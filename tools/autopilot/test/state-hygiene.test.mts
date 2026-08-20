@@ -35,8 +35,14 @@ test('the config does not pin a run', () => {
 
 test('start without a run refuses instead of guessing', () => {
   const emptyRepo = mkdtempSync(join(tmpdir(), 'repo-'));
+  // Through `tools/tsx-run.mjs`, the operator entry: `node <file>.mts` needs a
+  // node compiled with TypeScript support, and on one without it this spawned a
+  // process that died on ERR_UNKNOWN_FILE_EXTENSION — a non-zero exit with no
+  // `--run` in stderr, so the test failed for a reason that had nothing to do
+  // with what it asserts.
   const r = spawnSync(process.execPath,
-    [join(REPO, 'tools', 'autopilot', 'bin', 'autopilot.mts'), 'start', '--repo', emptyRepo],
+    [join(REPO, 'tools', 'tsx-run.mjs'), join(REPO, 'tools', 'autopilot', 'bin', 'autopilot.mts'),
+      'start', '--repo', emptyRepo],
     { encoding: 'utf8', timeout: 60_000 });
   assert.notEqual(r.status, 0);
   assert.match(r.stderr, /--run/);

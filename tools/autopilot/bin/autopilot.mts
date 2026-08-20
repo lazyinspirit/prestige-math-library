@@ -275,7 +275,28 @@ switch (cmd) {
         die(`plan: the scope-ledger step failed (exit ${r.status}). The ledger is what makes scope loss visible; not printing "Next:" over a stale one.`);
       }
     }
-    console.log(`\nNext: write the per-batch task files, then \`autopilot start --run ${run} --detach\``);
+    // The run's task files. These used to be a hand-written step that `plan`
+    // could only REMIND you to do — "Next: write the per-batch task files" —
+    // and the reminder is not a gate. Two things went wrong with that and both
+    // are now impossible: a file a REPAIR ROUND needs could be absent with
+    // doctor green (doctor never reached those dispatches), and the cheapest
+    // way to produce a set was to copy the previous run's and rename, which
+    // carries that run's MATHEMATICS into this one's prompts. `run-tasks.mjs`
+    // renders them from `briefs/tasks/`, deriving only what plan-spec and the
+    // manifests actually say, and its failure fails `plan` for the same reason
+    // the ledger step above does.
+    {
+      const { spawnSync } = await import('node:child_process');
+      const taskArgs = ['tools/run-tasks.mjs', '--run', run];
+      if (has('force')) taskArgs.push('--force');
+      const r = spawnSync('node', taskArgs, { cwd: repo, encoding: 'utf8' });
+      process.stdout.write((r.stdout ?? '').replace(/^/gm, '  '));
+      process.stderr.write((r.stderr ?? '').replace(/^/gm, '  '));
+      if (r.status !== 0) {
+        die(`plan: rendering the run's task files failed (exit ${r.status}). A stage with no task file blocks the run when it dispatches, not now.`);
+      }
+    }
+    console.log(`\nNext: \`autopilot doctor --run ${run}\`, then \`autopilot start --run ${run} --detach\``);
     break;
   }
 
@@ -293,6 +314,19 @@ switch (cmd) {
       .filter((p: any) => p.kind === 'A').map((p: any) => p.id);
     if (!owedA.length) die(`refresh-tasks: ${ledgerPath} owes no A pages`);
     writeDriftArtifacts(run, owedA);
+    // The stage task files are generated too, from briefs/tasks/, so a template
+    // defect found mid-run is fixed in the template and re-rendered here — the
+    // whole point of this command. `--force` also re-renders the per-batch Beta
+    // files, which are otherwise left alone in case a person enriched one.
+    {
+      const { spawnSync } = await import('node:child_process');
+      const taskArgs = ['tools/run-tasks.mjs', '--run', run];
+      if (has('force')) taskArgs.push('--force');
+      const r = spawnSync('node', taskArgs, { cwd: repo, encoding: 'utf8' });
+      process.stdout.write((r.stdout ?? '').replace(/^/gm, '  '));
+      process.stderr.write((r.stderr ?? '').replace(/^/gm, '  '));
+      if (r.status !== 0) die(`refresh-tasks: rendering the task files failed (exit ${r.status})`);
+    }
     break;
   }
 
@@ -325,10 +359,22 @@ switch (cmd) {
         ...(run ? ['--run', run] : []),
         ...(opt('state-dir') ? ['--state-dir', opt('state-dir')] : []),
         ...(opt('poll') ? ['--poll', opt('poll')] : [])];
+      // AND FORWARD THE LOADER THAT MADE THIS PROCESS RUNNABLE. This file is
+      // `.mts`; `node file.mts` only works on a node compiled with TypeScript
+      // support. On a node without it — a distro build, which is what this repo
+      // ran on — the child dies instantly with ERR_UNKNOWN_FILE_EXTENSION while
+      // the parent prints "running detached, pid N", so the operator is told the
+      // run started and the log holds a stack trace nobody is reading yet.
+      // `process.execArgv` is exactly the `--import <loader>` the parent was
+      // started with (by `tools/tsx-run.mjs`), and is empty on a node that does
+      // not need one, so this is correct in both worlds rather than a guess
+      // about which one we are in. Inspector flags are dropped: a detached
+      // daemon inheriting a fixed debug port cannot bind it twice.
+      const execArgv = process.execArgv.filter((a: string) => !a.startsWith('--inspect'));
       mkdirSync(stateDir, { recursive: true });
       const out = join(stateDir, 'autopilot.log');
       const fd = openSync(out, 'a');
-      const child = spawn(process.execPath, args, { detached: true, stdio: ['ignore', fd, fd] });
+      const child = spawn(process.execPath, [...execArgv, ...args], { detached: true, stdio: ['ignore', fd, fd] });
       child.unref();
       closeSync(fd);
       appendFileSync(out, `[${new Date().toISOString()}] detached pid ${child.pid}\n`);

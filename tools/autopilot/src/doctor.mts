@@ -92,40 +92,54 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   if (toolCommands && !checkedFlags) problems.push('flag check examined 0 flags over a table with tool commands — the detection is broken');
   else ok.push(`${checkedFlags} command flag(s) checked against their tools`);
 
-  // 2. every brief and task a stage will ask for, for every plausible unit count
-  //    — and none may contain an identity placeholder. dispatch.mjs hard-errors
-  //    on a prompt still carrying <n> or <k>, and the engine's argv template
-  //    passes only run/i/output, so a stage-referenced file containing one is
+  // 2. every brief and task a stage will ask for — and none may contain an
+  //    identity placeholder. dispatch.mjs hard-errors on a prompt still
+  //    carrying <n> or <k>, and the engine's argv template passes only
+  //    run/i/output, so a stage-referenced file containing one is
   //    undispatchable: on frontier-15 the drift unit burned all three attempts
   //    and blocked stage 1 on a grammar example that said "(order <n>)". The
   //    audit briefs legitimately carry <k> — their driver passes --var k= —
   //    but they are not in this stage table, so anything found here is real.
-  let missing = 0;
+  //
+  //    THE ENUMERATION IS `run-tasks.mjs`, NOT A WALK OF plan(). This check
+  //    used to call every stage's plan() against a synthetic unit list of
+  //    '1'..'8', which was wrong in both directions: it reported `batch-8` on a
+  //    seven-batch run, and it never reached a REPAIR ROUND's dispatches at
+  //    all — so `<run>-beta-source-scout.task.md`, `<run>-alpha-step4.task.md`,
+  //    `<run>-alpha-contract-audit.task.md` and four more could be absent with
+  //    doctor green, and the run would block on one of them hours in. That is
+  //    precisely the failure this file exists to prevent, so the enumeration
+  //    now reads the stage table's own task/brief references and expands them
+  //    over the run's REAL batches and group labels. One implementation, shared
+  //    with the generator that writes the files.
+  const runTasks = (mode: string) => spawnSync('node', [join(repo, 'tools/run-tasks.mjs'), '--run', run, mode],
+    { cwd: repo, encoding: 'utf8' });
+
+  const check = runTasks('--check');
+  if (check.status !== 0) {
+    for (const line of String(check.stderr ?? '').split('\n')) {
+      const m = /^\s{2}(\S.*)$/.exec(line);
+      if (m) problems.push(`no brief/task exists — tried ${m[1]}`);
+    }
+    if (!problems.length) problems.push(`run-tasks --check failed: ${String(check.stderr ?? check.stdout).trim().slice(0, 400)}`);
+    problems.push(`fix with: node tools/run-tasks.mjs --run ${run}`);
+  }
+
   const placeheld = new Set<string>();
-  for (const st of mod.stages) {
-    let plans = [];
-    try { plans = st.plan?.(ctx, units) ?? []; } catch { /* reported above */ }
-    for (const p of plans) {
-      for (const v of [p.brief, p.task]) {
-        if (!v) continue;
-        const cands = Array.isArray(v) ? v : [v];
-        if (!cands.some((c: any) => existsSync(join(repo, c)))) {
-          problems.push(`${st.id}/${p.label}: no brief/task exists — tried ${cands.join(' | ')}`);
-          missing += 1;
-        }
-        for (const c of cands) {
-          const f = join(repo, c);
-          if (!existsSync(f) || placeheld.has(c)) continue;
-          const bad = identityPlaceholders(readFileSync(f, 'utf8'));
-          if (bad.length) {
-            placeheld.add(c);
-            problems.push(`${c}: contains ${bad.join(', ')} — dispatch.mjs refuses the prompt, and the engine never passes --var n/k. Fix the file (or its template in bin/autopilot.mts) before starting.`);
-          }
-        }
-      }
+  const listed = runTasks('--list');
+  const promptFiles = String(listed.stdout ?? '').split('\n').map((s) => s.trim()).filter(Boolean);
+  for (const c of promptFiles) {
+    const f = join(repo, c);
+    if (!existsSync(f)) continue;
+    const bad = identityPlaceholders(readFileSync(f, 'utf8'));
+    if (bad.length) {
+      placeheld.add(c);
+      problems.push(`${c}: contains ${bad.join(', ')} — dispatch.mjs refuses the prompt, and the engine never passes --var n/k. Fix the file (or its template in briefs/tasks/) before starting.`);
     }
   }
-  if (!missing && !placeheld.size) ok.push('every stage resolves a brief and task file, none carrying an identity placeholder');
+  if (check.status === 0 && !placeheld.size) {
+    ok.push(`${promptFiles.length} brief/task file(s) resolve for every stage and repair round, none carrying an identity placeholder`);
+  }
 
   // 3. the scope ledger, without which scope loss is invisible
   const ledger = join(repo, 'research', `${run}-scope-ledger.json`);

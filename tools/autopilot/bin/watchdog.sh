@@ -19,6 +19,14 @@
 
 REPO="${1:-$PWD}"
 AUTOPILOT="$(cd "$(dirname "$0")" && pwd)/autopilot.mts"
+# The engine is a .mts file, and `node autopilot.mts` only works on a node
+# compiled with TypeScript support. This repo has no node_modules, so the
+# supported way to run one of its .mts tools is `tools/tsx-run.mjs`, which
+# resolves a loader at run time — the app checkout's tsx, else the repo's own
+# hook against a global TypeScript. Launching plain `node` here meant that on a
+# node without TS support the restart failed instantly, five times, and the
+# watchdog gave up: the exact silent overnight death it exists to prevent.
+RUNNER="$REPO/tools/tsx-run.mjs"
 STATE="$REPO/.autopilot"
 INTERVAL="${WATCHDOG_INTERVAL:-60}"
 MAX_FAILS="${WATCHDOG_MAX_FAILS:-5}"
@@ -48,7 +56,7 @@ while true; do
 
   if [ "$alive" = "0" ]; then
     log "engine not running — starting it"
-    ( cd "$REPO" && nohup node "$AUTOPILOT" start --repo "$REPO" >> "$STATE/autopilot.log" 2>&1 & )
+    ( cd "$REPO" && nohup node "$RUNNER" "$AUTOPILOT" start --repo "$REPO" >> "$STATE/autopilot.log" 2>&1 & )
     sleep 10
     again=$(ps -eo comm,args | awk '/autopilot\.mts start/ && $1 !~ /awk|sh$/' | wc -l | tr -d ' ')
     if [ "$again" = "0" ]; then
@@ -59,7 +67,7 @@ while true; do
       # until morning, filling the log and looking like activity.
       if [ "$FAILS" -ge "$MAX_FAILS" ]; then
         log "GIVING UP after $MAX_FAILS consecutive failures. The run is STOPPED."
-        log "  Diagnose with: node $AUTOPILOT start --repo $REPO   (in the foreground)"
+        log "  Diagnose with: node $RUNNER $AUTOPILOT start --repo $REPO   (in the foreground)"
         exit 1
       fi
       # Back off so a failing engine does not spin: 60s, 120s, 240s, ...
