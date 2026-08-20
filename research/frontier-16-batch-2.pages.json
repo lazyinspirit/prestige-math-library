@@ -54,6 +54,20 @@
         ]
       },
       {
+        "id": "fs-a-bounded-plane-set-has-an-area",
+        "kind": "false statement",
+        "title": "FALSE: every bounded plane set has Jordan area",
+        "strategy": "Take $E=(\\mathbb{Q}\\cap[0,1])^2$. It is bounded because it lies in the unit square. Density of the rationals and irrationals gives $\\partial E=[0,1]^2$. The unit square has inner and outer content $1$ directly from the rectangular definitions, so this boundary is not content zero; the boundary criterion makes $E$ non-Jordan-measurable. Cross-link the published counterexample carrying the same witness in the Remark, not in `deps`, because its home is an examples page and examples pages are dependency leaves.",
+        "deps": [
+          "def-metric-bounded-diameter",
+          "lem-q-and-irrationals-dense-r",
+          "def-metric-interior-closure-boundary",
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-jordan-boundary-criterion"
+        ]
+      },
+      {
         "id": "def-parallelogram-and-triangle-in-r2",
         "kind": "definition",
         "title": "Parallelograms and triangles in $\\mathbb{R}^2$",
@@ -128,10 +142,13 @@
       {
         "id": "def-simple-polygonal-region-and-triangulation",
         "kind": "definition",
-        "title": "Simple polygonal regions and their triangulations",
+        "title": "Simple polygonal regions, diagonals, and triangulations",
         "deps": [
           "def-euclidean-inner-product",
-          "def-finite-cardinality"
+          "def-finite-cardinality",
+          "def-metric-compactness",
+          "def-metric-interior-closure-boundary",
+          "def-connected-space"
         ]
       },
       {
@@ -392,6 +409,19 @@
         ]
       },
       {
+        "id": "lem-riemann-integral-unchanged-by-content-zero-modification",
+        "kind": "lemma",
+        "title": "Changing a bounded integrand on a content-zero set does not change its Riemann integral",
+        "strategy": "On a bounding rectangle, subtract the two zero extensions. The bounded difference vanishes off the content-zero disagreement set. Cover that set by finitely many cubes of arbitrarily small total volume and use grid control: only cells meeting the cover contribute to the Darboux gap, so the difference is integrable with integral zero. Linearity gives integrability and equality for the modified function, and interchanging the two functions gives the reverse implication. This includes changes made only on a domain seam or boundary.",
+        "deps": [
+          "def-riemann-integral-over-a-jordan-set",
+          "def-null-and-content-zero-in-rn",
+          "lem-finite-cube-covers-admit-grid-control",
+          "thm-multidimensional-riemann-criterion",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
         "id": "lem-gaussian-integral-is-finite-and-positive",
         "kind": "lemma",
         "title": "The improper integral of $e^{-x^2}$ over $\\mathbb{R}$ is finite and positive",
@@ -422,13 +452,20 @@
         "id": "lem-plane-gaussian-integral-in-polar-coordinates",
         "kind": "lemma",
         "title": "The plane Gaussian integral equals $\\pi$ by polar coordinates",
-        "strategy": "Integrate over compact annuli with a vanishing angular seam, where the polar map is injective and has Jacobian $r$. Change variables and use the exponential derivative to obtain $\\pi(e^{-\\varepsilon^2}-e^{-R^2})$ after the angular seam closes. Then send $\\varepsilon$ to zero and $R$ to infinity; nonnegative exhaustion independence identifies the limit with the plane integral.",
+        "strategy": "For $0<\\varepsilon<R$, split the full closed annulus into upper and lower half-annuli. Polar coordinates are injective on the two compact parameter rectangles with angular intervals $[0,\\pi]$ and $[-\\pi,0]$, so change of variables evaluates both halves. Their overlap is two radial segments of content zero; the content-zero modification lemma therefore recombines the two proper integrals into $\\pi(e^{-\\varepsilon^2}-e^{-R^2})$ on the full annulus. Circles are finite unions of continuous graphs, so the boundary criterion and Heine--Borel make closed discs compact Jordan sets. Bound the omitted inner disc by its enclosing square and let $\\varepsilon\\downarrow0$. Finally let expanding closed discs exhaust $\\mathbb{R}^2$ and apply nonnegative exhaustion independence.",
         "deps": [
           "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "lem-riemann-integral-unchanged-by-content-zero-modification",
           "thm-change-of-variables-for-compact-jordan-sets",
           "def-jacobian-determinant-of-a-c-one-map",
           "thm-polar-form-with-unique-principal-argument",
           "def-null-and-content-zero-in-rn",
+          "thm-jordan-boundary-criterion",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-heine-borel-rn",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-multidimensional-integral-properties",
+          "def-multidimensional-rectangle-and-volume",
           "thm-sine-and-cosine-derivatives",
           "cor-trigonometric-parity-and-pythagorean-identity",
           "thm-derivative-of-exponential",

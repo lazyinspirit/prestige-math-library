@@ -2,11 +2,11 @@
 
 ## Continuity checkpoint
 
-- Current substage: source-scouting round 2 restored Teschl's live canonical author URL after the `radon` host failed full-body fetching; final source-body stamping is the only mechanical blocker.
+- Current substage: Step-3 fix pass complete for stable findings B3-1 and B3-2; the batch is ready for Alpha's disk re-check.
 - Owned artifacts: `research/frontier-16-batch-3.pages.json`, `research/frontier-16-batch-3.notes.md`, `research/frontier-16-batch-3.proof-contracts.json`, and `research/frontier-16-batch-3.coverage.json`.
-- Completed checks: all normative files and both design locations were read; four full-text sources were harvested; every proposed published dependency was opened, found published, provenance-eligible, and homed at a lower plan order; fixed-string and semantic duplicate searches were run; the richness and boundary passes were completed; the coverage checklist and manifest-only content policy are clean. Fonda, BBT, and Lebl carry mechanical fetch stamps. Teschl's canonical author PDF was opened in full through web research: it has the April 2012 colophon and the harvested Chapter 2 locator and headings.
-- Open constraint: this shell sandbox has no DNS route. The stamped check therefore returns `EAI_AGAIN` for the canonical Teschl host and cannot compute its body hash here. No hash was invented.
-- Exact next action: in a network-enabled engine process, rerun `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-3.coverage.json --stamp`; then Step-3 Alpha can review the mathematics and the harvest together.
+- Completed checks: all normative files and both design locations were read; four full-text sources were harvested and fetch-stamped; every proposed published dependency was opened, found published, provenance-eligible, and homed at a lower plan order; fixed-string and semantic duplicate searches were run; the richness and boundary passes were completed; coverage-checklist, manifest-only content-policy, source-fetch-check, the current unspliced plan validation, and prosecheck all exit zero after the fix.
+- Open constraint: the engine has not yet spliced this revised manifest into `research/plan-spec.json`, so only Alpha's re-check and the mechanical Step-4 splice remain; no mathematical or source-liveness blocker is open in this batch.
+- Exact next action: Alpha re-checks B3-1 and B3-2 from the four batch-3 artifacts and marks the gauge-integral pair sufficient before the engine splices it.
 
 ## Controlling design and plan drift
 
@@ -65,12 +65,12 @@ The manifest preserves the spec verbatim. No batch-local ruling is made on eithe
 
 ### Gauge-integral pair
 
-- [Fonda, *The Kurzweil–Henstock Integral for Undergraduates*, Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf): P-partitions, gauges, Cousin, compact HK integration, algebra/order, the derivative FTC, primitives, integration by parts and substitution, Cauchy, subinterval additivity, Saks–Henstock, Riemann agreement, noncompact integrals, comparison, conditional sine integration, and Hake.
+- [Fonda, *The Kurzweil–Henstock Integral for Undergraduates*, Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf): P-partitions, gauges, Cousin, compact HK integration, algebra/order, the derivative FTC, primitives and the indefinite-integral primitive, integration by parts and substitution, Cauchy, subinterval additivity, Saks–Henstock, Riemann agreement, the L-integrable closure results, monotone and dominated convergence, noncompact integrals, comparison, conditional sine integration, and Hake. The absolute/L-integrable and convergence material is harvested but assigned to its named measure-theory destinations.
 - [Bruckner–Bruckner–Thomson, *Real Analysis*, §§1.2 and 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf): independent Cousin/bisection treatment, Heine–Borel consequence, generalized Riemann definition, derivative motivation, Volterra, the irrational-indicator exercise, elementary algebra, and Cauchy extension.
 - Convention disagreement: Fonda requires each tagged cell to lie in the centered gauge interval; BBT states the equivalent length-below-gauge form. The scaffold uses centered containment because it records the tag geometry explicitly.
 - Naming disagreement: Fonda says “P-partition” and unqualified “integrable”; BBT says “generalized Riemann integral.” The scaffold says “tagged partition” and “Henstock–Kurzweil integral.”
 
-The exact source-heading harvest and every disposition are in `research/frontier-16-batch-3.coverage.json`. The structural checklist reports 104 harvested rows without errors.
+The exact source-heading harvest and every disposition are in `research/frontier-16-batch-3.coverage.json`. The structural checklist reports 114 harvested rows without errors.
 
 ## Source-fetch status
 
@@ -92,7 +92,7 @@ A local state-Lipschitz condition makes the Picard operator contract on a suffic
 
 Tagged Riemann sums approximate an integral by sampling one point in each partition interval, and the fundamental theorem evaluates an integrable derivative by its endpoint increment. A gauge replaces one global mesh bound by a positive radius depending on the tag. Cousin's lemma, proved from nested-interval completeness, ensures that every gauge actually admits a fine tagged partition.
 
-The Henstock–Kurzweil integral controls all partitions fine for one gauge. Its uniqueness, linearity, monotonicity, subinterval additivity, Cauchy criterion, and Saks–Henstock estimate lead to agreement with the Riemann integral and to integration by parts and substitution. Every derivative is integrable without a prior boundedness or integrability hypothesis. Compact truncation limits define integrals at missing or infinite endpoints, comparison tests control their tails, and Hake's theorem shows that a finite missing endpoint can be filled with an arbitrary finite value without enlarging the integral.
+The Henstock–Kurzweil integral controls all partitions fine for one gauge. Its uniqueness, linearity, monotonicity, subinterval additivity, Cauchy criterion, and Saks–Henstock estimate lead to agreement with the Riemann integral and to integration by parts and substitution. Every derivative is integrable without a prior boundedness or integrability hypothesis, and its indefinite integral is a primitive. Compact truncation limits define integrals at missing or infinite endpoints, comparison tests control their tails, and Hake's theorem shows that a finite missing endpoint can be filled with an arbitrary finite value without enlarging the integral.
 
 Both B pages receive no authored summary body.
 
@@ -147,6 +147,7 @@ No AI-generated statement or construction is planned. Therefore no `generation` 
 | `thm-saks-henstock-lemma` | literature-derived | ai-altered | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the statement or exact witness. The Step-5 derivation is locally reorganized around published dependencies and the proof contract. |
 | `thm-riemann-integrable-functions-are-henstock-kurzweil-integrable` | literature-derived | ai-altered | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the statement or exact witness. The Step-5 derivation is locally reorganized around published dependencies and the proof contract. |
 | `thm-every-derivative-is-henstock-kurzweil-integrable` | literature-derived | ai-altered | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the statement or exact witness. The Step-5 derivation is locally reorganized around published dependencies and the proof contract. |
+| `cor-indefinite-henstock-kurzweil-integral-is-a-primitive` | literature-derived | ai-altered | [Fonda Ch. 1 §1.6, Corollary 1.15](https://dmi.units.it/~fonda/p2017_book_KH.pdf) supplies the statement. The Step-5 proof is adapted to the library's domain-relative derivative convention and obtains the conclusion from the preceding derivative theorem. |
 | `cor-henstock-kurzweil-integration-by-parts` | literature-derived | ai-altered | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the statement or exact witness. The Step-5 derivation is locally reorganized around published dependencies and the proof contract. |
 | `cor-henstock-kurzweil-substitution-for-derivatives` | literature-derived | ai-altered | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the statement or exact witness. The Step-5 derivation is locally reorganized around published dependencies and the proof contract. |
 | `def-henstock-kurzweil-integral-on-a-noncompact-interval` | literature-derived | not-applicable | [Fonda Ch. 1](https://dmi.units.it/~fonda/p2017_book_KH.pdf) and [Bruckner–Bruckner–Thomson §§1.2, 1.21](https://classicalrealanalysis.info/documents/BBT-AlllChapters-Landscape.pdf) supplies the convention; the library statement fixes notation and boundary clauses without a proof component. |
@@ -179,9 +180,9 @@ The corollary pass added uniform local existence for nearby initial values, the 
 
 The foundational proof is decomposed into gauge fineness, Cousin, HK definition, uniqueness, linearity, monotonicity, subinterval additivity, the compact Cauchy criterion, and Saks–Henstock.
 
-The sharp FTC is followed by separate integration-by-parts and substitution corollaries. Noncompact theory is decomposed into its definition, tail Cauchy criterion, comparison/absolute/limit-comparison theorem, and Hake extension.
+The sharp FTC is followed by the indefinite-integral primitive corollary and separate integration-by-parts and substitution corollaries. Noncompact theory is decomposed into its definition, tail Cauchy criterion, comparison/absolute/limit-comparison theorem, and Hake extension.
 
-The corollary pass added the two derivative-calculus formulas and the comparison package. It also records the in-scope non-absolute counterexample rather than attempting a premature Lebesgue comparison.
+The corollary pass added the indefinite-integral primitive, the two derivative-calculus formulas, and the comparison package. It also records the in-scope non-absolute counterexample rather than attempting a premature Lebesgue comparison.
 
 Both A pages remain well below the 60-item ceiling; no split is proposed. Their recounted sizes appear in the per-page lists below.
 
@@ -198,8 +199,10 @@ High-risk obligations retained for Step 5:
 - Peano must use Euler polygons, include the final shortened mesh cell, pass to the limit componentwise, and make no uniqueness claim.
 - Osgood must regularise the zero difference before separating variables and must prove both time directions.
 - Cousin must include endpoint limiting points and the one-piece partition contradiction.
+- The compact HK Cauchy criterion must use `def-countable-choice` exactly for the sequence of diameter-controlling gauges, take finite pointwise minima to make their fine-sum sets nested, and must not claim that avoiding a selected partition also avoids the gauge selection.
 - HK restriction/additivity must handle tags at the cut; Saks–Henstock must allow an empty partial partition.
 - The derivative FTC must split each cell at its tag, include one-sided endpoint derivatives, and telescope with the correct orientation.
+- The indefinite-integral primitive corollary must first establish $G(x)=F(x)-F(a)$ for every $x\in[a,b]$, including $x=a$, and then compare domain-relative difference quotients so both endpoints are covered.
 - Hake must distinguish a finite missing endpoint from an infinite endpoint and prove independence of the assigned endpoint value.
 - The sine-over-$x$ example asserts convergence only; the unproved value $\pi/2$ is deliberately absent.
 
@@ -208,6 +211,8 @@ No registered finite-smoke check in `QUALITY-CONTROLS.md` models these analytic 
 ## Exact same-batch clauses bound by the proof contracts
 
 Step 5 must include these clauses verbatim in the named item's Definition, Statement, Counterexample, or Example section so same-batch citation checks remain faithful:
+
+- `def-henstock-kurzweil-integral-on-a-compact-interval`: `On a degenerate interval, the Henstock–Kurzweil integral is $0$.`
 
 - `def-locally-lipschitz-in-the-state-variable`: `On every compact time-state cylinder the state-variable inequality holds with one finite constant $L$.`
 - `prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation`: `A curve solves the IVP if and only if it satisfies the associated Volterra integral equation.`
@@ -253,11 +258,11 @@ Step 5 must include these clauses verbatim in the named item's Definition, State
 
 ## Dependency closure
 
-The manifest has 64 distinct external dependencies. Every file was opened from disk; every one has `status: published`; every statement provenance is `literature-derived` or `ai-altered`; and every dependency is homed on a page with order below 288.00019. There are no legacy-unclassified dependencies, no AI-generated dependency targets, no homeless dependencies, and no published dependency requiring repair.
+The manifest has 65 distinct external dependencies. Every file was opened from disk; every one has `status: published`; every statement provenance is `literature-derived` or `ai-altered`; and every dependency is homed on a page with order below 288.00019. There are no legacy-unclassified dependencies, no AI-generated dependency targets, no homeless dependencies, and no published dependency requiring repair. The new `def-countable-choice` edge is homed on `countability-and-uncountability` at order 18, already inside the transitive prerequisite closure of `the-fundamental-theorems-of-calculus`, so no page-level prerequisite was added.
 
 External dependency ids:
 
-`cex-dirichlet-is-not-riemann-integrable`, `cex-volterra-bounded-derivative-not-riemann-integrable`, `cor-banach-error-estimates`, `cor-bolzano-weierstrass-in-rn`, `cor-exponential-reciprocal-and-positivity`, `cor-primitives-of-a-continuous-function`, `cor-vector-valued-ftc-and-lipschitz-bound`, `def-complete-metric-space`, `def-derivative`, `def-dirichlet-and-thomae-functions`, `def-equicontinuity-and-boundedness-in-ck`, `def-euclidean-inner-product`, `def-factorial-and-falling-factorial`, `def-improper-integral-at-a-finite-endpoint`, `def-interval`, `def-limits-at-infinity`, `def-lipschitz-holder-contraction`, `def-metric-ball`, `def-metric-uniform-continuity`, `def-monotone-function`, `def-one-sided-limits`, `def-oriented-integral`, `def-rational-power`, `def-series`, `def-tagged-partition-and-riemann-sum`, `def-vector-valued-derivative-and-integral`, `def-vector-valued-functions-limits-and-continuity`, `lem-absolute-convergence-implies-convergence`, `lem-finite-sum-laws`, `lem-geometric-sequence-null`, `lem-metrics-on-rn`, `lem-q-and-irrationals-dense-r`, `thm-algebra-of-derivatives`, `thm-all-norms-on-rn-are-equivalent`, `thm-banach-fixed-point`, `thm-c-k-complete-in-the-sup-metric`, `thm-cauchy-criterion-via-lub`, `thm-cauchy-schwarz-and-the-euclidean-norm`, `thm-chain-rule`, `thm-componentwise-convergence-and-completeness`, `thm-componentwise-limits-and-continuity`, `thm-connected-subsets-of-r-are-intervals`, `thm-continuous-implies-integrable`, `thm-darboux-equals-riemann`, `thm-darboux-theorem-for-derivatives`, `thm-derivative-of-exponential`, `thm-dirichlet-test-for-improper-integrals`, `thm-extreme-value-metric`, `thm-ftc-first-part`, `thm-ftc-second-part`, `thm-heine-borel-r`, `thm-heine-borel-rn`, `thm-heine-cantor-metric`, `thm-intermediate-value`, `thm-linearity-of-the-integral`, `thm-logarithm-derivative-and-integral`, `thm-monotonicity-of-the-integral`, `thm-nested-interval-property`, `thm-norm-inequality-for-the-vector-valued-integral`, `thm-picard-iterates-for-exponential`, `thm-quarter-turn-values-and-shift-formulas`, `thm-rationals-countable`, `thm-sine-and-cosine-derivatives`, `thm-uniform-limit-interchanges-riemann-integration`
+`cex-dirichlet-is-not-riemann-integrable`, `cex-volterra-bounded-derivative-not-riemann-integrable`, `cor-banach-error-estimates`, `cor-bolzano-weierstrass-in-rn`, `cor-exponential-reciprocal-and-positivity`, `cor-primitives-of-a-continuous-function`, `cor-vector-valued-ftc-and-lipschitz-bound`, `def-complete-metric-space`, `def-countable-choice`, `def-derivative`, `def-dirichlet-and-thomae-functions`, `def-equicontinuity-and-boundedness-in-ck`, `def-euclidean-inner-product`, `def-factorial-and-falling-factorial`, `def-improper-integral-at-a-finite-endpoint`, `def-interval`, `def-limits-at-infinity`, `def-lipschitz-holder-contraction`, `def-metric-ball`, `def-metric-uniform-continuity`, `def-monotone-function`, `def-one-sided-limits`, `def-oriented-integral`, `def-rational-power`, `def-series`, `def-tagged-partition-and-riemann-sum`, `def-vector-valued-derivative-and-integral`, `def-vector-valued-functions-limits-and-continuity`, `lem-absolute-convergence-implies-convergence`, `lem-finite-sum-laws`, `lem-geometric-sequence-null`, `lem-metrics-on-rn`, `lem-q-and-irrationals-dense-r`, `thm-algebra-of-derivatives`, `thm-all-norms-on-rn-are-equivalent`, `thm-banach-fixed-point`, `thm-c-k-complete-in-the-sup-metric`, `thm-cauchy-criterion-via-lub`, `thm-cauchy-schwarz-and-the-euclidean-norm`, `thm-chain-rule`, `thm-componentwise-convergence-and-completeness`, `thm-componentwise-limits-and-continuity`, `thm-connected-subsets-of-r-are-intervals`, `thm-continuous-implies-integrable`, `thm-darboux-equals-riemann`, `thm-darboux-theorem-for-derivatives`, `thm-derivative-of-exponential`, `thm-dirichlet-test-for-improper-integrals`, `thm-extreme-value-metric`, `thm-ftc-first-part`, `thm-ftc-second-part`, `thm-heine-borel-r`, `thm-heine-borel-rn`, `thm-heine-cantor-metric`, `thm-intermediate-value`, `thm-linearity-of-the-integral`, `thm-logarithm-derivative-and-integral`, `thm-monotonicity-of-the-integral`, `thm-nested-interval-property`, `thm-norm-inequality-for-the-vector-valued-integral`, `thm-picard-iterates-for-exponential`, `thm-quarter-turn-values-and-shift-formulas`, `thm-rationals-countable`, `thm-sine-and-cosine-derivatives`, `thm-uniform-limit-interchanges-riemann-integration`
 
 The source checks of Teschl, Lebl, Fonda, and BBT independently confirm the exact conventions used by the load-bearing ODE and HK results. AI-altered published inputs such as Banach fixed point, vector-valued integration, Euclidean compactness, and curve-space completeness were also checked directly from their actual Statements; their exact claims are sufficient for the scaffolded use.
 
@@ -314,6 +319,7 @@ Every final id reported `NEW`. Semantic searches for Picard–Lindelöf, Volterr
 - `thm-saks-henstock-lemma`
 - `thm-riemann-integrable-functions-are-henstock-kurzweil-integrable`
 - `thm-every-derivative-is-henstock-kurzweil-integrable`
+- `cor-indefinite-henstock-kurzweil-integral-is-a-primitive`
 - `cor-henstock-kurzweil-integration-by-parts`
 - `cor-henstock-kurzweil-substitution-for-derivatives`
 - `def-henstock-kurzweil-integral-on-a-noncompact-interval`
@@ -372,7 +378,7 @@ Every final id reported `NEW`. Semantic searches for Picard–Lindelöf, Volterr
 7. `fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field` — false statement — False: a local ODE solution extends across the whole time-domain of its vector field
 8. `fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness` — false statement — False: local Lipschitz continuity is necessary for uniqueness of an ODE solution
 
-### `the-gauge-integral-and-cousins-lemma` — 17 items
+### `the-gauge-integral-and-cousins-lemma` — 18 items
 
 1. `def-gauge-and-fine-tagged-partition` — definition — Gauges and gauge-fine tagged partitions of a compact interval
 2. `thm-cousins-lemma-for-gauges` — theorem — Cousin's lemma: every gauge on a compact interval admits a fine tagged partition
@@ -385,12 +391,13 @@ Every final id reported `NEW`. Semantic searches for Picard–Lindelöf, Volterr
 9. `thm-saks-henstock-lemma` — theorem — The Saks–Henstock lemma for fine partial tagged partitions
 10. `thm-riemann-integrable-functions-are-henstock-kurzweil-integrable` — theorem — Every Riemann integrable function is Henstock–Kurzweil integrable with the same integral
 11. `thm-every-derivative-is-henstock-kurzweil-integrable` — theorem — Every derivative is Henstock–Kurzweil integrable and satisfies Newton–Leibniz
-12. `cor-henstock-kurzweil-integration-by-parts` — corollary — Henstock–Kurzweil integration by parts for differentiable factors
-13. `cor-henstock-kurzweil-substitution-for-derivatives` — corollary — Henstock–Kurzweil substitution for a derivative composed with a differentiable map
-14. `def-henstock-kurzweil-integral-on-a-noncompact-interval` — definition — Henstock–Kurzweil integrals on half-open and unbounded intervals by compact truncation limits
-15. `thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals` — theorem — The Cauchy criterion for a Henstock–Kurzweil integral at a missing endpoint
-16. `thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals` — theorem — Comparison, absolute-convergence, and limit-comparison tests for noncompact Henstock–Kurzweil integrals
-17. `thm-hake-extension-theorem-for-henstock-kurzweil-integrals` — theorem — Hake's theorem: a finite-endpoint generalized integral is a proper Henstock–Kurzweil integral after assigning the endpoint value
+12. `cor-indefinite-henstock-kurzweil-integral-is-a-primitive` — corollary — The indefinite Henstock–Kurzweil integral of a derivative is a primitive
+13. `cor-henstock-kurzweil-integration-by-parts` — corollary — Henstock–Kurzweil integration by parts for differentiable factors
+14. `cor-henstock-kurzweil-substitution-for-derivatives` — corollary — Henstock–Kurzweil substitution for a derivative composed with a differentiable map
+15. `def-henstock-kurzweil-integral-on-a-noncompact-interval` — definition — Henstock–Kurzweil integrals on half-open and unbounded intervals by compact truncation limits
+16. `thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals` — theorem — The Cauchy criterion for a Henstock–Kurzweil integral at a missing endpoint
+17. `thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals` — theorem — Comparison, absolute-convergence, and limit-comparison tests for noncompact Henstock–Kurzweil integrals
+18. `thm-hake-extension-theorem-for-henstock-kurzweil-integrals` — theorem — Hake's theorem: a finite-endpoint generalized integral is a proper Henstock–Kurzweil integral after assigning the endpoint value
 
 ### `the-gauge-integral-and-cousins-lemma-examples` — 9 items
 
@@ -459,17 +466,47 @@ The unstamped check now isolates only Teschl at the `radon` host; the engine has
 - A search for a same-edition university mirror found `https://stanis.ku.edu/~stanis/GT_ode.pdf`, whose indexed body matched the April 2012 edition, but the current URL returns 404 and was rejected. The LSU copy is a 297-page July 2009 version, and the NZDR copy is a March 2011 draft; both remain rejected because their Chapter 2 pagination and sectioning differ.
 - Final local result: `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-3.coverage.json --stamp` reports 3/4 sources verified and `EAI_AGAIN` only for the canonical Teschl host. This sandbox cannot compute the final byte count or hash; no stamp was fabricated. The exact retry remains the next action for the network-enabled engine.
 
+## Source-scouting round 3 — 2026-08-20
+
+The remaining unstamped source is still Teschl. I replaced `https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf` with the live North Carolina State University mirror `https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf` and retained the failed author URL as `original_url`. The earlier failed `radon.mat.univie.ac.at` host variant remains recorded in round 1 above.
+
+- This is a same-source mirror, not a re-harvest. The fetched body is a complete 365-page PDF of Gerald Teschl's *Ordinary Differential Equations and Dynamical Systems*, AMS Graduate Studies in Mathematics 140, version June 27, 2012. Its table of contents places Chapter 2 at printed pp. 33–58 and lists exactly §§2.1–2.7 under the headings already harvested in the coverage file; its back matter extends through the index, ruling out a partial chapter capture. The locator and `contents` rows therefore remain unchanged.
+- `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-3.coverage.json --stamp` was retried after the substitution. This shell sandbox returned `EAI_AGAIN` for the NCSU host before downloading any bytes, as it did for the Vienna hosts, so it could not compute the required byte count and SHA-256 stamp. No stamp was inferred or fabricated. A network-enabled engine retry is the exact remaining action.
+
 ## Gate and command report
 
-- `node tools/coverage-checklist.mjs research/frontier-16-batch-3.coverage.json` — passed without errors or warnings; the exact row total remains mechanically recountable from the coverage file.
-- `node tools/content-policy.mjs research/frontier-16-batch-3.pages.json --manifest-only` — passed: 60 scoped items, no errors or warnings.
-- External dependency home-order audit — passed: all 64 external dependency ids have a published earlier home.
-- `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-3.coverage.json --stamp` — failed in this shell sandbox: the canonical Teschl host returned `EAI_AGAIN`; Fonda, Bruckner–Bruckner–Thomson, and Lebl remain fetch-verified, and no new stamp was written.
+- `node tools/coverage-checklist.mjs research/frontier-16-batch-3.coverage.json` — passed: 2 pages, 114 harvested results, no errors or warnings.
+- `node tools/content-policy.mjs --manifest-only research/frontier-16-batch-3.pages.json` — passed: 61 scoped items, no errors or warnings.
+- External dependency home-order audit — passed: all 65 external dependency ids have a published earlier home.
+- `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-3.coverage.json --stamp` — passed: all four sources are fetch-verified; no new stamp was needed.
 - `node tools/proof-contract.mjs research/frontier-16-batch-3.proof-contracts.json --strict` — run, but expectedly reports every as-yet-unauthored file as missing; all contracts are present, and semantic quote checking cannot run before authoring.
-- `validate-plan.mjs research/plan-spec.json` and `depsource.mjs` were not claimed against this unspliced batch. The engine's Step-4 splice is required first.
+- `node tools/validate-plan.mjs research/plan-spec.json` — passed for the current unspliced plan; this does not validate the revised batch item list until the engine's Step-4 splice. `depsource.mjs` remains a post-splice gate.
 
 ## Confidence statement
 
 Mathematical confidence is high on the scaffold: the contraction and Weissinger estimates, Grönwall signs, common-cylinder dependence argument, maximal-domain union, compact continuation, Euler/Peano limit, Osgood zero boundary, Cousin bisection, HK Cauchy/Saks–Henstock constants, derivative FTC, comparison tails, and Hake endpoint construction were each checked against the named full-text sources and mapped to exact library dependencies.
 
-I did not verify the final Step-5 prose or precheck stratification because the items do not yet exist. I did not compute the Dirichlet integral value $\pi/2$, and the scaffold does not claim it. I opened Teschl's canonical author PDF and Lebl's current same-edition body plus mirror metadata through web research, but I could not mechanically fetch-stamp Teschl because DNS is unavailable in this shell sandbox.
+I did not verify the final Step-5 prose or precheck stratification because the items do not yet exist. I did not compute the Dirichlet integral value $\pi/2$, and the scaffold does not claim it. Teschl's complete same-source NCSU mirror, Lebl's current same-edition body, Fonda, and Bruckner–Bruckner–Thomson all carry current mechanical fetch stamps.
+
+## Step-3 fix pass
+
+### B3-1 — applied
+
+- Corrected Fonda Proposition 1.14's disposition target from the continuous-Riemann-only `cor-primitives-of-a-continuous-function` to the published `cor-zero-derivative-implies-constant`, whose exact statement covers two differentiable primitives on an interval.
+- Added `cor-indefinite-henstock-kurzweil-integral-is-a-primitive` immediately after the derivative theorem. Its source-backed statement is Fonda Corollary 1.15; its proof contract requires the pointwise identity $G(x)=F(x)-F(a)$ and then equality of domain-relative difference quotients, including the endpoints.
+- Added faithful coverage rows for Fonda Proposition 1.16, Corollary 1.27, Corollaries 1.31–1.34, Theorem 1.35, Corollary 1.36, Lemma 1.37, and Theorem 1.38. Proposition 1.16 is already established by the sum and scalar-multiple clauses of published `thm-algebra-of-derivatives`; Corollary 1.27 is absorbed inline by the planned Saks–Henstock argument. The absolute/L-integrable closure results resolve to `the-lebesgue-and-riemann-integrals-compared`; the monotone/dominated convergence results and their proof machinery resolve to `the-lebesgue-integral-and-the-convergence-theorems`. Both destination page objects were opened before these dispositions were written.
+- The new id was checked with fixed-string and semantic searches across `items/`, `research/plan-spec.json`, and the batch manifests. No existing general HK indefinite-integral primitive was found; the published continuous-Riemann corollary is strictly narrower.
+
+### B3-2 — applied
+
+- Replaced the choice-free claim in `thm-henstock-kurzweil-cauchy-criterion` by an explicit use of published `def-countable-choice`: select one diameter-controlling gauge for each tolerance $2^{-n}$, take finite pointwise minima, and use the resulting nested fine-sum hulls. `lem-geometric-sequence-null` now licenses the shrinking-tolerance step. Cousin's lemma gives nonempty fine-sum sets; the proof still selects no sequence of partitions.
+- `def-countable-choice` is published with eligible `ai-altered` statement provenance on `countability-and-uncountability` at order 18. That page already lies in the transitive prerequisite closure of `the-fundamental-theorems-of-calculus`, so the item edge is legal without changing the gauge page's `requires` array.
+- The proof contract now cites the exact countable-choice clause at step 2.1 and records the gauge selection in the `nonempty-choice` boundary disposition.
+
+### Step-3 gate results
+
+- `coverage-checklist`: 2 pages, 114 harvested results, 0 errors, 0 warnings.
+- `content-policy --manifest-only`: 61 scoped items, 0 errors, 0 warnings.
+- `validate-plan`: exit 0 for the current unspliced `research/plan-spec.json`; authoritative validation of these revised ids remains the engine's post-splice gate.
+- `source-fetch-check --stamp`: all 4 sources fetch-verified, with no new stamp required.
+- `prosecheck --warnings`: exit 0; its count warnings are the required per-page report counts and Fonda's source heading `3 Examples`, not reader-facing authored prose.

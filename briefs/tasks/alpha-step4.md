@@ -25,6 +25,32 @@ page, and the edge(s). For every edge, decide from disk:
 Do NOT run the splice yourself; the engine re-splices the withheld batches
 mechanically once your edits land.
 
+## The other failure that brings you here: `validate-plan`
+
+`splice-plan` refuses an edge a batch manifest DECLARES and the plan lacks.
+`validate-plan` catches a different class it cannot see: an edge an item's
+`deps` INDUCE. Reproduce it with
+
+```
+node tools/validate-plan.mjs research/plan-spec.json
+```
+
+and read the `[undeclared-prereq]` lines — "page P has an item depending on Q,
+which is NOT in the closure of its declared requires". A re-splice cannot clear
+these; there is nothing declared for the transcriber to transcribe. Decide each
+one exactly as above: apply a backward edge the item genuinely consumes, strike
+the dependency where the item should not have reached for it, block a forward
+edge as a reading-order change.
+
+**One sub-class is never fixed by adding an edge.** A dep on a published
+**examples-page** item — an id whose owning page ends `-examples` — is a hard
+`validate-plan` error whatever the page-level `requires` says, because a B page
+is a leaf and nothing may depend on it. Adding the edge leaves the gate red and
+hides the real problem. The route has to be rebuilt from **A-page** items
+carrying the same result; find them, and if none exists, that is a real
+scaffold finding, not an edge decision. This class has now fired on two
+consecutive runs, four times each.
+
 **Write `research/{{run}}-alpha-step4.md`**: per edge — the evidence you read,
 the decision, and the exact edit (or the block). Keep decisions per-edge;
 never batch-approve.

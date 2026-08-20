@@ -510,16 +510,18 @@
           "def-oriented-integral"
         ]
       },
-      {
-        "id": "thm-henstock-kurzweil-cauchy-criterion",
-        "kind": "theorem",
-        "title": "The Cauchy criterion for Henstock–Kurzweil integrability",
-        "strategy": "Necessity follows by comparing two fine sums with the same integral. For sufficiency, take successively finer gauges whose nonempty sets of fine sums have shrinking diameter. Their closed interval hulls are nested and their lengths tend to zero, so the nested interval property gives one common value. Every sufficiently fine sum lies near that value, proving the integral condition without selecting a partition at each stage. Track the factor two explicitly.",
-        "deps": [
-          "def-henstock-kurzweil-integral-on-a-compact-interval",
-          "thm-cousins-lemma-for-gauges",
-          "thm-nested-interval-property"
-        ]
+    {
+      "id": "thm-henstock-kurzweil-cauchy-criterion",
+      "kind": "theorem",
+      "title": "The Cauchy criterion for Henstock–Kurzweil integrability",
+      "strategy": "Necessity follows by comparing two fine sums with the same integral. For sufficiency, use countable choice to select, for each $n\\in\\mathbb N$, a gauge $\\gamma_n$ for which all fine sums differ by less than $2^{-n}$. Put $\\delta_n=\\min_{k\\le n}\\gamma_k$. The nonempty sets of $\\delta_n$-fine sums are nested and have diameter below $2^{-n}$; their closed interval hulls are therefore nested with lengths tending to zero, so the nested interval property gives one common value. Every sufficiently fine sum lies near that value. Cousin's lemma supplies nonemptiness, while no sequence of fine partitions is selected.",
+      "deps": [
+        "def-henstock-kurzweil-integral-on-a-compact-interval",
+        "thm-cousins-lemma-for-gauges",
+        "thm-nested-interval-property",
+        "def-countable-choice",
+        "lem-geometric-sequence-null"
+      ]
       },
       {
         "id": "thm-saks-henstock-lemma",
@@ -543,20 +545,31 @@
           "def-tagged-partition-and-riemann-sum"
         ]
       },
-      {
-        "id": "thm-every-derivative-is-henstock-kurzweil-integrable",
-        "kind": "theorem",
+    {
+      "id": "thm-every-derivative-is-henstock-kurzweil-integrable",
+      "kind": "theorem",
         "title": "Every derivative is Henstock–Kurzweil integrable and satisfies Newton–Leibniz",
         "strategy": "For each tag, differentiability supplies a gauge radius on which the linearization error of the primitive is bounded by $\\varepsilon$ times interval length. On a fine tagged partition, split each increment at its tag, sum the two error estimates, and telescope the primitive increments. The total error is at most $\\varepsilon(b-a)$, proving that $F'$ is integrable with integral $F(b)-F(a)$ without boundedness or prior integrability of $F'$.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "def-derivative",
           "thm-cousins-lemma-for-gauges",
-          "lem-finite-sum-laws"
-        ]
-      },
-      {
-        "id": "cor-henstock-kurzweil-integration-by-parts",
+        "lem-finite-sum-laws"
+      ]
+    },
+    {
+      "id": "cor-indefinite-henstock-kurzweil-integral-is-a-primitive",
+      "kind": "corollary",
+      "title": "The indefinite Henstock–Kurzweil integral of a derivative is a primitive",
+      "strategy": "Let $F$ be differentiable on $[a,b]$ with $a<b$, put $f=F'$, and define $G(x)=\\int_a^x f$. Apply the derivative form of Newton–Leibniz on each $[a,x]$ to obtain $G(x)=F(x)-F(a)$, with $G(a)=0$ from the degenerate-interval convention. The difference quotient of $G$ at any point of $[a,b]$ is therefore the difference quotient of $F$ there, so $G'=F'=f$, including the one-sided endpoint derivatives used by the library's domain-relative definition.",
+      "deps": [
+        "thm-every-derivative-is-henstock-kurzweil-integrable",
+        "def-henstock-kurzweil-integral-on-a-compact-interval",
+        "def-derivative"
+      ]
+    },
+    {
+      "id": "cor-henstock-kurzweil-integration-by-parts",
         "kind": "corollary",
         "title": "Henstock–Kurzweil integration by parts for differentiable factors",
         "strategy": "For differentiable $F,G$, the product rule makes $(FG)'=F'G+FG'$, and the derivative theorem makes this sum Henstock–Kurzweil integrable with endpoint integral. If either summand is integrable, linearity makes the other integrable and rearrangement gives the integration-by-parts formula. State the symmetric iff and avoid assuming both products integrable at the outset.",

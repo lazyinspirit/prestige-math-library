@@ -3,9 +3,9 @@
 ## State and scope
 
 - Role: Beta-7, scaffolding `analyticity-liouville-and-morera` and its companion at orders 311 and 312.
-- Design/spec drift: adjudicated at Step 0 while this scaffold was in flight. The design says CA-4 and CA-2; the current `research/plan-spec.json` retains those published pages and adds the legal backward prerequisite `function-space-topologies` for the compact-convergence dictionary. The batch manifest follows the current spec. The transient edge to the unbuilt order-139 FTA page was removed; the Liouville remark cites the already-published theorem `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` instead.
+- Design/spec drift: adjudicated at Step 0 while this scaffold was in flight. The design says CA-4 and CA-2; the current `research/plan-spec.json` retains those published pages and adds the legal backward prerequisite `function-space-topologies` for the compact-convergence dictionary. The batch manifest follows the current spec. The transient edge to the unbuilt order-139 FTA page was removed. After Step-3 finding B7-1, this page instead proves the same FTA statement by a distinct Liouville route and keeps the already-published minimum-modulus theorem only in a separate agreement remark.
 - Owned artifacts: `research/frontier-16-batch-7.pages.json`, `research/frontier-16-batch-7.notes.md`, `research/frontier-16-batch-7.proof-contracts.json`, and the canonically required `research/frontier-16-batch-7.coverage.json`.
-- The A page has 21 items and the B page has 8 items. Neither approaches the 60-item ceiling, so no split is proposed.
+- The A page has 22 items and the B page has 8 items. Neither approaches the 60-item ceiling, so no split is proposed.
 - There is no external fallback, no `proved_here: false` item, no forward reference, and no cross-batch dependency.
 
 ## Findings for Step-3 Alpha, ordered by severity
@@ -132,7 +132,7 @@ representation).
 - Exact replacement:
 
 ~~~markdown
-Proposed A-page inventory (dependency order; 21 items):
+Proposed A-page inventory (dependency order; 22 items):
 
 | id | kind | one-line statement |
 |---|---|---|
@@ -148,7 +148,8 @@ Proposed A-page inventory (dependency order; 21 items):
 | `cor-cauchy-estimates-taylor-coefficients` | cor | Cauchy's inequalities bound every Taylor coefficient by the circle supremum. |
 | `thm-liouville-bounded-entire-function` | thm | Every bounded entire function is constant. |
 | `thm-entire-polynomial-growth-is-polynomial` | thm | If |(f(z))|(le C(1+|z|)^N) for real (C,N\ge0), then (f) is a polynomial of degree at most (lfloor N\rfloor). |
-| `rem-fundamental-theorem-of-algebra-via-liouville` | rem | Give the Liouville proof while citing the canonical published FTA statement. |
+| `thm-fundamental-theorem-of-algebra-liouville-proof` | thm | Every nonconstant complex polynomial has a complex root, proved by bounding its zero-free reciprocal and applying Liouville's theorem. |
+| `rem-fundamental-theorem-of-algebra-via-liouville` | rem | Record agreement between the new Liouville proof and the published minimum-modulus proof. |
 | `def-edgewise-riemann-integral-around-complex-triangle` | def | Extend triangle-boundary notation to functions whose three affine edge pullbacks are Riemann integrable, agreeing with the published contour integral for continuous integrands. |
 | `thm-morera-triangle-theorem` | thm | A continuous function is holomorphic exactly when every contained triangle-boundary integral vanishes. |
 | `lem-cauchy-estimates-on-concentric-subdiscs` | lem | Bound derivatives uniformly on a smaller concentric disc by values on the larger circle. |
@@ -200,7 +201,8 @@ statement names its compact subsets and domain.
 B: the third-order zero of $\sin z-z$; Morera used to prove holomorphy of
 $z\mapsto\int_0^1t^z\,dt$ on $\operatorname{Re}z>1$, with $0^z=0$ justified
 as a continuous endpoint value; the Liouville proof of the fundamental theorem
-of algebra is recorded on the A page while citing the canonical FTA theorem.
+of algebra is a distinct theorem on the A page, followed by an agreement remark
+linking it to the published minimum-modulus proof.
 The already-published exact expansions of $e^z$, $\sin z$, and $1/(1-z)$ are
 linked through the Taylor-coefficient agreement remark rather than duplicated.
 CEX: $\sum_{n\ge1} z^n/n^2$ converges uniformly on the closed unit disc and has
@@ -273,7 +275,8 @@ Every URL named for a source-backed component must appear verbatim in that item'
 | `cor-cauchy-estimates-taylor-coefficients` | `literature-derived` | `ai-altered` | A Cauchy estimate, S Corollary 4.3, W Corollary 2.2.4 and K §3.1.2. References A, S, W, K. |
 | `thm-liouville-bounded-entire-function` | `literature-derived` | `ai-altered` | A §2.3, S Corollary 4.5, W Theorem 2.3.2 and K §3.1.3. References A, S, W, K. |
 | `thm-entire-polynomial-growth-is-polynomial` | `ai-altered` | `ai-altered` | K states the integer-exponent theorem; the scaffold faithfully extends it to real (N\ge0) by the floor bound and the same Cauchy-estimate proof. Reference K. |
-| `rem-fundamental-theorem-of-algebra-via-liouville` | `literature-derived` | `not-applicable` | A/S/W/K all give the proof; the result itself remains the canonical published FTA item. References A, S, W, K. |
+| `thm-fundamental-theorem-of-algebra-liouville-proof` | `literature-derived` | `ai-altered` | A §2.3, S Corollary 4.6, W Corollary 2.3.3, and K §3.1.4 all state the FTA and prove it by applying Liouville to a zero-free reciprocal. The local proof makes the inside/outside boundedness split explicit and does not depend on the published minimum-modulus FTA theorem. References A, S, W, K. |
+| `rem-fundamental-theorem-of-algebra-via-liouville` | `ai-altered` | `not-applicable` | This is the owner-required cross-reference between two source-backed proofs: the new A/S/W/K Liouville route and the published minimum-modulus route. It makes no independent theorem claim. References A, S, W, K. |
 | `def-edgewise-riemann-integral-around-complex-triangle` | `ai-altered` | `not-applicable` | The parametric edge formula is the standard contour integral in Sh and in the published parametric-agreement theorem, extended narrowly to Riemann-integrable pullbacks so the continuity counterexample is well-formed. References Sh and the published Howell–Mathews source already carried by the dependency. |
 | `thm-morera-triangle-theorem` | `literature-derived` | `ai-altered` | A §2.3, S Theorem 5.1, W Theorem 2.3.4 and Sh Theorem 2.21; local proof uses the published triangle-to-primitive proposition. References A, S, W, Sh. |
 | `lem-cauchy-estimates-on-concentric-subdiscs` | `literature-derived` | `ai-altered` | W Theorem 2.4.2 and S Theorem 5.3. References W, S. |
@@ -306,6 +309,7 @@ Long-proof decomposition:
 
 - The Taylor theorem retains its geometric-kernel expansion inline because it is one coherent argument, but coefficient agreement and coefficient bounds are separated into `rem-taylor-coefficient-formula-agreement` and `cor-cauchy-estimates-taylor-coefficients`.
 - Zero multiplicity is separated into its definition and `thm-zero-order-factorization-holomorphic-function`; the identity theorem is not pulled forward.
+- The fundamental theorem of algebra is now a proof-bearing theorem rather than a proof sketch inside a remark. Its Liouville route separates the exterior bound from polynomial growth, the interior bound from compactness and the extreme value theorem, and the final constancy contradiction; the agreement remark is non-load-bearing and keeps the independent minimum-modulus proof visible.
 - Weierstrass convergence is decomposed by `lem-cauchy-estimates-on-concentric-subdiscs`, isolating the uniform derivative bound that the published centre inequality does not provide.
 - Parameter integrals separate basic holomorphy from differentiation under the integral: the latter is asserted only with the jointly continuous slice derivative and has its own proof steps.
 - Morera's discontinuous witness is preceded by `def-edgewise-riemann-integral-around-complex-triangle`; this keeps the counterexample well-formed without pretending the published continuous-integrand contour integral already covers it.
@@ -319,7 +323,7 @@ Useful corollaries added or retained by the corollary pass:
 - `cor-holomorphic-mean-value-property` records the circular average formula.
 - `cor-nonconstant-entire-function-has-dense-image` records the direct Liouville consequence and remains a generated non-load-bearing leaf.
 
-The proof-contract artifact covers all 22 proof-bearing items, every planned numbered step, direct fact citations, and all eight standard boundary cases. No registered finite-smoke model applies to these analytic arguments; every `finite_smoke` array is empty, and this is not reported as evidence.
+The proof-contract artifact covers all 23 proof-bearing items, every planned numbered step, direct fact citations, and all eight standard boundary cases. No registered finite-smoke model applies to these analytic arguments; every `finite_smoke` array is empty, and this is not reported as evidence.
 
 Highest-risk boundaries:
 
@@ -327,6 +331,7 @@ Highest-risk boundaries:
 - the whole-plane (+\infty) distance convention in the Taylor theorem;
 - (z=a), (n=0), (m=0), and the infinite-order zero germ;
 - (C=0), (N=0), and the first vanishing coefficient beyond (lfloor N\rfloor);
+- the root-free reciprocal in the Liouville proof of FTA, nonemptiness of the closed disc, and the shared boundary (|z|=R) of the inside and outside estimates;
 - degenerate triangles in both Morera directions and in its discontinuous counterexample;
 - (r=0) allowed only for the inner subdisc and (r<R) required before division;
 - the degenerate parameter interval (a=b), plus the endpoint (t=0) in the (t^z) example;
@@ -345,6 +350,7 @@ These clauses must occur verbatim in the Step-5 source items:
 - `thm-zero-order-factorization-holomorphic-function`: `A holomorphic function has finite order $m$ at $a$ if and only if, on some neighbourhood of $a$, it has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\ne0$.`
 - `cor-cauchy-estimates-taylor-coefficients`: `If $|f(\zeta)|\le M$ on $|\zeta-a|=r$, then the $n$th Taylor coefficient $c_n$ satisfies $|c_n|\le M/r^n$.`
 - `thm-liouville-bounded-entire-function`: `Every bounded entire function is constant.`
+- `thm-fundamental-theorem-of-algebra-liouville-proof`: `Every nonconstant complex polynomial has a complex root.`
 - `thm-morera-triangle-theorem`: `A continuous function on an open subset of $\mathbb C$ is holomorphic if and only if its integral around the boundary of every filled triangle contained in the open set is zero.`
 - `lem-cauchy-estimates-on-concentric-subdiscs`: `If $0\le r<R$, $M$ bounds $|f|$ on $|\zeta-a|=R$, and $|z-a|\le r$, then $|f^{(n)}(z)|\le n!RM/(R-r)^{n+1}$.`
 - `thm-weierstrass-convergence-holomorphic-functions`: `A locally uniform limit of holomorphic functions is holomorphic, and for every natural $k$ the $k$th derivatives converge locally uniformly to the $k$th derivative of the limit.`
@@ -364,18 +370,18 @@ Every load-bearing dependency is either earlier inside this A/B pair or publishe
 
 ## New-id report
 
-For each of the 29 proposed ids, this exact search was run before writing the manifest:
+For each of the 30 proposed ids, this exact search was run before writing the manifest:
 
 ~~~sh
 rg -n -F "<id>" items research/plan-spec.json
 test -e "items/<id>.md"
 ~~~
 
-All 29 searches found no item or planned id. The proposed ids are exactly the ids in the two per-page lists below.
+All 30 searches found no item or planned id. For the Step-3 addition, `rg -n -F "thm-fundamental-theorem-of-algebra-liouville-proof" items research/plan-spec.json research/frontier-16-batch-*.pages.json` returned no match before the manifest edit. The proposed ids are exactly the ids in the two per-page lists below.
 
 ## Per-page item list
 
-### `analyticity-liouville-and-morera` — 21 items
+### `analyticity-liouville-and-morera` — 22 items
 
 1. `rem-locally-uniform-convergence-dictionary` — remark — Locally uniform convergence on an open subset of the complex plane is compact convergence
 2. `def-real-analytic-map-on-the-plane` — definition — Real-analytic maps between open subsets of the coordinate plane
@@ -389,15 +395,16 @@ All 29 searches found no item or planned id. The proposed ids are exactly the id
 10. `cor-cauchy-estimates-taylor-coefficients` — corollary — Cauchy's inequalities bound the Taylor coefficients by the circle supremum
 11. `thm-liouville-bounded-entire-function` — theorem — Liouville's theorem: every bounded entire function is constant
 12. `thm-entire-polynomial-growth-is-polynomial` — theorem — An entire function of polynomial growth is a polynomial
-13. `rem-fundamental-theorem-of-algebra-via-liouville` — remark — The Liouville proof of the fundamental theorem of algebra
-14. `def-edgewise-riemann-integral-around-complex-triangle` — definition — The edgewise Riemann integral around a complex triangle for an integrable pullback
-15. `thm-morera-triangle-theorem` — theorem — Morera's theorem: vanishing triangle integrals characterize holomorphy among continuous functions
-16. `lem-cauchy-estimates-on-concentric-subdiscs` — lemma — Cauchy estimates on a smaller concentric disc
-17. `thm-weierstrass-convergence-holomorphic-functions` — theorem — Locally uniform limits of holomorphic functions are holomorphic and their derivatives converge locally uniformly
-18. `cor-locally-uniformly-convergent-holomorphic-series` — corollary — A locally uniformly convergent series of holomorphic functions may be differentiated term by term
-19. `thm-holomorphic-parameter-riemann-integral` — theorem — A jointly continuous finite-interval parameter integral of holomorphic functions is holomorphic
-20. `cor-holomorphic-mean-value-property` — corollary — A holomorphic function equals its average on every compactly contained circle
-21. `cor-nonconstant-entire-function-has-dense-image` — corollary — Every nonconstant entire function has dense image in the complex plane
+13. `thm-fundamental-theorem-of-algebra-liouville-proof` — theorem — Fundamental theorem of algebra by Liouville's theorem
+14. `rem-fundamental-theorem-of-algebra-via-liouville` — remark — Agreement of the Liouville and minimum-modulus proofs of the fundamental theorem of algebra
+15. `def-edgewise-riemann-integral-around-complex-triangle` — definition — The edgewise Riemann integral around a complex triangle for an integrable pullback
+16. `thm-morera-triangle-theorem` — theorem — Morera's theorem: vanishing triangle integrals characterize holomorphy among continuous functions
+17. `lem-cauchy-estimates-on-concentric-subdiscs` — lemma — Cauchy estimates on a smaller concentric disc
+18. `thm-weierstrass-convergence-holomorphic-functions` — theorem — Locally uniform limits of holomorphic functions are holomorphic and their derivatives converge locally uniformly
+19. `cor-locally-uniformly-convergent-holomorphic-series` — corollary — A locally uniformly convergent series of holomorphic functions may be differentiated term by term
+20. `thm-holomorphic-parameter-riemann-integral` — theorem — A jointly continuous finite-interval parameter integral of holomorphic functions is holomorphic
+21. `cor-holomorphic-mean-value-property` — corollary — A holomorphic function equals its average on every compactly contained circle
+22. `cor-nonconstant-entire-function-has-dense-image` — corollary — Every nonconstant entire function has dense image in the complex plane
 
 ### `analyticity-liouville-and-morera-examples` — 8 items
 
@@ -419,10 +426,76 @@ Cross-batch dependencies: none. The declared prerequisite pages and every other 
 ## Gate record and confidence
 
 - `node tools/coverage-checklist.mjs research/frontier-16-batch-7.coverage.json` reports 1 page, 70 harvested results, 0 errors, and 0 warnings.
-- `node tools/content-policy.mjs --manifest-only research/frontier-16-batch-7.pages.json` reports 29 scoped items, 0 errors, and 0 warnings.
+- `node tools/content-policy.mjs --manifest-only research/frontier-16-batch-7.pages.json` reports 30 scoped items, 0 errors, and 0 warnings after the Step-3 fix.
 - `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-7.coverage.json --stamp` does not pass: 2 of 6 exact URLs carry mechanical stamps and 4 fail at sandbox DNS with `EAI_AGAIN` as recorded in F9.
-- `node tools/proof-contract.mjs research/frontier-16-batch-7.proof-contracts.json --strict` was run. It reports the expected 22 `item-missing` errors because Step 5 has not authored any item file. A separate structural check confirms 22 contracts, unique numbered steps, valid citation-use step ids, declared citation facts, and all eight boundary rows per contract. This is not a proof-contract gate pass.
+- `node tools/proof-contract.mjs research/frontier-16-batch-7.proof-contracts.json --strict` was run. It reports the expected 23 `item-missing` errors because Step 5 has not authored any item file. A separate structural check confirms 23 contracts, unique numbered steps, valid citation-use step ids, declared citation facts, and all eight boundary rows per contract. This is not a proof-contract gate pass.
 - `node tools/finite-smoke.mjs research/frontier-16-batch-7.proof-contracts.json` reports 0 checks over 0 authored items; this is not evidence of a mathematical pass.
 - The authoritative `validate-plan` and `depsource` gates cannot assess this manifest until Step 4 splices it. No claim is made that either passed.
 
 Confidence is high in the mathematical scaffold, dependency order, source-heading harvest, and proof decomposition. I directly checked the fragile points: the distance-to-complement convention, zero and infinite zero order, the subdisc derivative estimate, real (N) in polynomial growth, Morera's continuity counterexample on degenerate edges, both (a=b) and (t=0) in parameter integrals, and the boundary power-series obstruction. I did not mechanically fetch-stamp four full texts because the sandbox blocks shell DNS, did not author or precheck the item files, did not run the spliced plan gates, and did not independently recompute a rendered page.
+
+## Step-3 fix pass
+
+### B7-1 — applied
+
+The rem-only FTA entry was replaced by the proof-bearing
+`thm-fundamental-theorem-of-algebra-liouville-proof`, with the exact published
+statement “Every nonconstant complex polynomial has a complex root.” Its
+contradiction proof uses the earlier same-page Liouville theorem, holomorphy of
+the zero-free reciprocal, polynomial growth for the exterior estimate,
+continuity plus Heine--Borel and the extreme value theorem for the closed-disc
+estimate, and the fact that a nonzero constant reciprocal forces the original
+polynomial to be constant. The shared boundary (|z|=R), the nonempty compact
+disc, constant and zero-polynomial exclusions, and the degree-one case are
+explicit in the strategy and proof contract.
+
+The new theorem does **not** list
+`thm-fundamental-theorem-of-algebra-minimum-modulus-proof` as a dependency. The
+existing `rem-fundamental-theorem-of-algebra-via-liouville` remains immediately
+after it as a separate agreement remark and depends on both independent theorem
+ids. The A page now has 22 items; the companion remains unchanged. The four
+harvested Ahlfors, Stein--Shakarchi, Weber, and Krantz FTA headings now dispose
+to the new theorem. Its expected component provenance is
+`statement: literature-derived`, `proof: ai-altered`, with all four existing
+source URLs required in the authored item's `sources.references`. The agreement
+remark is `statement: ai-altered`, `proof: not-applicable`; it makes no new
+theorem claim.
+
+The proof-contract scope and map now contain 23 proof-bearing items. The new
+contract assigns all nine planned steps exactly once, records eight direct fact
+citations, disposes all eight boundary cases, and selects no finite smoke check
+because none of the registered bounded models applies. An exact-substring check
+found every published citation quote in its named source section; the same-page
+Liouville quote is bound to the exact Step-5 clause already recorded above.
+
+**Published reciprocal-backlink queue.** No published item was edited in this
+fix pass. Once the new theorem is authored and spliced, the authorised later
+stage should update
+`items/thm-fundamental-theorem-of-algebra-minimum-modulus-proof.md` with the
+orientation-only `forward_refs` entry
+`thm-fundamental-theorem-of-algebra-liouville-proof` and append this exact
+Remark sentence: “A distinct proof using Liouville's theorem is given in
+[[thm-fundamental-theorem-of-algebra-liouville-proof]].” This must be a forward
+reference, never a logical dependency, because the new proof is on the
+order-311 page. The queue is required by B7-1's reciprocal-link instruction but
+is outside this batch-scaffold write boundary.
+
+The collision search for
+`thm-fundamental-theorem-of-algebra-liouville-proof` returned no match in
+`items/`, `research/plan-spec.json`, or any frontier-16 batch manifest before
+the edit. No other batch currently supplies or consumes the new id, and no
+load-bearing forward reference was introduced.
+
+Post-fix checks:
+
+- `coverage-checklist.mjs`: exit 0; 1 page, 70 harvested results, 0 errors, 0 warnings.
+- `content-policy.mjs --manifest-only`: exit 0; 30 scoped items, 0 errors, 0 warnings.
+- `validate-plan.mjs research/plan-spec.json`: exit 0 on the current plan; this checks the unspliced specification and is not a claim that the new id has already been spliced.
+- `prosecheck.mjs --warnings`: exit 0; 0 errors and only count heuristics inside this required scaffold report.
+- `git diff --check` on the four batch-7 scaffold artifacts: exit 0.
+- `proof-contract.mjs --strict`: expected non-pass at Step 3, with 23 `item-missing` errors and no authored items to inspect. The separate manifest/contract structural check reports 23 scopes, 23 contracts, no missing or extra contract, no duplicate step map, no undeclared citation source, and all boundary rows present.
+
+Confidence is high that B7-1 is closed at scaffold level. I verified the new
+route against the exact published dependency statements and the four already
+harvested source treatments. I did not author or precheck the new item, splice
+the manifest, apply the queued published backlink, or run Step-6/Step-7 review.

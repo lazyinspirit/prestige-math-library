@@ -72,13 +72,15 @@
         {"fact":"F3","source":"thm-convex-subsets-have-trivial-fundamental-group","source_section":"Statement","quote":"Then $C$ is simply connected.","uses":["2.1"]},
         {"fact":"F4","source":"lem-punctured-rn-is-polygonally-connected","source_section":"Statement","quote":"For $n\\ge2$, $\\mathbb R^n\\setminus\\{0\\}$ is polygonally connected.","uses":["2.2"]},
         {"fact":"F5","source":"thm-componentwise-limits-and-continuity","source_section":"Statement","quote":"**Continuity is componentwise.**","uses":["1.2","1.3"]},
-        {"fact":"F6","source":"thm-continuity-characterisations-top","source_section":"Statement","quote":"$f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.","uses":["1.2"]}
+        {"fact":"F6","source":"thm-continuity-characterisations-top","source_section":"Statement","quote":"$f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.","uses":["1.2"]},
+        {"fact":"F7","source":"thm-induced-fundamental-group-map-functoriality","source_section":"Statement","quote":"$(g\\circ f)_*=g_*\\circ f_*.","uses":["2.1"]},
+        {"fact":"F8","source":"def-simply-connected","source_section":"Definition","quote":"A topological space $X$ is **simply connected** when it is nonempty and path-connected","uses":["2.1"]}
       ],
       "derivations": [
         {"id":"formulas","claim":"Write mutually inverse stereographic formulas on each pole complement.","step":"1.1","inputs":["F1","algebra"]},
         {"id":"open-cover","claim":"The last-coordinate inequalities make the two pole complements open and their union the whole sphere.","step":"1.2","inputs":["F1","F5","F6","algebra"]},
         {"id":"continuity","claim":"Both formulas are continuous and hence are homeomorphisms.","step":"1.3","inputs":["F2","F5","step 1.1"]},
-        {"id":"complements","claim":"Each pole complement is simply connected.","step":"2.1","inputs":["F3","step 1.3"]},
+        {"id":"complements","claim":"Each pole complement is nonempty and path-connected, and [F7] applied to the stereographic homeomorphism and its inverse transports the one-element fundamental groups from [F3]; hence [F8] makes each complement simply connected.","step":"2.1","inputs":["F3","F7","F8","step 1.3"]},
         {"id":"overlap","claim":"The double complement is path-connected for n at least 2.","step":"2.2","inputs":["F4","step 1.3"]}
       ],
       "routine_steps": [],
@@ -669,7 +671,7 @@
     "lem-deck-transformations-correspond-to-normalizer-cosets": {
       "citations": [
         {"fact":"L1","source":"lem-covering-basepoint-change-conjugates-subgroup","source_section":"Statement","quote":"At the endpoint e_g of the lifted loop g, the induced subgroup is g inverse H g.","uses":["1.1"]},
-        {"fact":"L2","source":"prop-covering-morphism-subgroup-criterion","source_section":"Statement","quote":"A based morphism exists exactly when the source subgroup is contained in the target subgroup, and is unique.","uses":["1.2"]},
+        {"fact":"L2","source":"cor-based-connected-coverings-isomorphic-iff-equal-subgroups","source_section":"Statement","quote":"Based connected coverings are isomorphic exactly when their induced subgroups are equal.","uses":["1.2"]},
         {"fact":"F1","source":"def-normalizer-of-a-subgroup","source_section":"Definition","quote":"N_G(H):=\\{g\\in G:gHg^{-1}=H\\}","uses":["1.2"]},
         {"fact":"F2","source":"prop-deck-transformations-are-determined-by-one-point-and-act-freely","source_section":"Statement","quote":"two deck transformations agreeing at one point are equal.","uses":["2.1","2.2"]}
       ],
@@ -686,7 +688,7 @@
         {"case":"one","status":"checked","evidence":"For a one-sheeted cover H=G and the normalizer quotient has one coset."},
         {"case":"degenerate","status":"checked","evidence":"For self-normalizing H the construction correctly yields a trivial deck group."},
         {"case":"endpoints","status":"checked","evidence":"Every g is represented by a loop at b_0 lifted from e_0 to e_g."},
-        {"case":"nonempty-choice","status":"not_applicable","evidence":"Unique path lifting and unique covering morphisms determine all objects from g."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Unique path lifting and the based-covering isomorphism criterion determine all objects from g."},
         {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–1.2 prove a deck transformation forces g in the normalizer."},
         {"case":"iff-reverse","status":"checked","evidence":"Step 1.2 constructs the deck transformation from a normalizer element."}
       ],
@@ -792,11 +794,12 @@
         {"fact":"L1","source":"thm-classification-of-connected-covering-spaces","source_section":"Statement","quote":"Based connected coverings correspond to subgroups, and unbased connected coverings correspond to conjugacy classes.","uses":["1.2"]},
         {"fact":"F1","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["1.1"]},
         {"fact":"F2","source":"lem-subgroups-of-z-are-cyclic","source_section":"Statement","quote":"In particular every subgroup of $(\\mathbb{Z},+)$ is cyclic.","uses":["1.1"]},
-        {"fact":"F3","source":"thm-sheets-equal-fundamental-group-index","source_section":"Statement","quote":"Thus its finite number of sheets equals the subgroup index, and one is infinite exactly when the other is recorded as $\\infty$.","uses":["2.1"]}
+        {"fact":"F3","source":"thm-sheets-equal-fundamental-group-index","source_section":"Statement","quote":"Thus its finite number of sheets equals the subgroup index, and one is infinite exactly when the other is recorded as $\\infty$.","uses":["2.1"]},
+        {"fact":"F4","source":"thm-int-comm-ring","source_section":"Statement","quote":"$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of [[def-int-operations]] is a commutative ring with multiplicative identity","uses":["1.2"]}
       ],
       "derivations": [
         {"id":"subgroups","claim":"Transport every circle-covering subgroup to a unique nZ.","step":"1.1","inputs":["F1","F2"]},
-        {"id":"classes","claim":"Classification gives one based and one unbased class for each n.","step":"1.2","inputs":["L1","step 1.1","thm-int-comm-ring"]},
+        {"id":"classes","claim":"Classification gives one based class for each n; [F4] makes the circle group abelian, so conjugacy fixes every subgroup and gives the same unbased classes.","step":"1.2","inputs":["L1","F4","step 1.1"]},
         {"id":"sheets","claim":"For positive n the cover has n sheets; n=0 gives the universal infinite-sheeted cover.","step":"2.1","inputs":["F3","cor-real-line-is-universal-cover-of-circle","step 1.2"]}
       ],
       "routine_steps": [],

@@ -400,6 +400,16 @@
         ]
       },
       {
+        "id": "prop-pointwise-supremum-preserves-convexity",
+        "kind": "proposition",
+        "title": "A pointwise supremum of convex functions is convex wherever it is finite",
+        "strategy": "Let a nonempty family $(f_i)_{i\\in I}$ consist of real-valued convex functions on a common convex set $C$, and let $D=\\{x\\in C:\\sup_{i\\in I}f_i(x)<\\infty\\}$. For $x,y\\in D$, $t\\in[0,1]$, and every $i$, convexity bounds $f_i((1-t)x+ty)$ by $(1-t)f_i(x)+tf_i(y)$, which is at most $(1-t)\\sup_j f_j(x)+t\\sup_j f_j(y)$. This common finite upper bound puts the combined point in $D$; taking the supremum over $i$ gives the convexity inequality for $g(x)=\\sup_i f_i(x)$. The nonempty-family hypothesis ensures each supremum defining $g$ is of a nonempty bounded-above set, and the empty-domain and singleton-family cases are explicit.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-complete-ordered-field"
+        ]
+      },
+      {
         "id": "lem-convex-function-bound-on-an-interior-cube",
         "kind": "lemma",
         "title": "A convex function is bounded above and below on a smaller interior cube",
@@ -482,11 +492,30 @@
         ]
       },
       {
+        "id": "lem-convex-set-and-closure-have-same-interior-and-boundary",
+        "kind": "lemma",
+        "title": "A convex set and its closure have the same interior and boundary",
+        "strategy": "For $n\\ge1$ and a nonempty convex $C\\subseteq\\mathbb R^n$, first show that $\\overline C$ is convex by taking convergent sequences from $C$. Fix $c_0\\in C$, put $W=\\operatorname{span}(C-c_0)$ and $A=c_0+W$, and define relative interior using Euclidean balls inside $A$. A finite basis of $W$ identifies it with $\\mathbb R^d$; the pullback of the Euclidean norm is a norm, so finite-dimensional norm equivalence and Euclidean completeness show that $W$, hence $A$, is closed. Thus $C$ and $\\overline C$ have the same affine hull. Basis extraction from $C-c_0$ gives a simplex in $C$ whose positive barycentric core contains a relative ball, so $\\operatorname{ri}C$ is nonempty. Prove the line-segment principle directly: if $p\\in\\operatorname{ri}C$ and $y\\in\\overline C$, then every point of $[p,y)$ has a relative ball in $C$, using a sequence from $C$ converging to $y$ and the fixed relative ball at $p$. Every point of $\\operatorname{ri}(\\overline C)$ lies strictly between such a $p$ and a point of $\\overline C$ obtained by extending the segment within a relative ball, so $\\operatorname{ri}(\\overline C)=\\operatorname{ri}C$. If $W=\\mathbb R^n$, relative and ordinary interiors agree; if $W$ is proper, choose $v\\notin W$ and use arbitrarily small nonzero multiples of $v$ to show that every ambient ball about $A$ leaves $A$, so both ordinary interiors are empty. Closure idempotence and $\\partial C=\\overline C\\setminus\\operatorname{int}C$ then give equal ordinary interiors and boundaries. Treat $d=0$, $n=1$, singleton sets, and proper affine hulls explicitly.",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "def-linear-combination-and-span",
+          "cor-every-spanning-set-contains-a-basis",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-all-norms-on-rn-are-equivalent",
+          "thm-euclidean-space-complete",
+          "thm-metric-sequential-closure",
+          "thm-metric-closure-characterisation",
+          "def-metric-interior-closure-boundary",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
         "id": "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
         "kind": "theorem",
         "title": "Every boundary point of a nonempty Euclidean convex set has a supporting hyperplane",
-        "strategy": "Replace the set by its closed convex closure. Choose exterior points tending to the boundary point and strictly separate each by the normalized projection normal. Compactness of the unit sphere gives a convergent subsequence of normals. Pass the separation inequalities to the limit to obtain a nonzero unit normal supporting the closure at the boundary point, hence supporting the original set. The same argument includes convex sets with empty interior; no unproved affine-hull assertion is used.",
+        "strategy": "Use the preceding convex-closure lemma to replace the set by its closed convex closure without changing the given boundary point. The boundary definition then supplies points outside that closure tending to the boundary point. Strictly separate each exterior point and normalize its projection normal. Compactness of the unit sphere gives a convergent subsequence of normals. Pass the separation inequalities to the limit to obtain a nonzero unit normal supporting the closure at the boundary point, hence supporting the original set. The same argument includes convex sets with empty interior.",
         "deps": [
+          "lem-convex-set-and-closure-have-same-interior-and-boundary",
           "def-supporting-hyperplane-to-a-convex-set",
           "thm-strict-separation-of-a-point-from-a-closed-convex-set",
           "cor-euclidean-closed-balls-and-spheres-are-compact",
@@ -649,7 +678,7 @@
         "id": "thm-euclidean-semicontinuity-epigraph-characterisations",
         "kind": "theorem",
         "title": "Lower semicontinuity is equivalent to a closed epigraph and upper semicontinuity to a closed hypograph",
-        "strategy": "If $f$ is lower semicontinuous and $(x,t)$ lies below its epigraph, choose a level strictly between $t$ and $f(x)$; the open strict superlevel neighbourhood in the first coordinates and a short vertical interval form an open product neighbourhood disjoint from the epigraph. Conversely, if lower semicontinuity fails at $x$, choose a sequence approaching $x$ with values uniformly below $f(x)$ and use graph points to violate closedness. Apply the argument to $-f$ for the hypograph. State relative closedness in $A\\times\\mathbb R$ when $A$ is not closed.",
+        "strategy": "If $f$ is lower semicontinuous and $(x,t)$ lies below its epigraph, choose a level strictly between $t$ and $f(x)$; the open strict superlevel neighbourhood in the first coordinates and a short vertical interval form an open product neighbourhood disjoint from the epigraph. Conversely, if lower semicontinuity fails at $x$, choose $\\varepsilon>0$ and a sequence $x_j\\to x$ with $f(x_j)\\le f(x)-\\varepsilon$. The horizontal points $(x_j,f(x)-\\varepsilon)$ lie in the epigraph and converge to $(x,f(x)-\\varepsilon)$ outside it, contradicting closedness. Apply the argument to $-f$ for the hypograph. State relative closedness in $A\\times\\mathbb R$ when $A$ is not closed.",
         "deps": [
           "def-semicontinuity-on-euclidean-subsets",
           "def-epigraph-and-hypograph",
@@ -694,10 +723,11 @@
         "id": "ex-euclidean-norm-and-squared-norm-are-convex",
         "kind": "example",
         "title": "The Euclidean norm and its square are convex, with a ball of subgradients at zero for the norm",
-        "strategy": "The triangle inequality and homogeneity prove convexity of $x\\mapsto\\|x\\|_2$. Cauchy--Schwarz shows that its subdifferential at zero is exactly the closed unit ball. For $x\\mapsto\\|x\\|_2^2$, compute gradient $2x$ and Hessian $2I$, so the Hessian criterion gives strict convexity and the differentiable-subdifferential theorem gives the singleton $\\{2x\\}$.",
+        "strategy": "The triangle inequality and homogeneity prove convexity of $x\\mapsto\\|x\\|_2$. Cauchy--Schwarz shows that its subdifferential at zero is exactly the closed unit ball. For $x\\mapsto\\|x\\|_2^2$, compute gradient $2x$ and Hessian $2I$. The Hessian criterion gives convexity, the positive-definite-Hessian corollary gives strict convexity, and the differentiable-subdifferential theorem gives the singleton $\\{2x\\}$.",
         "deps": [
           "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "thm-hessian-characterises-convexity",
+          "cor-positive-definite-hessian-implies-strict-convexity",
           "cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient",
           "def-p-norms-on-rn",
           "thm-cauchy-schwarz-and-the-euclidean-norm"
@@ -732,11 +762,12 @@
         "id": "cex-convex-function-with-empty-subdifferential-at-a-boundary-point",
         "kind": "counterexample",
         "title": "$x\\mapsto-\\sqrt{1-\\|x\\|_2^2}$ has empty subdifferential on the unit-sphere boundary",
-        "strategy": "On the closed unit ball the function is convex and continuous. Fix a boundary point and suppose a finite vector were a subgradient. Test the subgradient inequality on the radial points $\\alpha x$ as $\\alpha$ tends to one from below; after division it forces the radial component of the putative subgradient to dominate $\\sqrt{(1+\\alpha)/(1-\\alpha)}$ for every $\\alpha<1$, impossible. This shows why the interior hypothesis in subgradient existence is sharp.",
+        "strategy": "For $x$ in the closed unit ball put $s_x=\\sqrt{1-\\|x\\|_2^2}$. Given $x,y$ and $0\\le t\\le1$, the lifted vectors $(x,s_x)$ and $(y,s_y)$ have unit Euclidean norm in one higher dimension. The triangle inequality makes their convex combination have norm at most one, so its nonnegative last coordinate is at most $s_{(1-t)x+ty}$. Negating gives convexity of $x\\mapsto-s_x$ on the whole closed ball, including its boundary. Fix a boundary point and suppose a finite vector were a subgradient. Test the subgradient inequality on the radial points $\\alpha x$ as $\\alpha$ tends to one from below; after division it forces the radial component of the putative subgradient to dominate $\\sqrt{(1+\\alpha)/(1-\\alpha)}$ for every $\\alpha<1$, impossible. This shows why the interior hypothesis in subgradient existence is sharp.",
         "deps": [
           "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "def-subgradient-and-subdifferential",
           "thm-convex-functions-have-subgradients-at-interior-points",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
           "def-p-norms-on-rn"
         ]
       },

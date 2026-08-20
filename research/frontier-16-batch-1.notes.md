@@ -10,16 +10,16 @@ The required stamped recheck was run after the replacement and again returned `f
 
 - Current substage: Step 2 proof-contract construction after source harvest, item decomposition, id reuse, and the first dependency pass.
 - Owned artifact paths: `research/frontier-16-batch-1.pages.json`, `research/frontier-16-batch-1.notes.md`, `research/frontier-16-batch-1.proof-contracts.json`, and the separately required gated harvest `research/frontier-16-batch-1.coverage.json`.
-- Completed checks: `CLAUDE.md`, `SCHEMA.md`, `README.md`, the house exemplar, the latest completed batch-1 artifacts, `QUALITY-CONTROLS.md`, both design sections, the plan-spec entries, all declared prerequisite page files, every candidate published dependency's actual Definition/Statement/Example and provenance, the id collision search, both richness passes, and web reading of the five coverage sources. The manifest parses as 16/10 items for the inverse-function pair and 29/13 for the convex/semicontinuity pair; `content-policy --manifest-only` reports 68 scoped ids with 0 errors and 0 warnings; `coverage-checklist --require-destination` reports 2 pages, 85 harvested headings, 0 errors and 1 low-yield advisory.
+- Completed checks: `CLAUDE.md`, `SCHEMA.md`, `README.md`, the house exemplar, the latest completed batch-1 artifacts, `QUALITY-CONTROLS.md`, both design sections, the plan-spec entries, all declared prerequisite page files, every candidate published dependency's actual Definition/Statement/Example and provenance, the id collision search, both richness passes, and web reading of the five coverage sources. After the Step-3 fix, the manifest parses as 16/10 items for the inverse-function pair and 31/13 for the convex/semicontinuity pair. Step-3 Alpha-a repaired the source harvest and the fix pass added the explicit Boyd extension dispositions; see the records below.
 - Open mathematical constraints: encode exact same-batch clauses and published citation substrings in every proof-bearing contract; keep the proper-local-diffeomorphism result below the order-293 covering-space dependency boundary; verify every boundary worksheet and the semicontinuity epigraph reverse direction; finish the source/provenance and design-amendment ledgers.
 - Mechanical blocker: `source-fetch-check --stamp` was run and every URL failed with sandbox DNS error `EAI_AGAIN`. The sources were opened through the web-research channel, but no `fetch_verified` field will be fabricated. Exact retry command: `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-1.coverage.json --stamp`.
 - Exact next action: write the version-1 proof-contract file from the finalized manifest, then run its structural audit plus coverage, content-policy, prose, collision, and whitespace checks.
 
-The action in that checkpoint is complete. The proof-contract artifact now has 59 scoped proof-bearing ids and 59 contracts, with an exact input map and all eight boundary dispositions for each.
+The action in that checkpoint is complete. After the Step-3 fix, the proof-contract artifact has 61 scoped proof-bearing ids and 61 contracts, with an exact input map and all eight boundary dispositions for each.
 
 ## Scope, plan order, and artifact boundary
 
-This batch owns `the-inverse-function-theorem-completed` at order 288.00001 with its companion at 288.00002, and `convex-and-semicontinuous-functions-on-rn` at order 288.00005 with its companion at 288.00006. The A pages have 16 and 29 items. Neither approaches the current 60-item split ceiling, so no split is proposed.
+This batch owns `the-inverse-function-theorem-completed` at order 288.00001 with its companion at 288.00002, and `convex-and-semicontinuous-functions-on-rn` at order 288.00005 with its companion at 288.00006. The A pages have 16 and 31 items. Neither approaches the current 60-item split ceiling, so no split is proposed.
 
 The four batch artifacts are `research/frontier-16-batch-1.pages.json`, `research/frontier-16-batch-1.coverage.json`, `research/frontier-16-batch-1.proof-contracts.json`, and this notes file. The coverage file is separately required by `QUALITY-CONTROLS.md` and the dispatch's canonical-harvest gate even though the dispatch's three-file write list accidentally omitted it. This is the same resolved prompt defect recorded by the most recently completed batch-1 run.
 
@@ -222,11 +222,12 @@ If declined, the B page leaves a real convention collision and does not say what
 
 1. Stephen Boyd and Lieven Vandenberghe, *Convex Optimization*: https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf
    - Read §2.5; §§3.1.1–3.1.4 and 3.1.6–3.1.8; §§3.2.1–3.2.3.
-   - Supports separation and support, the Euclidean convex-function definition, first- and second-order criteria, sublevels, epigraphs, Jensen, nonnegative sums, affine precomposition, and pointwise maxima.
+   - Supports separation and support, the Euclidean convex-function definition, first- and second-order criteria, sublevels, epigraphs, finite Jensen, nonnegative finite sums, affine precomposition, finite pointwise maxima, and pointwise suprema on their finite-valued domains.
+   - Its integral/expectation Jensen extension and infinite-sum/integral preservation clauses are harvested separately as out of scope because their measure, integration, and convergence hypotheses are not available from this pair.
    - Convention disagreement: the book normally extends a convex function by $+\infty$ outside its effective domain. This pair uses an explicit convex domain and finite real values only.
 2. Dimitri P. Bertsekas, MIT 6.253 complete lecture notes: https://ocw.mit.edu/courses/6-253-convex-analysis-and-optimization-spring-2012/6c63c6219c60378bc27d5b4a9167f1bc_MIT6_253S12_lec_comp.pdf
    - Read Lectures 2–7 and 12 by the source's own topic headings.
-   - Independently supports epigraphs and closed convex functions, differentiable criteria, continuity on relative interiors, optimal-solution existence, hyperplane separation, nonvertical epigraph support, subgradients, and the zero-subgradient optimality condition.
+   - Independently supports epigraphs and closed convex functions, differentiable criteria, the equality of relative interiors under closure, continuity on relative interiors, optimal-solution existence, hyperplane separation, nonvertical epigraph support, subgradients, and the zero-subgradient optimality condition.
    - Convention disagreement: the notes formulate several results for proper extended-real functions and relative interiors. The scaffold uses ordinary interiors of explicit finite-valued Euclidean domains and flags boundary failure separately.
 3. CUHK ENGG 5501 convex-analysis notes: https://www.se.cuhk.edu.hk/~manchoso/2425/engg5501/2-cvxanal.pdf
    - Supplemental exact source for $-\sqrt{1-\|x\|_2^2}$ having empty subdifferential on the unit sphere and for the Euclidean-norm subdifferential.
@@ -239,7 +240,7 @@ All five coverage URLs were opened through web research and their mathematical b
 
 ## Canonical coverage yield
 
-The coverage artifact records 85 source or canonical headings. For `the-inverse-function-theorem-completed`, the dispositions are 14 included, 4 inline, 10 already-published, 3 deferred, and 5 out-of-scope. For `convex-and-semicontinuous-functions-on-rn`, they are 30 included, 7 inline, and 12 out-of-scope.
+The coverage artifact records 97 source or canonical headings after the Step-3 Alpha-a source read and fix pass. For `the-inverse-function-theorem-completed`, the dispositions are 14 included, 6 inline, 12 already-published, 4 deferred, and 8 out-of-scope. For `convex-and-semicontinuous-functions-on-rn`, they are 33 included, 6 inline, and 14 out-of-scope.
 
 The IFT low-yield warning is caused by harvesting every exercise in Lebl §8.5 while correctly reusing ten immutable published results and sending two regular-level-set exercises to `constant-rank-submersions-and-regular-level-sets`. It is not a thin scaffold. No important result was declined merely for a missing definition or lemma. The broad convex-analysis declines are relative-interior algebra, recession theory, Fenchel conjugacy, sensitivity analysis, and full subdifferential calculus; each is a separate optimization or extended-real subject rather than missing machinery for this pair.
 
@@ -313,6 +314,7 @@ No planned Statement or construction is `ai-generated`. Accordingly no `generati
 | `thm-finite-jensen-inequality-in-euclidean-space` | literature-derived | ai-altered | Boyd §3.1.8; induction follows the published one-variable route but preserves vector combinations and zero weights; cite Boyd. |
 | `prop-convex-functions-have-convex-sublevel-sets` | literature-derived | ai-altered | Boyd §3.1.6; cite Boyd. |
 | `prop-basic-operations-preserving-convexity` | literature-derived | ai-altered | Boyd §§3.2.1–3.2.3; cite Boyd. |
+| `prop-pointwise-supremum-preserves-convexity` | literature-derived | ai-altered | Boyd §3.2.3 states the pointwise-supremum theorem and its finite-valued effective domain; the local proof writes the common-upper-bound inequality directly and invokes real completeness only to form each supremum; cite Boyd. |
 | `lem-convex-function-bound-on-an-interior-cube` | ai-altered | ai-altered | Isolates the vertex-bound and reflection subclaims in MIT Lecture 4's continuity proof; cite MIT. |
 | `thm-convex-functions-on-open-convex-sets-are-locally-lipschitz` | literature-derived | ai-altered | MIT Lecture 4 and Boyd §3.1; local ray/secant proof is fully supplied; cite both. |
 | `cor-convex-functions-on-open-convex-sets-are-continuous` | literature-derived | ai-altered | Boyd §3.1 and MIT Lecture 4; cite both. |
@@ -320,6 +322,7 @@ No planned Statement or construction is `ai-generated`. Accordingly no `generati
 | `thm-nearest-point-in-a-nonempty-closed-convex-set` | literature-derived | ai-altered | Standard finite-dimensional projection theorem underlying Boyd's separation proof; cite Boyd §2.5 and MIT Lecture 6. |
 | `lem-projection-onto-a-closed-convex-set-has-the-variational-inequality` | literature-derived | ai-altered | Standard projection characterization used in both separation treatments; cite Boyd and MIT. |
 | `thm-strict-separation-of-a-point-from-a-closed-convex-set` | literature-derived | ai-altered | Point--closed-set form of Boyd §2.5.1; cite Boyd. |
+| `lem-convex-set-and-closure-have-same-interior-and-boundary` | ai-altered | ai-altered | MIT Lecture 4 proves the stronger relative-interior identities under closure. The planned statement specializes them to ordinary Euclidean interior and adds the immediate boundary identity; the local proof includes the affine-hull, relative-ball, line-segment, and proper-subspace branches; cite MIT. |
 | `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set` | literature-derived | ai-altered | Boyd §2.5.2 and MIT Lecture 7; the limit-normal proof includes empty-interior sets; cite both. |
 | `thm-separating-hyperplane-theorem-for-disjoint-convex-sets` | literature-derived | ai-altered | Boyd §2.5.1 and MIT Lecture 7; proof uses the convex difference set and the two preceding separation forms; cite both. |
 | `def-subgradient-and-subdifferential` | literature-derived | not-applicable | MIT Lecture 12, Boyd first-order condition, and Drusvyatskiy §3.5; cite MIT and Drusvyatskiy. |
@@ -380,18 +383,21 @@ The following text must occur verbatim in the authored source section named by t
 - `thm-convex-function-iff-convex-epigraph`: `The function $f:C\to\mathbb R$ is convex if and only if its epigraph is a convex subset of $\mathbb R^{n+1}$.`
 - `thm-finite-jensen-inequality-in-euclidean-space`: `For a positive finite family of points in $C$ and nonnegative weights summing to one, $f$ of their weighted Euclidean sum is at most the weighted sum of their $f$-values.`
 - `prop-basic-operations-preserving-convexity`: `The pointwise maximum of a nonempty finite family of convex functions on a common convex domain is convex.`
+- `prop-pointwise-supremum-preserves-convexity`: `Let $(f_i)_{i\in I}$ be a nonempty family of convex real-valued functions on a common convex set $C$, put $D=\{x\in C:\sup_{i\in I}f_i(x)<\infty\}$, and define $g(x)=\sup_{i\in I}f_i(x)$ on $D$. Then $D$ is convex and $g$ is convex on $D$.`
 - `lem-convex-function-bound-on-an-interior-cube`: `Then $f$ is bounded above on the full cube and bounded above and below on the concentric half-sized cube.`
 - `thm-convex-functions-on-open-convex-sets-are-locally-lipschitz`: `Then $f$ is locally Lipschitz on $U$`
 - `cor-convex-functions-on-open-convex-sets-are-continuous`: `Every convex function $f:U\to\mathbb R$ on an open convex set is continuous on $U$.`
 - `thm-nearest-point-in-a-nonempty-closed-convex-set`: `there is a unique $p\in C$ such that $\|x-p\|_2\le\|x-z\|_2$ for every $z\in C$.`
 - `lem-projection-onto-a-closed-convex-set-has-the-variational-inequality`: `$$\langle x-p,z-p\rangle\le0\qquad(z\in C).$$`
 - `thm-strict-separation-of-a-point-from-a-closed-convex-set`: `Then there are $a\ne0$ and $b\in\mathbb R$ such that $\langle a,z\rangle\le b<\langle a,x\rangle$ for every $z\in C$.`
+- `lem-convex-set-and-closure-have-same-interior-and-boundary`: `The closure $\overline C$ is convex, $\operatorname{int}(C)=\operatorname{int}(\overline C)$, and $\partial C=\partial\overline C$.`
 - `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set`: `Then there is a nonzero vector $u$ such that $\langle u,z-a\rangle\le0$ for every $z\in C$.`
 - `def-subgradient-and-subdifferential`: `$v$ is a subgradient of $f$ at $a$ when $f(y)\ge f(a)+\langle v,y-a\rangle$ for every $y$ in the domain.`
 - `thm-convex-functions-have-subgradients-at-interior-points`: `Then $\partial f(a)$ is nonempty for every $a\in\operatorname{int}C$.`
 - `thm-differentiable-convex-functions-and-gradient-inequality`: `$$f(y)\ge f(x)+\langle\nabla f(x),y-x\rangle\qquad(x,y\in U).$$`
 - `cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient`: `Then $\partial f(a)=\{\nabla f(a)\}$.`
 - `thm-hessian-characterises-convexity`: `A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point.`
+- `cor-positive-definite-hessian-implies-strict-convexity`: `An everywhere-positive-definite Hessian implies strict convexity.`
 - `def-semicontinuity-on-euclidean-subsets`: `$f$ is upper semicontinuous at $a$ when for every $\varepsilon>0$ there is $\delta>0$ such that $f(x)<f(a)+\varepsilon$ for every $x\in A\cap B_2(a,\delta)$`
 - `thm-euclidean-semicontinuity-level-set-characterisations`: `Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.` and `Upper semicontinuity is equivalent to relative openness of every strict sublevel set`
 - `thm-euclidean-semicontinuous-extreme-value-theorem`: `Every lower semicontinuous real-valued function on a nonempty compact Euclidean set is bounded below and attains a minimum`
@@ -446,8 +452,9 @@ The implication-direction pass adds the open-map converse failure, alongside the
 
 Long-proof decomposition:
 
+- The operations layer now separates the finite maximum rule from `prop-pointwise-supremum-preserves-convexity`, whose proof isolates convexity of the finite-valued domain before taking the supremum inequality.
 - Interior continuity is decomposed into the finite-vertex cube bound, local Lipschitz theorem, and continuity corollary.
-- Separation is decomposed into nearest-point existence/uniqueness, the projection variational inequality, strict point--closed-set separation, boundary support, and general two-set separation.
+- Separation is decomposed into nearest-point existence/uniqueness, the projection variational inequality, strict point--closed-set separation, the convex-closure interior/boundary lemma, boundary support, and general two-set separation. The new closure lemma itself exposes the affine-hull, relative-ball, line-segment, full-dimensional, and proper-affine-hull branches needed by the support proof.
 - Subgradient existence is built only after that separation backbone, then followed by the gradient inequality, differentiable singleton, and zero-subgradient minimizer criterion.
 - The Hessian development separates the convexity iff theorem from the positive-definite sufficient condition for strict convexity and from the two distinct converse failures.
 - Semicontinuity is decomposed into the Euclidean definition, real-line agreement, level-set equivalences, epigraph/hypograph equivalences, and compact extreme-value theorem.
@@ -461,7 +468,7 @@ Useful corollaries added by the corollary pass:
 - local minima are global on open convex domains;
 - strictly convex functions have at most one global minimizer.
 
-The harvested general separating-hyperplane theorem is retained rather than silently replaced by the narrower point--set form. The A page has 29 items, well below the split ceiling. No pruning or split is proposed.
+The harvested pointwise-supremum proposition and general separating-hyperplane theorem are retained rather than silently reduced to finite maxima and point--set separation. The A page has 31 items, well below the split ceiling. No pruning or split is proposed.
 
 ## Per-page item list
 
@@ -497,7 +504,7 @@ The harvested general separating-hyperplane theorem is retained rather than sile
 9. `fs-zero-derivative-on-an-open-set-forces-constancy` — false statement — FALSE: zero derivative on an open set forces constancy
 10. `fs-an-open-c-one-map-has-invertible-derivative` — false statement — FALSE: every open $C^1$ map has invertible derivative
 
-### `convex-and-semicontinuous-functions-on-rn` — 29 items
+### `convex-and-semicontinuous-functions-on-rn` — 31 items
 
 1. `def-convex-and-strictly-convex-functions-on-euclidean-sets` — definition — Convex and strictly convex functions on Euclidean convex sets
 2. `def-epigraph-and-hypograph` — definition — The epigraph and hypograph of a real-valued function
@@ -505,29 +512,31 @@ The harvested general separating-hyperplane theorem is retained rather than sile
 4. `thm-finite-jensen-inequality-in-euclidean-space` — theorem — Finite Jensen inequality for convex functions on $\mathbb R^n$
 5. `prop-convex-functions-have-convex-sublevel-sets` — proposition — Every sublevel set of a convex function is convex
 6. `prop-basic-operations-preserving-convexity` — proposition — Nonnegative combinations, affine precomposition, and finite pointwise maxima preserve convexity
-7. `lem-convex-function-bound-on-an-interior-cube` — lemma — A convex function is bounded above and below on a smaller interior cube
-8. `thm-convex-functions-on-open-convex-sets-are-locally-lipschitz` — theorem — A convex function on an open convex set is locally Lipschitz
-9. `cor-convex-functions-on-open-convex-sets-are-continuous` — corollary — A convex function on an open convex set is continuous
-10. `def-supporting-hyperplane-to-a-convex-set` — definition — Supporting and strictly separating hyperplanes in Euclidean space
-11. `thm-nearest-point-in-a-nonempty-closed-convex-set` — theorem — Every point has a unique nearest point in a nonempty closed Euclidean convex set
-12. `lem-projection-onto-a-closed-convex-set-has-the-variational-inequality` — lemma — Metric projection onto a closed convex set satisfies the variational inequality
-13. `thm-strict-separation-of-a-point-from-a-closed-convex-set` — theorem — A point outside a nonempty closed convex set is strictly separated from it
-14. `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set` — theorem — Every boundary point of a nonempty Euclidean convex set has a supporting hyperplane
-15. `thm-separating-hyperplane-theorem-for-disjoint-convex-sets` — theorem — Disjoint nonempty Euclidean convex sets have a separating hyperplane
-16. `def-subgradient-and-subdifferential` — definition — Subgradients and the subdifferential of a convex function
-17. `thm-convex-functions-have-subgradients-at-interior-points` — theorem — A convex function has a subgradient at every interior point of its domain
-18. `thm-differentiable-convex-functions-and-gradient-inequality` — theorem — Differentiable convex functions are characterized by the gradient inequality
-19. `cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient` — corollary — The subdifferential of a differentiable convex function is its gradient singleton
-20. `cor-subgradient-zero-characterises-global-minima` — corollary — Zero is a subgradient exactly at a global minimum
-21. `thm-hessian-characterises-convexity` — theorem — A $C^2$ function is convex exactly when its Hessian is positive semidefinite
-22. `cor-positive-definite-hessian-implies-strict-convexity` — corollary — An everywhere-positive-definite Hessian implies strict convexity
-23. `cor-local-minima-of-convex-functions-on-rn-are-global` — corollary — Every local minimum of a convex function on an open Euclidean convex set is global
-24. `cor-strictly-convex-functions-on-rn-have-at-most-one-minimizer` — corollary — A strictly convex function on a Euclidean convex set has at most one global minimizer
-25. `def-semicontinuity-on-euclidean-subsets` — definition — Upper and lower semicontinuity on subsets of $\mathbb R^n$
-26. `prop-semicontinuity-agrees-on-the-real-line` — proposition — Euclidean semicontinuity agrees with the published real-line definition
-27. `thm-euclidean-semicontinuity-level-set-characterisations` — theorem — Semicontinuity on $\mathbb R^n$ is characterized by strict open level sets and weak closed level sets
-28. `thm-euclidean-semicontinuity-epigraph-characterisations` — theorem — Lower semicontinuity is equivalent to a closed epigraph and upper semicontinuity to a closed hypograph
-29. `thm-euclidean-semicontinuous-extreme-value-theorem` — theorem — Semicontinuous extreme value theorem on compact Euclidean sets
+7. `prop-pointwise-supremum-preserves-convexity` — proposition — A pointwise supremum of convex functions is convex wherever it is finite
+8. `lem-convex-function-bound-on-an-interior-cube` — lemma — A convex function is bounded above and below on a smaller interior cube
+9. `thm-convex-functions-on-open-convex-sets-are-locally-lipschitz` — theorem — A convex function on an open convex set is locally Lipschitz
+10. `cor-convex-functions-on-open-convex-sets-are-continuous` — corollary — A convex function on an open convex set is continuous
+11. `def-supporting-hyperplane-to-a-convex-set` — definition — Supporting and strictly separating hyperplanes in Euclidean space
+12. `thm-nearest-point-in-a-nonempty-closed-convex-set` — theorem — Every point has a unique nearest point in a nonempty closed Euclidean convex set
+13. `lem-projection-onto-a-closed-convex-set-has-the-variational-inequality` — lemma — Metric projection onto a closed convex set satisfies the variational inequality
+14. `thm-strict-separation-of-a-point-from-a-closed-convex-set` — theorem — A point outside a nonempty closed convex set is strictly separated from it
+15. `lem-convex-set-and-closure-have-same-interior-and-boundary` — lemma — A convex set and its closure have the same interior and boundary
+16. `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set` — theorem — Every boundary point of a nonempty Euclidean convex set has a supporting hyperplane
+17. `thm-separating-hyperplane-theorem-for-disjoint-convex-sets` — theorem — Disjoint nonempty Euclidean convex sets have a separating hyperplane
+18. `def-subgradient-and-subdifferential` — definition — Subgradients and the subdifferential of a convex function
+19. `thm-convex-functions-have-subgradients-at-interior-points` — theorem — A convex function has a subgradient at every interior point of its domain
+20. `thm-differentiable-convex-functions-and-gradient-inequality` — theorem — Differentiable convex functions are characterized by the gradient inequality
+21. `cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient` — corollary — The subdifferential of a differentiable convex function is its gradient singleton
+22. `cor-subgradient-zero-characterises-global-minima` — corollary — Zero is a subgradient exactly at a global minimum
+23. `thm-hessian-characterises-convexity` — theorem — A $C^2$ function is convex exactly when its Hessian is positive semidefinite
+24. `cor-positive-definite-hessian-implies-strict-convexity` — corollary — An everywhere-positive-definite Hessian implies strict convexity
+25. `cor-local-minima-of-convex-functions-on-rn-are-global` — corollary — Every local minimum of a convex function on an open Euclidean convex set is global
+26. `cor-strictly-convex-functions-on-rn-have-at-most-one-minimizer` — corollary — A strictly convex function on a Euclidean convex set has at most one global minimizer
+27. `def-semicontinuity-on-euclidean-subsets` — definition — Upper and lower semicontinuity on subsets of $\mathbb R^n$
+28. `prop-semicontinuity-agrees-on-the-real-line` — proposition — Euclidean semicontinuity agrees with the published real-line definition
+29. `thm-euclidean-semicontinuity-level-set-characterisations` — theorem — Semicontinuity on $\mathbb R^n$ is characterized by strict open level sets and weak closed level sets
+30. `thm-euclidean-semicontinuity-epigraph-characterisations` — theorem — Lower semicontinuity is equivalent to a closed epigraph and upper semicontinuity to a closed hypograph
+31. `thm-euclidean-semicontinuous-extreme-value-theorem` — theorem — Semicontinuous extreme value theorem on compact Euclidean sets
 
 ### `convex-and-semicontinuous-functions-on-rn-examples` — 13 items
 
@@ -547,7 +556,7 @@ The harvested general separating-hyperplane theorem is retained rather than sile
 
 ## New-id and reuse report
 
-The exact collision command was a fixed-string `rg` over `items/` and `research/plan-spec.json` for every final manifest id, followed by semantic searches for $C^k$ inverse regularity, regular loci, proper local diffeomorphisms, Jacobian sign, zero-derivative constancy, Euclidean convexity, epigraphs, separation, metric projection, subgradients, Hessian criteria, and Euclidean semicontinuity. All 68 final ids report `NEW`.
+The exact collision command was a fixed-string `rg` over `items/` and `research/plan-spec.json` for every final manifest id, followed by semantic searches for $C^k$ inverse regularity, regular loci, proper local diffeomorphisms, Jacobian sign, zero-derivative constancy, Euclidean convexity, pointwise suprema, convex-closure interior equality, epigraphs, separation, metric projection, subgradients, Hessian criteria, and Euclidean semicontinuity. All 70 final ids report `NEW`. The Step-3 additions `prop-pointwise-supremum-preserves-convexity` and `lem-convex-set-and-closure-have-same-interior-and-boundary` were each checked by exact id and semantic statement searches; neither occurs in `items/` or `plan-spec.json`.
 
 The semantic pass found three important reusable facts rather than new ids:
 
@@ -591,24 +600,58 @@ These are independent recommendations ordered by mathematical correctness, depen
 
 Mathematical confidence is high. I checked the $C^k$ bootstrap base and induction step, adjugate regularity, the global inverse gluing, proper-map closedness and finite-sheet construction, Jacobian-sign connectedness, polygonal constancy, the local Lipschitz ray geometry, projection uniqueness and variational inequality, both separation branches, nonvertical epigraph support, both directions of the gradient and Hessian criteria, both Hessian converse witnesses, all four semicontinuity level-set directions, both epigraph/hypograph directions, and the compact finite-intersection proof including lower bounds and the reciprocal-Archimedean endpoint.
 
-Every published dependency was opened from disk and every direct published contract quote was checked as an exact source substring. Every load-bearing dependency is internal to the pair or available in published content on an actual earlier page. There is no exception, cross-batch input, external fallback, or AI-generated dependency target.
+Every published dependency was opened from disk and every direct published contract quote was checked against its exact source clause, normalizing only source line wrapping. Every load-bearing dependency is internal to the pair or available in published content on an actual earlier page. There is no exception, cross-batch input, external fallback, or AI-generated dependency target.
 
-What was not verified: `validate-plan` and `depsource` cannot authoritatively classify these new edges until Step 4 splices the manifests into `research/plan-spec.json`; the proof-contract strict gate cannot read numbered steps or same-batch quote text until Step 5 creates the items. The source-fetch stamp remains blocked by local DNS. No Step-6 independent reader, Alpha audit, Step-7 judge, publication, or status change has occurred.
+The Step-3 additions use only published earlier prerequisites. `def-complete-ordered-field` is literature-derived. The exact on-disk Statements of `def-linear-combination-and-span`, `cor-every-spanning-set-contains-a-basis`, `thm-dimension-of-a-linear-subspace`, `thm-all-norms-on-rn-are-equivalent`, `thm-euclidean-space-complete`, `thm-metric-sequential-closure`, `thm-metric-closure-characterisation`, `def-metric-interior-closure-boundary`, and `def-euclidean-inner-product` were confirmed established-from-knowledge after inspection. Each has eligible `literature-derived` or `ai-altered` Statement provenance and is homed on `foundations-of-the-real-numbers`, `vector-spaces-and-subspaces`, `linear-independence-bases-and-dimension`, `rn-as-a-normed-space`, or `metric-spaces`, all in the convex page's declared prerequisite ancestry.
+
+What was not verified: `validate-plan` and `depsource` cannot authoritatively classify the two new manifest items until Step 4 splices them into `research/plan-spec.json`; the proof-contract strict gate cannot read numbered steps or same-batch quote text until Step 5 creates the items. No Step-6 independent reader, Alpha audit, Step-7 judge, publication, or status change has occurred.
 
 ## Final Step-2 checks
 
 At the close of this scaffold pass:
 
-- `coverage-checklist --require-destination` reports 2 pages, 85 harvested headings, 0 errors, and 1 low-yield advisory. The advisory is explained under “Canonical coverage yield.”
-- `content-policy --manifest-only` reports 68 scoped items, 0 errors, and 0 warnings.
-- The manifest parses as 16/10 items for the inverse-function pair and 29/13 for the convex/semicontinuity pair. Every internal dependency is earlier on the same page or on a smaller-order page in this batch.
-- The actual library-page home audit resolves all 86 external dependency ids to published pages of smaller order. No dependency id is missing.
-- The proof-contract artifact parses as 59 scoped proof-bearing items and 59 contracts. Every contract has citations, an exact numbered-step input map, all eight boundary dispositions, and a `finite_smoke` array. No registered finite-smoke model applies to these real-analysis claims.
-- The citation overlay reports 50 exact quotes to published source sections and 58 same-batch quotes bound to Step-5 clauses, with 0 missing quotes and 0 undeclared citation sources.
-- The exact fixed-string collision scan over `items/` and `research/plan-spec.json` reports all 68 final ids new. The semantic scan found and reused the published items recorded in the new-id report.
+- After the Step-3 fix, `coverage-checklist` reports 2 pages, 97 harvested results, 0 errors, and 1 low-yield advisory. The advisory is explained under “Canonical coverage yield.”
+- `content-policy --manifest-only` reports 70 scoped items, 0 errors, and 0 warnings.
+- The manifest parses as 16/10 items for the inverse-function pair and 31/13 for the convex/semicontinuity pair. Every internal dependency is earlier on the same page or on a smaller-order page in this batch.
+- The actual library-page home audit resolves all 93 external dependency ids to published pages of smaller order. No dependency id is missing, and the new dependency homes all occur in the declared prerequisite ancestry.
+- The proof-contract artifact parses as 61 scoped proof-bearing items and 61 contracts. Every contract has citations, an exact numbered-step input map, all eight boundary dispositions, and a `finite_smoke` array. No registered finite-smoke model applies to these real-analysis claims.
+- The citation overlay reports 61 published-source quotes and 61 same-batch quotes, with 0 normalized-quote misses and 0 undeclared citation sources. Every published citation introduced in the fix is also a literal source substring.
+- The exact fixed-string collision scan over `items/` and `research/plan-spec.json` reports all 70 final ids new. The semantic scan found and reused the published items recorded in the new-id report.
+- `validate-plan research/plan-spec.json` passes on the current unspliced plan. This is the requested Step-3 gate result, not a claim that it classified the two new ids before Step 4.
 - `prosecheck --warnings` reports 0 errors and 13 count heuristics, all in this required audit report; it reports no positional contradiction. The A-page summary text itself contains no count, rank, survey, or reading-position claim.
 - The notation scan finds no applied canonical embedding in any owned artifact.
 - `git diff --check` reports no whitespace error.
-- `source-fetch-check --stamp` was run twice. Both runs report 0/5 stamped and the same `EAI_AGAIN` DNS failure for every source. This gate did not pass, and the batch must not advance on a claim that it did.
+- During the original Step-2 pass, `source-fetch-check --stamp` was run twice and both runs reported 0/5 stamped with `EAI_AGAIN`. The later engine retry populated genuine stamps, and the current Step-3 fix check reports 5/5 sources fetch-verified.
 
-No mathematical, dependency, id-collision, size, cross-batch, external-fallback, or published-falsehood blocker remains. The sole blocker is the source-fetch stamp, which requires the engine to retry the exact command in an environment with DNS access; no permission prompt or fabricated stamp is an acceptable substitute.
+At the close of the Beta pass, no mathematical, dependency, id-collision, size, cross-batch, external-fallback, or published-falsehood blocker was recorded, and the only reported blocker was the missing source-fetch stamp. The current coverage file now carries a real fetch stamp for every source, so that mechanical blocker has since cleared. The Step-3 Alpha-a read nevertheless found the two remaining scaffold defects recorded below; the convex pair is not sufficient until they are repaired.
+
+## Step-3 Alpha-a direct repairs (2026-08-20)
+
+Alpha-a reopened the cited full texts and corrected four scaffold defects before issuing its breadth verdict.
+
+- Lebl §8.5 contains Exercise 8.5.11 after the ten exercises the harvest named. The locator now covers Exercises 8.5.1–8.5.11, and the omitted local-straightening result is explicitly deferred to `constant-rank-submersions-and-regular-level-sets`.
+- The Toronto §3.3 range contains two named visual examples, an `Important Coordinate Systems` section with polar, spherical, and cylindrical subsections, the normalized local-solvability theorem used in its inverse-function proof, and a named block-determinant claim. Each now has an honest disposition.
+- The reverse epigraph argument no longer asks nonconvergent graph points to witness nonclosedness: it uses the horizontal points $(x_j,f(x)-\varepsilon)$.
+- The two companion convexity routes now cite what they use. Strict convexity of the squared norm uses the positive-definite-Hessian corollary rather than the weaker semidefinite Hessian criterion. Convexity of the boundary square-root counterexample is proved directly by lifting points to the upper unit hemisphere and applying the Euclidean triangle inequality, so no continuity-at-the-boundary step is left implicit.
+
+At review time, the remaining Step-3 insufficiency was genuine breadth/decomposition work rather than one of these repaired routes: Boyd–Vandenberghe §3.2.3 supplies pointwise suprema of convex functions, and Bertsekas Lecture 4 supplies the convex-closure/interior fact needed before exterior points may be chosen in the supporting-hyperplane proof. Both are resolved in the fix pass below.
+
+## Step-3 fix pass
+
+- **B1-1 — applied.** Added `lem-convex-set-and-closure-have-same-interior-and-boundary` immediately before the supporting-hyperplane theorem. Its source-backed Statement records convexity of the closure and equality of ordinary interiors and boundaries. The proof contract closes the affine-hull route through a finite basis, finite-dimensional norm equivalence, Euclidean completeness, the relative line-segment principle, and separate full/proper affine-hull branches. `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set` now depends on the lemma and invokes its boundary equality before selecting points outside the closed convex closure.
+- **B1-2 — applied.** Added `prop-pointwise-supremum-preserves-convexity` after the finite operations proposition. Its Statement uses a nonempty family on a common convex domain and restricts the supremum to the convex finite-valued domain. Boyd §3.2.3 now points to this item rather than the finite-maximum proposition. The integral/expectation extension of Jensen in §3.1.8 and the infinite-sum/integral extension in §3.2.1 now have separate result-specific out-of-scope dispositions.
+- **B1-3 — already correct.** Alpha-a's disk repair is present: the Lebl locator includes Exercise 8.5.11 and defers its local-straightening result to `constant-rank-submersions-and-regular-level-sets`; the Toronto harvest includes both visual examples, the coordinate-system heading and its polar/spherical/cylindrical subsections, the normalized local-solvability theorem, and the block-determinant claim.
+- **B1-4 — already correct.** The epigraph-characterization strategy and contract use horizontal epigraph points $(x_j,f(x)-\varepsilon)$, which converge to $(x,f(x)-\varepsilon)$ outside the epigraph. They do not assert convergence of $(x_j,f(x_j))$.
+- **B1-5 — already correct.** `ex-euclidean-norm-and-squared-norm-are-convex` declares `cor-positive-definite-hessian-implies-strict-convexity`. Its contract uses the semidefinite Hessian theorem only for convexity and the positive-definite corollary for strict convexity.
+- **B1-6 — already correct.** `cex-convex-function-with-empty-subdifferential-at-a-boundary-point` declares `thm-cauchy-schwarz-and-the-euclidean-norm` and proves convexity on the whole closed ball by the upper-hemisphere lift and the Euclidean triangle inequality before running the radial boundary refutation.
+
+Requested gate results after these dispositions:
+
+- `coverage-checklist`: 2 pages, 97 harvested results, 0 errors, 1 previously adjudicated IFT low-yield warning.
+- `source-fetch-check --stamp`: 5/5 sources fetch-verified, 0 newly stamped.
+- `content-policy --manifest-only`: 70 scoped items, 0 errors, 0 warnings.
+- `validate-plan research/plan-spec.json`: pass on the current unspliced plan; Step 4 remains responsible for splicing and authoritative classification of the two new ids.
+- `prosecheck --warnings`: 0 errors; its count warnings occur in this required audit report, not in a page summary or item title.
+- The batch consistency audit found 70 unique items, 61 proof-bearing scope entries, 61 contracts, all eight boundary dispositions per contract, 122 declared citations, no undeclared citation source, no internal forward dependency, and no new dependency outside the convex page's declared prerequisite ancestry.
+
+Both required richness passes were rerun for the repaired pair. B1-1 supplies the focused intermediate lemma that decomposes boundary support; B1-2 retains the source's infinite-family closure result rather than treating finite maxima as if they covered it. No further useful immediate corollary was found, no pruning was performed, and the 31-item A page does not require a split.

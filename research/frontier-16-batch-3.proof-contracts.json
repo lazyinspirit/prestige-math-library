@@ -40,6 +40,7 @@
     "thm-saks-henstock-lemma",
     "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
     "thm-every-derivative-is-henstock-kurzweil-integrable",
+    "cor-indefinite-henstock-kurzweil-integral-is-a-primitive",
     "cor-henstock-kurzweil-integration-by-parts",
     "cor-henstock-kurzweil-substitution-for-derivatives",
     "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
@@ -3029,6 +3030,25 @@
           "uses": [
             "2.1"
           ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "there is a function $f$ with domain $\\mathbb{N}$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then $(r^k)$ is **null**",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
         }
       ],
       "derivations": [
@@ -3044,20 +3064,23 @@
         },
         {
           "id": "step-2",
-          "claim": "For successively tighter gauges, use L1 to make each fine-sum set nonempty; its closed interval hulls are nested with lengths tending to zero, so L2 gives one common value.",
+          "claim": "Use L3 to select one diameter-controlling gauge for every geometric tolerance, take finite pointwise minima, use L1 for nonemptiness and L4 for shrinking diameters, and apply L2 to the nested closed interval hulls.",
           "step": "2.1",
           "inputs": [
             "L1",
             "L2",
+            "L3",
+            "L4",
             "algebra"
           ]
         },
         {
           "id": "step-3",
-          "claim": "Compare an arbitrary sufficiently fine sum with the chosen stage sum to verify the integral definition.",
+          "claim": "Use L4 to choose a stage whose hull length is below the requested tolerance; every sum fine for that stage lies in the hull with its common point, verifying the integral definition without selecting a partition.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
+            "L4",
             "given",
             "algebra"
           ]
@@ -3073,12 +3096,12 @@
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "A zero diameter condition gives a constant sequence of selected sums."
+          "evidence": "A zero-diameter fine-sum set has a singleton closed interval hull; no division by its diameter occurs."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "The first chosen sum corresponds to the first positive tolerance and no index-one convention is imported."
+          "evidence": "The sequence starts at $n=0$ with tolerance $2^0=1$; the argument does not import a one-indexed convention."
         },
         {
           "case": "degenerate",
@@ -3093,7 +3116,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "The proof uses infima and suprema of the nonempty fine-sum sets and selects no partition from their countable family."
+          "evidence": "Step 2.1 invokes L3 exactly once to select the countable sequence of gauges. L1 makes each fine-sum set nonempty, and infima and suprema define the hulls without selecting a sequence of partitions."
         },
         {
           "case": "iff-forward",
@@ -3357,6 +3380,113 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-indefinite-henstock-kurzweil-integral-is-a-primitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every derivative is Henstock–Kurzweil integrable and its integral is the endpoint increment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-henstock-kurzweil-integral-on-a-compact-interval",
+          "source_section": "Definition",
+          "quote": "On a degenerate interval, the Henstock–Kurzweil integral is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "If $f$ is differentiable at $c$, then so is the",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "is **differentiable at $c$** when that limit exists",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "For each $x\\in[a,b]$, use L3 and apply L1 to the restriction of the primitive on $[a,x]$, with the zero-length case at $x=a$ supplied by L2, to obtain $G(x)=F(x)-F(a)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Cancel the constant $F(a)$ in the difference quotient of the pointwise identity from step 1.1 and apply L4 to conclude $G'=F'=f$ on the domain-relative interval.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated interval $[a,b]$ with $a<b$ contains both endpoints and is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes $G(a)=0=F(a)-F(a)$, and zero derivative values require no separate argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-point subinterval arising at $x=a$ is handled by L2 in step 1.1; every $x>a$ gives a nondegenerate subinterval for L1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The corollary is stated for $a<b$ because the library does not define a derivative at an isolated one-point domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares difference quotients on the common domain $[a,b]$, so it preserves the one-sided derivatives at $a$ and $b$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "L1 is applied to an arbitrary fixed $x$ and the proof makes no simultaneous or countable selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary asserts one implication from having a primitive to the primitive property of its indefinite integral."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed."
         }
       ],
       "finite_smoke": []

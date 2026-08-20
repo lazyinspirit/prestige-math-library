@@ -2,10 +2,10 @@
 
 ## Current substage and owned artifacts
 
-- Current substage: Steps 1–2 complete except for the mechanically required source-fetch stamps, which are blocked by sandbox DNS (`EAI_AGAIN`).
+- Current substage: Step-3 fix pass complete for Alpha finding `B5-1`; the engine has since added current full-text fetch stamps to all five coverage sources.
 - Owned artifacts: `research/frontier-16-batch-5.pages.json`, `research/frontier-16-batch-5.notes.md`, `research/frontier-16-batch-5.proof-contracts.json`, and the separately required `research/frontier-16-batch-5.coverage.json`.
 - The manifest carries one A/B pair, the proof contract covers every proof-bearing item, and the coverage harvest records each named source result read.
-- Exact next action for a network-capable retry: `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-5.coverage.json --stamp`, followed by the checklist and prose/content gates listed below.
+- Exact next action: Alpha’s `3-recheck` should verify finding `B5-1` from these artifacts; the engine can then splice the approved manifest at Step 4.
 
 ## Design/spec comparison
 
@@ -160,7 +160,7 @@ Both required passes were performed separately for this pair.
 3. Monotone continuity: continuity from below handles an infinite term before finite differences; continuity from above discards initial terms only after locating a finite one. The finitely-additive characterization proves both directions separately and restricts the above-at-empty clause to finite total mass.
 4. Set limits: `def-limsup-and-liminf-of-nonnegative-extended-sequences` prevents the published real-sequence definition from being applied to a measure value of $+\infty$. `thm-measure-of-set-liminf` uses increasing tail intersections; `thm-measure-of-set-limsup` uses decreasing tail unions and the exact finite-union bound. The corollary proves both numerical squeeze directions.
 5. Completion: normalize each representation to a measurable core plus a disjoint sub-null part; show complement and countable-union closure; show any two cores have null symmetric difference; disjointize measurable cores before countable additivity; prove completeness and uniqueness on the exact completed domain.
-6. Weighted/atomic constructions: define zero scalar times a measure separately so $0\cdot\infty$ is never written. Weighted countable additivity uses Tonelli. Finite atoms include the empty underlying space and infinite atom weights; countable discrete classification treats finite and countably infinite spaces without duplicate enumeration.
+6. Weighted/atomic constructions: for $c\in[0,+\infty]$, define $c\mu$ in three branches. The case $c=0$ is the zero measure; $0<c<+\infty$ uses the defined extended-real product and a direct partial-sum/supremum argument; $c=+\infty$ is zero on $\mu$-null sets and infinite otherwise. Prove the last branch is a measure by showing a disjoint union is null exactly when every member is null, and only then use Tonelli for countable weighted sums. Finite atoms use finite choice and the same infinite-coefficient branch, including the empty underlying space. The countable-discrete classification separates empty, finite, and countably infinite spaces and never pads an enumeration with repeated points.
 7. Semifinite machinery: every near-supremum selection names $\mathrm{AC}_\omega$; arbitrary-large finite subsets prove the supremum cannot stop at a finite value; the zero–infinity summand uses sigma-finite measurable sets and a countable flattening.
 8. Uniqueness: the finite agreement class contains the whole space because total masses agree, is a lambda-system only because subtraction is finite, and contains the pi-system. The exhaustion theorem restricts first, then lets the increasing exhaustion tend to $X$.
 9. Witnesses: verify each finite probability table, the ultrafilter dichotomy, all singleton masses, the empty intersection of counting tails, and the $k=0$ values in every geometric construction.
@@ -209,10 +209,10 @@ Source keys: `A` = https://measure.axler.net/MIRA.pdf; `F` = https://djvu.online
 | `prop-restriction-is-a-measure` | literature-derived | ai-altered | AF: Axler §2C and Folland §1.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
 | `def-dirac-measure` | literature-derived | not-applicable | AF: Axler §2C and Folland §1.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
 | `prop-dirac-measure-is-a-probability-measure` | literature-derived | ai-altered | A: Axler §2C/12.1/12.6 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
-| `def-nonnegative-weighted-sum-of-measures` | ai-altered | not-applicable | T: Tao Notation and §1.4.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
-| `thm-nonnegative-weighted-sums-of-measures` | literature-derived | ai-altered | T: Tao Notation and §1.4.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
-| `thm-measures-on-finite-sigma-algebras-are-atomic` | literature-derived | ai-altered | T: Tao Notation and §1.4.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
-| `thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums` | literature-derived | ai-altered | T: Tao Notation and §1.4.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
+| `def-nonnegative-weighted-sum-of-measures` | ai-altered | not-applicable | T: Tao’s nonnegative combinations support the construction, materially adapted to the library’s undefined $0\cdot(+\infty)$ by separate $c=0$, finite-positive, and $c=+\infty$ branches. |
+| `thm-nonnegative-weighted-sums-of-measures` | literature-derived | ai-altered | T: Tao Example 1.4.24 and Exercise 1.4.22 support the statement; the proof is materially adapted to establish the null/non-null $c=+\infty$ branch as a measure before the Tonelli interchange. |
+| `thm-measures-on-finite-sigma-algebras-are-atomic` | literature-derived | ai-altered | T: Tao Exercise 1.4.21 supports the atomic classification; the local route uses finite choice and evaluates infinite atom weights through the explicit $c=+\infty$ branch. |
+| `thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums` | literature-derived | ai-altered | T: Tao Exercise 1.4.25 supports the classification; the local route separates finite from countably infinite indexings, avoids repeated-point padding, and uses the explicit infinite-coefficient branch. |
 | `lem-semifinite-measures-have-arbitrarily-large-finite-subsets` | ai-altered | ai-altered | F: Folland §1.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
 | `def-semifinite-part-of-a-measure` | literature-derived | not-applicable | F: Folland §1.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
 | `thm-semifinite-part-is-a-measure` | ai-altered | ai-altered | F: Folland §1.3 supports the claim; the library version is edited to its zero-based indexing, explicit choice cost, and extended-real boundary strategy. |
@@ -254,14 +254,14 @@ These are generated examples only and carry `generation.role: example` at author
 Convention disagreements found:
 
 - This library indexes sequences by $\mathbb N$ containing 0; several sources use indices starting at 1. Every scaffolded geometric weight is shifted accordingly.
-- Tao treats $0\cdot\infty=0$ in his extended nonnegative arithmetic; this library leaves that product undefined. The weighted-measure definition makes the zero scalar a separate branch.
+- Tao treats $0\cdot\infty=0$ in his extended nonnegative arithmetic; this library leaves that product undefined. The weighted-measure definition therefore has separate zero, finite-positive, and infinite-coefficient branches, with $(+\infty)\mu$ defined as zero on $\mu$-null sets and $+\infty$ otherwise.
 - Folland’s restriction stays on the original sigma-algebra via $A\mapsto\mu(A\cap E)$; Tao’s displayed restriction is to a measurable subspace. This scaffold chooses the Folland convention explicitly.
 - Folland assumes choice globally. The two semifinite-part proofs and the countable-cocountable/counting equivalences expose the exact $\mathrm{AC}_\omega$ cost instead.
 - Some sources require a pi-system to contain the whole space; `def-pi-system` does not. The finite uniqueness lemma therefore states equality of total masses separately, and the sigma-finite theorem uses an exhaustion from the pi-system.
 
 ## Dependency closure
 
-The manifest has 39 distinct external dependency ids over 83 external edges, plus 115 same-batch edges. Every external item was opened from `items/`, is `status: published`, and has an eligible `literature-derived` or `ai-altered` Statement. There are no legacy-unclassified dependencies and therefore no legacy confidence-route exception. Every source clause used by a contract was read from the actual Definition or Statement, not from a scaffold description.
+The manifest has 40 distinct external dependency ids over 84 external edges, plus 118 same-batch edges. Every external item was opened from `items/`, is `status: published`, and has an eligible `literature-derived` or `ai-altered` Statement. The added direct dependency `lem-finite-choice` was reopened and its exact natural-number-indexed finite-choice statement checked; it lies strictly earlier and its `ai-altered` Statement is eligible. There are no legacy-unclassified dependencies and therefore no legacy confidence-route exception. Every source clause used by a contract was read from the actual Definition or Statement, not from a scaffold description.
 
 Every load-bearing dependency is either earlier in this pair or published on a strictly smaller-order page. There is no planned-later, homeless, unresolved, external-fallback, or `proved_here: false` edge. The B page is a leaf, and no A item or other planned item depends on a B-page construction.
 
@@ -305,14 +305,20 @@ None within `frontier-16`. All external edges resolve to already published conte
 - `content-policy.mjs --manifest-only`: 59 scoped items, 0 errors, 0 warnings.
 - `coverage-checklist.mjs`: 1 page and 92 harvested source results, 0 errors, 0 warnings.
 - Proof-contract JSON: 44 scoped proof-bearing items and 44 contracts; every contract has eight boundary rows. `proof-contract --strict` was run and, as expected before Step 5, reports only that the 44 item files do not yet exist; no pass is claimed.
-- `source-fetch-check --stamp`: attempted on all five URLs and failed all five with sandbox DNS `EAI_AGAIN`. No stamp was fabricated. The web research tool did open the Axler, Tao, Folland, and Galvin full texts and exposed the cited sections; Pollard’s exact section was read from the indexed university-hosted PDF result, but the mechanical full-body stamp remains absent.
+- `source-fetch-check --stamp`: the original Beta attempt failed with sandbox DNS `EAI_AGAIN` and fabricated no stamp. A later engine retry fetched and stamped all five full texts; the current coverage file records substantive byte counts, hashes, and document kinds for each source.
 - `validate-plan` and authoritative `depsource` cannot be run against this manifest until Step 4 splices it into `research/plan-spec.json`; no pass is claimed.
 - Independent calculations rechecked the dyadic total, every displayed shrinking-interval tail value for initial indices, and all row/column masses in Pollard’s four-point witness; each matched the scaffolded value.
 
-The unstamped coverage sources are the only current stage blocker. The owner prohibited permission prompts, so no escalation was requested. A network-capable engine retry should run the exact command recorded at the top of this file.
+The source-liveness blocker is closed on the current coverage file. No permission prompt or escalation was requested.
 
 ## Confidence statement
 
 Mathematical confidence is high in the corrected scaffold. The zero-based geometric formulas, extended-real cancellation boundaries, monotone-limit hypotheses, both directions of the continuity characterization, completion well-definedness, sigma-finite localization, and ultrafilter/finite-table witnesses were checked explicitly against the cited treatments and the published dependency statements.
 
-What was not verified: the full bodies could not be mechanically downloaded and hashed from this sandbox; the strict proof-contract and citation gates cannot pass until Step 5 creates the items; the manifest has not been spliced, so authoritative plan-order and dependency-source gates have not run; and no Step-6 reader or paired judge has inspected authored proofs, because no authored proofs exist yet.
+What was not verified: the strict proof-contract and citation gates cannot pass until Step 5 creates the items; the manifest has not been spliced, so authoritative plan-order and dependency-source gates have not run on this repaired batch overlay; and no Step-6 reader or paired judge has inspected authored proofs, because no authored proofs exist yet.
+
+## Step-3 fix pass
+
+- **B5-1 — applied.** This is Alpha group b’s finding, not the earlier design amendment with the same local label. The manifest now gives `def-nonnegative-weighted-sum-of-measures` explicit branches for $c=0$, $0<c<+\infty$, and $c=+\infty$, the last taking value zero on $\mu$-null sets and $+\infty$ otherwise. The theorem strategy proves that infinite branch is a measure before applying nonnegative Tonelli. The finite-atomic and countable-discrete strategies use the same convention for infinite weights; the former now declares `lem-finite-choice` and the weighted-sum/Dirac dependencies it actually uses, while the latter separates empty, finite, and countably infinite indexings without repeated-point padding. Their proof contracts now assign separate numbered obligations to the infinite branch, downstream atomic evaluation, coefficient uniqueness, and the relevant empty/zero/infinite boundaries. Declining this repair would leave the finite-atom classification undefined whenever an atom has infinite mass and a measurable set misses that atom.
+
+  The Step-3 commands were rerun from the repository root. `coverage-checklist` and `content-policy --manifest-only` pass cleanly. `validate-plan research/plan-spec.json` passes against the current unspliced plan; as required, this is not claimed as validation of the batch overlay before Step 4. `prosecheck --warnings` reports no errors and only the pre-existing count heuristics in this required audit report. Both batch JSON files parse, the contract/dependency consistency check reports no undeclared citation or unmapped planned step, all external dependency targets are published with eligible Statement provenance, and `git diff --check` is clean.

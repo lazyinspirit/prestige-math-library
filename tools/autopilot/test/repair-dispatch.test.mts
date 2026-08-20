@@ -337,3 +337,41 @@ test('no failing gate with a table entry is still unhandled', async () => {
   assert.equal(out.outcome, 'unhandled');
   rmSync(repo, { recursive: true, force: true });
 });
+
+// `validate-plan` IS step 4's business. Its `undeclared-prereq` finding — an
+// item whose deps reach a page outside its own page's requires closure — is
+// exactly what the step-4 Alpha adjudicates, and the task file has said so all
+// along. The hook returned on its first line for any gate but splice-refusals,
+// so on frontier-16 three rounds were spent in ninety seconds dispatching
+// nothing over 23 findings across all 11 pages. A gate with no route to its
+// fixer does not read as unrouted; it reads as exhausted, which is worse
+// because it looks like the repair was tried.
+test('a validate-plan failure at step 4 dispatches the adjudicating Alpha', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-alpha-step4.task.md'), 'adjudicate\n');
+  const started: any[] = [];
+  const s4: any = stages.find((s: any) => s.id === '4-splice');
+  await s4.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: (_s: any, p: any) => started.push(p) },
+    stage: s4, round: 1,
+    failure: { id: 'validate-plan', why: 'undeclared-prereq' },
+  });
+  assert.equal(started.length, 1, 'validate-plan must route to the step-4 Alpha, not fall through');
+  assert.equal(started[0].role, 'alpha');
+  assert.equal(started[0].job, 'adjudication');
+  assert.match(started[0].task[0], /alpha-step4\.task\.md$/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a gate step 4 does not own still falls through without dispatching', async () => {
+  const repo = fixtureRepo();
+  const s4: any = stages.find((s: any) => s.id === '4-splice');
+  await s4.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: () => { throw new Error('must not dispatch'); } },
+    stage: s4, round: 1,
+    failure: { id: 'manifest-integrity', why: '' },
+  });
+  rmSync(repo, { recursive: true, force: true });
+});

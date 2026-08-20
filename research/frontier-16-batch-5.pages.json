@@ -382,6 +382,7 @@
         "id": "def-nonnegative-weighted-sum-of-measures",
         "kind": "definition",
         "title": "Nonnegative scalar multiples and countable weighted sums of measures",
+        "strategy": "For $c\\in[0,+\\infty]$ and a measure $\\mu$, define $c\\mu$ by three disjoint branches: $c=0$ gives the zero measure; $0<c<+\\infty$ gives $(c\\mu)(E)=c\\mu(E)$ by the defined extended-real product; and $c=+\\infty$ gives value $0$ when $\\mu(E)=0$ and $+\\infty$ when $\\mu(E)>0$. Define a countable weighted sum pointwise by the nonnegative extended series of these already-defined scalar multiples. Thus the notation never forms the library's undefined product $0\\cdot(+\\infty)$.",
         "deps": [
           "def-nonnegative-extended-series",
           "def-measure"
@@ -391,7 +392,7 @@
         "id": "thm-nonnegative-weighted-sums-of-measures",
         "kind": "theorem",
         "title": "Nonnegative scalar multiples and countable weighted sums of measures are measures",
-        "strategy": "Define zero times a measure as the zero measure, so no undefined product $0\\cdot\\infty$ occurs; for a positive coefficient use ordinary extended scaling. Scalar multiples preserve countable additivity. For a countable sum, apply Tonelli's theorem for nonnegative double series to interchange the measure index with the disjoint-union index.",
+        "strategy": "Verify the three scalar branches before forming a countable sum. The zero branch is the zero measure. For $0<c<+\\infty$, scale finite partial sums and their extended-real supremum to prove countable additivity. For $c=+\\infty$, the branch is zero on $\\mu$-null sets and infinite otherwise: a disjoint union is null exactly when every member is null, by countable additivity of $\\mu$, so this branch is a measure without forming $0\\cdot(+\\infty)$. Only then apply Tonelli's theorem for nonnegative double series to interchange the measure index with the disjoint-union index in a countable weighted sum.",
         "deps": [
           "def-nonnegative-weighted-sum-of-measures",
           "thm-tonelli-for-nonnegative-double-series",
@@ -402,22 +403,26 @@
         "id": "thm-measures-on-finite-sigma-algebras-are-atomic",
         "kind": "theorem",
         "title": "A measure on a finite sigma-algebra is a finite weighted sum over its atoms",
-        "strategy": "For each point intersect the finitely many measurable sets containing it; the distinct intersections form a finite measurable partition into atoms. Every measurable set is the union of the atoms it contains. Finite additivity therefore writes its measure as the sum of the atom weights, and choosing one representative from each nonempty atom rewrites the same formula as a finite Dirac combination. Treat the empty underlying space and infinite atom weights.",
+        "strategy": "For each point intersect the finitely many measurable sets containing it; the distinct intersections form a finite measurable partition into atoms. Every measurable set is the union of the atoms it contains, so finite additivity writes its measure as the sum of their weights. Choose one representative from each atom and use the weighted-sum definition for the corresponding Dirac measures. If an atom has weight $+\\infty$, its term is zero on measurable sets missing that atom and $+\\infty$ on measurable sets containing it, exactly as the explicit infinite-coefficient branch requires. Treat the empty underlying space as the empty sum.",
         "deps": [
           "def-measure",
           "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-nonnegative-weighted-sum-of-measures",
           "def-nonnegative-extended-series",
           "def-finite-sum",
-          "def-countable"
+          "def-countable",
+          "lem-finite-choice"
         ]
       },
       {
         "id": "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
         "kind": "theorem",
         "title": "Every measure on a countable discrete space is its weighted sum of Dirac measures",
-        "strategy": "For a fixed listing of the countable set, decompose each subset into its disjoint singleton fibres and apply countable additivity. The coefficient of the Dirac mass at $x$ is forced to be $\\mu(\\{x\\})$, proving uniqueness. Handle the empty set, a finite listing padded by repetitions only after isolating duplicate-free terms, and infinite singleton weights.",
+        "strategy": "Separate the empty, finite nonempty, and countably infinite underlying sets. In the finite case use a bijection from one natural number and a finite sum; in the countably infinite case use a bijection from $\\mathbb N$, so every point is indexed exactly once and no repeated-point padding is needed. Decompose each subset into its disjoint singletons and apply countable additivity to obtain the weighted Dirac formula. The coefficient at $x$ is forced to be $\\mu(\\{x\\})$ by evaluation on $\\{x\\}$. When this coefficient is $+\\infty$, use the explicit infinite-coefficient branch, which is zero off $x$ and infinite on sets containing $x$.",
         "deps": [
           "thm-nonnegative-weighted-sums-of-measures",
+          "def-nonnegative-weighted-sum-of-measures",
           "prop-dirac-measure-is-a-probability-measure",
           "def-countable",
           "def-measure"

@@ -467,3 +467,12 @@ escalation-free way to supply the checker with network DNS, and the no-permissio
 rule precludes asking for one. The remaining named dead end is therefore the
 mechanical stamp under this sandbox's network isolation, not source liveness or
 full-text coverage.
+
+## Step-3 fix pass
+
+- **B4-1 — already correct.** The batch manifest already declares
+  `further-trigonometric-identities-and-inverses` in the A page's `requires`, as
+  proposed by Amendment RA4-1, and the tangent example declares
+  `def-principal-inverse-tangent` in its `deps`. Alpha C repaired the missing
+  transcription in `research/plan-spec.json`; the current plan now carries the
+  same prerequisite. No batch scaffold change is required.

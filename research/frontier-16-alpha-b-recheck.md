@@ -1,0 +1,14 @@
+# Frontier 16 — Alpha group b step-3 re-check
+
+- **B2-1 — confirmed.** `research/frontier-16-batch-2.pages.json` now includes `fs-a-bounded-plane-set-has-an-area` with the rational-points witness and a locally closed dependency route through boundedness, density, boundary, square content, and the Jordan boundary criterion; the published B-page counterexample remains non-load-bearing.
+- **B2-2 — confirmed.** The exact Step-5 clause in `research/frontier-16-batch-2.notes.md` now defines an already given filled set by compactness, connectedness, nonempty connected interior, regular closure, and an irredundant simple polygonal boundary, while the manifest declares the required metric compactness, interior/closure/boundary, and connectedness dependencies. It asserts no polygonal Jordan existence theorem, so the later polygon items remain orientation only.
+- **B2-3 — confirmed.** `research/frontier-16-batch-2.coverage.json` now gives individual dispositions to Erickson's diagonal and frugal-triangulation definitions and to the ETH three-dimensional contrast, Schönhardt obstruction, tetrahedralization-count variation, and related named results throughout the stated locator.
+- **B2-4 — confirmed.** `research/frontier-16-batch-2.pages.json` now places `lem-riemann-integral-unchanged-by-content-zero-modification` before the Gaussian chain and gives it a finite-cover/grid-control route with both integrability directions. The polar strategy uses two injective compact half-annuli, removes their content-zero overlap, fills the inner disc by a vanishing square bound, and finishes with an actual expanding-disc exhaustion; the corresponding contract assigns each bridge explicitly.
+- **B2-5 — confirmed.** `research/frontier-16-batch-2.coverage.json` now records Taylor Proposition 3.1.24 as out of scope with a specific explanation distinguishing Taylor's compactly supported unbounded-integrable class from this pair's locally Riemann-integrable domain-exhaustion theory.
+- **B5-1 — confirmed.** `research/frontier-16-batch-5.pages.json` now defines scalar multiplication in separate zero, finite-positive, and positive-infinity branches. The theorem proves the positive-infinity branch is a measure before Tonelli is used, and both atomic-classification strategies evaluate infinite weights with the same null/non-null convention; the relevant contract entries cover zero, infinite, empty, and indexing boundaries.
+
+## Pair verdicts
+
+- `areas-of-elementary-plane-figures` — **ready for splice**; B2-1 through B2-3 are present on disk and close the breadth, definition-route, and harvest findings.
+- `improper-and-parameter-dependent-multiple-integrals` — **ready for splice**; B2-4 and B2-5 are present on disk and the repaired polar route is dependency-closed at scaffold level.
+- `measures-and-their-basic-properties` — **ready for splice**; the positive-infinity scalar branch and both downstream atomic uses are defined consistently.

@@ -1079,11 +1079,39 @@ export const stages = [
     // the decision, so the round dispatches the adjudicating Alpha; the next
     // round's re-splice then transcribes what it decided. Three rounds:
     // re-splice, adjudicate, re-splice.
+    // `validate-plan` IS this stage's business, and it used to fall straight
+    // through this hook. Its `undeclared-prereq` finding — an item whose `deps`
+    // reach a page outside its own page's `requires` closure — is precisely
+    // what the step-4 Alpha adjudicates: apply a backward edge the scaffold
+    // genuinely consumes, strike one it does not, block a forward one as a
+    // reading-order change. The task file has said so all along.
+    //
+    // frontier-16 spliced cleanly and `validate-plan` returned 23 of them
+    // across all 11 pages, four being the b-leaf class. The hook returned on
+    // the first line, three rounds were spent in ninety seconds dispatching
+    // nothing, and the run reported "this needs a person" for a decision the
+    // stage owns an Alpha to make. A gate with no route to its fixer does not
+    // read as unrouted — it reads as exhausted, which is a worse blocker
+    // because it looks like the repair was tried.
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id)) return;
-      const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
-      if (repair.outcome === 'clean') return;
-      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+      // ONLY the undeclared-prereq class, not every validate-plan failure.
+      // That gate is repo-wide and fails for heterogeneous reasons — a cycle,
+      // a forward reference, an unresolved id, a page over the 60-item
+      // ceiling — and most of them are not edge decisions at all. An Alpha
+      // handed a `size` violation under an edge-adjudication task would reach
+      // for the tool it was given and add an edge. Leaving the rest on the
+      // blocker path is the original design and it is right.
+      const isEdgeDecision = failure.id === 'validate-plan'
+        && /undeclared-prereq/.test(String(failure.why ?? '') + String(failure.output ?? ''));
+      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id) && !isEdgeDecision) return;
+      // A re-splice cannot clear `undeclared-prereq`: the edges it names are
+      // induced by item `deps`, not declared by a manifest, so there is
+      // nothing for the transcriber to transcribe. Go straight to the Alpha.
+      if (!isEdgeDecision) {
+        const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
+        if (repair.outcome === 'clean') return;
+        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+      }
       executor.start(stage, {
         role: 'alpha',
         label: `step4-adjudicate-${round}`,

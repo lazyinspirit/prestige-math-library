@@ -9,6 +9,7 @@
     "cor-cauchy-estimates-taylor-coefficients",
     "thm-liouville-bounded-entire-function",
     "thm-entire-polynomial-growth-is-polynomial",
+    "thm-fundamental-theorem-of-algebra-liouville-proof",
     "thm-morera-triangle-theorem",
     "lem-cauchy-estimates-on-concentric-subdiscs",
     "thm-weierstrass-convergence-holomorphic-functions",
@@ -954,6 +955,224 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "A polynomial need not satisfy the displayed bound for arbitrary preassigned C and N, so no converse is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-fundamental-theorem-of-algebra-liouville-proof": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "If $P,Q$ are complex polynomials, then the set $D=\\{z\\in\\mathbb C:Q(z)\\ne0\\}$ is open, $P/Q$ is holomorphic on $D$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-complex-polynomial-growth-and-minimum-modulus",
+          "source_section": "Statement",
+          "quote": "If $p$ is a nonconstant complex polynomial, then $|p(z)|\\to\\infty$ as $|z|\\to\\infty$, and $|p|$ attains a global minimum on $\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "For every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$\nd_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2.\n$$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]].",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]])",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-liouville-bounded-entire-function",
+          "source_section": "Statement",
+          "quote": "Every bounded entire function is constant.",
+          "uses": [
+            "5.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Assume for contradiction that the given nonconstant polynomial p has no complex root.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The zero-free hypothesis and the rational-function theorem make g=1/p entire.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Polynomial growth supplies R>=1 such that |p(z)|>=1 and hence |g(z)|<=1 whenever |z|>=R.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Holomorphy makes g continuous, and the modulus laws make |g| continuous.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-2",
+          "claim": "The closed disc K={z:|z|<=R} is nonempty, closed, bounded, and therefore compact under the Euclidean-plane metric.",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "L4",
+            "L5",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-3",
+          "claim": "The extreme value theorem gives a finite maximum M of |g| on K.",
+          "step": "4.3",
+          "inputs": [
+            "step 4.1",
+            "step 4.2",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "The inside and outside bounds combine to |g(z)|<=max{1,M} on the whole plane, including |z|=R.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-2",
+          "claim": "Liouville's theorem makes the bounded entire function g constant.",
+          "step": "5.2",
+          "inputs": [
+            "step 2.1",
+            "step 5.1",
+            "L8"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "The constant reciprocal g is nonzero, so p=1/g is constant, contradicting the given nonconstancy.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 5.2",
+            "L4",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.2 records that the closed disc contains 0, so the extreme-value domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is constant and excluded by the given hypothesis; the contradiction assumption also excludes every zero value of p."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses R>=1, and the proof applies unchanged to degree-one polynomials."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant polynomials are outside the Statement, and step 6.1 reaches contradiction precisely by forcing p to be constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 includes |z|=R in both the closed-disc estimate and the exterior estimate, so no boundary circle is omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses one explicit threshold radius from divergence, while step 4.2 supplies the nonempty compact disc on which step 4.3 attains a maximum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence of a root for a nonconstant polynomial, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Having a complex root does not characterize nonconstant polynomials, since the zero polynomial also has roots."
         }
       ],
       "finite_smoke": []

@@ -120,5 +120,27 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   // every other failure id is left to the default blocker path
   await s4.onGateFailure({ ctx, executor, stage: s4, round: 3, failure: { id: 'validate-plan', why: '' } });
   assert.equal(started.length, 2);
+  // ...and validate-plan itself still is, EXCEPT for the one class that is an
+  // edge decision. That gate is repo-wide: a cycle, a forward reference, a
+  // page over the 60-item ceiling are not step 4's business, and an Alpha
+  // handed a `size` violation under an edge-adjudication task would reach for
+  // the tool it was given and add an edge.
+  await s4.onGateFailure({
+    ctx, executor, stage: s4, round: 3,
+    failure: { id: 'validate-plan', why: '[size] page P has 74 items, ceiling is 60' },
+  });
+  assert.equal(started.length, 2, 'a size violation is not an edge decision');
+  // `undeclared-prereq` IS: an item whose deps reach a page outside its own
+  // page's requires closure, decided exactly as a refusal is — apply a
+  // backward edge, strike the dependency, block a forward one. frontier-16
+  // returned 23 of them across all 11 pages, and three rounds were spent in
+  // ninety seconds dispatching nothing because the hook returned on line one.
+  await s4.onGateFailure({
+    ctx, executor, stage: s4, round: 3,
+    failure: { id: 'validate-plan', why: '[undeclared-prereq] page P has an item depending on Q' },
+  });
+  assert.equal(started.length, 3, 'undeclared-prereq must reach the adjudicating Alpha');
+  assert.equal(started[2].job, 'adjudication');
+  assert.match(started[2].task[0], /alpha-step4\.task\.md$/);
   rmSync(dir, { recursive: true, force: true });
 });

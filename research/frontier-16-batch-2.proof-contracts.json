@@ -5,6 +5,7 @@
     "thm-jordan-content-is-translation-invariant",
     "prop-riemann-graph-area-equals-jordan-content",
     "cor-disc-jordan-content-is-pi-r-squared",
+    "fs-a-bounded-plane-set-has-an-area",
     "lem-determinant-base-height-identity-in-r2",
     "thm-parallelogram-content-and-base-height-formula",
     "thm-triangle-content-and-base-height-formula",
@@ -27,6 +28,7 @@
     "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
     "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
     "thm-differentiation-under-dominated-improper-multiple-integrals",
+    "lem-riemann-integral-unchanged-by-content-zero-modification",
     "lem-gaussian-integral-is-finite-and-positive",
     "lem-gaussian-square-is-the-plane-gaussian-integral",
     "lem-plane-gaussian-integral-in-polar-coordinates",
@@ -322,6 +324,158 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-bounded-plane-set-has-an-area": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-metric-interior-closure-boundary",
+          "source_section": "Definition",
+          "quote": "The **boundary** of $A$ is $\\partial A := \\overline{A} \\setminus \\operatorname{int}(A)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-jordan-inner-and-outer-content",
+          "source_section": "Definition",
+          "quote": "For bounded $E\\subseteq\\mathbb R^m$, in the metric sense of [[def-metric-bounded-diameter]], its **Jordan outer content** is the infimum of $\\sum_{r<q}\\operatorname{vol}(R_r)$ over finite axis-parallel rectangle covers of $E$. Its **Jordan inner content** is the supremum of the same sums over finite families of rectangles contained in $E$ whose interiors are pairwise disjoint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bounded-witness",
+          "claim": "The set E of rational points in [0,1]^2 is contained in the unit square and is therefore bounded.",
+          "step": "1.1",
+          "inputs": [
+            "construct",
+            "L1"
+          ]
+        },
+        {
+          "id": "boundary-is-square",
+          "claim": "Coordinatewise density of rational and irrational points shows that both E and its complement meet every ball at every point of the unit square, while points outside the square are not adherent to E; hence the boundary of E is [0,1]^2.",
+          "step": "1.2",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "unit-square-content",
+          "claim": "The unit square itself is both an admissible one-rectangle inner family and an admissible one-rectangle outer cover of volume one, so its Jordan content is one and it is not content zero.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "not-jordan-measurable",
+          "claim": "The boundary criterion and the positive content of the boundary show that E is not Jordan measurable.",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "refute-bounded-area",
+          "claim": "The bounded set E has no Jordan area, refuting the universal claim.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The explicit witness contains rational points of the unit square and is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 includes the coordinate-zero boundary points and does not infer measurability from nondegeneracy"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the closed unit square, including coordinate-one boundary points"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "evidence": "The witness is dense in a nondegenerate two-dimensional square"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The witness is defined with [0,1], so all four sides and their rational endpoints are included"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The witness is specified explicitly and no element is selected"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The item refutes a universal implication with one witness and states no biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No converse implication is asserted"
         }
       ],
       "finite_smoke": []
@@ -2434,6 +2588,157 @@
       ],
       "finite_smoke": []
     },
+    "lem-riemann-integral-unchanged-by-content-zero-modification": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "The function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "It has **content zero** when such a cover can be finite.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-finite-cube-covers-admit-grid-control",
+          "source_section": "Statement",
+          "quote": "If $Q$ is a closed nondegenerate rectangle and $E\\subseteq Q$ is covered by finitely many axis-parallel rectangles of total volume $V$, then for every $\\eta>0$ there is a grid of $Q$ such that the cells meeting $E$ have total volume below $V+\\eta$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-multidimensional-riemann-criterion",
+          "source_section": "Statement",
+          "quote": "A bounded $f:Q\\to\\mathbb R$ on a nondegenerate rectangle is Riemann\nintegrable if and only if, for every $\\varepsilon>0$, some grid $P$ satisfies\n$U(f,P)-L(f,P)<\\varepsilon$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-extension-difference",
+          "claim": "On one bounding rectangle Q, the difference h of the zero extensions is bounded and vanishes outside the content-zero disagreement set N.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "small-cover",
+          "claim": "If the bound M for |h| is positive, content zero supplies a finite cube cover of N with volume small compared with epsilon/M; if M=0, h is already zero.",
+          "step": "1.2",
+          "inputs": [
+            "1.1",
+            "L2",
+            "cases",
+            "choose"
+          ]
+        },
+        {
+          "id": "zero-integral",
+          "claim": "Grid control confines every nonzero cell oscillation and every nonzero Darboux contribution of h to cells of arbitrarily small total volume, so h is integrable with integral zero.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forward-modification",
+          "claim": "If f is integrable then g=f+h is integrable and has the same integral.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reverse-modification",
+          "claim": "Interchanging f and g applies the same argument to -h, proving the reverse integrability implication and the equality in either case.",
+          "step": "3.2",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "L5",
+            "symmetry"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the Jordan domain or disagreement set is empty, step 1.1 gives h=0 on the whole bounding rectangle"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "The ambient dimension is at least one under the published multidimensional Riemann definitions"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-cover and grid-control proof works unchanged in one dimension"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 treats the bound M=0 separately before dividing by M"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The disagreement set may contain the domain boundary; closed cube covers and closed grid cells still confine every changed value"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 makes one finite-cover choice for the given epsilon and no family of choices"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 proves integrability of f implies integrability of g with equal value"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.2 interchanges f and g to prove the reverse implication"
+        }
+      ],
+      "finite_smoke": []
+    },
     "lem-gaussian-integral-is-finite-and-positive": {
       "citations": [
         {
@@ -2654,7 +2959,8 @@
           "source_section": "Statement",
           "quote": "When either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
           "uses": [
-            "1.1"
+            "1.1",
+            "1.2"
           ]
         },
         {
@@ -2668,27 +2974,102 @@
         },
         {
           "fact": "L3",
-          "source": "thm-derivative-of-exponential",
+          "source": "lem-riemann-integral-unchanged-by-content-zero-modification",
           "source_section": "Statement",
-          "quote": "In particular $(\\exp)'=\\exp$.",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded and Jordan measurable, let $f,g:E\\to\\mathbb R$ be bounded, and suppose $\\{x\\in E:f(x)\\ne g(x)\\}$ has content zero. Then $f$ is Riemann integrable over $E$ if and only if $g$ is, and when they are integrable their integrals are equal.",
           "uses": [
             "2.1"
           ]
         },
         {
           "fact": "L4",
+          "source": "thm-graphs-of-continuous-functions-have-content-zero",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $Q\\subseteq\\mathbb R^m$ be a closed nondegenerate rectangle, and let $f:Q\\to\\mathbb R$ be continuous. Its graph has content zero in $\\mathbb R^{m+1}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its indicator $1_E$ is Riemann integrable on a fixed nondegenerate bounding\nrectangle $Q$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L12",
           "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
           "source_section": "Statement",
           "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
           "uses": [
-            "3.1"
+            "4.1"
           ]
         }
       ],
       "derivations": [
         {
-          "id": "polar-truncation",
-          "claim": "On epsilon<=r<=R and -pi+delta<=theta<=pi, principal polar form gives injectivity and the Jacobian is r.",
+          "id": "half-annulus-coordinates",
+          "claim": "For 0<epsilon<R, polar coordinates are injective on each compact rectangle [epsilon,R]x[0,pi] and [epsilon,R]x[-pi,0], with Jacobian r, and map them onto the closed upper and lower half-annuli.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -2697,34 +3078,66 @@
           ]
         },
         {
-          "id": "evaluate",
-          "claim": "Change variables and integrate r e^{-r^2} to obtain the angular length times one half of e^{-epsilon^2}-e^{-R^2}.",
-          "step": "2.1",
+          "id": "evaluate-halves",
+          "claim": "Change of variables and the exponential antiderivative give one half of pi(e^{-epsilon^2}-e^{-R^2}) on each half-annulus.",
+          "step": "1.2",
           "inputs": [
             "1.1",
-            "L3",
+            "L1",
+            "L11",
             "thm-ftc-second-part",
             "lem-integral-elementary-bounds"
           ]
         },
         {
-          "id": "exhaust-punctured-plane",
-          "claim": "Send delta and epsilon to zero and R to infinity along a nested compact Jordan exhaustion of R^2 minus the origin.",
+          "id": "recombine-full-annulus",
+          "claim": "The two half-annuli overlap only in two radial segments of content zero; content-zero modification and linearity therefore recombine their integrals into the full-annulus formula pi(e^{-epsilon^2}-e^{-R^2}).",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L8"
+          ]
+        },
+        {
+          "id": "discs-are-compact-jordan",
+          "claim": "A circle is the finite union of its upper and lower continuous semicircle graphs, so the boundary criterion makes every closed disc Jordan measurable; closedness and boundedness make it compact.",
           "step": "3.1",
           "inputs": [
             "2.1",
             "L4",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "fill-inner-disc",
+          "claim": "The Gaussian mass of the omitted disc of radius epsilon is bounded by the content 4epsilon^2 of its enclosing square, so epsilon tending to zero turns the annulus formula into the disc formula pi(1-e^{-R^2}).",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "L3",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
             "thm-exponential-limits-and-range"
           ]
         },
         {
-          "id": "restore-origin",
-          "claim": "A singleton has content zero, so inserting the origin changes no compact Riemann integral; the value is pi.",
+          "id": "disc-exhaustion",
+          "claim": "The closed discs of radii j+1 form a compact Jordan exhaustion of the plane, and their Gaussian integrals tend to pi.",
           "step": "4.1",
           "inputs": [
             "3.1",
-            "def-null-and-content-zero-in-rn",
-            "Darboux estimate"
+            "3.2",
+            "L12",
+            "thm-exponential-limits-and-range"
           ]
         }
       ],
@@ -2738,7 +3151,7 @@
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "The origin is excluded before polar change of variables and restored by the content-zero argument in step 4.1"
+          "evidence": "The polar maps use epsilon>0; step 3.2 fills the omitted inner disc by a bound tending to zero without applying polar coordinates at the origin"
         },
         {
           "case": "one",
@@ -2748,17 +3161,17 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The singular polar radius and full-period seam are removed before applying L1"
+          "evidence": "step 1.1 assumes 0<epsilon<R, so neither parameter rectangle has a zero radial side or singular Jacobian"
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Angular seam endpoints are separated by delta>0; their limit is handled only after proper integration"
+          "evidence": "The closed half-intervals [0,pi] and [-pi,0] are separately injective; step 2.1 handles their duplicated radial boundary segments by content-zero modification"
         },
         {
           "case": "nonempty-choice",
           "status": "not_applicable",
-          "evidence": "The truncation parameters are explicit natural sequences"
+          "evidence": "The half-annuli, bounding squares, and expanding-disc sequence are explicit"
         },
         {
           "case": "iff-forward",

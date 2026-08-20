@@ -2622,7 +2622,9 @@
           "quote": "Definition clause: Nonnegative scalar multiples and countable weighted sums of measures.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "2.2",
+            "3.1"
           ]
         },
         {
@@ -2631,8 +2633,7 @@
           "source_section": "Statement",
           "quote": "Statement clause: Tonelli's theorem for double series of nonnegative extended real numbers.",
           "uses": [
-            "1.1",
-            "2.1"
+            "3.1"
           ]
         },
         {
@@ -2642,7 +2643,9 @@
           "quote": "Definition clause: Measures on sigma-algebras.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "2.2",
+            "3.1"
           ]
         }
       ],
@@ -2653,17 +2656,39 @@
           "step": "1.1",
           "inputs": [
             "L1",
-            "L2",
             "L3",
             "given"
           ]
         },
         {
-          "id": "core",
-          "claim": "Define zero times a measure as the zero measure, so no undefined product $0\\cdot\\infty$ occurs; for a positive coefficient use ordinary extended scaling. Scalar multiples preserve countable additivity. For a countable sum, apply Tonelli's theorem for nonnegative double series to interchange the measure index with the disjoint-union index.",
+          "id": "finite-and-zero-scalars",
+          "claim": "Prove that the zero scalar branch is the zero measure. For $0<c<+\\infty$, compare scaled finite partial sums and their extended-real supremum to prove that ordinary positive finite scaling preserves countable additivity.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "infinite-scalar",
+          "claim": "For $c=+\\infty$, prove that the branch which is zero on $\\mu$-null sets and $+\\infty$ otherwise is a measure: for a disjoint sequence its union is null exactly when every member is null, by countable additivity of $\\mu$. No expression $0\\cdot(+\\infty)$ is formed.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "cases"
+          ]
+        },
+        {
+          "id": "countable-weighted-sum",
+          "claim": "After every scalar multiple has been proved to be a measure, verify the pointwise countable sum at the empty set and interchange the coefficient index with the disjoint-union index by Tonelli's theorem for nonnegative double series.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
             "L1",
             "L2",
             "L3",
@@ -2672,10 +2697,12 @@
         },
         {
           "id": "conclusion",
-          "claim": "Assemble the core calculation into the exact assertion of Nonnegative scalar multiples and countable weighted sums of measures are measures, with no strengthened quantifier or omitted boundary case.",
-          "step": "3.1",
+          "claim": "Assemble the three scalar branches and the countable-sum calculation into the exact assertion of Nonnegative scalar multiples and countable weighted sums of measures are measures, with no strengthened quantifier or omitted boundary case.",
+          "step": "4.1",
           "inputs": [
-            "step 2.1"
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
           ]
         }
       ],
@@ -2684,27 +2711,27 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Planned steps 1.1–2.1 for “Nonnegative scalar multiples and countable weighted sums of measures are measures” explicitly test the empty set, empty sum, or empty family relevant to the construction."
+          "evidence": "Planned steps 2.2 and 3.1 verify that the infinite-scalar branch and every countable weighted sum assign zero to the empty set; the empty coefficient family gives the empty nonnegative series."
         },
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “Nonnegative scalar multiples and countable weighted sums of measures are measures” checks zero measure, a zero coefficient, index 0, or the zero-valued branch before using positivity or cancellation."
+          "evidence": "Planned step 2.1 proves the $c=0$ branch is the zero measure before any positive-scalar calculation; step 3.1 starts the coefficient sequence at index zero."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "Planned steps 1.1 and 3.1 for “Nonnegative scalar multiples and countable weighted sums of measures are measures” include the singleton, one-term, first-index, or total-mass-one boundary."
+          "evidence": "Planned step 2.1 includes $c=1$ in the finite-positive branch, and step 3.1 includes a one-term weighted sum as the first partial-sum case."
         },
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The proof plan for “Nonnegative scalar multiples and countable weighted sums of measures are measures” separates the finite/infinite, null/full, repeated-set, or collapsed-partition case that could degenerate the main argument."
+          "evidence": "Planned step 2.2 separates the all-null disjoint family from a family containing a positive-measure member, including the zero measure; this is the case in which ordinary extended multiplication would have formed the undefined product $0\\cdot(+\\infty)$."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “Nonnegative scalar multiples and countable weighted sums of measures are measures” checks the starting index 0, finite endpoint, first retained set, or limiting tail used by the proof."
+          "evidence": "Planned steps 2.1 and 2.2 treat both coefficient endpoints $0$ and $+\\infty$ separately from $0<c<+\\infty$; step 3.1 treats the index-zero partial sum."
         },
         {
           "case": "nonempty-choice",
@@ -2742,8 +2769,7 @@
           "source_section": "Definition",
           "quote": "Definition clause: The Dirac set function at a point.",
           "uses": [
-            "1.1",
-            "2.1"
+            "2.2"
           ]
         },
         {
@@ -2752,8 +2778,7 @@
           "source_section": "Definition",
           "quote": "Definition clause: Series in the nonnegative extended real line.",
           "uses": [
-            "1.1",
-            "2.1"
+            "2.2"
           ]
         },
         {
@@ -2775,6 +2800,33 @@
             "1.1",
             "2.1"
           ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Statement clause: A Dirac set function is a probability measure.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-nonnegative-weighted-sum-of-measures",
+          "source_section": "Definition",
+          "quote": "Definition clause: Nonnegative scalar multiples and countable weighted sums of measures.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $F$ be a function with domain $n$ all of whose\nvalues are nonempty sets. Then the family of its values,\n$\\mathcal{F} = F[n] = \\{\\, F(i) : i \\in n \\,\\}$, has a choice function\n([[def-choice-function]]).",
+          "uses": [
+            "2.2"
+          ]
         }
       ],
       "derivations": [
@@ -2784,24 +2836,34 @@
           "step": "1.1",
           "inputs": [
             "L1",
-            "L2",
-            "L3",
             "L4",
             "L5",
             "given"
           ]
         },
         {
-          "id": "core",
-          "claim": "For each point intersect the finitely many measurable sets containing it; the distinct intersections form a finite measurable partition into atoms. Every measurable set is the union of the atoms it contains. Finite additivity therefore writes its measure as the sum of the atom weights, and choosing one representative from each nonempty atom rewrites the same formula as a finite Dirac combination. Treat the empty underlying space and infinite atom weights.",
+          "id": "atomic-partition",
+          "claim": "For each point intersect the finitely many measurable sets containing it; prove that the distinct intersections form a finite measurable partition into atoms, that every measurable set is the union of the atoms it contains, and that finite additivity writes its measure as the sum of their weights.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
-            "L2",
-            "L3",
             "L4",
             "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-dirac-representation",
+          "claim": "Choose one representative from each nonempty atom and rewrite the atomic formula as the finite weighted sum of the corresponding Dirac measures. For an atom of weight $+\\infty$, use the explicit branch that is zero on a measurable set missing the representative and infinite on one containing it; atom membership makes this agree with whether the measurable set contains the whole atom. The empty underlying space gives the empty sum.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L3",
+            "L6",
+            "L7",
+            "L8",
             "algebra"
           ]
         },
@@ -2810,7 +2872,8 @@
           "claim": "Assemble the core calculation into the exact assertion of A measure on a finite sigma-algebra is a finite weighted sum over its atoms, with no strengthened quantifier or omitted boundary case.",
           "step": "3.1",
           "inputs": [
-            "step 2.1"
+            "step 2.1",
+            "step 2.2"
           ]
         }
       ],
@@ -2819,32 +2882,32 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Planned steps 1.1–2.1 for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” explicitly test the empty set, empty sum, or empty family relevant to the construction."
+          "evidence": "Planned step 2.2 treats an empty underlying space as having no atoms and represents its unique measure by the empty weighted sum."
         },
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” checks zero measure, a zero coefficient, index 0, or the zero-valued branch before using positivity or cancellation."
+          "evidence": "Planned step 2.2 uses the separate zero-coefficient branch for every zero-mass atom; it does not infer this value from a product with an extended-real mass."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "Planned steps 1.1 and 3.1 for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” include the singleton, one-term, first-index, or total-mass-one boundary."
+          "evidence": "Planned steps 2.1–2.2 include a sigma-algebra with one atom and recover its measure as a one-term weighted Dirac sum."
         },
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The proof plan for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” separates the finite/infinite, null/full, repeated-set, or collapsed-partition case that could degenerate the main argument."
+          "evidence": "Planned step 2.2 treats zero and infinite atom weights by their own branches and checks that a measurable set either contains an atom or misses it entirely."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” checks the starting index 0, finite endpoint, first retained set, or limiting tail used by the proof."
+          "evidence": "Planned step 2.2 treats both coefficient endpoints $0$ and $+\\infty$ explicitly and treats the zero-atom and one-atom finite sums."
         },
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Planned step 1.1 for “A measure on a finite sigma-algebra is a finite weighted sum over its atoms” identifies the nonempty family before every choice; any countable simultaneous selection is charged explicitly to the stated choice axiom."
+          "evidence": "Planned step 2.2 chooses one point from each member of a finite family of nonempty atoms; finite choice suffices, and the empty family requires no selection."
         },
         {
           "case": "iff-forward",
@@ -2867,7 +2930,6 @@
           "source_section": "Statement",
           "quote": "Statement clause: Nonnegative scalar multiples and countable weighted sums of measures are measures.",
           "uses": [
-            "1.1",
             "2.1"
           ]
         },
@@ -2877,7 +2939,6 @@
           "source_section": "Statement",
           "quote": "Statement clause: A Dirac set function is a probability measure.",
           "uses": [
-            "1.1",
             "2.1"
           ]
         },
@@ -2887,8 +2948,7 @@
           "source_section": "Definition",
           "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat",
           "uses": [
-            "1.1",
-            "2.1"
+            "1.1"
           ]
         },
         {
@@ -2898,7 +2958,18 @@
           "quote": "Definition clause: Measures on sigma-algebras.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-nonnegative-weighted-sum-of-measures",
+          "source_section": "Definition",
+          "quote": "Definition clause: Nonnegative scalar multiples and countable weighted sums of measures.",
+          "uses": [
+            "2.1",
+            "2.2"
           ]
         }
       ],
@@ -2908,23 +2979,32 @@
           "claim": "Fix the objects and unpack every stated hypothesis for Every measure on a countable discrete space is its weighted sum of Dirac measures; establish that each set, sum, limit, or selected witness used next is defined.",
           "step": "1.1",
           "inputs": [
-            "L1",
-            "L2",
             "L3",
             "L4",
             "given"
           ]
         },
         {
-          "id": "core",
-          "claim": "For a fixed listing of the countable set, decompose each subset into its disjoint singleton fibres and apply countable additivity. The coefficient of the Dirac mass at $x$ is forced to be $\\mu(\\{x\\})$, proving uniqueness. Handle the empty set, a finite listing padded by repetitions only after isolating duplicate-free terms, and infinite singleton weights.",
+          "id": "weighted-dirac-formula",
+          "claim": "Separate the empty, finite nonempty, and countably infinite cases. Use a bijection from a natural number in the finite case and a bijection from $\\mathbb N$ in the countably infinite case, so each point occurs exactly once. Decompose each subset into disjoint singletons and apply countable additivity to obtain the finite or countable weighted Dirac formula, with the empty space represented by the empty sum.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
             "L2",
-            "L3",
             "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coefficients-and-infinite-branch",
+          "claim": "Evaluate the representation on each singleton to prove that its coefficient is uniquely forced to be $\\mu(\\{x\\})$. If that value is $+\\infty$, use the explicit infinite-coefficient branch, which is zero on sets missing $x$ and infinite on sets containing $x$, rather than the undefined product $0\\cdot(+\\infty)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "L4",
+            "L5",
             "algebra"
           ]
         },
@@ -2933,7 +3013,8 @@
           "claim": "Assemble the core calculation into the exact assertion of Every measure on a countable discrete space is its weighted sum of Dirac measures, with no strengthened quantifier or omitted boundary case.",
           "step": "3.1",
           "inputs": [
-            "step 2.1"
+            "step 2.1",
+            "step 2.2"
           ]
         }
       ],
@@ -2942,32 +3023,32 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Planned steps 1.1–2.1 for “Every measure on a countable discrete space is its weighted sum of Dirac measures” explicitly test the empty set, empty sum, or empty family relevant to the construction."
+          "evidence": "Planned steps 1.1–2.1 separate the empty underlying space and represent its unique measure by the empty weighted sum, without choosing a point."
         },
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “Every measure on a countable discrete space is its weighted sum of Dirac measures” checks zero measure, a zero coefficient, index 0, or the zero-valued branch before using positivity or cancellation."
+          "evidence": "Planned step 2.2 evaluates zero singleton masses through the zero-coefficient branch; the countably infinite indexing in step 2.1 starts at zero."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "Planned steps 1.1 and 3.1 for “Every measure on a countable discrete space is its weighted sum of Dirac measures” include the singleton, one-term, first-index, or total-mass-one boundary."
+          "evidence": "Planned step 2.1 treats a one-point space by a one-term finite weighted sum, and step 2.2 recovers its sole coefficient by singleton evaluation."
         },
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The proof plan for “Every measure on a countable discrete space is its weighted sum of Dirac measures” separates the finite/infinite, null/full, repeated-set, or collapsed-partition case that could degenerate the main argument."
+          "evidence": "Planned steps 1.1–2.1 separate finite from countably infinite spaces and never pad a finite enumeration with repeated points; step 2.2 separately treats an infinite singleton mass."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Planned step 2.1 for “Every measure on a countable discrete space is its weighted sum of Dirac measures” checks the starting index 0, finite endpoint, first retained set, or limiting tail used by the proof."
+          "evidence": "Planned step 2.1 uses the exact finite index set $n$ or all of $\\mathbb N$ beginning at zero, and step 2.2 treats coefficient endpoints $0$ and $+\\infty$."
         },
         {
           "case": "nonempty-choice",
-          "status": "not_applicable",
-          "reason": "The proof of “Every measure on a countable discrete space is its weighted sum of Dirac measures” is canonical from the given sets and makes no selection from a nonempty family."
+          "status": "checked",
+          "evidence": "Planned step 1.1 fixes one witnessing bijection supplied by the definition of finite or countably infinite; this is a single existential choice, not a simultaneous choice from a family. The empty case is separated first."
         },
         {
           "case": "iff-forward",
@@ -5402,4 +5483,3 @@
     }
   }
 }
-

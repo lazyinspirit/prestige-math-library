@@ -453,6 +453,18 @@ I ran an exact fixed-string search for every proposed id across `items/` and `re
 
 Confidence is high on the mathematical statements, pushout convention, subgroup conjugacy direction, right-monodromy multiplication, source coverage, and boundary cases. I verified every direct published dependency's statement and provenance, but did not re-audit every published dependency proof. I did not verify the planned later differential-geometry consumers mentioned by the stale stable-interface prose because no current plan item cites those ids. All required source bodies carry current durable fetch stamps.
 
+## Step-3 Alpha-a direct repairs (2026-08-20)
+
+Alpha-a repaired the proof routes and page closure before recording the pair verdicts.
+
+- `lem-antipodal-sphere-cover` now explicitly transports simple connectedness across each stereographic homeomorphism using induced-map functoriality and the published simple-connectedness definition; the former strategy jumped from a convex target to a homeomorphic source without licensing the transport.
+- The finite-wedge theorem now directly depends on its wedge definition, and the classification theorem directly depends on path connectedness, because both notions occur in their own planned Statements.
+- `lem-deck-transformations-correspond-to-normalizer-cosets` now uses equality of based covering subgroups and the based-isomorphism corollary. Subgroup inclusion gives only a covering morphism, and May Chapter 3 explicitly warns that a self-map of a covering need not be an isomorphism; it therefore cannot by itself produce a deck transformation.
+- The circle-classification corollary now declares `thm-int-comm-ring` before using abelianness to identify based and unbased classes. The deck-group example now declares the real-line universal-cover corollary used in its $n=0$ case.
+- `classification-of-covering-spaces-examples` cites the two-circle-wedge group from `the-seifert-van-kampen-theorem`. That legal backward page edge was missing from both the batch manifest and `plan-spec.json`; both now declare it.
+
+No new item was authored in this repair. Hatcher and May remain the two independent full-text treatments, and all their headings in the stated locator ranges retain explicit dispositions.
+
 ## Continuity checkpoint
 
 - Current substage: Step 2 artifacts and all available pre-splice checks complete.
@@ -460,3 +472,16 @@ Confidence is high on the mathematical statements, pushout convention, subgroup 
 - Completed checks: all normative docs and exemplars read; both design sections checked against the spec; Hatcher and May harvested independently; every direct published dependency opened; new-id search clean; proof obligations and all boundary cases encoded; manifest-only content policy clean; source fetch check reports 4/4 verified; coverage, prose, JSON, exact-clause, and diff checks complete.
 - Open constraint: none mathematical; authoritative plan validation waits for the Step-4 splice.
 - Exact next action: Step-3 Alpha reads all four artifacts, adjudicates the ten findings, and verifies the two low-yield warning sets against the harvested source headings.
+
+## Step-3 fix pass
+
+- `B6-1` — **already correct.** `lem-deck-transformations-correspond-to-normalizer-cosets` now depends on `cor-based-connected-coverings-isomorphic-iff-equal-subgroups`, and both its strategy and proof contract require equality $H=g^{-1}Hg$ before constructing a deck transformation. The weaker subgroup-inclusion morphism criterion is no longer used in this route.
+- `B6-2` — **already correct.** `classification-of-covering-spaces-examples` declares `the-seifert-van-kampen-theorem` in `requires`, licensing its use of `cor-fundamental-group-of-two-circle-wedge`; the same legal backward prerequisite is already present in `research/plan-spec.json`. This fix pass did not edit the plan specification.
+- `B6-3` — **already correct.** `lem-antipodal-sphere-cover` now declares `def-simply-connected` and `thm-induced-fundamental-group-map-functoriality`. Its strategy and contract use each stereographic homeomorphism and its inverse to transport path-connectedness and the trivial fundamental group from $\mathbb R^n$ to the pole complement before invoking the definition of simple connectedness.
+- `B6-4` — **already correct.** The owning items now declare all four direct inputs: `def-wedge-of-pointed-spaces` for `thm-fundamental-group-of-finite-wedge-of-circles`, `def-path-connected` for `thm-classification-of-connected-covering-spaces`, `thm-int-comm-ring` for `cor-connected-coverings-of-circle-classified-by-nonnegative-integers`, and `cor-real-line-is-universal-cover-of-circle` for `ex-deck-groups-of-connected-circle-coverings`. The corresponding proof-contract routes name the same inputs.
+
+Gate rerun after this disposition:
+
+- `coverage-checklist.mjs`: exit 0; 76 harvested rows, 0 errors, and the same two Alpha-adjudicated low-yield warnings for the two A pages.
+- `content-policy.mjs --manifest-only`: exit 0; 39 scoped items, 0 errors, 0 warnings.
+- `validate-plan.mjs research/plan-spec.json`: exit 0; declared page order and all currently asserted item dependencies are consistent, with no item-level cycles, forward references, B-page dependency violations, or unresolved ids.
