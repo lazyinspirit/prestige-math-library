@@ -1,6 +1,6 @@
 // A stage whose product is a report must require the report.
 //
-// WHY. 6a-read and 9-receipt demanded their artifacts; 6b/6c/9-scope/10-report
+// WHY. 6a-read and 9-receipt demanded their artifacts; 6b/6c/9-scope/10-owner-report
 // did not — so the step-10 owner report, the step-9 richness sweep and both
 // adjudication reports could be absent with the stage green, as long as the
 // agent exited 0 and the ledger gates passed. reader-7-over-reader-1 taught
@@ -20,7 +20,7 @@ test('every report-bearing stage names its deliverable', async () => {
   const expect: Record<string, string> = {
     '6c-cross': 'research/frontier-14-alpha-6c.md',
     '9-scope': 'research/frontier-14-alpha-step9.md',
-    '10-report': 'research/frontier-14-step10-report.md',
+    '10-owner-report-v2': 'research/frontier-14-step10-report.md',
   };
   for (const [id, path] of Object.entries(expect)) {
     const st = mod.stages.find((s: any) => s.id === id);

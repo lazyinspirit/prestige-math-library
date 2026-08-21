@@ -22,6 +22,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 import { validateStages } from './spec.mts';
+import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 
 const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
 
@@ -139,6 +140,29 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   }
   if (check.status === 0 && !placeheld.size) {
     ok.push(`${promptFiles.length} brief/task file(s) resolve for every stage and repair round, none carrying an identity placeholder`);
+  }
+
+  // Structured-output schemas fail before inference, but the normal retry
+  // policy cannot distinguish that deterministic 400 from a transient model
+  // failure. Validate the endpoint's known strict subset before a run starts.
+  const outputSchemas = new Set<string>();
+  for (const st of mod.stages) {
+    try {
+      for (const plan of (st.plan?.(ctx, units) ?? [])) if (plan.outputSchema) outputSchemas.add(plan.outputSchema);
+    } catch { /* plan errors were already reported by the command check */ }
+  }
+  for (const rel of outputSchemas) {
+    const file = join(repo, rel);
+    if (!existsSync(file)) { problems.push(`output schema missing — ${rel}`); continue; }
+    try {
+      const schema = JSON.parse(readFileSync(file, 'utf8'));
+      for (const problem of validateCodexOutputSchema(schema)) problems.push(`${rel}: ${problem}`);
+    } catch (error: any) {
+      problems.push(`${rel}: output schema is not valid JSON (${error?.message ?? error})`);
+    }
+  }
+  if (outputSchemas.size && !problems.some((p) => /output schema|structured output|const schema|uniqueItems/.test(p))) {
+    ok.push(`${outputSchemas.size} Codex output schema(s) pass local endpoint-compatibility checks`);
   }
 
   // 3. the scope ledger, without which scope loss is invisible

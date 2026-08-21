@@ -39,6 +39,12 @@ export interface Plan {
   /** Path, or candidates tried in order — the first that exists wins. */
   brief?: string | string[];
   task?: string | string[];
+  /** Images attached to a Codex dispatch. Paths are resolved from the repo. */
+  images?: string[];
+  /** JSON Schema constraining the dispatched agent's final response. */
+  outputSchema?: string;
+  /** Repo-relative JSON artifact written mechanically from that final response. */
+  resultArtifact?: string;
   /** An argv ARRAY. Never a command string: every attempt to parse one
    *  produced a quoting defect. */
   argv?: string[];

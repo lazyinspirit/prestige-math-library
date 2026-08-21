@@ -91,7 +91,7 @@ test('run-commit commits a dirty tree on main and refuses any other branch', () 
   assert.match(r.stderr, /not main/);
 });
 
-test('the 10-report hook routes an open contract row to the owning Beta, then to the certifier', async () => {
+test('the 10-contract-close hook routes an open contract row to the owning Beta, then to the certifier', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'rework-'));
   mkdirSync(join(repo, 'research', 'demo-dispatch'), { recursive: true });
   writeFileSync(join(repo, 'research', 'defect-ledger.jsonl'), JSON.stringify({
@@ -99,7 +99,7 @@ test('the 10-report hook routes an open contract row to the owning Beta, then to
   }) + '\n');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s10: any = stages.find((s: any) => s.id === '10-report');
+  const s10: any = stages.find((s: any) => s.id === '10-contract-close');
   const args = { ctx: { run: 'demo', repo, dispatchDir: join(repo, 'research', 'demo-dispatch') }, executor, stage: s10, round: 1, failure: { id: 'defect-ledger', why: '' } };
 
   await s10.onGateFailure(args);
@@ -127,7 +127,7 @@ test('a quota-blocked rework is an outage on the obligation clock, not a burnt r
   }) + '\n');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s10: any = stages.find((s: any) => s.id === '10-report');
+  const s10: any = stages.find((s: any) => s.id === '10-contract-close');
   const report = await s10.onGateFailure({
     ctx: { run: 'demo', repo, dispatchDir: join(repo, 'research', 'demo-dispatch') },
     executor, stage: s10, round: 1, failure: { id: 'defect-ledger', why: '' },
@@ -137,10 +137,10 @@ test('a quota-blocked rework is an outage on the obligation clock, not a burnt r
   assert.ok(report.outage.retryAfterMs > 3500_000, 'the clock comes from the obligation row');
 });
 
-test('the 10-commit hook dispatches a DUE block obligation and waits on undue clocks', async () => {
+test('the 10-close-v2 hook dispatches a DUE block obligation and waits on undue clocks', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'oblig-close-'));
   mkdirSync(join(repo, 'research'), { recursive: true });
-  const s10c: any = stages.find((s: any) => s.id === '10-commit');
+  const s10c: any = stages.find((s: any) => s.id === '10-close-v2');
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
 
@@ -161,14 +161,14 @@ test('the 10-commit hook dispatches a DUE block obligation and waits on undue cl
   assert.match(report?.outage?.reason ?? '', /unblock clock/);
 });
 
-test('10-commit is the terminal stage and cannot waive', () => {
+test('10-close-v2 is the terminal stage and cannot waive', () => {
   const last: any = stages[stages.length - 1];
-  assert.equal(last.id, '10-commit');
+  assert.equal(last.id, '10-close-v2');
   assert.ok(!last.gatesWaived, 'the terminal stage may not waive');
   assert.ok(last.gates({ run: 'demo', repo: REPO }).length >= 2, 'obligations + tree-clean');
 });
 
-test('10-commit carries the frontmatter closure: judge-stamps after the ledger gates, before the commit', () => {
+test('10-close-v2 carries the frontmatter closure: judge-stamps after the ledger gates, before the commit', () => {
   // frontier-15 ended with every ledger-side gate green and 0 of 398 items
   // stamped — the stamp had no owning stage. The gate order is load-bearing:
   // stamps are only meaningful once judge closure holds, and the close-out
@@ -181,14 +181,14 @@ test('10-commit carries the frontmatter closure: judge-stamps after the ledger g
   assert.ok(at('judge-stamps') < at('tree-clean'), 'the commit sweeps the stamps');
 });
 
-test('the 10-commit hook routes a judge-stamps failure to the mechanical stamping repair', async () => {
+test('the 10-close-v2 hook routes a judge-stamps failure to the mechanical stamping repair', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'stamp-route-'));
   mkdirSync(join(repo, 'tools'), { recursive: true });
   mkdirSync(join(repo, 'research'), { recursive: true });
   // The stub proves the ROUTING; the real tool's behavior is judge-stamps.test.
   writeFileSync(join(repo, 'tools', 'apply-judge-stamps.mjs'),
     `import { writeFileSync } from 'node:fs';\nwriteFileSync('marker.txt', process.argv.slice(2).join(' '));\n`);
-  const s10c: any = stages.find((s: any) => s.id === '10-commit');
+  const s10c: any = stages.find((s: any) => s.id === '10-close-v2');
   const report = await s10c.onGateFailure({
     ctx: { run: 'demo', repo }, executor: { start: () => {} }, stage: s10c, round: 1,
     failure: { id: 'judge-stamps', why: '' },

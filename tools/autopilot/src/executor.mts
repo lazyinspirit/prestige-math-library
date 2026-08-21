@@ -427,7 +427,9 @@ export class Executor {
     // agent attempts discovering what existsSync answers instantly.
     plan.brief = this.resolveInput(plan.brief);
     plan.task = this.resolveInput(plan.task);
-    const absent = [plan.brief, plan.task].filter((f: any) => f && !existsSync(join(this.config.repo, f)));
+    const supplemental = [...(plan.images ?? []), plan.outputSchema].filter(Boolean) as string[];
+    const absent = [plan.brief, plan.task, ...supplemental]
+      .filter((f: any) => f && !existsSync(join(this.config.repo, f)));
     if (absent.length) {
       const msg = `stage ${stage.id}: missing input file(s) — ${plan.label} needs ${absent.join(', ')}`;
       if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
@@ -488,6 +490,9 @@ export class Executor {
       timeout: plan.timeout ?? this.config.defaultTimeoutSec ?? 14400,
       unit,
       artifact: artifactPaths[0] ?? '',
+      images: (plan.images ?? []).join(','),
+      outputSchema: plan.outputSchema ?? '',
+      resultArtifact: plan.resultArtifact ?? '',
     };
     // A stage may override the command entirely. Not every unit of work is an
     // agent: the judge sweep is a tool run, and forcing it through the agent

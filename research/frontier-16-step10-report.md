@@ -1,10 +1,12 @@
-# frontier-16 — Step 10 fatal-error report
+# frontier-16 — Step 10 final owner report
 
-**This is the owner pause.** Nothing in this run is `status: published`. All 324 items and 22 pages are still draft, and changing status remains the owner's publish action.
+**This is the owner pause, not a publication event.** All 324 items and 22 pages remain `status: draft`. This report changes no status, performs no owner audit, publishes nothing, and pushes or deploys nothing.
 
-**Headline.** The mathematical closure is complete: **173 fatal defects were found; 170 were fixed, one was narrowed, and two unsupported draft items were withdrawn and durably deferred. No fatal defect remains open.** The engine-owned current-context receipt records 324/324 paired judge verdicts, no pending rejudge, no unadjudicated rejection, and no open fatal. The append-only defect ledger has 273 frontier-16 rows and no open row.
+**Definitive answer: Yes.** The structured readiness verdict is exactly `publishable-pending-owner-approval`, with `workflow_owned_blockers: []`. Its only remaining actions are the owner's personal mathematical audit, deliberate `status: published` changes, and push/deployment.
 
-The level is **publishable on its mathematics**, but it is not yet ready for the status flip. Six pathway briefs gained pages and need owner-written sentences, and the engine must still rerun the terminal current-context gate, apply the reader-facing judge stamps, and make the close-out commit. The local report sandbox cannot execute the nested context-hash subprocesses, so its own terminal coverage and stamp probes are red for `spawnSync EPERM`; that limitation and the engine's green receipt are both recorded below.
+The mathematical closure is complete: **173 fatal defects were found; 170 were fixed, one claim was narrowed, and two unsupported draft items were withdrawn and durably deferred. No fatal defect remains open.** The current-context receipt records 324/324 paired judge verdicts, no pending rejudge, no unadjudicated rejection, and no open fatal. The append-only ledger has 273 frontier-16 rows and no open row; its refreshed generated view contains 880 rows across all recorded runs.
+
+The v2 closure that supersedes the earlier Step-10 draft is also complete. Six pathway briefs were rewritten and hash-closed; all 22 pages were captured twice through the real Next.js/Chromium renderer; initial Sigma found no rendering or parsing defect; Tau therefore made no content change; the no-content-loss guard and empty rejudge receipt passed; final Sigma approved all 22 fresh captures; and the frontmatter gate records 206 current paired-pass stamps, 117 honest lane-rejected skips, and one recorded-not-proved skip. The final readiness receipt binds all of those artifacts to content hash `bd6716e15a1e2c7a11483e2327cae2989a99a444bb3f30e1f4489f5f6f95f6d5`.
 
 ## What was built
 
@@ -510,9 +512,11 @@ Both lanes saw byte-identical frozen contexts. DeepSeek V4 Pro is the only cross
 | confirmed-nonfatal lane findings | 52 | 99 |
 | false-positive lane findings | 5 | 5 |
 
+Those are Alpha's exact-hash adjudications: all 304 rejection candidates were classified, and none of the 304 adjudication rows lacks an `item_sha256`.
+
 Latest **usable** current-text agreement is 207 both-pass, 38 both-reject, 17 DeepSeek-only reject, 62 Terra-only reject, and 0 incomplete/null. Every current rejection has an exact-hash nonfatal or false-positive adjudication. Latest **attempt** agreement is 191 both-pass, 38 both-reject, 16 DeepSeek-only, 59 Terra-only, and 20 incomplete/null: those 20 latest calls were nulls, but an earlier usable verdict on the same current text remains valid. Across the complete ledger there are 37 null verdict rows (31 DeepSeek, 6 Terra); none counts as coverage or a mathematical verdict.
 
-Owner-confirmed judge defects collapse 143 fatal lane findings into **95 distinct defect rows on 75 item ids**: 48 were found by both lanes, **19 by DeepSeek alone**, and **28 by Terra alone**. The DeepSeek-only set is the run's unique cross-family signal; the Terra-only set is independent-process evidence but not independent-family evidence.
+Alpha-confirmed judge defects collapse 143 fatal lane findings into **95 distinct defect rows on 75 item ids**: 48 were found by both lanes, **19 by DeepSeek alone**, and **28 by Terra alone**. The DeepSeek-only set is the run's unique cross-family signal; the Terra-only set is independent-process evidence but not independent-family evidence.
 
 ### DeepSeek-only confirmed-fatal defects — 19
 
@@ -622,77 +626,110 @@ Step 9 read all 148 deferred/out-of-scope harvest rows. All 148 stand; no theore
 
 ## Course-pathway receipt
 
-`tools/pathway-sync.mjs` placed every new A page and left no category without a pathway and no page unplaceable.
+`tools/pathway-sync.mjs` placed every new A page and left no category without a pathway and no page unplaceable. Lead Alpha then rewrote every affected brief as a coherent section. `research/frontier-16-pathway-closure.json` records six current `closed` rows with distinct baseline/final section hashes; `pathway-closure`, `pathcheck`, and `prosecheck` all passed.
 
-| category / part | pages placed |
-|---|---|
-| complex analysis / `contours-and-cauchy` | `analyticity-liouville-and-morera` |
-| measure theory / `sigma-algebras-and-borel-sets` | `measures-and-their-basic-properties` |
-| real analysis / `the-riemann-integral` | `the-gauge-integral-and-cousins-lemma` |
-| real analysis / `several-variables` | `picard-lindelof-and-first-order-odes`, `convex-and-semicontinuous-functions-on-rn`, `improper-and-parameter-dependent-multiple-integrals`, `the-inverse-function-theorem-completed` |
-| real analysis / `curves-and-the-fundamental-theorems` | `areas-of-elementary-plane-figures`, `trigonometric-and-oscillatory-examples-in-one-variable` |
-| topology / `homotopy-and-covering-spaces` | `classification-of-covering-spaces`, `the-seifert-van-kampen-theorem` |
+| rewritten brief | pages placed | material incorporated |
+|---|---|---|
+| complex analysis / `contours-and-cauchy` | `analyticity-liouville-and-morera` | Cauchy formulas and estimates, Taylor expansion and zero factorisation, Liouville and polynomial-growth rigidity, the Liouville proof of FTA, Morera, locally uniform limits and series, holomorphic parameter integrals, the mean-value property, and dense images of nonconstant entire functions |
+| measure theory / `sigma-algebras-and-borel-sets` | `measures-and-their-basic-properties` | nonnegative extended sums and measures, monotonicity/subadditivity and continuity, inclusion-exclusion, Borel-Cantelli and set limits, completion and restriction, weighted Dirac/atomic measures, semifinite parts, and sigma-finite uniqueness |
+| real analysis / `the-riemann-integral` | `the-gauge-integral-and-cousins-lemma` | gauges and Cousin's lemma, the Henstock-Kurzweil integral and Cauchy criterion, subinterval additivity and Saks-Henstock, integration of derivatives, integration by parts and substitution, comparison tests, and Hake extension |
+| real analysis / `several-variables` | `picard-lindelof-and-first-order-odes`, `convex-and-semicontinuous-functions-on-rn`, `improper-and-parameter-dependent-multiple-integrals`, `the-inverse-function-theorem-completed` | higher inverse/implicit-function theory and regular maps; improper multiple integrals, domination, polar coordinates and the Gaussian integral; convexity, separation, subgradients, Hessians and semicontinuity; Volterra/Picard, Gronwall, maximal solutions, Euler polygons, Peano and Osgood |
+| real analysis / `curves-and-the-fundamental-theorems` | `areas-of-elementary-plane-figures`, `trigonometric-and-oscillatory-examples-in-one-variable` | Jordan content, disc/base-height/determinant area formulas, triangulation and shoelace; power-series trigonometry, the Weierstrass function, finite sine-harmonic identities, and the continuous Riemann-Lebesgue lemma |
+| topology / `homotopy-and-covering-spaces` | `classification-of-covering-spaces`, `the-seifert-van-kampen-theorem` | subgroup classification of connected coverings, regular coverings and deck groups, circle coverings, van Kampen pushouts and loop factorisation, and computations for spheres, finite circle wedges, products, and the torus |
 
-Each of those six existing part briefs now covers material it does not mention. `pathway-sync` cannot write prose; the owner needs to add one mathematically descriptive sentence to each brief before publication. There are no `categoriesWithoutPathway` entries.
+There are no `categoriesWithoutPathway` or `unplaceable` entries. No pathway prose remains for the owner to author.
 
 ## Findings about the machinery, not the mathematics
 
-1. **The step-7 sweep survived an engine loss, but orphaned calls caused duplicate spend.** Judge children kept landing valid append-only rows after the engine vanished; a resumed sweep reused coverage correctly, while a few replacement calls timed out after the orphan had already supplied the verdict. Verdict authority stayed correct; time/token use did not.
-2. **Terra repeated the model-refresh availability failure from frontier-15.** It stalled at 303/324 current items with `failed to refresh available model`, then recovered after the engine was interrupted. Capacity refusal remained a null, never a verdict.
-3. **A duplicate-engine race produced a stale blocker.** SESSION started a replacement while the original engine was still completing asynchronous work. The replacement wrote an empty-output step-7 failure; the original later overwrote the stale state and dispatched exactly one Alpha. No mathematical artifact was duplicated, but there is no process-level single-engine lock.
-4. **The step-8 repair hook could not route unadjudicated rows.** The first Alpha adjudicated 229 rejection rows, while the completed ledger held 237. The gate correctly found eight omissions across six ids, but two repair rounds reran the battery without dispatching work because the hook handled `open_fatal` and not `unadjudicated`. A narrow recovery Alpha closed them; this routing gap outlives the run.
-5. **The repair loop converged, but expensively.** The initial 105 fatal lane findings collapsed to 70 repaired item versions; closure recovery added five; rejudges found 20 further fatal defects, producing 17 repeatedly repaired items and three three-repair items. Closure is now exact, but Peano and the Gaussian polar lemma deserve owner attention.
-6. **The report sandbox cannot run nested gate subprocesses.** `level-coverage --verify-current-context`, judge closure, `gate-liveness`, and `apply-judge-stamps --verify` all receive `spawnSync /usr/bin/node EPERM` here and falsely report zero coverage/unparsed output. Direct component gates pass, and the engine-owned current-context receipt is green. The report does not rewrite a gate to make itself pass.
-7. **Recovery wrote `after-step8-alpha` three times.** `pre-step8` is unique and the explicit `post-step8` guard window passes, so the duplicate closing label did not license an edit; it is nevertheless ambiguous history.
-8. **The bare status command in `AGENTS.md` is stale on Node 22.** `node tools/autopilot/bin/autopilot.mts status` fails on the `.mts` extension; `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts status` works.
-9. **Finite smoke is live but extremely thin.** It checks one cyclic-index claim in 1 of 271 proof-bearing items. The pass is bounded falsification evidence, not proof coverage.
-10. **Two proof-contract shotgun warnings remain.** `thm-semifinite-and-zero-infinity-decomposition` and `thm-weierstrass-convergence-holomorphic-functions` cite several Facts in one step while neighbouring steps cite none. The responsible Alphas opened the uses and found them licensed; the shape remains weaker than precise per-step attribution.
-11. **Group b's canonical refuter transport was unavailable.** Fallback readers completed the mathematical scope, but process-level read-only enforcement was unavailable in that lane.
-12. **The reciprocal FTA backlink remains owner-bound.** `rem-fundamental-theorem-of-algebra-via-liouville` names both proof routes, but the published minimum-modulus theorem does not name the new Liouville proof. This is expository enrichment, not an obvious-falsehood repair, so no agent edited the published item.
+1. **The source gates exposed repair starvation, then closed it.** The first scaffold join found five dead citations and 28 unstamped full-text sources. The report-all battery correctly exposed both, but the repair hook acted only on the primary URL failure, could not map a bare failing URL back to its batch, and exhausted rounds while the advisory stamping repair sat unused. The repaired machinery now runs every deterministic repair exposed by a battery and maps URLs back through coverage files before routing a scout. Final evidence is 37/37 live retained URLs, ten superseded originals excluded, 43/43 full-text stamps, and a source-backing plan with 180 authored results checked and no reharvest work.
+2. **Splice and edge repair signatures were wrong before they converged.** The stage-5 splice repair used `--all`, which refuses object drift, instead of per-batch `--update`; the validate-plan hook also failed to route an `undeclared-prereq` edge when the relevant line fell outside a truncated gate tail. Both loops exhausted before the current disk-derived repair/routing code landed. Final `splice-verify` proves all 22 pages across seven manifests agree with the plan, and manifest integrity reports no scope drift.
+3. **The step-7 sweep survived an engine loss, but duplicate work was spent.** Judge children kept landing valid append-only rows after the controller vanished. A resumed sweep correctly reused current rows, while several replacements timed out after orphaned calls had already supplied the same-hash verdict. Verdict authority stayed correct; time and tokens did not.
+4. **Terra repeated Frontier 15's model-refresh availability failure.** The lane stalled at 303/324 with `codex_models_manager::manager: failed to refresh available model`; DeepSeek reached 324/324. After interruption, the detached calls self-recovered and Terra also reached 324/324. The 37 null rows remain honest transport history and never counted as verdicts.
+5. **A duplicate-controller race created a stale blocker and is now guarded.** A replacement controller started while the original was still completing asynchronous work; the replacement wrote an empty-output Step-7 blocker, while the original later cleared the stage and dispatched the sole Alpha. No content or verdict was duplicated. The current controller lock refuses a second live owner of the state directory and reclaims only a dead lock; this is the direct process-level closure Frontier 16 supplied beyond Frontier 15's event-driven battery fix.
+6. **The Step-8 hook still has one unclosed workflow defect.** The first Alpha adjudicated 229 of 237 current rejection rows. The gate caught the eight omissions across six ids, but `8-adjudicate` routes `open_fatal` and contract-risk failures, not `closure.unadjudicated`; two rounds did no work. A narrow recovery Alpha adjudicated all eight, repaired five affected item versions, and the final receipt is closed. The run is sound; the generic routing defect remains a recommendation below.
+7. **The mathematical repair loop converged, but expensively.** The first Step-8 pass edited 70 item versions, closure recovery brought the licensed total to 75, and rejudges found further fatal defects. Seventeen items were repaired at least twice and three were repaired three times. Every final version has current paired coverage and no fatal outcome, but this is the run's strongest signal for focused owner reading.
+8. **Touch evidence improved over Frontier 15, with one naming flaw.** Frontier 15's ledger was blind to most repairs; Frontier 16's snapshots identify the 17 repeated-repair items from disk. Recovery nevertheless reused `after-step8-alpha` more than once. The unique `pre-step8` baseline and explicit final window kept licensing sound, but round-qualified closing labels would make the history unambiguous.
+9. **Refuter process enforcement was incomplete in group b.** Its three canonical refuter transports failed before mathematical output. In-session fallback refuters read all 99 items and found no defect, but their read-only status was prompt-enforced rather than process-enforced. This is better coverage than Frontier 15's 141-item refuter gap, but the same class—chartered independent scrutiny lost to lane plumbing—has not disappeared.
+10. **Frontmatter stamping now closes the Frontier 15 gap, and caught a new boundary case.** Frontier 15 finished with zero stamps and required owner repair. Frontier 16's stamp stage first exposed 206 missing current passes mechanically. An early application also put a judge block on `rem-sine-period-arc-length-integrand-is-nonelementary`, although `proved_here: false` means there is no proof to judge; `extcheck` stopped closure. The corrected tool stripped/skips that block. Final result: 206 stamped, 117 lane-rejected, one recorded-not-proved, zero problems.
+11. **The new render/Sigma/Tau chain had plumbing failures, not content findings.** Initial capture once had a stale van Kampen image hash and was recaptured. Sigma dispatch initially failed on unresolved generic placeholders and structured-output forwarding before a successful read-only run. Tau's whole-tree baseline overflowed the child-process default buffer, and the first guard attributed controller-created dispatch files to Tau. Later readiness checks similarly attributed post-Tau render/Sigma receipts to Tau until verification was changed to the durable boundary receipt. The corrected baseline uses a 64 MiB buffer, the immediate guard exempts only exact controller-owned files, and later readiness verifies the durable target receipt. Every blocker retired; no mathematical content was removed or edited.
+12. **Agent-sandbox `EPERM` was contained by role separation.** Tau could not spawn the nested Git verification in its own sandbox and reported that limitation. Tau did not self-certify: the controller-owned guard later ran successfully, confirmed zero changed files, and wrote an empty rejudge target set. The same separation lets this report rely on the engine's current-context gate rather than converting a local sandbox refusal into mathematical evidence.
+13. **The v2 stages repaired the earlier report-order race.** The first Step-10 report correctly described pathways, stamps, and rendering as pending because those actions had not happened. The serial v2 chain now takes the snapshot, places and rewrites pathways, captures and adjudicates rendering, runs Tau and any rejudge, stamps, captures again, obtains final Sigma approval, writes structured readiness, and only then dispatches this report. No final claim below depends on a concurrent action that might not have landed yet.
+14. **Two proof-contract shotgun warnings remain.** `thm-semifinite-and-zero-infinity-decomposition` and `thm-weierstrass-convergence-holomorphic-functions` cite several Facts in one step while neighbouring steps cite none. The responsible Alphas opened the uses and found them licensed; the shape remains weaker than precise per-step attribution.
+15. **The reciprocal FTA backlink remains optional enrichment.** `rem-fundamental-theorem-of-algebra-via-liouville` names both proof routes, but the published minimum-modulus theorem does not name the new Liouville proof. This is not a falsehood or publication blocker, so the run correctly left the published item untouched.
+
+### Frontier 15 controls exercised by Frontier 16
+
+| Frontier 15 finding | Frontier 16 evidence |
+|---|---|
+| per-group fatal findings did not reconcile with the ledger | **Closed:** 169 machine finding rows reconcile to 78 Step-6 fatal defect rows; all 173 fatal rows are present in the final ledger and report |
+| touchlog could not identify repeated repairs | **Closed:** 17 repeated-repair items and three three-repair items are derived from snapshots; only duplicate closing-label names remain |
+| no stage carried paired passes into frontmatter | **Closed:** 206 stamps, 117 honest lane-rejected skips, one recorded-not-proved skip |
+| no real browser render receipt | **Closed:** two complete 22-page manifests plus initial and final Sigma approval |
+| pathway prose and disk-derivable chores survived into the owner list | **Closed:** all six pathway obligations are hash-current and no prose remains owner-owned |
+| finite smoke was thin at 4/329 proof-bearing items | **Not improved:** Frontier 16 is thinner at 1/271; this remains a caveat and recommendation |
+| chartered refuter coverage was incomplete | **Improved but not closed:** all batch items received a fallback read, but group b lacked process-enforced read-only refuters |
+| Terra model-refresh failure | **Repeated:** self-recovered, but the exact transport failure recurred |
+
+`defect-ledger stats --run frontier-16 --leakage --recurrence --json` reports 230 delayed detections among 273 rows with a concrete expected catch point—principally `5-author → 6a-read` (103), `6a-read → 8-adjudicate` (75), and `8-adjudicate → 8-rejudge` (20)—and no recurrence flag. These are control-effectiveness signals, not open mathematical defects.
 
 ## Verification state
 
-| gate / receipt | current result | caveat |
-|---|---|---|
-| precheck | **green** — 4,540 checked, 0 failing | repo-wide |
-| depcheck / fwdcheck / extcheck | **green** | one run-scope `cited-not-in-deps` warning: `lem-finite-circle-wedge-open-cover` names the van Kampen corollary only to say its independently proved cover satisfies that corollary's hypotheses; the link is non-load-bearing orientation, not a missing logical edge |
-| rendercheck | **green** — 6,048 files, real KaTeX and YAML | no visual browser preview |
-| prosecheck | **green** — 0 errors, 571 heuristic warnings | warnings are legacy; not individually re-triaged here |
-| depsource | **green** — 0 unresolved | 529 current run-local deps are reported as not on a published page by design |
-| pathcheck | **green** — 10 pathways, 0 errors/warnings | six briefs need owner prose despite structural validity |
-| manifest-integrity / splice verify | **green** — 22/22 pages, no drift | |
-| proof-contract | **green** — 271/271, 2 shotgun warnings | warnings named above |
-| finite-smoke | **green but thin** — 1 check on 1/271 items | bounded evidence only |
-| risk-report | **green** — 271 routed, no missing review | every high/critical item has an Alpha disposition |
-| boundary-audit | **green** — 2,168 rows, 838 `not_applicable`, no detector candidate | regex detectors do not prove dispositions true; two false rows were found manually and repaired earlier |
-| citation-fidelity | **green** — no missing quote; 2 advisory widening candidates | both are false positives in context: the items' Given/Statement already fixes `n=1` or `n≥1` |
-| coverage checklist | **green** — 11 A pages, 579 harvest rows, 4 low-yield warnings | IFT, elementary area, van Kampen, and covering classification declines were read by Alpha |
-| full-text source stamps | **green** — 43/43 | |
-| URL liveness receipt | **green** — 37/37 retained URLs, 10 superseded originals excluded | generated before the final proof repairs; URLs did not change, and this sandbox cannot independently rerun network liveness |
-| content policy | **green** — 324 scoped, 0 errors/warnings | |
-| impact audit | **green** — 324 interfaces, 261/261 dispositions | correct pre-author baseline; no pending row |
-| step8 guard | **green** — 75/75 edits licensed, 0 creation/deletion | explicit `pre-step8 → post-step8` window |
-| spine receipt | **green** — 58/58 read | hash-bound |
-| defect ledger | **green** — 273 rows, 0 errors, no open row | generated view refreshed over all 880 ledger rows |
-| judge closure, engine receipt | **green** — 324/324, no rejudge/unadjudicated/open fatal | receipt is newer than every item edit |
-| judge closure, report sandbox rerun | **red/unknown** — 0/324 due every context-hash child returning non-JSON | `spawnSync EPERM`; not mathematical evidence |
-| frontmatter judge stamps | **pending** — 0/324 currently stamped | `10-commit` mechanically applies/verifies them; local verify hits the same EPERM |
-| obligations | **green** — 0 rows, 0 errors | |
+The final structured-readiness battery ran 14 gates and all were green. Earlier v2 stages reran the contract, Tau, rendering, pathway, and stamp gates at the boundary where each was authoritative.
 
-`node tools/defect-ledger.mjs stats --run frontier-16 --leakage --recurrence --json` reports no recurrence flag. It reports 230 leaked rows out of 273 rows carrying a concrete `should_have_caught`, principally `5-author → 6a-read` (103), `6a-read → 8-adjudicate` (75), and `8-adjudicate → 8-rejudge` (20). Those are workflow effectiveness signals, not open defects.
+| gate / receipt | what it established on the final scoped text | limit of the evidence |
+|---|---|---|
+| scaffold closure | 11/11 A pages reviewed, no missing verdict, no remaining `insufficient` page | an Alpha reading, not a theorem prover |
+| coverage checklist / gate liveness | 579 harvested headings across the seven batches were present and dispositioned; four low-yield pages were explicitly read | structure cannot prove the source harvest is honest; group Alphas supplied that semantic reading |
+| source fetch, URL liveness, source backing | 43/43 sources had full-text stamps; 37/37 retained URLs were live; ten superseded originals were excluded; 180 authored source-backed results had no reharvest work | liveness and fetchability do not prove a source supports every attributed statement |
+| manifest integrity / splice verify | all 22 owed pages remained in the seven manifests; plan and manifests agreed; no scope or object drift remained | does not itself prove mathematics |
+| precheck | 4,540 repo items checked, zero phase-format failures | proof syntax/stratification, not validity |
+| depcheck / fwdcheck / extcheck | no cycles or unresolved references; no draft item on a published page; every forward reference was declared, strictly later, closed and off the spine; the sole recorded-not-proved item had no proof/judge block and its consequences were marked | repo-wide advisory legacy warnings remain; none is a frontier-16 blocker |
+| rendercheck | 6,048 files passed the real KaTeX parser and the renderer's YAML parser, with no source-level delimiter/frontmatter failure | source parsing alone does not prove visual layout; the browser/Sigma rows below supply that tier |
+| prosecheck / depsource / pathcheck | no positional contradiction; zero unresolved dependencies; 10 pathway files had zero errors or warnings | 571 heuristic prose warnings are largely legacy and are not mathematical verdicts; 529 run-local deps are draft-local by design |
+| merged proof contract | 271/271 proof-bearing items had strict citation, input-map and boundary worksheets | worksheets record obligations; they do not prove the inferences. Two shotgun warnings remain and are named above |
+| finite smoke | the cyclic-cover divisibility check passed through `n=24`; one check ran over 1/271 proof-bearing items | extremely thin bounded falsification evidence, never a general proof |
+| risk report | all 271 proof-bearing items were routed and every high/critical item had an Alpha `risk_review` | risk score prioritises reading; it does not certify correctness |
+| boundary audit | 2,168 rows read, including 838 `not_applicable`; no template cluster or mechanically contradicted disposition | the detectors are intentionally narrow; manual readers found and repaired false rows that pattern checks could not certify |
+| citation fidelity | all 1,284 recorded quotes occurred in their cited items; no quote was missing | two widening candidates remain advisory false positives after reading; quote occurrence is not full semantic fidelity |
+| content policy / provenance | 324 scoped items satisfied component provenance, generated-claim containment and source-URL/external-fallback requirements; no AI-generated Statement is load-bearing | labels and URLs are accountability, not truth guarantees |
+| independent readers and group Alphas | all seven batches received complete proof-step/dependency-citation reads; 169 reader/refuter findings were adjudicated; every accepted fatal repair was checked from disk | all these lanes and Alpha are GPT-family; group b's fallback refuters lacked process-enforced read-only isolation |
+| cross-edge and audit receipt | the post-6b lead read all 1,099 non-same-batch relationships; final receipt covers 324 items, 271 proofs and 1,685 relationships, with both dependency drifts explained | 47 published-backward edges added in later fatal repairs were checked in the repair passes rather than a second monolithic 6c sweep |
+| impact audit | correct `pre-author → after-step8-alpha-round-3` window; 324 changed interfaces and 261/261 concrete consumer dispositions, none pending | proves the consumer queue was reviewed, not that every underlying proof is true |
+| Step-8/Tau guards | all 75 Step-8 item edits were licensed by confirmed fatal defects; Tau changed zero files, removed no content, and produced zero rejudge targets | the Tau guard is structural; Sigma found no visual defect for it to repair |
+| spine audit | 58/58 proof-bearing items among the top-100 dependency cones had current hash-bound reads | targeted high-blast-radius sampling, not all 271 proofs |
+| defect ledger | 273 frontier-16 rows checked, zero errors and no open row; all 173 fatal rows reconcile to dispositions; generated view refreshed over 880 total rows | historical open rows from other runs remain historical; they are not frontier-16 blockers |
+| judge coverage / closure | 324/324 current pairs; no pending rejudge, no unadjudicated rejection, no open fatal, and matching frozen context for every current pair | judge output is a screen; exact-hash nonfatal/false-positive adjudications remain part of closure |
+| judge stamps | 324 items accounted: 206 paired-pass stamps, 117 lane-rejected skips, one recorded-not-proved skip, zero problems | an adjudicated rejection never manufactures a pass stamp |
+| pathway closure | six rewritten sections were current against their baseline/final hashes; 10 pathways passed with zero errors/warnings | pathway prose is course navigation, not mathematical proof evidence |
+| real render manifests | initial and final manifests each captured 22/22 pages at 1,425 px width through Next.js + Chromium; each observed 9,306 KaTeX nodes, 210 SVG nodes, zero visible TikZ fences and zero renderer errors | one desktop viewport; not a responsive/accessibility test matrix |
+| Sigma initial / Tau / Sigma final | initial Sigma: zero findings, approved; Tau: zero findings to disposition, zero edits/blockers; final Sigma: zero findings across all 22 fresh captures, approved | Sigma's charter is visible LaTeX, TikZ/tikz-cd and phase-proof parsing, not mathematical correctness |
+| publication readiness | artifact hashes current, every scoped item/page still draft, final content hash current, and `workflow_owned_blockers` empty | deliberately does not perform the owner's personal audit, publish, or deploy |
+
+### Visual adjudication and Tau disposition
+
+There were **no Sigma findings to repair**. Initial Sigma reviewed every A and B capture and approved the manifest. Tau still ran, as required, and wrote a no-op receipt with `findings: []` and `changed_files: []`; it removed no content, encountered no mathematical blocker, and generated no changed-item rejudge target. The controller-owned guard independently confirmed the no-op. After judge stamps, all pages were captured again; final Sigma reviewed all 22 final images and approved them with no LaTeX, TikZ/tikz-cd, or proof-parsing finding.
+
+The initial and final content hash is identical. Fourteen image hashes changed because the final capture used the later app revision and current verification presentation; DOM counts, dimensions, raw-fence count, and renderer-error count remained identical. Final Sigma's approval is the adjudication of those final pixels.
 
 ### Caveats that must survive the headline
 
-- Step-6 authors, readers, refuters, Terra, and Alpha are all GPT-family. Only DeepSeek supplies cross-family scrutiny.
-- The fresh terminal current-context and judge-stamp commands cannot run in this report sandbox. The engine must rerun them after this report; do not publish from the local false-red output or from trust alone.
-- Latest-attempt judge output contains 20 null-latest ids, even though latest-usable current-text coverage is complete. The distinction is essential.
-- Finite-smoke covers 1/271 proof-bearing items. It is not general verification.
-- Harvest faithfulness was read at every stated locator by the three group Alphas; step 10 did not independently re-extract all 43 source bodies. The low-yield warnings are therefore group-Alpha attestations, not a second whole-level source audit.
-- The 6c lead read 1,094 published-backward edges at post-6b. The net 47 new published edges present after fatal repairs were checked inside those repair passes rather than in a second monolithic 6c sweep.
-- The local URL environment cannot supply an independent live recheck; the durable 37/37 receipt and 43/43 full-text stamps are the evidence.
-- No item has a reader-facing `verification.judge` stamp yet. That is intentionally owned by `10-commit`, not evidence that the judge sweep was absent.
-- Eighty-five honest scope rows still require an owner placement decision if those results are ever built. They do not invalidate the present pages.
-- No page was visually previewed in a browser. `rendercheck` proves parseability, not presentation.
+- DeepSeek V4 Pro is the only cross-family judge lane. Terra, the authors, readers/refuters, and Alpha are GPT-family; Terra/Alpha agreement is same-family agreement.
+- The append-only ledger contains 37 null transport rows (31 DeepSeek, six Terra). Latest usable current-text coverage is complete; nulls neither satisfy nor erase a verdict.
+- Finite smoke covers 1/271 proof-bearing items. Proof contracts, risk routing and detectors are accountability and prioritisation mechanisms, not mathematical proofs.
+- Harvest faithfulness was read at each stated locator by the group Alphas; Step 10 did not independently re-extract all 43 source bodies.
+- The source-liveness receipt predates final proof repairs, but no source URL changed after it; the hash-bound content and source-stamp receipts remain the evidence.
+- Eighty-five scope rows retain `owner-decision` as a future destination if those deferred results are ever built. They are not missing results from these pages and not current blockers.
+- The final visual tier sampled one desktop width and only Sigma's chartered parsing/rendering concerns. It is not a mathematical, accessibility, browser-matrix, or mobile-layout audit.
+- The reciprocal FTA backlink is optional enrichment, not correctness work and not part of readiness.
+
+## Recommended workflow changes, ranked by impact/risk ratio
+
+1. **Route `closure.unadjudicated` at `8-adjudicate` to a narrow Alpha recovery dispatch — high impact, low risk.** The scope is already an exact id/model/context list written by `level-coverage`; using that receipt would have avoided two empty repair rounds and the manual recovery dispatch without changing any adjudication rule or mathematical authority.
+2. **Classify the exact Codex model-manager refresh error as a judge-lane outage — high impact, low-to-medium risk.** It occurred in both Frontier 15 and Frontier 16. Match the specific `failed to refresh available model` transport signature, refund the round, and back off; do not broaden this to bare `NO_CONTENT`, which may be a genuinely dead lane.
+3. **Make refuter process enforcement a gated coverage property — medium-to-high impact, low risk.** Record whether each required high/critical read used process-enforced read-only isolation, prompt-only fallback, or no refuter. A fallback may remain visible evidence, but the engine should route a failed canonical transport instead of letting prose be the only place the independence loss appears.
+4. **Add one finite-smoke check for finite inclusion-exclusion signs and index boundaries — medium impact, low risk.** Frontier 16 contained both an induction-sign error and an off-by-one Statement error in `thm-finite-inclusion-exclusion-for-measures`; both admit exact finite-set tests. Do not impose a check-count quota or pretend this extends to the analytic proofs.
+5. **Require unique round-qualified touch-snapshot labels — low impact, very low risk.** Reject or suffix a reused closing label while preserving the unique baseline. This changes no content and makes repeated-repair history unambiguous.
+6. **No further change recommended for the v2 pathway/render/Sigma/Tau/stamp sequence, controller lock, or fatal-only rule.** The final serial chain closed every owned obligation, protected content against removal, produced current visual evidence and stamps, and left no blocker. No model, concurrency, style, or content-removal change is supported by this run. Likewise, do not add a second viewport merely from absence-of-evidence; first record an actual responsive defect or a deliberate owner requirement.
 
 ## What I recommend the owner read personally
 
@@ -701,18 +738,16 @@ Each of those six existing part briefs now covers material it does not mention. 
 3. `thm-simple-polygon-admits-a-triangulation` together with the two withdrawn frugal polygon results. The general triangulation proof was replaced wholesale and the source's n-minus-two theorem does not survive the broader subdivision-vertex convention.
 4. `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set` — choice scope was restored and the title was narrowed because an open convex set need not contain its boundary contact point.
 5. The DeepSeek-only repairs to `thm-seifert-van-kampen`, `thm-classification-of-connected-covering-spaces`, `thm-classical-weierstrass-function-nowhere-differentiable`, and `lem-weierstrass-low-frequency-difference-quotient-bound`. These are the strongest cross-family-only signals.
-6. The six pathway briefs named in the course-pathway receipt, and the owner-bound reciprocal FTA backlink.
+6. The six rewritten pathway briefs, now closed rather than owner to-dos, as the reader-facing course-pathway review.
+7. The reciprocal FTA backlink only if the owner wants symmetric exposition; it is optional enrichment.
 
 ## Publish readiness
 
-**Mathematics:** publishable. All 173 fatal defects are fixed, narrowed, or withdrawn; no open fatal, no unadjudicated current rejection, no pending rejudge, no open ledger row, and no unresolved dependency remains.
+**Is everything publishable pending owner approval? Yes.** This copies the structured readiness verdict: `publishable-pending-owner-approval`.
 
-**Before the status flip:**
+- `workflow_owned_blockers`: `[]`
+- `owner_actions_remaining`: personal mathematical audit; deliberate `status: published` changes; push/deployment
 
-1. Add one mathematically descriptive sentence to each of the six pathway briefs listed above.
-2. Let the engine's `10-report` gate rerun current-context coverage in its normal process environment; it must return 324/324 on the final tree.
-3. Let `10-commit` apply and verify the judge stamps and make the close-out commit on `main`.
-4. Decide whether to add the reciprocal published FTA backlink; this is optional enrichment, not a correctness blocker.
-5. Perform the owner audit, then set `verification.audited` and change `status: draft` to `published`.
+All 173 fatal defects are fixed, narrowed, or withdrawn and deferred; no open fatal, unadjudicated current rejection, pending rejudge, open frontier-16 ledger row, unresolved dependency, pathway obligation, Tau blocker, Sigma finding, or render-manifest defect remains. All scoped item and page statuses are still draft, exactly as the readiness gate requires before the owner decides.
 
-Nothing in this report changes a status field, publishes, pushes, or writes a new defect-ledger row.
+Owner approval is not a workflow defect, and Step 10 did not publish anything. Nothing in this report changes a status field, publishes, pushes, or writes a defect-ledger row.

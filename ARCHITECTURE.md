@@ -338,14 +338,17 @@ page relation the site renders, so the written order and the dependency order
 cannot disagree.
 
 `pathway-sync.mjs` is what keeps the gate cheap to satisfy. It runs at step 10,
-in stage `10-report` ahead of the report Alpha, and places every unplaced page
+ahead of `10-pathway-author-v2`, and places every unplaced page
 in its LEGAL WINDOW: no earlier than the part of its last prerequisite, no later
 than the part of the first page resting on it, choosing inside that window the
 part where most of its neighbours already live. Measured against a hand-written
 pathway, that heuristic reproduces the author's own placement. It never reorders
-parts, never creates one, and never edits a brief: the receipt
+parts, never creates one, and never edits a brief. The receipt
 `research/<run>-pathway.json` names the pages placed and the briefs that gained
-material, and the step-10 report is where the owner is asked for the sentences.
+material; `pathway-closure.mjs` converts those into exact section-hash
+obligations which Lead Alpha rewrites before rendering. Same-run sync reruns
+carry unresolved obligations forward instead of erasing them with an empty
+placement pass.
 Drafts are placed too, because a level publishes after the owner audit and a
 sync that waited for `published` would place nothing.
 
@@ -1134,7 +1137,7 @@ fixes); `should_have_caught` is the leakage field and
 **Whoever writes a disposition writes the row, in the same act** — 6b/6c
 Alphas for the step-6 body, step 8 per `confirmed_fatal`, step 9 for
 false-declines; step 10 authors no mathematical rows (it runs `stats` and
-`render`). The `check` gate at 8-adjudicate/8-rejudge/9-scope/10-report holds
+`render`). The `check` gate at 8-adjudicate/8-rejudge/9-scope/10-contract-close holds
 ledger and adjudications to each other: exactly one row per `confirmed_fatal`
 (anti-double-count), step-6-caught rows whenever a 6b report exists (a ledger
 that mirrors the adjudication file fails), **fatal** open rows agreeing with
@@ -1143,7 +1146,7 @@ namespace is unrepaired fatal proof defects, and comparing every open row
 against it false-positived on frontier-15's B41 — a nonfatal 503-ing archive
 snapshot a 6b Alpha correctly left open pending a pre-publish re-sweep — and
 burned a step-8 repair round), plus a liveness floor so zero rows never
-passes. The 10-report gate alone adds `--no-open`: step 9's sweep duty closes
+passes. The 10-contract-close gate adds `--no-open`: step 9's sweep duty closes
 each open row whose recorded condition is met, and a row still open at the
 terminal stage is unfinished work the owner must read, whatever its severity.
 **The step-6 COUNT is auditable** (owner directive, 2026-08-17): each 6b group
@@ -1154,8 +1157,8 @@ once any group's file exists every group needs one and the counts must
 reconcile; a pre-contract run gets a note. On frontier-15 one group accepted
 58 fatal reader findings, wrote 13 rows, satisfied the exists-only clause,
 and the run's headline understated its fatal count threefold. Relatedly, the
-twice-touched instrument now sees: `9-scope` and `10-report` snapshot
-`post-step8`/`post-step9` ahead of their Alphas (guarded so a resumed run
+twice-touched instrument now sees: `9-scope`, `10-snapshot-v2`, and the Tau
+baseline snapshots at their hard boundaries (guarded so a resumed run
 never mislabels a later tree), and `touchlog audit` counts refutations as
 distinct rejected VERSIONS (id + item hash) — both lanes rejecting one text
 is agreement, and frontier-15's 30-item escalation noise collapsed to the 4
@@ -1166,7 +1169,7 @@ leads with caught/prevented/escaped, never a bare total
 deliberately red where the record disagrees with itself — recorded, never
 force-fitted.
 
-### 3.11i Full closure — `9-close`, `10-commit`, obligations (owner, 2026-08-17)
+### 3.11i Full closure — `9-close`, `10-close-v2`, obligations (owner, 2026-08-17)
 
 **Failure it prevents:** a run that ends as a to-do list. frontier-15 reached
 its pause with four disk-derivable chores (stale impact receipt,
@@ -1175,7 +1178,7 @@ prose) and one dead end (a contract-quality row whose remedy — the owning
 Beta — had no dispatch route after authoring). `9-close` runs the splice
 refresh and the impact-receipt refresh (`impact-audit --refresh-receipt`
 adds `pending` rows that keep the gate red until the `impact-close` Alpha
-writes real dispositions). The 10-report `--no-open` hook runs the
+writes real dispositions). The `10-contract-close` `--no-open` hook runs the
 contract-rework loop: owning-Beta rewrite of its own worksheets (contract
 files only), then Alpha certification closing the ledger row in place; a
 quota-locked lane is an outage on the obligation row's clock, and a row's
@@ -1183,7 +1186,7 @@ quota-locked lane is an outage on the obligation row's clock, and a row's
 `tools/obligations.mjs` holds externally-blocked work as rows —
 `block`-tier fails the terminal gate until closed or owner-accepted (named
 acceptor, real reason); `report`-tier is surfaced, never blocking; due rows
-with a `dispatch` spec re-fire themselves. `10-commit`, the terminal stage,
+with a `dispatch` spec re-fire themselves. `10-close-v2`, the terminal stage,
 re-runs `level-coverage` and judge closure on the final tree, checks
 obligations, verifies the **frontmatter closure** (`judge-stamps`:
 `apply-judge-stamps --verify` fails on a ledger-licensed paired pass the item
@@ -1199,6 +1202,38 @@ under an exactly-two-lanes check) and then stamped nothing (clause-(a)-only
 currency; `judge-currency.mjs` now supplies the shared predicate, with the
 pair-context hash computed lazily only where the item-hash clause fails).
 Push and publish remain owner acts.
+
+### 3.11j Render closure — Sigma and Tau (owner, 2026-08-21)
+
+**Failure it prevents:** mechanically valid Markdown whose produced page shows
+raw or clipped LaTeX/TikZ, or collapses a phase proof into the wrong paragraph
+structure. Before this change `rendercheck.mjs` parsed source but no build stage
+rendered a page in a browser.
+
+`render-capture.mjs` copies the corpus and web source to `/tmp`, changes draft
+visibility only in that isolated corpus, and drives the real Next/KaTeX/TikZ
+component stack through Chromium CDP. Full-page PNGs stay under ignored
+`.autopilot/render/<run>/<phase>/`; the committed manifest binds all scope-ledger
+pages, dimensions, DOM error observations, content hash and image hashes.
+`render-manifest.mjs` checks completeness and currency.
+
+Read-only Terra **Sigma** receives every image at xhigh/1M and returns a
+schema-constrained receipt limited to LaTeX, TikZ/tikz-cd and proof parsing.
+Terra **Tau** runs exactly once, even for a no-op receipt, and may edit only the
+exact source files Sigma names. `visual-repair.mjs` snapshots every tracked file
+and scoped content file before Tau, then rejects out-of-scope edits, deletions,
+page-membership/protected-frontmatter drift, removed sections, removed proof
+steps, removed TikZ blocks, or an unreconciled finding. It emits only the changed
+item ids; those return to the paired DeepSeek+Terra judges. This is a narrow
+owner amendment to the normal Sol-only authoring rule, and Terra's later judge
+read is self-review, not independent support—DeepSeek is the cross-family lane.
+
+After verdict stamping the workflow captures fresh pages and Sigma adjudicates
+again. A final reject is a hard gate with no automatic repair loop: all
+mathematical content remains in place and publication readiness stays red.
+`publication-ready.mjs` then proves every workflow-owned receipt is current and
+all scoped statuses remain draft, leaving owner audit/status/push as the only
+actions outside the workflow.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 

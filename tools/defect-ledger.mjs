@@ -404,7 +404,7 @@ if (cmd === 'check') {
   }
 
   // (e) the terminal stage may not end with ANY open row, whatever its
-  // severity. `--no-open` is passed by the 10-report gate alone: step 9 owns
+  // severity. `--no-open` is passed by the terminal 10-close gate alone: step 9 owns
   // sweeping the run's open rows (closing each whose recorded condition is
   // met, with evidence), so a row still open here is unfinished work the
   // owner must see, not a waivable detail.

@@ -103,7 +103,7 @@ test('render leads with outcomes, never a bare total', () => {
 test('the check gate is wired at every adjudicating stage with a liveness floor', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['8-adjudicate', '8-rejudge', '9-scope', '10-report']) {
+  for (const id of ['8-adjudicate', '8-rejudge', '9-scope', '10-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
@@ -190,14 +190,14 @@ test('a pre-contract run with 6b reports and no findings files gets a note, neve
 test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['8-adjudicate', '8-rejudge', '9-scope', '10-report']) {
+  for (const id of ['8-adjudicate', '8-rejudge', '9-scope', '10-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
       return argv.includes('tools/defect-ledger.mjs');
     });
     const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
-    if (id === '10-report') assert.ok(argv.includes('--no-open'), '10-report is the no-open backstop');
+    if (id === '10-contract-close') assert.ok(argv.includes('--no-open'), '10-contract-close is the no-open backstop');
     else assert.ok(!argv.includes('--no-open'), `${id} must tolerate a nonfatal row left open for later work`);
   }
 });

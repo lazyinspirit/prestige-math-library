@@ -28,6 +28,7 @@ import { writeCommand } from '../src/control.mts';
 import { waves, packBatches, writeManifests, driftEvidence } from '../src/frontier.mts';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
+import { acquireControllerLock } from '../src/controller-lock.mts';
 import type { Config } from '../src/types.mts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -53,6 +54,8 @@ function loadConfig(): Config {
       '--role', '{role}', '--brief', '{brief}', '--task', '{task}',
       '--label', '{label}', '--run', '{run}', '--covers', '{covers}',
       '--timeout', '{timeout}',
+      '--image', '{images}', '--output-schema', '{outputSchema}',
+      '--result-artifact', '{resultArtifact}',
       // dispatch.mjs substitutes these into the brief and task as <run>, <i> and
       // <output>, so a generic template resolves to this run's real paths.
       // Each drops out entirely when empty.
@@ -65,7 +68,7 @@ function loadConfig(): Config {
       '--var', 'run={run}', '--var', 'i={unit}', '--var', 'output={artifact}'],
     concurrency: 5,
     maxAttempts: 2,
-    reportIntervalMin: 20,
+    reportIntervalMin: 10,
     pollSec: 30,
     defaultTimeoutSec: 14400,
     coversMap: {},
@@ -335,8 +338,8 @@ switch (cmd) {
     // Validate BEFORE detaching. A spec defect found by the detached child is a
     // blocker in a log nobody is reading yet; found here it is a message on the
     // terminal of the person who just typed `start`.
+    const probe = await buildExecutor(run);
     {
-      const probe = await buildExecutor(run);
       if (probe.specProblems.length) {
         console.error('autopilot: refusing to start — the stage table cannot fail:\n');
         console.error(formatProblems(probe.specProblems));
@@ -384,12 +387,22 @@ switch (cmd) {
       console.log(`  log:     ${out}`);
       break;
     }
-    const ex = await buildExecutor(run);
-    const cfg = loadConfig();
-    ex.reporter.notify('start', `autopilot driving ${ex.config.run} from ${repo}`);
-    const outcome = await ex.run({ pollMs: (Number(opt('poll', cfg.pollSec)) || 30) * 1000 });
-    ex.reporter.notify('finish', `run loop exited: ${outcome}`);
-    process.exit(outcome === 'blocked' ? 1 : 0);
+    let releaseController: () => void;
+    try { releaseController = acquireControllerLock(stateDir, probe.config.run); }
+    catch (error: any) { die(`autopilot: refusing duplicate start — ${error?.message ?? error}`, 1); }
+    process.once('exit', releaseController);
+    try {
+      const ex = await buildExecutor(run);
+      const cfg = loadConfig();
+      ex.reporter.notify('start', `autopilot driving ${ex.config.run} from ${repo}`);
+      const outcome = await ex.run({ pollMs: (Number(opt('poll', cfg.pollSec)) || 30) * 1000 });
+      ex.reporter.notify('finish', `run loop exited: ${outcome}`);
+      process.exitCode = outcome === 'blocked' ? 1 : 0;
+    } finally {
+      process.removeListener('exit', releaseController);
+      releaseController();
+    }
+    break;
   }
 
   case 'doctor': {

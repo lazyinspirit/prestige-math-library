@@ -39,7 +39,7 @@ autopilot start --run frontier-15 --detach
 `start --detach` is the last command that needs a person. Steps 1 → 10 run to
 completion: dispatching agents, retrying dead lanes once, running gates,
 refusing to advance past a gate that checked nothing, and writing a status
-report every 20 minutes.
+report every 10 minutes.
 
 The orchestrator's remaining job is to read `status.md` and tell you what it
 says. It is not on the critical path and cannot stall the run by failing to

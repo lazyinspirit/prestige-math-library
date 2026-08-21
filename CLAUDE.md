@@ -53,7 +53,7 @@ ever publishes: step 10 / A10 is the sole owner pause.
    dependency levels. `node tools/pathcheck.mjs` is the gate, and
    `tools/pathway-sync.mjs` (step 10) places each new page in it.
 6. **Commit + push** (`main`, conventional-commit style; the engine's
-   `10-commit` stage commits the run's tree on `main` itself — push stays an
+   `10-close-v2` stage commits the run's tree on `main` itself — push stays an
    owner act). NO Co-Authored-By
    trailers, ever. GitHub is backup only, never on the serving path.
 
@@ -76,6 +76,7 @@ account is **never** wired into the worker service.
 | `scaffolder` (subject tracks), `orchestrator` (audit) | GPT 5.6 Sol | Codex subscription, `xhigh`, 1M context |
 | `audit-beta`, `audit-alpha` | GPT 5.6 Sol | Codex subscription, `xhigh`, 1M context |
 | `mechanic` (post-adjudication bookkeeping) | GPT 5.6 Terra | Codex, **`medium`**, 1M context |
+| build Step-10 `sigma` / `tau` (owner, 2026-08-21) | GPT 5.6 Terra | Codex, `xhigh`, 1M context; Sigma read-only, Tau exact-finding write scope |
 | audit `certifier` / independent reader | GPT 5.6 Terra | Codex, `xhigh`, 1M context, read-only |
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
 | paired judges, build and audit | DeepSeek V4 Pro + **GPT 5.6 Terra** | `JUDGE_LINEUP=deepseek+terra` (owner, 2026-08-20) |
@@ -99,7 +100,13 @@ are all GPT-family. **DeepSeek is the only cross-family reader in either
 workflow** — the step-7 judge lane on the build side and `audit-refuter` on the
 audit side. Weight accordingly: Terra/Alpha agreement is same-family agreement,
 not corroboration, and a DeepSeek-only rejection is the one finding no other lane
-in the run could have produced. The authoring role uses Sol, never Terra.
+in the run could have produced. The mathematical authoring role uses Sol, never
+Terra, with one owner-directed Step-10 exception (2026-08-21): Tau may rewrite
+only an exact Sigma rendering/parsing finding in place. It may not remove or
+weaken mathematical content, its whole-tree diff is mechanically guarded, and
+every changed mathematical item returns to the DeepSeek+Terra pair before
+Sigma's final render adjudication. Terra self-review is not corroboration;
+DeepSeek remains the cross-family judge.
 Read-only is enforced per runner, never by asking: `--sandbox read-only` on
 Codex, tool-lessness by transport on DeepSeek, and — if a claude role is ever
 re-added — an `--allowed-tools` allow list on the claude runner.
@@ -299,7 +306,7 @@ verdicts — stay append-only evidence and never satisfy current coverage.
 
 - Record a paired pass in `verification.judge` only when **both** models actually
   pass the text — written mechanically by `apply-judge-stamps.mjs`, which the
-  engine's `judge-stamps` gate at 10-commit enforces (an adjudicated rejection
+  engine's `judge-stamps` gate at `10-stamps-v2`/`10-close-v2` enforces (an adjudicated rejection
   never stamps); commit the full verdict ledger at `research/<run>-judge.jsonl`
   and compare the two models' findings at step 10 / A10. A proof refuted or
   repaired more than once escalates per `WORKFLOW.md` §"Twice-touched proofs".

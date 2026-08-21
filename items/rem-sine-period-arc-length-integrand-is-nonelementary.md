@@ -19,10 +19,6 @@ external_dependency:
   necessity: "The exact length is proved locally, while the design also requires an honest record that this elliptic integral is not elementary; separating the sourced statement avoids pretending to develop differential algebra."
 verification:
   precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-21
 sources:
   scraped: []
   references:

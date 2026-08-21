@@ -109,8 +109,13 @@ separates points is uniformly dense.
 
 ## homotopy-and-covering-spaces
 
-Homotopy is a continuous deformation of one map into another, and homotopy equivalence is
-the coarser notion of sameness that keeps holes and forgets geometry. Loops at a point form
-the fundamental group; covering spaces lift paths and homotopies uniquely, which is what
-computes that group; and the covering of the circle by the line gives the first
-non-trivial answer, the integers.
+Homotopy deforms maps continuously, and based loops form the fundamental group. Covering
+maps lift paths and homotopies uniquely; universal-cover quotients then classify connected
+coverings by conjugacy classes of subgroups. Normal subgroups characterize regular
+coverings, and normalizer quotients compute their deck groups. For the circle this gives
+the line as universal cover and classifies every connected covering by a subgroup of
+$\mathbb Z$. The Seifert-van Kampen theorem expresses the fundamental group of an open
+union as a pushout, with compact subdivisions and homotopy grids controlling loop
+factorizations. Its consequences include simple connectedness of higher-dimensional
+spheres, free fundamental groups for finite wedges of circles, the product formula, and
+the group $\mathbb Z^2$ for the two-dimensional torus.

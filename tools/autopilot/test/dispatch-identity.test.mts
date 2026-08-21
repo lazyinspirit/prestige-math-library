@@ -60,3 +60,22 @@ test('an empty --var value leaves the generic placeholder intact instead of eras
   assert.match(out.prompt, /research\/frontier-99-batch-<i>\.pages\.json/,
     'i= (empty) erased <i> and produced research/frontier-99-batch-.pages.json');
 });
+
+test('task templates are rendered after they are appended to the prompt', () => {
+  const out = dispatch(['--role', 'reader', '--brief', brief('# Reader\n'),
+    '--task', brief('Read research/<run>-render-initial.json.\n'),
+    '--label', 'probe-task', '--run', 'frontier-99']);
+  assert.match(out.prompt, /research\/frontier-99-render-initial\.json/);
+  assert.doesNotMatch(out.prompt, /<run>/);
+});
+
+test('unsupported Codex output schemas fail locally during dry-run', () => {
+  const schema = brief(JSON.stringify({ type: 'array', uniqueItems: true, items: { type: 'string' } }));
+  const r = spawnSync(process.execPath,
+    [join(REPO, 'tools', 'dispatch.mjs'), '--role', 'reader',
+      '--brief', brief('# Reader\n'), '--label', 'bad-schema', '--run', 'frontier-99',
+      '--output-schema', schema, '--dry-run'],
+    { cwd: REPO, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 2);
+  assert.match(r.stderr, /uniqueItems is not supported/);
+});

@@ -445,12 +445,18 @@ ids rather than from prose:
 with nothing left but the owner's audit. After 9-receipt, **`9-close`** runs
 the mechanical closers (the splice refresh; the impact-receipt refresh over
 the full snapshot window, routing missing dispositions to an `impact-close`
-Alpha). The step-10 report's `--no-open` gate drives the **contract-rework
+Alpha). The `10-contract-close` `--no-open` gate drives the **contract-rework
 loop**: an open contract-quality ledger row with an owning batch dispatches
 that batch's Beta to rewrite its worksheets (contract files only — items are
 frozen), then a certifying Alpha closes the row in place; a lane blocked by a
-quota is an outage on the obligation row's clock, never a burnt round. After
-the report, **`10-commit`** — the terminal stage — re-runs the whole-level
+quota is an outage on the obligation row's clock, never a burnt round. Step 10
+then rewrites every pathway brief named by placement, captures every generated
+page through the real renderer, runs read-only Terra **Sigma**, gives exact
+findings once to Terra **Tau**, mechanically rejects scope or structural
+content loss, paired-rejudges Tau-touched mathematics, stamps verdicts, renders
+again, and requires Sigma's final approval. A final rejection stops with all
+content intact; it never licenses dropping a result or endless polishing.
+After the evidence-bound report, **`10-close-v2`** — the terminal stage — re-runs the whole-level
 receipt and judge closure, checks `<run>-obligations.jsonl` (a `block`-tier
 row must be closed or owner-accepted on the record; `report`-tier rows are
 surfaced), carries the judge closure into the frontmatter (the
@@ -1004,15 +1010,20 @@ required re-grep or re-audit caused by a repair.
 
 ## Step 10 — Final rundown and sole owner pause
 
-`tools/pathway-sync.mjs` runs first, mechanically, in the `10-report` stage. It
+After contract closure, `tools/pathway-sync.mjs` runs mechanically. It
 places every page of this level into its category's course pathway
 (`library/<cat>/_pathway.md`, SCHEMA §6.1) in the earliest part its
 prerequisites allow, and writes `research/<run>-pathway.json`. It never edits a
-brief. The rundown reports what it placed, the parts whose briefs now cover
-material they do not mention, and any category still owed a pathway file; the
-brief sentences are an owner decision, and this pause is where they are asked
-for. `pathcheck` then runs as a repo-wide gate, so a level cannot close with a
-published page missing from its reading order.
+brief. `pathway-closure.mjs` seeds one exact obligation per affected section;
+Lead Alpha rewrites each stale section as a coherent whole before `pathcheck`
+and `prosecheck` pass. Pathway prose is workflow-owned closure, not an owner
+to-do.
+
+The workflow then performs the Sigma → Tau → paired-rejudge → final-Sigma lane
+described above. Sigma adjudicates only visible LaTeX, TikZ/tikz-cd, and parsed
+proof structure. Tau never has authority to delete mathematical content. The
+report is generated only after a green structured publication-readiness receipt
+and must copy its definitive verdict.
 
 Full report: added/deleted in-flight results; forward references present; paired
 judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Terra
@@ -1035,8 +1046,8 @@ concise; no fatal defect may be omitted. Beta audit ledgers, the Alpha ledger,
 judge verdict log, touch ledger, and the Alpha adjudication ledger are the
 evidence sources.
 
-This is the **only owner pause** in the per-level build. Stop for the
-owner here, short of owner audit, publication, commit, or push.
+This is the **only owner pause** in the per-level build. The engine commits the
+closed draft run first; stop short of owner audit, status changes, and push.
 
 ---
 

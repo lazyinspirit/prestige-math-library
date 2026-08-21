@@ -5,7 +5,7 @@
 //   node tools/apply-judge-stamps.mjs --ledger research/audit/wave0-judge.jsonl \
 //     --manifests research/audit/wave0-a.pages.json,... [--apply] [--report out.json]
 //
-// `--verify` is the engine's GATE mode (the `judge-stamps` gate at 10-commit):
+// `--verify` is the engine's GATE mode (the `judge-stamps` gate at 10-close):
 // change nothing, exit 1 unless the frontmatter already carries every stamp the
 // ledger licenses — and no pass block the current verdicts contradict. At
 // closure `level-coverage --verify-current-context` has already passed, so an
@@ -203,6 +203,19 @@ for (const id of ids) {
     continue;
   }
   const text = readFileSync(file, 'utf8');
+  // `proved_here: false` is an explicit record that this library supplies no
+  // proof. The paired lanes may still have checked citation fidelity and the
+  // honesty of that boundary, but `verification.judge` means a local proof
+  // passed. Never manufacture that claim. A stale block written by an older
+  // version is mechanically removed in apply mode and is a hard error in
+  // verify mode until that repair has happened.
+  if (/^proved_here:\s*false\s*$/m.test(text)) {
+    const stale = judgeBlockRe.test(text);
+    if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
+    if (stale && verify) problems.push(`${id}: a judge block sits on recorded-not-proved material`);
+    result.skipped.push({ id, reason: 'recorded-not-proved', ...(stale ? { stripped_stale_pass: apply } : {}) });
+    continue;
+  }
   const target = targeted.get(id);
   if (target && attestedItemHash(text) !== target.item_sha256) {
     result.skipped.push({ id, reason: 'item-hash-changed-since-targeted-rejudge' });
@@ -282,7 +295,7 @@ const byReason = {};
 for (const s of result.skipped) byReason[s.reason] = (byReason[s.reason] ?? 0) + 1;
 if (verify) {
   const missing = result.stamped.filter((s) => s.changed).length;
-  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${problems.length} problem(s)`);
+  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${byReason['recorded-not-proved'] ?? 0} recorded-not-proved, ${problems.length} problem(s)`);
   for (const p of problems) console.error(`ERROR ${p}`);
   if (reportPath) {
     result.problems = problems;

@@ -148,12 +148,15 @@ of the derivative and the sign of the second derivative.
 
 ## the-riemann-integral
 
-The integral is built from upper and lower Darboux sums, and integrability is the statement that the
-two meet. The criterion is proved and the standard classes of integrable function established, then
-the linearity, additivity and order properties, and the form of the fundamental theorem that
-ordinary calculation uses. Improper integrals extend the definition past bounded functions and
-bounded intervals, and integration against a function of bounded variation extends it in the other
-direction.
+Upper and lower Darboux sums define Riemann integrability and yield its linearity, additivity,
+order properties, standard integrable classes, and the fundamental theorem of calculus.
+Improper integrals extend integration to unbounded functions and intervals, while
+Riemann-Stieltjes integration uses integrators of bounded variation. Gauge integration replaces
+a uniform mesh bound by a positive radius depending on the tag; Cousin's lemma guarantees fine
+tagged partitions. The Henstock-Kurzweil integral contains the Riemann integral, satisfies a
+Cauchy criterion, subinterval additivity, and the Saks-Henstock estimate, and integrates every
+derivative to its endpoint increment. Its compact and noncompact forms support integration by
+parts, substitution, comparison tests, and Hake extension across a finite missing endpoint.
 
 ## sequences-of-functions
 
@@ -175,19 +178,27 @@ describe the same functions.
 
 ## several-variables
 
-Calculus in several variables begins with the norm, because that is what turns the earlier limit
-arguments into arguments in Rⁿ. The total derivative is the linear map that approximates a function
-near a point, and from it come the chain rule, the equality of mixed partials, Taylor's formula and
-the classification of extrema. The inverse and implicit function theorems say when a system can be
-solved locally, and the Riemann integral over Jordan measurable sets, with Fubini and the change of
-variables formula, is how integration follows.
+Norms support limits in $\mathbb R^n$, and total derivatives lead to the chain rule, mixed
+partials, Taylor formulas, extrema, and inverse and implicit functions. Higher regularity,
+regular loci, proper local diffeomorphisms, orientation, and vanishing derivatives refine the
+local theory. Jordan integration, Fubini, and change of variables extend through compact
+exhaustions to improper multiple integrals; domination permits parameter limits and
+differentiation, and polar coordinates evaluate the Gaussian integral. Convexity is developed
+through epigraphs, Jensen's inequality, local Lipschitz bounds, separation, subgradients,
+Hessians, and semicontinuous extrema. For differential equations, the Volterra formulation and
+Picard contraction give local existence and uniqueness, Gronwall gives stability, maximal
+solutions obey an escape alternative, and Euler polygons and Osgood's condition separate
+existence from uniqueness under weaker hypotheses.
 
 ## curves-and-the-fundamental-theorems
 
-A path has a length when its inscribed polygons have a bounded supremum, which is bounded variation
-read geometrically, and the classical functions are what make the standard curves available. The
-fundamental theorems are proved here in their sharp forms, with the exceptional sets, the
-one-sided derivatives and the hypotheses for differentiating under the integral sign stated
-explicitly. Line integrals and the gradient theorem carry the same idea into Rⁿ, the equivalent
-characterisations of pi are shown to agree, and the complex exponential ties the exponential and the
-trigonometric functions together.
+Path length is the supremum of inscribed polygonal lengths, a geometric form of bounded
+variation. Sharp fundamental theorems account for exceptional sets and one-sided derivatives;
+line integrals, the gradient theorem, and differentiation under the integral sign extend the
+calculus of paths. Jordan content gives translation-invariant area, the disc formula $\pi r^2$,
+base-height and determinant formulas for parallelograms and triangles, and triangulation and
+shoelace formulas for simple polygons. Power-series trigonometry connects the equivalent
+characterisations of $\pi$ with the complex exponential. Uniform trigonometric series also
+produce the classical nowhere-differentiable Weierstrass function, while the continuous
+Riemann-Lebesgue lemma and finite sine-harmonic identities control oscillation in integrals and
+series.

@@ -43,7 +43,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // in-flight items as needed"). Step 9 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['6b-adjudicate', '6c-cross', '8-adjudicate', '8-rejudge', '9-scope', '10-report']) {
+  for (const id of ['6b-adjudicate', '6c-cross', '8-adjudicate', '8-rejudge', '9-scope', '10-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
@@ -56,7 +56,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
 test('prosecheck and depsource run at every repo-wide gate point', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5-author', '6c-cross', '9-scope', '10-report']) {
+  for (const id of ['5-author', '6c-cross', '9-scope', '10-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))

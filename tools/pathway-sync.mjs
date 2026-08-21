@@ -147,13 +147,57 @@ function writeInsertions(pw, additions, level) {
   writeFileSync(pw.file, lines.join('\n'));
 }
 
+let previousRunReceipt = null;
+if (run) {
+  try {
+    const old = JSON.parse(readFileSync(join(REPO, 'research', `${run}-pathway.json`), 'utf8'));
+    if (old.run === run) previousRunReceipt = old;
+  } catch { /* first run */ }
+}
+
 const receipt = {
   run: run ?? null,
-  placed,
-  briefsToRevisit: touched,
+  // Placement is idempotent in the tree: on a replay every already-inserted
+  // page disappears from `missing`, so a fresh `placed: []` would erase the
+  // run's durable placement history. Merge by page identity instead.
+  placed: carryForwardPlaced(placed),
+  // A rerun after placement sees no `missing` pages. Before this carry-forward
+  // rule that meant it overwrote the original obligations with `[]`, erasing
+  // the exact pathway briefs step 10 still owed. Keep same-run obligations
+  // until the pathway-closure receipt says Lead Alpha rewrote them.
+  briefsToRevisit: carryForwardBriefs(touched),
   categoriesWithoutPathway: owed,
   unplaceable: stuck,
 };
+
+function carryForwardBriefs(current) {
+  if (!run) return current;
+  const previous = Array.isArray(previousRunReceipt?.briefsToRevisit)
+    ? previousRunReceipt.briefsToRevisit : [];
+  let closed = new Set();
+  try {
+    const closure = JSON.parse(readFileSync(join(REPO, 'research', `${run}-pathway-closure.json`), 'utf8'));
+    closed = new Set((closure.briefs ?? []).filter((r) => r.status === 'closed')
+      .map((r) => `${r.category}\0${r.part}`));
+  } catch { /* closure has not started */ }
+  const merged = new Map();
+  for (const row of [...previous, ...current]) {
+    const key = `${row.category}\0${row.part}`;
+    if (closed.has(key)) continue;
+    const prior = merged.get(key);
+    merged.set(key, { category: row.category, part: row.part,
+      gained: [...new Set([...(prior?.gained ?? []), ...(row.gained ?? [])])] });
+  }
+  return [...merged.values()];
+}
+
+function carryForwardPlaced(current) {
+  if (!run) return current;
+  const previous = Array.isArray(previousRunReceipt?.placed) ? previousRunReceipt.placed : [];
+  const merged = new Map();
+  for (const row of [...previous, ...current]) merged.set(`${row.category}\0${row.page}`, row);
+  return [...merged.values()];
+}
 if (run && !dryRun) {
   const dir = join(REPO, 'research');
   writeFileSync(join(dir, `${run}-pathway.json`), JSON.stringify(receipt, null, 2) + '\n');
@@ -170,7 +214,9 @@ if (asJson) {
     console.log(`OWED    ${o.category} has ${o.pages} published pages and no _pathway.md`);
   for (const s of stuck)
     console.log(`STUCK   ${s.category}: ${s.reason}`);
-  console.log(`${placed.length} placed, ${touched.length} ${touched.length === 1 ? 'brief' : 'briefs'} to revisit, ${owed.length} ${owed.length === 1 ? 'category' : 'categories'} without a pathway${dryRun ? ' (dry run, nothing written)' : ''}`);
+  const retained = run && !dryRun
+    ? `; receipt retains ${receipt.placed.length} placement(s) and ${receipt.briefsToRevisit.length} open brief obligation(s)` : '';
+  console.log(`${placed.length} newly placed, ${touched.length} newly touched ${touched.length === 1 ? 'brief' : 'briefs'}, ${owed.length} ${owed.length === 1 ? 'category' : 'categories'} without a pathway${retained}${dryRun ? ' (dry run, nothing written)' : ''}`);
 }
 
 // The sync is not the gate. Fail loudly only when it could not do its job.

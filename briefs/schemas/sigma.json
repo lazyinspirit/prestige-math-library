@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run", "phase", "adjudicator", "capture_manifest", "capture_manifest_sha256", "pages_reviewed", "findings", "approved", "summary"],
+  "properties": {
+    "schema": {"type": "integer", "const": 1},
+    "run": {"type": "string"},
+    "phase": {"enum": ["initial", "final"]},
+    "adjudicator": {"type": "string", "const": "Sigma"},
+    "capture_manifest": {"type": "string"},
+    "capture_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pages_reviewed": {"type": "array", "items": {"type": "string"}},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["finding_id", "type", "severity", "page", "item", "source_file", "evidence", "repair", "content_preserved"],
+        "properties": {
+          "finding_id": {"type": "string", "pattern": "^S-[0-9]{3}$"},
+          "type": {"enum": ["latex", "tikz", "proof-parsing"]},
+          "severity": {"enum": ["publication-blocking"]},
+          "page": {"type": "string"},
+          "item": {"type": ["string", "null"]},
+          "source_file": {"type": "string"},
+          "evidence": {"type": "string", "minLength": 1},
+          "repair": {"type": "string", "minLength": 1},
+          "content_preserved": {"type": "boolean", "const": true}
+        }
+      }
+    },
+    "approved": {"type": "boolean"},
+    "summary": {"type": "string", "minLength": 1}
+  }
+}

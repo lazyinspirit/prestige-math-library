@@ -25,7 +25,13 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-A complex line integral is built from Riemann-Stieltjes integrals along a rectifiable path,
-with the ML estimate bounding it by length times sup. Goursat's theorem gives a vanishing
-integral over a triangle with no hypothesis on the derivative beyond its existence, and on
-a convex domain that produces a primitive, hence Cauchy's theorem.
+Complex line integrals are built from Riemann-Stieltjes integrals along rectifiable paths,
+with the ML estimate bounding an integral by path length times a supremum. Goursat's
+triangle theorem gives primitives and Cauchy's theorem on convex domains, while Cauchy's
+circle formulas recover all derivatives and yield Taylor expansion, zero factorization,
+and coefficient estimates. These estimates imply Liouville's theorem, polynomial rigidity
+under algebraic growth, and the Liouville proof of the fundamental theorem of algebra.
+Morera's triangle criterion gives a converse to holomorphy, and concentric-disc estimates
+control locally uniform limits and holomorphic series together with their derivatives.
+Finite parameter integrals remain holomorphic; the same circle formulas give the
+mean-value property and density of the image of every nonconstant entire function.

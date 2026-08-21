@@ -84,7 +84,7 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
 
   r = run(dir, '--verify');
   assert.equal(r.status, 0, r.stderr);
-  assert.match(r.stdout, /1 stamped current, 0 lane-rejected, 0 problem\(s\)/);
+  assert.match(r.stdout, /1 stamped current, 0 lane-rejected, 0 recorded-not-proved, 0 problem\(s\)/);
 
   // idempotent: a re-apply on the same day rewrites nothing
   r = run(dir, '--apply', '--report', 'research/stamps.json');
@@ -120,7 +120,37 @@ test('a lane rejection never stamps; a stale pass block fails verify and is stri
 
   r = run(dir, '--verify');
   assert.equal(r.status, 0, 'an honest lane-rejected skip passes the gate');
-  assert.match(r.stdout, /0 stamped current, 1 lane-rejected, 0 problem\(s\)/);
+  assert.match(r.stdout, /0 stamped current, 1 lane-rejected, 0 recorded-not-proved, 0 problem\(s\)/);
+});
+
+test('recorded-not-proved material is never stamped and an old stamp is stripped', () => {
+  const dir = fixture(['itm-unproved']);
+  const seeded = itemText('itm-unproved')
+    .replace('status: draft\n', 'status: draft\nproved_here: false\n')
+    .replace('  precheck: pass\n',
+      '  precheck: n/a\n  judge:\n    model: "deepseek-v4-pro + gpt-5.6-terra"\n    verdict: pass\n    date: 2026-08-01\n');
+  writeFileSync(join(dir, 'items', 'itm-unproved.md'), seeded);
+  const h = itemHashJudge(seeded);
+  writeLedger(dir, [
+    ledgerRow('itm-unproved', LANES[0], true, h),
+    ledgerRow('itm-unproved', LANES[1], true, h),
+  ]);
+
+  let r = run(dir, '--verify');
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /judge block sits on recorded-not-proved material/);
+
+  r = run(dir, '--apply', '--report', 'research/stamps.json');
+  assert.equal(r.status, 0, r.stderr);
+  assert.ok(!/ {2}judge:/.test(readFileSync(join(dir, 'items', 'itm-unproved.md'), 'utf8')),
+    'the misleading proof-pass stamp is stripped without touching the body');
+  const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
+  assert.equal(receipt.skipped[0].reason, 'recorded-not-proved');
+  assert.equal(receipt.skipped[0].stripped_stale_pass, true);
+
+  r = run(dir, '--verify');
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /1 recorded-not-proved, 0 problem\(s\)/);
 });
 
 test('clause (a) still reaches a pair-context match through the lazy spawn; a truly stale verdict is a gate failure', () => {

@@ -56,10 +56,11 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
-import { join } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { homedir } from 'node:os';
 import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
+import { validateCodexOutputSchema } from './codex-output-schema.mjs';
 
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
 const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
@@ -240,6 +241,13 @@ const ROLES = Object.freeze({
   // mathematical decision, it is not this lane's.
   mechanic:     { runner: 'codex',  model: TERRA_MODEL, sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by Terra' },
 
+  // STEP 10 ONLY (owner amendment, 2026-08-21). Sigma is the read-only visual
+  // adjudicator. Tau has the narrow authority to repair only findings named by
+  // Sigma; its edits are mechanically scope-checked and mathematical item edits
+  // return to the DeepSeek+Terra paired judges before Sigma reads the final render.
+  sigma:        { runner: 'codex',  model: TERRA_MODEL, sandbox: 'read-only',       effort: 'xhigh', cap: 1, why: 'final visual rendering and proof-parsing adjudicator; never edits' },
+  tau:          { runner: 'codex',  model: TERRA_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'step-10 repairer limited to exact Sigma findings; all mathematical edits are rejudged' },
+
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
   // Every Codex audit lane receives the explicit xhigh/1M configuration below;
   // the tool-less DeepSeek refuter maps xhigh to its API's `max` value.
@@ -254,6 +262,7 @@ const asJson = argv.includes('--json');
 const dryRun = argv.includes('--dry-run');
 const option = (name) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
 const options = (name) => argv.reduce((acc, arg, i) => (arg === name && argv[i + 1] ? [...acc, argv[i + 1]] : acc), []);
+const resolveFile = (p) => (existsSync(p) ? p : join(REPO, p));
 
 // --check-read-only: assert that every role declaring `sandbox: 'read-only'`
 // actually gets a mechanical guarantee on its own runner, and print the exact
@@ -288,6 +297,9 @@ const briefPath = option('--brief');
 const label = option('--label');
 const run = option('--run');
 const taskPath = option('--task');
+const imagePaths = options('--image').flatMap((value) => value.split(',')).map((s) => s.trim()).filter(Boolean);
+const outputSchemaPath = option('--output-schema');
+const resultArtifactPath = option('--result-artifact');
 const timeoutSec = Number(option('--timeout') ?? 7200);
 const covers = option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [];
 
@@ -305,12 +317,30 @@ if (!label || !/^[A-Za-z0-9._-]+$/.test(label)) usage('--label is required and m
 if (!run || !/^[A-Za-z0-9._-]+$/.test(run)) usage('--run is required and must be a plain name');
 if (!Number.isFinite(timeoutSec) || timeoutSec <= 0) usage('--timeout must be a positive number of seconds');
 if (!existsSync(join(REPO, briefPath)) && !existsSync(briefPath)) usage(`brief not found: ${briefPath}`);
+for (const image of imagePaths) if (!existsSync(resolveFile(image))) usage(`image not found: ${image}`);
+if (outputSchemaPath) {
+  if (!existsSync(resolveFile(outputSchemaPath))) usage(`output schema not found: ${outputSchemaPath}`);
+  try {
+    const schema = JSON.parse(readFileSync(resolveFile(outputSchemaPath), 'utf8'));
+    const problems = validateCodexOutputSchema(schema);
+    if (problems.length) usage(`invalid Codex output schema ${outputSchemaPath}: ${problems.join('; ')}`);
+  } catch (error) {
+    if (error?.name === 'SyntaxError') usage(`output schema is not valid JSON: ${outputSchemaPath} (${error.message})`);
+    throw error;
+  }
+}
+if (resultArtifactPath) {
+  const target = resolve(REPO, resultArtifactPath);
+  const rel = relative(REPO, target);
+  if (rel.startsWith('..') || rel === '' || !rel.startsWith(`research/`)) {
+    usage('--result-artifact must name a file below research/');
+  }
+}
 
 const spec = ROLES[role];
 
 // ---- prompt ------------------------------------------------------------------
 
-const resolveFile = (p) => (existsSync(p) ? p : join(REPO, p));
 let prompt = readFileSync(resolveFile(briefPath), 'utf8');
 
 // Briefs are templates carrying <n>/<i> placeholders ("Copy into a Beta-n-i
@@ -323,14 +353,6 @@ const vars = new Map(options('--var').map((pair) => {
 }));
 vars.set('run', run);
 if (covers.length) vars.set('covers', covers.join(','));
-// An EMPTY value means "not pinned", never "erase the placeholder": the engine
-// passes --var i={unit} with unit='' on every multi-batch dispatch, and
-// replacing a deliberately generic <i> ("each batch") with '' turned
-// research/<run>-batch-<i>.pages.json into a path that does not exist.
-for (const [key, value] of vars) {
-  if (value === '') continue;
-  prompt = prompt.replaceAll(`<${key}>`, value);
-}
 
 // A tool-less runner cannot open a file, so a brief that says "read the item on
 // disk" produces a confident reading of nothing. The task file IS the context
@@ -352,6 +374,16 @@ if (taskPath) {
   prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n\n${readFileSync(resolveFile(taskPath), 'utf8')}`;
 } else {
   prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n`;
+}
+
+// Render the complete assembled prompt, including the task. An EMPTY value
+// means "not pinned", never "erase the placeholder": the engine passes
+// --var i={unit} with unit='' on every multi-batch dispatch, and replacing a
+// deliberately generic <i> ("each batch") with '' turned
+// research/<run>-batch-<i>.pages.json into a path that does not exist.
+for (const [key, value] of vars) {
+  if (value === '') continue;
+  prompt = prompt.replaceAll(`<${key}>`, value);
 }
 
 // A leftover `<n>` is a real defect: the level identity must be concrete, and
@@ -386,6 +418,7 @@ if (!dryRun) mkdirSync(outDir, { recursive: true });
 const logPath = join(outDir, `${role}-${label}.log`);
 const resultPath = join(outDir, `${role}-${label}.result.json`);
 const promptPath = join(outDir, `${role}-${label}.prompt.md`);
+const lastMessagePath = join(outDir, `${role}-${label}.last-message.json`);
 
 // ---- the command -------------------------------------------------------------
 
@@ -414,6 +447,9 @@ const buildCodex = (temporaryHome) => [
     // seven of which evaporated once someone with a working fetch looked.
     ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
     '--sandbox', spec.sandbox,
+    ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
+    ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
+    ...(resultArtifactPath ? ['--output-last-message', lastMessagePath] : []),
     '--skip-git-repo-check',
     '--cd', REPO,
     '-',
@@ -643,6 +679,22 @@ const result = spec.runner === 'deepseek'
 release();
 persistRotatedCodexAuth();
 if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort */ } }
+
+// Sigma is read-only, so the dispatcher—not the model—materialises its
+// schema-constrained final response. This keeps the adjudicator unable to edit
+// the evidence it is judging while still giving the next gate a durable JSON
+// receipt. A missing or malformed final message turns the dispatch red.
+if (resultArtifactPath && result.code === 0 && !result.timedOut) {
+  try {
+    const parsed = JSON.parse(readFileSync(lastMessagePath, 'utf8'));
+    const target = resolve(REPO, resultArtifactPath);
+    mkdirSync(dirname(target), { recursive: true });
+    writeFileSync(target, JSON.stringify(parsed, null, 2) + '\n');
+  } catch (error) {
+    result.code = 1;
+    result.stderr += `\nresult artifact was not valid JSON: ${error?.message ?? error}`;
+  }
+}
 
 const ended = new Date();
 const record = {
