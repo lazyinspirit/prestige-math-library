@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-convex-and-strictly-convex-functions-on-euclidean-sets, def-subgradient-and-subdifferential, thm-convex-functions-have-subgradients-at-interior-points, thm-cauchy-schwarz-and-the-euclidean-norm, def-p-norms-on-rn]
+deps: [def-convex-and-strictly-convex-functions-on-euclidean-sets, def-subgradient-and-subdifferential, thm-convex-functions-have-subgradients-at-interior-points, thm-cauchy-schwarz-and-the-euclidean-norm, def-p-norms-on-rn, def-axiom-of-choice, def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
@@ -28,11 +28,11 @@ Every convex real-valued function on a closed convex domain has a subgradient at
 
 ## Facts & Assumptions
 
-**Given:** Let $B=\{x\in\mathbb R^n:\|x\|_2\le1\}$ for $n\ge1$ ([[def-p-norms-on-rn]]) and define $f(x)=-\sqrt{1-\|x\|_2^2}$ on $B$, with convexity as in [[def-convex-and-strictly-convex-functions-on-euclidean-sets]].
+**Given:** Let $B=\{x\in\mathbb R^n:\|x\|_2\le1\}$ for $n\ge1$ ([[def-p-norms-on-rn]]) and define $f(x)=-\sqrt{1-\|x\|_2^2}$ on $B$, with convexity as in [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. For the comparison with the interior-point theorem, assume the Axiom of Choice and the Axiom of Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]).
 
 [F1] A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\ge f(a)+\langle v,y-a\rangle$ for every $y$ in the domain ([[def-subgradient-and-subdifferential]]).
 
-[L1] A convex function has nonempty subdifferential at every interior point of its domain ([[thm-convex-functions-have-subgradients-at-interior-points]]).
+[L1] Assuming the Axiom of Choice and the Axiom of Countable Choice, a convex function has nonempty subdifferential at every interior point of its domain ([[thm-convex-functions-have-subgradients-at-interior-points]]).
 
 [L2] The Euclidean norm is a norm on $\mathbb R^n$ and satisfies the triangle inequality ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
 

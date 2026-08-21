@@ -50,6 +50,8 @@ parts:
       - the-fundamental-group
       - covering-spaces-and-lifting
       - the-fundamental-group-of-the-circle
+      - the-seifert-van-kampen-theorem
+      - classification-of-covering-spaces
 ---
 
 ## metric-spaces

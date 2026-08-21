@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ f281a8b7fdd9 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 18a2b7d5b8eb by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 776 |
-| now mechanically prevented | 217 |
+| defects caught before publication | 879 |
+| now mechanically prevented | 219 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -107,27 +107,30 @@
 | citation-truncated |  |  | 1 |  |  |  |
 | invalid-witness |  |  |  |  | 1 |  |
 
-## frontier-16 — 170 row(s)
+## frontier-16 — 273 row(s)
 
-| subclass | 6a-read | 6b-adjudicate |
-|---|---|---|
-| citation-missing | 42 | 7 |
-| citation-truncated | 15 | 7 |
-| missing-hypothesis | 17 | 1 |
-| invalid-inference | 15 | 1 |
-| citation-inflated | 10 | 2 |
-| false-boundary-disposition | 10 | 2 |
-| false-or-overstrong-title | 9 |  |
-| citation-misattributed | 6 | 2 |
-| missing-choice-scope | 2 | 4 |
-| undefined-notation | 5 |  |
-| false-or-overstrong-statement | 4 |  |
-| other | 2 |  |
-| arithmetic-error | 2 |  |
-| invalid-witness | 2 |  |
-| citation-corrupted | 1 |  |
-| ill-typed-construction | 1 |  |
-| thin-harvest |  | 1 |
+| subclass | 5-author | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate | 8-rejudge | 9-scope |
+|---|---|---|---|---|---|---|---|
+| citation-missing |  | 42 | 7 | 2 |  | 2 |  |
+| citation-inflated |  | 10 | 2 |  | 37 | 2 |  |
+| citation-truncated |  | 15 | 7 |  | 4 | 11 |  |
+| invalid-inference |  | 15 | 1 |  | 7 | 2 |  |
+| missing-hypothesis |  | 17 | 1 |  | 3 |  |  |
+| false-boundary-disposition | 2 | 10 | 2 |  |  |  |  |
+| ill-typed-construction |  | 1 |  |  | 12 | 1 |  |
+| undefined-notation |  | 5 |  |  | 5 | 2 |  |
+| false-or-overstrong-title |  | 9 |  |  | 2 |  |  |
+| false-or-overstrong-statement |  | 4 |  |  | 3 |  | 1 |
+| citation-misattributed |  | 6 | 2 |  |  |  |  |
+| missing-choice-scope |  | 2 | 4 |  |  |  |  |
+| invalid-witness |  | 2 |  |  | 2 |  |  |
+| other |  | 2 |  |  |  |  |  |
+| arithmetic-error |  | 2 |  |  |  |  |  |
+| citation-corrupted |  | 1 |  |  |  |  |  |
+| thin-harvest |  |  | 1 |  |  |  |  |
+| gate-vacuous | 1 |  |  |  |  |  |  |
+| deferral-without-destination |  |  |  |  |  |  | 1 |
+| false-decline |  |  |  |  |  |  | 1 |
 
 ## pre-frontier-13 — 3 row(s)
 

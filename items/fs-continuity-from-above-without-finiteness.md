@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [prop-counting-measure-is-a-measure, thm-continuity-from-above-for-measures, def-nat-order, lem-nat-discrete]
+deps: [def-counting-measure, prop-counting-measure-is-a-measure, thm-continuity-from-above-for-measures, def-nat-order, lem-nat-add-cancellative, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,11 +30,11 @@ pipeline_run: null
 
 **Given:** Counting measure $\#$ on $\mathbb N$ and the tails $E_k:=\{n\in\mathbb N:k\le n\}$.
 
-[L1] Counting measure is a measure and assigns $+\infty$ to every infinite set ([[prop-counting-measure-is-a-measure]]).
+[L1] Counting measure assigns $+\infty$ to every infinite set ([[def-counting-measure]]) and is a measure ([[prop-counting-measure-is-a-measure]]).
 
 [L2] Continuity from above is proved when one member of the decreasing sequence has finite measure ([[thm-continuity-from-above-for-measures]]).
 
-[L3] The natural order is defined by $m\le n$ exactly when $m+k=n$ for some natural $k$ ([[def-nat-order]]), and $k<k+1$ ([[lem-nat-discrete]]).
+[L3] The natural order is defined by $m\le n$ exactly when $m+k=n$ for some natural $k$ ([[def-nat-order]]), natural addition is cancellative ([[lem-nat-add-cancellative]]), and $k<k+1$ ([[lem-nat-discrete]]).
 
 ## Refutation
 
@@ -47,4 +47,3 @@ pipeline_run: null
 1.3 The intersection is empty: if $n$ belonged to every tail, it would belong to $E_{n+1}$, which would say $n+1\le n$, contrary to discreteness of the natural order. [given, L3]
 
 2.1 Thus $\#(\bigcap_kE_k)=\#(\varnothing)=0$ but $\inf_k\#(E_k)=+\infty$. This refutes the claim and shows why [L2] cannot be applied: no tail has finite counting measure. [step 1.2, step 1.3, L1, L2] ∎
-

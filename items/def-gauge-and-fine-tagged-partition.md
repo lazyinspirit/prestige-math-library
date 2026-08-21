@@ -5,7 +5,7 @@ title: "Gauges and gauge-fine tagged partitions of a compact interval"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-tagged-partition-and-riemann-sum, def-interval]
 justified_by: []
@@ -36,4 +36,4 @@ $$[x_{i-1},x_i]\subset(\xi_i-\delta(\xi_i),\xi_i+\delta(\xi_i))$$
 
 for every $i$. Its Riemann sum is $S(f,P)=\sum_{i=1}^m f(\xi_i)(x_i-x_{i-1})$.
 
-When $a=b$, the single degenerate tagged cell $([a,a],a)$ is declared a fine tagged partition for every gauge, and its Riemann sum is $0$. A **fine partial tagged partition** is any finite pairwise interior-disjoint family of tagged cells satisfying the same containment condition; the empty family is allowed and has sum $0$.
+When $a=b$, the single degenerate tagged cell $([a,a],a)$ is declared a fine tagged partition for every gauge, and its Riemann sum is $0$. A **fine partial tagged partition** is any finite pairwise interior-disjoint family of cells $([u_j,v_j],\xi_j)$ with $[u_j,v_j]\subseteq[a,b]$, $u_j\le v_j$, and $\xi_j\in[u_j,v_j]$, each satisfying the same gauge-containment condition. The empty family is allowed and has sum $0$.

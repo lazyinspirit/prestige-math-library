@@ -5,7 +5,7 @@ title: "Cauchy estimates on a smaller concentric disc"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [thm-cauchy-integral-formula-higher-derivatives, cor-ml-estimate-for-complex-line-integrals, thm-circle-circumference-diameter-ratio-is-pi, lem-complex-conjugation-and-modulus-laws]
 justified_by: []
@@ -30,8 +30,6 @@ pipeline_run: null
 Let $0\le r<R<S$, let $f$ be holomorphic on $D(a,S)$, and suppose $M\ge0$ satisfies $|f(\zeta)|\le M$ whenever $|\zeta-a|=R$. If $n\in\mathbb N$ and $|z-a|\le r$, then
 
 $$|f^{(n)}(z)|\le\frac{n!RM}{(R-r)^{n+1}}.$$
-
-If $0\le r<R$, $M$ bounds $|f|$ on $|\zeta-a|=R$, and $|z-a|\le r$, then $|f^{(n)}(z)|\le n!RM/(R-r)^{n+1}$.
 
 ## Facts & Assumptions
 

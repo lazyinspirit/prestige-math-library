@@ -17,7 +17,9 @@ deps: [thm-classification-of-connected-covering-spaces,
        lem-open-quotient-arcs-in-real-line-mod-integers,
        thm-convex-subsets-have-trivial-fundamental-group,
        def-locally-connected, def-semilocally-simply-connected-space,
-       thm-induced-fundamental-group-map-functoriality]
+       thm-induced-fundamental-group-map-functoriality,
+       prop-local-path-connectedness-lifts-and-descends-along-coverings,
+       thm-connected-and-locally-path-connected-implies-path-connected]
 justified_by: []
 aliases: []
 landmark: true
@@ -52,7 +54,7 @@ For $n\ge1$ the corresponding covering has $n$ sheets. The case $n=0$ is the inf
 
 [F2] Every subgroup of $(\mathbb Z,+)$ is $n\mathbb Z$ for exactly one natural number $n$ ([[lem-subgroups-of-z-are-cyclic]]).
 
-[F3] The number of sheets of a connected covering is the index of its induced subgroup, with both finite or both infinite ([[thm-sheets-equal-fundamental-group-index]]).
+[F3] For a covering with nonempty path-connected total space, the number of sheets is the index of its induced subgroup, with both finite or both infinite ([[thm-sheets-equal-fundamental-group-index]]).
 
 [F4] The additive group of $\mathbb Z$ is abelian ([[thm-int-comm-ring]]).
 
@@ -70,6 +72,10 @@ For $n\ge1$ the corresponding covering has $n$ sheets. The case $n=0$ is the inf
 
 [F11] A pointed homeomorphism induces a fundamental-group isomorphism ([[thm-induced-fundamental-group-map-functoriality]]).
 
+[F12] Local path-connectedness lifts from the base of a covering to its total space ([[prop-local-path-connectedness-lifts-and-descends-along-coverings]]).
+
+[F13] A connected locally path-connected space is path-connected ([[thm-connected-and-locally-path-connected-implies-path-connected]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -78,4 +84,4 @@ For $n\ge1$ the corresponding covering has $n$ sheets. The case $n=0$ is the inf
 
 2.1 By [L1], this gives one based-isomorphism class for each $n$. Since [F4] makes every conjugate of $n\mathbb Z$ equal to itself, the same parameter gives the unbased-isomorphism classes. Conversely, [L1] realizes every $n\mathbb Z$, so both correspondences are bijections. [step 1.1, L1, F4]
 
-3.1 For $n\ge1$, [F5] and [F6] give $[\mathbb Z:n\mathbb Z]=n$, so [F3] gives $n$ sheets. For $n=0$, the subgroup is trivial, [F5] and [F6] give infinite index, and [L2] realizes this class by the real-line universal cover. At $n=1$ the index is one. [step 2.1, L2, F3, F5, F6] ∎
+3.1 Every classified covering has connected total space. Since step 1.1 establishes that the circle is locally path-connected, [F12] and [F13] make each such total space path-connected, licensing [F3]. For $n\ge1$, [F5] and [F6] give $[\mathbb Z:n\mathbb Z]=n$, so [F3] gives $n$ sheets. For $n=0$, the subgroup is trivial, [F5] and [F6] give infinite index, and [L2] realizes this class by the real-line universal cover. At $n=1$ the index is one. [step 1.1, step 2.1, L2, F3, F5, F6, F12, F13] ∎

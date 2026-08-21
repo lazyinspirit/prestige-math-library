@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-extended-series]
+deps: [def-measure, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-extended-series]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,11 +30,11 @@ $$\mu\left(\bigcup_kE_k\right)=\sum_k\mu(E_k).$$
 
 ## Facts & Assumptions
 
-**Given:** A nonempty measurable space, a point $x$, and its Dirac probability $\delta_x$.
+**Given:** The one-point measurable space $X=\{x\}$ with sigma-algebra $\mathcal P(X)$ and its Dirac probability $\delta_x$.
 
 [L1] Countable additivity in the definition of a measure applies only to pairwise disjoint sequences ([[def-measure]]).
 
-[L2] The Dirac set function at $x$ is a probability measure and assigns $1$ to $\{x\}$ ([[prop-dirac-measure-is-a-probability-measure]]).
+[L2] The Dirac set function assigns $1$ to measurable sets containing $x$ and $0$ otherwise ([[def-dirac-measure]]), and it is a probability measure ([[prop-dirac-measure-is-a-probability-measure]]).
 
 [L3] A nonnegative extended series starts at index $0$ and is the supremum of its partial sums ([[def-nonnegative-extended-series]]).
 

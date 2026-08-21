@@ -5,7 +5,7 @@ title: "The Picard operator and Picard iterates on a closed ball of continuous c
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation, def-vector-valued-derivative-and-integral, def-metric-ball, thm-recursion]
 justified_by: []
@@ -26,12 +26,12 @@ pipeline_run: null
 
 ## Definition
 
-Fix $h\ge0$, $J=[t_0-h,t_0+h]$, an initial state $x_0\in\mathbb R^n$, and a radius $r>0$. Let
+Fix $n\in\mathbb N$ with $n\ge1$, $h\ge0$, $J=[t_0-h,t_0+h]$, an initial state $x_0\in\mathbb R^n$, and a radius $r>0$. Let
 
 $$\mathcal B_r:=\{x\in C(J,\mathbb R^n):\sup_{t\in J}\|x(t)-x_0\|_2\le r\}.$$
 
-Whenever $(t,x(t))$ lies in the domain of the continuous vector field $F$, its **Picard operator** is
+Let $D_F\subseteq\mathbb R\times\mathbb R^n$ be open and let $F:D_F\to\mathbb R^n$ be continuous. The **domain of the Picard operator on $\mathcal B_r$** consists of those $x\in\mathcal B_r$ whose whole graph $\{(s,x(s)):s\in J\}$ lies in $D_F$. For such a curve, continuity makes $s\mapsto F(s,x(s))$ integrable on every interval with endpoints $t_0,t\in J$, and its **Picard image** is
 
 $$(\mathcal Tx)(t):=x_0+\int_{t_0}^{t}F(s,x(s))\,ds.$$
 
-Starting from $x^{(0)}(t):=x_0$, the **Picard iterates** are defined recursively ([[thm-recursion]]) by $x^{(m+1)}:=\mathcal T x^{(m)}$ whenever each iterate lies in the operator's domain. Every fixed point satisfies the corresponding Volterra equation. When $h>0$, it is exactly a solution of the IVP by [[prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation]]; for $h=0$ the fixed-point equation remains defined, but no derivative on the isolated one-point domain is asserted.
+The operator maps into $C(J,\mathbb R^n)$; it is a self-map of $\mathcal B_r$ only when its image is known to remain in that ball. Starting from $x^{(0)}(t):=x_0$, define $x^{(m+1)}:=\mathcal T x^{(m)}$ inductively whenever $x^{(m)}$ is defined and lies in the operator domain; if that condition first fails, no later iterate is defined. When a separate invariant-ball result makes $\mathcal T:\mathcal B_r\to\mathcal B_r$ a total self-map, [[thm-recursion]] supplies the entire sequence. Every fixed point satisfies the corresponding Volterra equation. When $h>0$, it is exactly a solution of the IVP by [[prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation]]; for $h=0$ the fixed-point equation remains defined, but no derivative on the isolated one-point domain is asserted.

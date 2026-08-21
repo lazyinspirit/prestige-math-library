@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-mixed-improper-integral, thm-comparison-test-for-improper-integrals, thm-improper-p-test-rational, lem-exponential-dominates-one-plus-x, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, lem-integral-elementary-bounds]
+deps: [def-mixed-improper-integral, thm-comparison-test-for-improper-integrals, thm-substitution-for-improper-integrals, thm-improper-p-test-rational, lem-exponential-dominates-one-plus-x, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, thm-continuous-implies-integrable, lem-integral-elementary-bounds]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,14 +42,18 @@ The integral $I=\int_{-\infty}^{\infty}e^{-x^2}\,dx$ exists as a finite positive
 
 [L6] The exponential function is strictly increasing on $\mathbb R$ ([[thm-exponential-is-strictly-increasing]]).
 
-[L7] If $m\le h(x)\le M$ on $[a,b]$, then $m(b-a)\le\int_a^bh\le M(b-a)$ ([[lem-integral-elementary-bounds]]).
+[L7] If an integrable function $h$ satisfies $m\le h(x)\le M$ on $[a,b]$, then $m(b-a)\le\int_a^bh\le M(b-a)$ ([[lem-integral-elementary-bounds]]).
+
+[L8] Every continuous function on a compact interval is Riemann integrable ([[thm-continuous-implies-integrable]]).
+
+[L9] A valid $C^1$ substitution carries a convergent improper integral to the corresponding transformed improper integral ([[thm-substitution-for-improper-integrals]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $|x|\ge1$, then [L1] and [L3] give $0<e^{-x^2}\le1/(1+x^2)\le x^{-2}$. The $p$-test [L2] and comparison [L5] make the positive tail converge, and the substitution $u=-x$ gives the identical negative-tail estimate. [L1, L2, L3, L5]
+1.1 If $|x|\ge1$, then [L1] and [L3] give $0<e^{-x^2}\le1/(1+x^2)\le x^{-2}$. The $p$-test [L2] and comparison [L5] make the positive tail converge, and the substitution $u=-x$ in [L9] gives the identical negative-tail estimate. [L1, L2, L3, L5, L9]
 
-1.2 On $[-1,1]$, [L6] gives $e^{-x^2}\ge e^{-1}>0$, so [L7] gives $\int_{-1}^1e^{-x^2}\,dx\ge2e^{-1}>0$. [L3, L6, L7]
+1.2 On $[-1,1]$, the integrand is continuous and hence integrable by [L8]; [L6] gives $e^{-x^2}\ge e^{-1}>0$, so [L7] gives $\int_{-1}^1e^{-x^2}\,dx\ge2e^{-1}>0$. [L3, L6, L7, L8]
 
 2.1 By [L4], the two finite tails and the proper middle integral combine to a finite mixed improper integral, and step 1.2 makes the total strictly positive. [step 1.1, step 1.2, L4] ∎

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-cauchy-integral-formula-circle, thm-riemann-stieltjes-and-parametric-contour-integrals-agree]
+deps: [thm-cauchy-integral-formula-circle, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, cor-complex-differentiability-implies-continuity]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +36,9 @@ Thus a holomorphic function equals its average on every positive-radius circle l
 
 [L1] Under these hypotheses, Cauchy's circle formula gives $f(z)=(2\pi i)^{-1}\int_\gamma f(\zeta)/(\zeta-z)\,d\zeta$ for $|z-a|<r$, where $\gamma(\theta)=a+r\exp(i\theta)$ is positively oriented ([[thm-cauchy-integral-formula-circle]]).
 
-[L2] For a piecewise-$C^1$ contour, the complex contour integral equals the parameter integral of the pulled-back integrand multiplied by the contour derivative ([[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]]).
+[L2] For a piecewise-$C^1$ contour and an integrand continuous on its trace, the complex contour integral equals the parameter integral of the pulled-back integrand multiplied by the contour derivative ([[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]]).
+
+[L3] Every holomorphic function is continuous ([[cor-complex-differentiability-implies-continuity]]).
 
 ## Proof
 
@@ -44,6 +46,6 @@ Thus a holomorphic function equals its average on every positive-radius circle l
 
 1.1 Apply [L1] at the centre $z=a$ to obtain $f(a)=(2\pi i)^{-1}\int_\gamma f(\zeta)/(\zeta-a)\,d\zeta$. [L1]
 
-2.1 With $\zeta=\gamma(\theta)=a+r\exp(i\theta)$, [L2] gives $d\zeta=ir\exp(i\theta)\,d\theta$ while $\zeta-a=r\exp(i\theta)$, so step 1.1 becomes $f(a)=(2\pi i)^{-1}\int_0^{2\pi}f(a+r\exp(i\theta))\,i\,d\theta$. [step 1.1, L2, algebra]
+2.1 By [L3], $f$ is continuous; on the circle the denominator $\zeta-a$ is nonzero because its modulus is $r>0$, so elementary complex division makes $\zeta\mapsto f(\zeta)/(\zeta-a)$ continuous on the trace. With $\zeta=\gamma(\theta)=a+r\exp(i\theta)$, [L2] gives $d\zeta=ir\exp(i\theta)\,d\theta$ while $\zeta-a=r\exp(i\theta)$, so step 1.1 becomes $f(a)=(2\pi i)^{-1}\int_0^{2\pi}f(a+r\exp(i\theta))\,i\,d\theta$. [step 1.1, L2, L3, algebra]
 
 3.1 Cancelling the nonzero factor $i$ in step 2.1 yields the stated circular average; the calculation requires $r>0$ and also covers every constant or zero function. [step 2.1, algebra] ∎

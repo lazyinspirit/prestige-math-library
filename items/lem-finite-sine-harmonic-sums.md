@@ -61,7 +61,7 @@ If $x\in2\pi\mathbb Z$, every summand is zero and the sum is zero.
 
 **Proof technique:** cases.
 
-1.1 For the nonperiodic case, assume $x\notin2\pi\mathbb Z$ and put $S_N:=\sum_{n=1}^{N}e^{inx}$. Multiplication by $1-e^{ix}$, the exponential addition law [L7], and the finite-sum recursion telescope to $(1-e^{ix})S_N=e^{ix}-e^{i(N+1)x}$. The half-angle identity $1-e^{ix}=-2ie^{ix/2}\sin(x/2)$ and [L3] show that the multiplier is nonzero. [assume-case nonperiodic, L1, L2, L3, L5, L7, algebra]
+1.1 For the nonperiodic case, assume $x\notin2\pi\mathbb Z$ and define the auxiliary complex sums recursively by $S_0=0$ and $S_{j+1}=S_j+e^{i(j+1)x}$. Multiplication by $1-e^{ix}$ and the exponential addition law [L7] telescope directly to $(1-e^{ix})S_N=e^{ix}-e^{i(N+1)x}$. The half-angle identity $1-e^{ix}=-2ie^{ix/2}\sin(x/2)$ and [L3] show that the multiplier is nonzero. [assume-case nonperiodic, L1, L2, L3, L7, algebra]
 
 1.2 For the periodic case, assume $x\in2\pi\mathbb Z$. Then every $nx$ is a multiple of $2\pi$, so $\sin(nx)=0$ by [L3] and the finite sine sum is zero. [assume-case periodic, L3, L5]
 

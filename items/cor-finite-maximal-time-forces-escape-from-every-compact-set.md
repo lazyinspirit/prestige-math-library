@@ -5,7 +5,7 @@ title: "At a finite maximal time an ODE solution leaves every compact subset of 
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [thm-existence-and-uniqueness-of-a-maximal-ode-solution, lem-ode-extension-from-a-compact-interior-region, def-countable-choice, thm-well-ordering-principle, thm-recursion]
 justified_by: []
@@ -27,15 +27,15 @@ pipeline_run: null
 
 ## Statement
 
-Let $x:(\alpha,\beta)\to\mathbb R^n$ be a maximal solution. If the positive maximal endpoint is finite, the solution must eventually leave every compact set $K$ contained in the ODE domain: some $s<\beta$ satisfies $(t,x(t))\notin K$ for every $s<t<\beta$. The analogous assertion holds as $t\downarrow\alpha$ when $\alpha$ is finite.
+Let $x:(\alpha,\beta)\to\mathbb R^n$ be the maximal solution of an IVP whose continuous vector field is locally Lipschitz in the state variable on its open ODE domain. If the positive maximal endpoint is finite, the solution must eventually leave every compact set $K$ contained in that domain: some $s<\beta$ satisfies $(t,x(t))\notin K$ for every $s<t<\beta$. The analogous assertion holds as $t\downarrow\alpha$ when $\alpha$ is finite.
 
 At a finite maximal endpoint the solution leaves every compact subset of the ODE domain. If the positive maximal endpoint is finite, the solution must eventually leave every compact set.
 
 ## Facts & Assumptions
 
-**Given:** A maximal solution with a finite endpoint and an arbitrary compact subset $K$ of the open ODE domain.
+**Given:** A Picard–Lindelöf maximal solution with a finite endpoint and an arbitrary compact subset $K$ of the open ODE domain.
 
-[L1] A solution whose graph has a sequence approaching a compact interior endpoint state extends past that endpoint ([[lem-ode-extension-from-a-compact-interior-region]]).
+[L1] A solution of a Picard–Lindelöf ODE whose graph has a sequence approaching a compact interior endpoint state extends past that endpoint ([[lem-ode-extension-from-a-compact-interior-region]]).
 
 [L2] Countable choice selects one member from each nonempty set in a family indexed by $\mathbb N$ ([[def-countable-choice]]).
 

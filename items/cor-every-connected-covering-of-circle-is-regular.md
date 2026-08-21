@@ -38,7 +38,7 @@ Every connected covering of $\mathbb R/\mathbb Z$ is regular, including the univ
 
 **Given:** A connected covering $p:(E,e_0)\to(\mathbb R/\mathbb Z,[0])$.
 
-[L1] A connected covering is regular exactly when its induced subgroup is normal in the base fundamental group ([[thm-regular-covering-characterizations]]).
+[L1] For a covering with path-connected total space and path-connected locally path-connected base, regularity is equivalent to normality of the induced subgroup in the base fundamental group ([[thm-regular-covering-characterizations]]).
 
 [F1] Degree gives an isomorphism from the circle fundamental group to $(\mathbb Z,+)$ ([[thm-fundamental-group-of-the-circle]]).
 

@@ -38,7 +38,7 @@ Let $P$ have counterclockwise vertices $(0,0),(4,0),(5,2),(2,4),(0,3)$. It is a 
 
 **Proof technique:** direct.
 
-1.1 The successive edge cross products are positive, so the polygon is convex and the diagonals from $(0,0)$ to $(5,2)$ and $(2,4)$ lie inside. The resulting triangle determinants are $8$, $16$, and $6$, so [L1] gives content $(8+16+6)/2=15$. [L1, algebra]
+1.1 Write the vertices as $v_0,\ldots,v_4$ in the displayed order. The five supporting-line calculations $$\det(v_{i+1}-v_i,v_j-v_i)>0\qquad(j\notin\{i,i+1\})$$ give respectively the positive lists $(8,16,12)$, $(8,8,11)$, $(16,8,7)$, $(6,10,7)$, and $(12,15,6)$, with indices modulo five. Thus every other vertex lies strictly to the left of every directed boundary edge. The intersection of these five closed left half-planes is convex, has exactly the displayed boundary chain, and contains both diagonals from $v_0$; hence the chain is simple and counterclockwise and those diagonals triangulate it. The three triangle determinants are $8$, $16$, and $6$, so [L1] gives content $(8+16+6)/2=15$. [L1, algebra]
 
 1.2 The cyclic shoelace sum is $(0+8+20+6+0)-(0+0+4+0+0)=30$, so [L2] gives content $30/2=15$. [L2, algebra]
 

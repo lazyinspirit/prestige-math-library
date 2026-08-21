@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-semifinite-part-is-a-measure, def-finite-sigma-finite-and-semifinite-measures, def-countable-choice, thm-product-of-countable, thm-countable-union-of-countable, thm-finite-and-countable-subadditivity-of-measures, prop-counting-measure-is-a-measure, thm-r-uncountable]
+deps: [def-semifinite-part-of-a-measure, thm-semifinite-part-is-a-measure, def-finite-sigma-finite-and-semifinite-measures, def-countable-choice, thm-product-of-countable, thm-countable-union-of-countable, thm-finite-and-countable-subadditivity-of-measures, def-counting-measure, prop-counting-measure-is-a-measure, thm-r-uncountable]
 justified_by: []
 aliases: []
 landmark: true
@@ -50,15 +50,19 @@ The zero-infinity summand in such a decomposition need not be unique.
 
 [L6] A countable union has measure at most the nonnegative sum of the measures of its members ([[thm-finite-and-countable-subadditivity-of-measures]]).
 
+[L7] The value $\mu_{\mathrm{sf}}(E)$ is the supremum of the values of finite-measure measurable subsets of $E$ ([[def-semifinite-part-of-a-measure]]).
+
+[L8] Counting measure assigns a finite set its cardinality and an infinite set $+\infty$ ([[def-counting-measure]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 A measurable subset of a sigma-finite set is sigma-finite. Under [L3], a countable union of sigma-finite measurable sets is sigma-finite: select a finite-measure cover for each member and flatten the resulting $\mathbb N\times\mathbb N$ family to one countable cover. [given, L2, L3, choose]
 
-1.2 If $E$ is sigma-finite for $\mu$, the restriction of $\mu$ to $E$ is semifinite: a positive-measure subset must meet one member of a finite-measure cover in positive measure, since otherwise [L6] would make it null. Thus [L1] gives $\mu_{\mathrm{sf}}(E)=\mu(E)$. [given, L1, L2, L6]
+1.2 If $E$ is sigma-finite for $\mu$, restriction of the measure axioms makes $\mu|_E$ a measure, and it is semifinite: a positive-measure subset must meet one member of a finite-measure cover in positive measure, since otherwise [L6] would make it null. The semifinite part of this restriction, evaluated at $E$, is exactly the supremum in [L7]. Thus [L1] applied to $\mu|_E$ gives $\mu_{\mathrm{sf}}(E)=\mu(E)$. [given, L1, L2, L6, L7]
 
-1.3 For nonuniqueness, take counting measure $\#$ on the uncountable set $\mathbb R$. It is semifinite, so its semifinite part is itself. Besides the zero measure, define $\eta(E)=0$ for countable $E$ and $+\infty$ for uncountable $E$. One has $\eta(\varnothing)=0$; for a disjoint sequence, [L4] makes the union countable exactly when every member is countable, so countable additivity has both sides $0$ in that case and both sides $+\infty$ otherwise. Thus $\eta$ is a measure, and both $0$ and $\eta$ satisfy $\#=\#_{\mathrm{sf}}+0=\#_{\mathrm{sf}}+\eta$. [given, L1, L4, L5]
+1.3 For nonuniqueness, take counting measure $\#$ on the uncountable set $\mathbb R$. It is semifinite: every set of positive counting measure is nonempty, so one of its points gives a singleton subset of finite positive measure $1$ by [L8]. Hence [L1] makes its semifinite part itself. Besides the zero measure, define $\eta(E)=0$ for countable $E$ and $+\infty$ for uncountable $E$. One has $\eta(\varnothing)=0$; for a disjoint sequence, [L4] makes the union countable exactly when every member is countable, so countable additivity has both sides $0$ in that case and both sides $+\infty$ otherwise. Thus $\eta$ is a measure, and both $0$ and $\eta$ satisfy $\#=\#_{\mathrm{sf}}+0=\#_{\mathrm{sf}}+\eta$. [given, L1, L4, L5, L8]
 
 2.1 Therefore, for a disjoint sequence $(E_k)$, the union is sigma-finite exactly when every $E_k$ is sigma-finite. Hence $\nu(\bigcup_kE_k)=0$ exactly when every $\nu(E_k)=0$, and otherwise both sides of $\nu(\bigcup_kE_k)=\sum_k\nu(E_k)$ are $+\infty$; also $\nu(\varnothing)=0$. [step 1.1, L2]
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-convex-and-strictly-convex-functions-on-euclidean-sets, def-complete-ordered-field]
+deps: [def-convex-and-strictly-convex-functions-on-euclidean-sets, thm-dedekind-complete]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,7 +32,7 @@ Let $(f_i)_{i\in I}$ be a nonempty family of convex real-valued functions on a c
 
 [F1] The function $f:C\to\mathbb R$ is convex when $f((1-t)x+ty)\le(1-t)f(x)+tf(y)$ for all $x,y\in C$ and $t\in[0,1]$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]).
 
-[L1] Every nonempty subset of $\mathbb R$ that is bounded above has a least upper bound in $\mathbb R$ ([[def-complete-ordered-field]]).
+[L1] Every nonempty subset of $\mathbb R$ that is bounded above has a least upper bound in $\mathbb R$ ([[thm-dedekind-complete]]).
 
 ## Proof
 

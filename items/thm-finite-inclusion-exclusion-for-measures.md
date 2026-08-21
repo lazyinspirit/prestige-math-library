@@ -5,7 +5,7 @@ title: "Inclusion-exclusion for a nonempty finite family of finite-measure sets"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [prop-two-set-measure-identity, thm-finite-and-countable-subadditivity-of-measures, def-finite-sum, lem-finite-sum-laws, def-integer-power, thm-induction-principle]
 justified_by: []
@@ -28,7 +28,7 @@ Let $m\ge1$ be natural and let $A_0,\ldots,A_{m-1}$ be measurable sets of finite
 
 $$\mu\left(\bigcup_{i<m}A_i\right)=\sum_{\varnothing\ne J\subseteq\{0,\ldots,m-1\}}(-1)^{|J|+1}\mu\left(\bigcap_{j\in J}A_j\right).$$
 
-The finite sum on the right uses the following recursive order. For one index it lists $\{0\}$. After the nonempty subsets of $\{0,\ldots,m-1\}$ in their existing order, it lists $\{m\}$ and then the sets $J\cup\{m\}$ for nonempty $J$ in that same existing order. This convention fixes the sum without invoking an unproved permutation rule.
+The finite sum on the right uses the following recursive order. For a one-index family it lists $\{0\}$. To pass from the order for the nonempty subsets of $\{0,\ldots,m-1\}$ to the order for those of $\{0,\ldots,m\}$, retain the existing list, then append $\{m\}$, and then append the sets $J\cup\{m\}$ for nonempty $J\subseteq\{0,\ldots,m-1\}$ in that existing order. Thus the displayed formula for a family of size $m$ uses only subsets of $\{0,\ldots,m-1\}$. This convention fixes the sum without invoking an unproved permutation rule.
 
 ## Facts & Assumptions
 

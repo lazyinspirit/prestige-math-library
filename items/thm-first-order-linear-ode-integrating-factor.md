@@ -37,13 +37,15 @@ $$y(x)=\exp(-P(x))\left(y_0+\int_{x_0}^x\exp(P(t))q(t)\,dt\right),\qquad P(x)=\i
 
 [L1] The exponential satisfies $(\exp)'=\exp$ ([[thm-derivative-of-exponential]]).
 
-[L2] For a continuous $f$ on an order-convex interval with at least two elements, $x\mapsto\int_{x_0}^x f$ is a primitive of $f$, and every primitive $G$ satisfies $\int_a^b f=G(b)-G(a)$ ([[cor-primitives-of-a-continuous-function]]).
+[L2] For a continuous $f$ on an order-convex interval with at least two elements, $x\mapsto\int_{x_0}^x f$ is a primitive of $f$. If $a<b$ in the interval and $G$ is any primitive, then $\int_a^b f=G(b)-G(a)$ ([[cor-primitives-of-a-continuous-function]]).
 
-[L3] The chain rule gives $(f\circ g)'=(f'\circ g)g'$ ([[thm-chain-rule]]).
+[L6] Oriented integrals satisfy $\int_b^a f=-\int_a^b f$ and $\int_a^a f=0$ ([[def-oriented-integral]]).
 
-[L4] The product rule gives $(fg)'=f'g+fg'$ ([[thm-algebra-of-derivatives]]).
+[L3] If $g$ is differentiable at $c$ and $f$ is differentiable at $g(c)$, then $(f\circ g)'(c)=f'(g(c))g'(c)$ ([[thm-chain-rule]]).
 
-[L5] The exponential is positive and has a reciprocal at every real argument ([[cor-exponential-reciprocal-and-positivity]]).
+[L4] If $f$ and $g$ are differentiable at $c$, then $(fg)'(c)=f'(c)g(c)+f(c)g'(c)$ ([[thm-algebra-of-derivatives]]).
+
+[L5] For every real $u$, $\exp(u)>0$ and $\exp(-u)=1/\exp(u)$ ([[cor-exponential-reciprocal-and-positivity]]).
 
 ## Proof
 
@@ -51,4 +53,4 @@ $$y(x)=\exp(-P(x))\left(y_0+\int_{x_0}^x\exp(P(t))q(t)\,dt\right),\qquad P(x)=\i
 
 1.1 By the existence clause of [L2], $P'=p$; hence [L3], [L4], and [L1] give $(\exp(P)y)'=\exp(P)(y'+py)=\exp(P)q$. [given, L1, L2, L3, L4]
 
-2.1 Integrating step 1.1 by [L2], using $P(x_0)=0$, and dividing by [L5] yields the displayed formula; direct differentiation verifies it and its initial value, while applying step 1.1 to the difference of two solutions makes that difference zero. [step 1.1, L2, L5, algebra] ∎
+2.1 If $x_0<x$, apply the evaluation clause of [L2] on $[x_0,x]$; if $x<x_0$, apply it on $[x,x_0]$ and reverse the integral with [L6]; equality is immediate at $x=x_0$. In every case, using $P(x_0)=0$ and dividing by [L5] yields the displayed formula. Direct differentiation verifies it and its initial value, while applying step 1.1 to the difference of two solutions makes that difference zero. [step 1.1, L2, L5, L6, algebra] ∎

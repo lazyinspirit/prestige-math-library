@@ -30,7 +30,7 @@ Every linear bijection of $\mathbb R^2$ preserves Jordan content.
 
 **Given:** The unit square $Q=[0,1]^2$ and the linear map $T(x,y)=(2x,y)$.
 
-[L1] A linear map with matrix $A$ scales Jordan content by $|\det A|$ ([[thm-linear-images-scale-jordan-content-by-absolute-determinant]]).
+[L1] If $E$ is bounded and Jordan measurable, a linear map with matrix $A$ sends $E$ to a bounded Jordan measurable set of content $|\det A|\operatorname{cont}(E)$ ([[thm-linear-images-scale-jordan-content-by-absolute-determinant]]).
 
 [L2] A rectangle has volume equal to the product of its nonnegative side lengths ([[def-multidimensional-rectangle-and-volume]]).
 

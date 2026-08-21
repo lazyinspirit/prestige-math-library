@@ -8,7 +8,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-complete-measure-space, def-measure-null-set-and-almost-everywhere, def-countable-choice]
-justified_by: [lem-completion-domain-is-a-sigma-algebra, lem-completed-measure-is-well-defined]
+justified_by: [lem-completion-domain-is-a-sigma-algebra, lem-completed-measure-is-well-defined, thm-completion-of-a-measure-space]
 aliases: []
 landmark: true
 verification:
@@ -31,4 +31,4 @@ For a displayed representation $E=A\cup N$, define the proposed **completed set 
 
 $$\overline\mu(E):=\mu(A).$$
 
-The value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\overline{\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. The completion theorem then proves that $\overline\mu$ is the unique complete extension on this domain.
+The value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\overline{\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. Under the same choice hypothesis, [[thm-completion-of-a-measure-space]] proves that $\overline\mu$ is the unique complete extension on this domain.

@@ -48,7 +48,7 @@ When it exists, $f$ is unique and is itself a surjective covering map.
 
 **Given:** The based connected coverings and base hypotheses in the Statement.
 
-[F1] A based lift $\widetilde h:(Y,y_0)\to(E,e_0)$ through a covering exists exactly when $h_*\pi_1(Y,y_0)\subseteq p_*\pi_1(E,e_0)$, and it is then unique ([[thm-covering-space-lifting-criterion]]).
+[F1] If $Y$ is path-connected and locally path-connected, a based lift $\widetilde h:(Y,y_0)\to(E,e_0)$ through a covering exists exactly when $h_*\pi_1(Y,y_0)\subseteq p_*\pi_1(E,e_0)$, and it is then unique ([[thm-covering-space-lifting-criterion]]).
 
 [F2] For a covering, local path-connectedness holds in the total space exactly when it holds in the base ([[prop-local-path-connectedness-lifts-and-descends-along-coverings]]).
 

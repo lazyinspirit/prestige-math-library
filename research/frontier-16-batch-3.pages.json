@@ -43,6 +43,7 @@
           "def-vector-valued-derivative-and-integral",
           "cor-vector-valued-ftc-and-lipschitz-bound",
           "cor-primitives-of-a-continuous-function",
+          "thm-continuous-implies-integrable",
           "thm-componentwise-limits-and-continuity",
           "def-oriented-integral"
         ]
@@ -143,6 +144,8 @@
         "deps": [
           "thm-picard-lindelof-local-existence-and-uniqueness",
           "def-picard-operator-and-picard-iterates",
+          "lem-vector-valued-continuous-curve-space-is-complete",
+          "thm-complete-subspace-iff-closed",
           "lem-picard-operator-is-a-short-time-contraction",
           "lem-weissinger-fixed-point-criterion",
           "cor-banach-error-estimates",
@@ -172,9 +175,10 @@
         "title": "The Grönwall estimate for two solutions of a Lipschitz ODE",
         "strategy": "Subtract the two Volterra equations, apply the vector integral inequality and the state-Lipschitz estimate, then apply Grönwall to obtain $\\|x(t)-y(t)\\|\\le e^{L|t-t_0|}\\|x(t_0)-y(t_0)\\|$. Coincident initial values give uniqueness. Check the estimate at $t=t_0$, for $L=0$, and in both time directions.",
         "deps": [
-          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
-          "thm-gronwall-integral-inequality",
-          "thm-norm-inequality-for-the-vector-valued-integral"
+        "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+        "thm-gronwall-integral-inequality",
+        "thm-norm-inequality-for-the-vector-valued-integral",
+        "thm-monotonicity-of-the-integral"
         ]
       },
       {
@@ -284,8 +288,7 @@
         "title": "Euler polygonal approximations for a continuous ODE are uniformly bounded and equicontinuous",
         "strategy": "For $h>0$ on a cylinder with the given finite field bound $M$, define the Euler polygon recursively at positive-mesh vertices and interpolate linearly. Induction keeps every vertex and segment inside the spatial ball, and every polygon is $M$-Lipschitz, including a shortened final cell.",
         "deps": [
-          "def-first-order-ode-initial-value-problem-and-solution",
-          "def-equicontinuity-and-boundedness-in-ck"
+          "def-first-order-ode-initial-value-problem-and-solution"
         ]
       },
       {
@@ -294,12 +297,14 @@
         "title": "A uniformly bounded equicontinuous sequence of $\\mathbb R^n$-valued curves on a nonempty compact interval has a uniformly convergent subsequence",
         "strategy": "Fix an enumeration of the rational points of the compact time interval. At each rational time use deterministic nested-box bisection and least admissible indices to extract a convergent subsequence in $\\mathbb R^n$; diagonalize over the fixed enumeration. Equicontinuity and a finite rational net make the diagonal subsequence uniformly Cauchy, and completeness of the vector-valued curve space gives a continuous uniform limit. The construction uses no choice principle.",
         "deps": [
-          "cor-bolzano-weierstrass-in-rn",
-          "thm-rationals-countable",
-          "lem-q-and-irrationals-dense-r",
-          "lem-vector-valued-continuous-curve-space-is-complete",
-          "def-equicontinuity-and-boundedness-in-ck",
-          "thm-heine-borel-r"
+        "thm-rationals-countable",
+        "lem-q-and-irrationals-dense-r",
+        "lem-vector-valued-continuous-curve-space-is-complete",
+        "thm-heine-borel-r",
+        "thm-euclidean-space-complete",
+        "thm-recursion",
+        "thm-well-ordering-principle",
+        "lem-geometric-sequence-null"
         ]
       },
       {
@@ -312,7 +317,11 @@
           "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence",
           "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
           "thm-uniform-limit-interchanges-riemann-integration",
-          "thm-heine-cantor-metric"
+          "thm-heine-cantor-metric",
+          "thm-heine-borel-rn",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "lem-continuity-is-local-and-pastes",
+          "thm-extreme-value-metric"
         ]
       },
       {
@@ -537,8 +546,7 @@
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "thm-cousins-lemma-for-gauges",
-          "thm-henstock-kurzweil-cauchy-criterion",
-          "def-oriented-integral"
+          "thm-henstock-kurzweil-cauchy-criterion"
         ]
       },
       {
@@ -617,8 +625,7 @@
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "def-one-sided-limits",
-          "def-limits-at-infinity",
-          "def-oriented-integral"
+          "def-limits-at-infinity"
         ]
       },
       {
@@ -642,6 +649,7 @@
         "deps": [
           "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
           "thm-monotonicity-of-the-henstock-kurzweil-integral",
+          "thm-linearity-of-the-henstock-kurzweil-integral",
           "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
           "def-limits-at-infinity",
           "def-one-sided-limits"
@@ -701,7 +709,9 @@
           "thm-chain-rule",
           "thm-algebra-of-derivatives",
           "thm-sine-and-cosine-derivatives",
-          "thm-quarter-turn-values-and-shift-formulas"
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity"
         ]
       },
       {
@@ -711,6 +721,7 @@
         "strategy": "Assign the removable value one at zero. Every compact restriction is continuous, hence Riemann and Henstock–Kurzweil integrable. The primitive of $\\sin x$ is bounded and $1/x$ is nonnegative, decreasing, and tends to zero, so the published Dirichlet test gives convergence of the compact truncation integrals. The noncompact definition therefore yields an HK integral; do not claim the unproved value $\\pi/2$.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-noncompact-interval",
+          "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
           "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
           "thm-continuous-implies-integrable",
           "thm-dirichlet-test-for-improper-integrals",

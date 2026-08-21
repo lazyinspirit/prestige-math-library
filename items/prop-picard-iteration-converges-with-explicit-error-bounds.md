@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-picard-lindelof-local-existence-and-uniqueness, def-picard-operator-and-picard-iterates, lem-picard-operator-is-a-short-time-contraction, lem-weissinger-fixed-point-criterion, cor-banach-error-estimates, thm-norm-inequality-for-the-vector-valued-integral, def-factorial-and-falling-factorial, thm-picard-iterates-for-exponential]
+deps: [thm-picard-lindelof-local-existence-and-uniqueness, def-picard-operator-and-picard-iterates, lem-vector-valued-continuous-curve-space-is-complete, thm-complete-subspace-iff-closed, lem-picard-operator-is-a-short-time-contraction, lem-weissinger-fixed-point-criterion, cor-banach-error-estimates, thm-norm-inequality-for-the-vector-valued-integral, def-factorial-and-falling-factorial, thm-picard-iterates-for-exponential]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -47,6 +47,10 @@ and the corresponding factorial-series tail bounds the error.
 
 [L5] If $q=Lh<1$, the Picard operator on the invariant curve ball is a contraction with constant $q$ ([[lem-picard-operator-is-a-short-time-contraction]]).
 
+[L6] Continuous $\mathbb R^n$-valued curves on a nonempty compact interval form a complete space in the supremum metric ([[lem-vector-valued-continuous-curve-space-is-complete]]).
+
+[L7] A closed subspace of a complete metric space is complete ([[thm-complete-subspace-iff-closed]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -55,4 +59,4 @@ and the corresponding factorial-series tail bounds the error.
 
 1.2 For $m=1$, [L4] gives the pointwise bound $\|\mathcal Tx(t)-\mathcal Ty(t)\|_2\le L|t-t_0|d_\infty(x,y)$. If the corresponding bound holds with $m-1$, another application of [L4] integrates $L^m|s-t_0|^{m-1}/(m-1)!$ from $t_0$ to $t$ and gives $L^m|t-t_0|^m/m!$; induction and $|t-t_0|\le h$ yield the displayed supremum estimate. [given, L4, algebra]
 
-2.1 By [L3], the series $\sum_{m\ge1}(Lh)^m/m!$ converges, so [L2] applied to step 1.2 gives uniform convergence to the unique fixed point and the stated factorial tail estimate, including $h=0$. [step 1.2, L2, L3, algebra] ∎
+2.1 The invariant curve ball is a closed ball in the supremum metric, hence is nonempty and complete by [L6] and [L7]. By [L3], the series $\sum_{m\ge1}(Lh)^m/m!$ converges, so [L2] applied to step 1.2 gives uniform convergence to the unique fixed point and the stated factorial tail estimate, including $h=0$. [step 1.2, L2, L3, L6, L7, algebra] ∎

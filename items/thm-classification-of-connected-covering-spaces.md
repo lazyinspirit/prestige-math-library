@@ -11,7 +11,10 @@ deps: [lem-subgroup-quotient-of-universal-cover,
        cor-based-connected-coverings-isomorphic-iff-equal-subgroups,
        lem-covering-basepoint-change-conjugates-subgroup, def-path-connected,
        def-semilocally-simply-connected-space,
-       def-map-and-isomorphism-of-covering-spaces]
+       def-map-and-isomorphism-of-covering-spaces,
+       prop-local-path-connectedness-lifts-and-descends-along-coverings,
+       thm-connected-and-locally-path-connected-implies-path-connected,
+       thm-path-lifting-for-covering-maps]
 justified_by: []
 aliases: []
 landmark: true
@@ -41,19 +44,24 @@ Let $B$ be nonempty, path-connected, locally path-connected, and semilocally sim
 
 [L1] Every subgroup $H\le G$ is realized as the induced subgroup of a based connected quotient covering of a universal cover ([[lem-subgroup-quotient-of-universal-cover]]).
 
-[L2] Based connected coverings are isomorphic exactly when their induced subgroups are equal ([[cor-based-connected-coverings-isomorphic-iff-equal-subgroups]]).
+[L2] Over a path-connected locally path-connected base, based coverings with connected total spaces are isomorphic exactly when their induced subgroups are equal ([[cor-based-connected-coverings-isomorphic-iff-equal-subgroups]]).
 
-[L3] Changing the chosen point over $b_0$ conjugates the induced subgroup, and every fibre point is obtained by a lifted loop ([[lem-covering-basepoint-change-conjugates-subgroup]]).
+[L3] For a covering with path-connected total space, changing the chosen point over $b_0$ conjugates the induced subgroup, and every fibre point is obtained by a lifted loop ([[lem-covering-basepoint-change-conjugates-subgroup]]).
+
+[F1] Local path-connectedness lifts from the base of a covering to its total space ([[prop-local-path-connectedness-lifts-and-descends-along-coverings]]).
+
+[F2] A connected locally path-connected space is path-connected ([[thm-connected-and-locally-path-connected-implies-path-connected]]).
+
+[F3] Every path in the base of a covering has a unique lift from a prescribed point of the fibre ([[thm-path-lifting-for-covering-maps]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For the based correspondence, [L1] proves surjectivity: every subgroup occurs. [L1]
+1.1 Every connected covering under consideration has locally path-connected total space by [F1], because $B$ is locally path-connected, and therefore has path-connected total space by [F2]. For the based correspondence, [L1] proves surjectivity: every subgroup occurs. [given, L1, F1, F2]
 
-1.2 For the based correspondence, [L2] proves injectivity: two based connected coverings determine the same subgroup exactly when they are based-isomorphic. Thus claim 1 is a bijection. [L2]
+2.1 For the based correspondence, [L2] applies under the base hypotheses and the path-connectedness established in step 1.1, and proves injectivity: two based connected coverings determine the same subgroup exactly when they are based-isomorphic. Thus claim 1 is a bijection. [step 1.1, L2]
 
-2.1 For claim 2, [L3] shows that changing the chosen point over $b_0$ replaces the subgroup by a conjugate, so the conjugacy class depends only on the unbased covering. Every conjugacy class occurs by step 1.1. [step 1.1, L3]
+2.2 For claim 2, the path-connectedness from step 1.1 licenses [L3], which shows that changing the chosen point over $b_0$ replaces the subgroup by a conjugate. Hence the conjugacy class depends only on the unbased covering. Every conjugacy class occurs by step 1.1. [step 1.1, L3]
 
-3.1 Suppose two unbased connected coverings determine the same conjugacy class. Choose fibre points with induced subgroups $H_1,H_2$, and write $H_1=g^{-1}H_2g$. Lift a loop representing $g$ from the second fibre point. By [L3], its endpoint gives a new fibre point whose induced subgroup is $H_1$; [L2] then gives a based isomorphism and hence an unbased isomorphism. Conversely, any unbased isomorphism carries a chosen fibre point to a fibre point of the other cover, so [L2] and [L3] make the subgroups conjugate. This proves injectivity and completes claim 2. [step 1.2, L2, L3] ∎
-
+3.1 Suppose two unbased connected coverings determine the same conjugacy class. Choose fibre points with induced subgroups $H_1,H_2$, and write $H_1=g^{-1}H_2g$. By [F3], lift a loop representing $g$ from the second fibre point. By [L3], its endpoint gives a new fibre point whose induced subgroup is $H_1$; [L2] then gives a based isomorphism and hence an unbased isomorphism. Conversely, any unbased isomorphism carries a chosen fibre point to a fibre point of the other cover, so [L2] and [L3] make the subgroups conjugate. This proves injectivity and completes claim 2. [step 2.1, L2, L3, F3] ∎

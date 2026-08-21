@@ -9,7 +9,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [thm-nonnegative-weighted-sums-of-measures, prop-dirac-measure-is-a-probability-measure, def-probability-measure, thm-geometric-series, def-integer-power]
+deps: [thm-nonnegative-weighted-sums-of-measures, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-probability-measure, thm-geometric-series, def-integer-power]
 justified_by: []
 aliases: []
 landmark: false
@@ -34,7 +34,7 @@ Then $\mu$ is a probability measure on $\mathcal P(\mathbb N)$. The shift by $1$
 
 **Given:** The Dirac measures $\delta_k$ on $\mathbb N$ and the weights $c_k=2^{-(k+1)}$.
 
-[L1] Nonnegative countable weighted sums of measures are measures ([[thm-nonnegative-weighted-sums-of-measures]]), and every $\delta_k$ is a probability measure ([[prop-dirac-measure-is-a-probability-measure]]).
+[L1] Nonnegative countable weighted sums of measures are measures ([[thm-nonnegative-weighted-sums-of-measures]]); $\delta_k(E)$ is $1$ exactly when $k\in E$ and is $0$ otherwise ([[def-dirac-measure]]); and every $\delta_k$ is a probability measure ([[prop-dirac-measure-is-a-probability-measure]]).
 
 [L2] A probability measure is a measure of total mass $1$ ([[def-probability-measure]]).
 
@@ -51,4 +51,3 @@ Then $\mu$ is a probability measure on $\mathcal P(\mathbb N)$. The shift by $1$
 1.3 The unshifted total is $\sum_{k=0}^{\infty}2^{-k}=2$, whose first term at $k=0$ is $1$; thus those weights do not define a probability measure. [given, L3, algebra]
 
 2.1 Steps 1.1 and 1.2 make $\mu$ a probability measure by [L2], and step 1.3 verifies the index-zero boundary and rules out the unshifted construction. [step 1.1, step 1.2, step 1.3, L2] ∎
-

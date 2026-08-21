@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-henstock-kurzweil-integral-on-a-noncompact-interval, thm-riemann-integrable-functions-are-henstock-kurzweil-integrable, thm-continuous-implies-integrable, thm-dirichlet-test-for-improper-integrals, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity]
+deps: [def-henstock-kurzweil-integral-on-a-noncompact-interval, thm-henstock-kurzweil-integrability-on-subintervals-and-additivity, thm-riemann-integrable-functions-are-henstock-kurzweil-integrable, thm-continuous-implies-integrable, thm-dirichlet-test-for-improper-integrals, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -33,7 +33,7 @@ Define $s(0)=1$ and $s(x)=\sin x/x$ for $x>0$. Then $s$ has a noncompact Henstoc
 
 **Given:** The removable extension $s$ in the Example; differentiability of sine at $0$ gives $\lim_{x\to0}\sin x/x=1$.
 
-[L1] Dirichlet's improper-integral test applies when the first factor has a bounded truncation primitive and the second is nonnegative, nonincreasing, and tends to zero ([[thm-dirichlet-test-for-improper-integrals]]).
+[L1] Dirichlet's improper-integral test applies when the first factor is locally Riemann integrable with a bounded truncation primitive and the second is nonnegative, nonincreasing, and tends to zero ([[thm-dirichlet-test-for-improper-integrals]]).
 
 [L2] Every Riemann integrable function is Henstock–Kurzweil integrable with the same integral ([[thm-riemann-integrable-functions-are-henstock-kurzweil-integrable]]).
 
@@ -45,10 +45,12 @@ Define $s(0)=1$ and $s(x)=\sin x/x$ for $x>0$. Then $s$ has a noncompact Henstoc
 
 [L6] For every real $x$, $|\cos x|\le1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
 
+[L7] Henstock–Kurzweil integrals restrict to compact subintervals and add over adjacent intervals ([[thm-henstock-kurzweil-integrability-on-subintervals-and-additivity]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 On $[1,\infty)$ apply [L1] with first factor $\sin x$, whose primitive $-\cos x$ is bounded by [L3] and [L6], and second factor $1/x$, which is nonnegative, decreasing, and tends to zero; the compact truncation integrals therefore have a finite limit. [given, L1, L3, L6]
+1.1 On $[1,\infty)$ the first factor $\sin x$ is continuous and hence locally Riemann integrable by [L4], while its primitive $-\cos x$ is bounded by [L3] and [L6]. Apply [L1] with second factor $1/x$, which is nonnegative, decreasing, and tends to zero; the compact truncation integrals therefore have a finite limit. [given, L1, L3, L4, L6]
 
-2.1 The derivative clause in [L3] gives the removable limit at zero, so [L4] makes the extension Riemann integrable on each compact truncation and [L2] makes it HK integrable there; [L5] combines those integrals with the limit from step 1.1. [step 1.1, L2, L3, L4, L5] ∎
+2.1 The derivative clause in [L3] gives the removable limit at zero, so [L4] makes the extension Riemann integrable on each compact truncation and [L2] makes it HK integrable there. By [L7], for every $c>1$ its integral on $[0,c]$ is the fixed integral on $[0,1]$ plus the integral on $[1,c]$; the limit from step 1.1 and [L5] therefore give the noncompact HK integral. [step 1.1, L2, L3, L4, L5, L7] ∎

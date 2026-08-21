@@ -5,7 +5,7 @@ title: "Moduli of continuity and the Osgood divergence condition"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-metric-uniform-continuity, def-improper-integral-at-a-finite-endpoint, def-monotone-function]
 justified_by: []
@@ -30,7 +30,7 @@ A **modulus of continuity** is a continuous nondecreasing function $\rho:[0,r_0]
 
 $$\|F(t,x)-F(t,y)\|_2\le\rho(\|x-y\|_2)$$
 
-whenever the two points with the same time lie in that set.
+whenever the two points with the same time lie in that set and $\|x-y\|_2\le r_0$. Equivalently, the phrase is used without that last qualifier only on sets whose state-space diameter is at most $r_0$.
 
 The modulus satisfies the **Osgood divergence condition** when
 

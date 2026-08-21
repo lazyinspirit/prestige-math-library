@@ -5,9 +5,9 @@ title: "The semifinite part of a measure"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-finite-sigma-finite-and-semifinite-measures, lem-extended-reals-complete]
+deps: [def-finite-sigma-finite-and-semifinite-measures, lem-extended-reals-complete, def-countable-choice]
 justified_by: [thm-semifinite-part-is-a-measure]
 aliases: []
 landmark: true
@@ -27,5 +27,4 @@ Let $\mu$ be a measure on $(X,\mathcal A)$. Its **semifinite part** is the set f
 
 $$\mu_{\mathrm{sf}}(E):=\sup\{\mu(F):F\in\mathcal A,\ F\subseteq E,\ \mu(F)<+\infty\},\qquad E\in\mathcal A.$$
 
-The set inside the supremum is nonempty because it contains the value $\mu(\varnothing)=0$, and its supremum exists in $[0,+\infty]$ by [[lem-extended-reals-complete]]. The theorem [[thm-semifinite-part-is-a-measure]] proves that this set function is a semifinite measure and identifies when it equals $\mu$.
-
+The set inside the supremum is nonempty because it contains the value $\mu(\varnothing)=0$, and its supremum exists in $[0,+\infty]$ by [[lem-extended-reals-complete]]. Assuming the Axiom of Countable Choice ([[def-countable-choice]]), [[thm-semifinite-part-is-a-measure]] proves that this set function is a semifinite measure and identifies when it equals $\mu$.

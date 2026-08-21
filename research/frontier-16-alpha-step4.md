@@ -1,8 +1,10 @@
-# Frontier 16 — lead Alpha step-4 edge adjudication, round 2
+# Frontier 16 — lead Alpha step-4 edge adjudication
 
 ## Recovered state
 
-This dispatch has no earlier alpha-step4-adjudicate result or log to inherit. The latest prior step-4 artifact is research/frontier-16-dispatch/tool-splice-all.result.json, which records a successful mechanical splice of batches 1–7. research/frontier-16-splice-refusals.json now contains an empty refusals array. Round 2 was therefore caused entirely by the post-splice validate-plan result: 23 induced undeclared-prereq page edges, six overlapping b-leaf item edges, and 18 invalid kind values written as “false statement.”
+The inherited round-2 record is `research/frontier-16-dispatch/alpha-step4-adjudicate-2.result.json` with its log at the adjacent `.log` path. That round adjudicated the post-splice validator result: 23 induced undeclared-prereq page edges, six overlapping b-leaf item edges, and 18 invalid kind values written as “false statement.” Its mechanical predecessor, `research/frontier-16-dispatch/tool-splice-all.result.json`, records the successful splice of batches 1–7. The current `research/frontier-16-splice-refusals.json` has an empty refusals array.
+
+On this follow-up, a fresh `validate-plan` run found one dependency drift introduced during authoring: `ex-polar-coordinates-as-a-local-diffeomorphism` added `thm-sine-and-cosine-parametrize-the-unit-circle`, as recorded in the batch-1 notes scaffold-change ledger, but the companion page did not yet reach that theorem's A page. The coverage ledger identifies Lebl Exercise 8.5.8 and Toronto §3.3 as the polar-coordinate sources.
 
 I read the declaring manifests, batch notes, coverage ledgers, the target page entries in research/plan-spec.json, and the exact target items on disk. Every induced non-leaf page edge points strictly backward. No reading-order change or owner-only forward edge is present.
 
@@ -15,6 +17,7 @@ I read the declaring manifests, batch notes, coverage ledgers, the target page e
 | the-inverse-function-theorem-completed | fubini-and-change-of-variables | def-local-orientation-of-a-regular-c-one-map uses the exact definition of the Jacobian determinant of a square-dimensional $C^1$ map. | **Apply.** Added fubini-and-change-of-variables directly. |
 | the-inverse-function-theorem-completed | matrices-and-the-matrix-of-a-linear-map | Local orientation uses thm-invertible-matrices-correspond-to-linear-isomorphisms, whose Statement gives precisely the matrix/linear-isomorphism equivalence. | **Apply through closure.** Both new direct prerequisites reach this page; no redundant direct entry was added. |
 | the-inverse-function-theorem-completed-examples | sine-cosine-and-the-definition-of-pi | The polar-coordinate example computes with the sine/cosine derivative and the Pythagorean identity, exactly the two cited target clauses. Lebl §8.5 Exercise 8.5.8 and Toronto §3.3 are the recorded sources. | **Apply.** Added sine-cosine-and-the-definition-of-pi directly. |
+| the-inverse-function-theorem-completed-examples | fundamental-trigonometric-identities | The authored polar-coordinate verification cites `thm-sine-and-cosine-parametrize-the-unit-circle` in its Given paragraph and uses the theorem's injectivity on $[0,2\pi)$ in step 2.1 to prove principal-strip injectivity. The target page at order 185 contains that exact bijection theorem; the declaring page is at order 288.00002. | **Apply.** Added fundamental-trigonometric-identities directly to the page's `requires` in research/plan-spec.json. This is a genuine backward edge, not reachable through the existing sine/cosine prerequisite. |
 | the-inverse-function-theorem-completed-examples | the-exponential-function | Lebl’s two-equation implicit example differentiates $e^x,e^y,e^z$ and uses thm-derivative-of-exponential. | **Apply through closure.** sine-cosine-and-the-definition-of-pi already requires the-exponential-function, so the added sine/cosine prerequisite licenses this edge. |
 | the-inverse-function-theorem-completed-examples | inverse-and-implicit-function-theorems-examples | The induced page edge came only from two dependencies on published companion-page counterexamples. A B page is a leaf, so no requires edit could legalize either dependency. | **Strike.** Both item edges were removed and their source-backed constructions were rebuilt from A-page facts; details are in the leaf table below. |
 | convex-and-semicontinuous-functions-on-rn | the-riemann-integral-in-rn-and-jordan-content | The interior-cube bound uses def-multidimensional-rectangle-and-volume to choose and manipulate the closed cube. The target defines exactly that object. | **Apply.** Added the target directly. |
@@ -63,5 +66,7 @@ The six changed proof routes have matching updates in the owning batch proof-con
 - Planned contract citation sources versus item deps: exact.
 - Existing-source contract quote check: exact; planned-source clauses are deferred honestly to Step 5.
 - git diff --check: clean.
+
+The follow-up `validate-plan` pass initially exposed the single polar-coordinate edge above. After applying it, the gate is clean again.
 
 There is no forward-edge blocker. I did not run tools/splice-plan.mjs; the engine retains ownership of the mechanical re-splice.

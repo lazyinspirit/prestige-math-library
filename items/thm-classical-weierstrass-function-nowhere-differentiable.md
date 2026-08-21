@@ -1,11 +1,11 @@
 ---
 id: thm-classical-weierstrass-function-nowhere-differentiable
 kind: theorem
-title: "The classical Weierstrass function is continuous everywhere and differentiable nowhere"
+title: "Under $ab>1+3\\pi/2$, the classical Weierstrass function is continuous everywhere and differentiable nowhere"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-classical-weierstrass-function,
        thm-classical-weierstrass-series-converges-uniformly,
@@ -43,7 +43,7 @@ Weierstrass function ([[def-classical-weierstrass-function]]). If $ab>1+3\pi/2$,
 
 [L1] The sum $W_{a,b}:\mathbb R\to\mathbb R$ is continuous ([[thm-classical-weierstrass-series-converges-uniformly]]).
 
-[L2] For the low-frequency increment at the probes, $|A_m|<\pi(ab)^m(x_m-x_0)/(ab-1)$ ([[lem-weierstrass-low-frequency-difference-quotient-bound]]).
+[L2] For every $m\ge1$, the low-frequency increment at the probes satisfies $|A_m|<\pi(ab)^m(x_m-x_0)/(ab-1)$ ([[lem-weierstrass-low-frequency-difference-quotient-bound]]).
 
 [L3] For the tail increment at the same probes, $|B_m|\ge(2/3)(ab)^m(x_m-x_0)$ ([[lem-weierstrass-tail-difference-quotient-bound]]).
 
@@ -63,7 +63,7 @@ Weierstrass function ([[def-classical-weierstrass-function]]). If $ab>1+3\pi/2$,
 
 1.2 The hypothesis $ab>1+3\pi/2$ and positivity of $\pi$ give $ab>1$ and $$c:=\frac23-\frac{\pi}{ab-1}>0.$$ [given, L7, algebra]
 
-2.1 Splitting the series increment at frequency $m$ gives $W_{a,b}(x_m)-W_{a,b}(x_0)=A_m+B_m$. The reverse triangle inequality and [L2] to [L3] yield $$|W_{a,b}(x_m)-W_{a,b}(x_0)|\ge(ab)^m\left(\frac23-\frac{\pi}{ab-1}\right)(x_m-x_0).$$ [step 1.1, L2, L3, algebra]
+2.1 For $m\ge1$, splitting the series increment at frequency $m$ gives $W_{a,b}(x_m)-W_{a,b}(x_0)=A_m+B_m$. The reverse triangle inequality and [L2] to [L3] yield $$|W_{a,b}(x_m)-W_{a,b}(x_0)|\ge(ab)^m\left(\frac23-\frac{\pi}{ab-1}\right)(x_m-x_0).$$ [step 1.1, L2, L3, algebra]
 
 3.1 Since $x_m-x_0>0$, divide step 2.1 by it. Step 1.2 and [L4] show that the absolute values of the selected difference quotients are at least $c(ab)^m$ and tend to $+\infty$. [step 1.2, step 2.1, L4, algebra]
 

@@ -71,7 +71,7 @@
           "fact": "F1",
           "source": "def-ck-euclidean-maps-and-diffeomorphisms",
           "source_section": "Definition",
-          "quote": "A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$.",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
           "uses": [
             "1.1",
             "2.1"
@@ -81,7 +81,7 @@
           "fact": "L1",
           "source": "thm-chain-rule-for-total-derivatives",
           "source_section": "Statement",
-          "quote": "D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
           "uses": [
             "2.1"
           ]
@@ -90,7 +90,7 @@
           "fact": "L2",
           "source": "thm-algebra-of-derivatives",
           "source_section": "Statement",
-          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
           "uses": [
             "2.1"
           ]
@@ -99,7 +99,34 @@
           "fact": "L3",
           "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
           "source_section": "Statement",
-          "quote": "Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace\ntopology ([[def-subspace-topology-top]]). Then:\n\n1. **Composites.** If $f : X \\to Y$ and $g : Y \\to Z$ are continuous\n   ([[def-continuous-map-top]]) then $g \\circ f : X \\to Z$ is continuous.\n2. **Open cover.** Let $f : X \\to Y$ be a function and let\n   $\\{\\, U_i : i \\in I \\,\\}$ be a family of open subsets of $X$ with\n   $\\bigcup_{i \\in I} U_i = X$. If $f|_{U_i} : U_i \\to Y$ is continuous for every\n   $i \\in I$, then $f$ is continuous.\n3. **Finite closed cover.** Let $f : X \\to Y$ be a function, let $n \\ge 1$ and\n   let $F_1, \\dots, F_n$ be closed subsets of $X$ with\n   $F_1 \\cup \\dots \\cup F_n = X$. If $f|_{F_k} : F_k \\to Y$ is continuous for\n   every $k$, then $f$ is continuous.\n\nThe converses of claims 2 and 3 hold with no hypothesis on the cover at all:\nevery restriction of a continuous map to a subspace is continuous\n([[def-subspace-topology-top]]). The finiteness in claim 3 is not removable; see\nthe remarks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
           "uses": [
             "2.1"
           ]
@@ -108,12 +135,12 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "At order $k=0$, [F1] reduces the assertions to scalar component functions. Finite sums, products, and scalar multiples of continuous functions are continuous, and a composite of continuous maps is continuous; on an empty domain all these assertions are vacuous.",
+          "claim": "At order $k=0$, [F1] reduces the assertions to scalar component functions, and [L4] supplies closure under the stated operations; on an empty domain all these assertions are vacuous.",
           "step": "1.1",
           "inputs": [
             "F1",
+            "L4",
             "given",
-            "algebra",
             "base"
           ]
         },
@@ -127,15 +154,16 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Consider maps of class $C^{r+1}$. For a sum, scalar multiple, or componentwise product, [L2] on each coordinate line expresses every first partial derivative as a finite sum of products of $C^r$ functions. For a composite, [L3] supplies the total derivatives and identifies their matrices with the Jacobians, while [L1] expresses each first partial of the composite as a finite sum of products of first partials of the factors. The hypothesis in step 1.2 makes all these first partials $C^r$, so [F1] makes the resulting maps $C^{r+1}$. Together with the base case, this proves the result through every finite $k$.",
+          "claim": "Consider maps of class $C^{r+1}$. For a sum, scalar multiple, or componentwise product, [L2] on each coordinate line expresses every first partial derivative as a finite sum of products of $C^r$ functions. For a composite, [L3] supplies total differentiability, [L1] gives its total derivative, and [L5] identifies the first partials with the columns of that derivative; hence every first partial is a finite sum of products of first partials of the factors. The hypothesis in step 1.2 makes all these first partials $C^r$, so [F1] makes the resulting maps $C^{r+1}$. Together with the base case, this proves the result through every finite $k$.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.2",
             "step 1.1",
+            "step 1.2",
             "F1",
+            "L1",
             "L2",
             "L3",
+            "L5",
             "given",
             "algebra",
             "discharge-induction"
@@ -188,8 +216,8 @@
       "finite_smoke": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "Alpha-a with read-only refuter RB1I",
-        "notes": "RB1I read every proof step and cited source for thm-ck-euclidean-maps-closed-under-algebra-and-composition. Current score 8 (critical) is driven by 5 declared dependencies; 5 cited facts; boundary-sensitive language; induction, recursion, or minimality. Alpha rechecked the final disk text; no concrete false claim, unlicensed inference, missing hypothesis, or inaccurate citation remains."
+        "reviewer": "GPT 5.6 Sol lead Alpha — rejudge round 1, extending RB1I",
+        "notes": "Both rejudge lanes exposed that the C0 base case cited scalar real-function composition for vector-valued Euclidean maps. The repaired L4 uses the general topological composition theorem, while scalar algebra remains with its exact source. I rechecked the induction step, empty-domain case, and every derivative-order transition against the regenerated contract."
       }
     },
     "lem-matrix-inversion-preserves-ck-regularity": {
@@ -198,7 +226,7 @@
           "fact": "L1",
           "source": "cor-inverse-matrix-by-adjugate",
           "source_section": "Statement",
-          "quote": "$$A^{-1}=\\det(A)^{-1}\\operatorname{adj}(A).$$",
+          "quote": "If $R$ is a commutative ring, $n\\geq1$, $A\\in M_n(R)$, and $\\det(A)$ is a\nunit, then\n\n$$A^{-1}=\\det(A)^{-1}\\operatorname{adj}(A).$$",
           "uses": [
             "1.1",
             "2.1"
@@ -208,7 +236,7 @@
           "fact": "L2",
           "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
           "source_section": "Statement",
-          "quote": "the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
           "uses": [
             "1.1"
           ]
@@ -217,7 +245,7 @@
           "fact": "L3",
           "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
           "source_section": "Statement",
-          "quote": "Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$.",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
           "uses": [
             "1.1",
             "2.1"
@@ -230,9 +258,9 @@
           "claim": "Every cofactor and the determinant are polynomial expressions in the $C^r$ entries of $A$, so they are $C^r$ by [L2] and [L3]; [L1] identifies the only remaining factor needed for the inverse.",
           "step": "1.1",
           "inputs": [
+            "L1",
             "L2",
-            "L3",
-            "L1"
+            "L3"
           ]
         },
         {
@@ -249,9 +277,9 @@
           "claim": "Since $\\det A$ never vanishes, its image lies in the domain of step 1.2. Thus $(\\det A)^{-1}$ is $C^r$ by composition, and [L1] together with step 1.1 and [L3] makes every entry of $A^{-1}$ $C^r$.",
           "step": "2.1",
           "inputs": [
+            "step 1.1",
             "step 1.2",
             "L1",
-            "step 1.1",
             "L3"
           ]
         }
@@ -312,7 +340,7 @@
           "fact": "L1",
           "source": "thm-euclidean-inverse-function-theorem",
           "source_section": "Statement",
-          "quote": "Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "1.1"
           ]
@@ -321,7 +349,7 @@
           "fact": "L2",
           "source": "lem-matrix-inversion-preserves-ck-regularity",
           "source_section": "Statement",
-          "quote": "If the entries of $A:U\\to M_n(\\mathbb R)$ are $C^r$ and $\\det A$ never vanishes, then the entries of $A^{-1}$ are $C^r$.",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $r\\in\\mathbb N$. If the entries of $A:U\\to M_n(\\mathbb R)$ are $C^r$ and $\\det A$ never vanishes, then the entries of $A^{-1}$ are $C^r$.",
           "uses": [
             "2.1"
           ]
@@ -341,8 +369,8 @@
           "claim": "Suppose $1\\le r<k$ and $g$ is $C^r$. Because $f$ is $C^k$, the entries of $Df$ are $C^{k-1}$, hence $C^r$ when $r<k$; closure under composition makes $Df\\circ g$ $C^r$, and [L2] makes $Dg$ $C^r$. Therefore $g$ is $C^{r+1}$. Starting from step 1.1 and repeating this finite bootstrap reaches $C^k$.",
           "step": "2.1",
           "inputs": [
-            "L2",
             "step 1.1",
+            "L2",
             "given",
             "algebra"
           ]
@@ -399,7 +427,7 @@
           "fact": "L1",
           "source": "lem-newton-contraction-near-an-invertible-derivative",
           "source_section": "Statement",
-          "quote": "Moreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  Suppose $A:=Df(a)$ is invertible and put\n$B:=A^{-1}$.  Then there are $R>0$, $0\\le q<1$, and $C>0$ such that\n$\\overline B(a,R)\\subseteq U$, $\\|Bv\\|_2\\le C\\|v\\|_2$, and, for every\n$y\\in\\mathbb R^n$, the Newton map\n\n$$T_y(x):=x+B(y-f(x))$$\n\nsatisfies\n\n$$\\|T_y(x)-T_y(z)\\|_2\\le q\\|x-z\\|_2\\qquad(x,z\\in\\overline B(a,R)).$$\n\nMoreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$ and\n\n$$\\|Df(x)^{-1}v\\|_2\\le\\frac C{1-q}\\|v\\|_2.$$",
           "uses": [
             "1.1"
           ]
@@ -475,7 +503,7 @@
           "fact": "L1",
           "source": "thm-euclidean-inverse-function-theorem",
           "source_section": "Statement",
-          "quote": "Thus $f$ is a local diffeomorphism at $a$.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "1.1"
           ]
@@ -552,7 +580,7 @@
           "fact": "L1",
           "source": "cor-c-one-local-diffeomorphisms-are-open-maps",
           "source_section": "Statement",
-          "quote": "Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^1$. Suppose $Df(x)$ is invertible for every $x\\in U$. Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$. Thus $f$ is an open map ([[def-homeomorphism-and-open-maps]]).",
           "uses": [
             "1.1"
           ]
@@ -561,7 +589,7 @@
           "fact": "L2",
           "source": "thm-euclidean-inverse-function-theorem",
           "source_section": "Statement",
-          "quote": "$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "2.1"
           ]
@@ -582,8 +610,8 @@
           "claim": "Fix $y\\in f[U]$. The unique global inverse agrees near $y$, by injectivity, with the local inverse from [L2]. Hence $g$ is $C^1$ near every image point and satisfies $Dg(y)=Df(g(y))^{-1}$ there. This proves the stated global $C^1$ diffeomorphism and derivative formula.",
           "step": "2.1",
           "inputs": [
-            "L2",
             "step 1.1",
+            "L2",
             "given"
           ]
         }
@@ -644,7 +672,7 @@
           "fact": "L1",
           "source": "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image",
           "source_section": "Statement",
-          "quote": "Then $f[U]$ is open and $f:U\\to f[U]$ is a $C^1$ diffeomorphism.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be injective and $C^1$. Suppose $Df(x)$ is invertible for every $x\\in U$, equivalently $U=\\operatorname{Reg}(f)$ ([[def-regular-locus-of-a-c-one-map]]). Then $f[U]$ is open and $f:U\\to f[U]$ is a $C^1$ diffeomorphism. Its inverse $g$ satisfies\n\n$$Dg(f(x))=Df(x)^{-1}\\qquad(x\\in U).$$",
           "uses": [
             "1.1"
           ]
@@ -653,7 +681,7 @@
           "fact": "L2",
           "source": "thm-higher-regularity-of-local-inverses",
           "source_section": "Statement",
-          "quote": "Then every local inverse supplied by the inverse function theorem at $a$ is $C^k$.",
+          "quote": "Let $k,n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^k$, with $Df(a)$ invertible. Then every local inverse supplied by the inverse function theorem at $a$ is $C^k$. In its inverse neighbourhood it satisfies\n\n$$Dg(y)=Df(g(y))^{-1}.$$",
           "uses": [
             "2.1"
           ]
@@ -673,8 +701,8 @@
           "claim": "Around each $y\\in f[U]$, the inverse $g$ agrees with the unique local inverse of $f$. By [L2] that restriction is $C^k$. Thus $g$ is locally, and hence globally, $C^k$, so the corestriction is a $C^k$ diffeomorphism.",
           "step": "2.1",
           "inputs": [
-            "L2",
-            "step 1.1"
+            "step 1.1",
+            "L2"
           ]
         }
       ],
@@ -729,7 +757,7 @@
           "fact": "L1",
           "source": "thm-euclidean-implicit-function-theorem",
           "source_section": "Statement",
-          "quote": "$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
           "uses": [
             "1.1"
           ]
@@ -738,7 +766,7 @@
           "fact": "L2",
           "source": "thm-higher-regularity-of-local-inverses",
           "source_section": "Statement",
-          "quote": "Then every local inverse supplied by the inverse function theorem at $a$ is $C^k$.",
+          "quote": "Let $k,n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^k$, with $Df(a)$ invertible. Then every local inverse supplied by the inverse function theorem at $a$ is $C^k$. In its inverse neighbourhood it satisfies\n\n$$Dg(y)=Df(g(y))^{-1}.$$",
           "uses": [
             "2.1"
           ]
@@ -747,7 +775,7 @@
           "fact": "L3",
           "source": "thm-euclidean-inverse-function-theorem",
           "source_section": "Statement",
-          "quote": "Its inverse $g:W\\to V$ is $C^1$",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "2.1"
           ]
@@ -842,7 +870,7 @@
           "fact": "L1",
           "source": "def-proper-map-between-euclidean-open-sets",
           "source_section": "Definition",
-          "quote": "A continuous map $f:U\\to V$ is proper when $f^{-1}[K]$ is compact in $U$ for every compact subset $K$ of $V$.",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ and $V\\subseteq\\mathbb R^n$ be open, with their Euclidean metric topologies ([[def-metric-topology]]). A continuous map $f:U\\to V$ is proper when $f^{-1}[K]$ is compact in $U$ for every compact subset $K$ of $V$. Continuity and compactness have the meanings of [[def-metric-continuity]] and [[def-metric-compactness]].\n\nCompactness here is intrinsic to the displayed subspaces. In particular, properness concerns compact subsets of $V$, not merely subsets compact in the ambient space by an unstated convention.",
           "uses": [
             "1.1",
             "2.1"
@@ -852,7 +880,7 @@
           "fact": "L2",
           "source": "cor-c-one-local-diffeomorphisms-are-open-maps",
           "source_section": "Statement",
-          "quote": "Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^1$. Suppose $Df(x)$ is invertible for every $x\\in U$. Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$. Thus $f$ is an open map ([[def-homeomorphism-and-open-maps]]).",
           "uses": [
             "2.1"
           ]
@@ -861,7 +889,7 @@
           "fact": "L3",
           "source": "thm-continuous-image-of-a-compact-space-is-compact",
           "source_section": "Statement",
-          "quote": "if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is a compact subset of $Y$.",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
           "uses": [
             "1.1"
           ]
@@ -870,7 +898,7 @@
           "fact": "L4",
           "source": "lem-closed-subset-of-a-compact-space-is-compact",
           "source_section": "Statement",
-          "quote": "Then $F$ is a compact subset of $X$",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
           "uses": [
             "1.1"
           ]
@@ -883,8 +911,8 @@
           "step": "1.1",
           "inputs": [
             "L1",
-            "L4",
             "L3",
+            "L4",
             "given"
           ]
         },
@@ -893,9 +921,9 @@
           "claim": "By [L2], $f[U]$ is open, and by step 1.1 it is closed. It is nonempty, so connectedness of $V$ gives $f[U]=V$. For $y\\in V$, [L1] makes $f^{-1}(y)$ compact. Local injectivity makes this fibre discrete, and its cover by neighbourhoods meeting the fibre in one point has a finite subcover; hence the fibre is nonempty and finite.",
           "step": "2.1",
           "inputs": [
-            "L2",
             "step 1.1",
             "L1",
+            "L2",
             "given"
           ]
         },
@@ -957,8 +985,8 @@
       "finite_smoke": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "Alpha-a with read-only refuter RB1I",
-        "notes": "RB1I read every proof step and cited source for thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets. Current score 7 (high) is driven by 12 declared dependencies; 10 cited facts; boundary-sensitive language. Alpha rechecked the final disk text; no concrete false claim, unlicensed inference, missing hypothesis, or inaccurate citation remains."
+        "reviewer": "GPT 5.6 Sol lead Alpha — rejudge round 1, extending RB1I",
+        "notes": "The Terra rejudge found that L4 dropped the cited lemma's metric-space domain. The repaired Fact restores compact metric space exactly; every application is to the metric subspace U. I rechecked closedness, surjectivity, finite fibres, and the finite-sheet neighbourhood construction against the current Facts."
       }
     },
     "cor-proper-local-diffeomorphisms-have-constant-finite-fibres": {
@@ -967,7 +995,7 @@
           "fact": "L1",
           "source": "thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets",
           "source_section": "Statement",
-          "quote": "every $y\\in V$ has an open neighbourhood whose preimage is a finite disjoint union of open sets, each carried $C^1$-diffeomorphically onto that neighbourhood by $f$.",
+          "quote": "Let $n\\ge1$, let $U,V\\subseteq\\mathbb R^n$ be nonempty open sets, let $V$ be connected, and let $f:U\\to V$ be a proper $C^1$ map such that $Df(x)$ is invertible for every $x\\in U$. Then $f$ is surjective, every fibre is finite, and every $y\\in V$ has an open neighbourhood whose preimage is a finite disjoint union of open sets, each carried $C^1$-diffeomorphically onto that neighbourhood by $f$.",
           "uses": [
             "1.1"
           ]
@@ -1043,7 +1071,7 @@
           "fact": "L1",
           "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
           "source_section": "Statement",
-          "quote": "the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
           "uses": [
             "1.1"
           ]
@@ -1052,7 +1080,7 @@
           "fact": "L2",
           "source": "thm-continuous-image-of-a-connected-space",
           "source_section": "Statement",
-          "quote": "then $f[A]$ is a connected subset of $Y$.",
+          "quote": "Let $X$ and $Y$ be topological spaces and let $f : X \\to Y$ be continuous\n([[def-continuous-map-top]]). Subsets carry the subspace topology\n([[def-subspace-topology-top]]). Then:\n\n1. **Images.** If $A \\subseteq X$ is a connected subset of $X$\n   ([[def-connected-space]]) then $f[A]$ is a connected subset of $Y$. In\n   particular, if $X$ is connected then $f[X]$ is connected, and if $f$ is\n   moreover surjective then $Y$ is connected.\n2. **Topological invariance.** If $h : X \\to Y$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]) then $X$ is connected if and only if\n   $Y$ is. So connectedness is a **topological property**.\n\nNothing is assumed about $f$ beyond continuity: it need not be injective, open,\nclosed or surjective. Note the direction — a continuous **image** of a connected\nspace is connected, while a continuous **preimage** need not be, since a constant\nmap from a disconnected space is continuous.",
           "uses": [
             "2.1"
           ]
@@ -1073,8 +1101,8 @@
           "claim": "By [L2], its image is a connected subset of $\\mathbb R$. Regularity excludes zero. If the image contained both a negative and a positive value, order-convexity would force it to contain zero, a contradiction. Nonemptiness therefore leaves exactly one sign throughout $U$.",
           "step": "2.1",
           "inputs": [
-            "L2",
             "step 1.1",
+            "L2",
             "given"
           ]
         }
@@ -1237,7 +1265,7 @@
           "fact": "L1",
           "source": "thm-sine-and-cosine-derivatives",
           "source_section": "Statement",
-          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
           "uses": [
             "1.1"
           ]
@@ -1246,7 +1274,7 @@
           "fact": "L2",
           "source": "def-local-orientation-of-a-regular-c-one-map",
           "source_section": "Definition",
-          "quote": "A regular $C^1$ map is locally orientation-preserving where $\\det Df>0$ and locally orientation-reversing where $\\det Df<0$.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^1$. At a regular point, the derivative matrix is invertible ([[def-regular-locus-of-a-c-one-map]], [[thm-invertible-matrices-correspond-to-linear-isomorphisms]]), so its determinant is a nonzero real number ([[cor-invertible-matrix-has-unit-determinant]], [[def-ordered-field]]).\n\nA regular $C^1$ map is locally orientation-preserving where $\\det Df>0$ and locally orientation-reversing where $\\det Df<0$. These are the two possible signs of the Jacobian determinant [[def-jacobian-determinant-of-a-c-one-map]] at a regular point.",
           "uses": [
             "1.1"
           ]
@@ -1255,7 +1283,16 @@
           "fact": "L3",
           "source": "thm-algebra-of-derivatives",
           "source_section": "Statement",
-          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "1.1"
           ]
@@ -1264,13 +1301,13 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [L1] and [L3], $$DP(r,\\theta)=\\begin{pmatrix}\\cos\\theta&-r\\sin\\theta\\\\ \\sin\\theta&r\\cos\\theta\\end{pmatrix},\\qquad\\det DP(r,\\theta)=r.$$ Thus the inverse function theorem and [L2] give the asserted local diffeomorphism and orientation wherever $r\\ne0$.",
+          "claim": "By [L1] and [L3], $$DP(r,\\theta)=\\begin{pmatrix}\\cos\\theta&-r\\sin\\theta\\\\ \\sin\\theta&r\\cos\\theta\\end{pmatrix},\\qquad\\det DP(r,\\theta)=r.$$ Thus [L4] and [L2] give the asserted local diffeomorphism and orientation wherever $r\\ne0$.",
           "step": "1.1",
           "inputs": [
             "L1",
             "L2",
             "L3",
-            "given",
+            "L4",
             "algebra"
           ]
         },
@@ -1341,7 +1378,7 @@
           "fact": "L1",
           "source": "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image",
           "source_section": "Statement",
-          "quote": "Then $f[U]$ is open and the corestriction $f:U\\to f[U]$ is a $C^k$ diffeomorphism.",
+          "quote": "Let $k,n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be an injective $C^k$ map whose derivative is invertible everywhere. Then $f[U]$ is open and the corestriction $f:U\\to f[U]$ is a $C^k$ diffeomorphism.",
           "uses": [
             "2.1"
           ]
@@ -1350,7 +1387,7 @@
           "fact": "L2",
           "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
           "source_section": "Statement",
-          "quote": "Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
           "uses": [
             "1.1"
           ]
@@ -1429,7 +1466,7 @@
           "fact": "L1",
           "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
           "source_section": "Statement",
-          "quote": "there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
           "uses": [
             "2.1"
           ]
@@ -1438,7 +1475,7 @@
           "fact": "L2",
           "source": "thm-derivative-of-exponential",
           "source_section": "Statement",
-          "quote": "In particular $(\\exp)'=\\exp$.",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
           "uses": [
             "1.1"
           ]
@@ -1447,7 +1484,7 @@
           "fact": "L3",
           "source": "lem-derivative-of-a-power",
           "source_section": "Statement",
-          "quote": "$$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
           "uses": [
             "1.1"
           ]
@@ -1456,7 +1493,16 @@
           "fact": "L4",
           "source": "thm-chain-rule",
           "source_section": "Statement",
-          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
           "uses": [
             "1.1"
           ]
@@ -1465,12 +1511,13 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Repeated use of [L3] and the derivative algebra in the Given facts makes the polynomial terms smooth, while [L2] makes the exponential terms smooth; hence $F$ is smooth. By [L2]–[L4], $$D_{(y,z)}F(0,0,0)=\\begin{pmatrix}0&-3\\\\1&1\\end{pmatrix},$$ whose determinant is $3$, while $D_xF(0,0,0)=(0,1)^T$.",
+          "claim": "Repeated use of [L3] and [L5] makes the polynomial terms smooth, while [L2] and [L5] make the exponential terms smooth; hence $F$ is smooth. Direct substitution gives $F(0,0,0)=0$, and [L2]–[L4] give $$D_{(y,z)}F(0,0,0)=\\begin{pmatrix}0&-3\\\\1&1\\end{pmatrix},$$ whose determinant is $3$, while $D_xF(0,0,0)=(0,1)^T$.",
           "step": "1.1",
           "inputs": [
             "L2",
             "L3",
             "L4",
+            "L5",
             "given",
             "algebra"
           ]
@@ -1532,8 +1579,8 @@
       "finite_smoke": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "Alpha-a with read-only refuter RB1I",
-        "notes": "RB1I read every proof step and cited source for ex-two-equation-implicit-system. Current score 8 (critical) is driven by 6 declared dependencies; 6 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language. Alpha rechecked the final disk text; no concrete false claim, unlicensed inference, missing hypothesis, or inaccurate citation remains."
+        "reviewer": "GPT 5.6 Sol lead Alpha — rejudge round 1, extending RB1I",
+        "notes": "Both rejudge lanes found that L1 omitted the implicit-function theorem's open-domain, dimension, and Ck hypotheses. The repaired Fact restores them, and step 1.1 verifies each for the displayed smooth map before step 2.1 applies the theorem. The derivative matrix, determinant, solution derivative, and uniqueness claim were rechecked."
       }
     },
     "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism": {
@@ -1696,7 +1743,7 @@
           "fact": "L1",
           "source": "def-total-derivative-in-euclidean-space",
           "source_section": "Definition",
-          "quote": "with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
           "uses": [
             "1.1"
           ]
@@ -1773,7 +1820,7 @@
           "fact": "L1",
           "source": "def-derivative",
           "source_section": "Definition",
-          "quote": "$f$ is **differentiable at $c$** when that limit exists",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
           "uses": [
             "1.1",
             "3.1"
@@ -1783,7 +1830,7 @@
           "fact": "L2",
           "source": "thm-sine-and-cosine-derivatives",
           "source_section": "Statement",
-          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
           "uses": [
             "1.1"
           ]
@@ -1792,7 +1839,7 @@
           "fact": "L3",
           "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
           "source_section": "Statement",
-          "quote": "Both sine and cosine have period $2\\pi$",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
           "uses": [
             "2.1"
           ]
@@ -1801,7 +1848,7 @@
           "fact": "L4",
           "source": "thm-quarter-turn-values-and-shift-formulas",
           "source_section": "Statement",
-          "quote": "$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
           "uses": [
             "2.1"
           ]
@@ -1810,7 +1857,7 @@
           "fact": "L5",
           "source": "thm-continuous-inverse",
           "source_section": "Statement",
-          "quote": "$f$ is strictly monotone",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then:\n\n1. $f$ is strictly monotone ([[def-monotone-function]]);\n2. $f[I]$ is order-convex;\n3. the map $f : I \\to f[I]$ is a bijection, so there is exactly one\n   $g : f[I] \\to I$ with $g(f(x)) = x$ for every $x \\in I$ and $f(g(u)) = u$ for\n   every $u \\in f[I]$;\n4. $g$ is strictly monotone in the same sense as $f$: increasing if $f$ is\n   increasing, decreasing if $f$ is decreasing;\n5. $g$ is continuous on $f[I]$.\n\n**\"Interval\" means \"order-convex\" here**, as throughout this library\n([[thm-connected-subsets-of-r-are-intervals]] is what licenses the word and\n[[def-interval]] records that the classification of order-convex sets into the\nnine written forms is not proved here). No compactness and no boundedness is\nassumed: $I$ may be open, half-open, unbounded, or a single point.",
           "uses": [
             "3.1"
           ]
@@ -1833,9 +1880,9 @@
           "claim": "Put $x_n=1/(2\\pi n)$ and $y_n=1/((2n+1)\\pi)$ for $n\\ge1$. By [L3] and [L4], step 1.1 gives $f'(x_n)=-1$ and $f'(y_n)=3$. Both sequences tend to zero, so derivatives of both signs occur in every neighbourhood of zero.",
           "step": "2.1",
           "inputs": [
+            "step 1.1",
             "L3",
             "L4",
-            "step 1.1",
             "algebra"
           ]
         },
@@ -1844,9 +1891,9 @@
           "claim": "Suppose $f$ were injective on an interval about zero. It is continuous there, so [L5] would make it strictly increasing or strictly decreasing. Difference quotients show that the derivative of an increasing differentiable function is nonnegative and that of a decreasing one is nonpositive, contradicting step 2.1. Thus $f'(0)=1$ is invertible but no local inverse exists.",
           "step": "3.1",
           "inputs": [
-            "L5",
             "step 2.1",
             "L1",
+            "L5",
             "given",
             "assume-contra",
             "discharge-contradiction"
@@ -1909,7 +1956,7 @@
           "fact": "L1",
           "source": "thm-euclidean-inverse-function-theorem",
           "source_section": "Statement",
-          "quote": "If $Df(a)$ is invertible, then there are open sets",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
           "uses": [
             "1.1"
           ]
@@ -1918,7 +1965,7 @@
           "fact": "L2",
           "source": "def-invertible-euclidean-linear-map",
           "source_section": "Definition",
-          "quote": "is **invertible** when there is a linear map",
+          "quote": "Let $n\\ge1$.  A linear map $A:\\mathbb R^n\\to\\mathbb R^n$\n([[def-euclidean-linear-map]]) is **invertible** when there is a linear map\n$B:\\mathbb R^n\\to\\mathbb R^n$ such that\n\n$$B(Au)=u\\quad\\hbox{and}\\quad A(Bu)=u\\qquad(u\\in\\mathbb R^n).$$\n\nThe map $B$ is unique: if $C$ has the same two properties, then\n$C=C\\circ(A\\circ B)=(C\\circ A)\\circ B=B$.  It is denoted $A^{-1}$.",
           "uses": [
             "1.1"
           ]
@@ -1927,7 +1974,7 @@
           "fact": "L3",
           "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
           "source_section": "Statement",
-          "quote": "Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
           "uses": [
             "1.1"
           ]
@@ -1939,9 +1986,9 @@
           "claim": "By [L3], $$DS(x,y)=\\begin{pmatrix}2x&-2y\\\\2y&2x\\end{pmatrix}.$$ At $(x,y)\\ne(0,0)$, the matrix $\\frac1{2(x^2+y^2)}\\begin{pmatrix}x&y\\\\-y&x\\end{pmatrix}$ is its two-sided inverse, so [L2] and [L1] make $S$ locally invertible at every point of $U$.",
           "step": "1.1",
           "inputs": [
-            "L3",
-            "L2",
             "L1",
+            "L2",
+            "L3",
             "given",
             "algebra"
           ]
@@ -2012,7 +2059,7 @@
           "fact": "L1",
           "source": "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism",
           "source_section": "Statement refuted",
-          "quote": "The map $x\\mapsto x^3$ is a smooth open bijection of $\\mathbb R$ with derivative zero at the origin, but its inverse is not differentiable there.",
+          "quote": "A $C^1$ bijection between open subsets of the real line must be a $C^1$ diffeomorphism.\n\nThe counterexample below establishes: The map $x\\mapsto x^3$ is a smooth open bijection of $\\mathbb R$ with derivative zero at the origin, but its inverse is not differentiable there.",
           "uses": [
             "1.1",
             "2.1"
@@ -2033,8 +2080,8 @@
           "claim": "Its inverse fails even to be differentiable at zero by [L1], and therefore cannot be $C^1$. Hence the claim is false.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],
@@ -2089,7 +2136,7 @@
           "fact": "L1",
           "source": "cex-zero-derivative-on-a-disconnected-open-set-without-constancy",
           "source_section": "Statement refuted",
-          "quote": "The total derivative of $f$ is zero at every point of $U$, but $f$ is not constant on $U$.",
+          "quote": "If a differentiable real function has derivative zero at every point of an open domain, then it is constant on that domain.\n\nThe counterexample below establishes the true witness clause: The total derivative of $f$ is zero at every point of $U$, but $f$ is not constant on $U$.",
           "uses": [
             "1.1"
           ]
@@ -2179,7 +2226,7 @@
           "fact": "L1",
           "source": "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism",
           "source_section": "Statement refuted",
-          "quote": "The map $x\\mapsto x^3$ is a smooth open bijection of $\\mathbb R$ with derivative zero at the origin, but its inverse is not differentiable there.",
+          "quote": "A $C^1$ bijection between open subsets of the real line must be a $C^1$ diffeomorphism.\n\nThe counterexample below establishes: The map $x\\mapsto x^3$ is a smooth open bijection of $\\mathbb R$ with derivative zero at the origin, but its inverse is not differentiable there.",
           "uses": [
             "1.1"
           ]
@@ -2188,7 +2235,7 @@
           "fact": "L2",
           "source": "cor-c-one-local-diffeomorphisms-are-open-maps",
           "source_section": "Statement",
-          "quote": "Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$.",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R^n$ be $C^1$. Suppose $Df(x)$ is invertible for every $x\\in U$. Then $f$ maps every open subset of $U$ to an open subset of $\\mathbb R^n$. Thus $f$ is an open map ([[def-homeomorphism-and-open-maps]]).",
           "uses": [
             "2.1"
           ]
@@ -2209,8 +2256,8 @@
           "claim": "Therefore openness does not imply derivative invertibility. The valid result [L2] is only the forward sufficient implication from derivative invertibility to openness.",
           "step": "2.1",
           "inputs": [
-            "L2",
-            "step 1.1"
+            "step 1.1",
+            "L2"
           ]
         }
       ],
@@ -2265,7 +2312,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1",
             "2.1"
@@ -2275,7 +2322,7 @@
           "fact": "F2",
           "source": "def-epigraph-and-hypograph",
           "source_section": "Definition",
-          "quote": "The epigraph of $f:A\\to\\mathbb R$ is $\\operatorname{epi}f=\\{(x,s)\\in A\\times\\mathbb R:f(x)\\le s\\}$.",
+          "quote": "Let $A\\subseteq\\mathbb R^n$ and let $f:A\\to\\mathbb R$. The epigraph of $f:A\\to\\mathbb R$ is $\\operatorname{epi}f=\\{(x,s)\\in A\\times\\mathbb R:f(x)\\le s\\}$.\n\nIts **hypograph** is\n\n$$\\operatorname{hypo}f:=\\{(x,s)\\in A\\times\\mathbb R:s\\le f(x)\\}.$$\n\nBoth are subsets of the Cartesian product $A\\times\\mathbb R$ ([[def-cartesian-product]]). When $A$ is not closed, closedness of either set is understood relative to $A\\times\\mathbb R$ unless an ambient space is named.",
           "uses": [
             "1.1",
             "2.1"
@@ -2297,9 +2344,9 @@
           "claim": "For the reverse implication, assume the epigraph convex and apply its convexity to $(x,f(x))$ and $(y,f(y))$. By [F2], membership of their convex combination is exactly the inequality in [F1]. Thus $f$ is convex; if $C$ is empty, both conditions are vacuous.",
           "step": "2.1",
           "inputs": [
-            "F2",
+            "step 1.1",
             "F1",
-            "step 1.1"
+            "F2"
           ]
         }
       ],
@@ -2359,7 +2406,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1",
             "3.1"
@@ -2400,9 +2447,9 @@
           "claim": "Apply the induction hypothesis to $z=\\sum_{j=1}^N\\mu_jx_j\\in C$, then apply [F1] to $z,x_{N+1}$ with weights $s,\\lambda_{N+1}$. The resulting inequality is exactly the $(N+1)$-point formula, completing the induction.",
           "step": "3.1",
           "inputs": [
-            "F1",
             "step 1.2",
             "step 2.1",
+            "F1",
             "algebra",
             "discharge-induction"
           ]
@@ -2464,7 +2511,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1"
           ]
@@ -2541,7 +2588,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1",
             "1.2",
@@ -2629,7 +2676,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1",
             "2.1"
@@ -2637,9 +2684,9 @@
         },
         {
           "fact": "L1",
-          "source": "def-complete-ordered-field",
-          "source_section": "Definition",
-          "quote": "$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "source": "thm-dedekind-complete",
+          "source_section": "Statement",
+          "quote": "**Least-upper-bound property.** Every nonempty set $S$ of Dedekind cuts that is\nbounded above (there is a cut $B$ with $A \\le B$ for all $A \\in S$) has a least\nupper bound $\\sup S$, and it is given explicitly by the union\n$$C := \\bigcup_{A \\in S} A.$$\nTogether with [[thm-reals-dedekind-ordered-field]] this shows $\\mathbb{R}$ is a\n**complete totally ordered field**: the Dedekind construction is order-complete.\nThis order-completeness is the Dedekind counterpart of the Cauchy-sequence\ncompleteness of $\\mathbb{R}$.",
           "uses": [
             "1.1",
             "2.1"
@@ -2664,8 +2711,8 @@
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1",
             "F1",
+            "L1",
             "algebra"
           ]
         }
@@ -2726,7 +2773,7 @@
           "fact": "L1",
           "source": "thm-finite-jensen-inequality-in-euclidean-space",
           "source_section": "Statement",
-          "quote": "For a positive finite family of points in $C$ and nonnegative weights summing to one, $f$ of their weighted Euclidean sum is at most the weighted sum of their $f$-values.",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex. For a positive finite family of points in $C$ and nonnegative weights summing to one, $f$ of their weighted Euclidean sum is at most the weighted sum of their $f$-values. Explicitly, if $N\\ge1$, $x_1,\\ldots,x_N\\in C$, $\\lambda_j\\ge0$, and $\\sum_{j=1}^N\\lambda_j=1$, then\n\n$$f\\left(\\sum_{j=1}^N\\lambda_jx_j\\right)\\le\\sum_{j=1}^N\\lambda_jf(x_j).$$",
           "uses": [
             "1.1"
           ]
@@ -2810,7 +2857,7 @@
           "fact": "L1",
           "source": "lem-convex-function-bound-on-an-interior-cube",
           "source_section": "Statement",
-          "quote": "Then $f$ is bounded above on the full cube and bounded above and below on the concentric half-sized cube.",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be convex, let $f:C\\to\\mathbb R$ be convex, and suppose the closed sup-norm cube\n\n$$Q(a,r)=\\{x:\\|x-a\\|_\\infty\\le r\\}$$\n\nwith $r>0$ lies in $C$ ([[def-multidimensional-rectangle-and-volume]], [[def-p-norms-on-rn]]). Then $f$ is bounded above on the full cube and bounded above and below on the concentric half-sized cube.",
           "uses": [
             "1.1",
             "2.1"
@@ -2820,7 +2867,7 @@
           "fact": "F1",
           "source": "def-lipschitz-holder-contraction",
           "source_section": "Definition",
-          "quote": "$f$ is Lipschitz with constant $L$",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).\n\n- $f$ is **Lipschitz** with **constant** $L$, where $L \\in \\mathbb{R}$ and\n  $L \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; L \\, d_X(x,x') \\qquad \\text{for all } x, x' \\in X .$$\n  $f$ is *Lipschitz* if it is Lipschitz with some such constant.\n- Let $\\alpha \\in \\mathbb{Q}$ with $0 < \\alpha \\le 1$ ([[def-rat-order]]). $f$ is\n  **$\\alpha$-Hölder** with **constant** $C$, where $C \\in \\mathbb{R}$ and\n  $C \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; C \\, d_X(x,x')^{\\alpha} \\qquad \\text{for all } x, x' \\in X ,$$\n  the power being the rational power of a nonnegative base\n  ([[def-rational-power]]). $f$ is *$\\alpha$-Hölder* if it is so with some such\n  constant, and *Hölder* if it is $\\alpha$-Hölder for some rational\n  $\\alpha \\in (0,1]$.\n- $f$ is a **contraction** with constant $q$ if it is Lipschitz with constant $q$\n  and $0 \\le q < 1$. The number $q$ is then called a **contraction constant** for\n  $f$.\n\n**The power $d_X(x,x')^{\\alpha}$ is defined at every pair, including $x = x'$.**\nThe base $d_X(x,x')$ is a nonnegative real, and [[def-rational-power]] defines\n$a^{\\alpha}$ for every $a > 0$ and, by its supplementary clause, sets\n$0^{\\alpha} = 0$ for every rational $\\alpha > 0$. Since $\\alpha > 0$ is required\nhere, the displayed inequality at $x = x'$ reads $0 \\le C \\cdot 0$, which holds;\nso no separate clause and no restriction to $x \\ne x'$ is needed. Note that this\ndoes not by itself explain the strict inequality $\\alpha>0$: if one extended the\nformula to $\\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the\nequal-point inequality would still be the automatic $0\\le C$. Globally, however,\nthat extension would reduce to the bounded-diameter condition\n$d_Y(f(x),f(x'))\\le C$, outside the standard Hölder range adopted here.\n\n**Why the exponent is rational on this page and why it is at most $1$.** At this\npoint in the reading order only rational powers are available\n([[def-rational-power]]), so $\\alpha$ ranges over the rationals. The upper\nbound $\\alpha \\le 1$ is the standard convention, and it is where the notion is\nuseful: the classical theory reserves the name for $\\alpha \\in (0,1]$, and\nnothing in this library uses an exponent outside that range. No claim is made\nhere about what an exponent $\\alpha > 1$ would do.\n\n**Constants are not unique and are not part of the data.** If $f$ is Lipschitz\nwith constant $L$ it is Lipschitz with every constant $L' \\ge L$, and likewise\nfor Hölder constants; the adjectives above are existential statements. A\n*contraction*, by contrast, requires a constant strictly below $1$, and that is a\nreal restriction: exhibiting the constant is part of exhibiting a contraction, and\na map that shrinks every distance without admitting one uniform constant is not a\ncontraction here.",
           "uses": [
             "3.1"
           ]
@@ -2913,7 +2960,7 @@
           "fact": "L1",
           "source": "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
           "source_section": "Statement",
-          "quote": "Then $f$ is locally Lipschitz on $U$",
+          "quote": "Let $n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^n$ be open and convex, and let $f:U\\to\\mathbb R$ be convex. Then $f$ is locally Lipschitz on $U$: every $a\\in U$ has a neighbourhood on which one finite constant bounds $|f(x)-f(y)|$ by $\\|x-y\\|_2$.",
           "uses": [
             "1.1"
           ]
@@ -2922,7 +2969,7 @@
           "fact": "L2",
           "source": "thm-metric-regularity-hierarchy",
           "source_section": "Statement",
-          "quote": "2. If $f$ is Lipschitz, it is uniformly continuous ([[def-metric-uniform-continuity]]). 3. If $f$ is uniformly continuous, it is continuous",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function, with the three regularity conditions as in\n[[def-lipschitz-holder-contraction]]. Then:\n\n1. If $f$ is a contraction, it is Lipschitz.\n2. If $f$ is Lipschitz, it is uniformly continuous\n   ([[def-metric-uniform-continuity]]).\n3. If $f$ is uniformly continuous, it is continuous\n   ([[def-metric-continuity]]).\n4. If $f$ is $\\alpha$-Hölder for some rational $\\alpha$ with $0 < \\alpha \\le 1$,\n   it is uniformly continuous.\n5. Suppose $X$ is nonempty and bounded, and put\n   $R := \\operatorname{diam}(X) + 1$, a real with $R > 0$\n   ([[def-metric-bounded-diameter]]). If $f$ is Lipschitz with constant $L$, then\n   for **every** rational $\\alpha$ with $0 < \\alpha \\le 1$ the map $f$ is\n   $\\alpha$-Hölder with constant $L\\,R^{\\,1-\\alpha}$.\n\n**Claim 5 carries its boundedness hypothesis for a reason, and no unconditional\n\"Lipschitz implies Hölder\" is asserted anywhere here.** On an unbounded space the\nimplication is false; the witness and its verification are in the first remark\nbelow.\n\n**Strictness is not claimed.** The five implications are asserted and nothing\nmore; that none of them reverses is witnessed elsewhere, and those witnesses are\nnot prerequisites of this theorem. See the second remark.",
           "uses": [
             "1.1"
           ]
@@ -2998,7 +3045,7 @@
           "fact": "L1",
           "source": "thm-heine-borel-rn",
           "source_section": "Statement",
-          "quote": "if and only if $K$ is closed in $\\mathbb{R}^n$",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
           "uses": [
             "1.1"
           ]
@@ -3007,7 +3054,7 @@
           "fact": "L2",
           "source": "thm-extreme-value-metric",
           "source_section": "Statement",
-          "quote": "and it has a maximum and a minimum",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
           "uses": [
             "1.1"
           ]
@@ -3016,7 +3063,7 @@
           "fact": "L3",
           "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
           "source_section": "Statement",
-          "quote": "**Parallelogram law.**",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
           "uses": [
             "2.1"
           ]
@@ -3039,8 +3086,8 @@
           "claim": "Suppose distinct $p,q\\in C$ both minimize the squared distance at $d^2$. Convexity puts $(p+q)/2$ in $C$, while [L3] gives $$\\left\\|x-\\frac{p+q}{2}\\right\\|_2^2=d^2-\\frac14\\|p-q\\|_2^2<d^2,$$ contradicting minimality. Thus the nearest point is unique.",
           "step": "2.1",
           "inputs": [
-            "L3",
             "step 1.1",
+            "L3",
             "given",
             "assume-contra",
             "algebra",
@@ -3104,7 +3151,7 @@
           "fact": "L1",
           "source": "thm-nearest-point-in-a-nonempty-closed-convex-set",
           "source_section": "Statement",
-          "quote": "there is a unique $p\\in C$ such that $\\|x-p\\|_2\\le\\|x-z\\|_2$ for every $z\\in C$.",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\in\\mathbb R^n$. Then there is a unique $p\\in C$ such that $\\|x-p\\|_2\\le\\|x-z\\|_2$ for every $z\\in C$.",
           "uses": [
             "1.1",
             "2.1"
@@ -3178,12 +3225,26 @@
       "finite_smoke": []
     },
     "thm-strict-separation-of-a-point-from-a-closed-convex-set": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Lead Alpha step8 exact-hash adjudication",
+        "notes": "The high-risk score follows from the exterior-point existence step and boundary language. Alpha reopened the projection theorem and variational-inequality lemma, confirmed the old proof had no existence source, added the exact nearest-point theorem, and re-read both repaired steps. The repaired proof now obtains the unique projection before using its variational inequality; no missing hypothesis, invalid inference, or inaccurate citation remains."
+      },
       "citations": [
         {
           "fact": "L1",
           "source": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
           "source_section": "Statement",
-          "quote": "$$\\langle x-p,z-p\\rangle\\le0\\qquad(z\\in C).$$",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, let $x\\in\\mathbb R^n$, and let $p\\in C$. Then $p$ is the nearest point of $C$ to $x$ if and only if\n\n$$\\langle x-p,z-p\\rangle\\le0\\qquad(z\\in C).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\in\\mathbb R^n$. Then there is a unique $p\\in C$ such that $\\|x-p\\|_2\\le\\|x-z\\|_2$ for every $z\\in C$.",
           "uses": [
             "1.1"
           ]
@@ -3192,10 +3253,11 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Let $p$ be the nearest point and put $a=x-p$. By [L1], $\\langle a,z\\rangle\\le\\langle a,p\\rangle$ for every $z\\in C$. Since $x\\notin C$, one has $a\\ne0$ and $$\\langle a,x\\rangle=\\langle a,p\\rangle+\\|a\\|_2^2>\\langle a,p\\rangle.$$",
+          "claim": "Let $p$ be the nearest point supplied by [L2] and put $a=x-p$. By [L1], $\\langle a,z\\rangle\\le\\langle a,p\\rangle$ for every $z\\in C$. Since $x\\notin C$, one has $a\\ne0$ and $$\\langle a,x\\rangle=\\langle a,p\\rangle+\\|a\\|_2^2>\\langle a,p\\rangle.$$",
           "step": "1.1",
           "inputs": [
             "L1",
+            "L2",
             "given",
             "algebra"
           ]
@@ -3386,7 +3448,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "The basis vectors from step 1.1 give points of $C$ whose simplex has a positive barycentric core, so $C$ has nonempty relative interior. Fix a relative ball $B_A(p,r)\\subseteq C$ and $y\\in\\overline C$. For $q=(1-t)p+ty$ with $0\\le t<1$, [A2] and [L1] give a sequence $y_k\\in C$ tending to $y$; choose a term so close that $t\\|y-y_k\\|_2<(1-t)r/2$. If $\\|h\\|_2<(1-t)r/2$ and $$p_h=p+\\frac{t(y-y_k)+h}{1-t},$$ then $p_h\\in B_A(p,r)$ and $q+h=(1-t)p_h+ty_k\\in C$ by [F1]. Thus every strict segment point lies in $\\operatorname{ri}C$.",
+          "claim": "The basis vectors from step 1.1 give points of $C$ whose simplex has a positive barycentric core, so $C$ has nonempty relative interior. Fix a relative ball $B_A(p,r)\\subseteq C$ and $y\\in\\overline C$. For $q=(1-t)p+ty$ with $0\\le t<1$, [A2] and [L1] give a sequence $y_k\\in C$ tending to $y$; choose a term so close that $t\\|y-y_k\\|_2<(1-t)r/2$. If $h\\in W$ and $\\|h\\|_2<(1-t)r/2$, then $$p_h=p+\\frac{t(y-y_k)+h}{1-t}$$ lies in $A$ and within distance $r$ of $p$, hence lies in $B_A(p,r)$, while $q+h=(1-t)p_h+ty_k\\in C$ by [F1]. Thus a relative ball about every strict segment point lies in $C$, so every such point belongs to $\\operatorname{ri}C$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -3630,7 +3692,7 @@
           "fact": "L2",
           "source": "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
           "source_section": "Statement",
-          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty and convex, and let $a\\in\\partial C$. Then there is a nonzero vector $u$ such that $\\langle u,z-a\\rangle\\le0$ for every $z\\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty and convex, and let $a\\in C\\cap\\partial C$. Then there is a nonzero vector $u$ such that $\\langle u,z-a\\rangle\\le0$ for every $z\\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
           "uses": [
             "2.1"
           ]
@@ -3752,7 +3814,7 @@
           "fact": "L2",
           "source": "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
           "source_section": "Statement",
-          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty and convex, and let $a\\in\\partial C$. Then there is a nonzero vector $u$ such that $\\langle u,z-a\\rangle\\le0$ for every $z\\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty and convex, and let $a\\in C\\cap\\partial C$. Then there is a nonzero vector $u$ such that $\\langle u,z-a\\rangle\\le0$ for every $z\\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
           "uses": [
             "1.1"
           ]
@@ -3921,7 +3983,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "f((1-t)x+ty)\\le(1-t)f(x)+tf(y)",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1"
           ]
@@ -4005,7 +4067,7 @@
           "fact": "F1",
           "source": "def-subgradient-and-subdifferential",
           "source_section": "Definition",
-          "quote": "$v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
           "uses": [
             "1.1",
             "2.1"
@@ -4088,7 +4150,7 @@
           "fact": "L1",
           "source": "cor-second-derivative-characterises-convexity",
           "source_section": "Statement",
-          "quote": "then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
           "uses": [
             "1.1",
             "2.1"
@@ -4098,7 +4160,7 @@
           "fact": "F1",
           "source": "def-definite-and-indefinite-hessian-quadratic-forms",
           "source_section": "Definition",
-          "quote": "**positive semidefinite** when $q_H(h)\\ge0$ for every $h$",
+          "quote": "For a real $m\\times m$ matrix $H$, write $q_H(h):=\\langle Hh,h\\rangle$ using [[def-euclidean-inner-product]]. It is **positive definite** when $q_H(h)>0$ for every $h\\ne0$, **negative definite** when $q_H(h)<0$ for every $h\\ne0$, **positive semidefinite** when $q_H(h)\\ge0$ for every $h$, **negative semidefinite** when $q_H(h)\\le0$ for every $h$, and **indefinite** when it takes both positive and negative values. For a twice differentiable scalar field, its Hessian matrix is the matrix of [[def-hessian-and-euclidean-critical-point]].",
           "uses": [
             "1.1",
             "2.1"
@@ -4122,8 +4184,8 @@
           "claim": "For the forward implication, if $f$ is convex then every line restriction $\\phi$ is convex, so [L1] and step 1.1 give $\\langle H_f(x)v,v\\rangle\\ge0$ for every $v$, which is [F1]. For the reverse implication, [F1] and step 1.1 make every line restriction have nonnegative second derivative; [L1] makes each restriction convex, yielding the two-point convexity inequality for $f$.",
           "step": "2.1",
           "inputs": [
-            "L1",
             "step 1.1",
+            "L1",
             "F1"
           ]
         }
@@ -4287,7 +4349,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1"
           ]
@@ -4365,7 +4427,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "It is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1"
           ]
@@ -4448,7 +4510,7 @@
           "fact": "F1",
           "source": "def-semicontinuity-on-euclidean-subsets",
           "source_section": "Definition",
-          "quote": "$f$ is upper semicontinuous at $a$ when for every $\\varepsilon>0$ there is $\\delta>0$ such that $f(x)<f(a)+\\varepsilon$ for every $x\\in A\\cap B_2(a,\\delta)$",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, let $f:A\\to\\mathbb R$, and let $a\\in A$. Using the Euclidean metric and its balls ([[lem-metrics-on-rn]], [[def-metric-ball]]), $f$ is upper semicontinuous at $a$ when for every $\\varepsilon>0$ there is $\\delta>0$ such that $f(x)<f(a)+\\varepsilon$ for every $x\\in A\\cap B_2(a,\\delta)$.\n\nThe function is **lower semicontinuous at $a$** when for every $\\varepsilon>0$ there is $\\delta>0$ such that\n\n$$f(a)-\\varepsilon<f(x)\\qquad(x\\in A\\cap B_2(a,\\delta)).$$\n\nIt is upper or lower semicontinuous on $A$ when the corresponding condition holds at every point of $A$. These are relative notions on $A$; when $A$ is empty, each on-set condition is vacuous. A continuous function ([[def-metric-continuity]]) satisfies both conditions.",
           "uses": [
             "1.1"
           ]
@@ -4457,7 +4519,7 @@
           "fact": "F2",
           "source": "def-semicontinuity",
           "source_section": "Definition",
-          "quote": "$f$ is **upper semicontinuous at $c$** when for every real $\\varepsilon > 0$ there is a real $\\delta > 0$",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$, with\nneighbourhoods as in [[def-neighbourhood-r]].\n\n- $f$ is **upper semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;<\\; f(c) + \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **lower semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;>\\; f(c) - \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **upper semicontinuous on $A$**, respectively **lower semicontinuous on\n  $A$**, when it is so at every point of $A$.\n\nIn words: an upper semicontinuous function cannot jump **up** in the limit, and\na lower semicontinuous one cannot jump **down**. Both conditions are pointwise,\nboth quantify over the same unpunctured neighbourhoods as\n[[def-continuity-real]], and at $x = c$ each holds automatically, since\n$f(c) < f(c) + \\varepsilon$ and $f(c) > f(c) - \\varepsilon$.\n\n### Continuity is exactly the conjunction\n\n$f$ is continuous at $c$ **if and only if** it is both upper and lower\nsemicontinuous at $c$.\n\n*If $f$ is continuous at $c$*, a $\\delta$ witnessing $|f(x) - f(c)| < \\varepsilon$\non $A \\cap N_\\delta(c)$ witnesses both displayed conditions, since\n$|f(x) - f(c)| < \\varepsilon$ gives $-\\varepsilon < f(x) - f(c) < \\varepsilon$\n([[lem-of-abs-value]]).\n\n*Conversely*, given $\\varepsilon > 0$ take $\\delta_1$ for the upper condition\nand $\\delta_2$ for the lower one and put $\\delta := \\min\\{\\delta_1, \\delta_2\\} > 0$.\nFor $x \\in A \\cap N_\\delta(c)$ both $f(x) < f(c) + \\varepsilon$ and\n$f(x) > f(c) - \\varepsilon$ hold, that is $|f(x) - f(c)| < \\varepsilon$\n([[lem-of-abs-value]]). So $f$ is continuous at $c$.\n\nConsequently $f$ is continuous on $A$ exactly when it is both upper and lower\nsemicontinuous on $A$.\n\n### Negation exchanges the two\n\n$f$ is upper semicontinuous at $c$ **if and only if** $-f$ is lower\nsemicontinuous at $c$, since $f(x) < f(c) + \\varepsilon$ says the same thing as\n$-f(x) > -f(c) - \\varepsilon$ ([[def-complete-ordered-field]]). Every statement\nabout one notion below is therefore proved for one of them and transferred to\nthe other by this substitution, never proved twice.\n\n**Neither notion implies the other, and neither implies continuity.** The\nindicator of a closed set is upper semicontinuous and the indicator of an open\nset is lower semicontinuous, and neither is continuous unless the set is clopen;\nthe companion page uses an upper semicontinuous function on $[0,1]$ that attains\nno minimum.",
           "uses": [
             "1.1"
           ]
@@ -4540,7 +4602,7 @@
           "fact": "F1",
           "source": "def-semicontinuity-on-euclidean-subsets",
           "source_section": "Definition",
-          "quote": "$f$ is upper semicontinuous at $a$ when for every $\\varepsilon>0$ there is $\\delta>0$ such that $f(x)<f(a)+\\varepsilon$ for every $x\\in A\\cap B_2(a,\\delta)$",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, let $f:A\\to\\mathbb R$, and let $a\\in A$. Using the Euclidean metric and its balls ([[lem-metrics-on-rn]], [[def-metric-ball]]), $f$ is upper semicontinuous at $a$ when for every $\\varepsilon>0$ there is $\\delta>0$ such that $f(x)<f(a)+\\varepsilon$ for every $x\\in A\\cap B_2(a,\\delta)$.\n\nThe function is **lower semicontinuous at $a$** when for every $\\varepsilon>0$ there is $\\delta>0$ such that\n\n$$f(a)-\\varepsilon<f(x)\\qquad(x\\in A\\cap B_2(a,\\delta)).$$\n\nIt is upper or lower semicontinuous on $A$ when the corresponding condition holds at every point of $A$. These are relative notions on $A$; when $A$ is empty, each on-set condition is vacuous. A continuous function ([[def-metric-continuity]]) satisfies both conditions.",
           "uses": [
             "1.1",
             "2.1",
@@ -4763,7 +4825,7 @@
           "fact": "L1",
           "source": "thm-euclidean-semicontinuity-level-set-characterisations",
           "source_section": "Statement",
-          "quote": "Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, and let $f:A\\to\\mathbb R$.\n\n- Upper semicontinuity is equivalent to relative openness of every strict sublevel set $\\{f<\\alpha\\}$ and to relative closedness of every weak superlevel set $\\{f\\ge\\alpha\\}$.\n- Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.\n\nRelative openness and closedness refer to the subspace topology on $A$ ([[def-subspace-topology-top]], [[def-metric-topology]]).",
           "uses": [
             "1.1",
             "2.1"
@@ -4773,7 +4835,7 @@
           "fact": "L2",
           "source": "thm-compact-iff-finite-intersection-property",
           "source_section": "Statement",
-          "quote": "with the finite intersection property satisfies $\\bigcap \\mathcal{A} \\ne \\emptyset$.",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with closed sets as in\n[[def-metric-topology]] and the finite intersection property as in\n[[def-finite-intersection-property]]. For a family $\\mathcal{A}$ of subsets of\n$X$ write\n\n$$\\bigcap \\mathcal{A} \\;:=\\; \\{\\, x \\in X : x \\in F \\text{ for every } F \\in \\mathcal{A} \\,\\},$$\n\nso that $\\bigcap \\emptyset = X$, matching the convention for the empty finite\nintersection in [[def-finite-intersection-property]].\n\nThen $(X,d)$ is compact ([[def-metric-compactness]]) **if and only if** every\nfamily $\\mathcal{A}$ of closed subsets of $X$ with the finite intersection\nproperty satisfies $\\bigcap \\mathcal{A} \\ne \\emptyset$.\n\nNo choice principle is used in either direction: complementation is a canonical\nbijection, so no member of a family ever has to be selected.",
           "uses": [
             "3.1"
           ]
@@ -4782,7 +4844,7 @@
           "fact": "L3",
           "source": "thm-infimum-property",
           "source_section": "Statement",
-          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a greatest lower bound in $\\mathbb{R}$",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
           "uses": [
             "2.1"
           ]
@@ -4791,7 +4853,7 @@
           "fact": "L4",
           "source": "lem-inf-epsilon",
           "source_section": "Statement",
-          "quote": "\\text{ with } s < \\ell + \\varepsilon.",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below, and let $\\ell$ be a\nlower bound of $S$ ([[def-bounded-set]]). Then\n\n$$\\ell = \\inf S \\quad \\Longleftrightarrow \\quad \\text{for every } \\varepsilon > 0 \\text{ there exists } s \\in S \\text{ with } s < \\ell + \\varepsilon.$$\n\nIn words: among the lower bounds of $S$, the infimum is exactly the one that\ncannot be raised by any positive amount and still bound $S$ from below.",
           "uses": [
             "2.1"
           ]
@@ -4800,7 +4862,7 @@
           "fact": "L5",
           "source": "thm-of-archimedean",
           "source_section": "Statement",
-          "quote": "for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
           "uses": [
             "1.1"
           ]
@@ -4809,7 +4871,7 @@
           "fact": "L6",
           "source": "cor-archimedean-reciprocal",
           "source_section": "Statement",
-          "quote": "there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
           "uses": [
             "3.1"
           ]
@@ -4818,7 +4880,7 @@
           "fact": "L7",
           "source": "def-metric-compactness",
           "source_section": "Definition",
-          "quote": "$(X,d)$ is **compact** when every open cover of it has a finite subcover",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.",
           "uses": [
             "1.1"
           ]
@@ -4827,7 +4889,7 @@
           "fact": "L8",
           "source": "lem-finite-set-has-max",
           "source_section": "Statement",
-          "quote": "the set $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
           "uses": [
             "1.1"
           ]
@@ -4839,10 +4901,10 @@
           "claim": "For positive naturals $N$, the relatively open sets $U_N=\\{x\\in K:f(x)>-N\\}$ cover $K$: apply [L5] to $-f(x)$. By [L7], finitely many $U_N$ cover, and [L8] gives a largest index $M$ among them. Since the sets are nested, $U_M=K$, so $f>-M$ on $K$ and $f[K]$ is bounded below.",
           "step": "1.1",
           "inputs": [
+            "L1",
             "L5",
             "L7",
             "L8",
-            "L1",
             "given",
             "algebra"
           ]
@@ -4852,10 +4914,10 @@
           "claim": "By [L3], $m=\\inf f[K]$ exists. For every positive natural $N$, the set $F_N=K\\cap\\{f\\le m+1/N\\}$ is closed by [L1] and nonempty by [L4]. The family is nested, so every finite subfamily has nonempty intersection.",
           "step": "2.1",
           "inputs": [
-            "L3",
-            "L1",
-            "L4",
             "step 1.1",
+            "L1",
+            "L3",
+            "L4",
             "algebra"
           ]
         },
@@ -4864,9 +4926,9 @@
           "claim": "By [L2], choose $x_*\\in\\bigcap_NF_N$. If $f(x_*)>m$, [L6] gives $N\\ge1$ with $1/N<f(x_*)-m$, contradicting $x_*\\in F_N$. Thus $f(x_*)=m$. Applying the same argument to $-f$ proves that an upper semicontinuous function attains its maximum.",
           "step": "3.1",
           "inputs": [
+            "step 2.1",
             "L2",
             "L6",
-            "step 2.1",
             "choose",
             "algebra"
           ]
@@ -4928,43 +4990,16 @@
           "fact": "L1",
           "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
           "source_section": "Statement",
-          "quote": "$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
           "uses": [
             "1.1"
-          ]
-        },
-        {
-          "fact": "L4",
-          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
-          "source_section": "Statement",
-          "quote": "$$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$",
-          "uses": [
-            "1.2"
-          ]
-        },
-        {
-          "fact": "L5",
-          "source": "lem-derivative-of-a-power",
-          "source_section": "Statement",
-          "quote": "$$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
-          "uses": [
-            "2.1"
-          ]
-        },
-        {
-          "fact": "L6",
-          "source": "thm-algebra-of-derivatives",
-          "source_section": "Statement",
-          "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$",
-          "uses": [
-            "2.1"
           ]
         },
         {
           "fact": "L2",
           "source": "thm-hessian-characterises-convexity",
           "source_section": "Statement",
-          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point.",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
           "uses": [
             "2.1"
           ]
@@ -4973,7 +5008,43 @@
           "fact": "L3",
           "source": "cor-positive-definite-hessian-implies-strict-convexity",
           "source_section": "Statement",
-          "quote": "An everywhere-positive-definite Hessian implies strict convexity.",
+          "quote": "Let $f:U\\to\\mathbb R$ be $C^2$ on an open convex set. An everywhere-positive-definite Hessian implies strict convexity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
           "uses": [
             "2.1"
           ]
@@ -5000,13 +5071,14 @@
         },
         {
           "id": "step-2-1",
-          "claim": "By [L5] and [L6], the squared norm has gradient $2x$ and Hessian $2I$, which is positive definite. Thus [L2] gives convexity, [L3] gives strict convexity, and differentiable subgradient uniqueness gives $\\partial q(x)=\\{2x\\}$.",
+          "claim": "Since $q(x)=\\sum_{j<n}x_j^2$, coordinatewise differentiation with [L5]–[L7] gives gradient $2x$ and constant Hessian $2I$, so $q$ is $C^2$ and its Hessian is positive definite. Thus [L2] gives convexity, [L3] gives strict convexity, and differentiable subgradient uniqueness gives $\\partial q(x)=\\{2x\\}$.",
           "step": "2.1",
           "inputs": [
             "L2",
             "L3",
             "L5",
             "L6",
+            "L7",
             "given",
             "algebra"
           ]
@@ -5068,7 +5140,7 @@
           "fact": "L1",
           "source": "prop-basic-operations-preserving-convexity",
           "source_section": "Statement",
-          "quote": "The pointwise maximum of a nonempty finite family of convex functions on a common convex domain is convex.",
+          "quote": "The following operations preserve convexity on their natural convex domains:\n\n1. a finite linear combination $\\sum_j a_jf_j$ with $a_j\\ge0$;\n2. precomposition $f\\circ A$ with an affine map $A(x)=Tx+b$, where $T$ is Euclidean linear ([[def-euclidean-linear-map]]).\n\nThe pointwise maximum of a nonempty finite family of convex functions on a common convex domain is convex.\n\nFinite sums and maxima use [[def-finite-sum]], [[lem-finite-sum-laws]], and [[lem-finite-set-has-max]].",
           "uses": [
             "1.1"
           ]
@@ -5077,7 +5149,7 @@
           "fact": "L2",
           "source": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
           "source_section": "Statement",
-          "quote": "Then there are $a\\ne0$ and $b\\in\\mathbb R$ such that $\\langle a,z\\rangle\\le b<\\langle a,x\\rangle$ for every $z\\in C$.",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\notin C$. Then there are $a\\ne0$ and $b\\in\\mathbb R$ such that $\\langle a,z\\rangle\\le b<\\langle a,x\\rangle$ for every $z\\in C$. Thus a hyperplane strictly separates $x$ from $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
           "uses": [
             "3.1"
           ]
@@ -5086,7 +5158,7 @@
           "fact": "L3",
           "source": "thm-heine-borel-rn",
           "source_section": "Statement",
-          "quote": "if and only if $K$ is closed in $\\mathbb{R}^n$",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
           "uses": [
             "3.1"
           ]
@@ -5095,7 +5167,7 @@
           "fact": "L4",
           "source": "thm-continuous-image-of-a-compact-space-is-compact",
           "source_section": "Statement",
-          "quote": "if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is a compact subset of $Y$.",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
           "uses": [
             "3.1"
           ]
@@ -5104,7 +5176,7 @@
           "fact": "L5",
           "source": "thm-compact-subset-is-closed-and-bounded",
           "source_section": "Statement",
-          "quote": "Then $K$ is closed in $X$",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
           "uses": [
             "3.1"
           ]
@@ -5133,11 +5205,11 @@
           "claim": "The active-weight simplex is closed and bounded, hence compact by [L3]; its affine image is compact by [L4] and closed by [L5]. If a subgradient $v$ lay outside this active convex hull, [L2] would give a direction $h$ with $\\langle v,h\\rangle$ strictly larger than every active $\\langle a_j,h\\rangle$. Finiteness lets one choose $t>0$ small enough that inactive affine pieces remain below the active maximum at $x+th$. Then the subgradient inequality would require an increment at least $t\\langle v,h\\rangle$, while the actual increment is $t\\max_{j\\in J(x)}\\langle a_j,h\\rangle$, a contradiction. The displayed four-piece formula follows from its four active slopes at zero.",
           "step": "3.1",
           "inputs": [
+            "step 2.1",
+            "L2",
             "L3",
             "L4",
             "L5",
-            "L2",
-            "step 2.1",
             "algebra"
           ]
         }
@@ -5198,7 +5270,7 @@
           "fact": "F1",
           "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
           "source_section": "Definition",
-          "quote": "The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$.",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
           "uses": [
             "1.1"
           ]
@@ -5207,7 +5279,7 @@
           "fact": "L1",
           "source": "cor-convex-functions-on-open-convex-sets-are-continuous",
           "source_section": "Statement",
-          "quote": "Every convex function $f:U\\to\\mathbb R$ on an open convex set is continuous on $U$.",
+          "quote": "Every convex function $f:U\\to\\mathbb R$ on an open convex set is continuous on $U$. The assertion is vacuous when $U$ is empty.",
           "uses": [
             "2.1"
           ]
@@ -5228,8 +5300,8 @@
           "claim": "For every positive $x$, $f(x)=0$, whereas $f(0)=1$, so the right-hand limit at zero is not the function value. The function is convex on $[0,1]$ but is not continuous at $0$. This does not contradict [L1], because the domain is not open at zero.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],
@@ -5289,7 +5361,7 @@
           "fact": "F1",
           "source": "def-subgradient-and-subdifferential",
           "source_section": "Definition",
-          "quote": "$v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
           "uses": [
             "2.1"
           ]
@@ -5298,7 +5370,7 @@
           "fact": "L1",
           "source": "thm-convex-functions-have-subgradients-at-interior-points",
           "source_section": "Statement",
-          "quote": "Then $\\partial f(a)$ is nonempty for every $a\\in\\operatorname{int}C$.",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $C\\subseteq\\mathbb R^n$ be convex and let $f:C\\to\\mathbb R$ be convex. Then $\\partial f(a)$ is nonempty for every $a\\in\\operatorname{int}C$.",
           "uses": [
             "3.1"
           ]
@@ -5307,7 +5379,7 @@
           "fact": "L2",
           "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
           "source_section": "Statement",
-          "quote": "$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
           "uses": [
             "1.1"
           ]
@@ -5329,8 +5401,8 @@
           "claim": "Fix a unit vector $u$ and suppose $v$ satisfied [F1] at $u$. Testing $y=\\alpha u$ for $0\\le\\alpha<1$ gives $$\\langle v,u\\rangle\\ge\\frac{\\sqrt{1-\\alpha^2}}{1-\\alpha}=\\sqrt{\\frac{1+\\alpha}{1-\\alpha}}.$$ The right side is unbounded as $\\alpha$ approaches $1$, impossible for the fixed vector $v$. Hence $\\partial f(u)=\\varnothing$.",
           "step": "2.1",
           "inputs": [
-            "F1",
             "step 1.1",
+            "F1",
             "algebra"
           ]
         },
@@ -5400,7 +5472,7 @@
           "fact": "L1",
           "source": "thm-euclidean-semicontinuity-level-set-characterisations",
           "source_section": "Statement",
-          "quote": "Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, and let $f:A\\to\\mathbb R$.\n\n- Upper semicontinuity is equivalent to relative openness of every strict sublevel set $\\{f<\\alpha\\}$ and to relative closedness of every weak superlevel set $\\{f\\ge\\alpha\\}$.\n- Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.\n\nRelative openness and closedness refer to the subspace topology on $A$ ([[def-subspace-topology-top]], [[def-metric-topology]]).",
           "uses": [
             "1.1"
           ]
@@ -5409,7 +5481,7 @@
           "fact": "L2",
           "source": "thm-euclidean-semicontinuous-extreme-value-theorem",
           "source_section": "Statement",
-          "quote": "Every lower semicontinuous function $f:K\\to\\mathbb R$ is bounded below and attains a minimum.",
+          "quote": "Let $n\\ge1$ and let $K\\subseteq\\mathbb R^n$ be nonempty and compact. Every lower semicontinuous function $f:K\\to\\mathbb R$ is bounded below and attains a minimum. Dually, every upper semicontinuous function $f:K\\to\\mathbb R$ is bounded above and attains a maximum.",
           "uses": [
             "3.1"
           ]
@@ -5440,8 +5512,8 @@
           "claim": "The function does attain its minimum $-1$ at zero, as [L2] requires. It is only the unsupported opposite extremum that fails.",
           "step": "3.1",
           "inputs": [
-            "L2",
-            "step 2.1"
+            "step 2.1",
+            "L2"
           ]
         }
       ],
@@ -5501,7 +5573,7 @@
           "fact": "L1",
           "source": "thm-euclidean-semicontinuity-level-set-characterisations",
           "source_section": "Statement",
-          "quote": "Upper semicontinuity is equivalent to relative openness of every strict sublevel set",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, and let $f:A\\to\\mathbb R$.\n\n- Upper semicontinuity is equivalent to relative openness of every strict sublevel set $\\{f<\\alpha\\}$ and to relative closedness of every weak superlevel set $\\{f\\ge\\alpha\\}$.\n- Lower semicontinuity is equivalent to relative openness of every strict superlevel set and to relative closedness of every weak sublevel set.\n\nRelative openness and closedness refer to the subspace topology on $A$ ([[def-subspace-topology-top]], [[def-metric-topology]]).",
           "uses": [
             "1.1"
           ]
@@ -5510,7 +5582,7 @@
           "fact": "L2",
           "source": "def-metric-topology",
           "source_section": "Definition",
-          "quote": "if its complement $X \\setminus F$ is open.",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any open set containing $x$. The condition\nabove therefore reads: $U$ is open exactly when every point of $U$ has a ball\naround it inside $U$, and it is the balls alone that have to be tested.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
           "uses": [
             "1.1"
           ]
@@ -5588,7 +5660,7 @@
           "fact": "L1",
           "source": "thm-hessian-characterises-convexity",
           "source_section": "Statement",
-          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point.",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
           "uses": [
             "1.1"
           ]
@@ -5597,7 +5669,7 @@
           "fact": "L2",
           "source": "lem-derivative-of-a-power",
           "source_section": "Statement",
-          "quote": "$$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
           "uses": [
             "1.1"
           ]
@@ -5606,7 +5678,7 @@
           "fact": "L3",
           "source": "thm-algebra-of-derivatives",
           "source_section": "Statement",
-          "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
           "uses": [
             "1.1"
           ]
@@ -5690,7 +5762,7 @@
           "fact": "L1",
           "source": "lem-derivative-of-a-power",
           "source_section": "Statement",
-          "quote": "$$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
           "uses": [
             "1.1",
             "2.1"
@@ -5700,7 +5772,7 @@
           "fact": "L2",
           "source": "cor-mean-value-theorem",
           "source_section": "Statement",
-          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
           "uses": [
             "1.1"
           ]
@@ -5709,7 +5781,7 @@
           "fact": "L3",
           "source": "thm-algebra-of-derivatives",
           "source_section": "Statement",
-          "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
           "uses": [
             "2.1"
           ]
@@ -5796,7 +5868,7 @@
           "fact": "L1",
           "source": "cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary",
           "source_section": "Statement refuted",
-          "quote": "The function is convex on $[0,1]$ but is not continuous at $0$.",
+          "quote": "Every convex real-valued function on a convex subset of Euclidean space is continuous on its whole domain.\n\nThe counterexample below establishes: The function is convex on $[0,1]$ but is not continuous at $0$.",
           "uses": [
             "1.1",
             "2.1"
@@ -5817,8 +5889,8 @@
           "claim": "The same function fails continuity at the boundary point zero by [L1], so it refutes the claim. Openness of the domain, or restriction to its interior, is essential.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],
@@ -5873,7 +5945,7 @@
           "fact": "L1",
           "source": "ex-euclidean-norm-and-squared-norm-are-convex",
           "source_section": "Example",
-          "quote": "The Euclidean norm is convex and its subdifferential at zero is the closed unit ball.",
+          "quote": "Let $n\\ge1$. The Euclidean norm is convex and its subdifferential at zero is the closed unit ball. The squared norm $q(x)=\\|x\\|_2^2$ is strictly convex and satisfies\n\n$$\\partial q(x)=\\{2x\\}.$$",
           "uses": [
             "1.1"
           ]
@@ -5882,7 +5954,7 @@
           "fact": "L2",
           "source": "cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient",
           "source_section": "Statement",
-          "quote": "Then $\\partial f(a)=\\{\\nabla f(a)\\}$.",
+          "quote": "Let $f:U\\to\\mathbb R$ be convex on an open convex set and differentiable at $a\\in U$ ([[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]]). Then $\\partial f(a)=\\{\\nabla f(a)\\}$.",
           "uses": [
             "2.1"
           ]
@@ -5902,8 +5974,8 @@
           "claim": "By [L2], differentiability there would force the subdifferential to be a singleton. Hence the convex Euclidean norm is not differentiable at zero, and the claim is false.",
           "step": "2.1",
           "inputs": [
-            "L2",
-            "step 1.1"
+            "step 1.1",
+            "L2"
           ]
         }
       ],
@@ -5958,7 +6030,7 @@
           "fact": "L1",
           "source": "ex-characteristic-functions-of-open-and-closed-sets-are-semicontinuous",
           "source_section": "Example",
-          "quote": "On $[0,1]$, the characteristic function of $\\{0\\}$ is upper semicontinuous but discontinuous at zero, and its negative is lower semicontinuous but discontinuous there.",
+          "quote": "Let $n\\ge1$, let $X\\subseteq\\mathbb R^n$, and let $E\\subseteq X$. The characteristic function $1_E:X\\to\\mathbb R$ is lower semicontinuous when $E$ is relatively open, and upper semicontinuous when $E$ is relatively closed. On $[0,1]$, the characteristic function of $\\{0\\}$ is upper semicontinuous but discontinuous at zero, and its negative is lower semicontinuous but discontinuous there.",
           "uses": [
             "1.1",
             "2.1"
@@ -5979,8 +6051,8 @@
           "claim": "Its negative in [L1] separately satisfies lower semicontinuity and fails continuity on the same compact domain. Thus neither one-sided notion implies continuity.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],
@@ -6035,7 +6107,7 @@
           "fact": "L1",
           "source": "cex-positive-semidefinite-hessian-without-strict-convexity",
           "source_section": "Statement refuted",
-          "quote": "The Hessian of $f(x,y)=x^2$ is positive semidefinite everywhere, but $f$ is not strictly convex.",
+          "quote": "If a $C^2$ function on an open convex set has a positive-semidefinite Hessian everywhere, then it is strictly convex.\n\nThe counterexample below establishes: The Hessian of $f(x,y)=x^2$ is positive semidefinite everywhere, but $f$ is not strictly convex.",
           "uses": [
             "1.1",
             "2.1"
@@ -6056,8 +6128,8 @@
           "claim": "It is constant along every vertical line and therefore violates strict convexity by [L1]. Hence the claim is false.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],
@@ -6112,7 +6184,7 @@
           "fact": "L1",
           "source": "cex-strictly-convex-function-with-a-singular-hessian",
           "source_section": "Statement refuted",
-          "quote": "For every $n\\ge1$, the function $f:\\mathbb R^n\\to\\mathbb R$ given by $f(x)=\\sum_{j<n}x_j^4$ is strictly convex, but its Hessian at the origin is the zero matrix.",
+          "quote": "Every twice differentiable strictly convex function has a positive-definite Hessian at every point.\n\nThe counterexample below establishes: For every $n\\ge1$, the function $f:\\mathbb R^n\\to\\mathbb R$ given by $f(x)=\\sum_{j<n}x_j^4$ is strictly convex, but its Hessian at the origin is the zero matrix.",
           "uses": [
             "1.1",
             "2.1"
@@ -6133,8 +6205,8 @@
           "claim": "Its Hessian at the origin is zero and hence not positive definite by [L1], directly refuting the claim.",
           "step": "2.1",
           "inputs": [
-            "L1",
-            "step 1.1"
+            "step 1.1",
+            "L1"
           ]
         }
       ],

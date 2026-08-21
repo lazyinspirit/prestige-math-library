@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-first-order-ode-initial-value-problem-and-solution, def-equicontinuity-and-boundedness-in-ck]
+deps: [def-first-order-ode-initial-value-problem-and-solution]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -35,7 +35,7 @@ Euler polygonal approximations on a compact cylinder are uniformly bounded and e
 
 **Given:** The compact cylinder, its vector-field bound, and the Euler recursion at mesh vertices.
 
-[L1] A family is equicontinuous when the same local modulus works for every member at each point ([[def-equicontinuity-and-boundedness-in-ck]]).
+[L1] A family of $\mathbb R^n$-valued curves is equicontinuous when, for every $\varepsilon>0$, one $\delta>0$ makes $\|x_m(t)-x_m(s)\|_2<\varepsilon$ for every member whenever $|t-s|<\delta$.
 
 ## Proof
 

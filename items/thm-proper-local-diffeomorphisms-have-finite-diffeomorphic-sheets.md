@@ -35,9 +35,9 @@ Let $n\ge1$, let $U,V\subseteq\mathbb R^n$ be nonempty open sets, let $V$ be con
 
 [L2] A $C^1$ map with everywhere-invertible derivative maps every open subset of its domain to an open subset of $\mathbb R^n$ ([[cor-c-one-local-diffeomorphisms-are-open-maps]]).
 
-[L3] If $K\subseteq X$ is compact and $f:X\to Y$ is continuous, then $f[K]$ is compact in $Y$ ([[thm-continuous-image-of-a-compact-space-is-compact]]).
+[L3] If $K$ is a compact subset of a metric space $X$ and $f:X\to Y$ is continuous into a metric space $Y$, then $f[K]$ is compact in $Y$ ([[thm-continuous-image-of-a-compact-space-is-compact]]).
 
-[L4] A closed subset $F$ of a compact space $X$ is compact ([[lem-closed-subset-of-a-compact-space-is-compact]]).
+[L4] A closed subset $F$ of a compact metric space $X$ is compact ([[lem-closed-subset-of-a-compact-space-is-compact]]).
 
 ## Proof
 

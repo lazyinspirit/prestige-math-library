@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-nonnegative-weighted-sums-of-measures, def-nonnegative-weighted-sum-of-measures, prop-dirac-measure-is-a-probability-measure, def-countable, def-measure]
+deps: [thm-nonnegative-weighted-sums-of-measures, def-nonnegative-weighted-sum-of-measures, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-countable, def-measure]
 justified_by: []
 aliases: []
 landmark: true
@@ -36,9 +36,9 @@ For finite $X$ this is a finite sum over a bijective finite listing; for countab
 
 [L1] An at most countable set is finite or is in bijection with $\mathbb N$ ([[def-countable]]).
 
-[L2] A measure is countably additive on disjoint measurable sequences ([[def-measure]]).
+[L2] A measure vanishes at the empty set and is countably additive on disjoint measurable sequences ([[def-measure]]).
 
-[L3] Dirac set functions are probability measures ([[prop-dirac-measure-is-a-probability-measure]]), and nonnegative finite and countable weighted sums of measures are measures ([[def-nonnegative-weighted-sum-of-measures]], [[thm-nonnegative-weighted-sums-of-measures]]).
+[L3] The Dirac set function $\delta_y$ has value $1$ on sets containing $y$ and $0$ otherwise ([[def-dirac-measure]]); Dirac set functions are probability measures ([[prop-dirac-measure-is-a-probability-measure]]); and nonnegative finite and countable weighted sums of measures are measures ([[def-nonnegative-weighted-sum-of-measures]], [[thm-nonnegative-weighted-sums-of-measures]]).
 
 ## Proof
 

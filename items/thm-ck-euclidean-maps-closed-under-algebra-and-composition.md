@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-continuous-partial-derivatives-imply-total-differentiability, thm-induction-principle]
+deps: [def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, lem-continuity-is-local-and-pastes, thm-continuous-partial-derivatives-imply-total-differentiability, thm-total-derivative-computes-directional-and-partial-derivatives, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,12 +38,16 @@ Let $k\in\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean m
 
 [L3] If every first partial derivative exists near a point and is continuous there, then the map is totally differentiable there and its total derivative has matrix equal to its Jacobian ([[thm-continuous-partial-derivatives-imply-total-differentiability]]).
 
+[L4] Finite sums, products, and scalar multiples of continuous real functions are continuous ([[thm-algebra-of-continuous-functions]]), and a composite of continuous maps between topological spaces is continuous ([[lem-continuity-is-local-and-pastes]], claim 1).
+
+[L5] Total differentiability gives every directional and partial derivative by applying the total derivative to the corresponding direction vector ([[thm-total-derivative-computes-directional-and-partial-derivatives]]).
+
 ## Proof
 
 **Proof technique:** induction.
 
-1.1 At order $k=0$, [F1] reduces the assertions to scalar component functions. Finite sums, products, and scalar multiples of continuous functions are continuous, and a composite of continuous maps is continuous; on an empty domain all these assertions are vacuous. [F1, given, algebra, base]
+1.1 At order $k=0$, [F1] reduces the assertions to scalar component functions, and [L4] supplies closure under the stated operations; on an empty domain all these assertions are vacuous. [F1, L4, given, base]
 
 1.2 Fix $r\in\mathbb N$ and assume that all the closure assertions hold through order $r$. [ih]
 
-2.1 Consider maps of class $C^{r+1}$. For a sum, scalar multiple, or componentwise product, [L2] on each coordinate line expresses every first partial derivative as a finite sum of products of $C^r$ functions. For a composite, [L3] supplies the total derivatives and identifies their matrices with the Jacobians, while [L1] expresses each first partial of the composite as a finite sum of products of first partials of the factors. The hypothesis in step 1.2 makes all these first partials $C^r$, so [F1] makes the resulting maps $C^{r+1}$. Together with the base case, this proves the result through every finite $k$. [step 1.1, step 1.2, F1, L1, L2, L3, given, algebra, discharge-induction] ∎
+2.1 Consider maps of class $C^{r+1}$. For a sum, scalar multiple, or componentwise product, [L2] on each coordinate line expresses every first partial derivative as a finite sum of products of $C^r$ functions. For a composite, [L3] supplies total differentiability, [L1] gives its total derivative, and [L5] identifies the first partials with the columns of that derivative; hence every first partial is a finite sum of products of first partials of the factors. The hypothesis in step 1.2 makes all these first partials $C^r$, so [F1] makes the resulting maps $C^{r+1}$. Together with the base case, this proves the result through every finite $k$. [step 1.1, step 1.2, F1, L1, L2, L3, L5, given, algebra, discharge-induction] ∎

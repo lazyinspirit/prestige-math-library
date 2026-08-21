@@ -30,7 +30,7 @@ pipeline_run: null
 
 **Given:** On the punctured plane $U=\mathbb R^2\setminus\{(0,0)\}$ define $S(x,y)=(x^2-y^2,2xy)$. The domain is open ([[def-metric-topology]]), and scalar derivative algebra is supplied by [[thm-algebra-of-derivatives]] and [[def-c-one-map-and-local-inverse]].
 
-[L1] If $Df(a)$ is invertible, the inverse function theorem supplies open neighbourhoods on which $f$ has a $C^1$ inverse ([[thm-euclidean-inverse-function-theorem]]).
+[L1] If $f$ is $C^1$ on an open Euclidean domain and $Df(a)$ is invertible, the inverse function theorem supplies open neighbourhoods on which $f$ has a $C^1$ inverse ([[thm-euclidean-inverse-function-theorem]]).
 
 [L2] A Euclidean linear map is invertible when it has a two-sided linear inverse ([[def-invertible-euclidean-linear-map]]).
 

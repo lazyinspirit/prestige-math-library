@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-euclidean-inner-product, def-finite-cardinality, def-metric-compactness, def-metric-interior-closure-boundary, def-connected-space]
+deps: [def-euclidean-inner-product, lem-metrics-on-rn, def-finite-cardinality, def-metric-compactness, def-metric-interior-closure-boundary, def-connected-space]
 justified_by: []
 forward_refs: [def-polygonal-arc-and-polygon, thm-polygonal-jordan-curve]
 aliases: []
@@ -29,7 +29,7 @@ pipeline_run: null
 
 A simple polygonal region is a compact connected set $P\subseteq\mathbb R^2$ such that $\operatorname{int}P$ is nonempty and connected, $P=\overline{\operatorname{int}P}$, and $\partial P$ is the union of the edges of an irredundant simple closed finite polygonal chain.
 
-Explicitly, the boundary chain has distinct cyclic vertices $v_0,\ldots,v_{n-1}$ with $n\ge3$. With indices read modulo $n$, its closed edges are $[v_i,v_{i+1}]$. Nonconsecutive edges are disjoint, consecutive edges meet only at their common endpoint, and no three consecutive vertices are collinear. Compactness, interior, closure, boundary, and connectedness have their meanings in [[def-metric-compactness]], [[def-metric-interior-closure-boundary]], and [[def-connected-space]]; finiteness is that of [[def-finite-cardinality]].
+Explicitly, the boundary chain has distinct cyclic vertices $v_0,\ldots,v_{n-1}$ with $n\ge3$. With indices read modulo $n$, its closed edges are $[v_i,v_{i+1}]$. Nonconsecutive edges are disjoint, consecutive edges meet only at their common endpoint, and no three consecutive vertices are collinear. Compactness, interior, closure, boundary, and connectedness are taken in the Euclidean metric $d_2(x,y)=\lVert x-y\rVert_2$ of [[def-euclidean-inner-product]] and [[lem-metrics-on-rn]], with the notions of [[def-metric-compactness]], [[def-metric-interior-closure-boundary]], and [[def-connected-space]]; finiteness is that of [[def-finite-cardinality]].
 
 A diagonal $[v_i,v_j]$ joins two nonadjacent boundary vertices and its open segment $\{(1-t)v_i+tv_j:0<t<1\}$ lies in $\operatorname{int}P$.
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-simple-polygonal-region-and-triangulation, thm-simple-polygon-content-is-the-sum-of-triangle-contents, thm-triangle-content-and-base-height-formula, lem-finite-sum-laws]
+deps: [def-simple-polygonal-region-and-triangulation, thm-simple-polygon-admits-a-triangulation, thm-simple-polygon-content-is-the-sum-of-triangle-contents, thm-triangle-content-and-base-height-formula, lem-finite-sum-laws]
 justified_by: []
 aliases: []
 landmark: true
@@ -37,6 +37,8 @@ $$\operatorname{cont}(P)=\frac12\sum_{i<n}(x_i y_{i+1}-y_i x_{i+1}).$$
 
 [L1] A simple polygon is Jordan measurable and its content is the sum of the triangle contents in any triangulation ([[thm-simple-polygon-content-is-the-sum-of-triangle-contents]]).
 
+[L0] Every simple polygon admits a triangulation ([[thm-simple-polygon-admits-a-triangulation]]).
+
 [L2] A triangle has content one half of the absolute determinant of two displacement vectors ([[thm-triangle-content-and-base-height-formula]]).
 
 [L3] Finite sums are additive and commute with scalar multiplication ([[lem-finite-sum-laws]]).
@@ -45,7 +47,7 @@ $$\operatorname{cont}(P)=\frac12\sum_{i<n}(x_i y_{i+1}-y_i x_{i+1}).$$
 
 **Proof technique:** direct.
 
-1.1 Choose a triangulation and orient every triangular face counterclockwise. By [L1] and [L2], the polygon content is the sum over faces of one half of the signed boundary-edge expression $\det[p,q]+\det[q,r]+\det[r,p]$. [L1, L2, choose]
+1.1 Choose a triangulation by [L0] and orient every triangular face counterclockwise. By [L1] and [L2], the polygon content is the sum over faces of one half of the signed boundary-edge expression $\det[p,q]+\det[q,r]+\det[r,p]$. [L0, L1, L2, choose]
 
 2.1 By [L3], the finite face sum may be regrouped by oriented edges. Every internal edge is traversed once in each direction by its two incident faces, so its two determinant terms cancel. [step 1.1, L3, algebra]
 

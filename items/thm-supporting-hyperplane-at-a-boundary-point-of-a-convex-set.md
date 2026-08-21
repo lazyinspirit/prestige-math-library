@@ -1,11 +1,11 @@
 ---
 id: thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set
 kind: theorem
-title: "Every boundary point of a nonempty Euclidean convex set has a supporting hyperplane"
+title: "Every boundary point belonging to a nonempty Euclidean convex set has a supporting hyperplane"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [lem-convex-set-and-closure-have-same-interior-and-boundary, def-supporting-hyperplane-to-a-convex-set, thm-strict-separation-of-a-point-from-a-closed-convex-set, cor-euclidean-closed-balls-and-spheres-are-compact, cor-bolzano-weierstrass-in-rn, thm-metric-sequential-closure, def-metric-interior-closure-boundary, def-axiom-of-choice, def-countable-choice]
 justified_by: []
@@ -26,7 +26,7 @@ pipeline_run: null
 
 ## Statement
 
-Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty and convex, and let $a\in\partial C$. Then there is a nonzero vector $u$ such that $\langle u,z-a\rangle\le0$ for every $z\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).
+Assume the Axiom of Choice ([[def-axiom-of-choice]]) and the Axiom of Countable Choice ([[def-countable-choice]]). Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty and convex, and let $a\in C\cap\partial C$. Then there is a nonzero vector $u$ such that $\langle u,z-a\rangle\le0$ for every $z\in C$. Thus the hyperplane through $a$ normal to $u$ supports $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).
 
 ## Facts & Assumptions
 

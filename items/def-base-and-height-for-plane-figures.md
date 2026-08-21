@@ -5,7 +5,7 @@ title: "Base and perpendicular height for a chosen side of a plane figure"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-parallelogram-and-triangle-in-r2, def-metric-bounded-diameter, def-euclidean-inner-product]
 justified_by: []
@@ -23,10 +23,10 @@ pipeline_run: null
 
 ## Definition
 
-Let $v,w\in\mathbb R^2$ with $v\ne0$. For the parallelogram $P(p;v,w)$ ([[def-parallelogram-and-triangle-in-r2]]), the **base length along $v$** is $\lVert v\rVert_2$, and the corresponding **perpendicular height** is
+Let $p,v,w\in\mathbb R^2$ with $v\ne0$. For the parallelogram $P(p;v,w)$ ([[def-parallelogram-and-triangle-in-r2]]), the **base length along $v$** is $\lVert v\rVert_2$, and the corresponding **perpendicular height** is
 
-$$d(w,\mathbb Rv),\qquad \mathbb Rv:=\{tv:t\in\mathbb R\}.$$
+$$d(w,\mathbb Rv):=\inf_{t\in\mathbb R}\lVert w-tv\rVert_2,\qquad \mathbb Rv:=\{tv:t\in\mathbb R\}.$$
 
-The distance is defined because the line $\mathbb Rv$ is nonempty ([[def-metric-bounded-diameter]]).
+The infimum is the Euclidean point-to-set distance; it is defined because the line $\mathbb Rv$ is nonempty ([[def-metric-bounded-diameter]], [[def-euclidean-inner-product]]).
 
 For the triangle $T(A,B,C)$ with chosen nonzero side $A B$, the **base length** is $\lVert B-A\rVert_2$ and the corresponding **height** is $d(C-A,\mathbb R(B-A))$. This is the distance from $C$ to the full line through $A$ and $B$, not necessarily to the segment $[A,B]$.

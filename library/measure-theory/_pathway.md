@@ -6,6 +6,7 @@ parts:
     title: "Sigma-algebras and Borel sets"
     pages:
       - sigma-algebras-and-borel-sets
+      - measures-and-their-basic-properties
 ---
 
 ## sigma-algebras-and-borel-sets

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-improper-multiple-integral-and-absolute-convergence, thm-nonnegative-improper-multiple-integral-by-exhaustion, thm-multidimensional-integral-properties]
+deps: [def-improper-multiple-integral-and-absolute-convergence, thm-nonnegative-improper-multiple-integral-by-exhaustion, def-riemann-integral-over-a-jordan-set, thm-multidimensional-integral-properties]
 justified_by: []
 aliases: []
 landmark: true
@@ -41,14 +41,16 @@ and the value is independent of the exhaustion. Conversely, under the adopted de
 
 [L2] A locally Riemann-integrable signed function is improperly integrable precisely when the nonnegative improper integral of its absolute value is finite ([[def-improper-multiple-integral-and-absolute-convergence]]).
 
-[L3] Proper multidimensional Riemann integrals are linear and monotone ([[thm-multidimensional-integral-properties]]).
+[L3] On a nondegenerate rectangle, proper multidimensional Riemann integrals are linear and monotone ([[thm-multidimensional-integral-properties]]).
+
+[L4] The integral over a bounded Jordan set is the bounding-rectangle integral of the zero extension ([[def-riemann-integral-over-a-jordan-set]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Since $0\le f^+,f^-\le|f|$, proper monotonicity in [L3] and the defining suprema in [L2] make both nonnegative improper integrals finite; [L1] then gives $\int_{K_j}f^+\to\int_Df^+$ and $\int_{K_j}f^-\to\int_Df^-$ along every exhaustion. [L1, L2, L3]
+1.1 Since $0\le f^+,f^-\le|f|$, extend the restrictions to every compact Jordan set by zero on one bounding rectangle. Monotonicity in [L3], the Jordan-set definition [L4], and the defining suprema in [L2] make both nonnegative improper integrals finite; [L1] then gives $\int_{K_j}f^+\to\int_Df^+$ and $\int_{K_j}f^-\to\int_Df^-$ along every exhaustion. [L1, L2, L3, L4]
 
-2.1 On each compact $K_j$, the identity $f=f^+-f^-$ and [L3] give $\int_{K_j}f=\int_{K_j}f^+-\int_{K_j}f^-$. [step 1.1, L3]
+2.1 On each compact $K_j$, extend the three restrictions by zero to one bounding rectangle. The identity $f=f^+-f^-$ and linearity in [L3], interpreted through [L4], give $\int_{K_j}f=\int_{K_j}f^+-\int_{K_j}f^-$. [step 1.1, L3, L4]
 
 3.1 Subtracting the two finite limits in step 1.1 and using step 2.1 yields $\int_{K_j}f\to\int_Df^+-\int_Df^-=\int_Df$, independently of the exhaustion; the converse is the defining condition in [L2]. [step 1.1, step 2.1, L2] ∎

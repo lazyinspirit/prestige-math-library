@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-projection-onto-a-closed-convex-set-has-the-variational-inequality, def-supporting-hyperplane-to-a-convex-set, def-metric-interior-closure-boundary]
+deps: [thm-nearest-point-in-a-nonempty-closed-convex-set, lem-projection-onto-a-closed-convex-set-has-the-variational-inequality, def-supporting-hyperplane-to-a-convex-set, def-metric-interior-closure-boundary]
 justified_by: []
 aliases: []
 landmark: true
@@ -32,10 +32,12 @@ Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty, closed, and convex, and le
 
 [L1] If $p$ is the projection of $x$ onto $C$, then $$\langle x-p,z-p\rangle\le0\qquad(z\in C).$$ ([[lem-projection-onto-a-closed-convex-set-has-the-variational-inequality]])
 
+[L2] Every point of $\mathbb R^n$ has a unique nearest point in a nonempty closed convex subset of $\mathbb R^n$ ([[thm-nearest-point-in-a-nonempty-closed-convex-set]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $p$ be the nearest point and put $a=x-p$. By [L1], $\langle a,z\rangle\le\langle a,p\rangle$ for every $z\in C$. Since $x\notin C$, one has $a\ne0$ and $$\langle a,x\rangle=\langle a,p\rangle+\|a\|_2^2>\langle a,p\rangle.$$ [L1, given, algebra]
+1.1 Let $p$ be the nearest point supplied by [L2] and put $a=x-p$. By [L1], $\langle a,z\rangle\le\langle a,p\rangle$ for every $z\in C$. Since $x\notin C$, one has $a\ne0$ and $$\langle a,x\rangle=\langle a,p\rangle+\|a\|_2^2>\langle a,p\rangle.$$ [L1, L2, given, algebra]
 
 2.1 Taking $b=\langle a,p\rangle$ in step 1.1 gives the stated strict separation with a nonzero normal. [step 1.1] ∎

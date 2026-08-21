@@ -49,6 +49,7 @@ parts:
     pages:
       - the-riemann-integral
       - properties-of-the-integral-and-the-working-ftc
+      - the-gauge-integral-and-cousins-lemma
       - improper-integrals
       - bounded-variation-and-riemann-stieltjes
   - part: sequences-of-functions
@@ -75,6 +76,10 @@ parts:
       - inverse-and-implicit-function-theorems
       - the-riemann-integral-in-rn-and-jordan-content
       - fubini-and-change-of-variables
+      - the-inverse-function-theorem-completed
+      - improper-and-parameter-dependent-multiple-integrals
+      - convex-and-semicontinuous-functions-on-rn
+      - picard-lindelof-and-first-order-odes
   - part: curves-and-the-fundamental-theorems
     title: "Curves and the fundamental theorems"
     pages:
@@ -83,6 +88,8 @@ parts:
       - line-integrals-and-the-gradient-theorem
       - pi-the-equivalent-characterizations
       - the-complex-exponential-and-eulers-formula
+      - trigonometric-and-oscillatory-examples-in-one-variable
+      - areas-of-elementary-plane-figures
 ---
 
 ## building-the-reals

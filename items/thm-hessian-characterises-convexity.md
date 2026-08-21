@@ -30,7 +30,7 @@ A $C^2$ function on an open convex set is convex if and only if its Hessian is p
 
 **Given:** An open convex $U\subseteq\mathbb R^n$, a $C^2$ function $f:U\to\mathbb R$, and the total chain rule [[thm-chain-rule-for-total-derivatives]].
 
-[L1] A twice differentiable real function on an interval is convex if and only if its second derivative is nonnegative throughout the interval ([[cor-second-derivative-characterises-convexity]]).
+[L1] A twice differentiable real function on an open interval is convex if and only if its second derivative is nonnegative throughout the interval ([[cor-second-derivative-characterises-convexity]]).
 
 [F1] A symmetric quadratic form is positive semidefinite when $q_H(h)\ge0$ for every $h$ ([[def-definite-and-indefinite-hessian-quadratic-forms]]).
 

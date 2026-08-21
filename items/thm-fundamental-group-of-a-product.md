@@ -10,6 +10,7 @@ provenance:
 deps: [def-based-loops-and-fundamental-group, thm-fundamental-group-laws,
        def-homotopy-relative-and-path-homotopy,
        def-induced-homomorphism-on-fundamental-groups,
+       thm-induced-fundamental-group-map-functoriality,
        def-product-topology, thm-product-universal-property,
        def-external-direct-product-of-groups,
        thm-external-direct-product-is-a-group,
@@ -48,7 +49,7 @@ Its inverse sends $([\alpha],[\beta])$ to the class of the paired loop $s\mapsto
 
 [F4] A path homotopy relative to endpoints is a homotopy whose two endpoint tracks are constant ([[def-homotopy-relative-and-path-homotopy]]).
 
-[F5] A pointed continuous map sends a loop class $[\alpha]$ to the class of its composite with that map ([[def-induced-homomorphism-on-fundamental-groups]]).
+[F5] A pointed continuous map sends $[\alpha]$ to $[f\circ\alpha]$ by a well-defined group homomorphism, and induced maps respect identities and composition ([[thm-induced-fundamental-group-map-functoriality]]).
 
 ## Proof
 

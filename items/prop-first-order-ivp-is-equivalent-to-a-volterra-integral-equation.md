@@ -5,9 +5,9 @@ title: "A first-order initial value problem is equivalent to its Volterra integr
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
-deps: [def-first-order-ode-initial-value-problem-and-solution, def-vector-valued-derivative-and-integral, cor-vector-valued-ftc-and-lipschitz-bound, cor-primitives-of-a-continuous-function, thm-componentwise-limits-and-continuity, def-oriented-integral]
+deps: [def-first-order-ode-initial-value-problem-and-solution, def-vector-valued-derivative-and-integral, cor-vector-valued-ftc-and-lipschitz-bound, cor-primitives-of-a-continuous-function, thm-continuous-implies-integrable, thm-componentwise-limits-and-continuity, def-oriented-integral]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -27,7 +27,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $F:D\to\mathbb R^n$ be continuous, let $(t_0,x_0)\in D$, let $I\subseteq\mathbb R$ be order-convex with at least two elements, and let $x:I\to\mathbb R^n$ be continuous with $t_0\in I$ and $(t,x(t))\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is
+Let $n\ge1$, let $D\subseteq\mathbb R\times\mathbb R^n$ be open, let $F:D\to\mathbb R^n$ be continuous, let $(t_0,x_0)\in D$, let $I\subseteq\mathbb R$ be order-convex with at least two elements, and let $x:I\to\mathbb R^n$ be continuous with $t_0\in I$ and $(t,x(t))\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is
 
 $$x(t)=x_0+\int_{t_0}^{t}F(s,x(s))\,ds\qquad(t\in I).$$
 
@@ -41,10 +41,12 @@ The integral is oriented, so the assertion applies on either side of $t_0$.
 
 [L2] If $I$ is order-convex with at least two elements, $g:I\to\mathbb R$ is continuous, and $t_0\in I$, then $t\mapsto\int_{t_0}^t g$ is a primitive of $g$ on $I$ ([[cor-primitives-of-a-continuous-function]]).
 
+[L3] Every continuous real function on a compact interval is Riemann integrable ([[thm-continuous-implies-integrable]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For the forward direction, the identity is immediate at $t=t_0$; for $t\ne t_0$, each component of $x'=F(\,·\,,x)$ is continuous and hence integrable, so [L1] on the closed interval between $t_0$ and $t$, followed by orientation when $t<t_0$, gives $x(t)-x_0=\int_{t_0}^tF(s,x(s))\,ds$. [given, L1]
+1.1 For the forward direction, the identity is immediate at $t=t_0$; for $t\ne t_0$, each component of $x'=F(\,·\,,x)$ is continuous and hence integrable by [L3], so [L1] on the closed interval between $t_0$ and $t$, followed by orientation when $t<t_0$, gives $x(t)-x_0=\int_{t_0}^tF(s,x(s))\,ds$. [given, L1, L3]
 
 2.1 For the reverse direction, [L2] applied componentwise differentiates the displayed integral equation and gives $x'(t)=F(t,x(t))$; at $t=t_0$ the oriented integral is $0$, so $x(t_0)=x_0$. [given, L2, algebra] ∎

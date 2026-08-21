@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-improper-multiple-integral-and-absolute-convergence, thm-nonnegative-improper-multiple-integral-by-exhaustion, thm-multidimensional-integral-properties]
+deps: [def-improper-multiple-integral-and-absolute-convergence, thm-nonnegative-improper-multiple-integral-by-exhaustion, def-riemann-integral-over-a-jordan-set, thm-multidimensional-integral-properties]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,12 +38,14 @@ If $|f|\le g$ and $\int_Dg<+\infty$, then $f$ is absolutely improperly integrabl
 
 [L2] A signed function is improperly integrable precisely when the nonnegative improper integral of its absolute value is finite ([[def-improper-multiple-integral-and-absolute-convergence]]).
 
-[L3] Proper Riemann integrals preserve pointwise inequalities ([[thm-multidimensional-integral-properties]]).
+[L3] Proper Riemann integrals on a nondegenerate rectangle preserve pointwise inequalities ([[thm-multidimensional-integral-properties]]).
+
+[L4] The integral over a bounded Jordan set is the bounding-rectangle integral of the zero extension ([[def-riemann-integral-over-a-jordan-set]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 On every compact Jordan $K\subseteq D$, [L3] gives $0\le\int_Kf\le\int_Kg$; taking the defining suprema, equivalently using [L1] on any exhaustion, gives $0\le\int_Df\le\int_Dg$. [L1, L3]
+1.1 On every compact Jordan $K\subseteq D$, extend $f|_K$ and $g|_K$ by zero to one bounding rectangle. Their zero extensions satisfy the same pointwise inequalities, so [L3] and [L4] give $0\le\int_Kf\le\int_Kg$; taking the defining suprema, equivalently using [L1] on any exhaustion, gives $0\le\int_Df\le\int_Dg$. [L1, L3, L4]
 
 2.1 If $|f|\le g$ and $\int_Dg$ is finite, step 1.1 applied to $|f|$ gives $\int_D|f|\le\int_Dg<+\infty$, so [L2] gives absolute improper integrability of $f$. [step 1.1, L2] ∎

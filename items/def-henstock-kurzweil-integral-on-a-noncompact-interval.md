@@ -5,9 +5,9 @@ title: "Henstock–Kurzweil integrals on half-open and unbounded intervals by co
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-henstock-kurzweil-integral-on-a-compact-interval, def-one-sided-limits, def-limits-at-infinity, def-oriented-integral]
+deps: [def-henstock-kurzweil-integral-on-a-compact-interval, def-one-sided-limits, def-limits-at-infinity]
 justified_by: []
 forward_refs: []
 aliases: []
@@ -30,6 +30,6 @@ Suppose $f$ is HK integrable on every compact subinterval of an interval with a 
 
 - On $[a,b)$ with finite $b$, define $\int_a^b f:=\lim_{c\uparrow b}\int_a^c f$ when this finite limit exists.
 - On $[a,\infty)$, define $\int_a^\infty f:=\lim_{c\to\infty}\int_a^c f$ when this finite limit exists.
-- Missing left endpoints are defined by the analogous right limits, using oriented integrals.
+- Missing left endpoints are defined by the analogous right limits. For compact Henstock–Kurzweil integrals the orientation convention used here is $\int_v^u f:=-\int_u^v f$ when $u<v$, with $\int_u^u f:=0$; it is a convention for the compact HK values of [[def-henstock-kurzweil-integral-on-a-compact-interval]], not an invocation of the Darboux-only orientation definition.
 
 These are **noncompact Henstock–Kurzweil integrals**. Existence always means existence as a finite real number. A compact interval with both endpoints included uses the compact definition, not a truncation limit.

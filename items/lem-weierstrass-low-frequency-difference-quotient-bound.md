@@ -37,7 +37,7 @@ Then $A_0=0$ and, for every $m\in\mathbb N$,
 
 $$|A_m|\le\pi(x_m-x_0)\frac{(ab)^m-1}{ab-1}.$$
 
-In particular,
+In particular, for every $m\ge1$,
 
 $$|A_m|<\pi(ab)^m(x_m-x_0)/(ab-1).$$
 
@@ -67,4 +67,4 @@ $$|A_m|<\pi(ab)^m(x_m-x_0)/(ab-1).$$
 
 2.1 Repeated use of [L5], followed by [L1] on each summand and [L4], gives $$|A_m|\le\sum_{n<m}a^n b^n\pi|x_m-x_0|=\pi(x_m-x_0)\sum_{n<m}(ab)^n,$$ where [L2] supplies $x_m-x_0>0$ and [L6] supplies $\pi>0$. [step 1.1, L1, L2, L4, L5, L6, algebra]
 
-3.1 Substitute step 1.2 into step 2.1. Since $(ab)^m-1<(ab)^m$ and the other factors are positive, the strict displayed bound follows as well. [step 1.2, step 2.1, algebra] ∎
+3.1 Substitute step 1.2 into step 2.1. For $m\ge1$, one has $(ab)^m-1<(ab)^m$ and the other factors are positive, so the strict displayed bound follows; at $m=0$, the non-strict formula already gives $A_0=0$. [step 1.2, step 2.1, algebra] ∎

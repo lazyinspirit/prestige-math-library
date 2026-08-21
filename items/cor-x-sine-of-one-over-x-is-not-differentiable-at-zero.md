@@ -56,7 +56,7 @@ Then $f$ is continuous on $\mathbb R$ but is not differentiable at $0$.
 
 [L6] The derivative at zero, if it exists, is the limit of $(f(x)-f(0))/x$ as $x\to0$ through nonzero reals ([[def-derivative]]).
 
-[L7] Sine is continuous, algebraic combinations of continuous functions are continuous, and composites of continuous real functions are continuous ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-algebra-of-continuous-functions]], [[thm-composition-of-continuous-functions]]).
+[L7] Sine is continuous; sums and products of continuous functions are continuous; quotients are continuous where their denominators do not vanish; and composites of continuous real functions are continuous ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-algebra-of-continuous-functions]], [[thm-composition-of-continuous-functions]]).
 
 [L8] The number $\pi=2\gamma$ is positive because the first positive cosine zero satisfies $\gamma\in(0,2)$ ([[def-pi-via-first-positive-cosine-zero]], [[thm-cosine-has-a-smallest-positive-zero]]).
 
@@ -64,7 +64,7 @@ Then $f$ is continuous on $\mathbb R$ but is not differentiable at $0$.
 
 **Proof technique:** direct.
 
-1.1 By [L1], $-|x|\le f(x)\le|x|$ for $x\ne0$, so [L2] gives $f(x)\to0=f(0)$ at zero. Away from zero, the reciprocal, sine, and product operations preserve continuity by [L7]. Thus $f$ is continuous on $\mathbb R$. [L1, L2, L7, algebra]
+1.1 By [L1], $-|x|\le f(x)\le|x|$ for $x\ne0$, so [L2] gives $f(x)\to0=f(0)$ at zero. Away from zero, the identity function has no zero in the denominator of the reciprocal, so the quotient, sine, composite, and product clauses of [L7] preserve continuity. Thus $f$ is continuous on $\mathbb R$. [L1, L2, L7, algebra]
 
 1.2 For $x\ne0$, the difference quotient at zero is $(f(x)-f(0))/x=\sin(1/x)$. [L6, algebra]
 

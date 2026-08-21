@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image, def-local-orientation-of-a-regular-c-one-map, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-parametrize-the-unit-circle]
+deps: [thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image, thm-euclidean-inverse-function-theorem, def-local-orientation-of-a-regular-c-one-map, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-parametrize-the-unit-circle]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,10 +42,12 @@ the restriction to either half-plane $r>0$ or $r<0$ is a local diffeomorphism. I
 
 [L3] Products of differentiable real functions are differentiable and satisfy the product rule ([[thm-algebra-of-derivatives]]).
 
+[L4] A $C^1$ Euclidean map with invertible derivative at a point restricts to a $C^1$ diffeomorphism between neighbourhoods of that point and its image ([[thm-euclidean-inverse-function-theorem]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 By [L1] and [L3], $$DP(r,\theta)=\begin{pmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{pmatrix},\qquad\det DP(r,\theta)=r.$$ Thus the inverse function theorem and [L2] give the asserted local diffeomorphism and orientation wherever $r\ne0$. [L1, L2, L3, given, algebra]
+1.1 By [L1] and [L3], $$DP(r,\theta)=\begin{pmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{pmatrix},\qquad\det DP(r,\theta)=r.$$ Thus [L4] and [L2] give the asserted local diffeomorphism and orientation wherever $r\ne0$. [L1, L2, L3, L4, algebra]
 
 2.1 On the principal strip, equality of two images first gives equality of the positive radii by the Pythagorean identity. Translating each negative angle by $2\pi$ puts both angles into the half-open interval of the unit-circle parametrization without changing sine or cosine; its injectivity then gives equality of the original angles. The injective regular-map theorem makes this restriction a diffeomorphism onto its open image. On the full positive-radius domain, $(r,\theta)$ and $(r,\theta+2\pi)$ are distinct with the same image, so global injectivity fails there. [step 1.1, given, algebra] ∎

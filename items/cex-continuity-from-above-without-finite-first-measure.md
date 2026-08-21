@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [prop-counting-measure-is-a-measure, thm-continuity-from-above-for-measures, def-nat-order, lem-nat-discrete]
+deps: [def-counting-measure, prop-counting-measure-is-a-measure, thm-continuity-from-above-for-measures, def-nat-order, lem-nat-add-cancellative, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,11 +30,11 @@ The finiteness hypothesis in continuity from above cannot be deleted: a decreasi
 
 **Given:** Counting measure $\#$ on $\mathbb N$ and $E_k=\{n\in\mathbb N:k\le n\}$.
 
-[L1] Counting measure is a measure and gives every infinite set value $+\infty$ ([[prop-counting-measure-is-a-measure]]).
+[L1] Counting measure gives every infinite set value $+\infty$ ([[def-counting-measure]]) and is a measure ([[prop-counting-measure-is-a-measure]]).
 
 [L2] Continuity from above assumes that some member of the decreasing sequence has finite measure ([[thm-continuity-from-above-for-measures]]).
 
-[L3] The natural order is additive ([[def-nat-order]]) and each $n+1$ is strictly greater than $n$ ([[lem-nat-discrete]]).
+[L3] The natural order is defined through addition ([[def-nat-order]]), natural addition is cancellative ([[lem-nat-add-cancellative]]), and each $n+1$ is strictly greater than $n$ ([[lem-nat-discrete]]).
 
 ## Counterexample
 
@@ -47,4 +47,3 @@ The finiteness hypothesis in continuity from above cannot be deleted: a decreasi
 1.3 The intersection is empty: a natural $n$ does not belong to $E_{n+1}$. [given, L3]
 
 2.1 Hence $\#(\bigcap_kE_k)=0$ but $\inf_k\#(E_k)=+\infty$. The hypothesis of [L2] fails at every index, exactly as required. [step 1.2, step 1.3, L1, L2] ∎
-
