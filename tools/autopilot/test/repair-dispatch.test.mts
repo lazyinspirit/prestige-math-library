@@ -127,6 +127,53 @@ test('a step-8 contract-audit failure routes to a risk-review Alpha, not a no-op
   assert.equal(p.role, 'alpha');
 });
 
+test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alpha', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [],
+    unadjudicated: ['thm-x'],
+    unadjudicated_rows: [
+      { id: 'thm-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
+      { id: 'thm-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' },
+    ],
+    open_fatal: [],
+    closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'judge-closure', why: '1 unadjudicated' },
+  });
+  assert.equal(started.length, 1, 'the closure omission must dispatch immediately');
+  assert.equal(started[0].label, 'adjudicate-closure-recovery-1');
+  assert.equal(started[0].role, 'alpha');
+  assert.equal(started[0].job, 'adjudication');
+  assert.deepEqual(started[0].covers, [], 'recovery cannot manufacture stage coverage');
+  assert.equal(started[0].task, 'briefs/tasks/alpha-step8-closure-recovery.md');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('step 8 still routes open fatals to repair when no adjudication row is missing', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: [], unadjudicated_rows: [],
+    open_fatal: ['thm-x'], closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 2,
+    failure: { id: 'judge-closure', why: '1 open fatal' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'repair-8-round-2');
+  assert.equal(started[0].job, 'authoring');
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('a prompt file carrying an identity placeholder blocks before any spawn', () => {
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-poisoned.task.md'), 'the grammar example says (order <n>)\n');

@@ -632,7 +632,13 @@ function readScaffold(ctx): { insufficient: string[]; missing_verdict: string[];
 /** The closure receipt the judge gate writes, or null before it has ever run.
  *  Read fresh every time — it is rewritten by each gate run, and a cached copy
  *  would name repairs that have since landed. */
-function readClosure(ctx): { needs_rejudge: string[]; unadjudicated: string[]; open_fatal: string[]; closed: boolean } | null {
+function readClosure(ctx): {
+  needs_rejudge: string[];
+  unadjudicated: string[];
+  unadjudicated_rows?: Array<{ id: string; model: string; context_sha256: string }>;
+  open_fatal: string[];
+  closed: boolean;
+} | null {
   const p = R(ctx, closurePath(ctx));
   if (!existsSync(p)) return null;
   try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
@@ -1587,6 +1593,23 @@ export const stages = [
         return;
       }
       const closure = readClosure(ctx);
+      if (failure.id === 'judge-closure' && (closure?.unadjudicated?.length ?? 0) > 0) {
+        // The initial Alpha can miss rejection rows even though its stage result
+        // covers `all`. The receipt's exact id/model/context work units scope a
+        // recovery Alpha without repeating the completed adjudications. Legacy
+        // receipts retain the id summary, from which the task reconstructs the
+        // missing exact keys against the two append-only ledgers.
+        executor.start(stage, {
+          role: 'alpha',
+          label: `adjudicate-closure-recovery-${round}`,
+          job: 'adjudication',
+          covers: [],
+          brief: 'briefs/alpha.md',
+          task: 'briefs/tasks/alpha-step8-closure-recovery.md',
+          timeout: 21600,
+        });
+        return;
+      }
       const ids = closure?.open_fatal ?? [];
       if (!ids.length) return;              // gate failed on something else
       // The task points at the closure RECEIPT, never at a transcribed id list.

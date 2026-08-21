@@ -173,9 +173,11 @@ converge must become a blocker a person reads rather than an unbounded spend.
 | step 3 review → Beta fix → re-check | every pair is `sufficient` | `research/<run>-scaffold-closure.json` |
 | step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `research/<run>-judge-closure.json` |
 
-Both receipts name **ids**, not prose — nothing downstream can read a table. Why
-the loops are shaped this way, and the run that proved it: `ARCHITECTURE.md`
-§3.11d.
+Both receipts name machine-readable work, not prose — nothing downstream can
+read a table. Judge closure includes exact `(id, model, context_sha256)` rows for
+missing adjudications; `8-adjudicate` routes those rows to one narrow recovery
+Alpha before open-fatal repair. Why the loops are shaped this way, and the runs
+that proved it: `ARCHITECTURE.md` §3.11d.
 
 ## Budget, and why fatal repairs are not capped
 

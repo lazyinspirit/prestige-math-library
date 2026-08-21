@@ -451,6 +451,7 @@ function currentContextHash(id) {
 // receipt is what turns "these need rejudging" into a dispatch.
 const needsRejudge = [];      // no current verdict pair — repaired, or never judged
 const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
+const unadjudicatedRows = []; // exact (id, model, context) work units for Step 8
 const openFatal = [];         // Alpha confirmed fatal against the text on disk
 const judgeCoverage = [];
 for (const id of judgePath ? judgeScope : []) {
@@ -499,6 +500,7 @@ for (const id of judgePath ? judgeScope : []) {
       const outcome = judgeOutcomes.get(judgeOutcomeKey(id, model, hash));
       if (!outcome) {
         if (!unadjudicated.includes(id)) unadjudicated.push(id);
+        unadjudicatedRows.push({ id, model, context_sha256: hash });
         // Step 7 has not adjudicated anything yet; everywhere else this is a
         // rejection nobody has read, which is not the same as a rejection
         // somebody decided was harmless.
@@ -529,6 +531,9 @@ if (outPath) {
     pairs_complete: judgeCoverage.length,
     needs_rejudge: needsRejudge.sort(),
     unadjudicated: unadjudicated.sort(),
+    unadjudicated_rows: unadjudicatedRows.sort((a, b) =>
+      a.id.localeCompare(b.id) || a.model.localeCompare(b.model)
+        || a.context_sha256.localeCompare(b.context_sha256)),
     open_fatal: openFatal.sort(),
     // `closed` is the unconditional predicate, ignoring the --allow-* relaxations:
     // a stage may be allowed to proceed with work outstanding, but nothing should

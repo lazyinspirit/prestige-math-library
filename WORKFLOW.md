@@ -718,7 +718,10 @@ ledger rows, and records every planned-versus-authored dependency difference in
 the signed Alpha receipt. It also consumes Alpha's exact-hash judge
 adjudications: a current `confirmed_fatal` or unadjudicated rejection blocks
 closure, while an explicitly `confirmed_nonfatal` or `false_positive` finding
-does not override the 30-second nonfatal-gap policy.
+does not override the 30-second nonfatal-gap policy. The judge-closure receipt
+stores exact `(id, model, context_sha256)` work units for any missing outcome;
+Step 8 routes those units to a narrow recovery Alpha rather than re-running the
+completed adjudications or spending an empty repair round.
 
 **Obvious published-dependency repair (owner, 2026-08-01).** The owner has
 delegated a narrow exception to the usual published-content read-only boundary:

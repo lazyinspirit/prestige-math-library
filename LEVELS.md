@@ -971,6 +971,15 @@ the audit receipt and repeat the final `level-coverage.mjs
 --verify-current-context` gate after its targeted paired rejudge. A stale
 receipt or pair of ledger rows is not publication evidence.
 
+The judge-closure receipt records every missing adjudication as an exact
+`(id, model, context_sha256)` row as well as an id summary. If the initial Alpha
+omits any current rejection, `8-adjudicate` dispatches one narrow recovery Alpha
+from those rows; it does not repeat the completed adjudications or broaden the
+scope. A confirmed fatal found there follows the same fatal-only repair and
+targeted-rejudge rules. This closes the Frontier-16 failure in which eight
+omitted rows across six ids consumed two empty repair rounds before a manually
+targeted recovery.
+
 **The rejudge is item-granular, not page-granular (owner, 2026-08-06).** The
 judge's context unit is the whole A/B pair, so repairing one item moves the
 frozen context hash of every item on that pair. Read strictly, that forced a

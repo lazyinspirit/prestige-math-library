@@ -190,7 +190,7 @@ test('the closure receipt names the work, so a later stage can dispatch from it'
   const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
   if (!existsSync(join(repo, 'tools/level-coverage.mjs'))) return;
   const src = readFileSync(join(repo, 'tools/level-coverage.mjs'), 'utf8');
-  for (const key of ['needs_rejudge', 'unadjudicated', 'open_fatal', 'closed']) {
+  for (const key of ['needs_rejudge', 'unadjudicated', 'unadjudicated_rows', 'open_fatal', 'closed']) {
     assert.ok(src.includes(key), `the closure receipt must name ${key}`);
   }
 });

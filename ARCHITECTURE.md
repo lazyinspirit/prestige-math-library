@@ -550,13 +550,19 @@ outcome to a warning (true only at step 7, before anything has been adjudicated)
 and `--allow-pending-rejudge` demotes a missing verdict pair (true only at step
 8, where a repair correctly voids its own pair and the rejudge stage owns the
 consequence). `--out <receipt.json>` writes `needs_rejudge`, `unadjudicated` and
-`open_fatal` as id lists plus an unconditional `closed` flag that ignores both
-relaxations — so a stage may proceed with work outstanding, but nothing reading
-the receipt can conclude the level is finished when it is not. The receipt is
-written whether or not the gate passes: a failing gate is precisely when the ids
-it names need to become someone's dispatch. `frontier-14`'s step 8 named its 23
-rejudge targets in a markdown table, the rejudge never ran, and 22 of them are
-unjudged to this day — nothing downstream can read a table.
+`open_fatal` as id summaries, plus exact `(id, model, context_sha256)`
+`unadjudicated_rows` and an unconditional `closed` flag that ignores both
+relaxations. A stage may proceed with work outstanding, but nothing reading the
+receipt can conclude the level is finished when it is not. At `8-adjudicate`, a
+nonempty exact-row list dispatches one narrow recovery Alpha before open-fatal
+repair routing; it adjudicates only those missing rows and preserves the prior
+Step-8 record. The receipt is written whether or not the gate passes: a failing
+gate is precisely when the work it names needs to become someone's dispatch.
+`frontier-14`'s step 8 named its 23 rejudge targets in a markdown table, the
+rejudge never ran, and 22 of them are unjudged to this day — nothing downstream
+can read a table. Frontier 16 exposed the other direction: six ids/eight exact
+rejection rows reached the gate unadjudicated, and before this route two repair
+rounds did no work until a manually targeted recovery Alpha closed them.
 
 **COVERAGE FOLLOWS THE ITEM, NOT THE PAGE** (owner, 2026-08-06). The judge's
 context unit is the A/B pair — an item is judged with its whole page and
@@ -891,9 +897,11 @@ infinite spend. Two loops exist:
 | scaffold review → Beta fix → re-check | every pair `sufficient` | `scaffold-verdicts.mjs` → `<run>-scaffold-closure.json` |
 | judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `level-coverage --judge-only` → `<run>-judge-closure.json` |
 
-Both write **id lists**, not prose. `frontier-14`'s step 8 named its 23 rejudge
-targets in a markdown table and the rejudge never ran, because nothing
-downstream can read a table; 22 of those repairs were still unjudged days later.
+Both write machine-readable work, not prose. Judge closure carries id summaries
+for rejudge/open-fatal routing and exact `(id, model, context_sha256)` rows for
+missing adjudications. `frontier-14`'s step 8 named its 23 rejudge targets in a
+markdown table and the rejudge never ran, because nothing downstream can read a
+table; 22 of those repairs were still unjudged days later.
 The hook itself also could not have worked as first written — it fired only when
 the blocker *message* was new, and a gate failing the same way produces the same
 message every time, so it fired once and deadlocked.
