@@ -16,6 +16,10 @@ landmark: true
 short: "$W_{a,b}(x)=\\sum a^n\\cos(b^n\\pi x)$"
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-21
 sources:
   scraped: []
   references:

@@ -15,6 +15,10 @@ short: "$\\operatorname{cont}(D_r)=\\pi r^2$"
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-21
 sources:
   scraped: []
   references:

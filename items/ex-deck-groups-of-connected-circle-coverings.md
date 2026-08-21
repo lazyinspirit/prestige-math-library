@@ -23,6 +23,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-21
 sources:
   scraped: []
   references:
