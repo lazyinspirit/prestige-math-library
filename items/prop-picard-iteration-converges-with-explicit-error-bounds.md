@@ -2,7 +2,7 @@
 id: prop-picard-iteration-converges-with-explicit-error-bounds
 kind: proposition
 title: "Picard iteration converges with geometric short-time and factorial cylinder error bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-every-smooth-map-of-the-plane-is-real-analytic
 kind: false-statement
 title: "FALSE: every smooth map between open subsets of the plane is real analytic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

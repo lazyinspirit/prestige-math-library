@@ -2,7 +2,7 @@
 id: ex-parallelogram-content-from-a-two-by-two-matrix
 kind: example
 title: "The content of a parallelogram from a two-by-two matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

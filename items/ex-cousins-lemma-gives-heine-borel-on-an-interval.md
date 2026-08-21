@@ -2,7 +2,7 @@
 id: ex-cousins-lemma-gives-heine-borel-on-an-interval
 kind: example
 title: "Cousin's lemma yields the Heine–Borel theorem on a compact interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-unbounded-derivative-evaluated-by-henstock-kurzweil
 kind: example
 title: "$F(x)=x^2\\sin(1/x^2)$ has an unbounded derivative whose Henstock–Kurzweil integral is $\\sin 1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

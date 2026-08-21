@@ -2,7 +2,7 @@
 id: thm-finite-and-countable-subadditivity-of-measures
 kind: theorem
 title: "Finite and countable subadditivity of measures"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

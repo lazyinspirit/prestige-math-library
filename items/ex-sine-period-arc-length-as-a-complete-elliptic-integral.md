@@ -2,7 +2,7 @@
 id: ex-sine-period-arc-length-as-a-complete-elliptic-integral
 kind: example
 title: "The arc length of one sine period is $4\\sqrt{2}\\,E(1/\\sqrt{2})$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -26,6 +26,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

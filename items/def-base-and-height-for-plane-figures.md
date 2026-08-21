@@ -2,7 +2,7 @@
 id: def-base-and-height-for-plane-figures
 kind: definition
 title: "Base and perpendicular height for a chosen side of a plane figure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

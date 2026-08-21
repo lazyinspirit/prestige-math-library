@@ -2,7 +2,7 @@
 id: prop-riemann-graph-area-equals-jordan-content
 kind: proposition
 title: "Riemann area between continuous graphs equals Jordan content"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Graph area equals Jordan content"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

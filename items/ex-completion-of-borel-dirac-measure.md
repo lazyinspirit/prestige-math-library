@@ -2,7 +2,7 @@
 id: ex-completion-of-borel-dirac-measure
 kind: example
 title: "Assuming choice, the completion of the Borel Dirac measure at zero is defined on every subset of the real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

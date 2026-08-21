@@ -2,7 +2,7 @@
 id: cex-convex-function-with-empty-subdifferential-at-a-boundary-point
 kind: counterexample
 title: '$x\mapsto-\sqrt{1-\|x\|_2^2}$ has empty subdifferential on the unit-sphere boundary'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-deck-group-as-normalizer-quotient
 kind: theorem
 title: '$\operatorname{Deck}(E/B)\cong N_G(H)/H$ for a connected covering'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

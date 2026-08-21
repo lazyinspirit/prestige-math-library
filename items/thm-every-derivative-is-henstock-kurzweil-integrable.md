@@ -2,7 +2,7 @@
 id: thm-every-derivative-is-henstock-kurzweil-integrable
 kind: theorem
 title: "Every derivative is Henstock–Kurzweil integrable and satisfies Newton–Leibniz"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ short: "Every derivative is HK integrable"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

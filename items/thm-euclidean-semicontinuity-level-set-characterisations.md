@@ -2,7 +2,7 @@
 id: thm-euclidean-semicontinuity-level-set-characterisations
 kind: theorem
 title: 'Semicontinuity on $\mathbb R^n$ is characterized by strict open level sets and weak closed level sets'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-semicontinuity-on-euclidean-subsets
 kind: definition
 title: 'Upper and lower semicontinuity on subsets of $\mathbb R^n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

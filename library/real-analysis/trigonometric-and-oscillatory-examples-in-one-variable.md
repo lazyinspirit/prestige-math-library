@@ -1,7 +1,7 @@
 ---
 page: trigonometric-and-oscillatory-examples-in-one-variable
 title: "Trigonometric and Oscillatory Examples in One Variable"
-status: draft
+status: published
 items: [cor-sine-and-cosine-are-one-lipschitz,
         def-classical-weierstrass-function,
         thm-classical-weierstrass-series-converges-uniformly,

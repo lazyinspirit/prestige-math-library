@@ -2,7 +2,7 @@
 id: lem-semifinite-measures-have-arbitrarily-large-finite-subsets
 kind: lemma
 title: "Assuming countable choice, an infinite-measure set in a semifinite measure space has arbitrarily large finite-measure subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

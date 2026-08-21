@@ -2,7 +2,7 @@
 id: thm-peano-local-existence-for-continuous-odes
 kind: theorem
 title: "Peano local existence for a continuous first-order system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

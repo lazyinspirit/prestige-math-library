@@ -2,7 +2,7 @@
 id: thm-ck-euclidean-maps-closed-under-algebra-and-composition
 kind: theorem
 title: "$C^k$ Euclidean maps are closed under componentwise algebra and composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

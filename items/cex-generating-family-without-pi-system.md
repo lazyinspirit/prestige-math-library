@@ -2,7 +2,7 @@
 id: cex-generating-family-without-pi-system
 kind: counterexample
 title: "Two four-point probability measures agree on a generating family that is not a pi-system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

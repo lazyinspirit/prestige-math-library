@@ -1,7 +1,7 @@
 ---
 page: picard-lindelof-and-first-order-odes-examples
 title: "Picard-Lindelöf and First-Order Ordinary Differential Equations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-picard-iteration-for-y-prime-equals-y,
            ex-quadratic-ode-finite-time-blowup,

@@ -2,7 +2,7 @@
 id: lem-vector-valued-continuous-curve-space-is-complete
 kind: lemma
 title: "Continuous $\\mathbb{R}^n$-valued curves on a nonempty compact interval form a complete supremum-metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

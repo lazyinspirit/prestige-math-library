@@ -2,7 +2,7 @@
 id: cor-connected-coverings-of-circle-classified-by-nonnegative-integers
 kind: corollary
 title: 'Connected coverings of the circle are classified by the subgroups $n\mathbb Z$ for $n\ge0$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -30,6 +30,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

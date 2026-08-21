@@ -2,7 +2,7 @@
 id: ex-fundamental-groups-of-once-and-twice-punctured-two-sphere
 kind: example
 title: 'The once-punctured two-sphere has trivial fundamental group and the twice-punctured two-sphere has fundamental group $\mathbb Z$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

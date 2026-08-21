@@ -2,7 +2,7 @@
 id: lem-weierstrass-probe-points
 kind: lemma
 title: "Nearest-integer probe points for the Weierstrass function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ short: "Weierstrass probe points"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

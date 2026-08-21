@@ -1,7 +1,7 @@
 ---
 page: the-gauge-integral-and-cousins-lemma
 title: "The Gauge Integral and Cousin's Lemma"
-status: draft
+status: published
 items: [def-gauge-and-fine-tagged-partition,
         thm-cousins-lemma-for-gauges,
         def-henstock-kurzweil-integral-on-a-compact-interval,

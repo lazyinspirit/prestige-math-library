@@ -2,7 +2,7 @@
 id: ex-unequal-iterated-improper-integrals-on-the-unit-square
 kind: example
 title: "Two iterated improper integrals over the unit square are $\\pi/4$ and $-\\pi/4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

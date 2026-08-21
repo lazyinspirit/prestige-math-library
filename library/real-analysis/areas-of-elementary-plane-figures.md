@@ -1,7 +1,7 @@
 ---
 page: areas-of-elementary-plane-figures
 title: "Areas of Elementary Plane Figures"
-status: draft
+status: published
 items: [def-translation-of-a-set-in-rn,
         thm-jordan-content-is-translation-invariant,
         prop-riemann-graph-area-equals-jordan-content,

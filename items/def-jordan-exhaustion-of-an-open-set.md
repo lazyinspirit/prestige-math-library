@@ -2,7 +2,7 @@
 id: def-jordan-exhaustion-of-an-open-set
 kind: definition
 title: "Compact Jordan exhaustions of open subsets of $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "Compact Jordan exhaustion"
 verification:
   precheck: n/a
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

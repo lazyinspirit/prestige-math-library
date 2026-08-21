@@ -1,7 +1,7 @@
 ---
 page: convex-and-semicontinuous-functions-on-rn
 title: "Convex and Semicontinuous Functions on R^n"
-status: draft
+status: published
 items: [def-convex-and-strictly-convex-functions-on-euclidean-sets,
         def-epigraph-and-hypograph,
         thm-convex-function-iff-convex-epigraph,

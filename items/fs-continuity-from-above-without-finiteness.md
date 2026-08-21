@@ -2,7 +2,7 @@
 id: fs-continuity-from-above-without-finiteness
 kind: false-statement
 title: "FALSE: continuity from above needs no finiteness hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

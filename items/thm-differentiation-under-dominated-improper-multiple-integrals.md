@@ -2,7 +2,7 @@
 id: thm-differentiation-under-dominated-improper-multiple-integrals
 kind: theorem
 title: "Differentiation under an improper multiple integral under an integrable derivative bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ short: "Dominated differentiation under the integral"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

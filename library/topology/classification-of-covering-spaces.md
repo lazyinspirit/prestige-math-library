@@ -1,7 +1,7 @@
 ---
 page: classification-of-covering-spaces
 title: "Classification of Covering Spaces"
-status: draft
+status: published
 items: [def-local-homeomorphism,
         lem-compact-local-homeomorphism-surjective-with-finite-fibres,
         prop-compact-local-homeomorphism-is-finite-covering,

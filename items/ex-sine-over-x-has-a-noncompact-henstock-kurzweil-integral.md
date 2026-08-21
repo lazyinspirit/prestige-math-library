@@ -2,7 +2,7 @@
 id: ex-sine-over-x-has-a-noncompact-henstock-kurzweil-integral
 kind: example
 title: "$\\sin x/x$ has a Henstock–Kurzweil integral on $[0,\\infty)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-triangle-content-and-base-height-formula
 kind: theorem
 title: "A triangle has content $\\tfrac12|\\det[B-A\\ C-A]|$, equal to half base times height when the chosen side is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Triangle content"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

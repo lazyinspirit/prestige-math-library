@@ -2,7 +2,7 @@
 id: fs-van-kampen-with-disconnected-intersection
 kind: false-statement
 title: "FALSE: the two-set van Kampen conclusion needs no path-connectedness hypothesis on the overlap"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

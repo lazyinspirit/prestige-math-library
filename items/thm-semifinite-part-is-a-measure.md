@@ -2,7 +2,7 @@
 id: thm-semifinite-part-is-a-measure
 kind: theorem
 title: "Assuming countable choice, the semifinite part is a semifinite measure and equals the original measure exactly when it is semifinite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

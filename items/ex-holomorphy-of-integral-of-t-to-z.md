@@ -2,7 +2,7 @@
 id: ex-holomorphy-of-integral-of-t-to-z
 kind: example
 title: "Morera proves holomorphy of $z\\mapsto\\int_0^1 t^z\\,dt$ on $\\operatorname{Re}z>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

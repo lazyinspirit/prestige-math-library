@@ -1,7 +1,7 @@
 ---
 page: improper-and-parameter-dependent-multiple-integrals-examples
 title: "Improper and Parameter-Dependent Multiple Integrals: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-unequal-iterated-improper-integrals-on-the-unit-square,
            cex-zero-iterated-integrals-without-a-double-integral,

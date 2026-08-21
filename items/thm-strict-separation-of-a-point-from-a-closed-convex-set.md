@@ -2,7 +2,7 @@
 id: thm-strict-separation-of-a-point-from-a-closed-convex-set
 kind: theorem
 title: "A point outside a nonempty closed convex set is strictly separated from it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

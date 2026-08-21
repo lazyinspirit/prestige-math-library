@@ -1,7 +1,7 @@
 ---
 page: the-inverse-function-theorem-completed-examples
 title: "The Inverse Function Theorem Completed: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-polar-coordinates-as-a-local-diffeomorphism,
            ex-x-xy-is-a-diffeomorphism-off-the-axis,

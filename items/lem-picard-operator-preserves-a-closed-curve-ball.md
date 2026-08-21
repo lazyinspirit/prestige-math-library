@@ -2,7 +2,7 @@
 id: lem-picard-operator-preserves-a-closed-curve-ball
 kind: lemma
 title: "A bounded vector field makes the Picard operator preserve a sufficiently short closed curve ball"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

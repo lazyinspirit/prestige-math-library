@@ -1,7 +1,7 @@
 ---
 page: picard-lindelof-and-first-order-odes
 title: "Picard-Lindelöf and First-Order Ordinary Differential Equations"
-status: draft
+status: published
 items: [def-first-order-ode-initial-value-problem-and-solution,
         def-locally-lipschitz-in-the-state-variable,
         prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation,

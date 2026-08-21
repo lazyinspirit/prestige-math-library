@@ -2,7 +2,7 @@
 id: cor-nonconstant-entire-function-has-dense-image
 kind: corollary
 title: "Every nonconstant entire function has dense image in the complex plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -22,6 +22,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-henstock-kurzweil-integrability-on-subintervals-and-additivity
 kind: theorem
 title: "Henstock–Kurzweil integrability on subintervals and additivity over adjacent intervals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

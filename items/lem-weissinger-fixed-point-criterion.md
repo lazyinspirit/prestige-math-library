@@ -2,7 +2,7 @@
 id: lem-weissinger-fixed-point-criterion
 kind: lemma
 title: "Weissinger's fixed-point criterion for summably contracting iterates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

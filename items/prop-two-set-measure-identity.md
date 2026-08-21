@@ -2,7 +2,7 @@
 id: prop-two-set-measure-identity
 kind: proposition
 title: "The two-set measure identity $\\mu(A\\cup B)+\\mu(A\\cap B)=\\mu(A)+\\mu(B)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

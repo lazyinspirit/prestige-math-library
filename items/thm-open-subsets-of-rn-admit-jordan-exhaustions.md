@@ -2,7 +2,7 @@
 id: thm-open-subsets-of-rn-admit-jordan-exhaustions
 kind: theorem
 title: "Every open subset of $\\mathbb{R}^n$ admits a compact Jordan exhaustion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Open sets admit Jordan exhaustions"
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

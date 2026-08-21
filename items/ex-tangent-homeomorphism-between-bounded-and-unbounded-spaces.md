@@ -2,7 +2,7 @@
 id: ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces
 kind: example
 title: "Tangent identifies a bounded incomplete interval with the unbounded complete real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

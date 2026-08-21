@@ -2,7 +2,7 @@
 id: cex-continuous-ode-with-nonunique-delayed-solutions
 kind: counterexample
 title: "$y'=2\\sqrt{|y|}$ has a continuum of delayed-start solutions through the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

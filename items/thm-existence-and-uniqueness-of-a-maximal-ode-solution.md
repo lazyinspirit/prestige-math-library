@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-a-maximal-ode-solution
 kind: theorem
 title: "Every Picard–Lindelöf initial value problem has one maximal solution on an open interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ short: "The maximal ODE solution"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

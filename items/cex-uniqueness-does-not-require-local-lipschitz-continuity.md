@@ -2,7 +2,7 @@
 id: cex-uniqueness-does-not-require-local-lipschitz-continuity
 kind: counterexample
 title: "An almost-Lipschitz vector field has a unique solution through zero but is not locally Lipschitz there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

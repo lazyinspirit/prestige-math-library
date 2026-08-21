@@ -2,7 +2,7 @@
 id: ex-weierstrass-function-with-one-half-and-fifteen
 kind: example
 title: "The Weierstrass function with $a=1/2$ and $b=15$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -25,6 +25,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

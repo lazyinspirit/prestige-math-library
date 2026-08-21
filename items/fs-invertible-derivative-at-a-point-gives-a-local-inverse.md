@@ -2,7 +2,7 @@
 id: fs-invertible-derivative-at-a-point-gives-a-local-inverse
 kind: false-statement
 title: "FALSE: an invertible derivative at one point gives a local inverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-monotonicity-of-the-henstock-kurzweil-integral
 kind: theorem
 title: "Monotonicity of the Henstock–Kurzweil integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

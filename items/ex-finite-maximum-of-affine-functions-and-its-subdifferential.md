@@ -2,7 +2,7 @@
 id: ex-finite-maximum-of-affine-functions-and-its-subdifferential
 kind: example
 title: "A finite maximum of affine functions and its active subgradients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

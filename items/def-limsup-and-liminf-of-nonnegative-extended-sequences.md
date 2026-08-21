@@ -2,7 +2,7 @@
 id: def-limsup-and-liminf-of-nonnegative-extended-sequences
 kind: definition
 title: "Limit superior and limit inferior of a nonnegative extended-real sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

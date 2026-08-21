@@ -2,7 +2,7 @@
 id: lem-antipodal-sphere-cover
 kind: lemma
 title: 'Antipodal complements cover $S^n$ by simply connected sets with path-connected overlap for $n\ge2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

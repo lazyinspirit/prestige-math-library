@@ -2,7 +2,7 @@
 id: thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals
 kind: theorem
 title: "Comparison, absolute-convergence, and limit-comparison tests for noncompact Henstock–Kurzweil integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

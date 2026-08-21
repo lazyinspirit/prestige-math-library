@@ -1,7 +1,7 @@
 ---
 page: analyticity-liouville-and-morera
 title: "Analyticity of Holomorphic Functions; Liouville and Morera"
-status: draft
+status: published
 items: [rem-locally-uniform-convergence-dictionary, def-real-analytic-map-on-the-plane, def-taylor-series-holomorphic-function, def-order-of-zero-holomorphic-function, thm-taylor-expansion-holomorphic-function, thm-holomorphic-if-and-only-if-analytic, cor-holomorphic-functions-are-real-analytic-and-smooth, rem-taylor-coefficient-formula-agreement, thm-zero-order-factorization-holomorphic-function, cor-cauchy-estimates-taylor-coefficients, thm-liouville-bounded-entire-function, thm-entire-polynomial-growth-is-polynomial, thm-fundamental-theorem-of-algebra-liouville-proof, rem-fundamental-theorem-of-algebra-via-liouville, def-edgewise-riemann-integral-around-complex-triangle, thm-morera-triangle-theorem, lem-cauchy-estimates-on-concentric-subdiscs, thm-weierstrass-convergence-holomorphic-functions, cor-locally-uniformly-convergent-holomorphic-series, thm-holomorphic-parameter-riemann-integral, cor-holomorphic-mean-value-property, cor-nonconstant-entire-function-has-dense-image]
 examples: []
 ---

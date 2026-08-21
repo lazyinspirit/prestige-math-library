@@ -2,7 +2,7 @@
 id: lem-weierstrass-low-frequency-difference-quotient-bound
 kind: lemma
 title: "Low-frequency bound for the Weierstrass difference quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -22,6 +22,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

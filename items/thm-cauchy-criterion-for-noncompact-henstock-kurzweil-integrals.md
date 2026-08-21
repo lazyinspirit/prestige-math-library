@@ -2,7 +2,7 @@
 id: thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals
 kind: theorem
 title: "The Cauchy criterion for a Henstock–Kurzweil integral at a missing endpoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

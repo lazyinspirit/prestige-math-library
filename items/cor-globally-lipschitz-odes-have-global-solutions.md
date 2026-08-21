@@ -2,7 +2,7 @@
 id: cor-globally-lipschitz-odes-have-global-solutions
 kind: corollary
 title: "A globally state-Lipschitz vector field on $\\mathbb R\\times\\mathbb R^n$ has global solutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

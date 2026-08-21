@@ -2,7 +2,7 @@
 id: ex-borel-cantelli-for-shrinking-dyadic-intervals
 kind: example
 title: "Borel-Cantelli for the shrinking intervals $(0,2^{-k})$ under a dyadic atomic measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

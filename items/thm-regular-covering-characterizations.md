@@ -2,7 +2,7 @@
 id: thm-regular-covering-characterizations
 kind: theorem
 title: "A connected covering is regular exactly when its induced subgroup is normal, exactly when deck transformations act transitively on a fibre"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

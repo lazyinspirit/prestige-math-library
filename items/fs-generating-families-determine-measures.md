@@ -2,7 +2,7 @@
 id: fs-generating-families-determine-measures
 kind: false-statement
 title: "FALSE: agreement on an arbitrary generating family determines a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

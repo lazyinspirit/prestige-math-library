@@ -2,7 +2,7 @@
 id: cex-powers-locally-uniform-not-uniform-on-closed-disc
 kind: counterexample
 title: "$z^n$ tends locally uniformly to zero on the unit disc but not uniformly on the closed disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

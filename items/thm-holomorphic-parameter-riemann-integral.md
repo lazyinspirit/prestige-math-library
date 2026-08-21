@@ -2,7 +2,7 @@
 id: thm-holomorphic-parameter-riemann-integral
 kind: theorem
 title: "A jointly continuous finite-interval parameter integral of holomorphic functions is holomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "holomorphic parameter integrals"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

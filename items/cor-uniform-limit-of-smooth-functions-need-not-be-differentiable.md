@@ -2,7 +2,7 @@
 id: cor-uniform-limit-of-smooth-functions-need-not-be-differentiable
 kind: corollary
 title: "A uniform limit of smooth functions need not be differentiable anywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ short: "smooth approximants, nowhere-differentiable limit"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

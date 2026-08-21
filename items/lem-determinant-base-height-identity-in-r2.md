@@ -2,7 +2,7 @@
 id: lem-determinant-base-height-identity-in-r2
 kind: lemma
 title: "$\\lVert v\\rVert_2\\,d(w,\\mathbb{R}v)=|\\det[v\\ w]|$ for $v\\ne0$ in $\\mathbb{R}^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

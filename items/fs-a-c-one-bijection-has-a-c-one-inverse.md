@@ -2,7 +2,7 @@
 id: fs-a-c-one-bijection-has-a-c-one-inverse
 kind: false-statement
 title: "FALSE: every $C^1$ bijection has a $C^1$ inverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

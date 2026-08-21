@@ -1,7 +1,7 @@
 ---
 page: trigonometric-and-oscillatory-examples-in-one-variable-examples
 title: "Trigonometric and Oscillatory Examples in One Variable: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-weierstrass-function-with-one-half-and-fifteen,
            fs-a-continuous-function-is-differentiable-somewhere,

@@ -2,7 +2,7 @@
 id: lem-compact-local-homeomorphism-surjective-with-finite-fibres
 kind: lemma
 title: "A local homeomorphism from a nonempty compact space to a connected Hausdorff space is surjective with finite fibres"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

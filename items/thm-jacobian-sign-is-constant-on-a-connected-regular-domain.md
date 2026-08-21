@@ -2,7 +2,7 @@
 id: thm-jacobian-sign-is-constant-on-a-connected-regular-domain
 kind: theorem
 title: "The Jacobian sign of a regular $C^1$ map is constant on a connected domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: the-inverse-function-theorem-completed
 title: "The Inverse Function Theorem Completed"
-status: draft
+status: published
 items: [def-ck-euclidean-maps-and-diffeomorphisms,
         thm-ck-euclidean-maps-closed-under-algebra-and-composition,
         lem-matrix-inversion-preserves-ck-regularity,

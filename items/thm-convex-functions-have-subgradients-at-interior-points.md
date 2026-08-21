@@ -2,7 +2,7 @@
 id: thm-convex-functions-have-subgradients-at-interior-points
 kind: theorem
 title: "A convex function has a subgradient at every interior point of its domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

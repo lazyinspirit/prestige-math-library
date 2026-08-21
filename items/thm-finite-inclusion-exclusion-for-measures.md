@@ -2,7 +2,7 @@
 id: thm-finite-inclusion-exclusion-for-measures
 kind: theorem
 title: "Inclusion-exclusion for a nonempty finite family of finite-measure sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

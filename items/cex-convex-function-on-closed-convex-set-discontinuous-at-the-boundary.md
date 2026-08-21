@@ -2,7 +2,7 @@
 id: cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary
 kind: counterexample
 title: "A convex function on $[0,1]$ that is discontinuous at the boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

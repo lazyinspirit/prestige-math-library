@@ -1,7 +1,7 @@
 ---
 page: the-gauge-integral-and-cousins-lemma-examples
 title: "The Gauge Integral and Cousin's Lemma: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-dirichlet-function-is-henstock-kurzweil-integrable,
            ex-unbounded-derivative-evaluated-by-henstock-kurzweil,

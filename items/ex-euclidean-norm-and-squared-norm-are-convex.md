@@ -2,7 +2,7 @@
 id: ex-euclidean-norm-and-squared-norm-are-convex
 kind: example
 title: "The Euclidean norm and its square are convex, with a ball of subgradients at zero for the norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

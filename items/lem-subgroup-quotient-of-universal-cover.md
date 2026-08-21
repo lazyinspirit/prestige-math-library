@@ -2,7 +2,7 @@
 id: lem-subgroup-quotient-of-universal-cover
 kind: lemma
 title: "Every subgroup acts on the universal cover with a connected quotient covering that realizes it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

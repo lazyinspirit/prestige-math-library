@@ -2,7 +2,7 @@
 id: prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation
 kind: proposition
 title: "A first-order initial value problem is equivalent to its Volterra integral equation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

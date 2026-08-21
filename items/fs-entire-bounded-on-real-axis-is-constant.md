@@ -2,7 +2,7 @@
 id: fs-entire-bounded-on-real-axis-is-constant
 kind: false-statement
 title: "FALSE: an entire function bounded on the real axis is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

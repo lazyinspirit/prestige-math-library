@@ -2,7 +2,7 @@
 id: fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field
 kind: false-statement
 title: "False: a local ODE solution extends across the whole time-domain of its vector field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

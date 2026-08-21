@@ -2,7 +2,7 @@
 id: def-regular-locus-of-a-c-one-map
 kind: definition
 title: "The regular locus of a square-dimensional $C^1$ map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-picard-lindelof-local-existence-and-uniqueness
 kind: theorem
 title: "Picard-Lindelöf local existence and uniqueness for first-order systems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ short: "Local existence and uniqueness"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

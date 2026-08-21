@@ -2,7 +2,7 @@
 id: cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism
 kind: counterexample
 title: '$x\mapsto x^3$ is a $C^1$ bijection whose inverse is not differentiable at zero'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

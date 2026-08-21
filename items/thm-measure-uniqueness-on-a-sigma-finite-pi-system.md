@@ -2,7 +2,7 @@
 id: thm-measure-uniqueness-on-a-sigma-finite-pi-system
 kind: theorem
 title: "Measures agreeing on a generating pi-system are equal under an increasing finite-measure exhaustion from that pi-system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

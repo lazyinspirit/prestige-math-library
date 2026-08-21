@@ -2,7 +2,7 @@
 id: thm-regular-locus-is-open
 kind: theorem
 title: "The regular locus of a $C^1$ Euclidean map is open"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

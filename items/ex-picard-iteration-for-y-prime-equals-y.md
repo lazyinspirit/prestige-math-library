@@ -2,7 +2,7 @@
 id: ex-picard-iteration-for-y-prime-equals-y
 kind: example
 title: "Picard iteration for $y'=y$, $y(0)=1$, recovers the exponential series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

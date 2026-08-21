@@ -2,7 +2,7 @@
 id: lem-plane-gaussian-integral-in-polar-coordinates
 kind: lemma
 title: "The plane Gaussian integral equals $\\pi$ by polar coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Plane Gaussian integral is $\\pi$"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

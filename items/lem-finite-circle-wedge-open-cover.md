@@ -2,7 +2,7 @@
 id: lem-finite-circle-wedge-open-cover
 kind: lemma
 title: "Finite wedges of quotient circles have van Kampen covers at the wedge point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

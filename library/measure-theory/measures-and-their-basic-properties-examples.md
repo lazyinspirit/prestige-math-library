@@ -1,7 +1,7 @@
 ---
 page: measures-and-their-basic-properties-examples
 title: "Measures and Their Basic Properties — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-counting-measure-and-sigma-finiteness,
            ex-dirac-measure,

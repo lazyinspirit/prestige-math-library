@@ -2,7 +2,7 @@
 id: lem-picard-operator-is-a-short-time-contraction
 kind: lemma
 title: "A state-Lipschitz vector field makes the Picard operator a contraction when $Lh<1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

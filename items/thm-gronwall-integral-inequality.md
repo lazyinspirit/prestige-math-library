@@ -2,7 +2,7 @@
 id: thm-gronwall-integral-inequality
 kind: theorem
 title: "Gronwall's integral inequality with variable and constant coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ short: "Gronwall's inequality"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-henstock-kurzweil-integral-is-unique
 kind: proposition
 title: "The Henstock–Kurzweil integral has at most one value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

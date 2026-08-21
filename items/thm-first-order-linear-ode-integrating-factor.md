@@ -2,7 +2,7 @@
 id: thm-first-order-linear-ode-integrating-factor
 kind: theorem
 title: "A scalar first-order linear ODE has a unique solution given by the integrating-factor formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

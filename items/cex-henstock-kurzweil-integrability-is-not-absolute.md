@@ -2,7 +2,7 @@
 id: cex-henstock-kurzweil-integrability-is-not-absolute
 kind: counterexample
 title: "Henstock–Kurzweil integrability does not imply integrability of the absolute value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

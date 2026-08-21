@@ -2,7 +2,7 @@
 id: thm-simple-polygon-admits-a-triangulation
 kind: theorem
 title: "Every simple polygon admits a triangulation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Simple polygons triangulate"
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

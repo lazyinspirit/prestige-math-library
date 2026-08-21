@@ -2,7 +2,7 @@
 id: ex-quadratic-ode-finite-time-blowup
 kind: example
 title: "$y'=y^2$, $y(0)=1$, has maximal solution $y(t)=(1-t)^{-1}$ on $(-\\infty,1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

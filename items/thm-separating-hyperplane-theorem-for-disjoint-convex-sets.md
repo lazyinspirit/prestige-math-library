@@ -2,7 +2,7 @@
 id: thm-separating-hyperplane-theorem-for-disjoint-convex-sets
 kind: theorem
 title: "Disjoint nonempty Euclidean convex sets have a separating hyperplane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

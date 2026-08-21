@@ -2,7 +2,7 @@
 id: cor-lipschitz-ode-uniqueness-and-stability-estimate
 kind: corollary
 title: "The Grönwall estimate for two solutions of a Lipschitz ODE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

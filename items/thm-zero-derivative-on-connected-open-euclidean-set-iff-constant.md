@@ -2,7 +2,7 @@
 id: thm-zero-derivative-on-connected-open-euclidean-set-iff-constant
 kind: theorem
 title: "A differentiable map on a connected open Euclidean set has zero derivative exactly when it is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-dyadic-probability-measure-on-naturals
 kind: example
 title: "The weights $2^{-(k+1)}$ define a probability measure on $\\mathcal P(\\mathbb N)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

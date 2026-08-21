@@ -2,7 +2,7 @@
 id: thm-euclidean-semicontinuity-epigraph-characterisations
 kind: theorem
 title: "Lower semicontinuity is equivalent to a closed epigraph and upper semicontinuity to a closed hypograph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

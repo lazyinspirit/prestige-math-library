@@ -2,7 +2,7 @@
 id: ex-sine-harmonic-series-pointwise-not-uniform
 kind: example
 title: "$\\sum_{n=1}^{\\infty}\\sin(nx)/n$ converges pointwise but not uniformly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

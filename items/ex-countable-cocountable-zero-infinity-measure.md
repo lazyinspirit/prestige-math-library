@@ -2,7 +2,7 @@
 id: ex-countable-cocountable-zero-infinity-measure
 kind: example
 title: "Assuming countable choice, zero on countable sets and infinity on cocountable sets is a non-semifinite measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

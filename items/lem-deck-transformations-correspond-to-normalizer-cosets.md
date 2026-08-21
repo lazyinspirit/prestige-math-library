@@ -2,7 +2,7 @@
 id: lem-deck-transformations-correspond-to-normalizer-cosets
 kind: lemma
 title: "Deck transformations of a connected covering correspond to cosets in the subgroup normalizer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -23,6 +23,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

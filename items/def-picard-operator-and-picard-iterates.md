@@ -2,7 +2,7 @@
 id: def-picard-operator-and-picard-iterates
 kind: definition
 title: "The Picard operator and Picard iterates on a closed ball of continuous curves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

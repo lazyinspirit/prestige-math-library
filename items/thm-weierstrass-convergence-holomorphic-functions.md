@@ -2,7 +2,7 @@
 id: thm-weierstrass-convergence-holomorphic-functions
 kind: theorem
 title: "Locally uniform limits of holomorphic functions are holomorphic and their derivatives converge locally uniformly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Weierstrass convergence"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

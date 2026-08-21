@@ -2,7 +2,7 @@
 id: rem-fundamental-theorem-of-algebra-via-liouville
 kind: remark
 title: "Agreement of the Liouville and minimum-modulus proofs of the fundamental theorem of algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

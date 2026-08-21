@@ -2,7 +2,7 @@
 id: ex-irregular-pentagon-area-by-triangulation-and-shoelace
 kind: example
 title: "An irregular pentagon computed by triangulation and the shoelace formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

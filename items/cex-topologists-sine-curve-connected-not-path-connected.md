@@ -2,7 +2,7 @@
 id: cex-topologists-sine-curve-connected-not-path-connected
 kind: counterexample
 title: "The topologist's sine curve is connected but not path connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -26,6 +26,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-holomorphic-functions-are-real-analytic-and-smooth
 kind: corollary
 title: "Holomorphic functions are real analytic and smooth in their two real coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

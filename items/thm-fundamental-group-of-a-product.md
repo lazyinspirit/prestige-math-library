@@ -2,7 +2,7 @@
 id: thm-fundamental-group-of-a-product
 kind: theorem
 title: '$\pi_1(X\times Y,(x_0,y_0))\cong\pi_1(X,x_0)\times\pi_1(Y,y_0)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

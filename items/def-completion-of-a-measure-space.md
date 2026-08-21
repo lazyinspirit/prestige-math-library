@@ -2,7 +2,7 @@
 id: def-completion-of-a-measure-space
 kind: definition
 title: "The completion domain and proposed completed set function of a measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

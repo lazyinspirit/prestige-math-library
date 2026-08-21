@@ -2,7 +2,7 @@
 id: lem-topologists-sine-curve-is-connected
 kind: lemma
 title: "The topologist's sine curve is connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ short: "the topologist's sine curve is connected"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

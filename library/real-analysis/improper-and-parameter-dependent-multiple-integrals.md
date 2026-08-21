@@ -1,7 +1,7 @@
 ---
 page: improper-and-parameter-dependent-multiple-integrals
 title: "Improper and Parameter-Dependent Multiple Integrals"
-status: draft
+status: published
 items: [def-jordan-exhaustion-of-an-open-set,
         thm-open-subsets-of-rn-admit-jordan-exhaustions,
         def-improper-multiple-integral-and-absolute-convergence,

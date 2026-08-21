@@ -2,7 +2,7 @@
 id: ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge
 kind: example
 title: 'Two paths can induce distinct change-of-basepoint isomorphisms on $S^1\vee S^1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

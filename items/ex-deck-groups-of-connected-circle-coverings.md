@@ -2,7 +2,7 @@
 id: ex-deck-groups-of-connected-circle-coverings
 kind: example
 title: 'Deck groups of connected circle coverings: $\mathbb Z/n\mathbb Z$ for $n\ge1$ and $\mathbb Z$ for the universal cover'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -27,6 +27,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

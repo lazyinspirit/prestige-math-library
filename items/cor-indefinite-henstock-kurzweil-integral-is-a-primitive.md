@@ -2,7 +2,7 @@
 id: cor-indefinite-henstock-kurzweil-integral-is-a-primitive
 kind: corollary
 title: "The indefinite Henstock–Kurzweil integral of a derivative is a primitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

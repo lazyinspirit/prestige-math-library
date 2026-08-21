@@ -2,7 +2,7 @@
 id: cor-disc-jordan-content-is-pi-r-squared
 kind: corollary
 title: "A closed disc of radius $r\\ge0$ has Jordan content $\\pi r^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

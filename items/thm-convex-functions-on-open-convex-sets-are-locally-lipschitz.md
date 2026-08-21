@@ -2,7 +2,7 @@
 id: thm-convex-functions-on-open-convex-sets-are-locally-lipschitz
 kind: theorem
 title: "A convex function on an open convex set is locally Lipschitz"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

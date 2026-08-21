@@ -1,7 +1,7 @@
 ---
 page: measures-and-their-basic-properties
 title: "Measures and Their Basic Properties"
-status: draft
+status: published
 items: [def-nonnegative-extended-series,
         def-limsup-and-liminf-of-nonnegative-extended-sequences,
         thm-tonelli-for-nonnegative-double-series,

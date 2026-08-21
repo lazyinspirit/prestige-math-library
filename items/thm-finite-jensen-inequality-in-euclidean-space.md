@@ -2,7 +2,7 @@
 id: thm-finite-jensen-inequality-in-euclidean-space
 kind: theorem
 title: 'Finite Jensen inequality for convex functions on $\mathbb R^n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

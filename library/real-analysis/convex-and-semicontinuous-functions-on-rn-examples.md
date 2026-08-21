@@ -1,7 +1,7 @@
 ---
 page: convex-and-semicontinuous-functions-on-rn-examples
 title: "Convex and Semicontinuous Functions on R^n: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-euclidean-norm-and-squared-norm-are-convex,
            ex-finite-maximum-of-affine-functions-and-its-subdifferential,

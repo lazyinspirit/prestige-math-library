@@ -2,7 +2,7 @@
 id: lem-ode-extension-from-a-compact-interior-region
 kind: lemma
 title: "A solution whose graph approaches a compact interior region at a finite endpoint extends past that endpoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

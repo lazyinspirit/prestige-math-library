@@ -2,7 +2,7 @@
 id: fs-every-entire-function-with-antiderivative-is-polynomial
 kind: false-statement
 title: "FALSE: every entire function with an antiderivative is a polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-riemann-lebesgue-lemma-for-continuous-functions
 kind: theorem
 title: "Riemann–Lebesgue lemma for continuous functions on a compact interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -28,6 +28,7 @@ short: "continuous Riemann–Lebesgue lemma"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

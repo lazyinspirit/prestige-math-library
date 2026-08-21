@@ -1,7 +1,7 @@
 ---
 page: the-seifert-van-kampen-theorem
 title: "The Seifert–van Kampen Theorem"
-status: draft
+status: published
 items: [lem-open-cover-loop-generation, lem-antipodal-sphere-cover,
         thm-higher-dimensional-spheres-are-simply-connected,
         lem-van-kampen-homotopy-grid,

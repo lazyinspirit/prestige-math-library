@@ -2,7 +2,7 @@
 id: lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence
 kind: lemma
 title: "A uniformly bounded equicontinuous sequence of $\\mathbb R^n$-valued curves on a nonempty compact interval has a uniformly convergent subsequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

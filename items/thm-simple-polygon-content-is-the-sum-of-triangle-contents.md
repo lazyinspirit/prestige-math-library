@@ -2,7 +2,7 @@
 id: thm-simple-polygon-content-is-the-sum-of-triangle-contents
 kind: theorem
 title: "A simple polygon is Jordan measurable and its content is the sum of the contents of its triangles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ short: "Polygon content is the triangle sum"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-van-kampen-homotopy-grid
 kind: lemma
 title: "A path homotopy over a two-set open cover admits a finite subordinate grid"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -21,6 +21,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

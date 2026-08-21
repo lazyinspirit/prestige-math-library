@@ -2,7 +2,7 @@
 id: def-two-dimensional-torus
 kind: definition
 title: 'The two-dimensional torus $T^2=(\mathbb R/\mathbb Z)^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-deck-group-of-a-regular-covering
 kind: corollary
 title: 'A regular connected covering has deck group $\pi_1(B,b_0)/p_*\pi_1(E,e_0)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

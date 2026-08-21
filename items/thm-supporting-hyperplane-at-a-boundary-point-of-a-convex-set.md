@@ -2,7 +2,7 @@
 id: thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set
 kind: theorem
 title: "Every boundary point belonging to a nonempty Euclidean convex set has a supporting hyperplane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

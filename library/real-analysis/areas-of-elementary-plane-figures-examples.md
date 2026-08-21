@@ -1,7 +1,7 @@
 ---
 page: areas-of-elementary-plane-figures-examples
 title: "Areas of Elementary Plane Figures: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-triangle-area-by-determinant-and-base-height,
            ex-parallelogram-content-from-a-two-by-two-matrix,

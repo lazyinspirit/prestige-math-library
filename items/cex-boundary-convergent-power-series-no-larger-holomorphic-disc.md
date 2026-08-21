@@ -2,7 +2,7 @@
 id: cex-boundary-convergent-power-series-no-larger-holomorphic-disc
 kind: counterexample
 title: "Uniform convergence on the closed unit disc does not give a holomorphic extension to a larger disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

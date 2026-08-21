@@ -2,7 +2,7 @@
 id: lem-gaussian-square-is-the-plane-gaussian-integral
 kind: lemma
 title: "The square of the one-dimensional Gaussian integral is the plane Gaussian integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Gaussian square is the plane integral"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-open-cover-loop-generation
 kind: lemma
 title: "Loops over a two-set path-connected open cover factor through the covering sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-parallelogram-content-and-base-height-formula
 kind: theorem
 title: "A parallelogram has Jordan content $|\\det[v\\ w]|$, equal to base times height when $v\\ne0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

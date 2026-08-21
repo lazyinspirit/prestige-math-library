@@ -2,7 +2,7 @@
 id: cor-uniform-picard-lindelof-for-nearby-initial-values
 kind: corollary
 title: "Nearby initial values share one Picard–Lindelöf time interval and one state cylinder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

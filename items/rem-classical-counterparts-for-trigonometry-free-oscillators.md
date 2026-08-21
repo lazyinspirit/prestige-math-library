@@ -2,7 +2,7 @@
 id: rem-classical-counterparts-for-trigonometry-free-oscillators
 kind: remark
 title: "Classical counterparts for the trigonometry-free oscillators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ forward_refs: [ex-x-squared-sine-of-one-over-x-squared]
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

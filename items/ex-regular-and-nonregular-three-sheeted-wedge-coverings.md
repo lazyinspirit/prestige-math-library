@@ -2,7 +2,7 @@
 id: ex-regular-and-nonregular-three-sheeted-wedge-coverings
 kind: example
 title: "The two-circle wedge has both regular and nonregular connected three-sheeted coverings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -36,6 +36,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

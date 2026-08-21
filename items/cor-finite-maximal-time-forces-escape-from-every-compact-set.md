@@ -2,7 +2,7 @@
 id: cor-finite-maximal-time-forces-escape-from-every-compact-set
 kind: corollary
 title: "At a finite maximal time an ODE solution leaves every compact subset of the domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

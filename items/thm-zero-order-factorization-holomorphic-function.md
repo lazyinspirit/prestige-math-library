@@ -2,7 +2,7 @@
 id: thm-zero-order-factorization-holomorphic-function
 kind: theorem
 title: "The order of a zero is the exponent in its local holomorphic factorization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "$\\operatorname{ord}_a(f)$ and factorization"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-lower-semicontinuous-compact-function-without-a-maximum
 kind: counterexample
 title: "A lower semicontinuous function on $[0,1]$ with no maximum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

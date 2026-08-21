@@ -2,7 +2,7 @@
 id: cex-continuity-from-above-without-finite-first-measure
 kind: counterexample
 title: "Counting-measure tails decrease to the empty set while every term has infinite measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

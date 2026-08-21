@@ -2,7 +2,7 @@
 id: rem-sine-period-arc-length-integrand-is-nonelementary
 kind: remark
 title: "The sine-period arc-length integrand has no elementary antiderivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ external_dependency:
   necessity: "The exact length is proved locally, while the design also requires an honest record that this elliptic integral is not elementary; separating the sourced statement avoids pretending to develop differential algebra."
 verification:
   precheck: n/a
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

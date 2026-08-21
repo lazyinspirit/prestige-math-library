@@ -2,7 +2,7 @@
 id: lem-finite-measure-uniqueness-on-a-pi-system
 kind: lemma
 title: "Finite measures agreeing on a generating pi-system and on the whole space are equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

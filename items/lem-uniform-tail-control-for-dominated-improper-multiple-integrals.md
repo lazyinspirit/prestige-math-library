@@ -2,7 +2,7 @@
 id: lem-uniform-tail-control-for-dominated-improper-multiple-integrals
 kind: lemma
 title: "An integrable dominator gives uniform tail control on every compact parameter set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-osgood-uniqueness-criterion-for-first-order-odes
 kind: theorem
 title: "Osgood's criterion gives uniqueness without a Lipschitz bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ short: "Osgood uniqueness"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

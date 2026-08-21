@@ -2,7 +2,7 @@
 id: thm-classical-weierstrass-function-nowhere-differentiable
 kind: theorem
 title: "Under $ab>1+3\\pi/2$, the classical Weierstrass function is continuous everywhere and differentiable nowhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -22,6 +22,7 @@ short: "$W_{a,b}$ is nowhere differentiable"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:

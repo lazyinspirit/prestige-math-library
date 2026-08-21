@@ -1,7 +1,7 @@
 ---
 page: the-seifert-van-kampen-theorem-examples
 title: "The Seifert–van Kampen Theorem: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge,
            ex-fundamental-group-of-the-punctured-plane,

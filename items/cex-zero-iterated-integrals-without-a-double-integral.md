@@ -2,7 +2,7 @@
 id: cex-zero-iterated-integrals-without-a-double-integral
 kind: counterexample
 title: "A nonnegative function can have both iterated integrals zero and no double Riemann integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-21
+  audited: 2026-08-21
 sources:
   scraped: []
   references: []

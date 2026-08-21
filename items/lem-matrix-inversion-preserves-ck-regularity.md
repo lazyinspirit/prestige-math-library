@@ -2,7 +2,7 @@
 id: lem-matrix-inversion-preserves-ck-regularity
 kind: lemma
 title: "Matrix inversion preserves $C^k$ regularity where the determinant is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-21
 sources:
   scraped: []
   references:
