@@ -15,7 +15,7 @@ permissions, git permissions, or any permissions whatsoever."* No segment of an
 ## The situation
 
 Seven items were authored as **drafts** and have never been published. Both judge
-lanes read all seven — 14 verdicts, zero nulls. An independent Sol reader audited
+lanes read all seven — 14 verdicts, zero nulls. An independent reader audited
 them separately and returned four findings, **all nonfatal**, landing on the same
 proof steps the judges flagged.
 

@@ -102,7 +102,7 @@ bound, so it is shortest.
   authoring. Step 9 is the scope-denial sweep and continues without a pause;
   at the end of step 10, record the required grouped fatal-error report and
   pause short of owner audit or publication. At step 7, run DeepSeek v4 Pro and
-  a fresh GPT-5.6 Terra session in parallel on identical skeptical A/B and dependency context,
+  a fresh Claude Opus 5 session in parallel on identical skeptical A/B and dependency context,
   then compare their findings at step 10.
 - Before beginning a cycle, rerun `node tools/validate-plan.mjs
   research/plan-spec.json` and regenerate `research/BUILD-LEVELS.md` after any

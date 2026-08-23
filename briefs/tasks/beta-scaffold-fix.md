@@ -23,13 +23,19 @@ batch.
 2. A new item keeps the harvest honest: give it its coverage row with the
    disposition and locator, and its `fetch_verified`-stamped source per
    `briefs/beta-scaffold.md` §"URL discipline".
-3. Re-run your gates:
+3. Re-run your checks:
 
 ```
 node tools/coverage-checklist.mjs research/{{run}}-batch-<i>.coverage.json
-node tools/content-policy.mjs --manifest-only research/{{run}}-batch-<i>.pages.json
+node tools/content-policy.mjs --manifest-only research/{{run}}-batch-*.pages.json
 node tools/validate-plan.mjs research/plan-spec.json
 ```
+
+The policy check is deliberately whole-run: legal dependencies on earlier
+pages owned by another live batch must resolve against that batch's manifest.
+It still enforces the two-pair capacity separately for each batch. Do not
+remove, inline, or duplicate a necessary cross-batch edge merely to make an
+isolated one-manifest invocation pass.
 
 4. Append `## Scaffold-fix round` to `research/{{run}}-batch-<i>.notes.md`,
    one entry per finding id: `applied` / `pushed back` (+ reason), with what

@@ -94,12 +94,25 @@ the item connecting the test to its claim. Available checks are:
 - `cyclic-subgroup-lagrange`
 - `monotone-map-need-not-preserve-meets`
 - `full-subposet-meet-differs-from-ambient`
+- `binomial-congruence-solution-count`
+- `vieta-elementary-symmetric`
+- `linear-recurrence-matches-rational-series`
+- `matrix-ring-laws-mod-n`
 
-The last two were added on run `frontier-12`. Until then every registered check
-was graph- or group-theoretic, so a level of algebra, analysis and category
+`tools/finite-smoke.mjs` is the registry; this list is a copy of it and the tool
+wins. Run `node tools/finite-smoke.mjs --self-test` to print every check the
+registry actually defines — a contract may name a check the registry does not
+have, and that resolves to nothing rather than to an error.
+
+The two poset checks were added on run `frontier-12`. Until then every registered
+check was graph- or group-theoretic, so a level of algebra, analysis and category
 theory matched none and the gate reported `0 error(s), 0 check(s)` — green,
 having executed nothing. **A green `finite-smoke` is not evidence the gate ran;
-read the check count.**
+read the check count.** The four arithmetic and polynomial checks were added on
+run `frontier-13` for the same reason, and this list went four runs without
+naming them: on `frontier-17` all 381 contracts carried `finite_smoke: []` and
+two of the three checks the audit then selected were in the group this document
+did not list. **Selection is only as wide as the list an author reads.**
 
 They work because a poset **is** a category, with one arrow per related pair, and
 in it a product or pullback is exactly a meet — so a finite poset is a genuine

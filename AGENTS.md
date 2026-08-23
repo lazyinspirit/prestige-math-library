@@ -13,13 +13,14 @@ CONCLUDED runs — sixteen of them exist and none is in flight; verify against
 `.autopilot/` and `git log`, never against a RESUME file's own claim.
 
 **Model rule, read before you take an audit role.** `AUDIT-WORKFLOW.md` §2/§3
-binds Audit-Beta and Alpha to **GPT 5.6 Sol through the Codex subscription**
-at `xhigh` with a 1,000,000-token context window. Independent readers use
-**GPT 5.6 Terra** with the same settings; proof-refuters remain **DeepSeek V4
-Pro** at its `max` API reasoning setting. Alpha must recover
-the durable prior-session audit record before acting. Judge lanes are DeepSeek
-V4 Pro plus GPT 5.6 Terra (`JUDGE_LINEUP=deepseek+terra`) through the
-same independent 16-call-per-model scheduler used by the build.
+binds Audit-Beta and Alpha to **Claude Opus 5 through the claude CLI** at
+`xhigh` with a 1,000,000-token context window — the window is the `[1m]` suffix
+on the model id, `claude-opus-5[1m]`, and nothing else. Independent readers and
+the `certifier` use the same settings; proof-refuters remain **DeepSeek V4 Pro**
+at its `max` API reasoning setting. Alpha must recover the durable
+prior-session audit record before acting. Judge lanes are DeepSeek V4 Pro plus
+Claude Opus 5 (`JUDGE_LINEUP=deepseek+opus`, owner 2026-08-23) through the same
+independent per-model scheduler used by the build.
 A non-Anthropic session may run the SESSION duties (gates, sweeps, ledgers,
 commits, reports) — the judge lanes are subprocesses and work from any session —
 but it must not silently substitute itself for an assigned audit role. The build

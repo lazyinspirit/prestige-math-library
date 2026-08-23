@@ -196,7 +196,7 @@ const C = {
   alpha:        "#a78bfa",   // violet — audits and adjudicates
   reader:       "#22d3ee",   // cyan   — independent readers and refuters
   judgeA:       "#ffd23f",   // yellow — DeepSeek lane
-  judgeB:       "#3ddc84",   // green  — Terra lane
+  judgeB:       "#3ddc84",   // green  — second judge lane (Opus since 2026-08-23)
   gate:         "#f7b955",   // amber  — a gate still running
   ok:           "#3ddc84",
   bad:          "#ff5c5c",
@@ -372,7 +372,7 @@ const M = {
   refuters: NODE("refuters",1990,590, 260, 160, "read-only refuters", C.reader),
   freeze:   NODE("freeze", 2360, 345, 190, 130, "frozen context", C.ink),
   laneA:    NODE("laneA",  2640, 140, 300, 190, "DeepSeek V4 Pro", C.judgeA),
-  laneB:    NODE("laneB",  2640, 500, 300, 190, "GPT 5.6 Terra", C.judgeB),
+  laneB:    NODE("laneB",  2640, 500, 300, 190, "Claude Opus 5", C.judgeB),
   ledger:   NODE("ledger", 3040, 300, 210, 260, "verdict ledger", C.ink),
   owner:    NODE("owner",  3320, 330, 200, 200, "owner pause", C.orchestrator),
 };
@@ -545,9 +545,9 @@ const STEPS = [
   { n: 6, name: "Audit", who: "independent readers, then Alpha", dur: 20, camx: 1330,
     body: "Nobody audits what they authored. Alpha assigns each batch a reader who did not write it, and dispatches read-only proof-refuters that return evidence and never edits. Every citation is checked against the target on disk — citing a true theorem for a stronger claim than it makes is this library's largest single defect class. A gap a competent reader closes in thirty seconds is nonfatal, and is polished here, before the text is frozen.",
     mech: ["no self-audit", "read-only refuters", "fatal vs the 30-second gap", "cross-batch edges"] },
-  { n: 7, name: "Judge", who: "DeepSeek V4 Pro and GPT 5.6 Terra, one paired sweep on final text", dur: 22, camx: 1760,
-    body: "The text is frozen and each item's context — its own page, its companion, and only the pages it both declares and cites — is hashed once, then handed to both lanes: <code>deepseek-v4-pro</code> called directly, and a freshly spawned read-only <code>gpt-5.6-terra</code>. The pools are independent, sixteen calls to a lane, with no per-item barrier: a finished call takes the next item in its own lane. A pass is recorded only when both models passed the text.",
-    mech: ["one frozen hash, both lanes", "DeepSeek 16 + Terra 16, no barrier", "every A/B pair in the level", "both must pass"] },
+  { n: 7, name: "Judge", who: "DeepSeek V4 Pro and Claude Opus 5, one paired sweep on final text", dur: 22, camx: 1760,
+    body: "The text is frozen and each item's context — its own page, its companion, and only the pages it both declares and cites — is hashed once, then handed to both lanes: <code>deepseek-v4-pro</code> called directly, and a freshly spawned tool-less <code>claude-opus-5[1m]</code>. The pools are independent, fourteen calls to a lane, with no per-item barrier: a finished call takes the next item in its own lane. A pass is recorded only when both models passed the text.",
+    mech: ["one frozen hash, both lanes", "DeepSeek 14 + Opus 14, no barrier", "every A/B pair in the level", "both must pass"] },
   { n: 8, name: "Adjudicate", who: "Alpha-n", dur: 20, camx: 1560,
     body: "Adjudicate, do not comply. Alpha reads the frozen verdict against the current text and records one of three outcomes against that text's exact hash. Only <code>confirmed_fatal</code> licenses an edit; the other two close the rejection and change nothing — because any edit voids the verdict, forces a rejudge, and resamples a refuter that finds a fresh nitpick every run. Fatal repairs, by contrast, are uncapped.",
     mech: ["three outcomes", "fatal-only edits", "item_sha256 on every row", "targeted rejudge"] },
@@ -758,7 +758,7 @@ const NOTES = [
   [6, 2.0, 9.0, "nobody audits what they authored", C.reader],
   [6, 9.5, 19.5, "citing a true theorem for a stronger claim — the largest defect class", C.bad],
   [7, 2.0, 9.0, "the text is frozen, then hashed once", C.ink],
-  [7, 9.5, 21.5, "DeepSeek and Terra: independent pools, no per-item barrier", C.judgeA],
+  [7, 9.5, 21.5, "DeepSeek and Opus: independent pools, no per-item barrier", C.judgeA],
   [8, 2.0, 9.0, "three outcomes; only confirmed_fatal licenses an edit", C.alpha],
   [8, 9.5, 19.5, "a repair voids the verdict → targeted rejudge", C.bad],
   [9, 2.0, 9.0, "grep is the entry point, never the sweep", C.corpus],

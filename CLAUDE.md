@@ -71,46 +71,66 @@ account is **never** wired into the worker service.
 
 | lane | model | runner and settings |
 |---|---|---|
-| Beta (scaffold + Step-5 author), independent Step-6 `reader`, Alpha's `refuter` subagents | **GPT 5.6 Sol** | Codex subscription, `xhigh`, **1,000,000-token** context |
-| **build `alpha`** (owner, 2026-08-20) | **GPT 5.6 Sol** | Codex subscription, `xhigh`, 1M context, `tools.web_search=true` |
-| `scaffolder` (subject tracks), `orchestrator` (audit) | GPT 5.6 Sol | Codex subscription, `xhigh`, 1M context |
-| `audit-beta`, `audit-alpha` | GPT 5.6 Sol | Codex subscription, `xhigh`, 1M context |
-| `mechanic` (post-adjudication bookkeeping) | GPT 5.6 Terra | Codex, **`medium`**, 1M context |
-| build Step-10 `sigma` / `tau` (owner, 2026-08-21) | GPT 5.6 Terra | Codex, `xhigh`, 1M context; Sigma read-only, Tau exact-finding write scope |
-| audit `certifier` / independent reader | GPT 5.6 Terra | Codex, `xhigh`, 1M context, read-only |
+| Beta (scaffold + Step-5 author), independent Step-6 `reader`, Alpha's `refuter` subagents | **Claude Opus 5** | claude CLI, `xhigh`, **1,000,000-token** context (`[1m]` id) |
+| **build `alpha`** (owner, 2026-08-23) | **Claude Opus 5** | claude CLI, `xhigh`, 1M context, web tools |
+| `scaffolder` (subject tracks), `orchestrator` (audit) | Claude Opus 5 | claude CLI, `xhigh`, 1M context |
+| `audit-beta`, `audit-alpha` | Claude Opus 5 | claude CLI, `xhigh`, 1M context |
+| `mechanic` (post-adjudication bookkeeping) | Claude Opus 5 | claude CLI, **`medium`**, 1M context |
+| audit `certifier` / independent reader | Claude Opus 5 | claude CLI, `xhigh`, 1M context, read-only |
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
-| paired judges, build and audit | DeepSeek V4 Pro + **GPT 5.6 Terra** | `JUDGE_LINEUP=deepseek+terra` (owner, 2026-08-20) |
+| paired judges, build and audit | DeepSeek V4 Pro + **Claude Opus 5** | `JUDGE_LINEUP=deepseek+opus` (owner, 2026-08-23) |
 
-**Binding for every future session** (owner, 2026-07-31/08-08/08-20). Never
-silently substitute another model or a smaller window; a context-window field is
-`1000000`. `tools/dispatch.mjs` is this table, mechanically — Codex:
-`model_reasoning_effort="xhigh"`, `model_context_window=1000000`, temporary
-`CODEX_HOME` with `auth.json`, no `config.toml` — and `--dry-run --json` attests
-it. **No lane runs on an Anthropic model.** The `claude` runner is kept in
-`dispatch.mjs` with no role routed to it, and the only remaining claude process
-anywhere is the sonnet judge lane, which is selectable and not selected.
+**Binding for every future session** (owner, 2026-07-31/08-08/08-20/08-23). Never
+silently substitute another model or a smaller window. **On this runner the 1M
+window is the `[1m]` suffix on the model id — `claude-opus-5[1m]` — and nothing
+else**: the claude CLI has no `model_context_window` knob, so a bare
+`claude-opus-5` silently runs the standard window and no other symptom appears.
+`tools/dispatch.mjs` is this table, mechanically — `--model claude-opus-5[1m]`,
+`--effort xhigh`, `--output-format json` — and `--dry-run --json` attests it.
+**Every lane except `audit-refuter` now runs on an Anthropic model.** The `codex` runner is kept
+in `dispatch.mjs` with no role routed to it, and the Terra and sonnet judge lanes
+remain selectable and unselected.
 
-**The Alpha exception is withdrawn** (owner, 2026-08-20: *"Change from opus 5 to
-sol, and sonnet 5 to terra for all agents and judges"*). From 2026-08-10 the
-BUILD `alpha` role ran Claude Opus 5 to buy cross-family independence for the
-role that adjudicates the judges. **Read what that means now and do not
-rediscover it as a surprise:** Alpha, the Betas it audits, the `reader` and
-`refuter` it dispatches, and the Terra judge lane whose rejections it adjudicates
-are all GPT-family. **DeepSeek is the only cross-family reader in either
-workflow** — the step-7 judge lane on the build side and `audit-refuter` on the
-audit side. Weight accordingly: Terra/Alpha agreement is same-family agreement,
-not corroboration, and a DeepSeek-only rejection is the one finding no other lane
-in the run could have produced. The mathematical authoring role uses Sol, never
-Terra, with one owner-directed Step-10 exception (2026-08-21): Tau may rewrite
-only an exact Sigma rendering/parsing finding in place. It may not remove or
-weaken mathematical content, its whole-tree diff is mechanically guarded, and
-every changed mathematical item returns to the DeepSeek+Terra pair before
-Sigma's final render adjudication. Terra self-review is not corroboration;
-DeepSeek remains the cross-family judge.
-Read-only is enforced per runner, never by asking: `--sandbox read-only` on
-Codex, tool-lessness by transport on DeepSeek, and — if a claude role is ever
-re-added — an `--allowed-tools` allow list on the claude runner.
-`dispatch.mjs --check-read-only` prints it.
+**Sol and Terra are withdrawn** (owner, 2026-08-23: *"change all LLMs from gpt
+5.6 sol and gpt 5.6 Terra to opus 5 since Codex subscription reached weekly
+limit"*). The trigger is **capacity, not quality**: the Codex subscription that
+carried every GPT lane hit its weekly cap mid-`frontier-17`, with step 6b stalled
+at 6/9 group Alphas.
+
+**Read what that means now and do not rediscover it as a surprise.** The move
+does **not** restore cross-family independence — it renames the family. Alpha,
+the Betas it audits, the `reader` and `refuter` it dispatches, and the Opus judge
+lane whose rejections it adjudicates are now all **Anthropic-family**, exactly as
+they were all GPT-family before. **DeepSeek is still the only cross-family reader
+in either workflow** — the step-7 judge lane on the build side and
+`audit-refuter` on the audit side. Weight accordingly: Opus/Alpha agreement is
+same-family agreement, not corroboration, and a DeepSeek-only rejection is the
+one finding no other lane in the run could have produced. The Step-10 exception
+that used to sit here — Tau rewriting an exact Sigma rendering finding in
+place — is gone with the visual lane itself (owner, 2026-08-23;
+`ARCHITECTURE.md` §3.11j). **No agent edits mathematical content after step 9.**
+
+**Two things this move re-accepts, both measured, both live again.** (1) *Quota.*
+Four concurrent Opus 5 lanes at `xhigh` exhausted the Claude session limit in
+25-34 minutes and took the dispatching session with them — twice — which is
+precisely why the `scaffolder` left Opus on 2026-08-14 (`ARCHITECTURE.md` §6).
+Every lane cap is **unchanged** by this move (owner: *"Just replace LLMs as
+instructed without changing anything else"*), so those ceilings now point at an
+account with a known cliff, and the escape hatch that existed last time does not:
+Sol was a different account and there is no third one. A cap is a ceiling the
+engine may use, never a quota it must spend — **if lanes start dying on the
+session limit, lower the caps rather than re-spending the loop.** (2) *An
+unproven judge.* No injection test has been run against an Opus judge lane at the
+frozen prompt; `tools/judge.mts` sets that bar and records it as owed.
+
+Read-only is enforced per runner, never by asking: an `--allowed-tools` allow
+list on the claude runner (default-deny, measured 2026-08-05 — a deny list alone
+is escapable through a subagent), tool-lessness by transport on DeepSeek, and
+`--sandbox read-only` on Codex if that lane is ever re-opened.
+`dispatch.mjs --check-read-only` prints it. **This is the one place the move
+loses a guarantee rather than renaming one:** Codex's read-only was a kernel
+sandbox, the claude runner's is a tool-layer allow list, and it is only as good
+as the tool list.
 
 ## Hard rules
 
@@ -273,36 +293,53 @@ re-added — an `--allowed-tools` allow list on the claude runner.
   enforces it; `research/DEFECT-LEDGER.md` is generated, never edited.
   `ARCHITECTURE.md` §3.11h.
 
-### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-20)
+### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-23)
 
-At step 7, run `deepseek-v4-pro` with `gpt-5.6-terra` through
-`tools/judge.mts`, selected by `JUDGE_LINEUP=deepseek+terra` (owner,
-2026-08-20) — the default in `judge.mts`, `judge-sweep.mjs`,
-`level-coverage.mjs`, `judge-compare.mjs`, `apply-judge-stamps.mjs` and the
-audit driver. The Terra lane is an ephemeral `codex exec` process per call
-with a 0700 temporary `CODEX_HOME` holding only `auth.json` and an empty
-temporary working directory, `xhigh`, `model_context_window=1000000`, so the
-frozen prompt is its only context. **Both active lanes are capped at 14**
-(owner, 2026-08-20), so a sweep runs **28** calls combined. Both lanes read one
-byte-identical frozen prompt, as adversarial refuters of proofs and
-dependency citations (`ARCHITECTURE.md` §5). `deepseek+sonnet` remains
-selectable and unselected; its lane is a tool-less `claude -p` process.
+At step 7, run `deepseek-v4-pro` with `claude-opus-5[1m]` through
+`tools/judge.mts`, selected by `JUDGE_LINEUP=deepseek+opus` (owner,
+2026-08-23) — the default in `judge.mts`, `judge-sweep.mjs`,
+`level-coverage.mjs`, `judge-compare.mjs`, `apply-judge-stamps.mjs`
+and the audit driver. The Opus lane is a fresh `claude -p`
+process per call with an **empty temporary working directory** and
+`--allowed-tools ""`, so the frozen prompt is its only context — the empty
+workdir matters more here than it did for the retired Terra lane, because the
+repo root carries this file, and a judge that has read the build rules is no
+longer reading the frozen prompt alone. **Both active lanes are capped at 14**
+(owner, 2026-08-20, carried through the lane swap unchanged), so a sweep runs
+**28** calls combined. Both lanes read one byte-identical frozen prompt, as
+adversarial refuters of proofs and dependency citations (`ARCHITECTURE.md` §5).
+`deepseek+terra` and `deepseek+sonnet` remain selectable and unselected.
 
 **The judge's context unit is the A/B PAIR:** the item's page and its
 `-examples` companion in full, plus exactly the pages that page declares in
 `requires` and actually cites.
 
-**The cross-family screen is DeepSeek and nothing else** (owner, 2026-08-20).
-Terra now shares the GPT family with the Sol authors it screens *and* with the
-Sol Alpha that adjudicates its rejections, so neither agreement is
-corroboration: a Terra rejection Alpha calls `false_positive` is two
-same-family reads agreeing. Give a DeepSeek-only rejection the weight its
-isolation earns. **What this lineup re-accepts:** Terra was retired on
-2026-08-17 when the Codex account behind it was throttled mid-run (429 on the
-models endpoint, `NO_CONTENT` on every exec), and a capacity refusal is a null
-verdict, never a verdict. Spend `judge.mts --preflight` before a sweep.
-Rows from unselected lanes — Terra's frontier-15 nulls, sonnet's frontier-15
-verdicts — stay append-only evidence and never satisfy current coverage.
+**The cross-family screen is DeepSeek and nothing else** (owner, 2026-08-23).
+The second lane changed family and changed nothing structural: Opus now shares
+the Anthropic family with the authors it screens *and* with the Alpha that
+adjudicates its rejections, exactly as Terra shared the GPT family with both. So
+neither agreement is corroboration: an Opus rejection Alpha calls
+`false_positive` is two same-family reads agreeing. Give a DeepSeek-only
+rejection the weight its isolation earns.
+
+**What this lineup re-accepts, and it is two things.** (1) *Capacity.* Terra was
+retired on 2026-08-17 when its Codex account was throttled mid-run (429 on the
+models endpoint, `NO_CONTENT` on every exec) and restored on 2026-08-20; the
+2026-08-23 move happened because that same subscription spent its **weekly** cap
+outright. The Opus lane now draws on the same Claude subscription as every agent
+role, so one session limit can null the judge sweep and stall the dispatched
+roles together. A capacity refusal is a null verdict, never a verdict — and on
+the claude runner its signature is a fast `claude_exit`, not an error anyone
+reads. Spend `judge.mts --preflight` before a sweep. (2) *An unproven lane.*
+`tools/judge.mts` records an injection test as the adoption bar for any new judge
+model, passes 4 and 5 discharged it for the retired claude lane, and **no
+equivalent has been run for Opus at this prompt.** A low rejection rate and a
+fluent reason are not evidence of a good judge.
+
+Rows from unselected lanes — Terra's frontier-15 nulls and frontier-17 verdicts,
+sonnet's frontier-15 verdicts — stay append-only evidence and never satisfy
+current coverage. **A level judged under `deepseek+terra` is not judged now**;
+coverage is per frozen context *and* per configured lane.
 
 - Record a paired pass in `verification.judge` only when **both** models actually
   pass the text — written mechanically by `apply-judge-stamps.mjs`, which the
@@ -317,17 +354,22 @@ verdicts — stay append-only evidence and never satisfy current coverage.
   `logic`, `dependency_citation`, or `other`. At step 10 compare agreement,
   model-only rejections, nulls, and owner-confirmed fatal findings.
 - `tools/judge-sweep.mjs` keeps the lanes independent in file-backed pools:
-  **14 per active lane, 28 combined** (owner, 2026-08-20), superseding the
-  DeepSeek 24 / Terra 16 the day started with. It is a back-off below every
-  measured value — the 2026-08-05 cap of 16 per lane was itself derived from a
+  **14 per active lane, 28 combined** (owner, 2026-08-20, carried onto the Opus
+  lane unchanged on 2026-08-23), superseding the DeepSeek 24 / Terra 16 the
+  2026-08-20 day started with. It was a back-off below every value measured *for
+  the lanes it was set for* — the 2026-08-05 cap of 16 per lane came from a
   3.9 GB sweep with a 4.6 GB peak on a 7.8 GB host — and symmetric caps keep
   neither lane far ahead of the other, so an interrupted sweep leaves fewer
-  half-paired items. Each model advances when one of *its own* slots frees.
-  Every lane call is its own node+tsx process and a capacity refusal is a null
-  verdict, not a verdict. `JUDGE_CONCURRENCY_<MODEL>` can lower a lane further
-  for a targeted replay and can never raise it above the owner's value. On
-  refusal or kernel-kill nulls, lower rather than re-spend the loop.
-  `ARCHITECTURE.md` §5.
+  half-paired items. **For the Opus lane, 14 is above the only claude-CLI
+  measurements on record:** the retired claude lane returned 207 capacity
+  refusals against 140 responses at cap 16 (wave 5 A7, 60%, up from 29% on wave
+  4) while DeepSeek returned 209/209 on the same sweep, and the sonnet lane ran
+  313/392 clean at cap 6. Each model advances when one of *its own* slots frees.
+  Every lane call is its own process and a capacity refusal is a null verdict,
+  not a verdict. `JUDGE_CONCURRENCY_<MODEL>` can lower a lane further for a
+  targeted replay and can never raise it above the owner's value — for this lane
+  it is `JUDGE_CONCURRENCY_CLAUDE_OPUS_5_1M_`. On refusal or kernel-kill nulls,
+  lower rather than re-spend the loop. `ARCHITECTURE.md` §5.
 - Supply `--pages` with A-page ids; the sweep adds the B/examples items itself,
   because coverage is for the whole pair. **The initial Step-7 sweep takes every
   A page in the level** — both judges judge every item whether or not Alpha

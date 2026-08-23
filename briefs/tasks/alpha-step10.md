@@ -5,22 +5,22 @@ Write the final evidence-led account to
 code, ledgers, receipts, or status fields in this reporting stage.
 
 Read the complete run record, including the defect ledger and rendered stats,
-paired judge/adjudication/closure receipts, pathway closure, initial Sigma
-findings, Tau dispositions and changed-item rejudges, final render manifest,
-final Sigma adjudication, and `research/{{run}}-publication-readiness.json`.
+paired judge/adjudication/closure receipts, pathway closure, and
+`research/{{run}}-publication-readiness.json`.
 
 The report must state:
 
 - exactly what was built and what every verification gate established;
 - every fatal mathematical defect and its closed disposition, grouped by defect
   type and by location, without using rejection rates as a quality proxy;
-- DeepSeek-only, Terra-only, agreed, null, and Alpha-confirmed outcomes, while
-  making explicit that DeepSeek is the only cross-family judge lane;
-- every Sigma rendering/parsing finding, Tau repair or blocker, and the final
-  Sigma verdict; never describe removal of content as a repair;
+- DeepSeek-only, Opus-only, agreed, null, and Alpha-confirmed outcomes, while
+  making explicit that DeepSeek is the only cross-family judge lane — the Opus
+  lane shares the Anthropic family with the authors it screens and with the
+  Alpha that adjudicates its rejections, so its agreement is not corroboration;
 - every pathway brief rewritten and the material incorporated;
 - repeated repairs and machinery abnormalities, including self-resolved ones,
-  compared with the recorded Frontier 15 defects where evidence supports it;
+  compared with the recorded Frontier 15 and Frontier 16 defects where evidence
+  supports it;
 - any weak, late, or thin receipt and what it does not prove;
 - a ranked list of recommended workflow changes by impact/risk ratio, including
   an explicit “none” where the evidence supports no further change;

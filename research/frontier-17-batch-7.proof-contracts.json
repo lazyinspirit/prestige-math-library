@@ -1,0 +1,3116 @@
+{
+  "version": 1,
+  "level": "frontier-17",
+  "scope": [
+    "prop-retracts-inject-fundamental-groups",
+    "thm-no-retraction-of-the-closed-disk-onto-the-circle",
+    "lem-fixed-point-free-disk-map-produces-a-retraction",
+    "thm-brouwer-fixed-point-theorem-for-the-disk",
+    "lem-root-free-polynomial-circle-loops-are-nullhomotopic",
+    "lem-large-radius-polynomial-circle-loop-has-degree",
+    "thm-fundamental-theorem-of-algebra-via-the-fundamental-group",
+    "lem-antipodal-circle-map-has-odd-lift-increment",
+    "thm-borsuk-ulam-in-dimension-two",
+    "cor-no-continuous-injection-from-s2-to-r2",
+    "cor-three-closed-sets-covering-s2-contain-an-antipodal-pair",
+    "lem-loop-products-in-a-topological-group-agree-up-to-homotopy",
+    "thm-fundamental-group-of-a-topological-group-is-abelian",
+    "prop-fundamental-groups-of-punctured-euclidean-spaces",
+    "thm-plane-not-homeomorphic-to-other-euclidean-spaces",
+    "prop-hawaiian-earring-is-compact-and-path-connected",
+    "ex-radial-normalization-retracts-the-punctured-disk-but-not-the-disk",
+    "ex-cubic-polynomial-large-circle-loop-has-degree-three",
+    "ex-orthogonal-projection-has-one-borsuk-ulam-pair",
+    "cex-four-closed-sets-can-cover-s2-without-antipodal-pairs",
+    "ex-hawaiian-earring-retracts-onto-each-circle",
+    "fs-every-compact-path-connected-planar-set-has-a-universal-cover"
+  ],
+  "contracts": {
+    "prop-retracts-inject-fundamental-groups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-retraction-and-deformation-retract",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq X$ carry the subspace topology, and let $i:A\\hookrightarrow X$ be the inclusion ([[def-subspace-topology-top]]).\n\nA continuous map $r:X\\to A$ is a **retraction of $X$ onto $A$** if\n\n$$r\\circ i=\\operatorname{id}_A,$$\n\nequivalently, if $r(a)=a$ for every $a\\in A$. When such an $r$ exists, $A$ is a **retract** of $X$.\n\nThe subspace $A$ is a **deformation retract** of $X$ if there are a retraction $r:X\\to A$ and a homotopy\n\n$$H:\\operatorname{id}_X\\simeq_A i\\circ r.$$\n\nThus $H(x,0)=x$, $H(x,1)=i(r(x))$, and $H(a,t)=a$ for all $a\\in A$ and $t\\in I$ ([[def-homotopy-relative-and-path-homotopy]]). The pair $(r,H)$ is a **deformation retraction**.\n\nSome sources call the pointwise-fixed condition a *strong deformation retract*. In this library the word *deformation retract* always includes it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $a\\in A$, both $i:(A,a)\\to(X,a)$ and $r:(X,a)\\to(A,a)$ are pointed, and $r\\circ i=\\operatorname{id}_A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Functoriality gives $r_*\\circ i_*=(r\\circ i)_*=\\operatorname{id}$, so $i_*$ has a left inverse and is injective.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A$ is a deformation retract, the homotopy from $\\operatorname{id}_X$ to $i\\circ r$ fixes $a$, so [L1] also gives $i_*\\circ r_*=(i\\circ r)_*=\\operatorname{id}$; hence $i_*$ and $r_*$ are mutually inverse isomorphisms.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement quantifies over a chosen basepoint in A, so the assertion is vacuous when A is empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No natural index, dimension, sum, or denominator occurs in steps 1.1--2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when either fundamental group has one element."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For A=X and r=id, steps 1.1--2.1 reduce to the identity isomorphism; a one-point retract is also covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting endpoint enters this functoriality argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only selected object is the explicitly given basepoint a in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives consequences of being a retract; it is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from an injective induced map to existence of a retraction is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-no-retraction-of-the-closed-disk-onto-the-circle": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 5 declared dependencies; 5 cited facts; boundary-sensitive language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-retracts-inject-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq X$, let $i:A\\hookrightarrow X$ be the inclusion, and choose $a\\in A$. If $A$ is a retract of $X$ ([[def-retraction-and-deformation-retract]]), then\n\n$$i_*:\\pi_1(A,a)\\longrightarrow\\pi_1(X,a)$$\n\nis injective. If $A$ is a deformation retract of $X$, the inclusion and retraction induce mutually inverse fundamental-group isomorphisms at every basepoint of $A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-convex-subsets-have-trivial-fundamental-group",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$ and let $C\\subseteq\\mathbb R^n$ be nonempty and convex, with its\nEuclidean subspace topology. Then $C$ is simply connected. More explicitly,\nfor every basepoint $x_0\\in C$ and every loop $\\alpha$ at $x_0$, the formula\n\n$$H(s,t)=(1-t)\\alpha(s)+t x_0$$\n\nis a path homotopy relative to the endpoints from $\\alpha$ to the constant\nloop at $x_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-geometric-unit-circle-has-fundamental-group-z",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ with basepoint $(1,0)$. Then\n\n$$\\pi_1(C,(1,0))\\cong(\\mathbb Z,+).$$\n\nUnder this isomorphism, the loop\n\n$$t\\longmapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$$\n\ncorresponds to $n$ for every $n\\in\\mathbb Z$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The disk $D^2$ is nonempty and convex: if $x,y\\in D^2$ and $0\\le t\\le1$, then $\\lVert(1-t)x+ty\\rVert_2\\le(1-t)\\lVert x\\rVert_2+t\\lVert y\\rVert_2\\le1$. Hence $\\pi_1(D^2,e_0)$ has one element.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The unit circle has $\\pi_1(S^1,e_0)$ isomorphic to the nontrivial group $\\mathbb Z$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose a retraction $r:D^2\\to S^1$ existed.",
+          "step": "1.3",
+          "inputs": [
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], $i_*:\\pi_1(S^1,e_0)\\to\\pi_1(D^2,e_0)$ would be injective, but steps 1.1 and 1.2 make this a homomorphism from a nontrivial group to a one-element group, which cannot be injective. Thus no such retraction exists.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The disk and circle are explicitly nonempty; (1,0) is the common basepoint in steps 1.1 and 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed Euclidean dimension is two and no variable index begins at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles the one-element disk fundamental group and contrasts it with Z."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the positive radius one, so neither the disk nor the unit circle degenerates to an empty space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the whole unit circle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The basepoint and both spaces are explicit; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a nonexistence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-fixed-point-free-disk-map-produces-a-retraction": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 7 declared dependencies; 7 cited facts; quotient or equivalence-class construction; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, with vector-valued functions, their\ncomponents $f_i = \\pi_i \\circ f$, their limits and their continuity as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).\n\n**Where $m \\ge 1$ is spent.** The \"if\" direction of clauses 1 and 2 divides\n$\\varepsilon$ by $\\iota(m)$, which requires $\\iota(m) \\ne 0$; and clause 3's last\npart quotes a bound available only for $m \\ge 1$. The \"only if\" directions hold\nfor every $m$ but say nothing at $m = 0$, there being no index $i < 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-algebra-of-continuous-real-maps-on-a-space",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to\\mathbb R$ be continuous maps from a topological space. Then\n$f+g$, $fg$, $|f|$, $\\max(f,g)$, and $\\min(f,g)$ are continuous. On the open\ncozero set $\\operatorname{coz}(g)$, the quotient $f/g$ is continuous. The same\nholds for every finite sum, product, maximum, or minimum of continuous\nreal-valued maps.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-continuous-inverse",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then:\n\n1. $f$ is strictly monotone ([[def-monotone-function]]);\n2. $f[I]$ is order-convex;\n3. the map $f : I \\to f[I]$ is a bijection, so there is exactly one\n   $g : f[I] \\to I$ with $g(f(x)) = x$ for every $x \\in I$ and $f(g(u)) = u$ for\n   every $u \\in f[I]$;\n4. $g$ is strictly monotone in the same sense as $f$: increasing if $f$ is\n   increasing, decreasing if $f$ is decreasing;\n5. $g$ is continuous on $f[I]$.\n\n**\"Interval\" means \"order-convex\" here**, as throughout this library\n([[thm-connected-subsets-of-r-are-intervals]] is what licenses the word and\n[[def-interval]] records that the classification of order-convex sets into the\nnine written forms is not proved here). No compactness and no boundedness is\nassumed: $I$ may be open, half-open, unbounded, or a single point.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-retraction-and-deformation-retract",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq X$ carry the subspace topology, and let $i:A\\hookrightarrow X$ be the inclusion ([[def-subspace-topology-top]]).\n\nA continuous map $r:X\\to A$ is a **retraction of $X$ onto $A$** if\n\n$$r\\circ i=\\operatorname{id}_A,$$\n\nequivalently, if $r(a)=a$ for every $a\\in A$. When such an $r$ exists, $A$ is a **retract** of $X$.\n\nThe subspace $A$ is a **deformation retract** of $X$ if there are a retraction $r:X\\to A$ and a homotopy\n\n$$H:\\operatorname{id}_X\\simeq_A i\\circ r.$$\n\nThus $H(x,0)=x$, $H(x,1)=i(r(x))$, and $H(a,t)=a$ for all $a\\in A$ and $t\\in I$ ([[def-homotopy-relative-and-path-homotopy]]). The pair $(r,H)$ is a **deformation retraction**.\n\nSome sources call the pointwise-fixed condition a *strong deformation retract*. In this library the word *deformation retract* always includes it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x\\in D^2$, put $a=f(x)$, $v=x-a$, $A=\\langle v,v\\rangle$, $B=\\langle a,v\\rangle$, and $C=\\langle a,a\\rangle$. Fixed-point-freeness gives $v\\ne0$ and $A>0$. Define $$\\lambda(x)=\\frac{-B+\\sqrt{B^2+A(1-C)}}{A},\\qquad r(x)=a+\\lambda(x)v.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The equation $\\lVert a+tv\\rVert_2^2=1$ is $At^2+2Bt+C-1=0$, whose discriminant is $4(B^2+A(1-C))\\ge0$ because $C=\\lVert f(x)\\rVert_2^2\\le1$; thus $\\lambda(x)$ is its larger root. Since the upward-opening quadratic is nonpositive at both $t=0$ and $t=1$, its larger root satisfies $\\lambda(x)\\ge1$ and is the unique intersection parameter of the ray $a+tv$ with $S^1$ for $t\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The maps $a,v,A,B,C$ are continuous; the radicand is nonnegative, its square root is continuous, and the denominator $A$ never vanishes. Hence $\\lambda$ is continuous, and componentwise continuity makes $r(x)=a+\\lambda(x)v$ continuous.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 2.1 gives $\\lVert r(x)\\rVert_2=1$, so $r$ maps $D^2$ into $S^1$. If $x\\in S^1$, then $t=1$ is a root and is the larger root because $1\\ge0$ lies in the interval on which the quadratic is nonpositive; hence $\\lambda(x)=1$ and $r(x)=a+v=x$. Therefore $r$ is a continuous retraction of $D^2$ onto $S^1$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F2",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The closed disk is nonempty and each x has the explicitly defined values in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Fixed-point-freeness gives v nonzero and A>0 before the division in step 1.1; f(x)=0 remains allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves lambda>=1 and step 4.1 treats the equality lambda=1 on the unit circle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1--2.1 separately allow f(x)=0 and f(x) on S1; only f(x)=x is excluded by hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 verifies every point of the unit circle rather than appealing only to interior continuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The larger quadratic root is given by a formula and uniqueness in step 2.1, so no arbitrary ray intersection is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma constructs a retraction from a fixed-point-free map; it states no converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No implication from a retraction to a specified fixed-point-free self-map is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-brouwer-fixed-point-theorem-for-the-disk": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-fixed-point-free-disk-map-produces-a-retraction",
+          "source_section": "Statement",
+          "quote": "Every continuous fixed-point-free map $f:D^2\\to D^2$ determines a continuous retraction $D^2\\to S^1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-no-retraction-of-the-closed-disk-onto-the-circle",
+          "source_section": "Statement",
+          "quote": "Write $D^2=\\overline B_2(0,1)\\subseteq\\mathbb R^2$ and $S^1=S_2(0,1)$ ([[def-euclidean-spheres-and-closed-balls]]). There is no continuous retraction from the closed unit disk $D^2$ onto the unit circle $S^1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose that $f$ has no fixed point, so $f(x)\\ne x$ for every $x\\in D^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the map $f$ then determines a continuous retraction $D^2\\to S^1$, contradicting [L2]. Therefore $f$ has a fixed point.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 derives the fixed-point existence claim by contradiction on the nonempty disk, which contains the origin."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Dimension is fixed at two and no zero denominator appears in this two-step contradiction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The one-dimensional fixed-point theorem is not part of this dimension-two statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant maps and the identity map are allowed; step 1.1 applies only under the contrary fixed-point-free assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the ray-retraction lemma on the closed disk, including every boundary point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 proves existence by contradiction and makes no premature choice of a fixed point."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or characterization of fixed-point maps is stated."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-root-free-polynomial-circle-loops-are-nullhomotopic": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 8 declared dependencies; 8 cited facts; biconditional / both-direction claim; boundary-sensitive language; quotient or equivalence-class construction; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-polynomial-degree-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(Z)=\\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\\in\\mathbb C$ by\n$$\n0(z):=0,\\qquad p(z):=\\sum_{k<n+1}^{\\mathbb C}a_kz^k\\quad\\text{for }p=(a_0,\\ldots,a_n)\\ne0.\n$$\nwhere the latter is the initial-segment complex sum defined in\n[[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is\ndefined for the zero polynomial as well as every nonzero formal polynomial.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Complex arithmetic and powers are those of [[thm-complex-numbers-form-a-field]] and [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-metric-convergence-and-continuity",
+          "source_section": "Definition",
+          "quote": "For $z=x+iy$ and $w=u+iv$, put\n$$\nd_{\\mathbb C}(z,w):=|z-w|=\\sqrt{(x-u)^2+(y-v)^2}=\\lVert(x-u,y-v)\\rVert_2.\n$$\nUnder the identification $\\mathbb C=\\mathbb R^2$, this is exactly the metric\n$d_2$ induced by the Euclidean norm of [[def-p-norms-on-rn]]. It is a metric by\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]], so the metric axioms\nare established rather than assumed.\n\nConvergence in $\\mathbb C$, Cauchy sequences in $\\mathbb C$, and continuity of\nmaps between subsets of $\\mathbb C$ mean the notions of\n[[def-metric-convergence]], [[def-cauchy-in-metric]], and\n[[def-metric-continuity]] for $d_{\\mathbb C}$ (and the restricted metric on a\nsubset). These uses are therefore licensed by the metric-space definition\n[[def-metric-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The function\n\n$$h:\\mathbb R/\\mathbb Z\\longrightarrow C,\\qquad h([t])=(\\cos 2\\pi t,\\sin 2\\pi t),$$\n\nis a homeomorphism.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-algebra-of-continuous-real-maps-on-a-space",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to\\mathbb R$ be continuous maps from a topological space. Then\n$f+g$, $fg$, $|f|$, $\\max(f,g)$, and $\\min(f,g)$ are continuous. On the open\ncozero set $\\operatorname{coz}(g)$, the quotient $f/g$ is continuous. The same\nholds for every finite sum, product, maximum, or minimum of continuous\nreal-valued maps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+          "source_section": "Statement",
+          "quote": "A based circle loop is nullhomotopic exactly when its degree is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $\\tau\\in[0,1]$ and $u\\in\\mathbb R/\\mathbb Z$, put $q(\\tau,u)=p(\\tau R h(u))/p(\\tau R)$. Root-freeness makes numerator and denominator nonzero, so $$A(\\tau,u):=h^{-1}\\left(\\frac{q(\\tau,u)}{|q(\\tau,u)|}\\right)$$ is defined; moreover $q(\\tau,[0])=1$, hence $A(\\tau,[0])=[0]$. Define $\\alpha_R(u)=A(1,u)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Writing complex addition and multiplication in real and imaginary coordinates shows from [F1], [L3], and [L4] that $(\\tau,u)\\mapsto p(\\tau Rh(u))$ and $\\tau\\mapsto p(\\tau R)$ are continuous. Root-freeness and [L1] make division and radial normalization continuous, and [L2] makes $A$ continuous. At $\\tau=0$ one has $q(0,u)=p(0)/p(0)=1$, so $A(0,u)=[0]$ for every $u$, while step 1.1 keeps the basepoint fixed for all $\\tau$. Thus $A$ is a based homotopy on the unit interval from the constant loop to $\\alpha_R$, including the case $R=0$ without division by $R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence $\\alpha_R$ is nullhomotopic for every $R\\ge0$, and [L5] gives $\\deg(\\alpha_R)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L5",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The circle and interval are nonempty fixed spaces and no empty family is formed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the formula at R=0 directly and never divides by R."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 keep the loop basepoint $[0]$ fixed, equivalently both interval endpoints represent the same point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes every constant nonzero polynomial and makes its normalized loop constant; root-freeness excludes the zero polynomial."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the homotopy is based at both t endpoints and at both R-homotopy endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All loops and the homotopy are given by explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the implication from a root-free polynomial to nullhomotopic loops is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nullhomotopy of one or all boundary loops is not claimed to characterize root-freeness."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-large-radius-polynomial-circle-loop-has-degree": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 8 declared dependencies; 8 cited facts; existence, choice, uniqueness, or well-definedness; quotient or equivalence-class construction; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-polynomial-degree-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(Z)=\\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\\in\\mathbb C$ by\n$$\n0(z):=0,\\qquad p(z):=\\sum_{k<n+1}^{\\mathbb C}a_kz^k\\quad\\text{for }p=(a_0,\\ldots,a_n)\\ne0.\n$$\nwhere the latter is the initial-segment complex sum defined in\n[[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is\ndefined for the zero polynomial as well as every nonzero formal polynomial.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Complex arithmetic and powers are those of [[thm-complex-numbers-form-a-field]] and [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-algebra-of-continuous-real-maps-on-a-space",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to\\mathbb R$ be continuous maps from a topological space. Then\n$f+g$, $fg$, $|f|$, $\\max(f,g)$, and $\\min(f,g)$ are continuous. On the open\ncozero set $\\operatorname{coz}(g)$, the quotient $f/g$ is continuous. The same\nholds for every finite sum, product, maximum, or minimum of continuous\nreal-valued maps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-degree-is-invariant-under-path-homotopy",
+          "source_section": "Statement",
+          "quote": "Path-homotopic based circle loops have the same degree.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-standard-circle-loops-have-their-integer-degrees",
+          "source_section": "Statement",
+          "quote": "$\\deg(\\omega_n)=n$ for every integer $n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $|z|=R$, then $$\\left|\\sum_{j<n}a_jz^j\\right|\\le\\sum_{j<n}|a_j|R^j\\le SR^{n-1}<R^n=|z^n|.$$ The estimate includes $n=1$ and $S=0$, since $R>1$ and $S<R$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $s\\in[0,1]$ put $p_s(z)=z^n+s\\sum_{j<n}a_jz^j$. Step 1.1 remains strict with $sS\\le S$, so $p_s$ never vanishes on $|z|=R$, in particular $p_s(R)\\ne0$. The formula $$H(s,u)=h^{-1}\\left(\\frac{p_s(Rh(u))/p_s(R)}{|p_s(Rh(u))/p_s(R)|}\\right)$$ is therefore a continuous based homotopy by [L2] and [L3]. At $s=1$ it is $\\alpha_R$, while at $s=0$ it is $u\\mapsto h^{-1}(h(u)^n)=\\omega_n(u)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Homotopy invariance and the standard-loop calculation give $\\deg(\\alpha_R)=\\deg(\\omega_n)=n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L4",
+            "L5",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses $n\\ge1$, so the coefficient index set contains $0$, and its circle $|z|=R$ contains the positive real point $R$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero lower-coefficient sum is allowed; the radius condition reduces to R>1 and step 1.1 remains strict."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly includes $n=1$, when all lower-degree terms are constant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the case $S=0$, in which $p(z)=z^n$ and the coefficient homotopy is constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies s=1 with p and s=0 with the leading monomial and keeps the loop based at t=0,1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 starts with a given radius satisfying the strict bound, so no point, root, or maximum is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives a sufficient large-radius computation, not a characterization of radii."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A loop of degree n need not imply the stated coefficient bound."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-fundamental-theorem-of-algebra-via-the-fundamental-group": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 4 declared dependencies; 4 cited facts; biconditional / both-direction claim; boundary-sensitive language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-polynomial-degree-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(Z)=\\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\\in\\mathbb C$ by\n$$\n0(z):=0,\\qquad p(z):=\\sum_{k<n+1}^{\\mathbb C}a_kz^k\\quad\\text{for }p=(a_0,\\ldots,a_n)\\ne0.\n$$\nwhere the latter is the initial-segment complex sum defined in\n[[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is\ndefined for the zero polynomial as well as every nonzero formal polynomial.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Complex arithmetic and powers are those of [[thm-complex-numbers-form-a-field]] and [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-root-free-polynomial-circle-loops-are-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a complex polynomial with no zero in $\\mathbb C$. For each real $R\\ge0$, evaluate $p$ on the circle of radius $R$, divide by its value at the basepoint $R$, and radially normalize to the unit circle. Transported through the homeomorphism $h:\\mathbb R/\\mathbb Z\\to S^1$, this is a based circle loop $\\alpha_R$, and every $\\alpha_R$ is nullhomotopic. In particular, every such loop has degree zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-large-radius-polynomial-circle-loop-has-degree",
+          "source_section": "Statement",
+          "quote": "Let $p(z)=z^n+\\sum_{j<n}a_jz^j$ be a monic complex polynomial of degree $n\\ge1$, and put $S=\\sum_{j<n}|a_j|$. If $R>\\max\\{1,S\\}$, then the based normalized circle loop\n\n$$\\alpha_R(u)=h^{-1}\\left(\\frac{p(Rh(u))/p(R)}{|p(Rh(u))/p(R)|}\\right),\\qquad u\\in\\mathbb R/\\mathbb Z,$$\n\nis well defined and has degree $n$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+          "source_section": "Statement",
+          "quote": "A based circle loop is nullhomotopic exactly when its degree is zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $p$ has no root. Since $p$ is nonconstant, it is nonzero and has degree $n\\ge1$ and leading coefficient $c\\ne0$. Dividing every coefficient by $c$ gives a monic polynomial $q=c^{-1}p$ of the same degree and with the same zero set, so $q$ is also root-free.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "assume-contra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], every normalized radius-$R$ loop of $q$ is nullhomotopic, and therefore has degree zero by [L3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $q(z)=z^n+\\sum_{j<n}a_jz^j$, put $S=\\sum_{j<n}|a_j|$, and take $R=\\max\\{1,S\\}+1$. Then $R>\\max\\{1,S\\}$, so [L2] says that the normalized radius-$R$ loop has degree $n$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 assign the same loop both degree $0$ and degree $n$, impossible because $n\\ge1$. Hence the root-free assumption is false and $p$ has a complex root.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonconstant polynomial has a nonempty positive-degree coefficient list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes the zero polynomial by nonconstancy; if the constant coefficient is zero, the conclusion already holds with root zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 permits degree one and step 3.1 uses only n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 permits all lower coefficients to vanish and applies the large-radius lemma to a monomial."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The nullhomotopy and large-radius homotopy contracts explicitly verify their loop and homotopy endpoints before steps 2.1--2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses a real radius above an explicit finite real bound; the Archimedean property is not needed because the bound plus one is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fundamental theorem asserts existence of a root, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from existence of a root to nonconstancy is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-antipodal-circle-map-has-odd-lift-increment": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 4 declared dependencies; 4 cited facts; boundary-sensitive language; quotient or equivalence-class construction. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-circle-as-real-line-mod-integers",
+          "source_section": "Definition",
+          "quote": "The circle is $S^1:=\\mathbb R/\\mathbb Z$ with the quotient topology induced by $p(x)=[x]$ and basepoint $[0]$; moreover $p^{-1}([0])=\\mathbb Z$ and $p(x+n)=p(x)$ for every real $x$ and integer $n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-real-line-covers-real-line-mod-integers",
+          "source_section": "Statement",
+          "quote": "$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering map.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-path-lifting-for-covering-maps",
+          "source_section": "Statement",
+          "quote": "There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-lifted-path-endpoints-depend-only-on-path-homotopy",
+          "source_section": "Statement",
+          "quote": "Endpoint-fixed homotopic paths in the base have lifts with the same endpoint whenever their lifts begin at the same point.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $[u]=[v]$, then $(u+1/2)-(v+1/2)=u-v\\in\\mathbb Z$, so $a([u])=[u+1/2]$ is well defined by [F1]; moreover $a(a([u]))=[u+1]=[u]$, so $a$ is an involution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the loop $t\\mapsto h([t])$ were endpoint-fixed homotopic to the constant loop at $h([0])$.",
+          "step": "1.2",
+          "inputs": [
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $y\\in\\mathbb R$ be arbitrary subject to $p(y)=h([0])$. By [L1] and [L2], the loop $t\\mapsto h([t])$ has a unique lift $\\widetilde h$ with $\\widetilde h(0)=y$. Antipodality gives $p(\\widetilde h(1/2))=h([1/2])=p(y+1/2)$, so [F1] gives a unique integer $k$ with $\\widetilde h(1/2)=y+k+1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "F1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0\\le t\\le1/2$, the paths $t\\mapsto\\widetilde h(t+1/2)$ and $t\\mapsto\\widetilde h(t)+k+1/2$ project to the same path because $h([t+1/2])=a(h([t]))$, and they agree at $t=0$ by step 2.1. Lift uniqueness gives $\\widetilde h(t+1/2)=\\widetilde h(t)+k+1/2$, so at $t=1/2$ one obtains $\\widetilde h(1)=y+2k+1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The constant loop at $h([0])$ has the constant lift beginning at $y$, so [L3] and step 1.2 would force $\\widetilde h(1)=y$. Step 3.1 instead gives $\\widetilde h(1)=y+2k+1\\ne y$ for every integer $k$, including negative $k$. This contradiction shows that the loop is not nullhomotopic and completes the odd-increment claim.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.2",
+            "L3",
+            "algebra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The circle and interval are nonempty and the antipodal map is given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses that 2k+1 is never zero, including k=0 and negative k."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The full lift endpoint t=1 is computed explicitly in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 forces an odd lift increment, so a constant map cannot satisfy the antipodal identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks t=0 and t=1/2, while step 3.1 crosses the half-interval seam and computes t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 starts with an arbitrary point of the nonempty fibre and then uses unique path lifting; the integer $k$ is determined uniquely, so no repeated choice occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Antipodality is shown to imply odd increment; equivalence is not claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An odd-degree circle map need not be asserted antipodal."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-borsuk-ulam-in-dimension-two": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 7 declared dependencies; 7 cited facts; boundary-sensitive language; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-antipodal-circle-map-has-odd-lift-increment",
+          "source_section": "Statement",
+          "quote": "On $S^1=\\mathbb R/\\mathbb Z$, define the antipodal involution by $a([u])=[u+1/2]$. If a continuous map $h:S^1\\to S^1$ satisfies $h\\circ a=a\\circ h$, then every lift $\\widetilde h:[0,1]\\to\\mathbb R$ of $t\\mapsto h([t])$ has\n\n$$\\widetilde h(1)-\\widetilde h(0)=2k+1$$\n\nfor some integer $k$. Thus the lift increment is odd, possibly negative, and the loop $t\\mapsto h([t])$ is not nullhomotopic.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-radial-normalisation-is-continuous",
+          "source_section": "Statement",
+          "quote": "the map $\\rho:\\mathbb R^n\\setminus\\{0\\}\\to S^{n-1}$ defined by $\\rho(x)=x/\\lVert x\\rVert_2$ is continuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-composition-respects-homotopy",
+          "source_section": "Statement",
+          "quote": "If $v:Y\\to Z$ is continuous, then $v\\circ f\\simeq_A v\\circ g$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $f(x)\\ne f(-x)$ for every $x\\in S^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The difference $d(x)=f(x)-f(-x)$ is continuous by [L5] and nonzero by step 1.1, so $g(x)=\\rho(d(x))$ defines a continuous map $g:S^2\\to S^1$. Since $d(-x)=-d(x)$, one has $g(-x)=-g(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $h:\\mathbb R/\\mathbb Z\\to S^1$ be the homeomorphism in [F1] and put $b=h^{-1}\\circ g\\circ e$. The map $e$ is continuous componentwise by [L5]; since $e([t+1/2])=-e([t])$ and $h([u+1/2])=-h([u])$, the continuous map $b$ is antipodal. Hence the loop $t\\mapsto b([t])$ is not nullhomotopic by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The loop $t\\mapsto e([t])$ in $S^2$ is nullhomotopic because $S^2$ is simply connected. Postcomposing such a nullhomotopy with the continuous map $h^{-1}\\circ g$ makes $t\\mapsto b([t])$ nullhomotopic in $\\mathbb R/\\mathbb Z$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 contradict one another. Therefore the assumption in step 1.1 is false, and some $x\\in S^2$ satisfies $f(x)=f(-x)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the explicit equator in $S^2$, so the sphere and loop domain are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 makes every difference vector nonzero before radial normalization."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem concerns S2 to R2; the one-dimensional Borsuk--Ulam case is not asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 is the contrary hypothesis and excludes constant maps, which already satisfy the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 treat the equator as a based loop and preserve its endpoints through the nullhomotopy."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 obtains an antipodal equal-image point only after the contrary universal inequality has been refuted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Borsuk--Ulam is an existence theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse condition on maps with an antipodal equal-image pair is stated."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-no-continuous-injection-from-s2-to-r2": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-borsuk-ulam-in-dimension-two",
+          "source_section": "Statement",
+          "quote": "For every continuous map $f:S^2\\to\\mathbb R^2$, there is an $x\\in S^2$ with $f(x)=f(-x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets and let $f : A \\to B$ be a function ([[def-function]]).\n\n- $f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$, for all\n  $x, y \\in A$.\n- $f$ is **surjective** (onto) if for every $b \\in B$ there is some $x \\in A$\n  with $f(x) = b$; equivalently, the image $f[A] := \\{ f(x) : x \\in A \\}$ equals\n  $B$.\n- $f$ is **bijective** if it is both injective and surjective.\n\nFor $S \\subseteq A$ we write $f[S] = \\{ f(x) : x \\in S \\}$ for the image of $S$,\nand for $T \\subseteq B$ we write $f^{-1}[T] = \\{ x \\in A : f(x) \\in T \\}$ for the\npreimage of $T$; these are the image and preimage of a set under $f$ read as a\nrelation ([[def-image-and-preimage-under-a-relation]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose $x\\in S^2$ with $f(x)=f(-x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x=-x$, then $2x=0$ and hence $x=0$, contrary to $\\lVert x\\rVert_2=1$. Thus $x$ and $-x$ are distinct points with the same image, so $f$ is not injective.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "S2 is nonempty and step 1.1 obtains an explicit sphere point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The equation x=-x would give x=0, excluded by unit norm in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No variable index or one-dimensional case occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers constant maps, whose antipodal points have equal images and are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "S2 has no interval endpoints in this corollary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the existential conclusion of Borsuk--Ulam exactly once."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a nonexistence statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-three-closed-sets-covering-s2-contain-an-antipodal-pair": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 4 declared dependencies; 4 cited facts; boundary-sensitive language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-borsuk-ulam-in-dimension-two",
+          "source_section": "Statement",
+          "quote": "For every continuous map $f:S^2\\to\\mathbb R^2$, there is an $x\\in S^2$ with $f(x)=f(-x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-distance-to-set-is-lipschitz",
+          "source_section": "Statement",
+          "quote": "$$|d(x,A) - d(y,A)| \\le d(x,y),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-metric-spaces-are-tychonoff-and-perfectly-normal",
+          "source_section": "Statement",
+          "quote": "1. **Every closed set is a zero set.** For closed $C \\subseteq X$ there is a\n   continuous $f : X \\to \\mathbb{R}$ with $C = Z(f)$\n   ([[def-zero-sets-and-cozero-sets]]); for $C \\ne \\varnothing$ one may take\n   $f(x) = d(x,C)$ ([[def-metric-bounded-diameter]]), and for $C = \\varnothing$\n   the constant function $1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $i=1,2$, define $\\delta_i(x)=d(x,A_i)$ when $A_i\\ne\\varnothing$, and define $\\delta_i(x)=1$ when $A_i=\\varnothing$. By [L2] and [L3], each $\\delta_i$ is continuous and its zero set is exactly $A_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] to $\\delta=(\\delta_1,\\delta_2):S^2\\to\\mathbb R^2$. There is $x\\in S^2$ such that $\\delta_1(x)=\\delta_1(-x)$ and $\\delta_2(x)=\\delta_2(-x)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If either common value is zero, then $x$ and $-x$ both lie in the corresponding $A_i$. If both common values are positive, neither point lies in $A_1\\cup A_2$, so the covering hypothesis puts both in $A_3$. In every case one cover member contains the antipodal pair.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 assigns a constant function to every empty A_i, including patterns with one or two empty members."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats distance zero by the closed-set zero-set characterization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the constant value one only for an empty cover member, so it cannot be confused with the zero-set membership test."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated cover members and a member equal to S2 are allowed; step 3.1 still concludes correctly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting boundary occurs; closedness is handled by zero distance."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only Borsuk--Ulam's antipodal point is chosen in step 2.1; distance to a set is used only after nonemptiness is checked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary gives a consequence of a closed cover, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Containing an antipodal pair does not characterize three-set closed covers."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-loop-products-in-a-topological-group-agree-up-to-homotopy": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 6 declared dependencies; 6 cited facts; boundary-sensitive language; quotient or equivalence-class construction. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-topological-group",
+          "source_section": "Definition",
+          "quote": "multiplication $m:G\\times G\\to G$, $m(x,y)=xy$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "The product $[\\alpha][\\beta]$ traverses $\\alpha$ first\nand $\\beta$ second.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace\ntopology ([[def-subspace-topology-top]]). Then:\n\n1. **Composites.** If $f : X \\to Y$ and $g : Y \\to Z$ are continuous\n   ([[def-continuous-map-top]]) then $g \\circ f : X \\to Z$ is continuous.\n2. **Open cover.** Let $f : X \\to Y$ be a function and let\n   $\\{\\, U_i : i \\in I \\,\\}$ be a family of open subsets of $X$ with\n   $\\bigcup_{i \\in I} U_i = X$. If $f|_{U_i} : U_i \\to Y$ is continuous for every\n   $i \\in I$, then $f$ is continuous.\n3. **Finite closed cover.** Let $f : X \\to Y$ be a function, let $n \\ge 1$ and\n   let $F_1, \\dots, F_n$ be closed subsets of $X$ with\n   $F_1 \\cup \\dots \\cup F_n = X$. If $f|_{F_k} : F_k \\to Y$ is continuous for\n   every $k$, then $f$ is continuous.\n\nThe converses of claims 2 and 3 hold with no hypothesis on the cover at all:\nevery restriction of a continuous map to a subspace is continuous\n([[def-subspace-topology-top]]). The finiteness in claim 3 is not removable; see\nthe remarks.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-algebra-of-continuous-real-maps-on-a-space",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to\\mathbb R$ be continuous maps from a topological space. Then\n$f+g$, $fg$, $|f|$, $\\max(f,g)$, and $\\min(f,g)$ are continuous. On the open\ncozero set $\\operatorname{coz}(g)$, the quotient $f/g$ is continuous. The same\nholds for every finite sum, product, maximum, or minimum of continuous\nreal-valued maps.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $K:[0,1]^2\\to G$, $K(s,t)=\\alpha(s)\\beta(t)$, is continuous, and $K(0,0)=K(1,0)=K(0,1)=K(1,1)=e$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $u,t\\in[0,1]$, put $$A_u(t)=\\min\\left\\{\\frac{t}{1-u/2},1\\right\\},\\qquad B_u(t)=\\max\\left\\{\\frac{t-u/2}{1-u/2},0\\right\\}.$$ Since $1-u/2\\ge1/2$, [L2] and [L3] make these functions continuous on the parameter square. Hence $H_1(t,u)=K(A_u(t),B_u(t))$ is an endpoint-fixed homotopy: at $u=0$ it is $\\alpha(t)\\beta(t)$, and at $u=1$ it traverses $\\alpha$ first and $\\beta$ second, so it is $\\alpha*\\beta$ under [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The formula $H_2(t,u)=K(B_u(t),A_u(t))$ is another endpoint-fixed homotopy. At $u=0$ it is again $\\alpha(t)\\beta(t)$, while at $u=1$ it traverses $\\beta$ first and $\\alpha$ second, so it is $\\beta*\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\alpha$ or $\\beta$ is replaced by an endpoint-fixed homotopic loop, multiplying the two homotopies pointwise gives an endpoint-fixed homotopy by [F1] and [L1]. Thus pointwise multiplication is well defined on loop classes, and steps 2.1 and 3.1 identify it with both concatenation orders.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "L1",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A topological group has an identity and the loop interval is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves $1-u/2\\ge1/2>0$ on the whole parameter square before dividing by it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the one-element group all loops and both operations are constant, and steps 1.1--3.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 remain valid when either loop is constant, reducing to the relevant unit homotopy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes both path endpoints and checks every piecewise seam of the square sweep."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The square and homotopies are explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states a homotopy agreement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of topological groups is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-fundamental-group-of-a-topological-group-is-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-loop-products-in-a-topological-group-agree-up-to-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a topological group with identity $e$, and let $\\alpha,\\beta:[0,1]\\to G$ be loops based at $e$. Their pointwise product $(\\alpha\\cdot\\beta)(t)=\\alpha(t)\\beta(t)$ is endpoint-fixed homotopic both to $\\alpha*\\beta$ and to $\\beta*\\alpha$. Consequently pointwise multiplication descends to loop classes and agrees there with loop concatenation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every\nelement is invertible ([[def-invertible-element]]). Written out, a group is a set\n$G$ with a binary operation $*$ ([[def-binary-operation]]) and an element\n$e \\in G$ such that\n\n- **(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;\n- **(G2)** $e * x = x = x * e$ for every $x \\in G$;\n- **(G3)** for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.\n\nBy [[lem-identity-unique]] the element $e$ of (G2) is unique, and by\n[[lem-inverse-unique]] the element $y$ of (G3) is unique for each $x$ and is\ndetermined by either one of the two equations alone. So the notations $e$ for the\nidentity and $x^{-1}$ for the inverse of $x$ are legitimate, and asserting\n$y * x = e$ alone already says $y = x^{-1}$.\n\nA group is **abelian**, or **commutative**, when its operation is commutative:\n$x * y = y * x$ for all $x, y \\in G$.\n\n**Notation.** The operation is usually written multiplicatively, $xy$ for\n$x * y$, with identity $e$ (or $1$) and inverse $x^{-1}$. For an abelian group it\nis often written additively, $x + y$, with identity $0$ and inverse $-x$; the two\nnotations describe the same notion and nothing below depends on the choice. We\nwrite $G$ for the group when the operation is understood.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The classes $[\\alpha]$ and $[\\beta]$ have concatenation product $[\\alpha*\\beta]$, while their pointwise product is represented by $t\\mapsto\\alpha(t)\\beta(t)$; [L1] identifies these two classes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same pointwise product is also homotopic to $\\beta*\\alpha$ by [L1]. Therefore $[\\alpha][\\beta]=[\\alpha*\\beta]=[\\beta*\\alpha]=[\\beta][\\alpha]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $[\\alpha]$ and $[\\beta]$ were arbitrary, multiplication in $\\pi_1(G,e)$ is commutative, so the fundamental group is abelian.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A topological group is nonempty because it has an identity element."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No index or denominator occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-element topological group has the one-element, hence abelian, fundamental group; step 2.1 still holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant loop classes are the common unit explicitly used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the endpoint-fixed loop-product homotopies before passing to loop classes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Eckmann--Hilton calculation is pointwise and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts abelianness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An abelian fundamental group does not characterize topological groups."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-fundamental-groups-of-punctured-euclidean-spaces": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 6 declared dependencies; 6 cited facts; boundary-sensitive language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-punctured-rn-deformation-retracts-onto-the-sphere",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, put $P=\\mathbb R^n\\setminus\\{0\\}$, and let $S^{n-1}\\subseteq P$ be the unit sphere. Radial normalisation\n\n$$r:P\\to S^{n-1},\\qquad r(x)=\\frac{x}{\\lVert x\\rVert_2},$$\n\nis a retraction, and\n\n$$H(x,t)=\\left((1-t)+\\frac{t}{\\lVert x\\rVert_2}\\right)x$$\n\nis a deformation retraction of $P$ onto $S^{n-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-retracts-inject-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "If $A$ is a deformation retract of $X$, the inclusion and retraction induce mutually inverse fundamental-group isomorphisms at every basepoint of $A$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-geometric-unit-circle-has-fundamental-group-z",
+          "source_section": "Statement",
+          "quote": "$$\\pi_1(C,(1,0))\\cong(\\mathbb Z,+).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=2$, [L1] and [L2] identify $\\pi_1(P_2,e_0)$ with $\\pi_1(S^1,e_0)$, and [L3] identifies the latter with $\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $n\\ge3$ and $y\\in S^{n-1}$. Since $n-1\\ge2$, [L4] says that $S^{n-1}$ is simply connected, so $\\pi_1(S^{n-1},y)$ is trivial; [L1] and [L2] therefore make $\\pi_1(P_n,y)$ trivial.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an arbitrary $x\\in P_n$, the path $\\gamma_x(t)=((1-t)+t/\\lVert x\\rVert_2)x$ runs in $P_n$ from $x$ to $r(x)$. Concatenating an endpoint-fixed homotopy with the fixed paths $\\overline\\gamma_x$ and $\\gamma_x$ preserves it, so $$\\Phi_x([\\alpha])=[\\overline\\gamma_x*\\alpha*\\gamma_x]$$ is well defined. The piecewise formula $K(s,t)=\\gamma_x(2s(1-t))$ for $s\\le1/2$ and $K(s,t)=\\gamma_x(2(1-s)(1-t))$ for $s\\ge1/2$ contracts $\\gamma_x*\\overline\\gamma_x$ to the constant path at $x$; applying the same formula to $\\overline\\gamma_x$ contracts $\\overline\\gamma_x*\\gamma_x$ at $r(x)$. Hence the product of $\\Phi_x([\\alpha])$ and $\\Phi_x([\\beta])$ cancels its middle $\\gamma_x*\\overline\\gamma_x$ and equals $\\Phi_x([\\alpha*\\beta])$, while $[\\delta]\\mapsto[\\gamma_x*\\delta*\\overline\\gamma_x]$ is a two-sided inverse. Thus $\\Phi_x:\\pi_1(P_n,x)\\to\\pi_1(P_n,r(x))$ is an isomorphism, and step 1.2 makes $\\pi_1(P_n,x)$ trivial.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "L5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Given $x,z\\in P_n$, follow $\\gamma_x$ to $r(x)$, a sphere path from $r(x)$ to $r(z)$ supplied by the path-connectedness in [L4], and the reverse of $\\gamma_z$. This gives a path from $x$ to $z$, so $P_n$ is path-connected. Together with step 2.1, this proves simple connectedness and completes both clauses.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L4",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use the explicit point $e_0$ and explicit radial paths, so every space under discussion is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies radial division only in $P_n$, where the origin has been removed; dimension zero is outside the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with dimension two, while the Statement expressly excludes dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At n=2 step 1.1 uses S1; at n=3 step 2.1 uses S2, so the boundary between the two conclusions is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The radial basepoint path in step 3.1 stays nonzero at both endpoints and throughout."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the given basepoint $x$ and the explicit path to $r(x)$; no arbitrary basepoint or path is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states dimension-dependent calculations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse dimension classification from an arbitrary fundamental group is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-plane-not-homeomorphic-to-other-euclidean-spaces": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 7 declared dependencies; 7 cited facts; 6 numbered proof steps; boundary-sensitive language; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-fundamental-groups-of-punctured-euclidean-spaces",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, put $P_n=\\mathbb R^n\\setminus\\{0\\}$ and let $e_0=(1,0,\\ldots,0)$.\n\n1. The punctured plane satisfies $\\pi_1(P_2,e_0)\\cong\\mathbb Z$.\n2. For every $n\\ge3$, the space $P_n$ is path-connected and $\\pi_1(P_n,x)$ is trivial for every $x\\in P_n$; hence $P_n$ is simply connected.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-r-is-not-homeomorphic-to-higher-dimensional-euclidean-space",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge2$, there is no homeomorphism $\\mathbb R\\to\\mathbb R^n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-homeomorphism-and-open-maps",
+          "source_section": "Definition",
+          "quote": "$f$ is a **homeomorphism** if $f$ is a continuous bijection whose inverse\n  $f^{-1} : Y \\to X$ is also continuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets and let $f : A \\to B$ be a function ([[def-function]]).\n\n- $f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$, for all\n  $x, y \\in A$.\n- $f$ is **surjective** (onto) if for every $b \\in B$ there is some $x \\in A$\n  with $f(x) = b$; equivalently, the image $f[A] := \\{ f(x) : x \\in A \\}$ equals\n  $B$.\n- $f$ is **bijective** if it is both injective and surjective.\n\nFor $S \\subseteq A$ we write $f[S] = \\{ f(x) : x \\in S \\}$ for the image of $S$,\nand for $T \\subseteq B$ we write $f^{-1}[T] = \\{ x \\in A : f(x) \\in T \\}$ for the\npreimage of $T$; these are the image and preimage of a set under $f$ read as a\nrelation ([[def-image-and-preimage-under-a-relation]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $n=0$, then $\\mathbb R^0$ is a singleton by [L4], while $0$ and $e_0$ are distinct points of $\\mathbb R^2$; hence no bijection, and therefore no homeomorphism, exists.",
+          "step": "1.1",
+          "inputs": [
+            "L4",
+            "F1",
+            "assume-case zero"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $n=1$, a homeomorphism $\\mathbb R^2\\to\\mathbb R$ would have an inverse homeomorphism $\\mathbb R\\to\\mathbb R^2$, contrary to [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "F1",
+            "assume-case one"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "It remains to treat $n\\ge3$. Suppose $h:\\mathbb R^2\\to\\mathbb R^n$ is a homeomorphism. Translating the target gives a homeomorphism $h_0(x)=h(x)-h(0)$ with $h_0(0)=0$; its value $y=h_0(e_0)$ is nonzero because $h_0$ is injective. Choose $j<n$ with $y_j\\ne0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "L4",
+            "L5",
+            "assume-case high"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $P$ permute coordinate $j$ into coordinate $0$, put $u=P(y)$, and define $A:\\mathbb R^n\\to\\mathbb R^n$ by $A(z)_0=z_0/u_0$ and $A(z)_k=z_k-(u_k/u_0)z_0$ for $1\\le k<n$. Its inverse is $A^{-1}(w)_0=u_0w_0$ and $A^{-1}(w)_k=w_k+u_kw_0$, so [L5] makes $A$ a homeomorphism fixing $0$ and carrying $u$ to $e_0$. Thus $g=A\\circ P\\circ h_0$ is a homeomorphism with $g(0)=0$ and $g(e_0)=e_0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "L5",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Restriction gives a pointed homeomorphism $(\\mathbb R^2\\setminus\\{0\\},e_0)\\to(\\mathbb R^n\\setminus\\{0\\},e_0)$, so [L3] gives an isomorphism of their fundamental groups. This contradicts [L1], because the source is isomorphic to the nontrivial group $\\mathbb Z$ and the target is trivial. Hence no homeomorphism exists when $n\\ge3$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $n\\ne2$, exactly one of $n=0$, $n=1$, or $n\\ge3$ holds, and steps 1.1, 1.2, and 3.1 exclude a homeomorphism in every case.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every R^n is nonempty, including the singleton R0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is the complete n=0 case and uses the empty-function convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is the complete n=1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 exhausts the hypothesis $n\\ne2$ by the cases $n=0$, $n=1$, and $n\\ge3$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs; removing the origin is handled explicitly in steps 2.1--3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a nonzero coordinate only after h(e0) is proved nonzero; the finite coordinate set is nonempty for n>=3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a family of nonexistence statements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or full invariance-of-dimension claim is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-hawaiian-earring-is-compact-and-path-connected": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 8 declared dependencies; 8 cited facts; boundary-sensitive language; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "Throughout, $I := [0,1] = \\{\\, t \\in \\mathbb{R} : 0 \\le t \\le 1 \\,\\}$\n([[def-interval]]) carries the subspace topology inherited from $\\mathbb{R}$ with\nits usual topology ([[def-subspace-topology-top]],\n[[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). It is called the **unit interval**.\n\nLet $X$ be a topological space ([[def-topological-space]]) and let\n$x, y \\in X$.\n\n- A **path in $X$ from $x$ to $y$** is a continuous map $\\gamma : I \\to X$\n  ([[def-continuous-map-top]]) with $\\gamma(0) = x$ and $\\gamma(1) = y$. Its\n  **image** is $\\gamma[I]$.\n- $X$ is **path-connected** when for every pair $x, y \\in X$ there is a path in\n  $X$ from $x$ to $y$. A subset $A \\subseteq X$ is a **path-connected subset**\n  when the space $A$ with its subspace topology is path-connected; equivalently,\n  when any two of its points are joined by a path whose image lies in $A$, by the\n  characteristic property of a map into a subspace\n  ([[def-subspace-topology-top]]).\n- Write $x \\sim y$ when a path in $X$ from $x$ to $y$ exists. The **path\n  component** of $x$ is its equivalence class\n  $$P(x) \\;:=\\; \\{\\, y \\in X : x \\sim y \\,\\} .$$\n- The empty space is path-connected, the defining condition quantifying over no\n  pair of points, and so is every one-point space, the constant path joining its\n  point to itself.\n\n**$\\sim$ is an equivalence relation on $X$, and the obligation is discharged\nhere**, so that \"equivalence class\" above denotes.\n\n*Reflexive.* The constant map $\\gamma(t) = x$ is continuous, every preimage being\n$\\varnothing$ or $I$ ([[def-continuous-map-top]]), and joins $x$ to $x$.\n\n*Symmetric.* If $\\gamma$ joins $x$ to $y$, put $\\bar\\gamma(t) := \\gamma(1-t)$.\nThe map $r : I \\to I$, $r(t) = 1 - t$, is continuous: for $s, t \\in I$ one has\n$|r(s) - r(t)| = |s - t|$, so a ball of radius $\\varepsilon$ around $r(t)$ pulls\nback to contain the ball of radius $\\varepsilon$ around $t$\n([[def-metric-ball]], [[def-metrizable-space]]). Hence\n$\\bar\\gamma = \\gamma \\circ r$ is continuous ([[lem-continuity-is-local-and-pastes]],\nclaim 1) and joins $y$ to $x$.\n\n*Transitive.* Let $\\gamma_1$ join $x$ to $y$ and $\\gamma_2$ join $y$ to $z$.\nDefine $\\delta : I \\to X$ by\n\n$$\\delta(t) \\;:=\\; \\begin{cases} \\gamma_1(2t), & 0 \\le t \\le 1/2, \\\\ \\gamma_2(2t - 1), & 1/2 \\le t \\le 1. \\end{cases}$$\n\nThe two clauses agree at $t = 1/2$, both giving $\\gamma_1(1) = y = \\gamma_2(0)$,\nso $\\delta$ is a well-defined function. The sets $[0,1/2]$ and $[1/2,1]$ are\nclosed in $I$ and cover it, and there are **two** of them, so the finite closed\nform of the pasting lemma applies ([[lem-continuity-is-local-and-pastes]],\nclaim 3). On $[0,1/2]$ the map $\\delta$ is $\\gamma_1 \\circ a_1$ with\n$a_1(t) = 2t$, and on $[1/2,1]$ it is $\\gamma_2 \\circ a_2$ with\n$a_2(t) = 2t - 1$; each $a_k$ is continuous into $I$, since\n$|a_k(s) - a_k(t)| = 2|s-t|$, so the ball of radius $\\varepsilon/2$ around $t$\nmaps into the ball of radius $\\varepsilon$ around $a_k(t)$\n([[def-metric-ball]], [[def-metrizable-space]],\n[[def-subspace-topology-top]]). So both restrictions are continuous by\n[[lem-continuity-is-local-and-pastes]] claim 1, hence $\\delta$ is continuous, and\nit joins $x$ to $z$.\n\n**The path components partition $X$**, being the classes of an equivalence\nrelation, and each is a path-connected subset of $X$: two points of $P(x)$ are\njoined to $x$, hence to each other by the transitivity construction above, and\nthe resulting path has image inside $P(x)$: if $\\delta$ is a path from $x$ and\n$s \\in I$, then $t \\mapsto \\delta(st)$ is a path from $x$ to $\\delta(s)$,\ncontinuous because $t \\mapsto st$ satisfies $|st_1 - st_2| \\le |t_1 - t_2|$ and\nis therefore continuous into $I$ by the ball criterion used above, so every point\nof the image is itself joined to $x$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "source_section": "Statement",
+          "quote": "$\\mathbb R/\\mathbb Z$ is compact and path-connected.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $C_n$ contains the origin because its centre has norm $1/n$, and its radius is positive because $n\\ge1$. Thus the displayed union is nonempty and no circle of radius $1/0$ occurs.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x\\in C_n$, then $\\lVert x\\rVert_2\\le\\lVert x-(1/n,0)\\rVert_2+1/n=2/n\\le2$, so $\\mathbb H$ is bounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Each $C_n$ is closed: if $x\\notin C_n$, then $\\eta=|\\lVert x-(1/n,0)\\rVert_2-1/n|/2>0$, and [L4] shows that the ball of radius $\\eta$ about $x$ misses $C_n$. Now let $x\\notin\\mathbb H$ and write $d=\\lVert x\\rVert_2>0$. By [L5], choose $N\\ge1$ with $2/N<d/2$. Every $C_n$ with $n\\ge N$ lies in the ball of radius $d/2$ about $0$, while the union of the circles with $1\\le n<N$ is a finite, possibly empty, closed union that misses $x$. Intersecting a neighbourhood of $x$ disjoint from that finite union with the ball of radius $d/2$ about $x$ gives a neighbourhood disjoint from all of $\\mathbb H$. Hence $\\mathbb H$ is closed.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 make $\\mathbb H$ closed and bounded in $\\mathbb R^2$, so it is compact by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The affine map $z\\mapsto(1/n,0)+(1/n)z$ carries the unit circle homeomorphically onto $C_n$, so [L2] and [L3] make each $C_n$ path-connected. Given $x\\in C_m$ and $y\\in C_n$, join $x$ to the common origin inside $C_m$ and then the origin to $y$ inside $C_n$; concatenating the paths gives a path in $\\mathbb H$. Thus $\\mathbb H$ is path-connected.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows that every $C_n$ contains the origin, so the union is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 starts at n=1, never forms 1/0, and includes the origin as a point rather than an index."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "C_1 is explicitly included and the bounds in steps 2.1--3.1 include it among the finite large circles."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 starts at $n=1$ and gives every circle the positive radius $1/n$, so no radius-zero circle is inserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the origin as the accumulation point in the closedness proof, and step 4.1 uses it as the common path junction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For a given x outside H, step 2.2 chooses an explicit tail threshold from |x| and then takes distance to a finite closed union."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition records properties of one explicit space, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Compact path-connected planar spaces are not characterized as Hawaiian earrings."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-radial-normalization-retracts-the-punctured-disk-but-not-the-disk": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-punctured-rn-deformation-retracts-onto-the-sphere",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, put $P=\\mathbb R^n\\setminus\\{0\\}$, and let $S^{n-1}\\subseteq P$ be the unit sphere. Radial normalisation\n\n$$r:P\\to S^{n-1},\\qquad r(x)=\\frac{x}{\\lVert x\\rVert_2},$$\n\nis a retraction, and\n\n$$H(x,t)=\\left((1-t)+\\frac{t}{\\lVert x\\rVert_2}\\right)x$$\n\nis a deformation retraction of $P$ onto $S^{n-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-no-retraction-of-the-closed-disk-onto-the-circle",
+          "source_section": "Statement",
+          "quote": "Write $D^2=\\overline B_2(0,1)\\subseteq\\mathbb R^2$ and $S^1=S_2(0,1)$ ([[def-euclidean-spheres-and-closed-balls]]). There is no continuous retraction from the closed unit disk $D^2$ onto the unit circle $S^1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Restricting the retraction in [L1] to $D^2\\setminus\\{0\\}$ gives a continuous map into $S^1$, and every $x\\in S^1$ satisfies $\\rho(x)=x$. Thus $\\rho$ retracts the punctured disk onto the unit circle.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a continuous extension $\\bar\\rho:D^2\\to S^1$ existed, it would still satisfy $\\bar\\rho(x)=x$ on $S^1$, so it would be a retraction, contrary to [L2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The failure at the missing point is also visible directly: for every $0<t\\le1$, $\\rho(t,0)=(1,0)$ while $\\rho(-t,0)=(-1,0)$. The two radial approaches to $0$ therefore have different constant images, so $\\rho$ has no limit at $0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes every point of the nonempty unit circle and exhibits a retraction onto it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 treat zero as the unique missing extension point and never evaluate radial normalization there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that every unit-circle point is fixed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses two distinct radial approaches whose images are opposite unit-circle points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 treat the unit circle and the missing central point separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both rays and the normalization are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contrasts two domains and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse extension criterion is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-cubic-polynomial-large-circle-loop-has-degree-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-polynomial-degree-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(Z)=\\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\\in\\mathbb C$ by\n$$\n0(z):=0,\\qquad p(z):=\\sum_{k<n+1}^{\\mathbb C}a_kz^k\\quad\\text{for }p=(a_0,\\ldots,a_n)\\ne0.\n$$\nwhere the latter is the initial-segment complex sum defined in\n[[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is\ndefined for the zero polynomial as well as every nonzero formal polynomial.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Complex arithmetic and powers are those of [[thm-complex-numbers-form-a-field]] and [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-large-radius-polynomial-circle-loop-has-degree",
+          "source_section": "Statement",
+          "quote": "Let $p(z)=z^n+\\sum_{j<n}a_jz^j$ be a monic complex polynomial of degree $n\\ge1$, and put $S=\\sum_{j<n}|a_j|$. If $R>\\max\\{1,S\\}$, then the based normalized circle loop\n\n$$\\alpha_R(u)=h^{-1}\\left(\\frac{p(Rh(u))/p(R)}{|p(Rh(u))/p(R)|}\\right),\\qquad u\\in\\mathbb R/\\mathbb Z,$$\n\nis well defined and has degree $n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coefficient list is $(2,-2,0,1)$, so $p$ is monic of degree $3$ and the lower-coefficient modulus sum is $2+2+0=4<5$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The hypotheses of [L1] hold with $n=3$ and $R=5$, so the normalized loop has degree $3$. Explicitly, on $|z|=5$ and for $0\\le s\\le1$, one has $|s(-2z+2)|\\le s(10+2)\\le12<125=|z^3|$, so the displayed homotopy never meets zero; its endpoints are $z^3$ and $z^3-2z+2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses one explicit polynomial and one nonempty circle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The missing z^2 coefficient is included as zero in the sum 0+2+2 in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The polynomial degree is fixed at three."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the homotopy endpoint $s=0$, where only the monomial $z^3$ remains."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the s=0 and s=1 homotopy endpoints and the based loop endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The polynomial and radius five are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a worked instance, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Degree three does not characterize this polynomial."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-orthogonal-projection-has-one-borsuk-ulam-pair": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 3 cited facts; boundary-sensitive language; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-borsuk-ulam-in-dimension-two",
+          "source_section": "Statement",
+          "quote": "For every continuous map $f:S^2\\to\\mathbb R^2$, there is an $x\\in S^2$ with $f(x)=f(-x)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both coordinate functions of $q$ are continuous, so $q$ is continuous by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $v=(x,y,z)\\in S^2$ satisfies $q(v)=q(-v)$, then $(x,y)=(-x,-y)$ and hence $x=y=0$. The unit-sphere equation gives $z^2=1$, so $v=(0,0,1)$ or $v=(0,0,-1)$. These are two points forming exactly one antipodal pair, and they do have equal image $(0,0)$, in agreement with [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly exhibits the north and south points of $S^2$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes the zero vector by unit norm after the first two coordinates vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The conclusion says one antipodal pair, and step 2.1 distinguishes that from its two constituent points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that the antipodal equality leaves exactly the north-south pair and no larger family."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The pair is computed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a specific map, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No characterization of projections is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-four-closed-sets-can-cover-s2-without-antipodal-pairs": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this critical item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 4 declared dependencies; 4 cited facts; boundary-sensitive language; analytic limiting/completeness language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-three-closed-sets-covering-s2-contain-an-antipodal-pair",
+          "source_section": "Statement",
+          "quote": "If three closed subsets $A_1,A_2,A_3$ cover $S^2$, then one of them contains a pair of antipodal points: there are $i\\in\\{1,2,3\\}$ and $x\\in S^2$ with $x,-x\\in A_i$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-spheres-and-closed-balls",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. Give $\\mathbb{R}^n$ its Euclidean norm $\\lVert\\cdot\\rVert_2$ and its induced Euclidean metric $d_2$ ([[lem-metrics-on-rn]], [[def-norm-and-normed-space]]). For $c \\in \\mathbb{R}^n$ and $r>0$, put\n\n$$\\overline B_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2\\le r\\},\\qquad S_2(c,r):=\\{x\\in\\mathbb{R}^n:\\lVert x-c\\rVert_2=r\\}.$$\n\nThese are respectively the **Euclidean closed ball** and **Euclidean sphere** with centre $c$ and radius $r$. They carry the subspace topology inherited from $\\mathbb{R}^n$ ([[def-subspace-topology-top]]). Since $d_2(c,x)=\\lVert x-c\\rVert_2$, they are precisely the closed ball and sphere $\\bar B(c,r)$ and $S(c,r)$ of the metric-space definition ([[def-metric-ball]]).\n\nFor the unit sphere centred at the origin write\n\n$$S^{n-1}:=S_2(0,1).$$\n\nThe exponent is notation for this particular sphere, not a claim that a dimension theory has been developed here.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-componentwise-limits-and-continuity",
+          "source_section": "Statement",
+          "quote": "1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $$v_1=\\frac{(1,1,1)}{\\sqrt3},\\quad v_2=\\frac{(1,-1,-1)}{\\sqrt3},\\quad v_3=\\frac{(-1,1,-1)}{\\sqrt3},\\quad v_4=\\frac{(-1,-1,1)}{\\sqrt3},$$ and for $1\\le i\\le4$ define $$A_i=\\{x\\in S^2:\\langle x,v_i\\rangle\\ge\\langle x,v_j\\rangle\\text{ for every }1\\le j\\le4\\}.$$ The vectors $v_i$ are the vertices of a regular tetrahedron centred at $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [L1], each $A_i$ is a finite intersection of sets defined by a continuous closed inequality $\\langle x,v_i-v_j\\rangle\\ge0$, hence is closed in $S^2$. For every $x\\in S^2$, the finite set of four real numbers $\\langle x,v_j\\rangle$ has a maximum, so $x$ belongs to at least one $A_i$. Thus $A_1,A_2,A_3,A_4$ cover $S^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $x,-x\\in A_i$. Then $\\langle x,v_i-v_j\\rangle\\ge0$ and $\\langle-x,v_i-v_j\\rangle\\ge0$ for every $j$, so all these inner products vanish. For $i=1$, the vectors $v_1-v_2$, $v_1-v_3$, and $v_1-v_4$ are scalar multiples of $(0,1,1)$, $(1,0,1)$, and $(1,1,0)$, whose determinant is $2\\ne0$; the other values of $i$ differ only by coordinate sign changes and permutations. Hence the three differences span $\\mathbb R^3$, forcing $x=0$, contrary to $x\\in S^2$. No $A_i$ contains an antipodal pair.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 give a closed four-set cover with no antipodal pair in any member, refuting the proposed extension and showing that the three-set conclusion [F1] cannot be enlarged in this way.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F1",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The four Voronoi regions cover S2 in step 2.1, so the family and union are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 derives x=0 and rejects it using unit norm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns four cover members, not an indexed boundary at one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The explicit tetrahedral vertices are distinct in step 1.1, and step 2.2 verifies that their relevant differences span R3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a maximum of four explicit real values; a maximizing index exists in this finite set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to extending a three-set theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of tetrahedral covers is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hawaiian-earring-retracts-onto-each-circle": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 6 declared dependencies; 6 cited facts; boundary-sensitive language. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-hawaiian-earring-is-compact-and-path-connected",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge1$, let $C_n$ be the circle of radius $1/n$ centred at $(1/n,0)$, and put\n\n$$\\mathbb H=\\bigcup_{n\\ge1}C_n\\subseteq\\mathbb R^2.$$\n\nThe Hawaiian earring $\\mathbb H$ is compact and path-connected.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-retraction-and-deformation-retract",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq X$ carry the subspace topology, and let $i:A\\hookrightarrow X$ be the inclusion ([[def-subspace-topology-top]]).\n\nA continuous map $r:X\\to A$ is a **retraction of $X$ onto $A$** if\n\n$$r\\circ i=\\operatorname{id}_A,$$\n\nequivalently, if $r(a)=a$ for every $a\\in A$. When such an $r$ exists, $A$ is a **retract** of $X$.\n\nThe subspace $A$ is a **deformation retract** of $X$ if there are a retraction $r:X\\to A$ and a homotopy\n\n$$H:\\operatorname{id}_X\\simeq_A i\\circ r.$$\n\nThus $H(x,0)=x$, $H(x,1)=i(r(x))$, and $H(a,t)=a$ for all $a\\in A$ and $t\\in I$ ([[def-homotopy-relative-and-path-homotopy]]). The pair $(r,H)$ is a **deformation retraction**.\n\nSome sources call the pointwise-fixed condition a *strong deformation retract*. In this library the word *deformation retract* always includes it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-continuity-characterisations-top",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces, let\n$f : X \\to Y$ be a function, and let $\\mathcal{S}$ be a subbasis for\n$\\mathcal{T}_Y$ ([[def-topology-basis-subbasis]]). The following five conditions\nare equivalent.\n\n- **(a)** $f$ is continuous at every point of $X$ ([[def-continuous-map-top]]).\n- **(b)** $f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.\n- **(c)** $f^{-1}[F]$ is closed in $X$ for every closed $F \\subseteq Y$.\n- **(d)** $f^{-1}[S]$ is open in $X$ for every $S \\in \\mathcal{S}$.\n- **(e)** $f[\\overline{A}] \\subseteq \\overline{f[A]}$ for every $A \\subseteq X$,\n  closures being taken in $X$ and in $Y$ respectively\n  ([[def-interior-closure-boundary-top]]).\n\nCondition (d) is what makes continuity checkable against a generating family\nrather than against every open set, and it holds for a *basis* as well, a basis\nbeing in particular a subbasis for the topology it generates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "source_section": "Statement",
+          "quote": "1. **Finite and reverse triangle inequalities.** Let $V$ be a vector space over\n   $\\mathbb{R}$ and $N$ a norm on it ([[def-norm-and-normed-space]]). For every\n   $p \\in \\mathbb{N}$ and every list $u : p \\to V$\n   ([[def-linear-combination-and-span]]),\n   $$N\\Bigl(\\sum_{j<p} u_j\\Bigr) \\;\\le\\; \\sum_{j<p} N(u_j),$$\n   and for all $u, w \\in V$,\n   $$\\bigl|N(u) - N(w)\\bigr| \\;\\le\\; N(u - w).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $r_n:\\mathbb H\\to C_n$ by $r_n(x)=x$ for $x\\in C_n$ and $r_n(x)=0$ for $x\\in C_m$ with $m\\ne n$. Distinct circles meet only at $0$: subtracting their equations $x_1^2+x_2^2=2x_1/m$ and $x_1^2+x_2^2=2x_1/k$ gives $x_1=x_2=0$. Thus the clauses agree and define a function.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $x\\in C_m\\setminus\\{0\\}$ and put $d=\\lVert x\\rVert_2>0$. By [L2], choose $N$ with $2/N<d/2$; then every $C_k$ with $k\\ge N$ lies in $B(0,d/2)$ and is disjoint from $B(x,d/2)$. For each of the finitely many $k<N$ with $k\\ne m$, the positive number $|\\lVert x-(1/k,0)\\rVert_2-1/k|$ and [L3] give a ball about $x$ missing $C_k$; intersect these finitely many balls with $B(x,d/2)$. The resulting relative neighbourhood in $\\mathbb H$ meets only $C_m$, so there $r_n$ is the identity when $m=n$ and the constant map $0$ when $m\\ne n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $V\\subseteq C_n$ be open and let $x\\in r_n^{-1}[V]$. If $x\\ne0$ and $x\\in C_m$, step 2.1 gives a relative open neighbourhood $N$ of $x$ meeting only $C_m$. When $m=n$, write $V=O\\cap C_n$ by [F3] and replace $N$ by $N\\cap O$; the identity clause of $r_n$ then maps it into $V$. When $m\\ne n$, one has $r_n(x)=0\\in V$ and the constant clause maps all of $N$ into $V$. If $x=0$, then $0\\in V$; write $V=O\\cap C_n$ and choose an ambient open neighbourhood $W$ of $0$ with $W\\subseteq O$. Every point of $W\\cap C_n$ is fixed and every point of $W\\cap C_m$ for $m\\ne n$ maps to $0$, so $W\\cap\\mathbb H\\subseteq r_n^{-1}[V]$. Thus every point of $r_n^{-1}[V]$ has a relative open neighbourhood inside it, making that preimage open. The criterion [L1] now shows that $r_n$ is continuous.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The continuous map $r_n$ restricts to the identity on $C_n$, so it is a retraction of $\\mathbb H$ onto $C_n$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes an index $n\\ge1$ and defines a map onto the nonempty circle $C_n$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The origin is the unique common point and is the entire continuity obligation of step 3.1; no circle C_0 is defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes $n=1$ without changing the construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 collapses every nonselected circle to the origin while fixing the selected circle pointwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shared origin, the only accumulation seam of circle branches, is checked separately in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For each given n the map is defined by a deterministic case split."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example constructs retractions and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of Hawaiian-earring circles is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-compact-path-connected-planar-set-has-a-universal-cover": {
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-b (GPT 5.6 Sol)",
+        "notes": "Alpha-b adjudicated the full read-only /root/refute_batch7 trace for this high item: every numbered step, cited clause, and applicable boundary was checked, with focused attention to 10 declared dependencies; 10 cited facts. B7-F1–B7-F2 were repaired where applicable; no unresolved defect remains on this item."
+      },
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-hawaiian-earring-is-compact-and-path-connected",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge1$, let $C_n$ be the circle of radius $1/n$ centred at $(1/n,0)$, and put\n\n$$\\mathbb H=\\bigcup_{n\\ge1}C_n\\subseteq\\mathbb R^2.$$\n\nThe Hawaiian earring $\\mathbb H$ is compact and path-connected.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-hawaiian-earring-retracts-onto-each-circle",
+          "source_section": "Example",
+          "quote": "For every $n\\ge1$, the Hawaiian earring admits a retraction onto its circle $C_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-semilocally-simply-connected-space",
+          "source_section": "Definition",
+          "quote": "A space $X$ is **semilocally simply connected at $x\\in X$** when there is a neighbourhood $U$ of $x$ and a basepoint-preserving inclusion $(U,x)\\hookrightarrow(X,x)$ whose induced map on fundamental groups is trivial",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-universal-covering-spaces-force-semilocal-simple-connectedness",
+          "source_section": "Statement",
+          "quote": "If a space admits a universal covering, then it is semilocally simply connected.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-geometric-unit-circle-has-fundamental-group-z",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ with basepoint $(1,0)$. Then\n\n$$\\pi_1(C,(1,0))\\cong(\\mathbb Z,+).$$\n\nUnder this isomorphism, the loop\n\n$$t\\longmapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$$\n\ncorresponds to $n$ for every $n\\in\\mathbb Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-neighbourhood-top",
+          "source_section": "Definition",
+          "quote": "A set $N \\subseteq X$ is a **neighbourhood of $x$** if there is an open\n$U \\in \\mathcal{T}$ with $x \\in U \\subseteq N$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\mathbb H$ satisfies the compactness and path-connectedness hypotheses of the proposed statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $U$ be any neighbourhood of $0$ in $\\mathbb H$. By [F4], there is an ambient open set $O\\subseteq\\mathbb R^2$ with $0\\in O$ and $O\\cap\\mathbb H\\subseteq U$. By [F5], choose $\\varepsilon>0$ with $B(0,\\varepsilon)\\subseteq O$, so $\\mathbb H\\cap B(0,\\varepsilon)\\subseteq U$. Since $C_n\\subseteq\\overline B_2(0,2/n)$, [L4] gives an $n\\ge1$ with $C_n\\subseteq U$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $j:C_n\\hookrightarrow\\mathbb H$ be inclusion and $r_n:\\mathbb H\\to C_n$ the retraction of [F2]. Functoriality gives $(r_n)_*\\circ j_*=\\operatorname{id}$, so $j_*$ is injective. The pointed affine homeomorphism $z\\mapsto(1/n,0)-(1/n)z$ carries the geometric unit circle based at $(1,0)$ onto $C_n$ based at $0$ and carries the once-around loop of [L2] to a loop $\\ell_n$ in $C_n$. By [L2] and [L3], $[\\ell_n]\\ne1$ in $\\pi_1(C_n,0)$; injectivity of $j_*$ therefore makes its image nontrivial in $\\pi_1(\\mathbb H,0)$. Since $C_n\\subseteq U$, the same $\\ell_n$ is a loop in $U$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since every neighbourhood $U$ of $0$ contains such a loop, no inclusion-induced map $\\pi_1(U,0)\\to\\pi_1(\\mathbb H,0)$ is trivial. Thus $\\mathbb H$ is not semilocally simply connected at $0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L1], the Hawaiian earring has no universal cover. Together with step 1.1, it is a compact path-connected planar counterexample to the proposed universal claim.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "H contains the origin and is path-connected; every neighbourhood considered in step 1.2 contains the origin."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the origin as basepoint while keeping every circle index at $n\\ge1$, so no reciprocal of zero occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "C_1 is part of H, though step 1.2 may select a larger n to fit a small neighbourhood."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample satisfies both stated hypotheses; failure is specifically semilocal simple connectedness, not disconnectedness or noncompactness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The loop endpoints are the common origin and the inclusion and retraction preserve that basepoint in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given U, step 1.2 chooses one contained metric ball and one tail threshold, both locally for that U; no global selection over neighbourhoods is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is universally quantified and refuted by one witness; no biconditional is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No characterization of universal-cover existence among compact planar sets is asserted."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

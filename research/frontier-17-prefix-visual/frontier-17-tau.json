@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "run": "frontier-17",
+  "repairer": "Tau",
+  "sigma_receipt": "research/frontier-17-sigma-initial.json",
+  "findings": [
+    {
+      "finding_id": "S-001",
+      "disposition": "repaired",
+      "source_file": "items/lem-transitive-subgroups-of-s-four-and-the-resolvent-action.md",
+      "description": "Statement table header cell `$|H\\cap V_4|$` carried two bare `|`, so remark-gfm counted six header cells against a four-cell delimiter row, rejected the block and emitted the raw pipes as a paragraph. Replaced the two bare delimiters with `\\lvert`/`\\rvert`, which render identically. Every header, row, column and value is unchanged; the delimiter row and alignment are unchanged. Verified through the app's own remark-gfm/remark-math/rehype-katex pipeline: the block now emits one <table> with 4 <th> and 20 <td> and no katex-error, and a headless render shows all four columns and all five rows.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-002",
+      "disposition": "blocked",
+      "source_file": "items/prop-two-classical-counterexamples-in-polar-coordinates.md",
+      "description": "Not repaired. Confirmed Sigma's reading of the capture: the display `\\frac{xy}{x^2+y^2}` paints its numerator down at the fraction rule, on top of the denominator, while `\\frac12` on the same line paints correctly. The source LaTeX is correct and no source spelling avoids it. Independently rendered the identical TeX with the app's KaTeX 0.18.1 and katex.min.css in the same headless Edge build used for the capture: it renders as a correct fraction, so the defect is in the CSS environment of the app's library route, not in this file. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-003",
+      "disposition": "blocked",
+      "source_file": "items/ex-xy-sine-one-over-radius-squared-has-unbounded-partial-derivatives.md",
+      "description": "Not repaired. Same app-side fraction failure as S-002, on the item's defining display `xy\\sin\\!\\left(\\frac1{x^2+y^2}\\right)`. The same TeX renders correctly in the standalone KaTeX 0.18.1 + katex.min.css probe in the capture browser, so there is no source defect to repair. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-004",
+      "disposition": "blocked",
+      "source_file": "items/prop-two-classical-counterexamples-in-polar-coordinates.md",
+      "description": "Not repaired. `\\ne` paints as a detached `/=` and `\\notin` as `\\in/` throughout the run. Sigma is right that no source spelling avoids it: `\\ne`, `\\neq` and `\\not=` are one macro in KaTeX 0.18.1, and a literal U+2260 would be a mathematics-bearing edit across hundreds of corpus lines. The standalone probe renders `\\cos\\theta\\ne0` and `x\\notin A` as correct single glyphs, so the overlay failure is app-side. Also reproduced on the LIVE published site, on already-published legacy content. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-005",
+      "disposition": "blocked",
+      "source_file": "items/cex-circular-curve-defeats-vector-valued-mean-value-equality.md",
+      "description": "Not repaired. `\\lVert f'(t)\\rVert_2` paints its subscript full-size on the baseline, so a reader sees a norm multiplied by 2. The standalone probe renders the same TeX with a correct small lowered subscript, so the source is right and the fault is app-side. Reproduced on the LIVE published site (`\\|q-p\\|_2` on library/real-analysis/line-integrals-and-the-gradient-theorem-examples renders as `||q-p||2`), so this is a corpus-wide production defect, not a capture artefact and not specific to frontier-17. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-006",
+      "disposition": "blocked",
+      "source_file": "items/ex-sphere-as-a-regular-level-set.md",
+      "description": "Not repaired. Paired scripts (`\\|x\\|_2^2`, `S_R^{m-1}`) paint as an overlapping cluster. The standalone probe renders both correctly in the capture browser, so the LaTeX is standard and correct and the script-positioning failure is app-side, the same class as S-005. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-007",
+      "disposition": "blocked",
+      "source_file": "items/ex-s-three-galois-correspondence-for-x-cubed-minus-two.md",
+      "description": "Not repaired. The correspondence table is well formed GFM and parses; it renders with no cell padding, so `<r> = A_3` abuts `Q(omega)`. Confirmed the table is structurally sound by rendering it through the app pipeline. Supplying table styling is an app-repo change under the frozen presentation spec, and rewriting the table as prose or a list would restructure the item. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-008",
+      "disposition": "blocked",
+      "source_file": "items/ex-abelian-groups-of-order-three-hundred-sixty-in-both-canonical-forms.md",
+      "description": "Not repaired. Same missing cell padding as S-007, and on the widest row it manufactures the false reading `Z/5Z` where the elementary-divisor and invariant-factor columns part. The source table is well formed; the fix is table styling in the app repo. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-009",
+      "disposition": "blocked",
+      "source_file": "items/cex-circular-curve-defeats-vector-valued-mean-value-equality.md",
+      "description": "Not repaired. Inline math wraps mid-atom, detaching a base from its script and rendering `\\lVert f'(t)\\rVert_2=1` as a line ending in the norm followed by a line opening `2 = 1`. KaTeX's own `.base { white-space: nowrap }` prevents this when katex.min.css applies, which the standalone probe confirms; the app's library route is not getting that rule. Inserting non-breaking markup or rephrasing the affected sentences would be a content edit across most items in the run and would not address the cause. Content left intact.",
+      "content_removed": false
+    },
+    {
+      "finding_id": "S-010",
+      "disposition": "repaired",
+      "source_file": "items/fs-spherical-coordinates-are-globally-injective.md",
+      "description": "Proof step 2.1 carried the 3x3 Jacobian as inline math, so the step paragraph wrapped it and drew columns two and three outside the delimiters. Moved the identical matrix into a `$$` display block immediately after the step, following the corpus pattern (for example items/cor-multivariable-taylor-formula-with-peano-remainder.md step 1.1), with the step text ending 'gives the following.' and its unchanged `[step 1.3, L1, L5, algebra]` tag. Every entry, the step number, the citation tag and step 3.1's reference to 'the determinant in step 2.1' are unchanged. A headless render at the step column width shows the matrix whole inside its parentheses; precheck passes.",
+      "content_removed": false
+    }
+  ],
+  "changed_files": [
+    "items/fs-spherical-coordinates-are-globally-injective.md",
+    "items/lem-transitive-subgroups-of-s-four-and-the-resolvent-action.md"
+  ],
+  "summary": "Two of Sigma's ten findings were genuine source defects and are repaired: S-001, the Galois lemma whose GFM table was emitted as raw pipes because a header cell held bare `|` inside math (now `\\lvert`/`\\rvert`), and S-010, a 3x3 Jacobian carried as inline math that wrapped outside its own delimiters (now a display block). Both were re-rendered through the app's own remark-gfm/remark-math/rehype-katex pipeline and screenshotted in the capture browser; precheck, depcheck, fwdcheck, extcheck, rendercheck, prosecheck and depsource all pass repo-wide (4924 items checked, 0 failing). The other eight findings are BLOCKED, not fixed. I did not take Sigma's renderer-side diagnosis on trust: I rendered the exact TeX of S-002, S-003, S-004, S-005 and S-006 with the app's KaTeX 0.18.1 and its own katex.min.css in the same headless Edge build that produced the captures, and every construct renders correctly, so the LaTeX and the Markdown in these files are right and there is nothing here to repair. Two findings go further than Sigma's receipt and the owner should read them as such. First, this is NOT a capture artefact: S-004 and S-005 reproduce on the LIVE production site (alphabetamath.cc) on already-published legacy content, so the published library is rendering `!=` as a detached `/=` and `||q-p||_2` as `||q-p||2` for readers right now. Second, it is new: frontier-16's Sigma reviewed 22 captures on 2026-08-21 at app HEAD f7613cb and approved with zero findings, while frontier-17 captured on 2026-08-23 at app HEAD 4882f89; the only dependency movement in that window is next 16.2.9 -> 16.2.12 (katex stayed 0.18.1), and the symptom set — collapsed `\\frac` vlists, a detached `\\not` overlay, subscripts painted full-size on the baseline, overlapping paired scripts, unstyled tables, and inline math wrapping mid-atom — is what you get when katex.min.css loses the cascade on the library route. That is an app-repo defect affecting the whole corpus, not a frontier-17 content defect, and it is outside Tau's authority and outside this repository. No mathematical content was removed, weakened or restyled, and no status was changed."
+}

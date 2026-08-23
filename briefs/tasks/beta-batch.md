@@ -29,14 +29,22 @@ notes and carry on with the spec; stage 1's `drift` unit adjudicates it, and
 resolving it inside a batch is how two batches end up built against two
 different plans.
 
-## Gates you must leave green for your batch
+## Checks before you return
 
 ```
 node tools/coverage-checklist.mjs research/{{run}}-batch-<i>.coverage.json
-node tools/content-policy.mjs --manifest-only research/{{run}}-batch-<i>.pages.json
+node tools/content-policy.mjs --manifest-only research/{{run}}-batch-*.pages.json
 node tools/validate-plan.mjs research/plan-spec.json
 node tools/url-sweep.mjs --coverage research/{{run}}-batch-<i>.coverage.json --recover --fail-on-dead
 ```
+
+The policy check is deliberately whole-run: a dependency on an earlier page in
+another live batch is legal planned content, and every manifest must be present
+for the target to resolve. It still checks the two-pair capacity separately for
+each batch. Because Betas run concurrently, another batch may still be filling
+its manifest when you execute it; record that provisional result without
+weakening or duplicating a mathematically necessary edge. The engine reruns the
+same whole-run check after all scaffold lanes drain.
 
 On a dead source URL, **recover before re-sourcing**: `--recover` queries the
 Wayback index under every host variant, because a document moved behind a new

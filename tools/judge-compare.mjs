@@ -24,8 +24,9 @@ const JUDGE_LINEUPS = Object.freeze({
   // the one tool that could not read the run it reports on.
   "deepseek+sonnet": ["deepseek-v4-pro", "claude-sonnet-5"],
   "deepseek+terra": ["deepseek-v4-pro", "gpt-5.6-terra"],
+  "deepseek+opus": ["deepseek-v4-pro", "claude-opus-5[1m]"],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
 const models = JUDGE_LINEUPS[lineupName];
 if (!models) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);
@@ -174,7 +175,7 @@ if (adjudicationsPath) {
     }
     const key = candidateKey(row);
     if (!rejectionCandidates.has(key)) {
-      console.error(`${adjudicationsPath}:${index + 1}: does not match a DeepSeek/Terra rejection in ${ledger}`);
+      console.error(`${adjudicationsPath}:${index + 1}: does not match a ${PRIMARY}/${SECOND} rejection in ${ledger}`);
       process.exit(2);
     }
     // The final owner decision for a candidate is its last ledger entry.

@@ -1,0 +1,19 @@
+{
+  "role": "alpha",
+  "label": "step10-contract-repair",
+  "run": "frontier-17",
+  "covers": [],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T13:50:08.379Z",
+  "ended_at": "2026-08-23T13:57:14.490Z",
+  "ms": 426111,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-step10-contract-repair.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-step10-contract-repair.prompt.md",
+  "tail": "Both repairs landed. Report at `research/frontier-17-alpha-step10-contract-repair.md`.\n\n**Repair 1 — S-002, `thm-the-contravariant-power-set-functor-is-monadic`.** Joined step 1.4's three blocks (blank lines → spaces, nothing else), adopted precheck's canonical stratification `1.4→2.1, 2.1→3.1, 3.1→4.1`, and renumbered the batch-9 contract in the same act. The renumbering is honest: step 1.4 is the only step citing a phase-1 step, so it alone moves and its two consumers shift behind it.\n\nOne thing precheck's auto-repair does not do: it rewrites `step N.M` but not the list form, so it left step 4.1's prose reading \"steps 1.1, 1.2, and 2.1 give the left adjoint, conservativity, and preservation hypotheses\" — which after renumbering names the pullback step where the preservation step is meant. Corrected by hand to \"3.1\". Also found and fixed a related casualty: the contract's `step-2-1` claim had been **truncated at \"Hence [L3] gives\"** by the same fragmentation, so the contract's record of what the step claims was itself incomplete; it now carries the whole step.\n\n**Repair 2 — quartic/resolvent quote desync.** Updated the recorded L1 quote in batch-3 to the lemma's current `\\lvert…\\rvert` spelling. Checked first as instructed: the consuming item's own `[L1]` line restates the lemma's first sentence and never carried the table row, so no citation-fidelity repair on the item; a repo-wide grep confirms no item file carries the old spelling. Lemma not changed back.\n\n**Gates:** precheck (both items) 0 failing · `proof-contract --strict` **11 errors → 0**, 384/384 · depcheck, rendercheck, citation-fidelity, boundary-audit, finite-smoke all exit 0.\n\n**`visual-repair check` is still red, and I did not clear it.** All three content-side problems are gone (S-002 reconciled to `repaired`, `changed_files` now equals observed changes). What remains are three untracked files this dispatch itself created — its task file, its prompt, and this report — written at 23:50 against a 23:36 Tau baseline. They are controller artifacts of a later stage, exactly like the three already exempted at `tools/visual-repair.mjs:127`; the exemption just doesn't name a hand-started adjudicator, because `10-tau-guard-v2` has no `onGateFailure` route. Widening that allowlist is outside this dispatch's scope and is the wrong shape of fix for me to make unilaterally.\n\nTwo consequences: `research/frontier-17-tau-rejudge-targets.json` has never been written (`check` writes it only on success), so `visual-repair verify` can't run either and the step-10 close chain stays held. Re-baselining is not an option — it would snapshot after the content edits and void the guard.\n\n**Rejudge owed:** `thm-the-contravariant-power-set-functor-is-monadic`, new normalized `item_sha256` `f8dc34fd…d768e945`. Nothing stamped; the item had no `verification.judge` block to delete, but its five existing rows in `frontier-17-judge.jsonl` are now stale."
+}

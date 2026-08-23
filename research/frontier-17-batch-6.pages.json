@@ -1,0 +1,322 @@
+[
+  {
+    "order": 288.005,
+    "id": "outer-measure-and-the-caratheodory-extension-theorem",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Outer Measure and the Caratheodory Extension Theorem",
+    "companion": "outer-measure-and-the-caratheodory-extension-theorem-examples",
+    "requires": [
+      "measures-and-their-basic-properties-examples"
+    ],
+    "items": [
+      {
+        "id": "def-outer-measure",
+        "kind": "definition",
+        "title": "Outer measures",
+        "deps": ["def-extended-reals", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "def-caratheodory-measurable-set",
+        "kind": "definition",
+        "title": "Carathéodory measurable sets",
+        "deps": ["def-outer-measure"]
+      },
+      {
+        "id": "rem-caratheodory-measurability-versus-differentiability",
+        "kind": "remark",
+        "title": "Carathéodory measurability is not Carathéodory's differentiability criterion",
+        "deps": ["def-caratheodory-measurable-set", "thm-caratheodory-characterisation"]
+      },
+      {
+        "id": "lem-caratheodory-subadditive-inequality-is-automatic",
+        "kind": "lemma",
+        "title": "In the Carathéodory identity, the subadditive inequality is automatic",
+        "strategy": "For arbitrary subsets $A,E\\subseteq X$, write $A=(A\\cap E)\\cup(A\\setminus E)$ and apply countable subadditivity with all later terms empty. Thus only the reverse inequality must be proved when checking Carathéodory measurability; include $A=\\varnothing$ and infinite outer values without cancellation.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set"]
+      },
+      {
+        "id": "prop-caratheodory-measurable-sets-form-an-algebra",
+        "kind": "proposition",
+        "title": "Carathéodory measurable sets form an algebra",
+        "strategy": "Show that $\\varnothing$ is measurable and that measurability is symmetric under complements. For $E,F$ measurable, split a test set into the four cells cut out by $E$ and $F$; regroup three cells into the part inside $E\\cup F$, use subadditivity only in the safe direction, and invoke the automatic-inequality lemma for equality. No subtraction is used, so infinite values cause no gap.",
+        "deps": ["def-caratheodory-measurable-set", "lem-caratheodory-subadditive-inequality-is-automatic", "def-algebra-of-subsets"]
+      },
+      {
+        "id": "lem-finite-caratheodory-splitting",
+        "kind": "lemma",
+        "title": "Outer measure splits exactly over finite Carathéodory-measurable partitions",
+        "strategy": "Induct on $n\\in\\mathbb N$. The empty partition gives zero, and the successor step applies the Carathéodory identity for the new piece to the part of the test set inside the preceding finite union. Pairwise disjointness identifies the new cell and preserves the remainder. State the formula for every test set, including $n=0$ and infinite outer measure.",
+        "deps": ["def-caratheodory-measurable-set", "prop-caratheodory-measurable-sets-form-an-algebra", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "thm-countable-disjoint-caratheodory-splitting",
+        "kind": "theorem",
+        "title": "Countable disjoint unions of Carathéodory measurable sets are measurable and split every test set",
+        "strategy": "For disjoint measurable $E_k$ and a test set $A$, apply finite splitting to the first $n$ pieces and retain the remainder $A\\setminus\\bigcup_kE_k$. Let $n$ increase to obtain a lower bound by the nonnegative series, while countable subadditivity bounds $\\mu^*(A\\cap\\bigcup_kE_k)$ by that series. The two inequalities give both measurability and $\\mu^*(A\\cap\\bigcup_kE_k)=\\sum_k\\mu^*(A\\cap E_k)$, including infinite sums.",
+        "deps": ["lem-finite-caratheodory-splitting", "lem-caratheodory-subadditive-inequality-is-automatic", "def-outer-measure", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "prop-outer-null-sets-are-caratheodory-measurable",
+        "kind": "proposition",
+        "title": "Every outer-null set is Carathéodory measurable",
+        "strategy": "If $\\mu^*(N)=0$, monotonicity gives $\\mu^*(A\\cap N)=0$ and $A\\setminus N\\subseteq A$ gives the reverse inequality needed for the Carathéodory identity. Combine it with the automatic inequality. The argument also proves every subset of $N$ is outer-null and measurable.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set", "lem-caratheodory-subadditive-inequality-is-automatic"]
+      },
+      {
+        "id": "thm-caratheodory-outer-measure-theorem",
+        "kind": "theorem",
+        "title": "Carathéodory's theorem: measurable sets form a sigma-algebra carrying a complete measure",
+        "strategy": "The algebra proposition and closure under countable disjoint unions make the Carathéodory family a sigma-algebra. Countable splitting with the test set equal to the union gives countable additivity of the restriction. The outer-null proposition shows that every subset of every null measurable set lies in the domain, so the restricted measure is complete.",
+        "deps": ["prop-caratheodory-measurable-sets-form-an-algebra", "thm-countable-disjoint-caratheodory-splitting", "prop-outer-null-sets-are-caratheodory-measurable", "lem-algebra-with-countable-disjoint-unions-is-sigma", "def-measure", "def-complete-measure-space"]
+      },
+      {
+        "id": "fs-every-subset-is-caratheodory-measurable",
+        "kind": "false-statement",
+        "title": "FALSE: every subset is Carathéodory measurable for every outer measure",
+        "strategy": "On a two-point set define $\\mu^*(\\varnothing)=0$ and $\\mu^*(A)=1$ for every nonempty $A$. Verify the outer-measure axioms. A singleton fails the Carathéodory test against the whole space because the proposed split reads $1=1+1$.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set"]
+      },
+      {
+        "id": "fs-outer-measures-are-countably-additive-on-power-sets",
+        "kind": "false-statement",
+        "title": "FALSE: every outer measure is countably additive on the whole power set",
+        "strategy": "Use the same zero-one outer measure on a two-point set, but verify it independently. The two singleton sets are disjoint, their union has outer measure one, and their individual outer measures sum to two. This isolates failure of additivity from the domain issue.",
+        "deps": ["def-outer-measure"]
+      },
+      {
+        "id": "def-regular-outer-measure-and-measurable-hull",
+        "kind": "definition",
+        "title": "Measurable hulls and regular outer measures",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set"]
+      },
+      {
+        "id": "thm-regular-outer-measures-are-continuous-from-below",
+        "kind": "theorem",
+        "title": "Assuming countable choice, regular outer measures are continuous from below on all subsets",
+        "strategy": "For $E_n\\uparrow E$, the infinite-value case is immediate. Otherwise use countable choice to select measurable hulls $H_n\\supseteq E_n$ with equal outer measure. Put $G_n=\\bigcap_{k\\ge n}H_k$; then $G_n$ is an increasing measurable hull of $E_n$. Apply continuity from below to the restricted Carathéodory measure on $\\bigcup_nG_n$, use $E\\subseteq\\bigcup_nG_n$, and combine with monotonicity. Tail intersections avoid the false inference that $H_n\\setminus E_n$ is null for nonmeasurable $E_n$.",
+        "deps": ["def-regular-outer-measure-and-measurable-hull", "thm-caratheodory-outer-measure-theorem", "thm-continuity-from-below-for-measures", "def-countable-choice"]
+      },
+      {
+        "id": "thm-covering-cost-construction-produces-an-outer-measure",
+        "kind": "theorem",
+        "title": "Assuming countable choice, countable covering costs define an outer measure",
+        "strategy": "Let $\\mathcal C\\subseteq\\mathcal P(X)$ contain $\\varnothing$ and $X$, let $p:\\mathcal C\\to[0,+\\infty]$ satisfy $p(\\varnothing)=0$, and define outer cost by the infimum over countable $\\mathcal C$-covers. Empty-set and monotonicity are immediate. For countable subadditivity, if every term has finite outer cost, countable choice selects for the $j$th set a cover within $\\varepsilon2^{-(j+1)}$; flatten the double cover and use Tonelli. If one term has infinite cost, the inequality is automatic.",
+        "deps": ["def-outer-measure", "def-nonnegative-extended-series", "thm-tonelli-for-nonnegative-double-series", "lem-extended-reals-complete", "def-countable-choice"]
+      },
+      {
+        "id": "def-premeasure-on-an-algebra",
+        "kind": "definition",
+        "title": "Premeasures on algebras of sets",
+        "deps": ["def-algebra-of-subsets", "def-extended-reals", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "def-outer-measure-induced-by-a-premeasure",
+        "kind": "definition",
+        "title": "The outer set function induced by a premeasure",
+        "deps": ["def-premeasure-on-an-algebra", "lem-extended-reals-complete"]
+      },
+      {
+        "id": "cor-premeasure-induced-set-function-is-an-outer-measure",
+        "kind": "corollary",
+        "title": "Assuming countable choice, the outer set function induced by a premeasure is an outer measure",
+        "strategy": "Apply the covering-cost theorem with $\\mathcal C=\\mathcal A_0$ and $p=\\mu_0$. An algebra contains $\\varnothing$ and $X$, and the premeasure has value zero at the empty set, so every hypothesis is available verbatim.",
+        "deps": ["def-outer-measure-induced-by-a-premeasure", "thm-covering-cost-construction-produces-an-outer-measure", "def-algebra-of-subsets", "def-countable-choice"]
+      },
+      {
+        "id": "lem-disjointification-of-an-algebra-cover",
+        "kind": "lemma",
+        "title": "A countable algebra cover disjointifies inside the covered algebra set",
+        "strategy": "For $A,A_k\\in\\mathcal A_0$ with $A\\subseteq\\bigcup_kA_k$, put $B_k=A\\cap(A_k\\setminus\\bigcup_{j<k}A_j)$. Algebra closure puts every $B_k$ in $\\mathcal A_0$; the least index at which a point is covered proves that the $B_k$ are pairwise disjoint with union $A$, and $B_k\\subseteq A_k$. Treat $k=0$ with the empty preceding union.",
+        "deps": ["def-algebra-of-subsets"]
+      },
+      {
+        "id": "lem-induced-outer-measure-agrees-with-premeasure",
+        "kind": "lemma",
+        "title": "The induced outer measure agrees with the premeasure on the source algebra",
+        "strategy": "For $A\\in\\mathcal A_0$, the one-set cover gives $\\mu^*(A)\\le\\mu_0(A)$. For an arbitrary algebra cover of $A$, disjointify it. Countable additivity of the premeasure gives $\\mu_0(A)=\\sum_k\\mu_0(B_k)\\le\\sum_k\\mu_0(A_k)$. Taking the infimum gives the reverse inequality. This is the exact step where premeasure, rather than finite additivity alone, is consumed.",
+        "deps": ["def-premeasure-on-an-algebra", "def-outer-measure-induced-by-a-premeasure", "lem-disjointification-of-an-algebra-cover"]
+      },
+      {
+        "id": "lem-source-algebra-is-caratheodory-measurable",
+        "kind": "lemma",
+        "title": "Every source-algebra set is measurable for the induced outer measure",
+        "strategy": "Fix $E\\in\\mathcal A_0$ and a test set $A$. If $\\mu^*(A)=+\\infty$ the reverse inequality is automatic. Otherwise choose an algebra cover of $A$ within $\\varepsilon$ of its induced outer measure. Split every covering set by $E$ and $E^c$; finite additivity preserves each cost, and the subfamilies cover the two pieces of $A$. Let $\\varepsilon$ tend to zero and use the automatic inequality.",
+        "deps": ["def-premeasure-on-an-algebra", "def-outer-measure-induced-by-a-premeasure", "cor-premeasure-induced-set-function-is-an-outer-measure", "def-caratheodory-measurable-set", "lem-caratheodory-subadditive-inequality-is-automatic"]
+      },
+      {
+        "id": "thm-caratheodory-extension-theorem",
+        "kind": "theorem",
+        "title": "Assuming countable choice, a premeasure extends through its induced outer measure",
+        "strategy": "The induced set function is an outer measure, its Carathéodory family is a sigma-algebra carrying a complete measure, every source-algebra set is in that family, and agreement holds on the source algebra. Minimality of $\\sigma(\\mathcal A_0)$ therefore places the generated sigma-algebra inside the Carathéodory domain, and restriction gives an extension on $\\sigma(\\mathcal A_0)$. Existence is independent of sigma-finiteness.",
+        "deps": ["cor-premeasure-induced-set-function-is-an-outer-measure", "lem-induced-outer-measure-agrees-with-premeasure", "lem-source-algebra-is-caratheodory-measurable", "thm-caratheodory-outer-measure-theorem", "def-generated-sigma-algebra", "thm-generated-sigma-algebra-exists-and-is-minimal", "def-countable-choice"]
+      },
+      {
+        "id": "thm-premeasure-induced-outer-measure-is-regular",
+        "kind": "theorem",
+        "title": "Assuming countable choice, a premeasure-induced outer measure is regular with generated measurable hulls",
+        "strategy": "For $E$ of finite outer measure, use countable choice to select for each $n\\ge1$ an algebra cover whose cost is below $\\mu^*(E)+1/n$. Intersect the countable unions of these covers. The result lies in $\\sigma(\\mathcal A_0)$, contains $E$, and has the same outer measure. If $\\mu^*(E)=+\\infty$, take $X$. The extension theorem makes every such hull Carathéodory measurable.",
+        "deps": ["def-regular-outer-measure-and-measurable-hull", "def-outer-measure-induced-by-a-premeasure", "thm-caratheodory-extension-theorem", "def-generated-sigma-algebra", "def-countable-choice"]
+      },
+      {
+        "id": "thm-finite-caratheodory-sets-characterized-by-source-algebra-approximation",
+        "kind": "theorem",
+        "title": "Among sets of finite outer measure, Carathéodory measurability is equivalent to source-algebra approximation",
+        "strategy": "Assume $E$ has finite outer measure. If $E$ is Carathéodory measurable, choose an algebra cover of $E$ with finite cost within one quarter of a prescribed positive error; its finite partial unions lie in the algebra, its cost tail tends to zero, and measurability makes the part of the full covering union outside $E$ small. A sufficiently large finite union then has symmetric difference from $E$ of outer measure below the prescribed error. Conversely, compare both pieces of an arbitrary test set cut by $E$ with the corresponding pieces cut by a measurable approximant; subadditivity costs at most twice the symmetric-difference error. Let the error tend to zero and use the automatic inequality.",
+        "deps": ["def-outer-measure-induced-by-a-premeasure", "lem-source-algebra-is-caratheodory-measurable", "def-caratheodory-measurable-set", "lem-caratheodory-subadditive-inequality-is-automatic", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "prop-caratheodory-extension-compares-with-other-extensions",
+        "kind": "proposition",
+        "title": "The Carathéodory extension dominates every other extension and agrees with it on finite-measure sets",
+        "strategy": "Let $\\mu$ be the induced extension on $\\sigma(\\mathcal A_0)$ and $\\nu$ any other extension. Every algebra cover of $E$ gives $\\nu(E)\\le\\sum_k\\mu_0(A_k)$, so $\\nu(E)\\le\\mu(E)$. When $\\mu(E)<\\infty$, choose a covering union $A\\supseteq E$ of cost within $\\varepsilon$; continuity from below makes $\\mu(A)=\\nu(A)$ because both agree on its finite algebra partial unions. Finite subtraction bounds $\\mu(E)$ by $\\nu(E)+\\varepsilon$, and $\\varepsilon\\downarrow0$ gives equality.",
+        "deps": ["thm-caratheodory-extension-theorem", "def-measure", "thm-continuity-from-below-for-measures", "prop-measure-of-a-set-difference"]
+      },
+      {
+        "id": "thm-sigma-finite-premeasure-extension-is-unique",
+        "kind": "theorem",
+        "title": "A sigma-finite premeasure has at most one extension to its generated sigma-algebra",
+        "strategy": "An algebra is a pi-system. From a sigma-finite algebra cover $(A_n)$ form the increasing algebra exhaustion $P_n=\\bigcup_{k\\le n}A_k$; finite subadditivity gives $\\mu_0(P_n)<\\infty$. Two extending measures agree on the algebra and hence on this generating pi-system and its finite-measure exhaustion. Apply the published sigma-finite pi-system uniqueness theorem. No choice is spent because the exhaustion is part of the sigma-finiteness witness.",
+        "deps": ["def-premeasure-on-an-algebra", "def-algebra-of-subsets", "def-pi-system", "def-generated-sigma-algebra", "thm-measure-uniqueness-on-a-sigma-finite-pi-system"]
+      },
+      {
+        "id": "cor-finite-premeasure-extension-is-unique",
+        "kind": "corollary",
+        "title": "A finite premeasure has at most one extension to its generated sigma-algebra",
+        "strategy": "A finite premeasure is sigma-finite using the one-term exhaustion $P_n=X$ for every $n$. Apply sigma-finite uniqueness, including the empty ambient set and zero premeasure.",
+        "deps": ["def-premeasure-on-an-algebra", "thm-sigma-finite-premeasure-extension-is-unique"]
+      },
+      {
+        "id": "lem-sigma-finite-caratheodory-sets-have-generated-measurable-hulls",
+        "kind": "lemma",
+        "title": "Under sigma-finiteness, every Carathéodory measurable set differs from a generated measurable hull by a null set",
+        "strategy": "Assume countable choice and take an increasing finite-premeasure exhaustion $P_n\\in\\mathcal A_0$. For Carathéodory measurable $E$, select generated measurable hulls $H_n\\supseteq E\\cap P_n$ with equal finite measure. Measurability and finite cancellation give $\\mu^*(H_n\\setminus(E\\cap P_n))=0$. The union $H=\\bigcup_nH_n$ belongs to $\\sigma(\\mathcal A_0)$, contains $E$, and $H\\setminus E$ is outer-null by countable subadditivity.",
+        "deps": ["def-premeasure-on-an-algebra", "thm-premeasure-induced-outer-measure-is-regular", "thm-caratheodory-extension-theorem", "def-caratheodory-measurable-set", "def-generated-sigma-algebra", "def-countable-choice"]
+      },
+      {
+        "id": "thm-caratheodory-domain-is-the-completion-under-sigma-finiteness",
+        "kind": "theorem",
+        "title": "Assuming countable choice, the Carathéodory domain is the completion of the sigma-finite extension",
+        "strategy": "Completeness of the full Carathéodory restriction includes the completion of the extension on $\\sigma(\\mathcal A_0)$. Conversely, find $H\\in\\sigma(\\mathcal A_0)$ with $E\\subseteq H$ and $H\\setminus E$ outer-null. Regularity supplies a generated measurable null hull $Z$ of $H\\setminus E$, and $E=(H\\setminus Z)\\cup(E\\cap Z)$ is a completion representation. The measures agree there by uniqueness of the completed measure.",
+        "deps": ["lem-sigma-finite-caratheodory-sets-have-generated-measurable-hulls", "thm-premeasure-induced-outer-measure-is-regular", "thm-caratheodory-extension-theorem", "thm-caratheodory-outer-measure-theorem", "def-completion-of-a-measure-space", "thm-completion-of-a-measure-space", "def-countable-choice"]
+      },
+      {
+        "id": "fs-finitely-additive-functions-on-algebras-always-extend",
+        "kind": "false-statement",
+        "title": "FALSE: every finitely additive nonnegative function on an algebra extends to a measure",
+        "strategy": "On $\\mathcal P(\\mathbb N)$ assign zero to finite sets and $+\\infty$ to infinite sets. Verify finite additivity. Since the algebra is already a sigma-algebra, any extension must equal this function there, but the singleton partition violates countable additivity. This is the obstruction that the premeasure hypothesis removes.",
+        "deps": ["def-algebra-of-subsets", "def-sigma-algebra", "def-measure", "def-countable"]
+      },
+      {
+        "id": "fs-premeasure-extensions-are-always-unique",
+        "kind": "false-statement",
+        "title": "FALSE: the extension of a premeasure is always unique",
+        "strategy": "On the algebra of finite unions of half-open intervals in $\\mathbb R$ with extended endpoints, put $\\mu_0(\\varnothing)=0$ and $\\mu_0(A)=+\\infty$ for nonempty $A$. It is a premeasure but not sigma-finite. Both counting measure and the measure assigning $+\\infty$ to every nonempty Borel set extend it, and they disagree on singletons. Verify inline that every nonempty source-algebra member contains an infinite sequence obtained by repeated bisection, so counting measure really agrees there; also verify Borel generation and both measure axioms.",
+        "deps": ["def-premeasure-on-an-algebra", "def-measure", "def-counting-measure", "prop-counting-measure-is-a-measure", "def-borel-sigma-algebra", "thm-seven-generators-of-the-borel-sigma-algebra-on-r"]
+      },
+      {
+        "id": "fs-induced-outer-measures-always-agree-with-finitely-additive-data",
+        "kind": "false-statement",
+        "title": "FALSE: the covering construction agrees with every finitely additive source function",
+        "strategy": "On the finite-cofinite algebra of $\\mathbb N$, set $\\mu_0(A)=0$ for finite $A$ and $\\mu_0(A)=+\\infty$ for cofinite $A$. Verify finite additivity. The singleton cover has total cost zero, so the induced covering value of $\\mathbb N$ is zero although $\\mu_0(\\mathbb N)=+\\infty$. The discrepancy is exactly the failed premeasure clause.",
+        "deps": ["def-algebra-of-subsets", "def-outer-measure-induced-by-a-premeasure", "def-countable"]
+      },
+      {
+        "id": "def-metric-outer-measure",
+        "kind": "definition",
+        "title": "Metric outer measures",
+        "deps": ["def-outer-measure", "def-metric-space", "def-metric-bounded-diameter"]
+      },
+      {
+        "id": "lem-metric-outer-measure-boundary-layer-continuity",
+        "kind": "lemma",
+        "title": "Boundary layers of finite metric outer measure exhaust the complement of a closed set in outer measure",
+        "strategy": "For closed $F$ and $A$ with $\\mu^*(A)<\\infty$, set $B_n=\\{x\\in A\\setminus F:d(x,F)\\ge1/(n+1)\\}$ and $C_n=B_{n+1}\\setminus B_n$. Closedness gives $B_n\\uparrow A\\setminus F$. Alternating layers are positively separated, so metric additivity bounds the sums of their outer measures by $\\mu^*(A)$. Hence both parity-tail series tend to zero; subadditivity sandwiches $\\mu^*(A\\setminus F)$ between $\\mu^*(B_n)$ and that value plus a vanishing tail. Treat $A\\setminus F=\\varnothing$ before invoking distance to a nonempty set.",
+        "deps": ["def-metric-outer-measure", "def-metric-bounded-diameter", "def-nonnegative-extended-series"]
+      },
+      {
+        "id": "prop-closed-sets-are-caratheodory-measurable-for-metric-outer-measures",
+        "kind": "proposition",
+        "title": "Closed sets are Carathéodory measurable for metric outer measures",
+        "strategy": "Fix closed $F$ and a test set $A$. If $\\mu^*(A)=+\\infty$, the reverse inequality is automatic. Otherwise boundary layers $B_n\\subseteq A\\setminus F$ are positively separated from $A\\cap F$, so metric additivity gives $\\mu^*(A)\\ge\\mu^*(A\\cap F)+\\mu^*(B_n)$. Let $n$ increase and use boundary-layer continuity to replace the last term by $\\mu^*(A\\setminus F)$; combine with the automatic inequality.",
+        "deps": ["def-metric-outer-measure", "def-caratheodory-measurable-set", "lem-metric-outer-measure-boundary-layer-continuity", "lem-caratheodory-subadditive-inequality-is-automatic"]
+      },
+      {
+        "id": "thm-borel-sets-are-caratheodory-measurable-for-metric-outer-measures",
+        "kind": "theorem",
+        "title": "Every Borel set is Carathéodory measurable for a metric outer measure",
+        "strategy": "The Carathéodory measurable sets form a sigma-algebra and contain every closed set, hence every open set by complements. Minimality of the sigma-algebra generated by the open sets places the Borel sigma-algebra inside the Carathéodory family. Include the empty metric space, where every family involved is the one-element power set.",
+        "deps": ["def-metric-outer-measure", "prop-closed-sets-are-caratheodory-measurable-for-metric-outer-measures", "thm-caratheodory-outer-measure-theorem", "def-borel-sigma-algebra", "thm-generated-sigma-algebra-exists-and-is-minimal"]
+      }
+    ]
+  },
+  {
+    "order": 288.006,
+    "id": "outer-measure-and-the-caratheodory-extension-theorem-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Outer Measure and the Caratheodory Extension Theorem — Examples",
+    "companion": "outer-measure-and-the-caratheodory-extension-theorem",
+    "requires": [
+      "outer-measure-and-the-caratheodory-extension-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-zero-one-outer-measure-on-a-two-point-set",
+        "kind": "example",
+        "title": "The zero-one outer measure on a two-point set has only the trivial measurable sets",
+        "strategy": "On $X=\\{0,1\\}$ put $\\mu^*(\\varnothing)=0$ and $\\mu^*(E)=1$ otherwise. Check empty set, monotonicity, and countable subadditivity. The empty set and $X$ satisfy the Carathéodory identity, while either singleton fails it with test set $X$. This computes the entire measurable family.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set"]
+      },
+      {
+        "id": "ex-counting-outer-measure",
+        "kind": "example",
+        "title": "Counting measure is an outer measure for which every subset is measurable",
+        "strategy": "Use the published counting measure on $\\mathcal P(X)$. Its measure axioms give the outer-measure axioms. For every $A,E\\subseteq X$, the disjoint decomposition $A=(A\\cap E)\\sqcup(A\\setminus E)$ gives the Carathéodory identity, so the measurable family is all of $\\mathcal P(X)$. Treat finite, infinite, and empty sets through the published definition.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set", "def-counting-measure", "prop-counting-measure-is-a-measure"]
+      },
+      {
+        "id": "ex-counting-premeasure-on-the-finite-cofinite-algebra",
+        "kind": "example",
+        "title": "Counting premeasure on the finite-cofinite algebra induces counting outer measure",
+        "strategy": "On the finite-cofinite algebra of $\\mathbb N$, restrict counting measure: finite sets have their cardinality and cofinite sets have value $+\\infty$. The restriction is a premeasure. A finite $E$ covers itself at cost $|E|$, while disjointification makes every cover cost at least $|E|$. If $E$ is infinite, any algebra cover either contains a cofinite set or uses finite sets with an unbounded total number of points, so every covering cost is infinite. Thus the induced outer measure is counting outer measure on every subset.",
+        "deps": ["def-premeasure-on-an-algebra", "def-outer-measure-induced-by-a-premeasure", "lem-disjointification-of-an-algebra-cover", "ex-counting-outer-measure", "def-countable"]
+      },
+      {
+        "id": "ex-counting-outer-measure-is-metric-on-the-real-line",
+        "kind": "example",
+        "title": "Counting outer measure is a metric outer measure on the real line",
+        "strategy": "Equip $\\mathbb R$ with its usual metric. Positively separated nonempty subsets are disjoint, and counting measure is additive on every disjoint pair; empty-set cases follow from value zero. Hence counting outer measure is metric. Apply the metric Carathéodory criterion to recover Borel measurability, consistently with the stronger direct computation that every subset is measurable.",
+        "deps": ["def-metric-outer-measure", "ex-counting-outer-measure", "lem-real-line-is-a-metric-space", "thm-borel-sets-are-caratheodory-measurable-for-metric-outer-measures"]
+      },
+      {
+        "id": "cex-three-point-outer-measure-has-only-trivial-caratheodory-sets",
+        "kind": "counterexample",
+        "title": "A three-point outer measure has nonmeasurable subsets despite passing the whole-space split",
+        "strategy": "On $X=\\{1,2,3\\}$ put $\\mu^*(\\varnothing)=0$, $\\mu^*(X)=2$, and $\\mu^*(E)=1$ for every other nonempty $E$. Verify the outer-measure axioms. Every $E$ passes the equation obtained by testing only against $X$, but if $E$ is nonempty and proper, choose $x\\in E$ and $y\\notin E$ and test against $\\{x,y\\}$: the singleton pieces total two while the test set has outer measure one. Thus only $\\varnothing$ and $X$ are Carathéodory measurable.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set"]
+      },
+      {
+        "id": "cex-finite-cofinite-set-function-is-not-a-premeasure",
+        "kind": "counterexample",
+        "title": "Zero on finite sets and infinity on cofinite sets is finitely additive but not a premeasure",
+        "strategy": "On the finite-cofinite algebra of $\\mathbb N$, put $\\mu_0(A)=0$ for finite $A$ and $\\mu_0(A)=+\\infty$ for cofinite $A$. Check finite additivity by the finite-cofinite dichotomy. The disjoint singleton sequence has union $\\mathbb N$ in the algebra, but the term values sum to zero while the union has value infinity. This pinpoints the failed premeasure clause.",
+        "deps": ["def-premeasure-on-an-algebra", "def-algebra-of-subsets", "def-countable"]
+      },
+      {
+        "id": "cex-nonsigma-finite-premeasure-has-distinct-extensions",
+        "kind": "counterexample",
+        "title": "A non-sigma-finite premeasure has distinct Borel extensions",
+        "strategy": "Use the algebra of finite unions of half-open real intervals with extended endpoints and assign infinity to every nonempty member. Verify it is a premeasure and generates $\\mathcal B(\\mathbb R)$. Prove inline by repeated bisection that every nonempty algebra member is infinite, so counting measure and the measure that is zero only at the empty set both extend it; they disagree on every singleton. The premeasure is not sigma-finite because its only finite-measure member is empty.",
+        "deps": ["def-premeasure-on-an-algebra", "def-measure", "def-counting-measure", "prop-counting-measure-is-a-measure", "def-borel-sigma-algebra", "thm-seven-generators-of-the-borel-sigma-algebra-on-r"]
+      },
+      {
+        "id": "cex-two-point-outer-measure-need-not-be-regular",
+        "kind": "counterexample",
+        "title": "An outer measure on two points need not be regular",
+        "strategy": "On the two-point set put outer measure zero on the empty set, one on each singleton, and three-halves on the whole space. Exhaust the finite unions to verify the outer-measure axioms. Neither singleton is Carathéodory measurable, so the only measurable superset available as its hull is the whole space, whose outer measure is strictly larger. Thus no singleton has a measurable hull and the outer measure is not regular.",
+        "deps": ["def-outer-measure", "def-caratheodory-measurable-set", "def-regular-outer-measure-and-measurable-hull"]
+      }
+    ]
+  }
+]

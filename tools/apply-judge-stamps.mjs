@@ -18,7 +18,7 @@
 //
 // Published-page audit A8 has one deliberately narrower route:
 //
-//   JUDGE_LINEUP=deepseek+terra node tools/apply-judge-stamps.mjs \
+//   JUDGE_LINEUP=deepseek+opus node tools/apply-judge-stamps.mjs \
 //     --ledger research/audit/wave<k>-judge.jsonl \
 //     --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json \
 //     [--apply] [--report out.json]
@@ -127,14 +127,15 @@ const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((l
 // change cannot desynchronise this file again. It had drifted: only
 // deepseek+terra existed here after the owner moved the build to
 // deepseek+sonnet (2026-08-17), so the current lineup could not be stamped at
-// all. Both keys are kept for exactly that reason — the 2026-08-20 return to
-// deepseek+terra is the third lane change in a fortnight, and a table that
-// carries only today's answer is the defect, not the fix.
+// all. ALL THREE keys are kept for exactly that reason — deepseek+opus
+// (2026-08-23) is the fourth lane change in five weeks, and a table that carries
+// only today's answer is the defect, not the fix.
 const LINEUPS = Object.freeze({
+  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+opus';
 const expected = LINEUPS[lineupName];
 if (!expected) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(', ')}; got ${lineupName}`);

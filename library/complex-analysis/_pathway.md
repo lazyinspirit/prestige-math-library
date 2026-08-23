@@ -13,6 +13,7 @@ parts:
       - contour-integration
       - goursat-and-cauchys-theorem-in-a-convex-domain
       - analyticity-liouville-and-morera
+      - the-identity-theorem-and-the-open-mapping-theorem
 ---
 
 ## holomorphic-functions
@@ -25,13 +26,14 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Complex line integrals are built from Riemann-Stieltjes integrals along rectifiable paths,
-with the ML estimate bounding an integral by path length times a supremum. Goursat's
-triangle theorem gives primitives and Cauchy's theorem on convex domains, while Cauchy's
-circle formulas recover all derivatives and yield Taylor expansion, zero factorization,
-and coefficient estimates. These estimates imply Liouville's theorem, polynomial rigidity
-under algebraic growth, and the Liouville proof of the fundamental theorem of algebra.
-Morera's triangle criterion gives a converse to holomorphy, and concentric-disc estimates
-control locally uniform limits and holomorphic series together with their derivatives.
-Finite parameter integrals remain holomorphic; the same circle formulas give the
-mean-value property and density of the image of every nonconstant entire function.
+Complex line integrals are Riemann-Stieltjes integrals along rectifiable paths, bounded by
+the ML estimate. Goursat's triangle theorem gives primitives and Cauchy's theorem on convex
+domains, and the circle formulas recover every derivative, hence Taylor expansion, zero
+factorization, coefficient estimates, Liouville's theorem, polynomial rigidity, the
+fundamental theorem of algebra, the mean-value property and dense entire images; Morera's
+triangle criterion is the converse, and concentric-disc estimates control locally uniform
+limits, holomorphic series and parameter integrals. Analyticity is
+also rigid in the small: zeros are isolated unless the function vanishes identically, and a
+nonconstant map is locally a power in a biholomorphic coordinate, giving the open mapping
+theorem, the maximum and minimum modulus principles, Hadamard's three-lines theorem, and
+holomorphic inverses for injective maps.

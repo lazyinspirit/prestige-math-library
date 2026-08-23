@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "step8-lead",
+  "run": "frontier-17",
+  "covers": [
+    "all"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T04:45:21.443Z",
+  "ended_at": "2026-08-23T05:51:54.766Z",
+  "ms": 3993323,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-step8-lead.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-step8-lead.prompt.md",
+  "tail": "Step 8 is complete. All 150 rejections adjudicated, 48 items repaired, every gate green.\n\n## What I did\n\n**Adjudicated all 150 rejections** in `research/frontier-17-judge.jsonl` (131 distinct items: 127 DeepSeek rejections, 23 Opus). The 369 Opus `null` rows are capacity refusals — not verdicts, not adjudicated; every item ended with a real Opus verdict.\n\n| outcome | rows | items |\n|---|---:|---:|\n| `confirmed_fatal` | 60 | 48 |\n| `confirmed_nonfatal` | 86 | 79 |\n| `false_positive` | 4 | 4 |\n\n**48 fatal repairs**, grouped by defect type: citation-missing 19, citation-truncated 9, missing-hypothesis 7, invalid-inference 5, false-or-overstrong-statement 4, plus one each of citation-inflated, citation-misattributed, ill-typed-construction, arithmetic-error.\n\nThe findings that were genuinely mathematical rather than citational:\n- `lem-maximal-divisor-pivot-for-pid-submodules` ended on a **false clause** (a unit pivot does not make N a direct summand; DeepSeek's Z² counterexample checks out) — replaced with the true splitting.\n- `thm-galois-group-of-a-compositum-as-a-fibre-product`'s Given asserted the product of two separable polynomials is separable — **false when E₁=E₂**, a case step 3.1 explicitly treats.\n- `def-biholomorphic-map`'s local clause let `z²` qualify at 0 by restricting away from the origin, which would trivialise clause 4 of the holomorphic inverse function theorem.\n- `thm-lagrange-multipliers`'s cited curve-velocity theorem needs c to be a **regular value**, which surjectivity at one point doesn't give — fixed by restricting to the open submersion locus.\n- `def-finitely-patched-regular-surface-and-integrals`'s flux compatibility clause was **vacuous** (it demanded agreement exactly where no two normals are both defined).\n- `cor-torsion-splits` and `thm-the-canonical-presentation` each asserted something the proof did not establish; both are now proved.\n- `thm-groups-are-monadic-over-sets` / `thm-monoids-and-rings` identified an unspecified isomorphism with the comparison functor; both now prove the comparison bijective directly.\n\n**One judge finding I overturned on inspection:** DeepSeek read `r''(s)` in `cor-surface-area-of-revolution-formula`'s title as a second derivative. It is YAML single-quote escaping and decodes to `r'(s)` — correct. I had it queued as fatal, verified the decode, and moved it to `false_positive`; the file is byte-identical to baseline.\n\n**Not repaired, recorded:** two duplicated-argument pairs (`fs-premeasure-extensions-are-always-unique`/`cex-nonsigma-finite-premeasure-...`, and the critical-value pair). Nothing false is asserted, so R1 forbids the edit here — it's a step-9/owner content call.\n\n## Gates\n\n`step8-guard`: 48/48 changes licensed. `precheck` 44/44. `depcheck`, `citecheck`, `fwdcheck`, `extcheck` clean. `proof-contract --strict` 0 errors over 381 items (contracts updated in the **batch** files, then re-merged). `citation-fidelity` and `boundary-audit --fail-on-template` clean. `defect-ledger check` 0 errors — 131 new rows (48 fatal + 83 nonfatal/false-positive). Closure receipt: `unadjudicated: 0`, `open_fatal: 0`, `needs_rejudge: 48` — exactly the repaired items, no page-mates swept in.\n\nReport: `research/frontier-17-alpha-step8.md`. I did not run the rejudge; `8-rejudge` reads the closure file. No `verification.judge` was deleted because none exists yet.\n\nOne caveat worth flagging for step 10: 61 of the 79 nonfatal closures are a single shape — a dependency declared in `deps`, licensing a routine step, never lifted into the Facts block. The judge brief exempts exactly that, and one lane flagged it 100+ times anyway. The ledger rows are there so it can be queried rather than re-litigated."
+}

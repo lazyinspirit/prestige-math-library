@@ -255,9 +255,13 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
     if (/OK/.test(r.stdout ?? '')) ok.push('DeepSeek lane resolves its key from a bare environment');
     else problems.push('DeepSeek lane cannot find DEEPSEEK_API_KEY — the judge stage will fail when it runs');
 
-    const codex = spawnSync('sh', ['-c', 'command -v codex >/dev/null && test -f "$HOME/.codex/auth.json" && echo OK'], { encoding: 'utf8' });
-    if (/OK/.test(codex.stdout ?? '')) ok.push('Codex lane is on PATH and authenticated');
-    else notes.push('Codex CLI not found or not authenticated — the second judge lane may fail');
+    // The second judge lane moved Codex -> claude with every other lane (owner,
+    // 2026-08-23). Presence only: the claude CLI authenticates from the user's
+    // keychain session, so there is no auth file to test, and a spent
+    // subscription quota looks identical to a healthy one from here.
+    const claude = spawnSync('sh', ['-c', 'command -v claude >/dev/null && echo OK'], { encoding: 'utf8' });
+    if (/OK/.test(claude.stdout ?? '')) ok.push('claude CLI is on PATH for the second judge lane and every agent role');
+    else problems.push('claude CLI not found — the judge stage AND every dispatched agent role will fail when they run');
   }
 
   return { problems, notes, ok };

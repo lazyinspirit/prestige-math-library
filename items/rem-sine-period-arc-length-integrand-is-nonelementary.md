@@ -20,6 +20,10 @@ external_dependency:
 verification:
   precheck: n/a
   audited: 2026-08-21
+  sources_checked:
+    date: 2026-08-23
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

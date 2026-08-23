@@ -73,14 +73,18 @@ const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+terra, and the published-page audit (AUDIT-WORKFLOW.md)
-// verifies the same pairs on the current frozen context. Historical rows remain
-// evidence only: coverage is per frozen context, not per model name.
+// default is deepseek+opus (owner, 2026-08-23), and the published-page audit
+// (AUDIT-WORKFLOW.md) verifies the same pairs on the current frozen context.
+// Rows from a retired lane remain evidence only and never satisfy coverage —
+// which matters more after a lane change than at any other time, because a
+// level judged under deepseek+terra reads as fully covered until this map is
+// consulted. Coverage is per frozen context AND per configured lane.
 const JUDGE_LINEUPS = Object.freeze({
+  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+opus';
 const JUDGES = JUDGE_LINEUPS[lineupName];
 if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}`); process.exit(2); }
 // --audit: published-page audit scope (AUDIT-WORKFLOW.md). A legacy published

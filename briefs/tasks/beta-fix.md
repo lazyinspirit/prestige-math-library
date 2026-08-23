@@ -24,13 +24,19 @@ costs nothing.
 2. Apply the fix, or push back **with the reason**, per finding.
 3. The report's severity table says what each costs if left.
    ``blocks `sufficient` `` means the pair cannot proceed to step 4 unresolved.
-4. Re-run your gates:
+4. Re-run your checks:
 
 ```
 node tools/coverage-checklist.mjs research/{{run}}-batch-<i>.coverage.json
-node tools/content-policy.mjs --manifest-only research/{{run}}-batch-<i>.pages.json
+node tools/content-policy.mjs --manifest-only research/{{run}}-batch-*.pages.json
 node tools/validate-plan.mjs research/plan-spec.json
 ```
+
+The policy check is deliberately whole-run: legal dependencies on earlier
+pages owned by another live batch must resolve against that batch's manifest.
+It still enforces the two-pair capacity separately for each batch. Do not
+remove, inline, or duplicate a necessary cross-batch edge merely to make an
+isolated one-manifest invocation pass.
 
 5. Append `## Step-3 fix pass` to `research/{{run}}-batch-<i>.notes.md`, one
    entry per finding id: `applied` / `pushed back` (+ reason) /

@@ -192,12 +192,17 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: "deepseek-v4-pro + gpt-5.6-terra"
+    model: "deepseek-v4-pro + claude-opus-5[1m]"
                                      #   session workflow: DeepSeek V4 Pro runs
-                                     #   directly and fresh GPT 5.6 Terra runs via
-                                     #   Codex on identical frozen context; the GPT
-                                     #   5.6 Sol author also runs via Codex with a
-                                     #   1M-token context.
+                                     #   directly and a fresh Claude Opus 5 runs
+                                     #   via the claude CLI on identical frozen
+                                     #   context; the Opus author runs on the same
+                                     #   CLI with the same 1M-token context.
+                                     #   Written mechanically by
+                                     #   apply-judge-stamps.mjs from the configured
+                                     #   JUDGE_LINEUP — never hand-edited, and a
+                                     #   retired lane's name here means the stamp
+                                     #   predates the current lineup.
                                      #   Pipeline items use the production lineup
     verdict: pass
     date: 2026-07-25
@@ -218,7 +223,7 @@ verification:
     # section changed" but "would the judge have seen something different".
     # Pure typography, or adding a citation that changes no claim, does not count.
   verified:                          # OPTIONAL. Delegated verifier adjudication
-    model: gpt-5.6-sol-codex-subscription
+    model: claude-opus-5-1m
     verdict: certify                 #   verifier read the stated scope
     date: 2026-07-25
     scope: page                      #   what context the verifier actually had

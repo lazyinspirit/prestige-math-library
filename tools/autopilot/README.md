@@ -161,9 +161,11 @@ Three things per-unit progression is **not** allowed to relax:
   at the group exit, together, once, with the group drained — the level join.
   That is the whole safety argument: a gate that quietly becomes per-batch when
   it needed level scope reports success over a fraction of what it was asked to
-  check, and is indistinguishable from a gate that passed. The per-batch coverage
-  and policy gates run there too; they are per-batch in their *arguments*, never
-  in their timing. The price is stated where it is paid: step 5's repo-wide,
+  check, and is indistinguishable from a gate that passed. Coverage keeps one
+  invocation per batch, while scaffold policy receives all batch manifests in
+  one invocation so legal same-run cross-batch dependencies resolve; both run
+  only at the drained level join, never at a per-unit transition. The price is
+  stated where it is paid: step 5's repo-wide,
   content-policy item-mode and contract gates no longer run before the readers,
   because inside a group there is no drained moment between authoring and
   reading. They run on the same text at the join, before `6b-baseline` and 6c.

@@ -7,20 +7,20 @@ parts:
     pages:
       - sigma-algebras-and-borel-sets
       - measures-and-their-basic-properties
+      - outer-measure-and-the-caratheodory-extension-theorem
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra is a family of sets closed under the countable operations needed for
-countable additivity. Borel sets form the smallest sigma-algebra containing the open sets;
-in Euclidean space rational boxes generate them. Generated and trace sigma-algebras,
-measurable functions, pi-systems, lambda-systems, and Dynkin's theorem provide the set
-structure and uniqueness machinery for measures.
+A sigma-algebra is closed under the operations countable additivity needs; Borel sets are
+the smallest containing the open sets, generated in Euclidean space by rational boxes.
+Generated and trace sigma-algebras, measurable functions, pi- and lambda-systems and
+Dynkin's theorem give uniqueness; nonnegative extended sums give measures, probability
+measures, null sets, completeness and the finite, sigma-finite and semifinite classes, with
+monotone continuity, inclusion-exclusion, Borel-Cantelli, completion, restriction, atomic
+Dirac sums, semifinite parts and uniqueness along sigma-finite exhaustions.
 
-Nonnegative extended sums lead to measures, probability measures, null sets, completeness,
-and finite, sigma-finite, and semifinite measures. Monotonicity and subadditivity yield
-continuity under monotone set limits, inclusion-exclusion, Borel-Cantelli, and liminf and
-limsup inequalities. Completion and restriction alter the measurable domain, weighted
-Dirac sums describe atomic measures on discrete spaces, semifinite parts isolate the
-finite-measure information, and pi-system uniqueness extends through sigma-finite
-exhaustions.
+An outer measure restricts to a complete measure on the Caratheodory measurable sets;
+covering costs extend a premeasure from an algebra, sigma-finiteness makes it unique with
+the completion as its domain, regularity gives hulls and continuity from below, and metric
+outer measures reach every Borel set.

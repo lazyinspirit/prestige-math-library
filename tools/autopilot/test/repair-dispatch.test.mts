@@ -271,6 +271,7 @@ test('the three judge tools agree on the lineup table', () => {
     const r = spawnSync(process.execPath, [join(REPO, tool), ...args],
       { cwd: REPO, encoding: 'utf8', env: { ...process.env, JUDGE_LINEUP: '__nope__' }, timeout: 60_000 });
     const out = `${r.stdout}\n${r.stderr}`;
+    assert.match(out, /deepseek\+opus/, `${tool} lost the opus lineup`);
     assert.match(out, /deepseek\+terra/, `${tool} lost the terra lineup`);
     assert.match(out, /deepseek\+sonnet/, `${tool} lacks the sonnet lineup`);
   }

@@ -17,6 +17,7 @@ parts:
     pages:
       - quadratic-residues-and-the-legendre-symbol
       - quadratic-reciprocity-and-the-jacobi-symbol
+      - sums-of-two-squares
 ---
 
 ## divisibility-and-primes
@@ -37,5 +38,10 @@ unit group modulo a prime turns out to be cyclic, which is what a primitive root
 
 Which numbers are squares modulo a prime is decided by the Legendre symbol, and it is
 multiplicative because the unit group is cyclic. Euler's criterion and Gauss's lemma
-compute it, quadratic reciprocity relates the symbol for one prime to the symbol for the
-other, and the Jacobi symbol extends the computation to odd composite moduli.
+compute it, quadratic reciprocity relates the symbols of two primes, and the Jacobi symbol
+extends the computation to odd composite moduli. The first supplement then decides which
+integers are sums of two squares: Thue's lemma turns a square root of $-1$ into a
+representation of a prime congruent to one modulo four, unique up to signs and order, the
+Brahmagupta-Fibonacci identity multiplies representations, a prime congruent to three
+modulo four must occur to an even power, and the same analysis of primitive representations
+settles their products, divisors and the squarefree case.

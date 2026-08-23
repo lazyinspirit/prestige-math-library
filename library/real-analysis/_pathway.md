@@ -67,6 +67,7 @@ parts:
       - fundamental-trigonometric-identities
       - further-trigonometric-identities-and-inverses
       - the-integral-logarithm-and-its-characterisations
+      - trigonometric-and-oscillatory-examples-in-several-variables
   - part: several-variables
     title: "Several variables"
     pages:
@@ -80,6 +81,8 @@ parts:
       - improper-and-parameter-dependent-multiple-integrals
       - convex-and-semicontinuous-functions-on-rn
       - picard-lindelof-and-first-order-odes
+      - regular-surfaces-and-surface-integrals
+      - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems
     title: "Curves and the fundamental theorems"
     pages:
@@ -90,6 +93,8 @@ parts:
       - the-complex-exponential-and-eulers-formula
       - trigonometric-and-oscillatory-examples-in-one-variable
       - areas-of-elementary-plane-figures
+      - the-real-gamma-and-beta-functions
+      - volumes-of-elementary-solids-and-solids-of-revolution
 ---
 
 ## building-the-reals
@@ -169,36 +174,39 @@ term by term differentiation legitimate.
 
 ## classical-functions
 
-The exponential, the logarithm, the sine and the cosine are defined by their power series, so every
-identity about them is proved rather than read off a picture. The exponential yields its addition
-law, its derivative and its range, and pi is defined from the zeros of the cosine rather than from
-geometry. The trigonometric identities, the inverse functions and the integral form of the logarithm
-follow, and the characterisations that an informal treatment takes as definitions are shown to
-describe the same functions.
+The exponential, logarithm, sine and cosine are defined by their power series, so every identity is
+proved rather than read off a picture. The exponential yields its addition law, derivative and
+range, and pi comes from the zeros of the cosine, not from geometry. The trigonometric identities,
+the inverse functions and the integral logarithm follow, and the characterisations an informal
+treatment assumes are proved equivalent. In several variables they split a Cartesian expression
+into radial and angular parts, and the standard pathologies follow: line limits without a limit, a
+circle defeating the vector-valued mean value equality, agreeing mixed partials, differentiability
+with unbounded or discontinuous partials, uniform boundedness without equicontinuity, an exact
+solid of revolution, and non-injective spherical coordinates.
 
 ## several-variables
 
-Norms support limits in $\mathbb R^n$, and total derivatives lead to the chain rule, mixed
-partials, Taylor formulas, extrema, and inverse and implicit functions. Higher regularity,
-regular loci, proper local diffeomorphisms, orientation, and vanishing derivatives refine the
-local theory. Jordan integration, Fubini, and change of variables extend through compact
-exhaustions to improper multiple integrals; domination permits parameter limits and
-differentiation, and polar coordinates evaluate the Gaussian integral. Convexity is developed
-through epigraphs, Jensen's inequality, local Lipschitz bounds, separation, subgradients,
-Hessians, and semicontinuous extrema. For differential equations, the Volterra formulation and
-Picard contraction give local existence and uniqueness, Gronwall gives stability, maximal
-solutions obey an escape alternative, and Euler polygons and Osgood's condition separate
-existence from uniqueness under weaker hypotheses.
+Norms give limits in $\mathbb R^n$; total derivatives give the chain rule, mixed partials,
+Taylor formulas, extrema and inverse and implicit functions, refined by higher regularity,
+regular loci, local diffeomorphisms and orientation. Jordan integration, Fubini and change
+of variables extend by compact exhaustion to improper integrals; domination permits
+parameter limits and differentiation, polar coordinates the Gaussian integral. Convexity
+runs through epigraphs, Jensen, local Lipschitz bounds, separation, subgradients, Hessians
+and semicontinuous extrema; Volterra, Picard, Gronwall, maximal solutions, Euler polygons
+and Osgood settle first-order equations. Rank semicontinuity gives the constant-rank normal
+form, hence submersions, immersions, regular level sets, tangent kernels and Lagrange
+multipliers; the first fundamental form and Gram determinant give area, scalar integrals
+and flux for graphs and surfaces of revolution.
 
 ## curves-and-the-fundamental-theorems
 
-Path length is the supremum of inscribed polygonal lengths, a geometric form of bounded
-variation. Sharp fundamental theorems account for exceptional sets and one-sided derivatives;
-line integrals, the gradient theorem, and differentiation under the integral sign extend the
-calculus of paths. Jordan content gives translation-invariant area, the disc formula $\pi r^2$,
-base-height and determinant formulas for parallelograms and triangles, and triangulation and
-shoelace formulas for simple polygons. Power-series trigonometry connects the equivalent
-characterisations of $\pi$ with the complex exponential. Uniform trigonometric series also
-produce the classical nowhere-differentiable Weierstrass function, while the continuous
-Riemann-Lebesgue lemma and finite sine-harmonic identities control oscillation in integrals and
-series.
+Path length, the supremum of inscribed polygonal lengths, is bounded variation made geometric.
+Fundamental theorems handle exceptional sets and one-sided derivatives; line integrals, the
+gradient theorem and differentiation under the integral sign extend path calculus. Jordan content
+gives translation-invariant area, the disc formula $\pi r^2$, base-height and determinant formulas
+for parallelograms and triangles, and triangulation and shoelace formulas for polygons; slicing
+between continuous graphs extends it to volume, with disc, washer and shell formulas, cones and
+balls in every dimension by Cavalieri. Power-series trigonometry ties the characterizations of
+$\pi$ to the complex exponential, produces the Weierstrass function and, with the Riemann-Lebesgue
+lemma, controls oscillation; Euler's Gamma and Beta integrals give factorial interpolation,
+Bohr-Mollerup, $\Gamma(1/2)$, Stirling's constant and the unit-ball volume.

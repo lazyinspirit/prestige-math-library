@@ -46,11 +46,14 @@ parts:
       - free-modules-and-exact-sequences
       - tensor-products-of-modules
       - chain-conditions-and-semisimple-modules
+      - modules-over-a-pid-and-canonical-forms
   - part: sylow-and-extensions
     title: "Sylow theory and split extensions"
     pages:
       - semidirect-products-and-automorphism-groups
       - sylow-theorems-and-nilpotent-groups
+      - the-galois-correspondence
+      - frattini-subgroups-and-the-burnside-basis-theorem
 ---
 
 ## groups-and-quotients
@@ -98,16 +101,24 @@ and separability measuring how many extensions of a map there are.
 ## modules
 
 A module is a vector space over a ring instead of a field, so a submodule need not be a
-direct summand and dimension need not exist. Exact sequences state that failure precisely,
-free, projective and injective modules describe when it can be repaired, and the tensor
-product is the construction that turns bilinear maps into linear ones. Chain conditions
-bound the failure from the other side, and semisimplicity with Wedderburn-Artin says
-exactly which rings have none of it.
+direct summand and dimension need not exist. Exact sequences state that failure, free,
+projective and injective modules describe when it can be repaired, and the tensor product
+linearises bilinear maps. Chain conditions bound it from the other side, and
+Wedderburn-Artin says which rings have none. Over a principal ideal domain it disappears: a
+submodule of a finite free module has an aligned basis, yielding invariant factors,
+elementary divisors, Smith normal form and their uniqueness. Over the integers that
+classifies the finitely generated abelian groups; over a polynomial ring it gives rational
+canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 ## sylow-and-extensions
 
-A semidirect product builds a group from a normal subgroup and a complement acting on it,
-which is what a split extension is, and automorphism groups say how many such actions
-there are. Sylow's theorems count the subgroups of prime power order and constrain how many
-there can be, which is what turns the arithmetic of the group order into structure, up to
-the nilpotent groups where every Sylow subgroup is normal.
+A split extension is a semidirect product: a normal subgroup, a complement acting on it,
+and the automorphism groups counting such actions. Sylow's theorems turn the arithmetic of
+the group order into structure by counting subgroups of prime power order, up to the
+nilpotent groups where every Sylow subgroup is normal. In a finite $p$-group the maximal
+subgroups intersect in the nongenerators, and Burnside's basis theorem makes generation and
+automorphisms linear algebra on the elementary abelian quotient. Fields repeat the pattern:
+Artin's fixed-field theorem matches a finite automorphism group to a degree, the Galois
+correspondence pairs intermediate fields with subgroups and normality with normality, and
+the action on roots makes irreducibility transitivity, discriminants and resolvents
+settling cubics and quartics.

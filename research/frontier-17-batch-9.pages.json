@@ -1,0 +1,664 @@
+[
+  {
+    "order": 365.007,
+    "id": "monadicity-and-becks-theorem",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Monadicity and Beck's Theorem",
+    "companion": "monadicity-and-becks-theorem-examples",
+    "requires": [
+      "monads-comonads-and-their-algebras-examples"
+    ],
+    "items": [
+      {
+        "id": "def-absolute-colimit",
+        "kind": "definition",
+        "title": "Absolute colimits",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "def-split-coequalizer",
+        "kind": "definition",
+        "title": "Split coequalizer diagrams",
+        "deps": [
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute",
+        "kind": "theorem",
+        "title": "Every split coequalizer is a coequalizer and an absolute colimit",
+        "strategy": "Given a split fork, factor any map coequalizing the parallel pair through the chosen section and use the retraction equation for uniqueness. Since the proof uses only the four splitting equations, applying any functor reproduces the same universal-property argument, so the coequalizer is absolute.",
+        "deps": [
+          "def-split-coequalizer",
+          "def-absolute-colimit",
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "def-reflexive-pair",
+        "kind": "definition",
+        "title": "Reflexive parallel pairs and reflexive coequalizers",
+        "deps": [
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+        "kind": "definition",
+        "title": "$U$-split pairs and ordinary or strict creation of their coequalizers",
+        "deps": [
+          "def-split-coequalizer",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+        "kind": "theorem",
+        "title": "Every algebra is the coequalizer of its canonical pair of free algebras",
+        "strategy": "For a $T$-algebra $(A,a)$, use the algebra homomorphisms $(T^2A,\\mu_{TA})\\rightrightarrows(TA,\\mu_A)$ induced by $T(a)$ and $\\mu_A$. The structure map $a$ coequalizes them by the algebra associativity law. An algebra map out of the free algebra that coequalizes this pair factors uniquely through $a$ by precomposition with the unit and the algebra unit law.",
+        "deps": [
+          "def-monad",
+          "def-t-algebra-and-algebra-homomorphism",
+          "def-eilenberg-moore-category",
+          "def-free-t-algebra",
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras",
+        "kind": "theorem",
+        "title": "The canonical algebra presentation is split in the base, but its canonical splittings need not be algebra homomorphisms",
+        "strategy": "Verify the split-coequalizer equations in the base with $\\eta_{TA}$ and $\\eta_A$. Then use the free-monoid monad and a nontrivial monoid: its unit sends a product to a one-letter word, whereas multiplying the two one-letter words gives a two-letter word. Thus the canonical section need not be an algebra homomorphism; the Statement does not assert failure for every monad.",
+        "deps": [
+          "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+          "def-split-coequalizer",
+          "thm-the-free-monoid-monad-and-its-algebras-are-monoids"
+        ]
+      },
+      {
+        "id": "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs",
+        "kind": "theorem",
+        "title": "The Eilenberg–Moore forgetful functor strictly creates coequalizers of $U^T$-split pairs",
+        "strategy": "Start from a split coequalizer of the underlying pair. Absoluteness makes its images under $T$ and $T^2$ coequalizers. Factor the algebra structure of the source through the underlying quotient to obtain the unique candidate structure on the quotient; cancel the epimorphic quotient maps to verify the unit and associativity laws. The same cancellations prove the quotient map is an algebra homomorphism and has the coequalizer universal property, with uniqueness on the supplied apex.",
+        "deps": [
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+          "def-eilenberg-moore-category",
+          "def-t-algebra-and-algebra-homomorphism",
+          "thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute"
+        ]
+      },
+      {
+        "id": "lem-created-canonical-presentations-give-a-quasi-inverse-to-the-comparison-functor",
+        "kind": "lemma",
+      "title": "Supplied created canonical presentations give a quasi-inverse to the comparison functor",
+      "strategy": "For an adjunction $F\\dashv U$ inducing $T$, take as supplied data one created coequalizer for the $U$-split lifted canonical pair of every $T$-algebra $(A,a)$. Universal properties define this assignment on algebra morphisms. Compare its image under the comparison functor with the canonical algebra coequalizer, and compare its value on a domain object with the counit presentation; uniqueness of coequalizers supplies the two natural isomorphisms without invoking global choice.",
+        "deps": [
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+      "thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras",
+      "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+      "thm-the-comparison-functor-exists-and-is-unique",
+          "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs",
+          "def-eilenberg-moore-category",
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "thm-becks-monadicity-theorem",
+        "kind": "theorem",
+      "title": "Beck's monadicity theorem in data-supplied form",
+      "strategy": "For the monadic-to-creation implication, transport the strict creation theorem for the Eilenberg–Moore forgetful functor across the comparison equivalence. Conversely, require one created coequalizer for every lifted canonical algebra pair as supplied data; the reconstruction lemma then gives a quasi-inverse to the comparison functor without global choice. Keep ordinary isomorphism-invariant creation and equivalence, rather than strict creation and isomorphism, throughout.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+          "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs",
+          "lem-created-canonical-presentations-give-a-quasi-inverse-to-the-comparison-functor",
+          "prop-equivalences-preserve-reflect-and-create-limits-and-colimits"
+        ]
+      },
+      {
+        "id": "thm-becks-strict-monadicity-theorem",
+        "kind": "theorem",
+        "title": "Strict Beck monadicity theorem",
+      "strategy": "Repeat both directions with on-the-nose lifts. The canonical algebra presentation is split in the base and is a coequalizer in the Eilenberg–Moore category. Strict creation therefore makes every reconstructed object and morphism uniquely equal to the corresponding algebra datum, so the comparison has a two-sided inverse functor on the nose. Conversely an isomorphic comparison transports the Eilenberg–Moore strict-creation property without weakening it to an isomorphism-invariant lift.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+      "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs",
+      "thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras",
+      "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras"
+        ]
+      },
+      {
+        "id": "thm-crude-monadicity-the-reflexive-tripleability-theorem",
+        "kind": "theorem",
+      "title": "Data-supplied crude monadicity theorem for reflexive coequalizers",
+      "strategy": "The canonical pair attached to every algebra is reflexive. Use the supplied coequalizer for that pair, apply $U$, transport the canonical splitting, and invoke strict Eilenberg–Moore creation plus the canonical algebra coequalizer to compare it with the given algebra. Conservativity handles the counit comparison. The supplied object assignment and universal properties assemble these comparisons into a quasi-inverse without global choice.",
+        "deps": [
+      "def-reflexive-pair",
+      "def-conservative-functor",
+      "thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras",
+      "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+      "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs"
+        ]
+      },
+      {
+        "id": "thm-groups-are-monadic-over-sets",
+        "kind": "theorem",
+        "title": "Groups are strictly monadic over sets",
+        "strategy": "The published free-group-monad theorem identifies the Eilenberg–Moore category on the nose over $\\mathbf{Set}$ with groups and group homomorphisms. Read that identification as the comparison functor for the free–forgetful adjunction, yielding strict monadicity and hence monadicity.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-the-free-group-monad-and-its-algebras-are-groups",
+          "thm-the-comparison-functor-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "thm-modules-are-monadic-over-sets",
+        "kind": "theorem",
+        "title": "Modules over a fixed unital ring are strictly monadic over sets",
+        "strategy": "For a fixed unital ring $R$, the published free-module-monad theorem identifies its Eilenberg–Moore category on the nose over $\\mathbf{Set}$ with left $R$-modules. This is precisely the comparison functor for the free–forgetful adjunction.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-the-free-module-monad-and-its-algebras-are-modules",
+          "thm-the-comparison-functor-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "lem-free-word-rings-are-unital-rings",
+        "kind": "lemma",
+        "title": "Integer-valued finite formal sums of words form unital convolution rings",
+        "strategy": "For a set $X$, take the free abelian group $\\mathbb Z^{(X^*)}$ on finite words. Define multiplication by bilinearly extending word concatenation. Finite Fubini reindexing proves associativity and distributivity, while the empty word is the multiplicative identity. Treat $X=\\varnothing$ explicitly: the only word is empty and the resulting ring is $\\mathbb Z$.",
+        "deps": [
+          "thm-the-free-monoid-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "def-free-module-on-a-set-and-standard-basis",
+          "thm-int-comm-ring",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-ring",
+          "def-semigroup-and-monoid"
+        ]
+      },
+      {
+        "id": "thm-the-free-unital-ring-functor-is-left-adjoint-to-the-underlying-set-functor",
+        "kind": "theorem",
+        "title": "The free unital ring functor is left adjoint to the underlying-set functor",
+        "strategy": "Map each generator $x$ to the basis word $[x]$ in the free word ring. Given a function from $X$ to the underlying set of a ring $R$, send a word to the corresponding product in $R$ and extend uniquely over the free abelian group. The ring laws and finite-sum expansion make this extension a unital ring homomorphism; uniqueness on words proves the universal property and functoriality.",
+        "deps": [
+          "lem-free-word-rings-are-unital-rings",
+          "thm-universal-property-of-free-modules",
+          "thm-the-free-monoid-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint",
+          "def-ring-homomorphism",
+          "prop-rings-and-homomorphisms-form-category-ring"
+        ]
+      },
+      {
+        "id": "lem-the-underlying-set-functor-on-rings-strictly-creates-split-coequalizers",
+        "kind": "lemma",
+        "title": "The underlying-set functor on unital rings strictly creates split coequalizers",
+        "strategy": "For a split set coequalizer of the underlying functions of two ring homomorphisms, use preservation of the split coequalizer by each finite Cartesian power. Descend zero, one, addition, negation, and multiplication uniquely to the quotient set. Cancel the quotient map, and its finite powers, to verify the ring laws and the universal property. Uniqueness of every descended operation gives strict creation.",
+        "deps": [
+          "def-split-coequalizer",
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+          "def-ring",
+          "def-ring-homomorphism",
+          "prop-rings-and-homomorphisms-form-category-ring",
+          "thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute"
+        ]
+      },
+      {
+        "id": "thm-monoids-and-rings-are-monadic-over-sets",
+        "kind": "theorem",
+        "title": "Monoids and unital rings are strictly monadic over sets",
+        "strategy": "For monoids, use the published on-the-nose identification of monoids with algebras of the free-monoid monad. For rings, combine the locally constructed free-ring adjunction with strict creation of split coequalizers and apply strict Beck monadicity. Keep the zero ring and the empty generating set in scope.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-the-free-monoid-monad-and-its-algebras-are-monoids",
+          "thm-the-free-unital-ring-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "lem-the-underlying-set-functor-on-rings-strictly-creates-split-coequalizers",
+          "thm-becks-strict-monadicity-theorem"
+        ]
+      },
+      {
+        "id": "cor-group-actions-are-strictly-monadic-over-sets",
+        "kind": "corollary",
+        "title": "$G$-sets are strictly monadic over sets",
+        "strategy": "For a fixed group $G$, construct the monad $T(X)=G\\times X$ with unit $(e,x)$ and multiplication $(g,(h,x))\\mapsto(gh,x)$. The algebra laws are exactly the action laws and algebra homomorphisms are exactly equivariant maps, so the comparison for the free-action adjunction is an isomorphism over $\\mathbf{Set}$.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "def-monad",
+          "def-t-algebra-and-algebra-homomorphism",
+          "def-eilenberg-moore-category",
+          "def-group-action",
+          "def-equivariant-map-of-group-actions"
+        ]
+      },
+      {
+        "id": "lem-pullback-direct-image-inverse-image-beck-chevalley-for-sets",
+        "kind": "lemma",
+        "title": "Direct and inverse image satisfy Beck–Chevalley for pullback squares of sets",
+        "strategy": "Write a pullback square elementwise. Membership in either composite means that a point has a preimage satisfying the same two coordinate equations. Prove both inclusions directly, including empty fibres, and then record the special section–retraction identities used by the contravariant power-set argument.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "def-power-set",
+          "def-image-and-preimage-under-a-relation"
+        ]
+      },
+      {
+        "id": "thm-the-contravariant-power-set-functor-is-monadic",
+        "kind": "theorem",
+        "title": "The contravariant power-set functor is monadic",
+        "strategy": "Transpose relations to obtain the self-adjunction between $\\mathbf{Set}$ and $\\mathbf{Set}^{\\mathrm{op}}$. It reflects isomorphisms because bijectivity of inverse image forces both surjectivity and injectivity of the original function. Coreflexive equalizers in $\\mathbf{Set}$ become reflexive coequalizers in the opposite category, and the Beck–Chevalley lemma shows inverse image preserves them. Apply crude monadicity.",
+        "deps": [
+          "thm-equivalent-encodings-of-an-adjunction",
+          "thm-crude-monadicity-the-reflexive-tripleability-theorem",
+          "lem-pullback-direct-image-inverse-image-beck-chevalley-for-sets",
+          "def-conservative-functor",
+          "thm-set-has-all-small-limits",
+          "def-opposite-category",
+          "def-power-set"
+        ]
+      },
+      {
+        "id": "def-finitary-functor-and-finitary-monad",
+        "kind": "definition",
+        "title": "Finitary functors and finitary monads",
+        "deps": [
+          "def-filtered-category-and-filtered-colimit",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "def-monad"
+        ]
+      },
+      {
+        "id": "def-category-of-models-for-an-algebraic-theory",
+        "kind": "definition",
+        "title": "Categories of models for algebraic theories",
+        "deps": [
+          "def-finitary-functor-and-finitary-monad",
+          "def-monadic-and-strictly-monadic-functor"
+        ]
+      },
+      {
+        "id": "prop-a-monadic-category-over-a-cocomplete-base-is-cocomplete-iff-it-has-coequalizers",
+        "kind": "proposition",
+        "title": "Over a cocomplete base, a monadic category is cocomplete exactly when it has coequalizers",
+        "strategy": "One direction is immediate. For the converse, transport to the Eilenberg–Moore category. Construct every set-indexed coproduct as a coequalizer between coproducts of free algebras, then use the standard construction of a small colimit from coproducts and coequalizers. Transport the resulting colimits back across the comparison equivalence.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-equalizers-and-coequalizers",
+          "def-free-t-algebra",
+          "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+          "thm-the-eilenberg-moore-adjunction-induces-the-given-monad",
+          "cor-left-adjoints-preserve-colimits",
+          "thm-small-colimits-from-coproducts-and-coequalizers",
+          "prop-equivalences-preserve-reflect-and-create-limits-and-colimits"
+        ]
+      },
+      {
+        "id": "lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice",
+        "kind": "lemma",
+        "title": "Under dependent choice, algebras for a finitary monad on a complete cocomplete locally small category have coequalizers",
+        "strategy": "For a parallel pair of $T$-algebra maps, form Riehl's successive coequalizers $q_n:B\\to Q_n$ and correction maps $u_n:TQ_n\\to Q_{n+1}$. At each stage restrict to rank-minimal coded witnesses so the admissible next stages form a set, then use dependent choice for the recursively dependent sequence. Finitarity identifies the colimit of $TQ_n$ with $TQ_\\omega$, producing a $T$-algebra $(Q_\\omega,u_\\omega)$ and a weakly universal algebra fork. This singleton is a solution set for the diagonal functor on parallel pairs; pointwise completeness and the objectwise general adjoint functor theorem produce the actual coequalizer.",
+        "deps": [
+          "def-finitary-functor-and-finitary-monad",
+          "def-dependent-choice",
+          "def-eilenberg-moore-category",
+          "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-all-base-limits",
+          "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+          "thm-general-adjoint-functor-theorem-objectwise-form",
+          "def-the-solution-set-condition",
+          "def-equalizers-and-coequalizers",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-a-finitary-monad-on-a-complete-cocomplete-locally-small-category-has-complete-and-cocomplete-algebras",
+        "kind": "theorem",
+        "title": "Under dependent choice, a finitary monad on a complete cocomplete locally small category has complete and cocomplete algebras",
+        "strategy": "The Eilenberg–Moore forgetful functor creates every base limit, giving completeness without choice. Under dependent choice, the preceding sequential-construction lemma gives all coequalizers. Apply the cocompleteness criterion over the cocomplete base. Keep the empty diagram and zero-stage construction explicit.",
+        "deps": [
+          "def-finitary-functor-and-finitary-monad",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-dependent-choice",
+          "thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-all-base-limits",
+          "lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice",
+          "prop-a-monadic-category-over-a-cocomplete-base-is-cocomplete-iff-it-has-coequalizers",
+          "thm-the-eilenberg-moore-adjunction-induces-the-given-monad"
+        ]
+      },
+      {
+        "id": "cor-categories-of-models-for-algebraic-theories-are-complete-and-cocomplete",
+        "kind": "corollary",
+        "title": "Under dependent choice, categories of models for algebraic theories are complete and cocomplete",
+        "strategy": "A category of models is equivalent over $\\mathbf{Set}$ to the algebras of a finitary monad. The category of sets is complete, cocomplete, and locally small, so apply the finitary-monad theorem and transport all small limits and colimits across the comparison equivalence.",
+        "deps": [
+          "def-category-of-models-for-an-algebraic-theory",
+          "thm-a-finitary-monad-on-a-complete-cocomplete-locally-small-category-has-complete-and-cocomplete-algebras",
+          "thm-set-has-all-small-limits",
+          "thm-set-has-all-small-colimits",
+          "prop-equivalences-preserve-reflect-and-create-limits-and-colimits",
+          "def-dependent-choice"
+        ]
+      },
+      {
+        "id": "def-ultrafilter-extension-principle",
+        "kind": "definition",
+        "title": "The ultrafilter extension principle (UL/BPI)",
+        "deps": [
+          "def-ultrafilter"
+        ]
+      },
+      {
+        "id": "lem-a-given-ultrafilter-on-a-compact-hausdorff-space-has-a-unique-limit",
+        "kind": "lemma",
+        "title": "A given ultrafilter on a compact Hausdorff space has a unique limit",
+        "strategy": "The closed sets belonging to the given ultrafilter have the finite-intersection property, so compactness supplies a common point. That point is a cluster point of the ultrafilter and hence a limit. Hausdorff separation rules out two limits. The argument selects no extension of a filter and is valid for empty and singleton spaces: the empty space carries no ultrafilter.",
+        "deps": [
+          "def-compact-space",
+          "def-hausdorff-space",
+          "def-filter-convergence-and-cluster-point",
+          "def-ultrafilter",
+          "thm-compact-iff-fip",
+          "lem-ultrafilter-cluster-points-are-limits"
+        ]
+      },
+      {
+        "id": "lem-the-limit-map-of-a-compact-hausdorff-space-is-an-ultrafilter-algebra",
+        "kind": "lemma",
+        "title": "The ultrafilter-limit map of a compact Hausdorff space is an algebra for the ultrafilter monad",
+        "strategy": "Let $\\xi_X:\\beta X\\to X$ send each ultrafilter to its unique limit. Principal ultrafilters converge to their generating points. For an ultrafilter of ultrafilters, compare the flattened ultrafilter with the pushforward along $\\xi_X$: every neighbourhood belonging to the latter gives the required basic set for the former, so both converge to the same point. Uniqueness of limits yields the multiplication law.",
+        "deps": [
+          "lem-a-given-ultrafilter-on-a-compact-hausdorff-space-has-a-unique-limit",
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "thm-the-ultrafilter-monad-is-a-monad",
+          "def-t-algebra-and-algebra-homomorphism"
+        ]
+      },
+      {
+        "id": "lem-a-continuous-map-of-compact-hausdorff-spaces-is-an-ultrafilter-algebra-homomorphism",
+        "kind": "lemma",
+        "title": "A continuous map of compact Hausdorff spaces is an ultrafilter-algebra homomorphism",
+        "strategy": "For an ultrafilter $\\mathcal U$ on the source, pushforward is an ultrafilter. If $\\mathcal U$ converges to $x$, continuity makes $f_*\\mathcal U$ converge to $f(x)$. Uniqueness in the compact Hausdorff target therefore gives $f\\xi_X=\\xi_Y\\beta f$, exactly the algebra-homomorphism equation.",
+        "deps": [
+          "lem-a-given-ultrafilter-on-a-compact-hausdorff-space-has-a-unique-limit",
+          "lem-ultrafilter-pushforward-is-an-ultrafilter-and-is-functorial",
+          "def-t-algebra-and-algebra-homomorphism",
+          "def-continuous-map-top",
+          "def-filter-convergence-and-cluster-point"
+        ]
+      },
+      {
+        "id": "def-topology-induced-by-an-ultrafilter-algebra",
+        "kind": "definition",
+        "title": "The open-set family induced by an ultrafilter algebra",
+        "deps": [
+          "def-t-algebra-and-algebra-homomorphism",
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "def-topological-space"
+        ]
+      },
+      {
+        "id": "lem-the-open-sets-induced-by-an-ultrafilter-algebra-form-a-topology",
+        "kind": "lemma",
+        "title": "The open-set family induced by an ultrafilter algebra is a topology",
+        "strategy": "The empty set and whole set satisfy the defining implication. An arbitrary union is open because an algebra value in the union lies in one open member, and a finite intersection is open because ultrafilters are closed under finite intersections. This proof uses neither ultrafilter extension nor any choice principle.",
+        "deps": [
+          "def-topology-induced-by-an-ultrafilter-algebra",
+          "def-topological-space",
+          "def-ultrafilter"
+        ]
+      },
+      {
+        "id": "lem-closure-in-an-ultrafilter-algebra-topology",
+        "kind": "lemma",
+        "title": "Under the ultrafilter lemma, closure in an ultrafilter-algebra topology is the image of ultrafilters containing the set",
+        "strategy": "For $A\\subseteq X$, show first that $A\\subseteq\\xi[\\widehat A]$. To prove $\\xi[\\widehat A]$ closed, extend the finite-intersection family consisting of $\\widehat A$ and inverse images under $\\xi$ of members of a chosen ultrafilter, then apply the algebra multiplication law. Minimality among closed supersets follows directly from the closed-set characterization. Empty $A$ is checked separately, since no ultrafilter contains it.",
+        "deps": [
+          "def-topology-induced-by-an-ultrafilter-algebra",
+          "lem-the-open-sets-induced-by-an-ultrafilter-algebra-form-a-topology",
+          "def-interior-closure-boundary-top",
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "thm-ultrafilter-characterisation",
+          "def-ultrafilter-extension-principle"
+        ]
+      },
+      {
+        "id": "lem-an-ultrafilter-algebra-map-is-the-unique-ultrafilter-limit",
+        "kind": "lemma",
+        "title": "Under the ultrafilter lemma, an ultrafilter algebra maps each ultrafilter to its unique limit",
+        "strategy": "The defining open-set condition makes $\\xi(\\mathcal U)$ a limit of $\\mathcal U$. If $x$ is another limit, the closure formula places $x$ in $\\xi[\\widehat A]$ for every $A\\in\\mathcal U$. Extend the resulting finite-intersection family on $\\beta X$ to an ultrafilter of ultrafilters; the two algebra laws force $x=\\xi(\\mathcal U)$. Include principal ultrafilters and the empty underlying set.",
+        "deps": [
+          "lem-closure-in-an-ultrafilter-algebra-topology",
+          "def-filter-convergence-and-cluster-point",
+          "def-topology-induced-by-an-ultrafilter-algebra",
+          "thm-ultrafilter-characterisation",
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "def-ultrafilter-extension-principle"
+        ]
+      },
+      {
+        "id": "lem-an-ultrafilter-algebra-determines-a-compact-hausdorff-topology",
+        "kind": "lemma",
+        "title": "Under the ultrafilter lemma, every ultrafilter algebra determines a compact Hausdorff topology",
+        "strategy": "Use the preceding topology and unique-limit lemmas. Every ultrafilter converges, so the published ultrafilter compactness characterization gives compactness under the stated ultrafilter-lemma assumption. If two distinct points could not be separated, their two neighbourhood filters would have the finite-intersection property; an ultrafilter extension would converge to both, contradicting uniqueness. Thus the topology is Hausdorff.",
+        "deps": [
+          "lem-the-open-sets-induced-by-an-ultrafilter-algebra-form-a-topology",
+          "lem-an-ultrafilter-algebra-map-is-the-unique-ultrafilter-limit",
+          "thm-compactness-via-nets-filters-and-ultrafilters",
+          "def-hausdorff-space",
+          "def-ultrafilter-extension-principle"
+        ]
+      },
+      {
+        "id": "thm-the-compact-hausdorff-and-ultrafilter-algebra-constructions-are-inverse",
+        "kind": "theorem",
+        "title": "Under the ultrafilter lemma, compact Hausdorff spaces and ultrafilter algebras are recovered by the two limit constructions",
+        "strategy": "Starting with an algebra, the unique-limit lemma says the limit map of its induced topology is exactly its structure map. Starting with a compact Hausdorff space, characterize closed sets by stability under limits of ultrafilters containing them; this recovers the original topology. The continuous-map lemma gives one morphism direction, and the open-set definition plus preservation of algebra limits gives the converse. These object and morphism identities make the two functors inverse.",
+        "deps": [
+          "lem-the-limit-map-of-a-compact-hausdorff-space-is-an-ultrafilter-algebra",
+          "lem-a-continuous-map-of-compact-hausdorff-spaces-is-an-ultrafilter-algebra-homomorphism",
+          "lem-an-ultrafilter-algebra-determines-a-compact-hausdorff-topology",
+          "lem-an-ultrafilter-algebra-map-is-the-unique-ultrafilter-limit",
+          "def-topology-induced-by-an-ultrafilter-algebra",
+          "def-continuous-map-top",
+          "def-ultrafilter-extension-principle"
+        ]
+      },
+      {
+        "id": "thm-compact-hausdorff-spaces-are-monadic-over-sets",
+        "kind": "theorem",
+        "title": "Under the ultrafilter lemma, compact Hausdorff spaces are monadic over sets",
+        "strategy": "The inverse-constructions theorem identifies $\\mathbf{CompHaus}$ over $\\mathbf{Set}$ with the Eilenberg–Moore category of the ultrafilter monad. Transport the free–forgetful Eilenberg–Moore adjunction across this identification. The induced monad is the published ultrafilter monad, and the comparison is an equivalence; no separate Stone–Čech construction or dependent-choice hypothesis is imported.",
+        "deps": [
+          "thm-the-compact-hausdorff-and-ultrafilter-algebra-constructions-are-inverse",
+          "thm-the-eilenberg-moore-adjunction-induces-the-given-monad",
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-the-ultrafilter-monad-is-a-monad",
+          "def-ultrafilter-extension-principle"
+        ]
+      },
+      {
+        "id": "cor-a-continuous-bijection-of-compact-hausdorff-spaces-is-a-homeomorphism-by-conservativity",
+        "kind": "corollary",
+        "title": "A continuous bijection of compact Hausdorff spaces is a homeomorphism, by conservativity",
+        "strategy": "Under the compact-Hausdorff monadicity hypothesis, the underlying-set functor is conservative. A continuous bijection has an isomorphism as its underlying function, so it is an isomorphism in $\\mathbf{CompHaus}$; its inverse is continuous and it is a homeomorphism. The authored Remark cross-links the existing direct compact-to-Hausdorff proof.",
+        "deps": [
+          "thm-compact-hausdorff-spaces-are-monadic-over-sets",
+          "thm-a-monadic-functor-is-conservative",
+          "def-homeomorphism-and-open-maps",
+          "prop-topological-spaces-and-continuous-maps-form-category-top"
+        ]
+      },
+      {
+        "id": "cex-a-conservative-functor-that-is-not-monadic",
+        "kind": "counterexample",
+        "title": "Torsion-free abelian groups give a conservative right adjoint that is not monadic",
+        "strategy": "Compose the free-abelian-group adjunction from sets with the inclusion of torsion-free abelian groups. Free abelian groups are torsion-free, so the induced monad is canonically isomorphic to the usual free-abelian-group monad, but its comparison misses every abelian group with nonzero torsion, such as $\\mathbb Z/2$. The underlying-set functor is conservative because a bijective group homomorphism is an isomorphism.",
+        "deps": [
+          "def-conservative-functor",
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups",
+          "thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "thm-the-free-module-monad-and-its-algebras-are-modules",
+          "def-annihilator-and-torsion-of-a-module",
+          "prop-integers-modulo-n-as-a-quotient-group"
+        ]
+      },
+      {
+        "id": "fs-becks-theorem-characterises-strict-monadicity",
+        "kind": "false-statement",
+        "title": "FALSE: ordinary Beck creation characterizes strict monadicity",
+        "strategy": "Build the category whose objects are tagged sets $(X,i)$ with $i\\in\\{0,1\\}$ and whose morphisms are all functions of underlying sets. The forgetful functor to $\\mathbf{Set}$ has a left adjoint choosing tag zero and induces the identity monad. Its comparison is an equivalence but not an isomorphism, because two distinct tagged objects have the same image. Thus ordinary creation yields monadicity, while strict creation is the extra hypothesis for strict monadicity.",
+        "deps": [
+          "def-monadic-and-strictly-monadic-functor",
+          "thm-becks-monadicity-theorem",
+          "thm-becks-strict-monadicity-theorem",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "prop-category-isomorphisms-are-bijective-on-objects-and-morphisms"
+        ]
+      },
+      {
+        "id": "fs-every-conservative-right-adjoint-is-monadic",
+        "kind": "false-statement",
+        "title": "FALSE: every conservative right adjoint is monadic",
+        "strategy": "Use the preceding torsion-free-abelian-group counterexample. It has a left adjoint and reflects isomorphisms, but its comparison with algebras for the induced free-abelian-group monad is not essentially surjective.",
+        "deps": [
+          "cex-a-conservative-functor-that-is-not-monadic",
+          "def-conservative-functor",
+          "def-monadic-and-strictly-monadic-functor"
+        ]
+      },
+      {
+        "id": "fs-a-u-split-pair-is-a-split-pair-in-the-domain",
+        "kind": "false-statement",
+        "title": "FALSE: every $U$-split pair is split in the domain",
+        "strategy": "Use the canonical presentation of an algebra. Its underlying fork is split by the unit components, so the parallel pair is $U^T$-split. For the free-monoid monad on a nontrivial monoid, the canonical unit section is not an algebra homomorphism, so that base splitting is not a splitting in the algebra category.",
+        "deps": [
+          "def-u-split-coequalizer-and-creation-of-their-coequalizers",
+          "thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras"
+        ]
+      },
+      {
+        "id": "fs-the-forgetful-functor-from-topological-spaces-is-monadic",
+        "kind": "false-statement",
+        "title": "FALSE: the underlying-set functor from topological spaces is monadic",
+        "strategy": "A monadic functor is conservative. The identity from a two-point discrete space to the same set with the Sierpiński topology is a continuous bijection and hence an underlying-set isomorphism, but it is not a homeomorphism and therefore not an isomorphism in $\\mathbf{Top}$. Thus the underlying-set functor is not conservative and cannot be monadic.",
+        "deps": [
+          "thm-a-monadic-functor-is-conservative",
+          "prop-topological-spaces-and-continuous-maps-form-category-top",
+          "fs-continuous-bijection-is-a-homeomorphism",
+          "def-conservative-functor"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.008,
+    "id": "monadicity-and-becks-theorem-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Monadicity and Beck's Theorem — Examples",
+    "companion": "monadicity-and-becks-theorem",
+    "requires": [
+      "monadicity-and-becks-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-a-split-coequalizer-in-set",
+        "kind": "example",
+        "title": "A split coequalizer on a two-element set",
+        "strategy": "Take $X=Y=\\{0,1\\}$, let $g=t=1_Y$, let $f$ be constant at $0$, and let $h:Y\\to\\{*\\}$ be the unique map with section $s(*)=0$. Verify all four splitting equations and then check the coequalizer universal property directly. This is a finite exhaustive witness.",
+        "deps": [
+          "def-split-coequalizer",
+          "thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-the-canonical-presentation-of-a-monoid",
+        "kind": "example",
+        "title": "The canonical free-algebra presentation of a two-element idempotent monoid",
+        "strategy": "For $M=\\{1,e\\}$ with $e^2=e$, write the two maps from words of words in $M$ to words in $M$: evaluation of each inner word and concatenation. Their coequalizer evaluates a word in $M$ to its product. Verify on arbitrary finite words, including the empty word, and identify the unit splittings on underlying sets.",
+        "deps": [
+          "thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras",
+          "thm-the-free-monoid-monad-and-its-algebras-are-monoids",
+          "def-semigroup-and-monoid"
+        ]
+      },
+      {
+        "id": "ex-the-comparison-functor-for-the-free-group-adjunction",
+        "kind": "example",
+        "title": "The comparison functor for the free-group adjunction",
+        "strategy": "For a group $G$, compute the comparison object as the underlying set $UG$ with structure map evaluating a reduced word in $UG$ to its product in $G$. Check that group homomorphisms are exactly the algebra homomorphisms and illustrate the formula on the cyclic group of order two.",
+        "deps": [
+          "thm-the-free-group-monad-and-its-algebras-are-groups",
+          "thm-the-comparison-functor-exists-and-is-unique",
+          "def-eilenberg-moore-category",
+          "prop-integers-modulo-n-as-a-quotient-group"
+        ]
+      },
+      {
+        "id": "ex-the-kleisli-adjunction-for-the-maybe-monad-is-monadic-but-not-strictly-monadic",
+        "kind": "example",
+        "title": "The Kleisli adjunction for the maybe monad is monadic but not strictly monadic",
+        "strategy": "For the maybe monad $T(X)=X\\amalg\\{\\bot\\}$, identify its Kleisli category with sets and partial functions and its Eilenberg–Moore category with pointed sets. Adjoining and deleting a basepoint give quasi-inverse comparison functors, but the comparison is not bijective on objects under the fixed concrete encodings. Thus it is an equivalence and not an isomorphism.",
+        "deps": [
+          "def-monad",
+          "def-kleisli-category",
+          "def-eilenberg-moore-category",
+          "def-t-algebra-and-algebra-homomorphism",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "prop-category-isomorphisms-are-bijective-on-objects-and-morphisms",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "cex-a-reflexive-pair-whose-coequalizer-is-not-preserved",
+        "kind": "counterexample",
+        "title": "A reflexive coequalizer of sets not preserved by $\\mathbf{Set}(\\mathbb N,-)$",
+        "strategy": "Let $f=[\\sigma,1]$ and $g=[1,1]:\\mathbb N\\amalg\\mathbb N\\rightrightarrows\\mathbb N$, with common section the second coproduct injection; the unique map $\\mathbb N\\to1$ is their coequalizer. After applying $\\mathbf{Set}(\\mathbb N,-)$, each generating relation changes every coordinate by at most one, so any finite zigzag has a uniform coordinatewise bound. The zero sequence and identity sequence have unbounded difference and are not identified, although both map to the sole sequence in $1^{\\mathbb N}$.",
+        "deps": [
+          "def-reflexive-pair",
+          "def-equalizers-and-coequalizers",
+          "def-natural-numbers",
+          "def-products-and-coproducts",
+          "prop-sets-and-functions-form-category-set",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "ex-the-ultrafilter-algebra-structure-on-a-finite-discrete-space",
+        "kind": "example",
+        "title": "The ultrafilter algebra on a finite discrete space",
+        "strategy": "For a finite set $X$, use the ultrafilter decision property to prove every ultrafilter is principal at a unique point. The limit map is therefore inverse to the principal-unit bijection and satisfies the algebra laws. Verify the empty set separately, where both $X$ and $\\beta X$ are empty, and compute the two-point case explicitly.",
+        "deps": [
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "thm-the-ultrafilter-monad-is-a-monad",
+          "thm-ultrafilter-characterisation",
+          "def-standard-topologies",
+          "def-compact-space",
+          "def-hausdorff-space"
+        ]
+      },
+      {
+        "id": "ex-beta-of-the-naturals-as-an-ultrafilter-algebra",
+        "kind": "example",
+        "title": "$\\beta\\mathbb N$ as the free ultrafilter algebra",
+        "strategy": "The free algebra on $\\mathbb N$ for the ultrafilter monad has carrier $\\beta\\mathbb N$ and structure map $\\mu_{\\mathbb N}:\\beta\\beta\\mathbb N\\to\\beta\\mathbb N$. Expand the membership formula for flattening, check both algebra laws from the monad laws, and distinguish principal from free ultrafilters only under the explicitly stated ultrafilter-lemma hypothesis.",
+        "deps": [
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "thm-the-ultrafilter-monad-is-a-monad",
+          "def-free-t-algebra",
+          "def-eilenberg-moore-category",
+          "def-natural-numbers",
+          "def-ultrafilter-extension-principle"
+        ]
+      }
+    ]
+  }
+]

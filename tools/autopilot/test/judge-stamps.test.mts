@@ -22,11 +22,15 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'apply-judge-stamps.mjs');
 // The CONFIGURED lineup, which the tool resolves from JUDGE_LINEUP and these
-// tests run at its default (owner, 2026-08-20: deepseek+terra). The retired-lane
-// row below is whichever lane is not in it — the roles swapped on that date, and
-// the property under test did not.
-const LANES = ['deepseek-v4-pro', 'gpt-5.6-terra'];
-const RETIRED_LANE = 'claude-sonnet-5';
+// tests run at its default (owner, 2026-08-23: deepseek+opus). The retired-lane
+// row below is whichever lane is not in it — the roles have now swapped three
+// times, and the property under test did not move once.
+const LANES = ['deepseek-v4-pro', 'claude-opus-5[1m]'];
+const RETIRED_LANE = 'gpt-5.6-terra';
+// `[1m]` is a CHARACTER CLASS in a regex and a literal in the model id. Every
+// assertion below that matches the stamp text must go through this, or it
+// silently matches `claude-opus-5m` and passes against a stamp nobody wrote.
+const SECOND_LANE_RE = LANES[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const STUB_CONTEXT = 'c'.repeat(64);
 const OTHER_CONTEXT = 'f'.repeat(64);
 
@@ -78,7 +82,7 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
   r = run(dir, '--apply', '--report', 'research/stamps.json');
   assert.equal(r.status, 0, r.stderr);
   const text = readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8');
-  assert.match(text, / {2}judge:\n {4}model: "deepseek-v4-pro \+ gpt-5\.6-terra"\n {4}verdict: pass\n/);
+  assert.match(text, new RegExp(` {2}judge:\\n {4}model: "deepseek-v4-pro \\+ ${SECOND_LANE_RE}"\\n {4}verdict: pass\\n`));
   const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
   assert.deepEqual(receipt.stamped.map((s: any) => s.id), ['itm-a']);
 
@@ -98,7 +102,7 @@ test('a lane rejection never stamps; a stale pass block fails verify and is stri
   // seed the stale pass a rejection now contradicts
   const seeded = itemText('itm-b').replace(
     '  precheck: pass\n',
-    '  precheck: pass\n  judge:\n    model: "deepseek-v4-pro + gpt-5.6-terra"\n    verdict: pass\n    date: 2026-08-01\n');
+    `  precheck: pass\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
   writeFileSync(join(dir, 'items', 'itm-b.md'), seeded);
   const h = itemHashJudge(seeded);
   writeLedger(dir, [
@@ -128,7 +132,7 @@ test('recorded-not-proved material is never stamped and an old stamp is stripped
   const seeded = itemText('itm-unproved')
     .replace('status: draft\n', 'status: draft\nproved_here: false\n')
     .replace('  precheck: pass\n',
-      '  precheck: n/a\n  judge:\n    model: "deepseek-v4-pro + gpt-5.6-terra"\n    verdict: pass\n    date: 2026-08-01\n');
+      `  precheck: n/a\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
   writeFileSync(join(dir, 'items', 'itm-unproved.md'), seeded);
   const h = itemHashJudge(seeded);
   writeLedger(dir, [

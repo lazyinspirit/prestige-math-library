@@ -1,0 +1,656 @@
+{
+  "version": 1,
+  "level": "frontier-17",
+  "scope": [
+    "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+    "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+    "prop-tangent-plane-is-invariant-under-regular-reparametrization",
+    "cor-regular-surface-reparametrization-has-constant-orientation-sign",
+    "thm-surface-area-density-is-cross-product-norm",
+    "lem-oriented-area-vector-under-surface-reparametrization",
+    "thm-surface-area-and-scalar-integrals-are-reparametrization-invariant",
+    "thm-flux-under-surface-reparametrization",
+    "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals",
+    "thm-regular-level-surfaces-have-local-regular-parametrizations",
+    "cor-compact-regular-level-surfaces-have-finite-patch-covers",
+    "thm-surface-integrals-over-c-one-graphs",
+    "thm-scalar-surface-integrals-on-a-surface-of-revolution",
+    "cor-surface-area-of-revolution-formula",
+    "ex-sphere-and-hemisphere-surface-integrals",
+    "ex-closed-cylinder-as-a-finitely-patched-oriented-surface",
+    "ex-torus-surface-area",
+    "ex-downward-flux-on-the-graph-z-equals-xy",
+    "ex-lateral-area-of-a-right-circular-cone",
+    "cex-degenerate-surface-parametrization-collapses-to-a-curve",
+    "ex-orientation-reversal-preserves-area-and-negates-flux",
+    "ex-gabriels-horn-has-unbounded-truncated-lateral-area",
+    "cex-schwarz-lantern-polyhedral-areas-diverge",
+    "fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas",
+    "fs-continuity-alone-suffices-for-the-regular-surface-area-formula",
+    "fs-flux-is-independent-of-the-parametrization"
+  ],
+  "contracts": {
+    "lem-cross-product-is-bilinear-alternating-and-orthogonal": {
+      "citations": [
+        {"fact":"F1","source":"def-cross-product-in-r3","source_section":"Definition","quote":"For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.","uses":["1.1","1.2"]},
+        {"fact":"L1","source":"def-determinant-of-a-square-matrix","source_section":"Definition","quote":"Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"bilinear-alternating","claim":"Coordinate expansion proves bilinearity and alternation.","step":"1.1","inputs":["F1","algebra"]},
+        {"id":"triple-product","claim":"The dot product with a third vector equals the three-by-three determinant.","step":"1.2","inputs":["F1","L1","algebra"]},
+        {"id":"orthogonality","claim":"Repeated determinant columns give orthogonality to both factors.","step":"2.1","inputs":["step 1.2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem concerns a fixed triple of vectors in the nonempty coordinate space R^3, not a variable finite family."},
+        {"case":"zero","status":"checked","evidence":"step 1.1 includes either factor equal to the zero vector and gives a zero cross product."},
+        {"case":"one","status":"not_applicable","reason":"No indexed induction or denominator has a first nontrivial value one."},
+        {"case":"degenerate","status":"checked","evidence":"step 2.1 remains valid when the factors are parallel or equal."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval or parameter boundary occurs in the algebraic identities."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Every coordinate and determinant term is explicit; no witness is selected."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement lists identities and orthogonality conclusions, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted for the listed algebraic properties."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-cross-product-norm-is-the-two-vector-gram-determinant": {
+      "citations": [
+        {"fact":"L1","source":"lem-cross-product-is-bilinear-alternating-and-orthogonal","source_section":"Statement","quote":"For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-gram-determinant-detects-linear-independence","source_section":"Statement","quote":"It is positive if and only if the list is linearly independent, and it is zero if and only if the list is linearly dependent.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"lagrange-identity","claim":"Expansion gives the squared-norm identity.","step":"1.1","inputs":["L1","algebra"]},
+        {"id":"gram-identification","claim":"The right side is the determinant of the two-vector Gram matrix.","step":"1.2","inputs":["step 1.1","algebra"]},
+        {"id":"dependence-equivalence","claim":"The Gram criterion gives both dependence directions.","step":"2.1","inputs":["step 1.2","L2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The Gram list has exactly two entries, so the published empty-Gram convention is not invoked."},
+        {"case":"zero","status":"checked","evidence":"steps 1.1 and 2.1 include either vector equal to zero."},
+        {"case":"one","status":"not_applicable","reason":"There is no one-index base case or unit denominator."},
+        {"case":"degenerate","status":"checked","evidence":"step 2.1 treats parallel vectors and proves both quantities vanish."},
+        {"case":"endpoints","status":"not_applicable","reason":"The result is pointwise linear algebra with no interval endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No vector or coefficient is chosen from a nonempty set."},
+        {"case":"iff-forward","status":"checked","evidence":"step 2.1 proves independence implies positive determinant and nonzero cross product."},
+        {"case":"iff-reverse","status":"checked","evidence":"step 2.1 proves nonzero cross product implies independence via the Gram criterion."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-tangent-plane-is-invariant-under-regular-reparametrization": {
+      "citations": [
+        {"fact":"F1","source":"def-tangent-plane-of-a-regular-surface-patch","source_section":"Definition","quote":"At an interior parameter point, the tangent plane is $\\operatorname{span}\\{\\varphi_u,\\varphi_v\\}$.","uses":["1.1","2.1"]},
+        {"fact":"F2","source":"def-surface-reparametrization-and-orientation","source_section":"Definition","quote":"A regular reparametrization from $\\psi$ to $\\varphi$ is a $C^1$ diffeomorphism $h$ between neighbourhoods of their compact Jordan parameter regions with $\\psi=\\varphi\\circ h$.","uses":["1.1"]},
+        {"fact":"L1","source":"thm-chain-rule-for-total-derivatives","source_section":"Statement","quote":"$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$","uses":["1.1","2.1"]}
+      ],
+      "derivations": [
+        {"id":"forward-containment","claim":"The chain rule makes each reparametrized tangent a linear combination of the original tangents.","step":"1.1","inputs":["F1","F2","L1","given","algebra"]},
+        {"id":"reverse-containment","claim":"Apply the same calculation to the inverse parameter diffeomorphism.","step":"2.1","inputs":["step 1.1","F1","L1"]},
+        {"id":"equal-spans","claim":"The two containments give equality of tangent planes.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The tangent-plane assertion is pointwise on a nonempty parameter interior."},
+        {"case":"zero","status":"checked","evidence":"A zero coefficient in the two-by-two derivative matrix causes no problem; only zero determinant is excluded."},
+        {"case":"one","status":"checked","evidence":"The identity reparametrization gives equality immediately and is included in the chain-rule calculation."},
+        {"case":"degenerate","status":"checked","evidence":"Both surface tangent pairs and the parameter derivative are full rank on the interior by hypothesis."},
+        {"case":"endpoints","status":"checked","evidence":"The Statement is interior-point intrinsic; boundary tangent limits use the stipulated C^1 neighbourhood extensions and assert no new rank there."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The inverse diffeomorphism is part of the reparametrization data and is not selected."},
+        {"case":"iff-forward","status":"checked","evidence":"step 1.1 proves containment from the original chart to the reparametrized chart."},
+        {"case":"iff-reverse","status":"checked","evidence":"step 2.1 proves the reverse containment through the inverse reparametrization."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-regular-surface-reparametrization-has-constant-orientation-sign": {
+      "citations": [
+        {"fact":"F1","source":"def-surface-reparametrization-and-orientation","source_section":"Definition","quote":"A regular surface reparametrization is orientation-preserving when its parameter Jacobian determinant is positive and orientation-reversing when it is negative.","uses":["2.1"]},
+        {"fact":"L1","source":"thm-jacobian-sign-is-constant-on-a-connected-regular-domain","source_section":"Statement","quote":"Then either $\\det Df(x)>0$ for every $x\\in U$ or $\\det Df(x)<0$ for every $x\\in U$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"interior-sign","claim":"Apply the Jacobian-sign theorem on the connected parameter interior.","step":"1.1","inputs":["L1","given"]},
+        {"id":"boundary-extension","claim":"Continuity and nonvanishing extend the sign to the compact boundary.","step":"1.2","inputs":["step 1.1","given"]},
+        {"id":"orientation-dichotomy","claim":"Read the two alternatives as preserving or reversing.","step":"2.1","inputs":["step 1.2","F1","cases-exhaustive"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The parameter-region definition requires nonempty interior before step 1.1."},
+        {"case":"zero","status":"checked","evidence":"A zero Jacobian determinant is excluded by the neighbourhood-diffeomorphism hypothesis."},
+        {"case":"one","status":"not_applicable","reason":"The parameter dimension is fixed at two and no one-index construction occurs."},
+        {"case":"degenerate","status":"checked","evidence":"Disconnected parameter interiors are excluded; without connectedness mixed component signs are not claimed."},
+        {"case":"endpoints","status":"checked","evidence":"step 1.2 explicitly carries the sign from the interior to the parameter boundary."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof applies a dichotomy theorem and makes no selection."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is a dichotomy, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse from a chosen sign to diffeomorphism is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-surface-area-density-is-cross-product-norm": {
+      "citations": [
+        {"fact":"F1","source":"def-first-fundamental-form-and-surface-area-density","source_section":"Definition","quote":"The surface area density is $J_\\varphi=\\sqrt{\\det G_\\varphi}$, where $G_\\varphi$ is the Gram matrix of $\\varphi_u$ and $\\varphi_v$.","uses":["1.1"]},
+        {"fact":"L1","source":"thm-cross-product-norm-is-the-two-vector-gram-determinant","source_section":"Statement","quote":"For $u,v\\in\\mathbb R^3$, $\\|u\\times v\\|_2^2=\\det G(u,v)$, and this value is positive exactly when $u$ and $v$ are linearly independent.","uses":["1.1","2.1"]}
+      ],
+      "derivations": [
+        {"id":"square-identity","claim":"Identify the density square with the cross-product norm square.","step":"1.1","inputs":["F1","L1"]},
+        {"id":"take-root","claim":"The unique nonnegative square root gives equality of densities.","step":"1.2","inputs":["step 1.1","algebra"]},
+        {"id":"regular-positivity","claim":"Interior independence makes the common density positive.","step":"2.1","inputs":["step 1.2","L1","given"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The identity is pointwise at a parameter value and has exactly two tangent vectors."},
+        {"case":"zero","status":"checked","evidence":"step 1.2 still gives equality when a boundary density is zero."},
+        {"case":"one","status":"not_applicable","reason":"No indexed base case or unit parameter is involved."},
+        {"case":"degenerate","status":"checked","evidence":"step 2.1 distinguishes forbidden interior dependence from permitted boundary degeneracy."},
+        {"case":"endpoints","status":"checked","evidence":"Boundary zeros are retained in step 1.2 and not divided out."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The nonnegative square root is unique and no witness is chosen."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The main assertion is an equality; independence equivalence is supplied by the cited theorem."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No separate converse beyond the cited Gram criterion is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-oriented-area-vector-under-surface-reparametrization": {
+      "citations": [
+        {"fact":"L1","source":"thm-chain-rule-for-total-derivatives","source_section":"Statement","quote":"$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$","uses":["1.1"]},
+        {"fact":"L2","source":"lem-cross-product-is-bilinear-alternating-and-orthogonal","source_section":"Statement","quote":"For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.","uses":["1.2"]},
+        {"fact":"F1","source":"thm-surface-area-density-is-cross-product-norm","source_section":"Statement","quote":"For every parameter point, $J_\\varphi=\\|\\varphi_u\\times\\varphi_v\\|_2$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"parameter-derivatives","claim":"The chain rule writes both new tangents as linear combinations of the old tangents.","step":"1.1","inputs":["L1","given"]},
+        {"id":"oriented-vector-law","claim":"Bilinearity and alternation leave the determinant times the old area vector.","step":"1.2","inputs":["step 1.1","L2","algebra"]},
+        {"id":"density-law","claim":"Taking norms yields the absolute-Jacobian density law.","step":"2.1","inputs":["step 1.2","F1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The identities are pointwise on a nonempty parameter interior."},
+        {"case":"zero","status":"checked","evidence":"A zero boundary area vector remains zero in steps 1.2–2.1."},
+        {"case":"one","status":"checked","evidence":"A unit Jacobian determinant gives the unchanged oriented vector in step 1.2."},
+        {"case":"degenerate","status":"checked","evidence":"The reparametrization determinant cannot vanish; boundary degeneracy of the surface vector is still allowed."},
+        {"case":"endpoints","status":"checked","evidence":"The formula extends continuously to parameter-boundary points where derivatives exist."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All coefficients are derivative entries determined by the maps."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma states transformation identities, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse characterization of reparametrizations is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-surface-area-and-scalar-integrals-are-reparametrization-invariant": {
+      "citations": [
+        {"fact":"F1","source":"def-surface-area-and-scalar-surface-integral-of-a-patch","source_section":"Definition","quote":"For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.","uses":["1.1","2.1"]},
+        {"fact":"L1","source":"lem-oriented-area-vector-under-surface-reparametrization","source_section":"Statement","quote":"If $\\psi=\\varphi\\circ h$, then $J_\\psi=(J_\\varphi\\circ h)|\\det Dh|$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-change-of-variables-for-compact-jordan-sets","source_section":"Statement","quote":"$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"transform-integrand","claim":"Substitute the density transformation in the reparametrized scalar integral.","step":"1.1","inputs":["F1","L1","given"]},
+        {"id":"change-variables","claim":"Change variables by the parameter diffeomorphism to recover the original integral.","step":"1.2","inputs":["step 1.1","L2"]},
+        {"id":"area-specialization","claim":"The scalar field one gives area invariance.","step":"2.1","inputs":["step 1.2","F1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Admissible parameter regions have nonempty interiors; the theorem does not assert an empty patch."},
+        {"case":"zero","status":"checked","evidence":"Zero boundary densities are retained in step 1.1 and need no division."},
+        {"case":"one","status":"checked","evidence":"step 2.1 explicitly uses the constant scalar field one."},
+        {"case":"degenerate","status":"checked","evidence":"Interior degeneracy is excluded; content-zero boundary failures do not alter either side."},
+        {"case":"endpoints","status":"checked","evidence":"The compact-Jordan theorem in step 1.2 includes the full parameter boundaries."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The reparametrization and scalar field are given, with no selected witness."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem proves invariance under a supplied reparametrization, not a characterization."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Equal integrals do not imply two patches are reparametrizations, and no such converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-flux-under-surface-reparametrization": {
+      "citations": [
+        {"fact":"F1","source":"def-oriented-unit-normal-and-flux-of-a-surface-patch","source_section":"Definition","quote":"For a continuous vector field $F$, the flux in the orientation induced by $\\varphi$ is $\\int_D(F\\circ\\varphi)\\cdot(\\varphi_u\\times\\varphi_v)$.","uses":["1.1"]},
+        {"fact":"L1","source":"lem-oriented-area-vector-under-surface-reparametrization","source_section":"Statement","quote":"If $\\psi=\\varphi\\circ h$, then $\\psi_s\\times\\psi_t=(\\det Dh)(\\varphi_u\\times\\varphi_v)\\circ h$.","uses":["1.1"]},
+        {"fact":"L2","source":"cor-regular-surface-reparametrization-has-constant-orientation-sign","source_section":"Statement","quote":"Every regular reparametrization of a connected parameter region is either orientation-preserving everywhere or orientation-reversing everywhere.","uses":["1.2","2.1"]},
+        {"fact":"L3","source":"thm-change-of-variables-for-compact-jordan-sets","source_section":"Statement","quote":"$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$","uses":["1.2","2.1"]}
+      ],
+      "derivations": [
+        {"id":"flux-transform","claim":"Insert the signed area-vector law into the reparametrized flux.","step":"1.1","inputs":["F1","L1","given"]},
+        {"id":"preserving-case","claim":"Positive determinant turns signed change of variables into the same flux.","step":"1.2","inputs":["step 1.1","L2","L3","assume-case preserving"]},
+        {"id":"reversing-case","claim":"Negative determinant extracts one minus sign before absolute change of variables.","step":"2.1","inputs":["step 1.1","L2","L3","assume-case reversing","cases-exhaustive"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The connected parameter interior is nonempty by definition."},
+        {"case":"zero","status":"checked","evidence":"A zero flux integrand remains zero in both sign cases without masking the sign law."},
+        {"case":"one","status":"checked","evidence":"Determinant one is included in the preserving case at step 1.2."},
+        {"case":"degenerate","status":"checked","evidence":"A vanishing reparametrization determinant is excluded; surface rank failures may occur only on a null boundary."},
+        {"case":"endpoints","status":"checked","evidence":"Both change-of-variables applications integrate over complete compact parameter regions."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The two sign cases are exhaustive and require no witness selection."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The result states two transformation implications, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Flux equality or negation alone does not characterize the orientation sign."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals": {
+      "citations": [
+        {"fact":"L1","source":"thm-jordan-boundary-criterion","source_section":"Statement","quote":"A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.","uses":["1.1"]},
+        {"fact":"L2","source":"lem-riemann-integral-unchanged-by-content-zero-modification","source_section":"Statement","quote":"Then $f$ is Riemann integrable over $E$ if and only if $g$ is, and when they are integrable their integrals are equal.","uses":["1.2","2.1"]}
+      ],
+      "derivations": [
+        {"id":"boundary-null","claim":"The parameter boundary has content zero.","step":"1.1","inputs":["L1","given"]},
+        {"id":"scalar-modification","claim":"Scalar parameter integrands agreeing in the interior have equal integrals.","step":"1.2","inputs":["step 1.1","L2"]},
+        {"id":"flux-modification","claim":"The same scalar modification argument applies to the flux dot-product integrand.","step":"2.1","inputs":["step 1.1","L2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The boundary may be empty; step 1.1 then gives the empty content-zero set."},
+        {"case":"zero","status":"checked","evidence":"Identically zero area or flux integrands are included by step 1.2."},
+        {"case":"one","status":"not_applicable","reason":"No induction, multiplicity, or denominator specializes to one."},
+        {"case":"degenerate","status":"checked","evidence":"Only degeneracy confined to the parameter boundary is licensed; interior degeneracy is expressly excluded."},
+        {"case":"endpoints","status":"checked","evidence":"The entire claim is the disposition of parameter edges, seams, and corner points."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The exceptional set is the given boundary and no representative is selected."},
+        {"case":"iff-forward","status":"checked","evidence":"step 1.2 transfers integrability from the first bounded integrand to the second."},
+        {"case":"iff-reverse","status":"checked","evidence":"step 1.2 invokes the symmetric reverse implication of the modification lemma."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-regular-level-surfaces-have-local-regular-parametrizations": {
+      "citations": [
+        {"fact":"F1","source":"def-admissible-regular-parametrized-surface-patch","source_section":"Definition","quote":"A regular parametrized surface patch is the image of a $C^1$ map from a compact Jordan parameter region that is injective and has nonzero parameter cross product on the region's interior; seam identifications and rank failures may occur only on its boundary.","uses":["2.1"]},
+        {"fact":"L1","source":"cor-regular-level-set-local-graph-theorem","source_section":"Statement","quote":"Near each point, a regular level set is a $C^k$ graph over $\\ker Df(a)$ of dimension $m-n$.","uses":["2.1"]},
+        {"fact":"L2","source":"def-tangent-space-to-a-regular-level-set","source_section":"Definition","quote":"For $a\\in f^{-1}(c)$ regular, $T_a(f^{-1}(c)):=\\ker Df(a)$.","uses":["3.1"]},
+        {"fact":"L3","source":"cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension","source_section":"Statement","quote":"Two finite-dimensional vector spaces over the same field $F$ are linearly\nisomorphic if and only if they have the same dimension.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"empty-level","claim":"Dispose of an empty regular level vacuously and fix a point otherwise.","step":"1.1","inputs":["given","cases"]},
+        {"id":"local-patch","claim":"Identify R^2 linearly with the two-dimensional kernel, restrict the graph chart to a compact Jordan rectangle, and verify patch regularity.","step":"2.1","inputs":["step 1.1","L1","L3","F1","construct"]},
+        {"id":"tangent-agreement","claim":"Identify the chart derivative range with the published kernel tangent space.","step":"3.1","inputs":["step 2.1","L1","L2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"step 1.1 treats an empty level set as a vacuous local assertion."},
+        {"case":"zero","status":"checked","evidence":"The scalar target has positive dimension one, so regularity excludes the zero derivative at a level point."},
+        {"case":"one","status":"checked","evidence":"The target dimension one gives a two-dimensional kernel in R^3 by the cited graph theorem."},
+        {"case":"degenerate","status":"checked","evidence":"Critical level points are outside the theorem; step 2.1 uses surjectivity to obtain independent tangents."},
+        {"case":"endpoints","status":"checked","evidence":"step 2.1 deliberately shrinks to a compact rectangle whose boundary is allowed by the patch convention."},
+        {"case":"nonempty-choice","status":"checked","evidence":"step 1.1 fixes a point only after the nonempty branch is assumed."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem constructs patches from regular levels and states no converse."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"A regular patch need not arise as the specified global level set, so no reverse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-compact-regular-level-surfaces-have-finite-patch-covers": {
+      "citations": [
+        {"fact":"L1","source":"thm-regular-level-surfaces-have-local-regular-parametrizations","source_section":"Statement","quote":"Every point of a regular level surface in $\\mathbb R^3$ lies in the relative interior of a regular surface patch, and the patch tangent plane is the level-set tangent space.","uses":["1.2"]},
+        {"fact":"L2","source":"lem-compactness-is-intrinsic","source_section":"Statement","quote":"2. **Compactness read in the ambient space.** $A$ is a compact subset of $X$\n   ([[def-metric-compactness]]), that is $(A,d_A)$ is a compact metric space, if\n   and only if for every family $\\mathcal{U}$ of open subsets of $X$ with\n   $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and\n   $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$,\n   or else $A = \\emptyset$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"empty-cover","claim":"Use the empty patch family when the compact level is empty.","step":"1.1","inputs":["given","assume-case empty"]},
+        {"id":"local-cover","claim":"In the nonempty case the relative patch interiors form an open cover in the level-set subspace.","step":"1.2","inputs":["L1","given","assume-case nonempty"]},
+        {"id":"finite-subcover","claim":"Intrinsic compactness, read with the level set as ambient metric space, selects finitely many patches.","step":"2.1","inputs":["step 1.2","L2","choose","cases-exhaustive"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"step 1.1 supplies the empty finite cover."},
+        {"case":"zero","status":"not_applicable","reason":"No numeric zero parameter controls the compact-cover assertion."},
+        {"case":"one","status":"checked","evidence":"A single selected patch is permitted when it already covers the compact surface."},
+        {"case":"degenerate","status":"checked","evidence":"Critical or nonregular compact levels are excluded by hypothesis rather than silently covered."},
+        {"case":"endpoints","status":"checked","evidence":"Each selected patch includes its compact parameter boundary, so no cover point is lost at a patch edge."},
+        {"case":"nonempty-choice","status":"checked","evidence":"step 2.1 uses exactly the finite-subcover conclusion of compactness after step 1.2 constructs a cover."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Compactness is used to prove finite coverage; the converse is not asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"A finitely patched surface need not be compact without compact patch images and a closed union, so no reverse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-surface-integrals-over-c-one-graphs": {
+      "citations": [
+        {"fact":"F1","source":"def-surface-area-and-scalar-surface-integral-of-a-patch","source_section":"Definition","quote":"For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.","uses":["2.1"]},
+        {"fact":"F2","source":"def-oriented-unit-normal-and-flux-of-a-surface-patch","source_section":"Definition","quote":"For a continuous vector field $F$, the flux in the orientation induced by $\\varphi$ is $\\int_D(F\\circ\\varphi)\\cdot(\\varphi_u\\times\\varphi_v)$.","uses":["2.1","3.1"]},
+        {"fact":"L1","source":"thm-surface-area-density-is-cross-product-norm","source_section":"Statement","quote":"For every parameter point, $J_\\varphi=\\|\\varphi_u\\times\\varphi_v\\|_2$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"graph-tangents","claim":"Compute the two tangent vectors and their upward cross product.","step":"1.1","inputs":["given","algebra"]},
+        {"id":"graph-density","claim":"The cross-product norm is the square root of one plus the squared gradient norm.","step":"1.2","inputs":["step 1.1","L1","algebra"]},
+        {"id":"three-formulas","claim":"Substitute the vector and norm into area, scalar-integral, and upward flux definitions.","step":"2.1","inputs":["step 1.1","step 1.2","F1","F2"]},
+        {"id":"downward-orientation","claim":"Negating the normal negates flux and leaves area and scalar integrals unchanged.","step":"3.1","inputs":["step 2.1","F2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"If the Jordan region is empty, all three parameter integrals are zero; otherwise the graph map is injective."},
+        {"case":"zero","status":"checked","evidence":"A zero gradient gives density one in step 1.2, including constant graphs."},
+        {"case":"one","status":"checked","evidence":"The fixed final coordinate one prevents the graph cross product from vanishing."},
+        {"case":"degenerate","status":"checked","evidence":"step 1.1 proves every C^1 graph patch is regular, even at critical points of g."},
+        {"case":"endpoints","status":"checked","evidence":"The formulas integrate over the entire compact Jordan region, boundary included."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The graph parametrization and upward orientation are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem computes graph integrals and does not characterize graph surfaces."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse from these formulas to a graph representation is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-scalar-surface-integrals-on-a-surface-of-revolution": {
+      "citations": [
+        {"fact":"F1","source":"def-admissible-regular-parametrized-surface-patch","source_section":"Definition","quote":"A regular parametrized surface patch is the image of a $C^1$ map from a compact Jordan parameter region that is injective and has nonzero parameter cross product on the region's interior; seam identifications and rank failures may occur only on its boundary.","uses":["1.1"]},
+        {"fact":"F2","source":"def-surface-area-and-scalar-surface-integral-of-a-patch","source_section":"Definition","quote":"For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.","uses":["3.1"]},
+        {"fact":"L1","source":"thm-sine-and-cosine-derivatives","source_section":"Statement","quote":"The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$","uses":["2.1"]},
+        {"fact":"L2","source":"cor-trigonometric-parity-and-pythagorean-identity","source_section":"Statement","quote":"$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"patch-check","claim":"The revolution map is injective and regular in the rectangle interior, with only permitted boundary exceptions.","step":"1.1","inputs":["F1","given"]},
+        {"id":"density-computation","claim":"Differentiate the parametrization and compute density r times the square root of one plus r-prime squared.","step":"2.1","inputs":["L1","L2","given","algebra"]},
+        {"id":"scalar-formula","claim":"Insert the computed density into the scalar surface integral.","step":"3.1","inputs":["step 1.1","step 2.1","F2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The hypothesis a<b gives a nonempty parameter interior."},
+        {"case":"zero","status":"checked","evidence":"The radius may vanish at either endpoint, where step 1.1 treats it as a boundary exception."},
+        {"case":"one","status":"not_applicable","reason":"No indexed base case or unit denominator controls the formula."},
+        {"case":"degenerate","status":"checked","evidence":"An interior zero of the radius is excluded because it would collapse an entire circle and destroy regularity."},
+        {"case":"endpoints","status":"checked","evidence":"Endpoint-axis collapses and the angular seam are explicitly confined to the parameter boundary in step 1.1."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The parametrization is explicit and no representative is selected."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The result is a direct integral formula, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The formula does not characterize surfaces of revolution."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-surface-area-of-revolution-formula": {
+      "citations": [
+        {"fact":"L1","source":"thm-scalar-surface-integrals-on-a-surface-of-revolution","source_section":"Statement","quote":"For $\\varphi(s,t)=(s,r(s)\\cos t,r(s)\\sin t)$, the scalar surface integral is $\\int_0^{2\\pi}\\int_a^b q(\\varphi(s,t))r(s)\\sqrt{1+r'(s)^2}\\,ds\\,dt$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-jordan-fubini-by-sections","source_section":"Statement","quote":"Then $h$ is integrable on any rectangle containing the projection of $E$, its integral is independent of that rectangle and of the values on $N$, and\n$$\\int_Eg=\\int h(x)\\,dx.$$","uses":["1.2"]},
+        {"fact":"L3","source":"lem-integral-elementary-bounds","source_section":"Statement","quote":"$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"set-density","claim":"Set the scalar field equal to one in the revolution formula.","step":"1.1","inputs":["L1"]},
+        {"id":"separate-angle","claim":"Fubini and the integral of one supply the factor two pi.","step":"1.2","inputs":["step 1.1","L2","L3","algebra"]},
+        {"id":"endpoint-disposition","claim":"Boundary zeros do not contribute a separate area term.","step":"2.1","inputs":["step 1.2","given"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The profile interval is nondegenerate by hypothesis."},
+        {"case":"zero","status":"checked","evidence":"step 2.1 treats a radius zero at a profile endpoint."},
+        {"case":"one","status":"checked","evidence":"step 1.1 is exactly the scalar field one specialization."},
+        {"case":"degenerate","status":"checked","evidence":"Interior collapse is excluded by the source theorem's positive-radius hypothesis."},
+        {"case":"endpoints","status":"checked","evidence":"step 2.1 records both profile endpoints and the angular seam."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Fubini evaluates explicit sections and makes no selection."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary states a one-way calculation."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No inverse reconstruction of a profile from area is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-sphere-and-hemisphere-surface-integrals": {
+      "citations": [
+        {"fact":"F1","source":"def-surface-area-and-scalar-surface-integral-of-a-patch","source_section":"Definition","quote":"For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.","uses":["2.1"]},
+        {"fact":"F2","source":"def-oriented-unit-normal-and-flux-of-a-surface-patch","source_section":"Definition","quote":"For a continuous vector field $F$, the flux in the orientation induced by $\\varphi$ is $\\int_D(F\\circ\\varphi)\\cdot(\\varphi_u\\times\\varphi_v)$.","uses":["3.1"]},
+        {"fact":"L1","source":"thm-sine-and-cosine-derivatives","source_section":"Statement","quote":"$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$","uses":["1.1","2.1"]},
+        {"fact":"L2","source":"thm-jordan-fubini-by-sections","source_section":"Statement","quote":"$$\\int_Eg=\\int h(x)\\,dx.$$","uses":["2.1","3.1"]},
+        {"fact":"L3","source":"thm-ftc-second-part","source_section":"Statement","quote":"$$\\int_a^b f \\;=\\; G(b) - G(a) .$$","uses":["2.1","3.1"]}
+      ],
+      "derivations": [
+        {"id":"sphere-density","claim":"Differentiate spherical coordinates, select the outward area vector, and obtain density R squared sin phi.","step":"1.1","inputs":["L1","given","algebra"]},
+        {"id":"area-and-scalar","claim":"Fubini and the fundamental theorem give full-sphere area and the northern scalar z integral.","step":"2.1","inputs":["step 1.1","F1","L2","L3","algebra"]},
+        {"id":"radial-flux","claim":"The radial field dotted with the outward normal gives R and hence flux four pi R cubed.","step":"3.1","inputs":["step 1.1","F2","L2","L3","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The radius is positive, so the sphere and hemisphere are nonempty."},
+        {"case":"zero","status":"checked","evidence":"The poles have zero density and lie only on the parameter boundary in step 1.1."},
+        {"case":"one","status":"checked","evidence":"At R=1 the formulas reduce to area and radial flux four pi, with no separate convention."},
+        {"case":"degenerate","status":"checked","evidence":"R=0 is excluded because it would collapse the sphere and destroy interior regularity."},
+        {"case":"endpoints","status":"checked","evidence":"step 1.1 locates both poles and the longitude seam on the boundary; steps 2.1–3.1 include their zero contribution."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The spherical parametrization and outward orientation are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example consists of direct evaluations."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse geometric characterization is stated."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-closed-cylinder-as-a-finitely-patched-oriented-surface": {
+      "citations": [
+        {"fact":"F1","source":"def-finitely-patched-regular-surface-and-integrals","source_section":"Definition","quote":"For a compatible finite patch presentation, area, scalar surface integrals, and oriented flux are the sums of the corresponding patch values; pairwise overlap preimages have content zero.","uses":["1.1","2.1","3.1"]},
+        {"fact":"L1","source":"lem-parameter-boundary-exceptions-do-not-affect-surface-integrals","source_section":"Statement","quote":"Changing a bounded scalar or flux parameter integrand only on the content-zero boundary of a compact Jordan parameter region preserves integrability and its integral.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-jordan-fubini-by-sections","source_section":"Statement","quote":"$$\\int_Eg=\\int h(x)\\,dx.$$","uses":["2.1","3.1"]}
+      ],
+      "derivations": [
+        {"id":"patch-presentation","claim":"The side and two caps cover the cylinder boundary and overlap only along null seams.","step":"1.1","inputs":["F1","L1","construct"]},
+        {"id":"area-sum","claim":"Cross products and Fubini give lateral and cap areas and their sum.","step":"2.1","inputs":["step 1.1","F1","L2","algebra"]},
+        {"id":"flux-sum","claim":"The selected field has zero cap flux and the stated lateral flux.","step":"3.1","inputs":["step 1.1","F1","L2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Positive radius and height make all three geometric pieces nonempty."},
+        {"case":"zero","status":"checked","evidence":"The cap fluxes are exactly zero in step 3.1 rather than omitted."},
+        {"case":"one","status":"checked","evidence":"Unit radius or unit height substitutes directly into the derived formulas."},
+        {"case":"degenerate","status":"checked","evidence":"R=0 or H=0 is excluded because the claimed three-piece regular presentation degenerates."},
+        {"case":"endpoints","status":"checked","evidence":"step 1.1 accounts for both circular edge overlaps and the angular seams as null boundary sets."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All three patches and their outward orientations are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"This is a computed presentation, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The numerical values do not characterize cylinders."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-torus-surface-area": {
+      "citations": [
+        {"fact":"F1","source":"def-admissible-regular-parametrized-surface-patch","source_section":"Definition","quote":"A regular parametrized surface patch is the image of a $C^1$ map from a compact Jordan parameter region that is injective and has nonzero parameter cross product on the region's interior; seam identifications and rank failures may occur only on its boundary.","uses":["1.1"]},
+        {"fact":"F2","source":"def-surface-area-and-scalar-surface-integral-of-a-patch","source_section":"Definition","quote":"For a continuous scalar field $q$ on the patch image, $\\int_Sq\\,dS:=\\int_D(q\\circ\\varphi)J_\\varphi$, and $\\operatorname{Area}(S):=\\int_DJ_\\varphi$.","uses":["2.1"]},
+        {"fact":"L1","source":"thm-jordan-fubini-by-sections","source_section":"Statement","quote":"$$\\int_Eg=\\int h(x)\\,dx.$$","uses":["2.1"]},
+        {"fact":"L2","source":"thm-ftc-second-part","source_section":"Statement","quote":"$$\\int_a^b f \\;=\\; G(b) - G(a) .$$","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"torus-regularity","claim":"Compute the tangents and positive density b(a+b cos phi), using a>b>0.","step":"1.1","inputs":["F1","given","algebra"]},
+        {"id":"torus-area","claim":"Fubini and the full-period cosine integral yield four pi squared ab.","step":"2.1","inputs":["step 1.1","F2","L1","L2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The angle rectangle and torus are nonempty under a>b>0."},
+        {"case":"zero","status":"checked","evidence":"b=0 is excluded because it collapses the tube circle; the proof uses strict positivity in step 1.1."},
+        {"case":"one","status":"checked","evidence":"Values a=1 or b=1 are allowed whenever the strict inequality a>b remains true."},
+        {"case":"degenerate","status":"checked","evidence":"The horn-torus case a=b and self-intersecting case a<b are excluded explicitly."},
+        {"case":"endpoints","status":"checked","evidence":"Both angular seams are parameter-boundary identifications and do not affect the integral."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The torus parametrization is explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is a one-way computation."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No surface is characterized from its area value."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-downward-flux-on-the-graph-z-equals-xy": {
+      "citations": [
+        {"fact":"L1","source":"thm-surface-integrals-over-c-one-graphs","source_section":"Statement","quote":"For the graph of $g$ over $D$, the downward flux is the negative of $\\int_DF(x,y,g(x,y))\\cdot(-g_x,-g_y,1)$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-jordan-fubini-by-sections","source_section":"Statement","quote":"$$\\int_Eg=\\int h(x)\\,dx.$$","uses":["2.1"]},
+        {"fact":"L3","source":"thm-ftc-second-part","source_section":"Statement","quote":"$$\\int_a^b f \\;=\\; G(b) - G(a) .$$","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"pullback-flux","claim":"Substitute g=xy, the downward area vector, and the field to obtain the polynomial integrand.","step":"1.1","inputs":["L1","algebra"]},
+        {"id":"integrate-polynomial","claim":"Fubini and polynomial primitives evaluate the three terms as minus one eighteenth.","step":"2.1","inputs":["step 1.1","L2","L3","algebra"]},
+        {"id":"reverse-orientation","claim":"The upward value is the negative of the downward value.","step":"3.1","inputs":["step 2.1","L1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The unit square is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Axes where x=0 or y=0 are included in the polynomial integral and cause no division."},
+        {"case":"one","status":"checked","evidence":"All four unit-square corner values are included by the closed parameter domain."},
+        {"case":"degenerate","status":"checked","evidence":"The graph cross product has final coordinate one and never degenerates."},
+        {"case":"endpoints","status":"checked","evidence":"Fubini and the fundamental theorem evaluate both endpoints 0 and 1 in step 2.1."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The field, graph, and downward orientation are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is a direct calculation."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No reverse inference from flux to the graph is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-lateral-area-of-a-right-circular-cone": {
+      "citations": [
+        {"fact":"L1","source":"cor-surface-area-of-revolution-formula","source_section":"Statement","quote":"The surface obtained by rotating $r$ about the axis has area $2\\pi\\int_a^b r(s)\\sqrt{1+r'(s)^2}\\,ds$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-algebra-of-derivatives","source_section":"Statement","quote":"$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;","uses":["1.1"]},
+        {"fact":"L3","source":"thm-ftc-second-part","source_section":"Statement","quote":"$$\\int_a^b f \\;=\\; G(b) - G(a) .$$","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"cone-profile","claim":"The linear profile has derivative R/H and satisfies the revolution hypotheses except for its permitted endpoint zero.","step":"1.1","inputs":["L1","L2","given","algebra"]},
+        {"id":"evaluate-area","claim":"Insert the profile and evaluate the remaining linear integral.","step":"2.1","inputs":["step 1.1","L3","algebra"]},
+        {"id":"apex-disposition","claim":"The apex is a boundary image and contributes no extra term.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Positive height gives a nonempty profile interval."},
+        {"case":"zero","status":"checked","evidence":"The radius is zero exactly at the apex endpoint, handled in step 3.1."},
+        {"case":"one","status":"checked","evidence":"R=1 or H=1 substitutes directly in the formula."},
+        {"case":"degenerate","status":"checked","evidence":"R=0 or H=0 is excluded because it collapses the lateral surface or makes the profile undefined."},
+        {"case":"endpoints","status":"checked","evidence":"Both base and apex endpoints are evaluated in step 2.1, with the apex separately interpreted in step 3.1."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The cone profile is explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The item computes one surface area."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No cone is reconstructed from the numerical formula."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-degenerate-surface-parametrization-collapses-to-a-curve": {
+      "citations": [
+        {"fact":"F1","source":"def-admissible-regular-parametrized-surface-patch","source_section":"Definition","quote":"A regular parametrized surface patch is the image of a $C^1$ map from a compact Jordan parameter region that is injective and has nonzero parameter cross product on the region's interior; seam identifications and rank failures may occur only on its boundary.","uses":["2.1"]},
+        {"fact":"F2","source":"def-cross-product-in-r3","source_section":"Definition","quote":"For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"derivatives","claim":"Compute the two parameter derivatives and their zero cross product.","step":"1.1","inputs":["F2","algebra"]},
+        {"id":"image","claim":"The image is exactly a line segment and the map fails interior regularity.","step":"2.1","inputs":["step 1.1","F1"]},
+        {"id":"refute","claim":"The witness refutes the claim that two parameters alone produce a regular surface.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The unit-square parameter domain and its image are nonempty."},
+        {"case":"zero","status":"checked","evidence":"The second tangent and cross product are identically zero in step 1.1."},
+        {"case":"one","status":"checked","evidence":"Both endpoints of the image segment occur at u=0 and u=1."},
+        {"case":"degenerate","status":"checked","evidence":"Degeneracy is the explicit witness established in steps 1.1–2.1."},
+        {"case":"endpoints","status":"checked","evidence":"The image description in step 2.1 includes the whole closed segment."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The witness map is explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"A counterexample refutes one universal assertion."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No equivalence is under consideration."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-orientation-reversal-preserves-area-and-negates-flux": {
+      "citations": [
+        {"fact":"L1","source":"thm-surface-area-and-scalar-integrals-are-reparametrization-invariant","source_section":"Statement","quote":"Surface area and scalar surface integrals are unchanged by every regular reparametrization, regardless of orientation sign.","uses":["2.1"]},
+        {"fact":"L2","source":"thm-flux-under-surface-reparametrization","source_section":"Statement","quote":"An orientation-preserving reparametrization preserves flux and an orientation-reversing reparametrization negates it.","uses":["3.1"]}
+      ],
+      "derivations": [
+        {"id":"swap-sign","claim":"The coordinate swap is a regular reparametrization with determinant minus one.","step":"1.1","inputs":["given","algebra"]},
+        {"id":"area-values","claim":"Both parametrizations have area one.","step":"2.1","inputs":["step 1.1","L1","algebra"]},
+        {"id":"flux-values","claim":"The constant vertical field has flux one and minus one in the two orientations.","step":"3.1","inputs":["step 1.1","L2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The unit-square patch is nonempty."},
+        {"case":"zero","status":"checked","evidence":"The horizontal components of both area vectors are zero and are retained in the computation."},
+        {"case":"one","status":"checked","evidence":"Area one and flux magnitudes one are computed explicitly."},
+        {"case":"degenerate","status":"checked","evidence":"Both parameter tangent pairs are independent, so the example does not confuse reversal with degeneracy."},
+        {"case":"endpoints","status":"checked","evidence":"The coordinate swap maps the full closed square, including corners and edges, to itself."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Both maps and the vector field are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example instantiates two forward transformation laws."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is inferred from the computed values."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-gabriels-horn-has-unbounded-truncated-lateral-area": {
+      "citations": [
+        {"fact":"L1","source":"cor-surface-area-of-revolution-formula","source_section":"Statement","quote":"The surface obtained by rotating $r$ about the axis has area $2\\pi\\int_a^b r(s)\\sqrt{1+r'(s)^2}\\,ds$.","uses":["1.1"]},
+        {"fact":"L2","source":"def-integral-logarithm","source_section":"Definition","quote":"$$L(x):=\\int_1^x\\frac{dt}{t},$$","uses":["2.1"]},
+        {"fact":"L3","source":"thm-monotonicity-of-the-integral","source_section":"Statement","quote":"$$\\int_a^b f \\;\\le\\; \\int_a^b g .$$","uses":["2.1"]},
+        {"fact":"L4","source":"thm-integral-logarithm-is-unbounded","source_section":"Statement","quote":"In particular, $L$ is unbounded both below and above.","uses":["3.1"]}
+      ],
+      "derivations": [
+        {"id":"truncated-area","claim":"The revolution formula gives the compact truncation area for T>1.","step":"1.1","inputs":["L1","given","algebra"]},
+        {"id":"log-lower-bound","claim":"The density dominates 1/x, so the area dominates two pi L(T).","step":"2.1","inputs":["step 1.1","L2","L3","algebra"]},
+        {"id":"unboundedness","claim":"Unboundedness of the integral logarithm makes the truncation areas unbounded.","step":"3.1","inputs":["step 2.1","L4"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Every truncation uses the nonempty interval [1,T] with T>1."},
+        {"case":"zero","status":"checked","evidence":"The radius 1/x and its density are strictly positive, so no zero denominator occurs."},
+        {"case":"one","status":"checked","evidence":"The left endpoint x=1 is included and gives the normalized logarithm value L(1)=0."},
+        {"case":"degenerate","status":"checked","evidence":"T=1 is excluded from the positive-length truncations but is the harmless zero-area base value."},
+        {"case":"endpoints","status":"checked","evidence":"The compact revolution formula and logarithm definition use both endpoints 1 and T."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The profile and every truncation are explicit; unboundedness supplies values without a simultaneous choice family."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example proves a lower bound and unboundedness, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse from unbounded area to this profile is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-schwarz-lantern-polyhedral-areas-diverge": {
+      "citations": [
+        {"fact":"L1","source":"cor-sin-x-over-x-limit","source_section":"Statement","quote":"$$\\lim_{x\\to0}\\frac{\\sin x}{x}=1.$$","uses":["3.1"]},
+        {"fact":"L2","source":"thm-sine-and-cosine-addition-formulas","source_section":"Statement","quote":"For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$","uses":["3.1"]},
+        {"fact":"L3","source":"thm-sequential-criterion-for-function-limits","source_section":"Statement","quote":"2. For **every** sequence $(x_k)_{k \\in \\mathbb{N}}$ with $x_k \\in A$ and\n   $x_k \\ne c$ for every $k$, and $x_k \\to c$ ([[def-sequence]],\n   [[def-real-limit]]), the sequence $(f(x_k))_{k \\in \\mathbb{N}}$ converges to\n   $L$.","uses":["3.1"]},
+        {"fact":"L4","source":"thm-algebra-of-limits","source_section":"Statement","quote":"$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$","uses":["3.1"]},
+        {"fact":"L5","source":"lem-reciprocal-of-null-diverges","source_section":"Statement","quote":"$$(x_k) \\text{ converges to } 0 \\iff (1/x_k) \\text{ diverges to } +\\infty,$$","uses":["2.1","3.1"]}
+      ],
+      "derivations": [
+        {"id":"lantern-area","claim":"Coordinate geometry gives the common triangle area and the exact total-area formula.","step":"1.1","inputs":["given","algebra"]},
+        {"id":"mesh-size","claim":"Along n=k+1 and m=n cubed, circumferential and vertical edge lengths tend to zero.","step":"2.1","inputs":["L5","algebra"]},
+        {"id":"area-divergence","claim":"Small-angle limits give a positive asymptotic circumference factor and a square-root factor growing like n, so area diverges.","step":"3.1","inputs":["step 1.1","L1","L2","L3","L4","L5","algebra"]},
+        {"id":"counterexample-conclusion","claim":"The lanterns are inscribed, mesh-convergent approximations with divergent areas.","step":"4.1","inputs":["step 2.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Every lantern has positive ring and polygon parameters."},
+        {"case":"zero","status":"checked","evidence":"The construction uses n=k+1 and m=n cubed, so division by n never occurs at zero."},
+        {"case":"one","status":"checked","evidence":"The initial n=1 lantern is defined algebraically but only the tail is used for mesh convergence."},
+        {"case":"degenerate","status":"checked","evidence":"Positive cylinder radius and height prevent the reference cylinder and triangles from collapsing."},
+        {"case":"endpoints","status":"checked","evidence":"The bottom and top rings are included, and every inter-ring band contributes exactly the triangles counted in step 1.1."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All vertices, edges, and the sequence m=n cubed are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"A concrete counterexample needs no biconditional direction."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No characterization of convergent triangulations is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas": {
+      "citations": [
+        {"fact":"L1","source":"cex-schwarz-lantern-polyhedral-areas-diverge","source_section":"Statement refuted","quote":"Inscribed triangulated surfaces with mesh tending to zero need not have areas tending to the surface-integral area of the cylinder; their areas can diverge to infinity.","uses":["1.1","2.1"]}
+      ],
+      "derivations": [
+        {"id":"finite-cylinder-area","claim":"Fix the finite surface-integral area of a positive-radius finite-height cylinder.","step":"1.1","inputs":["L1","given"]},
+        {"id":"unbounded-polyhedra","claim":"The Schwarz lantern family has unbounded inscribed polyhedral areas.","step":"2.1","inputs":["L1"]},
+        {"id":"refute-supremum","claim":"The proposed supremum is infinite and cannot equal the finite cylinder area.","step":"3.1","inputs":["step 1.1","step 2.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The fixed cylinder and every triangulation are nonempty."},
+        {"case":"zero","status":"checked","evidence":"Positive radius and height exclude the zero-area degenerate cylinder."},
+        {"case":"one","status":"not_applicable","reason":"No single-triangle case is used to establish unboundedness."},
+        {"case":"degenerate","status":"checked","evidence":"The refutation uses a genuinely regular cylinder rather than a singular surface."},
+        {"case":"endpoints","status":"checked","evidence":"The lanterns include the full finite cylinder height and both end rings."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The counterexample sequence is explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The item refutes a proposed equality rather than proving an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No reverse implication is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-continuity-alone-suffices-for-the-regular-surface-area-formula": {
+      "citations": [
+        {"fact":"F1","source":"def-admissible-regular-parametrized-surface-patch","source_section":"Definition","quote":"A regular parametrized surface patch is the image of a $C^1$ map from a compact Jordan parameter region that is injective and has nonzero parameter cross product on the region's interior; seam identifications and rank failures may occur only on its boundary.","uses":["3.1"]},
+        {"fact":"L1","source":"def-directional-and-partial-derivatives","source_section":"Definition","quote":"For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"continuous-cone-map","claim":"The cone graph map on a closed disc is continuous and injective.","step":"1.1","inputs":["given","algebra"]},
+        {"id":"missing-partial","claim":"Along one coordinate line the difference quotients are one and minus one, so an interior partial derivative fails at the origin.","step":"2.1","inputs":["L1","step 1.1","algebra"]},
+        {"id":"refute-continuity","claim":"The missing derivative prevents the regular-patch cross-product formula despite continuity and injectivity.","step":"3.1","inputs":["step 2.1","F1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The closed disc and cone image are nonempty."},
+        {"case":"zero","status":"checked","evidence":"The obstruction is located exactly at the interior parameter point (0,0)."},
+        {"case":"one","status":"checked","evidence":"The opposing one-sided difference quotients are explicitly one and minus one."},
+        {"case":"degenerate","status":"checked","evidence":"The polar alternative confines its apex degeneracy to the boundary; the failed graph map has the failure in the interior."},
+        {"case":"endpoints","status":"checked","evidence":"The refutation distinguishes the interior origin from allowable parameter-boundary exceptions."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The cone map and test line are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The item refutes one implication from continuity to regular formula applicability."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse from regularity to continuity is at issue; regularity already includes C^1."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-flux-is-independent-of-the-parametrization": {
+      "citations": [
+        {"fact":"L1","source":"thm-flux-under-surface-reparametrization","source_section":"Statement","quote":"An orientation-preserving reparametrization preserves flux and an orientation-reversing reparametrization negates it.","uses":["2.1"]},
+        {"fact":"F1","source":"def-cross-product-in-r3","source_section":"Definition","quote":"For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.","uses":["1.1","2.1"]}
+      ],
+      "derivations": [
+        {"id":"standard-flux","claim":"The standard horizontal-square parametrization has upward area vector and flux one for the vertical field.","step":"1.1","inputs":["F1","algebra"]},
+        {"id":"reversed-flux","claim":"Swapping parameters reverses the area vector and gives flux minus one.","step":"2.1","inputs":["step 1.1","F1","L1","algebra"]},
+        {"id":"refute-unqualified","claim":"The unequal values refute parametrization independence without an orientation condition.","step":"3.1","inputs":["step 1.1","step 2.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The unit square is nonempty."},
+        {"case":"zero","status":"checked","evidence":"The horizontal field components and area-vector components are zero and retained in both dot products."},
+        {"case":"one","status":"checked","evidence":"The two flux values are exactly one and minus one."},
+        {"case":"degenerate","status":"checked","evidence":"Both parametrizations are regular, so the sign change is not caused by a rank failure."},
+        {"case":"endpoints","status":"checked","evidence":"The swap maps every edge and corner of the closed square to the corresponding boundary."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The witness maps and field are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"A false universal assertion is refuted by one witness."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No equivalence is asserted."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}

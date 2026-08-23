@@ -1,12 +1,15 @@
 // Topic-neutral cross-provider refuter-judge for library items. Normal paired
-// mode runs DeepSeek V4 Pro directly against a freshly spawned GPT-5.6 Terra
-// Codex-subscription process on the identical frozen prompt.
+// mode runs DeepSeek V4 Pro directly against a freshly spawned Claude Opus 5
+// CLI process on the identical frozen prompt.
 //
-// Owner update 2026-07-31: session-item authors use GPT 5.6 Sol through the
-// Codex subscription plan at xhigh reasoning with a 1M-token context window;
-// the judge uses direct DeepSeek V4 Pro and GPT-5.6 Terra in parallel. GPT-family
-// calls must NOT be routed through a third-party gateway. This file retains the
-// historical GLM/DeepSeek injection-test record as model-evaluation evidence.
+// Owner update 2026-08-23: every agent lane and the second judge lane are Claude
+// Opus 5 at xhigh with the 1M-token window, because the Codex subscription that
+// carried Sol and Terra reached its weekly limit. The judge is therefore direct
+// DeepSeek V4 Pro and a fresh Opus CLI process in parallel. Neither lane may be
+// routed through a third-party gateway. This file retains the historical
+// GLM/DeepSeek injection-test record as model-evaluation evidence, and the
+// adoption bar it sets has NOT been discharged for the Opus lane — see the
+// JUDGE_LINEUPS note below.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -133,7 +136,8 @@
 // rejections per proof across runs and cannot work off stdout alone.
 //
 // Needs DEEPSEEK_API_KEY, supplied directly or from the sibling Prestige
-// Intelligence .env file. Terra uses the already-authenticated Codex CLI.
+// Intelligence .env file. The Opus lane uses the already-authenticated claude
+// CLI (keychain session); the retired Terra lane used the Codex CLI.
 import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { basename, join } from "node:path";
@@ -141,7 +145,7 @@ import { spawn } from "node:child_process";
 import { homedir } from "node:os";
 import { deepseekEnvFile } from "./paths.mjs";
 import { itemHashJudge } from "./item-hash.mjs";
-import { unwrapSonnetEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs";
+import { unwrapClaudeEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -183,48 +187,66 @@ const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek
 const DEEPSEEK_API_URL = DEEPSEEK_BASE_URL.replace(/\/$/, "") + "/chat/completions";
 const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// SESSION items only. Session authoring uses GPT 5.6 Sol; its paired judges are
-// therefore direct DeepSeek V4 Pro and fresh GPT-5.6 Terra Codex processes. The
+// SESSION items only. Session authoring uses Claude Opus 5; its paired judges
+// are therefore direct DeepSeek V4 Pro and fresh Claude Opus 5 CLI processes —
+// note that the second lane is now the SAME model as the author it screens. The
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
 const DEEPSEEK_MODEL = "deepseek-v4-pro";
 const TERRA_MODEL = "gpt-5.6-terra";
 const SONNET_MODEL = "claude-sonnet-5";
+// The `[1m]` suffix IS the owner's 1M-context rule on this runner. The claude
+// CLI has no `model_context_window` knob, so a bare `claude-opus-5` silently
+// judges at the standard window — see tools/dispatch.mjs for the same note.
+const OPUS_MODEL = "claude-opus-5[1m]";
 // Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
 // API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
 // spelling that maps to `max`, so preserve the requested level explicitly and
 // send the canonical wire value.
 const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
-const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL];
+const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL, OPUS_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The active default is BACK TO deepseek+terra (owner, 2026-08-20): "sonnet 5 to
-// terra for all agents and judges". It had been deepseek+sonnet since 2026-08-17,
-// when the Codex subscription behind Terra was account-throttled mid-run — 429 on
-// the models endpoint, NO_CONTENT on every exec — and that is the risk this
-// reversion re-accepts: the Terra lane is only as available as that account.
-// `judge.mts --preflight` spends one minimal call per lane and is the cheap way
-// to find out before a sweep does. Sonnet's rows, like Terra's before them,
-// remain historical evidence only; the frozen prompt, hash attestation and
-// verdict contract are identical across every lane, which is what makes a lane
-// swap a configuration change rather than a re-judgement.
+// The active default is deepseek+opus (owner, 2026-08-23): "change all LLMs from
+// gpt 5.6 sol and gpt 5.6 Terra to opus 5 since Codex subscription reached weekly
+// limit". This is the fourth lane change in five weeks — deepseek+terra until
+// 2026-08-17, deepseek+sonnet when the Codex account behind Terra was throttled
+// mid-run, back to deepseek+terra on 2026-08-20, and now off the Codex account
+// entirely because its WEEKLY cap is spent rather than a burst limit. Every
+// retired lane's rows stay as append-only historical evidence and satisfy no
+// current coverage; the frozen prompt, hash attestation and verdict contract are
+// identical across all four, which is what makes a lane swap a configuration
+// change rather than a re-judgement. `judge.mts --preflight` spends one minimal
+// call per lane and is the cheap way to learn an account is dead before a sweep
+// does.
 //
-// FAMILY WEIGHTING under deepseek+terra, and it is sharper than it used to be.
-// The same 2026-08-20 instruction moved the build `alpha` role from Opus 5 to
-// Sol, so Terra now shares the GPT family with BOTH the authors it screens and
-// the Alpha that adjudicates its rejections. DeepSeek is the only cross-family
-// reader left in either workflow. Weight Terra/author and Terra/Alpha agreement
-// accordingly: a Terra-only rejection that Alpha calls a false positive is two
-// GPT-family reads agreeing, not a corroboration.
+// FAMILY WEIGHTING under deepseek+opus, and READ THIS BEFORE CONCLUDING THE MOVE
+// BOUGHT INDEPENDENCE BACK. It did not. Under deepseek+terra the second judge
+// lane shared the GPT family with both the authors it screened and the Alpha
+// adjudicating its rejections; under deepseek+opus it shares the ANTHROPIC family
+// with both. The structure is identical with the family name swapped, and
+// DeepSeek remains the only cross-family reader in either workflow. Weight
+// Opus/author and Opus/Alpha agreement accordingly: an Opus-only rejection that
+// Alpha calls a false positive is two same-family reads agreeing, not a
+// corroboration. A DeepSeek-only rejection is still the one finding no other lane
+// in the run could have produced.
+//
+// WHAT IS NOT MEASURED HERE. No injection test has been run against an Opus judge
+// lane at this prompt. The standing rule at the top of this file applies and has
+// not been discharged: a low rejection rate and a fluent reason are not evidence
+// of a good judge, and the only test that separates a judge from a rubber stamp
+// is injecting a defect you KNOW is there. Passes 4 and 5 did exactly that for
+// the retired claude lane before it was adopted; the equivalent for Opus is owed.
 //
 // WHAT THE LEDGERS MEASURED BEFORE THE 2026-08-04 SWITCH (frontiers 6-9,
 // waves 0-1; the evidence is in research/audit/RESUME.md, not in memory):
 //   gpt-5.6-terra    142 fatal / 58 false pos / 1036 adjudicated — 94.4% precision
 //   deepseek-v4-pro  129 fatal / 55 false pos /  618 adjudicated — 91.1% precision
 const JUDGE_LINEUPS: Record<string, string[]> = {
+  "deepseek+opus": [DEEPSEEK_MODEL, OPUS_MODEL],
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
   "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
 };
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
 const lineup = JUDGE_LINEUPS[lineupName];
 if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);
@@ -335,7 +357,7 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   child.stdin.end(prompt);
 });
 
-/** The Sonnet lane, to the Terra lane's exact isolation philosophy: a FRESH
+/** The claude-CLI lane, to the Terra lane's exact isolation philosophy: a FRESH
  *  claude CLI process per call, an EMPTY temporary working directory so the
  *  frozen prompt is its only context, and a tool-less run — the empty
  *  --allowed-tools list allows nothing, and headless -p mode auto-denies any
@@ -343,9 +365,16 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
  *  passed explicitly, never inherited from anyone's session default. The
  *  claude CLI authenticates from the user's own session (keychain), so unlike
  *  Terra there is no auth file to copy and nothing credential-shaped touches
- *  disk here at all. */
-const runFreshSonnet = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
-  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-sonnet-work-");
+ *  disk here at all.
+ *
+ *  PARAMETERISED BY MODEL since 2026-08-23, when Opus 5 took this lane. The
+ *  isolation is a property of the runner, not of the model behind it, and the
+ *  empty working directory matters MORE for Opus than it did for Sonnet: the
+ *  repo root carries a CLAUDE.md that would otherwise load as project context
+ *  and tell the judge how the library is built. A judge that has read the build
+ *  rules is not reading the frozen prompt alone. */
+const runFreshClaude = (model: string, prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-claude-work-");
   // --output-format json wraps the reply in a result envelope that carries
   // `usage` — without it the lane's spend is invisible: frontier-15 recorded
   // pt=0, ct=0 for all 626 sonnet attempts while DeepSeek's 12.6M prompt
@@ -353,7 +382,7 @@ const runFreshSonnet = (prompt: string, timeoutMs: number): Promise<CodexRun> =>
   // callSonnet unwraps the envelope and falls back to plain text if the CLI
   // ever changes shape.
   const child = spawn(process.env.CLAUDE_BIN ?? "claude", [
-    "-p", "--model", SONNET_MODEL, "--effort", "xhigh", "--allowed-tools", "", "--output-format", "json",
+    "-p", "--model", model, "--effort", "xhigh", "--allowed-tools", "", "--output-format", "json",
   ], { stdio: ["pipe", "pipe", "pipe"], cwd: temporaryWork, env: process.env });
   let stdout = "";
   let stderr = "";
@@ -385,9 +414,9 @@ if (bools.has("preflight")) {
       const terra = await runFreshTerra('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
       return { judgeModel, status: terra.code === 0 && terra.stdout.trim() ? 200 : 0, raw: terra.stdout || terra.stderr || "Codex produced no output" };
     }
-    if (judgeModel === SONNET_MODEL) {
-      const sonnet = await runFreshSonnet('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 180_000);
-      return { judgeModel, status: sonnet.code === 0 && sonnet.stdout.trim() ? 200 : 0, raw: sonnet.stdout || sonnet.stderr || "claude produced no output" };
+    if (judgeModel === SONNET_MODEL || judgeModel === OPUS_MODEL) {
+      const claude = await runFreshClaude(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 180_000);
+      return { judgeModel, status: claude.code === 0 && claude.stdout.trim() ? 200 : 0, raw: claude.stdout || claude.stderr || "claude produced no output" };
     }
     try {
       // A deliberately tiny direct completion tests the endpoint, model,
@@ -1144,13 +1173,13 @@ async function callTerra(): Promise<CallResult> {
   return { content: "", raw: "Terra retries exhausted" };
 }
 
-async function callSonnet(): Promise<CallResult> {
+async function callClaude(model: string): Promise<CallResult> {
   for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     const started = performance.now();
-    const run = await runFreshSonnet(frozenPrompt, 12 * 60_000);
+    const run = await runFreshClaude(model, frozenPrompt, 12 * 60_000);
     const latency_ms = Math.round(performance.now() - started);
-    const { content, usage } = unwrapSonnetEnvelope(run.stdout);
+    const { content, usage } = unwrapClaudeEnvelope(run.stdout);
     const event = {
       outcome: content && run.code === 0 ? "response" : run.timedOut ? "timeout" : "claude_exit",
       status: run.code,
@@ -1161,10 +1190,10 @@ async function callSonnet(): Promise<CallResult> {
       raw_bytes: (run.stdout.length + run.stderr.length),
     };
     if (run.code === 0 && content) {
-      emitAttempt(SONNET_MODEL, attempt, event);
+      emitAttempt(model, attempt, event);
       return { content, usage, raw: run.stderr };
     }
-    emitAttempt(SONNET_MODEL, attempt, event);
+    emitAttempt(model, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
     return {
       content: "",
@@ -1172,12 +1201,12 @@ async function callSonnet(): Promise<CallResult> {
       retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
     };
   }
-  return { content: "", raw: "Sonnet retries exhausted" };
+  return { content: "", raw: `${model} retries exhausted` };
 }
 
 const call = (judgeModel: string): Promise<CallResult> =>
   judgeModel === DEEPSEEK_MODEL ? callDeepSeek()
-    : judgeModel === SONNET_MODEL ? callSonnet()
+    : judgeModel === SONNET_MODEL || judgeModel === OPUS_MODEL ? callClaude(judgeModel)
       : callTerra();
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so

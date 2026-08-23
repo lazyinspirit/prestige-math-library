@@ -15,8 +15,14 @@
  *  crash banner — passes through as plain text with no usage: the lane keeps
  *  working, only its cost visibility degrades. `prompt_tokens` sums the three
  *  input classes because the cost ledger records what was SUBMITTED, and a
- *  cache-read token is still a submitted token. */
-export const unwrapSonnetEnvelope = (stdout) => {
+ *  cache-read token is still a submitted token.
+ *
+ *  Named `unwrapSonnetEnvelope` until 2026-08-23, when the owner moved every
+ *  agent lane and the second judge lane to Opus 5. The envelope is a property of
+ *  the CLI, not of the model behind it, so the name was wrong the moment a
+ *  second claude-family lane existed — and `tools/dispatch.mjs` now unwraps
+ *  every dispatched role's stdout with it, not just a judge's. */
+export const unwrapClaudeEnvelope = (stdout) => {
   const text = String(stdout ?? '').trim();
   try {
     const env = JSON.parse(text);

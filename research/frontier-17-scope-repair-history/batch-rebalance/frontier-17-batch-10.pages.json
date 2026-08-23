@@ -1,0 +1,257 @@
+[
+  {
+    "order": 288.00015,
+    "id": "regular-surfaces-and-surface-integrals",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Regular Surfaces and Surface Integrals",
+    "companion": "regular-surfaces-and-surface-integrals-examples",
+    "requires": [
+      "line-integrals-and-the-gradient-theorem",
+      "constant-rank-submersions-and-regular-level-sets"
+    ],
+    "items": [
+      {
+        "id": "def-cross-product-in-r3",
+        "kind": "definition",
+        "title": "The cross product in $\\mathbb R^3$",
+        "deps": ["def-euclidean-inner-product", "lem-standard-basis-of-f-n"]
+      },
+      {
+        "id": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+        "kind": "lemma",
+        "title": "The cross product is bilinear, alternating, and orthogonal to both factors",
+        "strategy": "Expand the coordinate definition in each argument to prove bilinearity and interchange the factors to prove alternation. A direct dot-product expansion gives the scalar-triple-product determinant identity. Substituting either factor as the third vector makes two determinant columns equal, so both dot products vanish. Keep zero vectors and parallel vectors in the same calculation.",
+        "deps": ["def-cross-product-in-r3", "def-euclidean-inner-product", "def-determinant-of-a-square-matrix"]
+      },
+      {
+        "id": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+        "kind": "theorem",
+        "title": "The squared cross-product norm is the Gram determinant of two vectors",
+        "strategy": "Expand the squared norm of the coordinate cross product and collect terms to obtain $\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle u,v\\rangle^2$, which is the determinant of the two-vector Gram matrix. The published Gram-determinant criterion then makes this value positive exactly for an independent pair and zero exactly for a dependent pair. Include either vector being zero.",
+        "deps": ["lem-cross-product-is-bilinear-alternating-and-orthogonal", "def-gram-matrix-and-gram-determinant", "thm-gram-determinant-detects-linear-independence"]
+      },
+      {
+        "id": "def-admissible-regular-parametrized-surface-patch",
+        "kind": "definition",
+        "title": "Regular parametrized surface patches on compact Jordan parameter regions",
+        "deps": ["def-cross-product-in-r3", "def-ck-euclidean-maps-and-diffeomorphisms", "def-riemann-integral-over-a-jordan-set", "def-metric-interior-closure-boundary", "thm-jordan-boundary-criterion"]
+      },
+      {
+        "id": "def-tangent-plane-of-a-regular-surface-patch",
+        "kind": "definition",
+        "title": "The tangent plane of a regular surface patch",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-linear-combination-and-span", "thm-cross-product-norm-is-the-two-vector-gram-determinant"]
+      },
+      {
+        "id": "def-surface-reparametrization-and-orientation",
+        "kind": "definition",
+        "title": "Surface reparametrizations and their orientation sign",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-ck-euclidean-maps-and-diffeomorphisms", "def-jacobian-determinant-of-a-c-one-map"]
+      },
+      {
+        "id": "prop-tangent-plane-is-invariant-under-regular-reparametrization",
+        "kind": "proposition",
+        "title": "The tangent plane is invariant under regular reparametrization",
+        "strategy": "For $\\psi=\\varphi\\circ h$, the chain rule writes the two tangents of $\\psi$ as linear combinations of the two tangents of $\\varphi$, so the new tangent plane is contained in the old one. Apply the same argument to the inverse parameter diffeomorphism to obtain the reverse containment. The invertible derivative of $h$ prevents either pair from losing rank, and boundary points are interpreted by the continuous extensions of the tangents.",
+        "deps": ["def-tangent-plane-of-a-regular-surface-patch", "def-surface-reparametrization-and-orientation", "thm-chain-rule-for-total-derivatives", "thm-total-derivative-computes-directional-and-partial-derivatives"]
+      },
+      {
+        "id": "cor-regular-surface-reparametrization-has-constant-orientation-sign",
+        "kind": "corollary",
+        "title": "A regular reparametrization of a connected parameter region has a constant orientation sign",
+        "strategy": "Restrict the neighbourhood diffeomorphism to the nonempty connected interior of the source parameter region. Its derivative is invertible everywhere, so the published Jacobian-sign theorem makes the determinant everywhere positive or everywhere negative. Continuity and nonvanishing on the compact region extend the same sign to its boundary. Thus every such reparametrization is exactly orientation-preserving or orientation-reversing.",
+        "deps": ["def-surface-reparametrization-and-orientation", "thm-jacobian-sign-is-constant-on-a-connected-regular-domain"]
+      },
+      {
+        "id": "def-first-fundamental-form-and-surface-area-density",
+        "kind": "definition",
+        "title": "The first fundamental form, Gram matrix, and area density of a surface patch",
+        "deps": ["def-tangent-plane-of-a-regular-surface-patch", "def-gram-matrix-and-gram-determinant", "thm-gram-determinant-detects-linear-independence"]
+      },
+      {
+        "id": "thm-surface-area-density-is-cross-product-norm",
+        "kind": "theorem",
+        "title": "The surface area density is the norm of the cross product of the parameter tangents",
+        "strategy": "The first fundamental matrix is the Gram matrix of the two parameter tangent vectors. Apply the two-vector cross-product identity to identify its determinant with the squared cross-product norm, then take the unique nonnegative square root. Regularity makes the common value positive in the parameter-region interior; boundary zeros remain allowed by the patch convention.",
+        "deps": ["def-first-fundamental-form-and-surface-area-density", "thm-cross-product-norm-is-the-two-vector-gram-determinant"]
+      },
+      {
+        "id": "lem-oriented-area-vector-under-surface-reparametrization",
+        "kind": "lemma",
+        "title": "The oriented area vector transforms by the parameter Jacobian determinant",
+        "strategy": "For $\\psi=\\varphi\\circ h$, the total chain rule expresses the two parameter derivatives of $\\psi$ as the two corresponding linear combinations of $\\varphi_u$ and $\\varphi_v$. Bilinearity and alternation of the cross product cancel the diagonal terms and leave $\\psi_s\\times\\psi_t=(\\det Dh)(\\varphi_u\\times\\varphi_v)\\circ h$. Taking norms gives the absolute-Jacobian transformation law for the area density, including the sign distinction.",
+        "deps": ["def-surface-reparametrization-and-orientation", "lem-cross-product-is-bilinear-alternating-and-orthogonal", "thm-chain-rule-for-total-derivatives", "thm-total-derivative-computes-directional-and-partial-derivatives", "thm-surface-area-density-is-cross-product-norm"]
+      },
+      {
+        "id": "def-surface-area-and-scalar-surface-integral-of-a-patch",
+        "kind": "definition",
+        "title": "Surface area and scalar surface integrals on a regular patch",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-first-fundamental-form-and-surface-area-density", "thm-continuous-functions-on-compact-jordan-sets-are-integrable"]
+      },
+      {
+        "id": "thm-surface-area-and-scalar-integrals-are-reparametrization-invariant",
+        "kind": "theorem",
+        "title": "Surface area and scalar surface integrals are invariant under regular reparametrization",
+        "strategy": "Substitute the absolute-Jacobian density law into the scalar parameter integral for $\\varphi\\circ h$. The compact-Jordan change-of-variables theorem for the neighbourhood diffeomorphism $h$ turns that integral into the parameter integral for $\\varphi$. This works for either orientation sign; specialize the scalar field to one for surface area. Boundary exceptions contribute nothing under the Jordan convention.",
+        "deps": ["def-surface-area-and-scalar-surface-integral-of-a-patch", "lem-oriented-area-vector-under-surface-reparametrization", "thm-change-of-variables-for-compact-jordan-sets"]
+      },
+      {
+        "id": "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+        "kind": "definition",
+        "title": "Unit normal fields, orientations, and flux through a regular surface patch",
+        "deps": ["def-surface-area-and-scalar-surface-integral-of-a-patch", "def-tangent-plane-of-a-regular-surface-patch", "thm-surface-area-density-is-cross-product-norm", "def-euclidean-inner-product"]
+      },
+      {
+        "id": "thm-flux-under-surface-reparametrization",
+        "kind": "theorem",
+        "title": "Flux is invariant under orientation-preserving reparametrization and changes sign under reversal",
+        "strategy": "Write flux as the parameter integral of $F\\circ\\varphi$ dotted with the oriented area vector. The area-vector transformation supplies $\\det Dh$ rather than its absolute value. Apply compact-Jordan change of variables after separating the constant determinant sign: the preserving case gives the same flux and the reversing case its negative. The orientation-sign corollary ensures these exhaust a connected parameter region.",
+        "deps": ["def-oriented-unit-normal-and-flux-of-a-surface-patch", "lem-oriented-area-vector-under-surface-reparametrization", "cor-regular-surface-reparametrization-has-constant-orientation-sign", "thm-change-of-variables-for-compact-jordan-sets"]
+      },
+      {
+        "id": "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals",
+        "kind": "lemma",
+        "title": "Content-zero parameter-boundary exceptions do not affect surface integrals",
+        "strategy": "A compact Jordan parameter region has content-zero boundary. Two bounded scalar parameter integrands that agree on the interior therefore differ only on a content-zero set, so the published modification lemma gives equivalent integrability and equal integrals. Apply the same statement to the scalar dot-product integrand for flux. This licenses seam identifications and rank failures confined to the parameter boundary, but no interior failure.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "thm-jordan-boundary-criterion", "lem-riemann-integral-unchanged-by-content-zero-modification"]
+      },
+      {
+        "id": "def-finitely-patched-regular-surface-and-integrals",
+        "kind": "definition",
+        "title": "Finitely patched regular surfaces, their area, scalar integrals, and flux",
+        "deps": ["def-surface-area-and-scalar-surface-integral-of-a-patch", "def-oriented-unit-normal-and-flux-of-a-surface-patch", "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals"]
+      },
+      {
+        "id": "thm-regular-level-surfaces-have-local-regular-parametrizations",
+        "kind": "theorem",
+        "title": "Regular level surfaces have local regular parametrizations with the same tangent plane",
+        "strategy": "Let $F:U\\subseteq\\mathbb R^3\\to\\mathbb R$ be $C^k$, let $c$ be regular, and fix $p\\in F^{-1}(c)$. The earlier regular-level-set graph theorem gives a $C^k$ graph over the two-dimensional kernel of $DF(p)$. Use equality of dimension to choose a linear isomorphism from $\\mathbb R^2$ to that kernel, then restrict the resulting graph chart to a small compact Jordan rectangle about the origin. It is injective and its two derivatives are independent, hence is a regular surface patch. Its tangent span is the graph derivative image, which the level-set theorem identifies with $\\ker DF(p)$, exactly the published level-set tangent space. Treat an empty level set vacuously and the nonempty case pointwise.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-tangent-plane-of-a-regular-surface-patch", "cor-regular-level-set-local-graph-theorem", "def-tangent-space-to-a-regular-level-set", "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension", "thm-total-derivative-computes-directional-and-partial-derivatives"]
+      },
+      {
+        "id": "cor-compact-regular-level-surfaces-have-finite-patch-covers",
+        "kind": "corollary",
+        "title": "A compact regular level surface is covered by finitely many regular surface patches",
+        "strategy": "For every point of the compact level surface, the local-parametrization theorem supplies a patch whose relative interior contains that point. These relative interiors form an open cover in the level-set subspace. Apply the ambient-cover form of intrinsic compactness with the level set itself as the ambient metric space, and select a finite subcover. The empty level uses the empty family and a singleton level cannot occur under a surjective derivative from $\\mathbb R^3$ to $\\mathbb R$.",
+        "deps": ["thm-regular-level-surfaces-have-local-regular-parametrizations", "def-metric-compactness", "lem-compactness-is-intrinsic"]
+      },
+      {
+        "id": "thm-surface-integrals-over-c-one-graphs",
+        "kind": "theorem",
+        "title": "Surface area, scalar integrals, and flux over a $C^1$ graph",
+        "strategy": "For $g$ defined near a compact Jordan region $D$, use $\\varphi(x,y)=(x,y,g(x,y))$. Its tangent vectors are $(1,0,g_x)$ and $(0,1,g_y)$, whose cross product is $(-g_x,-g_y,1)$; it is never zero and points upward. Substitute its norm $\\sqrt{1+\\|\\nabla g\\|_2^2}$ in the area and scalar-integral definitions, and retain the signed cross product for the upward flux formula. The downward formula is its negative.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-surface-area-and-scalar-surface-integral-of-a-patch", "def-oriented-unit-normal-and-flux-of-a-surface-patch", "def-jacobian-matrix-and-gradient", "thm-surface-area-density-is-cross-product-norm", "thm-algebra-of-derivatives"]
+      },
+      {
+        "id": "thm-scalar-surface-integrals-on-a-surface-of-revolution",
+        "kind": "theorem",
+        "title": "Scalar surface integrals on a surface of revolution",
+        "strategy": "Let $r:[a,b]\\to[0,\\infty)$ be $C^1$, positive on the open interval, and parametrize the surface by $\\varphi(s,t)=(s,r(s)\\cos t,r(s)\\sin t)$ for $0\\le t\\le2\\pi$. The map is injective and regular in the parameter interior, with only seam identifications and possible endpoint-axis degeneracies on the boundary. Differentiate and use the Pythagorean identity to obtain density $r(s)\\sqrt{1+r'(s)^2}$, then substitute it into the scalar surface-integral definition.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-surface-area-and-scalar-surface-integral-of-a-patch", "thm-surface-area-density-is-cross-product-norm", "thm-sine-and-cosine-derivatives", "cor-trigonometric-parity-and-pythagorean-identity", "thm-algebra-of-derivatives"]
+      },
+      {
+        "id": "cor-surface-area-of-revolution-formula",
+        "kind": "corollary",
+        "title": "The surface of revolution has area $2\\pi\\int_a^b r(s)\\sqrt{1+r'(s)^2}\\,ds$",
+        "strategy": "Set the scalar field equal to one in the surface-of-revolution integral. The density is independent of the angular parameter, so Jordan--Fubini separates the rectangle integral and the integral of the constant one over $[0,2\\pi]$ contributes the factor $2\\pi$. Endpoint zeros of $r$ lie on a content-zero parameter boundary and do not alter the value.",
+        "deps": ["thm-scalar-surface-integrals-on-a-surface-of-revolution", "thm-jordan-fubini-by-sections", "lem-integral-elementary-bounds"]
+      }
+    ]
+  },
+  {
+    "order": 288.00016,
+    "id": "regular-surfaces-and-surface-integrals-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Regular Surfaces and Surface Integrals: Examples and Counterexamples",
+    "companion": "regular-surfaces-and-surface-integrals",
+    "requires": ["regular-surfaces-and-surface-integrals"],
+    "items": [
+      {
+        "id": "ex-sphere-and-hemisphere-surface-integrals",
+        "kind": "example",
+        "title": "Surface area and flux on a sphere, with scalar integrals on a hemisphere",
+        "strategy": "For radius $R>0$, use spherical parameters on $[0,2\\pi]\\times[0,\\pi]$. The map is injective and regular in the interior; the longitude seam and the two poles lie on the parameter boundary. Compute density $R^2\\sin\\phi$, integrate to obtain area $4\\pi R^2$, and use the outward normal $x/R$ to obtain flux $4\\pi R^3$ for the field $F(x)=x$. On the northern hemisphere compute $\\iint z\\,dS=\\pi R^3$ and record the orientation sign in the corresponding flux calculation.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-surface-area-and-scalar-surface-integral-of-a-patch", "def-oriented-unit-normal-and-flux-of-a-surface-patch", "thm-sine-and-cosine-derivatives", "cor-trigonometric-parity-and-pythagorean-identity", "thm-sine-cosine-signs-monotonicity-and-ranges", "thm-quarter-turn-values-and-shift-formulas", "thm-jordan-fubini-by-sections", "thm-ftc-second-part"]
+      },
+      {
+        "id": "ex-closed-cylinder-as-a-finitely-patched-oriented-surface",
+        "kind": "example",
+        "title": "A closed cylinder as a finitely patched oriented surface",
+        "strategy": "For radius $R>0$ and height $H>0$, present the boundary as its lateral patch and two polar cap patches. Their pairwise intersections are boundary circles, whose parameter preimages have content zero. Direct cross-product calculations give total area $2\\pi RH+2\\pi R^2$. With outward orientation and $F(x,y,z)=(x,y,0)$, the cap fluxes vanish and the side flux is $2\\pi R^2H$.",
+        "deps": ["def-finitely-patched-regular-surface-and-integrals", "def-cross-product-in-r3", "thm-sine-and-cosine-derivatives", "cor-trigonometric-parity-and-pythagorean-identity", "thm-quarter-turn-values-and-shift-formulas", "thm-jordan-fubini-by-sections", "thm-ftc-second-part"]
+      },
+      {
+        "id": "ex-torus-surface-area",
+        "kind": "example",
+        "title": "The surface area of a torus is $4\\pi^2ab$",
+        "strategy": "For $a>b>0$, parametrize by $((a+b\\cos\\phi)\\cos\\theta,(a+b\\cos\\phi)\\sin\\theta,b\\sin\\phi)$ on the full angle rectangle. Its interior is injective, the seams lie on the boundary, and the cross-product norm is $b(a+b\\cos\\phi)>0$. Fubini and the full-period endpoint values make the cosine term integrate to zero, leaving $4\\pi^2ab$.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-surface-area-and-scalar-surface-integral-of-a-patch", "thm-sine-and-cosine-derivatives", "cor-trigonometric-parity-and-pythagorean-identity", "thm-sine-cosine-signs-monotonicity-and-ranges", "thm-quarter-turn-values-and-shift-formulas", "thm-jordan-fubini-by-sections", "thm-ftc-second-part"]
+      },
+      {
+        "id": "ex-downward-flux-on-the-graph-z-equals-xy",
+        "kind": "example",
+        "title": "Downward flux through the graph $z=xy$ over the unit square",
+        "strategy": "Use the downward area vector $(y,x,-1)$ for the graph $z=xy$ over $[0,1]^2$. For $F(x,y,z)=(zx,z^2,xy)$ the pulled-back dot product is $x^2y^2+x^3y^2-xy$. Apply Fubini and the fundamental theorem to the polynomial terms to obtain flux $-1/18$. Reversing upward changes only the sign.",
+        "deps": ["thm-surface-integrals-over-c-one-graphs", "thm-jordan-fubini-by-sections", "thm-ftc-second-part", "thm-algebra-of-derivatives"]
+      },
+      {
+        "id": "ex-lateral-area-of-a-right-circular-cone",
+        "kind": "example",
+        "title": "The lateral area of a right circular cone is $\\pi R\\sqrt{R^2+H^2}$",
+        "strategy": "For $R,H>0$, rotate the linear radius $r(s)=Rs/H$ for $0\\le s\\le H$. It is positive in the open interval and vanishes only at the apex parameter boundary. Substitute its constant derivative into the surface-of-revolution formula and evaluate the remaining linear integral to obtain $\\pi R\\sqrt{R^2+H^2}$, checking the apex contributes no separate term.",
+        "deps": ["cor-surface-area-of-revolution-formula", "thm-algebra-of-derivatives", "thm-ftc-second-part"]
+      },
+      {
+        "id": "cex-degenerate-surface-parametrization-collapses-to-a-curve",
+        "kind": "counterexample",
+        "title": "A degenerate two-parameter map can collapse its image to a curve",
+        "strategy": "On the unit square take $\\varphi(u,v)=(u,0,0)$. Its parameter derivatives are $(1,0,0)$ and $(0,0,0)$, so their cross product and Gram determinant vanish everywhere, while the image is a line segment. This checkable witness fails the regularity and nonempty-interior-image conclusions without relying on a picture.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-cross-product-in-r3"]
+      },
+      {
+        "id": "ex-orientation-reversal-preserves-area-and-negates-flux",
+        "kind": "example",
+        "title": "Opposite parametrizations preserve area and negate flux",
+        "strategy": "Parametrize the unit square in the horizontal plane by $\\varphi(u,v)=(u,v,0)$ and compose with the coordinate swap $h(s,t)=(t,s)$. The swap has determinant $-1$. Both parametrizations give area one, while for the constant field $(0,0,1)$ their fluxes are $1$ and $-1$. This computes both reparametrization laws on the same surface.",
+        "deps": ["thm-surface-area-and-scalar-integrals-are-reparametrization-invariant", "thm-flux-under-surface-reparametrization", "def-admissible-regular-parametrized-surface-patch"]
+      },
+      {
+        "id": "ex-gabriels-horn-has-unbounded-truncated-lateral-area",
+        "kind": "example",
+        "title": "Gabriel's horn has unbounded truncated lateral area",
+        "strategy": "Rotate $r(x)=1/x$ on each compact interval $[1,T]$ and apply the surface-of-revolution formula. The density $(1/x)\\sqrt{1+1/x^4}$ is at least $1/x$, so monotonicity bounds the truncated lateral area below by $2\\pi L(T)$, where the published integral logarithm is $L(T)=\\int_1^Tdt/t$. The published unboundedness of $L$ makes the truncated areas unbounded. Keep $T>1$ and never treat the noncompact horn as one compact patch.",
+        "deps": ["cor-surface-area-of-revolution-formula", "thm-algebra-of-derivatives", "thm-monotonicity-of-the-integral", "def-integral-logarithm", "thm-integral-logarithm-is-unbounded"]
+      },
+      {
+        "id": "cex-schwarz-lantern-polyhedral-areas-diverge",
+        "kind": "counterexample",
+        "title": "Schwarz lanterns can converge to a cylinder while their polyhedral areas diverge",
+        "strategy": "On a cylinder of radius $r>0$ and height $H>0$, use $m$ horizontal bands and staggered regular $n$-gons to obtain $2mn$ congruent triangles. Compute their total area as $2rn\\sin(\\pi/n)\\sqrt{H^2+m^2r^2(1-\\cos(\\pi/n))^2}$. Along $m=n^3$, the mesh diameter tends to zero, while the sine-over-angle limit and $1-\\cos x=2\\sin^2(x/2)$ show the square-root factor grows linearly in $n$; hence the areas diverge. Include positive $n$ and $m$ only and verify every vertex lies on the cylinder.",
+        "deps": ["def-cross-product-in-r3", "cor-sin-x-over-x-limit", "cor-trigonometric-parity-and-pythagorean-identity", "thm-sine-and-cosine-addition-formulas", "thm-algebra-of-limits", "thm-sequential-criterion-for-function-limits", "cor-archimedean-reciprocal", "lem-reciprocal-of-null-diverges", "def-divergence-to-infinity"]
+      },
+      {
+        "id": "fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas",
+        "kind": "false-statement",
+        "title": "FALSE: surface area is the supremum of inscribed polyhedral areas",
+        "strategy": "Apply the proposed definition to the fixed smooth cylinder. Its surface-integral area is finite, whereas the Schwarz lantern counterexample supplies inscribed triangulated polyhedra with arbitrarily small mesh and unbounded area. The supremum is therefore infinite, not the cylinder's surface area. This also shows why the arc-length supremum definition has no direct surface analogue.",
+        "deps": ["cex-schwarz-lantern-polyhedral-areas-diverge"]
+      },
+      {
+        "id": "fs-continuity-alone-suffices-for-the-regular-surface-area-formula",
+        "kind": "false-statement",
+        "title": "FALSE: continuity alone makes the regular-patch surface-area formula applicable",
+        "strategy": "On a closed disc use the continuous injective cone graph $\\varphi(u,v)=(u,v,\\sqrt{u^2+v^2})$. Along the horizontal parameter line its third component restricts to $|u|$, whose two one-sided difference quotients at zero are $1$ and $-1$. Thus an interior partial derivative does not exist and the cross-product integrand is unavailable, even though a different polar parametrization treats the cone with its apex confined to the parameter boundary.",
+        "deps": ["def-admissible-regular-parametrized-surface-patch", "def-directional-and-partial-derivatives", "def-euclidean-inner-product"]
+      },
+      {
+        "id": "fs-flux-is-independent-of-the-parametrization",
+        "kind": "false-statement",
+        "title": "FALSE: flux is independent of the parametrization without an orientation condition",
+        "strategy": "Use the horizontal unit-square patch and the constant field $(0,0,1)$. Its standard parametrization has flux $1$, while swapping the two parameters reverses orientation and gives flux $-1$. The general flux theorem explains the exact distinction: preserving reparametrizations keep the value, reversing ones negate it.",
+        "deps": ["thm-flux-under-surface-reparametrization", "def-cross-product-in-r3"]
+      }
+    ]
+  }
+]

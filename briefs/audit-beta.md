@@ -12,9 +12,9 @@
 > Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
 > If an indispensable operation has no escalation-free form, report a blocker.
 
-> **Model/routing rule (owner, 2026-08-08).** You are **GPT 5.6 Sol** at
+> **Model/routing rule (owner, 2026-08-23).** You are **Claude Opus 5** at
 > `xhigh` effort with a **1,000,000-token context window**, dispatched through
-> the Codex subscription. Do not substitute another model or route through a
+> the claude CLI. Do not substitute another model or route through a
 > billed pipeline.
 >
 > **You are the same model as the Alpha who will adjudicate your findings and

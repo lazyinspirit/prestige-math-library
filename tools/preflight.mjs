@@ -93,39 +93,41 @@ attempt('yaml', true, () => {
 // Two independent consumers decide it, and getting either wrong lets a run start
 // that cannot finish:
 //
-//   AGENTS  — every dispatched role is Codex: Sol for authoring, Beta, reader
-//             and `alpha`, Terra for `mechanic` and the audit `certifier`. The
-//             build `alpha` role ran Claude Opus 5 through the claude CLI from
-//             2026-08-10 and returned to Sol on 2026-08-20, so NO workflow needs
-//             a claude lane for an agent any more.
-//   JUDGES  — both workflows judge with the configured lineup, `deepseek+terra`
-//             by default (owner, 2026-08-20) and `deepseek+sonnet` if selected.
+//   AGENTS  — every dispatched role is Claude Opus 5 on the claude CLI (owner,
+//             2026-08-23): authoring, Beta, reader, `alpha`, `refuter`,
+//             `orchestrator`, `scaffolder`, `mechanic`, and the
+//             audit's `audit-beta`/`audit-alpha`/`certifier`. Only
+//             `audit-refuter` is elsewhere, and it is a keyed HTTP lane rather
+//             than a CLI. No workflow needs Codex for an agent any more.
+//   JUDGES  — both workflows judge with the configured lineup, `deepseek+opus`
+//             by default (owner, 2026-08-23), with `deepseek+terra` and
+//             `deepseek+sonnet` selectable.
 //
-// Codex is therefore required by every workflow, and the claude CLI is required
-// only when the SELECTED JUDGE LINEUP names a claude-family lane. Note what this
-// re-exposes: checking only the lineup, as this did until 2026-08-11, reported a
-// green preflight for a build that could not dispatch its sole adjudicator. That
-// hole is closed by the agent side no longer having a claude lane at all, not by
-// the check — so if a claude role is ever re-added, `buildNeedsClaude` has to
-// come back with it. The lineup table is duplicated from judge.mts on purpose:
-// preflight must not import a tool it is checking is runnable.
+// The claude CLI is therefore required by every workflow, and Codex is required
+// only when the SELECTED JUDGE LINEUP names a GPT-family lane. THIS IS THE EXACT
+// MIRROR of what stood here until 2026-08-23, and the hole it re-opens is the
+// one that paragraph warned about: checking only the lineup, as this did until
+// 2026-08-11, once reported a green preflight for a build that could not
+// dispatch its sole adjudicator. The agent side is what closes it, so
+// `needClaude` is unconditional below and must STAY unconditional for as long as
+// any agent lane is claude — do not simplify it back into the lineup test. The
+// lineup table is duplicated from judge.mts on purpose: preflight must not
+// import a tool it is checking is runnable.
 const lineupModels = {
+  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
-}[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
-const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
-// Unconditional in both workflows: every agent lane is Codex, and so is the
-// Terra judge lane whenever it is selected. The `!isAudit || judgeNeedsCodex`
-// form this replaces existed only to let an audit skip Codex, which it never
-// could — audit-beta, audit-alpha and certifier are all Codex roles.
-const needCodex = true;
-// The build `alpha` role returned to Sol on 2026-08-20, so no agent needs the
-// claude CLI in either workflow; only a claude-family JUDGE lane does.
-const needClaude = judgeNeedsClaude;
+}[process.env.JUDGE_LINEUP ?? 'deepseek+opus'] ?? [];
+const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
+// Unconditional in both workflows: every agent lane is claude, and so is the
+// Opus judge lane whenever it is selected.
+const needClaude = true;
+// Nothing routes to Codex after 2026-08-23; only a GPT-family JUDGE lane does.
+const needCodex = judgeNeedsCodex;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
-  'install the Codex CLI — build authoring/Beta/Alpha and the Terra judge lane spawn it');
+  'install the Codex CLI — only a GPT-family judge lane spawns it now');
 // PRESENCE IS NOT VALIDITY (2026-08-10, learned the hard way). This checks that
 // an auth record exists; it cannot tell a live token from a retired one, and
 // neither can `codex login status`, which reads the file and keeps reporting
@@ -140,12 +142,22 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
   existsSync(join(codexHome, 'auth.json'))
     ? `${join(codexHome, 'auth.json')} present (NOT validated — pass --judges to spend a real call)`
     : `no auth.json under ${codexHome}`,
-  'run the Codex login flow; an expired or already-rotated token takes out every Sol lane at once');
+  'run the Codex login flow; an expired or already-rotated token takes out every GPT-family lane at once');
 
+// UNCONDITIONAL, and the paragraph above says why: every dispatched agent role
+// runs `claude -p`, so a missing CLI is not a judge-lineup question. A build that
+// cannot spawn this cannot author, audit, adjudicate or repair anything.
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  judgeNeedsClaude
-    ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
-    : 'not needed: no agent lane runs on claude, and this judge lineup has no claude-family lane');
+  'install the claude CLI — every dispatched agent role and the Opus judge lane spawn `claude -p`');
+// PRESENCE IS NOT CAPACITY, and this is the failure that caused the 2026-08-23
+// move in the first place — with the roles reversed. A subscription that has
+// spent its weekly or session quota still has a working CLI and a valid session,
+// so this check stays green while every lane returns a capacity refusal. A
+// capacity refusal is a null verdict and an incomplete stage, never a verdict and
+// never a completed stage. `--judges` spends one real call and IS proof.
+record('claude-quota', needClaude, 'warn',
+  'not checked — CLI presence says nothing about remaining subscription quota',
+  'pass --judges to spend one real call per lane before committing to a sweep');
 
 // The key itself is never printed, logged, or placed in any output.
 const envFile = deepseekEnvFile();

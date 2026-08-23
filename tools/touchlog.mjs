@@ -99,6 +99,30 @@ if (cmd === "snap") {
   const label = rest[0];
   if (!label) die("snap needs a label");
   const led = load();
+  // A LABEL IS A KEY, SO A DUPLICATE SILENTLY MOVES A BASELINE.
+  //
+  // Every consumer resolves a label to ONE snapshot — `impact-audit --from/--to`
+  // and `step8-guard --baseline` both do — and with two rows carrying the same
+  // label the later one wins. On frontier-17 a step-8 recovery Alpha re-used
+  // `pre-step8` after 47 of the 48 repairs had landed, and `step8-guard` went
+  // from reporting "48 changed, 48/48 licensed" to "1 changed, 1/1 licensed".
+  // No unlicensed edit existed — that was verified against the original
+  // baseline before the duplicate was written — but the guard could no longer
+  // demonstrate it, and a baseline taken after the edits it is meant to bound
+  // confirms rather than checks. frontier-16 recommendation #5, unimplemented
+  // until now, with a live instance behind it.
+  //
+  // A hard refusal rather than an auto-suffix: the caller asked for a name that
+  // already means something, and quietly renaming it to `pre-step8-2` leaves
+  // both the caller and every later reader guessing which one their tool
+  // resolved. Choosing the new name is a decision, not a default.
+  if ((led.snapshots ?? []).some((s) => s.label === label)) {
+    const prior = led.snapshots.filter((s) => s.label === label).at(-1);
+    die(`snapshot label "${label}" already exists (recorded ${prior.at}). A label is a key: ` +
+        `impact-audit and step8-guard resolve one label to one snapshot, and a second row with ` +
+        `this name would silently move their baseline forward past the edits it is meant to ` +
+        `bound. Choose a distinct label — round-qualify it, e.g. "${label}-round-2".`);
+  }
   led.snapshots.push({ label, at: new Date().toISOString(), hashes: hashes(), surfaces: surfaces() });
   writeFileSync(ledgerPath, JSON.stringify(led, null, 1) + "\n");
   const r = repairs(led);

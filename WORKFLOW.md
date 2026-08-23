@@ -351,7 +351,8 @@ runner, effort and window, and `tools/dispatch.mjs` is its mechanical
 expression (`--dry-run --json` attests it). This section held a full copy; the
 copy drifted twice — it still named a retired Sonnet judge lane while its own
 table two paragraphs later said DeepSeek + Terra — which is the argument for
-the pointer.
+the pointer. The lineup has since changed twice more (deepseek+terra restored
+2026-08-20, deepseek+opus 2026-08-23), which is the argument for it again.
 
 ### The production defaults these replaced
 
@@ -366,21 +367,27 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Current session cost rule: GPT 5.6 Sol authoring, Beta **and build Alpha**, plus
-GPT 5.6 Terra judging, all run through the Codex subscription plan (owner,
-2026-08-20, returning Alpha from Claude Opus 5 and the second judge lane from
-Claude Sonnet 5); DeepSeek V4 Pro judging is direct DeepSeek API spend, and is
-now the only non-subscription lane and the only non-GPT one. GPT-family work
-must not be routed through ofox.
+Current session cost rule: Claude Opus 5 authoring, Beta, **build Alpha**, every
+other dispatched role, and the second judge lane all run through the **Claude
+subscription** (owner, 2026-08-23, moving every GPT lane off Codex after that
+subscription reached its weekly limit); DeepSeek V4 Pro judging is direct
+DeepSeek API spend, and is now the only non-subscription lane and the only
+non-Anthropic one. Anthropic-family work must not be routed through ofox.
+
+**The concentration is the risk to watch.** Until 2026-08-23 the run drew on two
+independent subscriptions, so exhausting one left the other working; it now draws
+on one, and a single session limit stalls the dispatched roles and nulls the
+judge sweep together. A capacity refusal is a null verdict and an incomplete
+stage, never a verdict and never a completed stage.
 
 Two hard rules govern the models:
 
 1. Generation never runs through the public billed pipeline, and never wires a
-   subscription into the worker service. Current authoring uses GPT 5.6 Sol
-   through the Codex subscription plan at `xhigh` reasoning with a
-   1,000,000-token context window.
-2. GPT-family models (author, Beta, Alpha) run via the Codex
-   subscription plan, never through ofox; the judge lanes are `CLAUDE.md`
+   subscription into the worker service. Current authoring uses Claude Opus 5
+   through the claude CLI at `xhigh` reasoning with a 1,000,000-token context
+   window, selected by the `[1m]` suffix on the model id.
+2. Subscription models (author, Beta, Alpha, and every other dispatched role)
+   run via the claude CLI, never through ofox; the judge lanes are `CLAUDE.md`
    §Model lineup's. Never adopt an additional judge model on latency, price,
    or fluent reasons; inject a defect you know is there and see whether it
    says so. DeepSeek v4-flash remains barred as judge because it passed a
@@ -885,10 +892,10 @@ directory directly.
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
    apify (step-0 scraping, zero when nothing was scraped) plus direct DeepSeek
-   judge spend. GPT 5.6 Sol authoring, Beta and build Alpha, plus GPT 5.6 Terra
-   judge work, run on the Codex subscription plan and are not counted as
-   direct-API spend. Since 2026-08-20 no lane runs on a Claude subscription, so
-   direct DeepSeek spend is the whole of the model bill.
+   judge spend. Claude Opus 5 authoring, Beta, build Alpha, every other
+   dispatched role and the second judge lane run on the Claude subscription and
+   are not counted as direct-API spend. Since 2026-08-23 no lane runs on the
+   Codex subscription, so direct DeepSeek spend is the whole of the model bill.
 
 ---
 

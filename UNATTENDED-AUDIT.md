@@ -40,7 +40,7 @@ stochastic. What is deterministic is the control flow around them.
 | `tools/gates.mjs --audit --step A<n>` | the gates of record for one audit step. Never writes, never spends |
 | `tools/audit-split.mjs` | classifies changed items pure-retag vs material, field-aware |
 | `tools/audit-batch-split.mjs` | applies `wave<k>-batch-split.json` at A0, so an over-cap generated manifest becomes legal batches instead of one Beta getting five pairs |
-| `tools/dispatch.mjs --role audit-*` | runs one briefed audit role. Since 2026-08-08, `audit-beta` and `audit-alpha` are GPT 5.6 Sol at `xhigh` with a 1,000,000-token context window; `certifier` is read-only GPT 5.6 Terra with the same settings; `audit-refuter` is read-only DeepSeek V4 Pro (an HTTP call, not a process, so it needs its context in `--task`). `--check-read-only` prints the per-runner enforcement |
+| `tools/dispatch.mjs --role audit-*` | runs one briefed audit role. Since 2026-08-23, `audit-beta`, `audit-alpha` and the read-only `certifier` are all Claude Opus 5 at `xhigh` with a 1,000,000-token context window (`claude-opus-5[1m]`); `audit-refuter` is read-only DeepSeek V4 Pro (an HTTP call, not a process, so it needs its context in `--task`). Note what the certifier's independence now rests on: a fresh process with no sight of the authoring context, not a different model family. `--check-read-only` prints the per-runner enforcement |
 | `tools/run-wave.mjs` | the state machine: steps, halts, durable state, journal |
 | `tools/run-control.mjs --run wave<k>` | talk to a wave that is already going. Resolves the run directory from the run's own state file, so a wave gets `research/audit/`; before 2026-08-05 it hardcoded `research/` and every steer command for a wave wrote a file nobody polled, while printing success |
 | `ops/run-wave@.service` | systemd user unit so the wave survives logout |
@@ -144,7 +144,7 @@ and wave 4 is what found them:
    misrouted dispatch** was indistinguishable from one that had adjudicated.
 
 Wave 4 advanced to A4 with 91 provenance determinations and 13 repairs approved
-by nobody. Three Sol Betas independently refused to apply them and said why —
+by nobody. Three Betas independently refused to apply them and said why —
 which is luck, not a mechanism. The lane now uses `briefs/audit-orchestrator.md`,
 delivers the step note through `dispatch.mjs --task`, and requires a receipt at
 `research/audit/wave<k>-A<n>.md` that a no-op cannot produce.

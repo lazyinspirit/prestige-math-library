@@ -10,7 +10,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { unwrapSonnetEnvelope, extractEmbeddedVerdict } from '../../judge-parse.mjs';
+import { unwrapClaudeEnvelope, extractEmbeddedVerdict } from '../../judge-parse.mjs';
 
 // The live envelope shape, captured from `claude -p --output-format json`.
 const LIVE_ENVELOPE = JSON.stringify({
@@ -25,22 +25,22 @@ const LIVE_ENVELOPE = JSON.stringify({
 });
 
 test('the live CLI envelope unwraps to content plus summed submitted tokens', () => {
-  const { content, usage } = unwrapSonnetEnvelope(LIVE_ENVELOPE);
+  const { content, usage } = unwrapClaudeEnvelope(LIVE_ENVELOPE);
   assert.equal(content, '{"keep":true,"reason":"envelope-test"}');
   assert.equal(usage?.prompt_tokens, 2 + 8507 + 23976, 'a cache-read token is still a submitted token');
   assert.equal(usage?.completion_tokens, 21);
 });
 
 test('a non-envelope stdout passes through as plain text with no usage', () => {
-  const { content, usage } = unwrapSonnetEnvelope('  {"keep":false,"reason":"direct"}  ');
+  const { content, usage } = unwrapClaudeEnvelope('  {"keep":false,"reason":"direct"}  ');
   assert.equal(content, '{"keep":false,"reason":"direct"}');
   assert.equal(usage, undefined);
-  const crash = unwrapSonnetEnvelope('Error: something died\nstack...');
+  const crash = unwrapClaudeEnvelope('Error: something died\nstack...');
   assert.equal(crash.content.startsWith('Error:'), true);
 });
 
 test('an envelope without usage still yields its result text', () => {
-  const { content, usage } = unwrapSonnetEnvelope(JSON.stringify({ result: 'ok', type: 'result' }));
+  const { content, usage } = unwrapClaudeEnvelope(JSON.stringify({ result: 'ok', type: 'result' }));
   assert.equal(content, 'ok');
   assert.equal(usage, undefined);
 });

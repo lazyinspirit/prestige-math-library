@@ -52,6 +52,7 @@ parts:
       - the-fundamental-group-of-the-circle
       - the-seifert-van-kampen-theorem
       - classification-of-covering-spaces
+      - applications-of-the-fundamental-group
 ---
 
 ## metric-spaces
@@ -109,13 +110,13 @@ separates points is uniformly dense.
 
 ## homotopy-and-covering-spaces
 
-Homotopy deforms maps continuously, and based loops form the fundamental group. Covering
-maps lift paths and homotopies uniquely; universal-cover quotients then classify connected
-coverings by conjugacy classes of subgroups. Normal subgroups characterize regular
-coverings, and normalizer quotients compute their deck groups. For the circle this gives
-the line as universal cover and classifies every connected covering by a subgroup of
-$\mathbb Z$. The Seifert-van Kampen theorem expresses the fundamental group of an open
-union as a pushout, with compact subdivisions and homotopy grids controlling loop
-factorizations. Its consequences include simple connectedness of higher-dimensional
-spheres, free fundamental groups for finite wedges of circles, the product formula, and
-the group $\mathbb Z^2$ for the two-dimensional torus.
+Homotopy deforms maps; based loops form the fundamental group. Covering maps lift paths and
+homotopies uniquely; universal-cover quotients classify connected coverings by conjugacy
+classes of subgroups, normal ones the regular coverings and normalizer quotients their deck
+groups; for the circle the cover is the line and the subgroups are those of $\mathbb Z$.
+Seifert-van Kampen makes an open union's group a pushout, giving simply connected higher
+spheres, free groups for wedges of circles, the product formula and $\mathbb Z^2$ for the
+torus. Functoriality makes these obstructions: the circle is no retract of the disk, giving
+Brouwer's theorem and the fundamental theorem of algebra; Borsuk-Ulam constrains
+sphere-to-plane maps; topological-group loops commute; punctured spaces separate the plane
+from other $\mathbb R^n$.

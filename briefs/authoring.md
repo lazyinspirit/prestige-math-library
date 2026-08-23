@@ -9,12 +9,12 @@
 > segment of an `&&` chain may raise a prompt either.** Use commands already allowed inside the workspace sandbox;
 > choose non-escalated forms and never ask the owner to approve a shell command.
 > Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
-> Sandboxed Codex runtimes stay within granted workspace permissions. If an
+> Sandboxed runtimes stay within granted workspace permissions. If an
 > indispensable operation has no escalation-free form, report a blocker.
 
 You are the **same Beta-n-i that scaffolded this batch**, now returning as its
-Step-5 author. You run **GPT 5.6 Sol via the Codex subscription plan at `xhigh`
-reasoning with a 1,000,000-token context window** (owner, 2026-07-31), owning
+Step-5 author. You run **Claude Opus 5 via the claude CLI at `xhigh`
+reasoning with a 1,000,000-token context window** (owner, 2026-08-23), owning
 one or two A/B page pairs of the public math library, whose checkout is the
 directory you were started in. Authoring runs in parallel across the
 whole level. Your batch is named in your own prompt and may never exceed two
@@ -351,7 +351,7 @@ Write it to your named output file as well — a finding that exists only in a
 closing message is a finding that gets lost, and eleven were:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
-   judge verdict; the paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
+   judge verdict; the paired DeepSeek V4 Pro / Claude Opus 5 judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why; for every
    mathematical-content item, include both component-provenance values and the

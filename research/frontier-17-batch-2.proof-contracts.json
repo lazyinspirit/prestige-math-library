@@ -1,0 +1,2016 @@
+{
+ "version": 1,
+ "level": "frontier-17",
+ "scope": [
+  "prop-two-classical-counterexamples-in-polar-coordinates",
+  "cex-circular-curve-defeats-vector-valued-mean-value-equality",
+  "fs-the-mean-value-equality-holds-for-vector-valued-maps",
+  "ex-sine-of-xy-and-its-mixed-partials",
+  "ex-xy-sine-one-over-radius-squared-has-unbounded-partial-derivatives",
+  "ex-radial-r-squared-sine-one-over-r-is-differentiable-with-discontinuous-gradient",
+  "ex-sine-product-family-is-not-equicontinuous",
+  "ex-volume-of-the-sine-solid-of-revolution",
+  "ex-surface-area-of-the-sine-solid-of-revolution",
+  "fs-spherical-coordinates-are-globally-injective"
+ ],
+ "contracts": {
+  "prop-two-classical-counterexamples-in-polar-coordinates": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "\\sin^2x+\\cos^2x=1",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-double-angle-and-power-reduction-identities",
+     "source_section": "Statement",
+     "quote": "\\sin(2x)=2\\sin x\\cos x",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-tangent-cotangent-secant-cosecant",
+     "source_section": "Definition",
+     "quote": "\\tan x:=\\frac{\\sin x}{\\cos x}",
+     "uses": [
+      "2.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "polar-radius",
+     "claim": "The Pythagorean identity reduces the Cartesian denominator to the positive quantity r squared.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "angular-identity",
+     "claim": "The first quotient is one half of sine of twice the angle.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "radial-angular-identity",
+     "claim": "On the nonzero-cosine domain, the second quotient is r squared times tangent.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.1",
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "domain-accurate-conclusion",
+     "claim": "Both identities hold on exactly their stated domains.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The proposition concerns explicit real parameters and no optionally empty set or family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 uses r>0 to prove the first denominator is nonzero, and step 2.2 separately requires x nonzero for the second quotient."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "There is no indexed construction, induction, or unit parameter whose first case changes either identity."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 2.2 isolate both possible denominator collapses instead of cancelling at r=0 or cos theta=0."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The angle ranges over all reals and the statement contains no interval endpoint."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The coordinates are explicit functions of r and theta, with no object selected from a nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "Neither asserted identity is a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse recovering polar parameters from either quotient is asserted."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "cex-circular-curve-defeats-vector-valued-mean-value-equality": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-vector-valued-derivative-and-integral",
+     "source_section": "Definition",
+     "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-componentwise-limits-and-continuity",
+     "source_section": "Statement",
+     "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, with vector-valued functions, their\ncomponents $f_i = \\pi_i \\circ f$, their limits and their continuity as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n1. **Continuity is componentwise.** Let $(X,d_X)$ be a metric space, $A \\subseteq X$,\n   $f : A \\to \\mathbb{R}^{m}$ and $a \\in A$. Then $f$ is continuous at $a$ if and\n   only if every component $f_i : A \\to \\mathbb{R}$ $(i<m)$ is continuous at $a$.\n2. **Limits are componentwise.** Let $A \\subseteq \\mathbb{R}$, let $c$ be a limit\n   point of $A$ ([[def-limit-point-r]]), let $f : A \\to \\mathbb{R}^{m}$ and let\n   $L \\in \\mathbb{R}^{m}$. Then $\\lim_{x\\to c} f(x) = L$ if and only if\n   $\\lim_{x\\to c} f_i(x) = L_i$ for every $i<m$ ([[def-function-limit]]).\n3. **Algebra.** Let $(X,d_X)$, $A$, $a$ be as in clause 1, let\n   $f, g : A \\to \\mathbb{R}^{m}$ be continuous at $a$ and let $\\lambda \\in \\mathbb{R}$.\n   Then $f + g$ and $\\lambda f$ (defined pointwise) are continuous at $a$; the\n   real-valued function $x \\mapsto \\langle f(x), g(x)\\rangle$ is continuous at\n   $a$ ([[def-euclidean-inner-product]]); and for every norm $N$ on\n   $\\mathbb{R}^{m}$ the real-valued function $x \\mapsto N(f(x))$ is continuous at\n   $a$ ([[def-norm-and-normed-space]]).\n\n**Where $m \\ge 1$ is spent.** The \"if\" direction of clauses 1 and 2 divides\n$\\varepsilon$ by $\\iota(m)$, which requires $\\iota(m) \\ne 0$; and clause 3's last\npart quotes a bound available only for $m \\ge 1$. The \"only if\" directions hold\nfor every $m$ but say nothing at $m = 0$, there being no index $i < 0$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "cor-differentiable-implies-continuous",
+     "source_section": "Statement",
+     "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+     "source_section": "Statement",
+     "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-p-norms-on-rn",
+     "source_section": "Definition",
+     "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is a rational, and that is not a matter of taste.**\n[[def-rational-power]] supplies $a^{r}$ for a nonnegative base and a **rational**\nexponent only; real exponents do not exist at this point in the reading order,\nand [[rem-real-exponents-deferred]] records exactly why. This is also why the\npublished Minkowski inequality [[thm-minkowski-finite]], which is what makes the\ntriangle inequality work below, is itself stated for rational $p \\ge 1$. **No\nstatement on this page is written for $p$ ranging over a real interval.**\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "def-pi-via-first-positive-cosine-zero",
+     "source_section": "Definition",
+     "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+     "uses": [
+      "1.4"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L1] and [L4], both components of $f$ are continuous on $[0,2\\pi]$, so $f$ is continuous there by [L3].",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Periodicity and the values at zero give $f(2\\pi)=f(0)=(1,0)$, so $f(2\\pi)-f(0)=(0,0)$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L6",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "Componentwise differentiation gives $f'(t)=(-\\sin t,\\cos t)$ for every $t\\in(0,2\\pi)$.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-1-4",
+     "claim": "Since $\\pi>0$, the scalar $2\\pi$ is nonzero.",
+     "step": "1.4",
+     "inputs": [
+      "L8",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For every $t\\in(0,2\\pi)$, $\\lVert f'(t)\\rVert_2=\\sqrt{\\sin^2t+\\cos^2t}=1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3",
+      "L5",
+      "L7",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "If the refuted equality held at some $\\xi\\in(0,2\\pi)$, step 1.2 would give $(0,0)=2\\pi f'(\\xi)$; step 1.4 would then force $f'(\\xi)=(0,0)$, contradicting step 2.1. Thus no such $\\xi$ exists.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 2.1",
+      "step 1.4",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The witness uses the explicit nonempty interval from zero to two pi."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.2 computes the zero endpoint increment, and step 3.1 shows why it cannot equal the claimed derivative vector."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 proves the exact unit-speed value rather than merely nonvanishing."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The repeated endpoint image is the intended degenerate feature and is handled in steps 1.2 and 3.1; the parameter interval itself is nondegenerate by step 1.4."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 1.2 verify continuity and evaluate both endpoints of the closed interval."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The counterexample proves that no proposed mean-value point exists and makes no auxiliary selection."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The refuted claim is a universal existence implication, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse implication is asserted."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 traced the endpoint, componentwise derivative, norm, and contradiction steps against all eight cited clauses. Alpha confirmed and repaired the two defects it found: the derivative norm is now quantified only on (0,2pi), and L2 restores c in A. The final circular witness is correctly typed and the contradiction uses only the nonzero interval length."
+   }
+  },
+  "fs-the-mean-value-equality-holds-for-vector-valued-maps": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "cex-circular-curve-defeats-vector-valued-mean-value-equality",
+     "source_section": "Statement refuted",
+     "quote": "The curve\n\n$$f:[0,2\\pi]\\longrightarrow\\mathbb R^2,\\qquad f(t)=(\\cos t,\\sin t),$$\n\nis continuous on its interval and differentiable in its interior, its endpoint\nincrement is zero, and $\\lVert f'(t)\\rVert_2=1$ for every $t\\in(0,2\\pi)$. Hence no\n$\\xi\\in(0,2\\pi)$ satisfies the displayed equality.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-mean-value-inequality",
+     "source_section": "Statement",
+     "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Fact [L1] supplies an instance with $m=2$, $a=0$, and $b=2\\pi$ that satisfies both hypotheses of the false claim but not its conclusion.",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Therefore the universal equality claim is false.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The failure does not affect the vector-valued mean value inequality: under its derivative-bound hypothesis, the estimate in [L2] remains valid.",
+     "step": "3.1",
+     "inputs": [
+      "L2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The false claim quantifies over maps on a nondegenerate interval a<b."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 uses a witness with zero endpoint increment while the derivative never vanishes."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 preserves the scalar-compatible inequality, while the Remark explicitly records that the equality is valid for codomain dimension one."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 uses the repeated endpoint image as the precise degeneracy that defeats the conclusion."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 cites the witness's closed-interval continuity and endpoint increment."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The refutation supplies an explicit map and proves the demanded point does not exist."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The false statement is a one-directional universal implication."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No reverse implication is part of the false statement."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "ex-sine-of-xy-and-its-mixed-partials": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c)",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "$(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+     "uses": [
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "def-directional-and-partial-derivatives",
+     "source_section": "Definition",
+     "quote": "$D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "x-partial",
+     "claim": "The one-variable chain rule computes the x partial derivative.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L4"
+     ]
+    },
+    {
+     "id": "y-partial",
+     "claim": "The one-variable chain rule computes the y partial derivative.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "L4"
+     ]
+    },
+    {
+     "id": "yx-mixed-partial",
+     "claim": "The product and chain rules compute the y derivative of the x partial.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "xy-mixed-partial",
+     "claim": "The product and chain rules compute the x derivative of the y partial.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.2",
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "global-agreement",
+     "claim": "Both formulas remain defined on the coordinate axes and agree on the whole plane.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 2.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example is a function on the nonempty space R squared, not a claim about an optionally empty family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 explicitly checks the formulas at x=0 and y=0."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No indexed construction or first positive denominator occurs."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 3.1 confirms that neither coordinate-axis specialization requires cancellation or exclusion."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The domain is the whole plane and contains no interval endpoints."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Every derivative is calculated explicitly and no point or representative is selected."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example asserts formulas and equality, not a biconditional characterization."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse from equality of mixed partials to the sine-product form is claimed."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 independently recomputed both first and mixed partial derivatives from the cited one-variable chain and product rules, including the coordinate axes. The two mixed formulas agree on all of R squared, and Alpha found no hidden appeal to Clairaut or missing domain case in the final calculation."
+   }
+  },
+  "ex-xy-sine-one-over-radius-squared-has-unbounded-partial-derivatives": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.3",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c)",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "$(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-total-derivative-in-euclidean-space",
+     "source_section": "Definition",
+     "quote": "\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "def-directional-and-partial-derivatives",
+     "source_section": "Definition",
+     "quote": "$D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-p-norms-on-rn",
+     "source_section": "Definition",
+     "quote": "\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}",
+     "uses": [
+      "2.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+     "source_section": "Statement",
+     "quote": "Both sine and cosine have period $2\\pi$",
+     "uses": [
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L9",
+     "source": "cor-archimedean-reciprocal",
+     "source_section": "Statement",
+     "quote": "there is a natural number $n \\ge 1$ such that",
+     "uses": [
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L10",
+     "source": "thm-nth-roots-exist",
+     "source_section": "Statement",
+     "quote": "there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a",
+     "uses": [
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L11",
+     "source": "def-pi-via-first-positive-cosine-zero",
+     "source_section": "Definition",
+     "quote": "Thus $\\pi>0$",
+     "uses": [
+      "1.4"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "quadratic-product-bound",
+     "claim": "A completed square gives twice the absolute product at most the squared radius.",
+     "step": "1.1",
+     "inputs": [
+      "algebra"
+     ]
+    },
+    {
+     "id": "origin-partials",
+     "claim": "The two axis restrictions give zero partial derivatives at the origin.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "L6"
+     ]
+    },
+    {
+     "id": "punctured-partials",
+     "claim": "The chain, product, and quotient rules compute both partials away from the origin.",
+     "step": "1.3",
+     "inputs": [
+      "given",
+      "L2",
+      "L3",
+      "L4",
+      "algebra"
+     ]
+    },
+    {
+     "id": "witness-sequence-converges",
+     "claim": "The positive reciprocal-root sequence is defined from its first index and tends to zero.",
+     "step": "1.4",
+     "inputs": [
+      "L9",
+      "L10",
+      "L11",
+      "algebra"
+     ]
+    },
+    {
+     "id": "origin-remainder-bound",
+     "claim": "The trigonometric bound turns the product estimate into a quadratic Euclidean bound.",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "L1",
+      "L7"
+     ]
+    },
+    {
+     "id": "partial-values-on-witness",
+     "claim": "The chosen phase makes sine zero and cosine one, forcing both partials to equal minus one over twice the coordinate.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.3",
+      "L2",
+      "L8",
+      "algebra"
+     ]
+    },
+    {
+     "id": "total-differentiability",
+     "claim": "The quadratic bound divided by the Euclidean norm tends to zero.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L5",
+      "algebra"
+     ]
+    },
+    {
+     "id": "unbounded-in-every-neighbourhood",
+     "claim": "For arbitrary radius and bound, a sufficiently late witness point lies nearby and makes both partial magnitudes exceed the bound.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.4",
+      "step 2.2",
+      "L7",
+      "choose"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The function has the explicit nonempty domain R squared."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.2 and 3.1 separately establish the partial derivatives and total derivative at the origin."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.4 defines the witness only for k>=1 and checks positivity at the first permitted index, so no zero denominator occurs."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 treats the punctured-plane bound and step 3.1 closes the excluded origin by the derivative definition."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The domain is the whole plane and the claim is local near an interior point."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 4.1 uses convergence of the explicit sequence to choose an index satisfying both the neighbourhood and magnitude bounds."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example asserts differentiability and unboundedness, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse from unbounded partial derivatives to this particular formula is claimed."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 checked the quadratic bound at the origin, both off-origin partial formulas, and the diagonal sequence beginning at k=1. The chosen phases make the cosine term exact and the reciprocal scale unbounded, while no division occurs at the separately treated origin; Alpha accepts the construction and quantifiers."
+   }
+  },
+  "ex-radial-r-squared-sine-one-over-r-is-differentiable-with-discontinuous-gradient": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-p-norms-on-rn",
+     "source_section": "Definition",
+     "quote": "\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "Consequently $|\\sin x|\\le1$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.4",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c)",
+     "uses": [
+      "1.3",
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "$(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+     "uses": [
+      "1.3",
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "def-total-derivative-in-euclidean-space",
+     "source_section": "Definition",
+     "quote": "\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-jacobian-matrix-and-gradient",
+     "source_section": "Definition",
+     "quote": "its **gradient** is",
+     "uses": [
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "thm-real-power-continuity-and-derivatives",
+     "source_section": "Statement",
+     "quote": "(x^\\alpha)'=\\alpha x^{\\alpha-1}",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L9",
+     "source": "thm-real-power-agrees-with-rational-exponent",
+     "source_section": "Statement",
+     "quote": "the real power $a^r=\\exp(r\\log a)$ agrees with the rational power",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L10",
+     "source": "thm-of-square-roots",
+     "source_section": "Statement",
+     "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L11",
+     "source": "thm-quarter-turn-values-and-shift-formulas",
+     "source_section": "Statement",
+     "quote": "\\cos(x+\\pi)=-\\cos x",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L12",
+     "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+     "source_section": "Statement",
+     "quote": "Both sine and cosine have period $2\\pi$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L13",
+     "source": "cor-archimedean-reciprocal",
+     "source_section": "Statement",
+     "quote": "there is a natural number $n \\ge 1$ such that",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L14",
+     "source": "def-pi-via-first-positive-cosine-zero",
+     "source_section": "Definition",
+     "quote": "Thus $\\pi>0$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L15",
+     "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+     "source_section": "Statement",
+     "quote": "In particular $\\partial_jf(a)=Df(a)e_j$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "origin-smallness",
+     "claim": "The radial square makes the difference quotient at the origin at most the radius.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "two-radial-sequences",
+     "claim": "Two explicit positive reciprocal sequences approach zero.",
+     "step": "1.2",
+     "inputs": [
+      "L13",
+      "L14",
+      "algebra"
+     ]
+    },
+    {
+     "id": "radius-partials",
+     "claim": "The positive-square-root derivative gives the coordinate partials of the radius off the origin.",
+     "step": "1.3",
+     "inputs": [
+      "given",
+      "L4",
+      "L5",
+      "L8",
+      "L9",
+      "L10",
+      "algebra"
+     ]
+    },
+    {
+     "id": "radial-factor-derivative",
+     "claim": "The product and chain rules compute the derivative of r squared sine of one over r.",
+     "step": "1.4",
+     "inputs": [
+      "L3",
+      "L4",
+      "L5",
+      "algebra"
+     ]
+    },
+    {
+     "id": "origin-gradient",
+     "claim": "Total differentiability yields derivative zero and hence zero coordinate partials at the origin.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L6",
+      "L7",
+      "L15"
+     ]
+    },
+    {
+     "id": "punctured-gradient",
+     "claim": "The radial chain rule combines the radius partials and radial factor derivative into the displayed gradient.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.3",
+      "step 1.4",
+      "L7"
+     ]
+    },
+    {
+     "id": "two-gradient-values",
+     "claim": "The two reciprocal phases make the radial factor exactly minus one and plus one.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 2.2",
+      "L3",
+      "L11",
+      "L12",
+      "algebra"
+     ]
+    },
+    {
+     "id": "gradient-discontinuity",
+     "claim": "Different constant gradient values along two sequences approaching the origin rule out a gradient limit.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "step 1.2",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The function has the explicit nonempty domain R squared."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 2.1 establish total differentiability and the gradient value at radius zero without using the punctured formula."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.2 starts both witness sequences at k=1, so every displayed denominator is positive."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 2.1 handles the collapsed radial direction at the origin, while step 2.2 is explicitly restricted to positive radius."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The domain is the whole plane and the origin is an interior point, not an interval endpoint."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Both witness sequences and all derivative formulas are explicit; no point is selected from an arbitrary set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example asserts differentiability and failure of gradient continuity, not an equivalence."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse characterizing radial oscillators by gradient discontinuity is claimed."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 checked the zero derivative from the radial bound, the punctured-plane gradient formula, and both positive-index phase sequences. Their radii tend to zero and force distinct limiting radial factors, so the gradient discontinuity is established without using the punctured formula at radius zero."
+   }
+  },
+  "ex-sine-product-family-is-not-equicontinuous": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-equicontinuity-and-boundedness-in-ck",
+     "source_section": "Definition",
+     "quote": "The family $\\mathcal F$ is **equicontinuous at $a\\in K$** when, for every $\\varepsilon>0$, there is $\\delta>0$",
+     "uses": [
+      "1.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "\\sin(-x)=-\\sin x",
+     "uses": [
+      "1.2",
+      "1.3",
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-sine-and-cosine-are-one-lipschitz",
+     "source_section": "Statement",
+     "quote": "|\\sin u-\\sin v|\\le|u-v|",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-quarter-turn-values-and-shift-formulas",
+     "source_section": "Statement",
+     "quote": "\\sin(\\pi/2)=1",
+     "uses": [
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "cor-archimedean-reciprocal",
+     "source_section": "Statement",
+     "quote": "there is a natural number $n \\ge 1$ such that",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "def-pi-via-first-positive-cosine-zero",
+     "source_section": "Definition",
+     "quote": "Thus $\\pi>0$",
+     "uses": [
+      "1.1",
+      "1.4",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "thm-heine-borel-rn",
+     "source_section": "Statement",
+     "quote": "**Closed boxes are compact.**",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "def-p-norms-on-rn",
+     "source_section": "Definition",
+     "quote": "\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "compact-square",
+     "claim": "Heine-Borel makes the nonempty closed square compact.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "L6",
+      "L7"
+     ]
+    },
+    {
+     "id": "member-continuity",
+     "claim": "The sine Lipschitz bound proves continuity of every fixed family member.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "L2",
+      "L3",
+      "L8",
+      "algebra"
+     ]
+    },
+    {
+     "id": "uniform-bound",
+     "claim": "The trigonometric bound gives one range bound for the entire family.",
+     "step": "1.3",
+     "inputs": [
+      "given",
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "oscillation-points",
+     "claim": "The origin and explicit quarter-turn points have function values zero and one.",
+     "step": "1.4",
+     "inputs": [
+      "given",
+      "L2",
+      "L4",
+      "L6",
+      "algebra"
+     ]
+    },
+    {
+     "id": "arbitrarily-close-witness",
+     "claim": "The reciprocal Archimedean property selects a frequency whose quarter-turn point lies within any prescribed radius.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.4",
+      "L5",
+      "L6",
+      "L8",
+      "choose",
+      "algebra"
+     ]
+    },
+    {
+     "id": "equicontinuity-fails",
+     "claim": "A fixed epsilon and the arbitrarily close unit jumps contradict equicontinuity at the origin.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.4",
+      "step 2.1",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 verifies that K is nonempty before the equicontinuity definition is applied."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The Example restricts the family to n>=1, and step 1.4 separately evaluates every member at the zero point of K."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.4 includes n=1 and shows its witness point lies in K with the claimed value."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.4 handles the common zero value at the origin, while step 2.1 produces distinct nearby points."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 1.4 include the closed-square origin and verify the witness points remain inside the square."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 2.1 invokes the reciprocal Archimedean property to choose a positive natural frequency for an arbitrary delta."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example compares uniform boundedness with failure of equicontinuity and asserts no biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse from nonequicontinuity to this sine-product family is claimed."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 verified compactness and nonemptiness of the square, the uniform unit bound, the n>=1 restriction, and the quarter-turn points approaching the origin. The single epsilon witness defeats every common equicontinuity radius while all family members remain continuous; Alpha found no boundary or index defect."
+   }
+  },
+  "ex-volume-of-the-sine-solid-of-revolution": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-volume-of-a-solid-of-revolution-by-discs",
+     "source_section": "Statement",
+     "quote": "The solid of revolution is compact and Jordan measurable and has volume $\\pi\\int_a^b f(x)^2\\,dx$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "cor-pi-is-the-first-positive-sine-zero",
+     "source_section": "Statement",
+     "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-differentiable-implies-continuous",
+     "source_section": "Statement",
+     "quote": "If $f$ is differentiable at $c$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-double-angle-and-power-reduction-identities",
+     "source_section": "Statement",
+     "quote": "\\sin^2x=(1-\\cos2x)/2",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-continuous-implies-integrable",
+     "source_section": "Statement",
+     "quote": "Then $f$ is bounded ([[def-bounded-set]]) and Riemann integrable on $[a,b]$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-linearity-of-the-integral",
+     "source_section": "Statement",
+     "quote": "\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "lem-integral-elementary-bounds",
+     "source_section": "Statement",
+     "quote": "\\int_a^b c \\;=\\; c\\,(b-a)",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "thm-ftc-second-part",
+     "source_section": "Statement",
+     "quote": "\\int_a^b f \\;=\\; G(b) - G(a)",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L9",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c)",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L10",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L11",
+     "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+     "source_section": "Statement",
+     "quote": "Both sine and cosine have period $2\\pi$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "disc-formula",
+     "claim": "The sine profile satisfies the nonnegative continuity hypotheses, so the disc theorem supplies measurability and the volume integral.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "cosine-double-angle-primitive",
+     "claim": "The chain rule produces a primitive of cosine at double angle and continuity makes its derivative integrable on the nondegenerate interval.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "L5",
+      "L9",
+      "L10"
+     ]
+    },
+    {
+     "id": "constant-integral",
+     "claim": "The integral of one over the nondegenerate interval is pi.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L7",
+      "algebra"
+     ]
+    },
+    {
+     "id": "sine-square-integral",
+     "claim": "Power reduction, linearity, and the fundamental theorem evaluate the sine-square integral as pi over two.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "step 1.3",
+      "L2",
+      "L4",
+      "L6",
+      "L8",
+      "L11",
+      "algebra"
+     ]
+    },
+    {
+     "id": "volume-value",
+     "claim": "Substitution into the disc formula gives pi squared over two.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The profile interval is the explicit nonempty interval from zero to positive pi."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 applies the source theorem to a profile with zero radius at both endpoints."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.3 treats the constant function one used in the power-reduction integral."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 relies on the source theorem's zero-radius section clause and never divides by the profile."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 checks the sine profile at both endpoints, and step 2.1 evaluates the primitive at both endpoints."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The profile, solid, and primitive are explicit and no selection occurs."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example is a direct volume computation, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse recognizing a solid from its numerical volume is asserted."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 rechecked the disc-theorem hypotheses, the allowed zero endpoint radii, positivity of pi, and the nondegenerate-interval hypotheses for the elementary integral and FTC clauses. The power-reduction computation gives integral pi/2 and therefore volume pi squared over two on the final text."
+   }
+  },
+  "ex-surface-area-of-the-sine-solid-of-revolution": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "cor-surface-area-of-revolution-formula",
+     "source_section": "Statement",
+     "quote": "The surface obtained by rotating $r$ about the axis has area $2\\pi\\int_a^b r(s)\\sqrt{1+r'(s)^2}\\,ds$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-scalar-surface-integrals-on-a-surface-of-revolution",
+     "source_section": "Statement",
+     "quote": "Let $a<b$, and let $r:[a,b]\\to[0,\\infty)$ be $C^1$ on a neighbourhood of $[a,b]$, positive on $(a,b)$, and allowed to vanish only at the endpoints.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "cor-pi-is-the-first-positive-sine-zero",
+     "source_section": "Statement",
+     "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+     "uses": [
+      "1.1",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.1",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-differentiable-implies-continuous",
+     "source_section": "Statement",
+     "quote": "If $f$ is differentiable at $c$",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-hyperbolic-identities-and-derivatives",
+     "source_section": "Statement",
+     "quote": "$\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-derivative-of-an-inverse",
+     "source_section": "Statement",
+     "quote": "if $f'(c) \\ne 0$, then $g$ is differentiable at $b$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-inverse-hyperbolic-logarithm-formulas",
+     "source_section": "Statement",
+     "quote": "\\operatorname{arsinh}u=\\log(u+\\sqrt{u^2+1})",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "thm-real-power-continuity-and-derivatives",
+     "source_section": "Statement",
+     "quote": "(x^\\alpha)'=\\alpha x^{\\alpha-1}",
+     "uses": [
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "thm-real-power-agrees-with-rational-exponent",
+     "source_section": "Statement",
+     "quote": "the real power $a^r=\\exp(r\\log a)$ agrees with the rational power",
+     "uses": [
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L9",
+     "source": "thm-of-square-roots",
+     "source_section": "Statement",
+     "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a",
+     "uses": [
+      "1.2",
+      "1.3",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L10",
+     "source": "thm-chain-rule",
+     "source_section": "Statement",
+     "quote": "(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c)",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L11",
+     "source": "thm-algebra-of-derivatives",
+     "source_section": "Statement",
+     "quote": "$(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L12",
+     "source": "thm-continuous-implies-integrable",
+     "source_section": "Statement",
+     "quote": "Then $f$ is bounded ([[def-bounded-set]]) and Riemann integrable on $[a,b]$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L13",
+     "source": "thm-ftc-second-part",
+     "source_section": "Statement",
+     "quote": "\\int_a^b f \\;=\\; G(b) - G(a)",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L14",
+     "source": "thm-quarter-turn-values-and-shift-formulas",
+     "source_section": "Statement",
+     "quote": "\\cos\\pi=-1",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "surface-formula",
+     "claim": "The sine profile satisfies the C1, positivity, and endpoint-zero hypotheses and yields the surface integral.",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "arsinh-calculus",
+     "claim": "The inverse derivative theorem gives the arsinh derivative and oddness of sinh gives oddness of arsinh.",
+     "step": "1.2",
+     "inputs": [
+      "L3",
+      "L4",
+      "L5",
+      "L9",
+      "algebra"
+     ]
+    },
+    {
+     "id": "integrand-integrability",
+     "claim": "Continuity of the trigonometric and positive square-root factors makes the area integrand integrable on the nondegenerate interval.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "L7",
+      "L8",
+      "L9",
+      "L12",
+      "algebra"
+     ]
+    },
+    {
+     "id": "primitive-verification",
+     "claim": "The chain, product, and square-root derivative rules verify the displayed primitive.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L2",
+      "L7",
+      "L8",
+      "L9",
+      "L10",
+      "L11",
+      "algebra"
+     ]
+    },
+    {
+     "id": "endpoint-evaluation",
+     "claim": "The fundamental theorem, cosine endpoint values, and oddness of arsinh give the exact integral and logarithmic form.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3",
+      "step 2.1",
+      "L6",
+      "L9",
+      "L13",
+      "L14",
+      "algebra"
+     ]
+    },
+    {
+     "id": "area-value",
+     "claim": "Substitution into the surface formula gives both equivalent exact area expressions.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The profile interval is the explicit nonempty interval from zero to positive pi."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 verifies that the two zero endpoint radii are allowed by the source theorem."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Steps 1.2 and 3.1 evaluate arsinh and the square root at the exact endpoint inputs one and minus one."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 distinguishes allowed endpoint collapse from the strictly positive interior profile."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 3.1 explicitly handle both profile endpoints and both primitive endpoint values."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The profile, inverse value, primitive, and endpoint values are explicit."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The example is a direct surface-area computation, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse characterization of sine profiles by surface area is claimed."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 verified the earlier surface theorem's a<b, C1, interior-positivity, and endpoint-zero hypotheses, then checked the arsinh derivative, the displayed primitive, and both endpoint evaluations. The exact integral and logarithmic equivalent follow with no improper-integral convention or unhandled seam."
+   }
+  },
+  "fs-spherical-coordinates-are-globally-injective": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-sine-and-cosine-derivatives",
+     "source_section": "Statement",
+     "quote": "(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-trigonometric-parity-and-pythagorean-identity",
+     "source_section": "Statement",
+     "quote": "\\sin^2x+\\cos^2x=1",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+     "source_section": "Statement",
+     "quote": "Both sine and cosine have period $2\\pi$",
+     "uses": [
+      "1.1",
+      "1.2",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-quarter-turn-values-and-shift-formulas",
+     "source_section": "Statement",
+     "quote": "\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-jacobian-determinant-of-a-c-one-map",
+     "source_section": "Definition",
+     "quote": "Its **Jacobian determinant** is",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+     "source_section": "Statement",
+     "quote": "Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$.",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-pi-via-first-positive-cosine-zero",
+     "source_section": "Definition",
+     "quote": "Thus $\\pi>0$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "cor-differentiable-implies-continuous",
+     "source_section": "Statement",
+     "quote": "If $f$ is differentiable at $c$",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "azimuthal-seam",
+     "claim": "Two distinct seam parameter points have the same spherical-coordinate image.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "L1",
+      "L3",
+      "L4",
+      "L7"
+     ]
+    },
+    {
+     "id": "poles-and-origin",
+     "claim": "Polar angles and zero radius collapse the remaining angular coordinates.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "L1",
+      "L3",
+      "L4",
+      "algebra"
+     ]
+    },
+    {
+     "id": "c-one-regularity",
+     "claim": "The component formulas make the ambient spherical map C1.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L6",
+      "L8"
+     ]
+    },
+    {
+     "id": "jacobian-matrix",
+     "claim": "Coordinate differentiation gives the displayed Jacobian matrix.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3",
+      "L1",
+      "L5",
+      "algebra"
+     ]
+    },
+    {
+     "id": "jacobian-determinant",
+     "claim": "Determinant expansion and the Pythagorean identity give r squared sine phi.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "refutation-and-singular-loci",
+     "claim": "The seam refutes injectivity, while the poles and zero radius also coincide with determinant zero.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 3.1",
+      "L3"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The parameter domain is explicitly nonempty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Steps 1.2 and 4.1 treat radius zero and prove that all angular coordinates collapse there."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 uses the admissible unit radius to isolate seam noninjectivity away from the zero-radius collapse."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.2 handles both polar axes and radius zero, and step 4.1 identifies the corresponding singular derivative loci."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 1.2 explicitly compare both azimuthal endpoints and both polar-angle endpoints."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "All colliding parameter points and determinant computations are explicit."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The false statement asserts injectivity, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse between nonzero Jacobian and global injectivity is asserted."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha group a (GPT 5.6 Sol)",
+    "refuter": "REF2 read-only proof refuter",
+    "notes": "REF2 checked the explicit azimuthal seam collision, collapse of every azimuth at both poles, collapse of all angles at radius zero, and the determinant r squared sin(phi). These witnesses cover the stated parameter boundaries and refute global injectivity independently of any local-invertibility converse."
+   }
+  }
+ }
+}

@@ -17,6 +17,7 @@ parts:
     pages:
       - reflective-subcategories-and-the-adjoint-functor-theorems
       - monads-comonads-and-their-algebras
+      - monadicity-and-becks-theorem
 ---
 
 ## categories-and-yoneda
@@ -37,7 +38,12 @@ colimits while right adjoints preserve limits.
 
 ## reflections-and-monads
 
-A reflective subcategory is one whose inclusion has a left adjoint, and the adjoint functor
-theorems say when a functor with the right preservation and size behaviour has an adjoint at
-all. Every adjunction induces a monad on one side and a comonad on the other, and the
-algebras of that monad measure how much of the adjunction the monad remembers.
+A reflective subcategory has an inclusion with a left adjoint, and the adjoint functor
+theorems say when preservation and size give a functor an adjoint. Every
+adjunction induces a monad and a comonad, and the monad's algebras measure how much of the
+adjunction it remembers. Beck's theorem says when nothing is forgotten: every algebra is a
+canonical coequalizer of free ones, split coequalizers are absolute, and the comparison
+functor is an equivalence exactly when the right adjoint creates coequalizers of the pairs
+it sends to split ones, with strict and reflexive variants. It shows groups, rings, modules,
+models of finitary algebraic theories and, through the ultrafilter monad, compact Hausdorff
+spaces are algebraic over sets, and the contravariant power-set functor monadic.

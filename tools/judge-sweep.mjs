@@ -46,17 +46,24 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
 const DEEPSEEK = "deepseek-v4-pro";
 const TERRA = "gpt-5.6-terra";
 const SONNET = "claude-sonnet-5";
+// The `[1m]` suffix is the 1M-window selector on the claude runner; see
+// tools/judge.mts. It is part of the model IDENTITY, so ledger rows, slot
+// directories and JUDGE_CONCURRENCY_* names all carry it.
+const OPUS = "claude-opus-5[1m]";
 // JUDGE_LINEUP mirrors tools/judge.mts. Historical rows are append-only evidence
 // only; the child judge inherits the same env var as the sweep. Default flipped
 // to deepseek+sonnet (owner, 2026-08-17) after the Codex account behind Terra
-// was throttled mid-run, and BACK to deepseek+terra (owner, 2026-08-20). Both
-// lanes' old rows stay as evidence; neither satisfies current coverage, which is
-// per frozen context and per configured lane, not per model name.
+// was throttled mid-run, BACK to deepseek+terra (owner, 2026-08-20), and to
+// deepseek+opus (owner, 2026-08-23) when that Codex subscription reached its
+// weekly limit outright. Every retired lane's rows stay as evidence; none
+// satisfies current coverage, which is per frozen context and per configured
+// lane, not per model name.
 const LINEUPS = Object.freeze({
+  "deepseek+opus": [DEEPSEEK, OPUS],
   "deepseek+terra": [DEEPSEEK, TERRA],
   "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
 const supportedModels = LINEUPS[lineupName];
 if (!supportedModels) {
   throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
@@ -169,8 +176,9 @@ const currentContextHash = async (id) => {
 const currentHashes = new Map();
 for (const id of ids) currentHashes.set(id, await currentContextHash(id));
 // Owner policy, 2026-08-01: cap each judge lane independently. The current
-// values are 14 per active lane (owner, 2026-08-20), so at most 28 calls
-// combined under the `deepseek+terra` lineup; see MODEL_CONCURRENCY below.
+// values are 14 per active lane (owner, 2026-08-20, carried through the
+// 2026-08-23 lane swap unchanged), so at most 28 calls combined under the
+// `deepseek+opus` lineup; see MODEL_CONCURRENCY below.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
@@ -211,9 +219,29 @@ const MODEL_CONCURRENCY = Object.freeze({
   // SONNET keeps 24 because its lineup is not selected; if `deepseek+sonnet` is
   // ever chosen again, decide its cap then rather than inheriting a number set
   // for a different lane.
+  //
+  // OPUS TAKES 14 (owner, 2026-08-23) — the owner's active-lane value, carried
+  // over unchanged with the lane swap: "Just replace LLMs as instructed without
+  // changing anything else". The paragraph above says to decide a newly selected
+  // lane's cap rather than inherit one, so record what the decision was made
+  // AGAINST, because this is the one number in this file that a measurement
+  // disagrees with:
+  //   * the retired 2026-08-04 claude lane returned 207 CAPACITY REFUSALS against
+  //     140 responses at cap 16 on wave 5 A7 — 60%, up from 29% on wave 4 — while
+  //     DeepSeek returned 209/209 on the same sweep;
+  //   * the sonnet lane ran 313/392 clean at cap 6, and its nulls came from the
+  //     account SESSION LIMIT rather than from concurrency;
+  //   * a capacity refusal is a null verdict, never a verdict, so a lane that
+  //     refuses does not fail loudly — it quietly halves the run's paired
+  //     coverage.
+  // Both figures are for a claude-CLI lane, which is what Opus now is, and 14 sits
+  // between them. If this sweep starts returning `claude_exit` nulls at ~3.5s,
+  // that is the refusal signature: lower with JUDGE_CONCURRENCY_CLAUDE_OPUS_5_1M_
+  // (which can only lower, never raise) rather than re-spending the loop.
   [DEEPSEEK]: 14,
   [TERRA]: 14,
   [SONNET]: 24,
+  [OPUS]: 14,
 });
 
 // MEASURED, wave 5 A7 (2026-08-05): at cap 16 the retired second lane returned **207
@@ -312,6 +340,14 @@ const acquireModelSlot = async (model) => {
         // nothing against a multi-hour sweep and keeps concurrent boots to
         // ones; steady-state recycling never bursts, so the delay applies
         // once per slot acquisition.
+        //
+        // DELIBERATELY TERRA-ONLY, still, after the 2026-08-23 move to Opus.
+        // This stagger targets one specific Codex failure — a models-refresh
+        // endpoint 429 at boot — and the claude CLI has no such step. The Opus
+        // lane's known failure is different in kind: an ACCOUNT capacity refusal
+        // (`claude_exit`, ~3.5s, 66 bytes), which spreading boots does not fix
+        // because the limit is on the quota, not on the boot. If that signature
+        // appears, lower the cap; do not add a stagger and expect it to help.
         if (model === "gpt-5.6-terra" && index > 0) await pause(index * 1500);
         return () => {
           clearInterval(heartbeat);

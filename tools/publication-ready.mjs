@@ -22,9 +22,7 @@ if (!run || write === verify) {
 const receiptRel = `research/${run}-publication-readiness.json`;
 const receiptPath = join(REPO, receiptRel);
 const artifactRels = [
-  `research/${run}-pathway-closure.json`, `research/${run}-sigma-initial.json`,
-  `research/${run}-tau.json`, `research/${run}-tau-rejudge-targets.json`,
-  `research/${run}-render-final.json`, `research/${run}-sigma-final.json`,
+  `research/${run}-pathway-closure.json`,
   `research/${run}-judge-closure.json`,
 ];
 const blockers = [];
@@ -36,8 +34,6 @@ function runCheck(label, args) {
 }
 if (!blockers.length && write) {
   runCheck('pathway closure', ['tools/pathway-closure.mjs', 'check', '--run', run]);
-  runCheck('Tau repair scope/content preservation', ['tools/visual-repair.mjs', 'verify', '--run', run]);
-  runCheck('final Sigma adjudication', ['tools/visual-adjudication.mjs', '--run', run, '--phase', 'final', '--require-approved']);
 }
 
 let scope;

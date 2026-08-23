@@ -1,0 +1,916 @@
+[
+  {
+    "order": 288.00003,
+    "id": "constant-rank-submersions-and-regular-level-sets",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Constant Rank, Submersions, Immersions and Regular Level Sets",
+    "companion": "constant-rank-submersions-and-regular-level-sets-examples",
+    "requires": [
+      "the-inverse-function-theorem-completed",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-differential-rank-and-constant-rank",
+        "kind": "definition",
+        "title": "The rank of a derivative and constant-rank Euclidean maps",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-rank-and-nullity",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "def-submatrix-minors-of-a-rectangular-matrix",
+        "kind": "definition",
+        "title": "Submatrices and minors of a rectangular matrix",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "lem-matrix-rank-detected-by-nonzero-minors",
+        "kind": "lemma",
+        "title": "A matrix has rank at least $r$ exactly when it has a nonzero $r$-rowed minor",
+        "strategy": "For $1\\le r\\le\\min\\{m,n\\}$, a nonzero $r$-rowed minor has independent columns, so the ambient matrix has rank at least $r$. Conversely choose $r$ independent columns from a matrix of rank at least $r$; row rank equals column rank for the resulting $m\\times r$ matrix, so some $r$ rows form a full-row-rank square submatrix. The invertible-matrix theorem makes it invertible, and its determinant is nonzero. Keep the positive-size restriction explicit so no undeclared empty determinant is used.",
+        "deps": [
+          "def-submatrix-minors-of-a-rectangular-matrix",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-row-rank-equals-column-rank",
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "thm-invertible-matrix-theorem",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "thm-differential-rank-is-lower-semicontinuous",
+        "kind": "theorem",
+        "title": "Differential rank is lower semicontinuous",
+        "strategy": "For a $C^1$ map, prove that $\\{x:\\operatorname{rank}Df(x)\\ge r\\}$ is open for every positive $r$: when $r$ exceeds either the source or target dimension the locus is empty; otherwise, at a point in the set, the rank-minor lemma selects one nonzero $r$-rowed Jacobian minor, and continuity of the derivative entries and of the determinant keeps that minor nonzero nearby. The $r=0$ locus is the whole open domain. Conclude that every maximal-rank locus is open, including the empty locus.",
+        "deps": [
+          "def-differential-rank-and-constant-rank",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "def-euclidean-submersions-and-immersions",
+        "kind": "definition",
+        "title": "Submersions and immersions between Euclidean open sets",
+        "deps": [
+          "def-differential-rank-and-constant-rank",
+          "thm-linear-kernel-image-and-injectivity",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "def-regular-critical-points-values-and-level-sets",
+        "kind": "definition",
+        "title": "Regular and critical points, regular and critical values, and level sets",
+        "deps": [
+          "def-euclidean-submersions-and-immersions"
+        ]
+      },
+      {
+        "id": "def-tangent-space-to-a-regular-level-set",
+        "kind": "definition",
+        "title": "The tangent space to a regular level set",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "def-kernel-and-image-of-a-linear-map",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "lem-constant-rank-source-coordinate-map-is-locally-invertible",
+        "kind": "lemma",
+        "title": "A nonzero rank minor supplies the source coordinates for the constant-rank theorem",
+        "strategy": "After permuting source and target coordinates, arrange that the leading $r\\times r$ minor of $Df(a)$ is nonzero. Form $\\Phi(x)=(f_1(x),\\ldots,f_r(x),x_{r+1},\\ldots,x_m)$. Its derivative at $a$ is block triangular with that minor on the diagonal, so the inverse function theorem and higher-inverse regularity give a local $C^k$ diffeomorphism. Treat $r=0$ by the identity source chart and $r=m$ by the full map.",
+        "deps": [
+          "def-differential-rank-and-constant-rank",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-higher-regularity-of-local-inverses",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ]
+      },
+      {
+        "id": "lem-constant-rank-tail-components-ignore-kernel-coordinates",
+        "kind": "lemma",
+        "title": "In source rank coordinates, the remaining components depend only on the rank coordinates",
+        "strategy": "Write $g=f\\circ\\Phi^{-1}$, so its first $r$ components are the first $r$ coordinates. Constant rank $r$ and the rank-minor criterion force every derivative of a remaining component in a remaining source direction to vanish: otherwise adjoining that entry to the identity corner produces a nonzero $(r+1)$-rowed minor. On a small rectangular coordinate neighbourhood, zero derivative on each connected slice makes each tail component depend only on the first $r$ variables. Handle $r=0$, $r=m$, and $r=n$ separately where one coordinate block is empty.",
+        "deps": [
+          "lem-constant-rank-source-coordinate-map-is-locally-invertible",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ]
+      },
+      {
+        "id": "thm-euclidean-constant-rank-normal-form",
+        "kind": "theorem",
+        "title": "The Euclidean constant-rank normal form",
+        "strategy": "Use the source-coordinate lemma and write the transformed map as $(u,h(u))$. The target shear $(z,w)\\mapsto(z,w-h(z))$ is a $C^k$ diffeomorphism with an explicit inverse, and it changes the map to $(u,v)\\mapsto(u,0)$. For rank zero use local constancy on a ball; for full source or target rank keep the empty coordinate block explicit. State both coordinate diffeomorphisms and their domains rather than suppressing the local restrictions.",
+        "deps": [
+          "def-differential-rank-and-constant-rank",
+          "lem-constant-rank-source-coordinate-map-is-locally-invertible",
+          "lem-constant-rank-tail-components-ignore-kernel-coordinates",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant"
+        ]
+      },
+      {
+        "id": "cor-euclidean-submersion-normal-form",
+        "kind": "corollary",
+        "title": "A Euclidean submersion is locally a coordinate projection",
+        "strategy": "At a submersion point the derivative has the maximal target rank. Lower semicontinuity therefore makes that rank constant on a neighbourhood, and the constant-rank theorem reduces the map to projection onto the first target-many coordinates. Include the equal-dimensional local-diffeomorphism case.",
+        "deps": [
+          "def-euclidean-submersions-and-immersions",
+          "thm-differential-rank-is-lower-semicontinuous",
+          "thm-euclidean-constant-rank-normal-form"
+        ]
+      },
+      {
+        "id": "cor-euclidean-immersion-normal-form-and-local-embedding",
+        "kind": "corollary",
+        "title": "A Euclidean immersion is locally the canonical inclusion and is locally an embedding",
+        "strategy": "At an immersion point the derivative has maximal source rank, which persists nearby by lower semicontinuity. The constant-rank normal form becomes $u\\mapsto(u,0)$; this is injective with a continuous $C^k$ inverse from its image, so after shrinking the original map is a $C^k$ embedding onto its local image. Treat equal dimensions as the inverse-function case.",
+        "deps": [
+          "def-euclidean-submersions-and-immersions",
+          "thm-differential-rank-is-lower-semicontinuous",
+          "thm-euclidean-constant-rank-normal-form",
+          "def-homeomorphism-and-open-maps"
+        ]
+      },
+      {
+        "id": "cor-euclidean-submersions-are-open-maps",
+        "kind": "corollary",
+        "title": "Euclidean submersions are open maps",
+        "strategy": "For a point in the image of an open set, shrink to the local projection coordinates supplied by the submersion normal form. Coordinate diffeomorphisms and the canonical projection are open, so the image contains a neighbourhood of the selected target point. Repeat for every image point; the empty open set is immediate.",
+        "deps": [
+          "cor-euclidean-submersion-normal-form",
+          "def-homeomorphism-and-open-maps",
+          "thm-product-universal-property"
+        ]
+      },
+      {
+        "id": "thm-constant-rank-level-set-local-normal-form",
+        "kind": "theorem",
+        "title": "A constant-rank level set is locally a coordinate slice",
+        "strategy": "Apply the constant-rank normal form at a point of $f^{-1}(c)$. In the resulting source coordinates the level-set equation is exactly $u=0$, while the remaining $m-r$ coordinates are free. Pull the slice back by the source diffeomorphism and state the empty level set as a vacuous case. The result is local and does not invoke unbuilt manifold terminology.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "thm-euclidean-constant-rank-normal-form"
+        ]
+      },
+      {
+        "id": "cor-regular-level-set-local-graph-theorem",
+        "kind": "corollary",
+        "title": "A regular level set is locally a $C^k$ graph of dimension $m-n$",
+        "strategy": "At a point of a regular level set the derivative is surjective, so maximal target rank persists on a neighbourhood. Apply the constant-rank level-set theorem with rank $n$. Use the finite-dimensional orthogonal decomposition $\\mathbb R^m=\\ker Df(a)\\oplus(\\ker Df(a))^\\perp$; the projection of the pulled-back slice to the kernel has invertible derivative at the point, so the inverse function theorem rewrites it as a graph over the kernel with values in the orthogonal complement. Record the vacuous empty-fibre convention and the zero-dimensional case $m=n$.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "thm-differential-rank-is-lower-semicontinuous",
+          "thm-constant-rank-level-set-local-normal-form",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-rank-nullity",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-higher-regularity-of-local-inverses"
+        ]
+      },
+      {
+        "id": "thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space",
+        "kind": "theorem",
+        "title": "Tangent vectors to a regular level set are exactly its curve velocities",
+        "strategy": "If a differentiable curve stays in the level set, the chain rule sends its velocity into $\\ker Df(a)$, which is the defined tangent space. Conversely use the local graph representation: every kernel vector gives a straight curve in graph coordinates, and pulling it back gives a $C^1$ level-set curve with the prescribed velocity. Check the zero vector by the constant curve and both inclusions separately.",
+        "deps": [
+          "def-tangent-space-to-a-regular-level-set",
+          "cor-regular-level-set-local-graph-theorem",
+          "thm-chain-rule-for-total-derivatives",
+          "def-vector-valued-derivative-and-integral"
+        ]
+      },
+      {
+        "id": "lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple",
+        "kind": "lemma",
+        "title": "A linear functional annihilating the kernel of a surjection is a unique transpose multiple",
+        "strategy": "Let $A:\\mathbb R^m\\to\\mathbb R^n$ be surjective and choose one preimage of each standard basis vector. If $\\ell$ vanishes on $\\ker A$, subtract the corresponding finite linear combination of those preimages from an arbitrary vector to show $\\ell(v)=\\lambda\\cdot Av$ for the vector of their $\\ell$-values. Surjectivity makes $A^T$ injective, proving uniqueness. The finite coordinate choices use no choice principle, and the cases $m,n\\ge1$ match the Euclidean conventions.",
+        "deps": [
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-injection-surjection-bijection",
+          "lem-standard-basis-of-f-n",
+          "def-euclidean-inner-product",
+          "thm-linear-kernel-image-and-injectivity"
+        ]
+      },
+      {
+        "id": "thm-lagrange-multipliers-for-regular-level-set-constraints",
+        "kind": "theorem",
+        "title": "Lagrange multipliers for a regular vector-valued level-set constraint",
+        "strategy": "Let $f$ have a constrained local extremum at $a$ on $G^{-1}(c)$ and assume $DG(a)$ is surjective. Every vector in $\\ker DG(a)$ is a level-set curve velocity by the tangent theorem, so the parametrized-extremum theorem makes $Df(a)$ annihilate that kernel. Apply the factorization lemma to obtain the unique $\\lambda\\in\\mathbb R^q$ with $Df(a)v=\\lambda\\cdot DG(a)v$ for all $v$, equivalently $\\nabla f(a)=DG(a)^T\\lambda$. Distinguish necessity from sufficiency.",
+        "deps": [
+          "thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space",
+          "lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple",
+          "thm-parametrized-constraint-necessary-condition",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-local-extrema-and-critical-points"
+        ]
+      },
+      {
+        "id": "cor-lagrange-multiplier-rule-for-one-regular-constraint",
+        "kind": "corollary",
+        "title": "For one regular constraint, the objective gradient is a scalar multiple of the constraint gradient",
+        "strategy": "Apply the vector-valued multiplier theorem with a one-dimensional target. The transpose of the one-row Jacobian sends the scalar multiplier to the same scalar multiple of $\\nabla G(a)$. The regularity hypothesis is exactly $\\nabla G(a)\\ne0$, and uniqueness follows from that nonzero vector.",
+        "deps": [
+          "thm-lagrange-multipliers-for-regular-level-set-constraints",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.00004,
+    "id": "constant-rank-submersions-and-regular-level-sets-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Constant Rank, Submersions, Immersions and Regular Level Sets: Examples and Counterexamples",
+    "companion": "constant-rank-submersions-and-regular-level-sets",
+    "requires": [
+      "constant-rank-submersions-and-regular-level-sets"
+    ],
+    "items": [
+      {
+        "id": "ex-sphere-as-a-regular-level-set",
+        "kind": "example",
+        "title": "A Euclidean sphere is a regular level set with tangent hyperplanes",
+        "strategy": "For $F(x)=\\|x\\|_2^2$, compute $DF(x)h=2\\langle x,h\\rangle$. On $F^{-1}(R^2)$ with $R>0$, the derivative is nonzero and hence surjective to $\\mathbb R$. Apply the regular-level-set theorem and identify the tangent space as $x^\\perp$. Treat the empty negative level and the singular zero level separately in the discussion.",
+        "deps": [
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "thm-curve-velocities-in-a-regular-level-set-equal-its-tangent-space",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "ex-ellipsoid-as-a-regular-level-set",
+        "kind": "example",
+        "title": "A positive-definite quadratic ellipsoid is a regular level set",
+        "strategy": "For a symmetric positive-definite matrix $A$, set $F(x)=\\langle Ax,x\\rangle$. Compute $DF(x)h=2\\langle Ax,h\\rangle$. On the positive level $F=1$, one has $x\\ne0$ and $Ax\\ne0$, since $Ax=0$ would contradict positive definiteness. Thus the derivative is surjective, and the tangent hyperplane is $(Ax)^\\perp$.",
+        "deps": [
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "def-euclidean-inner-product",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "ex-graph-as-a-regular-level-set",
+        "kind": "example",
+        "title": "The graph of a $C^k$ Euclidean map is a regular level set",
+        "strategy": "For $\\psi:U\\subseteq\\mathbb R^m\\to\\mathbb R^n$, define $G(x,y)=y-\\psi(x)$. Its derivative is $DG=(-D\\psi,I_n)$, which is surjective at every graph point. The regular-level-set theorem identifies $G^{-1}(0)$ with the graph, and the tangent space is $\\{(v,D\\psi(x)v):v\\in\\mathbb R^m\\}$ by solving the kernel equation.",
+        "deps": [
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-algebra-of-total-derivatives"
+        ]
+      },
+      {
+        "id": "ex-one-sheeted-hyperboloid-as-a-regular-surface-of-revolution",
+        "kind": "example",
+        "title": "The one-sheeted hyperboloid is a regular surface of revolution",
+        "strategy": "Use $F(x,y,z)=x^2+y^2-z^2$. On $F^{-1}(1)$ the gradient $(2x,2y,-2z)$ cannot vanish, so the level is regular. Its equation is invariant under rotations in the $xy$-plane, and rotating the profile $x=\\sqrt{1+z^2}$ around the $z$-axis gives the whole set. The tangent plane is the kernel of the displayed derivative.",
+        "deps": [
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-nth-roots-exist"
+        ]
+      },
+      {
+        "id": "ex-orthogonal-group-is-a-regular-level-set",
+        "kind": "example",
+        "title": "The orthogonal group is a regular level set of dimension $n(n-1)/2$",
+        "strategy": "Read $A\\mapsto A^{\\mathsf T}A$ as a polynomial map $\\mathbb R^{n^2}\\to\\mathbb R^{n(n+1)/2}$, compute its derivative $H\\mapsto A^{\\mathsf T}H+H^{\\mathsf T}A$ as a directional derivative, and solve $Df(A)H=S$ by $H=AS/2$ at a point of the fibre to get surjectivity. The graph dimension and the skew-symmetric description of the tangent space follow from the regular level set corollary.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "def-euclidean-submersions-and-immersions",
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-linear-kernel-image-and-injectivity",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "cex-cone-level-set-has-a-rank-drop-at-the-apex",
+        "kind": "counterexample",
+        "title": "The cone $x^2+y^2=z^2$ has a rank drop at its apex",
+        "strategy": "Take $F(x,y,z)=x^2+y^2-z^2$. Its zero level is the double cone. Away from the origin the gradient $(2x,2y,-2z)$ is nonzero, so the level is locally regular; at the apex the derivative is zero. Show directly that no neighbourhood of the apex in the cone is a graph over any plane by using the two nappes or the failure of a unique tangent plane.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "cor-regular-level-set-local-graph-theorem",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ]
+      },
+      {
+        "id": "cex-cusp-level-set-has-a-rank-drop-at-the-origin",
+        "kind": "counterexample",
+        "title": "The cusp $y^2=x^3$ has a rank drop at the origin",
+        "strategy": "Let $F(x,y)=y^2-x^3$. Its derivative is $(-3x^2,2y)$, nonzero on the zero level except at the origin. The parametrization $t\\mapsto(t^2,t^3)$ shows the cusp and gives zero velocity at the origin; the two branches cannot form a $C^1$ graph with a regular parametrization there. This isolates the failure at the critical point.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "cor-regular-level-set-local-graph-theorem",
+          "def-vector-valued-derivative-and-integral",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "ex-x-xy-has-nonconstant-rank-on-every-neighborhood-of-origin",
+        "kind": "example",
+        "title": "The map $(x,y)\\mapsto(x,xy)$ has nonconstant rank on every neighbourhood of the origin",
+        "strategy": "Its Jacobian is $\\begin{pmatrix}1&0\\\\y&x\\end{pmatrix}$ with determinant $x$. Hence the rank is two when $x\\ne0$ and one when $x=0$. Every neighbourhood of the origin meets both sets, even though the derivative is continuous and the rank-one locus itself is closed rather than open.",
+        "deps": [
+          "def-differential-rank-and-constant-rank",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "def-jacobian-matrix-and-gradient",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "cex-critical-value-can-have-a-smooth-level-set",
+        "kind": "counterexample",
+        "title": "A critical value can have a smooth level set",
+        "strategy": "For $F(x,y)=x^2$, zero is a critical value because every point of $F^{-1}(0)=\\{x=0\\}$ has nonsurjective derivative. Nevertheless the level set is the vertical line, the graph of the zero function over the $y$-axis. This separates regularity of a defining map from smoothness of the underlying set.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "ex-graph-as-a-regular-level-set",
+          "lem-derivative-of-a-power",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "ex-lagrange-multipliers-on-the-sphere",
+        "kind": "example",
+        "title": "Lagrange multipliers locate the extrema of a linear functional on a sphere",
+        "strategy": "For nonzero $a\\in\\mathbb R^m$, optimize $f(x)=\\langle a,x\\rangle$ subject to $G(x)=\\|x\\|_2^2-R^2=0$ with $R>0$. The multiplier equation is $a=2\\lambda x$, so the constraint gives $x=\\pm R a/\\|a\\|_2$. Evaluate $f$ there and use Cauchy--Schwarz to verify the global maximum and minimum. Treat $a=0$ separately as the constant objective.",
+        "deps": [
+          "cor-lagrange-multiplier-rule-for-one-regular-constraint",
+          "ex-sphere-as-a-regular-level-set",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "ex-lagrange-multipliers-with-two-constraints",
+        "kind": "example",
+        "title": "Two constraints on a sphere-plane circle, where one multiplier solution is only a local maximum",
+        "strategy": "Check that $DG$ has rank two everywhere on the circle, substitute $s=x+y$ to reduce the objective to $(s^2+2s-1)/2$ with $-\\sqrt2\\le s\\le\\sqrt2$, read off the global extrema by two elementary inequalities, use $\\|p-P_4\\|_2^2=2+\\sqrt2 s$ to turn the $s$-range near the left end into an explicit ball, and show the fourth multiplier solution is a strict local maximum that is not global.",
+        "deps": [
+          "thm-lagrange-multipliers-for-regular-level-set-constraints",
+          "def-euclidean-submersions-and-immersions",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-local-extrema-and-critical-points",
+          "def-p-norms-on-rn",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "fs-every-level-set-of-a-smooth-map-is-a-graph",
+        "kind": "false-statement",
+        "title": "FALSE: every level set of a smooth map is locally a graph",
+        "strategy": "Inline the source-backed cone witness rather than depending on the AI-generated counterexample item: for $F(x,y,z)=x^2+y^2-z^2$, compute $DF(0)=0$ and identify $F^{-1}(0)$ as the double cone. If it were a $C^1$ graph over any plane near the apex, it would have one tangent plane there, whereas its generating rays supply incompatible tangent directions. Contrast this with the regular-level-set theorem, whose surjectivity hypothesis is exactly what is missing.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "cor-regular-level-set-local-graph-theorem",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ]
+      },
+      {
+        "id": "fs-a-critical-value-has-a-singular-level-set",
+        "kind": "false-statement",
+        "title": "FALSE: a critical value must have a singular level set",
+        "strategy": "Inline the source-backed witness rather than depending on the AI-generated counterexample item. For $F(x,y)=x^2$, compute $DF(x,y)=(2x,0)$, so zero is a critical value because every point of $F^{-1}(0)$ lies on the line $x=0$ and is critical. The same level is the graph of the zero function over the $y$-axis, hence a smooth line. Thus criticality prevents the regular-value theorem from applying but does not make the underlying subset singular.",
+        "deps": [
+          "def-regular-critical-points-values-and-level-sets",
+          "ex-graph-as-a-regular-level-set",
+          "lem-derivative-of-a-power",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ]
+      },
+      {
+        "id": "fs-continuity-of-the-derivative-implies-constant-rank",
+        "kind": "false-statement",
+        "title": "FALSE: continuity of the derivative implies constant rank",
+        "strategy": "Use $(x,y)\\mapsto(x,xy)$. Its derivative matrix has polynomial entries and is continuous, but its determinant is $x$, so its rank is one on the vertical axis and two off it. This also illustrates the correct lower-semicontinuity theorem: rank can jump upward nearby.",
+        "deps": [
+          "ex-x-xy-has-nonconstant-rank-on-every-neighborhood-of-origin",
+          "thm-differential-rank-is-lower-semicontinuous"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.00015,
+    "id": "regular-surfaces-and-surface-integrals",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Regular Surfaces and Surface Integrals",
+    "companion": "regular-surfaces-and-surface-integrals-examples",
+    "requires": [
+      "line-integrals-and-the-gradient-theorem",
+      "constant-rank-submersions-and-regular-level-sets",
+      "inner-product-spaces-and-orthogonality",
+      "improper-and-parameter-dependent-multiple-integrals",
+      "the-integral-logarithm-and-its-characterisations",
+      "volumes-of-elementary-solids-and-solids-of-revolution"
+    ],
+    "items": [
+      {
+        "id": "def-cross-product-in-r3",
+        "kind": "definition",
+        "title": "The cross product in $\\mathbb R^3$",
+        "deps": [
+          "def-euclidean-inner-product",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+        "kind": "lemma",
+        "title": "The cross product is bilinear, alternating, and orthogonal to both factors",
+        "strategy": "Expand the coordinate definition in each argument to prove bilinearity and interchange the factors to prove alternation. A direct dot-product expansion gives the scalar-triple-product determinant identity. Substituting either factor as the third vector makes two determinant columns equal, so both dot products vanish. Keep zero vectors and parallel vectors in the same calculation.",
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+        "kind": "theorem",
+        "title": "The squared cross-product norm is the Gram determinant of two vectors",
+        "strategy": "Expand the squared norm of the coordinate cross product and collect terms to obtain $\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle u,v\\rangle^2$, which is the determinant of the two-vector Gram matrix. The published Gram-determinant criterion then makes this value positive exactly for an independent pair and zero exactly for a dependent pair. Include either vector being zero.",
+        "deps": [
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-gram-matrix-and-gram-determinant",
+          "thm-gram-determinant-detects-linear-independence"
+        ]
+      },
+      {
+        "id": "def-admissible-regular-parametrized-surface-patch",
+        "kind": "definition",
+        "title": "Regular parametrized surface patches on compact Jordan parameter regions",
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-riemann-integral-over-a-jordan-set",
+          "def-metric-interior-closure-boundary",
+          "thm-jordan-boundary-criterion"
+        ]
+      },
+      {
+        "id": "def-tangent-plane-of-a-regular-surface-patch",
+        "kind": "definition",
+        "title": "The tangent plane of a regular surface patch",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-linear-combination-and-span",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant"
+        ]
+      },
+      {
+        "id": "def-surface-reparametrization-and-orientation",
+        "kind": "definition",
+        "title": "Surface reparametrizations and their orientation sign",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-determinant-of-a-c-one-map"
+        ]
+      },
+      {
+        "id": "prop-tangent-plane-is-invariant-under-regular-reparametrization",
+        "kind": "proposition",
+        "title": "The tangent plane is invariant under regular reparametrization",
+        "strategy": "For $\\psi=\\varphi\\circ h$, the chain rule writes the two tangents of $\\psi$ as linear combinations of the two tangents of $\\varphi$, so the new tangent plane is contained in the old one. Apply the same argument to the inverse parameter diffeomorphism to obtain the reverse containment. The invertible derivative of $h$ prevents either pair from losing rank, and boundary points are interpreted by the continuous extensions of the tangents.",
+        "deps": [
+          "def-tangent-plane-of-a-regular-surface-patch",
+          "def-surface-reparametrization-and-orientation",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives"
+        ]
+      },
+      {
+        "id": "cor-regular-surface-reparametrization-has-constant-orientation-sign",
+        "kind": "corollary",
+        "title": "A regular reparametrization of a connected parameter region has a constant orientation sign",
+        "strategy": "Restrict the neighbourhood diffeomorphism to the nonempty connected interior of the source parameter region. Its derivative is invertible everywhere, so the published Jacobian-sign theorem makes the determinant everywhere positive or everywhere negative. Continuity and nonvanishing on the compact region extend the same sign to its boundary. Thus every such reparametrization is exactly orientation-preserving or orientation-reversing.",
+        "deps": [
+          "def-surface-reparametrization-and-orientation",
+          "thm-jacobian-sign-is-constant-on-a-connected-regular-domain"
+        ]
+      },
+      {
+        "id": "def-first-fundamental-form-and-surface-area-density",
+        "kind": "definition",
+        "title": "The first fundamental form, Gram matrix, and area density of a surface patch",
+        "deps": [
+          "def-tangent-plane-of-a-regular-surface-patch",
+          "def-gram-matrix-and-gram-determinant",
+          "thm-gram-determinant-detects-linear-independence"
+        ]
+      },
+      {
+        "id": "thm-surface-area-density-is-cross-product-norm",
+        "kind": "theorem",
+        "title": "The surface area density is the norm of the cross product of the parameter tangents",
+        "strategy": "The first fundamental matrix is the Gram matrix of the two parameter tangent vectors. Apply the two-vector cross-product identity to identify its determinant with the squared cross-product norm, then take the unique nonnegative square root. Regularity makes the common value positive in the parameter-region interior; boundary zeros remain allowed by the patch convention.",
+        "deps": [
+          "def-first-fundamental-form-and-surface-area-density",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant"
+        ]
+      },
+      {
+        "id": "lem-oriented-area-vector-under-surface-reparametrization",
+        "kind": "lemma",
+        "title": "The oriented area vector transforms by the parameter Jacobian determinant",
+        "strategy": "For $\\psi=\\varphi\\circ h$, the total chain rule expresses the two parameter derivatives of $\\psi$ as the two corresponding linear combinations of $\\varphi_u$ and $\\varphi_v$. Bilinearity and alternation of the cross product cancel the diagonal terms and leave $\\psi_s\\times\\psi_t=(\\det Dh)(\\varphi_u\\times\\varphi_v)\\circ h$. Taking norms gives the absolute-Jacobian transformation law for the area density, including the sign distinction.",
+        "deps": [
+          "def-surface-reparametrization-and-orientation",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-surface-area-density-is-cross-product-norm"
+        ]
+      },
+      {
+        "id": "def-surface-area-and-scalar-surface-integral-of-a-patch",
+        "kind": "definition",
+        "title": "Surface area and scalar surface integrals on a regular patch",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-first-fundamental-form-and-surface-area-density",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ]
+      },
+      {
+        "id": "thm-surface-area-and-scalar-integrals-are-reparametrization-invariant",
+        "kind": "theorem",
+        "title": "Surface area and scalar surface integrals are invariant under regular reparametrization",
+        "strategy": "Substitute the absolute-Jacobian density law into the scalar parameter integral for $\\varphi\\circ h$. The compact-Jordan change-of-variables theorem for the neighbourhood diffeomorphism $h$ turns that integral into the parameter integral for $\\varphi$. This works for either orientation sign; specialize the scalar field to one for surface area. Boundary exceptions contribute nothing under the Jordan convention.",
+        "deps": [
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "lem-oriented-area-vector-under-surface-reparametrization",
+          "thm-change-of-variables-for-compact-jordan-sets"
+        ]
+      },
+      {
+        "id": "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+        "kind": "definition",
+        "title": "Unit normal fields, orientations, and flux through a regular surface patch",
+        "deps": [
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "def-tangent-plane-of-a-regular-surface-patch",
+          "thm-surface-area-density-is-cross-product-norm",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "thm-flux-under-surface-reparametrization",
+        "kind": "theorem",
+        "title": "Flux is invariant under orientation-preserving reparametrization and changes sign under reversal",
+        "strategy": "Write flux as the parameter integral of $F\\circ\\varphi$ dotted with the oriented area vector. The area-vector transformation supplies $\\det Dh$ rather than its absolute value. Apply compact-Jordan change of variables after separating the constant determinant sign: the preserving case gives the same flux and the reversing case its negative. The orientation-sign corollary ensures these exhaust a connected parameter region.",
+        "deps": [
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "lem-oriented-area-vector-under-surface-reparametrization",
+          "cor-regular-surface-reparametrization-has-constant-orientation-sign",
+          "thm-change-of-variables-for-compact-jordan-sets"
+        ]
+      },
+      {
+        "id": "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals",
+        "kind": "lemma",
+        "title": "Content-zero parameter-boundary exceptions do not affect surface integrals",
+        "strategy": "A compact Jordan parameter region has content-zero boundary. Two bounded scalar parameter integrands that agree on the interior therefore differ only on a content-zero set, so the published modification lemma gives equivalent integrability and equal integrals. Apply the same statement to the scalar dot-product integrand for flux. This licenses seam identifications and rank failures confined to the parameter boundary, but no interior failure.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "thm-jordan-boundary-criterion",
+          "lem-riemann-integral-unchanged-by-content-zero-modification"
+        ]
+      },
+      {
+        "id": "def-finitely-patched-regular-surface-and-integrals",
+        "kind": "definition",
+        "title": "Finitely patched regular surfaces, their area, scalar integrals, and flux",
+        "deps": [
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals"
+        ]
+      },
+      {
+        "id": "thm-regular-level-surfaces-have-local-regular-parametrizations",
+        "kind": "theorem",
+        "title": "Regular level surfaces have local regular parametrizations with the same tangent plane",
+        "strategy": "Let $F:U\\subseteq\\mathbb R^3\\to\\mathbb R$ be $C^k$, let $c$ be regular, and fix $p\\in F^{-1}(c)$. The earlier regular-level-set graph theorem gives a $C^k$ graph over the two-dimensional kernel of $DF(p)$. Use equality of dimension to choose a linear isomorphism from $\\mathbb R^2$ to that kernel, then restrict the resulting graph chart to a small compact Jordan rectangle about the origin. It is injective and its two derivatives are independent, hence is a regular surface patch. Its tangent span is the graph derivative image, which the level-set theorem identifies with $\\ker DF(p)$, exactly the published level-set tangent space. Treat an empty level set vacuously and the nonempty case pointwise.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-tangent-plane-of-a-regular-surface-patch",
+          "cor-regular-level-set-local-graph-theorem",
+          "def-tangent-space-to-a-regular-level-set",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "thm-total-derivative-computes-directional-and-partial-derivatives"
+        ]
+      },
+      {
+        "id": "cor-compact-regular-level-surfaces-have-finite-patch-covers",
+        "kind": "corollary",
+        "title": "A compact regular level surface is covered by finitely many regular surface patches",
+        "strategy": "For every point of the compact level surface, the local-parametrization theorem supplies a patch whose relative interior contains that point. These relative interiors form an open cover in the level-set subspace. Apply the ambient-cover form of intrinsic compactness with the level set itself as the ambient metric space, and select a finite subcover. The empty level uses the empty family and a singleton level cannot occur under a surjective derivative from $\\mathbb R^3$ to $\\mathbb R$.",
+        "deps": [
+          "thm-regular-level-surfaces-have-local-regular-parametrizations",
+          "def-metric-compactness",
+          "lem-compactness-is-intrinsic"
+        ]
+      },
+      {
+        "id": "thm-surface-integrals-over-c-one-graphs",
+        "kind": "theorem",
+        "title": "Surface area, scalar integrals, and flux over a $C^1$ graph",
+        "strategy": "For $g$ defined near a compact Jordan region $D$, use $\\varphi(x,y)=(x,y,g(x,y))$. Its tangent vectors are $(1,0,g_x)$ and $(0,1,g_y)$, whose cross product is $(-g_x,-g_y,1)$; it is never zero and points upward. Substitute its norm $\\sqrt{1+\\|\\nabla g\\|_2^2}$ in the area and scalar-integral definitions, and retain the signed cross product for the upward flux formula. The downward formula is its negative.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "def-jacobian-matrix-and-gradient",
+          "thm-surface-area-density-is-cross-product-norm",
+          "thm-algebra-of-derivatives"
+        ]
+      },
+      {
+        "id": "thm-scalar-surface-integrals-on-a-surface-of-revolution",
+        "kind": "theorem",
+        "title": "Scalar surface integrals on a surface of revolution",
+        "strategy": "Let $r:[a,b]\\to[0,\\infty)$ be $C^1$, positive on the open interval, and parametrize the surface by $\\varphi(s,t)=(s,r(s)\\cos t,r(s)\\sin t)$ for $0\\le t\\le2\\pi$. The map is injective and regular in the parameter interior, with only seam identifications and possible endpoint-axis degeneracies on the boundary. Differentiate and use the Pythagorean identity to obtain density $r(s)\\sqrt{1+r'(s)^2}$, then substitute it into the scalar surface-integral definition.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "thm-surface-area-density-is-cross-product-norm",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-algebra-of-derivatives",
+          "thm-jordan-fubini-by-sections"
+        ]
+      },
+      {
+        "id": "cor-surface-area-of-revolution-formula",
+        "kind": "corollary",
+        "title": "The surface of revolution has area $2\\pi\\int_a^b r(s)\\sqrt{1+r'(s)^2}\\,ds$",
+        "strategy": "Set the scalar field equal to one in the surface-of-revolution integral. The density is independent of the angular parameter, so Jordan--Fubini separates the rectangle integral and the integral of the constant one over $[0,2\\pi]$ contributes the factor $2\\pi$. Endpoint zeros of $r$ lie on a content-zero parameter boundary and do not alter the value.",
+        "deps": [
+          "thm-scalar-surface-integrals-on-a-surface-of-revolution",
+          "thm-jordan-fubini-by-sections",
+          "lem-integral-elementary-bounds"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.00016,
+    "id": "regular-surfaces-and-surface-integrals-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Regular Surfaces and Surface Integrals: Examples and Counterexamples",
+    "companion": "regular-surfaces-and-surface-integrals",
+    "requires": [
+      "regular-surfaces-and-surface-integrals"
+    ],
+    "items": [
+      {
+        "id": "ex-sphere-and-hemisphere-surface-integrals",
+        "kind": "example",
+        "title": "Surface area and flux on a sphere, with scalar integrals on a hemisphere",
+        "strategy": "For radius $R>0$, use spherical parameters on $[0,2\\pi]\\times[0,\\pi]$. The map is injective and regular in the interior; the longitude seam and the two poles lie on the parameter boundary. Compute density $R^2\\sin\\phi$, integrate to obtain area $4\\pi R^2$, and use the outward normal $x/R$ to obtain flux $4\\pi R^3$ for the field $F(x)=x$. On the northern hemisphere compute $\\iint z\\,dS=\\pi R^3$ and record the orientation sign in the corresponding flux calculation.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-jordan-fubini-by-sections",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "ex-closed-cylinder-as-a-finitely-patched-oriented-surface",
+        "kind": "example",
+        "title": "A closed cylinder as a finitely patched oriented surface",
+        "strategy": "For radius $R>0$ and height $H>0$, present the boundary as its lateral patch and two polar cap patches. Their pairwise intersections are boundary circles, whose parameter preimages have content zero. Direct cross-product calculations give total area $2\\pi RH+2\\pi R^2$. With outward orientation and $F(x,y,z)=(x,y,0)$, the cap fluxes vanish and the side flux is $2\\pi R^2H$.",
+        "deps": [
+          "def-finitely-patched-regular-surface-and-integrals",
+          "lem-parameter-boundary-exceptions-do-not-affect-surface-integrals",
+          "def-cross-product-in-r3",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-jordan-fubini-by-sections",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "ex-torus-surface-area",
+        "kind": "example",
+        "title": "The surface area of a torus is $4\\pi^2ab$",
+        "strategy": "For $a>b>0$, parametrize by $((a+b\\cos\\phi)\\cos\\theta,(a+b\\cos\\phi)\\sin\\theta,b\\sin\\phi)$ on the full angle rectangle. Its interior is injective, the seams lie on the boundary, and the cross-product norm is $b(a+b\\cos\\phi)>0$. Fubini and the full-period endpoint values make the cosine term integrate to zero, leaving $4\\pi^2ab$.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-jordan-fubini-by-sections",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "ex-downward-flux-on-the-graph-z-equals-xy",
+        "kind": "example",
+        "title": "Downward flux through the graph $z=xy$ over the unit square",
+        "strategy": "Use the downward area vector $(y,x,-1)$ for the graph $z=xy$ over $[0,1]^2$. For $F(x,y,z)=(zx,z^2,xy)$ the pulled-back dot product is $x^2y^2+x^3y^2-xy$. Apply Fubini and the fundamental theorem to the polynomial terms to obtain flux $-1/18$. Reversing upward changes only the sign.",
+        "deps": [
+          "thm-surface-integrals-over-c-one-graphs",
+          "thm-jordan-fubini-by-sections",
+          "thm-ftc-second-part",
+          "thm-algebra-of-derivatives"
+        ]
+      },
+      {
+        "id": "ex-lateral-area-of-a-right-circular-cone",
+        "kind": "example",
+        "title": "The lateral area of a right circular cone is $\\pi R\\sqrt{R^2+H^2}$",
+        "strategy": "For $R,H>0$, rotate the linear radius $r(s)=Rs/H$ for $0\\le s\\le H$. It is positive in the open interval and vanishes only at the apex parameter boundary. Substitute its constant derivative into the surface-of-revolution formula and evaluate the remaining linear integral to obtain $\\pi R\\sqrt{R^2+H^2}$, checking the apex contributes no separate term.",
+        "deps": [
+          "cor-surface-area-of-revolution-formula",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "cex-degenerate-surface-parametrization-collapses-to-a-curve",
+        "kind": "counterexample",
+        "title": "A degenerate two-parameter map can collapse its image to a curve",
+        "strategy": "On the unit square take $\\varphi(u,v)=(u,0,0)$. Its parameter derivatives are $(1,0,0)$ and $(0,0,0)$, so their cross product and Gram determinant vanish everywhere, while the image is a line segment. This checkable witness fails the regularity and nonempty-interior-image conclusions without relying on a picture.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-cross-product-in-r3"
+        ]
+      },
+      {
+        "id": "ex-orientation-reversal-preserves-area-and-negates-flux",
+        "kind": "example",
+        "title": "Opposite parametrizations preserve area and negate flux",
+        "strategy": "Parametrize the unit square in the horizontal plane by $\\varphi(u,v)=(u,v,0)$ and compose with the coordinate swap $h(s,t)=(t,s)$. The swap has determinant $-1$. Both parametrizations give area one, while for the constant field $(0,0,1)$ their fluxes are $1$ and $-1$. This computes both reparametrization laws on the same surface.",
+        "deps": [
+          "thm-surface-area-and-scalar-integrals-are-reparametrization-invariant",
+          "thm-flux-under-surface-reparametrization",
+          "def-admissible-regular-parametrized-surface-patch"
+        ]
+      },
+      {
+        "id": "ex-gabriels-horn-has-unbounded-truncated-lateral-area",
+        "kind": "example",
+        "title": "Gabriel's horn has unbounded truncated lateral area",
+        "strategy": "Rotate $r(x)=1/x$ on each compact interval $[1,T]$ and apply the surface-of-revolution formula. The density $(1/x)\\sqrt{1+1/x^4}$ is at least $1/x$, so monotonicity bounds the truncated lateral area below by $2\\pi L(T)$, where the published integral logarithm is $L(T)=\\int_1^Tdt/t$. The published unboundedness of $L$ makes the truncated areas unbounded. Keep $T>1$ and never treat the noncompact horn as one compact patch.",
+        "deps": [
+          "cor-surface-area-of-revolution-formula",
+          "thm-algebra-of-derivatives",
+          "thm-monotonicity-of-the-integral",
+          "def-integral-logarithm",
+          "thm-integral-logarithm-is-unbounded"
+        ]
+      },
+      {
+        "id": "fs-finite-volume-implies-finite-lateral-surface-area",
+        "kind": "false-statement",
+        "title": "FALSE: finite volume implies finite lateral surface area",
+        "strategy": "Refute the implication with Gabriel's horn, obtained by rotating $r(x)=1/x$ for $x\\ge1$. On every compact truncation $[1,T]$, the disc-volume theorem gives $V(T)=\\pi\\int_1^T x^{-2}\\,dx$; the improper rational $p$-test gives the finite limit $\\pi$. The surface-of-revolution formula gives $A(T)=2\\pi\\int_1^T x^{-1}\\sqrt{1+x^{-4}}\\,dx\\ge2\\pi\\int_1^T x^{-1}\\,dx$, and the same $p$-test at $p=1$ makes these lateral areas unbounded. Keep the volume and area claims as limits of compact truncations rather than treating the noncompact horn as one regular compact patch.",
+        "deps": [
+          "thm-volume-of-a-solid-of-revolution-by-discs",
+          "def-improper-integral-at-infinity",
+          "thm-improper-p-test-rational",
+          "cor-surface-area-of-revolution-formula",
+          "thm-algebra-of-derivatives",
+          "thm-monotonicity-of-the-integral"
+        ]
+      },
+      {
+        "id": "cex-schwarz-lantern-polyhedral-areas-diverge",
+        "kind": "counterexample",
+        "title": "Schwarz lanterns can converge to a cylinder while their polyhedral areas diverge",
+        "strategy": "On a cylinder of radius $r>0$ and height $H>0$, use $m$ horizontal bands and staggered regular $n$-gons to obtain $2mn$ congruent triangles. Compute their total area as $2rn\\sin(\\pi/n)\\sqrt{H^2+m^2r^2(1-\\cos(\\pi/n))^2}$. Along $m=n^3$, the mesh diameter tends to zero, while the sine-over-angle limit and $1-\\cos x=2\\sin^2(x/2)$ show the square-root factor grows linearly in $n$; hence the areas diverge. Include positive $n$ and $m$ only and verify every vertex lies on the cylinder.",
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-surface-area-and-scalar-surface-integral-of-a-patch",
+          "thm-surface-area-density-is-cross-product-norm",
+          "thm-triangle-content-and-base-height-formula",
+          "cor-sin-x-over-x-limit",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-algebra-of-limits",
+          "thm-sequential-criterion-for-function-limits",
+          "cor-archimedean-reciprocal",
+          "lem-reciprocal-of-null-diverges",
+          "def-divergence-to-infinity"
+        ]
+      },
+      {
+        "id": "fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas",
+        "kind": "false-statement",
+        "title": "FALSE: surface area is the supremum of inscribed polyhedral areas",
+        "strategy": "Apply the proposed definition to the fixed smooth cylinder. Its surface-integral area is finite, whereas the Schwarz lantern counterexample supplies inscribed triangulated polyhedra with arbitrarily small mesh and unbounded area. The supremum is therefore infinite, not the cylinder's surface area. This also shows why the arc-length supremum definition has no direct surface analogue.",
+        "deps": [
+          "cex-schwarz-lantern-polyhedral-areas-diverge"
+        ]
+      },
+      {
+        "id": "fs-continuity-alone-suffices-for-the-regular-surface-area-formula",
+        "kind": "false-statement",
+        "title": "FALSE: continuity alone makes the regular-patch surface-area formula applicable",
+        "strategy": "On a closed disc use the continuous injective cone graph $\\varphi(u,v)=(u,v,\\sqrt{u^2+v^2})$. Along the horizontal parameter line its third component restricts to $|u|$, whose two one-sided difference quotients at zero are $1$ and $-1$. Thus an interior partial derivative does not exist and the cross-product integrand is unavailable, even though a different polar parametrization treats the cone with its apex confined to the parameter boundary.",
+        "deps": [
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-directional-and-partial-derivatives",
+          "def-euclidean-inner-product",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric"
+        ]
+      },
+      {
+        "id": "fs-flux-is-independent-of-the-parametrization",
+        "kind": "false-statement",
+        "title": "FALSE: flux is independent of the parametrization without an orientation condition",
+        "strategy": "Use the horizontal unit-square patch and the constant field $(0,0,1)$. Its standard parametrization has flux $1$, while swapping the two parameters reverses orientation and gives flux $-1$. The general flux theorem explains the exact distinction: preserving reparametrizations keep the value, reversing ones negate it.",
+        "deps": [
+          "thm-flux-under-surface-reparametrization",
+          "def-cross-product-in-r3",
+          "def-admissible-regular-parametrized-surface-patch",
+          "def-oriented-unit-normal-and-flux-of-a-surface-patch"
+        ]
+      }
+    ]
+  }
+]

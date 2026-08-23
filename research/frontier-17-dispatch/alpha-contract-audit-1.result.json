@@ -1,0 +1,19 @@
+{
+  "role": "alpha",
+  "label": "contract-audit-1",
+  "run": "frontier-17",
+  "covers": [],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T01:04:07.064Z",
+  "ended_at": "2026-08-23T01:18:57.331Z",
+  "ms": 890267,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-contract-audit-1.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/alpha-contract-audit-1.prompt.md",
+  "tail": "All gates green. Report at `research/frontier-17-alpha-contract-audit.md`.\n\n## What the detectors gave me\n\n`boundary-audit` and `risk-report` were already clean. Two things needed the read:\n\n**1. `citation-fidelity` widening candidate — the detector was wrong, but it pointed at a row that was.**\n\nThe reported finding is a false positive: the `$n\\ge2$` in `thm-sign-is-a-homomorphism` qualifies *surjectivity*, and the [L1] line restates only the homomorphism clause, which the source asserts for every natural $n$. Upheld on the record with a `reviewed` block.\n\nReading the row myself found a real defect the detector did not report. Old step 2.1 said *\"[L1] records the parity independently of the chosen product\"* — [L1] states only that `sgn` is a homomorphism. It does not say transpositions generate $S_n$, nor that $\\operatorname{sgn}(\\tau)=-1$. The step rested on two uncited facts and substituted a description of what the cited result is *for* in place of the proposition it states.\n\n**Nonfatal** (both facts are standard and sit in the cited item's own closure — well inside 30 seconds), **fixed at step 6** since the level is pre-freeze — there is no `frontier-17-judge.jsonl`, so no verdict was at risk. Added three published `literature-derived` deps, decomposed the proof so each fact is cited at the step using it, adopted precheck's canonical stratification, resynced the contract's citations/derivations/boundary rows, and wrote the `risk_review` the repair's new high tier demanded — from my own verification, not deferred to a refuter.\n\n**2. `gate-liveness`: finite-smoke VACUOUS.** All 381 contracts carried `finite_smoke: []`. Selected three registry checks where the check's model family *is* the claim's:\n\n- `cyclic-subgroup-lagrange` → `ex-frattini-subgroup-of-a-cyclic-p-group` (order of $\\langle g^p\\rangle$ is $p^{n-1}$)\n- `binomial-congruence-solution-count` → `prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares` (its pigeonhole on $|Q|=(p+1)/2$ holds only because each nonzero QR has exactly 2 roots)\n- `vieta-elementary-symmetric` → `prop-resolvent-cubic-formula-and-discriminant` ($e_1=-a, e_2=b, e_3=-c, e_4=d$, which the whole resolvent formula is derived from)\n\nI declined four others rather than manufacture coverage — most notably `matrix-ring-laws-mod-n` on the PID page, which would have executed and passed over $\\mathbb Z/n\\mathbb Z$ without touching a PID-specific claim.\n\n## One thing worth your attention\n\n`QUALITY-CONTROLS.md` listed 6 registry checks; `tools/finite-smoke.mjs` defines 10. The four arithmetic/polynomial checks added on `frontier-13` were never documented — and **two of the three I selected are in that unlisted group**. A Beta selecting from the doc could not have found them. Corrected to all ten with a pointer that the tool is the registry; that is the prevention on the `gate-vacuous` ledger row.\n\nTwo ledger rows written (`f17-contract-audit-1-d1`, `-d2`), view re-rendered in the same invocation. Nothing left open on this dispatch's gates; carried to step 10 are the registry gaps (finite outer measures on 2–3 point sets are the strongest) and the honest caveat that finite-smoke covers 3 of 381 items because six of ten registry checks are graph/poset/recurrence shaped and this level is not."
+}

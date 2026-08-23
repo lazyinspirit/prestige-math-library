@@ -1,0 +1,332 @@
+[
+  {
+    "order": 57.007,
+    "id": "sums-of-two-squares",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Sums of Two Squares",
+    "companion": "sums-of-two-squares-examples",
+    "requires": [
+      "quadratic-reciprocity-and-the-jacobi-symbol-examples"
+    ],
+    "items": [
+      {
+        "id": "def-sum-of-two-squares-representation",
+        "kind": "definition",
+        "title": "Representations and primitive representations as sums of two squares",
+        "deps": [
+          "def-common-divisor-and-gcd"
+        ]
+      },
+      {
+        "id": "lem-brahmagupta-fibonacci-two-square-identity",
+        "kind": "lemma",
+        "title": "The Brahmagupta–Fibonacci two-square identity",
+        "strategy": "Expand both displayed pairs of squares and cancel the cross terms. Record both sign variants because later multiplication and primitivity arguments need the freedom to choose either one. The calculation holds for all integer inputs, including zeros.",
+        "deps": []
+      },
+      {
+        "id": "cor-sums-of-two-squares-closed-under-products",
+        "kind": "corollary",
+        "title": "Sums of two squares are closed under products",
+        "strategy": "Choose ordered integer representations of the two nonnegative factors and apply either sign variant of the Brahmagupta–Fibonacci identity. If either factor is zero, its only representation is $(0,0)$ and the same formula still gives the zero product.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-brahmagupta-fibonacci-two-square-identity"
+        ]
+      },
+      {
+        "id": "prop-odd-two-square-representations-correspond-under-doubling",
+        "kind": "proposition",
+        "title": "Representations of an odd integer correspond to representations of twice that integer",
+        "strategy": "For odd positive $m$, send $(x,y)$ to $(x+y,x-y)$. Expansion gives a representation of $2m$. Conversely a representation $u^2+v^2=2m$ has $u,v$ both odd, so the inverse half-sums are integers. Verify the two composites and prove that the maps preserve coordinate gcd one by reducing any alleged common divisor to a common prime divisor.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "def-common-divisor-and-gcd",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "thm-euclids-lemma"
+        ]
+      },
+      {
+        "id": "lem-three-mod-four-prime-dividing-two-square-sum",
+        "kind": "lemma",
+        "title": "A prime congruent to $3$ modulo $4$ divides both coordinates of a divisible two-square sum",
+        "strategy": "Let $q\\equiv3\\pmod4$ be prime and suppose $q\\mid x^2+y^2$. If one coordinate is divisible by $q$, Euclid's lemma gives divisibility of the other. If neither is, divide by $y^2$ in $\\mathbb Z/q$ to make $-1$ a square, contradicting the first supplement. Hence $q\\mid x,y$ and therefore $q^2\\mid x^2+y^2$.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "thm-first-supplement-to-quadratic-reciprocity",
+          "def-legendre-symbol",
+          "thm-z-mod-p-is-a-field",
+          "thm-euclids-lemma",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares",
+        "kind": "proposition",
+        "title": "Every nonzero residue modulo an odd prime is a sum of two squares",
+        "strategy": "In $\\mathbb Z/p$, the set of all square classes, including zero, has $(p+1)/2$ elements. Its translate $a-Q$ has the same size. If the two sets were disjoint, their union would have $p+1$ elements while lying inside the $p$-element quotient. Their intersection therefore supplies $x^2=a-y^2$.",
+        "deps": [
+          "thm-count-of-quadratic-residues-modulo-prime",
+          "thm-standard-representatives-modulo-n",
+          "thm-sum-rule",
+          "thm-subset-of-a-finite-set",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "lem-thue-small-representatives",
+        "kind": "lemma",
+        "title": "Thue's lemma on small nonzero representatives",
+        "strategy": "For prime $p$ and $p\\nmid a$, let $h$ be the largest natural number with $h^2<p$, obtained from a nonempty finite search below $p$. Primality excludes $(h+1)^2=p$, so $(h+1)^2>p$. Map the $(h+1)^2$ pairs $0\\le i,j\\le h$ to $ia-j$ modulo $p$ and apply strong pigeonhole. Differences of a colliding pair give $ra\\equiv s\\pmod p$ with $|r|,|s|\\le h<\\sqrt p$; the coprimality hypothesis and the strict range force both differences to be nonzero.",
+        "deps": [
+          "thm-the-strong-pigeonhole-principle",
+          "thm-product-rule",
+          "lem-finite-set-has-max",
+          "thm-of-square-roots",
+          "thm-standard-representatives-modulo-n",
+          "thm-euclids-lemma",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "thm-fermat-two-square-theorem-for-primes",
+        "kind": "theorem",
+        "title": "Fermat's two-square theorem for primes",
+        "strategy": "Squares modulo four prove necessity, with $2=1^2+1^2$ handled separately. For an odd prime $p\\equiv1\\pmod4$, the first supplement gives a square root $a$ of $-1$ modulo $p$. Thue's lemma produces nonzero $r,s$ below $\\sqrt p$ with $ra\\equiv s$; then $p\\mid r^2+s^2$ and $0<r^2+s^2<2p$, so the positive multiple is exactly $p$.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-thue-small-representatives",
+          "thm-first-supplement-to-quadratic-reciprocity",
+          "def-legendre-symbol",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "lem-two-essentially-different-two-square-representations-factor-an-odd-integer",
+        "kind": "lemma",
+        "title": "Two essentially different two-square representations factor an odd integer",
+        "strategy": "Normalize the two positive representations so their first coordinates are odd, their second coordinates are even, and $0<x<u$, which forces $0<v<y$. Factor $(u-x)(u+x)=(y-v)(y+v)$ after dividing all four factors by two. Split the two cross factors by their gcd and use coprime divisibility to obtain positive $e,f,g,h$ with $x+iy=(e+if)(g+ih)$. Taking the elementary norm identity gives $N=(e^2+f^2)(g^2+h^2)$ with both factors greater than one.",
+        "deps": [
+          "lem-brahmagupta-fibonacci-two-square-identity",
+          "def-common-divisor-and-gcd",
+          "lem-coprime-divides-product"
+        ]
+      },
+      {
+        "id": "thm-uniqueness-of-two-square-representation-of-a-prime",
+        "kind": "theorem",
+        "title": "A prime congruent to $1$ modulo $4$ has one two-square representation up to signs and order",
+        "strategy": "Fermat's theorem supplies a representation. For an odd prime the two nonzero coordinates have opposite parity, so normalize every representation to positive coordinates with the odd coordinate first. If two normalized pairs differed, order their odd coordinates and apply the factorisation lemma, contradicting primality. Undoing the normalization shows that every ordered signed representation comes from the unique positive odd-even pair by signs and interchange.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "thm-fermat-two-square-theorem-for-primes",
+          "lem-two-essentially-different-two-square-representations-factor-an-odd-integer"
+        ]
+      },
+      {
+        "id": "lem-two-square-representations-of-prime-powers",
+        "kind": "lemma",
+        "title": "Prime powers represented as sums of two squares",
+        "strategy": "Treat exponent zero as $1=1^2+0^2$. Powers of $2$ and of primes congruent to one modulo four follow by induction from their prime representations and product closure. For $q\\equiv3\\pmod4$, even powers have the explicit representation $(q^j)^2+0^2$; if an odd power were represented, repeatedly divide both coordinates by $q$ using the three-mod-four divisibility lemma until an impossible representation of $q$ remained.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "cor-sums-of-two-squares-closed-under-products",
+          "lem-three-mod-four-prime-dividing-two-square-sum",
+          "thm-fermat-two-square-theorem-for-primes",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-sum-of-two-squares-characterisation",
+        "kind": "theorem",
+        "title": "Characterisation of positive integers that are sums of two squares",
+        "strategy": "Use canonical prime factorisation. If every prime congruent to three modulo four has even valuation, represent each prime-power factor by the preceding lemma and multiply the finite list. Conversely, for a represented integer and such a prime $q$, the local divisibility lemma removes $q^2$ from the integer and $q$ from both coordinates. Induction on $v_q(n)$ excludes a final odd exponent and proves that every such valuation is even. Include $n=1$ through the empty factorisation.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "cor-sums-of-two-squares-closed-under-products",
+          "lem-three-mod-four-prime-dividing-two-square-sum",
+          "lem-two-square-representations-of-prime-powers",
+          "thm-canonical-prime-factorisation",
+          "lem-p-adic-valuation-basic",
+          "lem-p-adic-valuation-additive",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "lem-coprime-primitive-two-square-products-remain-primitive",
+        "kind": "lemma",
+        "title": "Coprime primitively represented factors have a primitive product representation",
+        "strategy": "Let $P=a^2+b^2$ and $Q=c^2+d^2$ be primitive with $\\gcd(P,Q)=1$, and use $(ac-bd,ad+bc)$ for the product. If a prime divided both new coordinates, the two linear combinations with $a,b$ would force it to divide $P$, while the two combinations with $c,d$ would force it to divide $Q$; primitivity rules out the alternative in each case. This contradicts coprimality of $P,Q$.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-brahmagupta-fibonacci-two-square-identity",
+          "def-common-divisor-and-gcd",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "thm-euclids-lemma"
+        ]
+      },
+      {
+        "id": "lem-prime-one-mod-four-powers-have-primitive-two-square-representations",
+        "kind": "lemma",
+        "title": "Powers of primes congruent to $1$ modulo $4$ have primitive two-square representations",
+        "strategy": "Induct from $(1,0)$ and a primitive representation $p=a^2+b^2$. Given a primitive representation $(u,v)$ of $p^e$, the two sign variants of the identity give candidate representations of $p^{e+1}$. Any prime common to a candidate's coordinates must be $p$. If both candidates had both coordinates divisible by $p$, their sums and differences would force $p\\mid u,v$, since $p$ is odd and divides neither $a$ nor $b$. Thus at least one candidate is primitive.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-brahmagupta-fibonacci-two-square-identity",
+          "thm-fermat-two-square-theorem-for-primes",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "thm-euclids-lemma",
+          "thm-induction-principle",
+          "thm-canonical-prime-factorisation"
+        ]
+      },
+      {
+        "id": "thm-primitive-sum-of-two-squares-characterisation",
+        "kind": "theorem",
+        "title": "Characterisation of primitive sums of two squares",
+        "strategy": "If $n=x^2+y^2$ with $\\gcd(x,y)=1$, the three-mod-four divisibility lemma excludes every prime congruent to three modulo four, and reduction modulo four shows that $4\\nmid n$, equivalently $v_2(n)\\le1$. Conversely factor $n$ into a possible single factor $2$ and powers of distinct primes congruent to one modulo four. Represent those prime powers primitively and combine the pairwise-coprime factors using the primitive-product lemma, with the empty factorisation giving $n=1$.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-three-mod-four-prime-dividing-two-square-sum",
+          "lem-coprime-primitive-two-square-products-remain-primitive",
+          "lem-prime-one-mod-four-powers-have-primitive-two-square-representations",
+          "thm-canonical-prime-factorisation",
+          "lem-p-adic-valuation-basic",
+          "lem-pairwise-coprime-divisibility",
+          "thm-euclids-lemma",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-primitive-sums-of-two-squares-closed-under-products",
+        "kind": "corollary",
+        "title": "Primitive sums of two squares are closed under products unless both factors are even",
+        "strategy": "Apply the primitive characterisation to the two positive factors. Neither has a prime divisor congruent to three modulo four. Each has $2$-valuation at most one, and the condition that they are not both even makes the sum of their $2$-valuations at most one. Valuation additivity and the characterisation then give a primitive representation of the product.",
+        "deps": [
+          "thm-primitive-sum-of-two-squares-characterisation",
+          "lem-p-adic-valuation-additive"
+        ]
+      },
+      {
+        "id": "cor-divisors-of-primitively-two-square-representable-integers",
+        "kind": "corollary",
+        "title": "Positive divisors of primitively represented integers are primitively represented",
+        "strategy": "Let $d>1$ divide a positive integer $n$ with a primitive two-square representation. Every prime exponent of $d$ is at most the corresponding exponent of $n$. Hence $d$ has no prime divisor congruent to three modulo four and has $2$-valuation at most one. Apply the primitive characterisation.",
+        "deps": [
+          "thm-primitive-sum-of-two-squares-characterisation",
+          "thm-canonical-prime-factorisation",
+          "lem-p-adic-valuation-basic"
+        ]
+      },
+      {
+        "id": "cor-squarefree-sum-of-two-squares-characterisation",
+        "kind": "corollary",
+        "title": "Squarefree sums of two squares",
+        "strategy": "For squarefree positive $n$, every prime valuation is zero or one, so the general criterion reduces to the absence of odd prime factors congruent to three modulo four. If a representation had coordinate gcd greater than one, a prime dividing that gcd would have its square divide $n$, contradicting squarefreeness. Thus every representation of an eligible squarefree integer is primitive, including the empty-factor case $n=1$.",
+        "deps": [
+          "def-squarefree-positive-integer",
+          "thm-sum-of-two-squares-characterisation",
+          "thm-primitive-sum-of-two-squares-characterisation",
+          "def-common-divisor-and-gcd",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "thm-euclids-lemma"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 57.008,
+    "id": "sums-of-two-squares-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Sums of Two Squares — Examples",
+    "companion": "sums-of-two-squares",
+    "requires": [
+      "sums-of-two-squares"
+    ],
+    "items": [
+      {
+        "id": "ex-thue-lemma-produces-a-two-square-representation",
+        "kind": "example",
+        "title": "Thue's collision argument gives $73=3^2+8^2$",
+        "strategy": "Verify $27^2\\equiv-1\\pmod{73}$ and take $h=8$. The pairs $(0,0)$ and $(3,8)$ collide under $(i,j)\\mapsto27i-j\\pmod{73}$, so the difference gives $3\\cdot27\\equiv8$. Multiplying the root congruence gives $73\\mid3^2+8^2$, while the small bounds force equality.",
+        "deps": [
+          "lem-thue-small-representatives",
+          "def-sum-of-two-squares-representation"
+        ]
+      },
+      {
+        "id": "ex-two-square-representation-of-seventy-three-by-extended-euclid",
+        "kind": "example",
+        "title": "Extended Euclid gives $73=3^2+8^2$ from the root $27$ of $-1$",
+        "strategy": "Verify $27^2\\equiv-1\\pmod{73}$ and run $73=2\\cdot27+19$, $27=19+8$. Back-substitution gives $8=3\\cdot27-73$, hence $3\\cdot27\\equiv8\\pmod{73}$. Squaring and using the root congruence shows $73\\mid3^2+8^2$, and direct evaluation gives equality. This is the source's Euclidean route, distinct from the preceding collision route.",
+        "deps": [
+          "def-sum-of-two-squares-representation"
+        ]
+      },
+      {
+        "id": "ex-two-square-representations-from-prime-factorisation",
+        "kind": "example",
+        "title": "Prime factorisation gives two representations of $221$ as a sum of two squares",
+        "strategy": "Use $13=2^2+3^2$ and $17=1^2+4^2$. The two sign variants of the identity give $221=10^2+11^2=14^2+5^2$. Verify both equalities directly and record that composite integers need not inherit prime uniqueness.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-brahmagupta-fibonacci-two-square-identity"
+        ]
+      },
+      {
+        "id": "cex-an-odd-three-mod-four-valuation-obstructs-two-squares",
+        "kind": "counterexample",
+        "title": "$539=7^2\\cdot11$ is not a sum of two squares",
+        "strategy": "Refute the claim that every positive integer is a sum of two squares. If $539=x^2+y^2$, the prime $11\\equiv3\\pmod4$ would divide both coordinates, so $11^2$ would divide $539$. Its displayed prime factorisation has $11$ to exponent one, a contradiction. Relate this direct obstruction to the general valuation criterion.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-three-mod-four-prime-dividing-two-square-sum",
+          "thm-sum-of-two-squares-characterisation"
+        ]
+      },
+      {
+        "id": "ex-two-essentially-different-representations-force-compositeness",
+        "kind": "example",
+        "title": "The representations $221=5^2+14^2=11^2+10^2$ recover the factors $13$ and $17$",
+        "strategy": "Normalize the two representations with odd coordinates first and apply the factorisation construction. The half-sums and half-differences yield $e=2,f=3,g=4,h=1$, so the two proper factors are $e^2+f^2=13$ and $g^2+h^2=17$. Check their product and both original representations.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "lem-two-essentially-different-two-square-representations-factor-an-odd-integer"
+        ]
+      },
+      {
+        "id": "ex-primitive-two-square-representation-criterion",
+        "kind": "example",
+        "title": "The primitive two-square criterion distinguishes $289$, $34$, and $833$",
+        "strategy": "Verify the primitive representations $289=15^2+8^2$ and $34=3^2+5^2$. Verify $833=28^2+7^2$, but note that $7\\equiv3\\pmod4$ divides $833$, so the primitive criterion forbids every primitive representation even though a nonprimitive one exists. Check the displayed coordinate gcds and prime factors.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "thm-primitive-sum-of-two-squares-characterisation"
+        ]
+      },
+      {
+        "id": "cex-four-dividing-n-forces-a-nonprimitive-two-square-representation",
+        "kind": "counterexample",
+        "title": "$68=8^2+2^2$ is representable but has no primitive two-square representation",
+        "strategy": "Refute the claim that every represented positive integer is primitively represented. Squares modulo four are zero or one, so a representation of a multiple of four must have both coordinates even. Apply this to $68=8^2+2^2$ and compare with the $2$-valuation clause of the primitive criterion.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "thm-primitive-sum-of-two-squares-characterisation"
+        ]
+      },
+      {
+        "id": "ex-squarefree-sums-of-two-squares",
+        "kind": "example",
+        "title": "Squarefree sums of two squares up to $30$",
+        "strategy": "List the squarefree positive integers at most $30$, discard exactly those with an odd prime factor congruent to three modulo four, and obtain $1,2,5,10,13,17,26,29$. Give an explicit two-square representation of each retained integer and verify that every coordinate gcd is one. This is a bounded, independently checkable construction.",
+        "deps": [
+          "def-sum-of-two-squares-representation",
+          "def-squarefree-positive-integer",
+          "cor-squarefree-sum-of-two-squares-characterisation"
+        ]
+      }
+    ]
+  }
+]

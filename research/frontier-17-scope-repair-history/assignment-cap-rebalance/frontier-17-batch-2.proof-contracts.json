@@ -1,0 +1,3163 @@
+{
+  "version": 1,
+  "level": "frontier-17",
+  "scope": [
+    "lem-frattini-subgroup-is-characteristic",
+    "cor-generation-is-detected-modulo-the-frattini-subgroup",
+    "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+    "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+    "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient",
+    "thm-frattini-subgroup-formula-for-a-finite-p-group",
+    "prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups",
+    "prop-frattini-subgroup-of-a-quotient-finite-p-group",
+    "prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups",
+    "cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup",
+    "cor-frattini-free-finite-p-groups-are-elementary-abelian",
+    "thm-burnside-basis-theorem",
+    "cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size",
+    "cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set",
+    "cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one",
+    "cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes",
+    "thm-automorphisms-act-linearly-on-the-frattini-quotient",
+    "thm-hall-burnside-automorphism-theorem",
+    "cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group",
+    "ex-frattini-subgroup-of-a-cyclic-p-group",
+    "ex-frattini-subgroup-of-an-elementary-abelian-p-group",
+    "ex-frattini-subgroups-of-dihedral-and-quaternion-groups",
+    "ex-generator-rank-of-upper-unitriangular-groups",
+    "ex-maximal-subgroups-as-frattini-hyperplanes",
+    "cex-frattini-image-under-a-nonsurjective-homomorphism",
+    "cex-fitting-centralizer-without-solvability",
+    "ex-hall-burnside-detects-a-nontrivial-coprime-automorphism",
+    "fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups",
+    "fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms",
+    "fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size",
+    "fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup"
+  ],
+  "contracts": {
+    "lem-frattini-subgroup-is-characteristic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frattini-subgroup-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "For a finite group $G$, the **Frattini subgroup** is $$\\Phi(G):=\\bigcap\\{M\\le G:M\\text{ is maximal proper}\\}.$$ If $G=1$, the family is empty and its intersection inside $G$ is $G$ itself. Thus $\\Phi(1)=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-characteristic-subgroup",
+          "source_section": "Definition",
+          "quote": "A subgroup $H\\le G$ is **characteristic** in $G$, written $H\\operatorname{char}G$, if $\\alpha(H)=H$ for every automorphism $\\alpha\\in\\operatorname{Aut}(G)$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "permute-maximals",
+          "claim": "An automorphism and its inverse carry maximal proper subgroups to maximal proper subgroups.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fix-intersection",
+          "claim": "The image of the intersection is the same intersection, so Phi is characteristic and normal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 use the published empty-intersection convention for the trivial group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero-order group $G=1$ and obtains $\\Phi(1)=1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the identity automorphism as well as every nonidentity automorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows the family of maximal proper subgroups to be empty only when the finite group is trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Characteristicity of the Frattini subgroup has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 applies a specified automorphism to a specified family; it selects no subgroup from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts characteristicity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterizing all characteristic intersections is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-generation-is-detected-modulo-the-frattini-subgroup": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-frattini-subgroup-nongenerator-characterization",
+          "source_section": "Statement",
+          "quote": "For a finite group $G$, an element $x$ lies in $\\Phi(G)$ if and only if, for every subset $S\\subseteq G$, $\\langle S,x\\rangle=G$ implies $\\langle S\\rangle=G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-correspondence-theorem-groups",
+          "source_section": "Statement",
+          "quote": "For $N\\mathrel{\\trianglelefteq}G$, the maps $H\\mapsto H/N$ and $K\\mapsto\\pi^{-1}(K)$ are inverse inclusion-preserving bijections between subgroups $H$ with $N\\le H\\le G$ and subgroups $K\\le G/N$; they preserve normality.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "forward-generation",
+          "claim": "A generating set maps to a generating set of every quotient.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "remove-nongenerators",
+          "claim": "If the quotient images generate, adjoining the finite Frattini subgroup generates G and its elements can be removed one at a time.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conclude-equivalence",
+          "claim": "The two implications give generation detection, including the empty set and trivial group.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 checks $S=\\varnothing$ and notes it generates exactly in the trivial case on both sides."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats $G=1$, whose quotient and generated subgroup are both trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is valid when $\\Phi(G)$ has one element and removes only the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles $\\Phi(G)=G$; in a finite group this forces the same generation conclusion rather than an improper quotient argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Generation modulo the Frattini subgroup has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 enumerates one finite subgroup already given; no choice from an arbitrary family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves generation implies quotient generation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves quotient generation implies generation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-elementary-abelian-p-group",
+          "source_section": "Definition",
+          "quote": "An elementary abelian $p$-group is a finite abelian $p$-group in which every nonidentity element has order $p$; the trivial group is permitted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on $\\mathbb Z/p$ make it a field",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb Z/n,+,[0]_n)$ is an abelian group",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "well-defined-scalars",
+          "claim": "Exponent p makes $\\bar a\\cdot x=x^a$ independent of the integer representative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "vector-axioms",
+          "claim": "Commutativity and power laws verify scalar addition, multiplication, identities, and distributivity over the field Z/p.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "converse",
+          "claim": "The additive group of a finite Fp-linear structure is abelian of exponent p, hence elementary abelian.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the axioms on the one-element group, where every scalar action returns the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly verifies $0\\cdot x=1_E$ and scalar zero causes no representative ambiguity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly verifies $1\\cdot x=x$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero-dimensional linear structure and identifies its additive group as the trivial elementary abelian group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The canonical finite-field scalar structure has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All scalar operations are explicit powers; no representative is chosen because step 1.1 proves independence of representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 construct the linear structure from an elementary abelian group."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the additive-group converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fp-basis-of-an-elementary-abelian-p-group",
+          "source_section": "Definition",
+          "quote": "A basis of an elementary abelian $p$-group is an independent spanning subset for its canonical $\\mathbb F_p$-linear structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are finite then $A \\times B$ is finite and $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-canonical-prime-factorisation",
+          "source_section": "Statement",
+          "quote": "the exponents are determined by $n$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "basis-existence",
+          "claim": "Delete redundant members from the finite spanning set E until a minimal spanning set, hence a basis, remains.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "extension-and-extraction",
+          "claim": "Adjoin elements outside the span to extend an independent set, and delete redundancies to extract a basis from a spanning set.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "basis-size",
+          "claim": "Unique coordinate functions give $|E|=p^{|B|}$, and prime factorization forces equal basis sizes.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 identify the empty basis of the trivial group and the single empty coordinate function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives basis size zero exactly for the trivial elementary abelian group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives $|E|=p$ for a one-element basis and does not confuse one basis vector with a one-element group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the starting independent set already to span and the spanning set already to be minimal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite elementary-abelian bases has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 terminate inside one finite set; each adjoining or deletion is a finite existential step and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives existence, extension, extraction, and size uniqueness rather than one biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a cardinality equation alone to a basis assertion is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frattini-subgroup-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "For a finite group $G$, the **Frattini subgroup** is $$\\Phi(G):=\\bigcap\\{M\\le G:M\\text{ is maximal proper}\\}.$$ If $G=1$, the family is empty and its intersection inside $G$ is $G$ itself. Thus $\\Phi(1)=1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-maximal-subgroups-of-finite-nilpotent-groups",
+          "source_section": "Statement",
+          "quote": "Every maximal proper subgroup of a finite nilpotent group is normal and has prime index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "source_section": "Statement",
+          "quote": "Every finite elementary abelian $p$-group has a basis; every independent subset extends to a basis, every spanning subset contains a basis, and all bases have the same finite size.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-correspondence-theorem-groups",
+          "source_section": "Statement",
+          "quote": "For $N\\mathrel{\\trianglelefteq}G$, the maps $H\\mapsto H/N$ and $K\\mapsto\\pi^{-1}(K)$ are inverse inclusion-preserving bijections between subgroups $H$ with $N\\le H\\le G$ and subgroups $K\\le G/N$; they preserve normality.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "elementary-frattini-quotient",
+          "claim": "Maximal subgroups are normal of index p, so their intersection kills commutators and pth powers.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "separate-nonzero-cosets",
+          "claim": "A nonzero coset in an elementary abelian quotient can be extended to a basis and excluded by a hyperplane whose preimage is maximal.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-equivalence",
+          "claim": "Intersecting the preimages proves Phi is contained in every elementary-abelian kernel; quotients of the Frattini quotient prove the converse.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats $P=1$, where the Frattini quotient is the trivial elementary abelian group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the zero coset separately and only constructs a hyperplane for a nonzero coset."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a one-dimensional quotient: the omitted-vector hyperplane is the zero subgroup."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes $N=P$ and $N=\\Phi(P)$, the two extreme normal subgroups."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The maximal elementary-abelian quotient has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 extends one independent vector inside a finite group using the finite basis lemma, with no global choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves $P/N$ elementary abelian implies $\\Phi(P)\\le N$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves $\\Phi(P)\\le N$ implies $P/N$ elementary abelian."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-frattini-subgroup-formula-for-a-finite-p-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pth-power-subgroup-of-a-group",
+          "source_section": "Definition",
+          "quote": "For a group $G$ and a prime $p$, the $p$th-power subgroup is $G^p=\\langle g^p:g\\in G\\rangle$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient",
+          "source_section": "Statement",
+          "quote": "For a finite $p$-group $P$, the quotient $P/\\Phi(P)$ is elementary abelian, and for $N\\trianglelefteq P$ the quotient $P/N$ is elementary abelian if and only if $\\Phi(P)\\le N$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normal-product",
+          "claim": "Automorphisms preserve pth powers, so $P^p$ is characteristic; together with normal $P'$ this makes $P'P^p$ normal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-inclusion",
+          "claim": "The elementary abelian quotient $P/\\Phi(P)$ kills commutators and pth powers, so $P'P^p\\le\\Phi(P)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reverse-inclusion",
+          "claim": "The quotient by $P'P^p$ is abelian of exponent p, so the largest-quotient clause gives the reverse inclusion.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 give $1'=1^p=\\Phi(1)=1$ for the trivial group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 allows the quotient $P/P'P^p$ to be the zero elementary abelian group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes prime-order groups, where both $P'$ and $P^p$ are trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles $P'=1$, $P^p=1$, or equality of the two factors without assuming either is proper."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite-p-group Frattini formula has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All subgroups are generated from explicit commutators and powers; no representative or maximal subgroup is selected in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality proved by two inclusions, not a logical biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse inclusion is step 3.1, but it is not the reverse direction of an iff Statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "subgroup-inclusions",
+          "claim": "Commutators and pth powers formed in H are respectively commutators and pth powers in P.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-formula",
+          "claim": "The two inclusions multiply to $H'H^p\\le P'P^p$, and the Frattini formulas identify both sides.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes $H=1$, whose Frattini subgroup is trivial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero generator subgroup without requiring a nonidentity element."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes $H=P$ and gives equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows either commutator or power subgroup to be trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Frattini monotonicity inside finite p-groups has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inclusions are elementwise and use no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the inclusion $\\Phi(H)\\le\\Phi(P)$ is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The generally false reverse inclusion is not asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-frattini-subgroup-of-a-quotient-finite-p-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-correspondence-theorem-groups",
+          "source_section": "Statement",
+          "quote": "For $N\\mathrel{\\trianglelefteq}G$, the maps $H\\mapsto H/N$ and $K\\mapsto\\pi^{-1}(K)$ are inverse inclusion-preserving bijections between subgroups $H$ with $N\\le H\\le G$ and subgroups $K\\le G/N$; they preserve normality.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "images-of-verbal-subgroups",
+          "claim": "The quotient map sends $P'$ onto $(P/N)'$ and $P^p$ onto $(P/N)^p$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quotient-formula",
+          "claim": "Apply the Frattini formula in $P/N$ and rewrite the product image as $P'P^pN/N=\\Phi(P)N/N$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers $P=1$ and its sole normal subgroup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers $N=P$, where both sides are the trivial subgroup of the trivial quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers $N=1$, where the formula reduces to $\\Phi(P)=\\Phi(P)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows $P'$ or $P^p$ to lie in $N$, so either quotient image may vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Frattini subgroups of finite-p-group quotients has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Quotient images are canonical and no coset representatives are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states an equality rather than an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Both inclusions are encoded in the equality of step 2.1, not as a separate converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-external-direct-product-of-groups",
+          "source_section": "Definition",
+          "quote": "Let $G$ and $H$ be groups. Their **external direct product** has underlying set",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "componentwise-verbal-subgroups",
+          "claim": "Direct calculation gives $(P\\times Q)'=P'\\times Q'$ and $(P\\times Q)^p=P^p\\times Q^p$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-product-formula",
+          "claim": "The Frattini formula and componentwise subgroup products yield the claimed direct-product equality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes both factors trivial, whose product and Frattini subgroup are trivial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats trivial commutator and power components as identity factors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes exactly one trivial factor and reduces to the other group's formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 does not require nonabelian factors or nontrivial power subgroups."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Frattini subgroups of direct products has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are componentwise and deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states a product equality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructing factors from a product Frattini subgroup is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-pth-power-subgroup-of-a-group",
+          "source_section": "Definition",
+          "quote": "For a group $G$ and a prime $p$, the $p$th-power subgroup is $G^p=\\langle g^p:g\\in G\\rangle$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exponent-two-quotient",
+          "claim": "Every element of $P/P^2$ has square one; expanding $(xy)^2=1$ shows any exponent-two group is abelian.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "collapse-formula",
+          "claim": "Abelianness of $P/P^2$ gives $P'\\le P^2$, so $P'P^2=P^2$ in the Frattini formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 gives $\\Phi(1)=1^2=1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the identity coset and its square."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the element order bound two and includes elements of order one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows $P^2=1$, yielding an elementary abelian 2-group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The square-subgroup formula for finite 2-groups has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is a universal identity calculation with no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an equality for 2-groups."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not characterize 2-groups among all finite groups."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-frattini-free-finite-p-groups-are-elementary-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient",
+          "source_section": "Statement",
+          "quote": "For a finite $p$-group $P$, the quotient $P/\\Phi(P)$ is elementary abelian, and for $N\\trianglelefteq P$ the quotient $P/N$ is elementary abelian if and only if $\\Phi(P)\\le N$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-elementary-abelian-p-group",
+          "source_section": "Definition",
+          "quote": "An elementary abelian $p$-group is a finite abelian $p$-group in which every nonidentity element has order $p$; the trivial group is permitted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trivial-phi-forward",
+          "claim": "If $\\Phi(P)=1$, the elementary Frattini quotient is P itself.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "elementary-reverse",
+          "claim": "If P is elementary abelian, apply the kernel clause with $N=1$ to get $\\Phi(P)\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include the trivial group, which is elementary abelian by convention and has trivial Phi."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the zero subgroup as the kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes groups of order p, whose Frattini subgroup is trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both implications allow the quotient to be the zero-dimensional elementary abelian group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Frattini-free elementary-abelian criterion has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Neither implication selects generators or maximal subgroups."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves trivial Phi implies elementary abelian."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves elementary abelian implies trivial Phi."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-burnside-basis-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-generation-is-detected-modulo-the-frattini-subgroup",
+          "source_section": "Statement",
+          "quote": "A subset $S$ of a finite group $G$ generates $G$ if and only if its image generates $G/\\Phi(G)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-minimal-generating-set-of-a-group",
+          "source_section": "Definition",
+          "quote": "A subset $X$ of a group is a minimal generating set when it generates and no proper subset of $X$ generates.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "source_section": "Statement",
+          "quote": "Every finite elementary abelian $p$-group has a basis; every independent subset extends to a basis, every spanning subset contains a basis, and all bases have the same finite size.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "minimal-to-basis",
+          "claim": "Minimal generation forces distinct quotient images and a minimal spanning family, hence a basis.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "basis-to-minimal",
+          "claim": "A restricted bijection onto a basis gives generation, and deleting any lift destroys spanning and generation.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "state-equivalence",
+          "claim": "The two implications give the theorem, with the empty set corresponding to the empty basis for P=1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the empty minimal generating set of $P=1$ with the empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the zero-dimensional Frattini quotient only in the trivial-group case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a one-vector basis and proves its single lift is a minimal generator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly rules out two distinct elements of X with the same quotient image, closing the repeated-coset defect."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Burnside basis has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 lifts only the finitely many specified basis vectors; finite representative selection is made explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves minimal generation implies the restricted-bijection basis clause."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that clause implies minimal generation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-burnside-basis-theorem",
+          "source_section": "Statement",
+          "quote": "A subset $X$ of a finite $p$-group $P$ is a minimal generating set if and only if the quotient map restricts to a bijection from $X$ onto a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "source_section": "Statement",
+          "quote": "Every finite elementary abelian $p$-group has a basis; every independent subset extends to a basis, every spanning subset contains a basis, and all bases have the same finite size.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-size",
+          "claim": "Burnside identifies every minimal generating set bijectively with a basis, so its size is d(P).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "extract-minimal-subset",
+          "claim": "Extract a basis from the quotient image of any generating set and choose its distinct preimages.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give size zero and the empty extracted set for $P=1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies generator rank zero only with the empty quotient basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 extracts one generator when $d(P)=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits the original generating set to contain redundant elements and repeated quotient cosets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Sizes and extraction of finite-p-group generators has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses one preimage for each member of one finite basis, a finite choice carried out in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states common size and extraction, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim every d(P)-element subset generates."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-burnside-basis-theorem",
+          "source_section": "Statement",
+          "quote": "A subset $X$ of a finite $p$-group $P$ is a minimal generating set if and only if the quotient map restricts to a bijection from $X$ onto a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "source_section": "Statement",
+          "quote": "Every finite elementary abelian $p$-group has a basis; every independent subset extends to a basis, every spanning subset contains a basis, and all bases have the same finite size.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonzero-image",
+          "claim": "An element outside Phi has a nonzero quotient image, so its singleton is independent.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "extend-and-lift",
+          "claim": "Extend that singleton to a finite basis, lift the other vectors, and apply Burnside basis.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous for $P=1$ because $P\\setminus\\Phi(P)$ is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes the zero quotient vector exactly by $x\\notin\\Phi(P)$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers a one-dimensional quotient, where the singleton already is a basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows no additional basis vectors when the initial singleton spans."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Extension of a non-Frattini element to generators has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the finite basis-extension lemma and finitely many explicit lifts, not arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary asserts existence for elements outside Phi."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert that every member of every minimal generating set lies outside Phi, although that follows separately."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-burnside-basis-theorem",
+          "source_section": "Statement",
+          "quote": "A subset $X$ of a finite $p$-group $P$ is a minimal generating set if and only if the quotient map restricts to a bijection from $X$ onto a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-generator-rank-of-a-finite-p-group",
+          "source_section": "Definition",
+          "quote": "For a finite $p$-group $P$, the generator rank $d(P)$ is the common size of a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-generated-subgroup",
+          "source_section": "Definition",
+          "quote": "A group $G$ is **cyclic** when $G = \\langle g \\rangle$ for some $g \\in G$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rank-one-cyclic",
+          "claim": "A one-vector quotient basis lifts to one generator of P.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "cyclic-rank-one",
+          "claim": "A generator maps to a spanning singleton; nontriviality excludes dimension zero.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trivial-boundary",
+          "claim": "For P=1 the empty basis gives d(P)=0, explaining the nontrivial hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 records the trivial group and its empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives d(1)=0 and prevents it from entering the rank-one equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 are precisely the one-generator and one-basis-vector cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 rules out a cyclic nontrivial group with trivial Frattini quotient dimension zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Cyclicity and generator rank has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A single generator or basis vector is supplied by the hypothesis; no family selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves cyclic nontrivial P has d(P)=1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves d(P)=1 implies P cyclic."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient",
+          "source_section": "Statement",
+          "quote": "For a finite $p$-group $P$, the quotient $P/\\Phi(P)$ is elementary abelian, and for $N\\trianglelefteq P$ the quotient $P/N$ is elementary abelian if and only if $\\Phi(P)\\le N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "source_section": "Statement",
+          "quote": "Every finite elementary abelian $p$-group has a basis; every independent subset extends to a basis, every spanning subset contains a basis, and all bases have the same finite size.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-correspondence-theorem-groups",
+          "source_section": "Statement",
+          "quote": "For $N\\mathrel{\\trianglelefteq}G$, the maps $H\\mapsto H/N$ and $K\\mapsto\\pi^{-1}(K)$ are inverse inclusion-preserving bijections between subgroups $H$ with $N\\le H\\le G$ and subgroups $K\\le G/N$; they preserve normality.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "maximal-to-hyperplane",
+          "claim": "Correspondence sends M to a maximal proper subgroup of the quotient; basis extension shows it omits exactly one basis direction.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-description",
+          "claim": "The omitted coordinate defines a nonzero homomorphism to Z/p with that hyperplane as kernel, and every such kernel pulls back to a maximal subgroup.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bijection",
+          "claim": "The inverse-image and quotient maps are inverse, giving the stated classification.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 gives an empty correspondence for $P=1$: there are no maximal subgroups and no hyperplanes in the zero quotient."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes the zero functional and explains that its kernel is not a proper hyperplane."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles a one-dimensional quotient, whose unique hyperplane is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the hyperplane itself to be the zero subgroup but never the whole quotient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Frattini hyperplanes has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 extends one finite subgroup basis by one vector using the finite basis lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 sends every maximal subgroup to a hyperplane."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 pulls every hyperplane back to a maximal subgroup."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-automorphisms-act-linearly-on-the-frattini-quotient": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-frattini-subgroup-is-characteristic",
+          "source_section": "Statement",
+          "quote": "For every finite group $G$, the subgroup $\\Phi(G)$ is characteristic in $G$ and hence normal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "source_section": "Statement",
+          "quote": "The rule $\\bar a\\cdot x=x^a$ gives every elementary abelian $p$-group its canonical $\\mathbb F_p$-vector-space structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-automorphisms-form-a-group",
+          "source_section": "Statement",
+          "quote": "The automorphisms of a group form a group under composition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "induced-quotient-map",
+          "claim": "Characteristicity makes every automorphism descend to a quotient automorphism.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "linearity",
+          "claim": "The identity $\\alpha(x^a)=\\alpha(x)^a$ proves preservation of the canonical Fp scalar action.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "action-homomorphism",
+          "claim": "Induced maps preserve identities and composition, producing the homomorphism rho_P.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 includes $P=1$, where both automorphism groups and rho_P are trivial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies preservation of the zero scalar and zero quotient vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies preservation of scalar one and the identity automorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 permits the Frattini quotient to be zero-dimensional and the target automorphism group to be trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The automorphism action on the Frattini quotient has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The induced quotient map is unique and scalar preservation is an equation; no representatives are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem constructs a homomorphism from automorphisms of P."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim every linear automorphism of the quotient lifts to P."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-hall-burnside-automorphism-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-burnside-basis-theorem",
+          "source_section": "Statement",
+          "quote": "A subset $X$ of a finite $p$-group $P$ is a minimal generating set if and only if the quotient map restricts to a bijection from $X$ onto a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchys-theorem-for-finite-groups",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $p$ be prime. If $p\\mid|G|$, then $G$ contains an element of order $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-p-group-action-has-a-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite $p$-group $P$ act on a finite set $X$. If $p\\nmid|X|$, then $X^P\\ne\\varnothing",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "choose-prime-order-automorphism",
+          "claim": "A nontrivial p-prime subgroup has an element alpha of prime order q different from p.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-coset-representatives",
+          "claim": "Alpha preserves each Frattini coset; the q-action on its p-power-sized set has a fixed point.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-generating-basis",
+          "claim": "Choose fixed lifts of a quotient basis; Burnside makes them generators, so alpha is the identity, contradicting its order.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "discharge",
+          "claim": "The contradiction shows the p-prime subgroup is trivial.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 includes $P=1$, whose automorphism group has no nontrivial p-prime subgroup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the zero-dimensional quotient with its empty basis only when P is trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes singleton Frattini cosets and a cyclic acting group of prime order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 includes $A=1$ without invoking Cauchy's theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Hall–Burnside coprime automorphisms has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses fixed representatives only for one finite basis after step 2.1 proves each required finite fixed set nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way faithfulness statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim nontrivial quotient action forces coprime order."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-automorphisms-act-linearly-on-the-frattini-quotient",
+          "source_section": "Statement",
+          "quote": "Every automorphism of a finite $p$-group induces an $\\mathbb F_p$-linear automorphism of $P/\\Phi(P)$, and these form a homomorphism $\\rho_P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-hall-burnside-automorphism-theorem",
+          "source_section": "Statement",
+          "quote": "If a $p'$-subgroup $A\\le\\operatorname{Aut}(P)$ acts trivially on $P/\\Phi(P)$, then $A=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cauchys-theorem-for-finite-groups",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $p$ be prime. If $p\\mid|G|$, then $G$ contains an element of order $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-canonical-prime-factorisation",
+          "source_section": "Statement",
+          "quote": "the exponents are determined by $n$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-kernel",
+          "claim": "The kernel of rho_P is a finite subgroup of the permutation group of finite P.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exclude-other-primes",
+          "claim": "If q different from p divided the kernel order, Cauchy would give an order-q subgroup in the kernel, contradicting Hall–Burnside.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "prime-power-order",
+          "claim": "Unique prime factorization leaves only p in the kernel order, including exponent zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include $P=1$ and give the trivial kernel of order $p^0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly permits exponent zero in the p-power order."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes a kernel with one element."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a faithful action by making the kernel trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The kernel of the Frattini-quotient action has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Cauchy's theorem supplies one element under a divisibility hypothesis; no simultaneous family selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary proves the kernel is a p-group."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not characterize which p-subgroups of Aut(P) occur as the kernel."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-frattini-subgroup-of-a-cyclic-p-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-order-of-a-power-in-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $G=\\langle g\\rangle$ be cyclic of finite order $m\\ge1$. For every integer $a$,",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cyclic-power-subgroup",
+          "claim": "The cyclic power-order formula gives $P^p=\\langle g^p\\rangle$ and commutativity gives $P'=1$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frattini-and-rank",
+          "claim": "The Frattini formula gives Phi, and the quotient of order p has the displayed one-vector basis and rank one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes $n\\ge1$, so the trivial cyclic group of order $p^0$ is outside this construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes $\\langle g^p\\rangle=1$ when $n=1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the prime-order boundary $n=1$ and obtains rank one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the abelian commutator subgroup $P'=1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cyclic p-group example has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The generator g is part of the Example data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct computation for a specified family."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not classify all groups with rank one; that is the A-page cyclicity corollary."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-frattini-subgroup-of-an-elementary-abelian-p-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-frattini-free-finite-p-groups-are-elementary-abelian",
+          "source_section": "Statement",
+          "quote": "A finite $p$-group has trivial Frattini subgroup if and only if it is elementary abelian.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fp-basis-of-an-elementary-abelian-p-group",
+          "source_section": "Definition",
+          "quote": "A basis of an elementary abelian $p$-group is an independent spanning subset for its canonical $\\mathbb F_p$-linear structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are finite then $A \\times B$ is finite and $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "elementary-product",
+          "claim": "Componentwise addition makes $(Z/p)^n$ elementary abelian and finite, including the empty product.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coordinate-basis",
+          "claim": "The standard coordinate vectors give unique coordinates, hence a basis of size n and generator rank n.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 treat $n=0$: the empty product is trivial and has the empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives generator rank zero at $n=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the single coordinate basis and rank one at $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero vector and permits all coordinates to vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The elementary-abelian product example has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coordinate basis is explicitly indexed; no basis is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes one family."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert every elementary abelian group is literally this chosen Cartesian product, only that it has the same basis form."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-frattini-subgroups-of-dihedral-and-quaternion-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup",
+          "source_section": "Statement",
+          "quote": "For every finite $2$-group $P$, $\\Phi(P)=P^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two",
+          "source_section": "Statement",
+          "quote": "Let $Q_8=\\{1,-1,i,-i,j,-j,k,-k\\}\\subseteq\\mathbb{H}^{\\times}$ be as in",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-squares",
+          "claim": "Normal forms in D8 give $D_8^2=\\langle r^2\\rangle$, while quaternion multiplication gives $Q_8^2=\\{\\pm1\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frattini-subgroups",
+          "claim": "Apply the finite-two-group square formula and compute both quotients as two-dimensional elementary abelian groups.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both displayed groups have order eight, so no empty or trivial group occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the identity square and the zero quotient vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks each quotient contains the identity and three nonidentity elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows reflections to square to the identity while rotations and quaternion units contribute the central involution."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The D8 and Q8 computations has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The normal forms and quaternion elements are explicitly listed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes two groups."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not classify all rank-two 2-groups."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-generator-rank-of-upper-unitriangular-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "source_section": "Statement",
+          "quote": "For every finite $p$-group $P$, the subgroup $P^p$ is characteristic and $\\Phi(P)=P'P^p$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-generator-rank-of-a-finite-p-group",
+          "source_section": "Definition",
+          "quote": "For a finite $p$-group $P$, the generator rank $d(P)$ is the common size of a basis of $P/\\Phi(P)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on $\\mathbb Z/p$ make it a field",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "construct-heisenberg-group",
+          "claim": "The coordinate law is associative with the stated identity and inverse, and the set has order $p^3$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derived-axis",
+          "claim": "The explicit commutator formula is $(0,0,ab'-a'b)$ and every central-axis element occurs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-axis-and-phi",
+          "claim": "The power formula puts all pth powers on the central axis; the Frattini formula therefore identifies Phi with that axis for odd p and p=2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quotient-rank",
+          "claim": "The first two coordinates give a two-vector basis of the quotient, so d(H_p)=2.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter p is prime, so the coordinate set has at least eight elements and is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 include zero coordinates, the identity triple, and the zero quotient vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly verifies the identity element, and step 4.1 uses two nonzero coordinate basis vectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 separates odd p, where all pth powers vanish, from p=2, where squares may be nontrivial but remain on the central axis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The three-by-three unitriangular family has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All witnesses are explicit coordinate triples."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes the Frattini subgroup and rank of a specified family."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not classify all order-$p^3$ groups."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-maximal-subgroups-as-frattini-hyperplanes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-frattini-subgroups-of-dihedral-and-quaternion-groups",
+          "source_section": "Example",
+          "quote": "For $D_8$ and $Q_8$, the Frattini subgroup has order two and the Frattini quotient is $(\\mathbb Z/2)^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes",
+          "source_section": "Statement",
+          "quote": "The maximal subgroups of a finite $p$-group are exactly the inverse images of codimension-one subgroups of $P/\\Phi(P)$, equivalently kernels of nonzero linear homomorphisms to $\\mathbb Z/p$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "list-maximal-subgroups",
+          "claim": "The three displayed order-four subgroups of D8 are distinct, maximal, and contain Phi.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identify-lines-and-kernels",
+          "claim": "Their quotient images are the three lines in F2 squared and are kernels of the three nonzero coordinate linear forms.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "D8 and all three displayed subgroups are nonempty finite groups."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero vector common to every quotient line."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats one-dimensional hyperplanes in a two-dimensional quotient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the three subgroups are distinct rather than allowing repeated listings."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The D8 hyperplane example has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every subgroup and homomorphism is explicitly displayed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 maps each maximal subgroup to a quotient line."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 accounts for every line and pulls it back to one listed maximal subgroup."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-frattini-image-under-a-nonsurjective-homomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-frattini-subgroup-of-a-cyclic-p-group",
+          "source_section": "Example",
+          "quote": "If $P=\\langle g\\rangle$ has order $p^n$ with $n\\ge1$, then $\\Phi(P)=\\langle g^p\\rangle$ and $d(P)=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-frattini-subgroup-is-nilpotent",
+          "source_section": "Statement",
+          "quote": "The Frattini subgroup of every finite group is nilpotent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-only-proper-nontrivial-normal-subgroup-of-s-n",
+          "source_section": "Statement",
+          "quote": "For $n\\ge5$, the normal subgroups of $S_n$ are",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable",
+          "source_section": "Statement",
+          "quote": "The alternating group $A_n$ is not solvable for every $n\\ge5$. Consequently $S_n$ is not solvable for every $n\\ge5$; in particular, $A_5$ and $S_5$ are not solvable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-nilpotent-groups-and-finite-p-groups-are-solvable",
+          "source_section": "Statement",
+          "quote": "Every nilpotent group is solvable. Consequently every finite $p$-group is solvable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "embed-c4",
+          "claim": "The power map sends a C4 generator to a 4-cycle and its Frattini generator to a nonidentity double transposition.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-phi-s5",
+          "claim": "Phi(S5) is nilpotent and normal; the normal-subgroup classification and nonsolvability exclude A5 and S5, leaving 1.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "witness-failure",
+          "claim": "The nonidentity image from step 1.1 is not in the trivial target Frattini subgroup.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both C4 and S5 are fixed nontrivial finite groups."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the target Frattini subgroup is the trivial subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 tracks the single source generator and its square."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the homomorphism is injective but not surjective, exactly the missing hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The nonsurjective Frattini-image counterexample has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The 4-cycle and double transposition are explicit permutations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about homomorphisms preserving Phi is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-fitting-centralizer-without-solvability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup",
+          "source_section": "Statement",
+          "quote": "For every finite group $G$, $F(G)$ is nilpotent and normal, and every normal nilpotent subgroup of $G$ is contained in $F(G)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-alternating-group-is-simple-for-n-at-least-five",
+          "source_section": "Statement",
+          "quote": "The alternating group $A_n$ is simple for every $n\\ge5$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable",
+          "source_section": "Statement",
+          "quote": "The alternating group $A_n$ is not solvable for every $n\\ge5$. Consequently $S_n$ is not solvable for every $n\\ge5$; in particular, $A_5$ and $S_5$ are not solvable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-nilpotent-groups-and-finite-p-groups-are-solvable",
+          "source_section": "Statement",
+          "quote": "Every nilpotent group is solvable. Consequently every finite $p$-group is solvable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-fitting-a5",
+          "claim": "F(A5) is normal nilpotent; simplicity leaves 1 or A5, and nonsolvability excludes A5.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-centralizer",
+          "claim": "The centralizer of the trivial subgroup is all of A5, so it is not contained in F(A5).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A5 is a fixed nontrivial group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the zero/trivial Fitting subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 centralizes the one-element subgroup explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 rules out the whole-group Fitting alternative using nonsolvability."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The A5 Fitting-centralizer counterexample has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Simplicity gives a two-case exhaustion with no subgroup selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes deletion of solvability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not characterize solvable groups by the centralizer inclusion."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hall-burnside-detects-a-nontrivial-coprime-automorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-frattini-subgroup-of-a-cyclic-p-group",
+          "source_section": "Example",
+          "quote": "If $P=\\langle g\\rangle$ has order $p^n$ with $n\\ge1$, then $\\Phi(P)=\\langle g^p\\rangle$ and $d(P)=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-hall-burnside-automorphism-theorem",
+          "source_section": "Statement",
+          "quote": "If a $p'$-subgroup $A\\le\\operatorname{Aut}(P)$ acts trivially on $P/\\Phi(P)$, then $A=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "inversion-data",
+          "claim": "For C3, Phi is trivial and inversion is a nonidentity automorphism of order two.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "detected-action",
+          "claim": "The induced quotient action is the same nontrivial inversion, illustrating Hall–Burnside.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "C3 is nontrivial and the acting subgroup has two elements."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the trivial Frattini subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies inversion fixes the identity but not every element."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes a nontrivial coprime automorphism from one acting trivially on the quotient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The inversion action on C3 has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The automorphism is explicitly inversion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example illustrates the theorem's conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim every nontrivial quotient action has coprime order."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-frattini-subgroup-of-an-elementary-abelian-p-group",
+          "source_section": "Example",
+          "quote": "For every prime $p$ and $n\\in\\mathbb N$, $\\Phi((\\mathbb Z/p)^n)=1$ and the generator rank is $n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-frattini-subgroup-of-a-finite-group",
+          "source_section": "Definition",
+          "quote": "For a finite group $G$, the **Frattini subgroup** is $$\\Phi(G):=\\bigcap\\{M\\le G:M\\text{ is maximal proper}\\}.$$ If $G=1$, the family is empty and its intersection inside $G$ is $G$ itself. Thus $\\Phi(1)=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "maximal-lines-cover",
+          "claim": "Every nonzero vector in $(Z/2)^2$ spans one of its three maximal order-two subgroups.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compare-intersection-union",
+          "claim": "Their union is the whole group, while their intersection and hence Phi is trivial.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness group has four elements and three maximal subgroups."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 tracks the zero vector in every maximal subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one-dimensional maximal subgroups."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the union is the whole group rather than accidentally repeating one subgroup."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Union versus intersection of maximal subgroups has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All three subgroups are explicitly enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an equality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about unions of maximal subgroups is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-frattini-image-under-a-nonsurjective-homomorphism",
+          "source_section": "Counterexample",
+          "quote": "The embedding $C_4\\hookrightarrow S_5$ sending a generator to a $4$-cycle does not carry $\\Phi(C_4)$ into $\\Phi(S_5)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-correspondence-theorem-groups",
+          "source_section": "Statement",
+          "quote": "For $N\\mathrel{\\trianglelefteq}G$, the maps $H\\mapsto H/N$ and $K\\mapsto\\pi^{-1}(K)$ are inverse inclusion-preserving bijections between subgroups $H$ with $N\\le H\\le G$ and subgroups $K\\le G/N$; they preserve normality.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reuse-witness",
+          "claim": "The C4-to-S5 embedding sends a Frattini element outside the target Frattini subgroup.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "state-valid-boundary",
+          "claim": "For a surjection, the inverse image of every maximal target subgroup is maximal, proving the valid image inclusion.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "refute-universal-form",
+          "claim": "Step 1.1 shows nonsurjective homomorphisms do not satisfy that inclusion in general.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness and valid surjective statement concern nonempty groups with identities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the trivial target Frattini subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the one-element kernel and does not equate injectivity with surjectivity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 separate injective nonsurjective maps from surjections."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Functoriality of the Frattini subgroup has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Preimages of specified maximal subgroups are canonical."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false universal implication is refuted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not claim preservation of Phi characterizes surjectivity."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minimal-generating-set-of-a-group",
+          "source_section": "Definition",
+          "quote": "A subset $X$ of a group is a minimal generating set when it generates and no proper subset of $X$ generates.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-integers-modulo-n-as-a-quotient-group",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, view $n$ as its canonical nonnegative integer",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "singleton-basis",
+          "claim": "In additive Z/6, the singleton {1} generates and is inclusion-minimal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-element-basis",
+          "claim": "The set {2,3} generates because 2+2+3=1, while each singleton generates a proper subgroup.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-sizes",
+          "claim": "The two minimal generating sets have sizes one and two, refuting the arbitrary finite-group claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 show the empty set does not generate the nontrivial witness group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 tracks the zero residue in both generated subgroups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is the one-element minimal generating set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separately checks removal of 2 and removal of 3; neither singleton generates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Minimal generating-set sizes in Z/6 has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both generating sets and all residue computations are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal equal-size statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not classify finite groups whose minimal generating sets do have equal size."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-fitting-centralizer-without-solvability",
+          "source_section": "Counterexample",
+          "quote": "For $A_5$, one has $F(A_5)=1$ and $C_{A_5}(F(A_5))=A_5$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fitting-subgroup-contains-its-centralizer-in-a-finite-solvable-group",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite solvable group. Then $C_G(F(G))\\le F(G)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reuse-a5",
+          "claim": "For A5 the Fitting subgroup is trivial and its centralizer is all of A5.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "identify-missing-hypothesis",
+          "claim": "The published inclusion has finite solvability as a hypothesis, which A5 violates.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "refute",
+          "claim": "The strict failure in step 1.1 refutes the hypothesis-free claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A5 is nontrivial, so the counterexample does not rely on an empty group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the trivial Fitting subgroup."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the centralizer of the one-element subgroup."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 confirms the witness fails exactly solvability, not finiteness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Fitting-centralizer false statement has no ordered interval, limiting endpoint, or one-sided convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness group is fixed and no subgroup is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes deletion of a hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert the centralizer inclusion implies solvability."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

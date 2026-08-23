@@ -14,12 +14,14 @@
 > **Pass it on.** You dispatch independent readers and read-only proof-refuters;
 > put this rule in their prompts verbatim.
 
-> **Model/routing rule (owner, 2026-08-08).** You are **GPT 5.6 Sol** at
+> **Model/routing rule (owner, 2026-08-23).** You are **Claude Opus 5** at
 > `xhigh` effort with a **1,000,000-token context window**, dispatched through
-> the Codex subscription. The lanes you dispatch are:
+> the claude CLI. The lanes you dispatch are:
 >
-> - `--role certifier` → **GPT 5.6 Terra, `xhigh`, 1,000,000-token context,
->   read-only**, for the independent
+> - `--role certifier` → **Claude Opus 5, `xhigh`, 1,000,000-token context,
+>   read-only** — the SAME MODEL you are, so its certification is an independent
+>   process and an independent reading, never independent corroboration — for the
+>   independent
 >   current reading of any repair. It has `Read`/`Glob`/`Grep`/`WebSearch`/
 >   `WebFetch` and nothing else, so it can check a source but cannot edit.
 > - `--role audit-refuter` → **DeepSeek V4 Pro, read-only**, for adversarial
@@ -73,7 +75,7 @@ mathematics (`AUDIT-WORKFLOW.md` §7, "A6 efficiency protocol"). Spot-check each
 then use it:
 
 - **A URL liveness table** for every URL in the wave's ledgers and on disk in the
-  scoped items. The orchestrator's shell has outbound network; your Sol readers'
+  scoped items. The orchestrator's shell has outbound network; your readers'
   sandboxes do not. You own the **disposition** of anything dead or off-topic —
   not the fetching.
 - **The pure/material split** from `tools/audit-split.mjs`. A4 rewrites the

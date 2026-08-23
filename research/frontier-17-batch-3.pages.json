@@ -1,0 +1,1151 @@
+[
+  {
+    "order": 100,
+    "id": "the-galois-correspondence",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "The Galois Correspondence",
+    "companion": "the-galois-correspondence-examples",
+    "requires": [
+      "algebraic-closure-embeddings-and-separability-examples",
+      "symmetric-polynomials"
+    ],
+    "items": [
+      {
+        "id": "def-relative-field-automorphism-group",
+        "kind": "definition",
+        "title": "Relative field automorphisms and $\\operatorname{Aut}(K/F)$",
+        "deps": [
+          "def-f-homomorphisms-and-embeddings-of-field-extensions"
+        ]
+      },
+      {
+        "id": "thm-relative-automorphism-group-and-separable-degree-bound",
+        "kind": "theorem",
+        "title": "$\\operatorname{Aut}(K/F)$ is a group and $|\\operatorname{Aut}(K/F)|\\le [K:F]_s\\le [K:F]$",
+        "strategy": "Verify closure, identity, and inverses under composition. For finite $K/F$, choose an $F$-embedding $\\tau:K\\to\\Omega$ into an algebraic closure and inject $\\operatorname{Aut}(K/F)$ into $\\operatorname{Hom}_F(K,\\Omega)$ by $\\sigma\\mapsto\\tau\\circ\\sigma$; then apply the published separable-degree bound. Treat the trivial extension and degree one explicitly.",
+        "deps": [
+          "def-relative-field-automorphism-group",
+          "def-separable-degree",
+          "cor-separable-degree-is-at-most-extension-degree",
+          "thm-algebraic-embedding-extension"
+        ]
+      },
+      {
+        "id": "def-fixed-field-of-an-automorphism-group",
+        "kind": "definition",
+        "title": "The fixed field $K^G$ of a group of field automorphisms",
+        "deps": [
+          "def-relative-field-automorphism-group"
+        ]
+      },
+      {
+        "id": "thm-dedekind-linear-independence-of-characters",
+        "kind": "theorem",
+        "title": "Dedekind's linear independence theorem for distinct characters",
+        "strategy": "Assume a nontrivial dependence with the fewest nonzero coefficients. Normalize one coefficient, compare the relation at $gx$ with the relation at $x$ multiplied by one selected character value at $g$, and choose $g$ on which two distinct characters differ. The subtraction gives a shorter nonzero dependence, a contradiction. Include the empty and singleton character families.",
+        "deps": [
+          "def-group-homomorphism",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "lem-artin-fixed-field-lower-degree-bound",
+        "kind": "lemma",
+        "title": "Artin's fixed-field lower bound $[K:K^G]\\ge |G|$",
+        "strategy": "View the distinct automorphisms in the finite group $G$ as $K$-valued characters of $K^\\times$. Dedekind independence gives an invertible evaluation minor on a finite family of field elements. Those elements are linearly independent over $K^G$, because a fixed-field dependence would be annihilated by the same evaluation matrix. Handle the trivial group and the zero element separately.",
+        "deps": [
+          "def-fixed-field-of-an-automorphism-group",
+          "thm-dedekind-linear-independence-of-characters"
+        ]
+      },
+      {
+        "id": "lem-artin-fixed-field-upper-degree-bound",
+        "kind": "lemma",
+        "title": "Artin's fixed-field upper bound $[K:K^G]\\le |G|$",
+        "strategy": "For $|G|+1$ field elements solve the homogeneous system whose rows are their images under the automorphisms in $G$. Choose a nonzero solution with minimal support and scale its first nonzero coefficient to one. Applying any automorphism and reindexing the equations produces another solution; subtracting it from the original lowers the support unless every coefficient is fixed by $G$. The identity row then supplies a nontrivial $K^G$-linear dependence. Check $G=\\{1\\}$ and repeated or zero input elements.",
+        "deps": [
+          "def-fixed-field-of-an-automorphism-group",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "thm-artin-fixed-field-degree-theorem",
+        "kind": "theorem",
+        "title": "Artin's fixed-field theorem: $[K:K^G]=|G|$ and $\\operatorname{Aut}(K/K^G)=G$",
+        "strategy": "Combine the two degree bounds to obtain equality and finiteness. The defining fixed-field condition gives $G\\subseteq\\operatorname{Aut}(K/K^G)$, while the automorphism-degree bound gives the reverse cardinal inequality; equality of finite subsets forces equality of groups. Treat the trivial group without suppressing the degree-one case.",
+        "deps": [
+          "def-fixed-field-of-an-automorphism-group",
+          "lem-artin-fixed-field-lower-degree-bound",
+          "lem-artin-fixed-field-upper-degree-bound",
+          "thm-relative-automorphism-group-and-separable-degree-bound"
+        ]
+      },
+      {
+        "id": "cor-fixed-field-map-is-injective-on-finite-automorphism-groups",
+        "kind": "corollary",
+        "title": "Distinct finite automorphism groups have distinct fixed fields",
+        "strategy": "If finite groups $G$ and $H$ have the same fixed field, Artin's theorem identifies each with the full automorphism group over that field, so $G=H$. State the contrapositive as the advertised injectivity and include the trivial group.",
+        "deps": [
+          "thm-artin-fixed-field-degree-theorem"
+        ]
+      },
+      {
+        "id": "cor-relative-automorphism-order-divides-extension-degree",
+        "kind": "corollary",
+        "title": "For a finite extension, $|\\operatorname{Aut}(K/F)|$ divides $[K:F]$",
+        "strategy": "Let $G=\\operatorname{Aut}(K/F)$ and $E=K^G$. The automorphism bound makes $G$ finite, Artin gives $|G|=[K:E]$, and the tower law gives $[K:F]=[K:E][E:F]$. Check degree one and the trivial automorphism group.",
+        "deps": [
+          "thm-relative-automorphism-group-and-separable-degree-bound",
+          "def-fixed-field-of-an-automorphism-group",
+          "thm-artin-fixed-field-degree-theorem",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "def-finite-galois-extension-and-galois-group",
+        "kind": "definition",
+        "title": "Finite Galois extensions and $\\operatorname{Gal}(K/F)$",
+        "deps": [
+          "def-relative-field-automorphism-group",
+          "def-normal-algebraic-extension",
+          "def-separable-elements-and-separable-extensions"
+        ]
+      },
+      {
+        "id": "thm-finite-galois-extension-characterizations",
+        "kind": "theorem",
+        "title": "Equivalent characterizations of a finite Galois extension",
+        "strategy": "Prove separately that normal and separable finite extensions are splitting fields of a separable product of distinct minimal polynomials; that a splitting field of a separable polynomial has all of its embeddings as automorphisms and hence the full automorphism count; that the full count forces fixed field $F$ by Artin and the tower law; and that fixed field $F$ makes every orbit polynomial equal the corresponding minimal polynomial, giving distinct roots and normality. Record all four conditions and both directions of every equivalence, including $K=F$.",
+        "deps": [
+          "def-finite-galois-extension-and-galois-group",
+          "thm-artin-fixed-field-degree-theorem",
+          "prop-finitely-generated-normal-extensions-are-splitting-fields",
+          "def-polynomials-that-split-and-splitting-fields",
+          "thm-isomorphisms-extend-to-splitting-fields",
+          "prop-endomorphisms-of-a-splitting-field-permute-its-roots",
+          "thm-finite-extension-is-separable-iff-separable-degree-is-full",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "cor-finite-galois-over-every-intermediate-field",
+        "kind": "corollary",
+        "title": "A finite Galois extension is Galois over every intermediate field",
+        "strategy": "Normality descends from $K/F$ to $K/E$. The minimal polynomial over $E$ of an element of $K$ divides its separable minimal polynomial over $F$, so it remains separable. Finiteness descends by the tower law, giving that $K/E$ is Galois. Explicitly avoid claiming that $E/F$ is Galois.",
+        "deps": [
+          "def-finite-galois-extension-and-galois-group",
+          "prop-normality-descends-to-intermediate-fields",
+          "def-separable-elements-and-separable-extensions",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "def-galois-closure-of-a-finite-separable-extension",
+        "kind": "definition",
+        "title": "The Galois closure of a finite separable extension",
+        "deps": [
+          "def-normal-closure-of-an-algebraic-extension",
+          "def-finite-galois-extension-and-galois-group"
+        ]
+      },
+      {
+        "id": "thm-galois-closures-exist-and-are-minimal",
+        "kind": "theorem",
+        "title": "Finite separable extensions have finite minimal Galois closures",
+        "strategy": "Take the published finite normal closure inside an algebraic closure. It is the splitting field of the product of the generators' minimal polynomials; separability of the original extension makes the distinct factors separable, so the closure is finite, normal, and separable. Minimality is the intersection property of the normal closure. Treat the trivial extension and repeated generator polynomials.",
+        "deps": [
+          "def-galois-closure-of-a-finite-separable-extension",
+          "thm-finite-normal-closures-exist-and-are-finite",
+          "def-separable-elements-and-separable-extensions",
+          "thm-extension-generated-by-separable-elements-is-separable",
+          "thm-finite-galois-extension-characterizations"
+        ]
+      },
+      {
+        "id": "thm-fundamental-theorem-of-finite-galois-theory",
+        "kind": "theorem",
+        "title": "The fundamental theorem of finite Galois theory",
+        "strategy": "For finite Galois $K/F$ with group $G$, send $H$ to $K^H$ and $E$ to $\\operatorname{Gal}(K/E)$. Artin proves both inverse identities, not merely injectivity: $\\operatorname{Aut}(K/K^H)=H$ and $K^{\\operatorname{Gal}(K/E)}=E$. Verify inclusion reversal directly and derive $[K:K^H]=|H|$ and $[K^H:F]=[G:H]$ from Artin and the tower law. Include $H=1,G$ and $E=K,F$.",
+        "deps": [
+          "def-finite-galois-extension-and-galois-group",
+          "thm-artin-fixed-field-degree-theorem",
+          "cor-finite-galois-over-every-intermediate-field",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+        "kind": "theorem",
+        "title": "Normal subgroups, conjugate fields, and quotient groups in the Galois correspondence",
+        "strategy": "For $E=K^H$, compute $\\operatorname{Gal}(K/\\sigma(E))=\\sigma H\\sigma^{-1}$ elementwise. Deduce that $H$ is normal exactly when every $\\sigma$ stabilizes $E$, which is equivalent to $E/F$ being normal and, since it is separable, Galois. In the normal case prove restriction $G\\to\\operatorname{Gal}(E/F)$ is surjective by comparing its fixed field and degrees, identify its kernel as $H$, and apply the first isomorphism theorem. Keep the conjugation formula, biconditional, and quotient conclusion in separate proof blocks.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "def-normal-subgroup",
+          "thm-normal-subgroup-characterisations",
+          "def-quotient-group",
+          "thm-first-isomorphism-theorem-groups",
+          "def-normal-algebraic-extension"
+        ]
+      },
+      {
+        "id": "cor-finite-galois-extension-has-finitely-many-intermediate-fields",
+        "kind": "corollary",
+        "title": "A finite Galois extension has finitely many intermediate fields",
+        "strategy": "The finite Galois group has only finitely many subsets and hence finitely many subgroups. The fundamental theorem gives a bijection from those subgroups to intermediate fields. Include the degree-one extension.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory"
+        ]
+      },
+      {
+        "id": "prop-galois-correspondence-converts-composita-and-intersections",
+        "kind": "proposition",
+        "title": "The Galois correspondence exchanges composita with subgroup intersections and field intersections with generated subgroups",
+        "strategy": "For corresponding pairs $E_i=K^{H_i}$, an automorphism fixes the compositum $E_1E_2$ exactly when it fixes both fields, giving $\\operatorname{Gal}(K/E_1E_2)=H_1\\cap H_2$. The fixed field of $\\langle H_1,H_2\\rangle$ is exactly $K^{H_1}\\cap K^{H_2}$, giving the second identity by the fundamental theorem. Check equal fields, base/top fields, and both binary operations.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "def-generated-subgroup",
+          "lem-intersection-of-subgroups"
+        ]
+      },
+      {
+        "id": "thm-galois-translation-theorem",
+        "kind": "theorem",
+        "title": "The Galois translation theorem",
+        "strategy": "Let $E/F$ be finite Galois and let $L/F$ lie in a common extension. Show $EL/L$ is the splitting field of the same separable polynomial, so it is Galois. Restriction to $E$ injects $\\operatorname{Gal}(EL/L)$ into $\\operatorname{Gal}(E/E\\cap L)$. The fixed field in $E$ of the restriction image is exactly $E\\cap L$, because the fixed field of $\\operatorname{Gal}(EL/L)$ in $EL$ is $L$; Artin's theorem then makes the image have order $[E:E\\cap L]$, so it is the whole target. Handle $E\\subseteq L$, $E\\cap L=F$, and $L=F$.",
+        "deps": [
+          "thm-finite-galois-extension-characterizations",
+          "thm-artin-fixed-field-degree-theorem",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "thm-galois-group-of-a-compositum-as-a-fibre-product",
+        "kind": "theorem",
+        "title": "The Galois group of a compositum is a fibre product of Galois groups",
+        "strategy": "For finite Galois $E_1/F$ and $E_2/F$, restriction embeds $\\operatorname{Gal}(E_1E_2/F)$ in the product. Its image consists exactly of pairs with equal restrictions to $E_1\\cap E_2$, using the translation theorem to extend compatible pairs. The image is the full product exactly when the intersection is $F$; verify both directions and the case $E_1=E_2$.",
+        "deps": [
+          "thm-galois-translation-theorem",
+          "thm-finite-galois-extension-characterizations",
+          "thm-fundamental-theorem-of-finite-galois-theory"
+        ]
+      },
+      {
+        "id": "def-galois-group-of-a-separable-polynomial",
+        "kind": "definition",
+        "title": "The Galois group of a separable polynomial",
+        "deps": [
+          "def-polynomials-that-split-and-splitting-fields",
+          "def-finite-galois-extension-and-galois-group",
+          "thm-finite-galois-extension-characterizations"
+        ]
+      },
+      {
+        "id": "thm-galois-group-embeds-in-the-symmetric-group-on-the-roots",
+        "kind": "theorem",
+        "title": "A polynomial Galois group acts faithfully on its roots",
+        "strategy": "Every base-field automorphism permutes the finite root set. If it fixes every root, it fixes the splitting field generated by those roots, so the action is faithful and gives an embedding in the symmetric group. Reordering the roots conjugates the embedded subgroup by the corresponding permutation. Include constant separable polynomials and degree one.",
+        "deps": [
+          "def-galois-group-of-a-separable-polynomial",
+          "prop-endomorphisms-of-a-splitting-field-permute-its-roots",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "thm-irreducible-separable-polynomial-iff-galois-group-transitive",
+        "kind": "theorem",
+        "title": "A positive-degree separable polynomial is irreducible exactly when its Galois group is transitive on the roots",
+        "strategy": "If $f$ is irreducible, extend the simple-extension isomorphism sending one root to any other root to an automorphism of the splitting field. Conversely, if the action is transitive, an irreducible factor containing one root contains every orbit root because its coefficients are fixed; separability then forces the factor to be the whole monic polynomial. Require positive degree and prove both directions.",
+        "deps": [
+          "thm-galois-group-embeds-in-the-symmetric-group-on-the-roots",
+          "thm-isomorphisms-extend-to-splitting-fields",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "prop-vandermonde-transforms-by-sign-under-the-galois-action",
+        "kind": "proposition",
+        "title": "The Vandermonde product transforms by the sign of the root permutation",
+        "strategy": "For an ordered root list, each Galois automorphism permutes the pair factors in the Vandermonde product. Reordering a product by a transposition reverses exactly one net sign, and the sign homomorphism extends this to every permutation. Squaring gives an invariant discriminant. Treat degree zero and one empty products.",
+        "deps": [
+          "thm-galois-group-embeds-in-the-symmetric-group-on-the-roots",
+          "def-vandermonde-polynomial",
+          "thm-sign-is-a-homomorphism"
+        ]
+      },
+      {
+        "id": "thm-discriminant-square-criterion-for-an-alternating-galois-group",
+        "kind": "theorem",
+        "title": "For a monic separable polynomial in characteristic not two, the Galois group lies in $A_n$ exactly when the discriminant is a square",
+        "strategy": "Let $\\delta$ be the Vandermonde product. If the Galois group lies in $A_n$, the sign formula fixes $\\delta$, so the fundamental theorem puts $\\delta$ in the base field and the discriminant is its square. Conversely, if $\\delta^2=d^2$ with $d$ in the base field, the field hypothesis and characteristic not two give $\\delta=\\pm d$; every automorphism fixes it, and the sign formula forces even permutations. Record why separability makes $\\delta$ nonzero and why characteristic two is excluded.",
+        "deps": [
+          "prop-vandermonde-transforms-by-sign-under-the-galois-action",
+          "def-discriminant-of-a-monic-polynomial",
+          "thm-discriminant-root-formula-and-repeated-root-criterion",
+          "def-alternating-group",
+          "thm-fundamental-theorem-of-finite-galois-theory"
+        ]
+      },
+      {
+        "id": "thm-galois-group-of-an-irreducible-cubic-by-discriminant",
+        "kind": "theorem",
+        "title": "A monic irreducible separable cubic in characteristic not two has Galois group $A_3$ or $S_3$ according to its discriminant",
+        "strategy": "For a monic separable irreducible cubic over a field of characteristic not two, transitivity leaves only the transitive subgroups $A_3$ and $S_3$. Apply the discriminant criterion to distinguish them. Verify that the separability hypothesis remains explicit in characteristic three and that the square and nonsquare cases are exhaustive.",
+        "deps": [
+          "thm-irreducible-separable-polynomial-iff-galois-group-transitive",
+          "thm-discriminant-square-criterion-for-an-alternating-galois-group",
+          "def-alternating-group"
+        ]
+      },
+      {
+        "id": "def-resolvent-cubic-of-a-monic-quartic",
+        "kind": "definition",
+        "title": "The resolvent cubic of a monic quartic",
+        "deps": [
+          "cor-symmetric-polynomial-values-on-roots-lie-in-the-base-field",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "prop-resolvent-cubic-formula-and-discriminant",
+        "kind": "proposition",
+        "title": "The coefficient formula and discriminant of the quartic resolvent",
+        "strategy": "For $f=x^4+ax^3+bx^2+cx+d$, expand the three pair-product roots of the resolvent. Express their elementary symmetric functions through those of the four roots to obtain $R_f=y^3-by^2+(ac-4d)y-(a^2d+c^2-4bd)$. Factor each difference of two resolvent roots into two differences of quartic roots; multiplying the three squared differences proves $\\operatorname{Disc}(R_f)=\\operatorname{Disc}(f)$. Check repeated resolvent roots are excluded when $f$ is separable.",
+        "deps": [
+          "def-resolvent-cubic-of-a-monic-quartic",
+          "thm-fundamental-theorem-of-symmetric-polynomials",
+          "def-discriminant-of-a-monic-polynomial"
+        ]
+      },
+      {
+        "id": "lem-transitive-subgroups-of-s-four-and-the-resolvent-action",
+        "kind": "lemma",
+        "title": "The transitive subgroups of $S_4$ and their action on the three pairings",
+        "strategy": "Classify a transitive subgroup of $S_4$ by its order and intersection with the normal Klein four subgroup acting trivially on the three unordered pairings. The induced quotient is a transitive or intransitive subgroup of $S_3$, leaving $S_4,A_4,D_4,C_4$, and $V_4$. Record the quotient orders and whether the subgroup is contained in $A_4$; prove that the degree-two resolvent case leaves exactly $D_4$ and $C_4$. No classification beyond subgroups of $S_4$ is assumed.",
+        "deps": [
+          "def-alternating-group",
+          "def-normal-subgroup",
+          "thm-lagrange",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent",
+        "kind": "theorem",
+        "title": "The five-case resolvent classification of an irreducible quartic Galois group",
+        "strategy": "Let $f$ be separable irreducible of degree four over a field of characteristic not two. Identify the splitting field of the resolvent with the fixed field of the intersection of $G_f$ with the Klein four subgroup. Use resolvent factorization and the discriminant criterion to obtain $S_4$ for irreducible resolvent and nonsquare discriminant, $A_4$ for irreducible resolvent and square discriminant, $V_4$ for a fully split resolvent, and $D_4$ or $C_4$ when the resolvent has one base-field root; distinguish the last two by whether $f$ remains irreducible over the resolvent splitting field. Prove exhaustiveness and all boundary hypotheses.",
+        "deps": [
+          "def-resolvent-cubic-of-a-monic-quartic",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "lem-transitive-subgroups-of-s-four-and-the-resolvent-action",
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-discriminant-square-criterion-for-an-alternating-galois-group",
+          "thm-irreducible-separable-polynomial-iff-galois-group-transitive"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 101,
+    "id": "the-galois-correspondence-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "The Galois Correspondence — Examples",
+    "companion": "the-galois-correspondence",
+    "requires": [
+      "the-galois-correspondence"
+    ],
+    "items": [
+      {
+        "id": "ex-biquadratic-galois-correspondence-lattice",
+        "kind": "example",
+        "title": "The complete Galois correspondence for $\\mathbb Q(\\sqrt2,\\sqrt3)/\\mathbb Q$",
+        "strategy": "Write the four sign-change automorphisms explicitly and identify the group with $V_4$. Compute the fixed fields of its three order-two subgroups as $\\mathbb Q(\\sqrt2)$, $\\mathbb Q(\\sqrt3)$, and $\\mathbb Q(\\sqrt6)$, and include the base and top fields. Verify all degrees and reverse inclusions directly.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots"
+        ]
+      },
+      {
+        "id": "ex-s-three-galois-correspondence-for-x-cubed-minus-two",
+        "kind": "example",
+        "title": "The full $S_3$ correspondence for the splitting field of $x^3-2$",
+        "strategy": "In an algebraic closure choose a cube root $a$ of $2$ and a nontrivial cube root of unity $\\omega$. Prove the splitting field $L=\\mathbb Q(a,\\omega)$ has degree six, write generators $r:a\\mapsto\\omega a$ and $s:a\\mapsto a,\\omega\\mapsto\\omega^2$, and identify $S_3$. Match the three order-two subgroups with the three cubic fields and $A_3$ with $\\mathbb Q(\\omega)$; include base and top fields and label exactly which strict intermediate fields are normal.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-galois-group-of-an-irreducible-cubic-by-discriminant"
+        ]
+      },
+      {
+        "id": "ex-d-four-galois-correspondence-for-x-four-minus-two",
+        "kind": "example",
+        "title": "The ten-field $D_4$ correspondence for the splitting field of $x^4-2$",
+        "strategy": "Choose $a$ with $a^4=2$ and $i^2=-1$. Prove $L=\\mathbb Q(a,i)$ has degree eight, define $r(a)=ia,r(i)=i$ and $s(a)=a,s(i)=-i$, and obtain the dihedral relations. List every subgroup of $D_4$ and compute its fixed field by solving the coefficient constraints in the basis $1,a,a^2,a^3,i,ia,ia^2,ia^3$. Cross-check subgroup orders with field degrees and identify the normal subextensions.",
+        "deps": [
+          "thm-fundamental-theorem-of-finite-galois-theory",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent"
+        ]
+      },
+      {
+        "id": "cex-separable-nonnormal-extension-with-trivial-automorphism-group",
+        "kind": "counterexample",
+        "title": "$\\mathbb Q(\\sqrt[3]{2})/\\mathbb Q$ is separable and nonnormal with trivial automorphism group",
+        "strategy": "Eisenstein gives degree three and characteristic zero gives separability. The other roots of $x^3-2$ are absent from the real root field, so it is not normal. Every base automorphism must send the generator to a root lying in the field, leaving only the generator itself; hence the automorphism group is trivial.",
+        "deps": [
+          "def-finite-galois-extension-and-galois-group",
+          "def-relative-field-automorphism-group",
+          "def-normal-algebraic-extension",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect"
+        ]
+      },
+      {
+        "id": "cex-normal-inseparable-extension-with-trivial-automorphism-group",
+        "kind": "counterexample",
+        "title": "$\\mathbb F_p(t)/\\mathbb F_p(t^p)$ is normal and inseparable with trivial automorphism group",
+        "strategy": "Show $x^p-t^p$ is the minimal polynomial of $t$ over $\\mathbb F_p(t^p)$ and equals $(x-t)^p$ in the extension. Thus the degree is $p$, the extension is purely inseparable and normal, and $t$ is its only conjugate. Every base automorphism fixes $t$, so the automorphism group is trivial. Keep $p$ prime and include $p=2$.",
+        "deps": [
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "def-purely-inseparable-extension",
+          "cor-purely-inseparable-extensions-are-normal",
+          "def-relative-field-automorphism-group"
+        ]
+      },
+      {
+        "id": "ex-cubic-x-cubed-minus-three-x-plus-one-has-galois-group-a-three",
+        "kind": "example",
+        "title": "$x^3-3x+1$ has discriminant $81$ and Galois group $A_3$ over $\\mathbb Q$",
+        "strategy": "The rational-root theorem proves irreducibility. Compute the depressed-cubic discriminant as $-4(-3)^3-27=81=9^2$, verify separability, and apply the cubic discriminant theorem. Record the resulting cyclic degree-three splitting field.",
+        "deps": [
+          "thm-rational-root-theorem",
+          "thm-galois-group-of-an-irreducible-cubic-by-discriminant",
+          "def-discriminant-of-a-monic-polynomial"
+        ]
+      },
+      {
+        "id": "ex-cubic-x-cubed-minus-two-has-galois-group-s-three",
+        "kind": "example",
+        "title": "$x^3-2$ has discriminant $-108$ and Galois group $S_3$ over $\\mathbb Q$",
+        "strategy": "Eisenstein proves irreducibility. Compute the discriminant $-27(-2)^2=-108$, which is not a rational square, verify separability, and apply the cubic theorem. Reconcile the result with the explicitly generated group in the earlier lattice example.",
+        "deps": [
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-galois-group-of-an-irreducible-cubic-by-discriminant",
+          "ex-s-three-galois-correspondence-for-x-cubed-minus-two"
+        ]
+      },
+      {
+        "id": "ex-quartic-x-four-minus-x-minus-one-has-galois-group-s-four",
+        "kind": "example",
+        "title": "$x^4-x-1$ has Galois group $S_4$ over $\\mathbb Q$",
+        "strategy": "Reduction modulo two proves the quartic irreducible. Its resolvent is $y^3+4y-1$, which has no rational root and is irreducible, while the quartic discriminant is $-283$, not a square. Apply the irreducible-resolvent nonsquare row of the five-case theorem.",
+        "deps": [
+          "thm-reduction-mod-prime-irreducibility-test",
+          "thm-rational-root-theorem",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent"
+        ]
+      },
+      {
+        "id": "ex-quartic-x-four-plus-eight-x-plus-twelve-has-galois-group-a-four",
+        "kind": "example",
+        "title": "$x^4+8x+12$ has Galois group $A_4$ over $\\mathbb Q$",
+        "strategy": "The rational-root theorem excludes a linear factor. Modulo five the polynomial factors as one linear irreducible times one cubic irreducible and has only that one root; Gauss's lemma then rules out a product of two rational quadratics, proving irreducibility over $\\mathbb Q$. Compute the square discriminant $331776=576^2$ and show the resolvent $y^3-48y-64$ is irreducible modulo five. The square-discriminant irreducible-resolvent row gives $A_4$.",
+        "deps": [
+          "thm-rational-root-theorem",
+          "thm-reduction-mod-prime-irreducibility-test",
+          "thm-gauss-lemma-for-integer-polynomials",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent"
+        ]
+      },
+      {
+        "id": "ex-cyclotomic-quartic-has-galois-group-c-four",
+        "kind": "example",
+        "title": "$x^4+x^3+x^2+x+1$ has Galois group $C_4$ over $\\mathbb Q$",
+        "strategy": "Translate by one and apply Eisenstein at five to prove irreducibility. If $\\zeta$ is a root, list the four roots $\\zeta,\\zeta^2,\\zeta^3,\\zeta^4$ and show $\\zeta\\mapsto\\zeta^2$ extends to an automorphism of order four, so the splitting field has cyclic group $C_4$. Compute the resolvent $(y-2)(y^2+y-1)$ and reconcile this with the one-root cyclic row of the quartic theorem without citing later cyclotomic theory.",
+        "deps": [
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent"
+        ]
+      },
+      {
+        "id": "ex-biquadratic-quartic-has-galois-group-v-four",
+        "kind": "example",
+        "title": "$x^4-10x^2+1$ has Galois group $V_4$ over $\\mathbb Q$",
+        "strategy": "Show $\\sqrt2+\\sqrt3$ has minimal polynomial $x^4-10x^2+1$ and that its four conjugates are $\\pm\\sqrt2\\pm\\sqrt3$. Thus its splitting field is the biquadratic field from the earlier lattice example. Compute the resolvent $(y+10)(y-2)(y+2)$ and apply the fully split row of the quartic theorem.",
+        "deps": [
+          "ex-biquadratic-galois-correspondence-lattice",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent"
+        ]
+      },
+      {
+        "id": "fs-extension-degree-equals-number-of-automorphisms",
+        "kind": "false-statement",
+        "title": "FALSE: every degree-$n$ extension has exactly $n$ automorphisms",
+        "strategy": "Use the degree-three extension $\\mathbb Q(\\sqrt[3]{2})/\\mathbb Q$, whose preceding counterexample proves that its automorphism group is trivial. Contrast the false equality with the valid automorphism bound and divisibility theorem.",
+        "deps": [
+          "cex-separable-nonnormal-extension-with-trivial-automorphism-group",
+          "thm-relative-automorphism-group-and-separable-degree-bound",
+          "cor-relative-automorphism-order-divides-extension-degree"
+        ]
+      },
+      {
+        "id": "fs-every-galois-subgroup-corresponds-to-a-normal-subextension",
+        "kind": "false-statement",
+        "title": "FALSE: every subgroup in the Galois correspondence gives a normal subextension",
+        "strategy": "In the $S_3$ splitting field of $x^3-2$, an order-two subgroup is not normal and its fixed cubic field is not normal over $\\mathbb Q$. Identify the missing conjugate root and cite the exact normality clause.",
+        "deps": [
+          "ex-s-three-galois-correspondence-for-x-cubed-minus-two",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence"
+        ]
+      },
+      {
+        "id": "fs-polynomial-degree-determines-the-galois-group",
+        "kind": "false-statement",
+        "title": "FALSE: the degree of a polynomial determines its Galois group",
+        "strategy": "Compare the two irreducible cubics already computed: $x^3-3x+1$ has group $A_3$, while $x^3-2$ has group $S_3$. Their common degree and distinct discriminant square classes isolate the missing data.",
+        "deps": [
+          "ex-cubic-x-cubed-minus-three-x-plus-one-has-galois-group-a-three",
+          "ex-cubic-x-cubed-minus-two-has-galois-group-s-three"
+        ]
+      },
+      {
+        "id": "fs-galois-correspondence-is-inclusion-preserving",
+        "kind": "false-statement",
+        "title": "FALSE: the Galois correspondence preserves inclusion",
+        "strategy": "In the biquadratic example, the trivial subgroup is contained in every order-two subgroup, but its fixed field is the whole extension and contains, rather than is contained in, each quadratic fixed field. State the general inclusion-reversing implication from the fundamental theorem.",
+        "deps": [
+          "ex-biquadratic-galois-correspondence-lattice",
+          "thm-fundamental-theorem-of-finite-galois-theory"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 110,
+    "id": "modules-over-a-pid-and-canonical-forms",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Modules over a Principal Ideal Domain and the Canonical Forms",
+    "companion": "modules-over-a-pid-and-canonical-forms-examples",
+    "requires": [
+      "chain-conditions-and-semisimple-modules",
+      "euclidean-domains-pids-and-unique-factorisation",
+      "the-field-of-fractions-and-localisation",
+      "triangularisation-and-jordan-canonical-form",
+      "the-structure-of-finite-abelian-groups"
+    ],
+    "items": [
+      {
+        "id": "def-primary-component-of-a-module-over-a-domain",
+        "kind": "definition",
+        "title": "The $p$-primary component of a module over a domain",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "def-irreducible-and-prime-elements-in-a-domain"
+        ]
+      },
+      {
+        "id": "prop-torsion-and-primary-components-are-submodules-over-a-domain",
+        "kind": "proposition",
+        "title": "Torsion elements and $p$-primary elements form submodules over a domain",
+        "strategy": "For torsion elements killed by nonzero $a$ and $b$, the product $ab$ kills their sum and is nonzero because the ring is a domain; scalar multiples remain torsion. For the $p$-primary component, a common sufficiently large power of $p$ kills a sum. Include the zero element, the zero module, and associate choices of $p$.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "def-primary-component-of-a-module-over-a-domain",
+          "def-submodule"
+        ]
+      },
+      {
+        "id": "cor-principal-ideal-domains-are-noetherian",
+        "kind": "corollary",
+        "title": "Every principal ideal domain is Noetherian",
+        "strategy": "A submodule of the left regular module is an ideal, and every ideal of a PID has one generator. Thus every submodule is finitely generated, which is the Noetherian condition. Keep the left/right convention explicit and note commutativity makes the two sides agree.",
+        "deps": [
+          "def-principal-ideal-domain",
+          "def-noetherian-ring",
+          "thm-equivalent-characterizations-of-noetherian-modules"
+        ]
+      },
+      {
+        "id": "lem-irreducibles-are-prime-in-a-principal-ideal-domain",
+        "kind": "lemma",
+        "title": "Every irreducible element of a principal ideal domain is prime",
+        "strategy": "For irreducible $p$, show any ideal strictly containing $(p)$ is the whole ring: if $(p)\\subseteq(a)$ then $p=ab$, and irreducibility makes either $a$ a unit or the ideals equal. Thus $(p)$ is maximal, hence prime, and the prime-ideal condition gives divisibility of one factor whenever $p$ divides a product. Exclude zero and units exactly as the irreducible definition does.",
+        "deps": [
+          "def-principal-ideal-domain",
+          "def-irreducible-and-prime-elements-in-a-domain",
+          "def-prime-and-maximal-ideals",
+          "cor-maximal-ideals-are-prime"
+        ]
+      },
+      {
+        "id": "thm-principal-ideal-domains-are-unique-factorisation-domains",
+        "kind": "theorem",
+        "title": "Every principal ideal domain is a unique factorisation domain",
+        "strategy": "For factorization existence, assume that some nonzero nonunit is not a product of irreducibles. PID Noetherianity and the published maximal-condition characterization give a maximal principal ideal $(a)$ among those generated by such bad elements. If $a=bc$ with both factors nonunits, then $(a)$ is strictly contained in both $(b)$ and $(c)$; maximality makes both factors products of irreducibles, a contradiction. For uniqueness, use that every irreducible is prime, cancel an associate factor, and induct on the number of factors. Treat units and the empty product explicitly. The only dependent-choice cost is inherited from the published equivalence between Noetherianity and the maximal condition; no recursive factor selection is made locally.",
+        "deps": [
+          "cor-principal-ideal-domains-are-noetherian",
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "lem-irreducibles-are-prime-in-a-principal-ideal-domain",
+          "def-unique-factorisation-domain"
+        ]
+      },
+      {
+        "id": "lem-maximal-divisor-pivot-for-pid-submodules",
+        "kind": "lemma",
+        "title": "A nonzero PID submodule has a maximal coordinate ideal and a primitive pivot",
+        "strategy": "For nonzero $N$ inside a finite free module $M$, consider the ideals $\\varphi(N)$ as $\\varphi$ ranges over $M^*$. Starting from one nonzero value ideal, UFD factorization gives only finitely many containing principal ideals, so choose a maximal member $(a)=\\psi(N)$. If $a=\\psi(v)$, combine $\\psi$ with any coordinate functional to prove $a$ divides every coordinate of $v$; write $v=ae_1$ with $\\psi(e_1)=1$. Then split $M=Re_1\\oplus\\ker\\psi$ and $N=Rae_1\\oplus(N\\cap\\ker\\psi)$. Check rank one and $N=0$ separately.",
+        "deps": [
+          "thm-principal-ideal-domains-are-unique-factorisation-domains",
+          "def-internal-hom-module-over-a-commutative-ring",
+          "def-free-module-on-a-set-and-standard-basis"
+        ]
+      },
+      {
+        "id": "thm-simultaneous-basis-theorem-for-pid-submodules",
+        "kind": "theorem",
+        "title": "Simultaneous bases for a submodule of a finite free module over a PID",
+        "strategy": "Induct on the rank of the ambient free module. The maximal-pivot lemma splits off $Re_1$ and $Ra_1e_1$; apply the induction hypothesis to the kernel pair, concatenate bases, and use maximality once more to prove $a_1\\mid a_2$. Continue to obtain nonzero $a_1\\mid\\cdots\\mid a_r$, a basis $e_1,\\ldots,e_n$ of the ambient module, and basis $a_1e_1,\\ldots,a_re_r$ of the submodule. Include ranks zero and one and the zero submodule.",
+        "deps": [
+          "lem-maximal-divisor-pivot-for-pid-submodules",
+          "def-invariant-basis-number-and-rank-of-a-free-module",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-submodules-of-finite-free-pid-modules-are-free",
+        "kind": "corollary",
+        "title": "A submodule of a free module of finite rank over a PID is free of no larger rank",
+        "strategy": "Read the displayed basis $a_1e_1,\\ldots,a_re_r$ from the simultaneous-basis theorem. Its length satisfies $r\\le n$, and invariant basis number makes both ranks well defined. The zero submodule has the empty basis.",
+        "deps": [
+          "thm-simultaneous-basis-theorem-for-pid-submodules",
+          "thm-nonzero-commutative-rings-have-invariant-basis-number"
+        ]
+      },
+      {
+        "id": "def-invariant-factors-and-elementary-divisors-of-a-pid-module",
+        "kind": "definition",
+        "title": "Invariant factors and elementary divisors of a finitely generated module over a PID",
+        "deps": [
+          "def-direct-sum-of-a-family-of-modules",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-primary-component-of-a-module-over-a-domain",
+          "def-divisibility-and-associates-in-a-domain"
+        ]
+      },
+      {
+        "id": "thm-invariant-factor-decomposition-over-a-pid",
+        "kind": "theorem",
+        "title": "Invariant-factor decomposition of a finitely generated module over a PID",
+        "strategy": "Choose finitely many generators of $M$ and the induced surjection $R^n\\to M$. Its kernel is a submodule of a finite free module, so simultaneous bases put it in the form generated by $a_1e_1,\\ldots,a_re_r$ with $a_1\\mid\\cdots\\mid a_r$. Quotienting gives the direct sum of $R/(a_i)$ and a free part; remove unit factors but retain zero and empty cases. This proves existence only; uniqueness is established later.",
+        "deps": [
+          "def-invariant-factors-and-elementary-divisors-of-a-pid-module",
+          "thm-simultaneous-basis-theorem-for-pid-submodules",
+          "thm-first-isomorphism-theorem-modules",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "cor-finitely-generated-torsion-free-modules-over-a-pid-are-free",
+        "kind": "corollary",
+        "title": "Every finitely generated torsion-free module over a PID is free",
+        "strategy": "In the invariant-factor decomposition, every nonzero cyclic quotient $R/(a_i)$ is torsion. Torsion-freeness forces all such summands to vanish, leaving only the finite free part. Include the zero module and unit invariant factors.",
+        "deps": [
+          "thm-invariant-factor-decomposition-over-a-pid",
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "cor-torsion-splits-from-the-free-part-over-a-pid",
+        "kind": "corollary",
+        "title": "A finitely generated PID module is its torsion submodule direct-summed with a finite free module",
+        "strategy": "Identify the torsion elements in the invariant-factor decomposition as exactly the cyclic quotient summands; the free summand is torsion-free because the ring is a domain. Thus $M\\cong\\operatorname{Tor}(M)\\oplus R^r$. Explain that the complement need not be canonical and handle $r=0$ and zero torsion.",
+        "deps": [
+          "prop-torsion-and-primary-components-are-submodules-over-a-domain",
+          "thm-invariant-factor-decomposition-over-a-pid",
+          "def-free-module-on-a-set-and-standard-basis"
+        ]
+      },
+      {
+        "id": "lem-coprime-cyclic-pid-quotients-split",
+        "kind": "lemma",
+        "title": "Coprime cyclic quotients over a PID split by the Chinese remainder map",
+        "strategy": "For coprime $a,b$, use a Bezout identity $ra+sb=1$ to prove the map $R/(ab)\\to R/(a)\\oplus R/(b)$ is injective and surjective, giving an explicit inverse. Extend by finite induction to pairwise coprime factors. Check units, zero quotients, and the empty family.",
+        "deps": [
+          "def-principal-ideal-domain",
+          "def-quotient-module",
+          "thm-first-isomorphism-theorem-modules"
+        ]
+      },
+      {
+        "id": "thm-primary-decomposition-and-elementary-divisor-form-over-a-pid",
+        "kind": "theorem",
+        "title": "Primary decomposition and elementary-divisor form for finitely generated PID modules",
+        "strategy": "Factor each nonzero invariant factor into prime powers using the PID-to-UFD theorem. The coprime cyclic-quotient lemma splits each $R/(a_i)$ into prime-power cyclic summands. Group summands by associate prime to obtain the direct sum of $p$-primary components, and reverse the construction by aligning prime powers into divisibility columns. Keep the free part separate and cover the zero torsion module.",
+        "deps": [
+          "thm-invariant-factor-decomposition-over-a-pid",
+          "thm-principal-ideal-domains-are-unique-factorisation-domains",
+          "lem-coprime-cyclic-pid-quotients-split",
+          "def-invariant-factors-and-elementary-divisors-of-a-pid-module",
+          "prop-torsion-and-primary-components-are-submodules-over-a-domain"
+        ]
+      },
+      {
+        "id": "lem-p-power-torsion-dimensions-recover-elementary-divisors",
+        "kind": "lemma",
+        "title": "$p$-power torsion dimensions recover the elementary divisors of a PID module",
+        "strategy": "For irreducible $p$, prove $R/(p)$ is a field by the PID Bezout argument. On a cyclic summand $R/(p^e)$, compute the $R/(p)$-dimension of $p^{k-1}M[p^k]$ as one exactly when $e\\ge k$ and zero otherwise. Add dimensions over direct sums; the resulting sequence counts elementary divisors of exponent at least $k$ and its successive differences recover each exponent multiplicity. Free summands contribute zero. Check $k=1$ and the zero module.",
+        "deps": [
+          "thm-primary-decomposition-and-elementary-divisor-form-over-a-pid",
+          "lem-irreducibles-are-prime-in-a-principal-ideal-domain",
+          "thm-principal-ideal-domains-are-unique-factorisation-domains",
+          "def-dimension"
+        ]
+      },
+      {
+        "id": "thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid",
+        "kind": "theorem",
+        "title": "Uniqueness of invariant factors and elementary divisors over a PID",
+        "strategy": "An isomorphism preserves the torsion submodule and the free quotient, so invariant basis number recovers the free rank. For every associate prime and every positive $k$, the preceding dimension is intrinsic and recovers the multiplicity of $R/(p^k)$. Hence elementary divisors are unique up to associates and order; aligning their prime-power columns uniquely reconstructs the invariant factors. Prove the converse classification and include torsion-free and zero modules.",
+        "deps": [
+          "lem-p-power-torsion-dimensions-recover-elementary-divisors",
+          "thm-primary-decomposition-and-elementary-divisor-form-over-a-pid",
+          "thm-nonzero-commutative-rings-have-invariant-basis-number",
+          "cor-torsion-splits-from-the-free-part-over-a-pid"
+        ]
+      },
+      {
+        "id": "def-free-rank-of-a-finitely-generated-pid-module",
+        "kind": "definition",
+        "title": "The free rank of a finitely generated module over a PID",
+        "deps": [
+          "thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid",
+          "def-invariant-basis-number-and-rank-of-a-free-module"
+        ]
+      },
+      {
+        "id": "prop-fraction-field-dimension-recovers-pid-module-rank",
+        "kind": "proposition",
+        "title": "Extension to the fraction field recovers the free rank of a finitely generated PID module",
+        "strategy": "Let $Q=\\operatorname{Frac}(R)$ and apply extension of scalars to the decomposition $M\\cong\\operatorname{Tor}(M)\\oplus R^r$. Every cyclic torsion summand $R/(a)$ vanishes after tensoring with $Q$, since the nonzero $a$ becomes invertible, while $Q\\otimes_R R^r\\cong Q^r$. Therefore $\\dim_Q(Q\\otimes_R M)=r$. Include the zero module, zero free rank, and pure free and pure torsion cases.",
+        "deps": [
+          "def-free-rank-of-a-finitely-generated-pid-module",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "def-restriction-and-extension-of-scalars",
+          "thm-unit-isomorphisms-for-module-tensor-products",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "def-dimension",
+          "cor-torsion-splits-from-the-free-part-over-a-pid"
+        ]
+      },
+      {
+        "id": "def-matrix-equivalence-and-smith-normal-form-over-a-pid",
+        "kind": "definition",
+        "title": "Matrix equivalence and Smith normal form over a PID",
+        "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "def-principal-ideal-domain"
+        ]
+      },
+      {
+        "id": "def-determinantal-divisors-of-a-matrix-over-a-pid",
+        "kind": "definition",
+        "title": "Determinantal divisors from the minors of a matrix over a PID",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-generated-and-principal-ideals",
+          "def-principal-ideal-domain"
+        ]
+      },
+      {
+        "id": "thm-smith-normal-form-existence-over-a-pid",
+        "kind": "theorem",
+        "title": "Every matrix over a PID has a Smith normal form",
+        "strategy": "View a rectangular matrix as a homomorphism between finite free modules. Its image is finite free; apply the simultaneous-basis theorem to align the image in the codomain. The exact sequence from the domain onto the free image splits, so a basis of the kernel together with chosen lifts of the aligned image basis gives a domain basis in which the matrix is diagonal with divisibility chain. Include zero-sized matrices, the zero map, and rectangular rank deficiency. This is an existence proof over a PID, not a Euclidean algorithm.",
+        "deps": [
+          "def-matrix-equivalence-and-smith-normal-form-over-a-pid",
+          "thm-simultaneous-basis-theorem-for-pid-submodules",
+          "thm-splitting-lemma-for-modules",
+          "cor-free-modules-are-projective-and-flat",
+          "thm-first-isomorphism-theorem-modules"
+        ]
+      },
+      {
+        "id": "thm-smith-normal-form-uniqueness-via-determinantal-divisors",
+        "kind": "theorem",
+        "title": "Smith normal form is unique through the gcds of its minors",
+        "strategy": "Use determinant multilinearity to show multiplication on either side by an invertible matrix preserves the ideal generated by all $k$-minors, applying the inverse for the reverse containment. For a Smith diagonal matrix, the $k$th determinantal divisor is associate to the product of the first $k$ nonzero diagonal entries. Successive quotients recover every entry up to a unit and the first zero determinantal divisor recovers the rank. Handle $k=0$, zero matrices, and rectangular endpoints.",
+        "deps": [
+          "def-determinantal-divisors-of-a-matrix-over-a-pid",
+          "thm-smith-normal-form-existence-over-a-pid",
+          "thm-determinant-is-the-unique-normalized-alternating-multilinear-function"
+        ]
+      },
+      {
+        "id": "prop-abelian-groups-are-z-modules",
+        "kind": "proposition",
+        "title": "Abelian groups and $\\mathbb Z$-modules have the same objects and morphisms",
+        "strategy": "Use the published integer-power construction and exponent laws in additive notation: for an abelian group $G$, $ng$ is repeated addition when $n>0$, is $0$ when $n=0$, and is the additive inverse of the corresponding positive multiple when $n<0$. The exponent laws verify the module axioms over the published integer ring. Prove uniqueness from $1g=g$ and additivity in the integer variable. Additivity shows that a group homomorphism preserves every integer multiple, so group homomorphisms are exactly $\\mathbb Z$-linear maps. Subgroups are therefore exactly $\\mathbb Z$-submodules; generated subobjects, cyclicity, finite generation, and quotient objects consequently agree. Include the trivial group, the empty generating set, zero and negative scalars, and the zero subgroup.",
+        "deps": [
+          "thm-int-comm-ring",
+          "def-group",
+          "def-group-power",
+          "lem-group-power-laws",
+          "def-group-homomorphism",
+          "def-left-and-right-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-subgroup",
+          "cor-subgroups-of-abelian-groups-are-normal",
+          "def-submodule",
+          "def-generated-subgroup",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-quotient-group",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules",
+        "kind": "corollary",
+        "title": "The fundamental theorem of finitely generated abelian groups from PID modules",
+        "strategy": "Use the integer ring theorem and multiplicative cancellation to identify $\\mathbb Z$ as an integral domain. Every ideal is an additive subgroup, so the subgroup classification makes it principal and hence makes $\\mathbb Z$ a PID. Apply the abelian-group/$\\mathbb Z$-module dictionary before specializing the invariant-factor and elementary-divisor theorem. Obtain a unique free part $\\mathbb Z^r$ and a unique finite torsion part in both canonical forms. Explain why finitely generated torsion abelian groups are finite and include $r=0$ and the trivial group.",
+        "deps": [
+          "prop-abelian-groups-are-z-modules",
+          "thm-int-comm-ring",
+          "lem-int-cancellation",
+          "thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-principal-ideal-domain"
+        ]
+      },
+      {
+        "id": "prop-pid-module-classification-agrees-with-finite-abelian-group-classification",
+        "kind": "proposition",
+        "title": "The PID-module and finite-abelian-group classifications have the same canonical data",
+        "strategy": "For a finite abelian group, the free rank in the PID-module theorem is zero. Compare the definitions of its $p$-primary components, elementary divisors, and invariant factors with the published group-theoretic definitions. Uniqueness on both sides forces identical prime powers and identical divisibility chains, in both directions. Include the trivial group.",
+        "deps": [
+          "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules",
+          "thm-fundamental-theorem-of-finite-abelian-groups-elementary-divisor-form",
+          "thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form",
+          "def-elementary-divisor-data-for-a-finite-abelian-group",
+          "def-invariant-factor-data-for-a-finite-abelian-group"
+        ]
+      },
+      {
+        "id": "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant",
+        "kind": "corollary",
+        "title": "The index of a full-rank subgroup of $\\mathbb Z^n$ is the absolute determinant of a generating matrix",
+        "strategy": "Put a Smith normal form $PAQ=D$ on the generating matrix, use invertibility over $\\mathbb Z$ to replace $L$ by $D\\mathbb Z^n$, identify $\\mathbb Z^n/D\\mathbb Z^n$ with the direct sum of the $\\mathbb Z/d_i\\mathbb Z$, compare the order with $|\\det A|=|\\det D|$, and get the converse from the simultaneous basis theorem, which writes any subgroup as a column lattice.",
+        "deps": [
+          "thm-smith-normal-form-existence-over-a-pid",
+          "def-matrix-equivalence-and-smith-normal-form-over-a-pid",
+          "thm-simultaneous-basis-theorem-for-pid-submodules",
+          "prop-abelian-groups-are-z-modules",
+          "thm-determinant-multiplicative",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "thm-determinant-of-a-triangular-matrix",
+          "lem-units-of-z",
+          "thm-first-isomorphism-theorem-modules",
+          "thm-int-comm-ring",
+          "lem-int-cancellation",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-principal-ideal-domain"
+        ]
+      },
+      {
+        "id": "def-companion-matrix-of-a-monic-polynomial",
+        "kind": "definition",
+        "title": "The companion matrix of a monic polynomial",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "def-polynomial-module-of-an-endomorphism",
+        "kind": "definition",
+        "title": "The $F[x]$-module $V_T$ of an endomorphism",
+        "deps": [
+          "def-left-and-right-modules",
+          "def-polynomial-evaluation-at-an-endomorphism"
+        ]
+      },
+      {
+        "id": "prop-polynomial-module-is-finitely-generated-torsion-with-minimal-annihilator",
+        "kind": "proposition",
+        "title": "For finite-dimensional $V$, $V_T$ is finitely generated and torsion, with annihilator generated by the minimal polynomial",
+        "strategy": "Any finite $F$-basis of $V$ generates $V_T$ because constants lie in $F[x]$. The minimal polynomial annihilates every vector, so the module is torsion; the annihilator ideal of the whole module is exactly the set of polynomials $p$ with $p(T)=0$, whose monic generator is $\\mu_T$. Include the zero vector space, where the generator and characteristic polynomial are $1$.",
+        "deps": [
+          "def-polynomial-module-of-an-endomorphism",
+          "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism",
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "def-invariant-factors-and-elementary-divisors-of-an-endomorphism",
+        "kind": "definition",
+        "title": "Invariant factors and elementary divisors of an endomorphism",
+        "deps": [
+          "def-invariant-factors-and-elementary-divisors-of-a-pid-module",
+          "def-polynomial-module-of-an-endomorphism",
+          "cor-polynomial-ring-over-a-field-is-a-pid"
+        ]
+      },
+      {
+        "id": "thm-rational-canonical-form-existence-and-uniqueness",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of rational canonical form",
+        "strategy": "Apply the invariant-factor theorem to the finitely generated torsion $F[x]$-module $V_T$. Each summand $F[x]/(f_i)$ has the power basis on which multiplication by $x$ is the companion matrix $C(f_i)$, producing a block diagonal matrix with $f_1\\mid\\cdots\\mid f_r$. Module uniqueness makes the monic $f_i$ unique, and change of basis gives similarity. Include dimension zero and constant unit factors.",
+        "deps": [
+          "def-invariant-factors-and-elementary-divisors-of-an-endomorphism",
+          "prop-polynomial-module-is-finitely-generated-torsion-with-minimal-annihilator",
+          "thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid",
+          "def-companion-matrix-of-a-monic-polynomial",
+          "thm-cyclic-subspace-power-basis-and-companion-matrix",
+          "thm-similarity-is-an-equivalence-relation-and-models-basis-change"
+        ]
+      },
+      {
+        "id": "cor-largest-invariant-factor-is-the-minimal-polynomial",
+        "kind": "corollary",
+        "title": "On a nonzero finite-dimensional space, the largest invariant factor is the minimal polynomial",
+        "strategy": "A polynomial annihilates the direct sum $\\bigoplus F[x]/(f_i)$ exactly when it is divisible by every $f_i$. Since $f_1\\mid\\cdots\\mid f_r$, the annihilator ideal is $(f_r)$; comparison with the module annihilator identifies $f_r=\\mu_T$ after monic normalization. State the zero space separately: its invariant-factor list is empty and its minimal polynomial is $1$, so there is no largest factor to name.",
+        "deps": [
+          "thm-rational-canonical-form-existence-and-uniqueness",
+          "prop-polynomial-module-is-finitely-generated-torsion-with-minimal-annihilator"
+        ]
+      },
+      {
+        "id": "cor-product-of-invariant-factors-is-the-characteristic-polynomial",
+        "kind": "corollary",
+        "title": "The product of the invariant factors is the characteristic polynomial",
+        "strategy": "The characteristic polynomial of the companion matrix $C(f_i)$ is $f_i$, proved by determinant expansion. The characteristic polynomial of the rational block diagonal form is their product and is similarity-invariant. Include the empty product $1$ in dimension zero.",
+        "deps": [
+          "thm-rational-canonical-form-existence-and-uniqueness",
+          "def-characteristic-polynomial-of-an-operator",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "def-companion-matrix-of-a-monic-polynomial"
+        ]
+      },
+      {
+        "id": "thm-cayley-hamilton-from-pid-module-structure",
+        "kind": "theorem",
+        "title": "Cayley-Hamilton by the PID-module structure theorem",
+        "strategy": "The largest invariant factor is $\\mu_T$ and divides the product of all invariant factors, which is $\\chi_T$. Write $\\chi_T=q\\mu_T$ and evaluate at $T$; since $\\mu_T(T)=0$, obtain $\\chi_T(T)=0$. Treat dimension zero explicitly. Add a Remark linking the published adjugate proof and describing this as a genuinely different module-theoretic route.",
+        "deps": [
+          "cor-largest-invariant-factor-is-the-minimal-polynomial",
+          "cor-product-of-invariant-factors-is-the-characteristic-polynomial",
+          "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism"
+        ]
+      },
+      {
+        "id": "lem-linear-primary-companion-block-is-similar-to-a-jordan-block",
+        "kind": "lemma",
+        "title": "A companion block for $(x-\\lambda)^e$ is similar to the Jordan block $J_e(\\lambda)$",
+        "strategy": "In $F[x]/((x-\\lambda)^e)$ use the ordered basis $1,(x-\\lambda),\\ldots,(x-\\lambda)^{e-1}$, or its reverse according to the library's Jordan convention. Multiplication by $x=\\lambda+(x-\\lambda)$ has diagonal $\\lambda$ and one adjacent string of ones, so it is a Jordan block. Compare with the power basis defining the companion matrix to obtain similarity. Check $e=1$.",
+        "deps": [
+          "def-companion-matrix-of-a-monic-polynomial",
+          "def-jordan-block-and-jordan-string",
+          "thm-similarity-is-an-equivalence-relation-and-models-basis-change"
+        ]
+      },
+      {
+        "id": "thm-jordan-canonical-form-from-pid-module-structure",
+        "kind": "theorem",
+        "title": "Jordan canonical form from the elementary divisors of $V_T$",
+        "strategy": "Assume $\\chi_T$ splits. The elementary divisors of $V_T$ are powers $(x-\\lambda)^e$. The elementary-divisor decomposition expresses $V_T$ as their cyclic direct sum, and the preceding lemma turns each multiplication-by-$x$ companion block into $J_e(\\lambda)$. Conversely a Jordan block yields the corresponding cyclic primary module. Uniqueness of elementary divisors gives uniqueness of the block multiset. Include the empty space and cross-reference the published generalized-eigenspace proof.",
+        "deps": [
+          "thm-primary-decomposition-and-elementary-divisor-form-over-a-pid",
+          "def-invariant-factors-and-elementary-divisors-of-an-endomorphism",
+          "lem-linear-primary-companion-block-is-similar-to-a-jordan-block",
+          "def-jordan-canonical-form",
+          "thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid",
+          "cor-product-of-invariant-factors-is-the-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "prop-module-and-jordan-string-block-data-agree",
+        "kind": "proposition",
+        "title": "For split characteristic polynomial, elementary divisors and Jordan strings give the same Jordan blocks",
+        "strategy": "For each eigenvalue $\\lambda$ and $k\\ge1$, compute $\\dim\\ker(T-\\lambda I)^k$ on a summand $F[x]/((x-\\lambda)^e)$ as $\\min(k,e)$. Successive differences recover the number of blocks of size at least $k$, exactly the rank/nullity invariant used by the published Jordan-string uniqueness theorem. Thus the two independently proved forms agree, including block multiplicities and the zero space.",
+        "deps": [
+          "thm-jordan-canonical-form-from-pid-module-structure",
+          "thm-jordan-form-uniqueness-from-ranks-of-powers",
+          "thm-power-ranks-determine-nilpotent-jordan-blocks"
+        ]
+      },
+      {
+        "id": "thm-matrices-are-similar-iff-their-invariant-factors-agree",
+        "kind": "theorem",
+        "title": "Two matrices are similar exactly when their invariant factors agree",
+        "strategy": "Similarity identifies the two polynomial modules by the same change-of-basis map, so module uniqueness gives equal invariant factors. Conversely equal invariant factors give the same rational canonical block matrix, and each original matrix is similar to it. Prove both directions over an arbitrary field, with no splitting hypothesis, and include zero-sized matrices.",
+        "deps": [
+          "thm-rational-canonical-form-existence-and-uniqueness",
+          "def-invariant-factors-and-elementary-divisors-of-an-endomorphism",
+          "def-similar-matrices"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111,
+    "id": "modules-over-a-pid-and-canonical-forms-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Modules over a Principal Ideal Domain and the Canonical Forms — Examples",
+    "companion": "modules-over-a-pid-and-canonical-forms",
+    "requires": [
+      "modules-over-a-pid-and-canonical-forms"
+    ],
+    "items": [
+      {
+        "id": "prop-smith-normal-form-algorithm-over-a-euclidean-domain",
+        "kind": "proposition",
+        "title": "Euclidean row and column reduction computes Smith normal form",
+        "strategy": "Over a Euclidean domain, use elementary row and column operations to move a nonzero entry of least Euclidean value into the pivot. Division with remainder strictly lowers the pivot until it divides its row and column; if it fails to divide another entry, combine that entry into the pivot and descend again. Clear the row and column, recurse on the remaining rectangle, and repair adjacent diagonal entries by gcd/lcm operations to obtain the divisibility chain. Prove termination and include zero and empty matrices. Contrast this algorithm with the nonconstructive PID existence proof.",
+        "deps": [
+          "def-euclidean-domain",
+          "def-matrix-equivalence-and-smith-normal-form-over-a-pid",
+          "thm-smith-normal-form-existence-over-a-pid"
+        ]
+      },
+      {
+        "id": "ex-smith-normal-form-of-an-explicit-integer-matrix",
+        "kind": "example",
+        "title": "Smith normal form of an explicit three-by-three integer matrix",
+        "strategy": "For $A=\\begin{psmallmatrix}2&1&0\\\\4&4&6\\\\2&2&6\\end{psmallmatrix}$, carry out integer elementary row and column operations to obtain $\\operatorname{diag}(1,2,6)$. Independently check that the gcds of the entries, two-by-two minors, and determinant are $1,2,12$, so the determinantal-divisor uniqueness theorem confirms the result. Interpret the cokernel as $\\mathbb Z/2\\oplus\\mathbb Z/6$.",
+        "deps": [
+          "prop-smith-normal-form-algorithm-over-a-euclidean-domain",
+          "thm-smith-normal-form-uniqueness-via-determinantal-divisors",
+          "thm-invariant-factor-decomposition-over-a-pid"
+        ]
+      },
+      {
+        "id": "ex-abelian-groups-of-order-three-hundred-sixty-in-both-canonical-forms",
+        "kind": "example",
+        "title": "The abelian groups of order $360$ in elementary-divisor and invariant-factor form",
+        "strategy": "Use $360=2^3 3^2 5$ and the partitions of the exponents. List the six elementary-divisor combinations and align their prime-power columns to obtain the invariant-factor forms $\\mathbb Z/360$, $\\mathbb Z/3\\oplus\\mathbb Z/120$, $\\mathbb Z/2\\oplus\\mathbb Z/180$, $\\mathbb Z/6\\oplus\\mathbb Z/60$, $\\mathbb Z/2\\oplus\\mathbb Z/2\\oplus\\mathbb Z/90$, and $\\mathbb Z/2\\oplus\\mathbb Z/6\\oplus\\mathbb Z/30$. Verify every product and divisibility chain.",
+        "deps": [
+          "prop-pid-module-classification-agrees-with-finite-abelian-group-classification",
+          "def-partition-of-a-positive-integer"
+        ]
+      },
+      {
+        "id": "ex-z-squared-modulo-two-diagonal-relations-is-cyclic-of-order-six",
+        "kind": "example",
+        "title": "$\\mathbb Z^2/\\langle(2,0),(0,3)\\rangle$ is cyclic of order six",
+        "strategy": "The relation matrix is $\\operatorname{diag}(2,3)$. Use coprime row and column operations to obtain Smith form $\\operatorname{diag}(1,6)$, hence the quotient is $\\mathbb Z/6$. Cross-check with $\\mathbb Z/2\\oplus\\mathbb Z/3$ and the explicit generator represented by $(1,1)$.",
+        "deps": [
+          "thm-smith-normal-form-existence-over-a-pid",
+          "lem-coprime-cyclic-pid-quotients-split",
+          "thm-invariant-factor-decomposition-over-a-pid"
+        ]
+      },
+      {
+        "id": "ex-rational-canonical-form-of-an-explicit-four-by-four-matrix",
+        "kind": "example",
+        "title": "Rational canonical form of an explicit four-by-four matrix",
+        "strategy": "Take the block matrix $A=C(x-1)\\oplus C((x-1)(x^2+1))$ over $\\mathbb Q$ and write it entrywise. Compute the polynomial module as $\\mathbb Q[x]/(x-1)\\oplus\\mathbb Q[x]/((x-1)(x^2+1))$, verify the divisibility chain, and recover characteristic polynomial $(x-1)^2(x^2+1)$ and minimal polynomial $(x-1)(x^2+1)$. The matrix is already in rational canonical form, making every block convention visible.",
+        "deps": [
+          "thm-rational-canonical-form-existence-and-uniqueness",
+          "cor-largest-invariant-factor-is-the-minimal-polynomial",
+          "cor-product-of-invariant-factors-is-the-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "ex-rational-and-jordan-forms-of-one-matrix-over-q-and-c",
+        "kind": "example",
+        "title": "One matrix in rational form over $\\mathbb Q$ and Jordan form after adjoining its roots",
+        "strategy": "Use the preceding four-by-four matrix. Over $\\mathbb Q$ retain its two invariant-factor companion blocks. Over a field containing $i$, factor the elementary divisors into two copies of $x-1$ and one each of $x-i$ and $x+i$, yielding the diagonal Jordan block multiset $1,1,i,-i$. Check that scalar extension changes the elementary divisors but not the characteristic or minimal polynomial identities.",
+        "deps": [
+          "ex-rational-canonical-form-of-an-explicit-four-by-four-matrix",
+          "thm-jordan-canonical-form-from-pid-module-structure",
+          "prop-module-and-jordan-string-block-data-agree"
+        ]
+      },
+      {
+        "id": "ex-real-quarter-turn-has-rational-form-but-no-real-jordan-form",
+        "kind": "example",
+        "title": "The real quarter-turn has rational canonical form but no real Jordan form",
+        "strategy": "For $A=\\begin{psmallmatrix}0&-1\\\\1&0\\end{psmallmatrix}$ over $\\mathbb R$, show $V_A$ is cyclic with invariant factor $x^2+1$, so $A$ is its own companion block in rational canonical form. Since $x^2+1$ does not split over $\\mathbb R$, the published criterion forbids a real Jordan form. After adjoining a root, the module proof gives the two one-dimensional Jordan blocks.",
+        "deps": [
+          "thm-rational-canonical-form-existence-and-uniqueness",
+          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits",
+          "thm-jordan-canonical-form-from-pid-module-structure"
+        ]
+      },
+      {
+        "id": "ex-polynomial-module-of-a-two-by-two-operator",
+        "kind": "example",
+        "title": "The polynomial module of a two-by-two operator",
+        "strategy": "For $T=\\begin{psmallmatrix}0&-2\\\\1&0\\end{psmallmatrix}$ on $\\mathbb Q^2$, show $e_1,Te_1$ is a basis and $(T^2+2I)e_1=0$. The vector annihilator is $x^2+2$, so $V_T\\cong\\mathbb Q[x]/(x^2+2)$, the invariant factor is $x^2+2$, and the displayed matrix is its companion matrix. Verify torsion, finite generation, minimal polynomial, and characteristic polynomial directly.",
+        "deps": [
+          "def-polynomial-module-of-an-endomorphism",
+          "prop-polynomial-module-is-finitely-generated-torsion-with-minimal-annihilator",
+          "thm-cyclic-subspace-power-basis-and-companion-matrix",
+          "cor-largest-invariant-factor-is-the-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "fs-characteristic-and-minimal-polynomials-determine-similarity",
+        "kind": "false-statement",
+        "title": "FALSE: characteristic and minimal polynomials determine similarity",
+        "strategy": "Compare $J_2(0)\\oplus J_2(0)$ with $J_2(0)\\oplus J_1(0)\\oplus J_1(0)$. Both have characteristic polynomial $x^4$ and minimal polynomial $x^2$, but their invariant factors, equivalently their ranks, differ, so they are not similar. Add a Remark agreeing with the published B-page witness without citing it as a dependency.",
+        "deps": [
+          "thm-matrices-are-similar-iff-their-invariant-factors-agree",
+          "cor-largest-invariant-factor-is-the-minimal-polynomial",
+          "cor-product-of-invariant-factors-is-the-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "fs-finitely-generated-modules-over-domains-split-into-cyclic-modules",
+        "kind": "false-statement",
+        "title": "FALSE: every finitely generated module over a domain is a direct sum of cyclic modules",
+        "strategy": "Use the ideal $(2,x)$ as a two-generated torsion-free $\\mathbb Z[x]$-module. Every two nonzero elements $a,b$ in this ideal satisfy the nontrivial relation $b a-a b=0$, so it cannot contain a direct sum of two nonzero cyclic torsion-free modules; if it were one cyclic module, the ideal would be principal. Show $(2,x)$ is not principal because a generator would divide both $2$ and $x$, hence be a unit, while $1\\notin(2,x)$. This isolates the PID hypothesis.",
+        "deps": [
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-generated-and-principal-ideals",
+          "def-annihilator-and-torsion-of-a-module",
+          "thm-invariant-factor-decomposition-over-a-pid",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "fs-torsion-free-modules-over-pids-are-free-without-finite-generation",
+        "kind": "false-statement",
+        "title": "FALSE: every torsion-free module over a PID is free",
+        "strategy": "The additive group $\\mathbb Q$ is a torsion-free $\\mathbb Z$-module. If it had a nonempty basis and $b$ were a basis element, express $b/2$ as a finite integer combination of basis elements; multiplying by two makes the coefficient of $b$ both odd and even, contradicting uniqueness. The zero-basis case cannot span $\\mathbb Q$. Thus finite generation is essential.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "thm-rat-field",
+          "cor-finitely-generated-torsion-free-modules-over-a-pid-are-free"
+        ]
+      },
+      {
+        "id": "fs-elementary-divisors-determine-free-rank",
+        "kind": "false-statement",
+        "title": "FALSE: elementary divisors determine the free rank",
+        "strategy": "The free modules $R$ and $R^2$ over any nonzero PID have no torsion elementary divisors, but invariant basis number gives different free ranks. This shows why the free rank is separate data in the structure theorem. Use $R=\\mathbb Z$ as a concrete witness and include rank zero for comparison.",
+        "deps": [
+          "def-free-rank-of-a-finitely-generated-pid-module",
+          "def-invariant-factors-and-elementary-divisors-of-a-pid-module",
+          "thm-nonzero-commutative-rings-have-invariant-basis-number"
+        ]
+      }
+    ]
+  }
+]

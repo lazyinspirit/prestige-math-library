@@ -1,0 +1,21 @@
+{
+  "role": "tau",
+  "label": "repair-v2",
+  "run": "frontier-17",
+  "covers": [
+    "all"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T11:48:09.369Z",
+  "ended_at": "2026-08-23T12:00:58.251Z",
+  "ms": 768882,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/tau-repair-v2.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-17-dispatch/tau-repair-v2.prompt.md",
+  "tail": "Receipt written to `research/frontier-17-tau.json`. Two findings repaired, eight blocked.\n\n**Repaired**\n- `items/lem-transitive-subgroups-of-s-four-and-the-resolvent-action.md:34` — `$|H\\cap V_4|$` → `$\\lvert H\\cap V_4\\rvert$`. The two bare pipes were splitting the header into six cells against a four-cell delimiter row, so remark-gfm rejected the table and emitted raw pipes. Now emits one `<table>`, 4 `<th>`, 20 `<td>`.\n- `items/fs-spherical-coordinates-are-globally-injective.md:80` — the inline 3×3 Jacobian moved to a `$$` display block after the step (corpus pattern, cf. `cor-multivariable-taylor-formula-with-peano-remainder.md`), step number and `[step 1.3, L1, L5, algebra]` tag unchanged. Renders whole inside its delimiters.\n\nRepo-wide gates pass: precheck 4924/0, depcheck, fwdcheck, extcheck, rendercheck, prosecheck, depsource. The Tau guard reports no scope, content-loss, frontmatter, heading, step or untracked-file problems — its only eight lines are the blocked rows.\n\n**Blocked (S-002…S-009)** — and I did not take Sigma's renderer-side diagnosis on trust. I rendered the exact TeX for S-002/003/004/005/006 with the app's own KaTeX 0.18.1 and `katex.min.css` in the same headless Edge build that produced the captures: every construct renders correctly. So there is no source defect in those files.\n\nTwo things that go beyond Sigma's receipt:\n\n1. **It is not a capture artefact.** S-004 and S-005 reproduce on the live site — `alphabetamath.cc/real-analysis/line-integrals-and-the-gradient-theorem-examples` renders `\\|q-p\\|_2` as `‖q − p‖2` and `\\ne` as a detached `/=`, on already-published legacy content. Readers are seeing this now.\n2. **It is new, and it is app-side.** frontier-16's Sigma approved 22 captures on 2026-08-21 at app HEAD `f7613cb` with zero findings; frontier-17 captured 2026-08-23 at `4882f89`. The only dependency movement between them is `next` 16.2.9 → 16.2.12 (katex unchanged at 0.18.1). The symptom set — collapsed `\\frac` vlists, detached `\\not` overlay, baseline-height subscripts, overlapping `_2^2`, unstyled tables, inline math wrapping mid-atom — is what happens when `katex.min.css` (imported in `web/app/library/layout.tsx`) loses the cascade to Tailwind on the library route.\n\nThat fix is in the app repo and outside Tau's authority, so Step 10 stops here as designed. `research/frontier-17-tau-rejudge-targets.json` was not written (the guard exits 1 on any blocked row), so the two repaired items still owe their paired rejudge whenever the run resumes."
+}
