@@ -1336,14 +1336,21 @@ whole-wave coverage run or sweep.
 
 **`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
 `level-coverage.mjs`, `judge-compare.mjs`, `apply-judge-stamps.mjs` and
-`run-wave.mjs` — six tools, and the lineup table is duplicated a seventh time in
-`preflight.mjs`, which must not import a tool it is checking is runnable):
-`deepseek+opus` for both the build and all future audit sweeps (owner,
-2026-08-23). Records from an
-unselected lane remain readable evidence only. Every one of those tools defaults
-to the same value; a table that carries only today's answer is this repo's oldest
-defect class, so all three keys — `deepseek+opus`, `deepseek+terra`,
-`deepseek+sonnet` — stay in all of them. See §5.
+`run-wave.mjs`): `deepseek+opus` for both the build and all future audit sweeps
+(owner, 2026-08-23). Records from an unselected lane remain readable evidence
+only. All three keys — `deepseek+opus`, `deepseek+terra`, `deepseek+sonnet` —
+stay resolvable, because a table carrying only today's answer is this repo's
+oldest defect class. See §5.
+
+**Those six tools now IMPORT the table rather than redeclaring it**
+(2026-08-23; §3.13). They each carried their own copy until then, and one of the
+six fell a lane change behind: `judge-compare.mjs` missed the 2026-08-17 switch
+that the other five carried, so frontier-15's step-10 report had to be computed
+by hand — the reporting tool was the one tool that could not read the run it
+reports on. `preflight.mjs` keeps a literal copy **on purpose**, because it must
+not import a tool it is checking is runnable, and
+`tools/autopilot/test/model-registry.test.mts` reads that copy from source and
+fails if it disagrees with the registry.
 
 **`judge-sweep.mjs --manifests`** (2026-08-02): audit sweeps supply the batch
 manifests, not `--pages` — the sweep's `--pages` universe is plan-spec's
@@ -1385,6 +1392,28 @@ labelling those `not-building` is what stops every future session re-proposing
 them.
 
 ### 3.13 Environment resolution and preflight (2026-08-03)
+
+**`tools/models.mjs` — the model registry (2026-08-23).** One file owns every
+model id, the runner that can spawn it, its family, the `LANES` assignment
+naming which job each model does, and `JUDGE_LINEUPS`. `dispatch.mjs` builds each
+role from `lane('agentic')` or `lane('crossFamily')`, so a role cannot name a
+model its runner cannot spawn; the six judge-lineup tools import the map.
+
+*Failure it prevents:* the 2026-08-23 Sol/Terra → Opus swap changed no logic at
+all and still had to touch twelve role entries plus six duplicate copies of one
+three-key table. An earlier swap left `judge-compare.mjs` a lane behind, and
+frontier-15's step-10 report was computed by hand as a result. A model swap is
+now one edit to `LANES`; a new model id is one edit to `MODELS`.
+
+*What it deliberately excludes:* caps, sandboxes, effort, web access and working
+directories stay in `dispatch.mjs`, because they belong to the role and must not
+follow a lane swap. `preflight.mjs` keeps a literal lineup copy on purpose — it
+must not import a tool it is checking is runnable — and
+`tools/autopilot/test/model-registry.test.mts` reads that copy from source and
+fails on drift, asserts the `[1m]` context suffix survives, asserts no lineup
+pairs a model with itself, and asserts `crossFamily` never resolves to the same
+family as `agentic`. That last one is the guarantee a lane swap can silently
+delete rather than rename.
 
 This repo has no `node_modules` of its own. tsx, the normative precheck source
 and KaTeX all live in the `prestige-intelligence` checkout next door, and every

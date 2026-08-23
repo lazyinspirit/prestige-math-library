@@ -4,6 +4,7 @@
 // later null on the same prompt cannot erase an earlier complete verdict; a
 // later true/false verdict always remains decisive.
 import { existsSync, readFileSync } from "node:fs";
+import { JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 
 const argv = process.argv.slice(2);
 const ledger = argv[0];
@@ -17,16 +18,15 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 // JUDGE_LINEUP mirrors tools/judge.mts, judge-sweep.mjs and level-coverage.mjs.
 // The lineup is resolved, never assumed; `lineup` is emitted so a saved report
 // says which two models it actually compared.
-const JUDGE_LINEUPS = Object.freeze({
-  // The frontier-15 step-10 report was computed BY HAND because this table
-  // missed the 2026-08-17 lane switch that judge.mts, judge-sweep.mjs,
-  // level-coverage.mjs and run-wave.mjs all carried — the reporting tool was
-  // the one tool that could not read the run it reports on.
-  "deepseek+sonnet": ["deepseek-v4-pro", "claude-sonnet-5"],
-  "deepseek+terra": ["deepseek-v4-pro", "gpt-5.6-terra"],
-  "deepseek+opus": ["deepseek-v4-pro", "claude-opus-5[1m]"],
-});
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
+// THE COPY THAT USED TO LIVE HERE IS WHY tools/models.mjs EXISTS. The
+// frontier-15 step-10 report was computed BY HAND because this table missed the
+// 2026-08-17 lane switch that judge.mts, judge-sweep.mjs, level-coverage.mjs and
+// run-wave.mjs all carried — the reporting tool was the one tool that could not
+// read the run it reports on. It now imports the registry, so it cannot fall
+// behind again, and tools/autopilot/test/model-registry.test.mts guards the one
+// copy that remains by design (preflight.mjs, which must not import a tool it is
+// checking is runnable).
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const models = JUDGE_LINEUPS[lineupName];
 if (!models) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);

@@ -11,6 +11,7 @@ import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, 
 import { spawn } from "node:child_process";
 import { tsxLoader } from "./paths.mjs";
 import { verdictIsCurrent } from "./judge-currency.mjs";
+import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -43,14 +44,15 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
   throw new Error("--limit must be a positive integer");
 }
 
-const DEEPSEEK = "deepseek-v4-pro";
-const TERRA = "gpt-5.6-terra";
-const SONNET = "claude-sonnet-5";
-// The `[1m]` suffix is the 1M-window selector on the claude runner; see
-// tools/judge.mts. It is part of the model IDENTITY, so ledger rows, slot
-// directories and JUDGE_CONCURRENCY_* names all carry it.
-const OPUS = "claude-opus-5[1m]";
-// JUDGE_LINEUP mirrors tools/judge.mts. Historical rows are append-only evidence
+// The ids come from tools/models.mjs, the one registry. They stay named here
+// because the per-model CONCURRENCY table below keys on them, and the `[1m]`
+// suffix is part of the model IDENTITY — ledger rows, slot directories and
+// JUDGE_CONCURRENCY_* names all carry it.
+const DEEPSEEK = MODELS.deepseek.id;
+const TERRA = MODELS.terra.id;
+const SONNET = MODELS.sonnet.id;
+const OPUS = MODELS.opus.id;
+// The lineup map is the registry's too. Historical rows are append-only evidence
 // only; the child judge inherits the same env var as the sweep. Default flipped
 // to deepseek+sonnet (owner, 2026-08-17) after the Codex account behind Terra
 // was throttled mid-run, BACK to deepseek+terra (owner, 2026-08-20), and to
@@ -58,15 +60,10 @@ const OPUS = "claude-opus-5[1m]";
 // weekly limit outright. Every retired lane's rows stay as evidence; none
 // satisfies current coverage, which is per frozen context and per configured
 // lane, not per model name.
-const LINEUPS = Object.freeze({
-  "deepseek+opus": [DEEPSEEK, OPUS],
-  "deepseek+terra": [DEEPSEEK, TERRA],
-  "deepseek+sonnet": [DEEPSEEK, SONNET],
-});
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
-const supportedModels = LINEUPS[lineupName];
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
+const supportedModels = JUDGE_LINEUPS[lineupName];
 if (!supportedModels) {
-  throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
+  throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);
 }
 const models = modelsArg
   ? [...new Set(modelsArg.split(",").map((model) => model.trim()).filter(Boolean))]

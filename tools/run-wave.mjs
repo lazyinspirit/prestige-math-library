@@ -31,6 +31,7 @@ import { spawnSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
+import { DEFAULT_LINEUP } from './models.mjs';
 
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
@@ -641,9 +642,9 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       '--cost', `${DIR}/${run}-judge-cost.jsonl`,
       '--items', targets.join(','),
       // The lineup is the owner's to set and the sweep's child judges inherit
-      // whatever lands here, so an explicit env wins and the default follows
-      // tools/judge.mts rather than pinning a lineup the tools have moved off.
-    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+opus' } });
+      // whatever lands here, so an explicit env wins and the default comes from
+      // tools/models.mjs rather than pinning a lineup the tools have moved off.
+    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP } });
     journal('spend', { detail: `targeted judge sweep (${targets.length} repaired item(s)) exit ${sweep.code}` });
     if (sweep.code !== 0) halt('sweep-failed', `the judge sweep failed: ${String(sweep.out).slice(-500)}`, resumeCmd(step));
   }

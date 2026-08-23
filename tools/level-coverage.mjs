@@ -19,6 +19,7 @@ import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tsxLoader } from './paths.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -79,12 +80,8 @@ const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // which matters more after a lane change than at any other time, because a
 // level judged under deepseek+terra reads as fully covered until this map is
 // consulted. Coverage is per frozen context AND per configured lane.
-const JUDGE_LINEUPS = Object.freeze({
-  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
-  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
-});
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+opus';
+// The map is tools/models.mjs; this tool no longer keeps its own copy.
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const JUDGES = JUDGE_LINEUPS[lineupName];
 if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}`); process.exit(2); }
 // --audit: published-page audit scope (AUDIT-WORKFLOW.md). A legacy published

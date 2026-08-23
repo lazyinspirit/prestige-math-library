@@ -58,6 +58,7 @@ import { execFileSync } from 'node:child_process';
 import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -130,15 +131,11 @@ const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((l
 // all. ALL THREE keys are kept for exactly that reason — deepseek+opus
 // (2026-08-23) is the fourth lane change in five weeks, and a table that carries
 // only today's answer is the defect, not the fix.
-const LINEUPS = Object.freeze({
-  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
-  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
-});
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+opus';
-const expected = LINEUPS[lineupName];
+// The map is tools/models.mjs; this tool no longer keeps its own copy.
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
+const expected = JUDGE_LINEUPS[lineupName];
 if (!expected) {
-  console.error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(', ')}; got ${lineupName}`);
+  console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}; got ${lineupName}`);
   process.exit(2);
 }
 // A ledger a retired lane also wrote into is the normal case, not an error: rows

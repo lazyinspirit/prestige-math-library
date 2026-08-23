@@ -79,23 +79,25 @@ import { createSlotPool } from './slots.mjs';
 import { validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { unwrapClaudeEnvelope } from './judge-parse.mjs';
 
-// THE `[1m]` SUFFIX IS THE OWNER'S 1M RULE, and it is the whole of it. Unlike
-// Codex, the claude CLI has no `model_context_window` knob: the 1,000,000-token
-// variant is selected by the suffix on the model id itself, and a bare
-// `claude-opus-5` silently runs the standard window. There is no second place
-// this setting could be expressed, so a future edit that "tidies" the id away
-// deletes the context-window binding without any other symptom.
-const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5[1m]';
-const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
-// No GPT model constant lives here any more (owner, 2026-08-23). Two did:
-// SOL_MODEL (`gpt-5.6-sol`) for the authoring, Beta, reader, Alpha, refuter,
-// orchestrator, scaffolder and audit-beta/audit-alpha lanes, and TERRA_MODEL
-// (`gpt-5.6-terra`) for `mechanic`, the retired step-10 visual lane and the
-// audit `certifier`.
-// The Codex runner below still knows how to spawn them; nothing routes to it.
-const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
-const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
-void SOL_MODEL; void TERRA_MODEL; // retained for the Codex return path; unrouted
+// WHICH MODEL ANSWERS IS NOT DECIDED HERE ANY MORE (2026-08-23).
+//
+// `tools/models.mjs` is the registry: it owns every model id, the runner that
+// can spawn it, and the LANE assignment that says which job that model does.
+// A role below asks for a lane — `...lane('agentic')` — and gets back the
+// matching `{ runner, model }` pair. Moving every agent role to a different
+// model is therefore one edit to `LANES` in that file, not twelve here, and a
+// role can no longer name a model its runner cannot spawn.
+//
+// The `[1m]` suffix rule lives there too, with its warning intact: the claude
+// CLI has no `model_context_window` knob, so the 1,000,000-token variant is
+// selected by the suffix on the id and nothing else, and a bare
+// `claude-opus-5` silently runs the standard window.
+//
+// WHAT STAYS HERE, deliberately: sandbox, effort, cap, web, dir, requiresTask.
+// Those are properties of the ROLE, not of the model. The owner's instruction
+// on the 2026-08-23 swap was "just replace LLMs without changing anything
+// else"; a registry that carried caps would break that by construction.
+import { lane } from './models.mjs';
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
 //
@@ -142,8 +144,8 @@ const ROLES = Object.freeze({
   // the widest legal run into two waves for no stated reason: the 3-and-3 bound
   // exists for Alpha's attention span, not for Beta's. The reader lane matches
   // because 6a dispatches one independent reader per batch.
-  beta:         { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'one per batch, scaffolds and authors; 3 group Alphas x 3 batches' },
-  reader:       { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
+  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 9, web: true, why: 'one per batch, scaffolds and authors; 3 group Alphas x 3 batches' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 9, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
   // Alpha moved Sol -> Claude Opus 5 (owner, 2026-08-10), BACK TO SOL (owner,
   // 2026-08-20), and back to Opus 5 with every other lane (owner, 2026-08-23),
   // keeping xhigh and the 1M window throughout — now the `[1m]` model id again
@@ -189,12 +191,12 @@ const ROLES = Object.freeze({
   // ceiling the engine may use, never a quota it must spend: the accuracy win
   // comes from SCOPING a group Alpha to 3 batches, which is free, and running
   // the groups in series costs only wall clock.
-  alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
-  refuter:      { runner: 'claude', model: OPUS_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
+  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
+  refuter:      { ...lane('agentic'), sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   // AUDIT ONLY. The build has no orchestrator: every judgment it used to make
   // belongs to an Alpha, and every transition to the engine. The published-page
   // audit still runs under run-wave.mjs and still has one.
-  orchestrator: { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment in the published-page audit (AUDIT-WORKFLOW.md)' },
+  orchestrator: { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment in the published-page audit (AUDIT-WORKFLOW.md)' },
 
   // The `supervisor` role was removed 2026-08-16. It existed to take "is the
   // stage done, and what fires next" away from the orchestrator, which was the
@@ -249,7 +251,7 @@ const ROLES = Object.freeze({
   // scaffolder's brief is source research, and a lane without it does not fail —
   // it silently asserts from memory, which is the exact failure mode CLAUDE.md
   // records for the build lanes before 2026-08-11.
-  scaffolder:   { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
+  scaffolder:   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
 
   // `mechanic` (owner, 2026-08-14): "use Terra instead of Sol for tasks
   // requiring less reasoning" — for work whose difficulty is bookkeeping rather
@@ -277,7 +279,7 @@ const ROLES = Object.freeze({
   //
   // So: mechanical, post-adjudication, non-judged work only. If a task needs a
   // mathematical decision, it is not this lane's.
-  mechanic:     { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by its own lane' },
+  mechanic:     { ...lane('agentic'), sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by its own lane' },
 
   // THE STEP-10 VISUAL LANE IS GONE (owner, 2026-08-23). `sigma` (read-only
   // render adjudicator) and `tau` (repairer scoped to exact Sigma findings)
@@ -300,10 +302,10 @@ const ROLES = Object.freeze({
   // is a fresh process with no sight of the authoring context. Weigh a
   // certification accordingly — it is a second READ, not a second FAMILY, and the
   // frontier-12 self-citation failure is the precedent for what that can go wrong.
-  'audit-beta':    { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
-  'audit-alpha':   { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, dir: 'research/audit', web: true, why: 'single adjudicator at A6 and A8' },
-  certifier:       { runner: 'claude', model: OPUS_MODEL, sandbox: 'read-only',       effort: 'xhigh', cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author; needs web to check sources' },
-  'audit-refuter': { runner: 'deepseek', model: DEEPSEEK_MODEL, sandbox: 'read-only', effort: 'xhigh', cap: 8, dir: 'research/audit', requiresTask: true, why: 'adversarial proof reading on assembled context; tool-less by transport' },
+  'audit-beta':    { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
+  'audit-alpha':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 1, dir: 'research/audit', web: true, why: 'single adjudicator at A6 and A8' },
+  certifier:       { ...lane('agentic'), sandbox: 'read-only',       effort: 'xhigh', cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author; needs web to check sources' },
+  'audit-refuter': { ...lane('crossFamily'), sandbox: 'read-only', effort: 'xhigh', cap: 8, dir: 'research/audit', requiresTask: true, why: 'adversarial proof reading on assembled context; tool-less by transport' },
 });
 
 const argv = process.argv.slice(2);

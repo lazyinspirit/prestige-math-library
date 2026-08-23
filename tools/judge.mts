@@ -146,6 +146,7 @@ import { homedir } from "node:os";
 import { deepseekEnvFile } from "./paths.mjs";
 import { itemHashJudge } from "./item-hash.mjs";
 import { unwrapClaudeEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs";
+import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -191,13 +192,17 @@ const isPaymentError = (status: number, raw: string): boolean =>
 // are therefore direct DeepSeek V4 Pro and fresh Claude Opus 5 CLI processes —
 // note that the second lane is now the SAME model as the author it screens. The
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
-const DEEPSEEK_MODEL = "deepseek-v4-pro";
-const TERRA_MODEL = "gpt-5.6-terra";
-const SONNET_MODEL = "claude-sonnet-5";
-// The `[1m]` suffix IS the owner's 1M-context rule on this runner. The claude
-// CLI has no `model_context_window` knob, so a bare `claude-opus-5` silently
-// judges at the standard window — see tools/dispatch.mjs for the same note.
-const OPUS_MODEL = "claude-opus-5[1m]";
+// The ids come from tools/models.mjs, the one registry (2026-08-23). They stay
+// named here because the ROUTING below is per model — DeepSeek goes over HTTP,
+// Terra over Codex, Opus and Sonnet over fresh claude CLI processes — and that
+// mapping is this tool's business, not the registry's. Only the id is shared.
+// The registry also carries the `[1m]` rule: the claude CLI has no
+// `model_context_window` knob, so a bare `claude-opus-5` judges at the standard
+// window with no other symptom.
+const DEEPSEEK_MODEL = MODELS.deepseek.id;
+const TERRA_MODEL = MODELS.terra.id;
+const SONNET_MODEL = MODELS.sonnet.id;
+const OPUS_MODEL = MODELS.opus.id;
 // Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
 // API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
 // spelling that maps to `max`, so preserve the requested level explicitly and
@@ -241,13 +246,12 @@ const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL, OPUS_MODEL]
 // waves 0-1; the evidence is in research/audit/RESUME.md, not in memory):
 //   gpt-5.6-terra    142 fatal / 58 false pos / 1036 adjudicated — 94.4% precision
 //   deepseek-v4-pro  129 fatal / 55 false pos /  618 adjudicated — 91.1% precision
-const JUDGE_LINEUPS: Record<string, string[]> = {
-  "deepseek+opus": [DEEPSEEK_MODEL, OPUS_MODEL],
-  "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
-  "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
-};
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+opus";
-const lineup = JUDGE_LINEUPS[lineupName];
+// The map itself is tools/models.mjs. It used to be redeclared here and in five
+// other tools, and one of those six fell a lane change behind — judge-compare.mjs
+// still carries the note that frontier-15's step-10 report had to be computed by
+// hand because of it.
+const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
+const lineup = (JUDGE_LINEUPS as Record<string, readonly string[]>)[lineupName];
 if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);
   process.exit(2);
