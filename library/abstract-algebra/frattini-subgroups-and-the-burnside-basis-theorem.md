@@ -1,7 +1,7 @@
 ---
 page: frattini-subgroups-and-the-burnside-basis-theorem
 title: "Frattini Subgroups and the Burnside Basis Theorem"
-status: draft
+status: published
 items: [lem-frattini-subgroup-is-characteristic,
         cor-generation-is-detected-modulo-the-frattini-subgroup,
         def-elementary-abelian-p-group,

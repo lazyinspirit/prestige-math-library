@@ -2,7 +2,7 @@
 id: lem-boundary-of-a-solid-between-continuous-graphs-has-content-zero
 kind: lemma
 title: 'The boundary of a solid between continuous graphs over a compact Jordan base has content zero'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

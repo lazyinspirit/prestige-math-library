@@ -2,7 +2,7 @@
 id: def-fixed-field-of-an-automorphism-group
 kind: definition
 title: "The fixed field $K^G$ of a group of field automorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

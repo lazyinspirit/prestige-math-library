@@ -2,7 +2,7 @@
 id: def-surface-area-and-scalar-surface-integral-of-a-patch
 kind: definition
 title: 'Surface area and scalar surface integrals on a regular patch'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

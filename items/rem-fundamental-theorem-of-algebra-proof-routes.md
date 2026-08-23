@@ -2,7 +2,7 @@
 id: rem-fundamental-theorem-of-algebra-proof-routes
 kind: remark
 title: "The fundamental-group and minimum-modulus proofs of the fundamental theorem of algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

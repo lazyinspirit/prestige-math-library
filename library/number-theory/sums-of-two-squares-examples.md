@@ -1,7 +1,7 @@
 ---
 page: sums-of-two-squares-examples
 title: "Sums of Two Squares — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-thue-lemma-produces-a-two-square-representation,
            ex-two-square-representation-of-seventy-three-by-extended-euclid,

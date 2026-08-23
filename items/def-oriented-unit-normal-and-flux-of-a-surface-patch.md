@@ -2,7 +2,7 @@
 id: def-oriented-unit-normal-and-flux-of-a-surface-patch
 kind: definition
 title: 'Unit normal fields, orientations, and flux through a regular surface patch'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

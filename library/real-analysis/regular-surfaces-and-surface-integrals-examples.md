@@ -1,7 +1,7 @@
 ---
 page: regular-surfaces-and-surface-integrals-examples
 title: 'Regular Surfaces and Surface Integrals: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-sphere-and-hemisphere-surface-integrals,
            ex-closed-cylinder-as-a-finitely-patched-oriented-surface,

@@ -2,7 +2,7 @@
 id: ex-ellipsoid-as-a-regular-level-set
 kind: example
 title: 'A positive-definite quadratic ellipsoid is a regular level set'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size
 kind: false-statement
 title: "FALSE: all minimal generating sets of a finite group have the same size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

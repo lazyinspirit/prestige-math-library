@@ -2,7 +2,7 @@
 id: prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares
 kind: proposition
 title: "Every nonzero residue modulo an odd prime is a sum of two squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

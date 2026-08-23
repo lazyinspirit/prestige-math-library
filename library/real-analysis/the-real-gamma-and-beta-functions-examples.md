@@ -1,7 +1,7 @@
 ---
 page: the-real-gamma-and-beta-functions-examples
 title: "The Real Gamma and Beta Functions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-real-gamma-and-beta-special-values,
            ex-unit-n-ball-volumes-through-eight-from-gamma,

@@ -2,7 +2,7 @@
 id: thm-discriminant-square-criterion-for-an-alternating-galois-group
 kind: theorem
 title: "For a monic separable polynomial in characteristic not two, the Galois group lies in $A_n$ exactly when the discriminant is a square"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-cyclotomic-quartic-has-galois-group-c-four
 kind: example
 title: "$x^4+x^3+x^2+x+1$ has Galois group $C_4$ over $\\mathbb Q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

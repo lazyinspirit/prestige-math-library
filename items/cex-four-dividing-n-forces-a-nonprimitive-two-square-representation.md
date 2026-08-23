@@ -2,7 +2,7 @@
 id: cex-four-dividing-n-forces-a-nonprimitive-two-square-representation
 kind: counterexample
 title: "$68=8^2+2^2$ is representable but has no primitive two-square representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

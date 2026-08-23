@@ -1,7 +1,7 @@
 ---
 page: constant-rank-submersions-and-regular-level-sets
 title: 'Constant Rank, Submersions, Immersions and Regular Level Sets'
-status: draft
+status: published
 items: [def-differential-rank-and-constant-rank,
         def-submatrix-minors-of-a-rectangular-matrix,
         lem-matrix-rank-detected-by-nonzero-minors,

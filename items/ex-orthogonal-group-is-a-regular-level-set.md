@@ -2,7 +2,7 @@
 id: ex-orthogonal-group-is-a-regular-level-set
 kind: example
 title: 'The orthogonal group is a regular level set of dimension $n(n-1)/2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

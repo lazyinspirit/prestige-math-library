@@ -2,7 +2,7 @@
 id: fs-a-critical-value-has-a-singular-level-set
 kind: false-statement
 title: 'FALSE: a critical value must have a singular level set'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

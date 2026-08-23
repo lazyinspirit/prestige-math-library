@@ -2,7 +2,7 @@
 id: lem-created-canonical-presentations-give-a-quasi-inverse-to-the-comparison-functor
 kind: lemma
 title: "Supplied created canonical presentations give a quasi-inverse to the comparison functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

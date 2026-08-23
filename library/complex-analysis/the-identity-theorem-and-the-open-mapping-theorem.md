@@ -1,7 +1,7 @@
 ---
 page: the-identity-theorem-and-the-open-mapping-theorem
 title: "The Identity Theorem, the Maximum Principle and the Open Mapping Theorem"
-status: draft
+status: published
 items: [def-locally-injective-holomorphic-map, def-biholomorphic-map,
         lem-locally-zero-locus-clopen-holomorphic-function,
         thm-identity-theorem-holomorphic-functions,

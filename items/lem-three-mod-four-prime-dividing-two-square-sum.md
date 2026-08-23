@@ -2,7 +2,7 @@
 id: lem-three-mod-four-prime-dividing-two-square-sum
 kind: lemma
 title: "A prime congruent to $3$ modulo $4$ divides both coordinates of a divisible two-square sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

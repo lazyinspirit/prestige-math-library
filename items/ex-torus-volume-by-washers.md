@@ -2,7 +2,7 @@
 id: ex-torus-volume-by-washers
 kind: example
 title: 'A torus with major radius $R$ and minor radius $r$ has volume $2\pi^2Rr^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

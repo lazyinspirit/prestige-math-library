@@ -2,7 +2,7 @@
 id: def-finitely-patched-regular-surface-and-integrals
 kind: definition
 title: 'Finitely patched regular surfaces, their area, scalar integrals, and flux'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

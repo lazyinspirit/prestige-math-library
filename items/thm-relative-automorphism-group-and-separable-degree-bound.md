@@ -2,7 +2,7 @@
 id: thm-relative-automorphism-group-and-separable-degree-bound
 kind: theorem
 title: "$\\operatorname{Aut}(K/F)$ is a group and $|\\operatorname{Aut}(K/F)|\\le [K:F]_s\\le [K:F]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

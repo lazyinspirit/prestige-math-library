@@ -2,7 +2,7 @@
 id: cor-finite-premeasure-extension-is-unique
 kind: corollary
 title: "A finite premeasure has at most one extension to its generated sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

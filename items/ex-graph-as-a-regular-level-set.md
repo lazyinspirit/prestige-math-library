@@ -2,7 +2,7 @@
 id: ex-graph-as-a-regular-level-set
 kind: example
 title: 'The graph of a $C^k$ Euclidean map is a regular level set'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

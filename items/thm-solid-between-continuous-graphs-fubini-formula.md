@@ -2,7 +2,7 @@
 id: thm-solid-between-continuous-graphs-fubini-formula
 kind: theorem
 title: 'A solid between continuous graphs over a compact Jordan base is Jordan measurable and integrates by vertical sections'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

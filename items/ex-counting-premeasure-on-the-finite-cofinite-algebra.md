@@ -2,7 +2,7 @@
 id: ex-counting-premeasure-on-the-finite-cofinite-algebra
 kind: example
 title: "Counting premeasure on the finite-cofinite algebra induces counting outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

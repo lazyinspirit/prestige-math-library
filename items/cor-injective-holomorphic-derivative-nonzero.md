@@ -2,7 +2,7 @@
 id: cor-injective-holomorphic-derivative-nonzero
 kind: corollary
 title: "An injective holomorphic map has no critical point and is biholomorphic onto its image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

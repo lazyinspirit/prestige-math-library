@@ -1,7 +1,7 @@
 ---
 page: monadicity-and-becks-theorem-examples
 title: "Monadicity and Beck's Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-split-coequalizer-in-set,
            ex-the-canonical-presentation-of-a-monoid,

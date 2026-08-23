@@ -2,7 +2,7 @@
 id: fs-induced-outer-measures-always-agree-with-finitely-additive-data
 kind: false-statement
 title: "FALSE: the covering construction agrees with every finitely additive source function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

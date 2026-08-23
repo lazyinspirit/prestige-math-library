@@ -1,7 +1,7 @@
 ---
 page: regular-surfaces-and-surface-integrals
 title: 'Regular Surfaces and Surface Integrals'
-status: draft
+status: published
 items: [def-cross-product-in-r3,
         lem-cross-product-is-bilinear-alternating-and-orthogonal,
         thm-cross-product-norm-is-the-two-vector-gram-determinant,

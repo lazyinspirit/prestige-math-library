@@ -1,7 +1,7 @@
 ---
 page: applications-of-the-fundamental-group
 title: "Applications of the Fundamental Group"
-status: draft
+status: published
 items: [prop-retracts-inject-fundamental-groups,
         thm-no-retraction-of-the-closed-disk-onto-the-circle,
         lem-fixed-point-free-disk-map-produces-a-retraction,

@@ -2,7 +2,7 @@
 id: prop-vandermonde-transforms-by-sign-under-the-galois-action
 kind: proposition
 title: "The Vandermonde product transforms by the sign of the root permutation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

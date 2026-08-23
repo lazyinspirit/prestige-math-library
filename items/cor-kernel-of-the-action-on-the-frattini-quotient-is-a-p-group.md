@@ -2,7 +2,7 @@
 id: cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group
 kind: corollary
 title: "The kernel of the automorphism action on $P/\\Phi(P)$ is a $p$-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

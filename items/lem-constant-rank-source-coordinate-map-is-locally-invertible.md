@@ -2,7 +2,7 @@
 id: lem-constant-rank-source-coordinate-map-is-locally-invertible
 kind: lemma
 title: 'A nonzero rank minor supplies the source coordinates for the constant-rank theorem'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

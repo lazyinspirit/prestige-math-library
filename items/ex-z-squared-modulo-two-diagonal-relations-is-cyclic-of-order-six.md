@@ -2,7 +2,7 @@
 id: ex-z-squared-modulo-two-diagonal-relations-is-cyclic-of-order-six
 kind: example
 title: "$\\mathbb Z^2/\\langle(2,0),(0,3)\\rangle$ is cyclic of order six"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

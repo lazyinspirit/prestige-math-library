@@ -2,7 +2,7 @@
 id: fs-every-level-set-of-a-smooth-map-is-a-graph
 kind: false-statement
 title: 'FALSE: every level set of a smooth map is locally a graph'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

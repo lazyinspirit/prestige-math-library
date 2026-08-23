@@ -1,7 +1,7 @@
 ---
 page: trigonometric-and-oscillatory-examples-in-several-variables-examples
 title: "Trigonometric and Oscillatory Examples in Several Variables: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-circular-curve-defeats-vector-valued-mean-value-equality,
            fs-the-mean-value-equality-holds-for-vector-valued-maps,

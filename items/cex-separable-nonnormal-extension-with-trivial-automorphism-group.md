@@ -2,7 +2,7 @@
 id: cex-separable-nonnormal-extension-with-trivial-automorphism-group
 kind: counterexample
 title: "$\\mathbb Q(\\sqrt[3]{2})/\\mathbb Q$ is separable and nonnormal with trivial automorphism group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

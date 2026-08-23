@@ -2,7 +2,7 @@
 id: thm-crude-monadicity-the-reflexive-tripleability-theorem
 kind: theorem
 title: "Data-supplied crude monadicity theorem for reflexive coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

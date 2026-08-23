@@ -1,7 +1,7 @@
 ---
 page: the-galois-correspondence
 title: "The Galois Correspondence"
-status: draft
+status: published
 items: [def-relative-field-automorphism-group,
         thm-relative-automorphism-group-and-separable-degree-bound,
         def-fixed-field-of-an-automorphism-group,

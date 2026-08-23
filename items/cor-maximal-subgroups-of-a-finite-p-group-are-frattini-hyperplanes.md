@@ -2,7 +2,7 @@
 id: cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes
 kind: corollary
 title: "Maximal subgroups of a finite $p$-group are the inverse images of Frattini hyperplanes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

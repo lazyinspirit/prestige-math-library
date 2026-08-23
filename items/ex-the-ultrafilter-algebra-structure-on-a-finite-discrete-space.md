@@ -2,7 +2,7 @@
 id: ex-the-ultrafilter-algebra-structure-on-a-finite-discrete-space
 kind: example
 title: "The ultrafilter algebra on a finite discrete space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

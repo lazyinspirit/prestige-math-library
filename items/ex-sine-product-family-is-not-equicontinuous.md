@@ -2,7 +2,7 @@
 id: ex-sine-product-family-is-not-equicontinuous
 kind: example
 title: "The family $\\sin(nx)\\sin(ny)$ is uniformly bounded but not equicontinuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -28,6 +28,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

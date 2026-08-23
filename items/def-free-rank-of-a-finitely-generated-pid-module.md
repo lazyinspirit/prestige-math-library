@@ -2,7 +2,7 @@
 id: def-free-rank-of-a-finitely-generated-pid-module
 kind: definition
 title: "The free rank of a finitely generated module over a PID"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

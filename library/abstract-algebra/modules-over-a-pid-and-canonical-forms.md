@@ -1,7 +1,7 @@
 ---
 page: modules-over-a-pid-and-canonical-forms
 title: "Modules over a Principal Ideal Domain and the Canonical Forms"
-status: draft
+status: published
 items: [def-primary-component-of-a-module-over-a-domain,
         prop-torsion-and-primary-components-are-submodules-over-a-domain,
         cor-principal-ideal-domains-are-noetherian,

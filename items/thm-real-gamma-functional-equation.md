@@ -2,7 +2,7 @@
 id: thm-real-gamma-functional-equation
 kind: theorem
 title: 'The real Gamma functional equation $\Gamma(s+1)=s\Gamma(s)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-no-retraction-of-the-closed-disk-onto-the-circle
 kind: theorem
 title: "There is no retraction of the closed disk onto the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: 'no retraction $D^2\to S^1$'
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

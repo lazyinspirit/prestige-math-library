@@ -2,7 +2,7 @@
 id: ex-positive-convex-function-that-is-not-log-convex
 kind: example
 title: 'A positive convex function need not be log-convex'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-three-point-outer-measure-has-only-trivial-caratheodory-sets
 kind: counterexample
 title: "A three-point outer measure has nonmeasurable subsets despite passing the whole-space split"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references: []

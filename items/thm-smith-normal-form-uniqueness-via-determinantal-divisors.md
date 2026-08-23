@@ -2,7 +2,7 @@
 id: thm-smith-normal-form-uniqueness-via-determinantal-divisors
 kind: theorem
 title: "Smith normal form is unique through the gcds of its minors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

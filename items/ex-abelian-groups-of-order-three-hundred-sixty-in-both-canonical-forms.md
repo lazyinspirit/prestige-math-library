@@ -2,7 +2,7 @@
 id: ex-abelian-groups-of-order-three-hundred-sixty-in-both-canonical-forms
 kind: example
 title: "The abelian groups of order $360$ in elementary-divisor and invariant-factor form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

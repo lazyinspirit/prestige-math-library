@@ -2,7 +2,7 @@
 id: cor-regular-level-set-local-graph-theorem
 kind: corollary
 title: 'A regular level set is locally a $C^k$ graph of dimension $m-n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ short: 'regular levels are local graphs'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

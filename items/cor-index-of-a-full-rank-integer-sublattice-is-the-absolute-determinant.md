@@ -2,7 +2,7 @@
 id: cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant
 kind: corollary
 title: 'The index of a full-rank subgroup of $\mathbb Z^n$ is the absolute determinant of a generating matrix'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-real-beta-symmetry-and-trigonometric-form
 kind: proposition
 title: 'Symmetry and the trigonometric form of the real Beta integral'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

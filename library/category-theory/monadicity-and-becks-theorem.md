@@ -1,7 +1,7 @@
 ---
 page: monadicity-and-becks-theorem
 title: "Monadicity and Beck's Theorem"
-status: draft
+status: published
 items: [def-absolute-colimit, def-split-coequalizer,
         thm-a-split-coequalizer-is-a-coequalizer-and-is-absolute,
         def-reflexive-pair,

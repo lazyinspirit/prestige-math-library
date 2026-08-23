@@ -2,7 +2,7 @@
 id: ex-s-three-galois-correspondence-for-x-cubed-minus-two
 kind: example
 title: "The full $S_3$ correspondence for the splitting field of $x^3-2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

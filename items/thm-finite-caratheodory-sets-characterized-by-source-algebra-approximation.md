@@ -2,7 +2,7 @@
 id: thm-finite-caratheodory-sets-characterized-by-source-algebra-approximation
 kind: theorem
 title: "Assuming countable choice, Carathéodory measurability of a finite-outer-measure set is equivalent to source-algebra approximation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

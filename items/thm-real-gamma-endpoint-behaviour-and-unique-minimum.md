@@ -2,7 +2,7 @@
 id: thm-real-gamma-endpoint-behaviour-and-unique-minimum
 kind: theorem
 title: 'The real Gamma function has one minimum and diverges at both ends of its domain'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

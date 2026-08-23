@@ -2,7 +2,7 @@
 id: lem-the-limit-map-of-a-compact-hausdorff-space-is-an-ultrafilter-algebra
 kind: lemma
 title: "The ultrafilter-limit map of a compact Hausdorff space is an algebra for the ultrafilter monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

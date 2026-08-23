@@ -2,7 +2,7 @@
 id: ex-positive-non-log-convex-solution-of-gamma-functional-equation
 kind: example
 title: 'A positive non-log-convex solution of the Gamma functional equation'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

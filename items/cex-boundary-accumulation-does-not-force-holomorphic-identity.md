@@ -2,7 +2,7 @@
 id: cex-boundary-accumulation-does-not-force-holomorphic-identity
 kind: counterexample
 title: "Agreement accumulating only at the boundary does not force a holomorphic identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

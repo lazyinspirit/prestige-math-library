@@ -2,7 +2,7 @@
 id: thm-surface-area-density-is-cross-product-norm
 kind: theorem
 title: 'The surface area density is the norm of the cross product of the parameter tangents'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: trigonometric-and-oscillatory-examples-in-several-variables
 title: "Trigonometric and Oscillatory Examples in Several Variables"
-status: draft
+status: published
 items: [prop-two-classical-counterexamples-in-polar-coordinates]
 examples: []
 ---

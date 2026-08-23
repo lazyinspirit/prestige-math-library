@@ -2,7 +2,7 @@
 id: lem-prime-one-mod-four-powers-have-primitive-two-square-representations
 kind: lemma
 title: "Powers of primes congruent to $1$ modulo $4$ have primitive two-square representations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

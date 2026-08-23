@@ -2,7 +2,7 @@
 id: prop-frattini-subgroup-of-a-quotient-finite-p-group
 kind: proposition
 title: "$\\Phi(P/N)=\\Phi(P)N/N$ for a normal subgroup of a finite $p$-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

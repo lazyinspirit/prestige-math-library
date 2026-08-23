@@ -2,7 +2,7 @@
 id: thm-galois-group-of-an-irreducible-cubic-by-discriminant
 kind: theorem
 title: "A monic irreducible separable cubic in characteristic not two has Galois group $A_3$ or $S_3$ according to its discriminant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

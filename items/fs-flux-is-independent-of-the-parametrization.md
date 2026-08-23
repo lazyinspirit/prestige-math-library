@@ -2,7 +2,7 @@
 id: fs-flux-is-independent-of-the-parametrization
 kind: false-statement
 title: 'FALSE: flux is independent of the parametrization without an orientation condition'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-topology-induced-by-an-ultrafilter-algebra
 kind: definition
 title: "The open-set family induced by an ultrafilter algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

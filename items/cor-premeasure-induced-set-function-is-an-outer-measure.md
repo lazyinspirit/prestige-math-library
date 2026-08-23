@@ -2,7 +2,7 @@
 id: cor-premeasure-induced-set-function-is-an-outer-measure
 kind: corollary
 title: "Assuming countable choice, the outer set function induced by a premeasure is an outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

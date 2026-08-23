@@ -2,7 +2,7 @@
 id: ex-smith-normal-form-of-an-explicit-integer-matrix
 kind: example
 title: "Smith normal form of an explicit three-by-three integer matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

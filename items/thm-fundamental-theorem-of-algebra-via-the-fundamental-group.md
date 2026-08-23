@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-of-algebra-via-the-fundamental-group
 kind: theorem
 title: "Fundamental theorem of algebra by the fundamental-group obstruction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

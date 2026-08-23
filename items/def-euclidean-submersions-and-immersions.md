@@ -2,7 +2,7 @@
 id: def-euclidean-submersions-and-immersions
 kind: definition
 title: 'Submersions and immersions between Euclidean open sets'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

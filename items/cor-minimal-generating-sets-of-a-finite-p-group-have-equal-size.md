@@ -2,7 +2,7 @@
 id: cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size
 kind: corollary
 title: "Minimal generating sets of a finite $p$-group have size $d(P)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

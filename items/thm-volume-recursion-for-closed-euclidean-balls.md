@@ -2,7 +2,7 @@
 id: thm-volume-recursion-for-closed-euclidean-balls
 kind: theorem
 title: 'Closed Euclidean balls are Jordan measurable and their volumes satisfy the slicing recursion'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

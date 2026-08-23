@@ -2,7 +2,7 @@
 id: def-u-split-coequalizer-and-creation-of-their-coequalizers
 kind: definition
 title: "$U$-split pairs and ordinary or strict creation of their coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

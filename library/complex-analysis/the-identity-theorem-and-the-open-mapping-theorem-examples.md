@@ -1,7 +1,7 @@
 ---
 page: the-identity-theorem-and-the-open-mapping-theorem-examples
 title: "The Identity Theorem, the Maximum Principle and the Open Mapping Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [thm-complex-pythagorean-identity-by-identity-theorem,
            ex-local-mapping-of-complex-squaring-at-zero-and-one,

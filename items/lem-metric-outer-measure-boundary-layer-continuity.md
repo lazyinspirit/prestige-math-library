@@ -2,7 +2,7 @@
 id: lem-metric-outer-measure-boundary-layer-continuity
 kind: lemma
 title: "Boundary layers of finite metric outer measure exhaust the complement of a closed set in outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

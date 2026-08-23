@@ -2,7 +2,7 @@
 id: ex-frattini-subgroup-of-an-elementary-abelian-p-group
 kind: example
 title: "The Frattini subgroup of $(\\mathbb Z/p)^n$ is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

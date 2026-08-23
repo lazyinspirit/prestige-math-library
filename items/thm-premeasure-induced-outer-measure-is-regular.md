@@ -2,7 +2,7 @@
 id: thm-premeasure-induced-outer-measure-is-regular
 kind: theorem
 title: "Assuming countable choice, a premeasure-induced outer measure is regular with generated measurable hulls"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

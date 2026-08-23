@@ -2,7 +2,7 @@
 id: cor-gautschi-inequality-for-the-real-gamma-function
 kind: corollary
 title: 'Gautschi''s inequality for the real Gamma function'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

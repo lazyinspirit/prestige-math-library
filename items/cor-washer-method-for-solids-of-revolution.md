@@ -2,7 +2,7 @@
 id: cor-washer-method-for-solids-of-revolution
 kind: corollary
 title: 'The washer formula for a solid of revolution between two nonnegative profiles'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

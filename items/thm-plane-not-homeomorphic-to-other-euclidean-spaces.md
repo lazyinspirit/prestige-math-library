@@ -2,7 +2,7 @@
 id: thm-plane-not-homeomorphic-to-other-euclidean-spaces
 kind: theorem
 title: '$\mathbb R^2$ is not homeomorphic to $\mathbb R^n$ for $n\ne2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: '$\mathbb R^2\not\cong\mathbb R^n$ for $n\ne2$'
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

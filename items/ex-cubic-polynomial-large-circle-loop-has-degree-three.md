@@ -2,7 +2,7 @@
 id: ex-cubic-polynomial-large-circle-loop-has-degree-three
 kind: example
 title: "The large-circle loop of $z^3-2z+2$ on $|z|=5$ has degree three"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

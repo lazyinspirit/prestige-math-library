@@ -2,7 +2,7 @@
 id: thm-graph-of-continuous-function-on-a-compact-set-has-content-zero
 kind: theorem
 title: 'The graph of a continuous function on a compact Euclidean set has content zero'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

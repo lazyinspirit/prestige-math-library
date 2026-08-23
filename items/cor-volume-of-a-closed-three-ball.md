@@ -2,7 +2,7 @@
 id: cor-volume-of-a-closed-three-ball
 kind: corollary
 title: 'A closed three-dimensional ball of radius $r\ge0$ has volume $4\pi r^3/3$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

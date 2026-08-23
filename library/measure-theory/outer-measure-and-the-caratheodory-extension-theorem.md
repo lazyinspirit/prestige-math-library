@@ -1,7 +1,7 @@
 ---
 page: outer-measure-and-the-caratheodory-extension-theorem
 title: "Outer Measure and the Caratheodory Extension Theorem"
-status: draft
+status: published
 items: [def-outer-measure, def-caratheodory-measurable-set,
         rem-caratheodory-measurability-versus-differentiability,
         lem-caratheodory-subadditive-inequality-is-automatic,

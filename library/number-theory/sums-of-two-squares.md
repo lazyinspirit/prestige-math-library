@@ -1,7 +1,7 @@
 ---
 page: sums-of-two-squares
 title: "Sums of Two Squares"
-status: draft
+status: published
 items: [def-sum-of-two-squares-representation,
         lem-brahmagupta-fibonacci-two-square-identity,
         cor-sums-of-two-squares-closed-under-products,

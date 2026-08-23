@@ -2,7 +2,7 @@
 id: thm-galois-group-of-an-irreducible-quartic-by-its-resolvent
 kind: theorem
 title: "The five-case resolvent classification of an irreducible quartic Galois group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: the-real-gamma-and-beta-functions
 title: "The Real Gamma and Beta Functions"
-status: draft
+status: published
 items: [def-log-convex-positive-function,
         def-real-gamma-function-by-the-euler-integral,
         thm-real-gamma-euler-integral-convergence,

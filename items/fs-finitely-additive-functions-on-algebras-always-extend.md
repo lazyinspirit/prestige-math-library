@@ -2,7 +2,7 @@
 id: fs-finitely-additive-functions-on-algebras-always-extend
 kind: false-statement
 title: "FALSE: every finitely additive nonnegative function on an algebra extends to a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

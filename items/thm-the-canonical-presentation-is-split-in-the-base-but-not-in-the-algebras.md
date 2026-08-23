@@ -2,7 +2,7 @@
 id: thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras
 kind: theorem
 title: "The canonical algebra presentation is split in the base, but its canonical splittings need not be algebra homomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-compact-regular-level-surfaces-have-finite-patch-covers
 kind: corollary
 title: 'A compact regular level surface is covered by finitely many regular surface patches'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

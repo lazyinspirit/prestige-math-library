@@ -2,7 +2,7 @@
 id: cor-volume-of-a-radius-r-n-ball
 kind: corollary
 title: 'The volume of a radius-$r$ closed $n$-ball is $\pi^{n/2}r^n/\Gamma(n/2+1)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

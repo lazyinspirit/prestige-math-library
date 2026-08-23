@@ -2,7 +2,7 @@
 id: prop-caratheodory-extension-compares-with-other-extensions
 kind: proposition
 title: "Assuming countable choice, the Carathéodory extension dominates every other extension and agrees with it on finite-measure sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

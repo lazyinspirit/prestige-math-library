@@ -2,7 +2,7 @@
 id: thm-constant-rank-level-set-local-normal-form
 kind: theorem
 title: 'A constant-rank level set is locally a coordinate slice'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

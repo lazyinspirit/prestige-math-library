@@ -2,7 +2,7 @@
 id: cor-no-continuous-injection-from-s2-to-r2
 kind: corollary
 title: 'There is no continuous injection from $S^2$ into $\mathbb R^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

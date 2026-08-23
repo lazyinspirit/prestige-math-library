@@ -2,7 +2,7 @@
 id: thm-maximum-modulus-principle-with-boundary-and-infinity-control
 kind: theorem
 title: "Maximum modulus principle with boundary and infinity control"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

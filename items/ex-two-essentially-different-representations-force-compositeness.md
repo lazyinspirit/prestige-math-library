@@ -2,7 +2,7 @@
 id: ex-two-essentially-different-representations-force-compositeness
 kind: example
 title: "The representations $221=5^2+14^2=11^2+10^2$ recover the factors $13$ and $17$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

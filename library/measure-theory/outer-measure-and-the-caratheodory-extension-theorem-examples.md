@@ -1,7 +1,7 @@
 ---
 page: outer-measure-and-the-caratheodory-extension-theorem-examples
 title: "Outer Measure and the Caratheodory Extension Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-zero-one-outer-measure-on-a-two-point-set,
            ex-counting-outer-measure,

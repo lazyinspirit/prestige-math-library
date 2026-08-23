@@ -2,7 +2,7 @@
 id: thm-the-compact-hausdorff-and-ultrafilter-algebra-constructions-are-inverse
 kind: theorem
 title: "Under the ultrafilter lemma, compact Hausdorff spaces and ultrafilter algebras are recovered by the two limit constructions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

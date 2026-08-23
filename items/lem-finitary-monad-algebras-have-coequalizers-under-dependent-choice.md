@@ -2,7 +2,7 @@
 id: lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice
 kind: lemma
 title: "Under dependent choice, algebras for a finitary monad on a complete cocomplete locally small category have coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

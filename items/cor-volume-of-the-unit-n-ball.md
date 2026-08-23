@@ -2,7 +2,7 @@
 id: cor-volume-of-the-unit-n-ball
 kind: corollary
 title: 'The closed form for the volume of the unit $n$-ball'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

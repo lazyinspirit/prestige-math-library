@@ -2,7 +2,7 @@
 id: cor-largest-invariant-factor-is-the-minimal-polynomial
 kind: corollary
 title: "On a nonzero finite-dimensional space, the largest invariant factor is the minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

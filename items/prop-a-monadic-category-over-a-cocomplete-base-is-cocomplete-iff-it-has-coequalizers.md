@@ -2,7 +2,7 @@
 id: prop-a-monadic-category-over-a-cocomplete-base-is-cocomplete-iff-it-has-coequalizers
 kind: proposition
 title: "Over a cocomplete base, a monadic category is cocomplete exactly when it has coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

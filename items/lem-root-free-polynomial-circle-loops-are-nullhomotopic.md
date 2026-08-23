@@ -2,7 +2,7 @@
 id: lem-root-free-polynomial-circle-loops-are-nullhomotopic
 kind: lemma
 title: "A root-free complex polynomial gives nullhomotopic normalized circle loops"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-volume-of-a-right-circular-cylinder
 kind: corollary
 title: 'A right circular cylinder of radius $R$ and height $h$ has volume $\pi R^2h$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

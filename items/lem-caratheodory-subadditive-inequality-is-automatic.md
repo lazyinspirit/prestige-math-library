@@ -2,7 +2,7 @@
 id: lem-caratheodory-subadditive-inequality-is-automatic
 kind: lemma
 title: "In the Carathéodory identity, the subadditive inequality is automatic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-sums-of-two-squares-closed-under-products
 kind: corollary
 title: "Sums of two squares are closed under products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

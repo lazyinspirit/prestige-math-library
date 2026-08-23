@@ -1,7 +1,7 @@
 ---
 page: modules-over-a-pid-and-canonical-forms-examples
 title: "Modules over a Principal Ideal Domain and the Canonical Forms — Examples"
-status: draft
+status: published
 items: []
 examples: [prop-smith-normal-form-algorithm-over-a-euclidean-domain,
            ex-smith-normal-form-of-an-explicit-integer-matrix,

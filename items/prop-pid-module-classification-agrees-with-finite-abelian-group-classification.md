@@ -2,7 +2,7 @@
 id: prop-pid-module-classification-agrees-with-finite-abelian-group-classification
 kind: proposition
 title: "The PID-module and finite-abelian-group classifications have the same canonical data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

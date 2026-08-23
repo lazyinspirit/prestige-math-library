@@ -2,7 +2,7 @@
 id: fs-boundary-maximum-modulus-principle-on-unbounded-domains
 kind: false-statement
 title: "FALSE: boundary control alone gives the maximum principle on an unbounded domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

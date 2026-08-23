@@ -2,7 +2,7 @@
 id: lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple
 kind: lemma
 title: 'A linear functional annihilating the kernel of a surjection is a unique transpose multiple'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

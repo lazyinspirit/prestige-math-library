@@ -2,7 +2,7 @@
 id: cor-submodules-of-finite-free-pid-modules-are-free
 kind: corollary
 title: "A submodule of a free module of finite rank over a PID is free of no larger rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

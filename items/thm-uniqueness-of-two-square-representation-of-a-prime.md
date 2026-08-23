@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-two-square-representation-of-a-prime
 kind: theorem
 title: "A prime congruent to $1$ modulo $4$ has one two-square representation up to signs and order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

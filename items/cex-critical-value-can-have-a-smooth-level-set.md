@@ -2,7 +2,7 @@
 id: cex-critical-value-can-have-a-smooth-level-set
 kind: counterexample
 title: 'A critical value can have a smooth level set'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

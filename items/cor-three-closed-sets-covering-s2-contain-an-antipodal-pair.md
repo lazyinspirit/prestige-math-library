@@ -2,7 +2,7 @@
 id: cor-three-closed-sets-covering-s2-contain-an-antipodal-pair
 kind: corollary
 title: "One member of every three-set closed cover of $S^2$ contains an antipodal pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

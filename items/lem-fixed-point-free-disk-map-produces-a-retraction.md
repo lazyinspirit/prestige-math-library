@@ -2,7 +2,7 @@
 id: lem-fixed-point-free-disk-map-produces-a-retraction
 kind: lemma
 title: "A fixed-point-free self-map of the disk produces a continuous retraction onto the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

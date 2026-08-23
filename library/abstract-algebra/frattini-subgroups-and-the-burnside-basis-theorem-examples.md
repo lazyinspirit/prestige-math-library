@@ -1,7 +1,7 @@
 ---
 page: frattini-subgroups-and-the-burnside-basis-theorem-examples
 title: "Frattini Subgroups and the Burnside Basis Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-frattini-subgroup-of-a-cyclic-p-group,
            ex-frattini-subgroup-of-an-elementary-abelian-p-group,

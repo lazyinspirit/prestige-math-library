@@ -1,7 +1,7 @@
 ---
 page: volumes-of-elementary-solids-and-solids-of-revolution
 title: "Volumes of Elementary Solids and Solids of Revolution"
-status: draft
+status: published
 items: [def-solid-between-continuous-graphs-over-a-jordan-base,
         def-solid-of-revolution-about-a-coordinate-axis,
         lem-product-of-content-zero-set-and-interval-has-content-zero,

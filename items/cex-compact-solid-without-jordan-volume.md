@@ -2,7 +2,7 @@
 id: cex-compact-solid-without-jordan-volume
 kind: counterexample
 title: 'A compact subset of $\mathbb R^3$ need not be Jordan measurable'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

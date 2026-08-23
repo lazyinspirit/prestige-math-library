@@ -1,7 +1,7 @@
 ---
 page: the-galois-correspondence-examples
 title: "The Galois Correspondence — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-biquadratic-galois-correspondence-lattice,
            ex-s-three-galois-correspondence-for-x-cubed-minus-two,

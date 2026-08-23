@@ -1,7 +1,7 @@
 ---
 page: applications-of-the-fundamental-group-examples
 title: "Applications of the Fundamental Group — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-radial-normalization-retracts-the-punctured-disk-but-not-the-disk,
            ex-cubic-polynomial-large-circle-loop-has-degree-three,

@@ -2,7 +2,7 @@
 id: cor-surface-area-of-revolution-formula
 kind: corollary
 title: 'The surface of revolution has area $2\pi\int_a^b r(s)\sqrt{1+r''(s)^2}\,ds$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

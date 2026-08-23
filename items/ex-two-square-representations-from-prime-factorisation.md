@@ -2,7 +2,7 @@
 id: ex-two-square-representations-from-prime-factorisation
 kind: example
 title: "Prime factorisation gives two representations of $221$ as a sum of two squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

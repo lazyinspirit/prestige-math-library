@@ -2,7 +2,7 @@
 id: thm-surface-area-and-scalar-integrals-are-reparametrization-invariant
 kind: theorem
 title: 'Surface area and scalar surface integrals are invariant under regular reparametrization'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

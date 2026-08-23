@@ -1,7 +1,7 @@
 ---
 page: constant-rank-submersions-and-regular-level-sets-examples
 title: 'Constant Rank, Submersions, Immersions and Regular Level Sets: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-sphere-as-a-regular-level-set,
            ex-ellipsoid-as-a-regular-level-set,

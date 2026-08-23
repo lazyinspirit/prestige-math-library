@@ -2,7 +2,7 @@
 id: ex-thue-lemma-produces-a-two-square-representation
 kind: example
 title: "Thue's collision argument gives $73=3^2+8^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-maximal-subgroups-as-frattini-hyperplanes
 kind: example
 title: "The maximal subgroups of the dihedral group of order eight as Frattini hyperplanes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

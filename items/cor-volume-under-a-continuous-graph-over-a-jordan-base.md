@@ -2,7 +2,7 @@
 id: cor-volume-under-a-continuous-graph-over-a-jordan-base
 kind: corollary
 title: 'The volume under a nonnegative continuous graph over a compact Jordan base is its integral'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

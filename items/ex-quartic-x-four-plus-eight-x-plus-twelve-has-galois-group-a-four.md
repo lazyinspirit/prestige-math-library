@@ -2,7 +2,7 @@
 id: ex-quartic-x-four-plus-eight-x-plus-twelve-has-galois-group-a-four
 kind: example
 title: "$x^4+8x+12$ has Galois group $A_4$ over $\\mathbb Q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
     verdict: pass
     date: 2026-08-23
+  audited: 2026-08-24
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-flat-smooth-function-has-no-holomorphic-extension
 kind: counterexample
 title: "A flat smooth real function has no holomorphic extension near zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-24
 sources:
   scraped: []
   references:
