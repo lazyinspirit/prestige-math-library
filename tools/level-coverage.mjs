@@ -14,6 +14,7 @@
 // that no longer matches the actual in-flight items and relationships.
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
