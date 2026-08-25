@@ -2300,7 +2300,8 @@ delta capture → receipt refresh → Alpha review → deterministic register re
 `post-step8`. Deletions, unowned creations and duplicate ownership stop; a
 modified published item remains in the generated targeted judge scope. Changed
 ids alone re-enter the paired judge/adjudication/rejudge path. Impact closure precedes final stamps and
-receipts. Step 10 reconciles scope, defect, judge, adjudication, touch, pathway
+receipts; if its Alpha repairs a consumer, the follower snapshot is keyed to
+that dispatch's successful result rather than concurrent launch order. Step 10 reconciles scope, defect, judge, adjudication, touch, pathway
 and readiness records into one hash-bound evidence packet. Code, not report
 prose, renders every fatal row and statistic; the read-only Alpha adds only the
 interpretation that cannot be derived mechanically.

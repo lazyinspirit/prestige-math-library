@@ -2672,11 +2672,14 @@ export const stages = [
         if (pending) {
           executor.start(stage, {
             role: 'alpha', label: `impact-close-${round}`, job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
-            task: [`research/${ctx.run}-alpha-impact-close.task.md`], timeout: 7200,
+            task: 'briefs/tasks/alpha-impact-close.md', timeout: 7200,
           });
           executor.start(stage, {
             role: 'tool', label: `impact-close-snapshot-${round}`, job: 'bookkeeping-mechanical', covers: [],
-            argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), `post-step9-impact-round-${round}`],
+            timeout: 7200,
+            argv: ['node', 'tools/touchlog-after-result.mjs',
+              '--result', join(ctx.dispatchDir, `alpha-impact-close-${round}.result.json`),
+              '--touches', touchesPath(ctx), '--label', `post-step9-impact-round-${round}`],
           });
         }
         return;

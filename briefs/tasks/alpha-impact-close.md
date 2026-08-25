@@ -4,11 +4,12 @@ The `impact-receipt` gate is red. The receipt at `research/{{run}}-impact.json`
 has just been mechanically refreshed against the full window, which adds
 `"status": "pending"` rows for consumers the old receipt predates.
 
-Reproduce from the repo root:
+Read the final entry of `research/{{run}}-touches.json`; call its exact `label`
+`<end>`. Reproduce the gate from the repo root against that endpoint:
 
 ```
 node tools/impact-audit.mjs --touches research/{{run}}-touches.json \
-  --from pre-author --to post-step9 --receipt research/{{run}}-impact.json
+  --from pre-author --to <end> --receipt research/{{run}}-impact.json
 ```
 
 The window is `pre-author` → the newest snapshot, and both ends matter: a
@@ -25,8 +26,9 @@ If a consumer is genuinely broken by an interface change, that is a fatal
 defect: repair it under the standing licence, ledger row in the same act, and
 note that the item must rejudge.
 
-Do not touch dispositions that are already written. Exit when the command
-above exits 0.
+Do not touch dispositions that are already written and do not take a touch
+snapshot yourself. The engine snapshots only after this dispatch succeeds.
+Exit when the command above exits 0.
 
 **Read the latest prior repair-round result for this stage before deriving
 anything** (`research/{{run}}-dispatch/`). **No permission prompts of any

@@ -1140,7 +1140,8 @@ sweep.
 The engine serializes this boundary: it writes the delta, refreshes the group
 receipts, dispatches the lead Alpha, renders the closed register, and only then
 freezes `post-step9-scope`. None of those consumers run beside the producer it
-depends on.
+depends on. If impact closure needs an Alpha repair, its mechanical snapshot
+waits for that exact dispatch to succeed before hashing the tree.
 
 **Every mathematical change made after Step 8 is certified before receipts.**
 `step9-changes.mjs` compares guarded hashes with `post-step8`, classifies

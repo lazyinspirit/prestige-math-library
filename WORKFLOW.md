@@ -817,7 +817,8 @@ register render and the scope snapshot run serially. Every created or mathematic
 item since `post-step8` is derived by guarded hash; creations require one run
 manifest owner and modified published items enter a targeted change manifest.
 Every changed id passes through both judges and exact adjudication/rejudge, then
-stamped after impact closure. Unchanged current verdicts are not re-spent.
+stamped after impact closure. An impact-repair snapshot waits for its exact
+Alpha result. Unchanged current verdicts are not re-spent.
 
 Before the owner pause, Step 10 mechanically reconciles the final receipts and
 ledgers into a hash-bound evidence packet. Its deterministic renderer includes
