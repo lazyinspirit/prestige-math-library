@@ -126,3 +126,43 @@ export function sourceSectionText(body, section) {
   if (!SOURCE_SECTIONS.has(section)) return null;
   return sectionText(body, section);
 }
+
+/** Numbered proof blocks, not merely their opening lines.
+ *
+ * A proof step begins with `N.N ` at the start of a line and continues until
+ * the next numbered step or the end of its proof-like section. Displayed
+ * calculations and wrapped prose therefore belong to the step that introduces
+ * them. This matters for contracts: a fact cited on a continuation line is
+ * still an input to that step, and treating only the opening line as the step
+ * made the checker and contract regenerator silently omit it.
+ *
+ * Returns document order across Proof, Refutation, Counterexample and
+ * Verification sections. `text` is the complete block after the step id;
+ * `claim` removes only a trailing input tag and proof tombstone; `inputs` is
+ * that final tag split on commas. */
+export function numberedProofSteps(body) {
+  const steps = [];
+  for (const heading of ['Proof', 'Refutation', 'Counterexample', 'Verification']) {
+    const lines = sectionText(body, heading).split(/\r?\n/);
+    for (let index = 0; index < lines.length; index += 1) {
+      const opening = lines[index].match(/^(\d+\.\d+)\s+(.+)$/);
+      if (!opening) continue;
+      const block = [opening[2]];
+      while (index + 1 < lines.length && !/^\d+\.\d+\s+/.test(lines[index + 1])) {
+        block.push(lines[++index]);
+      }
+      while (block.length > 1 && block.at(-1) === '') block.pop();
+      const text = block.join('\n');
+      const tags = [...text.matchAll(/\[([^\[\]]*)\]\s*(?:∎)?\s*(?=\n|$)/g)];
+      const finalTag = tags.at(-1);
+      const isTrailingTag = finalTag && finalTag.index + finalTag[0].length === text.length;
+      const inputs = isTrailingTag
+        ? finalTag[1].split(',').map((value) => value.trim()).filter(Boolean)
+        : [];
+      const claim = (isTrailingTag ? text.slice(0, finalTag.index) : text)
+        .replace(/\s*∎\s*$/, '').trim();
+      steps.push({ id: opening[1], text, claim, inputs });
+    }
+  }
+  return steps;
+}

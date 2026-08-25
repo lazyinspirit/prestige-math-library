@@ -19,7 +19,7 @@ import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import {
   factLines, factParagraphs, sectionText, sourceSectionText, splitFrontmatter, wikilinks,
-  SOURCE_SECTIONS, parseFactLine, factsSectionText,
+  SOURCE_SECTIONS, parseFactLine, factsSectionText, numberedProofSteps,
 } from '../../facts-block.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
@@ -104,6 +104,16 @@ test('sourceSectionText returns null for a section a citation may not name', () 
   assert.equal(sourceSectionText(body, 'Remarks'), null);
   assert.equal(sourceSectionText(body, 'Proof'), null);
   assert.ok(!SOURCE_SECTIONS.has('Remarks'));
+});
+
+test('numberedProofSteps keeps continuation-line citations in their proof step', () => {
+  const body = `## Proof\n\n1.1 Start from the definition and compute\n\\[x^2=x\\].\nThe final implication uses [L2].\n[F1, L2] ∎\n\n1.2 Conclude from step 1.1. [step 1.1]\n`;
+  const steps = numberedProofSteps(body);
+  assert.deepEqual(steps.map((step) => step.id), ['1.1', '1.2']);
+  assert.match(steps[0].text, /uses \[L2\]/, 'the citation is part of step 1.1, not discarded');
+  assert.deepEqual(steps[0].inputs, ['F1', 'L2']);
+  assert.doesNotMatch(steps[0].claim, /\[F1, L2\]/, 'the trailing contract tag is not claim prose');
+  assert.match(steps[1].text, /step 1\.1/);
 });
 
 // ------------------------------------------- the scoped quote search (item 1)
@@ -198,6 +208,70 @@ test('a citation naming no source_section keeps the whole-item search', () => {
   const r = runFidelity(join(REPO, 'tools', 'citation-fidelity.mjs'), f);
   assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
   assert.equal(JSON.parse(r.stdout).summary.quote_not_found, 0);
+});
+
+test('contract regeneration cites a counterexample claim from Statement refuted', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'contract-regen-'));
+  mkdirSync(join(dir, 'items'));
+  writeFileSync(join(dir, 'items', 'cex-source.md'), `---
+id: cex-source
+---
+
+## Statement refuted
+
+Every widget is blue.
+
+## Counterexample
+
+A red widget.
+`);
+  writeFileSync(join(dir, 'items', 'thm-consumer.md'), `---
+id: thm-consumer
+deps: [cex-source]
+---
+
+## Statement
+
+A red widget exists.
+
+## Facts & Assumptions
+
+[L1] Not every widget is blue ([[cex-source]]).
+
+## Proof
+
+1.1 Apply [L1]. [L1] ∎
+`);
+  const contract = join(dir, 'contract.json');
+  writeFileSync(contract, JSON.stringify({ version: 1, scope: ['thm-consumer'], contracts: {
+    'thm-consumer': { citations: [], derivations: [], boundaries: [] },
+  } }));
+  const result = spawnSync(process.execPath,
+    [join(REPO, 'tools', 'regen-contract-entries.mjs'), contract, 'thm-consumer'],
+    { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const citation = JSON.parse(readFileSync(contract, 'utf8')).contracts['thm-consumer'].citations[0];
+  assert.equal(citation.source_section, 'Statement refuted');
+  assert.equal(citation.quote, 'Every widget is blue.');
+  assert.ok(SOURCE_SECTIONS.has(citation.source_section));
+});
+
+test('contract regeneration records a fact cited only on a continuation line', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'contract-regen-multiline-'));
+  mkdirSync(join(dir, 'items'));
+  writeFileSync(join(dir, 'items', 'def-source.md'), `---\nid: def-source\n---\n\n## Definition\n\nA source fact.\n`);
+  writeFileSync(join(dir, 'items', 'thm-consumer.md'), `---\nid: thm-consumer\ndeps: [def-source]\n---\n\n## Statement\n\nA conclusion.\n\n## Facts & Assumptions\n\n[L1] A source fact ([[def-source]]).\n\n## Proof\n\n1.1 Begin the argument.\nThe decisive implication uses [L1].\n[L1] ∎\n`);
+  const contract = join(dir, 'contract.json');
+  writeFileSync(contract, JSON.stringify({ version: 1, scope: ['thm-consumer'], contracts: {
+    'thm-consumer': { citations: [], derivations: [], boundaries: [] },
+  } }));
+  const result = spawnSync(process.execPath,
+    [join(REPO, 'tools', 'regen-contract-entries.mjs'), contract, 'thm-consumer'],
+    { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const entry = JSON.parse(readFileSync(contract, 'utf8')).contracts['thm-consumer'];
+  assert.deepEqual(entry.citations[0].uses, ['1.1']);
+  assert.ok(entry.derivations[0].inputs.includes('L1'));
 });
 
 // -------------------------------------- every consumer really imports the one

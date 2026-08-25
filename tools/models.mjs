@@ -35,8 +35,17 @@ export const MODELS = Object.freeze({
     runner: 'claude',
     family: 'anthropic',
   }),
+  // SONNET 5 -> SONNET 4.6 (owner, 2026-08-24). Verified to resolve against the
+  // claude CLI before being wired, because a bad id is the failure mode this
+  // registry exists to prevent and it does not always error — the `[1m]` lesson
+  // on the Opus entry above is the same shape.
+  //
+  // ONE sonnet entry, deliberately. A second (`sonnet5` alongside `sonnet46`)
+  // would make "the sonnet lane" ambiguous at every call site. Consequence to
+  // know: the `deepseek+sonnet` judge lineup below now means DeepSeek + Sonnet
+  // 4.6. That lineup is selectable and unselected, so nothing in flight moves.
   sonnet: Object.freeze({
-    id: process.env.SONNET_MODEL ?? 'claude-sonnet-5',
+    id: process.env.SONNET_MODEL ?? 'claude-sonnet-4-6',
     runner: 'claude',
     family: 'anthropic',
   }),
@@ -58,6 +67,32 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
+  // Owner, 2026-08-24: the Codex weekly cap reset and every agent and judge
+  // lane moves here from Opus 5 / Sonnet 4.6. Verified against the CLI before
+  // wiring — `gpt-5.4` resolves to `gpt-5.4-2s-codex-1p-codexswic-ev3`.
+  //
+  // EFFORT IS NOT `max` ON THIS RUNNER. The owner's "gpt 5.4 max" is the top
+  // tier, and codex rejects `max` outright: *"Unsupported value: 'max' ...
+  // Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'."*
+  // `max` is DeepSeek's spelling. The faithful translation is `xhigh`, which is
+  // what every Opus lane already ran at, so no lane changes tier in this swap.
+  gpt54: Object.freeze({
+    id: process.env.GPT54_MODEL ?? 'gpt-5.4',
+    runner: 'codex',
+    family: 'openai',
+  }),
+  // Owner, 2026-08-24: routed to `2-assign` ONLY. That stage emits a partition
+  // of batch numbers and nothing else — no mathematics passes through it — and
+  // `tools/alpha-groups.mjs` checks nine properties of the answer (uncovered,
+  // duplicate, duplicate-label, unknown-batch, oversize, too-many, shape,
+  // rationale, category-split). A weaker answer there cannot be WRONG, only
+  // worse: more dependency edges crossing a group boundary. Verified to resolve
+  // against the CLI before wiring.
+  luna: Object.freeze({
+    id: process.env.LUNA_MODEL ?? 'gpt-5.6-luna',
+    runner: 'codex',
+    family: 'openai',
+  }),
 });
 
 // ---------------------------------------------------------------------------
@@ -70,12 +105,42 @@ export const MODELS = Object.freeze({
 // dispatch.mjs picks up the matching runner automatically.
 // ---------------------------------------------------------------------------
 export const LANES = Object.freeze({
-  // Owner, 2026-08-23: every agent lane is Opus 5 (Codex weekly cap reached).
-  agentic: 'opus',
+  // Owner, 2026-08-23: every agent lane was Opus 5 (Codex weekly cap reached).
+  // Owner, 2026-08-24: the cap reset and every agent lane returns to Codex, now
+  // on gpt-5.4 at `xhigh`. Roles keep their own effort, sandbox and caps —
+  // those live in dispatch.mjs precisely so a lane swap cannot move them.
+  agentic: 'gpt54',
   // Owner, 2026-08-05: DeepSeek is the only cross-family reader in either
   // workflow. This is the lane whose independence is the point; moving it to
   // the same family as `agentic` does not rename a guarantee, it deletes one.
   crossFamily: 'deepseek',
+  // A THIRD lane (owner, 2026-08-24), for roles the owner runs at a LOWER
+  // EFFORT than `agentic` rather than on a different family: the step-6
+  // proof-refuter today, and the late-stage audit and reporting roles (6c, step
+  // 9, step 10) if that change lands. It moved Opus 5 -> Sonnet 4.6 -> gpt-5.4
+  // in one day; what has stayed constant is the property that matters.
+  //
+  // THE INVARIANT: this lane must keep a real filesystem. Its defining role is
+  // the proof-refuter, and `briefs/alpha.md` instructs refuters to OPEN THE
+  // CITED ITEM before calling a dependency too weak. `claude` and `codex` both
+  // satisfy that — codex runs as a sandboxed process, not a tool-less API lane.
+  // `crossFamily` does NOT, which is why the refuter was never routed there: a
+  // refuter that cannot read its dependencies reports on what it imagines them
+  // to say, and that is worse than having no refuter.
+  secondary: 'gpt54',
+  // Owner, 2026-08-24. The `2-assign` partition lane, and the only lane whose
+  // output is fully machine-checkable — which is the whole reason it may run a
+  // model no other lane runs. Do not widen it to a role that writes
+  // mathematics without evidence this model is adequate for that; none exists.
+  partition: 'luna',
+  // Owner, 2026-08-24: `8-adjudicate` ONLY, and the reason is MEASUREMENT, not
+  // capability. Every past run's step-8 adjudications were made by gpt-5.6-sol,
+  // and the fatal counts this run will be compared against are therefore Sol's
+  // judgements. Moving the authors to gpt-5.4 while ALSO moving the adjudicator
+  // would change two variables at once and make
+  // `research/frontier-18-interventions.md` §"Deferred to step 10" unanswerable.
+  // Holding the adjudicator fixed is what lets the comparison mean anything.
+  adjudication: 'sol',
 });
 
 // ---------------------------------------------------------------------------
@@ -89,13 +154,62 @@ export const LANES = Object.freeze({
 // now, and this map is what says so.
 // ---------------------------------------------------------------------------
 export const JUDGE_LINEUPS = Object.freeze({
+  'deepseek+gpt54': Object.freeze([MODELS.deepseek.id, MODELS.gpt54.id]),
   'deepseek+opus': Object.freeze([MODELS.deepseek.id, MODELS.opus.id]),
   'deepseek+terra': Object.freeze([MODELS.deepseek.id, MODELS.terra.id]),
   'deepseek+sonnet': Object.freeze([MODELS.deepseek.id, MODELS.sonnet.id]),
 });
 
-/** The build and audit default (owner, 2026-08-23). */
-export const DEFAULT_LINEUP = 'deepseek+opus';
+/**
+ * EVERY model this repo has ever judged with — the union over JUDGE_LINEUPS,
+ * derived, never hand-kept.
+ *
+ * This is the answer to "is this a judge model at all", which is a DIFFERENT
+ * question from "is this one of today's two lanes". Coverage asks the second and
+ * must use `JUDGE_LINEUPS[lineupName]`; a SHAPE check asks the first, because a
+ * retired lane's rows are append-only evidence the ledgers still have to be able
+ * to represent.
+ *
+ * frontier-18 is why this exists. `level-coverage.mjs` validated an adjudication
+ * row's `model` against the configured lineup, so when a group Alpha adjudicated
+ * the five `claude-sonnet-4-6` rejections that `step8-scope` handed it, every one
+ * came back as `judge-adjudication-shape` — a malformed row. Nothing an Alpha
+ * could write would fix it, so all three repair rounds burned and step 8 stopped
+ * dead on rows that were correct. Evidence must be writable even after its lane
+ * is retired, or the retirement silently rewrites history.
+ */
+export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);
+
+/** The build and audit default.
+ *
+ * Owner, 2026-08-25: claude-sonnet-4-6 -> gpt-5.6-terra on the second judge
+ * lane, at `xhigh` — which `runFreshCodex` already sends, along with the
+ * explicit 1M window, so the transport needs no change. The DeepSeek lane is
+ * unchanged and its verdicts stay current across this switch.
+ *
+ * TWO PROPERTIES THIS GIVES UP, recorded so neither is rediscovered as a
+ * surprise rather than a choice:
+ *
+ * 1. CROSS-FAMILY INDEPENDENCE ON BOTH LANES. Terra is openai, and so is every
+ *    agent role (gpt-5.4), the partition lane (gpt-5.6-luna) and the step-8
+ *    adjudicator (gpt-5.6-sol). So the second judge again shares a family with
+ *    the work it screens AND with the Alpha that adjudicates its rejections,
+ *    which is the arrangement every lineup before 2026-08-24 had. Under it,
+ *    only a DeepSeek-only rejection is structurally independent evidence.
+ *    Same-family agreement is not corroboration — that rule exists precisely
+ *    for this configuration and is now load-bearing again.
+ *
+ * 2. THE QUOTA SPLIT. Both judge lanes and all twelve Beta lanes are back on
+ *    one Codex weekly cap. A judge sweep now competes with authoring for the
+ *    same account, which is the shape that stalled frontier-17 at 6/9 group
+ *    Alphas. Lower a lane with JUDGE_CONCURRENCY_GPT_5_6_TERRA rather than
+ *    re-spending the loop if calls start refusing.
+ *
+ * COVERAGE CONSEQUENCE. Coverage is per frozen context AND per configured
+ * lane, so the 116 claude-sonnet-4-6 verdicts already in frontier-18's ledger
+ * become append-only evidence that satisfies nothing: every A page needs a
+ * fresh terra verdict. The DeepSeek rows are untouched. */
+export const DEFAULT_LINEUP = 'deepseek+terra';
 
 /**
  * Resolve `JUDGE_LINEUP` to its two model ids.

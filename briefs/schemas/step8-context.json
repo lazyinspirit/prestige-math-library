@@ -1,0 +1,124 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["group", "batches", "pages_read", "items_read", "conventions", "load_bearing", "published_dependencies", "concerns", "alerts", "seams_checked"],
+  "properties": {
+    "group": {
+      "type": "string",
+      "description": "The group label you were assigned, exactly as your task file states it."
+    },
+    "batches": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "The batch numbers you own."
+    },
+    "pages_read": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Every page id you opened in full. A page you did not open does not go here."
+    },
+    "items_read": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" },
+      "description": "Every item id you opened and read. This exact inventory is checked against your group's owned items; a self-reported count is not coverage evidence."
+    },
+    "conventions": {
+      "type": "array",
+      "description": "The conventions your pages fix, and where. These are what a judge objection usually turns on: an orientation sign, a boundary regularity assumption, whether a measure is complete, which index a sequence starts at, which direction an iff is stated in.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["convention", "fixed_by", "matters_for"],
+        "properties": {
+          "convention": { "type": "string", "description": "State the convention itself, not that one exists." },
+          "fixed_by": { "type": "string", "description": "The item id whose Definition or Statement fixes it." },
+          "matters_for": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Item ids whose correctness depends on it."
+          }
+        }
+      }
+    },
+    "load_bearing": {
+      "type": "array",
+      "description": "The items the rest of your group leans on. Ordered most load-bearing first.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "used_by"],
+        "properties": {
+          "id": { "type": "string" },
+          "statement": { "type": "string", "description": "The proposition as written, quoted exactly where practical, else the smallest faithful shortening. No changed domain, quantifier, hypothesis, direction or conclusion." },
+          "used_by": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "published_dependencies": {
+      "type": "array",
+      "description": "Published items your pages actually cite, with what each is used for. Only ones you opened.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "used_for", "opened"],
+        "properties": {
+          "id": { "type": "string" },
+          "used_for": { "type": "string" },
+          "opened": { "type": "boolean", "description": "True only if you read the item file. Never assert a dependency you did not open." }
+        }
+      }
+    },
+    "concerns": {
+      "type": "array",
+      "description": "Places you already find thin, before any verdict exists: an unstated hypothesis, a step whose justification you had to reconstruct, a citation that restates its source more strongly than the source allows, a boundary case the proof does not address. This list is the point of reading early — it is your own reading, uncontaminated by what a judge went on to say. An empty list is a real answer; do not manufacture entries.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "concern", "severity"],
+        "properties": {
+          "id": { "type": "string" },
+          "concern": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["would-be-fatal", "gap-a-reader-closes", "presentation"],
+            "description": "would-be-fatal: the claim as written looks false or unsupported. gap-a-reader-closes: the 30-second class. presentation: wording only."
+          }
+        }
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "description": "Defects you found in items belonging to ANOTHER group. You may read the whole library, so you will sometimes see one. Do not repair it and do not adjudicate it. Each entry is delivered to the group that owns the item before it adjudicates. Empty is fine.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["item", "finding", "severity"],
+        "properties": {
+          "item": { "type": "string", "description": "The item id. It must not be one of yours." },
+          "finding": { "type": "string", "description": "Name the item, quote the text you believe is wrong, and say what makes you think so. A reader who does not trust you must be able to check it." },
+          "severity": {
+            "type": "string",
+            "enum": ["would-be-fatal", "gap-a-reader-closes", "presentation"]
+          }
+        }
+      }
+    },
+    "seams_checked": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Each cross-group dependency edge your task file names, and whether the citing text states the cited proposition faithfully. Empty when your task file names no such edge.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "faithful", "note"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "faithful": { "type": "boolean" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

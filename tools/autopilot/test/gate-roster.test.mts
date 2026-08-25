@@ -15,15 +15,21 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
 test('the step-8 window is guarded end to end', async () => {
-  // 8-rejudge's onGateFailure dispatches an adjudicate-AND-REPAIR Alpha up to
-  // three times, inside the pre-step8 window — and its gate list carried no
-  // step8-guard, so edits made in that loop were never measured against the
-  // fatal-only rule. And neither step-8 stage re-ran the contract gates,
-  // though both rewrite proofs: a fatal repair whose new proof broke its own
-  // contract's input map was invisible until 9-scope.
+  // Mathematical currency and non-judge integrity intentionally have separate
+  // stages. The guard remains live around every mathematical edit/rejudge,
+  // while contracts run before paid calls and once more after the loop.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
   for (const id of ['8-adjudicate', '8-rejudge']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    const tools = st.gates(ctx)
+      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
+      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
+    assert.ok(tools.includes('tools/step8-guard.mjs'), `${id} does not run the fatal-only guard`);
+    assert.ok(!tools.includes('tools/proof-contract.mjs'),
+      `${id} lets contract bookkeeping consume the bounded judge loop`);
+  }
+  for (const id of ['8-preflight', '8-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
@@ -43,7 +49,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // in-flight items as needed"). Step 9 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['6b-adjudicate', '6c-cross', '8-adjudicate', '8-rejudge', '9-scope', '10-readiness-v2']) {
+  for (const id of ['6b-adjudicate', '6c-cross', '8-preflight', '8-close', '9-scope', '10-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))

@@ -15,7 +15,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  SOURCE_SECTIONS, factParagraphs, sectionText, sourceSectionText, splitFrontmatter,
+  SOURCE_SECTIONS, factParagraphs, numberedProofSteps, sourceSectionText, splitFrontmatter,
 } from './facts-block.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -318,13 +318,7 @@ function list(fm, key) {
 // come from tools/facts-block.mjs, the one parser for this grammar.
 function factsByLabel(body) { return factParagraphs(body); }
 function numberedSteps(body) {
-  const steps = new Map();
-  const sections = ['Proof', 'Refutation', 'Counterexample', 'Verification'];
-  for (const section of sections) for (const line of sectionText(body, section).split(/\r?\n/)) {
-    const match = line.match(/^(\d+\.\d+)\s+(.+)$/);
-    if (match) steps.set(match[1], { id: match[1], text: match[2] });
-  }
-  return steps;
+  return new Map(numberedProofSteps(body).map((step) => [step.id, step]));
 }
 function explicitTokens(text) {
   const out = new Set();

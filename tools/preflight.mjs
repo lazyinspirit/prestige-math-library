@@ -90,44 +90,49 @@ attempt('yaml', true, () => {
 // ---- model lanes ------------------------------------------------------------
 
 // WHICH CLI IS REQUIRED IS COMPUTED, NOT ASSUMED.
-// Two independent consumers decide it, and getting either wrong lets a run start
-// that cannot finish:
 //
-//   AGENTS  — every dispatched role is Claude Opus 5 on the claude CLI (owner,
-//             2026-08-23): authoring, Beta, reader, `alpha`, `refuter`,
-//             `orchestrator`, `scaffolder`, `mechanic`, and the
-//             audit's `audit-beta`/`audit-alpha`/`certifier`. Only
+// Two independent consumers decide it, and getting either wrong lets a run
+// start that cannot finish:
+//
+//   AGENTS  — every dispatched role resolves through LANES. Since 2026-08-24
+//             `agentic` and `secondary` are both gpt-5.4 on the CODEX runner:
+//             Beta, reader, `alpha`, `refuter`, `scaffolder`, `mechanic`, and
+//             the audit's `audit-beta`/`audit-alpha`/`certifier`. Only
 //             `audit-refuter` is elsewhere, and it is a keyed HTTP lane rather
-//             than a CLI. No workflow needs Codex for an agent any more.
-//   JUDGES  — both workflows judge with the configured lineup, `deepseek+opus`
-//             by default (owner, 2026-08-23), with `deepseek+terra` and
+//             than a CLI.
+//   JUDGES  — both workflows judge with the configured lineup, `deepseek+terra`
+//             by default, with `deepseek+opus`, `deepseek+terra` and
 //             `deepseek+sonnet` selectable.
 //
-// The claude CLI is therefore required by every workflow, and Codex is required
-// only when the SELECTED JUDGE LINEUP names a GPT-family lane. THIS IS THE EXACT
-// MIRROR of what stood here until 2026-08-23, and the hole it re-opens is the
-// one that paragraph warned about: checking only the lineup, as this did until
-// 2026-08-11, once reported a green preflight for a build that could not
-// dispatch its sole adjudicator. The agent side is what closes it, so
-// `needClaude` is unconditional below and must STAY unconditional for as long as
-// any agent lane is claude — do not simplify it back into the lineup test. The
-// lineup table is duplicated from judge.mts on purpose: preflight must not
+// CHECKING ONLY THE LINEUP IS THE HOLE THIS CLOSES. Until 2026-08-11 that is
+// all this did, and it reported a green preflight for a build that could not
+// dispatch its sole adjudicator. The agent side is what closes it — which is
+// why `AGENT_RUNNER` below is stated explicitly rather than inferred from the
+// judge lineup, and why it must move whenever LANES does. It has now been
+// claude-only, and is now codex-only, inside two days.
+//
+// Both tables are duplicated from the registry ON PURPOSE: preflight must not
 // import a tool it is checking is runnable.
+// `tools/autopilot/test/model-registry.test.mts` fails if the lineup drifts.
 const lineupModels = {
+  'deepseek+gpt54': ['deepseek-v4-pro', 'gpt-5.4'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
-}[process.env.JUDGE_LINEUP ?? 'deepseek+opus'] ?? [];
+  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-4-6'],
+}[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
+// Which runner every DISPATCHED AGENT ROLE uses — LANES.agentic and
+// LANES.secondary both resolve to gpt-5.4 on the codex runner (owner,
+// 2026-08-24). A build that cannot spawn this cannot author, audit, adjudicate
+// or repair anything, so it is unconditional for as long as that is true.
+const AGENT_RUNNER = 'codex';
 const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
-// Unconditional in both workflows: every agent lane is claude, and so is the
-// Opus judge lane whenever it is selected.
-const needClaude = true;
-// Nothing routes to Codex after 2026-08-23; only a GPT-family JUDGE lane does.
-const needCodex = judgeNeedsCodex;
+const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
+const needCodex = AGENT_RUNNER === 'codex' || judgeNeedsCodex;
+const needClaude = AGENT_RUNNER === 'claude' || judgeNeedsClaude;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
-  'install the Codex CLI — only a GPT-family judge lane spawns it now');
+  'install the Codex CLI — every agent lane spawns it, and so does a GPT-family judge lane');
 // PRESENCE IS NOT VALIDITY (2026-08-10, learned the hard way). This checks that
 // an auth record exists; it cannot tell a live token from a retired one, and
 // neither can `codex login status`, which reads the file and keeps reporting
@@ -144,11 +149,12 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
     : `no auth.json under ${codexHome}`,
   'run the Codex login flow; an expired or already-rotated token takes out every GPT-family lane at once');
 
-// UNCONDITIONAL, and the paragraph above says why: every dispatched agent role
-// runs `claude -p`, so a missing CLI is not a judge-lineup question. A build that
-// cannot spawn this cannot author, audit, adjudicate or repair anything.
+// CONDITIONAL SINCE 2026-08-24: no lane resolves to claude while the agent lanes
+// are codex, so this probes only when a claude-family JUDGE lane is selected.
+// It becomes unconditional again the moment LANES.agentic returns to claude —
+// which is what `AGENT_RUNNER` above exists to say in one place.
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  'install the claude CLI — every dispatched agent role and the Opus judge lane spawn `claude -p`');
+  'install the claude CLI — the configured Claude-family lane spawns `claude -p`');
 // PRESENCE IS NOT CAPACITY, and this is the failure that caused the 2026-08-23
 // move in the first place — with the roles reversed. A subscription that has
 // spent its weekly or session quota still has a working CLI and a valid session,

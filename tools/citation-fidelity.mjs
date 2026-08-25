@@ -146,6 +146,7 @@ const WIDENING = [arityWidened, boundDropped];
 
 const missingQuotes = [];
 const widenings = [];
+const upheld = [];
 let citationsChecked = 0;
 let citingItemsOnDisk = 0;
 const unauthored = new Set();
@@ -209,6 +210,10 @@ for (const file of files) {
 
       const line = lines.find((l) => l.fact === c.fact);
       if (!line) continue;
+      if (c.reviewed?.upheld === true && typeof c.reviewed.reason === 'string' && c.reviewed.reason.trim().length >= 40) {
+        upheld.push({ id, fact: c.fact, source, by: c.reviewed.by ?? 'unattributed', reason: c.reviewed.reason });
+        continue;
+      }
       for (const detect of WIDENING) {
         const why = detect(quote, line.text);
         if (why) {
@@ -232,10 +237,11 @@ const summary = {
   items_not_yet_authored: unauthored.size,
   quote_not_found: missingQuotes.length,
   widening_candidates: widenings.length,
+  upheld_by_review: upheld.length,
 };
 
 if (asJson) {
-  console.log(JSON.stringify({ summary, quote_not_found: missingQuotes, widening: widenings }, null, 2));
+  console.log(JSON.stringify({ summary, quote_not_found: missingQuotes, widening: widenings, upheld }, null, 2));
 } else {
   console.log(`citation-fidelity: ${summary.citations_checked} citation(s) over ${summary.citing_items_on_disk} authored item(s)`);
   if (summary.items_not_yet_authored) {
@@ -263,6 +269,10 @@ if (asJson) {
     }
   } else {
     console.log('\nWIDENING CANDIDATES — none found by the three detectors.');
+  }
+  if (upheld.length) {
+    console.log(`\nUPHELD BY REVIEW — ${upheld.length} citation row(s) an Alpha read and kept, with reasons on the record:`);
+    for (const u of upheld) console.log(`  ${u.id}  [${u.fact}] -> ${u.source}  by ${u.by}: ${String(u.reason).slice(0, 120)}`);
   }
   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
 }

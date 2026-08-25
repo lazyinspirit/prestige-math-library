@@ -61,14 +61,17 @@ entry. The `source` must be a dependency the item actually declares — a fact
 citing an item absent from `deps`/`justified_by` is
 `citation-undeclared-dependency`. `quote` must occur in the cited item's actual
 `Statement`, `Statement refuted`, `Definition`, or `Example`, and `uses` lists
-every proof step which cites that fact. This enforces faithful citation without
+every proof step which cites that fact, including citations in wrapped prose or
+display lines before the next numbered step. `facts-block.mjs` is the shared
+whole-step parser used by both checking and regeneration, so a continuation-line
+citation cannot disappear from both views. This enforces faithful citation without
 pretending that a substring test establishes the implication from the fact to its
 use.
 
 `--strict` is the whole-level gate: a scoped item with no contract at all becomes
 an error (`scope-missing-contract`) instead of a warning.
 
-Every numbered step is covered exactly once by a `derivations` or
+Every numbered step block is covered exactly once by a `derivations` or
 `routine_steps` entry, and every such entry names one step only. Entries record
 the exact fact, earlier step, given, or elementary operation used; they are the durable version of Beta's
 proof-obligation map. The example file is

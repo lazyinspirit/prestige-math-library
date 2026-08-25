@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch", "opened", "flagged"],
+  "properties": {
+    "batch": {
+      "type": "string",
+      "description": "The batch number this report covers, as a string."
+    },
+    "at": {
+      "type": "string",
+      "description": "ISO 8601 instant the reading finished. Optional; the engine stamps one if absent."
+    },
+    "opened": {
+      "type": "array",
+      "description": "Every item id you actually opened and read. This is the denominator that makes a clean verdict interpretable; an item you did not open is not a clean item.",
+      "items": { "type": "string" }
+    },
+    "not_opened": {
+      "type": "array",
+      "description": "Item ids in your scope you did not reach, if any. Say so rather than leaving it to be inferred.",
+      "items": { "type": "string" }
+    },
+    "flagged": {
+      "type": "array",
+      "description": "Concrete defects only. May be empty, and often should be — every flag costs an Alpha an adjudication, so a manufactured finding is worse than none.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "location", "defect", "evidence", "severity"],
+        "properties": {
+          "id": { "type": "string", "description": "The item id. Must be in your untouched scope." },
+          "location": {
+            "type": "string",
+            "description": "Exact location: Statement, Definition, a numbered proof step such as 2.1, a Facts entry such as [F3], the Remark, or the title."
+          },
+          "defect": {
+            "type": "string",
+            "enum": ["false-claim", "unlicensed-inference", "missing-hypothesis", "citation-inaccurate", "ill-formed", "overstrong-title-or-statement"],
+            "description": "The class of defect."
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Quote the dependency's text from disk, or give the counterexample, and say why it does not license what is written. A finding with no evidence costs an Alpha a round to discover it was not one."
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["fatal", "nonfatal"],
+            "description": "Fatal is a concrete false claim, an unlicensed inference, a missing hypothesis, an inaccurate citation, or a title or Statement asserting more than the proof gives. A gap a competent reader closes in 30 seconds is nonfatal."
+          }
+        }
+      }
+    },
+    "coverage_note": {
+      "type": "string",
+      "description": "Plain prose: what you read fully, what you sampled, and anything you could not check."
+    }
+  }
+}

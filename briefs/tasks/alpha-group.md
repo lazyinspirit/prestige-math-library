@@ -1,71 +1,67 @@
-> **Generic group task.** Your batches are named in the "This dispatch"
-> section appended below — work from that, and write your reports to the
-> `research/{{run}}-alpha-<your-group>-…` paths for your own group label.
+> **Generic group task.** Your batches and group label are in the appended
+> `# This dispatch` block. Write only your group’s artifacts.
 
-# Group Alpha — step-3 scaffold review, the batches named in your dispatch
+# Group Alpha — Step 3 scaffold and decline review
 
-Read every pair's `.pages.json`, `.notes.md` and `.coverage.json` together,
-against its design section, and return a `sufficient`/`insufficient` verdict
-per pair, naming for each `insufficient` the exact results to add and the
-source carrying them.
+Read every assigned batch’s `.pages.json`, `.notes.md`, and `.coverage.json`
+together with its governing design section. Decide whether each A/B pair is
+mathematically sufficient before proof authoring begins.
 
-You may repair the scaffold yourself where that is cheaper than routing
-(owner, 2026-08-16). At this step no proof exists, so your repair licence is
-the last two forms only — correct a false Statement or title, or add
-intermediate lemmas — inferring the route from `title`, `strategy` and `deps`.
-Step 3 is the last point where thinness costs a scaffold edit rather than a
-rewrite.
+## Required review
 
-**Write:** `research/{{run}}-alpha-<your-group>-step3-scaffold-review.md`,
-findings numbered `B<batch>-1, B<batch>-2, …`, stable ids, a severity table,
-and per-pair verdicts. **And** the machine half:
-`research/{{run}}-alpha-<your-group>-step3-verdicts.json`, which is the only
-artifact the closure gate reads.
+- Reconstruct every non-trivial proposed proof from `title`, `strategy`, and
+  `deps`. Verify that the dependencies actually supply every hypothesis and
+  construction the route needs.
+- Compare the scaffold with the design and `research/plan-spec.json`: missing
+  standard results, false statements, missing prerequisites, dishonest
+  decomposition, thin B pages, and A pages above the 60-item split limit are
+  findings.
+- Open every cited source at its locator. Confirm the coverage rows faithfully
+  represent that range and that two independent treatments back each pair.
+- Check every published dependency on disk and every component-provenance label.
+- A genuinely distinct second proof of an existing theorem is welcome; a bare
+  pointer or duplicated argument is not.
 
-## The run at a glance
+For every `deferred` or `out-of-scope` row, make an exact durable decision. Run:
 
-{{batch_table}}
+```sh
+node tools/scope-decisions.mjs refresh --run {{run}} --group <your-group>
+```
 
-Each Beta task file names the pages, their orders and the design section that
-governs the pair. **The design section is where that pair's traps are stated**
-— open it, and check the scaffold against them explicitly. They are the known
-defect classes for those specific pages, and a scaffold that trips one is
-`insufficient` however rich it looks.
+Then edit `research/{{run}}-alpha-<your-group>-scope-decisions.json`. Replace
+every `pending` decision with:
 
-## What to check, every batch
+- `stands` when the reason and destination are correct in the current page
+  closure; or
+- `owner-decision` when the result genuinely needs a new page or reading-order
+  change.
 
-- **Against the design**: a route the design decided and the scaffold
-  contradicts; a result the design lists and the scaffold drops; a
-  prerequisite the design names that is outside the page's `requires` closure.
-- **Against `plan-spec.json`**: `order` and `requires` disagreements between
-  the design document and the spec. A backward re-pin you verify from disk may
-  be applied to `plan-spec.json` directly — run
-  `node tools/validate-plan.mjs research/plan-spec.json` after, and record it.
-  A forward edge is a reading-order change and is owner-only: record it as
-  blocked.
-- **A second proof of a published theorem is welcome** (owner, 2026-08-20), and
-  a scaffold that reduced one to a bare pointer is thinner than it needed to be.
-  Where a page's development genuinely reaches a result the library already
-  proves by another route, the fuller form — a theorem with its own proof, a
-  distinct id naming the route, and a cross-reference each way — is the
-  preferred one. Adding it is inside your step-3 licence. The same proof written
-  twice is not, and neither is an invented claim.
-- **Size**: an A page whose scaffold exceeds 60 items is a SPLIT, decided now.
-- **Provenance order**: no `ai-generated` statement or construction may be a
-  load-bearing scaffold dependency. `literature-derived` and `ai-altered` may
-  be; a published item with no component provenance is `legacy-unclassified`
-  and must be opened and either confirmed or sourced before it is relied on.
-- **The harvest, for faithfulness.** `coverage-checklist.mjs` checks it is
-  structurally complete and true of disk. You check the enumerated headings
-  are really that source's own headings over the range the Beta says it read,
-  and that every disposition is about that specific result.
-- **Two independent treatments per pair**, at least one a textbook, monograph
-  or full lecture-note set with a harvestable table of contents. Wikipedia and
-  encyclopedia entries are convention tiebreakers, never a pair's backing.
+Give concrete disk/source evidence for every decision. If you edit a coverage
+row or its destination, rerun `refresh`, resolve any newly pending row, and run:
 
-## Also standing (from `briefs/alpha.md`)
+```sh
+node tools/scope-decisions.mjs check --run {{run}} --group <your-group>
+```
 
-Component-provenance labels checked per item; every published item the
-scaffold cites opened on disk; declines named by page id, never by prose.
+The receipt hashes the exact decline and its relevant closure. It is the
+machine proof that the decline was actually reviewed; a page-level verdict or
+prose claim cannot replace it.
+
+## Repair licence
+
+At Step 3 no proof exists. You may correct a false statement/title, add a
+needed intermediate lemma, or add a genuine distinct route when the design and
+dependencies determine it. A verified backward `requires` edge may be applied
+and validated. A forward edge, new page, or reading-order change is owner-only.
+
+## Outputs
+
+1. `research/{{run}}-alpha-<your-group>-step3-scaffold-review.md`, with stable
+   finding ids `B<batch>-1`, a severity table, evidence, and per-pair verdicts.
+2. `research/{{run}}-alpha-<your-group>-step3-verdicts.json`, one
+   `sufficient`/`insufficient` row per A page. An insufficient row must name the
+   exact missing result and source.
+3. `research/{{run}}-alpha-<your-group>-scope-decisions.json`, with no pending
+   or stale decision.
 
 **No permission prompts of any kind**, including inside an `&&` chain.

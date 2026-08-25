@@ -17,19 +17,29 @@ import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
 import { itemHashJudge } from '../../item-hash.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP, MODELS } from '../../models.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'apply-judge-stamps.mjs');
-// The CONFIGURED lineup, which the tool resolves from JUDGE_LINEUP and these
-// tests run at its default (owner, 2026-08-23: deepseek+opus). The retired-lane
-// row below is whichever lane is not in it — the roles have now swapped three
-// times, and the property under test did not move once.
-const LANES = ['deepseek-v4-pro', 'claude-opus-5[1m]'];
-const RETIRED_LANE = 'gpt-5.6-terra';
-// `[1m]` is a CHARACTER CLASS in a regex and a literal in the model id. Every
-// assertion below that matches the stamp text must go through this, or it
-// silently matches `claude-opus-5m` and passes against a stamp nobody wrote.
+// The CONFIGURED lineup, READ FROM THE REGISTRY rather than copied. This was a
+// literal `['deepseek-v4-pro', 'claude-opus-5[1m]']` and it broke on
+// 2026-08-24 when the owner moved the judge lane to gpt-5.4 — a lane change is
+// the supported operation the registry exists to make cheap, and a test that
+// fails on it is just a fourth copy of the assignment. The lane has now swapped
+// four times and the property under test has not moved once, which is the whole
+// point: what is asserted below is that a paired pass stamps and a lane
+// rejection does not, whoever the lanes happen to be.
+const LANES = [...JUDGE_LINEUPS[DEFAULT_LINEUP]];
+// Any model the registry knows that is NOT in the configured lineup: rows from
+// a retired lane must stay append-only evidence and never satisfy coverage.
+const RETIRED_LANE = Object.values(MODELS)
+  .map((m: any) => m.id)
+  .find((id: string) => !LANES.includes(id)) as string;
+// A model id can contain regex metacharacters — `claude-opus-5[1m]` carries a
+// CHARACTER CLASS — so every assertion matching stamp text must escape through
+// this, or it silently matches `claude-opus-5m` and passes against a stamp
+// nobody wrote.
 const SECOND_LANE_RE = LANES[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const STUB_CONTEXT = 'c'.repeat(64);
 const OTHER_CONTEXT = 'f'.repeat(64);
@@ -88,13 +98,27 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
 
   r = run(dir, '--verify');
   assert.equal(r.status, 0, r.stderr);
-  assert.match(r.stdout, /1 stamped current, 0 lane-rejected, 0 recorded-not-proved, 0 problem\(s\)/);
+  assert.match(r.stdout, /1 stamped current, 0 lane-rejected, 0 terminal manual, 0 recorded-not-proved, 0 problem\(s\)/);
 
   // idempotent: a re-apply on the same day rewrites nothing
   r = run(dir, '--apply', '--report', 'research/stamps.json');
   assert.equal(r.status, 0);
   const again = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
   assert.equal(again.stamped[0].changed, false);
+});
+
+test('--items stamps an explicitly certified subset without needing a manifest-wide pass', () => {
+  const dir = fixture(['itm-subset']);
+  const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-subset.md'), 'utf8'));
+  writeLedger(dir, [
+    ledgerRow('itm-subset', LANES[0], true, h),
+    ledgerRow('itm-subset', LANES[1], true, h),
+  ]);
+  const args = [TOOL, '--ledger', 'research/judge.jsonl', '--items', 'itm-subset'];
+  let result = spawnSync(process.execPath, [...args, '--apply'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  result = spawnSync(process.execPath, [...args, '--verify'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
 });
 
 test('a lane rejection never stamps; a stale pass block fails verify and is stripped on apply', () => {
@@ -124,7 +148,7 @@ test('a lane rejection never stamps; a stale pass block fails verify and is stri
 
   r = run(dir, '--verify');
   assert.equal(r.status, 0, 'an honest lane-rejected skip passes the gate');
-  assert.match(r.stdout, /0 stamped current, 1 lane-rejected, 0 recorded-not-proved, 0 problem\(s\)/);
+  assert.match(r.stdout, /0 stamped current, 1 lane-rejected, 0 terminal manual, 0 recorded-not-proved, 0 problem\(s\)/);
 });
 
 test('recorded-not-proved material is never stamped and an old stamp is stripped', () => {

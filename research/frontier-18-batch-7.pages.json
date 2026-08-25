@@ -1,0 +1,975 @@
+[
+  {
+    "order": 288.007,
+    "id": "lebesgue-measure-on-euclidean-space",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Lebesgue Measure on Euclidean Space",
+    "companion": "lebesgue-measure-on-euclidean-space-examples",
+    "requires": [
+      "outer-measure-and-the-caratheodory-extension-theorem-examples",
+      "areas-of-elementary-plane-figures",
+      "separation-axioms"
+    ],
+    "items": [
+      {
+        "id": "def-half-open-box",
+        "kind": "definition",
+        "title": "Half-open boxes in $\\mathbb{R}^n$ and their volume",
+        "deps": [
+          "def-extended-reals",
+          "def-multidimensional-rectangle-and-volume",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-half-open-boxes-form-an-elementary-family",
+        "kind": "lemma",
+        "title": "Half-open boxes are closed under intersection, and the complement of a half-open box is a finite disjoint union of half-open boxes",
+        "strategy": "For the intersection, note that $x$ lies in both boxes exactly when $\\max(a_i,a_i')<x_i\\le\\min(b_i,b_i')$ for every $i<n$, the extremes being taken in the extended order, so the intersection is the box with those parameters; the empty case is the one where some coordinate has $\\max(a_i,a_i')\\ge\\min(b_i,b_i')$. For the complement, split coordinate by coordinate: the complement of $(a_i,b_i]$ in $\\overline{\\mathbb R}$-parameter form is the disjoint union of at most the two boxes $(-\\infty,a_i]$ and $(b_i,+\\infty]$, so grouping the $n$ coordinates in order writes $\\mathbb R^n\\setminus B$ as the disjoint union of the boxes obtained by taking, for the first index $i$ at which a point leaves $B$, one of those two pieces in slot $i$, the box's own interval in slots below $i$, and all of $\\mathbb R$ above $i$. Check $n=1$ and the degenerate case $B=\\varnothing$, whose complement is the single box $\\mathbb R^n$.",
+        "deps": [
+          "def-half-open-box",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "def-elementary-set-in-rn",
+        "kind": "definition",
+        "title": "Elementary sets: the finite unions of half-open boxes in $\\mathbb{R}^n$",
+        "deps": [
+          "def-half-open-box"
+        ]
+      },
+      {
+        "id": "prop-elementary-sets-form-an-algebra",
+        "kind": "proposition",
+        "title": "The elementary sets form an algebra of subsets of $\\mathbb{R}^n$ containing every half-open box",
+        "strategy": "The empty box gives $\\varnothing$ and the box with all parameters $(-\\infty,+\\infty]$ gives $\\mathbb R^n$. Closure under finite unions is immediate from the definition. For complements, write $\\mathbb R^n\\setminus\\bigcup_{j<m}B_j=\\bigcap_{j<m}(\\mathbb R^n\\setminus B_j)$, expand each complement as a finite union of boxes, and distribute the intersection over the unions, using that an intersection of boxes is a box. Verify the empty union $m=0$ separately.",
+        "deps": [
+          "def-elementary-set-in-rn",
+          "lem-half-open-boxes-form-an-elementary-family",
+          "def-algebra-of-subsets"
+        ]
+      },
+      {
+        "id": "lem-elementary-sets-are-finite-disjoint-unions-of-half-open-boxes",
+        "kind": "lemma",
+        "title": "Every elementary set is a finite disjoint union of half-open boxes, and any finitely many boxes admit a common grid refinement",
+        "strategy": "Given boxes $B_0,\\dots,B_{m-1}$, collect for each coordinate $i$ the finite set of parameters $a_{j,i},b_{j,i}$ occurring in them, together with $-\\infty$ and $+\\infty$, and list it increasingly as $c_{i,0}<\\dots<c_{i,N_i}$. The cells $\\prod_{i<n}(c_{i,k_i},c_{i,k_i+1}]$ are pairwise disjoint, and each $B_j$ is exactly the union of the cells it contains, because a cell meets $B_j$ only if it lies inside it. Hence $\\bigcup_j B_j$ is the disjoint union of the cells meeting it. Cover the cases $m=0$ and boxes with infinite parameters.",
+        "deps": [
+          "def-elementary-set-in-rn",
+          "lem-half-open-boxes-form-an-elementary-family",
+          "prop-elementary-sets-form-an-algebra"
+        ]
+      },
+      {
+        "id": "lem-box-volume-is-additive-over-grid-subdivisions",
+        "kind": "lemma",
+        "title": "The volume of a half-open box is the sum of the volumes of the cells of any coordinate grid subdividing it",
+        "strategy": "Induct on the number of coordinates that are cut. Cutting a single coordinate at $a_i=c_0<\\dots<c_N=b_i$ splits the box into $N$ boxes whose volumes sum to the original by distributivity and the telescoping identity $\\sum_{k<N}(c_{k+1}-c_k)=b_i-a_i$; when the cut coordinate has an infinite side, at least one piece is again infinite in that coordinate and both sides are $+\\infty$. Iterating over coordinates gives the full grid. Every nonempty half-open box has all sides strictly positive, so no factor is zero and no product of the form $0\\cdot(+\\infty)$ is ever formed; the empty box is treated by the convention $\\operatorname{vol}(\\varnothing)=0$.",
+        "deps": [
+          "def-half-open-box",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "thm-elementary-volume-is-well-defined",
+        "kind": "theorem",
+        "title": "The sum of the volumes of a disjoint box decomposition of an elementary set does not depend on the decomposition",
+        "strategy": "Let $A=\\bigsqcup_{j<m}B_j=\\bigsqcup_{l<p}C_l$ be two disjoint box decompositions. Form the common grid refinement of all $B_j$ and all $C_l$. Each $B_j$ is a disjoint union of grid cells, so $\\operatorname{vol}(B_j)$ is the sum of their volumes by the grid lemma, and summing over $j$ gives the total over all cells inside $A$; the same computation applies to the $C_l$. Both sums are nonnegative extended sums of finitely many terms, so the argument uses no subtraction and holds when some volume is $+\\infty$. Include the case $A=\\varnothing$, where both sums are empty and equal $0$.",
+        "deps": [
+          "def-elementary-set-in-rn",
+          "lem-elementary-sets-are-finite-disjoint-unions-of-half-open-boxes",
+          "lem-box-volume-is-additive-over-grid-subdivisions",
+          "lem-half-open-boxes-form-an-elementary-family",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "prop-elementary-volume-is-finitely-additive-and-monotone",
+        "kind": "proposition",
+        "title": "Elementary volume is finitely additive, monotone and finitely subadditive on the elementary algebra",
+        "strategy": "Additivity on a disjoint pair follows by concatenating disjoint box decompositions of the two sets and applying well-definedness to the union. Monotonicity follows from additivity applied to $A\\subseteq A'$ through $A'=A\\sqcup(A'\\setminus A)$, which is legitimate because the elementary sets form an algebra. Subadditivity follows by disjointifying $A_0\\cup\\dots\\cup A_{m-1}$ into $A_j\\setminus\\bigcup_{l<j}A_l$ and using monotonicity termwise. All three statements hold with the value $+\\infty$ allowed, since only addition and comparison are used.",
+        "deps": [
+          "thm-elementary-volume-is-well-defined",
+          "prop-elementary-sets-form-an-algebra",
+          "lem-elementary-sets-are-finite-disjoint-unions-of-half-open-boxes"
+        ]
+      },
+      {
+        "id": "lem-elementary-sets-admit-compact-inner-and-open-outer-approximations",
+        "kind": "lemma",
+        "title": "Every elementary set is squeezed in volume between a compact subset and an elementary set whose interior contains it",
+        "strategy": "For $\\delta>0$ define the canonical enlargement $A^{+\\delta}:=\\bigcup_{s\\in[0,\\delta]^n}(A+s)$; on a box $(a,b]$ it is the box $(a,b+\\delta\\mathbf 1]$, so it is elementary for every elementary $A$, contains $A$ in its interior, and its volume tends to that of $A$ as $\\delta$ decreases, by finite subadditivity applied to one box decomposition. This enlargement depends on $A$ and $\\delta$ alone, so no set is chosen. For the inner approximation fix one disjoint box decomposition of $A$, shrink each bounded box $(a,b]$ to $(a+\\delta\\mathbf 1,b-\\delta\\mathbf 1]$ and take closures, obtaining a compact subset of $A$ whose elementary volume tends to that of $A$; when $A$ has infinite volume, intersect first with $(-R,R]^n$ and let $R$ grow.",
+        "deps": [
+          "def-elementary-set-in-rn",
+          "thm-elementary-volume-is-well-defined",
+          "prop-elementary-volume-is-finitely-additive-and-monotone",
+          "def-metric-topology",
+          "def-metric-interior-closure-boundary",
+          "thm-heine-borel-rn",
+          "lem-metrics-on-rn",
+          "def-translation-of-a-set-in-rn"
+        ]
+      },
+      {
+        "id": "thm-box-volume-is-a-premeasure-on-the-elementary-algebra",
+        "kind": "theorem",
+        "title": "Elementary volume is a sigma-finite premeasure on the algebra of elementary sets",
+        "strategy": "Let $A=\\bigsqcup_{k\\in\\mathbb N}A_k$ with all sets elementary. For $\\ge$, finite additivity and monotonicity give $\\sum_{k<N}\\mu_0(A_k)=\\mu_0(\\bigsqcup_{k<N}A_k)\\le\\mu_0(A)$ for every $N$, and the nonnegative extended sum is the supremum of these. For $\\le$ with $\\mu_0(A)<\\infty$ and $\\varepsilon>0$: choose one compact $K\\subseteq A$ with $\\mu_0(A)-\\varepsilon\\le\\mu_0(K)$, and for each $k$ set $\\delta_k:=2^{-m_k}$ where $m_k$ is the least natural number with $\\mu_0(A_k^{+2^{-m}})\\le\\mu_0(A_k)+\\varepsilon 2^{-k}$, so no choice principle is used. The interiors of the $A_k^{+\\delta_k}$ cover $K$, Heine-Borel extracts a finite subcover, and finite subadditivity gives $\\mu_0(K)\\le\\sum_{k<N}\\mu_0(A_k^{+\\delta_k})\\le\\sum_k\\mu_0(A_k)+2\\varepsilon$. For $\\mu_0(A)=\\infty$, apply the finite case to $A\\cap(-R,R]^n$ and let $R$ grow. Sigma-finiteness is $\\mathbb R^n=\\bigcup_k(-k,k]^n$.",
+        "deps": [
+          "prop-elementary-sets-form-an-algebra",
+          "thm-elementary-volume-is-well-defined",
+          "prop-elementary-volume-is-finitely-additive-and-monotone",
+          "lem-elementary-sets-admit-compact-inner-and-open-outer-approximations",
+          "def-premeasure-on-an-algebra",
+          "thm-heine-borel-rn",
+          "def-nonnegative-extended-series",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "def-lebesgue-outer-measure",
+        "kind": "definition",
+        "title": "Lebesgue outer measure on $\\mathbb{R}^n$",
+        "deps": [
+          "thm-box-volume-is-a-premeasure-on-the-elementary-algebra",
+          "def-outer-measure-induced-by-a-premeasure",
+          "def-elementary-set-in-rn"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+        "kind": "theorem",
+        "title": "Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume",
+        "strategy": "Apply the corollary that a premeasure-induced set function is an outer measure under countable choice, and the choice-free lemma that the induced set function agrees with the premeasure on the source algebra, both to the premeasure of the previous theorem. Record explicitly that only the outer-measure axioms consume countable choice, while the agreement clause does not, and that the covering cost of a single box already bounds the outer measure of that box from above.",
+        "deps": [
+          "def-lebesgue-outer-measure",
+          "cor-premeasure-induced-set-function-is-an-outer-measure",
+          "lem-induced-outer-measure-agrees-with-premeasure",
+          "def-outer-measure",
+          "def-countable-choice",
+          "thm-box-volume-is-a-premeasure-on-the-elementary-algebra"
+        ]
+      },
+      {
+        "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+        "kind": "definition",
+        "title": "Lebesgue measurable sets, the Lebesgue sigma-algebra $\\mathcal{L}(\\mathbb{R}^n)$, and Lebesgue measure $\\lambda_n$",
+        "deps": [
+          "def-lebesgue-outer-measure",
+          "def-caratheodory-measurable-set"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-measure-is-a-complete-measure",
+        "kind": "theorem",
+        "title": "Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume",
+        "strategy": "Carathéodory's theorem applied to Lebesgue outer measure gives the sigma-algebra and the complete measure. The extension theorem, applied to elementary volume, gives that every elementary set is Carathéodory measurable and that the restriction agrees with volume there. Note that every set of Lebesgue outer measure zero is measurable, which is the completeness clause, and check the boundary cases $\\varnothing$ and $\\mathbb R^n$.",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-caratheodory-outer-measure-theorem",
+          "lem-source-algebra-is-caratheodory-measurable",
+          "thm-caratheodory-extension-theorem",
+          "def-measure",
+          "def-complete-measure-space",
+          "def-countable-choice",
+          "def-elementary-set-in-rn"
+        ]
+      },
+      {
+        "id": "def-dyadic-cube-in-rn",
+        "kind": "definition",
+        "title": "Dyadic cubes of generation $k$ in $\\mathbb{R}^n$",
+        "deps": [
+          "def-half-open-box",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "lem-dyadic-cubes-of-one-generation-partition-rn",
+        "kind": "lemma",
+        "title": "For each generation, the dyadic cubes of that generation are pairwise disjoint and cover $\\mathbb{R}^n$",
+        "strategy": "For $x\\in\\mathbb R^n$ and $k\\in\\mathbb N$ the integers $m_i$ with $m_i2^{-k}<x_i\\le(m_i+1)2^{-k}$ exist and are unique, by the integer part applied to $2^kx_i$, so $x$ lies in exactly one generation-$k$ dyadic cube. Record the volume $2^{-kn}$ of each such cube from the box volume, and check $k=0$.",
+        "deps": [
+          "def-dyadic-cube-in-rn",
+          "def-half-open-box",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "lem-two-dyadic-cubes-are-nested-or-disjoint",
+        "kind": "lemma",
+        "title": "Two dyadic cubes are either disjoint or one contains the other",
+        "strategy": "Let $Q$ have generation $k$ and $Q'$ generation $k'$ with $k\\le k'$. By the partition lemma at generation $k'$, $Q$ is the disjoint union of the generation-$k'$ cubes it contains, so $Q'$ either is one of them, hence contained in $Q$, or is disjoint from all of them, hence from $Q$. Treat $k=k'$ through the same partition statement.",
+        "deps": [
+          "def-dyadic-cube-in-rn",
+          "lem-dyadic-cubes-of-one-generation-partition-rn"
+        ]
+      },
+      {
+        "id": "thm-open-subsets-of-rn-are-countable-disjoint-unions-of-dyadic-cubes",
+        "kind": "theorem",
+        "title": "Every open subset of $\\mathbb{R}^n$ is the union of a countable pairwise disjoint family of dyadic cubes",
+        "strategy": "For open $U$ let $\\mathcal D$ be the family of dyadic cubes contained in $U$ and let $\\mathcal M$ be its maximal members under inclusion. Every $x\\in U$ lies in some cube of $\\mathcal D$, because a small enough generation puts the whole cube containing $x$ inside a ball inside $U$; the generations of the cubes of $\\mathcal D$ containing $x$ are bounded below, so $x$ lies in a maximal one. Maximal cubes are pairwise disjoint by the nesting lemma, and the family of all dyadic cubes is countable, so $\\mathcal M$ is countable. Check $U=\\varnothing$, where the family is empty.",
+        "deps": [
+          "def-dyadic-cube-in-rn",
+          "lem-dyadic-cubes-of-one-generation-partition-rn",
+          "lem-two-dyadic-cubes-are-nested-or-disjoint",
+          "def-metric-topology",
+          "lem-metrics-on-rn",
+          "def-metric-ball",
+          "def-countable",
+          "thm-rational-points-and-boxes-in-rn"
+        ]
+      },
+      {
+        "id": "lem-half-open-boxes-generate-the-borel-sigma-algebra-on-rn",
+        "kind": "lemma",
+        "title": "The sigma-algebra generated by the half-open boxes of $\\mathbb{R}^n$ is the Borel sigma-algebra",
+        "strategy": "Every half-open box is Borel, being the intersection of the countably many open boxes obtained by pushing each finite lower parameter down by $1/m$ and intersecting with the open box on the upper parameters; hence the generated sigma-algebra is contained in the Borel sigma-algebra. Conversely every open set is a countable union of dyadic cubes, so the open sets lie in the generated sigma-algebra, and minimality of the Borel sigma-algebra over the open sets gives the reverse inclusion. The published generation theorem for rational half-open boxes gives the same conclusion by a second route and fixes the same $(a_i,b_i]$ convention.",
+        "deps": [
+          "def-elementary-set-in-rn",
+          "def-half-open-box",
+          "def-generated-sigma-algebra",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "def-borel-sigma-algebra",
+          "thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn",
+          "thm-open-subsets-of-rn-are-countable-disjoint-unions-of-dyadic-cubes",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "thm-borel-sets-are-lebesgue-measurable",
+        "kind": "theorem",
+        "title": "Assuming countable choice, every Borel subset of $\\mathbb{R}^n$ is Lebesgue measurable",
+        "strategy": "The Lebesgue measurable sets form a sigma-algebra containing every elementary set, hence every half-open box; minimality of the sigma-algebra generated by the half-open boxes and its identification with the Borel sigma-algebra give the inclusion. State the inclusion as strict nowhere: the strictness is a separate matter settled on the companion page.",
+        "deps": [
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "lem-half-open-boxes-generate-the-borel-sigma-algebra-on-rn",
+          "def-borel-sigma-algebra",
+          "def-sigma-algebra",
+          "thm-generated-sigma-algebra-exists-and-is-minimal"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+        "kind": "theorem",
+        "title": "A box in $\\mathbb{R}^n$ with parameters $a_i\\le b_i$ is Lebesgue measurable of measure $\\prod_{i<n}(b_i-a_i)$, whichever of its faces are included",
+        "strategy": "The half-open case is the extension clause. For the closed box $[a,b]$, write it as the decreasing intersection of the half-open boxes $(a-1/m\\mathbf 1,b]$ and apply continuity from above, legitimate because the first of them has finite measure when the box is bounded; for the open box use the increasing union of $(a,b-1/m\\mathbf 1]$ and continuity from below. Boxes with mixed faces sit between the open and closed ones and are squeezed. A box with $a_i=b_i$ for some $i$ has measure zero by the same squeeze, and unbounded boxes are handled by exhaustion with $(-R,R]^n$.",
+        "deps": [
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-continuity-from-above-for-measures",
+          "thm-continuity-from-below-for-measures",
+          "def-half-open-box",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+        "kind": "proposition",
+        "title": "Lebesgue measure is sigma-finite, and every metrically bounded subset of $\\mathbb{R}^n$ has finite outer measure",
+        "strategy": "The cubes $(-k,k]^n$ increase to $\\mathbb R^n$ and have finite measure, which is sigma-finiteness. A bounded set is contained in one of them by the comparison of the Euclidean and maximum metrics, so monotonicity of the outer measure bounds it. A compact set is bounded, hence of finite measure once it is known to be Borel.",
+        "deps": [
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-metric-bounded-diameter",
+          "lem-metrics-on-rn",
+          "thm-heine-borel-rn",
+          "prop-measure-monotonicity"
+        ]
+      },
+      {
+        "id": "prop-countable-subsets-of-rn-are-lebesgue-null",
+        "kind": "proposition",
+        "title": "Every at most countable subset of $\\mathbb{R}^n$ is Lebesgue null; in particular $\\lambda_1(\\mathbb{Q})=0$",
+        "strategy": "A singleton is the intersection of the boxes $(x-1/m\\mathbf 1,x]$, hence Borel of measure at most $m^{-n}$ for every $m$, hence null. Countable subadditivity of the measure over an enumeration gives the general case, and the rationals are countable. State the singleton computation before the countable one so the index $m$ starts at $1$ and no reciprocal of zero appears.",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-countable",
+          "thm-rationals-countable",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-measure-null-set-and-almost-everywhere"
+        ]
+      },
+      {
+        "id": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+        "kind": "proposition",
+        "title": "A box with a degenerate side is Lebesgue null, and so is every coordinate hyperplane in $\\mathbb{R}^n$",
+        "strategy": "A box with $a_i=b_i$ has measure zero by the box theorem. The coordinate hyperplane $\\{x:x_i=c\\}$ is the countable union over $R\\in\\mathbb N$ of its intersections with $[-R,R]^n$, each contained in a closed box with $i$-th side degenerate, so each is null and the union is null by countable subadditivity. Cover $n=1$, where the hyperplane is a singleton.",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-half-open-box",
+          "def-measure-null-set-and-almost-everywhere"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+        "kind": "theorem",
+        "title": "Assuming countable choice, the Lebesgue outer measure of an arbitrary subset of $\\mathbb{R}^n$ is the infimum of the measures of the open sets containing it",
+        "strategy": "One inequality is monotonicity. For the other, assume the outer measure finite, fix $\\varepsilon>0$ and a countable elementary cover whose volume sum is within $\\varepsilon$ of it; replace each cover set $E_k$ by the canonical enlargement $E_k^{+\\delta_k}$ with $\\delta_k$ the least reciprocal power of two making the volume increase at most $\\varepsilon2^{-k}$, and take the union of the interiors. That union is open, contains the set, and countable subadditivity bounds its measure by the volume sum plus $2\\varepsilon$. The infinite case is trivial because $\\mathbb R^n$ is open.",
+        "deps": [
+          "def-lebesgue-outer-measure",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "lem-elementary-sets-admit-compact-inner-and-open-outer-approximations",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-metric-topology",
+          "def-countable-choice",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ]
+      },
+      {
+        "id": "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls",
+        "kind": "corollary",
+        "title": "Every subset of $\\mathbb{R}^n$ has a $G_\\delta$ measurable hull of the same outer measure",
+        "strategy": "Intersect open supersets whose measures decrease to the outer measure, obtained from outer regularity at the thresholds $\\lambda^*(A)+1/m$ when that is finite and from $\\mathbb R^n$ otherwise. The intersection is a $G_\\delta$, hence Borel, contains the set, and has the same measure. Note that this exhibits Lebesgue outer measure as a regular outer measure in the sense of the measurable-hull definition, which the premeasure regularity theorem also gives.",
+        "deps": [
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "def-regular-outer-measure-and-measurable-hull",
+          "thm-premeasure-induced-outer-measure-is-regular",
+          "def-lebesgue-outer-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-g-delta-and-f-sigma-in-a-topological-space",
+          "def-countable-choice"
+        ]
+      },
+      {
+        "id": "lem-lebesgue-measurable-sets-have-small-open-excess",
+        "kind": "lemma",
+        "title": "For a Lebesgue measurable set and every positive $\\varepsilon$ there is an open superset whose difference from it has outer measure below $\\varepsilon$",
+        "strategy": "If the set has finite measure, outer regularity supplies an open $U$ with $\\lambda(U)\\le\\lambda(E)+\\varepsilon$, and measurability plus finiteness turn this into $\\lambda(U\\setminus E)\\le\\varepsilon$ by the difference formula. In general split $E$ along the shells $(-k,k]^n\\setminus(-(k-1),k-1]^n$, each piece of finite measure, apply the finite case with $\\varepsilon2^{-k}$, and take the union of the open sets. The shell at $k=0$ is empty and must be handled, and the subtraction step is used only where the measure is finite.",
+        "deps": [
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "prop-measure-of-a-set-difference",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ]
+      },
+      {
+        "id": "lem-small-open-excess-implies-lebesgue-measurable",
+        "kind": "lemma",
+        "title": "A subset of $\\mathbb{R}^n$ with open supersets of arbitrarily small excess is Lebesgue measurable",
+        "strategy": "Take open $U_m\\supseteq E$ with $\\lambda^*(U_m\\setminus E)<1/(m+1)$ and put $G:=\\bigcap_m U_m$. Then $G$ is a $G_\\delta$, hence Borel, hence measurable, and $G\\setminus E\\subseteq U_m\\setminus E$ for every $m$, so $\\lambda^*(G\\setminus E)=0$ and $G\\setminus E$ is measurable by completeness. Therefore $E=G\\setminus(G\\setminus E)$ is measurable. Index the $U_m$ from $m=0$ so the threshold $1/(m+1)$ is defined.",
+        "deps": [
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-g-delta-and-f-sigma-in-a-topological-space",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ]
+      },
+      {
+        "id": "thm-littlewood-characterisations-of-lebesgue-measurability",
+        "kind": "theorem",
+        "title": "Assuming countable choice, four equivalent descriptions of a Lebesgue measurable subset of $\\mathbb{R}^n$",
+        "strategy": "Prove the cycle: measurable implies small open excess; small open excess implies the $G_\\delta$-minus-null form, by the intersection built in the previous lemma; that form implies measurable, by completeness; and complementation converts the open-excess and $G_\\delta$ forms into the closed-deficit and $F_\\sigma$-plus-null forms. Each implication must be stated for sets of infinite measure as well, which is why the excess is measured by outer measure of the difference rather than by a difference of measures.",
+        "deps": [
+          "lem-lebesgue-measurable-sets-have-small-open-excess",
+          "lem-small-open-excess-implies-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-g-delta-and-f-sigma-in-a-topological-space",
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "def-countable-choice"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-inner-regularity-by-closed-and-compact-sets",
+        "kind": "theorem",
+        "title": "Assuming countable choice, the Lebesgue measure of a measurable set is the supremum of the measures of its compact subsets",
+        "strategy": "The countable choice is inherited from the cited Littlewood theorem and is stated in the Statement rather than dropped, matching the design's ledger row for inner regularity. Littlewood's closed-deficit form gives closed $F\\subseteq E$ with $\\lambda^*(E\\setminus F)$ small when $\\lambda(E)$ is finite, and then $\\lambda(F)$ is close to $\\lambda(E)$. Intersecting $F$ with the closed balls of radius $R$ and using continuity from below replaces $F$ by a compact set, since $\\mathbb R^n$ is sigma-compact and closed subsets of compact sets are compact. When $\\lambda(E)=\\infty$, apply the finite case to $E\\cap(-k,k]^n$, whose measures increase to $\\infty$ by continuity from below.",
+        "deps": [
+          "thm-littlewood-characterisations-of-lebesgue-measurability",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "cor-rn-is-locally-compact-and-sigma-compact",
+          "thm-heine-borel-rn",
+          "thm-continuity-from-below-for-measures",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-countable-choice"
+        ]
+      },
+      {
+        "id": "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+        "kind": "corollary",
+        "title": "$\\mathcal{L}(\\mathbb{R}^n)$ is exactly the completion of the restriction of $\\lambda_n$ to the Borel sets",
+        "strategy": "Elementary volume is a sigma-finite premeasure and the sigma-algebra generated by the elementary algebra is the Borel sigma-algebra, so the Carathéodory-domain theorem applies verbatim and identifies the Lebesgue sigma-algebra with the completion of the Borel restriction, the measures agreeing there. State the completion in the published sense, sets differing from a Borel set by a subset of a Borel null set.",
+        "deps": [
+          "thm-caratheodory-domain-is-the-completion-under-sigma-finiteness",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "lem-half-open-boxes-generate-the-borel-sigma-algebra-on-rn",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-completion-of-a-measure-space",
+          "thm-completion-of-a-measure-space",
+          "def-countable-choice",
+          "thm-box-volume-is-a-premeasure-on-the-elementary-algebra"
+        ]
+      },
+      {
+        "id": "rem-two-senses-of-regularity-for-lebesgue-measure",
+        "kind": "remark",
+        "title": "Regularity of an outer measure and regularity of a measure with respect to open and compact sets are different conditions, both satisfied here",
+        "deps": [
+          "def-regular-outer-measure-and-measurable-hull",
+          "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls",
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "thm-lebesgue-inner-regularity-by-closed-and-compact-sets"
+        ]
+      },
+      {
+        "id": "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure",
+        "kind": "lemma",
+        "title": "Countable covers by closed boxes, by open boxes and by closed cubes all compute Lebesgue outer measure",
+        "strategy": "Each closed box is contained in a half-open box of volume as close to it as desired and contains one, and likewise for open boxes, so the three covering infima over boxes coincide with the infimum over half-open covers by an $\\varepsilon2^{-k}$ adjustment termwise. For cubes, subdivide each box by a fine dyadic grid and enlarge the finitely many pieces meeting it to cubes of total volume at most the box volume plus $\\varepsilon$; the reverse inequality is immediate because a cube is a box. Degenerate boxes have volume zero on both sides and must be included explicitly.",
+        "deps": [
+          "def-lebesgue-outer-measure",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-multidimensional-rectangle-and-volume",
+          "def-nonnegative-extended-series",
+          "def-countable-choice",
+          "def-dyadic-cube-in-rn"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+        "kind": "theorem",
+        "title": "A subset of $\\mathbb{R}$ has Lebesgue outer measure zero if and only if it has measure zero in the sense of countable closed-interval covers",
+        "strategy": "The published definition asks, for every $\\varepsilon>0$, for sequences $(a_k),(b_k)$ with $a_k\\le b_k$, $A\\subseteq\\bigcup_k[a_k,b_k]$ and $\\sum_{k=0}^{\\infty}(b_k-a_k)$ convergent with sum at most $\\varepsilon$; quote it in that form, with the index starting at $0$ and the intervals closed. Given such a cover, the closed-cover lemma bounds the Lebesgue outer measure by $\\varepsilon$; conversely a half-open cover of small total volume yields closed intervals with the same endpoints and the same lengths. Handle degenerate intervals $a_k=b_k$, which are permitted on the published side and have length zero.",
+        "deps": [
+          "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure",
+          "def-measure-zero-and-content-zero",
+          "def-lebesgue-outer-measure",
+          "def-interval",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+        "kind": "theorem",
+        "title": "A subset of $\\mathbb{R}^m$ has Lebesgue outer measure zero if and only if it is null in the sense of countable closed-cube covers",
+        "strategy": "The published definition covers $E$ by a sequence of closed cubes whose volume series has sum at most $\\varepsilon$. A cube cover is a box cover, so one direction is the closed-cover lemma; the other replaces each half-open box in a cheap cover by finitely many cubes of total volume within $\\varepsilon2^{-k}$ of it, which is the cube clause of the same lemma. Quote the published definition exactly, including that the cubes are closed and that a cube of side length $0$ is permitted.",
+        "deps": [
+          "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure",
+          "def-null-and-content-zero-in-rn",
+          "def-lebesgue-outer-measure",
+          "def-multidimensional-rectangle-and-volume"
+        ]
+      },
+      {
+        "id": "cor-elementary-almost-everywhere-is-lebesgue-almost-everywhere",
+        "kind": "corollary",
+        "title": "A property holding outside a set of elementary measure zero is exactly a property holding $\\lambda$-almost everywhere",
+        "strategy": "Combine the two agreement theorems with completeness: a set of elementary measure zero has Lebesgue outer measure zero, hence is measurable with measure zero, and conversely. Then the published almost-everywhere notion relative to $\\lambda_n$, whose exceptional set must lie in a measurable null set, coincides with the covering formulation. Name both directions explicitly rather than asserting one.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "def-measure-null-set-and-almost-everywhere",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-measure-zero-and-content-zero",
+          "def-null-and-content-zero-in-rn"
+        ]
+      },
+      {
+        "id": "cor-riemann-integrability-and-lebesgue-null-discontinuity-sets",
+        "kind": "corollary",
+        "title": "A bounded function on a closed bounded interval, or on a closed nondegenerate rectangle, is Riemann integrable exactly when its discontinuity set has Lebesgue measure zero",
+        "strategy": "Substitute the agreement theorems into Lebesgue's criterion and its $\\mathbb R^m$ form, whose conclusions are stated with the covering notion of nullity. Repeat the choice ledger of the cited theorems rather than dropping it: the direction from integrability to nullity uses countable choice, the converse does not, and the substitution adds the countable choice already present in the construction of $\\lambda$.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "thm-lebesgue-criterion",
+          "thm-lebesgue-criterion-in-rn",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-countable-choice"
+        ]
+      },
+      {
+        "id": "rem-nullity-and-nowhere-density-remain-independent-for-lebesgue-measure",
+        "kind": "remark",
+        "title": "The published refutations separating nullity from nowhere density hold verbatim for Lebesgue measure",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "fs-measure-zero-implies-nowhere-dense",
+          "fs-nowhere-dense-implies-measure-zero",
+          "thm-fat-cantor-set-has-positive-measure",
+          "def-nowhere-dense-meager",
+          "prop-countable-subsets-of-rn-are-lebesgue-null"
+        ]
+      },
+      {
+        "id": "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+        "kind": "theorem",
+        "title": "Lebesgue outer measure is at most Jordan outer content, and a bounded Jordan measurable set is Lebesgue measurable with Lebesgue measure equal to its Jordan content",
+        "strategy": "A finite rectangle cover is a countable box cover, which gives the first inequality. For a Jordan measurable $E$, its boundary is null by the published boundary criterion, hence Lebesgue null by the agreement theorem, so $E$ differs from its interior by a null set and is measurable. A finite family of almost disjoint rectangles inside $E$ has Lebesgue measure equal to the sum of its volumes, because the pairwise intersections lie in degenerate boxes and are null, so the Jordan inner content is at most $\\lambda_n(E)$; squeezing between inner and outer content gives equality. State the inequality direction for every bounded set, not only for Jordan measurable ones.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-boundary-criterion",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-multidimensional-rectangle-and-volume",
+          "def-metric-interior-closure-boundary",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+        "kind": "corollary",
+        "title": "The Cantor set is an uncountable subset of $\\mathbb{R}$ of Lebesgue measure zero",
+        "strategy": "The published theorem gives that the Cantor set has measure zero in the covering sense and is uncountable; the agreement theorem turns the first clause into $\\lambda_1(C)=0$. Say plainly that measure zero is not a countability condition, and cite the published uncountability clause rather than reproving it.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-measure-zero-on-the-line",
+          "thm-cantor-set-properties",
+          "def-cantor-set",
+          "def-countable",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+        "kind": "theorem",
+        "title": "Lebesgue outer measure, Lebesgue measurability and Lebesgue measure are unchanged by translation",
+        "strategy": "A translate of a half-open box is a half-open box of the same volume, so translation carries elementary sets to elementary sets preserving volume, and therefore carries covers to covers of the same cost; the outer measures of $A$ and $A+h$ are thus equal. Measurability transfers because the Carathéodory identity for $E+h$ tested against $A$ is the identity for $E$ tested against $A-h$. Conclude equality of measures on measurable sets, and record that no choice principle enters beyond that already used to build the outer measure.",
+        "deps": [
+          "def-lebesgue-outer-measure",
+          "def-half-open-box",
+          "def-elementary-set-in-rn",
+          "thm-elementary-volume-is-well-defined",
+          "def-translation-of-a-set-in-rn",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-caratheodory-measurable-set",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-measure-under-dilations-and-reflections",
+        "kind": "theorem",
+        "title": "For a nonzero real $c$, dilation by $c$ multiplies Lebesgue outer measure by $|c|^n$, and reflection in the origin preserves it",
+        "strategy": "The image of a half-open box under $x\\mapsto cx$ is a half-open box, with the parameters swapped when $c<0$ and with volume $|c|^n$ times the original, by the power laws. Covers therefore correspond with costs scaled by $|c|^n$, giving the identity for outer measures, and the Carathéodory test transports as in the translation theorem. Treat $c<0$ explicitly, so the reflection $c=-1$ is a case and not an afterthought, and note that $c=0$ is excluded because the image is then a single point.",
+        "deps": [
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-lebesgue-outer-measure",
+          "def-half-open-box",
+          "def-integer-power",
+          "def-caratheodory-measurable-set",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "lem-power-laws"
+        ]
+      },
+      {
+        "id": "lem-dyadic-cube-values-are-forced-by-translation-invariance-and-normalisation",
+        "kind": "lemma",
+        "title": "A translation-invariant Borel measure giving the unit cube measure one gives each generation-$k$ dyadic cube measure $2^{-kn}$",
+        "strategy": "The unit cube $(0,1]^n$ is the disjoint union of the generation-$k$ dyadic cubes it contains, and there are $2^{kn}$ of them, each a translate of $(0,2^{-k}]^n$ by a vector in $2^{-k}\\mathbb Z^n$. Finite additivity and translation invariance give $1=2^{kn}\\mu((0,2^{-k}]^n)$, and every generation-$k$ dyadic cube is a translate of $(0,2^{-k}]^n$. Verify the count by induction on $k$ and treat $k=0$.",
+        "deps": [
+          "def-dyadic-cube-in-rn",
+          "lem-dyadic-cubes-of-one-generation-partition-rn",
+          "def-measure",
+          "def-translation-of-a-set-in-rn",
+          "def-integer-power",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-borel-sigma-algebra"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+        "kind": "theorem",
+        "title": "A translation-invariant measure on the Borel sets of $\\mathbb{R}^n$ giving the unit cube measure one is the restriction of Lebesgue measure",
+        "strategy": "By the dyadic lemma such a $\\mu$ agrees with $\\lambda_n$ on every dyadic cube, and every open set is a countable disjoint union of dyadic cubes, so $\\mu$ and $\\lambda_n$ agree on the open sets. The open sets form a pi-system generating the Borel sigma-algebra, and the increasing open cubes $(-k,k)^n$ have equal finite measure and exhaust $\\mathbb R^n$, so the published uniqueness theorem for a sigma-finite generating pi-system applies. Note that finiteness on bounded sets is a consequence of the normalisation and not an extra hypothesis.",
+        "deps": [
+          "lem-dyadic-cube-values-are-forced-by-translation-invariance-and-normalisation",
+          "thm-open-subsets-of-rn-are-countable-disjoint-unions-of-dyadic-cubes",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-pi-system",
+          "def-borel-sigma-algebra",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant",
+        "kind": "theorem",
+        "title": "An invertible linear map of $\\mathbb{R}^n$ scales the Lebesgue measure of every Borel set by a positive constant depending only on the map",
+        "strategy": "For invertible linear $T$ the map $E\\mapsto\\lambda_n(T[E])$ is defined on Borel sets, because $T$ is a homeomorphism and $T[E]$ is the preimage of $E$ under the continuous $T^{-1}$; it is a measure, and it is translation invariant since $T[E+h]=T[E]+T(h)$. Its value $c(T)$ on the unit cube is finite and positive, because $T[(0,1]^n]$ is bounded with nonempty interior. Dividing by $c(T)$ and applying the uniqueness theorem gives $\\lambda_n(T[E])=c(T)\\lambda_n(E)$, and composing gives $c(ST)=c(S)c(T)$.",
+        "deps": [
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "def-translation-of-a-set-in-rn",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets"
+        ]
+      },
+      {
+        "id": "lem-coordinate-scalings-and-permutations-scale-the-unit-cube-by-the-absolute-determinant",
+        "kind": "lemma",
+        "title": "A coordinate scaling and a coordinate transposition send the unit cube to a set of measure equal to the absolute value of the determinant",
+        "strategy": "A coordinate transposition permutes the sides of $(0,1]^n$ and returns the same cube, while its matrix has determinant $-1$. A scaling of one coordinate by $c\\ne0$ sends $(0,1]^n$ to a box with that side of length $|c|$ and the others of length $1$, of measure $|c|$, and its matrix has determinant $c$. Both matrices are elementary, and the published table of determinants under elementary row operations supplies the values; treat $c<0$, where the side becomes $[c,0)$ up to a reflection.",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-elementary-matrix",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-under-elementary-row-operations",
+          "def-half-open-box",
+          "thm-lebesgue-measure-under-dilations-and-reflections"
+        ]
+      },
+      {
+        "id": "lem-shear-images-of-the-unit-cube-have-lebesgue-measure-one",
+        "kind": "lemma",
+        "title": "A shear sends the unit cube to a set of Lebesgue measure one",
+        "strategy": "Let $T(x)=x+tx_je_i$ with $i\\ne j$. For an integer $k$ put $A_k:=\\{x\\in(0,1]^n:x_i+tx_j\\in(k,k+1]\\}$; only finitely many $k$ give a nonempty $A_k$, each $A_k$ is Borel, and $x\\mapsto T(x)-ke_i$ on $A_k$ assembles into a bijection of $(0,1]^n$ onto itself, since for each image point exactly one integer $k$ returns the $i$-th coordinate to $(0,1]$. The sets $T[A_k]-ke_i$ are therefore pairwise disjoint with union $(0,1]^n$, and translation invariance plus finite additivity give $\\lambda_n(T[(0,1]^n])=1$. The determinant of the shear matrix is $1$.",
+        "deps": [
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "def-elementary-matrix",
+          "thm-determinant-under-elementary-row-operations",
+          "def-determinant-of-a-square-matrix",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "lem-lipschitz-images-of-lebesgue-null-sets-are-lebesgue-null",
+        "kind": "lemma",
+        "title": "A Lipschitz self-map of $\\mathbb{R}^n$ carries Lebesgue null sets to Lebesgue null sets",
+        "strategy": "Translate through the agreement theorem: a Lebesgue null set is null in the published cube-cover sense, the published theorem on Lipschitz images preserves that property, and the agreement theorem translates back. Record that the image is then measurable by completeness, which is what later uses need, and that the hypothesis is a Lipschitz map from $\\mathbb R^n$ to itself.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "def-lipschitz-holder-contraction",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ]
+      },
+      {
+        "id": "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+        "kind": "theorem",
+        "title": "Every affine hyperplane of $\\mathbb{R}^n$, and hence every proper linear subspace, is Lebesgue null",
+        "strategy": "Write the hyperplane $\\{x:\\sum_i u_ix_i=c\\}$ with $u_j\\ne0$ as the image of the coordinate hyperplane $\\{x:x_j=0\\}$ under the affine map that replaces the $j$-th coordinate by $(c-\\sum_{i\\ne j}u_ix_i)/u_j$; that map is Lipschitz, the coordinate hyperplane is null, and the Lipschitz lemma applies. A proper linear subspace is contained in a hyperplane through the origin, and nullity passes to subsets by completeness. The case $n=1$ is a singleton and is covered by the countable-set proposition.",
+        "deps": [
+          "lem-lipschitz-images-of-lebesgue-null-sets-are-lebesgue-null",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "def-lipschitz-holder-contraction",
+          "def-p-norms-on-rn",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-countable-subsets-of-rn-are-lebesgue-null"
+        ]
+      },
+      {
+        "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+        "kind": "theorem",
+        "title": "A linear map $T$ of $\\mathbb{R}^n$ sends Lebesgue measurable sets to Lebesgue measurable sets, with $\\lambda_n(T[E])=|\\det T|\\,\\lambda_n(E)$ when $T$ is invertible and $T[E]$ Lebesgue null when it is not",
+        "strategy": "For invertible $T$ the scaling constant $c$ is multiplicative and matches $|\\det|$ on the elementary matrices by the two computation lemmas, so factoring $T$ into elementary matrices and using multiplicativity of the determinant gives $c(T)=|\\det T|$. Extend from Borel sets to Lebesgue measurable sets through Littlewood's $F_\\sigma$-plus-null form, the Lipschitz lemma handling the null part. When $\\det T=0$ the image of $\\mathbb R^n$ is a proper subspace, hence null, and the conclusion must be stated as nullity of $T[E]$ rather than as a product, because $|\\det T|\\lambda_n(E)$ is the undefined product $0\\cdot(+\\infty)$ when $\\lambda_n(E)=\\infty$.",
+        "deps": [
+          "thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant",
+          "lem-coordinate-scalings-and-permutations-scale-the-unit-cube-by-the-absolute-determinant",
+          "lem-shear-images-of-the-unit-cube-have-lebesgue-measure-one",
+          "thm-invertible-matrices-factor-into-elementary-matrices",
+          "cor-elementary-matrices-are-invertible",
+          "thm-determinant-multiplicative",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "lem-lipschitz-images-of-lebesgue-null-sets-are-lebesgue-null",
+          "thm-littlewood-characterisations-of-lebesgue-measurability",
+          "def-determinant-of-a-square-matrix",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps",
+        "kind": "corollary",
+        "title": "Lebesgue measure on $\\mathbb{R}^n$ is invariant under every orthogonal linear map",
+        "strategy": "An orthogonal operator has determinant of absolute value one, by the published corollary on orthogonal and unitary operators, so the change-of-variables theorem gives $\\lambda_n(T[E])=\\lambda_n(E)$. Say that rotations are the orientation-preserving case and that reflections are covered too, without asserting anything about which matrices occur.",
+        "deps": [
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus"
+        ]
+      },
+      {
+        "id": "rem-linear-change-of-variables-for-jordan-content-and-lebesgue-measure",
+        "kind": "remark",
+        "title": "How the Lebesgue change-of-variables formula relates to the published formula for Jordan content",
+        "deps": [
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content"
+        ]
+      },
+      {
+        "id": "lem-a-set-of-positive-finite-measure-fills-most-of-a-dyadic-cube",
+        "kind": "lemma",
+        "title": "A measurable set of positive finite measure occupies more than any prescribed proportion of some dyadic cube",
+        "strategy": "Given $\\theta\\in(0,1)$, outer regularity supplies an open $U\\supseteq E$ with $\\lambda_n(U)<\\lambda_n(E)/\\theta$, and $U$ is a countable disjoint union of dyadic cubes $Q_j$. If $\\lambda_n(E\\cap Q_j)\\le\\theta\\lambda_n(Q_j)$ for every $j$, summing gives $\\lambda_n(E)\\le\\theta\\lambda_n(U)<\\lambda_n(E)$, a contradiction. Hence some $j$ has $\\lambda_n(E\\cap Q_j)>\\theta\\lambda_n(Q_j)$; the hypothesis $\\lambda_n(E)>0$ is what makes the strict inequality available and $\\lambda_n(E)<\\infty$ is what makes the division legitimate.",
+        "deps": [
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "thm-open-subsets-of-rn-are-countable-disjoint-unions-of-dyadic-cubes",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-dyadic-cube-in-rn",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "thm-steinhaus-difference-set-contains-a-ball",
+        "kind": "theorem",
+        "title": "If a Lebesgue measurable subset of $\\mathbb{R}^n$ has positive measure, its difference set contains an open ball about the origin",
+        "strategy": "Reduce to $0<\\lambda_n(E)<\\infty$ by intersecting with a large cube and using continuity from below. Apply the density lemma with $\\theta=3/4$ to get a dyadic cube $Q$ of side $s$ with $\\lambda_n(E\\cap Q)>\\tfrac34 s^n$, and set $\\eta:=\\tfrac12((3/2)^{1/n}-1)>0$. For $\\|h\\|_\\infty<\\eta s$ both $E\\cap Q$ and its translate by $h$ lie in a box of side at most $(1+\\eta)s$, whose measure $(1+\\eta)^ns^n$ is below $2\\cdot\\tfrac34 s^n$, so the two sets meet and $h\\in E-E$. Conclude with the comparison between the maximum and Euclidean metrics; the $n$-th root is the published rational power.",
+        "deps": [
+          "lem-a-set-of-positive-finite-measure-fills-most-of-a-dyadic-cube",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-metric-ball",
+          "lem-metrics-on-rn",
+          "def-rational-power",
+          "lem-rational-power-well-defined",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-continuity-from-below-for-measures"
+        ]
+      },
+      {
+        "id": "cor-a-measurable-subgroup-of-rn-of-positive-measure-is-rn",
+        "kind": "corollary",
+        "title": "A Lebesgue measurable subgroup of $(\\mathbb{R}^n,+)$ of positive measure is all of $\\mathbb{R}^n$",
+        "strategy": "If $\\lambda_n(G)>0$ then some $G\\cap(-k,k]^n$ has positive finite measure, so Steinhaus gives a ball $B(0,r)\\subseteq (G\\cap(-k,k]^n)-(G\\cap(-k,k]^n)\\subseteq G-G=G$. Every $x\\in\\mathbb R^n$ lies in $mB(0,r)$ for a large natural $m$, and $G$ is closed under addition, so $x\\in G$. Note the contrapositive, that a proper measurable subgroup is null, which is the form the sources state.",
+        "deps": [
+          "thm-steinhaus-difference-set-contains-a-ball",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-continuity-from-below-for-measures",
+          "def-metric-ball",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.008,
+    "id": "lebesgue-measure-on-euclidean-space-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Lebesgue Measure on Euclidean Space — Examples",
+    "companion": "lebesgue-measure-on-euclidean-space",
+    "requires": [
+      "lebesgue-measure-on-euclidean-space"
+    ],
+    "items": [
+      {
+        "id": "ex-lebesgue-measure-of-intervals-boxes-and-the-rationals",
+        "kind": "example",
+        "title": "The Lebesgue measure of an interval, of a box, of $\\mathbb{Q}$ and of the irrationals in $[0,1]$",
+        "strategy": "Read off $\\lambda_1([a,b])=b-a$ and $\\lambda_n$ of a box from the box theorem, whichever faces are included. Then $\\lambda_1(\\mathbb Q)=0$ by countability, and additivity on the disjoint decomposition $[0,1]=(\\mathbb Q\\cap[0,1])\\sqcup([0,1]\\setminus\\mathbb Q)$ gives the irrationals measure $1$. Include a degenerate interval and the empty box.",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-measure",
+          "thm-rationals-countable"
+        ]
+      },
+      {
+        "id": "ex-cantor-set-measure-from-the-removed-intervals",
+        "kind": "example",
+        "title": "The complement of the Cantor set in $[0,1]$ has Lebesgue measure one, computed from the removed intervals",
+        "strategy": "At stage $n$ the construction removes $2^n$ open intervals of length $3^{-n-1}$; the removed set is their countable disjoint union, so its measure is $\\sum_{n=0}^{\\infty}2^n3^{-n-1}=1$ by the geometric series. Additivity on $[0,1]$ then returns $\\lambda_1(C)=0$, agreeing with the corollary proved from the published covering statement. Index the stages from $0$ and check that the first stage removes one interval of length $1/3$.",
+        "deps": [
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "def-cantor-set",
+          "thm-cantor-set-properties",
+          "thm-geometric-series",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "ex-smith-volterra-cantor-set-has-lebesgue-measure-one-half",
+        "kind": "example",
+        "title": "The Smith-Volterra-Cantor set has Lebesgue measure exactly $1/2$",
+        "strategy": "The published construction gives $S=\\bigcap_nS_n$ with $S_n$ a disjoint union of $2^n$ closed intervals of common length $\\lambda_n$, where $\\lambda_0=1$ and $\\lambda_{n+1}=(\\lambda_n-4^{-n-1})/2$. Put $u_n:=2^n\\lambda_n$; the recursion becomes $u_{n+1}=u_n-\\tfrac14 2^{-n}$, so induction and the geometric series give $u_n=\\tfrac12+2^{-n-1}$, and $\\lambda_1(S_n)=u_n$ by additivity over the disjoint intervals. The sets $S_n$ decrease and $S_0$ has finite measure, so continuity from above gives $\\lambda_1(S)=\\tfrac12$. Say explicitly that the published theorem asserts only that $S$ is not null in the covering sense and that the exact value is new here, obtained because $\\lambda_1$ is now available.",
+        "deps": [
+          "def-fat-cantor-set",
+          "thm-fat-cantor-set-has-positive-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-geometric-series",
+          "thm-continuity-from-above-for-measures",
+          "thm-induction-principle",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-integer-power",
+          "lem-power-laws"
+        ]
+      },
+      {
+        "id": "ex-a-dense-open-subset-of-the-unit-interval-of-small-measure",
+        "kind": "example",
+        "title": "For every positive $\\varepsilon$ there is a dense open subset of $(0,1)$ of Lebesgue measure below $\\varepsilon$",
+        "strategy": "Enumerate $\\mathbb Q\\cap(0,1)$ as $(q_k)_{k\\in\\mathbb N}$ and take the union of the intervals $(q_k-\\varepsilon2^{-k-3},q_k+\\varepsilon2^{-k-3})$ intersected with $(0,1)$. The union is open and dense because it contains every rational of $(0,1)$, and countable subadditivity bounds its measure by $\\sum_k\\varepsilon2^{-k-2}=\\varepsilon/2<\\varepsilon$.",
+        "deps": [
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-rationals-countable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-geometric-series",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "ex-a-dense-null-g-delta-set-containing-the-rationals",
+        "kind": "example",
+        "title": "A dense $G_\\delta$ subset of $\\mathbb{R}$ of Lebesgue measure zero containing every rational, and its meager complement of full measure",
+        "strategy": "Intersect the dense open sets of the previous example, taken on each interval $(m,m+1)$ with parameter $2^{-k}$, to get a dense $G_\\delta$ containing $\\mathbb Q$ whose measure is below every $2^{-k}$, hence zero. Its complement is a countable union of closed sets with empty interior, hence meager, and has full measure on every bounded interval. Relate this to the published counterexamples, which state the same phenomenon in the covering vocabulary.",
+        "deps": [
+          "ex-a-dense-open-subset-of-the-unit-interval-of-small-measure",
+          "def-g-delta-and-f-sigma-in-a-topological-space",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-continuity-from-above-for-measures",
+          "def-nowhere-dense-meager",
+          "thm-baire-category-r",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null"
+        ]
+      },
+      {
+        "id": "ex-the-graph-of-a-continuous-real-function-is-lebesgue-null-in-the-plane",
+        "kind": "example",
+        "title": "The graph of a continuous function $\\mathbb{R}\\to\\mathbb{R}$ is Lebesgue null in $\\mathbb{R}^2$",
+        "strategy": "On each $[m,m+1]$ the function is uniformly continuous, so for a prescribed tolerance there is a uniform partition fine enough that every point of the graph above one subinterval stays within a narrow vertical strip about the left endpoint value. The resulting closed boxes cover the graph over $[m,m+1]$ with total area bounded by the chosen weight for that integer interval, and the weights are chosen summably over $m\\in\\mathbb Z$. Countable subadditivity then gives a null closed-box cover. Note that this does not settle the measurable case, which belongs with the product measures.",
+        "deps": [
+          "thm-lebesgue-null-agrees-with-elementary-nullity-in-rn",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-continuity-real",
+          "thm-heine-cantor-r",
+          "thm-heine-borel-rn",
+          "cor-archimedean-reciprocal",
+          "thm-geometric-series"
+        ]
+      },
+      {
+        "id": "ex-lebesgue-measure-of-a-linear-image-of-the-unit-cube",
+        "kind": "example",
+        "title": "The Lebesgue measure of the image of the unit cube under an explicit linear map of the plane and of three-space",
+        "strategy": "Take the plane map with matrix rows $(2,1)$ and $(1,3)$, of determinant $5$, and the three-space map with an explicit triangular matrix; the change-of-variables theorem gives the measures $5$ and the product of the diagonal entries in absolute value. Add a singular example whose determinant is zero and whose image is a line segment, hence null. Verify the determinants by row reduction rather than quoting them.",
+        "deps": [
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null"
+        ]
+      },
+      {
+        "id": "ex-proper-measurable-subgroups-of-the-line-are-lebesgue-null",
+        "kind": "example",
+        "title": "Every Lebesgue measurable proper subgroup of $(\\mathbb{R},+)$ is null, and $\\mathbb{Z}$ and $\\mathbb{Q}$ are instances",
+        "strategy": "Contrapose the subgroup corollary: a measurable subgroup of positive measure is the whole line, so a proper measurable subgroup has measure zero. Check the two instances directly, both being countable, and note that the corollary says nothing about non-measurable subgroups.",
+        "deps": [
+          "cor-a-measurable-subgroup-of-rn-of-positive-measure-is-rn",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-rationals-countable"
+        ]
+      },
+      {
+        "id": "cex-lebesgue-null-sets-need-not-have-zero-jordan-outer-content",
+        "kind": "counterexample",
+        "title": "$\\mathbb{Q}\\cap[0,1]$ is Lebesgue null and has Jordan outer content one",
+        "strategy": "The set is countable, hence Lebesgue null. For the content, a finite family of closed intervals covering it has closed union, and that union contains the closure $[0,1]$ because the rationals are dense there, so the published bound on finite interval covers of an interval makes the total length at least $1$; the single interval $[0,1]$ realises $1$, so the Jordan outer content is exactly $1$. The witness therefore separates the countable-cover notion from the finite-cover notion at a single set, and the inner content is $0$, so the set is not Jordan measurable.",
+        "deps": [
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-jordan-inner-and-outer-content",
+          "lem-finite-interval-cover-total-length",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "def-interior-closure-boundary-r",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "fs-lebesgue-outer-measure-equals-jordan-outer-content-for-bounded-sets",
+        "kind": "false-statement",
+        "title": "Lebesgue outer measure agrees with Jordan outer content on every bounded subset of $\\mathbb{R}^n$",
+        "strategy": "The inequality holds in one direction, and the theorem on Jordan measurable sets makes the two agree there, which is what makes the false statement tempting. The refutation is $\\mathbb Q\\cap[0,1]$, of Lebesgue outer measure $0$ and Jordan outer content $1$. State exactly which hypothesis the true theorem carries and which the false statement drops.",
+        "deps": [
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+          "cex-lebesgue-null-sets-need-not-have-zero-jordan-outer-content",
+          "def-jordan-inner-and-outer-content",
+          "prop-countable-subsets-of-rn-are-lebesgue-null"
+        ]
+      },
+      {
+        "id": "fs-a-lebesgue-measurable-set-with-empty-interior-is-lebesgue-null",
+        "kind": "false-statement",
+        "title": "A Lebesgue measurable subset of $\\mathbb{R}$ with empty interior has measure zero",
+        "strategy": "The Smith-Volterra-Cantor set is compact, nowhere dense, hence of empty interior, and has measure $1/2$. Present the refutation through the published nowhere-density clause and the exact measure computed on this page, and record that the false statement is true for open sets and for countable sets, which is where the intuition comes from.",
+        "deps": [
+          "ex-smith-volterra-cantor-set-has-lebesgue-measure-one-half",
+          "thm-fat-cantor-set-has-positive-measure",
+          "def-fat-cantor-set",
+          "def-nowhere-dense-meager",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ]
+      },
+      {
+        "id": "fs-a-translation-invariant-borel-measure-on-the-line-is-a-multiple-of-lebesgue-measure",
+        "kind": "false-statement",
+        "title": "Every translation-invariant measure on the Borel sets of $\\mathbb{R}$ is a nonnegative multiple of Lebesgue measure",
+        "strategy": "Counting measure restricted to the Borel sets is translation invariant and is not a multiple of $\\lambda_1$, since it gives a singleton the value $1$ and $[0,1]$ the value $+\\infty$, while $\\lambda_1$ gives $0$ and $1$. The uniqueness theorem is not contradicted, because its hypothesis fixes the value $1$ on the unit cube and thereby forces finiteness on bounded sets. Name the dropped hypothesis explicitly.",
+        "deps": [
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure",
+          "def-borel-sigma-algebra",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "fs-every-lebesgue-measurable-set-is-a-borel-set",
+        "kind": "false-statement",
+        "title": "Assuming the Axiom of Choice, every Lebesgue measurable subset of $\\mathbb{R}$ is a Borel set",
+        "strategy": "The Cantor set is Lebesgue null and is in bijection with the power set of the naturals, so by completeness every one of its $2^{\\mathfrak c}$ subsets is Lebesgue measurable, while the Borel sigma-algebra on $\\mathbb R$ has cardinality $\\mathfrak c$. Cantor's theorem gives $2^{\\mathfrak c}>\\mathfrak c$, so the two families differ. The refutation is a counting argument and exhibits no particular set; the explicit witness belongs with the non-measurable material.",
+        "deps": [
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "thm-cantor-set-ternary-description",
+          "thm-cardinality-of-the-borel-sigma-algebra-on-rn",
+          "thm-cardinal-power-set-and-cantor",
+          "def-cardinal-arithmetic",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra"
+        ]
+      }
+    ]
+  }
+]

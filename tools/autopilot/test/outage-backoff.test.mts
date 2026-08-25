@@ -38,7 +38,7 @@ function writeLedger(repo: string, rows: any[]) {
 }
 
 function executorAt(repo: string) {
-  const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false };
+  const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 };
   const state = new State(statePath(config.stateDir)).init('demo');
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
   const adapter = makeExecAdapter({ argv: ['true'], cwd: repo });

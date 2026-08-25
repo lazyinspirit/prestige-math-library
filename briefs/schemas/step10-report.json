@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "readiness_verdict",
+    "executive_summary",
+    "caveats",
+    "owner_reading_priorities",
+    "recommendations"
+  ],
+  "properties": {
+    "version": { "type": "integer", "const": 2 },
+    "readiness_verdict": {
+      "type": "string",
+      "const": "publishable-pending-owner-approval"
+    },
+    "executive_summary": { "type": "string", "minLength": 20 },
+    "caveats": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 20 }
+    },
+    "owner_reading_priorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["subject", "reason"],
+        "properties": {
+          "subject": { "type": "string", "minLength": 20 },
+          "reason": { "type": "string", "minLength": 20 }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rank", "recommendation", "impact", "risk", "evidence"],
+        "properties": {
+          "rank": { "type": "integer", "minimum": 1 },
+          "recommendation": { "type": "string", "minLength": 20 },
+          "impact": { "type": "string", "minLength": 20 },
+          "risk": { "type": "string", "enum": ["low", "medium", "high"] },
+          "evidence": { "type": "string", "minLength": 20 }
+        }
+      }
+    }
+  }
+}

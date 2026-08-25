@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "drift-review-1",
+  "run": "frontier-18",
+  "covers": [
+    "drift"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-24T03:01:43.239Z",
+  "ended_at": "2026-08-24T03:19:23.746Z",
+  "ms": 1060507,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-drift-review-1.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-drift-review-1.prompt.md",
+  "tail": "Gate passes. Report at `research/frontier-18-alpha-step0-drift.md`; `plan-spec.json` is the only file edited, `requires` arrays only, `validate-plan` exits 0.\n\n**10 no-drift, 4 drift-applied, 13 backward edges added.** No mint, no reorder, no rescope, nothing blocked.\n\nTwo things you need to decide on:\n\n**This node ran after the Betas, not before.** Task files were written at 03:06; this dispatch ran at 13:11, and all ten batch manifests were scaffolded in between. So minting and rescoping were unavailable — `drift-apply` refuses a scaffolded run (`drift-apply-scaffolded`, confirmed with `--dry-run`, which wrote nothing). The run survived only because every live finding turned out to be a backward edge onto a published page. The `1-drift` ordering guarantee was not in force.\n\nThe compensation is that the scaffolds are better evidence than the designs, and I used both. Resolving each design finding against what the Betas actually cited moved four verdicts in both directions:\n\n- `cayley-graphs-word-metrics-and-quasi-isometry` — the largest finding. Its design's per-pair `requires` line is clean; the drift is in §1 prose that never writes a `requires` line. Twelve A-page citations reach `graphs-walks-and-connectivity` and `trees-forests-and-spanning-trees`, plus two B-page citations of `semidirect-products-and-automorphism-groups`. Step 4 would have rejected the page on twelve citations after they were written.\n- `noetherian-rings-and-hilbert-basis` — clean on every design reading; the scaffold's invariant-ring item cites `def-symmetric-polynomial` on the published `symmetric-polynomials` (58). Undeclared everywhere.\n- `lebesgue-measure-on-euclidean-space` — the two carried-forward edges are confirmed live (6 and 4 citations); five more pages the design never names are cited under theorems it does call for.\n- `extraspecial-p-groups-and-central-products` and `lattice-paths-and-catalan-numbers` went the other way. Both designs name a prerequisite (`dual-spaces-bilinear-forms-and-inertia`; CB-15) that the scaffold does not take — GT-2 built its commutator pairing self-contained by a different route, CB-6 took the reflection/cycle-lemma/formal-root route and scaffolded no symbolic method. I had applied both edits, then reverted them: the first would have been an unused edge forcing a 22-slot reorder of a scaffolded pair, and the second would have pointed at a page this run provably cannot build, making `lattice-paths` unbuildable — the frontier-16 failure the gate exists to catch.\n\n**One finding I could not fix.** `holomorphic-functions-of-several-variables-examples` cites `cex-partial-derivatives-without-continuity`, which lives on `the-total-derivative-examples` — a B page, a leaf. A `requires` edge cannot repair it; `validate-plan` rejects B-page dependencies. It needs a scaffold edit at step 3. It is the one dependency in the whole scoped set still outside its declared closure.\n\nCB-15 remains genuinely absent from the plan, at its stated anchor after `formal-power-series-examples` (194), for a future run to mint."
+}

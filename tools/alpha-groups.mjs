@@ -35,7 +35,8 @@ const wantFacts = argv.includes('--facts');
 const asJson = argv.includes('--json');
 // The alpha lane cap and the owner's per-Alpha batch bound. Both come from
 // dispatch.mjs / CLAUDE.md; stated once here so a change is a one-line edit.
-const MAX_GROUPS = Number(opt('max-groups', '3'));
+// 3 -> 4 (owner, 2026-08-24), tracking the alpha lane cap in dispatch.mjs.
+const MAX_GROUPS = Number(opt('max-groups', '4'));
 const MAX_BATCHES_PER_GROUP = Number(opt('max-batches', '3'));
 
 if (!run) {

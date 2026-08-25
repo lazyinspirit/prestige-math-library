@@ -20,7 +20,9 @@ test('every report-bearing stage names its deliverable', async () => {
   const expect: Record<string, string> = {
     '6c-cross': 'research/frontier-14-alpha-6c.md',
     '9-scope': 'research/frontier-14-alpha-step9.md',
-    '10-owner-report-v2': 'research/frontier-14-step10-report.md',
+    '10-evidence-v2': 'research/frontier-14-step10-evidence.json',
+    '10-owner-report-v2': 'research/frontier-14-step10-report.response.json',
+    '10-owner-report-render-v2': 'research/frontier-14-step10-report.md',
   };
   for (const [id, path] of Object.entries(expect)) {
     const st = mod.stages.find((s: any) => s.id === id);

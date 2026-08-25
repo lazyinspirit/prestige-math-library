@@ -38,7 +38,7 @@ function fixtureRepo() {
 }
 
 function executorAt(repo: string) {
-  const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false };
+  const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 };
   const state = new State(statePath(config.stateDir)).init('demo');
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
   const adapter = makeExecAdapter({ argv: ['true'], cwd: repo });
@@ -107,34 +107,64 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('a step-8 contract-audit failure routes to a risk-review Alpha, not a no-op round', async () => {
+test('Step-8 preflight routes contract residue without spending a judge round', async () => {
   // A fatal repair rewrites a proof; the rewritten proof recomputes its risk
   // tier. The first live step 8 came back critical-risk with no risk_review
   // and the hook, handling only open fatals, spent the round doing nothing.
+  const repo = groupedFixture();
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  const s8: any = stages.find((s: any) => s.id === '8-preflight');
   await s8.onGateFailure({
-    ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s8, round: 1,
-    failure: { id: 'risk-report', why: 'risk-review-missing [thm-x]' },
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'risk-report', why: 'risk-review-missing [thm-demo-x]' },
   });
   assert.equal(started.length, 1, 'the failure must dispatch, not fall through');
   const p = started[0];
-  assert.equal(p.label, 'adjudicate-risk-review-1');
-  assert.ok(!/^step8-/.test(p.label), 'a repair must not match the stage result pattern');
-  assert.ok(!/^risk-review-/.test(p.label), "6b's result files own that name family");
-  assert.deepEqual(p.task, ['research/demo-alpha-contract-audit.task.md']);
-  assert.equal(p.role, 'alpha');
+  assert.equal(p.label, 'step8-preflight-a-1');
+  assert.deepEqual(p.task, [
+    'research/demo-alpha-a-step8-preflight.task.md',
+    'briefs/tasks/alpha-step8-preflight.md',
+  ]);
+  assert.equal(p.role, 'alpha-adjudicate');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('contract residue cannot consume rejudge budget and is routed at Step-8 close', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: [], open_fatal: [], closed: true,
+  }));
+  const started: any[] = [];
+  const stage: any = stages.find((candidate: any) => candidate.id === '8-rejudge');
+  await stage.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
+    stage, round: 1, failure: { id: 'risk-report', why: 'risk-review-missing [thm-demo-x]' },
+  });
+  assert.equal(started.length, 0, 'rejudge owns mathematical currency only');
+  const close: any = stages.find((candidate: any) => candidate.id === '8-close');
+  await close.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
+    stage: close, round: 1, failure: { id: 'risk-report', why: 'risk-review-missing [thm-demo-x]' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'step8-close-a-1');
+  assert.equal(started[0].role, 'alpha-adjudicate');
+  assert.deepEqual(started[0].task, [
+    'research/demo-alpha-a-step8-close.task.md',
+    'briefs/tasks/alpha-step8-close.md',
+  ]);
+  rmSync(repo, { recursive: true, force: true });
 });
 
 test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alpha', async () => {
-  const repo = fixtureRepo();
+  const repo = groupedFixture();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [],
-    unadjudicated: ['thm-x'],
+    unadjudicated: ['thm-demo-x'],
     unadjudicated_rows: [
-      { id: 'thm-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
-      { id: 'thm-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' },
+      { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
+      { id: 'thm-demo-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' },
     ],
     open_fatal: [],
     closed: false,
@@ -147,19 +177,133 @@ test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alph
     failure: { id: 'judge-closure', why: '1 unadjudicated' },
   });
   assert.equal(started.length, 1, 'the closure omission must dispatch immediately');
-  assert.equal(started[0].label, 'adjudicate-closure-recovery-1');
-  assert.equal(started[0].role, 'alpha');
+  assert.equal(started[0].label, 'adjudicate-closure-recovery-a-1');
+  assert.equal(started[0].role, 'alpha-adjudicate');
   assert.equal(started[0].job, 'adjudication');
   assert.deepEqual(started[0].covers, [], 'recovery cannot manufacture stage coverage');
-  assert.equal(started[0].task, 'briefs/tasks/alpha-step8-closure-recovery.md');
+  assert.deepEqual(started[0].task, [
+    'research/demo-alpha-a-step8-recovery.task.md',
+    'briefs/tasks/alpha-step8-closure-recovery.md',
+  ]);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+// STEP 8 IS PARTITIONED BY GROUP (owner, 2026-08-25), and the repair rounds are
+// partitioned with it: an open fatal goes back to the group Alpha holding that
+// batch's conventions, not to whichever lane is free. An empty fan-out would be
+// a spent round that dispatched nothing, so even an unknown id is routed loudly
+// to the current groups and then rejected by the scope gate.
+function groupedFixture() {
+  const repo = fixtureRepo();
+  // Scope refresh is covered by step8-groups.test against the real tool. These
+  // routing tests supply an already-current fixture scope and keep refresh
+  // local so the tool's deliberate own-repository anchoring cannot read the
+  // main checkout for a throwaway run.
+  rmSync(join(repo, 'tools'), { recursive: true, force: true });
+  mkdirSync(join(repo, 'tools'));
+  writeFileSync(join(repo, 'tools', 'step8-scope.mjs'), 'process.exit(0);\n');
+  writeFileSync(join(repo, 'research', 'demo-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['1', '2'] },
+    { label: 'b', covers: ['3'] },
+  ]));
+  writeFileSync(join(repo, 'research', 'demo-step8-scope.json'), JSON.stringify({
+    run: 'demo',
+    groups: [{ label: 'a', batches: ['1', '2'] }, { label: 'b', batches: ['3'] }],
+    by_item: { 'thm-demo-x': 'a', 'thm-demo-y': 'b', 'thm-demo-z': 'a' },
+  }));
+  return repo;
+}
+
+test('step 8 routes an open fatal back to the group that owns the item', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: [], unadjudicated_rows: [],
+    open_fatal: ['thm-demo-y'], closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'judge-closure', why: '1 open fatal' },
+  });
+  assert.equal(started.length, 1, 'only the owning group is dispatched');
+  assert.equal(started[0].label, 'repair-8-b-round-1');
+  assert.ok(!/^step8-/.test(started[0].label), 'a repair must not match the stage result pattern');
+  assert.equal(started[0].task[0], 'research/demo-alpha-b-step8.task.md');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('step 8 fans a repair out to every group that owns one of the fatals', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: [], unadjudicated_rows: [],
+    open_fatal: ['thm-demo-x', 'thm-demo-y', 'thm-demo-z'], closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'judge-closure', why: '3 open fatal' },
+  });
+  assert.deepEqual(started.map((p: any) => p.label).sort(),
+    ['repair-8-a-round-1', 'repair-8-b-round-1'],
+    'one lane per owning group, not one per item and not one for the level');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a fatal on an item the scope does not know falls to every group, never to none', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: [], unadjudicated_rows: [],
+    open_fatal: ['thm-minted-at-step-nine'], closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'judge-closure', why: '1 open fatal' },
+  });
+  assert.deepEqual(started.map((p: any) => p.label).sort(),
+    ['repair-8-a-round-1', 'repair-8-b-round-1'],
+    'an unowned fatal is loud, not lost');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('closure recovery is routed per group and keeps the recovery brief', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [],
+    unadjudicated: ['thm-demo-x'],
+    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' }],
+    open_fatal: [], closed: false,
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s8, round: 1,
+    failure: { id: 'judge-closure', why: '1 unadjudicated' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'adjudicate-closure-recovery-a-1');
+  // The rendered group file leads, but the shared recovery brief must remain in
+  // the list: candidate resolution takes the first that EXISTS, and a stale or
+  // missing render must not cost the reconstruction instructions.
+  assert.deepEqual(started[0].task, [
+    'research/demo-alpha-a-step8-recovery.task.md',
+    'briefs/tasks/alpha-step8-closure-recovery.md',
+  ]);
   rmSync(repo, { recursive: true, force: true });
 });
 
 test('step 8 still routes open fatals to repair when no adjudication row is missing', async () => {
-  const repo = fixtureRepo();
+  const repo = groupedFixture();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [], unadjudicated: [], unadjudicated_rows: [],
-    open_fatal: ['thm-x'], closed: false,
+    open_fatal: ['thm-demo-x'], closed: false,
   }));
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
@@ -169,7 +313,7 @@ test('step 8 still routes open fatals to repair when no adjudication row is miss
     failure: { id: 'judge-closure', why: '1 open fatal' },
   });
   assert.equal(started.length, 1);
-  assert.equal(started[0].label, 'repair-8-round-2');
+  assert.equal(started[0].label, 'repair-8-a-round-2');
   assert.equal(started[0].job, 'authoring');
   rmSync(repo, { recursive: true, force: true });
 });
@@ -224,9 +368,20 @@ test('a candidate-detector failure at the read join dispatches the contract-audi
   await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'citation-fidelity', why: '' } });
   assert.equal(started.length, 2);
   assert.ok(started.every((p) => p.job === 'adjudication'));
-  // structural failures stay blockers
+  assert.ok(started.every((p) => String(p.task).includes('contract-audit')),
+    'the three contract detectors keep their own task, which names the tools to re-run');
+
+  // STRUCTURAL FAILURES NO LONGER DEAD-END (owner, 2026-08-24). This asserted
+  // `started.length` stayed 2 — a `proof-contract` failure fell through to the
+  // blocker path deliberately. That choice is reversed: on frontier-18 the same
+  // fall-through shape produced three blockers in one run, and a stage that
+  // stops without a read costs a person more than an Alpha that reads and
+  // reports "this one is yours". It routes to the GENERAL task, not the
+  // contract-detector one, and that task forbids narrowing a detector to pass.
   await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'proof-contract', why: '' } });
-  assert.equal(started.length, 2);
+  assert.equal(started.length, 3);
+  assert.match(started[2].label, /^gate-adjudication-proof-contract-2$/);
+  assert.ok(String(started[2].task).includes('gate-adjudication'));
 });
 
 test('boundary-audit respects an Alpha-upheld row and reports it', () => {
@@ -510,18 +665,111 @@ test('step 5 routes an undeclared-prereq to the edge-adjudication lane', async (
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('step 5 leaves a validate-plan failure of another class on the blocker path', async () => {
+test('step 5 routes a validate-plan failure of another class to gate adjudication', async () => {
+  // BEHAVIOUR CHANGED 2026-08-24, deliberately. This asserted that a
+  // non-edge validate-plan failure reached the BLOCKER path untouched, which is
+  // what the old three-id allow-list did with every unnamed gate. frontier-18
+  // produced three blockers of that shape in one run — depcheck, rendercheck and
+  // content-policy-items — all adjudicable from disk. A gate failure is a
+  // finding; it now goes to an Alpha, whose task is explicit that narrowing a
+  // detector to clear a run is never its call.
   const repo = fixtureRepo();
-  // a spec with no undeclared-prereq at all
   writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
     pages: [{ order: 1, id: 'solo', kind: 'A', requires: [], items: [{ id: 'def-a' }] }],
   }, null, 2));
   const s5: any = stages.find((s: any) => s.id === '5-author');
+  const started: any[] = [];
   await s5.onGateFailure({
     ctx: { run: 'demo', repo },
-    executor: { start: () => { throw new Error('must not dispatch'); } },
+    executor: { start: (_s: any, d: any) => started.push(d) },
     stage: s5, round: 1,
     failure: { id: 'validate-plan', why: 'FAIL' },
   });
+  assert.equal(started.length, 1, 'an unrouted gate failure must reach an Alpha, not a bare return');
+  assert.equal(started[0].role, 'alpha');
+  assert.equal(started[0].job, 'adjudication');
+  assert.match(started[0].label, /^gate-adjudication-validate-plan-1$/);
+  assert.ok(String(started[0].task).includes('gate-adjudication'),
+    'must use the general gate-adjudication task, not the contract-detector one');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('an unknown gate id still reaches an Alpha — the route is a default, not a list', () => {
+  // The property that matters: no enumeration of "failures worth routing",
+  // because such a list is always one entry short of the next incident.
+  const s5: any = stages.find((s: any) => s.id === '5-author');
+  const started: any[] = [];
+  return s5.onGateFailure({
+    ctx: { run: 'demo', repo: fixtureRepo() },
+    executor: { start: (_s: any, d: any) => started.push(d) },
+    stage: s5, round: 2,
+    failure: { id: 'some-gate-invented-next-year', why: 'FAIL' },
+  }).then(() => {
+    assert.equal(started.length, 1);
+    assert.match(started[0].label, /^gate-adjudication-some-gate-invented-next-year-2$/);
+  });
+});
+
+// SPAWN STAGGER (owner, 2026-08-24). Caps say how many agents may run; the
+// stagger says how fast they may boot. Without it a stage fans out to its cap
+// in one millisecond — frontier-18's step 3 started four Alphas inside 80ms —
+// so twelve Betas would open their first API connection simultaneously, which
+// is the shape that produces a 429 stampede and a lane of null verdicts.
+//
+// The delay lives in `start`, AFTER the synchronous inflight registration, so a
+// staggered spawn still counts against the cap the moment it is decided. These
+// tests pin that ordering: a regression that moved the wait into the fan-out
+// loop would leave the engine free to over-dispatch during the gap.
+test('the spawn stagger spaces dispatches and is per-engine, not per-stage', async () => {
+  const repo = fixtureRepo();
+  const config: any = {
+    repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'],
+    dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {},
+    adoptCommand: false, dispatchStaggerMs: 40,
+  };
+  const state = new State(statePath(config.stateDir)).init('demo');
+  const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
+  const spawnedAt: number[] = [];
+  const adapter: any = { invoke: async () => { spawnedAt.push(Date.now()); return { ok: true, code: 0 }; } };
+  const ex = new Executor({ config, stages, adapter, state, reporter });
+
+  const stage: any = { id: 'x', label: 'x', units: () => ['1'], pattern: /never/ };
+  const plan = (label: string) => ({ role: 'beta', label, job: 'scaffolding', covers: [label] });
+  const t0 = Date.now();
+  for (const l of ['a', 'b', 'c']) ex.start(stage, plan(l) as any);
+
+  // Registration is synchronous: all three count against the cap immediately,
+  // before any of them has spawned.
+  assert.equal(ex.inflight.size, 3, 'inflight must be populated before the waits elapse');
+  assert.equal(spawnedAt.length, 0, 'nothing may spawn in the same tick as its registration');
+
+  await Promise.all([...ex.inflight.values()].map((d: any) => d.promise));
+  assert.equal(spawnedAt.length, 3);
+  // First is immediate; each later one waits at least one full interval more.
+  assert.ok(spawnedAt[1] - t0 >= 35, `second spawn too early: ${spawnedAt[1] - t0}ms`);
+  assert.ok(spawnedAt[2] - t0 >= 75, `third spawn too early: ${spawnedAt[2] - t0}ms`);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('dispatchStaggerMs 0 disables the wait entirely', async () => {
+  const repo = fixtureRepo();
+  const config: any = {
+    repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'],
+    dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {},
+    adoptCommand: false, dispatchStaggerMs: 0,
+  };
+  const state = new State(statePath(config.stateDir)).init('demo');
+  const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
+  const spawnedAt: number[] = [];
+  const adapter: any = { invoke: async () => { spawnedAt.push(Date.now()); return { ok: true, code: 0 }; } };
+  const ex = new Executor({ config, stages, adapter, state, reporter });
+  const stage: any = { id: 'x', label: 'x', units: () => ['1'], pattern: /never/ };
+  const t0 = Date.now();
+  for (const l of ['a', 'b', 'c']) {
+    ex.start(stage, { role: 'beta', label: l, job: 'scaffolding', covers: [l] } as any);
+  }
+  await Promise.all([...ex.inflight.values()].map((d: any) => d.promise));
+  assert.equal(spawnedAt.length, 3);
+  assert.ok(spawnedAt[2] - t0 < 200, `expected no pacing, took ${spawnedAt[2] - t0}ms`);
   rmSync(repo, { recursive: true, force: true });
 });

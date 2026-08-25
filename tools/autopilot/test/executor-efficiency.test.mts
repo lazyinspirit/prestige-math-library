@@ -17,7 +17,7 @@ import { join } from 'node:path';
 
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
-import { Executor } from '../src/executor.mts';
+import { Executor, completedPrefixProblem } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 
 function fixture() {
@@ -51,7 +51,7 @@ function makeExecutor(fx: any, stages: any, extra: any = {}) {
   const config: any = {
     run: 'testrun', repo: fx.repo, stateDir, dispatchDir: fx.dispatchDir,
     argv: ['true'], concurrency: 3, maxAttempts: 2, coversMap: {},
-    adoptCommand: false, ...extra,
+    adoptCommand: false, dispatchStaggerMs: 0, ...extra,
   };
   const state = new State(statePath(stateDir)).init('testrun');
   const notifications: Array<{ kind: string; message: string }> = [];
@@ -105,15 +105,14 @@ test('a result file from an external process dirties the skip', async () => {
   assert.ok(typeof fp1 === 'string' && fp1.includes(':'));
 });
 
-test('the 20th skip runs the battery anyway — the dirty-channel backstop', async () => {
+test('an unchanged failed battery stays dormant for arbitrarily many ticks', async () => {
   const fx = fixture();
   cover(fx, 'worker', 'a1', ['1']);
   const { ex } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1', { ok: false })]));
   await ex.tick();
-  for (let i = 0; i < 20; i++) await ex.tick();
-  assert.equal(gateRuns(fx).length, 1, 'twenty quiet ticks are all skipped');
-  await ex.tick();
-  assert.equal(gateRuns(fx).length, 2, 'the 21st runs the backstop battery');
+  for (let i = 0; i < 100; i++) await ex.tick();
+  assert.equal(gateRuns(fx).length, 1,
+    'a wall clock is not evidence that deterministic gate inputs changed');
 });
 
 test('report-all: one battery names every failure; authority stays with the first', async () => {
@@ -166,6 +165,41 @@ test('retry re-arms the repair loop, not just the lanes', () => {
   assert.equal(st.repairExhaustedAt, undefined);
   assert.equal(st.backoffUntil, undefined, 'an operator retry overrides an outage clock');
   assert.ok(notifications.some((n) => n.kind === 'retry-armed' && /repair rounds re-armed on 1 stage/.test(n.message)));
+});
+
+test('retry cannot reopen a terminal Step 8 repair budget', () => {
+  const fx = fixture();
+  const stages = gatedStage(fx, [loggingGate(fx, 'g1')], {
+    maxFixRounds: 2,
+    terminalFixBudget: true,
+    onGateFailure: () => {},
+  });
+  const { ex } = makeExecutor(fx, stages);
+  const st = ex.state.stage('s1');
+  st.fixRounds = 2;
+  st.repairExhaustedAt = '2026-08-25T07:14:01.895Z';
+  st.backoffUntil = '2026-08-25T08:00:00.000Z';
+  writeFileSync(join(fx.repo, '.autopilot', 'control.json'), JSON.stringify({ command: 'retry' }));
+  ex.handleControl();
+  assert.equal(st.fixRounds, 2, 'the lifetime two-cycle count must survive retry');
+  assert.equal(st.repairExhaustedAt, '2026-08-25T07:14:01.895Z');
+  assert.equal(st.backoffUntil, undefined, 'retry may clear an outage clock without reopening the budget');
+});
+
+test('hot reload preserves every durable completed prefix', () => {
+  const oldStages = [{ id: 'one' }, { id: 'two' }, { id: 'three' }];
+  const completed = {
+    one: { gatesPassedAt: '2026-08-25T00:00:00Z' },
+    two: { gatesPassedAt: '2026-08-25T01:00:00Z' },
+  };
+  assert.equal(completedPrefixProblem(oldStages, [...oldStages, { id: 'four' }], completed), null,
+    'future work may be appended');
+  assert.equal(completedPrefixProblem(oldStages,
+    [{ id: 'one' }, { id: 'inserted' }, { id: 'two' }, { id: 'three' }], completed), 'two',
+  'new work cannot be silently inserted before a completed successor');
+  assert.equal(completedPrefixProblem(oldStages,
+    [{ id: 'two' }, { id: 'one' }, { id: 'three' }], completed), 'one',
+  'completed work cannot be reordered');
 });
 
 test('reconcileAdopted stamps endedAt from the result file on disk', () => {

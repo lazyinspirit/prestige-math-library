@@ -1,55 +1,45 @@
-# Step 9 — the scope-denial sweep, run `{{run}}`
+# Step 9 — changed scope decisions and terminal defect sweep, run `{{run}}`
 
-Every result declined during this run gets re-examined. Step 9 is a sweep and
-does not pause the build.
+Step 3 already reviewed every decline and stored an exact, closure-bound
+decision. Review only the rows without a reusable decision in
+`research/{{run}}-step9-scope-delta.json`. For a run created before these
+receipts existed, that file deliberately marks every decline pending, preserving
+the full historical sweep.
 
-## Why this exists
+## Resolve the pending decisions
 
-On an earlier run two declines rested on claims that were **factually false**:
-one said a page lay outside the closure when a published definition sits
-inside it; one said no floor definition exists when the published lemma was in
-closure. Four items had to be built as a result — at step 9, the worst
-possible moment.
+For each pending row, verify the stated reason and destination against the
+current page closure, published files, plan, and cited source. Update the owning
+`research/{{run}}-alpha-<group>-scope-decisions.json` row to `stands` or
+`owner-decision`, with concrete evidence.
 
-The converse is also a real answer: "published" and "published and in this
-page's closure" are different facts, and only the second licenses a citation.
+Overturn a false decline by changing its coverage disposition and building the
+missing result when it fits an existing page without a reading-order change.
+Author it to the Step 5 standard: exactly one owning batch manifest, proof
+contract, risk review, source disposition, and coherent splice/impact updates.
+Do not create a page or forward dependency; record that as `owner-decision`.
 
-## What to do
+After any coverage or plan edit, run:
 
-1. Collect every `deferred` and `out-of-scope` disposition from all
-   {{n_batches}} `research/{{run}}-batch-<i>.coverage.json` files.
-2. For each: is the stated reason **true of disk right now**?
-   `grep -rl '<id>' items/ library/` costs seconds. Check the closure, not
-   just publication.
-3. Confirm every decline names a **licensing page id** — the page that will
-   carry the result instead. A prose-only decline is indistinguishable from a
-   silent drop; on one run 52 of 68 were prose only. A decline to a page id
-   that does not exist in `plan-spec.json`, or to one whose subject does not
-   cover the result, is a finding.
-4. Overturn any decline resting on a false claim, and build what it wrongly
-   excluded — if it can be built without a new page or a reading-order change.
-   If it cannot, record it as an owner decision. Ledger duty applies: an
-   overturned decline that exposed a real defect writes its
-   `research/defect-ledger.jsonl` row in the same act.
-5. Sweep the run's still-open ledger rows:
-
-```
-grep '"disposition":"open"' research/defect-ledger.jsonl | grep '"run":"{{run}}"'
+```sh
+node tools/scope-decisions.mjs refresh --run {{run}} --all
 ```
 
-   For each open row, test its own recorded closing condition against disk.
-   Closing is an IN-PLACE update of that row — one defect, one row: set
-   `disposition` to `fixed` (or `deferred` with the exact remaining
-   condition), add the closing evidence to the row, and re-run
-   `node tools/defect-ledger.mjs render` (a hand edit stales the view
-   fingerprint). Never append a second row for the same defect. A row whose
-   condition cannot be met yet stays open with a note — the 10-report gate
-   refuses ANY open row (`--no-open`), so an open row you leave is one the
-   owner must personally read.
+Resolve every newly pending row, then run
+`node tools/scope-decisions.mjs check --run {{run}}`. Write concise reasoning
+and any authored ids to `research/{{run}}-alpha-step9-review.md`. The engine
+mechanically renders the complete `research/{{run}}-alpha-step9.md` register.
 
-## Output
+Every item created **or mathematically modified** after the post-Step-8
+snapshot is derived by guarded hash. The engine sends only those ids through
+both judge lanes, adjudication/fatal repair, exact rejudge, and verified stamp.
+Do not self-stamp or run a private sweep.
 
-`research/{{run}}-alpha-step9.md`: every decline, its verdict (`stands` /
-`overturned`), the disk evidence, and what was built as a result.
+## Terminal ledger sweep
+
+Inspect every open row for this run in `research/defect-ledger.jsonl`. Test its
+recorded closing condition against disk. Close or defer that same row in place
+with exact evidence; never append a duplicate defect. Rerun
+`node tools/defect-ledger.mjs render` after a ledger edit.
 
 **No permission prompts of any kind**, including inside an `&&` chain.

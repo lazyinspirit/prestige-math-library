@@ -1,0 +1,337 @@
+[
+  {
+    "order": 57.009,
+    "id": "lagrange-four-square-theorem",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Lagrange Four Square Theorem",
+    "companion": "lagrange-four-square-theorem-examples",
+    "requires": [
+      "sums-of-two-squares-examples"
+    ],
+    "items": [
+      {
+        "id": "def-sum-of-four-squares-representation",
+        "kind": "definition",
+        "title": "Representations as sums of four squares",
+        "deps": []
+      },
+      {
+        "id": "lem-euler-four-square-product-identity",
+        "kind": "lemma",
+        "title": "Euler's four-square product identity",
+        "strategy": "State the identity with Conrad's sign pattern $z_1=x_1y_1+x_2y_2+x_3y_3+x_4y_4$, $z_2=x_1y_2-x_2y_1-x_3y_4+x_4y_3$, $z_3=x_1y_3+x_2y_4-x_3y_1-x_4y_2$, $z_4=x_1y_4-x_2y_3+x_3y_2-x_4y_1$, and prove it by expanding both sides and cancelling cross terms. The sign pattern is load-bearing and must be displayed, not summarised: [[lem-four-square-descent]] uses exactly this pattern to get $m \\mid z_i$. The identity is a polynomial identity over $\\mathbb{Z}$, so it holds for all integer inputs including zeros and negatives.",
+        "deps": []
+      },
+      {
+        "id": "cor-four-squares-closed-under-products",
+        "kind": "corollary",
+        "title": "Sums of four squares are closed under products",
+        "strategy": "Take representations of the two factors and substitute into the identity. State the zero case explicitly: $0=0^2+0^2+0^2+0^2$, and the formula still gives a representation of the product when either factor is $0$. No positivity is needed anywhere.",
+        "deps": [
+          "def-sum-of-four-squares-representation",
+          "lem-euler-four-square-product-identity"
+        ]
+      },
+      {
+        "id": "lem-four-square-congruence-for-primes",
+        "kind": "lemma",
+        "title": "For every prime $p$ the congruence $x^2+y^2+1\\equiv 0\\pmod p$ is solvable",
+        "strategy": "Cases on $p$. For $p=2$ take $x=1$, $y=0$: then $1^2+0^2+1=2$ and $2\\equiv 0\\pmod 2$. For odd $p$ cite the published [[prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares]], whose Statement is: let $p$ be an odd prime and let $a\\in\\mathbb Z$ with $p\\nmid a$; then there are integers $x,y$ such that $x^2+y^2\\equiv a\\pmod p$. Apply it at $a=-1$. Its hypothesis $p\\nmid -1$ holds: $p\\mid -1$ would give $-1=pq$ for some integer $q$, hence $1=p(-q)$ and $p\\mid 1$, so $p=1$ or $p=-1$ because those are the units of $\\mathbb Z$, contradicting $p>1$. From $x^2+y^2\\equiv -1\\pmod p$ and $1\\equiv 1\\pmod p$, adding congruences gives $x^2+y^2+1\\equiv 0\\pmod p$. Do not re-run the square-class counting argument here: it is the proof of the cited proposition, which is homed on `sums-of-two-squares`, and running it again is the duplication Alpha finding B1-1 removed. This citation is this page's dependency edge to its declared prerequisite.",
+        "deps": [
+          "def-prime",
+          "def-congruence-modulo-an-integer",
+          "def-divides-in-z",
+          "lem-units-of-z",
+          "prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares",
+          "lem-congruence-respects-integer-arithmetic"
+        ]
+      },
+      {
+        "id": "lem-least-absolute-remainder",
+        "kind": "lemma",
+        "title": "The least absolute remainder modulo a positive integer",
+        "strategy": "For $m\\ge 1$ and $a\\in\\mathbb{Z}$, divide with remainder to get $a=qm+r_0$ with $0\\le r_0<m$; set $r=r_0$ when $2r_0\\le m$ and $r=r_0-m$ otherwise. Then $a\\equiv r\\pmod m$ and $-m<2r\\le m$, hence $4r^2\\le m^2$. Uniqueness: two such remainders differ by a multiple of $m$ of absolute value less than $m$, so by the divisor bound the difference is $0$. State the bound in the integer form $4r^2\\le m^2$ so no rational $m/2$ is needed, and record that $2r=m$ occurs exactly for even $m$ with $r=m/2$, the one boundary the four-square descent must exclude by hand.",
+        "deps": [
+          "cor-division-algorithm-nonzero-divisor",
+          "def-congruence-modulo-an-integer",
+          "def-divides-in-z",
+          "lem-divisor-bound"
+        ]
+      },
+      {
+        "id": "lem-small-four-square-multiple-of-a-prime",
+        "kind": "lemma",
+        "title": "Some multiple $pm$ with $1\\le m<p$ is a sum of four squares",
+        "strategy": "Take $u,v$ with $u^2+v^2+1\\equiv 0\\pmod p$ and replace them by their least absolute remainders $x,y$ modulo $p$; congruences are preserved under squaring and addition, so $p\\mid x^2+y^2+1$, and $4x^2\\le p^2$, $4y^2\\le p^2$. The value $x^2+y^2+1$ is positive, so $x^2+y^2+1=pm$ with $m\\ge 1$. For the strict bound argue in integers: $4pm=4(x^2+y^2+1)\\le 2p^2+4<4p^2$ because $p^2>2$, so $pm<p^2$ and $m<p$. Present the conclusion as $pm=x^2+y^2+1^2+0^2$, a genuine four-square representation.",
+        "deps": [
+          "def-prime",
+          "def-sum-of-four-squares-representation",
+          "lem-four-square-congruence-for-primes",
+          "lem-least-absolute-remainder",
+          "def-congruence-modulo-an-integer",
+          "lem-congruence-respects-integer-arithmetic",
+          "def-divides-in-z"
+        ]
+      },
+      {
+        "id": "lem-least-absolute-residue-quadruple-of-a-multiple",
+        "kind": "lemma",
+        "title": "The centred residue quadruple of $pm=a^2+b^2+c^2+d^2$ has norm $mn$ with $1\\le n<m$",
+        "strategy": "This isolates the boundary work of the descent. With $p$ prime, $1<m<p$ and $pm=a^2+b^2+c^2+d^2$, let $a',b',c',d'$ be the least absolute remainders modulo $m$. Squares are congruence-stable, so $m\\mid a'^2+b'^2+c'^2+d'^2$; write the value as $mn$ with $n\\ge 0$. Rule out $n=0$: it forces $m\\mid a,b,c,d$, hence $m^2\\mid pm$ and $m\\mid p$, so $m=p$ by primality, contradicting $m<p$. The bound $4a'^2\\le m^2$ on each coordinate gives $4mn\\le 4m^2$, so $n\\le m$. Rule out $n=m$: equality forces $4a'^2=m^2$ in each coordinate, so $m$ is even and each $a'=m/2$; then $a\\equiv m/2\\pmod m$ gives $a^2\\equiv (m/2)^2\\pmod{m^2}$, so $pm\\equiv 4(m/2)^2=m^2\\equiv 0\\pmod{m^2}$ and again $m\\mid p$. Hence $1\\le n<m$.",
+        "deps": [
+          "def-prime",
+          "lem-least-absolute-remainder",
+          "def-congruence-modulo-an-integer",
+          "lem-congruence-respects-integer-arithmetic",
+          "def-divides-in-z",
+          "lem-divisibility-basic"
+        ]
+      },
+      {
+        "id": "lem-four-square-descent",
+        "kind": "lemma",
+        "title": "Descent step: a smaller multiple of $p$ is a sum of four squares",
+        "strategy": "Let $p$ be prime, $1<m<p$ and $pm=a^2+b^2+c^2+d^2$. Take the centred residue quadruple $a',b',c',d'$ and the preceding lemma's $n$ with $1\\le n<m$ and $a'^2+b'^2+c'^2+d'^2=mn$. Multiply the two representations with Euler's identity in the exact sign pattern of [[lem-euler-four-square-product-identity]], taking $x=(a,b,c,d)$ and $y=(a',b',c',d')$, so $pm\\cdot mn=A^2+B^2+C^2+D^2$. Reduce each bilinear coordinate modulo $m$ using $a'\\equiv a$, $b'\\equiv b$, $c'\\equiv c$, $d'\\equiv d$: $A\\equiv a^2+b^2+c^2+d^2=pm\\equiv 0$, $B\\equiv ab-ba-cd+dc=0$, $C\\equiv ac+bd-ca-db=0$, $D\\equiv ad-bc+cb-da=0$. Write $A=mA'$ and so on; then $pm^2n=m^2(A'^2+B'^2+C'^2+D'^2)$ and cancelling $m^2\\ne 0$ gives $pn=A'^2+B'^2+C'^2+D'^2$.",
+        "deps": [
+          "def-prime",
+          "def-sum-of-four-squares-representation",
+          "lem-euler-four-square-product-identity",
+          "lem-least-absolute-remainder",
+          "lem-least-absolute-residue-quadruple-of-a-multiple",
+          "lem-congruence-respects-integer-arithmetic",
+          "def-congruence-modulo-an-integer",
+          "def-divides-in-z",
+          "lem-int-cancellation"
+        ]
+      },
+      {
+        "id": "thm-every-prime-is-a-sum-of-four-squares",
+        "kind": "theorem",
+        "title": "Every prime is a sum of four integer squares",
+        "strategy": "Contradiction. Assume the prime $p$ is not a sum of four squares. The set $S=\\{m\\in\\mathbb{Z} : 1\\le m<p$ and $pm$ is a sum of four squares$\\}$ is nonempty by the small-multiple lemma and is bounded below by $1$, so it has a least element $m_0$. If $m_0=1$ then $p=p\\cdot 1$ is a sum of four squares, against the assumption; so $m_0>1$ and the descent lemma supplies $n$ with $1\\le n<m_0$ and $pn$ a sum of four squares. Then $n<m_0<p$, so $n\\in S$, contradicting the leastness of $m_0$. The least-element principle for integer sets bounded below is what makes the descent terminate; no infinite regress is written.",
+        "deps": [
+          "def-prime",
+          "def-sum-of-four-squares-representation",
+          "lem-small-four-square-multiple-of-a-prime",
+          "lem-four-square-descent",
+          "lem-int-bounded-above-has-greatest"
+        ]
+      },
+      {
+        "id": "thm-lagrange-four-square-theorem",
+        "kind": "theorem",
+        "title": "Lagrange's four-square theorem: every nonnegative integer is a sum of four integer squares",
+        "strategy": "Contradiction on a least counterexample. Suppose some nonnegative integer is not a sum of four squares; the set of such integers is bounded below by $0$, so it has a least element $n_0$. Now $n_0\\ne 0$ because $0=0^2+0^2+0^2+0^2$, and $n_0\\ne 1$ because $1=1^2+0^2+0^2+0^2$; hence $n_0>1$ and $n_0$ has a prime divisor $q$. Write $n_0=qk$; then $k\\ge 1$ because $n_0>0$, and $k<n_0$ because $q\\ge 2$. By leastness $k$ is a sum of four squares, $q$ is one by the prime case, and closure under products makes $n_0$ one. Treat $0$ and $1$ explicitly rather than through a factorisation, since $1$ is the empty product and $0$ is not a product of primes at all.",
+        "deps": [
+          "def-sum-of-four-squares-representation",
+          "thm-every-prime-is-a-sum-of-four-squares",
+          "cor-four-squares-closed-under-products",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "lem-int-bounded-above-has-greatest",
+          "def-divides-in-z"
+        ]
+      },
+      {
+        "id": "rem-sign-patterns-in-the-four-square-identity",
+        "kind": "remark",
+        "title": "Why the descent fixes one sign pattern in the four-square identity",
+        "strategy": "A justifying remark, not a survey. Record that Euler wrote a second choice of signs ($z_2=x_1y_2-x_2y_1+x_3y_4-x_4y_3$, $z_3=x_1y_3-x_2y_4-x_3y_1+x_4y_2$, $z_4=x_1y_4+x_2y_3-x_3y_2-x_4y_1$, with the same $z_1$) and that Hamilton's quaternion identity uses $z_1=x_1y_1-x_2y_2-x_3y_3-x_4y_4$; cite Conrad Remarks 6.3 and 6.7 and Dummit Lemma 1, which states the second Euler pattern. Then give the one-line computation that makes the choice load-bearing: substituting $y\\equiv x\\pmod m$ into the pattern fixed in [[lem-euler-four-square-product-identity]] sends all four coordinates to $0$ modulo $m$, and does the same for Euler's second pattern, whereas Hamilton's first coordinate becomes $a^2-b^2-c^2-d^2$ modulo $m$, which the hypotheses of [[lem-four-square-descent]] do not force to vanish. Assert only that this proof's divisibility step needs the pattern displayed, never that no proof can use the quaternion pattern.",
+        "deps": [
+          "lem-euler-four-square-product-identity",
+          "lem-four-square-descent"
+        ]
+      },
+      {
+        "id": "lem-squares-modulo-eight",
+        "kind": "lemma",
+        "title": "A square is congruent to $0$, $1$ or $4$ modulo $8$",
+        "strategy": "Cases on the parity of $x$, obtained from division with remainder by $2$. If $x$ is odd then $x^2$ is odd and the congruence $t^2\\equiv x^2\\pmod{2^3}$ is solvable (take $t=x$), so the published unit-square criterion modulo powers of two gives $x^2\\equiv 1\\pmod 8$. If $x=2k$ then $x^2=4k^2$; when $k$ is even $16\\mid x^2$ so $x^2\\equiv 0\\pmod 8$, and when $k$ is odd $k^2$ is odd and $x^2=4(2l+1)=8l+4\\equiv 4\\pmod 8$. Record the consequence used later: $x^2\\equiv 1\\pmod 4$ when $x$ is odd and $x^2\\equiv 0\\pmod 4$ when $x$ is even, since $8\\mid t$ implies $4\\mid t$.",
+        "deps": [
+          "def-congruence-modulo-an-integer",
+          "cor-division-algorithm-nonzero-divisor",
+          "thm-unit-square-criterion-modulo-two-powers",
+          "lem-divisibility-basic",
+          "def-divides-in-z"
+        ]
+      },
+      {
+        "id": "lem-sum-of-three-squares-is-never-seven-modulo-eight",
+        "kind": "lemma",
+        "title": "No sum of three integer squares is congruent to $7$ modulo $8$",
+        "strategy": "Exhaustive cases on how many of $x,y,z$ are odd, which is $0$, $1$, $2$ or $3$. Each odd square contributes $1$ modulo $8$ and each even square contributes $0$ or $4$. Three odd gives $3$; two odd gives $2$ or $6$; one odd gives $1$ or $5$ (since $1+4+4=9\\equiv 1$); none odd gives $0$ or $4$ (since $4+4+4=12\\equiv 4$ and $0+4+4=8\\equiv 0$). The attainable residues are exactly $0,1,2,3,4,5,6$, and $7$ is not among them. Enumerating by the number of odd coordinates, rather than by the ten multisets of values, keeps the case list to four and makes exhaustiveness visible.",
+        "deps": [
+          "lem-squares-modulo-eight",
+          "def-congruence-modulo-an-integer",
+          "lem-congruence-respects-integer-arithmetic",
+          "cor-division-algorithm-nonzero-divisor"
+        ]
+      },
+      {
+        "id": "lem-four-dividing-a-sum-of-three-squares-forces-even-coordinates",
+        "kind": "lemma",
+        "title": "If $4$ divides $x^2+y^2+z^2$ then $x$, $y$ and $z$ are all even",
+        "strategy": "Modulo $4$ a square is $1$ when its base is odd and $0$ when its base is even, by the last clause of the squares-modulo-eight lemma. So $x^2+y^2+z^2$ is congruent modulo $4$ to the number $t$ of odd coordinates, and $t\\in\\{0,1,2,3\\}$. If $4$ divides the sum then $4\\mid t$, which among $0,1,2,3$ forces $t=0$. Halving each coordinate is then legitimate and is what the obstruction's induction step needs.",
+        "deps": [
+          "lem-squares-modulo-eight",
+          "def-congruence-modulo-an-integer",
+          "lem-congruence-respects-integer-arithmetic",
+          "def-divides-in-z",
+          "cor-division-algorithm-nonzero-divisor"
+        ]
+      },
+      {
+        "id": "prop-three-square-congruence-obstruction",
+        "kind": "proposition",
+        "title": "Positive integers $4^a m$ with $m\\equiv 7\\pmod 8$ are not sums of three integer squares",
+        "strategy": "Induction on $a\\in\\mathbb{N}$, with $4^a$ the power in the commutative monoid $(\\mathbb{Z},\\cdot,1)$, so that no natural number is written inside an applied embedding. Base $a=0$: $4^0=1$, so the number is $m\\equiv 7\\pmod 8$, and a three-square representation would give a sum of three squares congruent to $7$ modulo $8$. Step: suppose $4^{a+1}m=x^2+y^2+z^2$. Then $4$ divides the right side, so $x,y,z$ are all even; writing $x=2x'$ and so on and cancelling the nonzero factor $4$ gives $4^{a}m=x'^2+y'^2+z'^2$, contradicting the induction hypothesis. State the hypothesis as $m$ a positive integer with $m\\equiv 7\\pmod 8$, and note in the item that this is exactly the shape $8b+7$ with $b$ a nonnegative integer.",
+        "deps": [
+          "lem-sum-of-three-squares-is-never-seven-modulo-eight",
+          "lem-four-dividing-a-sum-of-three-squares-forces-even-coordinates",
+          "thm-induction-principle",
+          "def-group-power",
+          "lem-units-of-z",
+          "lem-int-cancellation",
+          "def-congruence-modulo-an-integer",
+          "def-divides-in-z"
+        ]
+      },
+      {
+        "id": "cor-integers-requiring-four-squares",
+        "kind": "corollary",
+        "title": "Positive integers $4^a m$ with $m\\equiv 7\\pmod 8$ need four nonzero squares",
+        "strategy": "Contradiction for the second clause. Existence is Lagrange's theorem applied to the nonnegative integer $n=4^a m$. If some four-square representation of $n$ had a zero coordinate, the remaining three coordinates would be integers whose squares sum to $n$, contradicting the three-square obstruction. Hence every four-square representation of such an $n$ has all four coordinates nonzero: four squares are not merely sufficient here, they are necessary.",
+        "deps": [
+          "prop-three-square-congruence-obstruction",
+          "thm-lagrange-four-square-theorem",
+          "def-sum-of-four-squares-representation",
+          "def-group-power",
+          "lem-units-of-z"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 57.01,
+    "id": "lagrange-four-square-theorem-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Lagrange Four Square Theorem — Examples",
+    "companion": "lagrange-four-square-theorem",
+    "requires": [
+      "lagrange-four-square-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-four-square-product-identity-by-expansion",
+        "kind": "example",
+        "title": "$7\\cdot 15=105$ through all four bilinear coordinates",
+        "strategy": "Take $7=2^2+1^2+1^2+1^2$ and $15=3^2+2^2+1^2+1^2$, so $x=(2,1,1,1)$ and $y=(3,2,1,1)$. The identity gives $z_1=10$, $z_2=1$, $z_3=-2$, $z_4=0$, and $100+1+4+0=105$. Compute every coordinate, including the one that vanishes, so the reader sees that a zero coordinate is a value of the formula and not an omission.",
+        "deps": [
+          "lem-euler-four-square-product-identity",
+          "def-sum-of-four-squares-representation"
+        ]
+      },
+      {
+        "id": "ex-four-square-congruence-for-an-odd-prime",
+        "kind": "example",
+        "title": "The two intersecting square sets modulo $11$ give $1^2+3^2+1=11$",
+        "strategy": "Modulo $11$ the square classes including zero are $\\{0,1,3,4,5,9\\}$, six of them, matching $(p+1)/2=6$. The translate $\\{-1-y^2\\}$ is $\\{10,9,6,1,5,7\\}$, also six. The two sets meet in $\\{1,5,9\\}$; taking the common value $1=1^2$ and $1=-1-3^2$ gives $1^2+3^2+1=11\\equiv 0\\pmod{11}$. List both sets in full so the count, not an assertion about the count, is what the reader checks. These two sets and their intersection are the argument of [[prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares]] at $a=-1$, written out at $p=11$: that proposition supplies a common value for every odd prime, and [[lem-four-square-congruence-for-primes]] cites it instead of re-running it, so this example is where the mechanism behind that citation is displayed.",
+        "deps": [
+          "lem-four-square-congruence-for-primes",
+          "prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "ex-least-absolute-remainders-and-the-even-modulus-tie",
+        "kind": "example",
+        "title": "Least absolute remainders modulo $7$ and modulo $8$",
+        "strategy": "Tabulate the least absolute remainders of $0,\\dots,7$ modulo $7$ (values $0,1,2,3,-3,-2,-1,0$) and modulo $8$ (values $0,1,2,3,4,-3,-2,-1$). Modulo $7$ every remainder satisfies $4r^2<m^2$ strictly; modulo $8$ the class of $4$ attains $2r=m$, and $4$ and $-4$ are congruent, which is why the lemma's normalisation $-m<2r\\le m$ selects $4$. This is precisely the boundary that [[lem-least-absolute-residue-quadruple-of-a-multiple]] has to exclude by a separate argument.",
+        "deps": [
+          "lem-least-absolute-remainder",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "ex-four-square-descent-for-thirteen",
+        "kind": "example",
+        "title": "Descending from $13\\cdot 11$ to $13$ in two steps",
+        "strategy": "Start from $143=13\\cdot 11=11^2+3^2+3^2+2^2$, a nonminimal multiple. Centred residues modulo $11$ are $(0,3,3,2)$ with norm $22=11\\cdot 2$, so $n=2$. Euler's identity gives $(A,B,C,D)=(22,33,33,22)$, each divisible by $11$, and dividing by $11$ gives $26=2^2+3^2+3^2+2^2=13\\cdot 2$. Repeat with $m=2$: centred residues $(0,1,1,0)$ have norm $2=2\\cdot 1$, the identity gives $(6,4,0,0)$, and dividing by $2$ gives $13=3^2+2^2+0^2+0^2$. Verify every displayed product and sum. Both parities of the modulus appear, which is the point of running two steps rather than one.",
+        "deps": [
+          "lem-four-square-descent",
+          "lem-least-absolute-residue-quadruple-of-a-multiple",
+          "lem-least-absolute-remainder",
+          "lem-euler-four-square-product-identity",
+          "def-sum-of-four-squares-representation"
+        ]
+      },
+      {
+        "id": "ex-four-square-representations-of-sixty-five",
+        "kind": "example",
+        "title": "Four essentially different four-square representations of $65$",
+        "strategy": "Exhibit $65=1^2+8^2+0^2+0^2=4^2+7^2+0^2+0^2=2^2+5^2+6^2+0^2=2^2+3^2+4^2+6^2$, Conrad's Example 6.1, verifying each sum. The multisets of absolute values are pairwise distinct, so no two are obtained from one another by reordering coordinates or changing signs. Existence is what Lagrange's theorem asserts; the number of representations is a separate question this page does not answer.",
+        "deps": [
+          "def-sum-of-four-squares-representation",
+          "thm-lagrange-four-square-theorem"
+        ]
+      },
+      {
+        "id": "fs-four-square-representations-of-a-prime-are-essentially-unique",
+        "kind": "false-statement",
+        "title": "FALSE: a prime has one four-square representation up to order and signs",
+        "strategy": "The claim is the four-square analogue of the two-square uniqueness statement for primes congruent to $1$ modulo $4$, and it fails. Refute it with $31$, which is prime and satisfies $31=5^2+2^2+1^2+1^2=3^2+3^2+3^2+2^2$; the multisets of absolute values $\\{5,2,1,1\\}$ and $\\{3,3,3,2\\}$ are different, so neither representation comes from the other by reordering or sign changes. Verify both sums and the primality of $31$ explicitly.",
+        "deps": [
+          "def-sum-of-four-squares-representation",
+          "def-prime"
+        ]
+      },
+      {
+        "id": "ex-four-square-representation-from-prime-factorisation",
+        "kind": "example",
+        "title": "Building a representation of $105$ from its prime factors",
+        "strategy": "Factor $105=3\\cdot 5\\cdot 7$ and take $3=1^2+1^2+1^2+0^2$, $5=2^2+1^2+0^2+0^2$, $7=2^2+1^2+1^2+1^2$. The identity applied to the first two gives $15=3^2+(-1)^2+(-2)^2+1^2$, and applied to that result and $7$ gives $105=4^2+8^2+5^2+0^2$. Check both products by expansion. Negative coordinates appear at the intermediate stage and are harmless, since only squares are read off at the end.",
+        "deps": [
+          "cor-four-squares-closed-under-products",
+          "lem-euler-four-square-product-identity",
+          "def-sum-of-four-squares-representation",
+          "thm-prime-factorisation-exists"
+        ]
+      },
+      {
+        "id": "cex-three-squares-fail-for-seven-modulo-eight",
+        "kind": "counterexample",
+        "title": "$7$ and $28$ are not sums of three integer squares",
+        "strategy": "For $7$, run the residue obstruction directly: any three squares contribute residues from $\\{0,1,4\\}$ modulo $8$ and no three of them total $7$. For $28=4\\cdot 7$, show the propagation: a three-square representation of $28$ would have all coordinates even, and halving them would represent $7$ by three squares. Give the finite check for $7$ by hand as well, listing the squares at most $7$, so the reader has both the congruence argument and a direct search.",
+        "deps": [
+          "prop-three-square-congruence-obstruction",
+          "lem-sum-of-three-squares-is-never-seven-modulo-eight",
+          "lem-four-dividing-a-sum-of-three-squares-forces-even-coordinates",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "cex-sums-of-three-squares-are-not-closed-under-products",
+        "kind": "counterexample",
+        "title": "$3$ and $5$ are sums of three squares and $15$ is not",
+        "strategy": "Dummit's witness. Verify $3=1^2+1^2+1^2$ and $5=2^2+1^2+0^2$, then note $15\\equiv 7\\pmod 8$, so the obstruction rules out any three-square representation of $15$. This is exactly why the four-square proof may reduce to primes and a three-square treatment may not: the four-square identity has no three-square counterpart.",
+        "deps": [
+          "prop-three-square-congruence-obstruction",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "ex-an-integer-that-genuinely-needs-four-squares",
+        "kind": "example",
+        "title": "$7$ and $28$ have four-square representations with no zero coordinate",
+        "strategy": "Exhibit $7=2^2+1^2+1^2+1^2$ and $28=5^2+1^2+1^2+1^2$, and prove that no representation of either can have a vanishing coordinate: a zero coordinate would leave a sum of three squares, which the obstruction forbids for $4^0\\cdot 7$ and $4^1\\cdot 7$. The pair shows both the $a=0$ and the $a=1$ case of the corollary.",
+        "deps": [
+          "cor-integers-requiring-four-squares",
+          "thm-lagrange-four-square-theorem",
+          "prop-three-square-congruence-obstruction",
+          "def-sum-of-four-squares-representation"
+        ]
+      }
+    ]
+  }
+]

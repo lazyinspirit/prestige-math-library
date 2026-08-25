@@ -1,0 +1,108 @@
+[
+  {
+    "defect_id": "frontier-18-contract-audit-004",
+    "run": "frontier-18",
+    "at": "2026-08-25",
+    "class": "accuracy",
+    "subclass": "citation-inflated",
+    "severity": "nonfatal",
+    "location": "facts-block",
+    "subject": "prop-irreducibility-of-the-cyclotomic-polynomial-characterises-the-full-galois-group fact L5 dropped the standing n>=1 hypothesis from the cited cyclotomic statements",
+    "batch": "3",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "The shared L5 fact line reused two cited cyclotomic statements but omitted the explicit n>=1 bound they both carry. The repair tightened the restatement to read 'For this n>=1' before the Galois and primitive-root clauses.",
+    "evidence": [
+      {
+        "path": "items/prop-irreducibility-of-the-cyclotomic-polynomial-characterises-the-full-galois-group.md",
+        "anchor": "Facts L5"
+      }
+    ],
+    "source": "citation-fidelity"
+  },
+  {
+    "defect_id": "frontier-18-contract-audit-005",
+    "run": "frontier-18",
+    "at": "2026-08-25",
+    "class": "accuracy",
+    "subclass": "other",
+    "subclass_note": "Three high-risk batch-2 items had current proofs and contracts on disk but no complete Alpha risk_review disposition: ex-the-two-extraspecial-groups-of-order-thirty-two, prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite, and ex-two-generating-sets-of-a-dihedral-group. This pass reread each proof against its cited dependencies and wrote the missing review blocks.",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "missing Alpha risk_review rows for three routed batch-2 items",
+    "batch": "2",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "6b-adjudicate",
+    "introduced_by_role": "group-alpha",
+    "should_have_caught": "6b-adjudicate",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "evidence": [
+      {
+        "path": "research/frontier-18-batch-2.proof-contracts.json",
+        "anchor": "risk_review blocks for the three batch-2 graph/extraspecial items"
+      }
+    ],
+    "source": "risk-report --require-reviewed"
+  },
+  {
+    "defect_id": "frontier-18-contract-audit-006",
+    "run": "frontier-18",
+    "at": "2026-08-25",
+    "class": "silent-runtime",
+    "subclass": "liveness-false-positive",
+    "severity": "nonfatal",
+    "location": "tool-code",
+    "subject": "gate-liveness misreported live gate probes as unparsed because pipe-backed child capture returned empty output",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "unknown",
+    "introduced_by_role": "unknown",
+    "should_have_caught": "unknown",
+    "disposition": "fixed",
+    "repair_cost": "tool-change",
+    "subclass_note": "The four probed tools print their summaries and then exit, which on this runtime drops pipe-buffered stdout/stderr. gate-liveness was reading empty captures and flagging all four probes as unparsed even though shell runs showed live nonempty scopes. The repair captures probe output through a temporary file instead of a pipe.",
+    "evidence": [
+      {
+        "path": "tools/gate-liveness.mjs",
+        "anchor": "runProbe temp-file capture helper"
+      }
+    ],
+    "source": "gate-liveness"
+  },
+  {
+    "defect_id": "frontier-18-contract-audit-007",
+    "run": "frontier-18",
+    "at": "2026-08-25",
+    "class": "silent-runtime",
+    "subclass": "other",
+    "subclass_note": "citation-fidelity carried no reviewed-row escape for widening candidates, even though the contract-audit task requires a reviewed/upheld disposition to suppress a false positive. The live false positive was lem-tagged-sums-approximate-a-contour-integral [L11], where the detector read the subscripted clause a_k >= 0 in the cited Statement as though it were a lower bound on the index variable k.",
+    "severity": "nonfatal",
+    "location": "tool-code",
+    "subject": "citation-fidelity ignored upheld reviewed citation rows and kept resurfacing adjudicated false positives",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "unknown",
+    "introduced_by_role": "unknown",
+    "should_have_caught": "unknown",
+    "disposition": "fixed",
+    "repair_cost": "tool-change",
+    "evidence": [
+      {
+        "path": "tools/citation-fidelity.mjs",
+        "anchor": "upheld reviewed citation rows before widening detectors"
+      },
+      {
+        "path": "research/frontier-18-batch-8.proof-contracts.json",
+        "anchor": "lem-tagged-sums-approximate-a-contour-integral citation L11 reviewed block"
+      }
+    ],
+    "source": "citation-fidelity"
+  }
+]

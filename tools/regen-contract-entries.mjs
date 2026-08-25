@@ -8,10 +8,15 @@
 // A citation quote is the full text of the cited item's own statement section,
 // which is the convention the existing contracts already use.
 import { readFileSync, writeFileSync, existsSync } from 'fs';
+import {
+  SOURCE_SECTIONS, factParagraphs, numberedProofSteps, sourceSectionText, splitFrontmatter,
+} from './facts-block.mjs';
 
-const STATEMENT_HEADINGS = [
-  'Statement', 'Definition', 'Example', 'Counterexample', 'Remark',
-];
+// Keep the preference explicit, but let the shared contract grammar decide
+// which headings are legal. In particular, a counterexample item's citable
+// claim is `Statement refuted`; `Counterexample` is its witness and has never
+// been a valid source_section in proof-contract.mjs.
+const CITABLE_HEADINGS = ['Statement', 'Statement refuted', 'Definition', 'Example'];
 
 function itemPath(id) { return `items/${id}.md`; }
 
@@ -19,55 +24,32 @@ function itemPath(id) { return `items/${id}.md`; }
 function statementSection(id) {
   const p = itemPath(id);
   if (!existsSync(p)) return null;
-  const md = readFileSync(p, 'utf8');
-  for (const h of STATEMENT_HEADINGS) {
-    const m = md.match(new RegExp(`\\n## ${h}\\n([\\s\\S]*?)(?=\\n## |$)`));
-    if (m) return { section: h, text: m[1].trim() };
+  const { body } = splitFrontmatter(readFileSync(p, 'utf8'));
+  for (const section of CITABLE_HEADINGS) {
+    if (!SOURCE_SECTIONS.has(section)) continue;
+    const text = sourceSectionText(body, section)?.trim();
+    if (text) return { section, text };
   }
   return null;
 }
 
 /** [L#]/[F#]/[A#] fact lines and the wikilink targets each declares. */
 function parseFacts(md) {
-  const fa = md.split(/\n## Facts & Assumptions\n/)[1];
-  if (!fa) return [];
-  const body = fa.split(/\n## /)[0];
-  const out = [];
-  for (const m of body.matchAll(/^\[([LFA]\d+)\]\s([\s\S]*?)(?=\n\n\[[LFA]\d+\]|\n*$)/gm)) {
-    const targets = [...m[2].matchAll(/\[\[([^\]]+)\]\]/g)].map(x => x[1]);
-    out.push({ fact: m[1], text: m[2].trim(), targets });
-  }
-  return out;
+  return [...factParagraphs(splitFrontmatter(md).body).values()]
+    .map((fact) => ({ fact: fact.label, text: fact.text, targets: fact.links }));
 }
 
-/** Numbered proof steps. The contract checker reads only a step's FIRST line,
- *  so tokens are collected from that line exactly as `explicitTokens` does. */
+/** Numbered proof steps, including every continuation line. The same shared
+ * parser feeds the checker, so regeneration cannot omit an input that the
+ * checker later discovers (or silently agree with the same truncated view). */
 function parseSteps(md) {
-  const parts = md.split(/\n## (?:Proof|Refutation|Verification|Counterexample)\n/);
-  if (parts.length < 2) return [];
-  const body = parts[parts.length - 1];
-  const out = [];
-  const lines = body.split(/\r?\n/);
-  for (let i = 0; i < lines.length; i++) {
-    const m = lines[i].match(/^(\d+\.\d+)\s+(.+)$/);
-    if (!m) continue;
-    const first = m[2];
-    // Tokens come from the first line only, matching the checker.
+  return numberedProofSteps(splitFrontmatter(md).body).map((step) => {
     const tokens = new Set();
-    for (const t of first.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+    for (const t of step.text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
       tokens.add(t[1] ?? t[2]);
     }
-    // A step may run over several lines (a display); its input tag is the last
-    // bracketed group of the whole block, which is not always on line one.
-    let block = first;
-    for (let k = i + 1; k < lines.length && !/^\d+\.\d+\s/.test(lines[k]); k++) block += '\n' + lines[k];
-    const tags = [...block.matchAll(/\[([^\][]*)\]\s*(?:∎)?\s*(?=\n|$)/g)];
-    const tag = tags.length ? tags[tags.length - 1] : null;
-    const claim = first.replace(/\s*\[[^\][]*\]\s*(?:∎)?\s*$/, '').trim();
-    const inputs = tag ? tag[1].split(',').map(s => s.trim()).filter(Boolean) : [];
-    out.push({ step: m[1], claim, inputs, tokens });
-  }
-  return out;
+    return { step: step.id, claim: step.claim, inputs: step.inputs, tokens };
+  });
 }
 
 const [file, ...ids] = process.argv.slice(2);
@@ -104,7 +86,7 @@ for (const id of ids) {
     }
   }
 
-  // A step's stated inputs must cover every token its first line cites.
+  // A step's stated inputs must cover every token anywhere in its block.
   const derivations = steps.map(s => {
     const inputs = [...s.inputs];
     const have = new Set(inputs.map(t => t.replace(/^step\s+/, '')));

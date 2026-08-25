@@ -15,10 +15,14 @@
 //   - the report is missing (the review has not run),
 //   - any A page the run owes lacks exactly one well-formed VERDICT line,
 //   - a drift-applied/drift-blocked verdict names no edge,
-//   - any verdict is drift-blocked. A blocked edge is a reading-order change,
-//     which is the owner's alone — the correct engine behaviour is to stop
-//     with the blocker named, not to build past an unresolved ordering
-//     question and meet it again at step 4 as `undeclared-prereq`.
+//   - any verdict is drift-blocked. This USED TO BE the routine disposition for
+//     a reading-order change or a prerequisite with no page id, both being the
+//     owner's alone. It is not any more (owner, 2026-08-24): the Alpha may mint
+//     a missing prerequisite, may reorder to close a forward edge, and above
+//     three mintings must rescope the run onto the dependencies instead. So a
+//     blocked verdict now means the Alpha declined authority it has, and the
+//     run still stops — the point of the stop has moved from "an owner must
+//     decide" to "nobody decided".
 //   - AN APPLIED EDGE IS NOT TRUE OF `plan-spec.json`, points forward, or names
 //     a page that neither exists nor is built by this run.
 //
@@ -47,7 +51,16 @@
 //   ...prose: what was read, what was found...
 //   VERDICT: no-drift
 //   VERDICT: drift-applied — added <page-id> (order <n>)[, ...]
-//   VERDICT: drift-blocked — <the exact edge and why it is not addable>
+//   VERDICT: drift-minted — <page-id> (order <n>)[, ...]
+//   VERDICT: drift-reordered — <page-id> (order <old> -> <new>)[, ...]
+//   VERDICT: drift-rescoped — build <page-id> (order <n>)[, ...] instead
+//   VERDICT: drift-blocked — <the exact edge and why no authority reaches it>
+//
+// `drift-minted` and `drift-rescoped` are materialised by tools/drift-apply.mjs,
+// which the `1-drift` stage runs as its mechanical repair. This gate does not
+// re-check their bookkeeping directly: a minted page that never reached a
+// manifest is absent from the scope ledger, so the unbuildable-edge loop below
+// still reports its citing page. One check, not two that can disagree.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -113,6 +126,11 @@ const errors = [];
 let applied = 0;
 let edgesChecked = 0;
 
+// A verdict names its pages as `<page-id> (order <n>)`. Shared by every verdict
+// kind that names one, so the report contract has a single spelling.
+const idsWithOrder = (detail) =>
+  [...detail.matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*[0-9.]+\)/g)].map((m) => m[1]);
+
 // Every `requires` edge of every page this run owes, not only the ones this
 // report claims to have added. A bad edge from any source has the same effect,
 // and this is the last stage that can see it cheaply.
@@ -138,7 +156,7 @@ for (const id of owed) {
   const rest = text.slice(start);
   const next = rest.search(/^###\s/m);
   const body = next < 0 ? rest : rest.slice(0, next);
-  const verdicts = [...body.matchAll(/^VERDICT:\s*(no-drift|drift-applied|drift-blocked)\b[ —-]*(.*)$/gm)];
+  const verdicts = [...body.matchAll(/^VERDICT:\s*(no-drift|drift-applied|drift-minted|drift-reordered|drift-rescoped|drift-blocked)\b[ —-]*(.*)$/gm)];
   if (verdicts.length !== 1) {
     errors.push(`drift-check-verdict: ${id} has ${verdicts.length} VERDICT line(s); exactly one is required`);
     continue;
@@ -153,7 +171,7 @@ for (const id of owed) {
     // of the spec and must point backward. A report claiming an edit it did not
     // make produces the same file as one that made it — the same failure the
     // step-3 recheck exists for, one stage earlier.
-    const named = [...detail.matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*([0-9.]+)\)/g)].map((m) => m[1]);
+    const named = idsWithOrder(detail);
     if (!named.length) {
       errors.push(`drift-check-detail: ${id} is drift-applied but its detail names no \`<page-id> (order <n>)\` edge`);
       continue;
@@ -171,8 +189,45 @@ for (const id of owed) {
       }
     }
   }
+  // MINTED / RESCOPED. The Alpha decided; `tools/drift-apply.mjs` does the
+  // bookkeeping and the unbuildable-edge loop above is what proves it landed —
+  // a minted page that never reached a manifest is not in the scope ledger, so
+  // its citing page still reads as unbuildable and this gate still fails. That
+  // is the check; there is nothing extra to assert here.
+  if (kind === 'drift-minted' || kind === 'drift-rescoped') {
+    applied += 1;
+    if (!idsWithOrder(detail).length) {
+      errors.push(`drift-check-detail: ${id} is ${kind} but its detail names no \`<page-id> (order <n>)\` page`);
+    }
+  }
+  // REORDERED moves a page in reading order to close a forward edge (owner,
+  // 2026-08-24). VERIFIED AGAINST THE SPEC, because a report that claims an
+  // edit produces the same file as one that made it — the same reason
+  // `drift-check-not-applied` exists for drift-applied. `drift-check-forward-edge`
+  // does NOT cover this: it only runs over the edges a drift-applied verdict
+  // names, so an unmade reorder would otherwise pass unseen.
+  if (kind === 'drift-reordered') {
+    applied += 1;
+    const moves = [...detail.matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*([0-9.]+)\s*(?:->|→)\s*([0-9.]+)\)/g)];
+    if (!moves.length) {
+      errors.push(`drift-check-detail: ${id} is drift-reordered but its detail names no `
+        + '`<page-id> (order OLD -> NEW)` move');
+    }
+    for (const [, target, from, to] of moves) {
+      const t = pageById.get(target);
+      if (!t) {
+        errors.push(`drift-check-reorder-unknown-page: ${id} reports moving \`${target}\`, absent from ${specPath}`);
+      } else if (Number(t.order) !== Number(to)) {
+        errors.push(`drift-check-not-reordered: ${id} reports moving \`${target}\` from ${from} to ${to}, `
+          + `but ${specPath} carries order ${t.order}`);
+      }
+    }
+  }
   if (kind === 'drift-blocked') {
-    errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} (owner decision; the run must not build past it)`);
+    errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} — `
+      + 'minting a missing prerequisite, reordering to close a forward edge, and rescoping onto '
+      + 'dependencies are all Alpha authority (owner, 2026-08-24). Use drift-minted, drift-reordered '
+      + 'or drift-rescoped; drift-blocked stops the run and is now a last resort, not a routine finding.');
   }
 }
 

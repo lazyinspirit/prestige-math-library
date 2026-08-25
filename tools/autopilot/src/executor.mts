@@ -67,6 +67,28 @@ const sleep = (ms: number, signal?: AbortSignal) => new Promise<void>((resolve) 
   signal?.addEventListener('abort', () => { clearTimeout(t); resolve(); }, { once: true });
 });
 
+/** A durable gate pass licenses exactly the ordered prefix that produced it.
+ * Future stages may be edited freely, but changing that prefix would make the
+ * engine skip newly inserted work. Such a change needs an explicit migration. */
+export function completedPrefixProblem(
+  oldStages: Array<Pick<Stage, 'id'>>,
+  newStages: Array<Pick<Stage, 'id'>>,
+  stageState: Record<string, { gatesPassedAt?: string }> = {},
+): string | null {
+  const oldIds = oldStages.map((stage) => stage.id);
+  const newIds = newStages.map((stage) => stage.id);
+  for (const completedId of oldIds.filter((id) => stageState[id]?.gatesPassedAt)) {
+    const oldIndex = oldIds.indexOf(completedId);
+    const newIndex = newIds.indexOf(completedId);
+    const oldPrefix = oldIds.slice(0, oldIndex + 1);
+    const newPrefix = newIndex < 0 ? [] : newIds.slice(0, newIndex + 1);
+    if (oldPrefix.length !== newPrefix.length || oldPrefix.some((id, index) => id !== newPrefix[index])) {
+      return completedId;
+    }
+  }
+  return null;
+}
+
 export class Executor {
   config: Config;
   stages: Stage[];
@@ -81,12 +103,13 @@ export class Executor {
   specProblems: SpecProblem[];
   stateVersion: number;
   lastBattery: Map<string, { version: number; ok: boolean; dirFp: string }>;
-  skipStreak: number;
   stagesPath: string | null;
   stagesMtimeMs: number;
   _adoptStage?: string;
   _announcedAdoption?: Set<string>;
   _barrierFor?: string;
+  /** Earliest wall-clock at which the next dispatch may SPAWN. See `start`. */
+  nextSpawnAt: number;
 
   constructor({ config, stages, adapter, state, reporter, clock = Date, signal }:
     { config: Config; stages: Stage[]; adapter: Adapter; state: any; reporter: any; clock?: { now(): number }; signal?: AbortSignal }) {
@@ -100,17 +123,19 @@ export class Executor {
     /** dispatchKey -> { promise, meta, startedAt } */
     this.inflight = new Map();
     this.stopped = false;
+    // No dispatch has spawned yet, so the first one owes no wait.
+    this.nextSpawnAt = 0;
     // EVENT-DRIVEN RE-VERIFICATION. A blocked stage's battery used to re-run
     // every tick against unchanged inputs: frontier-15 ran the 7-judge battery
     // 29 times during one account outage, re-probing archive.org each pass.
     // `stateVersion` counts state-changing events (a dispatch ends, a repair
     // round runs, a control command lands, adoption reconciles); a battery
     // that failed re-runs only when the version moves, the dispatch dir
-    // changes, a backoff clock expires — or every 20th skip, the bounded
-    // belt-and-braces against a dirty-channel this list misses.
+    // changes, or a backoff clock expires. A hand edit is made explicit with
+    // `autopilot retry`, which re-arms the battery; a wall-clock retry over
+    // byte-identical inputs only repeats deterministic work.
     this.stateVersion = 0;
     this.lastBattery = new Map();
-    this.skipStreak = 0;
     // Hot-reload bookkeeping: the stage table's source path and its mtime at
     // load. `maybeReloadStages` swaps in an edited table at the next tick —
     // loading a fix used to cost a stop, a full battery drain and a restart,
@@ -184,6 +209,18 @@ export class Executor {
       if (problems.length) {
         this.reporter.notify('stages-reload-refused',
           `edited stage table failed validation and was NOT loaded:\n${formatProblems(problems)}`);
+        return;
+      }
+      // A durable gate pass is evidence about the stage order that produced it.
+      // Hot reload may edit future work, but it may not insert, remove or move a
+      // stage before anything already gate-complete: currentStage() would skip
+      // the completed successor without rerunning the new predecessor. Compare
+      // every completed prefix to the table currently driving this process.
+      const changedPrefix = completedPrefixProblem(this.stages, mod.stages, this.state.data.stages);
+      if (changedPrefix) {
+        this.reporter.notify('stages-reload-refused',
+          `edited stage table changes the immutable completed prefix ending at ${changedPrefix}; `
+          + 'record an explicit migration instead of making durable gate evidence skip new work');
         return;
       }
       this.stages = mod.stages;
@@ -493,6 +530,8 @@ export class Executor {
       images: (plan.images ?? []).join(','),
       outputSchema: plan.outputSchema ?? '',
       resultArtifact: plan.resultArtifact ?? '',
+      sessionHome: plan.sessionHome ?? '',
+      resumeSession: plan.resumeSession ?? '',
     };
     // A stage may override the command entirely. Not every unit of work is an
     // agent: the judge sweep is a tool run, and forcing it through the agent
@@ -504,11 +543,49 @@ export class Executor {
       ? makeExecAdapter({ argv: plan.argv, cwd: this.config.repo,
         logger: (m: string) => this.reporter.event('exec', { label: plan.label, m }) })
       : this.adapter;
+    // STAGGER THE SPAWN (owner, 2026-08-24). A stage fans out to its cap in one
+    // millisecond — frontier-18's step 3 started four Alphas at .343, .345, .348
+    // and .423 — so every agent boots, reads the repo and opens its first API
+    // connection at the same instant. At the caps this run uses that is twelve
+    // Betas at once, and a simultaneous boot is the shape that produces a 429
+    // stampede and a lane of null verdicts.
+    //
+    // IT LIVES HERE, NOT IN THE FAN-OUT LOOP, for two reasons. The repair hooks
+    // (`dispatchSourceScouts`, `dispatchDriftRereview`) call `start` directly
+    // and would otherwise keep stampeding. And the delay must not sit between
+    // the `inflight` registration and the cap arithmetic that reads it: the
+    // registration below is synchronous and already done, so a staggered spawn
+    // still counts against the cap from the moment it is decided. Delaying the
+    // loop instead would leave the engine free to over-dispatch in the gap.
+    //
+    // The wait is per-engine, not per-stage: two overlapping pipeline stages
+    // share one boot budget, because the API does not care which stage a
+    // process belongs to.
+    // 3s by default (owner, 2026-08-24), so a production path that forgets to
+    // configure it is still paced. Test harnesses set `dispatchStaggerMs: 0`
+    // explicitly: they drive stub adapters where there is nothing to pace, and
+    // real sleeps there buy nothing but a slower suite.
+    //
+    // 2s -> 3s ON EVIDENCE, not taste. frontier-18's step 5 dispatched all ten
+    // authors inside one millisecond — 05:29:51.794, .802, .805 — and every one
+    // came back `API Error: 529 Overloaded`. Two full rounds of ten Opus[1m]
+    // lanes were lost to a simultaneous boot before a single token of authoring
+    // was written. The owner's standing instruction sets the separation at
+    // three seconds, and a stampede is the one case that had already been
+    // pre-authorised precisely because waiting to ask costs another round.
+    const staggerMs = this.config.dispatchStaggerMs ?? 3000;
+    const waitMs = Math.max(0, this.nextSpawnAt - this.clock.now());
+    this.nextSpawnAt = this.clock.now() + waitMs + staggerMs;
+    if (waitMs > 0) this.reporter.event('spawn-stagger', { label: plan.label, waitMs });
+
     // The adapter enforces the timeout; `plan.timeout` used to be only a
     // template variable, silently inert for every tool lane. The margin lets a
     // dispatcher that enforces the same budget on its agent finish its own
-    // cleanup before the engine kills the group.
-    const promise = adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 })
+    // cleanup before the engine kills the group. The timeout clock starts when
+    // the process does, after the stagger — an agent must not be charged for
+    // time it spent queued.
+    const promise = sleep(waitMs, this.signal)
+      .then(() => adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 }))
       .then((r) => {
         // THE ENGINE WRITES THE RECEIPT, not the command.
         //
@@ -680,8 +757,20 @@ export class Executor {
         // and a restart. Round budgets bound divergence; an operator's
         // explicit retry after a fix is the opposite of divergence.
         let repairArmed = 0;
-        for (const st of Object.values<any>(this.state.data.stages)) {
+        for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
           if (st.doneAt) continue;
+          const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
+          // Step 8's two rejudge cycles are a lifetime ceiling. `retry` is
+          // still useful after the owner/session resolves the terminal blocker:
+          // it invalidates the battery cache and re-runs the gates, but it may
+          // not quietly turn two cycles into more paid contexts.
+          if (stage?.terminalFixBudget) {
+            if (st.backoffUntil) {
+              delete st.backoffUntil;
+              repairArmed += 1;
+            }
+            continue;
+          }
           if (st.fixRounds || st.repairExhaustedAt || st.backoffUntil) {
             st.fixRounds = 0;
             delete st.repairExhaustedAt;
@@ -689,11 +778,30 @@ export class Executor {
             repairArmed += 1;
           }
         }
+        // ...and the PER-(GATE, ITEM) counters, for the same reason. Without
+        // this an item that burned its three tries stays blocked by name
+        // forever, and `retry` — the documented way to re-arm a battery after
+        // a fix — would silently do nothing for the one budget that is
+        // per-item. Scoped to unfinished stages so a closed stage's history is
+        // left intact as evidence.
+        let itemsArmed = 0;
+        const doneStages = new Set(Object.entries(this.state.data.stages)
+          .filter(([, st]: any) => st.doneAt).map(([id]) => id));
+        for (const [k, rec] of Object.entries(this.state.data.gateAttempts ?? {})) {
+          if (doneStages.has((rec as any).stage)) continue;
+          delete this.state.data.gateAttempts![k];
+          itemsArmed += 1;
+        }
+        if (itemsArmed) {
+          this.state.data.blockers = this.state.data.blockers.filter((b: any) => !/^item:/.test(b.key ?? ''));
+        }
         this.state.save();
         const how = unfinished ? ` (${armed - unfinished} failed, ${unfinished} unfinished)` : '';
         this.reporter.notify('retry-armed', unit
           ? `owner armed a retry for unit ${unit} (${armed} lane(s))${how}`
-          : `owner armed a retry for ${armed} lane(s)${how}${repairArmed ? `; repair rounds re-armed on ${repairArmed} stage(s)` : ''}`);
+          : `owner armed a retry for ${armed} lane(s)${how}`
+            + `${repairArmed ? `; repair rounds re-armed on ${repairArmed} stage(s)` : ''}`
+            + `${itemsArmed ? `; ${itemsArmed} (gate, item) attempt counter(s) cleared` : ''}`);
         break;
       }
       default: break;
@@ -958,8 +1066,11 @@ export class Executor {
     // ONE CAP, and it is the real one.
     //
     // `stage.concurrency` mirrors the dispatcher's own lane cap for that role —
-    // beta 9, reader 9, alpha 3, verified against tools/dispatch.mjs. Those are
-    // genuine constraints and the engine should respect them.
+    // beta 12, reader 12, alpha 4 since 2026-08-24, verified against
+    // tools/dispatch.mjs. Those are genuine constraints and the engine should
+    // respect them. HOW MANY may run is this arithmetic; HOW FAST they may boot
+    // is the per-spawn stagger in `start`, and the two are independent: raising
+    // a cap without spacing the spawns is what turns width into a stampede.
     //
     // A second, GLOBAL cap used to sit on top (stageCap * 2). That was my
     // invention, not a constraint anything enforces, and it could only ever
@@ -1116,9 +1227,11 @@ export class Executor {
       // changed result file from an EXTERNAL process, or an expired backoff
       // clock. frontier-15 ran the 7-judge battery 29 times against unchanged
       // inputs during one account outage, re-probing archive.org each pass.
-      // Every 20th skip runs the battery anyway — the bounded backstop against
-      // a dirty-channel this list misses. Unchanged inputs into deterministic
-      // tools cannot change a verdict; anything actually changed re-verifies.
+      // There is deliberately no clock-only backstop. Frontier-18 spent five
+      // hours re-running the same 22-gate Step-8 battery every 20 quiet ticks;
+      // deterministic tools over unchanged bytes cannot produce a new answer.
+      // A hand edit is re-armed by `autopilot retry`, and every engine-owned
+      // mutation below already bumps state or the dispatch-dir fingerprint.
       const groupKey = statuses.map(({ s }: any) => s.id).join('+');
       const last = this.lastBattery.get(groupKey);
       const dirFp = this.dispatchDirFingerprint();
@@ -1127,11 +1240,7 @@ export class Executor {
         return bu && new Date(bu).getTime() <= Date.now();
       });
       if (last && !last.ok && last.version === this.stateVersion && last.dirFp === dirFp
-        && !backoffDue && this.skipStreak < 20) {
-        this.skipStreak += 1;
-        return 'blocked';
-      }
-      this.skipStreak = 0;
+        && !backoffDue) return 'blocked';
       const versionAtStart = this.stateVersion;
       this.reporter.notify('gates', `${where}: running ${list.length} gate(s)`);
       const { ok, results } = await runGates(list, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
@@ -1274,10 +1383,105 @@ export class Executor {
    * (the gate-failure branch and the stalemate branch) go through here, so
    * neither can drift back to burning rounds an outage already explains.
    */
+  /**
+   * The item ids a gate's own output names.
+   *
+   * Every item-scoped gate in this repo prints `ERROR <code> [<item-id>]:` —
+   * content-policy, proof-contract, finite-smoke, risk-report, boundary-audit
+   * and citation-fidelity all do. The bracket form is also used for CITATION
+   * labels (`[F1]`, `[L3]`, `[step 2.1]`), so the shape test is what separates
+   * them: a real id is lower-case kebab with at least three segments
+   * (`cor-integers-requiring-four-squares`), and no citation label comes close.
+   *
+   * Returns an empty array for a plan- or level-scoped gate — `validate-plan`,
+   * `manifest-integrity`, `splice-verify`, `pathcheck`, `merge-contracts`,
+   * `gate-liveness` — and the caller then keys the counter on the gate alone.
+   * Reading ids out of the output rather than asking the gate for them is
+   * deliberate: it needs no change to sixty tools, and a gate that grows an id
+   * is picked up for free.
+   */
+  static itemsNamedBy(failure: GateResult): string[] {
+    const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+    const ids = new Set<string>();
+    for (const m of text.matchAll(/\[([a-z][a-z0-9]*(?:-[a-z0-9]+){2,})\]/g)) ids.add(m[1]);
+    return [...ids];
+  }
+
+  /** `gateAttempts` key. NUL-joined for the same reason the gate dedupe key is:
+   *  no id can contain it, so two different pairs cannot collide. */
+  private static attemptKey(gateId: string, item: string): string {
+    return `${gateId}\u0000${item}`;
+  }
+
+  /**
+   * Charge one try to every item the failing gate names, and report which of
+   * them still have tries left.
+   *
+   * Owner, 2026-08-25: "each item must pass through the same gate within 3
+   * tries, after which it becomes a blocker and requires intervention". The
+   * counter increments per BATTERY, not per repair dispatch — an item repaired
+   * on the first pass is not named by the next battery and never reaches two,
+   * which is what makes three a real allowance rather than three ticks of a
+   * clock.
+   */
+  private chargeItems(stage: Stage, failure: GateResult, budget: number): { live: string[]; spent: string[] } {
+    const named = Executor.itemsNamedBy(failure);
+    // A gate that names nothing is still bounded — on the gate alone.
+    const keys = named.length ? named : ['*'];
+    this.state.data.gateAttempts ??= {};
+    const live: string[] = [], spent: string[] = [];
+    for (const item of keys) {
+      const k = Executor.attemptKey(failure.id, item);
+      const rec = this.state.data.gateAttempts[k] ??= { n: 0, stage: stage.id, lastAt: '' };
+      rec.n += 1;
+      rec.stage = stage.id;
+      rec.lastAt = new Date().toISOString();
+      (rec.n > budget ? spent : live).push(item);
+    }
+    this.state.save();
+    for (const item of spent) {
+      const msg = item === '*'
+        ? `stage ${stage.id}: gate ${failure.id} failed ${budget}x and names no item — needs a person`
+        : `stage ${stage.id}: gate ${failure.id} failed ${budget}x on ${item} — needs a person`;
+      if (this.state.addBlocker(stage.id, msg, `item:${failure.id}:${item}`)) {
+        this.reporter.notify('blocked', msg, { stage: stage.id, gate: failure.id, item });
+      }
+    }
+    return { live, spent };
+  }
+
   private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'none'> {
     const st = this.state.stage(stage.id);
     const maxRounds = stage.maxFixRounds ?? 0;
-    if (!stage.onGateFailure || st.fixRounds >= maxRounds) return 'none';
+    if (!stage.onGateFailure) return 'none';
+    // PER-ITEM BUDGET, when the stage opts in. `fixRounds` is still stamped so
+    // the report and the `retry` control keep working, but it no longer BOUNDS
+    // the stage — the (gate, item) counters do. A stage without
+    // `perItemFixBudget` is unchanged, which is every stage outside step 6.
+    const perItem = stage.perItemFixBudget ?? 0;
+    if (perItem > 0) {
+      if (st.backoffUntil && new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
+      const { live, spent } = this.chargeItems(stage, failure, perItem);
+      // Every item this gate names has burned its tries: nothing left to try,
+      // and the blockers raised above name each one.
+      if (!live.length) {
+        // Stamped for the same reason the stage-wide path stamps it: the
+        // notice is given once, and `retry` clears it. The tick-level
+        // exhaustion notice is guarded on `maxRounds > 0`, which a per-item
+        // stage need not set, so this branch owns the message.
+        if (!st.repairExhaustedAt) {
+          st.repairExhaustedAt = new Date().toISOString();
+          this.state.save();
+          this.reporter.notify('repair-exhausted',
+            `${stage.id}: gate ${failure.id} — all ${spent.length} named item(s) exhausted ${perItem} tries; this needs a person`);
+        }
+        return 'none';
+      }
+      if (spent.length) {
+        this.reporter.notify('repair-partial',
+          `${stage.id}: gate ${failure.id} — ${spent.length} item(s) exhausted, continuing on ${live.length}`);
+      }
+    } else if (st.fixRounds >= maxRounds) return 'none';
     if (st.backoffUntil) {
       if (new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
       st.backoffUntil = null;

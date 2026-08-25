@@ -22,7 +22,7 @@
 // has been written. Diffing them at step 0 turns a rewrite into a one-line spec
 // edit. On the last run this found exactly one drift, and it was real.
 
-import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 export function loadPlan(repo: string): any {
@@ -45,6 +45,53 @@ export function pageStatus(repo: string): Map<string, string> {
     }
   };
   walk(root);
+  return out;
+}
+
+/**
+ * Every `requires` edge of the proposed pair set that points at a page which is
+ * neither published nor built by this run.
+ *
+ * THE SAME PREDICATE `drift-review-check` ENFORCES AT STAGE 1, checked before
+ * a single agent is dispatched. On frontier-18 a fourteen-pair set was planned
+ * whose ten largest members cited the previous run's pages while that run was
+ * still `draft`. `frontier` had already reported the buildable wave as four;
+ * the plan overrode it by hand, and nothing between `plan` and the stage-1
+ * gate could see the difference. The gate caught it — three hours and twenty
+ * minutes later, after ten Betas had scaffolded and a whole session window was
+ * spent, and it caught it as a stop that needed a person.
+ *
+ * Publication state is read from the FILESYSTEM, never from git: the owner
+ * flips `status: published` on disk hours before committing, so a commit
+ * timestamp says nothing about whether a page is readable.
+ */
+export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
+  const spec = loadPlan(repo);
+  const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
+  const status = pageStatus(repo);
+  const published = new Set([...status.entries()].filter(([, s]) => s === 'published').map(([id]) => id));
+
+  const inRun = new Set<string>();
+  for (const id of pageIds) {
+    inRun.add(id);
+    inRun.add(byId.get(id)?.companion ?? `${id}-examples`);
+  }
+  const out: any[] = [];
+  for (const id of [...inRun].sort()) {
+    const page: any = byId.get(id);
+    if (!page) { out.push({ page: id, requires: null, why: 'absent from plan-spec.json' }); continue; }
+    for (const req of page.requires ?? []) {
+      if (published.has(req) || inRun.has(req)) continue;
+      const t: any = byId.get(req);
+      out.push({
+        page: id,
+        requires: req,
+        why: t
+          ? `planned (order ${t.order}) but ${status.has(req) ? `on disk as ${status.get(req)}` : 'not built'} and not in this run`
+          : 'not a page in the plan at all',
+      });
+    }
+  }
   return out;
 }
 
@@ -99,111 +146,12 @@ export function closure(byId: Map<string, any>, pid: string): Set<string> {
   return seen;
 }
 
-/**
- * Pack A pages into batches of at most `cap`, preferring pages that share
- * prerequisites so seams fall inside a batch.
- *
- * Greedy by shared-closure size. Optimal packing is not worth solving here: the
- * cap is 2, the candidate set is a handful of pages, and the cost of a
- * suboptimal pairing is one extra cross-batch edge, not a defect.
- */
-export function packBatches(repo: string, pageIds: string[], { cap = 2 }: { cap?: number } = {}): string[][] {
-  const spec = loadPlan(repo);
-  const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
-  const ids = [...pageIds];
-  const cl = new Map<string, any>(ids.map((id: any) => [id, closure(byId, id)]));
-  const affinity = (a, b) => {
-    const A = cl.get(a); const B = cl.get(b);
-    let n = 0;
-    for (const x of A) if (B.has(x)) n += 1;
-    return n;
-  };
-  const sameCategory = (a, b) => byId.get(a)?.category === byId.get(b)?.category;
+// packBatches / writeManifests live in tools/plan-manifests.mjs so that
+// `tools/drift-apply.mjs` — a plain .mjs tool that cannot load a .mts module —
+// materialises a minted page through the SAME packer `plan` used. Two
+// implementations of a batcher produce two packings of the same pages.
+export { packBatches, writeManifests, scaffoldedManifests } from '../../plan-manifests.mjs';
 
-  const remaining = new Set(ids);
-  const out: any[] = [];
-  // Deterministic seed order, so the same input always produces the same
-  // batching — a run that batches differently on a re-plan is unreviewable.
-  const ordered = ids.slice().sort((a: any, b: any) => (byId.get(a).order ?? 0) - (byId.get(b).order ?? 0));
-
-  for (const seed of ordered) {
-    if (!remaining.has(seed)) continue;
-    remaining.delete(seed);
-    const group = [seed];
-    while (group.length < cap) {
-      let best = null; let bestScore = -1;
-      // Iterate candidates in the SAME canonical order as the seeds. Iterating
-      // `remaining` directly follows Set insertion order, which is the order
-      // the caller passed ids in — so the same pages batched differently
-      // depending on argument order, and a re-plan produced a different,
-      // unreviewable batching.
-      for (const cand of ordered) {
-        if (!remaining.has(cand)) continue;
-        // Only pair within a category: a Beta reading two literatures for two
-        // unrelated subjects is slower and reads less of each.
-        if (!sameCategory(seed, cand)) continue;
-        const score = affinity(seed, cand);
-        if (score > bestScore) { best = cand; bestScore = score; }
-      }
-      if (!best) break;
-      remaining.delete(best);
-      group.push(best);
-    }
-    out.push(group);
-  }
-  return out;
-}
-
-/** Write the step-0 batch manifests, with empty item lists for the Betas.
- *
- *  REFUSES to overwrite a manifest that already carries items. `plan` is a
- *  step-0 command; re-running it mid-run against a scaffolded run would reset
- *  every Beta's item list to [] — and the scope ledger regenerated in the same
- *  command would then CONFIRM the emptied manifests, so the anti-scope-loss
- *  gate could not see the loss it was built for. Scaffolded state is torn down
- *  by hand, on the record, never by a planner default. */
-export function writeManifests(repo: string, run: string, batchGroups: string[][], { force = false } = {}): any[] {
-  const spec = loadPlan(repo);
-  const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
-  const KEYS = ['order', 'id', 'kind', 'category', 'title', 'companion', 'requires', 'items'];
-  if (!force) {
-    const populated: string[] = [];
-    for (let i = 1; ; i += 1) {
-      const path = join(repo, 'research', `${run}-batch-${i}.pages.json`);
-      if (!existsSync(path)) break;
-      try {
-        const pages = JSON.parse(readFileSync(path, 'utf8'));
-        if ((Array.isArray(pages) ? pages : []).some((p: any) => (p.items ?? []).length)) populated.push(path);
-      } catch { populated.push(path); }
-    }
-    if (populated.length) {
-      throw new Error(`refusing to overwrite scaffolded manifest(s): ${populated.join(', ')} — `
-        + 'they carry item lists a Beta authored. Re-planning a live run destroys them; '
-        + 'pass --force only for a deliberate, on-the-record teardown.');
-    }
-  }
-  const written: any[] = [];
-  batchGroups.forEach((group: any, i: any) => {
-    const entries: any[] = [];
-    for (const a of group) {
-      const A: any = byId.get(a);
-      if (!A) throw new Error(`unknown page ${a}`);
-      const bId = A.companion ?? `${a}-examples`;
-      const B: any = byId.get(bId);
-      if (!B) throw new Error(`page ${a} has no companion entry ${bId} in the plan`);
-      for (const p of [A, B]) {
-        const e: any = {};
-        for (const k of KEYS) if (k in p) e[k] = k === 'items' ? [] : p[k];
-        if (!('items' in e)) e.items = [];
-        entries.push(e);
-      }
-    }
-    const path = join(repo, 'research', `${run}-batch-${i + 1}.pages.json`);
-    writeFileSync(path, JSON.stringify(entries, null, 2) + '\n');
-    written.push({ batch: i + 1, path, pages: entries.map((e: any) => e.id) });
-  });
-  return written;
-}
 
 /**
  * Assemble the evidence an Alpha needs to judge prerequisite drift.

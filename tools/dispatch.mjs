@@ -70,9 +70,12 @@
 // is only as good as the tool list. `--check-read-only` re-asserts the list from
 // the role table so a future tool addition cannot silently widen it.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { spawn } from 'node:child_process';
-import { dirname, join, relative, resolve } from 'node:path';
+// `resolve` is aliased because the spawn block below runs inside a Promise
+// executor whose parameter is also called `resolve`; the unaliased import was
+// shadowed there and silently settled the promise instead of building a path.
+import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:path';
 import { homedir } from 'node:os';
 import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
@@ -139,13 +142,26 @@ const ROLES = Object.freeze({
   // search tool was off for exactly the lanes whose brief is half source
   // research, and the comment below already records what an unsearching lane
   // does instead: it asserts from memory.
-  // CAP 9, NOT 5 (owner, 2026-08-16). The alpha cap is 3 and each group Alpha
+  // CAP 9, NOT 5 (owner, 2026-08-16). The alpha cap was 3 and each group Alpha
   // owns at most 3 batches, so a run can legitimately carry nine. Five throttled
   // the widest legal run into two waves for no stated reason: the 3-and-3 bound
   // exists for Alpha's attention span, not for Beta's. The reader lane matches
   // because 6a dispatches one independent reader per batch.
-  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 9, web: true, why: 'one per batch, scaffolds and authors; 3 group Alphas x 3 batches' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 9, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
+  //
+  // 9 -> 12 (owner, 2026-08-24), tracking the alpha cap 3 -> 4 by the SAME
+  // arithmetic that set 9: group Alphas x batches per Alpha is the widest legal
+  // run, and that is now 4 x 3. Leaving these at 9 would have throttled the
+  // twelve batches the new alpha cap admits, reintroducing the two-wave stall
+  // the 2026-08-16 raise removed.
+  //
+  // QUOTA. These are the two widest lanes and every one of them is Opus[1m] on
+  // one subscription. Nine concurrent Betas exhausted the session window ~55
+  // minutes into frontier-18's step 1; twelve will reach it sooner. The
+  // standing rule is unchanged and now matters more: a cap is a ceiling the
+  // engine MAY use, never a quota it must spend — if lanes die on the session
+  // limit, LOWER these rather than re-spending the loop.
+  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 12, web: true, why: 'one per batch, scaffolds and authors; 4 group Alphas x 3 batches' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 12, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
   // Alpha moved Sol -> Claude Opus 5 (owner, 2026-08-10), BACK TO SOL (owner,
   // 2026-08-20), and back to Opus 5 with every other lane (owner, 2026-08-23),
   // keeping xhigh and the 1M window throughout — now the `[1m]` model id again
@@ -191,8 +207,101 @@ const ROLES = Object.freeze({
   // ceiling the engine may use, never a quota it must spend: the accuracy win
   // comes from SCOPING a group Alpha to 3 batches, which is free, and running
   // the groups in series costs only wall clock.
-  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
-  refuter:      { ...lane('agentic'), sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
+  // CAP 3 -> 4 (owner, 2026-08-24). Two caps multiply into a ceiling on run
+  // width: group Alphas at <=3 batches each, times this cap, is the largest
+  // batch count `alpha-groups.mjs` will accept. At 3 that ceiling was NINE
+  // batches, and frontier-18's fourteen pairs across eight categories need ten
+  // — the packer only pairs within a category, so no legal repacking reaches
+  // nine. The assigning Alpha found a partition with zero cross-group
+  // dependency edges and the gate refused it anyway. 4 x 3 = 12 batches.
+  alpha:        { ...lane('agentic'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
+  // TWO NARROWER ALPHA ROLES (owner, 2026-08-24). Effort and model are ROLE
+  // properties, so a stage that wants either to differ needs its own role —
+  // exactly as `mechanic` has been a separate role at `medium` since 2026-08-14
+  // for the same reason.
+  //
+  // THIS DOES NOT WIDEN STEP-3 CONCURRENCY, which was the thing to check before
+  // splitting `3-recheck` off the shared `alpha` budget. A run has N groups (4
+  // here) and a group is in review OR fix OR recheck at any instant, never two.
+  // The real peak across those stages is the group count whatever the roles are.
+  //
+  // `alpha-assign` — `2-assign` only. The one lane whose output is fully
+  // machine-checkable (`alpha-groups.mjs`, nine properties), which is why it may
+  // run a model nothing else runs. No web: partitioning reads the manifests, not
+  // the literature.
+  'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
+  // `alpha-high` — `3-recheck` and `10-pathway-author-v2`. Same model as
+  // `alpha`, one tier down. Owner's call on 3-recheck against my advice: it is
+  // the gate on scaffold richness and `scaffold-verdicts` checks that verdicts
+  // resolve, not that a fix was mathematically adequate. Recorded, not argued.
+  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 4, web: true, why: 'scaffold recheck and pathway prose; one effort tier below alpha' },
+  // The final owner report interprets a mechanically reconciled local evidence
+  // packet.  It neither repairs nor researches; disabling web removes a costly
+  // source of irrelevant context while the read-only sandbox and structured
+  // response preserve the final readiness receipt.
+  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: false, requiresTask: true, why: 'Step-10 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
+  // `alpha-adjudicate` — step 8 ONLY (owner, 2026-08-24). gpt-5.6-sol at xhigh,
+  // the SAME adjudicator every past run used, so frontier-18's confirmed_fatal
+  // counts stay comparable with frontiers 15-17 even though its authors are
+  // gpt-5.4.
+  //
+  // CAP 1 -> 4 (owner, 2026-08-25), because step 8 is now partitioned by group
+  // Alpha rather than run by a single lead. The cap tracks the `alpha` cap by
+  // the same arithmetic it does: one Alpha per <=3 batches, four groups over the
+  // ten batches frontier-18 builds. A cap of 1 under group units would not have
+  // failed — it would have serialised the four groups behind one slot and looked
+  // like slowness rather than a misconfiguration, which is the worse failure.
+  //
+  // This cap is a THROUGHPUT limit, not a mutual-exclusion guarantee. The
+  // `alpha` role's cap of 4 has the same character; what makes concurrent
+  // adjudication safe is that the partition gives each group disjoint items and
+  // that `<run>-judge-adjudications.jsonl` is append-only. Two Alphas appending
+  // rows for different items do not race; two Alphas rewriting the same file
+  // would, which is why the task file says append and never rewrite.
+  //
+  // Step 8 is the sharpest role in the build: a `false_positive` adjudication
+  // silently discards a real defect and no later gate re-examines it. Keeping it
+  // on the model with the longest measured track record here is quality control,
+  // not conservatism.
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
+  // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
+  // judges are still sweeping (owner, 2026-08-25). Same lane and effort as the
+  // adjudicator it writes for, so the notes are in the idiom of the reader that
+  // will consume them.
+  //
+  // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 7 judges a frozen text; an
+  // edit landing mid-sweep voids verdicts already cast against the old bytes and
+  // leaves a level judged in two states with nothing on disk saying so. `--sandbox
+  // read-only` on codex is a kernel guarantee, not an instruction the model could
+  // follow badly, which is why this is a separate role rather than a paragraph in
+  // the task file. It returns its digest through `--result-artifact`: the
+  // dispatcher writes the file, so a role that cannot write still produces one a
+  // gate can read.
+  //
+  // No web: everything it reads is on disk, and a source lookup belongs to the
+  // Beta that authored the page, not to a reader of it.
+  // `alpha-group-read` — the step-7 half of a group Alpha's life (owner,
+  // 2026-08-25). Read-only at the kernel while the judges sweep a frozen text,
+  // and given a PERSISTENT session home so that `8-adjudicate` resumes this very
+  // conversation with write access rather than starting a fresh agent. Same lane
+  // and effort as the adjudicating half because it IS the adjudicating half.
+  //
+  // No web: everything it reads is on disk. Sourcing belongs to the Beta that
+  // authored the page, not to a reader of it.
+  'alpha-group-read': { ...lane('adjudication'), sandbox: 'read-only', effort: 'xhigh', cap: 4, why: 'step-7 reading half of a group Alpha; read-only so it cannot stale a verdict mid-sweep, session resumed at step 8' },
+  // OPUS 5 -> SONNET 4.6 (owner, 2026-08-24), via the `secondary` lane.
+  //
+  // DEEPSEEK WAS CONSIDERED AND REJECTED, and the reason is worth keeping. It
+  // would have made the refuter cross-family, which is the stronger check on
+  // paper. But DeepSeek is tool-less by transport — no filesystem at all — and
+  // this role's whole instruction is to OPEN THE CITED ITEM before calling a
+  // dependency too weak (`briefs/alpha.md` §"proof-refuter subagents"). A
+  // refuter that cannot read its dependencies reports on what it imagines them
+  // to say, which is worse than no refuter. Staying on the `claude` runner
+  // keeps the filesystem, so that brief remains true as written.
+  //
+  // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
+  refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   // AUDIT ONLY. The build has no orchestrator: every judgment it used to make
   // belongs to an Alpha, and every transition to the engine. The published-page
   // audit still runs under run-wave.mjs and still has one.
@@ -351,6 +460,18 @@ const taskPath = option('--task');
 const imagePaths = options('--image').flatMap((value) => value.split(',')).map((s) => s.trim()).filter(Boolean);
 const outputSchemaPath = option('--output-schema');
 const resultArtifactPath = option('--result-artifact');
+// A CODEX_HOME that OUTLIVES the dispatch, so the conversation can be resumed.
+// Every other lane gets a throwaway home deleted on exit — deliberately, because
+// a long-lived shared home was once corrupted and bricked every codex call. A
+// role that names one here opts out of that for exactly one reason: step 8 must
+// re-enter step 7's conversation. Per-group and per-run, so no two lanes share
+// one; kept out of the repository so it never reaches git status, and out of
+// /tmp so codex can lay down its PATH helpers without warning.
+const sessionHomeArg = option('--session-home');
+// Resume this conversation instead of starting a new one. The id comes from the
+// step-7 result record, never from `--last`: four group Alphas run at once, so
+// "most recent" is whichever happened to finish last, which is not a group.
+const resumeSession = option('--resume-session');
 const timeoutSec = Number(option('--timeout') ?? 7200);
 const covers = option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [];
 
@@ -358,6 +479,7 @@ const usage = (message) => {
   if (message) console.error(`dispatch: ${message}`);
   console.error('usage: node tools/dispatch.mjs --role <role> --brief <file> --label <name> --run <name>');
   console.error(`                               [--var k=v ...] [--task <file>] [--timeout <sec>] [--dry-run] [--json]`);
+  console.error(`                               [--session-home <dir>] [--resume-session <uuid>]`);
   console.error(`roles: ${Object.entries(ROLES).map(([n, r]) => `${n} (${r.sandbox ?? r.runner}, cap ${r.cap})`).join(', ')}`);
   process.exit(2);
 };
@@ -511,6 +633,49 @@ const lastMessagePath = join(outDir, `${role}-${label}.last-message.json`);
 // ---- the command -------------------------------------------------------------
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
+
+// RESUMING A SESSION INTO A DIFFERENT SANDBOX (owner, 2026-08-25).
+//
+// A group Alpha reads its pairs at step 7 and adjudicates them at step 8, and it
+// must be the SAME agent — the point of reading early is to hold the mathematics
+// in context before the objections arrive. But step 7 judges a frozen text, so
+// the reading half must be read-only, and the adjudicating half must be able to
+// repair. One `codex exec` cannot be both: `--sandbox` is fixed for the life of
+// the process.
+//
+// `codex exec resume` is the seam. It re-enters an existing conversation in a
+// NEW process, so the sandbox is chosen again. Verified 2026-08-25 against the
+// installed codex: a session created under `--sandbox read-only` and resumed
+// with `-c sandbox_mode="workspace-write"` recalled its earlier turn AND wrote a
+// file. Both halves matter — context without write access adjudicates nothing,
+// write access without context is just a fresh agent.
+//
+// THE FLAG SET IS DIFFERENT AND SMALLER, checked against `resume --help` rather
+// than assumed: `--sandbox` and `--cd` are REJECTED as unexpected arguments, so
+// the sandbox goes through `-c sandbox_mode=` and the working directory comes
+// from the spawned process's cwd. `-m`, `-c`, `--output-schema`,
+// `--output-last-message` and `--skip-git-repo-check` all still apply.
+//
+// `-c sandbox_mode=` is load-bearing and undocumented in `resume --help`, which
+// is why `--check-read-only` prints the resume form too: a resumed lane that
+// silently stayed read-only would look exactly like an adjudicator that found
+// nothing worth repairing.
+const buildCodexResume = (sessionHome) => [
+  process.env.CODEX_BIN ?? 'codex',
+  [
+    '--ask-for-approval', 'never', 'exec', 'resume', resumeSession,
+    '-c', `sandbox_mode="${spec.sandbox}"`,
+    '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
+    '-c', 'model_context_window=1000000',
+    ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
+    ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
+    ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
+    ...(resultArtifactPath ? ['--output-last-message', lastMessagePath] : []),
+    '--skip-git-repo-check',
+    '-',
+  ],
+  { CODEX_HOME: sessionHome },
+];
 
 const buildCodex = (temporaryHome) => [
   process.env.CODEX_BIN ?? 'codex',
@@ -697,6 +862,9 @@ const started = new Date();
 const release = await pool.acquire(role);
 
 let temporaryHome = null;
+// Set only when `--session-home` was given. Never torn down: it carries the
+// rollout a later `codex exec resume` re-enters.
+let persistentHome = null;
 let codexAuthPaths = null;
 
 // Copy a rotated auth record back to the canonical CODEX_HOME before the
@@ -710,6 +878,40 @@ let codexAuthPaths = null;
 // discarded and the canonical file was guaranteed to go stale. Betas run at
 // cap 5, so if this proves lossy the fix is to refresh once before fan-out
 // rather than to drop the copy-back.
+/** The codex conversation this dispatch created, or null for a non-codex lane.
+ *
+ *  Two sources, in order. codex announces `session id: <uuid>` on stderr at
+ *  startup — that is where it actually goes, checked against a real run rather
+ *  than assumed from where the banner appears in a terminal. If a future release
+ *  moves or drops that line, the rollout file under the session home names the
+ *  same uuid, and that home holds exactly one dispatch's sessions, so there is
+ *  nothing to disambiguate. */
+const codexSessionId = (result) => {
+  const banner = /^\s*session id:\s*([0-9a-f-]{36})\s*$/mi;
+  for (const stream of [result?.stderr, result?.stdout]) {
+    const hit = banner.exec(String(stream ?? ''))?.[1];
+    if (hit) return hit;
+  }
+  if (!persistentHome) return null;
+  const roots = [join(persistentHome, 'sessions')];
+  const found = [];
+  while (roots.length) {
+    const dir = roots.pop();
+    let entries;
+    try { entries = readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+    for (const e of entries) {
+      if (e.isDirectory()) roots.push(join(dir, e.name));
+      else {
+        const m = /^rollout-.*-([0-9a-f-]{36})\.jsonl$/i.exec(e.name);
+        if (m) found.push({ id: m[1], at: statSync(join(dir, e.name)).mtimeMs });
+      }
+    }
+  }
+  if (!found.length) return null;
+  found.sort((a, b) => b.at - a.at);
+  return found[0].id;
+};
+
 const persistRotatedCodexAuth = () => {
   if (!codexAuthPaths) return;
   const { source, temporary } = codexAuthPaths;
@@ -746,14 +948,30 @@ const result = spec.runner === 'deepseek'
     // lane. `codex login status` does NOT catch this — it reads the file
     // without validating it, and keeps reporting "Logged in using ChatGPT".
     // Copying the record back on exit keeps the canonical file in step.
-    temporaryHome = mkdtempSync(`/tmp/prestige-dispatch-${role}-`);
-    const sourceAuth = join(codexHome, 'auth.json');
-    codexAuthPaths = { source: sourceAuth, temporary: join(temporaryHome, 'auth.json') };
-    if (existsSync(sourceAuth)) {
-      copyFileSync(sourceAuth, join(temporaryHome, 'auth.json'));
-      chmodSync(join(temporaryHome, 'auth.json'), 0o600);
+    // A named session home is PERSISTENT and is not torn down below: it holds
+    // the rollout that `codex exec resume` re-enters. The auth handling is
+    // identical either way, including the rotation copy-back — a persistent home
+    // is still a home whose auth.json codex may rotate.
+    // `pathResolve`, NOT `resolve` — this block runs inside the `new Promise(
+    // (resolve) => ...)` executor below, so the bare name is the promise's own
+    // resolve function. Calling it settled the promise with the repo path as its
+    // value and every downstream field read `undefined` off a string. Caught by
+    // the first smoke test; it would never have shown up in a dry run, which
+    // returns before the spawn.
+    if (sessionHomeArg) {
+      persistentHome = pathResolve(REPO, sessionHomeArg);
+      mkdirSync(persistentHome, { recursive: true, mode: 0o700 });
+    } else {
+      temporaryHome = mkdtempSync(`/tmp/prestige-dispatch-${role}-`);
     }
-    [bin, args, extraEnv] = buildCodex(temporaryHome);
+    const activeHome = persistentHome ?? temporaryHome;
+    const sourceAuth = join(codexHome, 'auth.json');
+    codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
+    if (existsSync(sourceAuth)) {
+      copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
+      chmodSync(join(activeHome, 'auth.json'), 0o600);
+    }
+    [bin, args, extraEnv] = resumeSession ? buildCodexResume(activeHome) : buildCodex(activeHome);
   } else {
     [bin, args, extraEnv] = buildClaude();
   }
@@ -851,6 +1069,25 @@ const record = {
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,
   exit_code: result.code, timed_out: result.timedOut,
   ok: result.code === 0 && !result.timedOut,
+  // THE THREAD THIS DISPATCH IS PART OF, so a later stage can re-enter it.
+  //
+  // codex prints `session id: <uuid>` on its own stdout at startup. Parsed from
+  // there rather than by scanning the rollout directory for the newest file:
+  // four group Alphas share nothing but they do run at once, and "newest
+  // rollout" resolves to whichever wrote last, which is not this dispatch. On a
+  // resume the id is what we passed in, so it stays stable down the chain.
+  //
+  // Recorded for every codex lane, not only the resumable ones — an id costs
+  // nothing to keep and a transcript nobody can find again is the expensive
+  // thing.
+  // codex prints it on STDERR, not stdout — measured, not assumed; the first
+  // version scanned stdout only and recorded null against a session that existed.
+  // Both streams are scanned so a future move does not silently break it, and
+  // the rollout filename is the fallback: `rollout-<ts>-<uuid>.jsonl` under the
+  // session home, which is unambiguous precisely because that home belongs to
+  // this one dispatch.
+  session_id: resumeSession ?? codexSessionId(result),
+  session_home: persistentHome ? relative(REPO, persistentHome) : null,
   log: logPath, prompt: promptPath,
   // The agent's own final text, which is its report. Truncated in the record;
   // the log holds it in full.

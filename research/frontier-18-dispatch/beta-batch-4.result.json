@@ -1,0 +1,21 @@
+{
+  "role": "beta",
+  "label": "batch-4",
+  "run": "frontier-18",
+  "covers": [
+    "4"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T17:06:39.975Z",
+  "ended_at": "2026-08-23T17:53:06.144Z",
+  "ms": 2786169,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/beta-batch-4.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/beta-batch-4.prompt.md",
+  "tail": "Batch-4 steps 1–2 complete. Four artifacts written; nothing else touched.\n\n## Report to the step-3 Alpha\n\n**Pair.** `noetherian-rings-and-hilbert-basis` (A, order 111.001) — **38 items**; `noetherian-rings-and-hilbert-basis-examples` (B) — **12 items**. Well under the 60-item ceiling, no split proposed. Full lists, provenance and applyable scaffold amendments are in `research/frontier-18-batch-4.notes.md`.\n\n**Sources.** Four independent treatments, all fetched in full and stamped: Altman–Kleiman §16 pp. 96–100 (textbook), Milne §3 pp. 9–13, Totaro/Norwood §8 pp. 30–35, Hochster Ch. 5 pp. 71–92. 115 harvested headings, every one dispositioned.\n\n**Findings ranked** (12 total, in the notes). The three that need a decision:\n\n1. **Two `requires` edges beyond the spec.** The spec gives one anchor; all four design prerequisites are already in its transitive closure, so I kept it. I added `symmetric-polynomials` because `def-symmetric-polynomial` already writes `R[x₁,…,xₙ]^{Sym_n}`, and my `def-invariant-subring-of-a-group-of-ring-automorphisms` generalises exactly that — the seam rule requires citing it rather than redefining silently. `splice-plan.mjs` will withhold this for you.\n\n2. **The §10.4 overlay assigns formal-power-series Hilbert basis to this pair, and reading order forbids it.** `formal-power-series` is *published* at order 193; this page is 111.001. Deferred to `owner-decision`. Note that **no gate would have caught this**: `validate-plan.mjs` short-circuits the order check for any id already in `items/`, and `depsource.mjs` classifies a published item as `published` regardless of order.\n\n3. **The overlay's Cohen lemma carries a hypothesis its proof never uses** (\"provided every prime ideal is finite\"). The Zorn step needs nothing about primes; attaching it makes the lemma unusable where it is needed. Corrected.\n\nAlso: three overlay rows duplicate published items (`cor-noetherian-modules-are-hopfian`, `cor-finite-direct-sums-preserve-chain-conditions`, `ex-infinite-binary-product-ring-is-not-noetherian`); the overlay's leading-coefficient stage uses \"degree ≤ n\" where all four sources use exact degree; and **the design's H20 source URL is dead** (404 after redirect to `sites.lsa.umich.edu`) — I recovered the full 188-page document from the Wayback index rather than re-sourcing, which every other commutative-algebra batch should do too.\n\n**Forward references: none.** Dependency closure holds with the single `symmetric-polynomials` exception above.\n\n**Gates I actually ran:** `coverage-checklist` (bare and `--require-destination`), `source-fetch-check --stamp`, `url-sweep --recover --fail-on-dead`, `boundary-audit`, `content-policy --manifest-only` (50 items, 0 errors), `prosecheck` — all clean. `prosecheck` reports 14 `count-in-prose` warnings, all in the report sections the brief requires counts in.\n\n**Gates I did not run, and why:** `validate-plan` and `depsource` need the spliced spec (step 4). `proof-contract --strict`, `finite-smoke` and `risk-report` read authored item files; `risk-report` run now returns 45 `item-missing` errors, which is the expected step-1 state. My predicted results are stated as predictions in the notes, not as results."
+}

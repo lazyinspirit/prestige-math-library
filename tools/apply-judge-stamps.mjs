@@ -59,18 +59,22 @@ import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
+import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
 const ledgerPath = value('--ledger');
 const manifestsArg = value('--manifests');
+const itemsArg = value('--items');
 const targetedReceiptPath = value('--audit-targeted-rejudges');
+const terminalResolutionsPath = value('--terminal-resolutions');
 const reportPath = value('--report');
 const apply = argv.includes('--apply');
 const verify = argv.includes('--verify');
-if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)
+const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
+if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> [--verify] | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--apply] [--report <out.json>]');
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step8.jsonl>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -78,6 +82,7 @@ let LOADER;
 try { LOADER = tsxLoader(); }
 catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
 const today = new Date().toISOString().slice(0, 10);
+const terminalParsed = parseTerminalResolutions(terminalResolutionsPath, { allowMissing: true });
 
 // A stamp is evidence about the item, not a mathematical change to it.  Exclude
 // only the block this tool writes so applying/reapplying a stamp cannot make its
@@ -90,6 +95,8 @@ const ids = manifestsArg
   ? [...new Set(manifestsArg.split(',').map((s) => s.trim()).filter(Boolean)
     .flatMap((file) => JSON.parse(readFileSync(file, 'utf8'))
       .flatMap((page) => page.items.map((item) => item.id))))]
+  : itemsArg
+    ? [...new Set(itemsArg.split(',').map((id) => id.trim()).filter(Boolean))]
   : (() => {
     let receipt;
     try { receipt = JSON.parse(readFileSync(targetedReceiptPath, 'utf8')); }
@@ -192,6 +199,7 @@ const hasCurrentPassBlock = (text) => {
   return Boolean(m) && m[0].includes(`model: "${models.join(' + ')}"`) && m[0].includes('verdict: pass');
 };
 const problems = [];
+for (const message of terminalParsed.errors) problems.push(`terminal resolution: ${message}`);
 
 for (const id of ids) {
   const file = `items/${id}.md`;
@@ -212,6 +220,28 @@ for (const id of ids) {
     if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
     if (stale && verify) problems.push(`${id}: a judge block sits on recorded-not-proved material`);
     result.skipped.push({ id, reason: 'recorded-not-proved', ...(stale ? { stripped_stale_pass: apply } : {}) });
+    continue;
+  }
+  const terminal = terminalParsed.latest.get(id);
+  if (terminal) {
+    let now;
+    try {
+      now = { context_sha256: contextHash(id), item_sha256: attestedItemHash(text) };
+    } catch (cause) {
+      problems.push(`${id}: cannot verify terminal resolution — ${cause.message}`);
+      result.skipped.push({ id, reason: 'terminal-resolution-unverifiable' });
+      continue;
+    }
+    if (!terminalResolutionIsCurrent(terminal, now)) {
+      problems.push(`${id}: terminal resolution is stale against current item/context`);
+      result.skipped.push({ id, reason: 'terminal-resolution-stale' });
+      continue;
+    }
+    const stale = judgeBlockRe.test(text);
+    if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
+    if (stale && verify) problems.push(`${id}: a judge pass block sits on a terminal manually resolved item`);
+    result.skipped.push({ id, reason: 'terminal-manual-resolution', resolved_by: terminal.resolved_by,
+      disposition: terminal.disposition, ...(stale ? { stripped_stale_pass: apply } : {}) });
     continue;
   }
   const target = targeted.get(id);
@@ -293,7 +323,7 @@ const byReason = {};
 for (const s of result.skipped) byReason[s.reason] = (byReason[s.reason] ?? 0) + 1;
 if (verify) {
   const missing = result.stamped.filter((s) => s.changed).length;
-  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${byReason['recorded-not-proved'] ?? 0} recorded-not-proved, ${problems.length} problem(s)`);
+  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${byReason['terminal-manual-resolution'] ?? 0} terminal manual, ${byReason['recorded-not-proved'] ?? 0} recorded-not-proved, ${problems.length} problem(s)`);
   for (const p of problems) console.error(`ERROR ${p}`);
   if (reportPath) {
     result.problems = problems;

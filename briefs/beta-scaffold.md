@@ -373,6 +373,21 @@ its item list.
    cut and new page ids — never a pruning. Split before authoring; after it,
    the same change is a rewrite.
 
+4. **Scaffold diagram-heavy material algebraically.** Owner rule, 2026-08-25:
+   **diagrams are optional, equations are not.** Where a pair covers commutative
+   or string diagrams — category theory, homological algebra, monoidal
+   structure — plan every definition and statement so its content is carried by
+   named arrows with domains and codomains and by explicit equations between
+   composites. A `tikzcd` picture is a rendering aid the author layers on top;
+   it is never where a hypothesis, a Definition, a Statement or a proof step
+   lives. Note this in your notes for any pair whose sources present a result
+   only as a picture, and say how the author is to write it out. **The judges
+   cannot see pictures:** the frozen prompt is text, `deepseek-v4-pro` has no
+   vision, and at frontier-18 it spent 595s and then 720s on
+   `thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` without returning a
+   verdict. An item that cannot be judged cannot be published, so this is a
+   scaffolding decision, not a formatting one.
+
 Record every decomposition lemma and every added corollary in the per-page item
 list and in your new-id report, including what larger result it supports or what
 immediate consequence it captures.

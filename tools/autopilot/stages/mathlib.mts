@@ -18,7 +18,9 @@
 // than an agent, still fits the machine.
 
 import { readdirSync, existsSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -233,6 +235,13 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
       '--retire-redundant',
       '--retired-record', `research/${ctx.run}-retired-sources.json`],
   ],
+  // the drift review MINTED a prerequisite page or RESCOPED the run onto its
+  // dependencies (owner, 2026-08-24) -> write the batch manifests those
+  // decisions imply, and regenerate the ledger, task files and covers map from
+  // them. The Alpha decided; this is the bookkeeping, which is why it is
+  // mechanical. Exits 0 having done nothing when the report decided nothing,
+  // so it is safe as an unconditional repair for this gate.
+  'drift-review': (ctx) => ['tools/drift-apply.mjs', '--run', ctx.run],
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
     '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
@@ -284,6 +293,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   'judge-stamps': (ctx) => ['tools/apply-judge-stamps.mjs',
     '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
     '--manifests', batches(ctx).map((b: any) => join(ctx.repo, 'research', `${ctx.run}-batch-${b}.pages.json`)).join(','),
+    '--terminal-resolutions', R(ctx, terminalResolutionsPath(ctx)),
     '--apply', '--report', R(ctx, 'research', `${ctx.run}-judge-stamps.json`)],
   // a dirty tree at 10-close-v2 means repairs landed after the close-out
   // commit: commit again. Idempotent; refuses any branch but main.
@@ -297,8 +307,8 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
 const latestSnapshotLabel = (ctx: any): string => {
   try {
     const t = JSON.parse(readFileSync(join(ctx.repo, touchesPath(ctx)), 'utf8'));
-    const labels = new Set((t.snapshots ?? []).map((s: any) => s.label));
-    for (const l of ['post-step9', 'post-step8', 'pre-step8', 'post-6b']) if (labels.has(l)) return l;
+    const label = (t.snapshots ?? []).at(-1)?.label;
+    if (typeof label === 'string' && label) return label;
   } catch { /* fall through */ }
   return 'post-6b';
 };
@@ -413,9 +423,10 @@ const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string
  *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
  *                 caller may route the residue to a scouting dispatch.
  *  'unhandled'  — no table entry for any of the failing gates. */
-export const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
+export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
+  const excluded = new Set((excludeGateIds ?? []).map(String));
   const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
-  const handled = failing.filter((f: any) => MECHANICAL_REPAIRS[f.id]);
+  const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
   if (!handled.length) return { outcome: 'unhandled' };
 
   const { spawnSync } = await import('node:child_process');
@@ -508,6 +519,44 @@ export const dispatchEdgeAdjudication = ({ ctx, executor, stage, round }: any) =
     task: [`research/${ctx.run}-alpha-step4.task.md`],
     timeout: 3600,
   });
+};
+
+/**
+ * Re-dispatch the drift review when its report is the thing that is stale.
+ *
+ * THE GAP THIS CLOSES. `drift-check-blocked` is read out of the report's
+ * VERDICT lines, so a report can fail the gate for a finding that is no longer
+ * true — the Alpha wrote it under narrower authority, or a scaffold has since
+ * engineered around the edge. Nothing could rewrite it: the review had already
+ * returned exit 0, so the unit stayed covered and no retry re-armed it, and
+ * `drift-apply` only materialises decisions rather than making them. The run
+ * stopped for a reason nobody needed to decide, which is the exact shape of
+ * deadlock the 2026-08-24 rulings exist to remove.
+ *
+ * Deciding whether the edge is still real is judgment, so it goes back to an
+ * Alpha. Deciding THAT it must be re-asked is a function of the gate output, so
+ * it is here. The re-review reads the same task and brief; what has changed is
+ * the report on disk, the spec, and — the usual case — the scaffolds.
+ */
+export const dispatchDriftRereview = ({ ctx, executor, stage, round, failure }: any) => {
+  // KEYED OFF THE GATE, NOT THE REPAIR RESIDUE. `drift-apply` exits 0 when the
+  // report decided nothing it can materialise, which is exactly the blocked
+  // case — so `mechanicalRepair` reports 'clean', and a route hung off its
+  // residue would never fire. The honest question is what the GATE said.
+  const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
+  const blocked = failing.some((f: any) => f.id === 'drift-review'
+    && /drift-check-blocked:/.test(String(f.output ?? '') + String(f.stderr ?? '')));
+  if (!blocked) return false;
+  executor.start(stage, {
+    role: 'alpha',
+    label: `drift-review-${round}`,
+    job: 'verification',
+    covers: ['drift'],
+    brief: 'briefs/alpha-drift.md',
+    task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
+    timeout: 7200,
+  });
+  return true;
 };
 
 export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
@@ -636,6 +685,12 @@ const backingGate = (ctx) => gate('source-backing', [
 const contractsPath = (ctx) => `research/${ctx.run}-proof-contracts.json`;
 const touchesPath = (ctx) => `research/${ctx.run}-touches.json`;
 const closurePath = (ctx) => `research/${ctx.run}-judge-closure.json`;
+const terminalResolutionsPath = (ctx) => `research/${ctx.run}-step8-terminal-resolutions.jsonl`;
+const publishedClosurePath = (ctx) => `research/${ctx.run}-step8-published-closure.json`;
+const cutoverPath = (ctx) => `research/${ctx.run}-step8-cutover.json`;
+const step9ChangesPath = (ctx) => `research/${ctx.run}-step9-changes.json`;
+const step9ChangesScopePath = (ctx) => `research/${ctx.run}-step9-changes.pages.json`;
+const step9ClosurePath = (ctx) => `research/${ctx.run}-step9-judge-closure.json`;
 const scaffoldPath = (ctx) => `research/${ctx.run}-scaffold-closure.json`;
 
 /** The step-3 closure receipt, or null before the gate has ever run. */
@@ -658,6 +713,260 @@ function readClosure(ctx): {
   const p = R(ctx, closurePath(ctx));
   if (!existsSync(p)) return null;
   try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+function readStep9Closure(ctx): ReturnType<typeof readClosure> {
+  const p = R(ctx, step9ClosurePath(ctx));
+  if (!existsSync(p)) return null;
+  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+/** Every mathematical item Step 9 created or modified after the Step-8
+ * baseline.  This is the exact certification boundary, not an agent claim. */
+function readStep9Changes(ctx): string[] {
+  try {
+    const receipt = JSON.parse(readFileSync(R(ctx, step9ChangesPath(ctx)), 'utf8'));
+    return Array.isArray(receipt?.items) ? receipt.items.filter((id: any) => typeof id === 'string') : [];
+  } catch { return []; }
+}
+
+/** Derive the same Step-9 delta before its receipt exists so the first judge
+ * dispatch already has the exact set. */
+function step9ChangesOnDisk(ctx): string[] {
+  try {
+    const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
+    const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step8');
+    if (!baseline?.hashes) return [];
+    return readdirSync(R(ctx, 'items')).filter((name) => name.endsWith('.md'))
+      .map((name) => name.slice(0, -3)).filter((id) => {
+        const hash = shortHash(itemHashGuard(readFileSync(R(ctx, 'items', `${id}.md`), 'utf8')));
+        return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
+      }).sort();
+  } catch { return []; }
+}
+
+const step9ChangesGate = (ctx) => gate('step9-changes', ['node', 'tools/step9-changes.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'post-step8',
+  '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+  '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx), '--check']);
+
+const step9ClosureGate = (ctx) => gate('step9-judge-closure', ['node', 'tools/level-coverage.mjs',
+  '--judge-only', '--verify-current-context', '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--out', step9ClosurePath(ctx), step9ChangesScopePath(ctx)]);
+
+const scopeDecisionsGate = (ctx) => gate('scope-decisions', ['node', 'tools/scope-decisions.mjs',
+  'check', '--run', ctx.run]);
+
+/** The persistent CODEX_HOME for one group's Alpha.
+ *
+ *  Under `.autopilot/`, which is gitignored — a session home holds an auth
+ *  record and a full transcript, and neither belongs in the repository. One per
+ *  run and per group, so no two lanes share a home.
+ */
+const sessionHome = (ctx, label: string): string =>
+  `.autopilot/sessions/${ctx.run}/${label}`;
+
+/** The codex conversation a group's step-7 reader created, or null.
+ *
+ *  Read from that dispatch's own result record. `codex exec resume --last` would
+ *  be wrong here: four group Alphas run at once, so "most recent" is whichever
+ *  finished last, which is not a group identity. */
+function readSessionId(ctx, label: string): string | null {
+  const p = R(ctx, `research/${ctx.run}-dispatch/alpha-group-read-${label}.result.json`);
+  if (!existsSync(p)) return null;
+  try {
+    const rec = JSON.parse(readFileSync(p, 'utf8'));
+    return rec?.ok === true && typeof rec.session_id === 'string' ? rec.session_id : null;
+  } catch { return null; }
+}
+
+/** Re-render current Step-8 tasks before a recovery dispatch. The initial task
+ *  is a snapshot of the first rejection set; using it after a rejudge made an
+ *  Alpha reread historical rows that no longer owed a decision. */
+function refreshStep8Scope(ctx: any): void {
+  const result = spawnSync('node', ['tools/step8-scope.mjs', 'render', '--run', ctx.run], {
+    cwd: ctx.repo,
+    encoding: 'utf8',
+  });
+  if (result.status !== 0) {
+    throw new Error(`could not refresh Step-8 scope: ${(result.stderr || result.stdout || 'unknown failure').trim()}`);
+  }
+}
+
+function hasCompletedHistoricalRejudge(ctx: any): boolean {
+  const resultPath = R(ctx, `research/${ctx.run}-dispatch/tool-rejudge.result.json`);
+  const statePath = R(ctx, '.autopilot/state.json');
+  if (!existsSync(resultPath) || !existsSync(statePath)) return false;
+  try {
+    const result = JSON.parse(readFileSync(resultPath, 'utf8'));
+    const state = JSON.parse(readFileSync(statePath, 'utf8'));
+    return result.run === ctx.run && result.ok === true && state.run === ctx.run
+      && Boolean(state.stages?.['8-rejudge']?.gatesPassedAt);
+  } catch { return false; }
+}
+
+const step8GuardGate = (ctx) => gate('step8-guard', ['node', 'tools/step8-guard.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'pre-step8',
+  '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--scope', `research/${ctx.run}-step8-scope.json`,
+  '--terminal-resolutions', terminalResolutionsPath(ctx),
+  '--published-repairs', `research/${ctx.run}-step8-published-repairs.jsonl`]);
+
+const publishedGate = (ctx) => gate('step8-published', ['node', 'tools/step8-scope.mjs',
+  'published', '--run', ctx.run, '--out', publishedClosurePath(ctx)]);
+
+function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
+  const p = R(ctx, publishedClosurePath(ctx));
+  if (!existsSync(p)) return null;
+  try {
+    const row = JSON.parse(readFileSync(p, 'utf8'));
+    return {
+      needs_rejudge: row.needs_rejudge ?? [],
+      unadjudicated: [...new Set<string>((row.unadjudicated_rows ?? []).map((entry: any) => String(entry.id)))],
+      unadjudicated_rows: row.unadjudicated_rows ?? [],
+      open_fatal: row.open_fatal ?? [],
+      closed: !(row.needs_rejudge?.length || row.unadjudicated_rows?.length || row.open_fatal?.length || row.escalations?.length),
+    };
+  } catch { return null; }
+}
+
+/** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
+function itemsFromGateFailure(failure: any): string[] {
+  const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+  return [...new Set([...text.matchAll(/\[([a-z][a-z0-9]*(?:-[a-z0-9]+){2,})\]/g)].map((m) => m[1]))];
+}
+
+function startStep8Group(ctx: any, executor: any, stage: any, plan: any, group: string | null): void {
+  const sessionId = group ? readSessionId(ctx, group) : null;
+  executor.start(stage, {
+    role: 'alpha-adjudicate',
+    covers: [],
+    brief: 'briefs/alpha.md',
+    ...(group && sessionId ? { sessionHome: sessionHome(ctx, group), resumeSession: sessionId } : {}),
+    ...plan,
+  });
+}
+
+/** Materialised alerts whose owning group still owes a disposition, or has
+ *  confirmed a fatal target without the targeted rejection needed to edit. */
+function readOpenAlerts(ctx): Array<{ alert_id: string; item: string; owning_group: string; needs_judge: boolean; judge_started: boolean }> {
+  const alertsFile = R(ctx, `research/${ctx.run}-step8-alerts.json`);
+  const decisionsFile = R(ctx, `research/${ctx.run}-step8-alert-decisions.jsonl`);
+  if (!existsSync(alertsFile)) return [];
+  try {
+    const alerts = JSON.parse(readFileSync(alertsFile, 'utf8'))?.alerts ?? [];
+    const decisions = new Map<string, any>();
+    if (existsSync(decisionsFile)) for (const line of readFileSync(decisionsFile, 'utf8').split(/\r?\n/)) {
+      if (!line.trim()) continue;
+      const row = JSON.parse(line);
+      if (typeof row.alert_id === 'string') decisions.set(row.alert_id, row);
+    }
+    let cycles: any[] = [];
+    try { cycles = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-step8-rejudge-cycles.json`), 'utf8'))?.cycles ?? []; }
+    catch { /* no targeted cycle has run */ }
+    return alerts.flatMap((alert: any) => {
+      const decision = decisions.get(alert.alert_id);
+      if (!decision) return [{ ...alert, needs_judge: false, judge_started: false }];
+      if (decision.outcome === 'confirmed_fatal_unlicensed') {
+        const judgeStarted = cycles.some((cycle: any) => cycle.kind === 'alert'
+          && (cycle.items ?? []).includes(alert.item)
+          && String(cycle.started_at ?? '') >= String(decision.at ?? ''));
+        return [{ ...alert, needs_judge: true, judge_started: judgeStarted }];
+      }
+      return [];
+    });
+  } catch { return []; } // the strict scope gate reports exact line diagnostics
+}
+
+/** Published items repaired at step 8. They are OUTSIDE the run's scope, so the
+ *  closure receipt never names them and `8-rejudge` would ship a repaired
+ *  published page unjudged. */
+function readPublishedRepairs(ctx): string[] {
+  const p = R(ctx, `research/${ctx.run}-step8-published-repairs.jsonl`);
+  if (!existsSync(p)) return [];
+  const ids = new Set<string>();
+  for (const line of readFileSync(p, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    try {
+      const r = JSON.parse(line);
+      if (r.kind === 'repaired' && typeof r.id === 'string') ids.add(r.id);
+    } catch { /* the guard reports malformed rows; this must not throw here */ }
+  }
+  return [...ids];
+}
+
+function publishedRepairOwners(ctx, ids: string[]): string[] {
+  const wanted = new Set(ids);
+  const p = R(ctx, `research/${ctx.run}-step8-published-repairs.jsonl`);
+  if (!existsSync(p)) return [];
+  const owners = new Set<string>();
+  try {
+    for (const line of readFileSync(p, 'utf8').split(/\r?\n/)) {
+      if (!line.trim()) continue;
+      const row = JSON.parse(line);
+      if (row.kind === 'repaired' && wanted.has(row.id) && typeof row.group === 'string') owners.add(row.group);
+    }
+  } catch { return []; }
+  return alphaGroups(ctx).map((group: any) => String(group.label)).filter((label) => owners.has(label));
+}
+
+function fatalAdjudicationCounts(ctx): Map<string, number> {
+  const p = R(ctx, `research/${ctx.run}-judge-adjudications.jsonl`);
+  const contexts = new Map<string, Set<string>>();
+  if (!existsSync(p)) return new Map();
+  try {
+    for (const line of readFileSync(p, 'utf8').split(/\r?\n/)) {
+      if (!line.trim()) continue;
+      const row = JSON.parse(line);
+      if (row.outcome !== 'confirmed_fatal' || typeof row.id !== 'string') continue;
+      const seen = contexts.get(row.id) ?? new Set<string>();
+      // Two lanes rejecting the same frozen text are one fatal cycle, not two.
+      seen.add(String(row.context_sha256 ?? ''));
+      contexts.set(row.id, seen);
+    }
+  } catch { return new Map(); }
+  return new Map([...contexts].map(([id, rows]) => [id, rows.size]));
+}
+
+/** The group labels that own the given item ids, in assignment order.
+ *
+ *  Read from `<run>-step8-scope.json`, which `8-scope` renders mechanically
+ *  from the batch manifests and the validated group assignment. A repair round
+ *  uses this to send each open fatal back to the Alpha holding that batch's
+ *  conventions rather than to whichever lane is free.
+ *
+ *  An id the scope does not know — a step-9 build, or an item added after the
+ *  render — has no owner, and returning nothing for it would silently drop a
+ *  fatal defect. It falls to EVERY group instead: an Alpha told to repair an
+ *  item outside its batches declines and records a cross-group finding, which
+ *  the `step8-scope` gate then refuses to let the stage close over. Loud beats
+ *  lost.
+ *
+ *  A SINGLE `null` MEANS "no partition": the run has no group assignment yet, or
+ *  `8-scope` has not rendered. The caller then dispatches one whole-level Alpha,
+ *  which is what step 8 did before it was partitioned. This is the one case that
+ *  must never return an empty list — an empty list is a repair round that
+ *  dispatches nothing and reports a spent round, which is how an open fatal
+ *  reaches step 10.
+ */
+function step8Owners(ctx, ids: string[]): Array<string | null> {
+  const labels = alphaGroups(ctx).map((g: any) => String(g.label));
+  if (!labels.length) return [null];
+  const p = R(ctx, `research/${ctx.run}-step8-scope.json`);
+  if (!existsSync(p)) return labels;
+  let byItem: Record<string, string> = {};
+  try { byItem = JSON.parse(readFileSync(p, 'utf8'))?.by_item ?? {}; } catch { return labels; }
+  const owners = new Set<string>();
+  let unknown = false;
+  for (const id of ids) {
+    const g = byItem[id];
+    if (g) owners.add(g); else unknown = true;
+  }
+  if (unknown) return labels;
+  const hit = labels.filter((l) => owners.has(l));
+  return hit.length ? hit : [null];
 }
 
 /**
@@ -733,6 +1042,7 @@ const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false }
     '--judge-only', '--verify-current-context',
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+    '--terminal-resolutions', terminalResolutionsPath(ctx),
     ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
     ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
     '--out', closurePath(ctx),
@@ -746,6 +1056,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-
   '--contracts', contractsPath(ctx),
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--terminal-resolutions', terminalResolutionsPath(ctx),
   '--spine-receipt', `research/${ctx.run}-spine-audit.json`,
   '--audit-receipt', `research/${ctx.run}-audit-coverage.json`,
   '--verify-current-context',
@@ -855,9 +1166,62 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
 // ---------------------------------------------------------------------------
 
 export const stages = [
+  // ---------------------------------------------------------------------------
+  // WHY THE DRIFT REVIEW IS ITS OWN STAGE, AHEAD OF THE BETAS (owner rulings,
+  // 2026-08-24). It used to ride inside `1-scaffold` as the `drift` unit,
+  // finishing in ~15 minutes while the Betas ran for ~50. That was free while
+  // the review's only outputs were `requires` edits and a report. It stopped
+  // being free the moment the Alpha gained authority to MINT a missing
+  // prerequisite, REORDER to close a forward edge, and — above three
+  // mintings — RESCOPE the run onto its dependencies. Each of those changes
+  // WHICH PAGES THE RUN BUILDS, and a scope change discovered after ten Betas
+  // have scaffolded is a teardown of authored work: `drift-apply` refuses it,
+  // correctly, and the run would stop needing a person for the one class of
+  // decision these rulings were meant to automate.
+  //
+  // Ahead of the Betas the same decision costs one ~15-minute Alpha and
+  // nothing else. `batches()` reads the manifest directory, so a batch minted
+  // here simply exists when the scaffold stage computes its units — no
+  // signalling between the stages, and no cohort recomputed from a stale list.
+  // ---------------------------------------------------------------------------
+  {
+    id: '1-drift',
+    label: 'step-0 prerequisite-drift review',
+    units: () => ['drift'],
+    pattern: /^alpha-(?:alpha-)?drift-review\.result\.json$/,
+    labelFor: () => 'drift-review',
+    concurrency: 1,
+    artifacts: (ctx: any) => `research/${ctx.run}-alpha-step0-drift.md`,
+    plan: (ctx: any) => [{
+      role: 'alpha',
+      label: 'drift-review',
+      job: 'verification',
+      covers: ['drift'],
+      brief: 'briefs/alpha-drift.md',
+      task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
+      timeout: 7200,
+    }],
+    gates: (ctx: any) => [driftGate(ctx), planGate()],
+    // TWO ROUNDS, and they are different repairs. Round one materialises what
+    // the report already decided (`drift-apply`). If what remains is a BLOCKED
+    // verdict, the report itself is the stale artifact and the second round
+    // sends it back to an Alpha, which may now reorder, mint or rescope. A
+    // third round would re-ask an Alpha that has just answered.
+    maxFixRounds: 2,
+    onGateFailure: async (args: any) => {
+      const repair = await mechanicalRepair(args);
+      // A blocked verdict is never materialisable — the REPORT is the stale
+      // artifact — so this is asked regardless of how the repair went, and
+      // before the residue check, which cannot see a clean-exiting no-op.
+      if (dispatchDriftRereview(args)) return;
+      if (repair.outcome === 'residual') {
+        throw new Error(`drift decisions could not be materialised: ${(repair.stderr ?? '').slice(0, 300)}`);
+      }
+    },
+  },
   {
     id: '1-scaffold',
-    label: 'Beta scaffolding + step-0 drift review',
+    label: 'Beta scaffolding',
     // Not pipelined: the stage after it is the assignment barrier. See the note
     // above — a cohort computed before `2-assign` is computed from a fallback
     // that the assignment exists to overrule.
@@ -874,32 +1238,24 @@ export const stages = [
     // fails the stage. Coverage attributes results by their declared `covers`,
     // so the mixed unit set is safe — the Alpha declares `drift`, each Beta
     // declares its batch number.
-    units: (ctx: any) => ['drift', ...batches(ctx)],
+    units: (ctx: any) => batches(ctx),
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
-    // `beta-fix-batch-3.result.json`, which belongs to a different stage. The
-    // alternation admits exactly the two result shapes this stage owns.
-    pattern: /^(?:beta-(?:beta-)?batch-\d+|alpha-(?:alpha-)?drift-review)\.result\.json$/,
-    labelFor: (u) => (u === 'drift' ? 'drift-review' : `batch-${u}`),
-    concurrency: 9,
-    plan: (ctx, pending) => pending.map((u: any) => (u === 'drift'
-      ? {
-        role: 'alpha',
-        label: 'drift-review',
-        job: 'verification',
-        covers: ['drift'],
-        brief: 'briefs/alpha-drift.md',
-        task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
-        timeout: 7200,
-      }
-      : {
-        role: 'beta',
-        label: `batch-${u}`,
-        job: 'scaffolding',
-        covers: [u],
-        brief: 'briefs/beta-scaffold.md',
-        task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
-        timeout: 14400,
-      })),
+    // `beta-fix-batch-3.result.json`, which belongs to a different stage.
+    pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
+    labelFor: (u) => `batch-${u}`,
+    concurrency: 12,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'beta',
+      label: `batch-${u}`,
+      job: 'scaffolding',
+      covers: [u],
+      brief: 'briefs/beta-scaffold.md',
+      task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
+      timeout: 14400,
+    })),
+    // `driftGate` stays on this stage as well as on `1-drift`. It is cheap, and
+    // it is the check that a scope change applied upstream is still true of the
+    // manifests the Betas actually scaffolded against.
     gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
 
     // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
@@ -942,11 +1298,24 @@ export const stages = [
     id: '2-assign',
     label: 'assign batches to group Alphas',
     units: () => ['all'],
-    pattern: resultPattern('alpha', 'assign'),
+    // THE SAME PATTERN-VS-ROLE DEFECT `8-adjudicate` CARRIED, found by the
+    // class guard in `test/step8-groups.test.mts` on 2026-08-25. The plan moved
+    // to role `alpha-assign` when that lane was introduced (2026-08-24) and this
+    // line did not, so a re-run would write
+    // `alpha-assign-assign.result.json` and match nothing — the stage would
+    // re-dispatch a completed partition forever. It has not bitten only because
+    // frontier-18's `2-assign` ran before the lane existed and its result file
+    // records role `alpha`.
+    //
+    // Both spellings are recognised deliberately: the new one because it is what
+    // the plan now produces, the old one because frontier-18's result is on disk
+    // under it and narrowing the pattern would reopen a barrier the run passed
+    // days ago. Not written through `resultPattern`, which takes one role.
+    pattern: /^alpha-(?:assign-)?assign\.result\.json$/,
     artifacts: (ctx) => `research/${ctx.run}-alpha-groups.json`,
     concurrency: 1,
     plan: (ctx) => [{
-      role: 'alpha',
+      role: 'alpha-assign',
       label: 'assign',
       job: 'partitioning',
       covers: ['all'],
@@ -966,7 +1335,7 @@ export const stages = [
     role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'step3-[a-z]+'),
-    concurrency: 3,
+    concurrency: 4,
     // An Alpha group reviews as a unit, so it waits for its own three batches to
     // scaffold — and for nobody else's.
     cohort: alphaCohort,
@@ -986,7 +1355,7 @@ export const stages = [
     },
     // Every pair must carry a verdict. An Alpha that reviewed four of six pairs
     // and exited zero used to clear this stage.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx), scopeDecisionsGate(ctx)],
   },
 
   // Findings go back to the Beta that owns the batch. This used to be an
@@ -1004,7 +1373,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'fix-batch-\\d+'),
     labelFor: (u) => `fix-batch-${u}`,
-    concurrency: 9,
+    concurrency: 12,
     // A batch with no findings still needs a covering result, so the fix task
     // is written for every batch and a Beta with nothing to do says so and
     // exits. Making "no findings" a fast no-op is cheaper than making the
@@ -1028,15 +1397,21 @@ export const stages = [
     id: '3-recheck',
     label: 'Alpha re-check before splice',
     pipeline: 'scaffold',
-    role: 'alpha',
+    role: 'alpha-high',
     units: batches,
-    pattern: resultPattern('alpha', 'recheck-[a-z]+'),
-    concurrency: 3,
+    // The same pattern-vs-role defect as `2-assign`, and dormant for the same
+    // reason: the plan moved to role `alpha-high` on 2026-08-24 and this line
+    // did not, so frontier-18's four results are on disk as `alpha-recheck-*`
+    // while a re-run would write `alpha-high-recheck-*` and match nothing. Both
+    // spellings, so a fixed pattern does not reopen a stage that closed at
+    // step 3.
+    pattern: /^alpha-(?:high-)?recheck-[a-z]+\.result\.json$/,
+    concurrency: 4,
     cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
-        role: 'alpha',
+        role: 'alpha-high',
         label: `recheck-${g.label}`,
       job: 'adjudication',
         covers: g.covers,
@@ -1053,7 +1428,8 @@ export const stages = [
     // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
     // unstamped sources; only an unrecoverable or unfetchable source reaches
     // the fix loop below, as scouting work for the owning Beta.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }),
+      scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
     // Still thin after the re-check is another fix round, not an advance. Bounded
     // for the same reason the judge loop is: a scaffold that will not converge is
     // a decision for a person, and the blocker names the pairs.
@@ -1243,7 +1619,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'author-batch-\\d+'),
     labelFor: (u) => `author-batch-${u}`,
-    concurrency: 9,
+    concurrency: 12,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `author-batch-${u}`,
@@ -1298,14 +1674,51 @@ export const stages = [
         dispatchEdgeAdjudication({ ctx, executor, stage, round });
         return;
       }
-      if (!['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
+      // THE CONTRACT DETECTORS have their own task, because it names the three
+      // tools to re-run. Everything else gets the general route below.
+      if (['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
+        executor.start(stage, {
+          role: 'alpha',
+          label: `contract-audit-${round}`,
+          job: 'adjudication',
+          covers: [],
+          brief: 'briefs/alpha.md',
+          task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
+          timeout: 3600,
+        });
+        return;
+      }
+
+      // DEFAULT ROUTE, NOT AN ALLOW-LIST (owner, 2026-08-24). This line used to
+      // read `if (!['boundary-audit','citation-fidelity','gate-liveness']
+      // .includes(failure.id)) return;` — so any other failing gate fell through
+      // to a bare return, the round budget was spent re-running an identical
+      // failure, and the run reported "did not clear" for a repair it never ran.
+      //
+      // frontier-18 produced THREE blockers of exactly that shape in one run:
+      // `depcheck` (one typo'd id in a deps array), `rendercheck` (37 items of
+      // `$$` split across source lines) and `content-policy-items` (a notation
+      // detector firing wider than the rule it enforces). All three were
+      // adjudicable from disk by an Alpha; none needed a person, and the third
+      // still needed one only for the part that is genuinely the owner's — the
+      // scope of an owner-written rule.
+      //
+      // The comment two hooks above already recorded this shape ("This hook
+      // enumerated three ids, so it fell straight through") and closed it only
+      // for the mechanical case. An allow-list of failures worth routing is a
+      // list that is always one entry short of the next incident.
+      //
+      // A gate failure is a FINDING. The Alpha adjudicates it, repairs what is
+      // genuinely wrong, and reports a false positive as a false positive — the
+      // task is explicit that narrowing a detector to clear a run is never its
+      // call.
       executor.start(stage, {
         role: 'alpha',
-        label: `contract-audit-${round}`,
+        label: `gate-adjudication-${failure.id}-${round}`,
         job: 'adjudication',
         covers: [],
         brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
+        task: [`research/${ctx.run}-alpha-gate-adjudication.task.md`],
         timeout: 3600,
       });
     },
@@ -1322,7 +1735,7 @@ export const stages = [
     // zero having written its report over reader-1's.
     artifacts: (ctx, u) => `research/${ctx.run}-reader-${u}.md`,
     labelFor: (u) => `reader-${u}`,
-    concurrency: 9,
+    concurrency: 12,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'reader',
       label: `reader-${u}`,
@@ -1360,7 +1773,7 @@ export const stages = [
     role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', '6b-[a-z]+'),
-    concurrency: 3,
+    concurrency: 4,
     cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
@@ -1449,37 +1862,123 @@ export const stages = [
     ],
   },
 
+  // The group partition, rendered BEFORE the sweep so the step-7 readers have
+  // their scope. `8-scope` runs the same tool again after the sweep, when the
+  // rejection rows exist; the content half — pages, items, seams — is identical
+  // and is what the reading half needs.
+  {
+    id: '7-scope',
+    label: 'partition the level by group (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step7-scope'),
+    artifacts: (ctx) => `research/${ctx.run}-step8-scope.json`,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'step7-scope',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/step8-scope.mjs', 'render', '--run', ctx.run],
+    }],
+    gates: (ctx) => [
+      gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
+      }),
+    ],
+  },
+
+  // THE SWEEP AND THE GROUP PRE-READS RUN TOGETHER (owner, 2026-08-25).
+  //
+  // "Step 8 group alpha agents can be spawned, assigned groups, and can start
+  // reading A/B pairs they are tasked to adjudicate. All of these can be done
+  // during step 7." They are units of ONE stage rather than two stages, because
+  // the engine overlaps units inside a stage and serialises stages: a separate
+  // reading stage in front of the sweep would cost its own wall-clock, which is
+  // the thing the owner's instruction removes.
+  //
+  // WHAT THE PRE-READ BUYS. Step 8 resumes these reader conversations whenever
+  // their durable session ids are available. Without this each adjudicator
+  // meets two hundred items and a list of rejections in the same context window
+  // and reads the mathematics through the objections.
+  // Reading first separates those: the group reads its own pairs while
+  // no verdict exists, and its digest is the first thing its step-8 self opens.
+  // A concern recorded here was found with nobody pointing at it, so a judge
+  // rejection landing in the same place is two independent readings agreeing —
+  // evidence of a different quality from agreeing with a rejection you were
+  // handed.
+  //
+  // WHY THE PRE-READ IS READ-ONLY, at the kernel rather than in the prompt. Step
+  // 7 judges a frozen text. An edit landing mid-sweep voids verdicts already cast
+  // against the old bytes and leaves the level judged in two states with nothing
+  // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
+  // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
+  //
+  // QUOTA. Four Sol lanes now run concurrently with the sweep's Terra lane, all
+  // on the Codex weekly cap. A cap is a ceiling the engine may use, never a quota
+  // it must spend: if lanes start dying on a limit, lower `alpha-group-read`'s cap
+  // rather than re-spending the loop.
   {
     id: '7-judge',
-    label: 'paired judge sweep',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'judge-sweep'),
-    concurrency: 1,
+    label: 'paired judge sweep, with the group Alphas reading alongside',
+    // One unit for the sweep, one per group. The stage is done when the ledger
+    // is covered AND every group has a digest — which is what makes the reading
+    // a real obligation rather than a best-effort rider.
+    units: (ctx) => ['sweep', ...alphaGroups(ctx).map((g: any) => String(g.label))],
+    // Two result-file families in one stage, so the pattern is written out
+    // rather than derived: `resultPattern` takes one role. The group half is
+    // `<role>-<label>` with the label being the bare group letter, which is why
+    // the repair round below is labelled `read-again-*` — digits and the
+    // longer name keep it outside this pattern, so a re-read is never mistaken
+    // for the unit's own coverage.
+    pattern: /^(?:tool-judge-sweep|alpha-group-read-[a-z]+)\.result\.json$/,
+    concurrency: 5,
     // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
     // owns its own lane pools, retry semantics and attestation. The A-page ids
     // are computed here rather than in a shell sub-invocation: the first
     // version nested three levels of quoting inside a `sh -c`, which is a
     // defect waiting to happen in a stage that runs once, twelve hours into a
     // build, unattended.
-    plan: (ctx) => {
-      const aPages = [];
-      for (const b of batches(ctx)) {
-        const pj = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`), 'utf8'));
-        for (const p of pj) if (p.kind === 'A') aPages.push(p.id);
+    plan: (ctx, pendingUnits) => {
+      const plans: any[] = [];
+      if (pendingUnits.includes('sweep')) {
+        const aPages = [];
+        for (const b of batches(ctx)) {
+          const pj = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`), 'utf8'));
+          for (const p of pj) if (p.kind === 'A') aPages.push(p.id);
+        }
+        plans.push({
+          role: 'tool',
+          label: 'judge-sweep',
+          job: 'judgement',
+          covers: ['sweep'],
+          timeout: 43200,
+          // argv, so there is nothing to quote and nothing to parse. The engine
+          // writes the result record when this exits zero.
+          argv: ['node', 'tools/judge-sweep.mjs',
+            '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+            '--pages', aPages.join(',')],
+        });
       }
-      return [{
-        role: 'tool',
-        label: 'judge-sweep',
-        job: 'judgement',
-        covers: ['all'],
-        timeout: 43200,
-        // argv, so there is nothing to quote and nothing to parse. The engine
-        // writes the result record when this exits zero.
-        argv: ['node', 'tools/judge-sweep.mjs',
-          '--ledger', `research/${ctx.run}-judge.jsonl`,
-          '--cost', `research/${ctx.run}-judge-cost.jsonl`,
-          '--pages', aPages.join(',')],
-      }];
+      for (const g of alphaGroups(ctx)) {
+        if (!pendingUnits.includes(String(g.label))) continue;
+        plans.push({
+          role: 'alpha-group-read',
+          label: String(g.label),
+          job: 'audit',
+          covers: [String(g.label)],
+          brief: 'briefs/alpha.md',
+          task: [`research/${ctx.run}-alpha-${g.label}-step7-read.task.md`, 'briefs/tasks/alpha-step7-read.md'],
+          outputSchema: 'briefs/schemas/step8-context.json',
+          resultArtifact: `research/${ctx.run}-alpha-${g.label}-step8-context.json`,
+          // The home survives this dispatch. `8-adjudicate` resumes the
+          // conversation started here, so the group Alpha adjudicates holding
+          // the reading it did, not a file describing it.
+          sessionHome: sessionHome(ctx, String(g.label)),
+          timeout: 21600,
+        });
+      }
+      return plans;
     },
     // The sweep exiting zero says the tool ran. It does not say every item got a
     // verdict from both lanes, and on frontier-14 it did not: the stage cleared
@@ -1488,7 +1987,18 @@ export const stages = [
     //
     // Rejections are expected here — nothing has adjudicated anything yet — so
     // they are warnings at this one stage and hard errors everywhere after.
-    gates: (ctx) => [closureGate(ctx, { allowUnadjudicated: true })],
+    //
+    // The digest gate is what stops the reading from being a formality: a schema
+    // -valid object with nothing in it exits zero, so the check is against the
+    // group's real size. It deliberately does NOT require a nonempty `concerns`
+    // list — a careful reading that finds nothing thin is a result, and failing
+    // it would teach the lane to manufacture concerns.
+    gates: (ctx) => [
+      closureGate(ctx, { allowUnadjudicated: true }),
+      gate('step8-digests', ['node', 'tools/step8-scope.mjs', 'digests', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
+      }),
+    ],
     // A judge lane can die wholesale without a single verdict being wrong —
     // frontier-15 lost all 392 Terra calls to a 429 boot stampede while
     // DeepSeek answered everything. The re-sweep is mechanical, and the
@@ -1496,6 +2006,32 @@ export const stages = [
     // rounds; a lane that nulls twice is a platform problem for a person.
     maxFixRounds: 2,
     onGateFailure: async (args: any) => {
+      // A thin or missing digest is re-read, not reported. The dispatch that
+      // produced it exited zero, so unit coverage will not re-drive it on its
+      // own — this hook is the only route back.
+      if (args.failure.id === 'step8-digests') {
+        for (const g of alphaGroups(args.ctx)) {
+          args.executor.start(args.stage, {
+            role: 'alpha-group-read',
+            // Not `<label>` alone: that matches the stage pattern, and a repair
+            // round must not be mistaken for the unit's own coverage.
+            label: `read-again-${g.label}-${args.round}`,
+            job: 'audit',
+            covers: [],
+            brief: 'briefs/alpha.md',
+            task: [`research/${args.ctx.run}-alpha-${g.label}-step7-read.task.md`, 'briefs/tasks/alpha-step7-read.md'],
+            outputSchema: 'briefs/schemas/step8-context.json',
+            resultArtifact: `research/${args.ctx.run}-alpha-${g.label}-step8-context.json`,
+            // Same home, so the re-read CONTINUES the group's conversation
+            // rather than starting a rival one. Step 8 resumes whichever thread
+            // this home holds, and there must only ever be one per group.
+            sessionHome: sessionHome(args.ctx, String(g.label)),
+            resumeSession: readSessionId(args.ctx, String(g.label)) ?? undefined,
+            timeout: 21600,
+          });
+        }
+        return;
+      }
       if (args.failure.id !== 'judge-closure') return;
       const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' } });
       // A lane down to an account limit is not a failed repair: report the
@@ -1524,31 +2060,115 @@ export const stages = [
       + 'the step-8 guard measures the next stage against.',
   },
 
+  // PARTITION STEP 8 ACROSS THE GROUP ALPHAS, AND GIVE EACH ONE ITS CONTENT.
+  //
+  // Mechanical, and ahead of the adjudicators for the same reason `2-assign` is
+  // ahead of the group stages: who owns which rejection is a function of files
+  // on disk, so it is code. `step8-scope.mjs render` writes the partition and
+  // one self-contained task file per group — the group's pages, every item it
+  // owns, the dependency edges that leave its boundary, and the exact rejection
+  // rows still owing an outcome.
   {
-    id: '8-adjudicate',
-    label: 'fatal-only adjudication',
+    id: '8-scope',
+    label: 'partition step-8 adjudication by group (mechanical)',
     units: () => ['all'],
-    pattern: resultPattern('alpha', 'step8-[a-z-]+'),
+    pattern: resultPattern('tool', 'step8-scope'),
+    artifacts: (ctx) => `research/${ctx.run}-step8-scope.json`,
     concurrency: 1,
     plan: (ctx) => [{
-      role: 'alpha',
-      label: 'step8-lead',
-      job: 'adjudication',
+      role: 'tool',
+      label: 'step8-scope',
+      job: 'bookkeeping-mechanical',
       covers: ['all'],
-      brief: "briefs/alpha.md",
-      task: `research/${ctx.run}-alpha-step8.task.md`,
-      timeout: 21600,
+      argv: ['node', 'tools/step8-scope.mjs', 'render', '--run', ctx.run],
     }],
+    // Not waived, and it is not the same check as `artifacts`: the render can
+    // write a scope whose groups no longer match the assignment on disk, or a
+    // rejection belonging to no batch manifest — which nobody would adjudicate.
     gates: (ctx) => [
+      gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
+      }),
+      // PLACEHOLDER-FREE BY CONSTRUCTION: with no repairs the ledger is absent
+      // and this passes reporting zero, which is the truth. It only bites once an
+      // Alpha has edited published content.
+      publishedGate(ctx),
+      // `7-judge` immediately before this stage already proved complete paired
+      // coverage and no content-writing stage intervenes. Recomputing all exact
+      // context hashes here was the same closure check over the same bytes.
+    ],
+  },
+
+  // STEP 8 IS PARTITIONED BY GROUP (owner, 2026-08-25).
+  //
+  // It was one lead Alpha, `units: ['all']`, `concurrency: 1`, one task file
+  // that named no mathematics. On a 796-item level in nine categories that is
+  // one reader for every rejection in every subject, and the last ones it reads
+  // are read with the least attention left. Steps 3 and 6 decided the same
+  // question the other way years of runs ago: one Alpha per <=3 batches,
+  // assigned by `2-assign` for mathematical relatedness rather than position.
+  // Step 8 now uses that same partition, and the same `alphaCohort`.
+  //
+  // Each group Alpha resumes the read-only conversation it began alongside the
+  // Step-7 sweep. This carries a rejection-blind mathematical reading into the
+  // adjudication without reusing the Step-3/Step-6 conversation that already
+  // approved the proof. If no durable session id was recorded, dispatch falls
+  // back to a fresh conversation using the rendered task file from `8-scope`.
+  //
+  // READ SCOPE IS THE WHOLE LIBRARY, WRITE SCOPE IS THE GROUP. The sandbox is
+  // the repository root, so every Alpha can open any published item and any
+  // item this run has built — necessary, because a citation objection is
+  // adjudicated by reading the cited item, wherever it lives. Repairs stay
+  // inside the group's own batches; a defect found in another group's item is
+  // recorded in `<run>-step8-cross-group.jsonl` and the `step8-scope` gate
+  // fails until the owning group answers it.
+  //
+  // The pattern also changes, and the old one was wrong. It read
+  // `resultPattern('alpha', ...)` while the plan dispatched role
+  // `alpha-adjudicate` — introduced 2026-08-24 and never run — so
+  // `alpha-adjudicate-step8-lead.result.json` matched nothing and the stage
+  // would have re-dispatched a completed adjudication forever.
+  {
+    id: '8-adjudicate',
+    label: 'fatal-only adjudication (group Alphas)',
+    units: batches,
+    cohort: alphaCohort,
+    pattern: resultPattern('alpha-adjudicate', 'step8-[a-z]+'),
+    concurrency: 4,
+    plan: (ctx, pendingUnits) => alphaGroups(ctx)
+      .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
+      .map((g: any) => ({
+        role: 'alpha-adjudicate',
+        label: `step8-${g.label}`,
+        job: 'adjudication',
+        covers: g.covers,
+        brief: "briefs/alpha.md",
+        // The rendered per-group file first. The generic one is the fallback
+        // for a repair round firing before `8-scope` has re-rendered, and it
+        // tells the reader to look its own label up in the scope file.
+        task: [`research/${ctx.run}-alpha-${g.label}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
+        // RESUME THE STEP-7 READER RATHER THAN SPAWN A NEW AGENT. Same
+        // conversation, now with write access — `codex exec resume` picks the
+        // sandbox again, which one `codex exec` cannot do. If the reader left no
+        // usable session the fields are empty and this is an ordinary fresh
+        // dispatch working from the rendered file, which is strictly worse but
+        // not broken.
+        sessionHome: readSessionId(ctx, g.label) ? sessionHome(ctx, String(g.label)) : undefined,
+        resumeSession: readSessionId(ctx, g.label) ?? undefined,
+        timeout: 21600,
+      })),
+    gates: (ctx) => [
+      // The partition is re-checked here, not only at `8-scope`: the group
+      // Alphas are what write the cross-group findings, so the direction that
+      // says "the owning group answered it" can only fail after they have run.
+      gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run], {
+        liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
+      }),
       // Verified against the real tool: it takes a touch ledger, a baseline
       // label and the adjudication ledger — NOT --run. The first version of
       // this file guessed --run from memory and would have failed the stage
       // after burning two agent attempts.
-      gate('step8-guard', ['node', 'tools/step8-guard.mjs',
-        '--touches', touchesPath(ctx),
-        '--baseline', 'pre-step8',
-        '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`]),
-      ...repoWide(ctx),
+      step8GuardGate(ctx),
       // step8-guard checks one direction only: that every EDIT was licensed by a
       // fatal row. Nothing checked the other direction — that every REJECTION got
       // an outcome — so sixteen rejections on one batch were never read and the
@@ -1558,13 +2178,6 @@ export const stages = [
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
       closureGate(ctx, { pendingRejudge: true }),
-      ledgerGate(ctx),
-      // Repairs rewrite proofs, so the contract gates re-verify here — a fatal
-      // repair whose new proof breaks its own input map must not wait for
-      // 9-scope to surface. Repairs update the OWNING BATCH contract; the merge
-      // re-derives from batch files, so a merged-only edit is resurrected
-      // stale (frontier-14's step 9 did exactly that).
-      ...contractGates(ctx, { reviewed: true }),
     ],
     // THE FATAL-REPAIR LOOP.
     //
@@ -1577,62 +2190,186 @@ export const stages = [
     // A fatal defect that needs authoring is still work. It gets dispatched.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
-      // A fatal repair rewrites a proof, and a rewritten proof recomputes its
-      // risk tier and can trip the boundary and citation detectors — the
-      // contract-audit family, which routes to the same Alpha lane 6b uses.
-      // The first live step 8 hit exactly this: the both-lanes fatal's
-      // rewritten proof came back critical-risk with no risk_review, and the
-      // hook — which then handled only open fatals — spent the round doing
-      // nothing. The label is deliberately NOT `step8-*` (the stage pattern
-      // would mistake the repair for the adjudication) and NOT 6b's
-      // `risk-review-*` (those result files already exist in this dispatch
-      // dir and the names must not collide).
-      if (['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
-        executor.start(stage, {
-          role: 'alpha',
-          label: `adjudicate-risk-review-${round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
-          timeout: 3600,
-        });
+      // ALERT THE OWNING GROUP (owner, 2026-08-25). "If an Alpha discovers a
+      // defect belonging to a different group, it must alert that group's Alpha."
+      // The finding is already recorded and the gate already refuses to close
+      // over it — but a gate that blocks and dispatches nobody spends a round
+      // doing nothing and ends in a blocker for a person, which is not an alert.
+      // This is the alert: the engine reads `owning_group` off each unanswered
+      // finding and re-dispatches exactly those groups. The raiser never repairs
+      // it, so the item is only ever edited by the Alpha holding its conventions.
+      if (failure.id === 'step8-scope') {
+        refreshStep8Scope(ctx);
+        const openAlerts = readOpenAlerts(ctx);
+        const targetJudgeIds = [...new Set(openAlerts
+          .filter((alert) => alert.needs_judge && !alert.judge_started).map((alert) => alert.item))];
+        if (targetJudgeIds.length) {
+          executor.start(stage, {
+            role: 'tool', label: `alert-target-judge-round-${round}`, job: 'judgement', covers: [], timeout: 43200,
+            argv: ['node', 'tools/step8-rejudge-cycle.mjs', '--run', ctx.run,
+              '--ledger', `research/${ctx.run}-judge.jsonl`,
+              '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+              '--items', targetJudgeIds.join(','), '--kind', 'alert'],
+          });
+        }
+        const owed = openAlerts
+          .filter((alert) => !alert.needs_judge || alert.judge_started)
+          .map((alert) => String(alert.owning_group)).filter(Boolean);
+        for (const g of [...new Set(owed)]) {
+          startStep8Group(ctx, executor, stage, {
+            label: `cross-group-${g}-round-${round}`,
+            job: 'adjudication',
+            task: [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
+            timeout: 21600,
+          }, g);
+        }
         return;
       }
       const closure = readClosure(ctx);
       if (failure.id === 'judge-closure' && (closure?.unadjudicated?.length ?? 0) > 0) {
-        // The initial Alpha can miss rejection rows even though its stage result
-        // covers `all`. The receipt's exact id/model/context work units scope a
-        // recovery Alpha without repeating the completed adjudications. Legacy
-        // receipts retain the id summary, from which the task reconstructs the
-        // missing exact keys against the two append-only ledgers.
-        executor.start(stage, {
-          role: 'alpha',
-          label: `adjudicate-closure-recovery-${round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: 'briefs/tasks/alpha-step8-closure-recovery.md',
-          timeout: 21600,
-        });
+        refreshStep8Scope(ctx);
+        // A group Alpha can miss rejection rows even though its stage result
+        // covers its batches. The receipt's exact id/model/context work units
+        // scope a recovery Alpha without repeating the completed adjudications.
+        // Legacy receipts retain the id summary, from which the task
+        // reconstructs the missing exact keys against the two append-only
+        // ledgers.
+        //
+        // Routed back to the OWNING group for the same reason a repair is: an
+        // unadjudicated rejection is a decision about that batch's mathematics,
+        // and the group Alpha is the reader holding its conventions.
+        for (const g of step8Owners(ctx, closure!.unadjudicated)) {
+          startStep8Group(ctx, executor, stage, {
+            label: g ? `adjudicate-closure-recovery-${g}-${round}` : `adjudicate-closure-recovery-${round}`,
+            job: 'adjudication',
+            // Candidate resolution takes the FIRST file that exists, so a list
+            // that led with the group's ordinary step-8 file would silently
+            // discard the reconstruction instructions this round exists for.
+            // `8-scope` renders a per-group RECOVERY file — the same derived
+            // context with the recovery brief as its body — so the group Alpha
+            // gets both. The shared brief is the fallback if that render is
+            // stale, and the whole of it when there is no partition.
+            task: g
+              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
+              : 'briefs/tasks/alpha-step8-closure-recovery.md',
+            timeout: 21600,
+          }, g);
+        }
         return;
       }
       const ids = closure?.open_fatal ?? [];
       if (!ids.length) return;              // gate failed on something else
+      refreshStep8Scope(ctx);
+      // A FATAL REPAIR GOES BACK TO THE GROUP THAT OWNS THE ITEM. The item's
+      // group Alpha is the one holding that batch's conventions, its seams and
+      // its own adjudication of the rejection; sending an open fatal to whoever
+      // happens to be free is how a repair gets made against the wrong
+      // convention. `<run>-step8-scope.json` carries the item -> group map, and
+      // it is stable: which batch owns an item does not change mid-run.
+      //
       // The task points at the closure RECEIPT, never at a transcribed id list.
       // Copying a list of findings into a prompt is how eleven of them went
       // missing once already.
-      executor.start(stage, {
-        role: 'alpha',
-        // Deliberately not `step8-*`: the stage pattern matches `step8-` result
-        // files, and a repair must not be mistaken for the adjudication itself.
-        label: `repair-8-round-${round}`,
-        job: 'authoring',
-        covers: ['all'],
-        brief: "briefs/alpha.md",
-        task: [`research/${ctx.run}-alpha-repair.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
-        timeout: 21600,
-      });
+      //
+      // The old candidate list led with `<run>-alpha-repair.task.md`, which has
+      // not been rendered since `run-tasks.mjs` replaced the hand-written task
+      // files — `briefs/tasks/` has no `alpha-repair.md`. The reference resolved
+      // to nothing and silently fell through to the step-8 file, so it is gone
+      // rather than left looking load-bearing.
+      for (const g of step8Owners(ctx, ids)) {
+        startStep8Group(ctx, executor, stage, {
+          // Deliberately not `step8-<label>`: the stage pattern matches those,
+          // and a repair must not be mistaken for the adjudication itself.
+          label: g ? `repair-8-${g}-round-${round}` : `repair-8-round-${round}`,
+          job: 'authoring',
+          task: g
+            ? [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`]
+            : [`research/${ctx.run}-alpha-step8.task.md`],
+          timeout: 21600,
+        }, g);
+      }
+    },
+  },
+
+  // CHECK EVERY LICENSED REPAIR BEFORE BUYING ITS NEW VERDICTS. This is a
+  // separate non-judge budget: a stale proof contract, dependency typo or risk
+  // receipt can be repaired without consuming either of Step 8's two judge
+  // cycles, and its final text is what the judges then receive.
+  {
+    id: '8-preflight',
+    label: 'verify Step-8 repairs before rejudge',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step8-preflight'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'step8-preflight',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/step8-cutover.mjs', 'prepare', '--run', ctx.run,
+        '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)],
+    }],
+    gates: (ctx) => hasCompletedHistoricalRejudge(ctx)
+      ? [
+          gate('step8-cutover-frozen', ['node', 'tools/step8-cutover.mjs', 'check', '--run', ctx.run,
+            '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)]),
+          step8GuardGate(ctx),
+          ...repoWide(ctx),
+          ...contractGates(ctx, { reviewed: true }),
+          ledgerGate(ctx),
+        ]
+      : [
+          step8GuardGate(ctx),
+          ...repoWide(ctx),
+          ...contractGates(ctx, { reviewed: true }),
+          ledgerGate(ctx),
+          closureGate(ctx, { pendingRejudge: true }),
+        ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      // `judge-closure` has a mechanical full-sweep repair in Step 7. It is
+      // deliberately excluded here: preflight's closure allowance means any
+      // remaining failure is an adjudication/repair decision, and buying
+      // verdicts before that decision merely makes them stale again.
+      const mechanical = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
+      if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
+      const needsAgent = failures.some((entry: any) => entry.id === 'judge-closure' || !MECHANICAL_REPAIRS[entry.id]);
+      if (mechanical.outcome === 'clean' && !needsAgent) return;
+      refreshStep8Scope(ctx);
+      const closure = failures.some((entry: any) => entry.id === 'judge-closure') ? readClosure(ctx) : null;
+      const routeEvidence = {
+        output: `${failures.map((entry: any) => `${entry.output ?? ''}\n${entry.why ?? ''}`).join('\n')}\n${mechanical.stderr ?? ''}`,
+        why: '',
+      };
+      const named = [...new Set([
+        ...itemsFromGateFailure(routeEvidence),
+        ...(closure?.unadjudicated ?? []),
+        ...(closure?.open_fatal ?? []),
+      ])];
+      // An exact id routes to its owning resumed group. A gate that provides no
+      // id gets one focused reviewer, not four whole-group rereads.
+      const owners = named.length ? step8Owners(ctx, named) : [null];
+      for (const g of owners) {
+        const recoveringRejection = (closure?.unadjudicated?.length ?? 0) > 0;
+        startStep8Group(ctx, executor, stage, {
+          label: g ? `step8-preflight-${g}-${round}` : `step8-preflight-review-${round}`,
+          job: 'adjudication',
+          task: hasCompletedHistoricalRejudge(ctx)
+            ? (g
+              ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
+              : 'briefs/tasks/alpha-step8-close.md')
+            : recoveringRejection
+            ? (g
+              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
+              : 'briefs/tasks/alpha-step8-closure-recovery.md')
+            : (g
+              ? [`research/${ctx.run}-alpha-${g}-step8-preflight.task.md`, 'briefs/tasks/alpha-step8-preflight.md']
+              : 'briefs/tasks/alpha-step8-preflight.md'),
+          timeout: 7200,
+        }, g);
+      }
     },
   },
 
@@ -1648,8 +2385,20 @@ export const stages = [
     units: () => ['all'],
     pattern: resultPattern('tool', 'rejudge'),
     concurrency: 1,
+    // The wrapper performs a paid-lane availability probe before fan-out. A
+    // failed probe is a blocker, not a reason for the engine to repeat the same
+    // probe automatically before the account or service changes.
+    maxAttempts: 1,
     plan: (ctx) => {
-      const ids = readClosure(ctx)?.needs_rejudge ?? [];
+      // The closure receipt is computed over the RUN's scope, so a published item
+      // repaired at step 8 is not in it — the repair would ship unjudged, which
+      // is exactly what the owner's routing rule forbids. `judge-sweep --items`
+      // already accepts any authored item on disk (measured 2026-08-02, when an
+      // audit rejudge of 13 ids died on two long-published items), so the union
+      // needs no new machinery.
+      const published = readPublishedClosure(ctx);
+      const ids = [...new Set([...(readClosure(ctx)?.needs_rejudge ?? []),
+        ...(published ? published.needs_rejudge : readPublishedRepairs(ctx))])];
       return [{
         role: 'tool',
         label: 'rejudge',
@@ -1665,44 +2414,87 @@ export const stages = [
         // confirmed every rejection nonfatal and touched nothing. The closure
         // gate below is what decides whether that is true.
         argv: ids.length
-          ? ['node', 'tools/judge-sweep.mjs',
+          ? ['node', 'tools/step8-rejudge-cycle.mjs', '--run', ctx.run,
             '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
-            '--items', ids.join(',')]
+            '--items', ids.join(','), '--kind', 'initial']
           : ['node', '-e', 'console.log("rejudge: nothing repaired since the sweep")'],
       }];
     },
     // No allowances. Every item has a current pair, every current rejection has
     // an outcome, and no outcome is fatal — or this stage is not finished.
-    // step8-guard runs here too: the repair loop below dispatches an
-    // adjudicate-and-repair Alpha up to three times INSIDE the pre-step8
-    // window, and without the guard those edits were never measured against
-    // the fatal-only rule. Contract gates for the same reason as 8-adjudicate.
+    // This stage owns judge closure and ONLY judge closure. Non-judge repair
+    // integrity has its own preflight/close stages and its own budget, so a
+    // proof-contract row can never trigger or consume a judge round.
     gates: (ctx) => [
-      gate('step8-guard', ['node', 'tools/step8-guard.mjs',
-        '--touches', touchesPath(ctx),
-        '--baseline', 'pre-step8',
-        '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`]),
-      ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
-      ledgerGate(ctx),
+      step8GuardGate(ctx),
+      // The terminal check on the published route: this stage is where the
+      // repaired published items were actually swept, so this is where "both
+      // lanes returned a current verdict" is a statement about work that has
+      // happened rather than work that was planned.
+      publishedGate(ctx),
+      closureGate(ctx),
     ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
-    // adjudicating and possibly repairing again. That is a real convergence
-    // loop and it is bounded: past the cap the gate still blocks and a person
-    // reads the blocker. Fatal repairs being uncapped is a rule about what may
-    // be edited, not a licence to spend without limit unattended.
-    maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt = null }) => {
+    // adjudicating and possibly repairing again. Two distinct frozen contexts
+    // per item are the lifetime ceiling: after that the blocker is resolved by
+    // the owner or supervising session under an exact-hash terminal receipt,
+    // never by a third judge cycle.
+    maxFixRounds: 2,
+    terminalFixBudget: true,
+    onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {
       const closure = readClosure(ctx);
-      if (!closure || closure.closed) return;
+      const published = readPublishedClosure(ctx);
+      if (!closure && !published) return;
 
-      // The gate fails for two different reasons and they need different work.
-      //
-      // Items with no current pair need JUDGING, which is mechanical — a repair
-      // round can edit further items, and dispatching an adjudicator at them
-      // would be asking a model to read verdicts that do not exist yet. Judge
-      // first; adjudicate what comes back on the next round.
-      if (closure.needs_rejudge?.length) {
+      // Decide every rejection already on disk before buying another verdict.
+      // Frontier-18 had current unadjudicated rows and repaired items together;
+      // the old order swept first, then adjudicated those pre-existing rows,
+      // spending a judge pass that could not help close them.
+      const runContested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
+      const publishedContested = [...new Set([...(published?.unadjudicated ?? []), ...(published?.open_fatal ?? [])])];
+      const contested = [...new Set([...runContested, ...publishedContested])];
+      if (contested.length) {
+        const fatalCounts = fatalAdjudicationCounts(ctx);
+        const exhausted = contested.filter((id) => (fatalCounts.get(id) ?? 0) >= 2);
+        for (const id of exhausted) {
+          const message = `${id}: two distinct frozen contexts were adjudicated confirmed_fatal at Step 8; intervention is required and no third adjudication/rejudge cycle is permitted`;
+          if (executor.state.addBlocker(stage.id, message, `step8-two-fatal:${id}`))
+            executor.reporter.notify('blocked', message, { stage: stage.id, item: id });
+        }
+        const liveContested = contested.filter((id) => !exhausted.includes(id));
+        if (!liveContested.length) return;
+        refreshStep8Scope(ctx);
+        const liveRunContested = runContested.filter((id) => liveContested.includes(id));
+        const livePublishedContested = publishedContested.filter((id) => liveContested.includes(id));
+        const owners = [...new Set([
+          ...(liveRunContested.length ? step8Owners(ctx, liveRunContested) : []),
+          ...publishedRepairOwners(ctx, livePublishedContested),
+        ])];
+        for (const g of owners) {
+          startStep8Group(ctx, executor, stage, {
+            label: g ? `adjudicate-rejudge-${g}-round-${round}` : `adjudicate-rejudge-round-${round}`,
+            job: 'adjudication',
+            task: g
+              ? (((closure?.unadjudicated?.length ?? 0) > 0 && runContested.some((id) => (closure?.unadjudicated ?? []).includes(id)))
+                ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, `research/${ctx.run}-alpha-${g}-step8.task.md`]
+                : [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`])
+              : [`research/${ctx.run}-alpha-step8.task.md`],
+            timeout: 21600,
+          }, g);
+        }
+        return;
+      }
+
+      // With all existing decisions closed, items with no current pair need
+      // JUDGING. The same union includes published repairs outside run scope.
+      // The same union the stage's own plan takes, and for the same reason: a
+      // published item repaired during THIS repair loop is outside the run's
+      // scope, so the closure receipt will never name it, and the lane that must
+      // certify it is the one being dispatched right here.
+      const owed = [...new Set([...(closure?.needs_rejudge ?? []), ...(published?.needs_rejudge ?? [])])];
+      if (owed.length) {
         // The rejudge sweep runs as an ASYNC dispatch, so its outage shows up
         // one round late: if everything the PREVIOUS round's sweep produced was
         // outage-signature nulls, the lane is down — report it rather than
@@ -1715,51 +2507,142 @@ export const stages = [
           job: 'judgement',
           covers: [],                       // declares no coverage: this is extra work, not the stage's unit
           timeout: 43200,
-          argv: ['node', 'tools/judge-sweep.mjs',
+          argv: ['node', 'tools/step8-rejudge-cycle.mjs', '--run', ctx.run,
             '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
-            '--items', closure.needs_rejudge.join(',')],
+            '--items', owed.join(','), '--kind', 'repair'],
         });
         return;
       }
 
-      // Everything is judged; what is left is a decision about a rejection, or a
-      // fatal defect to repair. Both belong to Alpha.
-      executor.start(stage, {
-        role: 'alpha',
-        label: `adjudicate-rejudge-round-${round}`,
-        job: 'adjudication',
-        covers: ['all'],
-        brief: "briefs/alpha.md",
-        task: [`research/${ctx.run}-alpha-rejudge.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
-        timeout: 21600,
-      });
+      // No contested rows and no missing pairs: a non-closure failure belongs
+      // to 8-preflight/8-close and may not consume this terminal judge budget.
     },
+  },
+
+  // FINAL NON-JUDGE STEP-8 INTEGRITY. Full repository, contract and
+  // defect-ledger checks run once on the final live state. The Alpha audit
+  // receipt does not exist until 9-receipt, so full `level-coverage` cannot
+  // honestly run here; `8-final` below closes exact judge currency instead.
+  // Repair rounds here may update receipts or contracts only. The task makes
+  // an item edit a visible blocker because the two-cycle judge stage is
+  // already closed.
+  {
+    id: '8-close',
+    label: 'final Step-8 integrity closure',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step8-close-scope'),
+    artifacts: (ctx) => `research/${ctx.run}-step8-scope.json`,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'step8-close-scope', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: hasCompletedHistoricalRejudge(ctx)
+        ? ['node', '-e', 'console.log("step8 close: frozen cutover already ran the final integrity battery")']
+        : ['node', 'tools/step8-scope.mjs', 'render', '--run', ctx.run],
+    }],
+    gates: (ctx) => hasCompletedHistoricalRejudge(ctx)
+      ? [gate('step8-cutover-frozen', ['node', 'tools/step8-cutover.mjs', 'check', '--run', ctx.run,
+          '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)])]
+      : [
+          step8GuardGate(ctx),
+          publishedGate(ctx),
+          ...repoWide(ctx),
+          ...contractGates(ctx, { reviewed: true }),
+          ledgerGate(ctx),
+        ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      const mechanical = await mechanicalRepair({ ctx, failure });
+      if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
+      const needsAgent = failures.some((entry: any) => !MECHANICAL_REPAIRS[entry.id]);
+      if (mechanical.outcome === 'clean' && !needsAgent) return;
+      refreshStep8Scope(ctx);
+      const named = itemsFromGateFailure({
+        output: `${failures.map((entry: any) => `${entry.output ?? ''}\n${entry.why ?? ''}`).join('\n')}\n${mechanical.stderr ?? ''}`,
+        why: '',
+      });
+      // Final closure never turns an unscoped detector message into four
+      // duplicated whole-group reviews. One focused reviewer diagnoses the
+      // residue; exact item failures still go to their owning conversation.
+      const owners = named.length ? step8Owners(ctx, named) : [null];
+      for (const g of owners) {
+        startStep8Group(ctx, executor, stage, {
+          label: g ? `step8-close-${g}-${round}` : `step8-close-review-${round}`,
+          job: 'adjudication',
+          task: g
+            ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
+            : 'briefs/tasks/alpha-step8-close.md',
+          timeout: 7200,
+        }, g);
+      }
+    },
+  },
+
+  // HARD MATHEMATICAL CLOSE. Integrity repair is now drained; recompute exact
+  // judge currency once against those final bytes. There is deliberately no
+  // repair hook and no round budget here. A failure means a post-budget item
+  // edit, missing verdict, unadjudicated rejection or open fatal, each of which
+  // requires the supervising session/owner under the terminal-resolution rule
+  // rather than an implicit third judge cycle.
+  {
+    id: '8-final',
+    label: 'final Step-8 mathematical currency',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step8-final-currency'),
+    concurrency: 1,
+    plan: () => [{
+      role: 'tool', label: 'step8-final-currency', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', '-e', 'console.log("step8 final currency boundary")'],
+    }],
+    gates: (ctx) => [
+      step8GuardGate(ctx),
+      publishedGate(ctx),
+      closureGate(ctx),
+    ],
+  },
+
+  {
+    id: '8-freeze',
+    label: 'freeze the closed Step-8 item state',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-after-step8-close'),
+    artifacts: (ctx) => touchesPath(ctx),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'snap-after-step8-close', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8'],
+    }],
+    gatesWaived: 'The preceding 8-final stage validated exact mathematical currency and this immediately following '
+      + 'mechanical snapshot freezes that exact item state for Step 9; its artifact existence is required.',
   },
 
   {
     id: '9-scope',
-    label: 'scope-denial sweep',
+    label: 'scope-denial delta review',
     units: () => ['all'],
-    // The sweep's ONLY deliverable is prose about declined results — without
-    // this line an Alpha that exits 0 writing nothing clears the richness
-    // stage.
     artifacts: (ctx) => `research/${ctx.run}-alpha-step9.md`,
-    pattern: resultPattern('(?:alpha|orchestrator)', 'step9-[a-z-]+'),
+    pattern: resultPattern('(?:alpha|tool)', 'step9-[a-z-]+'),
     concurrency: 1,
-    // The post-step8 snapshot rides in front of the Alpha (concurrency 1 keeps
-    // the order): without it, everything from `pre-step8` onward collapsed
-    // into one blind window — step 8's five repairs and step 9's six builds
-    // were invisible to `touchlog report/audit`, and step 10 had to assemble
-    // the twice-touched account from prose. Guarded on `pending`: a resumed
-    // run whose step-9 work is already covered must not mint a "post-step8"
-    // snapshot of a later tree.
+    // Step 3 stores one hash-bound decision per decline.  Capture the delta
+    // before refreshing those receipts: old runs therefore review everything,
+    // while future runs spend Alpha time only where the row, page closure, or
+    // destination changed.  The final register remains complete and is
+    // rendered mechanically after the Alpha has resolved every pending row.
     plan: (ctx, pending) => (pending.length ? [{
       role: 'tool',
       label: 'snap-post-step8',
       job: 'bookkeeping-mechanical',
       covers: [],
       argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8'],
+    }, {
+      role: 'tool', label: 'step9-scope-delta', job: 'bookkeeping-mechanical', covers: [],
+      argv: ['node', 'tools/scope-decisions.mjs', 'delta', '--run', ctx.run,
+        '--out', `research/${ctx.run}-step9-scope-delta.json`],
+    }, {
+      role: 'tool', label: 'step9-scope-refresh', job: 'bookkeeping-mechanical', covers: [],
+      argv: ['node', 'tools/scope-decisions.mjs', 'refresh', '--run', ctx.run, '--all'],
     }, {
       role: 'alpha',
       label: 'step9-lead',
@@ -1768,24 +2651,218 @@ export const stages = [
       brief: "briefs/alpha.md",
       task: `research/${ctx.run}-alpha-step9.task.md`,
       timeout: 14400,
+    }, {
+      role: 'tool', label: 'step9-scope-render', job: 'bookkeeping-mechanical', covers: [],
+      argv: ['node', 'tools/scope-decisions.mjs', 'render', '--run', ctx.run,
+        '--out', `research/${ctx.run}-alpha-step9.md`],
+    }, {
+      role: 'tool', label: 'step9-scope-snapshot', job: 'bookkeeping-mechanical', covers: [],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step9'],
     }] : []),
-    // Step 9 can BUILD items (frontier-14 added two), so everything it could
-    // have disturbed is re-checked, judge closure included.
-    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
-      ledgerGate(ctx)],
+    gates: (ctx) => [scopeDecisionsGate(ctx), ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
+      closureGate(ctx, { pendingRejudge: true }), ledgerGate(ctx)],
   },
 
-  // THE WHOLE-LEVEL RECEIPTS.
-  //
-  // `level-coverage` needs a spine receipt and a completed audit receipt. On
-  // frontier-14 neither existed: step 8 discovered at the very end that
-  // `<run>-audit-coverage.json` had never been generated by any stage, generated
-  // the empty template itself, and left 57 reconciliation reasons blank. Nothing
-  // owned the artifact, so nothing produced it.
-  //
-  // Filling it is cognitive — a reviewer attests to scope and reconciles every
-  // dependency drift with a concrete reason — so it is an Alpha dispatch, and the
-  // gate is the receipt actually validating.
+  // EVERY STEP-9 MATHEMATICAL CHANGE RE-ENTERS CERTIFICATION.  The guarded hash
+  // delta includes both newly created items and edits to existing items.  Judge
+  // currency makes the latter just as important: a pass belongs to one frozen
+  // text, not to an id forever.  Only the exact changed set is swept.
+  {
+    id: '9-changes-judge',
+    label: 'certify Step 9 mathematical changes',
+    units: () => ['all'],
+    artifacts: (ctx) => [step9ChangesPath(ctx), step9ChangesScopePath(ctx)],
+    pattern: resultPattern('tool', 'step9-changes-index|step9-changes-judge'),
+    concurrency: 1,
+    plan: (ctx) => {
+      const ids = step9ChangesOnDisk(ctx);
+      return [{
+        role: 'tool',
+        label: 'step9-changes-index',
+        job: 'bookkeeping-mechanical',
+        covers: [],
+        argv: ['node', 'tools/step9-changes.mjs',
+          '--touches', touchesPath(ctx), '--baseline', 'post-step8',
+          '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+          '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx)],
+      }, {
+        role: 'tool',
+        label: 'step9-changes-judge',
+        job: 'judgement',
+        covers: ['all'],
+        timeout: 43200,
+        argv: ids.length
+          ? ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', ids.join(',')]
+          : ['node', '-e', 'console.log("step9 changes: nothing to judge")'],
+      }];
+    },
+    gates: (ctx) => [step9ChangesGate(ctx), ...repoWide(ctx),
+      ...contractGates(ctx, { reviewed: true }), step9ClosureGate(ctx), closureGate(ctx), ledgerGate(ctx)],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
+      if (failure.id === 'judge-closure' || failure.id === 'step9-judge-closure') {
+        const closure = failure.id === 'step9-judge-closure' ? readStep9Closure(ctx) : readClosure(ctx);
+        const needsJudge = closure?.needs_rejudge ?? [];
+        if (needsJudge.length) {
+          const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
+          if (reason) return { outage: { reason } };
+          executor.start(stage, {
+            role: 'tool', label: `step9-changes-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
+            argv: ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(',')],
+          });
+          return;
+        }
+        const contested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
+        const changed = new Set(readStep9Changes(ctx));
+        const local = contested.filter((id) => changed.has(id));
+        if (local.length) {
+          executor.start(stage, {
+            role: 'alpha', label: `step9-changes-adjudicate-${round}`, job: 'adjudication', covers: [],
+            brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step9-adjudicate.task.md`, timeout: 21600,
+          });
+        }
+        const carried = contested.filter((id) => !changed.has(id));
+        for (const g of step8Owners(ctx, carried)) if (carried.length) {
+          executor.start(stage, {
+            role: 'alpha', label: g ? `step9-carried-adjudicate-${g}-${round}` : `step9-carried-adjudicate-${round}`,
+            job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+            task: g
+              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
+              : 'briefs/tasks/alpha-step8-closure-recovery.md', timeout: 21600,
+          });
+        }
+        return;
+      }
+
+      const mechanical = await mechanicalRepair({ ctx, failure });
+      if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
+      if (mechanical.outcome !== 'unhandled') return;
+
+      if (['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
+        executor.start(stage, {
+          role: 'alpha', label: `step9-changes-contract-${round}`, job: 'adjudication', covers: [],
+          brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step9-adjudicate.task.md`, timeout: 21600,
+        });
+      }
+    },
+  },
+
+  // Finish all mechanically discoverable run repairs before the final Step-9
+  // stamp and receipts.  An impact repair may change item mathematics; the
+  // change receipt is therefore refreshed and the exact stale pair follows the
+  // same narrow recovery path before this stage can close.
+  {
+    id: '9-close',
+    label: 'mechanical run closers',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'close-splice'),
+    concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'close-splice', job: 'bookkeeping-mechanical', covers: ['all'], timeout: 600,
+      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'] }],
+    gates: (ctx) => [
+      gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
+      gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
+        '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+        '--receipt', `research/${ctx.run}-impact.json`]),
+      step9ChangesGate(ctx), step9ClosureGate(ctx), closureGate(ctx),
+    ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
+      if (failure.id === 'impact-receipt') {
+        await mechanicalRepair({ ctx, failure });
+        let pending = 0;
+        try {
+          const receipt = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-impact.json`), 'utf8'));
+          pending = (receipt.dispositions ?? []).filter((row: any) => !row?.status || row.status === 'pending').length;
+        } catch { pending = 1; }
+        if (pending) {
+          executor.start(stage, {
+            role: 'alpha', label: `impact-close-${round}`, job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+            task: [`research/${ctx.run}-alpha-impact-close.task.md`], timeout: 7200,
+          });
+          executor.start(stage, {
+            role: 'tool', label: `impact-close-snapshot-${round}`, job: 'bookkeeping-mechanical', covers: [],
+            argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), `post-step9-impact-round-${round}`],
+          });
+        }
+        return;
+      }
+      if (failure.id === 'step9-changes') {
+        executor.start(stage, {
+          role: 'tool', label: `step9-changes-refresh-${round}`, job: 'bookkeeping-mechanical', covers: [],
+          argv: ['node', 'tools/step9-changes.mjs', '--touches', touchesPath(ctx), '--baseline', 'post-step8',
+            '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+            '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx)],
+        });
+        return;
+      }
+      if (failure.id === 'judge-closure' || failure.id === 'step9-judge-closure') {
+        const closure = failure.id === 'step9-judge-closure' ? readStep9Closure(ctx) : readClosure(ctx);
+        const needsJudge = closure?.needs_rejudge ?? [];
+        if (needsJudge.length) {
+          const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
+          if (reason) return { outage: { reason } };
+          executor.start(stage, {
+            role: 'tool', label: `step9-close-rejudge-${round}`, job: 'judgement', covers: [], timeout: 43200,
+            argv: ['node', 'tools/judge-sweep.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+              '--cost', `research/${ctx.run}-judge-cost.jsonl`, '--items', needsJudge.join(',')],
+          });
+          return;
+        }
+        const contested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
+        const changed = new Set(readStep9Changes(ctx));
+        const local = contested.filter((id) => changed.has(id));
+        if (local.length) executor.start(stage, {
+          role: 'alpha', label: `step9-close-adjudicate-${round}`, job: 'adjudication', covers: [],
+          brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step9-adjudicate.task.md`, timeout: 21600,
+        });
+        const carried = contested.filter((id) => !changed.has(id));
+        for (const g of step8Owners(ctx, carried)) if (carried.length) executor.start(stage, {
+          role: 'alpha', label: g ? `step9-close-carried-${g}-${round}` : `step9-close-carried-${round}`,
+          job: 'adjudication', covers: [], brief: 'briefs/alpha.md',
+          task: g
+            ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
+            : 'briefs/tasks/alpha-step8-closure-recovery.md', timeout: 21600,
+        });
+        return;
+      }
+      const repair = await mechanicalRepair({ ctx, failure });
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+    },
+  },
+
+  // Stamp only after every Step-9 closer has finished changing mathematics.
+  // The stamp itself is excluded from guarded hashes, so it cannot make its own
+  // paired verdict stale.
+  {
+    id: '9-changes-stamp',
+    label: 'stamp certified Step 9 changes',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step9-changes-stamp'),
+    concurrency: 1,
+    plan: (ctx) => {
+      const ids = readStep9Changes(ctx);
+      return [{ role: 'tool', label: 'step9-changes-stamp', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ids.length
+          ? ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--items', ids.join(','), '--terminal-resolutions', terminalResolutionsPath(ctx),
+            '--apply', '--report', `research/${ctx.run}-step9-judge-stamps.json`]
+          : ['node', '-e', 'console.log("step9 changes: nothing to stamp")'] }];
+    },
+    gates: (ctx) => {
+      const ids = readStep9Changes(ctx);
+      return [step9ChangesGate(ctx), step9ClosureGate(ctx), closureGate(ctx),
+        ...(ids.length ? [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs',
+          '--ledger', `research/${ctx.run}-judge.jsonl`, '--items', ids.join(','),
+          '--terminal-resolutions', terminalResolutionsPath(ctx), '--verify'])] : [])];
+    },
+  },
+
+  // Whole-level receipts are deliberately last in Step 9.  They are cognitive
+  // attestations and lapse on later mathematical edits, so producing them
+  // before the impact closer or final Step-9 stamp caused guaranteed rework.
   {
     id: '9-receipt',
     label: 'whole-level audit and spine receipts',
@@ -1798,93 +2875,17 @@ export const stages = [
       label: 'receipts',
       job: 'audit',
       covers: ['all'],
-      brief: "briefs/alpha.md",
+      brief: 'briefs/alpha.md',
       task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`],
       timeout: 14400,
     }],
     gates: (ctx) => [levelCoverageGate(ctx)],
-    // The spine receipt LAPSES on any mathematical-content change after it is
-    // written — that is its design — so any edit between the receipts dispatch
-    // and this gate turns the stage permanently red with no path back. The
-    // receipts task already carries the regeneration commands; re-dispatch it.
     maxFixRounds: 2,
     onGateFailure: async ({ ctx, executor, stage, round }) => {
       executor.start(stage, {
-        role: 'alpha',
-        label: `receipts-fix-${round}`,
-        job: 'audit',
-        covers: [],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`],
-        timeout: 14400,
+        role: 'alpha', label: `receipts-fix-${round}`, job: 'audit', covers: [], brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`], timeout: 14400,
       });
-    },
-  },
-
-  // MECHANICAL CLOSERS, so the step-10 report stops being a to-do list.
-  // frontier-15's report ended with four disk-derivable chores for a person:
-  // a receipt one stage stale, un-propagated plan drift, an uncommitted tree,
-  // and prose-only external debts. Everything here is a function of files on
-  // disk or routes to the lane that owns the judgment (owner directive,
-  // 2026-08-17: the workflow fully closes a run at step 10).
-  {
-    id: '9-close',
-    label: 'mechanical run closers',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'close-splice'),
-    concurrency: 1,
-    plan: (ctx) => [{
-      role: 'tool',
-      label: 'close-splice',
-      job: 'bookkeeping-mechanical',
-      covers: ['all'],
-      timeout: 600,
-      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
-    }],
-    // splice-verify catches object drift the refresh should have propagated;
-    // impact-receipt fails while any consumer lacks a real disposition. The
-    // repair loop refreshes mechanically first (impact-receipt is in the
-    // MECHANICAL_REPAIRS table) and routes the residue — the dispositions —
-    // to the impact-close Alpha.
-    // closureGate: the impact-close Alpha's licence includes repairing a
-    // genuinely broken consumer, and a repaired item must rejudge — the
-    // post-sweep invariant (rejections are hard errors everywhere after 7)
-    // holds here exactly because this stage can edit items.
-    gates: (ctx) => [
-      gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
-      gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
-        '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
-        '--receipt', `research/${ctx.run}-impact.json`]),
-      closureGate(ctx),
-    ],
-    maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (failure.id === 'impact-receipt') {
-        // The refresh EXITS 0 by design (it refreshed), so its exit code says
-        // nothing about whether the gate can now pass — the first live round
-        // returned on 'clean' and never dispatched the Alpha. What decides is
-        // ON DISK: dispositions still pending after the refresh need the
-        // Alpha, in the SAME round.
-        await mechanicalRepair({ ctx, failure });
-        let pending = 0;
-        try {
-          const receipt = JSON.parse(readFileSync(join(ctx.repo, 'research', `${ctx.run}-impact.json`), 'utf8'));
-          pending = (receipt.dispositions ?? []).filter((d: any) => !d?.status || d.status === 'pending').length;
-        } catch { pending = 1; }
-        if (!pending) return;   // scope-only staleness: the refresh closed it
-        executor.start(stage, {
-          role: 'alpha',
-          label: `impact-close-${round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: [`research/${ctx.run}-alpha-impact-close.task.md`],
-          timeout: 7200,
-        });
-        return;
-      }
-      const repair = await mechanicalRepair({ ctx, failure });
-      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
     },
   },
 
@@ -1902,19 +2903,13 @@ export const stages = [
       covers: ['all'],
       argv: ['node', 'tools/defect-ledger.mjs', 'render'],
     }],
-    // THE TERMINAL GATE. This stage declared `gates: () => []`, and an empty gate
-    // list was read as "gates passed" — so the last stage of the pipeline could
-    // not fail. frontier-14 finished with `level-coverage` red, two unrepaired
-    // fatal defects and sixteen unread rejections, and the engine called it done.
-    //
-    // `validateStages` now refuses a terminal stage that waives its gates, so
-    // this cannot be removed by accident. Re-running the full receipt gate here
-    // rather than trusting 9-receipt is deliberate: it is the last thing that
-    // runs, on the final text, and it is what "the level is closed" means.
-    // The repo-wide invariants run once more for the same reason — step 10 is
-    // gates.mjs's last gate point for prosecheck/depsource, and step-9 edits
-    // land after 9-scope's own sweep.
-    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx, { terminal: true })],
+    // This is an early terminal-ledger closer, not yet a final-text check:
+    // pathway placement, pathway prose, and stamps still follow.  Re-running
+    // repo-wide and level coverage here used a full pass on a tree later stages
+    // could immediately supersede.  `10-readiness-v2` owns the first full
+    // final-text validation, and the read-only report integrity receipt lets
+    // `10-close-v2` safely reuse it on an unchanged protected tree.
+    gates: (ctx) => [closureGate(ctx), ledgerGate(ctx, { terminal: true })],
     // THE CONTRACT-REWORK LOOP (owner directive, 2026-08-17). `--no-open`
     // red on a contract-quality row with an owning batch — the rr-005 shape —
     // used to be a dead end: its recorded remedy is "the owning Beta rewrites
@@ -2004,8 +2999,11 @@ export const stages = [
   {
     id: '10-pathway-author-v2', label: 'Lead Alpha pathway rewrite', units: () => ['all'],
     artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
-    pattern: resultPattern('alpha', 'pathway-close-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'alpha', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
+    // Role `alpha-high` since 2026-08-24; the pattern still said `alpha`. No run
+    // has reached step 10 under the new lane, so there is no legacy result to
+    // keep matching and the correct single spelling is enough.
+    pattern: resultPattern('alpha-high', 'pathway-close-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'alpha-high', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
       brief: 'briefs/alpha.md',
       task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
     gates: (ctx) => [
@@ -2020,9 +3018,11 @@ export const stages = [
     plan: (ctx) => [{ role: 'tool', label: 'judge-stamps-v2', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
         '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+        '--terminal-resolutions', terminalResolutionsPath(ctx),
         '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
     gates: (ctx) => [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-      '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','), '--verify'], {
+      '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+      '--terminal-resolutions', terminalResolutionsPath(ctx), '--verify'], {
       liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
   },
   {
@@ -2034,14 +3034,49 @@ export const stages = [
     gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx, { terminal: true }),
       gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run, '--verify'])],
   },
+  // Reconcile the final receipts and append-only ledgers once.  The reporter
+  // receives this compact evidence packet instead of re-running gates or
+  // reconstructing fatal counts from prose; the exhaustive defect table is
+  // rendered mechanically from it.
   {
-    id: '10-owner-report-v2', label: 'evidence-bound owner report', units: () => ['all'],
+    id: '10-evidence-v2', label: 'mechanically reconciled owner evidence', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step10-evidence.json`,
+    pattern: resultPattern('tool', 'step10-evidence-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'step10-evidence-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/step10-report.mjs', 'evidence', '--run', ctx.run] }],
+    gates: (ctx) => [gate('step10-evidence', ['node', 'tools/step10-report.mjs', 'check-evidence', '--run', ctx.run])],
+  },
+  // Freeze the validated mathematical tree before asking for prose.  The next
+  // agent is kernel-enforced read-only and returns JSON; this receipt catches an
+  // out-of-band mutation as a hard failure rather than trusting that instruction.
+  {
+    id: '10-report-baseline-v2', label: 'freeze validated tree before reporting', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step10-report-integrity.json`,
+    pattern: resultPattern('tool', 'report-baseline-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'report-baseline-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/step10-report.mjs', 'snapshot', '--run', ctx.run] }],
+    gates: (ctx) => [gate('report-integrity', ['node', 'tools/step10-report.mjs', 'check', '--run', ctx.run])],
+  },
+  {
+    id: '10-owner-report-v2', label: 'read-only evidence-bound owner report', units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-step10-report.response.json`,
+    pattern: resultPattern('alpha-report', 'owner-report-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'alpha-report', label: 'owner-report-v2', job: 'reporting', covers: ['all'],
+      brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step10.task.md`, timeout: 10800,
+      outputSchema: 'briefs/schemas/step10-report.json', resultArtifact: `research/${ctx.run}-step10-report.response.json` }],
+    gates: (ctx) => [gate('step10-evidence', ['node', 'tools/step10-report.mjs', 'check-evidence', '--run', ctx.run]),
+      gate('report-response', ['node', 'tools/step10-report.mjs', 'check-response', '--run', ctx.run])],
+  },
+  {
+    id: '10-owner-report-render-v2', label: 'materialize owner report', units: () => ['all'],
     artifacts: (ctx) => `research/${ctx.run}-step10-report.md`,
-    pattern: resultPattern('alpha', 'owner-report-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'alpha', label: 'owner-report-v2', job: 'reporting', covers: ['all'],
-      brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step10.task.md`, timeout: 10800 }],
-    gates: (ctx) => [gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run,
-      '--verify', '--require-report']), closureGate(ctx)],
+    pattern: resultPattern('tool', 'owner-report-render-v2'), concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'owner-report-render-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/step10-report.mjs', 'render', '--run', ctx.run] }],
+    gates: (ctx) => [
+      gate('report-integrity', ['node', 'tools/step10-report.mjs', 'check', '--run', ctx.run]),
+      gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run, '--verify', '--require-report']),
+    ],
   },
 
   // THE CLOSE-OUT COMMIT — the new terminal stage (owner directive,
@@ -2068,40 +3103,28 @@ export const stages = [
       argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run],
     }],
     gates: (ctx) => [
-      // No liveness floor: zero obligation rows is a legitimately empty set
-      // (a run that owed nothing external), exactly like allowUnadjudicated
-      // at 7-judge. The tool's own summary line is the receipt that it ran.
+      // No liveness floor: zero obligation rows is a legitimately empty set.
       gate('obligations', ['node', 'tools/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
-      // The whole-level receipt and judge closure run once more here because
-      // this is now the LAST stage: what "the level is closed" means is that
-      // these pass on the exact tree the close-out commit captures.
-      levelCoverageGate(ctx), closureGate(ctx),
-      ledgerGate(ctx, { terminal: true }),
+      // `10-readiness-v2` already ran repo-wide, level coverage, judge closure,
+      // terminal ledger, and stamp validation, and its receipt sealed the tree
+      // on which those gates ran. The later report baseline independently
+      // protects the evidence/report interval. Together their cheap hash checks
+      // prove the validated inputs remain current instead of paying the same
+      // full scan again. Any unexpected mutation is an honest hard stop.
+      gate('report-integrity', ['node', 'tools/step10-report.mjs', 'check', '--run', ctx.run]),
       gate('publication-readiness', ['node', 'tools/publication-ready.mjs', '--run', ctx.run,
         '--verify', '--require-report']),
-      // The ledger is closed by here; this gate is what carries the closure
-      // into the FRONTMATTER the reader and the publish path see. frontier-15
-      // ended with every closure gate green and 0 of 398 items stamped — the
-      // owner ran apply-judge-stamps by hand on the VPS (2026-08-17). Fails
-      // on a licensed stamp the item does not carry, a pass block a current
-      // rejection contradicts, and any item without a current paired verdict.
-      gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs',
-        '--ledger', `research/${ctx.run}-judge.jsonl`,
-        '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-        '--verify'], {
-        liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' },
-      }),
-      // Last, so the commit the gate verifies includes anything a repair
-      // round wrote (an obligation closure, a late disposition, the stamps).
+      // Last, so the commit the gate verifies includes the rendered report and
+      // any obligation closure written in a repair round.
       gate('tree-clean', ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--check']),
     ],
-    // Two of these rounds are DESIGNED spends on a fresh run: the stamp
-    // round (judge-stamps writes frontmatter) and the commit round
-    // (tree-clean sweeps the stamps plus the close-commit's own result
-    // file). The remainder is headroom for real late dirt.
-    maxFixRounds: 4,
+    // The close-out commit deliberately dirties the tree with its own result
+    // file, so one clean-up/commit retry is expected. The remaining rounds are
+    // headroom for a real late obligation; a report-integrity mismatch is never
+    // auto-repaired because it signals an unexpected protected-tree mutation.
+    maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (failure.id === 'tree-clean' || failure.id === 'judge-stamps') {
+      if (failure.id === 'tree-clean') {
         const r = await mechanicalRepair({ ctx, failure });
         if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
         return;

@@ -1,0 +1,1181 @@
+[
+  {
+    "order": 397,
+    "id": "modules-substitution-and-prime-graphs",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Modules, Substitution and Prime Graphs",
+    "companion": "modules-substitution-and-prime-graphs-examples",
+    "requires": [
+      "erdos-hajnal-property-and-homogeneous-sets"
+    ],
+    "items": [
+      {
+        "id": "def-module-of-a-graph",
+        "kind": "definition",
+        "title": "Modules of a graph, and the trivial modules",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-module-criteria",
+        "kind": "lemma",
+        "title": "Three equivalent descriptions of a module: purity of every outside vertex, equality of outside neighbourhoods, and indistinguishability of the members",
+        "strategy": "Prove (i) implies (ii) implies (iii) implies (i) in a cycle. (i) says every $v\\notin M$ is complete or anticomplete to $M$; (ii) says $N(x)\\setminus M=N(y)\\setminus M$ for all $x,y\\in M$; (iii) says $vx\\in E$ iff $vy\\in E$ for all $x,y\\in M$ and $v\\notin M$. Each implication is a direct rewriting of the quantifiers; the empty module and the singletons satisfy all three vacuously.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "lem-modules-are-complement-invariant",
+        "kind": "lemma",
+        "title": "A vertex set is a module of $G$ exactly when it is a module of $\\overline G$",
+        "strategy": "For $v\\notin M$ the pair $(\\{v\\},M)$ is disjoint, so complementation exchanges complete with anticomplete and preserves purity. Apply the criterion of the module lemma in both directions, using $\\overline{\\overline G}=G$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-graph-isomorphism-and-complement",
+          "lem-purity-symmetry-and-complementation",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "lem-unions-of-components-and-of-anticomponents-are-modules",
+        "kind": "lemma",
+        "title": "Every union of connected components is a module, and so is every union of anticonnected components",
+        "strategy": "Let $M$ be a union of components and $v\\notin M$. The component of $v$ is disjoint from every component inside $M$, and distinct components are anticomplete, so $v$ is anticomplete to $M$. For anticomponents, distinct anticomponents are complete, so $v$ is complete to $M$; alternatively read the first statement in $\\overline G$ and apply complement invariance.",
+        "deps": [
+          "def-module-of-a-graph",
+          "cor-connected-components-partition-the-vertex-set",
+          "lem-components-are-anticomplete-and-anticomponents-complete",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "lem-modules-are-complement-invariant"
+        ]
+      },
+      {
+        "id": "lem-disjoint-modules-are-a-pure-pair",
+        "kind": "lemma",
+        "title": "Two disjoint nonempty modules form a complete or an anticomplete pair",
+        "strategy": "Let $M,N$ be disjoint nonempty modules. Every $x\\in M$ lies outside $N$, so $x$ is complete or anticomplete to $N$. If some $x$ were complete and some $x'$ anticomplete, pick $y\\in N$: then $yx\\in E$ and $yx'\\notin E$, contradicting that $y\\notin M$ is pure to $M$. So all vertices of $M$ agree, giving $(M,N)$ complete or anticomplete.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-module-criteria",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "lem-intersection-of-two-modules-is-a-module",
+        "kind": "lemma",
+        "title": "The intersection of two modules is a module",
+        "strategy": "Take $v\\notin M\\cap N$. Either $v\\notin M$, and then $v$ is pure to $M\\supseteq M\\cap N$, or $v\\in M\\setminus N$, and then $v$ is pure to $N\\supseteq M\\cap N$. Purity to a set passes to its subsets. No overlap hypothesis is needed, and the empty intersection is a module.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-module-criteria"
+        ]
+      },
+      {
+        "id": "lem-union-of-two-meeting-modules-is-a-module",
+        "kind": "lemma",
+        "title": "The union of two modules with a common vertex is a module",
+        "strategy": "Let $u\\in M\\cap N$ and $v\\notin M\\cup N$. Then $v$ is pure to $M$ and pure to $N$, and both sides are decided by whether $vu\\in E$: if $vu\\in E$ then $v$ is complete to $M$ and to $N$, otherwise anticomplete to both. Hence $v$ is pure to $M\\cup N$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-module-criteria"
+        ]
+      },
+      {
+        "id": "lem-differences-of-overlapping-modules-are-modules",
+        "kind": "lemma",
+        "title": "If two modules overlap, then each difference and their symmetric difference are modules",
+        "strategy": "Overlap means $M\\cap N$, $M\\setminus N$ and $N\\setminus M$ are all nonempty. For $M\\setminus N$: a vertex outside $M$ is pure to $M$, hence to $M\\setminus N$; a vertex $v\\in M\\cap N$ is handled by picking $w\\in N\\setminus M$ and chaining $x\\sim v\\iff x\\sim w\\iff x'\\sim w\\iff x'\\sim v$ for $x,x'\\in M\\setminus N$, where the outer equivalences use purity of $x,x'$ to $N$ and the middle one purity of $w$ to $M$. The symmetric difference uses the same chain to show a vertex of $M\\cap N$ treats $M\\setminus N$ and $N\\setminus M$ the same way. The overlap hypothesis is necessary: it fails for nested modules.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-module-criteria",
+          "lem-union-of-two-meeting-modules-is-a-module"
+        ]
+      },
+      {
+        "id": "lem-a-module-meets-an-induced-subgraph-in-a-module",
+        "kind": "lemma",
+        "title": "If $M$ is a module of $G$ and $W\\subseteq V(G)$, then $M\\cap W$ is a module of $G[W]$",
+        "strategy": "A vertex $v\\in W\\setminus M$ lies outside $M$, so it is complete or anticomplete to $M$ in $G$; adjacency in $G[W]$ is the restriction of adjacency in $G$, so the same holds towards $M\\cap W$ inside $G[W]$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-module-of-a-module-is-a-module",
+        "kind": "lemma",
+        "title": "A module of $G[M]$ is a module of $G$ whenever $M$ is a module of $G$",
+        "strategy": "Let $X\\subseteq M$ be a module of $G[M]$ and $v\\notin X$. If $v\\in M\\setminus X$ then purity comes from $X$ being a module of $G[M]$; if $v\\notin M$ then $v$ is pure to $M$, hence to the subset $X$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-proper-module-of-a-connected-graph-has-a-complete-neighbour",
+        "kind": "lemma",
+        "title": "In a connected graph, some vertex outside a nonempty proper module is complete to it",
+        "strategy": "Let $\\varnothing\\ne M\\subsetneq V(G)$ be a module of a connected $G$. Take $u\\in M$ and $w\\notin M$; a path from $u$ to $w$ leaves $M$ at some edge, giving $x\\in M$ and $v\\notin M$ adjacent. Then $v$ is not anticomplete to $M$, so it is complete to $M$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-connected-graph-and-connected-component",
+          "def-graph-walk-trail-path-and-cycle",
+          "lem-every-graph-walk-contains-a-path-between-its-endpoints",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "def-prime-graph",
+        "kind": "definition",
+        "title": "Prime graphs: those whose only modules are the trivial ones",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-finite-simple-graph",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-graphs-on-three-vertices-are-not-prime",
+        "kind": "lemma",
+        "title": "No graph on exactly three vertices is prime",
+        "strategy": "On three vertices a nontrivial module is a two-element set. Count edges: with $0$ or $3$ edges every pair is a module; with exactly one edge the two ends of that edge form a module; with exactly two edges the two vertices of degree one form a module. These four cases are exhaustive up to isomorphism, and the conclusion is invariant under isomorphism.",
+        "deps": [
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "def-finite-simple-graph",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-substitution-of-a-graph-for-a-vertex",
+        "kind": "definition",
+        "title": "Substituting one graph for a vertex of another",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "lem-the-substituted-set-is-a-module",
+        "kind": "lemma",
+        "title": "In $G_1$ with $G_2$ substituted for $a$, the vertex set of $G_2$ is a module, the two factors are recovered as induced subgraphs, and substituting a one-vertex graph changes nothing",
+        "strategy": "Write $G=G_1[a\\to G_2]$. A vertex $u\\in V(G_1)\\setminus\\{a\\}$ is adjacent in $G$ to every vertex of $V(G_2)$ if $ua\\in E(G_1)$ and to none otherwise, which is exactly the module condition. The restriction of $G$ to $V(G_1)\\setminus\\{a\\}$ is $G_1-a$ by the second clause of the definition, the restriction to $V(G_2)$ is $G_2$ by the third, and for any $w\\in V(G_2)$ sending $a\\mapsto w$ and fixing the rest is an isomorphism $G_1\\to G[(V(G_1)\\setminus\\{a\\})\\cup\\{w\\}]$. Taking $|V(G_2)|=1$ gives $G\\cong G_1$.",
+        "deps": [
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-module-of-a-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-isomorphism-and-complement",
+          "def-induced-embedding-and-induced-copy"
+        ]
+      },
+      {
+        "id": "lem-substitution-commutes-with-complementation",
+        "kind": "lemma",
+        "title": "The complement of $G_1[a\\to G_2]$ is $\\overline{G_1}[a\\to\\overline{G_2}]$",
+        "strategy": "Both graphs have the same vertex set. Compare the three kinds of pair separately: two vertices of $V(G_1)\\setminus\\{a\\}$, two vertices of $V(G_2)$, and one of each. In each case adjacency in the complement of the substitution and adjacency in the substitution of the complements are the negations of the same condition.",
+        "deps": [
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-prime-graphs-are-the-graphs-that-are-not-substitutions",
+        "kind": "theorem",
+        "title": "A graph with at least two vertices is prime exactly when it is not obtained by substituting one graph on at least two vertices for a vertex of another graph on at least two vertices",
+        "strategy": "If $G\\cong G_1[a\\to G_2]$ with $|V(G_1)|,|V(G_2)|\\ge2$, then $V(G_2)$ is a module of size between $2$ and $|V(G)|-1$, so $G$ is not prime. Conversely, given a module $M$ with $2\\le|M|\\le|V(G)|-1$, fix $x\\in M$, put $G_2=G[M]$ and $G_1=G[(V(G)\\setminus M)\\cup\\{x\\}]$, and check the four clauses of the substitution definition using purity of each outside vertex to $M$. Both factors then have at least two vertices.",
+        "deps": [
+          "def-prime-graph",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-module-of-a-graph",
+          "lem-the-substituted-set-is-a-module",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-isomorphism-and-complement",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-modular-partition-and-quotient-graph",
+        "kind": "definition",
+        "title": "Modular partitions and the quotient graph they define",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-disjoint-modules-are-a-pure-pair",
+          "def-finite-simple-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-union-of-parts-is-a-module-exactly-when-the-index-set-is",
+        "kind": "lemma",
+        "title": "For a modular partition, a set of parts is a module of the quotient exactly when the union of those parts is a module of the graph",
+        "strategy": "Write $\\mathcal P=\\{M_1,\\dots,M_k\\}$ and $X\\subseteq[k]$, and let $U=\\bigcup_{i\\in X}M_i$. A vertex outside $U$ lies in some $M_j$ with $j\\notin X$, and by disjoint purity its adjacency to each $M_i$ is constant on $M_i$; so $v$ is pure to $U$ exactly when $j$ is complete or anticomplete to $X$ in the quotient. Quantifying over all $j\\notin X$ gives the equivalence in both directions.",
+        "deps": [
+          "def-modular-partition-and-quotient-graph",
+          "def-module-of-a-graph",
+          "lem-disjoint-modules-are-a-pure-pair"
+        ]
+      },
+      {
+        "id": "thm-a-modular-partition-its-quotient-and-its-parts-determine-the-graph",
+        "kind": "theorem",
+        "title": "A graph is recovered from any modular partition by the induced subgraphs on the parts together with the quotient graph",
+        "strategy": "For $x\\in M_i$ and $y\\in M_j$ with $i\\ne j$, disjoint purity makes $xy\\in E(G)$ equivalent to $v_iv_j\\in E(G/\\mathcal P)$; for $i=j$ it is equivalent to $xy\\in E(G[M_i])$. That adjacency rule determines $E(G)$, and for $k=2$ it says exactly that $G$ is $ (G/\\mathcal P)$ with $G[M_1]$ and $G[M_2]$ substituted for its two vertices.",
+        "deps": [
+          "def-modular-partition-and-quotient-graph",
+          "def-module-of-a-graph",
+          "lem-disjoint-modules-are-a-pure-pair",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "lem-the-substituted-set-is-a-module",
+          "def-graph-isomorphism-and-complement",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-the-quotient-is-an-induced-subgraph-on-a-transversal",
+        "kind": "lemma",
+        "title": "The quotient by a modular partition is isomorphic to the subgraph induced by any set meeting each part exactly once",
+        "strategy": "Let $\\mathcal P=\\{M_1,\\dots,M_k\\}$ be a modular partition of $G$, pick $t_i\\in M_i$ for each $i$ and put $T=\\{t_1,\\dots,t_k\\}$; the $M_i$ are nonempty and finite in number, so the selection is a choice from finitely many nonempty sets and needs no further principle. Send the quotient vertex $v_i$ to $t_i$; this is a bijection onto $T$ because the parts are disjoint. For $i\\ne j$ the pair $(M_i,M_j)$ is complete or anticomplete, and $v_iv_j\\in E(G/\\mathcal P)$ is defined to record which; since $t_i\\in M_i$ and $t_j\\in M_j$, that is exactly the condition $t_it_j\\in E(G)$, so the bijection both preserves and reflects adjacency. Hence $G[T]\\cong G/\\mathcal P$, and the quotient is isomorphic to an induced subgraph of $G$. For $k=1$ both sides are the one-vertex graph.",
+        "deps": [
+          "def-modular-partition-and-quotient-graph",
+          "def-module-of-a-graph",
+          "lem-disjoint-modules-are-a-pure-pair",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-isomorphism-and-complement",
+          "def-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "lem-overlapping-proper-modules-of-a-connected-anticonnected-graph",
+        "kind": "lemma",
+        "title": "In a connected and anticonnected graph, the union of two proper modules that meet is again a proper module",
+        "strategy": "The union is a module. Suppose $M\\cup N=V(G)$ with $M,N$ proper and $M\\cap N\\ne\\varnothing$; then $A=M\\setminus N$, $B=N\\setminus M$ and $C=M\\cap N$ are all nonempty. Purity of each $a\\in A$ to $N$ and of each $b\\in B$ to $M$, combined as in the disjoint-purity argument, forces $(A,N)$ and $(B,M)$ each to be complete or anticomplete; the mixed choices contradict each other on the pair $(A,B)$. If both are complete then no edge of $\\overline G$ joins $A$, $B$ and $C$, so $\\overline G$ is disconnected; if both are anticomplete then $G$ is disconnected. Either way a hypothesis fails.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-union-of-two-meeting-modules-is-a-module",
+          "lem-module-criteria",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "lem-components-are-anticomplete-and-anticomponents-complete",
+          "cor-connected-components-partition-the-vertex-set",
+          "lem-anticonnected-components-are-complement-components"
+        ]
+      },
+      {
+        "id": "lem-every-vertex-lies-in-a-unique-maximal-proper-module",
+        "kind": "lemma",
+        "title": "In a connected and anticonnected graph with at least two vertices, each vertex lies in a largest proper module, and two such modules are equal or disjoint",
+        "strategy": "The singleton $\\{v\\}$ is a proper module, so the family of proper modules containing $v$ is nonempty and finite. Any two of its members meet at $v$, so their union is again a proper module containing $v$; iterating over the finite family gives that the union $M(v)$ of all of them is a proper module, necessarily the largest one. If $M(u)$ and $M(v)$ meet, their union is a proper module containing both, so maximality forces $M(u)=M(u)\\cup M(v)=M(v)$.",
+        "deps": [
+          "lem-overlapping-proper-modules-of-a-connected-anticonnected-graph",
+          "def-module-of-a-graph",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "thm-gallai-modular-decomposition",
+        "kind": "theorem",
+        "title": "Gallai's modular decomposition theorem: a graph on at least two vertices is disconnected, or has a disconnected complement, or has a modular partition into its maximal proper modules whose quotient is prime",
+        "strategy": "The first two cases exclude each other because a graph on at least two vertices is connected or anticonnected. In the third case the maximal proper modules are pairwise disjoint and cover $V(G)$, so they form a modular partition with $k\\ge2$ parts; a nontrivial module of the quotient would pull back to a proper module strictly containing a maximal one, so the quotient is prime. In the first case the components are modules and the quotient by them is edgeless; in the second the anticomponents are modules and that quotient is complete.",
+        "deps": [
+          "lem-every-vertex-lies-in-a-unique-maximal-proper-module",
+          "lem-unions-of-components-and-of-anticomponents-are-modules",
+          "thm-every-nontrivial-graph-is-connected-or-anticonnected",
+          "def-modular-partition-and-quotient-graph",
+          "lem-a-union-of-parts-is-a-module-exactly-when-the-index-set-is",
+          "def-prime-graph",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "cor-connected-components-partition-the-vertex-set",
+          "lem-anticonnected-components-are-complement-components",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "cor-the-prime-quotient-has-at-least-four-vertices",
+        "kind": "corollary",
+        "title": "The prime quotient produced by the modular decomposition of a connected and anticonnected graph has at least four vertices",
+        "strategy": "The quotient has $k\\ge2$ vertices. If $k=2$ the two parts are complete or anticomplete to each other, making $G$ or $\\overline G$ disconnected. If $k=3$ the quotient is a three-vertex graph, which is never prime. So $k\\ge4$.",
+        "deps": [
+          "thm-gallai-modular-decomposition",
+          "def-prime-graph",
+          "lem-graphs-on-three-vertices-are-not-prime",
+          "thm-a-modular-partition-its-quotient-and-its-parts-determine-the-graph",
+          "def-modular-partition-and-quotient-graph",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component"
+        ]
+      },
+      {
+        "id": "cor-the-modular-partition-with-a-prime-quotient-is-unique",
+        "kind": "corollary",
+        "title": "In a connected and anticonnected graph, a modular partition with at least two parts whose quotient is prime consists of the maximal proper modules",
+        "strategy": "Let $G$ be connected and anticonnected with at least two vertices and let $\\mathcal P=\\{M_1,\\dots,M_k\\}$ be a modular partition with $k\\ge2$ whose quotient is prime. Each part is then a proper module. If $k=2$ the two parts are disjoint modules, so they are complete or anticomplete to each other and $G$ or $\\overline G$ is disconnected, against the hypothesis; and $k=3$ is impossible because no three-vertex graph is prime, so $k\\ge4$. Fix $i$ and $x\\in M_i$, and let $M(x)$ be the largest proper module containing $x$; then $M_i\\subseteq M(x)$. If a part $M_j$ meets $M(x)$, then $M(x)\\cup M_j$ is a module, and it is proper because two meeting proper modules of a connected and anticonnected graph have a proper union, so maximality gives $M_j\\subseteq M(x)$: that is, $M(x)$ is a union of parts. Its index set is therefore a module of the quotient, hence trivial; it is nonempty and cannot be every part, since $M(x)$ is proper, so it is a single part and $M(x)=M_i$. Every part is thus a maximal proper module, and those partition the vertex set, so $\\mathcal P$ is the partition into maximal proper modules and is the only modular partition with at least two parts and a prime quotient. Both hypotheses are used: the edgeless graph on three vertices carries two different two-part modular partitions whose quotients are prime.",
+        "deps": [
+          "def-modular-partition-and-quotient-graph",
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "lem-disjoint-modules-are-a-pure-pair",
+          "lem-graphs-on-three-vertices-are-not-prime",
+          "lem-a-union-of-parts-is-a-module-exactly-when-the-index-set-is",
+          "lem-overlapping-proper-modules-of-a-connected-anticonnected-graph",
+          "lem-every-vertex-lies-in-a-unique-maximal-proper-module",
+          "thm-gallai-modular-decomposition",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component"
+        ]
+      },
+      {
+        "id": "lem-homogeneous-number-is-monotone-under-induced-subgraphs",
+        "kind": "lemma",
+        "title": "$\\operatorname{hom}(G[W])\\le\\operatorname{hom}(G)$ for every vertex subset $W$",
+        "strategy": "A clique of $G[W]$ is a clique of $G$ and a stable set of $G[W]$ is a stable set of $G$, because $G[W]$ has the induced adjacency. So $\\omega(G[W])\\le\\omega(G)$ and $\\alpha(G[W])\\le\\alpha(G)$, and the maximum of the two is monotone.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-clique-stable-set-and-numbers",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-large-set-contains-a-pattern-when-the-homogeneous-number-is-small",
+        "kind": "lemma",
+        "title": "If $\\epsilon$ is an Erdős–Hajnal constant for $H$ and $W$ is a nonempty vertex set with $|W|^{\\epsilon}>\\operatorname{hom}(G)$, then $G[W]$ has an induced copy of $H$",
+        "strategy": "Contrapositive. If $G[W]$ had no induced copy of $H$ it would be a nonempty member of the hereditary class of $H$-free graphs, so $\\operatorname{hom}(G[W])\\ge|W|^{\\epsilon}$; monotonicity of $\\operatorname{hom}$ then gives $\\operatorname{hom}(G)\\ge|W|^{\\epsilon}$, contradicting the hypothesis.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "lem-homogeneous-number-is-monotone-under-induced-subgraphs",
+          "def-induced-embedding-and-induced-copy",
+          "def-real-power",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-supersaturation-for-induced-copies",
+        "kind": "lemma",
+        "title": "If every $m$-element vertex set contains an induced copy of $H$, then at least $\\prod_{i<h}(n-i)/\\prod_{i<h}(m-i)$ of the $h$-element vertex sets induce a copy of $H$",
+        "strategy": "Let $h=|V(H)|\\ge1$ and $h\\le m\\le n=|V(G)|$. Double count the pairs $(W,S)$ with $|W|=m$, $S\\subseteq W$, $|S|=h$ and $G[S]\\cong H$. Every $W$ contributes at least one pair, so the count is at least $\\binom nm$; every good $S$ lies in exactly $\\binom{n-h}{m-h}$ such $W$, so the count is at most (number of good $S$) times $\\binom{n-h}{m-h}$. Dividing and cancelling factorials leaves the stated ratio of falling factorials, which is at least $((n-h+1)/m)^h$.",
+        "deps": [
+          "def-induced-embedding-and-induced-copy",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-double-counting",
+          "def-a-finite-incidence-relation-and-its-fibres",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "lem-induced-copies-counted-by-extending-a-deleted-vertex",
+        "kind": "lemma",
+        "title": "The induced copies of $H_1$ in $G$ are counted by summing, over the induced embeddings of $H_1-v$, the number of vertices that extend them at $v$",
+        "strategy": "Restricting an induced embedding of $H_1$ to $V(H_1)\\setminus\\{v\\}$ is an induced embedding of $H_1-v$, and the fibre over a given $\\varphi$ is exactly the set of admissible images of $v$. So the relation pairing $\\varphi$ with its extensions has row fibres the extension sets and total size $\\operatorname{ind}_{H_1}(G)$; double counting gives the identity. The number of induced embeddings of $H_1-v$ is at most the number of injections $V(H_1)\\setminus\\{v\\}\\to V(G)$, hence at most $n^{h_1-1}$.",
+        "deps": [
+          "def-induced-copy-number",
+          "def-induced-embedding-and-induced-copy",
+          "thm-double-counting",
+          "def-a-finite-incidence-relation-and-its-fibres",
+          "def-sum-over-a-finite-index-set",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-number-of-injections"
+        ]
+      },
+      {
+        "id": "lem-a-pattern-inside-an-extension-set-produces-the-substitution",
+        "kind": "lemma",
+        "title": "An induced copy of $H_2$ inside the extension set of an induced embedding of $H_1-v$ yields an induced copy of $H_1$ with $H_2$ substituted for $v$",
+        "strategy": "Combine $\\varphi$ on $V(H_1)\\setminus\\{v\\}$ with the embedding $\\psi$ of $H_2$ into the extension set. The map is injective because the extension set avoids the image of $\\varphi$. Check the three kinds of pair: inside $V(H_1)\\setminus\\{v\\}$ use that $\\varphi$ is induced; inside $V(H_2)$ use that $\\psi$ is induced; across, use that each vertex of the extension set has, towards the image of $\\varphi$, exactly the adjacencies $v$ has in $H_1$, which is the substitution rule.",
+        "deps": [
+          "def-substitution-of-a-graph-for-a-vertex",
+          "lem-induced-copies-counted-by-extending-a-deleted-vertex",
+          "def-induced-embedding-and-induced-copy",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "thm-substitution-preserves-the-erdos-hajnal-property",
+        "kind": "theorem",
+        "title": "Alon–Pach–Solymosi: if $H_1$ and $H_2$ have the Erdős–Hajnal property, so does the graph obtained from $H_1$ by substituting $H_2$ for a vertex",
+        "strategy": "Let $h_1=|V(H_1)|$, let $\\epsilon_1,\\epsilon_2$ be Erdős–Hajnal constants for $H_1,H_2$, put $\\beta=1/(2(h_1+1))$ and $\\epsilon=\\beta\\min\\{\\epsilon_1,\\epsilon_2\\}$. Suppose $G$ is $H$-free on $n$ vertices with $\\operatorname{hom}(G)<n^{\\epsilon}$, and let $m$ be the least natural number with $m\\ge n^{\\beta}$, so $m<n^{\\beta}+1$. Since $\\beta\\epsilon_1\\ge\\epsilon$, every $m$-set contains an induced $H_1$; supersaturation then gives at least $((n-h_1+1)/m)^{h_1}$ good $h_1$-sets, hence at least that many induced copies of $H_1$. Averaging over the at most $n^{h_1-1}$ induced embeddings of $H_1-v$ produces one whose extension set has size at least $4^{-h_1}n^{1-\\beta h_1}$, which exceeds $m$ once $n\\ge n_0(h_1)$ because $1-\\beta(h_1+1)=1/2$. That extension set is then large enough to contain an induced $H_2$, and the previous lemma builds an induced $H$ inside $G$ — a contradiction. Finally shrink $\\epsilon$ to $\\min\\{\\epsilon,1/\\log_2 n_0\\}$, which handles $n<n_0$ because $\\operatorname{hom}(G)\\ge2$ for $n\\ge2$ and $\\operatorname{hom}(G)=1$ for $n=1$.",
+        "deps": [
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "lem-a-large-set-contains-a-pattern-when-the-homogeneous-number-is-small",
+          "lem-supersaturation-for-induced-copies",
+          "lem-induced-copies-counted-by-extending-a-deleted-vertex",
+          "lem-a-pattern-inside-an-extension-set-produces-the-substitution",
+          "cor-the-averaging-principle",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-induced-copy-number",
+          "def-real-power",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "def-logarithm-to-a-base",
+          "thm-of-archimedean",
+          "thm-well-ordering-principle",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "cor-the-erdos-hajnal-conjecture-reduces-to-prime-graphs",
+        "kind": "corollary",
+        "title": "Every graph has the Erdős–Hajnal property if and only if every prime graph does",
+        "strategy": "One direction is trivial. For the other, induct on the number of vertices. A graph on at most one vertex is prime, and a graph on at least two vertices is either prime or a substitution $G_1[a\\to G_2]$ with $|V(G_1)|,|V(G_2)|\\ge2$; both factors then have strictly fewer vertices, so the induction hypothesis and the substitution theorem apply.",
+        "deps": [
+          "thm-substitution-preserves-the-erdos-hajnal-property",
+          "thm-prime-graphs-are-the-graphs-that-are-not-substitutions",
+          "def-prime-graph",
+          "def-erdos-hajnal-property-and-constant",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "cor-blowing-up-a-vertex-preserves-the-erdos-hajnal-property",
+        "kind": "corollary",
+        "title": "Substituting a complete or an edgeless graph for a vertex preserves the Erdős–Hajnal property",
+        "strategy": "The class of $K_t$-free graphs has the Erdős–Hajnal property for every $t\\ge1$. A graph is $\\overline{K_t}$-free exactly when its complement is $K_t$-free, so the class of $\\overline{K_t}$-free graphs is the complementary class of the $K_t$-free graphs and has the property with the same constants. Now apply the substitution theorem with $H_2=K_t$ or $H_2=\\overline{K_t}$.",
+        "deps": [
+          "thm-substitution-preserves-the-erdos-hajnal-property",
+          "thm-complete-graph-free-classes-are-erdos-hajnal",
+          "prop-erdos-hajnal-property-is-complement-invariant",
+          "cor-h-free-complement-dictionary",
+          "def-complement-of-a-graph-class",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-erdos-hajnal-property-and-constant"
+        ]
+      },
+      {
+        "id": "rem-modules-and-the-word-homogeneous",
+        "kind": "remark",
+        "title": "Why this page says module where its sources say homogeneous set",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "rem-conventions-for-prime-graphs",
+        "kind": "remark",
+        "title": "Which small graphs count as prime, and why the convention matters",
+        "deps": [
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "lem-graphs-on-three-vertices-are-not-prime",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 398,
+    "id": "modules-substitution-and-prime-graphs-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Modules, Substitution and Prime Graphs — Examples",
+    "companion": "modules-substitution-and-prime-graphs",
+    "requires": [
+      "modules-substitution-and-prime-graphs"
+    ],
+    "items": [
+      {
+        "id": "ex-modules-of-complete-and-edgeless-graphs",
+        "kind": "example",
+        "title": "Every vertex set is a module of a complete graph and of an edgeless graph",
+        "strategy": "In $K_n$ every outside vertex is adjacent to everything, so every $M$ is a module; in $\\overline{K_n}$ every outside vertex is adjacent to nothing. Hence neither is prime once $n\\ge3$, while $K_1$ and $K_2$ are prime because they have no set of size between $2$ and $n-1$.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-prime-graph"
+        ]
+      },
+      {
+        "id": "ex-modules-of-the-four-vertex-path",
+        "kind": "example",
+        "title": "The four-vertex path has only trivial modules",
+        "strategy": "Write $P_4$ as $0$-$1$-$2$-$3$ and check the six pairs and four triples. Each time exhibit one outside vertex adjacent to one member and not the other, for instance $2$ separates $\\{0,1\\}$ and $1$ separates $\\{0,2\\}$. So $P_4$ is prime.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-prime-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-the-four-vertex-path-is-the-only-prime-graph-on-four-vertices",
+        "kind": "example",
+        "title": "Up to isomorphism the four-vertex path is the only prime graph on four vertices",
+        "strategy": "A prime graph on four vertices is connected and anticonnected, since a union of components or of anticomponents is a module. List the connected graphs on four vertices: $P_4$, the star, $C_4$, the paw, the diamond and $K_4$. The complement of each of the last five is disconnected, and $P_4$ is prime by the previous example.",
+        "deps": [
+          "ex-modules-of-the-four-vertex-path",
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "lem-unions-of-components-and-of-anticomponents-are-modules",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "ex-paths-on-at-least-four-vertices-are-prime",
+        "kind": "example",
+        "title": "$P_n$ is prime for every $n\\ge4$",
+        "strategy": "Let $M$ be a module of $P_n$ with $2\\le|M|\\le n-1$. Since $P_n$ is connected some vertex $v\\notin M$ is complete to $M$, so $M\\subseteq N(v)$ and $|N(v)|\\ge2$ forces $v$ to be an interior vertex and $M=N(v)=\\{v-1,v+1\\}$. A vertex two steps from $v$ then exists because $n\\ge4$, and it is adjacent to exactly one member of $M$.",
+        "deps": [
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "lem-a-proper-module-of-a-connected-graph-has-a-complete-neighbour",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "ex-the-five-cycle-is-prime",
+        "kind": "example",
+        "title": "The five-cycle is prime",
+        "strategy": "A nontrivial module $M$ of $C_5$ has a vertex $v\\notin M$ complete to it, so $M\\subseteq N(v)$, which has two nonadjacent elements; the remaining two vertices each see exactly one of them.",
+        "deps": [
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "lem-a-proper-module-of-a-connected-graph-has-a-complete-neighbour",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-substitution-into-an-edge-and-into-a-nonedge",
+        "kind": "example",
+        "title": "Substituting into $K_2$ gives the join and substituting into $\\overline{K_2}$ gives the disjoint union",
+        "strategy": "Substitute $G_1$ for one vertex of $K_2$ and then $G_2$ for the other: the two parts become complete to each other, which is the join. The same construction inside $\\overline{K_2}$ leaves them anticomplete, which is the disjoint union. Read off that a disconnected graph and a graph with disconnected complement are both substitutions.",
+        "deps": [
+          "def-substitution-of-a-graph-for-a-vertex",
+          "lem-the-substituted-set-is-a-module",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component"
+        ]
+      },
+      {
+        "id": "ex-the-modular-decomposition-of-a-blown-up-five-cycle",
+        "kind": "example",
+        "title": "The modular decomposition of a five-cycle with each vertex blown up into an edgeless graph",
+        "strategy": "Take $C_5$ and substitute $\\overline{K_t}$ for each vertex in turn, with $t\\ge2$. The graph is connected and anticonnected, each of the five blown-up sets is a module, and no larger proper module exists because the quotient $C_5$ is prime. So the maximal proper modules are exactly those five sets and the quotient is $C_5$.",
+        "deps": [
+          "def-modular-partition-and-quotient-graph",
+          "thm-gallai-modular-decomposition",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "ex-the-five-cycle-is-prime",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-module-of-a-graph"
+        ]
+      },
+      {
+        "id": "ex-counting-induced-three-vertex-paths-by-extensions",
+        "kind": "example",
+        "title": "Counting the induced copies of $P_3$ in $P_4$ by extension sets",
+        "strategy": "In $P_4$ exactly the vertex sets $\\{0,1,2\\}$ and $\\{1,2,3\\}$ induce $P_3$, and $P_3$ has two automorphisms, so $\\operatorname{ind}_{P_3}(P_4)=4$. Deleting an endpoint $v$ of $P_3$ leaves $K_2$, whose induced embeddings into $P_4$ number six; summing the extension sizes over those six embeddings recovers $4$.",
+        "deps": [
+          "lem-induced-copies-counted-by-extending-a-deleted-vertex",
+          "def-induced-copy-number",
+          "def-induced-embedding-and-induced-copy",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-four-vertex-graph-with-the-erdos-hajnal-property-by-substitution",
+        "kind": "example",
+        "title": "Substituting an edge for an endpoint of $P_3$ gives a four-vertex graph with the Erdős–Hajnal property",
+        "strategy": "$P_3$ and $K_2$ both have the Erdős–Hajnal property, the first because every graph on at most three vertices does. Substituting $K_2$ for an endpoint of $P_3$ produces the paw, so the paw has the property. The same recipe covers every four-vertex graph except $P_4$ itself.",
+        "deps": [
+          "thm-substitution-preserves-the-erdos-hajnal-property",
+          "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-erdos-hajnal-property-and-constant"
+        ]
+      },
+      {
+        "id": "cex-a-union-of-two-disjoint-modules-need-not-be-a-module",
+        "kind": "counterexample",
+        "title": "Two disjoint modules whose union is not a module",
+        "strategy": "In $P_4$ written $0$-$1$-$2$-$3$, the singletons $\\{0\\}$ and $\\{2\\}$ are modules, but $3$ is adjacent to $2$ and not to $0$, so $\\{0,2\\}$ is not. This shows the hypothesis that the two modules meet cannot be dropped from the union lemma.",
+        "deps": [
+          "def-module-of-a-graph",
+          "ex-modules-of-the-four-vertex-path",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-a-difference-of-nested-modules-need-not-be-a-module",
+        "kind": "counterexample",
+        "title": "A difference of two nested modules that is not a module",
+        "strategy": "On $\\{a,b,c,d\\}$ take the two edges $ca$ and $cb$. Then $N=\\{a,b\\}$ is a module and $M=\\{a,b,c,d\\}$ is the whole vertex set, but $M\\setminus N=\\{c,d\\}$ is not, because $a$ is adjacent to $c$ and not to $d$. Here $N\\subseteq M$, so the two do not overlap.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-differences-of-overlapping-modules-are-modules",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-maximal-proper-modules-need-not-be-disjoint-in-a-disconnected-graph",
+        "kind": "counterexample",
+        "title": "Maximal proper modules need not be disjoint when the graph or its complement is disconnected",
+        "strategy": "In the edgeless graph on $\\{a,b,c\\}$ every vertex subset is a module, so $\\{a,b\\}$ and $\\{a,c\\}$ are proper modules, and each is maximal because the only module properly containing it is the whole vertex set. They meet in $a$, and their union is the whole vertex set rather than a proper module. So without connectivity of the graph the maximal proper modules need neither be pairwise disjoint nor have proper unions. Reading the same three vertices in the complement, the triangle is connected and its complement is disconnected, and the two sets are still overlapping maximal proper modules there because a set is a module of a graph exactly when it is a module of the complement. The same example gives two different modular partitions, $\\{\\{a\\},\\{b,c\\}\\}$ and $\\{\\{a,b\\},\\{c\\}\\}$, whose quotients are the edgeless graph on two vertices and so are prime.",
+        "deps": [
+          "def-module-of-a-graph",
+          "lem-modules-are-complement-invariant",
+          "lem-overlapping-proper-modules-of-a-connected-anticonnected-graph",
+          "lem-every-vertex-lies-in-a-unique-maximal-proper-module",
+          "def-modular-partition-and-quotient-graph",
+          "def-prime-graph",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-primality-is-not-inherited-by-induced-subgraphs",
+        "kind": "counterexample",
+        "title": "An induced subgraph of a prime graph need not be prime",
+        "strategy": "$P_5$ is prime, but deleting its middle vertex leaves two disjoint edges, in which each edge is a module of size two. So primality is not a hereditary property, unlike $H$-freeness.",
+        "deps": [
+          "def-prime-graph",
+          "ex-paths-on-at-least-four-vertices-are-prime",
+          "def-module-of-a-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "fs-every-graph-with-at-least-four-vertices-has-a-nontrivial-module",
+        "kind": "false-statement",
+        "title": "Every graph with at least four vertices has a nontrivial module",
+        "strategy": "True for one, two and three vertices in the sense that no nontrivial module can exist or one always does, but false from four onwards: $P_4$ is prime. Refute by exhibiting $P_4$ and checking all six two-element and four three-element subsets.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-prime-graph",
+          "ex-modules-of-the-four-vertex-path",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 401,
+    "id": "sparse-restricted-subgraphs-and-rodl-nikiforov",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Sparse Restricted Subgraphs and the Rödl–Nikiforov Theorems",
+    "companion": "sparse-restricted-subgraphs-and-rodl-nikiforov-examples",
+    "requires": [
+      "regular-pairs-and-induced-counting"
+    ],
+    "items": [
+      {
+        "id": "def-c-sparse-and-c-restricted-vertex-set",
+        "kind": "definition",
+        "title": "$c$-sparse, $c$-dense and $c$-restricted vertex sets",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-isomorphism-and-complement",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-directional-and-weak-sparsity-between-vertex-sets",
+        "kind": "definition",
+        "title": "Sparsity of one vertex set to another, and weak sparsity of a pair",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set"
+        ]
+      },
+      {
+        "id": "lem-weak-sparsity-is-a-bound-on-the-edge-density",
+        "kind": "lemma",
+        "title": "For disjoint nonempty vertex sets, weak $c$-sparsity says exactly that the edge density is at most $c$",
+        "strategy": "For disjoint $X,Y$ each edge between them contributes exactly one ordered pair to $e_G(X,Y)$, so $|E(X,Y)|=e_G(X,Y)$ and dividing by $|X||Y|$ turns the inequality $|E(X,Y)|\\le c|X||Y|$ into $d(X,Y)\\le c$. The two notions are therefore the same, which is why this page never introduces a second density.",
+        "deps": [
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "def-edge-density-between-vertex-sets",
+          "def-edges-between-sets-and-pure-mixed-pairs",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-sparsity-depends-only-on-the-induced-subgraph",
+        "kind": "lemma",
+        "title": "A set is $c$-sparse exactly when the maximum degree of the graph it induces is at most $c$ times its size",
+        "strategy": "For $x\\in X$ the set $N_G(x)\\cap X$ is the neighbourhood of $x$ in $G[X]$, so the defining inequality is $\\deg_{G[X]}(x)\\le c|X|$ for every $x$. Consequently $c$-sparsity of $X$ in $G$ and in any induced subgraph of $G$ containing $X$ are the same condition.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "lem-a-sparse-set-has-small-self-density",
+        "kind": "lemma",
+        "title": "A $c$-sparse set has self-density at most $c$, and a $c$-dense set has self-density at least $1-c-1/|X|$",
+        "strategy": "Sum the degrees: $e_G(X,X)=\\sum_{x\\in X}|N(x)\\cap X|$, which is at most $c|X|^2$ in the sparse case, so $d(X,X)\\le c$. In the dense case each $x$ has at most $c|X|$ non-neighbours inside $X\\setminus\\{x\\}$, hence at least $|X|-1-c|X|$ neighbours, and the same sum gives $d(X,X)\\ge1-c-1/|X|$. The extra $1/|X|$ is forced by the convention that diagonal pairs never contribute.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-edge-density-between-vertex-sets",
+          "thm-double-counting",
+          "def-sum-over-a-finite-index-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+        "kind": "lemma",
+        "title": "A set of self-density at most $c$ has a subset of at least half its size that is $4c$-sparse",
+        "strategy": "Sum the degrees inside $X$: $\\sum_{x\\in X}|N(x)\\cap X|=e(X,X)\\le c|X|^2$. By the averaging bound, fewer than half the vertices of $X$ have $|N(x)\\cap X|>2c|X|$, so the remaining set $X'$ has $|X'|\\ge|X|/2$ and every $x\\in X'$ satisfies $|N(x)\\cap X'|\\le2c|X|\\le4c|X'|$. Reading the same computation in the complement gives the dense form. Some loss is unavoidable: a star has tiny self-density and no large sparse subset containing its centre.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "lem-weak-sparsity-is-a-bound-on-the-edge-density",
+          "def-edge-density-between-vertex-sets",
+          "thm-double-counting",
+          "cor-the-averaging-principle",
+          "def-a-finite-incidence-relation-and-its-fibres",
+          "def-sum-over-a-finite-index-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph"
+        ]
+      },
+      {
+        "id": "lem-restrictedness-is-complement-invariant",
+        "kind": "lemma",
+        "title": "A set is $c$-sparse in $G$ exactly when it is $c$-dense in $\\overline G$, so $c$-restrictedness is complement-invariant",
+        "strategy": "For $x\\in X$ the neighbours of $x$ in $\\overline G$ inside $X$ are exactly its non-neighbours in $G$ inside $X\\setminus\\{x\\}$, so the two counting conditions are literally the same inequality read in the two graphs. Restrictedness is the disjunction of the two, hence unchanged.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-graph-isomorphism-and-complement",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "lem-sparsity-transfers-to-a-large-subset",
+        "kind": "lemma",
+        "title": "A subset occupying at least a $\\lambda$ fraction of a $c$-sparse set is $(c/\\lambda)$-sparse",
+        "strategy": "For $x\\in X'$ we have $|N(x)\\cap X'|\\le|N(x)\\cap X|\\le c|X|\\le (c/\\lambda)|X'|$, using $|X'|\\ge\\lambda|X|$. The same computation in the complement gives the dense version. The loss is real: without the size hypothesis a subset of a sparse set need not be sparse.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-sparsity-is-monotone-in-the-parameter",
+        "kind": "lemma",
+        "title": "Sparsity is preserved when the parameter grows, and every set of at most two vertices is $0$-restricted",
+        "strategy": "The defining inequality $|N(x)\\cap X|\\le c|X|$ only weakens as $c$ grows. A single vertex has no neighbour and no non-neighbour inside its own singleton. A two-element set is $0$-sparse when its two vertices are nonadjacent and $0$-dense when they are adjacent, so either way it is $0$-restricted. This is what makes the conclusion of the theorems below trivially available for small graphs, and it is also why a partition into restricted sets may need singleton and two-element parts.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set"
+        ]
+      },
+      {
+        "id": "cor-a-restricted-set-contains-a-large-stable-set-or-clique",
+        "kind": "corollary",
+        "title": "A $c$-sparse set $X$ satisfies $\\alpha(G[X])\\ge|X|/(c|X|+1)$, and a $c$-dense set satisfies $\\omega(G[X])\\ge|X|/(c|X|+1)$",
+        "strategy": "The maximum degree of $G[X]$ is at most $c\\lvert X\\rvert$, so [[lem-greedy-colouring-bound]] gives $\\chi(G[X])\\le c\\lvert X\\rvert+1$, and $\\lvert X\\rvert\\le\\chi(G[X])\\alpha(G[X])$ from [[thm-clique-independence-chromatic-bounds]] finishes the sparse case. Reading that case in the complement, where a $c$-dense set is $c$-sparse by [[lem-restrictedness-is-complement-invariant]] and stable sets become cliques by [[lem-complement-swaps-cliques-and-stable-sets]], gives the dense case. THE PAGE MEETS $\\alpha$ AND $\\omega$ UNDER TWO PUBLISHED DEFINITIONS AND MUST SAY ONCE, IN A NUMBERED STEP, THAT THEY AGREE: [[def-clique-and-independence-numbers]] (order 215) and [[def-clique-stable-set-and-numbers]] (order 393) define the same two invariants under the same symbols, and this item is the only place both are cited — [[lem-greedy-colouring-bound]] and [[thm-clique-independence-chromatic-bounds]] are stated against the first, [[lem-complement-swaps-cliques-and-stable-sets]] against the second. Verify the agreement from the two Definitions rather than assuming it from the notation. The bound tends to $1/c$ rather than to a fraction of $\\lvert X\\rvert$, and a disjoint union of cliques of order $c\\lvert X\\rvert$ shows it cannot be improved to a linear one.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "lem-restrictedness-is-complement-invariant",
+          "lem-greedy-colouring-bound",
+          "thm-clique-independence-chromatic-bounds",
+          "def-clique-and-independence-numbers",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "def-graph-isomorphism-and-complement",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "lem-regularity-is-monotone-in-the-parameter",
+        "kind": "lemma",
+        "title": "An $\\epsilon$-regular pair is $\\epsilon'$-regular for every $\\epsilon'\\ge\\epsilon$ with $\\epsilon'>0$",
+        "strategy": "Subsets qualifying at level $\\epsilon'$ already qualify at level $\\epsilon$ because $\\epsilon'|X|\\ge\\epsilon|X|$, and the density deviation they inherit is at most $\\epsilon\\le\\epsilon'$.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "def-edge-density-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "lem-trimming-a-self-regular-set-of-low-density",
+        "kind": "lemma",
+        "title": "Deleting the high-degree vertices of a $\\gamma$-self-regular set of density $d$ leaves more than $(1-\\gamma)$ of it, and that remainder is $((d+\\gamma)/(1-\\gamma))$-sparse",
+        "strategy": "Apply the typical-degree lemma to the pair $(W,W)$ with $Y'=W$: fewer than $\\gamma|W|$ vertices have more than $(d+\\gamma)|W|$ neighbours in $W$. Let $W'$ be the rest, so $|W'|>(1-\\gamma)|W|$ and $W'$ is nonempty. Each $x\\in W'$ has $|N(x)\\cap W'|\\le|N(x)\\cap W|\\le(d+\\gamma)|W|<((d+\\gamma)/(1-\\gamma))|W'|$.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "lem-typical-degrees-in-a-regular-pair",
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph"
+        ]
+      },
+      {
+        "id": "lem-trimming-a-self-regular-set-of-high-density",
+        "kind": "lemma",
+        "title": "Deleting the low-degree vertices of a $\\gamma$-self-regular set of density $d$ leaves more than $(1-\\gamma)$ of it, and that remainder is $((1-d+2\\gamma)/(1-\\gamma))$-dense",
+        "strategy": "The other half of the typical-degree lemma bounds by $\\gamma|W|$ the number of vertices with fewer than $(d-\\gamma)|W|$ neighbours in $W$. For $x$ in the remainder $W'$, at most $\\gamma|W|$ of its neighbours were deleted, so $|N(x)\\cap W'|\\ge(d-2\\gamma)|W|$ and the number of non-neighbours of $x$ inside $W'$ is at most $|W|-(d-2\\gamma)|W|$, which is less than $((1-d+2\\gamma)/(1-\\gamma))|W'|$.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "lem-typical-degrees-in-a-regular-pair",
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-self-regular-set-of-intermediate-density-carries-many-induced-copies",
+        "kind": "lemma",
+        "title": "A large $\\gamma$-self-regular set whose density lies between $\\eta$ and $1-\\eta$ forces at least $c|W|^{|V(H)|}$ induced copies of $H$",
+        "strategy": "Feed the induced counting lemma the $h$ sets $W_1=\\cdots=W_h=W$, which is permitted because it allows repetitions and pairs with $W_i=W_j$. Its density hypotheses read $d(W,W)\\ge\\eta$ on edges of $H$ and $d(W,W)\\le1-\\eta$ on non-edges, both supplied by $\\eta\\le d(W,W)\\le1-\\eta$; its regularity hypothesis follows from $\\gamma\\le\\gamma(H,\\eta)$ and monotonicity. The maps it produces are injective and induce $H$, so they are counted by $\\operatorname{ind}_H(G)$.",
+        "deps": [
+          "thm-induced-counting-lemma-for-regular-pairs",
+          "def-epsilon-regular-pair",
+          "def-edge-density-between-vertex-sets",
+          "def-induced-copy-number",
+          "def-induced-embedding-and-induced-copy",
+          "lem-regularity-is-monotone-in-the-parameter"
+        ]
+      },
+      {
+        "id": "lem-few-induced-copies-is-inherited-by-large-induced-subgraphs",
+        "kind": "lemma",
+        "title": "If $G$ has fewer than $(\\delta n)^{h}$ induced copies of $H$ and $|W|\\ge\\lambda n$, then $G[W]$ has fewer than $((\\delta/\\lambda)|W|)^{h}$",
+        "strategy": "An induced embedding of $H$ into $G[W]$ is one into $G$, so $\\operatorname{ind}_H(G[W])\\le\\operatorname{ind}_H(G)<(\\delta n)^h\\le((\\delta/\\lambda)|W|)^h$, the last step because $n\\le|W|/\\lambda$.",
+        "deps": [
+          "def-induced-copy-number",
+          "def-induced-embedding-and-induced-copy",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "thm-nikiforov-few-induced-copies-force-a-linear-restricted-set",
+        "kind": "theorem",
+        "title": "Nikiforov: for every $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there is $\\delta>0$ such that every graph $G$ with $\\operatorname{ind}_H(G)<(\\delta|V(G)|)^{|V(H)|}$ has an $\\epsilon$-restricted vertex set of size at least $\\delta|V(G)|$",
+        "strategy": "Set $\\eta=\\epsilon/4$ and choose $\\gamma\\le\\min\\{\\epsilon/8,\\gamma(H,\\eta)\\}$, so that both trimming constants $(\\eta+\\gamma)/(1-\\gamma)$ and $(\\eta+2\\gamma)/(1-\\gamma)$ are at most $\\epsilon$. Let $\\delta_1=\\delta(\\gamma)$ come from the linearly large self-regular subset theorem and let $c,N$ come from the induced counting lemma, then put $\\delta=\\min\\{\\delta_1/N,\\ \\delta_1c^{1/h},\\ (1-\\gamma)\\delta_1\\}$. Given $G$ nonempty, take a $\\gamma$-self-regular $W$ with $|W|\\ge\\delta_1n$. If $|W|<N$ then $n<N/\\delta_1$, so $\\delta n\\le1$ and a single vertex is the required set. Otherwise the middling-density lemma would give $\\operatorname{ind}_H(G)\\ge c|W|^h\\ge(\\delta n)^h$, so $d(W,W)<\\eta$ or $d(W,W)>1-\\eta$, and the matching trimming lemma returns an $\\epsilon$-restricted subset of size more than $(1-\\gamma)\\delta_1 n\\ge\\delta n$.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "thm-large-self-regular-subset",
+          "lem-regularity-is-monotone-in-the-parameter",
+          "lem-a-self-regular-set-of-intermediate-density-carries-many-induced-copies",
+          "lem-trimming-a-self-regular-set-of-low-density",
+          "lem-trimming-a-self-regular-set-of-high-density",
+          "lem-sparsity-is-monotone-in-the-parameter",
+          "def-induced-copy-number",
+          "def-epsilon-regular-pair",
+          "def-edge-density-between-vertex-sets",
+          "def-real-power",
+          "thm-real-power-agrees-with-rational-exponent"
+        ]
+      },
+      {
+        "id": "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+        "kind": "corollary",
+        "title": "Rödl: for every $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there is $\\delta>0$ such that every $H$-free graph has an $\\epsilon$-restricted vertex set of size at least $\\delta|V(G)|$",
+        "strategy": "An $H$-free graph has $\\operatorname{ind}_H(G)=0$, and for a nonempty $G$ the bound $(\\delta|V(G)|)^{|V(H)|}$ is strictly positive, so Nikiforov's hypothesis holds with the same $\\delta$.",
+        "deps": [
+          "thm-nikiforov-few-induced-copies-force-a-linear-restricted-set",
+          "def-h-free-and-family-free-graph",
+          "def-induced-copy-number",
+          "def-c-sparse-and-c-restricted-vertex-set"
+        ]
+      },
+      {
+        "id": "cor-rodl-for-a-nonempty-family-of-forbidden-graphs",
+        "kind": "corollary",
+        "title": "Rödl's theorem for a nonempty family of forbidden induced subgraphs",
+        "strategy": "Fix any $H\\in\\mathcal F$. An $\\mathcal F$-free graph is $H$-free, so the single-graph statement applies with $\\delta=\\delta(H,\\epsilon)$; taking the largest such $\\delta$ over $H\\in\\mathcal F$ gives the best constant this argument yields.",
+        "deps": [
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "def-h-free-and-family-free-graph",
+          "def-c-sparse-and-c-restricted-vertex-set"
+        ]
+      },
+      {
+        "id": "cor-rodl-in-the-edge-density-form",
+        "kind": "corollary",
+        "title": "The edge-density form of Rödl's theorem: a linearly large set of self-density at most $\\epsilon$ or at least $1-\\epsilon$",
+        "strategy": "Apply the theorem with parameter $\\epsilon/2$ and pass to densities. In the sparse case $d(X,X)\\le\\epsilon/2\\le\\epsilon$; in the dense case $d(X,X)\\ge1-\\epsilon/2-1/|X|$, which is at least $1-\\epsilon$ once $|X|\\ge2/\\epsilon$, and that holds for $n\\ge n_0=2/(\\epsilon\\delta)$. The threshold on $n$ is not removable, because the self-density of a clique of size $s$ is $1-1/s$.",
+        "deps": [
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "lem-a-sparse-set-has-small-self-density",
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "cor-the-density-form-and-the-degree-form-of-rodls-theorem-are-interchangeable",
+        "kind": "corollary",
+        "title": "The edge-density form of Rödl's theorem implies the maximum-degree form, with $\\epsilon$ and $\\delta$ each shrunk by a constant factor",
+        "strategy": "Given a linearly large $X$ with $d(X,X)\\le\\epsilon/4$ or $d(X,X)\\ge1-\\epsilon/4-1/\\lvert X\\rvert$, apply [[lem-a-weakly-sparse-set-has-a-large-sparse-subset]] to get $X′\\subseteq X$ with $\\lvert X′\\rvert\\ge\\lvert X\\rvert/2$ that is $\\epsilon$-restricted, taking $c=\\epsilon/4$ so that $4c=\\epsilon$. THE DENSE BRANCH IS NOT THE SAME COMPUTATION AND NEEDS ITS OWN NUMBERED STEP: the trimming lemma is stated for a set of small self-density, so the dense case is run inside $\\overline G$, where $d_{\\overline G}(X,X)=1-1/\\lvert X\\rvert-d_G(X,X)\\le\\epsilon/4$ by the diagonal convention of [[def-edge-density-between-vertex-sets]]; the lemma returns an $\\epsilon$-sparse $X′$ of $\\overline G$, and [[lem-restrictedness-is-complement-invariant]] carries it back as an $\\epsilon$-dense set of $G$. Do not write that the trimming lemma “gives the dense version too”: its Statement is one-sided, and the complement passage is the step that supplies the other side. So the two statements of Rödl’s theorem differ only in the constants, which is why the density form quoted in the literature and the maximum-degree form proved here are the same theorem.",
+        "deps": [
+          "cor-rodl-in-the-edge-density-form",
+          "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "lem-restrictedness-is-complement-invariant",
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-edge-density-between-vertex-sets",
+          "lem-a-sparse-set-has-small-self-density"
+        ]
+      },
+      {
+        "id": "cor-nikiforov-applies-to-every-linearly-large-induced-subgraph",
+        "kind": "corollary",
+        "title": "A linearly large induced subgraph of a graph with few induced copies again has a linearly large restricted set",
+        "strategy": "Combine the inheritance lemma with the theorem applied inside $G[W]$: the hypothesis transfers with $\\delta$ replaced by $\\delta/\\lambda$, and a set that is $\\epsilon$-restricted in $G[W]$ is $\\epsilon$-restricted in $G$ because sparsity depends only on the induced subgraph.",
+        "deps": [
+          "thm-nikiforov-few-induced-copies-force-a-linear-restricted-set",
+          "lem-few-induced-copies-is-inherited-by-large-induced-subgraphs",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph"
+        ]
+      },
+      {
+        "id": "cor-boundedly-many-restricted-sets-cover-all-but-a-small-fraction",
+        "kind": "corollary",
+        "title": "For every $\\lambda>0$ a bounded number of disjoint $\\epsilon$-restricted sets covers all but $\\lambda|V(G)|$ vertices of an $H$-free graph",
+        "strategy": "Repeatedly apply Rödl inside the graph induced on what is left. Every induced subgraph of an $H$-free graph is $H$-free, and each step removes at least a $\\delta$ fraction of the current remainder, so after $t$ steps the remainder has at most $(1-\\delta)^t n$ vertices; $t$ may therefore be taken proportional to $\\log(1/\\lambda)/\\delta$, a bound depending only on $H$, $\\epsilon$ and $\\lambda$. Sparsity is internal to the induced subgraph, so each extracted set is $\\epsilon$-restricted in $G$ as well. The leftover $\\lambda n$ vertices are not covered by this argument.",
+        "deps": [
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "lem-induced-freeness-passes-to-induced-subgraphs",
+          "def-h-free-and-family-free-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "thm-a-bounded-partition-into-weakly-restricted-sets",
+        "kind": "theorem",
+        "title": "Every $H$-free graph partitions into boundedly many vertex sets of self-density at most $\\epsilon$ or at least $1-\\epsilon$",
+        "strategy": "Run [[cor-boundedly-many-restricted-sets-cover-all-but-a-small-fraction]] with parameter $\\epsilon/2$ and a leftover fraction $\\lambda$ still to be chosen, obtaining disjoint sets $X_1,\\dots,X_t$ with $t\\le C\\log(1/\\lambda)/\\delta$ and a remainder $R$ of at most $\\lambda n$ vertices. Add $R$ to a largest $X_i$, whose size is at least $(1-\\lambda)n/t$. The added vertices contribute at most $\\lambda n\\,\\lvert X_i\\cup R\\rvert$ to the edge count on either side, so $X_i\\cup R$ still has self-density at most $\\epsilon$ or at least $1-\\epsilon$ provided $\\lambda t^2$ is small enough; since $t$ grows only logarithmically in $1/\\lambda$, such a $\\lambda$ exists. TWO THRESHOLDS ARE HIDDEN HERE AND EACH IS ITS OWN NUMBERED STEP. First, passing from the maximum-degree form to self-density in the dense case costs the $1/\\lvert X_i\\rvert$ slack of [[lem-a-sparse-set-has-small-self-density]], so it needs $\\lvert X_i\\rvert\\ge2/\\epsilon$, which holds for every extracted set because the last extraction still runs inside a remainder of at least $\\lambda n$ vertices and so returns a set of at least $\\delta\\lambda n$ of them. Second, that forces $n\\ge n_0(H,\\epsilon)$. STATE THE SMALL CASE RATHER THAN LEAVING IT: for $n<n_0$ partition $V(G)$ into singletons, each of self-density $0$, giving at most $n_0(H,\\epsilon)$ parts, so the bound on the number of parts is $\\max\\{t+1,n_0\\}$ and depends only on $H$ and $\\epsilon$. Without that case the theorem is stated for all $H$-free graphs and proved only for large ones. The corresponding statement for the maximum-degree form is not obtainable this way: a large star shows that a set containing a high-degree vertex may have no restricted extension, as [[cex-weak-sparsity-does-not-imply-sparsity]] records.",
+        "deps": [
+          "cor-boundedly-many-restricted-sets-cover-all-but-a-small-fraction",
+          "cor-rodl-in-the-edge-density-form",
+          "lem-a-sparse-set-has-small-self-density",
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "lem-weak-sparsity-is-a-bound-on-the-edge-density",
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-h-free-and-family-free-graph",
+          "thm-double-counting"
+        ]
+      },
+      {
+        "id": "rem-the-two-forms-of-rodls-theorem",
+        "kind": "remark",
+        "title": "Bounded degree against bounded density: the two statements of Rödl's theorem, and which one is stronger",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-a-sparse-set-has-small-self-density",
+          "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "cor-rodl-in-the-edge-density-form",
+          "cor-the-density-form-and-the-degree-form-of-rodls-theorem-are-interchangeable",
+          "def-edge-density-between-vertex-sets",
+          "def-directional-and-weak-sparsity-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "rem-the-diagonal-convention-in-self-density",
+        "kind": "remark",
+        "title": "Why the dense alternative carries a $1/|X|$ slack",
+        "deps": [
+          "def-edge-density-between-vertex-sets",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-a-sparse-set-has-small-self-density"
+        ]
+      },
+      {
+        "id": "rem-the-size-of-the-constant-in-rodls-theorem",
+        "kind": "remark",
+        "title": "What this proof gives for $\\delta$, and why the regularity route is expensive",
+        "deps": [
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "thm-large-self-regular-subset",
+          "thm-szemeredi-regularity-lemma-with-tower-bound",
+          "thm-nikiforov-few-induced-copies-force-a-linear-restricted-set"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 402,
+    "id": "sparse-restricted-subgraphs-and-rodl-nikiforov-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Sparse Restricted Subgraphs and the Rödl–Nikiforov Theorems — Examples",
+    "companion": "sparse-restricted-subgraphs-and-rodl-nikiforov",
+    "requires": [
+      "sparse-restricted-subgraphs-and-rodl-nikiforov"
+    ],
+    "items": [
+      {
+        "id": "ex-zero-sparse-sets-are-the-stable-sets",
+        "kind": "example",
+        "title": "The $0$-sparse sets are exactly the stable sets and the $0$-dense sets exactly the cliques",
+        "strategy": "With $c=0$ the condition reads $|N(x)\\cap X|\\le0$ for every $x\\in X$, which says $G[X]$ has no edges. Complementing gives the clique statement.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-clique-stable-set-and-numbers",
+          "lem-restrictedness-is-complement-invariant"
+        ]
+      },
+      {
+        "id": "ex-the-self-density-of-a-clique",
+        "kind": "example",
+        "title": "A clique of size $s$ has self-density $1-1/s$",
+        "strategy": "Count ordered pairs: $e(X,X)=s(s-1)$ because every ordered pair of distinct vertices is an edge and diagonal pairs never contribute, so $d(X,X)=s(s-1)/s^2$. In particular self-density never reaches $1$, which is exactly the slack recorded in the dense half of the sparse-density lemma.",
+        "deps": [
+          "def-edge-density-between-vertex-sets",
+          "lem-a-sparse-set-has-small-self-density",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-disjoint-union-of-small-cliques-is-a-sparse-vertex-set",
+        "kind": "example",
+        "title": "In a disjoint union of cliques of order $k$ the whole vertex set is $(k/n)$-sparse",
+        "strategy": "Every vertex has exactly $k-1$ neighbours, and $k-1\\le(k/n)\\cdot n$. So the sparsity parameter one can claim for the whole vertex set is governed by the largest component, not by the number of edges.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-clique-stable-set-and-numbers",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "ex-rodls-theorem-with-an-explicit-constant-for-p-three-free-graphs",
+        "kind": "example",
+        "title": "For $P_3$-free graphs Rödl's theorem holds with $\\delta=\\epsilon$, by an explicit argument",
+        "strategy": "In a $P_3$-free graph adjacency is transitive inside a component, so every component is a clique. If some component has more than $\\epsilon n$ vertices it is a clique of that size and is $0$-dense; otherwise every vertex has fewer than $\\epsilon n$ neighbours and the whole vertex set is $\\epsilon$-sparse. Either way an $\\epsilon$-restricted set of size at least $\\epsilon n$ exists, with no appeal to regularity.",
+        "deps": [
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-h-free-and-family-free-graph",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "ex-restricted-sets-in-a-union-of-two-cliques",
+        "kind": "example",
+        "title": "In a union of two equal cliques the restricted sets are the ones concentrated on a single side",
+        "strategy": "Write $a$ and $b$ for the sizes of the two traces. A set inside one clique is $0$-dense. A set meeting both has a vertex with $\\max\\{a,b\\}-1$ neighbours and one with $\\max\\{a,b\\}$ non-neighbours, so being $\\epsilon$-restricted with $\\epsilon<1/2$ forces $\\max\\{a,b\\}\\le1/(1-2\\epsilon)$; the set is then bounded independently of $n$.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "ex-zero-sparse-sets-are-the-stable-sets",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "ex-restricted-sets-in-a-complete-bipartite-graph",
+        "kind": "example",
+        "title": "In a balanced complete bipartite graph the two sides are the restricted sets of linear size",
+        "strategy": "Each side is stable, hence $0$-sparse of size $n/2$. A set taking $a$ vertices from each side gives every vertex $a$ neighbours and $a-1$ non-neighbours inside a set of size $2a$, so it is neither $\\epsilon$-sparse nor $\\epsilon$-dense once $a$ is large and $\\epsilon<1/2$.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "ex-zero-sparse-sets-are-the-stable-sets"
+        ]
+      },
+      {
+        "id": "cex-weak-sparsity-does-not-imply-sparsity",
+        "kind": "counterexample",
+        "title": "A star has tiny self-density, yet no restricted subset containing its centre has more than two vertices",
+        "strategy": "Let $X$ be the vertex set of a star $K_{1,m}$, of size $m+1$; its self-density is $2m/(m+1)^2$, which tends to $0$. Now let $Y\\subseteq X$ contain the centre and $k$ leaves. The centre has $k$ neighbours in $Y$, so $\\epsilon$-sparsity forces $k\\le\\epsilon(k+1)$, and each leaf has $k-1$ non-neighbours in $Y$, so $\\epsilon$-density forces $k-1\\le\\epsilon(k+1)$. For $\\epsilon<1/3$ both fail as soon as $k\\ge2$, so $|Y|\\le2$. The converse of the sparse-density lemma therefore fails, and the loss of a factor in the weakly-sparse trimming lemma is real.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-a-sparse-set-has-small-self-density",
+          "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "def-edge-density-between-vertex-sets",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-sparsity-does-not-pass-to-subsets",
+        "kind": "counterexample",
+        "title": "A subset of a $c$-sparse set that is not $c$-sparse",
+        "strategy": "Let $G$ be a perfect matching on $2m$ vertices and $X=V(G)$, which is $(1/(2m))$-sparse since every vertex has one neighbour. The two ends of a single edge form a subset of size $2$ in which each vertex still has one neighbour, so that subset is not $c$-sparse for $c<1/2$. This is why the transfer lemma charges a factor $1/\\lambda$.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-transfers-to-a-large-subset"
+        ]
+      },
+      {
+        "id": "cex-directional-sparsity-is-not-symmetric",
+        "kind": "counterexample",
+        "title": "$X$ can be $c$-sparse to $Y$ while $Y$ is not $c$-sparse to $X$",
+        "strategy": "Let $X=\\{x\\}$ and let $Y$ have $m\\ge3$ vertices, with $x$ adjacent to exactly one $y_0\\in Y$. Then $x$ has $1\\le\\tfrac12m$ neighbours in $Y$, so $X$ is $\\tfrac12$-sparse to $Y$; but $y_0$ has $1$ neighbour in $X$ and $\\tfrac12|X|=\\tfrac12$, so $Y$ is not. Weak sparsity, being an edge count, is symmetric.",
+        "deps": [
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "lem-weak-sparsity-is-a-bound-on-the-edge-density",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "cex-a-complete-graph-has-no-large-sparse-set",
+        "kind": "counterexample",
+        "title": "The dense alternative in Rödl's theorem cannot be dropped",
+        "strategy": "$K_n$ is $\\overline{K_2}$-free, so Rödl's theorem applies to it. Any $X\\subseteq V(K_n)$ with $|X|\\ge2$ has every vertex adjacent to the other $|X|-1$, so $\\epsilon$-sparsity would force $|X|-1\\le\\epsilon|X|$, impossible for $\\epsilon<\\tfrac12$ and $|X|\\ge2$. The linearly large set the theorem produces is therefore dense, never sparse.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "cor-rodl-every-h-free-graph-has-a-linear-restricted-set",
+          "def-h-free-and-family-free-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "fs-a-sparse-set-contains-a-stable-set-of-half-its-size",
+        "kind": "false-statement",
+        "title": "Every $c$-sparse set of size $m$ contains a stable set of size at least $m/2$",
+        "strategy": "Refute with a disjoint union of $1/c$ cliques of order $cn$: every vertex has $cn-1$ neighbours, so the whole vertex set is $c$-sparse, while a stable set meets each clique at most once and therefore has at most $1/c$ vertices — a constant, not a fraction of $n$. The witness is exhibited and both claims are checked directly from the definitions, so the refutation does not rest on the general lower bound the page records elsewhere.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "ex-a-disjoint-union-of-small-cliques-is-a-sparse-vertex-set",
+          "def-clique-stable-set-and-numbers",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-connected-graph-and-connected-component"
+        ]
+      }
+    ]
+  }
+]

@@ -33,7 +33,9 @@
 // a FAILURE unless --allow-missing says the artifacts do not exist yet.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { closeSync, existsSync, mkdtempSync, openSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -105,14 +107,33 @@ const PROBES = [
   },
 ];
 
+/** Some repo tools print their summary and then call `process.exit(...)`.
+ *  With stdout piped, Node may drop that buffered output; with stdout on a
+ *  file or tty, the same tools flush reliably. Capture via a temp file so this
+ *  liveness check reads what a human shell run actually emitted. */
+function runProbe(argv) {
+  const dir = mkdtempSync(join(tmpdir(), 'gate-liveness-'));
+  const log = join(dir, 'probe.log');
+  const fd = openSync(log, 'w');
+  let result;
+  try {
+    result = spawnSync('node', argv, { stdio: ['ignore', fd, fd], maxBuffer: 64 * 1024 * 1024 });
+  } finally {
+    closeSync(fd);
+  }
+  const out = readFileSync(log, 'utf8');
+  rmSync(dir, { recursive: true, force: true });
+  return { status: result?.status ?? null, out };
+}
+
 const results = [];
 for (const p of PROBES) {
   if (!p.needs()) {
     results.push({ gate: p.name, status: 'skipped', why: 'inputs not present' });
     continue;
   }
-  const r = spawnSync('node', p.argv(), { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
-  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+  const r = runProbe(p.argv());
+  const out = r.out;
   const raw = p.count(out);
   if (raw === undefined || raw === null) {
     results.push({ gate: p.name, status: 'unparsed', exit: r.status, why: 'summary line did not match the expected wording' });

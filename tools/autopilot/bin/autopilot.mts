@@ -25,7 +25,7 @@ import { Reporter, renderStatus } from '../src/reporter.mts';
 import { Executor } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
-import { waves, packBatches, writeManifests, driftEvidence } from '../src/frontier.mts';
+import { waves, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
@@ -137,8 +137,16 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '- **Backward edge** (the missing prerequisite has a LOWER `order`): apply it',
     '  yourself — edit that page\'s `requires` in `research/plan-spec.json`, run',
     '  `node tools/validate-plan.mjs research/plan-spec.json`, record the exact edit.',
-    '- **Higher-order or out-of-spec target:** a reading-order change, owner-only.',
-    '  Record it as blocked; edit nothing.',
+    '- **Higher-order target:** close it by REORDERING (owner, 2026-08-24). Edit',
+    '  `order` so the edge points backward, revalidate, record `drift-reordered`.',
+    '- **Target not in the spec at all:** MINT it (owner, 2026-08-24). Add the A page',
+    '  and its `-examples` companion to `plan-spec.json`, placed so every edge stays',
+    '  backward, and record `drift-minted`. This run then builds that pair.',
+    '- **More than three pages need minting:** the run is aimed above its own',
+    '  foundations. Drop the originals and record `drift-rescoped`, naming the',
+    '  dependency pairs to build instead — at most 14 pairs total.',
+    '',
+    'You run BEFORE any Beta, so all three cost one Alpha pass and no authored work.',
     '',
     '### Report contract — the gate parses this',
     '',
@@ -148,11 +156,18 @@ function writeDriftArtifacts(run: string, pages: string[]) {
     '    ...what you read: doc, section, the design\'s stated prerequisites...',
     '    VERDICT: no-drift',
     '    VERDICT: drift-applied — added <page-id> (order N)[, ...]',
-    '    VERDICT: drift-blocked — <the exact edge and why it is not addable>',
+    '    VERDICT: drift-minted — <page-id> (order N)[, ...]',
+    '    VERDICT: drift-reordered — <page-id> (order OLD -> NEW)[, ...]',
+    '    VERDICT: drift-rescoped — build <page-id> (order N)[, ...] instead',
+    '    VERDICT: drift-blocked — <the exact edge, and which of the three you tried>',
     '',
     'Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the',
-    'stage on a missing section, a malformed verdict, or any drift-blocked — a',
-    'blocked edge stops the run for the owner, which is the point.',
+    'stage on a missing section, a malformed verdict, or any drift-blocked.',
+    '`drift-blocked` is now a LAST RESORT, not the routine answer to an ordering',
+    'question: reordering, minting and rescoping are yours.',
+    '',
+    'Edit `plan-spec.json` and write the report. NOT manifests, NOT the scope ledger —',
+    '`tools/drift-apply.mjs` derives those from your verdicts.',
     '',
     '**No permission prompts of any kind**, including inside an `&&` chain.',
   ].join('\n') + '\n');
@@ -243,6 +258,27 @@ switch (cmd) {
       console.log(`no --pairs given; using wave 1 (${pages.length} pair(s))\n`);
     } else {
       pages = pairsArg.split(',').map((s: any) => s.trim()).filter(Boolean);
+    }
+
+    // REFUSE A PAIR SET THAT CANNOT BE BUILT, before a single agent starts.
+    // This is the same published-or-built-here predicate `drift-review-check`
+    // enforces at stage 1; running it here turns a three-hour discovery into a
+    // two-second one. `--allow-unbuildable` exists so a deliberate experiment
+    // is possible, and says on the record that it was deliberate.
+    {
+      const bad = unsatisfiableEdges(repo, pages);
+      if (bad.length && !has('allow-unbuildable')) {
+        const shown = bad.slice(0, 12).map((b: any) => (b.requires
+          ? `  ${b.page}\n      requires ${b.requires} — ${b.why}`
+          : `  ${b.page} — ${b.why}`)).join('\n');
+        die(`plan: ${bad.length} unbuildable \`requires\` edge(s) in this pair set.\n${shown}`
+          + (bad.length > 12 ? `\n  … and ${bad.length - 12} more` : '')
+          + '\n\nA page is buildable only when every page it requires is PUBLISHED on disk or built by'
+          + '\nthis same run. Publication state is the `status:` line in the file, never the git log —'
+          + '\na predecessor run is commonly published on disk hours before it is committed.'
+          + '\n\nRun `autopilot frontier` and plan its wave 1, or publish the predecessor first.'
+          + '\nPass --allow-unbuildable to plan anyway and own the stage-1 stop.');
+      }
     }
 
     const cap = Number(opt('cap', '2'));

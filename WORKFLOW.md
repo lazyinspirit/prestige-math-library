@@ -803,21 +803,20 @@ A strict refuter tends to surface a different nitpick on each stochastic run of
 the same long proof, so treat repeated re-judging as sampling, not as a verdict.
 The owner audit, not judge unanimity, is the convergence criterion.
 
-Step 9 completes its scope-denial sweep without pausing. Before the owner
-audit/publish pause at the end of `LEVELS.md` step 10, the lead Alpha produces
-a concise but complete fatal-error report. It first compares both judges'
-agreement, model-only rejections, nulls, and final adjudications, including the
-owner-confirmed fatal logic and dependency-citation detections from
-`tools/judge-compare.mjs --adjudications`, then groups every publish-blocking mathematical
-defect by type (logical inference, dependency citation, false/overstrong
-definition/title/Statement/theorem, missing hypothesis or choice scope, invalid
-witness, circular/forward/out-of-scope use) and location (Statement/title,
-proof/refutation, Facts/dependency metadata, Remark, page prose/summary). Every
-entry names its item/page and how it was resolved: dropped/deferred, restated,
-proof replaced or repaired, prose repaired, dependencies corrected, hypothesis
-restored, or a new lemma/result added. The report is concise by grouping, never
-by omitting a fatal defect; the detailed Beta/Alpha/judge/touch ledgers support
-it.
+Step 3 writes exact, closure-bound decisions for every coverage decline. Step 9
+rechecks only decisions whose row or relevant context changed; runs without the
+new receipt perform the full sweep. Every created or mathematically modified
+item since `post-step8` is derived by guarded hash; creations require one run
+manifest owner and modified published items enter a targeted change manifest.
+Every changed id passes through both judges and exact adjudication/rejudge, then
+stamped after impact closure. Unchanged current verdicts are not re-spent.
+
+Before the owner pause, Step 10 mechanically reconciles the final receipts and
+ledgers into a hash-bound evidence packet. Its deterministic renderer includes
+every fatal defect row, build/judge/pathway statistics and readiness facts. A
+read-only Alpha returns only executive interpretation, caveats, owner reading
+priorities and evidence-supported recommendations; it cannot omit a fatal row
+or alter the validated tree.
 
 ---
 
@@ -901,8 +900,12 @@ directory directly.
 
 ## Mechanics and gotchas worth remembering
 
-- **Precheck is line-based.** Each numbered proof step must be one physical line.
-  Reflow wrapped steps with `tools/reflow.mts` before prechecking.
+- **Precheck's structural tags are line-based.** Keep ordinary numbered prose on
+  one physical line and use `tools/reflow.mts` on accidental soft wraps. A
+  deliberate display or continuation before the next numbered step still
+  belongs to that step for proof-contract purposes: `facts-block.mjs` parses the
+  whole block, and both `proof-contract.mjs` and contract regeneration consume
+  that shared view.
 - **YAML titles must escape backslashes.** A frontmatter title like
   `"... $A \\cdot B$ ..."` needs a double backslash. A single backslash is an
   invalid YAML escape, and the renderer silently drops the whole item, which then

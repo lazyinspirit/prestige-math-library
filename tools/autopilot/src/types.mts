@@ -45,6 +45,12 @@ export interface Plan {
   outputSchema?: string;
   /** Repo-relative JSON artifact written mechanically from that final response. */
   resultArtifact?: string;
+  /** A CODEX_HOME that survives the dispatch, so a later stage can resume the
+   *  conversation. Ordinary lanes leave this unset and get a throwaway home. */
+  sessionHome?: string;
+  /** Re-enter this codex conversation instead of starting a new one. The id
+   *  comes from the earlier dispatch's result record. */
+  resumeSession?: string;
   /** An argv ARRAY. Never a command string: every attempt to parse one
    *  produced a quoting defect. */
   argv?: string[];
@@ -156,6 +162,24 @@ export interface Stage {
   onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number; prevRoundAt?: string | null }) => Promise<void | RepairReport> | void | RepairReport;
   /** Repair rounds allowed before a failing gate becomes a hard blocker. */
   maxFixRounds?: number;
+  /** The round cap is lifetime for this stage. An owner `retry` re-runs gates
+   *  after manual intervention but must not reset the counter or launch another
+   *  automatic repair/rejudge cycle. */
+  terminalFixBudget?: boolean;
+  /** TRIES EACH ITEM GETS AT EACH GATE (owner, 2026-08-25): "each item must
+   *  pass through the same gate within 3 tries, after which it becomes a
+   *  blocker and requires intervention".
+   *
+   *  Set this and the stage's repair budget stops being a single stage-wide
+   *  counter spent one gate per round, and becomes one counter per
+   *  (gate, item) pair. A round is spent while ANY named item still has tries
+   *  left; an item that burns its three is blocked BY NAME and stops
+   *  attracting repair, while its page-mates continue. The stage blocks only
+   *  when every item the failing gate names is exhausted.
+   *
+   *  Leave it unset to keep the original stage-wide `maxFixRounds` behaviour —
+   *  that is what every stage outside step 6 still does. */
+  perItemFixBudget?: number;
 }
 
 /** What a repair hook may report back about the round it just ran. */
@@ -177,6 +201,12 @@ export interface Config {
    *  own lane caps, which are the real constraint. */
   globalConcurrency?: number;
   maxAttempts?: number;
+  /** Minimum gap between two dispatch SPAWNS, in ms (default 2000; owner,
+   *  2026-08-24). A stage fans out to its cap in the same millisecond, so up to
+   *  twelve agent processes used to boot, read the repo and open their first
+   *  API connection simultaneously. Spacing them costs seconds against stages
+   *  that run for hours. 0 disables it. */
+  dispatchStaggerMs?: number;
   reportIntervalMin?: number;
   pollSec?: number;
   defaultTimeoutSec?: number;
@@ -245,6 +275,23 @@ export interface StateData {
   blockers: Blocker[];
   lastReportAt: string | null;
   paused: boolean;
+  /** PER-(GATE, ITEM) REPAIR ACCOUNTING (owner, 2026-08-25).
+   *
+   *  Key is `<gateId>\u0000<itemId>`, or `<gateId>\u0000*` for a gate whose
+   *  output names no item (validate-plan, manifest-integrity, splice-verify,
+   *  pathcheck, merge-contracts, gate-liveness are all plan- or level-scoped).
+   *  A counter increments only when that item is STILL named by that gate
+   *  after a completed battery, so an item repaired on the first pass never
+   *  reaches two.
+   *
+   *  Why this exists alongside `StageState.fixRounds`: the stage-wide budget
+   *  is consumed one GATE per round, because the battery stops at its first
+   *  failure. A level with four red gates therefore exhausted three rounds
+   *  before it exhausted the queue — frontier-18 did exactly that, twice — and
+   *  a single stubborn item could spend the whole level's budget. Opt in with
+   *  `Stage.perItemFixBudget`; stages that do not set it keep the old
+   *  accounting unchanged. */
+  gateAttempts?: Record<string, { n: number; stage: string; lastAt: string }>;
 }
 
 export interface StageStatus {

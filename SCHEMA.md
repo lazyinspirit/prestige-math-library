@@ -191,7 +191,9 @@ landmark: false                      # true = show as a node in the page's
 verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
-  judge:                             # omit only if not yet judged
+  judge:                             # omit unless both configured lanes actually
+                                     #   returned a current pass; a terminal
+                                     #   manual Step-8 resolution is not a pass
     model: "deepseek-v4-pro + claude-opus-5[1m]"
                                      #   session workflow: DeepSeek V4 Pro runs
                                      #   directly and a fresh Claude Opus 5 runs
@@ -332,6 +334,24 @@ rendered collapsed. EVERY phase-format body must pass precheck before `published
 
 ### 5.1 TikZ diagrams and commutative diagrams
 
+**Every diagram is optional; the equations it depicts are not** (owner,
+2026-08-25). No diagram — `tikz`, `tikzcd`, a string diagram drawn in either, or
+any figure the renderer turns into an SVG — may be the only place a piece of
+mathematics is stated. Whatever the picture asserts is also written
+algebraically in the item text: each arrow named with its domain and codomain,
+each commutativity claim as a composite equation, each string-diagram identity
+as an equation between composites in the ambient (bi)category. Delete every
+diagram from an item and its Definition, Statement and proof must still be
+complete and checkable.
+
+The reason is not style. A diagram is an SVG the item's readers cannot all see:
+the paired skeptical judges receive the frozen text, and a judge without vision
+reads a `tikzcd` block as unparsed source or not at all. `deepseek-v4-pro` spent
+595s and then 720s on
+`thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` at frontier-18 step 7
+without returning a verdict. An item whose content lives only in a picture
+cannot be judged, and an unjudgeable item cannot be published.
+
 An illustrative finite structure may be placed in a non-proof prose section
 (`## Definition`, `## Statement`, `## Statement refuted`, `## Example`, or
 `## Remarks`) in a fenced `tikz` block. The block contains a complete
@@ -346,6 +366,14 @@ The renderer compiles both `tikz` and `tikzcd` fenced blocks to cached inline
 SVGs on the server. `tikz` is for ordinary TikZ figures such as finite graphs,
 Hasse diagrams, and set diagrams; `tikzcd` is specifically for commutative
 diagrams.
+
+A **non-proof** section carrying a `tikzcd` block states the same content in
+prose and display math beside it — the arrows with their types, and each square
+or triangle the picture commutes as an explicit equation of composites. The
+`**Diagram:**` cell block below is a proof device and does not exist on a
+`def-` item or on any item with no phase-format proof, so on those items the
+surrounding text is the *only* algebraic statement and must carry the whole
+claim.
 
 Proofs that reason about a commutative diagram carry two co-located pieces, a
 deliberate dual source: the cells drive verification, the tikzcd drives the

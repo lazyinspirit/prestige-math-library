@@ -88,7 +88,7 @@ function makeExecutor(fx, stages, extra = {}) {
   const stateDir = join(fx.repo, '.autopilot');
   const config: any = {
     run: 'testrun', repo: fx.repo, stateDir, dispatchDir: fx.dispatchDir,
-    argv: ['true'], concurrency: 3, maxAttempts: 2, coversMap: {}, ...extra,
+    argv: ['true'], concurrency: 3, maxAttempts: 2, coversMap: {}, dispatchStaggerMs: 0, ...extra,
   };
   const state = new State(statePath(stateDir)).init('testrun');
   const reporter = new Reporter({ dir: stateDir, intervalMs: 10 ** 9, sink: () => {} });

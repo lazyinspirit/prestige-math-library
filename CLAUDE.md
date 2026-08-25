@@ -67,53 +67,120 @@ account is **never** wired into the worker service.
 
 | lane | model | runner and settings |
 |---|---|---|
-| Beta (scaffold + Step-5 author), Step-6 `reader`, Alpha's `refuter` | **Claude Opus 5** | claude CLI, `xhigh`, **1M** context (`[1m]` id) |
-| build `alpha` | Claude Opus 5 | claude CLI, `xhigh`, 1M, web tools |
-| `scaffolder`, audit `orchestrator`, `audit-beta`, `audit-alpha` | Claude Opus 5 | claude CLI, `xhigh`, 1M |
-| `mechanic` (post-adjudication bookkeeping) | Claude Opus 5 | claude CLI, **`medium`**, 1M |
-| audit `certifier` / independent reader | Claude Opus 5 | claude CLI, `xhigh`, 1M, read-only |
+| Beta (scaffold + Step-5 author), Step-6 `reader` | **GPT-5.4** | codex, `xhigh`, **1M** (`-c model_context_window=1000000`) |
+| Alpha's `refuter` | **GPT-5.4** | codex, `high`, `--sandbox read-only` |
+| build `alpha` | GPT-5.4 | codex, `xhigh`, 1M, web tools |
+| `alpha-assign` — `2-assign` ONLY | **GPT-5.6 Luna** | codex, `high`, 1M, cap 1, no web |
+| `alpha-high` — `3-recheck`, `10-pathway-author-v2` | GPT-5.4 | codex, **`high`**, 1M, web tools |
+| `alpha-adjudicate` — `8-adjudicate` ONLY | **GPT-5.6 Sol** | codex, `xhigh`, 1M, **cap 4**, web tools |
+| `scaffolder`, audit `orchestrator`, `audit-beta`, `audit-alpha` | GPT-5.4 | codex, `xhigh`, 1M |
+| `mechanic` (post-adjudication bookkeeping) | GPT-5.4 | codex, **`medium`**, 1M |
+| audit `certifier` / independent reader | GPT-5.4 | codex, `xhigh`, 1M, read-only |
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
-| paired judges, build and audit | DeepSeek V4 Pro + Claude Opus 5 | `JUDGE_LINEUP=deepseek+opus` |
+| paired judges, build and audit | DeepSeek V4 Pro + **GPT-5.6 Terra** | `JUDGE_LINEUP=deepseek+terra`; Terra at `xhigh`, 1M |
 
-**Binding for every future session** (owner, 2026-07-31/08-08/08-20/08-23). Never
-silently substitute another model or a smaller window. **The 1M window is the
-`[1m]` suffix on the model id and nothing else** — the claude CLI has no
-`model_context_window` knob, so a bare `claude-opus-5` runs the standard window
-with no other symptom. `tools/dispatch.mjs --dry-run --json` attests the table.
-The `codex` runner is kept with no role routed to it; `deepseek+terra` and
-`deepseek+sonnet` stay selectable and unselected.
+**Owner, 2026-08-25: the active paired judge moved from Sonnet to GPT-5.6
+Terra.** The ordinary agent assignments remain the table above. **There is no
+`max` effort on codex** — the API accepts `none|low|medium|high|xhigh`; `max` is
+DeepSeek's spelling and the corresponding Codex tier is `xhigh`. **The 1M
+window on Codex is `-c model_context_window=1000000`, passed explicitly** by
+both `dispatch.mjs` and `judge.mts` — the temporary `CODEX_HOME` carries only
+`auth.json`, so `config.toml` is not inherited and an omitted flag silently
+runs the built-in default.
 
-**Swap a model in `tools/models.mjs`** (2026-08-23) — the registry of every id,
-its runner and family, the `LANES` assignment and `JUDGE_LINEUPS`. Moving every
+**GPT-5.6 Terra remains subject to the judge injection bar.** `tools/judge.mts`
+sets that adoption test for every new judge model; a funded `--preflight` is
+reachability, not proof that the lane clears the bar.
+
+**Binding for every future session** (owner, 2026-07-31 → 08-24). Never silently
+substitute another model, effort tier or context window. **Verify a new id
+resolves before wiring it** — including `gpt-5.6-terra` before making it the
+active second judge — because a bad id does not reliably error.
+`tools/dispatch.mjs --dry-run --json` attests the resolved table and
+`--check-read-only` attests the sandboxes.
+
+**Context windows.** On codex the 1M window is `-c model_context_window=1000000`,
+passed explicitly by `dispatch.mjs` and `judge.mts`; the temporary `CODEX_HOME`
+carries only `auth.json`, so `config.toml` is NOT inherited and an omitted flag
+silently runs the built-in default. The retired Claude entries retain their
+`[1m]` model id so their historical configuration remains unambiguous, but they
+are not active judge lanes.
+
+**Effort vocabularies differ by runner and are not interchangeable.** codex
+accepts `none|low|medium|high|xhigh` and REJECTS `max`; `max` is DeepSeek's
+spelling of the top tier. "max" in an owner instruction means the runner's top
+tier — `xhigh` on codex.
+
+**Retained and unrouted:** `claude-opus-5[1m]`, `claude-sonnet-4-6`, and
+`gpt-5.4` as a judge lane. `deepseek+opus`, `deepseek+sonnet`, and
+`deepseek+gpt54` stay selectable but unselected. Retired lanes' ledger rows
+stay append-only evidence and satisfy no current coverage.
+
+**Swap a model in `tools/models.mjs`** — the registry of every id, its runner and
+family, the `LANES` assignment and `JUDGE_LINEUPS`. Five lanes: `agentic` (every
+ordinary agent role), `secondary` (a tier below — the `refuter`), `partition`
+(`2-assign` alone), `adjudication` (`8-adjudicate` alone, held on Sol so fatal
+counts stay comparable across runs), `crossFamily` (the tool-less adversarial
+reader). Moving every
 agent role is one edit to `LANES.agentic`; a new id is one edit to `MODELS`.
 **The registry does NOT own caps, sandboxes, effort, web access or working
-directories** — those belong to the role and stay in `dispatch.mjs`, so a lane
-swap cannot silently move them. `preflight.mjs` keeps a literal lineup copy on
-purpose (it must not import a tool it is checking is runnable);
-`tools/autopilot/test/model-registry.test.mts` fails if that copy drifts, if
-`[1m]` disappears, or if `crossFamily` resolves to `agentic`'s family.
+directories** — those belong to the ROLE and stay in `dispatch.mjs`, so a lane
+swap cannot silently move them. A stage wanting a different model or effort
+therefore needs its own role, as `mechanic`, `alpha-assign` and `alpha-high` do.
 
-**DeepSeek is the only cross-family reader in either workflow** — the step-7
-judge lane and `audit-refuter`. Every other lane is Anthropic, so Alpha, the
-Betas it audits, the `reader`/`refuter` it dispatches and the Opus judge whose
-rejections it adjudicates are one family. Opus/Alpha agreement is not
-corroboration; a DeepSeek-only rejection is the one finding no other lane could
-have produced. **No agent edits mathematical content after step 9.**
+**ANYTHING THAT ENUMERATES MODELS MUST DERIVE FROM THE REGISTRY.** Seven
+hand-kept copies were found in one week — `judge.mts`'s `SUPPORTED_MODELS`, its
+per-id transport routing, `judge-stamps.test.mts`, the registry's own lane test,
+and three lineup tables. `preflight.mjs` keeps a literal copy on purpose (it must
+not import a tool it is checking is runnable) and
+`tools/autopilot/test/model-registry.test.mts` fails if it drifts, if `[1m]`
+disappears from the Opus id, if a lane names a model its runner cannot spawn, if
+an agent lane becomes tool-less, or if `crossFamily` shares `agentic`'s family.
+**A test that must be edited when a lane moves is a copy, not a guard.**
 
-**Two live risks.** *Quota* — every agent lane and the Opus judge draw on one
-Claude subscription, so one session limit can null a sweep and stall the
-dispatched roles together. A cap is a ceiling the engine may use, never a quota
-it must spend: **if lanes die on the session limit, lower the caps rather than
-re-spending the loop.** *An unproven judge* — `tools/judge.mts` sets an injection
-test as the adoption bar for a new judge model, and none has been run against
-Opus at the frozen prompt.
+**SHAPE IS NOT COVERAGE — A LEDGER MUST BE ABLE TO WRITE A RETIRED LANE'S ROW**
+(found live, 2026-08-24). Two different questions get two different lists.
+*Is this a judge model at all* is `KNOWN_JUDGES`, the registry-derived union over
+every lineup; *is this one of today's two lanes* is `JUDGE_LINEUPS[lineupName]`.
+A **shape** check uses the first, a **coverage** check the second — which skips a
+retired lane's rows rather than rejecting them, so they stay append-only evidence
+exactly as §"Paired skeptical judges" requires. `level-coverage.mjs` asked the
+coverage question inside its adjudication shape check, so at frontier-18 step 8
+the five `claude-sonnet-4-6` rejections `step8-scope` handed group d came back
+`judge-adjudication-shape` after the Alpha adjudicated all five correctly. **No
+agent could have written those rows any other way**, so all three repair rounds
+burned and the stage stopped needing a person — the signature of a gate an agent
+cannot satisfy. `model-registry.test.mts` now fails if either shape checker tests
+`record.model` against the configured lineup.
 
-Read-only is enforced per runner, never by asking: an `--allowed-tools` allow
-list on the claude runner (default-deny — a deny list alone is escapable through
-a subagent, measured 2026-08-05), tool-lessness by transport on DeepSeek,
-`--sandbox read-only` on Codex if reopened. `dispatch.mjs --check-read-only`
-prints it. The claude runner's is a tool-layer allow list, not a kernel sandbox,
-and is only as good as the tool list.
+**ROUTE BY RUNNER, NEVER BY MODEL ID.** `judge.mts` chose its transport with a
+chain of id equality tests ending in a catch-all, so an unnamed model was judged
+by `gpt-5.6-terra` while every artifact recorded the requested name. Caught
+2026-08-24 before it ran. Paired judging is worth its cost only if the lanes are
+genuinely distinct, and a silent substitution announces itself nowhere.
+
+**THE TERRA JUDGE SHARES A FAMILY WITH MOST WORK IT SCREENS** (owner,
+2026-08-25). Agents are OpenAI-family; the judges are `deepseek-v4-pro` and
+`gpt-5.6-terra`; `audit-refuter` stays DeepSeek. Terra agreement is therefore
+not cross-family corroboration. A DeepSeek-only rejection remains the
+structurally independent signal. **Same-family agreement is not corroboration**
+— keep the rule across future lineup changes. **No agent edits mathematical
+content after step 9.**
+
+**Two live risks.** *Quota* — Terra and the ordinary agent lanes draw on the
+Codex subscription and its weekly cap, so a judge sweep competes with authoring
+for that account. A cap is a ceiling the engine may use, never a quota it must
+spend: **if lanes die on a limit, lower the caps rather than re-spending the
+loop.** *Judge adoption* — `tools/judge.mts` sets an injection test as the bar
+for a new judge model; a funded `--preflight` is reachability, not that bar.
+
+Read-only is enforced per runner, never by asking: `--sandbox read-only` on codex
+(a kernel-level guarantee, and what every read-only role now gets), an
+`--allowed-tools` allow list on the claude runner (default-deny — a deny list
+alone is escapable through a subagent, measured 2026-08-05), tool-lessness by
+transport on DeepSeek. `dispatch.mjs --check-read-only` prints it. The claude
+runner's is a tool-layer allow list rather than a kernel sandbox and is only as
+good as the tool list; codex's is not.
 
 ## Hard rules
 
@@ -165,12 +232,40 @@ and is only as good as the tool list.
 
 - **Capacity (owner, 2026-08-01; caps 2026-08-16).** Each Beta scaffolds and
   authors at most **two A/B pairs**, enforced by `content-policy.mjs
-  --manifest-only`. **Beta and reader caps 9**, alpha cap 3, each Alpha ≤3
-  batches.
+  --manifest-only`. **Beta and reader caps 12, alpha cap 4** (all raised
+  2026-08-24 from 9 and 3: alpha cap × 3 batches is the ceiling on a run's batch
+  count, and 3 capped it at nine — frontier-18 needed ten; the Beta/reader caps
+  track it by the same arithmetic). Stage `concurrency` mirrors these and moves
+  with them. **Quota:** every one of these lanes now draws on the **Codex**
+  subscription and its WEEKLY cap. On the Claude subscription nine concurrent
+  Betas exhausted the window in ~55 minutes and did it twice on frontier-18, so
+  12 is a ceiling to be used, not spent, whichever account is behind it. Each
+  Alpha ≤3 batches.
 
 - **Step-5/6 ownership (owner, 2026-07-31).** The Betas that scaffolded author
   all Step-5 content and at Step 6 may not audit anything they authored; Alpha
   assigns independent readers and adjudicates.
+
+- **The step-0 drift review is stage `1-drift`, ahead of the Betas, and Alpha
+  decides it (owner, 2026-08-24).** Four dispositions: apply a backward edge;
+  **reorder** to close a forward edge; **mint** a prerequisite the spec lacks
+  (A page + `-examples`), which **this run then builds**; and above **three**
+  mintings, **rescope** the run onto those dependencies instead, **≤14 pairs**.
+  Alpha edits `plan-spec.json` and writes its report only —
+  `tools/drift-apply.mjs` derives manifests, ledger and task files from the
+  verdicts, because an Alpha writing manifests is an Alpha driving a stage
+  transition. It runs before any Beta so a rescope costs one Alpha pass instead
+  of a teardown of authored work. `drift-blocked` still stops the run but is now
+  a last resort meaning *nobody decided*. `LEVELS.md` §Step 0 4c;
+  `ARCHITECTURE.md` §3.11e-3.
+
+- **`autopilot plan` refuses an unbuildable pair set (owner, 2026-08-24).** Every
+  `requires` edge must point at a page **published on disk** or built by the same
+  run — the stage-1 predicate, enforced before any agent starts. **Publication
+  state is the `status:` line, never the git log**: a predecessor is commonly
+  published on disk hours before it is committed. Plan `autopilot frontier`'s
+  wave 1 or publish the predecessor; `--allow-unbuildable` owns the stage-1 stop.
+  `ARCHITECTURE.md` §3.11e-4.
 
 - **Step-3 decisions belong to Alpha (owner, 2026-07-30; reassigned
   2026-08-16).** Alpha verifies each Beta recommendation from disk and **approves
@@ -189,12 +284,117 @@ and is only as good as the tool list.
   is `insufficient`. **Alpha may repair the scaffold itself** (owner,
   2026-08-16) — step 3 is the last point where thinness costs an edit rather than
   a rewrite. **Group Alphas** (owner, 2026-08-14): one per **≤3 batches** at
-  steps 3 and 6a/6b, outputs namespaced; assignment decided at `2-assign` and
-  validated by `alpha-groups.mjs`, which **never lets a category that fits inside
-  one Alpha be split**. The **lead Alpha** alone owns steps 4, 6c, 8, 9, the
+  steps 3, 6a/6b **and 8**, outputs namespaced; assignment decided at `2-assign`
+  and validated by `alpha-groups.mjs`, which **never lets a category that fits
+  inside one Alpha be split**. The **lead Alpha** alone owns steps 4, 6c, 9, the
   receipts and step 10. **Step 4's splice is not Alpha's**: `splice-plan.mjs`
   transcribes ids mechanically and its refusal is what Alpha adjudicates.
   `LEVELS.md` §Actors, §"Step 4"; `ARCHITECTURE.md` §6.
+
+- **Step 8 is partitioned by group (owner, 2026-08-25).** Each group Alpha
+  adjudicates the rejections against items in **its own batches**, on the same
+  `2-assign` partition steps 3 and 6 use; no rejection has two adjudicators and
+  none has none. Stage `8-scope` renders the partition mechanically
+  (`tools/step8-scope.mjs`) — who owns which rejection is a function of files on
+  disk — and writes each group a **self-contained task file**: its pages, every
+  item it owns, the dependency edges that leave its boundary, and its exact
+  rejection rows. Each group Alpha **resumes its rejection-blind Step-7 reader
+  conversation** when that durable session exists, and otherwise falls back to
+  a fresh dispatch using the rendered file. Nothing from its step-3 or step-6
+  self carries: a reader who already decided a proof was fine is the
+  worst-placed reader of a judge's objection to it. **Read scope is the whole
+  library, write scope is the group** — every Alpha may open any published item
+  and any item this run has built, because a citation objection is adjudicated by
+  reading the cited item; a defect found in another group's item is recorded in
+  `<run>-step8-cross-group.jsonl`. Repair and recovery rounds route back to the
+  owning group by the same map. `LEVELS.md` §"Step 8"; `ARCHITECTURE.md` §6.
+
+- **Step 8 separates mathematical retries from integrity closure (frontier-18
+  rebuild, 2026-08-25).** `8-scope` does not recompute judge currency over the
+  unchanged bytes just certified at `7-judge`. `8-adjudicate` owns exact-row
+  decisions and licensed fatal repairs; `8-preflight` runs the full repository,
+  contract and ledger checks **before** buying new verdicts; `8-rejudge` has the
+  lifetime **two frozen-context cycles per item** budget, counting its initial
+  targeted sweep, and gates only the Step-8 guard, published-repair
+  certification and judge closure; `8-close` runs the final non-judge integrity
+  battery; `8-final` recomputes exact mathematical currency with no repair hook
+  that could open a third cycle; `8-freeze` snapshots those bytes for Step 9. Existing
+  unadjudicated/open-fatal rows are decided before any missing-pair sweep, and
+  non-judge failures cannot consume or trigger the judge budget. Recovery tasks
+  are regenerated from current closure rows and resume the owning group; an
+  unscoped failure gets one focused reviewer, never four duplicated group scans.
+  Exact context hashes are still canonical `judge.mts --context-hash` results,
+  computed by a bounded local pool and reused only through an input-fingerprinted
+  receipt rather than 796 serial subprocesses. Immediately before fan-out, a
+  funded paired-lane preflight must pass; failure blocks without spending a
+  rejudge cycle or launching the sweep.
+
+- **A cross-group defect is an ALERT (owner, 2026-08-25).** The finding row is
+  not a note or a relabelled judge verdict. `step8-scope` gives it a stable id,
+  materialises it in `<run>-step8-alerts.json`, and blocks until the named
+  `owning_group` records an evidence-bearing disposition in
+  `<run>-step8-alert-decisions.jsonl`. The engine re-dispatches only that
+  group's Alpha. If the owner confirms a fatal target defect, a real targeted
+  judge rejection and its exact adjudication must exist before any edit; the
+  source item's rejection is provenance and cannot license the target repair.
+
+- **A defect in a PUBLISHED item is repaired, then judged by both lanes (owner,
+  2026-08-25).** No group owns published content, and leaving a known falsehood
+  live because it was out of scope is not a disposition. The Alpha repairs it and
+  appends `{kind:"repaired", id, group, found_via, pre_sha256, defect,
+  correction_basis}` to `<run>-step8-published-repairs.jsonl`. That row is a
+  **second licence source** for `step8-guard --published-repairs`, kept separate
+  from the adjudication ledger on purpose: published content was never in this
+  run's frozen pair context, so licensing the edit through a `confirmed_fatal`
+  row would mean naming a model that never judged the item — a fabricated verdict
+  in an append-only ledger step 10 reports from. `8-rejudge` unions those ids into
+  its sweep (the closure receipt is run-scoped and never names them), and
+  `step8-scope published` blocks until **both** lanes have answered on the
+  repaired text. That is the certification: published content has no step-6
+  reader left, and no author certifies its own repair. The existing bounds hold —
+  the replacement is the source-checked statement or a directly checkable
+  elementary correction, and **deletions, id changes and reading-order changes to
+  published pages stay owner-only**; a correction needing one of those, or a
+  debatable restatement or new theorem, is recorded as
+  `{kind:"escalated", …, why}` and stops there.
+
+- **A group Alpha is ONE agent that reads at step 7 and adjudicates at step 8
+  (owner, 2026-08-25).** It is spawned while the judge sweep runs, reads its own
+  group's pairs, and is then **resumed** at step 8 to adjudicate the rejections
+  against those items. Not two agents with a file between them — the same
+  conversation, so what it understood while reading is what it holds while
+  judging.
+  **Read-only at step 7, write at step 8**, which one `codex exec` cannot do
+  because `--sandbox` is fixed for the life of a process. `codex exec resume` is
+  the seam: it re-enters the conversation in a new process, so the sandbox is
+  chosen again. Verified 2026-08-25 — a session created under `--sandbox
+  read-only` and resumed with `-c sandbox_mode="workspace-write"` recalled its
+  earlier turn and wrote a file. `resume` REJECTS `--sandbox` and `--cd`; the
+  sandbox goes through `-c sandbox_mode=`, the working directory through the
+  spawned process's cwd. Role `alpha-group-read` at step 7, `alpha-adjudicate`
+  resuming at step 8; `dispatch.mjs --session-home` keeps the CODEX_HOME alive
+  under gitignored `.autopilot/sessions/<run>/<label>/`, and `--resume-session`
+  takes the id from the step-7 result record — never `--last`, which with four
+  concurrent groups means whichever finished last.
+  The reader returns a JSON digest (`briefs/schemas/step8-context.json`): the
+  conventions its pages fix, the load-bearing items, the dependencies it opened,
+  the seams it checked, what already looks wrong, and **alerts** — defects it
+  found in items another group owns. `8-scope` delivers each alert to the group
+  that owns the item. The `step8-digests` gate fails a vacuous digest against the
+  group's real size and fails an alert aimed at the sender's own items, but
+  **never requires a nonempty `concerns` list**. Quota: four Sol lanes overlap the
+  sweep on the Codex weekly cap; if lanes die on a limit, lower
+  `alpha-group-read`'s cap rather than re-spend.
+
+- **Route a stage by the role its plan dispatches (owner-scope defect, found
+  2026-08-25).** A stage's `pattern` must match `<role>-<label>.result.json` for
+  the role its own `plan()` names. The 2026-08-24 lane split left `2-assign`,
+  `3-recheck` and `8-adjudicate` matching `alpha` while dispatching
+  `alpha-assign`, `alpha-high` and `alpha-adjudicate`; none had re-run, so all
+  three would have re-dispatched a completed multi-hour agent forever with an
+  `ok: true` result on disk and nothing else amiss.
+  `tools/autopilot/test/step8-groups.test.mts` now checks every stage's pattern
+  against the result filename its own plan produces.
 
 - **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 6 and 8 a
   wrong proof is Alpha's to fix, not to report. Four authorised repairs, Alpha
@@ -204,9 +404,13 @@ and is only as good as the tool list.
   or claims more than the argument gives; **add intermediate lemmas**. If none
   closes the defect honestly, narrow or withdraw the claim; never inflate a
   dependency. The *stage* is what is bounded — step 8 needs a `confirmed_fatal`
-  row first — and inside that licence all four are open and uncapped. **At step 3
+  row first — and inside that licence all four repair modes are open. **At step 3
   only the last two apply.** "A proof rewrite is authoring" describes which repair
-  is needed; it is not a prohibition.
+  is needed; it is not a prohibition. Step 8 permits at most two automatic
+  frozen-context judge cycles per item, including the frozen judge context whose
+  first confirmed-fatal adjudication licenses repair;
+  after the second confirmed-fatal context, the item is a terminal blocker for
+  the owner or supervising session, with no third judge cycle.
 
 - **Alpha adjudicates judges; the 30-second threshold (owner, 2026-07-31).**
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen
@@ -233,18 +437,24 @@ and is only as good as the tool list.
   30-second tidying belong at **step 6**, before the text is frozen: any edit is
   a material rewrite under SCHEMA §3, so a step-8 polish voids
   `verification.judge`, forces a rejudge and resamples a refuter — an unbounded
-  loop converging on nothing. **Fatal repairs are deliberately uncapped:** a
-  proof that keeps yielding real fatal defects is either converging on
-  correctness or is false, and both must run to conclusion. The twice-touched
-  escalation stays advisory. `LEVELS.md` §"Step 8".
+  loop converging on nothing. **Owner clarification, 2026-08-25: two Step-8
+  frozen-context cycles per item are the maximum.** A fatal defect still present after the second cycle,
+  or a judge call that still has no usable verdict then, becomes a blocker for
+  the owner or supervising session to resolve directly. Record that exceptional
+  disposition in `<run>-step8-terminal-resolutions.jsonl`, bound to the exact
+  current item and context hashes. It supplies no judge verdict and no pass
+  stamp, and `autopilot retry` may re-run the gates but may not reopen the
+  two-cycle budget. `LEVELS.md` §"Step 8".
 
-- **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 does
-  not pause the build. At the end of step 10 the lead Alpha accounts for every
-  fatal error found and fixed, grouped by defect type (invalid inference,
-  incorrect dependency citation, false or overstrong statement, missing
-  hypothesis or choice scope, invalid witness) and by location (title/Statement,
-  proof, Facts, Remark, page prose), each naming the id and its disposition.
-  Evidence is the ledgers; concision must not omit a fatal defect.
+- **Exact decline decisions and post-Step-8 certification (owner, 2026-08-25).**
+  Step 3 records one evidence-bearing decision per `deferred`/`out-of-scope`
+  coverage row, bound to the exact row, relevant page closure and destination.
+  Step 9 re-examines only decisions whose bound context changed; a legacy run
+  without receipts reviews every decline. Every item created **or mathematically
+  modified** after `post-step8` receives both judge lanes, exact-hash
+  adjudication, targeted rejudge and a verified stamp; a creation must have one
+  run-manifest owner, while a modified published item stays in the targeted
+  change scope. Impact closure precedes final stamps and whole-level receipts.
 
 - **The defect ledger (owner, 2026-08-16).** A disposition and its row in
   `research/defect-ledger.jsonl` are one act — 6b/6c, step 8 (one row per
@@ -252,25 +462,33 @@ and is only as good as the tool list.
   `stats` + `render`. The `check` gate (steps 8–10) enforces it;
   `research/DEFECT-LEDGER.md` is generated, never edited.
 
-### Paired skeptical judges (owner, 2026-07-31; second lane 2026-08-23)
+- **Step-10 reporting is evidence-bound and read-only (owner, 2026-08-25).**
+  Final readiness is the one full final-text validation after pathway work and
+  stamps. Code reconciles its receipts and ledgers into a hash-bound evidence
+  packet and mechanically renders every build count, judge statistic and fatal
+  defect row. The read-only Alpha supplies only interpretation, caveats, owner
+  reading priorities and recommendations. A protected-tree receipt taken after
+  evidence generation must still match at close-out; a mismatch hard-stops.
 
-At step 7 run `deepseek-v4-pro` with `claude-opus-5[1m]` through
-`tools/judge.mts`, selected by `JUDGE_LINEUP=deepseek+opus`. The Opus lane is a
-fresh `claude -p` per call with an **empty temporary working directory** and
-`--allowed-tools ""`, so the frozen prompt is its only context — the empty
-workdir matters because the repo root carries this file, and a judge that has
-read the build rules is no longer reading the frozen prompt alone. Both lanes
-read one byte-identical frozen prompt as adversarial refuters of proofs and
-dependency citations. **Both lanes capped at 14** (owner, 2026-08-20) — **28**
-combined. `ARCHITECTURE.md` §5.
+### Paired skeptical judges (owner, 2026-07-31; Terra lane 2026-08-25)
+
+At step 7 run `deepseek-v4-pro` with `gpt-5.6-terra` through `tools/judge.mts`,
+selected by `JUDGE_LINEUP=deepseek+terra` (owner, 2026-08-25). Terra runs at
+`xhigh` in a fresh `codex exec --ephemeral` process under a throwaway
+`CODEX_HOME`, with the 1M window passed explicitly, so the frozen prompt is its
+only context. **Transport is chosen by the registry's runner for the id, never
+by an id equality test** — see §Model lineup. Both lanes read one
+byte-identical frozen prompt as adversarial refuters of proofs and dependency
+citations. **Both lanes capped at 14** (owner, 2026-08-20) — **28** combined.
+`ARCHITECTURE.md` §5.
 
 **The judge's context unit is the A/B PAIR:** the item's page and its `-examples`
 companion in full, plus exactly the pages that page declares in `requires` and
 actually cites.
 
 Rows from unselected lanes stay append-only evidence and never satisfy current
-coverage. **A level judged under `deepseek+terra` is not judged now**: coverage is
-per frozen context *and* per configured lane.
+coverage. **A level judged under a retired lineup is not judged now**: coverage
+is per frozen context *and* per configured lane.
 
 - Record a paired pass in `verification.judge` only when **both** models pass the
   text — written mechanically by `apply-judge-stamps.mjs`, enforced by the
@@ -285,7 +503,7 @@ per frozen context *and* per configured lane.
 - `tools/judge-sweep.mjs` keeps the lanes in independent file-backed pools; each
   model advances when one of *its own* slots frees, every call is its own
   process, and a capacity refusal is a null verdict, not a verdict.
-  `JUDGE_CONCURRENCY_<MODEL>` (here `JUDGE_CONCURRENCY_CLAUDE_OPUS_5_1M_`) can
+  `JUDGE_CONCURRENCY_<MODEL>` (here `JUDGE_CONCURRENCY_GPT_5_6_TERRA`) can
   lower a lane for a targeted replay, never raise it above the owner's value. On
   refusal or kernel-kill nulls, lower rather than re-spend the loop. Spend
   `judge.mts --preflight` before a sweep.
@@ -437,6 +655,25 @@ per frozen context *and* per configured lane.
   ~350 published items carrying it is a separate owner decision, and a real edit
   per item, never a `sed` pass.
 
+- **Diagrams are optional, equations are not (owner, 2026-08-25, standing).**
+  Every item involving a commutative diagram or a string diagram states its
+  content **precisely and algebraically** in the item text: arrows named with
+  domain and codomain, every commutativity claim written as a composite
+  equation, every string-diagram identity written as an equation between
+  composites. A `tikz`/`tikzcd` block is a rendering aid layered on top of that
+  text and never the sole carrier of a Definition, Statement, hypothesis or
+  proof step. Delete every diagram and the item must still be complete. **The
+  judges cannot see pictures:** the frozen prompt is text, `deepseek-v4-pro` has
+  no vision, and at frontier-18 step 7 it burned 595s and then 720s on
+  `thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` without returning a
+  verdict. An item whose mathematics lives only in an SVG is unjudgeable, and an
+  unjudgeable item cannot be published. Binds every scaffold, author, Beta and
+  Alpha. SCHEMA §5.1 carries the layout rules; the `**Diagram:**` cell grammar
+  it fixes is a *proof* device and does not exist on a `def-` item, so on those
+  the prose and display math are the whole algebraic statement. **Published
+  items are not retrofitted** — this governs new content, and the ~65 legacy
+  items carrying TikZ are a separate owner decision.
+
 - **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
   two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
   mathematical background and names definitions and results from declared
@@ -506,8 +743,10 @@ per frozen context *and* per configured lane.
   restatement is `ai-altered`, undecidable escalates to Alpha); the audit lineup
   is the model table above; and the repair delegation extends to
   citation-precision repairs, provenance retags and debatable restatements, Alpha
-  adjudicating. **Deletions, id changes and reading-order changes remain
-  owner-only.** The DeepSeek refuter is tool-less, so Alpha assembles its context
+  adjudicating. **Deletions, id changes and reading-order changes to PUBLISHED
+  pages remain owner-only** — the 2026-08-24 minting and reordering authority is
+  step-0 planning of unbuilt pages and does not reach published content, whose
+  ids are immutable on `main`. The DeepSeek refuter is tool-less, so Alpha assembles its context
   into the `--task` file and `dispatch.mjs` refuses a refuter dispatched without
   one.
 

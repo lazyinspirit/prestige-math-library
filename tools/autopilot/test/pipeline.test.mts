@@ -129,7 +129,7 @@ function makeExecutor(fx: any, stages: any, extra: any = {}) {
   const config: any = {
     run: 'testrun', repo: fx.repo, stateDir, dispatchDir: fx.dispatchDir,
     argv: ['true'], concurrency: 3, maxAttempts: 2, coversMap: {},
-    adoptCommand: false, ...extra,
+    adoptCommand: false, dispatchStaggerMs: 0, ...extra,
   };
   const state = new State(statePath(stateDir)).init('testrun');
   const reporter = new Reporter({ dir: stateDir, intervalMs: 10 ** 9, sink: () => {} });
@@ -408,9 +408,9 @@ test('the do-not-relax stages are still barriers', async () => {
   const mod = await import('../stages/mathlib.mts');
   const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '6b-baseline',
     '6c-cross', '7-judge', '8-baseline', '8-adjudicate', '8-rejudge',
-    '9-scope', '9-receipt', '9-close', '10-contract-close', '10-snapshot-v2',
+    '9-scope', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt', '10-contract-close', '10-snapshot-v2',
     '10-pathway-sync-v2', '10-pathway-seed-v2', '10-pathway-author-v2',
-    '10-stamps-v2', '10-readiness-v2', '10-owner-report-v2', '10-close-v2'];
+    '10-stamps-v2', '10-readiness-v2', '10-evidence-v2', '10-owner-report-v2', '10-close-v2'];
   for (const id of serial) {
     const st: any = (mod.stages as any[]).find((s) => s.id === id);
     assert.ok(st, `${id} is missing from the table`);

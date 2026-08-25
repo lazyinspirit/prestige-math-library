@@ -20,9 +20,10 @@
 // `verification.judge`, forces a rejudge, and resamples a refuter that
 // "tends to surface a different nitpick on each stochastic run of the same long
 // proof" (WORKFLOW.md §5). Each turn of that loop costs two judge calls and an
-// adjudication and converges on nothing. Fatal repairs are deliberately NOT
-// capped: a proof that keeps yielding real fatal defects is either converging
-// toward correctness or is actually false, and both must run to conclusion.
+// adjudication and converges on nothing. The automatic repair/rejudge loop is
+// capped at two frozen-context cycles. After exhaustion, only an exact-hash owner/session
+// terminal resolution may license the final intervention; it never fabricates
+// another judge verdict.
 //
 // HOW IT DECIDES, from disk rather than from an agent's account of its own edit.
 // A dedicated baseline snapshot is taken immediately before step-8 adjudication
@@ -39,7 +40,9 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { itemHashGuard, shortHash } from './item-hash.mjs';
+import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
+import { parseTerminalResolutions } from './step8-terminal-resolution.mjs';
+import { loadStep8JudgeEvidence, rejectionKey } from './step8-evidence.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const ITEMS = join(REPO, 'items');
@@ -53,13 +56,28 @@ const option = (name) => {
 const touchesPath = option('--touches');
 const baselineLabel = option('--baseline');
 const adjudicationsPath = option('--adjudications');
+const judgeLedgerPath = option('--judge-ledger');
+const scopePath = option('--scope');
 const againstLabel = option('--against');
+// THE SECOND LICENCE SOURCE (owner, 2026-08-25). A step-8 Alpha that finds a
+// falsehood in a PUBLISHED item must repair it, and that edit is real work with
+// no judge verdict behind it — published content was never in this run's frozen
+// pair context, so no adjudication row can exist for it. Before this flag the
+// only way to license such an edit was to write a `confirmed_fatal` row naming a
+// model that never judged the item, which is a fabricated verdict in an
+// append-only ledger step 10 reports from.
+//
+// A separate file with its own required shape keeps the two apart: an
+// adjudication answers a judge, a published repair answers the library. Omitting
+// the flag leaves the guard exactly as strict as it was.
+const publishedRepairsPath = option('--published-repairs');
+const terminalResolutionsPath = option('--terminal-resolutions');
 
 const usage = () => {
-  console.error('usage: node tools/step8-guard.mjs --touches <ledger.json> --baseline "<label>" --adjudications <file.jsonl> [--against "<label>"] [--json]');
+  console.error('usage: node tools/step8-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step8-scope.json> [--published-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
   process.exit(2);
 };
-if (!touchesPath || !baselineLabel || !adjudicationsPath) usage();
+if (!touchesPath || !baselineLabel || !judgeLedgerPath || !adjudicationsPath || !scopePath) usage();
 
 const errors = [];
 const warnings = [];
@@ -67,6 +85,11 @@ const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 
 const resolvePath = (p) => (p.startsWith('/') ? p : join(REPO, p));
+const terminalParsed = parseTerminalResolutions(
+  terminalResolutionsPath ? resolvePath(terminalResolutionsPath) : '',
+  { allowMissing: true },
+);
+for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 
 // ---- the baseline, and the state to compare it against ---------------------
 
@@ -106,26 +129,20 @@ const now = currentHashes();
 
 // ---- adjudications ---------------------------------------------------------
 
-const OUTCOMES = ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'];
 /** id -> Set of pre-edit text states a confirmed_fatal row licenses editing. */
 const fatalLicences = new Map();
 /** id -> [{model, outcome}] for the report, so a violation names what Alpha said. */
 const seenOutcomes = new Map();
 
-if (!existsSync(resolvePath(adjudicationsPath))) {
-  console.error(`step8-guard: adjudications ledger not found: ${adjudicationsPath}`);
-  process.exit(2);
+const evidence = loadStep8JudgeEvidence(resolvePath(judgeLedgerPath), resolvePath(adjudicationsPath),
+  { allowMissingAdjudications: false });
+for (const message of evidence.errors) error('step8-evidence-shape', message);
+for (const entry of evidence.surplusAnswers) {
+  error('judge-adjudication-no-rejection',
+    `${entry.path}:${entry.line}: adjudication does not exact-match a real keep:false judge row`, entry.row?.id ?? null);
 }
-for (const [index, line] of readFileSync(resolvePath(adjudicationsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
-  let record;
-  try { record = JSON.parse(line); } catch {
-    error('judge-adjudication-json', `${adjudicationsPath}:${index + 1}: invalid JSON`);
-    continue;
-  }
-  if (typeof record.id !== 'string' || !OUTCOMES.includes(record.outcome)) {
-    error('judge-adjudication-shape', `${adjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome, item_sha256}`);
-    continue;
-  }
+for (const entry of evidence.answers.values()) {
+  const record = entry.row;
   if (!seenOutcomes.has(record.id)) seenOutcomes.set(record.id, []);
   seenOutcomes.get(record.id).push({ model: record.model ?? '?', outcome: record.outcome });
 
@@ -133,7 +150,7 @@ for (const [index, line] of readFileSync(resolvePath(adjudicationsPath), 'utf8')
   // row cannot license any specific edit — it would license every edit forever.
   if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
     error('judge-adjudication-unhashed',
-      `${adjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) has no valid item_sha256; ` +
+      `${entry.path}:${entry.line}: ${record.id} (${record.outcome}) has no valid item_sha256; ` +
       'record the GUARD form — the full sha256 of the item text with the whole `verification:` block ' +
       'excluded (tools/item-hash.mjs `itemHashGuard`), which is what a touchlog baseline holds. ' +
       'This is NOT the judge-ledger form: a verdict row\'s item_sha256 excludes only the `judge:` ' +
@@ -141,8 +158,84 @@ for (const [index, line] of readFileSync(resolvePath(adjudicationsPath), 'utf8')
     continue;
   }
   if (record.outcome === 'confirmed_fatal') {
+    if (!evidence.rejections.has(rejectionKey(record))) {
+      error('fatal-licence-no-rejection',
+        `${entry.path}:${entry.line}: ${record.id} cannot license an edit because its exact judge rejection does not exist`,
+        record.id);
+      continue;
+    }
     if (!fatalLicences.has(record.id)) fatalLicences.set(record.id, new Set());
     fatalLicences.get(record.id).add(shortHash(record.item_sha256));
+  }
+}
+
+// ---- published repairs ------------------------------------------------------
+
+/** id -> Set of pre-edit text states a published-repair row licenses editing. */
+const publishedLicences = new Map();
+const publishedRows = [];
+const scope = JSON.parse(readFileSync(resolvePath(scopePath), 'utf8'));
+const runItems = new Set(Object.keys(scope.by_item ?? {}));
+const groups = new Set((scope.groups ?? []).map((group) => String(group.label)));
+const realRejectionsById = new Map();
+for (const entry of evidence.rejections.values()) {
+  const rows = realRejectionsById.get(entry.row.id) ?? [];
+  rows.push(entry.row);
+  realRejectionsById.set(entry.row.id, rows);
+}
+if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
+  for (const [index, line] of readFileSync(resolvePath(publishedRepairsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
+    let record;
+    try { record = JSON.parse(line); } catch {
+      error('published-repair-json', `${publishedRepairsPath}:${index + 1}: invalid JSON`);
+      continue;
+    }
+    publishedRows.push(record);
+    if (record.kind === 'escalated') continue;   // the published gate blocks unresolved escalation
+    if (record.kind !== 'repaired' || typeof record.id !== 'string'
+      || typeof record.defect !== 'string' || !record.defect.trim()
+      || typeof record.correction_basis !== 'string' || !record.correction_basis.trim()
+      || typeof record.found_via !== 'string' || !record.found_via.trim()) {
+      error('published-repair-shape',
+        `${publishedRepairsPath}:${index + 1}: a repair row requires ` +
+        '{kind:"repaired", id, group, found_via, pre_sha256, defect, correction_basis}. ' +
+        '`defect` says what was false, `correction_basis` says what makes the replacement right ' +
+        '(the exact source-checked statement, or the elementary check), and `found_via` names the ' +
+        'run item whose rejection exposed it. A repair to published content with none of those ' +
+        'recorded is indistinguishable from an unlicensed edit.', record.id);
+      continue;
+    }
+    if (runItems.has(record.id)) {
+      error('published-repair-in-run',
+        `${publishedRepairsPath}:${index + 1}: ${record.id} belongs to this run; use its exact judge rejection and ordinary fatal licence`,
+        record.id);
+      continue;
+    }
+    if (!groups.has(String(record.group))) {
+      error('published-repair-group',
+        `${publishedRepairsPath}:${index + 1}: group ${record.group} is not a group in ${scopePath}`, record.id);
+      continue;
+    }
+    if (!runItems.has(record.found_via) || scope.by_item?.[record.found_via] !== String(record.group)) {
+      error('published-repair-provenance',
+        `${publishedRepairsPath}:${index + 1}: found_via must be a run item owned by group ${record.group}`, record.id);
+      continue;
+    }
+    if (!(realRejectionsById.get(record.found_via) ?? []).length) {
+      error('published-repair-no-exposing-rejection',
+        `${publishedRepairsPath}:${index + 1}: found_via ${record.found_via} has no real keep:false judge verdict`, record.id);
+      continue;
+    }
+    if (typeof record.pre_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.pre_sha256)) {
+      error('published-repair-unhashed',
+        `${publishedRepairsPath}:${index + 1}: ${record.id} has no valid pre_sha256; record the GUARD ` +
+        'form (tools/item-hash.mjs `itemHashGuard`, whole `verification:` block excluded). Without the ' +
+        'text state the repair was made against, the row would license every future edit to this item.',
+        record.id);
+      continue;
+    }
+    if (!publishedLicences.has(record.id)) publishedLicences.set(record.id, new Set());
+    publishedLicences.get(record.id).add(shortHash(record.pre_sha256));
   }
 }
 
@@ -160,6 +253,23 @@ for (const id of Object.keys(baseline.hashes)) if (!(id in now)) deleted.push(id
 for (const id of changed) {
   const licensed = fatalLicences.get(id)?.has(baseline.hashes[id]);
   if (licensed) continue;
+  // A published-page repair is licensed by its own row against the same
+  // pre-edit state. It is not a weaker licence: the row must name the falsehood
+  // and what makes the replacement right, and the repaired item is then routed
+  // to BOTH judge lanes, which is a stronger certification than the single
+  // reader the published-dependency-repair rule asks for at step 6.
+  if (publishedLicences.get(id)?.has(baseline.hashes[id])) continue;
+  // The two-cycle terminal route is deliberately post-edit and exact: it
+  // licenses only the current item bytes named by the manual resolution. Judge
+  // closure separately verifies the context hash before treating the blocker as
+  // closed. A later edit makes this comparison fail immediately.
+  const terminal = terminalParsed.latest.get(id);
+  if (terminal) {
+    const text = readFileSync(join(ITEMS, `${id}.md`), 'utf8');
+    if (terminal.item_sha256 === itemHashJudge(text)) continue;
+    error('terminal-resolution-stale', `${id}: terminal resolution does not match the current item text`, id);
+    continue;
+  }
   const said = (seenOutcomes.get(id) ?? []).map((o) => `${o.model}:${o.outcome}`).join(', ') || 'no adjudication at all';
   error('nonfatal-edit',
     `${id}: changed since "${baselineLabel}" (${baseline.hashes[id]} -> ${now[id]}) with no confirmed_fatal ` +
@@ -170,11 +280,10 @@ for (const id of changed) {
     'excludes only the `judge:` sub-block, will never match and reads here as an unlicensed edit.', id);
 }
 
-// Creation and deletion are step-6 powers, not step-8 ones. Neither is R1's
-// subject, so neither blocks here — but an unexplained one at step 8 is worth a
-// human look, and silence would read as approval.
-for (const id of created) warn('step8-creation', `${id}: created since "${baselineLabel}"; adding results is a step-6 power`, id);
-for (const id of deleted) warn('step8-deletion', `${id}: removed since "${baselineLabel}"; deleting results is a step-6 power and never applies to published items`, id);
+// Creation and deletion are Step-6 powers. A warning here silently granted a
+// power Step 8 explicitly does not have, so both are hard failures.
+for (const id of created) error('step8-creation', `${id}: created since "${baselineLabel}"; adding results is not licensed at Step 8`, id);
+for (const id of deleted) error('step8-deletion', `${id}: removed since "${baselineLabel}"; deleting results is not licensed at Step 8`, id);
 
 // ---- report -----------------------------------------------------------------
 
@@ -184,7 +293,7 @@ const summary = {
   compared_against: againstLabel ?? 'working tree',
   items_at_baseline: Object.keys(baseline.hashes).length,
   changed: changed.length,
-  licensed_by_confirmed_fatal: changed.length - errors.filter((e) => e.code === 'nonfatal-edit').length,
+  licensed_by_fatal_or_terminal_resolution: changed.length - errors.filter((e) => e.code === 'nonfatal-edit').length,
   created: created.length,
   deleted: deleted.length,
   errors: errors.length,
@@ -196,7 +305,7 @@ if (asJson) {
 } else {
   console.log(`step8-guard: baseline "${baselineLabel}"${baseline.at ? ` (${baseline.at})` : ''} vs ${summary.compared_against}`);
   console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-  console.log(`  ${summary.licensed_by_confirmed_fatal}/${changed.length} change(s) licensed by a confirmed_fatal adjudication`);
+  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal adjudication or exact terminal resolution`);
   for (const w of warnings) console.log(`  WARN  ${w.code}: ${w.message}`);
   for (const e of errors) console.log(`  ERROR ${e.code}: ${e.message}`);
   console.log(errors.length ? `\nFAIL — ${errors.length} error(s)` : '\nOK — every step-8 edit is licensed by a confirmed fatal defect');

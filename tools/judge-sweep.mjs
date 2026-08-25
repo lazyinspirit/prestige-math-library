@@ -12,6 +12,7 @@ import { spawn } from "node:child_process";
 import { tsxLoader } from "./paths.mjs";
 import { verdictIsCurrent } from "./judge-currency.mjs";
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
+import { buildCurrentContextHashes } from "./context-hash-pool.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -31,6 +32,8 @@ const itemsArg = value("--items");
 const manifestsArg = value("--manifests");
 const limitArg = value("--limit");
 const modelsArg = value("--models");
+const contextCache = value("--context-cache")
+  || (ledger.endsWith('.jsonl') ? ledger.replace(/-judge\.jsonl$/, '-judge-context-hashes.json') : `${ledger}-context-hashes.json`);
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl (--pages a-page,another-page | --items item-id,item-id | --manifests wave<k>-a.pages.json,wave<k>-b.pages.json) [--models model,model] [--limit N]");
   process.exit(2);
@@ -146,36 +149,16 @@ const captureChild = (args, env) => new Promise((resolve, reject) => {
   child.on("error", (cause) => finish(() => reject(cause)));
   child.on("close", (code) => finish((stdout, stderr) => resolve({ code: code ?? 2, stdout, stderr })));
 });
-const currentContextHash = async (id) => {
-  let result;
-  try {
-    result = await captureChild(["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], process.env);
-  } catch (cause) {
-    throw new Error(`${id}: could not start current judge context build — ${cause.message}`);
-  }
-  if (result.code !== 0) {
-    throw new Error(`${id}: could not build current judge context — ${result.stderr.trim()}`);
-  }
-  let row;
-  try { row = JSON.parse(result.stdout); }
-  catch (cause) { throw new Error(`${id}: malformed current context hash output — ${cause.message}`); }
-  if (row.id !== id || typeof row.context_sha256 !== "string") {
-    throw new Error(`${id}: malformed current context hash`);
-  }
-  // `item_sha256` is what the byte-identical clause below reads. It has been on
-  // every verdict row since it was added; an older ledger without it simply
-  // fails that clause and falls back to the context hash, which is stricter.
-  return { context: row.context_sha256, item: typeof row.item_sha256 === "string" ? row.item_sha256 : null };
-};
-// Both model queues attest against the identical current prompt. Build its hash
-// once per item rather than parsing the same A/B-pair context twice before any
-// API call can start.
+// Both configured model queues attest against the identical current prompt.
+// Build each hash through the canonical judge path before network work starts.
 const currentHashes = new Map();
-for (const id of ids) currentHashes.set(id, await currentContextHash(id));
+for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: contextCache })) {
+  if (!result.ok) throw new Error(result.error);
+  currentHashes.set(result.id, { context: result.context, item: result.item });
+}
 // Owner policy, 2026-08-01: cap each judge lane independently. The current
-// values are 14 per active lane (owner, 2026-08-20, carried through the
-// 2026-08-23 lane swap unchanged), so at most 28 calls combined under the
-// `deepseek+opus` lineup; see MODEL_CONCURRENCY below.
+// values are 14 per active lane, so the current two-lane lineup admits at most
+// 28 calls combined; see MODEL_CONCURRENCY below.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
@@ -231,10 +214,12 @@ const MODEL_CONCURRENCY = Object.freeze({
   //   * a capacity refusal is a null verdict, never a verdict, so a lane that
   //     refuses does not fail loudly — it quietly halves the run's paired
   //     coverage.
-  // Both figures are for a claude-CLI lane, which is what Opus now is, and 14 sits
-  // between them. If this sweep starts returning `claude_exit` nulls at ~3.5s,
-  // that is the refusal signature: lower with JUDGE_CONCURRENCY_CLAUDE_OPUS_5_1M_
-  // (which can only lower, never raise) rather than re-spending the loop.
+  // Both figures are for a claude-CLI lane, which is what the second judge is
+  // again as of 2026-08-24 (claude-sonnet-4-6), and 14 sits between them. If this
+  // sweep starts returning `claude_exit` nulls at ~3.5s, that is the refusal
+  // signature: lower with JUDGE_CONCURRENCY_CLAUDE_SONNET_4_6 (which can only
+  // lower, never raise) rather than re-spending the loop. The env name is derived
+  // from the model id, so it moves with the lineup — see `laneCap` below.
   [DEEPSEEK]: 14,
   [TERRA]: 14,
   [SONNET]: 24,

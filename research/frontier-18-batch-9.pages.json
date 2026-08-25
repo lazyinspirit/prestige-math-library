@@ -1,0 +1,838 @@
+[
+  {
+    "order": 365.009,
+    "id": "ends-coends-and-weighted-limits",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Ends Coends and Weighted Limits",
+    "companion": "ends-coends-and-weighted-limits-examples",
+    "requires": [
+      "monadicity-and-becks-theorem-examples"
+    ],
+    "items": [
+      {
+        "id": "def-dinatural-transformation",
+        "kind": "definition",
+        "title": "Dinatural transformation between functors on $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C$",
+        "deps": [
+          "def-category",
+          "def-opposite-category",
+          "def-product-category",
+          "def-functor-and-contravariant-functor",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "prop-a-natural-transformation-composed-with-a-dinatural-transformation-is-dinatural",
+        "kind": "proposition",
+        "title": "Composing a dinatural transformation with a natural transformation on either side gives a dinatural transformation",
+        "strategy": "Let $\\sigma:P'\\Rightarrow P$ and $\\tau:Q\\Rightarrow Q'$ be natural and $\\alpha:P\\to Q$ dinatural. For $\\gamma_c:=\\alpha_c\\sigma_{c,c}$ rewrite each side of the hexagon at $f:c\\to c'$ using naturality of $\\sigma$ at the two product-category morphisms $(f,1_c):(c',c)\\to(c,c)$ and $(1_{c'},f):(c',c)\\to(c',c')$; both sides then reduce to the two sides of $\\alpha$'s hexagon precomposed with $\\sigma_{c',c}$. The post-composition case uses naturality of $\\tau$ at $(1_c,f)$ and $(f,1_{c'})$ in the same way.",
+        "deps": [
+          "def-dinatural-transformation",
+          "def-natural-transformation",
+          "def-product-category",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "thm-dinatural-transformations-do-not-compose-in-general",
+        "kind": "theorem",
+        "title": "Dinatural transformations do not compose in general",
+        "strategy": "Constructive. Take $\\mathcal C$ to be the walking arrow $0\\xrightarrow{u}1$ and $\\mathcal D=\\mathbf{Set}$. A functor $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathbf{Set}$ is four sets and four functions subject to one square. Choose $P$ with all four sets singletons; $Q$ with $Q(1,0)=\\varnothing$, $Q(0,0)$, $Q(1,1)$ and $Q(0,1)$ singletons; and $R$ with $R(1,0)=\\varnothing$, $R(0,0)=\\{c\\}$, $R(1,1)=\\{d\\}$ and $R(0,1)=\\{y_1,y_2\\}$ two-element, $R(1_0,u)(c)=y_1$, $R(u,1_1)(d)=y_2$. The empty set in the $(1,0)$ slot makes the required functor square vacuous for $Q$ and $R$, and makes every family $Q\\to R$ dinatural; the singleton $Q(0,1)$ makes the chosen family $P\\to Q$ dinatural; and the composite fails the hexagon at $u$ because its two legs land on $y_1\\ne y_2$. Record explicitly that the empty and singleton slots are what make each check finite.",
+        "deps": [
+          "def-dinatural-transformation",
+          "prop-sets-and-functions-form-category-set",
+          "def-product-category",
+          "def-opposite-category",
+          "def-category"
+        ]
+      },
+      {
+        "id": "def-wedge-and-cowedge",
+        "kind": "definition",
+        "title": "Wedges and cowedges, and the categories they form",
+        "deps": [
+          "def-dinatural-transformation",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-category",
+          "def-product-category",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "def-end-and-coend",
+        "kind": "definition",
+        "title": "The end and the coend of a functor $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathcal D$",
+        "deps": [
+          "def-wedge-and-cowedge",
+          "def-initial-terminal-and-zero-object",
+          "def-dinatural-transformation"
+        ]
+      },
+      {
+        "id": "thm-ends-and-coends-are-unique-up-to-unique-isomorphism",
+        "kind": "theorem",
+        "title": "An end and a coend are unique up to a unique isomorphism compatible with every component",
+        "strategy": "Direct. An end is a terminal object of the category of wedges and a coend an initial object of the category of cowedges, so the published uniqueness of terminal and initial objects applies verbatim; the compatibility clause is exactly the statement that the connecting isomorphism is a morphism of wedges, that is, commutes with every component.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism"
+        ]
+      },
+      {
+        "id": "thm-a-natural-transformation-induces-a-morphism-of-ends-and-of-coends",
+        "kind": "theorem",
+        "title": "A natural transformation of functors induces a unique morphism of their ends and of their coends",
+        "strategy": "Direct. For $\\eta:P\\Rightarrow P'$ show that the family $\\eta_{c,c}\\circ\\omega_c$ is a wedge from $\\int_c P(c,c)$ to $P'$, using naturality of $\\eta$ at $(1,f)$ and at $(f,1)$ together with the wedge condition for $\\omega$; terminality then gives the unique induced arrow. Record functoriality (identity and composite) as separate numbered steps, since both follow only from uniqueness of the induced arrow.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-natural-transformation",
+          "def-dinatural-transformation"
+        ]
+      },
+      {
+        "id": "def-twisted-arrow-category",
+        "kind": "definition",
+        "title": "The twisted arrow category and its projection to $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C$",
+        "deps": [
+          "def-category",
+          "def-opposite-category",
+          "def-product-category",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-the-twisted-arrow-category-is-the-category-of-elements-of-the-hom-bifunctor",
+        "kind": "theorem",
+        "title": "The twisted arrow category is the category of elements of the hom-bifunctor",
+        "strategy": "Direct. For locally small $\\mathcal C$ the hom-bifunctor is a covariant functor $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathbf{Set}$, so its category of elements has objects $((c,c'),f)$ with $f\\in\\mathcal C(c,c')$ and a morphism to $((d,d'),g)$ given by $(a,b)$ in the product category with $\\mathcal C(a,b)(f)=g$, that is $bfa=g$. Match this against the twisted arrow definition object for object and morphism for morphism, and check that the projection functor is the category-of-elements projection. This is the item that keeps the page from silently re-minting a published construction.",
+        "deps": [
+          "def-twisted-arrow-category",
+          "def-category-of-elements",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignment-is-a-bifunctor",
+          "def-small-locally-small-and-large-category",
+          "def-product-category"
+        ]
+      },
+      {
+        "id": "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+        "kind": "theorem",
+        "title": "An end is a limit over the twisted arrow category, and a coend is a colimit over its opposite",
+        "strategy": "Direct, by matching universal properties. From a wedge $\\omega$ build the cone with component at $f:c\\to c'$ equal to $T(1_c,f)\\omega_c=T(f,1_{c'})\\omega_{c'}$, and check naturality against a twisted arrow morphism $(a,b)$; conversely restrict a cone to the identity arrows. Show the two constructions are mutually inverse and carry morphisms of wedges to morphisms of cones, so terminal objects correspond. For the coend clause state the reindexing explicitly: the colimit is over $\\mathrm{Tw}(\\mathcal C)^{\\mathrm{op}}$ of the functor sending $f:c\\to c'$ to $T(c',c)$, with the domain and codomain SWAPPED. Getting that swap backwards is the page's designated fatal error.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-twisted-arrow-category",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-opposite-category",
+          "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism"
+        ]
+      },
+      {
+        "id": "prop-the-end-of-a-functor-mute-in-its-first-variable-is-the-limit-of-that-functor",
+        "kind": "proposition",
+        "title": "The end of a functor made mute in its contravariant variable is the ordinary limit of that functor",
+        "strategy": "Direct. For $F:\\mathcal C\\to\\mathcal D$ let $F'(c_1,c_2):=F(c_2)$ and check that $F'$ is a functor on $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C$. The wedge condition on a family $X\\to F'(c,c)=F(c)$ then reads $F(f)\\alpha_c=\\alpha_{c'}$, which is exactly the published cone condition, and morphisms of wedges are morphisms of cones. Hence the two universal properties coincide. State the dual clause for coends and colimits. This is the item that says ends generalise limits rather than sitting beside them, so it cites the published cone and limit definitions and restates neither.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-functor-and-contravariant-functor",
+          "def-product-category",
+          "def-opposite-category",
+          "def-dinatural-transformation"
+        ]
+      },
+      {
+        "id": "cor-ends-and-coends-exist-when-the-index-category-is-small-and-the-target-is-complete-or-cocomplete",
+        "kind": "corollary",
+        "title": "Ends exist over a small index category in a complete target, and coends in a cocomplete one",
+        "strategy": "Direct. The objects of $\\mathrm{Tw}(\\mathcal C)$ are the morphisms of $\\mathcal C$ and its morphisms form a subset of a product of two morphism sets, so $\\mathrm{Tw}(\\mathcal C)$ is small when $\\mathcal C$ is; completeness then supplies the limit. Carry out the smallness count inline rather than asserting it.",
+        "deps": [
+          "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+          "def-twisted-arrow-category",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-an-end-is-an-equalizer-between-two-products",
+        "kind": "theorem",
+        "title": "An end is the equalizer of two products, and a coend the coequalizer of two coproducts",
+        "strategy": "Direct from the wedge universal property, NOT by instantiating the published products-and-equalizers construction of a limit: the two index sets here are the objects of $\\mathcal C$ and the morphisms of $\\mathcal C$, which is not the indexing that construction uses on $\\mathrm{Tw}(\\mathcal C)$. Show that a morphism $X\\to\\prod_cT(c,c)$ equalises the two displayed maps exactly when its components form a wedge, then transport the universal property. State the existence hypothesis as: the two products and the equalizer exist (which small $\\mathcal C$ plus completeness supplies), so no proper-class product is formed.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation",
+        "kind": "theorem",
+        "title": "A set-valued coend is the disjoint union of the diagonal values modulo the dinaturality relation",
+        "strategy": "Direct. Combine the coequalizer description with the published construction of colimits in $\\mathbf{Set}$: the coend is $\\coprod_cT(c,c)$ modulo the least equivalence relation identifying $T(f,1_{c'})(x)$ with $T(1_c,f)(x)$ for every $f:c\\to c'$ and every $x\\in T(c',c)$. Write the relation with its variance displayed and check the generating pairs lie in the two summands named, since this is where an index swap hides.",
+        "deps": [
+          "thm-an-end-is-an-equalizer-between-two-products",
+          "def-end-and-coend",
+          "thm-set-has-all-small-colimits",
+          "prop-sets-and-functions-form-category-set",
+          "def-equivalence-relation",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-a-module-valued-coend-is-a-quotient-of-a-direct-sum-by-the-dinaturality-submodule",
+        "kind": "theorem",
+        "title": "A module-valued coend is the direct sum of the diagonal values modulo the dinaturality submodule",
+        "strategy": "Constructive, direct from the universal property rather than through a general cocompleteness theorem, because the published $R$-module cocompleteness asserts existence without exhibiting the coequalizer. Build $Q=\\bigl(\\bigoplus_cT(c,c)\\bigr)/S$ with $S$ the submodule generated by $T(f,1_{c'})(x)-T(1_c,f)(x)$; verify the canonical family is a cowedge, then use the direct-sum and quotient universal properties to factor an arbitrary cowedge uniquely through $Q$. The $I=\\varnothing$ case of the published direct sum makes the empty-index case explicit.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-universal-property-of-module-direct-sums",
+          "def-quotient-module",
+          "thm-quotient-module-universal-property",
+          "def-submodule",
+          "prop-modules-and-homomorphisms-form-category-rmod",
+          "def-small-locally-small-and-large-category",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "thm-a-continuous-functor-preserves-ends-and-a-cocontinuous-functor-preserves-coends",
+        "kind": "theorem",
+        "title": "A functor preserving twisted-arrow limits preserves ends, and dually for coends",
+        "strategy": "Direct. State the hypothesis at the exact strength the proof uses: $F$ preserves $\\mathrm{Tw}(\\mathcal C)$-limits. Then add the corollary form for small $\\mathcal C$ and continuous $F$, since 'continuous' in this library means preservation of SMALL limits and $\\mathrm{Tw}(\\mathcal C)$ is small only when $\\mathcal C$ is. Do not state a blanket 'continuous functors preserve all ends'.",
+        "deps": [
+          "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "def-end-and-coend",
+          "def-twisted-arrow-category",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "cor-a-right-adjoint-preserves-ends-and-a-left-adjoint-preserves-coends",
+        "kind": "corollary",
+        "title": "A right adjoint preserves ends and a left adjoint preserves coends",
+        "strategy": "Direct. The published theorem that a right adjoint preserves every limit that exists applies at the indexing category $\\mathrm{Tw}(\\mathcal C)$ with no size hypothesis, so this corollary carries none either.",
+        "deps": [
+          "thm-a-continuous-functor-preserves-ends-and-a-cocontinuous-functor-preserves-coends",
+          "thm-right-adjoints-preserve-limits",
+          "cor-left-adjoints-preserve-colimits",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-end-and-coend"
+        ]
+      },
+      {
+        "id": "cor-the-hom-functor-turns-a-coend-into-an-end-and-preserves-ends",
+        "kind": "corollary",
+        "title": "The hom-functor turns a coend into an end and carries an end to an end",
+        "strategy": "Direct. Apply the published statement that $\\mathcal D(-,X)$ sends a colimit to a limit over the opposite index, at index $\\mathrm{Tw}(\\mathcal C)^{\\mathrm{op}}$, and read the resulting limit back as an end through the twisted-arrow description. Quote the published corollary exactly: it gives $\\mathcal D(\\operatorname*{colim}D,X)\\cong\\lim_{\\mathcal J^{\\mathrm{op}}}\\mathcal D(D(j),X)$, which is the direction needed, and separately gives continuity of $\\mathcal D(X,-)$ for the second clause.",
+        "deps": [
+          "thm-a-continuous-functor-preserves-ends-and-a-cocontinuous-functor-preserves-coends",
+          "cor-hom-functors-are-continuous-and-send-colimits-to-limits",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-end-and-coend",
+          "def-twisted-arrow-category",
+          "def-opposite-category",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "def-parametrised-end-and-parametrised-coend",
+        "kind": "definition",
+        "title": "Ends and coends with parameters",
+        "deps": [
+          "def-end-and-coend",
+          "def-product-category",
+          "def-functor-and-contravariant-functor",
+          "def-wedge-and-cowedge"
+        ]
+      },
+      {
+        "id": "thm-a-chosen-family-of-ends-assembles-into-a-functor-of-the-parameters",
+        "kind": "theorem",
+        "title": "A chosen family of ends is the object part of exactly one functor making the counit natural in the parameters",
+        "strategy": "Direct, and stated in the data-supplied form the library uses for chosen limits: GIVEN a choice of end for each value of the parameter, there is exactly one functor structure on those chosen objects making every counit component natural in the parameter. Prove existence and uniqueness of the arrow map from terminality, then the two functor laws as separate steps. Do not state an unconditional 'the end is a functor', which would select an end for a proper class of parameters.",
+        "deps": [
+          "def-parametrised-end-and-parametrised-coend",
+          "def-end-and-coend",
+          "thm-a-natural-transformation-induces-a-morphism-of-ends-and-of-coends",
+          "def-functor-and-contravariant-functor",
+          "def-wedge-and-cowedge"
+        ]
+      },
+      {
+        "id": "thm-a-family-natural-in-the-parameter-factors-through-the-parametrised-end",
+        "kind": "theorem",
+        "title": "A family into a parametrised end is natural in the parameter exactly when its composite with the counit is",
+        "strategy": "Direct, both directions separately. One direction is composition of a natural family with a natural counit; the other uses the uniqueness half of the end's universal property applied to the two candidate factorisations of the same wedge. This is the step Fubini spends.",
+        "deps": [
+          "thm-a-chosen-family-of-ends-assembles-into-a-functor-of-the-parameters",
+          "def-parametrised-end-and-parametrised-coend",
+          "def-end-and-coend",
+          "def-natural-transformation",
+          "def-wedge-and-cowedge"
+        ]
+      },
+      {
+        "id": "lem-a-wedge-on-a-product-index-category-is-dinatural-in-each-variable-separately",
+        "kind": "lemma",
+        "title": "A wedge on a product index category is exactly a family dinatural in each variable separately",
+        "strategy": "Direct, both implications. Forwards, specialise the hexagon at $(f,1_d)$ and at $(1_c,g)$. Backwards, factor $T(1_c,f,1_d,g)$ as a composite of the two one-variable actions in either order and substitute the two separate hexagons; the four-variable functor's independent action in each slot is the only fact used and must be cited as such. Check the identity cases $f=1$, $g=1$ so the reader sees the reduction is not circular. The statement is about WEDGES, whose source is constant, and it must not be generalised in the text to arbitrary dinatural transformations between two varying functors: separate dinaturality does not give joint dinaturality there, and the constancy of the source is what the backward direction spends. Item 3 on this page is the standing evidence that dinaturality is fragile under exactly this kind of extension.",
+        "deps": [
+          "def-wedge-and-cowedge",
+          "def-dinatural-transformation",
+          "def-product-category",
+          "def-opposite-category",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-fubini-for-ends",
+        "kind": "theorem",
+        "title": "Fubini: an end over a product index category and the two iterated ends exist together and agree",
+        "strategy": "Universal property, NOT the copower-and-adjoint route of Loregian's proof, which needs the target to have copowers that this statement does not assume. Hypotheses: a chosen family of inner ends in each of the two orders. Establish a bijection, natural in the test object, between wedges into the product-index functor and wedges into the parametrised inner end, by composing the separate-dinaturality lemma with the unique factorisation through each inner end. Terminal objects then correspond, so any one of the three ends exists iff the others do, with canonical isomorphisms. State the reindexing $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\times\\mathcal D^{\\mathrm{op}}\\times\\mathcal D\\cong(\\mathcal C\\times\\mathcal D)^{\\mathrm{op}}\\times(\\mathcal C\\times\\mathcal D)$ explicitly as part of the setup. Dualise for coends. NO smallness hypothesis is used or claimed.",
+        "deps": [
+          "lem-a-wedge-on-a-product-index-category-is-dinatural-in-each-variable-separately",
+          "thm-a-chosen-family-of-ends-assembles-into-a-functor-of-the-parameters",
+          "thm-a-family-natural-in-the-parameter-factors-through-the-parametrised-end",
+          "def-parametrised-end-and-parametrised-coend",
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-product-category",
+          "def-opposite-category",
+          "thm-ends-and-coends-are-unique-up-to-unique-isomorphism"
+        ]
+      },
+      {
+        "id": "cor-ends-commute-with-ends",
+        "kind": "corollary",
+        "title": "Iterated ends may be taken in either order",
+        "strategy": "Direct. Both iterated ends are canonically isomorphic to the end over the product index category, so they are canonically isomorphic to each other; the hypotheses are exactly Fubini's two chosen families.",
+        "deps": [
+          "thm-fubini-for-ends",
+          "def-end-and-coend",
+          "def-parametrised-end-and-parametrised-coend",
+          "def-product-category"
+        ]
+      },
+      {
+        "id": "thm-the-set-of-natural-transformations-is-an-end",
+        "kind": "theorem",
+        "title": "For a small source category, the set of natural transformations is an end of the hom-bifunctor of the values",
+        "strategy": "Direct. For SMALL $\\mathcal C$ and locally small $\\mathcal D$ the set of natural transformations is a hom-set of the functor category by the published size proposition, so the claim is about a genuine set. Unwind the wedge condition on a family $Y\\to\\mathcal D(Fc,Gc)$: it says precisely that each element of $Y$ names a natural transformation. Then exhibit evaluation as the terminal wedge. Say explicitly which size hypothesis is used where, since this theorem is what makes the functor category's size hypothesis visible again.",
+        "deps": [
+          "def-end-and-coend",
+          "def-wedge-and-cowedge",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignment-is-a-bifunctor",
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "def-natural-transformation",
+          "def-small-locally-small-and-large-category",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "cor-the-end-of-the-hom-functor-is-the-monoid-of-natural-endomorphisms-of-the-identity",
+        "kind": "corollary",
+        "title": "The end of the hom-bifunctor is the commutative monoid of natural endomorphisms of the identity functor",
+        "strategy": "Direct. Take $F=G=1_{\\mathcal C}$ in the previous theorem for small $\\mathcal C$. For the monoid clause, note that vertical and horizontal composition of natural endomorphisms of an identity functor share the identity transformation as unit and satisfy the interchange law, so the published Eckmann-Hilton theorem applies verbatim and gives one commutative operation. Keep the two operations named separately until Eckmann-Hilton identifies them.",
+        "deps": [
+          "thm-the-set-of-natural-transformations-is-an-end",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-functor-category",
+          "def-vertical-composition-of-natural-transformations",
+          "def-horizontal-composition-and-whiskering-of-natural-transformations",
+          "thm-interchange-law-for-natural-transformations",
+          "thm-eckmann-hilton-argument",
+          "def-semigroup-and-monoid"
+        ]
+      },
+      {
+        "id": "thm-the-end-form-of-the-yoneda-lemma",
+        "kind": "theorem",
+        "title": "The end of the function-set functor on a representable is evaluation",
+        "strategy": "Direct. Both isomorphisms are the previous theorem taken at $\\mathcal D=\\mathbf{Set}$ with one argument a representable, followed by the published Yoneda bijection. Check the variance of the integrand in each of the two cases before writing the display: the first slot of the integrand carries the representable and is contravariant precisely because $\\mathbf{Set}(-,X)$ reverses it.",
+        "deps": [
+          "thm-the-set-of-natural-transformations-is-an-end",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "cor-contravariant-yoneda-lemma",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-end-and-coend",
+          "prop-sets-and-functions-form-category-set",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-the-ninja-yoneda-lemma-in-coend-form",
+        "kind": "theorem",
+        "title": "The co-Yoneda isomorphisms: a set-valued functor is a coend against a representable",
+        "strategy": "Direct, by a chain of natural bijections in a test set $Y$: the hom-functor turns the coend into an end; currying in $\\mathbf{Set}$ moves the product across; the end is then a set of natural transformations; and the published Yoneda bijection evaluates it. Conclude with the published statement that representables detect isomorphism of objects, which is what upgrades a natural bijection of representables into an isomorphism of the represented objects. State all four isomorphisms, covariant and contravariant, and derive the two end-form ones from the previous item rather than repeating its proof. The library publishes ONLY the contravariant detection statement, $\\mathcal C(-,a)\\cong\\mathcal C(-,b)\\iff a\\cong b$; the chain of bijections here is natural in a test object and so exhibits an isomorphism of COVARIANT representables. Apply the published corollary in $\\mathbf{Set}^{\\mathrm{op}}$ and say so in a numbered step. Do not cite it as though it read $\\mathcal C(a,-)\\cong\\mathcal C(b,-)$.",
+        "deps": [
+          "cor-the-hom-functor-turns-a-coend-into-an-end-and-preserves-ends",
+          "thm-the-set-of-natural-transformations-is-an-end",
+          "thm-the-end-form-of-the-yoneda-lemma",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "cor-contravariant-yoneda-lemma",
+          "thm-currying-is-an-adjunction-in-set",
+          "cor-representable-presheaves-detect-isomorphism-of-objects",
+          "def-end-and-coend",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-cartesian-product",
+          "def-yoneda-embedding",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "def-functor-tensor-product",
+        "kind": "definition",
+        "title": "The tensor product of a presheaf and a covariant set-valued functor",
+        "deps": [
+          "def-end-and-coend",
+          "def-hom-functors-and-hom-bifunctor",
+          "prop-sets-and-functions-form-category-set",
+          "def-cartesian-product",
+          "def-product-category",
+          "def-opposite-category",
+          "def-presheaf-representable-functor-and-representation"
+        ]
+      },
+      {
+        "id": "def-set-weighted-limit-and-weighted-colimit",
+        "kind": "definition",
+        "title": "Set-weighted limits and colimits",
+        "deps": [
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "def-presheaf-representable-functor-and-representation",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-natural-transformation",
+          "def-small-locally-small-and-large-category",
+          "prop-sets-and-functions-form-category-set",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "thm-a-weighted-limit-is-unique-up-to-unique-isomorphism",
+        "kind": "theorem",
+        "title": "A weighted limit and a weighted colimit are unique up to a unique compatible isomorphism",
+        "strategy": "Direct. A weighted limit IS a representation, so the published uniqueness of representing objects applies once the counit cylinder is identified with the universal element. Make that identification a numbered step rather than an aside; it is the whole content.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+          "def-universal-element",
+          "def-presheaf-representable-functor-and-representation"
+        ]
+      },
+      {
+        "id": "prop-a-weighted-limit-in-set-is-the-set-of-natural-transformations-from-the-weight",
+        "kind": "proposition",
+        "title": "A weighted limit of a set-valued diagram is the set of natural transformations from the weight",
+        "strategy": "Direct. Take the test object to be a one-element set in the defining representation and use that a function out of a singleton is an element of the codomain; naturality in the test object is what makes this an equality of functors and not just of underlying sets.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "prop-sets-and-functions-form-category-set",
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-natural-transformation",
+          "def-unordered-pair-and-singleton"
+        ]
+      },
+      {
+        "id": "def-power-and-copower-by-a-set",
+        "kind": "definition",
+        "title": "The power and the copower of an object by a set",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-hom-functors-and-hom-bifunctor",
+          "prop-sets-and-functions-form-category-set",
+          "def-small-locally-small-and-large-category",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-category"
+        ]
+      },
+      {
+        "id": "thm-a-power-is-a-product-of-copies-and-a-copower-is-a-coproduct-of-copies",
+        "kind": "theorem",
+        "title": "A power by a set is the product of that many copies and a copower is the coproduct",
+        "strategy": "Direct, and it is the seam item: it says that the power minted here is the published product of a constant family, not a second notion. Compare the two universal properties, noting that a function $S\\to\\mathcal M(m,c)$ is exactly an $S$-indexed family of morphisms $m\\to c$. Handle $S=\\varnothing$ explicitly: the power is then terminal and the copower initial, which is the published convention for empty products and coproducts.",
+        "deps": [
+          "def-power-and-copower-by-a-set",
+          "def-products-and-coproducts",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-indexed-family"
+        ]
+      },
+      {
+        "id": "thm-a-weighted-limit-is-an-end",
+        "kind": "theorem",
+        "title": "A weighted limit is an end of powers and a weighted colimit a coend of copowers",
+        "strategy": "Direct, by a chain of bijections natural in the test object: natural transformations from the weight into $\\mathcal M(m,F-)$ form an end of function sets; the power's defining bijection moves each function set inside the hom; and the hom-functor's preservation of ends pulls the end out. State the hypotheses as existence of the displayed powers or copowers and of the displayed end or coend, not as completeness of the target.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-power-and-copower-by-a-set",
+          "thm-the-set-of-natural-transformations-is-an-end",
+          "cor-the-hom-functor-turns-a-coend-into-an-end-and-preserves-ends",
+          "def-end-and-coend",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+          "def-hom-functors-and-hom-bifunctor"
+        ]
+      },
+      {
+        "id": "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+        "kind": "theorem",
+        "title": "A weighted limit is an ordinary limit over the category of elements of the weight, and a weighted colimit an ordinary colimit over it",
+        "strategy": "Direct, by an identity of data rather than by Kelly's density route: a cone with apex $m$ over the composite of the category-of-elements projection with the diagram is literally the same family as a natural transformation from the weight into $\\mathcal M(m,F-)$, once a component at $(c,x)$ is read as the value at $x$ of the component at $c$. Write both compatibility conditions out and observe they are the same equation. State the weighted-colimit clause as a separate numbered part and prove it, do not leave it to the reader: for a weight $W:\\mathcal J^{\\mathrm{op}}\\to\\mathbf{Set}$ the same identification reads a cocone under the composite of the category-of-elements projection with the diagram as a natural transformation from $W$ into $\\mathcal M(F-,m)$, so $W\\star F$ is the ordinary colimit over $\\int W$. Riehl CHT (7.1.8) and (7.2.4) are the two clauses and the harvest rows for both name this item. No smallness and no choice are used; record that the category of elements of a $\\mathbf{Set}$-valued weight on a small index category is small, since its objects are the disjoint union of the weight's values, because the existence corollary spends exactly that.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-category-of-elements",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-small-locally-small-and-large-category",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "cor-set-weighted-limits-and-colimits-exist-over-a-small-index-category-in-a-complete-or-cocomplete-target",
+        "kind": "corollary",
+        "title": "A limit weighted by a $\\mathbf{Set}$-valued weight on a small index category exists in a complete target, and the weighted colimit in a cocomplete one",
+        "strategy": "Direct, and it is the weighted half of the existence corollary the ends half already carries. For small $\\mathcal J$ and $W:\\mathcal J\\to\\mathbf{Set}$ the category of elements $\\int W$ has as objects the disjoint union of the sets $W(j)$ and as morphisms a subset of a disjoint union of morphism sets of $\\mathcal J$, so it is small; the previous theorem exhibits $\\{W,F\\}$ as an ordinary limit over it, and completeness of the target supplies that limit. Dually for $W\\star F$ over $\\int W$ with a cocomplete target. Carry out the smallness count inline rather than asserting it, exactly as the corresponding corollary for ends does. Say explicitly that this is sufficiency and not necessity: the definitions apply whenever the representing object exists, and an individual weighted limit over a large index category may exist.",
+        "deps": [
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-category-of-elements",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "cor-a-colimit-of-a-set-valued-functor-is-the-set-of-connected-components-of-its-category-of-elements",
+        "kind": "corollary",
+        "title": "A colimit of a set-valued functor is the set of connected components of its category of elements",
+        "strategy": "Direct. The published construction of colimits in $\\mathbf{Set}$ presents the colimit as the tagged union of the values modulo the least equivalence relation generated by the transition maps; the objects of the category of elements are exactly that tagged union and its morphisms are exactly the generating pairs, so the quotient is the set of connected components in the published finite-zigzag sense. Handle the empty index category: both sides are empty.",
+        "deps": [
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+          "def-category-of-elements",
+          "thm-set-has-all-small-colimits",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-isomorphism-groupoid-and-connected-category",
+          "prop-sets-and-functions-form-category-set",
+          "def-equivalence-relation"
+        ]
+      },
+      {
+        "id": "thm-the-constant-singleton-weight-recovers-an-ordinary-limit",
+        "kind": "theorem",
+        "title": "Weighting by the constant singleton gives exactly the ordinary limit",
+        "strategy": "Direct. A natural transformation from the constant singleton weight into $\\mathcal M(m,F-)$ is exactly a cone over $F$ with apex $m$, so the two representations represent the same functor. This is a comparison theorem: it does not redefine the ordinary limit, and the proof cites the published cone definition rather than restating it. Record the alternative one-line route through the category of elements of the constant singleton weight.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+          "def-unordered-pair-and-singleton"
+        ]
+      },
+      {
+        "id": "thm-weighted-limits-over-a-representable-weight-are-evaluation",
+        "kind": "theorem",
+        "title": "Weighting by a representable evaluates the diagram",
+        "strategy": "Direct. The published Yoneda bijection identifies natural transformations out of a representable with an evaluation, so the defining representation of the weighted limit is satisfied by the value of the diagram at that object. Do both variances: the covariant representable weights the limit, the contravariant one the colimit, and the naturality clause of the published Yoneda statement is what makes the identification compatible.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "cor-contravariant-yoneda-lemma",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+          "def-presheaf-representable-functor-and-representation"
+        ]
+      },
+      {
+        "id": "thm-representable-functors-carry-weighted-limits-to-weighted-limits",
+        "kind": "theorem",
+        "title": "A representable functor carries a weighted limit to the weighted limit of the composed diagram",
+        "strategy": "Direct. Read the defining representation together with the identification of a weighted limit in $\\mathbf{Set}$ with the set of natural transformations out of the weight; the statement then says that the hom-set of the weighted limit is the weighted limit of the hom-sets. State the weighted-colimit clause separately, since there the representable is contravariant and the result is again a weighted LIMIT in $\\mathbf{Set}$, not a colimit.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "prop-a-weighted-limit-in-set-is-the-set-of-natural-transformations-from-the-weight",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignment-is-a-bifunctor",
+          "def-presheaf-representable-functor-and-representation",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism"
+        ]
+      },
+      {
+        "id": "thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor",
+        "kind": "theorem",
+        "title": "A set-valued coend is a colimit weighted by the hom-bifunctor, and a set-valued end a limit weighted by it",
+        "strategy": "Direct, for a set-valued functor: expand the hom-weighted colimit by the coend formula, apply Fubini in the pair variable, and evaluate the inner coend by co-Yoneda. Fix the variance of the weight on the product index category in the setup before any computation, because the hom-bifunctor has to be read on the OPPOSITE of the index category, and record the copower generalisation as a remark rather than proving it. Together with the twisted-arrow item this closes the loop between the two descriptions of a coend.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-end-and-coend",
+          "thm-fubini-for-ends",
+          "thm-the-ninja-yoneda-lemma-in-coend-form",
+          "thm-a-weighted-limit-is-an-end",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-product-category",
+          "def-opposite-category",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "rem-why-the-enriched-generalisation-cannot-stop-at-conical-limits",
+        "kind": "remark",
+        "title": "Why weights are needed once the base of enrichment is not $\\mathbf{Set}$",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "thm-the-constant-singleton-weight-recovers-an-ordinary-limit",
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements"
+        ]
+      },
+      {
+        "id": "rem-orientation-and-notation-conventions-for-ends-coends-and-twisted-arrows",
+        "kind": "remark",
+        "title": "Orientation and notation conventions in force on this page",
+        "deps": [
+          "def-end-and-coend",
+          "def-twisted-arrow-category",
+          "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+          "def-opposite-category"
+        ]
+      },
+      {
+        "id": "fs-dinatural-transformations-compose",
+        "kind": "false-statement",
+        "title": "Dinatural transformations compose",
+        "strategy": "Refute by the witness of the composition theorem, restated in full so the item stands alone, and then say exactly which weaker composition statement IS true: a dinatural transformation composed with a natural one on either side.",
+        "deps": [
+          "def-dinatural-transformation",
+          "thm-dinatural-transformations-do-not-compose-in-general",
+          "prop-a-natural-transformation-composed-with-a-dinatural-transformation-is-dinatural"
+        ]
+      },
+      {
+        "id": "fs-every-end-exists",
+        "kind": "false-statement",
+        "title": "Every functor on $\\mathcal C^{\\mathrm{op}}\\times\\mathcal C$ has an end",
+        "strategy": "Refute with a SMALL index category, so the reader sees that smallness of the index alone is not the issue. Take $\\mathcal C$ discrete on a countably infinite set, so a wedge is an unconstrained family and an end is the product of the diagonal values; take the target to be the full subcategory of $\\mathbf{Set}$ on the finite sets and every diagonal value a two-element set. A finite object representing that product would have to have infinitely many elements, so no end exists. Add a second sentence recording the separate size failure for a large index category, without making the refutation depend on it.",
+        "deps": [
+          "def-end-and-coend",
+          "thm-an-end-is-an-equalizer-between-two-products",
+          "def-products-and-coproducts",
+          "def-subcategory-and-full-subcategory",
+          "prop-sets-and-functions-form-category-set",
+          "def-finite-cardinality",
+          "def-small-locally-small-and-large-category",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness"
+        ]
+      },
+      {
+        "id": "fs-a-coend-is-a-colimit-over-the-twisted-arrow-category-under-this-pages-convention",
+        "kind": "false-statement",
+        "title": "Under this page's convention a coend is the colimit of the same twisted-arrow diagram whose limit is the end",
+        "strategy": "Refute by computing both sides on the walking arrow $0\\to1$ with the hom-bifunctor as integrand. The twisted arrow category is then a cospan, whose colimit is the value at the non-identity arrow, a one-element set; while the coend is the two-element quotient computed from the coproduct description, because the slot indexed by the reverse direction is empty. State the CORRECT description in the refutation: the colimit is over the opposite category and of the functor with domain and codomain swapped.",
+        "deps": [
+          "def-twisted-arrow-category",
+          "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+          "def-end-and-coend",
+          "def-opposite-category",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-limit-and-colimit-of-a-diagram",
+          "prop-sets-and-functions-form-category-set",
+          "thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation"
+        ]
+      },
+      {
+        "id": "fs-every-functor-preserves-ends",
+        "kind": "false-statement",
+        "title": "Every functor preserves the ends that exist in its domain",
+        "strategy": "Refute with two finite poset witnesses, both bounded and both checkable by hand. Regard a preorder as a category and a monotone map as a functor, using the published dictionary; in such a category a binary product is a meet, and by the mute-functor proposition that product is the end of the corresponding two-variable functor. First witness: the four-element diamond collapsed onto the two-chain, where the meet of the two incomparable elements is the bottom but the meet of their images is the top. Second witness: a full subposet from which the ambient meet has been removed, so the full inclusion carries a meet to a different element. State the true statement beside it: preservation of the twisted-arrow limits is what is needed, and a right adjoint has it.",
+        "deps": [
+          "def-end-and-coend",
+          "prop-the-end-of-a-functor-mute-in-its-first-variable-is-the-limit-of-that-functor",
+          "thm-a-continuous-functor-preserves-ends-and-a-cocontinuous-functor-preserves-coends",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "def-preorder",
+          "prop-completeness-and-cocompleteness-in-poset-categories",
+          "def-products-and-coproducts",
+          "def-subcategory-and-full-subcategory",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "fs-a-weighted-limit-is-the-ordinary-limit-of-the-same-diagram",
+        "kind": "false-statement",
+        "title": "Every weighted limit is the ordinary limit of the diagram it weights",
+        "strategy": "Refute with the kernel-pair weight: index category the walking arrow, weight the two-element set mapping onto a one-element set, diagram a map of finite sets from a two-element set to a one-element set. The ordinary limit is the domain, with two elements; the weighted limit is the pullback of the map along itself, with four. Count both by hand. Then state the true comparison: the ordinary limit is the case of the constant singleton weight, and there is only a canonical comparison map in general.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "thm-the-constant-singleton-weight-recovers-an-ordinary-limit",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-pullbacks-and-pushouts",
+          "prop-sets-and-functions-form-category-set",
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "fs-yonedas-original-notation-agrees-with-the-modern-one",
+        "kind": "false-statement",
+        "title": "The integral notation of Yoneda's original paper means the same as the modern one",
+        "strategy": "Refute documentarily from the recorded convention: Yoneda's 1960 paper calls integration what is now the coend and writes it with the subscripted integral sign now reserved for the end, writing cointegration with a starred superscript for what is now the end. Cite the exact source clause and give the modern reading of each symbol so the reader can convert. Keep the refutation about the two notations and make no claim about the mathematics changing.",
+        "deps": [
+          "def-end-and-coend",
+          "rem-orientation-and-notation-conventions-for-ends-coends-and-twisted-arrows"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.01,
+    "id": "ends-coends-and-weighted-limits-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Ends Coends and Weighted Limits — Examples",
+    "companion": "ends-coends-and-weighted-limits",
+    "requires": [
+      "ends-coends-and-weighted-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-the-end-formula-checked-against-natural-transformations-on-a-small-diagram",
+        "kind": "example",
+        "title": "The end formula checked by hand against natural transformations on the walking arrow",
+        "strategy": "Take the index category to be the walking arrow and two set-valued functors on it. Compute the equalizer of the two displayed products directly, list the elements, and match them one for one against the natural transformations, which are pairs of functions making one square commute.",
+        "deps": [
+          "thm-the-set-of-natural-transformations-is-an-end",
+          "thm-an-end-is-an-equalizer-between-two-products",
+          "def-end-and-coend",
+          "def-natural-transformation",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-the-evaluation-family-is-dinatural",
+        "kind": "example",
+        "title": "Evaluation of functions is dinatural in its argument set",
+        "strategy": "Verify the hexagon for the family $\\mathrm{ev}_{(B)}:Y^B\\times B\\to Y$ regarded as a dinatural transformation from $(B_1,B_2)\\mapsto Y^{B_1}\\times B_2$ to the constant functor at $Y$. Chase a single pair through both legs at an arbitrary $f:B\\to B'$; this is the family whose failure to be natural motivates the whole notion.",
+        "deps": [
+          "def-dinatural-transformation",
+          "thm-currying-is-an-adjunction-in-set",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "prop-sets-and-functions-form-category-set",
+          "def-cartesian-product",
+          "def-wedge-and-cowedge"
+        ]
+      },
+      {
+        "id": "ex-the-twisted-arrow-category-of-the-walking-arrow",
+        "kind": "example",
+        "title": "The twisted arrow category of the walking arrow is a cospan",
+        "strategy": "Enumerate the three objects and every morphism, checking in each direction whether the required factorisation exists, and note that no morphism runs out of the non-identity arrow. Then read off that the end of a functor on the walking arrow is the pullback of its two non-diagonal legs.",
+        "deps": [
+          "def-twisted-arrow-category",
+          "thm-an-end-is-a-limit-over-the-twisted-arrow-category",
+          "def-pullbacks-and-pushouts",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "ex-the-tensor-product-of-a-right-and-a-left-monoid-set-as-a-coend",
+        "kind": "example",
+        "title": "The tensor product of monoid sets as a coend",
+        "strategy": "Regard a monoid as a one-object category, a presheaf on it as a right action and a covariant functor as a left action, and compute the coend from the quotient description: it is the product of the two underlying sets modulo the relation identifying $(xm,y)$ with $(x,my)$. Check the relation is exactly the generating dinaturality relation for this index category, where the coproducts have one summand.",
+        "deps": [
+          "def-functor-tensor-product",
+          "thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation",
+          "prop-monoids-and-groups-as-one-object-categories",
+          "def-semigroup-and-monoid",
+          "def-end-and-coend",
+          "def-cartesian-product"
+        ]
+      },
+      {
+        "id": "ex-the-coend-of-a-hom-functor",
+        "kind": "example",
+        "title": "The coend of the hom-bifunctor",
+        "strategy": "Compute $\\int^c\\mathcal C(c,c)$ from the quotient description: the endomorphisms of all objects modulo the relation identifying $gf$ with $fg$ whenever both composites are defined. Evaluate it on the walking arrow, where nothing is identified, and on a one-object category, where it is the set of conjugacy-type classes of the monoid under this relation.",
+        "deps": [
+          "thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-end-and-coend",
+          "prop-monoids-and-groups-as-one-object-categories",
+          "def-category"
+        ]
+      },
+      {
+        "id": "ex-fubini-verified-on-a-two-object-index",
+        "kind": "example",
+        "title": "Fubini checked by hand on a product of two walking arrows",
+        "strategy": "Take both index categories to be the walking arrow and a small set-valued functor in four variables. Compute the end over the product index directly from the equalizer description, then compute both iterated ends, and exhibit the isomorphisms elementwise.",
+        "deps": [
+          "thm-fubini-for-ends",
+          "thm-an-end-is-an-equalizer-between-two-products",
+          "def-end-and-coend",
+          "def-product-category",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-a-weighted-limit-computing-a-kernel-pair",
+        "kind": "example",
+        "title": "A weighted limit computing a kernel pair",
+        "strategy": "With the index category the walking arrow and the weight the map from a two-element set to a one-element set, unwind the defining representation into a pair of morphisms with a common composite, and identify the representing object as the pullback of the diagram's arrow along itself. Confirm by computing the category of elements of the weight and recognising the pullback shape.",
+        "deps": [
+          "def-set-weighted-limit-and-weighted-colimit",
+          "def-pullbacks-and-pushouts",
+          "thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements",
+          "def-hom-functors-and-hom-bifunctor"
+        ]
+      },
+      {
+        "id": "ex-copowers-and-powers-in-set",
+        "kind": "example",
+        "title": "Powers and copowers of a set by a set",
+        "strategy": "Identify the power of a set by a set as the function set and the copower as the product with that set, verify both defining bijections, and count both on finite examples including the empty exponent and the empty copower.",
+        "deps": [
+          "def-power-and-copower-by-a-set",
+          "thm-a-power-is-a-product-of-copies-and-a-copower-is-a-coproduct-of-copies",
+          "prop-sets-and-functions-form-category-set",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-cartesian-product",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "ex-a-module-valued-coend-computed-as-a-quotient-of-a-direct-sum",
+        "kind": "example",
+        "title": "A module-valued coend computed as a quotient of a direct sum",
+        "strategy": "Take the index category to be the walking arrow and a functor into modules over a fixed ring, write down the generating elements of the dinaturality submodule, and identify the quotient explicitly. Check the answer against the general cowedge universal property on one nontrivial test module.",
+        "deps": [
+          "thm-a-module-valued-coend-is-a-quotient-of-a-direct-sum-by-the-dinaturality-submodule",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-quotient-module",
+          "prop-modules-and-homomorphisms-form-category-rmod",
+          "def-end-and-coend"
+        ]
+      }
+    ]
+  }
+]

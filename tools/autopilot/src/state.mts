@@ -39,6 +39,10 @@ const empty = (): StateData => ({
   blockers: [],
   lastReportAt: null,
   paused: false,
+  /** `<gateId>\0<itemId>` -> tries that (gate, item) pair has had. See
+   *  StateData.gateAttempts. A container, so it is created fresh per instance
+   *  for the same reason `blockers` and `dispatches` are. */
+  gateAttempts: {},
 });
 
 export class State {

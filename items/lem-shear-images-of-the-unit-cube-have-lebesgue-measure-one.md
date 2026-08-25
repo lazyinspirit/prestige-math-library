@@ -1,0 +1,87 @@
+---
+id: lem-shear-images-of-the-unit-cube-have-lebesgue-measure-one
+kind: lemma
+title: "A shear sends the unit cube to a set of Lebesgue measure one"
+status: draft
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant, thm-borel-sets-are-lebesgue-measurable, thm-lebesgue-measure-is-a-complete-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-elementary-matrix, thm-determinant-under-elementary-row-operations, thm-determinant-of-a-triangular-matrix, def-determinant-of-a-square-matrix, def-matrix-product-and-identity-matrix, lem-euclidean-linear-maps-have-matrices-and-are-bounded, def-measure, def-half-open-box, def-translation-of-a-set-in-rn, lem-integer-part, def-borel-sigma-algebra, def-sigma-algebra, def-metric-topology, thm-metric-open-set-algebra, lem-metrics-on-rn, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-metric-ball, def-countable-choice]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "E. A. Carlen, Notes on Lebesgue Measure on $\\mathbb{R}^n$ and $S^{n-1}$ (Rutgers Math 501), Section 3"
+      url: "https://sites.math.rutgers.edu/~carlen/501F13/LebesgueMeas.pdf"
+    - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Chapter 2"
+      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Let $n \ge 2$, **assume the Axiom of Countable Choice**
+([[def-countable-choice]]), let $i \ne j$ be below $n$ and let $t$ be real. Let
+$T$ be the linear map with matrix the elementary matrix $T_{ij}(t)$ obtained
+from the identity by adding $t$ times row $j$ to row $i$
+([[def-elementary-matrix]]), so that
+
+$$T(x)_i = x_i + t\,x_j, \qquad T(x)_l = x_l \quad (l \ne i).$$
+
+Then $T\big[(0,1]^n\big]$ is Lebesgue measurable and
+
+$$\lambda_n\Big(T\big[(0,1]^n\big]\Big) \;=\; 1 \;=\; \bigl|\det T_{ij}(t)\bigr| .$$
+
+## Facts & Assumptions
+
+**Given:** A natural number $n \ge 2$, the Axiom of Countable Choice, distinct indices $i,j<n$, a real $t$, and the shear $T$ with matrix $T_{ij}(t)$.
+
+[L1] $\lambda_n(E+h)=\lambda_n(E)$ for every Lebesgue measurable $E$ and every $h$ ([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]], [[def-translation-of-a-set-in-rn]]).
+
+[L2] An invertible linear map carries Borel sets to Borel sets and open sets to open sets ([[thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant]], claim 1).
+
+[L3] Assuming countable choice, every Borel subset of $\mathbb{R}^n$ is Lebesgue measurable ([[thm-borel-sets-are-lebesgue-measurable]]), and $\lambda_n$ is a complete measure on $\mathcal{L}(\mathbb{R}^n)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).
+
+[L4] For real parameters $a_l\le b_l$, every set $R$ between the open box $R^\circ$ and closed box $\overline R$ is Lebesgue measurable with $\lambda_n(R)=\prod_{l<n}(b_l-a_l)$ ([[thm-lebesgue-measure-of-a-box-of-every-kind]]), and $(u,v]^n := B(\mathbf{u},\mathbf{v})$ ([[def-half-open-box]]).
+
+[F1] An **elementary matrix** is a matrix obtained by applying one elementary row operation to $I_n$; $T_{pq}(c)$ adds $c$ times row $q$ to the distinct row $p$ ([[def-elementary-matrix]], [[def-matrix-product-and-identity-matrix]]), and for every linear map there is a unique such matrix acting by $(Ax)_i=\sum_{l<n}a_{il}x_l$ ([[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).
+
+[F2] Adding $c$ times one row to a distinct row leaves the determinant equal to $\det(A)$ ([[thm-determinant-under-elementary-row-operations]], claim 3; [[def-determinant-of-a-square-matrix]]), and a triangular matrix has determinant the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
+
+[F3] For every real $x$ there is exactly one integer $p$ with $p \le x < p+1$ ([[lem-integer-part]]).
+
+[F4] A **measure** is countably additive on pairwise disjoint measurable sequences, hence finitely additive after padding with empty sets ([[def-measure]]).
+
+[F5] A subset $U$ is open in $(X,d)$ when every $x \in U$ has a ball $B(x,r) \subseteq U$, a subset is closed when its complement is open, and a finite intersection of open sets is open ([[def-metric-topology]], [[def-metric-ball]], [[thm-metric-open-set-algebra]], claim 3).
+
+[F6] For every $x \in \mathbb{R}^{n}$, $\lVert x\rVert_\infty \le \lVert x\rVert_2$, and $\lVert x-y\rVert_2 = d_2(x,y)$, $\lVert x-y\rVert_\infty = d_\infty(x,y)$ ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]], claim 3; [[lem-p-norms-are-norms-and-induce-the-published-metrics]], claim 3; [[def-p-norms-on-rn]]; [[lem-metrics-on-rn]]).
+
+[F7] The Borel sigma-algebra is the sigma-algebra generated by the open sets, and a sigma-algebra is closed under complements and countable unions ([[def-borel-sigma-algebra]], [[def-sigma-algebra]]); in particular every open and every closed subset of $\mathbb R^n$ is Borel.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The matrix $T_{ij}(t)$ is obtained from the identity by a row addition, so $\det T_{ij}(t) = \det I_n = 1$ and $T$ is invertible, with inverse the shear $T_{ij}(-t)$; consequently $T$ carries Borel sets to Borel sets. [L2, F1, F2]
+
+1.2 For every real $s$ there is exactly one integer $k$ with $k < s \le k+1$: applying the integer part to $-s$ gives the unique integer $p$ with $p \le -s < p+1$, and $k := -p-1$ is the integer sought, uniqueness following the same way. [F3]
+
+1.3 The linear functional $L(x) := x_i + t x_j$ satisfies $|L(x)-L(y)| \le (1+|t|)\,d_2(x,y)$, so for every real $s$ the set $\{\, x : L(x) > s \,\}$ is open and $\{\, x : L(x) \le s \,\}$ is closed. Also $(0,1]^n=[0,1]^n\cap\bigcap_{l<n}\{x:x_l>0\}$, with $[0,1]^n$ closed and each $\{x:x_l>0\}$ open, hence Borel by [F7]; therefore each $A_k := (0,1]^n\cap\{x:L(x)>k\}\cap\{x:L(x)\le k+1\}$ is a Borel set. [F1, F5, F6, F7]
+
+1.4 Only finitely many integers $k$ admit a point of $A_k$: for $x \in (0,1]^n$ one has $-|t| \le L(x) \le 1+|t|$, so $k < 1+|t|$ and $k+1 > -|t|$, and the integers satisfying both lie between the two integers supplied by the integer part of $-|t|-1$ and of $1+|t|$, hence form a finite consecutive list $K_-,\dots,K_+$. [F3]
+
+2.1 By step 1.2 every $x \in (0,1]^n$ lies in exactly one $A_k$, so the sets $A_k$ for $k$ in the list of step 1.4 are pairwise disjoint with union $(0,1]^n$. [step 1.2, step 1.4]
+
+3.1 Define $\Phi : (0,1]^n \to \mathbb{R}^n$ by $\Phi(x) := T(x) - k\,e_i$ for the unique $k$ with $x \in A_k$, where $e_i$ is the $i$-th standard vector. Then $\Phi$ takes values in $(0,1]^n$, since its $i$-th coordinate is $L(x)-k \in (0,1]$ and its other coordinates are those of $x$. [step 1.2, step 2.1, F1]
+
+4.1 $\Phi$ is a bijection of $(0,1]^n$ onto itself. It is injective: if $\Phi(x)=\Phi(y)$ then $x_l=y_l$ for every $l \ne i$, so $x_j=y_j$ and $x_i - y_i = k(x)-k(y)$ is an integer of absolute value below $1$, hence $0$. It is surjective: given $z \in (0,1]^n$, step 1.2 supplies the unique integer $k$ with $z_i - t z_j + k \in (0,1]$; setting $x_l := z_l$ for $l \ne i$ and $x_i := z_i - tz_j + k$ gives $x \in (0,1]^n$ with $L(x) = z_i + k \in (k,k+1]$, so $x \in A_k$ and $\Phi(x) = z$. [step 1.2, step 3.1]
+
+5.1 The sets $T[A_k]$ are pairwise disjoint, Borel and have union $T\big[(0,1]^n\big]$, because $T$ is an injective linear bijection; each $T[A_k] - k\,e_i = \Phi[A_k]$, so translation invariance gives $\lambda_n(T[A_k]) = \lambda_n(\Phi[A_k])$; and by step 4.1 the sets $\Phi[A_k]$ are pairwise disjoint with union $(0,1]^n$. [step 1.1, step 1.3, step 2.1, step 3.1, step 4.1, L1, L3]
+
+6.1 Finite additivity applied twice therefore gives $\lambda_n\Big(T\big[(0,1]^n\big]\Big) = \sum_k \lambda_n(T[A_k]) = \sum_k\lambda_n(\Phi[A_k]) = \lambda_n\big((0,1]^n\big) = 1$, which with step 1.1 is the Statement. [step 1.1, step 5.1, L3, L4, F4] ∎

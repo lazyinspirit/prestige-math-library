@@ -15,12 +15,12 @@
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tsxLoader } from './paths.mjs';
-import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
+import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
+import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -28,7 +28,12 @@ const asJson = argv.includes('--json');
 const verifyCurrent = argv.includes('--verify-current-context');
 const contractsPath = option('--contracts');
 const judgePath = option('--judge-ledger');
+const contextHashCachePath = option('--context-hash-cache')
+  || (judgePath?.endsWith('.jsonl')
+    ? judgePath.replace(/-judge\.jsonl$/, '-judge-context-hashes.json')
+    : `${judgePath ?? 'judge'}-context-hashes.json`);
 const judgeAdjudicationsPath = option('--judge-adjudications');
+const terminalResolutionsPath = option('--terminal-resolutions');
 const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
@@ -57,7 +62,7 @@ const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
 if (!batchFiles.length) usage();
 if (judgeOnly) {
@@ -73,6 +78,11 @@ const errors = [];
 const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
+const terminalParsed = parseTerminalResolutions(
+  terminalResolutionsPath ? resolvePath(terminalResolutionsPath) : '',
+  { allowMissing: true },
+);
+for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
 // default is deepseek+opus (owner, 2026-08-23), and the published-page audit
 // (AUDIT-WORKFLOW.md) verifies the same pairs on the current frozen context.
@@ -179,6 +189,9 @@ for (const file of batchFiles) {
   }
 }
 scope.sort();
+for (const row of terminalParsed.latest.values()) {
+  if (!scope.includes(row.id)) error('terminal-resolution-outside-scope', `${row.id}: terminal resolution is outside the supplied manifests`, row.id);
+}
 let judgeScope = scope;
 if (judgeTargetsPath) {
   const targetReceipt = loadJson(judgeTargetsPath, 'judge-targets-read');
@@ -364,12 +377,23 @@ if (judgeAdjudicationsPath) {
       }
       const validOutcome = ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'].includes(record.outcome);
       const validFatalType = ['logic', 'dependency_citation', 'other'].includes(record.defect_type);
+      // KNOWN_JUDGES, not JUDGES. Shape asks "is this a judge model at all";
+      // coverage asks "is this one of today's lanes" and is enforced below,
+      // where a retired lane's rows are skipped rather than rejected. Validating
+      // SHAPE against the configured lineup makes a retired lane's rows
+      // unwritable, which contradicts the standing rule that they stay
+      // append-only evidence — and it cannot be repaired by the agent that hit
+      // it. frontier-18 step 8: `step8-scope` handed group d the five
+      // claude-sonnet-4-6 rejections still current on their frozen context, the
+      // Alpha adjudicated all five correctly, and every row came back malformed.
+      // Three repair rounds burned on rows no Alpha could have written any other
+      // way, and the stage stopped needing a person.
       if (
-        typeof record.id !== 'string' || !JUDGES.includes(record.model) ||
+        typeof record.id !== 'string' || !KNOWN_JUDGES.includes(record.model) ||
         typeof record.context_sha256 !== 'string' || !record.context_sha256 || !validOutcome ||
         (record.outcome === 'confirmed_fatal' && !validFatalType)
       ) {
-        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome, item_sha256}; confirmed_fatal also needs defect_type`);
+        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model (any lineup in tools/models.mjs), context_sha256, outcome, item_sha256}; confirmed_fatal also needs defect_type`);
         continue;
       }
       // R1 (owner, 2026-08-03): the text state the decision was made against.
@@ -393,26 +417,18 @@ if (judgeAdjudicationsPath) {
   }
 }
 
-function currentContextHash(id) {
-  // Missing tsx is an environment failure, not a coverage verdict: report it as
-  // one error against this item rather than throwing out of the whole gate.
-  let loader;
-  try { loader = tsxLoader(); }
-  catch (cause) { error('context-hash', `${id}: ${cause.message}`, id); return null; }
-  const result = spawnSync(process.execPath, ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], {
-    cwd: REPO,
-    encoding: 'utf8',
-    timeout: 120_000,
-  });
-  if (result.status !== 0) {
-    error('context-hash', `${id}: judge context hash failed: ${(result.stderr || result.stdout || 'unknown failure').trim()}`, id);
-    return null;
-  }
+// Exact prompt assembly is unchanged; only its local scheduling is concurrent.
+// Keeping the failures item-scoped preserves the gate's report-all behaviour.
+const currentHashes = new Map();
+if (verifyCurrent && judgePath) {
   try {
-    const row = JSON.parse(result.stdout);
-    return { context: row.context_sha256, item: row.item_sha256 ?? null };
+    for (const result of await buildCurrentContextHashes(judgeScope, { cwd: REPO, cachePath: contextHashCachePath })) {
+      if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });
+      else error('context-hash', result.error, result.id);
+    }
+  } catch (cause) {
+    error('context-hash', `could not initialise current judge context builds: ${cause.message}`);
   }
-  catch { error('context-hash', `${id}: judge context hash output was not JSON`, id); return null; }
 }
 
 // COVERAGE FOLLOWS THE ITEM, NOT THE PAGE.
@@ -455,11 +471,32 @@ const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
 const unadjudicatedRows = []; // exact (id, model, context) work units for Step 8
 const openFatal = [];         // Alpha confirmed fatal against the text on disk
 const judgeCoverage = [];
+const terminalResolved = [];
 for (const id of judgePath ? judgeScope : []) {
   const contexts = verdicts.get(id) ?? new Map();
-  const now = verifyCurrent ? currentContextHash(id) : null;
+  const now = verifyCurrent ? currentHashes.get(id) ?? null : null;
   const current = now?.context ?? null;
   const currentItem = now?.item ?? null;
+  const terminal = terminalParsed.latest.get(id);
+  if (terminal) {
+    if (!verifyCurrent) {
+      error('terminal-resolution-unverified', `${id}: terminal resolution requires --verify-current-context`, id);
+    } else if (!terminalResolutionIsCurrent(terminal, {
+      context_sha256: current,
+      item_sha256: currentItem,
+    })) {
+      error('terminal-resolution-stale', `${id}: terminal resolution does not match the current item and pair context`, id);
+    } else {
+      terminalResolved.push({
+        id,
+        context_sha256: terminal.context_sha256,
+        item_sha256: terminal.item_sha256,
+        resolved_by: terminal.resolved_by,
+        disposition: terminal.disposition,
+      });
+      continue;
+    }
+  }
   // The per-lane currency rule is tools/judge-currency.mjs, shared with
   // tools/judge-sweep.mjs — the tool that decides which items to SPEND a judge
   // call on. The two implemented it separately and disagreed: the sweep read
@@ -530,6 +567,7 @@ if (outPath) {
     verified_against_current_context: verifyCurrent,
     scope: judgeScope.length,
     pairs_complete: judgeCoverage.length,
+    terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     needs_rejudge: needsRejudge.sort(),
     unadjudicated: unadjudicated.sort(),
     unadjudicated_rows: unadjudicatedRows.sort((a, b) =>
@@ -539,7 +577,7 @@ if (outPath) {
     // `closed` is the unconditional predicate, ignoring the --allow-* relaxations:
     // a stage may be allowed to proceed with work outstanding, but nothing should
     // be able to read this receipt and conclude the level is finished when it is not.
-    closed: needsRejudge.length === 0 && openFatal.length === 0 && unadjudicated.length === 0,
+    closed: errors.length === 0 && needsRejudge.length === 0 && openFatal.length === 0 && unadjudicated.length === 0,
     allowances: { unadjudicated: allowUnadjudicated, pending_rejudge: allowPendingRejudge },
   }, null, 2)}\n`);
 }
@@ -548,17 +586,28 @@ if (asJson) console.log(JSON.stringify(result, null, 2));
 else {
   if (templatePath) console.log(`level-coverage: wrote audit receipt template ${templatePath}`);
   if (judgeOnly) {
+    const closedRejections = warnings.filter((entry) => entry.code === 'judge-verdict-adjudicated-nonfatal').length;
     console.log(`level-coverage --judge-only: ${summary.judge_pairs}/${summary.judge_scope} current pair(s); `
-      + `${needsRejudge.length} need rejudge, ${unadjudicated.length} unadjudicated, ${openFatal.length} open fatal`);
+      + `${terminalResolved.length} terminal manual resolution(s), ${needsRejudge.length} need rejudge, `
+      + `${unadjudicated.length} unadjudicated, ${openFatal.length} open fatal, `
+      + `${closedRejections} adjudicated rejection(s) closed nonfatally`);
   } else console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs}/${summary.judge_scope} required judge pair(s)`);
-  for (const entry of warnings) console.warn(`WARN ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
+  // Judge closure commonly has hundreds of expected nonfatal/false-positive
+  // decisions. The append-only adjudication ledger is their evidence and JSON
+  // mode still returns every row; repeating them as hundreds of console lines
+  // on every exact-currency scan bloated frontier-18's event/log surface while
+  // changing no gate verdict. Keep one count in human mode and print every
+  // other warning normally.
+  for (const entry of warnings.filter((record) => !judgeOnly || record.code !== 'judge-verdict-adjudicated-nonfatal')) {
+    console.warn(`WARN ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
+  }
   for (const entry of errors) console.error(`ERROR ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
 }
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--terminal-resolutions <step8.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
   console.error('       judge closure alone (steps 7, 8, rejudge):');
-  console.error('       node tools/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
+  console.error('       node tools/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--terminal-resolutions <step8.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
   process.exit(2);
 }

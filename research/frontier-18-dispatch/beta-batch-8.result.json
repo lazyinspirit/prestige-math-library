@@ -1,0 +1,21 @@
+{
+  "role": "beta",
+  "label": "batch-8",
+  "run": "frontier-18",
+  "covers": [
+    "8"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T19:02:50.015Z",
+  "ended_at": "2026-08-23T19:45:31.015Z",
+  "ms": 2561000,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/beta-batch-8.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/beta-batch-8.prompt.md",
+  "tail": "Batch 8 is complete. All four artifacts are on disk and every gate I can run against them is green.\n\n## What I found\n\nThe batch had been scaffolded by an earlier dispatch that died after writing `pages.json` and `coverage.json`. I re-verified that work from disk rather than taking it on trust, fixed six defects, and wrote the two missing artifacts.\n\n**Defects corrected in the scaffold:**\n\n- **F1** — `cor-global-cauchy-theorem-homology` justified the existence of a point off the cycle's trace by calling `Γ*` \"a compact set of empty interior\". True, but the library has never established it and no dependency declared it — the exact \"a dep gate cannot see deps nobody declared\" class. Replaced with a clopen/connectedness argument (`Γ* ⊆ Ω`, so `Ω = Γ*` would make `Ω` a nonempty bounded clopen subset of a connected `ℂ`), and added the six dependencies that argument actually needs.\n- **F2** — `thm-power-series-expansion-in-several-complex-variables` was titled \"…the sum of its **derivative-coefficient** power series\", but at that point on the page the coefficients are only iterated integrals; the derivative identification needs the *next* theorem. Retitled, with an explicit instruction that the Statement may not claim it either.\n- **F14** — the SC-1 design lists two false statements; the scaffold carried one and had folded the other (the real analogue of `thm-locally-bounded-separate-holomorphy`) into a Remark. Added `fs-separately-real-analytic-functions-are-jointly-continuous`, refuted with the *published* witness rather than a re-minted one.\n- **F3/F4/F5** — a count in a title that can decay, a keyhole example asserting an index at points on its own trace, and two `,;` LaTeX typos.\n\n**Two design routes had to change**, both recorded as applyable amendments: the design's integrality proof needs `γ'`, which this library's *rectifiable* contours do not have (took Ahlfors's continuous-logarithm route instead), and the design routes the Lipschitz bound through CA-12's Schwarz lemma — CA-12 is not built in this run, so there is no item to cite (used `cor-cauchy-inequalities`). Also **F12**: the design cites \"one unbounded component\" to `the-topology-of-euclidean-space`, which does not carry it and neither does any published item; built the two prerequisites instead of deferring.\n\n## Verified, with the commands\n\n98 items (42 + 12 + 32 + 12), 0 dep problems, 0 id collisions, 142 external deps all opened from disk, 0 `ai-generated` statement deps, 0 legacy-unclassified, 6 `draft-page` deps (all frontier-17's CA-6, enumerated). `coverage-checklist --require-destination`, `content-policy --manifest-only`, `source-fetch-check` (6/6), `url-sweep --recover --fail-on-dead` (6/6 live), `source-backing` (59 results backed) all pass.\n\nThe proof contract covers all 81 proof-bearing items: **312 citations carry exact quotes verified to occur in the cited item's own section** (312 checked, 0 mismatches), 648 boundary rows with **no template reuse even at cluster size 2**, and `finite_smoke` selects `matrix-ring-laws-mod-n` on the two Jacobian-determinant items — 2/81 carrying obligations, which is a live count rather than a green tick over nothing.\n\n**Not verified, stated in the notes:** I did not re-enumerate all six sources' headings from scratch — the 163 harvest rows are the first dispatch's and the step-6 faithfulness check should treat them as unconfirmed by a second reader. The seven `ai-generated` B-page example constructions are finite computations I have not performed; each carries that as a step-5 obligation. `validate-plan`, `depsource`, `proof-contract` and `precheck` need the spliced spec or authored items and are the engine's to run."
+}

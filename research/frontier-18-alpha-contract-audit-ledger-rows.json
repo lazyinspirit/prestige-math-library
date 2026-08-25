@@ -1,0 +1,74 @@
+[
+  {
+    "defect_id": "frontier-18-contract-audit-001",
+    "run": "frontier-18",
+    "at": "2026-08-24",
+    "class": "accuracy",
+    "subclass": "false-boundary-disposition",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "template boundary rows across batches 1, 3, 4, 5, 6, 7, 8, and 9",
+    "batch": "1,3,4,5,6,7,8,9",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "The proof contracts carried 449 boilerplate boundary rows whose text repeated across many items or axes and therefore did not record the actual case being discharged. The repair rewrote those rows with case-specific evidence or item-specific not-applicable reasons, and upheld the 23 detector false positives on the record.",
+    "evidence": [
+      { "path": "research/frontier-18-batch-4.proof-contracts.json", "anchor": "boundary rows for the Noetherian batch cluster" },
+      { "path": "research/frontier-18-batch-9.proof-contracts.json", "anchor": "boundary rows for the ends/coends batch cluster" }
+    ],
+    "source": "boundary-audit"
+  },
+  {
+    "defect_id": "frontier-18-contract-audit-002",
+    "run": "frontier-18",
+    "at": "2026-08-24",
+    "class": "accuracy",
+    "subclass": "citation-inflated",
+    "severity": "nonfatal",
+    "location": "facts-block",
+    "subject": "lower-bound and range hypotheses dropped from fact restatements in batches 3, 5, 7, and 8",
+    "batch": "3,5,7,8",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "Eighteen facts lines restated cited results more broadly than their source clauses, mostly by dropping explicit bounds such as n >= 1 or by relying on an implicit 0 <= k < n range. The repair tightened those fact lines to carry the cited bounds explicitly or to avoid the wider wording altogether.",
+    "evidence": [
+      { "path": "items/thm-the-cyclotomic-galois-group-embeds-in-the-unit-group-modulo-n.md", "anchor": "Facts L1" },
+      { "path": "items/thm-lebesgue-outer-regularity-for-arbitrary-subsets.md", "anchor": "Facts F5" }
+    ],
+    "source": "citation-fidelity"
+  },
+  {
+    "defect_id": "frontier-18-contract-audit-003",
+    "run": "frontier-18",
+    "at": "2026-08-24",
+    "class": "accuracy",
+    "subclass": "other",
+    "subclass_note": "High/critical routed items in batches 5 and 10 were missing the required Alpha risk_review disposition even though they were in the routed set. This pass completed the missing review records from current-disk verification.",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "missing Alpha risk_review rows for routed items in batches 5 and 10",
+    "batch": "5,10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "6b-adjudicate",
+    "introduced_by_role": "group-alpha",
+    "should_have_caught": "6b-adjudicate",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "evidence": [
+      { "path": "research/frontier-18-batch-5.proof-contracts.json", "anchor": "risk_review blocks for the lattice-paths and linear-algebra items" },
+      { "path": "research/frontier-18-batch-10.proof-contracts.json", "anchor": "risk_review blocks for the modules and Rodl-Nikiforov items" }
+    ],
+    "source": "risk-report --require-reviewed"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "assign",
+  "run": "frontier-18",
+  "covers": [
+    "all"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-24T03:20:52.915Z",
+  "ended_at": "2026-08-24T03:26:55.435Z",
+  "ms": 362520,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-assign.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-assign.prompt.md",
+  "tail": "**Blocker: the stage is infeasible as specified.** frontier-18 has **ten** batches; three groups × three batches covers at most nine, and every batch must be owned. No arrangement passes — 4 groups fails `alpha-groups-too-many`, a 4-batch group fails `alpha-groups-oversize`, a 9-batch partition fails `alpha-groups-uncovered`.\n\nCause is the plan, not drift: the step-0 review recorded no minting, reordering or rescoping, and `packBatches` pairs A pages at cap 2 *within a category only*, so 14 pairs over 9 categories pack into 10 batches. All ten are already scaffolded, so re-batching is a teardown of authored work. `ARCHITECTURE.md` §6's \"one Alpha per ≤3 batches against a beta/reader cap of 9\" assumes ≤9 batches; this run is the first past it.\n\nI wrote the partition covering all ten batches (`research/frontier-18-alpha-groups.json`) and the blocker with both options (`research/frontier-18-alpha-blockers.md`). The gate's only error is the cap:\n\n```\nalpha-groups: 4 group(s) over 10 batch(es); 0 dependency edge(s) cross a group boundary\nERROR alpha-groups-too-many: 4 groups exceeds the alpha lane cap of 3\n```\n\n| group | batches | mathematics | items |\n|---|---|---|---|\n| a | 6, 7, 8 | analysis on R^n — one Lebesgue/Fubini/change-of-variables machinery; SCV literally `requires` `fubini-and-change-of-variables` and `the-total-derivative`, and the global Cauchy theorem is the Green–Stokes argument in the plane | 226 |\n| b | 5, 10 | combinatorics whole — batch 5's rank/eigenvalue toolkit is what Rödl–Nikiforov runs on | 215 |\n| c | 1, 3, 4 | one polynomial-ring/finite-field machinery — Lagrange's prime lemma is batch 3's F_p square count; Hilbert basis sits over the same rings | 141 |\n| d | 2, 9 | the forced pairing of the two remaining singletons: central products are built by an explicit universal property, and batch 9 is the (co)limit calculus itself | 199 |\n\nCriterion (2) could not discriminate: this run has **zero** cross-batch dependency edges at page and item level, so I decided on shared machinery with reading load as tiebreak.\n\n**Recommended:** raise `MAX_GROUPS` 3 → 4 (`tools/alpha-groups.mjs:38`, or `--max-groups 4` on the gate). That keeps every Alpha's ≤3-batch attention scope — the bound that protects accuracy — and touches only the concurrency ceiling, which stage `3-review` already caps at 3, so the fourth group queues rather than widening the fan-out. Option B (three groups, one owning four batches) is written out in the blocker if the concurrency ceiling must not move; it spends attention instead of wall clock and pairs ends/coends with combinatorics, which is thin.\n\nI did not change either cap or touch a manifest. The run holds at `2-assign`; after either change the gate clears with no further Alpha work."
+}

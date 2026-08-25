@@ -86,14 +86,28 @@ nohup sh tools/autopilot/bin/watchdog.sh "$PWD" > .autopilot/watchdog.log 2>&1 &
 `frontier` lists what is buildable now, in dependency waves, computed from
 publication state on disk. `plan` takes the pairs you chose and packs them into
 batches by prerequisite affinity, writes the manifests, and assembles the
-design-vs-spec drift **evidence** — mechanical throughout. Reading that evidence
-is not mechanical: stage 1 dispatches it as its `drift` unit, an Alpha
-verification pass that runs alongside the scaffolds, applies backward
-`requires` edges itself and records a higher-order edge as blocked.
-`tools/drift-review-check.mjs` gates the stage on the report — a missing
-review, an unreviewed page, or a blocked (owner-only) edge fails stage 1. The
-review existed as a task file with no dispatcher and no gate until 2026-08-16;
-frontier-15's step 0 held exactly the drift it would have missed.
+design-vs-spec drift **evidence** — mechanical throughout. `plan` also **refuses
+a pair set it cannot build**: every `requires` edge must reach a page published
+on disk or built by this same run (owner, 2026-08-24). That is the stage-1
+predicate, applied before any agent starts, and it reads the `status:` line —
+never the git log, since a predecessor is routinely published on disk hours
+before it is committed.
+
+Reading the drift evidence is not mechanical: **stage `1-drift`** dispatches an
+Alpha verification pass ahead of the scaffolds. It applies backward `requires`
+edges, **reorders** to close a forward edge, **mints** a prerequisite the spec
+lacks so this run builds it, and above three mintings **rescopes** the run onto
+those dependencies (≤14 pairs). `tools/drift-apply.mjs` — the gate's mechanical
+repair — turns those verdicts into manifests, ledger and task files; the Alpha
+writes none of them. `tools/drift-review-check.mjs` gates the stage: a missing
+review, an unreviewed page, an edge to a page nobody builds, or a
+`drift-blocked` verdict fails it.
+
+It runs **ahead of** the Betas rather than alongside them because minting and
+rescoping change which pages the run builds, and `drift-apply` refuses a run
+whose manifests already carry authored items. The review existed as a task file
+with no dispatcher and no gate until 2026-08-16; frontier-15's step 0 held
+exactly the drift it would have missed.
 
 `start --detach` refuses to detach if the stage table cannot fail (see below), so
 a spec defect is a message on your terminal rather than a blocker in a log nobody
@@ -148,7 +162,7 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
 | `repair hit an external outage … round refunded` | every failure the repair produced was a platform outage (an account session limit, a 429) — not a repair failure, so no round was spent | nothing; the hook re-fires when the backoff clock passes (default 20 min) and the budget is intact |
 | `gate <id> ALSO failing (advisory)` | the battery stops at its FIRST failure, then runs the rest read-only so one battery names every failure | fix them together with the primary; advisory failures never block or spend rounds on their own |
-| silence while blocked | the battery is event-driven: it re-runs on a dispatch end, repair round, control command, new result file or backoff expiry — not on a clock (except a backstop every 20th skip) | if you hand-edited files to fix the failure, `autopilot retry` re-arms the battery |
+| silence while blocked | the battery is event-driven: it re-runs on a dispatch end, repair round, control command, new result file or backoff expiry — never merely because another polling interval passed | if you hand-edited files to fix the failure, `autopilot retry` re-arms the battery |
 | `stage table reloaded` / `reload refused` | `stages/*.mts` was edited under a running engine; a table that fails validation is never loaded | on refusal, fix the table and save again — the running table stayed |
 | `N dispatch record(s) stamped from result files` | adopted/orphaned records reconciled against disk | nothing; bookkeeping |
 | `obligations … open at the terminal stage` | a `block`-tier external debt is neither closed nor owner-accepted | close it with evidence, or `obligations.mjs accept --by owner --reason "…"` |
@@ -171,7 +185,7 @@ converge must become a blocker a person reads rather than an unbounded spend.
 | loop | clears when | receipt it dispatches from |
 |---|---|---|
 | step 3 review → Beta fix → re-check | every pair is `sufficient` | `research/<run>-scaffold-closure.json` |
-| step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `research/<run>-judge-closure.json` |
+| step 7 judge → step-8 adjudicate → preflight → targeted rejudge → close | every item paired, every rejection adjudicated, no open fatal, final repository/contracts/ledger green | `research/<run>-judge-closure.json`; the full Alpha audit receipt follows at Step 9 |
 
 Both receipts name machine-readable work, not prose — nothing downstream can
 read a table. Judge closure includes exact `(id, model, context_sha256)` rows for
@@ -179,16 +193,33 @@ missing adjudications; `8-adjudicate` routes those rows to one narrow recovery
 Alpha before open-fatal repair. Why the loops are shaped this way, and the runs
 that proved it: `ARCHITECTURE.md` §3.11d.
 
-## Budget, and why fatal repairs are not capped
+## Budget and terminal Step-8 blockers
 
 Judge calls are the spend: two lanes over every item in the run, capped at **14
 concurrent per lane, 28 combined** (owner, 2026-08-20). A capacity refusal is a
 null verdict, not a verdict, and the sweep retries it.
 
-**Fatal repairs are deliberately uncapped** (owner, 2026-08-03). A proof that
-keeps yielding real fatal defects is either converging toward correctness or is
-false, and both must run to conclusion. What *is* capped is the number of
-automatic repair *rounds* per gate — the loop, not the repairs.
+**Step 8 has at most two frozen-context judge cycles per item, including the
+context whose first confirmed-fatal adjudication licenses repair** (owner
+clarification, 2026-08-25). If an adjudicator
+still confirms a fatal defect on the second context, the item becomes a terminal
+blocker for the owner or supervising session to resolve directly. No judge lane
+runs a third time. The
+manual disposition is recorded in
+`research/<run>-step8-terminal-resolutions.jsonl` against the exact current item
+and context hashes; it is neither a fabricated verdict nor a pass stamp, and
+`autopilot retry` may re-run the gates without reopening the round budget.
+
+That limit belongs only to `8-rejudge`. Its wrapper records the item before
+fan-out and runs a funded paired-lane preflight first, so a killed process cannot
+buy an unrecorded extra context and an unavailable lane cannot launch a costly
+partial sweep. Repository, proof-contract, impact and
+ledger residue is repaired in `8-preflight` before the first rejudge or in
+`8-close` after judge closure, on separate non-judge budgets. Pre-existing
+unadjudicated/open-fatal rows are routed to their owning Alpha before a sweep;
+only an item lacking a current verdict pair is sent to the judge lanes. A final
+closure repair that would change mathematics is a blocker, because it would
+invalidate the already-exhausted certification cycle.
 
 ## Limits — what is not yet true
 

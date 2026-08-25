@@ -622,11 +622,15 @@ before adjudication — the same dedicated-baseline pattern as `impact-audit` �
 and requires every item changed since it to be licensed by a `confirmed_fatal`
 row recorded against the pre-edit text state, which each adjudication row now
 carries as `item_sha256`. Scoping to that explicit window is what makes it
-exact: a step-9 scope-denial repair is simply not in it. **Fatal repairs are
-uncapped by deliberate design** — a proof that keeps yielding real fatal defects
-is either converging toward correctness or is actually false — so the guard
-counts licences, never attempts, and the twice-touched escalation stays
-advisory. `tools/item-hash.mjs` is the single normalization both it and
+exact: a step-9 scope-denial repair is simply not in it. **Owner clarification,
+2026-08-25: the automatic Step-8 loop is capped at two frozen-context judge
+cycles per item, including the frozen judge context whose first confirmed-fatal
+adjudication licenses repair.** A fatal defect or
+unusable judge response still open then becomes a terminal
+owner/session intervention, recorded in an exact-hash
+`<run>-step8-terminal-resolutions.jsonl` row. The terminal row is a distinct
+licence source: it is neither a judge verdict nor a pass stamp, and a generic
+retry cannot reopen the two-cycle budget. `tools/item-hash.mjs` is the single normalization both it and
 `touchlog` use, so the two can never disagree about what a repair is.
 **Two scope limits, measured in wave 5 (2026-08-06) and stated so nobody reads
 the guard as wider than it is.** It tracks `items/` only, so a `library/` page-prose
@@ -907,14 +911,80 @@ The hook itself also could not have worked as first written — it fired only wh
 the blocker *message* was new, and a gate failing the same way produces the same
 message every time, so it fired once and deadlocked.
 
+**Step 8 is now a five-boundary closure, not one mixed repair loop
+(frontier-18, 2026-08-25).** The observed loop combined mathematical decisions,
+contract repair, full repository validation and paired rejudging under one
+counter. A proof-contract failure therefore spent a judge round; an
+unadjudicated rejection could coexist with a missing pair and the sweep ran
+first; and each retry reran 21–22 gates, including a serial 796-item currency
+scan. The replacement gives each transition one meaning:
+
+1. `8-scope` renders current exact rows but does not repeat the unchanged
+   closure already proved by `7-judge`.
+2. `8-adjudicate` decides every current rejection and licenses only fatal
+   mathematical repairs.
+3. `8-preflight` runs repository, contract and ledger integrity before another
+   verdict is bought. Its repair budget cannot invoke the Step-7 full-sweep
+   repair registered for `judge-closure`.
+4. `8-rejudge` owns only exact judge currency. It always routes an existing
+   unadjudicated/open-fatal row to the owning resumed group before it considers
+   a missing-pair sweep. Immediately before fan-out a funded paired-lane
+   preflight must pass. A durable receipt counts distinct frozen contexts per
+   item, including that original confirmed-fatal context, and refuses a third context
+   before any paid call. This is the sole lifetime two-cycle budget.
+5. `8-close` runs the final repository/contract/ledger battery once. Full
+   `level-coverage` waits for the Alpha audit receipt authored at Step 9;
+   `8-final` instead recomputes exact judge currency with no repair hook, then
+   `8-freeze` snapshots those bytes. An item edit during final closure makes
+   currency stale and blocks rather than opening an implicit third cycle.
+
+Recovery tasks are re-rendered from the live closure receipt, so stale historical
+rejections are never copied into a new agent context. A failure naming exact
+items routes only to their owners; an unscoped detector gets one focused review,
+not four whole-group scans. Whole-level gates remain engine work and are banned
+from agent tasks.
+
+Exact context construction remains one canonical code path: every item invokes
+`judge.mts --context-hash`, but `context-hash-pool.mjs` schedules those local
+subprocesses through a bounded pool and reuses a receipt only when every item,
+library file, judge convention, hashing tool and relevant environment input has
+the same fingerprint. On frontier-18, the same closed 796-item
+judge-only scan fell from roughly 5m47s serial to 57.63s at the default pool
+size, with identical hashes tested against the former serial path. A failed item
+is reported independently without discarding successful neighbours.
+
+Every Step-8 adjudication now exact-joins a real `keep:false` verdict on
+`(id, model, context_sha256)`; fabricated decisions, malformed JSONL, and
+unlicensed creation/deletion are hard failures. Step-7 reading digests name the
+exact owned page, item and seam inventories instead of an unverifiable count.
+Cross-group findings have stable ids and owner dispositions, and a fatal target
+must acquire its own targeted rejection before repair. Published repairs have a
+separate closure and return to their originating group if either current lane
+rejects them.
+
+Stage hot reload now treats every gate-complete prefix as immutable. Frontier 18,
+whose rejudge had already completed before the new preflight/close stages were
+inserted, is handled by a write-once cutover receipt that freezes the successful
+rejudge evidence and item hashes. Re-running the migration checks that boundary;
+it cannot bless later edits by overwriting it.
+
+The same rebuild removed another false repair source: proof contracts formerly
+parsed only a numbered step's opening line. `facts-block.mjs` now owns the whole
+numbered-step grammar, and both checking and regeneration see continuation-line
+citations. The stricter live check found eight omitted `uses` mappings in two
+frontier-18 entries; targeted regeneration cleared them without changing item
+mathematics.
+
 **The battery is event-driven, and a failing one reports everything it can
 reach (owner directive, 2026-08-17; evidence in
 `research/frontier-15-machinery.md`).** A blocked stage's battery re-runs only
 when something that could change its verdict happened — a dispatch ended, a
 repair round ran, a control command landed, adoption reconciled a record, a
 result file appeared from an external process (dispatch-dir fingerprint), or a
-backoff clock expired — with an unconditional re-run every 20th skip as the
-bounded backstop. frontier-15 ran the 7-judge battery 29 times against
+backoff clock expired. There is no polling-count backstop: frontier-18 showed
+that it simply reran the same 22-gate battery roughly nineteen times after
+repair exhaustion, with no input capable of changing. frontier-15 ran the
+7-judge battery 29 times against
 unchanged inputs during one account outage, re-probing archive.org each pass;
 unchanged inputs into deterministic tools cannot change a verdict. **A
 hand-edit while the engine is blocked is re-armed by `autopilot retry`.**
@@ -1022,20 +1092,66 @@ step 0, the pair left the run).
 **Mechanism.** `autopilot plan` assembles per-page evidence
 (`<run>-drift-evidence.json`: declared `requires`, transitive closure, every
 design line naming the page, nearby out-of-closure page ids) and writes the
-task. Stage 1 owes a `drift` unit alongside its batches — an Alpha
-`verification` dispatch riding the 4-hour scaffold window at zero wall-clock
-cost. The Alpha applies **backward** edges itself (validate-plan gates the
-edit); a higher-order or out-of-spec edge is recorded as
-`VERDICT: drift-blocked`. `drift-review-check.mjs` fails the stage on a
-missing report, an owed A page without exactly one well-formed verdict, or any
-blocked verdict — a blocked edge is a reading-order change, owner-only, and
-the run stops at it. The verdict grammar lives in the task template
-(`bin/autopilot.mts`) and the checker together; change them together.
+task. **Stage `1-drift` is the review, alone, ahead of `1-scaffold`.** The
+Alpha applies **backward** edges itself (validate-plan gates the edit), and
+since 2026-08-24 may also **reorder** to close a forward edge, **mint** a
+prerequisite the spec lacks, or — above three mintings — **rescope** the run
+onto its dependencies (≤14 pairs). `drift-review-check.mjs` fails the stage on
+a missing report, an owed A page without exactly one well-formed verdict, an
+applied edge untrue of the spec, an edge pointing at a page neither published
+nor built here, or any `drift-blocked`. The verdict grammar lives in the task
+template (`bin/autopilot.mts`), the brief (`briefs/alpha-drift.md`) and the
+checker together; change them together.
+
+`drift-blocked` still stops the run, but its meaning has moved: it used to say
+*an owner must decide*, and now says *nobody decided*, since reordering,
+minting and rescoping are all Alpha authority.
+
+**Why it is its own stage.** It rode inside `1-scaffold` until 2026-08-24,
+finishing in ~15 minutes against a ~50-minute scaffold window — free, while its
+only outputs were `requires` edits and a report. The 2026-08-24 rulings made it
+able to change **which pages the run builds**, and a scope change discovered
+after ten Betas have scaffolded is a teardown of authored work:
+`tools/drift-apply.mjs` refuses a scaffolded run, so the automation would have
+deadlocked on precisely the decisions it was built to absorb. Ahead of the
+Betas the same decision costs one Alpha pass. `batches()` reads the manifest
+directory, so a batch minted at `1-drift` simply exists when `1-scaffold`
+computes its units — no signalling between stages.
+
+**The mechanical half.** `tools/drift-apply.mjs` is the drift gate's
+`MECHANICAL_REPAIRS` entry. It reads `drift-minted` / `drift-rescoped`
+verdicts, validates them against the spec the Alpha edited, writes the batch
+manifests they imply, and regenerates the scope ledger, task files and covers
+map from those manifests. It never decides anything: an Alpha that wrote
+manifests would be an Alpha driving a stage transition (§3.11d). It exits 0
+having done nothing when the report decided nothing, and refuses outright when
+any manifest already carries authored items.
 
 **History.** Between the engine rewrite and 2026-08-16 the review was a
 never-invoked node: `plan` wrote the task and printed "dispatched as the first
 audit node", no stage dispatched it, no gate read its report. Found because
 frontier-15's step 0 contained exactly the drift class it exists to catch.
+
+### 3.11e-4 Plan-time buildability — `unsatisfiableEdges` (2026-08-24)
+
+**Which failure it prevents.** A run planned on pages that cannot legally be
+built. `autopilot plan` now refuses a pair set containing a `requires` edge to
+a page that is neither published on disk nor built by the same run — the same
+predicate `drift-review-check` enforces at stage 1, and the same one
+`autopilot frontier` uses to compute waves. `--allow-unbuildable` overrides it
+and says on the record that the stage-1 stop was chosen.
+
+**Why it exists.** On frontier-18 a fourteen-pair set was planned whose ten
+largest members cited frontier-17 while that run was still `draft`. `frontier`
+had already reported the buildable wave as **four**; the plan overrode it by
+hand on the reasoning that frontier-17 had itself been planned before
+frontier-16 was published — a misreading of git history, since the owner flips
+`status: published` on disk hours before committing, and every gate reads the
+filesystem. Nothing between `plan` and the stage-1 gate could see the
+difference. The gate caught it 3h20m later, after ten Betas had scaffolded and
+a session window was spent, and caught it as a stop needing a person. The check
+costs two seconds. **Publication state is the `status:` line, never the git
+log.**
 
 ### 3.11f Gate liveness — `gate-liveness.mjs` (2026-08-16)
 
@@ -1516,7 +1632,7 @@ adjudicating lane and a silent downgrade there is invisible in the output.
 WebFetch/WebSearch by default for a write role and names them in the read-only
 allow list — but it is kept because it records which lanes must not lose the
 capability, and because the Codex return path reads it as a real switch. The role
-keeps `workspace-write` and its lane cap of 3.
+keeps `workspace-write` and its lane cap (3, raised to 4 on 2026-08-24).
 
 Read-only is a property of the ROLE, not of the prompt, and **each runner
 enforces it differently because their guarantees differ in strength**:
@@ -1587,7 +1703,35 @@ and the rule lives in `LEVELS.md` §"Step 3"/§"Step 6", not in this number:
 |---|---|
 | step 4 propagation | the shared `research/plan-*.md` prose scaffolds have one writer; two overwrite each other silently |
 | step 6c cross-batch/cross-level citation audit | the edges that are not inside any one batch are global by definition, so no group can see them |
-| step 8 judge adjudication | `step8-guard.mjs` gates one `pre-step8` baseline against one exact-hash adjudications ledger, and the 30-second rule is a judgement call that three adjudicators would draw in three places |
+
+**Step 8 left this table on 2026-08-25 (owner).** It was here on the reasoning
+that `step8-guard.mjs` gates one `pre-step8` baseline against one exact-hash
+adjudications ledger, and that the 30-second rule is a judgement call four
+adjudicators would draw in four places. Both halves were weaker than they looked.
+The baseline is taken once, by the engine at `8-baseline`, and measures the
+repository — it does not care how many Alphas edited inside the window, only that
+every edit is licensed by a fatal row. The ledger is append-only, and the
+partition gives each Alpha a disjoint item set, so four writers appending rows
+about different items do not race; what would race is a rewrite, which the task
+file forbids. What the single reader actually cost was attention: 796 items in
+nine categories through one context window, with the last rejections read on the
+least of it. The 30-second line moving between four readers is a real cost, and
+the smaller one — steps 3 and 6 already accept it, and each group Alpha at least
+draws its line while holding one coherent subject rather than nine.
+`tools/step8-scope.mjs` renders the partition; `LEVELS.md` §"Step 8" is
+normative.
+
+**And the partition bought a second thing the single lead could not have.** With
+the groups known before the sweep finishes, each group Alpha can read its own
+pairs *while* step 7 runs (owner, 2026-08-25) — as units of `7-judge` rather than
+a stage ahead of it, since the engine overlaps units inside a stage and
+serialises stages. The digest it returns is this group's account of the
+mathematics written before any verdict existed, which is the one reading that
+cannot have been shaped by the judges' framing; `8-scope` puts it at the top of
+the group's step-8 file. The reader is read-only at the kernel
+(`alpha-preread`, `--sandbox read-only`, artifact via `--result-artifact`),
+because an edit landing mid-sweep voids verdicts already cast and leaves a level
+judged in two states with nothing on disk saying so.
 
 **Quota is what bounds the number, not memory.** Four concurrent Opus lanes at
 `xhigh` exhausted the Claude session limit in 25–34 minutes and died at once
@@ -1680,10 +1824,17 @@ the constraint that actually binds.
 
 That is precisely the move the 2026-08-14 group-Alpha change makes for `alpha`
 itself (see above): the cap rose to 3 only once each group Alpha had a disjoint
-owned artifact set and the three genuinely shared stages — step 4, step 6c,
+owned artifact set and the genuinely shared stages — step 4, step 6c, and then
 step 8 — were pinned to the lead Alpha **by rule**. The guarantee is intact; what
 changed is where it is written down. Raising a cap without first relocating the
 guarantee remains the error this paragraph warns about.
+
+**`alpha-adjudicate` 1 → 4 on 2026-08-25 is the same move made again**, and it
+passes the same test: step 8's partition gives each group Alpha a disjoint item
+set before the cap rises, so the cap expresses throughput and the disjointness
+expresses the guarantee. A cap of 1 under group units would not have failed
+loudly — it would have serialised four groups behind one slot and looked like
+slowness, which is the worse failure.
 
 **That constraint is the Claude subscription session limit, not memory** —
 corrected 2026-08-13, having first been written the other way round from
@@ -1708,8 +1859,8 @@ fan-out by the batches' disjoint write sets — but the cap never bound, and wav
 was on course to spend ~2 hours reading four batches strictly one after another.
 Concurrency is still bounded by the ROLE rather than by the driver, because
 `dispatch.mjs` acquires a cross-process slot before spawning its model; a
-genuinely single-agent stage (the lead Alpha at steps 4, 6c and 8) is unchanged,
-and since 2026-08-14 the `alpha` cap of 3 lets a step's GROUP Alphas run at once
+genuinely single-agent stage (the lead Alpha at steps 4 and 6c) is unchanged,
+and since 2026-08-14 the `alpha` cap (3, raised to 4 on 2026-08-24) lets a step's GROUP Alphas run at once
 the way `beta` and `reader` already do. Failure semantics changed with it:
 every agent now completes and the halt names ALL failures, because a broken brief
 or credential is usually broken for every lane at once. Dry-run and simulation
@@ -2087,16 +2238,18 @@ ordered decision rule is: mathematical accuracy and correct dependency citation
 are non-negotiable; then minimize forward references; then preserve
 mathematical richness. The decision ledger is the durable audit trail.
 
-**The step-10 fatal-error rundown and sole owner pause are durable aggregation
-mechanisms (owner, 2026-07-31).** Step 9 completes the scope-denial sweep and
-continues without a pause. Beta audit reports and Alpha's audit ledger classify every
-publish-blocking defect by mathematical type, location in the artifact, affected
-id, and fix disposition. Judge and touch ledgers add refutation/repair history;
-the Alpha adjudication ledger adds approved reversals and drops. Step 10
-aggregates those records into a concise but complete owner report grouped by
-type and location, then makes the only owner pause. Grouping may
-compress repeated defects, but every fatal item must remain named and every
-resolution must be stated.
+**Steps 3, 9 and 10 use durable, delta-aware aggregation (owner, 2026-08-25).**
+`scope-decisions.mjs` gives every decline a stable identity and binds its Alpha
+decision to the exact row, page closure and destination. Step 9 reviews only
+invalidated decisions (or every row on a legacy run), then
+`step9-changes.mjs` derives all created and modified guarded hashes since
+`post-step8`. Deletions, unowned creations and duplicate ownership stop; a
+modified published item remains in the generated targeted judge scope. Changed
+ids alone re-enter the paired judge/adjudication/rejudge path. Impact closure precedes final stamps and
+receipts. Step 10 reconciles scope, defect, judge, adjudication, touch, pathway
+and readiness records into one hash-bound evidence packet. Code, not report
+prose, renders every fatal row and statistic; the read-only Alpha adds only the
+interpretation that cannot be derived mechanically.
 
 ### 6.1 No shell-permission prompts, and the mechanical backstops
 

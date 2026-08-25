@@ -19,7 +19,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-import { stages } from '../stages/mathlib.mts';
+import { stages, MECHANICAL_REPAIRS, dispatchDriftRereview } from '../stages/mathlib.mts';
 import { identityPlaceholders } from '../src/doctor.mts';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
@@ -86,6 +86,44 @@ test('a complete report with no blocked edges passes, and B pages are not demand
   assert.equal(r.status, 0, r.stderr);
   assert.match(r.stdout, /2 page\(s\) reviewed, 1 spec edit\(s\) applied/);
   rmSync(dir, { recursive: true, force: true });
+});
+
+// A REPORT CLAIMING AN EDIT PRODUCES THE SAME FILE AS ONE THAT MADE IT. That is
+// why drift-applied is verified against the spec, and drift-reordered has to be
+// too: `drift-check-forward-edge` only walks the edges a drift-applied verdict
+// names, so an unmade reorder passed unseen until this test.
+test('drift-reordered is verified against the spec, not taken on trust', () => {
+  const moved = SPEC_PAGES.map((p) => (p.id === 'alpha-page' ? { ...p, order: 30 } : p));
+
+  // the reorder the report claims IS true of the spec
+  const ok = fixture(PAGES, [
+    '### alpha-page', 'moved above its prerequisite.',
+    'VERDICT: drift-reordered — `alpha-page` (order 10 -> 30)',
+    '### beta-page', 'VERDICT: no-drift',
+  ].join('\n'), { specPages: moved });
+  assert.equal(check(ok).status, 0);
+  rmSync(ok, { recursive: true, force: true });
+
+  // the same report against a spec that was never edited
+  const stale = fixture(PAGES, [
+    '### alpha-page', 'moved above its prerequisite.',
+    'VERDICT: drift-reordered — `alpha-page` (order 10 -> 30)',
+    '### beta-page', 'VERDICT: no-drift',
+  ].join('\n'));
+  const r = check(stale);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /drift-check-not-reordered: alpha-page .* but .* carries order 10/);
+  rmSync(stale, { recursive: true, force: true });
+
+  // a reorder naming no move at all
+  const vague = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: drift-reordered — moved it up a bit',
+    '### beta-page', 'VERDICT: no-drift',
+  ].join('\n'));
+  const v = check(vague);
+  assert.equal(v.status, 1);
+  assert.match(v.stderr, /drift-check-detail: alpha-page/);
+  rmSync(vague, { recursive: true, force: true });
 });
 
 test('a missing report fails — the review not having run is not a pass', () => {
@@ -230,37 +268,113 @@ function stageCtx() {
   return { dir, ctx: { run: 'demo', repo: dir, dispatchDir: join(dir, 'research', 'demo-dispatch') } };
 }
 
-test('stage 1 owes the drift unit ahead of every batch', () => {
+// THE DRIFT REVIEW IS ITS OWN STAGE, AHEAD OF THE BETAS (owner rulings,
+// 2026-08-24). It used to be the `drift` unit of `1-scaffold`, running
+// alongside the Betas. Once the Alpha could mint, reorder and rescope, a
+// decision that changes WHICH PAGES THE RUN BUILDS could no longer be taken
+// while ten Betas were already scaffolding against the old set — `drift-apply`
+// refuses a scaffolded run, so the automation would have deadlocked on exactly
+// the class of decision it was built to handle. These three tests pin the
+// ordering, because a later edit that merges the stages back would restore the
+// deadlock silently.
+test('the drift review is a stage of its own, owed before any batch', () => {
   const { dir, ctx } = stageCtx();
-  const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  assert.deepEqual(s1.units(ctx), ['drift', '1', '2']);
+  const ids = stages.map((s: any) => s.id);
+  assert.ok(ids.indexOf('1-drift') >= 0, 'no 1-drift stage');
+  assert.ok(ids.indexOf('1-drift') < ids.indexOf('1-scaffold'),
+    '1-drift must precede 1-scaffold, or a rescope lands on scaffolded work');
+  const drift: any = stages.find((s: any) => s.id === '1-drift');
+  const scaffold: any = stages.find((s: any) => s.id === '1-scaffold');
+  assert.deepEqual(drift.units(ctx), ['drift']);
+  // The scaffold stage owes batches ONLY — a drift unit left here would let a
+  // Beta start before the review that may rescope it.
+  assert.deepEqual(scaffold.units(ctx), ['1', '2']);
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('stage 1 routes drift to an Alpha verification dispatch and batches to Betas', () => {
+test('1-drift routes to an Alpha verification dispatch; 1-scaffold to Betas', () => {
   const { dir, ctx } = stageCtx();
-  const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  const plans = s1.plan(ctx, ['drift', '1']);
-  const drift = plans.find((p: any) => p.label === 'drift-review');
-  assert.equal(drift.role, 'alpha');
-  assert.equal(drift.job, 'verification');
-  assert.equal(drift.brief, 'briefs/alpha-drift.md');
-  assert.deepEqual(drift.covers, ['drift']);
-  const beta = plans.find((p: any) => p.label === 'batch-1');
-  assert.equal(beta.role, 'beta');
-  assert.equal(beta.job, 'scaffolding');
+  const drift: any = stages.find((s: any) => s.id === '1-drift');
+  const [d] = drift.plan(ctx, ['drift']);
+  assert.equal(d.label, 'drift-review');
+  assert.equal(d.role, 'alpha');
+  assert.equal(d.job, 'verification');
+  assert.equal(d.brief, 'briefs/alpha-drift.md');
+  assert.deepEqual(d.covers, ['drift']);
+
+  const scaffold: any = stages.find((s: any) => s.id === '1-scaffold');
+  const [b] = scaffold.plan(ctx, ['1']);
+  assert.equal(b.label, 'batch-1');
+  assert.equal(b.role, 'beta');
+  assert.equal(b.job, 'scaffolding');
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('stage 1 pattern admits exactly its two result shapes', () => {
-  const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  assert.ok(s1.pattern.test('beta-batch-3.result.json'));
-  assert.ok(s1.pattern.test('alpha-drift-review.result.json'));
+test('each stage-1 pattern admits exactly its own result shape', () => {
+  const drift: any = stages.find((s: any) => s.id === '1-drift');
+  const scaffold: any = stages.find((s: any) => s.id === '1-scaffold');
+
+  assert.ok(drift.pattern.test('alpha-drift-review.result.json'));
+  // the drift review may not be satisfied by some other alpha result
+  assert.ok(!drift.pattern.test('alpha-a.result.json'));
+  assert.ok(!drift.pattern.test('alpha-drift-review.log'));
+  // nor by a Beta's scaffold
+  assert.ok(!drift.pattern.test('beta-batch-3.result.json'));
+
+  assert.ok(scaffold.pattern.test('beta-batch-3.result.json'));
   // a fix-stage result must not count as scaffold coverage
-  assert.ok(!s1.pattern.test('beta-fix-batch-3.result.json'));
-  // nor may the drift REVIEW be satisfied by some other alpha result
-  assert.ok(!s1.pattern.test('alpha-a.result.json'));
-  assert.ok(!s1.pattern.test('alpha-drift-review.log'));
+  assert.ok(!scaffold.pattern.test('beta-fix-batch-3.result.json'));
+  // and the drift review must no longer cover a scaffold unit
+  assert.ok(!scaffold.pattern.test('alpha-drift-review.result.json'));
+});
+
+test('1-drift repairs a mint/rescope verdict mechanically, via drift-apply', () => {
+  const drift: any = stages.find((s: any) => s.id === '1-drift');
+  // The gate the repair hangs off, and the repair itself. An Alpha that wrote
+  // manifests would be an Alpha driving a stage transition; the bookkeeping is
+  // a function of files on disk, so it is code.
+  assert.ok(MECHANICAL_REPAIRS['drift-review'], 'no mechanical repair for the drift gate');
+  const argv = MECHANICAL_REPAIRS['drift-review']({ run: 'demo', repo: '/tmp' } as any);
+  assert.deepEqual(argv, ['tools/drift-apply.mjs', '--run', 'demo']);
+  // Two rounds, two DIFFERENT repairs: materialise the decision, then — if a
+  // blocked verdict is what remains — send the stale report back to an Alpha.
+  assert.equal(drift.maxFixRounds, 2);
+});
+
+// The deadlock this closes: a report failing the gate for a finding that is no
+// longer true, with nothing able to rewrite it. The review had returned exit 0,
+// so its unit stayed covered and no retry re-armed it.
+test('a blocked verdict re-dispatches the drift review; other residue does not', () => {
+  const started: any[] = [];
+  const executor = { start: (_s: any, d: any) => started.push(d) };
+  const args = { ctx: { run: 'demo', repo: '/tmp' }, executor, stage: {}, round: 2 };
+
+  const gate = (output: string) => ({ id: 'drift-review', output });
+  assert.equal(dispatchDriftRereview({ ...args, failure: gate('ERROR drift-check-blocked: p — x') }), true);
+  assert.equal(started.length, 1);
+  assert.equal(started[0].role, 'alpha');
+  assert.equal(started[0].job, 'verification');
+  assert.deepEqual(started[0].covers, ['drift']);
+  assert.equal(started[0].brief, 'briefs/alpha-drift.md');
+  assert.equal(started[0].label, 'drift-review-2');
+
+  // An unbuildable edge is NOT the Alpha's to fix by re-reading: the target is
+  // unpublished and unbuilt, and re-asking cannot change that.
+  started.length = 0;
+  assert.equal(dispatchDriftRereview({ ...args, failure: gate('ERROR drift-check-unbuildable-edge: p requires q') }), false);
+  assert.equal(started.length, 0);
+
+  // It must also see a blocked verdict arriving as an ADVISORY gate rather than
+  // the primary failure, and must not fire on some other gate's output.
+  assert.equal(dispatchDriftRereview({
+    ...args,
+    failure: { id: 'url-liveness', output: 'dead', advisory: [gate('ERROR drift-check-blocked: p — x')] },
+  }), true);
+  started.length = 0;
+  assert.equal(dispatchDriftRereview({
+    ...args, failure: { id: 'url-liveness', output: 'ERROR drift-check-blocked: not from the drift gate' },
+  }), false);
+  assert.equal(started.length, 0);
 });
 
 // The template defect that blocked stage 1 on frontier-15: an identity

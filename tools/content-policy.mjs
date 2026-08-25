@@ -346,7 +346,19 @@ if (!manifestOnly) for (const id of scope) {
   //
   // Batch-scoped, like every other rule in this file, so the legacy corpus is
   // not retro-flagged — that is an owner decision, not a gate's.
-  for (const match of item.body.matchAll(/\\iota\s*(?:_\{[^}]*\}|_[A-Za-z0-9])?\s*\(/g)) {
+  //
+  // SUBSCRIPTED FORMS ARE NOT MATCHED (owner, 2026-08-24). The pattern used to
+  // opt IN to `\iota_1(`, `\iota_{k}(` and friends, which the rule never
+  // mentions: it names `\iota(n)`, `\iota(0)` and `\iota(k!)`, all of them the
+  // ONE canonical embedding applied to a natural number. `\iota_1` and
+  // `\iota_2` are a different symbol — on frontier-18 they were the canonical
+  // injections of a central product, applied to group elements and to a whole
+  // subgroup, with no natural number anywhere — and flagging them made the gate
+  // enforce something broader than the rule behind it. A detector wider than
+  // its rule has no honest disposition: an Alpha may not narrow it and may not
+  // rewrite correct mathematics to satisfy it, so every firing of this class
+  // stopped the run for a person. It blocked `5-author` for three repair rounds.
+  for (const match of item.body.matchAll(/\\iota\s*\(/g)) {
     const at = item.body.slice(match.index, match.index + 24).replace(/\s+/g, ' ');
     error('notation-iota-applied',
       `${item.file}: applied \\iota notation ("${at}…") — write the natural number directly. Bare \\iota for a universal-property inclusion is still fine.`,

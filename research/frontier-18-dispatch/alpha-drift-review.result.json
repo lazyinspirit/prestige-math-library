@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "drift-review",
+  "run": "frontier-18",
+  "covers": [
+    "drift"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-23T17:06:39.977Z",
+  "ended_at": "2026-08-23T17:21:56.687Z",
+  "ms": 916710,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-drift-review.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-18-dispatch/alpha-drift-review.prompt.md",
+  "tail": "Review complete. Report at `research/frontier-18-alpha-step0-drift.md`, one section per A page, all 14 parsing cleanly (exactly one verdict each; applied edges verified true of the spec and backward).\n\n**Applied — three backward edges, `validate-plan` exits 0:**\n\n| page | added | order |\n|---|---|---|\n| `finite-fields-and-cyclotomic-extensions` (101.2) | `triangularisation-and-jordan-canonical-form` | 90 |\n| `lebesgue-measure-on-euclidean-space` (288.007) | `the-riemann-integral-in-rn-and-jordan-content` | 235 |\n| \" | `determinants-of-matrices-over-a-commutative-ring` | 82 |\n\nThe algebra track flagged its own miss — \"the third `requires` is load-bearing and is the one that would be missed\", the normal basis theorem over a finite base field needing LA-10's cyclic-vector theorem. MT-4 named three prerequisites the declared closure lacked: the Jordan-content agreement dictionary, and the determinant plus elementary-matrix factorisation behind `λ(T(E)) = |det T| λ(E)`.\n\n**Blocked — two, both owner-only:**\n\n- `extraspecial-p-groups-and-central-products` (71.003) needs `dual-spaces-bilinear-forms-and-inertia` (92) — the design names the exact item, `thm-alternating-forms-have-a-symplectic-normal-form`, that items 8–16 rest on. Forward edge; `prereq-order` rejects it.\n- `lattice-paths-and-catalan-numbers` needs CB-15 \"Combinatorial Classes and the Symbolic Method\". The §22 enrichment replaced §11's CB-6 inventory and routes Motzkin/Schröder and the recursive-specification well-definedness through CB-15 — which has no page id and no `plan-spec.json` entry, because that lane wrote its file and nothing else.\n\nOne near-miss worth naming: SC-1's design routes `thm-locally-bounded-separate-holomorphy` through \"CA-12's Schwarz lemma\". CA-12 is backward (325 vs 349) so I applied the edge — then found it carries an empty item list and is unpublished, i.e. the exact frontier-16 failure `drift-review-check` was written for. Reverted; the bound needed follows from the maximum modulus principle on CA-6, already declared. Verdict `no-drift`, with the reasoning recorded.\n\n`drift-review-check` fails (exit 1) on the two blocked edges — intended — and also on ten pre-existing `unbuildable-edge` errors I did not cause: every A page in scope declares a `frontier-17` predecessor that is still `status: draft` on disk. Those pages have real item lists; they are just unpublished. That is a publication state, not drift, and publishing frontier-17 is yours; it is recorded in the report preamble."
+}

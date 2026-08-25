@@ -357,8 +357,21 @@ if (cmd === 'check') {
       .map((l) => { try { return JSON.parse(l); } catch { return null; } })
       .filter((a) => a?.outcome === 'confirmed_fatal');
     for (const a of fatals) {
-      const owners = mine.filter((r) => (r.adjudication_ref ?? []).some((ref) =>
-        (a.item_sha256 && ref.item_sha256 === a.item_sha256) || (!a.item_sha256 && r.subject === a.id)));
+      // Current rows identify the exact model verdict and context. Two judges
+      // can find DIFFERENT defects on the same bytes, so item_sha256 alone is
+      // not an ownership key. Prefer exact structured references; fall back to
+      // old item-only references only when no exact owner exists, preserving
+      // pre-contract ledgers without letting them double-own a current row.
+      const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
+      const sameItem = (r, ref) => a.item_sha256 ? ref.item_sha256 === a.item_sha256 : r.subject === a.id;
+      const exactOwners = mine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+        && (!ref.id || ref.id === a.id)
+        && (!a.model || ref.model === a.model)
+        && (!a.context_sha256 || ref.context_sha256 === a.context_sha256)));
+      const legacyOwners = mine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+        && (!ref.id || ref.id === a.id)
+        && (!ref.model || !ref.context_sha256)));
+      const owners = exactOwners.length ? exactOwners : legacyOwners;
       if (owners.length === 0) errs.push(`confirmed_fatal on ${a.id} (${a.model ?? '?'}) has no ledger row — the defect the adjudicator confirmed was never recorded`);
       if (owners.length > 1) errs.push(`confirmed_fatal on ${a.id} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
     }

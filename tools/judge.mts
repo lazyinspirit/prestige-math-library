@@ -209,7 +209,14 @@ const OPUS_MODEL = MODELS.opus.id;
 // send the canonical wire value.
 const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
-const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL, OPUS_MODEL];
+// DERIVED, NOT LISTED. This was `[DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL,
+// OPUS_MODEL]` — a fifth hand-kept copy of the model table, and it silently
+// excluded any id the registry gained. Adding gpt-5.4 on 2026-08-24 was
+// rejected by a tool that had no reason to know about it.
+const SUPPORTED_MODELS: string[] = Object.values(MODELS).map((m: any) => m.id);
+/** The runner that can actually spawn a judge model, from the registry. */
+const runnerFor = (id: string): string =>
+  (Object.values(MODELS) as any[]).find((m) => m.id === id)?.runner ?? "deepseek";
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
 // The active default is deepseek+opus (owner, 2026-08-23): "change all LLMs from
 // gpt 5.6 sol and gpt 5.6 Terra to opus 5 since Codex subscription reached weekly
@@ -312,7 +319,7 @@ const deepseekKey = (): string => {
 };
 
 type CodexRun = { stdout: string; stderr: string; code: number | null; timedOut: boolean };
-const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+const runFreshCodex = (model: string, prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
   // Codex subscription authentication lives in the user's normal CODEX_HOME,
   // but this judge must run read-only and must not let Codex initialise there.
   // Give every judge call a 0700 temporary home containing only its auth record
@@ -322,14 +329,14 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   // argument, or process output.
   const sourceHome = process.env.CODEX_HOME ?? join(homedir(), ".codex");
   const temporaryHome = mkdtempSync("/tmp/prestige-math-library-terra-");
-  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-terra-work-");
+  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-codex-work-");
   const sourceAuth = join(sourceHome, "auth.json");
   if (existsSync(sourceAuth)) {
     copyFileSync(sourceAuth, join(temporaryHome, "auth.json"));
     chmodSync(join(temporaryHome, "auth.json"), 0o600);
   }
   const child = spawn(process.env.CODEX_BIN ?? "codex", [
-    "--ask-for-approval", "never", "exec", "--ephemeral", "--model", TERRA_MODEL,
+    "--ask-for-approval", "never", "exec", "--ephemeral", "--model", model,
     "-c", 'model_reasoning_effort="xhigh"',
     // The temporary CODEX_HOME below contains only auth.json, so the user's
     // config.toml — including model_context_window — is deliberately NOT
@@ -414,11 +421,11 @@ const runFreshClaude = (model: string, prompt: string, timeoutMs: number): Promi
 // anything. A dead account then costs a single request per independent judge.
 if (bools.has("preflight")) {
   const checks = await Promise.all(models.map(async (judgeModel) => {
-    if (judgeModel === TERRA_MODEL) {
-      const terra = await runFreshTerra('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
-      return { judgeModel, status: terra.code === 0 && terra.stdout.trim() ? 200 : 0, raw: terra.stdout || terra.stderr || "Codex produced no output" };
+    if (runnerFor(judgeModel) === "codex") {
+      const codexRun = await runFreshCodex(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
+      return { judgeModel, status: codexRun.code === 0 && codexRun.stdout.trim() ? 200 : 0, raw: codexRun.stdout || codexRun.stderr || "Codex produced no output" };
     }
-    if (judgeModel === SONNET_MODEL || judgeModel === OPUS_MODEL) {
+    if (runnerFor(judgeModel) === "claude") {
       const claude = await runFreshClaude(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 180_000);
       return { judgeModel, status: claude.code === 0 && claude.stdout.trim() ? 200 : 0, raw: claude.stdout || claude.stderr || "claude produced no output" };
     }
@@ -949,6 +956,25 @@ if (bools.has("context-hash")) {
 
 const DEEPSEEK_INITIAL_MAX_TOKENS = 40_000;
 const DEEPSEEK_LENGTH_RETRY_MAX_TOKENS = 80_000;
+// DeepSeek has accepted very large A/B-pair prompts and then left the HTTP
+// request open without producing a byte. The remaining frontier-18 rejudge is
+// the measured case: 322,379 characters / 103,109 input tokens plus a 40k
+// completion reservation. Its earlier successful verdict used 19,071 output
+// tokens, so the defect is not that the proof needs an unbounded answer; it is
+// that the requested input-plus-output envelope is too close to the provider's
+// practical long-context limit. Do not shorten the frozen evidence prompt.
+// Instead, reserve one decisive completion budget only for prompts this large.
+// A rejudge sweep is independently restartable, so a stateful "small first,
+// then large" ladder resets after a gate round and silently spends the small
+// call again. Use 64k from the first long-context attempt: it avoids that loop
+// and gives the model one chance to finish its reasoning and emit JSON.
+// The normal 40k -> 80k length fallback remains available for ordinary prompts.
+const DEEPSEEK_LONG_CONTEXT_CHARS = 300_000;
+const DEEPSEEK_LONG_CONTEXT_MAX_TOKENS = 64_000;
+const deepseekBudget = (normalBudget: number): number =>
+  frozenPrompt.length >= DEEPSEEK_LONG_CONTEXT_CHARS
+    ? DEEPSEEK_LONG_CONTEXT_MAX_TOKENS
+    : normalBudget;
 // A full A/B-pair context at owner-requested xhigh can legitimately take more
 // than the former seven-minute transport window (several completed Frontier-6
 // calls already took more than six minutes).  Do not turn that live reasoning
@@ -1058,7 +1084,9 @@ async function callDeepSeek(): Promise<CallResult> {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     let resp: Response;
     let raw: string;
-    const max_tokens = deepseekLengthFallbackUsed ? DEEPSEEK_LENGTH_RETRY_MAX_TOKENS : DEEPSEEK_INITIAL_MAX_TOKENS;
+    const max_tokens = deepseekBudget(
+      deepseekLengthFallbackUsed ? DEEPSEEK_LENGTH_RETRY_MAX_TOKENS : DEEPSEEK_INITIAL_MAX_TOKENS,
+    );
     const started = performance.now();
     try {
       resp = await fetch(DEEPSEEK_API_URL, {
@@ -1146,11 +1174,11 @@ async function callDeepSeek(): Promise<CallResult> {
   return { content: "", raw: "retries exhausted" };
 }
 
-async function callTerra(): Promise<CallResult> {
+async function callCodex(model: string): Promise<CallResult> {
   for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     const started = performance.now();
-    const run = await runFreshTerra(frozenPrompt, 12 * 60_000);
+    const run = await runFreshCodex(model, frozenPrompt, 12 * 60_000);
     const latency_ms = Math.round(performance.now() - started);
     const content = run.stdout.trim();
     const event = {
@@ -1163,10 +1191,13 @@ async function callTerra(): Promise<CallResult> {
       raw_bytes: (run.stdout.length + run.stderr.length),
     };
     if (run.code === 0 && content) {
-      emitAttempt(TERRA_MODEL, attempt, event);
+      // `model`, not TERRA_MODEL: this function is no longer Terra-only, and an
+      // attempt row naming the wrong lane is the same lie the routing fix above
+      // removes — one layer down, in the cost ledger.
+      emitAttempt(model, attempt, event);
       return { content, raw: run.stderr };
     }
-    emitAttempt(TERRA_MODEL, attempt, event);
+    emitAttempt(model, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
     return {
       content: "",
@@ -1208,10 +1239,21 @@ async function callClaude(model: string): Promise<CallResult> {
   return { content: "", raw: `${model} retries exhausted` };
 }
 
-const call = (judgeModel: string): Promise<CallResult> =>
-  judgeModel === DEEPSEEK_MODEL ? callDeepSeek()
-    : judgeModel === SONNET_MODEL || judgeModel === OPUS_MODEL ? callClaude(judgeModel)
-      : callTerra();
+// ROUTED BY RUNNER, NOT BY ID. This was a chain of id equality tests ending in
+// `: callTerra()` — so ANY model the chain did not name was judged by
+// gpt-5.6-terra while the ledger recorded the requested name. Adding gpt-5.4 on
+// 2026-08-24 would have produced exactly that: a lineup of DeepSeek + "gpt-5.4"
+// in which the second lane was actually Terra. The registry already knows which
+// runner can spawn each id; asking it is the only form that cannot go stale.
+// The preflight switch above routes the same way, deliberately — the two used
+// to disagree about the fallthrough.
+const call = (judgeModel: string): Promise<CallResult> => {
+  switch (runnerFor(judgeModel)) {
+    case "codex": return callCodex(judgeModel);
+    case "claude": return callClaude(judgeModel);
+    default: return callDeepSeek();
+  }
+};
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
 // until now a rejection existed solely on stdout and vanished the moment it was

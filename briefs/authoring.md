@@ -252,11 +252,82 @@ them as a checklist against your own output:
 3. **Counts stated in prose.** "Seven items on this page depend on it" was
    published when the truth was nineteen. Nobody re-counts a count — it reads
    like a fact rather than a claim. Grep every number you write.
-4. **Citing an item for a claim it does not make.** See §3.
-5. **Wikilinks inside `$…$`.** The renderer rewrites `[[id]]` before KaTeX
+4. **Citing an item for a claim it does not make.** See §3 for the rule. This
+   is **54% of every confirmed-fatal defect this library has recorded** — more
+   than every other class combined — so here are the four shapes it takes, each
+   from a real repaired item. Read your own Facts block against these before you
+   report.
+
+   **(a) INFLATED — the restatement is stronger than the cited clause.**
+   The largest single shape; 38 of them escaped step 6 and cost a step-8 rejudge.
+   - cited `cor-archimedean-reciprocal`: *for each $\varepsilon>0$ there exists
+     a positive integer $N$ with $1/N<\varepsilon$*
+   - written in `[L4]`: *reciprocals of positive natural numbers tend to zero*
+   - Convergence of the whole sequence is a strictly stronger claim than the
+     existence of one index. The step then leaned on the stronger version.
+
+   **(b) TRUNCATED — the quote stops before the clause does its work.**
+   - cited `thm-internal-external-semidirect-product-equivalence`: *… iff
+     conjugation restricts to an action $\alpha$ and the resulting map
+     $\Phi:N\rtimes_\alpha H\to G$, $(n,h)\mapsto nh$, **is an isomorphism
+     carrying the canonical factors onto $N$ and $H$***
+   - written in `[L11]`: *… and the resulting map.*
+   - A biconditional whose right-hand side is missing licenses nothing at all.
+     If a clause is long, quote it whole; a faithful shortening never drops the
+     conclusion.
+
+   **(c) MISSING — a step uses a fact that is in no Facts line and no `deps`.**
+   - `ex-s-three-galois-correspondence-for-x-cubed-minus-two` step 1.1 multiplied
+     $[\mathbb Q(a):\mathbb Q]=3$ by $2$ to reach $[L:\mathbb Q]=6$ **by the
+     tower law**, which appeared in neither `deps` nor the Facts block. The
+     step's only licences were the Given and a bare `algebra` tag.
+   - `algebra` licenses arithmetic, not a named theorem. If you invoke a result,
+     it gets an `[F#]`/`[L#]` and a `deps` entry.
+
+   **(d) HYPOTHESIS DROPPED — the fact is real, its conditions are not carried.**
+   - `thm-holomorphic-parameter-riemann-integral`: `[L10]` omitted the cited
+     theorem's conclusion that $t\mapsto\|h(t)\|_2$ is integrable, and `[L11]`
+     omitted integrability of $q$ — so the item wrote an ordinary integral where
+     the source required an integrability hypothesis to write one at all.
+   - Copy the hypotheses across with the conclusion. A conclusion without its
+     conditions is a different theorem.
+
+5. **A proof step that describes an argument instead of performing one.**
+   `thm-a-distributive-law-makes-the-composite-a-monad` step 3.1 replaced the
+   entire associativity verification with the assertion that the distributive
+   axioms *"move the two occurrences of $S$ past the two occurrences of $T$ in
+   the same order"* — no typed equality chain, no commutative cells, nothing
+   showing the two composites $TSTSTS\to TS$ agree. Prose that gestures at a
+   diagram chase is not a diagram chase. If a step cannot be written as an
+   equality chain or a cited cell, it is not yet a step.
+
+6. **An expression that is not well formed under your own definitions.**
+   Type-check what you write: does the composite exist for the arrows as
+   declared, do the subscripts line up, is a restriction $f|_X$ written against
+   a domain you actually named, can the collection you formed have those members?
+   Real cases: a composite in `[L1]` undefined for the declared arrows with the
+   subscripts reversed; a Statement writing $f|_X$, $K\setminus X$ and
+   $L\setminus X$ without naming either embedding; a collection formed of
+   subobjects that this library's own class convention makes a proper class.
+7. **Wikilinks inside `$…$`.** The renderer rewrites `[[id]]` before KaTeX
    runs, so a wikilink inside math silently kills the whole block while every
    mechanical gate stays green. Never put a wikilink inside dollar signs; put
    the citation in the surrounding prose.
+8. **A diagram carrying mathematics the text does not.** Owner rule, 2026-08-25:
+   **diagrams are optional, equations are not.** Anything a commutative or
+   string diagram asserts is also written algebraically beside it — every arrow
+   named with its domain and codomain, every commuting square or triangle as an
+   explicit equation of composites, every string-diagram identity as an equation
+   between composites. Write the item so that deleting all its `tikz` and
+   `tikzcd` blocks leaves the Definition, Statement and proof complete and
+   checkable. This is not presentation: **the judges cannot see pictures.** The
+   frozen prompt is text, `deepseek-v4-pro` has no vision, and at frontier-18 it
+   spent 595s and then 720s on
+   `thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` without returning a
+   verdict. Watch the case the cell grammar does not cover: `**Diagram:**` cells
+   live in `## Facts & Assumptions`, which a `def-` item does not have, so on a
+   definition the surrounding prose and display math are the only algebra there
+   is and must carry the whole claim.
 
 ## 6. Triage: what to spend effort on
 

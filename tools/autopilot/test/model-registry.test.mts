@@ -18,7 +18,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { MODELS, LANES, JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_MODEL_IDS, lane, laneFamily, resolveLineup } from '../../models.mjs';
+import { MODELS, LANES, JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_MODEL_IDS, KNOWN_JUDGES, lane, laneFamily, resolveLineup } from '../../models.mjs';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
@@ -65,9 +65,50 @@ test('the cross-family lane really is a different family from the agentic lane',
 });
 
 test('a lane resolves to the runner that can actually spawn it', () => {
-  assert.deepEqual(lane('agentic'), { runner: MODELS.opus.runner, model: MODELS.opus.id });
-  assert.deepEqual(lane('crossFamily'), { runner: MODELS.deepseek.runner, model: MODELS.deepseek.id });
+  // THE INVARIANT, NOT TODAY'S ASSIGNMENT. This used to pin `agentic` to Opus
+  // and `crossFamily` to DeepSeek by name, which made it fail on 2026-08-24 for
+  // the one reason it should never fail: the owner moved a lane, which is the
+  // supported operation this whole registry exists to make cheap. A test that
+  // has to be edited every time the thing it guards is used correctly is not
+  // guarding anything — it is a second copy of the assignment.
+  //
+  // What must hold for EVERY lane, whatever it points at: it names a model the
+  // registry defines, and it reports that model's own runner. A lane naming a
+  // model whose runner cannot spawn it is the failure worth catching.
+  for (const [laneName, key] of Object.entries(LANES)) {
+    const model = (MODELS as Record<string, any>)[key];
+    assert.ok(model, `lane ${laneName} names unknown model ${key}`);
+    assert.deepEqual(lane(laneName as any), { runner: model.runner, model: model.id },
+      `lane ${laneName} must resolve to ${key}'s own runner and id`);
+    assert.ok(['claude', 'codex', 'deepseek'].includes(model.runner),
+      `lane ${laneName} resolves to unknown runner ${model.runner}`);
+  }
   assert.throws(() => lane('nonesuch' as any), /unknown lane/);
+});
+
+test('every agent lane can open a file; only crossFamily may be tool-less', () => {
+  // Load-bearing, and learned the hard way on 2026-08-24. The refuter was
+  // briefly routed to `crossFamily`, whose DeepSeek transport has no filesystem
+  // at all — while `briefs/alpha.md` instructs refuters to OPEN THE CITED ITEM
+  // before calling a dependency too weak. A refuter that cannot read its
+  // dependencies reports on what it imagines them to say.
+  //
+  // `deepseek` is the tool-less transport. Any lane a dispatched agent uses to
+  // READ the repo must therefore be a process runner.
+  for (const laneName of ['agentic', 'secondary']) {
+    assert.notEqual(lane(laneName as any).runner, 'deepseek',
+      `lane ${laneName} is tool-less — roles on it cannot read the repo they audit`);
+  }
+});
+
+test('the Alpha brief derives model identity instead of naming a stale lane', () => {
+  const source = readFileSync(join(REPO, 'briefs/alpha.md'), 'utf8');
+  assert.match(source, /tools\/models\.mjs/,
+    'the Alpha brief must direct the agent to the canonical model registry');
+  assert.doesNotMatch(source, /\*\*You are (?:Claude|GPT)/,
+    'the Alpha brief hard-codes a model identity that can drift from the registry');
+  assert.doesNotMatch(source, /paired (?:DeepSeek|Claude|GPT)/,
+    'the Alpha brief hard-codes a judge lineup that can drift from the registry');
 });
 
 test('the 1M context binding is on the Opus id and has not been tidied away', () => {
@@ -115,5 +156,42 @@ test('preflight keeps its own copy on purpose, and still has one', () => {
 test('LANES names only models the registry defines', () => {
   for (const [laneName, key] of Object.entries(LANES)) {
     assert.ok(MODELS[key as keyof typeof MODELS], `lane ${laneName} names unknown model ${key}`);
+  }
+});
+
+test('KNOWN_JUDGES covers every lineup, today\'s and every retired one', () => {
+  for (const [name, pair] of Object.entries(JUDGE_LINEUPS)) {
+    for (const model of pair) {
+      assert.ok(
+        KNOWN_JUDGES.includes(model),
+        `lineup ${name} names ${model}, which KNOWN_JUDGES omits — a ledger could not represent its rows`,
+      );
+    }
+  }
+  assert.equal(new Set(KNOWN_JUDGES).size, KNOWN_JUDGES.length, 'KNOWN_JUDGES has duplicates');
+});
+
+test('a ledger SHAPE check never validates a judge model against the configured lineup', () => {
+  // frontier-18 step 8. `level-coverage.mjs` asked `JUDGES.includes(record.model)`
+  // — the CONFIGURED lineup — inside its adjudication SHAPE check, so the five
+  // claude-sonnet-4-6 rows a group Alpha correctly adjudicated were rejected as
+  // malformed. No Alpha could write them any other way, so all three repair
+  // rounds burned and the stage stopped needing a person. Retired lanes' rows
+  // are append-only evidence: shape must accept them, coverage must ignore them.
+  const shapeCheckers = ['tools/level-coverage.mjs', 'tools/step8-guard.mjs'];
+  for (const rel of shapeCheckers) {
+    const source = readFileSync(join(REPO, rel), 'utf8');
+    for (const line of source.split('\n')) {
+      if (!line.includes('judge-adjudication-shape')) continue;
+      assert.ok(
+        !/\bJUDGES\.includes\(/.test(line),
+        `${rel} validates adjudication shape against the configured lineup; use KNOWN_JUDGES`,
+      );
+    }
+    // The condition sits above the error() call, so check the guard directly.
+    assert.ok(
+      !/\bJUDGES\.includes\(record\.model\)/.test(source) || /KNOWN_JUDGES\.includes\(record\.model\)/.test(source),
+      `${rel} still tests record.model against the configured lineup in a shape check`,
+    );
   }
 });

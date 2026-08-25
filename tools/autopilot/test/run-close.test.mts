@@ -168,33 +168,29 @@ test('10-close-v2 is the terminal stage and cannot waive', () => {
   assert.ok(last.gates({ run: 'demo', repo: REPO }).length >= 2, 'obligations + tree-clean');
 });
 
-test('10-close-v2 carries the frontmatter closure: judge-stamps after the ledger gates, before the commit', () => {
-  // frontier-15 ended with every ledger-side gate green and 0 of 398 items
-  // stamped — the stamp had no owning stage. The gate order is load-bearing:
-  // stamps are only meaningful once judge closure holds, and the close-out
-  // commit must capture them.
-  const last: any = stages[stages.length - 1];
-  const ids = last.gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
-  const at = (id: string) => ids.indexOf(id);
-  assert.ok(at('judge-stamps') >= 0, 'the stamp gate exists at the terminal stage');
-  assert.ok(at('judge-closure') < at('judge-stamps'), 'ledger closure precedes the frontmatter check');
-  assert.ok(at('judge-stamps') < at('tree-clean'), 'the commit sweeps the stamps');
+test('Step 10 stamps before readiness, then closes over a protected-tree receipt', () => {
+  // The stamp still has an owning stage.  After readiness validates that stamped
+  // tree, a read-only report cannot invalidate it; the terminal gate therefore
+  // proves the protected tree is unchanged instead of repeating the full scan.
+  const stage = (id: string): any => stages.find((s: any) => s.id === id);
+  const ids = stages.map((s: any) => s.id);
+  assert.ok(ids.indexOf('10-stamps-v2') < ids.indexOf('10-readiness-v2'));
+  assert.ok(ids.indexOf('10-readiness-v2') < ids.indexOf('10-evidence-v2'));
+  assert.ok(ids.indexOf('10-evidence-v2') < ids.indexOf('10-report-baseline-v2'));
+  assert.ok(ids.indexOf('10-report-baseline-v2') < ids.indexOf('10-close-v2'));
+  const closeGates = stage('10-close-v2').gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
+  assert.ok(closeGates.includes('report-integrity'), 'the terminal gate proves no validated input changed');
+  assert.ok(closeGates.includes('tree-clean'), 'the close-out commit still captures all final artifacts');
+  assert.ok(!closeGates.includes('judge-stamps'), 'the unchanged-tree proof replaces duplicate stamp verification');
 });
 
-test('the 10-close-v2 hook routes a judge-stamps failure to the mechanical stamping repair', async () => {
-  const repo = mkdtempSync(join(tmpdir(), 'stamp-route-'));
-  mkdirSync(join(repo, 'tools'), { recursive: true });
-  mkdirSync(join(repo, 'research'), { recursive: true });
-  // The stub proves the ROUTING; the real tool's behavior is judge-stamps.test.
-  writeFileSync(join(repo, 'tools', 'apply-judge-stamps.mjs'),
-    `import { writeFileSync } from 'node:fs';\nwriteFileSync('marker.txt', process.argv.slice(2).join(' '));\n`);
+test('a protected-tree mismatch never receives an automatic close-out repair', async () => {
   const s10c: any = stages.find((s: any) => s.id === '10-close-v2');
+  const started: any[] = [];
   const report = await s10c.onGateFailure({
-    ctx: { run: 'demo', repo }, executor: { start: () => {} }, stage: s10c, round: 1,
-    failure: { id: 'judge-stamps', why: '' },
+    ctx: { run: 'demo', repo: REPO }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
+    stage: s10c, round: 1, failure: { id: 'report-integrity', why: 'items/thm.md changed' },
   });
-  assert.equal(report, undefined, 'a clean repair spends the round without an outage');
-  const marker = readFileSync(join(repo, 'marker.txt'), 'utf8');
-  assert.match(marker, /--apply/);
-  assert.match(marker, /demo-judge\.jsonl/);
+  assert.equal(report, undefined);
+  assert.equal(started.length, 0, 'an unexpected mutation stays visible; no handler may certify over it');
 });

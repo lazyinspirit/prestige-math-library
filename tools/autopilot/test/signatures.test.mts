@@ -13,7 +13,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 // In-tree: the repository is two levels up from this file. It was an absolute
@@ -61,7 +61,20 @@ test('every gate and command in the stage table passes flags its tool defines', 
 test('every brief and task file a stage will ask for exists', async (t) => {
   if (!existsSync(join(REPO, 'research'))) return t.skip('target repo not present');
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
+  // THE NEWEST PLANNED RUN, not a hardcoded one. This pinned `frontier-14` and
+  // so asserted that today's stage table resolves against a run planned before
+  // half of it existed: when `1-drift` became a stage of its own it asked for
+  // `frontier-14-alpha-step0-drift.task.md`, a file that run never had, and the
+  // test failed for the age of its fixture rather than for a defect. A run's
+  // task files are written by `plan`, so the newest scope ledger names a run
+  // whose files a current stage table may fairly be checked against.
+  const runs = readdirSync(join(REPO, 'research'))
+    .map((f) => /^(.+)-scope-ledger\.json$/.exec(f)?.[1])
+    .filter(Boolean)
+    .sort((a, b) => (statSync(join(REPO, 'research', `${a}-scope-ledger.json`)).mtimeMs
+      - statSync(join(REPO, 'research', `${b}-scope-ledger.json`)).mtimeMs));
+  if (!runs.length) return t.skip('no planned run in the target repo');
+  const ctx = { run: runs.at(-1), repo: REPO };
   const missing = [];
   for (const st of mod.stages) {
     for (const p of (st.plan?.(ctx, ['1', '2', '3', '4', '5', '6']) ?? [])) {

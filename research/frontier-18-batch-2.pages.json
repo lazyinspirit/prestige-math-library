@@ -1,0 +1,2072 @@
+[
+  {
+    "order": 71.003,
+    "id": "extraspecial-p-groups-and-central-products",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Extraspecial $p$-Groups and Central Products",
+    "companion": "extraspecial-p-groups-and-central-products-examples",
+    "requires": [
+      "frattini-subgroups-and-the-burnside-basis-theorem-examples"
+    ],
+    "items": [
+      {
+        "id": "lem-commutator-identities-in-a-group-of-class-two",
+        "kind": "lemma",
+        "title": "Commutator identities in a group whose derived subgroup is central",
+        "strategy": "Expand $[g,h]=ghg^{-1}h^{-1}$ directly. Because every commutator is central it may be moved past any element without change, so the two-variable expansions $[xy,w]=[x,w][y,w]$ and $[x,yw]=[x,y][x,w]$ follow by cancellation, and induction on $n\\ge 0$ together with the inverse law $[x,y]^{-1}=[y,x]$ extends $[x^n,y]=[x,y]^n=[x,y^n]$ to every integer $n$, the case $n=0$ giving the identity.",
+        "deps": [
+          "def-commutator-and-commutator-subgroup",
+          "def-center-of-a-group",
+          "lem-center-is-normal",
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-group-power",
+          "lem-group-power-laws",
+          "lem-group-inverse-laws"
+        ]
+      },
+      {
+        "id": "lem-power-of-a-product-in-a-group-of-class-two",
+        "kind": "lemma",
+        "title": "In a group with central derived subgroup, $(xy)^n=[y,x]^{\\binom{n}{2}}x^ny^n$",
+        "strategy": "Induct on $n$. The base cases $n=0$ and $n=1$ hold because $\\binom{0}{2}=\\binom{1}{2}=0$. For the step, rewrite $y^nx$ as $[y,x]^{n}xy^n$ using the power law of the previous lemma, then use $\\binom{n}{2}+n=\\binom{n+1}{2}$. Every commutator that appears is central, so no reordering is needed to collect it.",
+        "deps": [
+          "lem-commutator-identities-in-a-group-of-class-two",
+          "def-commutator-and-commutator-subgroup",
+          "def-center-of-a-group",
+          "def-group-power",
+          "lem-group-power-laws",
+          "def-binomial-coefficient",
+          "lem-the-partial-alternating-sum-of-a-binomial-row"
+        ]
+      },
+      {
+        "id": "cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p",
+        "kind": "corollary",
+        "title": "For an odd prime $p$, the $p$-th power map is a homomorphism on a finite group whose derived subgroup is central of exponent dividing $p$",
+        "strategy": "Put $n=p$ in the product formula. For odd $p$ the integer $\\binom{p}{2}=p(p-1)/2$ is a multiple of $p$, and $[y,x]^p=1$ by hypothesis, so the commutator factor is trivial and $(xy)^p=x^py^p$. The hypothesis that $p$ is odd is used exactly once, and at $p=2$ the factor $[y,x]^{\\binom{2}{2}}=[y,x]$ survives.",
+        "deps": [
+          "lem-power-of-a-product-in-a-group-of-class-two",
+          "def-binomial-coefficient",
+          "def-prime",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup"
+        ]
+      },
+      {
+        "id": "def-special-and-extraspecial-p-groups",
+        "kind": "definition",
+        "title": "Special and extraspecial $p$-groups",
+        "deps": [
+          "def-finite-p-group",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup",
+          "def-frattini-subgroup-of-a-finite-group",
+          "def-elementary-abelian-p-group"
+        ]
+      },
+      {
+        "id": "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+        "kind": "proposition",
+        "title": "Three equivalent descriptions of an extraspecial $p$-group",
+        "strategy": "Prove (i) implies (ii) implies (iii) implies (i). From $\\Phi(P)=P'P^p$ and the fact that $P/\\Phi(P)$ is the largest elementary abelian quotient, a quotient $P/N$ is elementary abelian exactly when $\\Phi(P)\\le N$; apply this with $N=Z(P)$ in one direction and with the abelian-quotient criterion $P'\\le N$ in the other. The nonabelian hypothesis is what forces $P'\\ne 1$, and therefore $P'=Z(P)$ once $Z(P)$ has order $p$; without it the cyclic group of order $p$ would satisfy the remaining clauses.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "def-elementary-abelian-p-group",
+          "thm-frattini-quotient-is-the-largest-elementary-abelian-quotient",
+          "thm-frattini-subgroup-formula-for-a-finite-p-group",
+          "def-pth-power-subgroup-of-a-group",
+          "thm-quotient-abelian-iff-contains-commutator-subgroup",
+          "lem-center-is-normal",
+          "def-quotient-group",
+          "thm-lagrange",
+          "def-finite-p-group",
+          "def-frattini-subgroup-of-a-finite-group"
+        ]
+      },
+      {
+        "id": "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+        "kind": "corollary",
+        "title": "An extraspecial $p$-group is nilpotent of class exactly two and its derived subgroup has order $p$",
+        "strategy": "The characterisation gives $P'=Z(P)$ of order $p$, so $[P,P']\\le[P,Z(P)]=1$ and the lower central series terminates at the third term; the class is not one because $P$ is nonabelian. Every commutator therefore has order dividing $p$.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-nilpotent-group-and-nilpotency-class",
+          "thm-upper-and-lower-central-characterizations-of-nilpotence",
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-center-of-a-group",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "cor-an-extraspecial-p-group-has-no-complement-to-its-centre",
+        "kind": "corollary",
+        "title": "The centre of an extraspecial $p$-group has no complement",
+        "strategy": "A complement $H$ meets $Z(P)$ trivially and satisfies $P=HZ(P)$, so the quotient map restricts to an isomorphism $H\\to P/Z(P)$ and $H$ is elementary abelian, hence abelian. Then $P=HZ(P)$ is generated by two commuting abelian subgroups and is abelian, contradicting the definition.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-internal-semidirect-product",
+          "def-index",
+          "thm-lagrange",
+          "def-elementary-abelian-p-group",
+          "thm-first-isomorphism-theorem-groups"
+        ]
+      },
+      {
+        "id": "prop-noncentral-conjugacy-classes-of-an-extraspecial-p-group-have-size-p",
+        "kind": "proposition",
+        "title": "Every conjugacy class of an extraspecial $p$-group outside the centre has exactly $p$ elements",
+        "strategy": "For $g\\in P$ the element $gxg^{-1}=[g,x]x$ lies in $Z(P)x$ because $[g,x]\\in P'=Z(P)$, so the class of $x$ is contained in a coset of a subgroup of order $p$ and has at most $p$ elements. Its size is the index of a centraliser, hence a power of $p$, and it exceeds one exactly when $x$ is noncentral.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-conjugacy-class-and-centralizer",
+          "thm-conjugacy-class-cardinality",
+          "def-index",
+          "thm-lagrange",
+          "def-center-of-a-group",
+          "def-coset",
+          "def-finite-p-group"
+        ]
+      },
+      {
+        "id": "cor-the-centralizer-of-a-noncentral-element-of-an-extraspecial-p-group-has-index-p",
+        "kind": "corollary",
+        "title": "A noncentral element of an extraspecial $p$-group has centraliser of index $p$",
+        "strategy": "The class size equals the index of the centraliser, and the previous proposition computes that size as $p$.",
+        "deps": [
+          "prop-noncentral-conjugacy-classes-of-an-extraspecial-p-group-have-size-p",
+          "thm-conjugacy-class-cardinality",
+          "def-conjugacy-class-and-centralizer",
+          "def-index"
+        ]
+      },
+      {
+        "id": "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+        "kind": "definition",
+        "title": "The central product $G\\circ_\\alpha H$ of two groups along an isomorphism of central subgroups",
+        "deps": [
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-center-of-a-group",
+          "def-group-isomorphism-and-automorphism",
+          "def-quotient-group",
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup",
+        "kind": "lemma",
+        "title": "The identified subgroup used to form a central product is central, hence normal",
+        "strategy": "The set $N=\\{(z,\\alpha(z)^{-1}):z\\in Z_1\\}$ is the image of the injective homomorphism $z\\mapsto(z,\\alpha(z)^{-1})$, so it is a subgroup; each of its elements has both coordinates central in its own factor, so $N\\le Z(G\\times H)$, and a central subgroup is normal.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "def-center-of-a-group",
+          "lem-center-is-normal",
+          "def-normal-subgroup",
+          "def-subgroup",
+          "def-external-direct-product-of-groups",
+          "thm-first-isomorphism-theorem-groups"
+        ]
+      },
+      {
+        "id": "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+        "kind": "proposition",
+        "title": "The two canonical maps into a central product are injective homomorphisms whose images commute, generate it, and meet in the identified centre",
+        "strategy": "Compose each coordinate inclusion with the quotient map. Injectivity is the statement that $N$ meets each canonical copy of $G$ and of $H$ trivially, which holds because $(z,e)\\in N$ forces $\\alpha(z)=e$ and $\\alpha$ is injective. The images commute because $(g,e)$ and $(e,h)$ commute already in the direct product, and they generate because the direct product is generated by its two coordinate copies. The intersection is computed from the definition of $N$.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup",
+          "thm-first-isomorphism-theorem-groups",
+          "def-quotient-group",
+          "def-external-direct-product-of-groups",
+          "def-commutator-and-commutator-subgroup",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "prop-order-centre-and-derived-subgroup-of-a-central-product",
+        "kind": "proposition",
+        "title": "Order, centre and derived subgroup of a central product",
+        "strategy": "The order formula is the order of a direct product divided by the order of the identified subgroup. For the centre, an element of $G\\circ_\\alpha H$ is a product $\\bar g\\bar h$; if it is central then, since $\\bar h$ already commutes with the image of $G$, the element $\\bar g$ commutes with the image of $G$, and injectivity gives $g\\in Z(G)$; the converse is immediate. The derived subgroup is computed from $[\\bar g_1\\bar h_1,\\bar g_2\\bar h_2]=[\\bar g_1,\\bar g_2][\\bar h_1,\\bar h_2]$, which uses only that the two images commute.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup",
+          "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+          "prop-order-of-finite-direct-product",
+          "thm-lagrange",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup",
+          "def-generated-subgroup",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "thm-universal-property-of-the-central-product",
+        "kind": "theorem",
+        "title": "Homomorphisms out of a central product",
+        "strategy": "Given homomorphisms out of the two factors whose images commute and which agree on the identified centre after $\\alpha$, the direct product receives the map $(g,h)\\mapsto\\varphi(g)\\psi(h)$, a homomorphism precisely because the images commute. The agreement hypothesis says that $N$ lies in its kernel, so it factors through the quotient; uniqueness holds because the images of the two factors generate.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup",
+          "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+          "def-external-direct-product-of-groups",
+          "thm-coset-multiplication-well-defined-iff-normal",
+          "thm-first-isomorphism-theorem-groups",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "def-internal-central-product-of-a-family-of-subgroups",
+        "kind": "definition",
+        "title": "Internal central products of a finite family of subgroups",
+        "deps": [
+          "def-subgroup",
+          "def-generated-subgroup",
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-center-of-a-group",
+          "def-internal-direct-product-of-subgroups"
+        ]
+      },
+      {
+        "id": "thm-recognition-of-an-internal-central-product",
+        "kind": "theorem",
+        "title": "Internal central products are the images of external ones",
+        "strategy": "If the subgroups generate and commute pairwise, the multiplication map from their direct product is a surjective homomorphism, and each factor meets its kernel trivially exactly when the intersections are as prescribed. Conversely a surjective homomorphism from the direct product with those properties makes the images generate and commute, by transporting commutators through the homomorphism. Identifying the kernel with the antidiagonal subgroup in the two-factor case identifies the internal product with $G\\circ_\\alpha H$.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+          "thm-universal-property-of-the-central-product",
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-first-isomorphism-theorem-groups",
+          "def-external-direct-product-of-groups",
+          "thm-internal-direct-product-recognition",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+        "kind": "theorem",
+        "title": "A central product of extraspecial $p$-groups identified along their centres is extraspecial",
+        "strategy": "Use the centre and derived-subgroup formulas for a central product. Each factor has centre and derived subgroup equal to the common identified subgroup of order $p$, so the product has derived subgroup that same subgroup, and its centre is the image of the product of the factors' centres, which is again that subgroup. The quotient by it is a direct product of the factors' quotients, hence elementary abelian, and the product is nonabelian because at least one factor is.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "prop-order-centre-and-derived-subgroup-of-a-central-product",
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "def-elementary-abelian-p-group",
+          "def-frattini-subgroup-of-a-finite-group",
+          "def-external-direct-product-of-groups",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "def-commutator-pairing-of-an-extraspecial-p-group",
+        "kind": "definition",
+        "title": "The commutator pairing of an extraspecial $p$-group relative to a chosen generator of its centre",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-elementary-abelian-p-group",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "def-quotient-group",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-z-mod-p-is-a-field",
+          "def-order-in-a-group",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup"
+        ]
+      },
+      {
+        "id": "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+        "kind": "lemma",
+        "title": "The commutator pairing is well defined on the central quotient, is bilinear over $\\mathbb F_p$, and is alternating",
+        "strategy": "Independence of representatives follows from the class-two identities, since replacing $x$ by $xz_1$ with $z_1$ central changes no commutator. Additivity in each variable is the same identity read multiplicatively, and compatibility with $\\mathbb F_p$-scalars is the power law $[x^n,y]=[x,y]^n$ together with the canonical scalar action on an elementary abelian group. It is alternating because $[x,x]=1$; skew symmetry is then a consequence, not a separate hypothesis.",
+        "deps": [
+          "lem-commutator-identities-in-a-group-of-class-two",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "thm-z-mod-p-is-a-field",
+          "def-commutator-and-commutator-subgroup",
+          "def-group-power"
+        ]
+      },
+      {
+        "id": "lem-the-commutator-pairing-is-nondegenerate",
+        "kind": "lemma",
+        "title": "The commutator pairing of an extraspecial $p$-group has trivial radical",
+        "strategy": "If $b(\\bar x,\\bar y)=0$ for every $y$ then $x$ commutes with every element of $P$, so $x\\in Z(P)$ and $\\bar x$ is the zero vector. Conversely the zero vector pairs to zero with everything. The centre is exactly the kernel of the quotient map, which is what makes the radical trivial rather than merely small.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "def-center-of-a-group",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "lem-two-noncommuting-elements-of-an-extraspecial-p-group-generate-a-subgroup-of-order-p-cubed",
+        "kind": "lemma",
+        "title": "Two elements of an extraspecial $p$-group with nontrivial commutator generate an extraspecial subgroup of order $p^3$",
+        "strategy": "Let $[x,y]=z$ generate $Z(P)$. The images $\\bar x,\\bar y$ are independent in $P/Z(P)$, since a dependence would put $y$ in the abelian subgroup $\\langle x\\rangle Z(P)$ and force $[x,y]=1$. So $\\langle x,y\\rangle Z(P)/Z(P)$ has order $p^2$; and $z\\in\\langle x,y\\rangle$, while $x^p,y^p\\in Z(P)=\\langle z\\rangle$, so $\\langle x,y\\rangle$ contains $Z(P)$ and has order $p^3$. Its centre cannot exceed order $p$, or the group would be abelian by the cyclic-central-quotient lemma.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "def-generated-subgroup",
+          "thm-lagrange",
+          "lem-cyclic-quotient-by-center-implies-abelian",
+          "def-quotient-group",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "def-fp-basis-of-an-elementary-abelian-p-group",
+          "def-center-of-a-group",
+          "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension"
+        ]
+      },
+      {
+        "id": "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+        "kind": "theorem",
+        "title": "Every extraspecial $p$-group is an internal central product of nonabelian subgroups of order $p^3$",
+        "strategy": "Induct on the order. Choose $x\\notin Z(P)$; nondegeneracy supplies $y$ with $[x,y]$ a generator $z$ of $Z(P)$, and $P_1=\\langle x,y\\rangle$ has order $p^3$ by the previous lemma. For arbitrary $g$, put $u=x^{a}y^{-c}$ where $c=b(\\bar g,\\bar x)$ and $a=b(\\bar g,\\bar y)$ computed for $b(\\bar x,\\bar y)=1$; bilinearity gives $b(\\overline{gu^{-1}},\\bar x)=b(\\overline{gu^{-1}},\\bar y)=0$, so $gu^{-1}$ centralises $P_1$ and $P=P_1C_P(P_1)$. The intersection $P_1\\cap C_P(P_1)$ is $Z(P)$, and $C_P(P_1)$ is either $Z(P)$ or again extraspecial, of strictly smaller order.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "lem-two-noncommuting-elements-of-an-extraspecial-p-group-generate-a-subgroup-of-order-p-cubed",
+          "def-centralizer-of-a-subgroup",
+          "thm-lagrange",
+          "def-index",
+          "lem-subgroups-of-finite-p-groups-are-p-groups",
+          "def-center-of-a-group",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+        "kind": "corollary",
+        "title": "An extraspecial $p$-group has order $p^{1+2n}$ for some $n\\ge1$",
+        "strategy": "The central-product decomposition writes $P$ as a product of $n$ subgroups of order $p^3$ pairwise intersecting in the centre, and the order formula for a central product then gives $|P|=p^{3n}/p^{n-1}=p^{1+2n}$. There is at least one factor because $P$ is nonabelian.",
+        "deps": [
+          "prop-order-centre-and-derived-subgroup-of-a-central-product",
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "thm-lagrange",
+          "def-center-of-a-group"
+        ]
+      },
+      {
+        "id": "cor-the-generator-rank-of-an-extraspecial-p-group-is-twice-its-symplectic-rank",
+        "kind": "corollary",
+        "title": "An extraspecial $p$-group of order $p^{1+2n}$ has generator rank $2n$",
+        "strategy": "Its Frattini subgroup is its centre, so the Frattini quotient has order $p^{2n}$; the Burnside basis theorem identifies the generator rank with the dimension of that quotient.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "thm-burnside-basis-theorem",
+          "def-generator-rank-of-a-finite-p-group",
+          "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "def-frattini-subgroup-of-a-finite-group"
+        ]
+      },
+      {
+        "id": "lem-orthogonal-complement-counting-for-the-commutator-pairing",
+        "kind": "lemma",
+        "title": "A subgroup of the central quotient and its orthogonal complement have orders multiplying to the order of the quotient",
+        "strategy": "Fix a basis $\\bar e_1,\\dots,\\bar e_k$ of the subgroup and extend it to a basis of the whole quotient. Nondegeneracy makes the coordinate map $\\bar u\\mapsto(b(\\bar u,\\bar e_1),\\dots)$ into the full coordinate space injective, hence bijective by equal cardinality, so its restriction to the first $k$ coordinates is surjective with kernel exactly the orthogonal complement. Counting the fibres of that surjection gives the product formula.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "def-fp-basis-of-an-elementary-abelian-p-group",
+          "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "thm-first-isomorphism-theorem-groups",
+          "thm-lagrange",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n",
+        "kind": "proposition",
+        "title": "In an extraspecial $p$-group of order $p^{1+2n}$ every maximal abelian subgroup has order $p^{1+n}$",
+        "strategy": "A subgroup containing the centre is abelian exactly when its image in the central quotient is contained in its own orthogonal complement, and the correspondence theorem makes maximal abelian subgroups correspond to maximal such images. The counting lemma bounds such an image by $p^{n}$, and an image of exactly that order is produced by enlarging a self-orthogonal image while it is properly contained in its complement. Every maximal abelian subgroup contains the centre, since the centre commutes with everything.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "lem-orthogonal-complement-counting-for-the-commutator-pairing",
+          "def-center-of-a-group",
+          "thm-lagrange",
+          "def-quotient-group",
+          "thm-correspondence-theorem-groups",
+          "def-fp-basis-of-an-elementary-abelian-p-group"
+        ]
+      },
+      {
+        "id": "cor-an-extraspecial-p-group-is-a-product-of-two-maximal-abelian-subgroups",
+        "kind": "corollary",
+        "title": "An extraspecial $p$-group is the product of two maximal abelian subgroups meeting in its centre",
+        "strategy": "Take a self-orthogonal image of order $p^n$ with basis $\\bar x_1,\\dots,\\bar x_n$; the counting lemma supplies $\\bar y_1,\\dots,\\bar y_n$ pairing with them by the identity matrix and orthogonal among themselves, and the two preimages are maximal abelian, generate $P$, and meet in the centre.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "lem-orthogonal-complement-counting-for-the-commutator-pairing",
+          "prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n",
+          "thm-correspondence-theorem-groups",
+          "thm-lagrange",
+          "def-generated-subgroup",
+          "def-center-of-a-group"
+        ]
+      },
+      {
+        "id": "def-heisenberg-group-of-order-p-cubed",
+        "kind": "definition",
+        "title": "The Heisenberg group of order $p^3$ over $\\mathbb Z/p$",
+        "deps": [
+          "def-group",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-z-mod-p-is-a-field",
+          "def-prime"
+        ]
+      },
+      {
+        "id": "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed",
+        "kind": "proposition",
+        "title": "The Heisenberg multiplication is a group law, nonabelian, on a set of $p^3$ elements",
+        "strategy": "Associativity, the identity $(0,0,0)$ and the inverse $(-a,-b,-c+ab)$ are direct computations in $\\mathbb Z/p$. The order is the size of a threefold Cartesian product. Nonabelian because $(1,0,0)(0,1,0)$ and $(0,1,0)(1,0,0)$ differ in the third coordinate; this uses $1\\ne0$ in $\\mathbb Z/p$ and therefore holds for every prime, $p=2$ included.",
+        "deps": [
+          "def-heisenberg-group-of-order-p-cubed",
+          "def-group",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-finite-cardinality",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+        "kind": "proposition",
+        "title": "The Heisenberg group of order $p^3$ is extraspecial, and for odd $p$ it has exponent $p$",
+        "strategy": "Compute the centre as the third coordinate axis and the commutator subgroup as the same subgroup, both of order $p$; the definition then applies. For the exponent, the derived subgroup has exponent $p$ and the group has class two, so the $p$-th power map is a homomorphism when $p$ is odd; each generator has order $p$, so every $p$-th power is trivial. At $p=2$ the third power law fails and the element $(1,1,0)$ has order $4$.",
+        "deps": [
+          "cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p",
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed",
+          "def-exponent-of-a-finite-group",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared",
+        "kind": "lemma",
+        "title": "Raising to the power $1+p$ is an automorphism of order $p$ of a cyclic group of order $p^2$",
+        "strategy": "The unit $1+p$ of $\\mathbb Z/p^2$ has $(1+p)^k\\equiv 1+kp$ by the binomial theorem, every term from the square onward being divisible by $p^2$. Hence $(1+p)^k=1$ in $\\mathbb Z/p^2$ exactly when $p\\mid k$, so the unit has order $p$; the automorphism group of a cyclic group of order $n$ is the unit group of $\\mathbb Z/n$.",
+        "deps": [
+          "thm-automorphisms-of-a-finite-cyclic-group",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-binomial-theorem",
+          "def-binomial-coefficient",
+          "def-order-in-a-group",
+          "thm-classification-of-cyclic-groups",
+          "def-prime"
+        ]
+      },
+      {
+        "id": "def-modular-group-of-order-p-cubed",
+        "kind": "definition",
+        "title": "The modular group of order $p^3$ as a semidirect product $C_{p^2}\\rtimes C_p$",
+        "deps": [
+          "lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared",
+          "def-external-semidirect-product",
+          "def-action-by-automorphisms",
+          "thm-external-semidirect-product-is-a-group",
+          "thm-classification-of-cyclic-groups",
+          "thm-automorphisms-of-a-finite-cyclic-group"
+        ]
+      },
+      {
+        "id": "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+        "kind": "proposition",
+        "title": "The modular group of order $p^3$ is extraspecial, of exponent $p^2$ when $p$ is odd",
+        "strategy": "Its order is $p^3$ and it is nonabelian because the defining action is nontrivial. The commutator of the two canonical generators is $a^{p}$, which generates a subgroup of order $p$ contained in the centre, and the centre is no larger since the group is nonabelian. The generator $a$ has order $p^2$, so the exponent is $p^2$ for every prime; for $p=2$ the group is the dihedral group of order eight.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared",
+          "def-modular-group-of-order-p-cubed",
+          "prop-canonical-subgroups-of-an-external-semidirect-product",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group",
+          "prop-order-of-finite-direct-product",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup"
+        ]
+      },
+      {
+        "id": "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+        "kind": "proposition",
+        "title": "$\\operatorname{Dih}(C_4)$ and $Q_8$ are extraspecial of order $8$, with six and two solutions of $x^2=1$ respectively",
+        "strategy": "Both groups are nonabelian of order eight; in each the centre is the unique subgroup of order two and coincides with the derived subgroup, so the definition applies. The solution counts are read off from the normal forms $r^is^j$ and from the list $\\{\\pm1,\\pm i,\\pm j,\\pm k\\}$, in which $-1$ is the only element of order two.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "def-generalized-dihedral-group",
+          "cor-dihedral-groups-as-semidirect-products",
+          "def-quaternion-group-of-order-eight",
+          "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "thm-every-nonabelian-group-of-order-p-cubed-is-extraspecial",
+        "kind": "theorem",
+        "title": "A nonabelian group of order $p^3$ is extraspecial",
+        "strategy": "Its centre is nontrivial because the group is a nontrivial $p$-group, and it is not the whole group; a centre of order $p^2$ would leave a cyclic central quotient and force commutativity. So the centre has order $p$, the central quotient has order $p^2$ and is abelian, hence elementary abelian since a cyclic central quotient again forces commutativity.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "thm-nontrivial-center-of-a-finite-p-group",
+          "lem-cyclic-quotient-by-center-implies-abelian",
+          "thm-lagrange",
+          "def-finite-p-group",
+          "def-center-of-a-group",
+          "def-quotient-group",
+          "def-elementary-abelian-p-group",
+          "thm-cyclic-decomposition-of-finite-abelian-p-groups"
+        ]
+      },
+      {
+        "id": "thm-classification-of-the-nonabelian-groups-of-order-p-cubed",
+        "kind": "theorem",
+        "title": "For each prime there are exactly two nonabelian groups of order $p^3$ up to isomorphism",
+        "strategy": "Existence is the four constructions already made. For uniqueness, let $P$ be nonabelian of order $p^3$, hence extraspecial. If $P$ has an element of order $p^2$ it is generated by that element together with any element outside the cyclic subgroup it spans, the conjugation action has order $p$, and the order-$p$ automorphism of a cyclic group of order $p^2$ is unique; for odd $p$ the coset representative can then be corrected to have order $p$ using the $p$-th power homomorphism, giving the modular group, while for $p=2$ the two possible squares of the representative give the dihedral and quaternion groups. If $P$ has exponent $p$, which forces $p$ odd, choosing a noncentral element and a partner realises the Heisenberg multiplication.",
+        "deps": [
+          "cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p",
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared",
+          "def-modular-group-of-order-p-cubed",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "thm-every-nonabelian-group-of-order-p-cubed-is-extraspecial",
+          "def-exponent-of-a-finite-group",
+          "thm-internal-external-semidirect-product-equivalence",
+          "thm-classification-of-cyclic-groups",
+          "thm-lagrange",
+          "thm-index-p-subgroup-existence-in-finite-p-groups",
+          "def-quaternion-group-of-order-eight",
+          "cor-dihedral-groups-as-semidirect-products",
+          "def-generated-subgroup",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups",
+        "kind": "lemma",
+        "title": "$Q_8\\circ Q_8\\cong\\operatorname{Dih}(C_4)\\circ\\operatorname{Dih}(C_4)$",
+        "strategy": "Write $Q_8\\circ Q_8=\\langle x_1,y_1,x_2,y_2\\rangle$ with the two quaternion factors commuting and $x_i^2=y_i^2=z$. The elements $x_2y_1$ and $x_1y_2$ square to the identity and invert $x_1$ and $x_2$ respectively, so $H_1=\\langle x_1,x_2y_1\\rangle$ and $H_2=\\langle x_2,x_1y_2\\rangle$ are dihedral of order eight, they commute elementwise, they meet in the common centre, and they generate; the recognition theorem finishes.",
+        "deps": [
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "thm-classification-of-the-nonabelian-groups-of-order-p-cubed",
+          "def-quaternion-group-of-order-eight",
+          "def-generalized-dihedral-group",
+          "def-generated-subgroup",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "lem-counting-elements-of-order-dividing-two-in-a-central-product-of-extraspecial-two-groups",
+        "kind": "lemma",
+        "title": "A product formula for the number of square roots of the identity in a central product of extraspecial $2$-groups",
+        "strategy": "Every element of the central product is a product $\\bar g\\bar h$ of elements of the two images, which commute, so its square is $\\overline{g^2h^2}$ and is trivial exactly when $g^2$ and $h^2$ are equal in the identified centre, that is exactly when both are trivial or both equal its generator. Each element of the product has exactly two such representations, so halving the count of admissible pairs gives the formula.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+          "prop-order-centre-and-derived-subgroup-of-a-central-product",
+          "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+          "def-finite-cardinality",
+          "thm-product-rule",
+          "def-order-in-a-group",
+          "def-center-of-a-group"
+        ]
+      },
+      {
+        "id": "thm-classification-of-extraspecial-two-groups",
+        "kind": "theorem",
+        "title": "For each $n\\ge1$ there are exactly two extraspecial groups of order $2^{1+2n}$",
+        "strategy": "Decompose into $n$ factors of order eight, each dihedral or quaternion; replacing quaternion factors in pairs by dihedral ones leaves at most one quaternion factor, so every extraspecial group of that order is a central product of $n$ dihedral factors or of one quaternion and $n-1$ dihedral factors. The counting formula gives $2^{2n}+2^{n}$ square roots of the identity in the first case and $2^{2n}-2^{n}$ in the second, by induction on $n$; these differ, so the two are not isomorphic.",
+        "deps": [
+          "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "thm-classification-of-the-nonabelian-groups-of-order-p-cubed",
+          "lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups",
+          "lem-counting-elements-of-order-dividing-two-in-a-central-product-of-extraspecial-two-groups",
+          "def-finite-cardinality",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "lem-central-product-absorption-of-the-exponent-p-squared-factor-for-odd-p",
+        "kind": "lemma",
+        "title": "For odd $p$, a central product of two modular groups of order $p^3$ is a central product of a modular group with a Heisenberg group",
+        "strategy": "Write the product as $\\langle x_1,y_1,x_2,y_2\\rangle$ with commuting factors, $x_i$ of order $p^2$, $y_i$ of order $p$, and $x_1^p=x_2^p$ the central generator. Since $p$ is odd and the group has class two with derived subgroup of exponent $p$, the $p$-th power map is a homomorphism, so $a=x_2x_1^{-1}$ has order $p$; it does not commute with $y_2$, so $\\langle a,y_2\\rangle$ is nonabelian of order $p^3$ and of exponent $p$, hence Heisenberg. Its centraliser inside the product supplies the second factor, which has exponent $p^2$ because the whole group does.",
+        "deps": [
+          "cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p",
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "def-modular-group-of-order-p-cubed",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "thm-classification-of-the-nonabelian-groups-of-order-p-cubed",
+          "def-generated-subgroup",
+          "def-exponent-of-a-finite-group",
+          "def-centralizer-of-a-subgroup",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "thm-classification-of-extraspecial-p-groups-for-odd-p",
+        "kind": "theorem",
+        "title": "For odd $p$ and each $n\\ge1$ there are exactly two extraspecial groups of order $p^{1+2n}$, distinguished by their exponent",
+        "strategy": "Decompose into $n$ factors of order $p^3$, each Heisenberg or modular; absorbing modular factors in pairs leaves at most one, so every such group is a central product of Heisenberg factors or of one modular factor with Heisenberg factors. The first has exponent $p$ because the $p$-th power map is a homomorphism killing each factor, and the second has exponent $p^2$ because it contains an element of order $p^2$ and its $p$-th powers land in the centre.",
+        "deps": [
+          "cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p",
+          "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "def-modular-group-of-order-p-cubed",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "thm-classification-of-the-nonabelian-groups-of-order-p-cubed",
+          "lem-central-product-absorption-of-the-exponent-p-squared-factor-for-odd-p",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "def-plus-and-minus-type-of-an-extraspecial-p-group",
+        "kind": "definition",
+        "title": "Plus and minus type of an extraspecial $p$-group",
+        "deps": [
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "thm-classification-of-extraspecial-two-groups",
+          "thm-classification-of-extraspecial-p-groups-for-odd-p",
+          "def-exponent-of-a-finite-group"
+        ]
+      },
+      {
+        "id": "cor-the-exponent-of-an-extraspecial-p-group",
+        "kind": "corollary",
+        "title": "An extraspecial group of odd order has exponent $p$ or $p^2$, and an extraspecial $2$-group has exponent $4$",
+        "strategy": "For odd $p$ the classification names the exponent of each of the two types. For $p=2$ both types contain a dihedral or quaternion factor with an element of order four, and every square lies in the centre, so no element has order eight.",
+        "deps": [
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "thm-classification-of-extraspecial-two-groups",
+          "thm-classification-of-extraspecial-p-groups-for-odd-p",
+          "def-plus-and-minus-type-of-an-extraspecial-p-group",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "def-square-map-of-an-extraspecial-two-group",
+        "kind": "definition",
+        "title": "The square map of an extraspecial $2$-group relative to a chosen generator of its centre",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "def-quotient-group",
+          "def-center-of-a-group",
+          "def-order-in-a-group",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "lem-the-square-map-is-well-defined-and-refines-the-commutator-pairing",
+        "kind": "lemma",
+        "title": "The square map is well defined on the central quotient and satisfies $q(\\bar x\\bar y)=q(\\bar x)+q(\\bar y)+b(\\bar x,\\bar y)$",
+        "strategy": "Let $P$ be extraspecial of order $2^{1+2n}$ with $Z(P)=\\langle z\\rangle$ and $z^2=1$. Every square lies in the centre because $P/Z(P)$ is elementary abelian, so $x^2=z^{q(x)}$ defines $q(x)\\in\\mathbb F_2$; and $(xz)^2=x^2z^2=x^2$, so $q$ depends only on the class $\\bar x$. The class-two power formula at $n=2$ gives $(xy)^2=[y,x]x^2y^2$, and $[y,x]=z^{b(\\bar y,\\bar x)}$; over $\\mathbb F_2$ an alternating pairing is symmetric, so $b(\\bar y,\\bar x)=b(\\bar x,\\bar y)$ and the displayed identity follows. Record the two consequences the later counting spends: $q$ vanishes exactly on the classes whose elements have order dividing two, and a subgroup of $P/Z(P)$ on which $q$ vanishes is totally isotropic for $b$, so its preimage in $P$ is elementary abelian of twice its order. Conversely an elementary abelian subgroup of $P$ that does not contain $Z(P)$ meets it trivially and is properly contained in the elementary abelian subgroup it generates with $Z(P)$, so a maximal one always contains the centre. The identity is NOT additivity: $q$ is additive only where $b$ vanishes, and the whole separation of the two types lives in that correction term.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "lem-power-of-a-product-in-a-group-of-class-two",
+          "cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p",
+          "def-square-map-of-an-extraspecial-two-group",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces",
+          "def-elementary-abelian-p-group",
+          "def-quotient-group",
+          "def-center-of-a-group",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "prop-an-automorphism-of-an-extraspecial-p-group-trivial-on-the-frattini-quotient-is-inner",
+        "kind": "proposition",
+        "title": "An automorphism of an extraspecial $p$-group acting trivially on its Frattini quotient is inner",
+        "strategy": "Fix a minimal generating set of size $2n$. An automorphism trivial on the Frattini quotient multiplies each chosen generator by an element of the Frattini subgroup, which here is the centre of order $p$, and is determined by that choice, so there are at most $p^{2n}$ such automorphisms. Every inner automorphism is of this kind because the derived subgroup equals the Frattini subgroup, and the inner automorphism group has order $|P/Z(P)|=p^{2n}$. Equality of a bound with a cardinality forces the two sets to coincide.",
+        "deps": [
+          "prop-equivalent-characterisations-of-an-extraspecial-p-group",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "cor-the-generator-rank-of-an-extraspecial-p-group-is-twice-its-symplectic-rank",
+          "def-group-isomorphism-and-automorphism",
+          "def-inner-automorphism-group",
+          "cor-group-mod-center-is-inner-automorphism-group",
+          "thm-automorphisms-act-linearly-on-the-frattini-quotient",
+          "thm-burnside-basis-theorem",
+          "def-generator-rank-of-a-finite-p-group",
+          "def-finite-cardinality",
+          "def-frattini-subgroup-of-a-finite-group"
+        ]
+      },
+      {
+        "id": "prop-a-centre-fixing-automorphism-of-an-extraspecial-p-group-preserves-its-commutator-pairing",
+        "kind": "proposition",
+        "title": "An automorphism fixing the centre pointwise induces a pairing-preserving automorphism of the central quotient, with kernel the inner automorphisms",
+        "strategy": "Such an automorphism carries $[x,y]$ to $[\\alpha(x),\\alpha(y)]$ and fixes it, so the induced map on the central quotient preserves the pairing. Its kernel consists of the automorphisms trivial on the Frattini quotient, which are exactly the inner ones by the previous proposition. No claim is made here that the induced map is surjective onto the pairing-preserving group.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "prop-an-automorphism-of-an-extraspecial-p-group-trivial-on-the-frattini-quotient-is-inner",
+          "def-group-isomorphism-and-automorphism",
+          "def-outer-automorphism-group",
+          "def-inner-automorphism-group",
+          "def-commutator-and-commutator-subgroup"
+        ]
+      },
+      {
+        "id": "prop-maximal-elementary-abelian-subgroups-distinguish-the-two-extraspecial-two-groups",
+        "kind": "proposition",
+        "title": "The maximal elementary abelian subgroups of the two extraspecial groups of order $2^{1+2n}$ have orders $2^{n+1}$ and $2^{n}$",
+        "strategy": "Counting, not induction on the factors. Every maximal elementary abelian subgroup $E$ contains $Z(P)$, so $\\bar E$ is a subgroup of $P/Z(P)$ of order $2^{k}$ on which the square map vanishes, and $|E|=2^{k+1}$; maximality of $E$ says no $\\bar v\\notin\\bar E$ with $\\bar v\\perp\\bar E$ has $q(\\bar v)=0$, because $q(\\bar e\\bar v)=q(\\bar e)+q(\\bar v)+b(\\bar e,\\bar v)$ would then vanish on $\\bar E\\langle\\bar v\\rangle$. Count the classes with $q=0$ coset by coset of $\\bar E$: on $\\bar E$ itself there are $2^{k}$; on a coset inside $\\bar E^{\\perp}$ the correction term $b(\\cdot,\\bar v)$ vanishes on $\\bar E$ so $q$ is constantly $1$ there and the coset contributes none; on a coset outside $\\bar E^{\\perp}$ the map $\\bar u\\mapsto b(\\bar u,\\bar v)$ is a nonzero linear functional on $\\bar E$, so $q$ vanishes on exactly half of it. The orthogonal-complement count gives $|\\bar E^{\\perp}|=2^{2n-k}$, so the total is $2^{k}+(2^{2n-k}-2^{2n-2k})2^{k-1}=2^{2n-1}+2^{k}-2^{2n-k-1}$ classes, hence twice that many elements $x$ with $x^2=1$. The classification of extraspecial $2$-groups counts those elements as $2^{2n}+2^{n}$ for the plus type and $2^{2n}-2^{n}$ for the minus type, so $2^{k}-2^{2n-k-1}=\\pm2^{n-1}$; the left side is strictly increasing in $k$, so $k=n$ in the plus case and $k=n-1$ in the minus case, and both are attained. This proves the orders are exactly $2^{n+1}$ and $2^{n}$ for EVERY maximal elementary abelian subgroup, not merely for a largest one, and it separates the two types a second time, independently of the central-product decomposition.",
+        "deps": [
+          "thm-a-central-product-of-extraspecial-p-groups-is-extraspecial",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "def-square-map-of-an-extraspecial-two-group",
+          "lem-the-square-map-is-well-defined-and-refines-the-commutator-pairing",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "lem-orthogonal-complement-counting-for-the-commutator-pairing",
+          "prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "lem-counting-elements-of-order-dividing-two-in-a-central-product-of-extraspecial-two-groups",
+          "thm-classification-of-extraspecial-two-groups",
+          "def-plus-and-minus-type-of-an-extraspecial-p-group",
+          "def-elementary-abelian-p-group",
+          "def-fp-basis-of-an-elementary-abelian-p-group",
+          "lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension",
+          "thm-lagrange",
+          "def-generated-subgroup",
+          "def-center-of-a-group"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 71.004,
+    "id": "extraspecial-p-groups-and-central-products-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Extraspecial $p$-Groups and Central Products — Examples",
+    "companion": "extraspecial-p-groups-and-central-products",
+    "requires": [
+      "extraspecial-p-groups-and-central-products"
+    ],
+    "items": [
+      {
+        "id": "ex-the-commutator-pairings-of-the-dihedral-and-quaternion-groups-of-order-eight",
+        "kind": "example",
+        "title": "The commutator pairings of $\\operatorname{Dih}(C_4)$ and $Q_8$ are the same, while the groups are not isomorphic",
+        "strategy": "Compute both pairings on the two-element bases of the central quotients: each is the alternating pairing sending the basis pair to $1$. Then separate the groups by the number of solutions of $x^2=1$, which is six and two.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "def-generalized-dihedral-group",
+          "def-quaternion-group-of-order-eight",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "ex-the-heisenberg-group-of-order-twenty-seven",
+        "kind": "example",
+        "title": "The Heisenberg group of order $27$ has exponent $3$ and thirteen subgroups of order $3$",
+        "strategy": "Instantiate the Heisenberg multiplication at $p=3$, verify that every nonidentity element cubes to the identity using the class-two power formula, and count the subgroups of order three as the nonidentity elements divided by two.",
+        "deps": [
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "ex-the-heisenberg-group-at-the-prime-two-is-the-dihedral-group-of-order-eight",
+        "kind": "example",
+        "title": "At $p=2$ the Heisenberg construction produces $\\operatorname{Dih}(C_4)$, not a group of exponent $2$",
+        "strategy": "Exhibit an element of order four and match the dihedral relations, then note which step of the odd-$p$ exponent argument fails.",
+        "deps": [
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "def-generalized-dihedral-group",
+          "def-order-in-a-group",
+          "cor-dihedral-groups-as-semidirect-products"
+        ]
+      },
+      {
+        "id": "ex-the-modular-group-of-order-twenty-seven",
+        "kind": "example",
+        "title": "The modular group of order $27$ has exponent $9$ and exactly three cyclic subgroups of order $9$",
+        "strategy": "Instantiate at $p=3$, list the elements as $a^ib^j$, and compute orders from the relation $bab^{-1}=a^4$.",
+        "deps": [
+          "lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared",
+          "def-modular-group-of-order-p-cubed",
+          "prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p",
+          "def-exponent-of-a-finite-group",
+          "def-order-in-a-group",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "ex-the-two-extraspecial-groups-of-order-thirty-two",
+        "kind": "example",
+        "title": "The two extraspecial groups of order $32$ have $20$ and $12$ solutions of $x^2=1$",
+        "strategy": "Apply the counting formula to $\\operatorname{Dih}(C_4)\\circ\\operatorname{Dih}(C_4)$ and to $Q_8\\circ\\operatorname{Dih}(C_4)$ using the values six and two for the factors.",
+        "deps": [
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups",
+          "lem-counting-elements-of-order-dividing-two-in-a-central-product-of-extraspecial-two-groups",
+          "thm-classification-of-extraspecial-two-groups",
+          "def-order-in-a-group",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "ex-a-generating-pair-decomposition-of-an-extraspecial-group-of-order-thirty-two",
+        "kind": "example",
+        "title": "A choice of four generators exhibiting an extraspecial group of order $32$ as an internal central product",
+        "strategy": "Follow the decomposition theorem on a concrete group: pick a noncentral element, solve the pairing equation for a partner, and check that the centraliser of the resulting subgroup of order eight is the second factor.",
+        "deps": [
+          "lem-two-noncommuting-elements-of-an-extraspecial-p-group-generate-a-subgroup-of-order-p-cubed",
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "lem-the-commutator-pairing-is-nondegenerate",
+          "def-centralizer-of-a-subgroup",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "ex-a-central-product-of-two-cyclic-groups-of-order-four",
+        "kind": "example",
+        "title": "The central product of two cyclic groups of order four along their subgroups of order two is abelian of order eight",
+        "strategy": "Apply the external construction, compute the order from the order formula, and identify the quotient group; this shows the construction is not confined to nonabelian factors and does not always produce an extraspecial group.",
+        "deps": [
+          "def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups",
+          "lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup",
+          "prop-the-canonical-maps-into-a-central-product-are-injective-with-commuting-images",
+          "prop-order-centre-and-derived-subgroup-of-a-central-product",
+          "def-external-direct-product-of-groups",
+          "thm-classification-of-cyclic-groups",
+          "def-order-in-a-group"
+        ]
+      },
+      {
+        "id": "ex-maximal-abelian-subgroups-of-the-dihedral-group-of-order-eight",
+        "kind": "example",
+        "title": "The three maximal abelian subgroups of $\\operatorname{Dih}(C_4)$ have order four, as the general bound predicts",
+        "strategy": "List the subgroups of order four, check each is abelian and maximal among abelian subgroups, and compare with $p^{1+n}$ at $p=2$ and $n=1$.",
+        "deps": [
+          "prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n",
+          "cor-an-extraspecial-p-group-is-a-product-of-two-maximal-abelian-subgroups",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "def-generalized-dihedral-group",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "cex-a-special-p-group-that-is-not-extraspecial",
+        "kind": "counterexample",
+        "title": "A direct product of two Heisenberg groups is special with centre of order $p^2$, hence not extraspecial",
+        "strategy": "Compute the centre and the derived subgroup of the direct product coordinatewise; both equal the product of the two central lines, which is elementary abelian of order $p^2$, so the group is special while its centre exceeds order $p$.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "def-heisenberg-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-of-order-p-cubed",
+          "prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-for-odd-p",
+          "def-external-direct-product-of-groups",
+          "def-elementary-abelian-p-group",
+          "def-center-of-a-group",
+          "def-commutator-and-commutator-subgroup"
+        ]
+      },
+      {
+        "id": "cex-the-central-product-decomposition-of-an-extraspecial-group-is-not-unique",
+        "kind": "counterexample",
+        "title": "An extraspecial group of order $32$ decomposes both as two quaternion factors and as two dihedral factors",
+        "strategy": "Exhibit the two families of generating subgroups inside one group and check both satisfy the internal central-product conditions; the isomorphism type of the factors is therefore not an invariant of the group.",
+        "deps": [
+          "def-internal-central-product-of-a-family-of-subgroups",
+          "thm-recognition-of-an-internal-central-product",
+          "lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups",
+          "thm-classification-of-extraspecial-two-groups",
+          "def-quaternion-group-of-order-eight",
+          "def-generalized-dihedral-group"
+        ]
+      },
+      {
+        "id": "fs-every-special-p-group-is-extraspecial",
+        "kind": "false-statement",
+        "title": "FALSE: every special $p$-group is extraspecial",
+        "strategy": "Refute with the direct product of two Heisenberg groups, whose centre has order $p^2$.",
+        "deps": [
+          "def-special-and-extraspecial-p-groups",
+          "def-center-of-a-group"
+        ]
+      },
+      {
+        "id": "fs-there-is-exactly-one-extraspecial-group-of-each-admissible-order",
+        "kind": "false-statement",
+        "title": "FALSE: for each $n\\ge1$ there is exactly one extraspecial group of order $p^{1+2n}$ up to isomorphism",
+        "strategy": "Refute with the two types at each order, separated by the count of square roots of the identity when $p=2$ and by the exponent when $p$ is odd.",
+        "deps": [
+          "thm-classification-of-extraspecial-two-groups",
+          "thm-classification-of-extraspecial-p-groups-for-odd-p",
+          "def-order-in-a-group",
+          "def-exponent-of-a-finite-group"
+        ]
+      },
+      {
+        "id": "fs-the-commutator-pairing-determines-an-extraspecial-p-group-up-to-isomorphism",
+        "kind": "false-statement",
+        "title": "FALSE: two extraspecial $p$-groups whose commutator pairings agree are isomorphic",
+        "strategy": "Refute with $\\operatorname{Dih}(C_4)$ and $Q_8$: both pairings are the alternating pairing on a two-dimensional space, and the groups differ.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial",
+          "def-generalized-dihedral-group",
+          "def-quaternion-group-of-order-eight"
+        ]
+      },
+      {
+        "id": "fs-the-commutator-pairing-needs-no-choice-of-a-central-generator",
+        "kind": "false-statement",
+        "title": "FALSE: the commutator pairing of an extraspecial $p$-group is defined without choosing a generator of its centre",
+        "strategy": "Refute by replacing the generator $z$ by $z^{c}$ and observing that the pairing is multiplied by $c^{-1}$; only the pairing up to that scaling is choice-free.",
+        "deps": [
+          "def-commutator-pairing-of-an-extraspecial-p-group",
+          "lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating",
+          "def-center-of-a-group",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "fs-an-extraspecial-p-group-has-a-complement-to-its-centre",
+        "kind": "false-statement",
+        "title": "FALSE: the centre of an extraspecial $p$-group has a complement",
+        "strategy": "Refute with the general argument that a complement would be isomorphic to the elementary abelian central quotient and force the group to be abelian.",
+        "deps": [
+          "cor-an-extraspecial-p-group-has-no-complement-to-its-centre",
+          "def-internal-semidirect-product"
+        ]
+      },
+      {
+        "id": "fs-a-group-of-order-p-to-an-even-power-can-be-extraspecial",
+        "kind": "false-statement",
+        "title": "FALSE: some extraspecial $p$-group has order $p^{2n}$",
+        "strategy": "Refute from the central-product decomposition, which forces the order to be $p$ times an even power of $p$.",
+        "deps": [
+          "thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed",
+          "cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number",
+          "def-order-in-a-group"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 302.001,
+    "id": "cayley-graphs-word-metrics-and-quasi-isometry",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Cayley Graphs, Word Metrics and Quasi-Isometry",
+    "companion": "cayley-graphs-word-metrics-and-quasi-isometry-examples",
+    "requires": [
+      "applications-of-the-fundamental-group-examples",
+      "graphs-walks-and-connectivity",
+      "trees-forests-and-spanning-trees",
+      "semidirect-products-and-automorphism-groups"
+    ],
+    "items": [
+      {
+        "id": "def-simple-graph-without-a-finiteness-hypothesis",
+        "kind": "definition",
+        "title": "Simple graphs on an arbitrary vertex set",
+        "deps": [
+          "def-finite-simple-graph",
+          "rem-finite-simple-graph-convention"
+        ]
+      },
+      {
+        "id": "def-walks-paths-and-connectedness-in-a-simple-graph",
+        "kind": "definition",
+        "title": "Walks, paths, connectedness and components in a simple graph on an arbitrary vertex set",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints",
+        "kind": "lemma",
+        "title": "Every walk contains a path between the same endpoints, of no greater length",
+        "strategy": "Among the walks from $u$ to $v$ of length at most that of the given walk, the well-ordering principle selects one of least length. If a vertex occurred twice in it, deleting the segment between the two occurrences would give a shorter such walk. So the chosen walk repeats no vertex and is a path. Finiteness of the vertex set is never used; the walk itself is a finite list.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "def-graph-path-metric",
+        "kind": "definition",
+        "title": "The path metric of a connected simple graph",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints",
+          "def-metric-space",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+        "kind": "theorem",
+        "title": "The path metric of a connected simple graph is a metric on its vertex set",
+        "strategy": "Separation holds because the only path of length zero joins a vertex to itself; symmetry because reversing a path preserves its length; the triangle inequality because concatenating two paths gives a walk of the summed length, which the previous lemma replaces by a path no longer than it. Values are natural numbers, so no completeness or archimedean input is needed.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints",
+          "def-graph-path-metric",
+          "def-metric-space",
+          "lem-metric-nonnegativity"
+        ]
+      },
+      {
+        "id": "lem-a-vertex-bijection-is-an-isometry-of-path-metrics-exactly-when-it-is-a-graph-isomorphism",
+        "kind": "lemma",
+        "title": "A bijection of vertex sets is an isometry for the path metrics if and only if it is a graph isomorphism",
+        "strategy": "A graph isomorphism carries paths to paths of the same length in both directions, so it preserves the minima. Conversely an isometry preserves distance one, and distance one is exactly adjacency, so it preserves the edge relation in both directions.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-graph-path-metric",
+          "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+          "def-isometry-and-metric-embedding",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "lem-the-graph-notions-agree-with-the-published-finite-graph-theory",
+        "kind": "lemma",
+        "title": "On a finite vertex set these notions are the published ones, and the path metric is the published graph distance",
+        "strategy": "Compare the definitions clause by clause: a simple graph on a finite vertex set is a finite simple graph, and the walk, path, cycle, connectedness and component notions are literally the published ones. The published graph distance is the least length of a path in the same sense, so the two agree wherever the published one is defined, and the metric axioms proved here specialise to the published component-wise statement. Trees and forests likewise agree.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints",
+          "def-graph-path-metric",
+          "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+          "def-finite-simple-graph",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-connected-graph-and-connected-component",
+          "def-graph-distance-and-girth",
+          "lem-graph-distance-is-a-metric-on-each-component",
+          "lem-every-graph-walk-contains-a-path-between-its-endpoints"
+        ]
+      },
+      {
+        "id": "def-locally-finite-graph",
+        "kind": "definition",
+        "title": "Locally finite graphs and vertex degree without a finiteness hypothesis",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-balls-in-a-connected-locally-finite-graph-are-finite",
+        "kind": "lemma",
+        "title": "In a locally finite graph every ball of the path metric is finite",
+        "strategy": "Induct on the radius. The ball of radius zero is a single vertex, and the ball of radius $r+1$ is contained in the union over the ball of radius $r$ of the closed neighbourhoods of its vertices, a finite union of finite sets. Local finiteness is used at every vertex, not only at the centre.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-graph-path-metric",
+          "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+          "def-locally-finite-graph",
+          "def-finite-cardinality",
+          "def-metric-ball",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "def-cycles-trees-and-forests-in-a-simple-graph",
+        "kind": "definition",
+        "title": "Cycles, trees and forests in a simple graph on an arbitrary vertex set",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-tree-forest-and-leaf",
+          "thm-tree-characterisations"
+        ]
+      },
+      {
+        "id": "thm-a-simple-graph-is-a-tree-exactly-when-every-two-vertices-are-joined-by-a-unique-path",
+        "kind": "theorem",
+        "title": "A simple graph is a tree if and only if each pair of vertices is joined by exactly one path",
+        "strategy": "If paths are unique the graph is connected, and a cycle would give two distinct paths between two of its vertices, using that a cycle has length at least three. Conversely, in a tree two distinct paths with the same endpoints first diverge at some index and first meet again later, and the two segments between those points form a cycle.",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints",
+          "def-cycles-trees-and-forests-in-a-simple-graph"
+        ]
+      },
+      {
+        "id": "def-labelled-directed-graph-and-labelled-graph-isomorphism",
+        "kind": "definition",
+        "title": "Labelled directed graphs, their underlying simple graphs, and label-preserving isomorphisms",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-multigraph-loop-and-digraph",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "def-directed-labelled-cayley-graph",
+        "kind": "definition",
+        "title": "The directed labelled Cayley graph of a group with respect to a subset",
+        "deps": [
+          "def-labelled-directed-graph-and-labelled-graph-isomorphism",
+          "def-group",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "def-cayley-graph",
+        "kind": "definition",
+        "title": "The Cayley graph of a group with respect to a subset",
+        "deps": [
+          "def-simple-graph-without-a-finiteness-hypothesis",
+          "def-directed-labelled-cayley-graph",
+          "def-group",
+          "def-generated-subgroup",
+          "lem-group-inverse-laws"
+        ]
+      },
+      {
+        "id": "def-finitely-generated-group",
+        "kind": "definition",
+        "title": "Finitely generated groups",
+        "deps": [
+          "def-generated-subgroup",
+          "def-finite-cardinality",
+          "def-group"
+        ]
+      },
+      {
+        "id": "lem-a-cayley-graph-is-connected-exactly-when-its-defining-subset-generates-the-group",
+        "kind": "lemma",
+        "title": "A Cayley graph is connected if and only if the subset generates the group",
+        "strategy": "A walk from the identity to $g$ spells an expression for $g$ as a product of elements of the subset and their inverses, and conversely each such expression is a walk. So the component of the identity is exactly the generated subgroup, and left translation carries it onto the component of any vertex.",
+        "deps": [
+          "def-walks-paths-and-connectedness-in-a-simple-graph",
+          "def-cayley-graph",
+          "def-generated-subgroup",
+          "def-alphabet-words-and-reduction"
+        ]
+      },
+      {
+        "id": "prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite",
+        "kind": "proposition",
+        "title": "Every vertex of a Cayley graph has the same degree, and the graph is locally finite exactly when the symmetrised generating set is finite",
+        "strategy": "The neighbours of $g$ are the elements $gs$ with $s$ in the symmetrised set minus the identity, and left multiplication by $hg^{-1}$ is a bijection from the neighbours of $g$ onto those of $h$. The common degree is therefore the size of that set, finite exactly when the set is.",
+        "deps": [
+          "def-locally-finite-graph",
+          "def-cayley-graph",
+          "def-finitely-generated-group",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "thm-left-translation-is-a-free-action-by-labelled-graph-automorphisms-of-a-cayley-graph",
+        "kind": "theorem",
+        "title": "Left translation acts on a Cayley graph by label-preserving automorphisms, freely on vertices",
+        "strategy": "Left multiplication by $h$ sends the arc from $g$ to $gs$ to the arc from $hg$ to $hgs$, which carries the same label; it is bijective on vertices with inverse left multiplication by $h^{-1}$. It fixes a vertex only if $hg=g$, that is only if $h$ is the identity.",
+        "deps": [
+          "def-labelled-directed-graph-and-labelled-graph-isomorphism",
+          "def-directed-labelled-cayley-graph",
+          "def-cayley-graph",
+          "def-group-action",
+          "def-free-group-action"
+        ]
+      },
+      {
+        "id": "thm-the-left-translation-action-on-a-cayley-graph-restricts-the-embedding-of-cayleys-theorem",
+        "kind": "theorem",
+        "title": "The label-preserving automorphism action on a Cayley graph is the left regular representation of Cayley's theorem",
+        "strategy": "Cayley's theorem embeds a group in the symmetric group on its underlying set by left multiplication. The action just constructed has the same underlying permutations, so it is that embedding followed by the inclusion of the label-preserving automorphism group in the symmetric group; in particular the Cayley graph is a refinement of the regular action, not a second embedding theorem.",
+        "deps": [
+          "def-cayley-graph",
+          "thm-left-translation-is-a-free-action-by-labelled-graph-automorphisms-of-a-cayley-graph",
+          "thm-cayleys-theorem",
+          "def-group-action",
+          "def-group-isomorphism-and-automorphism"
+        ]
+      },
+      {
+        "id": "lem-the-cayley-graph-of-a-finite-group-with-a-finite-generating-set-is-a-finite-simple-graph",
+        "kind": "lemma",
+        "title": "For a finite group the Cayley graph is a finite simple graph in the published sense and the two distances agree",
+        "strategy": "The vertex set is the group, which is finite, and the edges are two-element subsets, so the published definition applies verbatim; the path metric and the published graph distance are then the same minimum over the same set of paths.",
+        "deps": [
+          "def-graph-path-metric",
+          "lem-the-graph-notions-agree-with-the-published-finite-graph-theory",
+          "def-cayley-graph",
+          "def-finite-simple-graph",
+          "def-graph-distance-and-girth",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-word-length-with-respect-to-a-generating-set",
+        "kind": "definition",
+        "title": "Word length of a group element with respect to a generating set",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-generated-subgroup",
+          "thm-well-ordering-principle",
+          "def-group-power",
+          "def-alphabet-words-and-reduction"
+        ]
+      },
+      {
+        "id": "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+        "kind": "lemma",
+        "title": "Word length is defined on every element and satisfies the subadditivity, inversion and vanishing laws",
+        "strategy": "The set of lengths of expressions of $g$ is a nonempty subset of the natural numbers whenever the set generates, so the well-ordering principle supplies a least element. Concatenating expressions gives subadditivity, reversing and inverting each letter gives equality of the lengths of $g$ and $g^{-1}$, and the empty expression gives length zero exactly at the identity.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-generated-subgroup",
+          "thm-well-ordering-principle",
+          "lem-group-inverse-laws"
+        ]
+      },
+      {
+        "id": "def-word-metric",
+        "kind": "definition",
+        "title": "The word metric of a group with respect to a generating set",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-metric-space"
+        ]
+      },
+      {
+        "id": "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+        "kind": "theorem",
+        "title": "The word metric is a left-invariant metric and coincides with the path metric of the Cayley graph",
+        "strategy": "The metric axioms are the three length laws transported by $d_S(g,h)=|g^{-1}h|_S$, and left invariance is immediate from that formula. For the identification, a walk of length $n$ from $g$ to $h$ in the Cayley graph is the same datum as an expression for $g^{-1}h$ as a product of $n$ symmetrised generators, once identity generators are discarded; taking minima on both sides gives the equality.",
+        "deps": [
+          "def-graph-path-metric",
+          "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+          "def-cayley-graph",
+          "lem-a-cayley-graph-is-connected-exactly-when-its-defining-subset-generates-the-group",
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-word-metric",
+          "def-metric-space"
+        ]
+      },
+      {
+        "id": "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite",
+        "kind": "proposition",
+        "title": "Balls of a word metric are finite if and only if the generating set is finite",
+        "strategy": "If the set is finite, the ball of radius $n$ about the identity is the image of the set of words of length at most $n$ in the symmetrised set, a finite set; left invariance moves this to every centre. If the set is infinite, the ball of radius one about the identity already contains it.",
+        "deps": [
+          "lem-balls-in-a-connected-locally-finite-graph-are-finite",
+          "def-finitely-generated-group",
+          "prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite",
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-metric-ball",
+          "def-finite-cardinality",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "prop-the-word-metric-is-the-largest-left-invariant-metric-giving-every-generator-distance-at-most-one-from-the-identity",
+        "kind": "proposition",
+        "title": "The word metric is the largest left-invariant metric in which each generator and its inverse lie within distance one of the identity",
+        "strategy": "For any competing left-invariant metric with that property, the triangle inequality along an expression of minimal length bounds the competing distance by the word length. The word metric itself attains the value one at every generator that is not the identity, so it satisfies the constraint and dominates.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-metric-space"
+        ]
+      },
+      {
+        "id": "prop-right-translation-moves-every-point-of-a-word-metric-space-the-same-bounded-distance",
+        "kind": "proposition",
+        "title": "Right translation by a fixed element displaces every point of a word metric space by exactly the word length of that element",
+        "strategy": "Left invariance gives $d_S(h,hg)=|g|_S$ for every $h$, so the displacement is constant. Right translation is therefore an isometry only when it is trivial in the sense that this constant is zero, while it always stays a bounded distance from the identity map.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-isometry-and-metric-embedding"
+        ]
+      },
+      {
+        "id": "thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree",
+        "kind": "theorem",
+        "title": "The Cayley graph of a free group with respect to a free basis is a tree",
+        "strategy": "The graph is connected because a basis generates. A cycle $g_0,\\dots,g_{n-1}$ of length $n\\ge3$ makes the successive quotients $g_{j+1}g_j^{-1}$ into basis letters or their inverses whose product around the cycle is the identity, and distinctness of the vertices makes the corresponding word reduced; the normal form theorem says a nonempty reduced word is not the identity.",
+        "deps": [
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "thm-a-simple-graph-is-a-tree-exactly-when-every-two-vertices-are-joined-by-a-unique-path",
+          "def-cayley-graph",
+          "lem-a-cayley-graph-is-connected-exactly-when-its-defining-subset-generates-the-group",
+          "def-free-group",
+          "def-free-basis",
+          "def-alphabet-words-and-reduction",
+          "thm-reduced-words-form-the-free-group",
+          "thm-normal-form-for-the-word-quotient-model"
+        ]
+      },
+      {
+        "id": "cor-word-length-in-a-free-group-with-respect-to-a-free-basis-is-reduced-word-length",
+        "kind": "corollary",
+        "title": "With respect to a free basis, the word length of an element is the length of its reduced word",
+        "strategy": "A reduced word of length $n$ is an expression of length $n$, so word length is at most reduced length. Conversely an expression of length shorter than the reduced word would, after free reduction, give a second reduced word for the same element, contradicting uniqueness of normal form.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree",
+          "def-alphabet-words-and-reduction",
+          "thm-reduced-words-form-the-free-group",
+          "thm-normal-form-for-the-word-quotient-model",
+          "def-free-basis"
+        ]
+      },
+      {
+        "id": "thm-a-generating-set-with-no-two-letter-relation-whose-cayley-graph-is-a-tree-is-a-free-basis",
+        "kind": "theorem",
+        "title": "If no product of two members of a generating set is the identity and the Cayley graph is a tree, the set is a free basis",
+        "strategy": "The universal property gives a surjection from the free group on the set. A shortest nonempty reduced word in its kernel has length at least two by injectivity on the set, exactly two is excluded by the hypothesis on products of two members, and length at least three produces a cycle in the Cayley graph by taking successive partial products, which are distinct by minimality.",
+        "deps": [
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "thm-a-simple-graph-is-a-tree-exactly-when-every-two-vertices-are-joined-by-a-unique-path",
+          "def-cayley-graph",
+          "thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree",
+          "def-free-group",
+          "def-free-basis",
+          "thm-reduced-words-form-the-free-group",
+          "thm-normal-form-for-the-word-quotient-model",
+          "def-alphabet-words-and-reduction"
+        ]
+      },
+      {
+        "id": "def-geodesic-and-geodesic-metric-space",
+        "kind": "definition",
+        "title": "Geodesics and geodesic metric spaces",
+        "deps": [
+          "def-metric-space",
+          "def-isometry-and-metric-embedding",
+          "lem-real-line-is-a-metric-space"
+        ]
+      },
+      {
+        "id": "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+        "kind": "definition",
+        "title": "Coarse Lipschitz maps and quasi-isometric embeddings",
+        "deps": [
+          "def-metric-space",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "def-bounded-distance-between-maps",
+        "kind": "definition",
+        "title": "Bounded distance between two maps into a metric space",
+        "deps": [
+          "def-metric-space",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition",
+        "kind": "lemma",
+        "title": "Bounded distance is an equivalence relation and is preserved by pre-composition and by post-composition with a coarse Lipschitz map",
+        "strategy": "Reflexivity, symmetry and transitivity come from the metric axioms with the bounds added. Pre-composition changes no value. Post-composition with a coarse Lipschitz map multiplies the bound by the multiplicative constant and adds the additive one, which is where the coarse Lipschitz hypothesis is needed and where an arbitrary map would fail.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps"
+        ]
+      },
+      {
+        "id": "def-coarsely-dense-subset-and-quasi-isometry",
+        "kind": "definition",
+        "title": "Coarsely dense subsets, quasi-inverses and quasi-isometries",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps",
+          "def-metric-space",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "lem-composites-of-coarse-lipschitz-maps-and-of-quasi-isometric-embeddings",
+        "kind": "lemma",
+        "title": "Composites of coarse Lipschitz maps and of quasi-isometric embeddings are again such, with explicit constants",
+        "strategy": "Substitute one pair of inequalities into the other and collect terms; the resulting constants are recorded rather than absorbed, since later statements about quasi-geodesics need them.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding"
+        ]
+      },
+      {
+        "id": "lem-a-map-at-bounded-distance-from-a-quasi-isometric-embedding-is-a-quasi-isometric-embedding",
+        "kind": "lemma",
+        "title": "A map at bounded distance from a quasi-isometric embedding is one, with the additive constant enlarged",
+        "strategy": "Apply the triangle inequality twice, once on each side, and enlarge the additive constant by twice the bound; the multiplicative constant is unchanged.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps",
+          "lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition"
+        ]
+      },
+      {
+        "id": "thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse",
+        "kind": "theorem",
+        "title": "A quasi-isometric embedding with coarsely dense image has a quasi-inverse quasi-isometric embedding",
+        "strategy": "For each target point select a source point whose image is within the density constant; the selection is a use of choice in general, and is choice-free when the source is a group with a fixed finite generating set, where the shortlex-least representative word supplies a definable selection. The selected map is checked to be a quasi-isometric embedding and to be at bounded distance from the identity after composition either way.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "lem-composites-of-coarse-lipschitz-maps-and-of-quasi-isometric-embeddings",
+          "lem-a-map-at-bounded-distance-from-a-quasi-isometric-embedding-is-a-quasi-isometric-embedding",
+          "def-axiom-of-choice",
+          "def-alphabet-words-and-reduction",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+        "kind": "corollary",
+        "title": "A map is a quasi-isometry exactly when it is a quasi-isometric embedding with coarsely dense image",
+        "strategy": "One direction is the previous theorem. For the other, if a quasi-inverse exists then every target point is within a bounded distance of the image of its quasi-inverse image.",
+        "deps": [
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse"
+        ]
+      },
+      {
+        "id": "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces",
+        "kind": "theorem",
+        "title": "Being quasi-isometric is reflexive, symmetric and transitive",
+        "strategy": "The identity is a quasi-isometry; a quasi-inverse of a quasi-isometry is a quasi-isometry, which is where the selection of the previous theorem is used again for symmetry; and composites of quasi-isometries are quasi-isometries with the composed constants.",
+        "deps": [
+          "lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "lem-composites-of-coarse-lipschitz-maps-and-of-quasi-isometric-embeddings",
+          "thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings"
+        ]
+      },
+      {
+        "id": "def-quasi-isometry-group-of-a-metric-space",
+        "kind": "definition",
+        "title": "The quasi-isometry group of a metric space",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition",
+          "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces",
+          "def-group"
+        ]
+      },
+      {
+        "id": "prop-the-quasi-isometry-group-is-a-group-and-quasi-isometric-spaces-have-isomorphic-quasi-isometry-groups",
+        "kind": "proposition",
+        "title": "Quasi-isometries modulo bounded distance form a group, and a quasi-isometry induces an isomorphism of these groups",
+        "strategy": "Composition is well defined on bounded-distance classes by the compatibility lemma, associativity is inherited from composition of maps, the class of the identity is neutral, and the class of a quasi-inverse is an inverse. Conjugation by a fixed quasi-isometry and its quasi-inverse is a homomorphism between the two groups with an explicit two-sided inverse.",
+        "deps": [
+          "lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse",
+          "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces",
+          "def-quasi-isometry-group-of-a-metric-space",
+          "def-group",
+          "def-group-isomorphism-and-automorphism",
+          "def-equivalence-relation"
+        ]
+      },
+      {
+        "id": "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+        "kind": "definition",
+        "title": "Bilipschitz embeddings and bilipschitz equivalences of metric spaces",
+        "deps": [
+          "def-metric-space",
+          "def-lipschitz-holder-contraction",
+          "def-equivalent-metrics",
+          "def-isometry-and-metric-embedding"
+        ]
+      },
+      {
+        "id": "prop-isometries-bilipschitz-equivalences-and-quasi-isometries-form-a-hierarchy",
+        "kind": "proposition",
+        "title": "Every isometry is a bilipschitz equivalence and every bilipschitz equivalence is a quasi-isometry, and two metrics on one set are Lipschitz equivalent exactly when the identity is a bilipschitz equivalence between them",
+        "strategy": "Each implication is obtained by taking the constants of the stronger notion and weakening them: multiplicative constant one for an isometry, additive constant zero for a bilipschitz equivalence. The last clause is a comparison of two definitions written on the same data, and it is what connects this page to the published notion of Lipschitz equivalent metrics.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "def-isometry-and-metric-embedding",
+          "def-equivalent-metrics",
+          "thm-metric-equivalence-hierarchy"
+        ]
+      },
+      {
+        "id": "def-separated-net-in-a-metric-space",
+        "kind": "definition",
+        "title": "Separated nets in a metric space",
+        "deps": [
+          "def-metric-space",
+          "def-metric-bounded-diameter",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets",
+        "kind": "theorem",
+        "title": "Two metric spaces are quasi-isometric if and only if each contains a separated net and the two nets are bilipschitz equivalent",
+        "strategy": "Given a quasi-isometry, choose a separated net in the source whose separation exceeds the additive constant times the multiplicative one; its image is then a separated net in the target and the restricted map is bilipschitz, because on well-separated points the additive error is absorbed into the multiplicative one. Conversely a bilipschitz equivalence of nets extends to the whole spaces by sending each point to the image of a nearby net point, which changes distances by a bounded amount. The extension selects nearby points, so it uses choice in the same place as the quasi-inverse theorem.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-bounded-distance-between-maps",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "def-separated-net-in-a-metric-space",
+          "def-axiom-of-choice",
+          "thm-metric-closure-characterisation",
+          "def-metric-ball"
+        ]
+      },
+      {
+        "id": "prop-a-metric-space-is-quasi-isometric-to-a-one-point-space-exactly-when-it-is-nonempty-of-finite-diameter",
+        "kind": "proposition",
+        "title": "The nonempty metric spaces quasi-isometric to a one-point space are exactly those of finite diameter",
+        "strategy": "A constant map from a space of finite diameter is a quasi-isometric embedding with coarsely dense image. Conversely a quasi-isometry to a point bounds all distances by the additive constant times the multiplicative one.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics",
+        "kind": "theorem",
+        "title": "The identity map between the word metrics of two finite generating sets is a bilipschitz equivalence",
+        "strategy": "Let $c$ be the largest word length in the second metric of a member of the first symmetrised set, finite because that set is finite. Expanding an element of length $n$ in the first metric and applying the triangle inequality along the expression bounds its second length by $cn$; exchanging the two sets gives the other inequality. Finiteness is used exactly to make the maximum exist.",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "def-equivalent-metrics",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-quasi-isometry-type-of-a-finitely-generated-group",
+        "kind": "definition",
+        "title": "The quasi-isometry type of a finitely generated group",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-metric",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces",
+          "prop-isometries-bilipschitz-equivalences-and-quasi-isometries-form-a-hierarchy",
+          "thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics"
+        ]
+      },
+      {
+        "id": "prop-a-finitely-generated-group-is-finite-exactly-when-it-is-quasi-isometric-to-a-one-point-space",
+        "kind": "proposition",
+        "title": "A finitely generated group is finite if and only if it is quasi-isometric to a point",
+        "strategy": "A finite group has finite diameter in any word metric. Conversely finite diameter with a finite generating set makes the whole group a ball of finite radius, and such balls are finite.",
+        "deps": [
+          "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite",
+          "prop-a-metric-space-is-quasi-isometric-to-a-one-point-space-exactly-when-it-is-nonempty-of-finite-diameter",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-metric-bounded-diameter",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "prop-a-finite-index-subgroup-of-a-finitely-generated-group-is-finitely-generated-and-quasi-isometrically-included",
+        "kind": "proposition",
+        "title": "A subgroup of finite index in a finitely generated group is finitely generated, and its inclusion is a quasi-isometry",
+        "strategy": "Fix a finite transversal containing the identity. Rewriting a product of generators by pushing transversal representatives to the right expresses each subgroup element in the finite set of products falling back into the subgroup, so that set generates. The inclusion is coarse Lipschitz with the resulting constants, is bounded below because ambient length never exceeds subgroup length, and has coarsely dense image because every element lies within the maximum ambient length of a transversal representative.",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-word-metric",
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-index",
+          "def-coset",
+          "lem-coset-partition",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "prop-the-quotient-of-a-finitely-generated-group-by-a-finite-normal-subgroup-is-a-quasi-isometry",
+        "kind": "proposition",
+        "title": "The quotient map by a finite normal subgroup is a quasi-isometry of word metric spaces",
+        "strategy": "The image of a generating set generates the quotient, so the quotient map is one-Lipschitz. A shortest expression in the quotient lifts to an expression in the group whose value differs from the chosen lift by an element of the finite kernel, so the lengths differ by at most the largest length in that kernel. Surjectivity gives coarse density for free.",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-length-with-respect-to-a-generating-set",
+          "lem-word-length-is-well-defined-and-satisfies-the-length-laws",
+          "def-word-metric",
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-quotient-group",
+          "def-normal-subgroup",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-quasi-geodesic-and-quasi-geodesic-metric-space",
+        "kind": "definition",
+        "title": "Quasi-geodesics and quasi-geodesic metric spaces",
+        "deps": [
+          "def-geodesic-and-geodesic-metric-space",
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding"
+        ]
+      },
+      {
+        "id": "prop-the-path-metric-of-a-connected-simple-graph-is-quasi-geodesic-with-constants-one-and-one",
+        "kind": "proposition",
+        "title": "The vertex set of a connected simple graph with its path metric is a $(1,1)$-quasi-geodesic space",
+        "strategy": "Given two vertices, parametrise a path realising their distance by sending each integer point of an interval to the corresponding vertex and each intermediate real to the nearer of its endpoints. The distances so obtained differ from those of the interval by at most one, which is the additive constant, and the multiplicative constant stays one.",
+        "deps": [
+          "def-graph-path-metric",
+          "thm-the-path-metric-of-a-connected-simple-graph-is-a-metric",
+          "def-geodesic-and-geodesic-metric-space",
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-quasi-geodesic-and-quasi-geodesic-metric-space",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space",
+        "kind": "corollary",
+        "title": "A group with the word metric of any generating set is a $(1,1)$-quasi-geodesic space",
+        "strategy": "The word metric is the path metric of the Cayley graph, which is connected because the set generates, and the previous proposition applies.",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "prop-the-path-metric-of-a-connected-simple-graph-is-quasi-geodesic-with-constants-one-and-one"
+        ]
+      },
+      {
+        "id": "prop-a-quasi-isometric-embedding-carries-a-quasi-geodesic-to-a-quasi-geodesic",
+        "kind": "proposition",
+        "title": "The composite of a quasi-geodesic with a quasi-isometric embedding is a quasi-geodesic, with computed constants",
+        "strategy": "A quasi-geodesic is by definition a quasi-isometric embedding of an interval, so this is the composition lemma applied to two quasi-isometric embeddings; the constants are those the lemma records.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "lem-composites-of-coarse-lipschitz-maps-and-of-quasi-isometric-embeddings",
+          "def-quasi-geodesic-and-quasi-geodesic-metric-space"
+        ]
+      },
+      {
+        "id": "prop-a-coarse-lipschitz-map-between-finitely-generated-groups-with-word-metrics-is-lipschitz",
+        "kind": "proposition",
+        "title": "A coarse Lipschitz map between word metric spaces of finitely generated groups is Lipschitz",
+        "strategy": "Adjacent points differ by a single generator and so have images at distance at most the sum of the two coarse constants; chaining along a shortest expression turns this into a purely multiplicative bound. The argument uses that the word metric takes integer values and adjacent points are at distance one, so it does not extend to an arbitrary metric source.",
+        "deps": [
+          "def-finitely-generated-group",
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "cor-a-bijective-quasi-isometry-between-finitely-generated-groups-is-a-bilipschitz-equivalence",
+        "kind": "corollary",
+        "title": "A bijective quasi-isometry between word metric spaces of finitely generated groups is a bilipschitz equivalence",
+        "strategy": "Such a map and its set-theoretic inverse are both quasi-isometries, hence both coarse Lipschitz, hence both Lipschitz by the previous proposition; two mutually inverse Lipschitz bijections are a bilipschitz equivalence. Bijectivity is what makes the set-theoretic inverse available, and the conclusion fails for general metric spaces.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "prop-a-coarse-lipschitz-map-between-finitely-generated-groups-with-word-metrics-is-lipschitz",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "def-quasi-isometry-invariant-and-geometric-property-of-a-finitely-generated-group",
+        "kind": "definition",
+        "title": "Quasi-isometry invariants and geometric properties of finitely generated groups",
+        "deps": [
+          "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces",
+          "def-quasi-isometry-type-of-a-finitely-generated-group"
+        ]
+      },
+      {
+        "id": "prop-finiteness-is-a-geometric-property-of-finitely-generated-groups",
+        "kind": "proposition",
+        "title": "Finiteness is a geometric property of finitely generated groups",
+        "strategy": "Two quasi-isometric finitely generated groups are simultaneously quasi-isometric to a point, and being quasi-isometric to a point characterises finiteness among finitely generated groups.",
+        "deps": [
+          "prop-a-finitely-generated-group-is-finite-exactly-when-it-is-quasi-isometric-to-a-one-point-space",
+          "def-quasi-isometry-invariant-and-geometric-property-of-a-finitely-generated-group",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 302.002,
+    "id": "cayley-graphs-word-metrics-and-quasi-isometry-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Cayley Graphs, Word Metrics and Quasi-Isometry — Examples",
+    "companion": "cayley-graphs-word-metrics-and-quasi-isometry",
+    "requires": [
+      "cayley-graphs-word-metrics-and-quasi-isometry"
+    ],
+    "items": [
+      {
+        "id": "ex-the-cayley-graph-and-word-metric-of-the-integers",
+        "kind": "example",
+        "title": "The Cayley graph of $\\mathbb Z$ for the generating set $\\{1\\}$ is a line and its word metric is $|m-n|$",
+        "strategy": "Read the edge set off the definition and identify the word length of $n$ as $|n|$ from the length laws; compare with the metric induced from the real line.",
+        "deps": [
+          "def-cayley-graph",
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "lem-real-line-is-a-metric-space",
+          "def-free-abelian-group"
+        ]
+      },
+      {
+        "id": "ex-two-generating-sets-of-the-integers-give-different-but-bilipschitz-equivalent-word-metrics",
+        "kind": "example",
+        "title": "The word metrics of $\\mathbb Z$ for $\\{1\\}$ and for $\\{2,3\\}$ differ at $1$ and are bilipschitz equivalent",
+        "strategy": "Compute both word lengths at small integers to see the metrics differ, then exhibit the constants the comparison theorem produces.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics",
+          "def-equivalent-metrics"
+        ]
+      },
+      {
+        "id": "ex-the-cayley-graph-of-a-free-abelian-group-of-finite-rank",
+        "kind": "example",
+        "title": "The Cayley graph of $\\mathbb Z^n$ for the standard basis is the integer lattice, and its word metric is the sum of coordinate differences",
+        "strategy": "Identify the neighbours of a vertex, then compute the word length as the $\\ell^1$ norm by exhibiting an expression of that length and bounding below coordinatewise.",
+        "deps": [
+          "def-cayley-graph",
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "def-free-abelian-group",
+          "lem-metrics-on-rn"
+        ]
+      },
+      {
+        "id": "ex-the-cayley-tree-of-a-free-group-of-rank-two",
+        "kind": "example",
+        "title": "The Cayley graph of the free group on two generators is the tree in which every vertex has four neighbours",
+        "strategy": "Apply the tree theorem to a free basis and compute the degree from the symmetrised set of size four.",
+        "deps": [
+          "def-cayley-graph",
+          "prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite",
+          "thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree",
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "def-free-group",
+          "def-free-basis"
+        ]
+      },
+      {
+        "id": "ex-two-generating-sets-of-a-dihedral-group",
+        "kind": "example",
+        "title": "The dihedral group of order eight has Cayley graphs that are a cycle of length eight and a cube",
+        "strategy": "Draw both edge sets from the definition for the generating sets $\\{r,s\\}$ and $\\{s,rs,r^2\\}$, and check the degrees.",
+        "deps": [
+          "def-cayley-graph",
+          "prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite",
+          "cor-dihedral-groups-as-semidirect-products",
+          "def-generalized-dihedral-group",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "ex-the-integers-are-quasi-isometric-to-the-real-line",
+        "kind": "example",
+        "title": "The inclusion of $\\mathbb Z$ in $\\mathbb R$ is a quasi-isometry that is neither surjective nor a bilipschitz equivalence",
+        "strategy": "Verify the quasi-isometric embedding inequalities with constants one and zero, produce the integer-part map as a quasi-inverse, and note that no bijection can exist for cardinality reasons.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "def-word-metric",
+          "lem-integer-part",
+          "lem-real-line-is-a-metric-space",
+          "def-metric-space"
+        ]
+      },
+      {
+        "id": "ex-a-finite-index-subgroup-of-a-free-abelian-group-is-quasi-isometric-to-it",
+        "kind": "example",
+        "title": "The subgroup $2\\mathbb Z\\times\\mathbb Z$ has index two in $\\mathbb Z^2$ and its inclusion is a quasi-isometry",
+        "strategy": "Exhibit a transversal of size two and apply the finite-index proposition, then check the constants directly on the two generators.",
+        "deps": [
+          "prop-a-finite-index-subgroup-of-a-finitely-generated-group-is-finitely-generated-and-quasi-isometrically-included",
+          "def-word-metric",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "def-index",
+          "def-free-abelian-group"
+        ]
+      },
+      {
+        "id": "ex-the-infinite-dihedral-group-is-quasi-isometric-to-the-integers",
+        "kind": "example",
+        "title": "The infinite dihedral group is quasi-isometric to $\\mathbb Z$, and to $\\mathbb Z\\times\\mathbb Z/2$",
+        "strategy": "Use the two presentations of the infinite dihedral group to exhibit Cayley graphs isomorphic to that of $\\mathbb Z$ and to that of $\\mathbb Z\\times\\mathbb Z/2$, then transport through the comparison theorem.",
+        "deps": [
+          "def-cayley-graph",
+          "def-word-metric",
+          "def-bilipschitz-embedding-and-bilipschitz-equivalence",
+          "thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-generalized-dihedral-group",
+          "def-group-presentation",
+          "thm-von-dyck",
+          "prop-equality-of-words-in-a-presentation"
+        ]
+      },
+      {
+        "id": "cex-an-infinite-generating-set-destroys-the-comparison-of-word-metrics",
+        "kind": "counterexample",
+        "title": "Taking $\\mathbb Z$ itself as a generating set gives a word metric of diameter one, not bilipschitz equivalent to the standard one",
+        "strategy": "Compute the word length of every nonzero integer as one, so the diameter is one while the standard word metric is unbounded; locate the exact step of the comparison theorem that fails.",
+        "deps": [
+          "def-word-length-with-respect-to-a-generating-set",
+          "def-word-metric",
+          "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite",
+          "thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "cex-a-quasi-isometry-need-not-be-continuous-injective-or-surjective",
+        "kind": "counterexample",
+        "title": "A single map exhibiting a quasi-isometry that is discontinuous, non-injective and non-surjective",
+        "strategy": "Take the integer-part map from the real line to $2\\mathbb Z$; verify the quasi-isometry inequalities and then each of the three failures at explicit points.",
+        "deps": [
+          "def-coarse-lipschitz-map-and-quasi-isometric-embedding",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "lem-integer-part",
+          "lem-real-line-is-a-metric-space",
+          "thm-metric-continuity-characterisations"
+        ]
+      },
+      {
+        "id": "fs-the-cayley-graph-of-a-group-does-not-depend-on-the-generating-set",
+        "kind": "false-statement",
+        "title": "FALSE: the Cayley graph of a group is independent of the chosen generating set",
+        "strategy": "Refute with $\\mathbb Z$ for $\\{1\\}$ and for $\\{2,3\\}$, whose vertex degrees differ.",
+        "deps": [
+          "def-cayley-graph",
+          "prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite"
+        ]
+      },
+      {
+        "id": "fs-the-word-metric-is-right-invariant",
+        "kind": "false-statement",
+        "title": "FALSE: every word metric is invariant under right translation",
+        "strategy": "Refute in a nonabelian group by exhibiting two points whose right translates move to a different distance.",
+        "deps": [
+          "def-word-metric",
+          "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph",
+          "prop-right-translation-moves-every-point-of-a-word-metric-space-the-same-bounded-distance"
+        ]
+      },
+      {
+        "id": "fs-a-quasi-isometry-is-continuous-or-bijective",
+        "kind": "false-statement",
+        "title": "FALSE: every quasi-isometry is continuous, or bijective",
+        "strategy": "Refute with the integer-part map, which is neither.",
+        "deps": [
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "fs-all-infinite-finitely-generated-groups-are-quasi-isometric",
+        "kind": "false-statement",
+        "title": "FALSE: any two infinite finitely generated groups are quasi-isometric",
+        "strategy": "Refute by comparing the sizes of balls in $\\mathbb Z$ and in a free group of rank two, which grow linearly and exponentially, and showing that a quasi-isometry would force a linear bound between the two counts.",
+        "deps": [
+          "def-word-metric",
+          "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "def-quasi-isometry-type-of-a-finitely-generated-group",
+          "def-free-group",
+          "def-metric-ball",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "fs-a-finitely-generated-group-with-a-word-metric-is-a-geodesic-metric-space",
+        "kind": "false-statement",
+        "title": "FALSE: a nontrivial finitely generated group with a word metric is a geodesic metric space",
+        "strategy": "Refute from the definition: a geodesic between two points at distance one supplies points at every intermediate real distance, while a word metric takes only integer values.",
+        "deps": [
+          "def-word-metric",
+          "def-geodesic-and-geodesic-metric-space",
+          "cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space"
+        ]
+      },
+      {
+        "id": "fs-nonisomorphic-groups-cannot-have-isomorphic-cayley-graphs",
+        "kind": "false-statement",
+        "title": "FALSE: groups with isomorphic Cayley graphs are isomorphic",
+        "strategy": "Refute with the symmetric group on three letters and the cyclic group of order six, each taken with its whole underlying set as generating set: both Cayley graphs are complete on six vertices.",
+        "deps": [
+          "def-cayley-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-classification-of-cyclic-groups",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "cex-a-tree-cayley-graph-need-not-come-from-a-free-generating-set",
+        "kind": "counterexample",
+        "title": "The Cayley graphs of $\\mathbb Z/2$ for $\\{1\\}$ and of $\\mathbb Z$ for $\\{-1,1\\}$ are trees, and neither generating set is free",
+        "strategy": "Draw both graphs and check they are trees; then note that $\\mathbb Z/2$ is not free and that $\\{-1,1\\}$ has a product of two members equal to the identity, which is exactly the hypothesis the converse theorem needs.",
+        "deps": [
+          "def-cayley-graph",
+          "def-cycles-trees-and-forests-in-a-simple-graph",
+          "thm-a-generating-set-with-no-two-letter-relation-whose-cayley-graph-is-a-tree-is-a-free-basis",
+          "def-free-basis",
+          "thm-classification-of-cyclic-groups"
+        ]
+      },
+      {
+        "id": "ex-the-quasi-isometry-group-of-a-metric-space-of-finite-diameter-is-trivial",
+        "kind": "example",
+        "title": "A nonempty metric space of finite diameter has trivial quasi-isometry group",
+        "strategy": "Every self-map of such a space is at bounded distance from the identity, so there is exactly one bounded-distance class.",
+        "deps": [
+          "def-quasi-isometry-group-of-a-metric-space",
+          "prop-the-quasi-isometry-group-is-a-group-and-quasi-isometric-spaces-have-isomorphic-quasi-isometry-groups",
+          "def-metric-bounded-diameter",
+          "def-bounded-distance-between-maps"
+        ]
+      },
+      {
+        "id": "ex-the-quasi-isometry-group-of-the-integers-contains-the-multiplicative-group-of-nonzero-reals",
+        "kind": "example",
+        "title": "Scaling maps embed the multiplicative group of nonzero reals into the quasi-isometry group of $\\mathbb Z$",
+        "strategy": "For nonzero $\\alpha$ the map $n\\mapsto\\lfloor\\alpha n\\rfloor$ is a quasi-isometry of $\\mathbb Z$; composing two of them agrees with scaling by the product up to a bounded error, so the assignment is a homomorphism on classes, and for $\\alpha\\ne\\beta$ the difference $|\\lfloor\\alpha n\\rfloor-\\lfloor\\beta n\\rfloor|$ is unbounded, so it is injective.",
+        "deps": [
+          "def-quasi-isometry-group-of-a-metric-space",
+          "prop-the-quasi-isometry-group-is-a-group-and-quasi-isometric-spaces-have-isomorphic-quasi-isometry-groups",
+          "def-coarsely-dense-subset-and-quasi-isometry",
+          "cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings",
+          "def-word-metric",
+          "lem-integer-part",
+          "lem-real-line-is-a-metric-space",
+          "def-group-isomorphism-and-automorphism"
+        ]
+      }
+    ]
+  }
+]
