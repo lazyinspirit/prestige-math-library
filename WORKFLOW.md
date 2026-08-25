@@ -62,6 +62,13 @@ anything, read:
 
 Follow those files, not this runbook, wherever they differ.
 
+For a per-level build, the active Step 6 is the routed pipeline in `LEVELS.md`:
+per-batch reader hashes, exact read-only refuter coverage of untouched and
+high/critical items, machine-complete group-Alpha decisions with defect-ledger
+ownership, then lead-Alpha cross-batch/forward-reference/post-6b-change closure and the final
+gate battery, followed by an immutable Step-6 evidence receipt. Alpha does not spawn duplicate build refuters, and 6c does not
+repeat same-batch or published-dependency citations already assigned to 6a.
+
 **The model lineup lives in `CLAUDE.md` §Model lineup — the single source of
 truth** — and this file never restates it: a second copy of a lineup drifts,
 and this one had already retired a judge lane in one paragraph while naming it

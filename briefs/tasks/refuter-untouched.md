@@ -1,49 +1,17 @@
-# Refute the untouched items of batch `<i>`, run `<run>`
+# Step 6a refutation — assigned batch
 
-## Your list
+Derive the batch number from the dispatch label. Open
+`research/<run>-step6-scope-<i>.json` and audit every id in `refuter_scope`:
+all reader-untouched items, all high/critical-risk items, and the assigned page
+prose.
 
-```
-node -e "const s=require('./research/<run>-step6-scope.json');console.log(s.batches['<i>'].untouched.join('\n'))"
-```
+Read `research/<run>-reader-<i>.md`, then verify from disk. Trace each proof,
+open every cited dependency, compare cited Statements word for word, type-check
+expressions, compare titles and Statements with proofs, and instantiate boundary
+cases. Keep the concrete examples and defect standard in `briefs/refuter.md` in
+view.
 
-That is your scope and it is closed: not the touched items, not another batch,
-not published content except as a **dependency you open in order to check a
-citation against it**.
-
-Read the reader's report first — `research/<run>-reader-<i>.md`. It ends with the
-count of items it actually opened and, where the set is interesting, which it
-skipped. Items on your list that the reader never opened are the ones where you
-are the only reader; spend your budget there.
-
-## What to do
-
-For each item: trace every numbered proof step against its cited facts, check
-every `[F#]`/`[A#]`/`[L#]` against the cited item **on disk**, and type-check
-every expression against the item's own definitions. `briefs/refuter.md` carries
-the standard and the two measured blind spots — the 34% citation-widening catch
-rate and the 87% well-formedness escape rate. Those two are the assignment.
-
-Boundary cases are in scope: the empty family, `n = 0`, `n = 1`, degenerate
-parameters, endpoints, and both directions of every iff. A contract row marked
-`not_applicable` over a case that is plainly applicable is a finding.
-
-## What you may not do
-
-- **No edits.** Not to items, not to contracts, not to manifests, not to a gate.
-  Your sandbox is read-only; this is stated so you do not spend time trying.
-- **No verdicts on the touched items**, even if you notice something. They are
-  already routed to the Alpha, which will see the same text.
-- **No judging.** Judging is step 7 and it is a different reader with a frozen
-  prompt.
-- Do not allege a dependency is too weak without opening it.
-
-## Output
-
-You cannot write a file and must not try. **Your final message is the report**:
-exactly the JSON object described by the schema appended to this dispatch, and
-nothing else. The dispatcher writes it to `research/<run>-refute-<i>.json`.
-
-An empty `flagged` is a real and common result; say so plainly rather than
-reaching for something to report. `opened` is what makes it interpretable.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Do not edit, judge, widen scope, or request permissions. Return only the required
+JSON. `opened` must equal `refuter_scope`, without duplicates; `not_opened` must
+be empty. The engine blocks on partial coverage. An empty `flagged` array is a
+valid result after a complete skeptical read.

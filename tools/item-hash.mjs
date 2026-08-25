@@ -59,6 +59,15 @@ export const stripJudgeStamp = (text) =>
 export const itemHashGuard = (text) =>
   createHash("sha256").update(stripVerification(text)).digest("hex");
 
+/** Hash only the mathematical interface downstream consumers can cite. */
+export const itemSurfaceHash = (text) => {
+  const withoutVerification = stripVerification(text);
+  const match = /^([\s\S]*?\n---\n)([\s\S]*)$/.exec(withoutVerification);
+  const surface = !match ? withoutVerification : match[1]
+    + match[2].replace(/^## (?:Scratch|Proof|Refutation|Counterexample|Verification)\b[^\n]*\n[\s\S]*?(?=^## |$(?![\s\S]))/gm, "");
+  return createHash("sha256").update(surface).digest("hex");
+};
+
 /** Full sha256 with only the `judge:` stamp excluded — the form a judge verdict
  *  row's `item_sha256` and `judge.mts --context-hash` are in. */
 export const itemHashJudge = (text) =>

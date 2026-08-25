@@ -13,7 +13,7 @@ of a single page's journey.
 All four normative docs are updated **in the same commit as the change they
 describe** (owner, 2026-07-27).
 
-Everything below is verified against the code as of 2026-07-31.
+Everything below is verified against the active stage table as of 2026-08-25.
 
 ---
 
@@ -21,12 +21,13 @@ Everything below is verified against the code as of 2026-07-31.
 
 | actor | model | does |
 |---|---|---|
-| **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
+| **owner** | human | final publication approval and owner-only published-content decisions; sets `verification.audited` |
 | **the engine** | `tools/autopilot/`, no model | batching, splicing, the **gate of record**, retries, blockers, ledgers, and every stage transition. It makes no mathematical judgment and never publishes |
-| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context (`[1m]` id), web tools** (owner, 2026-08-23; Sol from 2026-08-20, Claude Opus 5 from 2026-08-10, Sol before that) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk. **Since 2026-08-14 this is a GROUP role at steps 3 and 6a/6b** — see the row below |
-| **group Alpha / lead Alpha** (owner, 2026-08-14; assignment judged 2026-08-16) | same model and settings | A run's batches are divided among **group Alphas, at most three batches each** (`dispatch.mjs` alpha cap 4 since 2026-08-24; that cap times three batches is the ceiling on a run's batch count). **Which batches each owns is decided at stage `2-assign`**, by an Alpha, to minimise what crosses a group boundary; `tools/alpha-groups.mjs` validates it and fails on a category split that was avoidable. Each group Alpha runs **step 3** for its own batches, **steps 6a/6b** for them, and — since 2026-08-25 — **step 8** adjudication of the rejections against their items, writing only namespaced artifacts nobody else opens. The **lead Alpha** is one of them and additionally owns the stages that are global by nature: **step 4** propagation, **step 6c** cross-batch/cross-level citation audit, step 9, the receipts and step 10. Rationale: `ARCHITECTURE.md` §6 |
-| **Beta-n-i** | **Claude Opus 5 via the claude CLI, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
-| **independent Step-6 reader** | **Claude Opus 5 via the claude CLI, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
+| **Alpha-n** | current `alpha` assignment in `CLAUDE.md` | mathematical decisions and repairs at Steps 3, 4, 6, 8, 9, and reporting duties; it adjudicates staged refuter and judge evidence but does not spawn build Step-6 refuters |
+| **group Alpha / lead Alpha** | same assignment | one group per at most three Step-2-assigned batches at Steps 3, 6b, 7/8; the lead additionally owns global Steps 4, 6c, 9, receipts, and 10 |
+| **Beta-n-i** | current Beta assignment in `CLAUDE.md` | one per batch; scaffolds and authors its batch, and never audits its own content |
+| **independent Step-6 reader** | current `reader` assignment in `CLAUDE.md` | repair-capable audit of a batch it did not author; does not judge or adjudicate |
+| **Step-6 refuter** | current `refuter` assignment in `CLAUDE.md`, read-only | exact skeptical coverage of all reader-untouched and high/critical-risk items; returns structured evidence, never edits |
 | **judges** | **DeepSeek V4 Pro direct (`max`) and GPT-5.6 Terra** (owner, 2026-08-25; `JUDGE_LINEUP=deepseek+terra`) | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Terra runs at `xhigh` as an independent process but shares the OpenAI family with most work it screens, so weight same-family agreement accordingly. |
 
 ## Artifacts
@@ -677,175 +678,93 @@ they can state; it is opt-in and no longer the default.
 depends on 70, and orders 131 and 137 both depend on 129. Splitting there was
 correct. Splitting a single level is not.
 
-## Step 6 — Audit (independent readers, then Alpha-n)
+## Step 6 — Audit, route, repair, close
 
-**Model (owner, 2026-07-31, amended 2026-08-23): Beta-n-i AND Alpha-n are both
-Claude Opus 5, run through the claude CLI at `xhigh` reasoning with a
-1,000,000-token context window.** Do not run subscription audit work through ofox.
-Alpha's read-only proof-refuters and the independent Step-6 readers are Opus too,
-so **every reader in this step, and the Alpha adjudicating them, is one model** —
-which is a degree tighter than the one-family situation this paragraph described
-before 2026-08-23. Alpha ran on Claude Opus 5 from 2026-08-10 precisely to break
-a same-family arrangement; the owner withdrew that exception on 2026-08-20, and
-the 2026-08-23 capacity move collapsed the remaining model difference too. What
-is left outside the family is the
-DeepSeek judge lane at step 7 — treat a DeepSeek rejection as the only reading in
-the level that no other agent could have produced.
+Step 6 uses independent readers, read-only refuters, group Alphas, and one lead
+Alpha. A Beta never audits work it authored. The per-batch pipeline overlaps
+slow and fast batches without weakening the whole-level join:
 
-This is the final mathematical reading tier before the judge and the owner. It
-has three ordered parts.
+```
+6a-baseline → 6a-read → 6a-split → 6a-refute → 6a-collect → 6b-adjudicate
+→ 6b-baseline → 6c-edges → 6c-cross → 6d-close
+```
 
-**Contract and risk coverage (owner, 2026-08-01).** Independent readers update
-the contract belonging to the batch they audit whenever a repair changes proof
-text, citations, step numbers, or boundary handling. Before Step 7, Alpha merges
-the batch contracts and re-runs the three gates in `QUALITY-CONTROLS.md`. Every
-high/critical risk item receives an additional Alpha proof-refuter reading; the
-Alpha `risk_review` field records what that reading established or why a routing
-signal was inapplicable. This does not replace full reader coverage for any
-ordinary item.
+### 6a — read once, route exactly
 
-The engine owns both endpoints of the impact window: `pre-author` is taken at
-its own stage before Step 5, `post-6b` at its own stage after the 6b repairs,
-and the 6c gate diffs exactly `pre-author → post-6b` — an explicit right
-endpoint, because a defaulted one resolved to the baseline itself and the diff
-was empty by construction. `impact-audit.mjs` computes the transitive
-reverse-`deps` cone and direct citation consumers of every interface change in
-that window; Alpha records a concrete disposition for every listed item in
-`research/<run>-impact.json` before Step 7. A proof-only repair remains subject
-to its own audit and rejudge, but does not create a false downstream work queue.
+Before each reader starts, the engine hashes every assigned item, proof
+contract, manifest ownership row, page, and page metadata. The reader opens
+every assigned item/page and the dependencies needed to verify it, checks every
+mathematical carrier, and repairs licensed defects in its own in-flight batch.
+It may add a necessary intermediate result but may not delete an item, edit
+another batch, change `plan-spec.json`, or edit published content. A proposed
+withdrawal remains on disk for Alpha to inspect.
 
-For an owner-delegated published-dependency repair, take the baseline immediately
-before the repair, not merely at the start of authoring. Alpha appends the exact
-old and corrected text, source or elementary derivation, provenance transition,
-independent reviewer, impact-receipt path, and targeted paired-judge result to
-`research/<run>-published-dependency-repairs.md`. A Beta repair is reviewed
-by Alpha; an Alpha repair is reviewed by an independent Step-6 reader. Clear
-the stale `judge` block and obsolete `audited` stamp, then use the independent
-current `verified` block with `scope: published-dependency-repair` and
-`delegated_by: owner` only after that review. A `proved_here: false` item instead
-needs a fresh source check. Do not continue with an unresolved consumer queue.
+The reader checks exact hypotheses and citation direction, typing, title and
+Statement strength, zero/empty/degenerate cases, choice scope, witnesses,
+computations, and generated claims. Typical fatal catches include a dropped
+nonempty hypothesis, an undefined composite, a restriction with no embedding,
+division by zero at `h=0`, an `n=0` counterexample, or an overstrong title. The
+30-second gap rule applies only to a locally closable proof-step omission, never
+to a false claim or citation.
 
-**Alpha proof-refuters (owner, 2026-07-31).** For every future Alpha-n audit,
-Alpha dispatches one or more Claude Opus 5 proof-reading subagents with
-**read-only access** to the in-flight level and all published library content.
-Where the runtime exposes file permissions, grant no write capability; otherwise
-their prompt forbids `apply_patch`, file writes, and fixes. They work with the
-same adversarial standard as both step-7 judges: trace every proof step against
-its cited facts and dependencies, read those dependencies before claiming they
-are insufficient, and report only a specific logical, statement, hypothesis, or
-citation defect. They return evidence, never edits. Alpha-n remains the single
-adjudicator: it verifies every reported issue from disk, may refute a false
-positive, and alone may repair and gate in-flight content. The only public-item
-exception is the owner-delegated obvious-published-dependency protocol above.
+Code compares the pre/post composite hashes and routes:
 
-### 6a. Independent batch audits, in parallel
+- every changed item and page to group Alpha;
+- every unchanged item and every assigned page to the refuter;
+- every high/critical item to the refuter even if the reader changed it;
+- every uneditable reader finding to group Alpha as a structured obligation.
 
-**Who runs 6a and 6b (owner, 2026-08-14).** The **group Alpha** that owns a batch
-runs 6a and 6b for it — at most three batches per Alpha, the same division used
-at step 3, so the Alpha adjudicating a batch is the one that reviewed its
-scaffold. 6c below stays with the **lead Alpha** alone, because the edges it
-audits are exactly the ones no group can see. **Step 8 uses the same division**
-(owner, 2026-08-25) — see §"Step 8". The exact-hash ledger is still one file,
-and stays correct under four writers because it is append-only and the partition
-gives each Alpha disjoint items.
+The refuter opens its exact computed scope in a read-only sandbox. Its
+`opened`/`not_opened` arrays must form the exact scope with
+`not_opened=[]`; duplicates, omissions, extras, or out-of-scope findings block
+before Alpha. It returns evidence, never repairs or dispositions.
 
-Alpha assigns independent readers for each batch. A Beta that scaffolded or
-authored a batch is excluded from auditing it. Independent readers work in
-parallel and have write authority over their assigned in-flight
-batch files.
+### 6b — adjudicate only routed work
 
-For every authored item in the batch, the independent reader must:
+Each group Alpha decides exactly one obligation for every changed item, changed
+page, reader finding, and refuter finding in its assigned batches. It does not
+repeat the full read of ordinary untouched, unflagged items. It verifies from
+disk, accepts/amends/reverts reader work, confirms or refutes findings, repairs
+confirmed defects, updates contracts/manifests/provenance, completes risk
+reviews, and authors any proof it adds.
 
-1. **Verify every proof step of every proof skeptically.** Read the step, its
-   cited facts, and the cited dependency items from disk as a refuter would. A
-   step is clean only if the cited material mathematically licenses exactly what
-   the step claims.
-2. **Verify every dependency citation in the batch**, syntactically and
-   semantically: the target exists, is an allowed earlier/same-page dependency or
-   declared forward reference, and actually states the proposition for which it
-   is cited. The common failure mode is citing a true theorem for a stronger or
-   different claim than it makes.
-3. **Check component provenance and AI-generated truth risk.** For every
-mathematical-content item, including examples, counterexamples, false
-   statements, and mathematical remarks, verify `provenance.statement` and
-   `provenance.proof` separately against the actual source and edit history.
-   A material AI change to a source-backed statement/witness requires
-   statement `ai-altered`; an AI-generated proof does not taint a source-backed
-   statement. Reject every `deps` target whose Statement/Construction is
-   `ai-generated`, but permit literature-derived and AI-altered statements
-   regardless of proof provenance. For an AI-adapted target, reopen its exact
-   statement and source-check it against reputable literature whenever the
-   adaptation, hypotheses, conclusion, or conventions leave doubt. For an
-   AI-generated Statement/Construction
-   with any concrete truth concern, search for a relevant counterexample before
-   accepting a repair. Do not backfill legacy content.
-4. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
-   the fixed two-paragraph, under-150-words-per-paragraph A-summary contract and
-   the absence of an authored B-page body. No count in prose, no unsupported
-   position claim, and no corpus-wide scope denial.
-5. **Fix every defect it is licensed to fix**, not merely report it. If the fix
-   requires adding or deleting a lemma/proposition/theorem/corollary/example/
-   counterexample/false-statement, the independent reader may do so inside the in-flight level.
-   Anything it adds must be personally authored by that independent reader, including the full
-   proof when the kind requires one. Item ids remain immutable once on `main`.
-6. Delete any stale `verification.judge` block after a material rewrite, run
-   `tools/reflow.mts` and `tools/precheck.mts` on changed proof items, and run the
-   relevant gates locally. Do **not** judge; judging is step 7.
+The group report and `<run>-alpha-<g>-6b-decisions.json` bind each obligation to
+evidence, its final composite carrier hash, and closed defect-ledger rows. The
+gate rejects missing, extra, duplicate, stale, open, mismatched, double-owned,
+or unowned records. A gate-discovered defect receives a supplemental
+`gate:<defect-id>` decision rather than reopening completed obligations.
 
-Each independent reader reports to Alpha-n: every item changed; every added/deleted result and
-why; every proof step or citation defect found; unresolved concerns; and an
-explicit coverage statement saying that every proof step and every dependency
-citation in the batch was read, or naming any exception.
+A published dependency has one atomic pre-edit repair owner. The first group to
+claim it may edit; other groups may adjudicate their findings but cannot race on
+the file. Every finding retains its own exact handoff row. Step 8 later sends
+the repaired published item through both judge lanes; the repairer never
+self-certifies.
 
-### 6b. Alpha audit of independent-reader fixes
+### 6c/6d — close cross-batch and later changes
 
-After all independent readers finish, Alpha-n audits the mistakes and fixes they
-reported, plus the evidence reported by Alpha's read-only proof-refuters. Alpha
-verifies from disk, not from any report: changed item text, added or deleted
-results, dependency lists, page lists, component-provenance tags, stale judge blocks, and
-gate status.
-Alpha may confirm, refute, amend, revert, or extend a reported error or
-independent-reader fix. If Alpha adds a result, Alpha personally authors its proof.
+After all 6b work passes, one serialized stage reconciles batch manifests into
+the plan and freezes exact post-6b item/page carriers. Code then lists every
+cross-batch dependency, forward reference, and subsequent item/page change.
+The lead Alpha reads both ends of each cross-batch edge, resolves every forward
+reference by building its missing load-bearing lemmas or dropping the item with
+its recoverable coverage, and critically reads every post-6b carrier change.
+Same-batch and published-dependency citations already read at 6a are not bought
+again.
 
-### 6c. Alpha cross-batch and cross-level citation audit
+Every 6c verdict is evidence-bearing and bound to the current bytes. A proof-only
+edit, contract edit, metadata edit, addition, removal, or page edit therefore
+cannot silently bypass 6b. Page addition/removal changes build scope and is an
+owner blocker. The final battery checks routing, verdict application, ledger
+ownership/no-open state, plan/manifest agreement, repository policy, coverage,
+URLs, proof contracts, risk reviews, impact closure, and the audit manifest.
 
-Alpha-n then audits every dependency edge from the in-flight level that is not
-wholly inside one Beta batch:
-
-- cross-batch edges inside the level;
-- backward edges to already-published library content;
-- any declared forward reference, which should be few and explicitly justified.
-
-Alpha has full read access to all published content. For each edge, Alpha reads
-the source item's use and the target item on disk and verifies that the citation
-is semantically and mathematically accurate: right statement, right hypotheses,
-right direction, no hidden stronger claim. Alpha fixes failures directly when
-possible and may add/delete in-flight results as needed, personally authoring any
-proof it adds.
-
-If that reading discovers an obvious falsehood in the published dependency
-itself, Alpha may apply the narrowly delegated published-dependency repair rather
-than merely reporting it. The exact source or elementary derivation, dedicated
-touch baseline, full impact receipt, independent certification, provenance
-transition, and targeted paired rejudge remain mandatory.
-
-The mechanical backstop is `tools/audit-manifest.mjs`: generate the per-batch and
-cross-edge checklist, including `deps`, `justified_by`, `forward_refs`, and
-`external_refs`, then reconcile Alpha's report against it so omission is visible.
-The script enumerates relationships; the semantic verdict is the Beta/Alpha
-reader's responsibility.
-
-**Fatal, must fix:** mathematical inaccuracy; logical invalidity; a step not
-licensed by its cited facts; citing an item for a claim it does not make; a title
-or Statement asserting more than the proof gives; unlicensed forward references;
-and any cross-level citation whose target is not actually strong enough.
-An omitted bridge a competent human reader closes in 30 seconds is nonfatal:
-record or polish it if useful, but do not escalate it as a fatal proof defect.
-
-**Interaction with the twice-touched rule.** A repair here to an item already
-repaired earlier takes it to two touches and escalates to a personal audit by the
-lead Alpha. Alpha-n reports such repairs in a separate list and still makes
-necessary fixes.
+Both Alpha stages budget three attempts per named item per gate; 6b and 6c have
+separate counters. Exhaustion blocks that item instead of re-reading completed
+neighbours or consuming a level-wide counter. Finally `6d-close` reruns the
+exact Step-6 checks and freezes the scope files, reader/refuter artifacts,
+Alpha reports/decisions, 6c verdicts, published-repair ownership, and canonical
+6a/6b/6c ledger rows. Later stages may repair an item but cannot rewrite what
+Step 6 actually decided.
 
 ## Step 7 — Judge (after the audit, one sweep, on final text)
 
@@ -1035,7 +954,8 @@ its batch's conventions.
 
 Published pages are live on the site, no group owns them, and leaving a known
 falsehood live because it was out of the run's scope is not a disposition (owner,
-2026-08-25). The Alpha repairs it and appends to
+2026-08-25). The Alpha repairs it, writes a namespaced temporary row, then uses
+`tools/published-repairs.mjs append` to append to the shared
 `research/<run>-step8-published-repairs.jsonl`:
 
 ```

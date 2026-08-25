@@ -87,9 +87,9 @@ test('--json without --output keeps stdout a pure JSON document', () => {
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('the mathlib stage declares a liveness probe on the audit-manifest gate', () => {
-  const src = readFileSync(join(REPO, 'tools', 'autopilot', 'stages', 'mathlib.mts'), 'utf8');
-  const gateBlock = src.slice(src.indexOf("gate('audit-manifest'"));
-  assert.match(gateBlock.slice(0, 600), /liveness:\s*\{[^}]*min:\s*1/,
-    'the 6c audit-manifest gate must carry a liveness probe');
+test('the mathlib stage declares a liveness probe on the audit-manifest gate', async () => {
+  const { stages } = await import('../stages/mathlib.mts');
+  const stage: any = stages.find((entry: any) => entry.id === '6c-cross');
+  const gate = stage.gates({ run: 'r', repo: REPO }).find((entry: any) => entry.id === 'audit-manifest');
+  assert.equal(gate?.liveness?.min, 1, 'the 6c audit-manifest gate must carry a liveness probe');
 });

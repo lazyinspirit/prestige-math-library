@@ -39,7 +39,11 @@ job is one of them.
 | `tools/autopilot/bin/autopilot.mts` | the CLI — everything below runs through it |
 | `tools/autopilot/src/executor.mts` | the loop: coverage, dispatch, gates, retries, blockers |
 | `tools/autopilot/src/spec.mts` | validates the stage table before a run may start |
-| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 19 stages, their units, gates and repair loops |
+| `tools/autopilot/stages/mathlib.mts` | canonical domain stage table; imports the active Step-6 factory from `mathlib.step6.mts` |
+| `tools/step6-scope.mjs` | exact per-batch Step-6 routing, refuter coverage, Alpha decisions, and ledger closure |
+| `tools/cross-group-edges.mjs` | post-6b carrier currency, cross-batch edges, forward references, and applied 6c verdicts |
+| `tools/step6-close.mjs` | immutable Step-6 reports, decisions, handoffs, and canonical ledger receipt |
+| `tools/published-repairs.mjs` | single-owner published repair claim and locked certification append |
 | `tools/autopilot/bin/watchdog.sh` | restarts the engine if the process dies |
 | `tools/dispatch.mjs` | spawns one briefed agent role as a plain process |
 | `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |

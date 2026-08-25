@@ -137,10 +137,12 @@ and an update here and in `ARCHITECTURE.md`.
 `tools/risk-report.mjs` scores transparent structural signals: dependency and
 proof-step count, biconditionals, existence/well-definedness, boundary terms,
 induction, quotient constructions, and limiting/completeness language. A score
-of at least 5 is high risk; 8 is critical. It routes the item to an additional
-Alpha proof-refuter and requires an Alpha `risk_review` disposition before Step
-7. The score is a triage signal, not a proof defect and not a license to skip
-the normal independent-reader audit.
+of at least 5 is high risk; 8 is critical. After the independent reader,
+`step6-scope split` evaluates the reader-updated batch contract and includes
+every high/critical item in the engine's read-only refuter stage, even when the
+reader edited it. Exact refuter coverage and an Alpha `risk_review` are required
+before Step 7. The score is a triage signal, not a proof defect and never skips
+the ordinary reader audit.
 
 The disposition is `{status: "complete", reviewer, notes}` and the gate reads
 **`notes`**. On `frontier-15`, 33 of 125 reported `risk-review-missing` items

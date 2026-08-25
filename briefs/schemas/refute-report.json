@@ -1,11 +1,12 @@
 {
   "type": "object",
   "additionalProperties": false,
-  "required": ["batch", "opened", "flagged"],
+  "required": ["batch", "opened", "not_opened", "flagged", "coverage_note"],
   "properties": {
     "batch": {
       "type": "string",
-      "description": "The batch number this report covers, as a string."
+      "description": "The batch number this report covers, as a string.",
+      "minLength": 1
     },
     "at": {
       "type": "string",
@@ -13,12 +14,12 @@
     },
     "opened": {
       "type": "array",
-      "description": "Every item id you actually opened and read. This is the denominator that makes a clean verdict interpretable; an item you did not open is not a clean item.",
+      "description": "Every item or page id in the computed refuter_scope, exactly once.",
       "items": { "type": "string" }
     },
     "not_opened": {
       "type": "array",
-      "description": "Item ids in your scope you did not reach, if any. Say so rather than leaving it to be inferred.",
+      "description": "Item ids in scope you did not reach. Step 6 blocks unless this is empty.",
       "items": { "type": "string" }
     },
     "flagged": {
@@ -29,10 +30,11 @@
         "additionalProperties": false,
         "required": ["id", "location", "defect", "evidence", "severity"],
         "properties": {
-          "id": { "type": "string", "description": "The item id. Must be in your untouched scope." },
+          "id": { "type": "string", "minLength": 1, "description": "The item or page id. Must be in the computed refuter_scope." },
           "location": {
             "type": "string",
-            "description": "Exact location: Statement, Definition, a numbered proof step such as 2.1, a Facts entry such as [F3], the Remark, or the title."
+            "description": "Exact location: Statement, Definition, a numbered proof step such as 2.1, a Facts entry such as [F3], the Remark, or the title.",
+            "minLength": 1
           },
           "defect": {
             "type": "string",
@@ -41,7 +43,8 @@
           },
           "evidence": {
             "type": "string",
-            "description": "Quote the dependency's text from disk, or give the counterexample, and say why it does not license what is written. A finding with no evidence costs an Alpha a round to discover it was not one."
+            "description": "Quote the dependency's text from disk, or give the counterexample, and say why it does not license what is written. A finding with no evidence costs an Alpha a round to discover it was not one.",
+            "minLength": 1
           },
           "severity": {
             "type": "string",
@@ -53,7 +56,8 @@
     },
     "coverage_note": {
       "type": "string",
-      "description": "Plain prose: what you read fully, what you sampled, and anything you could not check."
+      "description": "Concise account of what you checked and any limitation.",
+      "minLength": 1
     }
   }
 }

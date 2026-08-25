@@ -1274,14 +1274,15 @@ burned a step-8 repair round), plus a liveness floor so zero rows never
 passes. The 10-contract-close gate adds `--no-open`: step 9's sweep duty closes
 each open row whose recorded condition is met, and a row still open at the
 terminal stage is unfinished work the owner must read, whatever its severity.
-**The step-6 COUNT is auditable** (owner directive, 2026-08-17): each 6b group
-writes `<run>-alpha-<g>-6b-findings.json` — one row per adjudicated finding
-(`briefs/alpha.md` has the schema) — and `check` compares the asserted
-confirmed-fatal count against the 6a/6b/6c-caught rows. Adoption-triggered:
-once any group's file exists every group needs one and the counts must
-reconcile; a pre-contract run gets a note. On frontier-15 one group accepted
-58 fatal reader findings, wrote 13 rows, satisfied the exists-only clause,
-and the run's headline understated its fatal count threefold. Relatedly, the
+**Step-6 ownership is auditable** (rebuilt 2026-08-25): each 6b group writes
+`<run>-alpha-<g>-6b-decisions.json`. `step6-scope check --phase adjudicate`
+derives the exact changed-item/page and reader/refuter-finding obligations,
+requires each once, binds every decision to closed defect-ledger rows, and
+rejects incompatible double ownership or an unowned row. A 6c final check
+refuses all open Step-6 rows. This supersedes the count-only
+`-6b-findings.json` contract, which could prove only that enough rows existed,
+not that the right finding owned the right row. Historical files remain
+evidence but satisfy no new run. Relatedly, the
 twice-touched instrument now sees: `9-scope` and `10-snapshot-v2` at their hard
 boundaries (guarded so a resumed run never mislabels a later tree; the
 `post-tau-v2` snapshot went with the visual lane on 2026-08-23, and
@@ -1294,6 +1295,55 @@ leads with caught/prevented/escaped, never a bare total
 "reconstructed"` and the historical `check` against frontier-14 is
 deliberately red where the record disagrees with itself — recorded, never
 force-fitted.
+
+### 3.11h-2 Exact Step-6 routing — `step6-scope.mjs` (2026-08-25)
+
+**Failures prevented:** repeated full-level Alpha reads, unverifiable refuter
+coverage, parallel scope-file overwrite, silent post-adjudication edits,
+concurrent published-item repair, and ledger/report evidence that can be
+retargeted after Step 6 closes.
+
+`mathlib.step6.mts` supplies the active stages to the canonical table:
+
+```
+6a-baseline → 6a-read → 6a-split → 6a-refute → 6a-collect → 6b-adjudicate
+→ 6b-baseline → 6c-edges → 6c-cross → 6d-close
+```
+
+The first six stages form one per-unit pipeline. Each batch owns independent
+composite pre/post hashes and `<run>-step6-scope-<batch>.json`; the composite
+covers item bytes, proof contract, semantic manifest ownership, page bytes,
+page metadata, and relative item order. `split` derives changed/unchanged
+carriers and structured reader findings. `refuter_scope` is every unchanged
+item, every high/critical item, and every assigned page. `collect` requires its
+exact `opened`/`not_opened` partition with `not_opened=[]` before group Alpha can
+act.
+
+Group Alpha receives only changed items/pages and reader/refuter findings.
+`-6b-decisions.json` names each stable obligation once, carries evidence and a
+mechanically stamped current carrier hash, and owns matching closed 6a/6b ledger
+rows. Supplemental gate defects use `gate:<defect-id>`. Exact checks reject
+missing/extra/duplicate/stale decisions and absent/open/mismatched/double-owned/
+unowned rows. Published repairs use an atomic pre-edit claim plus locked JSONL
+append, so parallel groups cannot edit one public item concurrently.
+
+`6b-baseline` serially reconciles the plan and freezes exact post-6b carriers.
+`6c-edges` computes cross-batch citations, forward references, and changes from
+that boundary. `6c-cross` requires current-hash verdicts for every listed or
+later-appearing obligation—including proof-only, contract, manifest, and page
+changes—without re-reading unchanged same-batch or published citations. The
+final battery also checks applied dispositions, plan/manifest agreement, impact,
+contracts, risk, policy, coverage, URLs, and no open Step-6 row. The 6b and 6c
+per-item/per-gate retry namespaces are separate.
+
+`step6-close.mjs` reruns exact closure and writes the version-2 `6d-close`
+receipt. It hashes the exact artifact set, canonical run-specific 6a/6b/6c
+ledger projection, published-repair handoffs/claims, and reader/Alpha reports.
+Later item repair is allowed; rewriting historical Step-6 evidence is not.
+
+`<run>-step6-cutover.json` is the write-once migration for a run that completed
+legacy Step 6 before these stages existed. It is bound to durable gate
+timestamps and legacy evidence; future runs execute every rebuilt stage.
 
 ### 3.11i Full closure — `9-close`, `10-close-v2`, obligations (owner, 2026-08-17)
 
@@ -1686,7 +1736,7 @@ plain, because `touchlog.mjs` must still read it on resume.
 `research/BUILD-AUDIT-INDEX.md` is the concise standing record of what each
 build and wave did and where its evidence lives.
 
-**Alpha's lane cap is 3 (owner, 2026-08-14): GROUP ALPHAS.** It was 1, with the
+**Alpha's lane cap is 4 (owner, raised 2026-08-24): GROUP ALPHAS.** It was 1, with the
 stated reason "single writer of the prose scaffolds" — which is a **step-4**
 invariant that the cap was enforcing at every stage. One Alpha per at most
 **three** Beta batches now runs step 3 and steps 6a/6b, so no single agent reads a
@@ -1702,7 +1752,7 @@ and the rule lives in `LEVELS.md` §"Step 3"/§"Step 6", not in this number:
 | stage | why the LEAD Alpha alone |
 |---|---|
 | step 4 propagation | the shared `research/plan-*.md` prose scaffolds have one writer; two overwrite each other silently |
-| step 6c cross-batch/cross-level citation audit | the edges that are not inside any one batch are global by definition, so no group can see them |
+| step 6c cross-batch citation, forward-reference, and post-6b change audit | code derives obligations spanning batches plus later additions/removals/page edits; the lead owns their single verdict file and final Step-6 battery |
 
 **Step 8 left this table on 2026-08-25 (owner).** It was here on the reasoning
 that `step8-guard.mjs` gates one `pre-step8` baseline against one exact-hash
@@ -2162,9 +2212,11 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | file | actor | carries |
 |---|---|---|
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | reputable-web-source research ledger, full published-corpus read access, plan order, dependency closure, namespaced writes, id reuse, seams, per-pair proof decomposition, corollary pass, 100-item review ceiling |
-| `beta-step8-audit.md` | independent Step-6 reader, **step 6a batch auditor** (historical filename retained) | exhaustive audit of a batch the reader did not author; fixes; added/deleted in-flight results |
 | `authoring.md` | the same Claude Opus 5 Beta-n-i that scaffolded the batch, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
-| `alpha.md` | Alpha-n, steps 4, 6, and 8 | dispatches read-only skeptical proof-refuters; adjudicates their and judges' findings; propagates, audits independent-reader fixes, and audits cross-batch and cross-level references |
+| `reader.md` | independent Step-6 reader | repairs and reports its batch; exact citation, well-formedness, boundary, provenance, and non-proof prose checks |
+| `refuter.md` | read-only Step-6 refuter | schema-bound exact coverage of untouched and high/critical items; evidence only |
+| `alpha-step6.md` | Step-6 group and lead Alphas | adjudicates exact reader/refuter obligations, repairs mathematics, and closes computed cross-batch and post-6b work without loading unrelated stage instructions |
+| `alpha.md` | Alpha-n, steps 3–5 and 7–10 | stage-specific review, judge adjudication, repair, propagation, and closure outside Step 6 |
 | `codex-judge.md` | DeepSeek V4 Pro + Claude Opus 5 judges, step 7 (historical filename, predating the lane moves) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
 | `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
 | `audit-beta.md` | Audit-Beta, audit steps A1/A2/A4 (`AUDIT-WORKFLOW.md`) | provenance determination table, evidence ledger row contract, citation-precision duties, full proof-contract capture (D1), repair classes and A3 approval boundary |
@@ -2281,9 +2333,8 @@ gitignored and does not travel with a checkout, so a fresh clone — or any mach
 but this one — has neither backstop. The briefs are the only copy that ships.
 Belt and braces is the correct redundancy here, not duplication to be tidied away.
 
-`briefs/alpha.md` additionally carries a **pass-it-on** clause, because Alpha-n
-briefs independent Step-6 readers at step 6 and those prompts may be composed by Alpha, not by
-this repo.
+Step-6 readers and refuters are engine-dispatched from their own briefs. Alpha
+does not compose or duplicate those prompts.
 
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)
 

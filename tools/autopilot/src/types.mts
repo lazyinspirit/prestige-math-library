@@ -84,6 +84,9 @@ export interface GateResult {
   checked?: number;
   code?: number | null;
   output?: string;
+  /** Per-(gate,item) repair routing. Present only while a stage hook runs. */
+  liveItems?: string[];
+  exhaustedItems?: string[];
 }
 
 export interface Stage {

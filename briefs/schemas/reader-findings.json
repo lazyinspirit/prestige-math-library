@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch", "findings", "coverage_note"],
+  "properties": {
+    "batch": { "type": "string", "minLength": 1 },
+    "findings": {
+      "type": "array",
+      "description": "Confirmed or suspected defects the reader was not licensed to edit. Repaired findings belong in the markdown report and byte-diff route, not here.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "subject_type", "location", "defect", "evidence", "severity"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "subject_type": { "type": "string", "enum": ["in-flight-item", "page", "published-dependency"] },
+          "consumer_id": { "type": "string", "minLength": 1, "description": "Required for a published dependency: an assigned item whose dependency closure reaches it." },
+          "location": { "type": "string", "minLength": 1 },
+          "defect": {
+            "type": "string",
+            "enum": ["false-claim", "unlicensed-inference", "missing-hypothesis", "citation-inaccurate", "ill-formed", "overstrong-title-or-statement"]
+          },
+          "evidence": { "type": "string", "minLength": 1 },
+          "severity": { "type": "string", "enum": ["fatal", "nonfatal"] }
+        }
+      }
+    },
+    "coverage_note": { "type": "string", "minLength": 1 }
+  }
+}

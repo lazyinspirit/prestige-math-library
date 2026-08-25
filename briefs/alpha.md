@@ -48,14 +48,12 @@ why; read it.
 | stage | who |
 |---|---|
 | step 3 scaffold breadth/depth review | your group's batches; namespaced report |
-| step 6a reader assignment, 6b adjudication | your group's batches; namespaced report |
 | step 7 pre-read | your group's pairs, read-only, while the judges sweep |
 | step 8 adjudication | the rejections against **your group's items** |
-| step 4, 6c, 9, receipts, 10 | **lead Alpha alone** |
+| step 4, 9, receipts, 10 | **lead Alpha alone** |
 
 Those last are single-agent **by rule, not by lane cap**. Two concurrent writers
-into a shared prose scaffold overwrite each other silently, and 6c audits exactly
-the edges lying outside any one batch, so no group can see them.
+into one shared artifact can overwrite each other silently.
 
 **Step 8 left that list on 2026-08-25** (owner). It was there on the reasoning
 that it gates one `pre-step8` baseline against one exact-hash ledger, and that
@@ -71,9 +69,9 @@ every category in one context window, the last of them read on the least of it.
 The 30-second line moving between readers is a real cost and the smaller one —
 and each of you at least draws it holding one coherent subject.
 
-A group Alpha finishes at 6b and writes its report; the engine's `3-fix` stage
-routes findings back to the owning Beta mechanically. The lead is a group Alpha
-*as well*: do your own group's 3/6a/6b first, then the global stages.
+The engine's `3-fix` stage routes Step-3 findings back to the owning Beta
+mechanically. The lead is a group Alpha as well: finish your group work before
+the global stages.
 
 Why: one Alpha reading a whole level was `frontier-12`'s 454 items across 24
 pages, and what that spends is attention, not context. `ARCHITECTURE.md` §6.
@@ -177,34 +175,6 @@ replacement.
 
 Delete `verification.judge` after a material rewrite. **You never judge** — the
 configured paired judge is step 7.
-
-## Your read-only proof-refuter subagents (owner, 2026-07-31)
-
-Dispatch one or more before your own adjudication at every step-6 audit. They are
-`--sandbox read-only` and **never write content or apply a fix**; they report
-evidence, you adjudicate. Their standard is the step-7 judges' standard.
-
-Instruct each to: trace every proof step against the exact cited facts; **open
-the cited item before saying a fact is too weak**; report only a concrete false
-claim, unlicensed inference, missing hypothesis, scope/quantifier error or
-inaccurate citation; and accept an item when no specific defect exists — a terse
-but licensed move is not an error.
-
-**Point them at the two measured blind spots** (frontiers 15-17). A citation
-aimed at the WRONG ITEM is caught 95% of the time; one that OVERSTATES THE RIGHT
-ITEM only 34% — so require the cited Statement to be read word against word with
-the restatement, not merely resolved. And require WELL-FORMEDNESS to be checked
-as its own pass: does each composite exist for the arrows as declared, do
-subscripts line up, is a restriction written against a domain the item named.
-That class escapes step 6 **87%** of the time, higher than anything else, and it
-is symbol-level rather than deep — it is missed because nobody is looking. Require id, exact location, and the dependency
-text or counterexample behind every finding. For an AI-generated item, require a
-targeted counterexample search when a concrete truth concern arises: a plausible
-repaired proof never substitutes for testing the Statement.
-
-You are the **sole adjudicator**. Verify every report from disk and confirm,
-refute with evidence, or apply the fix yourself. **A reader's conclusion never
-edits content directly.**
 
 ## Step 3 — scaffold breadth and depth
 
@@ -317,90 +287,6 @@ mechanically. It refuses on a `requires` disagreement, a differing item list, an
 oversize page or a duplicate id, and the engine raises a blocker for you to
 adjudicate. That adjudication is the cognitive half; the transcription is not.
 
-## Step 6 — audit
-
-**6a.** The ENGINE dispatches one independent reader per batch
-(`briefs/reader.md`); you never spawn readers — a second reader writes over
-the first one's report, which is how eleven findings died once. Your 6a role
-is the exclusion check: flag any reader assignment that touches a batch its
-agent scaffolded or authored.
-
-**6b.** After every reader and refuter report, adjudicate from disk: changed
-items, page files, dependency lists, provenance tags, added/deleted results,
-stale judge blocks, gate output. Confirm, refute, amend, revert or extend as the
-evidence warrants. If you add a result, author its proof.
-
-**This is where repairs are cheapest, so make them here.** The text is unfrozen
-and no verdict exists to void, so all four repairs are open at no cost: rewrite
-the failing step, replace a proof whose structure is wrong, correct a false or
-overstrong Statement, or split a long proof into named intermediate lemmas. A
-defect you leave for step 8 costs a frozen-verdict adjudication, a rejudge and a
-resampled refuter; the same defect fixed here costs an edit.
-
-Verify every A-page summary is **exactly two nonempty prose paragraphs, each
-under 150 words** — background and used dependencies first; main definitions,
-theorems and logical progression second. **Every B page has no authored summary
-body.**
-
-**6b.0 — harvest faithfulness.** `coverage-checklist.mjs` cannot prove a harvest
-is honest, and a Beta enumerating six of a chapter's twenty theorems passes it
-cleanly. Open the actual sources at the stated `locator` and ask: does `contents`
-reflect the range; is each decline true; is the pair's **primary** backing
-genuinely a textbook, monograph or full note set (two encyclopedia entries dressed
-as `lecture-notes` fails); does anything standard appear in **no** source's
-contents at all — the signal that the sources themselves were too thin. A
-faithfulness failure is a **step-6 repair**: add the results now, while the text
-is unfrozen and no verdict exists to void.
-
-**6b.1 — contracts and risk.** Each reader updates its own batch proof-contract
-whenever it changes proof text, citations, step numbers or a boundary case.
-When you accept a reader's added or deleted item, apply the licensed plan
-update yourself, naming the batch: `node tools/splice-plan.mjs --run <run>
---batch <the batch number> --update`
-— the splice-verify gate fails until the plan and the manifest agree again. For
-every `high`/`critical` item in `risk-report.mjs`, give at least one additional
-refuter the item, its contract and its sources, then record a complete
-`risk_review` with your adjudicated disposition. A finite-smoke pass is bounded
-falsification evidence and never replaces your reading.
-
-**A templated `not_applicable` boundary row is not a disposition.** On
-`frontier-13` two false template rows each hid a fatal defect; on `frontier-14`,
-three did — three times out of three that anyone looked.
-
-**Every adjudicated finding becomes a defect-ledger row, written in the same
-act as the disposition**: assemble rows as JSON and run
-`node tools/defect-ledger.mjs append --file <rows.json>` (never inline JSON
-through a shell). One row per DEFECT — two readers or two lanes on one defect
-is one row. Schema and closed enums are in the tool's header; `unknown` is the
-honest value for the introduced-at fields. The step-6 rows are the ones no
-other artifact holds, and the `check` gate at steps 8–10 refuses a ledger
-without them.
-
-**6c — cross-batch and cross-level edges.** Audit every relationship not wholly
-inside one batch: cross-batch edges, backward edges to published content,
-well-definedness discharges, external mentions, every declared forward
-reference. Read the source use and the target item on disk; verify right
-statement, hypotheses, direction, and no hidden stronger claim. **A declared edge
-list of zero is a finding, not a clean bill** — ask whether two same-level pages
-should connect but are duplicating or using prose instead of a citation.
-
-**6c — the impact receipt.** The engine snapshots `post-6b` before your
-dispatch; its gate diffs `pre-author → post-6b` and validates
-`research/<run>-impact.json` against exactly that computed scope. Generate the
-template first —
-
-```
-node tools/impact-audit.mjs --touches research/<run>-touches.json \
-  --from pre-author --to post-6b --template research/<run>-impact.json
-```
-
-— then set `reviewer` and give EVERY listed consumer a real disposition
-(`still-licensed` | `repaired` | `not-load-bearing`, each with a concrete
-note; a pending row is a red gate, and a templated note is the boundary-row
-defect in a new file). If the gate runs before you generate it, it writes the
-same template there and fails with the remedy. Your own 6c edits land after
-the `post-6b` snapshot by construction; the step-8 window measures them.
-
 ## Step 7 — pre-read your group, while the judges sweep
 
 Before step 8 you are dispatched **read-only** against your own group's pairs,
@@ -429,9 +315,9 @@ at steps 3 and 6. `research/<run>-alpha-<label>-step8.task.md` is your scope; it
 names your pages, every item you own, the edges that leave your boundary and your
 exact rejection rows. No rejection has two adjudicators and none has none.
 
-You are dispatched **fresh** here — nothing from your step-3 or step-6 self is in
-context. That is deliberate: a reader who already decided a proof was fine is the
-worst-placed reader of an objection to it.
+The engine resumes your rejection-blind Step-7 reader session when its durable
+session id exists; otherwise it dispatches the same rendered task fresh. Step-3
+and Step-6 context is never reused.
 
 **Read the whole library; write only inside your group** — plus published
 content, which belongs to no group and is treated separately below. Your sandbox
@@ -448,7 +334,8 @@ batch's conventions rather than being acted on by one who does not.
 
 **A defect in a PUBLISHED item — repair it, then send it to both judges.**
 Published pages are live. An unambiguous falsehood in a published Definition,
-Statement, Fact or equally load-bearing prose is repaired, with a row in
+Statement, Fact or equally load-bearing prose is repaired, with a row appended
+through `tools/published-repairs.mjs` to
 `research/<run>-step8-published-repairs.jsonl`:
 `{kind:"repaired", id, group, found_via, pre_sha256, defect, correction_basis}`.
 `pre_sha256` is the guard form of the pre-edit text, and without it the edit
@@ -456,6 +343,10 @@ reads as unlicensed. `8-rejudge` then sweeps that item through **both** lanes an
 `tools/step8-scope.mjs published` blocks until both have answered — that is the
 certification, since published content has no step-6 reader left and no author
 certifies its own repair.
+
+Write rows to a namespaced temporary JSON file, then run `node
+tools/published-repairs.mjs append --run <run> --file <rows.json>`. Never edit
+the shared JSONL directly.
 
 The replacement is the source-checked statement or a directly checkable
 elementary correction. Never an unsupported nontrivial theorem, never a choice
@@ -480,7 +371,7 @@ outcome classifies `defect_type` as `logic`, `dependency_citation` or `other`.
 `item_sha256` is the sha256 of the normalized item text — the file with its
 `verification:` block removed — as it stood when you adjudicated.
 
-With each adjudication, its defect-ledger row (same act, same rule as 6b): a
+With each adjudication, write its defect-ledger row in the same act: a
 `confirmed_fatal` yields a row whose `adjudication_ref` carries your
 `item_sha256`, and the gate demands exactly one row per fatal. An open fatal
 you decline to repair is `disposition: open` — the gate cross-checks it
@@ -582,43 +473,10 @@ rejection rates. Nothing you write flips `status`; that remains the owner's.
 
 ## Report
 
-1. Reader reports received, and whether their coverage was complete.
-2. Every reader fix you audited, accepted, amended or rejected.
-3. Every refuter finding, its evidence, and your disposition.
-4. Every cross-batch/cross-level edge audited, or the manifest path and an
-   explicit statement that all non-same-batch edges were read.
-5. Items and pages changed, added or deleted; for any added result, state that
-   you authored the proof.
-6. Twice-touched items.
-7. Honest remaining gaps.
-8. The impact-audit receipt and the manifest-bound coverage receipt, with any
-   planned-versus-authored dependency reconciliation and why it was necessary.
-9. The consolidated **fatal-error ledger**: per publish-blocking error, the
-   id/file, defect type, location and exact disposition. Reconcile duplicates
-   across reports without losing an affected id. Exclude mechanical and
-   30-second edits.
-10. The **course-pathway receipt**, `research/<run>-pathway.json`, written by
-    `tools/pathway-sync.mjs` before you run: the pages it placed and the part
-    each landed in, the parts whose briefs now cover material they do not
-    mention, and any category with published pages and no `_pathway.md`. The
-    sync never writes prose, so a brief that gained a page needs a sentence from
-    the owner, and this pause is the only place to ask for it. Name the pages,
-    not a count.
-
-**Fatal defects are fixed, not listed**, unless outside your write boundary or
-requiring an owner decision.
-
-**A 6b adjudication writes TWO artifacts**: the prose report and its machine
-half, `research/<run>-alpha-<g>-6b-findings.json` — a JSON array with one row
-per adjudicated reader or refuter finding:
-`{"id": "<item-id>", "verdict": "confirmed_fatal" | "confirmed_nonfatal" |
-"false_positive", "source": "<the finding's reference, e.g. R2-17>"}`.
-The defect ledger's completeness is CHECKED against these counts: on
-frontier-15 one group Alpha accepted 58 fatal reader findings and wrote 13
-ledger rows, no gate could see it, and the run's headline understated its
-fatal count threefold. A `confirmed_fatal` row here and its
-`research/defect-ledger.jsonl` row remain one act — this file does not
-replace the ledger, it is what makes the ledger auditable.
+The active task file owns its artifacts and required fields. Report evidence,
+decisions, edits, and blockers once; do not repeat role instructions or narrate
+routine commands. Fix fatal defects unless authority or mathematics makes them a
+real blocker.
 
 **Repair rounds inherit their predecessors' work.** If your task answers a
 failing gate that earlier rounds already worked (labels ending in a round

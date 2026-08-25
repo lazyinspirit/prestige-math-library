@@ -1386,31 +1386,43 @@ export class Executor {
   /**
    * The item ids a gate's own output names.
    *
-   * Every item-scoped gate in this repo prints `ERROR <code> [<item-id>]:` —
+   * Every subject-scoped gate in this repo prints `ERROR <code> [<id>]:` —
    * content-policy, proof-contract, finite-smoke, risk-report, boundary-audit
    * and citation-fidelity all do. The bracket form is also used for CITATION
    * labels (`[F1]`, `[L3]`, `[step 2.1]`), so the shape test is what separates
    * them: a real id is lower-case kebab with at least three segments
-   * (`cor-integers-requiring-four-squares`), and no citation label comes close.
+   * (`def-group`, `thm-zorn`, `compactness-page`). The line-anchored form
+   * includes page subjects; the closed item-prefix fallback finds item ids in
+   * older diagnostics without mistaking citation labels for subjects.
    *
-   * Returns an empty array for a plan- or level-scoped gate — `validate-plan`,
-   * `manifest-integrity`, `splice-verify`, `pathcheck`, `merge-contracts`,
-   * `gate-liveness` — and the caller then keys the counter on the gate alone.
-   * Reading ids out of the output rather than asking the gate for them is
-   * deliberate: it needs no change to sixty tools, and a gate that grows an id
-   * is picked up for free.
+   * Older plan and impact tools use either `  [code] <item>/page ...` or
+   * `ERROR code: ... <item>` rather than the canonical bracketed subject. Those
+   * concrete subjects still receive independent budgets. A genuinely level-
+   * scoped failure returns no id and is keyed on the gate alone.
    */
   static itemsNamedBy(failure: GateResult): string[] {
     const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
     const ids = new Set<string>();
-    for (const m of text.matchAll(/\[([a-z][a-z0-9]*(?:-[a-z0-9]+){2,})\]/g)) ids.add(m[1]);
+    const typed = /\b((?:def|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*)\b/g;
+    for (const line of text.split(/\r?\n/)) {
+      if (/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)\s+\([^)]*\.pages\.json\):/i.test(line)) {
+        ids.add(line.match(/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)/i)![1]);
+        continue;
+      }
+      if (!/^ERROR\b|^\s*\[[a-z0-9-]+\]\s+/i.test(line)) continue;
+      const bracketed = line.match(/^ERROR [^\n]*?\[([a-z0-9]+(?:-[a-z0-9]+)+)\]/);
+      if (bracketed) { ids.add(bracketed[1]); continue; }
+      for (const match of line.matchAll(typed)) ids.add(match[1]);
+      for (const match of line.matchAll(/\bpage\s+([a-z0-9]+(?:-[a-z0-9]+)+)\b/gi)) ids.add(match[1]);
+      for (const match of line.matchAll(/\bbatch\s+\d+\s+([a-z0-9]+(?:-[a-z0-9]+)+)\s+declares\b/gi)) ids.add(match[1]);
+    }
     return [...ids];
   }
 
-  /** `gateAttempts` key. NUL-joined for the same reason the gate dedupe key is:
-   *  no id can contain it, so two different pairs cannot collide. */
-  private static attemptKey(gateId: string, item: string): string {
-    return `${gateId}\u0000${item}`;
+  /** `gateAttempts` key. Step 6b and 6c are separate reviews, so neither may
+   * spend the other's allowance for the same gate and subject. */
+  private static attemptKey(stageId: string, gateId: string, item: string): string {
+    return `${stageId}\u0000${gateId}\u0000${item}`;
   }
 
   /**
@@ -1431,7 +1443,7 @@ export class Executor {
     this.state.data.gateAttempts ??= {};
     const live: string[] = [], spent: string[] = [];
     for (const item of keys) {
-      const k = Executor.attemptKey(failure.id, item);
+      const k = Executor.attemptKey(stage.id, failure.id, item);
       const rec = this.state.data.gateAttempts[k] ??= { n: 0, stage: stage.id, lastAt: '' };
       rec.n += 1;
       rec.stage = stage.id;
@@ -1443,7 +1455,7 @@ export class Executor {
       const msg = item === '*'
         ? `stage ${stage.id}: gate ${failure.id} failed ${budget}x and names no item — needs a person`
         : `stage ${stage.id}: gate ${failure.id} failed ${budget}x on ${item} — needs a person`;
-      if (this.state.addBlocker(stage.id, msg, `item:${failure.id}:${item}`)) {
+      if (this.state.addBlocker(stage.id, msg, `item:${stage.id}:${failure.id}:${item}`)) {
         this.reporter.notify('blocked', msg, { stage: stage.id, gate: failure.id, item });
       }
     }
@@ -1459,9 +1471,11 @@ export class Executor {
     // the stage — the (gate, item) counters do. A stage without
     // `perItemFixBudget` is unchanged, which is every stage outside step 6.
     const perItem = stage.perItemFixBudget ?? 0;
+    let repairFailure = failure;
     if (perItem > 0) {
       if (st.backoffUntil && new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
       const { live, spent } = this.chargeItems(stage, failure, perItem);
+      repairFailure = { ...failure, liveItems: live, exhaustedItems: spent };
       // Every item this gate names has burned its tries: nothing left to try,
       // and the blockers raised above name each one.
       if (!live.length) {
@@ -1491,10 +1505,13 @@ export class Executor {
     st.fixRounds += 1;
     st.lastRepairAt = new Date().toISOString();
     this.state.save();
-    this.reporter.notify('repair', `${stage.id}: ${describe}; starting repair round ${st.fixRounds}/${maxRounds}`);
+    const budgetLabel = perItem > 0
+      ? `repair cycle ${st.fixRounds}; ${perItem} tries per gate/item`
+      : `repair round ${st.fixRounds}/${maxRounds}`;
+    this.reporter.notify('repair', `${stage.id}: ${describe}; starting ${budgetLabel}`);
     let report: any;
     try {
-      report = await stage.onGateFailure({ ctx, failure, executor: this, stage, round: st.fixRounds, prevRoundAt });
+      report = await stage.onGateFailure({ ctx, failure: repairFailure, executor: this, stage, round: st.fixRounds, prevRoundAt });
     } catch (err: any) {
       this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
     }

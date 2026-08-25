@@ -1,74 +1,79 @@
-# Step 6b — adjudicate what was routed to you, run `<run>`
+# Step 6b — routed group adjudication
 
-## Your queue is computed, not chosen
+Work only on this dispatch's batches. Open each
+`research/<run>-step6-scope-<i>.json`, reader report, refuter report, named
+carrier, and dependencies needed to verify it.
 
-`research/<run>-step6-scope.json`. For each batch in your group, you owe an
-adjudication on:
+## Exact queue
 
-- **`touched`** — every item the independent reader edited. The reader's report
-  says why; the hash diff says that it happened, which is why an unexplained edit
-  still reaches you.
-- **`flagged`** — every untouched item a read-only refuter raised a concrete
-  defect against, in `research/<run>-refute-<i>.json`.
+Write exactly one decision for every:
 
+- `touched:<batch>:<id>` item, including contract/manifest-only changes and
+  additions;
+- `page:<batch>:<page-id>` page prose, metadata, or relative-order change;
+- `reader:<batch>:<number>` uneditable reader finding;
+- `refuter:<batch>:<number>` refuter finding.
+
+Do not re-audit untouched, unflagged ordinary-risk items. The refuter already
+opened all unchanged items/pages and every high/critical item.
+
+For changed work, accept, amend, or revert the reader repair. For a finding,
+confirm fatal/nonfatal or reject it as a false positive. Apply every confirmed
+repair, including contract, manifest, provenance, and stale-stamp updates. If
+withdrawal is necessary, leave the item and manifest entry present, record the
+recommendation, and let the 6c lead inspect and apply it.
+
+## Artifacts
+
+Write:
+
+1. `research/<run>-alpha-<g>-6b.md` with evidence and disposition for every
+   obligation, repair, risk review, structural change, and blocker.
+2. `research/<run>-alpha-<g>-6b-decisions.json`:
+
+```json
+{
+  "version": 1,
+  "run": "<run>",
+  "group": "<g>",
+  "decisions": [
+    {
+      "obligation": "touched:2:thm-example",
+      "id": "thm-example",
+      "route": "touched",
+      "verdict": "accepted_repair",
+      "defect_ids": ["<run>-S6-<g>-touched-2-thm-example"],
+      "evidence": "The corrected Statement retains the cited theorem's nonempty hypothesis."
+    },
+    {
+      "obligation": "refuter:2:3",
+      "id": "lem-example",
+      "route": "flagged",
+      "verdict": "false_positive",
+      "defect_ids": ["<run>-S6-<g>-refuter-2-3"],
+      "evidence": "[F2] states the required implication in items/dep.md."
+    }
+  ]
+}
 ```
-node -e "const s=require('./research/<run>-step6-scope.json');for(const[b,r]of Object.entries(s.batches))console.log(b,'touched',r.touched.length,'flagged',r.flagged.length)"
-```
 
-**`untouched` and unflagged items are not yours.** A reader read them and made no
-change, a refuter read them and found no concrete defect, and they go to the
-gates directly (owner, 2026-08-25). Re-auditing them is the cost this routing
-exists to remove. If you believe one of them is wrong, that is a finding to
-report, not a queue to widen.
+Touched/page verdicts are `accepted_repair`, `amended_repair`, or
+`reverted_change`. Reader/refuter verdicts are `confirmed_fatal`,
+`confirmed_nonfatal`, or `false_positive`. The engine stamps every decision
+with its current composite carrier hash before validation; do not invent that
+hash.
 
-## What you do with each
+Use deterministic defect ids namespaced by run, Step 6, group, and obligation
+so concurrent groups cannot collide. Append rows with
+`node tools/defect-ledger.mjs append --file <rows.json>`. Each finding owns one
+closed row; a touched carrier may own several.
 
-Verify **from disk, never from a report**: the changed item text, added and
-deleted results, dependency lists, page lists, component-provenance tags, stale
-judge blocks, gate status. On any reader fix or refuter finding you may
-**confirm, refute, amend, revert or extend**. If you add a result, you personally
-author its proof.
+When reader and refuter found the same defect, both decisions may cite one row
+only if subject, class, severity, exact location, and verdict match. The later
+decision sets `same_defect_as` and `same_defect_evidence`. Different defects on
+one item need different rows.
 
-Where the mathematics is genuinely wrong, four repairs are authorised and you
-pick whichever the defect needs (owner, 2026-08-16):
-
-1. rewrite part of the proof;
-2. write the whole proof, where its construction rather than its wording is wrong;
-3. correct the Statement, Definition or title, where what is written is false or
-   claims more than the argument gives;
-4. add intermediate lemmas.
-
-If none of them closes the defect honestly, **narrow or withdraw the claim**.
-Never inflate a dependency to make a step go through.
-
-A gap between proof steps a competent reader closes in **30 seconds is
-nonfatal** — record or polish it, never escalate it. It does not cover a defect
-in the Statement itself.
-
-## The disposition only you may write
-
-Every item `risk-report` routed to Alpha review needs a `risk_review` in the
-batch's proof-contract file. Nobody else may write one, which is why
-`--require-reviewed` is a step-6 gate and not a step-5 one. Say what the reading
-established, or why the routing signal was inapplicable — a templated row is not
-a disposition.
-
-## Ledger and manifests
-
-A disposition and its row in `research/defect-ledger.jsonl` are **one act**. A
-licensed manifest change is applied with `splice-plan --run <run> --batch <i>
---update`; you own that, the reader does not.
-
-At **60% of your context**, checkpoint into your report file before continuing.
-
-## Report
-
-`research/<run>-alpha-<g>-6b.md`. Per adjudicated item: the id, why it was routed
-to you (touched or flagged), your disposition, and what you changed. Then the
-items you repaired beyond what was routed, with the licence you used.
-
-State separately any item you believe is defective that was **not** in your queue
-— an untouched, unflagged item you have reason to doubt. That is the one signal
-this routing cannot generate by itself, and it is how the split gets corrected.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+An added repair lemma may cite its repaired consumer's row. Set
+`causal_subject`, `same_defect_as`, and `same_defect_evidence`; do not fabricate
+a defect on the lemma. Read existing results before retrying and extend them;
+never redo completed analysis.

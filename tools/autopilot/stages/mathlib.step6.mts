@@ -1,134 +1,154 @@
-// The REBUILT step 6 (owner, 2026-08-25).
-//
-// STAGED, NOT LIVE. Nothing imports this file yet, and that is deliberate:
-// `mathlib.mts` hot-reloads on mtime, so an edit there lands on the running
-// engine's next 30-second tick. `frontier-18` is at step 7 with its step-6
-// stages marked done; introducing new stage ids into the live table would make
-// them read as 0/N covered and the engine would re-dispatch finished work.
-// Cutover is one edit to `mathlib.mts` after the run closes — see
-// `tools/autopilot/stages/STEP6-CUTOVER.md`.
-//
-// A FACTORY, not a second stage table. Every gate builder is passed in rather
-// than re-declared: a hand-kept copy of `repoWide` is exactly the defect class
-// this repo keeps finding — seven copies of the model table in one week — so
-// there is one definition of each gate and this file has none of them.
-//
-// ---------------------------------------------------------------------------
-// WHAT CHANGED, AND WHY
-//
-// The owner's brief: step 6 has one mission — catch and repair as many defects
-// as possible before step 7 — and the old shape spent tokens re-reading text
-// nothing had flagged. Every item was read by a reader, then effectively
-// re-audited by its group Alpha, then covered by refuters the Alpha spawned at
-// its own discretion; and 6c then re-read every backward citation the readers
-// had already checked.
-//
-// The new routing sends each item down exactly ONE path:
-//
-//     reader changed it           -> group Alpha adjudicates -> gates
-//     untouched, refuter flagged  -> group Alpha adjudicates -> gates
-//     untouched, not flagged      -> straight to gates
-//
-// Four consequences, each a real change rather than a restatement:
-//
-//  1. THE REFUTERS BECOME A STAGE. They were subagents an Alpha spawned when
-//     it chose to, over whatever it chose, so their coverage was unverifiable:
-//     no artifact, no gate, no way to tell a level that was refuted from one
-//     that was not. As `6a-refute` their scope is computed (the untouched set)
-//     and their reports are gated. Still read-only, still never apply a fix.
-//
-//  2. THE ADJUDICATOR'S SCOPE IS COMPUTED, NOT CHOSEN — `touched u flagged`,
-//     from a hash diff and the refuters' own structured reports.
-//
-//  3. 6c COLLAPSES TO CROSS-GROUP EDGES. Measured on frontier-18: of 6,060
-//     dependency edges from in-scope items, 2,246 sit inside their own batch
-//     and 3,814 point at published content, and ZERO cross a batch boundary at
-//     all. The old 6c re-read those 3,814 backward edges with the whole level
-//     in view; they now stay with the 6a reader, whose duty 2 already requires
-//     reading every citation in its batch. That is a REASSIGNMENT, not a
-//     saving, and it is the one place coverage genuinely thins: nobody
-//     re-reads a published-dependency citation with the whole level in view.
-//
-//  4. NO BATCH WAITS ON A SIBLING between step 5 and 6b (owner, 2026-08-25).
-//     Every stage from `6a-baseline` through `6b-adjudicate` carries
-//     `pipeline: 'read'` and a single-batch cohort, so a batch whose authoring
-//     is done takes its own baseline, is read, is split, is refuted and is
-//     adjudicated while other batches are still being written. The first draft
-//     of this file got that wrong: it took ONE whole-level snapshot before
-//     6a-read, which is a barrier by construction and would have made the
-//     slowest author the start time of every reader. The per-batch hash files
-//     in `step6-scope.mjs` exist to remove exactly that barrier.
-//
-// PER-ITEM REPAIR BUDGETS. Both adjudicating stages set `perItemFixBudget: 3`
-// — "each item must pass through the same gate within 3 tries, after which it
-// becomes a blocker" (owner). The old stage-wide `maxFixRounds` was consumed
-// one GATE per round, because the battery stops at its first failure: on
-// frontier-18 a level with four red gates burned all three rounds before
-// reaching the fourth, twice. Per (gate, item) counters mean one stubborn item
-// blocks by name while its page-mates keep converging.
+// Active Step 6: independent readers, exact refuter coverage, routed Alpha
+// adjudication, cross-group edges, and final pre-judge closure.
 
-/**
- * Build the step-6 stages.
- *
- * @param d the shared gate builders and helpers from `mathlib.mts`. Passed in
- *          so this file declares no gate of its own.
- */
+import { inspectLegacyStep6Cutover } from '../../step6-cutover-lib.mjs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+/** A completed legacy run skips only stage ids introduced by this cutover.
+ * The receipt is write-once and bound to its gate timestamps and artifacts;
+ * existing stage ids continue to use their durable engine evidence. */
+export function hasLegacyStep6Cutover(ctx: any): boolean {
+  const result = inspectLegacyStep6Cutover({
+    root: ctx.repo,
+    run: ctx.run,
+    stateDir: ctx.config?.stateDir ?? '.autopilot',
+    dispatchDir: ctx.dispatchDir,
+  });
+  return result.ok;
+}
+
+/** Build Step 6 with the canonical gate helpers from mathlib.mts. */
 export function step6Stages(d: any) {
-  const { gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
+  const {
+    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
-    MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision, dispatchEdgeAdjudication } = d;
+    MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
+    dispatchSourceScouts,
+  } = d;
 
-  /** One batch, alone. Every stage from the baseline to the adjudication uses
-   *  a cohort of exactly its own batch so nothing waits on a sibling — except
-   *  `6b-adjudicate`, whose unit of work genuinely IS the Alpha's group. */
-  const soloCohort = (_ctx: any, u: string) => [String(u)];
-
-  /** The routing artifact's own gate, scoped to one batch while the pipeline
-   *  is running. `split` checks every manifest item is routed somewhere;
-   *  `adjudicate` additionally checks the refuters reported and that no flag
-   *  names an item the reader had already repaired. */
-  const routingGate = (ctx: any, phase: 'split' | 'adjudicate', batch: string | null = null) =>
-    gate(`step6-routing-${phase}${batch ? `-${batch}` : ''}`,
-      ['node', 'tools/step6-scope.mjs', 'check', '--run', ctx.run, '--phase', phase,
-        ...(batch ? ['--batch', batch] : [])], {
+  const legacyResult = resultPattern('alpha', '6c-[a-z-]+');
+  const introducedPattern = (normal: RegExp) =>
+    new RegExp(`(?:${normal.source})|(?:${legacyResult.source})`);
+  const introducedBatches = (ctx: any) => hasLegacyStep6Cutover(ctx) ? ['all'] : batches(ctx);
+  const introducedArtifact = (ctx: any, normal: string) => hasLegacyStep6Cutover(ctx)
+    ? `research/${ctx.run}-step6-cutover.json`
+    : normal;
+  const introducedPlan = (ctx: any, build: () => any[]) => hasLegacyStep6Cutover(ctx) ? [] : build();
+  const solo = (_ctx: any, unit: string) => [String(unit)];
+  const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
+    gate(`step6-routing-${phase}`,
+      ['node', 'tools/step6-scope.mjs', 'check', '--run', ctx.run, '--phase', phase], {
         liveness: { pattern: /(\d+) item\(s\) routed/.source, min: 1, unit: 'items routed' },
       });
+  const decisionStampGate = (ctx: any) => gate('step6-decision-stamp',
+    ['node', 'tools/step6-scope.mjs', 'stamp', '--run', ctx.run]);
+
+  /** Give each repair lane the exact current failure. Event order is not a
+   * task contract: advisory events may be newer, and exhausted item ids remain
+   * in the raw gate output. This generated file is the lane's authority. */
+  const writeGateTask = (args: any, phase: '6b' | '6c', edge: boolean) => {
+    const safeGate = String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-');
+    const relative = `research/${args.ctx.run}-${args.stage.id}-${safeGate}-repair-${args.round}.task.md`;
+    const live = (args.failure.liveItems ?? []).map(String);
+    const exhausted = (args.failure.exhaustedItems ?? []).map(String);
+    const advisory = (args.failure.advisory ?? []).map((failure: any) => ({
+      stage: failure.stage, gate: failure.id, why: failure.why,
+    }));
+    const canonical = [
+      readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step6-gate.md'), 'utf8').trim(),
+      edge ? readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step6-edge.md'), 'utf8').trim() : '',
+      phase === '6c' ? readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-6c-edges.md'), 'utf8').trim() : '',
+    ].filter(Boolean).join('\n\n');
+    const lines = [
+      `# Step 6${phase.slice(1)} repair — ${args.failure.id}`,
+      '',
+      `This file is the authority for repair cycle ${args.round}.`,
+      `Primary gate: \`${args.failure.id}\``,
+      `Reason: ${String(args.failure.why ?? 'See gate output below.')}`,
+      `Live item ids: ${live.length ? live.map((id: string) => `\`${id}\``).join(', ') : '(none named; repository-scoped)'}`,
+      `Exhausted item ids — do not repair or re-review: ${exhausted.length ? exhausted.map((id: string) => `\`${id}\``).join(', ') : '(none)'}`,
+      '',
+      'Repair only the live ids. Reproduce the primary gate from the current tree.',
+      'Advisory failures are context only; they receive their own gate budget if they become primary.',
+      edge ? 'This is an undeclared-prerequisite edge decision; follow the Step 6 edge task.' : '',
+      '',
+      '## Primary gate output',
+      '',
+      '```text',
+      String(args.failure.output ?? '').slice(-20_000),
+      '```',
+      '',
+      '## Advisory failures',
+      '',
+      '```json',
+      JSON.stringify(advisory, null, 2),
+      '```',
+      '',
+      '## Canonical repair protocol',
+      '',
+      canonical,
+      '',
+    ];
+    writeFileSync(join(args.ctx.repo, relative), `${lines.join('\n')}\n`);
+    return relative;
+  };
+
+  const dispatchGateRepair = async (args: any, phase: '6b' | '6c', residue = '') => {
+    if (residue) args.failure = { ...args.failure,
+      output: `${args.failure.output ?? ''}\n\nMECHANICAL RESIDUE:\n${residue}` };
+    const edge = await isEdgeDecision(args);
+    const dynamicTask = writeGateTask(args, phase, edge);
+    args.executor.start(args.stage, {
+      role: 'alpha', label: `${phase}-${edge ? 'edge' : 'gate'}-${String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-')}-${args.round}`,
+      job: 'adjudication', covers: [], brief: 'briefs/alpha-step6.md', task: dynamicTask,
+      timeout: phase === '6c' ? 7200 : 3600,
+    });
+  };
+
+  const handleGateFailure = async (args: any, phase: '6b' | '6c') => {
+    // `stage-stalemate` is missing Step 6 output, not the similarly named
+    // Step 4 splice refusal. Resume Alpha instead of running the Step 4 tool.
+    const failures = [args.failure, ...(args.failure.advisory ?? [])];
+    const primaryMechanical = args.failure.id !== 'stage-stalemate'
+      && Boolean(MECHANICAL_REPAIRS?.[args.failure.id]);
+    const hasMechanical = failures.some((failure: any) => failure.id !== 'stage-stalemate'
+      && MECHANICAL_REPAIRS?.[failure.id]);
+    if (hasMechanical) {
+      const result = await mechanicalRepair({ ...args, excludeGateIds: ['stage-stalemate'] });
+      if (result.outcome === 'outage') return { outage: { reason: result.reason } };
+      const scouted = result.outcome === 'residual'
+        && dispatchSourceScouts?.({ ...args, stderr: result.stderr });
+      if (primaryMechanical && (result.outcome === 'clean' || scouted)) return;
+      if (primaryMechanical) {
+        await dispatchGateRepair(args, phase, result.stderr ?? '');
+        return;
+      }
+    }
+    await dispatchGateRepair(args, phase);
+  };
 
   return [
-    // -----------------------------------------------------------------------
-    // THE LEFT ENDPOINT OF THE READER DIFF, TAKEN PER BATCH.
-    //
-    // Its position is the whole of its value and its granularity is the whole
-    // of the owner's first enforcement point. Taken after a reader runs it
-    // marks every item untouched and routes the level past the adjudicator;
-    // taken once for the whole level it is a barrier that costs the read
-    // pipeline its overlap. Per batch, immediately after that batch's
-    // authoring, it is neither.
     {
       id: '6a-baseline',
-      label: 'per-batch pre-reading hash (mechanical)',
+      label: 'per-batch pre-reader hash (mechanical)',
       pipeline: 'read',
-      units: batches,
-      pattern: resultPattern('tool', 'hash-pre-\\d+'),
-      labelFor: (u: string) => `hash-pre-${u}`,
-      artifacts: (ctx: any, u: string) => `research/${ctx.run}-step6-hash-${u}-pre.json`,
+      role: 'tool',
+      units: introducedBatches,
+      pattern: introducedPattern(resultPattern('tool', 'hash-pre-\\d+')),
+      labelFor: (unit: string) => `hash-pre-${unit}`,
+      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
+        `research/${ctx.run}-step6-hash-${unit}-pre.json`),
       concurrency: 12,
-      cohort: soloCohort,
-      plan: (ctx: any, pending: string[]) => pending.map((u) => ({
-        role: 'tool',
-        label: `hash-pre-${u}`,
-        job: 'bookkeeping-mechanical',
-        covers: [u],
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
+        role: 'tool', label: `hash-pre-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
+        argv: ['node', 'tools/step6-scope.mjs', 'hash', '--run', ctx.run,
+          '--batch', String(unit), '--label', 'pre'],
         timeout: 600,
-        argv: ['node', 'tools/step6-scope.mjs', 'hash', '--run', ctx.run, '--batch', String(u), '--label', 'pre'],
-      })),
-      gatesWaived: 'A hash file has nothing to check beyond its own existence and completeness, '
-        + 'which `artifacts` requires and `step6-scope split` verifies when it consumes it — the '
-        + 'split refuses to run at all if this file is missing, rather than defaulting every item '
-        + 'to touched or untouched.',
+      }))),
+      gatesWaived: 'The hash artifact is validated when split consumes it; a missing or malformed baseline makes split fail rather than guessing a route.',
     },
-
-    // -----------------------------------------------------------------------
     {
       id: '6a-read',
       label: 'independent readers',
@@ -136,260 +156,199 @@ export function step6Stages(d: any) {
       role: 'reader',
       units: batches,
       pattern: resultPattern('reader', 'reader-\\d+'),
-      artifacts: (ctx: any, u: string) => `research/${ctx.run}-reader-${u}.md`,
-      labelFor: (u: string) => `reader-${u}`,
+      labelFor: (unit: string) => `reader-${unit}`,
+      artifacts: (ctx: any, unit: string) => {
+        const report = `research/${ctx.run}-reader-${unit}.md`;
+        return hasLegacyStep6Cutover(ctx)
+          ? report
+          : [report, `research/${ctx.run}-reader-findings-${unit}.json`];
+      },
       concurrency: 12,
-      cohort: soloCohort,
-      plan: (ctx: any, pending: string[]) => pending.map((u) => ({
-        role: 'reader',
-        label: `reader-${u}`,
-        job: 'audit',
-        covers: [u],
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
+        role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
         brief: 'briefs/reader.md',
-        task: [`research/${ctx.run}-reader-${u}.task.md`, `research/${ctx.run}-reader.task.md`],
+        task: 'briefs/tasks/reader.md',
+        outputSchema: 'briefs/schemas/reader-findings.json',
+        resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
         timeout: 14400,
-      })),
-      gatesWaived: 'Readers fix what they are licensed to fix, so items DO change here, and the '
-        + 'full repo-wide and contract battery runs on that text at the read group\'s exit — over '
-        + 'the whole level, with the adjudicating Alphas in the loop to route any failure. A '
-        + 'battery per reader would be checking a level the other batches are still authoring. '
-        + 'Each reader\'s report is required as `artifacts` above.',
+      }))),
+      gatesWaived: 'Readers may repair items; the full repository, contract, routing, and ledger battery runs once at the read-pipeline join after every group Alpha has adjudicated.',
     },
-
-    // -----------------------------------------------------------------------
     {
       id: '6a-split',
-      label: 'route each item: touched by its reader, or not (mechanical)',
+      label: 'compute touched and untouched items (mechanical)',
       pipeline: 'read',
-      units: batches,
-      pattern: resultPattern('tool', 'split-\\d+'),
-      labelFor: (u: string) => `split-${u}`,
-      artifacts: (ctx: any) => `research/${ctx.run}-step6-scope.json`,
+      role: 'tool',
+      units: introducedBatches,
+      pattern: introducedPattern(resultPattern('tool', 'split-\\d+')),
+      labelFor: (unit: string) => `split-${unit}`,
+      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
+        `research/${ctx.run}-step6-scope-${unit}.json`),
       concurrency: 12,
-      cohort: soloCohort,
-      plan: (ctx: any, pending: string[]) => pending.map((u) => ({
-        role: 'tool',
-        label: `split-${u}`,
-        job: 'bookkeeping-mechanical',
-        covers: [u],
-        timeout: 600,
-        // Hash-then-split in ONE lane, so the order is not a race between two
-        // plan entries dispatched together up to the concurrency cap.
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
+        role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
         argv: ['sh', '-c',
-          `node tools/step6-scope.mjs hash --run ${ctx.run} --batch ${u} --label post `
-          + `&& node tools/step6-scope.mjs split --run ${ctx.run} --batch ${u}`],
-      })),
-      gates: (ctx: any) => [routingGate(ctx, 'split')],
+          `node tools/step6-scope.mjs hash --run ${ctx.run} --batch ${unit} --label post `
+          + `&& node tools/step6-scope.mjs split --run ${ctx.run} --batch ${unit}`],
+        timeout: 600,
+      }))),
+      gatesWaived: 'Each batch owns a separate scope artifact; exact manifest partition and refuter closure are checked at the pipeline join.',
     },
-
-    // -----------------------------------------------------------------------
-    // THE REFUTERS, PROMOTED TO A STAGE.
-    //
-    // Scope is the UNTOUCHED set: an item the reader already repaired goes to
-    // the adjudicator on that ground alone, and sending a refuter at it would
-    // buy a second opinion on text somebody is about to adjudicate anyway.
-    // Read-only by RUNNER — `--sandbox read-only` on codex is a kernel
-    // guarantee, not a prompt instruction — and the brief is explicit that a
-    // refuter returns evidence and never applies a fix.
     {
       id: '6a-refute',
-      label: 'read-only refuters over the untouched items',
+      label: 'read-only refuters over untouched and high-risk items',
       pipeline: 'read',
       role: 'refuter',
-      units: batches,
-      pattern: resultPattern('refuter', 'refute-\\d+'),
-      artifacts: (ctx: any, u: string) => `research/${ctx.run}-refute-${u}.json`,
-      labelFor: (u: string) => `refute-${u}`,
+      units: introducedBatches,
+      pattern: introducedPattern(resultPattern('refuter', 'refute-\\d+')),
+      labelFor: (unit: string) => `refute-${unit}`,
+      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
+        `research/${ctx.run}-refute-${unit}.json`),
       concurrency: 8,
-      cohort: soloCohort,
-      plan: (ctx: any, pending: string[]) => pending.map((u) => ({
-        role: 'refuter',
-        label: `refute-${u}`,
-        job: 'refutation',
-        covers: [u],
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
+        role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
         brief: 'briefs/refuter.md',
-        task: [`research/${ctx.run}-refuter-${u}.task.md`, 'briefs/tasks/refuter-untouched.md'],
-        // A READ-ONLY ROLE CANNOT WRITE ITS OWN REPORT, and that is not a
-        // contradiction to work around — it is why `--result-artifact` exists.
-        // The refuter emits the JSON as its final message and the DISPATCHER
-        // writes the file, so the kernel sandbox stays intact and the artifact
-        // this stage gates on still appears. `--output-schema` makes the shape
-        // enforceable at the endpoint rather than by hoping the prompt landed.
+        task: 'briefs/tasks/refuter-untouched.md',
         outputSchema: 'briefs/schemas/refute-report.json',
-        resultArtifact: `research/${ctx.run}-refute-${u}.json`,
+        resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
         timeout: 10800,
-      })),
-      gates: (ctx: any) => [
-        gate('step6-collect', ['node', 'tools/step6-scope.mjs', 'collect', '--run', ctx.run]),
-        routingGate(ctx, 'adjudicate'),
-      ],
+      }))),
+      gatesWaived: 'The read-only result is schema-constrained at dispatch; the following mechanical collect stage verifies exact scope coverage before Alpha can start.',
     },
-
-    // -----------------------------------------------------------------------
+    {
+      id: '6a-collect',
+      label: 'validate refuter coverage and materialize obligations (mechanical)',
+      pipeline: 'read',
+      role: 'tool',
+      units: introducedBatches,
+      pattern: introducedPattern(resultPattern('tool', 'collect-\\d+')),
+      labelFor: (unit: string) => `collect-${unit}`,
+      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
+        `research/${ctx.run}-step6-scope-${unit}.json`),
+      concurrency: 12,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
+        role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
+        argv: ['node', 'tools/step6-scope.mjs', 'collect', '--run', ctx.run, '--batch', String(unit)],
+        timeout: 600,
+      })),
+      gatesWaived: 'Collect exits nonzero unless opened and not_opened exactly partition the computed refuter scope and not_opened is empty; its successful result is the gate for this mechanical stage.',
+    },
     {
       id: '6b-adjudicate',
-      label: 'group Alpha adjudication of touched and flagged items',
+      label: 'group Alpha adjudication of touched items and refuter findings',
       pipeline: 'read',
       role: 'alpha',
       units: batches,
       pattern: resultPattern('alpha', '6b-[a-z]+'),
-      artifacts: (ctx: any, u: string) => {
-        const g = alphaGroups(ctx).find((x: any) => x.covers.map(String).includes(String(u)));
-        return g ? `research/${ctx.run}-alpha-${g.label}-6b.md` : null;
+      artifacts: (ctx: any, unit: string) => {
+        const group = alphaGroups(ctx).find((entry: any) => entry.covers.map(String).includes(String(unit)));
+        if (!group) return null;
+        const report = `research/${ctx.run}-alpha-${group.label}-6b.md`;
+        return hasLegacyStep6Cutover(ctx)
+          ? report
+          : [report, `research/${ctx.run}-alpha-${group.label}-6b-decisions.json`];
       },
       concurrency: 4,
-      // The ONE place a cohort is a group rather than a batch, and it has to
-      // be: one Alpha dispatch declares coverage of its whole group, so the
-      // group may not start until every batch it will claim has been split and
-      // refuted. It still does not wait on any OTHER group.
       cohort: alphaCohort,
-      plan: (ctx: any, pendingUnits: string[]) => alphaGroups(ctx)
-        .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
-        .map((g: any) => ({
-          role: 'alpha',
-          label: `6b-${g.label}`,
-          job: 'adjudication',
-          covers: g.covers,
-          brief: 'briefs/alpha.md',
-          task: [`research/${ctx.run}-alpha-${g.label}-6b.task.md`, 'briefs/tasks/alpha-6b-routed.md'],
+      plan: (ctx: any, pending: string[]) => alphaGroups(ctx)
+        .filter((group: any) => group.covers.some((unit: any) => pending.includes(String(unit))))
+        .map((group: any) => ({
+          role: 'alpha', label: `6b-${group.label}`, job: 'adjudication', covers: group.covers,
+          brief: 'briefs/alpha-step6.md',
+          task: 'briefs/tasks/alpha-6b-routed.md',
           timeout: 14400,
         })),
-      gates: (ctx: any) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
-        routingGate(ctx, 'adjudicate')],
-      // PER (GATE, ITEM), three tries each. `maxFixRounds` is deliberately
-      // absent: leaving it set would cap the stage from the other direction
-      // and reinstate the arithmetic this replaces.
+      gates: (ctx: any) => [
+        ...repoWide(ctx).filter((candidate: any) => candidate.id !== 'splice-verify'),
+        ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
+      ],
       perItemFixBudget: 3,
-      onGateFailure: async (args: any) => {
-        // A mechanical repair takes precedence whatever the gate id.
-        // `splice-verify` fails here as a matter of course — the adjudicator
-        // adds and repairs items under its step-6 licence, so the manifests
-        // move ahead of the plan. That is a transcription, not a reading.
-        if (MECHANICAL_REPAIRS?.[args.failure.id]) {
-          const r = await mechanicalRepair(args);
-          if (r.outcome === 'outage') return { outage: { reason: r.reason } };
-          return;
-        }
-        if (await isEdgeDecision(args)) { dispatchEdgeAdjudication(args); return; }
-        // DEFAULT ROUTE, NOT AN ALLOW-LIST. The old 6b hook named four gate ids
-        // and fell through for the other thirteen — the shape that produced
-        // three separate blockers in one run at step 5. A gate failure is a
-        // finding: the Alpha adjudicates it, repairs what is genuinely wrong,
-        // and reports a false positive as a false positive.
-        args.executor.start(args.stage, {
-          role: 'alpha',
-          label: `6b-gate-${args.failure.id}-${args.round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: [`research/${args.ctx.run}-alpha-gate-adjudication.task.md`],
-          timeout: 3600,
-        });
-      },
+      onGateFailure: (args: any) => handleGateFailure(args, '6b'),
     },
-
-    // -----------------------------------------------------------------------
     {
       id: '6b-baseline',
-      label: 'post-6b touch snapshot (mechanical)',
+      label: 'post-6b exact carrier and touch snapshots (mechanical)',
       units: () => ['all'],
       pattern: resultPattern('tool', 'snap-post-6b'),
-      artifacts: (ctx: any) => touchesPath(ctx),
+      artifacts: (ctx: any) => hasLegacyStep6Cutover(ctx)
+        ? touchesPath(ctx)
+        : [touchesPath(ctx), ...batches(ctx).map((batch: string) =>
+          `research/${ctx.run}-step6-hash-${batch}-post-6b.json`)],
       concurrency: 1,
-      plan: (ctx: any) => [{
+      plan: (ctx: any) => introducedPlan(ctx, () => [{
         role: 'tool', label: 'snap-post-6b', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-6b'],
-      }],
-      gatesWaived: 'A snapshot has nothing to check beyond its own existence; it is the right '
-        + 'endpoint of the 6c impact window, capturing authoring plus every 6a and 6b repair. '
-        + 'Stage order guarantees it is taken of text that has already passed the read group\'s gates.',
+        argv: ['sh', '-c', [
+          ...batches(ctx).map((batch: string) => `node tools/splice-plan.mjs --run ${ctx.run} --batch ${batch} --update --accept-requires`),
+          ...batches(ctx).map((batch: string) => `node tools/step6-scope.mjs hash --run ${ctx.run} --batch ${batch} --label post-6b`),
+          `node tools/touchlog.mjs snap ${touchesPath(ctx)} post-6b --idempotent`,
+        ].join(' && ')],
+      }]),
+      gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the post-6b impact endpoint. Missing output prevents successful coverage.',
     },
-
-    // -----------------------------------------------------------------------
-    // 6c's WORK LIST IS CODE. "Identify dependencies across batches managed by
-    // different alpha agents" is a join of the validated partition against the
-    // items' own `deps`, so the engine computes it and the Alpha is left with
-    // the only part no table can do: reading the citing use against the cited
-    // Statement.
     {
       id: '6c-edges',
-      label: 'compute the cross-group edge list (mechanical)',
+      label: 'compute cross-batch edges and post-6b changes (mechanical)',
       units: () => ['all'],
-      pattern: resultPattern('tool', 'cross-group-edges'),
-      artifacts: (ctx: any) => `research/${ctx.run}-cross-group-edges.json`,
+      pattern: introducedPattern(resultPattern('tool', 'cross-group-edges')),
+      artifacts: (ctx: any) => introducedArtifact(ctx,
+        `research/${ctx.run}-cross-group-edges.json`),
       concurrency: 1,
       plan: (ctx: any) => [{
         role: 'tool', label: 'cross-group-edges', job: 'bookkeeping-mechanical', covers: ['all'],
         argv: ['node', 'tools/cross-group-edges.mjs', 'list', '--run', ctx.run],
       }],
-      gatesWaived: 'The list is an OBLIGATION, not a verdict, and it is legitimately allowed to be '
-        + 'empty — frontier-18 had zero cross-group edges — so there is nothing to check here that '
-        + '`artifacts` does not already require. The next stage gates that every entry it does '
-        + 'contain was answered, and re-derives the list from disk so an edge the Alpha\'s own '
-        + 'repairs introduced cannot slip past.',
+      gatesWaived: 'The computed lists may be empty; this stage creates the verdict artifact, and 6c-cross re-derives every cross-batch edge, forward reference, and post-6b structural change.',
     },
-
-    // -----------------------------------------------------------------------
-    // THE LEAD ALPHA, WITH ONE JOB, AND THE FINAL BATTERY.
-    //
-    // Owner, 2026-08-25: 6c verifies the cross-group citations, decides every
-    // forward reference that reached this point — build the intermediate
-    // load-bearing lemmas, or drop the item because too many prerequisites are
-    // unmet — and then "all items face a final set of run gates before
-    // proceeding to step 7. If an item fails a final run gate, it must be
-    // repaired by the lead alpha adjudicator."
     {
       id: '6c-cross',
-      label: 'lead Alpha: cross-group citations, forward references, final gates',
+      label: 'lead Alpha cross-batch audit and final Step 6 closure',
       units: () => ['all'],
-      artifacts: (ctx: any) => [`research/${ctx.run}-alpha-6c.md`, `research/${ctx.run}-6c-verdicts.jsonl`],
       pattern: resultPattern('alpha', '6c-[a-z-]+'),
+      artifacts: (ctx: any) => hasLegacyStep6Cutover(ctx)
+        ? `research/${ctx.run}-alpha-6c.md`
+        : [`research/${ctx.run}-alpha-6c.md`, `research/${ctx.run}-6c-verdicts.jsonl`],
       concurrency: 1,
       plan: (ctx: any) => [{
-        role: 'alpha',
-        label: '6c-lead',
-        job: 'audit',
-        covers: ['all'],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-6c.task.md`, 'briefs/tasks/alpha-6c-edges.md'],
+        role: 'alpha', label: '6c-lead', job: 'audit', covers: ['all'], brief: 'briefs/alpha-step6.md',
+        task: 'briefs/tasks/alpha-6c-edges.md',
         timeout: 14400,
       }],
       gates: (ctx: any) => [
-        // 6c's own work first: every listed edge answered, every forward
-        // reference decided, and every decision APPLIED on disk.
-        gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run]),
-        // ...then the final battery over the whole level.
+        gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
+        routingGate(ctx, 'final'),
+        gate('step6-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
+        gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']),
         ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
-        ...contractGates(ctx, { reviewed: true }),
-        impactGate(ctx),
+        ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
+        gate('impact-audit-6c', ['node', 'tools/impact-audit.mjs',
+          '--touches', touchesPath(ctx), '--from', 'post-6b', '--current',
+          '--receipt', `research/${ctx.run}-impact-6c.json`]),
         gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
-          ...batches(ctx).map((b: string) => `research/${ctx.run}-batch-${b}.pages.json`),
+          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
           '--output', `research/${ctx.run}-audit-manifest.json`], {
           liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
         }),
       ],
-      // This stage had NO failure hook at all: thirty-one gates, every one an
-      // instant blocker with zero repair rounds. The owner's rule gives each
-      // item three tries and names the lead Alpha as the repairer.
       perItemFixBudget: 3,
-      onGateFailure: async (args: any) => {
-        if (MECHANICAL_REPAIRS?.[args.failure.id]) {
-          const r = await mechanicalRepair(args);
-          if (r.outcome === 'outage') return { outage: { reason: r.reason } };
-          return;
-        }
-        if (await isEdgeDecision(args)) { dispatchEdgeAdjudication(args); return; }
-        args.executor.start(args.stage, {
-          role: 'alpha',
-          label: `6c-repair-${args.failure.id}-${args.round}`,
-          job: 'adjudication',
-          covers: [],
-          brief: 'briefs/alpha.md',
-          task: [`research/${args.ctx.run}-alpha-gate-adjudication.task.md`,
-            'briefs/tasks/alpha-6c-edges.md'],
-          timeout: 7200,
-        });
-      },
+      onGateFailure: (args: any) => handleGateFailure(args, '6c'),
+    },
+    {
+      id: '6d-close',
+      label: 'freeze exact Step 6 closure (mechanical)',
+      units: () => ['all'],
+      pattern: introducedPattern(resultPattern('tool', 'step6-close')),
+      artifacts: (ctx: any) => introducedArtifact(ctx, `research/${ctx.run}-step6-closure.json`),
+      concurrency: 1,
+      plan: (ctx: any) => introducedPlan(ctx, () => [{
+        role: 'tool', label: 'step6-close', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ['node', 'tools/step6-close.mjs', 'close', '--run', ctx.run],
+        timeout: 900,
+      }]),
+      gatesWaived: 'The close tool reruns exact Step-6 routing, cross-edge, plan, and ledger checks before writing the immutable closure receipt; any nonzero check produces no successful result.',
     },
   ];
 }

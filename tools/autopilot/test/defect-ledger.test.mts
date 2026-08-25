@@ -15,6 +15,7 @@ import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -45,6 +46,40 @@ const fixture = (rows: object[], adj: object[], closure?: object) => {
 const check = (dir: string, extra: string[] = []) => spawnSync(process.execPath,
   [TOOL, 'check', '--run', 'r9', '--adjudications', join(dir, 'adj.jsonl'), ...extra],
   { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+
+const writeExactStep6 = (dir: string, decisions: object[]) => {
+  writeFileSync(join(dir, 'research', 'r9-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['1'] },
+  ]));
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify([
+    { id: 'p', category: 'test', items: ['thm-x'] },
+  ]));
+  const snapshot = (label: string, item: string) => ({
+    version: 2, run: 'r9', batch: '1', label, manifest: ['thm-x'],
+    hashes: { 'thm-x': { item_sha256: item, contract_sha256: 'contract' } },
+    page_manifest: ['p'], page_hashes: { p: 'page' },
+  });
+  writeFileSync(join(dir, 'research', 'r9-step6-hash-1-pre.json'), JSON.stringify(snapshot('pre', 'before')));
+  writeFileSync(join(dir, 'research', 'r9-step6-hash-1-post.json'), JSON.stringify(snapshot('post', 'after')));
+  const readerText = JSON.stringify({ batch: '1', findings: [], coverage_note: 'none' });
+  const refuterText = JSON.stringify({ batch: '1', opened: ['p'], not_opened: [], flagged: [], coverage_note: 'read page' });
+  writeFileSync(join(dir, 'research', 'r9-reader-findings-1.json'), readerText);
+  writeFileSync(join(dir, 'research', 'r9-refute-1.json'), refuterText);
+  const digest = (text: string) => createHash('sha256').update(text).digest('hex');
+  writeFileSync(join(dir, 'research', 'r9-step6-scope-1.json'), JSON.stringify({
+    version: 2, run: 'r9', batch: '1', group: 'a',
+    manifest_pre: ['thm-x'], manifest_post: ['thm-x'], added: [], removed: [],
+    page_manifest_pre: ['p'], page_manifest_post: ['p'], pages_added: [], pages_removed: [],
+    pages_touched: [], refuter_pages: ['p'], page_order_anchors: { p: [] },
+    touched: ['thm-x'], untouched: [], high_risk: [], refuter_scope: ['p'],
+    opened: ['p'], not_opened: [], flagged: [], refuter_findings: [], reader_findings: [],
+    reader_report_sha256: digest(readerText), refuter_report_sha256: digest(refuterText),
+  }));
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# exact routed decisions');
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b-decisions.json'), JSON.stringify({
+    version: 1, run: 'r9', group: 'a', decisions,
+  }));
+};
 
 test('a confirmed_fatal with no ledger row fails the check', () => {
   const dir = fixture([], [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }]);
@@ -168,45 +203,48 @@ test('--no-open refuses ANY open row, whatever its severity', () => {
   assert.ok(!/one defect, one row/.test(r.stderr), 'the failure must be the open row alone');
 });
 
-test('the 6b findings files audit the ledger COUNT — 13 rows against 58 fatals now fails', () => {
+test('exact 6b decisions close every routed obligation against its ledger row', () => {
   const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
-  // Two step-6 rows in the ledger, three confirmed_fatal findings asserted.
-  const dir = fixture(
-    [row({ caught_at_stage: '6b-adjudicate' }),
-      row({ defect_id: 'r9-D002', subject: 'thm-y', caught_at_stage: '6a-read', adjudication_ref: ['R1-1'] })],
-    adj, { open_fatal: [] });
-  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# findings');
-  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b-findings.json'), JSON.stringify([
-    { id: 'thm-x', verdict: 'confirmed_fatal', source: 'R1-1' },
-    { id: 'thm-y', verdict: 'confirmed_fatal', source: 'R1-2' },
-    { id: 'thm-z', verdict: 'confirmed_fatal', source: 'R1-3' },
-    { id: 'thm-w', verdict: 'confirmed_nonfatal', source: 'R1-4' },
-  ]));
+  const dir = fixture([row({ caught_at_stage: '6a-read' })], adj, { open_fatal: [] });
+  writeExactStep6(dir, [{
+    obligation: 'touched:1:thm-x', id: 'thm-x', route: 'touched',
+    verdict: 'accepted_repair', defect_ids: ['r9-D001'], evidence: 'Proof checked.',
+    subject_sha256: 'a'.repeat(64),
+  }]);
   const r = check(dir, ['--closure', join(dir, 'closure.json')]);
-  assert.notEqual(r.status, 0);
-  assert.match(r.stderr, /assert 3 confirmed-fatal finding\(s\) but only 2/);
+  assert.equal(r.status, 0, r.stderr);
 });
 
-test('a 6b report without its findings sibling fails once any group has one', () => {
+test('a routed obligation missing from 6b decisions fails exact closure', () => {
   const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
-  const dir = fixture([row({ caught_at_stage: '6b-adjudicate' })], adj, { open_fatal: [] });
-  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# a');
+  const dir = fixture([row({ caught_at_stage: '6a-read' })], adj, { open_fatal: [] });
+  writeExactStep6(dir, []);
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /Step-6 routed decisions or frozen closure no longer close/);
+  assert.match(r.stderr, /did not decide touched:1:thm-x/);
+});
+
+test('a report without its decisions sibling fails once exact routing is present', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '6a-read' })], adj, { open_fatal: [] });
+  writeExactStep6(dir, [{
+    obligation: 'touched:1:thm-x', id: 'thm-x', route: 'touched',
+    verdict: 'accepted_repair', defect_ids: ['r9-D001'], evidence: 'Proof checked.',
+  }]);
   writeFileSync(join(dir, 'research', 'r9-alpha-b-6b.md'), '# b');
-  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b-findings.json'), JSON.stringify([
-    { id: 'thm-x', verdict: 'confirmed_fatal', source: 'R1-1' },
-  ]));
   const r = check(dir, ['--closure', join(dir, 'closure.json')]);
   assert.notEqual(r.status, 0);
-  assert.match(r.stderr, /r9-alpha-b-6b\.md has no r9-alpha-b-6b-findings\.json/);
+  assert.match(r.stderr, /r9-alpha-b-6b\.md has no r9-alpha-b-6b-decisions\.json/);
 });
 
-test('a pre-contract run with 6b reports and no findings files gets a note, never a failure', () => {
+test('a pre-contract run with 6b reports and no decisions files remains historical', () => {
   const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
   const dir = fixture([row({ caught_at_stage: '6b-adjudicate' })], adj, { open_fatal: [] });
   writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# findings');
   const r = check(dir, ['--closure', join(dir, 'closure.json')]);
   assert.equal(r.status, 0, r.stderr);
-  assert.match(r.stdout, /cannot be audited against the ledger/);
+  assert.match(r.stdout, /predate exact -6b-decisions\.json routing/);
 });
 
 test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {

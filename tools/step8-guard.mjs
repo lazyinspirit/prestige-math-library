@@ -221,7 +221,26 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
         `${publishedRepairsPath}:${index + 1}: found_via must be a run item owned by group ${record.group}`, record.id);
       continue;
     }
-    if (!(realRejectionsById.get(record.found_via) ?? []).length) {
+    const fromStep6 = record.found_at_stage === '6a-read';
+    if (fromStep6) {
+      const decisionPath = resolvePath(`research/${scope.run}-alpha-${record.group}-6b-decisions.json`);
+      let decision = null;
+      try {
+        const doc = JSON.parse(readFileSync(decisionPath, 'utf8'));
+        decision = (doc.decisions ?? []).find((candidate) =>
+          candidate.obligation === record.step6_obligation && candidate.id === record.id
+          && candidate.route === 'reader'
+          && ['confirmed_fatal', 'confirmed_nonfatal'].includes(candidate.verdict));
+      } catch { /* exact diagnostic below */ }
+      if (!decision || !/^reader:\d+:\d+$/.test(record.step6_obligation ?? '')
+        || typeof record.step6_defect_class !== 'string' || !record.step6_defect_class
+        || typeof record.post_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.post_sha256)
+        || shortHash(record.post_sha256) !== baseline.hashes?.[record.id]) {
+        error('published-repair-step6-provenance',
+          `${publishedRepairsPath}:${index + 1}: Step-6 repair must exact-match its reader decision and the pre-Step-8 baseline`, record.id);
+        continue;
+      }
+    } else if (!(realRejectionsById.get(record.found_via) ?? []).length) {
       error('published-repair-no-exposing-rejection',
         `${publishedRepairsPath}:${index + 1}: found_via ${record.found_via} has no real keep:false judge verdict`, record.id);
       continue;
@@ -234,8 +253,10 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
         record.id);
       continue;
     }
-    if (!publishedLicences.has(record.id)) publishedLicences.set(record.id, new Set());
-    publishedLicences.get(record.id).add(shortHash(record.pre_sha256));
+    if (!fromStep6) {
+      if (!publishedLicences.has(record.id)) publishedLicences.set(record.id, new Set());
+      publishedLicences.get(record.id).add(shortHash(record.pre_sha256));
+    }
   }
 }
 

@@ -34,9 +34,8 @@
 // that taking two in a row with no edits between adds no touches.
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
-import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { stripVerification, itemHashGuard, shortHash } from "./item-hash.mjs";
+import { itemHashGuard, itemSurfaceHash, shortHash } from "./item-hash.mjs";
 
 const [, , cmd, ledgerPath, ...rest] = process.argv;
 const ITEMS = "items";
@@ -65,19 +64,10 @@ const hashes = () => {
  * changed title, dependency declaration, Statement/Definition/Example, Fact, or
  * Remark might.  Store a separate fingerprint so impact-audit can distinguish
  * those cases without trusting an agent's description of its own edit. */
-const publicSurface = (text) => {
-  const withoutVerification = stripVerification(text);
-  const m = /^([\s\S]*?\n---\n)([\s\S]*)$/.exec(withoutVerification);
-  if (!m) return withoutVerification;
-  const body = m[2].replace(/^## (?:Scratch|Proof|Refutation|Counterexample|Verification)\b[^\n]*\n[\s\S]*?(?=^## |$(?![\s\S]))/gm, "");
-  return m[1] + body;
-};
 const surfaces = () => {
   const out = {};
   for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
-    out[f.slice(0, -3)] = createHash("sha256")
-      .update(publicSurface(readFileSync(join(ITEMS, f), "utf8")))
-      .digest("hex").slice(0, 16);
+    out[f.slice(0, -3)] = itemSurfaceHash(readFileSync(join(ITEMS, f), "utf8")).slice(0, 16);
   return out;
 };
 
@@ -116,14 +106,22 @@ if (cmd === "snap") {
   // already means something, and quietly renaming it to `pre-step8-2` leaves
   // both the caller and every later reader guessing which one their tool
   // resolved. Choosing the new name is a decision, not a default.
-  if ((led.snapshots ?? []).some((s) => s.label === label)) {
-    const prior = led.snapshots.filter((s) => s.label === label).at(-1);
+  const prior = (led.snapshots ?? []).filter((s) => s.label === label).at(-1);
+  const currentHashes = hashes();
+  const currentSurfaces = surfaces();
+  if (prior) {
+    if (rest.includes("--idempotent")
+      && JSON.stringify(prior.hashes) === JSON.stringify(currentHashes)
+      && JSON.stringify(prior.surfaces) === JSON.stringify(currentSurfaces)) {
+      console.log(`snapshot "${label}" already records these exact item bytes — reused`);
+      process.exit(0);
+    }
     die(`snapshot label "${label}" already exists (recorded ${prior.at}). A label is a key: ` +
         `impact-audit and step8-guard resolve one label to one snapshot, and a second row with ` +
         `this name would silently move their baseline forward past the edits it is meant to ` +
         `bound. Choose a distinct label — round-qualify it, e.g. "${label}-round-2".`);
   }
-  led.snapshots.push({ label, at: new Date().toISOString(), hashes: hashes(), surfaces: surfaces() });
+  led.snapshots.push({ label, at: new Date().toISOString(), hashes: currentHashes, surfaces: currentSurfaces });
   writeFileSync(ledgerPath, JSON.stringify(led, null, 1) + "\n");
   const r = repairs(led);
   console.log(`snapshot "${label}" recorded — ${Object.keys(led.snapshots.at(-1).hashes).length} items, ` +

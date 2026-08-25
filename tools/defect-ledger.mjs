@@ -42,9 +42,14 @@
 // the row never gets written. `prevention: {kind: mechanical|brief|process|
 // none, ref}` is the field that turns the log into a control.
 
-import { readFileSync, writeFileSync, appendFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, appendFileSync, existsSync, readdirSync, mkdirSync, rmSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const STEP6_SCOPE_TOOL = fileURLToPath(new URL('./step6-scope.mjs', import.meta.url));
+const STEP6_CLOSE_TOOL = fileURLToPath(new URL('./step6-close.mjs', import.meta.url));
 
 const argv = process.argv.slice(2);
 const cmd = argv[0];
@@ -55,6 +60,34 @@ const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 &
 const given = (n) => argv.includes(`--${n}`);
 const asJson = argv.includes('--json');
 const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
+const lockPath = `${ledgerPath}.append-lock`;
+const lockWait = new Int32Array(new SharedArrayBuffer(4));
+
+/** Serialize the append and generated-view refresh. Step 6 group Alphas write
+ * concurrently; without one transaction, two unique-id checks can race and a
+ * slower renderer can publish a view that predates a completed append. */
+function acquireAppendLock(timeoutMs = 30_000) {
+  const started = Date.now();
+  for (;;) {
+    try {
+      mkdirSync(lockPath);
+      writeFileSync(join(lockPath, 'owner.json'), JSON.stringify({ pid: process.pid, at: new Date().toISOString() }));
+      return () => rmSync(lockPath, { recursive: true, force: true });
+    } catch (cause) {
+      if (cause?.code !== 'EEXIST') throw cause;
+      // Append+render normally takes milliseconds. A ten-minute lock is a dead
+      // writer; removing it is safer than making every future build permanent.
+      try {
+        if (Date.now() - statSync(lockPath).mtimeMs > 10 * 60_000) {
+          rmSync(lockPath, { recursive: true, force: true });
+          continue;
+        }
+      } catch { continue; }
+      if (Date.now() - started >= timeoutMs) throw new Error(`timed out waiting for ${lockPath}`);
+      Atomics.wait(lockWait, 0, 0, 50);
+    }
+  }
+}
 
 const STAGES = ['1-scaffold', '2-assign', '3-review', '3-fix', '3-recheck', '4-splice', '4-baseline',
   '5-author', '6a-read', '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
@@ -226,27 +259,31 @@ if (cmd === 'append') {
   if (!file) { console.error('append needs --file <rows.json> — never quote JSON through a shell'); process.exit(2); }
   const incoming = JSON.parse(readFileSync(file, 'utf8'));
   const rows = Array.isArray(incoming) ? incoming : [incoming];
-  const existing = loadLedger();
-  const ids = new Set(existing.map((r) => r.defect_id));
-  const errs = [];
-  for (const row of rows) errs.push(...validateRow(row, ids));
-  if (errs.length) {
-    console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
-    for (const e of errs) console.error(`  ${e}`);
-    process.exit(1);
+  const release = acquireAppendLock();
+  try {
+    const existing = loadLedger();
+    const ids = new Set(existing.map((r) => r.defect_id));
+    const errs = [];
+    for (const row of rows) errs.push(...validateRow(row, ids));
+    if (errs.length) {
+      console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
+      for (const e of errs) console.error(`  ${e}`);
+      process.exitCode = 1;
+    } else {
+      appendFileSync(ledgerPath, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
+      console.log(`defect-ledger: appended ${rows.length} row(s) to ${ledgerPath} (${existing.length + rows.length} total)`);
+      // The view fingerprint and append are one locked transaction. A second
+      // writer starts from the first writer's completed ledger and view.
+      if (!argv.includes('--no-render')) {
+        const viewPath = opt('out', VIEW_DEFAULT);
+        const n = renderView(viewPath);
+        console.log(`defect-ledger: re-rendered ${n} row(s) -> ${viewPath} @ ${ledgerFingerprint()}`);
+      }
+    }
+  } finally {
+    release();
   }
-  appendFileSync(ledgerPath, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
-  console.log(`defect-ledger: appended ${rows.length} row(s) to ${ledgerPath} (${existing.length + rows.length} total)`);
-  // Refresh the generated view in the same invocation. Its header asserts the
-  // fingerprint of the file it was built from, and an append that does not
-  // re-render makes that assertion false the moment it returns. `append` is an
-  // action and may write; the `check` GATE only ever reads.
-  if (!argv.includes('--no-render')) {
-    const viewPath = opt('out', VIEW_DEFAULT);
-    const n = renderView(viewPath);
-    console.log(`defect-ledger: re-rendered ${n} row(s) -> ${viewPath} @ ${ledgerFingerprint()}`);
-  }
-  process.exit(0);
+  process.exit(process.exitCode ?? 0);
 }
 
 if (cmd === 'validate') {
@@ -434,45 +471,31 @@ if (cmd === 'check') {
     }
   }
 
-  // (f) the ledger's step-6 COUNT is auditable, not just nonzero. Clause (c)
-  // requires step-6-caught rows to EXIST when a 6b report does — and on
-  // frontier-15 one group Alpha accepted 58 fatal reader findings, wrote 13
-  // rows, and satisfied it: the run's headline understated its fatal count
-  // threefold, in the one artifact built so that account would be a query.
-  // Each 6b group now also writes `<run>-alpha-<g>-6b-findings.json` (one row
-  // per adjudicated finding; briefs/alpha.md), and this clause compares the
-  // asserted confirmed-fatal count against the rows. Adoption-triggered: once
-  // ANY group's findings file exists, every 6b report needs its sibling and
-  // the counts must reconcile; a run predating the contract (frontier-15's
-  // own reports included) gets a note, never a retroactive failure.
+  // (f) New Step-6 runs carry exact routed decisions, not a fatal-count proxy.
+  // Re-run their mechanical closure here so a later ledger edit cannot break
+  // obligation ownership after Step 6 passed. Historical runs with no decision
+  // artifacts retain their evidence and are not retroactively failed.
   {
     let inResearch = [];
     try { inResearch = readdirSync('research'); } catch { /* no research dir: nothing to cross-check */ }
-    const findingsFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b-findings.json'));
+    const decisionFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b-decisions.json'));
     const reportFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b.md'));
-    if (findingsFiles.length) {
+    if (decisionFiles.length) {
       for (const rf of reportFiles) {
-        const sibling = rf.replace(/-6b\.md$/, '-6b-findings.json');
-        if (!findingsFiles.includes(sibling)) {
-          errs.push(`${rf} has no ${sibling} — once any group writes its machine findings, every group must`);
+        const sibling = rf.replace(/-6b\.md$/, '-6b-decisions.json');
+        if (!decisionFiles.includes(sibling)) {
+          errs.push(`${rf} has no ${sibling} — every routed Step-6 group needs exact decisions`);
         }
       }
-      let fatalFindings = 0;
-      for (const ff of findingsFiles) {
-        try {
-          const rows = JSON.parse(readFileSync(`research/${ff}`, 'utf8'));
-          if (!Array.isArray(rows)) { errs.push(`${ff}: must be a JSON array of findings`); continue; }
-          fatalFindings += rows.filter((r) => r?.verdict === 'confirmed_fatal').length;
-        } catch (e) { errs.push(`${ff}: unreadable — ${e.message}`); }
-      }
-      const stepSixRows = mine.filter((r) => ['6a-read', '6b-adjudicate', '6c-cross'].includes(r.caught_at_stage)).length;
-      if (stepSixRows < fatalFindings) {
-        errs.push(`the 6b findings files assert ${fatalFindings} confirmed-fatal finding(s) but only ${stepSixRows} `
-          + `ledger row(s) are caught at 6a/6b/6c — a confirmed fatal and its ledger row are one act`);
-      }
+      const frozenPath = join('research', `${run}-step6-closure.json`);
+      const closure = spawnSync(process.execPath,
+        existsSync(frozenPath)
+          ? [STEP6_CLOSE_TOOL, 'verify', '--root', process.cwd(), '--run', run]
+          : [STEP6_SCOPE_TOOL, 'check', '--root', process.cwd(), '--run', run, '--phase', 'final'],
+        { encoding: 'utf8', timeout: 120_000 });
+      if (closure.status !== 0) errs.push(`Step-6 routed decisions or frozen closure no longer close:\n${closure.stderr || closure.stdout}`);
     } else if (reportFiles.length) {
-      console.log(`note: ${reportFiles.length} 6b report(s) with no -6b-findings.json sibling (pre-contract run) — `
-        + 'the step-6 fatal count cannot be audited against the ledger');
+      console.log(`note: ${reportFiles.length} 6b report(s) predate exact -6b-decisions.json routing; retained as historical evidence`);
     }
   }
 

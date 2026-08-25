@@ -395,7 +395,8 @@ test('the mathlib table declares exactly two overlap groups, over exactly these 
   }
   assert.deepEqual([...byPipeline.keys()].sort(), ['read', 'scaffold']);
   assert.deepEqual(byPipeline.get('scaffold'), ['3-review', '3-fix', '3-recheck']);
-  assert.deepEqual(byPipeline.get('read'), ['5-author', '6a-read', '6b-adjudicate']);
+  assert.deepEqual(byPipeline.get('read'), ['5-author', '6a-baseline', '6a-read',
+    '6a-split', '6a-refute', '6a-collect', '6b-adjudicate']);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -407,7 +408,7 @@ test('the do-not-relax stages are still barriers', async () => {
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
   const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '6b-baseline',
-    '6c-cross', '7-judge', '8-baseline', '8-adjudicate', '8-rejudge',
+    '6c-cross', '6d-close', '7-judge', '8-baseline', '8-adjudicate', '8-rejudge',
     '9-scope', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt', '10-contract-close', '10-snapshot-v2',
     '10-pathway-sync-v2', '10-pathway-seed-v2', '10-pathway-author-v2',
     '10-stamps-v2', '10-readiness-v2', '10-evidence-v2', '10-owner-report-v2', '10-close-v2'];

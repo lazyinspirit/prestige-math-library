@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// risk-report.mjs — route structurally high-risk items to the extra Alpha pass.
+// risk-report.mjs — route structurally high-risk items to the Step-6 refuter.
 //
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json --require-reviewed
@@ -58,7 +58,7 @@ for (const id of ids) {
     required: tier === 'high' || tier === 'critical',
     risk_review: review,
     routing: tier === 'high' || tier === 'critical'
-      ? ['Alpha proof-refuter reads every step and cited source', 'Alpha records a risk_review disposition before Step 7']
+      ? ['engine read-only refuter reads every step and cited source', 'Alpha records a risk_review disposition before Step 7']
       : ['ordinary Step-6 reader coverage'],
   };
   if (finding.required && requireReviewed && !(review?.status === 'complete' && typeof review.reviewer === 'string' && review.reviewer.trim() && typeof review.notes === 'string' && review.notes.trim())) {

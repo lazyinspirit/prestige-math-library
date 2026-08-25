@@ -35,7 +35,7 @@
 // dispatched with, which is what `doctor` scans for identity placeholders.
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -165,8 +165,26 @@ const render = (text) => text.replace(/\{\{([a-z_]+)\}\}/g, (_match, key) => {
 // `2-assign` stage falls back to `briefs/alpha-assign.md`, a role brief that is
 // not per-run. Reading only the backticked entries made that fallback invisible
 // and reported a satisfied stage as missing.
+function stageSources() {
+  const pending = [R('tools/autopilot/stages/mathlib.mts')];
+  const seen = new Set();
+  const sources = [];
+  while (pending.length) {
+    const path = pending.pop();
+    if (seen.has(path)) continue;
+    seen.add(path);
+    const source = readFileSync(path, 'utf8');
+    sources.push(source);
+    for (const match of source.matchAll(/from\s+(?:'(\.\/[^']+)'|"(\.\/[^"]+)")/g)) {
+      const imported = resolve(dirname(path), match[1] ?? match[2]);
+      if (imported.startsWith(R('tools/autopilot/stages/')) && existsSync(imported)) pending.push(imported);
+    }
+  }
+  return sources.join('\n');
+}
+
 function stageTaskGroups() {
-  const src = readFileSync(R('tools/autopilot/stages/mathlib.mts'), 'utf8');
+  const src = stageSources();
   const groups = [];
   for (const m of src.matchAll(/task:\s*(\[[^\]]*\]|`[^`]*`|'[^']*'|"[^"]*")/g)) {
     const cands = [...m[1].matchAll(/`([^`]*)`|'([^']*)'|"([^"]*)"/g)].map((x) => x[1] ?? x[2] ?? x[3]);
@@ -179,7 +197,7 @@ function stageTaskGroups() {
  *  table for the same reason the task paths are: a brief renamed in `briefs/`
  *  and not in the table fails at dispatch, not at doctor. */
 function stageBriefs() {
-  const src = readFileSync(R('tools/autopilot/stages/mathlib.mts'), 'utf8');
+  const src = stageSources();
   return [...new Set([...src.matchAll(/brief:\s*(?:`([^`]*)`|'([^']*)'|"([^"]*)")/g)]
     .map((m) => m[1] ?? m[2] ?? m[3]))];
 }

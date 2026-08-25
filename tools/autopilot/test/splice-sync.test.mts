@@ -105,6 +105,53 @@ test('--update applies a licensed manifest change to the plan, loudly', () => {
   assert.equal(again.status, 0, 'after --update the scopes must agree');
 });
 
+test('Step 6 reconciliation copies an adjudicated manifest requires change exactly', () => {
+  const dir = fixture(['lem-a'], ['lem-a']);
+  const manifestPath = join(dir, 'research', 'r9-batch-1.pages.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  manifest[0].requires = ['prior-page'];
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+
+  const refused = run(dir, ['--run', 'r9', '--batch', '1', '--update']);
+  assert.equal(refused.status, 0);
+  assert.match(refused.stdout, /WITHHELD/);
+  let spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  assert.deepEqual(spec.pages[0].requires ?? [], [], 'ordinary update must not guess a requires decision');
+
+  const reconciled = run(dir, ['--run', 'r9', '--batch', '1', '--update', '--accept-requires']);
+  assert.equal(reconciled.status, 0, reconciled.stderr);
+  assert.match(reconciled.stdout, /RECONCILING demo-page requires/);
+  spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  assert.deepEqual(spec.pages[0].requires, ['prior-page']);
+  assert.equal(run(dir, ['--run', 'r9', '--verify']).status, 0);
+
+  manifest[0].requires = [];
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  assert.equal(run(dir, ['--run', 'r9', '--batch', '1', '--update', '--accept-requires']).status, 0);
+  spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  assert.deepEqual(spec.pages[0].requires, [], 'Step 6 reconciliation also removes stale plan-only requires');
+});
+
+test('--update rejects a duplicate introduced by the projected manifest before writing', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'splice-projected-'));
+  mkdirSync(join(dir, 'research'));
+  const original = {
+    pages: [
+      { id: 'page-one', kind: 'A', order: 1, items: ['lem-a'] },
+      { id: 'page-two', kind: 'A', order: 2, items: ['lem-b'] },
+    ],
+  };
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify(original));
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify([
+    { id: 'page-one', kind: 'A', order: 1, items: [{ id: 'lem-a' }, { id: 'lem-b' }] },
+  ]));
+  const result = run(dir, ['--run', 'r9', '--batch', '1', '--update']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /duplicate item id lem-b/);
+  assert.deepEqual(JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8')), original,
+    'the failed projected duplicate check must leave plan-spec untouched');
+});
+
 test('a changed manifest without --update stays a hard error', () => {
   const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-6b'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--batch', '1']);

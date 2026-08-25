@@ -341,8 +341,10 @@ good as the tool list; codex's is not.
 - **A defect in a PUBLISHED item is repaired, then judged by both lanes (owner,
   2026-08-25).** No group owns published content, and leaving a known falsehood
   live because it was out of scope is not a disposition. The Alpha repairs it and
-  appends `{kind:"repaired", id, group, found_via, pre_sha256, defect,
-  correction_basis}` to `<run>-step8-published-repairs.jsonl`. That row is a
+  writes `{kind:"repaired", id, group, found_via, pre_sha256, defect,
+  correction_basis}` to a namespaced temporary file, then appends it with
+  `tools/published-repairs.mjs`; agents never edit the shared
+  `<run>-step8-published-repairs.jsonl` directly. That row is a
   **second licence source** for `step8-guard --published-repairs`, kept separate
   from the adjudication ledger on purpose: published content was never in this
   run's frozen pair context, so licensing the edit through a `confirmed_fatal`
@@ -423,12 +425,16 @@ good as the tool list; codex's is not.
   polish it, never call it fatal. It covers gaps *between steps* — a defect in the
   Statement itself is never 30-second. **At step 8 the polish is withdrawn.**
 
-- **Alpha proof-refuter delegation (owner, 2026-07-31).** For every Alpha-n
-  audit, Alpha dispatches read-only proof-refuters held to the paired judges'
-  standard: report only a concrete false claim, unlicensed inference, missing
-  hypothesis, or inaccurate citation, and inspect the supplied dependency before
-  alleging it is too weak. **A refuter never writes content or applies a fix**;
-  Alpha alone adjudicates every finding from disk.
+- **Step-6 refuter ownership (owner, 2026-07-31; rebuilt 2026-08-25).** In a
+  build, the engine dispatches the read-only refuter stage; Alpha never spawns a
+  duplicate. The computed scope is every reader-untouched item plus every
+  high/critical-risk item. Mechanical collection requires exact, complete
+  coverage before 6b. Refuters report concrete false claims, unlicensed
+  inferences, missing hypotheses, inaccurate citations, and ill-formed
+  expressions, opening cited dependencies before alleging weakness. They never
+  edit or adjudicate; group Alpha decides every structured finding from disk.
+  The published-page audit retains its separate Alpha-dispatched, context-packed
+  DeepSeek refuter protocol under `AUDIT-WORKFLOW.md`.
 
 - **Step 8 is fatal-only (R1; owner, 2026-08-03).** Only a `confirmed_fatal`
   adjudication licenses an edit. A `confirmed_nonfatal` or `false_positive`
@@ -694,8 +700,9 @@ is per frozen context *and* per configured lane.
   passed over a live file), then `proof-contract --strict`, `finite-smoke`,
   `risk-report`, those two detectors, `gate-liveness`. Finite smoke tests are
   bounded countermodel searches, never general proofs. A high/critical risk
-  result routes the item to an extra Alpha proof-refuter and requires an Alpha
-  `risk_review`. **`--require-reviewed` belongs to Step 6, not Step 5:** only
+  result routes the item to the engine's Step-6 read-only refuter even when the
+  reader edited it, and requires an Alpha `risk_review`. **`--require-reviewed`
+  belongs to Step 6, not Step 5:** only
   Alpha writes a `risk_review`, at Step 6, so demanding one at Step 5 can never
   pass. Full contract: `QUALITY-CONTROLS.md`.
 
@@ -703,7 +710,7 @@ is per frozen context *and* per configured lane.
   `content-policy.mjs` on the manifests, generates the `audit-manifest.mjs`
   checklist, and records the Alpha receipt. After any public-interface change,
   `impact-audit.mjs` computes every downstream consumer and requires an Alpha
-  disposition. **Diff `pre-author → post-6b`, both engine snapshots** — a baseline
+  disposition. **Diff `pre-author → post-6b`, then `post-6b → current` at 6c** — a baseline
   after authoring, or a defaulted `--to`, makes the diff empty by construction, so
   the gate confirms instead of checking.
   `level-coverage.mjs --verify-current-context` is the hard receipt gate the
@@ -719,20 +726,19 @@ is per frozen context *and* per configured lane.
   `confirmed_fatal` blocks closure; `confirmed_nonfatal` and `false_positive` may
   clear it under the 30-second rule.
 
-- **Obvious published-dependency repair (owner, 2026-08-01).** Narrowly overrides
-  the read-only boundary: Beta and Alpha may repair a **published item the current
-  level depends on** when its Definition, Statement, Fact, citation or equally
-  load-bearing prose is an unambiguous falsehood. Not a licence to choose between
-  conventions, improve exposition, close a 30-second gap, or extend. The
-  replacement is either the exact source-checked statement with its conventions
-  and hypotheses, or a directly checkable elementary correction — never an
-  unsupported nontrivial theorem. **No author certifies its own repair**: a
-  Beta's is certified by Alpha, Alpha's by a Step-6 reader. **If the correction or
-  any consumer needs a debatable restatement, a new theorem, a deletion, a changed
-  reading order, or leaves an impact queue open, it is not "obvious" — report it
-  for the owner.** Snapshot, repair record, rejudge, stamp
-  (`verification.verified`, `scope: published-dependency-repair`,
-  `delegated_by: owner`) and impact closure: `WORKFLOW.md`, `LEVELS.md` §6.
+- **Obvious published-dependency repair (owner, 2026-08-01; Step-6 ownership
+  hardened 2026-08-26).** A Step-6 reader reports, but never edits, an
+  unambiguous falsehood in a published dependency. After adjudicating it, the
+  first group Alpha to acquire the atomic pre-edit claim is the sole repair
+  owner; parallel groups may not race on the file. The replacement is the exact
+  source-checked statement with its conventions/hypotheses or a directly
+  checkable elementary correction—never a preference, exposition improvement,
+  30-second gap closure, or unsupported theorem. The locked handoff records the
+  finding group, repair owner, old/new guard hashes, defect, and correction
+  basis; Step 8 sends the repaired item through both judge lanes. No repairer
+  self-certifies. A debatable restatement, new theorem, deletion, id/order
+  change, or open impact queue is an owner blocker. `WORKFLOW.md`; `LEVELS.md`
+  §6.
 
 - **Published-page audit workflow (owner, 2026-08-02).** `AUDIT-WORKFLOW.md` is
   normative for the retro-audit of published pages. **Every build safeguard

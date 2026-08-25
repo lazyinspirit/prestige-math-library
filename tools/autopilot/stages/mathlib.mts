@@ -21,6 +21,7 @@ import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
+import { step6Stages } from './mathlib.step6.mts';
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -1094,7 +1095,8 @@ const scaffoldGate = (ctx, { requireSufficient = false } = {}) =>
  *  tool diffs against the ledger's LAST snapshot — which at 6c time was
  *  `pre-author` itself, so the gate diffed the baseline against itself and
  *  confirmed "0 changed" over the whole level (hence `6b-baseline` before
- *  6c). The 6c Alpha's own later edits fall inside the step-8 window. */
+ *  6c). A second live `post-6b -> current` gate closes the lead Alpha's later
+ *  edits before Step 6 ends. */
 const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mjs',
   '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-6b',
   '--receipt', `research/${ctx.run}-impact.json`,
@@ -1724,143 +1726,12 @@ export const stages = [
     },
   },
 
-  {
-    id: '6a-read',
-    label: 'independent readers',
-    pipeline: 'read',
-    role: 'reader',
-    units: batches,
-    pattern: resultPattern('reader', 'reader-\\d+'),
-    // The report is the deliverable; a zero exit is not. reader-7 once exited
-    // zero having written its report over reader-1's.
-    artifacts: (ctx, u) => `research/${ctx.run}-reader-${u}.md`,
-    labelFor: (u) => `reader-${u}`,
-    concurrency: 12,
-    plan: (ctx, pending) => pending.map((u: any) => ({
-      role: 'reader',
-      label: `reader-${u}`,
-      job: 'audit',
-      covers: [u],
-      brief: "briefs/reader.md",
-      task: [`research/${ctx.run}-reader-${u}.task.md`, `research/${ctx.run}-reader.task.md`],
-      timeout: 14400,
-    })),
-    gatesWaived: 'Readers fix what they are licensed to fix (LEVELS.md 6a), so items DO change '
-      + 'here — and the full repo-wide and contract gate set runs on that text at the read '
-      + 'group\'s exit, over the whole level, with the adjudicating Alphas in the loop to route '
-      + 'any failure, before the 6b snapshot and before 6c. A gate run per reader instead would '
-      + 'be reading a level the other batches are still authoring. Each reader\'s report is '
-      + 'required as `artifacts` above.',
-  },
-
-  {
-    id: '6b-adjudicate',
-    // The report is the deliverable, exactly as at 6a: a group Alpha that
-    // adjudicates nothing and exits 0 must not clear the stage. Maps each
-    // batch to its owning group's report; before 2-assign there is no group,
-    // and the filter drops the null.
-    artifacts: (ctx, u) => {
-      const g = readAlphaGroups(ctx)?.find((x) => x.covers.includes(String(u)));
-      return g ? `research/${ctx.run}-alpha-${g.label}-6b.md` : null;
-    },
-    label: 'group Alpha adjudication',
-    // A group whose readers have ALL reported adjudicates while other groups are
-    // still reading. Its repairs are confined to its own batches; the level-wide
-    // checks that could be disturbed by them — the whole repo-wide set and the
-    // contract gates — run at the group exit, after every group's 6b is done and
-    // before 6c touches anything.
-    pipeline: 'read',
-    role: 'alpha',
-    units: batches,
-    pattern: resultPattern('alpha', '6b-[a-z]+'),
-    concurrency: 4,
-    cohort: alphaCohort,
-    plan: (ctx, pendingUnits) => alphaGroups(ctx)
-      .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
-      .map((g: any) => ({
-        role: 'alpha',
-        label: `6b-${g.label}`,
-      job: 'adjudication',
-        covers: g.covers,
-        brief: "briefs/alpha.md",
-        task: [`research/${ctx.run}-alpha-${g.label}-6b.task.md`, `research/${ctx.run}-alpha-group-6b.task.md`],
-        timeout: 14400,
-      })),
-    // `--require-reviewed` belongs here, not at step 5: a `risk_review` is a
-    // disposition only Alpha may write, and Alpha writes it at step 6.
-    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true })],
-    // A missing risk_review is adjudication residue: risk-report routed an
-    // item to Alpha review and no Alpha wrote the disposition — on the first
-    // live join, one high-tier lemma the group Alpha missed. Only an Alpha
-    // may write a risk_review (owner, 2026-08-01), so the round dispatches
-    // one rather than dead-ending; the same contract-audit task carries the
-    // duty. Structural contract failures stay blockers.
-    maxFixRounds: 2,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (!['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
-      executor.start(stage, {
-        role: 'alpha',
-        label: `risk-review-${round}`,
-        job: 'adjudication',
-        covers: [],
-        brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
-        timeout: 3600,
-      });
-    },
-  },
-
-  {
-    id: '6b-baseline',
-    label: 'post-6b touch snapshot (mechanical)',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'snap-post-6b'),
-    artifacts: (ctx) => touchesPath(ctx),
-    concurrency: 1,
-    plan: (ctx) => [{
-      role: 'tool',
-      label: 'snap-post-6b',
-      job: 'bookkeeping-mechanical',
-      covers: ['all'],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-6b'],
-    }],
-    gatesWaived: 'A snapshot has nothing to check beyond its own existence, which `artifacts` '
-      + 'already requires; it is the right endpoint of the 6c impact window, capturing '
-      + 'authoring plus every 6a/6b repair.',
-  },
-
-  {
-    id: '6c-cross',
-    label: 'cross-level citation audit',
-    units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-alpha-6c.md`,
-    pattern: resultPattern('alpha', '6c-[a-z-]+'),
-    concurrency: 1,
-    plan: (ctx) => [{
-      role: 'alpha',
-      label: '6c-lead',
-      job: 'audit',
-      covers: ['all'],
-      brief: "briefs/alpha.md",
-      task: `research/${ctx.run}-alpha-6c.task.md`,
-      timeout: 14400,
-    }],
-    gates: (ctx) => [
-      ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
-      ...contractGates(ctx, { reviewed: true }),
-      // Blast radius against the pre-authoring baseline, and the scope checklist
-      // Alpha's receipt is bound to.
-      impactGate(ctx),
-      gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
-        ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
-        '--output', `research/${ctx.run}-audit-manifest.json`], {
-        // A manifest set that resolved to nothing — wrong run name, empty
-        // pages.json — enumerates zero relationships and exits 0. That is not
-        // a clean scope checklist, it is no checklist.
-        liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
-      }),
-    ],
-  },
+  ...step6Stages({
+    gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
+    impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
+    MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
+    dispatchSourceScouts,
+  }),
 
   // The group partition, rendered BEFORE the sweep so the step-7 readers have
   // their scope. `8-scope` runs the same tool again after the sweep, when the

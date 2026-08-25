@@ -12,19 +12,22 @@
 // Alpha met a page marked `not ready` and resolved the deadlock by dropping it.
 //
 // The one genuinely cognitive thing step 4 encountered was a `requires`
-// disagreement between a batch manifest and the plan. That is not spliceable —
-// it is a decision. This tool refuses to guess: it reports the disagreement and
-// exits nonzero so the engine raises a blocker and an Alpha adjudicates.
+// disagreement between a batch manifest and the plan. That is not spliceable
+// until an Alpha adjudicates it. Ordinary mode records a refusal; Step 6 may
+// pass --accept-requires only after its exact adjudication gate has closed.
 //
 //   node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run]
 //   node tools/splice-plan.mjs --run <run> --verify
 //   node tools/splice-plan.mjs --run <run> --batch <i> --update
+//   node tools/splice-plan.mjs --run <run> --batch <i> --update --accept-requires
 //
 // Idempotent: a page whose items are already spliced and identical is left
 // alone. A page whose items are already spliced and DIFFERENT is a hard error,
 // never a silent overwrite — unless `--update` says the difference is a
 // licensed in-flight change (a 6b/6c Alpha added or deleted an item in the
-// batch manifest) and the plan should follow it, loudly.
+// batch manifest) and the plan should follow it, loudly. `--accept-requires`
+// also reconciles the manifest's exact page prerequisite set after Step 6 has
+// adjudicated that metadata carrier.
 //
 // `--verify` exists because the judge sweep expands its `--pages` into item
 // lists via plan-spec.json, which is spliced once at step 4: an item an Alpha
@@ -42,6 +45,7 @@ const batch = opt('batch');
 const dryRun = argv.includes('--dry-run');
 const verify = argv.includes('--verify');
 const update = argv.includes('--update');
+const acceptRequires = argv.includes('--accept-requires');
 const allMode = argv.includes('--all');
 const refusalsGateMode = argv.includes('--refusals-gate');
 // --fail-on-refusal: the REPAIR-path variant of --all. The splice itself is
@@ -65,8 +69,9 @@ if (refusalsGateMode) {
 }
 const SIZE_CEILING = 60;
 
-if (!run || (!batch && !verify && !allMode) || (update && !batch)) {
-  console.error('usage: node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run] [--update]');
+if (!run || (!batch && !verify && !allMode) || (update && !batch)
+  || (acceptRequires && (!update || !batch))) {
+  console.error('usage: node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run] [--update [--accept-requires]]');
   console.error('       node tools/splice-plan.mjs --run <run> --all [--dry-run]');
   console.error('       node tools/splice-plan.mjs --run <run> --verify');
   process.exit(2);
@@ -154,6 +159,10 @@ if (verify) {
           + (onlyP.length ? `; only in plan: ${onlyP.join(', ')}` : '')
           + (!onlyM.length && !onlyP.length ? '; same ids, different order' : ''));
       }
+      if (stable(page.requires ?? []) !== stable(target.requires ?? [])) {
+        drift.push(`${page.id} (${f}): manifest requires [${(page.requires ?? []).join(', ')}] `
+          + `vs plan [${(target.requires ?? []).join(', ')}]`);
+      }
 
       // A dep landing on a page that exists ONLY in the plan or this run's
       // manifests — no file on disk — is a dep on an UNBUILT page, and those
@@ -221,10 +230,11 @@ for (const b of batchList) {
     const want = page.items ?? [];
     const have = target.items ?? [];
 
+    let itemsChanged = !have.length && want.length > 0;
     if (have.length) {
       const sameIds = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
-      if (sameIds && have.every((h, k) => stable(h) === stable(want[k]))) { unchanged.push(page.id); continue; }
-      if (sameIds) {
+      const sameItems = sameIds && have.every((h, k) => stable(h) === stable(want[k]));
+      if (!sameItems && sameIds) {
         // Same ids, changed bodies: a deps/strategy edit on existing items.
         // No scope moved, so this is a REFRESH, not an unlicensed overwrite —
         // the manifest is the batch-level truth and the plan follows it. The
@@ -232,7 +242,8 @@ for (const b of batchList) {
         // repaired objects into the plan by hand.
         const changed = want.filter((w, k) => stable(w) !== stable(have[k])).map(idOf);
         console.log(`splice-plan: REFRESHING ${page.id} — same ids, ${changed.length} item object(s) changed: ${changed.join(', ')}`);
-      } else if (update) {
+        itemsChanged = true;
+      } else if (!sameItems && update) {
         // A licensed in-flight change: the manifest is the batch-level truth and
         // the plan follows it — loudly, with the delta on the record.
         const wantIds = want.map(idOf);
@@ -240,7 +251,8 @@ for (const b of batchList) {
         console.log(`splice-plan: UPDATING ${page.id} — plan ${haveIds.length} -> manifest ${wantIds.length} item(s)`);
         for (const w of wantIds.filter((x) => !haveIds.includes(x))) console.log(`  + ${w}`);
         for (const h of haveIds.filter((x) => !wantIds.includes(x))) console.log(`  - ${h}`);
-      } else {
+        itemsChanged = true;
+      } else if (!sameItems) {
         problems.push(
           `${page.id}: already has ${have.length} item(s) that differ from the manifest's ${want.length}. `
           + 'Refusing to overwrite — a licensed in-flight change is applied with --update; anything else is a finding.');
@@ -260,9 +272,14 @@ for (const b of batchList) {
     const manifestReq = new Set(page.requires ?? []);
     const planReq = new Set(target.requires ?? []);
     const onlyManifest = [...manifestReq].filter((r) => !planReq.has(r));
-    if (onlyManifest.length) {
+    const onlyPlan = [...planReq].filter((r) => !manifestReq.has(r));
+    if (onlyManifest.length && !acceptRequires) {
       refusals.push({ batch: String(b), page: page.id, requires: onlyManifest });
       continue;
+    }
+    const requiresChanged = acceptRequires && (onlyManifest.length > 0 || onlyPlan.length > 0);
+    if (requiresChanged) {
+      console.log(`splice-plan: RECONCILING ${page.id} requires — plan [${[...planReq].join(', ')}] -> manifest [${[...manifestReq].join(', ')}]`);
     }
 
     if (page.kind === 'A' && want.length > SIZE_CEILING) {
@@ -270,10 +287,26 @@ for (const b of batchList) {
       continue;
     }
 
-    target.items = want;
-    spliced.push({ page: page.id, items: want.length });
+    if (itemsChanged || requiresChanged) {
+      spliced.push({ page: page.id, items: want.length, nextItems: want,
+        nextRequires: [...manifestReq], requiresChanged });
+    } else {
+      unchanged.push(page.id);
+    }
   }
   perBatch.push({ batch: b, spliced, unchanged });
+}
+
+// Project only complete batches into memory before global validation. No file
+// is written until the duplicate scan below passes.
+const refusingBatches = new Set(refusals.map((r) => r.batch));
+for (const { batch: b, spliced } of perBatch) {
+  if (refusingBatches.has(String(b))) continue;
+  for (const change of spliced) {
+    const target = byId.get(change.page);
+    target.items = change.nextItems;
+    if (change.requiresChanged) target.requires = change.nextRequires;
+  }
 }
 
 // Duplicate ids anywhere in the plan would be a silent corruption.
@@ -294,16 +327,9 @@ if (problems.length) {
   process.exit(1);
 }
 
-// A batch containing any refusal is withheld WHOLE: its spec edits are
-// rolled back, no receipt is written, so coverage keeps its units open.
-const refusingBatches = new Set(refusals.map((r) => r.batch));
-if (refusingBatches.size) {
-  for (const { batch: b, spliced } of perBatch) {
-    if (!refusingBatches.has(String(b))) continue;
-    for (const s of spliced) { const t = byId.get(s.page); if (t) t.items = []; }
-  }
-}
-
+// Apply only complete batches. Mutations are deferred until every page has
+// been inspected, so withholding one batch cannot corrupt its plan entries
+// while another batch is written.
 if (!dryRun && perBatch.some((x) => !refusingBatches.has(String(x.batch)) && x.spliced.length)) {
   writeFileSync(specPath, JSON.stringify(spec, null, 2) + '\n');
 }
@@ -323,7 +349,7 @@ for (const { batch: b, spliced, unchanged } of perBatch) {
   const receipt = {
     run, step: 4, batch: Number(b),
     spliced_by: 'tools/splice-plan.mjs (mechanical)',
-    pages_spliced: spliced,
+    pages_spliced: spliced.map(({ page, items, requiresChanged }) => ({ page, items, requires_reconciled: requiresChanged })),
     pages_already_correct: unchanged,
     item_count: spliced.reduce((n, s) => n + s.items, 0),
     size_ceiling: SIZE_CEILING,

@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -24,6 +25,7 @@ const asJson = argv.includes('--json');
 const touchesPath = option('--touches');
 const fromLabel = option('--from');
 const toLabel = option('--to');
+const useCurrent = argv.includes('--current');
 const receiptPath = option('--receipt');
 const templatePath = option('--template');
 if (!touchesPath || !fromLabel) usage();
@@ -72,7 +74,14 @@ const snapshots = Array.isArray(ledger?.snapshots) ? ledger.snapshots : [];
 // first-match resolution would hide every edit made after the first attempt.
 const byLabel = (label) => [...snapshots].reverse().find((snapshot) => snapshot?.label === label);
 const before = byLabel(fromLabel);
-const after = toLabel ? byLabel(toLabel) : snapshots.at(-1);
+const liveSnapshot = () => ({
+  label: 'current workspace',
+  hashes: Object.fromEntries(readdirSync(join(REPO, 'items')).filter((name) => name.endsWith('.md')).sort()
+    .map((name) => [name.slice(0, -3), shortHash(itemHashGuard(readFileSync(join(REPO, 'items', name), 'utf8')))])),
+  surfaces: Object.fromEntries(readdirSync(join(REPO, 'items')).filter((name) => name.endsWith('.md')).sort()
+    .map((name) => [name.slice(0, -3), itemSurfaceHash(readFileSync(join(REPO, 'items', name), 'utf8')).slice(0, 16)])),
+});
+const after = useCurrent ? liveSnapshot() : toLabel ? byLabel(toLabel) : snapshots.at(-1);
 if (!before) die(`touch ledger has no snapshot labelled "${fromLabel}"`);
 if (!after) die(toLabel ? `touch ledger has no snapshot labelled "${toLabel}"` : 'touch ledger has no snapshots');
 if (!before.surfaces || !after.surfaces) {

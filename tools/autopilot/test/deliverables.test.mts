@@ -17,8 +17,9 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
 test('every report-bearing stage names its deliverable', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  const expect: Record<string, string> = {
-    '6c-cross': 'research/frontier-14-alpha-6c.md',
+  const expect: Record<string, string | string[]> = {
+    '6c-cross': ['research/frontier-14-alpha-6c.md', 'research/frontier-14-6c-verdicts.jsonl'],
+    '6d-close': 'research/frontier-14-step6-closure.json',
     '9-scope': 'research/frontier-14-alpha-step9.md',
     '10-evidence-v2': 'research/frontier-14-step10-evidence.json',
     '10-owner-report-v2': 'research/frontier-14-step10-report.response.json',
@@ -27,7 +28,7 @@ test('every report-bearing stage names its deliverable', async () => {
   for (const [id, path] of Object.entries(expect)) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.ok(st.artifacts, `${id} requires no artifact — its deliverable can be absent with the stage green`);
-    assert.equal(st.artifacts(ctx, 'all'), path);
+    assert.deepEqual(st.artifacts(ctx, 'all'), path);
   }
 });
 
@@ -39,17 +40,19 @@ test('6b maps each batch to its owning group report', async () => {
     { label: 'a', covers: ['2', '3', '7'] }, { label: 'b', covers: ['1', '4'] },
   ]));
   const ctx = { run: 'r9', repo };
-  const st = mod.stages.find((s: any) => s.id === '6b-adjudicate');
+  const st: any = mod.stages.find((s: any) => s.id === '6b-adjudicate');
   assert.ok(st.artifacts, '6b-adjudicate requires no artifact');
-  assert.equal(st.artifacts(ctx, '7'), 'research/r9-alpha-a-6b.md');
-  assert.equal(st.artifacts(ctx, '4'), 'research/r9-alpha-b-6b.md');
+  assert.deepEqual(st.artifacts(ctx, '7'),
+    ['research/r9-alpha-a-6b.md', 'research/r9-alpha-a-6b-decisions.json']);
+  assert.deepEqual(st.artifacts(ctx, '4'),
+    ['research/r9-alpha-b-6b.md', 'research/r9-alpha-b-6b-decisions.json']);
   assert.equal(st.artifacts({ run: 'r9', repo: mkdtempSync(join(tmpdir(), 'empty-')) }, '4'), null,
     'before 2-assign there is no group and no artifact demand');
 });
 
 test('9-receipt can regenerate a lapsed spine receipt', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const st = mod.stages.find((s: any) => s.id === '9-receipt');
+  const st: any = mod.stages.find((s: any) => s.id === '9-receipt');
   assert.ok(st.onGateFailure && st.maxFixRounds,
     'a lapsed spine receipt permanently blocked 9-receipt with no repair path');
 });
