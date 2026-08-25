@@ -67,7 +67,7 @@ test('every stage matches the results its own plan produces', async (t) => {
     let plans = [];
     try { plans = st.plan?.(ctx, ['1', '2', '3', '4', '5', '6', '7']) ?? []; } catch { continue; }
     for (const p of plans) {
-      // A `covers: []` rider (the post-step8/post-step9 snapshots) claims no
+      // A `covers: []` preparation dispatch claims no
       // coverage, so its result file matching nothing can stall nothing — the
       // invariant this test protects is that COVERING dispatches are visible
       // to their own stage's completion predicate.

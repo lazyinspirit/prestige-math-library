@@ -693,6 +693,16 @@ const step9ChangesPath = (ctx) => `research/${ctx.run}-step9-changes.json`;
 const step9ChangesScopePath = (ctx) => `research/${ctx.run}-step9-changes.pages.json`;
 const step9ClosurePath = (ctx) => `research/${ctx.run}-step9-judge-closure.json`;
 const scaffoldPath = (ctx) => `research/${ctx.run}-scaffold-closure.json`;
+const step9ScopeDeltaPath = (ctx) => `research/${ctx.run}-step9-scope-delta.json`;
+const step9ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step9-review.md`;
+const step9ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step9.md`;
+
+/** Step 9 cannot start its Alpha until the exact delta has been captured and
+ * every group decision file has been refreshed from that frozen comparison.
+ * The preparation command performs those two writes serially. */
+const step9ScopePrepared = (ctx): boolean => existsSync(R(ctx, step9ScopeDeltaPath(ctx)))
+  && alphaGroups(ctx).every((group) => existsSync(R(ctx,
+    `research/${ctx.run}-alpha-${group.label}-scope-decisions.json`)));
 
 /** The step-3 closure receipt, or null before the gate has ever run. */
 function readScaffold(ctx): { insufficient: string[]; missing_verdict: string[]; closed: boolean } | null {
@@ -2493,45 +2503,56 @@ export const stages = [
     id: '9-scope',
     label: 'scope-denial delta review',
     units: () => ['all'],
-    artifacts: (ctx) => `research/${ctx.run}-alpha-step9.md`,
+    artifacts: step9ScopeReviewPath,
     pattern: resultPattern('(?:alpha|tool)', 'step9-[a-z-]+'),
     concurrency: 1,
-    // Step 3 stores one hash-bound decision per decline.  Capture the delta
+    // Step 3 stores one hash-bound decision per decline. Capture the delta
     // before refreshing those receipts: old runs therefore review everything,
     // while future runs spend Alpha time only where the row, page closure, or
-    // destination changed.  The final register remains complete and is
-    // rendered mechanically after the Alpha has resolved every pending row.
-    plan: (ctx, pending) => (pending.length ? [{
-      role: 'tool',
-      label: 'snap-post-step8',
-      job: 'bookkeeping-mechanical',
-      covers: [],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8'],
-    }, {
-      role: 'tool', label: 'step9-scope-delta', job: 'bookkeeping-mechanical', covers: [],
-      argv: ['node', 'tools/scope-decisions.mjs', 'delta', '--run', ctx.run,
-        '--out', `research/${ctx.run}-step9-scope-delta.json`],
-    }, {
-      role: 'tool', label: 'step9-scope-refresh', job: 'bookkeeping-mechanical', covers: [],
-      argv: ['node', 'tools/scope-decisions.mjs', 'refresh', '--run', ctx.run, '--all'],
-    }, {
-      role: 'alpha',
-      label: 'step9-lead',
-      job: 'audit',
-      covers: ['all'],
-      brief: "briefs/alpha.md",
-      task: `research/${ctx.run}-alpha-step9.task.md`,
-      timeout: 14400,
-    }, {
-      role: 'tool', label: 'step9-scope-render', job: 'bookkeeping-mechanical', covers: [],
-      argv: ['node', 'tools/scope-decisions.mjs', 'render', '--run', ctx.run,
-        '--out', `research/${ctx.run}-alpha-step9.md`],
-    }, {
-      role: 'tool', label: 'step9-scope-snapshot', job: 'bookkeeping-mechanical', covers: [],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step9'],
-    }] : []),
+    // destination changed. Preparation and review are separate polls so the
+    // Alpha can never race the files that define its scope.
+    plan: (ctx, pending) => {
+      if (!pending.length) return [];
+      if (!step9ScopePrepared(ctx)) return [{
+        role: 'tool', label: 'step9-scope-prepare', job: 'bookkeeping-mechanical', covers: [],
+        argv: ['node', 'tools/scope-decisions.mjs', 'prepare', '--run', ctx.run,
+          '--out', step9ScopeDeltaPath(ctx)],
+      }];
+      return [{
+        role: 'alpha', label: 'step9-lead', job: 'audit', covers: ['all'], brief: "briefs/alpha.md",
+        task: `research/${ctx.run}-alpha-step9.task.md`, timeout: 14400,
+      }];
+    },
     gates: (ctx) => [scopeDecisionsGate(ctx), ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
       closureGate(ctx, { pendingRejudge: true }), ledgerGate(ctx)],
+  },
+
+  {
+    id: '9-scope-render',
+    label: 'render the closed scope-denial register',
+    units: () => ['all'],
+    artifacts: step9ScopeRegisterPath,
+    pattern: resultPattern('tool', 'step9-scope-render'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'step9-scope-render', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/scope-decisions.mjs', 'render', '--run', ctx.run,
+        '--out', step9ScopeRegisterPath(ctx)],
+    }],
+    gates: (ctx) => [scopeDecisionsGate(ctx)],
+  },
+
+  {
+    id: '9-scope-freeze',
+    label: 'freeze the reviewed Step-9 scope state',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'step9-scope-freeze'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool', label: 'step9-scope-freeze', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step9-scope'],
+    }],
+    gatesWaived: 'The preceding scope review and render stages are closed; this successful mechanical snapshot is the change boundary used by later impact checks.',
   },
 
   // EVERY STEP-9 MATHEMATICAL CHANGE RE-ENTERS CERTIFICATION.  The guarded hash

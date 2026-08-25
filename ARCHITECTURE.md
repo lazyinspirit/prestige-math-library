@@ -2293,7 +2293,9 @@ mathematical richness. The decision ledger is the durable audit trail.
 **Steps 3, 9 and 10 use durable, delta-aware aggregation (owner, 2026-08-25).**
 `scope-decisions.mjs` gives every decline a stable identity and binds its Alpha
 decision to the exact row, page closure and destination. Step 9 reviews only
-invalidated decisions (or every row on a legacy run), then
+invalidated decisions (or every row on a legacy run). The controller sequences
+delta capture → receipt refresh → Alpha review → deterministic register render
+→ touch freeze, so a render or snapshot cannot race the review it records. Then
 `step9-changes.mjs` derives all created and modified guarded hashes since
 `post-step8`. Deletions, unowned creations and duplicate ownership stop; a
 modified published item remains in the generated targeted judge scope. Changed

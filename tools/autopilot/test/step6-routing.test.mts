@@ -131,13 +131,15 @@ test('Frontier 18 receipt adopts completed legacy coverage without moving its cu
   const active = await import('../stages/mathlib.mts');
   const { Executor } = await import('../src/executor.mts');
   const state = { data: JSON.parse(readFileSync(join(REPO, '.autopilot/state.json'), 'utf8')), save() {} };
+  const stageBeforeCutoverCheck = state.data.stage;
   const executor = new Executor({
     config: { run: 'frontier-18', repo: REPO, stateDir: join(REPO, '.autopilot'),
       dispatchDir: ctx.dispatchDir, argv: ['true'] } as any,
     stages: active.stages, state, adapter: {} as any,
     reporter: { notify() {}, event() {}, report() {} },
   });
-  assert.equal(executor.currentStage().stage?.id, '8-preflight');
+  assert.equal(executor.currentStage().stage?.id, stageBeforeCutoverCheck,
+    'adopting legacy Step 6 evidence must preserve whichever live stage the run has reached');
 });
 
 test('item ids are extracted from gate output, not citation labels', () => {

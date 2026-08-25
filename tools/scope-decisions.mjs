@@ -22,8 +22,8 @@ const all = argv.includes('--all');
 const root = resolve(value('--root') || join(dirname(fileURLToPath(import.meta.url)), '..'));
 const research = join(root, 'research');
 const die = (message, code = 1) => { console.error(`ERROR ${message}`); process.exit(code); };
-if (!run || !['refresh', 'delta', 'check', 'render'].includes(command)) {
-  die('usage: node tools/scope-decisions.mjs <refresh|delta|check|render> --run <run> [--group <label>|--all] [--out <path>] [--root <repo>]', 2);
+if (!run || !['prepare', 'refresh', 'delta', 'check', 'render'].includes(command)) {
+  die('usage: node tools/scope-decisions.mjs <prepare|refresh|delta|check|render> --run <run> [--group <label>|--all] [--out <path>] [--root <repo>]', 2);
 }
 
 const canonical = (value) => {
@@ -146,8 +146,7 @@ const exact = (old, row) => old?.decline_id === row.decline_id && old?.row_sha25
   && old?.context_sha256 === row.context_sha256 && ['stands', 'owner-decision'].includes(old?.decision)
   && typeof old?.evidence === 'string' && old.evidence.trim();
 
-if (command === 'refresh') {
-  const labels = all ? groups.map((group) => String(group.label)) : [groupArg || die('refresh requires --group <label> or --all', 2)];
+function refreshDecisions(labels) {
   const current = currentDeclines();
   for (const label of labels) {
     const old = new Map(loadDecisions(label).map((row) => [row.decline_id, row]));
@@ -162,10 +161,9 @@ if (command === 'refresh') {
     writeFileSync(decisionPath(label), `${JSON.stringify({ version: 1, run, group: label, decisions }, null, 2)}\n`);
     console.log(`scope-decisions: ${label}: ${decisions.length} decline(s), ${decisions.filter((row) => row.decision === 'pending').length} pending`);
   }
-  process.exit(0);
 }
 
-if (command === 'delta') {
+function writeDelta() {
   const current = currentDeclines();
   const old = new Map(groups.flatMap((group) => loadDecisions(String(group.label))).map((row) => [row.decline_id, row]));
   const rows = current.map((row) => ({ ...row, prior_decision: exact(old.get(row.decline_id), row) ? old.get(row.decline_id).decision : null,
@@ -174,6 +172,22 @@ if (command === 'delta') {
   const out = resolve(value('--out') || join(research, `${run}-step9-scope-delta.json`));
   writeFileSync(out, `${JSON.stringify({ version: 1, run, total_declines: rows.length, pending_count: pending.length, rows }, null, 2)}\n`);
   console.log(`scope-decisions: Step 9 delta has ${pending.length}/${rows.length} decision(s) requiring review`);
+}
+
+if (command === 'prepare') {
+  writeDelta();
+  refreshDecisions(groups.map((group) => String(group.label)));
+  process.exit(0);
+}
+
+if (command === 'refresh') {
+  const labels = all ? groups.map((group) => String(group.label)) : [groupArg || die('refresh requires --group <label> or --all', 2)];
+  refreshDecisions(labels);
+  process.exit(0);
+}
+
+if (command === 'delta') {
+  writeDelta();
   process.exit(0);
 }
 

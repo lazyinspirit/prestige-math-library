@@ -812,7 +812,8 @@ The owner audit, not judge unanimity, is the convergence criterion.
 
 Step 3 writes exact, closure-bound decisions for every coverage decline. Step 9
 rechecks only decisions whose row or relevant context changed; runs without the
-new receipt perform the full sweep. Every created or mathematically modified
+new receipt perform the full sweep. Delta capture, receipt refresh, Alpha review,
+register render and the scope snapshot run serially. Every created or mathematically modified
 item since `post-step8` is derived by guarded hash; creations require one run
 manifest owner and modified published items enter a targeted change manifest.
 Every changed id passes through both judges and exact adjudication/rejudge, then

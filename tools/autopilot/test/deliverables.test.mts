@@ -20,7 +20,8 @@ test('every report-bearing stage names its deliverable', async () => {
   const expect: Record<string, string | string[]> = {
     '6c-cross': ['research/frontier-14-alpha-6c.md', 'research/frontier-14-6c-verdicts.jsonl'],
     '6d-close': 'research/frontier-14-step6-closure.json',
-    '9-scope': 'research/frontier-14-alpha-step9.md',
+    '9-scope': 'research/frontier-14-alpha-step9-review.md',
+    '9-scope-render': 'research/frontier-14-alpha-step9.md',
     '10-evidence-v2': 'research/frontier-14-step10-evidence.json',
     '10-owner-report-v2': 'research/frontier-14-step10-report.response.json',
     '10-owner-report-render-v2': 'research/frontier-14-step10-report.md',

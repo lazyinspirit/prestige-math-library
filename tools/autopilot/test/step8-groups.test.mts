@@ -179,9 +179,15 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
   assert.ok(stages.indexOf(close) < stages.indexOf(final));
   assert.ok(stages.indexOf(final) < stages.indexOf(freeze));
   assert.ok(stages.indexOf(freeze) < stages.indexOf(stage('9-scope')));
-
   const futureRepo = fixtureRepoWithGroups();
   const futureCtx = { run: 'demo', repo: futureRepo };
+  const freezePlan = freeze.plan(futureCtx);
+  const step9Plan = stage('9-scope').plan(futureCtx, ['all']);
+  assert.equal(freezePlan.filter((p: any) => p.argv?.includes('post-step8')).length, 1,
+    '8-freeze must create the Step-9 baseline exactly once');
+  assert.equal(step9Plan.filter((p: any) => p.argv?.includes('post-step8')).length, 0,
+    '9-scope must consume the frozen baseline, not try to recreate it');
+
   const judgeGateIds = rejudge.gates(futureCtx).map((g: any) => g.id);
   assert.deepEqual(judgeGateIds, ['step8-guard', 'step8-published', 'judge-closure'],
     'contract/repository repairs cannot consume the two-cycle judge budget');

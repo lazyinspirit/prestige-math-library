@@ -23,14 +23,13 @@ test('Step 3 decisions are exact and legacy Step 9 runs fall back to full review
     { name: 'A declined theorem', disposition: 'deferred', destination: 'destination', reason: 'Owned by the destination page.' },
   ], sources: [] }] }));
   try {
-    let result = run(root, ['delta', '--run', 'demo']);
+    let result = run(root, ['prepare', '--run', 'demo']);
     assert.equal(result.status, 0, result.stderr);
     assert.equal(JSON.parse(readFileSync(join(research, 'demo-step9-scope-delta.json'), 'utf8')).pending_count, 1,
       'a run without Step 3 receipts receives a full Step 9 review');
 
-    result = run(root, ['refresh', '--run', 'demo', '--all']);
-    assert.equal(result.status, 0, result.stderr);
     const receiptPath = join(research, 'demo-alpha-a-scope-decisions.json');
+    assert.ok(readFileSync(receiptPath, 'utf8'), 'prepare refreshes group receipts after writing the delta');
     const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
     receipt.decisions[0].decision = 'stands';
     receipt.decisions[0].evidence = 'The current plan places the theorem on destination after page-a.';

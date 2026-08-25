@@ -70,8 +70,11 @@ test('a modified published item is retained in the targeted judge scope', () => 
 
 test('Step 9 closes impact work before stamping and receipts', () => {
   const ids = stages.map((stage: any) => stage.id);
-  for (const id of ['9-scope', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt']) assert.ok(ids.includes(id));
+  for (const id of ['9-scope', '9-scope-render', '9-scope-freeze', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt']) assert.ok(ids.includes(id));
   assert.ok(ids.indexOf('9-scope') < ids.indexOf('9-changes-judge'));
+  assert.ok(ids.indexOf('9-scope') < ids.indexOf('9-scope-render'));
+  assert.ok(ids.indexOf('9-scope-render') < ids.indexOf('9-scope-freeze'));
+  assert.ok(ids.indexOf('9-scope-freeze') < ids.indexOf('9-changes-judge'));
   assert.ok(ids.indexOf('9-changes-judge') < ids.indexOf('9-close'));
   assert.ok(ids.indexOf('9-close') < ids.indexOf('9-changes-stamp'));
   assert.ok(ids.indexOf('9-changes-stamp') < ids.indexOf('9-receipt'));
@@ -83,6 +86,30 @@ test('Step 9 closes impact work before stamping and receipts', () => {
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step9-changes'));
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step9-judge-closure'));
   assert.ok(close.gates(ctx).some((gate: any) => gate.id === 'step9-changes'), 'impact repairs must refresh the certification delta');
+});
+
+test('Step 9 prepares, reviews, renders, and freezes in strict sequence', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step9-sequence-'));
+  mkdirSync(join(root, 'research'));
+  writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), '[]\n');
+  const ctx = { run: 'demo', repo: root };
+  const scope: any = stages.find((stage: any) => stage.id === '9-scope');
+  try {
+    let plan = scope.plan(ctx, ['all']);
+    assert.deepEqual(plan.map((entry: any) => entry.label), ['step9-scope-prepare']);
+    assert.deepEqual(plan[0].covers, [], 'preparation cannot claim the Alpha review');
+
+    writeFileSync(join(root, 'research', 'demo-step9-scope-delta.json'), '{}\n');
+    writeFileSync(join(root, 'research', 'demo-alpha-a-scope-decisions.json'), '{}\n');
+    plan = scope.plan(ctx, ['all']);
+    assert.deepEqual(plan.map((entry: any) => entry.label), ['step9-lead']);
+    assert.deepEqual(plan[0].covers, ['all']);
+
+    const render: any = stages.find((stage: any) => stage.id === '9-scope-render');
+    const freeze: any = stages.find((stage: any) => stage.id === '9-scope-freeze');
+    assert.deepEqual(render.plan(ctx).map((entry: any) => entry.label), ['step9-scope-render']);
+    assert.ok(freeze.plan(ctx)[0].argv.includes('post-step9-scope'));
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
 test('a closure retry judges only ids that are actually stale', async () => {

@@ -1137,6 +1137,11 @@ computes the receipt delta and re-examines only changed decisions. Runs that
 predate the receipt safely mark every decline pending, preserving the full
 sweep.
 
+The engine serializes this boundary: it writes the delta, refreshes the group
+receipts, dispatches the lead Alpha, renders the closed register, and only then
+freezes `post-step9-scope`. None of those consumers run beside the producer it
+depends on.
+
 **Every mathematical change made after Step 8 is certified before receipts.**
 `step9-changes.mjs` compares guarded hashes with `post-step8`, classifies
 created and modified items, refuses deletion, and requires one owning run
