@@ -5,8 +5,10 @@
 // The receipt also seals the protected repository tree. The expensive final
 // gates run against that sealed tree at 10-readiness-v2; terminal verification
 // recomputes the digest instead of rerunning the same mathematical scans. Files
-// that Step 10 is specifically expected to create after readiness are excluded,
-// as are engine state and dispatch transcripts. Everything else stays covered.
+// that Step 10 creates after readiness and the context-hash acceleration cache
+// that closure verification refreshes are excluded. The authoritative closure
+// receipt is hashed separately below; mathematical and workflow inputs remain
+// protected.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -35,8 +37,9 @@ const artifactRels = [
 
 function protectedTreeReceipt() {
   const ignoredTopLevel = new Set(['.git', '.autopilot', 'node_modules']);
-  const generatedAfterReadiness = new Set([
+  const mutableAfterReadiness = new Set([
     receiptRel,
+    `research/${run}-judge-context-hashes.json`,
     `research/${run}-step10-evidence.json`,
     `research/${run}-step10-report-integrity.json`,
     `research/${run}-step10-report.response.json`,
@@ -49,7 +52,7 @@ function protectedTreeReceipt() {
       const absolute = join(dir, entry.name);
       const rel = relative(root, absolute).replaceAll('\\', '/');
       if (!rel || ignoredTopLevel.has(rel.split('/')[0])) continue;
-      if (generatedAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
+      if (mutableAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
       if (entry.isDirectory()) walk(absolute);
       else if (entry.isFile()) files.push(rel);
     }

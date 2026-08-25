@@ -41,6 +41,7 @@ function fixture() {
     JSON.stringify({ id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'ctx', item_sha256: 'item', keep: true }),
   ].join('\n') + '\n');
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), '');
+  writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'before' }));
   writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), [
     JSON.stringify({ defect_id: 'demo-D001', run: 'demo', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
       subclass: 'invalid-inference', location: 'proof-step', disposition: 'fixed', caught_at_stage: '8-adjudicate', caught_by_role: 'judge-deepseek', repair_cost: 'repair+rejudge' }),
@@ -111,6 +112,9 @@ test('publication readiness seals protected inputs without rejecting expected re
     assert.ok(receipt.protected_tree_files > 0);
     assert.match(receipt.protected_tree_sha256, /^[a-f0-9]{64}$/);
 
+    result = runReadiness(root, '--verify');
+    assert.equal(result.status, 0, result.stderr);
+    writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'refreshed-by-closure-gate' }));
     result = runReadiness(root, '--verify');
     assert.equal(result.status, 0, result.stderr);
     writeFileSync(join(root, 'research', 'demo-step10-report.md'), 'Expected owner report output.\n');
