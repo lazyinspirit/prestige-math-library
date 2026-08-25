@@ -14,6 +14,10 @@ landmark: true
 forward_refs: [thm-complex-nth-roots-and-roots-of-unity]
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-25
 sources:
   scraped: []
   references:

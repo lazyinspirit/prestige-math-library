@@ -12,6 +12,7 @@ parts:
     pages:
       - formal-power-series
       - linear-recurrences-and-rational-generating-functions
+      - lattice-paths-and-catalan-numbers
   - part: order-and-inversion
     title: "Order, chains and Mobius inversion"
     pages:
@@ -25,6 +26,7 @@ parts:
       - eulerian-and-hamiltonian-graphs
       - induced-subgraphs-and-hereditary-graph-classes
       - graph-colouring
+      - linear-algebra-methods-in-combinatorics
   - part: ramsey-and-extremal
     title: "Ramsey and extremal graph theory"
     pages:
@@ -42,6 +44,8 @@ parts:
       - finite-probability-and-the-probabilistic-method
       - erdos-hajnal-property-and-homogeneous-sets
       - regular-pairs-and-induced-counting
+      - sparse-restricted-subgraphs-and-rodl-nikiforov
+      - modules-substitution-and-prime-graphs
 ---
 
 ## counting
@@ -54,11 +58,17 @@ the pigeonhole principle, which produces an object without exhibiting it.
 
 ## generating-functions
 
-A formal power series is a sequence written so that addition and multiplication of series
-are operations on sequences, with no question of convergence anywhere. Coefficient
-extraction, the unit criterion and the formal derivative make the ring usable, and a linear
-recurrence with constant coefficients becomes a rational generating function whose partial
-fractions return a closed form for the sequence.
+A formal power series is a sequence written so that algebra acts on coefficients, with no
+question of convergence anywhere. Coefficient extraction, inversion and formal
+differentiation turn recurrence relations into rational functions and closed forms. Lattice
+paths turn those coefficients into geometry: monotone and diagonal paths are counted by
+binomial coefficients, the reflection principle proves the ballot theorems, and Dyck paths
+give the Catalan numbers. The cycle lemma and first-return decompositions supply further
+Catalan, Motzkin and Schroder formulas, while balanced bracket words, binary trees and
+polygon triangulations identify the same Catalan family in different guises.
+Non-intersecting path systems then bring determinants into the subject through
+Lindstrom-Gessel-Viennot, so generating functions, bijections and linear algebra meet on
+one class of finite models.
 
 ## order-and-inversion
 
@@ -70,11 +80,17 @@ generalises inclusion-exclusion.
 
 ## graphs
 
-A graph is a finite vertex set with a symmetric adjacency relation, and the first facts are
-the ones every later argument quotes: degrees sum to twice the edge count, walks give
-connectivity and components, trees are the connected graphs with no cycle, and every
-connected graph has a spanning tree. Eulerian and Hamiltonian circuits, induced subgraphs
-and hereditary classes, and proper colourings with the greedy bound complete the language.
+A graph begins as adjacency, degree, walks, components and trees, and those notions already
+control spanning trees, Eulerian and Hamiltonian circuits, hereditary classes and proper
+colourings. Incidence vectors and incidence matrices then move finite set systems and graph
+decompositions into linear algebra: independence criteria yield Oddtown, Eventown, Fisher's
+inequality and the Graham-Pollak theorem. Shattering and VC dimension connect the same
+finite families to order and geometry, with shifting and multilinear polynomials proving
+Sauer-Shelah and the inclusion matrix giving an exact rank computation. Multivariate
+polynomial identities and the combinatorial Nullstellensatz close the part with
+Cauchy-Davenport, cube-cover bounds and the Frankl-Wilson intersection theorem, so
+combinatorial structure is measured equally by graph language, vector spaces and
+polynomials.
 
 ## ramsey-and-extremal
 
@@ -93,9 +109,13 @@ degree and gives the five colour theorem.
 
 ## probability
 
-A finite probability space is a finite set with weights, so expectation is a finite sum and
-every inequality here is a statement about counting. Linearity of expectation, Markov's
-inequality and the second moment method turn that into existence proofs: a graph with a
-property is exhibited by showing a random one has it with positive probability. The same
-machinery bounds induced copies of a fixed graph, gives regular pairs, and supports the
-Erdos-Hajnal property for hereditary classes.
+A finite probability space turns expectation into a weighted count, so linearity, Markov's
+inequality and second moments produce graphs and set systems by proving positive
+probability. In hereditary graph theory that method yields homogeneous sets and
+induced-copy estimates, while regularity replaces local irregularity by dense pseudorandom
+pairs with controlled counting. Nikiforov's theorem and Rodl's theorem then force linearly
+large sparse or dense restricted sets in $H$-free graphs, with bounded cover and partition
+forms. Modules and substitution give the complementary decomposition theory: a module is a
+vertex set indistinguishable from outside, Gallai's theorem splits every connected
+anticonnected graph into a prime quotient and modular parts, and substitution preserves the
+Erdos-Hajnal property, reducing the conjecture to prime graphs.

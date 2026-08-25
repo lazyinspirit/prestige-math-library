@@ -54,6 +54,7 @@ parts:
       - sylow-theorems-and-nilpotent-groups
       - the-galois-correspondence
       - frattini-subgroups-and-the-burnside-basis-theorem
+      - finite-fields-and-cyclotomic-extensions
 ---
 
 ## groups-and-quotients
@@ -112,13 +113,12 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 ## sylow-and-extensions
 
-A split extension is a semidirect product: a normal subgroup, a complement acting on it,
-and the automorphism groups counting such actions. Sylow's theorems turn the arithmetic of
-the group order into structure by counting subgroups of prime power order, up to the
-nilpotent groups where every Sylow subgroup is normal. In a finite $p$-group the maximal
-subgroups intersect in the nongenerators, and Burnside's basis theorem makes generation and
-automorphisms linear algebra on the elementary abelian quotient. Fields repeat the pattern:
-Artin's fixed-field theorem matches a finite automorphism group to a degree, the Galois
-correspondence pairs intermediate fields with subgroups and normality with normality, and
-the action on roots makes irreducibility transitivity, discriminants and resolvents
-settling cubics and quartics.
+A split extension is a semidirect product: a normal subgroup, a complement, and an action
+by automorphisms. Sylow's theorems turn divisibility of $|G|$ into existence, conjugacy and
+counting of $p$-subgroups, nilpotence makes them all normal, and the Frattini subgroup with
+Burnside's basis theorem linearises generation in finite $p$-groups. On the Galois side,
+intermediate fields match subgroups, finite fields are controlled by Frobenius, and normal
+bases make the cyclic action explicit. Roots of unity and cyclotomic polynomials then
+produce abelian Galois extensions, factorisation laws over finite fields, intersections and
+composita of cyclotomic fields, primes congruent to $1$ modulo $n$, and finite abelian
+Galois groups over $\mathbb Q$.

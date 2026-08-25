@@ -18,6 +18,7 @@ parts:
       - quadratic-residues-and-the-legendre-symbol
       - quadratic-reciprocity-and-the-jacobi-symbol
       - sums-of-two-squares
+      - lagrange-four-square-theorem
 ---
 
 ## divisibility-and-primes
@@ -36,12 +37,11 @@ unit group modulo a prime turns out to be cyclic, which is what a primitive root
 
 ## quadratic-residues
 
-Which numbers are squares modulo a prime is decided by the Legendre symbol, and it is
-multiplicative because the unit group is cyclic. Euler's criterion and Gauss's lemma
-compute it, quadratic reciprocity relates the symbols of two primes, and the Jacobi symbol
-extends the computation to odd composite moduli. The first supplement then decides which
-integers are sums of two squares: Thue's lemma turns a square root of $-1$ into a
-representation of a prime congruent to one modulo four, unique up to signs and order, the
-Brahmagupta-Fibonacci identity multiplies representations, a prime congruent to three
-modulo four must occur to an even power, and the same analysis of primitive representations
-settles their products, divisors and the squarefree case.
+Quadratic residues ask which classes modulo an odd prime are squares, and the Legendre
+symbol, Euler's criterion, Gauss's lemma and quadratic reciprocity answer that question in
+a multiplicative language extended by the Jacobi symbol. The same congruence tools settle
+sums of two squares: primes $p\equiv1\pmod4$ are represented, the Brahmagupta-Fibonacci
+identity multiplies representations, and primes $3\pmod4$ must occur to even exponent.
+Euler's four-square identity and a minimal-descent argument then show every prime, hence
+every nonnegative integer, is a sum of four squares. Congruences modulo $8$ isolate the
+sharper three-square obstruction $4^a(8m+7)$.

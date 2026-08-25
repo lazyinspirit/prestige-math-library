@@ -95,6 +95,7 @@ parts:
       - areas-of-elementary-plane-figures
       - the-real-gamma-and-beta-functions
       - volumes-of-elementary-solids-and-solids-of-revolution
+      - the-divergence-theorem-and-classical-stokes
 ---
 
 ## building-the-reals
@@ -200,13 +201,13 @@ and flux for graphs and surfaces of revolution.
 
 ## curves-and-the-fundamental-theorems
 
-Path length, the supremum of inscribed polygonal lengths, is bounded variation made geometric.
-Fundamental theorems handle exceptional sets and one-sided derivatives; line integrals, the
-gradient theorem and differentiation under the integral sign extend path calculus. Jordan content
-gives translation-invariant area, the disc formula $\pi r^2$, base-height and determinant formulas
-for parallelograms and triangles, and triangulation and shoelace formulas for polygons; slicing
-between continuous graphs extends it to volume, with disc, washer and shell formulas, cones and
-balls in every dimension by Cavalieri. Power-series trigonometry ties the characterizations of
-$\pi$ to the complex exponential, produces the Weierstrass function and, with the Riemann-Lebesgue
-lemma, controls oscillation; Euler's Gamma and Beta integrals give factorial interpolation,
-Bohr-Mollerup, $\Gamma(1/2)$, Stirling's constant and the unit-ball volume.
+Path length is the supremum of polygonal approximations, so bounded variation becomes
+geometry on curves; the fundamental theorems of calculus, line integrals and the gradient
+theorem turn derivatives back into increments along intervals and paths. Jordan content
+gives area and volume for polygons, solids of revolution and higher-dimensional balls,
+while the characterisations of $\pi$, the complex exponential, oscillatory examples and the
+Gamma and Beta integrals connect geometry with power series and special functions. In three
+dimensions divergence, curl and the Laplacian organise vector calculus, with conservative
+fields and vector potentials as the local structure theorems. The divergence theorem,
+Green's identities and classical Stokes then identify flux and circulation as the global
+integrals attached to divergence and curl.

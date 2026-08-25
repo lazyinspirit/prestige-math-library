@@ -12,6 +12,7 @@ parts:
     pages:
       - limits-and-colimits
       - adjunctions-units-and-counits
+      - ends-coends-and-weighted-limits
   - part: reflections-and-monads
     title: "Reflections, adjoint functors and monads"
     pages:
@@ -30,11 +31,16 @@ universal property into a definition.
 
 ## limits-and-adjunctions
 
-Limits and colimits specify an object by all the arrows to or from a diagram, so products,
-equalisers, pullbacks and their duals become one construction with one uniqueness argument.
-An adjunction pairs two functors through a natural bijection of hom-sets, equivalently
-through a unit and counit satisfying the triangle identities, and left adjoints preserve
-colimits while right adjoints preserve limits.
+Limits and colimits specify an object by all arrows to or from a diagram, so products,
+equalisers, pullbacks and their duals become instances of one universal construction.
+Adjunctions express the same economy for functors: a hom-set bijection is equivalent to a
+unit and counit, and left and right adjoints preserve the colimits and limits forced by
+their universal properties. Dinatural maps, wedges, ends and coends refine that language
+for bifunctors, with twisted-arrow categories and equalizer or coequalizer formulas making
+them computable and with natural transformations themselves appearing as an end. Weighted
+limits then replace an indexing category by a weight, so powers, representable weights and
+hom-weighted coends show ordinary limits, Yoneda formulas and colimits as instances of one
+end-coend calculus.
 
 ## reflections-and-monads
 
