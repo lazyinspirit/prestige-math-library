@@ -384,11 +384,15 @@ Fact or equally load-bearing prose, or an inaccurate citation of one — **repai
 it**. Do not route it to another group: no group owns published content, and
 leaving a known falsehood live because it was out of scope is not a disposition.
 
-Append one row to `research/frontier-18-step8-published-repairs.jsonl`:
+Write one row to a namespaced temporary JSON file:
 
 ```
 {kind: "repaired", id, group, found_via, pre_sha256, defect, correction_basis}
 ```
+
+Append it with
+`node tools/published-repairs.mjs append --run frontier-18 --file <rows.json>`.
+Never edit the shared JSONL directly; group Alphas run concurrently.
 
 `found_via` is the run item whose rejection exposed it. `defect` says what was
 false. `correction_basis` says what makes the replacement right — the exact
