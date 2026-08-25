@@ -2,7 +2,7 @@
 id: def-monotone-lattice-path
 kind: definition
 title: "Monotone lattice paths with steps $E=(1,0)$ and $N=(0,1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

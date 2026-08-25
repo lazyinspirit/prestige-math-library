@@ -2,7 +2,7 @@
 id: lem-strict-right-minima-of-a-quasiperiodic-partial-sum-function
 kind: lemma
 title: "If every $a_i\\le1$ and $\\lVert a\\rVert\\ge1$, the strict right minima form a two-sided increasing list on which $S_a$ increases by exactly $1$ at each successive index"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

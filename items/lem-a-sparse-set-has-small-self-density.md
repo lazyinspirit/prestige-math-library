@@ -2,7 +2,7 @@
 id: lem-a-sparse-set-has-small-self-density
 kind: lemma
 title: "A $c$-sparse set has self-density at most $c$, and a $c$-dense set has self-density at least $1-c-1/|X|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

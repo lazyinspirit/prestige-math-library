@@ -2,7 +2,7 @@
 id: thm-a-bounded-partition-into-weakly-restricted-sets
 kind: theorem
 title: "Every $H$-free graph partitions into boundedly many vertex sets of self-density at most $\\epsilon$ or at least $1-\\epsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

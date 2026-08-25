@@ -2,7 +2,7 @@
 id: cex-directional-sparsity-is-not-symmetric
 kind: counterexample
 title: "$X$ can be $c$-sparse to $Y$ while $Y$ is not $c$-sparse to $X$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

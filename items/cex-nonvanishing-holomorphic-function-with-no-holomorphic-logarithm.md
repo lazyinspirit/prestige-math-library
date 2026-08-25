@@ -2,7 +2,7 @@
 id: cex-nonvanishing-holomorphic-function-with-no-holomorphic-logarithm
 kind: counterexample
 title: "A nonvanishing holomorphic function on a domain with no holomorphic logarithm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

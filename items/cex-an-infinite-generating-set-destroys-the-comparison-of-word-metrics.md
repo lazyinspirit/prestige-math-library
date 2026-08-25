@@ -2,7 +2,7 @@
 id: cex-an-infinite-generating-set-destroys-the-comparison-of-word-metrics
 kind: counterexample
 title: "Taking $\\mathbb Z$ itself as a generating set gives a word metric of diameter one, not bilipschitz equivalent to the standard one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

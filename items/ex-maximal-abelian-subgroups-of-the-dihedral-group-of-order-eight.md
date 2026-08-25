@@ -2,7 +2,7 @@
 id: ex-maximal-abelian-subgroups-of-the-dihedral-group-of-order-eight
 kind: example
 title: "The three maximal abelian subgroups of $\\operatorname{Dih}(C_4)$ have order four, as the general bound predicts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

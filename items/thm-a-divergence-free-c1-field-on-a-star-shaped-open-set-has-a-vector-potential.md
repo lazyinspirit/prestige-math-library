@@ -2,7 +2,7 @@
 id: thm-a-divergence-free-c1-field-on-a-star-shaped-open-set-has-a-vector-potential
 kind: theorem
 title: "A divergence-free $C^1$ field on a star-shaped open subset of $\\mathbb R^3$ has a vector potential"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

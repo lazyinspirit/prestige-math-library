@@ -2,7 +2,7 @@
 id: def-central-product-of-two-groups-along-an-isomorphism-of-central-subgroups
 kind: definition
 title: "The central product $G\\circ_\\alpha H$ of two groups along an isomorphism of central subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-n
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

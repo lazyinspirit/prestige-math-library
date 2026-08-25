@@ -2,7 +2,7 @@
 id: cor-maximum-modulus-on-the-distinguished-boundary-of-a-polydisc
 kind: corollary
 title: "The modulus of a holomorphic function on a closed polydisc is bounded by its supremum on the distinguished boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

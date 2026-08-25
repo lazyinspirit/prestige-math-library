@@ -2,7 +2,7 @@
 id: lem-shifts-of-a-weight-one-word-realise-each-count-of-nonpositive-partial-sums-once
 kind: lemma
 title: "If $\\lVert a\\rVert=1$ then $j\\mapsto\\#\\{r:0\\le r<m,\\ S_a(j+r)\\le S_a(j)\\}$ is a bijection from $\\{0,\\dots,m-1\\}$ onto $\\{1,\\dots,m\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

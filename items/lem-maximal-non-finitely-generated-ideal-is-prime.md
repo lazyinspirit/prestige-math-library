@@ -2,7 +2,7 @@
 id: lem-maximal-non-finitely-generated-ideal-is-prime
 kind: lemma
 title: "An ideal maximal among the non-finitely-generated ideals is prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

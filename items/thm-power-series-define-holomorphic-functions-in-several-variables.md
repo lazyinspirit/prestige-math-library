@@ -2,7 +2,7 @@
 id: thm-power-series-define-holomorphic-functions-in-several-variables
 kind: theorem
 title: "An absolutely convergent multi-indexed power series is holomorphic and differentiates termwise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

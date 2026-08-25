@@ -2,7 +2,7 @@
 id: ex-the-planar-divergence-theorem-on-a-rectangle
 kind: example
 title: "The planar divergence theorem on a rectangle, checked against a direct boundary computation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

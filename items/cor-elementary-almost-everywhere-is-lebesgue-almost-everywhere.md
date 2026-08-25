@@ -2,7 +2,7 @@
 id: cor-elementary-almost-everywhere-is-lebesgue-almost-everywhere
 kind: corollary
 title: "A property holding outside a set of elementary measure zero is exactly a property holding $\\lambda$-almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

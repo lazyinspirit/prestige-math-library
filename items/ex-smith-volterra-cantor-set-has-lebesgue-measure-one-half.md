@@ -2,7 +2,7 @@
 id: ex-smith-volterra-cantor-set-has-lebesgue-measure-one-half
 kind: example
 title: "The Smith-Volterra-Cantor set has Lebesgue measure exactly $1/2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

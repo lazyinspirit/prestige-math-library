@@ -2,7 +2,7 @@
 id: prop-noncentral-conjugacy-classes-of-an-extraspecial-p-group-have-size-p
 kind: proposition
 title: "Every conjugacy class of an extraspecial $p$-group outside the centre has exactly $p$ elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

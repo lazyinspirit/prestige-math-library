@@ -2,7 +2,7 @@
 id: thm-lindstrom-gessel-viennot
 kind: theorem
 title: "$\\det\\bigl(\\lvert\\mathcal{M}(A_i,E_j)\\rvert\\bigr)_{i,j}=\\sum_{\\pi\\in S_r}\\operatorname{sgn}(\\pi)\\cdot\\#\\{\\text{non-intersecting }\\pi\\text{-systems}\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

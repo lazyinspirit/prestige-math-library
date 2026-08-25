@@ -2,7 +2,7 @@
 id: ex-counting-induced-three-vertex-paths-by-extensions
 kind: example
 title: "Counting the induced copies of $P_3$ in $P_4$ by extension sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

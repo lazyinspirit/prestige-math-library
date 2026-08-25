@@ -2,7 +2,7 @@
 id: fs-the-cayley-graph-of-a-group-does-not-depend-on-the-generating-set
 kind: false-statement
 title: "FALSE: the Cayley graph of a group is independent of the chosen generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

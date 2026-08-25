@@ -2,7 +2,7 @@
 id: lem-small-four-square-multiple-of-a-prime
 kind: lemma
 title: "Some multiple $pm$ with $1\\le m<p$ is a sum of four squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

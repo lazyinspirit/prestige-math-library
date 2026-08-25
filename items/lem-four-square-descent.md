@@ -2,7 +2,7 @@
 id: lem-four-square-descent
 kind: lemma
 title: "Descent step: a smaller multiple of $p$ is a sum of four squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

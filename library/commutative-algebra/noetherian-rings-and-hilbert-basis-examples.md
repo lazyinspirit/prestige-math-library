@@ -1,7 +1,7 @@
 ---
 page: noetherian-rings-and-hilbert-basis-examples
 title: "Noetherian Rings and Hilbert Basis — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-noetherian-integers-and-fields,
            ex-noetherian-quotient-affine-algebra,

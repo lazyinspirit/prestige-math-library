@@ -2,7 +2,7 @@
 id: cex-a-special-p-group-that-is-not-extraspecial
 kind: counterexample
 title: "For odd $p$, a direct product of two Heisenberg groups is special with centre of order $p^2$, hence not extraspecial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

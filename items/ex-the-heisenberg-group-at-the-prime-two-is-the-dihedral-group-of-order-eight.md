@@ -2,7 +2,7 @@
 id: ex-the-heisenberg-group-at-the-prime-two-is-the-dihedral-group-of-order-eight
 kind: example
 title: "At $p=2$ the Heisenberg construction produces $\\operatorname{Dih}(C_4)$, not a group of exponent $2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

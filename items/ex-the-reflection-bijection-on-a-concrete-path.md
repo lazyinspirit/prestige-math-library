@@ -2,7 +2,7 @@
 id: ex-the-reflection-bijection-on-a-concrete-path
 kind: example
 title: "The reflection bijection applied to $UDDUDU$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

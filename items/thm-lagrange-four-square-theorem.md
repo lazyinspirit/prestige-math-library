@@ -2,7 +2,7 @@
 id: thm-lagrange-four-square-theorem
 kind: theorem
 title: "Lagrange's four-square theorem: every nonnegative integer is a sum of four integer squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

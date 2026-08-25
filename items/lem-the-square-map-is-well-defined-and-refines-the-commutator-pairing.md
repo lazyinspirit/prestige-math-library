@@ -2,7 +2,7 @@
 id: lem-the-square-map-is-well-defined-and-refines-the-commutator-pairing
 kind: lemma
 title: "The square map is well defined on the central quotient and satisfies $q(\\bar x\\bar y)=q(\\bar x)+q(\\bar y)+b(\\bar x,\\bar y)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

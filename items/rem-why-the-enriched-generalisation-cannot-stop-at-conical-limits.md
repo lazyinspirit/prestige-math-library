@@ -2,7 +2,7 @@
 id: rem-why-the-enriched-generalisation-cannot-stop-at-conical-limits
 kind: remark
 title: 'Why weights are needed once the base of enrichment is not $\mathbf{Set}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-set-weighted-limit-and-weighted-colimit, thm-the-constant-singleton-w
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

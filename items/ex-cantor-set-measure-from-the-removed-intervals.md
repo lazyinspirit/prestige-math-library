@@ -2,7 +2,7 @@
 id: ex-cantor-set-measure-from-the-removed-intervals
 kind: example
 title: "The complement of the Cantor set in $[0,1]$ has Lebesgue measure one, computed from the removed intervals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

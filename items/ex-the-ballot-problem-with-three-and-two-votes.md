@@ -2,7 +2,7 @@
 id: ex-the-ballot-problem-with-three-and-two-votes
 kind: example
 title: "The ballot problem with three votes for $A$ and two for $B$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

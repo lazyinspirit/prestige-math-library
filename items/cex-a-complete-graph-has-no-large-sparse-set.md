@@ -2,7 +2,7 @@
 id: cex-a-complete-graph-has-no-large-sparse-set
 kind: counterexample
 title: "The dense alternative in Rödl's theorem cannot be dropped"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: lagrange-four-square-theorem
 title: "Lagrange Four Square Theorem"
-status: draft
+status: published
 items: [def-sum-of-four-squares-representation,
         lem-euler-four-square-product-identity,
         cor-four-squares-closed-under-products,

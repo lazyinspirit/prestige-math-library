@@ -2,7 +2,7 @@
 id: lem-squares-modulo-eight
 kind: lemma
 title: "A square is congruent to $0$, $1$ or $4$ modulo $8$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

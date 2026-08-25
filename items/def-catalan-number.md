@@ -2,7 +2,7 @@
 id: def-catalan-number
 kind: definition
 title: "The Catalan number $C_n:=\\lvert\\mathcal{D}_n\\rvert$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

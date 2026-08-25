@@ -2,7 +2,7 @@
 id: lem-determinant-independence-criterion
 kind: lemma
 title: "Determinant criterion: if the matrix $\\bigl(\\langle v_i,w_j\\rangle\\bigr)_{i,j}$ is invertible then both $v_1,\\dots,v_m$ and $w_1,\\dots,w_m$ are linearly independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

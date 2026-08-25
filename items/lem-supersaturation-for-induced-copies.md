@@ -2,7 +2,7 @@
 id: lem-supersaturation-for-induced-copies
 kind: lemma
 title: "If every $m$-element vertex set contains an induced copy of $H$, then at least $\\binom{n}{h}/\\binom{m}{h}$ of the $h$-element vertex sets induce a copy of $H$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-complex-jacobian-of-a-quadratic-map-of-the-bidisc
 kind: example
 title: "The complex Jacobian and its determinant for $(z_0z_1, z_0+z_1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

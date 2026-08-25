@@ -2,7 +2,7 @@
 id: thm-lebesgue-inner-regularity-by-closed-and-compact-sets
 kind: theorem
 title: "Assuming countable choice, the Lebesgue measure of a measurable set is the supremum of the measures of its compact subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "inner regularity"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

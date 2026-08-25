@@ -2,7 +2,7 @@
 id: fs-separately-real-analytic-functions-are-jointly-continuous
 kind: false-statement
 title: "A bounded function of two real variables whose every coordinate slice is real analytic is continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

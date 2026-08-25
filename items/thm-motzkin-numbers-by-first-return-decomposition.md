@@ -2,7 +2,7 @@
 id: thm-motzkin-numbers-by-first-return-decomposition
 kind: theorem
 title: "$M(x)=1+x\\,M(x)+x^{2}M(x)^{2}$, and $2x^{2}M(x)=1-x-(1-2x-3x^{2})^{1/2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

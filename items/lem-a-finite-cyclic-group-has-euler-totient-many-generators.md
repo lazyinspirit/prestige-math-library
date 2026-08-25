@@ -2,7 +2,7 @@
 id: lem-a-finite-cyclic-group-has-euler-totient-many-generators
 kind: lemma
 title: "A cyclic group of order $n$ has exactly $\\varphi(n)$ generators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

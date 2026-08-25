@@ -2,7 +2,7 @@
 id: rem-the-diagonal-convention-in-self-density
 kind: remark
 title: "Why the self-density bound for a dense set carries a $1/|X|$ slack"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

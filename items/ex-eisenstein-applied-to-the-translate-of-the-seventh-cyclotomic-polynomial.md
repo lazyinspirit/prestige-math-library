@@ -2,7 +2,7 @@
 id: ex-eisenstein-applied-to-the-translate-of-the-seventh-cyclotomic-polynomial
 kind: example
 title: "$\\Phi_7(t+1)$ is Eisenstein at seven"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

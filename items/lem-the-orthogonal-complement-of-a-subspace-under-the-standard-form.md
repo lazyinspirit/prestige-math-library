@@ -2,7 +2,7 @@
 id: lem-the-orthogonal-complement-of-a-subspace-under-the-standard-form
 kind: lemma
 title: "For a subspace $U\\le F^{n}$, $\\dim_F U^{\\perp}=n-\\dim_F U$, where $U^{\\perp}=\\{x:\\langle x,u\\rangle=0\\text{ for all }u\\in U\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

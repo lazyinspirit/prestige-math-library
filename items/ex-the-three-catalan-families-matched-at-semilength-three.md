@@ -2,7 +2,7 @@
 id: ex-the-three-catalan-families-matched-at-semilength-three
 kind: example
 title: "The five Dyck paths, balanced bracket words, binary trees and pentagon triangulations at semilength $3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

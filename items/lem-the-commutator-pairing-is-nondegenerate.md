@@ -2,7 +2,7 @@
 id: lem-the-commutator-pairing-is-nondegenerate
 kind: lemma
 title: "The commutator pairing of an extraspecial $p$-group has trivial radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

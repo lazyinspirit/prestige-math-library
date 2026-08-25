@@ -2,7 +2,7 @@
 id: ex-non-noetherian-subalgebra-of-a-polynomial-ring
 kind: example
 title: "The subalgebra $k[x,xy,xy^2,\\ldots]$ of $k[x,y]$ is not Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

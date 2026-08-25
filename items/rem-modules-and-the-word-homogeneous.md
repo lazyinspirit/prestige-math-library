@@ -2,7 +2,7 @@
 id: rem-modules-and-the-word-homogeneous
 kind: remark
 title: "Why this page says module where some sources say homogeneous set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

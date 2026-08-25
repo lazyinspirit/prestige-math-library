@@ -2,7 +2,7 @@
 id: thm-normal-basis-theorem-for-a-cyclic-extension
 kind: theorem
 title: "Every finite cyclic extension has a normal basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-cauchy-davenport-fails-for-a-composite-modulus
 kind: counterexample
 title: "In $\\mathbb{Z}/4$ the sets $A=B=\\{0,2\\}$ have $\\lvert A+B\\rvert=2$, below the Cauchy–Davenport bound $3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

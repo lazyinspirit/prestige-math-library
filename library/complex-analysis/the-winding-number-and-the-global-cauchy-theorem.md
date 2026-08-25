@@ -1,7 +1,7 @@
 ---
 page: the-winding-number-and-the-global-cauchy-theorem
 title: "The Winding Number and the Global Cauchy Theorem"
-status: draft
+status: published
 items: [lem-tagged-sums-approximate-a-contour-integral,
         lem-continuous-function-holomorphic-off-a-point-is-holomorphic,
         thm-contour-parameter-integrals-are-holomorphic,

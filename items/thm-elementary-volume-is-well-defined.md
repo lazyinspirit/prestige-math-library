@@ -2,7 +2,7 @@
 id: thm-elementary-volume-is-well-defined
 kind: theorem
 title: "The sum of the volumes of a disjoint box decomposition of an elementary set does not depend on the decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "elementary volume"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

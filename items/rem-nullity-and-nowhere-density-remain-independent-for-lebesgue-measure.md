@@ -2,7 +2,7 @@
 id: rem-nullity-and-nowhere-density-remain-independent-for-lebesgue-measure
 kind: remark
 title: "The published refutations separating nullity from nowhere density hold verbatim for Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

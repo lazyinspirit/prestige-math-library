@@ -2,7 +2,7 @@
 id: thm-the-ninja-yoneda-lemma-in-coend-form
 kind: theorem
 title: "The co-Yoneda isomorphisms: a set-valued functor is a coend against a representable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

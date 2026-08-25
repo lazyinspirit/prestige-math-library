@@ -2,7 +2,7 @@
 id: lem-locally-bounded-separately-holomorphic-functions-are-locally-lipschitz
 kind: lemma
 title: "A bounded separately holomorphic function on a polydisc is Lipschitz on every smaller polydisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-the-twisted-arrow-category-is-the-category-of-elements-of-the-hom-bifunctor
 kind: theorem
 title: "The twisted arrow category is the category of elements of the hom-bifunctor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-cyclic-coordinate-permutations-preserve-integrals-in-r3
 kind: lemma
 title: "A cyclic permutation of the coordinates of $\\mathbb R^3$ preserves Jordan measurability and integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

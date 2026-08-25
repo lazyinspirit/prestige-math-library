@@ -2,7 +2,7 @@
 id: prop-the-path-metric-of-a-connected-simple-graph-is-quasi-geodesic-with-constants-one-and-one
 kind: proposition
 title: "The vertex set of a connected simple graph with its path metric is a $(1,1)$-quasi-geodesic space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

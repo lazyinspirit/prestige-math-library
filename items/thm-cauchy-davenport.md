@@ -2,7 +2,7 @@
 id: thm-cauchy-davenport
 kind: theorem
 title: "Cauchy–Davenport: for $p$ prime and nonempty $A,B\\subseteq\\mathbb{Z}/p$, $\\lvert A+B\\rvert\\ge\\min\\{p,\\lvert A\\rvert+\\lvert B\\rvert-1\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

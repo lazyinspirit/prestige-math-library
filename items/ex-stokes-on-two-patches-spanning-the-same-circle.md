@@ -2,7 +2,7 @@
 id: ex-stokes-on-two-patches-spanning-the-same-circle
 kind: example
 title: "Stokes' theorem on a flat disc and on a hemisphere with the same induced boundary circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

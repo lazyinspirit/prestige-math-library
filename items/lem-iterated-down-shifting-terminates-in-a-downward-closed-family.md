@@ -2,7 +2,7 @@
 id: lem-iterated-down-shifting-terminates-in-a-downward-closed-family
 kind: lemma
 title: "Applying down-shifts until none changes the family terminates, and the result is closed under taking subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

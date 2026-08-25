@@ -2,7 +2,7 @@
 id: thm-balanced-bracket-words-are-exactly-the-nonnegative-prefix-words
 kind: theorem
 title: "$\\mathcal{B}_n$ is exactly the set of words of length $2n$ over $\\{\\texttt{(},\\texttt{)}\\}$ in which every prefix has at least as many $\\texttt{(}$ as $\\texttt{)}$ and the totals are equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-substitution-commutes-with-complementation
 kind: lemma
 title: "The complement of $G_1[a\\to G_2]$ is $\\overline{G_1}[a\\to\\overline{G_2}]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-cyclic-cubic-field-inside-the-seventh-cyclotomic-field
 kind: example
 title: "A degree-three Galois extension of $\\mathbb Q$ inside $\\mathbb Q(\\zeta_7)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

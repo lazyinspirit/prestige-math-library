@@ -2,7 +2,7 @@
 id: fs-four-square-representations-of-a-prime-are-essentially-unique
 kind: false-statement
 title: "FALSE: a prime has one four-square representation up to order and signs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 short: "FALSE: four-square uniqueness for primes"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

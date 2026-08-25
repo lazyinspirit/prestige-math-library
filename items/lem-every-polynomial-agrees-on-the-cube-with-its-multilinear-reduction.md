@@ -2,7 +2,7 @@
 id: lem-every-polynomial-agrees-on-the-cube-with-its-multilinear-reduction
 kind: lemma
 title: "$\\widetilde f$ is multilinear, agrees with $f$ at every point of $\\{0,1\\}^{n}$, is degree-nonincreasing when nonzero, and is the unique multilinear polynomial with that agreement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

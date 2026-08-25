@@ -2,7 +2,7 @@
 id: lem-central-product-absorption-of-the-exponent-p-squared-factor-for-odd-p
 kind: lemma
 title: "For odd $p$, a central product of two modular groups of order $p^3$ is a central product of a modular group with a Heisenberg group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

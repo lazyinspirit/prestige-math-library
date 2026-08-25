@@ -2,7 +2,7 @@
 id: ex-winding-number-of-the-unit-circle-traversed-three-times
 kind: example
 title: "The unit circle traversed three times has index $3$ at every interior point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

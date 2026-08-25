@@ -2,7 +2,7 @@
 id: thm-oddtown
 kind: theorem
 title: "Oddtown: distinct $A_1,\\dots,A_m\\subseteq[n]$ with every $\\lvert A_i\\rvert$ odd and every $\\lvert A_i\\cap A_j\\rvert$ ($i\\ne j$) even satisfy $m\\le n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

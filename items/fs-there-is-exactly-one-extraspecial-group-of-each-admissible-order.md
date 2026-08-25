@@ -2,7 +2,7 @@
 id: fs-there-is-exactly-one-extraspecial-group-of-each-admissible-order
 kind: false-statement
 title: "FALSE: for each $n\\ge1$ there is exactly one extraspecial group of order $p^{1+2n}$ up to isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

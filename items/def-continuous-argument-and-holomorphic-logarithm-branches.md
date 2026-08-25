@@ -2,7 +2,7 @@
 id: def-continuous-argument-and-holomorphic-logarithm-branches
 kind: definition
 title: "Continuous logarithms and continuous arguments along a contour"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-continuous-logarithms-exist-along-a-contour]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

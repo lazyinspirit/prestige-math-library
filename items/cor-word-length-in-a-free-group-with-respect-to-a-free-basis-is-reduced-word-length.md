@@ -2,7 +2,7 @@
 id: cor-word-length-in-a-free-group-with-respect-to-a-free-basis-is-reduced-word-length
 kind: corollary
 title: "With respect to a free basis, the word length of an element is the length of its reduced word"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

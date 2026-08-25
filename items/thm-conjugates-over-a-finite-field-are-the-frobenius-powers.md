@@ -2,7 +2,7 @@
 id: thm-conjugates-over-a-finite-field-are-the-frobenius-powers
 kind: theorem
 title: "A monic irreducible of degree $d$ over $\\mathbb F_q$ has the $d$ distinct roots $\\alpha,\\alpha^{q},\\dots,\\alpha^{q^{d-1}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-overlapping-proper-modules-of-a-connected-anticonnected-graph
 kind: lemma
 title: "In a connected and anticonnected graph, the union of two proper modules that meet is again a proper module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity
 kind: theorem
 title: "$t^{n}-1$ is separable over $K$ exactly when the characteristic does not divide $n$, and then a splitting field carries $n$ distinct $n$-th roots of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

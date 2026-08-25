@@ -2,7 +2,7 @@
 id: cor-boundedly-many-restricted-sets-cover-all-but-a-small-fraction
 kind: corollary
 title: "For every $\\lambda>0$ a bounded number of disjoint $\\epsilon$-restricted sets covers all but $\\lambda|V(G)|$ vertices of an $H$-free graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

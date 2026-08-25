@@ -2,7 +2,7 @@
 id: cor-finite-type-algebra-over-a-principal-ideal-domain-is-noetherian
 kind: corollary
 title: "Every algebra of finite type over a principal ideal domain is a Noetherian ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

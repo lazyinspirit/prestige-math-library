@@ -1,7 +1,7 @@
 ---
 page: cayley-graphs-word-metrics-and-quasi-isometry-examples
 title: "Cayley Graphs, Word Metrics and Quasi-Isometry — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-cayley-graph-and-word-metric-of-the-integers,
            ex-two-generating-sets-of-the-integers-give-different-but-bilipschitz-equivalent-word-metrics,

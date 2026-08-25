@@ -1,7 +1,7 @@
 ---
 page: ends-coends-and-weighted-limits
 title: "Ends Coends and Weighted Limits"
-status: draft
+status: published
 items: [def-dinatural-transformation,
         prop-a-natural-transformation-composed-with-a-dinatural-transformation-is-dinatural,
         thm-dinatural-transformations-do-not-compose-in-general,

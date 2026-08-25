@@ -2,7 +2,7 @@
 id: def-square-map-of-an-extraspecial-two-group
 kind: definition
 title: "The square map of an extraspecial $2$-group relative to a chosen generator of its centre"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-the-square-map-is-well-defined-and-refines-the-commutator-pai
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

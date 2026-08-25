@@ -2,7 +2,7 @@
 id: thm-classification-of-the-nonabelian-groups-of-order-p-cubed
 kind: theorem
 title: "For each prime there are exactly two nonabelian groups of order $p^3$ up to isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-power-series-expansion-of-a-geometric-quotient-in-two-variables
 kind: example
 title: "The power series of $z_0/(1-z_1)$ and the shape of its domain of convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

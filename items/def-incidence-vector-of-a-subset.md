@@ -2,7 +2,7 @@
 id: def-incidence-vector-of-a-subset
 kind: definition
 title: "The incidence vector $v_A\\in F^{n}$ of a subset $A\\subseteq[n]$ over a stated field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

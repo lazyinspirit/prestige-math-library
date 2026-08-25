@@ -2,7 +2,7 @@
 id: def-coarsely-dense-subset-and-quasi-isometry
 kind: definition
 title: "Coarsely dense subsets, quasi-inverses and quasi-isometries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-coarse-lipschitz-map-and-quasi-isometric-embedding, def-bounded-dista
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

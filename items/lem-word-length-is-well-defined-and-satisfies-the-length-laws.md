@@ -2,7 +2,7 @@
 id: lem-word-length-is-well-defined-and-satisfies-the-length-laws
 kind: lemma
 title: "Word length is defined on every element and satisfies the subadditivity, inversion and vanishing laws"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

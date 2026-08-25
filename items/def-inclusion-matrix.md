@@ -2,7 +2,7 @@
 id: def-inclusion-matrix
 kind: definition
 title: "The inclusion matrix $W_{t,k}(n)$ of $t$-sets against $k$-sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

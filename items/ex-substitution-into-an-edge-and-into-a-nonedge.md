@@ -2,7 +2,7 @@
 id: ex-substitution-into-an-edge-and-into-a-nonedge
 kind: example
 title: "Substituting into $K_2$ gives the join and substituting into $\\overline{K_2}$ gives the disjoint union"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-cohen-noetherian-criterion
 kind: theorem
 title: "Cohen's criterion: a commutative ring in which every prime ideal is finitely generated is Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

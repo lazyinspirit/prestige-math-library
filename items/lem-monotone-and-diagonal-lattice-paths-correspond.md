@@ -2,7 +2,7 @@
 id: lem-monotone-and-diagonal-lattice-paths-correspond
 kind: lemma
 title: "The two step sets describe the same objects: $U\\mapsto N$, $D\\mapsto E$ is a bijection matching the diagonal $y=x$ with the level $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

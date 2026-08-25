@@ -2,7 +2,7 @@
 id: ex-a-dense-null-g-delta-set-containing-the-rationals
 kind: example
 title: "A dense $G_\\delta$ subset of $\\mathbb{R}$ of Lebesgue measure zero containing every rational, and its meager complement of full measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -20,6 +20,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

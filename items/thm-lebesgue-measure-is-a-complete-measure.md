@@ -2,7 +2,7 @@
 id: thm-lebesgue-measure-is-a-complete-measure
 kind: theorem
 title: "Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "$\\lambda_n$ is a complete measure"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

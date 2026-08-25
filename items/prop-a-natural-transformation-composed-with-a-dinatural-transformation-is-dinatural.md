@@ -2,7 +2,7 @@
 id: prop-a-natural-transformation-composed-with-a-dinatural-transformation-is-dinatural
 kind: proposition
 title: "Composing a dinatural transformation with a natural transformation on either side gives a dinatural transformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

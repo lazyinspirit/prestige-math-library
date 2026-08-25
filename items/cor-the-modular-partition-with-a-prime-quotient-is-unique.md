@@ -2,7 +2,7 @@
 id: cor-the-modular-partition-with-a-prime-quotient-is-unique
 kind: corollary
 title: "In a connected and anticonnected graph, a modular partition with at least two parts whose quotient is prime consists of the maximal proper modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

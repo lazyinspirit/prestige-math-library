@@ -2,7 +2,7 @@
 id: lem-orbit-polynomial-has-invariant-coefficients
 kind: lemma
 title: "For a finite group of ring automorphisms the orbit polynomial is monic over the invariant subring, so the ring is integral over its invariants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

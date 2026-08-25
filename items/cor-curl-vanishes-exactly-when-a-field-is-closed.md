@@ -2,7 +2,7 @@
 id: cor-curl-vanishes-exactly-when-a-field-is-closed
 kind: corollary
 title: "A $C^1$ field on an open subset of $\\mathbb R^3$ is closed exactly when its curl vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

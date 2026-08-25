@@ -1,7 +1,7 @@
 ---
 page: extraspecial-p-groups-and-central-products-examples
 title: "Extraspecial $p$-Groups and Central Products — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-commutator-pairings-of-the-dihedral-and-quaternion-groups-of-order-eight,
            ex-the-heisenberg-group-of-order-twenty-seven,

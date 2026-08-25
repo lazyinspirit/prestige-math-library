@@ -2,7 +2,7 @@
 id: def-cayley-graph
 kind: definition
 title: "The Cayley graph of a group with respect to a subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-directed-labelled-c
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

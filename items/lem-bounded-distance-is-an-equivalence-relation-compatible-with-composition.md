@@ -2,7 +2,7 @@
 id: lem-bounded-distance-is-an-equivalence-relation-compatible-with-composition
 kind: lemma
 title: "Bounded distance is an equivalence relation and is preserved by pre-composition and by post-composition with a coarse Lipschitz map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

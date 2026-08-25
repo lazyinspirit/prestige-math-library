@@ -2,7 +2,7 @@
 id: thm-binary-trees-correspond-to-dyck-paths
 kind: theorem
 title: "There is a bijection $\\mathcal{T}_n\\to\\mathcal{D}_n$ for every $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

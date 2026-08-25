@@ -2,7 +2,7 @@
 id: ex-componentwise-holomorphy-of-an-explicit-map-into-complex-three-space
 kind: example
 title: "Componentwise holomorphy checked for an explicit map $\\mathbb{C}^2\\to\\mathbb{C}^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

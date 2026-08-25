@@ -2,7 +2,7 @@
 id: lem-commutator-identities-in-a-group-of-class-two
 kind: lemma
 title: "Commutator identities in a group whose derived subgroup is central"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

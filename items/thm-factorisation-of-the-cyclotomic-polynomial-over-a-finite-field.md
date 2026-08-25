@@ -2,7 +2,7 @@
 id: thm-factorisation-of-the-cyclotomic-polynomial-over-a-finite-field
 kind: theorem
 title: "For $\\gcd(n,q)=1$ the reduction of $\\Phi_n$ in $\\mathbb F_q[t]$ is a product of distinct monic irreducibles, each of degree the order of $[q]$ modulo $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

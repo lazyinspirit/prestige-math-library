@@ -2,7 +2,7 @@
 id: lem-every-vertex-lies-in-a-unique-maximal-proper-module
 kind: lemma
 title: "In a connected and anticonnected graph with at least two vertices, each vertex lies in a largest proper module, and two such modules are equal or disjoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

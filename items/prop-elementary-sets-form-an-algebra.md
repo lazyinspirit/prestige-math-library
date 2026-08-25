@@ -2,7 +2,7 @@
 id: prop-elementary-sets-form-an-algebra
 kind: proposition
 title: "The elementary sets form an algebra of subsets of $\\mathbb{R}^n$ containing every half-open box"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "$\\mathcal{E}_n$ is an algebra"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

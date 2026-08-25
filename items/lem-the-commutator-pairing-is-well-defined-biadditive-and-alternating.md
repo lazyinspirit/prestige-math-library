@@ -2,7 +2,7 @@
 id: lem-the-commutator-pairing-is-well-defined-biadditive-and-alternating
 kind: lemma
 title: "The commutator pairing is well defined on the central quotient, is bilinear over $\\mathbb F_p$, and is alternating"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-the-divergence-is-the-limiting-outward-flux-per-unit-volume
 kind: corollary
 title: "The divergence at a point is the limit of outward flux per unit volume"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

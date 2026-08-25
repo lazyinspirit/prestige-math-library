@@ -2,7 +2,7 @@
 id: ex-two-generating-sets-of-a-dihedral-group
 kind: example
 title: "The dihedral group of order eight has Cayley graphs that are a cycle of length eight and a cube"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

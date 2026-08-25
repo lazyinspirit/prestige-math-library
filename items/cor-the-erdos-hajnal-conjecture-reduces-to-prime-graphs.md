@@ -2,7 +2,7 @@
 id: cor-the-erdos-hajnal-conjecture-reduces-to-prime-graphs
 kind: corollary
 title: "Every graph has the Erdős–Hajnal property if and only if every prime graph does"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

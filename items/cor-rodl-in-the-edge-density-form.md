@@ -2,7 +2,7 @@
 id: cor-rodl-in-the-edge-density-form
 kind: corollary
 title: "The edge-density form of Rödl's theorem: every nonempty $H$-free graph has a linearly large set of self-density at most $\\epsilon$ or at least $1-\\epsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

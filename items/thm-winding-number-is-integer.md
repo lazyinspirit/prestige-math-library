@@ -2,7 +2,7 @@
 id: thm-winding-number-is-integer
 kind: theorem
 title: "The winding number of a closed contour is an integer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

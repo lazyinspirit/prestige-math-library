@@ -2,7 +2,7 @@
 id: thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements
 kind: theorem
 title: "A weighted limit is an ordinary limit over the category of elements of the weight, and a weighted colimit an ordinary colimit over it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

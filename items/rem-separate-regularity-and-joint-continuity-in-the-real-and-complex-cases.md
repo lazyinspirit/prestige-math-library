@@ -2,7 +2,7 @@
 id: rem-separate-regularity-and-joint-continuity-in-the-real-and-complex-cases
 kind: remark
 title: "Why local boundedness gives joint continuity here and nothing like it holds in the real case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

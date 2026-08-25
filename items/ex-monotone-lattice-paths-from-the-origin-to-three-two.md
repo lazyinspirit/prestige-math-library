@@ -2,7 +2,7 @@
 id: ex-monotone-lattice-paths-from-the-origin-to-three-two
 kind: example
 title: "The ten monotone lattice paths from $(0,0)$ to $(3,2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

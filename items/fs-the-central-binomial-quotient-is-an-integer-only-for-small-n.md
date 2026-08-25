@@ -2,7 +2,7 @@
 id: fs-the-central-binomial-quotient-is-an-integer-only-for-small-n
 kind: false-statement
 title: "FALSE: the quotient $\\binom{2n}{n}/(n+1)$ is an integer only for small $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

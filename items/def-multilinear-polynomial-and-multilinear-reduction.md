@@ -2,7 +2,7 @@
 id: def-multilinear-polynomial-and-multilinear-reduction
 kind: definition
 title: "Multilinear polynomials and the reduction $x_i^{2}\\mapsto x_i$ on the cube"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

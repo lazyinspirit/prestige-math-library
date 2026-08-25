@@ -2,7 +2,7 @@
 id: thm-infinitely-many-primes-congruent-to-one-modulo-n
 kind: theorem
 title: "For every $n\\ge1$ there are infinitely many primes $p$ with $p\\equiv1\\pmod n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

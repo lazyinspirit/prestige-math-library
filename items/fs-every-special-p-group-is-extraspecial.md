@@ -2,7 +2,7 @@
 id: fs-every-special-p-group-is-extraspecial
 kind: false-statement
 title: "FALSE: every special $p$-group is extraspecial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

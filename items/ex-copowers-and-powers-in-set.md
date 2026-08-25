@@ -2,7 +2,7 @@
 id: ex-copowers-and-powers-in-set
 kind: example
 title: "Powers and copowers of a set by a set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

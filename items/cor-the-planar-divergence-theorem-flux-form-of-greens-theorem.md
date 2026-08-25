@@ -2,7 +2,7 @@
 id: cor-the-planar-divergence-theorem-flux-form-of-greens-theorem
 kind: corollary
 title: "The planar divergence theorem: the flux form of Green's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

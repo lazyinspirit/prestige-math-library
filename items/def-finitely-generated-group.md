@@ -2,7 +2,7 @@
 id: def-finitely-generated-group
 kind: definition
 title: "Finitely generated groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-group, def-generated-subgroup, def-finite-cardinality]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

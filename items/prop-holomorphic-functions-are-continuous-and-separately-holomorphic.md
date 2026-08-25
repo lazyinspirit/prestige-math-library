@@ -2,7 +2,7 @@
 id: prop-holomorphic-functions-are-continuous-and-separately-holomorphic
 kind: proposition
 title: "A holomorphic function of several variables is continuous and separately holomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

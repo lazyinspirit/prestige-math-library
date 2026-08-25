@@ -1,7 +1,7 @@
 ---
 page: finite-fields-and-cyclotomic-extensions
 title: "Finite Fields and Cyclotomic Extensions"
-status: draft
+status: published
 items: [lem-subgroup-lattice-of-a-finite-cyclic-group,
         lem-a-finite-cyclic-group-has-euler-totient-many-generators,
         def-relative-frobenius-of-a-finite-field-extension,

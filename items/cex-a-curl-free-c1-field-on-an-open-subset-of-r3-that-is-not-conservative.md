@@ -2,7 +2,7 @@
 id: cex-a-curl-free-c1-field-on-an-open-subset-of-r3-that-is-not-conservative
 kind: counterexample
 title: "A curl-free $C^1$ field on the complement of a line that is not conservative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

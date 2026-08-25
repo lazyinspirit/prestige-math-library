@@ -2,7 +2,7 @@
 id: thm-a-weighted-limit-is-an-end
 kind: theorem
 title: "A weighted limit is an end of powers and a weighted colimit a coend of copowers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

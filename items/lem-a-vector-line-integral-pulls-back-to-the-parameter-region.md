@@ -2,7 +2,7 @@
 id: lem-a-vector-line-integral-pulls-back-to-the-parameter-region
 kind: lemma
 title: "A vector line integral along an image arc is the parameter line integral of the pulled-back field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

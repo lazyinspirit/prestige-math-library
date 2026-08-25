@@ -2,7 +2,7 @@
 id: prop-the-modular-group-of-order-p-cubed-is-extraspecial-and-has-exponent-p-squared-for-odd-p
 kind: proposition
 title: "The modular group of order $p^3$ is extraspecial, of exponent $p^2$ when $p$ is odd"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

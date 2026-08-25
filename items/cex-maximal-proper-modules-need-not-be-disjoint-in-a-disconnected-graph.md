@@ -2,7 +2,7 @@
 id: cex-maximal-proper-modules-need-not-be-disjoint-in-a-disconnected-graph
 kind: counterexample
 title: "Maximal proper modules need not be disjoint when the graph or its complement is disconnected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

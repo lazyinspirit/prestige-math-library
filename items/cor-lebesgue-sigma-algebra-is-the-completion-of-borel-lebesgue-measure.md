@@ -2,7 +2,7 @@
 id: cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure
 kind: corollary
 title: "$\\mathcal{L}(\\mathbb{R}^n)$ is exactly the completion of the restriction of $\\lambda_n$ to the Borel sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "$\\mathcal{L}$ is the Borel completion"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

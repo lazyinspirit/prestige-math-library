@@ -2,7 +2,7 @@
 id: lem-four-square-congruence-for-primes
 kind: lemma
 title: "For every prime $p$ the congruence $x^2+y^2+1\\equiv 0\\pmod p$ is solvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

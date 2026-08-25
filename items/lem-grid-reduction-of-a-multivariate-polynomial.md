@@ -2,7 +2,7 @@
 id: lem-grid-reduction-of-a-multivariate-polynomial
 kind: lemma
 title: "Reducing $f$ modulo $g_i(x_i)=\\prod_{s\\in S_i}(x_i-s)$ lowers each $\\deg_{x_i}$ below $\\lvert S_i\\rvert$, preserves the values on the grid, and preserves any top-degree coefficient whose exponents stay below the grid sizes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

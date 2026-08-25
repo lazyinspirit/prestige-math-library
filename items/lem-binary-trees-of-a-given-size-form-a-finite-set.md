@@ -2,7 +2,7 @@
 id: lem-binary-trees-of-a-given-size-form-a-finite-set
 kind: lemma
 title: "Each $\\mathcal{T}_n$ is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

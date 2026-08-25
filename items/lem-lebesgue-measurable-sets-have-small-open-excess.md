@@ -2,7 +2,7 @@
 id: lem-lebesgue-measurable-sets-have-small-open-excess
 kind: lemma
 title: "For a Lebesgue measurable set and every positive $\\varepsilon$ there is an open superset whose difference from it has outer measure below $\\varepsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

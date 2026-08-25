@@ -2,7 +2,7 @@
 id: cex-incidence-vectors-dependent-over-the-two-element-field-and-independent-over-the-reals
 kind: counterexample
 title: "A set family whose incidence vectors are dependent over $\\mathbb{F}_2$ and independent over $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

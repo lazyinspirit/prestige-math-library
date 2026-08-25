@@ -2,7 +2,7 @@
 id: def-quasi-geodesic-and-quasi-geodesic-metric-space
 kind: definition
 title: "Quasi-geodesics and quasi-geodesic metric spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-metric-space, def-coarse-lipschitz-map-and-quasi-isometric-embedding]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

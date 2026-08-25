@@ -2,7 +2,7 @@
 id: thm-eventown
 kind: theorem
 title: "Eventown: distinct $A_1,\\dots,A_m\\subseteq[n]$ with every $\\lvert A_i\\rvert$ and every $\\lvert A_i\\cap A_j\\rvert$ even satisfy $m\\le 2^{\\lfloor n/2\\rfloor}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

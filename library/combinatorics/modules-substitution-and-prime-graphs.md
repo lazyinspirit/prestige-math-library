@@ -1,7 +1,7 @@
 ---
 page: modules-substitution-and-prime-graphs
 title: "Modules, Substitution and Prime Graphs"
-status: draft
+status: published
 items: [def-module-of-a-graph,
         lem-module-criteria,
         lem-modules-are-complement-invariant,

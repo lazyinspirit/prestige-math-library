@@ -2,7 +2,7 @@
 id: def-wedge-and-cowedge
 kind: definition
 title: "Wedges and cowedges, and the categories they form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-dinatural-transformation, def-constant-diagram-cone-cocone-and-cone-m
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

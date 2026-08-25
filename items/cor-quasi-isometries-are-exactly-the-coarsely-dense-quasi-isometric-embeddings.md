@@ -2,7 +2,7 @@
 id: cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings
 kind: corollary
 title: "A map is a quasi-isometry exactly when it is a quasi-isometric embedding with coarsely dense image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

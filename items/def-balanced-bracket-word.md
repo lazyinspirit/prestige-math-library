@@ -2,7 +2,7 @@
 id: def-balanced-bracket-word
 kind: definition
 title: "Balanced bracket words, defined by the recursive grammar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-isometries-bilipschitz-equivalences-and-quasi-isometries-form-a-hierarchy
 kind: proposition
 title: "Every isometry is a bilipschitz equivalence and every bilipschitz equivalence is a quasi-isometry, and two metrics on one set are Lipschitz equivalent exactly when the identity is a bilipschitz equivalence between them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-lebesgue-measure-of-a-box-of-every-kind
 kind: theorem
 title: "A box in $\\mathbb{R}^n$ with parameters $a_i\\le b_i$ is Lebesgue measurable of measure $\\prod_{i<n}(b_i-a_i)$, whichever of its faces are included"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "measure of a box"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

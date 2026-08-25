@@ -2,7 +2,7 @@
 id: prop-prime-power-cyclotomic-polynomials-and-the-eisenstein-translate
 kind: proposition
 title: "$\\Phi_{p^{r}}(t)=\\sum_{k<p}t^{kp^{r-1}}$, and $\\Phi_{p^{r}}(t+1)$ is Eisenstein at $p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

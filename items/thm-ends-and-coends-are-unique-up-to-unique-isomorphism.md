@@ -2,7 +2,7 @@
 id: thm-ends-and-coends-are-unique-up-to-unique-isomorphism
 kind: theorem
 title: "An end and a coend are unique up to a unique isomorphism compatible with every component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

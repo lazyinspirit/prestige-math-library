@@ -2,7 +2,7 @@
 id: thm-a-power-is-a-product-of-copies-and-a-copower-is-a-coproduct-of-copies
 kind: theorem
 title: "A power by a set is the product of that many copies and a copower is the coproduct"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-separated-net-in-a-metric-space
 kind: definition
 title: "Separated nets in a metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-metric-space, def-metric-bounded-diameter, def-metric-interior-closur
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

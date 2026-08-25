@@ -2,7 +2,7 @@
 id: lem-orthogonal-complement-counting-for-the-commutator-pairing
 kind: lemma
 title: "A subgroup of the central quotient and its orthogonal complement have orders multiplying to the order of the quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

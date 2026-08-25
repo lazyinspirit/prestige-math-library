@@ -2,7 +2,7 @@
 id: lem-a-finite-abelian-group-is-a-quotient-of-a-power-of-a-cyclic-group
 kind: lemma
 title: "Every finite abelian group is a quotient of $(\\mathbb Z/n)^{k}$ for some $n$ and $k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

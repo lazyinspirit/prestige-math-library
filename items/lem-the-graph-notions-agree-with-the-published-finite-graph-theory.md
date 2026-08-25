@@ -2,7 +2,7 @@
 id: lem-the-graph-notions-agree-with-the-published-finite-graph-theory
 kind: lemma
 title: "On a finite vertex set the graph notions agree, and on connected graphs the two path distances agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

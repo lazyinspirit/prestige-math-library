@@ -2,7 +2,7 @@
 id: thm-chung-feller
 kind: theorem
 title: "The Chung–Feller theorem: for each $k$ with $0\\le k\\le n$, exactly $C_n$ of the diagonal paths from $(0,0)$ to $(2n,0)$ have exactly $2k$ steps lying above level $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

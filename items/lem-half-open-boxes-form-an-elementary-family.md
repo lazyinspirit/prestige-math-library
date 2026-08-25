@@ -2,7 +2,7 @@
 id: lem-half-open-boxes-form-an-elementary-family
 kind: lemma
 title: "Half-open boxes are closed under intersection, and the complement of a half-open box is a finite disjoint union of half-open boxes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

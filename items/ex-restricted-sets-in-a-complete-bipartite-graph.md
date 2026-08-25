@@ -2,7 +2,7 @@
 id: ex-restricted-sets-in-a-complete-bipartite-graph
 kind: example
 title: "The two sides of a balanced complete bipartite graph are large restricted sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

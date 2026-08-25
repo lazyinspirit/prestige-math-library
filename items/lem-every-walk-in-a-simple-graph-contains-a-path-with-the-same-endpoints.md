@@ -2,7 +2,7 @@
 id: lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints
 kind: lemma
 title: "Every walk contains a path between the same endpoints, of no greater length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

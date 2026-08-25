@@ -2,7 +2,7 @@
 id: lem-the-totient-of-a-gcd-and-of-a-least-common-multiple
 kind: lemma
 title: "$\\varphi(m)\\varphi(n)=\\varphi(\\gcd(m,n))\\,\\varphi(\\operatorname{lcm}(m,n))$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

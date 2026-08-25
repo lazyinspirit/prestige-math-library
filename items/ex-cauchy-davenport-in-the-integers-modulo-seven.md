@@ -2,7 +2,7 @@
 id: ex-cauchy-davenport-in-the-integers-modulo-seven
 kind: example
 title: "$A=B=\\{0,1,2\\}$ in $\\mathbb{Z}/7$: the sumset has five elements and the bound is tight"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

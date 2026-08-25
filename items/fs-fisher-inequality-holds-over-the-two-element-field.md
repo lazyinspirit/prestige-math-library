@@ -2,7 +2,7 @@
 id: fs-fisher-inequality-holds-over-the-two-element-field
 kind: false-statement
 title: "FALSE: distinct nonempty $A_1,\\dots,A_m\\subseteq[n]$ whose pairwise intersections all have the same parity satisfy $m\\le n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

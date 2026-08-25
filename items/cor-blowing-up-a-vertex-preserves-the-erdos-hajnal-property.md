@@ -2,7 +2,7 @@
 id: cor-blowing-up-a-vertex-preserves-the-erdos-hajnal-property
 kind: corollary
 title: "Substituting a complete or an edgeless graph for a vertex preserves the Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

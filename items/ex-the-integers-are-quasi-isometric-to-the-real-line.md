@@ -2,7 +2,7 @@
 id: ex-the-integers-are-quasi-isometric-to-the-real-line
 kind: example
 title: "The inclusion of $\\mathbb Z$ in $\\mathbb R$ is a quasi-isometry that is neither surjective nor a bilipschitz equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

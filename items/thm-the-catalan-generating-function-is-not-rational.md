@@ -2,7 +2,7 @@
 id: thm-the-catalan-generating-function-is-not-rational
 kind: theorem
 title: "$C(x)$ is not a rational formal power series, so $(C_n)$ satisfies no eventual constant-coefficient linear recurrence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

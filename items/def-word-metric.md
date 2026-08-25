@@ -2,7 +2,7 @@
 id: def-word-metric
 kind: definition
 title: "The word metric of a group with respect to a generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-word-length-with-respect-to-a-generating-set, lem-word-length-is-well
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

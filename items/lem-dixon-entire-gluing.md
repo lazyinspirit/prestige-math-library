@@ -2,7 +2,7 @@
 id: lem-dixon-entire-gluing
 kind: lemma
 title: "Dixon's glued function is entire and vanishes at infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-invariant-subring-of-a-group-of-ring-automorphisms
 kind: definition
 title: "A group acting on a ring by automorphisms and its invariant subring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

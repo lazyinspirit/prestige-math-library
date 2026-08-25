@@ -2,7 +2,7 @@
 id: fs-a-finitely-generated-group-with-a-word-metric-is-a-geodesic-metric-space
 kind: false-statement
 title: "FALSE: a nontrivial finitely generated group with a word metric is a geodesic metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

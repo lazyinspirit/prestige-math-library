@@ -2,7 +2,7 @@
 id: def-convex-polygon-chords-crossings-and-triangulations
 kind: definition
 title: "Chords of a labelled convex polygon, crossing, and triangulations, defined combinatorially"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

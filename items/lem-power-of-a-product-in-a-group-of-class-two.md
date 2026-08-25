@@ -2,7 +2,7 @@
 id: lem-power-of-a-product-in-a-group-of-class-two
 kind: lemma
 title: "In a group with central derived subgroup, $(xy)^n=[y,x]^{\\binom{n}{2}}x^ny^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

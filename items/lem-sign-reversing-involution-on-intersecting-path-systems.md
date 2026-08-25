@@ -2,7 +2,7 @@
 id: lem-sign-reversing-involution-on-intersecting-path-systems
 kind: lemma
 title: "Tail-swapping is a sign-reversing involution on the intersecting systems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

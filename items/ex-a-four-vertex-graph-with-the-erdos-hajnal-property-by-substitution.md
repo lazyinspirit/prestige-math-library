@@ -2,7 +2,7 @@
 id: ex-a-four-vertex-graph-with-the-erdos-hajnal-property-by-substitution
 kind: example
 title: "Substituting an edge for an endpoint of $P_3$ gives a four-vertex graph with the Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

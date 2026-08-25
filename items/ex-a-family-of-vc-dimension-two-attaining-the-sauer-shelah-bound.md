@@ -2,7 +2,7 @@
 id: ex-a-family-of-vc-dimension-two-attaining-the-sauer-shelah-bound
 kind: example
 title: "All subsets of $[4]$ of size at most $2$: VC dimension $2$ and exactly $\\sum_{i\\le2}\\binom{4}{i}=11$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-lebesgue-measure-and-the-lebesgue-sigma-algebra
 kind: definition
 title: "Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "Lebesgue measure"
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

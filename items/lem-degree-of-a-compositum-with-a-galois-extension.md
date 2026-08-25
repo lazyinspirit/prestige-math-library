@@ -2,7 +2,7 @@
 id: lem-degree-of-a-compositum-with-a-galois-extension
 kind: lemma
 title: "For $E/F$ finite Galois and $L/F$ finite inside a common field, $[EL:F]=[E:F][L:F]/[E\\cap L:F]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

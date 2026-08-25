@@ -2,7 +2,7 @@
 id: fs-a-coend-is-a-colimit-over-the-twisted-arrow-category-under-this-pages-convention
 kind: false-statement
 title: "FALSE: under this page's convention a coend is the colimit of the same twisted-arrow diagram whose limit is the end"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

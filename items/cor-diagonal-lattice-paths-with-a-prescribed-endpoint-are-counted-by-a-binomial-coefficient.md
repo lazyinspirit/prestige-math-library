@@ -2,7 +2,7 @@
 id: cor-diagonal-lattice-paths-with-a-prescribed-endpoint-are-counted-by-a-binomial-coefficient
 kind: corollary
 title: "The number of diagonal paths from $(0,a)$ to $(n,b)$ is $\\binom{n}{u}$ for the natural number $u$ with $2u=n+b-a$, and $0$ when no such $u$ exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

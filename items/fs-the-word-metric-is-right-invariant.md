@@ -2,7 +2,7 @@
 id: fs-the-word-metric-is-right-invariant
 kind: false-statement
 title: "FALSE: every word metric is invariant under right translation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

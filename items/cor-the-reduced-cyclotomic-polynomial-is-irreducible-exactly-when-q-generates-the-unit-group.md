@@ -2,7 +2,7 @@
 id: cor-the-reduced-cyclotomic-polynomial-is-irreducible-exactly-when-q-generates-the-unit-group
 kind: corollary
 title: "The reduction of $\\Phi_n$ is irreducible over $\\mathbb F_q$ exactly when $[q]$ generates $(\\mathbb Z/n)^\\times$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

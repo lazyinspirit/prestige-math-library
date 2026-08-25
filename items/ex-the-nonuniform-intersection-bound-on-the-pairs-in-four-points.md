@@ -2,7 +2,7 @@
 id: ex-the-nonuniform-intersection-bound-on-the-pairs-in-four-points
 kind: example
 title: "The six $2$-subsets of $[4]$ are $\\{0,1\\}$-intersecting, and the bound $\\sum_{i\\le2}\\binom{4}{i}=11$ holds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

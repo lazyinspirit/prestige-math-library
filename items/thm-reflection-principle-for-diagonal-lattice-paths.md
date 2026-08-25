@@ -2,7 +2,7 @@
 id: thm-reflection-principle-for-diagonal-lattice-paths
 kind: theorem
 title: "The reflection principle: paths from $(0,a)$ to $(n,b)$ staying strictly above level $c$ are counted by a difference of two binomial coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

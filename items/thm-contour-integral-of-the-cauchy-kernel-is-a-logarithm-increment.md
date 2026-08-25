@@ -2,7 +2,7 @@
 id: thm-contour-integral-of-the-cauchy-kernel-is-a-logarithm-increment
 kind: theorem
 title: "The integral of $dz/(z-p)$ along a contour is the increment of a continuous logarithm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-large-set-contains-a-pattern-when-the-homogeneous-number-is-small
 kind: lemma
 title: "If $\\epsilon$ is an Erdős–Hajnal constant for $H$ and $W$ is a nonempty vertex set with $|W|^{\\epsilon}>\\operatorname{hom}(G)$, then $G[W]$ has an induced copy of $H$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: contrapositive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

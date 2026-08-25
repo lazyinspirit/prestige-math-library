@@ -2,7 +2,7 @@
 id: thm-large-schroder-numbers-by-first-return-decomposition
 kind: theorem
 title: "$R(x)=1+x\\,R(x)+x\\,R(x)^{2}$, and $2x\\,R(x)=1-x-(1-6x+x^{2})^{1/2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

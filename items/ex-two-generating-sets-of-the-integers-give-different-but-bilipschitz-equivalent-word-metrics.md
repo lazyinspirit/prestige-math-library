@@ -2,7 +2,7 @@
 id: ex-two-generating-sets-of-the-integers-give-different-but-bilipschitz-equivalent-word-metrics
 kind: example
 title: "The word metrics of $\\mathbb Z$ for $\\{1\\}$ and for $\\{2,3\\}$ differ at $1$ and are bilipschitz equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

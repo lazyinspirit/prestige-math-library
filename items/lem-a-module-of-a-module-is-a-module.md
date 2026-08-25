@@ -2,7 +2,7 @@
 id: lem-a-module-of-a-module-is-a-module
 kind: lemma
 title: "A module of $G[M]$ is a module of $G$ whenever $M$ is a module of $G$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

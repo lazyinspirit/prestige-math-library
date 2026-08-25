@@ -2,7 +2,7 @@
 id: lem-dyadic-cubes-of-one-generation-partition-rn
 kind: lemma
 title: "For each generation, the dyadic cubes of that generation are pairwise disjoint and cover $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

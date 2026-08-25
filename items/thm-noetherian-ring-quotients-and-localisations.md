@@ -2,7 +2,7 @@
 id: thm-noetherian-ring-quotients-and-localisations
 kind: theorem
 title: "Every quotient and every localisation of a Noetherian ring is Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

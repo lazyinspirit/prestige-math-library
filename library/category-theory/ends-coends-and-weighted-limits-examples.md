@@ -1,7 +1,7 @@
 ---
 page: ends-coends-and-weighted-limits-examples
 title: "Ends Coends and Weighted Limits — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-end-formula-checked-against-natural-transformations-on-a-small-diagram,
            ex-the-evaluation-family-is-dinatural,

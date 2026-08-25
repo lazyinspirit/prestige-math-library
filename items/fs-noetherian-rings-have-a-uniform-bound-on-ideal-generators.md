@@ -2,7 +2,7 @@
 id: fs-noetherian-rings-have-a-uniform-bound-on-ideal-generators
 kind: false-statement
 title: "False statement: in a Noetherian ring there is a single bound on the number of generators an ideal needs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-every-finite-abelian-group-is-a-galois-group-over-the-rationals
 kind: theorem
 title: "Every finite abelian group is the Galois group of some finite Galois extension of $\\mathbb Q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

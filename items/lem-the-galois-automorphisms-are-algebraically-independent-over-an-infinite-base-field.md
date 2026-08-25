@@ -2,7 +2,7 @@
 id: lem-the-galois-automorphisms-are-algebraically-independent-over-an-infinite-base-field
 kind: lemma
 title: "Over an infinite base field, no nonzero polynomial vanishes at the conjugate tuple of every element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contrapositive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

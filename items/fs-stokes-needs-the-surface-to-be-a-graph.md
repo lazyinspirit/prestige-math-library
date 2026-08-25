@@ -2,7 +2,7 @@
 id: fs-stokes-needs-the-surface-to-be-a-graph
 kind: false-statement
 title: "FALSE: Stokes' theorem requires the surface to be a graph over a coordinate plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

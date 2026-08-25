@@ -2,7 +2,7 @@
 id: rem-orientation-and-notation-conventions-for-ends-coends-and-twisted-arrows
 kind: remark
 title: "Orientation and notation conventions in force on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-end-and-coend, def-twisted-arrow-category, thm-an-end-is-a-limit-over
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

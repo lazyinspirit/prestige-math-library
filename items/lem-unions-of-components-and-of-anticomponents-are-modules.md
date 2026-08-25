@@ -2,7 +2,7 @@
 id: lem-unions-of-components-and-of-anticomponents-are-modules
 kind: lemma
 title: "Every union of connected components is a module, and so is every union of anticonnected components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

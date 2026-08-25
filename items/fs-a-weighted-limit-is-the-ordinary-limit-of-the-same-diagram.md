@@ -2,7 +2,7 @@
 id: fs-a-weighted-limit-is-the-ordinary-limit-of-the-same-diagram
 kind: false-statement
 title: "FALSE: every weighted limit is the ordinary limit of the diagram it weights"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

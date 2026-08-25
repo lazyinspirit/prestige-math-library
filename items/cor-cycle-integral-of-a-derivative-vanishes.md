@@ -2,7 +2,7 @@
 id: cor-cycle-integral-of-a-derivative-vanishes
 kind: corollary
 title: "The integral of a continuous derivative over a cycle is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

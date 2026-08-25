@@ -2,7 +2,7 @@
 id: lem-trimming-a-self-regular-set-of-low-density
 kind: lemma
 title: "Deleting the high-degree vertices of a $\\gamma$-self-regular set of density $d$ leaves more than $(1-\\gamma)$ of it, and that remainder is $((d+\\gamma)/(1-\\gamma))$-sparse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

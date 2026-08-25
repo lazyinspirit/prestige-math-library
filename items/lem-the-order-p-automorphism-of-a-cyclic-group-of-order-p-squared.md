@@ -2,7 +2,7 @@
 id: lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared
 kind: lemma
 title: "Raising to the power $1+p$ is an automorphism of order $p$ of a cyclic group of order $p^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

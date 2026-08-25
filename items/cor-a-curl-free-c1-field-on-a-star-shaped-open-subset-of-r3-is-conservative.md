@@ -2,7 +2,7 @@
 id: cor-a-curl-free-c1-field-on-a-star-shaped-open-subset-of-r3-is-conservative
 kind: corollary
 title: "A $C^1$ field with vanishing curl on a star-shaped open subset of $\\mathbb R^3$ is conservative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

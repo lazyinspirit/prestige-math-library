@@ -2,7 +2,7 @@
 id: cor-the-order-of-an-extraspecial-p-group-is-p-to-one-plus-an-even-number
 kind: corollary
 title: "An extraspecial $p$-group has order $p^{1+2n}$ for some $n\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

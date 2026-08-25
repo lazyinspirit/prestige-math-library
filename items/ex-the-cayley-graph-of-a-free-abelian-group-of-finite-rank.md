@@ -2,7 +2,7 @@
 id: ex-the-cayley-graph-of-a-free-abelian-group-of-finite-rank
 kind: example
 title: "The Cayley graph of $\\mathbb Z^n$ for the standard basis is the integer lattice, and its word metric is the sum of coordinate differences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-fubini-for-ends
 kind: theorem
 title: "Fubini: an end over a product index category and the two iterated ends exist together and agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

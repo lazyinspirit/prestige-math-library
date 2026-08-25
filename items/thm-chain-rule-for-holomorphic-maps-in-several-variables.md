@@ -2,7 +2,7 @@
 id: thm-chain-rule-for-holomorphic-maps-in-several-variables
 kind: theorem
 title: "The composite of holomorphic maps is holomorphic and its complex Jacobian is the product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

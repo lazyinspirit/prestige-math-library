@@ -2,7 +2,7 @@
 id: thm-representable-functors-carry-weighted-limits-to-weighted-limits
 kind: theorem
 title: "A representable functor carries a weighted limit to the weighted limit of the composed diagram"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-wedge-on-a-product-index-category-is-dinatural-in-each-variable-separately
 kind: lemma
 title: "A wedge on a product index category is exactly a family dinatural in each variable separately"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

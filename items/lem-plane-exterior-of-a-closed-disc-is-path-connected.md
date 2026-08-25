@@ -2,7 +2,7 @@
 id: lem-plane-exterior-of-a-closed-disc-is-path-connected
 kind: lemma
 title: "The exterior of a closed disc in the plane is path-connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

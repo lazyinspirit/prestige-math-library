@@ -2,7 +2,7 @@
 id: cex-lebesgue-null-sets-need-not-have-zero-jordan-outer-content
 kind: counterexample
 title: "$\\mathbb{Q}\\cap[0,1]$ is Lebesgue null and has Jordan outer content one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

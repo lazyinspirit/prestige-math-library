@@ -2,7 +2,7 @@
 id: thm-recognition-of-an-internal-central-product
 kind: theorem
 title: "Internal central products are the images of external ones"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-integral-additivity-over-a-content-zero-almost-partition
 kind: lemma
 title: "Additivity of the integral over finitely many Jordan pieces that fill a Jordan set up to content zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-an-oddtown-family-on-four-points
 kind: example
 title: "An Oddtown family of four clubs on four citizens, and why a fifth cannot be added"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

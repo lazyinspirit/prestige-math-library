@@ -2,7 +2,7 @@
 id: cor-non-intersecting-monotone-path-pairs-are-counted-by-a-two-by-two-determinant
 kind: corollary
 title: "For $n\\ge1$ the pairs of non-intersecting monotone paths $(1,0)\\to(n+1,n)$ and $(0,1)\\to(n,n+1)$ number $\\binom{2n}{n}^2-\\binom{2n}{n+1}\\binom{2n}{n-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

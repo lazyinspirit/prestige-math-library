@@ -2,7 +2,7 @@
 id: lem-the-coordinate-flux-identity-for-a-simple-solid-region
 kind: lemma
 title: "The single-direction flux identity on a simple solid region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

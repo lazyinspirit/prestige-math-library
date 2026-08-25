@@ -2,7 +2,7 @@
 id: def-walks-paths-and-connectedness-in-a-simple-graph
 kind: definition
 title: "Walks, paths, connectedness and components in a simple graph on an arbitrary vertex set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-graph-walk-trail-pa
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

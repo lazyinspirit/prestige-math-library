@@ -2,7 +2,7 @@
 id: cex-a-nonzero-polynomial-vanishing-on-a-grid-of-exactly-its-degree
 kind: counterexample
 title: "$P(x)=x(x-1)$ vanishes on $\\{0,1\\}$ although $\\deg_x P=\\lvert\\{0,1\\}\\rvert$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

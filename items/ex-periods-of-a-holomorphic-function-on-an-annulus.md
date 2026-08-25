@@ -2,7 +2,7 @@
 id: ex-periods-of-a-holomorphic-function-on-an-annulus
 kind: example
 title: "Every cycle in a round annulus has one period, that of the central circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-countable-subsets-of-rn-are-lebesgue-null
 kind: proposition
 title: "Every at most countable subset of $\\mathbb{R}^n$ is Lebesgue null; in particular $\\lambda_1(\\mathbb{Q})=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

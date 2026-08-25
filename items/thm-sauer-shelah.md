@@ -2,7 +2,7 @@
 id: thm-sauer-shelah
 kind: theorem
 title: "Sauer–Shelah: a family on $[n]$ of VC dimension at most $d$ has at most $\\sum_{i=0}^{d}\\binom{n}{i}$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

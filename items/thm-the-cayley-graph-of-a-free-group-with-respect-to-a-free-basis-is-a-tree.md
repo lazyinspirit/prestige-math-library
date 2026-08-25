@@ -2,7 +2,7 @@
 id: thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree
 kind: theorem
 title: "The Cayley graph of a free group with respect to a free basis is a tree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-a-tree-cayley-graph-need-not-come-from-a-free-generating-set
 kind: counterexample
 title: "The Cayley graphs of $\\mathbb Z/2$ for $\\{1\\}$ and of $\\mathbb Z$ for $\\{-1,1\\}$ are trees, and neither generating set is free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-graph-path-metric
 kind: definition
 title: "The path metric of a connected simple graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-walks-paths-and-con
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

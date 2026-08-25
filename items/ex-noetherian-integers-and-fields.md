@@ -2,7 +2,7 @@
 id: ex-noetherian-integers-and-fields
 kind: example
 title: "Fields and $\\mathbb Z$ are Noetherian, and so are their polynomial rings in finitely many variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

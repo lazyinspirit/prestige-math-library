@@ -2,7 +2,7 @@
 id: def-vector-potential-of-a-c1-vector-field
 kind: definition
 title: "Vector potentials of a continuous field on an open subset of $\\mathbb R^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

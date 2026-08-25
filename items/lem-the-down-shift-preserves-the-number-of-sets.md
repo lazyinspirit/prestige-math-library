@@ -2,7 +2,7 @@
 id: lem-the-down-shift-preserves-the-number-of-sets
 kind: lemma
 title: "$\\lvert S_j(\\mathcal{F})\\rvert=\\lvert\\mathcal{F}\\rvert$, and $w(S_j(\\mathcal{F}))\\le w(\\mathcal{F})$ with equality only when $S_j(\\mathcal{F})=\\mathcal{F}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

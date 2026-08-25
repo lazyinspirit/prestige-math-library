@@ -1,7 +1,7 @@
 ---
 page: holomorphic-functions-of-several-variables
 title: "Holomorphic Functions of Several Complex Variables"
-status: draft
+status: published
 items: [rem-complex-euclidean-space-dictionary,
         def-balls-and-polydiscs-in-complex-euclidean-space,
         def-holomorphic-function-in-several-complex-variables,

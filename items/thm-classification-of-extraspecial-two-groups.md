@@ -2,7 +2,7 @@
 id: thm-classification-of-extraspecial-two-groups
 kind: theorem
 title: "For each $n\\ge1$ there are exactly two extraspecial groups of order $2^{1+2n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

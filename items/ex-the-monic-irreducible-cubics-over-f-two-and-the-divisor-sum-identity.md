@@ -2,7 +2,7 @@
 id: ex-the-monic-irreducible-cubics-over-f-two-and-the-divisor-sum-identity
 kind: example
 title: "The divisor-sum identity at $q=2$, $n=3$ finds exactly two monic irreducible cubics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-p-power-roots-of-unity-in-characteristic-p
 kind: proposition
 title: "In characteristic $p$ the only $p^{k}$-th root of unity is $1$, and $t^{p^{k}}-1=(t-1)^{p^{k}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

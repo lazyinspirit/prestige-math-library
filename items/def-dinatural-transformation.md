@@ -2,7 +2,7 @@
 id: def-dinatural-transformation
 kind: definition
 title: 'Dinatural transformation between functors on $\mathcal C^{\mathrm{op}}\times\mathcal C$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-category, def-opposite-category, def-product-category, def-functor-an
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

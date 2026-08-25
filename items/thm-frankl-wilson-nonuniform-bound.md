@@ -2,7 +2,7 @@
 id: thm-frankl-wilson-nonuniform-bound
 kind: theorem
 title: "An $L$-intersecting family on $[n]$ with $\\lvert L\\rvert=s$ has at most $\\sum_{i=0}^{s}\\binom{n}{i}$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

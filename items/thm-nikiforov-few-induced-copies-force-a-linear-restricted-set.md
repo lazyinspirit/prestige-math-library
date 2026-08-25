@@ -2,7 +2,7 @@
 id: thm-nikiforov-few-induced-copies-force-a-linear-restricted-set
 kind: theorem
 title: "Nikiforov: for every $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there is $\\delta>0$ such that every graph $G$ with $\\operatorname{ind}_H(G)<(\\delta|V(G)|)^{|V(H)|}$ has an $\\epsilon$-restricted vertex set of size at least $\\delta|V(G)|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

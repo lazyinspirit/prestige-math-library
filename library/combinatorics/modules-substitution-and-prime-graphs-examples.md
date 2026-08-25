@@ -1,7 +1,7 @@
 ---
 page: modules-substitution-and-prime-graphs-examples
 title: "Modules, Substitution and Prime Graphs — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-modules-of-complete-and-edgeless-graphs,
            ex-modules-of-the-four-vertex-path,

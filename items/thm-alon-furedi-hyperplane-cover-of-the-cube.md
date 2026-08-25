@@ -2,7 +2,7 @@
 id: thm-alon-furedi-hyperplane-cover-of-the-cube
 kind: theorem
 title: "Covering $\\{0,1\\}^{n}$ minus the origin by affine hyperplanes avoiding the origin needs at least $n$ of them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

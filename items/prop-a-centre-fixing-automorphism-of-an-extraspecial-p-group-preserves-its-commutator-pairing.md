@@ -2,7 +2,7 @@
 id: prop-a-centre-fixing-automorphism-of-an-extraspecial-p-group-preserves-its-commutator-pairing
 kind: proposition
 title: "An automorphism fixing the centre pointwise induces a pairing-preserving automorphism of the central quotient, with kernel the inner automorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

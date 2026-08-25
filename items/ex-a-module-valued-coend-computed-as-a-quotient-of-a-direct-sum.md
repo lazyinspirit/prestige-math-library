@@ -2,7 +2,7 @@
 id: ex-a-module-valued-coend-computed-as-a-quotient-of-a-direct-sum
 kind: example
 title: "A module-valued coend computed as a quotient of a direct sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

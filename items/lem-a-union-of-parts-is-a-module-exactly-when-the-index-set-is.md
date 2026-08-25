@@ -2,7 +2,7 @@
 id: lem-a-union-of-parts-is-a-module-exactly-when-the-index-set-is
 kind: lemma
 title: "For a modular partition, a set of parts is a module of the quotient exactly when the union of those parts is a module of the graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

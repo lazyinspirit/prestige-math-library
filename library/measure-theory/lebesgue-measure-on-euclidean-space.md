@@ -1,7 +1,7 @@
 ---
 page: lebesgue-measure-on-euclidean-space
 title: "Lebesgue Measure on Euclidean Space"
-status: draft
+status: published
 items: [def-half-open-box,
         lem-half-open-boxes-form-an-elementary-family,
         def-elementary-set-in-rn,

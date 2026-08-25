@@ -2,7 +2,7 @@
 id: cor-weak-ballot-problem
 kind: corollary
 title: "The weak ballot count: for $p\\ge q\\ge0$ the orderings in which the first candidate is never behind satisfy $(p+1)\\,N=(p-q+1)\\binom{p+q}{q}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-ballot-problem
 kind: theorem
 title: "Bertrand's ballot problem: for $p>q\\ge0$ the orderings in which the first candidate is strictly ahead throughout satisfy $(p+q)\\,N=(p-q)\\binom{p+q}{p}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

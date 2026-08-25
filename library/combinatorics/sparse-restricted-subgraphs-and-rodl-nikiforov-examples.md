@@ -1,7 +1,7 @@
 ---
 page: sparse-restricted-subgraphs-and-rodl-nikiforov-examples
 title: "Sparse Restricted Subgraphs and the Rödl–Nikiforov Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-zero-sparse-sets-are-the-stable-sets,
            ex-the-self-density-of-a-clique,

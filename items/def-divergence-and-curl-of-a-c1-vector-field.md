@@ -2,7 +2,7 @@
 id: def-divergence-and-curl-of-a-c1-vector-field
 kind: definition
 title: "Divergence and curl of a $C^1$ vector field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

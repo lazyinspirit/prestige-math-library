@@ -2,7 +2,7 @@
 id: ex-hilbert-basis-leading-coefficient-reduction
 kind: example
 title: "Working the Hilbert basis construction on an ideal of $\\mathbb Z[x]$ with non-monic stages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

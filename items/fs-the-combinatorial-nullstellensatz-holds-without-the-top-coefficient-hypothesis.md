@@ -2,7 +2,7 @@
 id: fs-the-combinatorial-nullstellensatz-holds-without-the-top-coefficient-hypothesis
 kind: false-statement
 title: "FALSE: if $\\deg f=\\sum_it_i$ and $\\lvert S_i\\rvert>t_i$ then $f$ is nonzero somewhere on $S_1\\times\\cdots\\times S_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

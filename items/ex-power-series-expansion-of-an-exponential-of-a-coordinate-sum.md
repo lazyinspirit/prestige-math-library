@@ -2,7 +2,7 @@
 id: ex-power-series-expansion-of-an-exponential-of-a-coordinate-sum
 kind: example
 title: "The power series of $\\exp(z_0+z_1)$ on every bidisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

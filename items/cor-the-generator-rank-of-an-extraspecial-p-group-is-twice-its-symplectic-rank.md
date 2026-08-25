@@ -2,7 +2,7 @@
 id: cor-the-generator-rank-of-an-extraspecial-p-group-is-twice-its-symplectic-rank
 kind: corollary
 title: "An extraspecial $p$-group of order $p^{1+2n}$ has generator rank $2n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

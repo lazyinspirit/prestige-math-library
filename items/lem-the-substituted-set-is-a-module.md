@@ -2,7 +2,7 @@
 id: lem-the-substituted-set-is-a-module
 kind: lemma
 title: "In $G_1$ with $G_2$ substituted for $a$, the vertex set of $G_2$ is a module, the two factors are recovered as induced subgraphs, and substituting a one-vertex graph changes nothing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

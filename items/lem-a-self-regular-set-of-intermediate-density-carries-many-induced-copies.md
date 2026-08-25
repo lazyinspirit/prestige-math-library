@@ -2,7 +2,7 @@
 id: lem-a-self-regular-set-of-intermediate-density-carries-many-induced-copies
 kind: lemma
 title: "A large $\\gamma$-self-regular set whose density lies between $\\eta$ and $1-\\eta$ forces at least $c|W|^{|V(H)|}$ induced copies of $H$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

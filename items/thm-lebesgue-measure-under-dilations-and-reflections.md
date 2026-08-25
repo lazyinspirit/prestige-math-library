@@ -2,7 +2,7 @@
 id: thm-lebesgue-measure-under-dilations-and-reflections
 kind: theorem
 title: "For a nonzero real $c$, dilation by $c$ multiplies Lebesgue outer measure by $|c|^n$, and reflection in the origin preserves it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

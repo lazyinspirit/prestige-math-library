@@ -2,7 +2,7 @@
 id: lem-lipschitz-images-of-lebesgue-null-sets-are-lebesgue-null
 kind: lemma
 title: "A Lipschitz self-map of $\\mathbb{R}^n$ carries Lebesgue null sets to Lebesgue null sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

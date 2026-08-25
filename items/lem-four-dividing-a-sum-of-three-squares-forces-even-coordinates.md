@@ -2,7 +2,7 @@
 id: lem-four-dividing-a-sum-of-three-squares-forces-even-coordinates
 kind: lemma
 title: "If $4$ divides $x^2+y^2+z^2$ then $x$, $y$ and $z$ are all even"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

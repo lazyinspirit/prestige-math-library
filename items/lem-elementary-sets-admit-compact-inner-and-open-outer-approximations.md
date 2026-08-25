@@ -2,7 +2,7 @@
 id: lem-elementary-sets-admit-compact-inner-and-open-outer-approximations
 kind: lemma
 title: "Every elementary set is squeezed in volume between a compact subset and an elementary set whose interior contains it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

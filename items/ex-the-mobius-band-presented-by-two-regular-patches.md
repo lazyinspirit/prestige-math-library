@@ -2,7 +2,7 @@
 id: ex-the-mobius-band-presented-by-two-regular-patches
 kind: example
 title: "The Mobius band presented by two regular patches, with normal comparison on the interiors of the overlap components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

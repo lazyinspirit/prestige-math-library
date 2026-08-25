@@ -2,7 +2,7 @@
 id: lem-change-of-variables-with-a-degenerate-parameter-boundary
 kind: lemma
 title: "Change of variables for a $C^1$ map injective and regular only on the interior of a compact Jordan set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-roots-of-unity-in-characteristic-three
 kind: example
 title: "In characteristic three, $t^{3}-1=(t-1)^{3}$ and $\\mu_6$ coincides with $\\mu_2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

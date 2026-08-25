@@ -2,7 +2,7 @@
 id: thm-classification-of-extraspecial-p-groups-for-odd-p
 kind: theorem
 title: "For odd $p$ and each $n\\ge1$ there are exactly two extraspecial groups of order $p^{1+2n}$, distinguished by their exponent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

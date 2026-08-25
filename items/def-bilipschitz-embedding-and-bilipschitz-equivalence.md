@@ -2,7 +2,7 @@
 id: def-bilipschitz-embedding-and-bilipschitz-equivalence
 kind: definition
 title: "Bilipschitz embeddings and bilipschitz equivalences of metric spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-metric-space, def-injection-surjection-bijection]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

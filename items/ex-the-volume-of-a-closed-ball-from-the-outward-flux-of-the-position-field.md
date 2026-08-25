@@ -2,7 +2,7 @@
 id: ex-the-volume-of-a-closed-ball-from-the-outward-flux-of-the-position-field
 kind: example
 title: "The volume of a closed ball recovered from the outward flux of the position field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

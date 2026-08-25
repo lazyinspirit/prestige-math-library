@@ -2,7 +2,7 @@
 id: def-heisenberg-group-of-order-p-cubed
 kind: definition
 title: "The Heisenberg group of order $p^3$ over $\\mathbb Z/p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [prop-the-heisenberg-group-of-order-p-cubed-is-a-nonabelian-group-
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

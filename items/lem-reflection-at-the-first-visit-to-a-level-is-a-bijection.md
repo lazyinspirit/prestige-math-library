@@ -2,7 +2,7 @@
 id: lem-reflection-at-the-first-visit-to-a-level-is-a-bijection
 kind: lemma
 title: "Reflecting the initial segment at the first visit to level $c$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

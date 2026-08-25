@@ -2,7 +2,7 @@
 id: thm-graham-pollak
 kind: theorem
 title: "Graham–Pollak: a complete bipartite decomposition of $K_n$ has at least $n-1$ parts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

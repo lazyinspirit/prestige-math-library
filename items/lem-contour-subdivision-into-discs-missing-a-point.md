@@ -2,7 +2,7 @@
 id: lem-contour-subdivision-into-discs-missing-a-point
 kind: lemma
 title: "A contour missing a point subdivides into arcs lying in discs that miss it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

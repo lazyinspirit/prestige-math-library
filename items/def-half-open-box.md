@@ -2,7 +2,7 @@
 id: def-half-open-box
 kind: definition
 title: "Half-open boxes in $\\mathbb{R}^n$ and their volume"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "half-open box"
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-artin-tate-finite-intermediate-algebra
 kind: example
 title: "Identifying the coefficient algebra in a concrete Artin–Tate tower"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

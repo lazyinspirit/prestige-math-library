@@ -2,7 +2,7 @@
 id: ex-the-seventh-cyclotomic-polynomial-factors-into-two-cubics-over-f-two
 kind: example
 title: "$\\Phi_7$ factors over $\\mathbb F_2$ into the two monic irreducible cubics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

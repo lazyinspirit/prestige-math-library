@@ -2,7 +2,7 @@
 id: lem-tagged-sums-approximate-a-contour-integral
 kind: lemma
 title: "Tagged sums approximate a contour integral within oscillation times length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

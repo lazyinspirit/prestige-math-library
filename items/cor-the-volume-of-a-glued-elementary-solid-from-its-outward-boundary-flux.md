@@ -2,7 +2,7 @@
 id: cor-the-volume-of-a-glued-elementary-solid-from-its-outward-boundary-flux
 kind: corollary
 title: "The volume of a glued elementary solid is a third of the outward flux of the position field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-a-family-with-independent-incidence-vectors-has-at-most-n-members
 kind: lemma
 title: "If the incidence vectors of $A_1,\\dots,A_m\\subseteq[n]$ are linearly independent over $F$ then $m\\le n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

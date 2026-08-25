@@ -2,7 +2,7 @@
 id: thm-catalan-recurrence
 kind: theorem
 title: "$C_{n+1}=\\sum_{i=0}^{n}C_i\\,C_{n-i}$, with $C_0=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

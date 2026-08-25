@@ -2,7 +2,7 @@
 id: def-simple-graph-without-a-finiteness-hypothesis
 kind: definition
 title: "Simple graphs on an arbitrary vertex set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-finite-simple-graph, rem-finite-simple-graph-convention]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

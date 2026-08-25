@@ -1,7 +1,7 @@
 ---
 page: cayley-graphs-word-metrics-and-quasi-isometry
 title: "Cayley Graphs, Word Metrics and Quasi-Isometry"
-status: draft
+status: published
 items: [def-simple-graph-without-a-finiteness-hypothesis,
         def-walks-paths-and-connectedness-in-a-simple-graph,
         lem-every-walk-in-a-simple-graph-contains-a-path-with-the-same-endpoints,

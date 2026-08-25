@@ -2,7 +2,7 @@
 id: cor-an-extraspecial-p-group-has-no-complement-to-its-centre
 kind: corollary
 title: "The centre of an extraspecial $p$-group has no complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-divergence-theorem-on-the-closed-unit-box
 kind: example
 title: "Both sides of the divergence theorem for $F(x,y,z)=(x^2,y^2,z^2)$ on the closed unit box"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

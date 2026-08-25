@@ -2,7 +2,7 @@
 id: ex-finite-dimensional-algebra-over-a-field-is-noetherian
 kind: example
 title: "An algebra that is finite dimensional as a vector space over a field is a Noetherian ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-map-at-bounded-distance-from-a-quasi-isometric-embedding-is-a-quasi-isometric-embedding
 kind: lemma
 title: "A map at bounded distance from a quasi-isometric embedding is one, with the additive constant enlarged"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

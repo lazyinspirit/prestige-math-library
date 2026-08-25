@@ -2,7 +2,7 @@
 id: ex-fubini-verified-on-a-two-object-index
 kind: example
 title: "Fubini checked by hand on a product of two walking arrows"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

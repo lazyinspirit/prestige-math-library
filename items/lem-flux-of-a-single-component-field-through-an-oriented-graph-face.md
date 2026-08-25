@@ -2,7 +2,7 @@
 id: lem-flux-of-a-single-component-field-through-an-oriented-graph-face
 kind: lemma
 title: "The flux of a single-component field through a graph face is a base integral of its trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-cyclic-shift-and-the-periodic-partial-sum-function
 kind: definition
 title: "Cyclic shifts of an integer word and its periodic partial-sum function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

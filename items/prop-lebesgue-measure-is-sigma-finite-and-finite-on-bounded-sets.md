@@ -2,7 +2,7 @@
 id: prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets
 kind: proposition
 title: "Lebesgue measure is sigma-finite, and every metrically bounded subset of $\\mathbb{R}^n$ has finite outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

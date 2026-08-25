@@ -2,7 +2,7 @@
 id: thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces
 kind: theorem
 title: "Being quasi-isometric is reflexive, symmetric and transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

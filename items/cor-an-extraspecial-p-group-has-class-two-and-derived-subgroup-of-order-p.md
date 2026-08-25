@@ -2,7 +2,7 @@
 id: cor-an-extraspecial-p-group-has-class-two-and-derived-subgroup-of-order-p
 kind: corollary
 title: "An extraspecial $p$-group is nilpotent of class exactly two and its derived subgroup has order $p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

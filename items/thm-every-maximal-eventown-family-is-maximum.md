@@ -2,7 +2,7 @@
 id: thm-every-maximal-eventown-family-is-maximum
 kind: theorem
 title: "An Eventown family that no further set can be added to has exactly $2^{\\lfloor n/2\\rfloor}$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-the-left-translation-action-on-a-cayley-graph-restricts-the-embedding-of-cayleys-theorem
 kind: theorem
 title: "The label-preserving automorphism action on a Cayley graph is the left regular representation of Cayley's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

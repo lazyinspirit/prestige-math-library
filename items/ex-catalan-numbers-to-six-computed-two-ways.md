@@ -2,7 +2,7 @@
 id: ex-catalan-numbers-to-six-computed-two-ways
 kind: example
 title: "The Catalan numbers through $C_6$, from the recurrence and from the closed formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

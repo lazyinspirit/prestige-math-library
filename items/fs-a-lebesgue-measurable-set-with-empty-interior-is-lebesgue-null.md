@@ -2,7 +2,7 @@
 id: fs-a-lebesgue-measurable-set-with-empty-interior-is-lebesgue-null
 kind: false-statement
 title: "A Lebesgue measurable subset of $\\mathbb{R}$ with empty interior has measure zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

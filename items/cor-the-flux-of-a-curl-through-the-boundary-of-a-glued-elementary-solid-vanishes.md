@@ -2,7 +2,7 @@
 id: cor-the-flux-of-a-curl-through-the-boundary-of-a-glued-elementary-solid-vanishes
 kind: corollary
 title: "The flux of a curl through the boundary of a glued elementary solid vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

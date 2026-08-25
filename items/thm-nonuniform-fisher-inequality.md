@@ -2,7 +2,7 @@
 id: thm-nonuniform-fisher-inequality
 kind: theorem
 title: "Fisher's inequality, nonuniform form: distinct nonempty $A_1,\\dots,A_m\\subseteq[n]$ with $\\lvert A_i\\cap A_j\\rvert=t$ for all $i\\ne j$ satisfy $m\\le n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

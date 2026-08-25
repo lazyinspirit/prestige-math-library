@@ -2,7 +2,7 @@
 id: cex-a-union-of-two-disjoint-modules-need-not-be-a-module
 kind: counterexample
 title: "Two disjoint modules whose union is not a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

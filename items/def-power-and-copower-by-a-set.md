@@ -2,7 +2,7 @@
 id: def-power-and-copower-by-a-set
 kind: definition
 title: "The power and the copower of an object by a set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-set-weighted-limit-and-weighted-colimit, def-hom-functors-and-hom-bif
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

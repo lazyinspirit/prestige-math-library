@@ -2,7 +2,7 @@
 id: cex-primality-is-not-inherited-by-induced-subgraphs
 kind: counterexample
 title: "An induced subgraph of a prime graph need not be prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

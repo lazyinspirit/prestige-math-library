@@ -2,7 +2,7 @@
 id: thm-prime-graphs-are-the-graphs-that-are-not-substitutions
 kind: theorem
 title: "A graph with at least two vertices is prime exactly when it is not obtained by substituting one graph on at least two vertices for a vertex of another graph on at least two vertices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

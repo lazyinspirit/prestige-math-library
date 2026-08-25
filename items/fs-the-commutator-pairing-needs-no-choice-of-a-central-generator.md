@@ -2,7 +2,7 @@
 id: fs-the-commutator-pairing-needs-no-choice-of-a-central-generator
 kind: false-statement
 title: "FALSE for odd $p$: the scalar-valued commutator pairing needs no choice of a central generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace
 kind: corollary
 title: "The index of a cycle is locally constant off its trace and vanishes far from it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

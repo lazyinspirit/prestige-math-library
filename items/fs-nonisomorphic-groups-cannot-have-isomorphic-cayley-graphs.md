@@ -2,7 +2,7 @@
 id: fs-nonisomorphic-groups-cannot-have-isomorphic-cayley-graphs
 kind: false-statement
 title: "FALSE: groups with isomorphic Cayley graphs are isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

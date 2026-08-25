@@ -2,7 +2,7 @@
 id: thm-artin-tate-lemma
 kind: theorem
 title: "Artin–Tate lemma: an intermediate ring over which a finite-type algebra is module-finite is itself of finite type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

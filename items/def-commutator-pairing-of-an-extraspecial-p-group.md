@@ -2,7 +2,7 @@
 id: def-commutator-pairing-of-an-extraspecial-p-group
 kind: definition
 title: "The commutator pairing of an extraspecial $p$-group relative to a chosen generator of its centre"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: [lem-the-commutator-pairing-is-well-defined-biadditive-and-alterna
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

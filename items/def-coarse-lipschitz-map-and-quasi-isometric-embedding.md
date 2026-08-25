@@ -2,7 +2,7 @@
 id: def-coarse-lipschitz-map-and-quasi-isometric-embedding
 kind: definition
 title: "Coarse Lipschitz maps and quasi-isometric embeddings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-metric-space, def-lipschitz-holder-contraction]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

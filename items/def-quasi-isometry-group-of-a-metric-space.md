@@ -2,7 +2,7 @@
 id: def-quasi-isometry-group-of-a-metric-space
 kind: definition
 title: "The quasi-isometry group of a metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-coarsely-dense-subset-and-quasi-isometry, def-bounded-distance-betwee
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

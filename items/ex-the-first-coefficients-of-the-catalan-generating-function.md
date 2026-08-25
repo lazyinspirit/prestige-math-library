@@ -2,7 +2,7 @@
 id: ex-the-first-coefficients-of-the-catalan-generating-function
 kind: example
 title: "The first coefficients of the Catalan generating function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-the-winding-number-and-the-planar-vortex-field
 kind: remark
 title: "The winding number is the circulation of the planar vortex field divided by $2\\pi$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

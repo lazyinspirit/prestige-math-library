@@ -2,7 +2,7 @@
 id: ex-modules-of-complete-and-edgeless-graphs
 kind: example
 title: "Every vertex set is a module of a complete graph and of an edgeless graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

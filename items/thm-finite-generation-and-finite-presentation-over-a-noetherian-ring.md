@@ -2,7 +2,7 @@
 id: thm-finite-generation-and-finite-presentation-over-a-noetherian-ring
 kind: theorem
 title: "Over a Noetherian ring a module is Noetherian exactly when it is finitely generated, exactly when it is finitely presented"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

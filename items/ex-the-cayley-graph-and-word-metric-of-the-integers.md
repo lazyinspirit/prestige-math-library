@@ -2,7 +2,7 @@
 id: ex-the-cayley-graph-and-word-metric-of-the-integers
 kind: example
 title: "The Cayley graph of $\\mathbb Z$ for the generating set $\\{1\\}$ is a line and its word metric is $|m-n|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-weak-sparsity-does-not-imply-sparsity
 kind: counterexample
 title: "A star has tiny self-density, yet no restricted subset containing its centre has more than two vertices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-elementary-set-in-rn
 kind: definition
 title: "Elementary sets: the finite unions of half-open boxes in $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "elementary set"
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

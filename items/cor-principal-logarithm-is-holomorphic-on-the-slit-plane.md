@@ -2,7 +2,7 @@
 id: cor-principal-logarithm-is-holomorphic-on-the-slit-plane
 kind: corollary
 title: "The principal logarithm is the normalised holomorphic branch on the slit plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

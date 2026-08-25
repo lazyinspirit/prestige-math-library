@@ -2,7 +2,7 @@
 id: rem-the-two-descriptions-of-the-subfield-lattice-of-a-finite-field
 kind: remark
 title: "The Galois description of the subfields of a finite field and the elementary divisibility criterion agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

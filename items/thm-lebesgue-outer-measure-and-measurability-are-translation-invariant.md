@@ -2,7 +2,7 @@
 id: thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
 kind: theorem
 title: "Lebesgue outer measure, Lebesgue measurability and Lebesgue measure are unchanged by translation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "translation invariance"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

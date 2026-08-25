@@ -2,7 +2,7 @@
 id: rem-the-two-forms-of-rodls-theorem
 kind: remark
 title: "Bounded degree against bounded density: the two statements of Rödl's theorem, and which one is stronger"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

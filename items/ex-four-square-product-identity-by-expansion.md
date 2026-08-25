@@ -2,7 +2,7 @@
 id: ex-four-square-product-identity-by-expansion
 kind: example
 title: "$7\\cdot 15=105$ through all four bilinear coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

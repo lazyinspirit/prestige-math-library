@@ -2,7 +2,7 @@
 id: lem-the-multilinear-monomials-of-bounded-degree-are-independent-on-the-cube
 kind: lemma
 title: "The functions $\\{0,1\\}^{n}\\to F$ obtained from $x_T$ with $\\lvert T\\rvert\\le s$ are linearly independent, so they span a space of dimension $\\sum_{i=0}^{s}\\binom{n}{i}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

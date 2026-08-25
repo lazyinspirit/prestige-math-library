@@ -2,7 +2,7 @@
 id: lem-induced-copies-counted-by-extending-a-deleted-vertex
 kind: lemma
 title: "The induced copies of $H_1$ in $G$ are counted by summing, over the induced embeddings of $H_1-v$, the number of vertices that extend them at $v$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n
 kind: proposition
 title: "In an extraspecial $p$-group of order $p^{1+2n}$ every maximal abelian subgroup has order $p^{1+n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

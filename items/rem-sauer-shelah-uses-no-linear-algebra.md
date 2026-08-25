@@ -2,7 +2,7 @@
 id: rem-sauer-shelah-uses-no-linear-algebra
 kind: remark
 title: "The shifting proof of Sauer–Shelah uses no field and no vector space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

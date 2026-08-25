@@ -2,7 +2,7 @@
 id: lem-a-cayley-graph-is-connected-exactly-when-its-defining-subset-generates-the-group
 kind: lemma
 title: "A Cayley graph is connected if and only if the subset generates the group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

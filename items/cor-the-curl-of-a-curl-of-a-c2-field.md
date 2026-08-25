@@ -2,7 +2,7 @@
 id: cor-the-curl-of-a-curl-of-a-c2-field
 kind: corollary
 title: "The curl of a curl is the gradient of the divergence minus the Laplacian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

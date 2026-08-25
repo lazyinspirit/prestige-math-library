@@ -2,7 +2,7 @@
 id: lem-complex-linear-real-differential-criterion
 kind: lemma
 title: "A real-linear functional on $\\mathbb{C}^m$ is complex linear exactly when its antiholomorphic part vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

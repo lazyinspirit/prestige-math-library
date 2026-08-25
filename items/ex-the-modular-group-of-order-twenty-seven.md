@@ -2,7 +2,7 @@
 id: ex-the-modular-group-of-order-twenty-seven
 kind: example
 title: "The modular group of order $27$ has exponent $9$ and exactly three cyclic subgroups of order $9$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

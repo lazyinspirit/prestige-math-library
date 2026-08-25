@@ -2,7 +2,7 @@
 id: rem-the-reach-of-the-classical-divergence-and-stokes-theorems
 kind: remark
 title: "What the classical divergence and Stokes theorems here do and do not cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: finite-fields-and-cyclotomic-extensions-examples
 title: "Finite Fields and Cyclotomic Extensions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-galois-group-of-f-eight-over-f-two,
            ex-the-subfield-lattice-of-the-field-of-order-two-to-the-twelve,

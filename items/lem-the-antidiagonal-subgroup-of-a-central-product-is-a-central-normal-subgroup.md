@@ -2,7 +2,7 @@
 id: lem-the-antidiagonal-subgroup-of-a-central-product-is-a-central-normal-subgroup
 kind: lemma
 title: "The identified subgroup used to form a central product is central, hence normal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

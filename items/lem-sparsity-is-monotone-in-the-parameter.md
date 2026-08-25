@@ -2,7 +2,7 @@
 id: lem-sparsity-is-monotone-in-the-parameter
 kind: lemma
 title: "Sparsity is preserved when the parameter grows, and every nonempty set of at most two vertices is $0$-restricted"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: the-winding-number-and-the-global-cauchy-theorem-examples
 title: "The Winding Number and the Global Cauchy Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-winding-number-of-the-unit-circle-traversed-three-times,
            ex-winding-number-of-a-figure-eight-cycle,

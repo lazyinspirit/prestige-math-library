@@ -2,7 +2,7 @@
 id: lem-shear-images-of-the-unit-cube-have-lebesgue-measure-one
 kind: lemma
 title: "A shear sends the unit cube to a set of Lebesgue measure one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

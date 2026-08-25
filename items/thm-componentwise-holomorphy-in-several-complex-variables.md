@@ -2,7 +2,7 @@
 id: thm-componentwise-holomorphy-in-several-complex-variables
 kind: theorem
 title: "A map into $\\mathbb{C}^n$ is holomorphic exactly when each of its components is"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-complex-jacobian-determinant-is-multiplicative
 kind: corollary
 title: "The complex Jacobian determinant of a composite of equidimensional holomorphic maps is the product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

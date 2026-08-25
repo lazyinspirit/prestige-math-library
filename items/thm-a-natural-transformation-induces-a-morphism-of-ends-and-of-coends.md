@@ -2,7 +2,7 @@
 id: thm-a-natural-transformation-induces-a-morphism-of-ends-and-of-coends
 kind: theorem
 title: "A natural transformation of functors induces a unique morphism of their ends and of their coends"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

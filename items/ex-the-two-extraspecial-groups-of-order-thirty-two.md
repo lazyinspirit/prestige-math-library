@@ -2,7 +2,7 @@
 id: ex-the-two-extraspecial-groups-of-order-thirty-two
 kind: example
 title: "The two extraspecial groups of order $32$ have $20$ and $12$ solutions of $x^2=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

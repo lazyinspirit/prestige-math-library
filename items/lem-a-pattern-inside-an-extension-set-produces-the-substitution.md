@@ -2,7 +2,7 @@
 id: lem-a-pattern-inside-an-extension-set-produces-the-substitution
 kind: lemma
 title: "An induced copy of $H_2$ inside the extension set of an induced embedding of $H_1-v$ yields an induced copy of $H_1$ with $H_2$ substituted for $v$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

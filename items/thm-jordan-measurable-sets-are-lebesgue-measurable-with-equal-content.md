@@ -2,7 +2,7 @@
 id: thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content
 kind: theorem
 title: "Lebesgue outer measure is at most Jordan outer content, and a bounded Jordan measurable set is Lebesgue measurable with Lebesgue measure equal to its Jordan content"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "Jordan content and Lebesgue measure"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

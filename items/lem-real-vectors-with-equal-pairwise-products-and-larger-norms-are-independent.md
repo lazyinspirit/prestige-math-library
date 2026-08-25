@@ -2,7 +2,7 @@
 id: lem-real-vectors-with-equal-pairwise-products-and-larger-norms-are-independent
 kind: lemma
 title: "If $v_1,\\dots,v_m\\in\\mathbb{R}^{n}$ satisfy $\\langle v_i,v_j\\rangle=t\\ge0$ for $i\\ne j$ and $\\langle v_i,v_i\\rangle>t$, they are linearly independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

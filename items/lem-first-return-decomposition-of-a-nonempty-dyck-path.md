@@ -2,7 +2,7 @@
 id: lem-first-return-decomposition-of-a-nonempty-dyck-path
 kind: lemma
 title: "Every Dyck path of semilength $n+1$ factors uniquely as $U\\,P\\,D\\,Q$ with $P\\in\\mathcal{D}_i$ and $Q\\in\\mathcal{D}_{n-i}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

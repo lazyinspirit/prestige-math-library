@@ -2,7 +2,7 @@
 id: thm-a-modular-partition-its-quotient-and-its-parts-determine-the-graph
 kind: theorem
 title: "A graph is recovered from any modular partition by the induced subgraphs on the parts together with the quotient graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

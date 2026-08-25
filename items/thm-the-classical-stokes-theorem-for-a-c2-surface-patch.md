@@ -2,7 +2,7 @@
 id: thm-the-classical-stokes-theorem-for-a-c2-surface-patch
 kind: theorem
 title: "The classical Stokes theorem for a $C^2$ patch over a finite elementary Green region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

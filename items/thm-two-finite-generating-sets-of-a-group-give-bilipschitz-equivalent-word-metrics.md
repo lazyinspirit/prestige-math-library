@@ -2,7 +2,7 @@
 id: thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics
 kind: theorem
 title: "The identity map between the word metrics of two finite generating sets is a bilipschitz equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

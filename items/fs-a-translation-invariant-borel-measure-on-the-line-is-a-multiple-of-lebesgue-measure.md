@@ -2,7 +2,7 @@
 id: fs-a-translation-invariant-borel-measure-on-the-line-is-a-multiple-of-lebesgue-measure
 kind: false-statement
 title: "Every translation-invariant measure on the Borel sets of $\\mathbb{R}$ is a nonnegative multiple of Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

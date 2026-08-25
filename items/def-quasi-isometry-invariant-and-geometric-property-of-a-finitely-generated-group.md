@@ -2,7 +2,7 @@
 id: def-quasi-isometry-invariant-and-geometric-property-of-a-finitely-generated-group
 kind: definition
 title: "Quasi-isometry invariants and geometric properties of finitely generated groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-finitely-generated-group, def-quasi-isometry-type-of-a-finitely-gener
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

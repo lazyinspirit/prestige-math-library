@@ -2,7 +2,7 @@
 id: prop-irreducibility-of-the-cyclotomic-polynomial-characterises-the-full-galois-group
 kind: proposition
 title: "$\\Phi_n$ is irreducible over $K$ exactly when $[K(\\zeta_n):K]=\\varphi(n)$, exactly when the embedding into $(\\mathbb Z/n)^\\times$ is onto"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

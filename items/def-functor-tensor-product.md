@@ -2,7 +2,7 @@
 id: def-functor-tensor-product
 kind: definition
 title: "The tensor product of a presheaf and a covariant set-valued functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-end-and-coend, def-hom-functors-and-hom-bifunctor, prop-sets-and-func
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

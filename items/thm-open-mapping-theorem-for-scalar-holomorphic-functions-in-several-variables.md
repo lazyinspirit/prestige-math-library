@@ -2,7 +2,7 @@
 id: thm-open-mapping-theorem-for-scalar-holomorphic-functions-in-several-variables
 kind: theorem
 title: "A nonconstant scalar holomorphic function on a domain in $\\mathbb{C}^m$ is an open map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

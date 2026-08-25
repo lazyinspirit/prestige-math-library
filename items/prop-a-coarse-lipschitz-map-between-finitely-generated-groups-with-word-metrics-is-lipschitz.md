@@ -2,7 +2,7 @@
 id: prop-a-coarse-lipschitz-map-between-finitely-generated-groups-with-word-metrics-is-lipschitz
 kind: proposition
 title: "A coarse Lipschitz map between word metric spaces of finitely generated groups is Lipschitz"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

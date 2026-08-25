@@ -2,7 +2,7 @@
 id: ex-non-noetherian-ring-with-a-strict-chain-of-principal-ideals
 kind: example
 title: "The subring $k[x,y,x/y,x/y^2,\\ldots]$ of $k(x,y)$ has a strictly ascending chain of principal ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

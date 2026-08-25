@@ -2,7 +2,7 @@
 id: rem-conventions-for-prime-graphs
 kind: remark
 title: "Which small graphs count as prime on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

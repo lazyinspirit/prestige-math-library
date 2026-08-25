@@ -2,7 +2,7 @@
 id: ex-a-normal-basis-of-the-complex-numbers-over-the-reals
 kind: example
 title: "$\\{1+i,\\,1-i\\}$ is a normal basis of $\\mathbb C/\\mathbb R$ while $\\{1,i\\}$ is not"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

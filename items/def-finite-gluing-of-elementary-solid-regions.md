@@ -2,7 +2,7 @@
 id: def-finite-gluing-of-elementary-solid-regions
 kind: definition
 title: "Finite gluings of elementary solid regions and their outward boundary presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

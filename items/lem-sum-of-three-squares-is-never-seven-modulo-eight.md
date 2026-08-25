@@ -2,7 +2,7 @@
 id: lem-sum-of-three-squares-is-never-seven-modulo-eight
 kind: lemma
 title: "No sum of three integer squares is congruent to $7$ modulo $8$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

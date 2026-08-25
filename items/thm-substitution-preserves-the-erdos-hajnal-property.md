@@ -2,7 +2,7 @@
 id: thm-substitution-preserves-the-erdos-hajnal-property
 kind: theorem
 title: "Alon–Pach–Solymosi: if $H_1$ and $H_2$ have the Erdős–Hajnal property, so does the graph obtained from $H_1$ by substituting $H_2$ for a vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

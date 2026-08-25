@@ -2,7 +2,7 @@
 id: def-modular-group-of-order-p-cubed
 kind: definition
 title: "The modular group of order $p^3$ as a semidirect product $C_{p^2}\\rtimes C_p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-the-order-p-automorphism-of-a-cyclic-group-of-order-p-squared, def-ex
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

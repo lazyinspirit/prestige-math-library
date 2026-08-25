@@ -2,7 +2,7 @@
 id: thm-catalan-numbers-by-the-cycle-lemma
 kind: theorem
 title: "$(2n+1)\\,C_n=\\binom{2n+1}{n}$, a second derivation of the Catalan count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-disjoint-union-of-small-cliques-is-a-sparse-vertex-set
 kind: example
 title: "In a disjoint union of cliques of order $k$ the whole vertex set is $(k/n)$-sparse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

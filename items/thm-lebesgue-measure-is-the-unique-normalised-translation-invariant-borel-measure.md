@@ -2,7 +2,7 @@
 id: thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure
 kind: theorem
 title: "A translation-invariant measure on the Borel sets of $\\mathbb{R}^n$ giving the unit cube measure one is the restriction of Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "uniqueness of Lebesgue measure"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

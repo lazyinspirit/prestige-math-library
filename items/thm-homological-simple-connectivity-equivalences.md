@@ -2,7 +2,7 @@
 id: thm-homological-simple-connectivity-equivalences
 kind: theorem
 title: "Equivalent characterisations of a homologically simply connected domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

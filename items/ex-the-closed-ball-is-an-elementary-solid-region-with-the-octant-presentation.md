@@ -2,7 +2,7 @@
 id: ex-the-closed-ball-is-an-elementary-solid-region-with-the-octant-presentation
 kind: example
 title: "The closed ball is an elementary solid region, presented by the eight spherical octants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-symmetric-polynomials-as-a-noether-invariant-ring
 kind: example
 title: "The symmetric polynomials as the invariant ring of the symmetric group, seen through Noether's finiteness theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

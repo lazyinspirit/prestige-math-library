@@ -2,7 +2,7 @@
 id: thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant
 kind: theorem
 title: "An invertible linear map of $\\mathbb{R}^n$ scales the Lebesgue measure of every Borel set by a positive constant depending only on the map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

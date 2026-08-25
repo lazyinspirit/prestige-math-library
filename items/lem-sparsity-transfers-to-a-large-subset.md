@@ -2,7 +2,7 @@
 id: lem-sparsity-transfers-to-a-large-subset
 kind: lemma
 title: "A subset occupying at least a $\\lambda$ fraction of a $c$-sparse set is $(c/\\lambda)$-sparse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

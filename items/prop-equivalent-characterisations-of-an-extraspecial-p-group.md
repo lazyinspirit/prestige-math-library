@@ -2,7 +2,7 @@
 id: prop-equivalent-characterisations-of-an-extraspecial-p-group
 kind: proposition
 title: "Three equivalent descriptions of an extraspecial $p$-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

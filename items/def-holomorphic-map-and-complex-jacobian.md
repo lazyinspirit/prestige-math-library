@@ -2,7 +2,7 @@
 id: def-holomorphic-map-and-complex-jacobian
 kind: definition
 title: "Holomorphic maps $\\mathbb{C}^m \\to \\mathbb{C}^n$ and the complex Jacobian matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-componentwise-holomorphy-in-several-complex-variables]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

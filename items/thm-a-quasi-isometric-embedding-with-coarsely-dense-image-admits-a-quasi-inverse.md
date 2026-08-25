@@ -2,7 +2,7 @@
 id: thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse
 kind: theorem
 title: "A quasi-isometric embedding with coarsely dense image has a quasi-inverse quasi-isometric embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

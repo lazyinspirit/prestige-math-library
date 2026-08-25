@@ -2,7 +2,7 @@
 id: def-locally-finite-graph
 kind: definition
 title: "Locally finite graphs and vertex degree without a finiteness hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-finite-cardinality]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

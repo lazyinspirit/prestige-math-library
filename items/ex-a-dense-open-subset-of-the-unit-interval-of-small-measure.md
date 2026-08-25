@@ -2,7 +2,7 @@
 id: ex-a-dense-open-subset-of-the-unit-interval-of-small-measure
 kind: example
 title: "For every positive $\\varepsilon$ there is a dense open subset of $(0,1)$ of Lebesgue measure below $\\varepsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

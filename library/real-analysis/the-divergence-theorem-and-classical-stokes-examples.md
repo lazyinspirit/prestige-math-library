@@ -1,7 +1,7 @@
 ---
 page: the-divergence-theorem-and-classical-stokes-examples
 title: "The Divergence Theorem and Classical Stokes: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-closed-unit-box-is-an-elementary-solid-region,
            ex-the-divergence-theorem-on-the-closed-unit-box,

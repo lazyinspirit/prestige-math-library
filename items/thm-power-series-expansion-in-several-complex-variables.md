@@ -2,7 +2,7 @@
 id: thm-power-series-expansion-in-several-complex-variables
 kind: theorem
 title: "A continuous separately holomorphic function is the sum of an absolutely convergent power series with Cauchy-integral coefficients on every smaller polydisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

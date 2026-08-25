@@ -2,7 +2,7 @@
 id: def-plus-and-minus-type-of-an-extraspecial-p-group
 kind: definition
 title: "Plus and minus type of an extraspecial $p$-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-the-heisenberg-group-of-order-p-cubed-is-extraspecial-and-has-expone
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

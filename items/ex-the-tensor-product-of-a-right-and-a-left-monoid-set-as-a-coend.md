@@ -2,7 +2,7 @@
 id: ex-the-tensor-product-of-a-right-and-a-left-monoid-set-as-a-coend
 kind: example
 title: "The tensor product of monoid sets as a coend"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume
 kind: theorem
 title: "Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

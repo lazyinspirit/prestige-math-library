@@ -2,7 +2,7 @@
 id: lem-artin-tate-intermediate-ring-is-module-finite-over-the-coefficient-subalgebra
 kind: lemma
 title: "In the Artin–Tate setup the intermediate ring is module-finite over the coefficient subalgebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

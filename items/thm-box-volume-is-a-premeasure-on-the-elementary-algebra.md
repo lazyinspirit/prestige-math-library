@@ -2,7 +2,7 @@
 id: thm-box-volume-is-a-premeasure-on-the-elementary-algebra
 kind: theorem
 title: "Elementary volume is a sigma-finite premeasure on the algebra of elementary sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "volume is a premeasure"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

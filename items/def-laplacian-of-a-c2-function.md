@@ -2,7 +2,7 @@
 id: def-laplacian-of-a-c2-function
 kind: definition
 title: "The Laplacian of a $C^2$ function and of a $C^2$ vector field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: [thm-c2-holomorphic-components-are-harmonic]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

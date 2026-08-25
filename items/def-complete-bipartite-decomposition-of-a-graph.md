@@ -2,7 +2,7 @@
 id: def-complete-bipartite-decomposition-of-a-graph
 kind: definition
 title: "A decomposition of a graph's edge set into complete bipartite subgraphs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

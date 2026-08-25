@@ -2,7 +2,7 @@
 id: thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation
 kind: theorem
 title: "A set-valued coend is the disjoint union of the diagonal values modulo the dinaturality relation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

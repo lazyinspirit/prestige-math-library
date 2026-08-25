@@ -2,7 +2,7 @@
 id: ex-the-infinite-dihedral-group-is-quasi-isometric-to-the-integers
 kind: example
 title: "The infinite dihedral group is quasi-isometric to $\\mathbb Z$, and to $\\mathbb Z\\times\\mathbb Z/2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

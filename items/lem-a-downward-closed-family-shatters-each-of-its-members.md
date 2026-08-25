@@ -2,7 +2,7 @@
 id: lem-a-downward-closed-family-shatters-each-of-its-members
 kind: lemma
 title: "If $\\mathcal{F}$ is closed under taking subsets then $\\mathcal{F}$ shatters every $F\\in\\mathcal{F}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-the-exponent-of-an-extraspecial-p-group
 kind: corollary
 title: "An extraspecial group of odd order has exponent $p$ or $p^2$, and an extraspecial $2$-group has exponent $4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

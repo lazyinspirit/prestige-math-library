@@ -2,7 +2,7 @@
 id: lem-restrictedness-is-complement-invariant
 kind: lemma
 title: "A set is $c$-sparse in $G$ exactly when it is $c$-dense in $\\overline G$, so $c$-restrictedness is complement-invariant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

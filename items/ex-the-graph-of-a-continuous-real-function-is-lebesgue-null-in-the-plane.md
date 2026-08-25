@@ -2,7 +2,7 @@
 id: ex-the-graph-of-a-continuous-real-function-is-lebesgue-null-in-the-plane
 kind: example
 title: "The graph of a continuous function $\\mathbb{R}\\to\\mathbb{R}$ is Lebesgue null in $\\mathbb{R}^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

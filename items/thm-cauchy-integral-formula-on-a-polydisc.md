@@ -2,7 +2,7 @@
 id: thm-cauchy-integral-formula-on-a-polydisc
 kind: theorem
 title: "The iterated Cauchy integral formula on a polydisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

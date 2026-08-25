@@ -2,7 +2,7 @@
 id: def-integration-and-index-of-complex-chain
 kind: definition
 title: "Integration over a complex chain and the index of a chain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

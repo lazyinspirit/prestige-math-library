@@ -2,7 +2,7 @@
 id: ex-a-generating-pair-decomposition-of-an-extraspecial-group-of-order-thirty-two
 kind: example
 title: "A choice of four generators exhibiting an extraspecial group of order $32$ as an internal central product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

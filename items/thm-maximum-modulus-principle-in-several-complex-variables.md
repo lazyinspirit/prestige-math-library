@@ -2,7 +2,7 @@
 id: thm-maximum-modulus-principle-in-several-complex-variables
 kind: theorem
 title: "An interior local maximum of the modulus forces a scalar holomorphic function to be constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

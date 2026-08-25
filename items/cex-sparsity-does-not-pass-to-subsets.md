@@ -2,7 +2,7 @@
 id: cex-sparsity-does-not-pass-to-subsets
 kind: counterexample
 title: "A subset of a $c$-sparse set that is not $c$-sparse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

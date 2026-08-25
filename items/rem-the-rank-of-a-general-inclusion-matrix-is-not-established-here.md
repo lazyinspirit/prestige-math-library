@@ -2,7 +2,7 @@
 id: rem-the-rank-of-a-general-inclusion-matrix-is-not-established-here
 kind: remark
 title: "What is and is not proved about $\\operatorname{rank}W_{t,k}(n)$ on this page"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

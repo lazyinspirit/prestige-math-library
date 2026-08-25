@@ -2,7 +2,7 @@
 id: cor-the-oddtown-bound-is-attained
 kind: corollary
 title: "The $n$ singletons form an Oddtown family, so the bound $m\\le n$ is attained for every $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

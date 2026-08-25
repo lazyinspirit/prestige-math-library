@@ -2,7 +2,7 @@
 id: thm-steinhaus-difference-set-contains-a-ball
 kind: theorem
 title: "If a Lebesgue measurable subset of $\\mathbb{R}^n$ has positive measure, its difference set contains an open ball about the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "Steinhaus theorem"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

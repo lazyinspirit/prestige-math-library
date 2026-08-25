@@ -2,7 +2,7 @@
 id: def-roots-of-unity-in-a-field
 kind: definition
 title: "The group $\\mu_n(K)$ of $n$-th roots of unity in a field, and primitive $n$-th roots of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 forward_refs: [thm-complex-nth-roots-and-roots-of-unity]
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

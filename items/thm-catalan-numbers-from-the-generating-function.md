@@ -2,7 +2,7 @@
 id: thm-catalan-numbers-from-the-generating-function
 kind: theorem
 title: "A third derivation of $(n+1)\\,C_n=\\binom{2n}{n}$, from the closed form of $C(x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

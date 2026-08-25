@@ -2,7 +2,7 @@
 id: thm-intersections-of-rational-cyclotomic-fields
 kind: theorem
 title: "$\\mathbb Q(\\mu_m)\\cap\\mathbb Q(\\mu_n)=\\mathbb Q(\\mu_{\\gcd(m,n)})$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

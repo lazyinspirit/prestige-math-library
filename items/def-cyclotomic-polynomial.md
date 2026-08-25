@@ -2,7 +2,7 @@
 id: def-cyclotomic-polynomial
 kind: definition
 title: "The cyclotomic polynomials $\\Phi_n\\in\\mathbb Z[t]$, defined by $\\prod_{d\\mid n}\\Phi_d=t^{n}-1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: [thm-cyclotomic-polynomials-are-monic-integer-polynomials-of-degre
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

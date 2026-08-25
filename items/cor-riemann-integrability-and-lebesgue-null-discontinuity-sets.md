@@ -2,7 +2,7 @@
 id: cor-riemann-integrability-and-lebesgue-null-discontinuity-sets
 kind: corollary
 title: "A bounded function on a closed bounded interval, or on a closed nondegenerate rectangle, is Riemann integrable exactly when its discontinuity set has Lebesgue measure zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "Riemann integrability and Lebesgue nullity"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

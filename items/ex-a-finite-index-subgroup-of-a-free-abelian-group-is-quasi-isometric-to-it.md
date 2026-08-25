@@ -2,7 +2,7 @@
 id: ex-a-finite-index-subgroup-of-a-free-abelian-group-is-quasi-isometric-to-it
 kind: example
 title: "The subgroup $2\\mathbb Z\\times\\mathbb Z$ has index two in $\\mathbb Z^2$ and its inclusion is a quasi-isometry"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

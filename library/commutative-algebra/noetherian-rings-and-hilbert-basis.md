@@ -1,7 +1,7 @@
 ---
 page: noetherian-rings-and-hilbert-basis
 title: "Noetherian Rings and Hilbert Basis"
-status: draft
+status: published
 items: [rem-noetherian-conventions-and-choice,
         lem-generated-submodule-as-finite-linear-combinations,
         lem-finite-generating-subset-of-a-generating-set,

@@ -2,7 +2,7 @@
 id: thm-noether-finiteness-theorem-for-invariants
 kind: theorem
 title: "Noether's finiteness theorem: the invariants of a finite group acting on a finite-type algebra over a Noetherian ring form an algebra of finite type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

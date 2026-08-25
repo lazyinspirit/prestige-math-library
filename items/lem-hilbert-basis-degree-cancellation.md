@@ -2,7 +2,7 @@
 id: lem-hilbert-basis-degree-cancellation
 kind: lemma
 title: "A single cancellation step lowers the degree of a polynomial in an ideal once its leading coefficient lies in a realised stage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

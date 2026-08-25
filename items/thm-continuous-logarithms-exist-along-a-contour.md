@@ -2,7 +2,7 @@
 id: thm-continuous-logarithms-exist-along-a-contour
 kind: theorem
 title: "Every contour missing a point admits a continuous logarithm, unique up to a constant in $2\\pi i\\mathbb{Z}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

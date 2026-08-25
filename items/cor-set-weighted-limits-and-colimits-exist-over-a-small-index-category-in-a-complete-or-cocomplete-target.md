@@ -2,7 +2,7 @@
 id: cor-set-weighted-limits-and-colimits-exist-over-a-small-index-category-in-a-complete-or-cocomplete-target
 kind: corollary
 title: 'A limit weighted by a $\mathbf{Set}$-valued weight on a small index category exists in a complete target, and the weighted colimit in a cocomplete one'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

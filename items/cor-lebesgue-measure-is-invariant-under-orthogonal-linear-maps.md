@@ -2,7 +2,7 @@
 id: cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps
 kind: corollary
 title: "Lebesgue measure on $\\mathbb{R}^n$ is invariant under every orthogonal linear map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "orthogonal invariance"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

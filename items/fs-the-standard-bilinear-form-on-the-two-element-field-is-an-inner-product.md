@@ -2,7 +2,7 @@
 id: fs-the-standard-bilinear-form-on-the-two-element-field-is-an-inner-product
 kind: false-statement
 title: "FALSE: $\\langle x,y\\rangle=\\sum_ix_iy_i$ makes $\\mathbb{F}_2^{n}$ an inner product space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

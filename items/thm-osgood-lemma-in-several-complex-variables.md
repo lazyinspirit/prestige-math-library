@@ -2,7 +2,7 @@
 id: thm-osgood-lemma-in-several-complex-variables
 kind: theorem
 title: "Osgood's lemma: continuous and separately holomorphic implies holomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

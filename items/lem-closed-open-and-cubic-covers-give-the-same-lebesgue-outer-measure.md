@@ -2,7 +2,7 @@
 id: lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure
 kind: lemma
 title: "Countable covers by closed boxes, by open boxes and by closed cubes all compute Lebesgue outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "closed, open and cubic covers agree"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

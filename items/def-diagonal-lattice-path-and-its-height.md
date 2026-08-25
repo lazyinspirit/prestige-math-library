@@ -2,7 +2,7 @@
 id: def-diagonal-lattice-path-and-its-height
 kind: definition
 title: "Diagonal lattice paths with steps $U=(1,1)$ and $D=(1,-1)$, and the height function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

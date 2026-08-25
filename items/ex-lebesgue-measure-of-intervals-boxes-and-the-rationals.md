@@ -2,7 +2,7 @@
 id: ex-lebesgue-measure-of-intervals-boxes-and-the-rationals
 kind: example
 title: "The Lebesgue measure of an interval, of a box, of $\\mathbb{Q}$ and of the irrationals in $[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

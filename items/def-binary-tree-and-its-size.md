@@ -2,7 +2,7 @@
 id: def-binary-tree-and-its-size
 kind: definition
 title: "Binary trees, defined recursively, and their size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

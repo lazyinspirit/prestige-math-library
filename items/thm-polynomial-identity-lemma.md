@@ -2,7 +2,7 @@
 id: thm-polynomial-identity-lemma
 kind: theorem
 title: "If $\\deg_{x_i}P<\\lvert S_i\\rvert$ for each $i$ and $P$ vanishes on $S_1\\times\\cdots\\times S_n$, then $P=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-primitive-root-of-unity-and-its-prime-power-share-a-minimal-polynomial-over-the-rationals
 kind: lemma
 title: "If $p$ is a prime not dividing $n$, a rational minimal polynomial of a primitive $n$-th root of unity also kills its $p$-th power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

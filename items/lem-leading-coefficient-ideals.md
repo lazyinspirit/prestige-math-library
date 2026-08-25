@@ -2,7 +2,7 @@
 id: lem-leading-coefficient-ideals
 kind: lemma
 title: "The leading coefficients of the degree-$n$ elements of an ideal of $R[x]$, together with $0$, form an ideal of $R$, and these ideals ascend with $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

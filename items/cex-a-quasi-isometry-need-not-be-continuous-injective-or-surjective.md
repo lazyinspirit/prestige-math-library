@@ -2,7 +2,7 @@
 id: cex-a-quasi-isometry-need-not-be-continuous-injective-or-surjective
 kind: counterexample
 title: "A single map exhibiting a quasi-isometry that is discontinuous, non-injective and non-surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

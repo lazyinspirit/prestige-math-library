@@ -2,7 +2,7 @@
 id: def-monomials-multidegree-and-total-degree
 kind: definition
 title: "Monomials, coefficients, degree in each variable and total degree in $F[x_1,\\dots,x_n]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

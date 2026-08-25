@@ -2,7 +2,7 @@
 id: ex-the-frobenius-conjugates-of-a-generator-of-f-sixteen
 kind: example
 title: "The four roots of $t^{4}+t+1$ over $\\mathbb F_2$ are the Frobenius powers of any one of them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

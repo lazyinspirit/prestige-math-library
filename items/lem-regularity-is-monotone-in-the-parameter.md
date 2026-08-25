@@ -2,7 +2,7 @@
 id: lem-regularity-is-monotone-in-the-parameter
 kind: lemma
 title: "An $\\epsilon$-regular pair is $\\epsilon'$-regular for every $\\epsilon'\\ge\\epsilon$ with $\\epsilon'>0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

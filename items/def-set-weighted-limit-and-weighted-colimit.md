@@ -2,7 +2,7 @@
 id: def-set-weighted-limit-and-weighted-colimit
 kind: definition
 title: "Set-weighted limits and colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-functor-category, prop-size-of-functor-categories, def-presheaf-repre
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

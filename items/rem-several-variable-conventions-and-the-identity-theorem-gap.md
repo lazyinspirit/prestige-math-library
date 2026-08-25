@@ -2,7 +2,7 @@
 id: rem-several-variable-conventions-and-the-identity-theorem-gap
 kind: remark
 title: "Conventions on this page, and what the several-variable identity theorem does not say"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ forward_refs: [ex-maximum-modulus-on-the-distinguished-boundary-of-a-bidisc, fs-
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

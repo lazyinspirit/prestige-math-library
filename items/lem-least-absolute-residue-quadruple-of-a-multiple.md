@@ -2,7 +2,7 @@
 id: lem-least-absolute-residue-quadruple-of-a-multiple
 kind: lemma
 title: "The centred residue quadruple of $pm=a^2+b^2+c^2+d^2$ has norm $mn$ with $1\\le n<m$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

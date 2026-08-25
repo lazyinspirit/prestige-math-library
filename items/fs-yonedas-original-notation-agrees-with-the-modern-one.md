@@ -2,7 +2,7 @@
 id: fs-yonedas-original-notation-agrees-with-the-modern-one
 kind: false-statement
 title: "FALSE: the integral notation of Yoneda's original paper means the same as the modern one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

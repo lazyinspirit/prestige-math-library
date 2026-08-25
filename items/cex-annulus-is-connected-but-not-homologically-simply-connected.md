@@ -2,7 +2,7 @@
 id: cex-annulus-is-connected-but-not-homologically-simply-connected
 kind: counterexample
 title: "A connected plane domain that is not homologically simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

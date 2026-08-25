@@ -2,7 +2,7 @@
 id: lem-a-triangulation-has-a-unique-triangle-on-the-closing-side
 kind: lemma
 title: "For $m\\ge3$ and a triangulation $T$ of the $m$-gon there is a unique $k$ with $1<k<m$ such that $\\{1,k\\}$ and $\\{k,m\\}$ are both chords of $T$ or sides, and $T$ splits along $k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

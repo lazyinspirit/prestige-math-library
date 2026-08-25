@@ -2,7 +2,7 @@
 id: cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls
 kind: corollary
 title: "Every subset of $\\mathbb{R}^n$ has a $G_\\delta$ measurable hull of the same outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

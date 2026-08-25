@@ -2,7 +2,7 @@
 id: ex-the-galois-group-of-f-eight-over-f-two
 kind: example
 title: "$\\operatorname{Gal}(\\mathbb F_8/\\mathbb F_2)$ is cyclic of order three with no proper intermediate field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

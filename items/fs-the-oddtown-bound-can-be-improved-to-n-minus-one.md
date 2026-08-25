@@ -2,7 +2,7 @@
 id: fs-the-oddtown-bound-can-be-improved-to-n-minus-one
 kind: false-statement
 title: "FALSE: an Oddtown family on $[n]$ has at most $n-1$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

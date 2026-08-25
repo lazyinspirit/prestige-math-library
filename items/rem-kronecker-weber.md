@@ -2,7 +2,7 @@
 id: rem-kronecker-weber
 kind: remark
 title: "Recorded, not proved: every finite abelian extension of $\\mathbb Q$ lies in a cyclotomic field"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -18,6 +18,10 @@ external_dependency:
   local_proof_attempt: "Two in-scope routes were tried. (i) Directly from the Galois correspondence: it classifies the subfields of a given cyclotomic field, but says nothing about an abelian extension not already given inside one, so it cannot produce the containment. (ii) Via ramification: the standard proof reduces to the local statement at each ramified prime and then to higher ramification groups of the p-adic rationals. This library has no valuation, no local field, no decomposition or inertia group and no ring of integers of a number field at any order, so not one step of that reduction can be written."
   necessity: "The arithmetic consequences of the theorem and its conductor formulation are routed through this statement by the number-theory plan, so deleting the item would silently remove a declared seam. Rescoping is not available either: the provable half is the converse, built separately as prop-subfields-of-rational-cyclotomic-fields-are-abelian-over-the-rationals, so what this remark records is exactly the half the library cannot supply."
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: owner-audit
   precheck: n/a
 sources:
   scraped: []

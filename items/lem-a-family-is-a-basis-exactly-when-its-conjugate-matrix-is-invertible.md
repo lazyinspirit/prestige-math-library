@@ -2,7 +2,7 @@
 id: lem-a-family-is-a-basis-exactly-when-its-conjugate-matrix-is-invertible
 kind: lemma
 title: "For a finite Galois extension, $(\\alpha_j)$ is a base-field basis exactly when the matrix $(\\sigma_i\\alpha_j)$ is invertible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

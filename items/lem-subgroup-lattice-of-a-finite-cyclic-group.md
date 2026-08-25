@@ -2,7 +2,7 @@
 id: lem-subgroup-lattice-of-a-finite-cyclic-group
 kind: lemma
 title: "A finite cyclic group has exactly one subgroup of each order dividing its own"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

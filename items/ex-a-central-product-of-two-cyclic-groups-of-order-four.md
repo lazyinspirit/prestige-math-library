@@ -2,7 +2,7 @@
 id: ex-a-central-product-of-two-cyclic-groups-of-order-four
 kind: example
 title: "The central product of two cyclic groups of order four along their subgroups of order two is abelian of order eight"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

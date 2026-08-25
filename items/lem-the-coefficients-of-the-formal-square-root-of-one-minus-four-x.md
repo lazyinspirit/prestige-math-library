@@ -2,7 +2,7 @@
 id: lem-the-coefficients-of-the-formal-square-root-of-one-minus-four-x
 kind: lemma
 title: "$[x^k](1-4x)^{1/2}=-\\frac{2}{k}\\binom{2k-2}{k-1}$ for $k\\ge1$, and $1$ for $k=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

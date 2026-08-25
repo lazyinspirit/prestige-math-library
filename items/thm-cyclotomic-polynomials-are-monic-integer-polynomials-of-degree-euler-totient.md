@@ -2,7 +2,7 @@
 id: thm-cyclotomic-polynomials-are-monic-integer-polynomials-of-degree-euler-totient
 kind: theorem
 title: "The recursion defines a unique monic $\\Phi_n\\in\\mathbb Z[t]$, of degree $\\varphi(n)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

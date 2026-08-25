@@ -2,7 +2,7 @@
 id: ex-the-boundary-flux-of-the-gradient-of-a-harmonic-function-vanishes
 kind: example
 title: "A function with vanishing Laplacian has zero boundary flux of its gradient on the unit box"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

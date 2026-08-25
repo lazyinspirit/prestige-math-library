@@ -2,7 +2,7 @@
 id: def-word-length-with-respect-to-a-generating-set
 kind: definition
 title: "Word length of a group element with respect to a generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-finitely-generated-group, def-generated-subgroup, thm-well-ordering-p
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

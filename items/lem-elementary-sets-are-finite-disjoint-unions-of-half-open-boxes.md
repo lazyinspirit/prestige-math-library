@@ -2,7 +2,7 @@
 id: lem-elementary-sets-are-finite-disjoint-unions-of-half-open-boxes
 kind: lemma
 title: "Every elementary set is a finite disjoint union of half-open boxes, and any finitely many boxes admit a common grid refinement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

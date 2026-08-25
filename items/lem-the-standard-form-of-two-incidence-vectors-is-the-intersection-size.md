@@ -2,7 +2,7 @@
 id: lem-the-standard-form-of-two-incidence-vectors-is-the-intersection-size
 kind: lemma
 title: "$\\langle v_A,v_B\\rangle$ is the image of $\\lvert A\\cap B\\rvert$ in $F$; over $\\mathbb{F}_2$ it is $0$ or $1$ according to the parity of $\\lvert A\\cap B\\rvert$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

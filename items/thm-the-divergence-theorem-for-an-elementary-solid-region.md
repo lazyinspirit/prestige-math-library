@@ -2,7 +2,7 @@
 id: thm-the-divergence-theorem-for-an-elementary-solid-region
 kind: theorem
 title: "The divergence theorem on an elementary solid region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

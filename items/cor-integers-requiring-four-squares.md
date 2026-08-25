@@ -2,7 +2,7 @@
 id: cor-integers-requiring-four-squares
 kind: corollary
 title: "Positive integers $4^a m$ with $m\\equiv 7\\pmod 8$ need four nonzero squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

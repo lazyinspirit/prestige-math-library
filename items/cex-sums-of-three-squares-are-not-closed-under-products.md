@@ -2,7 +2,7 @@
 id: cex-sums-of-three-squares-are-not-closed-under-products
 kind: counterexample
 title: "$3$ and $5$ are sums of three squares and $15$ is not"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 short: "three squares are not closed under products"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

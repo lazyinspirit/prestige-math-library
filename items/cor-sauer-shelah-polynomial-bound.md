@@ -2,7 +2,7 @@
 id: cor-sauer-shelah-polynomial-bound
 kind: corollary
 title: "For $d\\ge1$ a family on $[n]$ of VC dimension at most $d$ has at most $(n+1)^{d}$ members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-labelled-directed-graph-and-labelled-graph-isomorphism
 kind: definition
 title: "Labelled directed graphs, their underlying simple graphs, and label-preserving isomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-multigraph-loop-and
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: holomorphic-functions-of-several-variables-examples
 title: "Holomorphic Functions of Several Complex Variables — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-power-series-expansion-of-the-coordinate-product-on-a-bidisc,
            ex-power-series-expansion-of-an-exponential-of-a-coordinate-sum,

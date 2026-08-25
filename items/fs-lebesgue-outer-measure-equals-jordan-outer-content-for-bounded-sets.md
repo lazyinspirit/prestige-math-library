@@ -2,7 +2,7 @@
 id: fs-lebesgue-outer-measure-equals-jordan-outer-content-for-bounded-sets
 kind: false-statement
 title: "Lebesgue outer measure agrees with Jordan outer content on every bounded subset of $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

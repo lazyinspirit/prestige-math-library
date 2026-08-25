@@ -2,7 +2,7 @@
 id: def-the-induced-boundary-chain-of-a-c2-surface-patch
 kind: definition
 title: "The induced boundary chain and circulation of a $C^2$ patch over a finite elementary Green region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

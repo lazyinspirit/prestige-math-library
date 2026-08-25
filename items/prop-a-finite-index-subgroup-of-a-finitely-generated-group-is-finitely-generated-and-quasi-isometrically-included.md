@@ -2,7 +2,7 @@
 id: prop-a-finite-index-subgroup-of-a-finitely-generated-group-is-finitely-generated-and-quasi-isometrically-included
 kind: proposition
 title: "A subgroup of finite index in a finitely generated group is finitely generated, and its inclusion is a quasi-isometry"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

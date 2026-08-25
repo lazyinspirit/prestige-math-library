@@ -2,7 +2,7 @@
 id: prop-a-cayley-graph-is-regular-and-is-locally-finite-exactly-when-its-defining-subset-is-finite
 kind: proposition
 title: "Cayley-graph neighbourhoods are equipotent, and local finiteness is equivalent to finiteness of the symmetrised subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

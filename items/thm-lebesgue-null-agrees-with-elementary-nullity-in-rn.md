@@ -2,7 +2,7 @@
 id: thm-lebesgue-null-agrees-with-elementary-nullity-in-rn
 kind: theorem
 title: "A subset of $\\mathbb{R}^m$ has Lebesgue outer measure zero if and only if it is null in the sense of countable closed-cube covers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 short: "nullity agrees in $\\mathbb{R}^m$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-every-face-of-an-elementary-solid-region-is-outward-oriented
 kind: corollary
 title: "Every patch of an elementary solid region's presentation is a graph face in some direction, and at interior base points its normal is outward"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

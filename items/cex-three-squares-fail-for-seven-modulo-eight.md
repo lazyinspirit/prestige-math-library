@@ -2,7 +2,7 @@
 id: cex-three-squares-fail-for-seven-modulo-eight
 kind: counterexample
 title: "$7$ and $28$ are not sums of three integer squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 short: "three squares miss $7$ and $28$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

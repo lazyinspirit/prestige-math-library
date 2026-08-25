@@ -2,7 +2,7 @@
 id: def-motzkin-and-schroder-paths
 kind: definition
 title: "Motzkin paths, Schröder paths, the Motzkin numbers $M_n$, the large Schröder numbers $R_n$, and their generating functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

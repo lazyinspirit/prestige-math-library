@@ -2,7 +2,7 @@
 id: thm-triangulations-of-a-convex-polygon-correspond-to-binary-trees
 kind: theorem
 title: "There is a bijection $\\mathcal{T}_n\\to\\mathcal{P}_{n+2}$ for every $n\\in\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-proper-module-of-a-connected-graph-has-a-complete-neighbour
 kind: lemma
 title: "In a connected graph, some vertex outside a nonempty proper module is complete to it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

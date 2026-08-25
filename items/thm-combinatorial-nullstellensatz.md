@@ -2,7 +2,7 @@
 id: thm-combinatorial-nullstellensatz
 kind: theorem
 title: "Alon's Combinatorial Nullstellensatz: if $\\deg f=\\sum_it_i$, the coefficient of $x_1^{t_1}\\cdots x_n^{t_n}$ in $f$ is nonzero, and $\\lvert S_i\\rvert>t_i$, then $f(s_1,\\dots,s_n)\\ne0$ for some $s_i\\in S_i$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

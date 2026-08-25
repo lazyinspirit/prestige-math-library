@@ -2,7 +2,7 @@
 id: thm-an-end-is-an-equalizer-between-two-products
 kind: theorem
 title: "An end is the equalizer of two products, and a coend the coequalizer of two coproducts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

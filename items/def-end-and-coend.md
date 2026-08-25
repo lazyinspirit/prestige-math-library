@@ -2,7 +2,7 @@
 id: def-end-and-coend
 kind: definition
 title: 'The end and the coend of a functor $\mathcal C^{\mathrm{op}}\times\mathcal C\to\mathcal D$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-wedge-and-cowedge, def-initial-terminal-and-zero-object, def-dinatura
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

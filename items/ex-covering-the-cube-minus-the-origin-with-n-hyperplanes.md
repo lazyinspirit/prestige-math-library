@@ -2,7 +2,7 @@
 id: ex-covering-the-cube-minus-the-origin-with-n-hyperplanes
 kind: example
 title: "The $n$ hyperplanes $x_i=1$ cover $\\{0,1\\}^{n}$ except the origin, so the Alon–Füredi bound is tight"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

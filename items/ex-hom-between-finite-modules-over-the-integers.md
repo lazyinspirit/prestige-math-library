@@ -2,7 +2,7 @@
 id: ex-hom-between-finite-modules-over-the-integers
 kind: example
 title: "$\\operatorname{Hom}_{\\mathbb Z}(\\mathbb Z/m,\\mathbb Z/n)\\cong\\mathbb Z/\\gcd(m,n)$ for $n\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

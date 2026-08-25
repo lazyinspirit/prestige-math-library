@@ -2,7 +2,7 @@
 id: rem-two-senses-of-regularity-for-lebesgue-measure
 kind: remark
 title: "Regularity of an outer measure and regularity of a measure with respect to open and compact sets are different conditions, both satisfied here"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

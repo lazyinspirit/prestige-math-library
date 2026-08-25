@@ -2,7 +2,7 @@
 id: prop-maximal-elementary-abelian-subgroups-distinguish-the-two-extraspecial-two-groups
 kind: proposition
 title: "The maximal elementary abelian subgroups of the two extraspecial groups of order $2^{1+2n}$ have orders $2^{n+1}$ and $2^{n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

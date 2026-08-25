@@ -2,7 +2,7 @@
 id: ex-the-subfield-lattice-of-the-field-of-order-two-to-the-twelve
 kind: example
 title: "The intermediate fields of $\\mathbb F_{2^{12}}/\\mathbb F_2$ match the divisors of twelve"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

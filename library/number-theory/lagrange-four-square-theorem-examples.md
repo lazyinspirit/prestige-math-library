@@ -1,7 +1,7 @@
 ---
 page: lagrange-four-square-theorem-examples
 title: "Lagrange Four Square Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-four-square-product-identity-by-expansion,
            ex-four-square-congruence-for-an-odd-prime,

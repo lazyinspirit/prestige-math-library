@@ -2,7 +2,7 @@
 id: ex-the-inclusion-matrix-of-points-against-pairs-on-four-points
 kind: example
 title: "$W_{1,2}(4)$ written out, and its rank computed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

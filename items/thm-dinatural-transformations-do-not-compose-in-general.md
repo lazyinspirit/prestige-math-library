@@ -2,7 +2,7 @@
 id: thm-dinatural-transformations-do-not-compose-in-general
 kind: theorem
 title: "Dinatural transformations do not compose in general"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

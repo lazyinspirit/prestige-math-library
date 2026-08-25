@@ -2,7 +2,7 @@
 id: lem-the-divergence-and-curl-of-a-cross-product
 kind: lemma
 title: "The divergence and curl of a cross product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-every-end-exists
 kind: false-statement
 title: 'FALSE: every functor on $\mathcal C^{\mathrm{op}}\times\mathcal C$ has an end'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

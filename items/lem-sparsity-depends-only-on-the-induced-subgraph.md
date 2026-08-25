@@ -2,7 +2,7 @@
 id: lem-sparsity-depends-only-on-the-induced-subgraph
 kind: lemma
 title: "A set is $c$-sparse exactly when the maximum degree of the graph it induces is at most $c$ times its size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-modular-decomposition-of-a-blown-up-five-cycle
 kind: example
 title: "The modular decomposition of a five-cycle with each vertex blown up into an edgeless graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

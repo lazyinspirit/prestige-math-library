@@ -2,7 +2,7 @@
 id: def-cycles-trees-and-forests-in-a-simple-graph
 kind: definition
 title: "Cycles, trees and forests in a simple graph on an arbitrary vertex set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-graph-without-a-finiteness-hypothesis, def-walks-paths-and-con
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

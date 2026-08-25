@@ -2,7 +2,7 @@
 id: lem-the-coordinate-components-of-the-oriented-area-vector-are-projected-jacobians
 kind: lemma
 title: "Each coordinate of the oriented area vector is the Jacobian determinant of the matching cyclic projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

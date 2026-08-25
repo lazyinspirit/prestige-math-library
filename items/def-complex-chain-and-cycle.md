@@ -2,7 +2,7 @@
 id: def-complex-chain-and-cycle
 kind: definition
 title: "Complex chains, their traces, and cycles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-an-intersection-of-cyclotomic-extensions-larger-than-the-gcd-case
 kind: counterexample
 title: "$\\mathbb F_3(\\mu_5)\\cap\\mathbb F_3(\\mu_7)$ is larger than $\\mathbb F_3$ although five and seven are coprime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

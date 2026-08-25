@@ -2,7 +2,7 @@
 id: prop-the-quasi-isometry-group-is-a-group-and-quasi-isometric-spaces-have-isomorphic-quasi-isometry-groups
 kind: proposition
 title: "Quasi-isometries modulo bounded distance form a group, and a quasi-isometry induces an isomorphism of these groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

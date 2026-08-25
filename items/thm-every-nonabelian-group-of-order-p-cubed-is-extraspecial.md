@@ -2,7 +2,7 @@
 id: thm-every-nonabelian-group-of-order-p-cubed-is-extraspecial
 kind: theorem
 title: "A nonabelian group of order $p^3$ is extraspecial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

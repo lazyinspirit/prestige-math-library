@@ -2,7 +2,7 @@
 id: lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups
 kind: lemma
 title: "$Q_8\\circ Q_8\\cong\\operatorname{Dih}(C_4)\\circ\\operatorname{Dih}(C_4)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

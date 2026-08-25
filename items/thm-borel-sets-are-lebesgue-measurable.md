@@ -2,7 +2,7 @@
 id: thm-borel-sets-are-lebesgue-measurable
 kind: theorem
 title: "Assuming countable choice, every Borel subset of $\\mathbb{R}^n$ is Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "Borel implies Lebesgue measurable"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

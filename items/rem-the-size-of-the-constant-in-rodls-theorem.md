@@ -2,7 +2,7 @@
 id: rem-the-size-of-the-constant-in-rodls-theorem
 kind: remark
 title: "What this proof gives for $\\delta$, and why the regularity route is expensive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

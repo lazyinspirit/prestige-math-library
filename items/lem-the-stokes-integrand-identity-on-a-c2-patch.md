@@ -2,7 +2,7 @@
 id: lem-the-stokes-integrand-identity-on-a-c2-patch
 kind: lemma
 title: "The curl flux integrand of a $C^2$ patch is a two-dimensional curl of the pulled-back field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

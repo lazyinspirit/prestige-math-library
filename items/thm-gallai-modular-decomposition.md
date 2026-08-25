@@ -2,7 +2,7 @@
 id: thm-gallai-modular-decomposition
 kind: theorem
 title: "Gallai's modular decomposition theorem: a graph on at least two vertices is disconnected, or has a disconnected complement, or has a modular partition into its maximal proper modules whose quotient is prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

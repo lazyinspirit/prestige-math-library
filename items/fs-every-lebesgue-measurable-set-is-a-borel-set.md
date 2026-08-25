@@ -2,7 +2,7 @@
 id: fs-every-lebesgue-measurable-set-is-a-borel-set
 kind: false-statement
 title: "Assuming the Axiom of Choice, every Lebesgue measurable subset of $\\mathbb{R}$ is a Borel set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

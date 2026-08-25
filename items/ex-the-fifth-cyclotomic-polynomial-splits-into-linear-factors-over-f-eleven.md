@@ -2,7 +2,7 @@
 id: ex-the-fifth-cyclotomic-polynomial-splits-into-linear-factors-over-f-eleven
 kind: example
 title: "$\\Phi_5$ has four roots in $\\mathbb F_{11}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

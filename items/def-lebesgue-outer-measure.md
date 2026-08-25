@@ -2,7 +2,7 @@
 id: def-lebesgue-outer-measure
 kind: definition
 title: "Lebesgue outer measure on $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "Lebesgue outer measure"
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

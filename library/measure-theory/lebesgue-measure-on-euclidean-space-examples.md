@@ -1,7 +1,7 @@
 ---
 page: lebesgue-measure-on-euclidean-space-examples
 title: "Lebesgue Measure on Euclidean Space — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-lebesgue-measure-of-intervals-boxes-and-the-rationals,
            ex-cantor-set-measure-from-the-removed-intervals,

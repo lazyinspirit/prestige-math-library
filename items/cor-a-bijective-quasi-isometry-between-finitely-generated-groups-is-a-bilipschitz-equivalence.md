@@ -2,7 +2,7 @@
 id: cor-a-bijective-quasi-isometry-between-finitely-generated-groups-is-a-bilipschitz-equivalence
 kind: corollary
 title: "A bijective quasi-isometry between word metric spaces of finitely generated groups is a bilipschitz equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-proper-measurable-subgroups-of-the-line-are-lebesgue-null
 kind: example
 title: "Every Lebesgue measurable proper subgroup of $(\\mathbb{R},+)$ is null, and $\\mathbb{Z}$ and $\\mathbb{Q}$ are instances"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

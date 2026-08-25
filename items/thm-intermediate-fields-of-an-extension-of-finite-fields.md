@@ -2,7 +2,7 @@
 id: thm-intermediate-fields-of-an-extension-of-finite-fields
 kind: theorem
 title: "The intermediate fields of $\\mathbb F_{q^n}/\\mathbb F_q$ are the $\\mathbb F_{q^d}$, one for each positive divisor $d$ of $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

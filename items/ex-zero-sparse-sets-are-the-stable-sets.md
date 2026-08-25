@@ -2,7 +2,7 @@
 id: ex-zero-sparse-sets-are-the-stable-sets
 kind: example
 title: "The $0$-sparse sets are exactly the stable sets and the $0$-dense sets exactly the cliques"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

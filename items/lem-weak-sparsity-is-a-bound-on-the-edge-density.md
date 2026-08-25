@@ -2,7 +2,7 @@
 id: lem-weak-sparsity-is-a-bound-on-the-edge-density
 kind: lemma
 title: "For disjoint nonempty vertex sets, weak $c$-sparsity says exactly that the edge density is at most $c$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

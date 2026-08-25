@@ -2,7 +2,7 @@
 id: prop-a-quasi-isometric-embedding-carries-a-quasi-geodesic-to-a-quasi-geodesic
 kind: proposition
 title: "The composite of a quasi-geodesic with a quasi-isometric embedding is a quasi-geodesic, with computed constants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

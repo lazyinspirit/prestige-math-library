@@ -2,7 +2,7 @@
 id: fs-a-divergence-free-field-has-zero-outward-flux-through-every-closed-surface
 kind: false-statement
 title: "FALSE: a field with vanishing divergence has zero outward flux through the boundary of every solid it surrounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

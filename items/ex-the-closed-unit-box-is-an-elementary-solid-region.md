@@ -2,7 +2,7 @@
 id: ex-the-closed-unit-box-is-an-elementary-solid-region
 kind: example
 title: "The closed unit box, with its six faces, is an elementary solid region"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

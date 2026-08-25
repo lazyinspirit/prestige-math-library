@@ -2,7 +2,7 @@
 id: ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin
 kind: example
 title: "The inverse-square field is divergence free, and its flux through the sphere bounding the translated unit ball vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-adapted-outward-boundary-presentation-of-a-simple-solid-region
 kind: definition
 title: "Boundary presentations adapted to a simple solid region in a coordinate direction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

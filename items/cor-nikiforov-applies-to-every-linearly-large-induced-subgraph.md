@@ -2,7 +2,7 @@
 id: cor-nikiforov-applies-to-every-linearly-large-induced-subgraph
 kind: corollary
 title: "A linearly large induced subgraph of a graph with few induced copies again has a linearly large restricted set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

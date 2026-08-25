@@ -1,7 +1,7 @@
 ---
 page: extraspecial-p-groups-and-central-products
 title: "Extraspecial $p$-Groups and Central Products"
-status: draft
+status: published
 items: [lem-commutator-identities-in-a-group-of-class-two,
         lem-power-of-a-product-in-a-group-of-class-two,
         cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p,

@@ -2,7 +2,7 @@
 id: cor-a-unique-quadratic-subfield-of-the-p-th-cyclotomic-field
 kind: corollary
 title: "For an odd prime $p$, $\\mathbb Q(\\zeta_p)$ has exactly one intermediate field of degree two over $\\mathbb Q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-self-density-of-a-clique
 kind: example
 title: "A clique of size $s$ has self-density $1-1/s$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

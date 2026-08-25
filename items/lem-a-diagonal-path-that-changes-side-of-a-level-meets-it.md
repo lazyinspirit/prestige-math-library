@@ -2,7 +2,7 @@
 id: lem-a-diagonal-path-that-changes-side-of-a-level-meets-it
 kind: lemma
 title: "A diagonal path with $h(0)\\le c\\le h(n)$ or $h(n)\\le c\\le h(0)$ satisfies $h(i)=c$ for some $i$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

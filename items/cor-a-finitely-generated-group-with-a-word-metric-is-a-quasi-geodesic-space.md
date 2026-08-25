@@ -2,7 +2,7 @@
 id: cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space
 kind: corollary
 title: "A group with the word metric of any generating set is a $(1,1)$-quasi-geodesic space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

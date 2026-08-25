@@ -2,7 +2,7 @@
 id: thm-linear-change-of-variables-for-lebesgue-measure
 kind: theorem
 title: "A linear map $T$ of $\\mathbb{R}^n$ sends Lebesgue measurable sets to Lebesgue measurable sets, with $\\lambda_n(T[E])=|\\det T|\\,\\lambda_n(E)$ when $T$ is invertible and $T[E]$ Lebesgue null when it is not"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "linear change of variables"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

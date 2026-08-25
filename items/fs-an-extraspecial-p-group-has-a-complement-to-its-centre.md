@@ -2,7 +2,7 @@
 id: fs-an-extraspecial-p-group-has-a-complement-to-its-centre
 kind: false-statement
 title: "FALSE: the centre of an extraspecial $p$-group has a complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

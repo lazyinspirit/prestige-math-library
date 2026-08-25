@@ -2,7 +2,7 @@
 id: ex-index-of-the-boundary-cycle-of-a-round-annulus
 kind: example
 title: "The boundary cycle of a round annulus has index $1$ inside the annulus and $0$ on either side"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

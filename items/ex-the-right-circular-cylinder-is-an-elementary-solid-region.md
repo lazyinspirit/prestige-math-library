@@ -2,7 +2,7 @@
 id: ex-the-right-circular-cylinder-is-an-elementary-solid-region
 kind: example
 title: "A right circular cylinder is an elementary solid region, presented by two caps and four side quarters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

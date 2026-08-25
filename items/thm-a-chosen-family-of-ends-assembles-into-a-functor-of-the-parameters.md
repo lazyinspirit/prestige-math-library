@@ -2,7 +2,7 @@
 id: thm-a-chosen-family-of-ends-assembles-into-a-functor-of-the-parameters
 kind: theorem
 title: "A chosen family of ends is the object part of exactly one functor making the counit natural in the parameters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-bounded-distance-between-maps
 kind: definition
 title: "Bounded distance between two maps into a metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-metric-space]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

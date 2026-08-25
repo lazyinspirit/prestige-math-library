@@ -2,7 +2,7 @@
 id: prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite
 kind: proposition
 title: "Balls of a word metric are finite if and only if the generating set is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-binary-trees-and-triangulations-here-are-combinatorial-objects
 kind: remark
 title: "The trees and polygons of this page are defined by recursion and by inequalities on labels"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

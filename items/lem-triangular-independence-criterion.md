@@ -2,7 +2,7 @@
 id: lem-triangular-independence-criterion
 kind: lemma
 title: "Triangular criterion: if $\\langle v_i,w_i\\rangle\\ne0$ and $\\langle v_i,w_j\\rangle=0$ for $j<i$, then $v_1,\\dots,v_m$ are linearly independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-a-set-of-positive-finite-measure-fills-most-of-a-dyadic-cube
 kind: lemma
 title: "A measurable set of positive finite measure occupies more than any prescribed proportion of some dyadic cube"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

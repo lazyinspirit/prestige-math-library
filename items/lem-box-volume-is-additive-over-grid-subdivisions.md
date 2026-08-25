@@ -2,7 +2,7 @@
 id: lem-box-volume-is-additive-over-grid-subdivisions
 kind: lemma
 title: "The volume of a half-open box is the sum of the volumes of the cells of any coordinate grid subdividing it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

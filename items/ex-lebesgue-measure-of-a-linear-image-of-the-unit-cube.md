@@ -2,7 +2,7 @@
 id: ex-lebesgue-measure-of-a-linear-image-of-the-unit-cube
 kind: example
 title: "The Lebesgue measure of the image of the unit cube under an explicit linear map of the plane and of three-space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

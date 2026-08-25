@@ -2,7 +2,7 @@
 id: ex-cauchy-integral-formula-computed-on-a-bidisc
 kind: example
 title: "The iterated Cauchy formula computed for $z_0z_1$ on a bidisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

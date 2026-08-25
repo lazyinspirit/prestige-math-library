@@ -2,7 +2,7 @@
 id: lem-trimming-a-self-regular-set-of-high-density
 kind: lemma
 title: "Deleting the low-degree vertices of a $\\gamma$-self-regular set of density $d$ leaves more than $(1-\\gamma)$ of it, and that remainder is $((1-d+2\\gamma)/(1-\\gamma))$-dense"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

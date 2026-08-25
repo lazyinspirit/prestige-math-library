@@ -1,7 +1,7 @@
 ---
 page: the-divergence-theorem-and-classical-stokes
 title: "The Divergence Theorem and Classical Stokes"
-status: draft
+status: published
 items: [def-divergence-and-curl-of-a-c1-vector-field,
         lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules,
         lem-the-divergence-and-curl-of-a-cross-product,

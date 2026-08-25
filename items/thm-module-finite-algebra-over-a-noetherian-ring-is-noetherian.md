@@ -2,7 +2,7 @@
 id: thm-module-finite-algebra-over-a-noetherian-ring-is-noetherian
 kind: theorem
 title: "A module-finite algebra over a Noetherian ring is a Noetherian ring, and so is every ring between the two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

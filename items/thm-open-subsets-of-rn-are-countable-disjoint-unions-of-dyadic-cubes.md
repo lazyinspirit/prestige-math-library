@@ -2,7 +2,7 @@
 id: thm-open-subsets-of-rn-are-countable-disjoint-unions-of-dyadic-cubes
 kind: theorem
 title: "Every open subset of $\\mathbb{R}^n$ is the union of a countable pairwise disjoint family of dyadic cubes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "dyadic decomposition of an open set"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

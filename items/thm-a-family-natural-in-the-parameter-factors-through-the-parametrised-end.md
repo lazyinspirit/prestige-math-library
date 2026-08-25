@@ -2,7 +2,7 @@
 id: thm-a-family-natural-in-the-parameter-factors-through-the-parametrised-end
 kind: theorem
 title: "A family into a parametrised end is natural, or dinatural, in the parameter exactly when its composite with the counit is"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

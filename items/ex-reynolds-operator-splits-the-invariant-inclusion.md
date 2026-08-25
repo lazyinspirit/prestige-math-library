@@ -2,7 +2,7 @@
 id: ex-reynolds-operator-splits-the-invariant-inclusion
 kind: example
 title: "When the group order is invertible the Reynolds operator retracts a ring onto its invariants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

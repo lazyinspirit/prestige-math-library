@@ -2,7 +2,7 @@
 id: ex-cauchy-estimates-computed-on-a-bidisc
 kind: example
 title: "Cauchy estimates on a bidisc, computed and compared with the exact derivatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

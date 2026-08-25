@@ -2,7 +2,7 @@
 id: lem-a-word-whose-weight-is-coprime-to-its-length-has-a-trivial-shift-stabiliser
 kind: lemma
 title: "If $\\gcd(\\lVert a\\rVert,m)=1$ then the shift stabiliser of $a$ is trivial, so its orbit has exactly $m$ elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

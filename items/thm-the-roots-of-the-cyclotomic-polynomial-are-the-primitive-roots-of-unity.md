@@ -2,7 +2,7 @@
 id: thm-the-roots-of-the-cyclotomic-polynomial-are-the-primitive-roots-of-unity
 kind: theorem
 title: "Over a field whose characteristic does not divide $n$, the roots of $\\Phi_n$ are exactly the primitive roots of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

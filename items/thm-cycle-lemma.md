@@ -2,7 +2,7 @@
 id: thm-cycle-lemma
 kind: theorem
 title: "The cycle lemma (Dvoretzky–Motzkin): if every $a_i\\le1$ and $\\lVert a\\rVert=k\\ge1$, then exactly $k$ of the $m$ cyclic shifts of $a$ have all partial sums positive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-lebesgue-outer-regularity-for-arbitrary-subsets
 kind: theorem
 title: "Assuming countable choice, the Lebesgue outer measure of an arbitrary subset of $\\mathbb{R}^n$ is the infimum of the measures of the open sets containing it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "outer regularity"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

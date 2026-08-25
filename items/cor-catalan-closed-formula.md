@@ -2,7 +2,7 @@
 id: cor-catalan-closed-formula
 kind: corollary
 title: "$(n+1)\\,C_n=\\binom{2n}{n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

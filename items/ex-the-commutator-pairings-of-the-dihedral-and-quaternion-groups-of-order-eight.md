@@ -2,7 +2,7 @@
 id: ex-the-commutator-pairings-of-the-dihedral-and-quaternion-groups-of-order-eight
 kind: example
 title: "The commutator pairings of $\\operatorname{Dih}(C_4)$ and $Q_8$ are the same, while the groups are not isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

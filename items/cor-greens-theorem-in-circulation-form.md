@@ -2,7 +2,7 @@
 id: cor-greens-theorem-in-circulation-form
 kind: corollary
 title: "Green's theorem is the curl statement for a planar field lifted to $\\mathbb R^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

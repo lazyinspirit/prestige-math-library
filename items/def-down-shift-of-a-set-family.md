@@ -2,7 +2,7 @@
 id: def-down-shift-of-a-set-family
 kind: definition
 title: "The down-shift $S_j$ of a set family at a point $j$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

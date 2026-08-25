@@ -2,7 +2,7 @@
 id: cor-stokes-gives-zero-circulation-for-a-curl-free-field
 kind: corollary
 title: "A curl-free field has zero circulation around the induced boundary chain of a $C^2$ patch"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

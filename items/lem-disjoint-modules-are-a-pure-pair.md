@@ -2,7 +2,7 @@
 id: lem-disjoint-modules-are-a-pure-pair
 kind: lemma
 title: "Two disjoint nonempty modules form a complete or an anticomplete pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

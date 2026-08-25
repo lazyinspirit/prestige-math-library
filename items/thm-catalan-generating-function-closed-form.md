@@ -2,7 +2,7 @@
 id: thm-catalan-generating-function-closed-form
 kind: theorem
 title: "$2x\\,C(x)=1-(1-4x)^{1/2}$, where $(1-4x)^{1/2}$ is the unique square root with constant coefficient $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

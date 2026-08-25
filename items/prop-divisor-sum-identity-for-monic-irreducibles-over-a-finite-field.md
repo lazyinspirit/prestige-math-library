@@ -2,7 +2,7 @@
 id: prop-divisor-sum-identity-for-monic-irreducibles-over-a-finite-field
 kind: proposition
 title: "$\\sum_{d\\mid n}d\\,N_q(d)=q^{n}$ for the counts $N_q(d)$ of monic irreducibles of degree $d$ over $\\mathbb F_q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

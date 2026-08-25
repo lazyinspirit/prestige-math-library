@@ -2,7 +2,7 @@
 id: ex-the-galois-group-of-the-twelfth-cyclotomic-field-and-its-quadratic-subfields
 kind: example
 title: "$\\operatorname{Gal}(\\mathbb Q(\\zeta_{12})/\\mathbb Q)\\cong(\\mathbb Z/12)^\\times$ and its three quadratic subfields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

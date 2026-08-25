@@ -2,7 +2,7 @@
 id: ex-a-normal-basis-of-f-eight-over-f-two
 kind: example
 title: "A normal basis of $\\mathbb F_8$ over $\\mathbb F_2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

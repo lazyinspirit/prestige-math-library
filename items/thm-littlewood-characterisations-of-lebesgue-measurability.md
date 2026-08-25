@@ -2,7 +2,7 @@
 id: thm-littlewood-characterisations-of-lebesgue-measurability
 kind: theorem
 title: "Assuming countable choice, four equivalent descriptions of a Lebesgue measurable subset of $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "Littlewood characterisations"
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

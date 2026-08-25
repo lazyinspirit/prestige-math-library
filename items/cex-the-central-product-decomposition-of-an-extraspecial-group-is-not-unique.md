@@ -2,7 +2,7 @@
 id: cex-the-central-product-decomposition-of-an-extraspecial-group-is-not-unique
 kind: counterexample
 title: "An extraspecial group of order $32$ decomposes both as two quaternion factors and as two dihedral factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-cyclotomic-extension
 kind: definition
 title: "The cyclotomic extension $K(\\mu_n)$ as a splitting field of $t^{n}-1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

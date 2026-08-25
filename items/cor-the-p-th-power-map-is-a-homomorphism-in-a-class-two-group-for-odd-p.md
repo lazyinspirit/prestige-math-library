@@ -2,7 +2,7 @@
 id: cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p
 kind: corollary
 title: "For an odd prime $p$, the $p$-th power map is a homomorphism on a finite group whose derived subgroup is central of exponent dividing $p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

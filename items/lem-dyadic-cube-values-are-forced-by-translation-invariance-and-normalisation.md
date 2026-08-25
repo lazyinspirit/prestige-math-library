@@ -2,7 +2,7 @@
 id: lem-dyadic-cube-values-are-forced-by-translation-invariance-and-normalisation
 kind: lemma
 title: "A translation-invariant Borel measure giving the unit cube measure one gives each generation-$k$ dyadic cube measure $2^{-kn}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

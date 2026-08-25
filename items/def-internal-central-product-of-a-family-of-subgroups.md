@@ -2,7 +2,7 @@
 id: def-internal-central-product-of-a-family-of-subgroups
 kind: definition
 title: "Internal central products of a finite family of subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-subgroup, def-generated-subgroup, def-subgroup-commutator-and-lower-c
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-parametrised-end-and-parametrised-coend
 kind: definition
 title: "Ends and coends with parameters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-end-and-coend, def-product-category, def-functor-and-contravariant-fu
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

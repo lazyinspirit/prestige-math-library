@@ -2,7 +2,7 @@
 id: lem-balls-in-a-connected-locally-finite-graph-are-finite
 kind: lemma
 title: "In a connected locally finite graph every ball of the path metric is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

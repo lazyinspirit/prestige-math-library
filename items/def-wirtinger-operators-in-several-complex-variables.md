@@ -2,7 +2,7 @@
 id: def-wirtinger-operators-in-several-complex-variables
 kind: definition
 title: "Wirtinger operators in $\\mathbb{C}^m$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

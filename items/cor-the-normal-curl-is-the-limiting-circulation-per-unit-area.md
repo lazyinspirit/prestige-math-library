@@ -2,7 +2,7 @@
 id: cor-the-normal-curl-is-the-limiting-circulation-per-unit-area
 kind: corollary
 title: "The normal component of the curl is the limiting circulation per unit area of shrinking discs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

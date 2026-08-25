@@ -2,7 +2,7 @@
 id: thm-a-module-valued-coend-is-a-quotient-of-a-direct-sum-by-the-dinaturality-submodule
 kind: theorem
 title: "A module-valued coend is the direct sum of the diagonal values modulo the dinaturality submodule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

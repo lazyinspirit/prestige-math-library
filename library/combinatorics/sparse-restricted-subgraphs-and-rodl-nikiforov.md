@@ -1,7 +1,7 @@
 ---
 page: sparse-restricted-subgraphs-and-rodl-nikiforov
 title: "Sparse Restricted Subgraphs and the Rödl–Nikiforov Theorems"
-status: draft
+status: published
 items: [def-c-sparse-and-c-restricted-vertex-set,
         def-directional-and-weak-sparsity-between-vertex-sets,
         lem-weak-sparsity-is-a-bound-on-the-edge-density,

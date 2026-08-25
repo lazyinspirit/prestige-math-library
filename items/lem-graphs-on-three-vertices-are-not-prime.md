@@ -2,7 +2,7 @@
 id: lem-graphs-on-three-vertices-are-not-prime
 kind: lemma
 title: "No graph on exactly three vertices is prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

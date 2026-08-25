@@ -2,7 +2,7 @@
 id: lem-union-of-two-meeting-modules-is-a-module
 kind: lemma
 title: "The union of two modules with a common vertex is a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

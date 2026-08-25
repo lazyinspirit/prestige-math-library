@@ -2,7 +2,7 @@
 id: ex-four-square-representation-from-prime-factorisation
 kind: example
 title: "Building a representation of $105$ from its prime factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

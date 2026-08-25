@@ -2,7 +2,7 @@
 id: thm-sauer-shelah-by-multilinear-polynomials
 kind: theorem
 title: "A second proof of Sauer–Shelah, from the multilinear polynomial space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

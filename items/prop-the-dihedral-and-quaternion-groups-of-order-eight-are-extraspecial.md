@@ -2,7 +2,7 @@
 id: prop-the-dihedral-and-quaternion-groups-of-order-eight-are-extraspecial
 kind: proposition
 title: "$\\operatorname{Dih}(C_4)$ and $Q_8$ are extraspecial of order $8$, with six and two solutions of $x^2=1$ respectively"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

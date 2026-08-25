@@ -2,7 +2,7 @@
 id: def-catalan-generating-function
 kind: definition
 title: "The Catalan generating function $C(x)=\\sum_{n\\ge0}C_nx^n$ in $\\mathbb{Q}\\llbracket x\\rrbracket$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

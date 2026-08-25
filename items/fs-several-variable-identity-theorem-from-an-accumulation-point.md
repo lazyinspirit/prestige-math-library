@@ -2,7 +2,7 @@
 id: fs-several-variable-identity-theorem-from-an-accumulation-point
 kind: false-statement
 title: "A holomorphic function on a domain in $\\mathbb{C}^2$ vanishing on a set with an accumulation point vanishes identically"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

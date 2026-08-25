@@ -2,7 +2,7 @@
 id: def-standard-bilinear-form-on-a-coordinate-space
 kind: definition
 title: "The standard bilinear form $\\langle x,y\\rangle=\\sum_{i<n}x_iy_i$ on $F^{n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

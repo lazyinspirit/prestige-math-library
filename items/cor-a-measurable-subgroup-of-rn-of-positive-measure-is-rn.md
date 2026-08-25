@@ -2,7 +2,7 @@
 id: cor-a-measurable-subgroup-of-rn-of-positive-measure-is-rn
 kind: corollary
 title: "A Lebesgue measurable subgroup of $(\\mathbb{R}^n,+)$ of positive measure is all of $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

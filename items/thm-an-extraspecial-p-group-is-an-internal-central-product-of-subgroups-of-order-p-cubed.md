@@ -2,7 +2,7 @@
 id: thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed
 kind: theorem
 title: "Every extraspecial $p$-group is an internal central product of nonabelian subgroups of order $p^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

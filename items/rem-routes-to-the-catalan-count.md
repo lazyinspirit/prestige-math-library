@@ -2,7 +2,7 @@
 id: rem-routes-to-the-catalan-count
 kind: remark
 title: "Why the Catalan count is proved three times, and how the three statements agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

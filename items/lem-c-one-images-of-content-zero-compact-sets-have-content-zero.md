@@ -2,7 +2,7 @@
 id: lem-c-one-images-of-content-zero-compact-sets-have-content-zero
 kind: lemma
 title: "A $C^1$ map sends a compact set of content zero to a set of content zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

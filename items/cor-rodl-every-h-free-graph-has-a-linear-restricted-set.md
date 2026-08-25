@@ -2,7 +2,7 @@
 id: cor-rodl-every-h-free-graph-has-a-linear-restricted-set
 kind: corollary
 title: "Rödl: for every $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there is $\\delta>0$ such that every nonempty $H$-free graph has an $\\epsilon$-restricted vertex set of size at least $\\delta|V(G)|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"

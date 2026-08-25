@@ -2,7 +2,7 @@
 id: lem-holomorphic-difference-quotient-is-jointly-continuous
 kind: lemma
 title: "The filled difference quotient of a holomorphic function is jointly continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
