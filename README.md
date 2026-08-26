@@ -1,123 +1,72 @@
 # Prestige Math Library
 
-A curated library of mathematical definitions, theorems, phase-stratified proofs,
-examples, counterexamples, and verified-false statements. Served publicly at
-`app.prestige-intelligence.cc/library` by the Prestige Intelligence app, which
-bind-mounts this repository's checkout on the VPS (see `docker-compose.yml` in
-the app repo). This repo never runs a server; GitHub is backup and review only.
+The Prestige Math Library is the Markdown corpus and validation tooling used by
+the Prestige Intelligence application's `/library`. Its production renderer and
+web server are in the separate `prestige-intelligence` checkout, located by
+`tools/paths.mjs` and configured to read this checkout through
+`MATH_LIBRARY_DIR`.
 
-## How serving works
+## Source and document map
 
-- The app container reads these files directly from disk via a read-only volume
-  mount. A saved file is servable immediately — no build, no pull, no restart.
-- **The publish gate is frontmatter, not git:** every item/page carries
-  `status: draft | published`. The renderer hides anything not `published` from
-  the public; the signed-in owner sees drafts with a DRAFT banner.
-- `git commit` records history; `git push` backs up to GitHub. Neither is on the
-  serving path.
+`items/` is the canonical source for mathematical item bodies. `library/`
+places those items in category pages and, where present, reading pathways.
 
-## Layout
+| Need | Start here |
+| --- | --- |
+| Item/page contract | [SCHEMA.md](SCHEMA.md) |
+| Build and publication runbook | [WORKFLOW.md](WORKFLOW.md) |
+| Repository operating rules | [CLAUDE.md](CLAUDE.md) |
+| Article-specific contract | [articles/README.md](articles/README.md) |
 
-- `library/<category>/[<subcategory>/]` — the subject taxonomy. Each directory
-  has a `_category.md` (title + description, provisional).
-- Item schema (one file per definition/theorem/proof/example/counterexample,
-  stable IDs, dependency edges, license/attribution): **TBD — see SCHEMA.md
-  once settled.** Do not add content items until the schema is fixed.
-- `explainer/` — reader-facing explainers about how the library is built, served
-  through the same bind mount as the content. Two self-contained animated pages,
-  each one file with no build step and no network fetches, so saving one is the
-  deploy: `build-workflow.html` animates the per-level build of `LEVELS.md`, step
-  0 to 10, at low magnification; `authoring-and-repair.html` animates a single
-  item at high magnification — one real proof authored, stratified into phases by
-  `precheck`, rejected by a judge, adjudicated, repaired, and rejudged — and runs
-  48.5 seconds, with no title or end card, so it can also be filmed.
-  `explainer/INTEGRATION.md` has the app-side
-  routes and the `/library` links; `node explainer/serve.mjs` previews both on
-  `localhost:3000` with nothing installed. `explainer/render-video.mjs` captures
-  either page to an MP4 (H.264 / yuv420p / faststart, the profile X accepts)
-  through the page's `?film=1` seek hook; it needs puppeteer and ffmpeg-static
-  installed *somewhere*, passed with `--modules`, and nothing is added to this
-  repository. The pages contain no item text and no draft mathematics, and they
-  are not content: no gate reads them and they carry no frontmatter.
+The executable tools and configuration are authoritative for current behaviour;
+documentation describes their intended contract.
 
-## Provenance conventions (settled)
+## Repository map
 
-Three orthogonal axes, recorded per item; page badges are DERIVED mechanically
-from the page's items by the renderer (never hand-set):
+- `.claude/` — shared agent-tool settings; `settings.local.json` is ignored
+  machine-local configuration.
+- `.autopilot/` — ignored runtime state, logs, control file, reports, and
+  persisted sessions for the current build driver. Do not edit it as content.
+- `articles/` — narrative “Rabbit holes” Markdown that links into library
+  items; it has a separate contract and checker.
+- `briefs/` — reusable role briefs and task templates. `briefs/tasks/` is the
+  source for per-run task files rendered into `research/`.
+- `explainer/` — self-contained HTML explainers and their video-render helper.
+- `Handover-prompts/` — retained prompts from earlier sessions; historical
+  context, not live run state.
+- `ops/` — retained systemd unit for the retired `run-wave` audit service; it
+  is not an application service definition.
+- `research/` — design inputs, run manifests, generated task material,
+  receipts, and retained build/audit evidence. Dated run artefacts document
+  history; change their generating template or tool rather than hand-editing
+  generated output.
+- `tools/` — Node-based validators, render checks, planning utilities, and
+  dispatch helpers. Some use the app checkout's parser, TypeScript loader, or
+  precheck implementation through `tools/paths.mjs`.
+- `tools/autopilot/` — TypeScript control plane for the staged build: CLI,
+  stage definitions, runtime implementation, and its test suite.
 
-- **`origin`**: `pipeline` (generated by the production worker engines, stock
-  model lineup — the same pipeline that builds customer training datasets) or
-  `session` (authored in coding sessions under the per-level workflow).
-- **Component provenance** (every future mathematical-content item, including
-  definitions, propositions, theorems, lemmas, corollaries, examples,
-  counterexamples, false statements, and mathematical remarks):
-  `provenance.statement` identifies the Statement/Definition, or the exact
-  construction for examples and counterexamples; `provenance.proof` identifies
-  the local Proof, Verification, or Refutation. Each independently records
-  `ai-generated`, `ai-altered`, or `literature-derived`; the proof component can
-  additionally be `not-supplied` or, for definitions and remarks,
-  `not-applicable`. Thus a classical theorem can honestly display
-  “Statement: Literature-sourced · Proof: AI-generated.” These are reader-facing
-  disclosures of origin, not claims of novelty or correctness and not substitutes
-  for citations. An AI-generated statement/construction receives the heightened
-  truth audit; an AI-generated proof alone does not taint the statement. The
-  legacy one-axis `authorship` field remains readable but is not used for new
-  content. `proved_here` independently says whether a local proof is supplied;
-  its absence remains marked by the fuchsia ‡ tier.
-- **Dependency eligibility is statement-level:** Beta and Alpha may cite
-  `literature-derived` and `ai-altered` Statements/Constructions as logical
-  dependencies. They must never cite an `ai-generated` Statement/Construction
-  in `deps`, regardless of whether that item's local proof is sourced,
-  AI-altered, or AI-generated. Conversely, an AI-generated proof does not make
-  a source-backed statement ineligible. An eligible AI-altered statement is
-  still never presumed exact: Beta and Alpha check reputable literature whenever
-  its claim or conventions leave doubt. This future-scope rule is mechanically
-  enforced by `content-policy`, `proof-contract`, and `level-coverage`.
-- **External dependencies** are an exceptional, reader-visible use of
-  `proved_here: false`: Beta first seeks a literature-backed exact statement and
-  an in-library proof, then uses a source-cited ‡ record only when that proof
-  cannot be built in scope. A logical dependency is recorded in `deps`, never
-  hidden in `external_refs`, which is only for mentions. Future fallback records
-  additionally expose an exact source URL, sourced statement, failed local
-  route, and necessity; the batch-scope policy gate requires all four.
-- **Verification** (accumulative): mechanical precheck (always, both origins);
-  GPT-5.6 Terra judge; owner audit or a
-  clearly recorded owner-delegated independent verification, either of which
-  gates `status: published`.
-  In the build workflow (owner, 2026-08-26), GPT-5.4 authors and reads while
-  GPT-5.6 Terra is the sole Step-7 judge; both use Codex with explicit reasoning
-  and context settings from the model/role registries. Terra is same-family with
-  most work it screens, so its verdict is not cross-family corroboration. Step 7
-  gives every item its own `xhigh` turn inside one persistent Terra conversation
-  per A/B pair; Step 8 resumes that same pair conversation only for repaired
-  targets. Step 9 and later rejudges are fresh per item.
-  Future levels also gate scope coverage mechanically: every in-flight item has
-  provenance, every proof-bearing item a proof contract, every changed public
-  interface an audited downstream-impact receipt, and Terra a current verdict.
-  The production pipeline keeps its own generator/judge
-  lineups in
-  the app repo; do not use a generator-family model to judge its own pipeline
-  output. `deepseek/deepseek-v4-flash` remains barred as judge: it passed an
-  injected, blatantly false claim.
+## Safe entry points
 
-Page badge rule: all items `pipeline` → "Pipeline-generated & judge-verified";
-otherwise → "Session-authored" with judge status shown.
+Read `CLAUDE.md` before changing the corpus or tooling. For focused work, use
+the contract named in the table above rather than inferring rules from old run
+artefacts.
 
-## Citation conventions (settled)
+```bash
+# Inspect the current build state without steering it.
+(cd tools/autopilot && node --import tsx bin/autopilot.mts status --repo ../..)
 
-- Every source must have a WORKING url — scraped sources and standard
-  references alike (verify the link resolves before adding it).
-- Every item lists `source_urls` + license tags in frontmatter. The renderer
-  aggregates all items' sources into a deduplicated **Sources** section at the
-  end of every page (this also carries CC BY-SA / GFDL attribution).
-- Honesty rule for session-authored items: material generated from mathematical
-  knowledge rather than scraped texts must NOT list fabricated sources. The
-  end-of-page section carries **Sources scraped** (empty on every item today)
-  and the curated textbook pointers of `sources.references`.
-  **Owner, 2026-08-17: the references list no longer carries a `Standard
-  references` sub-heading or the caption "Recommended treatments; not extraction
-  sources."** With `scraped` empty everywhere, that list IS the Sources section
-  and the sub-heading named the same thing twice. The renderer restores the
-  sub-heading on any page that carries BOTH lists, which is the only case where
-  they need telling apart — so the honesty rule above is unchanged and nothing
-  in an item's frontmatter moved.
+# Validate the item/page graph.
+node tools/depcheck.mjs --quiet
+
+# Validate all narrative articles.
+node tools/tsx-run.mjs tools/articlecheck.mts
+
+# Preview the static explainers only.
+node explainer/serve.mjs
+```
+
+For an item proof-format check, run
+`node tools/tsx-run.mjs tools/precheck.mts [items/file.md ...]`; omit file
+arguments to check the full item corpus. Consult [WORKFLOW.md](WORKFLOW.md)
+before creating, starting, pausing, or otherwise steering a build.
