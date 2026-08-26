@@ -25,18 +25,22 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const REPO = process.env.AUTOPILOT_TEST_REPO ?? '/Users/ianx/Projects/prestige-math-library';
+const HERE = dirname(fileURLToPath(import.meta.url));
+const REPO = process.env.AUTOPILOT_TEST_REPO ?? resolve(HERE, '..', '..', '..');
 const has = existsSync(join(REPO, 'tools/dispatch.mjs'));
 const patternFor = (stage: any, ctx: any): RegExp =>
   typeof stage.pattern === 'function' ? stage.pattern(ctx) : stage.pattern;
 
-test('the dispatcher names results <role>-<label>.result.json', (t) => {
+test('the dispatcher preserves <role>-<label>.result.json as the stable coverage name', (t) => {
   if (!has) return t.skip('target repo not present');
   const src = readFileSync(join(REPO, 'tools/dispatch.mjs'), 'utf8');
-  assert.match(src, /resultPath\s*=\s*join\(outDir,\s*`\$\{role\}-\$\{label\}\.result\.json`\)/,
-    'the naming rule changed; every stage pattern in the table depends on it');
+  assert.match(src, /stableResultPath\s*=\s*join\(outDir,\s*`\$\{stem\}\.result\.json`\)/,
+    'the stable naming rule changed; every stage pattern in the table depends on it');
+  assert.match(src, /writeAttemptFile\(resultPath,\s*stableResultPath,/,
+    'attempt results are no longer refreshing the stable coverage name');
 });
 
 test('the dispatcher writes the fields coverage depends on', (t) => {
@@ -114,6 +118,25 @@ test('no stage pattern matches another stage\'s dispatches', async (t) => {
           && patternFor(st, ctx).test(n.file)) {
         problems.push(`${st.id} would count ${n.stage}'s "${n.file}" as its own`);
       }
+    }
+  }
+  assert.deepEqual(problems, [], problems.join('\n  '));
+});
+
+test('attempt-addressed evidence never satisfies stable stage coverage patterns', async (t) => {
+  if (!has) return t.skip('target repo not present');
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO, dispatchDir: join(REPO, 'research/frontier-14-dispatch') };
+  const names = [];
+  for (const st of mod.stages) {
+    let plans = [];
+    try { plans = st.plan?.(ctx, ['1', '2', '3']) ?? []; } catch { continue; }
+    for (const p of plans) names.push(`${p.role}-${p.label}.attempt-1.result.json`);
+  }
+  const problems = [];
+  for (const st of mod.stages) {
+    for (const name of names) {
+      if (patternFor(st, ctx).test(name)) problems.push(`${st.id} would count immutable evidence ${name}`);
     }
   }
   assert.deepEqual(problems, [], problems.join('\n  '));

@@ -177,9 +177,9 @@ provenance guesses would be dishonest.
 discharges, forward references, and external mentions. Alpha's coverage receipt
 is generated and verified by `tools/level-coverage.mjs`, which binds the receipt
 to a hash of the actual in-flight items and every such relationship. It also
-requires the merged proof contract to include every proof-bearing item and both
-judge ledgers to contain a complete paired verdict on the same current frozen
-context for every scoped item. A `keep=false` verdict needs Alpha's exact-hash
+requires the merged proof contract to include every proof-bearing item and the
+configured judge ledger to contain the complete current verdict set on the same
+frozen context for every scoped item. A `keep=false` verdict needs Alpha's exact-hash
 adjudication: missing or `confirmed_fatal` is an error; `confirmed_nonfatal`
 and `false_positive` remain visible warnings. Finally it
 compares each item's planned `deps`
@@ -254,7 +254,7 @@ model. The risk command makes the routing record hard for high/critical items.
 Use `--items id-a,id-b` only for a targeted post-repair rerun; the initial gate
 always covers the whole level.
 
-After the Step-7 sweep has produced a complete paired ledger, generate and sign
+After the Step-7 sweep has produced a complete configured-lineup ledger, generate and sign
 the Alpha receipt, then enforce it against the final disk text:
 
 ```sh

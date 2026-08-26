@@ -207,6 +207,15 @@ good as the tool list; codex's is not.
   adjudication, judgement, audit, reporting and supervision. The test: **if the
   answer is a function of files on disk, it is code.** `ARCHITECTURE.md` §3.11d.
 
+- **Deterministic launch defects spend no model attempts.** `autopilot start`
+  runs the existing doctor before detach, and the executor renders every fully
+  materialised primary or repair plan through the real dispatcher `--dry-run`
+  before starting any member of its fan-out; a deterministic repair-plan
+  refusal refunds the repair budget. Tool plans are typed argv and may not
+  invoke `sh`/`bash`; every automatic retry keeps its own atomically reserved
+  prompt, log and result while the unsuffixed path remains the latest-result
+  compatibility name.
+
 - **Every stage must be able to fail (owner, 2026-08-16).** A stage declares a
   gate or an explicit `gatesWaived` reason, and the **terminal stage may not
   waive**. An empty gate list, a gate with no command, and a gate whose inputs

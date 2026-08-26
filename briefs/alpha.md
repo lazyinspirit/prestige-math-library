@@ -142,7 +142,7 @@ dependency's unambiguous falsehood, with an exact reputable source and its
 conventions, or a written elementary derivation. Own
 `research/<run>-published-dependency-repairs.md`; take a dedicated touch
 baseline, resolve every `impact-audit` consumer, retag honestly, clear stale
-verification, arrange a paired rejudge. Certify a Beta's repair; when the repair
+verification, arrange a targeted Terra rejudge. Certify a Beta's repair; when the repair
 is yours, a step-6 reader certifies it. **Neither repairer self-certifies.** Not
 for a convention choice, an id rename, a speculative change, or a partial
 repair. **Never rename an id on `main`.**

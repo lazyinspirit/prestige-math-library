@@ -194,9 +194,8 @@ export function step6Stages(d: any) {
       cohort: solo,
       plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
         role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['sh', '-c',
-          `node tools/step6-scope.mjs hash --run ${ctx.run} --batch ${unit} --label post `
-          + `&& node tools/step6-scope.mjs split --run ${ctx.run} --batch ${unit}`],
+        argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
+          '--batch', String(unit)],
         timeout: 600,
       }))),
       gatesWaived: 'Each batch owns a separate scope artifact; exact manifest partition and refuter closure are checked at the pipeline join.',
@@ -286,11 +285,7 @@ export function step6Stages(d: any) {
       concurrency: 1,
       plan: (ctx: any) => introducedPlan(ctx, () => [{
         role: 'tool', label: 'snap-post-6b', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['sh', '-c', [
-          ...batches(ctx).map((batch: string) => `node tools/splice-plan.mjs --run ${ctx.run} --batch ${batch} --update --accept-requires`),
-          ...batches(ctx).map((batch: string) => `node tools/step6-scope.mjs hash --run ${ctx.run} --batch ${batch} --label post-6b`),
-          `node tools/touchlog.mjs snap ${touchesPath(ctx)} post-6b --idempotent`,
-        ].join(' && ')],
+        argv: ['node', 'tools/step6-scope.mjs', 'post-6b', '--run', ctx.run],
       }]),
       gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the post-6b impact endpoint. Missing output prevents successful coverage.',
     },

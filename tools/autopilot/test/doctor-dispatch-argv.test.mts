@@ -21,7 +21,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, '..', '..', '..');
 const STAGES = join(HERE, '..', 'stages', 'mathlib.mts');
 
-const GOOD_ARGV = ['node', 'tools/dispatch.mjs', '--role', '{role}'];
+const GOOD_ARGV = ['node', 'tools/dispatch.mjs', '--role', '{role}', '--attempt', '{attempt}'];
 
 const run = (config: any) => doctor({ repo: REPO, run: 'frontier-14', stagesPath: STAGES, config });
 
@@ -69,6 +69,21 @@ test('an argv naming no dispatcher script is a problem', async () => {
 test('an argv naming a dispatcher that does not exist is a problem', async () => {
   const r = await run({ argv: ['node', 'tools/no-such-dispatcher.mjs'] });
   assert.ok(r.problems.some((l: string) => /tools\/no-such-dispatcher\.mjs, which does not exist/.test(l)));
+});
+
+test('the repository dispatcher cannot omit the immutable-evidence attempt identity', async () => {
+  const r = await run({ argv: ['node', 'tools/dispatch.mjs', '--role', '{role}'] });
+  const p = r.problems.find((line: string) => /dispatch argv/.test(line));
+  assert.ok(p);
+  assert.match(p, /must contain exactly one "--attempt", "\{attempt\}"/);
+  assert.match(p, /overwrite their prompt\/log\/result evidence/);
+});
+
+test('the repository dispatcher cannot repeat the attempt identity', async () => {
+  const r = await run({ argv: [...GOOD_ARGV, '--attempt', '{attempt}'] });
+  const p = r.problems.find((line: string) => /dispatch argv/.test(line));
+  assert.ok(p);
+  assert.match(p, /must contain exactly one "--attempt", "\{attempt\}"/);
 });
 
 test('the check is never silent: every config shape yields exactly one line', async () => {

@@ -13,6 +13,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runScope, sha256, splitFrontmatter } from './step10-lib.mjs';
 import { resolveLineup } from './models.mjs';
+import { TERMINAL_REJUDGE_ROUNDS } from './step8-terminal-resolution.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -295,7 +296,7 @@ const lines = [`# ${run} — Step 10 owner report`, '', response.executive_summa
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
   `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
-  `- Terminal owner/session resolutions after the three-round cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
+  `- Terminal owner/session resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-cycle cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
   `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
   `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
   '## Fatal mathematical defects — exhaustive ledger table', '',

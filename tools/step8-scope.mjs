@@ -443,8 +443,8 @@ function groupHeader(g, index, seam, rejections, alerts) {
   L.push('## Your rejections');
   L.push('');
   if (!mine.length) {
-    L.push('**None open at render time.** That is a real outcome, not an error: both');
-    L.push('lanes may have passed every item you own. Verify it against');
+    L.push('**None open at render time.** That is a real outcome, not an error: Terra');
+    L.push('may have passed every item you own. Verify it against');
     L.push(`\`research/${run}-judge.jsonl\` yourself before reporting nothing to do —`);
     L.push('a rejection recorded after this file was rendered is still yours.');
   } else {

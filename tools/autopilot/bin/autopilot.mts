@@ -53,7 +53,7 @@ function loadConfig(): Config {
     argv: ['node', 'tools/dispatch.mjs',
       '--role', '{role}', '--brief', '{brief}', '--task', '{task}',
       '--label', '{label}', '--run', '{run}', '--covers', '{covers}',
-      '--timeout', '{timeout}',
+      '--timeout', '{timeout}', '--attempt', '{attempt}',
       '--image', '{images}', '--output-schema', '{outputSchema}',
       '--result-artifact', '{resultArtifact}',
       // dispatch.mjs substitutes these into the brief and task as <run>, <i> and
@@ -381,6 +381,23 @@ switch (cmd) {
         console.error(formatProblems(probe.specProblems));
         console.error('\nA stage with no gate reports success unconditionally. Add gates, or declare');
         console.error('`gatesWaived: "<why>"` — except on the terminal stage, which may not waive.');
+        process.exit(2);
+      }
+    }
+    // Doctor is part of START, not an optional operator memory test. Every
+    // problem it names is deterministic and cheaper to discover before detach
+    // than after a stage has begun spending model calls.
+    {
+      const checked = await doctor({
+        repo,
+        run: probe.config.run,
+        stagesPath: resolve(probe.config.stages),
+        config: probe.config,
+      });
+      if (checked.problems.length) {
+        console.error('autopilot: refusing to start — preflight found deterministic blocker(s):\n');
+        for (const problem of checked.problems) console.error(`  - ${problem}`);
+        console.error(`\nRun \`autopilot doctor --run ${probe.config.run}\` for the full report.`);
         process.exit(2);
       }
     }

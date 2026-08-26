@@ -61,7 +61,9 @@ The run is always `--run <run>` on the command line.
 Run state lives in `.autopilot/state.json`, owner commands in
 `.autopilot/control.json`, the human-readable snapshot in `.autopilot/status.md`,
 and append-only history in `.autopilot/events.jsonl`. Every agent's prompt, log
-and result record lands under `research/<run>-dispatch/`.
+and result record lands under `research/<run>-dispatch/`. Automatic attempts
+use `.attempt-<n>` names; a re-armed reused counter gets an unused `.replay-<m>`
+suffix, while each unsuffixed name is the latest compatibility alias.
 
 ---
 
@@ -77,6 +79,13 @@ command flag no tool defines, a brief or task file that does not exist, a judge
 lane that cannot authenticate, a missing scope ledger, and the stage-spec rules.
 It is seconds; each thing it catches costs hours. What went wrong to put each
 check there: `ARCHITECTURE.md` §3.11d.
+The explicit doctor command is a preview; `autopilot start` repeats it and
+refuses to detach if it finds a deterministic blocker. Plans that materialise
+later are dry-run through the real dispatcher at their launch boundary. Repair
+hooks are collected into a complete fan-out first; if any sibling is invalid,
+none starts and the repair round is refunded. The repository dispatcher argv
+must carry `--attempt {attempt}` so automatic evidence cannot fall back to an
+overwriting unsuffixed path.
 
 ## Starting
 
@@ -158,6 +167,7 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 |---|---|---|
 | `stage spec is invalid` | a stage cannot fail — usually a gate list that came back empty | fix the stage table; the engine refuses to dispatch until you do |
 | `missing input file(s)` | a brief or task the next dispatch needs is absent | write the file; the blocker retires itself on the next tick |
+| `dispatch preflight failed` | the exact runtime plan has an invalid role, prompt/task, schema, output path, or tool argv | fix the named deterministic defect; the blocker retires after a clean launch validation and no model attempt was spent |
 | `gate <id> failed` | a real defect, or a repair loop that has not converged | read the gate output in `events.jsonl` |
 | `gate url-liveness failed` **persisting** | a citation is dead and the archive holds **no snapshot** — the recovered case never persists: the repair round swaps recorded snapshots itself (`url-recover-apply.mjs`) and re-verifies | re-sourcing is a judgment: pick the replacement per §3.11c and update the coverage source |
 | `gate source-fetch-check failed` **persisting** | a source will not yield full text — dead with no archive copy, a bot wall, or an abstract page (§3.11c-2); the stampable case never persists, the repair round stamps it | scout an alternate URL for the SAME source; a different edition is a different source and needs a re-harvest |
@@ -199,9 +209,9 @@ that proved it: `ARCHITECTURE.md` §3.11d.
 
 ## Budget and terminal Step-8 blockers
 
-Judge calls are the spend: two lanes over every item in the run, capped at **14
-concurrent per lane, 28 combined** (owner, 2026-08-20). A capacity refusal is a
-null verdict, not a verdict, and the sweep retries it.
+Judge calls are the spend. Build Step 7 runs one fresh Terra call per item, with
+at most 14 calls active at once. Step 8 freshly rejudges only affected items. A
+capacity refusal is a null verdict, not a verdict, and the sweep retries it.
 
 **Step 8 has at most two frozen-context judge cycles per item, including the
 context whose first confirmed-fatal adjudication licenses repair** (owner
@@ -215,7 +225,7 @@ and context hashes; it is neither a fabricated verdict nor a pass stamp, and
 `autopilot retry` may re-run the gates without reopening the round budget.
 
 That limit belongs only to `8-rejudge`. Its wrapper records the item before
-fan-out and runs a funded paired-lane preflight first, so a killed process cannot
+fan-out and runs a funded Terra preflight first, so a killed process cannot
 buy an unrecorded extra context and an unavailable lane cannot launch a costly
 partial sweep. Repository, proof-contract, impact and
 ledger residue is repaired in `8-preflight` before the first rejudge or in

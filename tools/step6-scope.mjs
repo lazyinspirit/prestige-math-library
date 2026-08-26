@@ -26,7 +26,7 @@ const ROOT = resolve(option('root', join(dirname(fileURLToPath(import.meta.url))
 const R = (...parts) => join(ROOT, ...parts);
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const run = option('run');
-if (!run) fail('usage: step6-scope.mjs hash|split|collect|stamp|check --run <run> [--batch N] [--label pre|post|post-6b] [--phase split|adjudicate|final]');
+if (!run) fail('usage: step6-scope.mjs hash|post-reader|split|collect|stamp|post-6b|check --run <run> [--batch N] [--label pre|post|post-6b] [--phase split|adjudicate|final]');
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const hashPath = (batch, label) => R('research', `${run}-step6-hash-${batch}-${label}.json`);
@@ -314,6 +314,49 @@ function publishedDependencies(batchIds, allRunIds) {
     }
   }
   return owners;
+}
+
+/** Run one mechanical Step-6 subcommand without a shell. These composite
+ * commands replace the last two `sh -c "a && b"` stage plans while preserving
+ * the same fail-fast, idempotent order and forwarding every diagnostic. */
+function runChecked(args, label) {
+  const result = spawnSync(process.execPath, args, {
+    cwd: ROOT,
+    encoding: 'utf8',
+    timeout: 20 * 60_000,
+  });
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.error) fail(`step6-scope: ${label} could not launch (${result.error.message})`, 1);
+  if (result.status !== 0) fail(`step6-scope: ${label} failed with exit ${result.status}`, 1);
+}
+
+const selfCommand = (...parts) => [fileURLToPath(import.meta.url), ...parts,
+  '--root', ROOT, '--run', run];
+
+if (command === 'post-reader') {
+  const batch = requireBatch();
+  runChecked(selfCommand('hash', '--batch', batch, '--label', 'post'), `batch ${batch} post-reader hash`);
+  runChecked(selfCommand('split', '--batch', batch), `batch ${batch} routing split`);
+  console.log(`step6-scope: batch ${batch} post-reader hash and split complete`);
+  process.exit(0);
+}
+
+if (command === 'post-6b') {
+  const batchIds = Object.keys(manifestItems()).sort((a, b) => Number(a) - Number(b));
+  if (!batchIds.length) fail(`step6-scope: no batch manifests for ${run}`, 1);
+  for (const batch of batchIds) {
+    runChecked([R('tools', 'splice-plan.mjs'), '--run', run, '--batch', batch,
+      '--update', '--accept-requires'], `batch ${batch} plan reconciliation`);
+  }
+  for (const batch of batchIds) {
+    runChecked(selfCommand('hash', '--batch', batch, '--label', 'post-6b'),
+      `batch ${batch} post-6b hash`);
+  }
+  runChecked([R('tools', 'touchlog.mjs'), 'snap', `research/${run}-touches.json`,
+    'post-6b', '--idempotent'], 'post-6b touch snapshot');
+  console.log(`step6-scope: reconciled and froze ${batchIds.length} batch(es) at post-6b`);
+  process.exit(0);
 }
 
 if (command === 'hash') {

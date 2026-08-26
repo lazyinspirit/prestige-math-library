@@ -128,9 +128,9 @@
 // survive their own repair — the owner's twice-refuted escalation rule counts
 // rejections per proof across runs and cannot work off stdout alone.
 //
-// Needs DEEPSEEK_API_KEY, supplied directly or from the sibling Prestige
-// Intelligence .env file. The Opus lane uses the already-authenticated claude
-// CLI (keychain session); the retired Terra lane used the Codex CLI.
+// Historical DeepSeek routes need DEEPSEEK_API_KEY, supplied directly or from
+// the sibling Prestige Intelligence .env file. Historical Opus routes use the
+// already-authenticated claude CLI; the active Terra route uses the Codex CLI.
 import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { basename, join } from "node:path";
@@ -181,9 +181,8 @@ const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek
 const DEEPSEEK_API_URL = DEEPSEEK_BASE_URL.replace(/\/$/, "") + "/chat/completions";
 const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// SESSION items only. Session authoring uses the configured agent lane; its judge
-// are therefore direct DeepSeek V4 Pro and fresh Claude Opus 5 CLI processes —
-// note that the second lane is now the SAME model as the author it screens. The
+// Historical SESSION-item routes include direct DeepSeek V4 Pro and fresh
+// Claude Opus 5 CLI processes. The active build route is Terra alone; the
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
 // The ids come from tools/models.mjs, the one registry (2026-08-23). They stay
 // named here because the ROUTING below is per model — DeepSeek goes over HTTP,

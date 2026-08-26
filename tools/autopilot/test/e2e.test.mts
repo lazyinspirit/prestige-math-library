@@ -229,7 +229,14 @@ test('a stage that asks a model for mechanical work is refused at dispatch', asy
     gates: () => [PASSING_GATE],
   }];
   const ex = makeExecutor(fx, bad);
-  await assert.rejects(() => ex.tick(), /is mechanical/);
+  assert.equal(await ex.tick(), 'blocked',
+    'a deterministic role-contract defect is a blocker, not an engine crash');
+  assert.equal(ex.inflight.size, 0);
+  assert.equal(existsSync(join(fx.dispatchDir, 'calls.log')), false,
+    'the invalid cognitive job reached the adapter');
+  assert.deepEqual(Object.keys(ex.state.data.dispatches), [],
+    'a deterministic role-contract defect consumed a retry attempt');
+  assert.ok(ex.state.data.blockers.some((row: any) => /is mechanical/.test(row.message)));
 });
 
 test('a missing brief or task blocks immediately, without spending an agent', async () => {

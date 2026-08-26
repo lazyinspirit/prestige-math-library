@@ -69,9 +69,12 @@ test('refuter collection precedes Alpha and all outputs are gated', () => {
   assert.ok(finalGates.includes('step6-routing-final'));
   assert.ok(finalGates.includes('step6-ledger-valid'));
   assert.ok(finalGates.includes('validate-plan'));
+  const split = byId('6a-split').plan({ ...ordinaryCtx, run: 'r' }, ['2'])[0];
+  assert.deepEqual(split.argv,
+    ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', 'r', '--batch', '2']);
   const reconcile = byId('6b-baseline').plan({ ...ordinaryCtx, run: 'r' }, ['all'])[0];
-  assert.match(reconcile.argv[2], /--update --accept-requires/);
-  assert.match(reconcile.argv[2], /--label post-6b/);
+  assert.deepEqual(reconcile.argv,
+    ['node', 'tools/step6-scope.mjs', 'post-6b', '--run', 'r']);
   assert.equal(byId('6d-close').artifacts({ ...ordinaryCtx, run: 'r' }, 'all'),
     'research/r-step6-closure.json');
 });
@@ -235,8 +238,9 @@ function prepareSplit(fx: ReturnType<typeof fixture>) {
   fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
   writeFileSync(join(fx.root, 'items', 'thm-touched-high-risk.md'),
     readFileSync(join(fx.root, 'items', 'thm-touched-high-risk.md'), 'utf8') + '\nReader repair.\n');
-  fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
-  fx.run('split', '--run', 'r', '--batch', '1');
+  // Exercise the exact shell-free composite used by stage 6a-split. Its two
+  // typed subcommands must retain the old hash-then-split, fail-fast order.
+  fx.run('post-reader', '--run', 'r', '--batch', '1');
 }
 
 test('split isolates each batch and includes touched high-risk items in refuter scope', () => {
@@ -249,6 +253,44 @@ test('split isolates each batch and includes touched high-risk items in refuter 
     assert.deepEqual(scope.refuter_scope.sort(), [...fx.ids, 'p'].sort());
     assert.equal(existsSync(join(fx.root, 'research', 'r-step6-scope.json')), false,
       'the pipeline must not use one shared read-modify-write file');
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('post-6b composite reconciles, hashes, and snapshots in typed fail-fast order', () => {
+  const fx = fixture();
+  const calls = join(fx.root, 'research', 'composite-calls.log');
+  try {
+    writeFileSync(join(fx.root, 'tools', 'splice-plan.mjs'), `
+import { appendFileSync } from 'node:fs';
+appendFileSync(${JSON.stringify(calls)}, 'splice ' + process.argv.slice(2).join(' ') + '\\n');
+`);
+    writeFileSync(join(fx.root, 'tools', 'touchlog.mjs'), `
+import { appendFileSync } from 'node:fs';
+appendFileSync(${JSON.stringify(calls)}, 'touch ' + process.argv.slice(2).join(' ') + '\\n');
+`);
+    fx.run('post-6b', '--run', 'r');
+    assert.ok(existsSync(join(fx.root, 'research', 'r-step6-hash-1-post-6b.json')));
+    assert.deepEqual(readFileSync(calls, 'utf8').trim().split('\n'), [
+      'splice --run r --batch 1 --update --accept-requires',
+      'touch snap research/r-touches.json post-6b --idempotent',
+    ]);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('post-6b composite stops before hashing and snapshotting when reconciliation fails', () => {
+  const fx = fixture();
+  const touched = join(fx.root, 'research', 'touch-ran');
+  try {
+    writeFileSync(join(fx.root, 'tools', 'splice-plan.mjs'), 'process.exit(7);\n');
+    writeFileSync(join(fx.root, 'tools', 'touchlog.mjs'), `
+import { writeFileSync } from 'node:fs';
+writeFileSync(${JSON.stringify(touched)}, 'unexpected');
+`);
+    const result = fx.attempt('post-6b', '--run', 'r');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /plan reconciliation failed with exit 7/);
+    assert.equal(existsSync(join(fx.root, 'research', 'r-step6-hash-1-post-6b.json')), false);
+    assert.equal(existsSync(touched), false);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

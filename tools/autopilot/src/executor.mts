@@ -60,7 +60,7 @@ import { humanDuration } from './reporter.mts';
 import { assertCognitive } from './roles.mts';
 import { validateStages, formatProblems } from './spec.mts';
 import type { SpecProblem } from './spec.mts';
-import { makeExecAdapter } from './adapters/exec.mts';
+import { makeExecAdapter, render } from './adapters/exec.mts';
 
 const sleep = (ms: number, signal?: AbortSignal) => new Promise<void>((resolve) => {
   const t = setTimeout(resolve, ms);
@@ -117,6 +117,10 @@ export class Executor {
   _adoptStage?: string;
   _announcedAdoption?: Set<string>;
   _barrierFor?: string;
+  /** While a repair hook is constructing its response, start() collects every
+   * requested lane here. The complete set is preflighted before any member is
+   * launched, so a late bad sibling cannot race an early valid one. */
+  _repairStarts?: Array<{ stage: Stage; plan: Plan }>;
   /** Earliest wall-clock at which the next dispatch may SPAWN. See `start`. */
   nextSpawnAt: number;
 
@@ -463,50 +467,164 @@ export class Executor {
     return cands.find((c: any) => existsSync(join(ctx.repo, c))) ?? cands[cands.length - 1];
   }
 
+  /** Render the one variable set shared by launch preflight and the real
+   * dispatch. Keeping this in one function prevents the dry run from testing a
+   * command different from the one that is subsequently spawned. */
+  planVars(stage: Stage, plan: Plan, attempt: number): Record<string, unknown> {
+    const unit = (plan.covers ?? []).length === 1 ? String(plan.covers![0]) : '';
+    const artifactPaths = stage.artifacts && unit
+      ? [stage.artifacts(this.ctx(), unit)].flat().filter(Boolean)
+      : [];
+    return {
+      role: plan.role, label: plan.label, run: this.config.run,
+      brief: plan.brief, task: plan.task,
+      covers: (plan.covers ?? []).join(','),
+      timeout: plan.timeout ?? this.config.defaultTimeoutSec ?? 14400,
+      unit,
+      artifact: artifactPaths[0] ?? '',
+      images: (plan.images ?? []).join(','),
+      outputSchema: plan.outputSchema ?? '',
+      resultArtifact: plan.resultArtifact ?? '',
+      sessionHome: plan.sessionHome ?? '',
+      resumeSession: plan.resumeSession ?? '',
+      attempt,
+    };
+  }
+
+  /** Validate the exact plan that is about to launch, without spending a model
+   * call or a retry attempt. Static doctor checks cannot render plans whose
+   * task files and group assignments are created by earlier stages; this is the
+   * boundary where every primary and repair-hook plan finally exists in full.
+   *
+   * For the repository dispatcher, `--dry-run` exercises its real role table,
+   * prompt assembly, task requirement, schema validation and output-path rules.
+   * Tool lanes receive the equivalent local checks and may not reintroduce a
+   * shell command bundle. Custom test/platform adapters remain supported: if
+   * config.argv does not name dispatch.mjs, only the platform-independent
+   * checks run. */
+  preflightPlan(stage: Stage, plan: Plan): string | null {
+    try {
+      plan.brief = this.resolveInput(plan.brief);
+      plan.task = this.resolveInput(plan.task);
+      const supplemental = [...(plan.images ?? []), plan.outputSchema].filter(Boolean) as string[];
+      const absent = [plan.brief, plan.task, ...supplemental]
+        .filter((f: any) => f && !existsSync(join(this.config.repo, f)));
+      if (absent.length) return `missing input file(s): ${absent.join(', ')}`;
+
+      for (const f of [plan.brief, plan.task]) {
+        if (!f) continue;
+        const bad = identityPlaceholders(readFileSync(join(this.config.repo, f), 'utf8'));
+        if (bad.length) return `${f} contains ${bad.join(', ')} — the engine never supplies n/k`;
+      }
+      assertCognitive(plan.job, { stage: stage.id, label: plan.label });
+
+      if (plan.argv !== undefined) {
+        if (!Array.isArray(plan.argv) || !plan.argv.length) return 'tool argv must be a nonempty array';
+        const executable = String(plan.argv[0]).replaceAll('\\', '/').split('/').at(-1)
+          ?.replace(/\.exe$/i, '');
+        const envTarget = executable === 'env'
+          ? plan.argv.slice(1).map(String)
+            .find((part) => !part.startsWith('-') && !/^[A-Za-z_][A-Za-z0-9_]*=/.test(part))
+          : null;
+        // `env -S 'bash -c ...'` carries the command and its arguments in one
+        // argv member. Inspect its first word as well as ordinary `env bash`
+        // and strip Windows' executable suffix so the ban is portable.
+        const envExecutable = envTarget?.trim().split(/\s+/)[0]
+          ?.replaceAll('\\', '/').split('/').at(-1)?.replace(/\.exe$/i, '');
+        if (['sh', 'bash'].includes(executable ?? '') || ['sh', 'bash'].includes(envExecutable ?? '')) {
+          return 'tool argv invokes a shell; use a typed argv tool or composite command';
+        }
+        if (plan.argv[0] === 'node' && String(plan.argv[1] ?? '').startsWith('tools/')
+          && !existsSync(join(this.config.repo, String(plan.argv[1])))) {
+          return `tool does not exist: ${plan.argv[1]}`;
+        }
+        return null;
+      }
+
+      const dispatcher = (this.config.argv ?? []).some((part: string) =>
+        String(part).replaceAll('\\', '/').endsWith('tools/dispatch.mjs'));
+      if (!dispatcher) return null;
+      const key = `${stage.id}:${plan.label}`;
+      const nextAttempt = (this.state.dispatch(key)?.attempts ?? 0) + 1;
+      const parts = render([...this.config.argv, '--dry-run'], this.planVars(stage, plan, nextAttempt));
+      const attemptPositions = parts.flatMap((part, index) => part === '--attempt' ? [index] : []);
+      if (attemptPositions.length !== 1 || parts[attemptPositions[0] + 1] !== String(nextAttempt)) {
+        return `repository dispatcher must receive exact --attempt ${nextAttempt}; `
+          + 'keep "--attempt", "{attempt}" in config.argv so retries cannot overwrite evidence';
+      }
+      const [command, ...args] = parts;
+      const result = spawnSync(command, args, {
+        cwd: this.config.repo,
+        encoding: 'utf8',
+        timeout: 30_000,
+        maxBuffer: 4 * 1024 * 1024,
+      });
+      if (result.error) return `dispatcher dry-run could not launch: ${result.error.message}`;
+      if (result.status !== 0) {
+        const detail = String(result.stderr || result.stdout || `exit ${result.status}`)
+          .trim().replace(/\s+/g, ' ').slice(-1200);
+        return `dispatcher dry-run failed (exit ${result.status}): ${detail}`;
+      }
+      return null;
+    } catch (error: any) {
+      return `preflight threw: ${error?.message ?? error}`;
+    }
+  }
+
+  recordPlanPreflightBlocker(stage: Stage, plan: Plan, reason: string): void {
+    const message = `stage ${stage.id}: dispatch preflight failed for ${plan.role}/${plan.label} — ${reason}`;
+    const key = `dispatch-preflight:${plan.label}`;
+    const existing = this.state.data.blockers.find((blocker: any) =>
+      blocker.stage === stage.id && (blocker.key ?? blocker.message) === key);
+    if (existing) {
+      // The same lane can expose a different deterministic defect after the
+      // first is repaired. Keep one keyed blocker, but keep its diagnosis
+      // current rather than continuing to direct the operator at a fixed file.
+      if (existing.message !== message) {
+        existing.message = message;
+        existing.at = new Date().toISOString();
+        this.state.save();
+        this.reporter.notify('blocked', message, { stage: stage.id, label: plan.label, updated: true });
+      }
+    } else if (this.state.addBlocker(stage.id, message, key)) {
+      this.reporter.notify('blocked', message, { stage: stage.id, label: plan.label });
+    }
+  }
+
+  retirePlanPreflightBlockers(stage: Stage, plans: Plan[], { legacy = true } = {}): void {
+    const keys = new Set(plans.map((plan) => `dispatch-preflight:${plan.label}`));
+    const before = this.state.data.blockers.length;
+    this.state.data.blockers = this.state.data.blockers.filter((blocker: any) =>
+      blocker.stage !== stage.id
+      || (!keys.has(blocker.key)
+        && !(legacy && !String(blocker.key ?? '').startsWith('dispatch-preflight:')
+          && String(blocker.message).startsWith(`stage ${stage.id}: missing input file(s) —`))));
+    if (this.state.data.blockers.length !== before) {
+      this.state.save();
+      this.reporter.notify('unblocked', `${stage.id}: dispatch preflight blocker(s) cleared after a clean validation`);
+    }
+  }
+
   /** Start one dispatch. Never awaited inline — the engine keeps ticking while
    *  agents run, which is what allows a slow lane and a fast lane to overlap. */
-  start(stage: Stage, plan: Plan): void {
+  start(stage: Stage, plan: Plan, { preflighted = false } = {}): boolean {
+    if (this._repairStarts) {
+      this._repairStarts.push({ stage, plan });
+      return true;
+    }
     const key = `${stage.id}:${plan.label}`;
-    if (this.inflight.has(key)) return;
-    // Candidate resolution + the preflight, for EVERY caller. A hook-started
-    // dispatch with a missing input becomes a blocker here, not two spent
-    // agent attempts discovering what existsSync answers instantly.
-    plan.brief = this.resolveInput(plan.brief);
-    plan.task = this.resolveInput(plan.task);
-    const supplemental = [...(plan.images ?? []), plan.outputSchema].filter(Boolean) as string[];
-    const absent = [plan.brief, plan.task, ...supplemental]
-      .filter((f: any) => f && !existsSync(join(this.config.repo, f)));
-    if (absent.length) {
-      const msg = `stage ${stage.id}: missing input file(s) — ${plan.label} needs ${absent.join(', ')}`;
-      if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
-        this.state.addBlocker(stage.id, msg);
-        this.reporter.notify('blocked', msg, { stage: stage.id, label: plan.label, missing: absent });
+    if (this.inflight.has(key)) return false;
+    // This remains on the direct start() path because repair hooks bypass the
+    // ordinary plan fan-out. Invalid plans block before recordDispatchStart, so
+    // configuration defects consume zero retry attempts.
+    if (!preflighted) {
+      const problem = this.preflightPlan(stage, plan);
+      if (problem) {
+        this.recordPlanPreflightBlocker(stage, plan, problem);
+        return false;
       }
-      return;
+      this.retirePlanPreflightBlockers(stage, [plan]);
     }
-    // Identity placeholders fail here, as a blocker naming the file — not at
-    // dispatch.mjs, three burned attempts later. The doctor scans only the
-    // files plan() names, so a hook-referenced task file is invisible to it:
-    // the class bit twice in one day, first in a brief's grammar example,
-    // then in a repair task written hours after the doctor check landed.
-    // This is the one chokepoint every dispatch path crosses.
-    for (const f of [plan.brief, plan.task]) {
-      if (!f) continue;
-      const bad = identityPlaceholders(readFileSync(join(this.config.repo, f), 'utf8'));
-      if (bad.length) {
-        const msg = `stage ${stage.id}: ${f} contains ${bad.join(', ')} — dispatch.mjs refuses the prompt and the engine never passes --var n/k; fix the file`;
-        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
-          this.state.addBlocker(stage.id, msg);
-          this.reporter.notify('blocked', msg, { stage: stage.id, label: plan.label, file: f });
-        }
-        return;
-      }
-    }
-    // Owner rule, 2026-08-16: a model is dispatched for cognitive work only.
-    // Enforced at the point of dispatch rather than in review, because handing
-    // a model a mechanical task does not error — it returns a plausible answer
-    // and is wrong at a rate nobody measures.
-    assertCognitive(plan.job, { stage: stage.id, label: plan.label });
     // The attempt number is computed in ONE place, by recordDispatchStart, and
     // read back from the record it wrote. Computing it here as well produced a
     // second copy of the same quantity that the owner's `retry` command could
@@ -527,21 +645,7 @@ export class Executor {
     // correctly and wrote its report over reader-1's, destroying eleven fatal
     // findings. A path a template carries is a path that can be stale; a path
     // the engine computes cannot be.
-    const unit = (plan.covers ?? []).length === 1 ? String(plan.covers[0]) : '';
-    const artifactPaths = stage.artifacts && unit ? [stage.artifacts(this.ctx(), unit)].flat().filter(Boolean) : [];
-    const vars = {
-      role: plan.role, label: plan.label, run: this.config.run,
-      brief: plan.brief, task: plan.task,
-      covers: (plan.covers ?? []).join(','),
-      timeout: plan.timeout ?? this.config.defaultTimeoutSec ?? 14400,
-      unit,
-      artifact: artifactPaths[0] ?? '',
-      images: (plan.images ?? []).join(','),
-      outputSchema: plan.outputSchema ?? '',
-      resultArtifact: plan.resultArtifact ?? '',
-      sessionHome: plan.sessionHome ?? '',
-      resumeSession: plan.resumeSession ?? '',
-    };
+    const vars = this.planVars(stage, plan, attempt);
     // A stage may override the command entirely. Not every unit of work is an
     // agent: the judge sweep is a tool run, and forcing it through the agent
     // dispatcher would have produced a dispatch for a role that does not exist.
@@ -643,6 +747,36 @@ export class Executor {
       .finally(() => { this.inflight.delete(key); });
 
     this.inflight.set(key, { promise, meta, startedAt: this.clock.now() });
+    return true;
+  }
+
+  /** Validate a complete primary or repair fan-out before launching its first
+   * member. Duplicate labels are duplicate dispatch identities: allowing both
+   * would make the second silently lose the start() race and share evidence
+   * paths with the first. */
+  startMany(stage: Stage, plans: Plan[]): boolean {
+    if (!plans.length) return true;
+    const labelCounts = new Map<string, number>();
+    for (const plan of plans) labelCounts.set(plan.label, (labelCounts.get(plan.label) ?? 0) + 1);
+    const checked = plans.map((plan) => ({
+      plan,
+      reason: (labelCounts.get(plan.label) ?? 0) > 1
+        ? `duplicate label ${plan.label} appears ${labelCounts.get(plan.label)} times in one fan-out`
+        : this.preflightPlan(stage, plan),
+    }));
+    const valid = checked.filter((entry) => !entry.reason).map((entry) => entry.plan);
+    // A repaired sibling's stale keyed blocker is no longer true even when a
+    // different sibling remains invalid. Legacy all-fanout missing-file rows
+    // can only be retired safely once the complete set is clean.
+    this.retirePlanPreflightBlockers(stage, valid, { legacy: false });
+    const invalid = checked.filter((entry) => entry.reason);
+    if (invalid.length) {
+      for (const { plan, reason } of invalid) this.recordPlanPreflightBlocker(stage, plan, reason!);
+      return false;
+    }
+    this.retirePlanPreflightBlockers(stage, plans);
+    for (const plan of plans) this.start(stage, plan, { preflighted: true });
+    return true;
   }
 
   /** Every live dispatch for this run, with its label and covered units. */
@@ -1134,47 +1268,14 @@ export class Executor {
         return 'blocked';
       }
 
-      // PREFLIGHT. A dispatch whose brief or task file does not exist will
-      // fail, be retried, fail again, and only then block — two agent
-      // invocations and their wall-clock spent discovering a missing file that
-      // `existsSync` answers instantly. Check before spending. Candidate
-      // resolution itself lives in `resolveInput`, on the path every dispatch
-      // crosses — including hook-started repairs, which bypass this loop; it
-      // is called here too so the whole-stage missing-file blocker below can
-      // name every absent file at once rather than one per dispatch.
-      const pick = (v) => this.resolveInput(v, ctx);
-      for (const p of plans) { p.brief = pick(p.brief); p.task = pick(p.task); }
-
-      const missing: any[] = [];
-      for (const p of plans) {
-        for (const f of [p.brief, p.task]) {
-          if (f && !existsSync(join(ctx.repo, f))) missing.push({ label: p.label, file: f });
-        }
-      }
-      if (missing.length) {
-        const msg = `stage ${stage.id}: missing input file(s) — ${missing.map((m: any) => `${m.label} needs ${m.file}`).join('; ')}`;
-        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
-          this.state.addBlocker(stage.id, msg);
-          this.reporter.notify('blocked', msg, { stage: stage.id, missing });
-        }
+      // Validate the WHOLE fan-out before starting its first member. A common
+      // role/schema/task defect must stop the fleet with zero model calls; if
+      // validation lived only inside start(), an earlier valid sibling could
+      // already be running when a later plan exposed the shared defect.
+      if (!this.startMany(stage, plans)) {
         this.reporter.report(this.snapshot(), { force: true });
         return 'blocked';
       }
-
-      // Dispatching means the inputs are there now, so any earlier
-      // missing-file blocker for this stage is history. A resolved blocker left
-      // on the report is worse than no report: someone reading it at 3am cannot
-      // tell it from a live one, and the whole value of the status page is that
-      // what it shows is true right now.
-      const before = this.state.data.blockers.length;
-      this.state.data.blockers = this.state.data.blockers.filter(
-        (b) => !(b.stage === stage.id && /missing input file/.test(b.message)));
-      if (this.state.data.blockers.length !== before) {
-        this.state.save();
-        this.reporter.notify('unblocked', `${stage.id}: missing input file(s) now present`);
-      }
-
-      for (const p of plans) this.start(stage, p);
     }
     return 'ok';
   }
@@ -1328,9 +1429,10 @@ export class Executor {
           // once they drain, because `gatesPassedAt` is still unset.
           return 'working';
         }
-        if (spent === 'waiting') {
-          // An external outage is being waited out. The round budget is intact
-          // and the hook re-fires when the clock passes — not exhaustion.
+        if (spent === 'waiting' || spent === 'preflight-blocked') {
+          // An outage keeps its budget and waits on a clock. A deterministic
+          // launch blocker also keeps its budget. Both wait for the specific
+          // external change or explicit operator retry that makes progress safe.
           this.reporter.report(this.snapshot(), { force: true });
           return 'blocked';
         }
@@ -1471,7 +1573,7 @@ export class Executor {
     return { live, spent };
   }
 
-  private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'none'> {
+  private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'preflight-blocked' | 'none'> {
     const st = this.state.stage(stage.id);
     const maxRounds = stage.maxFixRounds ?? 0;
     if (!stage.onGateFailure) return 'none';
@@ -1480,6 +1582,11 @@ export class Executor {
     // the stage — the (gate, item) counters do. A stage without
     // `perItemFixBudget` is unchanged, which is every stage outside step 6.
     const perItem = stage.perItemFixBudget ?? 0;
+    const gateAttemptsBefore = perItem > 0
+      ? structuredClone(this.state.data.gateAttempts ?? {})
+      : null;
+    const blockerKeysBefore = new Set(this.state.data.blockers
+      .map((blocker: any) => blocker.key ?? blocker.message));
     let repairFailure = failure;
     if (perItem > 0) {
       if (st.backoffUntil && new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
@@ -1519,11 +1626,16 @@ export class Executor {
       : `repair round ${st.fixRounds}/${maxRounds}`;
     this.reporter.notify('repair', `${stage.id}: ${describe}; starting ${budgetLabel}`);
     let report: any;
+    let hookFailed = false;
+    this._repairStarts = [];
     try {
       report = await stage.onGateFailure({ ctx, failure: repairFailure, executor: this, stage, round: st.fixRounds, prevRoundAt });
     } catch (err: any) {
+      hookFailed = true;
       this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
     }
+    const requestedStarts = this._repairStarts ?? [];
+    this._repairStarts = undefined;
     if (report?.outage) {
       const waitMs = report.outage.retryAfterMs ?? OUTAGE_BACKOFF_MS;
       st.fixRounds -= 1;
@@ -1532,6 +1644,34 @@ export class Executor {
       this.reporter.notify('repair-outage',
         `${stage.id}: repair hit an external outage — ${report.outage.reason}; ` +
         `round refunded, retrying after ${Math.round(waitMs / 60_000)} min`);
+    } else if (!hookFailed && requestedStarts.length) {
+      const byStage = new Map<Stage, Plan[]>();
+      for (const request of requestedStarts) {
+        if (!byStage.has(request.stage)) byStage.set(request.stage, []);
+        byStage.get(request.stage)!.push(request.plan);
+      }
+      let clean = true;
+      for (const [requestedStage, plans] of byStage) {
+        if (!this.startMany(requestedStage, plans)) clean = false;
+      }
+      if (!clean) {
+        // The hook needed this round number to name its plans, but a
+        // deterministic launch defect is not a mathematical repair attempt.
+        // Restore both round and per-item budgets while keeping the exact
+        // dispatch-preflight blocker that tells the operator what to fix.
+        st.fixRounds -= 1;
+        st.lastRepairAt = prevRoundAt;
+        if (gateAttemptsBefore) this.state.data.gateAttempts = gateAttemptsBefore;
+        this.state.data.blockers = this.state.data.blockers.filter((blocker: any) => {
+          const key = blocker.key ?? blocker.message;
+          return blockerKeysBefore.has(key)
+            || !String(key).startsWith(`item:${stage.id}:${failure.id}:`);
+        });
+        this.state.save();
+        this.reporter.notify('repair-preflight',
+          `${stage.id}: repair fan-out failed launch preflight; repair budget refunded until the named blocker is fixed`);
+        return 'preflight-blocked';
+      }
     }
     // A repair round is a state-changing event whatever it did — it ran tools,
     // dispatched lanes, or set a clock — so the next battery must be live.

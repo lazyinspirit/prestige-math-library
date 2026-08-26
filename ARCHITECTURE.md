@@ -1035,7 +1035,19 @@ never written leaves `manifest-integrity` nothing to compare against, with a
 whole pair free to vanish. Its own flag check is guarded against collapsing:
 zero flags examined over a table that *has* tool commands is reported as broken
 detection, not as clean. The checklist as an operator sees it is
-`UNATTENDED.md` §"Before you start".
+`UNATTENDED.md` §"Before you start". `autopilot start` runs this same doctor
+before detaching, so correctness no longer depends on remembering the preview
+command. Static doctoring cannot see every plan written by an earlier stage or
+repair hook; immediately before launch, the executor therefore renders the
+complete plan and runs the real `dispatch.mjs --dry-run`. It validates the
+whole primary fan-out before starting its first member. Repair-hook starts are
+collected until the hook returns and then receive the same whole-set check; a
+deterministic refusal refunds that repair round and its per-item counters. The
+repository dispatcher must receive the exact engine-owned `--attempt` value.
+Any role, task, schema, prompt-identity or output-path defect therefore records
+a blocker before dispatch retry accounting. Tool plans receive the same
+input/job checks, must name an existing `tools/` target when applicable, and
+may not use `sh` or `bash` bundles, including absolute or `env`-wrapped forms.
 
 ### 3.11e-2 Stage completion by coverage, not by agent count (2026-08-16)
 
@@ -1325,6 +1337,9 @@ carriers and structured reader findings. `refuter_scope` is every unchanged
 item, every high/critical item, and every assigned page. `collect` requires its
 exact `opened`/`not_opened` partition with `not_opened=[]` before group Alpha can
 act.
+`6a-split` invokes the typed `step6-scope.mjs post-reader` composite, which runs
+the post-reader hash and split as separate argv subprocesses in fail-fast order;
+no batch value is interpolated into a shell command.
 
 Group Alpha receives only changed items/pages and reader/refuter findings.
 `-6b-decisions.json` names each stable obligation once, carries evidence and a
@@ -1334,7 +1349,9 @@ missing/extra/duplicate/stale decisions and absent/open/mismatched/double-owned/
 unowned rows. Published repairs use an atomic pre-edit claim plus locked JSONL
 append, so parallel groups cannot edit one public item concurrently.
 
-`6b-baseline` serially reconciles the plan and freezes exact post-6b carriers.
+`6b-baseline` invokes the typed `step6-scope.mjs post-6b` composite, which
+discovers the real batch manifests, serially reconciles the plan, hashes every
+post-6b carrier and records the idempotent touch snapshot in fail-fast order.
 `6c-edges` computes cross-batch citations, forward references, and changes from
 that boundary. `6c-cross` requires current-hash verdicts for every listed or
 later-appearing obligation—including proof-only, contract, manifest, and page
@@ -1741,6 +1758,17 @@ snapshots get the same treatment; a **halted** wave's snapshot stays tracked and
 plain, because `touchlog.mjs` must still read it on resume.
 `research/BUILD-AUDIT-INDEX.md` is the concise standing record of what each
 build and wave did and where its evidence lives.
+
+For current build-driver launches, retry evidence is additionally attempt
+addressed: `<role>-<label>.attempt-<n>.{prompt.md,log,result.json}`. A manually
+re-armed policy counter that reuses `<n>` receives the first unused
+`.replay-<m>` suffix, so prior evidence is never overwritten. The historical
+unsuffixed paths are refreshed as hard-link (copy fallback) latest aliases;
+coverage continues to read only that stable result name, while diagnosis can
+compare every attempt byte-for-byte. The prompt file is also the atomically
+exclusive attempt reservation, so simultaneous same-label replays cannot both
+select one suffix; latest aliases are replaced via a temporary link/copy and
+rename, never by copying through a prior attempt's hard-linked inode.
 
 **Alpha's lane cap is 4 (owner, raised 2026-08-24): GROUP ALPHAS.** It was 1, with the
 stated reason "single writer of the prose scaffolds" — which is a **step-4**

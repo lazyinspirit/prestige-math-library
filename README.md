@@ -81,24 +81,18 @@ from the page's items by the renderer (never hand-set):
   additionally expose an exact source URL, sourced statement, failed local
   route, and necessity; the batch-scope policy gate requires all four.
 - **Verification** (accumulative): mechanical precheck (always, both origins);
-  paired LLM judge including a cross-family DeepSeek screen; owner audit or a
+  GPT-5.6 Terra judge; owner audit or a
   clearly recorded owner-delegated independent verification, either of which
   gates `status: published`.
-  Current session workflow (owner, 2026-08-23): authoring and Beta/Alpha audit
-  use **Claude Opus 5 via the claude CLI**, at `xhigh` reasoning with a
-  **1,000,000-token context window**; the independent paired judges use
-  **DeepSeek V4 Pro directly via the DeepSeek API at `xhigh` thinking (official
-  API value: `max`) and a fresh Claude Opus 5 process**, on identical frozen
-  context. Neither lane is routed through a third-party gateway for this
-  workflow. DeepSeek is the sole cross-family screen: every other lane, author
-  and adjudicator alike, is now Anthropic-family, so agreement between them is
-  not corroboration. At the initial Step 7 sweep,
-  both judges cover every item in every completed A/B pair, including items
-  untouched by Alpha's Step-6 audit.
+  In the build workflow (owner, 2026-08-26), GPT-5.4 authors and reads while
+  GPT-5.6 Terra is the sole Step-7 judge; both use Codex with explicit reasoning
+  and context settings from the model/role registries. Terra is same-family with
+  most work it screens, so its verdict is not cross-family corroboration. Step 7
+  audits every item in every completed A/B pair; Step 8 freshly rejudges only
+  the repaired targets.
   Future levels also gate scope coverage mechanically: every in-flight item has
   provenance, every proof-bearing item a proof contract, every changed public
-  interface an audited downstream-impact receipt, and both judges a verdict on
-  the current shared frozen prompt.
+  interface an audited downstream-impact receipt, and Terra a current verdict.
   The production pipeline keeps its own generator/judge
   lineups in
   the app repo; do not use a generator-family model to judge its own pipeline

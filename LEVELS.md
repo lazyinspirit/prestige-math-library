@@ -430,7 +430,7 @@ that from disk, so a stage cleared by a hand-run dispatch is picked up without
 restarting anything.
 
 ```
-npx tsx tools/autopilot/bin/autopilot.mts doctor --run <run>   # before you start
+npx tsx tools/autopilot/bin/autopilot.mts doctor --run <run>   # optional preview; start repeats it
 npx tsx tools/autopilot/bin/autopilot.mts start  --run <run> --detach
 npx tsx tools/autopilot/bin/autopilot.mts status               # where the build is
 ```
@@ -714,6 +714,11 @@ Code compares the pre/post composite hashes and routes:
 - every high/critical item to the refuter even if the reader changed it;
 - every uneditable reader finding to group Alpha as a structured obligation.
 
+The post-reader hash and routing split are one typed
+`step6-scope.mjs post-reader` command. It executes those two mechanical
+operations in fail-fast order without `sh -c`, so batch ids and paths remain
+argv values rather than shell syntax.
+
 The refuter opens its exact computed scope in a read-only sandbox. Its
 `opened`/`not_opened` arrays must form the exact scope with
 `not_opened=[]`; duplicates, omissions, extras, or out-of-scope findings block
@@ -743,7 +748,10 @@ self-certifies.
 ### 6c/6d — close cross-batch and later changes
 
 After all 6b work passes, one serialized stage reconciles batch manifests into
-the plan and freezes exact post-6b item/page carriers. Code then lists every
+the plan and freezes exact post-6b item/page carriers. The serialized action is
+the typed `step6-scope.mjs post-6b` composite: reconcile every real manifest,
+hash every batch, then take the idempotent touch snapshot, stopping at the first
+failure. Code then lists every
 cross-batch dependency, forward reference, and subsequent item/page change.
 The lead Alpha reads both ends of each cross-batch edge, resolves every forward
 reference by building its missing load-bearing lemmas or dropping the item with
@@ -1304,6 +1312,11 @@ reachability, Node, git state and disk. It exists because several of those fail
 never ran reads like a gate that passed. `tools/paths.mjs` resolves the app repo
 (`$PRESTIGE_APP_DIR`, else the sibling checkout, else the VPS path), and
 `node tools/tsx-run.mjs tools/<x>.mts` is the invocation for every `.mts` tool.
+`autopilot start` itself then runs the repository-aware doctor before it can
+detach. At each later launch boundary the executor dry-runs the exact rendered
+dispatcher plan—including repair-hook plans—and validates a complete fan-out
+before starting its first member, so runtime-materialised deterministic defects
+consume no model attempt.
 
 ## Publish (after owner audit)
 

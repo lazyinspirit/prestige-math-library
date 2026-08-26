@@ -70,7 +70,7 @@
 // is only as good as the tool list. `--check-read-only` re-asserts the list from
 // the role table so a future tool addition cannot silently widen it.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync, readdirSync, statSync, linkSync, unlinkSync, renameSync, constants as fsConstants } from 'node:fs';
 import { spawn } from 'node:child_process';
 // `resolve` is aliased because the spawn block below runs inside a Promise
 // executor whose parameter is also called `resolve`; the unaliased import was
@@ -473,12 +473,14 @@ const sessionHomeArg = option('--session-home');
 // "most recent" is whichever happened to finish last, which is not a group.
 const resumeSession = option('--resume-session');
 const timeoutSec = Number(option('--timeout') ?? 7200);
+const attemptArg = option('--attempt');
+const attempt = attemptArg == null ? null : Number(attemptArg);
 const covers = option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [];
 
 const usage = (message) => {
   if (message) console.error(`dispatch: ${message}`);
   console.error('usage: node tools/dispatch.mjs --role <role> --brief <file> --label <name> --run <name>');
-  console.error(`                               [--var k=v ...] [--task <file>] [--timeout <sec>] [--dry-run] [--json]`);
+  console.error(`                               [--var k=v ...] [--task <file>] [--timeout <sec>] [--attempt <n>] [--dry-run] [--json]`);
   console.error(`                               [--session-home <dir>] [--resume-session <uuid>]`);
   console.error(`roles: ${Object.entries(ROLES).map(([n, r]) => `${n} (${r.sandbox ?? r.runner}, cap ${r.cap})`).join(', ')}`);
   process.exit(2);
@@ -489,6 +491,7 @@ if (!briefPath) usage('--brief is required');
 if (!label || !/^[A-Za-z0-9._-]+$/.test(label)) usage('--label is required and must be a plain name');
 if (!run || !/^[A-Za-z0-9._-]+$/.test(run)) usage('--run is required and must be a plain name');
 if (!Number.isFinite(timeoutSec) || timeoutSec <= 0) usage('--timeout must be a positive number of seconds');
+if (attempt != null && (!Number.isInteger(attempt) || attempt < 1)) usage('--attempt must be a positive integer');
 if (!existsSync(join(REPO, briefPath)) && !existsSync(briefPath)) usage(`brief not found: ${briefPath}`);
 for (const image of imagePaths) if (!existsSync(resolveFile(image))) usage(`image not found: ${image}`);
 if (outputSchemaPath) {
@@ -625,10 +628,78 @@ if (spec.runner === 'claude') {
 // wave and a level of the same number cannot collide on a log name.
 const outDir = join(REPO, spec.dir ?? 'research', `${run}-dispatch`);
 if (!dryRun) mkdirSync(outDir, { recursive: true });
-const logPath = join(outDir, `${role}-${label}.log`);
-const resultPath = join(outDir, `${role}-${label}.result.json`);
-const promptPath = join(outDir, `${role}-${label}.prompt.md`);
-const lastMessagePath = join(outDir, `${role}-${label}.last-message.json`);
+const stem = `${role}-${label}`;
+// `autopilot retry` deliberately resets its policy counter, so a manually
+// re-armed lane may arrive here as attempt 1 again. Never overwrite the first
+// attempt's evidence: select the first unused replay suffix as a separate,
+// monotone-on-disk evidence identity while keeping the policy attempt in the
+// result record and status line.
+let promptClaimed = false;
+const attemptTag = (() => {
+  if (attempt == null) return '';
+  const base = `.attempt-${attempt}`;
+  let candidate = base;
+  let replay = 1;
+  for (;;) {
+    const occupied = ['log', 'result.json', 'prompt.md', 'last-message.json']
+      .some((extension) => existsSync(join(outDir, `${stem}${candidate}.${extension}`)));
+    if (!occupied && !dryRun) {
+      // The prompt is the attempt reservation. existsSync-then-write alone is
+      // racy: two re-armed dispatchers can both choose replay-2 before either
+      // writes, then overwrite the same supposedly immutable evidence. `wx`
+      // makes the identity claim atomic on every supported filesystem.
+      try {
+        writeFileSync(join(outDir, `${stem}${candidate}.prompt.md`), prompt, { flag: 'wx' });
+        promptClaimed = true;
+        return candidate;
+      } catch (error) {
+        if (error?.code !== 'EEXIST') throw error;
+      }
+    }
+    if (!occupied && dryRun) return candidate;
+    replay += 1;
+    candidate = `${base}.replay-${replay}`;
+  }
+})();
+const logPath = join(outDir, `${stem}${attemptTag}.log`);
+const resultPath = join(outDir, `${stem}${attemptTag}.result.json`);
+const promptPath = join(outDir, `${stem}${attemptTag}.prompt.md`);
+const lastMessagePath = join(outDir, `${stem}${attemptTag}.last-message.json`);
+const stableLogPath = join(outDir, `${stem}.log`);
+const stableResultPath = join(outDir, `${stem}.result.json`);
+const stablePromptPath = join(outDir, `${stem}.prompt.md`);
+const stableLastMessagePath = join(outDir, `${stem}.last-message.json`);
+
+// Every retry keeps an immutable attempt file while the historical unsuffixed
+// names remain aliases to the latest attempt. Hard links add no duplicate log
+// bytes; copy is a portability fallback for filesystems that refuse links.
+// Build the replacement under a unique name, then rename it over the alias.
+// Never copy directly over an alias whose unlink failed: when that alias is a
+// hard link to attempt 1, doing so overwrites attempt 1's supposedly immutable
+// inode.
+const refreshLatest = (path, stable) => {
+  if (path === stable) return;
+  const temporary = `${stable}.latest-${process.pid}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  try {
+    try { linkSync(path, temporary); }
+    catch { copyFileSync(path, temporary, fsConstants.COPYFILE_EXCL); }
+    try { renameSync(temporary, stable); }
+    catch (error) {
+      // Windows does not replace an existing destination with rename. Remove
+      // the alias first there; if removal is refused, fail without ever opening
+      // the old hard-linked attempt for writing.
+      if (!['EEXIST', 'EPERM', 'EACCES'].includes(error?.code)) throw error;
+      if (existsSync(stable)) unlinkSync(stable);
+      renameSync(temporary, stable);
+    }
+  } finally {
+    try { if (existsSync(temporary)) unlinkSync(temporary); } catch { /* best effort */ }
+  }
+};
+const writeAttemptFile = (path, stable, value) => {
+  writeFileSync(path, value, attemptTag ? { flag: 'wx' } : undefined);
+  refreshLatest(path, stable);
+};
 
 // ---- the command -------------------------------------------------------------
 
@@ -838,7 +909,12 @@ if (dryRun) {
     lane_cap: spec.cap, timeout_s: timeoutSec,
     command: [bin, ...args].join(' '),
     prompt_bytes: Buffer.byteLength(prompt), prompt_lines: prompt.split('\n').length,
-    would_write: { log: logPath, result: resultPath, prompt: promptPath },
+    attempt,
+    evidence_tag: attemptTag || null,
+    would_write: {
+      log: logPath, result: resultPath, prompt: promptPath,
+      latest_result: stableResultPath,
+    },
     // The rendered prompt itself, so "render it through --dry-run and read the
     // actual output" is possible without a live dispatch.
     ...(asJson ? { prompt } : {}),
@@ -851,12 +927,13 @@ if (dryRun) {
 // ---- run ---------------------------------------------------------------------
 
 const pool = createSlotPool({
-  root: '/tmp/prestige-math-library-agent-slots',
+  root: process.env.DISPATCH_SLOT_ROOT ?? '/tmp/prestige-math-library-agent-slots',
   caps: Object.fromEntries(Object.entries(ROLES).map(([name, r]) => [name, r.cap])),
   label: 'dispatch',
 });
 
-writeFileSync(promptPath, prompt);
+if (promptClaimed) refreshLatest(promptPath, stablePromptPath);
+else writeAttemptFile(promptPath, stablePromptPath, prompt);
 
 const started = new Date();
 const release = await pool.acquire(role);
@@ -866,18 +943,6 @@ let temporaryHome = null;
 // rollout a later `codex exec resume` re-enters.
 let persistentHome = null;
 let codexAuthPaths = null;
-
-// Copy a rotated auth record back to the canonical CODEX_HOME before the
-// temporary home is destroyed. Only writes when the bytes actually changed, so
-// an unrotated run leaves the canonical file untouched.
-//
-// Concurrency caveat, stated rather than hidden: a single-use refresh token and
-// N parallel agents are fundamentally in tension — if two agents rotate, the
-// later writer wins and the earlier agent's rotated token is retired. That is
-// still strictly better than the previous behaviour, where EVERY rotation was
-// discarded and the canonical file was guaranteed to go stale. Betas run at
-// cap 5, so if this proves lossy the fix is to refresh once before fan-out
-// rather than to drop the copy-back.
 /** The codex conversation this dispatch created, or null for a non-codex lane.
  *
  *  Two sources, in order. codex announces `session id: <uuid>` on stderr at
@@ -926,7 +991,7 @@ const persistRotatedCodexAuth = () => {
 const result = spec.runner === 'deepseek'
   ? await (async () => {
     const outcome = await runDeepSeek(prompt, timeoutSec * 1000);
-    writeFileSync(logPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${outcome.stdout}\n\n## stderr\n${outcome.stderr}\n`);
+    writeAttemptFile(logPath, stableLogPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${outcome.stdout}\n\n## stderr\n${outcome.stderr}\n`);
     return outcome;
   })()
   : await new Promise((resolve) => {
@@ -947,7 +1012,7 @@ const result = spec.runner === 'deepseek'
     // including plain `codex exec`: one long run silently bricked the whole
     // lane. `codex login status` does NOT catch this — it reads the file
     // without validating it, and keeps reporting "Logged in using ChatGPT".
-    // Copying the record back on exit keeps the canonical file in step.
+    // Copy the winning auth record back below before deleting the temporary home.
     // A named session home is PERSISTENT and is not torn down below: it holds
     // the rollout that `codex exec resume` re-enters. The auth handling is
     // identical either way, including the rotation copy-back — a persistent home
@@ -997,7 +1062,7 @@ const result = spec.runner === 'deepseek'
     // wrapper. A stdout that is not an envelope (older CLI, crash banner) passes
     // through unchanged, so a broken run still reports what it printed.
     if (spec.runner === 'claude') stdout = unwrapClaudeEnvelope(stdout).content;
-    writeFileSync(logPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${stdout}\n\n## stderr\n${stderr}\n`);
+    writeAttemptFile(logPath, stableLogPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${stdout}\n\n## stderr\n${stderr}\n`);
     resolve({ code, timedOut, stdout, stderr });
   };
   const timer = setTimeout(() => { timedOut = true; child.kill('SIGTERM'); }, timeoutSec * 1000);
@@ -1029,7 +1094,7 @@ if (resultArtifactPath && spec.runner === 'claude' && result.code === 0 && !resu
   const unfenced = result.stdout.trim()
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/, '');
-  writeFileSync(lastMessagePath, unfenced);
+  writeAttemptFile(lastMessagePath, stableLastMessagePath, unfenced);
 }
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   try {
@@ -1045,7 +1110,7 @@ if (resultArtifactPath && result.code === 0 && !result.timedOut) {
 
 const ended = new Date();
 const record = {
-  role, label, run,
+  role, label, run, attempt, evidence_tag: attemptTag || null,
   // WHAT UNIT OF WORK THIS DISPATCH COVERS, and why it is on the record.
   //
   // Stage completion used to be a COUNT: "3 group Alphas returned". A count has
@@ -1093,7 +1158,8 @@ const record = {
   // the log holds it in full.
   tail: result.stdout.trim().split('\n').slice(-40).join('\n'),
 };
-writeFileSync(resultPath, JSON.stringify(record, null, 2) + '\n');
+writeAttemptFile(resultPath, stableResultPath, JSON.stringify(record, null, 2) + '\n');
+if (existsSync(lastMessagePath)) refreshLatest(lastMessagePath, stableLastMessagePath);
 
 if (asJson) {
   console.log(JSON.stringify(record, null, 2));

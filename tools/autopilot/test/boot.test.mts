@@ -18,7 +18,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import { spawnSync } from 'node:child_process';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -44,6 +45,31 @@ test('doctor boots through the operator runner, not the tsx test path', () => {
   assert.doesNotMatch(r.stderr ?? '', /ERR_UNKNOWN_FILE_EXTENSION|ERR_MODULE_NOT_FOUND|ERR_NO_TYPESCRIPT/,
     `the operator runner could not load the engine\nstderr: ${(r.stderr ?? '').slice(0, 2000)}`);
   assert.match(r.stdout, /stage spec: \d+ stage\(s\)/);
+});
+
+test('start runs doctor itself and refuses deterministic defects before the engine loop', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'autopilot-start-doctor-'));
+  const stagePath = join(repo, 'stages.mts');
+  writeFileSync(stagePath, `export const stages = [{
+    id: 'only', label: 'only', units: () => ['all'], pattern: /^worker-/,
+    plan: () => [{ role: 'worker', label: 'all', job: 'audit', covers: ['all'] }],
+    gates: () => [{ id: 'fixture', argv: ['node', '-e', 'console.log("checked 1 thing")'] }],
+  }];\n`);
+  writeFileSync(join(repo, 'autopilot.config.json'), JSON.stringify({
+    stages: stagePath,
+    argv: ['node', 'tools/no-such-dispatcher.mjs', '--role', '{role}'],
+    pollSec: 0.01,
+  }));
+  try {
+    const r = spawnSync(process.execPath,
+      [RUNNER, BIN, 'start', '--repo', repo, '--run', 'doctor-fixture'],
+      { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
+    assert.equal(r.status, 2, `stdout: ${r.stdout}\nstderr: ${r.stderr}`);
+    assert.match(r.stderr, /refusing to start — preflight found deterministic blocker/);
+    assert.match(r.stderr, /no such dispatcher|no-such-dispatcher/);
+    assert.equal(existsSync(join(repo, '.autopilot', 'controller.lock')), false,
+      'start entered the engine loop before doctor refused the configuration');
+  } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
 test('watchdog.sh launches the engine through the operator runner', () => {

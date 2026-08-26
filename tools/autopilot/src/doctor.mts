@@ -200,7 +200,13 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
     } else if (!existsSync(join(repo, tool))) {
       problems.push(`the dispatch argv names ${tool}, which does not exist`);
     } else {
-      ok.push(`dispatch argv resolves (${tool})`);
+      const normalized = String(tool).replaceAll('\\', '/');
+      const attemptPositions = dispatchArgv.flatMap((part: any, index: number) => part === '--attempt' ? [index] : []);
+      if (normalized.endsWith('tools/dispatch.mjs')
+        && (attemptPositions.length !== 1 || dispatchArgv[attemptPositions[0] + 1] !== '{attempt}')) {
+        problems.push('dispatch argv for tools/dispatch.mjs must contain exactly one "--attempt", "{attempt}" '
+          + '— otherwise automatic retries overwrite their prompt/log/result evidence');
+      } else ok.push(`dispatch argv resolves (${tool})`);
     }
   }
 

@@ -68,6 +68,13 @@ high/critical items, machine-complete group-Alpha decisions with defect-ledger
 ownership, then lead-Alpha cross-batch/forward-reference/post-6b-change closure and the final
 gate battery, followed by an immutable Step-6 evidence receipt. Alpha does not spawn duplicate build refuters, and 6c does not
 repeat same-batch or published-dependency citations already assigned to 6a.
+The engine runs the Step-6 hash/split and post-6b reconcile/hash/snapshot chains
+through typed `step6-scope.mjs` composite commands, not shell strings. Before
+any model fan-out—including a repair hook—it dry-runs the exact rendered
+dispatcher command; a deterministic role, prompt, schema or output-path defect
+blocks with zero model attempts, no already-started sibling and no spent repair
+round. The dispatch argv carries the engine's exact attempt counter, and the
+dispatcher atomically reserves a distinct evidence suffix before launch.
 
 **The model lineup lives in `CLAUDE.md` §Model lineup — the single source of
 truth** — and this file never restates it: a second copy of a lineup drifts,
@@ -752,7 +759,7 @@ silently choose a convention, create a new theorem, or leave a consumer queue
 open. A Beta's repair is independently checked by Alpha, and Alpha's by an
 independent Step-6 reader; the repairer never certifies itself. Materially
 AI-repaired content is `ai-altered` unless it was already `ai-generated`. Clear
-the stale judge and owner-audit records, have both current judge lanes rejudge
+  the stale judge and owner-audit records, have the current Terra judge rejudge
 the final changed material, and use a current `verification.verified` record
 with `scope: published-dependency-repair` and `delegated_by: owner` as the
 delegated public gate. A `proved_here: false` record instead receives a fresh
