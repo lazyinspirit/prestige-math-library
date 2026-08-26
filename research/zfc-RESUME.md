@@ -35,8 +35,8 @@ set of equivalence classes. They are companions to the published
    the standing Sol lineup, and today's substitution is recorded here instead of
    churning the normative docs for a one-day exception.
 3. **Re-homing of three published items (owner, confirmed 2026-08-06).** See
-   "Decisions" below. This is the owner approval that the standing rule
-   (`AUDIT-WORKFLOW.md`: reading-order changes are owner-only) requires.
+   "Decisions" below. This is the owner approval required for reading-order
+   changes.
 4. **"Partial relations" means PARTIAL ORDERS (owner, confirmed 2026-08-06).**
    The pair-2 A page defines the relation properties (reflexive, irreflexive,
    symmetric, antisymmetric, transitive, connex/total) generically; the published

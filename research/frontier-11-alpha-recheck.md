@@ -451,7 +451,7 @@ the publish commit would avoid it but would mean the step-7 judges never see the
 final text, which is worse and violates the paired-judge contract. The repo
 already has the mechanism for exactly this class: `depcheck --pending-audit-ok`,
 whose comment names it *"a materially repaired published item loses its obsolete
-`audited` stamp there"*. Its stated sole caller is the audit workflow's A4 gate,
+`audited` stamp there"*. Its stated sole caller was a legacy gate,
 so **using it in a build is a deviation to record explicitly in the run record and
 in the step-10 report**, not one to assume. That is the decision I am flagging
 rather than taking.

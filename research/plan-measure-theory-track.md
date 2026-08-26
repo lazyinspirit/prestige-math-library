@@ -628,7 +628,7 @@ explicit backlog and this table is its disposition, result by result.
 proof-bearing item on the MT page, list the retired `rem-` id in the new item's
 `aliases` so wikilinks resolve, and — only with explicit owner approval at that
 time — remove the `rem-` from the catalogue page's `items` list. **Removal is a
-deletion and deletions are owner-only** (`AUDIT-WORKFLOW.md` §2.3). Nothing in
+deletion and deletions are owner-only.** Nothing in
 this commission removes anything.
 
 The blast radius is small and was measured: across all of `items/`, exactly

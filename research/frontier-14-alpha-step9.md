@@ -570,7 +570,7 @@ the step-9 rule they are recorded rather than built.
 
 - **Harvest faithfulness against the sources.** Step 9 checks claims against
   *disk*. Whether a decline's description of a source heading matches what the
-  source actually says is the step-6 check (`AUDIT-WORKFLOW`/`LEVELS` §6), and
+  source actually says is the step-6 check, and
   I did not re-fetch any PDF here. D65 in particular rests on "Erdman poses this
   as an open-ended exercise asking the reader to supply the condition" — I did
   not open Erdman to confirm the exercise is open-ended. Its second ground, the

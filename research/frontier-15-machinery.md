@@ -326,7 +326,7 @@ and a fix for the `${current}` ReferenceError the `7496b516` rewrite left in
 the audit-targeted evidence block (the A8 route crashed on any eligible
 stamp; regression test added). Suite ends at **311/311**. Docs same-commit:
 ARCHITECTURE §3.11i, LEVELS §Full closure, UNATTENDED blocker table,
-AUDIT-WORKFLOW §tools, CLAUDE.md (39,728 chars, measured).
+and CLAUDE.md (39,728 chars, measured).
 
 ## 5. Conclusion — the build cycle is CLOSED (owner, 2026-08-17)
 

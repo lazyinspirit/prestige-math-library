@@ -245,4 +245,3 @@
 - `frontier-14-D430` frontier-14 · other · covering-spaces-and-lifting
 - `frontier-12-D008` frontier-12 · other · spine-audit receipt
 - `frontier-13-D053` frontier-13 · other · tools/precheck.mts
-- `pre-frontier-13-D003` pre-frontier-13 · other · tools/run-wave.test.mjs

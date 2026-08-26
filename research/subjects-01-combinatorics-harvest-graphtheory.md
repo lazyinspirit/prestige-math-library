@@ -1195,7 +1195,7 @@ Two further edition differences the scaffolder must not trip over:
   "Extremal Problems and Turán's Theorem" *and* "Color-Critical Graphs".
 
 **Always cite the edition and check the chapter number.** A citation of "West ch. 6" is
-ambiguous and is exactly the sort of imprecise locator the audit workflow flags.
+ambiguous and is exactly the sort of imprecise locator the source review flags.
 
 **Value note for this lane:** West §5.3 "Enumerative Aspects" is the reference treatment of the
 **chromatic polynomial**, including "Counting Acyclic Orientations" — i.e. **Stanley's

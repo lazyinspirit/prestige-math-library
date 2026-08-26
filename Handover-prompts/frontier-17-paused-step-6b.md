@@ -11,8 +11,7 @@ artifacts, process state, and git history are authoritative.
 ## Mandatory first actions
 
 1. `cd /home/lazyinspirit/Projects/prestige-math-library`.
-2. Read `CLAUDE.md` completely before touching the repository. Then read the
-   relevant model/role rules in `AUDIT-WORKFLOW.md` sections 2 and 3.
+2. Read `CLAUDE.md` completely before touching the repository.
 3. Inspect, without mutating:
 
    ```bash

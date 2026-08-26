@@ -452,8 +452,8 @@ machinery finding, because the ledger is the artifact that was built precisely s
 this account would be a query rather than archaeology.
 
 **2. `judge-compare.mjs` cannot read this run.** The lane switch to
-`deepseek+sonnet` (commit `ea0c10db`) updated `judge.mts`, `judge-sweep.mjs`,
-`level-coverage.mjs` and `run-wave.mjs`. It did not update
+`deepseek+sonnet` (commit `ea0c10db`) updated the judge executors and
+`level-coverage.mjs`. It did not update
 `judge-compare.mjs`, whose `JUDGE_LINEUPS` still carries only
 `deepseek+terra` — so `JUDGE_LINEUP=deepseek+sonnet` exits 2 with *"must be one
 of deepseek+terra"*, and the default run dies at adjudication line 93, the first

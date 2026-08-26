@@ -403,7 +403,7 @@ now.
 this run does not have one.** I wrote in round 1 that liveness was being checked
 for the wrong question. It is worse than that. `tools/url-sweep.mjs` exists and
 does exactly this job, but grepping the tools and the normative docs, its only
-caller is `tools/run-wave.mjs` — the **audit** driver. `run-level.mjs` never
+caller was the retired driver. `run-level.mjs` never
 invokes it, and its inputs are `--manifests` and `--ledgers`, not a
 `coverage.json`. So the build side has a liveness tool it never runs, and would
 not point it at the artifact that carries the source URLs if it did.

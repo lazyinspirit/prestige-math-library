@@ -294,7 +294,7 @@ until the step-10 commit) while their `verification.audited` is deleted, because
 the 2026-08-02 audit cannot cover rewritten text. `depcheck` therefore has
 grounds to raise `published-unaudited` — an **error** — for that whole window.
 `depcheck --pending-audit-ok` exists for exactly this class, but its documented
-sole caller is the audit workflow's A4 gate, so using it inside a build is a
+sole caller was a legacy gate, so using it inside a build is a
 deviation, and Alpha rightly refused to assume it.
 
 The window is unavoidable under the rewrite reading: deferring the rewrite to the
@@ -322,7 +322,7 @@ and suppresses nothing else.
 
 **Therefore `--pending-audit-ok` is authorised for `depcheck` in this build, from
 step 5 until the step-10 publish commit, and its use is a recorded deviation**:
-the flag's documented sole caller is the audit workflow's A4 gate. It is reported
+the flag's documented sole caller was a legacy gate. It is reported
 at step 10. The window closes when the owner sets `verification.audited` on the
 four at publish. Because the gate was run unsuppressed first, this rests on
 measured evidence rather than on the assumption Alpha rightly refused to make.

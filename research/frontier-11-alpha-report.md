@@ -327,7 +327,7 @@ D10's absence stands.
   are `status: published`, still listed by published order 189, with their
   `verification.audited` deleted — so `depcheck` raises `published-unaudited`, an
   **error**, for that whole window. `depcheck --pending-audit-ok` exists for
-  exactly this class, but its stated sole caller is the audit workflow's A4 gate,
+  exactly this class, but its stated sole caller was a legacy gate,
   so using it inside a build is a deviation to record explicitly, not to assume.
   I flagged it in the re-check and I flag it again; it is unavoidable under the
   rewrite reading, because deferring the rewrite to the publish commit would

@@ -2,8 +2,8 @@
 
 **Alpha:** Claude Opus 5, `claude` runner, `xhigh`, 1,000,000-token window
 (`claude-opus-5[1m]`), `--permission-mode bypassPermissions`.
-Delegation: CLAUDE.md §"Obvious published-dependency repair" (owner, 2026-08-01),
-as extended for citation-precision repairs by AUDIT-WORKFLOW.md §2.3.
+Delegation: the owner-authorized published-dependency repair rule, as extended
+for citation-precision repairs on 2026-08-01.
 
 ---
 

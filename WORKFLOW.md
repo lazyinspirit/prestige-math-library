@@ -6,9 +6,7 @@ This is the active TypeScript/autopilot build reference. The source of truth is
 is the CLI. Code wins over this file. Read [README.md](README.md) for repository
 and provenance rules and [SCHEMA.md](SCHEMA.md) for page/item contracts.
 
-This runbook covers the new-content build only. It retires A0–A10, run-wave, and
-published-page audit procedure; a build tool or artifact whose name contains
-`audit` remains in scope when the live stage table uses it.
+This runbook covers the new-content build.
 
 ## Commands
 

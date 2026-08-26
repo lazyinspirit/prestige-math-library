@@ -35,8 +35,7 @@ an interactive login, and CLAUDE.md forbids substituting another model or a
 smaller window for a pinned lane.
 
 **Blast radius beyond the judge:** every Codex-runner role in `dispatch.mjs` is
-equally unavailable — `beta`, `reader`, `refuter`, `orchestrator`, `audit-beta`,
-`audit-alpha`, `certifier`. The DeepSeek lane is unaffected (its key resolves
+equally unavailable. The DeepSeek lane is unaffected (its key resolves
 from the app repo `.env` via `paths.mjs`) and returned real verdicts throughout.
 
 ## 2. What this session changed — 8 items, all `draft`, all in frontier-12 scope

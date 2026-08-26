@@ -95,8 +95,8 @@ and it earned its place twice. It alone caught the Type II Fubini defect that
 Terra passed. And on the published `[L2]` repair it **flipped REJECT → PASS**
 while Terra produced a fresh objection on each successive text.
 
-**A lineup problem I created.** I first sent Alpha's repair to the audit-workflow
-`certifier` role, which is pinned to **GPT 5.6 Terra** — the same model as one
+**A lineup problem I created.** I first sent Alpha's repair to a `certifier`
+role using **GPT 5.6 Terra** — the same model as one
 judge lane. It declined to certify while citing **Terra's own ledger row** as its
 support. That is self-agreement, not corroboration. `CLAUDE.md` says a **Step-6
 reader** (Sol) certifies Alpha's repair in a build; I used the audit role by

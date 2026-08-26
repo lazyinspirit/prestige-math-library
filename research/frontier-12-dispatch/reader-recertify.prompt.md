@@ -104,8 +104,8 @@ is you. You did not author this repair and you are not the model that raised the
 objection.
 
 **Why you are being asked, and what went wrong before.** The orchestrator first
-dispatched the audit-workflow `certifier` role, which is pinned to **GPT 5.6
-Terra**. Terra is also one of the two judge lanes, and it declined to certify
+dispatched a `certifier` role using **GPT 5.6 Terra**. Terra is also one of the
+two judge lanes, and it declined to certify
 while citing **its own ledger row** as support. That is self-agreement, not
 independent corroboration. The cross-family lane, DeepSeek V4 Pro, **passed** the
 same text. Your read is the one that settles it.

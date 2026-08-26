@@ -2,7 +2,7 @@
 
 Run: `frontier-14`  
 Batch: complex-analysis foundation (`complex-power-series-and-analytic-functions`; `contour-integration`)  
-Role: Audit-Beta, steps 1–2; returning step-5 author
+Role: Beta, steps 1–2; returning step-5 author
 
 ## Continuity checkpoint
 

@@ -566,7 +566,7 @@ contains 237 valid rejection rows.
 
 Read the repository instructions and recover the durable prior work before
 acting: `CLAUDE.md`, `UNATTENDED.md`, the relevant Step-8 rules in
-`ARCHITECTURE.md` and `AUDIT-WORKFLOW.md`,
+`ARCHITECTURE.md`,
 `research/frontier-16-machinery.md`, `research/frontier-16-alpha-step8.md`,
 `research/frontier-16-judge-closure.json`,
 `research/frontier-16-judge.jsonl`, and

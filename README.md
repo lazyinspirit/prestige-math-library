@@ -34,10 +34,8 @@ documentation describes their intended contract.
 - `explainer/` — self-contained HTML explainers and their video-render helper.
 - `Handover-prompts/` — retained prompts from earlier sessions; historical
   context, not live run state.
-- `ops/` — retained systemd unit for the retired `run-wave` audit service; it
-  is not an application service definition.
 - `research/` — design inputs, run manifests, generated task material,
-  receipts, and retained build/audit evidence. Dated run artefacts document
+  receipts, and retained build evidence. Dated run artefacts document
   history; change their generating template or tool rather than hand-editing
   generated output.
 - `tools/` — Node-based validators, render checks, planning utilities, and

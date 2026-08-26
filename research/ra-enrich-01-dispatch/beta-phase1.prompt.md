@@ -99,9 +99,9 @@ Do not change any `status:` field to `published`.**
 Owner instruction: *"If we are adding new items to an existing page, ONLY judge
 and audit newly added items, not the whole page."*
 
-This mirrors the audit workflow's A7 exception, where a targeted repair rejudges
-only the exact repair ids rather than sweeping a whole wave. It is the
-orchestrator that runs the paired judges and dispatches the independent audit —
+This follows the same principle as targeted repair review: rejudge only the
+exact repair ids rather than sweeping an entire run. It is the orchestrator
+that runs the paired judges and dispatches the independent review —
 **not you.** You author; you do not judge or audit your own work. That separation
 is not negotiable in this library: authors never judge, and no author certifies
 its own work.
