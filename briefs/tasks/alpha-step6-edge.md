@@ -1,17 +1,13 @@
 # Step 6 undeclared-prerequisite repair
 
-Run `node tools/validate-plan.mjs research/plan-spec.json` and read every
-`undeclared-prereq` row for the live ids. Open the citing item, its dependency,
-both owning pages, and the current page `requires` closure.
+Run `node tools/validate-plan.mjs research/plan-spec.json` and inspect each
+live `undeclared-prereq` entry named by the generated gate task. Read the citing
+item, dependency, owning pages, and current `requires` closure.
 
-- Genuine backward prerequisite: add the required page edge and revalidate.
-- Unneeded or incorrect dependency: rewrite the citing item and remove the bad
-  dependency; do not inflate page prerequisites.
-- Forward prerequisite: do not hide a reading-order defect. Record the exact
-  owner blocker unless the active task explicitly licenses reordering.
-- Dependency on an `-examples` page: reroute through an A-page result carrying
-  the needed theorem. Adding a page edge cannot make this legal.
+Add only a genuine backward page prerequisite. Remove or repair an unneeded
+dependency; reroute an `-examples` dependency through an A-page result. A
+forward prerequisite is an owner blocker unless the active task explicitly
+licenses reordering.
 
-Record one evidence-bearing decision per edge in the Step 6 report. For a
-concrete item defect, also write the Step 6 gate decision and ledger row. Never
-overwrite the durable Step 4 task or report.
+Record the evidence, disposition, and any concrete defect's Step-6 decision and
+ledger row in the report required by the generated task.

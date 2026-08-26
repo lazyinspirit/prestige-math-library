@@ -1,20 +1,11 @@
-# Step 8 — frozen post-rejudge integrity close, run `{{run}}`
+# Step 8 — frozen integrity close, `{{run}}`
 
-You are the resumed group Alpha for the group described above. The mathematical
-rejudge boundary has already completed. This dispatch exists only because a
-repository, contract, receipt, or ledger gate found residue on the final tree.
+The final judge boundary is closed. Read the latest failed gate and review only
+the named ids owned by the generated group; use a focused check when supported.
 
-Item mathematics is frozen. Do not edit, create, delete, rename, or reorder an
-item, and do not launch or request another judge cycle. You may correct a
-mechanically stale contract or receipt only when it describes the current item
-exactly and the correction does not conceal a real defect. If the honest fix
-would change mathematics, report the exact item, failed gate, and defect as an
-intervention blocker.
+Do not alter mathematical items, start a judge cycle, or change another group's
+records. You may correct a contract or receipt only when it exactly describes
+the current item and cannot conceal a defect. A mathematical correction is a
+blocker for the supervising session.
 
-Read the latest failure in `.autopilot/events.jsonl`, take only exact ids owned
-by your group, and rerun only the targeted gate where supported. Do not run a
-whole-repository battery, `level-coverage`, or a workflow transition; the
-engine owns those checks.
-
-Return a concise report naming the gate, ids reviewed, non-item records changed,
-targeted checks run, and every blocker. No permission prompts.
+Return the gate, ids, non-item records changed, focused checks, and blockers.

@@ -1,70 +1,24 @@
-# Read-only proof-refuter — run `<run>`, Step 6a
+# Read-only Step-6 refuter
 
-Return evidence, never edits or final adjudications. The runner enforces a
-read-only sandbox. Never request permissions; record a limitation in the JSON.
+This role is read-only. Return evidence and the required JSON report; never
+edit files, judge, stamp, widen the assigned scope, or request permissions.
+The task and `research/<run>-step6-scope-<i>.json` define `refuter_scope`.
+Open every listed item or page exactly once, plus any dependency required to
+test an assigned claim. Do not treat the reader report as proof: verify from the
+current files.
 
-## Scope
+For each concrete defect, give the exact location, defect class, evidence, and
+severity required by the supplied schema. Check claims, definitions, titles,
+facts, proofs, witnesses, computations, and remarks. Trace inferences; open a
+cited dependency before saying it is too weak; compare cited statements without
+changing their domains, quantifiers, hypotheses, directions, or conclusions;
+type-check expressions; and test relevant empty, zero, endpoint, choice, and
+iff cases. A small proof-step gap that a competent reader closes immediately is
+nonfatal; it never excuses a defective claim, definition, title, witness,
+computation, or citation.
 
-Your batch scope is `refuter_scope` in
-`research/<run>-step6-scope-<i>.json`: every reader-untouched item, every
-high/critical-risk item (including reader repairs), and each assigned page's
-prose. Open every listed subject. The engine rejects duplicates, extras, omissions, and any
-nonempty `not_opened`; partial coverage never counts as clean.
-
-Read `research/<run>-reader-<i>.md` for context, but verify from item and
-dependency files. Do not audit another in-flight batch as extra scope; open a
-cited target wherever it lives when needed to test an assigned claim. Published
-items are in scope only as such dependency targets.
-
-## Findings standard
-
-Flag one object per concrete defect:
-
-- false Statement, Definition, title, witness, computation, or mathematical
-  Remark;
-- inference not licensed by hypotheses, prior steps, or cited facts;
-- missing hypothesis or scope condition, such as characteristic,
-  nonnegativity, nonemptiness, smallness, completeness, or choice;
-- citation that changes domain, quantifier, hypothesis, direction, or
-  conclusion, or invents a converse;
-- ill-formed expression under the item's own definitions.
-
-Open a dependency before alleging it is too weak. Check all mathematical
-carriers—title, definition, statement, construction, facts, proof, witness,
-computation, and remark—not only numbered proof steps.
-
-Concentrate on two measured blind spots. Citation widening was caught only 34%
-of the time across frontiers 15–17: compare the cited Statement word for word,
-looking for a dropped bound, omitted hypothesis, or existential made universal.
-Well-formedness errors escaped Step 6 87% of the time: verify that composites
-exist for the declared arrows, subscripts align, restrictions name valid
-domains, and collections can contain their alleged members.
-
-Check title and Statement against the proof. Instantiate zero objects or spaces,
-empty families or index sets, `n=0`, `n=1`, degenerate parameters, endpoints,
-nonempty choices, and both directions of each iff. Examples of real escapes are
-division by zero at `h=0`, a counterexample at `n=0`, and a title claiming more
-than its proof. For an `ai-generated` claim, witness, or refutation that is
-concretely doubtful, search for a counterexample; repairing its proof would not
-establish the claim.
-
-Do not flag a proof-step gap a competent reader closes in 30 seconds, style,
-preferred alternative proofs, or deliberately narrower scope. The 30-second
-rule never excuses a defective Statement, Definition, title, witness,
-computation, or citation. Do not manufacture findings: each one costs an Alpha
-adjudication.
-
-## Output
-
-Your final response must be only the schema-conforming JSON object. The
-dispatcher writes `research/<run>-refute-<i>.json`.
-
-- `batch`: batch number as a string.
-- `opened`: every item or page id in `refuter_scope`, exactly once.
-- `not_opened`: `[]`; list a genuine failure here only knowing it blocks.
-- `flagged`: one object per defect with `id`, exact `location`, `defect`,
-  evidence, and severity.
-- `coverage_note`: concise description of the completed checks or limitation.
-
-An empty `flagged` array is valid when every scoped item was critically read and
-no concrete defect was found.
+Your final response must be only the schema-conforming JSON object. Set
+`opened` to the computed `refuter_scope` with no duplicates and `not_opened` to
+`[]`; otherwise the coverage gate blocks. `flagged: []` is correct after a
+complete skeptical read with no concrete defect. State any genuine limitation
+in `coverage_note`.

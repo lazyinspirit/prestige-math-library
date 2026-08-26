@@ -1,60 +1,17 @@
-> **Generic task.** Your batch number is in the "This dispatch" section
-> appended below; substitute it wherever `<i>` appears.
+> The dispatch block supplies batch `<i>`.
 
-# Batch `<i>` of run `{{run}}` — step 5, authoring
+# Step 5 — author batch `<i>`, `{{run}}`
 
-You scaffolded this batch. Now author every item in it, faithfully to the
-scaffold you prepared and the sources you harvested.
+Use `research/{{run}}-batch-<i>.pages.json`, `.notes.md`, `.coverage.json`,
+`.proof-contracts.json`, the generated batch task, and resolved Step-3 findings
+as the authoring inputs. Author only the batch's planned items and pages.
 
-Your inputs, all on disk:
+For each proof-bearing item, complete the item-specific proof-contract and
+boundary dispositions: a `checked` row identifies its proof step; a
+`not_applicable` row gives the mathematical reason for that statement. Preserve
+the exact claim of every cited `[F#]`, `[A#]`, or `[L#]` target.
 
-- `research/{{run}}-batch-<i>.pages.json` — the spliced scaffold
-- `research/{{run}}-batch-<i>.notes.md` — your source ledger and rationales
-- `research/{{run}}-batch-<i>.coverage.json` — the harvest
-- `research/{{run}}-batch-<i>.proof-contracts.json` — extend it as you author
-- group Alpha's step-3 review and re-check, for the findings you resolved
-- `research/{{run}}-beta-<i>.task.md` — your batch's pages and design section;
-  what binds the scaffold binds the authoring
-
-## Before you write a proof
-
-Prepare the proof-obligation map the contract requires: every substantive
-subclaim assigned to an exact dependency or an inline derivation, and a
-boundary pass over empty, zero, one, degenerate, endpoint, nonempty-choice and
-both iff-directions.
-
-**Write the disposition you actually determined.** A templated
-`not_applicable` is not a disposition — `--strict` checks only that the eight
-axes are present, and rows of that shape have each hidden a fatal defect on
-more than one run. A `checked` row cites the exact step that discharges the
-case and says what that step establishes for it; a `not_applicable` row says
-why that axis has no content for *this* statement, about the mathematics,
-never a restatement of the title.
-
-## Citation fidelity
-
-In every `[F#]`, `[A#]` or `[L#]`, state the cited proposition itself — quoted
-exactly when practical, else the smallest faithful shortening. No changed
-domain, quantifier, hypothesis, direction or conclusion; no invented converse.
-A clause's opening words are not a citation. If a dependency looks
-insufficient, add inline steps, reconsider the strategy, or reconsider whether
-the claim is true as stated — never widen the restatement to cover the gap.
-
-## Gates you must leave green for your batch
-
-```
-node tools/tsx-run.mjs tools/precheck.mts items/<your ids>
-node tools/validate-plan.mjs research/plan-spec.json
-node tools/content-policy.mjs research/{{run}}-batch-<i>.pages.json
-```
-
-On a precheck REPAIR, adopt the printed canonical stratification into the file
-and re-run until clean.
-
-## Report
-
-Append `## Step-5 authoring` to `research/{{run}}-batch-<i>.notes.md`: items
-authored, provenance per component with rationale, any claim you narrowed or
-dropped and why, and any blocker. State plainly anything you could not do.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Run precheck on the batch items, `validate-plan`, and item-scoped
+`content-policy`; apply any canonical precheck repair before rerunning. Append
+`## Step-5 authoring` to the batch notes with authored ids, provenance rationale,
+narrowed/dropped claims, and blockers.

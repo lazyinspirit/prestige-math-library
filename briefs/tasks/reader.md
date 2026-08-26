@@ -1,22 +1,13 @@
-# Step 6a reader task
+# Step 6a — reader
 
-Open `research/<run>-batch-<i>.pages.json`, every listed item, every assigned
-page file, and every cited dependency needed to verify the mathematics. Audit
-all A/B page pairs; a batch may contain more than one pair.
+Read the assigned batch manifest, every assigned A/B page and item, and each
+dependency needed to verify the current mathematics. You may repair an
+in-flight assigned item or A-page prose; do not modify another batch, the plan,
+a B-page body, or published content.
 
-Write the evidence report to `<output>`. It must list:
-
-- every edited item or page and why it changed;
-- every confirmed defect, including repaired defects;
-- exact item and page counts opened, plus any blocker;
-- a verdict for every assigned page.
-
-Return `research/<run>-reader-findings-<i>.json` under
-`briefs/schemas/reader-findings.json`. Put only findings you could not edit in
-that JSON. A repaired defect belongs only in the markdown and the disk diff.
-Return an empty `findings` array when nothing remains uneditable.
-Set the JSON `batch` field to the bare `<i>` batch id.
-
-Never edit another batch, `research/plan-spec.json`, or published content.
-Never delete an in-flight item; leave it present and report a proposed
-withdrawal for Alpha. Never judge or stamp.
+Write the named reader report with opened item/page inventory, every edit,
+uneditable defect, per-page verdict, and blocker. Return only uneditable
+findings in the schema-conforming `research/<run>-reader-findings-<i>.json`:
+use the bare batch id, exact location, defect class, evidence, severity, and
+published consumer where required. A repaired defect belongs in the report and
+disk diff, not the JSON findings array.

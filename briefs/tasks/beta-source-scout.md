@@ -1,51 +1,13 @@
-> **Source-scouting round.** Your batch number is in the "This dispatch"
-> section appended below; substitute it wherever `<i>` appears.
+> The dispatch block supplies batch `<i>`.
 
-# Batch `<i>` of run `{{run}}` — scout a live full-text URL
+# Source scouting — batch `<i>`, `{{run}}`
 
-One or more of your batch's cited sources cannot be fetched as full text —
-dead with no usable archive copy, behind a bot wall, or an abstract/partial
-capture. Find which, mechanically:
+Use `source-fetch-check` on this batch's coverage to identify the failed source
+records. Work only in its coverage and notes.
 
-```
-node tools/source-fetch-check.mjs --coverage research/{{run}}-batch-<i>.coverage.json
-```
+Prefer a verified alternate URL for the same text, then a complete archive of
+that text. A different treatment requires reharvesting its actual range and
+rewriting its contents rows and locators; retain `original_url` provenance.
 
-Every `ERROR fetch-check-*` line naming a page of YOUR batch is yours.
-
-A liveness sweep and a full-text check answer different questions, and the gap
-between them is where this stage lives: a two-page Wayback capture of a
-hundred-page lecture set answers 200 and is not the document your locators
-point into.
-
-## The scouting order (`briefs/beta-scaffold.md` §"URL discipline")
-
-1. **An alternate live URL for the SAME source** — the author's current page,
-   the publisher's open copy, arXiv, a university mirror. Same edition, same
-   text, so your locators and harvest stay true.
-2. **A different, complete archive capture** of the same document. Check other
-   snapshot dates and host variants; a partial capture does not mean no full
-   capture exists.
-3. If the same text genuinely cannot be found: **a different source is a
-   re-harvest.** Replace the source, re-read the range your items need,
-   rewrite that source's `contents` rows faithfully, and say so in your notes
-   — never leave `contents` rows attributed to a document you did not verify
-   carries them.
-
-After each change, stamp and verify:
-
-```
-node tools/source-fetch-check.mjs --coverage research/{{run}}-batch-<i>.coverage.json --stamp
-```
-
-Exit only when that command exits 0 for your batch, or record exactly what you
-could not find and why in your notes — a named dead end is a valid outcome; a
-silent one is not.
-
-## Scope
-
-`research/{{run}}-batch-<i>.coverage.json` and `.notes.md` only. Keep
-`original_url` provenance when you replace a URL. Not `plan-spec.json`, not
-items, not other batches.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Run `source-fetch-check --stamp` after each change. Record the failed source,
+search result, replacement or remaining blocker in the batch notes.

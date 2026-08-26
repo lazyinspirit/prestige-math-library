@@ -1,83 +1,16 @@
-> **Re-harvest round.** Your batch number is in the "This dispatch" section
-> appended below; substitute it wherever `<i>` appears.
+> The dispatch block supplies batch `<i>`.
 
-# Batch `<i>` of run `{{run}}` — a source is gone; its results are not
+# Reharvest — batch `<i>`, `{{run}}`
 
-One of your batch's sources cannot be opened by a reader and has no archive
-copy. **Results you authored were backed by it and by nothing else.** They are
-named for you, mechanically, in
+Read `research/{{run}}-reharvest-plan.json` and use its `work[]` rows belonging
+to this batch. Confirm that the named source has no usable same-document URL or
+complete archive before choosing a different treatment.
 
-**`research/{{run}}-reharvest-plan.json`** — read `work[]`. Each entry gives
-the `page`, the `item` id that lost its backing, and the `dead` source: its
-URL, title, kind, locator, and the exact harvested result line that item came
-from. Reproduce the list any time with:
+For each orphaned result, replace only the batch coverage and notes with a
+source that actually carries the result, its verified locator, and its own
+faithful contents rows. Preserve original URL provenance. If no replacement is
+found, record the search and leave the result in scope for later adjudication.
 
-```
-node tools/source-backing.mjs --coverage research/{{run}}-batch-<i>.coverage.json \
-  --liveness research/{{run}}-url-liveness.json
-```
-
-## The one rule
-
-**A result that had source backing may not end up with none, and deleting the
-result is never the remedy.** Removing the dead source row also removes its
-`included` rows, which silently takes real mathematics off the page while every
-other gate stays green — they all validate what is present. That is the failure
-this stage exists to prevent, so it is worth saying plainly: if you clear this
-gate by dropping an item, you have caused the defect, not fixed it.
-
-## What to do, in order
-
-1. **Confirm the source is really gone.** `beta-source-scout.task.md`'s order
-   comes first and is cheaper: an alternate live URL for the *same* document,
-   then a different complete archive capture. Only when both genuinely fail is
-   this a re-harvest. Say in your notes which you tried.
-
-2. **Find a different treatment that carries the same result.** For each
-   `work[]` entry you have the exact statement — an ellipse perimeter as a
-   second-kind elliptic integral, a well-definedness lemma, a counterexample —
-   not just a page number. Search reputable sources for a treatment that
-   actually contains it: textbook, monograph, or a full lecture-note set with a
-   harvestable table of contents. One source may cover several orphaned
-   results; prefer that to one source per result.
-
-3. **Re-read the range and rewrite the rows faithfully.** The new source's
-   `contents` rows must describe *that* document's own headings over the range
-   you actually read, with its own locator. Never re-attribute the old rows by
-   swapping the URL underneath them — the old row names the old book's
-   Example 7.1.7, and the new book numbers its results differently. A row
-   attributed to a document you have not verified carries it is worse than a
-   dead link, because it reads as verified.
-
-4. **Keep the item's mathematics fixed, and adjust it only if the new source
-   genuinely states something different.** If the replacement treats the result
-   under different hypotheses, that is a real finding: say so in your notes and
-   narrow the item honestly rather than pretending the sources agree.
-
-5. **If no replacement exists at all** — a genuinely obscure result no other
-   treatment carries — do not delete it. Record the search you ran and what you
-   could not find, and leave it for Alpha at step 3. A named dead end is a
-   valid outcome; a silent one is not.
-
-## Gates you must leave green for your batch
-
-```
-node tools/source-backing.mjs --coverage research/{{run}}-batch-<i>.coverage.json --liveness research/{{run}}-url-liveness.json
-node tools/coverage-checklist.mjs research/{{run}}-batch-<i>.coverage.json --require-destination
-node tools/url-sweep.mjs --coverage research/{{run}}-batch-<i>.coverage.json --recover --fail-on-dead
-node tools/source-fetch-check.mjs --coverage research/{{run}}-batch-<i>.coverage.json --stamp
-```
-
-## Report
-
-Append `## Re-harvest round` to `research/{{run}}-batch-<i>.notes.md`: the dead
-source and what you tried before replacing it, the replacement and why it
-carries each orphaned result, the exact range you read, and any item whose
-statement moved as a result.
-
-## Scope
-
-`research/{{run}}-batch-<i>.coverage.json` and `.notes.md`. Keep `original_url`
-provenance. Touch item text only where step 4 forces it, and say so.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Run source-backing, destination-required coverage, URL recovery/liveness, and
+fetch stamping for the batch. Append the dead source, replacement/search,
+affected result, and any changed claim constraint to the batch notes.

@@ -1,45 +1,15 @@
-> **Contract-rework round.** The batch you own is in the "This dispatch"
-> section appended below; substitute it wherever `<i>` appears.
+> The dispatch block supplies batch `<i>`.
 
-# Contract-worksheet rework, batch `<i>`, run `{{run}}`
+# Contract worksheet rework — batch `<i>`, `{{run}}`
 
-A defect-ledger row records that this batch's proof-contract boundary
-worksheets were **generated rather than written** — rows of the shape
-`"<title>: <stock clause for this axis> for <statement>"`, with
-`not_applicable` reasons drawn from a small fixed set of phrasings. Read the
-ledger row first (`research/defect-ledger.jsonl`, this run): it names the
-affected items and the count.
+Read the assigned open contract-quality ledger row and each affected item. Edit
+only `research/{{run}}-batch-<i>.proof-contracts.json`.
 
-A worksheet that restates the title is not a disposition of anything, and rows
-of this shape have hidden real fatal defects on more than one run.
+Rewrite each affected boundary disposition from the current proof: a `checked`
+row names the exact discharging step and its case; a `not_applicable` row gives
+an item-specific mathematical reason. Leave a discovered proof failure visible
+and report it rather than changing item text.
 
-**Your job: rewrite the affected boundary rows as REAL dispositions, with the
-sources to hand.** For each affected item:
-
-1. Open the item and its proof. For each of the eight boundary axes (empty,
-   zero, one, degenerate, endpoints, nonempty-choice, iff-forward,
-   iff-reverse), write what the item's own text actually does with that case:
-   a `checked` row cites the exact step that discharges it and states what
-   that step establishes for the case; a `not_applicable` row says why THAT
-   axis has no content for THIS statement — about the mathematics, never a
-   restatement of the title.
-2. **Touch ONLY `research/{{run}}-batch-<i>.proof-contracts.json`** — never
-   item text, page files, or any other batch's contracts. If the items are
-   already frozen and judged, their contracts are not.
-3. Where writing an honest row reveals the PROOF actually fails a case, do not
-   paper over it: leave the row stating the gap and record the finding at the
-   end of your report — that is an escalation, not yours to repair here.
-4. Re-run, from the repo root, until all pass:
-
-```
-node tools/merge-proof-contracts.mjs --level {{run}} \
-  research/{{run}}-proof-contracts.json research/{{run}}-batch-*.proof-contracts.json
-node tools/boundary-audit.mjs research/{{run}}-batch-*.proof-contracts.json --fail-on-contradicted --fail-on-template
-node tools/proof-contract.mjs research/{{run}}-proof-contracts.json --strict
-```
-
-Do NOT close the ledger row — the certifying Alpha does that after reading
-your work. Your report lists every item you rewrote and every row you changed
-from `not_applicable` to `checked` or back, with one sentence each.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Run the contract merge, `boundary-audit --fail-on-contradicted
+--fail-on-template`, and `proof-contract --strict`. Report every rewritten row
+and any unresolved proof gap; the certifying Alpha closes the ledger row.

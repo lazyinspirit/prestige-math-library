@@ -1,35 +1,16 @@
-> **Generic group task.** Your batches and group label are in the appended
-> `# This dispatch` block. Work from disk, not from Beta summaries.
+> The dispatch block supplies the group label and batches.
 
-# Group Alpha — Step 3 recheck before splice
+# Step 3 — scaffold recheck
 
-Re-open your Step 3 scaffold report and each assigned batch’s `## Step-3 fix
-pass` notes. For every finding, verify the claimed result in the current
-scaffold, coverage, plan, and sources. Adjudicate pushback with evidence.
+Read `research/{{run}}-alpha-<group>-step3-scaffold-review.md` and each
+assigned batch's `## Step-3 fix pass` notes. Verify every reported fix or
+pushback against the current manifest, coverage, and plan.
 
-Refresh the exact decline receipts because a Beta repair may have changed a
-reason, destination, page closure, or disposition:
+Refresh and check `research/{{run}}-alpha-<your-group>-scope-decisions.json`
+with `tools/scope-decisions.mjs`. Resolve any newly pending row from current
+evidence before the check.
 
-```sh
-node tools/scope-decisions.mjs refresh --run {{run}} --group <your-group>
-```
-
-Resolve every `pending` row in
-`research/{{run}}-alpha-<your-group>-scope-decisions.json` as `stands` or
-`owner-decision`, with concrete evidence. If you make another coverage or plan
-repair, refresh again before filling the receipt. Finish with:
-
-```sh
-node tools/scope-decisions.mjs check --run {{run}} --group <your-group>
-```
-
-Write `research/{{run}}-alpha-<your-group>-recheck.md`, one line per finding:
-`confirmed`, `not applied`, `pushback accepted`, or `pushback rejected`, with
-the evidence and any remaining block.
-
-Also update `research/{{run}}-alpha-<your-group>-step3-verdicts.json`. Flip a
-pair to `sufficient` only after verifying its fixes on disk; keep an unresolved
-pair `insufficient` with a non-empty `missing` list. The machine gates the
-verdict file and the exact decline receipts, not the prose conclusion.
-
-**No permission prompts of any kind**, including inside an `&&` chain.
+Write `research/{{run}}-alpha-<your-group>-recheck.md` with one disposition per
+finding. Update `research/{{run}}-alpha-<your-group>-step3-verdicts.json` only
+after verifying the current bytes: `sufficient` for a closed pair, or
+`insufficient` with a nonempty missing list for one that remains blocked.
