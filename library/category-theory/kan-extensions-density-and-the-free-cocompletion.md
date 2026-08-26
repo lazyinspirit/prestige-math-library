@@ -1,7 +1,7 @@
 ---
 page: kan-extensions-density-and-the-free-cocompletion
 title: "Kan Extensions Density and the Free Cocompletion"
-status: draft
+status: published
 items: [def-left-and-right-kan-extension,
         rem-the-left-right-naming-clash,
         thm-kan-extensions-are-unique-up-to-unique-isomorphism,

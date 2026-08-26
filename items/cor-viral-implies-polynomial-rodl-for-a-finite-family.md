@@ -2,7 +2,7 @@
 id: cor-viral-implies-polynomial-rodl-for-a-finite-family
 kind: corollary
 title: "The viral property implies the polynomial Rödl property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

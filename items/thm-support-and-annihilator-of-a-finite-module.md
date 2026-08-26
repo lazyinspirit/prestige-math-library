@@ -2,7 +2,7 @@
 id: thm-support-and-annihilator-of-a-finite-module
 kind: theorem
 title: "For a finite module, support is the set of primes containing the annihilator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

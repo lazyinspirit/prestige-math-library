@@ -2,7 +2,7 @@
 id: ex-a-family-containing-k-one-is-vacuously-viral
 kind: example
 title: "A family containing $K_1$ is viral for vacuous reasons"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

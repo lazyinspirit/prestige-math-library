@@ -2,7 +2,7 @@
 id: def-descent-set-major-index-excedance-and-fixed-point
 kind: definition
 title: "Descent sets, major index, excedances and fixed points of a permutation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

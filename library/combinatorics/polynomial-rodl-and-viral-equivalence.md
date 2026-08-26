@@ -1,7 +1,7 @@
 ---
 page: polynomial-rodl-and-viral-equivalence
 title: "Polynomial Rödl, Virality and Erdős–Hajnal Equivalence"
-status: draft
+status: published
 items: [def-polynomial-rodl-property-for-a-finite-family,
         def-viral-property-for-a-finite-family,
         def-t-k-homogeneous-property,

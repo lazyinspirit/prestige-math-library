@@ -2,7 +2,7 @@
 id: thm-support-under-localisation
 kind: theorem
 title: "Support under localisation is restriction to primes disjoint from the denominator set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

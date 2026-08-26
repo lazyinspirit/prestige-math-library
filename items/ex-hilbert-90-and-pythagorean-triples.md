@@ -2,7 +2,7 @@
 id: ex-hilbert-90-and-pythagorean-triples
 kind: example
 title: "Hilbert 90 for $\\mathbb Q(i)/\\mathbb Q$ recovers the rational parametrization of the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-hilberts-theorem-90]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset
 kind: corollary
 title: "Every subset of $\\mathbb{R}$ of positive Lebesgue outer measure contains a nonmeasurable subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

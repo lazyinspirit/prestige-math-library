@@ -2,7 +2,7 @@
 id: def-vitali-set-on-the-unit-interval
 kind: definition
 title: "Vitali set on $[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

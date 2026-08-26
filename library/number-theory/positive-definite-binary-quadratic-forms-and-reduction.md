@@ -1,7 +1,7 @@
 ---
 page: positive-definite-binary-quadratic-forms-and-reduction
 title: "Positive Definite Binary Quadratic Forms and Reduction"
-status: draft
+status: published
 items: [def-binary-quadratic-form-over-integers,
         def-integer-represented-by-binary-quadratic-form,
         def-primitive-binary-quadratic-form,

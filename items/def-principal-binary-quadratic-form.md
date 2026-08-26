@@ -2,7 +2,7 @@
 id: def-principal-binary-quadratic-form
 kind: definition
 title: "The principal binary quadratic form of a discriminant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

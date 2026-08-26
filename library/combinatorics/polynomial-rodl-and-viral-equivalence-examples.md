@@ -1,7 +1,7 @@
 ---
 page: polynomial-rodl-and-viral-equivalence-examples
 title: "Polynomial Rödl, Virality and Erdős–Hajnal Equivalence — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-singleton-family-p-three-is-viral,
            ex-a-family-containing-k-one-is-vacuously-viral,

@@ -2,7 +2,7 @@
 id: cor-a-continuous-preimage-of-a-lebesgue-measurable-set-can-be-nonmeasurable
 kind: corollary
 title: "A continuous preimage of a Lebesgue measurable subset of $\\mathbb{R}$ can be nonmeasurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-quartic-solved-by-its-resolvent-cubic
 kind: example
 title: "A quartic solved through its resolvent cubic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-resolvent-cubic-of-a-monic-quartic, prop-resolvent-cubic-formula-and-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-kummer-extension
 kind: definition
 title: "Kummer extensions from adjoining $n$-th roots over a base field containing $\\mu_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,8 @@ provenance:
 deps: [def-roots-of-unity-in-a-field, thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer]
 aliases: []
 landmark: false
+verification:
+  audited: 2026-08-26
 sources:
   scraped: []
   references:

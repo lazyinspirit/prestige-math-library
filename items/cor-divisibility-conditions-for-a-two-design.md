@@ -2,7 +2,7 @@
 id: cor-divisibility-conditions-for-a-two-design
 kind: corollary
 title: "The standard divisibility conditions for a $2$-design"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-counting-identities-for-a-two-design]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

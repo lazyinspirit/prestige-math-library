@@ -2,7 +2,7 @@
 id: cor-localisation-commutes-with-finite-intersections-of-submodules
 kind: corollary
 title: "Localisation commutes with finite intersections of submodules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-localisation-commutes-with-kernels-images-and-cokernels, thm-localisa
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

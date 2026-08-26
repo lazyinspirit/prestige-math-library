@@ -2,7 +2,7 @@
 id: cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six
 kind: corollary
 title: "A Steiner triple system can exist only when $v\\equiv1$ or $3\\pmod6$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-steiner-systems-and-steiner-triple-systems,
        def-congruence-modulo-an-integer]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

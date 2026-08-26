@@ -2,7 +2,7 @@
 id: ex-cardano-from-the-lagrange-resolvent
 kind: example
 title: "Cardano's formula for $x^3-3x-1$ from the Lagrange resolvent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lagrange-resolvent, thm-cyclic-degree-n-extensions-with-roots-of-unit
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

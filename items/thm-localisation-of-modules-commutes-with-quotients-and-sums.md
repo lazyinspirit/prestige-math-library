@@ -2,7 +2,7 @@
 id: thm-localisation-of-modules-commutes-with-quotients-and-sums
 kind: theorem
 title: "Localisation commutes with quotient modules and arbitrary direct sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisation-of-modules-is-tensor-product, thm-right-exactness-of-ten
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-homogeneous-dimension-of-a-finitely-generated-nilpotent-group
 kind: definition
 title: "The homogeneous dimension of a finitely generated nilpotent group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: [rem-bass-guivarch-growth-degree-formula]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

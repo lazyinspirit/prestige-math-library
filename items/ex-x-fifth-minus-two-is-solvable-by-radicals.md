@@ -2,7 +2,7 @@
 id: ex-x-fifth-minus-two-is-solvable-by-radicals
 kind: example
 title: "$x^5-2$ over $\\mathbb Q$ is solvable by radicals although it is a quintic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-solvable-by-radicals, def-polynomials-that-split-and-splitting-fields
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

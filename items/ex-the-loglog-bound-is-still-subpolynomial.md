@@ -2,7 +2,7 @@
 id: ex-the-loglog-bound-is-still-subpolynomial
 kind: example
 title: "A lower bound of size $2^{c\\sqrt{\\log_2 n\\,\\log_2\\log_2 n}}$ is still subpolynomial in $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-logarithm-to-a-base]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

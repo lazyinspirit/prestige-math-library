@@ -2,7 +2,7 @@
 id: cex-same-discriminant-does-not-imply-proper-equivalence
 kind: counterexample
 title: "Forms of discriminant $-24$ need not be properly equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

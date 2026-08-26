@@ -2,7 +2,7 @@
 id: cor-symmetric-group-has-factorial-cardinality-again
 kind: corollary
 title: "The Lehmer code gives $|S_n|=n!$ again"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

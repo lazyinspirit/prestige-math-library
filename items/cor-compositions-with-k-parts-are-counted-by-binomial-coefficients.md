@@ -2,7 +2,7 @@
 id: cor-compositions-with-k-parts-are-counted-by-binomial-coefficients
 kind: corollary
 title: "Compositions of $n$ into $k$ positive parts are counted by $\\binom{n-1}{k-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

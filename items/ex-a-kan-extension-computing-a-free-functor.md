@@ -2,7 +2,7 @@
 id: ex-a-kan-extension-computing-a-free-functor
 kind: example
 title: "A Kan extension computing the free-group functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

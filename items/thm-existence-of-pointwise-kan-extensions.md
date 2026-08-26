@@ -2,7 +2,7 @@
 id: thm-existence-of-pointwise-kan-extensions
 kind: theorem
 title: "Pointwise Kan extensions exist under smallness and completeness hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

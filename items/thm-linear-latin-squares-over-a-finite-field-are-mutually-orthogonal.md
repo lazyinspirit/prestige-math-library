@@ -2,7 +2,7 @@
 id: thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal
 kind: theorem
 title: "The linear Latin squares $L_a(i,j)=ai+j$ over $\\mathbb F_q$ are pairwise orthogonal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-latin-square, def-orthogonal-latin-squares-and-complete-families]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

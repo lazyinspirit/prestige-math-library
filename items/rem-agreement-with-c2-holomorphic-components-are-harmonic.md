@@ -2,7 +2,7 @@
 id: rem-agreement-with-c2-holomorphic-components-are-harmonic
 kind: remark
 title: "Agreement with the earlier C^2 holomorphic-components theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-c2-holomorphic-components-are-harmonic]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

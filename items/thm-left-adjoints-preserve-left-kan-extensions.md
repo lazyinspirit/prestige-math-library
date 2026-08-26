@@ -2,7 +2,7 @@
 id: thm-left-adjoints-preserve-left-kan-extensions
 kind: theorem
 title: "Left adjoints preserve left Kan extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

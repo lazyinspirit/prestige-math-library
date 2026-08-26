@@ -2,7 +2,7 @@
 id: cex-two-homogeneous-need-not-be-two-transitive
 kind: counterexample
 title: "The square-affine group of F_7 is 2-homogeneous but not 2-transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

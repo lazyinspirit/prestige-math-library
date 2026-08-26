@@ -2,7 +2,7 @@
 id: cex-an-unbounded-harmonic-function-need-not-extend-across-a-puncture
 kind: counterexample
 title: "Re(1/z) is harmonic on a punctured disc and does not extend harmonically across 0"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

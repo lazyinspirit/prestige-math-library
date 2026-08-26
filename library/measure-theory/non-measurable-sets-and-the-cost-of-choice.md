@@ -1,7 +1,7 @@
 ---
 page: non-measurable-sets-and-the-cost-of-choice
 title: "Non Measurable Sets and the Cost of Choice"
-status: draft
+status: published
 items: [def-lebesgue-inner-measure-on-r,
         thm-bounded-subsets-of-r-are-lebesgue-measurable-exactly-when-inner-and-outer-measures-agree,
         def-vitali-set-on-the-unit-interval,

@@ -2,7 +2,7 @@
 id: def-cyclic-extension
 kind: definition
 title: "A cyclic extension is a finite Galois extension with cyclic Galois group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-finite-galois-extension-and-galois-group]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

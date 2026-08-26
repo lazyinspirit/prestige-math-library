@@ -2,7 +2,7 @@
 id: ex-the-incidence-matrix-of-the-fano-plane
 kind: example
 title: "The Fano plane has incidence matrix $N$ with $NN^{\\mathsf T}=2I+J$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [ex-skolems-construction-gives-the-fano-plane,
        thm-fishers-inequality-for-two-designs]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

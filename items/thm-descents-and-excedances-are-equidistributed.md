@@ -2,7 +2,7 @@
 id: thm-descents-and-excedances-are-equidistributed
 kind: theorem
 title: "Descents and excedances are equidistributed on $S_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

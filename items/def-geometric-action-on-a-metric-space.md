@@ -2,7 +2,7 @@
 id: def-geometric-action-on-a-metric-space
 kind: definition
 title: "Geometric actions on a metric space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

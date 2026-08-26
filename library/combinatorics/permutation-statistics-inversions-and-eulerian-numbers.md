@@ -1,7 +1,7 @@
 ---
 page: permutation-statistics-inversions-and-eulerian-numbers
 title: "Permutation Statistics, Inversions and Eulerian Numbers"
-status: draft
+status: published
 items: [rem-permutation-statistics-conventions,
         def-descent-set-major-index-excedance-and-fixed-point,
         def-eulerian-number-and-eulerian-polynomial,

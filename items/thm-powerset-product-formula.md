@@ -2,7 +2,7 @@
 id: thm-powerset-product-formula
 kind: theorem
 title: "If $\\mathcal{A}$ has no size-zero objects then $\\operatorname{PSET}(\\mathcal{A})$ has generating function $\\prod_{n\\ge 1}(1+x^n)^{a_n}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

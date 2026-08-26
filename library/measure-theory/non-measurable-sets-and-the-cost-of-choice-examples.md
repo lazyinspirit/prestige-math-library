@@ -1,7 +1,7 @@
 ---
 page: non-measurable-sets-and-the-cost-of-choice-examples
 title: "Non Measurable Sets and the Cost of Choice: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-cosets-of-q-in-r-and-the-vitali-translates-on-unit-interval,
            ex-the-homeomorphism-x-plus-cx-carries-the-cantor-set-to-a-measure-one-compact-set,

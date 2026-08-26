@@ -1,7 +1,7 @@
 ---
 page: solvability-by-radicals-and-kummer-theory
 title: "Solvability by Radicals and Kummer Theory"
-status: draft
+status: published
 items: [def-field-norm-and-trace, thm-field-norm-and-trace-by-embeddings, thm-basic-laws-for-field-norm-and-trace, thm-field-norm-and-trace-agree-with-operator-determinant-and-trace, def-trace-form-of-a-finite-extension, thm-trace-form-is-nondegenerate-iff-separable, cor-trace-is-surjective-for-finite-separable-extensions, def-cyclic-extension, thm-hilberts-theorem-90, thm-additive-hilberts-theorem-90, def-lagrange-resolvent, thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer, thm-artin-schreier-characterization-of-cyclic-degree-p-extensions, def-kummer-extension, thm-kummer-pairing-is-perfect, cor-degree-of-f-adjoin-an-nth-root-by-coset-order, thm-kummer-correspondence, def-radical-extension, def-solvable-by-radicals, lem-normal-closure-of-a-radical-extension-is-radical, lem-adjoining-roots-of-unity-to-a-galois-extension-adds-an-abelian-kernel, thm-solvable-by-radicals-implies-a-solvable-galois-group, thm-solvable-galois-group-implies-solvable-by-radicals, lem-symmetric-groups-up-to-four-are-solvable, cor-polynomials-of-degree-at-most-four-are-solvable-by-radicals, thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p, thm-general-polynomial-of-degree-n-has-galois-group-s-n, cor-abel-ruffini-for-the-general-polynomial]
 examples: []
 ---

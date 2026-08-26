@@ -2,7 +2,7 @@
 id: thm-identity-principle-for-plane-harmonic-functions
 kind: theorem
 title: "A plane harmonic function that vanishes on a nonempty open set vanishes everywhere on the domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

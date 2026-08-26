@@ -2,7 +2,7 @@
 id: cex-a-product-without-unique-factorisation-does-not-satisfy-the-product-rule
 kind: counterexample
 title: "A product class without unique factorisation does not have generating function $A(x)B(x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

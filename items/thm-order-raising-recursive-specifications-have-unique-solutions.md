@@ -2,7 +2,7 @@
 id: thm-order-raising-recursive-specifications-have-unique-solutions
 kind: theorem
 title: "An order-raising recursive specification has a unique solution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

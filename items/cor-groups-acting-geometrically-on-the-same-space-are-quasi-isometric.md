@@ -2,7 +2,7 @@
 id: cor-groups-acting-geometrically-on-the-same-space-are-quasi-isometric
 kind: corollary
 title: "Groups acting geometrically on the same space are quasi-isometric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

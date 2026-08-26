@@ -1,7 +1,7 @@
 ---
 page: classical-and-loglog-erdos-hajnal-bounds-examples
 title: "Classical and Log-Log Erdős–Hajnal Bounds — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-choosing-x-for-the-classical-erdos-hajnal-bound,
            ex-choosing-x-for-the-loglog-erdos-hajnal-bound,

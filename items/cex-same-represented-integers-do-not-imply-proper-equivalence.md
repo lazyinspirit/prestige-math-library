@@ -2,7 +2,7 @@
 id: cex-same-represented-integers-do-not-imply-proper-equivalence
 kind: counterexample
 title: "Distinct reduced forms can represent the same integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

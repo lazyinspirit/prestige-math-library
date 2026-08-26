@@ -2,7 +2,7 @@
 id: thm-bose-construction-produces-a-steiner-triple-system
 kind: theorem
 title: "Bose's construction gives a Steiner triple system of order $6m+3$ for $m\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-steiner-systems-and-steiner-triple-systems,
        thm-standard-representatives-modulo-n]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

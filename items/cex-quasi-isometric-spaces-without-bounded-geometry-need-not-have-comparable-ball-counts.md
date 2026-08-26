@@ -2,7 +2,7 @@
 id: cex-quasi-isometric-spaces-without-bounded-geometry-need-not-have-comparable-ball-counts
 kind: counterexample
 title: "Quasi-isometry without bounded geometry need not preserve local ball counts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

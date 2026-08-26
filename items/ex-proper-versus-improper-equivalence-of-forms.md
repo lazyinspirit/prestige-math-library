@@ -2,7 +2,7 @@
 id: ex-proper-versus-improper-equivalence-of-forms
 kind: example
 title: "Improper equivalence can merge two distinct proper classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

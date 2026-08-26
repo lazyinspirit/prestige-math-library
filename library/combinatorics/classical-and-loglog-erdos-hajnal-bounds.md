@@ -1,7 +1,7 @@
 ---
 page: classical-and-loglog-erdos-hajnal-bounds
 title: "Classical and Log-Log Erdős–Hajnal Bounds"
-status: draft
+status: published
 items: [rem-fox-sudakov-quantitative-density-theorem,
         thm-classical-erdos-hajnal-bound,
         rem-loglog-quantitative-density-theorem,

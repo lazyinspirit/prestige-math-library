@@ -2,7 +2,7 @@
 id: cor-eulerian-numbers-are-symmetric
 kind: corollary
 title: "The Eulerian numbers satisfy $A(n,k)=A(n,n-1-k)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

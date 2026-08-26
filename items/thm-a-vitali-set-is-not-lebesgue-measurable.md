@@ -2,7 +2,7 @@
 id: thm-a-vitali-set-is-not-lebesgue-measurable
 kind: theorem
 title: "Assuming the Axiom of Choice, a Vitali set is not Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

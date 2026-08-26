@@ -2,7 +2,7 @@
 id: rem-permutation-statistics-conventions
 kind: remark
 title: "This page uses the published inversion number and the shifted Eulerian indexing $A(n,k)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

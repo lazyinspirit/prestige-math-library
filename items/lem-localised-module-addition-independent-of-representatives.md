@@ -2,7 +2,7 @@
 id: lem-localised-module-addition-independent-of-representatives
 kind: lemma
 title: "Addition of localised module fractions is independent of representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-localisation-of-a-module, lem-localised-module-fraction-equivalence-i
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-fox-sudakov-quantitative-density-theorem
 kind: remark
 title: "Fox–Sudakov: a quantitative density form of Rödl's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,10 @@ external_dependency:
   local_proof_attempt: "A local proof would require rebuilding the quantitative density theorem from Induced subgraph density. I, which lies outside this page's prerequisite closure."
   necessity: "The next theorem proves the classical Erdos-Hajnal lower bound from exactly this quantitative input and no stronger one."
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

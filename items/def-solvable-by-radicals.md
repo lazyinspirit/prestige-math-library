@@ -2,7 +2,7 @@
 id: def-solvable-by-radicals
 kind: definition
 title: "A polynomial is solvable by radicals when its splitting field lies in a radical extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-radical-extension, def-polynomials-that-split-and-splitting-fields]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

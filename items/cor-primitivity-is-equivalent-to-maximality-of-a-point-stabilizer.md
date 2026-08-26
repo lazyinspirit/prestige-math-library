@@ -2,7 +2,7 @@
 id: cor-primitivity-is-equivalent-to-maximality-of-a-point-stabilizer
 kind: corollary
 title: "A transitive action on more than one point is primitive exactly when a point stabilizer is maximal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-norm-and-trace-in-a-quadratic-extension
 kind: example
 title: "For $\\mathbb Q(\\sqrt d)/\\mathbb Q$, the embedding formulas match the determinant and trace of multiplication"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-field-norm-and-trace-by-embeddings, thm-field-norm-and-trace-agree-wi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

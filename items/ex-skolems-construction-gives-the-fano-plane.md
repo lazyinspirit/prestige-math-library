@@ -2,7 +2,7 @@
 id: ex-skolems-construction-gives-the-fano-plane
 kind: example
 title: "The seven translates of $\\{0,1,3\\}$ form the Fano plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-steiner-systems-and-steiner-triple-systems, def-finite-projective-plane]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-continuous-images-of-lebesgue-measurable-subsets-of-r-are-lebesgue-measurable
 kind: false-statement
 title: "FALSE: every continuous image of a Lebesgue measurable subset of $\\mathbb{R}$ is Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ proof_strategy: direct
 deps: [cor-a-continuous-image-of-a-lebesgue-measurable-set-can-be-nonmeasurable]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-homeomorphism-x-plus-cx-carries-the-cantor-set-to-a-measure-one-compact-set
 kind: example
 title: "The map $x \\mapsto x+c(x)$ carries the Cantor set onto a compact set of Lebesgue measure $1$ inside $[0,2]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero
        thm-cantor-function-properties]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

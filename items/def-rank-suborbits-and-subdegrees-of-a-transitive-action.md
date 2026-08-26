@@ -2,7 +2,7 @@
 id: def-rank-suborbits-and-subdegrees-of-a-transitive-action
 kind: definition
 title: "Rank, suborbits, and subdegrees of a transitive action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-orbit-and-stabilizer]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

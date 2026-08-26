@@ -2,7 +2,7 @@
 id: ex-blocks-in-a-regular-cyclic-action
 kind: example
 title: "Blocks in a regular cyclic action are cosets of subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

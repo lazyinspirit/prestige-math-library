@@ -2,7 +2,7 @@
 id: ex-a-harmonic-conjugate-of-x-squared-minus-y-squared
 kind: example
 title: "2xy is a harmonic conjugate of x^2-y^2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

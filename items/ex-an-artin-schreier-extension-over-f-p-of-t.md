@@ -2,7 +2,7 @@
 id: ex-an-artin-schreier-extension-over-f-p-of-t
 kind: example
 title: "Over $\\mathbb F_p(t)$, the polynomial $x^p-x-t$ gives a cyclic Artin-Schreier extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-artin-schreier-characterization-of-cyclic-degree-p-extensions, cor-ra
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

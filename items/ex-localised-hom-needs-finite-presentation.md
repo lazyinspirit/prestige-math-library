@@ -2,7 +2,7 @@
 id: ex-localised-hom-needs-finite-presentation
 kind: example
 title: "Localised Hom can fail without finite presentation of the source"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisation-of-hom-for-finitely-presented-modules, thm-localisation-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

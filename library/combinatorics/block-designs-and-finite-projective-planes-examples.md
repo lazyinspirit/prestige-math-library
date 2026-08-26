@@ -1,7 +1,7 @@
 ---
 page: block-designs-and-finite-projective-planes-examples
 title: "Block Designs and Finite Projective Planes — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-skolems-construction-gives-the-fano-plane,
            ex-the-incidence-matrix-of-the-fano-plane,

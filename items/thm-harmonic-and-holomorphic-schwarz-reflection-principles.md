@@ -2,7 +2,7 @@
 id: thm-harmonic-and-holomorphic-schwarz-reflection-principles
 kind: theorem
 title: "Harmonic and holomorphic Schwarz reflection across the real axis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

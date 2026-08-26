@@ -2,7 +2,7 @@
 id: ex-norm-and-trace-in-a-finite-field-extension
 kind: example
 title: "In $\\mathbb F_{q^n}/\\mathbb F_q$, norm and trace are the Frobenius product and sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-field-norm-and-trace-by-embeddings, thm-extensions-of-finite-fields-a
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-yoneda-embedding-preserves-colimits
 kind: false-statement
 title: "FALSE: the Yoneda embedding preserves colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

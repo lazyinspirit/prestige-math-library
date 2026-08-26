@@ -2,7 +2,7 @@
 id: ex-a-proper-isometric-action-that-is-not-cobounded
 kind: example
 title: "Horizontal translations of Z on the Euclidean plane are proper but not cobounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

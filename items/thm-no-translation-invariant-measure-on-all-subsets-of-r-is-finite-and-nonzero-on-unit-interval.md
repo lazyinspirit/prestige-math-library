@@ -2,7 +2,7 @@
 id: thm-no-translation-invariant-measure-on-all-subsets-of-r-is-finite-and-nonzero-on-unit-interval
 kind: theorem
 title: "Assuming the Axiom of Choice, no translation-invariant measure on $\\mathcal{P}(\\mathbb{R})$ is both finite and nonzero on $[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

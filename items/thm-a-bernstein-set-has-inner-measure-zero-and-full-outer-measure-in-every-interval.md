@@ -2,7 +2,7 @@
 id: thm-a-bernstein-set-has-inner-measure-zero-and-full-outer-measure-in-every-interval
 kind: theorem
 title: "A Bernstein set has inner measure $0$, and in every nondegenerate interval its intersection has full outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

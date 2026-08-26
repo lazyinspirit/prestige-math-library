@@ -2,7 +2,7 @@
 id: def-trace-form-of-a-finite-extension
 kind: definition
 title: "The trace form $(x,y)\\mapsto \\operatorname{Tr}_{K/F}(xy)$ of a finite extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-field-norm-and-trace, def-bilinear-symmetric-skew-and-alternating-forms]
 aliases: []
 landmark: false
+verification:
+  audited: 2026-08-26
 sources:
   scraped: []
   references:

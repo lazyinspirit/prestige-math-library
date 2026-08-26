@@ -2,7 +2,7 @@
 id: thm-multiset-exponential-formula
 kind: theorem
 title: "Over a commutative $\\mathbb{Q}$-algebra, $\\operatorname{MSET}(\\mathcal{A})$ has generating function $\\exp(\\sum_{k\\ge 1}A(x^k)/k)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

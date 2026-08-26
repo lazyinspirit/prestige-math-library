@@ -2,7 +2,7 @@
 id: def-radical-extension
 kind: definition
 title: "A radical extension is a tower obtained by adjoining one $n$-th root at each step"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

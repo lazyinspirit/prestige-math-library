@@ -2,7 +2,7 @@
 id: ex-trace-vanishes-on-a-purely-inseparable-extension
 kind: example
 title: "For $\\mathbb F_p(t)/\\mathbb F_p(t^p)$, the trace is identically zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-rational-function-field-as-a-fraction-field, lem-p-power-polynomial-i
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

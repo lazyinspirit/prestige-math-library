@@ -2,7 +2,7 @@
 id: def-isolated-singularity-types
 kind: definition
 title: "Isolated singularities: removable, poles, and essential singularities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

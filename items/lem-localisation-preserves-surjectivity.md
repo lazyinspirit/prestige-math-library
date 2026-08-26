@@ -2,7 +2,7 @@
 id: lem-localisation-preserves-surjectivity
 kind: lemma
 title: "Surjective module maps remain surjective after localisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-module-homomorphism-kernel-image-and-cokernel, def-localisation-of-a-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

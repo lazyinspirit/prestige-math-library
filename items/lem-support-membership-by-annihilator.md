@@ -2,7 +2,7 @@
 id: lem-support-membership-by-annihilator
 kind: lemma
 title: "A prime lies in the support exactly when some element has annihilator inside it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-support-of-a-module, def-annihilator-and-torsion-of-a-module, lem-zer
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

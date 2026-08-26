@@ -2,7 +2,7 @@
 id: fs-lan-along-a-fully-faithful-functor-always-restricts-back-to-the-original-functor
 kind: false-statement
 title: "FALSE: a left Kan extension along a fully faithful functor always restricts back to the original functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

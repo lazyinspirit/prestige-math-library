@@ -2,7 +2,7 @@
 id: thm-local-criterion-for-zero-modules-and-maps
 kind: theorem
 title: "Assuming the Axiom of Choice, local criteria for zero modules and for injective, surjective, and bijective maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

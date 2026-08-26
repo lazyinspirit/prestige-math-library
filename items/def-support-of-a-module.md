@@ -2,7 +2,7 @@
 id: def-support-of-a-module
 kind: definition
 title: "Support of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-localisation-at-a-prime-ideal, def-left-and-right-modules]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

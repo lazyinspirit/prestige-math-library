@@ -2,7 +2,7 @@
 id: ex-pg-two-three-has-thirteen-points-and-thirteen-lines
 kind: example
 title: "$PG(2,3)$ has $13$ points and $13$ lines"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-pg-two-q-is-a-finite-projective-plane,
        thm-counts-in-a-finite-projective-plane]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

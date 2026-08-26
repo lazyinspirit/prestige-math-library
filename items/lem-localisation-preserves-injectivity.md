@@ -2,7 +2,7 @@
 id: lem-localisation-preserves-injectivity
 kind: lemma
 title: "Injective module maps remain injective after localisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-zero-in-a-localised-module, def-module-homomorphism-kernel-image-and-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

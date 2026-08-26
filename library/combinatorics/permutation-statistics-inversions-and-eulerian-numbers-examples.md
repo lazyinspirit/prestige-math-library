@@ -1,7 +1,7 @@
 ---
 page: permutation-statistics-inversions-and-eulerian-numbers-examples
 title: "Permutation Statistics, Inversions and Eulerian Numbers: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-s-four-statistics-table,
            ex-lehmer-code-and-q-factorial-for-s-four,

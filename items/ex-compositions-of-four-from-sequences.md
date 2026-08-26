@@ -2,7 +2,7 @@
 id: ex-compositions-of-four-from-sequences
 kind: example
 title: "The compositions of $4$ from $\\operatorname{SEQ}_{\\ge 1}(\\operatorname{SEQ}_{\\ge 1}(\\mathcal{Z}))$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

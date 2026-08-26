@@ -2,7 +2,7 @@
 id: lem-compact-subsets-of-a-bernstein-set-are-countable
 kind: lemma
 title: "Every compact subset of a Bernstein set is countable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

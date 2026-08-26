@@ -2,7 +2,7 @@
 id: thm-universal-property-localisation-of-a-module
 kind: theorem
 title: "Universal property of localisation for modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

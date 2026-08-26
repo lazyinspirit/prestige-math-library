@@ -2,7 +2,7 @@
 id: def-multiset-and-powerset-constructions
 kind: definition
 title: "The multiset construction $\\operatorname{MSET}(\\mathcal{A})$ and the powerset construction $\\operatorname{PSET}(\\mathcal{A})$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

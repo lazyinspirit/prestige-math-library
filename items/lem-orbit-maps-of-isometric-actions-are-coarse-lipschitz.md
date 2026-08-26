@@ -2,7 +2,7 @@
 id: lem-orbit-maps-of-isometric-actions-are-coarse-lipschitz
 kind: lemma
 title: "Orbit maps of isometric actions are coarse Lipschitz"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

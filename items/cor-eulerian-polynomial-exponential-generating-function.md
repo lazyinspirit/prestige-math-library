@@ -2,7 +2,7 @@
 id: cor-eulerian-polynomial-exponential-generating-function
 kind: corollary
 title: "The Eulerian-polynomial exponential generating function in $\\mathbb{Q}(t)\\llbracket x\\rrbracket$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

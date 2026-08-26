@@ -2,13 +2,14 @@
 id: def-orthogonal-latin-squares-and-complete-families
 kind: definition
 title: "Orthogonal Latin squares and complete families of them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-latin-square]
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

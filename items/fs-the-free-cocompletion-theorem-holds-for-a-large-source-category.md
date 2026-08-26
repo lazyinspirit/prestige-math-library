@@ -2,7 +2,7 @@
 id: fs-the-free-cocompletion-theorem-holds-for-a-large-source-category
 kind: false-statement
 title: "FALSE: the free-cocompletion theorem holds for an arbitrary large locally small source category with no change in meaning"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

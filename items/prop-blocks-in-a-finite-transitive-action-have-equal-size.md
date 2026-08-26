@@ -2,7 +2,7 @@
 id: prop-blocks-in-a-finite-transitive-action-have-equal-size
 kind: proposition
 title: "Blocks in a finite transitive action have a common size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

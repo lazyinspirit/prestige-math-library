@@ -2,7 +2,7 @@
 id: thm-normal-subgroups-of-a-primitive-action-are-transitive-or-kernel-contained
 kind: theorem
 title: "Normal subgroups of a primitive action are transitive or lie in the kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

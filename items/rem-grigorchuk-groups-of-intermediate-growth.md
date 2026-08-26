@@ -2,7 +2,7 @@
 id: rem-grigorchuk-groups-of-intermediate-growth
 kind: remark
 title: "Grigorchuk groups of intermediate growth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,10 @@ external_dependency:
   necessity: "The page uses the existence theorem as the standard witness that subexponential growth need not be polynomial and as the source-backed example of intermediate growth."
 aliases: []
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

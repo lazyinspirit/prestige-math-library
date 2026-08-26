@@ -2,7 +2,7 @@
 id: ex-support-of-a-cyclic-module
 kind: example
 title: "The support of Z/12Z is the pair of primes (2) and (3)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [lem-support-of-a-cyclic-module-is-its-vanishing-set, def-support-of-a-mod
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

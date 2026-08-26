@@ -2,7 +2,7 @@
 id: rem-loglog-quantitative-density-theorem
 kind: remark
 title: "Bucić–Nguyen–Scott–Seymour: a log-log quantitative density theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,10 @@ external_dependency:
   local_proof_attempt: "A local proof would require rebuilding theorem 1.8 of Induced subgraph density. I and the blockade machinery behind it, which are outside this page's prerequisite closure."
   necessity: "The next theorem proves the improved log-log Erdos-Hajnal bound from exactly this quantitative input."
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

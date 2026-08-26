@@ -2,7 +2,7 @@
 id: def-residue-isolated-singularity
 kind: definition
 title: "The residue of an isolated singularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-laurent-expansion-annulus, thm-laurent-coefficient-formula-and-unique
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

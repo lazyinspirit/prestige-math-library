@@ -2,7 +2,7 @@
 id: thm-the-codensity-construction-satisfies-the-monad-laws
 kind: theorem
 title: "The codensity construction satisfies the monad laws"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

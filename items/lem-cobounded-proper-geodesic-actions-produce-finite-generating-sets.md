@@ -2,7 +2,7 @@
 id: lem-cobounded-proper-geodesic-actions-produce-finite-generating-sets
 kind: lemma
 title: "Cobounded proper geodesic actions produce finite generating sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-two-orthogonal-latin-squares-of-order-three
 kind: example
 title: "The squares $L_1(i,j)=i+j$ and $L_2(i,j)=2i+j$ on $\\mathbb F_3$ are orthogonal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

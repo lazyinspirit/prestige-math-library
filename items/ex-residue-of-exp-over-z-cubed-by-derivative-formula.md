@@ -2,7 +2,7 @@
 id: ex-residue-of-exp-over-z-cubed-by-derivative-formula
 kind: example
 title: "The residue of e^z/z^3 from the pole-derivative formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

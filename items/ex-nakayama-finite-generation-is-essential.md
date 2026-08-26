@@ -2,7 +2,7 @@
 id: ex-nakayama-finite-generation-is-essential
 kind: example
 title: "The p-primary quotient Q/Z_(p) over Z_(p) shows finite generation is essential in Nakayama"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-localisation-at-a-prime-ideal, thm-localisation-at-a-prime-is-local, 
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

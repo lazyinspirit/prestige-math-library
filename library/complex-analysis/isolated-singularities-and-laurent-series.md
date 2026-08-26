@@ -1,7 +1,7 @@
 ---
 page: isolated-singularities-and-laurent-series
 title: "Isolated Singularities and Laurent Series"
-status: draft
+status: published
 items: [def-complex-annulus, def-convergent-complex-laurent-series, def-principal-part-laurent-series, def-isolated-singularity-types, def-simple-pole, def-meromorphic-function-complex-domain, thm-laurent-expansion-annulus, thm-laurent-coefficient-formula-and-uniqueness, cor-laurent-coefficients-independent-of-radius, def-residue-isolated-singularity, thm-laurent-regular-principal-decomposition, thm-removable-singularity-characterizations, thm-pole-characterizations, thm-isolated-singularity-trichotomy, thm-casorati-weierstrass, cor-residue-contour-integral-formula, lem-residue-simple-pole, thm-residue-pole-derivative-formula, cor-residue-quotient-simple-zero, def-singularity-at-infinity, thm-poles-meromorphic-function-are-discrete-and-countable]
 examples: []
 ---

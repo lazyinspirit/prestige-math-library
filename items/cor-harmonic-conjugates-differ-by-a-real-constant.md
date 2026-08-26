@@ -2,7 +2,7 @@
 id: cor-harmonic-conjugates-differ-by-a-real-constant
 kind: corollary
 title: "Two harmonic conjugates differ by a real constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

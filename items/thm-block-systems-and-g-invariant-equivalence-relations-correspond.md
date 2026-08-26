@@ -2,7 +2,7 @@
 id: thm-block-systems-and-g-invariant-equivalence-relations-correspond
 kind: theorem
 title: "G-invariant block systems are exactly the invariant equivalence relations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

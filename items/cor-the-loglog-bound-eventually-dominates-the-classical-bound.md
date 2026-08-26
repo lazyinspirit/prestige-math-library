@@ -2,7 +2,7 @@
 id: cor-the-loglog-bound-eventually-dominates-the-classical-bound
 kind: corollary
 title: "For fixed $H$, the log-log scale eventually exceeds every classical scale $2^{c\\sqrt{\\log_2 n}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [thm-classical-erdos-hajnal-bound,
        def-logarithm-to-a-base]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

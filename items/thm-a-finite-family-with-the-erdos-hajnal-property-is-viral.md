@@ -2,7 +2,7 @@
 id: thm-a-finite-family-with-the-erdos-hajnal-property-is-viral
 kind: theorem
 title: "Every finite family with the Erdős–Hajnal property is viral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

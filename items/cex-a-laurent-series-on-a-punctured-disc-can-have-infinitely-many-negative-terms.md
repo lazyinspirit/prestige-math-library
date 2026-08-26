@@ -2,7 +2,7 @@
 id: cex-a-laurent-series-on-a-punctured-disc-can-have-infinitely-many-negative-terms
 kind: counterexample
 title: "A Laurent series on a punctured disc can have infinitely many negative powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-polynomial-subexponential-exponential-and-intermediate-growth
 kind: definition
 title: "Polynomial, subexponential, exponential, and intermediate growth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-growth-comparison-and-growth-type, def-growth-function-of-a-finitely-
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

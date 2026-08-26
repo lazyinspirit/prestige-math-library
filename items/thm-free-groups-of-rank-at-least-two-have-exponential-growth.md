@@ -2,7 +2,7 @@
 id: thm-free-groups-of-rank-at-least-two-have-exponential-growth
 kind: theorem
 title: "Free groups of rank at least two have exponential growth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

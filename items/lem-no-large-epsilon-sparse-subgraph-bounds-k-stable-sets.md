@@ -2,7 +2,7 @@
 id: lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets
 kind: lemma
 title: "Without a large $\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

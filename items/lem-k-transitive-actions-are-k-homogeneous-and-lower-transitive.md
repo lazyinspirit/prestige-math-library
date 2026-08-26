@@ -2,7 +2,7 @@
 id: lem-k-transitive-actions-are-k-homogeneous-and-lower-transitive
 kind: lemma
 title: "k-transitivity implies k-homogeneity and lower transitivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

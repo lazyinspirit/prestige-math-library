@@ -2,13 +2,14 @@
 id: def-steiner-systems-and-steiner-triple-systems
 kind: definition
 title: "Steiner triple systems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-two-design]
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

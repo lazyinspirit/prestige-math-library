@@ -2,7 +2,7 @@
 id: ex-singularities-at-infinity-for-polynomials-and-reciprocals
 kind: example
 title: "Positive powers have poles at infinity and their reciprocals have removable singularities there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

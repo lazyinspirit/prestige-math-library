@@ -2,7 +2,7 @@
 id: def-harmonic-conjugate
 kind: definition
 title: "Harmonic conjugates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-plane-harmonic-function]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

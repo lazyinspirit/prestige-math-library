@@ -2,7 +2,7 @@
 id: thm-kummer-correspondence
 kind: theorem
 title: "Kummer theory classifies finite abelian extensions of exponent dividing $n$ by subgroups between $(F^\\times)^n$ and $F^\\times$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-uniqueness-for-the-bounded-plane-dirichlet-problem
 kind: corollary
 title: "The bounded plane Dirichlet problem has at most one continuous harmonic solution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

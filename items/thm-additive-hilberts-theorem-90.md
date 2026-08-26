@@ -2,7 +2,7 @@
 id: thm-additive-hilberts-theorem-90
 kind: theorem
 title: "Additive Hilbert 90: trace zero is the image of $\\alpha\\mapsto\\alpha-\\sigma(\\alpha)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

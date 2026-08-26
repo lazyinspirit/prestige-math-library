@@ -2,7 +2,7 @@
 id: def-block-and-block-system-for-a-group-action
 kind: definition
 title: "Blocks and block systems for a group action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

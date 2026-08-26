@@ -2,7 +2,7 @@
 id: ex-nakayama-jacobson-hypothesis-is-essential
 kind: example
 title: "Over Z, the ideal (2) acts surjectively on Z/3Z but does not kill it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-jacobson-radical-of-a-ring, def-product-of-an-ideal-and-a-module, thm
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-binary-quadratic-form-substitution-is-a-right-action
 kind: lemma
 title: "Integral substitution defines a right action of $\\mathrm{SL}_2(\\mathbb Z)$ on integral binary quadratic forms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-casorati-weierstrass
 kind: theorem
 title: "Casorati-Weierstrass theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

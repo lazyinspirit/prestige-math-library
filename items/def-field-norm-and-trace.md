@@ -2,7 +2,7 @@
 id: def-field-norm-and-trace
 kind: definition
 title: "The norm $N_{K/F}$ and trace $\\operatorname{Tr}_{K/F}$ of a finite field extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-extension-degree-and-finite-extension, def-determinant-of-a-linear-op
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-general-polynomial-of-degree-n-has-galois-group-s-n
 kind: theorem
 title: "The general polynomial of degree $n$ has Galois group $S_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

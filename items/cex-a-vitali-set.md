@@ -2,7 +2,7 @@
 id: cex-a-vitali-set
 kind: counterexample
 title: "A Vitali set shows that not every subset of $\\mathbb{R}$ is Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-vitali-sets-exist-under-choice-on-r-over-q,
        thm-a-vitali-set-is-not-lebesgue-measurable]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

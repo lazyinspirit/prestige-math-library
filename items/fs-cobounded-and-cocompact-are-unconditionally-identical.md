@@ -2,7 +2,7 @@
 id: fs-cobounded-and-cocompact-are-unconditionally-identical
 kind: false-statement
 title: "FALSE: cobounded and cocompact are identical without extra hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-singularity-at-infinity
 kind: definition
 title: "Isolated singularities at infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

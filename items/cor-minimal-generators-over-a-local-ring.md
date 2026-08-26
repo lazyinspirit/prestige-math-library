@@ -2,7 +2,7 @@
 id: cor-minimal-generators-over-a-local-ring
 kind: corollary
 title: "Assuming the Axiom of Choice, minimal generators over a local ring are exactly residue-field bases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

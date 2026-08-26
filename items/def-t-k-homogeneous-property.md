@@ -2,7 +2,7 @@
 id: def-t-k-homogeneous-property
 kind: definition
 title: "The $(t,k)$-homogeneous property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

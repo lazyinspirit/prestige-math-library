@@ -2,7 +2,7 @@
 id: ex-localisation-kills-exactly-s-torsion
 kind: example
 title: "Localising Z/12Z kills exactly the torsion seen by the denominator set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [lem-zero-in-a-localised-module, def-localisation-of-a-module]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

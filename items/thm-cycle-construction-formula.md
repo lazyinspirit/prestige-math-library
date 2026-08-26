@@ -2,7 +2,7 @@
 id: thm-cycle-construction-formula
 kind: theorem
 title: "Over a commutative $\\mathbb{Q}$-algebra, $\\operatorname{CYC}(\\mathcal{A})$ has generating function $\\sum_{k\\ge 1}\\frac{\\varphi(k)}{k}\\log\\frac{1}{1-A(x^k)}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

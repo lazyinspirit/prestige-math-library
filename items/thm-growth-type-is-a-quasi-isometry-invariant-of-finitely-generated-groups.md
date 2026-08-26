@@ -2,7 +2,7 @@
 id: thm-growth-type-is-a-quasi-isometry-invariant-of-finitely-generated-groups
 kind: theorem
 title: "Growth type is a quasi-isometry invariant of finitely generated groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

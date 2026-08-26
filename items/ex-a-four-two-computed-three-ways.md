@@ -2,7 +2,7 @@
 id: ex-a-four-two-computed-three-ways
 kind: example
 title: "$A(4,2)=11$ by the recurrence, by Worpitzky's identity and by excedances"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

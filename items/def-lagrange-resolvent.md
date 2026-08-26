@@ -2,7 +2,7 @@
 id: def-lagrange-resolvent
 kind: definition
 title: "The Lagrange resolvent attached to a cyclic action and a root of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-cyclic-extension, def-roots-of-unity-in-a-field]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

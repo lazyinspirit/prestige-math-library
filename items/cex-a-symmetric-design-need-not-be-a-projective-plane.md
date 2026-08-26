@@ -2,7 +2,7 @@
 id: cex-a-symmetric-design-need-not-be-a-projective-plane
 kind: counterexample
 title: "The complementary $2$-$(7,4,2)$ design is symmetric but not a projective plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [ex-skolems-construction-gives-the-fano-plane,
        cor-finite-projective-planes-are-symmetric-two-designs]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

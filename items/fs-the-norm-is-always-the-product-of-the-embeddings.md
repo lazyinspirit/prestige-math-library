@@ -2,7 +2,7 @@
 id: fs-the-norm-is-always-the-product-of-the-embeddings
 kind: false-statement
 title: "FALSE: for every finite extension, the norm is just the product over the embeddings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-field-norm-and-trace-by-embeddings, ex-trace-vanishes-on-a-purely-ins
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

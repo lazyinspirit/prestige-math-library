@@ -2,7 +2,7 @@
 id: cor-binary-words-have-generating-function-one-over-one-minus-two-x
 kind: corollary
 title: "Binary words have generating function $1/(1-2x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-loglog-erdos-hajnal-bound
 kind: theorem
 title: "Every $H$-free graph has a homogeneous set of size at least $2^{c\\sqrt{\\log_2 n\\,\\log_2\\log_2 n}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ deps: [rem-loglog-quantitative-density-theorem,
        def-edge-density-between-vertex-sets]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

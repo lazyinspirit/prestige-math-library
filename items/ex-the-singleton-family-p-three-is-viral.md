@@ -2,7 +2,7 @@
 id: ex-the-singleton-family-p-three-is-viral
 kind: example
 title: "The singleton family $\\{P_3\\}$ is viral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

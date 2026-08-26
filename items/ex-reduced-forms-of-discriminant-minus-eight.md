@@ -2,7 +2,7 @@
 id: ex-reduced-forms-of-discriminant-minus-eight
 kind: example
 title: "The reduced primitive forms of discriminant $-8$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

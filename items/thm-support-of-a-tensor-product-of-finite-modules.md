@@ -2,7 +2,7 @@
 id: thm-support-of-a-tensor-product-of-finite-modules
 kind: theorem
 title: "Support of a tensor product of finite modules is the intersection of the supports"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-support-and-annihilator-of-a-finite-module, thm-localisation-of-modul
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

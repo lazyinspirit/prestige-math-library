@@ -2,7 +2,7 @@
 id: thm-local-holomorphic-potential-for-harmonic-functions
 kind: theorem
 title: "Every plane harmonic function is locally the real part of a holomorphic function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

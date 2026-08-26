@@ -2,7 +2,7 @@
 id: ex-partitions-with-parts-at-most-three
 kind: example
 title: "Partitions with parts at most $3$ from a truncated multiset product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

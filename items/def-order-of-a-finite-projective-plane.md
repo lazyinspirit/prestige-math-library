@@ -2,7 +2,7 @@
 id: def-order-of-a-finite-projective-plane
 kind: definition
 title: "The order of a finite projective plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-finite-projective-plane,
        lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points]
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

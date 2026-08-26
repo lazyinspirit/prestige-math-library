@@ -2,7 +2,7 @@
 id: prop-discriminant-square-mod-four-n-criterion-for-primitive-representation
 kind: proposition
 title: "A positive integer $n$ is primitively represented by some discriminant $\\Delta$ form exactly when $\\Delta$ is a square modulo $4n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

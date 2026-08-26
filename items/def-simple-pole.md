@@ -2,7 +2,7 @@
 id: def-simple-pole
 kind: definition
 title: "Simple poles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-isolated-singularity-types]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

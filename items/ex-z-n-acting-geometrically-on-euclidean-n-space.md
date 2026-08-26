@@ -2,7 +2,7 @@
 id: ex-z-n-acting-geometrically-on-euclidean-n-space
 kind: example
 title: "Z^n acts geometrically on Euclidean n-space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

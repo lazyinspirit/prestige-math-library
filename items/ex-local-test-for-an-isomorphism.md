@@ -2,7 +2,7 @@
 id: ex-local-test-for-an-isomorphism
 kind: example
 title: "Assuming the Axiom of Choice, the Chinese-remainder map Z/6Z -> Z/2Z direct-sum Z/3Z is an isomorphism by local tests"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-local-criterion-for-zero-modules-and-maps, thm-integers-modulo-n-basi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: geometric-actions-svarc-milnor-and-growth
 title: "Geometric Actions Svarc Milnor and Growth"
-status: draft
+status: published
 items: [def-isometric-proper-and-cobounded-actions-on-metric-spaces,
         lem-metric-properness-agrees-with-proper-discontinuity-on-proper-discrete-metric-spaces,
         def-geometric-action-on-a-metric-space,

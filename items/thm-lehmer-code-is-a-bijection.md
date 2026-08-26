@@ -2,7 +2,7 @@
 id: thm-lehmer-code-is-a-bijection
 kind: theorem
 title: "The Lehmer code is a bijection $S_n\\to\\prod_{i=1}^{n}\\{0,\\dots,i-1\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

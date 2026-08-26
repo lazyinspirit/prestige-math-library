@@ -2,7 +2,7 @@
 id: ex-residue-of-p-over-q-at-a-simple-zero
 kind: example
 title: "A residue of p over q at a simple zero is p(a)/q'(a)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

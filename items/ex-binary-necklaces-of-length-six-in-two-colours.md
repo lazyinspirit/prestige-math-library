@@ -2,7 +2,7 @@
 id: ex-binary-necklaces-of-length-six-in-two-colours
 kind: example
 title: "Binary necklaces of length $6$ from both $\\operatorname{CYC}(2\\mathcal{Z})$ and Burnside's lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

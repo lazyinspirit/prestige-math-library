@@ -2,7 +2,7 @@
 id: ex-foata-transformation-on-three-one-four-two
 kind: example
 title: "Foata's transformation on the permutation $2\\,0\\,3\\,1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

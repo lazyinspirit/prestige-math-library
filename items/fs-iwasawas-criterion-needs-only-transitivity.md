@@ -2,7 +2,7 @@
 id: fs-iwasawas-criterion-needs-only-transitivity
 kind: false-statement
 title: "FALSE: transitivity alone forces nontrivial normal subgroups to be transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

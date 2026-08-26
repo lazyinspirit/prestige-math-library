@@ -2,7 +2,7 @@
 id: thm-unique-reduced-positive-definite-binary-quadratic-form
 kind: theorem
 title: "Each proper-equivalence class of positive-definite integral binary quadratic forms contains exactly one reduced form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

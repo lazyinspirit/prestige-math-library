@@ -2,7 +2,7 @@
 id: cex-a-bernstein-set
 kind: counterexample
 title: "Assuming countable choice and a well-ordering of the real line, a Bernstein set is dense, has inner measure $0$, and is not Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-bernstein-sets-exist-under-a-well-ordering-of-r,
        cor-a-bernstein-set-is-not-lebesgue-measurable, def-countable-choice]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

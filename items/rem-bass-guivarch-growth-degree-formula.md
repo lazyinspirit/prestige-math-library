@@ -2,7 +2,7 @@
 id: rem-bass-guivarch-growth-degree-formula
 kind: remark
 title: "Bass-Guivarch growth-degree formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,10 @@ external_dependency:
   necessity: "The page needs the formula to identify the growth degree of the Heisenberg example and to derive the polynomial-growth corollary for finitely generated nilpotent groups."
 aliases: []
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

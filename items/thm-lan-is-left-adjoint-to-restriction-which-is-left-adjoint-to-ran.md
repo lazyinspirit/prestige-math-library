@@ -2,7 +2,7 @@
 id: thm-lan-is-left-adjoint-to-restriction-which-is-left-adjoint-to-ran
 kind: theorem
 title: "Lan is left adjoint to restriction, and restriction is left adjoint to Ran"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

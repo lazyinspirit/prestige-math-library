@@ -2,7 +2,7 @@
 id: thm-counts-in-a-finite-projective-plane
 kind: theorem
 title: "A finite projective plane of order $n$ has $n^2+n+1$ points and the same number of lines"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-finite-projective-plane,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

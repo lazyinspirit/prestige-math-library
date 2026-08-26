@@ -2,7 +2,7 @@
 id: cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel
 kind: corollary
 title: "There is a Lebesgue measurable subset of $\\mathbb{R}$ that is not Borel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-major-index-equals-inversion-number-pointwise
 kind: false-statement
 title: "FALSE: the major index equals the inversion number for every permutation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

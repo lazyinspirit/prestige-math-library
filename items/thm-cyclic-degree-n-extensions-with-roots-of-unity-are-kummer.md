@@ -2,7 +2,7 @@
 id: thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer
 kind: theorem
 title: "If $\\mu_n\\subseteq F$ and $\\operatorname{char}F\\nmid n$, then a degree-$n$ extension is cyclic exactly when it is $F(\\alpha)$ with $\\alpha^n\\in F$ and $x^n-\\alpha^n$ irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

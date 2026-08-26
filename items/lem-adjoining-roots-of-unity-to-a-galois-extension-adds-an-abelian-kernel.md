@@ -2,7 +2,7 @@
 id: lem-adjoining-roots-of-unity-to-a-galois-extension-adds-an-abelian-kernel
 kind: lemma
 title: "Adjoining roots of unity to a finite Galois extension adds an abelian kernel and preserves solvability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-a-proper-subgroup-of-r-can-be-nonmeasurable
 kind: counterexample
 title: "Assuming Choice, a proper subgroup of $(\\mathbb{R},+)$ can be nonmeasurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [lem-hamel-basis-exists, cor-a-measurable-subgroup-of-rn-of-positive-measu
        thm-finite-and-countable-subadditivity-of-measures]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

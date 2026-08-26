@@ -2,7 +2,7 @@
 id: cor-a-bernstein-set-is-not-lebesgue-measurable
 kind: corollary
 title: "Assuming the Axiom of Countable Choice, a Bernstein set is not Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

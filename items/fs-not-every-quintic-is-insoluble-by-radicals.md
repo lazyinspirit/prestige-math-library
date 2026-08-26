@@ -2,7 +2,7 @@
 id: fs-not-every-quintic-is-insoluble-by-radicals
 kind: false-statement
 title: "FALSE: every quintic is insoluble by radicals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [ex-x-fifth-minus-two-is-solvable-by-radicals]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

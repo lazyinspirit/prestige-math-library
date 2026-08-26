@@ -2,7 +2,7 @@
 id: rem-skolem-construction-produces-a-steiner-triple-system
 kind: remark
 title: "Skolem's construction gives a Steiner triple system of order $6m+1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,10 @@ external_dependency:
   local_proof_attempt: "The in-scope route is the usual explicit construction on (Z/(2m)) x (Z/3) union {infinity}. The batch harvest and design notes both record that the exact block list was not verified against a primary source on disk, and the authoring rule here forbids reconstructing that list from memory."
   necessity: "This existence statement is the only missing branch in the landmark characterization of Steiner triple system orders."
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

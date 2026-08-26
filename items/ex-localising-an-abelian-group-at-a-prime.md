@@ -2,7 +2,7 @@
 id: ex-localising-an-abelian-group-at-a-prime
 kind: example
 title: "Localising cyclic abelian groups and Q/Z at a prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-localisation-at-a-prime-ideal, thm-localisation-of-modules-is-tensor-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

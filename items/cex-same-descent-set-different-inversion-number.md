@@ -2,7 +2,7 @@
 id: cex-same-descent-set-different-inversion-number
 kind: counterexample
 title: "Two permutations can have the same descent set and different inversion numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

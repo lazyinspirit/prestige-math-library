@@ -2,7 +2,7 @@
 id: thm-localisation-of-modules-is-tensor-product
 kind: theorem
 title: "Localisation of modules is extension of scalars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

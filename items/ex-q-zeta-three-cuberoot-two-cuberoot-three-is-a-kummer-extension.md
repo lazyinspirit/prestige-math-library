@@ -2,7 +2,7 @@
 id: ex-q-zeta-three-cuberoot-two-cuberoot-three-is-a-kummer-extension
 kind: example
 title: "$\\mathbb Q(\\zeta_3,\\sqrt[3]{2},\\sqrt[3]{3})$ is a Kummer extension with quotient $(\\mathbb Z/3)^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-kummer-correspondence, thm-field-norm-and-trace-by-embeddings]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

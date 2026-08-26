@@ -2,7 +2,7 @@
 id: cor-degree-of-f-adjoin-an-nth-root-by-coset-order
 kind: corollary
 title: "The degree $[F(\\sqrt[n]{a}):F]$ is the order of $a(F^\\times)^n$ in $F^\\times/(F^\\times)^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

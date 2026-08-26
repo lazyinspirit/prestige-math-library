@@ -1,7 +1,7 @@
 ---
 page: blocks-primitivity-and-multiple-transitivity
 title: "Blocks Primitivity and Multiple Transitivity"
-status: draft
+status: published
 items: [def-block-and-block-system-for-a-group-action,
         lem-translates-of-a-block-form-a-g-invariant-partition-of-its-orbit,
         thm-block-systems-and-g-invariant-equivalence-relations-correspond,

@@ -2,7 +2,7 @@
 id: thm-local-criterion-for-exactness-of-modules
 kind: theorem
 title: "Assuming the Axiom of Choice, a sequence of modules is exact exactly when all prime localisations are exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

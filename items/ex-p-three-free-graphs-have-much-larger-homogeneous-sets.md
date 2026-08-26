@@ -2,7 +2,7 @@
 id: ex-p-three-free-graphs-have-much-larger-homogeneous-sets
 kind: example
 title: "The $P_3$-free case is much stronger than the general lower bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-p3-free-graphs-have-square-root-homogeneous-sets,
        def-logarithm-to-a-base]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

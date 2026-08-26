@@ -2,7 +2,7 @@
 id: thm-pg-two-q-is-a-finite-projective-plane
 kind: theorem
 title: "For every prime power $q$, the space $PG(2,q)$ is a projective plane of order $q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-finite-projective-plane,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

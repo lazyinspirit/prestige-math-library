@@ -2,7 +2,7 @@
 id: ex-truncation-iteration-for-a-recursive-specification
 kind: example
 title: "Iterating a recursive specification to determine coefficients through degree $6$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

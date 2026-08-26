@@ -2,7 +2,7 @@
 id: thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion
 kind: theorem
 title: "The presheaf category on a small category is the free cocompletion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

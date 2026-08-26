@@ -1,7 +1,7 @@
 ---
 page: localisation-of-modules-and-support
 title: "Localisation of Modules and Support"
-status: draft
+status: published
 items: [def-localisation-of-a-module, lem-localised-module-fraction-equivalence-is-an-equivalence-relation, lem-localised-module-addition-independent-of-representatives, lem-localised-module-scalar-action-independent-of-representatives, thm-universal-property-localisation-of-a-module, thm-localisation-of-modules-is-tensor-product, thm-localisation-of-modules-commutes-with-quotients-and-sums, lem-zero-in-a-localised-module, lem-localisation-preserves-injectivity, lem-localisation-preserves-surjectivity, thm-localisation-of-modules-is-exact, cor-localisation-commutes-with-kernels-images-and-cokernels, cor-localisation-commutes-with-finite-intersections-of-submodules, lem-localisation-of-hom-natural-map, lem-localised-hom-finite-free-case, lem-localised-hom-finite-presentation-kernel-step, thm-localisation-of-hom-for-finitely-presented-modules, thm-local-criterion-for-zero-modules-and-maps, thm-local-criterion-for-exactness-of-modules, def-support-of-a-module, lem-support-membership-by-annihilator, lem-support-of-a-cyclic-module-is-its-vanishing-set, lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports, thm-support-and-annihilator-of-a-finite-module, thm-support-in-a-short-exact-sequence, thm-support-of-a-tensor-product-of-finite-modules, thm-support-of-arbitrary-direct-sums, thm-support-under-localisation, def-jacobson-radical-of-a-ring, thm-jacobson-radical-unit-characterisation, lem-determinant-trick-for-nakayama, thm-nakayama-lemma, cor-nakayama-generators-modulo-an-ideal, cor-minimal-generators-over-a-local-ring, cor-finite-module-locally-zero-near-a-prime]
 examples: []
 ---

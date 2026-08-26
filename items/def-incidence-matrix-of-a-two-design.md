@@ -2,13 +2,14 @@
 id: def-incidence-matrix-of-a-two-design
 kind: definition
 title: "The point-block incidence matrix of a $2$-design"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-two-design]
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-substitution-rule-for-ordinary-generating-functions
 kind: theorem
 title: "If $B(0)=0$ then $\\mathcal{A}\\circ\\mathcal{B}$ has generating function $A(B(x))$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

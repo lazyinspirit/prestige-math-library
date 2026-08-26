@@ -2,7 +2,7 @@
 id: fs-every-nontrivial-normal-subgroup-of-a-primitive-group-is-regular
 kind: false-statement
 title: "FALSE: every nontrivial normal subgroup of a faithful primitive group is regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

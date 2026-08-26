@@ -2,7 +2,7 @@
 id: lem-leading-coefficient-is-minimal-in-a-reduced-class
 kind: lemma
 title: "The leading coefficient of a reduced positive-definite form is minimal in its proper-equivalence class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

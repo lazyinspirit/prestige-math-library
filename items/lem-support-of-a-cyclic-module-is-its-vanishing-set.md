@@ -2,7 +2,7 @@
 id: lem-support-of-a-cyclic-module-is-its-vanishing-set
 kind: lemma
 title: "The support of a cyclic quotient is its vanishing set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-support-of-a-module, thm-localisation-commutes-with-quotients, thm-lo
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

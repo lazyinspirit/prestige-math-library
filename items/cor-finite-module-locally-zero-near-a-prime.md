@@ -2,7 +2,7 @@
 id: cor-finite-module-locally-zero-near-a-prime
 kind: corollary
 title: "A finite module that vanishes at a prime vanishes on some principal neighbourhood of that prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-support-and-annihilator-of-a-finite-module, def-support-of-a-module, 
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-fishers-inequality-for-two-designs
 kind: theorem
 title: "Fisher's inequality: every $2$-$(v,k,\\lambda)$ design has at least $v$ blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [thm-incidence-matrix-identity-for-a-two-design,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

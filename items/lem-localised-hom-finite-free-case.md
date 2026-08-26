@@ -2,7 +2,7 @@
 id: lem-localised-hom-finite-free-case
 kind: lemma
 title: "The localised Hom map is an isomorphism for finite free sources"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-localisation-of-hom-natural-map, lem-hom-from-a-finite-free-module, l
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-incidence-matrix-identity-for-a-two-design
 kind: theorem
 title: "For a $2$-design, $NN^{\\mathsf T}=(r-\\lambda)I+\\lambda J$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-two-design, def-incidence-matrix-of-a-two-design, thm-counting-identities-for-a-two-design]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-two-disjoint-nonmeasurable-sets-can-have-a-measurable-union
 kind: counterexample
 title: "Two disjoint nonmeasurable subsets of $[0,1]$ can have the measurable union $[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-vitali-sets-exist-under-choice-on-r-over-q,
        thm-lebesgue-measure-of-a-box-of-every-kind]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

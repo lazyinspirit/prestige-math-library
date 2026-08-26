@@ -2,7 +2,7 @@
 id: lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points
 kind: lemma
 title: "Every line in a finite projective plane has the same number of points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-finite-projective-plane]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

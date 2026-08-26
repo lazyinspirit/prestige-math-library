@@ -2,7 +2,7 @@
 id: ex-lehmer-code-and-q-factorial-for-s-four
 kind: example
 title: "The Lehmer codes of $S_4$ recover $[4]_q!$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

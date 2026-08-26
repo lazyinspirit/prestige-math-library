@@ -2,7 +2,7 @@
 id: lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets
 kind: lemma
 title: "Many good $2t$-vertex subsets force many homogeneous $k$-sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

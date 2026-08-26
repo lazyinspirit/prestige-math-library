@@ -2,7 +2,7 @@
 id: lem-localised-module-scalar-action-independent-of-representatives
 kind: lemma
 title: "The localised scalar action is independent of representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-localisation-of-a-module, def-multiplicative-subset-and-localisation]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

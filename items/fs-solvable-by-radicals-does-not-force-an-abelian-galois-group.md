@@ -2,7 +2,7 @@
 id: fs-solvable-by-radicals-does-not-force-an-abelian-galois-group
 kind: false-statement
 title: "FALSE: a polynomial solvable by radicals must have abelian Galois group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [ex-x-fifth-minus-two-is-solvable-by-radicals, thm-eisenstein-irreducibili
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

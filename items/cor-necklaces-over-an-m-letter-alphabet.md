@@ -2,7 +2,7 @@
 id: cor-necklaces-over-an-m-letter-alphabet
 kind: corollary
 title: "The number of necklaces of length $n$ on an $m$-letter alphabet is $\\frac{1}{n}\\sum_{d\\mid n}\\varphi(d)m^{n/d}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

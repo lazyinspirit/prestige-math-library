@@ -2,7 +2,7 @@
 id: cor-binary-trees-satisfy-b-equals-one-plus-z-b-squared
 kind: corollary
 title: "Rooted plane binary trees satisfy $B(x)=1+xB(x)^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

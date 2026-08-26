@@ -2,7 +2,7 @@
 id: fs-every-subset-of-r-is-lebesgue-measurable
 kind: false-statement
 title: "FALSE: assuming the Axiom of Choice, every subset of $\\mathbb{R}$ is Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [thm-vitali-sets-exist-under-choice-on-r-over-q,
        def-axiom-of-choice]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

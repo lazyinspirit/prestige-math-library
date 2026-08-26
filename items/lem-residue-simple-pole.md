@@ -2,7 +2,7 @@
 id: lem-residue-simple-pole
 kind: lemma
 title: "At a simple pole the residue is the limit of (z-a)f(z)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

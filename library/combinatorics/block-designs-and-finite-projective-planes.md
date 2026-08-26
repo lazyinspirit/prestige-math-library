@@ -1,7 +1,7 @@
 ---
 page: block-designs-and-finite-projective-planes
 title: "Block Designs and Finite Projective Planes"
-status: draft
+status: published
 items: [def-two-design,
         def-incidence-matrix-of-a-two-design,
         lem-replication-number-is-constant-in-a-two-design,

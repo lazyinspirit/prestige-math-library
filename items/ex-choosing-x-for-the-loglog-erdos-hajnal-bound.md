@@ -2,7 +2,7 @@
 id: ex-choosing-x-for-the-loglog-erdos-hajnal-bound
 kind: example
 title: "For large $n$, the log-log choice of $x$ still leaves a dense-or-sparse set of order at least $\\sqrt n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [rem-loglog-quantitative-density-theorem,
        def-logarithm-to-a-base]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

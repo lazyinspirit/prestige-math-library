@@ -2,7 +2,7 @@
 id: cor-polynomials-of-degree-at-most-four-are-solvable-by-radicals
 kind: corollary
 title: "Every polynomial of degree at most four is solvable by radicals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

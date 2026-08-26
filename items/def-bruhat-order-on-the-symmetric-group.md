@@ -2,7 +2,7 @@
 id: def-bruhat-order-on-the-symmetric-group
 kind: definition
 title: "The Bruhat order on $S_n$ by rank inequalities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

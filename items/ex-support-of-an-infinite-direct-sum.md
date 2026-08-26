@@ -2,7 +2,7 @@
 id: ex-support-of-an-infinite-direct-sum
 kind: example
 title: "The support of the direct sum over all primes of Z/pZ is the set of all nonzero prime ideals of Z"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-support-of-arbitrary-direct-sums, lem-support-of-a-cyclic-module-is-i
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

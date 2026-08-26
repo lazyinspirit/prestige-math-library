@@ -1,7 +1,7 @@
 ---
 page: kan-extensions-density-and-the-free-cocompletion-examples
 title: "Kan Extensions Density and the Free Cocompletion — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-left-kan-extension-along-a-full-subcategory-inclusion,
            ex-a-kan-extension-computing-a-free-functor,

@@ -2,7 +2,7 @@
 id: prop-doubly-transitive-actions-are-primitive
 kind: proposition
 title: "Every doubly transitive action is primitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-replication-number-is-constant-in-a-two-design
 kind: lemma
 title: "Every point of a $2$-design lies in the same number of blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-two-design]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

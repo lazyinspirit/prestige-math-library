@@ -2,7 +2,7 @@
 id: thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six
 kind: theorem
 title: "A Steiner triple system exists exactly for orders $v>3$ with $v\\equiv1$ or $3\\pmod6$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ deps: [cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-gromov-polynomial-growth-theorem
 kind: remark
 title: "Gromov's polynomial-growth theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,10 @@ external_dependency:
 aliases: []
 landmark: true
 verification:
+  sources_checked:
+    date: 2026-08-26
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

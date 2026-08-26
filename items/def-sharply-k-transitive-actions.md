@@ -2,7 +2,7 @@
 id: def-sharply-k-transitive-actions
 kind: definition
 title: "Sharply k-transitive actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-k-transitive-and-k-homogeneous-actions]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

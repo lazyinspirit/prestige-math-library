@@ -2,7 +2,7 @@
 id: thm-support-of-arbitrary-direct-sums
 kind: theorem
 title: "Support of an arbitrary direct sum is the union of the supports"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-support-of-a-module, thm-localisation-of-modules-commutes-with-quotie
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

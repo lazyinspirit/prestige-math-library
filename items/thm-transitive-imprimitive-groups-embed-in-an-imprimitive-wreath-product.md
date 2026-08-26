@@ -2,7 +2,7 @@
 id: thm-transitive-imprimitive-groups-embed-in-an-imprimitive-wreath-product
 kind: theorem
 title: "A transitive imprimitive action embeds modulo its kernel in an imprimitive wreath product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

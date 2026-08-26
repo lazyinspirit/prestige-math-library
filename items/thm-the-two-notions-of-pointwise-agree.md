@@ -2,7 +2,7 @@
 id: thm-the-two-notions-of-pointwise-agree
 kind: theorem
 title: "The comma-category and representable-preservation notions of pointwise Kan extension agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

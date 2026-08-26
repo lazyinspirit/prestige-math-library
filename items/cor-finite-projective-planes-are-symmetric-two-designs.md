@@ -2,7 +2,7 @@
 id: cor-finite-projective-planes-are-symmetric-two-designs
 kind: corollary
 title: "A projective plane of order $n$ is a symmetric $2$-$(n^2+n+1,n+1,1)$ design"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-two-design,
        thm-counts-in-a-finite-projective-plane]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-growth-function-of-a-finitely-generated-group
 kind: definition
 title: "The growth function of a finitely generated group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

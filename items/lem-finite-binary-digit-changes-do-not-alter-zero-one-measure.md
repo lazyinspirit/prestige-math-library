@@ -2,7 +2,7 @@
 id: lem-finite-binary-digit-changes-do-not-alter-zero-one-measure
 kind: lemma
 title: "A Lebesgue measurable subset of $[0,1]$ that is invariant under changing finitely many binary digits has measure $0$ or $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

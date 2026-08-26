@@ -2,7 +2,7 @@
 id: thm-limits-and-colimits-are-kan-extensions-along-the-functor-to-the-terminal-category
 kind: theorem
 title: "Limits and colimits are Kan extensions along the functor to the terminal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

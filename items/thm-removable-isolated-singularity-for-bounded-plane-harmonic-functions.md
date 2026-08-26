@@ -2,7 +2,7 @@
 id: thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions
 kind: theorem
 title: "A bounded harmonic function near an isolated puncture extends harmonically"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

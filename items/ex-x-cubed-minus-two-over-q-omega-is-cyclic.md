@@ -2,7 +2,7 @@
 id: ex-x-cubed-minus-two-over-q-omega-is-cyclic
 kind: example
 title: "Over $\\mathbb Q(\\omega)$, the splitting field of $x^3-2$ is a cyclic cubic extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer, thm-field-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

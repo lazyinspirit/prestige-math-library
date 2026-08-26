@@ -2,7 +2,7 @@
 id: thm-sequence-construction-generating-function
 kind: theorem
 title: "If $\\mathcal{A}$ has no size-zero objects then $\\operatorname{SEQ}(\\mathcal{A})$ has generating function $1/(1-A(x))$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

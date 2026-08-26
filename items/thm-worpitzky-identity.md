@@ -2,7 +2,7 @@
 id: thm-worpitzky-identity
 kind: theorem
 title: "Worpitzky's identity for $n\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

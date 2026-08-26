@@ -2,7 +2,7 @@
 id: def-poisson-integral-on-the-disc
 kind: definition
 title: "The Poisson integral on the unit disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-poisson-kernel-on-the-disc]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

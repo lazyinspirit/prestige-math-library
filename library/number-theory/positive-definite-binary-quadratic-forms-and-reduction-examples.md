@@ -1,7 +1,7 @@
 ---
 page: positive-definite-binary-quadratic-forms-and-reduction-examples
 title: "Positive Definite Binary Quadratic Forms and Reduction — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-reducing-a-large-binary-quadratic-form,
            ex-reduced-forms-of-discriminant-minus-four,

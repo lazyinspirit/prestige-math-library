@@ -2,7 +2,7 @@
 id: ex-localisation-does-not-commute-with-products
 kind: example
 title: "Localisation need not commute with infinite products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-localisation-of-modules-commutes-with-quotients-and-sums, def-localis
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

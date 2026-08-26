@@ -2,7 +2,7 @@
 id: thm-solvable-by-radicals-implies-a-solvable-galois-group
 kind: theorem
 title: "In characteristic $0$, a polynomial solvable by radicals has a solvable Galois group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

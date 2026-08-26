@@ -2,7 +2,7 @@
 id: ex-primes-represented-by-x-squared-plus-two-y-squared
 kind: example
 title: "Odd primes congruent to $1$ or $3$ modulo $8$ are represented by $x^2+2y^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

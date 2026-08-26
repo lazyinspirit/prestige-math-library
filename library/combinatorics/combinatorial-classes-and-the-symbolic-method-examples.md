@@ -1,7 +1,7 @@
 ---
 page: combinatorial-classes-and-the-symbolic-method-examples
 title: "Combinatorial Classes and the Symbolic Method: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-binary-words-as-sequences-of-two-atoms,
            ex-compositions-of-four-from-sequences,

@@ -2,7 +2,7 @@
 id: ex-real-parts-of-z-powers-are-harmonic
 kind: example
 title: "The real parts of z^n are harmonic polynomials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

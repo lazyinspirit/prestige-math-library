@@ -2,7 +2,7 @@
 id: def-primitive-binary-quadratic-form
 kind: definition
 title: "Primitive binary quadratic forms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

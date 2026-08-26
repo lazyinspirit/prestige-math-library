@@ -2,7 +2,7 @@
 id: lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports
 kind: lemma
 title: "A finite module has the union of its generator-cyclic supports"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-support-membership-by-annihilator, lem-support-of-a-cyclic-module-is-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

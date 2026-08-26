@@ -2,7 +2,7 @@
 id: lem-localisation-of-hom-natural-map
 kind: lemma
 title: "There is a natural localisation map on Hom"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-hom-module-over-a-commutative-ring, thm-universal-property-localisati
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

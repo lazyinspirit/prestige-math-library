@@ -2,7 +2,7 @@
 id: lem-localised-hom-finite-presentation-kernel-step
 kind: lemma
 title: "A finite presentation reduces localised Hom to the finite free case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-localisation-of-hom-natural-map, thm-localisation-of-modules-is-exact
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

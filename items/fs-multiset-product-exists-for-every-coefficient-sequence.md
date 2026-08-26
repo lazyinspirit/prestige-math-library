@@ -2,7 +2,7 @@
 id: fs-multiset-product-exists-for-every-coefficient-sequence
 kind: false-statement
 title: "FALSE: the positive-size multiset product always encodes a valid multiset class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

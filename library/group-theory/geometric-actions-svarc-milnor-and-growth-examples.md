@@ -1,7 +1,7 @@
 ---
 page: geometric-actions-svarc-milnor-and-growth-examples
 title: "Geometric Actions Svarc Milnor and Growth Examples"
-status: draft
+status: published
 items: []
 examples: [ex-integers-acting-geometrically-on-the-line,
            ex-z-n-acting-geometrically-on-euclidean-n-space,

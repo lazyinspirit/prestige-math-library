@@ -2,7 +2,7 @@
 id: rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters
 kind: remark
 title: "What the Vitali set, Bernstein sets and free ultrafilters cost in choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

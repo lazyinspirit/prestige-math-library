@@ -2,7 +2,7 @@
 id: lem-symmetric-groups-up-to-four-are-solvable
 kind: lemma
 title: "The symmetric groups $S_n$ are solvable for $n\\le 4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

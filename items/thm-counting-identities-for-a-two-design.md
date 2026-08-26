@@ -2,7 +2,7 @@
 id: thm-counting-identities-for-a-two-design
 kind: theorem
 title: "A $2$-design satisfies $bk=vr$ and $r(k-1)=\\lambda(v-1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-two-design, lem-replication-number-is-constant-in-a-two-design]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

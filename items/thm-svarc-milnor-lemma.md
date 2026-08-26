@@ -2,7 +2,7 @@
 id: thm-svarc-milnor-lemma
 kind: theorem
 title: "The Svarc-Milnor lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

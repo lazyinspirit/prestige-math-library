@@ -2,7 +2,7 @@
 id: prop-finite-sharply-k-transitive-actions-have-order-falling-factorial
 kind: proposition
 title: "A finite sharply k-transitive action has order n(n-1)...(n-k+1)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

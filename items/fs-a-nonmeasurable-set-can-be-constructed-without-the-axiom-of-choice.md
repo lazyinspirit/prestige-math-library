@@ -2,7 +2,7 @@
 id: fs-a-nonmeasurable-set-can-be-constructed-without-the-axiom-of-choice
 kind: false-statement
 title: "FALSE, relative to an inaccessible cardinal: ZF + DC proves that a nonmeasurable subset of $\\mathbb{R}$ exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ proof_strategy: direct
 deps: [rem-solovay-model, rem-shelah-inaccessible-and-the-baire-property]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

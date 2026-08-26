@@ -2,7 +2,7 @@
 id: def-primitive-and-imprimitive-actions
 kind: definition
 title: "Primitive and imprimitive transitive actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-block-and-block-system-for-a-group-action, def-group-action]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

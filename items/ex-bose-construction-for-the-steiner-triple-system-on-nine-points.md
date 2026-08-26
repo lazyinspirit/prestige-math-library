@@ -2,7 +2,7 @@
 id: ex-bose-construction-for-the-steiner-triple-system-on-nine-points
 kind: example
 title: "Bose's construction at order $9$ gives a Steiner triple system on nine points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-bose-construction-produces-a-steiner-triple-system]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

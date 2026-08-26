@@ -2,7 +2,7 @@
 id: cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted
 kind: counterexample
 title: "The polynomial Rödl witness need not be the whole graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-combinatorial-specification-and-order-raising-recursion
 kind: definition
 title: "Combinatorial specifications and order-raising recursive specifications"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-26
   precheck: n/a
 sources:
   scraped: []

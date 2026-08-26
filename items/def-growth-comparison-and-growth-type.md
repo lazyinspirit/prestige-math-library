@@ -2,7 +2,7 @@
 id: def-growth-comparison-and-growth-type
 kind: definition
 title: "Growth comparison and growth type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-growth-function-of-a-finitely-generated-group]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

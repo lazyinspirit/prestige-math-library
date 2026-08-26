@@ -2,7 +2,7 @@
 id: thm-harmonic-conjugate-on-homologically-simply-connected-domains
 kind: theorem
 title: "Harmonic conjugates exist on homologically simply connected plane domains"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

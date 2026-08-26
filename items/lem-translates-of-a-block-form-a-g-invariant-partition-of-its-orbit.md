@@ -2,7 +2,7 @@
 id: lem-translates-of-a-block-form-a-g-invariant-partition-of-its-orbit
 kind: lemma
 title: "The translates of a block partition its orbit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: combinatorial-classes-and-the-symbolic-method
 title: "Combinatorial Classes and the Symbolic Method"
-status: draft
+status: published
 items: [def-combinatorial-class-and-ordinary-generating-function,
         def-neutral-and-atomic-classes,
         def-disjoint-union-and-cartesian-product-of-combinatorial-classes,

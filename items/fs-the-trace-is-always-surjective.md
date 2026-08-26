@@ -2,7 +2,7 @@
 id: fs-the-trace-is-always-surjective
 kind: false-statement
 title: "FALSE: the trace map of every finite extension is surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [ex-trace-vanishes-on-a-purely-inseparable-extension]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

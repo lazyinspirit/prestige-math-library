@@ -2,7 +2,7 @@
 id: def-localisation-of-a-module
 kind: definition
 title: "Localisation of a module at a multiplicative subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-localised-module-fraction-equivalence-is-an-equivalence-relat
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-26
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

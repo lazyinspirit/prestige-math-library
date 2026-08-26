@@ -2,7 +2,7 @@
 id: prop-positive-definite-binary-form-criterion
 kind: proposition
 title: "An integral binary quadratic form is positive definite exactly when its leading coefficient is positive and its discriminant is negative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

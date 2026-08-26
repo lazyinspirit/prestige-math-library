@@ -2,7 +2,7 @@
 id: ex-binary-words-as-sequences-of-two-atoms
 kind: example
 title: "Binary words of length at most three from $\\operatorname{SEQ}(2\\mathcal{Z})$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

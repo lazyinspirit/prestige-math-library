@@ -2,7 +2,7 @@
 id: lem-gauss-reduction-step-improves-a-positive-definite-form
 kind: lemma
 title: "A non-reduced positive-definite form admits an equivalent positive-definite form with smaller reduction measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

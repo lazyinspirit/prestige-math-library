@@ -2,7 +2,7 @@
 id: lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two
 kind: lemma
 title: "The map $x \\mapsto x + c(x)$ is a homeomorphism from $[0,1]$ onto $[0,2]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-cosets-of-q-in-r-and-the-vitali-translates-on-unit-interval
 kind: example
 title: "The cosets of $\\mathbb{Q}$ in $\\mathbb{R}$ meet $[0,1]$ in pairwise disjoint classes, and rational translates of a Vitali set count them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ proof_strategy: direct
 deps: [def-vitali-set-on-the-unit-interval, thm-rationals-countable]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

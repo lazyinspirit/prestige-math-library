@@ -2,7 +2,7 @@
 id: cor-prime-power-orders-admit-complete-families-of-orthogonal-latin-squares
 kind: corollary
 title: "Every prime power order $q$ admits $q-1$ mutually orthogonal Latin squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-existence-of-finite-fields,
        def-orthogonal-latin-squares-and-complete-families]
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

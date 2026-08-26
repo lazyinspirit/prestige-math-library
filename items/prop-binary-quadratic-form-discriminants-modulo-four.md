@@ -2,7 +2,7 @@
 id: prop-binary-quadratic-form-discriminants-modulo-four
 kind: proposition
 title: "An integer is the discriminant of an integral binary quadratic form exactly when it is congruent to $0$ or $1$ modulo $4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

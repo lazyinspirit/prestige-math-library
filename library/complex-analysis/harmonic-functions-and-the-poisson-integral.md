@@ -1,7 +1,7 @@
 ---
 page: harmonic-functions-and-the-poisson-integral
 title: "Harmonic Functions and the Poisson Integral"
-status: draft
+status: published
 items: [def-plane-harmonic-function, rem-agreement-with-c2-holomorphic-components-are-harmonic, thm-local-holomorphic-potential-for-harmonic-functions, def-harmonic-conjugate, thm-harmonic-conjugate-on-homologically-simply-connected-domains, cor-harmonic-conjugates-differ-by-a-real-constant, thm-plane-harmonic-functions-are-smooth-and-real-analytic, def-mean-value-property-for-plane-functions, thm-mean-value-property-for-plane-harmonic-functions, thm-maximum-and-minimum-principles-for-plane-harmonic-functions, cor-uniqueness-for-the-bounded-plane-dirichlet-problem, cor-liouville-theorem-for-plane-harmonic-functions, thm-identity-principle-for-plane-harmonic-functions, thm-conformal-invariance-of-plane-harmonicity, def-poisson-kernel-on-the-disc, lem-poisson-kernel-properties-on-the-disc, def-poisson-integral-on-the-disc, lem-poisson-integrals-are-harmonic, lem-poisson-kernel-is-a-boundary-approximate-identity, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-poisson-representation-for-disc-harmonic-functions, thm-converse-mean-value-property-for-plane-functions, thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions, thm-harnack-inequality-on-a-disc, thm-harnack-convergence-principle-for-plane-harmonic-functions, thm-harmonic-and-holomorphic-schwarz-reflection-principles]
 examples: []
 ---

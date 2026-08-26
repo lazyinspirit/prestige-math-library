@@ -2,7 +2,7 @@
 id: cex-zero-residue-does-not-force-a-removable-singularity
 kind: counterexample
 title: "Zero residue does not imply a removable singularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

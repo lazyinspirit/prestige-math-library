@@ -2,7 +2,7 @@
 id: thm-the-codensity-monad-of-the-small-skeleton-of-finite-sets-is-the-ultrafilter-monad
 kind: theorem
 title: "The codensity monad of the small skeleton of finite sets is the ultrafilter monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

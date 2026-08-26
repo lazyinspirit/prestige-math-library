@@ -2,7 +2,7 @@
 id: lem-metric-properness-agrees-with-proper-discontinuity-on-proper-discrete-metric-spaces
 kind: lemma
 title: "Metric properness agrees with proper discontinuity on proper discrete metric spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

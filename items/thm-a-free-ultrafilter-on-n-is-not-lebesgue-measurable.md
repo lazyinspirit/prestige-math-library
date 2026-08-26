@@ -2,7 +2,7 @@
 id: thm-a-free-ultrafilter-on-n-is-not-lebesgue-measurable
 kind: theorem
 title: "A free ultrafilter on $\\mathbb{N}$, viewed as a subset of $\\{0,1\\}^{\\mathbb{N}}$ and hence of $[0,1]$, is not Lebesgue measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

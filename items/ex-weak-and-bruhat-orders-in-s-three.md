@@ -2,7 +2,7 @@
 id: ex-weak-and-bruhat-orders-in-s-three
 kind: example
 title: "The weak and Bruhat orders on $S_3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

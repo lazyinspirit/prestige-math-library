@@ -2,7 +2,7 @@
 id: fs-a-dense-set-of-outer-measure-zero-and-a-dense-set-of-full-inner-measure-cannot-coexist
 kind: false-statement
 title: "FALSE: a dense subset of $\\mathbb{R}$ of outer measure zero and a dense subset of full inner measure cannot both meet every open interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ deps: [prop-countable-subsets-of-rn-are-lebesgue-null,
        thm-lebesgue-measure-of-a-box-of-every-kind]
 aliases: []
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []

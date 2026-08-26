@@ -2,7 +2,7 @@
 id: thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p
 kind: theorem
 title: "For prime $p$, a transitive subgroup of $S_p$ containing a transposition is all of $S_p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

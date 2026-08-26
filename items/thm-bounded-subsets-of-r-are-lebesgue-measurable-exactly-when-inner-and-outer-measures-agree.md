@@ -2,7 +2,7 @@
 id: thm-bounded-subsets-of-r-are-lebesgue-measurable-exactly-when-inner-and-outer-measures-agree
 kind: theorem
 title: "For bounded subsets of $\\mathbb{R}$, Lebesgue measurability is equivalent to equality of inner and outer measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-26
   precheck: pass
 sources:
   scraped: []
