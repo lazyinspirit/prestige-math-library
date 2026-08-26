@@ -23,7 +23,7 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'apply-judge-stamps.mjs');
 // The CONFIGURED lineup, READ FROM THE REGISTRY rather than copied. This was a
-// literal `['deepseek-v4-pro', 'claude-opus-5[1m]']` and it broke on
+// literal `['gpt-5.6-terra', 'gpt-5.6-sol']` and it broke on
 // 2026-08-24 when the owner moved the judge lane to gpt-5.4 — a lane change is
 // the supported operation the registry exists to make cheap, and a test that
 // fails on it is just a fourth copy of the assignment. The lane has now swapped

@@ -1,6 +1,6 @@
 // An external outage must not consume repair rounds.
 //
-// WHY. During the sonnet account limit on frontier-15 (2026-08-17), every
+// WHY. During the terra account limit on frontier-15 (2026-08-17), every
 // judge-closure re-sweep was a guaranteed null — "You've hit your session
 // limit · resets 12pm" — yet each re-sweep consumed one of 7-judge's two
 // repair rounds. The stage exhausted on work that could never have succeeded
@@ -22,7 +22,7 @@ import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 
-const SONNET_LIMIT = "NO_CONTENT: You've hit your session limit · resets 12pm (Australia/Sydney)";
+const SESSION_LIMIT = "NO_CONTENT: You've hit your session limit · resets 12pm (Australia/Sydney)";
 const UNPARSEABLE = 'UNPARSEABLE (567 chars): Flagged: step 1.1 asserts that a homomorphism killing 2';
 
 function fixtureRepo() {
@@ -48,7 +48,7 @@ function executorAt(repo: string) {
 // ---------------------------------------------------------------- signature
 
 test('the signature matches the live outage messages and nothing else', () => {
-  assert.ok(OUTAGE_SIGNATURE.test(SONNET_LIMIT), 'the sonnet session limit IS the outage');
+  assert.ok(OUTAGE_SIGNATURE.test(SESSION_LIMIT), 'the session limit IS the outage');
   assert.ok(OUTAGE_SIGNATURE.test('HTTP 429 Too Many Requests'), 'a provider 429 is an outage');
   assert.ok(!OUTAGE_SIGNATURE.test(UNPARSEABLE), 'a prose verdict re-spends on a round, correctly');
   assert.ok(!OUTAGE_SIGNATURE.test('NO_CONTENT: OpenAI Codex v0.147.0'),
@@ -67,21 +67,21 @@ test('all fresh nulls carrying the signature is an outage; anything else is not'
   // every null since the cut carries the signature -> outage, reason quoted
   writeLedger(repo, [
     { id: 'a', model: 'm', keep: true, at: after },
-    { id: 'b', model: 'm', keep: null, reason: SONNET_LIMIT, at: after },
-    { id: 'c', model: 'm', keep: null, reason: SONNET_LIMIT, at: after },
+    { id: 'b', model: 'm', keep: null, reason: SESSION_LIMIT, at: after },
+    { id: 'c', model: 'm', keep: null, reason: SESSION_LIMIT, at: after },
   ]);
   assert.match(judgeOutageSince(ctx, cut) ?? '', /session limit/);
 
   // one non-outage null in the window -> a repair round is the right spend
   writeLedger(repo, [
-    { id: 'b', model: 'm', keep: null, reason: SONNET_LIMIT, at: after },
+    { id: 'b', model: 'm', keep: null, reason: SESSION_LIMIT, at: after },
     { id: 'c', model: 'm', keep: null, reason: UNPARSEABLE, at: after },
   ]);
   assert.equal(judgeOutageSince(ctx, cut), null);
 
   // outage nulls that predate the window are history, not evidence
   writeLedger(repo, [
-    { id: 'b', model: 'm', keep: null, reason: SONNET_LIMIT, at: before },
+    { id: 'b', model: 'm', keep: null, reason: SESSION_LIMIT, at: before },
     { id: 'c', model: 'm', keep: true, at: after },
   ]);
   assert.equal(judgeOutageSince(ctx, cut), null);
@@ -176,7 +176,7 @@ test('8-rejudge reports the previous round\'s outage instead of re-dispatching i
   const s8: any = stages.find((s: any) => s.id === '8-rejudge');
 
   // the previous round's sweep produced only outage nulls -> report, no dispatch
-  writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason: SONNET_LIMIT, at: after }]);
+  writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason: SESSION_LIMIT, at: after }]);
   const r1 = await s8.onGateFailure({ ctx, executor, stage: s8, round: 2, prevRoundAt: cut,
     failure: { id: 'judge-closure', ok: false, why: '' } });
   assert.match(r1?.outage?.reason ?? '', /session limit/);

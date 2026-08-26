@@ -442,7 +442,7 @@ test('a rejected published repair returns to its originating group even after ru
     repaired: ['lem-published-thing'],
     needs_rejudge: [],
     unadjudicated_rows: [{
-      id: 'lem-published-thing', model: 'deepseek-v4-pro', context_sha256: 'a'.repeat(64),
+      id: 'lem-published-thing', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64),
     }],
     open_fatal: [],
     escalations: [],
@@ -508,7 +508,7 @@ test('step8-scope published refuses retired-lineup-only evidence', () => {
   const { foundVia, sessionRoot } = installPublishedJudgeSession(run);
   const files = [
     [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
-    [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'deepseek-v4-pro', context_sha256: 'abc', keep: true })}\n`],
+    [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'gpt-5.6-terra', context_sha256: 'abc', keep: true })}\n`],
   ];
   try {
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);

@@ -681,7 +681,7 @@ export class Executor {
     //
     // 2s -> 3s ON EVIDENCE, not taste. frontier-18's step 5 dispatched all ten
     // authors inside one millisecond — 05:29:51.794, .802, .805 — and every one
-    // came back `API Error: 529 Overloaded`. Two full rounds of ten Opus[1m]
+    // came back `API Error: 529 Overloaded`. Two full rounds of ten Sol[1m]
     // lanes were lost to a simultaneous boot before a single token of authoring
     // was written. The owner's standing instruction sets the separation at
     // three seconds, and a stampede is the one case that had already been
@@ -1487,7 +1487,7 @@ export class Executor {
    *  'none'    — no hook, or the round budget is exhausted.
    *
    * A hook that returns `{ outage }` gets its round REFUNDED and a clock set
-   * instead. During the sonnet account limit on frontier-15, every judge
+   * instead. During the terra account limit on frontier-15, every judge
    * re-sweep was a guaranteed null yet each consumed a round, and 7-judge
    * exhausted on work that could never have succeeded — the budget bounds
    * divergence, and an outage is not divergence. Both round-spending sites

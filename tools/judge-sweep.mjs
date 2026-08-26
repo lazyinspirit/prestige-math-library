@@ -1,10 +1,9 @@
 // Run hash-attested judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Each model has its own cross-process pool: 16 slots per configured model (owner,
-// 2026-08-05; DeepSeek was briefly 24). They start their next item as soon as
-// one of their own slots is free. Total concurrency is the sum of the selected
-// models' caps; the current singleton Terra lineup therefore uses Terra's cap.
+// Each model has its own cross-process pool. They start their next item as soon
+// as one of their own slots is free. Total concurrency is the sum of the selected
+// models' caps; the current singleton Terra lineup uses Terra's cap.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
@@ -53,22 +52,10 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
   throw new Error("--limit must be a positive integer");
 }
 
-// The ids come from tools/models.mjs, the one registry. They stay named here
-// because the per-model CONCURRENCY table below keys on them, and the `[1m]`
-// suffix is part of the model IDENTITY — ledger rows, slot directories and
-// JUDGE_CONCURRENCY_* names all carry it.
-const DEEPSEEK = MODELS.deepseek.id;
+// The ids come from tools/models.mjs, the one registry.
 const TERRA = MODELS.terra.id;
-const SONNET = MODELS.sonnet.id;
-const OPUS = MODELS.opus.id;
-// The lineup map is the registry's too. Historical rows are append-only evidence
-// only; the child judge inherits the same env var as the sweep. Default flipped
-// to deepseek+sonnet (owner, 2026-08-17) after the Codex account behind Terra
-// was throttled mid-run, BACK to deepseek+terra (owner, 2026-08-20), and to
-// deepseek+opus (owner, 2026-08-23) when that Codex subscription reached its
-// weekly limit outright. Every retired lane's rows stay as evidence; none
-// satisfies current coverage, which is per frozen context and per configured
-// model set, not per any judge name appearing in the ledger.
+// The child judge inherits the same configured lineup as the sweep. Historical
+// rows remain append-only evidence but do not satisfy current model coverage.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const supportedModels = JUDGE_LINEUPS[lineupName];
 if (!supportedModels) {
@@ -240,83 +227,11 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
 const MODEL_CONCURRENCY = Object.freeze({
-  // DeepSeek gates every sweep: at the end of wave 1b's A7, Terra had
-  // finished all 174 while DeepSeek still had 36 pending with all of its
-  // slots held. Its per-call latency, not its throughput, sets wall clock.
-  // That is why it was raised 16 -> 24 (owner, 2026-08-03), and it is BACK to
-  // 16 (owner, 2026-08-05) for a reason latency does not see: MEMORY. Every
-  // lane call is its own node+tsx process. Wave 4 measured the sweep at 3.9 GB
-  // with a 4.6 GB peak on a 7.8 GB host, past the
-  // unit's MemoryHigh=4G and closing on MemoryMax=5G. A lane killed by the
-  // kernel returns a capacity refusal, and a capacity refusal is not a verdict
-  // — a capacity refusal is always a null verdict.
-  // RAISED to 24 for DeepSeek and Sonnet (owner, 2026-08-17), superseding the
-  // 2026-08-05 16-cap. The context that cap carried, restated so this raise
-  // is a decision and not amnesia: the 16-cap's reason was MEMORY — the sweep
-  // measured 3.9 GB with a 4.6 GB peak at 16+16 on a 7.8 GB VPS host, and a
-  // kernel-killed lane is a null verdict. This host carries 16 GB. The
-  // retired 2026-08-04 Claude lane also recorded 207 capacity refusals at
-  // cap 16; today's sonnet lane ran 313/392 clean at cap 6 with its nulls
-  // coming from the account session limit, not concurrency. If 24 produces
-  // refusal or kernel-kill nulls, the currency rule re-spends them — but
-  // lower the cap back rather than paying that loop twice.
-  //
-  // BOTH ACTIVE LANES ARE 14 (owner, 2026-08-20): "Set judge concurrency to 14
-  // for both deepseek and terra". The sweep therefore runs **28 calls combined**
-  // under `deepseek+terra`. This is a BACK-OFF, not a raise, and it sits below
-  // every previously measured cliff: below the 2026-08-05 memory value of 16
-  // that was derived on a 7.8 GB host, and well below the 24 the other lanes
-  // carried. Symmetric caps also mean neither lane can get far ahead of the
-  // other, so an interrupted sweep leaves fewer half-paired items.
-  //
-  // Do not read this as a memory or capacity finding — none was taken on
-  // 2026-08-20. It is an owner setting, and the note above records what the
-  // numbers around it were measured from.
-  //
-  // SONNET keeps 24 because its lineup is not selected; if `deepseek+sonnet` is
-  // ever chosen again, decide its cap then rather than inheriting a number set
-  // for a different lane.
-  //
-  // OPUS TAKES 14 (owner, 2026-08-23) — the owner's active-lane value, carried
-  // over unchanged with the lane swap: "Just replace LLMs as instructed without
-  // changing anything else". The paragraph above says to decide a newly selected
-  // lane's cap rather than inherit one, so record what the decision was made
-  // AGAINST, because this is the one number in this file that a measurement
-  // disagrees with:
-  //   * the retired 2026-08-04 claude lane returned 207 CAPACITY REFUSALS against
-  //     140 responses at cap 16 on wave 5 A7 — 60%, up from 29% on wave 4 — while
-  //     DeepSeek returned 209/209 on the same sweep;
-  //   * the sonnet lane ran 313/392 clean at cap 6, and its nulls came from the
-  //     account SESSION LIMIT rather than from concurrency;
-  //   * a capacity refusal is a null verdict, never a verdict, so a lane that
-  //     refuses does not fail loudly — it quietly halves the run's paired
-  //     coverage.
-  // Both figures are for a claude-CLI lane, which is what the second judge is
-  // again as of 2026-08-24 (claude-sonnet-4-6), and 14 sits between them. If this
-  // sweep starts returning `claude_exit` nulls at ~3.5s, that is the refusal
-  // signature: lower with JUDGE_CONCURRENCY_CLAUDE_SONNET_4_6 (which can only
-  // lower, never raise) rather than re-spending the loop. The env name is derived
-  // from the model id, so it moves with the lineup — see `laneCap` below.
-  [DEEPSEEK]: 14,
   [TERRA]: 14,
-  [SONNET]: 24,
-  [OPUS]: 14,
 });
 
-// MEASURED, wave 5 A7 (2026-08-05): at cap 16 the retired second lane returned **207
-// capacity refusals against 140 responses** — `claude_exit`, status 1, 66 bytes,
-// ~3.5s, i.e. refused fast rather than reasoning and failing. 69 of 209 items
-// ended with only DeepSeek's verdict, so the wave's paired coverage was really
-// 140/209. The trend is the alarming part: wave 4 refused 61 of 213 (29%) at the
-// same cap, wave 5 refused 60%. DeepSeek, on the same sweep, returned 209/209.
-//
-// This is the exact failure that retired an earlier lane (303 refusals of 382 on
-// wave 0), and the standing rule is that a capacity refusal is a NULL, never a
-// verdict. So the cap needs to be tunable without editing an owner-set constant:
-// the default is whatever MODEL_CONCURRENCY says the owner set (14 per active
-// lane since 2026-08-20), and a targeted replay can lower just the refusing
-// lane. Raising it above the owner's value is deliberately not possible here —
-// this exists to back off, not to push harder.
+// A targeted replay may lower a model's cap without editing the registry.
+// Raising it above the configured value is deliberately not possible here.
 const concurrencyOverride = (model) => {
   const raw = process.env[`JUDGE_CONCURRENCY_${model.replace(/[^A-Za-z0-9]/g, "_").toUpperCase()}`];
   if (raw === undefined) return null;
@@ -389,24 +304,9 @@ const acquireModelSlot = async (model) => {
         const heartbeat = setInterval(() => {
           try { utimesSync(slot, new Date(), new Date()); } catch { /* released or replaced */ }
         }, SLOT_HEARTBEAT_MS);
-        // STAGGER THE CODEX BOOT BURST. Terra is an ephemeral Codex process
-        // per call, and sixteen of them booting in the same second all hit
-        // the models-refresh endpoint together: on frontier-15's step-7
-        // sweep every Terra call died NO_CONTENT on `429 Too Many Requests
-        // ... failed to refresh available models` while DeepSeek's direct
-        // API sailed — 392 null verdicts, an entire lane lost. A first-boot
-        // spread of 1.5s per slot index (0–22.5s across the pool) costs
-        // nothing against a multi-hour sweep and keeps concurrent boots to
-        // ones; steady-state recycling never bursts, so the delay applies
+        // Stagger the Codex boot burst so the pool does not hit model refresh
+        // concurrently. Steady-state recycling never bursts, so this applies
         // once per slot acquisition.
-        //
-        // DELIBERATELY TERRA-ONLY, still, after the 2026-08-23 move to Opus.
-        // This stagger targets one specific Codex failure — a models-refresh
-        // endpoint 429 at boot — and the claude CLI has no such step. The Opus
-        // lane's known failure is different in kind: an ACCOUNT capacity refusal
-        // (`claude_exit`, ~3.5s, 66 bytes), which spreading boots does not fix
-        // because the limit is on the quota, not on the boot. If that signature
-        // appears, lower the cap; do not add a stagger and expect it to help.
         if (model === "gpt-5.6-terra" && index > 0) await pause(index * 1500);
         return () => {
           clearInterval(heartbeat);
@@ -469,7 +369,6 @@ if (persistentPairs) {
           JUDGE_MAX_ATTEMPTS: "1",
           JUDGE_ATTEMPT_NUMBER: String(attempt + 1),
           JUDGE_RETRY_ALLOWED: attempt < 2 ? "1" : "0",
-          JUDGE_DEEPSEEK_LENGTH_FALLBACK: lengthFallback ? "1" : "0",
         });
       } catch (cause) {
         console.error(`[judge-sweep] ${id}: could not start persistent judge — ${String(cause)}`);
@@ -547,7 +446,6 @@ const runAttempt = async (task) => {
           JUDGE_MAX_ATTEMPTS: "1",
           JUDGE_ATTEMPT_NUMBER: String(task.attempt + 1),
           JUDGE_RETRY_ALLOWED: task.attempt < 2 ? "1" : "0",
-          JUDGE_DEEPSEEK_LENGTH_FALLBACK: task.lengthFallback ? "1" : "0",
         },
       );
     } catch (error) {

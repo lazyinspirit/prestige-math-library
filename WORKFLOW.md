@@ -59,8 +59,8 @@ stages.
 
 `tools/models.mjs` owns model IDs, runners, lanes, and judge-lineup resolution.
 `tools/dispatch.mjs` owns role caps, effort, web access, sandbox enforcement,
-session handling, and output capture. This document deliberately names neither
-current model nor lineup.
+session handling, and output capture. Every registered model is a GPT model on
+the Codex runner; the current judge lineup is the singleton `gpt-5.6-terra` lane.
 
 | Role | Build responsibility | Evidence |
 |---|---|---|

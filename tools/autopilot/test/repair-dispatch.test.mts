@@ -164,7 +164,7 @@ test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alph
     unadjudicated: ['thm-demo-x'],
     unadjudicated_rows: [
       { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
-      { id: 'thm-demo-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' },
+      { id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' },
     ],
     open_fatal: [],
     closed: false,
@@ -277,7 +277,7 @@ test('closure recovery is routed per group and keeps the recovery brief', async 
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
     needs_rejudge: [],
     unadjudicated: ['thm-demo-x'],
-    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'deepseek-v4-pro', context_sha256: 'abc123' }],
+    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'abc123' }],
     open_fatal: [], closed: false,
   }));
   const started: any[] = [];
@@ -413,7 +413,7 @@ test('boundary-audit respects an Alpha-upheld row and reports it', () => {
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('the three judge tools agree on the lineup table', () => {
+test('the judge tools agree on the configured lineup', () => {
   // Two hash normalisations under one field name; two prompt systems for one
   // role; two gate tables — divergent copies are this repo's oldest defect
   // class. The lineup map lives in three files; an unknown JUDGE_LINEUP makes
@@ -426,9 +426,7 @@ test('the three judge tools agree on the lineup table', () => {
     const r = spawnSync(process.execPath, [join(REPO, tool), ...args],
       { cwd: REPO, encoding: 'utf8', env: { ...process.env, JUDGE_LINEUP: '__nope__' }, timeout: 60_000 });
     const out = `${r.stdout}\n${r.stderr}`;
-    assert.match(out, /deepseek\+opus/, `${tool} lost the opus lineup`);
-    assert.match(out, /deepseek\+terra/, `${tool} lost the terra lineup`);
-    assert.match(out, /deepseek\+sonnet/, `${tool} lacks the sonnet lineup`);
+    assert.match(out, /terra/, `${tool} lost the Terra lineup`);
   }
 });
 

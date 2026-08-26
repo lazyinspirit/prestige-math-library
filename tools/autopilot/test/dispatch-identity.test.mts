@@ -102,14 +102,14 @@ test('an invalid attempt number fails before inference', () => {
 
 test('a manually re-armed attempt cannot overwrite earlier prompt, log, or result evidence', () => {
   const temp = mkdtempSync(join(tmpdir(), 'dispatch-cli-'));
-  const fakeClaude = join(temp, 'fake-claude.mjs');
-  writeFileSync(fakeClaude, `#!/usr/bin/env node
+  const fakeCodex = join(temp, 'fake-codex.mjs');
+  writeFileSync(fakeCodex, `#!/usr/bin/env node
 let input = '';
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', (chunk) => { input += chunk; });
 process.stdin.on('end', () => console.log('fake ok ' + input.length));
 `);
-  chmodSync(fakeClaude, 0o755);
+  chmodSync(fakeCodex, 0o755);
   const run = `dispatch-evidence-${process.pid}-${Date.now()}`;
   const outDir = join(REPO, 'research', `${run}-dispatch`);
   const invoke = () => spawnSync(process.execPath,
@@ -117,7 +117,7 @@ process.stdin.on('end', () => console.log('fake ok ' + input.length));
       '--brief', brief('# Mechanic\nReturn a short acknowledgement.\n'),
       '--label', 'retry-preserve', '--run', run, '--attempt', '1', '--timeout', '10'],
     { cwd: REPO, encoding: 'utf8', timeout: 30_000,
-      env: { ...process.env, CLAUDE_BIN: fakeClaude, CODEX_BIN: fakeClaude,
+      env: { ...process.env, CODEX_BIN: fakeCodex,
         DISPATCH_SLOT_ROOT: join(temp, 'slots') } });
   try {
     const first = invoke();
@@ -159,7 +159,7 @@ process.stdin.on('end', () => setTimeout(() => console.log('fake concurrent ok')
     const child = spawn(process.execPath,
       [join(REPO, 'tools', 'dispatch.mjs'), '--role', 'mechanic', '--brief', prompt,
         '--label', 'same-label', '--run', run, '--attempt', '1', '--timeout', '10'],
-      { cwd: REPO, env: { ...process.env, CLAUDE_BIN: fake, CODEX_BIN: fake,
+      { cwd: REPO, env: { ...process.env, CODEX_BIN: fake,
         DISPATCH_SLOT_ROOT: join(temp, 'slots') }, stdio: ['ignore', 'ignore', 'pipe'] });
     let stderr = '';
     child.stderr.setEncoding('utf8');

@@ -252,7 +252,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   // a judge lane that returned nulls (capacity refusal, a 429 boot stampede)
   // -> re-run the sweep. The currency rule spends ONLY on items lacking a
   // current boolean verdict, so a lane that answered is never re-billed:
-  // frontier-15's retry pended terra 392, deepseek 0.
+  // frontier-15's retry pended terra 392, terra 0.
   'judge-closure': (ctx) => {
     const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
     const aPages = ledger.pages.filter((p: any) => p.kind === 'A').map((p: any) => p.id);
@@ -342,7 +342,7 @@ const blockedObligation = (ctx: any, kind: string): { reason: string; retryAfter
 
 /** A lane override recorded on the matching obligation row — how an owner
  *  substitution travels: the row's `dispatch` carries role/brief/task (e.g.
- *  Opus 5 standing in for a quota-locked Codex lane, owner 2026-08-17), and
+ *  Sol 5 standing in for a quota-locked Codex lane, owner 2026-08-17), and
  *  the decision sits in the run's own artifacts rather than in code. */
 const obligationDispatch = (ctx: any, kind: string): any | null => {
   try {
@@ -355,7 +355,7 @@ const obligationDispatch = (ctx: any, kind: string): any | null => {
 /** An external platform outage answering for a whole lane: an account session
  *  limit ("You've hit your session limit · resets 12pm"), a provider-wide 429
  *  or quota refusal. During one, a judge re-sweep is a guaranteed null — the
- *  sonnet limit on frontier-15 burned both of 7-judge's repair rounds on
+ *  terra limit on frontier-15 burned both of 7-judge's repair rounds on
  *  re-sweeps that could not have succeeded, and the stage exhausted into a
  *  manual rounds-reset. Deliberately NOT matched: UNPARSEABLE (a prose verdict
  *  re-spends on a round, correctly) and NO_CONTENT alone (Terra's account
@@ -365,7 +365,7 @@ const obligationDispatch = (ctx: any, kind: string): any | null => {
  *  THIS CLASSIFIER BECAME LOAD-BEARING ON 2026-08-23. It was written for a
  *  second-lane outage while the agent lanes ran on a different account; the
  *  owner has now moved every agent role AND the second judge lane onto one
- *  Claude subscription, so a single "You've hit your session limit" answers for
+ *  Codex subscription, so a single "You've hit your session limit" answers for
  *  the whole run rather than for one lane. `session limit` is matched and stays
  *  matched. Do not narrow this pattern. */
 export const OUTAGE_SIGNATURE = /session limit|resets \d|rate.?limit|\b429\b|quota exceeded|overloaded/i;
@@ -1900,7 +1900,7 @@ export const stages = [
     ],
     // A judge lane can die wholesale without a single verdict being wrong —
     // frontier-15 lost all 392 Terra calls to a 429 boot stampede while
-    // DeepSeek answered everything. The re-sweep is mechanical, and the
+    // Terra answered everything. The re-sweep is mechanical, and the
     // currency rule makes it surgical: only null-verdict items spend. Two
     // rounds; a lane that nulls twice is a platform problem for a person.
     maxFixRounds: 2,

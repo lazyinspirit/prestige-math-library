@@ -32,8 +32,8 @@ const audit = (dir: string) => spawnSync(process.execPath,
 
 test('both lanes rejecting one text version is ONE refutation, not two', () => {
   const dir = fixture([
-    { id: 'thm-x', model: 'deepseek-v4-pro', keep: false, item_sha256: 'aaa' },
-    { id: 'thm-x', model: 'claude-sonnet-5', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
   ]);
   const r = audit(dir);
   assert.equal(r.status, 0, r.stderr);
@@ -42,9 +42,9 @@ test('both lanes rejecting one text version is ONE refutation, not two', () => {
 
 test('two rejected versions of one item is a real 2x — the converging-or-false signal', () => {
   const dir = fixture([
-    { id: 'thm-x', model: 'deepseek-v4-pro', keep: false, item_sha256: 'aaa' },
-    { id: 'thm-x', model: 'claude-sonnet-5', keep: false, item_sha256: 'aaa' },
-    { id: 'thm-x', model: 'deepseek-v4-pro', keep: false, item_sha256: 'bbb' },
+    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.6-terra', keep: false, item_sha256: 'bbb' },
   ]);
   const r = audit(dir);
   assert.match(r.stdout, /thm-x/);
@@ -53,8 +53,8 @@ test('two rejected versions of one item is a real 2x — the converging-or-false
 
 test('a re-spent lane on the same text adds nothing', () => {
   const dir = fixture([
-    { id: 'thm-x', model: 'claude-sonnet-5', keep: false, item_sha256: 'aaa' },
-    { id: 'thm-x', model: 'claude-sonnet-5', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
+    { id: 'thm-x', model: 'gpt-5.4', keep: false, item_sha256: 'aaa' },
   ]);
   const r = audit(dir);
   assert.match(r.stdout, /0 item\(s\)|none/);

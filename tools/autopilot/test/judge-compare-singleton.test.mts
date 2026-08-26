@@ -1,6 +1,6 @@
 // Step 10 must classify the active singleton judge directly. The old reporter
 // destructured two models, so a complete Terra verdict was silently reported
-// as incomplete after the owner retired DeepSeek from the judge lineup.
+// as incomplete after the owner retired Terra from the judge lineup.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';

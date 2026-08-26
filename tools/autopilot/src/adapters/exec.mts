@@ -1,7 +1,7 @@
 // The universal adapter: run a command, wait, report the exit code.
 //
-// PORTABILITY IS THE POINT. Claude Code, Codex, pi, opencode and everything
-// after them differ in exactly one place — how you start an agent and how you
+// PORTABILITY IS THE POINT. Agent hosts differ in exactly one place — how you
+// start an agent and how you
 // know it finished. Everything else the engine does (stage order, coverage,
 // gates, retries, reporting) is identical everywhere, so the platform-specific
 // surface is deliberately this one function.

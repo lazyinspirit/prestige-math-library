@@ -4,8 +4,8 @@
 //   node tools/preflight.mjs [--judges] [--json]
 //
 // WHY. Every dependency this repo has is somewhere else: tsx and the normative
-// precheck source in the app repo, KaTeX in its web tree, Codex auth in a home
-// directory, the DeepSeek key in a .env. Interactively a missing one is an
+// precheck source in the app repo, KaTeX in its web tree, and Codex auth in a
+// home directory. Interactively a missing one is an
 // annoying error message. Unattended it is worse than that, because several of
 // them fail SOFT: rendercheck reports "real KaTeX (SKIPPED)" and exits 0, so a
 // gate that never ran is indistinguishable in a log from a gate that found
@@ -20,17 +20,16 @@
 //
 // Exit 0 = every REQUIRED check passed. Exit 1 = at least one failed.
 
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 import { createRequire } from 'node:module';
-import { REPO, APP_DIR, WORKER_DIR, describe, tsxLoader, precheckSource, katexCandidates, yamlCandidates, deepseekEnvFile } from './paths.mjs';
+import { REPO, APP_DIR, WORKER_DIR, describe, tsxLoader, precheckSource, katexCandidates, yamlCandidates } from './paths.mjs';
 
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const withJudges = argv.includes('--judges');
-const isAudit = argv.includes('--audit');
 
 const checks = [];
 /** @param status 'pass' | 'fail' | 'warn' | 'skip' */
@@ -89,47 +88,8 @@ attempt('yaml', true, () => {
 
 // ---- model lanes ------------------------------------------------------------
 
-// WHICH CLI IS REQUIRED IS COMPUTED, NOT ASSUMED.
-//
-// Two independent consumers decide it, and getting either wrong lets a run
-// start that cannot finish:
-//
-//   AGENTS  — every dispatched role resolves through LANES. Since 2026-08-24
-//             `agentic` and `secondary` are both gpt-5.4 on the CODEX runner:
-//             Beta, reader, `alpha`, `refuter`, `scaffolder`, `mechanic`, and
-//             the audit's `audit-beta`/`audit-alpha`/`certifier`. Only
-//             `audit-refuter` is elsewhere, and it is a keyed HTTP lane rather
-//             than a CLI.
-//   JUDGES  — both workflows judge with the configured model set, `terra` by
-//             default. Retired paired lineups remain selectable only for
-//             historical replay and ledger interpretation.
-//
-// CHECKING ONLY THE LINEUP IS THE HOLE THIS CLOSES. Until 2026-08-11 that is
-// all this did, and it reported a green preflight for a build that could not
-// dispatch its sole adjudicator. The agent side is what closes it — which is
-// why `AGENT_RUNNER` below is stated explicitly rather than inferred from the
-// judge lineup, and why it must move whenever LANES does. It has now been
-// claude-only, and is now codex-only, inside two days.
-//
-// Both tables are duplicated from the registry ON PURPOSE: preflight must not
-// import a tool it is checking is runnable.
-// `tools/autopilot/test/model-registry.test.mts` fails if the lineup drifts.
-const lineupModels = {
-  'terra': ['gpt-5.6-terra'],
-  'deepseek+gpt54': ['deepseek-v4-pro', 'gpt-5.4'],
-  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
-  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-4-6'],
-}[process.env.JUDGE_LINEUP ?? 'terra'] ?? [];
-// Which runner every DISPATCHED AGENT ROLE uses — LANES.agentic and
-// LANES.secondary both resolve to gpt-5.4 on the codex runner (owner,
-// 2026-08-24). A build that cannot spawn this cannot author, audit, adjudicate
-// or repair anything, so it is unconditional for as long as that is true.
-const AGENT_RUNNER = 'codex';
-const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
-const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
-const needCodex = AGENT_RUNNER === 'codex' || judgeNeedsCodex;
-const needClaude = AGENT_RUNNER === 'claude' || judgeNeedsClaude;
+// Every dispatched role and configured judge lane uses the Codex runner.
+const needCodex = true;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
@@ -149,37 +109,6 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
     ? `${join(codexHome, 'auth.json')} present (NOT validated — pass --judges to spend a real call)`
     : `no auth.json under ${codexHome}`,
   'run the Codex login flow; an expired or already-rotated token takes out every GPT-family lane at once');
-
-// CONDITIONAL SINCE 2026-08-24: no lane resolves to claude while the agent lanes
-// are codex, so this probes only when a claude-family JUDGE lane is selected.
-// It becomes unconditional again the moment LANES.agentic returns to claude —
-// which is what `AGENT_RUNNER` above exists to say in one place.
-attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  'install the claude CLI — the configured Claude-family lane spawns `claude -p`');
-// PRESENCE IS NOT CAPACITY, and this is the failure that caused the 2026-08-23
-// move in the first place — with the roles reversed. A subscription that has
-// spent its weekly or session quota still has a working CLI and a valid session,
-// so this check stays green while every lane returns a capacity refusal. A
-// capacity refusal is a null verdict and an incomplete stage, never a verdict and
-// never a completed stage. `--judges` spends one real call and IS proof.
-record('claude-quota', needClaude, 'warn',
-  'not checked — CLI presence says nothing about remaining subscription quota',
-  'pass --judges to spend one real call per lane before committing to a sweep');
-
-// The key itself is never printed, logged, or placed in any output.
-const envFile = deepseekEnvFile();
-if (process.env.DEEPSEEK_API_KEY) {
-  record('deepseek-key', true, 'pass', 'present in environment');
-} else if (envFile && existsSync(envFile)) {
-  const found = readFileSync(envFile, 'utf8').split(/\r?\n/)
-    .some((line) => /^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*\S/.test(line));
-  record('deepseek-key', true, found ? 'pass' : 'fail',
-    found ? `present in ${envFile}` : `${envFile} has no DEEPSEEK_API_KEY`,
-    found ? null : 'set DEEPSEEK_API_KEY or add it to that file');
-} else {
-  record('deepseek-key', true, 'fail', `no DEEPSEEK_API_KEY and no env file at ${envFile ?? '<unresolved>'}`,
-    'set DEEPSEEK_API_KEY or DEEPSEEK_ENV_FILE');
-}
 
 // ---- host -------------------------------------------------------------------
 
@@ -203,32 +132,6 @@ attempt('disk', false, () => {
   if (gb < 2) throw new Error(`${gb.toFixed(1)} GiB free — judge ledgers and touch snapshots grow through a level`);
   return `${gb.toFixed(1)} GiB free`;
 });
-
-// ---- audit-only checks -------------------------------------------------------
-//
-// The retro-audit needs something the build does not: outbound HTTP from the
-// DRIVER. Every provenance row carries a source URL, and the orchestrator is the
-// only actor that can verify them — the Codex agent sandboxes have no DNS, which
-// is why wave 2 produced eight `established-knowledge` waivers, seven of which
-// dissolved the moment someone with a working fetch looked. A wave driven on a
-// machine with no egress would silently degrade to that failure mode.
-
-if (isAudit) {
-  attempt('outbound-http', true, () => {
-    const result = spawnSync('curl', ['-sSL', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '20',
-      'https://en.wikipedia.org/wiki/Ordinal_arithmetic'], { encoding: 'utf8', timeout: 30_000 });
-    if (result.error) throw new Error(`curl unavailable: ${result.error.message}`);
-    const code = (result.stdout || '').trim();
-    if (code !== '200') throw new Error(`expected 200, got ${code || 'no response'} — the URL liveness sweep cannot run`);
-    return 'curl reaches the open web (200)';
-  }, 'without this the wave cannot verify a single source URL');
-
-  attempt('audit-dir', true, () => {
-    const dir = join(REPO, 'research', 'audit');
-    if (!existsSync(dir)) throw new Error('research/audit/ is missing — every wave artifact lives there');
-    return 'research/audit/ present';
-  });
-}
 
 // ---- optional live lane check ----------------------------------------------
 

@@ -132,12 +132,7 @@ const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((l
 // The lineup this tool stamps for is configuration, not a constant. Resolve it
 // the way judge.mts, judge-sweep.mjs, judge-compare.mjs and level-coverage.mjs
 // already do, so one env var stays the single source of truth and a future lane
-// change cannot desynchronise this file again. It had drifted: only
-// deepseek+terra existed here after the owner moved the build to
-// deepseek+sonnet (2026-08-17), so the current lineup could not be stamped at
-// all. Historical keys are kept for exactly that reason — deepseek+opus
-// (2026-08-23) is the fourth lane change in five weeks, and a table that carries
-// only today's answer is the defect, not the fix.
+// change cannot desynchronise this file again.
 // The map is tools/models.mjs; this tool no longer keeps its own copy.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const expected = JUDGE_LINEUPS[lineupName];

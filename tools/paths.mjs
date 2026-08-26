@@ -105,10 +105,6 @@ export const katexCandidates = () =>
 export const yamlCandidates = () =>
   [APP_DIR ? join(WEB_DIR, 'node_modules/yaml') : null, 'yaml'].filter(Boolean);
 
-/** Where DEEPSEEK_API_KEY is read from when it is not already in the env. */
-export const deepseekEnvFile = () =>
-  process.env.DEEPSEEK_ENV_FILE ?? (APP_DIR ? join(APP_DIR, '.env') : null);
-
 /** For `npx --prefix <dir> tsx ...`. */
 export const workerPrefix = () => {
   if (!WORKER_DIR) {

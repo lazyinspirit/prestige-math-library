@@ -42,7 +42,7 @@ function fixture() {
   writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'before' }));
   writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), [
     JSON.stringify({ defect_id: 'demo-D001', run: 'demo', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
-      subclass: 'invalid-inference', location: 'proof-step', disposition: 'fixed', caught_at_stage: '8-adjudicate', caught_by_role: 'judge-deepseek', repair_cost: 'repair+rejudge' }),
+      subclass: 'invalid-inference', location: 'proof-step', disposition: 'fixed', caught_at_stage: '8-adjudicate', caught_by_role: 'judge-terra', repair_cost: 'repair+rejudge' }),
     JSON.stringify({ defect_id: 'demo-D002', run: 'demo', severity: 'fatal', subject: 'thm-a', class: 'accuracy',
       subclass: 'missing-hypothesis', location: 'statement', disposition: 'fixed', caught_at_stage: '8-adjudicate', caught_by_role: 'judge-terra', repair_cost: 'repair+rejudge' }),
   ].join('\n') + '\n');

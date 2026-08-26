@@ -38,7 +38,7 @@ test('the Step-8 paid budget counts frozen contexts per item and stops at two', 
 test('the fatal context that licensed the first repair counts as cycle one', () => {
   const row = {
     id: 'thm-demo-one',
-    model: 'deepseek-v4-pro',
+    model: 'gpt-5.6-terra',
     context_sha256: 'a'.repeat(64),
     outcome: 'confirmed_fatal',
     at: '2026-08-25T00:00:00Z',
@@ -100,7 +100,7 @@ test('cross-group alert identity includes the exact source rejection tuple', () 
     severity: 'fatal',
     source_rejection: {
       id: 'thm-demo-source',
-      model: 'deepseek-v4-pro',
+      model: 'gpt-5.6-terra',
       context_sha256: 'a'.repeat(64),
     },
   };
@@ -108,7 +108,7 @@ test('cross-group alert identity includes the exact source rejection tuple', () 
     ...base,
     source_rejection: {
       context_sha256: 'a'.repeat(64),
-      model: 'deepseek-v4-pro',
+      model: 'gpt-5.6-terra',
       id: 'thm-demo-source',
     },
   }), 'object key order cannot change identity');
@@ -136,7 +136,7 @@ test('the Step-8 guard rejects an adjudication that no judge rejection supports'
       const live = readFileSync(join(REPO, 'research/frontier-18-judge-adjudications.jsonl'), 'utf8');
       const fabricated = {
         id: 'thm-fabricated-never-judged',
-        model: 'deepseek-v4-pro',
+        model: 'gpt-5.6-terra',
         context_sha256: 'f'.repeat(64),
         item_sha256: 'e'.repeat(64),
         outcome: 'confirmed_fatal',
@@ -166,11 +166,11 @@ test('terminal intervention binds the exact unresolved item and two cycle receip
   writeFileSync(join(root, '.autopilot', 'state.json'), JSON.stringify({ run: 'demo' }));
   const initialContext = 'a'.repeat(64);
   writeFileSync(join(root, 'research', 'demo-judge.jsonl'), `${JSON.stringify({
-    id: 'thm-demo-target', model: 'deepseek-v4-pro',
+    id: 'thm-demo-target', model: 'gpt-5.6-terra',
     context_sha256: initialContext, keep: false,
   })}\n`);
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), `${JSON.stringify({
-    id: 'thm-demo-target', model: 'deepseek-v4-pro',
+    id: 'thm-demo-target', model: 'gpt-5.6-terra',
     context_sha256: initialContext, outcome: 'confirmed_fatal',
   })}\n`);
   writeFileSync(join(root, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({

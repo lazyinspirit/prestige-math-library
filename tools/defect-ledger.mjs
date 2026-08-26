@@ -119,14 +119,9 @@ const ENUMS = {
     'page-prose', 'page-summary', 'contract-row', 'coverage-row', 'frontmatter',
     'tool-code', 'engine-stage', 'brief', 'task-file'],
   caught_at_stage: STAGES,
-  // One value per judge LANE, and every retired lane is kept: the ledger is
-  // append-only, so dropping `judge-terra` would invalidate historical rows that
-  // are still the evidence for a past run's step-10 report. `judge-opus` was
-  // added with the 2026-08-23 lineup move — without it, a defect caught by the
-  // active second lane has no legal role value and step 8 cannot record its
-  // disposition at all, which the `check` gate then reads as an unrecorded
-  // adjudication rather than as a missing enum entry.
-  caught_by_role: ['beta', 'reader', 'refuter', 'judge-deepseek', 'judge-opus', 'judge-terra', 'judge-sonnet',
+  // Keep one role value per registered GPT judge lane so dispositions remain
+  // valid when the active GPT lineup changes.
+  caught_by_role: ['beta', 'reader', 'refuter', 'judge-terra', 'judge-sol', 'judge-gpt54',
     'group-alpha', 'lead-alpha', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
   disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
 };

@@ -35,7 +35,7 @@ function fixture() {
   const adj = join(dir, 'adj.jsonl');
   writeFileSync(ledger, JSON.stringify(ROW('demo-run-D001')) + '\n');
   writeFileSync(adj, JSON.stringify({
-    id: 'thm-demo', model: 'deepseek-v4-pro', outcome: 'confirmed_fatal', item_sha256: 'a'.repeat(64),
+    id: 'thm-demo', model: 'gpt-5.6-terra', outcome: 'confirmed_fatal', item_sha256: 'a'.repeat(64),
   }) + '\n');
   return { dir, ledger, view, adj };
 }

@@ -78,7 +78,7 @@ function coverageFixture({ rows, fatalRun }: { rows: object[]; fatalRun: string 
   writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'),
     rows.map((r) => JSON.stringify(r)).join('\n') + (rows.length ? '\n' : ''));
   writeFileSync(join(dir, 'research', `${fatalRun}-judge-adjudications.jsonl`),
-    JSON.stringify({ id: 'thm-x', model: 'deepseek-v4-pro', outcome: 'confirmed_fatal' }) + '\n');
+    JSON.stringify({ id: 'thm-x', model: 'gpt-5.6-terra', outcome: 'confirmed_fatal' }) + '\n');
   return dir;
 }
 

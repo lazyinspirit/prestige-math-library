@@ -1,44 +1,4 @@
-// judge-parse.mjs — the judge lanes' pure parsing, importable and tested.
-//
-// Two functions, both born from frontier-15's step-10 report finding 16: the
-// sonnet lane was "reliable at the verdict and unreliable at the transport" —
-// 28 stated rejections lost to verdict parsing, and 626 attempts recorded at
-// zero tokens because the CLI's plain-text mode carries no usage. Parsing
-// lives here, out of judge.mts's top-level script body, so it can be tested
-// without spawning a model.
-
-/** Unwrap the claude CLI's `--output-format json` envelope: the reply text is
- *  `result` and the spend is `usage` (verified against the live CLI,
- *  2026-08-17: keys `result`, `usage.input_tokens`,
- *  `usage.cache_creation_input_tokens`, `usage.cache_read_input_tokens`,
- *  `usage.output_tokens`). A stdout that is not an envelope — an older CLI, a
- *  crash banner — passes through as plain text with no usage: the lane keeps
- *  working, only its cost visibility degrades. `prompt_tokens` sums the three
- *  input classes because the cost ledger records what was SUBMITTED, and a
- *  cache-read token is still a submitted token.
- *
- *  Named `unwrapSonnetEnvelope` until 2026-08-23, when the owner moved every
- *  agent lane and the second judge lane to Opus 5. The envelope is a property of
- *  the CLI, not of the model behind it, so the name was wrong the moment a
- *  second claude-family lane existed — and `tools/dispatch.mjs` now unwraps
- *  every dispatched role's stdout with it, not just a judge's. */
-export const unwrapClaudeEnvelope = (stdout) => {
-  const text = String(stdout ?? '').trim();
-  try {
-    const env = JSON.parse(text);
-    if (env && typeof env.result === 'string') {
-      const u = env.usage;
-      return {
-        content: env.result.trim(),
-        usage: u ? {
-          prompt_tokens: (u.input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0),
-          completion_tokens: u.output_tokens ?? 0,
-        } : undefined,
-      };
-    }
-  } catch { /* not an envelope — fall through to plain text */ }
-  return { content: text };
-};
+// judge-parse.mjs — pure verdict parsing, importable without spawning a model.
 
 /** Find the first balanced `{...}` block containing `"keep"` that parses to an
  *  object with a boolean `keep`. This is PARSING, never inference:

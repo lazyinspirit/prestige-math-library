@@ -5,9 +5,8 @@
 //     --contracts research/frontier-15-proof-contracts.json \
 //     --items a,b,c --out /tmp/rr-1.task.md
 //
-// The DeepSeek lane has no tools, so every item, its contract entry and the full
-// text of every declared dependency has to travel inside --task.  Dependency
-// bodies are deduplicated across the group and printed once.
+// Every item, its contract entry, and the full text of every declared dependency
+// travels inside --task. Dependency bodies are deduplicated and printed once.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';

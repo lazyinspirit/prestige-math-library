@@ -390,7 +390,7 @@ if (judgeAdjudicationsPath) {
       // unwritable, which contradicts the standing rule that they stay
       // append-only evidence — and it cannot be repaired by the agent that hit
       // it. frontier-18 step 8: `step8-scope` handed group d the five
-      // claude-sonnet-4-6 rejections still current on their frozen context, the
+      // gpt-5.4 rejections still current on their frozen context, the
       // Alpha adjudicated all five correctly, and every row came back malformed.
       // Three repair rounds burned on rows no Alpha could have written any other
       // way, and the stage stopped needing a person.
@@ -492,11 +492,9 @@ if (judgeSessionRun) {
 //   (b) its OWN text is byte-identical to what those verdicts were cast against.
 //       The proof the judge read is the proof on disk; only a neighbour moved.
 //
-// (b) is not a relaxation invented here. AUDIT-WORKFLOW.md §9 and CLAUDE.md
-// already require audit A8 to re-run the configured judge only on what changed, with an
-// item SHA-256 recorded "so the stamp itself and a later unrelated companion-page
-// edit cannot stale it". The field simply was never written to the ledger, so
-// this gate had nothing to honour the rule with. judge.mts now records it.
+// (b) follows the item-currency rule: re-run the configured judge only when the
+// item changes, recording an item SHA-256 so an unrelated companion-page edit
+// cannot stale its verdict. judge.mts records that field.
 //
 // In published-audit mode with --judge-targets, this loop is deliberately the
 // exact repair set rather than the whole manifest. A2/A6 provide whole-wave

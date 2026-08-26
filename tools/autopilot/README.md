@@ -28,7 +28,7 @@ measures.
 
 ```bash
 cd ~/Projects/prestige-math-library
-claude                                    # start a session
+codex                                     # start a session
 
 # in the session, or in any shell:
 autopilot frontier --categories complex-analysis,topology

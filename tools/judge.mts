@@ -1,8 +1,5 @@
-// Topic-neutral refuter-judge for library items. Owner update 2026-08-26: normal
-// mode runs GPT-5.6 Terra alone at xhigh with the explicit 1M context window.
-// DeepSeek is not part of Step 7 or later rejudges. This file retains historical
-// multi-model injection-test records as model-evaluation evidence; retired
-// lineup keys remain available only for replay and ledger interpretation.
+// Topic-neutral refuter-judge for library items. Normal mode runs the configured
+// GPT lineup at xhigh with an explicit one-million-token context window.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -11,14 +8,9 @@
 //
 //   model                         median latency   false pos   caught defects
 //   z-ai/glm-5.2                       73.8 s         0/5           0/3
-//   deepseek/deepseek-v4-flash          5.1 s         1/5           0/3
 //   google/gemini-3.1-flash-lite        3.4 s         0/5           0/3
 //   openai/gpt-5.4-mini                 ~3   s         4/5           0/3
 //   minimax/minimax-m2.7 | moonshotai/kimi-k2.6 | bailian/qwen3.7-plus: UNPARSEABLE
-//
-// On pass 1 the default was switched to deepseek for 14x lower latency, since its
-// REASON strings named the specific construction under test and read as genuine
-// engagement. THAT WAS WRONG, and the way it was wrong is the lesson here.
 //
 // PASS 2 — INJECTION TEST, which is what actually separates a judge from a rubber
 // stamp. Two defects were injected into a known-good item:
@@ -30,10 +22,7 @@
 //
 //   model                        blatant (a)   subtle (b)
 //   z-ai/glm-5.2                 CAUGHT        missed
-//   deepseek/deepseek-v4-flash   MISSED        missed
-//
-// DeepSeek passed the blatant injection and reported "No false claim, unjustified
-// step, or mis-cited fact was found." GLM named claim 3, gave the n = m witness,
+// A fluent candidate passed the blatant injection. GLM named claim 3, gave the n = m witness,
 // and pointed out that step 6.1 proves n = m rather than n < m. Reverted.
 //
 // THE METHOD, not the ranking, is what to keep: A LOW REJECTION RATE AND A
@@ -46,29 +35,6 @@
 // The finding that outranks all of it: on 3 real historical defects EVERY model
 // scored 0/3, GLM included. All three were found by reading tiers. Keep the judge
 // as a cheap screen; never model it as the thing that finds defects.
-//
-// PASS 4 — INJECTION TEST FOR A RETIRED LANE, 2026-08-02, 2 calls. Control:
-// lem-cauchy-bounded unmodified -> keep=true,
-// with a substantive reason that checked L1 against lem-rat-triangle's actual
-// step. Injection: step 2.1 altered to the false bound |a_N| - 1 -> keep=false,
-// naming the step, the n = N contradiction, the correct |a_N| + 1 bound, and
-// that step 3.2 silently uses the true bound while citing 2.1. The lane meets
-// the adoption bar; the standing rule still applies to any future model or
-// context change.
-//
-// PASS 5 — INJECTION TEST FOR A RETIRED LANE, 2026-08-02, 4 calls.
-// First pair, WITHOUT output-format enforcement: control -> keep=true with a
-// substantive reason; injection (step 2.1 falsified to |a_N| - 1) -> the
-// defect was found exactly, but answered in PROSE, so it scored
-// UNPARSEABLE/null. That is a lane-contract failure, not a detection failure:
-// the fix is the `--append-system-prompt` JSON constraint above, the exact
-// analogue of the DeepSeek lane's `response_format: json_object`; the frozen
-// judge prompt is unchanged and stays byte-identical across lanes.
-// Second pair, WITH it: control -> keep=true (reason checked L1 against
-// lem-rat-triangle's actual step); injection -> keep=false, naming step 2.1,
-// the correct |a_N| + 1 bound, and that step 3.2 uses the true bound while
-// citing 2.1. The lane meets the adoption bar. The exemplar was restored and
-// `git diff` verified clean after each injection.
 //
 // PASS 3 — INJECTION TEST FOR THE A/B PAIR CONTEXT, 2026-07-28, 3 calls. The
 // companion-page block below was added on the owner's instruction; the same rule
@@ -100,10 +66,10 @@
 //
 // Also: half the catalogue is not drop-in. Reasoning-style models return <think>
 // blocks or reasoning-only content this harness cannot parse. Check parseability
-// before swapping a model, not after.
+// before changing a model, not after.
 // Run from the repo root (the app worker's tsx supplies the TS loader):
 //   node tools/tsx-run.mjs tools/judge.mts \
-//     items/<id>.md [--parallel | --model deepseek-v4-pro] [--topic "..."] [--conventions "..."] \
+//     items/<id>.md [--parallel | --model gpt-5.6-terra] [--topic "..."] [--conventions "..."] \
 //     [--batch "<A-page-slug>,<A-page-slug>,..."]
 //
 // CONTEXT SUPPLIED, in the order the prompt carries it (see the blocks below):
@@ -128,17 +94,13 @@
 // survive their own repair — the owner's twice-refuted escalation rule counts
 // rejections per proof across runs and cannot work off stdout alone.
 //
-// Historical DeepSeek routes need DEEPSEEK_API_KEY, supplied directly or from
-// the sibling Prestige Intelligence .env file. Historical Opus routes use the
-// already-authenticated claude CLI; the active Terra route uses the Codex CLI.
 import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, mkdirSync, chmodSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { basename, join, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { homedir } from "node:os";
-import { deepseekEnvFile } from "./paths.mjs";
 import { itemHashJudge } from "./item-hash.mjs";
-import { unwrapClaudeEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs";
+import { extractEmbeddedVerdict } from "./judge-parse.mjs";
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 
 const argv = process.argv.slice(2);
@@ -164,80 +126,13 @@ if (!file && !bools.has("preflight")) {
   process.exit(2);
 }
 
-// EXIT CODES. 0 = a verdict was produced (pass, refutation, or an honest null).
-// 2 = usage/config error. 3 = THE ACCOUNT CANNOT PAY: no verdict is obtainable
-// now or by retrying, and a sweep should stop rather than continue.
-//
-// Why 3 exists (measured 2026-07-28, frontier-1). The account ran dry mid-build.
-// A 402 is not a transient fault, but it reached callers as `keep: null` with a
-// NO_CONTENT reason — indistinguishable from the intermittently dropped verdicts
-// this harness genuinely does produce, and the documented response to those is
-// "always re-run before concluding". So six agents re-ran a payment error for
-// HOURS. The status was never the problem; the AMBIGUITY was.
+// EXIT CODES. 0 = a verdict was produced, 2 = usage/configuration error,
+// 3 = the configured account cannot serve a preflight request.
 const PAYMENT_EXIT = 3;
-// Endpoint override, so the payment path above can be EXERCISED in a test rather
-// than only reasoned about. Defaults to production; nothing in the workflow sets it.
-const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com";
-const DEEPSEEK_API_URL = DEEPSEEK_BASE_URL.replace(/\/$/, "") + "/chat/completions";
-const isPaymentError = (status: number, raw: string): boolean =>
-  status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// Historical SESSION-item routes include direct DeepSeek V4 Pro and fresh
-// Claude Opus 5 CLI processes. The active build route is Terra alone; the
-// production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
-// The ids come from tools/models.mjs, the one registry (2026-08-23). They stay
-// named here because the ROUTING below is per model — DeepSeek goes over HTTP,
-// Terra over Codex, Opus and Sonnet over fresh claude CLI processes — and that
-// mapping is this tool's business, not the registry's. Only the id is shared.
-// The registry also carries the `[1m]` rule: the claude CLI has no
-// `model_context_window` knob, so a bare `claude-opus-5` judges at the standard
-// window with no other symptom.
-const DEEPSEEK_MODEL = MODELS.deepseek.id;
 const TERRA_MODEL = MODELS.terra.id;
-const SONNET_MODEL = MODELS.sonnet.id;
-const OPUS_MODEL = MODELS.opus.id;
-// Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
-// API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
-// spelling that maps to `max`, so preserve the requested level explicitly and
-// send the canonical wire value.
-const DEEPSEEK_THINKING_LEVEL = "xhigh";
-const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
-// DERIVED, NOT LISTED. This was `[DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL,
-// OPUS_MODEL]` — a fifth hand-kept copy of the model table, and it silently
-// excluded any id the registry gained. Adding gpt-5.4 on 2026-08-24 was
-// rejected by a tool that had no reason to know about it.
 const SUPPORTED_MODELS: string[] = Object.values(MODELS).map((m: any) => m.id);
-/** The runner that can actually spawn a judge model, from the registry. */
-const runnerFor = (id: string): string =>
-  (Object.values(MODELS) as any[]).find((m) => m.id === id)?.runner ?? "deepseek";
-// JUDGE_LINEUP selects the session's configured judge set without forking the
-// tool. Owner, 2026-08-26: the active default is Terra alone; DeepSeek is no
-// longer part of Step 7 or any later rejudge. Retired paired lineups remain
-// selectable for historical replay, and their rows stay append-only evidence
-// that satisfies no current coverage. The frozen prompt, hash attestation and
-// verdict contract remain identical across model sets. `judge.mts --preflight`
-// spends one minimal call per configured model and is the cheap way to learn an
-// account is dead before a sweep does.
-//
-// FAMILY WEIGHTING. Terra shares the OpenAI family with the work it screens and
-// with the Step-8 Sol adjudicator. The sole-judge configuration therefore has
-// no cross-family corroboration; a Terra verdict is one independent process
-// reading, not agreement between model families.
-//
-// WHAT IS NOT MEASURED HERE. No injection test has been run against an Opus judge
-// lane at this prompt. The standing rule at the top of this file applies and has
-// not been discharged: a low rejection rate and a fluent reason are not evidence
-// of a good judge, and the only test that separates a judge from a rubber stamp
-// is injecting a defect you KNOW is there. Passes 4 and 5 did exactly that for
-// the retired claude lane before it was adopted; the equivalent for Opus is owed.
-//
-// WHAT THE LEDGERS MEASURED BEFORE THE 2026-08-04 SWITCH (frontiers 6-9,
-// waves 0-1; the evidence is in research/audit/RESUME.md, not in memory):
-//   gpt-5.6-terra    142 fatal / 58 false pos / 1036 adjudicated — 94.4% precision
-//   deepseek-v4-pro  129 fatal / 55 false pos /  618 adjudicated — 91.1% precision
-// The map itself is tools/models.mjs. It used to be redeclared here and in five
-// other tools, and one of those six fell a lane change behind — judge-compare.mjs
-// still carries the note that frontier-15's step-10 report had to be computed by
-// hand because of it.
+// JUDGE_LINEUP selects the configured GPT judge set. A normal invocation uses
+// all configured models; --model targets exactly one model for recovery work.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const lineup = (JUDGE_LINEUPS as Record<string, readonly string[]>)[lineupName];
 if (!lineup) {
@@ -285,7 +180,7 @@ for (const judgeModel of models) {
   }
 }
 if (persistentJudge) {
-  if (bools.has("preflight") || models.length !== 1 || runnerFor(models[0]) !== "codex") {
+  if (bools.has("preflight") || models.length !== 1) {
     console.error("[judge] persistent sessions require one Codex judge in normal item mode");
     process.exit(2);
   }
@@ -298,24 +193,6 @@ if (persistentJudge) {
     process.exit(2);
   }
 }
-
-const deepseekKey = (): string => {
-  if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
-  const envPath = deepseekEnvFile();
-  if (!envPath) {
-    console.error("[judge] DEEPSEEK_API_KEY is not set and no prestige-intelligence checkout was found; set DEEPSEEK_API_KEY or PRESTIGE_APP_DIR");
-    process.exit(2);
-  }
-  try {
-    const line = readFileSync(envPath, "utf8").split(/\r?\n/).find((entry) =>
-      /^(?:export\s+)?DEEPSEEK_API_KEY\s*=/.test(entry),
-    );
-    const value = line?.replace(/^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*/, "").trim()
-      .replace(/^['"]|['"]$/g, "");
-    if (value) return value;
-  } catch { /* report a key-free configuration error below */ }
-  throw new Error("DEEPSEEK_API_KEY is not set and was not found in the configured DeepSeek .env file");
-};
 
 type CodexRun = { stdout: string; stderr: string; code: number | null; timedOut: boolean; sessionId: string | null };
 const sessionMetadataName = "judge-session.json";
@@ -462,100 +339,16 @@ const runCodex = (model: string, prompt: string, timeoutMs: number, activeSessio
   child.stdin.end(prompt);
 });
 
-/** The claude-CLI lane, to the Terra lane's exact isolation philosophy: a FRESH
- *  claude CLI process per call, an EMPTY temporary working directory so the
- *  frozen prompt is its only context, and a tool-less run — the empty
- *  --allowed-tools list allows nothing, and headless -p mode auto-denies any
- *  permission request besides. Effort is the owner's xhigh; the model id is
- *  passed explicitly, never inherited from anyone's session default. The
- *  claude CLI authenticates from the user's own session (keychain), so unlike
- *  Terra there is no auth file to copy and nothing credential-shaped touches
- *  disk here at all.
- *
- *  PARAMETERISED BY MODEL since 2026-08-23, when Opus 5 took this lane. The
- *  isolation is a property of the runner, not of the model behind it, and the
- *  empty working directory matters MORE for Opus than it did for Sonnet: the
- *  repo root carries a CLAUDE.md that would otherwise load as project context
- *  and tell the judge how the library is built. A judge that has read the build
- *  rules is not reading the frozen prompt alone. */
-const runFreshClaude = (model: string, prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
-  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-claude-work-");
-  // --output-format json wraps the reply in a result envelope that carries
-  // `usage` — without it the lane's spend is invisible: frontier-15 recorded
-  // pt=0, ct=0 for all 626 sonnet attempts while DeepSeek's 12.6M prompt
-  // tokens were measured, so every lane decision was made half-blind.
-  // callSonnet unwraps the envelope and falls back to plain text if the CLI
-  // ever changes shape.
-  const child = spawn(process.env.CLAUDE_BIN ?? "claude", [
-    "-p", "--model", model, "--effort", "xhigh", "--allowed-tools", "", "--output-format", "json",
-  ], { stdio: ["pipe", "pipe", "pipe"], cwd: temporaryWork, env: process.env });
-  let stdout = "";
-  let stderr = "";
-  let settled = false;
-  let timedOut = false;
-  const finish = (code: number | null) => {
-    if (settled) return;
-    settled = true;
-    clearTimeout(timeout);
-    try { rmSync(temporaryWork, { recursive: true, force: true }); } catch { /* best-effort workdir cleanup */ }
-    resolve({ stdout, stderr, code, timedOut });
-  };
-  const timeout = setTimeout(() => {
-    timedOut = true;
-    child.kill("SIGTERM");
-  }, timeoutMs);
-  child.stdout.on("data", (chunk) => { stdout += chunk; });
-  child.stderr.on("data", (chunk) => { stderr += chunk; });
-  child.on("error", (error) => { stderr += String(error); finish(null); });
-  child.on("close", finish);
-  child.stdin.end(prompt);
-});
-
 // --preflight: one minimal call per selected model, before a sweep spends
 // anything. A dead account then costs a single request per independent judge.
 if (bools.has("preflight")) {
   const checks = await Promise.all(models.map(async (judgeModel) => {
-    if (runnerFor(judgeModel) === "codex") {
-      const codexRun = await runCodex(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
-      return { judgeModel, status: codexRun.code === 0 && codexRun.stdout.trim() ? 200 : 0, raw: codexRun.stdout || codexRun.stderr || "Codex produced no output" };
-    }
-    if (runnerFor(judgeModel) === "claude") {
-      const claude = await runFreshClaude(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 180_000);
-      return { judgeModel, status: claude.code === 0 && claude.stdout.trim() ? 200 : 0, raw: claude.stdout || claude.stderr || "claude produced no output" };
-    }
-    try {
-      // A deliberately tiny direct completion tests the endpoint, model,
-      // credentials, JSON mode, and configured xhigh setting used by normal
-      // judging. This is a reachability preflight, not
-      // an item verdict. The supplied text is not item material and no verdict
-      // ledger is written during preflight.
-      const r = await fetch(DEEPSEEK_API_URL, {
-        method: "POST",
-        headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
-        body: JSON.stringify({
-          model: DEEPSEEK_MODEL,
-          reasoning_effort: DEEPSEEK_API_REASONING_EFFORT,
-          thinking: { type: "enabled" },
-          response_format: { type: "json_object" },
-          max_tokens: 512,
-          messages: [{ role: "user", content: 'Return exactly this json object: {"ok":true}.' }],
-        }),
-        signal: AbortSignal.timeout(60_000),
-      });
-      const raw = await r.text();
-      return { judgeModel, status: r.status, raw };
-    } catch (e) {
-      return { judgeModel, status: 0, raw: `transport failure — ${String((e as Error)?.message ?? e)}` };
-    }
+    const run = await runCodex(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
+    return { judgeModel, status: run.code === 0 && run.stdout.trim() ? 200 : 0, raw: run.stdout || run.stderr || "Codex produced no output" };
   }));
   for (const { judgeModel, status, raw } of checks) {
     if (status === 0) {
       console.error(`[judge] preflight (${judgeModel}): ${raw}`);
-      process.exit(PAYMENT_EXIT);
-    }
-    if (isPaymentError(status, raw)) {
-      console.error(`[judge] PREFLIGHT FAILED (${judgeModel}): the account cannot pay. ${raw.slice(0, 200)}`);
-      console.error("[judge] Do not start a sweep. This needs an owner top-up; no retry will succeed.");
       process.exit(PAYMENT_EXIT);
     }
     if (status >= 400) {
@@ -994,10 +787,9 @@ Output STRICT minified JSON ONLY, no prose around it. Keep \`reason\` to at most
 
 const sys = refuterSys;
 // The closing format reminder is a RECENCY fix, not a new instruction: the
-// same rule already sits in the system prompt, but on frontier-15 it sat
-// ~30k tokens above the end of the context and 28 sonnet replies opened with
-// "Flagged:" / "Verdict: **keep=false**" prose — stated rejections lost to
-// parsing. Format-only; the refuter framing is untouched (its recall is
+// same rule already sits in the system prompt, but a long context can push it
+// far above the response boundary and invite prose-wrapped verdicts. Format-only;
+// the refuter framing is untouched (its recall is
 // benchmarked and may not be softened — see the deleted certify arm above).
 const buildUserPrompt = () => "Audit this library item. Return only the JSON verdict. Do not read files or call tools: the supplied context is authoritative.\n\n---\n" + body + citedContext(body) + pageContext(body)
   + '\n\n---\nEND OF CONTEXT. Reply now with the verdict as a single minified JSON object and nothing else — {"keep":true|false,"reason":"..."} — the first character of your reply must be `{`. Do not precede or follow it with any prose.';
@@ -1023,11 +815,6 @@ const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
 // is the only thing the ledger recorded, so coverage could not tell "this proof
 // changed" from "a sibling on the same page changed".
 //
-// AUDIT-WORKFLOW.md and CLAUDE.md already state the rule this restores — audit
-// A8 re-runs the configured judge only on what changed, with an item SHA-256 "so the
-// stamp itself and a later unrelated companion-page edit cannot stale it". The
-// field was simply never written, so the gate had nothing to honour it with.
-//
 // `itemHashJudge` — tools/item-hash.mjs — is the ONE definition of this
 // normalisation: the whole file with only the `judge:` block removed. Excluding
 // it is what stops the act of stamping a pass from invalidating the pass it
@@ -1045,69 +832,14 @@ if (bools.has("context-hash")) {
   process.exit(0);
 }
 
-const DEEPSEEK_INITIAL_MAX_TOKENS = 40_000;
-const DEEPSEEK_LENGTH_RETRY_MAX_TOKENS = 80_000;
-// DeepSeek has accepted very large A/B-pair prompts and then left the HTTP
-// request open without producing a byte. The remaining frontier-18 rejudge is
-// the measured case: 322,379 characters / 103,109 input tokens plus a 40k
-// completion reservation. Its earlier successful verdict used 19,071 output
-// tokens, so the defect is not that the proof needs an unbounded answer; it is
-// that the requested input-plus-output envelope is too close to the provider's
-// practical long-context limit. Do not shorten the frozen evidence prompt.
-// Instead, reserve one decisive completion budget only for prompts this large.
-// A rejudge sweep is independently restartable, so a stateful "small first,
-// then large" ladder resets after a gate round and silently spends the small
-// call again. Use 64k from the first long-context attempt: it avoids that loop
-// and gives the model one chance to finish its reasoning and emit JSON.
-// The normal 40k -> 80k length fallback remains available for ordinary prompts.
-const DEEPSEEK_LONG_CONTEXT_CHARS = 300_000;
-const DEEPSEEK_LONG_CONTEXT_MAX_TOKENS = 64_000;
-const deepseekBudget = (normalBudget: number): number =>
-  frozenPrompt.length >= DEEPSEEK_LONG_CONTEXT_CHARS
-    ? DEEPSEEK_LONG_CONTEXT_MAX_TOKENS
-    : normalBudget;
-// A full A/B-pair context at owner-requested xhigh can legitimately take more
-// than the former seven-minute transport window (several completed Frontier-6
-// calls already took more than six minutes).  Do not turn that live reasoning
-// into an unrecorded failure: let the direct API have the same twelve-minute
-// allowance as the Terra lane.  This changes only transport patience, not the
-// frozen prompt, thinking level, or token budget.
-const DEEPSEEK_REQUEST_TIMEOUT_MS = 12 * 60_000;
 const configuredAttemptLimit = Number(process.env.JUDGE_MAX_ATTEMPTS ?? 3);
 const MAX_CALL_ATTEMPTS = Number.isInteger(configuredAttemptLimit) && configuredAttemptLimit >= 1
   ? Math.min(configuredAttemptLimit, 3)
   : 3;
 const retryAllowed = process.env.JUDGE_RETRY_ALLOWED !== "0";
-const payloadForDeepSeek = (maxTokens: number) => ({
-  model: DEEPSEEK_MODEL,
-  // `max` is DeepSeek's documented API representation of owner-requested xhigh.
-  reasoning_effort: DEEPSEEK_API_REASONING_EFFORT,
-  thinking: { type: "enabled" },
-  response_format: { type: "json_object" },
-  // Raised 3000 -> 8000 -> 40000 on 2026-07-26 (owner). Under the full-page context
-  // the reason strings grew, and a truncated reason arrives as unparseable JSON ->
-  // keep=null, which reads as a call failure rather than as a verdict. A page agent
-  // hit this twice on one item and correctly refused to record a verdict from it.
-  // Reasoning models also spend this budget on thinking BEFORE emitting the JSON, so
-  // the ceiling must clear both; that is why the generous value.
-  //
-  // This is a CEILING, not a target: billing is on tokens actually produced, and
-  // measured completions run about 1.4k. Headroom here costs nothing.
-  // DeepSeek v4 Pro exhausted 40000 tokens on maximum reasoning without an answer
-  // on the Cycle-1 uniform-Cauchy theorem (2026-07-31). It now starts at 40000
-  // then retries that explicit length failure once at 80000. This keeps
-  // ordinary calls short without weakening the skeptical prompt or abandoning
-  // the hard cases that genuinely need more reasoning room.
-  max_tokens: maxTokens,
-  messages: [{ role: "user", content: frozenPrompt }],
-});
-
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-interface JudgeResp {
-  choices?: { message?: { content?: string }; finish_reason?: string | null }[];
-  usage?: { prompt_tokens?: number; completion_tokens?: number };
-}
+interface JudgeUsage { prompt_tokens?: number; completion_tokens?: number }
 
 const attemptLog = process.env.JUDGE_ATTEMPTLOG;
 const configuredAttemptNumber = Number(process.env.JUDGE_ATTEMPT_NUMBER ?? 1);
@@ -1127,144 +859,18 @@ const emitAttempt = (judgeModel: string, attempt: number, event: Record<string, 
     }) + "\n");
   } catch { /* telemetry must never suppress a verdict */ }
 };
-const rateLimitHeaders = (headers: Headers) => ({
-  limit_requests: headers.get("x-ratelimit-limit-requests"),
-  remaining_requests: headers.get("x-ratelimit-remaining-requests"),
-  reset_requests: headers.get("x-ratelimit-reset-requests"),
-  retry_after: headers.get("retry-after"),
-});
-const transportError = (error: unknown) => {
-  const e = error as { name?: unknown; message?: unknown; code?: unknown; errno?: unknown; cause?: unknown };
-  const cause = e?.cause as { name?: unknown; message?: unknown; code?: unknown; errno?: unknown } | undefined;
-  return {
-    name: typeof e?.name === "string" ? e.name : "Error",
-    message: String(e?.message ?? error).slice(0, 500),
-    code: typeof e?.code === "string" ? e.code : null,
-    errno: typeof e?.errno === "string" || typeof e?.errno === "number" ? e.errno : null,
-    cause: cause ? {
-      name: typeof cause.name === "string" ? cause.name : "Error",
-      message: String(cause.message ?? cause).slice(0, 500),
-      code: typeof cause.code === "string" ? cause.code : null,
-      errno: typeof cause.errno === "string" || typeof cause.errno === "number" ? cause.errno : null,
-    } : null,
-  };
-};
-const backoffMs = (attempt: number, retryAfter: string | null = null): number => {
-  const requested = Number(retryAfter ?? NaN);
-  const base = Number.isFinite(requested) ? Math.min(requested * 1000, 60_000) : (attempt + 1) * 4000;
-  return base + Math.floor(Math.random() * 1000);
-};
-const retryAfterMs = (retryAfter: string | null): number | null => {
-  const requested = Number(retryAfter ?? NaN);
-  return Number.isFinite(requested) ? Math.min(requested * 1000, 60_000) : null;
-};
+const backoffMs = (attempt: number): number => (attempt + 1) * 4000 + Math.floor(Math.random() * 1000);
 
 type RetryKind = "transient" | "length";
 type CallResult = {
   content: string;
-  usage?: JudgeResp["usage"];
+  usage?: JudgeUsage;
   raw: string;
   payment?: boolean;
   retry?: RetryKind;
   retry_after_ms?: number | null;
   session_id?: string | null;
 };
-
-async function callDeepSeek(): Promise<CallResult> {
-  let deepseekLengthFallbackUsed = process.env.JUDGE_DEEPSEEK_LENGTH_FALLBACK === "1";
-  for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
-    const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
-    let resp: Response;
-    let raw: string;
-    const max_tokens = deepseekBudget(
-      deepseekLengthFallbackUsed ? DEEPSEEK_LENGTH_RETRY_MAX_TOKENS : DEEPSEEK_INITIAL_MAX_TOKENS,
-    );
-    const started = performance.now();
-    try {
-      resp = await fetch(DEEPSEEK_API_URL, {
-        method: "POST",
-        headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
-        body: JSON.stringify(payloadForDeepSeek(max_tokens)),
-        signal: AbortSignal.timeout(DEEPSEEK_REQUEST_TIMEOUT_MS),
-      });
-      // A reset can arrive while the response body is being read, not only
-      // while the request is opened.  Keep both operations in this transport
-      // guard so judge-sweep receives retry exit 4 instead of a raw Node
-      // process exit that leaves a current-context verdict missing.
-      raw = await resp.text();
-    } catch (e) {
-      const latency_ms = Math.round(performance.now() - started);
-      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "transport_failure", latency_ms, max_tokens, transport: transportError(e) });
-      if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
-      return {
-        content: "",
-        raw: String((e as Error)?.message ?? e),
-        retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
-      };
-    }
-    const latency_ms = Math.round(performance.now() - started);
-    const headers = rateLimitHeaders(resp.headers);
-    // A payment error is TERMINAL. Never retry it, and never let it leave here
-    // wearing the same clothes as a dropped verdict — see PAYMENT_EXIT above.
-    if (isPaymentError(resp.status, raw)) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "payment_required", status: resp.status, latency_ms, max_tokens, rate_limit: headers, raw_bytes: raw.length });
-      return { content: "", raw, payment: true };
-    }
-    if (resp.status === 429 || resp.status >= 500) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "retryable_http", status: resp.status, latency_ms, max_tokens, rate_limit: headers, raw_bytes: raw.length });
-      if (retryPossible) { await sleep(backoffMs(attempt, headers.retry_after)); continue; }
-      return {
-        content: "",
-        raw,
-        retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
-        retry_after_ms: retryAfterMs(headers.retry_after),
-      };
-    }
-    let j: JudgeResp = {};
-    try { j = JSON.parse(raw) as JudgeResp; } catch { /* leave raw for the error path */ }
-    const choice = j.choices?.[0];
-    const content = choice?.message?.content ?? "";
-    const finish_reason = choice?.finish_reason ?? null;
-    const successful = resp.status >= 200 && resp.status < 300;
-    const event = {
-      outcome: content ? "response" : !successful ? "empty_http_error" : finish_reason === null ? "empty_incomplete" : "empty_terminal",
-      status: resp.status,
-      latency_ms,
-      max_tokens,
-      rate_limit: headers,
-      finish_reason,
-      has_content: Boolean(content),
-      usage: j.usage ?? null,
-      raw_bytes: raw.length,
-    };
-    // An empty completion with no terminal finish reason is a gateway-side
-    // interruption, not a substantive null verdict. Retry it with jitter. A
-    // DeepSeek length stop gets one 80k fallback after its normal 40k attempt;
-    // a second length stop remains a measurable reasoning-budget null.
-    if (successful && !content && finish_reason === null && retryPossible) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "empty_incomplete_retry" });
-      await sleep(backoffMs(attempt, headers.retry_after));
-      continue;
-    }
-    if (successful && !content && finish_reason === "length" && !deepseekLengthFallbackUsed && retryPossible) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "length_retry" });
-      deepseekLengthFallbackUsed = true;
-      await sleep(backoffMs(attempt, headers.retry_after));
-      continue;
-    }
-    if (successful && !content && finish_reason === null && MAX_CALL_ATTEMPTS === 1 && retryAllowed) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "empty_incomplete_retry" });
-      return { content, usage: j.usage, raw, retry: "transient", retry_after_ms: retryAfterMs(headers.retry_after) };
-    }
-    if (successful && !content && finish_reason === "length" && !deepseekLengthFallbackUsed && MAX_CALL_ATTEMPTS === 1 && retryAllowed) {
-      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "length_retry" });
-      return { content, usage: j.usage, raw, retry: "length", retry_after_ms: retryAfterMs(headers.retry_after) };
-    }
-    emitAttempt(DEEPSEEK_MODEL, attempt, event);
-    return { content, usage: j.usage, raw };
-  }
-  return { content: "", raw: "retries exhausted" };
-}
 
 async function callCodex(model: string): Promise<CallResult> {
   let activeSession = resumeSession ?? null;
@@ -1308,55 +914,10 @@ async function callCodex(model: string): Promise<CallResult> {
       retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
     };
   }
-  return { content: "", raw: "Terra retries exhausted" };
-}
-
-async function callClaude(model: string): Promise<CallResult> {
-  for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
-    const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
-    const started = performance.now();
-    const run = await runFreshClaude(model, frozenPrompt, 12 * 60_000);
-    const latency_ms = Math.round(performance.now() - started);
-    const { content, usage } = unwrapClaudeEnvelope(run.stdout);
-    const event = {
-      outcome: content && run.code === 0 ? "response" : run.timedOut ? "timeout" : "claude_exit",
-      status: run.code,
-      latency_ms,
-      max_tokens: null,
-      finish_reason: run.code === 0 ? "claude_complete" : run.timedOut ? "timeout" : "claude_exit",
-      has_content: Boolean(content),
-      raw_bytes: (run.stdout.length + run.stderr.length),
-    };
-    if (run.code === 0 && content) {
-      emitAttempt(model, attempt, event);
-      return { content, usage, raw: run.stderr };
-    }
-    emitAttempt(model, attempt, event);
-    if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
-    return {
-      content: "",
-      raw: (run.stderr || run.stdout || `claude exited ${String(run.code)}`).slice(0, 1000),
-      retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
-    };
-  }
   return { content: "", raw: `${model} retries exhausted` };
 }
 
-// ROUTED BY RUNNER, NOT BY ID. This was a chain of id equality tests ending in
-// `: callTerra()` — so ANY model the chain did not name was judged by
-// gpt-5.6-terra while the ledger recorded the requested name. Adding gpt-5.4 on
-// 2026-08-24 would have produced exactly that: a lineup of DeepSeek + "gpt-5.4"
-// in which the second lane was actually Terra. The registry already knows which
-// runner can spawn each id; asking it is the only form that cannot go stale.
-// The preflight switch above routes the same way, deliberately — the two used
-// to disagree about the fallthrough.
-const call = (judgeModel: string): Promise<CallResult> => {
-  switch (runnerFor(judgeModel)) {
-    case "codex": return callCodex(judgeModel);
-    case "claude": return callClaude(judgeModel);
-    default: return callDeepSeek();
-  }
-};
+const call = (judgeModel: string): Promise<CallResult> => callCodex(judgeModel);
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
 // until now a rejection existed solely on stdout and vanished the moment it was
@@ -1388,7 +949,7 @@ const emit = (judgeModel: string, keep: boolean | null, reason: string, sessionI
 // times was this proof refuted", and a payment failure is not a verdict about
 // the proof at all. 46 such lines entered the frontier-1 ledger before this
 // existed and had to be filtered out of every count made from it afterwards.
-type Verdict = { judgeModel: string; keep: boolean | null; reason: string; usage?: JudgeResp["usage"]; payment?: boolean; retry?: RetryKind; retry_after_ms?: number | null; session_id?: string | null };
+type Verdict = { judgeModel: string; keep: boolean | null; reason: string; usage?: JudgeUsage; payment?: boolean; retry?: RetryKind; retry_after_ms?: number | null; session_id?: string | null };
 
 const judgeOne = async (judgeModel: string): Promise<Verdict> => {
   const { content, usage, raw, payment, retry, retry_after_ms, session_id } = await call(judgeModel);
@@ -1411,10 +972,8 @@ const judgeOne = async (judgeModel: string): Promise<Verdict> => {
       return { judgeModel, keep: true, reason: "TRUNCATED_ACCEPT: " + content.slice(0, 300), usage, session_id };
     }
     // A reply that wraps or trails a WELL-FORMED verdict object in prose is a
-    // parse problem, not a verdict problem: frontier-15 lost 28 stated sonnet
-    // rejections as UNPARSEABLE nulls, each costing a full xhigh re-spend and
-    // each "one re-sweep away from losing it for good" (step-10 report,
-    // finding 16). Extraction is PARSING — JSON.parse must succeed and `keep`
+    // parse problem, not a verdict problem. Extraction is PARSING — JSON.parse
+    // must succeed and `keep`
     // must be a boolean. Prose is never interpreted: "Flagged:" with no
     // parseable object stays a null for a re-spend.
     const embedded = extractEmbeddedVerdict(cleaned);

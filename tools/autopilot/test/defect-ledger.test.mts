@@ -99,15 +99,15 @@ test('one adjudication owned by two rows is a double count', () => {
 
 test('two models may record different defects on the same item version', () => {
   const context = 'ctx-1';
-  const deepseek = { id: 'thm-x', model: 'deepseek-v4-pro', context_sha256: context,
-    outcome: 'confirmed_fatal', item_sha256: 'abc' };
   const terra = { id: 'thm-x', model: 'gpt-5.6-terra', context_sha256: context,
     outcome: 'confirmed_fatal', item_sha256: 'abc' };
+  const gpt54 = { id: 'thm-x', model: 'gpt-5.4', context_sha256: context,
+    outcome: 'confirmed_fatal', item_sha256: 'abc' };
   const dir = fixture([
-    row({ adjudication_ref: [deepseek] }),
+    row({ adjudication_ref: [gpt54] }),
     row({ defect_id: 'r9-D002', subclass: 'false-or-overstrong-statement',
       location: 'remark', caught_by_role: 'judge-terra', adjudication_ref: [terra] }),
-  ], [deepseek, terra]);
+  ], [gpt54, terra]);
   const r = check(dir);
   assert.equal(r.status, 0, r.stderr);
 });
