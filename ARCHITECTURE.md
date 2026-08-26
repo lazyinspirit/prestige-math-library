@@ -2057,10 +2057,14 @@ workflows. Retired paired values remain resolvable only for historical replay;
 their rows remain evidence but satisfy no current coverage. Coverage is per
 frozen context and per configured model set, never merely per model name.
 
-Terra runs via an ephemeral `codex exec` per call with a 0700 temporary
-`CODEX_HOME` holding only `auth.json`, an empty temporary working directory,
-read-only sandbox, and a cap-14 file-backed pool. A capacity refusal is a null
-verdict, never a verdict; lower `JUDGE_CONCURRENCY_GPT_5_6_TERRA` rather than
+For the build's Step 7/8 route, Terra uses one persistent `CODEX_HOME` and exact
+Codex session per A/B pair, an empty temporary working directory, a read-only
+sandbox, and a cap-14 file-backed pool. One worker owns each pair and submits
+items sequentially; every item receives its own `xhigh` turn with the unchanged
+skeptical prompt and full hash-attested pair context. Step 8 resumes the exact
+same session for repaired items. Step 9 and later, and non-build routes without
+`--run`, retain ephemeral per-item calls. A capacity refusal is a null verdict,
+never a verdict; lower `JUDGE_CONCURRENCY_GPT_5_6_TERRA` rather than
 re-spending null calls. Terra shares the OpenAI family with most work it screens
 and the Sol adjudicator, so this judge route provides no cross-family
 corroboration. The separate DeepSeek audit-refuter remains cross-family but is
@@ -2094,7 +2098,10 @@ mean 93,810-token prompt and omitted three of five siblings on every call.
 
 **Ledger:** every judge run writes one Terra line to
 `research/<run>-judge.jsonl`, with at least
-`{id, model, keep, reason, context_sha256, at}`.
+`{id, model, keep, reason, context_sha256, at}`. Step-7/8 rows additionally bind
+`session_pair` and `session_id`; closure checks them against
+`.autopilot/sessions/<run>/judge/<A-page>/judge-session.json`, so a fresh or
+wrong-session verdict cannot satisfy the persistent-session boundary.
 `verification.judge` records a pass only when Terra passed the current
 text; an absent block means unjudged or owner-audited over a refuted false
 positive. `keep: null` is not a pass. `tools/judge-sweep.mjs` resumes selected

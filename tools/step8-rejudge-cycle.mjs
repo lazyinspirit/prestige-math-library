@@ -192,7 +192,7 @@ function main() {
   // Count before fan-out: a killed process cannot silently buy a third call.
   writeJsonAtomic(receiptPath, receipt);
 
-  const sweep = spawnSync(process.execPath, ['tools/judge-sweep.mjs',
+  const sweep = spawnSync(process.execPath, ['tools/judge-sweep.mjs', '--run', run,
     '--ledger', ledger, '--cost', cost, '--items', ids.join(',')],
   { cwd: root, stdio: 'inherit', timeout: 43_200_000 });
   cycle.completed_at = new Date().toISOString();

@@ -209,9 +209,11 @@ that proved it: `ARCHITECTURE.md` §3.11d.
 
 ## Budget and terminal Step-8 blockers
 
-Judge calls are the spend. Build Step 7 runs one fresh Terra call per item, with
-at most 14 calls active at once. Step 8 freshly rejudges only affected items. A
-capacity refusal is a null verdict, not a verdict, and the sweep retries it.
+Judge calls are the spend. Build Step 7 runs one persistent Terra conversation
+per A/B pair and one complete, sequential `xhigh` turn per item, with at most 14
+pairs active at once. Step 8 resumes the same pair conversation only for affected
+items. Step 9 and later rejudges are fresh. A capacity refusal is a null verdict,
+not a verdict, and the sweep retries it.
 
 **Step 8 has at most two frozen-context judge cycles per item, including the
 context whose first confirmed-fatal adjudication licenses repair** (owner

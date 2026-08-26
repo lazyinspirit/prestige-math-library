@@ -50,7 +50,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
-import { resolveLineup } from './models.mjs';
+import { MODELS, resolveLineup } from './models.mjs';
 import {
   exactSetProblems,
   loadStep8JudgeEvidence,
@@ -615,6 +615,8 @@ if (mode === 'published') {
   const rows = readJsonl(R('research', `${run}-step8-published-repairs.jsonl`));
   const bad = [];
   const repaired = rows.filter((r) => r.kind === 'repaired');
+  const latestRepaired = new Map();
+  for (const row of repaired) if (typeof row.id === 'string') latestRepaired.set(row.id, row);
   const escalated = rows.filter((r) => r.kind === 'escalated');
   const receiptPath = opt('out');
   const pending = { version: 1, run, repaired: [...new Set(repaired.map((row) => row.id).filter(Boolean))],
@@ -630,7 +632,7 @@ if (mode === 'published') {
     else bad.push(`\`${r.id}\` is escalated to the owner and unresolved: ${r.why}`);
   }
 
-  const repairedIds = [...new Set(repaired.map((row) => row.id).filter(Boolean))];
+  const repairedIds = [...latestRepaired.keys()];
   // A run with no published repairs has no published judge obligation.  Do not
   // manufacture a missing-ledger failure for an empty lane; escalations above
   // remain hard blockers in their own right.
@@ -640,6 +642,20 @@ if (mode === 'published') {
   bad.push(...evidence.errors);
   const verdicts = repairedIds.length ? readJsonl(judgePath) : [];
   const { models: currentModels } = resolveLineup();
+  if (currentModels.length !== 1 || currentModels[0] !== MODELS.terra.id) {
+    bad.push(`Step 8 persistent-session closure requires the singleton ${MODELS.terra.id} lineup`);
+  }
+  const plan = repairedIds.length ? JSON.parse(readFileSync(R('research', 'plan-spec.json'), 'utf8')) : { pages: [] };
+  const pairByPage = new Map();
+  for (const page of plan.pages.filter((candidate) => candidate.kind === 'A')) {
+    pairByPage.set(page.id, page.id);
+    if (typeof page.companion === 'string') pairByPage.set(page.companion, page.id);
+  }
+  const pairByItem = new Map();
+  for (const page of plan.pages) {
+    const pair = pairByPage.get(page.id);
+    for (const item of page.items ?? []) if (pair) pairByItem.set(item.id, pair);
+  }
   const currentHashes = new Map();
   for (const result of await buildCurrentContextHashes(repairedIds, {
     cwd: REPO,
@@ -648,11 +664,25 @@ if (mode === 'published') {
     if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });
     else bad.push(result.error);
   }
-  for (const r of repaired) {
+  for (const r of latestRepaired.values()) {
     const p = R('items', `${r.id}.md`);
     if (!existsSync(p)) { bad.push(`repaired row names \`${r.id}\`, which is not an item on disk`); continue; }
     const now = currentHashes.get(r.id);
     if (!now) continue;
+    const pair = pairByItem.get(r.found_via);
+    let expectedSession = null;
+    try {
+      if (!pair) throw new Error(`found_via ${r.found_via} has no run A/B pair`);
+      const sessionPath = R('.autopilot', 'sessions', run, 'judge', pair, 'judge-session.json');
+      const session = JSON.parse(readFileSync(sessionPath, 'utf8'));
+      if (session.version !== 1 || session.pair !== pair || session.model !== MODELS.terra.id
+        || !/^[0-9a-f-]{36}$/i.test(session.session_id)) throw new Error(`${sessionPath}: invalid session metadata`);
+      expectedSession = session;
+    } catch (cause) {
+      bad.push(`\`${r.id}\`: cannot route the repaired item to its Step-7 Terra session (${cause.message ?? String(cause)})`);
+      pending.needs_rejudge.push(r.id);
+      continue;
+    }
     // Use the same currency predicate and same-context configured-model shape as
     // level-coverage. Published items are outside the run manifests, so the
     // run-scoped closure receipt cannot perform this check for us.
@@ -667,6 +697,8 @@ if (mode === 'published') {
     }
     const eligible = [...byContext.entries()].filter(([context, byModel]) =>
       currentModels.every((model) => byModel.has(model)
+        && byModel.get(model).session_pair === pair
+        && byModel.get(model).session_id === expectedSession.session_id
         && verdictIsCurrent({ context_sha256: context, item_sha256: byModel.get(model).item_sha256 }, now)));
     if (!eligible.length) {
       bad.push(`\`${r.id}\` was repaired but lacks a current verdict from ${currentModels.join(' + ')} — `

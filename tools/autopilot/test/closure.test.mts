@@ -82,6 +82,8 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   const stages: any[] = mod.stages;
   const stage = (id: string): any => stages.find((candidate: any) => candidate.id === id);
   const gateIds = (id: string) => (stage(id).gates?.(ctx) ?? []).map((gate: any) => gate.id);
+  const closureArgv = (id: string) => (stage(id).gates?.(ctx) ?? [])
+    .find((candidate: any) => candidate.id === 'judge-closure')?.argv ?? [];
   assert.ok(gateIds('7-judge').includes('judge-closure'));
   assert.ok(!gateIds('8-scope').includes('judge-closure'), 'unchanged Step-7 bytes are not rescanned at scope render');
   for (const id of ['8-adjudicate', '8-preflight', '8-rejudge']) {
@@ -92,6 +94,13 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   assert.equal(stage('8-final').onGateFailure, undefined, 'final currency cannot trigger another repair/rejudge cycle');
   assert.ok(stages.indexOf(stage('8-close')) < stages.indexOf(stage('8-final')));
   assert.ok(stages.indexOf(stage('8-final')) < stages.indexOf(stage('8-freeze')));
+
+  for (const id of ['7-judge', '8-adjudicate', '8-preflight', '8-rejudge', '8-final']) {
+    assert.ok(closureArgv(id).includes('--judge-session-run'), `${id} must require its assigned Terra conversation`);
+  }
+  for (const id of ['9-scope', '9-changes-judge', '9-close', '10-readiness-v2']) {
+    assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must retain the later fresh-item route`);
+  }
 
   // Later mathematical change stages retain direct closure until final
   // readiness seals the tree; reporting/commit stages may then reuse that seal.

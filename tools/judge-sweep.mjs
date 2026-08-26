@@ -9,6 +9,7 @@
 // unrelated calls in the same lane can continue. No result influences the other.
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
 import { spawn } from "node:child_process";
+import { join, resolve } from "node:path";
 import { tsxLoader } from "./paths.mjs";
 import { verdictIsCurrent } from "./judge-currency.mjs";
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
@@ -32,6 +33,8 @@ const itemsArg = value("--items");
 const manifestsArg = value("--manifests");
 const limitArg = value("--limit");
 const modelsArg = value("--models");
+const run = value("--run");
+const persistentPairs = Boolean(run);
 const contextCache = value("--context-cache")
   || (ledger.endsWith('.jsonl') ? ledger.replace(/-judge\.jsonl$/, '-judge-context-hashes.json') : `${ledger}-context-hashes.json`);
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
@@ -41,6 +44,9 @@ if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
 if (manifestsArg && (pagesArg || itemsArg)) {
   console.error("judge-sweep: --manifests cannot be combined with --pages/--items");
   process.exit(2);
+}
+if (persistentPairs && (!/^[A-Za-z0-9._-]+$/.test(run) || manifestsArg || modelsArg)) {
+  throw new Error("--run persistent judging requires a plain run id, --pages or --items, and the configured Terra lineup");
 }
 const limit = limitArg ? Number(limitArg) : Infinity;
 if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
@@ -73,6 +79,9 @@ const models = modelsArg
   : supportedModels;
 if (!models.length || models.some((model) => !supportedModels.includes(model))) {
   throw new Error(`--models must contain only ${supportedModels.join(", ")}`);
+}
+if (persistentPairs && (models.length !== 1 || models[0] !== TERRA)) {
+  throw new Error(`--run persistent judging requires the singleton ${TERRA} lineup`);
 }
 const requestedPages = new Set(pagesArg.split(",").map((s) => s.trim()).filter(Boolean));
 const requestedItems = new Set(itemsArg.split(",").map((s) => s.trim()).filter(Boolean));
@@ -108,6 +117,74 @@ const unknownItems = [...requestedItems].filter((id) => !plannedIds.has(id) && !
 if (unknownItems.length) throw new Error(`--items includes unknown item id(s): ${unknownItems.join(", ")}`);
 if (!ids.length || new Set(ids).size !== ids.length) {
   throw new Error(`selected pages produced ${ids.length} non-unique items`);
+}
+
+// Persistent build judging is still item-granular. This map changes only the
+// transport and scheduling: one sequential worker owns each A/B pair, and every
+// invocation below remains the canonical one-item judge.mts prompt.
+const aPageForPage = new Map();
+for (const page of plan.pages.filter((candidate) => candidate.kind === "A")) {
+  aPageForPage.set(page.id, page.id);
+  if (typeof page.companion === "string") aPageForPage.set(page.companion, page.id);
+}
+const pairForItem = new Map();
+for (const page of plan.pages) {
+  const pair = aPageForPage.get(page.id);
+  if (!pair) continue;
+  for (const item of page.items ?? []) pairForItem.set(item.id, pair);
+}
+const latestPublishedRepair = new Map();
+if (persistentPairs && itemsArg) {
+  const repairPath = `research/${run}-step8-published-repairs.jsonl`;
+  if (existsSync(repairPath)) {
+    for (const [index, line] of readFileSync(repairPath, "utf8").split("\n").filter(Boolean).entries()) {
+      let row;
+      try { row = JSON.parse(line); } catch { throw new Error(`${repairPath}:${index + 1}: invalid JSON`); }
+      if (row.kind === "repaired" && typeof row.id === "string") latestPublishedRepair.set(row.id, row);
+    }
+  }
+}
+const pairForTarget = (itemId) => {
+  const route = latestPublishedRepair.get(itemId);
+  if (route) {
+    const via = pairForItem.get(route.found_via);
+    if (via) return via;
+    throw new Error(`${itemId}: no Step-7 A/B pair session route through found_via ${route.found_via}`);
+  }
+  const direct = pairForItem.get(itemId);
+  if (direct) return direct;
+  throw new Error(`${itemId}: no Step-7 A/B pair session route`);
+};
+const pairTargets = new Map();
+if (persistentPairs) {
+  for (const itemId of ids) {
+    const pair = pairForTarget(itemId);
+    const owned = pairTargets.get(pair) ?? [];
+    owned.push(itemId);
+    pairTargets.set(pair, owned);
+  }
+}
+const sessionHomeFor = (pair) => {
+  if (!/^[A-Za-z0-9._-]+$/.test(pair)) throw new Error(`invalid A/B pair id: ${pair}`);
+  return resolve(`.autopilot/sessions/${run}/judge/${pair}`);
+};
+const readPairSession = (pair, required = false) => {
+  const path = join(sessionHomeFor(pair), "judge-session.json");
+  if (!existsSync(path)) {
+    if (required) throw new Error(`${pair}: missing Step-7 Terra session metadata at ${path}`);
+    return null;
+  }
+  let row;
+  try { row = JSON.parse(readFileSync(path, "utf8")); }
+  catch (cause) { throw new Error(`${path}: invalid JSON (${cause.message})`); }
+  if (row.version !== 1 || row.pair !== pair || row.model !== TERRA
+    || !/^[0-9a-f-]{36}$/i.test(row.session_id)) {
+    throw new Error(`${path}: invalid persistent Terra session metadata`);
+  }
+  return row;
+};
+if (persistentPairs && itemsArg) {
+  for (const pair of pairTargets.keys()) readPairSession(pair, true);
 }
 
 const history = new Map();
@@ -354,13 +431,103 @@ const pendingFor = (model) => ids
     const current = currentHashes.get(id);
     if (!current) throw new Error(`${id}: missing current judge context hash`);
     const modelRows = history.get(id)?.get(model) ?? [];
+    const pair = persistentPairs ? pairForTarget(id) : null;
+    const session = pair ? readPairSession(pair, false) : null;
     return ![...modelRows].reverse().some((row) =>
-      typeof row.keep === "boolean" && verdictIsCurrent(row, current),
+      typeof row.keep === "boolean" && verdictIsCurrent(row, current)
+        && (!persistentPairs || (session && row.session_pair === pair && row.session_id === session.session_id)),
     );
   })
   .slice(0, limit);
 const pending = Object.fromEntries(models.map((model) => [model, pendingFor(model)]));
 console.log(`[judge-sweep] lineup ${lineupName}: ${models.map((model) => `${model} pending ${pending[model]?.length ?? 0}/${ids.length} (cap ${capFor(model)})`).join("; ")} — at most ${MAX_CONCURRENT_CALLS} calls combined.`);
+
+if (persistentPairs) {
+  const pendingIds = new Set(pending[TERRA]);
+  const work = [...pairTargets.entries()]
+    .map(([pair, targets]) => [pair, targets.filter((id) => pendingIds.has(id))])
+    .filter(([, targets]) => targets.length);
+  console.log(`[judge-sweep] ${work.length} persistent Terra pair worker(s); each item receives one complete sequential xhigh turn.`);
+  let paymentFailed = false;
+
+  const runPairAttempt = async (pair, id, attempt, lengthFallback) => {
+    const session = readPairSession(pair, false);
+    console.log(`[judge-sweep] start ${TERRA} ${id} in pair ${pair} attempt ${attempt + 1}${session ? " (resume)" : " (new session)"}`);
+    const releaseSlot = await acquireModelSlot(TERRA);
+    heldSlotReleases.add(releaseSlot);
+    try {
+      const args = ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--model", TERRA,
+        "--session-home", sessionHomeFor(pair), "--session-pair", pair,
+        ...(session ? ["--resume-session", session.session_id] : [])];
+      let captured;
+      try {
+        captured = await captureChild(args, {
+          ...process.env,
+          JUDGE_VERDICTLOG: ledger,
+          JUDGE_COSTLOG: cost,
+          JUDGE_ATTEMPTLOG: attempts,
+          JUDGE_MAX_ATTEMPTS: "1",
+          JUDGE_ATTEMPT_NUMBER: String(attempt + 1),
+          JUDGE_RETRY_ALLOWED: attempt < 2 ? "1" : "0",
+          JUDGE_DEEPSEEK_LENGTH_FALLBACK: lengthFallback ? "1" : "0",
+        });
+      } catch (cause) {
+        console.error(`[judge-sweep] ${id}: could not start persistent judge — ${String(cause)}`);
+        return { code: 2, retry_after_ms: null };
+      }
+      if (captured.stdout) process.stdout.write(captured.stdout);
+      if (captured.stderr) process.stderr.write(captured.stderr);
+      let retry_after_ms = null;
+      if (captured.code === RETRY_EXIT || captured.code === LENGTH_RETRY_EXIT) {
+        for (const line of captured.stdout.trim().split("\n").reverse()) {
+          try {
+            const control = JSON.parse(line);
+            if (control.retry) {
+              retry_after_ms = Number.isFinite(control.retry_after_ms) ? control.retry_after_ms : null;
+              break;
+            }
+          } catch { /* diagnostic output */ }
+        }
+      }
+      return { code: captured.code, retry_after_ms };
+    } finally {
+      heldSlotReleases.delete(releaseSlot);
+      releaseSlot();
+    }
+  };
+
+  const pairWorker = async ([pair, targets]) => {
+    for (const id of targets) {
+      let lengthFallback = false;
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        if (paymentFailed) return;
+        const result = await runPairAttempt(pair, id, attempt, lengthFallback);
+        if (result.code === 3) {
+          paymentFailed = true;
+          console.error("[judge-sweep] account cannot pay; stopping without treating this as a verdict.");
+          return;
+        }
+        if ((result.code === RETRY_EXIT || result.code === LENGTH_RETRY_EXIT) && attempt < 2) {
+          lengthFallback ||= result.code === LENGTH_RETRY_EXIT;
+          const base = Number.isFinite(result.retry_after_ms) ? Math.min(result.retry_after_ms, 60_000) : (attempt + 1) * 4000;
+          await pause(base + Math.floor(Math.random() * 1000));
+          continue;
+        }
+        if (result.code !== 0) {
+          console.error(`[judge-sweep] ${TERRA} ${id}: judge exited ${result.code}; closure will expose the incomplete item.`);
+        }
+        break;
+      }
+    }
+  };
+
+  // Exactly one worker per A/B pair. Items inside a worker are deliberately
+  // serial: Terra finishes one full item verdict before seeing the next item.
+  await Promise.all(work.map(pairWorker));
+  if (paymentFailed) process.exit(3);
+  console.log("[judge-sweep] persistent pair sweep completed; run tools/judge-compare.mjs on the judge ledger.");
+  process.exit(0);
+}
 
 const runAttempt = async (task) => {
   const { id, model } = task;

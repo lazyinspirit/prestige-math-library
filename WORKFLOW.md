@@ -678,8 +678,12 @@ most work it screens, so this route supplies no cross-family corroboration
 (`CLAUDE.md` §Skeptical judge).
 
 The initial Step-7 sweep covers **every item in every completed A/B pair**,
-not merely Alpha-touched items. Only after that full sweep may Alpha select the
-exact materially repaired items for a targeted rejudge.
+not merely Alpha-touched items. It runs one persistent Terra conversation and
+one sequential worker per A/B pair; each item receives a separate `xhigh` turn
+with the unchanged skeptical one-item prompt and full frozen pair context. Only
+after one verdict finishes does that pair advance. After the full sweep, Step 8
+reuses the same pair conversation for each exact materially repaired item.
+Step 9 and later rejudges remain fresh per item.
 
 Dependencies cited by an item are treated as separately-verified, so the judge
 grades only the item's own reasoning — but it is given the text of those

@@ -22,7 +22,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { stages } from '../stages/mathlib.mts';
-import { resolveLineup } from '../../models.mjs';
+import { MODELS, resolveLineup } from '../../models.mjs';
 import { tsxLoader } from '../../paths.mjs';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 
@@ -487,10 +487,27 @@ test('step8-guard licenses a published repair, and only a well-formed one', () =
   }
 });
 
+function installPublishedJudgeSession(run: string) {
+  const pair = 'free-groups-and-presentations';
+  const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
+  const page = plan.pages.find((candidate: any) => candidate.id === pair);
+  assert.ok(page?.items?.length, `test pair ${pair} must exist in plan-spec.json`);
+  const foundVia = page.items[0].id;
+  const sessionId = 'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee';
+  const sessionRoot = join(REPO, '.autopilot', 'sessions', run);
+  const sessionHome = join(sessionRoot, 'judge', pair);
+  mkdirSync(sessionHome, { recursive: true });
+  writeFileSync(join(sessionHome, 'judge-session.json'), `${JSON.stringify({
+    version: 1, pair, model: MODELS.terra.id, session_id: sessionId,
+  }, null, 2)}\n`);
+  return { foundVia, pair, sessionId, sessionRoot };
+}
+
 test('step8-scope published refuses retired-lineup-only evidence', () => {
   const run = `step8pubtest${process.pid}`;
+  const { foundVia, sessionRoot } = installPublishedJudgeSession(run);
   const files = [
-    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: 'thm-y', pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
+    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, `${JSON.stringify({ id: 'lem-cauchy-bounded', model: 'deepseek-v4-pro', context_sha256: 'abc', keep: true })}\n`],
   ];
   try {
@@ -501,16 +518,19 @@ test('step8-scope published refuses retired-lineup-only evidence', () => {
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
+    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 
 test('step8-scope published refuses a stale configured-model verdict', () => {
   const run = `step8pubstaletest${process.pid}`;
+  const { foundVia, pair, sessionId, sessionRoot } = installPublishedJudgeSession(run);
   const { models } = resolveLineup();
   const files = [
-    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: 'thm-y', pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
+    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
       id: 'lem-cauchy-bounded', model, context_sha256: 'stale', item_sha256: 'b'.repeat(64), keep: true,
+      session_pair: pair, session_id: sessionId,
     })).join('\n') + '\n'],
   ];
   try {
@@ -521,12 +541,14 @@ test('step8-scope published refuses a stale configured-model verdict', () => {
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
+    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 
 test('step8-scope published accepts the configured model set on the current text', () => {
   const run = `step8pubcurrenttest${process.pid}`;
   const id = 'lem-cauchy-bounded';
+  const { foundVia, pair, sessionId, sessionRoot } = installPublishedJudgeSession(run);
   const built = spawnSync(process.execPath,
     ['--import', tsxLoader(), 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
     { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
@@ -534,9 +556,10 @@ test('step8-scope published accepts the configured model set on the current text
   const hash = JSON.parse(built.stdout);
   const { models } = resolveLineup();
   const files = [
-    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id, group: 'a', found_via: 'thm-y', pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
+    [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id, group: 'a', found_via: foundVia, pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
     [`${run}-judge.jsonl`, models.map((model) => JSON.stringify({
       id, model, context_sha256: hash.context_sha256, item_sha256: hash.item_sha256, keep: true,
+      session_pair: pair, session_id: sessionId,
     })).join('\n') + '\n'],
   ];
   try {
@@ -547,6 +570,7 @@ test('step8-scope published accepts the configured model set on the current text
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
+    rmSync(sessionRoot, { recursive: true, force: true });
   }
 });
 

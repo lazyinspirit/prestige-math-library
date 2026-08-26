@@ -256,7 +256,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   'judge-closure': (ctx) => {
     const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
     const aPages = ledger.pages.filter((p: any) => p.kind === 'A').map((p: any) => p.id);
-    return ['tools/judge-sweep.mjs',
+    return ['tools/judge-sweep.mjs', '--run', ctx.run,
       '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
       '--cost', R(ctx, 'research', `${ctx.run}-judge-cost.jsonl`),
       '--pages', aPages.join(',')];
@@ -1065,12 +1065,13 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false } = {}) =>
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeSessionRun = false } = {}) =>
   gate('judge-closure', ['node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
     '--terminal-resolutions', terminalResolutionsPath(ctx),
+    ...(judgeSessionRun ? ['--judge-session-run', ctx.run] : []),
     ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
     ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
     '--out', closurePath(ctx),
@@ -1817,7 +1818,7 @@ export const stages = [
   // rather than re-spending the loop.
   {
     id: '7-judge',
-    label: 'Terra judge sweep, with the group Alphas reading alongside',
+    label: 'one persistent Terra judge per A/B pair, with the group Alphas reading alongside',
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
     // a real obligation rather than a best-effort rider.
@@ -1852,7 +1853,7 @@ export const stages = [
           timeout: 43200,
           // argv, so there is nothing to quote and nothing to parse. The engine
           // writes the result record when this exits zero.
-          argv: ['node', 'tools/judge-sweep.mjs',
+          argv: ['node', 'tools/judge-sweep.mjs', '--run', ctx.run,
             '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
             '--pages', aPages.join(',')],
@@ -1892,7 +1893,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true }),
+      closureGate(ctx, { allowUnadjudicated: true, judgeSessionRun: true }),
       gate('step8-digests', ['node', 'tools/step8-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -2075,7 +2076,7 @@ export const stages = [
       // A repaired item correctly has no current verdict; `8-rejudge` owns
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
-      closureGate(ctx, { pendingRejudge: true }),
+      closureGate(ctx, { pendingRejudge: true, judgeSessionRun: true }),
     ],
     // THE FATAL-REPAIR LOOP.
     //
@@ -2222,7 +2223,7 @@ export const stages = [
           ...repoWide(ctx),
           ...contractGates(ctx, { reviewed: true }),
           ledgerGate(ctx),
-          closureGate(ctx, { pendingRejudge: true }),
+          closureGate(ctx, { pendingRejudge: true, judgeSessionRun: true }),
         ],
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
@@ -2332,7 +2333,7 @@ export const stages = [
       // configured judge returned a current verdict" is a statement about work that has
       // happened rather than work that was planned.
       publishedGate(ctx),
-      closureGate(ctx),
+      closureGate(ctx, { judgeSessionRun: true }),
     ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
     // adjudicating and possibly repairing again. Two distinct frozen contexts
@@ -2518,7 +2519,7 @@ export const stages = [
     gates: (ctx) => [
       step8GuardGate(ctx),
       publishedGate(ctx),
-      closureGate(ctx),
+      closureGate(ctx, { judgeSessionRun: true }),
     ],
   },
 
@@ -2666,7 +2667,7 @@ export const stages = [
         return;
       }
 
-      const mechanical = await mechanicalRepair({ ctx, failure });
+      const mechanical = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
       if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
       if (mechanical.outcome !== 'unhandled') return;
 
@@ -2701,7 +2702,7 @@ export const stages = [
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
       if (failure.id === 'impact-receipt') {
-        await mechanicalRepair({ ctx, failure });
+        await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
         let pending = 0;
         try {
           const receipt = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-impact.json`), 'utf8'));
@@ -2761,7 +2762,7 @@ export const stages = [
         });
         return;
       }
-      const repair = await mechanicalRepair({ ctx, failure });
+      const repair = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
       if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
     },
   },

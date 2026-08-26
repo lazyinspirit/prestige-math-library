@@ -490,9 +490,13 @@ good as the tool list; codex's is not.
 
 At step 7 run only `gpt-5.6-terra` through `tools/judge.mts`, selected by
 `JUDGE_LINEUP=terra` (owner, 2026-08-26). Terra runs at
-`xhigh` in a fresh `codex exec --ephemeral` process under a throwaway
-`CODEX_HOME`, with the 1M window passed explicitly, so the frozen prompt is its
-only context. **Transport is chosen by the registry's runner for the id, never
+`xhigh` with the 1M window passed explicitly. `judge-sweep.mjs --run <run>`
+creates one persistent Codex conversation per A/B pair and one sequential
+worker per pair. Every item still receives its own complete turn with the
+unchanged skeptical one-item prompt and full frozen A/B context; only after that
+verdict finishes may the pair worker submit its next item. Step 8 resumes the
+same pair conversation for a repaired item. Step 9 and later judging remains a
+fresh ephemeral call per item. **Transport is chosen by the registry's runner for the id, never
 by an id equality test** — see §Model lineup. Terra reads the frozen prompt as
 an adversarial refuter of proofs and dependency citations. **Terra is capped at
 14**.
@@ -516,9 +520,13 @@ is per frozen context *and* per configured model set.
   `{id, model, context_sha256, outcome, defect_type?}` — `outcome` is
   `confirmed_fatal`, `confirmed_nonfatal` or `false_positive`; fatal types are
   `logic`, `dependency_citation` or `other`.
-- `tools/judge-sweep.mjs` keeps the model in a file-backed pool; it advances when
-  one of its slots frees, every call is its own
-  process, and a capacity refusal is a null verdict, not a verdict.
+- `tools/judge-sweep.mjs` keeps the model in a file-backed pool. Step 7 has one
+  worker per selected A/B pair (14 workers for Frontier 19), and each worker
+  serializes its items while independent pairs run concurrently. Every item
+  turn is its own process resuming the pair's exact session UUID; a capacity
+  refusal is a null verdict, not a verdict. Session identity is stored at
+  `.autopilot/sessions/<run>/judge/<A-page>/judge-session.json`, copied into the
+  verdict row, and required by the Step-7/8 closure gates.
   `JUDGE_CONCURRENCY_<MODEL>` (here `JUDGE_CONCURRENCY_GPT_5_6_TERRA`) can
   lower a lane for a targeted replay, never raise it above the owner's value. On
   refusal or kernel-kill nulls, lower rather than re-spend the loop. Spend
@@ -527,8 +535,8 @@ is per frozen context *and* per configured model set.
   **The initial Step-7 sweep takes every A page in the level** — Terra judges
   every item whether or not Alpha changed it. `--items` is for a later rejudge of
   an item repaired after that sweep, driven by `8-rejudge` from
-  `<run>-judge-closure.json`; `--models` remains a historical-replay and targeted
-  retry option.
+  `<run>-judge-closure.json`, and resumes that item's pair session. `--models`
+  remains available only on the fresh historical-replay route.
 
 ### Mathematical content
 

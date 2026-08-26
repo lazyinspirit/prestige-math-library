@@ -18,7 +18,7 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES } from './models.mjs';
+import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES, MODELS } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
@@ -35,6 +35,7 @@ const contextHashCachePath = option('--context-hash-cache')
     : `${judgePath ?? 'judge'}-context-hashes.json`);
 const judgeAdjudicationsPath = option('--judge-adjudications');
 const terminalResolutionsPath = option('--terminal-resolutions');
+const judgeSessionRun = option('--judge-session-run');
 const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
@@ -63,7 +64,7 @@ const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--judge-session-run', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
 if (!batchFiles.length) usage();
 if (judgeOnly) {
@@ -74,6 +75,10 @@ if (judgeOnly) {
   // gate that cannot fail is worse than no gate: it reports green.
   if (!verifyCurrent) { console.error('--judge-only requires --verify-current-context; otherwise it checks nothing'); process.exit(2); }
 } else if ((!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
+if (judgeSessionRun && (!judgeOnly || !/^[A-Za-z0-9._-]+$/.test(judgeSessionRun))) {
+  console.error('--judge-session-run takes one plain build run id and requires --judge-only');
+  process.exit(2);
+}
 
 const errors = [];
 const warnings = [];
@@ -432,6 +437,40 @@ if (verifyCurrent && judgePath) {
   }
 }
 
+const expectedJudgeSessions = new Map();
+if (judgeSessionRun) {
+  if (JUDGES.length !== 1 || JUDGES[0] !== MODELS.terra.id) {
+    error('judge-session-lineup', `persistent Step-7/8 judging requires the singleton ${MODELS.terra.id} lineup`);
+  } else {
+    try {
+      const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
+      const pairByPage = new Map();
+      for (const page of plan.pages.filter((candidate) => candidate.kind === 'A')) {
+        pairByPage.set(page.id, page.id);
+        if (typeof page.companion === 'string') pairByPage.set(page.companion, page.id);
+      }
+      const pairByItem = new Map();
+      for (const page of plan.pages) {
+        const pair = pairByPage.get(page.id);
+        for (const item of page.items ?? []) if (pair) pairByItem.set(item.id, pair);
+      }
+      for (const id of judgeScope) {
+        const pair = pairByItem.get(id);
+        if (!pair) throw new Error(`${id}: no A/B pair in research/plan-spec.json`);
+        const path = join(REPO, '.autopilot', 'sessions', judgeSessionRun, 'judge', pair, 'judge-session.json');
+        const session = JSON.parse(readFileSync(path, 'utf8'));
+        if (session.version !== 1 || session.pair !== pair || session.model !== MODELS.terra.id
+          || !/^[0-9a-f-]{36}$/i.test(session.session_id)) {
+          throw new Error(`${path}: invalid persistent Terra session metadata`);
+        }
+        expectedJudgeSessions.set(id, { pair, session_id: session.session_id });
+      }
+    } catch (cause) {
+      error('judge-session-provenance', cause.message ?? String(cause));
+    }
+  }
+}
+
 // COVERAGE FOLLOWS THE ITEM, NOT THE PAGE.
 //
 // The judge's context unit is the A/B PAIR — an item is judged with its whole
@@ -508,12 +547,18 @@ for (const id of judgePath ? judgeScope : []) {
   // `context_sha256`; passing it per row is the same test, spelled once.
   const coversCurrent = ([hash, byModel]) => {
     if (!verifyCurrent) return true;
+    const expectedSession = expectedJudgeSessions.get(id);
     // Every lane's verdict must be current — clause (a) via the group's shared
     // context hash, or clause (b) via that lane's own item hash.
-    return JUDGES.every((model) => verdictIsCurrent(
-      { context_sha256: hash, item_sha256: byModel.get(model)?.item_sha256 },
-      { context: current, item: currentItem },
-    ));
+    return JUDGES.every((model) => {
+      const row = byModel.get(model);
+      return (!judgeSessionRun || (expectedSession && row?.session_pair === expectedSession.pair
+        && row?.session_id === expectedSession.session_id))
+        && verdictIsCurrent(
+          { context_sha256: hash, item_sha256: row?.item_sha256 },
+          { context: current, item: currentItem },
+        );
+    });
   };
   const eligible = [...contexts.entries()].filter((entry) =>
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));

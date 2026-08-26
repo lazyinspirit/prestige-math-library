@@ -824,11 +824,12 @@ never a quota it must spend: if lanes start dying on a limit, lower
 `alpha-group-read`'s cap rather than re-spending the loop.
 
 
-**Model change (owner, 2026-08-26; Terra only):** the session-item judge is a
-freshly spawned GPT-5.6 Terra Codex process at `xhigh`
-(`JUDGE_LINEUP=terra`). `tools/judge-sweep.mjs` uses one file-backed,
-cross-process Terra pool with **14 concurrent calls maximum**. Each call receives
-the exact hash-attested frozen prompt for the item. DeepSeek remains available
+**Model change (owner, 2026-08-26; Terra only):** the session-item judge is
+GPT-5.6 Terra at `xhigh` (`JUDGE_LINEUP=terra`). Step 7 creates one persistent
+Codex conversation and one sequential worker per A/B pair; Frontier 19 therefore
+has exactly 14 pair workers under the existing **14 concurrent calls maximum**.
+Each item receives its own complete turn and exact hash-attested frozen prompt,
+and a pair cannot advance until that verdict finishes. DeepSeek remains available
 only as the separate audit proof-refuter and in retired lineup keys; it is not a
 Step-7 judge. Terra shares the OpenAI family with most work it screens, so this
 configuration provides no cross-family judge corroboration.
@@ -847,7 +848,10 @@ Step-7 sweep. `--items` is reserved for a later Alpha-selected rejudge after a
 material repair, and `--models` only recovers an incomplete verdict.
 
 Record a full verdict ledger at `research/<run>-judge.jsonl` with at least
-`{id, model, keep, reason, context_sha256, at}` for Terra's call on every item.
+`{id, model, keep, reason, context_sha256, session_pair, session_id, at}` for
+Terra's Step-7/8 call on every item. The exact pair session is recorded at
+`.autopilot/sessions/<run>/judge/<A-page>/judge-session.json`; Step-7/8 closure
+rejects an otherwise-current verdict from a different conversation.
 Use
 `tools/judge-sweep.mjs` to resume a selected page set. Pass its A-page ids: the
 sweep automatically includes every selected A page's B/examples companion, so
@@ -855,9 +859,10 @@ all items in each A/B pair receive coverage. It skips only complete
 pairs whose hash also matches freshly assembled current context.
 The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that attestation for Terra's call.
-For a targeted recovery, `--models gpt-5.6-terra` retries missing
-current-context verdicts; ordinary first-pass sweeps omit the flag.
-The sweep permits at most 14 Terra calls at once.
+For a Step-7/8 targeted recovery, pass `--run <run>` and the affected pages or
+items; it resumes each pair's exact session. The fresh route used at Step 9 and
+later still permits `--models gpt-5.6-terra`. The sweep permits at most 14 Terra
+calls at once.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
 finish reason, and structured transport cause. An empty response with no terminal
 finish reason is retried with jitter up to the normal three-attempt limit;
@@ -976,7 +981,9 @@ its sweep — the closure receipt is computed over the run's scope and never nam
 a published item, so without the union the repair would ship unjudged — and
 `tools/step8-scope.mjs published` gates the Step-8 scope, rejudge, final
 integrity and final-currency boundaries until Terra has returned a current
-verdict on the repaired text with any rejection adjudicated.
+verdict on the repaired text from the same A/B-pair conversation used at Step 7,
+with any rejection adjudicated. Each repaired item is a separate complete turn;
+Step 8 never combines several items into one prompt.
 Historic or retired-lane rows do not qualify. This is what replaces the certifier the published-dependency-repair
 rule names at step 6: published content has no step-6 reader left, and no author
 certifies its own repair. It is a stronger check than that rule asks for.

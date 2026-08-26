@@ -88,8 +88,9 @@ from the page's items by the renderer (never hand-set):
   GPT-5.6 Terra is the sole Step-7 judge; both use Codex with explicit reasoning
   and context settings from the model/role registries. Terra is same-family with
   most work it screens, so its verdict is not cross-family corroboration. Step 7
-  audits every item in every completed A/B pair; Step 8 freshly rejudges only
-  the repaired targets.
+  gives every item its own `xhigh` turn inside one persistent Terra conversation
+  per A/B pair; Step 8 resumes that same pair conversation only for repaired
+  targets. Step 9 and later rejudges are fresh per item.
   Future levels also gate scope coverage mechanically: every in-flight item has
   provenance, every proof-bearing item a proof contract, every changed public
   interface an audited downstream-impact receipt, and Terra a current verdict.

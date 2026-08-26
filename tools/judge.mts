@@ -131,9 +131,9 @@
 // Historical DeepSeek routes need DEEPSEEK_API_KEY, supplied directly or from
 // the sibling Prestige Intelligence .env file. Historical Opus routes use the
 // already-authenticated claude CLI; the active Terra route uses the Codex CLI.
-import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from "node:fs";
+import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, mkdirSync, chmodSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { basename, join } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { homedir } from "node:os";
 import { deepseekEnvFile } from "./paths.mjs";
@@ -142,7 +142,7 @@ import { unwrapClaudeEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs"
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
+const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch", "session-home", "resume-session", "session-pair"]);
 // --no-context disables the cited-item RAG block, for A/B measurement only.
 const opts: Record<string, string> = {};
 const bools = new Set<string>();
@@ -273,10 +273,28 @@ if (!conventions) {
   process.exit(2);
 }
 const id = basename(file).replace(/\.md$/, "");
+const sessionHomeArg = opts["session-home"];
+const resumeSession = opts["resume-session"];
+const sessionPair = opts["session-pair"];
+const persistentJudge = Boolean(sessionHomeArg || resumeSession || sessionPair);
 
 for (const judgeModel of models) {
   if (!SUPPORTED_MODELS.includes(judgeModel)) {
     console.error(`--model must be one of ${SUPPORTED_MODELS.join(", ")}`);
+    process.exit(2);
+  }
+}
+if (persistentJudge) {
+  if (bools.has("preflight") || models.length !== 1 || runnerFor(models[0]) !== "codex") {
+    console.error("[judge] persistent sessions require one Codex judge in normal item mode");
+    process.exit(2);
+  }
+  if (!sessionHomeArg || !sessionPair || !/^[A-Za-z0-9._-]+$/.test(sessionPair)) {
+    console.error("[judge] --session-home and a plain --session-pair are both required for persistent judging");
+    process.exit(2);
+  }
+  if (resumeSession && !/^[0-9a-f-]{36}$/i.test(resumeSession)) {
+    console.error("[judge] --resume-session must be a UUID");
     process.exit(2);
   }
 }
@@ -299,8 +317,46 @@ const deepseekKey = (): string => {
   throw new Error("DEEPSEEK_API_KEY is not set and was not found in the configured DeepSeek .env file");
 };
 
-type CodexRun = { stdout: string; stderr: string; code: number | null; timedOut: boolean };
-const runFreshCodex = (model: string, prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+type CodexRun = { stdout: string; stderr: string; code: number | null; timedOut: boolean; sessionId: string | null };
+const sessionMetadataName = "judge-session.json";
+const sessionIdFrom = (home: string, stdout: string, stderr: string): string | null => {
+  const banner = /^\s*session id:\s*([0-9a-f-]{36})\s*$/mi;
+  for (const stream of [stderr, stdout]) {
+    const hit = banner.exec(stream)?.[1];
+    if (hit) return hit;
+  }
+  const pending = [join(home, "sessions")];
+  const found: { id: string; at: number }[] = [];
+  while (pending.length) {
+    const dir = pending.pop()!;
+    let entries;
+    try { entries = readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+    for (const entry of entries) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) pending.push(path);
+      else {
+        const match = /^rollout-.*-([0-9a-f-]{36})\.jsonl$/i.exec(entry.name);
+        if (match) found.push({ id: match[1], at: statSync(path).mtimeMs });
+      }
+    }
+  }
+  found.sort((a, b) => b.at - a.at);
+  return found[0]?.id ?? null;
+};
+const persistJudgeSession = (home: string, model: string, sessionId: string): void => {
+  const path = join(home, sessionMetadataName);
+  if (existsSync(path)) {
+    const row = JSON.parse(readFileSync(path, "utf8"));
+    if (row.pair !== sessionPair || row.model !== model || row.session_id !== sessionId) {
+      throw new Error(`${path}: persistent judge identity does not match ${sessionPair}/${model}/${sessionId}`);
+    }
+    return;
+  }
+  const temporary = `${path}.tmp-${process.pid}`;
+  writeFileSync(temporary, JSON.stringify({ version: 1, pair: sessionPair, model, session_id: sessionId }, null, 2) + "\n");
+  renameSync(temporary, path);
+};
+const runCodex = (model: string, prompt: string, timeoutMs: number, activeSession: string | null = null): Promise<CodexRun> => new Promise((resolveRun) => {
   // Codex subscription authentication lives in the user's normal CODEX_HOME,
   // but this judge must run read-only and must not let Codex initialise there.
   // Give every judge call a 0700 temporary home containing only its auth record
@@ -309,15 +365,33 @@ const runFreshCodex = (model: string, prompt: string, timeoutMs: number): Promis
   // every exit path. The token is never placed in a prompt, ledger, command
   // argument, or process output.
   const sourceHome = process.env.CODEX_HOME ?? join(homedir(), ".codex");
-  const temporaryHome = mkdtempSync("/tmp/prestige-math-library-terra-");
+  const persistentHome = sessionHomeArg ? resolve(sessionHomeArg) : null;
+  const activeHome = persistentHome ?? mkdtempSync("/tmp/prestige-math-library-terra-");
+  if (persistentHome) mkdirSync(persistentHome, { recursive: true, mode: 0o700 });
+  if (persistentHome && existsSync(join(persistentHome, sessionMetadataName))) {
+    const metadata = JSON.parse(readFileSync(join(persistentHome, sessionMetadataName), "utf8"));
+    if (metadata.version !== 1 || metadata.pair !== sessionPair || metadata.model !== model
+      || !/^[0-9a-f-]{36}$/i.test(metadata.session_id)) {
+      throw new Error(`${join(persistentHome, sessionMetadataName)}: invalid persistent judge metadata`);
+    }
+    if (activeSession && activeSession !== metadata.session_id) {
+      throw new Error(`${join(persistentHome, sessionMetadataName)}: requested session does not match the pair's persisted session`);
+    }
+    activeSession ??= metadata.session_id;
+  }
   const temporaryWork = mkdtempSync("/tmp/prestige-math-library-codex-work-");
   const sourceAuth = join(sourceHome, "auth.json");
+  const activeAuth = join(activeHome, "auth.json");
+  let authBaseline: Buffer | null = null;
   if (existsSync(sourceAuth)) {
-    copyFileSync(sourceAuth, join(temporaryHome, "auth.json"));
-    chmodSync(join(temporaryHome, "auth.json"), 0o600);
+    authBaseline = readFileSync(sourceAuth);
+    writeFileSync(activeAuth, authBaseline);
+    chmodSync(activeAuth, 0o600);
+  } else if (existsSync(activeAuth)) {
+    authBaseline = readFileSync(activeAuth);
   }
-  const child = spawn(process.env.CODEX_BIN ?? "codex", [
-    "--ask-for-approval", "never", "exec", "--ephemeral", "--model", model,
+  const initialArgs = [
+    "--ask-for-approval", "never", "exec", ...(persistentHome ? [] : ["--ephemeral"]), "--model", model,
     "-c", 'model_reasoning_effort="xhigh"',
     // The temporary CODEX_HOME below contains only auth.json, so the user's
     // config.toml — including model_context_window — is deliberately NOT
@@ -325,7 +399,17 @@ const runFreshCodex = (model: string, prompt: string, timeoutMs: number): Promis
     // lane silently runs at the Codex built-in default (owner, 2026-08-03).
     "-c", "model_context_window=1000000",
     "--sandbox", "read-only", "--skip-git-repo-check", "--cd", temporaryWork, "-",
-  ], { stdio: ["pipe", "pipe", "pipe"], env: { ...process.env, CODEX_HOME: temporaryHome } });
+  ];
+  const resumeArgs = [
+    "--ask-for-approval", "never", "exec", "resume", activeSession!,
+    "--model", model,
+    "-c", 'sandbox_mode="read-only"',
+    "-c", 'model_reasoning_effort="xhigh"',
+    "-c", "model_context_window=1000000",
+    "--skip-git-repo-check", "-",
+  ];
+  const child = spawn(process.env.CODEX_BIN ?? "codex", activeSession ? resumeArgs : initialArgs,
+    { cwd: temporaryWork, stdio: ["pipe", "pipe", "pipe"], env: { ...process.env, CODEX_HOME: activeHome } });
   let stdout = "";
   let stderr = "";
   let settled = false;
@@ -334,9 +418,38 @@ const runFreshCodex = (model: string, prompt: string, timeoutMs: number): Promis
     if (settled) return;
     settled = true;
     clearTimeout(timeout);
-    try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort credential cleanup */ }
+    let sessionId = activeSession;
+    try {
+      if (persistentHome) {
+        sessionId = activeSession ?? sessionIdFrom(activeHome, stdout, stderr);
+        if (sessionId) persistJudgeSession(activeHome, model, sessionId);
+      }
+      // A Codex OAuth refresh token is single-use. Preserve only a credential
+      // this call actually advanced; an unchanged pair-local baseline must
+      // never overwrite a newer canonical winner. Before the next persistent
+      // turn, the copy above makes every pair adopt that winner.
+      if ((persistentJudge || bools.has("preflight")) && authBaseline && existsSync(activeAuth)) {
+        const after = readFileSync(activeAuth);
+        let canonical = existsSync(sourceAuth) ? readFileSync(sourceAuth) : null;
+        if (!after.equals(authBaseline) && (!canonical || canonical.equals(authBaseline))) {
+          writeFileSync(sourceAuth, after);
+          chmodSync(sourceAuth, 0o600);
+          canonical = after;
+        }
+        if (persistentHome && canonical && !after.equals(canonical)) {
+          writeFileSync(activeAuth, canonical);
+          chmodSync(activeAuth, 0o600);
+        }
+      }
+    } catch (cause) {
+      stderr += `\n[judge] persistent session failure: ${String((cause as Error).message ?? cause)}`;
+      code = 2;
+    }
+    if (!persistentHome) {
+      try { rmSync(activeHome, { recursive: true, force: true }); } catch { /* best-effort credential cleanup */ }
+    }
     try { rmSync(temporaryWork, { recursive: true, force: true }); } catch { /* best-effort workdir cleanup */ }
-    resolve({ stdout, stderr, code, timedOut });
+    resolveRun({ stdout, stderr, code, timedOut, sessionId });
   };
   const timeout = setTimeout(() => {
     timedOut = true;
@@ -403,7 +516,7 @@ const runFreshClaude = (model: string, prompt: string, timeoutMs: number): Promi
 if (bools.has("preflight")) {
   const checks = await Promise.all(models.map(async (judgeModel) => {
     if (runnerFor(judgeModel) === "codex") {
-      const codexRun = await runFreshCodex(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
+      const codexRun = await runCodex(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
       return { judgeModel, status: codexRun.code === 0 && codexRun.stdout.trim() ? 200 : 0, raw: codexRun.stdout || codexRun.stderr || "Codex produced no output" };
     }
     if (runnerFor(judgeModel) === "claude") {
@@ -1054,6 +1167,7 @@ type CallResult = {
   payment?: boolean;
   retry?: RetryKind;
   retry_after_ms?: number | null;
+  session_id?: string | null;
 };
 
 async function callDeepSeek(): Promise<CallResult> {
@@ -1153,10 +1267,12 @@ async function callDeepSeek(): Promise<CallResult> {
 }
 
 async function callCodex(model: string): Promise<CallResult> {
+  let activeSession = resumeSession ?? null;
   for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     const started = performance.now();
-    const run = await runFreshCodex(model, frozenPrompt, 12 * 60_000);
+    const run = await runCodex(model, frozenPrompt, 12 * 60_000, activeSession);
+    activeSession = run.sessionId ?? activeSession;
     const latency_ms = Math.round(performance.now() - started);
     const content = run.stdout.trim();
     const event = {
@@ -1168,12 +1284,21 @@ async function callCodex(model: string): Promise<CallResult> {
       has_content: Boolean(content),
       raw_bytes: (run.stdout.length + run.stderr.length),
     };
+    if (persistentJudge && !activeSession) {
+      emitAttempt(model, attempt, { ...event, outcome: "session_id_missing" });
+      if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
+      return {
+        content: "",
+        raw: "persistent Terra call returned no recoverable session id",
+        retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
+      };
+    }
     if (run.code === 0 && content) {
       // `model`, not TERRA_MODEL: this function is no longer Terra-only, and an
       // attempt row naming the wrong lane is the same lie the routing fix above
       // removes — one layer down, in the cost ledger.
       emitAttempt(model, attempt, event);
-      return { content, raw: run.stderr };
+      return { content, raw: run.stderr, session_id: activeSession };
     }
     emitAttempt(model, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
@@ -1239,13 +1364,18 @@ const call = (judgeModel: string): Promise<CallResult> => {
 // needs a COUNT PER PROOF ACROSS RUNS, so verdicts must outlive the run that
 // produced them. Set JUDGE_VERDICTLOG to the level's ledger and never rotate it
 // mid-level; the count is the whole point.
-const emit = (judgeModel: string, keep: boolean | null, reason: string): void => {
+const emit = (judgeModel: string, keep: boolean | null, reason: string, sessionId: string | null = null): void => {
   const line = JSON.stringify({ id, model: judgeModel, keep, reason });
   process.stdout.write(line + "\n");
   const vlog = process.env.JUDGE_VERDICTLOG;
   if (vlog) {
     try {
-      appendFileSync(vlog, JSON.stringify({ id, model: judgeModel, keep, reason, context_sha256: contextSha256, item_sha256: itemSha256, at: new Date().toISOString() }) + "\n");
+      appendFileSync(vlog, JSON.stringify({
+        id, model: judgeModel, keep, reason, context_sha256: contextSha256,
+        item_sha256: itemSha256,
+        ...(persistentJudge ? { session_pair: sessionPair, session_id: sessionId } : {}),
+        at: new Date().toISOString(),
+      }) + "\n");
     } catch { /* non-fatal: stdout is still the primary channel */ }
   }
 };
@@ -1258,17 +1388,17 @@ const emit = (judgeModel: string, keep: boolean | null, reason: string): void =>
 // times was this proof refuted", and a payment failure is not a verdict about
 // the proof at all. 46 such lines entered the frontier-1 ledger before this
 // existed and had to be filtered out of every count made from it afterwards.
-type Verdict = { judgeModel: string; keep: boolean | null; reason: string; usage?: JudgeResp["usage"]; payment?: boolean; retry?: RetryKind; retry_after_ms?: number | null };
+type Verdict = { judgeModel: string; keep: boolean | null; reason: string; usage?: JudgeResp["usage"]; payment?: boolean; retry?: RetryKind; retry_after_ms?: number | null; session_id?: string | null };
 
 const judgeOne = async (judgeModel: string): Promise<Verdict> => {
-  const { content, usage, raw, payment, retry, retry_after_ms } = await call(judgeModel);
-  if (payment) return { judgeModel, keep: null, reason: "PAYMENT_REQUIRED: " + raw.slice(0, 200), usage, payment: true };
-  if (retry) return { judgeModel, keep: null, reason: "RETRY_REQUIRED: " + raw.slice(0, 200), usage, retry, retry_after_ms };
-  if (!content) return { judgeModel, keep: null, reason: "NO_CONTENT: " + raw.slice(0, 300), usage };
+  const { content, usage, raw, payment, retry, retry_after_ms, session_id } = await call(judgeModel);
+  if (payment) return { judgeModel, keep: null, reason: "PAYMENT_REQUIRED: " + raw.slice(0, 200), usage, payment: true, session_id };
+  if (retry) return { judgeModel, keep: null, reason: "RETRY_REQUIRED: " + raw.slice(0, 200), usage, retry, retry_after_ms, session_id };
+  if (!content) return { judgeModel, keep: null, reason: "NO_CONTENT: " + raw.slice(0, 300), usage, session_id };
   const cleaned = content.replace(/^```json/i, "").replace(/^```/, "").replace(/```$/, "").trim();
   try {
     const v = JSON.parse(cleaned) as { keep?: boolean; reason?: string };
-    return { judgeModel, keep: typeof v.keep === "boolean" ? v.keep : null, reason: v.reason ?? content, usage };
+    return { judgeModel, keep: typeof v.keep === "boolean" ? v.keep : null, reason: v.reason ?? content, usage, session_id };
   } catch {
     // A few reasoning models occasionally overrun the requested reason length
     // after first emitting an unambiguous `{"keep":true, ...` verdict. An
@@ -1278,7 +1408,7 @@ const judgeOne = async (judgeModel: string): Promise<Verdict> => {
     // Step 8 must adjudicate, and remains a null for a targeted retry.
     const leading = cleaned.match(/^\{\s*"keep"\s*:\s*(true|false)\b/);
     if (leading?.[1] === "true") {
-      return { judgeModel, keep: true, reason: "TRUNCATED_ACCEPT: " + content.slice(0, 300), usage };
+      return { judgeModel, keep: true, reason: "TRUNCATED_ACCEPT: " + content.slice(0, 300), usage, session_id };
     }
     // A reply that wraps or trails a WELL-FORMED verdict object in prose is a
     // parse problem, not a verdict problem: frontier-15 lost 28 stated sonnet
@@ -1289,9 +1419,9 @@ const judgeOne = async (judgeModel: string): Promise<Verdict> => {
     // parseable object stays a null for a re-spend.
     const embedded = extractEmbeddedVerdict(cleaned);
     if (embedded) {
-      return { judgeModel, keep: embedded.keep, reason: "EMBEDDED_JSON: " + (embedded.reason ?? content.slice(0, 280)), usage };
+      return { judgeModel, keep: embedded.keep, reason: "EMBEDDED_JSON: " + (embedded.reason ?? content.slice(0, 280)), usage, session_id };
     }
-    return { judgeModel, keep: null, reason: `UNPARSEABLE (${content.length} chars): ` + content.slice(0, 300), usage };
+    return { judgeModel, keep: null, reason: `UNPARSEABLE (${content.length} chars): ` + content.slice(0, 300), usage, session_id };
   }
 };
 
@@ -1309,7 +1439,7 @@ for (const verdict of verdicts) {
   if (verdict.retry) {
     process.stdout.write(JSON.stringify({ id, model: verdict.judgeModel, retry: verdict.retry, retry_after_ms: verdict.retry_after_ms ?? null }) + "\n");
   } else {
-    emit(verdict.judgeModel, verdict.keep, verdict.reason);
+    emit(verdict.judgeModel, verdict.keep, verdict.reason, verdict.session_id ?? null);
   }
 }
 if (verdicts.some((verdict) => verdict.payment)) {
