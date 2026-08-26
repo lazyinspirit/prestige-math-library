@@ -234,7 +234,7 @@ const batchLabels = () => manifests().map((n) => n.replace(/\.pages\.json$/, '')
 // Published-page A7 is a REJUDGE, not a second whole-wave reading pass. The
 // whole wave already received Beta, Alpha and independent-refuter coverage at
 // A2/A6. Owner clarification 2026-08-08: only exact repairs recorded by A6 (and
-// later exact A8 repairs) receive new paired judge calls. Keep that spend scope
+// later exact A8 repairs) receive a new configured-judge call. Keep that spend scope
 // in a machine-readable receipt rather than inferring it from a dirty worktree,
 // where provenance retags and unrelated owner edits are indistinguishable.
 const rejudgeTargets = () => {
@@ -279,8 +279,8 @@ const rejudgeTargets = () => {
 // an injection test before the next production sweep. The risk it guards is
 // specific and silent: a line telling a judge what is NOT a defect can make it
 // credulous exactly there, and a credulous lane returns keep:true and looks
-// like a clean sweep. Wave 3 added the sigma line and tested it; both lanes got
-// sharper, not softer.
+// like a clean sweep. Wave 3 added the sigma line and tested the then-paired
+// lineup. New prompt changes must test every model in the configured lineup.
 
 const conventionsFingerprint = () => {
   const parts = ['briefs/judge-conventions.txt', 'tools/judge.mts']
@@ -620,7 +620,7 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       halt('injection-test-required',
         'the judge prompt context changed (briefs/judge-conventions.txt or tools/judge.mts) and no passing injection test '
         + `records fingerprint ${fingerprint.slice(0, 12)}.\n`
-        + '  ARCHITECTURE.md §5: inject a defect known false under this library\'s conventions and verify BOTH lanes catch it.\n'
+        + '  ARCHITECTURE.md §5: inject a defect known false under this library\'s conventions and verify every configured judge catches it.\n'
         + `  Record the result in ${DIR}/judge-injection-tests.jsonl as {"fingerprint":"…","result":"pass","at":"…"}.`,
         resumeCmd(step));
     }

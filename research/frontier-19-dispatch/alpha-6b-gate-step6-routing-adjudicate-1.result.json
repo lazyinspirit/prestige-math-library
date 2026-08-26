@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "6b-gate-step6-routing-adjudicate-1",
+  "run": "frontier-19",
+  "covers": [],
+  "stage": null,
+  "runner": "codex",
+  "model": "gpt-5.4",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-26T04:02:55.504Z",
+  "ended_at": "2026-08-26T04:23:11.346Z",
+  "ms": 1215842,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "session_id": "01a03c3c-3d52-7343-8ed4-c49a2d0fbb6b",
+  "session_home": null,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-dispatch/alpha-6b-gate-step6-routing-adjudicate-1.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-dispatch/alpha-6b-gate-step6-routing-adjudicate-1.prompt.md",
+  "tail": "The Step-6 routing repair is on disk. In [tools/step6-scope.mjs](/home/lazyinspirit/Projects/prestige-math-library/tools/step6-scope.mjs), I fixed the mechanical gate mismatch so `adjudicate` accepts the same frozen reader batch label that `split` already routed, and I limited `ledger-unowned` to decision-eligible Step-6 subjects instead of forcing the global contract-audit summary rows through fake item decisions. I also retagged the stale touched decisions in [research/frontier-19-alpha-b-6b-decisions.json](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-alpha-b-6b-decisions.json) and [research/frontier-19-alpha-d-6b-decisions.json](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-alpha-d-6b-decisions.json) from `accepted_repair` to `amended_repair` where the final carrier had later changed, and recorded that in the matching group reports [research/frontier-19-alpha-b-6b.md](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-alpha-b-6b.md) and [research/frontier-19-alpha-d-6b.md](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-alpha-d-6b.md). I also updated the reader brief/schema and [ARCHITECTURE.md](/home/lazyinspirit/Projects/prestige-math-library/ARCHITECTURE.md) to reflect the gate behavior.\n\nVerification is green on the live run: `node tools/step6-scope.mjs check --run frontier-19 --phase adjudicate` now returns `step6-scope: 443 item(s) routed, 99 adjudication obligation(s), 0 error(s)`. I also checked the affected batches individually; the only red seen in isolated batch-1/4 runs was the expected batch-filter artifact around batch-10 published-repair ownership, while the full run is clean. I could not use `tools/autopilot/test/step6-routing.test.mts` as a reliable regression signal here because that fixture already fails in this sandbox on `spawnSync cp EPERM`, and it also has an unrelated pre-existing frontier-18 assertion failure."
+}

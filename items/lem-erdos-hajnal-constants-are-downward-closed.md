@@ -13,15 +13,16 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-15
-  audited: 2026-08-16
+  verified:
+    model: gpt-5.4
+    verdict: certify
+    date: 2026-08-26
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "Erdos-Hajnal properties in graphs and hypergraphs, introduction"
+    - title: "Erdős-Hajnal beyond the five-vertex path"
       url: "https://arxiv.org/html/2606.06258v2"
 pipeline_run: null
 ---

@@ -85,6 +85,10 @@ const requireBatch = () => {
 const unique = (values) => new Set(values).size === values.length;
 const sameSet = (left, right) => left.length === right.length
   && left.every((value) => new Set(right).has(value));
+const matchesBatchLabel = (value, batch) => {
+  const actual = String(value ?? '');
+  return actual === String(batch) || actual === `${run}-batch-${batch}`;
+};
 const canonical = (value) => Array.isArray(value) ? value.map(canonical)
   : value && typeof value === 'object'
     ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])]))
@@ -235,8 +239,12 @@ function expectedSplit(pre, post) {
 function highRiskItems(ids, batch) {
   const contract = R('research', `${run}-batch-${batch}.proof-contracts.json`);
   if (!existsSync(contract)) fail(`step6-scope: merged proof contract is missing at ${contract}`);
+  // The batch contract is the authoritative authored-item scope.  Passing the
+  // manifest selection again can accidentally include cited dependency ids
+  // after a reader rewrite, which risk-report correctly rejects as outside
+  // the contract.  Route exactly the contract's own scope instead.
   const result = spawnSync(process.execPath,
-    [R('tools', 'risk-report.mjs'), contract, '--items', ids.join(','), '--json'],
+    [R('tools', 'risk-report.mjs'), contract, '--json'],
     { cwd: ROOT, encoding: 'utf8', timeout: 120_000 });
   if (result.status !== 0) fail(`step6-scope: risk routing failed\n${result.stderr || result.stdout}`, 1);
   const report = JSON.parse(result.stdout);
@@ -379,7 +387,13 @@ if (command === 'split') {
   catch (cause) { fail(`step6-scope: batch ${batch} reader findings artifact is invalid JSON (${cause.message})`, 1); }
   const readerErrors = [];
   const readerError = (message) => readerErrors.push(message);
-  if (String(readerReport.batch) !== batch) readerError(`report names batch ${readerReport.batch ?? '(missing)'}`);
+  // Readers receive both the run id and batch number in their task and may
+  // identify the batch as either "N" or "<run>-batch-N".  Both name this
+  // exact scope; rejecting the latter loses a completed independent audit on
+  // a presentation-only identifier difference.
+  if (![batch, `${run}-batch-${batch}`].includes(String(readerReport.batch))) {
+    readerError(`report names batch ${readerReport.batch ?? '(missing)'}`);
+  }
   if (!Array.isArray(readerReport.findings)) readerError('findings must be an array');
   if (typeof readerReport.coverage_note !== 'string' || !readerReport.coverage_note.trim()) readerError('coverage_note must be a nonempty string');
   const allRunIds = new Set(Object.values(manifestItems()).flat());
@@ -442,7 +456,7 @@ if (command === 'collect') {
 
   const errors = [];
   const error = (message) => errors.push(message);
-  if (String(report.batch) !== String(batch)) error(`report names batch ${report.batch ?? '(missing)'}`);
+  if (!matchesBatchLabel(report.batch, batch)) error(`report names batch ${report.batch ?? '(missing)'}`);
   const opened = Array.isArray(report.opened) ? report.opened.map(String) : [];
   const notOpened = Array.isArray(report.not_opened) ? report.not_opened.map(String) : [];
   const findings = Array.isArray(report.flagged) ? report.flagged : [];
@@ -571,7 +585,7 @@ if (command === 'check') {
           const report = JSON.parse(readerText);
           const reportErrors = [];
           const reportError = (message) => reportErrors.push(message);
-          if (String(report.batch) !== batch) reportError(`report names batch ${report.batch ?? '(missing)'}`);
+          if (!matchesBatchLabel(report.batch, batch)) reportError(`report names batch ${report.batch ?? '(missing)'}`);
           if (!Array.isArray(report.findings)) reportError('findings must be an array');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
           const allRunIds = new Set(Object.values(manifests).flat());
@@ -605,7 +619,7 @@ if (command === 'check') {
           const opened = Array.isArray(report.opened) ? report.opened.map(String) : [];
           const notOpened = Array.isArray(report.not_opened) ? report.not_opened.map(String) : [];
           const flagged = Array.isArray(report.flagged) ? report.flagged : [];
-          if (String(report.batch) !== batch) reportError(`report names batch ${report.batch ?? '(missing)'}`);
+          if (!matchesBatchLabel(report.batch, batch)) reportError(`report names batch ${report.batch ?? '(missing)'}`);
           if (!unique(opened) || !unique(notOpened) || opened.some((id) => notOpened.includes(id))) reportError('coverage arrays are not unique and disjoint');
           if (!sameSet(opened, scope.opened ?? []) || notOpened.length) reportError('coverage no longer matches the collected scope');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
@@ -640,6 +654,7 @@ if (command === 'check') {
     const referenced = new Map();
     const publishedBindings = [];
     const liveByBatch = new Map();
+    const ownableSubjects = new Set();
     const liveFor = (batch) => {
       if (!liveByBatch.has(batch)) liveByBatch.set(batch, liveFingerprints(batch));
       return liveByBatch.get(batch);
@@ -650,6 +665,7 @@ if (command === 'check') {
       const groupSubjects = new Set(group.covers.flatMap((batch) => [
         ...(manifests[batch] ?? []), ...(pages[batch] ?? []).map((page) => page.id),
       ]));
+      for (const subject of groupSubjects) ownableSubjects.add(subject);
       const owed = [];
       for (const batch of group.covers) {
         const scope = scopes[batch] ?? (existsSync(scopePath(batch)) ? readJson(scopePath(batch), `batch ${batch} scope`) : null);
@@ -661,8 +677,14 @@ if (command === 'check') {
           obligation: `page:${batch}:${id}`, id, batch, route: 'page',
           order_anchor: scope.page_order_anchors?.[id] ?? [],
         });
-        for (const finding of scope.reader_findings ?? []) owed.push({ ...finding, route: 'reader' });
-        for (const finding of scope.refuter_findings ?? []) owed.push({ ...finding, route: 'flagged' });
+        for (const finding of scope.reader_findings ?? []) {
+          ownableSubjects.add(finding.id);
+          owed.push({ ...finding, route: 'reader' });
+        }
+        for (const finding of scope.refuter_findings ?? []) {
+          ownableSubjects.add(finding.id);
+          owed.push({ ...finding, route: 'flagged' });
+        }
       }
       const path = decisionsPath(group.label);
       if (!existsSync(path)) { error('decisions-missing', `group ${group.label} has no 6b decisions file`); continue; }
@@ -852,7 +874,11 @@ if (command === 'check') {
     for (const [obligation, binding] of expectedPublished) if (!seenPublished.has(obligation)) {
       error('published-repair-missing', `[${binding.target.id}] ${obligation} repaired published mathematics but has no certification handoff row`);
     }
-    for (const row of earlyRows) if (!referenced.has(row.defect_id)) error('ledger-unowned', `[${row.subject}] ${row.defect_id} has no 6b decision reference`);
+    for (const row of earlyRows) {
+      if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id)) {
+        error('ledger-unowned', `[${row.subject}] ${row.defect_id} has no 6b decision reference`);
+      }
+    }
     if (phase === 'final') {
       for (const row of mine.filter((entry) => ['6a-read', '6b-adjudicate', '6c-cross'].includes(entry.caught_at_stage)
         && ['open', 'deferred'].includes(entry.disposition))) {

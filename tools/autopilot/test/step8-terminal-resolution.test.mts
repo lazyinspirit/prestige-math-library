@@ -36,7 +36,38 @@ function resolution(now: any) {
   };
 }
 
-test('an exact terminal resolution closes missing judge coverage without fabricating a pair', () => {
+test('one current Terra verdict completes singleton judge coverage', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step8-terra-coverage-'));
+  try {
+    const manifest = join(dir, 'batch.pages.json');
+    const ledger = join(dir, 'judge.jsonl');
+    const closure = join(dir, 'closure.json');
+    const now = currentHashes();
+    writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id: ITEM, deps: [] }] }])}\n`);
+    writeFileSync(ledger, `${JSON.stringify({
+      id: ITEM,
+      model: 'gpt-5.6-terra',
+      keep: true,
+      context_sha256: now.context_sha256,
+      item_sha256: now.item_sha256,
+      at: '2026-08-26T00:00:00.000Z',
+    })}\n`);
+    const result = run(['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
+      '--judge-ledger', ledger, '--out', closure, manifest]);
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /1\/1 current configured-judge verdict set/);
+    assert.match(result.stdout, /1\/1 current pair/,
+      'the live pre-singleton-lineup engine must still be able to parse its liveness counter');
+    const parsed = JSON.parse(readFileSync(closure, 'utf8'));
+    assert.equal(parsed.judge_lineup, 'terra');
+    assert.equal(parsed.verdicts_complete, 1);
+    assert.equal(parsed.closed, true);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('an exact terminal resolution closes missing judge coverage without fabricating a verdict', () => {
   const dir = mkdtempSync(join(tmpdir(), 'step8-terminal-'));
   try {
     const manifest = join(dir, 'batch.pages.json');
@@ -52,7 +83,8 @@ test('an exact terminal resolution closes missing judge coverage without fabrica
     assert.equal(result.status, 0, result.stderr || result.stdout);
     const parsed = JSON.parse(readFileSync(closure, 'utf8'));
     assert.equal(parsed.closed, true);
-    assert.equal(parsed.pairs_complete, 0, 'manual closure must not be reported as a judge pair');
+    assert.equal(parsed.verdicts_complete, 0, 'manual closure must not be reported as a judge verdict');
+    assert.equal(parsed.pairs_complete, 0, 'the legacy compatibility count must agree');
     assert.equal(parsed.terminal_resolved.length, 1);
     assert.deepEqual(parsed.needs_rejudge, []);
   } finally {

@@ -174,7 +174,7 @@ would-be generated decomposition lemma belongs inline or needs a source-backed
 replacement.
 
 Delete `verification.judge` after a material rewrite. **You never judge** — the
-configured paired judge is step 7.
+configured Terra judge is step 7.
 
 ## Step 3 — scaffold breadth and depth
 
@@ -332,15 +332,15 @@ gate blocks the stage while it is unanswered and the engine re-dispatches the
 owning group's Alpha against it, so the finding reaches the reader holding that
 batch's conventions rather than being acted on by one who does not.
 
-**A defect in a PUBLISHED item — repair it, then send it to both judges.**
+**A defect in a PUBLISHED item — repair it, then send it to Terra.**
 Published pages are live. An unambiguous falsehood in a published Definition,
 Statement, Fact or equally load-bearing prose is repaired, with a row appended
 through `tools/published-repairs.mjs` to
 `research/<run>-step8-published-repairs.jsonl`:
 `{kind:"repaired", id, group, found_via, pre_sha256, defect, correction_basis}`.
 `pre_sha256` is the guard form of the pre-edit text, and without it the edit
-reads as unlicensed. `8-rejudge` then sweeps that item through **both** lanes and
-`tools/step8-scope.mjs published` blocks until both have answered — that is the
+reads as unlicensed. `8-rejudge` then sweeps that item through Terra and
+`tools/step8-scope.mjs published` blocks until Terra has answered — that is the
 certification, since published content has no step-6 reader left and no author
 certifies its own repair.
 
@@ -447,7 +447,7 @@ coverage row, relevant closure, or destination changed since Step 3; a legacy
 run with no exact receipts marks every decline pending and therefore retains the
 full sweep. Build a wrongly declined result only when an existing page can own
 it without a reading-order change. Every item created or mathematically modified
-after Step 8 follows the exact paired-judge, adjudication, rejudge, and stamp
+after Step 8 follows the exact configured-judge, adjudication, rejudge, and stamp
 loop; unchanged items retain current verdicts.
 
 ## Receipts

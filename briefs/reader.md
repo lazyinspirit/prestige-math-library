@@ -69,3 +69,4 @@ authority blockers. A published dependency uses
 `subject_type:"published-dependency"` and the assigned `consumer_id` whose
 dependency closure reaches it. A repaired defect is routed by its composite
 carrier change; do not duplicate it in the JSON. Use `findings:[]` when clean.
+Set the JSON `batch` field to the bare assigned batch id (for example `7`).

@@ -7,7 +7,7 @@
 //   --adjudications research/level<n>-judge-adjudications.jsonl \
 //   [--against "<later snapshot label>"] [--json]
 //
-// WHY THIS EXISTS. At step 8 Alpha adjudicates each paired-judge rejection as
+// WHY THIS EXISTS. At step 8 Alpha adjudicates each configured-judge rejection as
 // `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Only the first
 // licenses a content edit. The other two close the rejection where they stand:
 // tools/level-coverage.mjs already lets them clear closure as warnings, so no
@@ -19,7 +19,7 @@
 // IS its prose). So a cosmetic polish applied to a nonfatal finding voids
 // `verification.judge`, forces a rejudge, and resamples a refuter that
 // "tends to surface a different nitpick on each stochastic run of the same long
-// proof" (WORKFLOW.md §5). Each turn of that loop costs two judge calls and an
+// proof" (WORKFLOW.md §5). Each turn of that loop costs another judge call and an
 // adjudication and converges on nothing. The automatic repair/rejudge loop is
 // capped at two frozen-context cycles. After exhaustion, only an exact-hash owner/session
 // terminal resolution may license the final intervention; it never fabricates

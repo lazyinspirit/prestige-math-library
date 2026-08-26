@@ -1,10 +1,10 @@
-// Run hash-attested paired judge calls for every item on selected plan pages.
+// Run hash-attested judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Each model has its own cross-process pool: 16 slots per lane (owner,
+// Each model has its own cross-process pool: 16 slots per configured model (owner,
 // 2026-08-05; DeepSeek was briefly 24). They start their next item as soon as
-// one of their own slots is free, without waiting for the other model on the
-// same item. At most 32 calls run combined under a two-model lineup.
+// one of their own slots is free. Total concurrency is the sum of the selected
+// models' caps; the current singleton Terra lineup therefore uses Terra's cap.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
@@ -35,7 +35,7 @@ const modelsArg = value("--models");
 const contextCache = value("--context-cache")
   || (ledger.endsWith('.jsonl') ? ledger.replace(/-judge\.jsonl$/, '-judge-context-hashes.json') : `${ledger}-context-hashes.json`);
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
-  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl (--pages a-page,another-page | --items item-id,item-id | --manifests wave<k>-a.pages.json,wave<k>-b.pages.json) [--models model,model] [--limit N]");
+  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge.jsonl --cost research/level<n>-judge-cost.jsonl (--pages a-page,another-page | --items item-id,item-id | --manifests wave<k>-a.pages.json,wave<k>-b.pages.json) [--models model,...] [--limit N]");
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -62,7 +62,7 @@ const OPUS = MODELS.opus.id;
 // deepseek+opus (owner, 2026-08-23) when that Codex subscription reached its
 // weekly limit outright. Every retired lane's rows stay as evidence; none
 // satisfies current coverage, which is per frozen context and per configured
-// lane, not per model name.
+// model set, not per any judge name appearing in the ledger.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
 const supportedModels = JUDGE_LINEUPS[lineupName];
 if (!supportedModels) {
@@ -149,7 +149,7 @@ const captureChild = (args, env) => new Promise((resolve, reject) => {
   child.on("error", (cause) => finish(() => reject(cause)));
   child.on("close", (code) => finish((stdout, stderr) => resolve({ code: code ?? 2, stdout, stderr })));
 });
-// Both configured model queues attest against the identical current prompt.
+// Every configured model queue attests against the identical current prompt.
 // Build each hash through the canonical judge path before network work starts.
 const currentHashes = new Map();
 for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: contextCache })) {
@@ -157,8 +157,8 @@ for (const result of await buildCurrentContextHashes(ids, { loader, cachePath: c
   currentHashes.set(result.id, { context: result.context, item: result.item });
 }
 // Owner policy, 2026-08-01: cap each judge lane independently. The current
-// values are 14 per active lane, so the current two-lane lineup admits at most
-// 28 calls combined; see MODEL_CONCURRENCY below.
+// Terra remains capped at 14. Under the current singleton lineup that is also
+// the total judge concurrency; see MODEL_CONCURRENCY below.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
@@ -475,4 +475,4 @@ await Promise.all(Array.from(
   () => worker(),
 ));
 if (paymentFailed) process.exit(3);
-console.log("[judge-sweep] completed; run tools/judge-compare.mjs on the paired ledger.");
+console.log("[judge-sweep] completed; run tools/judge-compare.mjs on the judge ledger.");

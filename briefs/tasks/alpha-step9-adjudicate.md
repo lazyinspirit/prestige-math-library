@@ -18,14 +18,14 @@ pre-edit guard hash from `tools/item-hash.mjs`, not the judge-context hash.
 - `confirmed_fatal` licenses one coherent repair to that item. Record the
   defect-ledger row, update the owning batch contract/risk review, and make only
   the manifest/plan/impact changes the repair truly requires. The engine then
-  rejudges that exact changed id in both lanes.
+  rejudges that exact changed id with Terra.
 
 For a contract-detector dispatch, repair the real contract/risk defect or
 record why the detector is inapplicable. Any mathematical rewrite returns to
-both judge lanes.
+Terra.
 
 Write `research/{{run}}-alpha-step9-adjudicate.md`, naming every exact verdict,
 outcome, evidence, licensed edit, and rejudge target. Do not write a judge stamp;
-the mechanical stamp stage does so only after paired closure.
+the mechanical stamp stage does so only after Terra closure.
 
 **No permission prompts of any kind**, including inside an `&&` chain.

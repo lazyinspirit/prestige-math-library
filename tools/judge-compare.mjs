@@ -1,4 +1,4 @@
-// Summarize the paired session-judge ledger for the Step-10 owner report.
+// Summarize the configured session-judge ledger for the Step-10 owner report.
 // The ledger keeps every verdict, while the agreement section compares the
 // latest usable verdict for each item/model after any targeted re-judging. A
 // later null on the same prompt cannot erase an earlier complete verdict; a
@@ -17,7 +17,7 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 
 // JUDGE_LINEUP mirrors tools/judge.mts, judge-sweep.mjs and level-coverage.mjs.
 // The lineup is resolved, never assumed; `lineup` is emitted so a saved report
-// says which two models it actually compared.
+// says which configured models it actually compared.
 // THE COPY THAT USED TO LIVE HERE IS WHY tools/models.mjs EXISTS. The
 // frontier-15 step-10 report was computed BY HAND because this table missed the
 // 2026-08-17 lane switch that judge.mts, judge-sweep.mjs, level-coverage.mjs and
@@ -32,10 +32,6 @@ if (!models) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);
   process.exit(2);
 }
-const [PRIMARY, SECOND] = models;
-// Stable, lineup-independent key names: the model each one refers to is named
-// by `lineup` in the output rather than baked into the key.
-const ONLY_REJECT = Object.freeze({ [PRIMARY]: "primary_only_reject", [SECOND]: "second_only_reject" });
 const rows = readFileSync(ledger, "utf8").split("\n").filter(Boolean).map((line, index) => {
   try {
     const row = JSON.parse(line);
@@ -83,33 +79,30 @@ for (const row of selected) {
   history.set(row.id, histories);
 }
 const latestAttemptAgreement = {
-  both_pass: [],
-  both_reject: [],
-  primary_only_reject: [],
-  second_only_reject: [],
+  all_pass: [],
+  all_reject: [],
+  mixed: [],
   incomplete_or_null: [],
 };
 const latestUsableVerdictAgreement = Object.fromEntries(
   Object.keys(latestAttemptAgreement).map((key) => [key, []]),
 );
 const contextIntegrity = {
-  matching_frozen_context: [],
+  fully_attested_frozen_context: [],
   mismatched_or_unattested_context: [],
 };
 const classify = (target, id, byModel) => {
-  const primary = byModel.get(PRIMARY)?.keep;
-  const second = byModel.get(SECOND)?.keep;
-  if (primary === true && second === true) target.both_pass.push(id);
-  else if (primary === false && second === false) target.both_reject.push(id);
-  else if (primary === false && second === true) target[ONLY_REJECT[PRIMARY]].push(id);
-  else if (primary === true && second === false) target[ONLY_REJECT[SECOND]].push(id);
-  else target.incomplete_or_null.push(id);
+  const keeps = models.map((model) => byModel.get(model)?.keep);
+  if (keeps.some((keep) => typeof keep !== "boolean")) target.incomplete_or_null.push(id);
+  else if (keeps.every((keep) => keep === true)) target.all_pass.push(id);
+  else if (keeps.every((keep) => keep === false)) target.all_reject.push(id);
+  else target.mixed.push(id);
 };
 for (const [id, byModel] of latest) {
-  const primaryRow = byModel.get(PRIMARY);
-  const secondRow = byModel.get(SECOND);
-  if (primaryRow?.context_sha256 && primaryRow.context_sha256 === secondRow?.context_sha256) {
-    contextIntegrity.matching_frozen_context.push(id);
+  const contexts = models.map((model) => byModel.get(model)?.context_sha256);
+  if (contexts.every((context) => typeof context === "string" && context)
+    && new Set(contexts).size === 1) {
+    contextIntegrity.fully_attested_frozen_context.push(id);
   } else {
     contextIntegrity.mismatched_or_unattested_context.push(id);
   }
@@ -175,7 +168,7 @@ if (adjudicationsPath) {
     }
     const key = candidateKey(row);
     if (!rejectionCandidates.has(key)) {
-      console.error(`${adjudicationsPath}:${index + 1}: does not match a ${PRIMARY}/${SECOND} rejection in ${ledger}`);
+      console.error(`${adjudicationsPath}:${index + 1}: does not match a configured-model rejection in ${ledger}`);
       process.exit(2);
     }
     // The final owner decision for a candidate is its last ledger entry.
@@ -214,7 +207,7 @@ if (adjudicationsPath) {
 
 process.stdout.write(JSON.stringify({
   ledger,
-  lineup: { name: lineupName, primary: PRIMARY, second: SECOND },
+  lineup: { name: lineupName, models },
   models: perModel,
   latest_attempt_agreement: latestAttemptAgreement,
   latest_usable_verdict_agreement: latestUsableVerdictAgreement,

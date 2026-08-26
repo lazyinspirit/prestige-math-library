@@ -57,7 +57,7 @@ no receipt at all — it converts an honest red into a false green, which is the
 exact failure this whole stage exists to prevent.
 
 If an error is about the mathematics rather than the receipt — a missing
-verdict pair, an unadjudicated rejection, an open fatal — **do not paper over
+configured-judge verdict, an unadjudicated rejection, an open fatal — **do not paper over
 it**. Say so in your report and let the gate hold.
 
 **No permission prompts of any kind**, including inside an `&&` chain.

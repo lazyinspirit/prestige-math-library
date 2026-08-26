@@ -12,6 +12,7 @@ parts:
     pages:
       - congruences-and-the-chinese-remainder-theorem
       - primitive-roots-and-unit-groups-modulo-n
+      - positive-definite-binary-quadratic-forms-and-reduction
   - part: quadratic-residues
     title: "Quadratic residues and reciprocity"
     pages:
@@ -32,8 +33,13 @@ makes a prime factorisation unique rather than merely possible.
 
 Congruence modulo n turns divisibility into an equivalence relation, so the integers modulo
 n become a ring in which linear equations can be solved. The Chinese remainder theorem
-splits a composite modulus into its prime powers, Euler's totient counts the units, and the
-unit group modulo a prime turns out to be cyclic, which is what a primitive root is.
+splits a composite modulus into prime powers, Euler's totient counts the units, and the
+unit group modulo a prime is cyclic. The same congruence language governs binary quadratic
+forms: discriminants are constrained modulo $4$, the discriminant-square criterion detects
+primitive representations, and unimodular substitutions define proper equivalence. For
+positive-definite forms, Gauss reduction gives each class a unique reduced representative,
+so each negative discriminant has finitely many classes. Class number is therefore finite,
+and reduction makes proper equivalence decidable.
 
 ## quadratic-residues
 

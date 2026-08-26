@@ -512,16 +512,16 @@ invalidates its old judge pass and owner-audit date. `depcheck` already permits
 the independent reader's `verification.verified` slot as the delegated publish
 gate; the protocol records `delegated_by: owner`, rather than misrepresenting
 that reader as the owner. The corrected item and every materially repaired
-consumer receive a current paired rejudge. The exception permits correction, not
+consumer receive a current Terra rejudge. The exception permits correction, not
 id renames, removals, speculative theorem repair, or an unresolved public
 impact queue.
 
 `tools/level-coverage.mjs` is the whole-level closure gate. It derives item and
 relationship scope from actual batch manifests, demands a contract for every
 proof-bearing item, verifies an Alpha receipt against a current manifest hash,
-and requires both judge models to have a usable verdict for every item in a
+and requires every currently configured judge model to have a usable verdict for every item in a
 build. In published-audit mode, `--judge-targets` keeps those non-judge checks
-whole-wave while requiring judge pairs only for the exact repair receipt. A
+whole-wave while requiring judge verdicts only for the exact repair receipt. A
 current `keep: false` verdict is never silently cleared: the gate requires an
 exact `{id, model, context_sha256}` Alpha adjudication from
 `--judge-adjudications`; `confirmed_fatal` and a missing adjudication fail,
@@ -539,7 +539,7 @@ full gate needs a merged contract, a spine receipt and a completed audit
 receipt, so the earliest point it can run is the very end of a build — which is
 exactly where `frontier-14` found it red, with nothing left to do about it. Judge
 closure needs only the manifests, the ledger and the items on disk, and answers
-three questions: does every scoped item have a current verdict pair, is every
+three questions: does every scoped item have a current configured-model verdict, is every
 current rejection adjudicated at its exact hash, and is any adjudication
 `confirmed_fatal`. `--judge-only` requires `--verify-current-context` — without
 it the check compares verdicts against whatever context they were cast against,
@@ -548,8 +548,8 @@ which is trivially satisfied and answers nothing.
 Two narrow, per-stage relaxations, because the same predicate is asked at three
 different moments: `--allow-unadjudicated` demotes a rejection with no Alpha
 outcome to a warning (true only at step 7, before anything has been adjudicated),
-and `--allow-pending-rejudge` demotes a missing verdict pair (true only at step
-8, where a repair correctly voids its own pair and the rejudge stage owns the
+and `--allow-pending-rejudge` demotes a missing verdict (true only at step
+8, where a repair correctly voids its own verdict and the rejudge stage owns the
 consequence). `--out <receipt.json>` writes `needs_rejudge`, `unadjudicated` and
 `open_fatal` as id summaries, plus exact `(id, model, context_sha256)`
 `unadjudicated_rows` and an unconditional `closed` flag that ignores both
@@ -575,8 +575,8 @@ all 31 items on the pair, 12 of which cite the repaired items nowhere, not even
 transitively; over four rounds, 10 real repairs cost ~130 rejudge calls, and each
 round's repairs staled the round before. A judge re-reading an unchanged proof
 against an unchanged argument returns the same verdict and charges for it.
-So an item is covered when EITHER its verdicts were cast against the current pair
-context, OR **both lanes' verdicts were cast against byte-identical text of that
+So an item is covered when EITHER its verdict was cast against the current pair
+context, OR **the configured model's verdict was cast against byte-identical text of that
 item** — `judge.mts` now records `item_sha256` on every verdict beside
 `context_sha256`, normalised exactly as `apply-judge-stamps`' `attestedItemHash`
 (the file with only the `judge:` block removed, so stamping a pass cannot
@@ -616,7 +616,7 @@ loop, not a wrong answer: any edit is a material rewrite under SCHEMA §3, whose
 test is deliberately broad, so a cosmetic polish applied to a nonfatal finding
 voids `verification.judge`, forces a rejudge, and resamples a refuter that
 "tends to surface a different nitpick on each stochastic run of the same long
-proof". Each turn costs two judge calls and an adjudication and converges on
+proof". Each turn costs another judge call and an adjudication and converges on
 nothing. The guard reads a dedicated `touchlog` baseline taken immediately
 before adjudication — the same dedicated-baseline pattern as `impact-audit` —
 and requires every item changed since it to be licensed by a `confirmed_fatal`
@@ -1282,7 +1282,14 @@ rejects incompatible double ownership or an unowned row. A 6c final check
 refuses all open Step-6 rows. This supersedes the count-only
 `-6b-findings.json` contract, which could prove only that enough rows existed,
 not that the right finding owned the right row. Historical files remain
-evidence but satisfy no new run. Relatedly, the
+evidence but satisfy no new run. The reader-findings batch label is
+compatibility-normalised between bare `N` and legacy `<run>-batch-N`: `split`
+already freezes either spelling into the scope, so `adjudicate` and `final`
+must accept the same frozen bytes. The ownership join itself applies only to
+decision-eligible Step-6 subjects — run items, run pages, and
+published-dependency ids routed through a reader finding. Global contract-audit
+summary rows stay owned by their own report/append file rather than forcing a
+fake item-level `6b` decision. Relatedly, the
 twice-touched instrument now sees: `9-scope` and `10-snapshot-v2` at their hard
 boundaries (guarded so a resumed run never mislabels a later tree; the
 `post-tau-v2` snapshot went with the visual lane on 2026-08-23, and
@@ -1365,9 +1372,9 @@ acceptor, real reason); `report`-tier is surfaced, never blocking; due rows
 with a `dispatch` spec re-fire themselves. `10-close-v2`, the terminal stage,
 re-runs `level-coverage` and judge closure on the final tree, checks
 obligations, verifies the **frontmatter closure** (`judge-stamps`:
-`apply-judge-stamps --verify` fails on a ledger-licensed paired pass the item
+`apply-judge-stamps --verify` fails on a ledger-licensed judge pass the item
 does not carry, a pass block a current rejection contradicts, or any item
-without a current paired verdict; its mechanical repair is `--apply`, and
+without a current configured-judge verdict; its mechanical repair is `--apply`, and
 `lane-rejected` is the one honest skip — an adjudication never manufactures a
 pass), and commits on `main` via `tools/run-commit.mjs` (refuses any
 other branch, never touches a `status` field, no trailers). The stamp gate
@@ -1490,22 +1497,23 @@ generated kind/role restrictions, and structured external records on legacy
 deferred items.
 
 **`level-coverage.mjs --audit`** — same hard gate as the build at the initial
-A7 sweep (provenance, contracts, receipts, current paired verdicts), with
+A7 sweep (provenance, contracts, receipts, current judge verdicts), with
 exactly one difference: a
 legacy `ai-generated` dep target is a warning routed to the genrisk
 disposition instead of an instant error. Its Step-8 mechanism is an exact copy
 of the build: Alpha adjudicates the rejection from disk, records the
 per-model/per-context outcome, deletes a stale pass on a material rewrite, and
-re-runs both judges **only on what changed**. A public-interface repair repeats
+re-runs Terra **only on what changed**. A public-interface repair repeats
 impact closure and records a hash-attested targeted rejudge receipt, not a new
 whole-wave coverage run or sweep.
 
 **`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
 `level-coverage.mjs`, `judge-compare.mjs`, `apply-judge-stamps.mjs` and
-`run-wave.mjs`): `deepseek+opus` for both the build and all future audit sweeps
-(owner, 2026-08-23). Records from an unselected lane remain readable evidence
-only. All three keys — `deepseek+opus`, `deepseek+terra`, `deepseek+sonnet` —
-stay resolvable, because a table carrying only today's answer is this repo's
+`run-wave.mjs`): `terra` for both the build and all future audit sweeps (owner,
+2026-08-26). DeepSeek is not a Step-7 judge. Records from an unselected lineup
+remain readable evidence only. Retired paired keys — `deepseek+opus`,
+`deepseek+terra`, `deepseek+sonnet`, `deepseek+gpt54` — stay resolvable, because
+a table carrying only today's answer is this repo's
 oldest defect class. See §5.
 
 **Those six tools now IMPORT the table rather than redeclaring it**
@@ -1670,12 +1678,10 @@ weaker guarantee: the failure MODE is unchanged, a malformed final message still
 turns the dispatch red, but its likelihood is not.
 
 **What the move does NOT buy, stated once so no later session has to infer it.**
-Alpha is the sole adjudicator of the DeepSeek and Opus judges, and an Opus Alpha
-shares the Anthropic family with the Opus lane it weighs — structurally identical
-to the Sol/Terra arrangement it replaced, with the family renamed. **DeepSeek
-remains the only cross-family reader in either workflow**: the step-7 judge lane
-on the build side, `audit-refuter` on the audit side. Opus/author and Opus/Alpha
-agreement are same-family agreement. Alpha's `effort: 'xhigh'` stays explicit in
+The Step-7-and-later judge is now Terra alone (owner, 2026-08-26), so its verdict
+has no cross-family judge corroboration. DeepSeek remains only as the separate
+audit `audit-refuter`; its output supplies no judge coverage. Alpha's `effort:
+'xhigh'` stays explicit in
 the role table even though the runner defaults are its own, because this is the
 adjudicating lane and a silent downgrade there is invisible in the output.
 `web: true` is now documentation rather than a switch — the claude runner loads
@@ -2014,75 +2020,29 @@ null so its distinct failure mode remains measurable.
 
 ## 5. The judge
 
-**Current routing (owner, 2026-08-23): session-item judging runs DeepSeek V4
-Pro directly at maximum reasoning and a fresh Claude Opus 5 CLI process at
-`xhigh` with a 1,000,000-token context window, in parallel.**
+**Current routing (owner, 2026-08-26): session-item judging runs GPT-5.6 Terra
+alone through a fresh Codex process at `xhigh` with the explicit 1,000,000-token
+context window. DeepSeek is removed from Step 7 and all later rejudges.**
 
-**Lineup parameter (owner, 2026-08-08; current value 2026-08-23).** The lineup is
-`deepseek+opus` in both workflows — the fourth value in five weeks.
-`deepseek+terra` until 2026-08-17, when that lane's Codex account was throttled
-mid-frontier-15 (429 on the models endpoint, NO_CONTENT on every exec — 392 null
-rows kept as evidence); `deepseek+sonnet` until 2026-08-20, when the same
-instruction that moved `alpha` back to Sol restored Terra; and `deepseek+opus`
-from 2026-08-23, when that Codex subscription reached its **weekly** limit
-outright rather than a burst limit. Rows from an unselected lane remain evidence
-only, because coverage is per frozen context *and* per configured lane, never per
-model name — which matters most right after a lane change, when a level judged
-under the previous lineup reads as covered until the map is consulted.
+**Lineup parameter.** The active value is `JUDGE_LINEUP=terra` in both
+workflows. Retired paired values remain resolvable only for historical replay;
+their rows remain evidence but satisfy no current coverage. Coverage is per
+frozen context and per configured model set, never merely per model name.
 
-**Two risks this lineup carries.** *Capacity:* the Opus lane draws on the same
-Claude subscription as every agent role, so one session limit can null the sweep
-and stall the dispatched roles together; `judge.mts --preflight` spends one
-minimal call per lane to find out before a sweep does, and a capacity refusal is
-a null verdict, never a verdict. *An unproven lane:* the injection-test adoption
-bar recorded at the top of `judge.mts` — and discharged for the retired claude
-lane by passes 4 and 5 — has **not** been run for Opus at this prompt.
-
-The Opus lane is `runFreshClaude` in `judge.mts`: a fresh `claude -p` per call
-with an empty temporary working directory, `--allowed-tools ""`, `--effort
-xhigh`, `--output-format json`, and the `[1m]` model id that selects the
-1,000,000-token window. The empty workdir matters more here than it did for the
-retired Terra lane: the repo root carries `CLAUDE.md`, and a judge that loads the
-build rules as project context is no longer reading the frozen prompt alone.
-**Both active pools are capped at 14** (owner, 2026-08-20, carried onto the Opus
-lane unchanged on 2026-08-23), so a sweep runs 28 calls combined — symmetric, so
-neither lane runs far ahead of the other and an interrupted sweep leaves fewer
-half-paired items. **For a claude-CLI lane, 14 is above the only measurements on
-record**: the retired 2026-08-04 claude lane returned 207 capacity refusals
-against 140 responses at cap 16 (wave 5 A7) while DeepSeek returned 209/209, and
-the sonnet lane ran 313/392 clean at cap 6. Lower with
-`JUDGE_CONCURRENCY_CLAUDE_OPUS_5_1M_` — which can only lower — if fast
-`claude_exit` nulls appear. The Terra lane (`runFreshTerra`: an ephemeral `codex
-exec` per call with a 0700 temporary `CODEX_HOME` holding only `auth.json`, an
-empty temporary working directory, read-only sandbox, pool 14) and the sonnet
-lane (pool 24) remain implemented for their lineups. The frozen prompt, hash
-attestation, verdict contract, attempt telemetry, and retry semantics are
-identical across lineups — which is what makes a lane swap a configuration change
-rather than a re-judgement; `judge-sweep.mjs` gives each lane its own
-cross-process slot pool.
-
-**DeepSeek is the ONLY cross-family screen, and after 2026-08-23 that is still
-true — the move renamed the family, it did not restore the split.** Opus is an
-independent second *process*, not an independent family: it shares the Anthropic
-family with the Beta that authored the text it reads, with the `reader` and
-`refuter`, and with the Alpha that adjudicates its rejections. That is
-structurally identical to the Sol/Terra arrangement it replaced. The only
-configuration that ever weighed the two judge lanes from outside both families
-was the 2026-08-10 to 2026-08-20 Opus Alpha against a GPT judge lane, and nothing
-does that now. Weight Opus/Alpha agreement as same-family agreement, and give a
-DeepSeek-only rejection the standing its isolation earns.
-Both lanes receive the exact same hash-attested frozen item, A/B-pair, dependency
-and conventions prompt. Every Claude Opus 5 author, Beta and Alpha uses `xhigh`
-reasoning with a 1,000,000-token context window.
-`tools/judge.mts --parallel` supports a one-item paired call and
-retains the historical GLM/DeepSeek injection-test record. The normal sweep
-uses independent model lanes so a slow judge never blocks the other's next item.
+Terra runs via an ephemeral `codex exec` per call with a 0700 temporary
+`CODEX_HOME` holding only `auth.json`, an empty temporary working directory,
+read-only sandbox, and a cap-14 file-backed pool. A capacity refusal is a null
+verdict, never a verdict; lower `JUDGE_CONCURRENCY_GPT_5_6_TERRA` rather than
+re-spending null calls. Terra shares the OpenAI family with most work it screens
+and the Sol adjudicator, so this judge route provides no cross-family
+corroboration. The separate DeepSeek audit-refuter remains cross-family but is
+not a Step-7 judge and supplies no judge coverage.
 
 **When it runs:** once, after the step-6 independent-reader/Alpha audit, on final
-text, with **both judges covering every item in a newly built completed level**
+text, with **Terra covering every item in a newly built completed level**
 regardless of whether Alpha changed it. Published-page audit A7 is deliberately
 different (owner clarification 2026-08-08): its whole wave has already received
-Beta/Alpha/refuter coverage, so the paired lanes rejudge only ids in the
+Beta/Alpha/refuter coverage, so Terra rejudges only ids in the
 machine-readable repair-target receipt. The old
 reason still applies: judging before audit bought verdicts that later rewrites
 invalidated. Measured on `frontier-1`, 292 calls for 212 items produced 80 repeat
@@ -2104,32 +2064,31 @@ target page both declares in `requires` and actually cites. That edge-restricted
 context rule was measured on `frontier-1`: passing every sibling page produced a
 mean 93,810-token prompt and omitted three of five siblings on every call.
 
-**Ledger:** every paired judge run writes two full lines to
-`research/<run>-judge.jsonl`, one per model, with at least
-`{id, model, keep, reason, context_sha256, at}`. The matching
-`context_sha256` attests that the pair saw the same frozen prompt.
-`verification.judge` records a pass only when both models passed the current
+**Ledger:** every judge run writes one Terra line to
+`research/<run>-judge.jsonl`, with at least
+`{id, model, keep, reason, context_sha256, at}`.
+`verification.judge` records a pass only when Terra passed the current
 text; an absent block means unjudged or owner-audited over a refuted false
 positive. `keep: null` is not a pass. `tools/judge-sweep.mjs` resumes selected
 plan pages: naming an A page automatically includes the item list on its
 B/examples companion, so A/B-pair coverage cannot silently omit examples. It
 skips only complete pairs whose hash also matches a freshly
-assembled current prompt. It assembles that hash once per selected item and
-shares it across both model queues. At step 10, `tools/judge-compare.mjs` reports both
-latest-attempt and latest-usable agreement: a later null cannot erase an
+assembled current prompt. It assembles that hash once per selected item. At
+step 10, `tools/judge-compare.mjs` reports latest-attempt and latest-usable
+status: a later null cannot erase an
 earlier complete verdict on the same prompt, but a later substantive verdict
-does. It also summarizes model-only findings for the owner report. Its optional
+does. It also summarizes the judge's findings for the owner report. Its optional
 `--adjudications` input measures which judge actually found owner-confirmed
 fatal logic or dependency-citation defects; rejection volume alone is never
-treated as effectiveness. It resolves the pair from `JUDGE_LINEUP` exactly as
+treated as effectiveness. It resolves the configured model set from `JUDGE_LINEUP` exactly as
 `judge.mts`, `judge-sweep.mjs` and `level-coverage.mjs` do, and emits the
-`lineup` it compared so a saved report names its own two models. **It was pinned
+`lineup` it compared so a saved report names its model set. **It was pinned
 to a retired lineup until wave 5 (2026-08-06)**, so a wave judged by a newer
 lineup reported one absent model and silently dropped second-lane verdicts; the
 agreement keys are `primary_only_reject` and
 `second_only_reject` rather than model names for that reason.
-The ordinary sweep selects both judges; a targeted `--models` recovery selects
-only the named model's missing current-context verdicts and never re-spends a
+The ordinary sweep selects Terra; a targeted `--models` recovery selects
+the named configured model's missing current-context verdicts and never re-spends a
 complete verdict from its peer.
 
 **Effectiveness ledger:** step 8 appends one owner decision per rejected
@@ -2217,8 +2176,8 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `refuter.md` | read-only Step-6 refuter | schema-bound exact coverage of untouched and high/critical items; evidence only |
 | `alpha-step6.md` | Step-6 group and lead Alphas | adjudicates exact reader/refuter obligations, repairs mathematics, and closes computed cross-batch and post-6b work without loading unrelated stage instructions |
 | `alpha.md` | Alpha-n, steps 3–5 and 7–10 | stage-specific review, judge adjudication, repair, propagation, and closure outside Step 6 |
-| `codex-judge.md` | DeepSeek V4 Pro + Claude Opus 5 judges, step 7 (historical filename, predating the lane moves) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
-| `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
+| `codex-judge.md` | GPT-5.6 Terra judge, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
+| `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into the frozen prompt |
 | `audit-beta.md` | Audit-Beta, audit steps A1/A2/A4 (`AUDIT-WORKFLOW.md`) | provenance determination table, evidence ledger row contract, citation-precision duties, full proof-contract capture (D1), repair classes and A3 approval boundary |
 | `audit-alpha.md` | audit Alpha, audit steps A6/A8 | sole-adjudicator role, D2 concurrences, refuter dispatch, cross-edge audit, genrisk dispositions, exact-hash judge adjudication, the item-granular rejudge set |
 | `audit-orchestrator.md` | the orchestrator itself, audit steps A3/A9 | the two judgment steps and only those: A3 proposal adjudication with its fixed decision priority, the A9 scope-denial re-grep and published-claim-decay sweep, the decision-receipt contract, and the duty to refuse a wrong dispatch nonzero. Exists because wave 4 dispatched `audit-alpha.md` — a different role — to a judgment step |
@@ -2299,7 +2258,7 @@ delta capture → receipt refresh → Alpha review → deterministic register re
 `step9-changes.mjs` derives all created and modified guarded hashes since
 `post-step8`. Deletions, unowned creations and duplicate ownership stop; a
 modified published item remains in the generated targeted judge scope. Changed
-ids alone re-enter the paired judge/adjudication/rejudge path. Impact closure precedes final stamps and
+ids alone re-enter the judge/adjudication/rejudge path. Impact closure precedes final stamps and
 receipts; if its Alpha repairs a consumer, the follower snapshot is keyed to
 that dispatch's successful result rather than concurrent launch order. Step 10 reconciles scope, defect, judge, adjudication, touch, pathway
 and readiness records into one hash-bound evidence packet. Code, not report

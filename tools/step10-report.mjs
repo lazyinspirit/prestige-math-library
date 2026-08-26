@@ -12,6 +12,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync, statSync, mkdirSy
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runScope, sha256, splitFrontmatter } from './step10-lib.mjs';
+import { resolveLineup } from './models.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -88,6 +89,9 @@ function buildEvidence() {
   if (readiness.run !== run) die('publication readiness names the wrong run');
   if (readiness.verdict !== 'publishable-pending-owner-approval' || (readiness.workflow_owned_blockers ?? []).length) die('publication readiness is not closed');
   if (closure.closed !== true || (closure.needs_rejudge ?? []).length || (closure.unadjudicated ?? []).length || (closure.open_fatal ?? []).length) die('judge closure is not closed');
+  let configuredModels;
+  try { configuredModels = [...resolveLineup(closure.judge_lineup).models]; }
+  catch (cause) { die(`judge closure names an invalid lineup (${cause.message})`); }
   const scope = runScope(run, root);
   const items = scope.items.map((item) => {
     const { frontmatter } = splitFrontmatter(readFileSync(join(root, item.file), 'utf8'));
@@ -130,15 +134,31 @@ function buildEvidence() {
     rows.push(row);
     versions.set(key, rows);
   }
-  const pairStats = { paired_versions: 0, agreed_keep: 0, agreed_reject: 0, split: 0, contains_null: 0 };
+  const configuredSetStats = {
+    versions_with_evidence: 0,
+    complete_versions: 0,
+    all_keep: 0,
+    all_reject: 0,
+    mixed: 0,
+    contains_null: 0,
+    incomplete: 0,
+  };
   for (const rows of versions.values()) {
-    const models = new Set(rows.map((row) => row.model));
-    if (models.size < 2) continue;
-    pairStats.paired_versions++;
-    if (rows.some((row) => row.keep == null)) pairStats.contains_null++;
-    else if (rows.every((row) => row.keep === true)) pairStats.agreed_keep++;
-    else if (rows.every((row) => row.keep === false)) pairStats.agreed_reject++;
-    else pairStats.split++;
+    const byConfiguredModel = new Map(rows
+      .filter((row) => configuredModels.includes(row.model))
+      .map((row) => [row.model, row]));
+    if (!byConfiguredModel.size) continue;
+    configuredSetStats.versions_with_evidence++;
+    if (!configuredModels.every((model) => byConfiguredModel.has(model))) {
+      configuredSetStats.incomplete++;
+      continue;
+    }
+    configuredSetStats.complete_versions++;
+    const keeps = configuredModels.map((model) => byConfiguredModel.get(model).keep);
+    if (keeps.some((keep) => keep == null)) configuredSetStats.contains_null++;
+    else if (keeps.every((keep) => keep === true)) configuredSetStats.all_keep++;
+    else if (keeps.every((keep) => keep === false)) configuredSetStats.all_reject++;
+    else configuredSetStats.mixed++;
   }
   const adjudications = jsonLines(paths.adjudications);
   const inputs = Object.fromEntries(Object.values(paths).map((path) => [relative(root, path), sha256(readFileSync(path))]));
@@ -161,7 +181,7 @@ function buildEvidence() {
     verification: {
       judge_lineup: closure.judge_lineup ?? 'unknown',
       scope: closure.scope ?? items.length,
-      pairs_complete: closure.pairs_complete ?? 0,
+      verdicts_complete: closure.verdicts_complete ?? closure.pairs_complete ?? 0,
       terminal_resolutions: closure.terminal_resolved ?? [],
       closure_closed: closure.closed === true,
       workflow_owned_blockers: 0,
@@ -178,7 +198,7 @@ function buildEvidence() {
       ledger_rows: judgeRows.length,
       exact_verdicts: verdicts.length,
       by_model: Object.fromEntries(Object.entries(byModel).sort(([a], [b]) => a.localeCompare(b))),
-      pair_stats: pairStats,
+      configured_set_stats: configuredSetStats,
       adjudications: { rows: adjudications.length, outcomes: countBy(adjudications, 'outcome') },
     },
     repeated_repairs: repairCounts(touches),
@@ -274,7 +294,7 @@ const lines = [`# ${run} — Step 10 owner report`, '', response.executive_summa
   `- Item kinds: ${Object.entries(evidence.build.items_by_kind).map(([kind, count]) => `${kind} ${count}`).join('; ')}.`, '',
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
-  `- Current paired verdicts complete: ${evidence.verification.pairs_complete}/${evidence.verification.scope}.`,
+  `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
   `- Terminal owner/session resolutions after the three-round cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
   `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
   `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
@@ -289,8 +309,8 @@ lines.push('', `Grouped by class: ${Object.entries(evidence.defects.by_class).ma
   '## Judge and adjudication record', '',
   '| Model | Exact verdicts | Kept | Rejected | Null |', '|---|---:|---:|---:|---:|');
 for (const [model, stats] of Object.entries(evidence.judges.by_model)) lines.push(`| ${cell(model)} | ${stats.verdicts} | ${stats.kept} | ${stats.rejected} | ${stats.null} |`);
-const pairs = evidence.judges.pair_stats;
-lines.push('', `Across ${pairs.paired_versions} paired text version(s): ${pairs.agreed_keep} agreed keep, ${pairs.agreed_reject} agreed reject, ${pairs.split} split, and ${pairs.contains_null} contained a null response.`,
+const sets = evidence.judges.configured_set_stats;
+lines.push('', `Across ${sets.versions_with_evidence} text version(s) with configured-judge evidence: ${sets.complete_versions} complete model set(s), ${sets.all_keep} all keep, ${sets.all_reject} all reject, ${sets.mixed} mixed, ${sets.contains_null} containing a null response, and ${sets.incomplete} incomplete.`,
   `Adjudications: ${Object.entries(evidence.judges.adjudications.outcomes).map(([outcome, count]) => `${outcome} ${count}`).join('; ') || 'none'}.`, '',
   '## Repeated repairs and pathway closure', '');
 if (evidence.repeated_repairs.length) {

@@ -1,0 +1,479 @@
+[
+  {
+    "order": 225,
+    "id": "block-designs-and-finite-projective-planes",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Block Designs and Finite Projective Planes",
+    "companion": "block-designs-and-finite-projective-planes-examples",
+    "requires": [
+      "linear-algebra-methods-in-combinatorics",
+      "algebraic-extensions-degree-and-finite-fields",
+      "congruences-and-the-chinese-remainder-theorem",
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial"
+    ],
+    "items": [
+      {
+        "id": "def-two-design",
+        "kind": "definition",
+        "title": "A $2$-$(v,k,\\lambda)$ design",
+        "deps": []
+      },
+      {
+        "id": "def-incidence-matrix-of-a-two-design",
+        "kind": "definition",
+        "title": "The point-block incidence matrix of a $2$-design",
+        "deps": [
+          "def-two-design"
+        ]
+      },
+      {
+        "id": "lem-replication-number-is-constant-in-a-two-design",
+        "kind": "lemma",
+        "title": "Every point of a $2$-design lies in the same number of blocks",
+        "strategy": "Fix a point p and count ordered pairs (q,B) with q != p and {p,q} subseteq B. For each block through p there are k-1 choices of q, while for each q != p there are exactly lambda blocks through {p,q}. The resulting count is independent of p, so the number r_p of blocks through p is constant. State the boundary 2 <= k < v explicitly so k-1 and v-1 are positive.",
+        "deps": [
+          "def-two-design"
+        ]
+      },
+      {
+        "id": "thm-counting-identities-for-a-two-design",
+        "kind": "theorem",
+        "title": "A $2$-design satisfies $bk=vr$ and $r(k-1)=\\lambda(v-1)$",
+        "strategy": "After the preceding lemma, define r to be the common replication number and b to be the number of blocks. Double-count incident point-block pairs for bk=vr. The second identity is the count used in the constancy proof, now written with the common r. Keep the two counts separate so later items can cite each formula individually.",
+        "deps": [
+          "def-two-design",
+          "lem-replication-number-is-constant-in-a-two-design"
+        ]
+      },
+      {
+        "id": "cor-divisibility-conditions-for-a-two-design",
+        "kind": "corollary",
+        "title": "The standard divisibility conditions for a $2$-design",
+        "strategy": "From r(k-1)=lambda(v-1) conclude that k-1 divides lambda(v-1), so r=lambda(v-1)/(k-1) is an integer. Substitute that into bk=vr to obtain b=v lambda(v-1)/(k(k-1)). State the conclusion as necessity only, not sufficiency.",
+        "deps": [
+          "thm-counting-identities-for-a-two-design"
+        ]
+      },
+      {
+        "id": "thm-incidence-matrix-identity-for-a-two-design",
+        "kind": "theorem",
+        "title": "For a $2$-design, $NN^{\\mathsf T}=(r-\\lambda)I+\\lambda J$",
+        "strategy": "Let N be the 0-1 incidence matrix with rows indexed by points and columns by blocks. The diagonal entry of NN^T counts blocks through one point and is r. An off-diagonal entry counts blocks through a pair of distinct points and is lambda. Therefore the whole matrix is (r-lambda)I + lambda J. Keep the matrix-size conventions explicit: N is v by b, so NN^T is v by v.",
+        "deps": [
+          "def-two-design",
+          "def-incidence-matrix-of-a-two-design",
+          "thm-counting-identities-for-a-two-design"
+        ]
+      },
+      {
+        "id": "thm-fishers-inequality-for-two-designs",
+        "kind": "theorem",
+        "title": "Fisher's inequality: every $2$-$(v,k,\\lambda)$ design has at least $v$ blocks",
+        "strategy": "Use the incidence identity. Since 2 <= k < v, the counting identity gives r > lambda. If x is orthogonal to the all-ones vector then x^T NN^T x=(r-lambda)||x||^2, and on the all-ones line one gets x^T NN^T x=(r-lambda+lambda v)||x||^2/v. Hence NN^T is positive definite, so rank(NN^T)=v. Since rank(NN^T) <= rank(N) <= b, we obtain v <= b. Keep the proof over R, because positivity is load-bearing and the published false-statement witness over F_2 is on the earlier page.",
+        "deps": [
+          "thm-incidence-matrix-identity-for-a-two-design",
+          "thm-counting-identities-for-a-two-design",
+          "def-incidence-matrix-of-a-two-design"
+        ]
+      },
+      {
+        "id": "def-symmetric-design",
+        "kind": "definition",
+        "title": "A symmetric design",
+        "deps": [
+          "def-two-design"
+        ]
+      },
+      {
+        "id": "thm-block-intersections-in-a-symmetric-design",
+        "kind": "theorem",
+        "title": "In a symmetric $2$-design, distinct blocks meet in exactly $\\lambda$ points",
+        "strategy": "Let N be the square incidence matrix of a symmetric design. By Fisher's inequality and symmetry, N is square and the determinant of NN^T from the previous identity is nonzero because r>lambda, so N is invertible. Use bk=vr with b=v to get r=k, and use the constant row and column sums k to show N^{-1} J N = J. Then N^T N = N^{-1}(NN^T)N = (k-lambda)I + lambda J. The off-diagonal entries of N^T N count block intersections, so every two distinct blocks meet in exactly lambda points.",
+        "deps": [
+          "def-symmetric-design",
+          "thm-counting-identities-for-a-two-design",
+          "thm-incidence-matrix-identity-for-a-two-design",
+          "thm-fishers-inequality-for-two-designs",
+          "def-incidence-matrix-of-a-two-design"
+        ]
+      },
+      {
+        "id": "def-steiner-systems-and-steiner-triple-systems",
+        "kind": "definition",
+        "title": "Steiner triple systems",
+        "deps": [
+          "def-two-design"
+        ]
+      },
+      {
+        "id": "cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six",
+        "kind": "corollary",
+        "title": "A Steiner triple system can exist only when $v\\equiv1$ or $3\\pmod6$",
+        "strategy": "Specialize the divisibility conditions to k=3 and lambda=1. Then r=(v-1)/2 is integral, so v is odd, and b=v(v-1)/6 is integral, so 3 divides v(v-1)/2. Checking odd residues modulo 6 leaves only 1 and 3.",
+        "deps": [
+          "def-steiner-systems-and-steiner-triple-systems",
+          "cor-divisibility-conditions-for-a-two-design",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "thm-bose-construction-produces-a-steiner-triple-system",
+        "kind": "theorem",
+        "title": "Bose's construction gives a Steiner triple system of order $6m+3$ for $m\\ge1$",
+        "strategy": "Write v=6m+3=3n with n odd. On Z/n define x circle y = ((n+1)/2)(x+y), which is well defined because 2 is invertible modulo odd n. Form points Z/n x Z/3, add the vertical triples {(x,0),(x,1),(x,2)}, and for each unordered pair x != y add the three triples {(x,i),(y,i),(x circle y,i+1)}. Verify every pair of points lies in exactly one block by splitting into same-layer and adjacent-layer cases. Count the blocks separately to match v(v-1)/6.",
+        "deps": [
+          "def-steiner-systems-and-steiner-triple-systems",
+          "def-integers-modulo-n",
+          "def-addition-and-multiplication-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-standard-representatives-modulo-n"
+        ]
+      },
+      {
+        "id": "rem-skolem-construction-produces-a-steiner-triple-system",
+        "kind": "remark",
+        "title": "Skolem's construction gives a Steiner triple system of order $6m+1$",
+        "strategy": "Record the exact sourced existence statement for the 1 mod 6 branch and explain that this batch uses the existence consequence but does not rebuild the source's block list locally.",
+        "deps": []
+      },
+      {
+        "id": "thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six",
+        "kind": "theorem",
+        "title": "A Steiner triple system exists exactly for orders $v>3$ with $v\\equiv1$ or $3\\pmod6$",
+        "strategy": "The forward implication combines the congruence obstruction with the library's own 2-design convention, which forces v>3. For the reverse implication, split by the two odd residue classes: v=6m+3 with v>3 uses Bose, and v=6m+1 with v>3 uses Skolem.",
+        "deps": [
+          "cor-steiner-triple-systems-force-v-congruent-one-or-three-mod-six",
+          "thm-bose-construction-produces-a-steiner-triple-system",
+          "rem-skolem-construction-produces-a-steiner-triple-system",
+          "def-steiner-systems-and-steiner-triple-systems",
+          "def-two-design",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "def-finite-projective-plane",
+        "kind": "definition",
+        "title": "A finite projective plane",
+        "deps": []
+      },
+      {
+        "id": "lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points",
+        "kind": "lemma",
+        "title": "Every line in a finite projective plane has the same number of points",
+        "strategy": "Take two lines l and m. If l=m there is nothing to prove, so assume they are distinct and let p=l intersect m. Use the nondegeneracy axiom to choose a point x off l union m. For each point y on l\\{p}, the line through x and y meets m in exactly one point of m\\{p}; conversely every point of m\\{p} arises this way. This bijection gives |l|-1=|m|-1. Keep the role of the third projective-plane axiom explicit: it is exactly what supplies x.",
+        "deps": [
+          "def-finite-projective-plane"
+        ]
+      },
+      {
+        "id": "def-order-of-a-finite-projective-plane",
+        "kind": "definition",
+        "title": "The order of a finite projective plane",
+        "deps": [
+          "def-finite-projective-plane",
+          "lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points"
+        ]
+      },
+      {
+        "id": "thm-counts-in-a-finite-projective-plane",
+        "kind": "theorem",
+        "title": "A finite projective plane of order $n$ has $n^2+n+1$ points and the same number of lines",
+        "strategy": "Fix a line l with n+1 points. Every point off l lies on a unique line through each point of l, and each of the n+1 lines through a fixed point of l contributes n off-line points, so there are n(n+1) off-line points and therefore n^2+n+1 points in total. Fix a point p and a line l not through p to get exactly n+1 lines through p. Double-count incident point-line pairs to obtain equality of the point and line counts.",
+        "deps": [
+          "def-finite-projective-plane",
+          "lem-every-line-in-a-finite-projective-plane-has-the-same-number-of-points",
+          "def-order-of-a-finite-projective-plane"
+        ]
+      },
+      {
+        "id": "cor-finite-projective-planes-are-symmetric-two-designs",
+        "kind": "corollary",
+        "title": "A projective plane of order $n$ is a symmetric $2$-$(n^2+n+1,n+1,1)$ design",
+        "strategy": "Read points as the ground set and lines as the blocks. The projective-plane axioms give lambda=1, the count theorem gives v=b=n^2+n+1, and every line has k=n+1 points.",
+        "deps": [
+          "def-two-design",
+          "def-symmetric-design",
+          "def-finite-projective-plane",
+          "def-order-of-a-finite-projective-plane",
+          "thm-counts-in-a-finite-projective-plane"
+        ]
+      },
+      {
+        "id": "thm-pg-two-q-is-a-finite-projective-plane",
+        "kind": "theorem",
+        "title": "For every prime power $q$, the space $PG(2,q)$ is a projective plane of order $q$",
+        "strategy": "Take points to be the one-dimensional subspaces of F_q^3 and lines the two-dimensional subspaces. Two distinct points span a unique two-dimensional subspace, and two distinct two-dimensional subspaces intersect in a unique one-dimensional subspace by the dimension formula in a three-dimensional vector space. The coordinate axes provide four points with no three collinear. A line is a two-dimensional F_q-space, so it has q^2-1 nonzero vectors and therefore (q^2-1)/(q-1)=q+1 projective points; the preceding theorem then identifies the order as q.",
+        "deps": [
+          "def-finite-projective-plane",
+          "def-order-of-a-finite-projective-plane",
+          "thm-existence-of-finite-fields",
+          "thm-finite-fields-have-prime-power-order",
+          "lem-cardinality-of-a-finite-dimensional-space-over-a-finite-field"
+        ]
+      },
+      {
+        "id": "def-latin-square",
+        "kind": "definition",
+        "title": "A Latin square",
+        "deps": []
+      },
+      {
+        "id": "def-orthogonal-latin-squares-and-complete-families",
+        "kind": "definition",
+        "title": "Orthogonal Latin squares and complete families of them",
+        "deps": [
+          "def-latin-square"
+        ]
+      },
+      {
+        "id": "thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal",
+        "kind": "theorem",
+        "title": "The linear Latin squares $L_a(i,j)=ai+j$ over $\\mathbb F_q$ are pairwise orthogonal",
+        "strategy": "For each nonzero a in F_q, define L_a(i,j)=ai+j on F_q x F_q. Each fixed row or column is an affine bijection, so L_a is Latin. If a != b and prescribed symbols s,t are given, solving ai+j=s and bi+j=t reduces to (a-b)i=s-t, which has a unique solution because a-b is nonzero in a field. Then j is uniquely determined, so every ordered pair occurs exactly once.",
+        "deps": [
+          "def-latin-square",
+          "def-orthogonal-latin-squares-and-complete-families",
+          "thm-existence-of-finite-fields"
+        ]
+      },
+      {
+        "id": "cor-prime-power-orders-admit-complete-families-of-orthogonal-latin-squares",
+        "kind": "corollary",
+        "title": "Every prime power order $q$ admits $q-1$ mutually orthogonal Latin squares",
+        "strategy": "A finite field of order q exists for every prime power q, and the preceding theorem gives one Latin square for each nonzero slope a in F_q. Since there are q-1 nonzero field elements, these form a complete family.",
+        "deps": [
+          "thm-existence-of-finite-fields",
+          "thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 226,
+    "id": "block-designs-and-finite-projective-planes-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Block Designs and Finite Projective Planes — Examples",
+    "companion": "block-designs-and-finite-projective-planes",
+    "requires": [
+      "block-designs-and-finite-projective-planes"
+    ],
+    "items": [
+      {
+        "id": "ex-skolems-construction-gives-the-fano-plane",
+        "kind": "example",
+        "title": "The seven translates of $\\{0,1,3\\}$ form the Fano plane",
+        "strategy": "List the seven translates modulo 7 of {0,1,3}, verify that every pair of points lies in exactly one translate, and then check that the same seven triples satisfy the projective-plane axioms.",
+        "deps": [
+          "def-steiner-systems-and-steiner-triple-systems",
+          "def-finite-projective-plane"
+        ]
+      },
+      {
+        "id": "ex-the-incidence-matrix-of-the-fano-plane",
+        "kind": "example",
+        "title": "The Fano plane has incidence matrix $N$ with $NN^{\\mathsf T}=2I+J$",
+        "strategy": "Choose an explicit ordering of the seven points and seven lines of the Fano plane, write the 7 by 7 incidence matrix, and multiply it out. The diagonal entries should be 3, the off-diagonal ones 1, so this example exhibits both the incidence identity and equality in Fisher's inequality.",
+        "deps": [
+          "ex-skolems-construction-gives-the-fano-plane",
+          "thm-incidence-matrix-identity-for-a-two-design",
+          "thm-fishers-inequality-for-two-designs"
+        ]
+      },
+      {
+        "id": "ex-bose-construction-for-the-steiner-triple-system-on-nine-points",
+        "kind": "example",
+        "title": "Bose's construction at order $9$ gives a Steiner triple system on nine points",
+        "strategy": "Take n=3, compute x circle y=2(x+y) in Z/3, list the three vertical triples and the nine quasigroup triples, and check that each unordered pair of points appears once. This example is the first nontrivial 3 mod 6 case and is small enough to verify by direct incidence data.",
+        "deps": [
+          "thm-bose-construction-produces-a-steiner-triple-system"
+        ]
+      },
+      {
+        "id": "ex-pg-two-three-has-thirteen-points-and-thirteen-lines",
+        "kind": "example",
+        "title": "$PG(2,3)$ has $13$ points and $13$ lines",
+        "strategy": "Count the one-dimensional and two-dimensional subspaces of F_3^3. There are 26 nonzero vectors and each point has 2 nonzero representatives, so there are 13 points; dually there are 13 lines. Display one sample line as the span of two independent vectors and check that it contains 4 projective points.",
+        "deps": [
+          "thm-pg-two-q-is-a-finite-projective-plane",
+          "thm-counts-in-a-finite-projective-plane"
+        ]
+      },
+      {
+        "id": "ex-two-orthogonal-latin-squares-of-order-three",
+        "kind": "example",
+        "title": "The squares $L_1(i,j)=i+j$ and $L_2(i,j)=2i+j$ on $\\mathbb F_3$ are orthogonal",
+        "strategy": "Write both 3 by 3 arrays explicitly and list the nine ordered pairs (L_1(i,j),L_2(i,j)). Each pair from F_3^2 should appear once, which is the concrete verification of orthogonality in the first prime-power case beyond q=2.",
+        "deps": [
+          "thm-linear-latin-squares-over-a-finite-field-are-mutually-orthogonal"
+        ]
+      },
+      {
+        "id": "cex-a-symmetric-design-need-not-be-a-projective-plane",
+        "kind": "counterexample",
+        "title": "The complementary $2$-$(7,4,2)$ design is symmetric but not a projective plane",
+        "strategy": "Take the complements of the seven Fano lines inside the seven-point set. Each complementary block has size 4 and any two meet in 2 points, so the design is symmetric. It is not a projective plane because projective planes have lambda=1: two lines should meet in exactly one point, not two.",
+        "deps": [
+          "ex-skolems-construction-gives-the-fano-plane",
+          "cor-finite-projective-planes-are-symmetric-two-designs"
+        ]
+      },
+      {
+        "id": "cex-two-latin-squares-need-not-be-orthogonal",
+        "kind": "counterexample",
+        "title": "A Latin square need not be orthogonal to an identical copy of itself",
+        "strategy": "Use the addition table of Z/3 twice. The ordered pair (0,0) occurs in every cell of the main diagonal, so the ordered pairs are not all distinct. This is the smallest clean witness that orthogonality is genuinely extra structure.",
+        "deps": [
+          "def-latin-square",
+          "def-orthogonal-latin-squares-and-complete-families"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 403,
+    "id": "classical-and-loglog-erdos-hajnal-bounds",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Classical and Log-Log Erdős–Hajnal Bounds",
+    "companion": "classical-and-loglog-erdos-hajnal-bounds-examples",
+    "requires": [
+      "erdos-hajnal-property-and-homogeneous-sets",
+      "sparse-restricted-subgraphs-and-rodl-nikiforov"
+    ],
+    "items": [
+      {
+        "id": "rem-fox-sudakov-quantitative-density-theorem",
+        "kind": "remark",
+        "title": "Fox–Sudakov: a quantitative density form of Rödl's theorem",
+        "strategy": "Record the exact H-free specialization of Fox and Sudakov's quantitative density theorem, with the source's base-2 logarithm convention stated explicitly. This item is source-cited and proved_here=false: later proofs on the page depend on its statement, not on a local derivation of the theorem itself.",
+        "deps": []
+      },
+      {
+        "id": "thm-classical-erdos-hajnal-bound",
+        "kind": "theorem",
+        "title": "Every $H$-free graph has a homogeneous set of size at least $2^{c\\sqrt{\\log_2 n}}$",
+        "strategy": "Fix the constant from the Fox-Sudakov remark and let L=log_2 n. Choose x=2^{-sqrt(L/(2c_H))}. The remark gives a vertex set S of size at least sqrt(n) whose induced subgraph, or its complement, has density at most x. Use the published weak-density trimming lemma to pass to a subset of S with maximum degree at most 4x|S|, then apply the greedy colouring bound and |V|<=chi alpha to obtain a stable set of size at least |S|/(4x|S|+1); in the complement branch that becomes a clique in G. Convert the denominator to a constant multiple of 1/x and absorb the small-n boundary into the final constant c.",
+        "deps": [
+          "rem-fox-sudakov-quantitative-density-theorem",
+          "def-homogeneous-set-and-homogeneous-number",
+          "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-greedy-colouring-bound",
+          "thm-clique-independence-chromatic-bounds",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "rem-loglog-quantitative-density-theorem",
+        "kind": "remark",
+        "title": "Bucić–Nguyen–Scott–Seymour: a log-log quantitative density theorem",
+        "strategy": "Record the H-free specialization of theorem 1.8 from the 2024 paper, again keeping the source's base-2 logarithm convention explicit. This is the second source-cited proved_here=false input: the page proves the announced Erdős-Hajnal consequence from it, not the density theorem itself.",
+        "deps": []
+      },
+      {
+        "id": "thm-loglog-erdos-hajnal-bound",
+        "kind": "theorem",
+        "title": "Every $H$-free graph has a homogeneous set of size at least $2^{c\\sqrt{\\log_2 n\\,\\log_2\\log_2 n}}$",
+        "strategy": "Let L=log_2 n and choose x=2^{-beta sqrt(L log_2 L)} with beta depending only on the constant in the log-log density remark, so that the theorem's delta satisfies delta n >= sqrt(n) for all large enough L. Apply the remark to get a dense-or-sparse set S of that size, trim it as in the classical proof, and use greedy colouring plus the clique/stable-set bounds to obtain a homogeneous set of order at least a constant multiple of 1/x. The resulting lower bound is 2^{Omega(sqrt(L log_2 L))}; absorb the finitely many small n cases into the constant c.",
+        "deps": [
+          "rem-loglog-quantitative-density-theorem",
+          "def-homogeneous-set-and-homogeneous-number",
+          "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-greedy-colouring-bound",
+          "thm-clique-independence-chromatic-bounds",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "cor-the-loglog-bound-eventually-dominates-the-classical-bound",
+        "kind": "corollary",
+        "title": "For fixed $H$, the log-log scale eventually exceeds every classical scale $2^{c\\sqrt{\\log_2 n}}$",
+        "strategy": "Compare the exponents. For large n, sqrt(log_2 n log_2 log_2 n) is sqrt(log_2 log_2 n) times larger than sqrt(log_2 n), so any positive log-log constant eventually beats any fixed classical constant. State the conclusion with an eventual threshold, not as a uniform inequality for all n >= 2.",
+        "deps": [
+          "thm-classical-erdos-hajnal-bound",
+          "thm-loglog-erdos-hajnal-bound",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 404,
+    "id": "classical-and-loglog-erdos-hajnal-bounds-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Classical and Log-Log Erdős–Hajnal Bounds — Examples",
+    "companion": "classical-and-loglog-erdos-hajnal-bounds",
+    "requires": [
+      "classical-and-loglog-erdos-hajnal-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-choosing-x-for-the-classical-erdos-hajnal-bound",
+        "kind": "example",
+        "title": "For large $n$, the Fox–Sudakov choice of $x$ leaves a dense-or-sparse set of order at least $\\sqrt n$",
+        "strategy": "Let L=log_2 n and x=2^{-sqrt(L/(2c_H))}. Compute delta=2^{-c_H(log_2(1/x))^2}=2^{-L/2}, so delta n=sqrt(n). This is the one-line algebra the main theorem uses before the trimming argument begins.",
+        "deps": [
+          "rem-fox-sudakov-quantitative-density-theorem",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "ex-choosing-x-for-the-loglog-erdos-hajnal-bound",
+        "kind": "example",
+        "title": "For large $n$, the log-log choice of $x$ still leaves a dense-or-sparse set of order at least $\\sqrt n$",
+        "strategy": "Let L=log_2 n and choose x=2^{-beta sqrt(L log_2 L)} with beta=1/(4 sqrt(c_H)). For large L, bound log_2 log_2(1/x) from below by (1/2) log_2 L and deduce delta n >= sqrt(n).",
+        "deps": [
+          "rem-loglog-quantitative-density-theorem",
+          "def-logarithm-to-a-base"
+        ]
+      },
+      {
+        "id": "ex-the-classical-bound-is-subpolynomial",
+        "kind": "example",
+        "title": "A lower bound of size $2^{c\\sqrt{\\log_2 n}}$ is still subpolynomial in $n$",
+        "strategy": "Fix epsilon>0 and write n=2^L. Then 2^{c sqrt(L)} / n^epsilon = 2^{c sqrt(L)-epsilon L}, and the exponent tends to -infinity because sqrt(L)=o(L). This example is the honest reason the classical bound does not by itself prove the Erdős-Hajnal conjecture.",
+        "deps": [
+          "thm-classical-erdos-hajnal-bound",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "ex-the-loglog-bound-is-still-subpolynomial",
+        "kind": "example",
+        "title": "A lower bound of size $2^{c\\sqrt{\\log_2 n\\,\\log_2\\log_2 n}}$ is still subpolynomial in $n$",
+        "strategy": "Again write n=2^L. Then 2^{c sqrt(L log_2 L)} / n^epsilon = 2^{c sqrt(L log_2 L)-epsilon L}, and sqrt(L log_2 L)=o(L). This example shows that the log-log improvement is genuine but still falls short of the conjectured power law.",
+        "deps": [
+          "thm-loglog-erdos-hajnal-bound",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "ex-p-three-free-graphs-have-much-larger-homogeneous-sets",
+        "kind": "example",
+        "title": "The $P_3$-free case is much stronger than the general lower bounds",
+        "strategy": "Use the published theorem that every P_3-free graph has a homogeneous set of order at least |G|^{1/2}. Compare n^{1/2}=2^{(1/2)log_2 n} with the general scales 2^{c sqrt(log_2 n)} and 2^{c sqrt(log_2 n log_2 log_2 n)}: for large n the square-root exponent is much larger. This example keeps the reader from confusing a universal lower bound with the best possible bound for a specific class.",
+        "deps": [
+          "thm-p3-free-graphs-have-square-root-homogeneous-sets",
+          "thm-classical-erdos-hajnal-bound",
+          "thm-loglog-erdos-hajnal-bound",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      }
+    ]
+  }
+]

@@ -20,7 +20,7 @@ repeat them. Confirm that a reader did not audit content it authored. Verify all
 reported findings from item and dependency files; a report is evidence, not a
 verdict.
 
-Do not judge or stamp. Step 7 owns the paired judges. Delete
+Do not judge or stamp. Step 7 owns the Terra judge. Delete
 `verification.judge` after a material rewrite.
 
 ## Mathematical standard
@@ -85,14 +85,14 @@ same file and should extend its decision after the owner repair lands. Preserve
 the reader finding's `pre_sha256`, repair and close every consumer, then append:
 
 ```json
-{"kind":"repaired","id":"<published-id>","group":"<finding-group>","repair_owner_group":"<claim-owner>","found_via":"<consumer-id>","found_at_stage":"6a-read","step6_obligation":"reader:<batch>:<n>","step6_defect_class":"<class>","pre_sha256":"<reader baseline>","post_sha256":"<current itemHashGuard>","defect":"what was false","correction_basis":"exact source-checked or elementary basis"}
+{"kind":"repaired","id":"<published-id>","group":"<finding-group>","repair_owner_group":"<claim-owner>","found_via":"<consumer-id>","found_at_stage":"6a-read","step6_obligation":"reader:<batch>:<reader-sequence>","step6_defect_class":"<class>","pre_sha256":"<reader baseline>","post_sha256":"<current itemHashGuard>","defect":"what was false","correction_basis":"exact source-checked or elementary basis"}
 ```
 
 Write the row to a namespaced temporary JSON file, then append it with
 `node tools/published-repairs.mjs append --run <run> --file <rows.json>`; never
 edit the shared JSONL directly. Compute `post_sha256` with `itemHashGuard` from
 `tools/item-hash.mjs`. The Step-6 gate binds the row to the
-reader decision and Step 8 sends that published id to both judge lanes. No
+reader decision and Step 8 sends that published id to Terra. No
 repairer self-certifies. If the correction is debatable or needs deletion, id
 change, a new theorem, or published-page order changes, record an owner blocker
 without editing.

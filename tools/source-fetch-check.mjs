@@ -104,7 +104,7 @@ async function fetchFull(url) {
     if (declared > maxBytes) return { error: `content-length ${declared} exceeds --max-bytes ${maxBytes}`, finalUrl };
     const buffer = Buffer.from(await res.arrayBuffer());
     if (buffer.length > maxBytes) return { error: `body of ${buffer.length} bytes exceeds --max-bytes ${maxBytes}`, finalUrl };
-    return { bytes: buffer.length, buffer, finalUrl };
+    return { bytes: buffer.length, buffer, finalUrl, contentType: res.headers.get('content-type') ?? '' };
   } catch (err) {
     const why = err?.name === 'TimeoutError' ? `timeout after ${timeoutSec}s`
       : (err?.cause?.code ?? err?.message ?? String(err));
@@ -124,7 +124,7 @@ function pdfPageCount(buffer) {
 }
 
 /** Classify a fetched body as full text, or say why it is not. */
-function classify(url, finalUrl, buffer) {
+function classify(url, finalUrl, buffer, contentType = '') {
   const wall = botWallReason(url, finalUrl ?? url);
   if (wall) return { fail: `bot wall: ${wall}` };
   const head = buffer.subarray(0, 8).toString('latin1');
@@ -142,6 +142,15 @@ function classify(url, finalUrl, buffer) {
       .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
     if (stripped.length < MIN_HTML_TEXT) return { fail: `HTML with ${stripped.length} chars of text — below the ${MIN_HTML_TEXT}-char floor (a wall or an error page, not a document)` };
     return { kind: 'html', detail: { text_chars: stripped.length } };
+  }
+  // Some academic lecture notes are served directly as text/plain rather than
+  // wrapped in HTML.  Their mathematical content is still reader-visible full
+  // text, so assess it by the same substantive-text floor rather than treating
+  // it as opaque binary merely because it has no tags.
+  if (/^text\/plain(?:\s*;|$)/i.test(contentType)) {
+    const plain = text.replace(/\s+/g, ' ').trim();
+    if (plain.length < MIN_HTML_TEXT) return { fail: `plain text with ${plain.length} chars — below the ${MIN_HTML_TEXT}-char floor (a wall or an error page, not a document)` };
+    return { kind: 'text', detail: { text_chars: plain.length } };
   }
   if (buffer.length < MIN_OTHER) return { fail: `${buffer.length} bytes of unrecognised content — below the ${MIN_OTHER}-byte floor` };
   return { kind: 'binary', detail: {} };
@@ -167,7 +176,7 @@ for (const file of coverages) {
       if (!stampMode) { failures.push(`fetch-check-unstamped: ${page.page}: ${source.url}`); continue; }
       const got = await fetchFull(source.url);
       if (got.error) { failures.push(`fetch-check-dead: ${page.page}: ${source.url} — ${got.error}`); continue; }
-      const cls = classify(source.url, got.finalUrl, got.buffer);
+      const cls = classify(source.url, got.finalUrl, got.buffer, got.contentType);
       if (cls.fail) { failures.push(`fetch-check-not-full-text: ${page.page}: ${source.url} — ${cls.fail}`); continue; }
       source.fetch_verified = {
         at: new Date().toISOString(),

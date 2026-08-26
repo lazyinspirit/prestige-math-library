@@ -1,15 +1,8 @@
-// Topic-neutral cross-provider refuter-judge for library items. Normal paired
-// mode runs DeepSeek V4 Pro directly against a freshly spawned Claude Opus 5
-// CLI process on the identical frozen prompt.
-//
-// Owner update 2026-08-23: every agent lane and the second judge lane are Claude
-// Opus 5 at xhigh with the 1M-token window, because the Codex subscription that
-// carried Sol and Terra reached its weekly limit. The judge is therefore direct
-// DeepSeek V4 Pro and a fresh Opus CLI process in parallel. Neither lane may be
-// routed through a third-party gateway. This file retains the historical
-// GLM/DeepSeek injection-test record as model-evaluation evidence, and the
-// adoption bar it sets has NOT been discharged for the Opus lane — see the
-// JUDGE_LINEUPS note below.
+// Topic-neutral refuter-judge for library items. Owner update 2026-08-26: normal
+// mode runs GPT-5.6 Terra alone at xhigh with the explicit 1M context window.
+// DeepSeek is not part of Step 7 or later rejudges. This file retains historical
+// multi-model injection-test records as model-evaluation evidence; retired
+// lineup keys remain available only for replay and ledger interpretation.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -188,7 +181,7 @@ const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek
 const DEEPSEEK_API_URL = DEEPSEEK_BASE_URL.replace(/\/$/, "") + "/chat/completions";
 const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// SESSION items only. Session authoring uses Claude Opus 5; its paired judges
+// SESSION items only. Session authoring uses the configured agent lane; its judge
 // are therefore direct DeepSeek V4 Pro and fresh Claude Opus 5 CLI processes —
 // note that the second lane is now the SAME model as the author it screens. The
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
@@ -217,30 +210,19 @@ const SUPPORTED_MODELS: string[] = Object.values(MODELS).map((m: any) => m.id);
 /** The runner that can actually spawn a judge model, from the registry. */
 const runnerFor = (id: string): string =>
   (Object.values(MODELS) as any[]).find((m) => m.id === id)?.runner ?? "deepseek";
-// JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The active default is deepseek+opus (owner, 2026-08-23): "change all LLMs from
-// gpt 5.6 sol and gpt 5.6 Terra to opus 5 since Codex subscription reached weekly
-// limit". This is the fourth lane change in five weeks — deepseek+terra until
-// 2026-08-17, deepseek+sonnet when the Codex account behind Terra was throttled
-// mid-run, back to deepseek+terra on 2026-08-20, and now off the Codex account
-// entirely because its WEEKLY cap is spent rather than a burst limit. Every
-// retired lane's rows stay as append-only historical evidence and satisfy no
-// current coverage; the frozen prompt, hash attestation and verdict contract are
-// identical across all four, which is what makes a lane swap a configuration
-// change rather than a re-judgement. `judge.mts --preflight` spends one minimal
-// call per lane and is the cheap way to learn an account is dead before a sweep
-// does.
+// JUDGE_LINEUP selects the session's configured judge set without forking the
+// tool. Owner, 2026-08-26: the active default is Terra alone; DeepSeek is no
+// longer part of Step 7 or any later rejudge. Retired paired lineups remain
+// selectable for historical replay, and their rows stay append-only evidence
+// that satisfies no current coverage. The frozen prompt, hash attestation and
+// verdict contract remain identical across model sets. `judge.mts --preflight`
+// spends one minimal call per configured model and is the cheap way to learn an
+// account is dead before a sweep does.
 //
-// FAMILY WEIGHTING under deepseek+opus, and READ THIS BEFORE CONCLUDING THE MOVE
-// BOUGHT INDEPENDENCE BACK. It did not. Under deepseek+terra the second judge
-// lane shared the GPT family with both the authors it screened and the Alpha
-// adjudicating its rejections; under deepseek+opus it shares the ANTHROPIC family
-// with both. The structure is identical with the family name swapped, and
-// DeepSeek remains the only cross-family reader in either workflow. Weight
-// Opus/author and Opus/Alpha agreement accordingly: an Opus-only rejection that
-// Alpha calls a false positive is two same-family reads agreeing, not a
-// corroboration. A DeepSeek-only rejection is still the one finding no other lane
-// in the run could have produced.
+// FAMILY WEIGHTING. Terra shares the OpenAI family with the work it screens and
+// with the Step-8 Sol adjudicator. The sole-judge configuration therefore has
+// no cross-family corroboration; a Terra verdict is one independent process
+// reading, not agreement between model families.
 //
 // WHAT IS NOT MEASURED HERE. No injection test has been run against an Opus judge
 // lane at this prompt. The standing rule at the top of this file applies and has
@@ -263,7 +245,7 @@ if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);
   process.exit(2);
 }
-// A normal invocation is always the paired comparison. `--model` is reserved
+// A normal invocation uses every model in the configured set. `--model` is reserved
 // for a targeted replay of exactly one incomplete/changed model verdict; the
 // retained `--parallel` spelling is an explicit no-op alias for the default.
 const models = opts.model ? [opts.model] : lineup;
@@ -908,13 +890,10 @@ const sys = refuterSys;
 const buildUserPrompt = () => "Audit this library item. Return only the JSON verdict. Do not read files or call tools: the supplied context is authoritative.\n\n---\n" + body + citedContext(body) + pageContext(body)
   + '\n\n---\nEND OF CONTEXT. Reply now with the verdict as a single minified JSON object and nothing else — {"keep":true|false,"reason":"..."} — the first character of your reply must be `{`. Do not precede or follow it with any prose.';
 
-// Build the entire prompt ONCE before either request starts. Context assembly
-// de-duplicates page and cited-item blocks with `shownIds`, so assembling it
-// inside each parallel call would give the second model a different prompt.
+// Build the entire prompt ONCE before any request starts. Context assembly
+// de-duplicates page and cited-item blocks with `shownIds`.
 const userPrompt = buildUserPrompt();
-// This exact payload, byte for byte, is the sole model-visible audit prompt for
-// both providers. Their provider envelopes necessarily differ, but neither gets
-// a model-specific system prompt, context block, or verdict from the other.
+// This exact payload, byte for byte, is the sole model-visible audit prompt.
 const frozenPrompt = sys + "\n\n=== AUDIT MATERIAL ===\n" + userPrompt;
 const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
 
@@ -933,7 +912,7 @@ const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
 // changed" from "a sibling on the same page changed".
 //
 // AUDIT-WORKFLOW.md and CLAUDE.md already state the rule this restores — audit
-// A8 "re-runs both judges only on what changed", with an item SHA-256 "so the
+// A8 re-runs the configured judge only on what changed, with an item SHA-256 "so the
 // stamp itself and a later unrelated companion-page edit cannot stale it". The
 // field was simply never written, so the gate had nothing to honour it with.
 //
@@ -1336,7 +1315,7 @@ for (const verdict of verdicts) {
 }
 if (verdicts.some((verdict) => verdict.payment)) {
   console.error("[judge] ACCOUNT CANNOT PAY — stopping. This is terminal: no retry will succeed and this is not a verdict about the proof.");
-  console.error("[judge] Needs an owner top-up. Run `tsx tools/judge.mts --preflight --parallel` to confirm both judges before restarting a paired sweep.");
+  console.error("[judge] Needs an owner top-up. Run `tsx tools/judge.mts --preflight` to confirm the configured judge before restarting the sweep.");
   process.exit(PAYMENT_EXIT);
 }
 if (verdicts.some((verdict) => verdict.retry)) {

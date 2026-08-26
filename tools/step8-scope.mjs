@@ -169,6 +169,12 @@ function buildIndex(groups) {
  *  without a boolean `keep` is not a rejection and is never handed to an
  *  adjudicator. */
 function openRejections() {
+  // `7-scope` deliberately renders this partition before the judge sweep so
+  // the group readers can start alongside it. At that point no judge ledger
+  // exists yet, and the honest rejection set is empty. Once `7-judge` has
+  // written the ledger, the later `8-scope` render takes the strict path below
+  // and partitions every recorded rejection.
+  if (!existsSync(judgePath)) return [];
   const evidence = loadStep8JudgeEvidence(judgePath, adjPath);
   if (evidence.errors.length) fail(evidence.errors.join('\n'));
   const answered = new Set(evidence.answers.keys());
@@ -597,7 +603,7 @@ if (mode === 'digests') {
 // ---- published ---------------------------------------------------------------
 
 // A step-8 Alpha that finds a falsehood in a PUBLISHED item repairs it and routes
-// the repaired item to BOTH judge lanes (owner, 2026-08-25). This gate is what
+// the repaired item to every currently configured judge. This gate is what
 // makes the second half real: without it, a repair to live content ships on one
 // agent's say-so, and published content has no step-6 reader left to certify it.
 //
@@ -647,7 +653,7 @@ if (mode === 'published') {
     if (!existsSync(p)) { bad.push(`repaired row names \`${r.id}\`, which is not an item on disk`); continue; }
     const now = currentHashes.get(r.id);
     if (!now) continue;
-    // Use the same currency predicate and same-context paired shape as
+    // Use the same currency predicate and same-context configured-model shape as
     // level-coverage. Published items are outside the run manifests, so the
     // run-scoped closure receipt cannot perform this check for us.
     const byContext = new Map();
@@ -663,7 +669,7 @@ if (mode === 'published') {
       currentModels.every((model) => byModel.has(model)
         && verdictIsCurrent({ context_sha256: context, item_sha256: byModel.get(model).item_sha256 }, now)));
     if (!eligible.length) {
-      bad.push(`\`${r.id}\` was repaired but lacks a current verdict pair from ${currentModels.join(' + ')} — `
+      bad.push(`\`${r.id}\` was repaired but lacks a current verdict from ${currentModels.join(' + ')} — `
         + 'historic or retired-lane rows do not certify the repaired text');
       pending.needs_rejudge.push(r.id);
       continue;
@@ -695,7 +701,7 @@ if (mode === 'published') {
     for (const b of bad) console.error(`  ${b}`);
     process.exit(1);
   }
-  console.log(`step8-scope --published: ${repaired.length} published item(s) repaired and judged by both lanes, `
+  console.log(`step8-scope --published: ${repaired.length} published item(s) repaired and judged by the configured model set, `
     + `${escalated.length} escalated, ${rows.length} row(s) checked`);
   process.exit(0);
 }
@@ -764,7 +770,12 @@ for (const o of orphans) problems.push(`rejection ${o.id} (${o.model}) belongs t
 const alertReceipt = collectAlerts(groups, index);
 problems.push(...alertReceipt.problems);
 const alertById = new Map(alertReceipt.alerts.map((alert) => [alert.alert_id, alert]));
-const evidence = loadStep8JudgeEvidence(judgePath, adjPath);
+// The same checker closes both renders. During `7-scope` the ledger does not
+// exist yet, so there cannot be a judge-backed cross-group alert to validate.
+// `8-scope` runs after the sweep and takes the strict evidence path.
+const evidence = existsSync(judgePath)
+  ? loadStep8JudgeEvidence(judgePath, adjPath)
+  : { errors: [], answers: new Map(), rejections: new Map() };
 problems.push(...evidence.errors);
 for (const alert of alertReceipt.alerts.filter((entry) => entry.source === 'step8-rejection')) {
   const source = evidence.rejections.get(rejectionKey(alert.source_rejection))?.row;

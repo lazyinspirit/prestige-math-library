@@ -28,18 +28,16 @@ function fixture() {
   writeFileSync(join(root, 'research', 'demo-publication-readiness.json'), JSON.stringify({ run: 'demo',
     verdict: 'publishable-pending-owner-approval', workflow_owned_blockers: [], content_sha256: 'content',
     owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'] }));
-  writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({ judge_lineup: 'deepseek+terra', closed: true,
-    scope: 1, pairs_complete: 1, needs_rejudge: [], unadjudicated: [], open_fatal: [] }));
+  writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({ judge_lineup: 'terra', closed: true,
+    scope: 1, verdicts_complete: 1, needs_rejudge: [], unadjudicated: [], open_fatal: [] }));
   writeFileSync(join(root, 'research', 'demo-pathway-closure.json'), JSON.stringify({ briefs: [
     { category: 'analysis', status: 'closed', disposition: 'rewritten' },
   ] }));
   writeFileSync(join(root, 'research', 'demo-touches.json'), JSON.stringify({ snapshots: [
     { label: 'a', hashes: { 'thm-a': 'a' } }, { label: 'b', hashes: { 'thm-a': 'b' } }, { label: 'c', hashes: { 'thm-a': 'c' } },
   ] }));
-  writeFileSync(join(root, 'research', 'demo-judge.jsonl'), [
-    JSON.stringify({ id: 'thm-a', model: 'deepseek-v4-pro', context_sha256: 'ctx', item_sha256: 'item', keep: true }),
-    JSON.stringify({ id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'ctx', item_sha256: 'item', keep: true }),
-  ].join('\n') + '\n');
+  writeFileSync(join(root, 'research', 'demo-judge.jsonl'),
+    `${JSON.stringify({ id: 'thm-a', model: 'gpt-5.6-terra', context_sha256: 'ctx', item_sha256: 'item', keep: true })}\n`);
   writeFileSync(join(root, 'research', 'demo-judge-adjudications.jsonl'), '');
   writeFileSync(join(root, 'research', 'demo-judge-context-hashes.json'), JSON.stringify({ cached: 'before' }));
   writeFileSync(join(root, 'research', 'defect-ledger.jsonl'), [
@@ -58,7 +56,8 @@ test('Step 10 mechanically reconciles and renders every fatal row', () => {
     assert.equal(result.status, 0, result.stderr);
     const evidence = JSON.parse(readFileSync(join(root, 'research', 'demo-step10-evidence.json'), 'utf8'));
     assert.equal(evidence.defects.fatal_count, 2);
-    assert.equal(evidence.judges.pair_stats.agreed_keep, 1);
+    assert.equal(evidence.judges.configured_set_stats.complete_versions, 1);
+    assert.equal(evidence.judges.configured_set_stats.all_keep, 1);
     assert.deepEqual(evidence.repeated_repairs, [{ id: 'thm-a', repairs: 2 }]);
     result = runTool(root, 'check-evidence');
     assert.equal(result.status, 0, result.stderr);

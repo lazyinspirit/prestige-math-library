@@ -56,9 +56,9 @@ const judgeOnly = argv.includes('--judge-only');
 // the expected state there, not a defect. It is a hard error everywhere else.
 const allowUnadjudicated = argv.includes('--allow-unadjudicated');
 // Step 8 repairs items, and a repaired item's text no longer matches the verdict
-// that condemned it — so it correctly has no current pair. That is the rejudge
+// that condemned it — so it correctly has no current configured-model set. That is the rejudge
 // stage's input, not step 8's failure. Allowed only there; by the rejudge gate
-// and every gate after it, an item with no current pair is a hole.
+// and every gate after it, an item with no current configured-model set is a hole.
 const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
@@ -85,11 +85,11 @@ const terminalParsed = parseTerminalResolutions(
 );
 for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+opus (owner, 2026-08-23), and the published-page audit
-// (AUDIT-WORKFLOW.md) verifies the same pairs on the current frozen context.
+// default is Terra alone (owner, 2026-08-26), and the published-page audit
+// (AUDIT-WORKFLOW.md) verifies the same configured set on current frozen context.
 // Rows from a retired lane remain evidence only and never satisfy coverage —
 // which matters more after a lane change than at any other time, because a
-// level judged under deepseek+terra reads as fully covered until this map is
+// level judged under a retired model set reads as fully covered until this map is
 // consulted. Coverage is per frozen context AND per configured lane.
 // The map is tools/models.mjs; this tool no longer keeps its own copy.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;
@@ -100,7 +100,7 @@ if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LI
 // backbone is a genrisk finding to disposition, not an instant gate failure —
 // the future-batch prohibition cannot be applied retroactively without either
 // blocking every wave on history or inviting dishonest retagging. Everything
-// else (provenance coverage, contracts, receipts, judge pairs) stays hard.
+// else (provenance coverage, contracts, receipts, configured-judge coverage) stays hard.
 const auditMode = argv.includes('--audit');
 if (judgeTargetsPath && !auditMode) {
   console.error('--judge-targets is reserved for the published-page audit');
@@ -454,20 +454,20 @@ if (verifyCurrent && judgePath) {
 //       The proof the judge read is the proof on disk; only a neighbour moved.
 //
 // (b) is not a relaxation invented here. AUDIT-WORKFLOW.md §9 and CLAUDE.md
-// already require audit A8 to "re-run both judges ONLY ON WHAT CHANGED", with an
+// already require audit A8 to re-run the configured judge only on what changed, with an
 // item SHA-256 recorded "so the stamp itself and a later unrelated companion-page
 // edit cannot stale it". The field simply was never written to the ledger, so
 // this gate had nothing to honour the rule with. judge.mts now records it.
 //
 // In published-audit mode with --judge-targets, this loop is deliberately the
 // exact repair set rather than the whole manifest. A2/A6 provide whole-wave
-// reading coverage; A7 supplies paired REJUDGE evidence only for actual repairs.
+// reading coverage; A7 supplies current rejudge evidence only for actual repairs.
 // Legacy rows predating item_sha256 fall back to (a) alone, which is strict.
 // The three closure sets, named so a later stage can act on them mechanically.
 // frontier-14's step 8 named its 23 rejudge targets in a markdown table, and the
 // rejudge never ran: nothing downstream could read a table. A machine-readable
 // receipt is what turns "these need rejudging" into a dispatch.
-const needsRejudge = [];      // no current verdict pair — repaired, or never judged
+const needsRejudge = [];      // no current configured-model verdict — repaired, or never judged
 const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
 const unadjudicatedRows = []; // exact (id, model, context) work units for Step 8
 const openFatal = [];         // Alpha confirmed fatal against the text on disk
@@ -519,13 +519,13 @@ for (const id of judgePath ? judgeScope : []) {
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
   if (!eligible.length) {
     needsRejudge.push(id);
-    (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context, and none cast against the item\'s current text' : ''}`, id);
+    (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete verdict set from ${JUDGES.join('/')} ${verifyCurrent ? 'for the current frozen context, and none cast against the item\'s current text' : ''}`.trim(), id);
     continue;
   }
   eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
   const [hash, byModel] = eligible[0];
   const models = Object.fromEntries(JUDGES.map((model) => [model, byModel.get(model).keep]));
-  // A paired run is coverage, not unchecked clearance.  Each current rejection
+  // A judge run is coverage, not unchecked clearance. Each current rejection
   // must either be independently classified by Alpha as nonfatal/false-positive
   // or be repaired and rejudged.  Confirmed fatal and unadjudicated rejections
   // remain hard stops; this preserves the fatal-error gate while honoring the
@@ -555,7 +555,7 @@ for (const id of judgePath ? judgeScope : []) {
   judgeCoverage.push({ id, context_sha256: hash, models });
 }
 
-const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_pairs: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
+const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
 const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
 
 // The closure receipt. Written whether or not the gate passes — a failing gate
@@ -567,6 +567,8 @@ if (outPath) {
     judge_lineup: lineupName,
     verified_against_current_context: verifyCurrent,
     scope: judgeScope.length,
+    verdicts_complete: judgeCoverage.length,
+    // Legacy field retained while historical Step-10 receipts remain readable.
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     needs_rejudge: needsRejudge.sort(),
@@ -588,11 +590,17 @@ else {
   if (templatePath) console.log(`level-coverage: wrote audit receipt template ${templatePath}`);
   if (judgeOnly) {
     const closedRejections = warnings.filter((entry) => entry.code === 'judge-verdict-adjudicated-nonfatal').length;
-    console.log(`level-coverage --judge-only: ${summary.judge_pairs}/${summary.judge_scope} current pair(s); `
+    console.log(`level-coverage --judge-only: ${summary.judge_complete}/${summary.judge_scope} current configured-judge verdict set(s); `
       + `${terminalResolved.length} terminal manual resolution(s), ${needsRejudge.length} need rejudge, `
       + `${unadjudicated.length} unadjudicated, ${openFatal.length} open fatal, `
-      + `${closedRejections} adjudicated rejection(s) closed nonfatally`);
-  } else console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs}/${summary.judge_scope} required judge pair(s)`);
+      + `${closedRejections} adjudicated rejection(s) closed nonfatally; `
+      // Compatibility for the live engine's pre-singleton-lineup liveness
+      // pattern. Here "pair" is only the historical counter name for one
+      // item's complete configured verdict set; the authoritative wording and
+      // cardinality are the configured-judge set printed first.
+      + `legacy gate counter ${summary.judge_complete}/${summary.judge_scope} current pairs `
+      + `(one per-item configured verdict set, including singleton lineups)`);
+  } else console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_complete}/${summary.judge_scope} required configured-judge verdict set(s)`);
   // Judge closure commonly has hundreds of expected nonfatal/false-positive
   // decisions. The append-only adjudication ledger is their evidence and JSON
   // mode still returns every row; repeating them as hundreds of console lines

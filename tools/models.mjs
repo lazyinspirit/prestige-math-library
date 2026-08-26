@@ -144,16 +144,16 @@ export const LANES = Object.freeze({
 });
 
 // ---------------------------------------------------------------------------
-// JUDGE LINEUPS — the paired skeptical judges.
+// JUDGE LINEUPS — the configured skeptical judge set.
 //
-// ALL THREE KEYS STAY, always. A table carrying only today's answer is this
-// repo's oldest defect class; deepseek+opus (2026-08-23) is the fourth lane
-// change in five weeks. Rows from an unselected lane remain append-only
-// evidence and never satisfy current coverage, which is per frozen context AND
-// per configured lane — so a level judged under deepseek+terra is not judged
-// now, and this map is what says so.
+// Retired paired keys stay so historical ledger rows remain interpretable. The
+// active `terra` key is deliberately one model: owner, 2026-08-26, removed
+// DeepSeek from Step 7 and made GPT-5.6 Terra the sole judge through close-out.
+// Rows from an unselected lineup remain append-only evidence and never satisfy
+// current coverage, which is per frozen context AND per configured model set.
 // ---------------------------------------------------------------------------
 export const JUDGE_LINEUPS = Object.freeze({
+  terra: Object.freeze([MODELS.terra.id]),
   'deepseek+gpt54': Object.freeze([MODELS.deepseek.id, MODELS.gpt54.id]),
   'deepseek+opus': Object.freeze([MODELS.deepseek.id, MODELS.opus.id]),
   'deepseek+terra': Object.freeze([MODELS.deepseek.id, MODELS.terra.id]),
@@ -165,7 +165,7 @@ export const JUDGE_LINEUPS = Object.freeze({
  * derived, never hand-kept.
  *
  * This is the answer to "is this a judge model at all", which is a DIFFERENT
- * question from "is this one of today's two lanes". Coverage asks the second and
+ * question from "is this one of today's configured judges". Coverage asks the second and
  * must use `JUDGE_LINEUPS[lineupName]`; a SHAPE check asks the first, because a
  * retired lane's rows are append-only evidence the ledgers still have to be able
  * to represent.
@@ -182,42 +182,24 @@ export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUP
 
 /** The build and audit default.
  *
- * Owner, 2026-08-25: claude-sonnet-4-6 -> gpt-5.6-terra on the second judge
- * lane, at `xhigh` — which `runFreshCodex` already sends, along with the
- * explicit 1M window, so the transport needs no change. The DeepSeek lane is
- * unchanged and its verdicts stay current across this switch.
- *
- * TWO PROPERTIES THIS GIVES UP, recorded so neither is rediscovered as a
- * surprise rather than a choice:
- *
- * 1. CROSS-FAMILY INDEPENDENCE ON BOTH LANES. Terra is openai, and so is every
- *    agent role (gpt-5.4), the partition lane (gpt-5.6-luna) and the step-8
- *    adjudicator (gpt-5.6-sol). So the second judge again shares a family with
- *    the work it screens AND with the Alpha that adjudicates its rejections,
- *    which is the arrangement every lineup before 2026-08-24 had. Under it,
- *    only a DeepSeek-only rejection is structurally independent evidence.
- *    Same-family agreement is not corroboration — that rule exists precisely
- *    for this configuration and is now load-bearing again.
- *
- * 2. THE QUOTA SPLIT. Both judge lanes and all twelve Beta lanes are back on
- *    one Codex weekly cap. A judge sweep now competes with authoring for the
- *    same account, which is the shape that stalled frontier-17 at 6/9 group
- *    Alphas. Lower a lane with JUDGE_CONCURRENCY_GPT_5_6_TERRA rather than
- *    re-spending the loop if calls start refusing.
- *
- * COVERAGE CONSEQUENCE. Coverage is per frozen context AND per configured
- * lane, so the 116 claude-sonnet-4-6 verdicts already in frontier-18's ledger
- * become append-only evidence that satisfies nothing: every A page needs a
- * fresh terra verdict. The DeepSeek rows are untouched. */
-export const DEFAULT_LINEUP = 'deepseek+terra';
+ * Owner, 2026-08-26: remove DeepSeek from Step 7; GPT-5.6 Terra at `xhigh`
+ * remains the sole judge model. This applies to initial coverage, Step-8
+ * adjudication/rejudge closure, stamps, Step 9, and Step 10 evidence. Historical
+ * DeepSeek rows remain append-only evidence but satisfy no current obligation.
+ * Terra shares the OpenAI family with most work it screens and with the Sol
+ * Step-8 adjudicator, so this configuration provides no cross-family judge
+ * corroboration. The sweep now draws only on the Codex account; lower
+ * JUDGE_CONCURRENCY_GPT_5_6_TERRA rather than re-spending null calls. */
+export const DEFAULT_LINEUP = 'terra';
 
 /**
- * Resolve `JUDGE_LINEUP` to its two model ids.
+ * Resolve `JUDGE_LINEUP` to its configured model ids.
  *
  * Every caller used to inline this three-line dance and one of them fell a lane
  * change behind. Callers that must fail hard pass their own `onError`; the
  * default throws, because silently judging with the wrong pair is worse than
- * stopping.
+ * stopping. A lineup may contain one or more models; callers must never assume
+ * a pair.
  *
  * @param {string} [name] lineup key; defaults to $JUDGE_LINEUP then DEFAULT_LINEUP
  * @returns {{name: string, models: readonly string[]}}

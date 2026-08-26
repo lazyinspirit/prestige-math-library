@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// apply-judge-stamps.mjs — write `verification.judge` from a paired verdict
+// apply-judge-stamps.mjs — write `verification.judge` from configured verdicts
 // ledger, for the text CURRENTLY on disk.
 //
 //   node tools/apply-judge-stamps.mjs --ledger research/audit/wave0-judge.jsonl \
@@ -10,7 +10,7 @@
 // ledger licenses — and no pass block the current verdicts contradict. At
 // closure `level-coverage --verify-current-context` has already passed, so an
 // item with NO current verdict here is a currency defect, never a normal case.
-// WHY A GATE: frontier-15 closed 398/398 pairs in the ledger while 0 of 398
+// WHY A GATE: frontier-15 closed 398/398 items in the ledger while 0 of 398
 // items carried the stamp — no stage owned the stamping act, every closure gate
 // read the ledger, and the owner did the stamping by hand on the VPS
 // (2026-08-17). A `lane-rejected` item is the one honest skip: an adjudication
@@ -18,7 +18,7 @@
 //
 // Published-page audit A8 has one deliberately narrower route:
 //
-//   JUDGE_LINEUP=deepseek+opus node tools/apply-judge-stamps.mjs \
+//   JUDGE_LINEUP=terra node tools/apply-judge-stamps.mjs \
 //     --ledger research/audit/wave<k>-judge.jsonl \
 //     --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json \
 //     [--apply] [--report out.json]
@@ -28,14 +28,14 @@
 // WHY THIS EXISTS. A sweep records verdicts in its ledger; nothing carried them
 // into the items. After wave 0 that left 197 audited items still advertising a
 // judge pass from their ORIGINAL publication lineup (glm-5.2 / gpt-5.4, July
-// 2026) while the audit's own paired screen had produced fresh verdicts nobody
+// 2026) while the audit's fresh screen had produced verdicts nobody
 // could see on the page.
 //
 // THE HONESTY RULE IT ENFORCES (SCHEMA §verification, CLAUDE.md): record a
-// paired pass ONLY when BOTH current lanes actually returned keep=true, on the
+// pass ONLY when every currently configured judge returned keep=true, on the
 // item's CURRENT frozen context hash. Concretely:
 //
-//   * both lanes keep=true on the current hash  -> write/overwrite the block
+//   * every configured judge keeps current text -> write/overwrite the block
 //   * anything else (a rejection, a null, a verdict against a stale hash,
 //     a missing lane)                           -> LEAVE THE ITEM ALONE and
 //                                                  report it
@@ -135,7 +135,7 @@ const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((l
 // change cannot desynchronise this file again. It had drifted: only
 // deepseek+terra existed here after the owner moved the build to
 // deepseek+sonnet (2026-08-17), so the current lineup could not be stamped at
-// all. ALL THREE keys are kept for exactly that reason — deepseek+opus
+// all. Historical keys are kept for exactly that reason — deepseek+opus
 // (2026-08-23) is the fourth lane change in five weeks, and a table that carries
 // only today's answer is the defect, not the fix.
 // The map is tools/models.mjs; this tool no longer keeps its own copy.
@@ -147,9 +147,9 @@ if (!expected) {
 }
 // A ledger a retired lane also wrote into is the normal case, not an error: rows
 // from a retired lineup stay append-only evidence and never satisfy current
-// coverage (CLAUDE.md §"Paired skeptical judges"). Stamp from the lineup's own
-// two lanes and ignore every other lane's rows; a lane the ledger never wrote at
-// all is still a hard error, since then nothing here judged anything.
+// coverage (CLAUDE.md §"Skeptical judge"). Stamp from the lineup's own
+// configured models and ignore every other model's rows; a configured model the
+// ledger never wrote at all is still a hard error, since then nothing here judged anything.
 const models = [...expected];
 const ledgerLanes = new Set(rows.map((r) => r.model));
 const absent = models.filter((m) => !ledgerLanes.has(m));
@@ -168,13 +168,19 @@ const contextHash = (id) => {
 };
 
 // Replace an existing `  judge:` block (a mapping nested under `verification:`)
-// or insert one directly after the `  precheck:` line. Frontmatter only; the
-// mathematical body is never touched.
+// or insert one directly after the `  precheck:` line. Definitions with no
+// precheck legitimately have no `verification:` mapping at all; create that
+// mapping immediately before `sources:` instead of silently skipping a licensed
+// pass. Frontmatter only; the mathematical body is never touched.
 const writeBlock = (text, block) => {
   const existing = /^ {2}judge:\n(?: {4}.*\n)*/m;
   if (existing.test(text)) return text.replace(existing, block);
   const precheck = /^( {2}precheck: .*\n)/m;
   if (precheck.test(text)) return text.replace(precheck, `$1${block}`);
+  const verification = /^verification:\n/m;
+  if (verification.test(text)) return text.replace(verification, `$&${block}`);
+  const sources = /^sources:\n/m;
+  if (sources.test(text)) return text.replace(sources, `verification:\n${block}sources:\n`);
   return null;
 };
 
@@ -272,8 +278,8 @@ for (const id of ids) {
       context: pairContext ??= (target ? target.context_sha256 : contextHash(id)),
       item: itemNow,
     });
-  // Grouped by context hash, as the gate does, so both lanes' verdicts come from
-  // one judging of one pair rather than being assembled across two.
+  // Grouped by context hash, as the gate does, so every configured verdict comes
+  // from one judging of one pair rather than being assembled across contexts.
   const groups = new Map();
   for (const r of rows) {
     if (r.id !== id || !models.includes(r.model) || typeof r.keep !== 'boolean') continue;
@@ -286,7 +292,7 @@ for (const id of ids) {
   if (!eligible.length) {
     const seen = [...groups.values()].flatMap((byModel) => [...byModel.keys()]);
     result.skipped.push({ id, reason: 'no-current-verdict', models: models.filter((m) => !seen.includes(m)) });
-    problems.push(`${id}: no current paired verdict — at closure this is a currency defect, not a normal case`);
+    problems.push(`${id}: no current configured-judge verdict — at closure this is a currency defect, not a normal case`);
     continue;
   }
   const verdicts = models.map((model) => ({ model, row: eligible[eligible.length - 1][1].get(model) }));
@@ -305,7 +311,7 @@ for (const id of ids) {
 
   if (verify) {
     const missing = !hasCurrentPassBlock(text);
-    if (missing) problems.push(`${id}: the ledger licenses a paired pass the frontmatter does not carry`);
+    if (missing) problems.push(`${id}: the ledger licenses a judge pass the frontmatter does not carry`);
     result.stamped.push({ id, changed: missing });
     continue;
   }

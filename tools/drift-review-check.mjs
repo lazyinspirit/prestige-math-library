@@ -92,6 +92,24 @@ if (!existsSync(reportPath)) {
 }
 const text = readFileSync(reportPath, 'utf8');
 
+// A minted/rescoped pair enters the run only *after* this Alpha review has
+// completed. Requiring it to have its own report section turns a successful
+// materialisation into an impossible gate: the Alpha cannot review a pair that
+// was not in its task, while drift-apply correctly adds it to the scope ledger.
+// Its naming verdict is the review evidence for that pair; the ordinary
+// per-page section requirement applies to the scope the Alpha was given.
+const mintedOrRescoped = new Set();
+const reportHeadings = [...text.matchAll(/^###\s+`?([a-z0-9][a-z0-9-]*)`?\s*$/gm)];
+for (const [i, heading] of reportHeadings.entries()) {
+  const body = text.slice(heading.index + heading[0].length, reportHeadings[i + 1]?.index ?? text.length);
+  const verdict = /^VERDICT:\s*(drift-minted|drift-rescoped)\b[ —-]*(.*)$/m.exec(body);
+  if (!verdict) continue;
+  for (const id of verdict[2].matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*[0-9.]+\)/g)) {
+    mintedOrRescoped.add(id[1]);
+  }
+}
+const reviewedOwed = owed.filter((id) => !mintedOrRescoped.has(id));
+
 // What a `requires` edge may point at: a page a reader can already open, or one
 // this run is building. Anything else leaves the citing page unbuildable.
 const specPath = 'research/plan-spec.json';
@@ -148,7 +166,7 @@ for (const id of owed) {
   }
 }
 
-for (const id of owed) {
+for (const id of reviewedOwed) {
   const esc = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const head = text.match(new RegExp(`^###\\s+\`?${esc}\`?\\s*$`, 'm'));
   if (!head) { errors.push(`drift-check-missing-page: no \`### ${id}\` section in the report`); continue; }
@@ -235,5 +253,5 @@ if (errors.length) {
   for (const e of errors) console.error(`ERROR ${e}`);
   process.exit(1);
 }
-console.log(`drift-review-check: ${owed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
+console.log(`drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
   + `${edgesChecked} requires edge(s) checked, every one published or built by this run`);

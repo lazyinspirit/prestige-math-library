@@ -1,4 +1,4 @@
-# Step 8 — fatal-only adjudication of the paired-judge verdicts, run `{{run}}`
+# Step 8 — fatal-only adjudication of configured-judge verdicts, run `{{run}}`
 
 You are a **group Alpha**. Step 8 is partitioned: each group Alpha adjudicates
 the rejections against items in its own batches, and no rejection belongs to
@@ -77,7 +77,7 @@ name a real rejection of the target plus an exact `confirmed_fatal`
 adjudication. `confirmed_fatal_unlicensed` blocks and causes the engine to seek
 a targeted judge verdict; it never licenses an edit by itself.
 
-### A defect in a PUBLISHED item: repair it, then send it to both judges
+### A defect in a PUBLISHED item: repair it, then send it to Terra
 
 Published pages are live on the site. If a rejection you are adjudicating exposes
 an unambiguous falsehood in a published item — a false Definition, Statement,
@@ -103,8 +103,8 @@ before your edit (`tools/item-hash.mjs` `itemHashGuard`, whole `verification:`
 block excluded); without it the row licenses nothing and `step8-guard` reads your
 edit as an unlicensed one.
 
-**Then it goes to both judge lanes.** `8-rejudge` sweeps every id in that ledger,
-and `tools/step8-scope.mjs published` fails the stage until both lanes have
+**Then it goes to Terra.** `8-rejudge` sweeps every id in that ledger,
+and `tools/step8-scope.mjs published` fails the stage until Terra has
 returned a verdict on the repaired text and any rejection has been adjudicated.
 This is the certification: published content has no step-6 reader left to certify
 it, and no author certifies its own repair.
@@ -124,15 +124,12 @@ and stop. An escalation is a correct action by the Alpha but a hard workflow
 blocker until the owner resolves it; known unresolved published falsehoods do
 not advance. Improvising on published mathematics is not allowed.
 
-## Read the lanes for what each one is
+## Read the verdict for what it is
 
-The two lanes are **not** independent corroboration of each other in the way a
-count of agreements suggests. Terra shares the GPT family with the Betas that
-authored this text and with you. DeepSeek is the only cross-family reader in
-the run. A DeepSeek-only rejection is the one finding no other lane here could
-have produced; give it the weight its isolation earns, and give a Terra
-rejection you are inclined to call `false_positive` an extra pass, because that
-verdict is two same-family reads agreeing.
+Terra is the sole Step-7 judge and shares the OpenAI family with the Betas that
+authored this text and with you. Its verdict is one fresh-process reading, not
+cross-family corroboration. Adjudicate every rejection from disk on its evidence;
+do not inflate or discount it as agreement between independent model families.
 
 A capacity refusal is a **null verdict, not a verdict**. Never adjudicate one.
 

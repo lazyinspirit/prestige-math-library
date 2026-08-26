@@ -149,7 +149,7 @@ current-context rejections for those ids. Rows outside that list can exist when
 an operator stopped an obsolete full-wave attempt; preserve them as attempt
 evidence, but do not adjudicate them, edit their items, or let them expand A8.
 
-A rejection from **either** judge now lands on text that has cleared the step-6
+A Terra rejection now lands on text that has cleared the step-6
 audit, so Alpha-n adjudicates it from disk. **Adjudicate, do not
 comply.** Each rejection gets either a fix, with the defect named, or a
 refutation, with a verbatim quote from the cited item. Append a per-model,
@@ -158,7 +158,7 @@ step 10 can separate confirmed fatal logic/dependency-citation detections from
 nonfatal findings and false positives. Every row also carries `item_sha256`, the
 full sha256 of the normalized item text (its `verification:` block removed) as it
 stood when you adjudicated. Then delete
-`verification.judge` on anything materially rewritten and re-run both judges
+`verification.judge` on anything materially rewritten and re-run Terra
 only on what changed.
 
 **A8 is fatal-only (R1, owner 2026-08-03) — now enforced, not only written.**
@@ -178,8 +178,8 @@ repairs are uncapped.
 
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
 the audit receipt and repeat the final `level-coverage.mjs
---verify-current-context` gate after its targeted paired rejudge. A stale
-receipt or pair of ledger rows is not publication evidence.
+--verify-current-context` gate after its targeted Terra rejudge. A stale
+receipt or stale ledger row is not publication evidence.
 
 > **REPORT EXACTLY WHICH ITEMS YOU EDITED — that list IS the rejudge set**
 > (owner, 2026-08-06). Only items whose own text you changed are rejudged. Their
@@ -197,7 +197,7 @@ receipt or pair of ledger rows is not publication evidence.
 > costs another.
 >
 > This does not soften what a repair means. A repaired proof is always rejudged
-> by both lanes before it can be stamped. What is spared is only the sibling you
+> by Terra before it can be stamped. What is spared is only the sibling you
 > did not touch.
 
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.

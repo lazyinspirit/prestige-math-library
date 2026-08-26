@@ -285,7 +285,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
     '--touches', join(ctx.repo, touchesPath(ctx)),
     '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
     '--refresh-receipt', R(ctx, 'research', `${ctx.run}-impact.json`)],
-  // the paired ledger licenses stamps the frontmatter does not carry ->
+  // the configured-judge ledger licenses stamps the frontmatter does not carry ->
   // write them (and strip any pass block a current rejection contradicts).
   // Stamping is a disk function of the ledger plus the current item text;
   // the residue — an item no current verdict covers at closure — survives as
@@ -941,6 +941,23 @@ function fatalAdjudicationCounts(ctx): Map<string, number> {
   return new Map([...contexts].map(([id, rows]) => [id, rows.size]));
 }
 
+/** Durable Step-8 judge-cycle counts.  The receipt, not the stage-wide repair
+ * counter, owns the two-context lifetime ceiling for each item. */
+function rejudgeCycleCounts(ctx): Map<string, number> {
+  const p = R(ctx, `research/${ctx.run}-step8-rejudge-cycles.json`);
+  const counts = new Map<string, number>();
+  if (!existsSync(p)) return counts;
+  try {
+    const receipt = JSON.parse(readFileSync(p, 'utf8'));
+    for (const cycle of receipt?.cycles ?? []) {
+      for (const id of new Set<string>((cycle?.items ?? []).map(String))) {
+        counts.set(id, (counts.get(id) ?? 0) + 1);
+      }
+    }
+  } catch { /* the cycle wrapper reports a malformed receipt exactly */ }
+  return counts;
+}
+
 /** The group labels that own the given item ids, in assignment order.
  *
  *  Read from `<run>-step8-scope.json`, which `8-scope` renders mechanically
@@ -1036,7 +1053,7 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  * Judge closure — the predicate that says whether the mathematics is signed off.
  *
  * Three questions, all answered against the text on disk right now: does every
- * item have a current verdict pair, is every current rejection adjudicated, and
+ * item have a current configured-judge verdict set, is every current rejection adjudicated, and
  * is any adjudication `confirmed_fatal`. `--out` writes the ids in each class so
  * the rejudge stage has something to dispatch from — frontier-14's step 8 named
  * its 23 rejudge targets in a markdown table and the rejudge never ran, because
@@ -1044,7 +1061,7 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *
  * The allowances are per-stage and narrow:
  *   step 7 — nothing is adjudicated yet, so rejections are expected;
- *   step 8 — repairs legitimately void their own pairs, and the next stage fixes
+ *   step 8 — repairs legitimately void their own verdicts, and the next stage fixes
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
@@ -1800,7 +1817,7 @@ export const stages = [
   // rather than re-spending the loop.
   {
     id: '7-judge',
-    label: 'paired judge sweep, with the group Alphas reading alongside',
+    label: 'Terra judge sweep, with the group Alphas reading alongside',
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
     // a real obligation rather than a best-effort rider.
@@ -1862,7 +1879,7 @@ export const stages = [
       return plans;
     },
     // The sweep exiting zero says the tool ran. It does not say every item got a
-    // verdict from both lanes, and on frontier-14 it did not: the stage cleared
+    // verdict from every configured model, and on frontier-14 it did not: the stage cleared
     // on its own receipt and the level went forward with holes that only surfaced
     // at the very end. Coverage of the LEDGER is the completion condition.
     //
@@ -1974,7 +1991,7 @@ export const stages = [
       // and this passes reporting zero, which is the truth. It only bites once an
       // Alpha has edited published content.
       publishedGate(ctx),
-      // `7-judge` immediately before this stage already proved complete paired
+      // `7-judge` immediately before this stage already proved complete judge
       // coverage and no content-writing stage intervenes. Recomputing all exact
       // context hashes here was the same closure check over the same bytes.
     ],
@@ -2055,7 +2072,7 @@ export const stages = [
       // an outcome — so sixteen rejections on one batch were never read and the
       // stage passed green. This is that direction.
       //
-      // A repaired item correctly has no current verdict pair; `8-rejudge` owns
+      // A repaired item correctly has no current verdict; `8-rejudge` owns
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
       closureGate(ctx, { pendingRejudge: true }),
@@ -2175,7 +2192,7 @@ export const stages = [
 
   // CHECK EVERY LICENSED REPAIR BEFORE BUYING ITS NEW VERDICTS. This is a
   // separate non-judge budget: a stale proof contract, dependency typo or risk
-  // receipt can be repaired without consuming either of Step 8's two judge
+  // receipt can be repaired without consuming another Step-8 judge
   // cycles, and its final text is what the judges then receive.
   {
     id: '8-preflight',
@@ -2311,8 +2328,8 @@ export const stages = [
     gates: (ctx) => [
       step8GuardGate(ctx),
       // The terminal check on the published route: this stage is where the
-      // repaired published items were actually swept, so this is where "both
-      // lanes returned a current verdict" is a statement about work that has
+      // repaired published items were actually swept, so this is where "the
+      // configured judge returned a current verdict" is a statement about work that has
       // happened rather than work that was planned.
       publishedGate(ctx),
       closureGate(ctx),
@@ -2322,8 +2339,14 @@ export const stages = [
     // per item are the lifetime ceiling: after that the blocker is resolved by
     // the owner or supervising session under an exact-hash terminal receipt,
     // never by a third judge cycle.
+    // The two-context ceiling is PER ITEM and is enforced durably by
+    // step8-rejudge-cycle.mjs before it probes or spends a judge call.  Keep
+    // this stage's two-round convergence budget re-armable after a supervising
+    // intervention: one set of exhausted items can otherwise consume the
+    // stage-wide counter and strand different items that still have an unused
+    // legal cycle (frontier-19).  Re-arming the stage cannot buy a third
+    // context for any item because the cycle receipt remains authoritative.
     maxFixRounds: 2,
-    terminalFixBudget: true,
     onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {
       const closure = readClosure(ctx);
       const published = readPublishedClosure(ctx);
@@ -2376,6 +2399,21 @@ export const stages = [
       // certify it is the one being dispatched right here.
       const owed = [...new Set([...(closure?.needs_rejudge ?? []), ...(published?.needs_rejudge ?? [])])];
       if (owed.length) {
+        // A repair makes the condemning verdict stale, so exhausted items appear
+        // in `needs_rejudge` rather than `open_fatal`.  Do not pass them to the
+        // wrapper as part of a mixed batch: it correctly rejects the whole
+        // argv before spending, which used to strand unrelated eligible items.
+        // Name each exhausted item as the intervention blocker and continue
+        // only with ids whose durable per-item budget remains.
+        const cycleCounts = rejudgeCycleCounts(ctx);
+        const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 2);
+        for (const id of exhausted) {
+          const message = `${id}: current repaired text still needs closure after two Step-8 frozen contexts; intervention is required and no third judge cycle is permitted`;
+          if (executor.state?.addBlocker?.(stage.id, message, `step8-two-cycle-owed:${id}`))
+            executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
+        }
+        const liveOwed = owed.filter((id) => !exhausted.includes(id));
+        if (!liveOwed.length) return;
         // The rejudge sweep runs as an ASYNC dispatch, so its outage shows up
         // one round late: if everything the PREVIOUS round's sweep produced was
         // outage-signature nulls, the lane is down — report it rather than
@@ -2392,12 +2430,12 @@ export const stages = [
             '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
-            '--items', owed.join(','), '--kind', 'repair'],
+            '--items', liveOwed.join(','), '--kind', 'repair'],
         });
         return;
       }
 
-      // No contested rows and no missing pairs: a non-closure failure belongs
+      // No contested rows and no missing verdicts: a non-closure failure belongs
       // to 8-preflight/8-close and may not consume this terminal judge budget.
     },
   },
@@ -2730,7 +2768,7 @@ export const stages = [
 
   // Stamp only after every Step-9 closer has finished changing mathematics.
   // The stamp itself is excluded from guarded hashes, so it cannot make its own
-  // paired verdict stale.
+  // judge verdict stale.
   {
     id: '9-changes-stamp',
     label: 'stamp certified Step 9 changes',

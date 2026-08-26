@@ -12,13 +12,18 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
-  audited: 2026-08-16
+  verified:
+    model: gpt-5.4
+    verdict: certify
+    date: 2026-08-26
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "M. Chudnovsky, The Erdos-Hajnal Conjecture: A Survey, sec. 1"
       url: "https://web.math.princeton.edu/~mchudnov/EHsurvey.pdf"
-    - title: "Erdos-Hajnal properties in graphs and hypergraphs, introduction"
+    - title: "Erdős-Hajnal beyond the five-vertex path"
       url: "https://arxiv.org/html/2606.06258v2"
 pipeline_run: null
 ---

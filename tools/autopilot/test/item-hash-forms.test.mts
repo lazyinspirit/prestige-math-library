@@ -36,7 +36,7 @@ verification:
   precheck: pass
   audited: 2026-08-01
   judge:
-    lineup: deepseek+terra
+    lineup: terra
     at: 2026-08-02
 ---
 
@@ -64,6 +64,21 @@ test('the guard form ignores every verification field; the judge form ignores on
   const restamped = ITEM.replace('    at: 2026-08-02', '    at: 2026-11-11');
   assert.equal(itemHashJudge(restamped), itemHashJudge(ITEM),
     'stamping a pass must not invalidate the pass it records');
+});
+
+test('a first judge stamp and its otherwise-empty verification parent are both hash-neutral', () => {
+  const withoutVerification = ITEM.replace(
+    /verification:\n  precheck: pass\n  audited: 2026-08-01\n  judge:\n    lineup: terra\n    at: 2026-08-02\n/,
+    'sources:\n  references: []\n',
+  );
+  const stamped = withoutVerification.replace(
+    'sources:\n',
+    'verification:\n  judge:\n    lineup: terra\n    at: 2026-08-02\nsources:\n',
+  );
+  assert.equal(itemHashJudge(stamped), itemHashJudge(withoutVerification),
+    'creating the verification container for a first stamp must preserve verdict currency');
+  assert.doesNotMatch(stripJudgeStamp(stamped), /^verification:$/m,
+    'the empty parent left by stripping the stamp must also be removed');
 });
 
 test('both forms bind the mathematics, in frontmatter as well as the body', () => {

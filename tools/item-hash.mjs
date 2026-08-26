@@ -50,9 +50,14 @@ export const stripVerification = (text) => {
   return fm + "\n---\n" + m[2];
 };
 
-/** Strip only the two-space-indented `judge:` sub-block of `verification:`. */
+/** Strip only the two-space-indented `judge:` sub-block of `verification:`.
+ * If the stamp was the mapping's only child, strip its now-empty parent too:
+ * adding a first judge stamp to a definition must not invalidate the verdict
+ * that licenses the stamp. Other verification evidence remains in scope. */
 export const stripJudgeStamp = (text) =>
-  String(text).replace(/^ {2}judge:\n(?: {4}.*\n)*/m, "");
+  String(text)
+    .replace(/^ {2}judge:\n(?: {4}.*\n)*/m, "")
+    .replace(/^verification:\n(?=^(?:---|[A-Za-z_][A-Za-z0-9_-]*:))/m, "");
 
 /** Full sha256 with the whole `verification:` block excluded — the form a
  *  touchlog baseline and an adjudication row's `item_sha256` are in. */

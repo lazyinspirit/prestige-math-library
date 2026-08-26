@@ -22,21 +22,24 @@ import { MODELS, LANES, JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_MODEL_IDS, KNOWN_JU
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
-/** Pull every `'<lineup>': ['<id>', '<id>']` literal out of a source file. */
+/** Pull every literal `'<lineup>': ['<id>', ...]` row out of a source file. */
 function literalLineups(source: string): Map<string, string[]> {
   const found = new Map<string, string[]>();
-  const row = /['"]([a-z0-9]+\+[a-z0-9]+)['"]\s*:\s*\[\s*['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]\s*\]/g;
-  for (const m of source.matchAll(row)) found.set(m[1], [m[2], m[3]]);
+  const row = /^\s*['"]([a-z0-9]+(?:\+[a-z0-9]+)*)['"]\s*:\s*\[(.*)\],?\s*$/gm;
+  for (const m of source.matchAll(row)) {
+    const models = [...m[2].matchAll(/['"]([^'"]+)['"]/g)].map((entry) => entry[1]);
+    if (models.length) found.set(m[1], models);
+  }
   return found;
 }
 
 test('every lineup names models the registry knows', () => {
-  for (const [name, pair] of Object.entries(JUDGE_LINEUPS)) {
-    assert.equal(pair.length, 2, `${name} must name exactly two lanes`);
-    for (const id of pair) {
+  for (const [name, models] of Object.entries(JUDGE_LINEUPS)) {
+    assert.ok(models.length >= 1, `${name} must name at least one judge`);
+    assert.equal(new Set(models).size, models.length, `${name} repeats a judge model`);
+    for (const id of models) {
       assert.ok(KNOWN_MODEL_IDS.includes(id), `${name} names ${id}, which is not in MODELS`);
     }
-    assert.notEqual(pair[0], pair[1], `${name} pairs a model with itself, which is not a paired judge`);
   }
 });
 
@@ -46,11 +49,20 @@ test('the default lineup exists and is resolvable', () => {
   assert.throws(() => resolveLineup('deepseek+nonesuch'), /must be one of/);
 });
 
-test('all three lineup keys survive a lane change', () => {
+test('the owner-amended active judge is Terra alone at xhigh with a 1M window', () => {
+  assert.equal(DEFAULT_LINEUP, 'terra');
+  assert.deepEqual(JUDGE_LINEUPS[DEFAULT_LINEUP], [MODELS.terra.id]);
+  assert.equal(MODELS.terra.id, 'gpt-5.6-terra');
+  const judge = readFileSync(join(REPO, 'tools/judge.mts'), 'utf8');
+  assert.match(judge, /model_reasoning_effort="xhigh"/);
+  assert.match(judge, /model_context_window=1000000/);
+});
+
+test('the active singleton and retired paired lineup keys survive a lane change', () => {
   // A table carrying only today's answer is the defect, not the fix: rows from
   // an unselected lane stay readable evidence, and coverage is per configured
   // lane, so the retired keys must remain resolvable.
-  for (const key of ['deepseek+opus', 'deepseek+terra', 'deepseek+sonnet']) {
+  for (const key of ['terra', 'deepseek+opus', 'deepseek+terra', 'deepseek+sonnet']) {
     assert.ok(JUDGE_LINEUPS[key], `${key} was dropped; retired lanes must stay resolvable`);
   }
 });

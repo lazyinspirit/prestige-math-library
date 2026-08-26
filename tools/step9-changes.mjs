@@ -2,7 +2,7 @@
 // Exact certification scope for every mathematical item changed after Step 8.
 //
 // Step 9 may create a missing result or repair an existing one.  Both actions
-// invalidate judge currency and both must traverse the paired judge,
+// invalidate judge currency and every changed item must traverse the configured judge,
 // adjudication, rejudge, and stamp path.  This receipt compares the guarded
 // mathematical hash (the same form used by touchlog and step8-guard) with the
 // immutable post-step8 snapshot and refuses deletions or unowned changes.

@@ -1,0 +1,23 @@
+{
+  "role": "beta",
+  "label": "reharvest-1-b6",
+  "run": "frontier-19",
+  "covers": [
+    "6"
+  ],
+  "stage": null,
+  "runner": "codex",
+  "model": "gpt-5.4",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-25T17:37:35.793Z",
+  "ended_at": "2026-08-25T17:45:06.783Z",
+  "ms": 450990,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "session_id": "01a039ff-bc43-7a72-a1c0-8a001b2f1f13",
+  "session_home": null,
+  "log": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-dispatch/beta-reharvest-1-b6.log",
+  "prompt": "/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-dispatch/beta-reharvest-1-b6.prompt.md",
+  "tail": "Appended `## Re-harvest round` to [research/frontier-19-batch-6.notes.md](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-batch-6.notes.md). I left [research/frontier-19-batch-6.coverage.json](/home/lazyinspirit/Projects/prestige-math-library/research/frontier-19-batch-6.coverage.json) unchanged, because batch 6 does not actually have a `work[]` re-harvest entry on disk, and the only suspect row, `https://people.math.harvard.edu/~elkies/M155.09/jan29`, is still live and still contains the cited Jan. 29 material for the incidence-matrix definition, Fisher’s inequality, and the symmetric-design/block-intersection theorem.\n\nChecks on August 25, 2026:\n- `node tools/source-backing.mjs --coverage research/frontier-19-batch-6.coverage.json --liveness research/frontier-19-url-liveness.json` -> green, `21 authored result(s)... every one still backed by an openable source`\n- `node tools/coverage-checklist.mjs research/frontier-19-batch-6.coverage.json --require-destination` -> green, `0 error(s), 0 warning(s)`\n- `node tools/source-fetch-check.mjs --coverage research/frontier-19-batch-6.coverage.json` -> red, `7/8 source(s) fetch-verified`, with the lone unstamped Harvard row\n- `node tools/prosecheck.mjs research/frontier-19-batch-6.notes.md --warnings` -> no errors, 7 existing `count-in-prose` warnings in the notes file\n\nThe blocker is environmental, not mathematical: `source-fetch-check --stamp`, direct `node fetch(...)`, and `curl -I` all fail from this workspace with DNS-resolution errors (`EAI_AGAIN` / `Could not resolve host`) for Harvard, arXiv, and Princeton hosts. I recorded that exact blocker in the notes and did not invent a replacement source. The next action is simply to rerun `node tools/source-fetch-check.mjs --coverage research/frontier-19-batch-6.coverage.json --stamp` in a fetch-capable environment; if that works, batch 6 needs no re-harvest at all."
+}

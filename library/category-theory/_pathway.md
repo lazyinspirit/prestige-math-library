@@ -19,6 +19,7 @@ parts:
       - reflective-subcategories-and-the-adjoint-functor-theorems
       - monads-comonads-and-their-algebras
       - monadicity-and-becks-theorem
+      - kan-extensions-density-and-the-free-cocompletion
 ---
 
 ## categories-and-yoneda
@@ -45,11 +46,12 @@ end-coend calculus.
 ## reflections-and-monads
 
 A reflective subcategory has an inclusion with a left adjoint, and the adjoint functor
-theorems say when preservation and size give a functor an adjoint. Every
-adjunction induces a monad and a comonad, and the monad's algebras measure how much of the
-adjunction it remembers. Beck's theorem says when nothing is forgotten: every algebra is a
-canonical coequalizer of free ones, split coequalizers are absolute, and the comparison
-functor is an equivalence exactly when the right adjoint creates coequalizers of the pairs
-it sends to split ones, with strict and reflexive variants. It shows groups, rings, modules,
-models of finitary algebraic theories and, through the ultrafilter monad, compact Hausdorff
-spaces are algebraic over sets, and the contravariant power-set functor monadic.
+theorems say when preservation and size force such adjoints. Every adjunction induces a
+monad and a comonad, and Beck's theorem tests when the comparison with Eilenberg-Moore
+algebras is an equivalence. Kan extensions then generalise adjunctions and limits:
+restriction along a functor sits between left and right Kan extension, comma-category and
+coend formulas make Kan extensions calculable, and fully faithful functors recover genuine
+extension. Density shows every presheaf as a colimit of representables, Yoneda as its own
+left Kan extension, and the presheaf category as the free
+cocompletion of a small category. The same language ends with codensity monads, including
+the ultrafilter monad from finite sets.

@@ -381,9 +381,9 @@ its item list.
    composites. A `tikzcd` picture is a rendering aid the author layers on top;
    it is never where a hypothesis, a Definition, a Statement or a proof step
    lives. Note this in your notes for any pair whose sources present a result
-   only as a picture, and say how the author is to write it out. **The judges
-   cannot see pictures:** the frozen prompt is text, `deepseek-v4-pro` has no
-   vision, and at frontier-18 it spent 595s and then 720s on
+   only as a picture, and say how the author is to write it out. **The judge
+   receives no pictures:** the frozen prompt is text-only; a retired DeepSeek
+   lane demonstrated the failure mode at frontier-18 when it spent 595s and then 720s on
    `thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` without returning a
    verdict. An item that cannot be judged cannot be published, so this is a
    scaffolding decision, not a formatting one.

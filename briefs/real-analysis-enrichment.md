@@ -101,7 +101,7 @@ and audit newly added items, not the whole page."*
 
 This mirrors the audit workflow's A7 exception, where a targeted repair rejudges
 only the exact repair ids rather than sweeping a whole wave. It is the
-orchestrator that runs the paired judges and dispatches the independent audit —
+orchestrator that runs the judge and dispatches the independent audit —
 **not you.** You author; you do not judge or audit your own work. That separation
 is not negotiable in this library: authors never judge, and no author certifies
 its own work.

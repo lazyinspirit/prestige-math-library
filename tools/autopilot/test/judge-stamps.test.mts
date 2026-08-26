@@ -28,19 +28,14 @@ const TOOL = join(REPO, 'tools', 'apply-judge-stamps.mjs');
 // the supported operation the registry exists to make cheap, and a test that
 // fails on it is just a fourth copy of the assignment. The lane has now swapped
 // four times and the property under test has not moved once, which is the whole
-// point: what is asserted below is that a paired pass stamps and a lane
-// rejection does not, whoever the lanes happen to be.
+// point: what is asserted below is that a complete configured-model pass stamps
+// and a rejection does not, however many models the active set contains.
 const LANES = [...JUDGE_LINEUPS[DEFAULT_LINEUP]];
 // Any model the registry knows that is NOT in the configured lineup: rows from
 // a retired lane must stay append-only evidence and never satisfy coverage.
 const RETIRED_LANE = Object.values(MODELS)
   .map((m: any) => m.id)
   .find((id: string) => !LANES.includes(id)) as string;
-// A model id can contain regex metacharacters — `claude-opus-5[1m]` carries a
-// CHARACTER CLASS — so every assertion matching stamp text must escape through
-// this, or it silently matches `claude-opus-5m` and passes against a stamp
-// nobody wrote.
-const SECOND_LANE_RE = LANES[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const STUB_CONTEXT = 'c'.repeat(64);
 const OTHER_CONTEXT = 'f'.repeat(64);
 
@@ -73,12 +68,11 @@ const run = (dir: string, ...args: string[]) => spawnSync(process.execPath,
   [TOOL, '--ledger', 'research/judge.jsonl', '--manifests', 'research/m.pages.json', ...args],
   { cwd: dir, encoding: 'utf8', timeout: 60_000 });
 
-test('apply stamps a current paired pass, ignores retired-lane rows, and verify closes over it', () => {
+test('apply stamps a current configured-model pass, ignores retired-lane rows, and verify closes over it', () => {
   const dir = fixture(['itm-a']);
   const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8'));
   writeLedger(dir, [
-    ledgerRow('itm-a', LANES[0], true, h),
-    ledgerRow('itm-a', LANES[1], true, h),
+    ...LANES.map((model) => ledgerRow('itm-a', model, true, h)),
     // the retired lane in the same ledger is append-only evidence, never an
     // error and never a third-lane refusal
     ledgerRow('itm-a', RETIRED_LANE, false, h),
@@ -86,13 +80,13 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
 
   let r = run(dir, '--verify');
   assert.equal(r.status, 1, 'unstamped licensed pass fails the gate');
-  assert.match(r.stderr, /itm-a: the ledger licenses a paired pass/);
+  assert.match(r.stderr, /itm-a: the ledger licenses a judge pass/);
   assert.match(r.stdout, /judge-stamps: 1 item\(s\) in scope/);
 
   r = run(dir, '--apply', '--report', 'research/stamps.json');
   assert.equal(r.status, 0, r.stderr);
   const text = readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8');
-  assert.match(text, new RegExp(` {2}judge:\\n {4}model: "deepseek-v4-pro \\+ ${SECOND_LANE_RE}"\\n {4}verdict: pass\\n`));
+  assert.ok(text.includes(`  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n`));
   const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
   assert.deepEqual(receipt.stamped.map((s: any) => s.id), ['itm-a']);
 
@@ -110,14 +104,33 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
 test('--items stamps an explicitly certified subset without needing a manifest-wide pass', () => {
   const dir = fixture(['itm-subset']);
   const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-subset.md'), 'utf8'));
-  writeLedger(dir, [
-    ledgerRow('itm-subset', LANES[0], true, h),
-    ledgerRow('itm-subset', LANES[1], true, h),
-  ]);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-subset', model, true, h)));
   const args = [TOOL, '--ledger', 'research/judge.jsonl', '--items', 'itm-subset'];
   let result = spawnSync(process.execPath, [...args, '--apply'], { cwd: dir, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   result = spawnSync(process.execPath, [...args, '--verify'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('apply creates verification for a definition with no precheck and preserves verdict currency', () => {
+  const dir = fixture(['def-no-precheck']);
+  const file = join(dir, 'items', 'def-no-precheck.md');
+  const definition = itemText('def-no-precheck').replace(
+    'verification:\n  precheck: pass\n',
+    'sources:\n  references: []\n',
+  );
+  writeFileSync(file, definition);
+  const h = itemHashJudge(definition);
+  writeLedger(dir, LANES.map((model) => ledgerRow('def-no-precheck', model, true, h)));
+
+  let result = run(dir, '--apply');
+  assert.equal(result.status, 0, result.stderr);
+  const stamped = readFileSync(file, 'utf8');
+  assert.match(stamped, /^verification:\n  judge:/m);
+  assert.equal(itemHashJudge(stamped), h,
+    'the stamp and its newly-created verification parent must both be hash-neutral');
+
+  result = run(dir, '--verify');
   assert.equal(result.status, 0, result.stderr);
 });
 
@@ -129,10 +142,7 @@ test('a lane rejection never stamps; a stale pass block fails verify and is stri
     `  precheck: pass\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
   writeFileSync(join(dir, 'items', 'itm-b.md'), seeded);
   const h = itemHashJudge(seeded);
-  writeLedger(dir, [
-    ledgerRow('itm-b', LANES[0], true, h),
-    ledgerRow('itm-b', LANES[1], false, h),
-  ]);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-b', model, false, h)));
 
   let r = run(dir, '--verify');
   assert.equal(r.status, 1);
@@ -159,10 +169,7 @@ test('recorded-not-proved material is never stamped and an old stamp is stripped
       `  precheck: n/a\n  judge:\n    model: "${LANES.join(' + ')}"\n    verdict: pass\n    date: 2026-08-01\n`);
   writeFileSync(join(dir, 'items', 'itm-unproved.md'), seeded);
   const h = itemHashJudge(seeded);
-  writeLedger(dir, [
-    ledgerRow('itm-unproved', LANES[0], true, h),
-    ledgerRow('itm-unproved', LANES[1], true, h),
-  ]);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-unproved', model, true, h)));
 
   let r = run(dir, '--verify');
   assert.equal(r.status, 1);
@@ -187,17 +194,15 @@ test('clause (a) still reaches a pair-context match through the lazy spawn; a tr
   writeLedger(dir, [
     // itm-c: item hash stale, but the recorded pair context equals the current
     // one (the stub) — clause (a), reached only via the lazy judge.mts spawn
-    ledgerRow('itm-c', LANES[0], true, stale, STUB_CONTEXT),
-    ledgerRow('itm-c', LANES[1], true, stale, STUB_CONTEXT),
+    ...LANES.map((model) => ledgerRow('itm-c', model, true, stale, STUB_CONTEXT)),
     // itm-d: neither clause holds
-    ledgerRow('itm-d', LANES[0], true, stale, OTHER_CONTEXT),
-    ledgerRow('itm-d', LANES[1], true, stale, OTHER_CONTEXT),
+    ...LANES.map((model) => ledgerRow('itm-d', model, true, stale, OTHER_CONTEXT)),
   ]);
 
   let r = run(dir, '--verify');
   assert.equal(r.status, 1);
-  assert.match(r.stderr, /itm-c: the ledger licenses a paired pass/);
-  assert.match(r.stderr, /itm-d: no current paired verdict/);
+  assert.match(r.stderr, /itm-c: the ledger licenses a judge pass/);
+  assert.match(r.stderr, /itm-d: no current configured-judge verdict/);
 
   r = run(dir, '--apply');
   assert.equal(r.status, 0, r.stderr);
@@ -206,7 +211,7 @@ test('clause (a) still reaches a pair-context match through the lazy spawn; a tr
 
   r = run(dir, '--verify');
   assert.equal(r.status, 1, 'the currency defect on itm-d survives as the residue');
-  assert.match(r.stderr, /itm-d: no current paired verdict/);
+  assert.match(r.stderr, /itm-d: no current configured-judge verdict/);
   assert.ok(!/itm-c/.test(r.stderr));
 });
 
@@ -217,10 +222,7 @@ test('the audit-targeted route writes the exact receipt evidence into the stamp'
   const dir = fixture(['itm-e']);
   const h = itemHashJudge(readFileSync(join(dir, 'items', 'itm-e.md'), 'utf8'));
   const C = 'a'.repeat(64);
-  writeLedger(dir, [
-    ledgerRow('itm-e', LANES[0], true, h, C),
-    ledgerRow('itm-e', LANES[1], true, h, C),
-  ]);
+  writeLedger(dir, LANES.map((model) => ledgerRow('itm-e', model, true, h, C)));
   writeFileSync(join(dir, 'research', 'targets.json'), JSON.stringify({
     version: 1, mode: 'published-audit-targeted-rejudge',
     targets: [{ id: 'itm-e', context_sha256: C, item_sha256: h }],

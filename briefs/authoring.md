@@ -320,9 +320,9 @@ them as a checklist against your own output:
    explicit equation of composites, every string-diagram identity as an equation
    between composites. Write the item so that deleting all its `tikz` and
    `tikzcd` blocks leaves the Definition, Statement and proof complete and
-   checkable. This is not presentation: **the judges cannot see pictures.** The
-   frozen prompt is text, `deepseek-v4-pro` has no vision, and at frontier-18 it
-   spent 595s and then 720s on
+   checkable. This is not presentation: **the judge receives no pictures.** The
+   frozen prompt is text-only; a retired DeepSeek lane demonstrated the failure
+   mode at frontier-18 when it spent 595s and then 720s on
    `thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor` without returning a
    verdict. Watch the case the cell grammar does not cover: `**Diagram:**` cells
    live in `## Facts & Assumptions`, which a `def-` item does not have, so on a
@@ -422,7 +422,7 @@ Write it to your named output file as well — a finding that exists only in a
 closing message is a finding that gets lost, and eleven were:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
-   judge verdict; the paired DeepSeek V4 Pro / Claude Opus 5 judge is step 7.
+   judge verdict; GPT-5.6 Terra is the sole Step-7 judge.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why; for every
    mathematical-content item, include both component-provenance values and the

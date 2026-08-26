@@ -1,0 +1,1952 @@
+{
+  "version": 1,
+  "level": "frontier-19",
+  "note": "Step-5 authoring contract for batch 10 on Tuesday, August 25, 2026. The scoped false statement from the scaffold was dropped because future-scope content policy forbids a newly ai-generated false statement.",
+  "scope": [
+    "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets",
+    "lem-small-total-copy-expectation-forces-many-homogeneous-k-sets",
+    "lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets",
+    "thm-a-finite-family-with-the-erdos-hajnal-property-is-viral",
+    "cor-viral-implies-polynomial-rodl-for-a-finite-family",
+    "cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family",
+    "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+    "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+    "ex-the-singleton-family-p-three-is-viral",
+    "ex-a-family-containing-k-one-is-vacuously-viral",
+    "cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted",
+    "cex-the-empty-family-is-not-erdos-hajnal"
+  ],
+  "contracts": {
+    "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-t-k-homogeneous-property",
+          "source_section": "Definition",
+          "quote": "Let $t$ and $k$ be natural numbers. A finite graph $G$ has the\n**$(t,k)$-homogeneous property** if every $t$-element subset $X\\subseteq V(G)$\ncontains a homogeneous subset $Y\\subseteq X$ with $|Y|=k$\n([[def-homogeneous-set-and-homogeneous-number]]).\n\nA class $\\mathcal C$ of finite graphs has the **$(t,k)$-homogeneous property**\nif every graph in $\\mathcal C$ has it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-double-counting",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be finite sets and let $R \\subseteq X \\times Y$, with row fibres\n$R_x$ and column fibres $R^{y}$ as in\n[[def-a-finite-incidence-relation-and-its-fibres]]. Then, in $\\mathbb{N}$,\n\n$$\\sum_{x \\in X}\\lvert R_x\\rvert \\;=\\; \\lvert R\\rvert \\;=\\; \\sum_{y \\in Y}\\lvert R^{y}\\rvert ,$$\n\nthe sums being those of [[def-sum-over-a-finite-index-set]].\n\nBoth index sets may be empty. If $X = \\varnothing$ then $R = \\varnothing$, every\ncolumn fibre is empty, and all three quantities are $0$; the same holds with the\nroles of $X$ and $Y$ exchanged.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Call a set $X\\in[V(G)]^{2t}$ **good** when it contains a $t$-element subset $T$ with $G[T]\\in\\mathcal C$; by hypothesis, there are at least $\\tfrac12\\binom{n}{2t}$ good sets.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $X$ is good, choose $T\\subseteq X$ with $|T|=t$ and $G[T]\\in\\mathcal C$; then [L1] gives a homogeneous $k$-element subset $K\\subseteq T$, and since $G[T]$ is the induced subgraph on $T$, that same set $K$ is homogeneous in $G$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $R$ be the relation between the homogeneous $k$-element subsets $K$ of $V(G)$ and the good sets $X\\in[V(G)]^{2t}$ defined by $K\\subseteq X$. Step 1.2 shows that every good $X$ is related to at least one $K$, so [L4] gives $|R|\\ge\\tfrac12\\binom{n}{2t}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the relation $R$ of step 2.1, fix a homogeneous $k$-element subset $K$ of $V(G)$. The good sets $X$ with $K\\subseteq X$ are among the $2t$-element supersets of $K$, and [L3] counts those as $\\binom{n-k}{2t-k}$. If $N$ is the number of homogeneous $k$-element subsets of $V(G)$, then [L4] gives $|R|\\le N\\binom{n-k}{2t-k}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Comparing steps 2.1 and 3.1 yields $N\\ge\\tfrac12\\binom{n}{2t}/\\binom{n-k}{2t-k}=\\tfrac12\\binom{n}{k}/\\binom{2t}{k}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $n\\ge2t$, each factor in the ratio formula satisfies $(n-j)/(2t-j)\\ge n/(2t)$ for $0\\le j<k$, so $\\binom{n}{k}/\\binom{2t}{k}\\ge(n/(2t))^k$. Therefore $N\\ge\\tfrac12(n/(2t))^k$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires $n\\ge2t$ and hence a nonempty vertex set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in Many good $2t$-vertex subsets force many homogeneous $k$-sets is handled in step 5.1: Since $n\\ge2t$, each factor in the ratio formula satisfies $(n-j)/(2t-j)\\ge n/(2t)$ for $0\\le j<k$, so $\\binom{n}{k}/\\binom{2t}{k}\\ge(n/(2t))^k$. Therefore $N\\ge\\tfrac12(n/(2t))^k$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in Many good $2t$-vertex subsets force many homogeneous $k$-sets is handled in step 2.1: Let $R$ be the relation between the homogeneous $k$-element subsets $K$ of $V(G)$ and the good sets $X\\in[V(G)]^{2t}$ defined by $K\\subseteq X$. Step 1.2 shows that every good $X$ is related to at least one $K$, so [L4]…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in Many good $2t$-vertex subsets force many homogeneous $k$-sets is handled in step 5.1: Since $n\\ge2t$, each factor in the ratio formula satisfies $(n-j)/(2t-j)\\ge n/(2t)$ for $0\\le j<k$, so $\\binom{n}{k}/\\binom{2t}{k}\\ge(n/(2t))^k$. Therefore $N\\ge\\tfrac12(n/(2t))^k$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 in Many good $2t$-vertex subsets force many homogeneous $k$-sets: Since $n\\ge2t$, each factor in the ratio formula satisfies $(n-j)/(2t-j)\\ge n/(2t)$ for $0\\le j<k$, so $\\binom{n}{k}/\\binom{2t}{k}\\ge(n/(2t))^k$. Therefore $N\\ge\\tfrac12(n/(2t))^k$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness in Many good $2t$-vertex subsets force many homogeneous $k$-sets is introduced only after the needed existence data are in force; see step 1.2: If $X$ is good, choose $T\\subseteq X$ with $|T|=t$ and $G[T]\\in\\mathcal C$; then [L1] gives a homogeneous $k$-element subset $K\\subseteq T$, and since $G[T]$ is the induced subgraph on $T$, that same set $K$ is homogene…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Many good $2t$-vertex subsets force many homogeneous $k$-sets, the statement is one directional: Let $\\mathcal C$ be a class of finite graphs such that every graph in $\\mathcal C$ has the $(t,k)$-homogeneous property. Let $G$ be a finite graph on $n\\ge2t$ vertices. Suppose at… It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Many good $2t$-vertex subsets force many homogeneous $k$-sets, the statement is one directional: Let $\\mathcal C$ be a class of finite graphs such that every graph in $\\mathcal C$ has the $(t,k)$-homogeneous property. Let $G$ be a finite graph on $n\\ge2t$ vertices. Suppose at… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current polynomial-Rodl, virality, and Erdos-Hajnal-equivalence chain against its proof-contract entries on the current text. The routed risks here were restricted-subgraph counting, finite-family parameters, and exponent bookkeeping through the Rodl-to-Erdos-Hajnal transfer. On disk the nonempty-graph hypotheses, the restrictedness and complement moves, and the exponent bounds are explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-small-total-copy-expectation-forces-many-homogeneous-k-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-induced-copy-number",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, define the **induced-embedding count**\n\n$$\\operatorname{ind}_H(G):=|\\{\\varphi:V(H)\\to V(G):\\varphi\\text{ is an induced embedding}\\}|.$$\n\nThe set inside the cardinality is a subset of the finite function set $V(G)^{V(H)}$, so the displayed natural number is well defined ([[thm-cardinality-of-a-set-of-functions]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]).\n\nThis convention counts labelled embeddings, not vertex subsets. An induced copy with image $W$ contributes one embedding for each isomorphism $H\\to G[W]$ ([[def-induced-embedding-and-induced-copy]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-markov-inequality",
+          "source_section": "Statement",
+          "quote": "If $X$ is a nonnegative real random variable on a finite probability space and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$\nThe weak threshold $X\\ge a$ is part of the statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets",
+          "source_section": "Statement",
+          "quote": "Let $1\\le k\\le t$ be integers, and let $\\mathcal C$ be a class of finite graphs\nsuch that every graph in $\\mathcal C$ has the $(t,k)$-homogeneous property. Let $G$ be a finite graph on\n$n\\ge2t$ vertices. Suppose at least half of the sets $X\\in[V(G)]^{2t}$ contain\na $t$-element subset $T\\subseteq X$ with $G[T]\\in\\mathcal C$. Then $G$ has at\nleast\n\n$$\n\\frac12\\left(\\frac{n}{2t}\\right)^k\n$$\n\nhomogeneous vertex sets of size $k$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Y$ is nonnegative and $\\mathbb E[Y]\\le t/2$, [L3] gives $\\mathbb P(Y\\ge t)\\le1/2$, so with probability at least $1/2$ one has $Y<t$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a set $X\\in[V(G)]^{2t}$ with $Y(X)<t$. For each induced embedding counted by $Y(X)$ choose one vertex from its image; this is possible because every graph in $\\mathcal F$ has at least one vertex. Delete from $X$ every chosen vertex. Since fewer than $t$ embeddings were counted, fewer than $t$ vertices are deleted, so at least $t$ vertices remain.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $T$ be any $t$-element subset of the remaining vertices. If some $H\\in\\mathcal F$ had an induced embedding into $G[T]$, then that same embedding would already have been counted in $Y(X)$, so step 2.1 would have deleted a vertex from its image. Because the image lies in $T$, this contradicts the choice of $T$. Thus $G[T]$ is $\\mathcal F$-free by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 show that with probability at least $1/2$, a uniformly random $2t$-element subset of $V(G)$ contains a $t$-element induced subgraph that is $\\mathcal F$-free. Applying [L4] to the class of $\\mathcal F$-free graphs proves the claimed lower bound on homogeneous $k$-sets.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 in Small total induced-copy expectation forces many homogeneous $k$-sets: Steps 2.1 and 3.1 show that with probability at least $1/2$, a uniformly random $2t$-element subset of $V(G)$ contains a $t$-element induced subgraph that is $\\mathcal F$-free. Applying [L4] to the class of $\\mathcal F$…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch is already fixed in the statement of Small total induced-copy expectation forces many homogeneous $k$-sets: Let $\\mathcal F$ be a finite family of graphs, each with at least one vertex, such that every $\\mathcal F$-free graph has the $(t,k)$-homogeneous property. Let $G$ be a finite graph on $n\\ge2t$ vertices. Choose $X$ unif…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in Small total induced-copy expectation forces many homogeneous $k$-sets is handled in step 1.1: Since $Y$ is nonnegative and $\\mathbb E[Y]\\le t/2$, [L3] gives $\\mathbb P(Y\\ge t)\\le1/2$, so with probability at least $1/2$ one has $Y<t$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch is already fixed in the statement of Small total induced-copy expectation forces many homogeneous $k$-sets: Let $\\mathcal F$ be a finite family of graphs, each with at least one vertex, such that every $\\mathcal F$-free graph has the $(t,k)$-homogeneous property. Let $G$ be a finite graph on $n\\ge2t$ vertices. Choose $X$ unif…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 in Small total induced-copy expectation forces many homogeneous $k$-sets: Since $Y$ is nonnegative and $\\mathbb E[Y]\\le t/2$, [L3] gives $\\mathbb P(Y\\ge t)\\le1/2$, so with probability at least $1/2$ one has $Y<t$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness in Small total induced-copy expectation forces many homogeneous $k$-sets is introduced only after the needed existence data are in force; see step 2.1: Fix a set $X\\in[V(G)]^{2t}$ with $Y(X)<t$. For each induced embedding counted by $Y(X)$ choose one vertex from its image; this is possible because every graph in $\\mathcal F$ has at least one vertex. Delete from $X$ eve…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Small total induced-copy expectation forces many homogeneous $k$-sets, the statement is one directional: Let $\\mathcal F$ be a finite family of graphs, each with at least one vertex, such that every $\\mathcal F$-free graph has the $(t,k)$-homogeneous property. Let $G$ be a finite gra… It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Small total induced-copy expectation forces many homogeneous $k$-sets, the statement is one directional: Let $\\mathcal F$ be a finite family of graphs, each with at least one vertex, such that every $\\mathcal F$-free graph has the $(t,k)$-homogeneous property. Let $G$ be a finite gra… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha group d",
+        "refuter": "Batch-10 read-only refuter",
+        "notes": "The batch-10 refuter opened all 17 routed ids, including this critical sampling lemma. Alpha rechecked the repaired positive-vertex hypothesis, deletion argument, and current manifest row against the cited probability-space dependencies and found no remaining defect on the final carrier."
+      }
+    },
+    "lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pascals-rule",
+          "source_section": "Statement",
+          "quote": "For all $n, k \\in \\mathbb{N}$:\n\n1. **Pascal's rule.**\n   $\\displaystyle\\binom{n+1}{k+1} = \\binom{n}{k} + \\binom{n}{k+1}$, with **no**\n   restriction relating $k$ to $n$;\n2. **The hockey-stick identity.**\n   $\\displaystyle\\sum_{i<n+1}\\binom{i}{k} = \\binom{n+1}{k+1}$, the sum being the\n   $\\mathbb{N}$-valued finite sum of [[def-nat-finite-sum-and-product]] over\n   $i = 0, 1, \\dots, n$.\n\n```tikz\n\\begin{tikzpicture}[x=1cm,y=1cm]\n  \\node at (0,3.8) {$|A|=n+1$};\n  \\node[draw,rounded corners] (all) at (0,3) {$[A]^{k+1}$, with $A'=A\\setminus\\{a\\}$};\n  \\node[draw,rounded corners] (yes) at (-3,1.75) {$P=\\{S:a\\in S\\}$};\n  \\node[draw,rounded corners] (no) at (3,1.75) {$Q=\\{S:a\\notin S\\}$};\n  \\node[draw,rounded corners] (left) at (-3,0.35) {$[A']^k$};\n  \\node[draw,rounded corners] (right) at (3,0.35) {$[A']^{k+1}$};\n  \\draw[->] (all) -- (yes);\n  \\draw[->] (all) -- (no);\n  \\draw[->] (yes) -- node[left] {$S\\mapsto S\\setminus\\{a\\}$} (left);\n  \\draw[->] (no) -- node[right] {$S\\mapsto S$} (right);\n  \\node at (0,-0.75) {${n+1\\choose k+1}={n\\choose k}+{n\\choose k+1}$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph, let $c\\ge0$, and let $X\\subseteq V(G)$ be\nnonempty. Then $X$ is $c$-sparse in $G$ if and only if every vertex of the\ninduced subgraph $G[X]$ has degree at most $c|X|$. In particular, if\n$X\\subseteq W\\subseteq V(G)$, then $X$ is $c$-sparse in $G$ if and only if it is\n$c$-sparse in $G[W]$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[base] If $\\ell=0$, then the hypothesis $(1-\\epsilon)^\\ell n\\le u$ reads $n\\le u$. Every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{u}{k}=\\binom{n}{0}\\binom{u}{k}$ of them by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[ih] Assume $\\ell\\ge1$ and that the claim holds for every admissible parameter tuple with smaller value of $\\ell+n$.",
+          "step": "1.2",
+          "inputs": [
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $u\\ge n$, then every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{n}{\\ell}\\binom{n-\\ell}{k-\\ell}\\le\\binom{n}{\\ell}\\binom{u}{k-\\ell}$ of them by [L2]. Thus the claim is immediate in this case. We may therefore assume $u<n$. Take $v\\in V(G)$ of maximum degree. Applying the hypothesis to $S=V(G)$ gives $\\deg_G(v)\\ge\\epsilon n-1$. Let $U:=V(G)\\setminus(\\{v\\}\\cup N_G(v))$, so $|U|\\le(1-\\epsilon)n$.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Stable $k$-sets containing $v$ correspond exactly to stable $(k-1)$-sets of $G[U]$. Since $(1-\\epsilon)^{\\ell-1}|U|\\le(1-\\epsilon)^\\ell n\\le u$, the induction hypothesis applied to $G[U]$ with parameters $(\\ell-1,k-1)$ shows that there are at most $\\binom{|U|}{\\ell-1}\\binom{u}{k-\\ell}\\le\\binom{n-1}{\\ell-1}\\binom{u}{k-\\ell}$ such stable sets.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Stable $k$-sets avoiding $v$ are stable $k$-sets of $G-v$. Any subset of $V(G-v)$ with at least $u$ vertices is also a subset of $V(G)$, so it still satisfies the maximum-degree hypothesis. The induction hypothesis applied to $G-v$ with parameters $(\\ell,k)$ therefore bounds their number by $\\binom{n-1}{\\ell}\\binom{u}{k-\\ell}$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Adding the bounds from steps 2.1 and 2.2 and using Pascal's rule from [L2] gives at most $\\bigl(\\binom{n-1}{\\ell-1}+\\binom{n-1}{\\ell}\\bigr)\\binom{u}{k-\\ell}=\\binom{n}{\\ell}\\binom{u}{k-\\ell}$ stable $k$-sets in $G$, in the sense of [L1]. If $G$ has no $\\epsilon$-sparse induced subgraph on $u$ or more vertices, then [L3] shows that every such induced subgraph has a vertex of degree exceeding $\\epsilon|S|$, hence in particular at least $\\epsilon|S|-1$, so the same bound applies in that situation as well.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1",
+            "L2",
+            "L3",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is for positive integers $u,n$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded is handled in step 1.1: [base] If $\\ell=0$, then the hypothesis $(1-\\epsilon)^\\ell n\\le u$ reads $n\\le u$. Every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{u}{k}=\\binom{n}{0}\\binom…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded is handled in step 1.1: [base] If $\\ell=0$, then the hypothesis $(1-\\epsilon)^\\ell n\\le u$ reads $n\\le u$. Every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{u}{k}=\\binom{n}{0}\\binom…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded is handled in step 1.1: [base] If $\\ell=0$, then the hypothesis $(1-\\epsilon)^\\ell n\\le u$ reads $n\\le u$. Every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{u}{k}=\\binom{n}{0}\\binom…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 in Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded: If $u\\ge n$, then every stable $k$-set is a $k$-element subset of the $n$-vertex set, so there are at most $\\binom{n}{k}\\le\\binom{n}{\\ell}\\binom{n-\\ell}{k-\\ell}\\le\\binom{n}{\\ell}\\binom{u}{k-\\ell}$ of them by [L2]. Thus…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The needed witness data are already fixed in the statement of Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded: Let $\\epsilon\\in(0,1]$, let $0\\le\\ell\\le k$ be integers, and let $u,n$ be positive integers with $$ (1-\\epsilon)^\\ell n\\le u. $$ Let $G$ be a finite graph on $n$ vertices such that every subset $S\\subseteq V(G)$ with $|…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded, the statement is one directional: Let $\\epsilon\\in(0,1]$, let $0\\le\\ell\\le k$ be integers, and let $u,n$ be positive integers with $$ (1-\\epsilon)^\\ell n\\le u. $$ Let $G$ be a finite graph on $n$ vertices such tha… It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Without a large $\\\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded, the statement is one directional: Let $\\epsilon\\in(0,1]$, let $0\\le\\ell\\le k$ be integers, and let $u,n$ be positive integers with $$ (1-\\epsilon)^\\ell n\\le u. $$ Let $G$ be a finite graph on $n$ vertices such tha… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha group d",
+        "refuter": "Batch-10 read-only refuter",
+        "notes": "The batch-10 refuter opened this high-risk induction lemma. Alpha rechecked the repaired u>=n branch, the current Pascal-based contract row, and the sparse-set closure step and found no remaining defect on the final carrier."
+      }
+    },
+    "thm-a-finite-family-with-the-erdos-hajnal-property-is-viral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs ([[def-hereditary-graph-class]]). A real number $\\epsilon>0$ is an **Erdős–Hajnal constant** for $\\mathcal C$ if every nonempty $G\\in\\mathcal C$ satisfies\n$$\\operatorname{hom}(G)\\ge |V(G)|^\\epsilon,$$\nwhere the homogeneous number is that of [[def-homogeneous-set-and-homogeneous-number]] and the power is that of [[def-real-power]]. The class $\\mathcal C$ has the **Erdős–Hajnal property** if it has an Erdős–Hajnal constant.\n\nFor a finite graph $H$, we say that **$H$ has the Erdős–Hajnal property** when the hereditary class of $H$-free graphs has it. The same terminology applies to a finite family $\\mathcal F$ through its class of $\\mathcal F$-free graphs.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-erdos-hajnal-constants-are-downward-closed",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a hereditary graph class. If $\\epsilon$ is an Erdős–Hajnal constant for $\\mathcal C$ and $0<\\delta\\le\\epsilon$, then $\\delta$ is also an Erdős–Hajnal constant for $\\mathcal C$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-power-agrees-with-rational-exponent",
+          "source_section": "Statement",
+          "quote": "If $a>0$ and $r\\in\\mathbb Q$, then the real power $a^r=\\exp(r\\log a)$ agrees with the rational power of [[def-rational-power]]. For $r>0$, both conventions also give $0^r=0$.",
+          "uses": [
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-t-k-homogeneous-property",
+          "source_section": "Definition",
+          "quote": "Let $t$ and $k$ be natural numbers. A finite graph $G$ has the\n**$(t,k)$-homogeneous property** if every $t$-element subset $X\\subseteq V(G)$\ncontains a homogeneous subset $Y\\subseteq X$ with $|Y|=k$\n([[def-homogeneous-set-and-homogeneous-number]]).\n\nA class $\\mathcal C$ of finite graphs has the **$(t,k)$-homogeneous property**\nif every graph in $\\mathcal C$ has it.",
+          "uses": [
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "6.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-small-total-copy-expectation-forces-many-homogeneous-k-sets",
+          "source_section": "Statement",
+          "quote": "Let $1\\le k\\le t$ be integers, and let $\\mathcal F$ be a finite family of\ngraphs, each with at least one vertex, such that every $\\mathcal F$-free graph\nhas the $(t,k)$-homogeneous property.\nLet $G$ be a finite graph on $n\\ge2t$ vertices. Choose $X$ uniformly from\n$[V(G)]^{2t}$ and define\n\n$$\nY(X):=\\sum_{H\\in\\mathcal F}\\operatorname{ind}_H(G[X]).\n$$\n\nIf $\\mathbb E[Y]\\le t/2$, then $G$ has at least\n\n$$\n\\frac12\\left(\\frac{n}{2t}\\right)^k\n$$\n\nhomogeneous vertex sets of size $k$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets",
+          "source_section": "Statement",
+          "quote": "Let $\\epsilon\\in(0,1]$, let $0\\le\\ell\\le k$ be integers, and let $u,n$ be\npositive integers with\n\n$$\n(1-\\epsilon)^\\ell n\\le u.\n$$\n\nLet $G$ be a finite graph on $n$ vertices such that every subset\n$S\\subseteq V(G)$ with $|S|\\ge u$ induces a graph $G[S]$ of maximum degree at\nleast $\\epsilon|S|-1$. Then $G$ has at most\n\n$$\n\\binom{n}{\\ell}\\binom{u}{k-\\ell}\n$$\n\nstable sets of size $k$.\n\nIn particular, the same bound holds whenever $G$ has no $\\epsilon$-sparse\ninduced subgraph on $u$ or more vertices.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-complement-swaps-cliques-and-stable-sets",
+          "source_section": "Statement",
+          "quote": "For every finite graph $G$, a vertex set is a clique in $G$ if and only if it is a stable set in $\\overline G$. Consequently,\n\n$$\\omega(\\overline G)=\\alpha(G),\\qquad \\alpha(\\overline G)=\\omega(G).$$",
+          "uses": [
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-restrictedness-is-complement-invariant",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph, let $c\\ge0$, and let $X\\subseteq V(G)$ be\nnonempty. Then $X$ is $c$-sparse in $G$ if and only if $X$ is $c$-dense in\n$\\overline G$. Consequently $X$ is $c$-restricted in $G$ if and only if it is\n$c$-restricted in $\\overline G$.",
+          "uses": [
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph, let $c\\ge0$, and let $X\\subseteq V(G)$ be\nnonempty. Then $X$ is $c$-sparse in $G$ if and only if every vertex of the\ninduced subgraph $G[X]$ has degree at most $c|X|$. In particular, if\n$X\\subseteq W\\subseteq V(G)$, then $X$ is $c$-sparse in $G$ if and only if it is\n$c$-sparse in $G[W]$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "def-viral-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. We say that $\\mathcal F$ is\n**viral** if there exists a real number $d\\ge1$ such that for every real\n$\\epsilon\\in(0,\\tfrac12)$ and every nonempty finite simple graph $G$ satisfying\n\n$$\\operatorname{ind}_H(G)<\\bigl(\\epsilon^d|V(G)|\\bigr)^{|V(H)|} \\qquad\\text{for every }H\\in\\mathcal F,$$\n\nthere is an $\\epsilon$-restricted vertex set $X\\subseteq V(G)$ with\n\n$$|X|\\ge\\epsilon^d|V(G)|.$$\n\nThe induced-copy count is that of [[def-induced-copy-number]], and\n$\\epsilon$-restricted is in the sense of\n[[def-c-sparse-and-c-restricted-vertex-set]].",
+          "uses": [
+            "1.1",
+            "4.1",
+            "9.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $K_0\\in\\mathcal F$, then every nonempty graph $G$ has $\\operatorname{ind}_{K_0}(G)=1$, so the inequality $\\operatorname{ind}_{K_0}(G)<(\\epsilon^d|V(G)|)^0$ reads $1<1$ and has no nonempty instance; if $K_1\\in\\mathcal F$, then $\\operatorname{ind}_{K_1}(G)=|V(G)|$ and the inequality $\\operatorname{ind}_{K_1}(G)<\\epsilon^d|V(G)|$ is impossible because $\\epsilon^d<1$. Thus in either case $\\mathcal F$ is viral vacuously. We may therefore assume from now on that every $H\\in\\mathcal F$ has at least two vertices.",
+          "step": "1.1",
+          "inputs": [
+            "L13",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose an Erdős–Hajnal constant $c>0$ for the class of $\\mathcal F$-free graphs.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L12] to $1/c$ to choose a natural number $m\\ge1$ with $1/c<m$, so $1/m<c$; by [L1], the exponent $1/m$ is also an Erdős–Hajnal constant for the class of $\\mathcal F$-free graphs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "L12",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $q:=|\\mathcal F|$. Since [L11] makes $(7x)^{2m}/2^x\\to0$ and $q(7x)^m/2^{2x}\\to0$ as $x\\to+\\infty$, choose an integer $d>4m$ such that $32(7d)^{2m}<2^{d-4m}$ and $8q(7d)^m<2^{2d-2m}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L11",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $\\epsilon\\in(0,\\tfrac12)$ and let $G$ be a nonempty graph on $n$ vertices with $\\operatorname{ind}_H(G)<(\\epsilon^d n)^{|V(H)|}$ for every $H\\in\\mathcal F$. Put $\\delta:=\\epsilon^d$, $\\ell:=\\left\\lceil d\\log(1/\\epsilon)/\\epsilon\\right\\rceil$, $k:=2\\ell$, and $t:=k^m$. If $\\delta n<1$, then any singleton vertex set is $0$-sparse and hence $\\epsilon$-restricted, with size $1>\\delta n$; so we may assume $\\delta n\\ge1$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L13",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Applying [L9] to $x=1/\\epsilon-1>0$ gives $1/\\epsilon\\le\\exp(1/\\epsilon-1)$, and [L10] therefore yields $\\log(1/\\epsilon)<1/\\epsilon$. Hence $\\ell\\le d/\\epsilon^2+1$, so $k=2\\ell\\le 2d/\\epsilon^2+2\\le 7d/\\epsilon^2$, and therefore $t\\le(7d)^m\\epsilon^{-2m}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L9",
+            "L10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "From [L9] we have $1-\\epsilon\\le\\exp(-\\epsilon)$, so $(1-\\epsilon)^\\ell\\le\\exp(-\\epsilon\\ell)$. Since $\\ell\\ge d\\log(1/\\epsilon)/\\epsilon$, strict increase of the exponential and [L10] give $\\exp(-\\epsilon\\ell)\\le\\exp(-d\\log(1/\\epsilon))=\\epsilon^d=\\delta$. Thus $(1-\\epsilon)^\\ell n\\le\\delta n$.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "L2",
+            "L9",
+            "L10"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Suppose there were no $\\epsilon$-restricted subset of $V(G)$ of size at least $\\delta n$, and put $u:=\\lceil\\delta n\\rceil$. Because vertex-set sizes are integers, this means there is no $\\epsilon$-restricted subset of size at least $u$. Since step 5.2 gives $(1-\\epsilon)^\\ell n\\le\\delta n\\le u$, no induced subgraph of $G$ on at least $u$ vertices is $\\epsilon$-sparse or $\\epsilon$-dense. By [L7] and [L8], every induced subgraph of $G$ and of $\\overline G$ on at least $u$ vertices therefore has maximum degree at least $\\epsilon|S|-1$.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.2",
+            "L7",
+            "L8"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "Step 5.1 gives $t\\delta^2\\le(7d)^m\\epsilon^{2d-2m}\\le(7d)^m2^{-(2d-2m)}$ and $t^2\\delta\\le(7d)^{2m}\\epsilon^{d-4m}\\le(7d)^{2m}2^{-(d-4m)}$, so step 3.1 yields $8qt\\delta^2\\le1$ and $32t^2\\delta\\le1$. Since $\\delta n\\ge1$, the second inequality forces $n\\ge1/\\delta\\ge32t^2>2t$.",
+          "step": "6.2",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-3",
+          "claim": "Every $\\mathcal F$-free graph on exactly $t=k^m$ vertices satisfies $\\operatorname{hom}(H)\\ge t^{1/m}=(k^m)^{1/m}=k$ by steps 2.1 and [L2]. Hence the class of $\\mathcal F$-free graphs has the $(t,k)$-homogeneous property.",
+          "step": "6.3",
+          "inputs": [
+            "step 2.1",
+            "step 5.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Step 6.1 gives the hypotheses of [L6] for both $G$ and $\\overline G$, so each has at most $\\binom{n}{\\ell}\\binom{u}{k-\\ell}$ stable $k$-sets. By [L7], the stable $k$-sets of $\\overline G$ are exactly the cliques of $G$. Since $k=2\\ell$, $u=\\lceil\\delta n\\rceil$, and step 4.1 gives $\\delta n\\ge1$, one has $u\\le\\delta n+1\\le2\\delta n$. Hence $G$ has at most\n\n$$ 2\\binom{n}{\\ell}\\binom{u}{k-\\ell}\\le2n^\\ell u^{k-\\ell}\\le2^{\\ell+1}\\delta^\\ell n^k $$\n\nhomogeneous $k$-vertex sets.",
+          "step": "7.1",
+          "inputs": [
+            "step 4.1",
+            "step 6.1",
+            "L6",
+            "L7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-2",
+          "claim": "Choose $X$ uniformly from $[V(G)]^{2t}$. Fix $H\\in\\mathcal F$ and put $h:=|V(H)|$. If $h>2t$, then no $2t$-element vertex set can contain the $h$-vertex image of an induced embedding of $H$, so $\\operatorname{ind}_H(G[X])=0$ for every $X$. Suppose instead that $h\\le2t$. Then step 6.2 gives $h\\le2t<n$, so an induced embedding of $H$ into $G$ survives in $G[X]$ exactly when $X$ contains its $h$-vertex image, which happens with probability $$ \\frac{\\binom{n-h}{2t-h}}{\\binom{n}{2t}} =\\prod_{j=0}^{h-1}\\frac{2t-j}{n-j} \\le\\left(\\frac{2t}{n}\\right)^h. $$ If $p_H$ denotes that survival probability, then $\\mathbb E[\\operatorname{ind}_H(G[X])]=\\operatorname{ind}_H(G)\\,p_H <(\\delta n)^h(2t/n)^h=(2t\\delta)^h$. So the same upper bound holds in both cases.",
+          "step": "7.2",
+          "inputs": [
+            "step 4.1",
+            "step 6.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Let $Y(X):=\\sum_{H\\in\\mathcal F}\\operatorname{ind}_H(G[X])$. Step 1.1 gives $|V(H)|\\ge2$ for every $H\\in\\mathcal F$, and step 6.2 gives $2t\\delta\\le1/(16t)\\le1$. Hence step 7.2 implies $\\mathbb E[\\operatorname{ind}_H(G[X])]< (2t\\delta)^2$ for every $H\\in\\mathcal F$. By [L4], $\\mathbb E[Y]<q(2t\\delta)^2=4qt^2\\delta^2\\le t/2$. Applying [L5] and step 6.3, the graph $G$ has at least $\\tfrac12(n/(2t))^k$ homogeneous $k$-vertex sets.",
+          "step": "8.1",
+          "inputs": [
+            "step 1.1",
+            "step 6.2",
+            "step 6.3",
+            "step 7.2",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-8-2",
+          "claim": "Because $\\epsilon<1/2$, step 4.1 gives $\\ell=\\lceil d\\log(1/\\epsilon)/\\epsilon\\rceil\\ge2$. Using step 6.2 and step 7.1, we obtain\n\n$$ 2^{\\ell+1}\\delta^\\ell n^k\\le\\frac{2^{\\ell+1}n^k}{(32t^2)^\\ell} =\\frac{n^k}{2^{4\\ell-1}t^{2\\ell}} \\le\\frac{n^k}{2^{2\\ell+2}t^{2\\ell}} =\\frac{n^k}{4(2t)^k}. $$\n\nThis contradicts the lower bound $\\tfrac12(n/(2t))^k=n^k/(2(2t)^k)$ from step 8.1. Therefore some $\\epsilon$-restricted subset of $V(G)$ has size at least $\\delta n=\\epsilon^d n$.",
+          "step": "8.2",
+          "inputs": [
+            "step 4.1",
+            "step 6.2",
+            "step 7.1",
+            "step 8.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Since $\\epsilon$ and the nonempty graph $G$ were arbitrary, the exponent $d$ from step 3.1 witnesses that $\\mathcal F$ is viral.",
+          "step": "9.1",
+          "inputs": [
+            "step 8.2",
+            "L13",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 in Every finite family with the Erdős–Hajnal property is viral: If $K_0\\in\\mathcal F$, then every nonempty graph $G$ has $\\operatorname{ind}_{K_0}(G)=1$, so the inequality $\\operatorname{ind}_{K_0}(G)<(\\epsilon^d|V(G)|)^0$ reads $1<1$ and has no nonempty instance; if $K_1\\in\\mathcal…"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in Every finite family with the Erdős–Hajnal property is viral is handled in step 1.1: If $K_0\\in\\mathcal F$, then every nonempty graph $G$ has $\\operatorname{ind}_{K_0}(G)=1$, so the inequality $\\operatorname{ind}_{K_0}(G)<(\\epsilon^d|V(G)|)^0$ reads $1<1$ and has no nonempty instance; if $K_1\\in\\mathcal…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in Every finite family with the Erdős–Hajnal property is viral is handled in step 1.1: If $K_0\\in\\mathcal F$, then every nonempty graph $G$ has $\\operatorname{ind}_{K_0}(G)=1$, so the inequality $\\operatorname{ind}_{K_0}(G)<(\\epsilon^d|V(G)|)^0$ reads $1<1$ and has no nonempty instance; if $K_1\\in\\mathcal…"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in Every finite family with the Erdős–Hajnal property is viral is handled in step 1.1: If $K_0\\in\\mathcal F$, then every nonempty graph $G$ has $\\operatorname{ind}_{K_0}(G)=1$, so the inequality $\\operatorname{ind}_{K_0}(G)<(\\epsilon^d|V(G)|)^0$ reads $1<1$ and has no nonempty instance; if $K_1\\in\\mathcal…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.2 in Every finite family with the Erdős–Hajnal property is viral: From [L9] we have $1-\\epsilon\\le\\exp(-\\epsilon)$, so $(1-\\epsilon)^\\ell\\le\\exp(-\\epsilon\\ell)$. Since $\\ell\\ge d\\log(1/\\epsilon)/\\epsilon$, strict increase of the exponential and [L10] give $\\exp(-\\epsilon\\ell)\\le\\exp(-…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness in Every finite family with the Erdős–Hajnal property is viral is introduced only after the needed existence data are in force; see step 1.2: Choose an Erdős–Hajnal constant $c>0$ for the class of $\\mathcal F$-free graphs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This theorem proves one implication in the equivalence cycle."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse implications are separate later items on the page."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha group d",
+        "refuter": "Batch-10 read-only refuter",
+        "notes": "The batch-10 refuter flagged the h>2t binomial-parameter defect here. Alpha rechecked the repaired integer threshold, the zero-probability branch in step 7.2, and the current manifest row against the cited Erdős-Hajnal and Rödl dependencies and found no remaining defect on the final carrier."
+      }
+    },
+    "cor-viral-implies-polynomial-rodl-for-a-finite-family": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-viral-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "We say that $\\mathcal F$ is **viral** if there exists a real number $d\\ge1$ such that",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-induced-copy-number",
+          "source_section": "Definition",
+          "quote": "$$\\operatorname{ind}_H(G):=|\\{\\varphi:V(H)\\to V(G):\\varphi\\text{ is an induced embedding}\\}|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-polynomial-rodl-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "We say that $\\mathcal F$ has the **polynomial Rödl property** if there exists a real number $d\\ge1$ such that",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "choose-viral-exponent",
+          "claim": "Fix the viral exponent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "family-free-counts-zero",
+          "claim": "A family-free graph has zero forbidden-copy count for every forbidden graph.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-viral",
+          "claim": "The viral implication becomes exactly the polynomial Rödl conclusion on a family-free graph.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 in The viral property implies the polynomial Rödl property: Applying the viral implication from step 1.1 to the graph $G$ of step 1.2 yields an $\\epsilon$-restricted vertex set of size at least $\\epsilon^d|V(G)|$. This is exactly the polynomial Rödl conclusion of [L3]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in The viral property implies the polynomial Rödl property is handled in step 1.2: Let $\\epsilon\\in(0,\\tfrac12)$ and let $G$ be a nonempty $\\mathcal F$-free graph. Then [L2] gives $\\operatorname{ind}_H(G)=0<(\\epsilon^d|V(G)|)^{|V(H)|}$ for every $H\\in\\mathcal F$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in The viral property implies the polynomial Rödl property is handled in step 2.1: Applying the viral implication from step 1.1 to the graph $G$ of step 1.2 yields an $\\epsilon$-restricted vertex set of size at least $\\epsilon^d|V(G)|$. This is exactly the polynomial Rödl conclusion of [L3]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in The viral property implies the polynomial Rödl property is handled in step 1.2: Let $\\epsilon\\in(0,\\tfrac12)$ and let $G$ be a nonempty $\\mathcal F$-free graph. Then [L2] gives $\\operatorname{ind}_H(G)=0<(\\epsilon^d|V(G)|)^{|V(H)|}$ for every $H\\in\\mathcal F$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement of The viral property implies the polynomial Rödl property: Every finite family of graphs with the viral property has the polynomial Rödl property."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness in The viral property implies the polynomial Rödl property is introduced only after the needed existence data are in force; see step 1.1: Choose an exponent $d\\ge1$ witnessing the viral property of $\\mathcal F$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This corollary proves one implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse implication is a separate item."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-polynomial-rodl-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "We say that $\\mathcal F$ has the **polynomial Rödl property** if there exists a real number $d\\ge1$ such that",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "A real number $\\epsilon>0$ is an **Erdős–Hajnal constant** for $\\mathcal C$ if every nonempty $G\\in\\mathcal C$ satisfies $$\\operatorname{hom}(G)\\ge |V(G)|^\\epsilon,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "The **homogeneous number** of $G$ is $$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "source_section": "Statement",
+          "quote": "Then $X$ is $c$-sparse in $G$ if and only if every vertex of the induced subgraph $G[X]$ has degree at most $c|X|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-greedy-colouring-bound",
+          "source_section": "Statement",
+          "quote": "$$\\chi(G)\\leq\\Delta(G)+1.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-clique-independence-chromatic-bounds",
+          "source_section": "Statement",
+          "quote": "$$\\omega(G)\\leq\\chi(G),\\qquad |V|\\leq\\chi(G)\\alpha(G).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-restrictedness-is-complement-invariant",
+          "source_section": "Statement",
+          "quote": "Then $X$ is $c$-sparse in $G$ if and only if $X$ is $c$-dense in $\\overline G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-complement-swaps-cliques-and-stable-sets",
+          "source_section": "Statement",
+          "quote": "a vertex set is a clique in $G$ if and only if it is a stable set in $\\overline G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "a^{r+s}=a^ra^s",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fix-constant-and-graph",
+          "claim": "Fix the candidate Erdős–Hajnal exponent and an arbitrary nonempty family-free graph.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "small-n-case",
+          "claim": "Graphs of sufficiently small order already have homogeneous number at least $n^c$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "large-n-parameters",
+          "claim": "In the large-$n$ case, choose $\\epsilon=n^{-1/(d+1)}$ and obtain a large restricted set.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L6",
+            "choose"
+          ]
+        },
+        {
+          "id": "sparse-branch",
+          "claim": "An $\\epsilon$-sparse witness set yields a large stable set by colouring bounds.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dense-branch",
+          "claim": "An $\\epsilon$-dense witness set yields a large clique by passing to the complement.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "assemble-constant",
+          "claim": "The small-$n$ case and the two large-$n$ branches together prove the Erdős–Hajnal bound.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite family $\\mathcal F$ is fixed data here, and the only emptiness-sensitive object in the argument is the graph $G$, which [L1] and [L2] already restrict to be nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-3",
+            "reason": "The detector keys on the word family, but the proof never chooses an element of $\\mathcal F$; the only emptiness-sensitive object is the graph $G$, and [L1] and [L2] already restrict to nonempty $G$."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in The polynomial Rödl property implies the Erdős–Hajnal property is handled in step 2.2: Assume now that $n\\ge2^{2d+2}$ and set $\\epsilon:=n^{-1/(d+1)}=n^{-2c}$. Then $\\epsilon\\in(0,\\tfrac12)$. By [L1], choose an $\\epsilon$-restricted vertex set $X\\subseteq V(G)$ with $|X|\\ge\\epsilon^dn=n^{1-d/(d+1)}=n^{1/(…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in The polynomial Rödl property implies the Erdős–Hajnal property is handled in step 1.1: Put $c:=1/(2d+2)$, and let $G$ be a nonempty $\\mathcal F$-free graph on $n$ vertices. We show that $\\operatorname{hom}(G)\\ge n^c$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in The polynomial Rödl property implies the Erdős–Hajnal property is handled in step 2.1: If $n=1$, then $\\operatorname{hom}(G)=1=n^c$. If $2\\le n<2^{1/c}$, then any two vertices of $G$ are adjacent or nonadjacent, so $\\operatorname{hom}(G)\\ge2>n^c$. It therefore remains only to treat the case $n\\ge2^{1/c}=2…"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 in The polynomial Rödl property implies the Erdős–Hajnal property: If $n=1$, then $\\operatorname{hom}(G)=1=n^c$. If $2\\le n<2^{1/c}$, then any two vertices of $G$ are adjacent or nonadjacent, so $\\operatorname{hom}(G)\\ge2>n^c$. It therefore remains only to treat the case $n\\ge2^{1/c}=2…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness in The polynomial Rödl property implies the Erdős–Hajnal property is introduced only after the needed existence data are in force; see step 2.2: Assume now that $n\\ge2^{2d+2}$ and set $\\epsilon:=n^{-1/(d+1)}=n^{-2c}$. Then $\\epsilon\\in(0,\\tfrac12)$. By [L1], choose an $\\epsilon$-restricted vertex set $X\\subseteq V(G)$ with $|X|\\ge\\epsilon^dn=n^{1-d/(d+1)}=n^{1/(…"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This corollary proves one implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse implication is a separate item."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current polynomial-Rodl, virality, and Erdos-Hajnal-equivalence chain against its proof-contract entries on the current text. The routed risks here were restricted-subgraph counting, finite-family parameters, and exponent bookkeeping through the Rodl-to-Erdos-Hajnal transfer. On disk the nonempty-graph hypotheses, the restrictedness and complement moves, and the exponent bounds are explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-a-finite-family-with-the-erdos-hajnal-property-is-viral",
+          "source_section": "Statement",
+          "quote": "Every finite family of graphs with the Erdős–Hajnal property is viral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-viral-implies-polynomial-rodl-for-a-finite-family",
+          "source_section": "Statement",
+          "quote": "Every finite family of graphs with the viral property has the polynomial Rödl property.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family",
+          "source_section": "Statement",
+          "quote": "Every finite family of graphs with the polynomial Rödl property has the Erdős–Hajnal property.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "eh-implies-viral",
+          "claim": "Invoke the main theorem.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "viral-implies-polynomial",
+          "claim": "Invoke the first corollary.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "polynomial-implies-eh",
+          "claim": "Invoke the second corollary.",
+          "step": "1.3",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "close-cycle",
+          "claim": "The three implications form a cycle and therefore an equivalence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement of For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: Let $\\mathcal F$ be a finite family of graphs. The following are equivalent: 1. $\\mathcal F$ has the Erdős–Hajnal property. 2. $\\mathcal F$ has the polynomial Rödl property. 3. $\\mathcal F$ is viral."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch is already fixed in the statement of For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: Let $\\mathcal F$ be a finite family of graphs. The following are equivalent: 1. $\\mathcal F$ has the Erdős–Hajnal property. 2. $\\mathcal F$ has the polynomial Rödl property. 3. $\\mathcal F$ is viral."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent is handled in step 1.1: Assertion 1 implies assertion 3 by [L1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch is already fixed in the statement of For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: Let $\\mathcal F$ be a finite family of graphs. The following are equivalent: 1. $\\mathcal F$ has the Erdős–Hajnal property. 2. $\\mathcal F$ has the polynomial Rödl property. 3. $\\mathcal F$ is viral."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent, the statement says Let $\\mathcal F$ be a finite family of graphs. The following are equivalent: 1. $\\mathcal F$ has the Erdős–Hajnal property. 2. $\\mathcal F$ has the polynomial Rödl property. 3. $\\… It introduces no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No new choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 in For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: The three implications close the cycle $1\\Rightarrow3\\Rightarrow2\\Rightarrow1$, so the three assertions are equivalent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 in For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: The three implications close the cycle $1\\Rightarrow3\\Rightarrow2\\Rightarrow1$, so the three assertions are equivalent."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of graphs. The following are equivalent:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "For a finite graph $H$, we say that **$H$ has the Erdős–Hajnal property** when the hereditary class of $H$-free graphs has it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-polynomial-rodl-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "We say that $\\mathcal F$ has the **polynomial Rödl property**",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-viral-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "We say that $\\mathcal F$ is **viral**",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "apply-family-equivalence",
+          "claim": "Apply the finite-family equivalence to the singleton family.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "translate-singleton-language",
+          "claim": "Translate the finite-family assertions for $\\{H\\}$ into the single-graph assertions.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "conclude",
+          "claim": "The translated assertions are the claimed equivalence for a single graph.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 in For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: By [L2] and [L3], the first of those assertions is exactly “$H$ has the Erdős–Hajnal property”, while the other two are already assertions about the singleton family $\\{H\\}$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch is already fixed in the statement of For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: For every finite graph $H$, the following are equivalent: 1. $H$ has the Erdős–Hajnal property. 2. The singleton family $\\{H\\}$ has the polynomial Rödl property. 3. The singleton family $\\{H\\}$ is viral."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent is handled in step 2.1: Steps 1.1 and 1.2 give the claimed equivalence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch is already fixed in the statement of For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: For every finite graph $H$, the following are equivalent: 1. $H$ has the Erdős–Hajnal property. 2. The singleton family $\\{H\\}$ has the polynomial Rödl property. 3. The singleton family $\\{H\\}$ is viral."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent, the statement says For every finite graph $H$, the following are equivalent: 1. $H$ has the Erdős–Hajnal property. 2. The singleton family $\\{H\\}$ has the polynomial Rödl property. 3. The singleton… It introduces no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof on disk for For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent uses explicit data from the claim and makes no witness-selection from a merely nonempty class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 in For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: Steps 1.1 and 1.2 give the claimed equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 in For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent: Steps 1.1 and 1.2 give the claimed equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-singleton-family-p-three-is-viral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every finite graph $H$ with $|V(H)|\\le3$ has the Erdős–Hajnal property.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "source_section": "Statement",
+          "quote": "For every finite graph $H$, the following are equivalent:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "The **path graph** $P_n$ has $n$ vertices.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "p3-has-eh",
+          "claim": "The published three-vertex classification gives the Erdős–Hajnal property for $P_3$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "apply-singleton-corollary",
+          "claim": "The singleton equivalence turns the Erdős–Hajnal property of $P_3$ into virality of $\\{P_3\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns the nonempty graph $P_3$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-vertex witness appears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in The singleton family $\\\\{P_3\\\\}$ is viral is handled in step 2.1: Applying [L2] to the graph $P_3$ of step 1.1 shows that the singleton family $\\{P_3\\}$ is viral."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate parameter appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example on disk says The singleton family $\\{P_3\\}$ is viral. It introduces no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof on disk for The singleton family $\\\\{P_3\\\\}$ is viral uses explicit data from the claim and makes no witness-selection from a merely nonempty class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The singleton family $\\{P_3\\}$ is viral. It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The singleton family $\\{P_3\\}$ is viral. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-family-containing-k-one-is-vacuously-viral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-viral-property-for-a-finite-family",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. We say that $\\mathcal F$ is\n**viral** if there exists a real number $d\\ge1$ such that for every real\n$\\epsilon\\in(0,\\tfrac12)$ and every nonempty finite simple graph $G$ satisfying\n\n$$\\operatorname{ind}_H(G)<\\bigl(\\epsilon^d|V(G)|\\bigr)^{|V(H)|} \\qquad\\text{for every }H\\in\\mathcal F,$$\n\nthere is an $\\epsilon$-restricted vertex set $X\\subseteq V(G)$ with\n\n$$|X|\\ge\\epsilon^d|V(G)|.$$\n\nThe induced-copy count is that of [[def-induced-copy-number]], and\n$\\epsilon$-restricted is in the sense of\n[[def-c-sparse-and-c-restricted-vertex-set]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-induced-copy-number",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, define the **induced-embedding count**\n\n$$\\operatorname{ind}_H(G):=|\\{\\varphi:V(H)\\to V(G):\\varphi\\text{ is an induced embedding}\\}|.$$\n\nThe set inside the cardinality is a subset of the finite function set $V(G)^{V(H)}$, so the displayed natural number is well defined ([[thm-cardinality-of-a-set-of-functions]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]).\n\nThis convention counts labelled embeddings, not vertex subsets. An induced copy with image $W$ contributes one embedding for each isomorphism $H\\to G[W]$ ([[def-induced-embedding-and-induced-copy]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each vertex of $G$ determines one induced embedding of $K_1$ into $G$, so [L2] gives $\\operatorname{ind}_{K_1}(G)=|V(G)|$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $d\\ge1$, then $0<\\epsilon<1$ gives $\\log\\epsilon<0$ and therefore $d\\log\\epsilon\\le\\log\\epsilon<0$. By [L3], $0<\\epsilon^d\\le\\epsilon<1$, so $\\epsilon^d|V(G)|<|V(G)|=\\operatorname{ind}_{K_1}(G)$. Thus the defining viral inequality for $K_1$ can hold for no nonempty graph.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the antecedent in [L1] has no nonempty instance, every exponent $d\\ge1$ witnesses the viral implication vacuously. Therefore any finite family containing $K_1$ is viral.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns a family containing $K_1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch is already fixed in the statement of A family containing $K_1$ is viral for vacuous reasons: Every finite family of graphs containing $K_1$ is viral, but only vacuously: for $\\epsilon\\in(0,\\tfrac12)$ no nonempty graph satisfies the required $K_1$-copy bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in A family containing $K_1$ is viral for vacuous reasons is handled in step 1.1: Each vertex of $G$ determines one induced embedding of $K_1$ into $G$, so [L2] gives $\\operatorname{ind}_{K_1}(G)=|V(G)|$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch is already fixed in the statement of A family containing $K_1$ is viral for vacuous reasons: Every finite family of graphs containing $K_1$ is viral, but only vacuously: for $\\epsilon\\in(0,\\tfrac12)$ no nonempty graph satisfies the required $K_1$-copy bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 in A family containing $K_1$ is viral for vacuous reasons: If $d\\ge1$, then [L3] yields $\\epsilon^d|V(G)|<|V(G)|=\\operatorname{ind}_{K_1}(G)$. Thus the defining viral inequality for $K_1$ can hold for no nonempty graph."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof on disk for A family containing $K_1$ is viral for vacuous reasons uses explicit data from the claim and makes no witness-selection from a merely nonempty class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: Every finite family of graphs containing $K_1$ is viral, but only vacuously: for $\\epsilon\\in(0,\\tfrac12)$ no nonempty graph satisfies the required $K_1$-copy bound. It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: Every finite family of graphs containing $K_1$ is viral, but only vacuously: for $\\epsilon\\in(0,\\tfrac12)$ no nonempty graph satisfies the required $K_1$-copy bound. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current polynomial-Rodl, virality, and Erdos-Hajnal-equivalence chain against its proof-contract entries on the current text. The routed risks here were restricted-subgraph counting, finite-family parameters, and exponent bookkeeping through the Rodl-to-Erdos-Hajnal transfer. On disk the nonempty-graph hypotheses, the restrictedness and complement moves, and the exponent bounds are explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every finite graph $H$ with $|V(H)|\\le3$ has the Erdős–Hajnal property.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "source_section": "Statement",
+          "quote": "For every finite graph $H$, the following are equivalent:\n\n1. $H$ has the Erdős–Hajnal property.\n2. The singleton family $\\{H\\}$ has the polynomial Rödl property.\n3. The singleton family $\\{H\\}$ is viral.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The graph $G$ is $P_3$-free: three vertices in one clique induce a triangle, three vertices meeting both cliques induce either one edge or no edge, and none of those induced subgraphs is $P_3$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $X:=V(G)$. Every vertex of $X$ has exactly $N-1$ neighbours and exactly $N$ non-neighbours inside $X$. Since $N>1/(1-2\\epsilon)$, one has $N-1>2\\epsilon N=\\epsilon|X|$, so $X$ is not $\\epsilon$-sparse; and because $\\epsilon<1/2$, one also has $N>\\epsilon|X|$, so $X$ is not $\\epsilon$-dense. Thus $X$ is not $\\epsilon$-restricted by [L4].",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "One clique component of $G$ is $0$-dense and therefore $\\epsilon$-restricted, so the polynomial Rödl conclusion for $G$ is realized by a proper subset of vertices rather than by the whole graph.",
+          "step": "1.3",
+          "inputs": [
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [L3], the graph $P_3$ has three vertices, so [L1] gives the Erdős–Hajnal property for $P_3$. Applying [L2] then shows that the singleton family $\\{P_3\\}$ has the polynomial Rödl property.",
+          "step": "1.4",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.2 and 1.3 show that the theorem's restricted witness need not be $V(G)$ itself, refuting the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness graph is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in The polynomial Rödl witness need not be the whole graph is handled in step 1.3: One clique component of $G$ is $0$-dense and therefore $\\epsilon$-restricted, so the polynomial Rödl conclusion for $G$ is realized by a proper subset of vertices rather than by the whole graph."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness needs two clique sides."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collapsed or exceptional branch in The polynomial Rödl witness need not be the whole graph is handled in step 1.3: One clique component of $G$ is $0$-dense and therefore $\\epsilon$-restricted, so the polynomial Rödl conclusion for $G$ is realized by a proper subset of vertices rather than by the whole graph."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 in The polynomial Rödl witness need not be the whole graph: Let $X:=V(G)$. Every vertex of $X$ has exactly $N-1$ neighbours and exactly $N$ non-neighbours inside $X$. Since $N>1/(1-2\\epsilon)$, one has $N-1>2\\epsilon N=\\epsilon|X|$, so $X$ is not $\\epsilon$-sparse; and because $…"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness graph is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: Whenever a finite family has the polynomial Rödl property, the restricted set guaranteed by that property can always be chosen to be the whole graph. It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: Whenever a finite family has the polynomial Rödl property, the restricted set guaranteed by that property can always be chosen to be the whole graph. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha group d",
+        "refuter": "Batch-10 read-only refuter",
+        "notes": "The batch-10 refuter opened this high-risk counterexample. Alpha rechecked the repaired three-vertex Erdős-Hajnal route for P3 and the current contract row against the cited singleton-equivalence dependencies and found no remaining defect on the final carrier."
+      }
+    },
+    "cex-the-empty-family-is-not-erdos-hajnal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-the-class-of-all-graphs-is-not-erdos-hajnal",
+          "source_section": "Statement",
+          "quote": "The hereditary class of all finite graphs does not have the Erdős–Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of graphs. The following are equivalent:",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-class",
+          "claim": "The empty-family-free graphs are exactly all finite graphs.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "published-obstruction",
+          "claim": "The published class-of-all-graphs corollary refutes the Erdős–Hajnal property for the empty family.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "equivalence-consequence",
+          "claim": "The A-page equivalence theorem then rules out the other two properties as well.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 in The empty forbidden family is not Erdős–Hajnal: By [L1], every finite graph is $\\varnothing$-free. So the class of $\\varnothing$-free graphs is exactly the class of all finite graphs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch is already fixed in the statement of The empty forbidden family is not Erdős–Hajnal: The empty forbidden family has the Erdős–Hajnal property."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first nontrivial or unit-size branch in The empty forbidden family is not Erdős–Hajnal is handled in step 2.1: Applying [L2] to the class identified in step 1.1 shows that the empty family does not have the Erdős–Hajnal property."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No extra degenerate parameter appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk says The empty forbidden family has the Erdős–Hajnal property. It introduces no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof on disk for The empty forbidden family is not Erdős–Hajnal uses explicit data from the claim and makes no witness-selection from a merely nonempty class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: The empty forbidden family has the Erdős–Hajnal property. It does not assert an equivalence or converse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: The empty forbidden family has the Erdős–Hajnal property. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

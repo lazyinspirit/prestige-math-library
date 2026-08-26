@@ -44,7 +44,15 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (!s?.id) { P('(spec)', 'a stage has no id'); continue; }
     if (seen.has(s.id)) P(s.id, 'duplicate stage id — coverage and state are keyed by it');
     seen.add(s.id);
-    if (!(s.pattern instanceof RegExp)) P(s.id, 'needs a `pattern` RegExp to recognise its result files');
+    if (!(s.pattern instanceof RegExp) && typeof s.pattern !== 'function') {
+      P(s.id, 'needs a `pattern` RegExp (or context resolver returning one) to recognise its result files');
+    } else if (typeof s.pattern === 'function') {
+      try {
+        if (!(s.pattern(ctx) instanceof RegExp)) P(s.id, '`pattern(ctx)` must return a RegExp');
+      } catch (err: any) {
+        P(s.id, `pattern(ctx) threw — ${err?.message ?? err}`);
+      }
+    }
     if (typeof s.units !== 'function') P(s.id, 'needs a `units(ctx)` function; a stage that owes nothing can never be incomplete');
     if (typeof s.plan !== 'function') P(s.id, 'needs a `plan(ctx, pending)` function');
   }

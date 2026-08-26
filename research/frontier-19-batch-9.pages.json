@@ -1,0 +1,478 @@
+[
+  {
+    "order": 365.011,
+    "id": "kan-extensions-density-and-the-free-cocompletion",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Kan Extensions Density and the Free Cocompletion",
+    "companion": "kan-extensions-density-and-the-free-cocompletion-examples",
+    "requires": [
+      "ends-coends-and-weighted-limits-examples"
+    ],
+    "items": [
+      {
+        "id": "def-left-and-right-kan-extension",
+        "kind": "definition",
+        "title": "Left and right Kan extensions",
+        "strategy": "State the local universal properties on the nose. A left Kan extension of F along K is a functor L with a natural transformation eta: F => LK universal among such pairs; dually a right Kan extension is a functor R with epsilon: RK => F terminal among such pairs. Keep the direction of eta and epsilon explicit, because the page later compares modern and older naming conventions.",
+        "deps": [
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "rem-the-left-right-naming-clash",
+        "kind": "remark",
+        "title": "Mac Lane's warning about left and right Kan extensions",
+        "strategy": "Record the convention disagreement reader-facingly. Mac Lane warns that some authors reverse the left/right naming, but this library follows the modern convention fixed in item 1: left Kan extensions come with eta: F => LK and right Kan extensions with epsilon: RK => F. Keep the remark about notation and orientation only; it is not a second definition.",
+        "deps": [
+          "def-left-and-right-kan-extension"
+        ]
+      },
+      {
+        "id": "thm-kan-extensions-are-unique-up-to-unique-isomorphism",
+        "kind": "theorem",
+        "title": "Kan extensions are unique up to unique isomorphism",
+        "strategy": "For two left Kan extensions of the same F along K, factor each unit through the other universal pair and obtain natural transformations in both directions. The two composites are forced to be identities by uniqueness, yielding a unique natural isomorphism compatible with the units. Repeat dually for right Kan extensions and state both compatibilities explicitly.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "def-global-kan-extension",
+        "kind": "definition",
+        "title": "Global Kan extensions as adjoints to restriction",
+        "strategy": "For a small source C and locally small target E, define restriction K^*: [D,E] -> [C,E] by precomposition. A global left Kan extension along K is a left adjoint Lan_K to K^*, and dually a global right Kan extension is a right adjoint Ran_K. Distinguish this functor-level notion from the local extension of a single F, and say once that a class-sized family of local extensions is supplied data rather than silently chosen.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-functor-category",
+          "def-small-locally-small-and-large-category",
+          "prop-size-of-functor-categories",
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ]
+      },
+      {
+        "id": "thm-lan-is-left-adjoint-to-restriction-which-is-left-adjoint-to-ran",
+        "kind": "theorem",
+        "title": "Lan is left adjoint to restriction, and restriction is left adjoint to Ran",
+        "strategy": "Assume that for each F: C -> E a local left Kan extension along K is supplied, and similarly a local right Kan extension. These local universal pairs are exactly the objectwise universal arrows to and from the restriction functor K^*, so the published assembly theorem turns them into adjunctions Lan_K ⊣ K^* and K^* ⊣ Ran_K on the legitimate functor categories. Keep the family supplied rather than selected.",
+        "deps": [
+          "def-global-kan-extension",
+          "def-left-and-right-kan-extension",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint",
+          "thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object",
+          "def-comma-slice-and-coslice-categories"
+        ]
+      },
+      {
+        "id": "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+        "kind": "theorem",
+        "title": "Comma-category limit and colimit formulae compute Kan extensions",
+        "strategy": "For fixed d in D, a colimit of the diagram (K ↓ d) -> C -> E gives an object with the left Kan universal property at d, and a limit of the diagram (d ↓ K) -> C -> E gives the right Kan universal property at d. In each direction, the natural transformation component at c is the leg indexed by the identity on Kc. When such cones are supplied for every d, the action on arrows is forced by the local universal properties and is unique.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-comma-slice-and-coslice-categories",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "def-pointwise-kan-extension-by-the-comma-category-formula",
+        "kind": "definition",
+        "title": "Pointwise Kan extensions by the comma-category formula",
+        "strategy": "Define a pointwise left Kan extension to be a local left Kan extension whose value at each d is computed by the colimit cone of item 6, and dually for a pointwise right Kan extension by the limit cone. State explicitly that eta_c is the colimit leg at id_{Kc} and epsilon_c the limit leg at id_{Kc}; that clause is what later fully faithful and density arguments use.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-comma-slice-and-coslice-categories"
+        ]
+      },
+      {
+        "id": "thm-existence-of-pointwise-kan-extensions",
+        "kind": "theorem",
+        "title": "Pointwise Kan extensions exist under smallness and completeness hypotheses",
+        "strategy": "If C is small and D locally small, then each comma category K ↓ d and d ↓ K is small. Hence cocompleteness of E supplies the objectwise colimits and completeness of E the objectwise limits of item 6. State the result in the owner's required split form: objectwise existence is automatic from the hypotheses, while the global functors Lan_K F and Ran_K F arise only from supplied chosen colimits or limits for every d.",
+        "deps": [
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-small-locally-small-and-large-category",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-comma-slice-and-coslice-categories"
+        ]
+      },
+      {
+        "id": "def-pointwise-kan-extension-by-preservation-by-representables",
+        "kind": "definition",
+        "title": "Pointwise Kan extensions as those preserved by representables",
+        "strategy": "When D and E are locally small, define a right Kan extension to be pointwise when every covariant representable E(e,-) preserves it. Define a left Kan extension to be pointwise after passage to opposite categories, so that each contravariant representable E(-,e) sends it to the corresponding pointwise right Kan extension. Spell the variance out; 'preserved by representables' alone is ambiguous.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-opposite-category",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-the-two-notions-of-pointwise-agree",
+        "kind": "theorem",
+        "title": "The comma-category and representable-preservation notions of pointwise Kan extension agree",
+        "strategy": "One direction is immediate because representables preserve the small limits and colimits used in item 7. For the converse, identify cones over d ↓ K and cocones under K ↓ d with natural families from the appropriate representable weights, then apply Yoneda. Keep the locally-small hypotheses on both D and E explicit: this is the corrected second-edition statement, and the first edition omitted them.",
+        "deps": [
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "def-pointwise-kan-extension-by-preservation-by-representables",
+          "thm-representable-functors-preserve-small-limits",
+          "cor-contravariant-yoneda-lemma",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-comma-slice-and-coslice-categories",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "def-absolute-kan-extension",
+        "kind": "definition",
+        "title": "Absolute Kan extension",
+        "strategy": "Define a left or right Kan extension to be absolute when it is preserved by every functor out of its codomain. Keep it separate from pointwise: pointwise asks only for preservation by representables, while absolute is strictly stronger.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-left-adjoints-preserve-left-kan-extensions",
+        "kind": "theorem",
+        "title": "Left adjoints preserve left Kan extensions",
+        "strategy": "Whisker a left Kan extension through a left adjoint L ⊣ R and use the adjunction between L and R to convert a factorization problem out of LLan_K F into one out of Lan_K F. Uniqueness transfers back through the adjunction, so the whiskered pair is again a left Kan extension. The right-handed dual is recorded in the proof but not used as a separate deps target on this page.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise",
+        "kind": "theorem",
+        "title": "A pointwise Kan extension along a fully faithful functor genuinely extends the original functor",
+        "strategy": "If K is fully faithful, then the relevant slice or coslice category at Kc has the identity on c as a terminal or initial object. The pointwise formula therefore computes the value at Kc by evaluation at that identity, making the unit or counit component invertible. This is the precise theorem behind 'restriction recovers the original functor', and the pointwise hypothesis is essential.",
+        "deps": [
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "thm-the-two-notions-of-pointwise-agree",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-comma-slice-and-coslice-categories"
+        ]
+      },
+      {
+        "id": "thm-kan-extensions-as-coends",
+        "kind": "theorem",
+        "title": "Kan extensions as coends and ends",
+        "strategy": "Use the hom-weighted coend and end formulas from the previous page. For small C and locally small D, the left Kan extension value at d represents the hom-weighted colimit ∫^c D(Kc,d) · Fc, and the right Kan extension value at d the weighted limit ∫_c F(c)^{D(d,Kc)} when the required copowers, powers, coends and ends exist. The proof identifies these objects with the universal objects of item 6.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor",
+          "thm-a-weighted-limit-is-an-end",
+          "thm-weighted-limits-over-a-representable-weight-are-evaluation",
+          "def-power-and-copower-by-a-set",
+          "def-hom-functors-and-hom-bifunctor",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-limits-and-colimits-are-kan-extensions-along-the-functor-to-the-terminal-category",
+        "kind": "theorem",
+        "title": "Limits and colimits are Kan extensions along the functor to the terminal category",
+        "strategy": "Let !: C -> 1 be the unique functor. Then K ↓ * and * ↓ K identify with C itself, so item 6 specializes to the ordinary colimit and limit universal properties. State both sides explicitly: a colimit is a left Kan extension along ! and a limit is a right Kan extension along !.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-comma-slice-and-coslice-categories",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "thm-an-adjunction-is-an-absolute-kan-extension",
+        "kind": "theorem",
+        "title": "Adjunctions as absolute Kan extensions, with the preserved converse",
+        "strategy": "If F ⊣ G with unit eta and counit epsilon, then G is the left Kan extension of 1_C along F and F the right Kan extension of 1_D along G; absoluteness follows from item 12. Conversely, a left Kan extension of 1_C along F yields a right adjoint only when it is preserved by F, and dually on the other side. State the preservation clause in the Statement, because dropping it is a genuine falsehood in the literature.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-absolute-kan-extension",
+          "thm-left-adjoints-preserve-left-kan-extensions",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "thm-evaluation-is-the-limit-over-the-coslice-category",
+        "kind": "theorem",
+        "title": "Evaluation is the limit over the coslice category",
+        "strategy": "Apply the right Kan formula of item 6 to K = id_C. The comma category c ↓ id_C is the coslice c / C, and its initial object id_c computes the limit directly. Record separately the equalizer calculation that appears when C is small and the target has products and equalizers; that calculation is not the universal-property proof itself.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-comma-slice-and-coslice-categories",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-evaluation-is-the-colimit-over-the-slice-category",
+        "kind": "theorem",
+        "title": "Evaluation is the colimit over the slice category",
+        "strategy": "Dualize item 17. For K = id_C, the comma category id_C ↓ c is the slice C / c, and the terminal object id_c computes the colimit directly. Keep this as the dual evaluation formula, not as a second definition of co-Yoneda.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-comma-slice-and-coslice-categories",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-density-for-a-small-category",
+        "kind": "theorem",
+        "title": "Density theorem for a small category",
+        "strategy": "For small C and a covariant Set-valued functor F, build the canonical diagram of covariant representables indexed by the opposite of the category of elements of F. Show that giving a cocone from this diagram to any G is exactly giving a natural transformation F => G, so F is their colimit. Keep the smallness restriction explicit, even though some sources formulate a larger locally-small version.",
+        "deps": [
+          "def-category-of-elements",
+          "def-yoneda-embedding",
+          "thm-evaluation-is-the-colimit-over-the-slice-category",
+          "cor-contravariant-yoneda-lemma",
+          "def-small-locally-small-and-large-category",
+          "prop-size-of-functor-categories"
+        ]
+      },
+      {
+        "id": "thm-density-as-a-self-kan-extension-for-a-small-category",
+        "kind": "theorem",
+        "title": "The Yoneda embedding is its own pointwise left Kan extension",
+        "strategy": "Apply item 19 inside the presheaf category Set^{C^op}. For a presheaf X, the canonical colimit of representables indexed by its category of elements is exactly the comma-category colimit of the Yoneda embedding over X, so the identity functor with the identity natural transformation is the pointwise left Kan extension of y along itself.",
+        "deps": [
+          "thm-density-for-a-small-category",
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "def-yoneda-embedding",
+          "def-category-of-elements",
+          "def-small-locally-small-and-large-category",
+          "prop-size-of-functor-categories"
+        ]
+      },
+      {
+        "id": "def-dense-subcategory",
+        "kind": "definition",
+        "title": "Dense functor and dense subcategory",
+        "strategy": "Define a functor F: D -> C with D small to be dense when the identity on C is the pointwise left Kan extension of F along itself, equivalently when every object of C is the canonical colimit of the comma diagram F ↓ C. A small full subcategory is dense when its inclusion is dense.",
+        "deps": [
+          "thm-density-as-a-self-kan-extension-for-a-small-category",
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "def-category-of-elements",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion",
+        "kind": "theorem",
+        "title": "The presheaf category on a small category is the free cocompletion",
+        "strategy": "For small C and locally small cocomplete E, define Lan_y F objectwise by the density colimit over the category of elements of a presheaf X. Item 20 gives the pointwise left Kan extension of y along itself, item 13 makes Lan_y F a genuine extension of F along y, and Yoneda identifies the right adjoint with the presheaf e |-> E(F-,e). Conversely, any adjunction out of the presheaf category is recovered by restricting its left adjoint along y. Keep the chosen colimits supplied rather than selected.",
+        "deps": [
+          "thm-density-as-a-self-kan-extension-for-a-small-category",
+          "thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise",
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "def-yoneda-embedding",
+          "def-category-of-elements",
+          "def-small-locally-small-and-large-category",
+          "prop-size-of-functor-categories"
+        ]
+      },
+      {
+        "id": "def-codensity-monad",
+        "kind": "definition",
+        "title": "Codensity monad",
+        "strategy": "For a functor G: D -> C, define its codensity monad to be the right Kan extension Ran_G G when it exists. The counit is the Kan-extension counit, the unit is induced from the identity on G, and the multiplication is induced by pasting the counit with itself. Record that a codense functor is one whose codensity monad is the identity.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-natural-transformation",
+          "def-monad"
+        ]
+      },
+      {
+        "id": "thm-the-codensity-construction-satisfies-the-monad-laws",
+        "kind": "theorem",
+        "title": "The codensity construction satisfies the monad axioms",
+        "strategy": "Using the universal property of the right Kan extension, show that the unit induced in item 23 and the multiplication induced by the twice-pasted counit are the unique natural transformations making the two unit triangles and the associativity square commute after whiskering with G. Uniqueness then forces the monad laws in C, so item 23 is genuinely a monad and not only an endofunctor formula.",
+        "deps": [
+          "def-codensity-monad",
+          "def-left-and-right-kan-extension",
+          "def-monad",
+          "def-natural-transformation"
+        ]
+      },
+      {
+        "id": "thm-the-codensity-monad-of-the-small-skeleton-of-finite-sets-is-the-ultrafilter-monad",
+        "kind": "theorem",
+        "title": "The codensity monad of the small skeleton of finite sets is the ultrafilter monad",
+        "strategy": "Use the explicit small skeleton FinOrd of Set on the standard finite ordinals [n] = {0, ..., n-1}. Apply the pointwise right Kan formula to the inclusion FinOrd -> Set and identify a cone from X into a finite set J with a natural choice of a value in J for every finite-valued function X -> J. Leinster's characterization turns these natural choice operators into ultrafilters, and the formulas for the induced unit and multiplication agree with the published principal-ultrafilter and flattening maps. This keeps the source small and avoids any appeal to an unchosen large skeleton of FinSet.",
+        "deps": [
+          "def-codensity-monad",
+          "thm-the-codensity-construction-satisfies-the-monad-laws",
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "def-ultrafilter",
+          "thm-ultrafilter-characterisation",
+          "def-the-ultrafilter-endofunctor-unit-and-multiplication",
+          "thm-the-ultrafilter-monad-is-a-monad"
+        ]
+      },
+      {
+        "id": "fs-every-kan-extension-is-pointwise",
+        "kind": "false-statement",
+        "title": "Every Kan extension is pointwise",
+        "strategy": "Refute with the standard fully faithful inclusion 1+1 -> (ell <- m -> r) into a five-object target category having no initial object. The universal left extension exists vacuously, but the comma category at m is empty, so the pointwise colimit formula would need an initial object that the target does not have. State the positive correction beside it: item 13 needs pointwise, and item 10 explains why.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "thm-the-two-notions-of-pointwise-agree",
+          "thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "fs-lan-along-a-fully-faithful-functor-always-restricts-back-to-the-original-functor",
+        "kind": "false-statement",
+        "title": "Along a fully faithful functor every left Kan extension restricts back to the original functor",
+        "strategy": "Use the same witness as the previous false statement: the unit components at the two source objects are non-invertible even though the inclusion is fully faithful. The correct theorem is item 13, which needs the pointwise hypothesis and then computes the restriction by the identity object in the relevant slice category.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise",
+          "def-full-faithful-and-essentially-surjective-functor"
+        ]
+      },
+      {
+        "id": "fs-the-free-cocompletion-theorem-holds-for-a-large-source-category",
+        "kind": "false-statement",
+        "title": "The free cocompletion theorem holds for a large source category",
+        "strategy": "Refute by the house size policy, not by a fake counterexample. For a large source category C, the functor collection Set^{C^op} is not one of the legitimate functor categories recognized by the library's small-source rule, and the category of elements or presheaf colimits used in item 22 no longer live in an accepted functor category. State the positive replacement: item 22 is for small C, deliberately.",
+        "deps": [
+          "thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion",
+          "prop-size-of-functor-categories",
+          "def-small-locally-small-and-large-category",
+          "def-yoneda-embedding"
+        ]
+      },
+      {
+        "id": "fs-the-yoneda-embedding-preserves-colimits",
+        "kind": "false-statement",
+        "title": "The Yoneda embedding preserves colimits",
+        "strategy": "Take a small category with an initial object 0 and at least one object. The colimit of the empty diagram is 0, but the initial presheaf in Set^{C^op} is pointwise empty, while y(0)(0) = C(0,0) is a singleton. Hence y does not preserve this colimit. Record the true statement beside it: the published corollary says Yoneda preserves and reflects small limits.",
+        "deps": [
+          "def-yoneda-embedding",
+          "cor-yoneda-preserves-and-reflects-small-limits",
+          "def-initial-terminal-and-zero-object",
+          "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.012,
+    "id": "kan-extensions-density-and-the-free-cocompletion-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Kan Extensions Density and the Free Cocompletion — Examples",
+    "companion": "kan-extensions-density-and-the-free-cocompletion",
+    "requires": [
+      "kan-extensions-density-and-the-free-cocompletion"
+    ],
+    "items": [
+      {
+        "id": "ex-left-kan-extension-along-a-full-subcategory-inclusion",
+        "kind": "example",
+        "title": "A left Kan extension along a full inclusion",
+        "strategy": "Take the full inclusion of the two-point chain {0 < 2} into the three-point chain {0 < 1 < 2}, regarded as categories. A Set-valued functor on the smaller chain is just a map X -> Z. Compute the pointwise left Kan extension by the comma-category colimits: the new middle value is X, the top value remains Z, and item 13 explains why restriction along the full inclusion recovers the original diagram.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-a-kan-extension-computing-a-free-functor",
+        "kind": "example",
+        "title": "The free group functor as a Kan extension",
+        "strategy": "Let 1 be the terminal category, let F: 1 -> Grp pick out the infinite cyclic group Z, and extend F along the Yoneda embedding y: 1 -> Set. Item 22 identifies Lan_y F(X) with the colimit of X copies of Z, hence with the free group on X. Compare the resulting adjunction with the published free-group adjunction to show the Kan extension really recovers the familiar free functor.",
+        "deps": [
+          "thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion",
+          "thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "def-yoneda-embedding",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-induction-and-coinduction-of-group-representations",
+        "kind": "example",
+        "title": "Induction and coinduction as Kan extensions along a subgroup inclusion",
+        "strategy": "Regard groups as one-object categories. For a subgroup H ⊂ G and a representation X: BH -> C, item 6 turns the left Kan extension along BH -> BG into the usual induced object and the right Kan extension into the coinduced object. Unwind the comma categories as G/H-cosets to recover the standard coequalizer and equalizer descriptions. When H has finite index, both formulas collapse to the same finite coproduct or product of copies.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "prop-monoids-and-groups-as-one-object-categories",
+          "def-functor-and-contravariant-functor",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "ex-the-orbit-category-kan-extension",
+        "kind": "example",
+        "title": "The orbit-category right Kan extension is the fixed-point functor",
+        "strategy": "Embed B(G^op) into the orbit category O_G by the object G/e. For a left G-set X, compute the right Kan extension to O_G^op at a subgroup H by identifying the relevant comma category with the action groupoid of G/H. Its limit is the subset of H-fixed points of X, so the Kan extension is the fixed-point functor H |-> X^H. This example is the category-theoretic shadow of the fixed-point constructions used in equivariant homotopy theory.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "prop-monoids-and-groups-as-one-object-categories",
+          "def-group-action",
+          "prop-connected-groupoid-equivalent-to-an-automorphism-group",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-density-computed-for-a-presheaf-on-a-two-object-category",
+        "kind": "example",
+        "title": "A two-object presheaf rebuilt as a colimit of representables",
+        "strategy": "Take the walking arrow category 0 -> 1 and a presheaf X with two elements over 0 mapping to one element over 1. Write down its category of elements explicitly, list the two representables that occur, and compute the colimit diagram in Set^{C^op}. The colimit reproduces X exactly, making the density theorem concrete on the smallest nontrivial presheaf category.",
+        "deps": [
+          "thm-density-for-a-small-category",
+          "def-category-of-elements",
+          "def-yoneda-embedding",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "cex-a-kan-extension-that-is-not-pointwise",
+        "kind": "counterexample",
+        "title": "A fully faithful left Kan extension that is not pointwise",
+        "strategy": "Work the standard witness from the A-page false statements in full detail. Take the fully faithful inclusion 1+1 -> (ell <- m -> r) and the five-object target category whose middle comma category has no initial object. Show the local universal pair exists uniquely, then compute K ↓ m and see that the pointwise colimit would need an initial object that is absent. This is the concrete witness behind items 28 and 29.",
+        "deps": [
+          "def-left-and-right-kan-extension",
+          "def-pointwise-kan-extension-by-the-comma-category-formula",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "ex-lan-along-the-inclusion-of-the-rationals-in-the-reals",
+        "kind": "example",
+        "title": "The real exponential is the Kan extension of the rational exponential",
+        "strategy": "View Q and R as poset categories. The monotone functor q |-> 2^q from Q to the positive reals has a pointwise left Kan extension along Q -> R obtained by taking suprema over q <= x, and the density of Q in R identifies that supremum with 2^x. The same density argument makes it the right Kan extension by infima over x <= q, so the left and right pointwise extensions coincide in this case.",
+        "deps": [
+          "thm-the-comma-category-limit-and-colimit-formulae-compute-kan-extensions",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "lem-rat-embeds-dense",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+    "defect_id": "frontier-19-contract-audit-001",
+    "run": "frontier-19",
+    "at": "2026-08-26",
+    "class": "accuracy",
+    "subclass": "false-boundary-disposition",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "template boundary rows across the frontier-19 batch contracts",
+    "batch": "1,2,3,4,5,6,7,8,9,10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "The proof contracts carried 48 template clusters spanning 1,185 rows and 31 contradicted-candidate rows. The repair rewrote the repeated boundary text into case-specific evidence or item-specific not-applicable reasons, corrected the genuinely wrong rows, and upheld 17 detector false positives on the record where the axis token in the Statement did not create a real boundary obligation.",
+    "evidence": [
+      {
+        "path": "research/frontier-19-batch-5.proof-contracts.json",
+        "anchor": "symbolic-method and permutation-statistics boundary rows"
+      },
+      {
+        "path": "research/frontier-19-batch-7.proof-contracts.json",
+        "anchor": "bounded-subsets-inner-outer-measure boundary rows"
+      }
+    ],
+    "source": "boundary-audit"
+  },
+  {
+    "defect_id": "frontier-19-contract-audit-002",
+    "run": "frontier-19",
+    "at": "2026-08-26",
+    "class": "accuracy",
+    "subclass": "citation-inflated",
+    "severity": "nonfatal",
+    "location": "facts-block",
+    "subject": "dropped k>=1 hypotheses in batch-1 group-action fact restatements",
+    "batch": "1",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "Three fact lines widened cited definitions by omitting the k>=1 hypothesis from the k-transitive and sharply k-transitive statements. The repair tightened those fact lines in the authored item text. A fourth citation-fidelity hit, the Cantor-set interval-measurability citation, was a one-dimensional specialization of the cited box theorem and was upheld on the record rather than rewritten.",
+    "evidence": [
+      {
+        "path": "items/lem-k-transitive-actions-are-k-homogeneous-and-lower-transitive.md",
+        "anchor": "Facts L1"
+      },
+      {
+        "path": "items/ex-natural-actions-of-symmetric-and-alternating-groups.md",
+        "anchor": "Facts L1-L2"
+      }
+    ],
+    "source": "citation-fidelity"
+  },
+  {
+    "defect_id": "frontier-19-contract-audit-003",
+    "run": "frontier-19",
+    "at": "2026-08-26",
+    "class": "accuracy",
+    "subclass": "other",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "missing Alpha risk_review rows for high/critical items in batches 2, 3, 4, 5, 6, and 10",
+    "batch": "2,3,4,5,6,10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "detector",
+    "introduced_at_stage": "6b-adjudicate",
+    "introduced_by_role": "group-alpha",
+    "should_have_caught": "6b-adjudicate",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "Risk-report routed 85 high or critical items whose proof-contract rows lacked the required Alpha risk_review disposition. This pass reread the current batch clusters from disk, then wrote the missing review blocks directly into the owning batch contracts with notes naming the proof families actually checked.",
+    "evidence": [
+      {
+        "path": "research/frontier-19-batch-3.proof-contracts.json",
+        "anchor": "risk_review blocks for Kummer-theory and solvability-by-radicals items"
+      },
+      {
+        "path": "research/frontier-19-batch-5.proof-contracts.json",
+        "anchor": "risk_review blocks for symbolic-method and Foata items"
+      },
+      {
+        "path": "research/frontier-19-batch-6.proof-contracts.json",
+        "anchor": "risk_review blocks for design and Erdos-Hajnal items"
+      }
+    ],
+    "source": "risk-report --require-reviewed"
+  },
+  {
+    "defect_id": "frontier-19-contract-audit-004",
+    "run": "frontier-19",
+    "at": "2026-08-26",
+    "class": "silent-runtime",
+    "subclass": "gate-vacuous",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "frontier-19 finite-smoke selection",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "gate",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "subclass_note": "gate-liveness initially reported finite-smoke VACUOUS: 0 checks. The level carries finitely checkable algebraic and combinatorial claims, so zero checks was under-selection, not registry inapplicability. The repair added four finite_smoke rows: cyclic-subgroup-lagrange on cor-degree-of-f-adjoin-an-nth-root-by-coset-order, vieta-elementary-symmetric on thm-general-polynomial-of-degree-n-has-galois-group-s-n, and linear-recurrence-matches-rational-series on the binary-word and composition generating-function corollaries.",
+    "evidence": [
+      {
+        "path": "research/frontier-19-proof-contracts.json",
+        "note": "After the repair, finite-smoke executes 4 checks over 4/349 items and gate-liveness reports finite-smoke live instead of VACUOUS."
+      }
+    ],
+    "source": "gate-liveness",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "tools/gate-liveness.mjs --min-checks 1"
+    }
+  }
+]

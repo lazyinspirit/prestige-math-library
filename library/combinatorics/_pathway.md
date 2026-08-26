@@ -12,6 +12,8 @@ parts:
     pages:
       - formal-power-series
       - linear-recurrences-and-rational-generating-functions
+      - permutation-statistics-inversions-and-eulerian-numbers
+      - combinatorial-classes-and-the-symbolic-method
       - lattice-paths-and-catalan-numbers
   - part: order-and-inversion
     title: "Order, chains and Mobius inversion"
@@ -27,6 +29,7 @@ parts:
       - induced-subgraphs-and-hereditary-graph-classes
       - graph-colouring
       - linear-algebra-methods-in-combinatorics
+      - block-designs-and-finite-projective-planes
   - part: ramsey-and-extremal
     title: "Ramsey and extremal graph theory"
     pages:
@@ -46,6 +49,8 @@ parts:
       - regular-pairs-and-induced-counting
       - sparse-restricted-subgraphs-and-rodl-nikiforov
       - modules-substitution-and-prime-graphs
+      - polynomial-rodl-and-viral-equivalence
+      - classical-and-loglog-erdos-hajnal-bounds
 ---
 
 ## counting
@@ -60,15 +65,15 @@ the pigeonhole principle, which produces an object without exhibiting it.
 
 A formal power series is a sequence written so that algebra acts on coefficients, with no
 question of convergence anywhere. Coefficient extraction, inversion and formal
-differentiation turn recurrence relations into rational functions and closed forms. Lattice
-paths turn those coefficients into geometry: monotone and diagonal paths are counted by
-binomial coefficients, the reflection principle proves the ballot theorems, and Dyck paths
-give the Catalan numbers. The cycle lemma and first-return decompositions supply further
-Catalan, Motzkin and Schroder formulas, while balanced bracket words, binary trees and
-polygon triangulations identify the same Catalan family in different guises.
-Non-intersecting path systems then bring determinants into the subject through
-Lindstrom-Gessel-Viennot, so generating functions, bijections and linear algebra meet on
-one class of finite models.
+differentiation turn recurrence relations into rational functions and closed forms, while
+permutations add a second generating-function language: Lehmer codes count inversions by
+$q$-factorials, Foata's transformations compare inversion number, major index, descents
+and excedances, and Eulerian polynomials package descent statistics. Symbolic
+combinatorics then turns disjoint unions, products, sequences, multisets, powersets,
+cycles, substitution and pointing into formulas for compositions, partitions, necklaces,
+and recursive families such as plane and binary trees. Lattice paths convert the same
+series into geometry, where reflection, first-return decomposition, the cycle lemma, and
+Lindstrom-Gessel-Viennot yield ballot, Catalan, Motzkin and determinant formulas.
 
 ## order-and-inversion
 
@@ -82,15 +87,14 @@ generalises inclusion-exclusion.
 
 A graph begins as adjacency, degree, walks, components and trees, and those notions already
 control spanning trees, Eulerian and Hamiltonian circuits, hereditary classes and proper
-colourings. Incidence vectors and incidence matrices then move finite set systems and graph
-decompositions into linear algebra: independence criteria yield Oddtown, Eventown, Fisher's
-inequality and the Graham-Pollak theorem. Shattering and VC dimension connect the same
-finite families to order and geometry, with shifting and multilinear polynomials proving
-Sauer-Shelah and the inclusion matrix giving an exact rank computation. Multivariate
-polynomial identities and the combinatorial Nullstellensatz close the part with
-Cauchy-Davenport, cube-cover bounds and the Frankl-Wilson intersection theorem, so
-combinatorial structure is measured equally by graph language, vector spaces and
-polynomials.
+colourings. Incidence vectors and incidence matrices then move finite set systems into
+linear algebra: independence arguments prove Oddtown, Eventown, Fisher's inequality and
+Graham-Pollak, while design identities force the parameter equations of $2$-designs and
+symmetric designs. Steiner triple systems, finite projective planes and orthogonal Latin
+squares give structured examples in which the same counting becomes explicit, with
+projective planes realising symmetric $2$-designs and finite fields producing complete
+orthogonal families at prime-power orders. Shattering, VC dimension and the combinatorial
+Nullstellensatz close the part with order, geometry and polynomial methods.
 
 ## ramsey-and-extremal
 
@@ -110,12 +114,13 @@ degree and gives the five colour theorem.
 ## probability
 
 A finite probability space turns expectation into a weighted count, so linearity, Markov's
-inequality and second moments produce graphs and set systems by proving positive
+inequality and second moments produce combinatorial objects by proving positive
 probability. In hereditary graph theory that method yields homogeneous sets and
-induced-copy estimates, while regularity replaces local irregularity by dense pseudorandom
-pairs with controlled counting. Nikiforov's theorem and Rodl's theorem then force linearly
-large sparse or dense restricted sets in $H$-free graphs, with bounded cover and partition
-forms. Modules and substitution give the complementary decomposition theory: a module is a
-vertex set indistinguishable from outside, Gallai's theorem splits every connected
-anticonnected graph into a prime quotient and modular parts, and substitution preserves the
-Erdos-Hajnal property, reducing the conjecture to prime graphs.
+induced-copy estimates, while regularity and the sparse-subgraph theory of Nikiforov and
+Rodl force linearly large restricted sets in $H$-free graphs. Modules and substitution
+give the complementary decomposition theory: Gallai's theorem splits connected
+anticonnected graphs into prime quotients and modular parts, and substitution preserves the
+Erdos-Hajnal property. The finite-family variants then show that the Erdos-Hajnal
+property, the polynomial Rodl property and virality are equivalent. Quantitative density
+theorems then give classical and log-log lower bounds for homogeneous sets in $H$-free
+graphs.

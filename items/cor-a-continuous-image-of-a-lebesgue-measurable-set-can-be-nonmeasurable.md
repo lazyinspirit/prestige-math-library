@@ -1,0 +1,62 @@
+---
+id: cor-a-continuous-image-of-a-lebesgue-measurable-set-can-be-nonmeasurable
+kind: corollary
+title: "A continuous image of a Lebesgue measurable subset of $\\mathbb{R}$ can be nonmeasurable"
+status: draft
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset,
+       lem-this-homeomorphism-sends-the-cantor-set-onto-a-set-of-lebesgue-measure-one,
+       cor-cantor-set-is-an-uncountable-lebesgue-null-set,
+       thm-lebesgue-measure-is-a-complete-measure,
+       lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two,
+       def-countable-choice]
+justified_by: []
+aliases: []
+landmark: true
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-26
+sources:
+  scraped: []
+  references:
+    - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Example 2.22"
+      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Assume the Axiom of Choice. Then there exist a Lebesgue measurable set
+$E \subseteq \mathbb{R}$ and a continuous map $f:E \to \mathbb{R}$ whose image
+$f[E]$ is not Lebesgue measurable.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice.
+
+[L1] Every subset of $\mathbb{R}$ of positive Lebesgue outer measure contains a nonmeasurable subset ([[cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset]]).
+
+[L2] The image $K=\psi[C]$ of the Cantor set under $\psi(x)=x+c(x)$ is compact and has Lebesgue measure $1$ ([[lem-this-homeomorphism-sends-the-cantor-set-onto-a-set-of-lebesgue-measure-one]]).
+
+[L3] The Cantor set is Lebesgue measurable with measure $0$ ([[cor-cantor-set-is-an-uncountable-lebesgue-null-set]]).
+
+[L4] Assuming countable choice, Lebesgue measure is complete ([[thm-lebesgue-measure-is-a-complete-measure]]).
+
+[L5] $\psi$ is a homeomorphism from $[0,1]$ onto $[0,2]$ ([[lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 By [L2] the set $K$ has positive outer measure, so [L1] supplies a subset $N \subseteq K$ that is not Lebesgue measurable. [L1, L2, choose]
+
+2.1 Let $E := \psi^{-1}[N] \subseteq C$. Since $C$ is measurable and has measure $0$ by [L3], completeness from [L4] makes every subset of $C$, and in particular $E$, Lebesgue measurable. [step 1.1, L3, L4, L5]
+
+3.1 The restriction $f := \psi|_E : E \to \mathbb{R}$ is continuous, because $E \subseteq [0,1]$ and $\psi$ is continuous by [L5]. Its image is $f[E]=N$, which is not Lebesgue measurable by step 1.1. [step 1.1, step 2.1, L5] ∎

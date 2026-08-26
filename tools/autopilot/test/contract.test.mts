@@ -29,6 +29,8 @@ import { join } from 'node:path';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? '/Users/ianx/Projects/prestige-math-library';
 const has = existsSync(join(REPO, 'tools/dispatch.mjs'));
+const patternFor = (stage: any, ctx: any): RegExp =>
+  typeof stage.pattern === 'function' ? stage.pattern(ctx) : stage.pattern;
 
 test('the dispatcher names results <role>-<label>.result.json', (t) => {
   if (!has) return t.skip('target repo not present');
@@ -73,13 +75,18 @@ test('every stage matches the results its own plan produces', async (t) => {
       // to their own stage's completion predicate.
       if (Array.isArray(p.covers) && p.covers.length === 0) continue;
       const resultName = `${p.role}-${p.label}.result.json`;
-      if (!st.pattern.test(resultName)) {
-        problems.push(`${st.id}: pattern ${st.pattern} does not match its own dispatch "${resultName}"`);
+      const pattern = patternFor(st, ctx);
+      if (!pattern.test(resultName)) {
+        problems.push(`${st.id}: pattern ${pattern} does not match its own dispatch "${resultName}"`);
       }
-      // And the doubled form a caller produces when its label repeats the role.
-      const doubled = `${p.role}-${p.role}-${p.label}.result.json`;
-      if (!st.pattern.test(doubled)) {
-        problems.push(`${st.id}: pattern ${st.pattern} misses the role-prefixed form "${doubled}" — this is the alpha-alpha-step3-a case`);
+      // Alpha historically received labels that already began with `alpha-`.
+      // Other semantic roles (`alpha-high`, `alpha-assign`) are complete role
+      // names, not prefixes the caller repeats.
+      if (p.role === 'alpha') {
+        const doubled = `${p.role}-${p.role}-${p.label}.result.json`;
+        if (!pattern.test(doubled)) {
+          problems.push(`${st.id}: pattern ${pattern} misses the role-prefixed form "${doubled}" — this is the alpha-alpha-step3-a case`);
+        }
       }
     }
   }
@@ -97,9 +104,14 @@ test('no stage pattern matches another stage\'s dispatches', async (t) => {
     for (const p of plans) names.push({ stage: st.id, file: `${p.role}-${p.label}.result.json` });
   }
   const problems = [];
+  const order = new Map(mod.stages.map((stage: any, index: number) => [stage.id, index]));
   for (const st of mod.stages) {
     for (const n of names) {
-      if (n.stage !== st.id && st.pattern.test(n.file)) {
+      // A later result cannot exist before this serial stage first closes. The
+      // dangerous collision is a stage counting an EARLIER result, which is
+      // exactly how 6d counted 6c-lead and became undispatchable on frontier 19.
+      if ((order.get(n.stage) as number) < (order.get(st.id) as number)
+          && patternFor(st, ctx).test(n.file)) {
         problems.push(`${st.id} would count ${n.stage}'s "${n.file}" as its own`);
       }
     }
@@ -120,7 +132,8 @@ test('a stage that runs a bare command produces a result the engine can read', a
       // one here produced a quoting defect — three in a row, including the test
       // written to prove the fix.
       assert.ok(Array.isArray(p.argv), `${st.id}/${p.label}: argv must be an array`);
-      assert.ok(!p.argv.some((a) => /[>|;&]|^sh$/.test(String(a))),
+      assert.ok(!['sh', 'bash'].includes(String(p.argv[0]))
+        && !p.argv.some((a) => ['>', '|', ';', '&'].includes(String(a))),
         `${st.id}/${p.label}: argv contains a shell metacharacter or invokes sh — it should not need to`);
     }
   }

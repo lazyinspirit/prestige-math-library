@@ -32,7 +32,7 @@ mechanically renders the complete `research/{{run}}-alpha-step9.md` register.
 
 Every item created **or mathematically modified** after the post-Step-8
 snapshot is derived by guarded hash. The engine sends only those ids through
-both judge lanes, adjudication/fatal repair, exact rejudge, and verified stamp.
+Terra judging, adjudication/fatal repair, exact rejudge, and verified stamp.
 Do not self-stamp or run a private sweep.
 
 ## Terminal ledger sweep

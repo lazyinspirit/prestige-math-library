@@ -246,7 +246,7 @@ another project means writing another one.
 - **Start a stage table that cannot fail.** See "Every stage must be able to
   fail" above; `autopilot doctor` reports it too.
 - **Finish with the mathematics unsigned.** Every stage from the judge sweep
-  onward gates on judge closure: every item has a current verdict pair, every
+  onward gates on judge closure: every item has a current configured-judge verdict set, every
   current rejection has an exact-hash Alpha outcome, and no outcome is
   `confirmed_fatal`. The terminal stage additionally runs the whole-level
   receipt gate on the final text.

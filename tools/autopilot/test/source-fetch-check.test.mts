@@ -26,7 +26,7 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'source-fetch-check.mjs');
 
-// ---- a local source host: one real PDF, one thin page, one sign-in bounce ----
+// ---- a local source host: PDF, HTML, substantive plain text, and failures ----
 let server: Server;
 let base = '';
 /** A byte-level PDF the page counter can read: n page objects + padding. */
@@ -38,10 +38,12 @@ const fakePdf = (pages: number) => Buffer.concat([
 
 before(async () => {
   const article = `<html><body><main>${'Lemma 1. A finite intersection of open sets is open. '.repeat(120)}</main></body></html>`;
+  const plainText = 'Theorem. Every finite projective plane is a symmetric design. '.repeat(100);
   server = createServer((req, res) => {
     if (req.url === '/notes.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(12)); return; }
     if (req.url === '/abstract.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(2)); return; }
     if (req.url === '/article.html') { res.writeHead(200, { 'content-type': 'text/html' }); res.end(article); return; }
+    if (req.url === '/notes.txt') { res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' }); res.end(plainText); return; }
     if (req.url === '/thin.html') { res.writeHead(200, { 'content-type': 'text/html' }); res.end('<html><body>Not found.</body></html>'); return; }
     if (req.url === '/paywalled.pdf') { res.writeHead(302, { location: `${base}/signin/` }); res.end(); return; }
     if (req.url === '/signin/') { res.writeHead(200, { 'content-type': 'text/html' }); res.end(`<html><body>${'Please sign in to continue. '.repeat(200)}</body></html>`); return; }
@@ -89,6 +91,17 @@ test('a real PDF and a substantive page stamp; the stamps carry evidence', async
   assert.match(pdf.fetch_verified.sha256_16, /^[0-9a-f]{16}$/);
   assert.equal(html.fetch_verified.kind, 'html');
   assert.ok(html.fetch_verified.text_chars > 2_000);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a substantive text/plain lecture note stamps as reader-visible full text', async () => {
+  const { dir, file } = coverage([`${base}/notes.txt`]);
+  const r = await run(file, ['--stamp']);
+  assert.equal(r.status, 0, r.stderr);
+  const cov = JSON.parse(readFileSync(file, 'utf8'));
+  const source = cov.pages[0].sources[0];
+  assert.equal(source.fetch_verified.kind, 'text');
+  assert.ok(source.fetch_verified.text_chars > 2_000);
   rmSync(dir, { recursive: true, force: true });
 });
 

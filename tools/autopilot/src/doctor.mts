@@ -8,9 +8,9 @@
 //     would have failed twelve hours into an unattended run.
 //   * a brief or task file that does not exist, discovered when the stage that
 //     needs it dispatches, at 02:00.
-//   * a judge lane that cannot authenticate — the key resolves through the app
-//     repo's .env, not the environment, so an engine started from a bare shell
-//     may or may not find it depending on machinery it does not control.
+//   * a configured judge runner that cannot authenticate or launch — a run
+//     started from a bare shell may not inherit the same environment as an
+//     interactive check.
 //   * a scope ledger that was never written, leaving manifest-integrity with
 //     nothing to compare against and a whole pair free to vanish.
 //
@@ -23,6 +23,7 @@ import { spawnSync } from 'node:child_process';
 
 import { validateStages } from './spec.mts';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
+import { MODELS, resolveLineup } from '../../models.mjs';
 
 const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
 
@@ -239,29 +240,40 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
     }
   }
 
-  // 6. judge lanes — checked only if a stage mentions them
+  // 6. configured judge runners — checked only if a stage mentions them.
+  // Resolve the registry instead of assuming a pair: Terra became the sole
+  // Step-7-and-later judge on 2026-08-26, and the old unconditional DeepSeek /
+  // Claude probes would have made a healthy Terra-only run fail doctor.
   const usesJudge = mod.stages.some((s: any) => {
     try { return (s.plan?.(ctx, units) ?? []).some((p: any) => (p.argv ?? []).join(' ').includes('judge')); }
     catch { return false; }
   });
   if (usesJudge) {
-    const r = spawnSync('node', ['--input-type=module', '-e',
-      `import { deepseekEnvFile } from '${join(repo, 'tools/paths.mjs')}';
-       import { readFileSync, existsSync } from 'node:fs';
-       const p = deepseekEnvFile();
-       if (!p || !existsSync(p)) { console.log('NOKEY'); process.exit(0); }
-       console.log(readFileSync(p,'utf8').split(/\\r?\\n/).some(l => l.startsWith('DEEPSEEK_API_KEY=')) ? 'OK' : 'NOKEY');`],
-      { cwd: repo, encoding: 'utf8', env: { PATH: process.env.PATH, HOME: process.env.HOME } });
-    if (/OK/.test(r.stdout ?? '')) ok.push('DeepSeek lane resolves its key from a bare environment');
-    else problems.push('DeepSeek lane cannot find DEEPSEEK_API_KEY — the judge stage will fail when it runs');
+    const lineup = resolveLineup(process.env.JUDGE_LINEUP);
+    const judgeModels = new Set(lineup.models);
+    const runners = new Set(Object.values(MODELS)
+      .filter((model: any) => judgeModels.has(model.id))
+      .map((model: any) => model.runner));
 
-    // The second judge lane moved Codex -> claude with every other lane (owner,
-    // 2026-08-23). Presence only: the claude CLI authenticates from the user's
-    // keychain session, so there is no auth file to test, and a spent
-    // subscription quota looks identical to a healthy one from here.
-    const claude = spawnSync('sh', ['-c', 'command -v claude >/dev/null && echo OK'], { encoding: 'utf8' });
-    if (/OK/.test(claude.stdout ?? '')) ok.push('claude CLI is on PATH for the second judge lane and every agent role');
-    else problems.push('claude CLI not found — the judge stage AND every dispatched agent role will fail when they run');
+    if (runners.has('deepseek')) {
+      const r = spawnSync('node', ['--input-type=module', '-e',
+        `import { deepseekEnvFile } from '${join(repo, 'tools/paths.mjs')}';
+         import { readFileSync, existsSync } from 'node:fs';
+         const p = deepseekEnvFile();
+         if (!p || !existsSync(p)) { console.log('NOKEY'); process.exit(0); }
+         console.log(readFileSync(p,'utf8').split(/\\r?\\n/).some(l => l.startsWith('DEEPSEEK_API_KEY=')) ? 'OK' : 'NOKEY');`],
+        { cwd: repo, encoding: 'utf8', env: { PATH: process.env.PATH, HOME: process.env.HOME } });
+      if (/OK/.test(r.stdout ?? '')) ok.push('configured DeepSeek judge resolves its key from a bare environment');
+      else problems.push('configured DeepSeek judge cannot find DEEPSEEK_API_KEY');
+    }
+
+    for (const runner of ['codex', 'claude']) {
+      if (!runners.has(runner)) continue;
+      const bin = runner === 'codex' ? (process.env.CODEX_BIN ?? 'codex') : (process.env.CLAUDE_BIN ?? 'claude');
+      const probe = spawnSync(bin, ['--version'], { cwd: repo, encoding: 'utf8', timeout: 15_000 });
+      if (!probe.error && probe.status === 0) ok.push(`${runner} CLI launches for configured judge lineup ${lineup.name}`);
+      else problems.push(`${runner} CLI cannot launch — configured judge lineup ${lineup.name} will fail`);
+    }
   }
 
   return { problems, notes, ok };

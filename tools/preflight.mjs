@@ -100,9 +100,9 @@ attempt('yaml', true, () => {
 //             the audit's `audit-beta`/`audit-alpha`/`certifier`. Only
 //             `audit-refuter` is elsewhere, and it is a keyed HTTP lane rather
 //             than a CLI.
-//   JUDGES  — both workflows judge with the configured lineup, `deepseek+terra`
-//             by default, with `deepseek+opus`, `deepseek+terra` and
-//             `deepseek+sonnet` selectable.
+//   JUDGES  — both workflows judge with the configured model set, `terra` by
+//             default. Retired paired lineups remain selectable only for
+//             historical replay and ledger interpretation.
 //
 // CHECKING ONLY THE LINEUP IS THE HOLE THIS CLOSES. Until 2026-08-11 that is
 // all this did, and it reported a green preflight for a build that could not
@@ -115,11 +115,12 @@ attempt('yaml', true, () => {
 // import a tool it is checking is runnable.
 // `tools/autopilot/test/model-registry.test.mts` fails if the lineup drifts.
 const lineupModels = {
+  'terra': ['gpt-5.6-terra'],
   'deepseek+gpt54': ['deepseek-v4-pro', 'gpt-5.4'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5[1m]'],
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-4-6'],
-}[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
+}[process.env.JUDGE_LINEUP ?? 'terra'] ?? [];
 // Which runner every DISPATCHED AGENT ROLE uses — LANES.agentic and
 // LANES.secondary both resolve to gpt-5.4 on the codex runner (owner,
 // 2026-08-24). A build that cannot spawn this cannot author, audit, adjudicate

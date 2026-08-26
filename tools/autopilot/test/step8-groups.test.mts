@@ -24,11 +24,17 @@ import { tmpdir } from 'node:os';
 import { stages } from '../stages/mathlib.mts';
 import { resolveLineup } from '../../models.mjs';
 import { tsxLoader } from '../../paths.mjs';
+import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
 const stage = (id: string): any => stages.find((s: any) => s.id === id);
+
+test('the step-7 reader output schema is accepted by the dispatcher', () => {
+  const schema = JSON.parse(readFileSync(join(REPO, 'briefs/schemas/step8-context.json'), 'utf8'));
+  assert.deepEqual(validateCodexOutputSchema(schema), []);
+});
 
 /** A throwaway repo holding just the group assignment and the item map, which is
  *  all the step-8 routing hooks read. */
@@ -191,7 +197,8 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
   const judgeGateIds = rejudge.gates(futureCtx).map((g: any) => g.id);
   assert.deepEqual(judgeGateIds, ['step8-guard', 'step8-published', 'judge-closure'],
     'contract/repository repairs cannot consume the two-cycle judge budget');
-  assert.equal(rejudge.terminalFixBudget, true, 'only the mathematical rejudge loop is lifetime-capped');
+  assert.equal(rejudge.terminalFixBudget, undefined,
+    'the stage-wide repair counter must be re-armable; the durable rejudge-cycle receipt owns the per-item lifetime cap');
   assert.equal(rejudge.maxAttempts, 1, 'a failed funded-lane preflight is not immediately repeated');
   assert.ok(preflight.gates(futureCtx).some((g: any) => g.id === 'proof-contract'));
   assert.ok(close.gates(futureCtx).some((g: any) => g.id === 'proof-contract'));
@@ -204,11 +211,17 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
     'non-judge repair rounds have separate budgets');
   rmSync(futureRepo, { recursive: true, force: true });
 
-  if (existsSync(join(REPO, 'research/frontier-18-step8-cutover.json'))) {
-    const migrated = close.gates({ run: 'frontier-18', repo: REPO }).map((g: any) => g.id);
-    assert.deepEqual(migrated, ['step8-cutover-frozen'],
-      'the already-rejudged live run uses its explicit frozen migration instead of retroactively inserting work');
-  }
+  const migratedRepo = fixtureRepoWithGroups();
+  mkdirSync(join(migratedRepo, '.autopilot'));
+  mkdirSync(join(migratedRepo, 'research', 'demo-dispatch'));
+  writeFileSync(join(migratedRepo, 'research', 'demo-dispatch', 'tool-rejudge.result.json'),
+    JSON.stringify({ run: 'demo', ok: true }));
+  writeFileSync(join(migratedRepo, '.autopilot', 'state.json'),
+    JSON.stringify({ run: 'demo', stages: { '8-rejudge': { gatesPassedAt: '2026-08-25T00:00:00.000Z' } } }));
+  const migrated = close.gates({ run: 'demo', repo: migratedRepo }).map((g: any) => g.id);
+  assert.deepEqual(migrated, ['step8-cutover-frozen'],
+    'an already-rejudged run uses its explicit frozen migration instead of retroactively inserting work');
+  rmSync(migratedRepo, { recursive: true, force: true });
 });
 
 test('Step-8 preflight adjudicates existing rejection rows before any rejudge', async () => {
@@ -249,7 +262,7 @@ test('Step-8 preflight routes unhandled advisory residue in the same repair roun
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('Step-8 rejudge dispatches agents for contested rows and tools only for missing pairs', async () => {
+test('Step-8 rejudge dispatches agents for contested rows and tools only for missing verdicts', async () => {
   const repo = fixtureRepoWithGroups();
   const s: any = stage('8-rejudge');
   const runHook = async (closure: any) => {
@@ -267,6 +280,40 @@ test('Step-8 rejudge dispatches agents for contested rows and tools only for mis
   assert.equal(missing.length, 1);
   assert.equal(missing[0].role, 'tool');
   assert.match(missing[0].argv.join(' '), /step8-rejudge-cycle\.mjs .*--items thm-demo-y/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('Step-8 rejudge blocks exhausted owed items without stranding eligible page-mates', async () => {
+  const repo = fixtureRepoWithGroups();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: ['thm-demo-x', 'thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false,
+  }));
+  writeFileSync(join(repo, 'research', 'demo-step8-rejudge-cycles.json'), JSON.stringify({
+    version: 1, run: 'demo', max_cycles_per_item: 2, cycles: [
+      { cycle_id: 'x-1', items: ['thm-demo-x'] },
+      { cycle_id: 'x-2', items: ['thm-demo-x'] },
+      { cycle_id: 'y-1', items: ['thm-demo-y'] },
+    ],
+  }));
+  const started: any[] = [];
+  const blockers: any[] = [];
+  const notices: any[] = [];
+  const s: any = stage('8-rejudge');
+  await s.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: {
+      start: (_x: any, p: any) => started.push(p),
+      state: { addBlocker: (...args: any[]) => { blockers.push(args); return true; } },
+      reporter: { notify: (...args: any[]) => notices.push(args) },
+    },
+    stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
+  });
+  assert.equal(blockers.length, 1);
+  assert.match(blockers[0][1], /thm-demo-x/);
+  assert.equal(notices[0][0], 'blocked');
+  assert.equal(started.length, 1);
+  assert.match(started[0].argv.join(' '), /--items thm-demo-y(?: |$)/);
+  assert.ok(!started[0].argv.join(' ').includes('thm-demo-x'));
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -303,6 +350,9 @@ test('every group Alpha at step 8 has its own task file and resumes its reader w
 // a finally. That is also the honest test: it exercises the paths the gate
 // actually reads.
 const check = (run: string) => spawnSync('node', ['tools/step8-scope.mjs', 'check', '--run', run],
+  { cwd: REPO, encoding: 'utf8' });
+
+const render = (run: string) => spawnSync('node', ['tools/step8-scope.mjs', 'render', '--run', run],
   { cwd: REPO, encoding: 'utf8' });
 
 function withFixtureRun(files: Record<string, unknown>, body: (run: string) => void) {
@@ -363,7 +413,7 @@ test('a cross-group finding the owning group has answered dispatches nobody', as
   rmSync(repo, { recursive: true, force: true });
 });
 
-// A PUBLISHED REPAIR IS ROUTED TO BOTH JUDGE LANES (owner, 2026-08-25). The
+// A PUBLISHED REPAIR IS ROUTED TO THE CONFIGURED JUDGE (owner, 2026-08-25). The
 // closure receipt is computed over the RUN's scope, so a published item is never
 // in it — without the union below the repair ships to a live page unjudged.
 test('a repaired published item is swept even though closure never names it', () => {
@@ -437,7 +487,7 @@ test('step8-guard licenses a published repair, and only a well-formed one', () =
   }
 });
 
-test('step8-scope published fails a repair only one lane judged', () => {
+test('step8-scope published refuses retired-lineup-only evidence', () => {
   const run = `step8pubtest${process.pid}`;
   const files = [
     [`${run}-step8-published-repairs.jsonl`, `${JSON.stringify({ kind: 'repaired', id: 'lem-cauchy-bounded', group: 'a', found_via: 'thm-y', pre_sha256: 'a'.repeat(64), defect: 'd', correction_basis: 'c' })}\n`],
@@ -446,15 +496,15 @@ test('step8-scope published fails a repair only one lane judged', () => {
   try {
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
     const r = spawnSync('node', ['tools/step8-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
-    assert.notEqual(r.status, 0, 'one lane is not certification');
-    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict pair/);
+    assert.notEqual(r.status, 0, 'a retired judge row is not current certification');
+    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict from gpt-5\.6-terra/);
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
   }
 });
 
-test('step8-scope published refuses two stale or retired-lane verdicts', () => {
+test('step8-scope published refuses a stale configured-model verdict', () => {
   const run = `step8pubstaletest${process.pid}`;
   const { models } = resolveLineup();
   const files = [
@@ -466,15 +516,15 @@ test('step8-scope published refuses two stale or retired-lane verdicts', () => {
   try {
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
     const r = spawnSync('node', ['tools/step8-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
-    assert.notEqual(r.status, 0, 'two historic lane names are not current certification');
-    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict pair/);
+    assert.notEqual(r.status, 0, 'a stale configured-model row is not current certification');
+    assert.match(`${r.stdout}${r.stderr}`, /lacks a current verdict/);
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
   }
 });
 
-test('step8-scope published accepts both configured lanes on the current text', () => {
+test('step8-scope published accepts the configured model set on the current text', () => {
   const run = `step8pubcurrenttest${process.pid}`;
   const id = 'lem-cauchy-bounded';
   const built = spawnSync(process.execPath,
@@ -493,7 +543,7 @@ test('step8-scope published accepts both configured lanes on the current text', 
     for (const [name, body] of files) writeFileSync(join(REPO, 'research', name), body);
     const r = spawnSync('node', ['tools/step8-scope.mjs', 'published', '--run', run], { cwd: REPO, encoding: 'utf8' });
     assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
-    assert.match(r.stdout, /1 published item\(s\) repaired and judged by both lanes/);
+    assert.match(r.stdout, /1 published item\(s\) repaired and judged by the configured model set/);
   } finally {
     for (const [name] of files) rmSync(join(REPO, 'research', name), { force: true });
     rmSync(join(REPO, 'research', `${run}-judge-context-hashes.json`), { force: true });
@@ -532,6 +582,35 @@ test('step8-scope check fails on an unrendered partition', () => {
   const r = check(`step8scopeabsent${process.pid}`);
   assert.notEqual(r.status, 0, 'a missing scope file is a failure, not a pass');
   assert.match(`${r.stdout}${r.stderr}`, /has not rendered the partition/);
+});
+
+test('step7 scope renders before the judge ledger exists', () => {
+  withFixtureRun({
+    'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
+    'batch-1.pages.json': [{
+      id: 'page-demo-a', kind: 'A', title: 'Demo', category: 'demo', order: 1,
+      items: [{ id: 'thm-demo-one', kind: 'theorem', title: 'Demo theorem' }],
+      requires: [],
+    }],
+  }, (run) => {
+    const generated = [
+      'step8-scope.json', 'step8-alerts.json', 'alpha-a-step8.task.md',
+      'alpha-a-step8-recovery.task.md', 'alpha-a-step8-preflight.task.md',
+      'alpha-a-step8-close.task.md', 'alpha-a-step7-read.task.md',
+    ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
+    try {
+      const r = render(run);
+      assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
+      assert.match(r.stdout, /0 open rejection\(s\) partitioned/);
+      const scope = JSON.parse(readFileSync(generated[0], 'utf8'));
+      assert.deepEqual(scope.groups[0].rejections, []);
+      const checked = check(run);
+      assert.equal(checked.status, 0, `${checked.stdout}${checked.stderr}`);
+      assert.match(checked.stdout, /1 item\(s\) partitioned/);
+    } finally {
+      for (const p of generated) rmSync(p, { force: true });
+    }
+  });
 });
 
 test('step8-scope check fails when the rendered scope disagrees with the assignment', () => {
@@ -619,6 +698,7 @@ test('every stage pattern matches the result file its own plan produces', () => 
   const checked: string[] = [];
   for (const s of stages as any[]) {
     if (!s.pattern || !s.plan || !s.units) continue;
+    const pattern = typeof s.pattern === 'function' ? s.pattern(ctx) : s.pattern;
     let plans: any[];
     // Each stage's OWN units. A fixed list would hand `1-scaffold` the unit
     // `all`, which is not one of its units, and the guard would report a
@@ -629,9 +709,9 @@ test('every stage pattern matches the result file its own plan produces', () => 
       // A mechanical rider is exempt: `9-scope` plans a `tool` snapshot in front
       // of its Alpha so the ordering is guaranteed, and that snapshot is
       // deliberately not what satisfies an agent stage's coverage.
-      if (p.role === 'tool' && !s.pattern.source.startsWith('^tool-')) continue;
-      assert.ok(s.pattern.test(`${p.role}-${p.label}.result.json`),
-        `stage ${s.id}: pattern ${s.pattern} does not match ${p.role}-${p.label}.result.json`);
+      if (p.role === 'tool' && !pattern.source.startsWith('^tool-')) continue;
+      assert.ok(pattern.test(`${p.role}-${p.label}.result.json`),
+        `stage ${s.id}: pattern ${pattern} does not match ${p.role}-${p.label}.result.json`);
       checked.push(s.id);
     }
   }

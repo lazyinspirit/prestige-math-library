@@ -2,7 +2,7 @@
 // step8-terminal-resolution.mjs — exact-hash manual closure after both Step-8
 // rejudge cycles have exhausted.
 //
-// The ordinary closure remains paired judges -> Alpha adjudication -> repair ->
+// The ordinary closure remains judge -> Alpha adjudication -> repair ->
 // targeted rejudge.  This file is the deliberately narrow terminal exception:
 // after the engine has recorded `repair-exhausted` for `8-rejudge`, the owner or
 // supervising session resolves the blocker directly and records the exact text

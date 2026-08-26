@@ -1,0 +1,468 @@
+[
+  {
+    "order": 101.6,
+    "id": "solvability-by-radicals-and-kummer-theory",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Solvability by Radicals and Kummer Theory",
+    "companion": "solvability-by-radicals-and-kummer-theory-examples",
+    "requires": [
+      "finite-fields-and-cyclotomic-extensions-examples",
+      "composition-series-and-solvable-groups",
+      "dual-spaces-bilinear-forms-and-inertia"
+    ],
+    "items": [
+      {
+        "id": "def-field-norm-and-trace",
+        "kind": "definition",
+        "title": "The norm $N_{K/F}$ and trace $\\operatorname{Tr}_{K/F}$ of a finite field extension",
+        "deps": [
+          "def-extension-degree-and-finite-extension",
+          "def-determinant-of-a-linear-operator",
+          "def-trace-of-an-endomorphism"
+        ]
+      },
+      {
+        "id": "thm-field-norm-and-trace-by-embeddings",
+        "kind": "theorem",
+        "title": "Norm and trace from embeddings, with the inseparable exponent in the norm formula",
+        "strategy": "Let $K_{\\mathrm{sep}}/F$ be the maximal separable subextension of $K/F$. For the trace, use the multiplicity-$[K:F]_i$ block decomposition through $K_{\\mathrm{sep}}$ to show that inseparability forces $\\operatorname{Tr}_{K/F}=0$ in characteristic $p$ when $[K:F]_i>1$, while in the separable case the trace is the sum over the $F$-embeddings into a normal closure. For the norm, first prove the separable product formula over the distinct $F$-embeddings, then compare multiplication-by-$a$ on $K$ with multiplication-by-$a$ on $K_{\\mathrm{sep}}$ repeated $[K:F]_i$ times to get $N_{K/F}(a)=\\bigl(\\prod_\\sigma \\sigma(a)\\bigr)^{[K:F]_i}$. The exponent is load-bearing and must remain in both the title and the statement.",
+        "deps": [
+          "def-field-norm-and-trace",
+          "def-separable-elements-and-separable-extensions"
+        ]
+      },
+      {
+        "id": "thm-basic-laws-for-field-norm-and-trace",
+        "kind": "theorem",
+        "title": "Norm is multiplicative, trace is $F$-linear, and both are transitive in towers",
+        "strategy": "Linearity and multiplicativity are immediate from the multiplication operators on the finite-dimensional $F$-vector space $K$. For transitivity in a tower $L/K/F$, either compare the block matrices for multiplication by an element of $L$ after choosing a $K$-basis and an $F$-basis, or use the embedding formulas and count each $F$-embedding through an intermediate $K$-embedding exactly once. Treat purely inseparable subextensions explicitly so the trace-zero case is not silently absorbed into the separable argument.",
+        "deps": [
+          "def-field-norm-and-trace",
+          "thm-field-norm-and-trace-by-embeddings",
+          "thm-determinant-multiplicative"
+        ]
+      },
+      {
+        "id": "thm-field-norm-and-trace-agree-with-operator-determinant-and-trace",
+        "kind": "theorem",
+        "title": "Field norm and trace agree with the determinant and trace of multiplication by an element",
+        "strategy": "This is the dictionary item the page owes the earlier determinant and trace pages. Unpack the multiplication map $m_a\\colon K\\to K$, note that the finite-extension definition of norm and trace was made through $m_a$, and spell out the zero-dimensional convention so the determinant agrees with the already-published linear-algebra definition on the zero field extension.",
+        "deps": [
+          "def-field-norm-and-trace",
+          "def-determinant-of-a-linear-operator",
+          "def-trace-of-an-endomorphism"
+        ]
+      },
+      {
+        "id": "def-trace-form-of-a-finite-extension",
+        "kind": "definition",
+        "title": "The trace form $(x,y)\\mapsto \\operatorname{Tr}_{K/F}(xy)$ of a finite extension",
+        "deps": [
+          "def-field-norm-and-trace",
+          "def-bilinear-symmetric-skew-and-alternating-forms"
+        ]
+      },
+      {
+        "id": "thm-trace-form-is-nondegenerate-iff-separable",
+        "kind": "theorem",
+        "title": "The trace form of a finite extension is nondegenerate exactly when the extension is separable",
+        "strategy": "If $K/F$ is inseparable then the trace theorem makes $\\operatorname{Tr}_{K/F}=0$, so the whole space lies in the radical. If $K/F$ is separable, embed $K$ into a normal closure, write the trace form matrix as $A^{\\mathsf T}A$ with $A=(\\sigma_i(e_j))$, and use Dedekind independence to show $A$ is invertible for any $F$-basis $(e_j)$. Then the bilinear-form radical vanishes, which is exactly nondegeneracy in the earlier linear-algebra sense.",
+        "deps": [
+          "def-trace-form-of-a-finite-extension",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-field-norm-and-trace-by-embeddings",
+          "thm-dedekind-linear-independence-of-characters"
+        ]
+      },
+      {
+        "id": "cor-trace-is-surjective-for-finite-separable-extensions",
+        "kind": "corollary",
+        "title": "The trace map of a finite separable extension is surjective",
+        "strategy": "Regard the trace map as the linear functional $x\\mapsto \\operatorname{Tr}_{K/F}(x\\cdot 1)$. If its image were $0$, then $1$ would lie in the radical of the trace form, contradicting nondegeneracy. Since the codomain is the one-dimensional $F$-vector space $F$ over itself, any nonzero linear map onto it is surjective.",
+        "deps": [
+          "thm-trace-form-is-nondegenerate-iff-separable"
+        ]
+      },
+      {
+        "id": "def-cyclic-extension",
+        "kind": "definition",
+        "title": "A cyclic extension is a finite Galois extension with cyclic Galois group",
+        "deps": [
+          "def-finite-galois-extension-and-galois-group"
+        ]
+      },
+      {
+        "id": "thm-hilberts-theorem-90",
+        "kind": "theorem",
+        "title": "Hilbert's theorem 90 for a finite cyclic extension",
+        "strategy": "Let $K/F$ be cyclic with generator $\\sigma$. The easy direction is the telescoping product $N_{K/F}(\\beta/\\sigma(\\beta))=1$. For the converse, choose the standard crossed-homomorphism built from an element of norm $1$ and apply Dedekind independence to the linear combination $\\sum_i c_i\\sigma^i$ acting on a carefully chosen vector, so the vanishing of first cohomology is proved algebraically rather than quoted. Keep the degree-one case visible.",
+        "deps": [
+          "def-cyclic-extension",
+          "def-field-norm-and-trace",
+          "thm-dedekind-linear-independence-of-characters"
+        ]
+      },
+      {
+        "id": "thm-additive-hilberts-theorem-90",
+        "kind": "theorem",
+        "title": "Additive Hilbert 90: trace zero is the image of $\\alpha\\mapsto\\alpha-\\sigma(\\alpha)$",
+        "strategy": "One direction is the telescoping trace computation. For the converse, let $K/F$ be cyclic of degree $n$ with generator $\\sigma$, choose $c\\in K$ with $\\operatorname{Tr}_{K/F}(c)=1$, and for a trace-zero element $b$ use the standard explicit sum $\\alpha=\\sum_{i=0}^{n-1}(\\sum_{j=0}^{i-1}\\sigma^j(b))\\sigma^i(c)$ to obtain $\\alpha-\\sigma(\\alpha)=b$. This proof keeps the characteristic-$p$ case honest because it uses only the existence of one element of trace $1$ from the previous corollary.",
+        "deps": [
+          "def-cyclic-extension",
+          "cor-trace-is-surjective-for-finite-separable-extensions"
+        ]
+      },
+      {
+        "id": "def-lagrange-resolvent",
+        "kind": "definition",
+        "title": "The Lagrange resolvent attached to a cyclic action and a root of unity",
+        "deps": [
+          "def-cyclic-extension",
+          "def-roots-of-unity-in-a-field"
+        ]
+      },
+      {
+        "id": "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer",
+        "kind": "theorem",
+        "title": "If $\\mu_n\\subseteq F$ and $\\operatorname{char}F\\nmid n$, then a degree-$n$ extension is cyclic exactly when it is $F(\\alpha)$ with $\\alpha^n\\in F$ and $x^n-\\alpha^n$ irreducible",
+        "strategy": "For the cyclic-to-radical direction, choose a generator $\\sigma$ of the Galois group and a primitive $n$-th root of unity $\\zeta\\in F$; the Lagrange resolvent gives a nonzero eigenvector $\\alpha$ with $\\sigma(\\alpha)=\\zeta\\alpha$, so $\\alpha^n\\in F$ and $K=F(\\alpha)$ by primitivity. For the converse, let $K=F(\\alpha)$ with $\\alpha^n=a\\in F$, use the published splitting-field description of $x^n-a$ after adjoining one nonzero root, and conclude that the splitting field already equals $K$ because all roots are $\\zeta^i\\alpha$ with $\\zeta\\in F$; the automorphism sending $\\alpha$ to $\\zeta\\alpha$ generates a cyclic group of order $n$. The irreducibility clause is what forces the degree to be exactly $n$.",
+        "deps": [
+          "def-lagrange-resolvent",
+          "thm-hilberts-theorem-90",
+          "prop-splitting-field-of-x-n-minus-a",
+          "thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity"
+        ]
+      },
+      {
+        "id": "thm-artin-schreier-characterization-of-cyclic-degree-p-extensions",
+        "kind": "theorem",
+        "title": "In characteristic $p$, a degree-$p$ extension is cyclic exactly when it is generated by a root of $x^p-x-a$ with $a\\in F$ and that polynomial irreducible",
+        "strategy": "If $K/F$ is cyclic of degree $p$ with generator $\\sigma$, additive Hilbert 90 applied to the trace-zero element $1$ gives $\\alpha\\in K$ with $\\sigma(\\alpha)=\\alpha+1$, whence $\\alpha^p-\\alpha\\in F$ and $K=F(\\alpha)$. Conversely, if $x^p-x-a$ is irreducible, its roots are exactly $\\alpha+i$ for $i\\in\\mathbb F_p$, so the polynomial is separable and its splitting field is $F(\\alpha)$ itself; translation by $1$ on the root set defines a cyclic Galois group of order $p$. Record explicitly that this is the characteristic-$p$ replacement for the roots-of-unity Kummer theorem, not a special case of it.",
+        "deps": [
+          "def-cyclic-extension",
+          "thm-additive-hilberts-theorem-90",
+          "def-ring-characteristic"
+        ]
+      },
+      {
+        "id": "def-kummer-extension",
+        "kind": "definition",
+        "title": "Kummer extensions from adjoining $n$-th roots over a base field containing $\\mu_n$",
+        "deps": [
+          "def-roots-of-unity-in-a-field",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer"
+        ]
+      },
+      {
+        "id": "thm-kummer-pairing-is-perfect",
+        "kind": "theorem",
+        "title": "The Kummer pairing $\\operatorname{Gal}(K/F)\\times B/(F^\\times)^n\\to\\mu_n$ is perfect",
+        "strategy": "For a finite Kummer extension $K=F(\\sqrt[n]{B})$, define the pairing by $\\langle\\sigma,b(F^\\times)^n\\rangle=\\sigma(\\beta)/\\beta$ for any chosen $n$-th root $\\beta$ of $b$. Prove well-definedness by changing the root by an element of $\\mu_n$ and the representative by an $n$-th power. Nondegeneracy on the Galois side uses the earlier cyclic theorem: if $\\sigma$ is nontrivial, some one-generator Kummer subextension detects it. Nondegeneracy on the $B/(F^\\times)^n$ side uses the same one-generator reduction and the fact that $x^d-b$ cannot split trivially when the class of $b$ has order $d>1$.",
+        "deps": [
+          "def-kummer-extension",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer"
+        ]
+      },
+      {
+        "id": "cor-degree-of-f-adjoin-an-nth-root-by-coset-order",
+        "kind": "corollary",
+        "title": "The degree $[F(\\sqrt[n]{a}):F]$ is the order of $a(F^\\times)^n$ in $F^\\times/(F^\\times)^n$",
+        "strategy": "Let $d$ be the order of the class of $a$, so $a^d\\in(F^\\times)^n$ and $d\\mid n$. Replace $a$ by the same class viewed modulo $d$-th powers and apply the cyclic Kummer theorem to the irreducible polynomial $x^d-b$ obtained after removing the maximal $d$-th power already present in $F$. The extension degree equals the order of the cyclic subgroup detected by the perfect pairing.",
+        "deps": [
+          "thm-kummer-pairing-is-perfect"
+        ]
+      },
+      {
+        "id": "thm-kummer-correspondence",
+        "kind": "theorem",
+        "title": "Kummer theory classifies finite abelian extensions of exponent dividing $n$ by subgroups between $(F^\\times)^n$ and $F^\\times$",
+        "strategy": "Send such a subgroup $B$ to the field $F(\\sqrt[n]{B})$. The previous theorem makes the Galois group a finite abelian group killed by $n$. For the inverse direction, let $K/F$ be a finite abelian extension of exponent dividing $n$ with $\\mu_n\\subseteq F$, and define $B$ to be the set of elements of $F^\\times$ whose chosen $n$-th roots lie in $K$; every cyclic quotient of $\\operatorname{Gal}(K/F)$ is Kummer by the cyclic theorem, so the subgroup recovers the whole extension. Inclusion preservation is immediate, and the perfect pairing identifies $\\operatorname{Gal}(K/F)$ with $\\operatorname{Hom}(B/(F^\\times)^n,\\mu_n)$.",
+        "deps": [
+          "def-kummer-extension",
+          "thm-kummer-pairing-is-perfect",
+          "thm-artin-fixed-field-degree-theorem"
+        ]
+      },
+      {
+        "id": "def-radical-extension",
+        "kind": "definition",
+        "title": "A radical extension is a tower obtained by adjoining one $n$-th root at each step",
+        "deps": []
+      },
+      {
+        "id": "def-solvable-by-radicals",
+        "kind": "definition",
+        "title": "A polynomial is solvable by radicals when its splitting field lies in a radical extension",
+        "deps": [
+          "def-radical-extension",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "lem-normal-closure-of-a-radical-extension-is-radical",
+        "kind": "lemma",
+        "title": "The normal closure of a radical extension is again radical",
+        "strategy": "Induct up the radical tower. For a single step adjoining an $n$-th root $\\alpha$ of $a$, the published splitting-field result for $x^n-a$ shows that after adjoining the relevant roots of unity the normal closure is obtained by adjoining finitely many elements of the form $\\zeta\\alpha$, which is still radical. At the inductive step, take the normal closure of the previous stage first and then apply the same one-step argument over that normal field. Do not assume roots of unity or Galoisness in the definition; this lemma is exactly what restores them when needed.",
+        "deps": [
+          "def-radical-extension",
+          "prop-splitting-field-of-x-n-minus-a",
+          "def-roots-of-unity-in-a-field"
+        ]
+      },
+      {
+        "id": "lem-adjoining-roots-of-unity-to-a-galois-extension-adds-an-abelian-kernel",
+        "kind": "lemma",
+        "title": "Adjoining roots of unity to a finite Galois extension adds an abelian kernel and preserves solvability",
+        "strategy": "If $K/F$ is finite Galois and $L=K(\\mu_n)$, then $L/F$ is again Galois and restriction gives a surjection $\\operatorname{Gal}(L/F)\\twoheadrightarrow\\operatorname{Gal}(K/F)$. Its kernel is $\\operatorname{Gal}(L/K)$, a subgroup of the cyclotomic Galois group over $K$, hence abelian. Therefore a solvable quotient remains solvable after extending by this abelian kernel, and conversely a quotient of a solvable group is solvable.",
+        "deps": [
+          "def-cyclotomic-extension",
+          "cor-cyclotomic-extensions-are-abelian",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+          "thm-subgroups-and-quotients-of-solvable-groups-are-solvable",
+          "thm-extensions-and-direct-products-of-solvable-groups-are-solvable"
+        ]
+      },
+      {
+        "id": "thm-solvable-by-radicals-implies-a-solvable-galois-group",
+        "kind": "theorem",
+        "title": "In characteristic $0$, a polynomial solvable by radicals has a solvable Galois group",
+        "strategy": "Let the splitting field sit inside a radical extension. Replace that extension by its normal closure, which stays radical by the previous lemma. Then adjoin all roots of unity needed by the tower; the new Galois group changes only by abelian kernels, so solvability is unaffected. Each successive radical step is cyclic by the cyclic Kummer theorem, hence has solvable Galois group, and repeated use of the extension theorem shows the top Galois group is solvable. Finally pass to the polynomial's splitting field as a quotient.",
+        "deps": [
+          "def-solvable-by-radicals",
+          "lem-normal-closure-of-a-radical-extension-is-radical",
+          "lem-adjoining-roots-of-unity-to-a-galois-extension-adds-an-abelian-kernel",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer",
+          "thm-subgroups-and-quotients-of-solvable-groups-are-solvable",
+          "thm-extensions-and-direct-products-of-solvable-groups-are-solvable"
+        ]
+      },
+      {
+        "id": "thm-solvable-galois-group-implies-solvable-by-radicals",
+        "kind": "theorem",
+        "title": "In characteristic $0$, a solvable Galois group makes a polynomial solvable by radicals",
+        "strategy": "Let $E/F$ be the splitting field with solvable Galois group. Choose a composition series whose factors are cyclic of prime order. Work upward through the corresponding tower of fixed fields. Before treating a prime-order step, adjoin the relevant roots of unity to the lower field; the preceding lemma keeps the Galois groups solvable and only enlarges the ambient field by radical extensions. The cyclic Kummer theorem then writes the lifted step as adjoining one prime root. Composing these radical steps through the tower puts the full splitting field inside a radical extension of the original base field.",
+        "deps": [
+          "def-solvable-by-radicals",
+          "thm-normal-subgroups-and-quotients-in-the-galois-correspondence",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer",
+          "thm-finite-solvable-iff-composition-factors-have-prime-order"
+        ]
+      },
+      {
+        "id": "lem-symmetric-groups-up-to-four-are-solvable",
+        "kind": "lemma",
+        "title": "The symmetric groups $S_n$ are solvable for $nle 4$",
+        "strategy": "Use explicit abelian factor series. $S_1$ and $S_2$ are cyclic. For $S_3$, the alternating subgroup $A_3$ is normal of index $2$ and has order $3$, so $1\triangleleft A_3\triangleleft S_3$ has prime-order abelian factors. For $S_4$, let $V_4={1,(12)(34),(13)(24),(14)(23)}$. Conjugation relabels the double transpositions, so $V_4\triangleleft A_4$; $V_4$ is abelian; $|A_4/V_4|=3$ and $|S_4/A_4|=2$, so $S_4\triangleright A_4\triangleright V_4\triangleright 1$ is an abelian factor series. Apply the published solvable-by-abelian-factor-series criterion.",
+        "deps": [
+          "thm-solvable-iff-it-has-an-abelian-factor-series",
+          "def-alternating-group",
+          "cor-alternating-group-is-normal-and-has-half-the-elements",
+          "cor-order-of-a-quotient-group",
+          "cor-prime-order-group-is-cyclic",
+          "lem-conjugating-a-cycle-relabels-its-entries"
+        ]
+      },
+      {
+        "id": "cor-polynomials-of-degree-at-most-four-are-solvable-by-radicals",
+        "kind": "corollary",
+        "title": "Every polynomial of degree at most four is solvable by radicals",
+        "strategy": "For a polynomial of degree $nle 4$, its Galois group is a subgroup of $S_n$ acting on the roots. The preceding lemma makes $S_n$ solvable for $nle 4$, solvability descends to subgroups, and the previous theorem then places the splitting field inside a radical extension.",
+        "deps": [
+          "thm-solvable-galois-group-implies-solvable-by-radicals",
+          "thm-subgroups-and-quotients-of-solvable-groups-are-solvable",
+          "lem-symmetric-groups-up-to-four-are-solvable"
+        ]
+      },
+      {
+        "id": "thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p",
+        "kind": "theorem",
+        "title": "For prime $p$, a transitive subgroup of $S_p$ containing a transposition is all of $S_p$",
+        "strategy": "Let $N$ be the subgroup generated by all transpositions lying in the given transitive subgroup $G$. Because conjugates of transpositions are transpositions, $N$ is normal in $G$. The $N$-orbits on a set of size $p$ form a $G$-stable partition, so transitivity of $G$ and primality of $p$ force $N$ to be transitive once $N$ is nontrivial. Now build the graph whose edges are the transpositions in $N$: transitivity means the graph is connected, and the subgroup generated by transpositions along the edges of a connected graph is the full symmetric group.",
+        "deps": [
+          "def-group-action",
+          "def-normal-subgroup",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "thm-transpositions-generate-the-symmetric-group"
+        ]
+      },
+      {
+        "id": "thm-general-polynomial-of-degree-n-has-galois-group-s-n",
+        "kind": "theorem",
+        "title": "The general polynomial of degree $n$ has Galois group $S_n$",
+        "strategy": "Let $X_1,\\dots,X_n$ be algebraically independent over $F$ and let $p_i$ be the elementary symmetric polynomials. The symmetric-functions theorem identifies the fixed field of the natural $S_n$-action on $F(X_1,\\dots,X_n)$ as $F(p_1,\\dots,p_n)$. Renaming $p_i$ as independent coefficient symbols $t_i$ gives the general polynomial $X^n-t_1X^{n-1}+\\cdots+(-1)^nt_n$ with roots $X_1,\\dots,X_n$. Its splitting field is exactly $F(X_1,\\dots,X_n)$, and the permutation action on the roots embeds the Galois group into $S_n$ while Artin's theorem on invariants makes the extension degree $n!$, forcing equality.",
+        "deps": [
+          "thm-fundamental-theorem-of-symmetric-polynomials",
+          "cor-rational-function-field-as-a-fraction-field",
+          "thm-artin-fixed-field-degree-theorem",
+          "thm-galois-group-embeds-in-the-symmetric-group-on-the-roots",
+          "thm-finite-galois-extension-characterizations"
+        ]
+      },
+      {
+        "id": "cor-abel-ruffini-for-the-general-polynomial",
+        "kind": "corollary",
+        "title": "For $n\\ge5$, the general polynomial of degree $n$ is not solvable by radicals",
+        "strategy": "The previous theorem makes the Galois group of the general polynomial equal to $S_n$, and the published solvable-group theorem says $S_n$ is not solvable for $n\\ge5$. If the general polynomial were solvable by radicals, the forward solvability theorem would force its Galois group to be solvable, contradiction. State this exactly as a theorem about the general polynomial over the rational-function field, not as a theorem about every quintic over $\\mathbb Q$.",
+        "deps": [
+          "thm-general-polynomial-of-degree-n-has-galois-group-s-n",
+          "thm-solvable-by-radicals-implies-a-solvable-galois-group",
+          "thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 101.8,
+    "id": "solvability-by-radicals-and-kummer-theory-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Solvability by Radicals and Kummer Theory — Examples",
+    "companion": "solvability-by-radicals-and-kummer-theory",
+    "requires": [
+      "solvability-by-radicals-and-kummer-theory"
+    ],
+    "items": [
+      {
+        "id": "ex-norm-and-trace-in-a-quadratic-extension",
+        "kind": "example",
+        "title": "For $\\mathbb Q(\\sqrt d)/\\mathbb Q$, the embedding formulas match the determinant and trace of multiplication",
+        "strategy": "Work in the ordered basis $(1,\\sqrt d)$ with $d$ squarefree. For $a+b\\sqrt d$, compute the multiplication matrix, its determinant, and its trace. Then compute the two embeddings into an algebraic closure and compare their sum and product with the same formulas. State separately what happens when $d=0$ is excluded by the squarefree hypothesis.",
+        "deps": [
+          "def-field-norm-and-trace",
+          "thm-field-norm-and-trace-by-embeddings",
+          "thm-field-norm-and-trace-agree-with-operator-determinant-and-trace"
+        ]
+      },
+      {
+        "id": "ex-norm-and-trace-in-a-finite-field-extension",
+        "kind": "example",
+        "title": "In $\\mathbb F_{q^n}/\\mathbb F_q$, norm and trace are the Frobenius product and sum",
+        "strategy": "List the $n$ embeddings of $\\mathbb F_{q^n}$ over $\\mathbb F_q$ as the powers of Frobenius. Apply the embedding formulas to obtain $N(\\alpha)=\\alpha^{1+q+\\cdots+q^{n-1}}=\\alpha^{(q^n-1)/(q-1)}$ and $\\operatorname{Tr}(\\alpha)=\\alpha+\\alpha^q+\\cdots+\\alpha^{q^{n-1}}$. Use the $\\alpha=0$ boundary to show the norm formula is understood multiplicatively only on nonzero elements while the polynomial formula still gives $0$.",
+        "deps": [
+          "thm-field-norm-and-trace-by-embeddings",
+          "thm-extensions-of-finite-fields-are-galois-with-cyclic-frobenius-group"
+        ]
+      },
+      {
+        "id": "ex-trace-vanishes-on-a-purely-inseparable-extension",
+        "kind": "example",
+        "title": "For $\\mathbb F_p(t)/\\mathbb F_p(t^p)$, the trace is identically zero",
+        "strategy": "Take $u=t^p$ so that $t$ is a root of $x^p-u$ and the extension has degree $p$ but only one embedding over the base field. Apply the trace formula from the A page or compute the multiplication matrix in the basis $1,t,\\dots,t^{p-1}$ to show every diagonal sum vanishes. This is the reader-facing witness that the trace-form theorem's inseparable direction is not cosmetic.",
+        "deps": [
+          "thm-field-norm-and-trace-by-embeddings"
+        ]
+      },
+      {
+        "id": "ex-hilbert-90-and-pythagorean-triples",
+        "kind": "example",
+        "title": "Hilbert 90 for $\\mathbb Q(i)/\\mathbb Q$ recovers the rational parametrization of the unit circle",
+        "strategy": "An element $a+bi\\in\\mathbb Q(i)$ has norm $1$ exactly when $a^2+b^2=1$. Hilbert 90 writes it as $(m+ni)/(m-ni)$ for rationals $m,n$, and clearing denominators yields the classical formula $(x,y,z)=(m^2-n^2,2mn,m^2+n^2)$ for Pythagorean triples. Keep the degenerate cases $n=0$ and $m=0$ visible so the points $(\\pm1,0)$ are not dropped.",
+        "deps": [
+          "thm-hilberts-theorem-90"
+        ]
+      },
+      {
+        "id": "ex-x-cubed-minus-two-over-q-omega-is-cyclic",
+        "kind": "example",
+        "title": "Over $\\mathbb Q(\\omega)$, the splitting field of $x^3-2$ is a cyclic cubic extension",
+        "strategy": "Because $\\omega\\in\\mathbb Q(\\omega)$, the base field already contains $\\mu_3$. Show that $x^3-2$ is irreducible over $\\mathbb Q(\\omega)$, for example by the rational-root test through the Eisenstein argument over $\\mathbb Z[\\omega]$ or by degree comparison with the known cubic subfield, and then apply the cyclic Kummer theorem. The three roots are $\\sqrt[3]{2},\\omega\\sqrt[3]{2},\\omega^2\\sqrt[3]{2}$.",
+        "deps": [
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer"
+        ]
+      },
+      {
+        "id": "ex-cardano-from-the-lagrange-resolvent",
+        "kind": "example",
+        "title": "Cardano's formula for $x^3-3x-1$ from the Lagrange resolvent",
+        "strategy": "Depress the cubic, form the two nontrivial Lagrange resolvents over a field containing $\\omega$, and use the cyclic cubic structure to solve for their cubes in the base field. Then recover one root as the symmetric linear combination of the resolvents and verify directly that it satisfies $x^3-3x-1=0$. The check is load-bearing: without it the example is only a formal manipulation of radicals.",
+        "deps": [
+          "def-lagrange-resolvent",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer",
+          "cor-polynomials-of-degree-at-most-four-are-solvable-by-radicals"
+        ]
+      },
+      {
+        "id": "ex-a-quartic-solved-by-its-resolvent-cubic",
+        "kind": "example",
+        "title": "A quartic solved through its resolvent cubic",
+        "strategy": "Choose a monic irreducible quartic with rational coefficients, write down its resolvent cubic, and solve the cubic first. Use the published resolvent formulas and subgroup classification to reconstruct the quartic roots from one square root and one cubic radical stage. The point is not to reprove the quartic theorem, but to make the passage from the resolvent data to actual radicals explicit once.",
+        "deps": [
+          "def-resolvent-cubic-of-a-monic-quartic",
+          "prop-resolvent-cubic-formula-and-discriminant",
+          "thm-galois-group-of-an-irreducible-quartic-by-its-resolvent",
+          "cor-polynomials-of-degree-at-most-four-are-solvable-by-radicals"
+        ]
+      },
+      {
+        "id": "ex-x-fifth-minus-two-is-solvable-by-radicals",
+        "kind": "example",
+        "title": "$x^5-2$ over $\\mathbb Q$ is solvable by radicals although it is a quintic",
+        "strategy": "Its splitting field is $\\mathbb Q(\\sqrt[5]{2},\\zeta_5)$, so by definition it lies in a radical extension. Compute the Galois group as the semidirect product generated by $\\sqrt[5]{2}\\mapsto\\zeta_5\\sqrt[5]{2}$ and $\\zeta_5\\mapsto\\zeta_5^a$ for $a\\in(\\mathbb Z/5)^\\times$, yielding a group of order $20$ isomorphic to $\\mathbb Z/5\\rtimes\\mathbb Z/4$. This is the page's concrete witness that “quintic” and “insoluble by radicals” are not synonymous.",
+        "deps": [
+          "def-solvable-by-radicals",
+          "thm-solvable-by-radicals-implies-a-solvable-galois-group",
+          "thm-cyclic-degree-n-extensions-with-roots-of-unity-are-kummer",
+          "cor-the-galois-group-of-a-rational-cyclotomic-field"
+        ]
+      },
+      {
+        "id": "ex-an-artin-schreier-extension-over-f-p-of-t",
+        "kind": "example",
+        "title": "Over $\\mathbb F_p(t)$, the polynomial $x^p-x-t$ gives a cyclic Artin-Schreier extension",
+        "strategy": "Show that $t$ is not of the form $b^p-b$ in $\\mathbb F_p(t)$ by comparing pole orders: $b^p-b$ cannot have a single simple pole. The Artin-Schreier theorem then gives irreducibility and a cyclic degree-$p$ Galois group. Write the full root set as $\\alpha+i$ for $i\\in\\mathbb F_p$ so the splitting-field claim is visibly true.",
+        "deps": [
+          "thm-artin-schreier-characterization-of-cyclic-degree-p-extensions"
+        ]
+      },
+      {
+        "id": "ex-q-zeta-three-cuberoot-two-cuberoot-three-is-a-kummer-extension",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\zeta_3,\\sqrt[3]{2},\\sqrt[3]{3})$ is a Kummer extension with quotient $(\\mathbb Z/3)^2$",
+        "strategy": "Take $F=\\mathbb Q(\\zeta_3)$, where $\\mu_3\\subseteq F$. Show that the classes of $2$ and $3$ in $F^\\times/(F^\\times)^3$ are independent, so the subgroup they generate has order $9$. The degree formula then gives $[F(\\sqrt[3]{2},\\sqrt[3]{3}):F]=9$, and the Kummer pairing identifies the Galois group with $\\operatorname{Hom}((\\mathbb Z/3)^2,\\mu_3)\\cong(\\mathbb Z/3)^2$.",
+        "deps": [
+          "cor-degree-of-f-adjoin-an-nth-root-by-coset-order",
+          "thm-kummer-correspondence"
+        ]
+      },
+      {
+        "id": "fs-solvable-by-radicals-does-not-force-an-abelian-galois-group",
+        "kind": "false-statement",
+        "title": "FALSE: a polynomial solvable by radicals must have abelian Galois group",
+        "strategy": "Use $x^5-2$. The previous example places its splitting field in a radical extension, so it is solvable by radicals. Its Galois group has order $20$ and is the nonabelian semidirect product $\\mathbb Z/5\\rtimes\\mathbb Z/4$, because the order-four automorphism of $\\zeta_5$ acts nontrivially on the order-five subgroup generated by adjoining $\\sqrt[5]{2}$.",
+        "deps": [
+          "ex-x-fifth-minus-two-is-solvable-by-radicals"
+        ]
+      },
+      {
+        "id": "fs-not-every-quintic-is-insoluble-by-radicals",
+        "kind": "false-statement",
+        "title": "FALSE: every quintic is insoluble by radicals",
+        "strategy": "Again use $x^5-2$. The point of separating this from the preceding false statement is that the present claim fails already at the level of existence of one radical solution method, while the preceding claim fails at the stronger level of the Galois group's structure.",
+        "deps": [
+          "ex-x-fifth-minus-two-is-solvable-by-radicals"
+        ]
+      },
+      {
+        "id": "fs-the-norm-is-always-the-product-of-the-embeddings",
+        "kind": "false-statement",
+        "title": "FALSE: for every finite extension, the norm is just the product over the embeddings",
+        "strategy": "Refute this with the purely inseparable extension $\\mathbb F_p(t)/\\mathbb F_p(t^p)$. There is only one embedding over the base field, so the raw embedding product sends $t$ to $t$, while the actual norm is $t^p$ because the inseparable exponent is $p$. This is precisely the omitted factor from the theorem title on the A page.",
+        "deps": [
+          "thm-field-norm-and-trace-by-embeddings",
+          "ex-trace-vanishes-on-a-purely-inseparable-extension"
+        ]
+      },
+      {
+        "id": "fs-the-trace-is-always-surjective",
+        "kind": "false-statement",
+        "title": "FALSE: the trace map of every finite extension is surjective",
+        "strategy": "Use the same purely inseparable extension $\\mathbb F_p(t)/\\mathbb F_p(t^p)$. The example shows that its trace is identically zero, so its image is the zero subspace of the base field and not the whole field. This is why the surjectivity corollary on the A page is stated with the separability hypothesis in the title, not buried in remarks.",
+        "deps": [
+          "cor-trace-is-surjective-for-finite-separable-extensions",
+          "ex-trace-vanishes-on-a-purely-inseparable-extension"
+        ]
+      }
+    ]
+  }
+]

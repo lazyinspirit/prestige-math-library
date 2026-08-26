@@ -67,6 +67,15 @@ const sleep = (ms: number, signal?: AbortSignal) => new Promise<void>((resolve) 
   signal?.addEventListener('abort', () => { clearTimeout(t); resolve(); }, { once: true });
 });
 
+/** Resolve a stage's result matcher for this run. Migration compatibility is
+ * run-specific: a legacy result may cover an introduced stage only when the
+ * run's hash-bound cutover receipt validates. */
+const stagePattern = (stage: Stage, ctx: Ctx): RegExp => {
+  const pattern = typeof stage.pattern === 'function' ? stage.pattern(ctx) : stage.pattern;
+  if (!(pattern instanceof RegExp)) throw new TypeError(`${stage.id}: pattern(ctx) did not return a RegExp`);
+  return pattern;
+};
+
 /** A durable gate pass licenses exactly the ordered prefix that produced it.
  * Future stages may be edited freely, but changing that prefix would make the
  * engine skip newly inserted work. Such a change needs an explicit migration. */
@@ -273,7 +282,7 @@ export class Executor {
       return { done: true, unitsDone: true, gatesPassed: true, why: 'skipped by owner', missing: [], mode: 'skip' };
     }
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
-    const units = stageComplete(ctx.dispatchDir, stage.pattern, owed, {
+    const units = stageComplete(ctx.dispatchDir, stagePattern(stage, ctx), owed, {
       coversMap: ctx.coversMap,
       fallbackCount: stage.fallbackCount ?? owed.length,
     });
@@ -358,7 +367,7 @@ export class Executor {
   unitsComplete(stage: Stage, ctx: Ctx = this.ctx()): Set<Unit> {
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
     if (this.state.data.stages[stage.id]?.skipped) return new Set(owed);
-    const cov = covered(ctx.dispatchDir, stage.pattern, ctx.coversMap);
+    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
     // A stage running in the legacy COUNT mode declares no coverage at all, so
     // there is no per-unit answer to give. Fall back to the only thing that mode
     // supports — the stage as a whole — rather than inventing a per-unit one.
@@ -678,7 +687,7 @@ export class Executor {
         if (stage?.pattern && lm) {
           const rm = /--role\s+([^\s]+)/.exec(line);
           const resultName = `${rm ? rm[1] : ''}-${lm[1]}.result.json`;
-          if (!stage.pattern.test(resultName)) continue;
+          if (!stagePattern(stage, this.ctx()).test(resultName)) continue;
         }
         const m = /--covers\s+([^\s]+)/.exec(line);
         if (!m) continue;
@@ -972,7 +981,7 @@ export class Executor {
       for (const { s, st } of statuses) {
         if (st.unitsDone) continue;
         const owed = (s.units ? s.units(ctx) : []).map(String);
-        const cov = covered(ctx.dispatchDir, s.pattern, ctx.coversMap);
+        const cov = covered(ctx.dispatchDir, stagePattern(s, ctx), ctx.coversMap);
         if (pending(owed, cov).length) continue;   // dispatchable — not a stalemate
         const missing = owed.filter((u: string) => !this.unitsComplete(s, ctx).has(u));
         const failure = { id: 'stage-stalemate', ok: false, why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete, nothing dispatchable` };
@@ -1004,7 +1013,7 @@ export class Executor {
     { prev?: Stage | null; groupKey?: string; roleBudget?: (role: string) => number } = {}): Promise<'ok' | 'blocked'> {
     // Which units still need a successful dispatch.
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
-    const cov = covered(ctx.dispatchDir, stage.pattern, ctx.coversMap);
+    const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
     let need = pending(owed, cov);
 
     // ...and, inside an overlap group, only those whose own work at the previous

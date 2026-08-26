@@ -55,6 +55,7 @@ parts:
       - the-galois-correspondence
       - frattini-subgroups-and-the-burnside-basis-theorem
       - finite-fields-and-cyclotomic-extensions
+      - solvability-by-radicals-and-kummer-theory
 ---
 
 ## groups-and-quotients
@@ -113,12 +114,13 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 ## sylow-and-extensions
 
-A split extension is a semidirect product: a normal subgroup, a complement, and an action
-by automorphisms. Sylow's theorems turn divisibility of $|G|$ into existence, conjugacy and
-counting of $p$-subgroups, nilpotence makes them all normal, and the Frattini subgroup with
-Burnside's basis theorem linearises generation in finite $p$-groups. On the Galois side,
-intermediate fields match subgroups, finite fields are controlled by Frobenius, and normal
-bases make the cyclic action explicit. Roots of unity and cyclotomic polynomials then
-produce abelian Galois extensions, factorisation laws over finite fields, intersections and
-composita of cyclotomic fields, primes congruent to $1$ modulo $n$, and finite abelian
-Galois groups over $\mathbb Q$.
+A split extension is a semidirect product, so actions by automorphisms assemble finite
+groups from normal pieces. Sylow's theorems turn divisibility of $|G|$ into existence,
+conjugacy and counting of $p$-subgroups, and nilpotence with the Frattini subgroup sharpens
+that picture for finite $p$-groups. On the Galois side, intermediate fields match
+subgroups, Frobenius controls finite fields, normal bases make cyclic actions explicit, and
+roots of unity with cyclotomic polynomials produce abelian extensions. Norm, trace and the
+trace form then translate finite separable extensions into linear algebra, Hilbert 90 and
+Lagrange resolvents identify cyclic extensions through Kummer and Artin-Schreier data, and
+adjoining radicals becomes equivalent to solvability of the Galois group, yielding
+Abel-Ruffini for the general polynomial.

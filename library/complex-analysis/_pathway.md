@@ -16,6 +16,8 @@ parts:
       - the-identity-theorem-and-the-open-mapping-theorem
       - holomorphic-functions-of-several-variables
       - the-winding-number-and-the-global-cauchy-theorem
+      - harmonic-functions-and-the-poisson-integral
+      - isolated-singularities-and-laurent-series
 ---
 
 ## holomorphic-functions
@@ -28,12 +30,13 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Complex line integrals along rectifiable paths are bounded by the ML estimate, and Goursat's
-theorem turns local holomorphy into Cauchy's theorem, Cauchy's integral formula, derivative
-bounds, Taylor expansion, Liouville's theorem and Morera's converse. Zeros, local power
-maps and the maximum principle describe the rigidity of one-variable holomorphy. In several
-variables the same ideas pass to polydiscs: separate holomorphy, iterated Cauchy formulas,
-power-series expansions, Cauchy estimates, the several-variable identity theorem and the
-scalar open mapping theorem. Winding numbers and homology then globalise the disc formulas
-in the plane, giving the global Cauchy integral formula, invariance under homology, and
-holomorphic primitives, logarithms and roots on homologically simply connected domains.
+Complex line integrals are bounded by the ML estimate, and Goursat's theorem turns local
+holomorphy into Cauchy's theorem, Cauchy's integral formula, derivative bounds, Taylor
+expansion, Liouville's theorem and Morera's converse. Zeros, local power maps,
+several-variable Cauchy formulas, winding numbers and homology then globalise those disc
+arguments into primitives, logarithms and roots on suitable domains. Laurent expansions
+split behaviour near an isolated singularity into regular and principal parts, residues
+extract the contour contribution of poles, and the removable-pole-essential trichotomy with
+Casorati-Weierstrass describes the puncture. The same real and imaginary part calculus
+yields harmonic conjugates, mean-value and maximum principles, Poisson's integral, Harnack
+estimates, and Schwarz reflection for harmonic and holomorphic functions.

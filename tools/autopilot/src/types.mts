@@ -129,7 +129,11 @@ export interface Stage {
   /** Which result files belong to this stage. Build it with `resultPattern`
    *  rather than by hand — thirteen hand-written regexes drifted from the
    *  dispatcher's naming rule. */
-  pattern: RegExp;
+  /** The result-file matcher may depend on run context when a migration must
+   *  recognise legacy evidence without letting that evidence cover a new run.
+   *  Resolve it before every coverage/adoption check; never cache one run's
+   *  compatibility matcher for another run. */
+  pattern: RegExp | ((ctx: Ctx) => RegExp);
   labelFor?: (u: Unit) => string;
   /** The file each unit owes. A result is not an artifact: a lane can exit zero
    *  having written its output to the wrong path. */

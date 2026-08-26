@@ -121,8 +121,9 @@ test('adjudicating stages budget three tries per named item', () => {
 });
 
 test('Frontier 18 receipt adopts completed legacy coverage without moving its current stage', async () => {
+  const legacyStateDir = join(REPO, '.autopilot-frontier-18-complete-20260825');
   const ctx = { run: 'frontier-18', repo: REPO,
-    dispatchDir: join(REPO, 'research/frontier-18-dispatch'), config: { stateDir: join(REPO, '.autopilot') } };
+    dispatchDir: join(REPO, 'research/frontier-18-dispatch'), config: { stateDir: legacyStateDir } };
   assert.equal(hasLegacyStep6Cutover(ctx), true);
   for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']) {
     assert.deepEqual(byId(id).units(ctx), ['all'], `${id} must adopt completed legacy work`);
@@ -130,16 +131,29 @@ test('Frontier 18 receipt adopts completed legacy coverage without moving its cu
   }
   const active = await import('../stages/mathlib.mts');
   const { Executor } = await import('../src/executor.mts');
-  const state = { data: JSON.parse(readFileSync(join(REPO, '.autopilot/state.json'), 'utf8')), save() {} };
+  const state = { data: JSON.parse(readFileSync(join(legacyStateDir, 'state.json'), 'utf8')), save() {} };
   const stageBeforeCutoverCheck = state.data.stage;
   const executor = new Executor({
-    config: { run: 'frontier-18', repo: REPO, stateDir: join(REPO, '.autopilot'),
+    config: { run: 'frontier-18', repo: REPO, stateDir: legacyStateDir,
       dispatchDir: ctx.dispatchDir, argv: ['true'] } as any,
     stages: active.stages, state, adapter: {} as any,
     reporter: { notify() {}, event() {}, report() {} },
   });
-  assert.equal(executor.currentStage().stage?.id, stageBeforeCutoverCheck,
-    'adopting legacy Step 6 evidence must preserve whichever live stage the run has reached');
+  const after = executor.currentStage().stage?.id;
+  const introduced = new Set(['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']);
+  assert.equal(after === undefined || !introduced.has(after), true,
+    `adopting legacy Step 6 evidence must not move the archived ${stageBeforeCutoverCheck} run backward to ${after}`);
+});
+
+test('ordinary introduced stages never count the current 6c Alpha result as their own', () => {
+  const ctx = { ...ordinaryCtx, run: 'future-run' };
+  for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']) {
+    const pattern = byId(id).pattern(ctx);
+    assert.ok(pattern instanceof RegExp);
+    assert.equal(pattern.test('alpha-6c-lead.result.json'), false,
+      `${id} must not be falsely covered by the current run's lead Alpha`);
+  }
+  assert.equal(byId('6d-close').pattern(ctx).test('tool-step6-close.result.json'), true);
 });
 
 test('item ids are extracted from gate output, not citation labels', () => {
@@ -431,6 +445,57 @@ test('exact refuter findings, Alpha decisions, and ledger rows close end to end'
     const missing = fx.attempt('check', '--run', 'r', '--phase', 'adjudicate');
     assert.notEqual(missing.status, 0);
     assert.match(missing.stderr, /decision-missing|ledger-unowned/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('adjudicate accepts the same legacy reader batch label that split routed', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
+      batch: 'r-batch-1', findings: [], coverage_note: 'No uneditable findings.',
+    }));
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-D1', run: 'r', subject: 'thm-touched-high-risk',
+      caught_at_stage: '6a-read', severity: 'fatal', disposition: 'fixed',
+    }) + '\n');
+    writeFileSync(join(fx.root, 'research', 'r-alpha-a-6b-decisions.json'), JSON.stringify({
+      version: 1, run: 'r', group: 'a', decisions: [
+        { obligation: 'touched:1:thm-touched-high-risk', id: 'thm-touched-high-risk', route: 'touched',
+          verdict: 'accepted_repair', defect_ids: ['r-D1'], evidence: 'repair checked' },
+      ],
+    }));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('global contract-audit summary rows do not invent 6b ownership gaps', () => {
+  const fx = fixture();
+  try {
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), [
+      { defect_id: 'r-D1', run: 'r', subject: 'thm-touched-high-risk',
+        caught_at_stage: '6a-read', severity: 'fatal', disposition: 'fixed' },
+      { defect_id: 'r-contract-audit', run: 'r', subject: 'contract audit summary',
+        caught_at_stage: '6b-adjudicate', severity: 'nonfatal', disposition: 'fixed' },
+    ].map((row) => JSON.stringify(row)).join('\n') + '\n');
+    writeFileSync(join(fx.root, 'research', 'r-alpha-a-6b-decisions.json'), JSON.stringify({
+      version: 1, run: 'r', group: 'a', decisions: [
+        { obligation: 'touched:1:thm-touched-high-risk', id: 'thm-touched-high-risk', route: 'touched',
+          verdict: 'accepted_repair', defect_ids: ['r-D1'], evidence: 'repair checked' },
+      ],
+    }));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

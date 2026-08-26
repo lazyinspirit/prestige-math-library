@@ -1,0 +1,236 @@
+[
+  {
+    "order": 405,
+    "id": "polynomial-rodl-and-viral-equivalence",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Polynomial Rödl, Virality and Erdős–Hajnal Equivalence",
+    "companion": "polynomial-rodl-and-viral-equivalence-examples",
+    "requires": [
+      "erdos-hajnal-property-and-homogeneous-sets",
+      "sparse-restricted-subgraphs-and-rodl-nikiforov"
+    ],
+    "items": [
+      {
+        "id": "def-polynomial-rodl-property-for-a-finite-family",
+        "kind": "definition",
+        "title": "The polynomial Rödl property for a finite forbidden family",
+        "deps": [
+          "def-h-free-and-family-free-graph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "def-viral-property-for-a-finite-family",
+        "kind": "definition",
+        "title": "The viral property for a finite forbidden family",
+        "deps": [
+          "def-h-free-and-family-free-graph",
+          "def-induced-copy-number",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "def-t-k-homogeneous-property",
+        "kind": "definition",
+        "title": "The $(t,k)$-homogeneous property",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number"
+        ]
+      },
+      {
+        "id": "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets",
+        "kind": "lemma",
+        "title": "Many good $2t$-vertex subsets force many homogeneous $k$-sets",
+        "strategy": "Use the Bucić–Fox–Pham / Nguyen double-counting step. Count incidences between homogeneous $k$-sets and $2t$-vertex subsets; every good $2t$-set contributes at least one homogeneous $k$-set because it contains a $t$-vertex induced subgraph in the hereditary class, and every graph in that class has the $(t,k)$-homogeneous property.",
+        "deps": [
+          "def-t-k-homogeneous-property",
+          "def-hereditary-graph-class",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-binomial-coefficient",
+          "thm-double-counting"
+        ]
+      },
+      {
+        "id": "lem-small-total-copy-expectation-forces-many-homogeneous-k-sets",
+        "kind": "lemma",
+        "title": "Small total induced-copy expectation forces many homogeneous $k$-sets",
+        "strategy": "Package the family version of the sampling lemma. If a random $2t$-vertex subset has expected total forbidden-copy count at most $t/2$, Markov makes at least half of those subsets good; deleting one vertex from each forbidden copy leaves a $t$-vertex family-free induced subgraph, so the previous lemma yields many homogeneous $k$-sets.",
+        "deps": [
+          "def-t-k-homogeneous-property",
+          "def-h-free-and-family-free-graph",
+          "def-induced-copy-number",
+          "def-uniform-finite-probability-space",
+          "def-expectation-on-a-finite-probability-space",
+          "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets",
+          "thm-markov-inequality"
+        ]
+      },
+      {
+        "id": "lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets",
+        "kind": "lemma",
+        "title": "Without a large $\\epsilon$-sparse induced subgraph, the number of $k$-vertex stable sets is bounded",
+        "strategy": "Follow Nguyen's Kleitman–Winston style induction. A stable $k$-set either contains a chosen high-degree vertex or avoids it; recurse on the non-neighbour set in the first case and on the deleted graph in the second, using the no-large-sparse-set hypothesis to keep the parameters admissible.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "def-clique-stable-set-and-numbers",
+          "def-binomial-coefficient",
+          "thm-pascals-rule"
+        ]
+      },
+      {
+        "id": "thm-a-finite-family-with-the-erdos-hajnal-property-is-viral",
+        "kind": "theorem",
+        "title": "Every finite family with the Erdős–Hajnal property is viral",
+        "strategy": "Handle the vacuous $K_0$ and $K_1$ cases first. Otherwise take an Erdős–Hajnal exponent $c$, choose an integer $m$ with $mc\\ge1$, set $t=k^m$, and use the family-free class to guarantee that every good $t$-vertex induced subgraph contains a homogeneous $k$-set. Bound the expected forbidden-copy count in a random $2t$-vertex subset by linearity of expectation, get many homogeneous $k$-sets from the sampling lemma, and then apply the stable-set counting lemma to $G$ and to $\\overline G$ to contradict the absence of an $\\epsilon$-restricted linear subset.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "lem-erdos-hajnal-constants-are-downward-closed",
+          "def-viral-property-for-a-finite-family",
+          "def-t-k-homogeneous-property",
+          "def-h-free-and-family-free-graph",
+          "def-induced-copy-number",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-agrees-with-rational-exponent",
+          "thm-of-archimedean",
+          "thm-linearity-of-expectation",
+          "lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets",
+          "lem-small-total-copy-expectation-forces-many-homogeneous-k-sets",
+          "lem-no-large-epsilon-sparse-subgraph-bounds-k-stable-sets",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "lem-restrictedness-is-complement-invariant",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-beats-every-polynomial"
+        ]
+      },
+      {
+        "id": "cor-viral-implies-polynomial-rodl-for-a-finite-family",
+        "kind": "corollary",
+        "title": "The viral property implies the polynomial Rödl property",
+        "strategy": "If a graph is $\\mathcal H$-free, then every forbidden induced-copy count is zero, so the viral hypothesis applies with no extra work.",
+        "deps": [
+          "def-polynomial-rodl-property-for-a-finite-family",
+          "def-viral-property-for-a-finite-family",
+          "def-h-free-and-family-free-graph",
+          "def-induced-copy-number"
+        ]
+      },
+      {
+        "id": "cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family",
+        "kind": "corollary",
+        "title": "The polynomial Rödl property implies the Erdős–Hajnal property",
+        "strategy": "Let $d$ witness the polynomial Rödl property. For large $n$, choose $\\epsilon=n^{-1/(d+1)}$ and take the restricted set $X$ of size at least $n^{1/(d+1)}$; if $X$ is sparse, greedy colouring of $G[X]$ gives a stable set of size at least $1/(2\\epsilon)$, and if $X$ is dense the same bound in the complement gives a clique. A finite small-order check closes the remaining values of $n$.",
+        "deps": [
+          "def-polynomial-rodl-property-for-a-finite-family",
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-h-free-and-family-free-graph",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-real-power",
+          "thm-real-power-laws",
+          "lem-sparsity-depends-only-on-the-induced-subgraph",
+          "lem-restrictedness-is-complement-invariant",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "lem-greedy-colouring-bound",
+          "thm-clique-independence-chromatic-bounds"
+        ]
+      },
+      {
+        "id": "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+        "kind": "theorem",
+        "title": "For a finite family, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent",
+        "strategy": "Combine the previous theorem and corollaries to close the cycle Erdős–Hajnal $\\Rightarrow$ viral $\\Rightarrow$ polynomial Rödl $\\Rightarrow$ Erdős–Hajnal.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-polynomial-rodl-property-for-a-finite-family",
+          "def-viral-property-for-a-finite-family",
+          "thm-a-finite-family-with-the-erdos-hajnal-property-is-viral",
+          "cor-viral-implies-polynomial-rodl-for-a-finite-family",
+          "cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family"
+        ]
+      },
+      {
+        "id": "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+        "kind": "corollary",
+        "title": "For a single graph, the Erdős–Hajnal property, the polynomial Rödl property, and virality are equivalent",
+        "strategy": "Apply the finite-family theorem to the singleton family $\\{H\\}$, using that $\\{H\\}$-free means $H$-free.",
+        "deps": [
+          "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 406,
+    "id": "polynomial-rodl-and-viral-equivalence-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Polynomial Rödl, Virality and Erdős–Hajnal Equivalence — Examples",
+    "companion": "polynomial-rodl-and-viral-equivalence",
+    "requires": [
+      "polynomial-rodl-and-viral-equivalence"
+    ],
+    "items": [
+      {
+        "id": "ex-the-singleton-family-p-three-is-viral",
+        "kind": "example",
+        "title": "The singleton family $\\{P_3\\}$ is viral",
+        "strategy": "The published three-vertex classification gives the Erdős–Hajnal property for $P_3$, and the new singleton equivalence turns that immediately into the viral property.",
+        "deps": [
+          "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-family-containing-k-one-is-vacuously-viral",
+        "kind": "example",
+        "title": "A family containing $K_1$ is viral for vacuous reasons",
+        "strategy": "For every nonempty graph $G$, the labelled induced-copy count of $K_1$ is exactly $|V(G)|$, so for every $\\epsilon<1$ the inequality $\\operatorname{ind}_{K_1}(G)<(\\epsilon^d|V(G)|)^1$ never holds. The viral implication therefore has no instances to check.",
+        "deps": [
+          "def-viral-property-for-a-finite-family",
+          "def-induced-copy-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-real-power",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ]
+      },
+      {
+        "id": "cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted",
+        "kind": "counterexample",
+        "title": "The polynomial Rödl witness need not be the whole graph",
+        "strategy": "Use the disjoint union of two equal cliques, which is $P_3$-free and therefore lies in a polynomial Rödl family by the singleton equivalence. The whole graph has about half the vertices adjacent to each vertex and about half nonadjacent, so for every fixed $\\epsilon<1/2$ it is neither $\\epsilon$-sparse nor $\\epsilon$-dense, even though one clique side is a $0$-dense restricted set.",
+        "deps": [
+          "cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-h-free-and-family-free-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-the-empty-family-is-not-erdos-hajnal",
+        "kind": "counterexample",
+        "title": "The empty forbidden family is not Erdős–Hajnal",
+        "strategy": "For the empty family, every graph is vacuously family-free, so its free class is the class of all finite graphs. The published random-graph corollary shows that class is not Erdős–Hajnal, so the empty family cannot satisfy any of the equivalent properties.",
+        "deps": [
+          "cor-the-class-of-all-graphs-is-not-erdos-hajnal",
+          "def-h-free-and-family-free-graph",
+          "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,3055 @@
+{
+  "version": 1,
+  "level": "frontier-19",
+  "scope": [
+    "prop-binary-quadratic-form-discriminants-modulo-four",
+    "lem-binary-quadratic-form-substitution-is-a-right-action",
+    "thm-proper-equivalence-preserves-representations",
+    "prop-proper-equivalence-preserves-discriminant-and-primitivity",
+    "prop-discriminant-square-mod-four-n-criterion-for-primitive-representation",
+    "prop-positive-definite-binary-form-criterion",
+    "lem-gauss-reduction-step-improves-a-positive-definite-form",
+    "thm-reduction-of-positive-definite-binary-quadratic-forms",
+    "lem-leading-coefficient-is-minimal-in-a-reduced-class",
+    "lem-reduced-forms-with-the-same-leading-coefficient-are-equal",
+    "thm-unique-reduced-positive-definite-binary-quadratic-form",
+    "lem-leading-coefficient-bound-for-a-reduced-form",
+    "cor-finiteness-of-positive-definite-binary-form-classes",
+    "cor-binary-quadratic-form-equivalence-is-decidable",
+    "ex-reducing-a-large-binary-quadratic-form",
+    "ex-reduced-forms-of-discriminant-minus-four",
+    "ex-reduced-forms-of-discriminant-minus-eight",
+    "ex-primes-represented-by-x-squared-plus-two-y-squared",
+    "ex-reduced-forms-of-discriminant-minus-twenty",
+    "ex-reduced-forms-of-discriminant-minus-twenty-three",
+    "cex-same-discriminant-does-not-imply-proper-equivalence",
+    "cex-same-represented-integers-do-not-imply-proper-equivalence",
+    "ex-proper-versus-improper-equivalence-of-forms",
+    "cex-indefinite-classes-have-cycles-of-reduced-forms"
+  ],
+  "contracts": {
+    "prop-binary-quadratic-form-discriminants-modulo-four": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-congruence-respects-integer-arithmetic",
+          "source_section": "Statement",
+          "quote": "Let $n,a,a',b,b'\\in\\mathbb Z$. If $a\\equiv a'\\pmod n$ and\n$b\\equiv b'\\pmod n$, then\n\n$$a+b\\equiv a'+b'\\pmod n,\\qquad a-b\\equiv a'-b'\\pmod n,\\qquad ab\\equiv a'b'\\pmod n.$$\n\nIn particular $-a\\equiv-a'\\pmod n$, and for every $k\\in\\mathbb N$ the natural\npowers of [[def-group-power]] satisfy $a^k\\equiv(a')^k\\pmod n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $\\Delta$ is the discriminant of some integral form, say $\\Delta=b^2-4ac$. Then $\\Delta\\equiv b^2\\pmod4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\Delta\\equiv0\\pmod4$, then $(1,0,-\\Delta/4)$ is an integral binary quadratic form and its discriminant is $0^2-4\\cdot1\\cdot(-\\Delta/4)=\\Delta$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $\\Delta\\equiv1\\pmod4$, then $(1,1,(1-\\Delta)/4)$ is an integral binary quadratic form and its discriminant is $1^2-4\\cdot1\\cdot((1-\\Delta)/4)=\\Delta$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $b=2m$ is even, then $b^2=4m^2\\equiv0\\pmod4$; if $b=2m+1$ is odd, then $b^2=4m(m+1)+1\\equiv1\\pmod4$. Hence every discriminant is congruent to $0$ or $1$ modulo $4$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves the forward implication, while steps 1.2 and 1.3 prove the converse in the two possible congruence classes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition is about integers and explicit coefficient triples, not a set or family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 covers Δ = 0 and produces the integral form (1,0,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers Δ = 1 and produces the integral form (1,1,0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 allow c = 0 or negative c; no nondegeneracy of the form is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or index endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two witnessing forms are explicit constructions, not choices from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the necessity direction from the discriminant formula."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 prove the two sufficiency branches."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-binary-quadratic-form-substitution-is-a-right-action": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $I$ is the $2\\times2$ identity matrix, then $(f\\mid I)(x,y)=f(1\\cdot x+0\\cdot y,0\\cdot x+1\\cdot y)=f(x,y)$ for all $x,y$, so $f\\mid I=f$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}$ and $N=\\begin{pmatrix}u&v\\\\ w&z\\end{pmatrix}$. Then $((f\\mid M)\\mid N)(x,y)=(f\\mid M)(ux+vy,wx+zy)=f(p(ux+vy)+q(wx+zy),r(ux+vy)+s(wx+zy))$, which is exactly $(f\\mid(MN))(x,y)$ by the definition of matrix multiplication.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coefficients of $f\\mid M$ are $a p^2+bpr+c r^2$, $2apq+b(ps+qr)+2crs$, and $a q^2+bqs+c s^2$, hence are integers. Therefore the substitutions stay inside the set of integral binary quadratic forms, and steps 1.1 and 1.2 are precisely the right-action axioms.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The acting set is a collection of matrices, not a family indexed by an optional parameter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the identity matrix, and the zero form is fixed there as well."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is the unit axiom for the action."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 does not exclude forms with discriminant 0 or vanishing coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered range or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made: the identity and composite matrices are given explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states action axioms, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "thm-proper-equivalence-preserves-representations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integer-represented-by-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form\n([[def-binary-quadratic-form-over-integers]]) and let $n\\in\\mathbb{Z}$.\n\nWe say that $f$ **represents** $n$ when there exist integers $r,s$ such that\n\n$$n=f(r,s)=ar^2+brs+cs^2.$$\n\nWe say that $f$ **primitively represents** $n$ when there exist integers\n$r,s$ with\n\n$$n=f(r,s)\\qquad\\text{and}\\qquad \\gcd(r,s)=1$$\n\n([[def-common-divisor-and-gcd]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-binary-quadratic-form-substitution-is-a-right-action",
+          "source_section": "Statement",
+          "quote": "For an integral binary quadratic form $f$ and matrices $M,N\\in\\mathrm{SL}_2(\\mathbb Z)$,\nthe substitution notation of [[def-proper-equivalence-of-binary-quadratic-forms]]\nsatisfies\n\n$$f\\mid I=f,\\qquad (f\\mid M)\\mid N=f\\mid(MN).$$\n\nThus integral substitution defines a right action of $\\mathrm{SL}_2(\\mathbb Z)$\non integral binary quadratic forms.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $g(x,y)=n$, then $n=f(px+qy,rx+sy)$ by [F1], so every representation of $n$ by $g$ yields a representation of $n$ by $f$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $ps-qr=1$, the inverse matrix is $M^{-1}=\\begin{pmatrix}s&-q\\\\ -r&p\\end{pmatrix}\\in\\mathrm{SL}_2(\\mathbb Z)$. By [L1], $(f\\mid M)\\mid M^{-1}=f$, so $f=g\\mid M^{-1}$. Applying step 1.1 to $g$ and $M^{-1}$ gives the converse implication. Therefore $f$ and $g$ represent exactly the same integers.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $u=px+qy$ and $v=rx+sy$. If $\\gcd(x,y)=1$ and an integer $d$ divides both $u$ and $v$, then $d$ divides $su-qv=(ps-qr)x=x$ and $-ru+pv=(ps-qr)y=y$, so $\\gcd(u,v)=1$. The same argument with $M^{-1}$ gives the converse, so the correspondence of steps 1.1 and 2.1 restricts to a bijection on primitive representations.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares two represented-integer sets, not an optional family or empty object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers n = 0 exactly as any other represented integer; the zero vector may represent it on either side."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes primitive representations with one coordinate 0, such as (1,0), because gcd(1,0)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the determinant-one substitution formulas and does not assume primitive or nondegenerate forms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or index range occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inverse matrix is explicit from ps-qr = 1; no existence choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the forward implication from g to f."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the reverse implication by the inverse substitution."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "prop-proper-equivalence-preserves-discriminant-and-primitivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-primitive-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "An integral binary quadratic form $f=(a,b,c)$\n([[def-binary-quadratic-form-over-integers]]) is **primitive** when the only\nintegers dividing all three coefficients $a$, $b$, and $c$ are $1$ and $-1$.\n\nEquivalently, $f$ is primitive when there is no positive integer greater than\n$1$ dividing all three coefficients simultaneously.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-binary-quadratic-form-substitution-is-a-right-action",
+          "source_section": "Statement",
+          "quote": "For an integral binary quadratic form $f$ and matrices $M,N\\in\\mathrm{SL}_2(\\mathbb Z)$,\nthe substitution notation of [[def-proper-equivalence-of-binary-quadratic-forms]]\nsatisfies\n\n$$f\\mid I=f,\\qquad (f\\mid M)\\mid N=f\\mid(MN).$$\n\nThus integral substitution defines a right action of $\\mathrm{SL}_2(\\mathbb Z)$\non integral binary quadratic forms.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding $g(x,y)=f(px+qy,rx+sy)$ gives $A=ap^2+bpr+cr^2$, $B=2apq+b(ps+qr)+2crs$, and $C=aq^2+bqs+cs^2$. A direct simplification yields $B^2-4AC=(ps-qr)^2(b^2-4ac)=b^2-4ac$, since $ps-qr=1$. Thus $f$ and $g$ have the same discriminant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose an integer $d$ divides $a$, $b$, and $c$. Then the formulas of step 1.1 show that $d$ also divides $A$, $B$, and $C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $ps-qr=1$, the inverse matrix $M^{-1}=\\begin{pmatrix}s&-q\\\\ -r&p\\end{pmatrix}$ is integral and lies in $\\mathrm{SL}_2(\\mathbb Z)$. By [L1], $f=g\\mid M^{-1}$, so the same argument as in step 2.1 with $M^{-1}$ shows that every common divisor of $A$, $B$, and $C$ also divides $a$, $b$, and $c$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 show that $(a,b,c)$ and $(A,B,C)$ have exactly the same common divisors. Therefore one form is primitive exactly when the other is, by [F3].",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition concerns one form and one substitution matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers discriminant 0, and step 4.1 covers the non-primitive case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the primitive case because the two triples have exactly the same common divisors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 4.1 use only the determinant-one substitution formulas, with no positivity hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered parameter range appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inverse substitution is explicit; nothing is chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 in Proper equivalence preserves discriminant and primitivity of the form: Steps 2.1 and 3.1 show that $(a,b,c)$ and $(A,B,C)$ have exactly the same common divisors. Therefore one form is primitive exactly when the other is, by [F3]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 in Proper equivalence preserves discriminant and primitivity of the form: Steps 2.1 and 3.1 show that $(a,b,c)$ and $(A,B,C)$ have exactly the same common divisors. Therefore one form is primitive exactly when the other is, by [F3]."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "prop-discriminant-square-mod-four-n-criterion-for-primitive-representation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integer-represented-by-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form\n([[def-binary-quadratic-form-over-integers]]) and let $n\\in\\mathbb{Z}$.\n\nWe say that $f$ **represents** $n$ when there exist integers $r,s$ such that\n\n$$n=f(r,s)=ar^2+brs+cs^2.$$\n\nWe say that $f$ **primitively represents** $n$ when there exist integers\n$r,s$ with\n\n$$n=f(r,s)\\qquad\\text{and}\\qquad \\gcd(r,s)=1$$\n\n([[def-common-divisor-and-gcd]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-proper-equivalence-preserves-discriminant-and-primitivity",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $g$ be properly equivalent integral binary quadratic forms. Then:\n\n1. $f$ and $g$ have the same discriminant.\n2. $f$ is primitive if and only if $g$ is primitive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-coprime-criterion",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$. Then $a$ and $b$ are coprime ([[def-coprime]]) if and\nonly if\n\n$$ax + by \\;=\\; 1 \\qquad \\text{for some } x, y \\in \\mathbb{Z} .$$\n\nWhen this holds, the set of common divisors of $a$ and $b$ is exactly\n$\\{1, -1\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a form $f=(a,b,c)$ of discriminant $\\Delta$ primitively represents $n$, say $n=f(r,s)$ with $\\gcd(r,s)=1$. By [L1] choose integers $t,u$ with $ru-st=1$, and put $M=\\begin{pmatrix}r&t\\\\ s&u\\end{pmatrix}\\in\\mathrm{SL}_2(\\mathbb Z)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose $\\Delta\\equiv b^2\\pmod{4n}$ for some integer $b$. Then $4n$ divides $b^2-\\Delta$, so $c:=(b^2-\\Delta)/(4n)$ is an integer. The form $f=(n,b,c)$ has discriminant $\\Delta$, and $f(1,0)=n$ with $\\gcd(1,0)=1$, so it primitively represents $n$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "L2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The properly equivalent form $g=f\\mid M$ has leading coefficient $g(1,0)=f(r,s)=n$, so $g=(n,b',c')$ for some integers $b',c'$. By [F3], $g$ has the same discriminant $\\Delta$, hence $\\Delta=b'^2-4nc'$, which says exactly that $\\Delta\\equiv b'^2\\pmod{4n}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves that primitive representation implies the square congruence, and step 1.2 proves the converse.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement compares one integer n and one discriminant Δ."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-valued branch in A positive integer $n$ is primitively represented by some discriminant $\\\\Delta$ form exactly when $\\\\Delta$ is a square modulo $4n$ is handled in step 1.2: Conversely, suppose $\\Delta\\equiv b^2\\pmod{4n}$ for some integer $b$. Then $4n$ divides $b^2-\\Delta$, so $c:=(b^2-\\Delta)/(4n)$ is an integer. The form $f=(n,b,c)$ has discriminant $\\Delta$, and $f(1,0)=n$ with $\\gcd(1,…"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers n = 1 with the primitive pair (1,0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 allows c = 0 or negative c; no positive-definiteness assumption appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Bézout to witness a determinant-one extension of a primitive pair."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the forward implication from primitive representation to the square congruence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the converse by constructing the representing form."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "prop-positive-definite-binary-form-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "An integral binary quadratic form $f(x,y)=ax^2+bxy+cy^2$\n([[def-binary-quadratic-form-over-integers]]) is **positive definite** when\n\n$$f(x,y)>0$$\n\nfor every real pair $(x,y)\\ne(0,0)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $f$ is positive definite. Then $a=f(1,0)>0$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose $a>0$ and $\\Delta<0$. For every real $(x,y)$ one has $4af(x,y)=(2ax+by)^2-\\Delta y^2$ by direct expansion.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $(x,y)\\ne(0,0)$ and $y=0$, then $x\\ne0$ and $f(x,0)=ax^2>0$ because $a>0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Also $\\left(-\\frac{b}{2a},1\\right)\\ne(0,0)$, so [F1] gives $f\\left(-\\frac{b}{2a},1\\right)>0$. Multiplying by $4a>0$ from step 1.1 yields $-\\,\\Delta=(2a(-b/(2a))+b)^2-\\Delta>0$, hence $\\Delta<0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $(x,y)\\ne(0,0)$ and $y\\ne0$, then step 1.2 gives $4af(x,y)=(2ax+by)^2+(-\\Delta)y^2>0$ because both summands are nonnegative and the second is positive.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.2 and 1.3 cover every nonzero real pair, so $f$ is positive definite by [F1]. Together with steps 1.1 and 2.1, this proves the criterion.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one form and the nonzero real plane."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the nonzero test vector (1,0), and step 1.1 separately treats y = 0 in the completed-square identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit vector (1,0) is the boundary witness in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 rules out discriminant 0 as part of the forbidden Δ ≥ 0 case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only witnesses used are explicit vectors such as (1,0) or those arising from the completed-square formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the coefficient criterion implies positive definiteness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 prove positive definiteness implies a > 0 and Δ < 0."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-gauss-reduction-step-improves-a-positive-definite-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-proper-equivalence-preserves-discriminant-and-primitivity",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $g$ be properly equivalent integral binary quadratic forms. Then:\n\n1. $f$ and $g$ have the same discriminant.\n2. $f$ is primitive if and only if $g$ is primitive.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-positive-definite-binary-form-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form, and let\n$\\Delta=b^2-4ac$ be its discriminant. Then $f$ is positive definite if and only\nif\n\n$$a>0\\qquad\\text{and}\\qquad \\Delta<0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.2",
+            "6.1",
+            "6.2",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f$ is positive definite, [F3] gives $a>0$ and $\\Delta:=b^2-4ac<0$.",
+          "step": "1.1",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $c<a$ or if $c=a$ and $b<0$, let $g=f\\mid\\begin{pmatrix}0&-1\\\\ 1&0\\end{pmatrix}=(c,-b,a)$. This matrix lies in $\\mathrm{SL}_2(\\mathbb Z)$, so $g$ is properly equivalent to $f$; by [F2] and [F3] it is again positive definite because its leading coefficient is $c>0$ and its discriminant is still $\\Delta<0$. Its measure satisfies $\\mu(g)=3c+a+\\varepsilon(g)<3a+c+\\varepsilon(f)=\\mu(f)$ because $c<a$ gives a drop of at least $1$, and when $c=a$ with $b<0$ the boundary defect disappears so $\\varepsilon(g)=0<1=\\varepsilon(f)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Assume now that step 2.1 does not apply. Then $a\\le c$ and, because $f$ is not reduced, one must have $b\\notin(-a,a]$. Choose the unique integer $k$ for which $b':=b+2ak$ lies in $(-a,a]$, and let $g=f\\mid\\begin{pmatrix}1&k\\\\ 0&1\\end{pmatrix}=(a,b',c')$, where $c'=ak^2+bk+c$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "choose",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The new form $g$ is properly equivalent to $f$, so it has the same discriminant $\\Delta<0$ by [F2]; its leading coefficient is still $a>0$, so [F3] makes it positive definite. Also $4a(c'-c)=b'^2-b^2$, hence $c'\\le c$, with strict inequality when $|b'|<|b|$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $|b|>a$, then $|b'|<|b|$, so step 4.1 gives $c'<c$. In this case $\\varepsilon(f)=0$: if $a<c$ there is no boundary defect, while if $a=c$ then step 2.1 was excluded and therefore $b>0$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "If $|b|=a$, then step 2.1 is excluded, so $a<c$ and the only way $b\\notin(-a,a]$ can occur is $b=-a$. Then the chosen residue is $b'=a$, so $c'=c$ and the boundary defect disappears: $\\varepsilon(g)=0<1=\\varepsilon(f)$. Hence again $\\mu(g)<\\mu(f)$.",
+          "step": "5.2",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $|b|>a$ and $c'>a$, then $-a<b'\\le a<c'$, so $g$ already satisfies the reduced-form boundary sign conditions and $\\varepsilon(g)=0$. Therefore $\\mu(g)=3a+c'<3a+c=\\mu(f)$.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "If $|b|>a$ and $c'=a$, then step 5.1 gives $c>a$ because otherwise $c=a$ and $c'=c$ would force $|b'|=|b|$, contradicting $|b'|<|b|$. If $b'\\ge0$, then $\\varepsilon(g)=0$ and $\\mu(g)=4a<3a+c=\\mu(f)$. If instead $b'<0$, let $h=g\\mid\\begin{pmatrix}0&-1\\\\ 1&0\\end{pmatrix}=(a,-b',a)$. Then $h$ is properly equivalent to $f$, still positive definite, and $\\varepsilon(h)=0$, so again $\\mu(h)=4a<3a+c=\\mu(f)$.",
+          "step": "6.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-3",
+          "claim": "If $|b|>a$ and $c'<a$, let $h=g\\mid\\begin{pmatrix}0&-1\\\\ 1&0\\end{pmatrix}=(c',-b',a)$. Then $h$ is properly equivalent to $f$ and positive definite. Since $c'\\le a-1$ and $\\varepsilon(h)\\le1$, one has $\\mu(h)=3c'+a+\\varepsilon(h)\\le 3(a-1)+a+1=4a-2<4a\\le 3a+c=\\mu(f)$.",
+          "step": "6.3",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Step 2.1 covers the case $c<a$ or $c=a$ with $b<0$; steps 6.1, 6.2, and 6.3 cover the remaining case $|b|>a$; and step 5.2 covers the case $|b|=a$ with $b<0$. Therefore every non-reduced positive-definite form is properly equivalent to a positive-definite form of smaller reduction measure.",
+          "step": "7.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 6.1",
+            "step 6.2",
+            "step 6.3",
+            "step 5.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma concerns one form, not an indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a > 0, so the zero-leading-coefficient case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 still chooses b′ in (-1,1] when a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1, 5.2, 6.2, and 6.3 isolate the boundary defects c = a with b < 0, b = -a, and the sheared subcases c' = a and c' < a."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.2 treat the endpoint cases |b| = a and a = c explicitly, while step 6.2 handles the sheared endpoint c' = a."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses the unique residue class representative b′ in the half-open interval (-a,a]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives an improving move, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A non-reduced positive-definite form admits an equivalent positive-definite form with smaller reduction measure, the statement is one directional: Let $f=(a,b,c)$ be a positive-definite integral binary quadratic form that is not reduced. Define its **reduction measure** $$\\mu(f):=3a+c+\\varepsilon(f),$$ where $\\varepsilon(f)=… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "thm-reduction-of-positive-definite-binary-quadratic-forms": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gauss-reduction-step-improves-a-positive-definite-form",
+          "source_section": "Statement",
+          "quote": "Let $f=(a,b,c)$ be a positive-definite integral binary quadratic form that is\nnot reduced. Define its **reduction measure**\n\n$$\\mu(f):=3a+c+\\varepsilon(f),$$\n\nwhere $\\varepsilon(f)=0$ when $b\\ge0$ whenever $|b|=a$ or $a=c$, and\n$\\varepsilon(f)=1$ otherwise. Then there exists a properly equivalent\npositive-definite form $g$ with\n\n$$\\mu(g)<\\mu(f).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S$ be the set of reduction measures of the positive-definite forms properly equivalent to $f$. The set $S$ is nonempty because it contains the measure of $f$, and $S\\subseteq\\mathbb{N}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the set $S$ has a least element. Choose a positive-definite form $g$ properly equivalent to $f$ whose reduction measure is that least element.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $g$ were not reduced, [L1] would produce a properly equivalent positive-definite form $h$ with strictly smaller reduction measure. Since $h$ is properly equivalent to $g$ and $g$ is properly equivalent to $f$, the form $h$ is also properly equivalent to $f$, so its measure lies in $S$, contradicting the choice of $g$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore $g$ is reduced, and it is properly equivalent to $f$ by construction.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem applies to one positive-definite form."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a least reduction measure among positive-definite forms only, so the zero form never enters."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 works equally when the least-measure representative already has a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 concludes reducedness using the full boundary-sensitive definition from [F1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 invokes [F1], whose endpoint clauses are exactly the terminal condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a least-measure representative from the nonempty set S."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence of a reduced equivalent form, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every positive-definite integral binary quadratic form is properly equivalent to a reduced form, the statement is one directional: Every positive-definite integral binary quadratic form is properly equivalent to a reduced form. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-leading-coefficient-is-minimal-in-a-reduced-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integer-represented-by-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form\n([[def-binary-quadratic-form-over-integers]]) and let $n\\in\\mathbb{Z}$.\n\nWe say that $f$ **represents** $n$ when there exist integers $r,s$ such that\n\n$$n=f(r,s)=ar^2+brs+cs^2.$$\n\nWe say that $f$ **primitively represents** $n$ when there exist integers\n$r,s$ with\n\n$$n=f(r,s)\\qquad\\text{and}\\qquad \\gcd(r,s)=1$$\n\n([[def-common-divisor-and-gcd]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f$ is positive definite, $a=f(1,0)>0$. Also the leading coefficient of $g$ is $g(1,0)=f(p,r)=ap^2+bpr+cr^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Because $ps-qr=1$, every common divisor of $p$ and $r$ divides $1$, so $\\gcd(p,r)=1$. Thus the integer $f(p,r)$ is primitively represented by $f$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $|b|\\le a\\le c$ from [F1], we have $f(p,r)\\ge ap^2-a|pr|+ar^2=a(p^2-|pr|+r^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $r=0$, then $p\\ne0$ because $ps-qr=1$, so $p^2-|pr|+r^2=p^2\\ge1$. If $r\\ne0$, then $p^2-|pr|+r^2=(|p|-|r|)^2+|pr|\\ge1$. Hence in all cases $p^2-|pr|+r^2\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining steps 1.1, 2.1, and 3.1 gives $g(1,0)=f(p,r)\\ge a$. So the leading coefficient of $g$ is at least $a$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma compares one reduced form to another in its class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a > 0, so the zero-leading-coefficient case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 is sharp when the first column is (±1,0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 splits explicitly into the cases r = 0 and r ≠ 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the endpoint inequalities |b| = a and a = c only through the reduced-form bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made beyond reading the first column of the given matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-directional bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about equality or equivalence is claimed here."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-reduced-forms-with-the-same-leading-coefficient-are-equal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "3.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The leading coefficient of $g$ is $g(1,0)=f(p,r)=ap^2+bpr+cr^2$, and because $|b|\\le a\\le c$ one has $g(1,0)\\ge a(p^2-|pr|+r^2)\\ge a$. Since $g$ has leading coefficient exactly $a$, equality holds throughout.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Equality in step 1.1 forces $p^2-|pr|+r^2=1$, so $(|p|,|r|)$ is one of $(1,0)$, $(0,1)$, or $(1,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(|p|,|r|)=(1,0)$, then $r=0$ and $p=\\pm1$. The determinant condition gives $s=p$ and $M=\\begin{pmatrix}p&q\\\\ 0&p\\end{pmatrix}$. The transformed middle coefficient is $b'=b+2aq$ when $p=1$ and $b'=b-2aq$ when $p=-1$, so $|b'|\\le a$ and $|b|\\le a$ force $q=0$ unless $|b|=a$ and $b'=-b$. But the boundary rule in [F2] forbids $b'=-a$ for a reduced form, so $q=0$, hence $b'=b$ and $c'=c$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $(|p|,|r|)=(0,1)$, then $p=0$ and $r=\\pm1$. Equality in step 1.1 gives $c=a$, so reducedness of $f$ yields $0\\le b\\le a$. The determinant condition gives $q=-r$, so $M=\\begin{pmatrix}0&-r\\\\ r&s\\end{pmatrix}$, and direct substitution gives $g=(a,-b+2ars,a-brs+as^2)$. Since $g$ is reduced, $|-b+2ars|\\le a$. If $s=0$, then $g=(a,-b,a)$, and reducedness of $g$ with $a=c'=a$ forces $-b\\ge0$; together with $b\\ge0$ this gives $b=0$, hence $g=f$. If $s\\ne0$, then the same bound implies $2a|s|-b\\le a$, so $|s|=1$ and $b=a$; the sign of $-b+2ars$ then forces $rs=1$, and again $g=(a,a,a)=f$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "If $(|p|,|r|)=(1,1)$, equality in step 1.1 forces $c=a$ and $|b|=a$. By reducedness, $b=a$. Replacing $M$ by $-M$ if necessary does not change the substitution, so we may assume $(p,r)=(1,-1)$. Then $s+q=1$, and the transformed middle coefficient is $b'=a(2q-1)$. Since $|b'|\\le a$, one has $q=0$ or $q=1$; reducedness excludes $b'=-a$, so $q=1$ and $b'=a$. The discriminant identity $b'^2-4ac'=b^2-4ac$ then gives $c'=a=c$, so again $g=f$.",
+          "step": "3.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The three cases of step 2.1 are exhaustive, and each yields $g=f$. Therefore properly equivalent reduced forms with the same leading coefficient are equal.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 3.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma compares two fixed reduced forms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats reduced positive-definite forms only, so the common leading coefficient a is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the first-column case (±1,0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 3.3 handle the boundary cases c = a and |b| = a explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 classifies the equality case, and steps 3.2 and 3.3 analyze the endpoint sign conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; the matrix entries are the data being analyzed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves equality from the same-leading-coefficient hypothesis only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse is trivial and not the content of the lemma."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-unique-reduced-positive-definite-binary-quadratic-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-reduction-of-positive-definite-binary-quadratic-forms",
+          "source_section": "Statement",
+          "quote": "Every positive-definite integral binary quadratic form is properly equivalent to\na reduced form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-leading-coefficient-is-minimal-in-a-reduced-class",
+          "source_section": "Statement",
+          "quote": "Let $f=(a,b,c)$ be a reduced positive-definite binary quadratic form, and let\n$g$ be any form properly equivalent to $f$. Then the leading coefficient of $g$\nis at least $a$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-reduced-forms-with-the-same-leading-coefficient-are-equal",
+          "source_section": "Statement",
+          "quote": "Let $f=(a,b,c)$ and $g=(a,b',c')$ be reduced positive-definite binary quadratic\nforms. If $f$ and $g$ are properly equivalent, then $f=g$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the proper-equivalence class of $f$ contains at least one reduced form.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $g$ and $h$ are reduced forms properly equivalent to $f$. Then $g$ and $h$ are properly equivalent to each other. Applying [L2] first to $g$ against $h$ and then to $h$ against $g$ shows that their leading coefficients are equal.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With equal leading coefficients, [L3] gives $g=h$. So the reduced representative is unique.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Existence from step 1.1 and uniqueness from step 3.1 prove the theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one proper-equivalence class at a time."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 3.1 concern positive-definite forms only, so the zero form is excluded throughout."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 compares reduced representatives even when their common leading coefficient is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 applies [L3], which already covers the boundary reduced cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 invokes [L3], whose proof handles the endpoint sign conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No new choice is made beyond the existence result already recorded in [L1]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not an iff statement; it is existence plus uniqueness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed separately."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "lem-leading-coefficient-bound-for-a-reduced-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-positive-definite-binary-form-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form, and let\n$\\Delta=b^2-4ac$ be its discriminant. Then $f$ is positive definite if and only\nif\n\n$$a>0\\qquad\\text{and}\\qquad \\Delta<0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From $|b|\\le a\\le c$ we get $b^2\\le a^2\\le ac$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the form is positive definite, [L1] gives $\\Delta<0$, so $|\\Delta|=4ac-b^2$. Using step 1.1 yields $|\\Delta|=4ac-b^2\\ge4a^2-a^2=3a^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $a^2\\le|\\Delta|/3$, and since $a>0$ for a positive-definite form, taking square roots gives $a\\le\\sqrt{|\\Delta|/3}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma concerns one reduced form and its coefficients."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives |Δ| ≥ 3a^2, and step 3.1 then uses a > 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid and sharp when a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows the equality cases b^2 = a^2 and a = c."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the endpoint inequalities |b| = a and a = c directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A reduced positive-definite form of discriminant $\\\\Delta$ satisfies $a\\\\le\\\\sqrt{|\\\\Delta|/3}$, the statement is one directional: Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with discriminant $\\Delta$. Then $$a\\le\\sqrt{|\\Delta|/3}.$$ It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-finiteness-of-positive-definite-binary-form-classes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-leading-coefficient-bound-for-a-reduced-form",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with\ndiscriminant $\\Delta$. Then\n\n$$a\\le\\sqrt{|\\Delta|/3}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], it is enough to show that only finitely many reduced forms have discriminant $\\Delta$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $(a,b,c)$ is reduced with discriminant $\\Delta$, then $1\\le a\\le\\sqrt{|\\Delta|/3}$ by [L2], so only finitely many positive integers $a$ can occur.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each such $a$, reducedness gives $|b|\\le a$, so only finitely many integers $b$ can occur. Once $a$ and $b$ are fixed, the discriminant equation $\\Delta=b^2-4ac$ determines $c=(b^2-\\Delta)/(4a)$ uniquely. Therefore only finitely many reduced triples $(a,b,c)$ have discriminant $\\Delta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence there are only finitely many proper-equivalence classes of positive-definite integral binary quadratic forms of discriminant $\\Delta$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary counts classes for one fixed discriminant, not a family indexed by an optional set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement is only for negative discriminants, so Δ = 0 is explicitly outside scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The possibility of exactly one class is allowed and is realized in later examples such as Δ = -4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 determines c uniquely from a and b, so repeated candidate data do not create extra classes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is needed; the argument is purely finitary enumeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In For each negative discriminant, there are only finitely many proper-equivalence classes of positive-definite integral binary quadratic forms, the statement is one directional: For every negative integer $\\Delta$, there are only finitely many proper-equivalence classes of positive-definite integral binary quadratic forms of discriminant $\\Delta$. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "cor-binary-quadratic-form-equivalence-is-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-reduction-of-positive-definite-binary-quadratic-forms",
+          "source_section": "Statement",
+          "quote": "Every positive-definite integral binary quadratic form is properly equivalent to\na reduced form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose reduced forms $f_{\\mathrm{red}}$ and $g_{\\mathrm{red}}$ properly equivalent to $f$ and $g$, respectively.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $f$ and $g$ are properly equivalent, then $f_{\\mathrm{red}}$ and $g_{\\mathrm{red}}$ lie in the same proper-equivalence class, so [L2] gives $f_{\\mathrm{red}}=g_{\\mathrm{red}}$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, if $f_{\\mathrm{red}}=g_{\\mathrm{red}}$, then $f$ and $g$ are both properly equivalent to that same reduced form, hence are properly equivalent to each other.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $f$ and $g$ are properly equivalent exactly when their reduced representatives are equal. Since equality of two explicit coefficient triples is decidable, proper equivalence is decidable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary compares two specific forms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Positive-definite inputs exclude the zero form, and step 2.1 compares only finite integer triples."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A form already reduced in one step is covered by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the exact reduced triples, so boundary reduced forms are handled correctly as well."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure is deterministic once the reduction algorithm is fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary gives a decision procedure, not a biconditional proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate converse is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-reducing-a-large-binary-quadratic-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-binary-quadratic-form-substitution-is-a-right-action",
+          "source_section": "Statement",
+          "quote": "For an integral binary quadratic form $f$ and matrices $M,N\\in\\mathrm{SL}_2(\\mathbb Z)$,\nthe substitution notation of [[def-proper-equivalence-of-binary-quadratic-forms]]\nsatisfies\n\n$$f\\mid I=f,\\qquad (f\\mid M)\\mid N=f\\mid(MN).$$\n\nThus integral substitution defines a right action of $\\mathrm{SL}_2(\\mathbb Z)$\non integral binary quadratic forms.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-reduction-of-positive-definite-binary-quadratic-forms",
+          "source_section": "Statement",
+          "quote": "Every positive-definite integral binary quadratic form is properly equivalent to\na reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S=\\begin{pmatrix}0&-1\\\\ 1&0\\end{pmatrix}$ and $T_k=\\begin{pmatrix}1&k\\\\ 0&1\\end{pmatrix}$. Direct substitution gives $f\\mid S=(25,-214,458)$, $(f\\mid S)\\mid T_4=(25,-14,2)$, $((f\\mid S)\\mid T_4)\\mid S=(2,14,25)$, then after $T_{-3}$ one gets $(2,2,1)$, after another $S$ one gets $(1,-2,2)$, and after $T_1$ one gets $(1,0,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The final form $(1,0,1)$ is reduced because $|0|\\le1\\le1$ and the boundary sign condition is automatic.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By repeated use of the right-action law [L1], the composite matrix is $ST_4ST_{-3}ST_1=\\begin{pmatrix}3&4\\\\ -13&-17\\end{pmatrix}$, which has determinant $1$, so the single displayed substitution is exactly the product of the six moves in step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the explicit reduction algorithm indeed carries $(458,214,25)$ to the reduced form $(1,0,1)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one explicit form, not a family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 ends at the reduced form (1,0,1), so a zero middle coefficient is allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The final leading coefficient a = 1 is part of the worked chain in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 records the full chain instead of skipping repeated swaps or shears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the terminal endpoint case b = 0 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reduction path is deterministic once the explicit move choices are fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The positive-definite form $(458,214,25)$ reduces to $(1,0,1)$ through the explicit swap-and-shear moves $$ (458,214,25)\\to(25,-214,458)\\to(25,-14,2)\\to(2,14,25)\\to(2,2,1)\\to(1,-2… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-reduced-forms-of-discriminant-minus-four": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-leading-coefficient-bound-for-a-reduced-form",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with\ndiscriminant $\\Delta$. Then\n\n$$a\\le\\sqrt{|\\Delta|/3}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-binary-quadratic-form-class-number",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta<0$ be an integer with $\\Delta\\equiv0$ or $1\\pmod4$. The\n**binary quadratic form class number** $h(\\Delta)$ is the number of\nproper-equivalence classes of primitive positive-definite integral binary\nquadratic forms of discriminant $\\Delta$.\n\nThis number is finite by\n[[cor-finiteness-of-positive-definite-binary-form-classes]], since primitive\npositive-definite forms of discriminant $\\Delta$ are a subclass of all\npositive-definite forms of discriminant $\\Delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $a\\le\\sqrt{4/3}<2$ by [L1], so the positive integer $a$ must be $1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The discriminant equation gives $-4=b^2-4c$, so $4c=b^2+4$. Since the form is reduced, $|b|\\le1$; the choices $b=\\pm1$ make $c=5/4$, not an integer, while $b=0$ gives $c=1$. Thus the only reduced possibility is $(1,0,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The form $(1,0,1)$ is primitive, so by [L2] there is exactly one proper-equivalence class of primitive positive-definite forms of discriminant $-4$. Hence [L3] gives $h(-4)=1$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example treats one fixed discriminant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The middle coefficient b = 0 occurs in the unique reduced form found in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 forces the leading coefficient a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example allows c = a and the boundary sign rule through the candidate (1,0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The reduced endpoint b = 0 is realized in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made beyond finite enumeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a concrete case rather than proving an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The only reduced primitive positive-definite binary quadratic form of discriminant $-4$ is $$x^2+y^2=(1,0,1).$$ Consequently $h(-4)=1$. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-reduced-forms-of-discriminant-minus-eight": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-leading-coefficient-bound-for-a-reduced-form",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with\ndiscriminant $\\Delta$. Then\n\n$$a\\le\\sqrt{|\\Delta|/3}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-binary-quadratic-form-class-number",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta<0$ be an integer with $\\Delta\\equiv0$ or $1\\pmod4$. The\n**binary quadratic form class number** $h(\\Delta)$ is the number of\nproper-equivalence classes of primitive positive-definite integral binary\nquadratic forms of discriminant $\\Delta$.\n\nThis number is finite by\n[[cor-finiteness-of-positive-definite-binary-form-classes]], since primitive\npositive-definite forms of discriminant $\\Delta$ are a subclass of all\npositive-definite forms of discriminant $\\Delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $a\\le\\sqrt{8/3}<2$, so the positive integer $a$ must be $1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The discriminant equation gives $-8=b^2-4c$, so $4c=b^2+8$. Reducedness gives $|b|\\le1$; the choices $b=\\pm1$ make $c=9/4$, not an integer, while $b=0$ gives $c=2$. Thus the only reduced possibility is $(1,0,2)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The form $(1,0,2)$ is primitive, so by [L2] there is exactly one proper-equivalence class of primitive positive-definite forms of discriminant $-8$. Hence [L3] gives $h(-8)=1$, and every such form is properly equivalent to $(1,0,2)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns one fixed discriminant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The middle coefficient again vanishes in the unique reduced form from step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 forces a = 1 here as well."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 produces the reduced form (1,0,2), whose middle coefficient is 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the reduced endpoint b = 0 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is finite enumeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a concrete case only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The only reduced primitive positive-definite binary quadratic form of discriminant $-8$ is $$x^2+2y^2=(1,0,2).$$ Consequently $h(-8)=1$, and every primitive positive-definite form… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-primes-represented-by-x-squared-plus-two-y-squared": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-reduced-forms-of-discriminant-minus-eight",
+          "source_section": "Example",
+          "quote": "The only reduced primitive positive-definite binary quadratic form of\ndiscriminant $-8$ is\n\n$$x^2+2y^2=(1,0,2).$$\n\nConsequently $h(-8)=1$, and every primitive positive-definite form of\ndiscriminant $-8$ is properly equivalent to $x^2+2y^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-proper-equivalence-preserves-representations",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. If $f$ and $g$ are properly\nequivalent, then:\n\n1. $f$ and $g$ represent exactly the same integers.\n2. Primitive representations correspond bijectively: for each integer $n$, a\n   pair $(x,y)$ with $\\gcd(x,y)=1$ satisfies $g(x,y)=n$ if and only if the pair\n   $(px+qy,rx+sy)$ has relatively prime coordinates and satisfies\n   $f(px+qy,rx+sy)=n$, where $g=f\\mid\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-positive-definite-binary-form-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form, and let\n$\\Delta=b^2-4ac$ be its discriminant. Then $f$ is positive definite if and only\nif\n\n$$a>0\\qquad\\text{and}\\qquad \\Delta<0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-first-supplement-to-quadratic-reciprocity",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$,\n\n$$\\left(\\frac{-1}{p}\\right)=(-1)^{(p-1)/2}.$$\n\nEquivalently, $(-1/p)=1$ if and only if $p\\equiv1\\pmod4$, while $(-1/p)=-1$ if and only if $p\\equiv3\\pmod4$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-second-supplement-to-quadratic-reciprocity",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$,\n\n$$\\left(\\frac2p\\right)=(-1)^{(p^2-1)/8}.$$\n\nEquivalently, $(2/p)=1$ if and only if $p\\equiv1$ or $7\\pmod8$, while $(2/p)=-1$ if and only if $p\\equiv3$ or $5\\pmod8$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-legendre-symbol-multiplicativity",
+          "source_section": "Statement",
+          "quote": "For every odd prime $p$ and all integers $a,b$,\n\n$$\\left(\\frac{ab}{p}\\right)=\\left(\\frac ap\\right)\\left(\\frac bp\\right).$$\n\nConsequently, if $p\\nmid c$, then $(ac^2/p)=(a/p)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "Let $p$ be an odd prime and let $a\\in\\mathbb Z$. The **Legendre symbol** is\n\n$$\\left(\\frac ap\\right):=\\begin{cases}0,&p\\mid a,\\\\1,&p\\nmid a\\text{ and }a\\text{ is a quadratic residue modulo }p,\\\\-1,&p\\nmid a\\text{ and }a\\text{ is a quadratic nonresidue modulo }p.\\end{cases}$$\n\nThe zero branch is separate from the quadratic residue and nonresidue branches of [[def-quadratic-residue-modulo-n]], which apply only to unit numerators.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $p=x^2+2y^2$, then reducing modulo $8$ shows $x^2\\equiv1\\pmod8$ and $2y^2\\equiv0$ or $2\\pmod8$, because squares modulo $8$ are $0,1,4$ and $p$ is odd. Hence $p\\equiv1$ or $3\\pmod8$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose $p\\equiv1$ or $3\\pmod8$. Then [L4] and [L5] give $\\left(\\frac{-1}{p}\\right)\\left(\\frac2p\\right)=1$, so [L6] yields $\\left(\\frac{-2}{p}\\right)=1$. By [L7], there is an integer $t$ with $t^2\\equiv-2\\pmod p$.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $c=(t^2+2)/p$, which is an integer by step 1.2, and define $f=(p,2t,c)$. Then $\\Delta(f)=(2t)^2-4pc=4t^2-4(t^2+2)=-8$, and $f(1,0)=p$, so $f$ represents $p$. If a divisor $d$ of $p$, $2t$, and $c$ were greater than $1$, then $d=p$ because $p$ is prime; but $p\\mid 2t$ would force $p\\mid t$, hence $p\\mid t^2+2$, so $p\\mid 2$, impossible for an odd prime. Thus $f$ is primitive. Since its leading coefficient is $p>0$ and its discriminant is $-8<0$, [L3] makes $f$ positive definite. Therefore [L1] shows that $f$ is properly equivalent to $x^2+2y^2$, and then [L2] shows that $x^2+2y^2$ represents $p$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the claimed criterion.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns odd primes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis excludes p = 2 and any zero modulus issue; step 1.1 works only for odd primes and records that restriction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The representation x^2+2y^2 permits y = 0; step 1.1 still covers the prime 1-class modulo 8."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the discriminant -8 form explicitly as (p,2t,(t^2+2)/p) and then reduces it to the unique reduced representative (1,0,2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The residue endpoints 1 and 3 modulo 8 are the exact output of step 1.1 and the exact input to step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a square root t only after the Legendre-symbol criterion proves one exists."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the representation implies the residue condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 prove that the residue classes 1 and 3 modulo 8 force a representation by x^2+2y^2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-reduced-forms-of-discriminant-minus-twenty": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-leading-coefficient-bound-for-a-reduced-form",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with\ndiscriminant $\\Delta$. Then\n\n$$a\\le\\sqrt{|\\Delta|/3}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-binary-quadratic-form-class-number",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta<0$ be an integer with $\\Delta\\equiv0$ or $1\\pmod4$. The\n**binary quadratic form class number** $h(\\Delta)$ is the number of\nproper-equivalence classes of primitive positive-definite integral binary\nquadratic forms of discriminant $\\Delta$.\n\nThis number is finite by\n[[cor-finiteness-of-positive-definite-binary-form-classes]], since primitive\npositive-definite forms of discriminant $\\Delta$ are a subclass of all\npositive-definite forms of discriminant $\\Delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $a\\le\\sqrt{20/3}<3$, so $a$ is $1$ or $2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $a=1$, then $-20=b^2-4c$, so $4c=b^2+20$. Reducedness gives $|b|\\le1$. The values $b=\\pm1$ make $c=21/4$, not an integer, while $b=0$ gives $c=5$, yielding $(1,0,5)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $a=2$, then $-20=b^2-8c$, so $8c=b^2+20$. Reducedness gives $|b|\\le2$. The values $b=0,\\pm1$ give no integer $c$, while $b=\\pm2$ gives $c=3$; the boundary rule forces $b=2$. Thus the only reduced possibility with $a=2$ is $(2,2,3)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two forms of steps 2.1 and 2.2 are primitive and distinct, and [L2] shows that no other reduced primitive form of discriminant $-20$ exists. Hence [L3] gives $h(-20)=2$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one discriminant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The candidate list in step 1.1 includes b = 0 and rejects or keeps it by the discriminant equation rather than by assumption."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The bound in step 1.1 allows a = 1 as one of the finite candidates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example keeps distinct reduced forms with the same discriminant rather than assuming uniqueness too early."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 use the boundary values b = 0 and b = 2 in the finite search."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No nonempty set is chosen from; the search is finite enumeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a concrete class number only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The reduced primitive positive-definite binary quadratic forms of discriminant $-20$ are $$x^2+5y^2=(1,0,5),\\qquad 2x^2+2xy+3y^2=(2,2,3).$$ Consequently $h(-20)=2$. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-reduced-forms-of-discriminant-minus-twenty-three": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-leading-coefficient-bound-for-a-reduced-form",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,c)$ be a reduced positive-definite binary quadratic form with\ndiscriminant $\\Delta$. Then\n\n$$a\\le\\sqrt{|\\Delta|/3}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-binary-quadratic-form-class-number",
+          "source_section": "Definition",
+          "quote": "Let $\\Delta<0$ be an integer with $\\Delta\\equiv0$ or $1\\pmod4$. The\n**binary quadratic form class number** $h(\\Delta)$ is the number of\nproper-equivalence classes of primitive positive-definite integral binary\nquadratic forms of discriminant $\\Delta$.\n\nThis number is finite by\n[[cor-finiteness-of-positive-definite-binary-form-classes]], since primitive\npositive-definite forms of discriminant $\\Delta$ are a subclass of all\npositive-definite forms of discriminant $\\Delta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $a\\le\\sqrt{23/3}<3$, so $a$ is $1$ or $2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $a=1$, then $-23=b^2-4c$, so $4c=b^2+23$. Reducedness gives $|b|\\le1$. The value $b=0$ gives no integer $c$, while $b=\\pm1$ gives $c=6$; the boundary rule forces $b=1$. Thus $(1,1,6)$ is the only reduced possibility with $a=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $a=2$, then $-23=b^2-8c$, so $8c=b^2+23$. Reducedness gives $|b|\\le2$. The values $b=0,\\pm2$ give no integer $c$, while $b=\\pm1$ gives $c=3$, and both signs are allowed because $|b|<a$. Thus the reduced possibilities are $(2,1,3)$ and $(2,-1,3)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The three forms from steps 2.1 and 2.2 are primitive and distinct, and [L2] shows that no other reduced primitive form of discriminant $-23$ exists. Hence [L3] gives $h(-23)=3$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one discriminant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The candidate search in step 1.1 includes the possibility b = 0 and rejects it by the discriminant equation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite search in step 1.1 includes the case a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example keeps both signs of the middle coefficient only when the reduced-form rule allows them as distinct reduced forms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint conditions on b are exactly what distinguish the two conjugate reduced forms in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The computation is exhaustive finite enumeration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes one class number only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: The reduced primitive positive-definite binary quadratic forms of discriminant $-23$ are $$ (1,1,6),\\qquad (2,1,3),\\qquad (2,-1,3). $$ Consequently $h(-23)=3$. It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "cex-same-discriminant-does-not-imply-proper-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-proper-equivalence-preserves-representations",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. If $f$ and $g$ are properly\nequivalent, then:\n\n1. $f$ and $g$ represent exactly the same integers.\n2. Primitive representations correspond bijectively: for each integer $n$, a\n   pair $(x,y)$ with $\\gcd(x,y)=1$ satisfies $g(x,y)=n$ if and only if the pair\n   $(px+qy,rx+sy)$ has relatively prime coordinates and satisfies\n   $f(px+qy,rx+sy)=n$, where $g=f\\mid\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integer-represented-by-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form\n([[def-binary-quadratic-form-over-integers]]) and let $n\\in\\mathbb{Z}$.\n\nWe say that $f$ **represents** $n$ when there exist integers $r,s$ such that\n\n$$n=f(r,s)=ar^2+brs+cs^2.$$\n\nWe say that $f$ **primitively represents** $n$ when there exist integers\n$r,s$ with\n\n$$n=f(r,s)\\qquad\\text{and}\\qquad \\gcd(r,s)=1$$\n\n([[def-common-divisor-and-gcd]]).",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The discriminants are $0^2-4\\cdot1\\cdot6=-24$ and $0^2-4\\cdot2\\cdot3=-24$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The form $f$ represents $1$, since $f(1,0)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The form $g$ does not represent $1$: if $g(x,y)=1$, then $2x^2+3y^2=1$, but $y\\ne0$ would force the left-hand side to be at least $3$, while $y=0$ would give $2x^2=1$, impossible in integers.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $f$ and $g$ do not represent the same integers, [L1] shows that they are not properly equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses two explicit forms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats the nonzero integer pairs; the zero pair gives the value 0 for both forms and is irrelevant to representing 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The represented integer singled out in step 2.1 is exactly 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both counterexample forms are already primitive and positive definite; no hidden degeneracy is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a refutation, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: Two integral binary quadratic forms with the same discriminant need not be properly equivalent. The forms $$f=(1,0,6)\\qquad\\text{and}\\qquad g=(2,0,3)$$ both have discriminant $-24… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-same-represented-integers-do-not-imply-proper-equivalence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "A positive-definite binary quadratic form $(a,b,c)$\n([[def-positive-definite-binary-quadratic-form]]) is **reduced** when\n\n$$|b|\\le a\\le c,$$\n\nand, in the two boundary cases, the middle coefficient is required to be\nnonnegative:\n\n$$b\\ge0\\qquad\\text{whenever}\\qquad |b|=a\\ \\text{ or }\\ a=c.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integer-represented-by-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "Let $f(x,y)=ax^2+bxy+cy^2$ be an integral binary quadratic form\n([[def-binary-quadratic-form-over-integers]]) and let $n\\in\\mathbb{Z}$.\n\nWe say that $f$ **represents** $n$ when there exist integers $r,s$ such that\n\n$$n=f(r,s)=ar^2+brs+cs^2.$$\n\nWe say that $f$ **primitively represents** $n$ when there exist integers\n$r,s$ with\n\n$$n=f(r,s)\\qquad\\text{and}\\qquad \\gcd(r,s)=1$$\n\n([[def-common-divisor-and-gcd]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both forms are reduced: for each one, $|\\,\\pm1\\,|\\le2\\le3$, and no boundary clause is violated because $|b|<a<c$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every integers $x,y$, one has $g(x,y)=2x^2-xy+3y^2=f(x,-y)$. Thus $g$ represents exactly the integers that $f$ represents, and conversely.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reduced triples are distinct because $(2,1,3)\\ne(2,-1,3)$. Therefore [L2] forbids proper equivalence between $f$ and $g$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses two explicit forms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The substitution y ↦ -y in step 1.1 leaves the zero vector fixed and therefore does not depend on nonzero inputs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary case |b| = 1 < a = 2 is part of the step 1.2 check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item's whole point is the sign-degenerate pair b and -b; step 1.2 addresses it directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The reduced-form boundary sign convention is exactly what makes the two triples distinct in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is required; the substitution y ↦ -y is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a refutation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: Two binary quadratic forms can represent exactly the same integers and still fail to be properly equivalent. The forms $$f=(2,1,3)\\qquad\\text{and}\\qquad g=(2,-1,3)$$ have this pro… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    },
+    "ex-proper-versus-improper-equivalence-of-forms": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-equivalence-of-binary-quadratic-forms",
+          "source_section": "Definition",
+          "quote": "Let $f$ and $g$ be integral binary quadratic forms. We say that $f$ and $g$ are\n**properly equivalent** when there exists a matrix\n\n$$M=\\begin{pmatrix}p&q\\\\ r&s\\end{pmatrix}\\in \\mathrm{SL}_2(\\mathbb{Z})$$\n\nsuch that\n\n$$g(x,y)=f(px+qy,rx+sy)$$\n\nfor all integers $x,y$.\n\nWhen this holds we also write\n\n$$g=f\\mid M.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cex-same-represented-integers-do-not-imply-proper-equivalence",
+          "source_section": "Statement refuted",
+          "quote": "Two binary quadratic forms can represent exactly the same integers and still\nfail to be properly equivalent. The forms\n\n$$f=(2,1,3)\\qquad\\text{and}\\qquad g=(2,-1,3)$$\n\nhave this property.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $N=\\begin{pmatrix}1&0\\\\ 0&-1\\end{pmatrix}$ has determinant $-1$, and direct substitution gives $f\\mid N=(2,-1,3)=g$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus allowing determinant $-1$ merges the two distinct proper classes from [L1]: the forms are equivalent under a unimodular substitution, but not under a determinant-one unimodular substitution.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example compares two explicit forms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The substitution in step 1.1 fixes the zero vector and therefore works uniformly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The determinant threshold between 1 and -1 is exactly the example's boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The same pair of forms from the previous counterexample is used precisely because only the orientation sign changes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The determinant -1 matrix is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates a distinction rather than proving an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example on disk is one directional: If one allows determinant $-1$ substitutions as well as determinant $1$ substitutions, then the two distinct reduced forms $$ (2,1,3)\\qquad\\text{and}\\qquad(2,-1,3) $$ become equiv… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-indefinite-classes-have-cycles-of-reduced-forms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-unique-reduced-positive-definite-binary-quadratic-form",
+          "source_section": "Statement",
+          "quote": "Each proper-equivalence class of positive-definite integral binary quadratic\nforms contains exactly one reduced form.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-discriminant-of-binary-quadratic-form",
+          "source_section": "Definition",
+          "quote": "The **discriminant** of the integral binary quadratic form\n\n$$f=(a,b,c)=ax^2+bxy+cy^2$$\n\nis the integer\n\n$$\\Delta(f):=b^2-4ac.$$\n\nWhen the form is clear from context, we also write its discriminant as\n$\\Delta=b^2-4ac$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both forms have discriminant $60$, since $6^2-4(-6)(1)=60$ and $6^2-4(1)(-6)=60$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The matrix $M=\\begin{pmatrix}-8&7\\\\ -7&6\\end{pmatrix}$ has determinant $1$, and direct substitution gives $f\\mid M=g$. Thus $f$ and $g$ are properly equivalent.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under Granville's positive-discriminant convention, a form of discriminant $d>0$ is reduced when $0<\\sqrt d-b<2|a|<\\sqrt d+b$. Since $7<\\sqrt{60}<8$, one has $0<\\sqrt{60}-6<2$ and $13<\\sqrt{60}+6<14$. Hence $0<\\sqrt{60}-6<12<\\sqrt{60}+6$ for $f$ and $0<\\sqrt{60}-6<2<\\sqrt{60}+6$ for $g$, so both are reduced in that convention.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two reduced forms $f$ and $g$ are distinct, yet step 1.2 puts them in one proper-equivalence class. So the uniqueness statement [L1], which is true for positive-definite forms, does not extend to positive discriminant.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses one explicit indefinite class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The discriminant is positive, not zero, and step 1.1 writes the actual reduced cycle rather than a limiting case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The cycle comparison in step 2.1 is about one proper-equivalence class and already shows failure there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is explicit about switching conventions: the reduced condition is the indefinite-source convention, not the positive-definite one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 writes the exact source convention, including its boundary inequalities, before verifying the example forms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cycle is written explicitly from source and checked directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a counterexample, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted on disk is one directional: The uniqueness theorem for reduced positive-definite forms does not extend to positive discriminant. Under Granville's positive-discriminant convention, both $$f=(-6,6,1)\\qquad\\te… It does not assert an equivalence or converse."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha contract-audit-3",
+        "notes": "I reread the current positive-definite binary-quadratic-form reduction chain against its proof-contract entries on the current text. The routed risks here were biconditionals about primitivity and reduced representatives, quotient constructions through proper equivalence classes, reduction inequalities, and explicit reduced-form examples. On disk the discriminant congruence split, the SL_2-substitution formulas, the Gauss reduction step, the uniqueness and finiteness arguments, and the worked discriminant examples all keep the boundary hypotheses and cited algebra explicit, and I found no concrete false claim, missing hypothesis, unlicensed inference, or inaccurate citation."
+      }
+    }
+  }
+}

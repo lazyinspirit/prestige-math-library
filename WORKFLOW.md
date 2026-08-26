@@ -249,10 +249,10 @@ e.g.:
 export JUDGE_VERDICTLOG=research/<run>-judge.jsonl
 ```
 
-The paired judges (lineup: `CLAUDE.md` §Model lineup) each record
+The configured judge (lineup: `CLAUDE.md` §Model lineup) records
 `{id, model, keep, reason, context_sha256, at}` for every call, including `keep: null` tool
-failures. Commit the shared ledger with the level. Count refutations from either
-model per id; never rotate it mid-level, because the count is the entire point
+failures. Commit the shared ledger with the level. Count refutations per item
+version; never rotate it mid-level, because the count is the entire point
 of keeping it.
 
 For every `keep: false`, Alpha also appends a decision to
@@ -261,8 +261,8 @@ context_sha256}`. `outcome` is `confirmed_fatal`, `confirmed_nonfatal`, or
 `false_positive`; confirmed fatal findings classify `defect_type` as `logic`,
 `dependency_citation`, or `other`. Step 10 runs
 `tools/judge-compare.mjs <ledger> --adjudications <file>`: the confirmed fatal
-counts are a precision comparison of the two judges, while raw rejections alone
-are not an effectiveness claim.
+count measures Terra's precision among adjudicated rejections, while raw
+rejections alone are not an effectiveness claim and cannot measure recall.
 
 **Repairs are worse — they had no record at all**, living only in subagent prose
 reports, which is exactly what amendment 6 of the build workflow says not to
@@ -660,18 +660,17 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 
 Run the judge, then report and fix.
 
-**Paired judges.** The lineup is `CLAUDE.md` §Model lineup, selected by
-`JUDGE_LINEUP` and run concurrently with
-`tools/judge.mts --parallel`. That program loads
+**Judge.** The lineup is `CLAUDE.md` §Model lineup, selected by
+`JUDGE_LINEUP=terra` and run with `tools/judge.mts`. That program loads
 `briefs/judge-conventions.txt` by default into the frozen prompt and its hash;
 `briefs/codex-judge.md` is historical human documentation, not a second runtime
-prompt. Each receives the same frozen context and reads proofs and dependencies
-skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/<run>-judge.jsonl` as
-`{id, model, keep, reason, context_sha256, at}`. DeepSeek is the cross-family
-screen; the second lane is same-family with audit Alpha, so weight agreement
-accordingly (`CLAUDE.md` §Paired skeptical judges).
+prompt. Terra reads proofs and dependencies skeptically and accepts unless it
+can name a specific defect. Record its verdict in `research/<run>-judge.jsonl`
+as `{id, model, keep, reason, context_sha256, at}`. Terra is same-family with
+most work it screens, so this route supplies no cross-family corroboration
+(`CLAUDE.md` §Skeptical judge).
 
-The initial Step-7 paired sweep covers **every item in every completed A/B pair**,
+The initial Step-7 sweep covers **every item in every completed A/B pair**,
 not merely Alpha-touched items. Only after that full sweep may Alpha select the
 exact materially repaired items for a targeted rejudge.
 
@@ -681,7 +680,7 @@ dependencies, of its own page, and of its A/B companion page, so "faithfully
 restated?" and "actually licensed?" are checkable rather than assumed. `--batch`
 adds the rest of the level. See `ARCHITECTURE.md` §5.
 
-**Adjudication.** Alpha alone adjudicates every paired-judge
+**Adjudication.** Alpha alone adjudicates every configured-judge
 rejection in this and all future sessions. It reads the frozen verdict against
 the text on disk, records `confirmed_fatal`, `confirmed_nonfatal`, or
 `false_positive`, applies any permitted draft repair, and limits rejudging to
@@ -816,7 +815,7 @@ new receipt perform the full sweep. Delta capture, receipt refresh, Alpha review
 register render and the scope snapshot run serially. Every created or mathematically modified
 item since `post-step8` is derived by guarded hash; creations require one run
 manifest owner and modified published items enter a targeted change manifest.
-Every changed id passes through both judges and exact adjudication/rejudge, then
+Every changed id passes through Terra and exact adjudication/rejudge, then
 stamped after impact closure. An impact-repair snapshot waits for its exact
 Alpha result. Unchanged current verdicts are not re-spent.
 
@@ -938,8 +937,8 @@ directory directly.
 
 The library records origin (session or pipeline), separate statement/construction
 and proof/verification provenance on future mathematical-content items, and
-verification (mechanical precheck, paired judge including a cross-family
-DeepSeek lane, owner audit). The component chips tell the reader which part was
+verification (mechanical precheck, Terra judge, owner audit). The component
+chips tell the reader which part was
 generated, materially altered, or faithfully derived from literature;
 `proved_here` still
 separately says whether this library supplies a proof. Page badges are derived

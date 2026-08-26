@@ -28,8 +28,13 @@ export function step6Stages(d: any) {
   } = d;
 
   const legacyResult = resultPattern('alpha', '6c-[a-z-]+');
-  const introducedPattern = (normal: RegExp) =>
-    new RegExp(`(?:${normal.source})|(?:${legacyResult.source})`);
+  // Compatibility is conditional on THIS run's hash-bound cutover receipt.
+  // A static union is unsafe: on an ordinary run the current 6c Alpha result
+  // then matches every later introduced stage. Frontier 19 reached 6d with its
+  // unit falsely covered by alpha-6c-lead, so the real close tool could not be
+  // dispatched and the closure artifact could never appear.
+  const introducedPattern = (normal: RegExp) => (ctx: any) =>
+    hasLegacyStep6Cutover(ctx) ? legacyResult : normal;
   const introducedBatches = (ctx: any) => hasLegacyStep6Cutover(ctx) ? ['all'] : batches(ctx);
   const introducedArtifact = (ctx: any, normal: string) => hasLegacyStep6Cutover(ctx)
     ? `research/${ctx.run}-step6-cutover.json`

@@ -1,0 +1,520 @@
+[
+  {
+    "order": 111.003,
+    "id": "localisation-of-modules-and-support",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Localisation of Modules and Support",
+    "companion": "localisation-of-modules-and-support-examples",
+    "requires": [
+      "noetherian-rings-and-hilbert-basis-examples"
+    ],
+    "items": [
+      {
+        "id": "def-localisation-of-a-module",
+        "kind": "definition",
+        "title": "Localisation of a module at a multiplicative subset",
+        "deps": [
+          "def-left-and-right-modules",
+          "def-multiplicative-subset-and-localisation"
+        ]
+      },
+      {
+        "id": "lem-localised-module-fraction-equivalence-is-an-equivalence-relation",
+        "kind": "lemma",
+        "title": "The module-fraction relation is an equivalence relation",
+        "strategy": "Check reflexivity and symmetry directly. For transitivity, combine two annihilating-denominator equations with one common multiplier from the multiplicative set.",
+        "deps": [
+          "def-localisation-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-localised-module-addition-independent-of-representatives",
+        "kind": "lemma",
+        "title": "Addition of localised module fractions is independent of representatives",
+        "strategy": "Start from two valid representative changes and clear both denominator changes at once to show the common-denominator sum defines the same class.",
+        "deps": [
+          "def-localisation-of-a-module",
+          "lem-localised-module-fraction-equivalence-is-an-equivalence-relation"
+        ]
+      },
+      {
+        "id": "lem-localised-module-scalar-action-independent-of-representatives",
+        "kind": "lemma",
+        "title": "The localised scalar action is independent of representatives",
+        "strategy": "Treat the ring-fraction and module-fraction representative changes separately and then combine them to show ((a/u)(m/s) = am/(us)) is well defined.",
+        "deps": [
+          "def-localisation-of-a-module",
+          "lem-localised-module-fraction-equivalence-is-an-equivalence-relation",
+          "thm-localisation-equivalence-and-ring-laws"
+        ]
+      },
+      {
+        "id": "thm-universal-property-localisation-of-a-module",
+        "kind": "theorem",
+        "title": "Universal property of localisation for modules",
+        "strategy": "Send m/s to s^{-1}f(m) in the target S^{-1}R-module, prove representative independence from the previous well-definedness lemmas, and force uniqueness by evaluating every class at m/1 and 1/s.",
+        "deps": [
+          "def-localisation-of-a-module",
+          "lem-localised-module-addition-independent-of-representatives",
+          "lem-localised-module-scalar-action-independent-of-representatives",
+          "thm-localisation-equivalence-and-ring-laws"
+        ]
+      },
+      {
+        "id": "thm-localisation-of-modules-is-tensor-product",
+        "kind": "theorem",
+        "title": "Localisation of modules is extension of scalars",
+        "strategy": "Construct mutually inverse maps S^{-1}R tensor_R M <-> S^{-1}M by ((a/s) tensor m) mapsto am/s and m/s mapsto (1/s) tensor m, checking balance and the inverse identities explicitly.",
+        "deps": [
+          "thm-universal-property-localisation-of-a-module",
+          "thm-universal-property-of-module-tensor-products",
+          "prop-elementary-tensor-formulas-descend-exactly-when-balanced",
+          "thm-commutative-ring-module-structure-on-a-tensor-product"
+        ]
+      },
+      {
+        "id": "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+        "kind": "theorem",
+        "title": "Localisation commutes with quotient modules and arbitrary direct sums",
+        "strategy": "Identify localisation with extension of scalars, then use the published quotient-tensor isomorphism and the direct-sum tensor isomorphism to transport both constructions through localisation.",
+        "deps": [
+          "thm-localisation-of-modules-is-tensor-product",
+          "cor-tensor-product-with-a-quotient-ring",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums"
+        ]
+      },
+      {
+        "id": "lem-zero-in-a-localised-module",
+        "kind": "lemma",
+        "title": "A localised module fraction is zero exactly when one denominator kills its numerator",
+        "strategy": "Unpack equality with 0/1 in the localisation relation and rewrite the witness equation as an annihilation statement on the numerator.",
+        "deps": [
+          "def-localisation-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-localisation-preserves-injectivity",
+        "kind": "lemma",
+        "title": "Injective module maps remain injective after localisation",
+        "strategy": "If a localised element maps to zero, apply the zero-fraction criterion in the codomain and then use injectivity of the original map to push the annihilating denominator back to the source.",
+        "deps": [
+          "lem-zero-in-a-localised-module",
+          "thm-module-kernel-image-and-injectivity"
+        ]
+      },
+      {
+        "id": "lem-localisation-preserves-surjectivity",
+        "kind": "lemma",
+        "title": "Surjective module maps remain surjective after localisation",
+        "strategy": "Lift the numerator of each target fraction along the original surjection and keep the same denominator.",
+        "deps": [
+          "def-localisation-of-a-module",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "thm-localisation-of-modules-is-exact",
+        "kind": "theorem",
+        "title": "Localisation of modules is exact",
+        "strategy": "Use the tensor description plus right exactness of tensor products for the cokernel side, and the injectivity-preservation lemma for the left exact side.",
+        "deps": [
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-right-exactness-of-tensor-products",
+          "lem-localisation-preserves-injectivity"
+        ]
+      },
+      {
+        "id": "cor-localisation-commutes-with-kernels-images-and-cokernels",
+        "kind": "corollary",
+        "title": "Localisation commutes with kernels images and cokernels",
+        "strategy": "Apply exactness to the standard short exact sequences defining kernel, image, and cokernel.",
+        "deps": [
+          "thm-localisation-of-modules-is-exact",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "cor-localisation-commutes-with-finite-intersections-of-submodules",
+        "kind": "corollary",
+        "title": "Localisation commutes with finite intersections of submodules",
+        "strategy": "Realise a finite intersection as the kernel of the diagonal map to a finite direct sum of quotients, then localise kernels, quotients, and direct sums.",
+        "deps": [
+          "cor-localisation-commutes-with-kernels-images-and-cokernels",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "thm-universal-property-of-module-direct-sums",
+          "def-direct-sum-of-a-family-of-modules"
+        ]
+      },
+      {
+        "id": "lem-localisation-of-hom-natural-map",
+        "kind": "lemma",
+        "title": "There is a natural localisation map on Hom",
+        "strategy": "Send a localised homomorphism class f/s to the induced map on localisations, prove the formula respects the localisation relation, and check S^{-1}R-linearity.",
+        "deps": [
+          "lem-hom-module-over-a-commutative-ring",
+          "thm-universal-property-localisation-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-localised-hom-finite-free-case",
+        "kind": "lemma",
+        "title": "The localised Hom map is an isomorphism for finite free sources",
+        "strategy": "Identify both sides with a finite direct sum of the localised target by evaluating at a chosen finite basis and localising coordinatewise.",
+        "deps": [
+          "lem-localisation-of-hom-natural-map",
+          "lem-hom-from-a-finite-free-module",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums"
+        ]
+      },
+      {
+        "id": "lem-localised-hom-finite-presentation-kernel-step",
+        "kind": "lemma",
+        "title": "A finite presentation reduces localised Hom to the finite free case",
+        "strategy": "Apply Hom to a finite presentation, localise the resulting kernel diagram, and compare the two rows using exactness and the finite free case on the surrounding free modules.",
+        "deps": [
+          "lem-localisation-of-hom-natural-map",
+          "lem-localised-hom-finite-free-case",
+          "thm-localisation-of-modules-is-exact",
+          "def-finitely-presented-module-and-algebra"
+        ]
+      },
+      {
+        "id": "thm-localisation-of-hom-for-finitely-presented-modules",
+        "kind": "theorem",
+        "title": "Localisation of Hom for finite and finitely presented modules",
+        "strategy": "Prove injectivity from a finite generating set of the source, then use the finite-presentation kernel reduction to obtain surjectivity and hence an isomorphism in the finitely presented case.",
+        "deps": [
+          "lem-localisation-of-hom-natural-map",
+          "lem-localised-hom-finite-free-case",
+          "lem-localised-hom-finite-presentation-kernel-step",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "thm-local-criterion-for-zero-modules-and-maps",
+        "kind": "theorem",
+        "title": "Local criteria for zero modules and for injective, surjective, and bijective maps",
+        "strategy": "Detect a nonzero element by its annihilator and a maximal ideal containing that annihilator, then apply the kernel and cokernel identifications after localisation to translate module tests into map tests.",
+        "deps": [
+          "cor-localisation-commutes-with-kernels-images-and-cokernels",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "prop-iterated-localisation",
+          "thm-ideal-correspondence-for-localisation",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "thm-local-criterion-for-exactness-of-modules",
+        "kind": "theorem",
+        "title": "A sequence of modules is exact exactly when all prime localisations are exact",
+        "strategy": "Localise the sequence to get necessity, then test the homology module for zero by the previous local criterion.",
+        "deps": [
+          "thm-local-criterion-for-zero-modules-and-maps",
+          "thm-localisation-of-modules-is-exact",
+          "def-exact-and-short-exact-sequences-of-modules"
+        ]
+      },
+      {
+        "id": "def-support-of-a-module",
+        "kind": "definition",
+        "title": "Support of a module",
+        "deps": [
+          "def-localisation-at-a-prime-ideal",
+          "def-left-and-right-modules"
+        ]
+      },
+      {
+        "id": "lem-support-membership-by-annihilator",
+        "kind": "lemma",
+        "title": "A prime lies in the support exactly when some element has annihilator inside it",
+        "strategy": "Translate nonvanishing of m/1 in M_p into the failure of every denominator outside p to annihilate m, and rewrite that condition as Ann(m) subseteq p.",
+        "deps": [
+          "def-support-of-a-module",
+          "def-annihilator-and-torsion-of-a-module",
+          "lem-zero-in-a-localised-module"
+        ]
+      },
+      {
+        "id": "lem-support-of-a-cyclic-module-is-its-vanishing-set",
+        "kind": "lemma",
+        "title": "The support of a cyclic quotient is its vanishing set",
+        "strategy": "Identify (R/I)_p with R_p/I_p and show this quotient is nonzero exactly when the extended ideal I_p is proper, equivalently when p contains I.",
+        "deps": [
+          "def-support-of-a-module",
+          "thm-localisation-commutes-with-quotients",
+          "thm-ideal-correspondence-for-localisation"
+        ]
+      },
+      {
+        "id": "lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports",
+        "kind": "lemma",
+        "title": "A finite module has the union of its generator-cyclic supports",
+        "strategy": "Localise a finite generating surjection from a finite direct sum of cyclic modules and compare vanishing on both sides.",
+        "deps": [
+          "lem-support-of-a-cyclic-module-is-its-vanishing-set",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "def-support-of-a-module"
+        ]
+      },
+      {
+        "id": "thm-support-and-annihilator-of-a-finite-module",
+        "kind": "theorem",
+        "title": "For a finite module, support is the set of primes containing the annihilator",
+        "strategy": "Use the annihilator-membership lemma for one direction, and reduce the converse to finitely many cyclic generator quotients whose supports are explicit vanishing sets.",
+        "deps": [
+          "lem-support-membership-by-annihilator",
+          "lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports",
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "thm-support-in-a-short-exact-sequence",
+        "kind": "theorem",
+        "title": "Support in a short exact sequence is the union of the outer supports",
+        "strategy": "Localise the short exact sequence and read nonvanishing of the middle term directly from exactness of the localised sequence.",
+        "deps": [
+          "def-support-of-a-module",
+          "thm-localisation-of-modules-is-exact",
+          "def-exact-and-short-exact-sequences-of-modules"
+        ]
+      },
+      {
+        "id": "thm-support-of-arbitrary-direct-sums",
+        "kind": "theorem",
+        "title": "Support of an arbitrary direct sum is the union of the supports",
+        "strategy": "Localise the direct sum termwise and use the zero-module local criterion to see that a direct sum localisation vanishes exactly when every summand localisation vanishes.",
+        "deps": [
+          "def-support-of-a-module",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "thm-local-criterion-for-zero-modules-and-maps"
+        ]
+      },
+      {
+        "id": "thm-support-under-localisation",
+        "kind": "theorem",
+        "title": "Support under localisation is restriction to primes disjoint from the denominator set",
+        "strategy": "Use the prime-correspondence theorem and iterated localisation to identify the localisations of S^{-1}M with the original localisations of M at primes disjoint from S.",
+        "deps": [
+          "def-support-of-a-module",
+          "thm-ideal-correspondence-for-localisation",
+          "prop-iterated-localisation",
+          "thm-localisation-of-modules-is-tensor-product"
+        ]
+      },
+      {
+        "id": "def-jacobson-radical-of-a-ring",
+        "kind": "definition",
+        "title": "The Jacobson radical of a ring",
+        "deps": [
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "thm-jacobson-radical-unit-characterisation",
+        "kind": "theorem",
+        "title": "An element lies in the Jacobson radical exactly when one minus any multiple is a unit",
+        "strategy": "Intersect over maximal ideals for one direction, and for the converse put a nonunit into a maximal ideal and force the corresponding one-minus-multiple to be a nonunit too.",
+        "deps": [
+          "def-jacobson-radical-of-a-ring",
+          "thm-proper-ideal-contained-in-maximal-ideal"
+        ]
+      },
+      {
+        "id": "lem-determinant-trick-for-nakayama",
+        "kind": "lemma",
+        "title": "Determinant trick for Nakayama",
+        "strategy": "Write chosen generators of M as I-linear combinations of themselves, form the matrix I-A, and apply the adjugate identity to show a determinant in 1+I annihilates M.",
+        "deps": [
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-product-of-an-ideal-and-a-module",
+          "thm-adjugate-identity-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-nakayama-lemma",
+        "kind": "theorem",
+        "title": "Nakayama's lemma",
+        "strategy": "Apply the determinant trick to obtain an annihilator in 1+I and then use the Jacobson radical unit test to force that annihilator to be a unit.",
+        "deps": [
+          "thm-jacobson-radical-unit-characterisation",
+          "lem-determinant-trick-for-nakayama",
+          "def-product-of-an-ideal-and-a-module"
+        ]
+      },
+      {
+        "id": "cor-nakayama-generators-modulo-an-ideal",
+        "kind": "corollary",
+        "title": "Generators modulo an ideal in the Jacobson radical lift to generators",
+        "strategy": "Let N be the submodule generated by the chosen lifts. The quotient M/N is killed modulo I, so Nakayama annihilates it.",
+        "deps": [
+          "thm-nakayama-lemma",
+          "def-product-of-an-ideal-and-a-module",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "cor-minimal-generators-over-a-local-ring",
+        "kind": "corollary",
+        "title": "Minimal generators over a local ring are exactly residue-field bases",
+        "strategy": "Use Nakayama for the spanning direction, and if a lifted relation over the residue field is dependent then solve for one generator and remove it.",
+        "deps": [
+          "cor-nakayama-generators-modulo-an-ideal",
+          "def-local-ring",
+          "def-product-of-an-ideal-and-a-module",
+          "cor-residue-field-of-a-localisation-at-a-prime"
+        ]
+      },
+      {
+        "id": "thm-support-of-a-tensor-product-of-finite-modules",
+        "kind": "theorem",
+        "title": "Support of a tensor product of finite modules is the intersection of the supports",
+        "strategy": "Localise at a prime. If one factor localises to zero the tensor localises to zero; if both local factors are nonzero and finite over a local ring, pass to the residue field and use Nakayama plus nonzero finite-dimensional tensor products over a field.",
+        "deps": [
+          "thm-support-and-annihilator-of-a-finite-module",
+          "thm-localisation-of-modules-is-tensor-product",
+          "thm-localisation-at-a-prime-is-local",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "cor-tensor-products-of-finite-free-modules-and-dimension",
+          "thm-nakayama-lemma"
+        ]
+      },
+      {
+        "id": "cor-finite-module-locally-zero-near-a-prime",
+        "kind": "corollary",
+        "title": "A finite module that vanishes at a prime vanishes on some principal neighbourhood of that prime",
+        "strategy": "Use the support-annihilator theorem to find an annihilating element outside the prime, then invert it so that the localised module is killed by a unit.",
+        "deps": [
+          "thm-support-and-annihilator-of-a-finite-module",
+          "def-support-of-a-module",
+          "thm-localisation-equivalence-and-ring-laws"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.004,
+    "id": "localisation-of-modules-and-support-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Localisation of Modules and Support — Examples",
+    "companion": "localisation-of-modules-and-support",
+    "requires": [
+      "localisation-of-modules-and-support"
+    ],
+    "items": [
+      {
+        "id": "ex-localising-an-abelian-group-at-a-prime",
+        "kind": "example",
+        "title": "Localising cyclic abelian groups and Q/Z at a prime",
+        "strategy": "Compute Z_(p) tensor_Z Z/n from the quotient-tensor formula by separating the p-primary and prime-to-p parts, then show Q/Z localises to its p-primary summand.",
+        "deps": [
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-of-modules-is-tensor-product",
+          "cor-tensor-product-with-a-quotient-ring",
+          "thm-localisation-at-a-prime-is-local"
+        ]
+      },
+      {
+        "id": "ex-localisation-kills-exactly-s-torsion",
+        "kind": "example",
+        "title": "Localising Z/12Z kills exactly the torsion seen by the denominator set",
+        "strategy": "Work with the multiplicative sets generated by 2 and by 3, compute when a denominator power annihilates each residue class, and read the surviving fractions from the zero criterion.",
+        "deps": [
+          "lem-zero-in-a-localised-module",
+          "def-localisation-of-a-module"
+        ]
+      },
+      {
+        "id": "ex-support-of-a-cyclic-module",
+        "kind": "example",
+        "title": "The support of Z/12Z is the pair of primes (2) and (3)",
+        "strategy": "Apply the cyclic-support lemma to the quotient Z/(12), then identify the prime ideals of Z containing 12.",
+        "deps": [
+          "lem-support-of-a-cyclic-module-is-its-vanishing-set",
+          "def-support-of-a-module"
+        ]
+      },
+      {
+        "id": "ex-support-of-an-infinite-direct-sum",
+        "kind": "example",
+        "title": "The support of the direct sum over all primes of Z/pZ is the set of all nonzero prime ideals of Z",
+        "strategy": "Localise each summand at a prime q and observe that only the q-summand survives, then apply the direct-sum support theorem.",
+        "deps": [
+          "thm-support-of-arbitrary-direct-sums",
+          "def-support-of-a-module"
+        ]
+      },
+      {
+        "id": "ex-nakayama-jacobson-hypothesis-is-essential",
+        "kind": "example",
+        "title": "Over Z, the ideal (2) acts surjectively on Z/3Z but does not kill it",
+        "strategy": "Show 2 acts as an automorphism of Z/3Z, so (2)M = M, and then note that (2) is not contained in the Jacobson radical of Z.",
+        "deps": [
+          "thm-nakayama-lemma",
+          "def-jacobson-radical-of-a-ring",
+          "def-product-of-an-ideal-and-a-module",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "ex-nakayama-finite-generation-is-essential",
+        "kind": "example",
+        "title": "The p-primary quotient Q/Z_(p) over Z_(p) shows finite generation is essential in Nakayama",
+        "strategy": "Identify $mathbb Z_{(p)}$ inside $mathbb Q$ via the localisation definition and the field-of-fractions embedding, then show multiplication by $p$ on $mathbb Q/mathbb Z_{(p)}$ is surjective while the module remains nonzero and not finitely generated.",
+        "deps": [
+          "thm-nakayama-lemma",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "cor-residue-field-of-a-localisation-at-a-prime",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds"
+        ]
+      },
+      {
+        "id": "ex-minimal-generators-local-ring",
+        "kind": "example",
+        "title": "The ideal (x,y) in k[x,y]_(x,y) has two minimal generators",
+        "strategy": "Pass to the residue field of the local ring k[x,y]_(x,y), compute the classes of x and y in m/m^2, and apply the residue-basis criterion.",
+        "deps": [
+          "cor-minimal-generators-over-a-local-ring",
+          "def-localisation-at-a-prime-ideal",
+          "thm-localisation-at-a-prime-is-local",
+          "cor-residue-field-of-a-localisation-at-a-prime"
+        ]
+      },
+      {
+        "id": "ex-local-test-for-an-isomorphism",
+        "kind": "example",
+        "title": "The Chinese-remainder map Z/6Z -> Z/2Z direct-sum Z/3Z is an isomorphism by local tests",
+        "strategy": "Check that localising at primes other than 2 and 3 kills both sides, and that at 2 and 3 the map becomes the obvious identity on the surviving summand.",
+        "deps": [
+          "thm-local-criterion-for-zero-modules-and-maps",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "ex-localised-hom-needs-finite-presentation",
+        "kind": "example",
+        "title": "Localised Hom can fail without finite presentation of the source",
+        "strategy": "Use Altman-Kleiman's standard non-finitely-presented source module to show the natural localisation-of-Hom map is injective but not surjective, and isolate exactly where the finite-presentation kernel step breaks.",
+        "deps": [
+          "thm-localisation-of-hom-for-finitely-presented-modules",
+          "lem-localisation-of-hom-natural-map",
+          "def-finitely-presented-module-and-algebra"
+        ]
+      },
+      {
+        "id": "ex-localisation-does-not-commute-with-products",
+        "kind": "example",
+        "title": "Localisation need not commute with infinite products",
+        "strategy": "Follow Altman-Kleiman's infinite-product witness and compare the product of the localised factors with the localisation of the product by testing which families admit one common denominator.",
+        "deps": [
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "def-localisation-of-a-module"
+        ]
+      }
+    ]
+  }
+]

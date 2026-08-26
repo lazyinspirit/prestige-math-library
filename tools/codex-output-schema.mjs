@@ -20,6 +20,14 @@ export function validateCodexOutputSchema(schema) {
     if (Object.prototype.hasOwnProperty.call(node, 'uniqueItems')) {
       problems.push(`${path}: uniqueItems is not supported by Codex structured output`);
     }
+    if (node.type === 'object' && node.properties && typeof node.properties === 'object') {
+      const declared = Object.keys(node.properties);
+      const required = Array.isArray(node.required) ? node.required : [];
+      const omitted = declared.filter((key) => !required.includes(key));
+      if (omitted.length) {
+        problems.push(`${path}: required must include every property for Codex structured output; missing ${omitted.join(', ')}`);
+      }
+    }
 
     for (const [key, value] of Object.entries(node)) walk(value, `${path}.${key}`);
   };

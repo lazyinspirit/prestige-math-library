@@ -46,7 +46,7 @@ scope are exactly the fully-tagged frontier pairs (R3).
 2. **Citation-precision and accuracy audit.** Every proof step and every
    dependency citation in the published corpus is read skeptically — the same
    duties as build step 6a — including cross-page and cross-batch edges, with
-   the paired-judge screen on the final text.
+   the Terra judge screen on the final text.
 
 Baseline measured from disk (2026-08-02):
 
@@ -64,22 +64,22 @@ These three deltas are owner decisions embodied in the commissioning
 instruction; they are recorded here so no future session mistakes them for
 drift:
 
-- **Model lineup (owner clarification, 2026-08-25).** Agent-role assignments
+- **Model lineup (owner clarification, 2026-08-26).** Agent-role assignments
   are the current canonical `CLAUDE.md` lineup; this audit document does not
-  duplicate them. The paired judges are **DeepSeek V4 Pro** plus **GPT-5.6
-  Terra**, selected by `JUDGE_LINEUP=deepseek+terra`. Terra runs through Codex
-  at `xhigh` with its explicit 1,000,000-token context configuration; the
-  DeepSeek refuter and judge remain read-only, tool-less API lanes at `max`.
+  duplicate them. The sole Step-7 judge is **GPT-5.6 Terra**, selected by
+  `JUDGE_LINEUP=terra`, through Codex at `xhigh` with its explicit
+  1,000,000-token context configuration. DeepSeek is removed from Step 7 and
+  every Step-8-or-later rejudge/coverage/stamp obligation; the separate
+  DeepSeek proof-refuter remains a read-only, tool-less API lane at `max`.
   All roles are dispatched by `tools/dispatch.mjs`, which owns per-runner
   read-only enforcement (§8). Every resumed Alpha must complete the durable
   context-recovery protocol in `briefs/audit-alpha.md` before acting.
 
-  The judge lanes use the build's exact paired mechanism: independent,
-  file-backed pools, identical frozen contexts, and neither lane waits for the
-  other. The standing injection bar (`ARCHITECTURE.md` §5) governs judge lanes,
-  which return a mechanical keep/reject verdict. Rows from retired second lanes
+  The judge uses the build's file-backed scheduler and hash-attested frozen
+  context. The standing injection bar (`ARCHITECTURE.md` §5) governs the judge,
+  which returns a mechanical keep/reject verdict. Rows from retired lineups
   are append-only historical evidence and do **not** constitute coverage under
-  the current lineup: coverage is per frozen context and per configured lane,
+  the current lineup: coverage is per frozen context and per configured model set,
   never merely per model name.
 - **Legacy-provenance amendment.** The standing rule "never retrofit legacy
   items" existed because *retroactive provenance guesses would be dishonest*
@@ -105,7 +105,7 @@ drift:
   and equivalent judgment-call rewrites, with **Alpha as final adjudicator**.
   All existing safeguards carry over: dedicated touch snapshots,
   `impact-audit` closure on any public-interface change, no self-certification,
-  stale-verdict deletion, targeted paired rejudge. Only **deletions, id
+  stale-verdict deletion, targeted Terra rejudge. Only **deletions, id
   renames/removals, and structural reading-order changes** remain owner-only;
   they go to the A10 queue with evidence and a proposed route.
 
@@ -119,32 +119,31 @@ drift:
 | **Alpha** | current canonical `CLAUDE.md` audit-role assignment | sole adjudicator: verifies Beta findings and repairs from disk, dispatches read-only proof-refuters, audits every cross-batch/cross-level edge, adjudicates judge rejections, owns the repair and blast-radius ledgers; must recover the prior durable record before resuming |
 | **certifier** (independent reader) | current canonical `CLAUDE.md` audit-role assignment, read-only | Alpha-assigned check of any repair authored by a Beta or by Alpha itself — the author of a repair never certifies it. Stays on an agentic runner because certifying a source-backed repair requires actually fetching the source |
 | **proof-refuter** | **DeepSeek V4 Pro** (`max`), read-only (owner, 2026-08-05) | adversarial proof reading on context Alpha assembles. Tool-less by transport, so Alpha must supply the item and its cited dependencies in the dispatch task file; `dispatch.mjs` refuses a refuter dispatched without one |
-| **judges** | **DeepSeek V4 Pro direct (`max`) + GPT-5.6 Terra (`xhigh`, 1,000,000-token context)** | paired adversarial screens on identical hash-attested frozen context, invoked through the build's `tools/judge.mts --parallel` / `tools/judge-sweep.mjs` (§8), with 16 independent concurrent calls per model |
+| **judge** | **GPT-5.6 Terra (`xhigh`, 1,000,000-token context)** | sole Step-7 adversarial screen on hash-attested frozen context, invoked through the build's `tools/judge.mts` / `tools/judge-sweep.mjs` (§8), capped at 14 concurrent calls |
 
 **The build-only Step-10 amendment of 2026-08-21 is withdrawn (owner,
 2026-08-23).** Sigma and Tau are deleted from the build workflow; they never
 applied to any A-stage, so nothing in this document changes. `ARCHITECTURE.md`
 §3.11j records the deletion and what it gives up.
 
-Cross-family honesty note (rewritten 2026-08-25 for the Terra lineup). The
-second judge and the ordinary agent roles are OpenAI-family lanes, so their
-agreement is not cross-family corroboration. State the consequences plainly:
+Cross-family honesty note (rewritten 2026-08-26 for Terra-only judging). The
+sole judge and the ordinary agent roles are OpenAI-family lanes, so the judge
+route supplies no cross-family corroboration. State the consequences plainly:
 
 - **Beta, Alpha and certifier agreement is not cross-family corroboration.**
   Each remains an independent process and reading, but a shared-family blind
   spot does not become independent evidence merely because another such role
   agrees.
 - **The refuter is the cross-family audit-side reader.** It remains DeepSeek V4
-  Pro so the audit has a non-Anthropic reading lane outside the judges.
+  Pro, but it is not a Step-7 judge and its findings do not satisfy judge coverage.
 - **Alpha is now the same family as a large part of the legacy corpus it
   adjudicates**, which was already true before this move and is not new. It is
   not an independent family screen on Claude-authored published content and must
   not be described as one.
 
-Net: **DeepSeek is the cross-family screen**, in both the refuter lane and the
-judge lane. The Terra judge lane is a fresh independent comparison process, but
-not a cross-family screen for OpenAI-family work. Weight a DeepSeek finding
-accordingly, in both lanes.
+Net: the **DeepSeek proof-refuter** is the audit's cross-family screen. Terra is
+the sole judge and a fresh independent process, but not a cross-family screen
+for OpenAI-family work. A Terra verdict is one reading, not corroboration.
 
 Context-continuity checkpoints carry over unchanged: orchestrator at 50% of
 active context into `research/audit/RESUME.md`; each Beta at 60% into its
@@ -232,10 +231,10 @@ build namespace clean.
 | `wave<k>-published-repairs.md` | the repair ledger: old text, new text, class (falsehood / citation-precision / retag), source or elementary derivation, certifier, impact receipt path |
 | `wave<k>-touches.json` | `touchlog.mjs` snapshots (baseline, after A4, after A6, after A8) |
 | `wave<k>-impact-audit.json` | Alpha dispositions for consumers of any changed public interface |
-| `wave<k>-judge.jsonl` / `-judge-attempts.jsonl` | paired verdict and transport ledgers |
+| `wave<k>-judge.jsonl` / `-judge-attempts.jsonl` | configured-judge verdict and transport ledgers |
 | `wave<k>-judge-adjudications.jsonl` | Alpha's exact-hash `{id, model, context_sha256, outcome, defect_type?}` decisions |
 | `wave<k>-coverage.json` | the coverage receipt enforced by `level-coverage.mjs` in audit mode |
-| `wave<k>-targeted-judge-receipt.json` | one target per material A8 repair: its id, exact DeepSeek/Terra rejudge context, and item SHA-256 with only `verification.judge` excluded |
+| `wave<k>-targeted-judge-receipt.json` | one target per material A8 repair: its id, exact Terra rejudge context, and item SHA-256 with only `verification.judge` excluded |
 | `genrisk.json` | standing corpus-wide generated-statement blast-radius report + Alpha dispositions (§6) |
 | `RESUME.md` | orchestrator checkpoint |
 | `briefs/audit-beta.md`, `briefs/audit-alpha.md`, `briefs/audit-orchestrator.md` | brief templates for the three audit roles — Beta (A1/A2/A4), Alpha (A6/A8), orchestrator (A3/A9); each opens with the no-shell-permission-prompts rule and states the triage rule verbatim, like every existing brief |
@@ -339,7 +338,7 @@ disposition in `genrisk.json`, tried in this order:
    actually license, then re-license consumers;
 5. **verified-generated** — none of the above closes: the seed keeps
    `ai-generated`, receives a counterexample search, an Alpha proof-refuter
-   reading, and both judges; it stays in `genrisk.json` as a standing flagged
+   reading, and Terra; it stays in `genrisk.json` as a standing flagged
    seed with its cone, and `content-policy` already forbids any **future**
    batch from citing it, so the blast radius is frozen at today's cone.
 
@@ -523,25 +522,25 @@ the whole point is the legacy corpus. The `risk-report` level is a size heuristi
 *order* the reading, never to bound it, and state explicitly in the Alpha report
 what was read in full and what was sampled.
 
-**A7 — Targeted paired rejudge (owner clarification 2026-08-08).** A published
+**A7 — Targeted Terra rejudge (owner clarification 2026-08-08; Terra-only 2026-08-26).** A published
 audit has already given the whole wave Beta, Alpha, and independent-refuter
 coverage at A2/A6. A7 is therefore a rejudge, not a second whole-wave reading
-sweep: DeepSeek V4 Pro + GPT-5.6 Terra judge only the exact items repaired at
+sweep: GPT-5.6 Terra judges only the exact items repaired at
 A4/A6, plus any consumer Alpha materially repaired. Pure provenance retags do
 not create judge targets; a body/dependency/citation repair or source correction
 recorded in `wave<k>-published-repairs.md` does. The exact ids live in
 `wave<k>-rejudge-targets.json` with
 `mode: published-audit-repair-targets`; the driver and coverage gate refuse
 targets outside the wave. Same frozen A/B-pair context unit, same single hash
-attestation shared by both lanes, same 16+16 file-backed cross-process slot
-pools, same attempt-ledger/retry semantics, same
+attestation, one cap-14 file-backed cross-process Terra pool, same
+attempt-ledger/retry semantics, same
 `verification.judge`-is-passes-only honesty rule. **Before the first
-production rejudge after a second-lane model or context change, that lane must
+production rejudge after a judge-model or context change, that model must
 pass the standing injection test** — the same bar every previous judge change
 must meet (`ARCHITECTURE.md` §5).
 
 **A8 — Adjudicate rejections (Alpha; exact build Step-8 mechanism, owner
-amendment 2026-08-03).** A rejection from **either** judge now lands on text
+amendment 2026-08-03).** A Terra rejection now lands on text
 that has cleared the step-6 audit, so Alpha-n adjudicates it from disk.
 **Adjudicate, do not comply.** Each rejection gets either a fix, with the
 defect named, or a refutation, with a verbatim quote from the cited item.
@@ -549,16 +548,16 @@ Append a per-model, per-context owner decision to
 `research/audit/wave<k>-judge-adjudications.jsonl` so step 10 can separate
 confirmed fatal logic/dependency-citation detections from nonfatal findings and
 false positives. Then delete `verification.judge` on anything materially
-rewritten and re-run both judges **only on what changed**.
+rewritten and re-run Terra **only on what changed**.
 
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs` and writes or
 refreshes its entry in `wave<k>-targeted-judge-receipt.json` after the targeted
-paired rejudge. The entry binds the changed item to the exact pair context and
+Terra rejudge. The entry binds the changed item to the exact pair context and
 to an item SHA-256 with only `verification.judge` excluded. It is validated by
 `apply-judge-stamps.mjs --audit-targeted-rejudges` before the target receives a
 stamp. This is **not** a replacement full-wave sweep: unchanged items and
 consumers disposed `still-licensed` are neither rejudged nor required to have
-a new current-context pair, and a later unrelated A/B-page prose edit does not
+a new current-context verdict set, and a later unrelated A/B-page prose edit does not
 stale the target.
 
 **ONLY REPAIRED ITEMS ARE REJUDGED — enforced, not merely stated** (owner,
@@ -566,12 +565,12 @@ stale the target.
 was the intent from the beginning, but nothing made
 `level-coverage --verify-current-context` obey it. The judge's context unit is
 the A/B PAIR, so `context_sha256` moves when ANY item on the pair is edited, and
-the gate demanded a fresh pair for every sibling of a repair. Wave 5's A8
+the gate demanded fresh verdicts for every sibling of a repair. Wave 5's A8
 measured the cost: 2 repairs staled all 31 items on a pair, 12 of which cite the
 repaired items nowhere, and 10 repairs across four rounds cost ~130 rejudge
 calls — each round staling the one before. `judge.mts` now records
 `item_sha256` on every verdict beside `context_sha256`, and coverage accepts a
-verdict pair cast against **byte-identical text of that item** even when the pair
+configured-judge verdicts cast against **byte-identical text of that item** even when the A/B-pair
 context has moved. A repaired item is never covered that way, because its own
 hash changed: it always rejudges. Ledger rows predating the field fall back to
 the strict context comparison. Alpha must therefore **report the exact ids it
@@ -622,9 +621,9 @@ stage; no stage advances on an agent's report.
 
 | tool | change |
 |---|---|
-| `tools/judge.mts` | the build's `deepseek+terra` production pair: direct DeepSeek plus a fresh tool-less GPT-5.6 Terra process at `xhigh` with the explicit one-million-token Codex configuration, run in an empty temporary working directory so the frozen prompt is its only context. Frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are shared byte-for-byte by both lanes. Historical ledger rows are retained only as prior evidence |
-| `tools/judge-sweep.mjs` | the unmodified build dual scheduler: each lane has its own cross-process pool (14 per lane, 28 combined), advances independently, and shares the same frozen prompt hash per item. The child judge inherits `JUDGE_LINEUP=deepseek+terra` so sweep and judges cannot disagree. Build Step 7 may use `--manifests` for its initial whole-level sweep; published-audit A7 uses `--items` from the exact `wave<k>-rejudge-targets.json` repair receipt (owner clarification 2026-08-08). |
-| `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; `--audit` downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition, and `--judge-targets` keeps the mathematical/relationship receipt whole-wave while requiring paired verdicts only for recorded repair ids |
+| `tools/judge.mts` | the build's `terra` production judge: a fresh GPT-5.6 Terra process at `xhigh` with the explicit one-million-token Codex configuration and frozen hash-attested prompt. Historical lineup rows are retained only as prior evidence |
+| `tools/judge-sweep.mjs` | the build scheduler with one active file-backed Terra pool, cap 14. The child judge inherits `JUDGE_LINEUP=terra` so sweep and judge cannot disagree. Build Step 7 may use `--manifests` for its initial whole-level sweep; published-audit A7 uses `--items` from the exact `wave<k>-rejudge-targets.json` repair receipt (owner clarification 2026-08-08). |
+| `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; `--audit` downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition, and `--judge-targets` keeps the mathematical/relationship receipt whole-wave while requiring a current Terra verdict only for recorded repair ids |
 | `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` entirely from disk. The wave is the **site's dependency level** — the app's `pageGraph` (item `deps` projected to pages via the home convention, in-category edges, transitive reduction, longest path from a category root, roots at 0) ported verbatim, so the audit order and the `/library` index can never disagree (owner, 2026-08-02); the plan-spec `requires` function keeps ordering the build only. Pages read from `library/*/*.md` with `status: published`; pair = A page + its published `-examples` companion; `not-proved-here` excluded from scope; item lists from the page files, each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
 | `tools/content-policy.mjs` | `--audit --ledger <provenance.jsonl>…` mode: requires both provenance components and a matching evidence-ledger row (`audit-ledger-missing-row`, `audit-ledger-mismatch`, `audit-ledger-evidence[-mismatch]`, `audit-ledger-rationale`) for every scoped item; mechanizes D2 (`established-knowledge` needs `alpha_concurred: true` and is the only URL waiver, surfaced as the `established-knowledge-unsourced` warning) and D5 (`legacy-authorship-retained` error); downgrades to warnings what cannot bind history — `ai-generated-statement-dependency` (routed to genrisk), `generated-kind`/`generated-role`, and `external-record-missing` on legacy deferred items. **`--audit --manifest-only` (added 2026-08-04) is A0's shape** and takes no ledger, because manifest-only never opens an item file and so has nothing to reconcile one against. It suppresses the three checks that ask whether a batch may MINT its ids — `batch-item-already-exists`, `batch-b-leaf-target`, `batch-forward-dependency` — which are vacuous or false for an audit manifest of published ids: the first fires on every scoped item by construction, and the other two encode reading-order rules legacy pages predate. A B-leaf or backwards edge in published content is a finding for the wave to read, surfaced by `audit-manifest.mjs`, not a gate failure. Kept: `batch-item-shape`, `batch-duplicate-item`, `batch-plan-id-collision`, `batch-dependency-missing`. The two-A/B-pair cap is not checked in audit scope — it binds the Betas assigned inside a batch, not the manifest, so splitting an over-cap manifest is an A0 action. Measured on wave 4: 95 errors before, 0 after |
 
@@ -635,7 +634,7 @@ stage; no stage advances on an agent's report.
 | `tools/genrisk.mjs` | seeds = published `ai-generated` statements plus legacy untagged `authorship: ai-generated` items (D5); computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering). Report mode regenerates `research/audit/genrisk.json` preserving dispositions by seed id; `--receipt` requires one concrete Alpha disposition (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/`owner-queue`, with reviewer + notes) per load-bearing seed, verifies retag/restate/unfold/narrow claims against disk, and fails on stale cones. Baseline measured 2026-08-02: 23 seeds, all zero-cone |
 | `tools/step8-guard.mjs` | R1, A8/step-8 fatal-only. Compares every item against a dedicated `touchlog` baseline (`--baseline "pre-a8"`) and requires each change to be licensed by a `confirmed_fatal` adjudication recorded against that pre-edit `item_sha256`. Errors `nonfatal-edit`, `judge-adjudication-unhashed`; warns `step8-creation`/`step8-deletion`. `--against <label>` re-checks a completed stage from the ledger alone. Fatal repairs are uncapped |
 | `tools/audit-split.mjs` | A6 efficiency, §7. Classifies every changed item as **pure retag** (only `provenance`/`sources`/`authorship`/`verification`/`pipeline_run`/`generation` moved, body byte-identical) or **material** (body text, or any of `title`, `kind`, `status`, `deps`, `justified_by`, `forward_refs`, `external_refs`, `aliases`, `landmark`, `proved_here`, `short`, `proof_strategy`, `id`). Field-aware by construction: a line-range test against the frontmatter boundary misses `title`/`deps` changes, and in wave 3 that mistake hid a confirmed fatal. An unrecognised frontmatter key is treated as material, so a future schema addition fails safe. `--base <ref>`, `--scope <pages.json,...>`, `--json`. Exit 0 always — a classifier, not a gate. Measured wave 3: 224 changed → 198 pure / 26 material |
-| `tools/apply-judge-stamps.mjs` | writes `verification.judge` from the paired verdict ledger. The normal route stamps only a two-lane `keep: true` pair that is current under `tools/judge-currency.mjs` — the current frozen pair context, or byte-identical text of that item (owner, 2026-08-06) — the same predicate `level-coverage.mjs` and `judge-sweep.mjs` read, and it takes both lanes' verdicts from one context group. Its lineup is `JUDGE_LINEUP`, defaulting to `deepseek+terra`; rows from a retired lane in the same ledger are ignored, never an error. Audit A8 additionally accepts `--audit-targeted-rejudges`: it requires both configured lanes' `keep: true` rows at the receipt's exact context and the receipt's unchanged item SHA-256 (excluding only the judge block it writes), then stamps only those material repair targets. Thus the exact targeted Step-8 rule remains verifiable without manufacturing a pass from an adjudication or rerunning unchanged items. Frontmatter only, dry-run by default (`--apply` writes; `--verify` is the build engine's gate mode at `10-stamps-v2` and `10-close-v2` — exit 1 on a licensed stamp the item lacks, a pass block a current rejection contradicts, or an item with no current paired verdict). |
+| `tools/apply-judge-stamps.mjs` | writes `verification.judge` from the configured verdict ledger. The normal route stamps only a current Terra `keep: true` verdict under `tools/judge-currency.mjs` — the current frozen pair context, or byte-identical text of that item (owner, 2026-08-06). Its lineup is `JUDGE_LINEUP`, defaulting to `terra`; rows from retired lineups are ignored. Audit A8 additionally accepts `--audit-targeted-rejudges`: it requires Terra's `keep: true` row at the receipt's exact context and the receipt's unchanged item SHA-256, then stamps only those material repair targets. Frontmatter only, dry-run by default (`--apply` writes; `--verify` gates Steps 10 and close-out). |
 
 **Coverage gate per wave (the A7→A8 receipt, mirroring the build):**
 
@@ -647,7 +646,7 @@ node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.prov
 node tools/audit-manifest.mjs research/audit/wave<k>-*.pages.json --json > research/audit/wave<k>-audit-manifest.json
 node tools/genrisk.mjs --receipt research/audit/genrisk.json
 node tools/impact-audit.mjs --touches research/audit/wave<k>-touches.json --from <baseline> --receipt research/audit/wave<k>-impact-audit.json
-JUDGE_LINEUP=deepseek+terra node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --judge-targets research/audit/wave<k>-rejudge-targets.json --spine-receipt research/audit/wave<k>-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
+JUDGE_LINEUP=terra node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --judge-targets research/audit/wave<k>-rejudge-targets.json --spine-receipt research/audit/wave<k>-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
 ```
 
 **Corrected 2026-08-04, first time this gate was actually run in any wave.** Two
@@ -668,13 +667,13 @@ After a material A8 repair, do **not** repeat it for the wave. Alpha records onl
 receipt, and the stamp gate is:
 
 ```sh
-JUDGE_LINEUP=deepseek+terra node tools/apply-judge-stamps.mjs --ledger research/audit/wave<k>-judge.jsonl --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json --apply
+JUDGE_LINEUP=terra node tools/apply-judge-stamps.mjs --ledger research/audit/wave<k>-judge.jsonl --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json --apply
 ```
 
 The targeted audit rejudge itself runs under the same lineup:
 
 ```sh
-JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --ledger research/audit/wave<k>-judge.jsonl --cost research/audit/wave<k>-judge-cost.jsonl --items <comma-separated ids from wave<k>-rejudge-targets.json>
+JUDGE_LINEUP=terra node tools/judge-sweep.mjs --ledger research/audit/wave<k>-judge.jsonl --cost research/audit/wave<k>-judge-cost.jsonl --items <comma-separated ids from wave<k>-rejudge-targets.json>
 # The manifests remain the whole-wave audit scope for A2/A6 and the non-judge
 # coverage receipt. A7's spend scope is only the machine-recorded repair ids.
 ```
@@ -707,7 +706,7 @@ stamps: delete any stale `verification.judge`; on a **material** repair remove
 the obsolete `audited` stamp and record the independent current reading as
 `verification.verified` with `scope: published-audit` and
 `delegated_by: owner` (`depcheck` accepts `verified` as the publish gate,
-verified at `depcheck.mjs:281`) → both judge lanes rejudge the repaired item
+verified at `depcheck.mjs:281`) → Terra rejudges the repaired item
 and each consumer that Alpha actually materially repairs; a consumer disposed
 `still-licensed` is not rejudged. Record each rejudged target in the targeted
 receipt and stamp it only through that receipt. A
@@ -725,9 +724,8 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
 - Retro-tagging: ≈2,220 published items lacking provenance, each needing a
   read + literature search. This, plus full contract capture (D1) for every
   proof-bearing item, is the wall-clock center, not judging.
-- Judging: ≈2,400 items × 2 lanes ≈ 4,800 calls across the run, paced by the
-  16+16 pools; the sweep is resumable and skips completed current-context
-  pairs, so waves are safely interruptible.
+- Judging: ≈2,400 Terra calls across the run, paced by a cap-14 pool; the sweep
+  is resumable and skips completed current-context verdicts, so waves are safely interruptible.
 - ~11 published waves (levels 1–10/11), per-wave width 1–8+ pairs. Waves are
   sequential by design; batches inside a wave are concurrent.
 
@@ -760,10 +758,9 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
   agent-repairable with Alpha as final adjudicator and every safeguard
   mandatory; only deletions, id changes, and reading-order restructures queue
   for the owner.
-- **R2 — judge coverage: EVERY ITEM, EVERY WAVE.** Full paired
-  DeepSeek + GPT-5.6 Terra coverage of each wave on final post-audit text,
-  producing a complete fresh ledger under the new lineup. (Scoped by R3:
-  ≈4,000 calls over the 2,007 in-scope items.)
+- **R2 — judge coverage: EVERY ITEM, EVERY WAVE.** Full GPT-5.6 Terra coverage
+  of each wave on final post-audit text, producing a complete fresh ledger under
+  the `terra` lineup. (Scoped by R3: ≈2,007 calls.)
 - **R3 — already-tagged content excluded (owner, 2026-08-02, standing for all
   future sessions).** Items already carrying both component-provenance tags
   are never audit scope; the exclusion is mechanical at batch generation

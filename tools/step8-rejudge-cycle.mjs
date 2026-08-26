@@ -2,7 +2,7 @@
 // One durable Step-8 rejudge cycle. The receipt is per item, so an unrelated
 // repair does not spend another item's budget, and the frozen context that
 // licensed the first repair counts.
-// A paired funded-lane preflight runs immediately before fan-out (or is reused
+// A funded configured-judge preflight runs immediately before fan-out (or is reused
 // for at most five minutes under the identical lineup).
 
 import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
@@ -172,11 +172,11 @@ function main() {
     };
     writeJsonAtomic(preflightPath, row);
     if (preflight.status !== 0) {
-      console.error(`step8-rejudge-cycle: paired judge preflight failed before fan-out\n${row.detail}`);
+      console.error(`step8-rejudge-cycle: configured-judge preflight failed before fan-out\n${row.detail}`);
       process.exit(preflight.status === 3 ? 3 : 1);
     }
   } else {
-    console.log(`step8-rejudge-cycle: using funded paired-lane preflight from ${cached.at}`);
+    console.log(`step8-rejudge-cycle: using funded judge preflight from ${cached.at}`);
   }
 
   const cycle = {
