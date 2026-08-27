@@ -8,7 +8,7 @@
 // the merged file alone — the gates re-merge from the batch files and a
 // merged-only edit comes back stale on the next merge.
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,11 +23,19 @@ const input = JSON.parse(readFileSync(file, 'utf8'));
 const { reviewer, refuter, reviews } = input;
 if (!reviewer || !reviews) { console.error('input needs reviewer and reviews'); process.exit(2); }
 
-const batches = [];
-for (let i = 1; i <= 9; i += 1) {
-  const path = join(REPO, 'research', `${run}-batch-${i}.proof-contracts.json`);
-  if (existsSync(path)) batches.push({ path, index: i, document: JSON.parse(readFileSync(path, 'utf8')), dirty: false });
-}
+const researchDir = join(REPO, 'research');
+const batches = readdirSync(researchDir)
+  .filter((name) => name.startsWith(`${run}-batch-`) && name.endsWith('.proof-contracts.json'))
+  .map((name) => {
+    const match = name.match(/-batch-(\d+)\.proof-contracts\.json$/);
+    return match ? { name, index: Number(match[1]) } : null;
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.index - b.index)
+  .map(({ name, index }) => {
+    const path = join(researchDir, name);
+    return { path, index, document: JSON.parse(readFileSync(path, 'utf8')), dirty: false };
+  });
 
 const applied = [];
 const orphans = [];

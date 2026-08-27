@@ -13,6 +13,7 @@ parts:
       - limits-and-colimits
       - adjunctions-units-and-counits
       - ends-coends-and-weighted-limits
+      - preadditive-and-additive-categories-and-biproducts
   - part: reflections-and-monads
     title: "Reflections, adjoint functors and monads"
     pages:
@@ -34,14 +35,12 @@ universal property into a definition.
 
 Limits and colimits specify an object by all arrows to or from a diagram, so products,
 equalisers, pullbacks and their duals become instances of one universal construction.
-Adjunctions express the same economy for functors: a hom-set bijection is equivalent to a
-unit and counit, and left and right adjoints preserve the colimits and limits forced by
-their universal properties. Dinatural maps, wedges, ends and coends refine that language
-for bifunctors, with twisted-arrow categories and equalizer or coequalizer formulas making
-them computable and with natural transformations themselves appearing as an end. Weighted
-limits then replace an indexing category by a weight, so powers, representable weights and
-hom-weighted coends show ordinary limits, Yoneda formulas and colimits as instances of one
-end-coend calculus.
+Adjunctions express the same economy for functors, and ends, coends and weighted limits
+extend it to bifunctors and naturality. The added page shows how this universal language
+becomes additive: preadditive categories identify hom-sets with abelian groups, biproducts
+force the needed enrichment, matrix calculus organises maps between finite biproducts, and
+kernels and cokernels recover finite limits and colimits. Additive functors and idempotent
+completion then supply the standard structural consequences.
 
 ## reflections-and-monads
 

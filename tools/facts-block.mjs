@@ -115,9 +115,10 @@ export function factParagraphs(body) {
 }
 
 /** The sections a proof contract may quote from. A citation names one, and the
- *  quote is checked inside it — not against the whole file, where a phrase
- *  occurring in a Remark or a Proof would vouch for a Statement it is not in. */
-export const SOURCE_SECTIONS = new Set(['Statement', 'Statement refuted', 'Definition', 'Example']);
+ *  quote is checked inside it — not against the whole file, where a phrase in
+ *  a different section could vouch for a claim it does not make. Remarks are
+ *  included because page-level convention records are legitimate fact sources. */
+export const SOURCE_SECTIONS = new Set(['Statement', 'Statement refuted', 'Definition', 'Example', 'Remark']);
 
 /** The text a `source_section` quote must be found in, or `null` when the
  *  section is not one a citation may name. `null` is the caller's cue to say so

@@ -1,0 +1,667 @@
+[
+  {
+    "order": 319,
+    "id": "the-residue-theorem",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "The Residue Theorem and the Evaluation of Real Integrals",
+    "companion": "the-residue-theorem-examples",
+    "requires": [
+      "convexity",
+      "isolated-singularities-and-laurent-series",
+      "improper-integrals"
+    ],
+    "items": [
+      {
+        "id": "rem-cauchy-principal-value-dictionary",
+        "kind": "remark",
+        "title": "This page keeps Cauchy principal values distinct from genuine improper convergence",
+        "strategy": "Point back to the published principal-value and improper-integral definitions, and record that the contour method will sometimes compute only a principal value unless one-sided convergence is separately justified.",
+        "deps": [
+          "def-cauchy-principal-value",
+          "rem-improper-integral-conventions-and-scope"
+        ]
+      },
+      {
+        "id": "def-standard-residue-contours",
+        "kind": "definition",
+        "title": "Standard semicircle, rectangle, keyhole, indentation, and sector contours",
+        "deps": [
+          "def-cauchy-principal-value",
+          "def-complex-logarithms-principal-logarithm-and-complex-powers",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane"
+        ]
+      },
+      {
+        "id": "def-admissible-cycle-for-residue-theorem",
+        "kind": "definition",
+        "title": "Admissible cycles for the residue theorem",
+        "deps": [
+          "def-complex-chain-and-cycle",
+          "def-null-homologous-and-homologous-complex-cycles",
+          "def-meromorphic-function-complex-domain",
+          "thm-poles-meromorphic-function-are-discrete-and-countable"
+        ]
+      },
+      {
+        "id": "lem-finiteness-support-residue-sum",
+        "kind": "lemma",
+        "title": "Only finitely many singularities contribute to the residue sum of an admissible cycle",
+        "strategy": "Use that the cycle trace is compact, the index vanishes far from it and is locally constant off it, so the nonzero-index region is a compact subset of the ambient domain. A closed discrete singular set meets that compact set in only finitely many points.",
+        "deps": [
+          "def-admissible-cycle-for-residue-theorem",
+          "cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace",
+          "thm-poles-meromorphic-function-are-discrete-and-countable"
+        ]
+      },
+      {
+        "id": "thm-residue-theorem-null-homologous-cycle",
+        "kind": "theorem",
+        "title": "The residue theorem for a null-homologous cycle",
+        "strategy": "Around each contributing singularity choose small disjoint circles and subtract the corresponding principal-part integrals. The remaining integrand is holomorphic on the punctured region, homologous-cycle invariance transfers the integral to the small circles, and the local residue formula turns each small-circle integral into 2 pi i times the residue.",
+        "deps": [
+          "def-admissible-cycle-for-residue-theorem",
+          "lem-finiteness-support-residue-sum",
+          "cor-residue-contour-integral-formula",
+          "cor-contour-integrals-homologous-cycles"
+        ]
+      },
+      {
+        "id": "cor-residue-theorem-circle",
+        "kind": "corollary",
+        "title": "A positively oriented circle integral is the sum of the enclosed residues",
+        "strategy": "Apply the residue theorem to a circle and use the winding-number computation for a positively oriented circle.",
+        "deps": [
+          "thm-residue-theorem-null-homologous-cycle",
+          "thm-winding-number-circle-traversed-k-times"
+        ]
+      },
+      {
+        "id": "lem-large-semicircle-vanishing",
+        "kind": "lemma",
+        "title": "A rational large-semicircle integral vanishes under the zR(z) to 0 condition",
+        "strategy": "Bound the arc integral by arc length times the supremum of |R| on the semicircle. The hypothesis that zR(z) tends to 0 uniformly gives a bound of order o(1/R), which cancels the O(R) arc length.",
+        "deps": [
+          "def-standard-residue-contours"
+        ]
+      },
+      {
+        "id": "lem-jordans-lemma-rational-functions",
+        "kind": "lemma",
+        "title": "Jordan's lemma for rational functions of one complex variable",
+        "strategy": "On the upper semicircle write |e^(i lambda R e^(i theta))| = e^(-lambda R sin theta) and use the convexity-derived bound sin theta >= 2 theta / pi on [0, pi/2] and symmetry on [pi/2, pi]. Combine the exponential decay with the O(1/R) rational bound to dominate the arc integral by an explicitly vanishing integral.",
+        "deps": [
+          "def-standard-residue-contours",
+          "lem-large-semicircle-vanishing",
+          "cor-second-derivative-characterises-convexity"
+        ]
+      },
+      {
+        "id": "lem-indented-arc-residue-limit",
+        "kind": "lemma",
+        "title": "An indented arc around a simple singularity contributes the expected residue fraction",
+        "strategy": "Expand f into its Laurent series at the indented point. The regular part contributes vanishing length times supremum, while integrating the 1/(z-a) term along a parametrized arc gives i(beta-alpha) times the residue with the correct orientation sign.",
+        "deps": [
+          "def-standard-residue-contours",
+          "def-residue-isolated-singularity",
+          "cor-residue-contour-integral-formula"
+        ]
+      },
+      {
+        "id": "thm-residue-evaluation-rational-real-integrals",
+        "kind": "theorem",
+        "title": "Rational improper integrals without real poles are upper-half-plane residue sums",
+        "strategy": "Integrate the rational function over a real segment closed by a large upper semicircle. The degree gap gives the real-line improper convergence and the large-arc vanishing lemma removes the semicircle, so the limit equals 2 pi i times the residues of the poles in the upper half-plane.",
+        "deps": [
+          "thm-residue-theorem-null-homologous-cycle",
+          "lem-large-semicircle-vanishing",
+          "def-standard-residue-contours",
+          "thm-improper-p-test-rational"
+        ]
+      },
+      {
+        "id": "thm-residue-evaluation-principal-value-real-poles",
+        "kind": "theorem",
+        "title": "Indented real-axis contours compute principal values with half-residue corrections",
+        "strategy": "Replace each real pole by a declared upper or lower indentation. The large arc still vanishes, the straight pieces converge to the principal value, and the indentation lemma contributes the signed half-residue terms.",
+        "deps": [
+          "rem-cauchy-principal-value-dictionary",
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "lem-large-semicircle-vanishing",
+          "lem-indented-arc-residue-limit"
+        ]
+      },
+      {
+        "id": "thm-residue-evaluation-rational-fourier-integrals",
+        "kind": "theorem",
+        "title": "Rational Fourier integrals are evaluated by residues and Jordan's lemma",
+        "strategy": "Apply the residue theorem to e^(i lambda z) R(z) in the upper half-plane when lambda > 0 and in the lower half-plane when lambda < 0. Jordan's lemma kills the large arc, and the real-pole case is handled by the same indentation bookkeeping as for principal values.",
+        "deps": [
+          "rem-cauchy-principal-value-dictionary",
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "lem-jordans-lemma-rational-functions",
+          "lem-indented-arc-residue-limit"
+        ]
+      },
+      {
+        "id": "thm-trigonometric-integral-unit-circle-substitution",
+        "kind": "theorem",
+        "title": "Trigonometric integrals become contour integrals by the unit-circle substitution",
+        "strategy": "Use z = e^(i theta), Euler's formula, and the identities cos theta = (z + z^(-1)) / 2, sin theta = (z - z^(-1)) / (2i), d theta = dz / (i z) on the positively oriented unit circle. This converts an integral of a rational expression in sine and cosine into a residue computation, provided the transformed integrand has no unit-circle poles.",
+        "deps": [
+          "thm-eulers-formula",
+          "thm-polar-form-with-unique-principal-argument",
+          "thm-residue-theorem-null-homologous-cycle",
+          "def-standard-residue-contours"
+        ]
+      },
+      {
+        "id": "lem-keyhole-branch-boundary-values",
+        "kind": "lemma",
+        "title": "A keyhole contour sees the two boundary values of z^(alpha-1)",
+        "strategy": "Define the branch by z^(alpha-1) = exp((alpha-1) Log z) with Arg z in (0, 2 pi). On the upper and lower lips of the positive axis the arguments differ by 2 pi, so the boundary values differ by the factor e^(2 pi i (alpha-1)).",
+        "deps": [
+          "def-standard-residue-contours",
+          "def-complex-logarithms-principal-logarithm-and-complex-powers",
+          "cor-principal-logarithm-is-holomorphic-on-the-slit-plane"
+        ]
+      },
+      {
+        "id": "thm-keyhole-residue-formula-mellin-rational-integrals",
+        "kind": "theorem",
+        "title": "Keyhole contours evaluate Mellin-type rational integrals",
+        "strategy": "Integrate z^(alpha-1) R(z) over a keyhole contour with the declared logarithm branch. The large and small circular arcs vanish under the endpoint-decay hypotheses, the two radial edges differ by the branch factor from the previous lemma, and the residue theorem yields the contour identity from which the real integral is solved.",
+        "deps": [
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "lem-keyhole-branch-boundary-values",
+          "thm-improper-p-test-rational"
+        ]
+      },
+      {
+        "id": "thm-cotangent-residue-summation-rational-functions",
+        "kind": "theorem",
+        "title": "Cotangent residues sum a rational function over the integers",
+        "strategy": "Apply the residue theorem to pi cot(pi z) f(z) on expanding rectangles. The poles at the integers are simple with residue f(n), the boundary integrals vanish from the O(z^-2) decay and periodic cotangent bounds, and the remaining residues occur exactly at the nonintegral poles of f.",
+        "deps": [
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "cor-residue-quotient-simple-zero",
+          "thm-complex-sine-and-cosine-zero-sets",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives"
+        ]
+      },
+      {
+        "id": "thm-cosecant-residue-alternating-summation-rational-functions",
+        "kind": "theorem",
+        "title": "Cosecant residues sum an alternating rational series over the integers",
+        "strategy": "Replace pi cot(pi z) by pi csc(pi z). The pole at n now has residue (-1)^n f(n), and the same rectangle estimate turns the bilateral alternating sum into the negative sum of the nonintegral residues.",
+        "deps": [
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "cor-residue-quotient-simple-zero",
+          "thm-complex-sine-and-cosine-zero-sets",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives"
+        ]
+      },
+      {
+        "id": "cor-basel-sum-by-residues",
+        "kind": "corollary",
+        "title": "The Basel sum is pi squared over six by a residue computation",
+        "strategy": "Integrate pi cot(pi z) / z^2 over an expanding rectangle. The nonzero integer poles contribute the bilateral sum of 1 / n^2, the origin contributes the constant term from the Laurent expansion, and comparison of residues yields the classical value while recording that the page's cotangent-summation theorem itself does not apply to 1 / z^2.",
+        "deps": [
+          "def-standard-residue-contours",
+          "thm-residue-theorem-null-homologous-cycle",
+          "thm-complex-sine-and-cosine-zero-sets",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives"
+        ]
+      },
+      {
+        "id": "fs-residue-theorem-applies-to-any-cycle-in-the-domain",
+        "kind": "false-statement",
+        "title": "FALSE: the residue theorem applies to every cycle in the ambient domain",
+        "strategy": "Refute by taking a cycle that winds around a singularity but is not null-homologous in the punctured ambient domain. The point of the counterexample is that null-homology in the ambient region is a real hypothesis, not cosmetic language.",
+        "deps": [
+          "def-admissible-cycle-for-residue-theorem",
+          "thm-residue-theorem-null-homologous-cycle"
+        ]
+      },
+      {
+        "id": "fs-principal-value-convergence-implies-improper-convergence",
+        "kind": "false-statement",
+        "title": "FALSE: existence of a Cauchy principal value forces improper convergence",
+        "strategy": "Use the odd integrand x / (1 + x^2), whose symmetric truncations cancel but whose two one-sided improper integrals diverge logarithmically. This isolates the principal-value dictionary remark as a real distinction, not a notation change.",
+        "deps": [
+          "rem-cauchy-principal-value-dictionary",
+          "def-cauchy-principal-value",
+          "thm-improper-convergence-implies-principal-value"
+        ]
+      },
+      {
+        "id": "fs-degree-drop-by-one-is-enough-for-rational-real-integral-convergence",
+        "kind": "false-statement",
+        "title": "FALSE: denominator degree one more than numerator degree already forces convergence",
+        "strategy": "Use a rational function asymptotic to c / x with nonzero c, so the real-line tails grow like log R. The correct degree hypothesis for unconditional improper convergence is the two-degree gap used in the rational-integral theorem.",
+        "deps": [
+          "thm-improper-p-test-rational",
+          "thm-residue-evaluation-rational-real-integrals"
+        ]
+      },
+      {
+        "id": "fs-large-arc-vanishing-follows-from-pointwise-decay-alone",
+        "kind": "false-statement",
+        "title": "FALSE: pointwise decay alone makes every large semicircle integral vanish",
+        "strategy": "Use 1 / z on upper semicircles: the function tends to 0 pointwise but z f(z) does not, and the arc integral tends to i pi rather than 0. This shows why the large-arc lemma uses the stronger z f(z) to 0 control.",
+        "deps": [
+          "lem-large-semicircle-vanishing"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 320,
+    "id": "the-residue-theorem-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "The Residue Theorem and the Evaluation of Real Integrals — Examples",
+    "companion": "the-residue-theorem",
+    "requires": [
+      "the-residue-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-residue-evaluates-int-one-over-one-plus-x-squared",
+        "kind": "example",
+        "title": "The integral of 1 / (1 + x^2) over the real line is pi",
+        "strategy": "Close the contour in the upper half-plane, note the unique enclosed pole at i, and apply the rational real-integral theorem.",
+        "deps": [
+          "thm-residue-evaluation-rational-real-integrals"
+        ]
+      },
+      {
+        "id": "ex-residue-evaluates-int-one-over-one-plus-x-fourth",
+        "kind": "example",
+        "title": "The integral of 1 / (1 + x^4) over the real line is pi over sqrt(2)",
+        "strategy": "Use the two poles of z^4 + 1 in the upper half-plane and sum their residues before invoking the rational real-integral theorem.",
+        "deps": [
+          "thm-residue-evaluation-rational-real-integrals"
+        ]
+      },
+      {
+        "id": "ex-residue-evaluates-cos-over-one-plus-x-squared",
+        "kind": "example",
+        "title": "The integral of cos x / (1 + x^2) over the real line is pi / e",
+        "strategy": "Evaluate the integral of e^(i x) / (1 + x^2) by the Fourier-integral theorem and take real parts.",
+        "deps": [
+          "thm-residue-evaluation-rational-fourier-integrals"
+        ]
+      },
+      {
+        "id": "ex-residue-evaluates-sine-over-x-principal-value",
+        "kind": "example",
+        "title": "The principal value of the sine integral is pi / 2",
+        "strategy": "Apply the Fourier-integral theorem to e^(i z) / z with an upper indentation at the origin and then take imaginary parts.",
+        "deps": [
+          "def-cauchy-principal-value",
+          "thm-residue-evaluation-rational-fourier-integrals"
+        ]
+      },
+      {
+        "id": "ex-trigonometric-integral-one-over-a-plus-cos-theta",
+        "kind": "example",
+        "title": "The integral of 1 / (a + cos theta) over [0, 2 pi]",
+        "strategy": "Use the unit-circle substitution, reduce to a rational function of z, and compute the enclosed residue when |a| > 1.",
+        "deps": [
+          "thm-trigonometric-integral-unit-circle-substitution"
+        ]
+      },
+      {
+        "id": "ex-keyhole-evaluates-x-alpha-minus-one-over-one-plus-x",
+        "kind": "example",
+        "title": "The integral of x^(alpha-1) / (1 + x) over (0, infinity) is pi / sin(pi alpha)",
+        "strategy": "Apply the keyhole theorem to R(z) = 1 / (1 + z), compute the residue at z = -1, and solve the resulting branch-factor identity.",
+        "deps": [
+          "thm-keyhole-residue-formula-mellin-rational-integrals"
+        ]
+      },
+      {
+        "id": "ex-residue-evaluates-the-gaussian-cosine-integral-by-a-rectangle",
+        "kind": "example",
+        "title": "A rectangle contour evaluates the Gaussian cosine integral",
+        "strategy": "Integrate e^(-z^2) e^(2 i b z) on a rectangle, translate by i b to complete the square, and compare opposite sides to recover the real cosine integral.",
+        "deps": [
+          "def-standard-residue-contours",
+          "thm-eulers-formula",
+          "thm-residue-theorem-null-homologous-cycle"
+        ]
+      },
+      {
+        "id": "ex-residue-evaluates-the-basel-sum",
+        "kind": "example",
+        "title": "The residue theorem gives the Basel sum",
+        "strategy": "Unpack the rectangle computation behind the Basel corollary and then divide the bilateral sum by two.",
+        "deps": [
+          "cor-basel-sum-by-residues"
+        ]
+      },
+      {
+        "id": "cex-sine-over-x-is-only-conditionally-convergent",
+        "kind": "counterexample",
+        "title": "The sine integral converges conditionally but not absolutely",
+        "strategy": "Use Dirichlet's test for convergence of integral_1^infinity sin x / x dx and the uniform-tail-mass criterion to show that the absolute-value integral diverges.",
+        "deps": [
+          "thm-dirichlet-test-for-improper-integrals",
+          "thm-absolute-divergence-from-uniform-tail-mass"
+        ]
+      },
+      {
+        "id": "cex-one-over-z-defeats-the-large-semicircle-estimate",
+        "kind": "counterexample",
+        "title": "The function 1 / z makes the large-semicircle shortcut fail",
+        "strategy": "Parametrize the upper semicircle directly to see that the arc integral tends to i pi, so the weakened hypothesis in the false statement is genuinely wrong.",
+        "deps": [
+          "fs-large-arc-vanishing-follows-from-pointwise-decay-alone"
+        ]
+      },
+      {
+        "id": "cex-misidentifying-a-double-pole-gives-the-wrong-residue",
+        "kind": "counterexample",
+        "title": "Treating a double pole as simple gives the wrong answer",
+        "strategy": "Compare the correct derivative formula for the residue of e^z / (z-a)^2 with the incorrect simple-pole limit rule to show the numerical mismatch.",
+        "deps": [
+          "lem-residue-simple-pole",
+          "thm-residue-pole-derivative-formula"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 351,
+    "id": "the-hartogs-phenomena",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "The Hartogs Phenomena",
+    "companion": "the-hartogs-phenomena-examples",
+    "requires": [
+      "subharmonic-functions-and-the-dirichlet-problem",
+      "holomorphic-functions-of-several-variables",
+      "complete-metrizability-and-baire",
+      "isolated-singularities-and-laurent-series"
+    ],
+    "items": [
+      {
+        "id": "def-holomorphic-extension-and-domain-of-holomorphy",
+        "kind": "definition",
+        "title": "Holomorphic extension and domains of holomorphy in several variables",
+        "deps": [
+          "def-holomorphic-function-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "def-hartogs-figure-and-polydisc-hull",
+        "kind": "definition",
+        "title": "The Hartogs figure H(r,s) and its bidisc hull",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space"
+        ]
+      },
+      {
+        "id": "lem-holomorphic-dependence-of-slice-laurent-coefficients",
+        "kind": "lemma",
+        "title": "Laurent coefficients on Hartogs slices depend holomorphically on the remaining variables",
+        "strategy": "Fix an annular circle in the distinguished variable. Cauchy's coefficient formula expresses each Laurent coefficient as a contour integral whose integrand is jointly continuous and holomorphic in the parameter variables, so the parameter-integral theorem makes the coefficient holomorphic in the remaining coordinates.",
+        "deps": [
+          "def-hartogs-figure-and-polydisc-hull",
+          "thm-contour-parameter-integrals-are-holomorphic",
+          "thm-cauchy-integral-formula-on-a-polydisc",
+          "thm-laurent-coefficient-formula-and-uniqueness"
+        ]
+      },
+      {
+        "id": "lem-vanishing-of-negative-laurent-coefficients-on-a-hartogs-figure",
+        "kind": "lemma",
+        "title": "Negative Laurent coefficients vanish on a Hartogs figure",
+        "strategy": "On the thin cylinder of the Hartogs figure each slice is actually holomorphic through the inner disc, so its negative Laurent coefficients vanish there. The previous lemma makes those coefficients holomorphic in the other variable, and the identity theorem propagates the vanishing across the whole parameter domain.",
+        "deps": [
+          "lem-holomorphic-dependence-of-slice-laurent-coefficients",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "thm-hartogs-figure-extension",
+        "kind": "theorem",
+        "title": "A holomorphic function on a Hartogs figure extends to the full bidisc",
+        "strategy": "Expand on the annular slices in the distinguished variable. The negative coefficients vanish by the previous lemma, so the remaining nonnegative series defines a holomorphic function on the whole bidisc; equivalently one may write the same extension by a fixed-circle Cauchy integral and use the identity theorem on the overlap.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "def-hartogs-figure-and-polydisc-hull",
+          "lem-holomorphic-dependence-of-slice-laurent-coefficients",
+          "lem-vanishing-of-negative-laurent-coefficients-on-a-hartogs-figure",
+          "thm-cauchy-integral-formula-on-a-polydisc",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "cor-hartogs-figure-obstruction-to-domain-of-holomorphy",
+        "kind": "corollary",
+        "title": "A domain containing a Hartogs figure but not its hull is not a domain of holomorphy",
+        "strategy": "If a domain contains the Hartogs figure and omits a point of its bidisc hull, then every holomorphic function on the smaller domain extends across that omitted point inside a neighborhood. This contradicts the page's fixed simultaneous-extension definition of domain of holomorphy.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "thm-hartogs-figure-extension"
+        ]
+      },
+      {
+        "id": "thm-removability-of-a-puncture-in-several-complex-variables",
+        "kind": "theorem",
+        "title": "An isolated puncture is removable in complex dimension at least two",
+        "strategy": "Work in a polydisc around the puncture and fix all but one variable. Cauchy's formula on a circle in the remaining variable defines a candidate extension that is holomorphic in the parameter variables, agrees with the original function on a punctured overlap, and therefore extends uniquely across the point by the identity theorem.",
+        "deps": [
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "thm-contour-parameter-integrals-are-holomorphic",
+          "thm-cauchy-integral-formula-on-a-polydisc",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "cor-no-isolated-holomorphic-singularities-in-several-complex-variables",
+        "kind": "corollary",
+        "title": "Holomorphic functions of several variables have no isolated singularities",
+        "strategy": "A singularity at an isolated deleted point would contradict the puncture-removability theorem.",
+        "deps": [
+          "thm-removability-of-a-puncture-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "lem-bounded-punctured-slice-has-holomorphic-parameter-extension",
+        "kind": "lemma",
+        "title": "A locally bounded punctured slice has a holomorphic parameter extension",
+        "strategy": "For fixed parameter values, the one-variable slice across the missing coordinate point is bounded and hence removable. Use a Cauchy integral on a fixed circle to represent the extended value and the parameter-integral theorem to show that the extension varies holomorphically with the remaining coordinates.",
+        "deps": [
+          "thm-removable-singularity-characterizations",
+          "thm-contour-parameter-integrals-are-holomorphic",
+          "thm-cauchy-integral-formula-on-a-polydisc"
+        ]
+      },
+      {
+        "id": "thm-riemann-extension-across-a-coordinate-hyperplane",
+        "kind": "theorem",
+        "title": "A locally bounded holomorphic function extends across a coordinate hyperplane",
+        "strategy": "Apply the preceding slicewise extension lemma near each point of the missing hyperplane. The local extensions agree with the original function off the hyperplane, so the identity theorem glues them into a unique holomorphic extension.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "lem-bounded-punctured-slice-has-holomorphic-parameter-extension",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "lem-local-boundedness-of-separately-holomorphic-functions",
+        "kind": "lemma",
+        "title": "Separate holomorphy forces local boundedness on smaller polydiscs",
+        "strategy": "On a closed polydisc, use Baire category in the real parameter cube to find a nontrivial subpolydisc on which the function is bounded in one variable uniformly over the others. Expand in the remaining variables by Cauchy's formula; the logarithms of the coefficient moduli are subharmonic in the last variable, and a Hartogs-lemma/Fatou argument upgrades the subpolydisc bound to a bound on every smaller polydisc.",
+        "deps": [
+          "def-separately-holomorphic-function",
+          "lem-baire-category-in-a-closed-interval",
+          "thm-cauchy-integral-formula-on-a-polydisc",
+          "thm-cauchy-estimates-on-a-polydisc",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "thm-plane-subharmonic-functions-are-locally-integrable",
+          "thm-fatou-lemma"
+        ]
+      },
+      {
+        "id": "thm-hartogs-separate-holomorphy",
+        "kind": "theorem",
+        "title": "Separate holomorphy implies joint holomorphy in finite dimensions",
+        "strategy": "Combine the local-boundedness lemma with the already established theorem that a locally bounded separately holomorphic function is jointly holomorphic.",
+        "deps": [
+          "def-separately-holomorphic-function",
+          "lem-local-boundedness-of-separately-holomorphic-functions",
+          "thm-locally-bounded-separate-holomorphy"
+        ]
+      },
+      {
+        "id": "lem-local-hartogs-extension-across-polydisc-shells",
+        "kind": "lemma",
+        "title": "Hartogs figures give local extension across polydisc shells",
+        "strategy": "Near a boundary point of a compact hole, choose product coordinates so that a small neighborhood outside the hole contains a Hartogs figure while the local hull reaches farther inward. Apply the Hartogs-figure extension theorem in these coordinates and transport the extension back.",
+        "deps": [
+          "def-hartogs-figure-and-polydisc-hull",
+          "thm-hartogs-figure-extension",
+          "def-balls-and-polydiscs-in-complex-euclidean-space"
+        ]
+      },
+      {
+        "id": "lem-propagation-and-gluing-of-hartogs-extensions",
+        "kind": "lemma",
+        "title": "Local Hartogs extensions propagate along chains and glue uniquely",
+        "strategy": "Extend across one shell at a time along a finite chain of overlapping neighborhoods. Uniqueness on nonempty overlaps follows from the identity theorem, so the local extensions are independent of the chosen chain and glue to a single holomorphic continuation.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "lem-local-hartogs-extension-across-polydisc-shells",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "thm-hartogs-extension-across-compact-holes",
+        "kind": "theorem",
+        "title": "Hartogs extension across a connected compact hole",
+        "strategy": "Cover the compact hole by finitely many local shell neighborhoods. Starting from the given function on the connected exterior, use propagation across the finite chain and gluing uniqueness to extend holomorphically across every shell and hence across the whole compact set.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "lem-local-hartogs-extension-across-polydisc-shells",
+          "lem-propagation-and-gluing-of-hartogs-extensions",
+          "thm-identity-theorem-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "fs-punctured-domain-functions-must-be-unbounded",
+        "kind": "false-statement",
+        "title": "FALSE: every holomorphic function on a punctured several-variable domain is unbounded near the puncture",
+        "strategy": "Refute by the puncture-removability theorem: bounded holomorphic functions near the deleted point extend, and even the coordinate functions restricted to a punctured polydisc stay bounded and extend.",
+        "deps": [
+          "thm-removability-of-a-puncture-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "fs-one-variable-isolated-singularity-theory-has-a-several-variable-analogue",
+        "kind": "false-statement",
+        "title": "FALSE: isolated singularities in several variables can be poles or essential",
+        "strategy": "The several-variable puncture theorem collapses the one-variable trichotomy at a deleted point: an isolated deleted point is always removable.",
+        "deps": [
+          "cor-no-isolated-holomorphic-singularities-in-several-complex-variables",
+          "thm-isolated-singularity-trichotomy"
+        ]
+      },
+      {
+        "id": "fs-every-domain-in-c-two-is-a-domain-of-holomorphy",
+        "kind": "false-statement",
+        "title": "FALSE: every domain in C^2 is a domain of holomorphy",
+        "strategy": "Use a domain that contains a Hartogs figure but not its hull, or equivalently the bidisc minus the origin. The Hartogs figure corollary shows that such a domain admits extension across the missing point.",
+        "deps": [
+          "cor-hartogs-figure-obstruction-to-domain-of-holomorphy"
+        ]
+      },
+      {
+        "id": "fs-separate-holomorphy-can-fail-to-imply-local-boundedness",
+        "kind": "false-statement",
+        "title": "FALSE: separate holomorphy can fail to imply local boundedness",
+        "strategy": "The local-boundedness lemma is exactly the contrary statement. A false claim here would collapse Hartogs's theorem back to the weaker continuous or bounded Osgood setting.",
+        "deps": [
+          "lem-local-boundedness-of-separately-holomorphic-functions"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 352,
+    "id": "the-hartogs-phenomena-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "The Hartogs Phenomena — Examples",
+    "companion": "the-hartogs-phenomena",
+    "requires": [
+      "the-hartogs-phenomena"
+    ],
+    "items": [
+      {
+        "id": "ex-hartogs-figure-in-modulus-coordinates",
+        "kind": "example",
+        "title": "The Hartogs figure in (|z1|, |z2|) coordinates",
+        "strategy": "Describe the thin cylinder and thick shell pieces explicitly and identify the missing bidisc core that the extension theorem fills.",
+        "deps": [
+          "def-hartogs-figure-and-polydisc-hull"
+        ]
+      },
+      {
+        "id": "ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure",
+        "kind": "example",
+        "title": "The function 1 / (1 - z1 z2) extends holomorphically from a Hartogs figure",
+        "strategy": "The function is holomorphic on the whole bidisc because |z1 z2| < 1 there, so restricting it to a Hartogs figure gives a concrete example whose extension theorem recovers the obvious global formula.",
+        "deps": [
+          "thm-hartogs-figure-extension"
+        ]
+      },
+      {
+        "id": "ex-z-one-over-one-minus-z-one-z-two-extends-across-the-punctured-bidisc",
+        "kind": "example",
+        "title": "A holomorphic function on the punctured bidisc extends across the origin",
+        "strategy": "Use f(z1,z2) = z1 / (1 - z1 z2) on the punctured bidisc. The extension across the origin is manifest, illustrating the puncture theorem with a nonconstant example.",
+        "deps": [
+          "thm-removability-of-a-puncture-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "ex-bidisc-minus-the-origin-is-not-a-domain-of-holomorphy",
+        "kind": "example",
+        "title": "The bidisc minus the origin is not a domain of holomorphy",
+        "strategy": "Every holomorphic function on the punctured bidisc extends to the full bidisc, so the missing origin cannot support the nonextendability demanded by the definition of domain of holomorphy.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy",
+          "thm-removability-of-a-puncture-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "cex-one-over-z-has-a-nonremovable-puncture-in-one-variable",
+        "kind": "counterexample",
+        "title": "The one-variable function 1 / z does not extend across the origin",
+        "strategy": "Its Laurent series has a nonzero principal part and the singularity is a simple pole, so the several-variable puncture theorem genuinely needs complex dimension at least two.",
+        "deps": [
+          "def-simple-pole",
+          "thm-pole-characterizations"
+        ]
+      },
+      {
+        "id": "cex-c-two-minus-a-complex-line-is-a-domain-of-holomorphy",
+        "kind": "counterexample",
+        "title": "C^2 minus a complex line is a domain of holomorphy",
+        "strategy": "On Omega = {z1 != 0}, the holomorphic function 1 / z1 has no extension across the missing hyperplane. This shows that hypersurface holes behave differently from point or compact holes.",
+        "deps": [
+          "def-holomorphic-extension-and-domain-of-holomorphy"
+        ]
+      }
+    ]
+  }
+]

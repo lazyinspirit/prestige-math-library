@@ -1,0 +1,580 @@
+[
+  {
+    "order": 199,
+    "id": "set-partitions-stirling-numbers-and-exponential-generating-functions",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Set Partitions, Stirling Numbers and Exponential Generating Functions",
+    "companion": "set-partitions-stirling-numbers-and-exponential-generating-functions-examples",
+    "requires": [
+      "lattice-paths-and-catalan-numbers",
+      "inclusion-exclusion-and-the-pigeonhole-principle",
+      "combinatorial-classes-and-the-symbolic-method",
+      "permutation-statistics-inversions-and-eulerian-numbers",
+      "the-exponential-function"
+    ],
+    "items": [
+      {
+        "id": "rem-stirling-number-and-egf-conventions",
+        "kind": "remark",
+        "title": "This page fixes the Stirling-sign and exponential-generating-function conventions",
+        "strategy": "Record once and for all that $S(n,k)$ denotes the second-kind numbers, $c(n,k)$ the signless first-kind numbers, and $s(n,k)=(-1)^{n-k}c(n,k)$ the signed first-kind numbers used in the inversion theorem. Also record that every exponential generating function on this page lives in a commutative $\\mathbb{Q}$-algebra, so the factorial denominators and the formal $\\exp$ and $\\log$ operations are meaningful.",
+        "deps": []
+      },
+      {
+        "id": "def-set-partition-and-block",
+        "kind": "definition",
+        "title": "Set partitions and blocks",
+        "deps": []
+      },
+      {
+        "id": "lem-set-partitions-of-a-finite-set-are-finite",
+        "kind": "lemma",
+        "title": "The set partitions of a finite set form a finite set",
+        "strategy": "Encode a partition of a finite set $A$ by the function that sends each element to the least element of its block after transporting the problem to $A=[n]$. This gives an injection from the set of partitions into the finite function set $[n]^{[n]}$, so every level used in the Stirling and Bell definitions is finite.",
+        "deps": [
+          "def-set-partition-and-block",
+          "thm-cardinality-of-a-set-of-functions"
+        ]
+      },
+      {
+        "id": "def-stirling-second-kind-and-bell-number",
+        "kind": "definition",
+        "title": "The Stirling numbers of the second kind and the Bell numbers",
+        "deps": [
+          "def-set-partition-and-block",
+          "lem-set-partitions-of-a-finite-set-are-finite"
+        ]
+      },
+      {
+        "id": "def-signed-and-signless-stirling-first-kind",
+        "kind": "definition",
+        "title": "The signed and signless Stirling numbers of the first kind",
+        "deps": [
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "cor-symmetric-group-has-factorial-cardinality-again"
+        ]
+      },
+      {
+        "id": "def-rising-factorial",
+        "kind": "definition",
+        "title": "The rising factorial",
+        "deps": [
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "def-exponential-generating-function-over-a-q-algebra",
+        "kind": "definition",
+        "title": "Exponential generating functions over a commutative $\\mathbb{Q}$-algebra",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-formal-exponential-logarithm-and-powers"
+        ]
+      },
+      {
+        "id": "def-labelled-classes-and-basic-labelled-constructions",
+        "kind": "definition",
+        "title": "Labelled classes, labelled product, and the constructions $\\operatorname{SEQ}$, $\\operatorname{SET}$, $\\operatorname{CYC}$, and boxed product",
+        "deps": [
+          "def-combinatorial-class-and-ordinary-generating-function"
+        ]
+      },
+      {
+        "id": "thm-stirling-second-kind-recurrence",
+        "kind": "theorem",
+        "title": "The Stirling numbers of the second kind satisfy $S(n,k)=kS(n-1,k)+S(n-1,k-1)$",
+        "strategy": "Distinguish whether the element $n$ is alone in its block or not. The singleton case strips off the block $\\{n\\}$ and contributes $S(n-1,k-1)$; otherwise $n$ is inserted into one of the $k$ blocks of a partition of $[n-1]$ into $k$ blocks, giving the factor $kS(n-1,k)$.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number"
+        ]
+      },
+      {
+        "id": "cor-bell-number-binomial-recurrence",
+        "kind": "corollary",
+        "title": "The Bell numbers satisfy $B_{n+1}=\\sum_{k=0}^n\\binom{n}{k}B_k$",
+        "strategy": "For a partition of $[n+1]$, let $S$ be the block containing $n+1$. Choosing the other elements of $S$ is equivalent to choosing its complement among the first $n$ elements, and the remaining elements may then be partitioned arbitrarily. Summing over the possible complements gives the displayed binomial recurrence.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "thm-stirling-second-kind-recurrence"
+        ]
+      },
+      {
+        "id": "thm-stirling-second-kind-inclusion-exclusion-formula",
+        "kind": "theorem",
+        "title": "The Stirling numbers of the second kind are given by $S(n,k)=\\frac{1}{k!}\\sum_{i=0}^k(-1)^i\\binom{k}{i}(k-i)^n$",
+        "strategy": "Count surjections from $[n]$ onto $[k]$ by inclusion-exclusion and then forget the labels on the codomain blocks. Each set partition into $k$ blocks gives exactly $k!$ surjections after ordering the blocks, so dividing the surjection count by $k!$ yields the formula.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "def-factorial-and-falling-factorial",
+          "thm-the-number-of-surjections"
+        ]
+      },
+      {
+        "id": "thm-powers-expand-in-the-falling-factorial-basis",
+        "kind": "theorem",
+        "title": "Ordinary powers expand in the falling-factorial basis by the second-kind Stirling numbers",
+        "strategy": "For a positive integer $x$, the value $x^n$ counts all functions $[n]\\to[x]$. Group these functions by the partition of $[n]$ into nonempty fibres of equal value: choosing the partition contributes $S(n,k)$ and assigning distinct values to its $k$ blocks contributes $x^{\\underline{k}}$. Since both sides are polynomials in $x$ that agree at all integers $x\\ge 0$, the identity holds in the polynomial ring.",
+        "deps": [
+          "def-factorial-and-falling-factorial",
+          "def-stirling-second-kind-and-bell-number",
+          "thm-the-number-of-surjections"
+        ]
+      },
+      {
+        "id": "thm-signless-first-kind-recurrence-and-rising-factorial-expansion",
+        "kind": "theorem",
+        "title": "The signless first-kind Stirling numbers satisfy their recurrence and expand the rising factorial",
+        "strategy": "Insert $n$ into a permutation of $[n-1]$ either as a new $1$-cycle or inside one of the existing $n-1$ cycle positions to obtain the recurrence for $c(n,k)$. For the polynomial identity, compare the effect of multiplying $x^{\\overline{n-1}}$ by $x+n-1$ with the same cycle-insertion recurrence; the shared initial conditions force the coefficients of $x^k$ to be $c(n,k)$.",
+        "deps": [
+          "def-signed-and-signless-stirling-first-kind",
+          "def-rising-factorial",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-signed-stirling-inversion",
+        "kind": "theorem",
+        "title": "The signed first-kind and second-kind Stirling numbers are inverse transition matrices",
+        "strategy": "Use the second-kind expansion of $x^n$ in the falling-factorial basis and the first-kind expansion of $x^{\\underline{n}}$ in the monomial basis. Substitute one into the other and use the fact that a finite linear combination of the falling factorials is uniquely determined by its values at $0,1,\\ldots,n$ to read off the Kronecker-delta matrix identity and the corresponding inversion formula for sequences.",
+        "deps": [
+          "def-factorial-and-falling-factorial",
+          "thm-powers-expand-in-the-falling-factorial-basis",
+          "thm-signless-first-kind-recurrence-and-rising-factorial-expansion"
+        ]
+      },
+      {
+        "id": "thm-labelled-symbolic-method-rules-for-exponential-generating-functions",
+        "kind": "theorem",
+        "title": "The labelled constructions translate into the usual exponential-generating-function rules",
+        "strategy": "For labelled product, distribute labels by choosing the subset sent to the left factor, producing the binomial convolution that becomes multiplication after division by $n!$. The constructions $\\operatorname{SEQ}$, $\\operatorname{SET}$, and $\\operatorname{CYC}$ are then the iterated labelled-product, unordered labelled-product, and cyclic labelled-product cases, while the boxed product records the unique globally smallest label and therefore integrates the derivative of the left factor against the right factor.",
+        "deps": [
+          "def-exponential-generating-function-over-a-q-algebra",
+          "def-labelled-classes-and-basic-labelled-constructions",
+          "thm-formal-composition-laws",
+          "thm-formal-exponential-logarithm-identities",
+          "thm-summable-families-and-rearrangement"
+        ]
+      },
+      {
+        "id": "thm-vertical-egfs-for-the-stirling-triangles",
+        "kind": "theorem",
+        "title": "The two Stirling triangles have the expected vertical exponential generating functions",
+        "strategy": "A partition into exactly $k$ nonempty blocks is a labelled set of $k$ nonempty labelled sets, so the labelled symbolic method gives $(e^x-1)^k/k!$. Likewise a permutation with exactly $k$ cycles is a labelled set of $k$ labelled cycles, giving $\\bigl(\\log(1/(1-x))\\bigr)^k/k!$.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "def-signed-and-signless-stirling-first-kind",
+          "thm-labelled-symbolic-method-rules-for-exponential-generating-functions"
+        ]
+      },
+      {
+        "id": "thm-exponential-formula-for-set-partitions-and-bell-numbers",
+        "kind": "theorem",
+        "title": "The exponential formula gives the Bell-number generating function",
+        "strategy": "View a set partition as a labelled set of nonempty labelled sets. The labelled symbolic method therefore translates the specification $\\operatorname{SET}(\\operatorname{SET}_{\\ge1}(\\mathcal Z))$ into the formal identity $\\sum_{n\\ge0}B_nx^n/n!=\\exp(e^x-1)$, and the coefficient of $u^k$ in the same argument recovers the block-count refinement.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "thm-labelled-symbolic-method-rules-for-exponential-generating-functions"
+        ]
+      },
+      {
+        "id": "cor-dobinski-formula-for-bell-numbers",
+        "kind": "corollary",
+        "title": "Dobinski's formula expresses the Bell numbers as $B_n=e^{-1}\\sum_{\\ell\\ge0}\\ell^n/\\ell!$",
+        "strategy": "Start from the analytic Bell-number generating function $e^{e^x-1}=e^{-1}e^{e^x}$. Expand $e^{e^x}$ as the absolutely convergent double series $\\sum_{\\ell\\ge0}e^{\\ell x}/\\ell!$, justify the rearrangement with the library's double-series Fubini theorem, then expand each $e^{\\ell x}$ and compare the coefficient of $x^n/n!$.",
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-double-series-fubini",
+          "thm-exponential-formula-for-set-partitions-and-bell-numbers"
+        ]
+      },
+      {
+        "id": "cor-standard-specializations-of-the-labelled-symbolic-method",
+        "kind": "corollary",
+        "title": "Standard labelled specializations give involutions, ordered Bell numbers, and partitions without singletons",
+        "strategy": "Apply the labelled symbolic method to three specifications: involutions are labelled sets of $1$-cycles and $2$-cycles, ordered Bell structures are sequences of nonempty labelled sets, and partitions with no singleton blocks are labelled sets of blocks of size at least $2$. The three resulting EGFs are then immediate symbolic translations.",
+        "deps": [
+          "thm-labelled-symbolic-method-rules-for-exponential-generating-functions",
+          "thm-exponential-formula-for-set-partitions-and-bell-numbers",
+          "thm-vertical-egfs-for-the-stirling-triangles"
+        ]
+      },
+      {
+        "id": "thm-lah-numbers-count-ordered-set-partitions-and-expand-rising-factorials",
+        "kind": "theorem",
+        "title": "The Lah numbers count ordered-block set partitions and expand the rising factorial in the falling basis",
+        "strategy": "Let $L(n,k)$ be the coefficient of $x^{\\underline{k}}$ in $x^{\\overline{n}}$, so the expansion is a definition by basis coefficients. A combinatorial count chooses a permutation of $[n]$ and then cuts it into $k$ nonempty consecutive lists by placing $k-1$ separators among the $n-1$ gaps, yielding $L(n,k)=n!\\binom{n-1}{k-1}/k!$. The same list-of-lists object is exactly a partition of $[n]$ into $k$ linearly ordered blocks.",
+        "deps": [
+          "def-factorial-and-falling-factorial",
+          "def-rising-factorial",
+          "thm-powers-expand-in-the-falling-factorial-basis",
+          "thm-signless-first-kind-recurrence-and-rising-factorial-expansion"
+        ]
+      },
+      {
+        "id": "cor-touchards-congruence-for-bell-numbers",
+        "kind": "corollary",
+        "title": "Touchard's congruence: for prime $p$, $B_{n+p}\\equiv B_n+B_{n+1}\\pmod p$",
+        "strategy": "Reduce the Bell recurrence modulo $p$ at the index $n+p-1$. The middle binomial coefficients in the $p$th row are divisible by $p$, so Pascal's rule gives the congruence $\\binom{n+p-1}{k}\\equiv\\binom{n-1}{k}+\\binom{n-1}{k-1}\\pmod p$; splitting the Bell recurrence with this congruence collapses to the sum of the $n$th and $(n+1)$st Bell recurrences.",
+        "deps": [
+          "cor-bell-number-binomial-recurrence",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-euclids-lemma",
+          "lem-coprime-divides-product",
+          "def-congruence-modulo-an-integer"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 200,
+    "id": "set-partitions-stirling-numbers-and-exponential-generating-functions-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Set Partitions, Stirling Numbers and Exponential Generating Functions — Examples",
+    "companion": "set-partitions-stirling-numbers-and-exponential-generating-functions",
+    "requires": [
+      "set-partitions-stirling-numbers-and-exponential-generating-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-set-partitions-of-four-by-block-count",
+        "kind": "example",
+        "title": "The set partitions of $[4]$ grouped by their number of blocks",
+        "strategy": "List the partitions of $[4]$ explicitly and regroup them by block count. The example gives concrete values of $S(4,k)$ and $B_4$ without hiding the objects behind the notation.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number"
+        ]
+      },
+      {
+        "id": "ex-s-four-two-computed-by-recurrence-formula-and-listing",
+        "kind": "example",
+        "title": "$S(4,2)$ computed by recurrence, inclusion-exclusion, and direct listing",
+        "strategy": "Evaluate the recurrence and the explicit inclusion-exclusion formula, then compare both answers with the direct list of two-block partitions of $[4]$. The point is to keep the three standard routes visibly synchronized on one concrete value.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "thm-stirling-second-kind-recurrence",
+          "thm-stirling-second-kind-inclusion-exclusion-formula"
+        ]
+      },
+      {
+        "id": "ex-stirling-triangles-invert-up-to-four",
+        "kind": "example",
+        "title": "The two Stirling triangles multiply to the identity through size $4$",
+        "strategy": "Write the lower-triangular matrices $(S(n,k))_{0\\le k\\le n\\le4}$ and $(s(n,k))_{0\\le k\\le n\\le4}$ and multiply them explicitly. This makes the signed first-kind convention concrete and visibly shows why the signless first-kind numbers do not invert the second-kind matrix.",
+        "deps": [
+          "thm-signed-stirling-inversion"
+        ]
+      },
+      {
+        "id": "ex-ordered-bell-versus-bell-at-three",
+        "kind": "example",
+        "title": "Ordered Bell structures and ordinary Bell partitions differ already on $[3]$",
+        "strategy": "List the ordinary set partitions of $[3]$, then list the ordered partitions obtained by ordering the blocks. The example isolates the precise overcount that turns Bell numbers into ordered Bell numbers.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "cor-standard-specializations-of-the-labelled-symbolic-method"
+        ]
+      },
+      {
+        "id": "ex-involutions-of-four-and-their-cycle-decomposition",
+        "kind": "example",
+        "title": "The involutions of $S_4$ are exactly the products of disjoint $1$-cycles and $2$-cycles",
+        "strategy": "List the identity, the six transpositions, and the three products of two disjoint transpositions. The example is the finite witness for the symbolic description that leads to the EGF $\\exp(x+x^2/2)$.",
+        "deps": [
+          "cor-standard-specializations-of-the-labelled-symbolic-method",
+          "def-signed-and-signless-stirling-first-kind"
+        ]
+      },
+      {
+        "id": "ex-lah-number-l-four-two",
+        "kind": "example",
+        "title": "The Lah number $L(4,2)$ counts the ordered two-block partitions of $[4]$",
+        "strategy": "Choose the underlying two-block partition shape and then order the elements inside each block, or equivalently cut permutations of $[4]$ into two nonempty consecutive lists. Both counts lead to the same value and make the ordered-block meaning of Lah numbers explicit.",
+        "deps": [
+          "thm-lah-numbers-count-ordered-set-partitions-and-expand-rising-factorials"
+        ]
+      },
+      {
+        "id": "ex-set-partitions-of-four-with-no-singletons",
+        "kind": "example",
+        "title": "The partitions of $[4]$ with no singleton blocks",
+        "strategy": "List the partitions of $[4]$ all of whose blocks have size at least $2$. This is the first nontrivial coefficient check for the EGF $\\exp(e^x-1-x)$.",
+        "deps": [
+          "cor-standard-specializations-of-the-labelled-symbolic-method"
+        ]
+      },
+      {
+        "id": "ex-singleton-block-families-have-egf-exp-x",
+        "kind": "example",
+        "title": "Singleton blocks alone recover the EGF $e^x$",
+        "strategy": "Interpret a partition all of whose blocks have size $1$ as a labelled set of atomic blocks. The example is deliberately trivial: it lets the reader see the labelled $\\operatorname{SET}$ rule with no combinatorial noise.",
+        "deps": [
+          "thm-labelled-symbolic-method-rules-for-exponential-generating-functions"
+        ]
+      },
+      {
+        "id": "fs-bell-numbers-count-ordered-set-partitions",
+        "kind": "false-statement",
+        "title": "FALSE: the Bell number counts ordered set partitions",
+        "strategy": "Refute the claim on $[3]$ by counting ordinary partitions and ordered partitions separately. The failure is not small or asymptotic: it is already visible in the first nontrivial case.",
+        "deps": [
+          "def-stirling-second-kind-and-bell-number",
+          "cor-standard-specializations-of-the-labelled-symbolic-method"
+        ]
+      },
+      {
+        "id": "fs-stirling-second-kind-counts-surjections",
+        "kind": "false-statement",
+        "title": "FALSE: $S(n,k)$ counts surjections $[n]\\to[k]$",
+        "strategy": "Use a small example such as $n=3$, $k=2$ or the general factor-of-$k!$ comparison. The point is to isolate that $S(n,k)$ counts surjections only after forgetting the labels on the fibres.",
+        "deps": [
+          "thm-stirling-second-kind-inclusion-exclusion-formula",
+          "thm-the-number-of-surjections"
+        ]
+      },
+      {
+        "id": "fs-exponential-generating-functions-multiply-without-labelled-product-hypothesis",
+        "kind": "false-statement",
+        "title": "FALSE: exponential generating functions multiply for every informal product of labelled structures",
+        "strategy": "Give two labelled constructions whose decomposition into left and right factors is not unique after the labels are forgotten or reshuffled. The refutation is there to show that the labelled product hypothesis is mathematical content, not presentation.",
+        "deps": [
+          "thm-labelled-symbolic-method-rules-for-exponential-generating-functions"
+        ]
+      },
+      {
+        "id": "cex-set-partitions-with-the-same-block-sizes-can-be-distinct",
+        "kind": "counterexample",
+        "title": "Two distinct set partitions can have the same multiset of block sizes",
+        "strategy": "Exhibit two partitions of the same finite set with the same block-size profile but different blocks. This is the local witness that integer partitions forget information that set partitions retain.",
+        "deps": [
+          "def-set-partition-and-block"
+        ]
+      },
+      {
+        "id": "cex-the-second-kind-inclusion-exclusion-formula-does-not-count-permutations-by-cycles",
+        "kind": "counterexample",
+        "title": "The second-kind inclusion-exclusion formula does not count permutations by cycle number",
+        "strategy": "Compare a small value such as $S(4,2)$ with the number of permutations of $[4]$ having two cycles. The example isolates that the same-looking symbols cannot be interchanged across the first-kind and second-kind settings.",
+        "deps": [
+          "def-signed-and-signless-stirling-first-kind",
+          "thm-stirling-second-kind-inclusion-exclusion-formula"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 407,
+    "id": "blockades-combs-and-pattern-graphs",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Blockades, Combs and Pattern Graphs",
+    "companion": "blockades-combs-and-pattern-graphs-examples",
+    "requires": [
+      "polynomial-rodl-and-viral-equivalence"
+    ],
+    "items": [
+      {
+        "id": "rem-blockade-conventions-and-order",
+        "kind": "remark",
+        "title": "Blockades are ordered sequences, and directional sparsity follows that order",
+        "strategy": "Record the two conventions the later Erdős-Hajnal pages depend on: a blockade is an ordered list of blocks, and the phrase '$x$-sparse blockade' is directional rather than symmetric. This prevents later pages from silently dropping the order or replacing directional sparsity by weak density.",
+        "deps": [
+          "def-directional-and-weak-sparsity-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "def-blockade-length-and-width",
+        "kind": "definition",
+        "title": "A blockade, its length, and its width",
+        "deps": []
+      },
+      {
+        "id": "def-complete-anticomplete-pure-and-x-sparse-blockades",
+        "kind": "definition",
+        "title": "Complete, anticomplete, pure, weakly sparse, and $x$-sparse blockades",
+        "deps": [
+          "def-blockade-length-and-width",
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "def-comb-in-a-graph",
+        "kind": "definition",
+        "title": "Combs built on a blockade",
+        "deps": [
+          "def-blockade-length-and-width",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "def-pattern-graph-of-a-pure-blockade",
+        "kind": "definition",
+        "title": "The pattern graph of a pure blockade",
+        "deps": [
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "def-sparse-orientation-of-a-blockade",
+        "kind": "definition",
+        "title": "The sparse orientation attached to an ordered blockade",
+        "deps": [
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "lem-p-four-free-pattern-graphs-have-square-root-homogeneous-sets",
+        "kind": "lemma",
+        "title": "$P_4$-free pattern graphs have homogeneous sets of square-root size",
+        "strategy": "Argue by induction on the order of the pattern graph. A nontrivial $P_4$-free graph is disconnected or its complement is disconnected, so one of the two complementary decompositions splits the graph into two smaller pieces; applying the inductive hypothesis to the larger homogeneous side of each piece and then combining across a complete or anticomplete cut gives the square-root bound.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "lem-components-are-anticomplete-and-anticomponents-complete",
+          "thm-every-nontrivial-graph-is-connected-or-anticonnected"
+        ]
+      },
+      {
+        "id": "lem-pure-blockades-with-p-four-free-patterns-contain-large-homogeneous-subblockades",
+        "kind": "lemma",
+        "title": "A pure blockade whose pattern graph is $P_4$-free contains a large complete or anticomplete subblockade",
+        "strategy": "Take the pattern graph of the pure blockade and apply the square-root homogeneous-set lemma to it. A clique in the pattern graph yields a complete subblockade and a stable set yields an anticomplete one, with the same block width because only blocks are discarded, never thinned.",
+        "deps": [
+          "def-pattern-graph-of-a-pure-blockade",
+          "lem-p-four-free-pattern-graphs-have-square-root-homogeneous-sets"
+        ]
+      },
+      {
+        "id": "lem-maximal-pattern-pure-blockades-force-many-blocks",
+        "kind": "lemma",
+        "title": "The maximal-pattern argument forces a long pure blockade before theorem 2.3 can fail",
+        "strategy": "Assume a maximal pure blockade whose pattern graph is $P_4$-free and whose block sizes satisfy the weighted sum invariant used in the source proof. If it has too few blocks, apply the hypothesis of theorem 2.3 inside the largest block, replace that block by the complete or anticomplete blockade found there, and enlarge the pattern by substituting a clique or an independent set at the corresponding vertex, contradicting maximality.",
+        "deps": [
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "thm-complete-or-anticomplete-blockade-hypotheses-force-restricted-induced-subgraphs",
+        "kind": "theorem",
+        "title": "Polynomially large complete or anticomplete blockades force polynomially large restricted induced subgraphs",
+        "strategy": "Follow the maximal pure-blockade route of Nguyen--Scott--Seymour. Build a maximal pure blockade whose pattern graph is $P_4$-free and whose block sizes satisfy the source's $1/a$-power sum invariant, use the previous lemma to show that the pattern has many vertices, extract a complete or anticomplete subblockade of length at least $\\varepsilon^{-1}$, and then compress along the source's cograph-pattern argument to obtain an $\\varepsilon$-restricted induced subgraph of size at least $\\varepsilon^{3a}|G|$.",
+        "deps": [
+          "def-c-sparse-and-c-restricted-vertex-set",
+          "def-complete-anticomplete-pure-and-x-sparse-blockades",
+          "lem-maximal-pattern-pure-blockades-force-many-blocks",
+          "lem-pure-blockades-with-p-four-free-patterns-contain-large-homogeneous-subblockades"
+        ]
+      },
+      {
+        "id": "thm-large-sparse-pair-hypotheses-yield-x-sparse-blockades",
+        "kind": "theorem",
+        "title": "Repeated large sparse pairs produce a long $x$-sparse blockade",
+        "strategy": "Iteratively apply the sparse-pair hypothesis inside the current large remainder. At stage $i$, record the sparse side as the next block and continue inside the almost-all remainder; the size inequality $|Y|\\ge(1-by)|F|$ guarantees that enough vertices survive for $\\lceil y^{-1}\\rceil$ stages, and the directional sparse-to relation is preserved by taking later blocks from later remainders. The resulting ordered sequence is an $x$-sparse blockade of the required length and width.",
+        "deps": [
+          "def-blockade-length-and-width",
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "def-sparse-orientation-of-a-blockade"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 408,
+    "id": "blockades-combs-and-pattern-graphs-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Blockades, Combs and Pattern Graphs — Examples",
+    "companion": "blockades-combs-and-pattern-graphs",
+    "requires": [
+      "blockades-combs-and-pattern-graphs"
+    ],
+    "items": [
+      {
+        "id": "ex-a-three-block-blockade-and-its-width",
+        "kind": "example",
+        "title": "A three-block blockade and its width",
+        "strategy": "Specify three pairwise disjoint vertex sets in a small graph and compute the blockade width as the minimum block size. The example exists purely to make the ordered-sequence viewpoint concrete.",
+        "deps": [
+          "def-blockade-length-and-width"
+        ]
+      },
+      {
+        "id": "ex-pure-but-not-complete-blockade",
+        "kind": "example",
+        "title": "A pure blockade need not be complete or anticomplete",
+        "strategy": "Give a three-block blockade in which one pair of blocks is complete and another is anticomplete. This is the smallest explicit witness that purity is a pattern condition, not a uniform adjacency condition.",
+        "deps": [
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "ex-a-three-tooth-comb",
+        "kind": "example",
+        "title": "A three-tooth comb built on a blockade",
+        "strategy": "Exhibit three attachment vertices and three blocks satisfying the definition of a comb. The verification checks exactly which adjacencies are required and which are forbidden.",
+        "deps": [
+          "def-comb-in-a-graph"
+        ]
+      },
+      {
+        "id": "ex-pattern-graph-of-a-pure-blockade",
+        "kind": "example",
+        "title": "The pattern graph of a four-block pure blockade",
+        "strategy": "Start from a pure blockade and write down the graph on block indices whose edges record complete pairs. The example is there so later pages can cite a finite witness when they use pattern language.",
+        "deps": [
+          "def-pattern-graph-of-a-pure-blockade"
+        ]
+      },
+      {
+        "id": "ex-a-sparse-orientation-of-four-blocks",
+        "kind": "example",
+        "title": "An ordered blockade determines a sparse orientation",
+        "strategy": "Choose four blocks so that later blocks are sparse to earlier ones in a specified order. The example shows that the order of extraction is part of the data, not a cosmetic choice.",
+        "deps": [
+          "def-sparse-orientation-of-a-blockade"
+        ]
+      },
+      {
+        "id": "fs-every-pure-blockade-is-complete-or-anticomplete",
+        "kind": "false-statement",
+        "title": "FALSE: every pure blockade is complete or anticomplete",
+        "strategy": "Reuse the smallest mixed complete/anticomplete pattern from the earlier pure-but-not-complete example. A single finite blockade refutes the claim because purity only asks for each pair of blocks to be pure, not for all pairs to behave the same way.",
+        "deps": [
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "fs-blockade-order-never-matters-for-x-sparsity",
+        "kind": "false-statement",
+        "title": "FALSE: reordering a blockade never changes whether it is $x$-sparse",
+        "strategy": "Construct two blocks $A,B$ with $B$ sparse to $A$ but not conversely. The same unordered pair therefore yields one ordered blockade that is $x$-sparse and one that is not.",
+        "deps": [
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "cex-weak-sparsity-does-not-imply-directional-sparsity",
+        "kind": "counterexample",
+        "title": "Weak sparsity does not force directional sparsity",
+        "strategy": "Give a pair of vertex sets with small average edge density but one high-degree witness in one direction. This separates the weak edge-count notion from the directional maximum-degree notion used in sparse blockades.",
+        "deps": [
+          "def-directional-and-weak-sparsity-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "cex-a-comb-fails-when-a-tooth-sees-a-foreign-block",
+        "kind": "counterexample",
+        "title": "A would-be comb fails if one attachment vertex sees a foreign block",
+        "strategy": "Modify a valid comb by adding a single forbidden adjacency from one tooth to another block. The point of the counterexample is to show that the anti-complete-away-from-own-block clause is genuinely load-bearing.",
+        "deps": [
+          "def-comb-in-a-graph"
+        ]
+      }
+    ]
+  }
+]

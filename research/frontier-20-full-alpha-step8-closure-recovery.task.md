@@ -1,0 +1,18 @@
+# Step 8 — exact closure recovery, `frontier-20-full`
+
+Read `research/frontier-20-full-judge-closure.json`,
+`research/frontier-20-full-judge.jsonl`,
+`research/frontier-20-full-judge-adjudications.jsonl`, and the generated `by_item`
+ownership map in `research/frontier-20-full-step8-scope.json`. Take only current
+unadjudicated `(id, model, context_sha256)` rows owned by this group; leave
+other groups' rows untouched. A row owned by no group is a reported blocker,
+not a row to discard.
+
+Append one exact adjudication outcome per owned row. Only
+`confirmed_fatal` licenses its coherent repair and matching ledger row; update
+only records made stale by that repair. Send a concrete other-group finding to
+`research/frontier-20-full-step8-cross-group.jsonl`, never repair that item.
+
+Write `research/frontier-20-full-alpha-step8-closure-recovery-<group>.md` with the rows
+handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
+blockers. Preserve shared append-only ledgers.

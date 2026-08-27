@@ -1,0 +1,753 @@
+[
+  {
+    "order": 288.011,
+    "id": "lebesgue-stieltjes-measures-and-distribution-functions",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Lebesgue Stieltjes Measures and Distribution Functions",
+    "companion": "lebesgue-stieltjes-measures-and-distribution-functions-examples",
+    "requires": [
+      "non-measurable-sets-and-the-cost-of-choice-examples"
+    ],
+    "items": [
+      {
+        "id": "rem-lebesgue-stieltjes-convention-ledger",
+        "kind": "remark",
+        "title": "This page uses the nondecreasing, right-continuous, (a,b]-interval convention",
+        "deps": [
+          "def-one-sided-limits"
+        ]
+      },
+      {
+        "id": "def-borel-measure-finite-on-compact-sets-on-r",
+        "kind": "definition",
+        "title": "A Borel measure on R that is finite on compact sets",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "def-half-open-interval-algebra-on-r",
+        "kind": "definition",
+        "title": "The algebra of finite disjoint unions of half-open intervals in R with extended endpoints",
+        "deps": [
+          "def-algebra-of-subsets",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-lebesgue-stieltjes-interval-set-function",
+        "kind": "definition",
+        "title": "The interval set function attached to a nondecreasing right-continuous function",
+        "deps": [
+          "def-half-open-interval-algebra-on-r",
+          "rem-lebesgue-stieltjes-convention-ledger"
+        ]
+      },
+      {
+        "id": "prop-stieltjes-interval-set-function-is-finitely-additive",
+        "kind": "proposition",
+        "title": "The Stieltjes interval set function is finitely additive on the half-open interval algebra",
+        "strategy": "Order all finite endpoints together with any needed infinite cuts, refine both h-interval decompositions to the common grid they determine, and telescope the interval increments across the adjacent cells. This isolates the representation-independence step from the sigma-additivity step that follows.",
+        "deps": [
+          "def-lebesgue-stieltjes-interval-set-function"
+        ]
+      },
+      {
+        "id": "thm-stieltjes-interval-set-function-is-a-premeasure",
+        "kind": "theorem",
+        "title": "The Stieltjes interval set function is a premeasure",
+        "strategy": "Use the previous proposition for finite additivity. For countable additivity when a disjoint union stays inside the algebra, reduce first to one target h-interval, obtain one inequality from finite additivity and nonnegativity, prove the reverse inequality on bounded intervals by the finite-cover argument, and then recover the ray and whole-line cases by truncation.",
+        "deps": [
+          "def-premeasure-on-an-algebra",
+          "def-lebesgue-stieltjes-interval-set-function",
+          "prop-stieltjes-interval-set-function-is-finitely-additive"
+        ]
+      },
+      {
+        "id": "thm-existence-of-the-lebesgue-stieltjes-measure",
+        "kind": "theorem",
+        "title": "Assuming countable choice, a nondecreasing right-continuous function defines a Borel measure on R",
+        "strategy": "Apply the published Caratheodory extension theorem to the premeasure on the half-open interval algebra, then identify the generated sigma-algebra with the Borel sigma-algebra on R. Keep the statement on intervals explicit: the resulting measure is characterized first on (a,b].",
+        "deps": [
+          "def-borel-measure-finite-on-compact-sets-on-r",
+          "thm-caratheodory-extension-theorem",
+          "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+          "thm-stieltjes-interval-set-function-is-a-premeasure"
+        ]
+      },
+      {
+        "id": "thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r",
+        "kind": "theorem",
+        "title": "The interval data on (a,b] determines the Borel measure uniquely",
+        "strategy": "The half-open intervals form a pi-system, and the unit intervals (n,n+1] give a sigma-finite exhaustion. Therefore two Borel measures that agree on every half-open interval agree on every Borel set by the published uniqueness theorem for sigma-finite pi-systems.",
+        "deps": [
+          "thm-existence-of-the-lebesgue-stieltjes-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system"
+        ]
+      },
+      {
+        "id": "def-distribution-function-of-a-borel-measure-on-r",
+        "kind": "definition",
+        "title": "The distribution function of a Borel measure on R, normalized at 0",
+        "deps": [
+          "def-borel-measure-finite-on-compact-sets-on-r"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-stieltjes-correspondence-with-distribution-functions",
+        "kind": "theorem",
+        "title": "Assuming countable choice, finite-on-compacts Borel measures on R correspond to nondecreasing right-continuous functions modulo constants",
+        "strategy": "Assuming countable choice, define F_mu by intervals relative to 0, use measure monotonicity and continuity from above to prove that F_mu is nondecreasing and right-continuous, and compare mu with the Stieltjes measure of F_mu on every half-open interval. Uniqueness then gives mu_{F_mu}=mu. Equality mu_F=mu_G is equivalent to equality of interval increments, which is exactly that F-G is constant.",
+        "deps": [
+          "def-distribution-function-of-a-borel-measure-on-r",
+          "thm-continuity-from-above-for-measures",
+          "thm-continuity-from-below-for-measures",
+          "thm-existence-of-the-lebesgue-stieltjes-measure",
+          "thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r"
+        ]
+      },
+      {
+        "id": "def-atom-of-a-measure-on-r",
+        "kind": "definition",
+        "title": "An atom of a measure on R",
+        "deps": [
+          "def-measure"
+        ]
+      },
+      {
+        "id": "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+        "kind": "theorem",
+        "title": "Interval formulas and atoms for a Lebesgue-Stieltjes measure",
+        "strategy": "Recover (a,b), [a,b), and [a,b] from (a,b] by countable unions and intersections and use one-sided limits of nondecreasing functions to convert the resulting endpoint terms into F(b-) and F(a-). The singleton formula follows by subtraction. An atom occurs exactly where the left jump F(a)-F(a-) is positive, and the jump set is countable by the published bounded-variation discontinuity theorem applied on compact truncations.",
+        "deps": [
+          "cor-bv-discontinuities-are-countable-and-of-first-kind",
+          "def-atom-of-a-measure-on-r",
+          "def-one-sided-limits",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-stieltjes-measures-are-regular-on-r",
+        "kind": "theorem",
+        "title": "Lebesgue-Stieltjes measures on R are outer regular and inner regular by compact sets",
+        "strategy": "Use coverings by open intervals to get outer regularity, first on arbitrary sets and then on Borel sets. For inner regularity, localize to bounded pieces E intersect (-n,n], approximate each bounded piece from inside by compact sets, and pass to the whole set by continuity from below. The argument follows the one-dimensional regularity proof for complete Stieltjes measures and keeps the compact truncation visible.",
+        "deps": [
+          "thm-continuity-from-below-for-measures",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity",
+        "kind": "corollary",
+        "title": "Lebesgue measure is the Lebesgue-Stieltjes measure of the identity function",
+        "strategy": "The identity function x -> x is increasing and right-continuous, so it defines a Stieltjes measure. Both that measure and the published Lebesgue measure give length b-a to every half-open interval (a,b], hence they agree on Borel sets by the uniqueness theorem.",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r"
+        ]
+      },
+      {
+        "id": "def-cantor-measure",
+        "kind": "definition",
+        "title": "The Cantor measure",
+        "deps": [
+          "def-cantor-function",
+          "thm-existence-of-the-lebesgue-stieltjes-measure"
+        ]
+      },
+      {
+        "id": "prop-cantor-measure-is-a-singular-atomless-probability-measure",
+        "kind": "proposition",
+        "title": "The Cantor measure is a singular atomless probability measure concentrated on the Cantor set",
+        "strategy": "Use the Cantor function c with c(0)=0 and c(1)=1 to get total mass 1 on [0,1]. The point-mass formula and continuity of c show that every singleton has measure 0. The gap-constancy property of c makes every complementary gap of the Cantor set have measure 0, so the whole complement has measure 0. Because the Cantor set itself has Lebesgue measure 0, the measure is singular with respect to Lebesgue measure.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "def-cantor-measure",
+          "thm-cantor-function-properties",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "thm-finite-borel-measure-on-r-is-atomic-plus-atomless",
+        "kind": "theorem",
+        "title": "Every finite Borel measure on R splits as an atomic part plus an atomless part",
+        "strategy": "Pass from the measure to its normalized distribution function F_mu. The previous jump theorem shows that the atoms are countable and their masses are exactly the positive jumps. Form the atomic part as the weighted Dirac sum over those masses and subtract it from mu. The remainder is still a finite Borel measure and has no atoms by construction.",
+        "deps": [
+          "def-atom-of-a-measure-on-r",
+          "def-dirac-measure",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "fs-every-increasing-function-defines-a-lebesgue-stieltjes-measure",
+        "kind": "false-statement",
+        "title": "FALSE: every nondecreasing function defines a Lebesgue-Stieltjes measure on Borel sets",
+        "strategy": "Refute with the step function that is 0 for x at most 0 and 1 for x above 0. Then the shrinking intervals (0,1/n] all have measure 1, so countable additivity on their decreasing intersection would force 1 to equal 0. This is exactly the failure that right continuity rules out.",
+        "deps": [
+          "rem-lebesgue-stieltjes-convention-ledger"
+        ]
+      },
+      {
+        "id": "fs-lebesgue-stieltjes-measures-have-zero-point-masses",
+        "kind": "false-statement",
+        "title": "FALSE: a Lebesgue-Stieltjes measure always gives every singleton measure 0",
+        "strategy": "Use the distribution function with one jump at 0. Its associated measure is the Dirac mass at 0, so the singleton {0} has measure 1. The point-mass formula identifies exactly why the claim fails: jumps create atoms.",
+        "deps": [
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "fs-lebesgue-stieltjes-measures-determine-the-distribution-function-without-normalization",
+        "kind": "false-statement",
+        "title": "FALSE: a Lebesgue-Stieltjes measure determines its distribution function uniquely",
+        "strategy": "If G(x)=F(x)+c for a constant c, then G and F give the same interval increments and hence the same measure. Therefore a measure determines only the right-continuous nondecreasing function modulo constants; the normalization at 0 is what singles out one representative.",
+        "deps": [
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "fs-every-borel-measure-on-r-is-finite-on-compact-sets",
+        "kind": "false-statement",
+        "title": "FALSE: every Borel measure on R is finite on compact sets",
+        "strategy": "Counting measure on R is a Borel measure, but every infinite compact set such as [0,1] has infinite counting measure. Thus finiteness on compact sets is a real hypothesis in the correspondence theorem, not a consequence of being Borel.",
+        "deps": [
+          "def-counting-measure",
+          "prop-counting-measure-is-a-measure"
+        ]
+      },
+      {
+        "id": "fs-every-atomless-borel-measure-on-r-has-a-density",
+        "kind": "false-statement",
+        "title": "FALSE: every atomless Borel measure on R is absolutely continuous with respect to Lebesgue measure",
+        "strategy": "The Cantor measure is atomless, but it is concentrated on the Cantor set, which has Lebesgue measure 0. Hence it is singular rather than absolutely continuous. This is the standard witness that atomless and absolutely continuous are different notions.",
+        "deps": [
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.012,
+    "id": "lebesgue-stieltjes-measures-and-distribution-functions-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Lebesgue Stieltjes Measures and Distribution Functions - Examples",
+    "companion": "lebesgue-stieltjes-measures-and-distribution-functions",
+    "requires": [
+      "lebesgue-stieltjes-measures-and-distribution-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-the-identity-function-generates-lebesgue-measure",
+        "kind": "example",
+        "title": "The identity function generates Lebesgue measure",
+        "strategy": "Compute the half-open interval increment of F(x)=x and appeal to the uniqueness theorem. Then verify the four interval formulas directly to make the convention tangible.",
+        "deps": [
+          "cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "ex-one-jump-function-generates-a-dirac-mass-at-zero",
+        "kind": "example",
+        "title": "A single jump generates the Dirac mass at 0",
+        "strategy": "Use the function that is 0 on x less than 0 and 1 on x at least 0. Its interval increments vanish away from 0 and equal 1 exactly when the interval crosses 0 from the left, so the associated measure is the Dirac mass at 0.",
+        "deps": [
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "ex-a-step-function-generates-a-finite-atomic-measure",
+        "kind": "example",
+        "title": "A step function generates a finite atomic measure",
+        "strategy": "Choose a right-continuous step function with three jumps, compute the mass at each jump from the jump sizes, and write the measure as the corresponding weighted sum of Dirac masses.",
+        "deps": [
+          "thm-finite-borel-measure-on-r-is-atomic-plus-atomless",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "ex-two-normalizations-give-the-same-lebesgue-stieltjes-measure",
+        "kind": "example",
+        "title": "Two different normalizations can give the same measure",
+        "strategy": "Take G(x)=F(x)+c with c not equal to 0 and compare the interval increments term by term. The example is the concrete witness for the constant-difference ambiguity in the correspondence theorem.",
+        "deps": [
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions"
+        ]
+      },
+      {
+        "id": "ex-interval-formulas-for-a-function-with-one-jump",
+        "kind": "example",
+        "title": "The four interval formulas for a function with one jump",
+        "strategy": "Use a function that is linear except for one jump, compute F(b)-F(a), F(b-)-F(a), F(b)-F(a-), and F(b-)-F(a-) where appropriate, and compare the answers for (a,b], (a,b), [a,b], and [a,b).",
+        "deps": [
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures"
+        ]
+      },
+      {
+        "id": "ex-cantor-measure-is-concentrated-on-the-cantor-set",
+        "kind": "example",
+        "title": "The Cantor measure lives on the Cantor set",
+        "strategy": "Use the gap-constancy of the Cantor function to show that each complementary gap has measure 0, sum over the countably many gaps, and then record that the whole mass 1 sits on the Cantor set.",
+        "deps": [
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure"
+        ]
+      },
+      {
+        "id": "ex-arctangent-generates-a-borel-probability-measure",
+        "kind": "example",
+        "title": "The arctangent distribution function generates a Borel probability measure",
+        "strategy": "Use F(x)=arctan(x)/pi + 1/2, compute its limiting values at minus and plus infinity, and conclude from the interval formula that the total mass is 1. The example stops before any density calculation, which belongs later in the track.",
+        "deps": [
+          "thm-existence-of-the-lebesgue-stieltjes-measure"
+        ]
+      },
+      {
+        "id": "cex-right-continuity-is-necessary-for-lebesgue-stieltjes-measures",
+        "kind": "counterexample",
+        "title": "Without right continuity the interval formula need not be countably additive",
+        "strategy": "Take the left-continuous jump function at 0. Then the disjoint intervals (0,1/n] all receive mass 1 while their intersection is empty, so continuity from above and hence countable additivity fail. The witness is as concrete as possible because it defends a convention, not a deep theorem.",
+        "deps": [
+          "fs-every-increasing-function-defines-a-lebesgue-stieltjes-measure"
+        ]
+      },
+      {
+        "id": "cex-cantor-measure-is-atomless-but-not-absolutely-continuous",
+        "kind": "counterexample",
+        "title": "The Cantor measure is atomless but not absolutely continuous",
+        "strategy": "Combine the atomless and singular clauses of the Cantor-measure proposition. Since the Cantor set has Lebesgue measure 0 but full Cantor measure, no density with respect to Lebesgue measure can exist.",
+        "deps": [
+          "fs-every-atomless-borel-measure-on-r-has-a-density",
+          "prop-cantor-measure-is-a-singular-atomless-probability-measure"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.013,
+    "id": "measurable-functions-and-simple-approximation",
+    "kind": "A",
+    "category": "measure-theory",
+    "title": "Measurable Functions and Simple Approximation",
+    "companion": "measurable-functions-and-simple-approximation-examples",
+    "requires": [
+      "lebesgue-stieltjes-measures-and-distribution-functions-examples"
+    ],
+    "items": [
+      {
+        "id": "rem-measurable-function-codomain-convention",
+        "kind": "remark",
+        "title": "Measurability is relative to sigma-algebras on both domain and codomain",
+        "deps": [
+          "def-measurable-space"
+        ]
+      },
+      {
+        "id": "def-borel-sigma-algebra-on-the-extended-real-line",
+        "kind": "definition",
+        "title": "The Borel sigma-algebra on the extended real line",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "def-measurable-function-between-measurable-spaces",
+        "kind": "definition",
+        "title": "A measurable function between measurable spaces",
+        "deps": [
+          "def-measurable-space"
+        ]
+      },
+      {
+        "id": "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+        "kind": "proposition",
+        "title": "An indicator function is measurable exactly when its set is measurable",
+        "strategy": "Check the inverse image of the singleton {1} and the inverse images of the two Borel rays (-infinity,1/2) and (1/2,infinity). This is the basic dictionary between sets and measurable functions and will be used repeatedly on both pages.",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces"
+        ]
+      },
+      {
+        "id": "def-borel-and-lebesgue-measurable-function-on-rn",
+        "kind": "definition",
+        "title": "Borel measurable and Lebesgue measurable functions on R^n",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-measurable-function-between-measurable-spaces"
+        ]
+      },
+      {
+        "id": "def-positive-and-negative-parts-of-a-function",
+        "kind": "definition",
+        "title": "The positive and negative parts of a real-valued function",
+        "deps": []
+      },
+      {
+        "id": "def-simple-function-and-canonical-representation",
+        "kind": "definition",
+        "title": "Simple functions and their canonical representation",
+        "deps": [
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "def-sigma-algebra-generated-by-a-function",
+        "kind": "definition",
+        "title": "The sigma-algebra generated by a measurable function",
+        "deps": [
+          "def-generated-sigma-algebra",
+          "def-measurable-function-between-measurable-spaces"
+        ]
+      },
+      {
+        "id": "rem-zero-times-infinity-convention-for-pointwise-products",
+        "kind": "remark",
+        "title": "The convention 0 times infinity equals 0 is used only for pointwise products of measurable functions",
+        "deps": [
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "thm-generating-family-criterion-for-measurable-functions",
+        "kind": "theorem",
+        "title": "To prove measurability it suffices to test a generating family in the codomain",
+        "strategy": "For a fixed function f, the collection of codomain sets whose preimages are measurable is itself a sigma-algebra because inverse image commutes with complements and countable unions. If the generating family sits inside that sigma-algebra, minimality of the generated sigma-algebra finishes the proof.",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces",
+          "thm-generated-sigma-algebra-comparison-criterion"
+        ]
+      },
+      {
+        "id": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+        "kind": "theorem",
+        "title": "Real-valued and extended-real-valued measurability can be checked on threshold sets",
+        "strategy": "Use the generating-family theorem with the right rays (a,infinity], their left-ray complements, and the published generators of the Borel sigma-algebra on R. Then prove the rational-threshold version by approximating every real threshold from above and below with rationals.",
+        "deps": [
+          "def-borel-sigma-algebra-on-the-extended-real-line",
+          "thm-generating-family-criterion-for-measurable-functions",
+          "thm-seven-generators-of-the-borel-sigma-algebra-on-r"
+        ]
+      },
+      {
+        "id": "cor-continuous-functions-are-borel-measurable",
+        "kind": "corollary",
+        "title": "Continuous functions are Borel measurable",
+        "strategy": "A continuous map pulls back open sets to open sets, hence to Borel sets. The definition of Borel measurability is exactly that statement written in sigma-algebra language.",
+        "deps": [
+          "def-measurable-function-between-measurable-spaces",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ]
+      },
+      {
+        "id": "thm-monotone-real-functions-are-borel-measurable",
+        "kind": "theorem",
+        "title": "Monotone real functions are Borel measurable",
+        "strategy": "For a nondecreasing function, each superlevel set {f>a} is an upper ray together with at most one endpoint, and the endpoint behavior is controlled by one-sided limits and jump discontinuities. Therefore every threshold set is Borel, and the threshold criterion gives measurability. The decreasing case reduces by negation.",
+        "deps": [
+          "def-monotone-function",
+          "thm-monotone-discontinuities-are-jumps",
+          "thm-monotone-one-sided-limits-exist",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "thm-coordinatewise-measurability-into-r-n",
+        "kind": "theorem",
+        "title": "A map into R^n is measurable exactly when each coordinate is measurable",
+        "strategy": "The coordinate maps are continuous, so one direction is immediate by composition. For the converse, the rational boxes generate the Borel sigma-algebra on R^n, and the preimage of a box is a finite intersection of coordinate threshold preimages.",
+        "deps": [
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "thm-composition-with-borel-functions-preserves-measurability",
+        "kind": "theorem",
+        "title": "Composing with a Borel function preserves measurability",
+        "strategy": "If g is Borel measurable and f is measurable, then for every Borel set B the preimage (g composed with f)^(-1)(B) equals f^(-1)(g^(-1)(B)). Because g^(-1)(B) is Borel, the right-hand side is measurable. Keep the codomain sigma-algebra explicit so the theorem does not overclaim to merely Lebesgue-measurable outer maps.",
+        "deps": [
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-measurable-function-between-measurable-spaces"
+        ]
+      },
+      {
+        "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "kind": "theorem",
+        "title": "Arithmetic and lattice operations preserve measurability whenever they are defined",
+        "strategy": "Use the rational decomposition {f+g>a} = union over rationals q of {f>q} intersect {g>a-q}; this is the chosen route because it avoids product sigma-algebras. Max, min, absolute value, and positive and negative parts come from threshold identities. For nonnegative products use {fg>a} = union over positive rationals q of {f>q} intersect {g>a/q}, then decompose general products into the four nonnegative pieces with the convention 0 times infinity equals 0.",
+        "deps": [
+          "def-positive-and-negative-parts-of-a-function",
+          "rem-zero-times-infinity-convention-for-pointwise-products",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+        "kind": "theorem",
+        "title": "Sequential suprema, infima, limsup, liminf, and pointwise limits of measurable functions are measurable",
+        "strategy": "Write the threshold sets of sup_n f_n and inf_n f_n as countable unions and intersections of threshold sets of the individual functions. Then limsup and liminf are built from tail suprema and tail infima, and the set where a pointwise limit exists is exactly where limsup equals liminf. On that set the common value is measurable because it equals either extended-real limit function.",
+        "deps": [
+          "def-limsup-liminf",
+          "thm-convergence-iff-limsup-equals-liminf",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+        "kind": "theorem",
+        "title": "Every nonnegative measurable function is the increasing pointwise limit of explicit simple functions",
+        "strategy": "Use the dyadic truncations obtained by partitioning the range into intervals [j 2^(-n),(j+1) 2^(-n)) below level n and a final truncation set {f>=n}. The threshold theorem makes each level set measurable, so every approximant is simple. Monotonicity and pointwise convergence are checked directly from the dyadic inequalities, and boundedness of f on a set gives uniform convergence there.",
+        "deps": [
+          "def-simple-function-and-canonical-representation",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "cor-measurable-functions-admit-dominated-simple-approximations",
+        "kind": "corollary",
+        "title": "Every measurable real-valued function has simple approximations dominated by its absolute value",
+        "strategy": "Apply the nonnegative approximation theorem to the positive and negative parts separately and subtract the resulting simple functions. The dominance bound follows because each approximation is monotone from below and the parts sum to the absolute value.",
+        "deps": [
+          "def-positive-and-negative-parts-of-a-function",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations"
+        ]
+      },
+      {
+        "id": "thm-ae-equality-preserves-measurability-on-complete-spaces",
+        "kind": "theorem",
+        "title": "On a complete measure space, equality almost everywhere preserves measurability",
+        "strategy": "If f=g off a null set N and f is measurable, then each threshold set of g is the union of a measurable piece outside N and a subset of N. Completeness makes every subset of N measurable, so the threshold criterion closes the proof. The same witness shows exactly why completeness is needed.",
+        "deps": [
+          "def-complete-measure-space",
+          "prop-null-sets-form-a-sigma-ideal-in-a-complete-space",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ]
+      },
+      {
+        "id": "thm-completion-measurable-functions-have-base-measurable-representatives",
+        "kind": "theorem",
+        "title": "A function measurable for a completion is almost everywhere equal to one measurable for the original sigma-algebra",
+        "strategy": "Start with the explicit simple approximants of a nonnegative completion-measurable function. Replace each completion-measurable level set by an original measurable set with null symmetric difference, producing original simple functions that agree almost everywhere with the old ones. Their pointwise limsup is original measurable, and the complete-space almost-everywhere theorem transfers the limit back to the given function. Apply this to positive and negative parts for the general real-valued case.",
+        "deps": [
+          "def-positive-and-negative-parts-of-a-function",
+          "thm-ae-equality-preserves-measurability-on-complete-spaces",
+          "thm-completion-of-a-measure-space",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ]
+      },
+      {
+        "id": "thm-doob-dynkin-lemma",
+        "kind": "theorem",
+        "title": "Doob-Dynkin factorization through the sigma-algebra generated by a function",
+        "strategy": "First handle countably valued functions g by pulling each fiber back from the generating function f and disjointifying the corresponding codomain sets. For a general extended-real-valued g, approximate it uniformly by simple dyadic truncations, factor each truncation through f, and then define the codomain map h pointwise on the set where the approximants converge. The measurability of h comes from the measurable-limit theorem on the codomain side.",
+        "deps": [
+          "def-sigma-algebra-generated-by-a-function",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ]
+      },
+      {
+        "id": "fs-measurable-level-sets-do-not-imply-measurability",
+        "kind": "false-statement",
+        "title": "FALSE: if every level set of a real-valued function is measurable, then the function is measurable",
+        "strategy": "Choose a nonmeasurable Vitali set V in [0,1] and define f(x)=x for x outside V and f(x)=x+2 for x in V. Every level set is empty or a singleton, hence measurable. However f^(-1)([2,3])=V, so f is not measurable.",
+        "deps": [
+          "thm-a-vitali-set-is-not-lebesgue-measurable",
+          "thm-vitali-sets-exist-under-choice-on-r-over-q"
+        ]
+      },
+      {
+        "id": "fs-absolute-value-measurable-does-not-imply-measurability",
+        "kind": "false-statement",
+        "title": "FALSE: if the absolute value is measurable, then the function is measurable",
+        "strategy": "Let V be a nonmeasurable Vitali set and define f to be 1 on V and -1 off V. Then |f| is the constant function 1, hence measurable, while f^(-1)((0,infinity))=V is not measurable.",
+        "deps": [
+          "thm-a-vitali-set-is-not-lebesgue-measurable",
+          "thm-vitali-sets-exist-under-choice-on-r-over-q"
+        ]
+      },
+      {
+        "id": "fs-an-arbitrary-supremum-of-measurable-functions-need-not-be-measurable",
+        "kind": "false-statement",
+        "title": "FALSE: the supremum of an arbitrary family of measurable functions is always measurable",
+        "strategy": "Let V be a nonmeasurable Vitali set and consider the family of measurable indicators {1_{{t}}} indexed by t in V. Their pointwise supremum is 1_V, which is not measurable. The theorem on suprema is therefore genuinely sequential, not arbitrary-family.",
+        "deps": [
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-a-vitali-set-is-not-lebesgue-measurable",
+          "thm-vitali-sets-exist-under-choice-on-r-over-q"
+        ]
+      },
+      {
+        "id": "fs-ae-equality-with-a-measurable-function-does-not-imply-measurability",
+        "kind": "false-statement",
+        "title": "FALSE: equality almost everywhere with a measurable function always implies measurability",
+        "strategy": "Work on the incomplete measure space (R,B(R),lambda restricted to B(R)). Let E be a Lebesgue measurable non-Borel subset of the Cantor set. Then chi_E equals 0 almost everywhere because E lies inside a null set, but chi_E is not Borel measurable. Thus completeness is a real hypothesis in the almost-everywhere theorem.",
+        "deps": [
+          "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "fs-composing-a-lebesgue-measurable-function-with-a-continuous-map-need-not-preserve-measurability",
+        "kind": "false-statement",
+        "title": "FALSE: composing a Lebesgue measurable function with a continuous map always preserves measurability",
+        "strategy": "Use a Lebesgue measurable set E and a continuous map g whose preimage g^(-1)(E) is nonmeasurable. Then the indicator of E is Lebesgue measurable, but composing it with g gives the nonmeasurable indicator of g^(-1)(E). This is exactly why the outer function in the composition theorem must be Borel measurable, not merely Lebesgue measurable.",
+        "deps": [
+          "cor-a-continuous-preimage-of-a-lebesgue-measurable-set-can-be-nonmeasurable",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "fs-a-pointwise-limit-of-continuous-functions-need-not-be-continuous-ae",
+        "kind": "false-statement",
+        "title": "FALSE: a pointwise limit of continuous functions is continuous almost everywhere",
+        "strategy": "Let K be a fat Cantor set. The distance-to-set functions x -> max(0,1-n d(x,K)) are continuous and converge pointwise to the indicator of K. That indicator is discontinuous at every boundary point of K, and the fat Cantor set has empty interior and positive measure, so the limit fails to be continuous on a set of positive measure.",
+        "deps": [
+          "def-fat-cantor-set",
+          "lem-distance-to-set-is-lipschitz",
+          "thm-fat-cantor-set-has-positive-measure"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.014,
+    "id": "measurable-functions-and-simple-approximation-examples",
+    "kind": "B",
+    "category": "measure-theory",
+    "title": "Measurable Functions and Simple Approximation - Examples",
+    "companion": "measurable-functions-and-simple-approximation",
+    "requires": [
+      "measurable-functions-and-simple-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-indicator-functions-are-measurable",
+        "kind": "example",
+        "title": "Indicator functions are the basic measurable functions",
+        "strategy": "Compute the inverse images of the two relevant Borel values 0 and 1 and record exactly which measurable set controls each one.",
+        "deps": [
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "ex-a-simple-function-and-its-canonical-representation",
+        "kind": "example",
+        "title": "A simple function written in canonical form",
+        "strategy": "Start with a function described piecewise on overlapping measurable sets, merge equal values, and then rewrite it using distinct coefficients and disjoint level sets.",
+        "deps": [
+          "def-simple-function-and-canonical-representation"
+        ]
+      },
+      {
+        "id": "ex-dirichlet-function-is-borel-and-nowhere-continuous",
+        "kind": "example",
+        "title": "The Dirichlet function is Borel measurable and nowhere continuous",
+        "strategy": "Its value-1 set Q is countable and hence Borel, so the indicator criterion gives Borel measurability. The published continuity-set theorem then supplies nowhere continuity.",
+        "deps": [
+          "def-dirichlet-and-thomae-functions",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "thm-dirichlet-and-thomae-continuity-sets"
+        ]
+      },
+      {
+        "id": "ex-cantor-function-is-borel-measurable",
+        "kind": "example",
+        "title": "The Cantor function is monotone, continuous, and Borel measurable",
+        "strategy": "Use the published continuity of the Cantor function, then apply the general theorem that continuous maps have Borel preimages of Borel sets.",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "thm-cantor-function-properties",
+          "thm-monotone-real-functions-are-borel-measurable"
+        ]
+      },
+      {
+        "id": "ex-dyadic-simple-approximations-to-x-squared-on-zero-two",
+        "kind": "example",
+        "title": "The dyadic simple approximants to x^2 on [0,2] for the first two levels",
+        "strategy": "Apply the explicit dyadic formula from the approximation theorem with n=1 and n=2, tabulate the level sets, and compare the resulting step functions with x^2.",
+        "deps": [
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations"
+        ]
+      },
+      {
+        "id": "ex-sigma-of-an-indicator-function",
+        "kind": "example",
+        "title": "The sigma-algebra generated by an indicator function",
+        "strategy": "For f=1_A, compute all inverse images of Borel subsets of R and show that only the four sets empty, A, A^c, and the whole space appear.",
+        "deps": [
+          "def-sigma-algebra-generated-by-a-function",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "ex-sigma-of-a-two-step-simple-function",
+        "kind": "example",
+        "title": "The sigma-algebra generated by a two-step simple function",
+        "strategy": "Write the function in canonical form, list the preimages of the singleton value sets, and identify the sigma-algebra generated by those level sets.",
+        "deps": [
+          "def-sigma-algebra-generated-by-a-function",
+          "def-simple-function-and-canonical-representation"
+        ]
+      },
+      {
+        "id": "ex-a-lebesgue-measurable-function-that-is-not-borel",
+        "kind": "example",
+        "title": "A Lebesgue measurable function need not be Borel measurable",
+        "strategy": "Take the indicator of a Lebesgue measurable non-Borel set. The indicator criterion turns the set-theoretic pathology into a function-theoretic one immediately.",
+        "deps": [
+          "cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable"
+        ]
+      },
+      {
+        "id": "cex-an-uncountable-supremum-of-indicators-need-not-be-measurable",
+        "kind": "counterexample",
+        "title": "An uncountable supremum of measurable indicators need not be measurable",
+        "strategy": "Take the same family of singleton indicators used in the A-page false statement and compute its supremum as the indicator of the indexing Vitali set.",
+        "deps": [
+          "fs-an-arbitrary-supremum-of-measurable-functions-need-not-be-measurable"
+        ]
+      },
+      {
+        "id": "cex-a-continuous-preimage-can-break-lebesgue-measurability",
+        "kind": "counterexample",
+        "title": "A continuous preimage can break Lebesgue measurability",
+        "strategy": "Use the published continuous preimage pathology and rewrite it as an indicator-function composition so the failure is visible as a direct preimage calculation.",
+        "deps": [
+          "fs-composing-a-lebesgue-measurable-function-with-a-continuous-map-need-not-preserve-measurability"
+        ]
+      },
+      {
+        "id": "cex-ae-equality-can-fail-on-an-incomplete-space",
+        "kind": "counterexample",
+        "title": "Almost-everywhere equality can fail to preserve measurability on an incomplete space",
+        "strategy": "Use the indicator of the non-Borel measurable subset of the Cantor set and compare it with the zero function on the Borel measure space. The two agree almost everywhere but only one is measurable there.",
+        "deps": [
+          "fs-ae-equality-with-a-measurable-function-does-not-imply-measurability"
+        ]
+      },
+      {
+        "id": "cex-a-function-can-have-measurable-level-sets-without-being-measurable",
+        "kind": "counterexample",
+        "title": "A function can have measurable level sets without being measurable",
+        "strategy": "Use the Vitali-set-based injection from the A-page false statement and compute both its singleton fibers and the nonmeasurable interval preimage that defeats measurability.",
+        "deps": [
+          "fs-measurable-level-sets-do-not-imply-measurability"
+        ]
+      }
+    ]
+  }
+]

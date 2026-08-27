@@ -55,6 +55,7 @@ parts:
       - the-galois-correspondence
       - frattini-subgroups-and-the-burnside-basis-theorem
       - finite-fields-and-cyclotomic-extensions
+      - the-fundamental-theorem-of-algebra
       - solvability-by-radicals-and-kummer-theory
 ---
 
@@ -117,10 +118,9 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 A split extension is a semidirect product, so actions by automorphisms assemble finite
 groups from normal pieces. Sylow's theorems turn divisibility of $|G|$ into existence,
 conjugacy and counting of $p$-subgroups, and nilpotence with the Frattini subgroup sharpens
-that picture for finite $p$-groups. On the Galois side, intermediate fields match
-subgroups, Frobenius controls finite fields, normal bases make cyclic actions explicit, and
-roots of unity with cyclotomic polynomials produce abelian extensions. Norm, trace and the
-trace form then translate finite separable extensions into linear algebra, Hilbert 90 and
-Lagrange resolvents identify cyclic extensions through Kummer and Artin-Schreier data, and
-adjoining radicals becomes equivalent to solvability of the Galois group, yielding
-Abel-Ruffini for the general polynomial.
+that picture for finite $p$-groups. The Galois correspondence translates subgroup data into
+intermediate fields, finite fields and cyclotomic polynomials supply explicit abelian
+extensions, and solvability by radicals becomes a condition on the Galois group. The new
+endpoint is Artin's algebraic proof of the fundamental theorem of algebra: odd-degree real
+roots, splitting fields and Sylow $2$-subgroups force $\mathbb C$ to be algebraically
+closed, yielding the standard factorisation results over $\mathbb C$ and $\mathbb R$.

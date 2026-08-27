@@ -2102,11 +2102,16 @@ CA-13); it is bounded by $\min\varphi$ and $\max\varphi$;
 which is regular** (landmark), uniquely; the exterior-disc and exterior-cone
 barrier criteria; **a boundary point whose connected component in
 $\partial\Omega$ is not a singleton is regular** (the planar logarithmic
-barrier theorem); hence every bounded simply connected proper plane domain is
+barrier theorem); every bounded simply connected proper plane domain is
 regular; and **conformal transport of continuous boundary data** only when the
-conformal bijection extends to a homeomorphism of the closures. The proof says
-boundary component, not complementary component, and the last theorem does not
-silently invoke Carathéodory or prime ends.
+conformal bijection extends to a homeomorphism of the closures. Keep the
+boundary-component theorem as its own result. For the simply connected
+corollary, the accepted proof route is instead the sourced complementary-
+component bridge: planar simple connectivity makes the complement in the
+Riemann sphere connected, and boundedness puts both the chosen boundary point
+and infinity in that component. Khoruzhenko's Theorem 52 independently states
+the same regularity endpoint. The last theorem does not silently invoke
+Carathéodory or prime ends.
 The logarithmic-capacity Wiener criterion is deferred to fine potential theory
 and is not smuggled into this proof.
 

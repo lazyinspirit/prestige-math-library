@@ -16,7 +16,7 @@ import {
 // which headings are legal. In particular, a counterexample item's citable
 // claim is `Statement refuted`; `Counterexample` is its witness and has never
 // been a valid source_section in proof-contract.mjs.
-const CITABLE_HEADINGS = ['Statement', 'Statement refuted', 'Definition', 'Example'];
+const CITABLE_HEADINGS = ['Statement', 'Statement refuted', 'Definition', 'Example', 'Remark'];
 
 function itemPath(id) { return `items/${id}.md`; }
 

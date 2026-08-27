@@ -1,0 +1,421 @@
+[
+  {
+    "order": 329,
+    "id": "subharmonic-functions-and-the-dirichlet-problem",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Subharmonic Functions and the Dirichlet Problem",
+    "companion": "subharmonic-functions-and-the-dirichlet-problem-examples",
+    "requires": [
+      "harmonic-functions-and-the-poisson-integral",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "the-topology-of-euclidean-space"
+    ],
+    "items": [
+      {
+        "id": "rem-standard-upper-semicontinuous-subharmonic-convention",
+        "kind": "remark",
+        "title": "This page uses the standard upper-semicontinuous subharmonic convention",
+        "strategy": "Record that plane subharmonic functions here take values in [-infinity, infinity), are upper semicontinuous, and are not allowed to be identically -infinity on a connected component. Explain that this is the convention needed for log|f| and for Perron's method, while the continuous real-valued convention in older potential-theory sources is treated as a special case rather than as a competing definition.",
+        "deps": [
+          "def-plane-harmonic-function"
+        ]
+      },
+      {
+        "id": "def-plane-subharmonic-function",
+        "kind": "definition",
+        "title": "Subharmonic functions on plane domains",
+        "deps": []
+      },
+      {
+        "id": "def-plane-superharmonic-function",
+        "kind": "definition",
+        "title": "Superharmonic functions on plane domains",
+        "deps": [
+          "def-plane-subharmonic-function"
+        ]
+      },
+      {
+        "id": "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined",
+        "kind": "lemma",
+        "title": "Upper semicontinuous functions are Borel and their circle averages are defined",
+        "strategy": "For an upper semicontinuous u, the sets {u < a} are open and the sets {u >= a} are closed, so u is Borel-measurable. On a compact circle the upper semicontinuity gives a finite upper bound, so the only possible improper value in the average is -infinity, which is allowed by the page convention.",
+        "deps": []
+      },
+      {
+        "id": "thm-harmonic-majorant-characterization-of-plane-subharmonicity",
+        "kind": "theorem",
+        "title": "Subharmonicity is equivalent to harmonic comparison on compactly contained discs",
+        "strategy": "Use the Poisson solution of the disc Dirichlet problem to convert the circle submean inequality into comparison with the harmonic extension of the boundary values. For the converse, compare u(z0) with the harmonic majorant solving the disc boundary problem for u|partial D and read off the center value from the Poisson formula.",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined",
+          "def-plane-harmonic-function",
+          "def-poisson-integral-on-the-disc",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "thm-c-two-characterization-of-plane-subharmonicity",
+        "kind": "theorem",
+        "title": "A C^2 function is subharmonic exactly when its Laplacian is nonnegative",
+        "strategy": "For the forward direction, apply the submean inequality to a Taylor expansion of the circle average. For the reverse direction, solve the disc Dirichlet problem for the boundary values of u and apply the harmonic-comparison characterization to the difference between u and that harmonic extension.",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity"
+        ]
+      },
+      {
+        "id": "thm-plane-subharmonic-functions-are-locally-integrable",
+        "kind": "theorem",
+        "title": "Plane subharmonic functions are locally integrable",
+        "strategy": "On a compactly contained disc, compare the function with the harmonic majorant of its boundary values and use the submean inequality to bound its positive part by a finite boundary average. Upper semicontinuity on compact circles supplies the remaining local bound needed to conclude integrability on smaller discs.",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined",
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity"
+        ]
+      },
+      {
+        "id": "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+        "kind": "theorem",
+        "title": "The logarithm of the modulus of a holomorphic function is subharmonic",
+        "strategy": "Away from the zeros of f, write log|f| as the real part of a holomorphic logarithm and use the C^2 criterion. Near a zero, factor f(z)=(z-a)^m g(z) with g(a) nonzero and combine the harmonicity of log|g| with the standard logarithmic singularity of m log|z-a|.",
+        "deps": [
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-zero-order-factorization-holomorphic-function",
+          "thm-logarithm-derivative-and-integral"
+        ]
+      },
+      {
+        "id": "cor-modulus-powers-of-holomorphic-functions-are-subharmonic",
+        "kind": "corollary",
+        "title": "Positive powers of the modulus of a holomorphic function are subharmonic",
+        "strategy": "Use the harmonic-majorant form of subharmonicity. If h majorizes log|f| on a disc, then exp(ph) majorizes |f|^p there, and the convexity of the exponential preserves the boundary comparison.",
+        "deps": [
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic",
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity"
+        ]
+      },
+      {
+        "id": "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+        "kind": "lemma",
+        "title": "Positive linear combinations and finite maxima preserve subharmonicity",
+        "strategy": "For positive linear combinations, add the submean inequalities termwise. For a finite maximum, solve the harmonic comparison problem on a small disc and observe that the maximum of functions dominated by the same harmonic majorant is still dominated by it.",
+        "deps": [
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity"
+        ]
+      },
+      {
+        "id": "thm-decreasing-limit-theorem-for-plane-subharmonic-functions",
+        "kind": "theorem",
+        "title": "A decreasing limit of plane subharmonic functions is subharmonic or identically -infinity",
+        "strategy": "A decreasing limit of upper semicontinuous functions is upper semicontinuous. On a fixed circle, add one constant large enough to make the sequence nonnegative there and apply monotone convergence to the submean inequalities; if every interior value diverges to -infinity then the limit is the excluded trivial case.",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined",
+          "thm-monotone-convergence"
+        ]
+      },
+      {
+        "id": "def-upper-semicontinuous-regularization",
+        "kind": "definition",
+        "title": "Upper-semicontinuous regularization",
+        "deps": []
+      },
+      {
+        "id": "thm-upper-envelope-theorem-for-plane-subharmonic-functions",
+        "kind": "theorem",
+        "title": "The upper-semicontinuous regularization of a locally bounded-above subharmonic supremum is subharmonic",
+        "strategy": "Take finite maxima of the family to obtain an increasing net of subharmonic minorants, regularize the pointwise supremum, and use the harmonic-comparison characterization on each compactly contained disc. Local boundedness above is the hypothesis that keeps the envelope finite and prevents the raw supremum from leaving the class.",
+        "deps": [
+          "def-upper-semicontinuous-regularization",
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity"
+        ]
+      },
+      {
+        "id": "thm-maximum-principle-for-plane-subharmonic-functions",
+        "kind": "theorem",
+        "title": "A plane subharmonic function with an interior maximum is constant on its component",
+        "strategy": "Apply the submean inequality on discs centered at a maximum point. Equality of the center value with the boundary average forces equality almost everywhere on each circle, and upper semicontinuity then propagates the constant value across the connected component.",
+        "deps": [
+          "def-plane-subharmonic-function",
+          "lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined"
+        ]
+      },
+      {
+        "id": "def-poisson-modification-of-a-subharmonic-function",
+        "kind": "definition",
+        "title": "Poisson modification on a compactly contained disc",
+        "deps": [
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "lem-gluing-lemma-for-plane-subharmonic-functions",
+        "kind": "lemma",
+        "title": "Subharmonic pieces glue across a boundary under the limsup inequality",
+        "strategy": "Use the harmonic-comparison form of subharmonicity on discs lying wholly inside one side or the other. On discs meeting the seam, the limsup boundary condition prevents the harmonic majorant from being violated when the two pieces are compared through shrinking circles.",
+        "deps": [
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity"
+        ]
+      },
+      {
+        "id": "thm-poisson-modification-preserves-subharmonicity-and-majorizes",
+        "kind": "theorem",
+        "title": "Poisson modification is subharmonic and majorizes the original function",
+        "strategy": "Inside the modified disc the function is harmonic by construction; outside it is the original subharmonic function. The gluing lemma handles the seam, and the harmonic boundary-value solution majorizes the original function by the harmonic-comparison characterization.",
+        "deps": [
+          "def-poisson-modification-of-a-subharmonic-function",
+          "lem-gluing-lemma-for-plane-subharmonic-functions",
+          "thm-harmonic-majorant-characterization-of-plane-subharmonicity",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "def-perron-family-for-the-plane-dirichlet-problem",
+        "kind": "definition",
+        "title": "The Perron lower family for continuous boundary data",
+        "deps": [
+          "def-plane-subharmonic-function"
+        ]
+      },
+      {
+        "id": "def-perron-envelope-for-the-plane-dirichlet-problem",
+        "kind": "definition",
+        "title": "The Perron envelope and its regularization",
+        "deps": [
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "def-upper-semicontinuous-regularization"
+        ]
+      },
+      {
+        "id": "lem-perron-family-is-nonempty-and-bounded",
+        "kind": "lemma",
+        "title": "The Perron family is nonempty and uniformly bounded by the boundary data",
+        "strategy": "Constant functions below min(phi) and above max(phi) show nonemptiness and provide trivial barriers for the lower family. The subharmonic maximum principle then keeps every lower function between the global minimum and maximum of the boundary datum.",
+        "deps": [
+          "def-perron-family-for-the-plane-dirichlet-problem",
+          "thm-maximum-principle-for-plane-subharmonic-functions"
+        ]
+      },
+      {
+        "id": "thm-perron-envelope-is-harmonic",
+        "kind": "theorem",
+        "title": "The regularized Perron envelope is harmonic",
+        "strategy": "At a chosen interior point, approximate the envelope from below by lower functions, replace each on a small disc by its Poisson modification, and take finite maxima to keep them in the lower family. Harnack convergence of the harmonic lifts produces a harmonic function on the disc that agrees with the envelope at the center; varying the center gives harmonicity everywhere.",
+        "deps": [
+          "def-perron-envelope-for-the-plane-dirichlet-problem",
+          "lem-perron-family-is-nonempty-and-bounded",
+          "def-poisson-modification-of-a-subharmonic-function",
+          "thm-poisson-modification-preserves-subharmonicity-and-majorizes",
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-harnack-convergence-principle-for-plane-harmonic-functions",
+          "thm-upper-envelope-theorem-for-plane-subharmonic-functions"
+        ]
+      },
+      {
+        "id": "def-barrier-and-regular-boundary-point",
+        "kind": "definition",
+        "title": "Barriers and regular boundary points",
+        "deps": [
+          "def-plane-subharmonic-function"
+        ]
+      },
+      {
+        "id": "thm-barrier-characterization-of-regular-boundary-points",
+        "kind": "theorem",
+        "title": "A boundary point is regular exactly when it admits a barrier",
+        "strategy": "A barrier squeezes every Perron lower function below the boundary datum at the marked point, forcing the Perron solution to attain the correct limit there. Conversely, solve the Perron problem for a carefully chosen bump datum that vanishes only at the point and turn the resulting harmonic solution into a negative subharmonic barrier.",
+        "deps": [
+          "def-barrier-and-regular-boundary-point",
+          "thm-perron-envelope-is-harmonic",
+          "thm-maximum-principle-for-plane-subharmonic-functions"
+        ]
+      },
+      {
+        "id": "thm-perron-solves-dirichlet-on-regular-plane-domains",
+        "kind": "theorem",
+        "title": "On a regular bounded plane domain, Perron's method solves the Dirichlet problem",
+        "strategy": "The Perron envelope is harmonic by the previous theorem. If every boundary point is regular, the barrier characterization forces the harmonic envelope to approach the boundary datum pointwise on the whole boundary, and published Dirichlet uniqueness supplies the uniqueness clause.",
+        "deps": [
+          "thm-perron-envelope-is-harmonic",
+          "thm-barrier-characterization-of-regular-boundary-points",
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "thm-exterior-disc-and-exterior-cone-points-are-regular",
+        "kind": "theorem",
+        "title": "Exterior disc points and exterior cone points are regular",
+        "strategy": "For an exterior disc point, use a translated logarithmic potential as an explicit barrier. For an exterior cone point, straighten the cone, apply a power map that turns it into a half-plane, and take the negative real part there to obtain a barrier after pulling back.",
+        "deps": [
+          "thm-barrier-characterization-of-regular-boundary-points"
+        ]
+      },
+      {
+        "id": "lem-local-subharmonic-peak-function-globalizes",
+        "kind": "lemma",
+        "title": "A local strict subharmonic peak function globalizes",
+        "strategy": "Follow Boas §7.6.3. Shrink the local neighborhood, scale the local peak function so it stays below -1 on the seam circle, and define the global candidate by taking the maximum of that scaled local function with the constant -1. The maximum construction preserves subharmonicity and keeps the required boundary upper limits, so the result is a global peak function.",
+        "deps": [
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity"
+        ]
+      },
+      {
+        "id": "lem-weak-local-subharmonic-peak-function-implies-regularity",
+        "kind": "lemma",
+        "title": "A weak local subharmonic peak function implies regularity",
+        "strategy": "Use the Bouligand refinement quoted in Boas §7.6.4: a weak local subharmonic peak function upgrades to a strict local one. Then apply the locality lemma to globalize the peak function and invoke the barrier characterization to conclude regularity.",
+        "deps": [
+          "lem-local-subharmonic-peak-function-globalizes",
+          "thm-barrier-characterization-of-regular-boundary-points"
+        ]
+      },
+      {
+        "id": "lem-boundary-point-whose-complementary-component-contains-another-point-is-regular",
+        "kind": "lemma",
+        "title": "A boundary point whose complementary component contains another point is regular",
+        "strategy": "Follow the peak-function construction in Boas §7.7. Send the boundary point to 0 and a second point of the same complementary component to infinity by a linear fractional map. On the transformed slit complement choose a holomorphic branch of log and use Re(1/log z) as a weak local harmonic peak function. The previous lemma then upgrades that local weak peak data to regularity at the boundary point.",
+        "deps": [
+          "lem-weak-local-subharmonic-peak-function-implies-regularity"
+        ]
+      },
+      {
+        "id": "thm-nonsingleton-boundary-component-is-regular",
+        "kind": "theorem",
+        "title": "A point on a nonsingleton boundary component is regular",
+        "strategy": "Use the same logarithmic peak-function route as in the complementary-component lemma, now in the boundary-component setting recorded by Khoruzhenko's Theorem 53. Once the corresponding local weak peak function is in hand, the previously declared weak-local-to-regularity bridge yields the conclusion.",
+        "deps": [
+          "lem-weak-local-subharmonic-peak-function-implies-regularity"
+        ]
+      },
+      {
+        "id": "cor-simply-connected-proper-plane-domains-are-regular",
+        "kind": "corollary",
+        "title": "Every bounded simply connected proper plane domain is regular",
+        "strategy": "Keep the current source-backed complementary-component route explicit as a scoped pushback against the still-live CA-14 design route until a separate sourced no-singleton-boundary-component bridge exists. In Boas's planar working definition, a simply connected domain is one whose complement in the extended plane is connected. For a bounded proper domain that connected complementary component contains both the chosen boundary point and infinity, so the previous lemma applies at every boundary point. Khoruzhenko's Theorem 52 confirms this same endpoint directly, while thm-nonsingleton-boundary-component-is-regular remains a separately scaffolded theorem rather than the load-bearing route for this corollary on current bytes.",
+        "deps": [
+          "lem-boundary-point-whose-complementary-component-contains-another-point-is-regular"
+        ]
+      },
+      {
+        "id": "thm-conformal-transport-of-plane-dirichlet-solutions",
+        "kind": "theorem",
+        "title": "A conformal homeomorphism of closures transports continuous Dirichlet solutions",
+        "strategy": "Compose the boundary datum on the target with the inverse boundary homeomorphism, solve the regular-domain Dirichlet problem on the source, and then compose the harmonic solution with the inverse conformal map. Conformal invariance preserves harmonicity in the interior, the closure homeomorphism gives the right boundary limits, and uniqueness identifies the transported solution.",
+        "deps": [
+          "thm-perron-solves-dirichlet-on-regular-plane-domains",
+          "thm-conformal-invariance-of-plane-harmonicity",
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem",
+          "def-homeomorphism-and-open-maps"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 330,
+    "id": "subharmonic-functions-and-the-dirichlet-problem-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Subharmonic Functions and the Dirichlet Problem — Examples",
+    "companion": "subharmonic-functions-and-the-dirichlet-problem",
+    "requires": [
+      "subharmonic-functions-and-the-dirichlet-problem"
+    ],
+    "items": [
+      {
+        "id": "ex-basic-plane-subharmonic-functions",
+        "kind": "example",
+        "title": "The functions |z|^2 and log|z| are subharmonic",
+        "strategy": "Compute the Laplacian of |z|^2 directly and invoke the C^2 criterion. For log|z|, use the dedicated logarithmic-modulus theorem with the holomorphic function f(z)=z.",
+        "deps": [
+          "thm-c-two-characterization-of-plane-subharmonicity",
+          "thm-log-modulus-of-a-holomorphic-function-is-subharmonic"
+        ]
+      },
+      {
+        "id": "ex-poisson-modification-of-a-radial-quadratic-on-a-disc",
+        "kind": "example",
+        "title": "Poisson modification of |z|^2 on a concentric disc is constant there",
+        "strategy": "On the circle |z|=r the boundary values of |z|^2 are the constant r^2. The Poisson solution with constant boundary data is constant, so the modification replaces the inner disc by the harmonic function r^2 and leaves the outer annulus unchanged.",
+        "deps": [
+          "def-poisson-modification-of-a-subharmonic-function",
+          "thm-poisson-modification-preserves-subharmonicity-and-majorizes",
+          "thm-poisson-integral-solves-the-disc-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "ex-perron-solution-on-an-annulus-with-radial-data",
+        "kind": "example",
+        "title": "The Perron solution on an annulus with radial boundary data is affine in log|z|",
+        "strategy": "Write the candidate harmonic function as A log|z| + B, determine A and B from the two boundary circles, and then appeal to bounded-domain Dirichlet uniqueness. The example exhibits Perron's solution explicitly on a non-disc regular domain.",
+        "deps": [
+          "thm-perron-solves-dirichlet-on-regular-plane-domains",
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "ex-a-square-corner-has-an-explicit-barrier",
+        "kind": "example",
+        "title": "A corner of a square has an explicit barrier",
+        "strategy": "Translate and rotate the corner to the first quadrant and use the standard power-map barrier coming from an exterior cone. This computes the abstract geometric regularity criterion in a concrete polygonal case.",
+        "deps": [
+          "thm-exterior-disc-and-exterior-cone-points-are-regular",
+          "def-barrier-and-regular-boundary-point"
+        ]
+      },
+      {
+        "id": "cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum",
+        "kind": "counterexample",
+        "title": "The punctured disc has an irregular boundary point and a continuous datum with no harmonic solution",
+        "strategy": "Take boundary data equal to 0 on the unit circle and 1 at the puncture. Any bounded harmonic solution on the punctured disc would extend harmonically across the puncture by the published removable-singularity theorem, forcing the center value to agree with the circle limit and contradicting the prescribed datum.",
+        "deps": [
+          "thm-barrier-characterization-of-regular-boundary-points",
+          "thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions",
+          "cor-uniqueness-for-the-bounded-plane-dirichlet-problem"
+        ]
+      },
+      {
+        "id": "fs-every-bounded-plane-domain-has-a-dirichlet-solution",
+        "kind": "false-statement",
+        "title": "FALSE: every bounded plane domain admits a continuous harmonic solution for every continuous boundary datum",
+        "strategy": "Refute the universal claim by the punctured-disc datum from the previous counterexample. The failure is not a matter of smoothness or explicit formulas: the domain is bounded, yet one boundary point is irregular.",
+        "deps": [
+          "cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum"
+        ]
+      },
+      {
+        "id": "fs-the-perron-envelope-always-attains-the-boundary-data",
+        "kind": "false-statement",
+        "title": "FALSE: the Perron envelope always attains the boundary values",
+        "strategy": "Use the same punctured-disc datum. Perron's construction still produces a harmonic envelope on the interior, but regularity fails at the puncture, so the boundary limit there does not match the prescribed value.",
+        "deps": [
+          "cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum",
+          "thm-perron-envelope-is-harmonic"
+        ]
+      },
+      {
+        "id": "fs-a-subharmonic-function-can-attain-an-interior-maximum",
+        "kind": "false-statement",
+        "title": "FALSE: every subharmonic function attains a maximum somewhere in the interior",
+        "strategy": "The function |z|^2 on the unit disc is subharmonic and attains its maximum only on the boundary. This single witness refutes the universal claim and matches the maximum-principle theorem on the A page.",
+        "deps": [
+          "ex-basic-plane-subharmonic-functions",
+          "thm-maximum-principle-for-plane-subharmonic-functions"
+        ]
+      },
+      {
+        "id": "fs-the-pointwise-supremum-of-an-arbitrary-family-of-subharmonic-functions-is-subharmonic",
+        "kind": "false-statement",
+        "title": "FALSE: the raw pointwise supremum of an arbitrary family of subharmonic functions is subharmonic",
+        "strategy": "On the unit disc, each function u_n(z)=max(n Re z,-1) is subharmonic, but the pointwise supremum is -1 on the left half-disc, 0 on the imaginary axis, and +infinity on the right half-disc. The example shows exactly why local boundedness above and upper-semicontinuous regularization are load-bearing in the upper-envelope theorem.",
+        "deps": [
+          "lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity",
+          "thm-upper-envelope-theorem-for-plane-subharmonic-functions"
+        ]
+      }
+    ]
+  }
+]

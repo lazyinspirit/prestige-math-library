@@ -1,0 +1,2746 @@
+{
+  "version": 1,
+  "level": "frontier-20",
+  "scope": [
+    "thm-odd-degree-real-polynomial-has-a-real-root",
+    "cor-irreducible-real-polynomial-has-degree-one-or-even-degree",
+    "lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra",
+    "lem-quadratic-extension-in-characteristic-not-two-is-generated-by-a-square-root",
+    "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+    "thm-the-complex-numbers-are-algebraically-closed",
+    "cor-every-complex-polynomial-splits-into-linear-factors",
+    "cor-the-complex-numbers-are-an-algebraic-closure-of-the-reals",
+    "cor-the-algebraic-numbers-in-c-form-an-algebraic-closure-of-q",
+    "lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs",
+    "cor-irreducible-real-polynomials-have-degree-one-or-two",
+    "cor-every-real-polynomial-factors-into-linear-and-irreducible-quadratic-factors",
+    "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+    "ex-x-cubed-minus-two-over-r-and-c",
+    "ex-x-four-plus-one-factors-into-two-real-quadratics",
+    "ex-x-squared-plus-one-is-irreducible-over-r-and-split-over-c",
+    "ex-x-fifth-minus-x-minus-one-has-a-real-root",
+    "ex-x-fifth-minus-six-x-plus-three-is-not-solvable-by-radicals",
+    "fs-every-real-polynomial-has-a-real-root",
+    "fs-the-real-numbers-are-algebraically-closed",
+    "fs-every-irreducible-real-polynomial-has-degree-one",
+    "fs-every-irreducible-quintic-over-q-is-insoluble-by-radicals"
+  ],
+  "contracts": {
+    "thm-odd-degree-real-polynomial-has-a-real-root": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "Let $0\\ne f=\\sum_i a_i x^i\\in R[x]$. Its **degree** is the largest natural number $n$ for which $a_n\\ne0$, and its **leading coefficient** is $a_n$:\n\n$$ \\deg f:=\\max\\{i\\in\\mathbb N:a_i\\ne0\\},\\qquad \\operatorname{lc}(f):=a_{\\deg f}. $$\n\nThe maximum exists because the nonempty support is finite. The polynomial $f$ is **monic** when $\\operatorname{lc}(f)=1_R$. The zero polynomial has no degree and no leading coefficient. Accordingly, every degree statement below explicitly separates the zero polynomial rather than assigning it a formal degree.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $S:=\\sum_{i<n}|a_i|$ and $$ R:=1+\\frac{S}{|a_n|}. $$ Then $R>1$, and therefore $$ \\sum_{i<n}|a_i|R^i \\le SR^{n-1} < |a_n|R^n. $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The estimate in step 1.1 gives $$ \\left|\\sum_{i<n}a_iR^i\\right| \\le \\sum_{i<n}|a_i|R^i < |a_n|R^n. $$ Hence $f(R)=a_nR^n+\\sum_{i<n}a_iR^i$ has the same sign as $a_n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Because $n$ is odd, $(-R)^n=-R^n$. Also $$ \\left|\\sum_{i<n}a_i(-R)^i\\right| \\le \\sum_{i<n}|a_i|R^i < |a_n|R^n, $$ so $f(-R)=a_n(-R)^n+\\sum_{i<n}a_i(-R)^i$ has the opposite sign from $a_n$. Thus $f(-R)$ and $f(R)$ have opposite signs.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L1], the polynomial function $f$ is continuous on $[-R,R]$. Since step 2.2 shows that $0$ lies between $f(-R)$ and $f(R)$, [L2] gives a point $c \\in [-R,R]$ with $f(c)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Every odd-degree real polynomial has a real root (odd degree real polynomial has a real root) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement degree hypothesis, unpacked in fact F1, excludes the only zero-denominator boundary: the leading coefficient a_n is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works for the boundary case n=1 as well as for larger odd degrees."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Every odd-degree real polynomial has a real root (odd degree real polynomial has a real root) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the intermediate value theorem on the explicit endpoints -R and R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 records the existence of a root c in the closed interval [-R,R]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Every odd-degree real polynomial has a real root (odd degree real polynomial has a real root) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Every odd-degree real polynomial has a real root (odd degree real polynomial has a real root) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I reread the odd-degree real-root proof from current disk. The chosen R = 1 + S/|a_n| makes the leading term dominate the lower-degree tail, so f(R) has the sign of a_n and f(-R) the opposite sign because n is odd; IVT on [-R,R] then gives a real root. The n = 1 boundary and the nonzero leading-coefficient hypothesis are used exactly where needed, and I found no remaining gap or inaccurate citation."
+      }
+    },
+    "cor-irreducible-real-polynomial-has-degree-one-or-even-degree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-odd-degree-real-polynomial-has-a-real-root",
+          "source_section": "Statement",
+          "quote": "Let\n$$\nf(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_0 \\in \\mathbb R[x]\n$$\nhave odd degree $n \\ge 1$. Then there exists $c \\in \\mathbb R$ with $f(c)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.\n\nMore precisely, there is a unique $q\\in R[x]$ such that $f=q(x-a)+f(a)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $\\deg f$ is odd. Then [L1] gives $a \\in \\mathbb R$ with $f(a)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the linear polynomial $x-a$ divides $f$. Since $f$ is irreducible and $x-a$ is nonconstant, this forces $f$ to be associated to $x-a$, so $\\deg f=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore an irreducible real polynomial can have odd degree only in the linear case. If it is not linear, its degree is not odd and hence is even.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement concerns one irreducible polynomial f in R[x], so no empty-domain or empty-family branch arises."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 isolates the linear odd-degree boundary and proves deg f = 1 there."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial over $\\\\mathbb R$ has degree $1$ or an even degree (irreducible real polynomial has degree one or even degree) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I checked the current corollary directly against the odd-degree real-root theorem and the factor theorem. If an irreducible real polynomial had odd degree, it would have a real root a, hence a linear factor x-a; irreducibility then forces degree 1, and the only remaining case is even degree. The quantifiers and the linear-versus-even dichotomy are now stated and used correctly."
+      }
+    },
+    "lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-algebraically-closed-field",
+          "source_section": "Definition",
+          "quote": "A field $F$ is **algebraically closed** when every nonconstant polynomial $p\\in F[x]$ has a root in $F$: there is $\\lambda\\in F$ such that $p(\\lambda)=0$.\n\nThis definition concerns roots in the field itself. It does not assert here that any particular field, including $\\mathbb C$, is algebraically closed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomials-that-split-and-splitting-fields",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a field extension and let $0\\ne f\\in F[x]$ have degree $n$. The polynomial $f$ **splits over $E$** if there are $c\\in F^\\times$ and $\\alpha_1,\\ldots,\\alpha_n\\in E$ such that\n$$ f(x)=c\\prod_{j=1}^n(x-\\alpha_j) $$\nin $E[x]$, with repetitions allowed. When $n=0$, the product is empty, so every nonzero constant polynomial splits over $F$.\n\nFor a family $\\mathcal F$ of nonzero polynomials in $F[x]$, a **splitting field of $\\mathcal F$ over $F$** is a field extension $E/F$ such that every member of $\\mathcal F$ splits over $E$ and $E$ is generated over $F$ by all roots in $E$ of all polynomials in $\\mathcal F$. A splitting field of the one-element family $\\{f\\}$ is called a splitting field of $f$. For the empty family, the set of roots is empty and its splitting field is $F$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$\n(a+bi)+(u+vi)=(a+u)+(b+v)i,\n$$\n$$\n(a+bi)(u+vi)=(au-bv)+(av+bu)i.\n$$\nIf $a+bi\\ne0$, then\n$$\n(a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}.\n$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $g=u+iv$ with $u,v \\in \\mathbb R[x]$, and put $\\overline g:=u-iv$. Then $$ g\\overline g = u^2+v^2 \\in \\mathbb R[x]. $$ Because $g$ is nonconstant, so is $g\\overline g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the standing hypothesis and [L2], the real polynomial $g\\overline g$ splits over $\\mathbb C$, so it has a complex root $z$. In particular, $$ 0=(g\\overline g)(z)=g(z)\\overline g(z). $$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\mathbb C$ is a field by [F1], step 2.1 implies either $g(z)=0$ or $\\overline g(z)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $g(z)=0$ then $g$ already has a root in $\\mathbb C$. If $\\overline g(z)=0$, then conjugating that equality and using the conjugation law from [F1] gives $g(\\overline z)=0$. Thus $g$ has a root in $\\mathbb C$ in either case.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The polynomial $g \\in \\mathbb C[x]$ was arbitrary. Therefore every nonconstant polynomial over $\\mathbb C$ has a root in $\\mathbb C$, and [L1] makes $\\mathbb C$ algebraically closed.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement imposes n >= 1 and positive multiplicities m_j, so step 1.1 necessarily has at least one root class and a nonempty indexed factor family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a complex root z of the split real polynomial g g-bar."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\\\mathbb C$ (real polynomial splitting suffices for the fundamental theorem of algebra) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-quadratic-extension-in-characteristic-not-two-is-generated-by-a-square-root": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-evaluation-kernel-and-minimal-polynomial",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a field extension and $a\\in K$. Evaluation is the unique\n$F$-algebra homomorphism\n$$\\operatorname{ev}_a:F[x]\\longrightarrow K,\\qquad f\\longmapsto f(a).$$\nIf $a$ is transcendental, its kernel is zero. If $a$ is algebraic, there is a\nunique monic irreducible polynomial $m_a\\in F[x]$ such that\n$$\\ker(\\operatorname{ev}_a)=(m_a),$$\nand, for every $f\\in F[x]$,\n$$f(a)=0\\quad\\Longleftrightarrow\\quad m_a\\mid f.$$\nThe polynomial $m_a$ is the **minimal polynomial** of $a$ over $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a field extension and let $a\\in K$ be algebraic with minimal\npolynomial $m_a$ of degree $n$. Evaluation induces an $F$-isomorphism\n$$F[x]/(m_a)\\cong F(a),\\qquad f+(m_a)\\longmapsto f(a).$$\nMoreover, every element of $F(a)$ has a unique expression\n$$c_0+c_1a+\\cdots+c_{n-1}a^{n-1},\\qquad c_j\\in F.$$\nThus $1,a,\\ldots,a^{n-1}$ is the **power basis**, and the **degree** of the\nsimple extension is $[F(a):F]=n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tower-law-for-finite-field-extensions",
+          "source_section": "Statement",
+          "quote": "Let $F\\subseteq K\\subseteq L$ be fields. If $K/F$ and $L/K$ are finite, then $L/F$ is finite and\n\n$$[L:F]=[L:K][K:F].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $\\alpha \\in E \\setminus F$. Then $F \\subsetneq F(\\alpha) \\subseteq E$. Since $[E:F]=2$, fact [L2] forces $[F(\\alpha):F]=2$ and hence $E=F(\\alpha)$. Therefore [L1] gives\n$$\nm_\\alpha(x)=x^2+bx+c\n$$\nwith $b,c \\in F$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\operatorname{char}F \\ne 2$, the element $2$ is invertible in $F$. Put $$ \\delta:=2\\alpha+b. $$ Using $m_\\alpha(\\alpha)=0$, $$ \\delta^2 = 4\\alpha^2+4b\\alpha+b^2 = b^2-4c \\in F. $$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Also $$ \\alpha=\\frac{\\delta-b}{2}, $$ so $F(\\alpha)=F(\\delta)$. Therefore $$ E=F(\\alpha)=F(\\delta)=F(\\sqrt d) $$ with $d:=\\delta^2 \\in F$. If $d$ were already a square in $F$, then $\\delta \\in F$ and the displayed formula would give $\\alpha \\in F$, contradicting step 1.1. Hence $d$ may be chosen nonsquare.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 starts from the exact boundary degree [E:F]=2 and identifies a quadratic minimal polynomial."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses an element alpha outside the base field to generate the quadratic extension."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim A quadratic extension in characteristic not $2$ is obtained by adjoining a square root (quadratic extension in characteristic not two is generated by a square root) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I reread this lemma after the 6b tower-law repair. The current proof now justifies that alpha not in F inside a degree-2 extension gives [F(alpha):F] = 2 and E = F(alpha), then completes the square via delta = 2 alpha + b and proves the chosen d is nonsquare by contradiction. The characteristic-not-2 hypothesis is used exactly for dividing by 2, and the field-degree chain closes cleanly."
+      }
+    },
+    "prop-algebraically-closed-splitting-and-finite-extension-criteria": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-algebraically-closed-field",
+          "source_section": "Definition",
+          "quote": "A field $F$ is **algebraically closed** when every nonconstant polynomial $p\\in F[x]$ has a root in $F$: there is $\\lambda\\in F$ such that $p(\\lambda)=0$.\n\nThis definition concerns roots in the field itself. It does not assert here that any particular field, including $\\mathbb C$, is algebraically closed.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomials-that-split-and-splitting-fields",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a field extension and let $0\\ne f\\in F[x]$ have degree $n$. The polynomial $f$ **splits over $E$** if there are $c\\in F^\\times$ and $\\alpha_1,\\ldots,\\alpha_n\\in E$ such that\n$$ f(x)=c\\prod_{j=1}^n(x-\\alpha_j) $$\nin $E[x]$, with repetitions allowed. When $n=0$, the product is empty, so every nonzero constant polynomial splits over $F$.\n\nFor a family $\\mathcal F$ of nonzero polynomials in $F[x]$, a **splitting field of $\\mathcal F$ over $F$** is a field extension $E/F$ such that every member of $\\mathcal F$ splits over $E$ and $E$ is generated over $F$ by all roots in $E$ of all polynomials in $\\mathcal F$. A splitting field of the one-element family $\\{f\\}$ is called a splitting field of $f$. For the empty family, the set of roots is empty and its splitting field is $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.\n\nMore precisely, there is a unique $q\\in R[x]$ such that $f=q(x-a)+f(a)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-element-algebraic-iff-simple-extension-finite",
+          "source_section": "Statement",
+          "quote": "For an element $a$ of an extension $K/F$,\n\n$$a\\text{ is algebraic over }F\\quad\\Longleftrightarrow\\quad F(a)/F\\text{ is finite}.$$\n\nIf $a$ is algebraic with minimal polynomial of degree $n$, then $[F(a):F]=n$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-every-nonconstant-polynomial-has-a-root-in-an-extension",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial $f\\in F[x]$ has a root in some field extension\nof $F$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-finite-field-extensions-are-algebraic",
+          "source_section": "Statement",
+          "quote": "Every finite field extension $K/F$ is algebraic: each $a\\in K$ is a root of a nonzero polynomial in $F[t]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-evaluation-kernel-and-minimal-polynomial",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a field extension and $a\\in K$. Evaluation is the unique\n$F$-algebra homomorphism\n$$\\operatorname{ev}_a:F[x]\\longrightarrow K,\\qquad f\\longmapsto f(a).$$\nIf $a$ is transcendental, its kernel is zero. If $a$ is algebraic, there is a\nunique monic irreducible polynomial $m_a\\in F[x]$ such that\n$$\\ker(\\operatorname{ev}_a)=(m_a),$$\nand, for every $f\\in F[x]$,\n$$f(a)=0\\quad\\Longleftrightarrow\\quad m_a\\mid f.$$\nThe polynomial $m_a$ is the **minimal polynomial** of $a$ over $F$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $F$ is algebraically closed, and let $f \\in F[x]$ be nonconstant. By [L1] it has a root $a \\in F$, so [L3] gives $f=(x-a)q$ for some $q \\in F[x]$. Repeating the same argument on $q$ while it remains nonconstant writes $f$ as a product of linear factors, so $f$ splits over $F$ in the sense of [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume every nonconstant polynomial in $F[x]$ splits over $F$, and let $E/F$ be finite. For any $\\alpha \\in E$, fact [L6] makes $\\alpha$ algebraic over $F$. If $\\alpha \\notin F$, let $m_\\alpha$ be its minimal polynomial over $F$. Then [L7] makes $m_\\alpha$ a nonconstant irreducible polynomial with $m_\\alpha(\\alpha)=0$. By the hypothesis, $m_\\alpha$ splits over $F$ and therefore has a root $a \\in F$. Fact [L3] gives $x-a$ as a linear factor of $m_\\alpha$, contradicting irreducibility. Hence every $\\alpha \\in E$ already lies in $F$, so $E=F$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L6",
+            "L7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $F$ has no nontrivial finite extension, and let $f \\in F[x]$ be nonconstant. By [L5] there is an extension $K/F$ and an element $\\alpha \\in K$ with $f(\\alpha)=0$. Then $\\alpha$ is algebraic over $F$, so [L4] makes $F(\\alpha)/F$ finite. By the hypothesis this finite extension must be trivial, hence $\\alpha \\in F$. Therefore every nonconstant polynomial over $F$ has a root in $F$, and [L1] says that $F$ is algebraically closed.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1, 1.2, and 1.3 prove $(1)\\Rightarrow(2)\\Rightarrow(3)\\Rightarrow(1)$, so the three conditions are equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension (algebraically closed splitting and finite extension criteria) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension (algebraically closed splitting and finite extension criteria) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension (algebraically closed splitting and finite extension criteria) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension (algebraically closed splitting and finite extension criteria) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension (algebraically closed splitting and finite extension criteria) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a root a in F, and step 1.3 chooses an extension root alpha supplied by the extension theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 prove the forward implications from algebraic closedness to splitting and then to triviality of finite extensions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.3 proves the converse implication from the absence of nontrivial finite extensions back to algebraic closedness."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I reread all three directions of the equivalence on current bytes. The 1=>2 branch repeatedly factors off linear roots, the 2=>3 branch now cites the minimal-polynomial theorem exactly where irreducibility and divisibility are used, and the 3=>1 branch reduces a root in an extension to a finite simple extension over F. I found no remaining false implication, missing hypothesis, or citation drift."
+      }
+    },
+    "thm-the-complex-numbers-are-algebraically-closed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra",
+          "source_section": "Statement",
+          "quote": "Assume every nonconstant polynomial in $\\mathbb R[x]$ splits over $\\mathbb C$.\nThen $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "1.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-splitting-fields-exist-for-finite-families",
+          "source_section": "Statement",
+          "quote": "Let $f_1,\\ldots,f_m\\in F[x]$ be nonzero, where $m\\in\\mathbb N$. A splitting field of the product\n$$ h=\\prod_{j=1}^m f_j $$\nis a splitting field of the family $\\{f_1,\\ldots,f_m\\}$. Hence every finite family of nonzero polynomials has a splitting field. For $m=0$, $h=1$ and the splitting field is $F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-algebraic-splitting-extensions-are-normal",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be algebraic. If $E$ is a splitting field over $F$ of a nonzero polynomial $f\\in F[x]$, then $E/F$ is normal.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "source_section": "Statement",
+          "quote": "Every field of characteristic zero is perfect. Every finite field is perfect,\nand every algebraically closed field is perfect.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "source_section": "Statement",
+          "quote": "If $K/F$ is algebraic and $F$ is perfect, then $K/F$ is separable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-fundamental-theorem-of-finite-galois-theory",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be finite Galois and let $G=\\operatorname{Gal}(K/F)$. The assignments $H\\mapsto K^H$ and $E\\mapsto\\operatorname{Gal}(K/E)$ are mutually inverse inclusion-reversing bijections between subgroups $H\\le G$ and intermediate fields $F\\subseteq E\\subseteq K$. Moreover,\n\n$$[K:K^H]=|H|\\quad\\text{and}\\quad [K^H:F]=[G:H].$$",
+          "uses": [
+            "1.3",
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-tower-law-for-finite-field-extensions",
+          "source_section": "Statement",
+          "quote": "Let $F\\subseteq K\\subseteq L$ be fields. If $K/F$ and $L/K$ are finite, then $L/F$ is finite and\n\n$$[L:F]=[L:K][K:F].$$",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-sylow-first-theorem",
+          "source_section": "Statement",
+          "quote": "Let $G$ be finite, let $p$ be prime, and write $|G|=p^am$ with $p\\nmid m$. Then $G$ has a subgroup of order $p^a$, hence a Sylow $p$-subgroup ([[def-sylow-p-subgroup]]). See [[def-sylow-p-subgroup]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-index-p-subgroup-existence-in-finite-p-groups",
+          "source_section": "Statement",
+          "quote": "Every nontrivial finite $p$-group has a normal subgroup of index $p$. See [[thm-finite-p-groups-are-nilpotent]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-every-complex-number-has-a-square-root",
+          "source_section": "Statement",
+          "quote": "Every $z=a+bi\\in\\mathbb C$ has a square root. If $b\\ne0$, one square root is\n$$u+vi,\\qquad u=\\sqrt{\\frac{|z|+a}{2}},\\qquad v=\\frac{b}{2u}.$$\nIf $b=0$, one may take $\\sqrt a$ when $a\\ge0$, and\n$i\\sqrt{-a}$ when $a<0$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "cor-universal-property-of-the-complex-numbers",
+          "source_section": "Statement",
+          "quote": "Let $L/\\mathbb R$ be a field extension and let $j\\in L$ satisfy $j^2=-1$.\nThere is a unique field homomorphism $\\mathbb C\\to L$ fixing $\\mathbb R$ and\nsending $i$ to $j$. Its image is $\\mathbb R[j]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "lem-quadratic-extension-in-characteristic-not-two-is-generated-by-a-square-root",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be a field extension with $[E:F]=2$ and $\\operatorname{char}F \\ne 2$.\nThen there is $d \\in F$ such that $E=F(\\sqrt d)$. In fact $d$ may be chosen to\nbe a nonsquare in $F$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L12",
+          "source": "cor-irreducible-real-polynomial-has-degree-one-or-even-degree",
+          "source_section": "Statement",
+          "quote": "If $f \\in \\mathbb R[x]$ is irreducible, then $\\deg f = 1$ or $\\deg f$ is even.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L13",
+          "source": "thm-finitely-generated-algebraic-extensions-are-finite",
+          "source_section": "Statement",
+          "quote": "If $a_1,\\ldots,a_r$ are algebraic over $F$, then $F(a_1,\\ldots,a_r)/F$ is finite.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L14",
+          "source": "cor-element-algebraic-iff-simple-extension-finite",
+          "source_section": "Statement",
+          "quote": "For an element $a$ of an extension $K/F$,\n\n$$a\\text{ is algebraic over }F\\quad\\Longleftrightarrow\\quad F(a)/F\\text{ is finite}.$$\n\nIf $a$ is algebraic with minimal polynomial of degree $n$, then $[F(a):F]=n$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], it is enough to prove that every nonconstant polynomial in $\\mathbb R[x]$ splits over $\\mathbb C$. Fix such a polynomial $f \\in \\mathbb R[x]$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "suffices: split every nonconstant real polynomial over C"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $h:=f(x)(x^2+1)$. By [L2], choose a splitting field $E/\\mathbb R$ of $h$. The roots of $h$ are algebraic over $\\mathbb R$, and $E$ is generated by finitely many of them, so [L13] makes $E/\\mathbb R$ finite. Because $E$ is a splitting field of $h$, [L3] makes it normal, and [L4] makes it separable. Thus $E/\\mathbb R$ is finite Galois.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L13",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $G:=\\operatorname{Gal}(E/\\mathbb R)$. By [L7], choose a Sylow $2$-subgroup $H \\le G$, and put $M:=E^H$. Then [L5] gives $$ [M:\\mathbb R]=[G:H], $$ which is odd by the definition of a Sylow $2$-subgroup.",
+          "step": "1.3",
+          "inputs": [
+            "L5",
+            "L7",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $x^2+1$ splits in $E$, choose $j \\in E$ with $j^2=-1$. By [L10], there is a unique real-field embedding $\\iota:\\mathbb C \\to E$ sending $i$ to $j$. Identify $\\mathbb C$ with its image, so that $$ \\mathbb R \\subseteq \\mathbb C \\subseteq E. $$",
+          "step": "2.1",
+          "inputs": [
+            "L10",
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\alpha \\in M$. Since $\\mathbb R \\subseteq \\mathbb R(\\alpha) \\subseteq M$, the tower law [L6] shows that $[\\mathbb R(\\alpha):\\mathbb R]$ divides $[M:\\mathbb R]$, so $[\\mathbb R(\\alpha):\\mathbb R]$ is odd. Because $\\alpha \\in E$ and step 1.2 made $E/\\mathbb R$ finite, the element $\\alpha$ is algebraic over $\\mathbb R$. Fact [L14] therefore makes the minimal-polynomial degree of $\\alpha$ over $\\mathbb R$ equal to the same odd number $[\\mathbb R(\\alpha):\\mathbb R]$; by [L12] it must have degree $1$. Hence $\\alpha \\in \\mathbb R$. Since every element of $M$ lies in $\\mathbb R$, we get $M=\\mathbb R$.",
+          "step": "2.2",
+          "inputs": [
+            "L6",
+            "L12",
+            "L14",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $M=E^H=\\mathbb R=E^G$, the bijection in [L5] forces $H=G$. Therefore $G$ is a finite $2$-group.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $J:=\\operatorname{Gal}(E/\\mathbb C)$. Then $J \\le G$, so step 3.1 makes $J$ a finite $2$-group. Suppose $J$ is nontrivial.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [L8], the nontrivial $2$-group $J$ has a subgroup $K$ of index $2$. Put $L:=E^K$. Then $E^J=\\mathbb C$ by [L5], and [L5] together with [L6] gives $$ [L:\\mathbb C]=[J:K]=2. $$",
+          "step": "5.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "L8",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The field $\\mathbb C$ has characteristic zero, hence not $2$, so [L11] makes the quadratic extension $L/\\mathbb C$ equal to $\\mathbb C(\\sqrt d)$ for some $d \\in \\mathbb C$. By [L9], choose $e \\in \\mathbb C$ with $e^2=d$. Then $$ L=\\mathbb C(\\sqrt d)=\\mathbb C(e)=\\mathbb C, $$ contradicting step 5.1. Therefore $J$ is trivial.",
+          "step": "6.1",
+          "inputs": [
+            "L9",
+            "L11",
+            "step 5.1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Since $\\operatorname{Gal}(E/\\mathbb C)=1$, the fixed field of the trivial subgroup is $E$; by [L5], that fixed field is also $\\mathbb C$. Thus $E=\\mathbb C$. Because $E$ is a splitting field of $h$ and $f$ divides $h$, the polynomial $f$ splits over $\\mathbb C$. By step 1.1 and [L1], this proves that $\\mathbb C$ is algebraically closed.",
+          "step": "7.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 4.1, 5.1, and 6.1 make the needed choices of splitting field, Sylow subgroup, embedding root, index-2 subgroup, and square root."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers are algebraically closed (the complex numbers are algebraically closed) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I checked the repaired proof route end to end. It takes a finite Galois splitting field of f(x)(x^2+1), passes to the fixed field of a Sylow-2 subgroup, uses the odd-degree theorem plus the simple-extension degree formula to force that fixed field down to R, and then kills the last quadratic extension over C by adjoining a square root already in C. The finite, separable, and characteristic-0 hypotheses are all used in the right places."
+      }
+    },
+    "cor-every-complex-polynomial-splits-into-linear-factors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-algebraically-closed-splitting-and-finite-extension-criteria",
+          "source_section": "Statement",
+          "quote": "For a field $F$, the following are equivalent:\n\n1. $F$ is algebraically closed.\n2. Every nonconstant polynomial in $F[x]$ splits over $F$.\n3. $F$ has no nontrivial finite extension.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the field $\\mathbb C$ is algebraically closed.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to the field $\\mathbb C$ and the given polynomial $f$ shows that $f$ splits over $\\mathbb C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $f$ was arbitrary, every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the equivalence proposition to the given polynomial f."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Every nonconstant polynomial in $\\\\mathbb C[x]$ splits into linear factors (every complex polynomial splits into linear factors) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-the-complex-numbers-are-an-algebraic-closure-of-the-reals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-complex-numbers-are-a-quadratic-real-extension",
+          "source_section": "Statement",
+          "quote": "The complex field is a simple algebraic extension $\\mathbb C=\\mathbb R(i)$.\nIts power basis is $1,i$, and $[\\mathbb C:\\mathbb R]=2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-algebraic-closure",
+          "source_section": "Definition",
+          "quote": "An **algebraic closure** of a field $F$ is a field extension $\\overline F/F$\nthat is algebraic ([[def-algebraic-and-transcendental-elements]]) and whose\nfield $\\overline F$ is algebraically closed\n([[def-algebraically-closed-field]]). The notation $\\overline F$ denotes a\nchosen algebraic closure; it does not specify a preferred one or a preferred\nisomorphism between two choices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [L1] gives the algebraically closed part of the definition in [L3].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fact [L2] gives the algebraic-extension part of the definition in [L3].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore [L3] makes $\\mathbb C/\\mathbb R$ an algebraic closure of $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the boundary fact [C:R]=2, so the algebraic-extension side of the definition is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The complex numbers form an algebraic closure of $\\\\mathbb R$ (the complex numbers are an algebraic closure of the reals) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-the-algebraic-numbers-in-c-form-an-algebraic-closure-of-q": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-algebraic-elements-form-a-subfield",
+          "source_section": "Statement",
+          "quote": "For a field extension $K/F$, the set\n\n$$A=\\{a\\in K:a\\text{ is algebraic over }F\\}$$\n\nis a subfield of $K$ containing $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-finitely-generated-algebraic-extensions-are-finite",
+          "source_section": "Statement",
+          "quote": "If $a_1,\\ldots,a_r$ are algebraic over $F$, then $F(a_1,\\ldots,a_r)/F$ is finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-element-algebraic-iff-simple-extension-finite",
+          "source_section": "Statement",
+          "quote": "For an element $a$ of an extension $K/F$,\n\n$$a\\text{ is algebraic over }F\\quad\\Longleftrightarrow\\quad F(a)/F\\text{ is finite}.$$\n\nIf $a$ is algebraic with minimal polynomial of degree $n$, then $[F(a):F]=n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-tower-law-for-finite-field-extensions",
+          "source_section": "Statement",
+          "quote": "Let $F\\subseteq K\\subseteq L$ be fields. If $K/F$ and $L/K$ are finite, then $L/F$ is finite and\n\n$$[L:F]=[L:K][K:F].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-finite-field-extensions-are-algebraic",
+          "source_section": "Statement",
+          "quote": "Every finite field extension $K/F$ is algebraic: each $a\\in K$ is a root of a nonzero polynomial in $F[t]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-algebraic-closure",
+          "source_section": "Definition",
+          "quote": "An **algebraic closure** of a field $F$ is a field extension $\\overline F/F$\nthat is algebraic ([[def-algebraic-and-transcendental-elements]]) and whose\nfield $\\overline F$ is algebraically closed\n([[def-algebraically-closed-field]]). The notation $\\overline F$ denotes a\nchosen algebraic closure; it does not specify a preferred one or a preferred\nisomorphism between two choices.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the set $A$ is a subfield of $\\mathbb C$ containing $\\mathbb Q$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $$ f(x)=a_nx^n+\\cdots+a_0 \\in A[x] $$ be nonconstant. Since $\\mathbb C$ is algebraically closed by [L2], the polynomial $f$ has a root $z \\in \\mathbb C$.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coefficients $a_0,\\dots,a_n$ are algebraic over $\\mathbb Q$, so $$ F:=\\mathbb Q(a_0,\\dots,a_n) $$ is a finite extension of $\\mathbb Q$ by [L3]. The element $z$ is a root of a nonzero polynomial over $F$, so it is algebraic over $F$; therefore [L4] makes $F(z)/F$ finite. By [L5], the extension $F(z)/\\mathbb Q$ is finite, and then [L6] makes $z$ algebraic over $\\mathbb Q$. Hence $z \\in A$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that every nonconstant polynomial in $A[x]$ has a root in $A$, so $A$ is algebraically closed. Since every element of $A$ is algebraic over $\\mathbb Q$ by definition, [L7] makes $A$ an algebraic closure of $\\mathbb Q$.",
+          "step": "3.1",
+          "inputs": [
+            "L7",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 choose the complex root z and the coefficient field F needed for the finite-tower argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The algebraic numbers in $\\\\mathbb C$ form an algebraic closure of $\\\\mathbb Q$ (the algebraic numbers in c form an algebraic closure of q) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I reread the present proof that the algebraic numbers in C form an algebraic closure of Q. The argument now cleanly shows that A is a subfield, that any nonconstant polynomial over A has a root z in C, and that adjoining z to the finite coefficient field Q(a_0,...,a_n) keeps the extension finite, hence algebraic over Q. That is exactly the closure condition needed, with no missing field-degree step."
+      }
+    },
+    "lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-real-automorphisms-of-the-complex-numbers",
+          "source_section": "Statement",
+          "quote": "Every field automorphism of $\\mathbb C$ that fixes $\\mathbb R$ pointwise is\neither the identity or complex conjugation, and these two automorphisms are\ndistinct.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], complex conjugation fixes every coefficient of $f$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply conjugation to the equality $f(z)=0$. Because conjugation is a field automorphism and fixes the coefficients of $f$, this gives $$ 0=\\overline{f(z)}=f(\\overline z). $$",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\overline z$ is also a root of $f$. Since $z \\notin \\mathbb R$, one has $\\overline z \\ne z$, so the two roots form a conjugate pair.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 applies conjugation directly to the root equation f(z)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim A nonreal root of a real polynomial comes with its complex conjugate (nonreal roots of a real polynomial occur in conjugate pairs) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-irreducible-real-polynomials-have-degree-one-or-two": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs",
+          "source_section": "Statement",
+          "quote": "Let $f \\in \\mathbb R[x]$ and let $z \\in \\mathbb C \\setminus \\mathbb R$. If\n$f(z)=0$, then $f(\\overline z)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-evaluation-kernel-and-minimal-polynomial",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a field extension and $a\\in K$. Evaluation is the unique\n$F$-algebra homomorphism\n$$\\operatorname{ev}_a:F[x]\\longrightarrow K,\\qquad f\\longmapsto f(a).$$\nIf $a$ is transcendental, its kernel is zero. If $a$ is algebraic, there is a\nunique monic irreducible polynomial $m_a\\in F[x]$ such that\n$$\\ker(\\operatorname{ev}_a)=(m_a),$$\nand, for every $f\\in F[x]$,\n$$f(a)=0\\quad\\Longleftrightarrow\\quad m_a\\mid f.$$\nThe polynomial $m_a$ is the **minimal polynomial** of $a$ over $F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a root $z \\in \\mathbb C$ of $f$. If $z \\in \\mathbb R$, then the minimal polynomial of $z$ over $\\mathbb R$ is $x-z$, and [L3] makes $x-z$ divide $f$. Since $f$ is irreducible, this forces $\\deg f=1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose instead that $z \\notin \\mathbb R$. Then [L2] gives $f(\\overline z)=0$. Put $$ q(x):=(x-z)(x-\\overline z)=x^2-(z+\\overline z)x+z\\overline z \\in \\mathbb R[x]. $$ Because $q(z)=0$, fact [L3] makes the minimal polynomial of $z$ over $\\mathbb R$ divide $q$ and also divide $f$. Since $f$ is irreducible, that minimal polynomial is associated to $f$, so $$ \\deg f \\le \\deg q = 2. $$ The degree cannot be $1$ in the nonreal case, hence $\\deg f=2$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The real-root and nonreal-root cases are exhaustive, so every irreducible polynomial in $\\mathbb R[x]$ has degree $1$ or $2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the real-root boundary case gives degree 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim An irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ or $2$ (irreducible real polynomials have degree one or two) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-every-real-polynomial-factors-into-linear-and-irreducible-quadratic-factors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-polynomial-factorisation-into-irreducibles",
+          "source_section": "Statement",
+          "quote": "Every nonzero nonunit polynomial over a field is a finite product of irreducible polynomials.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-irreducible-real-polynomials-have-degree-one-or-two",
+          "source_section": "Statement",
+          "quote": "If $f \\in \\mathbb R[x]$ is irreducible, then $\\deg f = 1$ or $\\deg f = 2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $f$ is a nonzero constant, then it already has the required form: it is itself the nonzero scalar multiplying the empty product. Now assume that $f$ is a nonzero nonunit polynomial. By [L1], it factors as $$ f=u\\,p_1\\cdots p_r $$ with $u \\in \\mathbb R^\\times$ and each $p_j$ irreducible in $\\mathbb R[x]$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], each irreducible factor $p_j$ has degree $1$ or $2$. Therefore each $p_j$ is either linear or an irreducible quadratic, so the factorization of step 1.1 is exactly the required one.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The constant and nonconstant cases together prove the statement for every nonzero polynomial in $\\mathbb R[x]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the nonzero constant polynomial as a scalar times the empty product."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles irreducible factors of degree 1 as the linear part of the factorization."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Every real polynomial factors into linear and irreducible quadratic factors (every real polynomial factors into linear and irreducible quadratic factors) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-every-complex-polynomial-splits-into-linear-factors",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polynomials-that-split-and-splitting-fields",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a field extension and let $0\\ne f\\in F[x]$ have degree $n$. The polynomial $f$ **splits over $E$** if there are $c\\in F^\\times$ and $\\alpha_1,\\ldots,\\alpha_n\\in E$ such that\n$$ f(x)=c\\prod_{j=1}^n(x-\\alpha_j) $$\nin $E[x]$, with repetitions allowed. When $n=0$, the product is empty, so every nonzero constant polynomial splits over $F$.\n\nFor a family $\\mathcal F$ of nonzero polynomials in $F[x]$, a **splitting field of $\\mathcal F$ over $F$** is a field extension $E/F$ such that every member of $\\mathcal F$ splits over $E$ and $E$ is generated over $F$ by all roots in $E$ of all polynomials in $\\mathcal F$. A splitting field of the one-element family $\\{f\\}$ is called a splitting field of $f$. For the empty family, the set of roots is empty and its splitting field is $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "source_section": "Statement",
+          "quote": "For every field $F$, the polynomial ring $F[x]$ is a unique factorisation domain.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], there are $c \\in \\mathbb C^\\times$ and complex numbers $\\beta_1,\\dots,\\beta_n$ such that $$ f(x)=c\\prod_{k=1}^n (x-\\beta_k). $$ Let $\\alpha_1,\\dots,\\alpha_r$ be the distinct values among the $\\beta_k$, and let $m_j$ be the number of indices $k$ with $\\beta_k=\\alpha_j$. Then $$ f(x)=c\\prod_{j=1}^r (x-\\alpha_j)^{m_j}, $$ and by construction $m_1+\\cdots+m_r=n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose also that $$ f(x)=c'\\prod_{j=1}^s (x-\\gamma_j)^{n_j} $$ with $c' \\in \\mathbb C^\\times$, distinct $\\gamma_j$, and positive integers $n_j$. In the UFD $\\mathbb C[x]$, each linear factor $x-\\alpha$ is irreducible, hence prime. Therefore the exponent with which $x-\\alpha$ appears in a factorization of $f$ is uniquely determined. After reordering, this gives $$ r=s,\\qquad \\gamma_j=\\alpha_j,\\qquad n_j=m_j \\text{ for every } j. $$ So the multiplicities are well defined.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives a factorization whose exponents sum to $n$, and step 2.1 gives uniqueness of those exponents. This is exactly the statement that a degree-$n$ complex polynomial has exactly $n$ roots counted with multiplicity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement imposes n >= 1 and positive multiplicities m_j, so step 1.1 necessarily has at least one root class and a nonempty indexed factor family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the boundary case n=1 by producing one linear factor and total multiplicity 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity (complex polynomial has exactly degree many roots counted with multiplicity) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-cubed-minus-two-over-r-and-c": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-odd-degree-real-polynomial-has-a-real-root",
+          "source_section": "Statement",
+          "quote": "Let\n$$\nf(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_0 \\in \\mathbb R[x]\n$$\nhave odd degree $n \\ge 1$. Then there exists $c \\in \\mathbb R$ with $f(c)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the polynomial $f$ has a real root $r$. Since $r^3=2>0$, [L3] gives $r>0$. The identity $x^3-r^3=(x-r)(x^2+rx+r^2)$ therefore yields $$ x^3-2=(x-r)(x^2+rx+r^2) $$ over $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x^2+rx+r^2=0$, then $$ (2x+r)^2 = 4x^2+4rx+r^2 = -3r^2, $$ which is impossible in $\\mathbb R$ because the left-hand side is nonnegative while the right-hand side is negative. So the quadratic factor is irreducible over $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [L2], let $\\sqrt 3 > 0$ be the real square root of $3$. Solving the quadratic factor from step 1.1 gives the two nonreal roots $$ \\frac{-r \\pm i\\sqrt 3\\,r}{2}. $$ Substituting them back into the factorization from step 1.1 gives the displayed complete factorization over $\\mathbb C$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $x^3-2$ has one real linear factor and one irreducible quadratic factor over $\\mathbb R$, but it splits completely into three linear factors over $\\mathbb C$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the real root r furnished by the odd-degree theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim $x^3-2$ over $\\\\mathbb R$ and over $\\\\mathbb C$ (x cubed minus two over r and c) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-four-plus-one-factors-into-two-real-quadratics": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using $(\\sqrt 2)^2=2$ from [L1], direct expansion gives $$ (x^2+\\sqrt 2\\,x+1)(x^2-\\sqrt 2\\,x+1)=x^4+1. $$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The quadratic $x^2+\\sqrt 2\\,x+1$ has discriminant $2-4=-2<0$, so it has no real root; the same is true of $x^2-\\sqrt 2\\,x+1$. Therefore both quadratic factors are irreducible over $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Their roots in $\\mathbb C$ are $$ \\frac{-\\sqrt 2 \\pm i\\sqrt 2}{2} \\quad\\text{and}\\quad \\frac{\\sqrt 2 \\pm i\\sqrt 2}{2}, $$ the four fourth roots of $-1$. Pairing each nonreal root with its conjugate recovers the two real quadratic factors from step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence $x^4+1$ is a concrete polynomial that is irreducible over neither $\\mathbb R$ nor $\\mathbb C$, but over $\\mathbb R$ it factors exactly into two irreducible quadratics.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the negative discriminant -2 to rule out real roots of each quadratic factor."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim $x^4+1$ factors over $\\\\mathbb R$ into two irreducible quadratics (x four plus one factors into two real quadratics) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-squared-plus-one-is-irreducible-over-r-and-split-over-c": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+          "source_section": "Statement",
+          "quote": "The polynomial $x^2+1$ is irreducible in $\\mathbb R[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-every-complex-polynomial-splits-into-linear-factors",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [L1] gives the real-side claim immediately: $x^2+1$ is irreducible over $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In $\\mathbb C[x]$ one has $$ (x-i)(x+i)=x^2+1, $$ so $f$ has the two complex roots $i$ and $-i$. This agrees with the general splitting statement [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $x^2+1$ is the standard smallest-degree polynomial that is irreducible over $\\mathbb R$ but becomes reducible over $\\mathbb C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 exhibits the exact two linear factors over C for this quadratic boundary example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim $x^2+1$ is irreducible over $\\\\mathbb R$ and split over $\\\\mathbb C$ (x squared plus one is irreducible over r and split over c) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-fifth-minus-x-minus-one-has-a-real-root": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-odd-degree-real-polynomial-has-a-real-root",
+          "source_section": "Statement",
+          "quote": "Let\n$$\nf(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_0 \\in \\mathbb R[x]\n$$\nhave odd degree $n \\ge 1$. Then there exists $c \\in \\mathbb R$ with $f(c)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct evaluation gives $$ f(1)=1-1-1=-1 \\quad\\text{and}\\quad f(2)=32-2-1=29. $$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sign change in step 1.1 is exactly the kind of endpoint behaviour used in the proof of [L1]. Since $f$ has odd degree, [L1] gives a real root.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $x^5-x-1$ is a concrete odd-degree polynomial with a real zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the polynomial at the explicit endpoints 1 and 2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-x-1$ has a real root (x fifth minus x minus one has a real root) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-fifth-minus-six-x-plus-three-is-not-solvable-by-radicals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-eisenstein-irreducibility-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f=a_nx^n+\\cdots+a_0\\in\\mathbb Z[x]$ be primitive with $n\\ge1$. If there is a prime $p$ such that\n\n$$ p\\nmid a_n,\\qquad p\\mid a_i\\ \\text{for every }i<n,\\qquad p^2\\nmid a_0, $$\n\nthen $f$ is irreducible in $\\mathbb Q[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "source_section": "Statement",
+          "quote": "Every field of characteristic zero is perfect. Every finite field is perfect,\nand every algebraically closed field is perfect.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-perfect-field",
+          "source_section": "Definition",
+          "quote": "A field $F$ ([[def-field]]) is **perfect** when every nonconstant irreducible\npolynomial in $F[x]$ is separable\n([[def-repeated-root-and-separable-polynomial]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-irreducible-separable-polynomial-iff-galois-group-transitive",
+          "source_section": "Statement",
+          "quote": "A positive-degree separable polynomial is irreducible if and only if its Galois group acts transitively on its roots.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p",
+          "source_section": "Statement",
+          "quote": "Let $p$ be prime and let $G\\le S_p$ act transitively on\n$\\{0,1,\\dots,p-1\\}$. If\n$G$ contains a transposition, then $G=S_p$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable",
+          "source_section": "Statement",
+          "quote": "The alternating group $A_n$ is not solvable for every $n\\ge5$. Consequently $S_n$ is not solvable for every $n\\ge5$; in particular, $A_5$ and $S_5$ are not solvable.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-solvable-by-radicals-implies-a-solvable-galois-group",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field of characteristic $0$, and let $f\\in F[x]$ be nonzero. If\n$f$ is solvable by radicals, then the Galois group of its splitting field over\n$F$ is a solvable group.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-polynomials-that-split-and-splitting-fields",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a field extension and let $0\\ne f\\in F[x]$ have degree $n$. The polynomial $f$ **splits over $E$** if there are $c\\in F^\\times$ and $\\alpha_1,\\ldots,\\alpha_n\\in E$ such that\n$$ f(x)=c\\prod_{j=1}^n(x-\\alpha_j) $$\nin $E[x]$, with repetitions allowed. When $n=0$, the product is empty, so every nonzero constant polynomial splits over $F$.\n\nFor a family $\\mathcal F$ of nonzero polynomials in $F[x]$, a **splitting field of $\\mathcal F$ over $F$** is a field extension $E/F$ such that every member of $\\mathcal F$ splits over $E$ and $E$ is generated over $F$ by all roots in $E$ of all polynomials in $\\mathcal F$. A splitting field of the one-element family $\\{f\\}$ is called a splitting field of $f$. For the empty family, the set of roots is empty and its splitting field is $F$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The prime $3$ divides the coefficients $-6$ and $3$, does not divide the leading coefficient $1$, and $3^2=9$ does not divide the constant term $3$. So [L1] makes $f$ irreducible over $\\mathbb Q$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $a:=(6/5)^{1/4}>1$, which exists by [L2]. For real numbers $x<y$ one has $$ f(y)-f(x)=(y-x)\\bigl(y^4+y^3x+y^2x^2+yx^3+x^4-6\\bigr). $$ If $a\\le x<y$ or $x<y\\le-a$, then each of the five degree-four monomials in parentheses is at least $a^4=6/5$, and at least one is strictly larger than $6/5$; hence the parenthesis is $>5a^4-6=0$, so $f(y)>f(x)$. If $-a\\le x<y\\le a$, then each of those monomials is at most $a^4=6/5$, and they cannot all equal $6/5$ when $x<y$: equality in the $x^4$ and $y^4$ terms would force $|x|=|y|=a$, while $x<y$ would then give $(x,y)=(-a,a)$ and hence $y^3x=-a^4$. So the parenthesis is $<5a^4-6=0$, and therefore $f(y)<f(x)$. Thus $f$ is increasing on $(-\\infty,-a]$, decreasing on $[-a,a]$, and increasing on $[a,\\infty)$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $a^4=6/5<16=2^4$ and $a>0$, one has $a<2$. Also $$ f(-a)=\\frac{24a}{5}+3>0 \\quad\\text{and}\\quad f(a)=3-\\frac{24a}{5}<0. $$ Together with $f(-2)=-17<0$ and $f(2)=23>0$, the continuity from [L3] and the intermediate value theorem [L5] give a root in each of the three intervals $$ (-2,-a),\\qquad (-a,a),\\qquad (a,2). $$ Step 1.2 shows that $f$ is monotone on each of the three corresponding regions, so there is at most one root in each. Therefore $f$ has exactly three real roots.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L6], choose all five roots of $f$ in $\\mathbb C$ and let $E \\subseteq \\mathbb C$ be the subfield they generate over $\\mathbb Q$. Fact [L11] makes $E$ a splitting field of $f$ over $\\mathbb Q$. Step 2.1 shows that exactly three of those roots are real, so the remaining two roots are nonreal. Complex conjugation on $\\mathbb C$ fixes $\\mathbb Q$ and preserves the root set, hence it restricts to a $\\mathbb Q$-automorphism of $E$ that fixes the three real roots and swaps the two nonreal roots. Thus $\\operatorname{Gal}(E/\\mathbb Q)$ contains a transposition.",
+          "step": "3.1",
+          "inputs": [
+            "L6",
+            "L11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The field $\\mathbb Q$ has characteristic $0$, so [L4] makes it perfect. Step 1.1 shows that $f$ is irreducible over $\\mathbb Q$, and therefore $f$ is separable by the defining property of a perfect field in [L4]. Fact [L7] now makes $\\operatorname{Gal}(E/\\mathbb Q)$ transitive on the five roots. With step 3.1, fact [L8] gives $$ \\operatorname{Gal}(E/\\mathbb Q)=S_5. $$",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L7",
+            "L8",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [L9], the group $S_5$ is not solvable. If $f$ were solvable by radicals, [L10] would force $\\operatorname{Gal}(E/\\mathbb Q)$ to be solvable, contradicting step 4.1. Hence $f$ is not solvable by radicals.",
+          "step": "5.1",
+          "inputs": [
+            "L9",
+            "L10",
+            "step 4.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the endpoint values at -2, -a, a, and 2 to isolate the three real-root intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the positive fourth root a=(6/5)^(1/4), and step 3.1 fixes the splitting field E."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim $x^5-6x+3$ over $\\\\mathbb Q$ is not solvable by radicals (x fifth minus six x plus three is not solvable by radicals) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha gate repair 2",
+        "notes": "I reread the current quintic example after both the reader and refuter repairs. The proof now includes a < 2 before applying IVT on the outer intervals, chooses the splitting field inside C so complex conjugation genuinely gives a transposition, and checks f(plus/minus i a) != 0 as well as f(plus/minus a) != 0 for separability. The transitivity-to-S5 route and the nonsolvability conclusion both close on the live text."
+      }
+    },
+    "fs-every-real-polynomial-has-a-real-root": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+          "source_section": "Statement",
+          "quote": "The polynomial $x^2+1$ is irreducible in $\\mathbb R[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f$ is irreducible and has degree $2$, it has no real root.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $f$ is a real polynomial without any real zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This single counterexample refutes the claim that every real polynomial has a real root.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the quadratic witness x^2+1, so the first nontrivial degree boundary already refutes the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every polynomial with real coefficients has a real root (every real polynomial has a real root) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-the-real-numbers-are-algebraically-closed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-algebraically-closed-field",
+          "source_section": "Definition",
+          "quote": "A field $F$ is **algebraically closed** when every nonconstant polynomial $p\\in F[x]$ has a root in $F$: there is $\\lambda\\in F$ such that $p(\\lambda)=0$.\n\nThis definition concerns roots in the field itself. It does not assert here that any particular field, including $\\mathbb C$, is algebraically closed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+          "source_section": "Statement",
+          "quote": "The polynomial $x^2+1$ is irreducible in $\\mathbb R[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the polynomial $x^2+1$ has no real root.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\mathbb R$ fails the defining property in [L1] for algebraic closedness.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So the real numbers are not algebraically closed.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the degree-2 polynomial x^2+1 as the decisive counterexample."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: the real numbers are algebraically closed (the real numbers are algebraically closed) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-irreducible-real-polynomial-has-degree-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+          "source_section": "Statement",
+          "quote": "The polynomial $x^2+1$ is irreducible in $\\mathbb R[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-irreducible-real-polynomials-have-degree-one-or-two",
+          "source_section": "Statement",
+          "quote": "If $f \\in \\mathbb R[x]$ is irreducible, then $\\deg f = 1$ or $\\deg f = 2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the polynomial $x^2+1$ is irreducible over $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "It has degree $2$, and [L2] says that degree $2$ is the exact non-linear possibility for irreducible real polynomials.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the degree-one claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the degree-2 irreducible witness x^2+1 to refute the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible polynomial in $\\\\mathbb R[x]$ has degree $1$ (every irreducible real polynomial has degree one) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-irreducible-quintic-over-q-is-insoluble-by-radicals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-eisenstein-irreducibility-criterion",
+          "source_section": "Statement",
+          "quote": "Let $f=a_nx^n+\\cdots+a_0\\in\\mathbb Z[x]$ be primitive with $n\\ge1$. If there is a prime $p$ such that\n\n$$ p\\nmid a_n,\\qquad p\\mid a_i\\ \\text{for every }i<n,\\qquad p^2\\nmid a_0, $$\n\nthen $f$ is irreducible in $\\mathbb Q[x]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-every-nonconstant-polynomial-has-a-root-in-an-extension",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial $f\\in F[x]$ has a root in some field extension\nof $F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-solvable-by-radicals",
+          "source_section": "Definition",
+          "quote": "Let $f\\in F[x]$ be a nonzero polynomial and let $E/F$ be a splitting field of\n$f$ ([[def-polynomials-that-split-and-splitting-fields]]).\n\nThe polynomial $f$ is **solvable by radicals** when there exists a radical\nextension $L/F$ ([[def-radical-extension]]) such that $E\\subseteq L$.\n\nThis is deliberately the weakest standard convention: the radical tower itself\nis not required to be Galois and is not required to contain the relevant roots of\nunity in advance.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Eisenstein at the prime $2$ shows that $q(x)=x^5-2$ is irreducible over $\\mathbb Q$, so it is an irreducible quintic.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], choose $s$ with $s^2=5$, choose $\\beta$ over $\\mathbb Q(s)$ with $$ \\beta^2=\\frac{-5-s}{2}, $$ and choose $\\alpha$ with $\\alpha^5=2$. Put $$ u:=\\frac{-1+s}{2} \\quad\\text{and}\\quad \\zeta:=\\frac{u+\\beta}{2}. $$ Then $u^2+u-1=0$, $\\zeta^2-u\\zeta+1=0$, and therefore $$ \\zeta+\\zeta^{-1}=u. $$ Using $u^2+u-1=0$, this implies $$ \\zeta^4+\\zeta^3+\\zeta^2+\\zeta+1=0. $$ Since $\\zeta \\ne 1$, we get $\\zeta^5=1$, so $\\zeta$ is a primitive fifth root of unity. Thus every root of $q$ has the form $\\alpha\\zeta^k$ with $0 \\le k < 5$, and all of them lie in $$ L:=\\mathbb Q(s,\\beta,\\alpha). $$",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The field tower $$ \\mathbb Q \\subseteq \\mathbb Q(s) \\subseteq \\mathbb Q(s,\\beta) \\subseteq \\mathbb Q(s,\\beta,\\alpha)=L $$ adjoins successively a square root of $5$, a square root of $(-5-s)/2$, and a fifth root of $2$. So $L/\\mathbb Q$ is a radical extension. Step 1.2 shows that the splitting field of $q$ is contained in $L$, and [L3] therefore makes $q$ solvable by radicals.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence $x^5-2$ is an irreducible quintic over $\\mathbb Q$ that is solvable by radicals, so the universal claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the witness as an irreducible quintic, so the degree-5 boundary is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the successive radical adjunctions s, beta, and alpha used to build the witness tower."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim FALSE: every irreducible quintic over $\\\\mathbb Q$ is insoluble by radicals (every irreducible quintic over q is insoluble by radicals) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

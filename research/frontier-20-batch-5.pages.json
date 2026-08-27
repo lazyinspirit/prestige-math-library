@@ -1,0 +1,311 @@
+[
+  {
+    "order": 78.3,
+    "id": "regular-continued-fractions-and-diophantine-approximation",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Regular Continued Fractions and Diophantine Approximation",
+    "companion": "regular-continued-fractions-and-diophantine-approximation-examples",
+    "requires": [
+      "positive-definite-binary-quadratic-forms-and-reduction-examples"
+    ],
+    "items": [
+      {
+        "id": "def-regular-continued-fraction",
+        "kind": "definition",
+        "title": "Finite and infinite regular continued fractions",
+        "deps": [
+          "def-rationals",
+          "def-rat-operations"
+        ]
+      },
+      {
+        "id": "def-convergents-of-regular-continued-fraction",
+        "kind": "definition",
+        "title": "Convergents of a regular continued fraction",
+        "deps": [
+          "def-regular-continued-fraction",
+          "def-rationals",
+          "def-rat-operations",
+          "thm-recursion"
+        ]
+      },
+      {
+        "id": "lem-continued-fraction-convergent-recurrence",
+        "kind": "lemma",
+        "title": "Convergents are given by the standard recurrences and tail formula",
+        "strategy": "Induct on the length of a finite continued fraction. The same induction, or the equivalent product of the standard unimodular 2x2 matrices, gives the tail-substitution formula with a final parameter t in place of the last partial quotient.",
+        "deps": [
+          "def-convergents-of-regular-continued-fraction",
+          "def-regular-continued-fraction",
+          "def-rat-operations",
+          "thm-recursion"
+        ]
+      },
+      {
+        "id": "lem-continued-fraction-determinant-identity",
+        "kind": "lemma",
+        "title": "Determinant identity for consecutive convergents",
+        "strategy": "Check the identity in the initial case and use the convergent recurrences to pass from n to n+1 by a one-line cancellation, so the determinant alternates sign and consecutive convergents differ by 1 divided by the product of their denominators.",
+        "deps": [
+          "def-convergents-of-regular-continued-fraction",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-continued-fraction-convergents-are-reduced",
+        "kind": "corollary",
+        "title": "Convergents are reduced fractions",
+        "strategy": "Any common divisor of p_n and q_n divides the determinant combination p_n q_{n-1} - p_{n-1} q_n, so it must divide 1. The same determinant identity shows that the two consecutive convergent columns form a Z-basis of Z^2.",
+        "deps": [
+          "lem-continued-fraction-determinant-identity",
+          "thm-bezout-identity"
+        ]
+      },
+      {
+        "id": "def-continued-fraction-complete-quotients",
+        "kind": "definition",
+        "title": "Complete quotients in the continued-fraction algorithm",
+        "deps": [
+          "def-complete-ordered-field",
+          "def-regular-continued-fraction",
+          "lem-nat-embeds-int",
+          "thm-of-archimedean",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "lem-continued-fraction-complete-quotient-formula",
+        "kind": "lemma",
+        "title": "Complete-quotient tail formula",
+        "strategy": "Substitute the next complete quotient alpha_(n+1) for the last tail parameter in the finite-prefix formula and clear the nested reciprocal. This rewrites the original real number as one linear-fractional expression in alpha_(n+1).",
+        "deps": [
+          "def-continued-fraction-complete-quotients",
+          "lem-continued-fraction-convergent-recurrence"
+        ]
+      },
+      {
+        "id": "thm-convergence-of-infinite-regular-continued-fractions",
+        "kind": "theorem",
+        "title": "Every infinite regular continued fraction converges to a unique real number",
+        "strategy": "Use the determinant identity to show that even convergents increase, odd convergents decrease, and every even convergent lies below every odd one. Take the supremum of the even convergents in the complete ordered field and use the gap formula together with q_n >= n to force the odd convergents to the same cut.",
+        "deps": [
+          "def-complete-ordered-field",
+          "def-convergents-of-regular-continued-fraction",
+          "lem-continued-fraction-determinant-identity",
+          "thm-induction-principle",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "thm-continued-fraction-algorithm-for-real-numbers",
+        "kind": "theorem",
+        "title": "The continued-fraction algorithm for real numbers",
+        "strategy": "Iterate the complete-quotient construction. If a complete quotient becomes integral the expansion stops; otherwise the tail formula expresses the original real as a convergent plus a positive tail, and the convergence theorem forces the infinite expansion to have the original real as its value.",
+        "deps": [
+          "def-continued-fraction-complete-quotients",
+          "lem-continued-fraction-complete-quotient-formula",
+          "lem-continued-fraction-determinant-identity",
+          "thm-convergence-of-infinite-regular-continued-fractions"
+        ]
+      },
+      {
+        "id": "thm-rational-continued-fraction-termination",
+        "kind": "theorem",
+        "title": "The continued-fraction algorithm terminates exactly on rational numbers",
+        "strategy": "For a rational input, the complete quotients are the successive reciprocal remainder ratios from the Euclidean algorithm, so the positive remainders strictly decrease and termination follows. Conversely, a finite continued fraction is rational by the convergent recurrence.",
+        "deps": [
+          "thm-continued-fraction-algorithm-for-real-numbers",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "thm-normalized-finite-continued-fraction-uniqueness",
+        "kind": "theorem",
+        "title": "Normalized finite regular continued fractions are unique",
+        "strategy": "The Euclidean-algorithm construction gives one finite expansion for each rational. The identity [..., a_n] = [..., a_n - 1, 1] gives the second expansion, and excluding a final 1 or terminal 0 leaves a single normal form with last partial quotient at least 2 unless the number is an integer.",
+        "deps": [
+          "lem-continued-fraction-convergent-recurrence",
+          "thm-rational-continued-fraction-termination"
+        ]
+      },
+      {
+        "id": "lem-continued-fraction-error-bound",
+        "kind": "lemma",
+        "title": "Convergent error bound",
+        "strategy": "Apply the complete-quotient tail formula to an irrational alpha, then subtract p_n/q_n and simplify with the determinant identity. The sign alternation shows that the convergents alternate around alpha, and positivity of the next denominator gives the 1 over q_n q_(n+1) bound.",
+        "deps": [
+          "lem-continued-fraction-determinant-identity",
+          "thm-continued-fraction-algorithm-for-real-numbers"
+        ]
+      },
+      {
+        "id": "thm-continued-fraction-convergents-are-best-approximations",
+        "kind": "theorem",
+        "title": "Convergents are best rational approximations of the first kind",
+        "strategy": "Expand an integer pair (s,r) in the unimodular basis formed by two consecutive convergent vectors. The coefficients are integers, their signs are forced by the alternating placement of the convergents around alpha, and comparing signed distances to the line of slope alpha yields the denominator bound s >= q_(n+1).",
+        "deps": [
+          "cor-continued-fraction-convergents-are-reduced",
+          "lem-continued-fraction-determinant-identity",
+          "lem-continued-fraction-error-bound"
+        ]
+      },
+      {
+        "id": "thm-legendre-continued-fraction-criterion",
+        "kind": "theorem",
+        "title": "Legendre's criterion for convergents",
+        "strategy": "Choose n with q_n <= s < q_(n+1). The best-approximation theorem turns the strict 1/(2 s^2) bound into a comparison with the n-th convergent, and then the integer |r q_n - s p_n| is forced below 1, so the rational must equal p_n/q_n.",
+        "deps": [
+          "lem-continued-fraction-error-bound",
+          "thm-continued-fraction-convergents-are-best-approximations"
+        ]
+      },
+      {
+        "id": "def-quadratic-irrational",
+        "kind": "definition",
+        "title": "Quadratic irrationals",
+        "deps": [
+          "def-rationals",
+          "def-real-numbers"
+        ]
+      },
+      {
+        "id": "def-eventually-periodic-continued-fraction",
+        "kind": "definition",
+        "title": "Eventually periodic regular continued fractions",
+        "deps": [
+          "def-regular-continued-fraction"
+        ]
+      },
+      {
+        "id": "lem-periodic-continued-fraction-is-quadratic",
+        "kind": "lemma",
+        "title": "Eventually periodic regular continued fractions are quadratic irrationals",
+        "strategy": "A purely periodic tail x satisfies x = (a x + b)/(c x + d) for integers a, b, c, d coming from one period, so x solves a quadratic equation. Appending a finite nonrepeating prefix preserves quadratic irrationality, and nontermination rules out rationality.",
+        "deps": [
+          "def-eventually-periodic-continued-fraction",
+          "def-quadratic-irrational",
+          "lem-continued-fraction-convergent-recurrence",
+          "thm-rational-continued-fraction-termination"
+        ]
+      },
+      {
+        "id": "lem-quadratic-irrational-complete-quotients-are-finite-state",
+        "kind": "lemma",
+        "title": "Complete quotients of a quadratic irrational lie in a finite state space",
+        "strategy": "Rewrite each complete quotient of a quadratic irrational in the normalized form (P_n + sqrt(D))/Q_n after clearing denominators and rationalizing. The recurrence preserves divisibility Q_n | D - P_n^2, and the inequalities 0 < P_n < sqrt(D), 0 < Q_n < 2 sqrt(D) for large n leave only finitely many integral parameter pairs.",
+        "deps": [
+          "def-continued-fraction-complete-quotients",
+          "def-quadratic-irrational",
+          "thm-continued-fraction-algorithm-for-real-numbers",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "thm-lagrange-periodic-continued-fraction-theorem",
+        "kind": "theorem",
+        "title": "Lagrange's theorem for regular continued fractions",
+        "strategy": "The forward implication is the previous fixed-point lemma. For the converse, the finite-state lemma shows that some complete quotient repeats; determinism of the continued-fraction algorithm turns repetition of a complete quotient into repetition of the subsequent digits, hence eventual periodicity.",
+        "deps": [
+          "def-eventually-periodic-continued-fraction",
+          "lem-periodic-continued-fraction-is-quadratic",
+          "lem-quadratic-irrational-complete-quotients-are-finite-state",
+          "thm-continued-fraction-algorithm-for-real-numbers"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 78.4,
+    "id": "regular-continued-fractions-and-diophantine-approximation-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Regular Continued Fractions and Diophantine Approximation — Examples",
+    "companion": "regular-continued-fractions-and-diophantine-approximation",
+    "requires": [
+      "regular-continued-fractions-and-diophantine-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-two-finite-continued-fractions-for-a-rational",
+        "kind": "example",
+        "title": "A rational number has exactly two finite regular continued-fraction expansions",
+        "strategy": "Run the rational continued-fraction algorithm on one explicit fraction, then apply the last-digit replacement [..., a_n] = [..., a_n - 1, 1] and identify which expansion is normalized by the final-digit-at-least-2 rule.",
+        "deps": [
+          "thm-normalized-finite-continued-fraction-uniqueness"
+        ]
+      },
+      {
+        "id": "ex-continued-fraction-and-extended-euclid",
+        "kind": "example",
+        "title": "The continued fraction of 37/11 matches Euclid and Bézout",
+        "strategy": "Compute the Euclidean quotients and remainders for 37 and 11, read off the continued-fraction digits, and compare the convergent determinants with the Bézout coefficients returned by the extended Euclidean calculation.",
+        "deps": [
+          "thm-bezout-identity",
+          "thm-rational-continued-fraction-termination"
+        ]
+      },
+      {
+        "id": "ex-continued-fraction-of-square-root-two",
+        "kind": "example",
+        "title": "The continued fraction [1; overline 2] for sqrt(2)",
+        "strategy": "Apply the real algorithm to sqrt(2), verify the repeating digit 2, tabulate a few convergents, and check both the alternating error bound and the determinant identity on those convergents.",
+        "deps": [
+          "lem-continued-fraction-determinant-identity",
+          "lem-continued-fraction-error-bound",
+          "thm-lagrange-periodic-continued-fraction-theorem"
+        ]
+      },
+      {
+        "id": "ex-continued-fraction-of-square-root-fourteen",
+        "kind": "example",
+        "title": "The continued fraction [3; overline{1,2,1,6}] for sqrt(14)",
+        "strategy": "Run the complete-quotient recurrence for sqrt(14), record the successive (P_n, Q_n) states, and display the return to the initial state that forces the repeating block 1, 2, 1, 6.",
+        "deps": [
+          "lem-quadratic-irrational-complete-quotients-are-finite-state",
+          "thm-lagrange-periodic-continued-fraction-theorem"
+        ]
+      },
+      {
+        "id": "ex-golden-ratio-as-a-periodic-continued-fraction",
+        "kind": "example",
+        "title": "The golden ratio is [1; overline 1]",
+        "strategy": "Set x = [1; overline 1], solve x = 1 + 1/x, keep the positive root, and compare it with the standard quadratic irrational (1 + sqrt(5))/2.",
+        "deps": [
+          "def-quadratic-irrational",
+          "lem-periodic-continued-fraction-is-quadratic"
+        ]
+      },
+      {
+        "id": "ex-best-rational-approximations-to-pi",
+        "kind": "example",
+        "title": "The convergents 22/7, 333/106, and 355/113 for pi",
+        "strategy": "Tabulate the convergents of pi through 355/113, use the first-kind best-approximation theorem to compare them with nearby competitors, and then apply Legendre's criterion to explain why 355/113 is singled out by its unusually small error.",
+        "deps": [
+          "thm-continued-fraction-convergents-are-best-approximations",
+          "thm-legendre-continued-fraction-criterion"
+        ]
+      },
+      {
+        "id": "cex-an-excellent-approximation-at-the-legendre-boundary",
+        "kind": "counterexample",
+        "title": "A very good rational approximation need not be a convergent once the Legendre constant exceeds 1/2",
+        "strategy": "Choose an irrational with a semiconvergent just beyond the Legendre threshold, verify that its error is less than C/q^2 for some constant C greater than 1/2, and check directly that the fraction is not among the convergents.",
+        "deps": [
+          "lem-continued-fraction-error-bound",
+          "thm-legendre-continued-fraction-criterion"
+        ]
+      },
+      {
+        "id": "ex-a-negative-real-continued-fraction",
+        "kind": "example",
+        "title": "A negative irrational still has positive later partial quotients",
+        "strategy": "Run the complete-quotient algorithm on one negative irrational, show that the integer part absorbs the sign in the first digit, and verify from the recurrence that every later complete quotient is positive and therefore produces a positive partial quotient.",
+        "deps": [
+          "def-continued-fraction-complete-quotients",
+          "thm-continued-fraction-algorithm-for-real-numbers"
+        ]
+      }
+    ]
+  }
+]

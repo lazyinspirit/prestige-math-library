@@ -1,0 +1,2675 @@
+{
+  "version": 1,
+  "level": "frontier-20",
+  "scope": [
+    "lem-continued-fraction-convergent-recurrence",
+    "lem-continued-fraction-determinant-identity",
+    "cor-continued-fraction-convergents-are-reduced",
+    "lem-continued-fraction-complete-quotient-formula",
+    "thm-convergence-of-infinite-regular-continued-fractions",
+    "thm-continued-fraction-algorithm-for-real-numbers",
+    "thm-rational-continued-fraction-termination",
+    "thm-normalized-finite-continued-fraction-uniqueness",
+    "lem-continued-fraction-error-bound",
+    "thm-continued-fraction-convergents-are-best-approximations",
+    "thm-legendre-continued-fraction-criterion",
+    "lem-periodic-continued-fraction-is-quadratic",
+    "lem-quadratic-irrational-complete-quotients-are-finite-state",
+    "thm-lagrange-periodic-continued-fraction-theorem",
+    "ex-two-finite-continued-fractions-for-a-rational",
+    "ex-continued-fraction-and-extended-euclid",
+    "ex-continued-fraction-of-square-root-two",
+    "ex-continued-fraction-of-square-root-fourteen",
+    "ex-golden-ratio-as-a-periodic-continued-fraction",
+    "ex-best-rational-approximations-to-pi",
+    "cex-an-excellent-approximation-at-the-legendre-boundary",
+    "ex-a-negative-real-continued-fraction"
+  ],
+  "contracts": {
+    "lem-continued-fraction-convergent-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "A **finite regular continued fraction** is an expression\n$$[a_0; a_1,\\ldots,a_n]$$\nwith $a_0 \\in \\mathbb{Z}$ and $a_i \\in \\mathbb{Z}_{>0}$ for $i \\ge 1$. Its value\nis defined recursively in $\\mathbb{Q}$ ([[def-rationals]], [[def-rat-operations]])\nby\n$$[a_n] := a_n,\\qquad [a_0; a_1,\\ldots,a_n] := a_0 + \\frac{1}{[a_1;\\ldots,a_n]} \\quad(n \\ge 1).$$\n\nThis recursion is well defined. Indeed, starting from the last digit and\nworking backwards, every tail $[a_i;\\ldots,a_n]$ with $i\\ge1$ is a positive\nrational: the last tail is $a_n>0$, and $a_i+1/t>0$ whenever $a_i>0$ and\n$t>0$. In particular every denominator occurring in the recursion is nonzero.\n\nAn **infinite regular continued fraction** is a digit sequence\n$(a_n)_{n \\ge 0}$ with $a_0 \\in \\mathbb{Z}$ and $a_n \\in \\mathbb{Z}_{>0}$ for\n$n \\ge 1$, written\n$$[a_0; a_1,a_2,\\ldots].$$\nIts value is not assumed by the notation; existence and uniqueness of the value\nare proved in [[thm-convergence-of-infinite-regular-continued-fractions]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=0$ one has. [given, F1, base, algebra]\n$$[a_0,t] = a_0 + \\frac{1}{t} = \\frac{ta_0+1}{t} = \\frac{tp_0+p_{-1}}{tq_0+q_{-1}},$$\nbecause $p_0=a_0$, $q_0=1$, $p_{-1}=1$, and $q_{-1}=0$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the tail formula holds for a fixed length $n$. [step 1.1, F1, induction, algebra]\nPut\n$u:=a_{n+1}+1/t>0$. Then\n$$[a_0; a_1,\\ldots,a_{n+1},t] = [a_0; a_1,\\ldots,a_n,u] = \\frac{u p_n + p_{n-1}}{u q_n + q_{n-1}}$$\nby the induction hypothesis, and multiplying numerator and denominator by $t$\ngives\n$$\\frac{(a_{n+1}t+1)p_n+tp_{n-1}}{(a_{n+1}t+1)q_n+tq_{n-1}} = \\frac{tp_{n+1}+p_n}{tq_{n+1}+q_n}$$\nby the recurrences of [F1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show, by induction on the length, that. [F2, step 1.1, step 2.1, discharge-induction]\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}}$$\nfor every $n \\ge 0$ and every $t>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Setting $t=a_{n+1}$ in step 3.1 yields. [step 3.1, F1, algebra]\n$$[a_0; a_1,\\ldots,a_{n+1}] = \\frac{a_{n+1}p_n+p_{n-1}}{a_{n+1}q_n+q_{n-1}} = \\frac{p_{n+1}}{q_{n+1}},$$\nand renaming the index proves the finite-convergent formula.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the base case n = 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are given by the standard recurrences and tail formula (continued fraction convergent recurrence) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened this lemma against the current recurrence definitions and the batch-5 reader/refuter evidence. The live proof still handles the real base case n = 0 with the p_{-1}, q_{-1} conventions, runs the induction step through u = a_{n+1} + 1/t with t > 0, and then specializes t = a_{n+1} to recover the ordinary convergent formula. I also checked that no zero-denominator or tail-sign issue survives on the current bytes."
+      }
+    },
+    "lem-continued-fraction-determinant-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $n=0$ one has. [given, F1, base, algebra]\n$$p_0q_{-1}-p_{-1}q_0 = a_0\\cdot 0 - 1 \\cdot 1 = -1 = (-1)^{-1}.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $D_n:=p_nq_{n-1}-p_{n-1}q_n$, then the recurrences of [F1] give. [F1, induction, algebra]\n$$D_{n+1} = (a_{n+1}p_n+p_{n-1})q_n - p_n(a_{n+1}q_n+q_{n-1}) = -D_n.$$\nSo the sign flips at each successor step.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 imply by induction that. [F2, step 1.1, step 1.2, discharge-induction]\n$$D_n = (-1)^{n-1}$$\nfor every $n \\ge 0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $n \\ge 1$. [step 2.1, algebra]\n$$\\frac{p_n}{q_n}-\\frac{p_{n-1}}{q_{n-1}} = \\frac{p_nq_{n-1}-p_{n-1}q_n}{q_nq_{n-1}} = \\frac{(-1)^{n-1}}{q_nq_{n-1}}$$\nby step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the base index n = 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Determinant identity for consecutive convergents (continued fraction determinant identity) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reread this lemma against the convergent recurrence and the current batch-5 coverage. The proof still computes D_0 = p_0 q_{-1} - p_{-1} q_0 = -1, shows D_{n+1} = -D_n directly from the recurrence, and then derives the difference formula only for n >= 1, exactly where division by q_n q_{n-1} is licensed. I found no remaining sign, index, or denominator defect on the live theorem."
+      }
+    },
+    "cor-continued-fraction-convergents-are-reduced": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bezout-identity",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$, not both $0$, and put\n\n$$I \\;:=\\; \\{\\, ax + by \\;:\\; x, y \\in \\mathbb{Z} \\,\\} .$$\n\nThen $I$ contains a positive element, and its least positive element is\n$\\gcd(a,b)$ ([[def-common-divisor-and-gcd]]). In particular there are integers\n$x_0, y_0$ with\n\n$$a x_0 + b y_0 \\;=\\; \\gcd(a,b),$$\n\nso the equation $ax + by = \\gcd(a,b)$ is solvable in $\\mathbb{Z}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $d$ be a common divisor of $p_n$ and $q_n$. [F1, F2, given]\nThen $d$ divides every\ninteger linear combination of $p_n$ and $q_n$, in particular\n$p_nq_{n-1}-p_{n-1}q_n=(-1)^{n-1}$ by [F1]. Hence $d$ divides $1$, so $d=1$ and\n$p_n/q_n$ is reduced.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The determinant of the matrix with columns $(q_n,p_n)$ and $(q_{n+1},p_{n+1})$ is. [F1, algebra]\n$$q_n p_{n+1} - p_n q_{n+1} = (-1)^n$$\nby [F1]. Therefore\n$$\\begin{pmatrix}u\\\\v\\end{pmatrix} = (-1)^n(up_{n+1}-vq_{n+1})\\begin{pmatrix}q_n\\\\p_n\\end{pmatrix} + (-1)^n(vq_n-up_n)\\begin{pmatrix}q_{n+1}\\\\p_{n+1}\\end{pmatrix}$$\nfor every $(u,v)\\in\\mathbb{Z}^2$, so the two columns span $\\mathbb{Z}^2$ over\n$\\mathbb{Z}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 are exactly the two assertions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are reduced fractions (continued fraction convergents are reduced) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-continued-fraction-complete-quotient-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-convergent-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,\\ldots,a_n]$ be a finite regular continued fraction, and let\n$p_k,q_k$ be its convergent numerators and denominators as in\n[[def-convergents-of-regular-continued-fraction]]. Then\n$$[a_0; a_1,\\ldots,a_n] = \\frac{p_n}{q_n}.$$\n\nMore generally, for every real $t > 0$ one has\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}},$$\nwhere $[a_0; a_1,\\ldots,a_n,t]$ means the finite continued fraction obtained by\nappending the last tail $t$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Repeatedly substituting the identities of [F1] yields. [given, F1, algebra]\n$$\\alpha = [a_0; a_1,\\ldots,a_n,\\alpha_{n+1}]$$\nwhenever $\\alpha_{n+1}$ is defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since every complete quotient after the first is $>1$, in particular $\\alpha_{n+1}>0$. [step 1.1, F1, F2]\nSo step 1.1 and [F2] give\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Complete-quotient tail formula (continued fraction complete quotient formula) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened this lemma against the current complete-quotient definition and the tail formula from the convergent recurrence lemma. The proof still obtains alpha = [a_0; ...; a_n, alpha_{n+1}] by repeated substitution and then uses the fact that every later complete quotient is positive to apply the tail formula with t = alpha_{n+1}. I checked the positivity and indexing boundaries and found no remaining gap on current bytes."
+      }
+    },
+    "thm-convergence-of-infinite-regular-continued-fractions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since every partial quotient after the first is at least $1$. [given, F1, induction, algebra]\nThe denominators satisfy\n$$q_{n+1}=a_{n+1}q_n+q_{n-1}\\ge q_n+q_{n-1}>q_n>0$$\nfor $n\\ge1$, with $q_0=1$ and $q_1=a_1\\ge1$. Thus $(q_n)$ is nondecreasing\nfrom $q_0$ onward and strictly increasing from $q_1$ onward, and induction on\n$n$ gives $q_n\\ge n$ for $n\\ge1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the signs of $c_n-c_{n-1}$ alternate, and by step 1.1 their absolute values strictly decrease. [F1, step 1.1, algebra]\nHence\n$$c_{2m}<c_{2m+1},\\qquad c_{2m+2}=c_{2m+1}-(c_{2m+1}-c_{2m+2})>c_{2m},$$\nand similarly\n$$c_{2m+3}=c_{2m+2}-(c_{2m+2}-c_{2m+3})<c_{2m+1}.$$\nSo the even convergents increase, the odd convergents decrease, and every even\nconvergent is below every odd convergent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $d_n:=1/(q_nq_{n+1})$. [F2, step 1.1, algebra]\nStep 1.1 gives $d_n\\le1/(n(n+1))$ for $n\\ge1$, and the Archimedean property\n[F2] therefore implies $d_n\\to0$. For\n$\\varepsilon>0$ choose $N\\ge1$ with $1/N<\\varepsilon$, then for $n\\ge N$,\n$$0<d_n\\le \\frac{1}{n(n+1)}\\le \\frac{1}{n}\\le \\frac{1}{N}<\\varepsilon.$$",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $E:=\\{c_{2m}:m\\ge0\\}$. [step 2.1, given]\nBy step 2.1 the set $E$ is nonempty and bounded above by $c_1$, so [F3] gives a\nreal number\n$x:=\\sup E$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $n=2m+1$ is odd, then $c_{n-1}\\in E$ and step 2.1 gives. [step 2.1, step 2.2, F1]\n$c_{n-1}\\le x\\le c_n$, so\n$$0\\le c_n-x\\le c_n-c_{n-1}=d_{n-1}.$$\nIf $n=2m$ is even, then $c_n\\in E$ and step 2.1 gives\n$c_n\\le x\\le c_{n+1}$, so\n$$0\\le x-c_n\\le c_{n+1}-c_n=d_n.$$\nSince the right-hand sides tend to $0$ by step 2.2, both subsequences converge\nto $x$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $y$ were another real with both subsequences converging to $y$, then for every $m$. [step 3.2, algebra]\n$$|x-y|\\le |x-c_{2m}|+|c_{2m}-y|,$$\nand the right-hand side tends to $0$ as $m\\to\\infty$ by step 3.2. Hence\n$x=y$, so the value is unique.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The detector keys on symbolic denominators in steps 2.2 and 3.2, but step 1.1 proves q_0=1 and q_n>0 for every later convergent denominator before those divisions occur. No zero denominator remains on current disk.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The detector keys on symbolic denominators in steps 2.2 and 3.2, but step 1.1 proves q_0=1 and q_n>0 for every later convergent denominator before those divisions occur. No zero denominator remains on current disk."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Every infinite regular continued fraction converges to a unique real number (convergence of infinite regular continued fractions) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reread this theorem against the determinant identity, the Archimedean input, and the current batch-5 contract boundaries. The live proof still proves q_n > 0 and strictly increasing, squeezes the even and odd convergents into monotone subsequences, shows d_n = 1/(q_n q_{n+1}) tends to 0, and then uses x = sup{c_{2m}} to prove both subsequences converge to the same unique real value. I also checked the zero-denominator boundary the contract had upheld earlier, and it remains closed on current bytes."
+      }
+    },
+    "thm-continued-fraction-algorithm-for-real-numbers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number, let $a_n$ and $\\alpha_n$ be its continued-fraction\ndigits and complete quotients, and let $p_n/q_n$ be the convergents attached to\n$a_0,a_1,\\ldots$. Whenever $\\alpha_{n+1}$ is defined,\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-convergence-of-infinite-regular-continued-fractions",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,a_2,\\ldots]$ be an infinite regular continued fraction, and let\n$c_n:=p_n/q_n$ be its convergents. Then:\n\n1. $c_0<c_2<c_4<\\cdots$ and $c_1>c_3>c_5>\\cdots$;\n2. every even convergent is below every odd convergent; and\n3. there is a unique real number $x$ such that both subsequences\n$(c_{2m})_{m\\ge0}$ and $(c_{2m+1})_{m\\ge0}$ converge to $x$.\n\nThis real number is the value of the infinite regular continued fraction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\alpha_N=a_N$ for some $N$, then repeated substitution of the identities $\\alpha_n=a_n+1/\\alpha_{n+1}$ for $n<N$ yields. [given, algebra]\n$$\\alpha=[a_0; a_1,\\ldots,a_N].$$\nFor $N\\ge1$ the last digit $a_N=\\alpha_N$ is positive because every complete\nquotient after the first is greater than $1$, so the output is a finite regular\ncontinued fraction.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the algorithm never terminates. Then every $\\alpha_{n+1}$ is defined and satisfies $\\alpha_{n+1}>a_{n+1}\\ge1$, so [F1] and [F2] give. [F1, F2, algebra]\n$$\\alpha-\\frac{p_n}{q_n} = \\frac{p_{n-1}q_n-p_nq_{n-1}}{q_n(\\alpha_{n+1}q_n+q_{n-1})} = \\frac{(-1)^n}{q_n(\\alpha_{n+1}q_n+q_{n-1})}.$$\nHence\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_n(a_{n+1}q_n+q_{n-1})} = \\frac{1}{q_nq_{n+1}}.$$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The infinite digit sequence $a_0,a_1,\\ldots$ is therefore a regular continued fraction, so by [F3] its convergents $p_n/q_n$ converge to some real number $x$. [F3, step 1.2, algebra]\nStep 1.2 shows $\\alpha-p_n/q_n\\to0$, and therefore\n$$|\\alpha-x| \\le \\left|\\alpha-\\frac{p_n}{q_n}\\right| + \\left|\\frac{p_n}{q_n}-x\\right|\\to0.$$\nThus $\\alpha=x$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 handles the terminating case and step 2.1 the nonterminating case,\nso the algorithm always reconstructs the original real number.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the terminating integer case, which includes alpha = 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the terminating integer case, which includes alpha = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm for real numbers (continued fraction algorithm for real numbers) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened this theorem against the complete-quotient formula, determinant identity, and convergence theorem. The terminating branch still reconstructs a finite regular continued fraction equal to alpha, while the nonterminating branch uses the explicit error formula to show alpha - p_n/q_n tends to 0 and then identifies alpha with the unique limit supplied by the convergence theorem. I checked both branches and found no remaining termination-or-convergence defect on the live proof."
+      }
+    },
+    "thm-rational-continued-fraction-termination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continued-fraction-algorithm-for-real-numbers",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number. The complete-quotient algorithm of\n[[def-continued-fraction-complete-quotients]] either terminates with a finite\nregular continued fraction equal to $\\alpha$, or produces an infinite regular\ncontinued fraction whose convergents converge to $\\alpha$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-convergent-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,\\ldots,a_n]$ be a finite regular continued fraction, and let\n$p_k,q_k$ be its convergent numerators and denominators as in\n[[def-convergents-of-regular-continued-fraction]]. Then\n$$[a_0; a_1,\\ldots,a_n] = \\frac{p_n}{q_n}.$$\n\nMore generally, for every real $t > 0$ one has\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}},$$\nwhere $[a_0; a_1,\\ldots,a_n,t]$ means the finite continued fraction obtained by\nappending the last tail $t$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\alpha$ is an integer, the algorithm stops immediately. Otherwise write $\\alpha=u_0/v_0$ with integers $v_0>0$ and $\\gcd(u_0,v_0)=1$. Applying [F1] to. [given, F1, algebra] $u_0$ and $v_0$ gives $$u_0 = a_0v_0+r_0,\\qquad 0<r_0<v_0,$$ so $$\\alpha = a_0 + \\frac{r_0}{v_0},\\qquad \\alpha_1=\\frac{1}{\\alpha-a_0}=\\frac{v_0}{r_0}.$$ Thus the next numerator is the previous denominator.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, if the algorithm terminates, then by [F2] the original number is a finite regular continued fraction and hence rational.",
+          "step": "1.2",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $n\\ge1$, and suppose. [F1, F3, induction, algebra] $$\\alpha_n=\\frac{u_n}{v_n}\\qquad(v_n>0,\\ \\gcd(u_n,v_n)=1)$$ is not an integer. Since $n\\ge1$, fact [F3] gives $\\alpha_n>1$, so $u_n>v_n>0$. Applying [F1] gives $$u_n=a_nv_n+r_n,\\qquad 0<r_n<v_n,\\qquad \\alpha_{n+1}=\\frac{v_n}{r_n}.$$ Any common divisor of $v_n$ and $r_n=u_n-a_nv_n$ also divides $u_n$, so $\\gcd(v_n,r_n)=1$. Hence this is already the reduced form $$\\alpha_{n+1}=\\frac{u_{n+1}}{v_{n+1}}=\\frac{v_n}{r_n},$$ and therefore $u_{n+1}=v_n<u_n$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "When $\\alpha$ is a nonintegral rational, step 1.1 gives $$\\alpha_1=\\frac{v_0}{r_0}>1.$$ So step 1.3 applies successively to $\\alpha_1,\\alpha_2,\\ldots$ as long as they remain nonintegral. Their positive integer numerators $u_1,u_2,u_3,\\ldots$ then form a strictly decreasing sequence, which cannot continue forever. Therefore some complete quotient is an integer, and the algorithm terminates.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The equations in steps 1.1 and 1.3 are exactly the Euclidean divisions of the successive numerator-denominator pairs, so the continued-fraction digits are. [step 1.1, step 1.3, F1] the Euclidean quotient digits.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm terminates exactly on rational numbers (rational continued fraction termination) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the integer case immediately, and 0 is an integer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the integer case immediately, and 1 is an integer."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm terminates exactly on rational numbers (rational continued fraction termination) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm terminates exactly on rational numbers (rational continued fraction termination) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued-fraction algorithm terminates exactly on rational numbers (rational continued fraction termination) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that termination forces rationality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that a rational input eventually terminates."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reread this theorem against the current batch-5 reader repair and the live Euclidean-algorithm proof. The repaired argument now starts the strict numerator descent at alpha_1 = v_0/r_0 > 1, proves that every later nonintegral complete quotient has reduced form u_n/v_n with u_{n+1} = v_n < u_n, and therefore closes the rational case without the old false negative-rational n = 0 step. I also checked that the quotient digits still match the Euclidean divisions exactly, and I found no remaining boundary defect."
+      }
+    },
+    "thm-normalized-finite-continued-fraction-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-convergent-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,\\ldots,a_n]$ be a finite regular continued fraction, and let\n$p_k,q_k$ be its convergent numerators and denominators as in\n[[def-convergents-of-regular-continued-fraction]]. Then\n$$[a_0; a_1,\\ldots,a_n] = \\frac{p_n}{q_n}.$$\n\nMore generally, for every real $t > 0$ one has\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}},$$\nwhere $[a_0; a_1,\\ldots,a_n,t]$ means the finite continued fraction obtained by\nappending the last tail $t$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], every rational number has a terminating continued-fraction expansion. If the rational is not an integer, the last complete quotient is a positive integer greater than $1$. [F1, given]\nBecause every complete quotient after the first is greater than $1$, the\nalgorithm already produces a normalized finite expansion.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $a_n\\ge2$, then [F2] gives. [F2, algebra]\n$$[a_0; a_1,\\ldots,a_n] = [a_0; a_1,\\ldots,a_n-1,1].$$\nFor an integer $m$, the same identity reads\n$$[m]=[m-1,1]=[m-1;1].$$\nSo every normalized finite expansion produces a second finite expansion.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Conversely, any finite expansion with last digit $1$ and length at least $1$ can be shortened by the identity. [F2, induction]\n$$[a_0; a_1,\\ldots,a_{n-1},1] = [a_0; a_1,\\ldots,a_{n-1}+1].$$\nRepeating this collapse removes every terminal $1$ and ends at a normalized\nexpansion. Thus every finite expansion is obtained from a normalized one by at\nmost one final split of the last digit.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The normalized expansion is unique because the continued-fraction algorithm on a rational has unique digits at each step. [F1, step 1.2, step 1.3]\nEach digit is the unique integer\npart of the current complete quotient, and [F1] says the process terminates.\nTherefore nonintegers have exactly two finite expansions, while integers have\nexactly the two listed in step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the integer branch [m] = [m-1;1], which includes m = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Normalized finite regular continued fractions are unique (normalized finite continued fraction uniqueness) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened this theorem against the current rational-termination theorem and the tail identity from the convergent recurrence lemma. The proof still gets the normalized expansion from the terminating algorithm, shows the final split [a_0; ...; a_n] = [a_0; ...; a_n - 1, 1] when a_n >= 2, collapses every terminal 1 back to a normalized expansion, and then uses uniqueness of the Euclidean digit chain to show the normalized form is unique. I checked the integer branch, including m = 1, and found no remaining defect."
+      }
+    },
+    "lem-continued-fraction-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number, let $a_n$ and $\\alpha_n$ be its continued-fraction\ndigits and complete quotients, and let $p_n/q_n$ be the convergents attached to\n$a_0,a_1,\\ldots$. Whenever $\\alpha_{n+1}$ is defined,\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2]. [F1, F2, F3, F4, algebra]\n$$\\alpha-\\frac{p_n}{q_n} = \\frac{q_n(\\alpha_{n+1}p_n+p_{n-1})-p_n(\\alpha_{n+1}q_n+q_{n-1})} {q_n(\\alpha_{n+1}q_n+q_{n-1})} = \\frac{(-1)^n}{q_n(\\alpha_{n+1}q_n+q_{n-1})}.$$\nThe denominator is positive by [F3] and [F4], so the sign is $(-1)^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fact [F4] gives $\\alpha_{n+1}>a_{n+1}$, and [F3] gives. [step 1.1, F3, F4, algebra]\n$$\\alpha_{n+1}q_n+q_{n-1} > a_{n+1}q_n+q_{n-1} = q_{n+1}.$$\nTaking absolute values in step 1.1 yields\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_nq_{n+1}}.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Facts [F3] and [F4] give $q_{n+1}\\ge q_n>0$, so the second inequality is immediate. [F3, F4, step 2.1, algebra]\n$$\\frac{1}{q_nq_{n+1}}\\le \\frac{1}{q_n^2}$$",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The only flagged denominators are q_n and α_{n+1}q_n+q_{n-1}. Steps 2.1 and 3.1 use q_{n+1}>q_n>0, so the zero-denominator case is excluded by the current continued-fraction hypotheses rather than omitted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The only flagged denominators are q_n and α_{n+1}q_n+q_{n-1}. Steps 2.1 and 3.1 use q_{n+1}>q_n>0, so the zero-denominator case is excluded by the current continued-fraction hypotheses rather than omitted."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Convergent error bound (continued fraction error bound) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step8-closure-recovery-d",
+        "notes": "I rechecked the exact error identity, its sign, and both inequalities. The repaired facts now separately cite the convergent recurrence q_{n+1}=a_{n+1}q_n+q_{n-1} and the complete-quotient inequality alpha_{n+1}>a_{n+1}; with positive denominators these give the strict first bound, and monotonicity gives the second. No denominator-zero or indexing case remains."
+      }
+    },
+    "thm-continued-fraction-convergents-are-best-approximations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-continued-fraction-convergents-are-reduced",
+          "source_section": "Statement",
+          "quote": "Every convergent $p_n/q_n$ of a regular continued fraction is in lowest terms.\nMoreover, for each $n \\ge 0$ the two vectors\n$$(q_n,p_n),\\qquad (q_{n+1},p_{n+1})$$\nform a $\\mathbb{Z}$-basis of $\\mathbb{Z}^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number, let $a_n$ and $\\alpha_n$ be its continued-fraction\ndigits and complete quotients, and let $p_n/q_n$ be the convergents attached to\n$a_0,a_1,\\ldots$. Whenever $\\alpha_{n+1}$ is defined,\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-continued-fraction-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number, and let $p_n/q_n$ be its continued-\nfraction convergents. Then, for every $n\\ge0$,\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_nq_{n+1}} \\le \\frac{1}{q_n^2}.$$\nMoreover,\n$$\\alpha-\\frac{p_n}{q_n}$$\nhas sign $(-1)^n$, so the convergents alternate around $\\alpha$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From [F3] and [F5] one obtains. [F3, F5, algebra] $$q_n\\alpha-p_n=\\frac{(-1)^n}{\\alpha_{n+1}q_n+q_{n-1}},\\qquad q_{n-1}\\alpha-p_{n-1}=-\\alpha_{n+1}(q_n\\alpha-p_n).$$ So the consecutive errors have opposite signs and satisfy $$|q_{n-1}\\alpha-p_{n-1}|=\\alpha_{n+1}|q_n\\alpha-p_n|.$$",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the basis statement in [F1], there are unique integers $u,v$ with. [F1, step 1.1, algebra] $$\\begin{pmatrix}s\\\\ r\\end{pmatrix} = u\\begin{pmatrix}q_n\\\\ p_n\\end{pmatrix} + v\\begin{pmatrix}q_{n-1}\\\\ p_{n-1}\\end{pmatrix}.$$ Subtracting $r$ from $s\\alpha$ gives $$s\\alpha-r = u(q_n\\alpha-p_n)+v(q_{n-1}\\alpha-p_{n-1}) = (u-v\\alpha_{n+1})(q_n\\alpha-p_n)$$ by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Assume $|s\\alpha-r|<|q_n\\alpha-p_n|$. Step 2.1 gives. [step 2.1, F2, algebra] $$|u-v\\alpha_{n+1}|<1.$$ If $v<0$, then $u<0$ as well, because otherwise $u-v\\alpha_{n+1}\\ge1+\\alpha_{n+1}>1$; but then $s=uq_n+vq_{n-1}<0$, impossible. If $v=0$, then $|u|<1$, so $u=0$ and again $s=0$, impossible. Therefore $v>0$. Since $u$ is an integer and [F2] gives $\\alpha_{n+1}>a_{n+1}$, the inequality above implies $$u>v\\alpha_{n+1}-1>va_{n+1}-1,$$ hence $u\\ge va_{n+1}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now. [step 3.1, F4, algebra] $$s=uq_n+vq_{n-1}\\ge v(a_{n+1}q_n+q_{n-1})=vq_{n+1}\\ge q_{n+1},$$ which is the first claim. Because $n\\ge1$, fact [F2] gives $a_{n+1}\\ge1$, and [F4] then gives $$q_{n+1}=a_{n+1}q_n+q_{n-1}>q_n.$$ For the consequence, suppose $s\\le q_n$ and $$\\left|\\alpha-\\frac{r}{s}\\right|<\\left|\\alpha-\\frac{p_n}{q_n}\\right|.$$ Then $$|s\\alpha-r| = s\\left|\\alpha-\\frac{r}{s}\\right| < s\\left|\\alpha-\\frac{p_n}{q_n}\\right| \\le q_n\\left|\\alpha-\\frac{p_n}{q_n}\\right| = |q_n\\alpha-p_n|,$$ contradicting the first claim because $s<q_{n+1}$. Thus no denominator at most $q_n$ gives a closer rational approximation.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This row is about zero denominators, not the separate n=0 boundary repaired on Wednesday, August 26, 2026. The current Statement assumes n≥1 and s>0, and facts F2/F4 keep q_n and q_{n+1} positive throughout.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "This row is about zero denominators, not the separate n=0 boundary repaired on Wednesday, August 26, 2026. The current Statement assumes n≥1 and s>0, and facts F2/F4 keep q_n and q_{n+1} positive throughout."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Convergents are best rational approximations of the first kind (continued fraction convergents are best approximations) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair 4",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened this theorem against the repaired batch-5 proof and the refuter evidence. The current statement now correctly starts at n >= 1, so the basis decomposition uses (q_n, p_n) and (q_{n-1}, p_{n-1}) legally; from there the live proof still gets |u - v alpha_{n+1}| < 1, forces v > 0, deduces u >= v a_{n+1}, and concludes s >= q_{n+1}, which in turn gives the denominator-at-most-q_n consequence. I checked the former n = 0 boundary explicitly and found it closed on current bytes."
+      }
+    },
+    "thm-legendre-continued-fraction-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continued-fraction-convergents-are-best-approximations",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number with convergents $p_n/q_n$, and let\n$n\\ge1$. If\n$r,s\\in\\mathbb{Z}$ with $s>0$ and\n$$|s\\alpha-r|<|q_n\\alpha-p_n|,$$\nthen\n$$s\\ge q_{n+1}.$$\nConsequently, no rational number with denominator at most $q_n$ approximates\n$\\alpha$ more closely than $p_n/q_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First suppose $s<q_1$. By [F3]. [F3, given, algebra]\n$$0<\\alpha-a_0=\\frac1{\\alpha_1}<\\frac1{q_1}\\le\\frac12.$$\nIf $r/s\\ne a_0$, then $|r-sa_0|\\ge1$. Since the integers satisfy\n$q_1\\ge s+1$, the reverse triangle inequality gives\n$$\\left|\\alpha-\\frac rs\\right|\\ge \\left|\\frac rs-a_0\\right|-|\\alpha-a_0|>\\frac1s-\\frac1{q_1}\\ge\\frac1s-\\frac1{s+1}=\\frac1{s(s+1)}\\ge\\frac1{2s^2},$$\ncontrary to the hypothesis. Hence $r/s=a_0=p_0/q_0$ is the zeroth convergent.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "It remains to suppose $q_1\\le s$. Since the denominators are unbounded. [F1, given]\nand strictly increase from $q_1$ onward, [F1] gives an index $n\\ge1$ with\n$$q_n\\le s<q_{n+1}.$$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $r/s\\ne p_n/q_n$. Since $s<q_{n+1}$, [F2] and the hypothesis give. [step 1.2, F2, given, algebra]\n$$|q_n\\alpha-p_n|\\le |s\\alpha-r|<\\frac1{2s}.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $rq_n-sp_n$ is a nonzero integer when $r/s\\ne p_n/q_n$, one has. [step 2.1, given, algebra]\n$$1\\le |rq_n-sp_n| = sq_n\\left|\\frac{r}{s}-\\frac{p_n}{q_n}\\right|.$$\nUsing the triangle inequality and step 2.1,\n$$|rq_n-sp_n|\\le q_n|r-s\\alpha|+s|q_n\\alpha-p_n|\\le(q_n+s)|s\\alpha-r|<\\frac{q_n+s}{2s}\\le1,$$\na contradiction. Therefore $r/s=p_n/q_n$, so $r/s$ is a convergent.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The current Given already takes a reduced rational r/s with s>0, and fact F1 makes the convergent denominators strictly increasing from q_0=1. The proof never reaches a zero denominator.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The current Given already takes a reduced rational r/s with s>0, and fact F1 makes the convergent denominators strictly increasing from q_0=1. The proof never reaches a zero denominator."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 starts from q_0 = 1 and therefore already covers the case s = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Legendre's criterion for convergents (legendre continued fraction criterion) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step8-closure-recovery-d",
+        "notes": "I rechecked both denominator ranges. When s<q_1, the repaired proof no longer claims s=1: it uses q_1>=s+1, the integer separation |r-sa_0|>=1, and the reverse triangle inequality to contradict the strict Legendre bound unless r/s=a_0. For q_1<=s, the scaled-error best-approximation theorem and nonzero determinant integer yield the standard contradiction."
+      }
+    },
+    "lem-periodic-continued-fraction-is-quadratic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-eventually-periodic-continued-fraction",
+          "source_section": "Definition",
+          "quote": "An infinite regular continued fraction\n$$[a_0; a_1,a_2,\\ldots]$$\n([[def-regular-continued-fraction]]) is **eventually periodic** if there are\nintegers $N\\ge0$ and $h\\ge1$ such that\n$$a_{n+h}=a_n\\qquad\\text{for every }n\\ge N.$$\nThe smallest such $h$ is the period of the eventual tail.\nIt exists because the admissible positive integers $h$ form a nonempty subset\nof $\\mathbb N$, to which [[thm-well-ordering-principle]] applies.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-convergent-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,\\ldots,a_n]$ be a finite regular continued fraction, and let\n$p_k,q_k$ be its convergent numerators and denominators as in\n[[def-convergents-of-regular-continued-fraction]]. Then\n$$[a_0; a_1,\\ldots,a_n] = \\frac{p_n}{q_n}.$$\n\nMore generally, for every real $t > 0$ one has\n$$[a_0; a_1,\\ldots,a_n,t] = \\frac{t p_n + p_{n-1}}{t q_n + q_{n-1}},$$\nwhere $[a_0; a_1,\\ldots,a_n,t]$ means the finite continued fraction obtained by\nappending the last tail $t$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-convergence-of-infinite-regular-continued-fractions",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,a_2,\\ldots]$ be an infinite regular continued fraction, and let\n$c_n:=p_n/q_n$ be its convergents. Then:\n\n1. $c_0<c_2<c_4<\\cdots$ and $c_1>c_3>c_5>\\cdots$;\n2. every even convergent is below every odd convergent; and\n3. there is a unique real number $x$ such that both subsequences\n$(c_{2m})_{m\\ge0}$ and $(c_{2m+1})_{m\\ge0}$ converge to $x$.\n\nThis real number is the value of the infinite regular continued fraction.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By increasing $N$ if necessary, we may still assume. [F1, F2, F3, F5, algebra] $$a_{n+h}=a_n\\qquad(n\\ge N)$$ with $N\\ge1$. Let $$x=[a_N; a_{N+1},\\ldots,a_{N+h-1},a_N,a_{N+1},\\ldots]$$ be the purely periodic tail. For $r\\ge1$, let $x_r$ be the finite continued fraction formed from $r$ copies of this period. By [F5], $x_r\\to x$, and [F2] gives $$x_{r+1}=\\frac{x_rp_{h-1}+p_{h-2}}{x_rq_{h-1}+q_{h-2}},$$ where the convergents are taken for the digit block $a_N,\\ldots,a_{N+h-1}$. The denominators are positive by [F3], so a direct difference calculation shows that the displayed fractional-linear expression preserves the limit $x_r\\to x$. Hence $$x=\\frac{xp_{h-1}+p_{h-2}}{xq_{h-1}+q_{h-2}}.$$ Clearing denominators yields the quadratic equation $$q_{h-1}x^2+(q_{h-2}-p_{h-1})x-p_{h-2}=0.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The discriminant of the quadratic in step 1.1 is. [step 1.1, F3, F4, algebra] $$\\Delta=(q_{h-2}-p_{h-1})^2+4q_{h-1}p_{h-2}=(p_{h-1}+q_{h-2})^2-4\\bigl(p_{h-1}q_{h-2}-p_{h-2}q_{h-1}\\bigr).$$ Putting $m:=p_{h-1}+q_{h-2}>0$, fact [F4] gives $$\\Delta=m^2-4(-1)^{h-2}.$$ If $h$ is odd, then $\\Delta=m^2+4$, which cannot be a square because $(n-m)(n+m)=4$ has no solution in integers with $m>0$. If $h$ is even, then $h\\ge2$, fact [F3] gives $p_{h-1}\\ge p_1\\ge2$ and $q_{h-2}\\ge q_0=1$, so $m\\ge3$; then $\\Delta=m^2-4$, which cannot be a square because $(m-n)(m+n)=4$ has no solution with $m\\ge3$. Therefore $\\Delta$ is not a square, so the root $x$ from step 1.1 is irrational.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Append the finite tails $x_r$ of step 1.1 after the prefix. [F1, F2, F5, step 1.1, algebra] $a_0,\\ldots,a_{N-1}$. These are a subsequence of the convergents of $\\alpha$, so [F5] makes their values tend to $\\alpha$. By [F2] their values are $$\\frac{x_rp_{N-1}+p_{N-2}}{x_rq_{N-1}+q_{N-2}}.$$ The same positive-denominator difference calculation used in step 1.1 lets $r\\to\\infty$ and gives $$\\alpha=\\frac{xp_{N-1}+p_{N-2}}{xq_{N-1}+q_{N-2}}.$$ Clearing denominators and substituting the quadratic equation from step 1.1 shows that $\\alpha$ also satisfies a quadratic equation over $\\mathbb{Q}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose that $\\alpha$ were rational. Step 2.2 gives. [step 2.1, step 2.2, F4, algebra] $$x(\\alpha q_{N-1}-p_{N-1})=p_{N-2}-\\alpha q_{N-2}.$$ If $\\alpha q_{N-1}-p_{N-1}=0$, then also $p_{N-2}-\\alpha q_{N-2}=0$, and eliminating $\\alpha$ yields $$p_{N-1}q_{N-2}-p_{N-2}q_{N-1}=0,$$ contrary to [F4]. Therefore $$x=\\frac{p_{N-2}-\\alpha q_{N-2}}{\\alpha q_{N-1}-p_{N-1}}$$ is rational, contradicting step 2.1. Hence $\\alpha$ is irrational.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.2 and 3.1 show that $\\alpha$ is an irrational real root of a quadratic equation over $\\mathbb{Q}$, which is exactly the definition of a quadratic irrational ([[def-quadratic-irrational]]).",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats one full period uniformly, including the case h = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Eventually periodic regular continued fractions are quadratic irrationals (periodic continued fraction is quadratic) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step8-closure-recovery-d",
+        "notes": "I rechecked the repaired tail argument through both limit passages. Finite truncations containing repeated periods converge to the periodic tail, the finite tail formula relates consecutive truncations by a positive-denominator fractional-linear map, and a direct difference calculation permits passage to the fixed-point equation. The same argument through the initial prefix transports the quadratic equation to alpha, and the determinant identity still excludes rationality."
+      }
+    },
+    "lem-quadratic-irrational-complete-quotients-are-finite-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quadratic-irrational",
+          "source_section": "Definition",
+          "quote": "A real number $\\alpha$ ([[def-real-numbers]]) is a **quadratic irrational** if\nit is irrational and satisfies a quadratic equation\n$$A\\alpha^2+B\\alpha+C=0$$\nwith $A,B,C\\in\\mathbb{Q}$ ([[def-rationals]]) and $A\\ne0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number, let $a_n$ and $\\alpha_n$ be its continued-fraction\ndigits and complete quotients, and let $p_n/q_n$ be the convergents attached to\n$a_0,a_1,\\ldots$. Whenever $\\alpha_{n+1}$ is defined,\n$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-continued-fraction-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number, and let $p_n/q_n$ be its continued-\nfraction convergents. Then, for every $n\\ge0$,\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_nq_{n+1}} \\le \\frac{1}{q_n^2}.$$\nMoreover,\n$$\\alpha-\\frac{p_n}{q_n}$$\nhas sign $(-1)^n$, so the convergents alternate around $\\alpha$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], after multiplying by a common denominator we may choose integers. [F1, given, algebra] $a,b,c$ with $a\\ne0$ and $$a\\alpha^2+b\\alpha+c=0.$$ Its discriminant $D:=b^2-4ac$ is positive because $\\alpha$ is real and nonsquare because $\\alpha$ is irrational.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\alpha$ is irrational, [F2] says the continued-fraction algorithm. [F2, F3, algebra] never terminates, so every $\\alpha_n$ is defined. For each $n\\ge1$, substituting the expression from [F3] into the quadratic equation from step 1.1 and clearing denominators yields $$A_n\\alpha_n^2+B_n\\alpha_n+C_n=0,$$ where $$A_n:=ap_{n-1}^2+bp_{n-1}q_{n-1}+cq_{n-1}^2,$$ $$B_n:=2ap_{n-1}p_{n-2}+b(p_{n-1}q_{n-2}+p_{n-2}q_{n-1})+2cq_{n-1}q_{n-2},$$ $$C_n:=ap_{n-2}^2+bp_{n-2}q_{n-2}+cq_{n-2}^2.$$ These coefficients are integers.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The discriminant of that quadratic is. [step 2.1, F4, algebra] $$B_n^2-4A_nC_n=(b^2-4ac)\\bigl(p_{n-1}q_{n-2}-p_{n-2}q_{n-1}\\bigr)^2=D,$$ because [F4] gives $$\\bigl(p_{n-1}q_{n-2}-p_{n-2}q_{n-1}\\bigr)^2=1.$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Put. [F5, F6, step 1.1, algebra] $$\\delta_n:=\\alpha q_{n-1}-p_{n-1}=q_{n-1}\\left(\\alpha-\\frac{p_{n-1}}{q_{n-1}}\\right).$$ Facts [F5] and [F6] give $$|\\delta_n|<\\frac1{q_n}\\le1,\\qquad |q_{n-1}\\delta_n|<\\frac{q_{n-1}}{q_n}\\le1.$$ Since $p_{n-1}=\\alpha q_{n-1}-\\delta_n$, the coefficient $A_n$ from step 2.1 becomes $$A_n=a(\\alpha q_{n-1}-\\delta_n)^2+b(\\alpha q_{n-1}-\\delta_n)q_{n-1}+cq_{n-1}^2=-(2a\\alpha+b)q_{n-1}\\delta_n+a\\delta_n^2,$$ because $a\\alpha^2+b\\alpha+c=0$. Therefore $$|A_n|\\le|2a\\alpha+b|+|a|,$$ so only finitely many integers can occur as $A_n$.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $n\\ge2$, the formulas in step 2.1 give $C_n=A_{n-1}$, so the integers. [step 2.1, step 3.2, step 3.1, algebra] $C_n$ also range over a finite set. Then step 3.1 yields $$B_n^2=D+4A_nC_n,$$ so only finitely many integers $B_n$ can occur as well. Thus only finitely many triples $(A_n,B_n,C_n)$ arise, and each $\\alpha_n$ with $n\\ge1$ is one of the at most two roots of one of those finitely many quadratics. Together with the single value $\\alpha_0=\\alpha$, this proves that only finitely many complete quotients occur.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves Q_(n+1) > 0 and therefore rules out the zero-denominator state directly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim Complete quotients of a quadratic irrational lie in a finite state space (quadratic irrational complete quotients are finite state) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reread the repaired finite-state lemma against the complete-quotient formula, determinant identity, and convergent error bound. The current proof really does attach each later complete quotient to an integer quadratic with the same nonsquare discriminant, bounds A_n through the error term delta_n, and then gets only finitely many possible coefficient triples. I also checked the boundary that A_n cannot collapse to 0 because the discriminant stays nonsquare, so the finite-root conclusion is sound on current bytes."
+      }
+    },
+    "thm-lagrange-periodic-continued-fraction-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-continued-fraction-is-quadratic",
+          "source_section": "Statement",
+          "quote": "The value of every eventually periodic regular continued fraction is a\nquadratic irrational.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-quadratic-irrational-complete-quotients-are-finite-state",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a quadratic irrational, and let $\\alpha_n$ be the complete\nquotients produced by the continued-fraction algorithm. Then only finitely many\ndistinct complete quotients occur.\n\nMore precisely, if\n$$a\\alpha^2+b\\alpha+c=0$$\nwith $a,b,c\\in\\mathbb{Z}$ and discriminant $D:=b^2-4ac>0$, then for every\n$n\\ge1$ the complete quotient $\\alpha_n$ is a root of an integer quadratic\nequation\n$$A_nx^2+B_nx+C_n=0$$\nwhose discriminant is also $D$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the continued fraction of $\\alpha$ is eventually periodic, then [F1] shows that $\\alpha$ is a quadratic irrational.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose now that $\\alpha$ is a quadratic irrational. By [F2], only finitely. [F2, given] many complete quotients $\\alpha_n$ occur, so there exist indices $m<n$ with $$\\alpha_m=\\alpha_n.$$",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From $\\alpha_m=\\alpha_n$ and the determinism in [F3], the next digits agree: $a_m=a_n$, and then the next complete quotients agree: $\\alpha_{m+1}=\\alpha_{n+1}$. Repeating this argument inductively gives $$a_{m+j}=a_{n+j}\\qquad\\text{for every }j\\ge0,$$ so the continued-fraction digits repeat with period $n-m$ from the index $m$ onward. Thus the continued fraction is eventually periodic.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both directions of the equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim Lagrange's theorem for regular continued fractions (lagrange periodic continued fraction theorem) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that eventual periodicity implies quadratic irrationality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that a quadratic irrational has an eventually periodic expansion."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened the current Lagrange theorem against the repaired periodic-implies-quadratic lemma, the finite-state lemma, and the deterministic complete-quotient algorithm. The reverse direction now reads correctly: once a complete quotient repeats, the later digits repeat by determinism, so the expansion is eventually periodic. I checked the purely periodic boundary m=0 as well as negative inputs handled by the regular algorithm, and found no remaining proof or statement defect."
+      }
+    },
+    "ex-two-finite-continued-fractions-for-a-rational": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-normalized-finite-continued-fraction-uniqueness",
+          "source_section": "Statement",
+          "quote": "Every rational number has a unique **normalized** finite regular continued\nfraction: either the expansion has length $0$, or its last digit is at least\n$2$. If the rational is not an integer, then it has exactly one other finite\nregular continued-fraction expansion, obtained by replacing the last digit\n$a_n\\ge2$ by the pair $a_n-1,1$. An integer $m$ has exactly the two expansions\n$[m]$ and $[m-1;1]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct calculation gives. [given, algebra]\n$$[1;1,1,2] = 1+\\frac{1}{1+\\frac{1}{1+\\frac12}} = 1+\\frac{1}{1+\\frac23} = 1+\\frac35 = \\frac85.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Likewise. [F1, step 1.1, algebra]\n$$[1;1,1,1,1] = 1+\\frac{1}{1+\\frac{1}{1+\\frac{1}{1+\\frac11}}} = 1+\\frac35 = \\frac85,$$\nso the same rational has two finite expansions. The last digit of $[1;1,1,2]$\nis $2$, so [F1] identifies it as the normalized one and shows there are no\nfurther finite expansions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed denominators 1+1/2, 1+2/3, and 1+1/1 are fixed positive numbers in the concrete 8/5 computation. The detector is reacting to arithmetic notation, not to an omitted zero case.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The displayed denominators 1+1/2, 1+2/3, and 1+1/1 are fixed positive numbers in the concrete 8/5 computation. The detector is reacting to arithmetic notation, not to an omitted zero case."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim A rational number has exactly two finite regular continued-fraction expansions (two finite continued fractions for a rational) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-continued-fraction-and-extended-euclid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rational-continued-fraction-termination",
+          "source_section": "Statement",
+          "quote": "For a real number $\\alpha$, the continued-fraction algorithm terminates if and\nonly if $\\alpha$ is rational. When $\\alpha$ is rational, the continued-fraction\ndigits are exactly the successive quotient digits of the Euclidean algorithm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bezout-identity",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$, not both $0$, and put\n\n$$I \\;:=\\; \\{\\, ax + by \\;:\\; x, y \\in \\mathbb{Z} \\,\\} .$$\n\nThen $I$ contains a positive element, and its least positive element is\n$\\gcd(a,b)$ ([[def-common-divisor-and-gcd]]). In particular there are integers\n$x_0, y_0$ with\n\n$$a x_0 + b y_0 \\;=\\; \\gcd(a,b),$$\n\nso the equation $ax + by = \\gcd(a,b)$ is solvable in $\\mathbb{Z}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Euclidean quotient digits are $3,2,1,3$, so [F1] gives. [F1, given, algebra]\n$$\\frac{37}{11}=[3;2,1,3].$$\nIts convergents are\n$$3,\\qquad 3+\\frac12=\\frac72,\\qquad 3+\\frac{1}{2+\\frac11}=\\frac{10}{3},\\qquad 3+\\frac{1}{2+\\frac{1}{1+\\frac13}}=\\frac{37}{11}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The penultimate convergent is $10/3$, and. [F2, step 1.1, algebra]\n$$37\\cdot3-11\\cdot10=111-110=1.$$\nSo $1$ is an explicit integer linear combination of $37$ and $11$, which is\nexactly the Bezout identity for $\\gcd(37,11)=1$ in the sense of [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed denominators 2+1/1 and 1+1/3 are fixed positive numbers in the explicit 37/11 computation. No symbolic denominator or free zero-parameter branch survives after the example data are fixed.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The displayed denominators 2+1/1 and 1+1/3 are fixed positive numbers in the explicit 37/11 computation. No symbolic denominator or free zero-parameter branch survives after the example data are fixed."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction of 37/11 matches Euclid and Bezout (continued fraction and extended euclid) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I rechecked the Euclidean divisions 37=3·11+4, 11=2·4+3, 4=1·3+1, 3=3·1+0 against the rational-termination theorem and Bezout identity. The continued-fraction digits [3;2,1,3], the displayed convergents, and the penultimate relation 37·3-11·10=1 are all correct on the current item, so the example now matches both the Euclidean algorithm and the advertised Bezout witness."
+      }
+    },
+    "ex-continued-fraction-of-square-root-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "Let $p_n/q_n$ be the convergents of a regular continued fraction. Then for every\n$n \\ge 0$,\n$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$\nConsequently, for every $n \\ge 1$,\n$$\\frac{p_n}{q_n} - \\frac{p_{n-1}}{q_{n-1}} = \\frac{(-1)^{n-1}}{q_n q_{n-1}}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number, and let $p_n/q_n$ be its continued-\nfraction convergents. Then, for every $n\\ge0$,\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_nq_{n+1}} \\le \\frac{1}{q_n^2}.$$\nMoreover,\n$$\\alpha-\\frac{p_n}{q_n}$$\nhas sign $(-1)^n$, so the convergents alternate around $\\alpha$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continued-fraction-algorithm-for-real-numbers",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number. The complete-quotient algorithm of\n[[def-continued-fraction-complete-quotients]] either terminates with a finite\nregular continued fraction equal to $\\alpha$, or produces an infinite regular\ncontinued fraction whose convergents converge to $\\alpha$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convergents-of-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "Let $a_0,a_1,\\ldots$ be the digit sequence of a regular continued fraction\n([[def-regular-continued-fraction]]), terminating at $a_N$ in the finite case.\nDefine integers\n$p_n,q_n$ by\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0,$$\nand, for every index $n\\ge0$ for which the digit $a_n$ exists,\n$$p_n = a_n p_{n-1} + p_{n-2},\\qquad q_n = a_n q_{n-1} + q_{n-2}.$$\n\nThe denominators are positive at every digit index: $q_0=1$, and if the digit\n$a_1$ exists then $q_1=a_1>0$; thereafter\n$q_n=a_nq_{n-1}+q_{n-2}>0$ by induction because $a_n>0$ and the preceding\ndenominators are nonnegative. Thus the quotient below is defined in\n$\\mathbb Q$.\n\nThe rational number $p_n/q_n$ is the **$n$-th convergent**. The initial labels\n$-2$ and $-1$ belong only to this recurrence convention; they do not extend the\ndigit sequence itself to negative indices.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $1<\\sqrt2<2$, [F3] gives $a_0=1$. Then [F3, F4, given, algebra]\n$$\\alpha_1=\\frac1{\\sqrt2-1}=\\sqrt2+1,$$\nso $2<\\alpha_1<3$ and $a_1=2$. Moreover\n$$\\frac1{\\alpha_1-2} = \\frac1{\\sqrt2-1} = \\alpha_1,$$\nso every later complete quotient is again $\\alpha_1$. Thus the algorithm never\nterminates and produces the digits $1,2,2,\\ldots$; by [F4] its continued\nfraction converges to the original number. Hence\n$$\\sqrt2=[1;\\overline2].$$",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F5] to the digits from step 1.1 gives [F5, step 1.1, algebra]\n$$(p_0,q_0)=(1,1),\\quad(p_1,q_1)=(3,2),\\quad(p_2,q_2)=(7,5),\\quad(p_3,q_3)=(17,12),$$\nso the convergents begin\n$$1,\\qquad\\frac32,\\qquad\\frac75,\\qquad\\frac{17}{12}.$$\nThe same recurrence gives $q_4=29$. For the displayed pairs one checks\n$$3\\cdot1-1\\cdot2=1,\\qquad 7\\cdot2-3\\cdot5=-1,\\qquad 17\\cdot5-7\\cdot12=1,$$\nexactly as [F1] predicts.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The error formula [F2] now gives [F2, step 2.1, algebra]\n$$\\left|\\sqrt2-\\frac32\\right|=\\frac{3-2\\sqrt2}{2}<\\frac1{10},\\qquad \\left|\\sqrt2-\\frac75\\right|=\\frac{5\\sqrt2-7}{5}<\\frac1{60},$$\nand similarly\n$$\\left|\\sqrt2-\\frac{17}{12}\\right|=\\frac{17-12\\sqrt2}{12}<\\frac1{348}.$$\nSo the concrete convergents alternate around $\\sqrt2$ with the expected quality\nof approximation.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The flagged denominator 2+1/2 is a fixed positive value in the explicit periodic expansion of sqrt(2). There is no free parameter whose zero value could change this witness.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The flagged denominator 2+1/2 is a fixed positive value in the explicit periodic expansion of sqrt(2). There is no free parameter whose zero value could change this witness."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 starts with the first digit a_0 = 1 and so explicitly handles that unit digit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 2] for sqrt(2) (continued fraction of square root two) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step8-closure-recovery-d",
+        "notes": "I rechecked the complete-quotient computation and its reconstruction step. The repeated quotient alpha_1=sqrt(2)+1 produces the digits 1,2,2,... and proves nontermination; the newly cited real-number algorithm theorem then identifies the value of that infinite continued fraction with the original sqrt(2). The displayed convergents and error inequalities remain consistent with the repaired argument."
+      }
+    },
+    "ex-continued-fraction-of-square-root-fourteen": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $3<\\sqrt{14}<4$, the first digit is $a_0=3$. Then [given, algebra] $$\\alpha_1=\\frac1{\\sqrt{14}-3}=\\frac{\\sqrt{14}+3}{5},\\qquad \\alpha_2=\\frac1{\\alpha_1-1}=\\frac{\\sqrt{14}+2}{2},$$ $$\\alpha_3=\\frac1{\\alpha_2-2}=\\frac{\\sqrt{14}+2}{5},\\qquad \\alpha_4=\\frac1{\\alpha_3-1}=\\sqrt{14}+3,$$ and finally $$\\alpha_5=\\frac1{\\alpha_4-6}=\\frac1{\\sqrt{14}-3}=\\alpha_1.$$ So the digits from $\\alpha_1$ onward are $1,2,1,6$ and then repeat.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that $\\alpha_5=\\alpha_1$. By the determinism in [F1], the same four digits $1,2,1,6$ therefore repeat from $\\alpha_1$ onward. Hence $$\\sqrt{14}=[3;\\overline{1,2,1,6}].$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the repeated digit 1 as part of the explicit state cycle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [3; overline 1,2,1,6] for sqrt(14) (continued fraction of square root fourteen) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-golden-ratio-as-a-periodic-continued-fraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-continued-fraction-is-quadratic",
+          "source_section": "Statement",
+          "quote": "The value of every eventually periodic regular continued fraction is a\nquadratic irrational.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-convergence-of-infinite-regular-continued-fractions",
+          "source_section": "Statement",
+          "quote": "Let $[a_0; a_1,a_2,\\ldots]$ be an infinite regular continued fraction, and let\n$c_n:=p_n/q_n$ be its convergents. Then:\n\n1. $c_0<c_2<c_4<\\cdots$ and $c_1>c_3>c_5>\\cdots$;\n2. every even convergent is below every odd convergent; and\n3. there is a unique real number $x$ such that both subsequences\n$(c_{2m})_{m\\ge0}$ and $(c_{2m+1})_{m\\ge0}$ converge to $x$.\n\nThis real number is the value of the infinite regular continued fraction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-continued-fraction",
+          "source_section": "Definition",
+          "quote": "A **finite regular continued fraction** is an expression\n$$[a_0; a_1,\\ldots,a_n]$$\nwith $a_0 \\in \\mathbb{Z}$ and $a_i \\in \\mathbb{Z}_{>0}$ for $i \\ge 1$. Its value\nis defined recursively in $\\mathbb{Q}$ ([[def-rationals]], [[def-rat-operations]])\nby\n$$[a_n] := a_n,\\qquad [a_0; a_1,\\ldots,a_n] := a_0 + \\frac{1}{[a_1;\\ldots,a_n]} \\quad(n \\ge 1).$$\n\nThis recursion is well defined. Indeed, starting from the last digit and\nworking backwards, every tail $[a_i;\\ldots,a_n]$ with $i\\ge1$ is a positive\nrational: the last tail is $a_n>0$, and $a_i+1/t>0$ whenever $a_i>0$ and\n$t>0$. In particular every denominator occurring in the recursion is nonzero.\n\nAn **infinite regular continued fraction** is a digit sequence\n$(a_n)_{n \\ge 0}$ with $a_0 \\in \\mathbb{Z}$ and $a_n \\in \\mathbb{Z}_{>0}$ for\n$n \\ge 1$, written\n$$[a_0; a_1,a_2,\\ldots].$$\nIts value is not assumed by the notation; existence and uniqueness of the value\nare proved in [[thm-convergence-of-infinite-regular-continued-fractions]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $x_m=[1;\\underbrace{1,\\ldots,1}_{m\\text{ further digits}}]$. By. [F2, F3, given, algebra]\n[F2], $x_m\\to x$, while [F3] gives $x_{m+1}=1+1/x_m$. Since\n$x_m\\ge1$ and $x\\ge1$,\n$$\\left|\\frac1{x_m}-\\frac1x\\right|=\\frac{|x_m-x|}{x_mx}\\le |x_m-x|\\longrightarrow0.$$\nTaking limits in the recursion therefore gives\n$$x=1+\\frac1x.$$\nMultiplying by $x$ gives\n$$x^2-x-1=0,$$\nwhose positive solution is\n$$x=\\frac{1+\\sqrt5}{2}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The continued fraction is purely periodic, so [F1] says its value is a. [F1, step 1.1]\nquadratic irrational. Step 1.1 exhibits the quadratic equation explicitly, and\nits positive root is the golden ratio $\\varphi$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $x_m\\ge1$ for every finite truncation and $x\\ge1$ for the limit before dividing by $x_mx$. Thus the reciprocal estimate has a positive, nonzero denominator throughout."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly the one-digit periodic tail x = [1; overline 1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The continued fraction [1; overline 1] for the golden ratio (golden ratio as a periodic continued fraction) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step8-closure-recovery-d",
+        "notes": "I rechecked the repaired fixed-point argument. The finite truncations x_m are genuine convergents and converge to x; their recursive evaluation gives x_{m+1}=1+1/x_m. The bounds x_m>=1 and x>=1 make every reciprocal defined and yield the explicit estimate |1/x_m-1/x|<=|x_m-x|, so passage to the limit proves x=1+1/x without assuming the infinite-tail identity. The positive quadratic root is then the golden ratio."
+      }
+    },
+    "ex-best-rational-approximations-to-pi": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-legendre-continued-fraction-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number. If $r,s\\in\\mathbb{Z}$ satisfy\n$s>0$, $\\gcd(r,s)=1$, and\n$$\\left|\\alpha-\\frac{r}{s}\\right|<\\frac1{2s^2},$$\nthen $r/s$ is a convergent of $\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continued-fraction-convergents-are-best-approximations",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number with convergents $p_n/q_n$, and let\n$n\\ge1$. If\n$r,s\\in\\mathbb{Z}$ with $s>0$ and\n$$|s\\alpha-r|<|q_n\\alpha-p_n|,$$\nthen\n$$s\\ge q_{n+1}.$$\nConsequently, no rational number with denominator at most $q_n$ approximates\n$\\alpha$ more closely than $p_n/q_n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct decimal comparison gives. [given, algebra]\n$$\\left|\\pi-\\frac{22}{7}\\right|\\approx1.264\\times10^{-3},\\qquad \\left|\\pi-\\frac{333}{106}\\right|\\approx8.322\\times10^{-5},$$\n$$\\left|\\pi-\\frac{355}{113}\\right|\\approx2.668\\times10^{-7} <\\frac{1}{2\\cdot113^2}\\approx3.916\\times10^{-5}.$$\nMoreover $355=3\\cdot113+16$ and $113=7\\cdot16+1$, so\n$\\gcd(355,113)=1$. Thus $355/113$ is reduced and satisfies Legendre's\ncriterion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1] and [F1], the fraction $355/113$ is a convergent of $\\pi$. Then [F2] says no. [L1, F1, F2, step 1.1]\nrational with denominator at most $113$ approximates $\\pi$ more closely. Since\n$22/7$ and $333/106$ have denominators $7$ and $106$, neither can beat\n$355/113$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The direct errors from step 1.1 also show that $333/106$ improves on. [step 1.1, algebra]\n$22/7$, but that both are far worse than $355/113$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The flagged denominator 2·113^2 is a fixed positive integer in the explicit 355/113 error computation. This example has no free zero-parameter branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The flagged denominator 2·113^2 is a fixed positive integer in the explicit 355/113 error computation. This example has no free zero-parameter branch."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The fractions 22/7, 333/106, and 355/113 as approximations to pi (best rational approximations to pi) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-an-excellent-approximation-at-the-legendre-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-legendre-continued-fraction-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number. If $r,s\\in\\mathbb{Z}$ satisfy\n$s>0$, $\\gcd(r,s)=1$, and\n$$\\left|\\alpha-\\frac{r}{s}\\right|<\\frac1{2s^2},$$\nthen $r/s$ is a convergent of $\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number, and let $p_n/q_n$ be its continued-\nfraction convergents. Then, for every $n\\ge0$,\n$$\\left|\\alpha-\\frac{p_n}{q_n}\\right| < \\frac{1}{q_nq_{n+1}} \\le \\frac{1}{q_n^2}.$$\nMoreover,\n$$\\alpha-\\frac{p_n}{q_n}$$\nhas sign $(-1)^n$, so the convergents alternate around $\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first few convergents of $[1;\\overline2]=\\sqrt2$ are. [given, algebra]\n$$1,\\qquad \\frac32,\\qquad \\frac75,\\qquad \\frac{17}{12},$$\nso $10/7$ is not a convergent of $\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Nevertheless. [given, algebra]\n$$\\frac{10}{7}-\\sqrt2 = \\frac{100-98}{7(10+7\\sqrt2)} = \\frac{2}{7(10+7\\sqrt2)} < \\frac{3}{4\\cdot 7^2}.$$\nThus $10/7$ satisfies the displayed $3/(4s^2)$ bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 and step 1.2 together refute the statement. In the light of [F1],. [F1, F2, step 1.1, step 1.2]\nthis shows that the sharp constant $1/2$ in Legendre's criterion cannot simply\nbe replaced by the larger constant $3/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The denominators 7(10+7√2) and 4·7^2 are fixed positive values in the concrete 3/4 witness. The counterexample does not quantify over a denominator that could vanish.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-1",
+            "reason": "The denominators 7(10+7√2) and 4·7^2 are fixed positive values in the concrete 3/4 witness. The counterexample does not quantify over a denominator that could vanish."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) has no separate one-element, one-summand, or first-index branch beyond the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim The constant 1/2 in Legendre's criterion cannot be replaced by 3/4 (an excellent approximation at the legendre boundary) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-negative-real-continued-fraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continued-fraction-algorithm-for-real-numbers",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be a real number. The complete-quotient algorithm of\n[[def-continued-fraction-complete-quotients]] either terminates with a finite\nregular continued fraction equal to $\\alpha$, or produces an infinite regular\ncontinued fraction whose convergents converge to $\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $-2<-\\sqrt2<-1$, the first digit is $a_0=-2$. Then. [F1, given, algebra]\n$$\\alpha_1=\\frac1{-\\sqrt2+2}=\\frac{2+\\sqrt2}{2},\\qquad \\alpha_2=\\frac1{\\alpha_1-1}=\\sqrt2,$$\nso $a_1=1$ and $a_2=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "One more step gives. [F1, F2, step 1.1, algebra]\n$$\\alpha_3=\\frac1{\\sqrt2-1}=\\sqrt2+1,$$\nso every later digit is $2$. Hence the digit string is\n$$[-2;1,1,\\overline2],$$\nand [F2] identifies its value with $-\\sqrt2$. In particular the negative sign\nis absorbed entirely into the first digit, while every later digit stays\npositive as required by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) uses fixed data rather than an optional family, so no separate empty-family or empty-set branch changes the argument."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) does not leave a separate zero-valued parameter or denominator branch beyond the explicit hypotheses used in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly compute the later unit digits a_1 = a_2 = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) does not introduce a distinct degenerate or collapsed configuration beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) has no interval-endpoint or boundary-point branch requiring a separate proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) uses explicit data or canonical constructions already named in the item, not a choice from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) is not stated as a biconditional, so there is no forward iff direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim A negative irrational has a regular continued fraction with positive later digits (a negative real continued fraction) is not stated as a biconditional, so there is no reverse iff direction to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-d gate repair",
+        "refuter": "Batch-5 read-only refuter",
+        "notes": "I reopened the negative-irrational example against the complete-quotient definition and reconstruction theorem. The current computation gives a_0=-2, alpha_1=(2+sqrt2)/2, alpha_2=sqrt2, alpha_3=sqrt2+1, so the tail is again overline 2 and the digit string [-2;1,1,overline 2] reconstructs -sqrt2. I specifically checked the sign boundary: only the initial digit is negative and every later digit is positive, exactly as the statement claims."
+      }
+    }
+  }
+}

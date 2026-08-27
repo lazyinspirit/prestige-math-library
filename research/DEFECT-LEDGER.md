@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 421f576a374c by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 9b3e717940a6 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 1827 |
+| defects caught before publication | 2175 |
 | now mechanically prevented | 232 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -199,6 +199,27 @@
 | undefined-notation | 1 | 1 |  | 2 |  |
 | gate-vacuous |  | 1 |  |  |  |
 
+## frontier-20 — 348 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| other | 15 | 55 | 4 |  |  |  |
+| invalid-inference | 16 | 17 | 2 | 7 | 7 | 6 |
+| false-or-overstrong-statement | 2 | 13 |  | 2 | 10 |  |
+| citation-corrupted | 26 |  |  | 1 |  |  |
+| missing-hypothesis | 4 | 2 | 2 | 3 | 12 | 3 |
+| missing-choice-scope |  | 1 |  | 2 | 17 | 1 |
+| citation-missing | 5 |  |  |  | 8 | 6 |
+| ill-typed-construction |  | 1 |  | 1 | 15 | 2 |
+| undefined-notation | 3 | 1 |  | 1 | 10 | 2 |
+| invalid-witness | 1 | 1 |  | 2 | 10 |  |
+| false-boundary-disposition | 5 | 1 |  | 1 | 5 | 1 |
+| citation-inflated |  | 1 |  | 2 | 4 | 5 |
+| citation-misattributed | 3 | 3 |  |  | 1 | 2 |
+| citation-truncated |  |  |  | 3 | 2 | 2 |
+| arithmetic-error | 1 | 1 |  |  | 4 |  |
+| false-or-overstrong-title | 1 |  |  |  |  | 1 |
+
 ## pre-frontier-13 — 3 row(s)
 
 | subclass | A10 | owner | unknown |
@@ -245,3 +266,4 @@
 - `frontier-14-D430` frontier-14 · other · covering-spaces-and-lifting
 - `frontier-12-D008` frontier-12 · other · spine-audit receipt
 - `frontier-13-D053` frontier-13 · other · tools/precheck.mts
+- `pre-frontier-13-D003` pre-frontier-13 · other · tools/run-wave.test.mjs

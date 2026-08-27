@@ -15,6 +15,7 @@ parts:
       - permutation-statistics-inversions-and-eulerian-numbers
       - combinatorial-classes-and-the-symbolic-method
       - lattice-paths-and-catalan-numbers
+      - set-partitions-stirling-numbers-and-exponential-generating-functions
   - part: order-and-inversion
     title: "Order, chains and Mobius inversion"
     pages:
@@ -51,6 +52,7 @@ parts:
       - modules-substitution-and-prime-graphs
       - polynomial-rodl-and-viral-equivalence
       - classical-and-loglog-erdos-hajnal-bounds
+      - blockades-combs-and-pattern-graphs
 ---
 
 ## counting
@@ -65,15 +67,13 @@ the pigeonhole principle, which produces an object without exhibiting it.
 
 A formal power series is a sequence written so that algebra acts on coefficients, with no
 question of convergence anywhere. Coefficient extraction, inversion and formal
-differentiation turn recurrence relations into rational functions and closed forms, while
-permutations add a second generating-function language: Lehmer codes count inversions by
-$q$-factorials, Foata's transformations compare inversion number, major index, descents
-and excedances, and Eulerian polynomials package descent statistics. Symbolic
-combinatorics then turns disjoint unions, products, sequences, multisets, powersets,
-cycles, substitution and pointing into formulas for compositions, partitions, necklaces,
-and recursive families such as plane and binary trees. Lattice paths convert the same
-series into geometry, where reflection, first-return decomposition, the cycle lemma, and
-Lindstrom-Gessel-Viennot yield ballot, Catalan, Motzkin and determinant formulas.
+differentiation solve recurrences, permutations contribute $q$-factorials and Eulerian
+polynomials, symbolic combinatorics turns labelled constructions into EGF identities, and
+lattice paths convert the same series into Catalan-type counts. The added page completes
+this route for set partitions: Stirling numbers encode basis changes between powers and
+factorials, Bell numbers satisfy their standard recurrences and exponential formula,
+labelled constructions explain partition and ordered-partition counts, and Dobinski's
+formula is kept separate as the one analytic argument.
 
 ## order-and-inversion
 
@@ -115,12 +115,10 @@ degree and gives the five colour theorem.
 
 A finite probability space turns expectation into a weighted count, so linearity, Markov's
 inequality and second moments produce combinatorial objects by proving positive
-probability. In hereditary graph theory that method yields homogeneous sets and
-induced-copy estimates, while regularity and the sparse-subgraph theory of Nikiforov and
-Rodl force linearly large restricted sets in $H$-free graphs. Modules and substitution
-give the complementary decomposition theory: Gallai's theorem splits connected
-anticonnected graphs into prime quotients and modular parts, and substitution preserves the
-Erdos-Hajnal property. The finite-family variants then show that the Erdos-Hajnal
-property, the polynomial Rodl property and virality are equivalent. Quantitative density
-theorems then give classical and log-log lower bounds for homogeneous sets in $H$-free
-graphs.
+probability. In hereditary graph theory this yields homogeneous sets, induced-copy
+estimates, regularity-driven restricted subgraphs, modular decomposition, and the density
+bounds behind Erdos-Hajnal, polynomial Rodl and virality formulations. The added blockade
+page supplies one local engine for those results: ordered blockades, combs and pure pattern
+graphs encode sparse or complete behaviour, $P_4$-free patterns force large homogeneous
+subblockades, and maximal sparse-pair extraction turns repeated local sparsity into a long
+structured blockade for later iterative arguments.

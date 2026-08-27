@@ -7,6 +7,7 @@ parts:
     pages:
       - divisibility-gcd-and-bezout
       - primes-and-the-fundamental-theorem-of-arithmetic
+      - regular-continued-fractions-and-diophantine-approximation
   - part: congruences-and-unit-groups
     title: "Congruences and unit groups"
     pages:
@@ -27,7 +28,12 @@ parts:
 Number theory here starts from the integers as this library constructed them, an ordered
 commutative ring and nothing more. Division with remainder gives the greatest common
 divisor and Bezout's identity, and Bezout gives Euclid's lemma, which is the step that
-makes a prime factorisation unique rather than merely possible.
+makes a prime factorisation unique rather than merely possible. The added page extends that
+same division algorithm into approximation: regular continued fractions encode repeated
+quotient extraction, convergents satisfy a determinant identity and sharp error bounds, and
+best approximation with Legendre's criterion follows from the complete-quotient formulas.
+The final step identifies quadratic irrationals by eventual periodicity, with Lagrange's
+theorem matching quadratic equations to finite-state continued-fraction dynamics.
 
 ## congruences-and-unit-groups
 

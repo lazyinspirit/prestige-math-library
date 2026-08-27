@@ -1,0 +1,631 @@
+[
+  {
+    "order": 111.005,
+    "id": "prime-spectra-and-radicals",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Prime Spectra and Radicals",
+    "companion": "prime-spectra-and-radicals-examples",
+    "requires": [
+      "localisation-of-modules-and-support-examples",
+      "algebraic-extensions-degree-and-finite-fields"
+    ],
+    "items": [
+      {
+        "id": "def-radical-of-an-ideal",
+        "kind": "definition",
+        "title": "The radical of an ideal",
+        "deps": [
+          "def-commutative-ring",
+          "def-left-right-and-two-sided-ideal"
+        ]
+      },
+      {
+        "id": "lem-radical-membership-by-a-power",
+        "kind": "lemma",
+        "title": "Radical membership via positive powers",
+        "strategy": "Unpack the definition of the radical and record the unit-ideal and zero-ring edge cases explicitly so later uses do not hide them.",
+        "deps": [
+          "def-radical-of-an-ideal"
+        ]
+      },
+      {
+        "id": "lem-radical-is-an-ideal",
+        "kind": "lemma",
+        "title": "The radical of an ideal is an ideal",
+        "strategy": "Use the binomial theorem for sums, ideal absorption for scalar multiples, and exponent nesting for idempotence and monotonicity.",
+        "deps": [
+          "def-radical-of-an-ideal",
+          "thm-binomial-theorem-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "lem-radical-of-an-intersection",
+        "kind": "lemma",
+        "title": "The radical of a finite intersection",
+        "strategy": "One inclusion is immediate from monotonicity; for the reverse, raise a common product of witnessing powers into the intersection.",
+        "deps": [
+          "lem-radical-is-an-ideal"
+        ]
+      },
+      {
+        "id": "lem-radical-of-a-product",
+        "kind": "lemma",
+        "title": "The radical of a product of ideals",
+        "strategy": "Use IJ subseteq I cap J for one inclusion and multiply witnesses from sqrt(I) and sqrt(J) for the reverse.",
+        "deps": [
+          "lem-radical-of-an-intersection",
+          "def-sum-and-product-of-ideals"
+        ]
+      },
+      {
+        "id": "def-nilradical-and-reduced-ring",
+        "kind": "definition",
+        "title": "The nilradical and reduced rings",
+        "deps": [
+          "def-radical-of-an-ideal"
+        ]
+      },
+      {
+        "id": "lem-radical-commutes-with-quotient-correspondence",
+        "kind": "lemma",
+        "title": "Radicals and quotient correspondence",
+        "strategy": "Translate power-membership in R/I back and forth across the quotient map and use the ideal correspondence theorem.",
+        "deps": [
+          "def-radical-of-an-ideal",
+          "thm-correspondence-theorem-ideals"
+        ]
+      },
+      {
+        "id": "lem-radical-commutes-with-localisation",
+        "kind": "lemma",
+        "title": "Radicals commute with localization",
+        "strategy": "If a fraction has a power in the extended ideal, clear denominators; the forward direction is immediate from functoriality of localization.",
+        "deps": [
+          "def-radical-of-an-ideal",
+          "def-multiplicative-subset-and-localisation",
+          "thm-ideal-correspondence-for-localisation"
+        ]
+      },
+      {
+        "id": "cor-reduced-quotient-by-the-nilradical",
+        "kind": "corollary",
+        "title": "The reduced quotient by the nilradical",
+        "strategy": "Use the quotient-radical identification for reducedness, then factor any map to a reduced ring through the quotient by the nilradical.",
+        "deps": [
+          "def-nilradical-and-reduced-ring",
+          "lem-radical-commutes-with-quotient-correspondence"
+        ]
+      },
+      {
+        "id": "lem-prime-containing-a-multiplicative-set-disjoint-ideal",
+        "kind": "lemma",
+        "title": "A prime containing an ideal and avoiding a multiplicative set",
+        "strategy": "Take an ideal maximal among those containing I and disjoint from S via Zorn, then prove maximal disjointness forces primality.",
+        "deps": [
+          "def-prime-and-maximal-ideals",
+          "def-multiplicative-subset-and-localisation",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "cor-prime-containing-an-ideal-avoiding-an-element",
+        "kind": "corollary",
+        "title": "Separating an element from an ideal by a prime",
+        "strategy": "Apply the multiplicative-set lemma to the powers of the chosen element.",
+        "deps": [
+          "lem-prime-containing-a-multiplicative-set-disjoint-ideal"
+        ]
+      },
+      {
+        "id": "lem-radical-intersection-proof-forward-inclusion",
+        "kind": "lemma",
+        "title": "Primes containing an ideal contain its radical",
+        "strategy": "If a power of x lies in a prime containing I, primality removes the power one factor at a time.",
+        "deps": [
+          "def-radical-of-an-ideal",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-radical-intersection-proof-separating-prime",
+        "kind": "lemma",
+        "title": "A separating prime for an element outside a radical",
+        "strategy": "If f is not in sqrt(I), no power of f lies in I, so the previous corollary produces a prime over I that omits f.",
+        "deps": [
+          "cor-prime-containing-an-ideal-avoiding-an-element",
+          "def-radical-of-an-ideal"
+        ]
+      },
+      {
+        "id": "thm-radical-as-intersection-of-primes",
+        "kind": "theorem",
+        "title": "The radical of an ideal is the intersection of the prime ideals containing it",
+        "strategy": "Combine the forward inclusion from primality with the separating-prime lemma for elements outside the radical.",
+        "deps": [
+          "lem-radical-intersection-proof-forward-inclusion",
+          "lem-radical-intersection-proof-separating-prime"
+        ]
+      },
+      {
+        "id": "cor-nilradical-as-intersection-of-primes",
+        "kind": "corollary",
+        "title": "The nilradical is the intersection of all prime ideals",
+        "strategy": "Apply the radical-intersection theorem to the zero ideal.",
+        "deps": [
+          "def-nilradical-and-reduced-ring",
+          "thm-radical-as-intersection-of-primes"
+        ]
+      },
+      {
+        "id": "cor-ring-reduced-iff-zero-is-an-intersection-of-primes",
+        "kind": "corollary",
+        "title": "A ring is reduced exactly when zero is an intersection of primes",
+        "strategy": "Translate reducedness into vanishing nilradical and invoke the nilradical intersection corollary.",
+        "deps": [
+          "def-nilradical-and-reduced-ring",
+          "cor-nilradical-as-intersection-of-primes"
+        ]
+      },
+      {
+        "id": "def-prime-spectrum-and-vanishing-sets",
+        "kind": "definition",
+        "title": "The prime spectrum and vanishing sets",
+        "deps": [
+          "def-prime-and-maximal-ideals",
+          "def-generated-and-principal-ideals"
+        ]
+      },
+      {
+        "id": "def-krull-dimension-of-a-ring",
+        "kind": "definition",
+        "title": "Krull dimension of a nonzero ring",
+        "deps": [
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "def-height-of-a-prime-ideal",
+        "kind": "definition",
+        "title": "The height of a prime ideal",
+        "deps": [
+          "def-prime-and-maximal-ideals",
+          "def-localisation-at-a-prime-ideal",
+          "def-krull-dimension-of-a-ring"
+        ]
+      },
+      {
+        "id": "lem-vanishing-set-reverses-inclusions",
+        "kind": "lemma",
+        "title": "Vanishing sets reverse inclusions",
+        "strategy": "A prime containing the larger ideal automatically contains the smaller one.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets"
+        ]
+      },
+      {
+        "id": "lem-vanishing-set-of-an-arbitrary-sum",
+        "kind": "lemma",
+        "title": "Vanishing sets of arbitrary sums",
+        "strategy": "A prime contains the sum of a family exactly when it contains each summand.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-sum-and-product-of-ideals"
+        ]
+      },
+      {
+        "id": "lem-vanishing-set-of-a-finite-product",
+        "kind": "lemma",
+        "title": "Vanishing sets of finite products",
+        "strategy": "If a prime contains a finite product of ideals, primality forces one factor ideal into the prime.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-sum-and-product-of-ideals",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-vanishing-set-identities",
+        "kind": "lemma",
+        "title": "Vanishing-set identities",
+        "strategy": "Combine the boundary cases with the arbitrary-sum and finite-product lemmas.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "lem-vanishing-set-of-an-arbitrary-sum",
+          "lem-vanishing-set-of-a-finite-product"
+        ]
+      },
+      {
+        "id": "lem-vanishing-sets-detect-radicals",
+        "kind": "lemma",
+        "title": "Vanishing sets detect radicals",
+        "strategy": "Equal vanishing sets mean equal intersections of containing primes, hence equal radicals, and conversely radicals do not change which primes contain an ideal.",
+        "deps": [
+          "lem-vanishing-set-identities",
+          "thm-radical-as-intersection-of-primes",
+          "lem-radical-is-an-ideal"
+        ]
+      },
+      {
+        "id": "def-principal-distinguished-subset-of-spectrum",
+        "kind": "definition",
+        "title": "Principal distinguished subsets of the prime spectrum",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets"
+        ]
+      },
+      {
+        "id": "lem-distinguished-subset-identities",
+        "kind": "lemma",
+        "title": "Distinguished-subset identities",
+        "strategy": "Rewrite D(f) as the complement of V(f) and use primality together with the nilradical criterion for emptiness.",
+        "deps": [
+          "def-principal-distinguished-subset-of-spectrum",
+          "cor-nilradical-as-intersection-of-primes"
+        ]
+      },
+      {
+        "id": "lem-distinguished-subset-cover-detects-radical",
+        "kind": "lemma",
+        "title": "Distinguished-subset covers detect radicals",
+        "strategy": "Pass to complements and use equality of vanishing sets with equality of radicals.",
+        "deps": [
+          "lem-distinguished-subset-identities",
+          "lem-vanishing-sets-detect-radicals",
+          "def-generated-and-principal-ideals"
+        ]
+      },
+      {
+        "id": "lem-spectrum-map-respects-composition-and-identities",
+        "kind": "lemma",
+        "title": "The spectrum map respects composition and identities",
+        "strategy": "Contraction of prime ideals is prime, inverse images compose, and the identity map contracts to itself.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-ring-homomorphism",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-spectrum-map-preimage-of-vanishing-set",
+        "kind": "lemma",
+        "title": "The spectrum map pulls back vanishing sets",
+        "strategy": "A target prime contains the extension IA exactly when its contraction contains I.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-ring-homomorphism",
+          "def-generated-and-principal-ideals"
+        ]
+      },
+      {
+        "id": "thm-prime-spectrum-map-by-contraction",
+        "kind": "theorem",
+        "title": "A ring map induces a contraction map on prime spectra",
+        "strategy": "Package the contraction construction and the vanishing-set pullback lemma into the contravariant spectrum map.",
+        "deps": [
+          "lem-spectrum-map-respects-composition-and-identities",
+          "lem-spectrum-map-preimage-of-vanishing-set"
+        ]
+      },
+      {
+        "id": "lem-primes-of-a-quotient-are-primes-over-the-kernel",
+        "kind": "lemma",
+        "title": "Primes of a quotient lie over the kernel",
+        "strategy": "Apply ideal correspondence and the quotient-domain criterion to transfer primality across R to R/I.",
+        "deps": [
+          "thm-correspondence-theorem-ideals",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "def-prime-spectrum-and-vanishing-sets"
+        ]
+      },
+      {
+        "id": "thm-prime-spectrum-of-a-quotient-bijection",
+        "kind": "theorem",
+        "title": "Prime ideals of a quotient ring are exactly the prime ideals containing the ideal",
+        "strategy": "Read the quotient prime correspondence as the spectrum contraction map onto V(I).",
+        "deps": [
+          "lem-primes-of-a-quotient-are-primes-over-the-kernel",
+          "thm-prime-spectrum-map-by-contraction"
+        ]
+      },
+      {
+        "id": "lem-primes-of-a-localisation-avoid-the-multiplicative-set",
+        "kind": "lemma",
+        "title": "Primes of a localization avoid the denominator set",
+        "strategy": "Use localization ideal correspondence, checking that extension and contraction are inverse on the primes disjoint from S.",
+        "deps": [
+          "thm-ideal-correspondence-for-localisation",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-multiplicative-subset-and-localisation"
+        ]
+      },
+      {
+        "id": "cor-primes-of-a-prime-local-ring",
+        "kind": "corollary",
+        "title": "Primes of a localization at a prime",
+        "strategy": "Specialize the localization-prime correspondence to S = R minus p.",
+        "deps": [
+          "lem-primes-of-a-localisation-avoid-the-multiplicative-set",
+          "def-localisation-at-a-prime-ideal"
+        ]
+      },
+      {
+        "id": "cor-primes-of-a-principal-localisation",
+        "kind": "corollary",
+        "title": "Primes of a principal localization",
+        "strategy": "Specialize the localization-prime correspondence to the powers of a single element.",
+        "deps": [
+          "lem-primes-of-a-localisation-avoid-the-multiplicative-set",
+          "def-principal-localisation"
+        ]
+      },
+      {
+        "id": "thm-prime-spectrum-of-a-localisation-bijection",
+        "kind": "theorem",
+        "title": "Prime ideals of a localization are exactly the primes disjoint from the denominator set",
+        "strategy": "Promote the localization-prime correspondence to the spectrum-level bijection.",
+        "deps": [
+          "lem-primes-of-a-localisation-avoid-the-multiplicative-set",
+          "thm-prime-spectrum-map-by-contraction"
+        ]
+      },
+      {
+        "id": "cor-prime-spectrum-insensitive-to-nilpotents",
+        "kind": "corollary",
+        "title": "Passing to the reduced quotient does not change the prime spectrum",
+        "strategy": "Quotient by the nilradical and invoke the quotient-spectrum bijection together with radical detection.",
+        "deps": [
+          "cor-reduced-quotient-by-the-nilradical",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "lem-vanishing-sets-detect-radicals"
+        ]
+      },
+      {
+        "id": "lem-minimal-prime-over-an-ideal-exists",
+        "kind": "lemma",
+        "title": "Minimal primes over a proper ideal exist",
+        "strategy": "First place the ideal inside some prime, then apply Zorn to descending chains of primes over the ideal; intersections of such chains stay prime.",
+        "deps": [
+          "def-prime-and-maximal-ideals",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "lem-noetherian-minimal-primes-induction-split",
+        "kind": "lemma",
+        "title": "The Noetherian minimal-prime induction split",
+        "strategy": "If a radical ideal is not prime, choose x and y outside it with xy inside it and split minimal primes according to which element they contain.",
+        "deps": [
+          "thm-noetherian-induction",
+          "def-sum-and-product-of-ideals",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "thm-nilradical-of-a-noetherian-ring-is-nilpotent",
+        "kind": "theorem",
+        "title": "The nilradical of a Noetherian ring is nilpotent",
+        "strategy": "Use finite generation of the nilradical in a Noetherian ring and a common exponent argument for finitely many nilpotent generators.",
+        "deps": [
+          "def-nilradical-and-reduced-ring",
+          "thm-noetherian-ring-ideal-characterisations",
+          "lem-radical-membership-by-a-power"
+        ]
+      },
+      {
+        "id": "cor-radical-ideal-has-finitely-many-minimal-primes-noetherian",
+        "kind": "corollary",
+        "title": "A radical ideal in a Noetherian ring is a finite intersection of minimal primes",
+        "strategy": "Reduce to the quotient by the radical ideal, run the Noetherian induction split there, and pull the resulting minimal primes back to R before applying the radical-intersection theorem.",
+        "deps": [
+          "thm-radical-as-intersection-of-primes",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-noetherian-induction",
+          "lem-noetherian-minimal-primes-induction-split",
+          "lem-minimal-prime-over-an-ideal-exists"
+        ]
+      },
+      {
+        "id": "thm-noetherian-ring-has-finitely-many-minimal-primes",
+        "kind": "theorem",
+        "title": "A Noetherian ring has finitely many minimal prime ideals",
+        "strategy": "Specialize the radical-ideal corollary to the zero ideal.",
+        "deps": [
+          "cor-radical-ideal-has-finitely-many-minimal-primes-noetherian",
+          "def-nilradical-and-reduced-ring"
+        ]
+      },
+      {
+        "id": "lem-height-equals-local-dimension",
+        "kind": "lemma",
+        "title": "Height equals local dimension",
+        "strategy": "Prime chains in R_p correspond exactly to prime chains in R ending at p, so the two suprema agree.",
+        "deps": [
+          "def-height-of-a-prime-ideal",
+          "cor-primes-of-a-prime-local-ring",
+          "def-krull-dimension-of-a-ring"
+        ]
+      },
+      {
+        "id": "cor-dimension-of-a-quotient-as-chains-above-an-ideal",
+        "kind": "corollary",
+        "title": "Dimension of a quotient via chains above an ideal",
+        "strategy": "Translate prime chains in R/I into prime chains of R containing I by the quotient-spectrum correspondence.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.006,
+    "id": "prime-spectra-and-radicals-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Prime Spectra and Radicals - Examples",
+    "companion": "prime-spectra-and-radicals",
+    "requires": [
+      "prime-spectra-and-radicals"
+    ],
+    "items": [
+      {
+        "id": "ex-prime-sets-of-a-field-and-the-integers",
+        "kind": "example",
+        "title": "The prime ideals of a field and of the integers",
+        "strategy": "A field has only the zero ideal. For Z, prove every ideal is nZ by well-ordering, then use quotient criteria to see that nZ is prime exactly for n = 0 or n prime.",
+        "deps": [
+          "def-field",
+          "def-integers",
+          "def-prime-spectrum-and-vanishing-sets",
+          "def-prime-and-maximal-ideals",
+          "def-prime",
+          "thm-well-ordering-principle",
+          "def-generated-and-principal-ideals",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-z-mod-p-is-a-field",
+          "lem-every-integer-above-one-has-a-prime-divisor"
+        ]
+      },
+      {
+        "id": "ex-prime-spectrum-set-of-a-product-ring",
+        "kind": "example",
+        "title": "Every prime ideal of a product ring comes from one factor",
+        "strategy": "In R x S the idempotents (1,0) and (0,1) multiply to 0, so a prime contains exactly one of them and therefore comes from one projection.",
+        "deps": [
+          "def-product-ring",
+          "def-prime-and-maximal-ideals",
+          "thm-prime-spectrum-map-by-contraction"
+        ]
+      },
+      {
+        "id": "ex-prime-spectrum-set-of-dual-numbers",
+        "kind": "example",
+        "title": "Dual numbers and their reduced quotient have the same prime set",
+        "strategy": "Write the dual numbers as k[epsilon]/(epsilon^2); epsilon is nilpotent, so reduction identifies their prime spectra.",
+        "deps": [
+          "cor-prime-spectrum-insensitive-to-nilpotents",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-prime-ideals-of-a-node",
+        "kind": "example",
+        "title": "Minimal and maximal primes of the node ring",
+        "strategy": "Work in k[x,y]/(xy): any prime over (xy) contains x or y, so quotient correspondence reduces the computation to the two coordinate-axis quotients and their maximal ideals.",
+        "deps": [
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-field",
+          "def-generated-and-principal-ideals",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "ex-distinguished-subset-and-localisation-primes",
+        "kind": "example",
+        "title": "The distinguished subset D(x) matches the primes of the localization at x",
+        "strategy": "Primes of k[x,y]_x correspond exactly to primes of k[x,y] avoiding x, which is the distinguished subset D(x).",
+        "deps": [
+          "lem-distinguished-subset-identities",
+          "cor-primes-of-a-principal-localisation",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-field",
+          "def-principal-localisation"
+        ]
+      },
+      {
+        "id": "ex-radical-intersection-computation",
+        "kind": "example",
+        "title": "Computing sqrt((x^2,xy)) from its containing primes",
+        "strategy": "Show every prime over (x^2,xy) contains x, and conversely x^2 already lies in the ideal, so the radical is (x).",
+        "deps": [
+          "thm-radical-as-intersection-of-primes",
+          "lem-radical-of-a-product",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-generated-and-principal-ideals",
+          "def-field",
+          "def-prime-spectrum-and-vanishing-sets"
+        ]
+      },
+      {
+        "id": "ex-radical-of-a-product-and-intersection",
+        "kind": "example",
+        "title": "A radical of a product and intersection computation",
+        "strategy": "Compute a monomial example two ways and compare it with the product/intersection radical identities.",
+        "deps": [
+          "lem-radical-of-a-product",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-generated-and-principal-ideals",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-separating-prime-for-a-missing-radical-element",
+        "kind": "example",
+        "title": "A separating prime for an element outside a radical",
+        "strategy": "Use an explicit polynomial ideal and invoke the separating-prime corollary to exhibit a prime avoiding the chosen element.",
+        "deps": [
+          "cor-prime-containing-an-ideal-avoiding-an-element",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-generated-and-principal-ideals",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-spectrum-of-a-zero-ring-empty",
+        "kind": "example",
+        "title": "The zero ring has empty prime spectrum",
+        "strategy": "There are no proper ideals in the zero ring, so no prime ideals; then check the displayed V and D boundary cases directly.",
+        "deps": [
+          "def-prime-spectrum-and-vanishing-sets",
+          "lem-vanishing-set-identities",
+          "lem-distinguished-subset-identities"
+        ]
+      },
+      {
+        "id": "ex-primes-in-a-prime-localisation",
+        "kind": "example",
+        "title": "Primes inside a localization at a prime",
+        "strategy": "List primes below (x,y) in k[x,y], then transport them through localization at that prime.",
+        "deps": [
+          "cor-primes-of-a-prime-local-ring",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-field",
+          "def-localisation-at-a-prime-ideal"
+        ]
+      },
+      {
+        "id": "ex-noetherian-nilradical-common-exponent",
+        "kind": "example",
+        "title": "A common nilpotence exponent in a Noetherian quotient",
+        "strategy": "Generate the nilradical by finitely many monomials and take a common exponent guaranteed by the nilradical-nilpotence theorem.",
+        "deps": [
+          "thm-nilradical-of-a-noetherian-ring-is-nilpotent",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-nilradical-need-not-be-nilpotent-nonnoetherian",
+        "kind": "example",
+        "title": "A non-Noetherian nilradical need not be nilpotent",
+        "strategy": "Use an infinite-variable quotient whose nilpotent generators have unbounded exponents, so no common power kills them all.",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-field",
+          "def-nilradical-and-reduced-ring"
+        ]
+      }
+    ]
+  }
+]
