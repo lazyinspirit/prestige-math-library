@@ -2,7 +2,7 @@
 id: lem-p-four-free-pattern-graphs-have-square-root-homogeneous-sets
 kind: lemma
 title: "A $P_4$-free graph on $q$ vertices has a homogeneous set of size at least $\\sqrt q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

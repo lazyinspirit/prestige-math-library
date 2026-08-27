@@ -2,13 +2,14 @@
 id: rem-algorithmic-role-of-onan-scott
 kind: remark
 title: "The O'Nan-Scott theorem reduces finite primitive-group questions to socle types"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-onan-scott-classification-of-finite-primitive-groups]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

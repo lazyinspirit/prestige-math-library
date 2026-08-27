@@ -2,7 +2,7 @@
 id: fs-every-atomless-borel-measure-on-r-has-a-density
 kind: false-statement
 title: "FALSE: every atomless Borel measure on $\\mathbb{R}$ is absolutely continuous with respect to Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-cantor-measure-is-a-singular-atomless-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

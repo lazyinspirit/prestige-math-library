@@ -2,7 +2,7 @@
 id: ex-ordered-bell-versus-bell-at-three
 kind: example
 title: "Ordered Bell numbers already differ from Bell numbers at $n=3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-stirling-second-kind-and-bell-number, cor-standard-specializations-of
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

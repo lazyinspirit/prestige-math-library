@@ -2,7 +2,7 @@
 id: lem-pure-blockades-with-p-four-free-patterns-contain-large-homogeneous-subblockades
 kind: lemma
 title: "Pure blockades with $P_4$-free patterns contain complete or anticomplete subblockades of square-root length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

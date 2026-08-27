@@ -2,7 +2,7 @@
 id: cex-mass-escapes-to-infinity-under-pointwise-convergence
 kind: counterexample
 title: "Mass can escape to infinity under pointwise convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fatou-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

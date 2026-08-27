@@ -2,7 +2,7 @@
 id: def-signed-and-signless-stirling-first-kind
 kind: definition
 title: "The signed and signless Stirling numbers of the first kind"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-permutation-support-disjoint-cycles-and-cycle-type, cor-symmetric-gro
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

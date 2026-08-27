@@ -2,13 +2,14 @@
 id: def-geodesic-segment-triangle-and-geodesic-metric-space
 kind: definition
 title: "Geodesic segments, geodesic triangles, and geodesic metric spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-geodesic-and-geodesic-metric-space]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation
 kind: theorem
 title: "On a biproduct, the injections and projections satisfy the identity-sum relation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

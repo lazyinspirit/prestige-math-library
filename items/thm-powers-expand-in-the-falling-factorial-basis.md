@@ -2,7 +2,7 @@
 id: thm-powers-expand-in-the-falling-factorial-basis
 kind: theorem
 title: "Ordinary powers expand in the falling-factorial basis by the second-kind Stirling numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

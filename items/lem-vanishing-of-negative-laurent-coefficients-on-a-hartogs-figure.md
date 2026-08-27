@@ -2,7 +2,7 @@
 id: lem-vanishing-of-negative-laurent-coefficients-on-a-hartogs-figure
 kind: lemma
 title: "Negative Laurent coefficients vanish on a Hartogs figure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

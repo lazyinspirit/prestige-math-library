@@ -2,7 +2,7 @@
 id: lem-vanishing-set-identities
 kind: lemma
 title: "Vanishing-set identities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

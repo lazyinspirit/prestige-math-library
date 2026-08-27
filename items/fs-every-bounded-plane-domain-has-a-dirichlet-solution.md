@@ -2,7 +2,7 @@
 id: fs-every-bounded-plane-domain-has-a-dirichlet-solution
 kind: false-statement
 title: "FALSE: every bounded plane domain solves the Dirichlet problem for every continuous boundary datum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

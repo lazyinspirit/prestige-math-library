@@ -2,7 +2,7 @@
 id: ex-lah-number-l-four-two
 kind: example
 title: "The Lah number $L(4,2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-lah-numbers-count-ordered-set-partitions-and-expand-rising-factorials
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

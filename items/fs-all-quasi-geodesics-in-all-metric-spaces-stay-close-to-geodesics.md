@@ -2,7 +2,7 @@
 id: fs-all-quasi-geodesics-in-all-metric-spaces-stay-close-to-geodesics
 kind: false-statement
 title: "FALSE: all quasi-geodesics in all metric spaces stay uniformly close to geodesics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quasi-geodesic-and-quasi-geodesic-metric-space, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

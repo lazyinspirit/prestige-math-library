@@ -2,7 +2,7 @@
 id: ex-x-squared-plus-one-is-irreducible-over-r-and-split-over-c
 kind: example
 title: "$x^2+1$ is irreducible over $\\mathbb R$ and split over $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

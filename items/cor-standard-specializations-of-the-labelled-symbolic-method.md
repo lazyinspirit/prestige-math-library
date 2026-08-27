@@ -2,7 +2,7 @@
 id: cor-standard-specializations-of-the-labelled-symbolic-method
 kind: corollary
 title: "Standard labelled specializations give involutions, ordered Bell numbers, and partitions without singletons"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

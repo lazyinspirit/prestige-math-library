@@ -2,7 +2,7 @@
 id: prop-finite-and-free-groups-are-hyperbolic
 kind: proposition
 title: "Finite groups and free groups are hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hyperbolic-group, prop-cayley-trees-are-zero-hyperbolic, thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

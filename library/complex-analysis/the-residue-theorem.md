@@ -1,7 +1,7 @@
 ---
 page: the-residue-theorem
 title: "The Residue Theorem and the Evaluation of Real Integrals"
-status: draft
+status: published
 items: [rem-cauchy-principal-value-dictionary,
         def-standard-residue-contours,
         def-admissible-cycle-for-residue-theorem,

@@ -2,7 +2,7 @@
 id: thm-coordinatewise-measurability-into-r-n
 kind: theorem
 title: "A map into $\\mathbb{R}^n$ is measurable exactly when its coordinates are measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-generating-family-criterion-for-measurable-functions, thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn, thm-threshold-characterisations-of-real-and-extended-real-measurability]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

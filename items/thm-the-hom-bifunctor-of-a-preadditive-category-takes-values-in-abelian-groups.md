@@ -2,7 +2,7 @@
 id: thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups
 kind: theorem
 title: "The hom-bifunctor of a preadditive category takes values in abelian groups"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

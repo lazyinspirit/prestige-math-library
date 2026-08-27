@@ -1,7 +1,7 @@
 ---
 page: socles-and-the-onan-scott-landscape
 title: "Socles and the Onan Scott Landscape"
-status: draft
+status: published
 items: [def-minimal-normal-subgroup-and-socle,
         lem-distinct-minimal-normal-subgroups-centralize-one-another,
         lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple,

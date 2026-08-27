@@ -2,7 +2,7 @@
 id: ex-singleton-block-families-have-egf-exp-x
 kind: example
 title: "Set partitions whose blocks are all singletons have EGF $e^x$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-labelled-symbolic-method-rules-for-exponential-generating-functions]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

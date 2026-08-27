@@ -2,7 +2,7 @@
 id: lem-periodic-continued-fraction-is-quadratic
 kind: lemma
 title: "Eventually periodic regular continued fractions are quadratic irrationals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

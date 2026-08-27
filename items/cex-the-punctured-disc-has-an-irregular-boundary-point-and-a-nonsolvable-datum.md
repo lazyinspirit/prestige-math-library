@@ -2,7 +2,7 @@
 id: cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum
 kind: counterexample
 title: "The punctured disc has an irregular boundary point and a continuous boundary datum with no harmonic solution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions, cor-uniqueness-for-the-bounded-plane-dirichlet-problem, thm-perron-solves-dirichlet-on-regular-plane-domains]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

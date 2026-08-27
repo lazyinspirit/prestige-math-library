@@ -2,7 +2,7 @@
 id: ex-perron-solution-on-an-annulus-with-radial-data
 kind: example
 title: "The Perron solution on an annulus with constant radial boundary data is logarithmic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-perron-solves-dirichlet-on-regular-plane-domains, thm-exterior-disc-and-exterior-cone-points-are-regular, cor-uniqueness-for-the-bounded-plane-dirichlet-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

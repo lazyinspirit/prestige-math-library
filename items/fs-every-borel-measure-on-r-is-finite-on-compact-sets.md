@@ -2,7 +2,7 @@
 id: fs-every-borel-measure-on-r-is-finite-on-compact-sets
 kind: false-statement
 title: "FALSE: every Borel measure on $\\mathbb{R}$ is finite on compact sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-counting-measure, prop-counting-measure-is-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

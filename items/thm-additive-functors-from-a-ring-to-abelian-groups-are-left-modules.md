@@ -2,7 +2,7 @@
 id: thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules
 kind: theorem
 title: "Additive functors from a ring to abelian groups are left modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups
 kind: theorem
 title: "Finite characteristically simple groups are direct products of isomorphic simple groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-characteristic-subgroup, def-group-isomorphism-and-automorphism, def-internal-direct-product-of-subgroups, def-simple-group]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-trigonometric-integral-one-over-a-plus-cos-theta
 kind: example
 title: "The integral of 1 / (a + cos theta) over [0, 2 pi]"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

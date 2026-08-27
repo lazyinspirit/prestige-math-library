@@ -2,7 +2,7 @@
 id: thm-exterior-disc-and-exterior-cone-points-are-regular
 kind: theorem
 title: "Exterior disc points and exterior cone points are regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-barrier-characterization-of-regular-boundary-points,
        lem-local-subharmonic-peak-function-globalizes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

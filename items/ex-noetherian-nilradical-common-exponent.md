@@ -2,7 +2,7 @@
 id: ex-noetherian-nilradical-common-exponent
 kind: example
 title: "A common nilpotence exponent in a Noetherian quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-measurable-function-between-measurable-spaces
 kind: definition
 title: "A measurable function between measurable spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measurable-space]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

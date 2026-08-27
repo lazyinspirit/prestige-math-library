@@ -2,7 +2,7 @@
 id: def-boundary-topology-by-gromov-products
 kind: definition
 title: "The boundary topology defined by Gromov products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gromov-boundary-by-asymptotic-sequences, def-gromov-product]
 justified_by: [thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

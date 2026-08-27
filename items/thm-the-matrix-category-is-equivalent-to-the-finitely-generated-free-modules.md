@@ -2,7 +2,7 @@
 id: thm-the-matrix-category-is-equivalent-to-the-finitely-generated-free-modules
 kind: theorem
 title: "The matrix category is fully faithful in modules and, with chosen bases, equivalent to finite free modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

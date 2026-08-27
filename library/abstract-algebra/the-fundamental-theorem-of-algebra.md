@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-theorem-of-algebra
 title: "The Fundamental Theorem of Algebra"
-status: draft
+status: published
 items: [thm-odd-degree-real-polynomial-has-a-real-root,
         cor-irreducible-real-polynomial-has-degree-one-or-even-degree,
         lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra,

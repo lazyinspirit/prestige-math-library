@@ -2,7 +2,7 @@
 id: thm-indefinite-integral-of-a-nonnegative-function-is-a-measure
 kind: theorem
 title: "The indefinite integral of a nonnegative measurable function is a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, def-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

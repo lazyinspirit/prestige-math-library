@@ -2,7 +2,7 @@
 id: fs-every-domain-in-c-two-is-a-domain-of-holomorphy
 kind: false-statement
 title: "FALSE: every domain in C^2 is a domain of holomorphy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

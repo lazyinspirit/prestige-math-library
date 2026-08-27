@@ -2,7 +2,7 @@
 id: lem-holomorphic-dependence-of-slice-laurent-coefficients
 kind: lemma
 title: "Laurent coefficients on Hartogs slices depend holomorphically on the remaining variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

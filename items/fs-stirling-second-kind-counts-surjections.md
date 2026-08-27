@@ -2,7 +2,7 @@
 id: fs-stirling-second-kind-counts-surjections
 kind: false-statement
 title: "FALSE: $S(n,k)$ counts surjections $[n]\\to[k]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

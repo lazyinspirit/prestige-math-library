@@ -2,7 +2,7 @@
 id: fs-composing-a-lebesgue-measurable-function-with-a-continuous-map-need-not-preserve-measurability
 kind: false-statement
 title: "FALSE: composing a Lebesgue measurable function with a continuous map preserves measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset, lem-this-homeomorphism-sends-the-cantor-set-onto-a-set-of-lebesgue-measure-one, cor-cantor-set-is-an-uncountable-lebesgue-null-set, thm-lebesgue-measure-is-a-complete-measure, lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two, prop-indicator-function-is-measurable-iff-its-set-is-measurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

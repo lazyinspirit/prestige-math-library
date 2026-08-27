@@ -2,13 +2,14 @@
 id: def-elementary-and-non-elementary-hyperbolic-groups
 kind: definition
 title: "Elementary and non-elementary hyperbolic groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-hyperbolic-group]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

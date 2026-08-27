@@ -2,7 +2,7 @@
 id: lem-finiteness-support-residue-sum
 kind: lemma
 title: "Only finitely many singularities contribute to the residue sum of an admissible cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

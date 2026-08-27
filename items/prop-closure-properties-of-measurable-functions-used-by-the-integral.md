@@ -2,7 +2,7 @@
 id: prop-closure-properties-of-measurable-functions-used-by-the-integral
 kind: proposition
 title: "Closure properties of measurable functions used by the integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-extended-real-valued-measurable-function]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

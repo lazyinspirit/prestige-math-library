@@ -1,7 +1,7 @@
 ---
 page: regular-continued-fractions-and-diophantine-approximation-examples
 title: "Regular Continued Fractions and Diophantine Approximation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-two-finite-continued-fractions-for-a-rational,
            ex-continued-fraction-and-extended-euclid,

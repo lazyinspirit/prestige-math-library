@@ -2,7 +2,7 @@
 id: thm-integral-triangle-inequality
 kind: theorem
 title: "The modulus of an integral is bounded by the integral of the modulus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, def-complex-conjugate-real-imaginary-part-and-modulus, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

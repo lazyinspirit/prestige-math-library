@@ -2,7 +2,7 @@
 id: def-complete-anticomplete-pure-and-x-sparse-blockades
 kind: definition
 title: "Complete, anticomplete, pure, weakly sparse, and $x$-sparse blockades"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-blockade-length-and-width, def-directional-and-weak-sparsity-between-
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

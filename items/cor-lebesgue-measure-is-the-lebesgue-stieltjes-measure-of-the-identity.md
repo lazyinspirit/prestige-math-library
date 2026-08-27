@@ -2,7 +2,7 @@
 id: cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity
 kind: corollary
 title: "Lebesgue measure is the Lebesgue-Stieltjes measure of the identity function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-existence-of-the-lebesgue-stieltjes-measure, thm-lebesgue-measure-of-a-box-of-every-kind, thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

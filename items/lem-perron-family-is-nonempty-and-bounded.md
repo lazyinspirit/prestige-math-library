@@ -2,7 +2,7 @@
 id: lem-perron-family-is-nonempty-and-bounded
 kind: lemma
 title: "The Perron family is nonempty and uniformly bounded by the boundary data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-perron-family-for-the-plane-dirichlet-problem, thm-maximum-principle-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

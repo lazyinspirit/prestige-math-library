@@ -1,7 +1,7 @@
 ---
 page: lebesgue-stieltjes-measures-and-distribution-functions
 title: "Lebesgue-Stieltjes Measures and Distribution Functions"
-status: draft
+status: published
 items: [rem-lebesgue-stieltjes-convention-ledger,
         def-borel-measure-finite-on-compact-sets-on-r,
         def-half-open-interval-algebra-on-r,

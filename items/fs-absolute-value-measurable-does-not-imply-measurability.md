@@ -2,7 +2,7 @@
 id: fs-absolute-value-measurable-does-not-imply-measurability
 kind: false-statement
 title: "FALSE: if the absolute value is measurable, then the function is measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-vitali-set-is-not-lebesgue-measurable, thm-vitali-sets-exist-under-choice-on-r-over-q]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

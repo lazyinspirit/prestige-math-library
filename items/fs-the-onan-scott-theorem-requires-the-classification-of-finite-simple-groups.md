@@ -2,7 +2,7 @@
 id: fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups
 kind: false-statement
 title: "FALSE: the O'Nan-Scott theorem requires the classification of finite simple groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-cfsg-refinements-of-the-onan-scott-reduction, thm-onan-scott-classification-of-finite-primitive-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

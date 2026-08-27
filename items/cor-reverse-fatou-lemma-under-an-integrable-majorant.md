@@ -2,7 +2,7 @@
 id: cor-reverse-fatou-lemma-under-an-integrable-majorant
 kind: corollary
 title: "Reverse Fatou's lemma under an integrable majorant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fatou-lemma, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

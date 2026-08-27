@@ -2,13 +2,14 @@
 id: rem-onan-scott-eight-type-and-five-type-conventions
 kind: remark
 title: "This page uses the coarse five-type O'Nan-Scott convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

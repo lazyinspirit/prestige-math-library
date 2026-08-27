@@ -2,7 +2,7 @@
 id: ex-poisson-modification-of-a-radial-quadratic-on-a-disc
 kind: example
 title: "Poisson modification flattens a radial quadratic on the chosen inner disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, cor-uniqueness-for-the-bounded-plane-dirichlet-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

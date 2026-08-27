@@ -2,7 +2,7 @@
 id: cex-fatou-can-be-strict-and-domination-can-fail-simultaneously
 kind: counterexample
 title: "Fatou can be strict and domination can fail simultaneously"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fatou-lemma, thm-dominated-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

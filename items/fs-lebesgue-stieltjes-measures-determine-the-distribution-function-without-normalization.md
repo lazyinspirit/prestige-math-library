@@ -2,7 +2,7 @@
 id: fs-lebesgue-stieltjes-measures-determine-the-distribution-function-without-normalization
 kind: false-statement
 title: "FALSE: a Lebesgue-Stieltjes measure determines its distribution function uniquely"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lebesgue-stieltjes-correspondence-with-distribution-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

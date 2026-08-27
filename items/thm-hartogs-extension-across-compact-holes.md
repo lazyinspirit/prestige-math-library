@@ -2,7 +2,7 @@
 id: thm-hartogs-extension-across-compact-holes
 kind: theorem
 title: "Hartogs extension across a connected compact hole with a finite shell cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

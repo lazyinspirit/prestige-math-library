@@ -1,7 +1,7 @@
 ---
 page: the-residue-theorem-examples
 title: "The Residue Theorem and the Evaluation of Real Integrals — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-residue-evaluates-int-one-over-one-plus-x-squared,
            ex-residue-evaluates-int-one-over-one-plus-x-fourth,

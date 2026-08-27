@@ -2,7 +2,7 @@
 id: thm-barrier-characterization-of-regular-boundary-points
 kind: theorem
 title: "A boundary point is regular exactly when it admits a barrier"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-barrier-and-regular-boundary-point, thm-perron-envelope-is-harmonic, thm-maximum-principle-for-plane-subharmonic-functions, thm-c-two-characterization-of-plane-subharmonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

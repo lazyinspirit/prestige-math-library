@@ -2,7 +2,7 @@
 id: def-lebesgue-stieltjes-interval-set-function
 kind: definition
 title: "The interval set function attached to a nondecreasing right-continuous function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-half-open-interval-algebra-on-r, rem-lebesgue-stieltjes-convention-ledger]
 justified_by: [prop-stieltjes-interval-set-function-is-finitely-additive]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

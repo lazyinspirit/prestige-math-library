@@ -2,7 +2,7 @@
 id: cor-modulus-powers-of-holomorphic-functions-are-subharmonic
 kind: corollary
 title: "Positive powers of the modulus of a holomorphic function are subharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-log-modulus-of-a-holomorphic-function-is-subharmonic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

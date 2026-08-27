@@ -2,7 +2,7 @@
 id: cex-dirichlet-function-is-positive-but-has-zero-lebesgue-integral
 kind: counterexample
 title: "The Dirichlet function is positive on a dense set but has Lebesgue integral $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirichlet-and-thomae-functions, prop-countable-subsets-of-rn-are-lebesgue-null, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

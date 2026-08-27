@@ -2,7 +2,7 @@
 id: ex-prime-spectrum-set-of-dual-numbers
 kind: example
 title: "Dual numbers and their reduced quotient have the same prime set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

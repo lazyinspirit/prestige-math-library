@@ -2,7 +2,7 @@
 id: ex-a-step-function-generates-a-finite-atomic-measure
 kind: example
 title: "A step function generates a finite atomic measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirac-measure, prop-dirac-measure-is-a-probability-measure, thm-nonnegative-weighted-sums-of-measures, thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

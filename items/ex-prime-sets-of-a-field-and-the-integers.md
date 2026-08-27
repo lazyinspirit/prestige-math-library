@@ -2,7 +2,7 @@
 id: ex-prime-sets-of-a-field-and-the-integers
 kind: example
 title: "The prime ideals of a field and of the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

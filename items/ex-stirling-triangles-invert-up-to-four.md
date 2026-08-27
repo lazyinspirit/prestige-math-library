@@ -2,7 +2,7 @@
 id: ex-stirling-triangles-invert-up-to-four
 kind: example
 title: "The Stirling triangles invert up to size $4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-signed-stirling-inversion]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-existence-of-the-lebesgue-stieltjes-measure
 kind: theorem
 title: "Assuming countable choice, a nondecreasing right-continuous function defines a Borel measure on $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-borel-measure-finite-on-compact-sets-on-r, thm-caratheodory-extension
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

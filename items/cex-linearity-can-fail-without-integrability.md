@@ -2,7 +2,7 @@
 id: cex-linearity-can-fail-without-integrability
 kind: counterexample
 title: "Linearity can fail without an integrability hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

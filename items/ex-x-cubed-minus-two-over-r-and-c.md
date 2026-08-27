@@ -2,7 +2,7 @@
 id: ex-x-cubed-minus-two-over-r-and-c
 kind: example
 title: "$x^3-2$ over $\\mathbb R$ and over $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

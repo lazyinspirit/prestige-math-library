@@ -2,13 +2,14 @@
 id: def-barrier-and-regular-boundary-point
 kind: definition
 title: "Barriers and regular boundary points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-plane-subharmonic-function, def-perron-envelope-for-the-plane-dirichlet-problem]
 verification:
+  audited: 2026-08-27
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

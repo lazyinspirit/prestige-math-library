@@ -2,13 +2,14 @@
 id: def-atom-of-a-measure-on-r
 kind: definition
 title: "An atom of a measure on $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure, def-borel-sigma-algebra]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

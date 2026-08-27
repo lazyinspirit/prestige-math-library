@@ -2,7 +2,7 @@
 id: lem-weak-local-subharmonic-peak-function-implies-regularity
 kind: lemma
 title: "A weak local subharmonic peak function upgrades to regularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-local-subharmonic-peak-function-globalizes, thm-barrier-characterization-of-regular-boundary-points]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-dimension-of-a-quotient-as-chains-above-an-ideal
 kind: corollary
 title: "Dimension of a quotient via chains above an ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

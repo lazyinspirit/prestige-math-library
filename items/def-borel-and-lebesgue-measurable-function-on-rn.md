@@ -2,13 +2,14 @@
 id: def-borel-and-lebesgue-measurable-function-on-rn
 kind: definition
 title: "Borel measurable and Lebesgue measurable functions on $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-borel-sigma-algebra, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-measurable-function-between-measurable-spaces, thm-lebesgue-measure-is-a-complete-measure, def-countable-choice]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   references:

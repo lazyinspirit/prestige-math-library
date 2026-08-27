@@ -2,7 +2,7 @@
 id: cor-measurable-functions-admit-dominated-simple-approximations
 kind: corollary
 title: "Every measurable function admits simple approximations dominated by its absolute value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-positive-and-negative-parts-of-a-function, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cex-a-function-can-have-measurable-level-sets-without-being-measurable
 kind: counterexample
 title: "A function can have measurable level sets without being measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-vitali-set-is-not-lebesgue-measurable, thm-vitali-sets-exist-under-choice-on-r-over-q]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

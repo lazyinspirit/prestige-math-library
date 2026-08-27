@@ -1,7 +1,7 @@
 ---
 page: blockades-combs-and-pattern-graphs-examples
 title: "Blockades, Combs and Pattern Graphs — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-three-block-blockade-and-its-width,
            ex-pure-but-not-complete-blockade,

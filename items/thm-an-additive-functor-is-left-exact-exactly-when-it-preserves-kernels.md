@@ -2,7 +2,7 @@
 id: thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels
 kind: theorem
 title: "An additive functor is left exact exactly when it preserves kernels"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

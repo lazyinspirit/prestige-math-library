@@ -2,7 +2,7 @@
 id: ex-residue-evaluates-int-one-over-one-plus-x-fourth
 kind: example
 title: "The integral of 1 / (1 + x^4) over the real line is pi over sqrt(2)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

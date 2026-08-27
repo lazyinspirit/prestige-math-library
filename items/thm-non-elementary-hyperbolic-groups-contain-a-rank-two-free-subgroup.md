@@ -2,7 +2,7 @@
 id: thm-non-elementary-hyperbolic-groups-contain-a-rank-two-free-subgroup
 kind: theorem
 title: "Non-elementary hyperbolic groups contain a rank-two free subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-elementary-and-non-elementary-hyperbolic-groups, def-rank-of-a-finite-rank-free-group, thm-free-groups-are-torsion-free, thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

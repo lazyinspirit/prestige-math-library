@@ -2,7 +2,7 @@
 id: thm-lagrange-periodic-continued-fraction-theorem
 kind: theorem
 title: "Lagrange's theorem for regular continued fractions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-two-finite-continued-fractions-for-a-rational
 kind: example
 title: "A rational number has exactly two finite regular continued-fraction expansions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

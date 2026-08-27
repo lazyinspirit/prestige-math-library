@@ -2,7 +2,7 @@
 id: def-labelled-classes-and-basic-labelled-constructions
 kind: definition
 title: "Labelled classes, labelled product, and the constructions $\\operatorname{SEQ}$, $\\operatorname{SET}$, $\\operatorname{CYC}$, and boxed product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-combinatorial-class-and-ordinary-generating-function]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-harmonic-majorant-characterization-of-plane-subharmonicity
 kind: theorem
 title: "Subharmonicity is equivalent to harmonic comparison on compactly contained discs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-plane-subharmonic-function, lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined, def-poisson-integral-on-the-disc, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-conformal-invariance-of-plane-harmonicity, thm-mean-value-property-for-plane-harmonic-functions, thm-monotone-convergence-for-the-integral, thm-maximum-principle-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

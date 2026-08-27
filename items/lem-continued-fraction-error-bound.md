@@ -2,7 +2,7 @@
 id: lem-continued-fraction-error-bound
 kind: lemma
 title: "Convergent error bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

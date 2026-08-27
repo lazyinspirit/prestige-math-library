@@ -2,7 +2,7 @@
 id: cex-product-of-two-infinite-groups-need-not-be-hyperbolic
 kind: counterexample
 title: "A product of two infinite groups need not be hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

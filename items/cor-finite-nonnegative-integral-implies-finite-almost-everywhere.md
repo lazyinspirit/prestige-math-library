@@ -2,7 +2,7 @@
 id: cor-finite-nonnegative-integral-implies-finite-almost-everywhere
 kind: corollary
 title: "A nonnegative measurable function with finite integral is finite almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-nonnegative-integral-zero-iff-zero-almost-everywhere, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

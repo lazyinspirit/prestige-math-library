@@ -2,7 +2,7 @@
 id: thm-composition-with-borel-functions-preserves-measurability
 kind: theorem
 title: "Composition with a Borel measurable outer map preserves measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-measurable-function-between-measurable-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

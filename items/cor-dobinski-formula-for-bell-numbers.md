@@ -2,7 +2,7 @@
 id: cor-dobinski-formula-for-bell-numbers
 kind: corollary
 title: "Dobinski's formula expresses the Bell numbers as $B_n=e^{-1}\\sum_{\\ell\\ge0}\\ell^n/\\ell!$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

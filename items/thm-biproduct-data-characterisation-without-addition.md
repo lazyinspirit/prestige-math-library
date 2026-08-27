@@ -2,7 +2,7 @@
 id: thm-biproduct-data-characterisation-without-addition
 kind: theorem
 title: "Biproduct data characterisation without addition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

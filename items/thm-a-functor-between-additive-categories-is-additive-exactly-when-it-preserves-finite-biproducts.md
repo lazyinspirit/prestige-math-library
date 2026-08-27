@@ -2,7 +2,7 @@
 id: thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts
 kind: theorem
 title: "A functor between additive categories is additive exactly when it preserves finite biproducts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

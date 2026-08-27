@@ -2,7 +2,7 @@
 id: def-krull-dimension-of-a-ring
 kind: definition
 title: "Krull dimension of a nonzero ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

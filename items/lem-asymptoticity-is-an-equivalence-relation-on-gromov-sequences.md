@@ -2,7 +2,7 @@
 id: lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences
 kind: lemma
 title: "Asymptoticity of Gromov sequences is an equivalence relation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gromov-boundary-by-asymptotic-sequences, thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

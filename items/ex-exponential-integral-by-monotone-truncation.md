@@ -2,7 +2,7 @@
 id: ex-exponential-integral-by-monotone-truncation
 kind: example
 title: "The exponential tail function is integrable by monotone truncation and geometric comparison"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, thm-lebesgue-measure-of-a-box-of-every-kind, thm-geometric-series, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

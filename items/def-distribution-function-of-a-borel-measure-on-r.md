@@ -2,13 +2,14 @@
 id: def-distribution-function-of-a-borel-measure-on-r
 kind: definition
 title: "The distribution function of a Borel measure on $\\mathbb{R}$, normalized at $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-borel-measure-finite-on-compact-sets-on-r, thm-heine-borel-r, prop-measure-monotonicity]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-dyadic-simple-approximations-to-x-squared-on-zero-two
 kind: example
 title: "The dyadic simple approximants for $x^2$ on $[0,2]$ at $k=1$ and $k=2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

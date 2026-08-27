@@ -2,7 +2,7 @@
 id: cex-z-squared-is-not-hyperbolic
 kind: counterexample
 title: "Z^2 is not hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

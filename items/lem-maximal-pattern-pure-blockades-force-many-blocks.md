@@ -2,7 +2,7 @@
 id: lem-maximal-pattern-pure-blockades-force-many-blocks
 kind: lemma
 title: "A maximal pure blockade with large total $a$-mass must already have at least $\\epsilon^{-2}$ blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

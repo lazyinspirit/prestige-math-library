@@ -2,7 +2,7 @@
 id: cor-bounded-convergence-on-a-finite-measure-space
 kind: corollary
 title: "Bounded convergence on a finite measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dominated-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

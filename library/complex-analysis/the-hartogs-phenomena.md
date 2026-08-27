@@ -1,7 +1,7 @@
 ---
 page: the-hartogs-phenomena
 title: "The Hartogs Phenomena"
-status: draft
+status: published
 items: [def-holomorphic-extension-and-domain-of-holomorphy,
         def-hartogs-figure-and-polydisc-hull,
         lem-holomorphic-dependence-of-slice-laurent-coefficients,

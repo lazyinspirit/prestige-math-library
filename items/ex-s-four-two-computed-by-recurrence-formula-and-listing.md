@@ -2,7 +2,7 @@
 id: ex-s-four-two-computed-by-recurrence-formula-and-listing
 kind: example
 title: "$S(4,2)$ computed by recurrence, inclusion-exclusion, and direct listing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-stirling-second-kind-and-bell-number, thm-stirling-second-kind-recurr
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

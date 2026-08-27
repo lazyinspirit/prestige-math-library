@@ -2,7 +2,7 @@
 id: thm-residue-evaluation-rational-real-integrals
 kind: theorem
 title: "Rational improper integrals without real poles are upper-half-plane residue sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

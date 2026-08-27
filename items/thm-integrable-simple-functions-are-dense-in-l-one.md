@@ -2,7 +2,7 @@
 id: thm-integrable-simple-functions-are-dense-in-l-one
 kind: theorem
 title: "Integrable simple functions are dense in $L^1(\\mu)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, def-integrable-real-and-complex-functions-and-their-integrals, thm-dominated-convergence, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-z-one-over-one-minus-z-one-z-two-extends-across-the-punctured-bidisc
 kind: example
 title: "A holomorphic function on the punctured bidisc extends across the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

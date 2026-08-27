@@ -2,7 +2,7 @@
 id: thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring
 kind: theorem
 title: "A one-object preadditive category is the same thing as a ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

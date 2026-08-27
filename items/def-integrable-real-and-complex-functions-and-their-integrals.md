@@ -2,13 +2,14 @@
 id: def-integrable-real-and-complex-functions-and-their-integrals
 kind: definition
 title: "Integrable real and complex functions, and their integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [prop-closure-properties-of-measurable-functions-used-by-the-integral, def-nonnegative-lebesgue-integral, def-complex-conjugate-real-imaginary-part-and-modulus]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

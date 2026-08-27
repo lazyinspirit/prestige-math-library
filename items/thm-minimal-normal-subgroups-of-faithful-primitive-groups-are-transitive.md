@@ -2,7 +2,7 @@
 id: thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive
 kind: theorem
 title: "Minimal normal subgroups of faithful primitive groups are transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-minimal-normal-subgroup-and-socle, thm-normal-subgroups-of-a-primitive-action-are-transitive-or-kernel-contained]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

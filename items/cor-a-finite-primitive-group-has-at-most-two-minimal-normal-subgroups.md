@@ -2,7 +2,7 @@
 id: cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups
 kind: corollary
 title: "A finite primitive group has at most two minimal normal subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-distinct-minimal-normal-subgroups-centralize-one-another, lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular, thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

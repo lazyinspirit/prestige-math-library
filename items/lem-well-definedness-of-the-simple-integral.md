@@ -2,7 +2,7 @@
 id: lem-well-definedness-of-the-simple-integral
 kind: lemma
 title: "The simple integral is independent of the chosen representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-of-a-nonnegative-simple-function, def-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

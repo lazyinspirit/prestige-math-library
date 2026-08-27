@@ -2,7 +2,7 @@
 id: ex-continued-fraction-of-square-root-fourteen
 kind: example
 title: "The continued fraction [3; overline 1,2,1,6] for sqrt(14)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

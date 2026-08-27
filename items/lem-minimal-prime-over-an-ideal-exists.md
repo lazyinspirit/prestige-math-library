@@ -2,7 +2,7 @@
 id: lem-minimal-prime-over-an-ideal-exists
 kind: lemma
 title: "Minimal primes over a proper ideal exist"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

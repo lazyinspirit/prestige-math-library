@@ -2,7 +2,7 @@
 id: rem-artin-and-minimum-modulus-proofs-of-the-fundamental-theorem-of-algebra
 kind: remark
 title: "The Artin and minimum-modulus proofs of the fundamental theorem of algebra use different machinery"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

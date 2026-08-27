@@ -2,7 +2,7 @@
 id: ex-counting-measure-integral-is-a-series
 kind: example
 title: "Integrating against counting measure recovers a series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-counting-measure, prop-counting-measure-is-a-measure, def-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

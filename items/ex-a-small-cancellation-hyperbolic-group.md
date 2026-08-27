@@ -2,7 +2,7 @@
 id: ex-a-small-cancellation-hyperbolic-group
 kind: example
 title: "A small-cancellation presentation gives a hyperbolic group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-two-transitive-groups-have-affine-or-almost-simple-socle-type
 kind: proposition
 title: "Finite 2-transitive groups have affine or almost simple socle type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-almost-simple-finite-group, def-k-transitive-and-k-homogeneous-actions, prop-doubly-transitive-actions-are-primitive, thm-onan-scott-classification-of-finite-primitive-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

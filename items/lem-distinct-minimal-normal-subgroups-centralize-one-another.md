@@ -2,7 +2,7 @@
 id: lem-distinct-minimal-normal-subgroups-centralize-one-another
 kind: lemma
 title: "Distinct minimal normal subgroups centralize one another"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-commutator-and-commutator-subgroup, def-minimal-normal-subgroup-and-socle, def-normal-subgroup]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

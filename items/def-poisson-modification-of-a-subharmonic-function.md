@@ -2,13 +2,15 @@
 id: def-poisson-modification-of-a-subharmonic-function
 kind: definition
 title: "Poisson modification on a compactly contained disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-conformal-invariance-of-plane-harmonicity]
 justified_by: [thm-poisson-modification-preserves-subharmonicity-and-majorizes]
+verification:
+  audited: 2026-08-27
 sources:
   scraped: []
   references:

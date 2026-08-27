@@ -2,7 +2,7 @@
 id: thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant
 kind: theorem
 title: "The boundary topology is well defined and quasi-isometry invariant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boundary-topology-by-gromov-products, lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences, thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

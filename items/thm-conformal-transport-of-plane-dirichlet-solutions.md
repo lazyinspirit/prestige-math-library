@@ -2,7 +2,7 @@
 id: thm-conformal-transport-of-plane-dirichlet-solutions
 kind: theorem
 title: "Conformal transport of continuous Dirichlet solutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-perron-solves-dirichlet-on-regular-plane-domains, thm-conformal-invariance-of-plane-harmonicity, cor-uniqueness-for-the-bounded-plane-dirichlet-problem, def-barrier-and-regular-boundary-point]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

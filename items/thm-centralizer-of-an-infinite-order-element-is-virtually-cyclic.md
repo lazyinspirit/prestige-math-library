@@ -2,7 +2,7 @@
 id: thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic
 kind: theorem
 title: "The centralizer of an infinite-order element in a hyperbolic group is virtually cyclic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-centralizer-of-a-subgroup, lem-centralizers-and-normalizers-are-subgroups, thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

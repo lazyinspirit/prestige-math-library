@@ -2,7 +2,7 @@
 id: lem-radical-of-a-product
 kind: lemma
 title: "The radical of a product of ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

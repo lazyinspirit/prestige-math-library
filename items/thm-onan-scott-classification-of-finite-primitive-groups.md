@@ -2,7 +2,7 @@
 id: thm-onan-scott-classification-of-finite-primitive-groups
 kind: theorem
 title: "The O'Nan-Scott classification of finite primitive groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups, de
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-x-to-the-minus-one-half-is-unbounded-but-integrable
 kind: example
 title: "The function $x^{-1/2}$ on $(0,1]$ is unbounded and integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, thm-lebesgue-measure-of-a-box-of-every-kind, thm-geometric-series, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

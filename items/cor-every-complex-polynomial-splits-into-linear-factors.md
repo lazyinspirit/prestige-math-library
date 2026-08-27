@@ -2,7 +2,7 @@
 id: cor-every-complex-polynomial-splits-into-linear-factors
 kind: corollary
 title: "Every nonconstant polynomial in $\\mathbb C[x]$ splits into linear factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

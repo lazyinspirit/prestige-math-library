@@ -2,7 +2,7 @@
 id: ex-dirac-integral-is-evaluation-at-a-point
 kind: example
 title: "Integrating against a Dirac measure is evaluation at the point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

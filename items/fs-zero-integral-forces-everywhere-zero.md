@@ -2,7 +2,7 @@
 id: fs-zero-integral-forces-everywhere-zero
 kind: false-statement
 title: "FALSE: a nonnegative measurable function with integral $0$ vanishes everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-lebesgue-measure-of-a-box-of-every-kind]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

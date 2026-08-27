@@ -2,7 +2,7 @@
 id: thm-exponential-formula-for-set-partitions-and-bell-numbers
 kind: theorem
 title: "The exponential formula gives the Bell-number generating function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

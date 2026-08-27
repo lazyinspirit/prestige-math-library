@@ -2,7 +2,7 @@
 id: fs-the-same-delta-works-after-every-change-of-generating-set
 kind: false-statement
 title: "FALSE: the same delta works after every finite change of generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-hyperbolic-group-definition-is-independent-of-finite-generating-set, thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

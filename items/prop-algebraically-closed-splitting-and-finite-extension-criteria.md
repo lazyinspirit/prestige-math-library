@@ -2,7 +2,7 @@
 id: prop-algebraically-closed-splitting-and-finite-extension-criteria
 kind: proposition
 title: "A field is algebraically closed exactly when every nonconstant polynomial splits, equivalently when it has no nontrivial finite extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

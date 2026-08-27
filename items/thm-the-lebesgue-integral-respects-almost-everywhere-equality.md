@@ -2,7 +2,7 @@
 id: thm-the-lebesgue-integral-respects-almost-everywhere-equality
 kind: theorem
 title: "Two integrable functions are equal almost everywhere exactly when all of their indefinite integrals agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-integral-over-a-null-set-vanishes, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-integrable-real-and-complex-functions-and-their-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

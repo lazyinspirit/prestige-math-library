@@ -2,7 +2,7 @@
 id: thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable
 kind: theorem
 title: "Sequential suprema, infima, limsup, liminf, and pointwise limits of measurable functions are measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-limsup-liminf, thm-convergence-iff-limsup-equals-liminf, thm-threshol
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

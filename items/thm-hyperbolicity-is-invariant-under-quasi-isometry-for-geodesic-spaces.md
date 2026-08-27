@@ -2,7 +2,7 @@
 id: thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces
 kind: theorem
 title: "Hyperbolicity is a quasi-isometry invariant of geodesic spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-coarsely-dense-subset-and-quasi-isometry, thm-morse-stability-of-quasi-geodesics, thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

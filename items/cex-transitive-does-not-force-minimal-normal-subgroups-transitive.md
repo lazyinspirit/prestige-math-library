@@ -2,7 +2,7 @@
 id: cex-transitive-does-not-force-minimal-normal-subgroups-transitive
 kind: counterexample
 title: "A transitive imprimitive action can have a nontransitive minimal normal subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

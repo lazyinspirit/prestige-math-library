@@ -2,13 +2,14 @@
 id: def-positive-and-negative-parts-of-a-function
 kind: definition
 title: "The positive and negative parts of a function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extended-reals]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

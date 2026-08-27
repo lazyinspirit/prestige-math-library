@@ -2,7 +2,7 @@
 id: prop-order-and-scalar-rules-for-the-nonnegative-integral
 kind: proposition
 title: "Monotonicity and nonnegative homogeneity of the nonnegative integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

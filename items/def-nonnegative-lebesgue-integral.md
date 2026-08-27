@@ -2,13 +2,14 @@
 id: def-nonnegative-lebesgue-integral
 kind: definition
 title: "The nonnegative Lebesgue integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extended-real-valued-measurable-function, def-nonnegative-simple-measurable-function, def-integral-of-a-nonnegative-simple-function]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

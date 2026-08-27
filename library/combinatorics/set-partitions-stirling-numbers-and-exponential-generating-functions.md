@@ -1,7 +1,7 @@
 ---
 page: set-partitions-stirling-numbers-and-exponential-generating-functions
 title: "Set Partitions, Stirling Numbers and Exponential Generating Functions"
-status: draft
+status: published
 items: [rem-stirling-number-and-egf-conventions,
         def-set-partition-and-block,
         lem-set-partitions-of-a-finite-set-are-finite,

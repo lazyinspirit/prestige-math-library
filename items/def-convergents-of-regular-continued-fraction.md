@@ -2,7 +2,7 @@
 id: def-convergents-of-regular-continued-fraction
 kind: definition
 title: "Convergents of a regular continued fraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

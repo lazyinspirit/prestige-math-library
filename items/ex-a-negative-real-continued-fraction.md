@@ -2,7 +2,7 @@
 id: ex-a-negative-real-continued-fraction
 kind: example
 title: "A negative irrational has a regular continued fraction with positive later digits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

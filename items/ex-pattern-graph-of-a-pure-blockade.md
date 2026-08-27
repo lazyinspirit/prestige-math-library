@@ -2,7 +2,7 @@
 id: ex-pattern-graph-of-a-pure-blockade
 kind: example
 title: "The pattern graph of a pure blockade can be a path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-pattern-graph-of-a-pure-blockade]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-finite-borel-measure-on-r-is-atomic-plus-atomless
 kind: theorem
 title: "Every finite Borel measure on $\\mathbb{R}$ splits as an atomic part plus an atomless part"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-atom-of-a-measure-on-r, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, thm-nonnegative-weighted-sums-of-measures, thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

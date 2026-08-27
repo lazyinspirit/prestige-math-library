@@ -2,7 +2,7 @@
 id: ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure
 kind: example
 title: "The function 1 / (1 - z1 z2) extends holomorphically from a Hartogs figure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

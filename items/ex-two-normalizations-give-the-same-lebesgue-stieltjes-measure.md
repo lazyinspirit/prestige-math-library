@@ -2,7 +2,7 @@
 id: ex-two-normalizations-give-the-same-lebesgue-stieltjes-measure
 kind: example
 title: "Two different normalizations give the same Lebesgue-Stieltjes measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lebesgue-stieltjes-correspondence-with-distribution-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

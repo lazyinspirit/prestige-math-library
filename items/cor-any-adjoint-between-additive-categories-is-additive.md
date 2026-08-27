@@ -2,7 +2,7 @@
 id: cor-any-adjoint-between-additive-categories-is-additive
 kind: corollary
 title: "Any adjoint between additive categories is additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

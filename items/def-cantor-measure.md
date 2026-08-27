@@ -2,13 +2,14 @@
 id: def-cantor-measure
 kind: definition
 title: "The Cantor measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-cantor-function, thm-cantor-function-properties, cor-cantor-function-is-continuous, thm-existence-of-the-lebesgue-stieltjes-measure]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

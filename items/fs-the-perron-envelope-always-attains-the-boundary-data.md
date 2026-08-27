@@ -2,7 +2,7 @@
 id: fs-the-perron-envelope-always-attains-the-boundary-data
 kind: false-statement
 title: "FALSE: the regularized Perron envelope always attains the prescribed boundary data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum, thm-perron-envelope-is-harmonic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

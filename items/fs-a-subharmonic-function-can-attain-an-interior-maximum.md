@@ -2,7 +2,7 @@
 id: fs-a-subharmonic-function-can-attain-an-interior-maximum
 kind: false-statement
 title: "FALSE: a nonconstant subharmonic function can attain a finite interior maximum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-maximum-principle-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-the-empty-biproduct-is-a-zero-object
 kind: proposition
 title: "The empty biproduct is a zero object"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

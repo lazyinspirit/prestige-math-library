@@ -2,7 +2,7 @@
 id: ex-affine-type-agl-one-p
 kind: example
 title: "The natural action of AGL(1,p) is affine type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

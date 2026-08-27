@@ -2,7 +2,7 @@
 id: thm-differentiation-under-the-integral-sign
 kind: theorem
 title: "Differentiation under the integral sign"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-dominated-convergence, cor-mean-value-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

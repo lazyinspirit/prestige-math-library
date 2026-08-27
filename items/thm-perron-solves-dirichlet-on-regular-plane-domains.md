@@ -2,7 +2,7 @@
 id: thm-perron-solves-dirichlet-on-regular-plane-domains
 kind: theorem
 title: "On a regular bounded plane domain, Perron's method solves the Dirichlet problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-perron-envelope-is-harmonic, thm-barrier-characterization-of-regular-boundary-points, cor-uniqueness-for-the-bounded-plane-dirichlet-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

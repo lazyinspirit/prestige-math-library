@@ -2,7 +2,7 @@
 id: thm-monotone-real-functions-are-borel-measurable
 kind: theorem
 title: "Every monotone real function is Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monotone-function, thm-threshold-characterisations-of-real-and-extended-real-measurability]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: fs-pointwise-limits-of-integrable-functions-are-integrable
 kind: false-statement
 title: "FALSE: pointwise limits of integrable functions are integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-counting-measure, prop-counting-measure-is-a-measure, def-integrable-real-and-complex-functions-and-their-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

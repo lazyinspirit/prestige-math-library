@@ -1,7 +1,7 @@
 ---
 page: preadditive-and-additive-categories-and-biproducts-examples
 title: "Preadditive and Additive Categories and Biproducts — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-biproduct-of-two-abelian-groups-computed-as-a-matrix-calculus,
            ex-abelian-groups-modules-and-vector-spaces-are-additive,

@@ -2,7 +2,7 @@
 id: ex-a-three-tooth-comb
 kind: example
 title: "A three-tooth comb"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-comb-in-a-graph]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

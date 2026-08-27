@@ -2,7 +2,7 @@
 id: lem-gluing-lemma-for-plane-subharmonic-functions
 kind: lemma
 title: "Subharmonic pieces glue across a boundary under the limsup inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-harmonic-majorant-characterization-of-plane-subharmonicity,
        thm-maximum-principle-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

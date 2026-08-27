@@ -2,7 +2,7 @@
 id: thm-jensens-integral-inequality
 kind: theorem
 title: "Jensen's integral inequality for a probability measure"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, def-probability-measure, thm-supporting-lines-for-convex-functions, def-nonnegative-lebesgue-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

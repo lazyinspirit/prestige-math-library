@@ -2,7 +2,7 @@
 id: cor-prime-spectrum-insensitive-to-nilpotents
 kind: corollary
 title: "Passing to the reduced quotient does not change the prime spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

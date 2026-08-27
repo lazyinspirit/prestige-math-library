@@ -2,7 +2,7 @@
 id: cex-cantor-measure-is-atomless-but-not-absolutely-continuous
 kind: counterexample
 title: "The Cantor measure is atomless but not absolutely continuous with respect to Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-cantor-measure-is-a-singular-atomless-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-spaces-and-hyperbolic-groups
 title: "Hyperbolic Spaces and Hyperbolic Groups"
-status: draft
+status: published
 items: [def-geodesic-segment-triangle-and-geodesic-metric-space,
         def-delta-slim-geodesic-triangle-and-hyperbolic-space,
         prop-cayley-trees-are-zero-hyperbolic,

@@ -2,7 +2,7 @@
 id: ex-interval-formulas-for-a-function-with-one-jump
 kind: example
 title: "The interval formulas for a function with one jump"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-gromov-boundary-by-asymptotic-sequences
 kind: definition
 title: "The Gromov boundary via asymptotic sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-delta-slim-geodesic-triangle-and-hyperbolic-space, def-gromov-product]
 justified_by: [lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

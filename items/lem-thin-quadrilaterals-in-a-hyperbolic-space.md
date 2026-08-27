@@ -2,7 +2,7 @@
 id: lem-thin-quadrilaterals-in-a-hyperbolic-space
 kind: lemma
 title: "Hyperbolic spaces have thin geodesic quadrilaterals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-delta-slim-geodesic-triangle-and-hyperbolic-space]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-uniform-convergence-does-not-force-integral-convergence-on-an-infinite-measure-space
 kind: counterexample
 title: "Uniform convergence does not force convergence of integrals on an infinite-measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-bounded-convergence-on-a-finite-measure-space]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: set-partitions-stirling-numbers-and-exponential-generating-functions-examples
 title: "Set Partitions, Stirling Numbers and Exponential Generating Functions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-set-partitions-of-four-by-block-count,
            ex-s-four-two-computed-by-recurrence-formula-and-listing,

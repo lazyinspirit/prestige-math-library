@@ -2,7 +2,7 @@
 id: ex-prime-spectrum-set-of-a-product-ring
 kind: example
 title: "Every prime ideal of a product ring comes from one factor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

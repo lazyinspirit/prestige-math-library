@@ -2,7 +2,7 @@
 id: lem-boundary-point-whose-complementary-component-contains-another-point-is-regular
 kind: lemma
 title: "A boundary point whose complementary component contains another point is regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-weak-local-subharmonic-peak-function-implies-regularity, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, def-null-homologous-and-homologous-complex-cycles, thm-homological-simple-connectivity-equivalences, thm-conformal-invariance-of-plane-harmonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular
 kind: lemma
 title: "Two distinct minimal normal subgroups of a primitive group are regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-actions, lem-distinct-minimal-normal-subgroups-centralize-one-another, thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-hyperbolic-groups-admit-finite-dehn-presentations
 kind: theorem
 title: "Hyperbolic groups admit finite Dehn presentations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-presentation, def-hyperbolic-group, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

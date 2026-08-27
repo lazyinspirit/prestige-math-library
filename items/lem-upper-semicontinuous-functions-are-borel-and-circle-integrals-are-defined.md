@@ -2,7 +2,7 @@
 id: lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined
 kind: lemma
 title: "Upper semicontinuous functions are Borel and their circle averages are defined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

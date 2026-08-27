@@ -2,7 +2,7 @@
 id: ex-x-fifth-minus-x-minus-one-has-a-real-root
 kind: example
 title: "$x^5-x-1$ has a real root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

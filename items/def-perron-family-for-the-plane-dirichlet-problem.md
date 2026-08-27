@@ -2,13 +2,14 @@
 id: def-perron-family-for-the-plane-dirichlet-problem
 kind: definition
 title: "The Perron lower family for continuous boundary data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-plane-subharmonic-function]
 verification:
+  audited: 2026-08-27
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

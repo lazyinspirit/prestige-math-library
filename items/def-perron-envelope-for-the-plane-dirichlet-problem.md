@@ -2,13 +2,14 @@
 id: def-perron-envelope-for-the-plane-dirichlet-problem
 kind: definition
 title: "The Perron envelope and its regularization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-perron-family-for-the-plane-dirichlet-problem]
 verification:
+  audited: 2026-08-27
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

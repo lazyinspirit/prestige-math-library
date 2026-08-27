@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-spaces-and-hyperbolic-groups-examples
 title: "Hyperbolic Spaces and Hyperbolic Groups — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-tree-is-zero-hyperbolic,
            ex-the-hyperbolic-plane-is-hyperbolic,

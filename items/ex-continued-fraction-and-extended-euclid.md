@@ -2,7 +2,7 @@
 id: ex-continued-fraction-and-extended-euclid
 kind: example
 title: "The continued fraction of 37/11 matches Euclid and Bezout"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

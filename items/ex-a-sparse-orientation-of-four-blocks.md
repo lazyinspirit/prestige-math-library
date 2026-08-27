@@ -2,7 +2,7 @@
 id: ex-a-sparse-orientation-of-four-blocks
 kind: example
 title: "A sparse orientation of four blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-sparse-orientation-of-a-blockade]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

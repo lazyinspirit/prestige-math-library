@@ -2,7 +2,7 @@
 id: lem-radical-intersection-proof-separating-prime
 kind: lemma
 title: "A separating prime for an element outside a radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

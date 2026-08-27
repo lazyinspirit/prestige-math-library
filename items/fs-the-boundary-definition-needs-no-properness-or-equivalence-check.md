@@ -2,7 +2,7 @@
 id: fs-the-boundary-definition-needs-no-properness-or-equivalence-check
 kind: false-statement
 title: "FALSE: a proposed Gromov boundary quotient needs no equivalence check"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boundary-topology-by-gromov-products, def-gromov-boundary-by-asymptotic-sequences, lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures
 kind: theorem
 title: "Interval formulas and atoms for a Lebesgue-Stieltjes measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-atom-of-a-measure-on-r, def-one-sided-limits, thm-continuity-from-above-for-measures, thm-continuity-from-below-for-measures, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, cor-bv-discontinuities-are-countable-and-of-first-kind, thm-countable-union-of-countable, prop-measure-of-a-set-difference]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

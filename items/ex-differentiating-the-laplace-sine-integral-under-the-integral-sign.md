@@ -2,7 +2,7 @@
 id: ex-differentiating-the-laplace-sine-integral-under-the-integral-sign
 kind: example
 title: "Differentiating $\\int_0^{\\infty} e^{-tx}\\sin x\\,dx$ under the integral sign"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-differentiation-under-the-integral-sign]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

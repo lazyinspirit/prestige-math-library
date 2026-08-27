@@ -1,7 +1,7 @@
 ---
 page: blockades-combs-and-pattern-graphs
 title: "Blockades, Combs and Pattern Graphs"
-status: draft
+status: published
 items: [rem-blockade-conventions-and-order,
         def-blockade-length-and-width,
         def-complete-anticomplete-pure-and-x-sparse-blockades,

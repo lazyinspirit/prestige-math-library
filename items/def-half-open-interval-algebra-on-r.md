@@ -2,13 +2,14 @@
 id: def-half-open-interval-algebra-on-r
 kind: definition
 title: "The algebra of finite disjoint unions of half-open intervals in $\\mathbb{R}$ with extended endpoints"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-algebra-of-subsets, def-interval]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

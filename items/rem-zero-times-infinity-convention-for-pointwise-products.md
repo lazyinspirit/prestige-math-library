@@ -2,13 +2,14 @@
 id: rem-zero-times-infinity-convention-for-pointwise-products
 kind: remark
 title: "The convention $0 \\cdot \\infty = 0$ is used only for pointwise products of measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extended-reals]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   references:

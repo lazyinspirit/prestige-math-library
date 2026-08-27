@@ -2,7 +2,7 @@
 id: ex-free-groups-and-their-cantor-boundaries
 kind: example
 title: "Free groups have Cantor-set boundaries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-finite-and-free-groups-are-hyperbolic, thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

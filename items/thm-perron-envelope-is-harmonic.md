@@ -2,7 +2,7 @@
 id: thm-perron-envelope-is-harmonic
 kind: theorem
 title: "The regularized Perron envelope is harmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-perron-envelope-for-the-plane-dirichlet-problem, lem-perron-family-is-nonempty-and-bounded, def-poisson-modification-of-a-subharmonic-function, thm-poisson-modification-preserves-subharmonicity-and-majorizes, lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity, thm-harnack-convergence-principle-for-plane-harmonic-functions, thm-upper-envelope-theorem-for-plane-subharmonic-functions, thm-maximum-principle-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

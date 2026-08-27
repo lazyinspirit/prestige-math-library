@@ -2,7 +2,7 @@
 id: thm-linearity-of-the-lebesgue-integral-on-l-one
 kind: theorem
 title: "The Lebesgue integral is linear on $L^1(\\mu)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-the-matrix-category-over-a-ring-is-additive
 kind: theorem
 title: "The matrix category over a ring is additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: rem-standard-upper-semicontinuous-subharmonic-convention
 kind: remark
 title: "This page uses the standard upper-semicontinuous subharmonic convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-plane-harmonic-function]
 verification:
+  audited: 2026-08-27
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

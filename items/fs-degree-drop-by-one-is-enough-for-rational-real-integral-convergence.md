@@ -2,7 +2,7 @@
 id: fs-degree-drop-by-one-is-enough-for-rational-real-integral-convergence
 kind: false-statement
 title: "FALSE: denominator degree one more than numerator degree already forces convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

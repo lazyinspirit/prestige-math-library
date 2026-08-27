@@ -2,7 +2,7 @@
 id: ex-dirichlet-function-is-borel-and-nowhere-continuous
 kind: example
 title: "The Dirichlet function is Borel measurable and nowhere continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-q-and-irrationals-dense-r, prop-indicator-function-is-measurable-iff-its-set-is-measurable, thm-rationals-countable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

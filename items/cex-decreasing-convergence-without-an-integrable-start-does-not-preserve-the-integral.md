@@ -2,7 +2,7 @@
 id: cex-decreasing-convergence-without-an-integrable-start-does-not-preserve-the-integral
 kind: counterexample
 title: "A decreasing sequence need not satisfy a monotone convergence theorem without an integrable start"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

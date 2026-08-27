@@ -2,7 +2,7 @@
 id: prop-indicator-function-is-measurable-iff-its-set-is-measurable
 kind: proposition
 title: "An indicator function is measurable exactly when its set is measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-measurable-function-between-measurable-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-plane-subharmonic-functions-are-locally-integrable
 kind: theorem
 title: "Plane subharmonic functions are locally integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-plane-subharmonic-function, lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined, thm-harmonic-majorant-characterization-of-plane-subharmonicity, thm-open-connected-subsets-of-rn-are-polygonally-connected]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

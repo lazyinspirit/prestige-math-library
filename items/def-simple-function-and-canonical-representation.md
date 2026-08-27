@@ -2,13 +2,14 @@
 id: def-simple-function-and-canonical-representation
 kind: definition
 title: "A simple function and its canonical representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measurable-function-between-measurable-spaces]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   references:

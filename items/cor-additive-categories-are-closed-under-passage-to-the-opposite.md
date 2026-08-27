@@ -2,7 +2,7 @@
 id: cor-additive-categories-are-closed-under-passage-to-the-opposite
 kind: corollary
 title: "Additive categories are closed under passage to the opposite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-nonnegative-integral-zero-iff-zero-almost-everywhere
 kind: theorem
 title: "A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-measure-null-set-and-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

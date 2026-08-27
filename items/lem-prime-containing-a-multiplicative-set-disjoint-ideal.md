@@ -2,7 +2,7 @@
 id: lem-prime-containing-a-multiplicative-set-disjoint-ideal
 kind: lemma
 title: "A prime containing an ideal and avoiding a multiplicative set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

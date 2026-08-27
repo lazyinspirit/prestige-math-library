@@ -2,7 +2,7 @@
 id: cex-an-uncountable-supremum-of-indicators-need-not-be-measurable
 kind: counterexample
 title: "An uncountable supremum of measurable indicators can be nonmeasurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-indicator-function-is-measurable-iff-its-set-is-measurable, thm-a-vitali-set-is-not-lebesgue-measurable, thm-vitali-sets-exist-under-choice-on-r-over-q]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

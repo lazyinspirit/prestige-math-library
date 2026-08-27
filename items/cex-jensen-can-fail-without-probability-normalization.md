@@ -2,7 +2,7 @@
 id: cex-jensen-can-fail-without-probability-normalization
 kind: counterexample
 title: "Jensen's inequality can fail on an infinite measure space without normalization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

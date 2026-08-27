@@ -2,7 +2,7 @@
 id: lem-large-semicircle-vanishing
 kind: lemma
 title: "A rational large-semicircle integral vanishes under the zR(z) to 0 condition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

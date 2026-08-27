@@ -2,7 +2,7 @@
 id: fs-linearity-without-the-integrability-hypothesis
 kind: false-statement
 title: "FALSE: the Lebesgue integral extends linearly to all measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-quadratic-extension-in-characteristic-not-two-is-generated-by-a-square-root
 kind: lemma
 title: "A quadratic extension in characteristic not $2$ is obtained by adjoining a square root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

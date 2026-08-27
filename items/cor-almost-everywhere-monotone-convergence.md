@@ -2,7 +2,7 @@
 id: cor-almost-everywhere-monotone-convergence
 kind: corollary
 title: "Almost-everywhere monotone convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, cor-integral-over-a-null-set-vanishes, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

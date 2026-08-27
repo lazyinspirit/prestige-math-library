@@ -2,7 +2,7 @@
 id: thm-trigonometric-integral-unit-circle-substitution
 kind: theorem
 title: "Trigonometric integrals become contour integrals by the unit-circle substitution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

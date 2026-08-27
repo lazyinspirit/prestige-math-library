@@ -2,7 +2,7 @@
 id: cor-a-functor-between-additive-categories-preserving-finite-products-is-additive
 kind: corollary
 title: "A functor between additive categories preserving finite products is additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

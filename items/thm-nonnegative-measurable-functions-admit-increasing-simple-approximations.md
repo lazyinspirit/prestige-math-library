@@ -2,7 +2,7 @@
 id: thm-nonnegative-measurable-functions-admit-increasing-simple-approximations
 kind: theorem
 title: "Every nonnegative measurable function admits an explicit increasing sequence of simple approximations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-simple-function-and-canonical-representation, thm-threshold-character
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

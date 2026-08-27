@@ -2,7 +2,7 @@
 id: thm-increasing-simple-approximation-of-a-nonnegative-measurable-function
 kind: theorem
 title: "Every nonnegative measurable function is the increasing limit of simple measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-extended-real-valued-measurable-function, def-nonnegative-simple-measurable-function, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

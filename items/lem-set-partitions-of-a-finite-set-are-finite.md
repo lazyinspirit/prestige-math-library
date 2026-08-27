@@ -2,7 +2,7 @@
 id: lem-set-partitions-of-a-finite-set-are-finite
 kind: lemma
 title: "The set partitions of a finite set form a finite set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

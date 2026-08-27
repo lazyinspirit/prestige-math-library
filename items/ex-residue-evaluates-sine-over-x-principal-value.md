@@ -2,7 +2,7 @@
 id: ex-residue-evaluates-sine-over-x-principal-value
 kind: example
 title: "The whole-line principal value of sin x / x is pi, so the half-line integral is pi / 2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

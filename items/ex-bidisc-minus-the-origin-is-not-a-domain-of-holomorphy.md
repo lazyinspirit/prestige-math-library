@@ -2,7 +2,7 @@
 id: ex-bidisc-minus-the-origin-is-not-a-domain-of-holomorphy
 kind: example
 title: "The bidisc minus the origin is not a domain of holomorphy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

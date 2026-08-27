@@ -2,7 +2,7 @@
 id: ex-a-tree-is-zero-hyperbolic
 kind: example
 title: "Every tree is 0-hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-cayley-trees-are-zero-hyperbolic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

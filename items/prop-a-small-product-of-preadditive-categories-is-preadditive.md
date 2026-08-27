@@ -2,7 +2,7 @@
 id: prop-a-small-product-of-preadditive-categories-is-preadditive
 kind: proposition
 title: "A small product of preadditive categories is preadditive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

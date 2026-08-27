@@ -2,7 +2,7 @@
 id: thm-threshold-characterisations-of-real-and-extended-real-measurability
 kind: theorem
 title: "Threshold characterisations of real-valued and extended-real-valued measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-borel-sigma-algebra-on-the-extended-real-line, thm-generating-family-criterion-for-measurable-functions, lem-rat-embeds-dense]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

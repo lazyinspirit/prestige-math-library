@@ -2,7 +2,7 @@
 id: cex-commutative-monoids-are-semiadditive-and-not-additive
 kind: counterexample
 title: "Commutative monoids are semiadditive and not additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

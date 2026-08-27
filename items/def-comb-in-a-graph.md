@@ -2,7 +2,7 @@
 id: def-comb-in-a-graph
 kind: definition
 title: "Combs in a graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-blockade-length-and-width, def-edges-between-sets-and-pure-mixed-pair
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

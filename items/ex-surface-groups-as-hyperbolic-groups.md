@@ -2,7 +2,7 @@
 id: ex-surface-groups-as-hyperbolic-groups
 kind: example
 title: "Closed surface groups are hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-the-hyperbolic-plane-is-hyperbolic, thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces, thm-svarc-milnor-lemma, thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

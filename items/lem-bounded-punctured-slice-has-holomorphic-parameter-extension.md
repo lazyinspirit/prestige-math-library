@@ -2,7 +2,7 @@
 id: lem-bounded-punctured-slice-has-holomorphic-parameter-extension
 kind: lemma
 title: "A locally bounded punctured slice has a holomorphic parameter extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

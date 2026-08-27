@@ -2,7 +2,7 @@
 id: fs-principal-value-convergence-implies-improper-convergence
 kind: false-statement
 title: "FALSE: existence of a Cauchy principal value forces improper convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

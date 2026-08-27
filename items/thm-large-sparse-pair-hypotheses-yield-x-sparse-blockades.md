@@ -2,7 +2,7 @@
 id: thm-large-sparse-pair-hypotheses-yield-x-sparse-blockades
 kind: theorem
 title: "Large sparse-pair hypotheses yield an $x$-sparse or complete blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-maximum-principle-for-plane-subharmonic-functions
 kind: theorem
 title: "A plane subharmonic function with an interior maximum is constant on its component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-plane-subharmonic-function]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-an-additive-functor-preserves-finite-biproducts
 kind: theorem
 title: "An additive functor preserves finite biproducts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

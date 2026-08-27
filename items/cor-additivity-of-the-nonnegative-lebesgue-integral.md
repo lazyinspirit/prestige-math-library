@@ -2,7 +2,7 @@
 id: cor-additivity-of-the-nonnegative-lebesgue-integral
 kind: corollary
 title: "Additivity of the nonnegative Lebesgue integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, prop-closure-properties-of-measurable-functions-used-by-the-integral, prop-basic-properties-of-the-nonnegative-simple-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

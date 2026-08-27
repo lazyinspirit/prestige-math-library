@@ -2,7 +2,7 @@
 id: lem-jordans-lemma-rational-functions
 kind: lemma
 title: "Jordan's lemma for rational functions of one complex variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

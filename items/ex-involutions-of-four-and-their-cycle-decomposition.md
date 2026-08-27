@@ -2,7 +2,7 @@
 id: ex-involutions-of-four-and-their-cycle-decomposition
 kind: example
 title: "The involutions of $[4]$ and their cycle decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [cor-standard-specializations-of-the-labelled-symbolic-method]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

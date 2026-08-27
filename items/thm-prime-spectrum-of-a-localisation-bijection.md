@@ -2,7 +2,7 @@
 id: thm-prime-spectrum-of-a-localisation-bijection
 kind: theorem
 title: "Prime ideals of a localization are exactly the primes disjoint from the denominator set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

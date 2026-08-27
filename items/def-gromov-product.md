@@ -2,13 +2,14 @@
 id: def-gromov-product
 kind: definition
 title: "The Gromov product based at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-metric-space]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

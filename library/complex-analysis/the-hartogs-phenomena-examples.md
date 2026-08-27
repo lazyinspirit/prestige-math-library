@@ -1,7 +1,7 @@
 ---
 page: the-hartogs-phenomena-examples
 title: "The Hartogs Phenomena — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hartogs-figure-in-modulus-coordinates,
            ex-one-over-one-minus-z-one-z-two-extends-from-a-hartogs-figure,

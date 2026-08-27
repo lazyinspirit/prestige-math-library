@@ -2,7 +2,7 @@
 id: cor-touchards-congruence-for-bell-numbers
 kind: corollary
 title: "Touchard's congruence: for prime $p$, $B_{n+p}\\equiv B_n+B_{n+1}\\pmod p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

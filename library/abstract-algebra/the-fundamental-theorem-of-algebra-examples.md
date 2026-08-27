@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-theorem-of-algebra-examples
 title: "The Fundamental Theorem of Algebra: Examples and Counterexamples"
-status: draft
+status: published
 items: [rem-artin-and-minimum-modulus-proofs-of-the-fundamental-theorem-of-algebra]
 examples: [ex-x-cubed-minus-two-over-r-and-c,
            ex-x-four-plus-one-factors-into-two-real-quadratics,

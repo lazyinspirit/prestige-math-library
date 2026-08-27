@@ -2,7 +2,7 @@
 id: lem-radical-of-an-intersection
 kind: lemma
 title: "The radical of a finite intersection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

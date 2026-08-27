@@ -2,7 +2,7 @@
 id: thm-morphisms-between-finite-biproducts-correspond-to-matrices
 kind: theorem
 title: "Morphisms between finite biproducts correspond to matrices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

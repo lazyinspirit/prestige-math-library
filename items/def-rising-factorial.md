@@ -2,7 +2,7 @@
 id: def-rising-factorial
 kind: definition
 title: "The rising factorial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-factorial-and-falling-factorial]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

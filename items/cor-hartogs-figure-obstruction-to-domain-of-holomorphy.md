@@ -2,7 +2,7 @@
 id: cor-hartogs-figure-obstruction-to-domain-of-holomorphy
 kind: corollary
 title: "A domain containing a Hartogs figure but not its hull is not a domain of holomorphy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

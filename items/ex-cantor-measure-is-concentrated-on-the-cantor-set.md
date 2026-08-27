@@ -2,7 +2,7 @@
 id: ex-cantor-measure-is-concentrated-on-the-cantor-set
 kind: example
 title: "The Cantor measure is concentrated on the Cantor set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-cantor-measure-is-a-singular-atomless-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

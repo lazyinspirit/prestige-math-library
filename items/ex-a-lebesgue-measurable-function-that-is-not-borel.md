@@ -2,7 +2,7 @@
 id: ex-a-lebesgue-measurable-function-that-is-not-borel
 kind: example
 title: "A Lebesgue measurable function that is not Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel, prop-indicator-function-is-measurable-iff-its-set-is-measurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

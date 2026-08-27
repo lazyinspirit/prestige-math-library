@@ -2,7 +2,7 @@
 id: cex-misidentifying-a-double-pole-gives-the-wrong-residue
 kind: counterexample
 title: "Treating a double pole as simple gives the wrong answer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-arithmetic-and-lattice-operations-preserve-measurability
 kind: theorem
 title: "Arithmetic and lattice operations preserve measurability whenever they are defined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-positive-and-negative-parts-of-a-function, rem-zero-times-infinity-convention-for-pointwise-products, thm-threshold-characterisations-of-real-and-extended-real-measurability]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

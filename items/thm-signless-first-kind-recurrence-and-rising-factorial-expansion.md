@@ -2,7 +2,7 @@
 id: thm-signless-first-kind-recurrence-and-rising-factorial-expansion
 kind: theorem
 title: "The signless first-kind Stirling numbers satisfy their recurrence and expand the rising factorial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

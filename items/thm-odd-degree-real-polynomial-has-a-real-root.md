@@ -2,7 +2,7 @@
 id: thm-odd-degree-real-polynomial-has-a-real-root
 kind: theorem
 title: "Every odd-degree real polynomial has a real root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

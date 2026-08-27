@@ -2,7 +2,7 @@
 id: cex-a-zero-kernel-does-not-force-monicity-in-a-merely-semiadditive-category
 kind: counterexample
 title: "A zero kernel does not force monicity in a merely semiadditive category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

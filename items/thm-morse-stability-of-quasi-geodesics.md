@@ -2,7 +2,7 @@
 id: thm-morse-stability-of-quasi-geodesics
 kind: theorem
 title: "Morse stability of quasi-geodesics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-quasi-geodesic-and-quasi-geodesic-metric-space, lem-thin-quadrilatera
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

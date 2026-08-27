@@ -1,7 +1,7 @@
 ---
 page: measurable-functions-and-simple-approximation
 title: "Measurable Functions and Simple Approximation"
-status: draft
+status: published
 items: [rem-measurable-function-codomain-convention,
         def-borel-sigma-algebra-on-the-extended-real-line,
         def-measurable-function-between-measurable-spaces,

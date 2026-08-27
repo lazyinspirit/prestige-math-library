@@ -2,7 +2,7 @@
 id: def-idempotent-and-split-idempotent
 kind: definition
 title: "Idempotent and split idempotent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

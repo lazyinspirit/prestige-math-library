@@ -1,7 +1,7 @@
 ---
 page: preadditive-and-additive-categories-and-biproducts
 title: "Preadditive and Additive Categories and Biproducts"
-status: draft
+status: published
 items: [def-preadditive-category,
         thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring,
         thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules,

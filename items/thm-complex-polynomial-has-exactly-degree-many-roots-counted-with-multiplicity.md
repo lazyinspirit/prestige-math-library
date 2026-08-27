@@ -2,7 +2,7 @@
 id: thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity
 kind: theorem
 title: "A complex polynomial of degree $n$ has exactly $n$ roots counted with multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

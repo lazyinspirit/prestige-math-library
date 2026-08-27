@@ -2,7 +2,7 @@
 id: ex-nilradical-need-not-be-nilpotent-nonnoetherian
 kind: example
 title: "A non-Noetherian nilradical need not be nilpotent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

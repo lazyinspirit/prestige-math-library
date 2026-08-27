@@ -2,7 +2,7 @@
 id: fs-bell-numbers-count-ordered-set-partitions
 kind: false-statement
 title: "FALSE: Bell numbers count ordered set partitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

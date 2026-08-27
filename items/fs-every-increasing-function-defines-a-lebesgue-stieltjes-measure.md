@@ -2,7 +2,7 @@
 id: fs-every-increasing-function-defines-a-lebesgue-stieltjes-measure
 kind: false-statement
 title: "FALSE: every nondecreasing function defines a Lebesgue-Stieltjes measure on Borel sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-lebesgue-stieltjes-convention-ledger, thm-continuity-from-above-for-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

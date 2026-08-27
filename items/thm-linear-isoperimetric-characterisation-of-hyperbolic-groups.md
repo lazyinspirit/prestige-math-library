@@ -2,7 +2,7 @@
 id: thm-linear-isoperimetric-characterisation-of-hyperbolic-groups
 kind: theorem
 title: "Linear isoperimetric characterisation of hyperbolic groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-group-presentation, def-hyperbolic-group, thm-hyperbolic-groups-admit-finite-dehn-presentations, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-residue-evaluation-rational-fourier-integrals
 kind: theorem
 title: "Rational Fourier integrals are evaluated by residues and Jordan's lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

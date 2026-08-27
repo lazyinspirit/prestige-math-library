@@ -2,7 +2,7 @@
 id: thm-fatou-lemma
 kind: theorem
 title: "Fatou's lemma"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

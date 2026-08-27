@@ -2,7 +2,7 @@
 id: thm-hyperbolic-groups-have-bounded-orders-of-finite-subgroups
 kind: theorem
 title: "Finite subgroups of a hyperbolic group have uniformly bounded order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hyperbolic-group, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

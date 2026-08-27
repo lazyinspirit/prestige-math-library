@@ -2,7 +2,7 @@
 id: def-additive-category
 kind: definition
 title: "Additive category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

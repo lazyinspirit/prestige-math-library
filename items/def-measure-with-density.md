@@ -2,13 +2,14 @@
 id: def-measure-with-density
 kind: definition
 title: "The measure with density $f$ relative to $\\mu$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

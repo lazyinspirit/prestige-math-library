@@ -2,7 +2,7 @@
 id: fs-every-primitive-group-has-a-unique-minimal-normal-subgroup
 kind: false-statement
 title: "FALSE: every primitive group has a unique minimal normal subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups, lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

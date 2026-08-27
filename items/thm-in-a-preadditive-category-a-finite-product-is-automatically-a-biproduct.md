@@ -2,7 +2,7 @@
 id: thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct
 kind: theorem
 title: "In a preadditive category, a finite product is automatically a biproduct"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

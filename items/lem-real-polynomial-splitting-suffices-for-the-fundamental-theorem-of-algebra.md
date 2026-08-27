@@ -2,7 +2,7 @@
 id: lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra
 kind: lemma
 title: "To prove the fundamental theorem of algebra, it suffices to split every real polynomial over $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

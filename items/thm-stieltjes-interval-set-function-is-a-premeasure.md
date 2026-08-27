@@ -2,7 +2,7 @@
 id: thm-stieltjes-interval-set-function-is-a-premeasure
 kind: theorem
 title: "The Stieltjes interval set function is a premeasure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-premeasure-on-an-algebra, def-lebesgue-stieltjes-interval-set-function, prop-stieltjes-interval-set-function-is-finitely-additive, thm-heine-borel-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

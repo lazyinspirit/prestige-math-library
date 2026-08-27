@@ -2,7 +2,7 @@
 id: ex-the-identity-function-generates-lebesgue-measure
 kind: example
 title: "The identity function generates Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity, thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

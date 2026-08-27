@@ -2,7 +2,7 @@
 id: fs-monotone-convergence-without-monotonicity
 kind: false-statement
 title: "FALSE: monotone convergence holds without monotonicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

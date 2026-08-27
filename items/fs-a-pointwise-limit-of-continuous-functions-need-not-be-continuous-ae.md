@@ -2,7 +2,7 @@
 id: fs-a-pointwise-limit-of-continuous-functions-need-not-be-continuous-ae
 kind: false-statement
 title: "FALSE: a pointwise limit of continuous functions is continuous almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fat-cantor-set-has-positive-measure, thm-metric-spaces-are-tychonoff-and-perfectly-normal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

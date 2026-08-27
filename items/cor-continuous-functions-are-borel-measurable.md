@@ -2,7 +2,7 @@
 id: cor-continuous-functions-are-borel-measurable
 kind: corollary
 title: "Continuous functions on Euclidean spaces are Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-borel-and-lebesgue-measurable-function-on-rn, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

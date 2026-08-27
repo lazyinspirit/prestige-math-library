@@ -2,7 +2,7 @@
 id: def-blockade-length-and-width
 kind: definition
 title: "Blockades, their length, their width, and their support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: measurable-functions-and-simple-approximation-examples
 title: "Measurable Functions and Simple Approximation - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-indicator-functions-are-measurable,
            ex-a-simple-function-and-its-canonical-representation,

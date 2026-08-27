@@ -2,7 +2,7 @@
 id: thm-ae-equality-preserves-measurability-on-complete-spaces
 kind: theorem
 title: "On a complete measure space, equality almost everywhere preserves measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-complete-measure-space, prop-null-sets-form-a-sigma-ideal-in-a-complete-space, thm-threshold-characterisations-of-real-and-extended-real-measurability]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

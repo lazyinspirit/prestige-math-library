@@ -2,7 +2,7 @@
 id: thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups
 kind: theorem
 title: "Finite C'(1/6) presentations define hyperbolic groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-linear-isoperimetric-characterisation-of-hyperbolic-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-jensen-yields-weighted-am-gm
 kind: example
 title: "Jensen's inequality yields the weighted AM-GM inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-jensens-integral-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-delta-slim-geodesic-triangle-and-hyperbolic-space
 kind: definition
 title: "Delta-slim triangles and hyperbolic spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-geodesic-segment-triangle-and-geodesic-metric-space]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

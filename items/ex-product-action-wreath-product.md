@@ -2,7 +2,7 @@
 id: ex-product-action-wreath-product
 kind: example
 title: "A primitive product-action wreath product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

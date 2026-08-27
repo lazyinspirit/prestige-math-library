@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r
 kind: theorem
 title: "The interval data on $(a,b]$ determines the Borel measure uniquely"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-borel-measure-finite-on-compact-sets-on-r, thm-measure-uniqueness-on-a-sigma-finite-pi-system, thm-seven-generators-of-the-borel-sigma-algebra-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

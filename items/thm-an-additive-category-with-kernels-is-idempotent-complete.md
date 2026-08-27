@@ -2,7 +2,7 @@
 id: thm-an-additive-category-with-kernels-is-idempotent-complete
 kind: theorem
 title: "An additive category with kernels is idempotent complete"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-no-isolated-holomorphic-singularities-in-several-complex-variables
 kind: corollary
 title: "Holomorphic functions of several variables have no isolated singularities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

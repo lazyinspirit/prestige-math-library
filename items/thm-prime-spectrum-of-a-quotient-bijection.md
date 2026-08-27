@@ -2,7 +2,7 @@
 id: thm-prime-spectrum-of-a-quotient-bijection
 kind: theorem
 title: "Prime ideals of a quotient ring are exactly the prime ideals containing the ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

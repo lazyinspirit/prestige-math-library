@@ -2,7 +2,7 @@
 id: def-principal-distinguished-subset-of-spectrum
 kind: definition
 title: "Principal distinguished subsets of the prime spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-large-arc-vanishing-follows-from-pointwise-decay-alone
 kind: false-statement
 title: "FALSE: pointwise decay alone makes every large semicircle integral vanish"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-exponential-generating-function-over-a-q-algebra
 kind: definition
 title: "Exponential generating functions over a commutative $\\mathbb{Q}$-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-formal-power-series-and-coefficient-extraction, def-formal-exponentia
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

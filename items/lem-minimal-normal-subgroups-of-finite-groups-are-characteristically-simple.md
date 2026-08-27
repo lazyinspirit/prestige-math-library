@@ -2,7 +2,7 @@
 id: lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple
 kind: lemma
 title: "Minimal normal subgroups of finite groups are characteristically simple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-characteristic-subgroup, def-minimal-normal-subgroup-and-socle, lem-characteristic-subgroup-of-a-normal-subgroup-is-normal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

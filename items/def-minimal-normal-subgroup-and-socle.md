@@ -2,13 +2,14 @@
 id: def-minimal-normal-subgroup-and-socle
 kind: definition
 title: "Minimal normal subgroups and the socle of a finite group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-generated-subgroup, def-normal-subgroup]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

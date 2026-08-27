@@ -1,7 +1,7 @@
 ---
 page: socles-and-the-onan-scott-landscape-examples
 title: "Socles and the Onan Scott Landscape — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-affine-type-agl-one-p,
            ex-almost-simple-type-from-an-alternating-group,

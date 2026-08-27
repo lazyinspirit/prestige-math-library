@@ -2,7 +2,7 @@
 id: ex-a-square-corner-has-an-explicit-barrier
 kind: example
 title: "A square corner carries an explicit power-barrier"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-exterior-disc-and-exterior-cone-points-are-regular, def-barrier-and-regular-boundary-point]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

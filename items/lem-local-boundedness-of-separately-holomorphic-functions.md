@@ -2,7 +2,7 @@
 id: lem-local-boundedness-of-separately-holomorphic-functions
 kind: lemma
 title: "Separate holomorphy forces local boundedness on smaller polydiscs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -27,6 +27,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

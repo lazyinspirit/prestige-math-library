@@ -2,13 +2,14 @@
 id: def-l-one-of-a-measure
 kind: definition
 title: "The class $L^1(\\mu)$ of integrable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integrable-real-and-complex-functions-and-their-integrals]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

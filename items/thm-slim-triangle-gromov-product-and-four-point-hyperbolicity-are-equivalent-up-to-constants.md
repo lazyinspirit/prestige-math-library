@@ -2,7 +2,7 @@
 id: thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants
 kind: theorem
 title: "Slim triangles, the Gromov product, and the four-point condition are equivalent up to constants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-delta-slim-geodesic-triangle-and-hyperbolic-space, def-gromov-product]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

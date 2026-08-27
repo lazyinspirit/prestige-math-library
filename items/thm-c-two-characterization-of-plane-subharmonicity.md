@@ -2,7 +2,7 @@
 id: thm-c-two-characterization-of-plane-subharmonicity
 kind: theorem
 title: "A C^2 function is subharmonic exactly when its Laplacian is nonnegative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-harmonic-majorant-characterization-of-plane-subharmonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

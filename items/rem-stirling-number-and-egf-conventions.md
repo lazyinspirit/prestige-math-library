@@ -2,7 +2,7 @@
 id: rem-stirling-number-and-egf-conventions
 kind: remark
 title: "This page fixes the Stirling-sign and exponential-generating-function conventions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

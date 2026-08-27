@@ -2,7 +2,7 @@
 id: prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group
 kind: proposition
 title: "In a preadditive category with a zero object, the zero morphism is the neutral element of each hom-group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

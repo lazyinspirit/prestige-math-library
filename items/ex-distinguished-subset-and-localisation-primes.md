@@ -2,7 +2,7 @@
 id: ex-distinguished-subset-and-localisation-primes
 kind: example
 title: "The distinguished subset D(x) matches the primes of the localization at x"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

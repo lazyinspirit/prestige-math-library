@@ -2,7 +2,7 @@
 id: ex-basic-plane-subharmonic-functions
 kind: example
 title: '$|z|^2$ and $\log|z|$ are the model basic subharmonic functions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-c-two-characterization-of-plane-subharmonicity, thm-log-modulus-of-a-holomorphic-function-is-subharmonic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

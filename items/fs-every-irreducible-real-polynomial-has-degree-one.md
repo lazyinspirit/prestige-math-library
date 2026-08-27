@@ -2,7 +2,7 @@
 id: fs-every-irreducible-real-polynomial-has-degree-one
 kind: false-statement
 title: "FALSE: every irreducible polynomial in $\\mathbb R[x]$ has degree $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

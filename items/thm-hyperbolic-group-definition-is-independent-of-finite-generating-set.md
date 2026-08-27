@@ -2,7 +2,7 @@
 id: thm-hyperbolic-group-definition-is-independent-of-finite-generating-set
 kind: theorem
 title: "Hyperbolicity of a finitely generated group is independent of the finite generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hyperbolic-group, thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces, thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

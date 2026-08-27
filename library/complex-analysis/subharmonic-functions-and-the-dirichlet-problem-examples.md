@@ -1,7 +1,7 @@
 ---
 page: subharmonic-functions-and-the-dirichlet-problem-examples
 title: "Subharmonic Functions and the Dirichlet Problem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-basic-plane-subharmonic-functions, ex-poisson-modification-of-a-radial-quadratic-on-a-disc, ex-perron-solution-on-an-annulus-with-radial-data, ex-a-square-corner-has-an-explicit-barrier, cex-the-punctured-disc-has-an-irregular-boundary-point-and-a-nonsolvable-datum, fs-every-bounded-plane-domain-has-a-dirichlet-solution, fs-the-perron-envelope-always-attains-the-boundary-data, fs-a-subharmonic-function-can-attain-an-interior-maximum, fs-the-pointwise-supremum-of-an-arbitrary-family-of-subharmonic-functions-is-subharmonic]
 ---

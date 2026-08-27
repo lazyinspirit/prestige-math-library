@@ -2,13 +2,14 @@
 id: def-borel-sigma-algebra-on-the-extended-real-line
 kind: definition
 title: "The Borel sigma-algebra on the extended real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-borel-sigma-algebra, def-extended-reals]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-convergence-of-infinite-regular-continued-fractions
 kind: theorem
 title: "Every infinite regular continued fraction converges to a unique real number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

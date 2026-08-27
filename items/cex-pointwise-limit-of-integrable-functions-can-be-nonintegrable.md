@@ -2,7 +2,7 @@
 id: cex-pointwise-limit-of-integrable-functions-can-be-nonintegrable
 kind: counterexample
 title: "A pointwise limit of integrable functions need not be integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

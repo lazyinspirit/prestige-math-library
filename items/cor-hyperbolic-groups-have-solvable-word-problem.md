@@ -2,7 +2,7 @@
 id: cor-hyperbolic-groups-have-solvable-word-problem
 kind: corollary
 title: "Hyperbolic groups have solvable word problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-hyperbolic-groups-admit-finite-dehn-presentations]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

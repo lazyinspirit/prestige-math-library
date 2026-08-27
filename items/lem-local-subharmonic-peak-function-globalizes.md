@@ -2,7 +2,7 @@
 id: lem-local-subharmonic-peak-function-globalizes
 kind: lemma
 title: "A local strict subharmonic peak function globalizes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity, lem-gluing-lemma-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-cauchy-principal-value-dictionary
 kind: remark
 title: "This page keeps Cauchy principal values distinct from genuine improper convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

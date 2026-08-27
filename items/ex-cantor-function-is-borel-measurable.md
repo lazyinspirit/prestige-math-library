@@ -2,7 +2,7 @@
 id: ex-cantor-function-is-borel-measurable
 kind: example
 title: "The Cantor function is Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-cantor-function-is-continuous, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

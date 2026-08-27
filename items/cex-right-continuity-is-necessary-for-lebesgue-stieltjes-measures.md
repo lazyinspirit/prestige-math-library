@@ -2,7 +2,7 @@
 id: cex-right-continuity-is-necessary-for-lebesgue-stieltjes-measures
 kind: counterexample
 title: "A nondecreasing function that is not right-continuous can fail countable additivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-continuity-from-above-for-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

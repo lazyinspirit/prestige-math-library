@@ -2,13 +2,14 @@
 id: def-integral-over-a-measurable-set
 kind: definition
 title: "Integral over a measurable subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-nonnegative-lebesgue-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

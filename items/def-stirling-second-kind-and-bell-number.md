@@ -2,7 +2,7 @@
 id: def-stirling-second-kind-and-bell-number
 kind: definition
 title: "The Stirling numbers of the second kind and the Bell numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-set-partition-and-block, lem-set-partitions-of-a-finite-set-are-finit
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

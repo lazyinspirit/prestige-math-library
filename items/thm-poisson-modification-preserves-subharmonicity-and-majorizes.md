@@ -2,7 +2,7 @@
 id: thm-poisson-modification-preserves-subharmonicity-and-majorizes
 kind: theorem
 title: "Poisson modification is subharmonic and majorizes the original function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-poisson-modification-of-a-subharmonic-function, lem-gluing-lemma-for-plane-subharmonic-functions, thm-harmonic-majorant-characterization-of-plane-subharmonicity, thm-poisson-integral-solves-the-disc-dirichlet-problem, thm-conformal-invariance-of-plane-harmonicity, thm-harnack-convergence-principle-for-plane-harmonic-functions, thm-plane-subharmonic-functions-are-locally-integrable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-indented-arc-residue-limit
 kind: lemma
 title: "An indented arc around a simple singularity contributes the expected residue fraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

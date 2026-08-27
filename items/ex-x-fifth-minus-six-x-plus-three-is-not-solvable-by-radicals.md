@@ -2,7 +2,7 @@
 id: ex-x-fifth-minus-six-x-plus-three-is-not-solvable-by-radicals
 kind: example
 title: "$x^5-6x+3$ over $\\mathbb Q$ is not solvable by radicals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

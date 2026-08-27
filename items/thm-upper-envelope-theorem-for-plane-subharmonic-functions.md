@@ -2,7 +2,7 @@
 id: thm-upper-envelope-theorem-for-plane-subharmonic-functions
 kind: theorem
 title: "The upper-semicontinuous regularization of a locally bounded-above subharmonic supremum is subharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-upper-semicontinuous-regularization, thm-harmonic-majorant-characterization-of-plane-subharmonicity, lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

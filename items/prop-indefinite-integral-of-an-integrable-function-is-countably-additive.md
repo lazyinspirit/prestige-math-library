@@ -2,7 +2,7 @@
 id: prop-indefinite-integral-of-an-integrable-function-is-countably-additive
 kind: proposition
 title: "The indefinite integral of an integrable function is countably additive on measurable sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-almost-simple-type-from-an-alternating-group
 kind: example
 title: "The natural action of $A_n$ is almost simple type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, def-almost-simple-finite-group]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

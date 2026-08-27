@@ -2,7 +2,7 @@
 id: ex-socle-of-a-finite-solvable-primitive-group
 kind: example
 title: "The socle of a finite solvable primitive group is elementary abelian and regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

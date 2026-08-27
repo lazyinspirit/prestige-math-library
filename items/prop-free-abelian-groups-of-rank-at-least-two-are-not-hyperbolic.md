@@ -2,7 +2,7 @@
 id: prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic
 kind: proposition
 title: "Free abelian groups of rank at least two are not hyperbolic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hyperbolic-group, def-rank-of-a-finite-rank-free-group, lem-thin-quadrilaterals-in-a-hyperbolic-space, thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

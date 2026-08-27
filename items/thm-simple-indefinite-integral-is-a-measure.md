@@ -2,7 +2,7 @@
 id: thm-simple-indefinite-integral-is-a-measure
 kind: theorem
 title: "The indefinite integral of a nonnegative simple function is a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-over-a-measurable-set, prop-basic-properties-of-the-nonnegative-simple-integral, def-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

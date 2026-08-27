@@ -2,7 +2,7 @@
 id: fs-lebesgue-stieltjes-measures-have-zero-point-masses
 kind: false-statement
 title: "FALSE: a Lebesgue-Stieltjes measure always gives every singleton measure $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-existence-of-the-lebesgue-stieltjes-measure, thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

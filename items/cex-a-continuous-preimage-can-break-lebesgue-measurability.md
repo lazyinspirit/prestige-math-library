@@ -2,7 +2,7 @@
 id: cex-a-continuous-preimage-can-break-lebesgue-measurability
 kind: counterexample
 title: "A continuous preimage of a Lebesgue measurable set can be nonmeasurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-a-continuous-preimage-of-a-lebesgue-measurable-set-can-be-nonmeasurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

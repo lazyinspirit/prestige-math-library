@@ -2,7 +2,7 @@
 id: rem-cfsg-refinements-of-the-onan-scott-reduction
 kind: remark
 title: "CFSG enters later refinements of the O'Nan-Scott reduction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,10 @@ external_dependency:
   local_proof_attempt: "A local proof would require the classification of finite simple groups and the detailed case analysis of primitive almost-simple and related types. This page develops only the socle-level reduction, not those global refinements."
   necessity: "The batch needs an honest boundary marker separating the structural five-type theorem from later CFSG-driven refinements and applications."
 verification:
+  sources_checked:
+    date: 2026-08-27
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

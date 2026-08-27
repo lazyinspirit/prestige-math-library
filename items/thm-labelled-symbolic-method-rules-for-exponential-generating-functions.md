@@ -2,7 +2,7 @@
 id: thm-labelled-symbolic-method-rules-for-exponential-generating-functions
 kind: theorem
 title: "The labelled constructions translate into the usual exponential-generating-function rules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

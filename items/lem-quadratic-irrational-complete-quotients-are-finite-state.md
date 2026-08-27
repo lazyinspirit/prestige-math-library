@@ -2,7 +2,7 @@
 id: lem-quadratic-irrational-complete-quotients-are-finite-state
 kind: lemma
 title: "Complete quotients of a quadratic irrational lie in a finite state space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

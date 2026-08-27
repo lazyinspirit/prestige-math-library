@@ -2,7 +2,7 @@
 id: lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses
 kind: lemma
 title: "Product-action wreath products are primitive under the standard hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, def-imprimitive-wreath-product-of-permutation-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-simple-diagonal-action
 kind: example
 title: "A simple diagonal action"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types, thm-onan-scott-classification-of-finite-primitive-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

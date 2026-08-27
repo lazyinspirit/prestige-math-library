@@ -2,7 +2,7 @@
 id: def-sparse-orientation-of-a-blockade
 kind: definition
 title: "Sparse orientations of a blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-directional-and-weak-sparsity-between-vertex-sets, def-blockade-lengt
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

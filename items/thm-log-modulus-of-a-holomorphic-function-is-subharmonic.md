@@ -2,7 +2,7 @@
 id: thm-log-modulus-of-a-holomorphic-function-is-subharmonic
 kind: theorem
 title: "The logarithm of the modulus of a holomorphic function is subharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-c-two-characterization-of-plane-subharmonicity, thm-zero-order-factorization-holomorphic-function, lem-local-holomorphic-logarithm-nonvanishing-function-on-disc, cor-holomorphic-functions-are-real-analytic-and-smooth]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

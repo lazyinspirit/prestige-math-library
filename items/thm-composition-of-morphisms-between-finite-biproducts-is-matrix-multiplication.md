@@ -2,7 +2,7 @@
 id: thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication
 kind: theorem
 title: "Composition of morphisms between finite biproducts is matrix multiplication"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

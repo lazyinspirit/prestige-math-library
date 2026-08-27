@@ -2,7 +2,7 @@
 id: thm-absolute-continuity-of-the-integral
 kind: theorem
 title: "Absolute continuity of the integral"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-monotone-convergence-for-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

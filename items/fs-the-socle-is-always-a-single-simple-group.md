@@ -2,7 +2,7 @@
 id: fs-the-socle-is-always-a-single-simple-group
 kind: false-statement
 title: "FALSE: the socle is always a single simple group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-socle-is-characteristic-and-admits-a-direct-product-decomposition, thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

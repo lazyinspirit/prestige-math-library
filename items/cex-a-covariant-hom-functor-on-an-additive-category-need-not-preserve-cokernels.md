@@ -2,7 +2,7 @@
 id: cex-a-covariant-hom-functor-on-an-additive-category-need-not-preserve-cokernels
 kind: counterexample
 title: "A covariant hom functor on an additive category need not preserve cokernels"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

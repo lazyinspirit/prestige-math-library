@@ -2,7 +2,7 @@
 id: thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted
 kind: theorem
 title: "Infinite-order elements of hyperbolic groups are undistorted"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-a-finitely-generated-group-with-a-word-metric-is-a-quasi-geodesic-space, def-hyperbolic-group, thm-morse-stability-of-quasi-geodesics]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

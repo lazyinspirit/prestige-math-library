@@ -2,7 +2,7 @@
 id: fs-one-variable-isolated-singularity-theory-has-a-several-variable-analogue
 kind: false-statement
 title: "FALSE: isolated singularities in several variables can be poles or essential"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

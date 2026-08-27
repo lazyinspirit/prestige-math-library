@@ -2,7 +2,7 @@
 id: ex-abelian-groups-modules-and-vector-spaces-are-additive
 kind: example
 title: "Abelian groups, modules, and vector spaces are additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

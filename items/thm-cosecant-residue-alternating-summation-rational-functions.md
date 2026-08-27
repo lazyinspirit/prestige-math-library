@@ -2,7 +2,7 @@
 id: thm-cosecant-residue-alternating-summation-rational-functions
 kind: theorem
 title: "Cosecant residues sum an alternating rational series over the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

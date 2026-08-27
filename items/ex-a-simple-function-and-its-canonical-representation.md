@@ -2,7 +2,7 @@
 id: ex-a-simple-function-and-its-canonical-representation
 kind: example
 title: "A simple function and its canonical representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-simple-function-and-canonical-representation]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

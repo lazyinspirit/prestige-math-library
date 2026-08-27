@@ -2,7 +2,7 @@
 id: lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity
 kind: lemma
 title: "Positive linear combinations and finite maxima preserve subharmonicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-plane-subharmonic-function,
        thm-plane-subharmonic-functions-are-locally-integrable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-simply-connected-proper-plane-domains-are-regular
 kind: corollary
 title: "Every bounded simply connected proper plane domain is regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-boundary-point-whose-complementary-component-contains-another-point-is-regular]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

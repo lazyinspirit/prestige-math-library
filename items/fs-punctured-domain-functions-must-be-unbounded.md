@@ -2,7 +2,7 @@
 id: fs-punctured-domain-functions-must-be-unbounded
 kind: false-statement
 title: "FALSE: every holomorphic function on a punctured several-variable domain is unbounded near the puncture"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

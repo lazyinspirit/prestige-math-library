@@ -2,7 +2,7 @@
 id: thm-decreasing-limit-theorem-for-plane-subharmonic-functions
 kind: theorem
 title: "A decreasing limit of plane subharmonic functions is subharmonic or identically -infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-plane-subharmonic-function, lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

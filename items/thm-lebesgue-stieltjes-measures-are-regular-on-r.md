@@ -2,7 +2,7 @@
 id: thm-lebesgue-stieltjes-measures-are-regular-on-r
 kind: theorem
 title: "Lebesgue-Stieltjes measures on $\\mathbb{R}$ are outer regular and inner regular by compact sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-half-open-interval-algebra-on-r, thm-borel-sigma-algebra-of-a-subspace-is-the-trace, thm-continuity-from-above-for-measures, thm-continuity-from-below-for-measures, thm-heine-borel-r, thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures, thm-lebesgue-stieltjes-correspondence-with-distribution-functions, thm-monotone-class, thm-seven-generators-of-the-borel-sigma-algebra-on-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

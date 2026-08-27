@@ -2,7 +2,7 @@
 id: ex-arctangent-generates-a-borel-probability-measure
 kind: example
 title: "The arctangent distribution function generates a Borel probability measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-continuity-from-below-for-measures, thm-existence-of-the-lebesgue-stieltjes-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: def-set-partition-and-block
 kind: definition
 title: "Set partitions and blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

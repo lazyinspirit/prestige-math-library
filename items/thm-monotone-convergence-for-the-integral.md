@@ -2,7 +2,7 @@
 id: thm-monotone-convergence-for-the-integral
 kind: theorem
 title: "Monotone convergence for the integral"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-nonnegative-lebesgue-integral, def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-continuity-from-below-for-measures, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-basic-properties-of-the-nonnegative-simple-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

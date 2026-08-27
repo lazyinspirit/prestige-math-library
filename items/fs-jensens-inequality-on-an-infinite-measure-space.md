@@ -2,7 +2,7 @@
 id: fs-jensens-inequality-on-an-infinite-measure-space
 kind: false-statement
 title: "FALSE: Jensen's inequality holds on an infinite measure space without normalization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-jensens-integral-inequality, def-counting-measure, prop-counting-measure-is-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

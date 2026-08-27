@@ -1,7 +1,7 @@
 ---
 page: regular-continued-fractions-and-diophantine-approximation
 title: "Regular Continued Fractions and Diophantine Approximation"
-status: draft
+status: published
 items: [def-regular-continued-fraction,
         def-convergents-of-regular-continued-fraction,
         lem-continued-fraction-convergent-recurrence,

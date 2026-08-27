@@ -2,13 +2,14 @@
 id: def-nonnegative-simple-measurable-function
 kind: definition
 title: "Nonnegative simple measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-extended-real-valued-measurable-function]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

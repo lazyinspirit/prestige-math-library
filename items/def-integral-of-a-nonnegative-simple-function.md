@@ -2,7 +2,7 @@
 id: def-integral-of-a-nonnegative-simple-function
 kind: definition
 title: "The integral of a nonnegative simple function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nonnegative-simple-measurable-function, def-measure]
 justified_by: [lem-well-definedness-of-the-simple-integral]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-integral-over-a-null-set-vanishes
 kind: corollary
 title: "A nonnegative integral over a null set vanishes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-over-a-measurable-set, thm-simple-indefinite-integral-is-a-measure, def-measure-null-set-and-almost-everywhere, def-nonnegative-lebesgue-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

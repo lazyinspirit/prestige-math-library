@@ -2,7 +2,7 @@
 id: thm-stirling-second-kind-inclusion-exclusion-formula
 kind: theorem
 title: "The Stirling numbers of the second kind are given by $S(n,k)=\\frac{1}{k!}\\sum_{i=0}^k(-1)^i\\binom{k}{i}(k-i)^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-one-over-z-has-a-nonremovable-puncture-in-one-variable
 kind: counterexample
 title: "The one-variable function 1 / z does not extend across the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

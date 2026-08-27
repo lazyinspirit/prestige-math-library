@@ -2,7 +2,7 @@
 id: ex-a-ring-viewed-as-a-one-object-preadditive-category-with-its-matrices
 kind: example
 title: "A ring viewed as a one-object preadditive category with its matrices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

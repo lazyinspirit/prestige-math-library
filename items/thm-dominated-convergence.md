@@ -2,7 +2,7 @@
 id: thm-dominated-convergence
 kind: theorem
 title: "Dominated convergence"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [cor-reverse-fatou-lemma-under-an-integrable-majorant, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integral-triangle-inequality, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-integral-over-a-null-set-vanishes, cor-finite-nonnegative-integral-implies-finite-almost-everywhere, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

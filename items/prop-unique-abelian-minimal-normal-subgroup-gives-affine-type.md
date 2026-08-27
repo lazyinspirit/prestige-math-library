@@ -2,7 +2,7 @@
 id: prop-unique-abelian-minimal-normal-subgroup-gives-affine-type
 kind: proposition
 title: "A unique abelian minimal normal subgroup gives affine type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups, cor-abelian-normal-subgroups-of-faithful-primitive-actions-are-regular, def-elementary-abelian-p-group, lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces, lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension, lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-socle-is-characteristic-and-admits-a-direct-product-decomposition
 kind: proposition
 title: "The socle is characteristic and decomposes as a direct product of minimal normal subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-characteristic-subgroup, def-internal-direct-product-of-subgroups, def-minimal-normal-subgroup-and-socle, lem-distinct-minimal-normal-subgroups-centralize-one-another, lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple, thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

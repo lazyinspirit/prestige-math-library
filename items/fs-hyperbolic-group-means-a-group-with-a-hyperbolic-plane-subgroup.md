@@ -2,7 +2,7 @@
 id: fs-hyperbolic-group-means-a-group-with-a-hyperbolic-plane-subgroup
 kind: false-statement
 title: "FALSE: a hyperbolic group is just a group with a hyperbolic-plane subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hyperbolic-group, prop-finite-and-free-groups-are-hyperbolic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

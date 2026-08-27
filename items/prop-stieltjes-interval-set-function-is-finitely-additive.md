@@ -2,7 +2,7 @@
 id: prop-stieltjes-interval-set-function-is-finitely-additive
 kind: proposition
 title: "The Stieltjes interval set function is finitely additive on the half-open interval algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-lebesgue-stieltjes-interval-set-function]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

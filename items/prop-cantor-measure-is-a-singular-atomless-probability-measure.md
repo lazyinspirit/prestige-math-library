@@ -2,7 +2,7 @@
 id: prop-cantor-measure-is-a-singular-atomless-probability-measure
 kind: proposition
 title: "The Cantor measure is a singular atomless probability measure concentrated on the Cantor set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-cantor-function-is-continuous, cor-cantor-set-is-an-uncountable-lebesgue-null-set, def-cantor-measure, thm-cantor-function-properties, thm-continuity-from-below-for-measures, thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

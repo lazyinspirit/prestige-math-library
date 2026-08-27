@@ -2,7 +2,7 @@
 id: fs-fatou-lemma-is-always-an-equality
 kind: false-statement
 title: "FALSE: Fatou's lemma is always an equality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fatou-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-x-four-plus-one-factors-into-two-real-quadratics
 kind: example
 title: "$x^4+1$ factors over $\\mathbb R$ into two irreducible quadratics"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

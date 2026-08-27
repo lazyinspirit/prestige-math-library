@@ -2,7 +2,7 @@
 id: thm-the-complex-numbers-are-algebraically-closed
 kind: theorem
 title: "The complex numbers are algebraically closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

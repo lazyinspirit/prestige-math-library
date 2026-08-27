@@ -1,7 +1,7 @@
 ---
 page: lebesgue-stieltjes-measures-and-distribution-functions-examples
 title: "Lebesgue-Stieltjes Measures and Distribution Functions - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-identity-function-generates-lebesgue-measure,
            ex-one-jump-function-generates-a-dirac-mass-at-zero,

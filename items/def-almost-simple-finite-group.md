@@ -2,13 +2,14 @@
 id: def-almost-simple-finite-group
 kind: definition
 title: "Almost simple finite groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group-isomorphism-and-automorphism, def-simple-group, thm-automorphisms-form-a-group]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

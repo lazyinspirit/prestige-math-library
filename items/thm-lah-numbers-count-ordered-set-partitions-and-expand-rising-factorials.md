@@ -2,7 +2,7 @@
 id: thm-lah-numbers-count-ordered-set-partitions-and-expand-rising-factorials
 kind: theorem
 title: "The Lah numbers count ordered-block set partitions and expand the rising factorial in the falling basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

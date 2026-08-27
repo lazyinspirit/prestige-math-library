@@ -2,7 +2,7 @@
 id: thm-completion-measurable-functions-have-base-measurable-representatives
 kind: theorem
 title: "A function measurable for a completion is almost everywhere equal to one measurable for the original sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-measurable-functions-admit-dominated-simple-approximations, def-completion-of-a-measure-space, prop-null-sets-form-a-sigma-ideal-in-a-complete-space, thm-completion-of-a-measure-space, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

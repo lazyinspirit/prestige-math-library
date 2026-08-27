@@ -2,7 +2,7 @@
 id: fs-an-arbitrary-supremum-of-measurable-functions-need-not-be-measurable
 kind: false-statement
 title: "FALSE: the supremum of an arbitrary family of measurable functions is always measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-indicator-function-is-measurable-iff-its-set-is-measurable, thm-a-vitali-set-is-not-lebesgue-measurable, thm-vitali-sets-exist-under-choice-on-r-over-q]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

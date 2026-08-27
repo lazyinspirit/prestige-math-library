@@ -2,7 +2,7 @@
 id: rem-the-published-module-statement-is-the-instance-of-this-corollary
 kind: remark
 title: "The published module statement is the instance of this corollary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

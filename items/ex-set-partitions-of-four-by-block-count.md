@@ -2,7 +2,7 @@
 id: ex-set-partitions-of-four-by-block-count
 kind: example
 title: "The set partitions of $[4]$ grouped by their number of blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-stirling-second-kind-and-bell-number]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

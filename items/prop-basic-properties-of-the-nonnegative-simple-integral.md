@@ -2,7 +2,7 @@
 id: prop-basic-properties-of-the-nonnegative-simple-integral
 kind: proposition
 title: "The simple integral is monotone, homogeneous, and additive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-of-a-nonnegative-simple-function, lem-well-definedness-of-the-simple-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

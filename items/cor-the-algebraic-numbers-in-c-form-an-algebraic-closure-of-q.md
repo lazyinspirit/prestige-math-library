@@ -2,7 +2,7 @@
 id: cor-the-algebraic-numbers-in-c-form-an-algebraic-closure-of-q
 kind: corollary
 title: "The algebraic numbers in $\\mathbb C$ form an algebraic closure of $\\mathbb Q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-residue-evaluates-the-gaussian-cosine-integral-by-a-rectangle
 kind: example
 title: "A rectangle contour evaluates the Gaussian cosine integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

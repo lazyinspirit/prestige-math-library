@@ -2,7 +2,7 @@
 id: ex-one-jump-function-generates-a-dirac-mass-at-zero
 kind: example
 title: "A single jump generates the Dirac mass at $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

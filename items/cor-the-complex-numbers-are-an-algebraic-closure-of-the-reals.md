@@ -2,7 +2,7 @@
 id: cor-the-complex-numbers-are-an-algebraic-closure-of-the-reals
 kind: corollary
 title: "The complex numbers form an algebraic closure of $\\mathbb R$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

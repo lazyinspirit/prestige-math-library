@@ -2,7 +2,7 @@
 id: cor-irreducible-real-polynomials-have-degree-one-or-two
 kind: corollary
 title: "An irreducible polynomial in $\\mathbb R[x]$ has degree $1$ or $2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

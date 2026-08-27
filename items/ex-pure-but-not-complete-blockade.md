@@ -2,7 +2,7 @@
 id: ex-pure-but-not-complete-blockade
 kind: example
 title: "A pure blockade that is neither complete nor anticomplete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-complete-anticomplete-pure-and-x-sparse-blockades]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

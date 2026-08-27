@@ -2,7 +2,7 @@
 id: rem-the-matrix-category-is-the-finite-biproduct-completion-of-a-ring
 kind: remark
 title: "The matrix category is the finite biproduct completion of a ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

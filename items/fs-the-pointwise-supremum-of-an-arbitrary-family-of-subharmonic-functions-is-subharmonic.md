@@ -2,7 +2,7 @@
 id: fs-the-pointwise-supremum-of-an-arbitrary-family-of-subharmonic-functions-is-subharmonic
 kind: false-statement
 title: "FALSE: an arbitrary pointwise supremum of subharmonic functions is subharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity, thm-upper-envelope-theorem-for-plane-subharmonic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

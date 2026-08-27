@@ -2,7 +2,7 @@
 id: lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs
 kind: lemma
 title: "A nonreal root of a real polynomial comes with its complex conjugate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-local-hartogs-extension-across-polydisc-shells
 kind: lemma
 title: "Hartogs figures give local extension across polydisc shells"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-additive-functors-and-natural-transformations-form-a-preadditive-category
 kind: proposition
 title: "Additive functors and natural transformations form a preadditive category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

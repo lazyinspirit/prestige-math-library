@@ -2,7 +2,7 @@
 id: cor-abelian-subgroups-of-hyperbolic-groups-are-virtually-cyclic
 kind: corollary
 title: "Abelian subgroups of hyperbolic groups are virtually cyclic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

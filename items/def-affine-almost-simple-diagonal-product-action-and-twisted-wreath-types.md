@@ -2,13 +2,14 @@
 id: def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types
 kind: definition
 title: "Affine, almost simple, diagonal, product action, and twisted wreath types"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-imprimitive-wreath-product-of-permutation-groups, def-regular-actions, def-almost-simple-finite-group, prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]
 verification:
+  audited: 2026-08-27
   precheck: n/a
 sources:
   scraped: []

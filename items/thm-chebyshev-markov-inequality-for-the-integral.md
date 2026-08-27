@@ -2,7 +2,7 @@
 id: thm-chebyshev-markov-inequality-for-the-integral
 kind: theorem
 title: "Chebyshev-Markov inequality for the integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-integral-over-a-measurable-set, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

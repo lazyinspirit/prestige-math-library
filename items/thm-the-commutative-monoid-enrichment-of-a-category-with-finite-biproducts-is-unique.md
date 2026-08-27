@@ -2,7 +2,7 @@
 id: thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique
 kind: theorem
 title: "The commutative-monoid enrichment of a category with finite biproducts is unique"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

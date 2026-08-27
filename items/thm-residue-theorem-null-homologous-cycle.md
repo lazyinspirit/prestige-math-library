@@ -2,7 +2,7 @@
 id: thm-residue-theorem-null-homologous-cycle
 kind: theorem
 title: "The residue theorem for a null-homologous cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-one-over-z-defeats-the-large-semicircle-estimate
 kind: counterexample
 title: "The function 1 / z makes the large-semicircle shortcut fail"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

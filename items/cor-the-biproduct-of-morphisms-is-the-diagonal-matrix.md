@@ -2,7 +2,7 @@
 id: cor-the-biproduct-of-morphisms-is-the-diagonal-matrix
 kind: corollary
 title: "The biproduct of morphisms is the diagonal matrix"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

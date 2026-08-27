@@ -2,7 +2,7 @@
 id: cex-set-partitions-with-the-same-block-sizes-can-be-distinct
 kind: counterexample
 title: "Two set partitions can have the same block-size multiset and still be different"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

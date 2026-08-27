@@ -2,7 +2,7 @@
 id: thm-lebesgue-stieltjes-correspondence-with-distribution-functions
 kind: theorem
 title: "Assuming countable choice, finite-on-compacts Borel measures on $\\mathbb{R}$ correspond to nondecreasing right-continuous functions modulo constants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-distribution-function-of-a-borel-measure-on-r, thm-continuity-from-ab
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-27
   precheck: pass
 sources:
   references:

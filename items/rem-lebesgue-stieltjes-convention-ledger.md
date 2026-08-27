@@ -2,13 +2,14 @@
 id: rem-lebesgue-stieltjes-convention-ledger
 kind: remark
 title: "This page uses the nondecreasing, right-continuous, $(a,b]$-interval convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-one-sided-limits]
 verification:
+  audited: 2026-08-27
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
