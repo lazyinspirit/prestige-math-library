@@ -19,6 +19,7 @@ parts:
     pages:
       - reflective-subcategories-and-the-adjoint-functor-theorems
       - monads-comonads-and-their-algebras
+      - abelian-categories
       - monadicity-and-becks-theorem
       - kan-extensions-density-and-the-free-cocompletion
 ---
@@ -46,11 +47,11 @@ completion then supply the standard structural consequences.
 
 A reflective subcategory has an inclusion with a left adjoint, and the adjoint functor
 theorems say when preservation and size force such adjoints. Every adjunction induces a
-monad and a comonad, and Beck's theorem tests when the comparison with Eilenberg-Moore
-algebras is an equivalence. Kan extensions then generalise adjunctions and limits:
-restriction along a functor sits between left and right Kan extension, comma-category and
-coend formulas make Kan extensions calculable, and fully faithful functors recover genuine
-extension. Density shows every presheaf as a colimit of representables, Yoneda as its own
-left Kan extension, and the presheaf category as the free
-cocompletion of a small category. The same language ends with codensity monads, including
-the ultrafilter monad from finite sets.
+monad or comonad, Beck's theorem tests when the comparison with Eilenberg-Moore algebras is
+an equivalence, and Kan extensions generalise adjunctions and limits through comma-category
+and coend formulas, with density identifying presheaves as colimits of representables and
+presheaf categories as free cocompletions. Abelian categories insert the exact algebra used
+later in that universal language: kernels, cokernels, images and coimages give canonical
+epi-mono factorisations, pullbacks and pushouts preserve exactness in the expected
+directions, quotient and isomorphism theorems recover familiar module-style algebra, and
+exact functors become the categorical form of homological control.

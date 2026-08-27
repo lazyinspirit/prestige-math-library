@@ -14,12 +14,13 @@ landmark: true
 short: "Riemann's criterion"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -50,8 +51,8 @@ $$\text{for every real } \varepsilon > 0 \text{ there is a partition } P \text{ 
 replaces a statement about a supremum and an infimum over all partitions, which
 cannot be checked directly, by the exhibition of a **single** partition for each
 $\varepsilon$. The criterion says nothing about the value of the integral; that
-is located separately, by [[lem-integral-elementary-bounds]], between $L(f,P)$
-and $U(f,P)$ for the same $P$.
+separate lower-and-upper-sum estimate places the integral between $L(f,P)$ and
+$U(f,P)$ for the same $P$.
 
 ## Facts & Assumptions
 

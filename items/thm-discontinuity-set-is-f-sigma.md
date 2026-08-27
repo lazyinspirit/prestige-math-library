@@ -15,12 +15,13 @@ landmark: true
 short: "discontinuity set is $F_\\sigma$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -55,19 +56,18 @@ In particular, when $A = \mathbb{R}$ the discontinuity set $D$ is an $F_\sigma$
 subset of $\mathbb{R}$ and the continuity set $C$ is a $G_\delta$ subset, and
 claim 1 reads $D = \bigcup_{n} \{\, x \in \mathbb{R} : \omega_f(x) \ge 1/\iota(n+1) \,\}$.
 
-**Claim 1 is stated separately because it is what is cited downstream.** The
-exhaustion of $D$ by the superlevel sets $\{\omega_f \ge 1/\iota(n+1)\}$ is used
-directly wherever a property has to be established one threshold at a time —
-[[thm-baire-one-continuity-points]] shows each superlevel set nowhere dense and
-concludes that $D$ is meager — and that use needs the identity itself, not only
-the descriptive conclusion of claim 2.
+**Claim 1 is stated separately because it is what later arguments cite
+downstream.** The exhaustion of $D$ by the superlevel sets
+$\{\omega_f \ge 1/\iota(n+1)\}$ is exactly the form needed when a later proof
+establishes a property one threshold at a time, so the identity itself is
+recorded here and not only the descriptive conclusion of claim 2.
 
 **The statement is relative on purpose.** For a general domain $A$ the sets $D$
 and $C$ are subsets of $A$, and neither is $F_\sigma$ or $G_\delta$ in
-$\mathbb{R}$ in general; what the proof produces are two subsets of $\mathbb{R}$
-that cut down to them. The absolute form is stated only for $A = \mathbb{R}$,
-which is the case [[thm-continuity-set-realisation]] and
-[[cor-no-function-is-continuous-exactly-on-q]] use.
+$\mathbb{R}$ in general; what the proof produces are two subsets of
+$\mathbb{R}$ that cut down to them. The absolute form is stated only for
+$A = \mathbb{R}$, which is the case used later by the realization and
+exact-continuity-set examples.
 
 ## Facts & Assumptions
 

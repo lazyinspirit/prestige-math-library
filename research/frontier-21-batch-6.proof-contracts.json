@@ -1,0 +1,3426 @@
+{
+  "version": 1,
+  "run": "frontier-21",
+  "batch": 6,
+  "note": "Step-5 authoring contract for frontier-21 batch 6 on Thursday, August 27, 2026.",
+  "scope": [
+    "lem-partition-conjugation-is-an-involution",
+    "thm-partitions-with-k-parts-equal-largest-part-k",
+    "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k",
+    "thm-partitions-into-k-parts-recurrence",
+    "cor-distinct-partitions-have-product-generating-function",
+    "cor-odd-partitions-have-product-generating-function",
+    "thm-euler-distinct-parts-equal-odd-parts-by-generating-functions",
+    "thm-glaisher-bijection-between-odd-and-distinct-partitions",
+    "thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions",
+    "thm-durfee-square-identity",
+    "thm-unlabelled-unlabelled-placement-counts",
+    "thm-twelvefold-way",
+    "thm-euler-pentagonal-number-theorem-by-franklin",
+    "cor-pentagonal-recurrence-for-partition-numbers",
+    "fs-partitions-into-k-parts-are-counted-by-binomial-coefficients",
+    "fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions",
+    "cex-a-partition-that-is-not-self-conjugate",
+    "cex-conjugation-does-not-send-distinct-parts-to-odd-parts",
+    "cex-manipulating-the-euler-product-without-summability",
+    "lem-fixed-colourings-factor-by-cycle-type",
+    "thm-polya-enumeration-theorem",
+    "thm-weighted-pattern-inventory-formula",
+    "thm-cycle-index-of-cyclic-group",
+    "thm-cycle-index-of-dihedral-group",
+    "lem-permutations-with-a-given-cycle-type-count",
+    "thm-cycle-index-of-symmetric-group",
+    "thm-cycle-index-of-alternating-group",
+    "cor-necklace-count-via-cycle-index",
+    "cor-bracelet-count-via-cycle-index",
+    "thm-edge-set-orbits-on-two-subsets-by-polya",
+    "cor-symmetric-group-cycle-index-series-is-exponential",
+    "fs-distinct-groups-have-distinct-cycle-indices",
+    "fs-cycle-index-determines-the-abstract-group",
+    "fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment",
+    "cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index",
+    "cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information"
+  ],
+  "contracts": {
+    "lem-partition-conjugation-is-an-involution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda$ be a partition written in the page convention of\n[[def-twelvefold-way-ball-box-conventions]]. For a nonempty partition, write\n\n$$\\lambda = (\\lambda_1,\\dots,\\lambda_r), \\qquad \\lambda_1 \\ge \\cdots \\ge \\lambda_r > 0.$$\n\nAlso adjoin the empty partition\n\n$$\\varnothing_{\\mathrm{part}}:=()$$\n\nof $0$.\n\nThe **Ferrers diagram** (or **Young diagram**) of a nonempty partition $\\lambda$\nis the set of cells\n\n$$\\{(i,j) : 1 \\le i \\le r,\\ 1 \\le j \\le \\lambda_i\\},$$\n\ndrawn as left-justified rows, with row $i$ containing $\\lambda_i$ cells.\n\nThe Ferrers diagram of $\\varnothing_{\\mathrm{part}}$ is the empty set of cells.\n\nThe **conjugate partition** of a nonempty partition $\\lambda$ is obtained by\ntransposing this diagram:\nfor $1\\le j\\le\\lambda_1$, its $j$-th part is the number of rows of $\\lambda$\nof length at least $j$. Equivalently,\n\n$$\\lambda'_j = |\\{\\, i : \\lambda_i \\ge j \\,\\}| \\qquad (1\\le j\\le\\lambda_1).$$\n\nThe conjugate of $\\varnothing_{\\mathrm{part}}$ is again\n$\\varnothing_{\\mathrm{part}}$.\n\nThe partition is **self-conjugate** when $\\lambda'=\\lambda$.\n\nThe **Durfee length** of $\\varnothing_{\\mathrm{part}}$ is $0$. For a nonempty\npartition $\\lambda$, the **Durfee length** $d(\\lambda)$ is the largest integer\n$d \\ge 1$ such that $\\lambda_d \\ge d$. The **Durfee square** is the\n$d(\\lambda)\\times d(\\lambda)$ square of cells in the upper-left corner of the\nFerrers diagram, and for $\\varnothing_{\\mathrm{part}}$ it is the empty\n$0\\times0$ square.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A cell $(i,j)$ belongs to the Ferrers diagram of $\\lambda$ exactly when the $i$-th row has length at least $j$, and by [F1] this is equivalent to the $j$-th row of $\\lambda'$ having length at least $i$. Therefore the cells of $\\lambda'$ are exactly the transpose $(j,i)$ of the cells of $\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Transposing the same finite set of cells a second time sends $(j,i)$ back to $(i,j)$, so the twice-conjugated diagram is the original diagram. Hence its row lengths are again $\\lambda$, that is, $(\\lambda')'=\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conjugation involution theorem is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-partitions-with-k-parts-equal-largest-part-k": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda$ be a partition written in the page convention of\n[[def-twelvefold-way-ball-box-conventions]]. For a nonempty partition, write\n\n$$\\lambda = (\\lambda_1,\\dots,\\lambda_r), \\qquad \\lambda_1 \\ge \\cdots \\ge \\lambda_r > 0.$$\n\nAlso adjoin the empty partition\n\n$$\\varnothing_{\\mathrm{part}}:=()$$\n\nof $0$.\n\nThe **Ferrers diagram** (or **Young diagram**) of a nonempty partition $\\lambda$\nis the set of cells\n\n$$\\{(i,j) : 1 \\le i \\le r,\\ 1 \\le j \\le \\lambda_i\\},$$\n\ndrawn as left-justified rows, with row $i$ containing $\\lambda_i$ cells.\n\nThe Ferrers diagram of $\\varnothing_{\\mathrm{part}}$ is the empty set of cells.\n\nThe **conjugate partition** of a nonempty partition $\\lambda$ is obtained by\ntransposing this diagram:\nfor $1\\le j\\le\\lambda_1$, its $j$-th part is the number of rows of $\\lambda$\nof length at least $j$. Equivalently,\n\n$$\\lambda'_j = |\\{\\, i : \\lambda_i \\ge j \\,\\}| \\qquad (1\\le j\\le\\lambda_1).$$\n\nThe conjugate of $\\varnothing_{\\mathrm{part}}$ is again\n$\\varnothing_{\\mathrm{part}}$.\n\nThe partition is **self-conjugate** when $\\lambda'=\\lambda$.\n\nThe **Durfee length** of $\\varnothing_{\\mathrm{part}}$ is $0$. For a nonempty\npartition $\\lambda$, the **Durfee length** $d(\\lambda)$ is the largest integer\n$d \\ge 1$ such that $\\lambda_d \\ge d$. The **Durfee square** is the\n$d(\\lambda)\\times d(\\lambda)$ square of cells in the upper-left corner of the\nFerrers diagram, and for $\\varnothing_{\\mathrm{part}}$ it is the empty\n$0\\times0$ square.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-partition-conjugation-is-an-involution",
+          "source_section": "Statement",
+          "quote": "For every partition $\\lambda$, one has\n\n$$(\\lambda')'=\\lambda.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $k=0$ and $n>0$, then there is no partition of $n$ with exactly $0$ parts and no partition of $n$ whose largest part is $0$, so both displayed sets are empty. If $k=0$ and $n=0$, then both displayed sets consist only of the empty partition; by the partition convention recalled in [F1], its largest part is $0$. Thus the claim holds when $k=0$. Assume now $k \\ge 1$. Let $\\lambda$ be a partition of $n$ with exactly $k$ parts. Then its Ferrers diagram has exactly $k$ rows by [F1]. After transposition, the conjugate diagram has top row length $k$, because the first column of the original diagram had one cell in each of the $k$ rows. Thus $\\lambda'$ has largest part $k$. The same argument in reverse shows that any partition with largest part $k$ conjugates to one with exactly $k$ parts.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that conjugation maps each of the two displayed sets into the other, and [L1] shows that this map has its own inverse. Therefore it is a bijection between them, so the two sets have equal cardinality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 handles the empty displayed families that occur when k=0 and n>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles the k=0 branch by splitting n>0 from n=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate singleton boundary beyond the explicit k=0 branch is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Outside the k=0 case, Ferrers conjugation behaves uniformly on the two partition families."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Conjugation is an explicit construction and uses no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 carries a partition with exactly k parts to one whose largest part is k."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 uses step 1.1 together with involutivity to recover the reverse direction."
+        }
+      ]
+    },
+    "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-partitions-with-k-parts-equal-largest-part-k",
+          "source_section": "Statement",
+          "quote": "For every $n \\ge 0$ and $k \\ge 0$, conjugation is a bijection between:\n\n- partitions of $n$ with exactly $k$ parts, and\n- partitions of $n$ whose largest part is $k$.\n\nIn particular, these two sets have the same cardinality.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda$ be a partition of $n$ with at most $k$ parts. If $\\lambda$ has exactly $j$ parts, then $j \\le k$, and [L1] sends $\\lambda$ by conjugation to a partition whose largest part is $j$. By [F1], every part of the conjugate is therefore at most $k$. The same reasoning in reverse sends any partition all of whose parts are at most $k$ to one with at most $k$ parts.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus conjugation restricts to a bijection between the two displayed sets, so they have equal cardinality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The conjugation bijection between partitions with at most k parts and partitions with parts at most k does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 carries the at-most-k-parts condition to the parts-at-most-k condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 states that the same conjugation argument gives the reverse direction as a bijection."
+        }
+      ]
+    },
+    "thm-partitions-into-k-parts-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A partition of $n$ into exactly $k$ positive parts either contains a part equal to $1$ or has every part at least $2$. These two cases are disjoint and exhaustive.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the first case, delete one part equal to $1$. The remaining parts still form a partition, now of $n-1$, and they are exactly $k-1$ positive parts. Conversely, adjoining one part equal to $1$ to any partition of $n-1$ into $k-1$ positive parts gives a partition of $n$ into $k$ positive parts containing a $1$. So the first case contributes $p_{k-1}(n-1)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the second case, subtract $1$ from each of the $k$ parts. Because each part was at least $2$, the result is a partition of $n-k$ into exactly $k$ positive parts. Conversely, adding $1$ to each part of any partition of $n-k$ into $k$ positive parts recovers a partition of $n$ into $k$ parts all at least $2$. So the second case contributes $p_k(n-k)$. If $n-k<0$, then [F1] makes this contribution $0$, exactly as it should.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two disjoint cases of steps 2.1 and 2.2 cover every partition counted by $p_k(n)$, so their cardinalities add to $p_k(n)$. This is the stated recurrence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 handles the collapsed branch n-k<0 by invoking the convention p_k(n-k)=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact-k partition recurrence is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-distinct-partitions-have-product-generating-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-powerset-product-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal{A}$ be a combinatorial class with no size-zero objects, and write\n\n$$A(x) = \\sum_{n \\ge 1} a_n x^n.$$\n\nThen $\\operatorname{PSET}(\\mathcal{A})$ is a combinatorial class and\n\n$$\\operatorname{OGF}(\\operatorname{PSET}(\\mathcal{A})) = \\prod_{n \\ge 1}(1+x^n)^{a_n}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], a partition into distinct parts is exactly a subset of the set $\\{u_1,u_2,\\dots\\}$: include $u_m$ when the part $m$ occurs, and omit it otherwise. The total size of the chosen subset is the sum of the selected part sizes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to the class with one object $u_m$ in each positive size $m$ gives one factor $(1+x^m)$ for every $m \\ge 1$. Step 1.1 identifies the resulting powerset objects with distinct-part partitions, so their generating function is $\\prod_{m \\ge 1}(1+x^m)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 identifies the empty subset as the unique distinct-part partition of size 0, and step 2.1 includes that choice as the constant term of the product."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The distinct-part product generating function is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-odd-partitions-have-product-generating-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-multiset-product-formula",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal{A}$ be a combinatorial class with no size-zero objects, and write\n\n$$A(x) = \\sum_{n \\ge 1} a_n x^n$$\n\nfor its ordinary generating function. Then $\\operatorname{MSET}(\\mathcal{A})$ is\na combinatorial class and\n\n$$\\operatorname{OGF}(\\operatorname{MSET}(\\mathcal{A})) = \\prod_{n \\ge 1}(1-x^n)^{-a_n}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], a partition into odd parts is exactly a multiset of the objects $v_1,v_2,\\dots$: the multiplicity of $v_m$ records how often the odd part $2m-1$ occurs. The total size of the multiset is the sum of the odd parts.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] to the class $\\{v_1,v_2,\\dots\\}$ gives the product $\\prod_{m \\ge 1}(1-x^{2m-1})^{-1}$. Step 1.1 identifies its multiset objects with partitions into odd parts, so this is the generating function for $p_{\\mathrm{odd}}(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 identifies the empty multiset as the unique odd-part partition of size 0, and step 2.1 includes that choice as the constant term of the product."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The odd-part product generating function is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-euler-distinct-parts-equal-odd-parts-by-generating-functions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-distinct-partitions-have-product-generating-function",
+          "source_section": "Statement",
+          "quote": "In $\\mathbb{Z}\\llbracket x\\rrbracket$,\n\n$$\\sum_{n \\ge 0} p_{\\mathrm{dist}}(n)x^n = \\prod_{m \\ge 1}(1+x^m).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-odd-partitions-have-product-generating-function",
+          "source_section": "Statement",
+          "quote": "In $\\mathbb{Z}\\llbracket x\\rrbracket$,\n\n$$\\sum_{n \\ge 0} p_{\\mathrm{odd}}(n)x^n = \\prod_{m \\ge 1}(1-x^{2m-1})^{-1}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-coefficient-extraction-linearity-and-extensionality",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $f,g\\in R\\llbracket x\\rrbracket$, $r\\in R$, and $n,k\\in\\mathbb N$. Then\n\n$$[x^n](f+g)=[x^n]f+[x^n]g,\\qquad [x^n](rf)=r[x^n]f,$$\n\nand $f=g$ if and only if $[x^n]f=[x^n]g$ for every $n$. Moreover,\n\n$$[x^n](x^kf)=\\begin{cases}[x^{n-k}]f,&k\\le n,\\\\0,&k>n,\\end{cases}$$\n\nand\n\n$$[x^n](fg)=\\sum_{i=0}^{n}[x^i]f[x^{n-i}]g.$$\n\nThese formulas include $n=0$, $k=0$, and $k>n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $N \\ge 1$. Using $1+x^m=(1-x^{2m})(1-x^m)^{-1}$ for $1 \\le m \\le N$ and canceling only the even factors that already appear in the denominator gives $\\prod_{m=1}^{N}(1+x^m)=\\left(\\prod_{m=\\lfloor N/2\\rfloor+1}^{N}(1-x^{2m})\\right)\\big/\\left(\\prod_{\\substack{1 \\le j \\le N\\\\ j\\text{ odd}}}(1-x^j)\\right)$. Every uncancelled numerator factor has degree $>N$, so the left-hand side and $1/\\prod_{1 \\le j \\le N,\\ j\\text{ odd}}(1-x^j)$ have the same coefficients through degree $N$.",
+          "step": "1.1",
+          "inputs": [
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $n \\ge 0$ and choose $N>n$. By step 1.1, the coefficient of $x^n$ in $\\prod_{m=1}^{N}(1+x^m)$ equals the coefficient of $x^n$ in $1/\\prod_{1 \\le j \\le N,\\ j\\text{ odd}}(1-x^j)$. Factors with index $>N$ have degree $>n$ in both products, so this is also the common coefficient of $x^n$ in the two infinite products $\\prod_{m \\ge 1}(1+x^m)$ and $\\prod_{m \\ge 1}(1-x^{2m-1})^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute the two product expansions from [L1] and [L2] into step 2.1. The resulting formal series are equal, so [L3] gives equality of every coefficient. Hence $p_{\\mathrm{dist}}(n)=p_{\\mathrm{odd}}(n)$ for all $n \\ge 0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 treats the truncation point N>n and shows the coefficient has already stabilized there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Euler's generating-function proof that distinct-part and odd-part partitions agree is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-glaisher-bijection-between-odd-and-distinct-partitions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda$ be a partition of $n$ into odd parts. For each odd integer $m$, let $c_m$ be its multiplicity in $\\lambda$, and write the binary expansion\n\n$$c_m=\\sum_{j \\ge 0}\\varepsilon_{m,j}2^j, \\qquad \\varepsilon_{m,j}\\in\\{0,1\\}.$$\n\nDefine $G(\\lambda)$ to contain the part $2^jm$ once for every pair $(m,j)$ with $\\varepsilon_{m,j}=1$. Since\n\n$$\\sum_{j \\ge 0}\\varepsilon_{m,j}2^jm=m c_m,$$\n\nthe parts with odd core $m$ have the same total $m c_m$ before and after the\nreplacement. Summing over the odd cores shows that the total sum of the parts\nof $G(\\lambda)$ is still $n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $\\mu$ be a partition of $n$ into distinct parts. Write each part uniquely as $2^ju$ with $u$ odd, and replace it by $2^j$ copies of the odd part $u$. The resulting partition $H(\\mu)$ has only odd parts and still sums to $n$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The parts of $G(\\lambda)$ are distinct. Indeed, every positive integer has a unique expression $2^ju$ with $u$ odd, so two equal parts in $G(\\lambda)$ would come from the same odd core $u$ and the same power $2^j$, hence from the same binary digit.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two constructions are inverse. Starting from $\\lambda$, step 1.2 reconstructs from each part $2^jm$ of $G(\\lambda)$ exactly the $2^j$ copies of $m$ encoded by the corresponding binary digit, so $H(G(\\lambda))=\\lambda$. Starting from $\\mu$, step 1.1 groups together all parts with the same odd core and reassembles exactly the original powers of two, so $G(H(\\mu))=\\mu$. Therefore $G$ is a bijection.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Glaisher's bijection between odd-part and distinct-part partitions does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 construct the map from odd-part partitions to distinct-part partitions and verify distinctness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "steps 1.2 and 3.1 construct the reverse map and show it is inverse to the forward construction."
+        }
+      ]
+    },
+    "thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda$ be a partition written in the page convention of\n[[def-twelvefold-way-ball-box-conventions]]. For a nonempty partition, write\n\n$$\\lambda = (\\lambda_1,\\dots,\\lambda_r), \\qquad \\lambda_1 \\ge \\cdots \\ge \\lambda_r > 0.$$\n\nAlso adjoin the empty partition\n\n$$\\varnothing_{\\mathrm{part}}:=()$$\n\nof $0$.\n\nThe **Ferrers diagram** (or **Young diagram**) of a nonempty partition $\\lambda$\nis the set of cells\n\n$$\\{(i,j) : 1 \\le i \\le r,\\ 1 \\le j \\le \\lambda_i\\},$$\n\ndrawn as left-justified rows, with row $i$ containing $\\lambda_i$ cells.\n\nThe Ferrers diagram of $\\varnothing_{\\mathrm{part}}$ is the empty set of cells.\n\nThe **conjugate partition** of a nonempty partition $\\lambda$ is obtained by\ntransposing this diagram:\nfor $1\\le j\\le\\lambda_1$, its $j$-th part is the number of rows of $\\lambda$\nof length at least $j$. Equivalently,\n\n$$\\lambda'_j = |\\{\\, i : \\lambda_i \\ge j \\,\\}| \\qquad (1\\le j\\le\\lambda_1).$$\n\nThe conjugate of $\\varnothing_{\\mathrm{part}}$ is again\n$\\varnothing_{\\mathrm{part}}$.\n\nThe partition is **self-conjugate** when $\\lambda'=\\lambda$.\n\nThe **Durfee length** of $\\varnothing_{\\mathrm{part}}$ is $0$. For a nonempty\npartition $\\lambda$, the **Durfee length** $d(\\lambda)$ is the largest integer\n$d \\ge 1$ such that $\\lambda_d \\ge d$. The **Durfee square** is the\n$d(\\lambda)\\times d(\\lambda)$ square of cells in the upper-left corner of the\nFerrers diagram, and for $\\varnothing_{\\mathrm{part}}$ it is the empty\n$0\\times0$ square.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda$ be a self-conjugate partition, and let $d=d(\\lambda)$. For each diagonal cell $(i,i)$ with $1 \\le i \\le d$, let $h_i$ be the length of its hook: the cell itself together with the cells directly to its right in row $i$ and directly below it in column $i$. Self-conjugacy pairs the cells to the right with the cells below, so each $h_i$ is odd. As $i$ increases, each later diagonal hook lies strictly inside the previous one, so $h_1>h_2>\\cdots>h_d$. The diagonal hooks are disjoint and cover the whole diagram, hence $h_1+\\cdots+h_d=|\\lambda|=n$. Thus $\\lambda$ determines a partition of $n$ into distinct odd parts.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $h_1>h_2>\\cdots>h_d>0$ be distinct odd parts summing to $n$, and write $h_i=2a_i+1$. Then $a_1>\\cdots>a_d\\ge0$, and since these are $d$ distinct nonnegative integers one has $a_i \\ge d-i$ for each $i$. Build a diagram by placing diagonal cells $(i,i)$ for $1 \\le i \\le d$, then adjoining $a_i$ cells to the right of $(i,i)$ and $a_i$ cells below $(i,i)$. The inequalities $a_i \\ge d-i$ and $a_1>\\cdots>a_d$ make these hooks nest to form a Ferrers diagram, and the construction is visibly symmetric across the main diagonal, so the resulting partition is self-conjugate.",
+          "step": "1.2",
+          "inputs": [
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The diagonal hooks of the partition from step 1.2 have lengths $h_1,\\dots,h_d$ by construction, so step 1.2 inverts step 1.1. Therefore the two constructions are mutually inverse bijections.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The diagonal-hook bijection between self-conjugate partitions and distinct odd partitions does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 sends a self-conjugate Ferrers diagram to its distinct odd diagonal-hook partition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1 rebuild the self-conjugate Ferrers diagram from the distinct odd parts and identify the inverse."
+        }
+      ]
+    },
+    "thm-durfee-square-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-coefficient-extraction-linearity-and-extensionality",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $f,g\\in R\\llbracket x\\rrbracket$, $r\\in R$, and $n,k\\in\\mathbb N$. Then\n\n$$[x^n](f+g)=[x^n]f+[x^n]g,\\qquad [x^n](rf)=r[x^n]f,$$\n\nand $f=g$ if and only if $[x^n]f=[x^n]g$ for every $n$. Moreover,\n\n$$[x^n](x^kf)=\\begin{cases}[x^{n-k}]f,&k\\le n,\\\\0,&k>n,\\end{cases}$$\n\nand\n\n$$[x^n](fg)=\\sum_{i=0}^{n}[x^i]f[x^{n-i}]g.$$\n\nThese formulas include $n=0$, $k=0$, and $k>n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k",
+          "source_section": "Statement",
+          "quote": "For every $n \\ge 0$ and $k \\ge 0$, the number of partitions of $n$ with at\nmost $k$ parts equals the number of partitions of $n$ whose parts are all at\nmost $k$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda$ be a partition with Durfee length $k$. Removing its $k\\times k$ Durfee square leaves two pieces: a right-hand piece $\\alpha$ consisting of the cells to the right of the square, and a lower piece $\\beta$ consisting of the cells below the square. The piece $\\alpha$ has at most $k$ rows, while each row of $\\beta$ has length at most $k$. Conversely, given $k$, a partition $\\alpha$ with at most $k$ parts, and a partition $\\beta$ with all parts at most $k$, one reconstructs $\\lambda$ uniquely by adjoining $\\alpha$ to the right side and $\\beta$ below the square.",
+          "step": "1.1",
+          "inputs": [
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $k$, the square contributes the factor $x^{k^2}$. By [L2], the right-hand piece $\\alpha$ has the same generating function as partitions with parts at most $k$, namely $\\prod_{i=1}^{k}(1-x^i)^{-1}$; the lower piece $\\beta$ has the same generating function for the same direct multiplicity reason. Thus partitions whose Durfee square has size $k$ contribute $x^{k^2}/\\prod_{i=1}^{k}(1-x^i)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every partition has exactly one Durfee length, so summing the contributions of step 2.1 over all $k \\ge 0$ counts every partition exactly once. Therefore the coefficient of $x^n$ on the right is $p(n)$ for every $n \\ge 0$, and [L1] gives the displayed identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly sets the k=0 empty product to 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 counts the empty partition through the k=0 summand, giving the n=0 coefficient."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof needs no separate singleton branch beyond the k=0 term already isolated in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed configuration appears beyond the Durfee-square split itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reconstruction from the Durfee square and the two side pieces is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a generating-function identity, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a generating-function identity, not an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 7): four declared dependencies and boundary-sensitive generating-function language. I reread the Durfee decomposition against the current partition items and contract citations. Step 1.1 gives the bijection between a partition of Durfee length k and the pair of side pieces (alpha,beta), step 2.1 gives the two Euler-product factors, and the k=0 empty-product case is stated correctly. No unrepaired mathematical or citation defect remains on the current bytes."
+      }
+    },
+    "thm-unlabelled-unlabelled-placement-counts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-twelvefold-way-ball-box-conventions",
+          "source_section": "Definition",
+          "quote": "Throughout this page, $n$ counts balls or domain elements and $k$ counts boxes\nor codomain values.\n\nWhen partitions are displayed on this page, they are written in\nnonincreasing order\n\n$$\\lambda_1 \\ge \\lambda_2 \\ge \\cdots \\ge \\lambda_r > 0,$$\n\neven though [[def-partition-of-a-positive-integer]] stores the same data as a\nnondecreasing list.\n\nA **composition** of $n$ into $k$ parts means an ordered $k$-tuple of positive\nintegers summing to $n$, while a **weak composition** allows zero parts. Thus\n[[cor-compositions-with-k-parts-are-counted-by-binomial-coefficients]] counts\npositive occupancies and [[thm-stars-and-bars]] counts arbitrary occupancies.\n\nFor placements of indistinguishable balls into boxes:\n\n- if the boxes are labelled, the data are the occupancy vector\n  $(a_1,\\dots,a_k)$;\n- if the boxes are unlabelled, the data are the same occupancies reordered into\n  nonincreasing order, with zero occupancies omitted.\n\nHence an unlabelled-to-unlabelled placement is encoded by a partition whose\nparts are the nonzero occupancies. Ferrers diagrams are read in English\nconvention, with the longest row on top and rows left-justified.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k",
+          "source_section": "Statement",
+          "quote": "For every $n \\ge 0$ and $k \\ge 0$, the number of partitions of $n$ with at\nmost $k$ parts equals the number of partitions of $n$ whose parts are all at\nmost $k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], an arbitrary placement is determined by the list of its positive occupancies, written in nonincreasing order. These occupancies sum to $n$, so they form a partition of $n$; because there are only $k$ boxes, there can be at most $k$ positive occupancies. Conversely, any partition of $n$ with at most $k$ parts becomes such a placement by reading its parts as the nonzero box occupancies. This proves clause 1 in its \"at most $k$ parts\" form.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A placement is surjective exactly when every box is occupied, so there are exactly $k$ positive occupancies. By step 1.1 these are exactly the partitions of $n$ into $k$ positive parts, which are counted by $p_k(n)$. This is clause 3.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "A placement is injective exactly when every occupied box contains one ball. Therefore the positive occupancy list must be $(1,\\dots,1)$ with $n$ entries. Such a list exists exactly when $n \\le k$, and when it exists it is unique. This proves clause 2.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The second description in clause 1 follows from [L2].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 handles the injective extreme by showing there is one class when n<=k and none when n>k."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The three unlabelled-to-unlabelled ball-box counts is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-twelvefold-way": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-number-of-injections",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets, $n := \\lvert A\\rvert$ and $k := \\lvert B\\rvert$,\nand write\n\n$$\\operatorname{Inj}(B,A) := \\{\\, f : B \\to A \\ :\\ f \\text{ is injective} \\,\\}.$$\n\nThen $\\operatorname{Inj}(B,A)$ is finite and\n$\\lvert\\operatorname{Inj}(B,A)\\rvert = n^{\\underline{k}}$\n([[def-factorial-and-falling-factorial]]).\n\nThe two boundary readings are part of the statement. At $k = 0$ there is exactly\none injection, the empty function, and $n^{\\underline{0}} = 1$. For $k > n$ there\nis none, and $n^{\\underline{k}} = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-stirling-second-kind-and-bell-number",
+          "source_section": "Definition",
+          "quote": "For $n,k\\in\\mathbb{N}$, let $\\Pi(n,k)$ be the set of partitions of $[n]$ into\nexactly $k$ blocks. By [[lem-set-partitions-of-a-finite-set-are-finite]], this\nset is finite.\n\nThe **Stirling number of the second kind** is\n\n$$S(n,k):=|\\Pi(n,k)|.$$\n\nThe **Bell number** is\n\n$$B_n:=\\sum_{k=0}^{n}S(n,k),$$\n\nthe total number of set partitions of $[n]$.\n\nThe definition includes the standard boundary values:\n\n- $S(0,0)=1$ because the empty family is the unique partition of $\\varnothing$;\n- $S(n,0)=0$ for $n\\geq 1$ because a nonempty set cannot be partitioned into\n  zero nonempty blocks; and\n- $S(n,k)=0$ for $k>n$ because $n$ distinct elements cannot be split into more\n  than $n$ nonempty blocks.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-stars-and-bars",
+          "source_section": "Statement",
+          "quote": "Let $m \\ge 1$ and write $m = \\sigma(M)$, so $M = m-1$. Then for every\n$n \\in \\mathbb{N}$\n\n$$\\big\\lvert\\mathcal{W}(n,m)\\big\\rvert = \\binom{n+m-1}{\\,m-1\\,} = \\binom{n+M}{M},$$\n\nand the map\n$k \\mapsto \\big\\{\\, \\big(\\sum_{j<\\sigma(i)} k_j\\big) + i \\ :\\ i < M \\,\\big\\}$\nis a bijection of $\\mathcal{W}(n,m)$ onto the set of $M$-element subsets of\n$n+M$.\n\nMoreover, for $m \\ge 1$ **and $n \\ge 1$**,\n\n$$\\big\\lvert\\mathcal{C}(n,m)\\big\\rvert = \\binom{n-1}{\\,m-1\\,}.$$\n\n**The hypothesis $m \\ge 1$ is not decoration.** At $m = 0$ the expression\n$\\binom{n+m-1}{m-1}$ would require the value $m-1$ at $m = 0$, and\n[[def-composition-of-a-natural-number]] records the true counts there:\n$\\lvert\\mathcal{W}(0,0)\\rvert = 1$ and $\\lvert\\mathcal{W}(n,0)\\rvert = 0$ for\n$n \\ge 1$. The hypothesis $n \\ge 1$ in the second display is equally load\nbearing: at $n = 0$, $m = 1$ the formula would give $\\binom{0}{0} = 1$ while\n$\\mathcal{C}(0,1) = \\varnothing$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $n,k \\in \\mathbb{N}$ with $n \\ge 1$ and $k \\ge 1$. Then the number of\ncompositions of $n$ into exactly $k$ positive parts is\n\n$$\\binom{n-1}{k-1}.$$\n\nWhen $k>n$, there are no such compositions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-unlabelled-unlabelled-placement-counts",
+          "source_section": "Statement",
+          "quote": "Fix positive integers $n$ and $k$. For placements of $n$ indistinguishable\nballs into $k$ indistinguishable boxes:\n\n1. the arbitrary placements are counted by the partitions of $n$ with at most\n   $k$ parts, equivalently by the partitions of $n$ whose parts are all at most\n   $k$;\n2. the injective placements are counted by $1$ when $n \\le k$ and by $0$ when\n   $n>k$;\n3. the surjective placements are counted by $p_k(n)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For labelled balls and labelled boxes, clause 1 is [L1] and clause 2 is [L2]. For clause 3, a surjection $f:[n]\\to[k]$ has $k$ nonempty fibres, which form a partition of $[n]$ into exactly $k$ blocks; conversely, labelling the $k$ blocks of any such partition by the elements of $[k]$ recovers a surjection. By [L3], there are therefore $k!\\,S(n,k)$ surjections.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For unlabelled balls and labelled boxes, the data are occupancy vectors $(a_1,\\dots,a_k)$. Arbitrary placements are weak compositions, so clause 4 is [L4]. Surjective placements are positive compositions, so clause 6 is [L4]. Injective placements are exactly the $0$-$1$ occupancy vectors with total $n$, so one chooses which $n$ of the $k$ labelled boxes are occupied; this gives clause 5, namely $\\binom{k}{n}$.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For labelled balls and unlabelled boxes, one remembers only the fibres and forgets their labels. Thus a surjective placement is exactly a partition of $[n]$ into $k$ nonempty blocks, giving clause 9 as $S(n,k)$ by [L3]. An arbitrary placement uses some number $j$ of nonempty boxes with $1 \\le j \\le \\min(n,k)$, so clause 7 is the sum of the counts $S(n,j)$ over those $j$. For injective placements every fibre is a singleton, hence there is one orbit when $n \\le k$ and none when $n>k$, proving clause 8.",
+          "step": "1.3",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clauses 10, 11, and 12 are exactly the three conclusions of [L5].",
+          "step": "2.1",
+          "inputs": [
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes positive integers n and k, so the only indexed sum runs from j=1 to min(n,k), which is nonempty. The detector is reacting to notation, not to a genuine empty-family branch.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The theorem fixes positive integers n and k, so the only indexed sum runs from j=1 to min(n,k), which is nonempty. The detector is reacting to notation, not to a genuine empty-family branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, 1.3, and 2.1 handle the impossible injective branches, the surjective positive-part branches, and the unlabeled extreme cases directly in the twelve clauses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The twelvefold-way table is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 7): nine dependencies and a twelve-case classification invite routing mistakes. I checked each clause against the current ball-box conventions and cited counting theorems. The surjection counts use fibres and occupancy vectors correctly, the injective unlabelled cases separate n<=k from n>k correctly, and clauses 10-12 match thm-unlabelled-unlabelled-placement-counts exactly. No unrepaired defect remains."
+      }
+    },
+    "thm-euler-pentagonal-number-theorem-by-franklin": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-counting-functions-and-restricted-families",
+          "source_section": "Definition",
+          "quote": "For integers $n$ and $k$, define:\n\n- for $n>0$, a partition of $n$ is one from\n  [[def-partition-of-a-positive-integer]], while for $n=0$ there is exactly one\n  partition, the empty partition $\\varnothing_{\\mathrm{part}}:=()$;\n- $p(n)$ is the number of partitions of $n$ when $n \\ge 0$, with\n  $p(0)=1$, and $p(n)=0$ for $n<0$;\n- $p_k(n)$ is the number of partitions of $n$ into exactly $k$ positive parts\n  when $n \\ge 0$ and $k \\ge 0$, and $p_k(n)=0$ if $n<0$ or $k<0$.\n\nThus $p_0(0)=1$, while $p_0(n)=0$ for $n \\ne 0$.\n\nFor the empty partition, the number of parts is $0$ and the largest part is\ndefined to be $0$. The empty partition is regarded as having both distinct\nparts and odd parts.\n\nFor a nonempty partition $\\lambda=(\\lambda_1,\\dots,\\lambda_r)$ of $n$:\n\n- $\\lambda$ has **at most $k$ parts** when $r \\le k$;\n- $\\lambda$ has **largest part $k$** when $\\lambda_1=k$;\n- $\\lambda$ has **parts at most $k$** when $\\lambda_1 \\le k$;\n- $\\lambda$ has **distinct parts** when $\\lambda_1>\\lambda_2>\\cdots>\\lambda_r$;\n- $\\lambda$ has **odd parts** when every $\\lambda_i$ is odd.\n\nWrite $p_{\\mathrm{dist}}(n)$ for the number of partitions of $n$ into distinct\nparts and $p_{\\mathrm{odd}}(n)$ for the number of partitions of $n$ into odd\nparts.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda=(\\lambda_1>\\cdots>\\lambda_\\ell)$ be a nonempty partition into distinct parts. Write $s=\\lambda_\\ell$ for its smallest part, and let $t$ be the largest index such that $\\lambda_i=\\lambda_1-i+1$ for every $1 \\le i \\le t$. Thus the first $t$ rows form the maximal upper-right staircase. If $s \\le t$ and $\\lambda \\ne (2s-1,2s-2,\\dots,s)$, define $\\alpha(\\lambda)$ by deleting the last part $s$ and adding $1$ to each of the first $s$ parts. If $s>t$ and $\\lambda \\ne (2t,2t-1,\\dots,t+1)$, define $\\beta(\\lambda)$ by subtracting $1$ from each of the first $t$ parts and adjoining a new last part $t$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the first case of step 1.1, the partition $\\alpha(\\lambda)$ is still distinct: the first $s$ parts remain strictly decreasing, the last changed part satisfies $\\lambda_s+1>\\lambda_{s+1}$ because those rows were consecutive, and deleting the old last part decreases the number of parts by $1$. The first $s$ parts of $\\alpha(\\lambda)$ are consecutive and its smallest part is larger than $s$, so $\\alpha(\\lambda)$ falls under the second construction with parameter $t=s$, and $\\beta(\\alpha(\\lambda))=\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the second case of step 1.1, the partition $\\beta(\\lambda)$ is still distinct: maximality of $t$ gives $\\lambda_t-1>\\lambda_{t+1}$, while the new last part $t$ is smaller than the previous smallest part because $s>t$. The first $t$ parts of $\\beta(\\lambda)$ are consecutive and its smallest part is exactly $t$, so $\\beta(\\lambda)$ falls under the first construction with parameter $s=t$, and $\\alpha(\\beta(\\lambda))=\\lambda$. Thus steps 2.1 and 2.2 define a sign-reversing involution on all nonexceptional nonempty distinct partitions.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The empty partition contributes the constant term $1$. The only nonempty distinct partitions excluded from step 1.1 are the two staircase families $(2k-1,2k-2,\\dots,k)$ and $(2k,2k-1,\\dots,k+1)$. Their sizes are $k+(k+1)+\\cdots+(2k-1)=k(3k-1)/2$ and $(k+1)+(k+2)+\\cdots+2k=k(3k+1)/2$, and each has exactly $k$ parts, so each contributes the sign $(-1)^k$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 2.2, all nonexceptional nonempty distinct partitions cancel in opposite-parity pairs. Step 2.3 leaves only the empty partition and the two exceptional staircase families, so [F2] gives $\\prod_{m \\ge 1}(1-x^m)=1+\\sum_{k \\ge 1}(-1)^k(x^{k(3k-1)/2}+x^{k(3k+1)/2})$, equivalently the two-sided sum over $r \\in \\mathbb{Z}$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.3 records the empty partition as the surviving constant-term contribution 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.2 and 2.3 isolate the two exceptional staircase families that survive the involution."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Franklin's sign-reversing involution proof of Euler's pentagonal theorem is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-pentagonal-recurrence-for-partition-numbers": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-integer-partitions-have-euler-product",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal{P}$ be the class of integer partitions, with size equal to the sum\nof the parts. Then\n\n$$\\operatorname{OGF}(\\mathcal{P}) = \\prod_{n \\ge 1}(1-x^n)^{-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-euler-pentagonal-number-theorem-by-franklin",
+          "source_section": "Statement",
+          "quote": "In $\\mathbb{Z}\\llbracket x\\rrbracket$,\n\n$$\\prod_{m \\ge 1}(1-x^m)=\\sum_{r \\in \\mathbb{Z}}(-1)^r x^{r(3r-1)/2}.$$\n\nEquivalently,\n\n$$\\prod_{m \\ge 1}(1-x^m)=1+\\sum_{r \\ge 1}(-1)^r\\left(x^{r(3r-1)/2}+x^{r(3r+1)/2}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-coefficient-extraction-linearity-and-extensionality",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $f,g\\in R\\llbracket x\\rrbracket$, $r\\in R$, and $n,k\\in\\mathbb N$. Then\n\n$$[x^n](f+g)=[x^n]f+[x^n]g,\\qquad [x^n](rf)=r[x^n]f,$$\n\nand $f=g$ if and only if $[x^n]f=[x^n]g$ for every $n$. Moreover,\n\n$$[x^n](x^kf)=\\begin{cases}[x^{n-k}]f,&k\\le n,\\\\0,&k>n,\\end{cases}$$\n\nand\n\n$$[x^n](fg)=\\sum_{i=0}^{n}[x^i]f[x^{n-i}]g.$$\n\nThese formulas include $n=0$, $k=0$, and $k>n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiply the identities of [L1] and [L2]. The two products are reciprocals, so $P(x)\\sum_{r \\in \\mathbb{Z}}(-1)^r x^{r(3r-1)/2}=1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L3], the coefficient of $x^n$ on the left side of step 1.1 is $\\sum_{r \\in \\mathbb{Z}}(-1)^r p\\!\\left(n-\\frac{r(3r-1)}{2}\\right)$, with the convention $p(m)=0$ for $m<0$. The coefficient on the right side is $0$ when $n>0$ and $1$ when $n=0$. This proves the equivalent formulation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $n>0$, isolate the $r=0$ term in step 2.1. The remaining nonzero terms occur in the pairs $r=\\pm1,\\pm2,\\dots$, whose offsets are $1,2,5,7,12,15,\\dots$. Moving them to the other side yields the displayed recurrence for $p(n)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The equivalent formula sums over all integers r, a fixed nonempty index set. The genuine boundary is n=0, and the contract already records that separately in the checked zero row from step 2.1.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The equivalent formula sums over all integers r, a fixed nonempty index set. The genuine boundary is n=0, and the contract already records that separately in the checked zero row from step 2.1."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 records the coefficient at n=0 as 1 before step 3.1 isolates the n>0 recurrence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Euler's pentagonal recurrence for p(n) is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-partitions-into-k-parts-are-counted-by-binomial-coefficients": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-partitions-into-k-parts-recurrence",
+          "source_section": "Statement",
+          "quote": "For every integer $n$ and every integer $k \\ge 1$,\n\n$$p_k(n)=p_{k-1}(n-1)+p_k(n-k).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $n,k \\in \\mathbb{N}$ with $n \\ge 1$ and $k \\ge 1$. Then the number of\ncompositions of $n$ into exactly $k$ positive parts is\n\n$$\\binom{n-1}{k-1}.$$\n\nWhen $k>n$, there are no such compositions.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using [L1], one gets $p_3(5)=p_2(4)+p_3(2)=2+0=2$, corresponding to the two partitions $3+1+1$ and $2+2+1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], one has $\\binom{5-1}{3-1}=\\binom{4}{2}=6$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 give $p_3(5)=2 \\ne 6=\\binom{4}{2}$, so the displayed claim is false. The binomial coefficient counts ordered compositions, not unordered partitions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that partitions into k parts are counted by a binomial coefficient is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-partition-conjugation-is-an-involution",
+          "source_section": "Statement",
+          "quote": "For every partition $\\lambda$, one has\n\n$$(\\lambda')'=\\lambda.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-glaisher-bijection-between-odd-and-distinct-partitions",
+          "source_section": "Statement",
+          "quote": "For every integer $n \\ge 0$, there is a bijection between partitions of $n$\ninto odd parts and partitions of $n$ into distinct parts.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Ferrers diagram of $(4,2,1)$ has column lengths $3,2,1,1$, so [L1] gives $(4,2,1)'=(3,2,1,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The conjugate partition $(3,2,1,1)$ has an even part, namely $2$, so it is not a partition into odd parts.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore conjugation does not send every distinct-part partition to an odd-part partition, and the displayed claim is false. By [L2], the correct bijection is a different map.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that ordinary conjugation gives the distinct-to-odd bijection is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-a-partition-that-is-not-self-conjugate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda$ be a partition written in the page convention of\n[[def-twelvefold-way-ball-box-conventions]]. For a nonempty partition, write\n\n$$\\lambda = (\\lambda_1,\\dots,\\lambda_r), \\qquad \\lambda_1 \\ge \\cdots \\ge \\lambda_r > 0.$$\n\nAlso adjoin the empty partition\n\n$$\\varnothing_{\\mathrm{part}}:=()$$\n\nof $0$.\n\nThe **Ferrers diagram** (or **Young diagram**) of a nonempty partition $\\lambda$\nis the set of cells\n\n$$\\{(i,j) : 1 \\le i \\le r,\\ 1 \\le j \\le \\lambda_i\\},$$\n\ndrawn as left-justified rows, with row $i$ containing $\\lambda_i$ cells.\n\nThe Ferrers diagram of $\\varnothing_{\\mathrm{part}}$ is the empty set of cells.\n\nThe **conjugate partition** of a nonempty partition $\\lambda$ is obtained by\ntransposing this diagram:\nfor $1\\le j\\le\\lambda_1$, its $j$-th part is the number of rows of $\\lambda$\nof length at least $j$. Equivalently,\n\n$$\\lambda'_j = |\\{\\, i : \\lambda_i \\ge j \\,\\}| \\qquad (1\\le j\\le\\lambda_1).$$\n\nThe conjugate of $\\varnothing_{\\mathrm{part}}$ is again\n$\\varnothing_{\\mathrm{part}}$.\n\nThe partition is **self-conjugate** when $\\lambda'=\\lambda$.\n\nThe **Durfee length** of $\\varnothing_{\\mathrm{part}}$ is $0$. For a nonempty\npartition $\\lambda$, the **Durfee length** $d(\\lambda)$ is the largest integer\n$d \\ge 1$ such that $\\lambda_d \\ge d$. The **Durfee square** is the\n$d(\\lambda)\\times d(\\lambda)$ square of cells in the upper-left corner of the\nFerrers diagram, and for $\\varnothing_{\\mathrm{part}}$ it is the empty\n$0\\times0$ square.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Ferrers diagram of $\\lambda$ has column lengths $3,2,1,1$, so [F1] gives $\\lambda'=(3,2,1,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $(3,2,1,1)\\ne(4,2,1)$, the partition $\\lambda$ is not self-conjugate. Therefore the displayed claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that (4,2,1) is not self-conjugate is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-conjugation-does-not-send-distinct-parts-to-odd-parts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-partition-conjugation-is-an-involution",
+          "source_section": "Statement",
+          "quote": "For every partition $\\lambda$, one has\n\n$$(\\lambda')'=\\lambda.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The columns of the Ferrers diagram of $\\lambda$ have lengths $3,2,1,1$, so [L1] gives $\\lambda'=(3,2,1,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The conjugate partition has an even part, namely $2$, so it is not a partition into odd parts. Therefore the displayed claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that conjugating (4,2,1) does not give an odd-part partition is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-manipulating-the-euler-product-without-summability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-summable-families-and-rearrangement",
+          "source_section": "Statement",
+          "quote": "Let $(f_i)_{i\\in I}$ be a summable family in $R\\llbracket x\\rrbracket$.\n\n1. A bijection of its index set does not change its sum. A partition $I=\\bigsqcup_{j\\in J}I_j$ gives summable subfamilies, a summable family $(\\sum_{i\\in I_j}f_i)_{j\\in J}$, and\n   $$\\sum_{i\\in I}f_i=\\sum_{j\\in J}\\sum_{i\\in I_j}f_i.$$\n2. For every $h\\in R\\llbracket x\\rrbracket$, the family $(hf_i)_{i\\in I}$ is summable and\n   $$h\\sum_{i\\in I}f_i=\\sum_{i\\in I}hf_i.$$\n3. If $\\operatorname{ord}_x(u_k)\\to+\\infty$, the partial products $\\prod_{k<M}(1+u_k)$ stabilize modulo each $x^N$. The resulting infinite product is unchanged by a permutation of the factors or by finite regrouping.\n\nThe assertions include the empty sum and empty product.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the right-hand side, only the $m=1$ and $m=3$ summands contribute a nonzero $x^3$ coefficient, so the naive calculation gives $1+1=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "But [F1] gives the true coefficient as $3$, corresponding to the partitions $3$, $2+1$, and $1+1+1$. The naive rule loses the mixed contribution $x \\cdot x^2$ coming from two different factors, so it is not a genuine regrouping of the locally finite product expansion licensed by [L1]. Therefore the displayed identity is false, and the missing summability control is exactly what permits the legal coefficientwise product.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample to naive coefficient extraction from the Euler product is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "lem-fixed-colourings-factor-by-cycle-type": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-colouring-action-weight-function-and-pattern-inventory",
+          "source_section": "Definition",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $C$ be a finite set of\ncolours. A **colouring** is a function $f:X \\to C$.\n\nThe action of $G$ on $X$ induces an action on colourings by\n\n$$(g \\cdot f)(x):=f(g^{-1}x).$$\n\nNow let $R$ be a commutative ring and let $w:C \\to R$ be a weight function. The\n**weight** of a colouring $f$ is\n\n$$\\operatorname{wt}(f):=\\prod_{x \\in X} w(f(x)).$$\n\nBecause the induced action only permutes the positions $x \\in X$, every two\ncolourings in the same $G$-orbit have the same weight.\n\nThe **pattern inventory** is the orbit sum\n\n$$\\mathcal{I}_G(X,C;w):=\\sum_{O \\in C^X/G}\\operatorname{wt}(O),$$\n\nwhere $\\operatorname{wt}(O)$ denotes the common weight of the colourings in the\norbit $O$. When every colour has weight $1$, this is just the number of\ncolouring orbits.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A colouring $f$ is fixed by $g$ exactly when it is constant on every cycle of the permutation of $X$ induced by $g$. Indeed, $g \\cdot f=f$ means $f(x)=f(g^{-1}x)$ for every $x$, and iterating this equality around a cycle forces one common colour on that whole cycle. Conversely, a colouring constant on each cycle is unchanged by the action.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $g$ has $j_d(g)$ cycles of length $d$, then each cycle may be assigned any one of the $m$ colours independently, so the number of fixed colourings is $m^{\\sum_d j_d(g)}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the weighted setting, a fixed colouring contributes on a $d$-cycle the factor $w(c)^d$ for the single colour $c$ chosen on that cycle. Summing over all colour choices on that cycle gives $p_d$. Independence across cycles from step 1.1 therefore yields the product $\\prod_d p_d^{j_d(g)}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 reduces a fixed colouring to one colour choice on each cycle, so when X is empty there are no cycles and exactly the empty colouring; steps 2.1 and 3.1 then give the value 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cycle-by-cycle description of fixed colourings is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-polya-enumeration-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $X/G$ denote the set\nof orbits. Then\n\n$$|G|\\,|X/G|=\\sum_{g\\in G}|X^g|.$$\n\nEquivalently, the number of orbits is the average number of fixed points of an\nelement of $G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-fixed-colourings-factor-by-cycle-type",
+          "source_section": "Statement",
+          "quote": "Let a finite group element $g$ act on a finite set $X$, and let $j_d(g)$ denote\nthe number of $d$-cycles of the induced permutation of $X$.\n\n1. If $C$ is a finite colour set with $m=|C|$, then the number of colourings\n   $f:X \\to C$ fixed by $g$ is\n\n   $$m^{\\sum_{d \\ge 1} j_d(g)}.$$\n\n2. More generally, if $w:C \\to R$ is a weight function into a commutative ring\n   and\n\n   $$p_d:=\\sum_{c \\in C} w(c)^d,$$\n\n   then\n\n   $$\\sum_{\\substack{f:X \\to C\\\\ g \\cdot f = f}} \\operatorname{wt}(f)=\\prod_{d \\ge 1} p_d^{j_d(g)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the induced action of $G$ on the colouring set $C^X$. The number of colouring orbits is therefore $\\frac{1}{|G|}\\sum_{g \\in G} |\\{\\,f:X \\to C : g \\cdot f=f\\,\\}|$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replace each fixed-colouring count in step 1.1 by the formula from [L2]. This gives $\\frac{1}{|G|}\\sum_{g \\in G} m^{\\sum_d j_d(g)}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the definition of the cycle index, substituting $s_d=m$ for every $d$ turns $\\frac{1}{|G|}\\sum_{g \\in G}\\prod_{d \\ge 1} s_d^{j_d(g)}$ into the sum of step 2.1. Hence the orbit count is $Z_G(m,m,\\dots,m)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 applies Burnside to the colouring set C^X itself; when X is empty that set is a singleton, so steps 2.1 and 3.1 still give exactly one orbit."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The detector is reacting to the averaging factor 1/|G|, but a finite group has positive cardinality. No zero-denominator branch exists here, and the fixed-colouring count in step 2.1 is handled uniformly.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The detector is reacting to the averaging factor 1/|G|, but a finite group has positive cardinality. No zero-denominator branch exists here, and the fixed-colouring count in step 2.1 is handled uniformly."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Pólya's orbit-counting formula for colourings is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-weighted-pattern-inventory-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-colouring-action-weight-function-and-pattern-inventory",
+          "source_section": "Definition",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $C$ be a finite set of\ncolours. A **colouring** is a function $f:X \\to C$.\n\nThe action of $G$ on $X$ induces an action on colourings by\n\n$$(g \\cdot f)(x):=f(g^{-1}x).$$\n\nNow let $R$ be a commutative ring and let $w:C \\to R$ be a weight function. The\n**weight** of a colouring $f$ is\n\n$$\\operatorname{wt}(f):=\\prod_{x \\in X} w(f(x)).$$\n\nBecause the induced action only permutes the positions $x \\in X$, every two\ncolourings in the same $G$-orbit have the same weight.\n\nThe **pattern inventory** is the orbit sum\n\n$$\\mathcal{I}_G(X,C;w):=\\sum_{O \\in C^X/G}\\operatorname{wt}(O),$$\n\nwhere $\\operatorname{wt}(O)$ denotes the common weight of the colourings in the\norbit $O$. When every colour has weight $1$, this is just the number of\ncolouring orbits.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-fixed-colourings-factor-by-cycle-type",
+          "source_section": "Statement",
+          "quote": "Let a finite group element $g$ act on a finite set $X$, and let $j_d(g)$ denote\nthe number of $d$-cycles of the induced permutation of $X$.\n\n1. If $C$ is a finite colour set with $m=|C|$, then the number of colourings\n   $f:X \\to C$ fixed by $g$ is\n\n   $$m^{\\sum_{d \\ge 1} j_d(g)}.$$\n\n2. More generally, if $w:C \\to R$ is a weight function into a commutative ring\n   and\n\n   $$p_d:=\\sum_{c \\in C} w(c)^d,$$\n\n   then\n\n   $$\\sum_{\\substack{f:X \\to C\\\\ g \\cdot f = f}} \\operatorname{wt}(f)=\\prod_{d \\ge 1} p_d^{j_d(g)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $X/G$ denote the set\nof orbits. Then\n\n$$|G|\\,|X/G|=\\sum_{g\\in G}|X^g|.$$\n\nEquivalently, the number of orbits is the average number of fixed points of an\nelement of $G$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because weights are preserved on orbits by [F1], the colouring set $C^X$ splits into finitely many $G$-stable blocks according to the value $u$ of $\\operatorname{wt}(f)$. For one such value $u$, let $\\mathcal{C}_u$ be the set of colourings of weight $u$. Applying [L2] to the induced action on the finite set $\\mathcal{C}_u$ gives $|G|\\,|\\mathcal{C}_u/G|=\\sum_{g \\in G} |\\mathcal{C}_u^g|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the identity of step 1.1 by $u$ and sum over all weight values $u$. The left-hand side becomes $|G|\\,\\mathcal{I}_G(X,C;w)$ by [F1], while the right-hand side becomes $\\sum_{g \\in G}\\sum_{\\substack{f:X \\to C\\\\ g \\cdot f=f}}\\operatorname{wt}(f)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Replace the inner weighted fixed-colouring sum in step 2.1 by [L1]. This gives $|G|\\,\\mathcal{I}_G(X,C;w)=\\sum_{g \\in G}\\prod_{d \\ge 1} p_d^{j_d(g)}$. When $1/|G|$ is defined in $R$, divide by $|G|$ to obtain $\\mathcal{I}_G(X,C;w)=Z_G(p_1,p_2,\\dots,p_{|X|})$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1-3.1 cover the empty-colouring cases through the same orbit-sum identity on the finite colouring set C^X."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement first proves the undivided |G|-times-inventory identity, and step 3.1 divides by |G| only under the added hypothesis that 1/|G| exists in R."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-size branch is needed beyond the finite orbit argument already written."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no extra collapsed configuration beyond the fixed-colouring factorization already handled."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or order-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof partitions colourings by weight and makes no witness choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way identity and conditional reformulation, not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way identity and conditional reformulation, not a biconditional criterion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the proof mixes orbit sums, weights, and a conditional division by |G|. I checked the current proof against the fixed-colouring factor lemma and Cauchy-Frobenius. Step 1.1 partitions the finite colouring set by attained weight, step 2.1 recombines those orbit counts into the inventory sum, and step 3.1 divides by |G| only under the stated hypothesis that 1/|G| exists in R. No unrepaired defect remains."
+      }
+    },
+    "thm-cycle-index-of-cyclic-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-unit-group-modulo-n-and-euler-totient",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer. Multiplication makes $\\mathbb Z/n$ a commutative\nmonoid with identity $[1]_n$ by [[thm-integers-modulo-n-basic-algebra]]. A class\n$u\\in\\mathbb Z/n$ is a **unit** when it is invertible in that monoid\n([[def-invertible-element]]). The set of all units is\n\n$$(\\mathbb Z/n)^\\times:=\\{\\,u\\in\\mathbb Z/n:\\text{some }v\\in\\mathbb Z/n\\text{ satisfies }uv=[1]_n\\,\\}.$$\n\nBy [[lem-monoid-units-form-a-group]], multiplication restricts to a group\noperation on $(\\mathbb Z/n)^\\times$, called the **unit group modulo $n$**.\n\nThe quotient $\\mathbb Z/n$ is finite with cardinality $n$ by\n[[thm-standard-representatives-modulo-n]], and its unit set is a finite subset by\n[[thm-subset-of-a-finite-set]]. Euler's **totient function** is therefore defined\nfor every positive integer $n$ by\n\n$$\\varphi(n):=\\big|(\\mathbb Z/n)^\\times\\big|\\in\\mathbb N$$\n\n([[def-finite-cardinality]]). For $n=1$, the quotient has one element, which is\nits multiplicative identity and hence a unit, so $\\varphi(1)=1$ follows from the\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A rotation by $r$ steps decomposes the $n$ vertices into $\\gcd(n,r)$ cycles, each of length $n/\\gcd(n,r)$. Therefore its cycle-index monomial is $s_{n/\\gcd(n,r)}^{\\gcd(n,r)}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a divisor $d$ of $n$. A rotation contributes the monomial $s_d^{n/d}$ exactly when its cycles have length $d$, equivalently when its step size has the form $r=(n/d)a$ with $a$ coprime to $d$. Indeed, the order of the rotation by $r$ is the least positive $m$ with $mr \\equiv 0 \\pmod n$, and for $r=(n/d)a$ this least $m$ is exactly $d$ when $\\gcd(a,d)=1$. Therefore the rotations of order $d$ are in bijection with the units $a \\in (\\mathbb{Z}/d)^\\times$, so there are $\\varphi(d)$ of them by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Average the monomials over all $n$ rotations. Grouping them by the divisor $d$ from step 2.1 yields $Z(C_n)=\\frac{1}{n}\\sum_{d \\mid n}\\varphi(d)\\,s_d^{n/d}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "cyclic-subgroup-lagrange",
+          "asserts": "the order of the rotation by $r$ is the least positive $m$ with $mr \\equiv 0 \\pmod n$, and for $r=(n/d)a$ this least $m$ is exactly $d$ when $\\gcd(a,d)=1$.",
+          "max_modulus": 60
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n >= 1, so the divisor set of n always contains 1 and is never empty. The detector is only seeing the indexed divisor sum syntactically.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The statement assumes n >= 1, so the divisor set of n always contains 1 and is never empty. The detector is only seeing the indexed divisor sum syntactically."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The same hypothesis n >= 1 makes the denominator n strictly positive, so the detector does not identify a real zero-denominator branch in this proof.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The same hypothesis n >= 1 makes the denominator n strictly positive, so the detector does not identify a real zero-denominator branch in this proof."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the cyclic rotation action is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-cycle-index-of-dihedral-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cycle-index-of-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $C_n$ act on the vertices of a labelled $n$-gon by rotation, with $n \\ge 1$.\nThen\n\n$$Z(C_n)=\\frac{1}{n}\\sum_{d \\mid n}\\varphi(d)\\,s_d^{n/d}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The subgroup of rotations has $n$ elements. Since $D_{2n}$ has $2n$ elements, the total rotational contribution to $Z(D_{2n})$ is $(1/2)Z(C_n)$ by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $n$ is odd. Every reflection fixes exactly one vertex and swaps the remaining $n-1$ vertices in $(n-1)/2$ transpositions. Thus each reflection contributes the monomial $s_1s_2^{(n-1)/2}$. There are $n$ reflections, so after division by $2n$ their total contribution is $(1/2)s_1s_2^{(n-1)/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $n$ is even. Then there are two reflection types. The $n/2$ reflections through opposite vertices fix two vertices and swap the remaining $n-2$ vertices in $(n-2)/2$ transpositions, so they contribute $s_1^2s_2^{(n-2)/2}$. The $n/2$ reflections through opposite edges fix no vertex and consist of $n/2$ transpositions, so they contribute $s_2^{n/2}$. Dividing the sum of these $n$ reflection monomials by $2n$ gives the contribution $\\frac{1}{4}\\left(s_1^2s_2^{(n-2)/2}+s_2^{n/2}\\right)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combine step 1.1 with step 2.1 in the odd case and with step 2.2 in the even case. This yields the two displayed formulas.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 split the reflection contribution into the odd-n and even-n configurations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cycle-index formula for the dihedral action is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "lem-permutations-with-a-given-cycle-type-count": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Arrange the symbols $1,\\dots,n$ in a line. There are $n!$ such linearisations. Break the line into consecutive blocks: first the $m_1$ blocks of length $1$, then the $m_2$ blocks of length $2$, and so on, ending with the $m_n$ blocks of length $n$. Turn each block $(a_1,\\dots,a_d)$ into the cycle $(a_1\\,a_2\\,\\dots\\,a_d)$. This produces a permutation of the required cycle type.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every permutation of that cycle type is produced many times by step 1.1. For each $d$-cycle, any of its $d$ cyclic rotations gives the same cycle, so each such cycle is counted $d$ times. Also, the $m_d$ cycles of the same length may be listed in any order, so they are counted a further factor of $m_d!$. Therefore each permutation is produced exactly $\\prod_d d^{m_d}m_d!$ times.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Divide the total number $n!$ of linearisations from step 1.1 by the overcounting factor of step 2.1. This gives exactly $\\frac{n!}{\\prod_{d=1}^{n} d^{m_d} m_d!}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At n=0, step 1.1 has the single empty linearisation and no cycle blocks, step 2.1 has empty overcounting factor 1, and step 3.1 returns the unique permutation of S_0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The factorial-denominator count for a fixed cycle type is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-cycle-index-of-symmetric-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cycle-index-of-a-permutation-group",
+          "source_section": "Definition",
+          "quote": "Let a finite group $G$ act on a finite set $X$ of size $n$. For $g \\in G$ and\n$1 \\le d \\le n$, let $j_d(g)$ be the number of $d$-cycles in the permutation of\n$X$ induced by $g$. Then\n\n$$\\sum_{d=1}^{n} d\\,j_d(g)=n,$$\n\nso the monomial\n\n$$\\prod_{d=1}^{n} s_d^{j_d(g)}$$\n\nlies in the polynomial ring $\\mathbb{Q}[s_1,\\dots,s_n]$\n([[def-multivariate-polynomial-ring-by-iteration]]).\n\nThe **cycle index** of the permutation action $G \\curvearrowright X$ is\n\n$$Z_G(s_1,\\dots,s_n):=\\frac{1}{|G|}\\sum_{g \\in G}\\prod_{d=1}^{n} s_d^{j_d(g)}.$$\n\nWhen the acting set is clear from context, this polynomial is also written\n$Z(G)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-permutations-with-a-given-cycle-type-count",
+          "source_section": "Statement",
+          "quote": "Let $m_1,\\dots,m_n$ be nonnegative integers satisfying\n\n$$\\sum_{d=1}^{n} d\\,m_d=n.$$\n\nThen the number of permutations in $S_n$ with exactly $m_d$ cycles of length\n$d$ for each $d$ is\n\n$$\\frac{n!}{\\prod_{d=1}^{n} d^{m_d} m_d!}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the average from [F1], all permutations with the same cycle type contribute the same monomial $\\prod_d s_d^{m_d}$. Thus the sum may be regrouped by cycle type.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed cycle type $(m_1,\\dots,m_n)$ with $\\sum_d d\\,m_d=n$, there are exactly the permutations counted by [L1]. Their total contribution to the unnormalized sum is therefore $\\frac{n!}{\\prod_d d^{m_d}m_d!}\\prod_d s_d^{m_d}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Divide the regrouped sum of step 2.1 by $n!$, as required by [F1]. The factor $n!$ cancels, leaving exactly the displayed cycle-type expansion for $Z(S_n)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes n=0. Then S_0 has one permutation of empty cycle type, so step 1.1 regroups that single term and step 3.1 divides by 0! = 1, leaving the empty-product contribution 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cycle-index sum over symmetric-group cycle types is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-cycle-index-of-alternating-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-alternating-group",
+          "source_section": "Definition",
+          "quote": "For $n\\in\\mathbb N$, the **alternating group** is the kernel of the sign\nhomomorphism,\n\n$$A_n:=\\ker(\\operatorname{sgn}:S_n\\to\\{+1,-1\\})=\\{\\sigma\\in S_n:\\operatorname{sgn}(\\sigma)=1\\}.$$\n\nThus $A_n$ consists exactly of the even permutations. The subgroup and\nnormality assertions implicit in the word “group” follow from\n[[thm-image-subgroup-and-kernel-normal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-sign-from-disjoint-cycle-structure",
+          "source_section": "Statement",
+          "quote": "A cycle of length $k$ has sign $(-1)^{k-1}$. If $\\sigma\\in S_n$ and\n$c(\\sigma)$ is the number of cycles after every fixed point is included as a\none-cycle, then\n\n$$\\operatorname{sgn}(\\sigma)=(-1)^{n-c(\\sigma)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-alternating-group-is-normal-and-has-half-the-elements",
+          "source_section": "Statement",
+          "quote": "For every natural $n$, $A_n$ is a normal subgroup of $S_n$. If $n\\ge2$, then\n$2|A_n|=n!$. If $n=0$ or $n=1$, then $A_n=S_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cycle-index-of-symmetric-group",
+          "source_section": "Statement",
+          "quote": "For every integer $n \\ge 0$,\n\n$$Z(S_n)=\\sum_{\\substack{m_1,\\dots,m_n \\ge 0\\\\ \\sum_{d=1}^{n} d\\,m_d=n}}\\frac{1}{\\prod_{d=1}^{n} d^{m_d}m_d!}\\prod_{d=1}^{n} s_d^{m_d}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], a permutation of cycle type $(m_1,\\dots,m_n)$ belongs to $A_n$ exactly when $\\sum_d (d-1)m_d$ is even.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For such an even cycle type, the number of permutations in $A_n$ with that type is the same as the number in $S_n$, namely $n!/\\prod_d d^{m_d}m_d!$, because an entire cycle type is either even or odd. Therefore the unnormalized cycle-index sum over $A_n$ is $\\sum_{\\substack{m_1,\\dots,m_n \\ge 0\\\\ \\sum_d d\\,m_d=n\\\\ \\sum_d(d-1)m_d\\text{ even}}}\\frac{n!}{\\prod_d d^{m_d}m_d!}\\prod_d s_d^{m_d}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Divide step 2.1 by $|A_n|=n!/2$ from [L3]. This multiplies the cycle-type coefficients by $2/n!$, leaving exactly $2\\sum_{\\substack{m_1,\\dots,m_n \\ge 0\\\\ \\sum_d d\\,m_d=n\\\\ \\sum_d(d-1)m_d\\text{ even}}}\\frac{1}{\\prod_d d^{m_d}m_d!}\\prod_d s_d^{m_d}$. The equivalent filtered formula follows because $1+(-1)^e$ is $2$ when $e$ is even and $0$ when $e$ is odd.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n >= 2, so the index range d=1,...,n is nonempty and the cycle-type families are genuine finite tuples. No empty-family boundary remains to discharge.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The statement assumes n >= 2, so the index range d=1,...,n is nonempty and the cycle-type families are genuine finite tuples. No empty-family boundary remains to discharge."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The parity-filtered cycle-index formula for the alternating group is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-necklace-count-via-cycle-index": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-polya-enumeration-theorem",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $C$ be a finite colour\nset with $m=|C|$. Then the number of $G$-orbits of colourings $X \\to C$ is\n\n$$Z_G(m,m,\\dots,m)=\\frac{1}{|G|}\\sum_{g \\in G} m^{\\sum_{d \\ge 1} j_d(g)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cycle-index-of-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $C_n$ act on the vertices of a labelled $n$-gon by rotation, with $n \\ge 1$.\nThen\n\n$$Z(C_n)=\\frac{1}{n}\\sum_{d \\mid n}\\varphi(d)\\,s_d^{n/d}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A length-$n$ necklace over an $m$-letter alphabet is exactly a colouring of the vertices of a labelled $n$-gon by $m$ colours, up to the rotation action of $C_n$.",
+          "step": "1.1",
+          "inputs": [
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1] and [L2], the number of such orbits is $Z(C_n)(m,m,\\dots,m)=\\frac{1}{n}\\sum_{d \\mid n}\\varphi(d)m^{n/d}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n >= 1, so the divisor set of n is nonempty and the cyclic-group average never collapses to an empty divisor sum. The detector is reacting only to the sigma notation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The statement requires n >= 1, so the divisor set of n is nonempty and the cyclic-group average never collapses to an empty divisor sum. The detector is reacting only to the sigma notation."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The same hypotheses n >= 1 and m >= 1 make both the denominator n and the alphabet size m positive, so the detector does not identify a real zero branch here.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The same hypotheses n >= 1 and m >= 1 make both the denominator n and the alphabet size m positive, so the detector does not identify a real zero branch here."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The necklace formula obtained from the cyclic-group cycle index is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-bracelet-count-via-cycle-index": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-polya-enumeration-theorem",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, and let $C$ be a finite colour\nset with $m=|C|$. Then the number of $G$-orbits of colourings $X \\to C$ is\n\n$$Z_G(m,m,\\dots,m)=\\frac{1}{|G|}\\sum_{g \\in G} m^{\\sum_{d \\ge 1} j_d(g)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cycle-index-of-dihedral-group",
+          "source_section": "Statement",
+          "quote": "Let $D_{2n}$ act on the vertices of a labelled $n$-gon, with $n \\ge 1$.\n\nIf $n$ is odd, then\n\n$$Z(D_{2n})=\\frac{1}{2}Z(C_n)+\\frac{1}{2}s_1s_2^{(n-1)/2}.$$\n\nIf $n$ is even, then\n\n$$Z(D_{2n})=\\frac{1}{2}Z(C_n)+\\frac{1}{4}\\left(s_1^2s_2^{(n-2)/2}+s_2^{n/2}\\right).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A bracelet is a colouring of a labelled $n$-gon up to all dihedral symmetries, so [L1] counts it by evaluating $Z(D_{2n})$ at $s_d=m$ for all $d$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute $s_d=m$ into the odd case of [L2]. Since $s_1s_2^{(n-1)/2}$ becomes $m^{(n+1)/2}$, the odd-$n$ bracelet count is $\\frac{1}{2n}\\sum_{d \\mid n}\\varphi(d)m^{n/d}+\\frac12 m^{(n+1)/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Substitute $s_d=m$ into the even case of [L2]. The two reflection monomials become $m^{n/2+1}$ and $m^{n/2}$, giving $\\frac{1}{2n}\\sum_{d \\mid n}\\varphi(d)m^{n/d}+\\frac14\\left(m^{n/2}+m^{n/2+1}\\right)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 are the two parity cases for $n$, so they prove the stated bracelet formulas.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n >= 1, so the divisor set of n is nonempty in both parity clauses. The bracelet formulas are not ranging over an optional empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The statement requires n >= 1, so the divisor set of n is nonempty in both parity clauses. The bracelet formulas are not ranging over an optional empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The same hypotheses n >= 1 and m >= 1 make 2n > 0 and m > 0, so neither the averaging denominator nor the alphabet-size parameter can vanish in the stated formulas.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-4",
+            "reason": "The same hypotheses n >= 1 and m >= 1 make 2n > 0 and m > 0, so neither the averaging denominator nor the alphabet-size parameter can vanish in the stated formulas."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The bracelet formula obtained from the dihedral-group cycle index introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 2.2 handle the odd-n and even-n reflection contributions separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The bracelet formula obtained from the dihedral-group cycle index has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The bracelet formula obtained from the dihedral-group cycle index does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The bracelet formula obtained from the dihedral-group cycle index is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The bracelet formula obtained from the dihedral-group cycle index is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-edge-set-orbits-on-two-subsets-by-polya": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-two-element-subsets-count",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set with $n := \\lvert A\\rvert$. Then the set $[A]^{2}$ of\ntwo-element subsets of $A$ is finite with\n\n$$\\big\\lvert [A]^{2}\\big\\rvert = \\binom{n}{2},$$\n\nand, **for every $n \\in \\mathbb{N}$**, the identity\n\n$$2\\cdot\\binom{n}{2} = n\\,(n-1)$$\n\nholds in $\\mathbb{N}$, the difference being the truncated one. Equivalently, in\n$\\mathbb{R}$, $\\iota\\binom{n}{2} = \\iota(n)\\big(\\iota(n)-1\\big)/2$ for every\n$n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-weighted-pattern-inventory-formula",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, let $C$ be a finite colour set,\nlet $R$ be a commutative ring, and let $w:C \\to R$ be a weight function. For\neach $d \\ge 1$, put\n\n$$p_d:=\\sum_{c \\in C} w(c)^d.$$\n\nThen\n\n$$|G|\\,\\mathcal{I}_G(X,C;w)=\\sum_{g \\in G}\\prod_{d \\ge 1} p_d^{j_d(g)}.$$\n\nIf moreover the scalar $1/|G|$ is defined in $R$ (in particular if $R$ is a\ncommutative $\\mathbb{Q}$-algebra), then equivalently\n\n$$\\mathcal{I}_G(X,C;w)=Z_G(p_1,p_2,\\dots,p_{|X|}).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], edge-sets on $[n]$ are exactly colourings of the finite set $E_n$ by the two colours white and black. The induced action of $S_n$ on those colourings is exactly the relabelling action on edge-sets.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Give white weight $1$ and black weight $x$. Then the weight of a colouring corresponding to $A \\subseteq E_n$ is precisely $x^{|A|}$. The $d$-th power sum of the two colour weights is therefore $1^d+x^d=1+x^d$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L2] to the action of $S_n$ on the colourings of $E_n$. By step 2.1, the resulting pattern inventory is exactly $Z_{S_n \\curvearrowright E_n}(1+x,1+x^2,\\dots,1+x^{|E_n|})$, and by the definition of weight it is also exactly $\\sum_O x^{|A|}=F_n(x)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1-3.1 treat the empty pair-set case as the unique empty colouring and its single orbit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "By L1, n=0 gives E_0=[0]^2=empty, and step 3.1 evaluates both sides on that single empty edge-set orbit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "By L1, n=1 gives E_1=[1]^2=empty, and step 3.1 again yields the single empty edge-set orbit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further collapsed configuration appears beyond the empty pair-set cases already covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The repaired notation names any orbit representative A explicitly, so no uncited witness choice remains."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a Pólya identity, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a Pólya identity, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "cor-symmetric-group-cycle-index-series-is-exponential": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cycle-index-series-of-a-graded-symmetric-family",
+          "source_section": "Definition",
+          "quote": "Let $(A_n)_{n \\ge 0}$ be a sequence of finite sets such that each $A_n$ carries\nan action of the symmetric group $S_n$. For $\\sigma \\in S_n$, write\n$\\operatorname{Fix}_{A_n}(\\sigma)$ for the set of structures in $A_n$ fixed by\n$\\sigma$.\n\nThe **cycle-index series** of the family is the formal power series\n\n$$\\mathcal{Z}_A(t):=\\sum_{n \\ge 0} Z_{A_n}(s_1,\\dots,s_n)\\,t^n,$$\n\nwhere\n\n$$Z_{A_n}(s_1,\\dots,s_n):=\\frac{1}{n!}\\sum_{\\sigma \\in S_n}|\\operatorname{Fix}_{A_n}(\\sigma)|\\prod_{d=1}^{n} s_d^{j_d(\\sigma)}.$$\n\nFor each fixed $n$, the coefficient of $t^n$ lies in\n$\\mathbb{Q}[s_1,\\dots,s_n]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-cycle-index-of-symmetric-group",
+          "source_section": "Statement",
+          "quote": "For every integer $n \\ge 0$,\n\n$$Z(S_n)=\\sum_{\\substack{m_1,\\dots,m_n \\ge 0\\\\ \\sum_{d=1}^{n} d\\,m_d=n}}\\frac{1}{\\prod_{d=1}^{n} d^{m_d}m_d!}\\prod_{d=1}^{n} s_d^{m_d}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-formal-exponential-logarithm-identities",
+          "source_section": "Statement",
+          "quote": "In a commutative $\\mathbb Q$-algebra $R$, for $u,v\\in xR\\llbracket x\\rrbracket$ and $c,d\\in R$,\n\n$$\\exp(u+v)=\\exp(u)\\exp(v),$$\n\n$$\\log((1+u)(1+v))=\\log(1+u)+\\log(1+v),$$\n\nand $\\exp:xR\\llbracket x\\rrbracket\\to1+xR\\llbracket x\\rrbracket$ and $\\log:1+xR\\llbracket x\\rrbracket\\to xR\\llbracket x\\rrbracket$ are inverse group homomorphisms. Consequently,\n\n$$(1+u)^{c+d}=(1+u)^c(1+u)^d,\\qquad ((1+u)^c)^d=(1+u)^{cd},$$\n\nand\n\n$$(1+u)^c=\\sum_{n\\ge0}\\frac{c(c-1)\\cdots(c-n+1)}{n!}u^n,$$\n\nwhere the numerator is the empty product $1$ at $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $n \\ge 0$. Factors with $d>n$ cannot contribute to the coefficient of $t^n$, so that coefficient is already the coefficient of $t^n$ in the finite truncation $\\exp\\left(\\sum_{d=1}^{n}\\frac{s_d t^d}{d}\\right)$. By [L2], this truncation equals $\\prod_{d=1}^{n}\\exp\\left(\\frac{s_d t^d}{d}\\right)=\\prod_{d=1}^{n}\\sum_{m_d \\ge 0}\\frac{s_d^{m_d} t^{d m_d}}{d^{m_d}m_d!}$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding the finite product in step 1.1, the coefficient of $t^n$ is $\\sum_{\\substack{m_1,\\dots,m_n \\ge 0\\\\ \\sum_{d=1}^{n} d\\,m_d=n}}\\frac{1}{\\prod_{d=1}^{n} d^{m_d}m_d!}\\prod_{d=1}^{n} s_d^{m_d}$. This depends only on $s_1,\\dots,s_n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coefficient in step 2.1 is exactly the cycle-type formula for $Z(S_n)$ from [L1]. Since this holds for every $n$, the whole series satisfies $\\sum_{n \\ge 0} Z(S_n)t^n=\\exp\\left(\\sum_{d \\ge 1}\\frac{s_d t^d}{d}\\right)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 with n=0 truncates to the empty product, so the constant term is 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 index d only over positive integers, so the denominator d never vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate singleton branch is needed beyond the coefficient extraction already done for each fixed n."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed configuration appears beyond the finite truncation at each coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 truncates the exponential at d<=n before coefficient extraction, which is the relevant endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coefficient comparison is explicit and makes no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a formal-series identity, not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a formal-series identity, not a biconditional statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 7): the risk is the infinite series truncation and the 1/d denominators. I checked that step 1.1 legitimately truncates at d<=n when extracting the coefficient of t^n, step 2.1 matches the cycle-type expansion, and step 3.1 identifies that coefficient with Z(S_n). The denominators are harmless because the whole identity is stated in Q[s_1,s_2,...][[t]]. No unrepaired defect remains."
+      }
+    },
+    "fs-distinct-groups-have-distinct-cycle-indices": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cycle-index-of-a-permutation-group",
+          "source_section": "Definition",
+          "quote": "Let a finite group $G$ act on a finite set $X$ of size $n$. For $g \\in G$ and\n$1 \\le d \\le n$, let $j_d(g)$ be the number of $d$-cycles in the permutation of\n$X$ induced by $g$. Then\n\n$$\\sum_{d=1}^{n} d\\,j_d(g)=n,$$\n\nso the monomial\n\n$$\\prod_{d=1}^{n} s_d^{j_d(g)}$$\n\nlies in the polynomial ring $\\mathbb{Q}[s_1,\\dots,s_n]$\n([[def-multivariate-polynomial-ring-by-iteration]]).\n\nThe **cycle index** of the permutation action $G \\curvearrowright X$ is\n\n$$Z_G(s_1,\\dots,s_n):=\\frac{1}{|G|}\\sum_{g \\in G}\\prod_{d=1}^{n} s_d^{j_d(g)}.$$\n\nWhen the acting set is clear from context, this polynomial is also written\n$Z(G)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C_4=\\langle g\\rangle$ act on $X$ through the quotient map $g \\mapsto \\tau$. Then the two even powers of $g$ act as the identity and the two odd powers act as $\\tau$, so $Z_{C_4}(X)=\\frac14\\left(2s_1^4+2s_2^2\\right)=\\frac12(s_1^4+s_2^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $V_4=\\{1,a,b,ab\\}$ act on $X$ through a quotient $V_4 \\twoheadrightarrow \\{1,\\tau\\}$ with kernel of size $2$. Then again two group elements act as the identity and two act as $\\tau$, so $Z_{V_4}(X)=\\frac14\\left(2s_1^4+2s_2^2\\right)=\\frac12(s_1^4+s_2^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The groups $C_4$ and $V_4$ are not isomorphic, but steps 1.1 and 1.2 give the same cycle index. Therefore the displayed claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that nonisomorphic groups always have different cycle indices is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-cycle-index-determines-the-abstract-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cycle-index-of-a-permutation-group",
+          "source_section": "Definition",
+          "quote": "Let a finite group $G$ act on a finite set $X$ of size $n$. For $g \\in G$ and\n$1 \\le d \\le n$, let $j_d(g)$ be the number of $d$-cycles in the permutation of\n$X$ induced by $g$. Then\n\n$$\\sum_{d=1}^{n} d\\,j_d(g)=n,$$\n\nso the monomial\n\n$$\\prod_{d=1}^{n} s_d^{j_d(g)}$$\n\nlies in the polynomial ring $\\mathbb{Q}[s_1,\\dots,s_n]$\n([[def-multivariate-polynomial-ring-by-iteration]]).\n\nThe **cycle index** of the permutation action $G \\curvearrowright X$ is\n\n$$Z_G(s_1,\\dots,s_n):=\\frac{1}{|G|}\\sum_{g \\in G}\\prod_{d=1}^{n} s_d^{j_d(g)}.$$\n\nWhen the acting set is clear from context, this polynomial is also written\n$Z(G)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C_4=\\langle g\\rangle$ act on $X$ through the quotient map $g \\mapsto \\tau$. Then two elements act as the identity and two act as $\\tau$, so [F1] gives the cycle index $\\frac14(2s_1^4+2s_2^2)=\\frac12(s_1^4+s_2^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $V_4$ act on $X$ through a quotient onto $\\{1,\\tau\\}$ with kernel of size $2$. Again two elements act as the identity and two act as $\\tau$, so the same calculation gives the same cycle index $\\frac12(s_1^4+s_2^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The abstract groups $C_4$ and $V_4$ are not isomorphic, so equal cycle index does not determine the acting group. Therefore the displayed claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that a cycle index determines the abstract acting group is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-weighted-pattern-inventory-formula",
+          "source_section": "Statement",
+          "quote": "Let a finite group $G$ act on a finite set $X$, let $C$ be a finite colour set,\nlet $R$ be a commutative ring, and let $w:C \\to R$ be a weight function. For\neach $d \\ge 1$, put\n\n$$p_d:=\\sum_{c \\in C} w(c)^d.$$\n\nThen\n\n$$|G|\\,\\mathcal{I}_G(X,C;w)=\\sum_{g \\in G}\\prod_{d \\ge 1} p_d^{j_d(g)}.$$\n\nIf moreover the scalar $1/|G|$ is defined in $R$ (in particular if $R$ is a\ncommutative $\\mathbb{Q}$-algebra), then equivalently\n\n$$\\mathcal{I}_G(X,C;w)=Z_G(p_1,p_2,\\dots,p_{|X|}).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Give blue weight $1$ and red weight $u$. Because the action is trivial and $X$ has one point, there are exactly two colouring orbits, with weights $1$ and $u$. Hence the pattern inventory is $1+u$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the same conclusion is the cycle-index substitution for this one-point action. Unless $u=1$, the polynomial $1+u$ is not the plain orbit count $2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the displayed claim is false: a nonconstant weight assignment retains extra colour-profile information instead of collapsing to a single total.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation of the claim that every weighted inventory collapses to the plain orbit count is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F1] to let both $C_4$ and $V_4$ act on $X$ through the same quotient image $\\{1,\\tau\\}$. In each action, exactly two group elements act as the identity and exactly two act as $\\tau$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore both actions have the same averaged cycle monomials, namely $\\frac14(2s_1^4+2s_2^2)=\\frac12(s_1^4+s_2^2)$. But $C_4$ and $V_4$ are not isomorphic. Hence the displayed claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that C4 and V4 can share a cycle index through quotient actions is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Give blue weight $b$ and red weight $r$. By [F1], the full weighted inventory is $b+r$, which distinguishes the blue orbit from the red orbit.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The one-variable specialization named in the statement replaces the cycle-index variables by $s_i=x^i$, so here it sends $s_1$ to $x$. The resulting polynomial $x$ no longer distinguishes blue from red, so the specialization has erased colour-profile information. Therefore the displayed claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data does not split over an optional empty family or index set; the proof works with the objects fixed in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data introduces no separate zero-denominator or zero-parameter branch beyond the uniform argument already written."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data introduces no separate singleton or unit-size branch that needs its own proof row."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data has no additional collapsed configuration beyond the stated hypotheses and the main proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data has no interval or order-endpoint parameter whose boundary values require a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data does not depend on choosing a witness from an unspecified nonempty family; every construction is explicit from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample showing that the one-variable specialization erases colour-profile data is stated as a one-directional identity, count, or refutation rather than an if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

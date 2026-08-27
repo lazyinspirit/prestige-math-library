@@ -14,12 +14,13 @@ landmark: true
 short: "refinement inequalities"
 proof_strategy: induction
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -55,10 +56,11 @@ $\iota(n'-n) \in \mathbb{R}$ ([[def-canonical-natural]]); $\iota$ is additive an
 nondecreasing on $\mathbb{N}$ ([[lem-of-naturals-positive]]). The same
 abbreviation is used throughout the proof.
 
-Claims 1 and 2 are what make [[def-darboux-integral]] well posed. Claim 3 is the
-extra information that a refinement changes the sums by an amount controlled by
-the mesh of the **coarse** partition and by how many points were added; it is
-what [[thm-darboux-equals-riemann]] needs and nothing else on this page uses it.
+Claims 1 and 2 are what make the Darboux-integral definition well posed. Claim
+3 is the extra information that a refinement changes the sums by an amount
+controlled by the mesh of the **coarse** partition and by how many points were
+added; it is the bound a later Darboux-versus-Riemann comparison needs and
+nothing else on this page uses it.
 Here $n' - n \ge 0$ ([[def-partition-and-refinement]]), so the right-hand bounds
 are nonnegative.
 
@@ -110,6 +112,6 @@ are nonnegative.
 
 - **Where the hypothesis $|f| \le M$ is used, and where it is not.** Claims 1 and 2 need only that $f$ is bounded, so that the Darboux sums exist at all; the particular bound $M$ enters only in claim 3, through step 4.1, and the factor $2M$ there is exactly the largest possible value of $M_k - m_k$ ([[def-darboux-sums]]).
 
-- **The mesh in claim 3 is that of the coarse partition.** It has to be: the refinement $P'$ may have very short subintervals, and what the estimate measures is how much a single one of $P$'s subintervals can be improved by being cut up. That is why [[thm-darboux-equals-riemann]] can fix a partition $P_0$ once and then let $P$ range over all partitions of small mesh.
+- **The mesh in claim 3 is that of the coarse partition.** It has to be: the refinement $P'$ may have very short subintervals, and what the estimate measures is how much a single one of $P$'s subintervals can be improved by being cut up. That is why the later theorem comparing Darboux and Riemann integration can fix a partition $P_0$ once and then let $P$ range over all partitions of small mesh.
 
 - **The count $n' - n$ is not a count of new points in disguise.** It is the difference of the two index counts, and by the telescoping identity of [[def-partition-and-refinement]] it equals the total amount by which the blocks of $\varphi$ exceed length one. That is the form the proof uses, and it needs no notion of the cardinality of $\operatorname{pts}(P') \setminus \operatorname{pts}(P)$.

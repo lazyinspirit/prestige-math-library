@@ -1,0 +1,580 @@
+[
+  {
+    "order": 141,
+    "id": "the-spectral-theorem-and-singular-value-decomposition",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "The Spectral Theorem, Positive Operators and Singular Value Decomposition",
+    "companion": "the-spectral-theorem-and-singular-value-decomposition-examples",
+    "requires": [
+      "the-fundamental-theorem-of-algebra",
+      "inner-product-spaces-and-orthogonality",
+      "triangularisation-and-jordan-canonical-form"
+    ],
+    "items": [
+      {
+        "id": "def-self-adjoint-and-normal-endomorphism",
+        "kind": "definition",
+        "title": "Self-adjoint and normal endomorphisms of a finite-dimensional real or complex inner product space",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces"
+        ]
+      },
+      {
+        "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+        "kind": "proposition",
+        "title": "In an orthonormal basis, self-adjoint means conjugate-transpose symmetry and normal means commuting with the conjugate transpose",
+        "strategy": "Translate the defining adjoint identities through the matrix-of-the-adjoint theorem and read the two operator conditions entrywise.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "thm-schur-triangularisation",
+        "kind": "theorem",
+        "title": "If the characteristic polynomial of an endomorphism splits, some orthonormal basis makes its matrix upper triangular",
+        "strategy": "Start from a triangularising basis, read off the invariant flag, and run Gram-Schmidt along that flag so the orthonormalised basis preserves every successive span.",
+        "deps": [
+          "thm-triangularisation-splitting-criterion",
+          "prop-complete-invariant-flags-and-upper-triangular-matrices",
+          "thm-gram-schmidt-orthonormalisation"
+        ]
+      },
+      {
+        "id": "lem-normal-upper-triangular-matrix-is-diagonal",
+        "kind": "lemma",
+        "title": "A normal upper-triangular matrix is diagonal",
+        "strategy": "Compare the norms of each basis vector under the matrix and its conjugate transpose, then peel off the last nonzero superdiagonal row by row.",
+        "deps": [
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "kind": "theorem",
+        "title": "Complex spectral theorem: a normal endomorphism of a finite-dimensional complex inner product space has an orthonormal eigenbasis, and conversely",
+        "strategy": "Use the fundamental theorem of algebra to split the characteristic polynomial, apply Schur triangularisation, and then force the triangular matrix to be diagonal by normality.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-the-complex-numbers-are-algebraically-closed",
+          "thm-schur-triangularisation",
+          "lem-normal-upper-triangular-matrix-is-diagonal"
+        ]
+      },
+      {
+        "id": "thm-real-normal-endomorphism-classification",
+        "kind": "theorem",
+        "title": "A real normal endomorphism is orthogonally block-diagonalisable with 1x1 real blocks and 2x2 rotation-scaling blocks",
+        "strategy": "Represent the operator by a real matrix in an orthonormal basis, apply the complex spectral theorem to that matrix over C, and pair nonreal conjugate eigenvectors by taking real and imaginary parts.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "prop-standard-coordinate-inner-products",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "kind": "corollary",
+        "title": "Real spectral theorem: a self-adjoint endomorphism of a finite-dimensional real inner product space has an orthonormal eigenbasis",
+        "strategy": "Use the real normal classification and observe that self-adjointness forces every 2x2 block to collapse to a real scalar block.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-real-normal-endomorphism-classification"
+        ]
+      },
+      {
+        "id": "thm-spectral-resolution-and-polynomial-spectral-projections",
+        "kind": "theorem",
+        "title": "A normal endomorphism is a sum of its eigenvalues times pairwise orthogonal projections, and each spectral projection is a polynomial in the endomorphism",
+        "strategy": "Group an orthonormal eigenbasis by eigenvalue, write the associated orthogonal projections, and recover each projection from Lagrange interpolation on the distinct eigenvalues.",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-primary-projections-are-polynomials-in-the-endomorphism",
+          "def-orthogonal-projection",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections"
+        ]
+      },
+      {
+        "id": "def-functional-calculus-for-a-normal-endomorphism",
+        "kind": "definition",
+        "title": "The spectral functional calculus f(T) for a normal endomorphism",
+        "deps": [
+          "thm-spectral-resolution-and-polynomial-spectral-projections"
+        ]
+      },
+      {
+        "id": "prop-functional-calculus-for-normal-endomorphisms",
+        "kind": "proposition",
+        "title": "For normal endomorphisms, the spectral functional calculus respects sums, products, adjoints, and composition of scalar functions",
+        "strategy": "Compute directly on the spectral-resolution formula, using orthogonality and idempotence of the spectral projections.",
+        "deps": [
+          "def-functional-calculus-for-a-normal-endomorphism",
+          "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "prop-adjoint-algebra"
+        ]
+      },
+      {
+        "id": "def-semisimple-and-nilpotent-endomorphisms",
+        "kind": "definition",
+        "title": "Semisimple endomorphisms as endomorphisms diagonalisable over an algebraic closure, and nilpotent endomorphisms",
+        "deps": [
+          "def-algebraic-closure",
+          "def-diagonalisable-endomorphism",
+          "def-nilpotent-endomorphism"
+        ]
+      },
+      {
+        "id": "thm-additive-jordan-chevalley-decomposition",
+        "kind": "theorem",
+        "title": "Over a perfect field, every endomorphism has a unique commuting semisimple-plus-nilpotent decomposition, polynomial in the endomorphism",
+        "strategy": "Choose a splitting field inside an algebraic closure, separate the semisimple and nilpotent parts on each primary component by the split Jordan calculation, and descend the resulting operators by using perfect-field separability, uniqueness, and base automorphisms of the algebraic closure to show the polynomial expressions are fixed over the ground field.",
+        "deps": [
+          "def-semisimple-and-nilpotent-endomorphisms",
+          "def-algebraic-closure",
+          "def-perfect-field",
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "cor-conjugate-elements-are-related-by-an-automorphism-of-an-algebraic-closure",
+          "cor-primary-projections-are-polynomials-in-the-endomorphism",
+          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots"
+        ]
+      },
+      {
+        "id": "def-non-negative-and-positive-operator",
+        "kind": "definition",
+        "title": "Non-negative and positive operators",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism"
+        ]
+      },
+      {
+        "id": "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+        "kind": "proposition",
+        "title": "Over the reals, non-negative and positive operators correspond exactly to positive semidefinite and positive definite symmetric forms",
+        "strategy": "Apply the bilinear-form correspondence to the form (u,v) -> <Tu,v> and translate the pointwise inequalities through the self-adjoint condition.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "thm-bilinear-forms-correspond-to-linear-maps-into-the-dual",
+          "def-definiteness-inertia-and-signature-data-over-the-reals"
+        ]
+      },
+      {
+        "id": "thm-non-negative-operator-characterisations",
+        "kind": "theorem",
+        "title": "A non-negative operator is equivalently self-adjoint with nonnegative eigenvalues, a positive semidefinite matrix in an orthonormal basis, or an operator of the form S^*S",
+        "strategy": "Use the spectral theorem to diagonalise, read off the quadratic form from the diagonal entries, and reverse the construction by taking square roots of the eigenvalues.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ]
+      },
+      {
+        "id": "thm-non-negative-square-root-exists-and-is-unique",
+        "kind": "theorem",
+        "title": "A non-negative operator has a unique non-negative square root",
+        "strategy": "Diagonalise the operator, take the unique nonnegative square root of each diagonal entry, and compare spectra to force uniqueness inside the non-negative class.",
+        "deps": [
+          "thm-non-negative-operator-characterisations",
+          "thm-spectral-resolution-and-polynomial-spectral-projections",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "prop-non-negative-square-root-is-a-polynomial-in-the-operator",
+        "kind": "proposition",
+        "title": "The non-negative square root of a non-negative operator is a polynomial in the operator",
+        "strategy": "Interpolate the scalar square-root function on the finite spectrum and compare the resulting functional-calculus value with the unique non-negative square root.",
+        "deps": [
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "prop-functional-calculus-for-normal-endomorphisms",
+          "thm-spectral-resolution-and-polynomial-spectral-projections"
+        ]
+      },
+      {
+        "id": "def-singular-values-of-an-endomorphism",
+        "kind": "definition",
+        "title": "The singular values of an endomorphism as the eigenvalues of the positive square root of T^*T",
+        "deps": [
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "prop-adjoint-algebra"
+        ]
+      },
+      {
+        "id": "prop-singular-values-are-well-defined",
+        "kind": "proposition",
+        "title": "Singular values are well defined because the positive square root of T^*T is unique",
+        "strategy": "Unpack the definition and appeal only to the uniqueness clause in the square-root theorem.",
+        "deps": [
+          "def-singular-values-of-an-endomorphism",
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "thm-singular-value-decomposition",
+        "kind": "theorem",
+        "title": "Every endomorphism of a finite-dimensional real or complex inner product space admits a singular value decomposition",
+        "strategy": "Diagonalise T^*T in an orthonormal basis, scale the images of the nonzero right-singular vectors to obtain orthonormal left-singular vectors, and complete both lists to orthonormal bases.",
+        "deps": [
+          "def-singular-values-of-an-endomorphism",
+          "prop-singular-values-are-well-defined",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "cor-rank-equals-number-of-nonzero-singular-values",
+        "kind": "corollary",
+        "title": "The rank of an endomorphism is the number of its nonzero singular values",
+        "strategy": "Read the image directly from the singular value decomposition: the nonzero singular directions are exactly the basis vectors that survive.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "cor-adjoint-has-the-same-singular-values",
+        "kind": "corollary",
+        "title": "An endomorphism and its adjoint have the same singular values",
+        "strategy": "Take the adjoint of the singular value decomposition and observe that the same diagonal entries reappear with the left and right singular vectors swapped.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "prop-adjoint-algebra"
+        ]
+      },
+      {
+        "id": "thm-polar-decomposition",
+        "kind": "theorem",
+        "title": "Every endomorphism has a polar decomposition T = SU with U non-negative and S an isometry on the orthogonal complement of ker T, and S is unique exactly when T is invertible",
+        "strategy": "Build the isometric factor on the singular-vector bases, identify the positive factor with the square root of T^*T, and compare kernels to isolate the uniqueness boundary.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "prop-adjoint-algebra"
+        ]
+      },
+      {
+        "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "kind": "definition",
+        "title": "The operator norm ||T|| = max_{||v||=1} ||Tv|| in finite dimension",
+        "deps": [
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "thm-operator-norm-is-the-largest-singular-value",
+        "kind": "theorem",
+        "title": "The operator norm equals the largest singular value and is attained at a first right-singular vector",
+        "strategy": "Insert a unit vector into the singular value decomposition, bound the weighted sum by the top singular value, and attain equality on the first right-singular vector.",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "kind": "corollary",
+        "title": "The operator norm is submultiplicative and satisfies ||T^*T|| = ||T||^2",
+        "strategy": "Use the max definition for submultiplicativity and the singular-value description for the T^*T identity.",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "prop-adjoint-algebra"
+        ]
+      },
+      {
+        "id": "thm-eckart-young-best-rank-k-approximation",
+        "kind": "theorem",
+        "title": "The best rank-at-most-k approximation in operator norm is the rank-k truncation of a singular value decomposition",
+        "strategy": "Use the singular basis to exhibit the truncation and obtain the lower bound from a dimension-count intersection with the span of the first k+1 right-singular vectors.",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-singular-value-decomposition",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-rayleigh-quotient",
+        "kind": "definition",
+        "title": "The Rayleigh quotient of a nonzero vector for a self-adjoint endomorphism",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-inner-product-space"
+        ]
+      },
+      {
+        "id": "thm-courant-fischer-min-max-principle",
+        "kind": "theorem",
+        "title": "Courant-Fischer min-max principle for self-adjoint endomorphisms on finite-dimensional real inner product spaces",
+        "strategy": "Diagonalise orthogonally, compare subspace dimensions against the ordered eigenbasis, and evaluate the Rayleigh quotient on the extremal coordinate subspaces.",
+        "deps": [
+          "def-rayleigh-quotient",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ]
+      },
+      {
+        "id": "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+        "kind": "corollary",
+        "title": "The smallest and largest eigenvalues of a self-adjoint endomorphism are the minimum and maximum Rayleigh quotients",
+        "strategy": "Take the first and last cases of Courant-Fischer.",
+        "deps": [
+          "def-rayleigh-quotient",
+          "thm-courant-fischer-min-max-principle"
+        ]
+      },
+      {
+        "id": "thm-cauchy-interlacing-for-self-adjoint-compressions",
+        "kind": "theorem",
+        "title": "The eigenvalues of the orthogonal compression of a self-adjoint endomorphism to a hyperplane interlace those of the original endomorphism",
+        "strategy": "Apply Courant-Fischer on the hyperplane and on the ambient space, comparing the admissible subspaces by one-dimensional codimension counts.",
+        "deps": [
+          "def-orthogonal-projection",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-courant-fischer-min-max-principle",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "thm-weyl-inequalities-for-self-adjoint-sums",
+        "kind": "theorem",
+        "title": "Weyl inequalities bound the eigenvalues of a sum of self-adjoint endomorphisms",
+        "strategy": "Choose the two subspaces supplied by Courant-Fischer, intersect them, and evaluate the sum on a nonzero vector from that intersection.",
+        "deps": [
+          "thm-courant-fischer-min-max-principle",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-gershgorin-disks",
+        "kind": "definition",
+        "title": "The Gershgorin disks of an endomorphism with respect to an ordered basis",
+        "deps": [
+          "def-coordinate-column-and-matrix-of-a-linear-map"
+        ]
+      },
+      {
+        "id": "thm-gershgorin-disk-theorem",
+        "kind": "theorem",
+        "title": "Every eigenvalue lies in some Gershgorin disk",
+        "strategy": "Write an eigenvector in the chosen basis, divide by a coordinate of maximal modulus, and estimate the corresponding row equation.",
+        "deps": [
+          "def-gershgorin-disks",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-coordinate-column-and-matrix-of-a-linear-map"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 142,
+    "id": "the-spectral-theorem-and-singular-value-decomposition-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "The Spectral Theorem and SVD: Examples and Counterexamples",
+    "requires": [
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "ex-real-symmetric-three-by-three-orthogonal-diagonalisation",
+        "kind": "example",
+        "title": "An explicit real symmetric 3x3 matrix is orthogonally diagonalised",
+        "strategy": "Compute the eigenvalues and an orthonormal eigenbasis, assemble the orthogonal matrix Q, and check Q^T A Q is diagonal.",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-hermitian-two-by-two-unitary-diagonalisation",
+        "kind": "example",
+        "title": "An explicit Hermitian 2x2 matrix is unitarily diagonalised",
+        "strategy": "Solve for two orthonormal eigenvectors, form the unitary matrix, and verify the diagonalisation directly.",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-quarter-turn-real-normal-form",
+        "kind": "example",
+        "title": "The real quarter-turn is normal and appears as a single 2x2 block in the real normal classification",
+        "strategy": "Check A^T A = A A^T, compute the complex eigenvalues +/- i, and exhibit the real 2x2 block from the classification theorem.",
+        "deps": [
+          "thm-real-normal-endomorphism-classification",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-complex-symmetric-nilpotent-matrix",
+        "kind": "example",
+        "title": "A complex symmetric matrix can be nonzero, square to zero, and fail to be normal",
+        "strategy": "Work with the matrix [[1,i],[i,-1]], compute A^2 = 0, and compare A^*A with A A^*.",
+        "deps": [
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "ex-non-negative-square-root-as-a-polynomial-in-a-matrix",
+        "kind": "example",
+        "title": "The non-negative square root of an explicit matrix is exhibited as a polynomial in the matrix",
+        "strategy": "Diagonalise the matrix, take square roots of the diagonal entries, and then interpolate the same operator as a polynomial in the original matrix.",
+        "deps": [
+          "prop-non-negative-square-root-is-a-polynomial-in-the-operator",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-polar-decomposition-of-an-invertible-matrix",
+        "kind": "example",
+        "title": "A worked polar decomposition of an invertible matrix",
+        "strategy": "Compute T^*T, extract its positive square root, and then solve for the isometric factor from T = S sqrt(T^*T).",
+        "deps": [
+          "thm-polar-decomposition",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-polar-decomposition-of-a-singular-matrix",
+        "kind": "example",
+        "title": "A singular matrix has a polar decomposition with visibly nonunique isometric factors",
+        "strategy": "Choose a rank-one matrix, compute the positive factor, and display two distinct isometries that agree on the orthogonal complement of the kernel.",
+        "deps": [
+          "thm-polar-decomposition",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-singular-value-decomposition-of-a-two-by-three-matrix",
+        "kind": "example",
+        "title": "The singular value decomposition of an explicit 2x3 matrix",
+        "strategy": "Diagonalise T^*T, normalize the image vectors, and write the resulting U Sigma V^* factorisation in full.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-rank-one-svd-truncation",
+        "kind": "example",
+        "title": "The rank-one truncation of an SVD realises the Eckart-Young minimiser",
+        "strategy": "Truncate the previous SVD after the first singular value, compute the operator-norm error, and match it with the next singular value.",
+        "deps": [
+          "ex-singular-value-decomposition-of-a-two-by-three-matrix",
+          "thm-eckart-young-best-rank-k-approximation"
+        ]
+      },
+      {
+        "id": "ex-courant-fischer-on-a-three-by-three-symmetric-matrix",
+        "kind": "example",
+        "title": "Courant-Fischer is checked on an explicit 3x3 symmetric matrix",
+        "strategy": "Compute the ordered eigenvalues and then evaluate the min-max expression on the coordinate eigenspaces and their orthogonal complements.",
+        "deps": [
+          "thm-courant-fischer-min-max-principle",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-principal-submatrix-interlacing",
+        "kind": "example",
+        "title": "The eigenvalues of a principal 2x2 submatrix interlace those of a 3x3 symmetric matrix",
+        "strategy": "Compress to a coordinate hyperplane, compute both spectra, and compare the ordered lists entry by entry.",
+        "deps": [
+          "thm-cauchy-interlacing-for-self-adjoint-compressions",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-gershgorin-disks-and-spectrum",
+        "kind": "example",
+        "title": "Gershgorin disks for an explicit 3x3 matrix contain the true spectrum",
+        "strategy": "Compute the row sums, draw the three disks, and check the actual eigenvalues against their union.",
+        "deps": [
+          "thm-gershgorin-disk-theorem"
+        ]
+      },
+      {
+        "id": "fs-normal-operators-are-diagonalisable-over-the-base-field",
+        "kind": "false-statement",
+        "title": "FALSE: Every normal operator is diagonalisable over its base field",
+        "strategy": "Refute the field-free claim with the real quarter-turn, which is normal over R but has no real eigenvalue.",
+        "deps": [
+          "thm-real-normal-endomorphism-classification"
+        ]
+      },
+      {
+        "id": "fs-complex-symmetric-matrices-are-unitarily-diagonalizable",
+        "kind": "false-statement",
+        "title": "FALSE: Every complex symmetric matrix is unitarily diagonalisable",
+        "strategy": "Use the worked complex symmetric nilpotent matrix, which is symmetric but not normal and hence cannot satisfy the complex spectral theorem.",
+        "deps": [
+          "ex-complex-symmetric-nilpotent-matrix",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ]
+      },
+      {
+        "id": "fs-nonnegative-quadratic-values-force-self-adjointness",
+        "kind": "false-statement",
+        "title": "FALSE: If <Tv,v> is nonnegative for every v, then T is automatically self-adjoint",
+        "strategy": "Refute the claim with the real quarter-turn, for which every value <Tv,v> is zero although the operator is not self-adjoint.",
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "ex-quarter-turn-real-normal-form"
+        ]
+      },
+      {
+        "id": "fs-square-roots-of-a-non-negative-operator-are-unique",
+        "kind": "false-statement",
+        "title": "FALSE: A non-negative operator has a unique square root among all operators",
+        "strategy": "Use a diagonal matrix with positive entries and compare its non-negative square root with a distinct diagonal sign choice.",
+        "deps": [
+          "thm-non-negative-square-root-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "fs-polar-isometry-is-unique-for-singular-operators",
+        "kind": "false-statement",
+        "title": "FALSE: The isometry in the polar decomposition is unique even for singular operators",
+        "strategy": "Appeal to the singular polar-decomposition example, where two distinct isometries agree on the range of the positive factor.",
+        "deps": [
+          "ex-polar-decomposition-of-a-singular-matrix",
+          "thm-polar-decomposition"
+        ]
+      },
+      {
+        "id": "fs-singular-values-are-absolute-values-of-the-eigenvalues",
+        "kind": "false-statement",
+        "title": "FALSE: The singular values of an operator are the absolute values of its eigenvalues",
+        "strategy": "Use the nilpotent matrix [[0,2],[0,0]], whose eigenvalues are both zero while its singular values are 2 and 0.",
+        "deps": [
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "fs-operator-norm-is-the-largest-eigenvalue-modulus",
+        "kind": "false-statement",
+        "title": "FALSE: The operator norm is always the largest modulus of an eigenvalue",
+        "strategy": "Use the same nilpotent matrix [[0,2],[0,0]], whose operator norm is 2 although every eigenvalue has modulus 0.",
+        "deps": [
+          "thm-operator-norm-is-the-largest-singular-value"
+        ]
+      }
+    ]
+  }
+]

@@ -57,6 +57,7 @@ parts:
       - finite-fields-and-cyclotomic-extensions
       - the-fundamental-theorem-of-algebra
       - solvability-by-radicals-and-kummer-theory
+      - the-group-algebra-and-representations
 ---
 
 ## groups-and-quotients
@@ -117,10 +118,10 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 A split extension is a semidirect product, so actions by automorphisms assemble finite
 groups from normal pieces. Sylow's theorems turn divisibility of $|G|$ into existence,
-conjugacy and counting of $p$-subgroups, and nilpotence with the Frattini subgroup sharpens
-that picture for finite $p$-groups. The Galois correspondence translates subgroup data into
-intermediate fields, finite fields and cyclotomic polynomials supply explicit abelian
-extensions, and solvability by radicals becomes a condition on the Galois group. The new
-endpoint is Artin's algebraic proof of the fundamental theorem of algebra: odd-degree real
-roots, splitting fields and Sylow $2$-subgroups force $\mathbb C$ to be algebraically
-closed, yielding the standard factorisation results over $\mathbb C$ and $\mathbb R$.
+conjugacy and counting of $p$-subgroups; nilpotence, the Frattini subgroup and the Galois
+correspondence refine that picture, while finite fields, cyclotomic polynomials and
+solvability by radicals give explicit extensions. Artin's proof of the fundamental theorem
+of algebra is the field-theoretic endpoint. The same structure also linearises: $k[G]$
+identifies representations with modules, the regular representation contains every
+irreducible, Schur's lemma and splitting fields control endomorphisms, and finite abelian
+groups have only one-dimensional irreducibles over a splitting field.

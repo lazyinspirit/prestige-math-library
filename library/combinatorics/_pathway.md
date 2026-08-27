@@ -16,6 +16,8 @@ parts:
       - combinatorial-classes-and-the-symbolic-method
       - lattice-paths-and-catalan-numbers
       - set-partitions-stirling-numbers-and-exponential-generating-functions
+      - integer-partitions-and-the-twelvefold-way
+      - counting-up-to-symmetry-burnside-and-polya
   - part: order-and-inversion
     title: "Order, chains and Mobius inversion"
     pages:
@@ -53,6 +55,8 @@ parts:
       - polynomial-rodl-and-viral-equivalence
       - classical-and-loglog-erdos-hajnal-bounds
       - blockades-combs-and-pattern-graphs
+      - quotient-blockades-and-mixing-relations
+      - pure-pairs-forests-and-path-antipath-classes
 ---
 
 ## counting
@@ -67,13 +71,15 @@ the pigeonhole principle, which produces an object without exhibiting it.
 
 A formal power series is a sequence written so that algebra acts on coefficients, with no
 question of convergence anywhere. Coefficient extraction, inversion and formal
-differentiation solve recurrences, permutations contribute $q$-factorials and Eulerian
-polynomials, symbolic combinatorics turns labelled constructions into EGF identities, and
-lattice paths convert the same series into Catalan-type counts. The added page completes
-this route for set partitions: Stirling numbers encode basis changes between powers and
-factorials, Bell numbers satisfy their standard recurrences and exponential formula,
-labelled constructions explain partition and ordered-partition counts, and Dobinski's
-formula is kept separate as the one analytic argument.
+differentiation solve recurrences, permutation statistics contribute $q$-factorials and
+Eulerian polynomials, symbolic combinatorics turns labelled constructions into EGF
+identities, and lattice paths convert the same series into Catalan-type counts. The same
+formal language governs set and integer partitions: Stirling and Bell numbers encode
+labelled decompositions, Ferrers conjugation identifies parts with largest parts, Euler's
+distinct-equals-odd identity and the Durfee-square decomposition turn product formulas into
+structure, Franklin's involution yields the pentagonal recurrence for $p(n)$, and
+Burnside-Pólya cycle indices convert necklace, bracelet and weighted colouring orbits into
+explicit substitutions.
 
 ## order-and-inversion
 
@@ -115,10 +121,11 @@ degree and gives the five colour theorem.
 
 A finite probability space turns expectation into a weighted count, so linearity, Markov's
 inequality and second moments produce combinatorial objects by proving positive
-probability. In hereditary graph theory this yields homogeneous sets, induced-copy
-estimates, regularity-driven restricted subgraphs, modular decomposition, and the density
-bounds behind Erdos-Hajnal, polynomial Rodl and virality formulations. The added blockade
-page supplies one local engine for those results: ordered blockades, combs and pure pattern
-graphs encode sparse or complete behaviour, $P_4$-free patterns force large homogeneous
-subblockades, and maximal sparse-pair extraction turns repeated local sparsity into a long
-structured blockade for later iterative arguments.
+probability. In hereditary graph theory this viewpoint yields homogeneous sets,
+induced-copy estimates, regularity-driven restricted subgraphs, modular decomposition, and
+the density statements behind Erdos-Hajnal, polynomial Rodl and virality formulations.
+Ordered blockades make those arguments local: combs and pure pattern graphs force long
+sparse or dense structure, quotienting by mixed-block reachability produces pure pairs
+between blockade classes and descent lemmas for small quotient blocks, and path-antipath-
+free classes inherit the strong Erdos-Hajnal property, hence the ordinary Erdos-Hajnal
+conclusion, through that pure-pair machinery and the cograph bridge.

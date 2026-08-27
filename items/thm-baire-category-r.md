@@ -16,11 +16,12 @@ short: "countable intersection of dense open sets is dense"
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -52,18 +53,19 @@ itself.
 
 **The selection is canonical, and the proof spends no choice principle.** The
 textbook argument picks a nested interval at every stage in terms of the one
-before it, which is the axiom of dependent choice ([[def-dependent-choice]]). The construction below
+before it, which is the axiom of dependent choice. The construction below
 instead fixes one enumeration $e$ of the rationals ([[thm-rationals-countable]],
 [[lem-rat-embeds-dense]]) and, at every stage, takes the interval whose two
 rational endpoints have **least index** among those meeting the requirements.
 The requirements are met by some rational-endpoint interval, which is what the
 refinement claim of the proof establishes, and the least such index is
 determined by [[thm-well-ordering-principle]]; so the whole recursion is a
-single application of [[thm-recursion]] to one total map. This is the device of
-[[thm-perfect-set-uncountable-r]], transplanted from perfect sets to dense open
-sets. What it does **not** settle is the strength of the theorem for general
-complete metric spaces, which is recorded separately in
-[[rem-baire-in-r-is-choice-free]].
+single application of [[thm-recursion]] to one total map. This is the same
+least-index device used later in the perfect-set development, transplanted here
+from perfect sets to dense open sets. What it does **not** settle is the
+strength of the theorem for general complete metric spaces; that
+metamathematical point is recorded separately on the choice ledger for this
+thread.
 
 ## Facts & Assumptions
 

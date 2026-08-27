@@ -1,0 +1,2813 @@
+{
+  "version": 1,
+  "level": "frontier-21",
+  "note": "Step-6 repaired contract for batch 10 on Thursday, August 27, 2026. This batch-local contract now covers all 25 proof-bearing batch items on current disk; the four batch definitions remain outside the proof-contract scope by design.",
+  "scope": [
+    "thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected",
+    "cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+    "thm-strong-erdos-hajnal-property-implies-erdos-hajnal-property",
+    "thm-erdos-hajnal-pach-pure-pair-theorem",
+    "thm-path-and-antipath-free-graphs-have-the-strong-erdos-hajnal-property",
+    "cor-path-and-antipath-free-graphs-have-the-erdos-hajnal-property",
+    "thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex",
+    "thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property",
+    "cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property",
+    "thm-leaf-deletion-preserves-virality-of-a-finite-family",
+    "thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family",
+    "cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property",
+    "ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path",
+    "ex-the-forest-theorem-specialized-to-the-four-vertex-path",
+    "ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path",
+    "ex-the-leaf-coleaf-corollary-recovers-the-five-vertex-path-case-from-the-four-vertex-path-case",
+    "lem-mixed-block-reachability-is-an-equivalence-relation",
+    "lem-quotient-blocks-preserve-connectedness-and-anticonnectedness",
+    "lem-blocks-from-different-mixed-block-classes-form-pure-pairs",
+    "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks",
+    "lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks",
+    "cex-mixedness-of-blocks-is-not-transitive",
+    "ex-a-mixed-chain-collapses-to-one-quotient-block",
+    "ex-a-vertex-can-be-mixed-on-a-quotient-block-while-pure-on-each-member-block",
+    "ex-the-quotient-witness-reduction-in-a-four-block-configuration"
+  ],
+  "contracts": {
+    "thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-nontrivial-graph-is-connected-or-anticonnected",
+          "source_section": "Statement",
+          "quote": "Every finite graph with at least two vertices is connected or anticonnected. Equivalently, if $G$ is disconnected and nontrivial, then $\\overline G$ is connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-anticonnected-graph-and-anticonnected-component",
+          "source_section": "Definition",
+          "quote": "A graph $G$ is **anticonnected**, or **co-connected**, when its complement $\\overline G$ is connected ([[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).\n\nAn **anticonnected component**, or **anticomponent**, of $G$ is a vertex set $A\\subseteq V(G)$ that is the vertex set of a connected component of $\\overline G$. Equivalently, $G[A]$ is anticonnected and $A$ is inclusion-maximal with that property ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library convention, the null graph is not anticonnected, while a one-vertex graph is anticonnected.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-connected-graph-and-connected-component",
+          "source_section": "Definition",
+          "quote": "Vertices $u$ and $v$ of a graph $G$ are **connected**, or **reachable from one\nanother**, when a path in $G$ has endpoints $u$ and $v$. Equivalently, a walk\njoins them, because [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]\nturns such a walk into a path.\n\nFor $v\\in V(G)$, its **connected component** is the induced subgraph on\n\n$$C_G(v):=\\{\\,u\\in V(G):u\\text{ is reachable from }v\\,\\}.$$\n\nA graph is **connected** when its vertex set is nonempty and every two vertices\nare reachable from one another. Thus the null graph is not connected. The\none-vertex graph is connected, since its vertex is joined to itself by the path\nof length $0$ from [[def-graph-walk-trail-path-and-cycle]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], if $G$ is disconnected then the first alternative of the Statement already holds. Assume instead that $G$ is connected.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose for contradiction that $G$ is also anticonnected. Then [L2] makes $\\overline G$ connected. Choose a vertex $v\\in V(G)$. Because $G$ is connected and nontrivial, [F1] gives a neighbour $x$ of $v$. Because $\\overline G$ is connected, [F1] also gives a vertex $y$ nonadjacent to $v$. Among all pairs $(a,b)$ with $va\\in E(G)$ and $vb\\notin E(G)$, choose one for which the distance from $a$ to $b$ in $G$ is minimal. Let\n$$a=u_0,u_1,\\dots,u_m=b$$\nbe a shortest $a$-$b$ path in $G$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "F1",
+            "choose",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $a$ and $b$ are nonadjacent, one has $m\\ge 2$. A shortest path is induced, so $u_0u_2\\notin E(G)$ and no nonconsecutive pair among $u_0,u_1,\\dots,u_m$ is adjacent. If some $u_i$ with $1\\le i<m$ were adjacent to $v$, then $(u_i,b)$ would be another neighbour/nonneighbour pair for $v$ whose distance is $m-i<m$, contradicting the choice in step 1.2. Hence $vu_1,vu_2\\notin E(G)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The four vertices $v,u_0,u_1,u_2$ therefore induce a path: the edges are $vu_0$, $u_0u_1$, and $u_1u_2$, while the nonedges are $vu_1$, $vu_2$, and $u_0u_2$. This is an induced copy of $P_4$, contradicting [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "So a nontrivial $P_4$-free graph cannot be both connected and anticonnected. Since step 1.1 reduced to the connected case, [L2] shows that whenever $G$ is connected, $\\overline G$ must be disconnected.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement starts at graphs with at least two vertices, so the null graph never enters the claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This proof never divides by a symbolic quantity or branches on a zero-valued parameter; its only size threshold is the explicit lower bound |V(G)| >= 2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The one-vertex graph is excluded by the hypothesis |V(G)| >= 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles the shortest admissible path case m = 2, which is the collapsed configuration that already yields the induced P4."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or ordered-boundary parameter occurs in this graph-theoretic dichotomy."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 chooses a minimal-distance neighbour/nonneighbour pair from a nonempty finite set of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.1 turns the proved conclusion into the equivalent reformulation about not being both connected and anticonnected."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1 uses the definition of anticonnectedness to recover the reformulation in the other direction."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier critical (score 8): six dependencies and a minimal-counterexample path argument. I reread the current proof against the cited connectedness and complement items. Step 1.2 correctly chooses a neighbour/nonneighbour pair for v with minimal distance, step 2.1 shows the first two internal path vertices are both nonadjacent to v, and step 3.1 then produces the forbidden induced P4. The nontrivial-order boundary is handled explicitly by |V(G)|>=2. No unrepaired defect remains."
+      }
+    },
+    "cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph with at least two vertices. If $G$ is\n$P_4$-free, then $G$ is disconnected or $\\overline G$ is disconnected.\nEquivalently, no nontrivial $P_4$-free graph is both connected and\nanticonnected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-connected-components-partition-the-vertex-set",
+          "source_section": "Statement",
+          "quote": "The vertex sets $C_G(v)$ of the connected components of a graph $G$ are\nnonempty, cover $V(G)$, and any two are equal or disjoint. Each induced graph\n$G[C_G(v)]$ is connected and contains every connected subgraph of $G$ that\ncontains $v$. Consequently the connected components are precisely the maximal\nconnected subgraphs of $G$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-anticonnected-components-are-complement-components",
+          "source_section": "Statement",
+          "quote": "For every graph $G$, its anticomponents are exactly the vertex sets of the connected components of $\\overline G$. In particular, they partition $V(G)$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-components-are-anticomplete-and-anticomponents-complete",
+          "source_section": "Statement",
+          "quote": "Distinct connected components of a graph are anticomplete to one another. Distinct anticomponents are complete to one another.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We prove by induction on $n$ the stronger statement $\\alpha(G)\\omega(G)\\ge n$. If $n\\le 1$, then $\\alpha(G)=1$ when $n=1$ and $\\alpha(G)=\\omega(G)=0$ when $n=0$, so the inequality is immediate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $n\\ge 2$. By [L2], either $G$ is disconnected or $\\overline G$ is disconnected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose first that $G$ is disconnected. By [L3], choose a connected component $C$ of $G$ and let $D:=V(G)\\setminus C$; then $C$ and $D$ are nonempty, $G[C]$ and $G[D]$ are induced subgraphs of $G$, and [L4] makes $C$ anticomplete to $D$. By [L1] both induced subgraphs are $P_4$-free, so the induction hypothesis gives $\\alpha(G[C])\\omega(G[C])\\ge |C|$ and $\\alpha(G[D])\\omega(G[D])\\ge |D|$. A stable set in $G[C]$ together with a stable set in $G[D]$ is still stable in $G$, while every clique of $G$ lies in one side. Hence $\\alpha(G)\\ge \\alpha(G[C])+\\alpha(G[D])$ and $\\omega(G)\\ge \\max\\{\\omega(G[C]),\\omega(G[D])\\}$, so $\\alpha(G)\\omega(G)\\ge \\alpha(G[C])\\omega(G[C])+\\alpha(G[D])\\omega(G[D])\\ge |C|+|D|=n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3",
+            "L4",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Suppose instead that $\\overline G$ is disconnected. By [L3], choose an anticomponent $C$ of $G$ and let $D:=V(G)\\setminus C$; then $C$ and $D$ are nonempty, the induced subgraphs $G[C]$ and $G[D]$ are $P_4$-free by [L1], and [L4] makes $C$ complete to $D$. The induction hypothesis again yields $\\alpha(G[C])\\omega(G[C])\\ge |C|$ and $\\alpha(G[D])\\omega(G[D])\\ge |D|$. Now a clique in $G[C]$ together with a clique in $G[D]$ is a clique in $G$, while every stable set of $G$ lies in one side. Thus $\\omega(G)\\ge \\omega(G[C])+\\omega(G[D])$ and $\\alpha(G)\\ge \\max\\{\\alpha(G[C]),\\alpha(G[D])\\}$, and again $\\alpha(G)\\omega(G)\\ge |C|+|D|=n$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3",
+            "L4",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 prove $\\alpha(G)\\omega(G)\\ge n$. Since $\\max\\{\\alpha(G),\\omega(G)\\}^2\\ge \\alpha(G)\\omega(G)$, one obtains $\\max\\{\\alpha(G),\\omega(G)\\}\\ge \\sqrt n$. By [L5], this says that $G$ has a clique or a stable set of size at least $\\sqrt n$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "L5",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 includes the n = 0 graph in the base case of the stronger inequality alpha(G) omega(G) >= n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly verifies the zero-vertex case of the inductive inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly verifies the one-vertex case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 cover the two collapsed decompositions where one chosen side is a single component or anticomponent and the other is the union of the rest."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The corollary has no interval parameter whose endpoint behaviour needs a separate argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 choose a component or anticomponent from a nonempty partition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way lower bound on hom(G), not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is claimed for the square-root bound."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier critical (score 8): six dependencies and an induction over disconnected and complement-disconnected branches. I checked the current proof from the base cases n=0 and n=1 through the two induction branches. Step 3.1 combines stable sets across disconnected components, step 3.2 combines cliques across anticomponents, and step 4.1 converts alpha(G)omega(G)>=n into the square-root homogeneous-set bound correctly. No unrepaired defect remains."
+      }
+    },
+    "thm-strong-erdos-hajnal-property-implies-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-strong-erdos-hajnal-property-for-a-hereditary-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs. We say that\n$\\mathcal C$ has the **strong Erdős–Hajnal property** if there exists a real\nconstant $\\epsilon>0$ such that every graph $G\\in\\mathcal C$ with\n$|V(G)|\\ge 2$ contains disjoint vertex sets $A,B\\subseteq V(G)$ satisfying\n\n$$|A|\\ge \\epsilon|V(G)|,\\qquad |B|\\ge \\epsilon|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair in the sense of\n[[def-edges-between-sets-and-pure-mixed-pairs]].\n\nEquivalently, every nontrivial graph in the class contains a complete or\nanticomplete pair whose two sides both have linear size.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-hereditary-graph-class",
+          "source_section": "Definition",
+          "quote": "A class $\\mathcal C$ of finite simple graphs is a **hereditary graph class** when:\n\n1. it is closed under isomorphism; and\n2. whenever $G\\in\\mathcal C$ and $H$ has an induced embedding into $G$, one has $H\\in\\mathcal C$.\n\nThe second clause is closure under taking induced subgraphs ([[def-induced-embedding-and-induced-copy]]). Isomorphism closure makes membership depend only on graph structure, not on the chosen vertex labels ([[def-graph-isomorphism-and-complement]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+          "source_section": "Statement",
+          "quote": "If $G$ is a finite $P_4$-free graph on $n$ vertices, then $G$ contains a clique\nor a stable set of size at least $\\sqrt n$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs ([[def-hereditary-graph-class]]). A real number $\\epsilon>0$ is an **Erdős–Hajnal constant** for $\\mathcal C$ if every nonempty $G\\in\\mathcal C$ satisfies\n$$\\operatorname{hom}(G)\\ge |V(G)|^\\epsilon,$$\nwhere the homogeneous number is that of [[def-homogeneous-set-and-homogeneous-number]] and the power is that of [[def-real-power]]. The class $\\mathcal C$ has the **Erdős–Hajnal property** if it has an Erdős–Hajnal constant.\n\nFor a finite graph $H$, we say that **$H$ has the Erdős–Hajnal property** when the hereditary class of $H$-free graphs has it. The same terminology applies to a finite family $\\mathcal F$ through its class of $\\mathcal F$-free graphs.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If every nonempty graph in $\\mathcal C$ has one vertex, then $1$ is already an Erdős–Hajnal constant, so there is nothing to prove. We therefore assume that $\\mathcal C$ contains some graph with at least two vertices. Let $\\eta>0$ be the strong Erdős–Hajnal constant from [L1]. Applying [L1] to one nontrivial graph in $\\mathcal C$ gives disjoint sets $A$ and $B$ with $|A|,|B|\\ge \\eta|V(G)|$, hence $2\\eta\\le 1$. Choose $c>0$ so that $2\\eta^c=1$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We claim that every nonempty graph $G\\in\\mathcal C$ induces a $P_4$-free subgraph on at least $|V(G)|^c$ vertices. We prove this by induction on $|V(G)|$, and the case $|V(G)|=1$ is immediate.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $G\\in\\mathcal C$ with $n:=|V(G)|\\ge 2$, and assume the claim for smaller orders. By [L1], choose disjoint sets $A,B\\subseteq V(G)$ with $|A|,|B|\\ge \\eta n$ and $(A,B)$ pure. By [L2], the induced subgraphs $G[A]$ and $G[B]$ both lie in $\\mathcal C$, so the induction hypothesis gives induced $P_4$-free subgraphs $H_A\\subseteq G[A]$ and $H_B\\subseteq G[B]$ with $|V(H_A)|\\ge |A|^c$ and $|V(H_B)|\\ge |B|^c$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $H:=G[V(H_A)\\cup V(H_B)]$. The pair $(V(H_A),V(H_B))$ is still pure because it sits inside the pure pair $(A,B)$. No induced $P_4$ can lie entirely in one side, since $H_A$ and $H_B$ are each $P_4$-free. A $1+3$ split is impossible because the lone vertex would be complete or anticomplete to the three opposite vertices, while a vertex of $P_4$ is neither complete nor anticomplete to the other three. A $2+2$ split is impossible as well: a complete cross-pair gives four cross edges, and an anticomplete cross-pair gives none, whereas $P_4$ has exactly three edges and is connected. Hence $H$ is $P_4$-free.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [L5], $|V(H)|=|V(H_A)|+|V(H_B)|\\ge |A|^c+|B|^c\\ge 2(\\eta n)^c=2\\eta^c n^c=n^c$. This closes the induction and proves the claim from step 2.1.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "L5",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $G$ be any nonempty graph in $\\mathcal C$. By step 5.1, $G$ contains an induced $P_4$-free subgraph $H$ with $|V(H)|\\ge |V(G)|^c$. Then [L3] gives a clique or stable set in $H$ of size at least $|V(H)|^{1/2}\\ge |V(G)|^{c/2}$, and the same set is a clique or stable set in $G$. By [L4], the exponent $c/2$ is an Erdős–Hajnal constant for $\\mathcal C$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Erdős-Hajnal constants are defined on nonempty graphs, and this theorem does not quantify over an empty family or empty decomposition."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof uses a positive strong constant eta and never divides by a potentially zero symbolic term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 uses the one-vertex graph as the base case for the induced P4-free subgraph claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles the degenerate hereditary class with no nontrivial members."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No closed interval or endpoint-limited parameter appears; the relevant constant is chosen strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 choose a nontrivial witness graph and then the strong pure pair inside a member of the class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states only the forward implication from strong to weak Erdős-Hajnal."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication is not claimed anywhere in the statement."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier critical (score 9): this proof builds a large P4-free induced subgraph recursively from a strong Erdős-Hajnal hypothesis. I checked the choice of c with 2eta^c=1, the inductive construction in steps 2.1-5.1, and the final appeal to the P4-free corollary in step 6.1. The 1+3 and 2+2 split exclusions in step 4.1 are correct, and the order-1 boundary is handled at the start. No unrepaired defect remains."
+      }
+    },
+    "thm-path-and-antipath-free-graphs-have-the-strong-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-rodl-in-the-edge-density-form",
+          "source_section": "Statement",
+          "quote": "For every graph $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there exists\n$\\delta>0$ such that every nonempty $H$-free finite simple graph $G$ contains a\nset $X\\subseteq V(G)$ with $|X|\\ge\\delta|V(G)|$ and either\n$d_G(X,X)\\le\\epsilon$ or $d_G(X,X)\\ge1-\\epsilon$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-weakly-sparse-set-has-a-large-sparse-subset",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph, let $c\\ge0$, and let $X\\subseteq V(G)$ be\nnonempty. If $d_G(X,X)\\le c$, then there is a subset $X'\\subseteq X$ with\n$|X'|\\ge|X|/2$ such that $X'$ is $4c$-sparse.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-connected-components-partition-the-vertex-set",
+          "source_section": "Statement",
+          "quote": "The vertex sets $C_G(v)$ of the connected components of a graph $G$ are\nnonempty, cover $V(G)$, and any two are equal or disjoint. Each induced graph\n$G[C_G(v)]$ is connected and contains every connected subgraph of $G$ that\ncontains $v$. Consequently the connected components are precisely the maximal\nconnected subgraphs of $G$.",
+          "uses": [
+            "4.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-components-are-anticomplete-and-anticomponents-complete",
+          "source_section": "Statement",
+          "quote": "Distinct connected components of a graph are anticomplete to one another. Distinct anticomponents are complete to one another.",
+          "uses": [
+            "4.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-strong-erdos-hajnal-property-for-a-hereditary-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs. We say that\n$\\mathcal C$ has the **strong Erdős–Hajnal property** if there exists a real\nconstant $\\epsilon>0$ such that every graph $G\\in\\mathcal C$ with\n$|V(G)|\\ge 2$ contains disjoint vertex sets $A,B\\subseteq V(G)$ satisfying\n\n$$|A|\\ge \\epsilon|V(G)|,\\qquad |B|\\ge \\epsilon|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair in the sense of\n[[def-edges-between-sets-and-pure-mixed-pairs]].\n\nEquivalently, every nontrivial graph in the class contains a complete or\nanticomplete pair whose two sides both have linear size.",
+          "uses": [
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-c-sparse-and-c-restricted-vertex-set",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $c\\ge0$ be real. A nonempty vertex set\n$X\\subseteq V(G)$ is **$c$-sparse** when\n\n$$\n|N_G(x)\\cap X|\\le c|X|\n$$\n\nfor every $x\\in X$, and it is **$c$-dense** when\n\n$$\n|(X\\setminus\\{x\\})\\setminus N_G(x)|\\le c|X|\n$$\n\nfor every $x\\in X$. Thus $c$-dense means that every vertex of $X$ has at most\n$c|X|$ non-neighbours inside $X$ other than itself.\n\nA set is **$c$-restricted** when it is $c$-sparse or $c$-dense. The condition is\ninternal to the induced subgraph $G[X]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]), and the dense clause is the sparse clause read in the complement.",
+          "uses": [
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We first prove the connected-case claim: for each $r\\ge 2$ there are constants $\\varepsilon_r>0$ and $c_r>0$ such that every connected graph $J$ on $m\\ge 2$ vertices has a vertex of degree greater than $\\varepsilon_r m$, or contains an induced $P_r$ starting at every vertex, or has a biclique of size at least $c_rm$ in $\\overline J$. We prove this by induction on $r$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $r=2$, choose $\\varepsilon_2:=1/2$ and $c_2:=1/4$. Every vertex of a connected graph on at least two vertices is incident with an edge, so every vertex starts an induced $P_2$. Thus the claim holds for $r=2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $r>2$, assume the claim for $r-1$, and let $\\varepsilon_r:=\\varepsilon_{r-1}/(2+\\varepsilon_{r-1})$. Since $\\varepsilon_r<1/2$, choose any constant $0<c_r\\le \\min\\{(1-2\\varepsilon_r)/4,\\ c_{r-1}(1-\\varepsilon_r)/2\\}$. Now let $J$ be a connected graph on $m\\ge 2$ vertices for which the first outcome fails, so every vertex has degree at most $\\varepsilon_r m$. Fix a vertex $v_1$ and put $S:=V(J)\\setminus(N_J(v_1)\\cup\\{v_1\\})$. Then $|S|\\ge (1-\\varepsilon_r)m-1$. Since $J$ is connected, $v_1$ has degree at least $1$, so $m\\ge 1/\\varepsilon_r$ and therefore $|S|\\ge (1-2\\varepsilon_r)m$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "ih",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Suppose every connected component of $J[S]$ has size at most $|S|/2$. Choose components greedily until their union $A$ has size in the interval $[|S|/4,|S|/2]$: if the running union first reaches $|S|/4$ before it exceeds $|S|/2$, stop there; otherwise the next component itself has size in $[|S|/4,|S|/2]$ and we take that one alone. Let $B:=S\\setminus A$. Then $|A|,|B|\\ge |S|/4$, and [L3] makes $A$ anticomplete to $B$ in $J$. Hence $A$ and $B$ form a biclique of size at least $|S|/4\\ge c_rm$ in $\\overline J$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Suppose instead that $J[S]$ has a connected component $S'$ with $|S'|>|S|/2$. Because $J$ is connected, some vertex $v_2\\in N_J(v_1)$ has a neighbour in $S'$. Let $J_2:=J[S'\\cup\\{v_2\\}]$, which is connected. Every vertex of $J_2$ still has degree at most $\\varepsilon_r m$, and $\\varepsilon_r m=\\varepsilon_{r-1}(1-\\varepsilon_r)m/2<\\varepsilon_{r-1}(|S'|+1)=\\varepsilon_{r-1}|V(J_2)|$ because $|S'|+1>|S|/2+1\\ge (1-\\varepsilon_r)m/2$. So the first outcome of the induction hypothesis is false for $J_2$.",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "ih",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Apply the induction hypothesis to $J_2$ with parameter $r-1$. If outcome 2 holds there, then $J_2$ contains an induced $P_{r-1}$ starting at $v_2$, and prefixing this path with $v_1$ gives an induced $P_r$ in $J$ starting at $v_1$ because $v_1$ is adjacent to $v_2$ and has no neighbours in $S'$. If outcome 3 holds there, then $\\overline{J_2}$ contains a biclique of size at least $c_{r-1}|V(J_2)|\\ge c_{r-1}(1-\\varepsilon_r)m/2\\ge c_rm$, and the same biclique lies in $\\overline J$. Thus, whenever outcome 1 fails for $J$, either outcome 2 or outcome 3 follows. This completes the induction and proves the connected-case claim.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.2",
+            "ih",
+            "algebra",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $\\varepsilon:=\\varepsilon_k/8$. Because $P_k$ is the standard $k$-vertex path, [L1] applied to $H=P_k$ yields a constant $\\delta>0$ such that every nonempty $P_k$-free graph has a vertex set of size at least $\\delta n$ whose self-density is at most $\\varepsilon$ or at least $1-\\varepsilon$.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Let $G$ be a graph with no induced $P_k$ and no induced $\\overline{P_k}$, and let $n:=|V(G)|\\ge 2$. If $G$ has a set of size at least $\\delta n$ and self-density at least $1-\\varepsilon$, apply the same argument to $\\overline G$: an induced $P_k$ in $\\overline G$ would be an induced $\\overline{P_k}$ in $G$, and an induced $\\overline{P_k}$ in $\\overline G$ would be an induced $P_k$ in $G$. So $\\overline G$ belongs to the same forbidden class. Replacing $G$ by $\\overline G$ if necessary, we may assume that $G$ has a set $S_0$ with $|S_0|\\ge \\delta n$ and self-density at most $\\varepsilon$.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "By [L2], the set $S_0$ contains a subset $S$ with $|S|\\ge |S_0|/2\\ge \\delta n/2$ such that $S$ is $4\\varepsilon$-sparse. By [F1], every vertex of $G[S]$ therefore has degree at most $4\\varepsilon|S|=\\varepsilon_k|S|/2$.",
+          "step": "8.1",
+          "inputs": [
+            "step 7.1",
+            "L2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "If every connected component of $G[S]$ has size at most $|S|/2$, then the same greedy argument as in step 4.1 partitions those components into anticomplete sets $A,B\\subseteq S$ with $|A|,|B|\\ge |S|/4\\ge \\delta n/8$. This is already a pure pair in $G$.",
+          "step": "9.1",
+          "inputs": [
+            "step 8.1",
+            "L3",
+            "choose",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-9-2",
+          "claim": "Otherwise $G[S]$ has a connected component $S'$ with $|S'|>|S|/2$. Every vertex of $G[S']$ has degree at most $\\varepsilon_k|S|/2<\\varepsilon_k|S'|$, and $G[S']$ is $P_k$-free because induced subgraphs preserve forbidden induced paths. Applying the connected-case claim from step 5.1 to the connected graph $G[S']$, outcome 1 is false by the degree bound and outcome 2 is false because $G[S']$ contains no induced $P_k$ at all. Hence outcome 3 holds, so $\\overline{G[S']}$ has a biclique with both sides of size at least $c_k|S'|\\ge c_k\\delta n/4$. Equivalently, $G$ has an anticomplete pair of that size.",
+          "step": "9.2",
+          "inputs": [
+            "step 5.1",
+            "step 8.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "Let $\\gamma_k:=\\min\\{\\delta/8,c_k\\delta/4\\}$. Steps 9.1 and 9.2 show that every graph with no induced $P_k$ or $\\overline{P_k}$ and at least two vertices contains a pure pair with both sides of size at least $\\gamma_k n$. By [L4], the class forbidding $P_k$ and $\\overline{P_k}$ has the strong Erdős–Hajnal property.",
+          "step": "10.1",
+          "inputs": [
+            "step 9.1",
+            "step 9.2",
+            "L4",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem fixes one integer k and one nontrivial graph class; no empty family or empty graph case is part of the claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter range starts at k >= 2, and the proof has no zero-denominator or zero-path-length branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The minimal admissible forbidden path is P2, so there is no k = 1 boundary to discharge."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 9.1 handles the degenerate outcome where the pruned set S breaks entirely into small connected components."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The auxiliary epsilon is chosen in the open interval (0, 1/2), and the excluded endpoint 1/2 is never used as a limiting case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 3.1, 4.2, 7.1, and 8.1 choose witness vertices, components, and the pruned sparse set from nonempty finite collections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is the existence of a strong Erdős-Hajnal constant, not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse equivalence is asserted for the path-antipath class."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier critical (score 13): this is the densest proof in the batch, combining the connected-case induction with sparse-set extraction. I confirmed and repaired one live citation defect: step 8.1 now cites def-c-sparse-and-c-restricted-vertex-set before turning the 4epsilon-sparse conclusion into a degree bound. I then rechecked the connected-case induction, the small-component anticomplete-pair branch, and the large-component recursion to outcome 3. No unrepaired defect remains on the current bytes."
+      }
+    },
+    "cor-path-and-antipath-free-graphs-have-the-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-path-and-antipath-free-graphs-have-the-strong-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "For every integer $k\\ge 2$, there exists a real constant $\\gamma_k>0$ such that\nevery finite graph $G$ with no induced $P_k$ and no induced $\\overline{P_k}$\nand with $|V(G)|\\ge 2$ contains disjoint sets $A,B\\subseteq V(G)$ with\n\n$$|A|\\ge \\gamma_k|V(G)|,\\qquad |B|\\ge \\gamma_k|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair. Equivalently, the hereditary class\nforbidding $P_k$ and $\\overline{P_k}$ has the strong Erdős–Hajnal property.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-strong-erdos-hajnal-property-implies-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every hereditary class of finite graphs with the strong Erdős–Hajnal property\nalso has the Erdős–Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The previous theorem gives the strong Erdős–Hajnal property for the hereditary class of graphs forbidding $P_k$ and $\\overline{P_k}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L2] to that class yields the Erdős–Hajnal property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary specializes a fixed k >= 2 and does not quantify over an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument is a two-theorem composition with no zero-valued branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter k is not allowed to drop to 1 in the statement being applied."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No structural collapse case remains once the strong theorem and the strong-to-weak implication are available."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter to check at an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no new choice; it only applies the two named input theorems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This corollary states a forward consequence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-path-and-antipath-free-graphs-have-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "For every integer $k\\ge 2$, every finite graph with no induced $P_k$ and no\ninduced $\\overline{P_k}$ has a clique or stable set of size at least a positive\npower of its order. Equivalently, the class forbidding $P_k$ and\n$\\overline{P_k}$ has the Erdős–Hajnal property.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the parameter choice $k=5$ in [L1] is exactly the class forbidding $P_5$ and $\\overline{P_5}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore graphs with no induced $P_5$ and no induced $\\overline{P_5}$ have the Erdős–Hajnal property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the concrete graph P5, so no empty-object branch can arise."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued parameter in this specialization step."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is about the five-vertex path, not a singleton or one-step boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nothing collapses structurally here; the argument is only the substitution k = 5."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is part of the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 selects the admissible parameter value k = 5."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example records one concrete consequence, not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-coleaf-of-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph and let $v\\in V(G)$. We say that $v$ is a\n**co-leaf** of $G$ if $v$ is a leaf of the complement graph $\\overline G$.\n\nEquivalently, $v$ is adjacent in $G$ to every vertex of $G$ except one. In\ndegree language,\n\n$$\\deg_G(v)=|V(G)|-2.$$\n\nThus a co-leaf is the complement-theoretic analogue of an ordinary leaf.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the complement $\\overline{P_5}$ has edges $13,14,15,24,25,35$. So vertices $1$ and $5$ each have degree $3=5-2$ in $\\overline{P_5}$, while vertices $2,3,4$ each have degree $2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 and [L1] show that $1$ and $5$ are co-leaves of $\\overline{P_5}$, and that $2,3,4$ are not. Since $1$ and $5$ are exactly the leaves of the path $P_5$, the co-leaves of $\\overline{P_5}$ are precisely the leaves of $P_5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked graph has five vertices, so there is no empty-graph branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The verification is a direct degree count and does not divide by or branch on zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-vertex graph is irrelevant to this fixed P5 computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 separates the two endpoint vertices from the three internal vertices by their exact complement degrees."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the path endpoints 1 and 5 as the only co-leaves."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification is completely explicit and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one concrete identification rather than a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate converse direction is part of the example."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-mixed-block-reachability-is-an-equivalence-relation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-purity-symmetry-and-complementation",
+          "source_section": "Statement",
+          "quote": "For disjoint vertex sets $A,B$ in a graph $G$:\n\n1. $(A,B)$ is complete, anticomplete, pure or mixed exactly when $(B,A)$ has the same property;\n2. complementation swaps complete pairs with anticomplete pairs; and\n3. complementation preserves pure pairs and mixed pairs.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reflexivity is immediate from [L2], because every block is related to itself.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $A\\,\\mathcal M\\,B$ by a mixed chain\n$$A=A_1,A_2,\\dots,A_m=B,$$\nthen [L1] makes the reversed chain\n$$B=A_m,A_{m-1},\\dots,A_1=A$$\nagain a mixed chain, so $B\\,\\mathcal M\\,A$. Thus $\\mathcal M$ is symmetric.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $A\\,\\mathcal M\\,B$ and $B\\,\\mathcal M\\,C$, then [L2] gives a mixed chain from $A$ to $B$ and another from $B$ to $C$. Concatenating them at $B$ yields a mixed chain from $A$ to $C$, so $A\\,\\mathcal M\\,C$. Thus $\\mathcal M$ is transitive.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\mathcal M$ is reflexive, symmetric, and transitive, hence an equivalence relation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A blockade has at least one nonempty block by definition, so the relation is never evaluated on an empty block set here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chain relation has no zero-valued parameter or symbolic denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is exactly the single-block self-relation case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 covers the degenerate length-zero chain already built into the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or ordered-boundary parameter appears in the equivalence-relation proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Symmetry and transitivity are proved by reversing and concatenating the given chains, not by choosing from an unspecified family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not an if-and-only-if statement; it verifies the three axioms of an equivalence relation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction separate from the three equivalence-relation clauses."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-quotient-blocks-preserve-connectedness-and-anticonnectedness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-connected-graph-and-connected-component",
+          "source_section": "Definition",
+          "quote": "Vertices $u$ and $v$ of a graph $G$ are **connected**, or **reachable from one\nanother**, when a path in $G$ has endpoints $u$ and $v$. Equivalently, a walk\njoins them, because [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]\nturns such a walk into a path.\n\nFor $v\\in V(G)$, its **connected component** is the induced subgraph on\n\n$$C_G(v):=\\{\\,u\\in V(G):u\\text{ is reachable from }v\\,\\}.$$\n\nA graph is **connected** when its vertex set is nonempty and every two vertices\nare reachable from one another. Thus the null graph is not connected. The\none-vertex graph is connected, since its vertex is joined to itself by the path\nof length $0$ from [[def-graph-walk-trail-path-and-cycle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-anticonnected-graph-and-anticonnected-component",
+          "source_section": "Definition",
+          "quote": "A graph $G$ is **anticonnected**, or **co-connected**, when its complement $\\overline G$ is connected ([[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).\n\nAn **anticonnected component**, or **anticomponent**, of $G$ is a vertex set $A\\subseteq V(G)$ that is the vertex set of a connected component of $\\overline G$. Equivalently, $G[A]$ is anticonnected and $A$ is inclusion-maximal with that property ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library convention, the null graph is not anticonnected, while a one-vertex graph is anticonnected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-complement-commutes-with-induced-subgraphs",
+          "source_section": "Statement",
+          "quote": "For every finite graph $G$ and every $W\\subseteq V(G)$,\n\n$$\\overline{G[W]}=\\overline G[W]$$\n\nas graphs on vertex set $W$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume first that every original block contained in $D$ is connected. Fix one such block $A_0\\subseteq D$. Let $B\\subseteq D$ be any other member block. By [L1], choose a mixed chain $$A_0=B_0,B_1,\\dots,B_m=B$$ inside $D$. We prove by induction on $m$ that $G[B_0\\cup\\cdots\\cup B_m]$ is connected. The case $m=0$ is immediate because $B_0=A_0$ is connected. If $m>0$, then the induction hypothesis gives connectedness of $G[B_0\\cup\\cdots\\cup B_{m-1}]$, the block $B_m$ is connected by assumption, and [L2] gives a cross-edge between $B_{m-1}$ and $B_m$ because that pair is mixed. Hence the union up to $B_m$ is connected. Since $B$ was arbitrary, every member block of $D$ lies in the same connected component of $G[D]$, and therefore $G[D]$ is connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Now assume every original block contained in $D$ is anticonnected. By [L3] and [L4], each member block induces a connected subgraph of $\\overline G$. If two member blocks are consecutive on a mixed chain in $D$, then [L2] gives a cross-nonedge between them in $G$, hence a cross-edge in $\\overline G$. Repeating the argument of step 1.1 inside $\\overline G$ shows that $\\overline G[D]$ is connected. By [L3], this means that $G[D]$ is anticonnected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the connected and anticonnected conclusions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A quotient block is a union of nonempty original blocks, so the empty-set case does not arise."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sized parameter or denominator enters the connectedness argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the base case m=0 for the fixed member block A0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles the anticonnected branch by passing to the complement graph."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or ordered extremum to inspect."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses a mixed chain from the fixed block A0 to an arbitrary member block B inside D."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Both clauses are preservation implications, not biconditional characterizations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from connected quotient block back to connected member blocks is stated."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier critical (score 11): the refuter correctly found that the old proof assumed a false global ordering of the member blocks. I repaired the lemma by replacing that claim with the exact mixed-chain consequence of the quotient definition: fix a base member block, connect any other member block by a mixed chain, and build connectedness along the chain; then repeat the argument in the complement for anticonnectedness. The current proof matches the cited statements exactly. No unrepaired defect remains."
+      }
+    },
+    "lem-blocks-from-different-mixed-block-classes-form-pure-pairs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose for contradiction that $(A,B)$ is mixed. Then [L2] gives a mixed chain of length one from $A$ to $B$, so $A\\,\\mathcal M\\,B$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], $\\mathcal M$-related blocks lie in the same quotient block of $\\mathcal L/\\mathcal M$. This contradicts the hypothesis that $A$ and $B$ lie in different quotient blocks.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $(A,B)$ is not mixed, hence it is pure.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma concerns two actual original blocks of a blockade, so neither side is empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero-chain length is the issue; the contradiction is purely relational."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The argument does not depend on singleton cardinalities, only on whether a pair of blocks is mixed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats the extremal length-one mixed chain, which is already enough to force the contradiction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in this quotient-separation lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct contradiction from the given pair of blocks and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way purity consequence of lying in different quotient classes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim that every pure pair must lie in different quotient classes."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the risk is confusing mixedness with reachability. I checked that step 1.1 uses the definition correctly: a mixed pair already gives a length-one mixed chain, so if A and B were mixed they would be M-related and therefore lie in the same quotient block. Step 3.1 then concludes purity by exclusion of mixedness. No unrepaired defect remains."
+      }
+    },
+    "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose original blocks $B_1,B_2\\subseteq D$ such that $u$ is complete to $B_1$ and anticomplete to $B_2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], choose a mixed block chain $B_1=A_{r_1},A_{r_2},\\dots,A_{r_m}=B_2$ inside $D$. Since $u$ is complete to the first block and anticomplete to the last, there is a first index $j<m$ at which the relation changes. Then $u$ is complete to $A_{r_j}$ and anticomplete to $A_{r_{j+1}}$, and the two blocks are mixed because they are consecutive on the chain.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking $A_1:=A_{r_j}$ and $A_2:=A_{r_{j+1}}$ gives the required pair of mixed original blocks in $D$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A vertex mixed on D forces D to contain both an adjacent and a nonadjacent witness, so the quotient block cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no zero-valued quantity or division to check in the chain argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "If D had only one member block, the hypotheses 'mixed on D' and 'pure on each member block' would be incompatible."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 uses the first switch point along the mixed chain, which is the relevant collapsed boundary of the argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof has no interval endpoint or ordered-boundary parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 choose the two witness blocks and then the first index where the adjacency type changes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states existence of witness blocks, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction from witness blocks back to the original hypothesis is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): this proof depends on finding the first adjacency change along a mixed chain inside one quotient block. I checked that step 1.1 obtains member blocks B1 and B2 with opposite adjacency to u, step 2.1 chooses a valid mixed chain between them, and the first change along that chain gives consecutive mixed blocks with the required complete/anticomplete pattern. No unrepaired defect remains."
+      }
+    },
+    "lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-blocks-from-different-mixed-block-classes-form-pure-pairs",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be blocks of a blockade $\\mathcal L$. If $A$ and $B$ lie in\ndifferent blocks of the quotient blockade $\\mathcal L/\\mathcal M$, then\n$(A,B)$ is a pure pair.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a block of the quotient blockade $\\mathcal L/\\mathcal M$, and let\n$u\\notin D$ be a vertex. Suppose that $u$ is mixed on $D$ but is pure to every\noriginal block of $\\mathcal L$ contained in $D$. Then there are two original\nblocks $A_1,A_2$ of $\\mathcal L$, both contained in $D$, such that\n\n1. $A_1$ and $A_2$ are mixed; and\n2. $u$ is complete to $A_1$ and anticomplete to $A_2$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $D_1$ and $D_2$ are mixed as quotient blocks, there is a vertex in one of them that is mixed on the other. Hypothesis 3 excludes the possibility that a vertex of $D_1$ is mixed on $D_2$, so choose a vertex $b_2\\in D_2$ that is mixed on $D_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The quotient blocks $D_1$ and $D_2$ are distinct. Therefore [L1] implies that every original block of $\\mathcal L$ contained in $D_2$ is pure to every original block of $\\mathcal L$ contained in $D_1$. In particular, if $B$ is the original block of $\\mathcal L$ containing $b_2$, then $b_2$ is pure to every original block contained in $D_1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now $b_2$ is outside $D_1$, is mixed on $D_1$ by step 1.1, and is pure to every original block inside $D_1$ by step 2.1. Applying [L2], choose mixed original blocks $A_1,A_2\\subseteq D_1$ such that $b_2$ is complete to $A_1$ and anticomplete to $A_2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "choose",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set $x':=y$, $y':=u$, and $u':=b_2$. Because $y$ is complete to $D_1\\cup D_2$, it is complete to $A_1\\cup A_2$ and adjacent to $b_2$. Because $u$ is complete to $D_1$ and anticomplete to $D_2$, it is complete to $A_1\\cup A_2$ and nonadjacent to $b_2$. Hypothesis 2 gives $u\\in N(x)\\setminus N(y)$, so $y$ and $u$ are nonadjacent. Therefore $u'=b_2\\in N(x')\\setminus N(y')$, while $u'$ is complete to $A_1$ and anticomplete to $A_2$ by step 3.1. This is exactly the required witness.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two mixed quotient blocks and the three outside vertices already force all participating sets to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof contains no zero-threshold or denominator branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The conclusion already requires two mixed member blocks inside D1, so the one-member-block case is excluded by the hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 resolves the orientation issue by using hypothesis 3 to force the mixed vertex to come from D2 rather than D1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This descent lemma has no interval endpoint or extremal parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1 choose the mixed vertex b2 and then the two member blocks A1 and A2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence transfer from quotient level to member blocks, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse lift from a member-block witness back to the quotient hypotheses is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the proof must use the repaired quotient-block lemma and the purity lemma without slipping from existence to an unsupported witness choice. I checked that step 1.1 chooses b_2 mixed on D_1, step 3.1 applies the opposite-adjacency lemma inside D_1, and step 4.1 constructs x'=y, y'=u, u'=b_2 with the required adjacency pattern from the current hypotheses. No unrepaired defect remains."
+      }
+    },
+    "cex-mixedness-of-blocks-is-not-transitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The pair $(A,B)$ is mixed: it has edges $a_1b_1$ and $a_2b_2$, but also nonedges $a_1b_2$ and $a_2b_1$. The same calculation shows that $(B,C)$ is mixed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By construction there are no edges between $A$ and $C$, so $(A,C)$ is anticomplete and therefore not mixed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus mixedness can hold for $(A,B)$ and $(B,C)$ while failing for $(A,C)$. This is why [L2] passes to the reachability closure $\\mathcal M$ rather than treating mixedness itself as an equivalence relation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses three explicit two-vertex blocks, so no empty block case is present."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is varied in this finite witness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Singleton blocks cannot be mixed, so the witness necessarily lives beyond the one-vertex-per-block regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 uses the extreme anticomplete pair (A, C) to kill the would-be transitivity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness is combinatorial and has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All vertices and edges are written down explicitly; there is no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A counterexample refutes a forward implication rather than proving an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is part of the false claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-mixed-chain-collapses-to-one-quotient-block": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-mixed-block-reachability-is-an-equivalence-relation",
+          "source_section": "Statement",
+          "quote": "For every blockade, the mixed-block reachability relation $\\mathcal M$ is an\nequivalence relation on its set of blocks.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $(A,B)$ and $(B,C)$ are mixed, there is a mixed chain from $A$ to $C$ through $B$. Thus $A$, $B$, and $C$ lie in the same $\\mathcal M$-class.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "No pair involving $D$ is mixed, so there is no mixed chain from $D$ to any of $A$, $B$, or $C$. Therefore $D$ lies in a different $\\mathcal M$-class.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the quotient blockade has one block equal to the union $A\\cup B\\cup C$ of the first class and one block equal to $D$ from the second class.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four named nonempty blocks, so there is no empty-class branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is being pushed to a boundary in this computation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example computes two quotient classes, not a singleton quotient or one-block blockade."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 isolates D as the lone class outside the mixed chain, which is the collapsed side of the quotient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter to test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The quotient classes are read off the fixed mixed/nonmixed relations; no arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a worked example of one quotient computation, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse criterion is being claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the risk is whether the stated mixed and pure pairs really determine the quotient classes. I checked that the mixed edges A-B and B-C put A, B, and C in one M-class, while every pair involving D is pure so D cannot join that class. Step 2.1 then identifies the quotient blocks exactly as A union B union C and D. No unrepaired defect remains."
+      }
+    },
+    "ex-a-vertex-can-be-mixed-on-a-quotient-block-while-pure-on-each-member-block": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-mixed-block-reachability-relation-on-a-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade in a finite graph $G$. Define a\nrelation $\\mathcal M$ on the set of blocks of $\\mathcal L$ by declaring\n$L_i\\,\\mathcal M\\,L_j$ if either $i=j$ or there is a sequence of blocks\n\n$$L_i=L_{r_1},L_{r_2},\\dots,L_{r_m}=L_j$$\n\nsuch that every consecutive pair $L_{r_t},L_{r_{t+1}}$ is mixed in the sense\nof [[def-edges-between-sets-and-pure-mixed-pairs]].\n\nThus two blocks are $\\mathcal M$-related exactly when one can move from one to\nthe other through a chain of mixed block pairs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a block of the quotient blockade $\\mathcal L/\\mathcal M$, and let\n$u\\notin D$ be a vertex. Suppose that $u$ is mixed on $D$ but is pure to every\noriginal block of $\\mathcal L$ contained in $D$. Then there are two original\nblocks $A_1,A_2$ of $\\mathcal L$, both contained in $D$, such that\n\n1. $A_1$ and $A_2$ are mixed; and\n2. $u$ is complete to $A_1$ and anticomplete to $A_2$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $A_1$ and $A_2$ are mixed, [L1] places them in the same mixed-reachability class. They are the only blocks of $\\mathcal L$, so their class has union $D=A_1\\cup A_2$, the unique quotient block.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vertex $u$ is adjacent to every vertex of $A_1$ and to no vertex of $A_2$. Therefore $u$ is neither complete nor anticomplete to $D$, so $u$ is mixed on $D$. At the same time it is pure to $A_1$ and pure to $A_2$ individually.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is exactly the phenomenon isolated by [L2]: the mixing appears only after passing to the quotient union.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The quotient block D is the explicit union of two named mixed member blocks, so emptiness never occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This verification uses only explicit adjacency patterns, not a zero threshold."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The phenomenon requires at least two member blocks inside D; with one member block the hypotheses would collapse."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 is precisely the union-versus-member collapse: u is mixed on D even though it is pure on A1 and on A2 separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or extremal numeric boundary is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is fully explicit and does not choose from an unspecified family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item exhibits one concrete configuration rather than an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse theorem being asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the example must really exhibit mixing only after unioning the member blocks. I checked that A_1 and A_2 lie in one quotient block, that u is complete to A_1 and anticomplete to A_2, and therefore that u is neither complete nor anticomplete to the union D while remaining pure on each member block separately. The current verification matches the stated phenomenon exactly. No unrepaired defect remains."
+      }
+    },
+    "ex-the-quotient-witness-reduction-in-a-four-block-configuration": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quotient-blockade-by-mixed-block-reachability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal L=(L_1,\\dots,L_n)$ be a blockade, and let $\\mathcal M$ be its\nmixed-block reachability relation. The **quotient blockade**\n$\\mathcal L/\\mathcal M$ is obtained by replacing each $\\mathcal M$-equivalence\nclass of original blocks by its union.\n\nConcretely, if $\\mathcal C_1,\\dots,\\mathcal C_t$ are the $\\mathcal M$-classes,\nordered by the least original index of a block they contain, then\n\n$$\\mathcal L/\\mathcal M=(D_1,\\dots,D_t),\\qquad D_i:=\\bigcup_{L\\in\\mathcal C_i}L.$$\n\nEach $D_i$ is called a **quotient block**. Because the original blocks are\npairwise disjoint and each equivalence class is nonempty, the quotient blocks\nare again pairwise disjoint and nonempty.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ be a blockade in a graph $G$, and suppose that every block of\n$\\mathcal L$ is connected or every block is anticonnected. Let $D_1,D_2$ be\ndistinct mixed blocks of the quotient blockade $\\mathcal L/\\mathcal M$. Assume\nthere are vertices $x,y,u\\notin D_1\\cup D_2$ such that:\n\n1. $x$ and $y$ are nonadjacent and both are complete to $D_1\\cup D_2$;\n2. $u\\in N(x)\\setminus N(y)$, with $u$ complete to $D_1$ and anticomplete to\n   $D_2$; and\n3. no vertex of $D_1$ is mixed on $D_2$.\n\nThen there are mixed original blocks $A_1,A_2$ of $\\mathcal L$, both contained\nin $D_1$, and vertices $x',y',u'\\notin A_1\\cup A_2$ such that:\n\n1. $x'$ and $y'$ are nonadjacent and both are complete to $A_1\\cup A_2$; and\n2. $u'\\in N(x')\\setminus N(y')$, with $u'$ complete to $A_1$ and anticomplete\n   to $A_2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By item 2 of the configuration and [L1], the two original blocks $A_1,A_2$ form one quotient block $D_1=A_1\\cup A_2$, while $D_2=B$ is the other quotient block. Because $B$ is complete to $A_1$ and anticomplete to $A_2$, the quotient blocks $D_1$ and $D_2$ are mixed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Item 1 of the configuration says that every original block of the blockade is connected, so the connectivity hypothesis of [L2] holds. No vertex of $D_1$ is mixed on $D_2$: every vertex of $A_1$ is complete to $B$, and every vertex of $A_2$ is anticomplete to $B$. The outside vertices satisfy the remaining hypotheses of [L2]: $x$ and $y$ are nonadjacent and complete to $D_1\\cup D_2$, while $u\\in N(x)\\setminus N(y)$ is complete to $D_1$ and anticomplete to $D_2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [L2] therefore yields mixed original blocks $A_1,A_2$ inside $D_1$ and vertices $x',y',u'$ outside $A_1\\cup A_2$ with the required adjacency pattern. Thus the quotient-level witness has been pushed down to a witness on the original mixed pair inside $D_1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses explicit nonempty blocks A1, A2, and B together with three outside vertices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The verification is finite and discrete, with no zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The reduction needs two member blocks inside D1 and a nonempty block B, so a one-block or one-vertex boundary does not apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 verifies the asymmetric no-mixing-on-D2 hypothesis in the smallest concrete configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting parameter appears in this worked witness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 applies the descent lemma using a witness vertex from the nonempty block B."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example checks one application of the descent lemma, not an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstruction is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the reader and refuter both found live defects here, and Harvey found one more. I verified the repaired title and Given line now match the actual three-block setup, I added the missing hypothesis that the three original blocks are connected so the descent lemma is actually applicable, and I removed the old overclaim about where the descended witness lies. On the current bytes, step 2.1 supplies every lemma hypothesis and step 3.1 claims only the lemma's existential conclusion. No unrepaired defect remains."
+      }
+    },
+    "thm-erdos-hajnal-pach-pure-pair-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-edges-between-sets-and-pure-mixed-pairs",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph and let $A,B\\subseteq V(G)$ be disjoint. An **edge between $A$ and $B$** is an edge $ab$ with $a\\in A$ and $b\\in B$.\n\nThe pair $(A,B)$ is:\n\n- **complete** when every $a\\in A$ is adjacent to every $b\\in B$;\n- **anticomplete** when no $a\\in A$ is adjacent to any $b\\in B$;\n- **pure** when it is complete or anticomplete; and\n- **mixed** when it is neither complete nor anticomplete.\n\nAdjacency is the symmetric edge relation of $G$ ([[def-finite-simple-graph]], [[def-graph-adjacency-incidence-neighbourhood-and-degree]]). If $A=\\varnothing$ or $B=\\varnothing$, the pair is both complete and anticomplete, hence pure and not mixed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose $\\delta_H>0$ and disjoint sets $A,B\\subseteq V(G)$ with $$|A|\\ge |V(G)|^{\\delta_H},\\qquad |B|\\ge |V(G)|^{\\delta_H},$$ such that $A$ is complete or anticomplete to $B$. Set $c_H:=\\delta_H$. Then $|A|$ and $|B|$ are certainly at least $\\lfloor |V(G)|^{c_H}\\rfloor$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the pair $(A,B)$ is pure. Therefore the constant $c_H$ has the required property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is only for graphs with at least two vertices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator enters the theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes the one-vertex case by requiring |V(G)|>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 converts the source theorem’s complete-or-anticomplete alternative into pure-pair language."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting process occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the constant c_H and the witness sets A and B."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose the constant $\\epsilon_H>0$ attached to the forest $H$. For the given graph $G$, the same source theorem gives at least one of the two alternatives in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\epsilon_H$ has the required property for all finite $H$-free graphs with at least two vertices.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is only for graphs with at least two vertices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem has no zero-valued parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes the one-vertex case by requiring |V(G)|>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 records the source branch where no linear-degree vertex appears and an anticomplete pair is produced instead."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting argument appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the constant epsilon_H from the source theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives an either-or conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 6): this new item is a source-backed endpoint theorem, so the main risk is silent widening beyond the cited statement. I checked the current statement against statement 1.4 of Pure pairs I, and I corrected step 1.1 so it now says the source gives at least one of the two alternatives rather than exactly one. The current item now matches the sourced H-free, |V(G)|>=2, and degree-or-anticomplete-pair conclusion with no stronger claim. No unrepaired defect remains."
+      }
+    },
+    "thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "source_section": "Statement",
+          "quote": "For every family $\\mathcal F$ of finite graphs, the class of all $\\mathcal F$-free finite graphs is hereditary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-strong-erdos-hajnal-property-for-a-hereditary-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs. We say that\n$\\mathcal C$ has the **strong Erdős–Hajnal property** if there exists a real\nconstant $\\epsilon>0$ such that every graph $G\\in\\mathcal C$ with\n$|V(G)|\\ge 2$ contains disjoint vertex sets $A,B\\subseteq V(G)$ satisfying\n\n$$|A|\\ge \\epsilon|V(G)|,\\qquad |B|\\ge \\epsilon|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair in the sense of\n[[def-edges-between-sets-and-pure-mixed-pairs]].\n\nEquivalently, every nontrivial graph in the class contains a complete or\nanticomplete pair whose two sides both have linear size.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal C_H$ be the class of finite graphs with no induced $H$ and no induced $\\overline H$. By [L1], this is a hereditary class. By [F1], some constant $\\epsilon_H>0$ works for every graph $G\\in\\mathcal C_H$ with $|V(G)|\\ge 2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], step 1.1 is exactly the assertion that $\\mathcal C_H$ has the strong Erdős-Hajnal property. This is equivalent to the displayed graph-level formulation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The graph-level formulation is only for graphs with at least two vertices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator occurs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes one-vertex graphs in the linear-pair formulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the graph-level linear pure-pair statement with the class-level strong Erdős-Hajnal formulation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the constant epsilon_H for the hereditary class C_H."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 reads the graph-level statement of step 1.1 into the strong Erdős-Hajnal definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 reads the strong Erdős-Hajnal definition back into the displayed graph-level formulation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 5): the risk is confusing the graph-level source theorem with the class-level strong Erdős-Hajnal definition. I checked the current statement against statement 1.2 of Pure pairs I and the cited hereditary-class definition. Step 1.1 sets the H-and-complement-free class C_H with the exact sourced linear pure-pair conclusion, and step 2.1 matches that data to def-strong-erdos-hajnal-property-for-a-hereditary-class. No unrepaired defect remains."
+      }
+    },
+    "cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "For every forest $H$, there exists a real constant $\\epsilon_H>0$ such that\nevery finite graph $G$ with no induced $H$ and no induced $\\overline{H}$ and\nwith $|V(G)|\\ge 2$ contains disjoint sets $A,B\\subseteq V(G)$ satisfying\n\n$$|A|\\ge \\epsilon_H|V(G)|,\\qquad |B|\\ge \\epsilon_H|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair. Equivalently, the hereditary class of\ngraphs forbidding $H$ and $\\overline{H}$ has the strong Erdős-Hajnal property.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "source_section": "Statement",
+          "quote": "For every family $\\mathcal F$ of finite graphs, the class of all $\\mathcal F$-free finite graphs is hereditary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-strong-erdos-hajnal-property-implies-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Every hereditary class of finite graphs with the strong Erdős–Hajnal property\nalso has the Erdős–Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathcal C_H$ be the class of finite graphs with no induced $H$ and no induced $\\overline H$. By [L2], this is a hereditary class, and by [L1] it has the strong Erdős-Hajnal property.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L3] to $\\mathcal C_H$ gives the Erdős-Hajnal property for that class. This is the claimed graph-level statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The operative class-level Erdős-Hajnal definition is for nonempty graphs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 applies the class Erdős-Hajnal property to every nonempty graph in C_H, including order 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 isolate the hereditary class C_H and transfer the strong property to the weak one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint or limiting process in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The corollary transfers a class property and makes no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 converts the class-level conclusion into the displayed graph-level Erdős-Hajnal statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the graph-level wording with the class property obtained for C_H."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-leaf-deletion-preserves-virality-of-a-finite-family": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the two modified families $\\mathcal F_1$ and $\\mathcal F_2$ by deleting the chosen leaves from $H_1$ and $H_2$. The hypothesis says that both families are viral.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F1] to the data of step 1.1 gives that $\\mathcal F$ is viral.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes two members H1 and H2 of the family, so the family is already nonempty in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof only replaces family members by leaf-deleted graphs; it introduces no zero-valued quantity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A graph with a leaf has at least two vertices, so the one-vertex case does not occur."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 still forms both modified families even if H1=H2 or the two modified families coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is purely combinatorial on finite families, with no interval or limit parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 forms the two modified families from the chosen leaves v1 and v2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way virality preservation statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse virality implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-coleaf-of-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph and let $v\\in V(G)$. We say that $v$ is a\n**co-leaf** of $G$ if $v$ is a leaf of the complement graph $\\overline G$.\n\nEquivalently, $v$ is adjacent in $G$ to every vertex of $G$ except one. In\ndegree language,\n\n$$\\deg_G(v)=|V(G)|-2.$$\n\nThus a co-leaf is the complement-theoretic analogue of an ordinary leaf.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-complement-commutes-with-induced-subgraphs",
+          "source_section": "Statement",
+          "quote": "For every finite graph $G$ and every $W\\subseteq V(G)$,\n\n$$\\overline{G[W]}=\\overline G[W]$$\n\nas graphs on vertex set $W$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] with $F_1:=H_1$ and $F_2:=\\overline{H_2}$. The chosen vertex $v$ is a leaf of $F_1$ by hypothesis, and [L1] makes $w$ a leaf of $F_2$. By [L2], the second modified family in [F1] is exactly $$\\{H_2'\\}\\cup(\\mathcal F\\setminus\\{H_2\\})=\\mathcal F_2,$$ while the first modified family is exactly $\\mathcal F_1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the hypothesis says that $\\mathcal F_1$ and $\\mathcal F_2$ are both viral, [F1] yields that $\\mathcal F$ is viral.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes two family members together with a leaf and a co-leaf, so the family boundary is nonempty in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Only complement and deletion operations appear; there is no zero-parameter branch to inspect."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Graphs with a leaf or co-leaf have at least two vertices, so no one-vertex branch arises."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 applies the source theorem even when the same family member supplies both roles after complementing one side."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite-family replacement and complementation, so no endpoint analysis is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses the chosen leaf v and co-leaf w to identify the two modified families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way virality preservation result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. Let $H_1\\in\\mathcal F$\nhave a leaf $v$, and let $H_2\\in\\mathcal F$ have a co-leaf $w$. Write\n$H_1':=H_1\\setminus\\{v\\}$ and $H_2':=H_2\\setminus\\{w\\}$. If\n\n$$\\mathcal F_1:=\\{H_1'\\}\\cup(\\mathcal F\\setminus\\{H_1\\})$$\n\nand\n\n$$\\mathcal F_2:=\\{H_2'\\}\\cup(\\mathcal F\\setminus\\{H_2\\})$$\n\nare both viral, then $\\mathcal F$ is viral.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of graphs. The following are equivalent:\n\n1. $\\mathcal F$ has the Erdős–Hajnal property.\n2. $\\mathcal F$ has the polynomial Rödl property.\n3. $\\mathcal F$ is viral.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the hypothesis that $\\mathcal F_1$ and $\\mathcal F_2$ have the Erdős-Hajnal property implies that both families are viral.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] gives that $\\mathcal F$ is viral.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A second application of [L2] turns virality of $\\mathcal F$ back into the Erdős-Hajnal property.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes two modified families F1 and F2, so the family data are already nonempty in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The corollary transfers previously proved family properties and introduces no zero-valued quantity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof is a family-level transfer argument, not a separate one-vertex graph computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 still handles the case where the two modified families coincide, because the equivalence theorem applies to each one separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting process appears in this transfer argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The corollary transfers existing properties and makes no new witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way preservation corollary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse preservation statement is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-forest-theorem-specialized-to-the-four-vertex-path": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "For every forest $H$, there exists a real constant $\\epsilon_H>0$ such that\nevery finite graph $G$ with no induced $H$ and no induced $\\overline{H}$ and\nwith $|V(G)|\\ge 2$ contains disjoint sets $A,B\\subseteq V(G)$ satisfying\n\n$$|A|\\ge \\epsilon_H|V(G)|,\\qquad |B|\\ge \\epsilon_H|V(G)|,$$\n\nand such that $(A,B)$ is a pure pair. Equivalently, the hereditary class of\ngraphs forbidding $H$ and $\\overline{H}$ has the strong Erdős-Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The graph $P_4$ is a tree, hence a forest. Its complement has edges $\\{1,3\\}$, $\\{1,4\\}$, and $\\{2,4\\}$, which form the path $3-1-4-2$. So $\\overline{P_4}\\cong P_4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] with $H=P_4$ therefore gives a linear pure pair in every graph with no induced $P_4$ and no induced $\\overline{P_4}$. By step 1.1, that is exactly the class of $P_4$-free graphs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns the strong Erdős-Hajnal conclusion for nontrivial P4-free graphs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The specialization uses only the fixed graph P4 and no zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The strong Erdős-Hajnal formulation only concerns graphs with at least two vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 verifies the special self-complementary shape of P4."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof compares P4 with its complement directly; there is no endpoint or limit to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The specialization is explicit and uses no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example applies a theorem and does not assert an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-leaf-coleaf-corollary-recovers-the-five-vertex-path-case-from-the-four-vertex-path-case": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a finite family of finite graphs. Let $H_1\\in\\mathcal F$\nhave a leaf $v$, and let $H_2\\in\\mathcal F$ have a co-leaf $w$. Write\n$H_1':=H_1\\setminus\\{v\\}$ and $H_2':=H_2\\setminus\\{w\\}$. If\n\n$$\\mathcal F_1:=\\{H_1'\\}\\cup(\\mathcal F\\setminus\\{H_1\\})$$\n\nand\n\n$$\\mathcal F_2:=\\{H_2'\\}\\cup(\\mathcal F\\setminus\\{H_2\\})$$\n\nhave the Erdős-Hajnal property, then $\\mathcal F$ has the Erdős-Hajnal\nproperty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-erdos-hajnal-property-passes-to-hereditary-subclasses",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal D\\subseteq\\mathcal C$ are hereditary graph classes, then every Erdős–Hajnal constant for $\\mathcal C$ is one for $\\mathcal D$. In particular, the Erdős–Hajnal property passes from $\\mathcal C$ to $\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property",
+          "source_section": "Statement",
+          "quote": "For every forest $H$, every finite graph with no induced $H$ and no induced\n$\\overline{H}$ has a clique or a stable set of size at least a positive power\nof its order. Equivalently, the hereditary class forbidding $H$ and\n$\\overline{H}$ has the Erdős-Hajnal property.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-coleaf-of-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph and let $v\\in V(G)$. We say that $v$ is a\n**co-leaf** of $G$ if $v$ is a leaf of the complement graph $\\overline G$.\n\nEquivalently, $v$ is adjacent in $G$ to every vertex of $G$ except one. In\ndegree language,\n\n$$\\deg_G(v)=|V(G)|-2.$$\n\nThus a co-leaf is the complement-theoretic analogue of an ordinary leaf.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "source_section": "Statement",
+          "quote": "For every family $\\mathcal F$ of finite graphs, the class of all $\\mathcal F$-free finite graphs is hereditary.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The graph $P_5$ has leaf $1$. By [L5], the complement $\\overline{P_5}$ has edges $13$, $14$, $15$, $24$, $25$, and $35$, so vertex $1$ has degree $3=5-2$. By [L4], vertex $1$ is therefore a co-leaf of $\\overline{P_5}$. Delete that leaf of $P_5$ and that co-leaf of $\\overline{P_5}$. The resulting smaller families are $$\\mathcal F_1=\\{P_4,\\overline{P_5}\\}\\qquad\\text{and}\\qquad \\mathcal F_2=\\{P_5,\\overline{P_4}\\}.$$ From the path edges $12$, $23$, and $34$, [L5] gives complement edges $13$, $14$, and $24$, which form the path $3$-$1$-$4$-$2$. Thus $\\overline{P_4}\\cong P_4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The path $P_4$ is a forest, and step 1.1 shows that $\\overline{P_4}\\cong P_4$. Therefore [L3] applied with $H=P_4$ gives the Erdős-Hajnal property for the hereditary class of $P_4$-free graphs. By [L6], the classes defined by forbidding $\\{P_4,\\overline{P_5}\\}$ and $\\{P_5,\\overline{P_4}\\}$ are hereditary. Each is a subclass of the $P_4$-free class, using step 1.1 for the second family. Hence [L2] gives the Erdős-Hajnal property for both $\\mathcal F_1$ and $\\mathcal F_2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [L1] to the family $\\mathcal F=\\{P_5,\\overline{P_5}\\}$ and the two smaller families from steps 1.1 and 2.1 yields the Erdős-Hajnal property for graphs with no induced $P_5$ and no induced $\\overline{P_5}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the concrete family {P5, overline(P5)} and its two smaller relatives."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument is about the fixed paths P4 and P5 rather than a zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns five-vertex and four-vertex paths, so no one-vertex branch arises."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 handles the two smaller families by placing both inside the hereditary P4-free class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This recovery uses finite forbidden-family inclusions only, not an interval or limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses vertex 1 as the deleted leaf of P5 and the deleted co-leaf of overline(P5)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way recovery of the P5 case from the P4 case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse recovery claim is made."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Codex Alpha 6b-d",
+        "notes": "Tier high (score 7): the risk was relying on ai-generated dependencies instead of published or literature-derived support. I repaired the example so it now proves the co-leaf fact in overline(P5) and the self-complementarity of P4 inline, then uses the published forest corollary and hereditary-subclass transfer. I rechecked both smaller families and the final application of the leaf/co-leaf corollary. No unrepaired defect remains."
+      }
+    }
+  }
+}

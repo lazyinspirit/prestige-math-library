@@ -1,0 +1,280 @@
+[
+  {
+    "order": 78.5,
+    "id": "pell-equations-and-generalized-pell-orbits",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Pell Equations and Generalized Pell Orbits",
+    "companion": "pell-equations-and-generalized-pell-orbits-examples",
+    "requires": [
+      "regular-continued-fractions-and-diophantine-approximation-examples"
+    ],
+    "items": [
+      {
+        "id": "def-pell-equation",
+        "kind": "definition",
+        "title": "Pell's equation",
+        "deps": []
+      },
+      {
+        "id": "def-generalized-and-negative-pell-equations",
+        "kind": "definition",
+        "title": "Generalized and negative Pell equations",
+        "deps": [
+          "def-pell-equation"
+        ]
+      },
+      {
+        "id": "def-norm-on-integer-square-root-order",
+        "kind": "definition",
+        "title": "The norm on the explicit order $\\mathbb{Z}[\\sqrt{D}]$",
+        "deps": []
+      },
+      {
+        "id": "lem-pell-norm-multiplication",
+        "kind": "lemma",
+        "title": "The Pell norm is multiplicative",
+        "strategy": "Expand products in the explicit coordinate model $x + y\\sqrt{D}$ and compare coefficients. The same expansion gives the star-product formula on coordinate pairs and proves norm multiplicativity without importing abstract field norm machinery.",
+        "deps": [
+          "def-norm-on-integer-square-root-order"
+        ]
+      },
+      {
+        "id": "prop-integral-pell-solutions-form-a-group",
+        "kind": "proposition",
+        "title": "Integral Pell solutions form an abelian group",
+        "strategy": "Identify a solution of $x^2 - Dy^2 = 1$ with $x + y\\sqrt{D}$. Closure and inverses come from the explicit multiplicative norm law, while commutativity is inherited from the coordinate multiplication formula in $\\mathbb{Z}[\\sqrt{D}]$.",
+        "deps": [
+          "def-pell-equation",
+          "def-norm-on-integer-square-root-order",
+          "lem-pell-norm-multiplication"
+        ]
+      },
+      {
+        "id": "lem-square-root-continued-fraction-state-recurrence",
+        "kind": "lemma",
+        "title": "The complete quotients of $\\sqrt{D}$ satisfy the $P_n,Q_n$ recurrence",
+        "strategy": "Start from a normalized state $\\alpha_n = (\\sqrt{D} + P_n)/Q_n$ with $Q_n > 0$ and $Q_n \\mid D - P_n^2$. Taking $a_n = \\lfloor \\alpha_n \\rfloor$ and rationalizing $1/(\\alpha_n-a_n)$ yields the next state $(P_{n+1}, Q_{n+1})$, while the positivity and divisibility conditions make the normalized state unique.",
+        "deps": [
+          "def-continued-fraction-complete-quotients"
+        ]
+      },
+      {
+        "id": "lem-square-root-convergent-norm-identity",
+        "kind": "lemma",
+        "title": "Convergents to $\\sqrt{D}$ satisfy the norm identity",
+        "strategy": "Insert the normalized next complete quotient into the continued-fraction tail formula for $\\sqrt{D}$, clear denominators, and compare coefficients. The determinant identity for consecutive convergents then isolates $p_n^2 - Dq_n^2$ as $(-1)^{n+1}Q_{n+1}$.",
+        "deps": [
+          "def-convergents-of-regular-continued-fraction",
+          "lem-continued-fraction-complete-quotient-formula",
+          "lem-continued-fraction-determinant-identity",
+          "lem-square-root-continued-fraction-state-recurrence"
+        ]
+      },
+      {
+        "id": "thm-square-root-continued-fraction-period-structure",
+        "kind": "theorem",
+        "title": "The continued fraction of $\\sqrt{D}$ has symmetric period ending in $2a_0$",
+        "strategy": "Use the $P_n,Q_n$ recurrence to prove the bounds $0 < P_n < \\sqrt{D}$ and $0 < Q_n < 2\\sqrt{D}$ for $n \\ge 1$, leaving only finitely many normalized states. Determinism forces a first repeated state, which must be $(a_0,1)$, and conjugating the backward recurrence reverses the intervening states and hence the digits.",
+        "deps": [
+          "lem-square-root-continued-fraction-state-recurrence"
+        ]
+      },
+      {
+        "id": "thm-lagrange-existence-for-pell-equation",
+        "kind": "theorem",
+        "title": "Every Pell equation has a positive nontrivial integral solution",
+        "strategy": "Apply the period-structure theorem and the convergent norm identity at the end of one full period. If the period length is even, the terminal convergent already has norm $1$; if it is odd, the terminal convergent has norm $-1$ and squaring it gives a norm-one solution.",
+        "deps": [
+          "def-pell-equation",
+          "lem-pell-norm-multiplication",
+          "lem-square-root-convergent-norm-identity",
+          "thm-square-root-continued-fraction-period-structure"
+        ]
+      },
+      {
+        "id": "thm-negative-pell-period-parity-criterion",
+        "kind": "theorem",
+        "title": "Negative Pell is soluble exactly for odd period length",
+        "strategy": "The symmetric period structure and the convergent norm identity show that an odd period yields a negative-Pell solution at the last convergent before the return state, and identify the least positive norm-one solution in each parity case. For the converse, apply NT-7's strict Legendre criterion to any positive solution of $x^2 - Dy^2 = -1$ so that it must appear among the convergents of $\\sqrt{D}$.",
+        "deps": [
+          "def-pell-equation",
+          "def-generalized-and-negative-pell-equations",
+          "def-continued-fraction-complete-quotients",
+          "lem-square-root-continued-fraction-state-recurrence",
+          "lem-square-root-convergent-norm-identity",
+          "thm-square-root-continued-fraction-period-structure",
+          "thm-legendre-continued-fraction-criterion"
+        ]
+      },
+      {
+        "id": "def-fundamental-pell-solution",
+        "kind": "definition",
+        "title": "The fundamental Pell solution",
+        "deps": [
+          "thm-lagrange-existence-for-pell-equation"
+        ]
+      },
+      {
+        "id": "thm-all-positive-pell-solutions-are-fundamental-powers",
+        "kind": "theorem",
+        "title": "All positive Pell solutions are powers of the fundamental solution",
+        "strategy": "Given a positive solution $\\alpha$, choose the unique integer $k$ with $\\varepsilon_D^k \\le \\alpha < \\varepsilon_D^{k+1}$. The quotient $\\alpha\\varepsilon_D^{-k}$ is an integral norm-one element between $1$ and $\\varepsilon_D$, so minimality of the fundamental solution forces it to equal $1$.",
+        "deps": [
+          "def-fundamental-pell-solution",
+          "prop-integral-pell-solutions-form-a-group"
+        ]
+      },
+      {
+        "id": "cor-all-integral-pell-solutions",
+        "kind": "corollary",
+        "title": "All integral Pell solutions are $\\pm \\varepsilon_D^k$",
+        "strategy": "Among $\\alpha$, $\\alpha^{-1}$, $-\\alpha$, and $-\\alpha^{-1}$, exactly one lies in the positive cone. Apply the positive-solutions theorem there, then restore the sign and inverse data.",
+        "deps": [
+          "prop-integral-pell-solutions-form-a-group",
+          "thm-all-positive-pell-solutions-are-fundamental-powers"
+        ]
+      },
+      {
+        "id": "def-pell-equivalence-of-generalized-solutions",
+        "kind": "definition",
+        "title": "Pell-equivalence for generalized solutions",
+        "deps": [
+          "def-fundamental-pell-solution",
+          "prop-integral-pell-solutions-form-a-group"
+        ]
+      },
+      {
+        "id": "thm-generalized-pell-solutions-have-finitely-many-orbits",
+        "kind": "theorem",
+        "title": "Generalized Pell solutions fall into finitely many Pell orbits",
+        "strategy": "For a nonzero solution $\\alpha$, choose the unique integer exponent that places the positive real embedding of $\\alpha\\varepsilon_D^{-k}$ in a fixed half-open logarithmic interval centered at $0$. The conjugate embedding is then $N/\\alpha$, which gives explicit bounds on both coefficients and leaves only finitely many possible representatives.",
+        "deps": [
+          "def-generalized-and-negative-pell-equations",
+          "def-norm-on-integer-square-root-order",
+          "def-pell-equivalence-of-generalized-solutions",
+          "lem-pell-norm-multiplication"
+        ]
+      },
+      {
+        "id": "cor-generalized-pell-solubility-is-decidable",
+        "kind": "corollary",
+        "title": "Generalized Pell solubility is decidable by bounded search",
+        "strategy": "Search the explicit rectangle from the orbit theorem and retain one representative from each orbit under multiplication by powers of $\\varepsilon_D$. The search is finite and succeeds exactly when a solution exists.",
+        "deps": [
+          "thm-generalized-pell-solutions-have-finitely-many-orbits"
+        ]
+      },
+      {
+        "id": "cor-one-generalized-pell-solution-gives-infinitely-many",
+        "kind": "corollary",
+        "title": "One generalized Pell solution generates infinitely many more",
+        "strategy": "Fix one nonzero solution and multiply it by $\\varepsilon_D^k$ for all integers $k$. The norm stays fixed by multiplicativity, and the positive real embedding changes strictly with $k$, so the resulting solutions are distinct.",
+        "deps": [
+          "def-generalized-and-negative-pell-equations",
+          "def-fundamental-pell-solution",
+          "lem-pell-norm-multiplication"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 78.6,
+    "id": "pell-equations-and-generalized-pell-orbits-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Pell Equations and Generalized Pell Orbits — Examples",
+    "companion": "pell-equations-and-generalized-pell-orbits",
+    "requires": [
+      "pell-equations-and-generalized-pell-orbits"
+    ],
+    "items": [
+      {
+        "id": "ex-pell-equation-for-two",
+        "kind": "example",
+        "title": "The Pell and negative Pell equations for $D=2$",
+        "strategy": "Compute the period $[1;\\overline{2}]$, extract the norm $-1$ solution $1 + \\sqrt{2}$, square it to obtain the fundamental norm-one solution $3 + 2\\sqrt{2}$, and list the first several powers.",
+        "deps": [
+          "thm-negative-pell-period-parity-criterion",
+          "thm-all-positive-pell-solutions-are-fundamental-powers"
+        ]
+      },
+      {
+        "id": "ex-pell-equation-for-three",
+        "kind": "example",
+        "title": "The Pell equation for $D=3$",
+        "strategy": "Compute the even period of $\\sqrt{3}$, identify the least norm-one convergent, and use the parity criterion to show that $x^2 - 3y^2 = -1$ has no integral solution.",
+        "deps": [
+          "thm-negative-pell-period-parity-criterion"
+        ]
+      },
+      {
+        "id": "ex-negative-pell-equation-for-five",
+        "kind": "example",
+        "title": "The negative Pell equation for $D=5$",
+        "strategy": "Use the odd period of $\\sqrt{5}$ to locate the least solution of $x^2 - 5y^2 = -1$, then square it to obtain the least positive solution of $x^2 - 5y^2 = 1$.",
+        "deps": [
+          "thm-negative-pell-period-parity-criterion"
+        ]
+      },
+      {
+        "id": "ex-pell-equation-for-fourteen",
+        "kind": "example",
+        "title": "The Pell equation for $D=14$",
+        "strategy": "Reuse the NT-7 complete-quotient states for $\\sqrt{14}$, locate the first returned state, and apply the norm identity to identify the first convergent with norm $1$.",
+        "deps": [
+          "lem-square-root-convergent-norm-identity",
+          "thm-square-root-continued-fraction-period-structure"
+        ]
+      },
+      {
+        "id": "ex-large-fundamental-pell-solution-for-sixty-one",
+        "kind": "example",
+        "title": "The large fundamental solution for $D=61$",
+        "strategy": "Compute the period data for $\\sqrt{61}$, identify the convergent prescribed by the parity criterion, and use it to illustrate that the least solution can be enormous even though the continued-fraction algorithm is finite.",
+        "deps": [
+          "thm-negative-pell-period-parity-criterion"
+        ]
+      },
+      {
+        "id": "ex-generalized-pell-orbits-for-six",
+        "kind": "example",
+        "title": "Generalized Pell orbits for $x^2 - 6y^2 = 3$",
+        "strategy": "Start from the representative $3 + \\sqrt{6}$ and the Pell generator $5 + 2\\sqrt{6}$, then verify that every solution lies in one of the resulting orbits under multiplication by powers of $5 + 2\\sqrt{6}$.",
+        "deps": [
+          "thm-all-positive-pell-solutions-are-fundamental-powers",
+          "thm-generalized-pell-solutions-have-finitely-many-orbits"
+        ]
+      },
+      {
+        "id": "ex-generalized-pell-bounded-representatives",
+        "kind": "example",
+        "title": "Bounded representatives for $x^2 - 7y^2 = 57$",
+        "strategy": "Apply the explicit orbit bounds to $x^2 - 7y^2 = 57$, enumerate the finitely many representatives in that box, and regenerate the full solution set from those representatives by powers of the fundamental Pell unit.",
+        "deps": [
+          "cor-generalized-pell-solubility-is-decidable",
+          "thm-generalized-pell-solutions-have-finitely-many-orbits"
+        ]
+      },
+      {
+        "id": "cex-generalized-pell-solutions-need-not-all-be-convergents",
+        "kind": "counterexample",
+        "title": "A generalized Pell solution need not be a convergent",
+        "strategy": "Use a sourced solution such as $3 + \\sqrt{6}$ or $8 + \\sqrt{7}$, check that its rational quotient is not among the convergents of the relevant square root, and explain that the missing hypothesis is the small-norm bound behind the convergent criterion.",
+        "deps": [
+          "thm-legendre-continued-fraction-criterion",
+          "thm-square-root-continued-fraction-period-structure"
+        ]
+      },
+      {
+        "id": "cex-pell-units-need-not-be-all-quadratic-field-units",
+        "kind": "counterexample",
+        "title": "The elementary Pell order can miss units from the larger quadratic order",
+        "strategy": "Use $D = 5$ and compare $\\mathbb{Z}[\\sqrt{5}]$ with the larger explicit order $\\mathbb{Z}[(1 + \\sqrt{5})/2]$. The unit $(1 + \\sqrt{5})/2$ has norm $-1$ and lies outside $\\mathbb{Z}[\\sqrt{5}]$, which keeps the NT-8 seam visible without using any theorem about maximal orders.",
+        "deps": [
+          "def-norm-on-integer-square-root-order"
+        ]
+      }
+    ]
+  }
+]

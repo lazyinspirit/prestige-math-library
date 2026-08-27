@@ -17,12 +17,12 @@
 // whoever produced them. That is how a step done by hand, or by a tool rather
 // than an agent, still fits the machine.
 
-import { readdirSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
-import { step6Stages } from './mathlib.step6.mts';
+import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -845,15 +845,18 @@ function refreshStep8Scope(ctx: any): void {
   }
 }
 
-function hasCompletedHistoricalRejudge(ctx: any): boolean {
-  const resultPath = R(ctx, `research/${ctx.run}-dispatch/tool-rejudge.result.json`);
-  const statePath = R(ctx, '.autopilot/state.json');
-  if (!existsSync(resultPath) || !existsSync(statePath)) return false;
+/** The cutover tool materialises this receipt only when 8-rejudge had already
+ * completed before the rebuilt preflight stage ran.  Rechecking the live
+ * rejudge result here is not equivalent: every ordinary run has necessarily
+ * completed rejudge by the time it enters 8-close, which made that stage
+ * misclassify live frontier-21 as a historical migration. */
+function hasHistoricalRejudgeCutover(ctx: any): boolean {
+  const receiptPath = R(ctx, cutoverPath(ctx));
+  if (!existsSync(receiptPath)) return false;
   try {
-    const result = JSON.parse(readFileSync(resultPath, 'utf8'));
-    const state = JSON.parse(readFileSync(statePath, 'utf8'));
-    return result.run === ctx.run && result.ok === true && state.run === ctx.run
-      && Boolean(state.stages?.['8-rejudge']?.gatesPassedAt);
+    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    return receipt.version === 1 && receipt.run === ctx.run
+      && receipt.mode === 'post-rejudge-frozen';
   } catch { return false; }
 }
 
@@ -1533,7 +1536,11 @@ export const stages = [
     },
     // Every pair must carry a verdict. An Alpha that reviewed four of six pairs
     // and exited zero used to clear this stage.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx), scopeDecisionsGate(ctx)],
+    // Scope decisions are checked at the recheck join below, after Betas have
+    // finished changing coverage. Checking the same file here first makes a
+    // post-recheck scaffold repair fail under 3-review's ownership before the
+    // recheck stage can refresh the newly introduced decision rows.
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx)],
   },
 
   // Findings go back to the Beta that owns the batch. This used to be an
@@ -1613,12 +1620,18 @@ export const stages = [
     // a decision for a person, and the blocker names the pairs.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
+      const scaffoldFailed = [failure, ...(failure?.advisory ?? [])]
+        .some((entry: any) => entry?.id === 'scaffold-verdicts');
       // Mechanically repairable failures never spend a Beta dispatch; a
       // repair that leaves residue (a source no swap or stamp can save)
       // routes the residue to scouting Betas — the owner's designed remedy —
       // rather than burning rounds into a needs-a-person blocker.
       const repair = await mechanicalRepair({ ctx, failure });
-      if (repair.outcome === 'clean') return;
+      // A clean mechanical repair may have fixed only an advisory failure.
+      // It must not hide an unrelated thin-scaffold verdict from this same
+      // battery: frontier-21 otherwise spent round 1 stamping a source and
+      // dispatched no Beta for the primary scaffold failure.
+      if (repair.outcome === 'clean' && !scaffoldFailed) return;
       if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
       if (repair.outcome === 'residual') {
         if (dispatchSourceScouts({ ctx, executor, stage, round, stderr: repair.stderr })) return;
@@ -1639,6 +1652,45 @@ export const stages = [
       const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
       const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
       const owed = [...new Set(pages.map((p: any) => batchOf.get(p)).filter(Boolean))];
+      // A scaffold-fix Beta changes the evidence that the group Alpha already
+      // judged. When such a repair result is newer than either the group's
+      // verdict or its scope decisions, the next repair action is an Alpha
+      // recheck, not another Beta rewrite. Frontier-21 exposed the missing
+      // handoff: the Beta added Theorem 3.4, gates read stale Alpha artifacts,
+      // and the engine otherwise asked the Beta to repair the same scaffold
+      // again.
+      const dispatchDir = R(ctx, 'research', `${ctx.run}-dispatch`);
+      const repairFiles = existsSync(dispatchDir)
+        ? readdirSync(dispatchDir).filter((name: string) => /^beta-scaffold-fix-\d+-b\d+\.result\.json$/.test(name))
+        : [];
+      const staleGroups = alphaGroups(ctx).filter((group: any) => {
+        if (!group.covers.some((batch: string) => owed.includes(batch))) return false;
+        const verdict = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-step3-verdicts.json`);
+        const decisions = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-scope-decisions.json`);
+        const judgedAt = Math.min(
+          existsSync(verdict) ? statSync(verdict).mtimeMs : 0,
+          existsSync(decisions) ? statSync(decisions).mtimeMs : 0,
+        );
+        return repairFiles.some((name: string) => {
+          const batch = name.match(/-b(\d+)\.result\.json$/)?.[1];
+          return batch && group.covers.includes(batch)
+            && statSync(join(dispatchDir, name)).mtimeMs > judgedAt;
+        });
+      });
+      if (staleGroups.length) {
+        for (const group of staleGroups) {
+          executor.start(stage, {
+            role: 'alpha-high',
+            label: `scaffold-recheck-${round}-${group.label}`,
+            job: 'adjudication',
+            covers: group.covers,
+            brief: 'briefs/alpha.md',
+            task: [`research/${ctx.run}-alpha-${group.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
+            timeout: 7200,
+          });
+        }
+        return;
+      }
       for (const b of owed) {
         executor.start(stage, {
           role: 'beta',
@@ -1797,6 +1849,12 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'author-batch-\\d+'),
     labelFor: (u) => `author-batch-${u}`,
+    // A zero-exit author result is only a process receipt. Frontier 21 batch 8
+    // explicitly stopped after one of two pairs and omitted its contract, yet
+    // coverage released the reader and made split retry an impossible command.
+    // The per-batch contract is the durable completion artifact consumed by
+    // Step 6, so keep that unit in authoring until the artifact actually lands.
+    artifacts: (ctx, u) => `research/${ctx.run}-batch-${u}.proof-contracts.json`,
     concurrency: 12,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
@@ -1829,8 +1887,31 @@ export const stages = [
     // a read of the mathematics. This level carries Sylow, unit groups and
     // poset-category limit claims, all squarely inside the registry, so the
     // floor held correctly on 0/324.
-    maxFixRounds: 3,
+    //
+    // This is the 22-gate Step-5/6 join, and primary failures surface one at a
+    // time. Frontier 21 repaired rendercheck, splice currency, and one contract
+    // quote in three successful rounds, then falsely exhausted before the newly
+    // exposed boundary review could receive its first routed read. Keep the
+    // loop bounded, but budget for sequential distinct gates at this join.
+    maxFixRounds: 8,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      // Artifact accounting now keeps a partial zero-exit author covered but
+      // incomplete. Resume exactly the batches whose required contracts never
+      // landed; a successful continuation makes the ordinary stage complete
+      // without manufacturing a second coverage claim.
+      if (failure.id === 'stage-stalemate') {
+        const missing = batches(ctx).filter((u: any) => !existsSync(join(ctx.repo,
+          'research', `${ctx.run}-batch-${u}.proof-contracts.json`)));
+        for (const u of missing) {
+          executor.start(stage, {
+            role: 'beta', label: `author-recover-${u}-${round}`,
+            job: 'authoring', covers: [], brief: 'briefs/authoring.md',
+            task: [`research/${ctx.run}-beta-${u}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
+            timeout: 21600,
+          });
+        }
+        return;
+      }
       // A FAILURE WITH A MECHANICAL REPAIR TAKES IT FIRST, whatever its id.
       // `splice-verify` fails here as a matter of course: the 6b Alphas add
       // and repair items under their step-6 licence, so the manifests move
@@ -1902,11 +1983,145 @@ export const stages = [
     },
   },
 
+  // Step 6 includes artifact-owner recovery for incomplete author contracts
+  // and malformed reader findings; keep it inside the hot-reloaded table.
   ...step6Stages({
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
     MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
     dispatchSourceScouts,
+  }).map((entry: any) => {
+    if (entry.id === '6a-collect') {
+      const ordinaryPattern = resultPattern('tool', 'collect-\\d+(?:-recovered)?');
+      return {
+        ...entry,
+        pattern: (ctx: any) => hasLegacyStep6Cutover(ctx) ? entry.pattern(ctx) : ordinaryPattern,
+        plan: (ctx: any, pending: string[]) => {
+          if (hasLegacyStep6Cutover(ctx)) return entry.plan(ctx, pending);
+          return pending.map((unit: string) => {
+            let malformed = false;
+            try {
+              const scope = JSON.parse(readFileSync(join(ctx.repo, 'research',
+                `${ctx.run}-step6-scope-${unit}.json`), 'utf8'));
+              const report = JSON.parse(readFileSync(join(ctx.repo, 'research',
+                `${ctx.run}-refute-${unit}.json`), 'utf8'));
+              const expected = new Set((scope?.refuter_scope ?? []).map(String));
+              const opened = (report?.opened ?? []).map(String);
+              const notOpened = (report?.not_opened ?? []).map(String);
+              const actual = new Set([...opened, ...notOpened]);
+              malformed = !Array.isArray(report?.opened) || !Array.isArray(report?.not_opened)
+                || expected.size !== actual.size
+                || [...expected].some((id) => !actual.has(id))
+                || notOpened.length > 0;
+            } catch { malformed = true; }
+            if (malformed) {
+              return {
+                role: 'refuter', label: `refute-recover-${unit}`,
+                job: 'refutation', covers: [unit], brief: 'briefs/refuter.md',
+                task: 'briefs/tasks/refuter-untouched.md',
+                outputSchema: 'briefs/schemas/refute-report.json',
+                resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
+                timeout: 10800,
+              };
+            }
+            const recovered = existsSync(join(ctx.dispatchDir,
+              `refuter-refute-recover-${unit}.result.json`));
+            return {
+              role: 'tool', label: `collect-${unit}${recovered ? '-recovered' : ''}`,
+              job: 'bookkeeping-mechanical', covers: [unit],
+              argv: ['node', 'tools/step6-scope.mjs', 'collect', '--run', ctx.run,
+                '--batch', String(unit)],
+              timeout: 600,
+            };
+          });
+        },
+      };
+    }
+    if (entry.id !== '6a-split') return entry;
+    const ordinaryPattern = resultPattern('tool', 'split-\\d+(?:-(?:reader-)?recovered)?');
+    return {
+      ...entry,
+      pattern: (ctx: any) => hasLegacyStep6Cutover(ctx) ? entry.pattern(ctx) : ordinaryPattern,
+      plan: (ctx: any, pending: string[]) => {
+        if (hasLegacyStep6Cutover(ctx)) return entry.plan(ctx, pending);
+        return pending.map((unit: string) => {
+          const contract = join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.proof-contracts.json`);
+          if (!existsSync(contract)) {
+            return {
+              role: 'beta', label: `author-recover-${unit}`,
+              job: 'authoring', covers: [unit], brief: 'briefs/authoring.md',
+              task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
+              timeout: 21600,
+            };
+          }
+          const findings = join(ctx.repo, 'research', `${ctx.run}-reader-findings-${unit}.json`);
+          let malformed = false;
+          try {
+            const report = JSON.parse(readFileSync(findings, 'utf8'));
+            malformed = !Array.isArray(report?.findings)
+              || report.findings.some((finding: any) => finding?.subject_type === 'published-dependency'
+                && (typeof finding?.id !== 'string'
+                  || !existsSync(join(ctx.repo, 'items', `${finding.id}.md`))));
+            const prePath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-pre.json`);
+            const postPath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-post.json`);
+            if (existsSync(prePath) && existsSync(postPath)) {
+              const pre = JSON.parse(readFileSync(prePath, 'utf8'));
+              const post = JSON.parse(readFileSync(postPath, 'utf8'));
+              const carrierChanged = (finding: any) => {
+                if (finding?.subject_type === 'in-flight-item') {
+                  return JSON.stringify(pre?.hashes?.[finding.id] ?? null)
+                    !== JSON.stringify(post?.hashes?.[finding.id] ?? null);
+                }
+                if (finding?.subject_type === 'page') {
+                  return JSON.stringify(pre?.page_hashes?.[finding.id] ?? null)
+                    !== JSON.stringify(post?.page_hashes?.[finding.id] ?? null);
+                }
+                return false;
+              };
+              malformed ||= report.findings.some(carrierChanged);
+            }
+          } catch { malformed = true; }
+          if (malformed) {
+            const recoveryTask = `research/${ctx.run}-reader-recover-${unit}.task.md`;
+            writeFileSync(join(ctx.repo, recoveryTask), [
+              '# Step 6 reader routing-artifact correction',
+              '',
+              `Correct research/${ctx.run}-reader-findings-${unit}.json for batch ${unit}.`,
+              'Preserve every genuine uneditable finding and the existing reader report.',
+              'The finding `id` is NOT an obligation label or a newly invented finding key.',
+              'For `published-dependency`, `id` must be the exact published item id:',
+              'the filename stem under items/ for the carrier named by `location`.',
+              'For `in-flight-item` or `page`, `id` must likewise be the exact assigned carrier id.',
+              '`consumer_id` must be an assigned item whose dependency closure reaches that published id.',
+              'Remove a finding if its in-flight item or page changed since the pre-reader hash;',
+              'that carrier is already routed as touched and cannot also remain an open finding.',
+              'Write the corrected schema-conforming JSON to the same named result artifact.',
+              '',
+            ].join('\n'));
+            return {
+              role: 'reader', label: `reader-recover-${unit}`,
+              job: 'audit', covers: [unit], brief: 'briefs/reader.md',
+              task: recoveryTask, outputSchema: 'briefs/schemas/reader-findings.json',
+              resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
+              timeout: 14400,
+            };
+          }
+          const authorRecovered = existsSync(join(ctx.dispatchDir,
+            `beta-author-recover-${unit}.result.json`));
+          const readerRecovered = existsSync(join(ctx.dispatchDir,
+            `reader-reader-recover-${unit}.result.json`));
+          const suffix = readerRecovered && authorRecovered ? '-reader-recovered'
+            : authorRecovered || readerRecovered ? '-recovered' : '';
+          return {
+            role: 'tool', label: `split-${unit}${suffix}`,
+            job: 'bookkeeping-mechanical', covers: [unit],
+            argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
+              '--batch', String(unit)],
+            timeout: 600,
+          };
+        });
+      },
+    };
   }),
 
   // The group partition, rendered BEFORE the sweep so the step-7 readers have
@@ -2136,10 +2351,11 @@ export const stages = [
       gate('step8-scope', ['node', 'tools/step8-scope.mjs', 'check', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) partitioned/.source, min: 1, unit: 'items partitioned' },
       }),
-      // PLACEHOLDER-FREE BY CONSTRUCTION: with no repairs the ledger is absent
-      // and this passes reporting zero, which is the truth. It only bites once an
-      // Alpha has edited published content.
-      publishedGate(ctx),
+      // Published repairs intentionally lack current verdicts here: 8-rejudge
+      // is the stage that buys those verdicts, and it owns publishedGate again
+      // after doing so. Requiring it while merely rendering the adjudication
+      // partition made a Step-6 published repair block the only path to its
+      // rejudge (frontier 21: thm-discontinuity-set-is-f-sigma).
       // `7-judge` immediately before this stage already proved complete judge
       // coverage and no content-writing stage intervenes. Recomputing all exact
       // context hashes here was the same closure check over the same bytes.
@@ -2377,7 +2593,7 @@ export const stages = [
       argv: ['node', 'tools/step8-cutover.mjs', 'prepare', '--run', ctx.run,
         '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)],
     }],
-    gates: (ctx) => hasCompletedHistoricalRejudge(ctx)
+    gates: (ctx) => hasHistoricalRejudgeCutover(ctx)
       ? [
           gate('step8-cutover-frozen', ['node', 'tools/step8-cutover.mjs', 'check', '--run', ctx.run,
             '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)]),
@@ -2420,7 +2636,7 @@ export const stages = [
       const owners = named.length ? step8RepairOwners(ctx, named) : [null];
       for (const g of owners) {
         const recoveringRejection = (closure?.unadjudicated?.length ?? 0) > 0;
-        const baseTask = hasCompletedHistoricalRejudge(ctx)
+        const baseTask = hasHistoricalRejudgeCutover(ctx)
           ? (g
             ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
             : 'briefs/tasks/alpha-step8-close.md')
@@ -2525,6 +2741,7 @@ export const stages = [
       const closure = readClosure(ctx);
       const published = readPublishedClosure(ctx);
       if (!closure && !published) return;
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
 
       // Decide every rejection already on disk before buying another verdict.
       // Frontier-18 had current unadjudicated rows and repaired items together;
@@ -2551,14 +2768,26 @@ export const stages = [
           ...publishedRepairOwners(ctx, livePublishedContested),
         ])];
         for (const g of owners) {
+          // A published rejection is outside the rendered run partition, so
+          // the group's static Step-8 task cannot name it.  Frontier 21 routed
+          // the Baire rejection to its correct owner but gave that owner a task
+          // saying it had no open rejection, and two repair rounds did no work.
+          // Materialise the same exact run/published tuple envelope used by the
+          // other Step-8 repair stages so the dispatch has both evidence and
+          // explicit authority for precisely its assigned contested rows.
+          const baseTask = g
+            ? (((closure?.unadjudicated?.length ?? 0) > 0 && runContested.some((id) => (closure?.unadjudicated ?? []).includes(id)))
+              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, `research/${ctx.run}-alpha-${g}-step8.task.md`]
+              : [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`])
+            : [`research/${ctx.run}-alpha-step8.task.md`];
+          const envelopeTask = writeStep8RepairEnvelope({
+            ctx, stage, round, group: g, mode: 'rejudge-adjudication', failures,
+            named: liveContested, task: baseTask,
+          });
           startStep8Group(ctx, executor, stage, {
             label: g ? `adjudicate-rejudge-${g}-round-${round}` : `adjudicate-rejudge-round-${round}`,
             job: 'adjudication',
-            task: g
-              ? (((closure?.unadjudicated?.length ?? 0) > 0 && runContested.some((id) => (closure?.unadjudicated ?? []).includes(id)))
-                ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, `research/${ctx.run}-alpha-${g}-step8.task.md`]
-                : [`research/${ctx.run}-alpha-${g}-step8.task.md`, `research/${ctx.run}-alpha-step8.task.md`])
-              : [`research/${ctx.run}-alpha-step8.task.md`],
+            task: [envelopeTask],
             timeout: 21600,
           }, g);
         }
@@ -2630,11 +2859,11 @@ export const stages = [
     concurrency: 1,
     plan: (ctx) => [{
       role: 'tool', label: 'step8-close-scope', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: hasCompletedHistoricalRejudge(ctx)
+      argv: hasHistoricalRejudgeCutover(ctx)
         ? ['node', '-e', 'console.log("step8 close: frozen cutover already ran the final integrity battery")']
         : ['node', 'tools/step8-scope.mjs', 'render', '--run', ctx.run],
     }],
-    gates: (ctx) => hasCompletedHistoricalRejudge(ctx)
+    gates: (ctx) => hasHistoricalRejudgeCutover(ctx)
       ? [gate('step8-cutover-frozen', ['node', 'tools/step8-cutover.mjs', 'check', '--run', ctx.run,
           '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)])]
       : [

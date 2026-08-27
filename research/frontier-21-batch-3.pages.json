@@ -1,0 +1,278 @@
+[
+  {
+    "order": 111.007,
+    "id": "artinian-rings-and-length",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Artinian Rings and Length",
+    "companion": "artinian-rings-and-length-examples",
+    "requires": [
+      "prime-spectra-and-radicals-examples"
+    ],
+    "items": [
+      {
+        "id": "lem-artinian-domain-is-a-field",
+        "kind": "lemma",
+        "title": "An Artinian integral domain is a field",
+        "strategy": "Let $D$ be an Artinian integral domain and take $0 \\ne a \\in D$. The descending chain $(a) \\supseteq (a^2) \\supseteq \\cdots$ stabilizes, so $(a^n)=(a^{n+1})$ for some $n$. Then $a^n=a^{n+1}b$ for some $b$, and cancellation in the domain gives $1=ab$, so every nonzero element is a unit.",
+        "deps": [
+          "def-artinian-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-generated-and-principal-ideals"
+        ]
+      },
+      {
+        "id": "thm-artinian-ring-primes-are-maximal",
+        "kind": "theorem",
+        "title": "Every prime ideal of an Artinian ring is maximal",
+        "strategy": "If $\\mathfrak p$ is prime in an Artinian ring $R$, then ideals of $R/\\mathfrak p$ correspond to ideals of $R$ containing $\\mathfrak p$, so $R/\\mathfrak p$ is Artinian. The quotient is also a domain because $\\mathfrak p$ is prime, and the preceding lemma makes that Artinian domain a field. Therefore $R/\\mathfrak p$ is a field and $\\mathfrak p$ is maximal.",
+        "deps": [
+          "lem-artinian-domain-is-a-field",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "thm-correspondence-theorem-ideals",
+          "def-artinian-ring"
+        ]
+      },
+      {
+        "id": "thm-artinian-ring-has-finitely-many-maximal-ideals",
+        "kind": "theorem",
+        "title": "An Artinian ring has only finitely many maximal ideals",
+        "strategy": "Among the finite intersections of maximal ideals choose one minimal by inclusion. If some other maximal ideal $\\mathfrak m$ were missing, then for each listed maximal ideal choose an element in it but not in $\\mathfrak m$; their product still avoids $\\mathfrak m$ because $\\mathfrak m$ is prime, but lies in the chosen minimal intersection, contradiction.",
+        "deps": [
+          "def-artinian-ring",
+          "def-prime-and-maximal-ideals",
+          "cor-maximal-ideals-are-prime",
+          "thm-equivalent-characterizations-of-artinian-modules"
+        ]
+      },
+      {
+        "id": "thm-nilradical-of-artinian-ring-is-nilpotent",
+        "kind": "theorem",
+        "title": "The nilradical of an Artinian ring is a nilpotent ideal",
+        "strategy": "Let $N=\\operatorname{Nil}(R)$. If $N^n=N^{n+1}$ with $N^n \\ne 0$, choose an ideal $\\mathfrak a$ minimal among those with $\\mathfrak aN^n \\ne 0$, then choose $a \\in \\mathfrak a$ with $aN^n \\ne 0$. Minimality forces $\\mathfrak a=(a)$ and $aN^n=(a)$, so $a=ax$ for some $x \\in N^n$; iterating and using nilpotence of $x$ gives $a=0$, contradiction.",
+        "deps": [
+          "def-artinian-ring",
+          "def-nilradical-and-reduced-ring",
+          "def-generated-and-principal-ideals",
+          "thm-equivalent-characterizations-of-artinian-modules"
+        ]
+      },
+      {
+        "id": "thm-chinese-remainder-theorem-for-comaximal-ideals",
+        "kind": "theorem",
+        "title": "Chinese remainder theorem for pairwise comaximal ideals",
+        "strategy": "For two comaximal ideals $I,J$, prove $IJ=I \\cap J$, identify the kernel of $R \\to R/I \\times R/J$, and solve simultaneous residues using $u+v=1$ with $u \\in I$, $v \\in J$. Then show one ideal is comaximal with the product of the rest, so induction on the finite family yields the isomorphism $R/\\prod I_i \\cong \\prod R/I_i$ together with $\\bigcap I_i=\\prod I_i$.",
+        "deps": [
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "prop-canonical-quotient-ring-map",
+          "thm-correspondence-theorem-ideals",
+          "def-product-ring",
+          "thm-quotient-ring-laws"
+        ]
+      },
+      {
+        "id": "thm-artinian-ring-is-noetherian",
+        "kind": "theorem",
+        "title": "Every commutative Artinian ring is Noetherian",
+        "strategy": "Let $N$ be the nilradical. By the preceding results, the maximal ideals are finite in number, $N$ is nilpotent, and $N=\\bigcap \\mathfrak m_i$; Chinese remainder identifies $R/N$ with a finite product of fields. For each layer $N^i/N^{i+1}$, use the orthogonal idempotents of $R/N$ to split it into field-vector-space components and prove inline that each component is finite-dimensional, since an infinite-dimensional component would yield a strict descending chain of subspaces and hence of ideals. Therefore every layer is Noetherian, and the finite $N$-adic filtration upgrades $R$ itself to Noetherian.",
+        "deps": [
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-artinian-ring-has-finitely-many-maximal-ideals",
+          "thm-nilradical-of-artinian-ring-is-nilpotent",
+          "cor-nilradical-as-intersection-of-primes",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-chain-conditions-in-short-exact-sequences",
+          "cor-product-of-two-noetherian-rings-is-noetherian"
+        ]
+      },
+      {
+        "id": "thm-artinian-ring-has-finite-length",
+        "kind": "theorem",
+        "title": "A commutative ring is Artinian exactly when it has finite length as a module over itself",
+        "strategy": "If $R$ has finite length as an $R$-module, then its ideals satisfy both chain conditions, so $R$ is Artinian. Conversely, if $R$ is Artinian, the previous theorem makes its regular module both Artinian and Noetherian; the published module criterion then yields a composition series, hence finite length.",
+        "deps": [
+          "def-artinian-ring",
+          "def-noetherian-ring",
+          "thm-artinian-ring-is-noetherian",
+          "thm-composition-series-iff-noetherian-and-artinian"
+        ]
+      },
+      {
+        "id": "thm-artinian-local-ring-has-nilpotent-maximal-ideal",
+        "kind": "theorem",
+        "title": "An Artinian local ring has nilpotent maximal ideal, and its finite modules have finite length",
+        "strategy": "In a local Artinian ring the unique maximal ideal is the only prime ideal, hence the nilradical, so it is nilpotent. For a finite module $M$, the filtration $M \\supseteq \\mathfrak mM \\supseteq \\cdots \\supseteq 0$ terminates; each quotient is killed by $\\mathfrak m$ and is therefore a vector space over the residue field, and the images of one fixed finite generating set of $M$ generate every quotient, so each quotient is finite-dimensional. Additivity of length along the filtration yields finite length.",
+        "deps": [
+          "def-artinian-ring",
+          "def-local-ring",
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-nilradical-of-artinian-ring-is-nilpotent",
+          "cor-nilradical-as-intersection-of-primes",
+          "def-product-of-an-ideal-and-a-module",
+          "cor-length-is-additive-in-short-exact-sequences",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-structure-theorem-for-artinian-rings",
+        "kind": "theorem",
+        "title": "An Artinian ring is canonically the finite product of its localizations at its maximal ideals",
+        "strategy": "Let $\\mathfrak m_1,\\dots,\\mathfrak m_r$ be the maximal ideals and choose $n$ with $N^n=0$ for the nilradical $N$. The powers $\\mathfrak m_i^n$ are pairwise comaximal and have zero product, so Chinese remainder gives $R \\cong \\prod_i R/\\mathfrak m_i^n$. Each quotient is local with maximal ideal $\\mathfrak m_i/\\mathfrak m_i^n$, and comparison with localization at $\\mathfrak m_i$ identifies these factors with the canonical local rings $R_{\\mathfrak m_i}$; the quotient-by-powers presentation depends on the chosen exponent and is not called canonical.",
+        "deps": [
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-artinian-ring-has-finitely-many-maximal-ideals",
+          "thm-nilradical-of-artinian-ring-is-nilpotent",
+          "cor-nilradical-as-intersection-of-primes",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-localisation-commutes-with-quotients",
+          "cor-every-local-ring-is-its-localisation-at-its-maximal-ideal",
+          "def-jacobson-radical-of-a-ring"
+        ]
+      },
+      {
+        "id": "cor-prime-set-of-an-artinian-ring",
+        "kind": "corollary",
+        "title": "The prime ideals of an Artinian ring are exactly its finitely many maximal ideals",
+        "strategy": "Combine the theorem that every prime ideal is maximal with the theorem that only finitely many maximal ideals exist. Record just the finite-set identification here; the discrete-topology consequence waits for the later spectrum topology page.",
+        "deps": [
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-artinian-ring-has-finitely-many-maximal-ideals"
+        ]
+      },
+      {
+        "id": "thm-artinian-ring-characterisation-by-primes",
+        "kind": "theorem",
+        "title": "A Noetherian ring is Artinian exactly when every prime ideal is maximal",
+        "strategy": "The forward direction is the Artinian prime-maximal theorem together with Artinian implies Noetherian. Conversely, if $R$ is Noetherian and every prime is maximal, then the finitely many minimal primes over $(0)$ are all maximal and every prime contains one of them, hence equals one of them. The nilradical is nilpotent, the reduced quotient is a finite product of fields by Chinese remainder, and the nilpotent-radical filtration gives finite length for the regular module; therefore $R$ is Artinian.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-artinian-ring",
+          "thm-artinian-ring-primes-are-maximal",
+          "thm-artinian-ring-is-noetherian",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "thm-nilradical-of-a-noetherian-ring-is-nilpotent",
+          "cor-nilradical-as-intersection-of-primes",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "thm-composition-series-iff-noetherian-and-artinian",
+          "cor-product-of-two-noetherian-rings-is-noetherian"
+        ]
+      },
+      {
+        "id": "cor-artinian-quotients-and-localisations",
+        "kind": "corollary",
+        "title": "Quotients and localizations of an Artinian ring are Artinian",
+        "strategy": "A quotient of an Artinian ring is Artinian because its ideals correspond to ideals above the kernel. For localizations, use the Artinian product decomposition: localizing a finite product acts factorwise, and in a local Artinian factor a denominator in the maximal ideal kills the localization because that ideal is nilpotent, while a denominator outside the maximal ideal is already a unit. Thus a localization keeps exactly the local factors whose maximal ideals avoid the multiplicative set.",
+        "deps": [
+          "thm-structure-theorem-for-artinian-rings",
+          "thm-artinian-local-ring-has-nilpotent-maximal-ideal",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "def-multiplicative-subset-and-localisation",
+          "def-quotient-ring"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.008,
+    "id": "artinian-rings-and-length-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Artinian Rings and Length — Examples",
+    "companion": "artinian-rings-and-length",
+    "requires": [
+      "artinian-rings-and-length"
+    ],
+    "items": [
+      {
+        "id": "ex-artinian-truncated-polynomial-ring",
+        "kind": "example",
+        "title": "The truncated polynomial ring $k[x]/(x^n)$ is local Artinian of length $n$",
+        "strategy": "Let $R=k[x]/(x^n)$ and $\\mathfrak m=(x)$. Show $\\mathfrak m^n=0$, every ideal is $(x^r)$ for some $0 \\le r \\le n$, and each quotient $\\mathfrak m^r/\\mathfrak m^{r+1}$ is one-dimensional over $k=R/\\mathfrak m$. The filtration by powers of $\\mathfrak m$ then gives the ring length and makes the nilpotent maximal ideal explicit.",
+        "deps": [
+          "def-field",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "def-generated-and-principal-ideals",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "thm-correspondence-theorem-ideals",
+          "thm-artinian-local-ring-has-nilpotent-maximal-ideal",
+          "cor-length-is-additive-in-short-exact-sequences"
+        ]
+      },
+      {
+        "id": "ex-artinian-product-of-local-rings",
+        "kind": "example",
+        "title": "$\\mathbb Z/12\\mathbb Z$ splits as the product of its two local Artinian factors",
+        "strategy": "Use the Chinese remainder theorem to identify $\\mathbb Z/12\\mathbb Z$ with $\\mathbb Z/3\\mathbb Z \\times \\mathbb Z/4\\mathbb Z$. Check that the two factors are local, read off the two prime ideals of the product, and pull them back to the two primes of $\\mathbb Z/12\\mathbb Z$ to see the structure theorem concretely.",
+        "deps": [
+          "def-product-ring",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "prop-integers-modulo-n-as-a-quotient-ring",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "cor-prime-set-of-an-artinian-ring",
+          "thm-structure-theorem-for-artinian-rings"
+        ]
+      },
+      {
+        "id": "ex-field-is-artinian",
+        "kind": "example",
+        "title": "A field has module length one over itself",
+        "strategy": "For a field $K$, the chain $0 \\subset K$ is a composition series, so $\\ell_K(K)=1$. Hence every field is Artinian and gives the minimal nonzero example for the page's length convention.",
+        "deps": [
+          "def-field",
+          "def-composition-series-and-length-of-a-module",
+          "thm-artinian-ring-has-finite-length"
+        ]
+      },
+      {
+        "id": "ex-noetherian-not-artinian",
+        "kind": "example",
+        "title": "$\\mathbb Z$ and $k[x]$ are Noetherian but not Artinian",
+        "strategy": "Use the published Noetherian results for $\\mathbb Z$ and for finite-variable polynomial rings. Then exhibit the strict descending ideal chains $(2) \\supset (2^2) \\supset \\cdots$ in $\\mathbb Z$ and $(x) \\supset (x^2) \\supset \\cdots$ in $k[x]$ to show that Noetherianity alone does not force Artinianness.",
+        "deps": [
+          "def-field",
+          "lem-subgroups-of-z-are-cyclic",
+          "thm-noetherian-ring-ideal-characterisations",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "def-generated-and-principal-ideals",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "ex-length-of-a-truncated-local-module",
+        "kind": "example",
+        "title": "The module $R/(x^i)$ over $k[x]/(x^n)$ has length $i$",
+        "strategy": "Let $R=k[x]/(x^n)$ and $1 \\le i \\le n$. Filter $R/(x^i)$ by the images of $(x^j)$, so each subquotient is generated by one class killed by $(x)$ and hence is one-dimensional over the residue field. The short exact sequences $0 \\to (x^{i-1})/(x^i) \\to R/(x^i) \\to R/(x^{i-1}) \\to 0$ then verify additivity step by step.",
+        "deps": [
+          "def-field",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
+          "thm-artinian-local-ring-has-nilpotent-maximal-ideal",
+          "cor-length-is-additive-in-short-exact-sequences"
+        ]
+      },
+      {
+        "id": "ex-zero-dimensional-nonnoetherian-ring",
+        "kind": "example",
+        "title": "The ring $(\\mathbb Z/2)^{\\mathbb N}$ is zero-dimensional but not Noetherian",
+        "strategy": "In $R=(\\mathbb Z/2)^{\\mathbb N}$ every element is idempotent coordinatewise. Therefore if $\\mathfrak p$ is prime then every element of the domain $R/\\mathfrak p$ satisfies $x^2=x$, so every nonzero class equals $1$ and the quotient is a field; thus every prime is maximal. On the other hand the ideals generated by the first finitely many coordinate idempotents form a strict ascending chain, so $R$ is not Noetherian and hence not Artinian.",
+        "deps": [
+          "def-artinian-ring",
+          "def-noetherian-ring",
+          "def-prime-and-maximal-ideals",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-integers-modulo-n",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-quotient-is-field-iff-ideal-maximal"
+        ]
+      }
+    ]
+  }
+]

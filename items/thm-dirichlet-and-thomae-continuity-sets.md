@@ -8,19 +8,20 @@ provenance:
   statement: literature-derived
   proof: ai-altered
   evidence: exact-source
-deps: [def-dirichlet-and-thomae-functions, def-continuity-real, lem-q-and-irrationals-dense-r, def-oscillation, thm-continuity-iff-oscillation-zero, cor-archimedean-reciprocal, lem-integer-part, def-canonical-natural, lem-of-naturals-positive, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-neighbourhood-r, thm-closure-characterisations-r, lem-rat-embeds-dense, def-extended-reals, lem-extended-reals-complete]
+deps: [def-dirichlet-and-thomae-functions, def-continuity-real, lem-q-and-irrationals-dense-r, def-oscillation, thm-continuity-iff-oscillation-zero, cor-archimedean-reciprocal, lem-integer-part, def-canonical-natural, lem-of-naturals-positive, lem-finite-set-has-max, def-max-min, def-neighbourhood-r, thm-closure-characterisations-r, lem-rat-embeds-dense, def-extended-reals, lem-extended-reals-complete]
 justified_by: []
 aliases: [thm-thomae-continuity-set]
 landmark: true
 short: "Thomae is continuous exactly at the irrationals"
 proof_strategy: cases
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -44,16 +45,14 @@ $t(x) = 0$ at every irrational $x$. Then:
 3. $t$ is continuous at every irrational and discontinuous at every rational, so
    its set of continuity points is exactly $\mathbb{R} \setminus \mathbb{Q}$.
 
-**Claim 1 restates, on this page, what
-[[cex-dirichlet-is-nowhere-continuous]] already proves.** That item is homed on
-the examples page of *Continuity, the intermediate and extreme value theorems,
-and uniform continuity*, and an examples page is a leaf of this library: nothing
-outside it may depend on an item that lives there. The claim is needed here, and
-on later pages, as a citable statement, so it is proved again rather than
-quoted. The two statements are the same statement, and neither is stronger than
-the other; the proof below is the same argument, and no originality is claimed
-for it. This is the pattern
-[[ex-distance-to-the-integers-is-1-lipschitz]] follows.
+**Claim 1 duplicates a companion examples-page argument on purpose.** The
+examples-page proof that the Dirichlet function is nowhere continuous lives on
+a leaf page of the library, so later A-page items cannot cite it directly. The
+claim is needed here, and on later pages, as a citable theorem-level
+statement, so it is proved again rather than quoted. The two statements are the
+same, and no originality is claimed for the repeated proof. The same
+duplication pattern is used elsewhere in this page family for examples whose
+argument also has to be available in A-page form.
 
 ## Facts & Assumptions
 
@@ -71,7 +70,7 @@ for it. This is the pattern
 
 [L5] $\omega_{f}(S) = \sup\{|f(x)-f(y)| : x,y \in S\}$ and $\omega_{f}(c) = \inf\{\omega_{f}(N_\delta(c)) : \delta > 0\}$ for $f$ defined on all of $\mathbb{R}$, both computed in $\overline{\mathbb{R}}$, where every set has a supremum and an infimum; $f$ is continuous at $c$ if and only if $\omega_{f}(c) = 0$ ([[def-oscillation]], [[def-extended-reals]], [[lem-extended-reals-complete]], [[thm-continuity-iff-oscillation-zero]]).
 
-[L6] $|u| \ge 0$, $|u - v| \le |u| + |v|$, and if $0 \le u \le M$ and $0 \le v \le M$ then $|u - v| \le M$ ([[lem-of-abs-value]]).
+[L6] If $0 \le u \le M$ and $0 \le v \le M$, then $-M \le u-v \le M$; consequently $|u-v| \le M$, by the two cases $u-v \ge 0$ and $u-v < 0$.
 
 ## Proof
 

@@ -1,0 +1,1984 @@
+{
+  "version": 1,
+  "level": "frontier-21",
+  "note": "Step-5 authoring contract for frontier-21 batch 7 on Thursday, August 27, 2026.",
+  "scope": [
+    "lem-riemann-integrable-function-has-borel-darboux-envelopes",
+    "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+    "cor-riemann-integrable-function-is-almost-everywhere-equal-to-a-borel-function",
+    "thm-arzela-bounded-convergence-for-riemann-integrals",
+    "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+    "thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral",
+    "ex-indicator-of-the-rationals-is-lebesgue-integrable-with-integral-zero-and-not-riemann-integrable",
+    "fs-every-riemann-integrable-function-is-borel-measurable",
+    "ex-open-dense-set-indicator-is-a-monotone-l-one-limit-of-riemann-integrable-functions-but-is-not-riemann-integrable",
+    "cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable",
+    "cex-semicontinuous-function-almost-everywhere-equal-to-no-riemann-integrable-function",
+    "cex-a-null-set-that-is-no-functions-discontinuity-set"
+  ],
+  "contracts": {
+    "lem-riemann-integrable-function-has-borel-darboux-envelopes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-criterion",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then $f$ is Darboux integrable on $[a,b]$\n([[def-darboux-integral]]) **if and only if**\n\n$$\\text{for every real } \\varepsilon > 0 \\text{ there is a partition } P \\text{ of } [a,b] \\text{ with } U(f,P) - L(f,P) < \\varepsilon$$\n\n([[def-darboux-sums]], [[def-partition-and-refinement]]).\n\n**This is the criterion every later integrability proof on this page uses.** It\nreplaces a statement about a supremum and an infimum over all partitions, which\ncannot be checked directly, by the exhibition of a **single** partition for each\n$\\varepsilon$. The criterion says nothing about the value of the integral; that\nseparate lower-and-upper-sum estimate places the integral between $L(f,P)$ and\n$U(f,P)$ for the same $P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-refinement-inequalities",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded, say\n$|f(x)| \\le M$ for every $x \\in [a,b]$ with $M \\ge 0$ real\n([[def-bounded-set]]). Darboux sums are those of [[def-darboux-sums]] and\npartitions those of [[def-partition-and-refinement]]. Then:\n\n1. **Refinement.** If $P' = (n',t')$ refines $P = (n,t)$ then\n   $$L(f,P) \\;\\le\\; L(f,P') \\;\\le\\; U(f,P') \\;\\le\\; U(f,P).$$\n2. **Every lower sum is at most every upper sum.** For arbitrary partitions $P$\n   and $Q$ of $[a,b]$,\n   $$L(f,P) \\;\\le\\; U(f,Q).$$\n3. **Quantitative form.** If $P' = (n',t')$ refines $P = (n,t)$ then\n   $$0 \\;\\le\\; U(f,P) - U(f,P') \\;\\le\\; 2M\\,(n' - n)\\,\\|P\\|, \\qquad 0 \\;\\le\\; L(f,P') - L(f,P) \\;\\le\\; 2M\\,(n' - n)\\,\\|P\\| .$$\n\n**Notation.** In claim 3 the natural number $n' - n$ multiplies a real, and as in\nclause 2 of [[lem-finite-sum-laws]] it stands there for its canonical natural\n$\\iota(n'-n) \\in \\mathbb{R}$ ([[def-canonical-natural]]); $\\iota$ is additive and\nnondecreasing on $\\mathbb{N}$ ([[lem-of-naturals-positive]]). The same\nabbreviation is used throughout the proof.\n\nClaims 1 and 2 are what make the Darboux-integral definition well posed. Claim\n3 is the extra information that a refinement changes the sums by an amount\ncontrolled by the mesh of the **coarse** partition and by how many points were\nadded; it is the bound a later Darboux-versus-Riemann comparison needs and\nnothing else on this page uses it.\nHere $n' - n \\ge 0$ ([[def-partition-and-refinement]]), so the right-hand bounds\nare nonnegative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a subspace of a topological space $X$. Then\n\n$$\\mathcal B(Y)=\\mathcal B(X)|_Y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable.\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "thm-darboux-equals-riemann",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]) and let $I \\in \\mathbb{R}$. The following are equivalent.\n\n1. **(Darboux)** $f$ is Darboux integrable on $[a,b]$ with\n   $\\int_a^b f = I$ ([[def-darboux-integral]]).\n2. **(Riemann)** For every real $\\varepsilon > 0$ there is a real $\\delta > 0$\n   such that\n   $$\\bigl|\\,S(f,P,\\xi) - I\\,\\bigr| \\;<\\; \\varepsilon$$\n   for **every** tagged partition $(P,\\xi)$ of $[a,b]$ with $\\|P\\| < \\delta$\n   ([[def-tagged-partition-and-riemann-sum]], [[def-partition-and-refinement]]).\n\n**The quantifier over tagged partitions is universal, and that is the content.**\nCondition 2 constrains every tagged partition of small mesh at once, tags\nincluded; it is not a statement about one sequence of tagged partitions, and it\ncannot be weakened to one. The companion page of this pair exhibits a\nnon-integrable function whose Riemann sums are constant along such a sequence.\n\n**Boundedness is a hypothesis of both conditions as stated here.** Condition 1\npresupposes it, since the Darboux sums of an unbounded function do not exist\n([[def-darboux-sums]]); condition 2 makes sense for unbounded $f$ as well, and\nin fact implies boundedness, but that implication is not proved here and is not\nused: every application on this page starts from a bounded $f$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ satisfy\n\n$$m \\;\\le\\; f(x) \\;\\le\\; M \\qquad \\text{for every } x \\in [a,b],$$\n\nwith $m, M$ real. Then $f$ is bounded ([[def-bounded-set]]), so its Darboux sums\nand integrals are defined ([[def-darboux-sums]], [[def-darboux-integral]]), and\nfor **every** partition $P$ of $[a,b]$ ([[def-partition-and-refinement]])\n\n$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$\n\nIn particular, taking $f$ to be the constant function with value $c$:\n\n$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$\n\nthe constant function being integrable, with $L(f,P) = U(f,P) = c(b-a)$ for\nevery partition $P$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose recursively a refining sequence of partitions $P_1\\preceq P_2\\preceq\\cdots$ of $[a,b]$ such that $U(f,P_n)-L(f,P_n)<1/n$ for every $n\\ge1$: choose $P_1$ for $\\varepsilon=1$, and once $P_n$ is chosen, let $R_{n+1}$ satisfy $U(f,R_{n+1})-L(f,R_{n+1})<1/(n+1)$ and put $P_{n+1}:=P_n\\vee R_{n+1}$; then [L2] preserves the inequality under refinement. For each $n$, write $P_n=\\{a=t^{(n)}_0<\\cdots<t^{(n)}_{m_n}=b\\}$ and let $m_{n,i}$ and $M_{n,i}$ be the infimum and supremum of $f$ on $[t^{(n)}_i,t^{(n)}_{i+1}]$. Define $$\\ell_n:=m_{n,m_n-1}\\chi_{\\{b\\}}+\\sum_{i<m_n-1}m_{n,i}\\chi_{[t^{(n)}_i,t^{(n)}_{i+1})},$$ $$u_n:=M_{n,m_n-1}\\chi_{\\{b\\}}+\\sum_{i<m_n-1}M_{n,i}\\chi_{[t^{(n)}_i,t^{(n)}_{i+1})}.$$ Each partition piece is a Borel subset of $[a,b]$ by [L3], so $\\ell_n$ and $u_n$ are bounded Borel functions on $[a,b]$. Also $-B\\le \\ell_n\\le \\ell_{n+1}\\le f\\le u_{n+1}\\le u_n\\le B$ pointwise, while [L11] gives $$L(f,P_n)\\le I\\le U(f,P_n),\\qquad U(f,P_n)-L(f,P_n)<1/n.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "choose",
+            "construct",
+            "L11"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\varphi:=\\sup_n \\ell_n$ and $\\psi:=\\inf_n u_n$. Since $\\ell_n\\uparrow\\varphi$, the last clause of [L4] makes $\\varphi$ Borel measurable; since $u_n$ are measurable, the infimum clause of [L4] makes $\\psi$ Borel measurable. Step 1.1 gives $-B\\le\\varphi\\le f\\le\\psi\\le B$. Now $B+\\ell_n$ is a nonnegative simple function, so [L6] and [L8] give $$\\int_{[a,b]}(B+\\ell_n)\\,d\\lambda_1 = B(b-a)+L(f,P_n).$$ Because $B+\\ell_n\\uparrow B+\\varphi$, [L7] yields $$\\int_{[a,b]}(B+\\varphi)\\,d\\lambda_1 = \\lim_{n\\to\\infty}\\big(B(b-a)+L(f,P_n)\\big)=B(b-a)+I,$$ the limit being the squeeze from step 1.1. Since $|(B+\\varphi)-B\\chi_{[a,b]}|=|\\varphi|\\le B\\chi_{[a,b]}$, the constant function $B\\chi_{[a,b]}$ is integrable by [L6] and [L8], so step 1.1 and [L5], [L9] show that $\\varphi\\in L^1(\\lambda_1)$ and $$\\int_{[a,b]}\\varphi\\,d\\lambda_1 = I.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "L9"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $n$ the function $u_n-\\ell_n$ is nonnegative simple, and step 1.1 with [L6] and [L8] gives $$\\int_{[a,b]}(u_n-\\ell_n)\\,d\\lambda_1 = U(f,P_n)-L(f,P_n)<1/n.$$ Because $\\varphi\\le f\\le\\psi$ and $\\ell_n\\le\\varphi\\le\\psi\\le u_n$, one has $0\\le \\psi-\\varphi\\le u_n-\\ell_n$ for every $n$. So [L5] yields $$0\\le \\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1 < 1/n\\qquad(n\\ge1).$$ If that integral were positive, [L10] would give $n$ with $1/n<\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1$, contradicting the displayed inequality. Therefore $$\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1=0.$$ The same bound $|\\psi-\\varphi|\\le 2B\\chi_{[a,b]}$ shows $\\psi-\\varphi\\in L^1(\\lambda_1)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L5",
+            "L6",
+            "L8",
+            "L9",
+            "L10"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\psi=\\varphi+(\\psi-\\varphi)$ and both summands are integrable, [L9] and step 3.1 give $$\\int_{[a,b]}\\psi\\,d\\lambda_1 =\\int_{[a,b]}\\varphi\\,d\\lambda_1+\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1 =I+0=I.$$ Together with steps 2.1 and 3.1, this proves the existence of bounded Borel envelopes $\\varphi\\le f\\le\\psi$ with the same Lebesgue integral $I$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L9"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function admits Borel Darboux envelopes with the same Lebesgue integral is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the recursive refining partitions must produce measurable upper and lower envelopes whose integrals really squeeze to the same value I. Resolved: step 1.1 builds P_n with gap < 1/n, steps 2.1 and 3.1 use monotone convergence and the zero integral of psi - phi, and step 4.1 concludes that both bounded Borel envelopes integrate to I."
+      }
+    },
+    "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-riemann-integrable-function-has-borel-darboux-envelopes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$, let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable, and write\n$$I:=\\int_a^b f(x)\\,dx$$\nfor its Riemann integral. Then there exist bounded Borel functions\n$\\varphi,\\psi:[a,b]\\to\\mathbb R$ such that\n\n$$\\varphi(x)\\le f(x)\\le \\psi(x)\\qquad(x\\in[a,b]),$$\n\n$$\\int_{[a,b]}\\varphi\\,d\\lambda_1 = I = \\int_{[a,b]}\\psi\\,d\\lambda_1.$$\n\nIn particular,\n$$\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1=0.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-ae-equality-preserves-measurability-on-complete-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A},\\mu)$ be a complete measure space, let\n$f : X \\to \\overline{\\mathbb{R}}$ be measurable, and let\n$g : X \\to \\overline{\\mathbb{R}}$ satisfy $g=f$ almost everywhere. Then $g$ is\nmeasurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable.\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose bounded Borel functions $\\varphi,\\psi$ on $[a,b]$ with [L1, L2]\n$\\varphi\\le f\\le\\psi$ and both integrals equal to $I$. Then\n$0\\le \\psi-\\varphi$ and\n$$\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1=0.$$\nSo [L2] gives $\\psi=\\varphi$ almost everywhere. Since $\\varphi\\le f\\le\\psi$,\nthe same null set yields $f=\\varphi$ almost everywhere.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L4], the measure space $(\\mathbb R,\\mathcal L(\\mathbb R),\\lambda_1)$ is [step 1.1, L3, L4]\ncomplete. The function $\\varphi$ is measurable because it is Borel, so [L3]\napplied to step 1.1 shows that $f$ is Lebesgue measurable.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The constant function $B\\chi_{[a,b]}$ is a nonnegative simple measurable [step 2.1, L1, L6, L7]\nfunction, and [L6] together with [L7] gives\n$$\\int_{[a,b]} B\\chi_{[a,b]}\\,d\\lambda_1 = B(b-a)<+\\infty.$$\nSince step 2.1 makes $|f|$ measurable and $|f|\\le B\\chi_{[a,b]}$, [L6] yields\n$$\\int_{[a,b]}|f|\\,d\\lambda_1<+\\infty.$$\nHence $f$ is Lebesgue integrable on $[a,b]$. The same estimate applies to\n$\\varphi$, because [L1] gives $|\\varphi|\\le B$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 and 3.1 show that $f$ and $\\varphi$ are integrable and agree [step 1.1, step 3.1, L1, L5]\nalmost everywhere. Taking the measurable set $A=[a,b]$ in [L5] gives\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_{[a,b]}\\varphi\\,d\\lambda_1.$$\nBy [L1], the right-hand side is $I=\\int_a^b f(x)\\,dx$. So the Lebesgue and\nRiemann integrals of $f$ agree.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A bounded Riemann integrable function on a closed bounded interval is Lebesgue measurable and has the same integral is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the proof must turn the Borel envelopes into actual measurability and equality of the Lebesgue and Riemann integrals without dropping the almost-everywhere comparison. Resolved: step 1.1 imports the equal-integral envelopes, step 2.1 uses completeness to transfer measurability from phi to f, and steps 3.1-4.1 dominate by B chi_[a,b] and use almost-everywhere equality to identify the two integrals."
+      }
+    },
+    "cor-riemann-integrable-function-is-almost-everywhere-equal-to-a-borel-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-riemann-integrable-function-has-borel-darboux-envelopes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$, let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable, and write\n$$I:=\\int_a^b f(x)\\,dx$$\nfor its Riemann integral. Then there exist bounded Borel functions\n$\\varphi,\\psi:[a,b]\\to\\mathbb R$ such that\n\n$$\\varphi(x)\\le f(x)\\le \\psi(x)\\qquad(x\\in[a,b]),$$\n\n$$\\int_{[a,b]}\\varphi\\,d\\lambda_1 = I = \\int_{[a,b]}\\psi\\,d\\lambda_1.$$\n\nIn particular,\n$$\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1=0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose bounded Borel functions $\\varphi,\\psi$ with [L1, L2]\n$\\varphi\\le f\\le\\psi$ and\n$$\\int_{[a,b]}(\\psi-\\varphi)\\,d\\lambda_1=0.$$\nSince $\\psi-\\varphi\\ge0$, [L2] gives $\\psi=\\varphi$ almost everywhere on\n$[a,b]$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the same full-measure set one has [step 1.1, L1]\n$\\varphi\\le f\\le\\psi=\\varphi$, so $f=\\varphi$ almost everywhere. Taking\n$g:=\\varphi$ proves the claim, and $g$ is Borel by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: equal integrals of the envelopes must force actual almost-everywhere equality before squeezing f between them. Resolved: step 1.1 gets integral(psi - phi) = 0 and uses the zero-almost-everywhere theorem to obtain psi = phi a.e., and step 2.1 then concludes f = phi a.e. with phi Borel."
+      }
+    },
+    "thm-arzela-bounded-convergence-for-riemann-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-bounded-convergence-on-a-finite-measure-space",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a finite measure space and let $f$ and $(f_n)$ be\nmeasurable complex-valued functions with $f_n\\to f$ almost everywhere. If\n$|f_n|\\le M$ almost everywhere for one real $M\\ge0$, then\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], each $f_n$ and $f$ is Lebesgue measurable and integrable on $[a,b]$, and $$\\int_{[a,b]} f_n\\,d\\lambda_1=\\int_a^b f_n(x)\\,dx,\\qquad \\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$ Also [L3] makes $([a,b],\\mathcal L([a,b]),\\lambda_1)$ a finite measure space.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The convergence hypothesis is pointwise, hence almost everywhere, and the uniform bound $|f_n|\\le M$ holds everywhere. So [L2] applies on $[a,b]$ and gives $$\\int_{[a,b]} f_n\\,d\\lambda_1\\longrightarrow\\int_{[a,b]} f\\,d\\lambda_1.$$ Translating the two sides with step 1.1 yields the stated convergence of the Riemann integrals.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Arzela's bounded convergence theorem for Riemann integrals is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-improper-integral-at-infinity",
+          "source_section": "Statement",
+          "quote": "Let $f$ be Riemann integrable on every compact interval $[a,R]$ with $R>a$. The improper integral over the right-unbounded interval is\n$$\\int_a^\\infty f(x)\\,dx:=\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx,$$\nprovided this limit exists as a finite real number. In that case the improper integral **converges**; otherwise it diverges. In particular, a limit of $+\\infty$ or $-\\infty$ is divergence, not convergence to an extended-real value.\n\nIf $f$ is Riemann integrable on every $[R,b]$ with $R<b$, define\n$$\\int_{-\\infty}^b f(x)\\,dx:=\\lim_{R\\to-\\infty}\\int_R^b f(x)\\,dx$$\nunder the same finite-limit convention. All finite integrals use the oriented convention.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each natural number $n\\ge1$, define $$f_n:=f\\,\\chi_{[a,a+n]}.$$ Then $0\\le f_n\\le f_{n+1}$ and $f_n(x)\\uparrow f(x)$ for every $x\\ge a$. By [L1] applied on $[a,a+n]$, $$\\int_{[a,\\infty)} f_n\\,d\\lambda_1 = \\int_{[a,a+n]} f\\,d\\lambda_1 =\\int_a^{a+n} f(x)\\,dx.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $f_n\\uparrow f$, [L2] gives $$\\int_{[a,\\infty)} f\\,d\\lambda_1 =\\lim_{n\\to\\infty}\\int_{[a,\\infty)} f_n\\,d\\lambda_1 =\\lim_{n\\to\\infty}\\int_a^{a+n} f(x)\\,dx.$$ Because $a+n\\to+\\infty$, [L3] identifies the last limit with the given improper integral $L$. Hence $$\\int_{[a,\\infty)} f\\,d\\lambda_1=L,$$ and in particular the Lebesgue integral is finite, so $f$ is integrable on the half-line.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the half-line truncations must be monotone and the limiting value must match the improper integral definition exactly. Resolved: step 1.1 sets f_n = f chi_[a,a+n] and uses the bounded-interval comparison theorem, and step 2.1 applies monotone convergence together with the improper-integral definition to recover the given limit L."
+      }
+    },
+    "thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-stieltjes-existence-continuous-bv",
+          "source_section": "Statement",
+          "quote": "If $f:[a,b]\\to\\mathbb R$ is continuous and\n$\\alpha:[a,b]\\to\\mathbb R$ has bounded variation, then\n$\\int_a^b f\\,d\\alpha$ exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-stieltjes-darboux-criterion",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $f:[a,b]\\to\\mathbb R$ be bounded and let $\\alpha:[a,b]\\to\\mathbb R$\nbe nondecreasing. Then $f$ is Riemann-Stieltjes integrable in the mesh sense of\n[[def-riemann-stieltjes-sum-and-integral]] if and only if both of the following\nconditions hold:\n\n1. $f$ is continuous at every discontinuity of $\\alpha$; and\n2. for every $\\varepsilon>0$ there is a partition $P$ with\n\n$$U_\\alpha(f,P)-L_\\alpha(f,P)<\\varepsilon.$$\n\nIn condition 2, writing $\\omega_i(f)$ for the oscillation of $f$ on\n$[t_i,t_{i+1}]$, the condition is\n$\\sum_{i<n}\\omega_i(f)\\Delta_i\\alpha<\\varepsilon$.\n\nThe hypothesis $a<b$ is required and not cosmetic. On $[a,a]$ the integral is\n$0$ by [[def-riemann-stieltjes-sum-and-integral]], so every bounded $f$ is\nintegrable, while [[def-partition-and-refinement]] admits no partition of a\nsingleton interval, so condition 2 asserts the existence of something that does\nnot exist and fails. The equivalence therefore holds only on a nondegenerate\ninterval; a consumer needing $a=b$ reads the value straight off the definition.\n\nIn particular, when $\\alpha$ is continuous, the weighted Darboux condition\nalone is equivalent to mesh Riemann-Stieltjes integrability.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let\n$F : \\mathbb{R} \\to \\mathbb{R}$ be nondecreasing and right-continuous, and let\n$\\mu_F$ be its Lebesgue-Stieltjes measure. Then for every $a < b$,\n\n$$\\mu_F((a,b)) = F(b^-) - F(a),$$\n\n$$\\mu_F([a,b]) = F(b) - F(a^-),$$\n\n$$\\mu_F([a,b)) = F(b^-) - F(a^-),$$\n\nand\n\n$$\\mu_F(\\{a\\}) = F(a) - F(a^-).$$\n\nConsequently $a$ is an atom of $\\mu_F$ in the sense of\n[[def-atom-of-a-measure-on-r]] if and only if $F(a) > F(a^-)$, and the set of\natoms of $\\mu_F$ is at most countable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-riemann-stieltjes-sum-and-integral",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $f,\\alpha:[a,b]\\to\\mathbb R$, and let $P=(n,t)$ be a partition\n([[def-partition-and-refinement]]). A choice of tags\n$\\xi_i\\in[t_i,t_{i+1}]$ for $i<n$ makes $(P,\\xi)$ a tagged partition as in\n[[def-tagged-partition-and-riemann-sum]]. Its **Riemann-Stieltjes sum** is\n\n$$S(f,\\alpha;P,\\xi):=\\sum_{i<n}f(\\xi_i)\\bigl(\\alpha(t_{i+1})-\\alpha(t_i)\\bigr).$$\n\nThe function $f$ is **Riemann-Stieltjes integrable with respect to $\\alpha$** on\n$[a,b]$ if there is $I\\in\\mathbb R$ such that for every $\\varepsilon>0$ there is\n$\\delta>0$ for which every tagged partition with $\\|P\\|<\\delta$ satisfies\n$|S(f,\\alpha;P,\\xi)-I|<\\varepsilon$. Then\n$I=\\int_a^b f\\,d\\alpha$.\n\nIf $f$ is bounded ([[def-bounded-set]]) and $\\alpha$ is nondecreasing\n([[def-monotone-function]]), put\n\n$$m_i:=\\inf_{x\\in[t_i,t_{i+1}]}f(x),\\qquad M_i:=\\sup_{x\\in[t_i,t_{i+1}]}f(x),$$\n$$L_\\alpha(f,P):=\\sum_{i<n}m_i\\Delta_i\\alpha,\\qquad U_\\alpha(f,P):=\\sum_{i<n}M_i\\Delta_i\\alpha,$$\n\nwhere $\\Delta_i\\alpha=\\alpha(t_{i+1})-\\alpha(t_i)\\ge0$. These are the lower and\nupper Stieltjes sums. Each subinterval is nonempty and its image under bounded\n$f$ is bounded above and below, so the suprema exist by\n[[def-complete-ordered-field]] and the infima by [[def-infimum]] and\n[[thm-infimum-property]]. Finite sums use [[def-finite-sum]] and\n[[lem-finite-sum-laws]]. On $[a,a]$ the integral is $0$; for $b<a$ set\n$\\int_a^b f\\,d\\alpha=-\\int_b^a f\\,d\\alpha$, matching\n[[def-oriented-integral]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-riemann-stieltjes-linearity-and-additivity",
+          "source_section": "Statement",
+          "quote": "Whenever the integrals on the right exist,\n\n$$\\int_a^b(uf+vg)\\,d\\alpha=u\\int_a^b f\\,d\\alpha+v\\int_a^b g\\,d\\alpha,$$\n$$\\int_a^b f\\,d(u\\alpha+v\\beta)=u\\int_a^b f\\,d\\alpha+v\\int_a^b f\\,d\\beta.$$\n\nLet $a\\le c\\le b$, suppose $\\alpha$ has bounded variation, and suppose $f$ is continuous at $c$. Then integrability on\n$[a,b]$ is equivalent to integrability on both $[a,c]$ and $[c,b]$, and\n\n$$\\int_a^b f\\,d\\alpha=\\int_a^c f\\,d\\alpha+\\int_c^b f\\,d\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Extend $g$ to a continuous function $\\widetilde g:\\mathbb R\\to\\mathbb R$ by setting $\\widetilde g(x)=g(a)$ for $x<a$, $\\widetilde g(x)=g(x)$ for $x\\in[a,b]$, and $\\widetilde g(x)=g(b)$ for $x>b$. Then [L5] makes $\\widetilde g$ Borel measurable. Put $$h:=(B+\\widetilde g)\\chi_{(a,b]}.$$ This is a nonnegative measurable function. Since $0\\le h\\le 2B\\,\\chi_{(a,b]}$, [L3], [L4], [L6], and [L7] show that $h$ is $\\mu_F$-integrable. Let $$J:=\\int_a^b (B+g)\\,dF.$$ By [L1], the integral $J$ exists. The constant integrand $B$ has the same Riemann-Stieltjes sum $B(F(b)-F(a))$ for every tagged partition, so [L8] gives $$\\int_a^b B\\,dF=B\\bigl(F(b)-F(a)\\bigr).$$ Therefore [L9] yields $$J=I+B\\bigl(F(b)-F(a)\\bigr).$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L8",
+            "L9",
+            "construct",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\varepsilon>0$. By [L2], choose a partition $P_0=\\{a=t_0<\\cdots<t_m=b\\}$ with $U_F(g,P_0)-L_F(g,P_0)<\\varepsilon$. By [L8], choose $\\delta>0$ such that every tagged partition of mesh below $\\delta$ has Riemann-Stieltjes sum for $B+g$ within $\\varepsilon$ of $J$. Let $P=\\{a=s_0<\\cdots<s_n=b\\}$ be a refinement of $P_0$ with mesh below $\\delta$. For each $i$ put $$m_i:=\\inf_{[s_{i-1},s_i]}g,\\qquad M_i:=\\sup_{[s_{i-1},s_i]}g,$$ and define nonnegative simple functions on $\\mathbb R$ by $$\\ell_P:=\\sum_{i=1}^n (B+m_i)\\chi_{(s_{i-1},s_i]},\\qquad u_P:=\\sum_{i=1}^n (B+M_i)\\chi_{(s_{i-1},s_i]}.$$ Then $\\ell_P\\le h\\le u_P$. Because each refined infimum is at least the corresponding coarse infimum and each refined supremum is at most the corresponding coarse supremum, the Stieltjes lower sum increases and the upper sum decreases under this refinement, so $$U_F(g,P)-L_F(g,P)\\le U_F(g,P_0)-L_F(g,P_0)<\\varepsilon.$$ Also [L3] and [L4] give $$\\int \\ell_P\\,d\\mu_F = B\\bigl(F(b)-F(a)\\bigr)+L_F(g,P),\\qquad \\int u_P\\,d\\mu_F = B\\bigl(F(b)-F(a)\\bigr)+U_F(g,P).$$",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L8",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix any tagging $\\xi$ of $P$. Then $$\\int \\ell_P\\,d\\mu_F\\le\\int h\\,d\\mu_F\\le\\int u_P\\,d\\mu_F,$$ and because $m_i\\le g(\\xi_i)\\le M_i$ on every subinterval, $$\\int \\ell_P\\,d\\mu_F\\le S(B+g,F;P,\\xi)\\le\\int u_P\\,d\\mu_F.$$ Hence both $\\int h\\,d\\mu_F$ and $S(B+g,F;P,\\xi)$ lie in an interval of length $U_F(g,P)-L_F(g,P)<\\varepsilon$, so $$\\left|\\int h\\,d\\mu_F-S(B+g,F;P,\\xi)\\right|<\\varepsilon.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L7",
+            "L8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $\\|P\\|<\\delta$, [L8] gives $$\\left|S(B+g,F;P,\\xi)-J\\right|<\\varepsilon.$$ Combining this with step 2.1, $$\\left|\\int h\\,d\\mu_F-J\\right|<2\\varepsilon.$$ Since $\\varepsilon>0$ was arbitrary, $$\\int h\\,d\\mu_F=J=I+B\\bigl(F(b)-F(a)\\bigr).$$",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "L8"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 gives $h=\\widetilde g\\,\\chi_{(a,b]}+B\\chi_{(a,b]}$, and both summands are integrable by step 1.1. Therefore [L3] and [L6] yield $$\\int_{(a,b]} g\\,d\\mu_F =\\int h\\,d\\mu_F-B\\mu_F((a,b]) =\\bigl(I+B(F(b)-F(a))\\bigr)-B(F(b)-F(a)) =I.$$ This is exactly $$\\int_{(a,b]} g\\,d\\mu_F=\\int_a^b g\\,dF,$$ so the two integrals agree.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L3",
+            "L6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For a continuous integrand, the Riemann-Stieltjes and Lebesgue-Stieltjes integrals agree is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the proof must compare the measure integral and every fine tagged Riemann-Stieltjes sum through the same epsilon window after adding the constant B. Resolved: step 1.1 makes h = (B + g) chi_(a,b] integrable, steps 1.2-3.1 squeeze the measure integral and tagged sums between lower and upper Stieltjes sums, and step 4.1 subtracts B(F(b) - F(a)) to recover I."
+      }
+    },
+    "ex-indicator-of-the-rationals-is-lebesgue-integrable-with-integral-zero-and-not-riemann-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirichlet-and-thomae-functions",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{N} \\subseteq \\mathbb{Z} \\subseteq \\mathbb{Q} \\subseteq\n\\mathbb{R}$ denotes the chain of canonical embeddings\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]]), and\neach set is identified with its image in $\\mathbb{R}$, as elsewhere in this\nlibrary; for a natural $q$ the real $\\iota(q) = q \\cdot 1_{\\mathbb{R}}$ is the\ncanonical natural ([[def-canonical-natural]]), and $\\iota(q) > 0$ for $q \\ge 1$\n([[lem-of-naturals-positive]]). A real is **rational** when it lies in\n$\\mathbb{Q}$ and **irrational** otherwise; both sets are dense in $\\mathbb{R}$\n([[lem-q-and-irrationals-dense-r]]).\n\n### The Dirichlet function\n\n$$\\mathbf{1}_{\\mathbb{Q}} : \\mathbb{R} \\to \\mathbb{R}, \\qquad \\mathbf{1}_{\\mathbb{Q}}(x) := \\begin{cases} 1 & \\text{if } x \\in \\mathbb{Q},\\\\ 0 & \\text{if } x \\notin \\mathbb{Q}.\\end{cases}$$\n\nThis is the indicator of the rationals. It is a function because every real\neither lies in $\\mathbb{Q}$ or does not, and the two clauses are exclusive.\n\n### The least denominator of a rational\n\nLet $x \\in \\mathbb{Q}$ and put\n\n$$Q(x) \\;:=\\; \\{\\, q \\in \\mathbb{N} \\;:\\; q \\ge 1 \\ \\text{ and } \\ \\iota(q)\\,x \\in \\mathbb{Z} \\,\\}.$$\n\n**$Q(x)$ is nonempty.** Every rational is $a/b$ with $a \\in \\mathbb{Z}$ and $b$ a\npositive integer ([[lem-int-embeds-rat]]), and a positive integer is $\\iota(q)$\nfor a unique natural $q \\ge 1$ ([[lem-nat-embeds-int]]); then\n$\\iota(q)\\,x = a \\in \\mathbb{Z}$, so $q \\in Q(x)$.\n\nBy the well-ordering principle ([[thm-well-ordering-principle]]) the nonempty\nsubset $Q(x) \\subseteq \\mathbb{N}$ has a least element. Write\n\n$$q(x) \\;:=\\; \\min Q(x) \\;\\ge\\; 1,$$\n\nthe **least denominator** of $x$, and $p(x) := \\iota(q(x))\\,x \\in \\mathbb{Z}$,\nso that\n\n$$x \\;=\\; \\frac{p(x)}{\\iota(q(x))} .$$\n\nNothing is selected here: $q(x)$ is the least element of a set determined by\n$x$, so it is a function of $x$ alone.\n\n**The least denominator is the denominator in lowest terms.** The integers\n$p(x)$ and $q(x)$ are coprime ([[def-coprime]]). Indeed put\n$d := \\gcd(p(x), q(x))$, which satisfies $d \\ge 1$ because $q(x) \\ge 1$ makes the\npair different from $(0,0)$ ([[lem-gcd-basic-values]],\n[[def-common-divisor-and-gcd]]). Then $d$ divides $q(x)$, so $q(x)/d$ is a\nnatural number $\\ge 1$, and $\\iota(q(x)/d) = \\iota(q(x))/d$ because $\\iota$\ncarries products of naturals to products ([[lem-of-naturals-positive]]); hence\n\n$$\\iota(q(x)/d)\\,x \\;=\\; \\frac{\\iota(q(x))\\,x}{d} \\;=\\; \\frac{p(x)}{d} \\;\\in\\; \\mathbb{Z},$$\n\nso $q(x)/d \\in Q(x)$ and therefore $q(x)/d \\ge q(x)$, which forces $d = 1$.\n**Conversely, a lowest-terms denominator is the least one, so the description is\nunambiguous.** Suppose $x = p/\\iota(q)$ with $q \\ge 1$ a natural, $p \\in \\mathbb{Z}$\nand $\\gcd(p,q) = 1$. Then $q \\in Q(x)$, so $q_{0} := q(x) \\le q$; and from\n$p/\\iota(q) = p(x)/\\iota(q_{0})$ we get $q_{0}p = q\\,p(x)$ in $\\mathbb{Z}$, so\n$q \\mid q_{0}p$, and $\\gcd(p,q) = 1$ gives $q \\mid q_{0}$\n([[lem-coprime-divides-product]], claim 1), hence $q \\le q_{0}$. So $q = q(x)$:\nwriting $x = p/q$ \"in lowest terms with $q \\ge 1$\" and taking $q = q(x)$ describe\nthe same integer, and [[cor-gcd-quotients-coprime]] is what produces such a\nrepresentation from an arbitrary one.\n\n### Thomae's function\n\n$$t : \\mathbb{R} \\to \\mathbb{R}, \\qquad t(x) := \\begin{cases} 1/\\iota(q(x)) & \\text{if } x \\in \\mathbb{Q},\\\\ 0 & \\text{if } x \\notin \\mathbb{Q}.\\end{cases}$$\n\nIt is also called the **popcorn function** or the **ruler function**. The value\nis well defined because $q(x)$ is, and $\\iota(q(x)) \\ge 1 > 0$ is invertible.\n\n**Boundary values, stated rather than left to the reader.**\n\n- $t(0) = 1$. Indeed $\\iota(1)\\cdot 0 = 0 \\in \\mathbb{Z}$, so $1 \\in Q(0)$ and\n  $q(0) = 1$; the representation is $0 = 0/1$.\n- $t(m) = 1$ for every integer $m$, by the same computation with $1 \\in Q(m)$.\n- $0 < t(x) \\le 1$ for every rational $x$, since $\\iota(q(x)) \\ge 1$; and\n  $t(x) = 0$ exactly at the irrationals.\n\n**On the range.** The values of $t$ are $0$ and the reciprocals\n$1/\\iota(q)$ of the canonical naturals $q \\ge 1$; every such value is attained,\n$1/\\iota(q)$ being the value at the rational $1/\\iota(q)$ itself, whose least\ndenominator is $q$ because $\\iota(k)/\\iota(q) \\in \\mathbb{Z}$ with\n$1 \\le k < q$ would give a positive integer smaller than $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-countable-sets-are-null",
+          "source_section": "Statement",
+          "quote": "Every at most countable set $A \\subseteq \\mathbb{R}$ ([[def-countable]]) has\nmeasure zero ([[def-measure-zero-and-content-zero]]).\n\nThe cover is explicit: the $k$-th point of a listing of $A$ is put inside an\ninterval of length $\\varepsilon \\cdot 2^{-k-1}$, and the lengths sum to\n$\\varepsilon$ by [[thm-geometric-series]]. **No choice principle is used**: a\nlisting of $A$ is a single object, fixed once ([[lem-countable-iff-surjection-from-n]]),\nand everything after that is a formula in $k$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-dirichlet-and-thomae-continuity-sets",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbf{1}_{\\mathbb{Q}}$ and $t$ be the Dirichlet and Thomae functions\n([[def-dirichlet-and-thomae-functions]]), and write $q(x)$ for the least\ndenominator of a rational $x$, so that $t(x) = 1/\\iota(q(x))$ there and\n$t(x) = 0$ at every irrational $x$. Then:\n\n1. $\\mathbf{1}_{\\mathbb{Q}}$ is continuous at **no** point of $\\mathbb{R}$\n   ([[def-continuity-real]]);\n2. $\\omega_{t}(c) = t(c)$ for **every** real $c$ ([[def-oscillation]]);\n3. $t$ is continuous at every irrational and discontinuous at every rational, so\n   its set of continuity points is exactly $\\mathbb{R} \\setminus \\mathbb{Q}$.\n\n**Claim 1 duplicates a companion examples-page argument on purpose.** The\nexamples-page proof that the Dirichlet function is nowhere continuous lives on\na leaf page of the library, so later A-page items cannot cite it directly. The\nclaim is needed here, and on later pages, as a citable theorem-level\nstatement, so it is proved again rather than quoted. The two statements are the\nsame, and no originality is claimed for the repeated proof. The same\nduplication pattern is used elsewhere in this page family for examples whose\nargument also has to be available in A-page form.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-riemann-integrability-and-lebesgue-null-discontinuity-sets",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]).\n\n1. Let $a<b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded, with\n   discontinuity set $D$. Then $f$ is Riemann integrable on $[a,b]$ if and only\n   if $D$ is Lebesgue measurable with $\\lambda_1(D) = 0$.\n2. Let $m \\ge 1$ and let $f$ be a bounded real function on a closed\n   nondegenerate rectangle in $\\mathbb{R}^m$, with discontinuity set $D$. Then\n   $f$ is Riemann integrable if and only if $D$ is Lebesgue measurable with\n   $\\lambda_m(D) = 0$.\n\n**The choice ledger of the cited criteria is inherited, not discharged.** In\n[[thm-lebesgue-criterion]] the implication from integrability to nullity of $D$\nuses countable choice and the converse implication is a theorem of ZF; the\ntranslation performed here rests on the construction of $\\lambda$, which uses\ncountable choice in both directions, so the statement above carries the\nhypothesis throughout.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the function $f$ is $1$ on $\\mathbb Q\\cap[0,1]$ and $0$ on its [L1, L2, L3, L4]\ncomplement. The set $\\mathbb Q\\cap[0,1]$ is countable, hence null by [L2], and\n[L3] makes it Lebesgue measurable. Therefore $f=0$ almost everywhere on\n$[0,1]$, so [L4] gives\n$$\\int_{[0,1]} f\\,d\\lambda_1=0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L5], every point of $[0,1]$ is a discontinuity of $f$. Thus the [L5, L6, L7]\ndiscontinuity set of $f$ is the whole interval $[0,1]$, whose Lebesgue measure\nis $1$ by [L7], not $0$. So [L6] shows that $f$ is not Riemann integrable.",
+          "step": "1.2",
+          "inputs": [
+            "L5",
+            "L6",
+            "L7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The indicator of the rationals in [0,1] is Lebesgue integrable with integral 0 and not Riemann integrable is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the witness must prove both Lebesgue integral 0 and failure of Riemann integrability from the current continuity-set theorem. Resolved: step 1.1 uses countability and completeness to show the rationals are null and hence the integral is 0, and step 1.2 identifies every point of [0,1] as a discontinuity and invokes the null-discontinuity criterion."
+      }
+    },
+    "fs-every-riemann-integrable-function-is-borel-measurable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two",
+          "source_section": "Statement",
+          "quote": "Let $c:[0,1]\\to\\mathbb{R}$ be the Cantor function. Define\n\n$$\\psi:[0,1]\\to\\mathbb{R}, \\qquad \\psi(x):=x+c(x).$$\n\nThen $\\psi$ is a homeomorphism from $[0,1]$ onto $[0,2]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-this-homeomorphism-sends-the-cantor-set-onto-a-set-of-lebesgue-measure-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $C \\subseteq [0,1]$ be the Cantor set\nand let $\\psi(x)=x+c(x)$ be the homeomorphism of\n[[lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two]].\nThen\n\n$$K:=\\psi[C] \\subseteq [0,2]$$\n\nis compact and Lebesgue measurable, with $\\lambda(K)=1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $A \\subseteq \\mathbb{R}$ satisfy\n$\\lambda^*(A)>0$. Then $A$ contains a subset that is not Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-cantor-set-is-an-uncountable-lebesgue-null-set",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). The Cantor\nmiddle-thirds set $C$ ([[def-cantor-set]]) is Lebesgue measurable with\n\n$$\\lambda_1(C) = 0,$$\n\nand $C$ is uncountable ([[def-countable]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-null-sets-form-a-sigma-ideal-in-a-complete-space",
+          "source_section": "Statement",
+          "quote": "In every measure space, a countable union of measurable null sets is measurable and null, and every measurable subset of a null set is null. If the measure space is complete, every subset of a measurable null set is measurable and null. Thus the null sets of a complete measure space form a sigma-ideal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-cantor-set-properties",
+          "source_section": "Statement",
+          "quote": "Let $C$ be the Cantor set ([[def-cantor-set]]). Then:\n\n1. $C$ is closed and bounded, hence compact\n   ([[thm-heine-borel-characterisation-r]], [[def-open-cover-r]]);\n2. $C$ has content zero, and therefore measure zero\n   ([[def-measure-zero-and-content-zero]]);\n3. $C$ is perfect ([[def-perfect-set-r]]);\n4. $C$ is uncountable ([[def-countable]]);\n5. $C$ contains no interval with two distinct endpoints, and is nowhere dense\n   ([[def-nowhere-dense-meager]]);\n6. every nonempty connected subset of $C$ ([[def-connected-r]]) is a single\n   point.\n\nClaim 6 is what the phrase \"totally disconnected\" names elsewhere; that phrase\nis **not** used here, because no definition of total disconnectedness exists at\nthis point in the reading order. What is proved is exactly the displayed\nstatement, and it is obtained from claim 5 through\n[[thm-connected-subsets-of-r-are-intervals]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-riemann-integrability-and-lebesgue-null-discontinuity-sets",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]).\n\n1. Let $a<b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded, with\n   discontinuity set $D$. Then $f$ is Riemann integrable on $[a,b]$ if and only\n   if $D$ is Lebesgue measurable with $\\lambda_1(D) = 0$.\n2. Let $m \\ge 1$ and let $f$ be a bounded real function on a closed\n   nondegenerate rectangle in $\\mathbb{R}^m$, with discontinuity set $D$. Then\n   $f$ is Riemann integrable if and only if $D$ is Lebesgue measurable with\n   $\\lambda_m(D) = 0$.\n\n**The choice ledger of the cited criteria is inherited, not discharged.** In\n[[thm-lebesgue-criterion]] the implication from integrability to nullity of $D$\nuses countable choice and the converse implication is a theorem of ZF; the\ntranslation performed here rests on the construction of $\\lambda$, which uses\ncountable choice in both directions, so the statement above carries the\nhypothesis throughout.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a subspace of a topological space $X$. Then\n\n$$\\mathcal B(Y)=\\mathcal B(X)|_Y.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the compact set $K$ has positive measure, so [L2] provides a [L1, L2, L3, L4, construct]\nnonmeasurable subset $N\\subseteq K$. Put $E:=\\psi^{-1}[N]\\subseteq C$. Since\n$C$ is measurable and null by [L3], step 1.1 and [L4] show that $E$ is\nLebesgue measurable and null.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $h:=\\mathbf 1_E$ on $[0,1]$. If $x\\notin C$, then [step 1.1, L3, L5, L6]\nan open\nneighbourhood of $x$ disjoint from $C$, hence disjoint from $E$, so $h$ is\nidentically $0$ there. Thus every discontinuity of $h$ lies in $C$. Since $C$\nhas Lebesgue measure $0$ by [L3], [L6] makes $h$ Riemann integrable on $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose instead that $h$ were Borel measurable on $[0,1]$. [step 1.1, step 2.1, L1, L7, L8, assume-contra, discharge-contradiction]\nThen\n$E=h^{-1}((1/2,\\infty))$ would be Borel in the subspace $[0,1]$. Because\n$E\\subseteq C$, [L7] makes $E$ Borel in the subspace $C$. The restriction\n$\\psi|_C:C\\to K$ is a homeomorphism by [L1], so its inverse\n$(\\psi|_C)^{-1}:K\\to C$ is continuous; applying [L8] to that inverse shows that\n$N=\\psi[E]$ is Borel in the subspace $K$. Since $K$ is compact and therefore\nclosed in $\\mathbb R$, [L7] makes $N$ Borel in $\\mathbb R$, contradicting the\nchoice of $N$. Therefore $h$ is Riemann integrable but not Borel measurable,\nand the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L7",
+            "L8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the refutation depends on pulling a nonmeasurable subset of the positive-measure image K back to a null subset E of the Cantor set while keeping the discontinuity set null. Resolved: step 1.1 uses Choice to choose N subset K and pulls back E subset C, step 2.1 makes chi_E Riemann integrable because every discontinuity lies in the null Cantor set, and step 3.1 shows Borel measurability would force N itself to be Borel."
+      }
+    },
+    "ex-open-dense-set-indicator-is-a-monotone-l-one-limit-of-riemann-integrable-functions-but-is-not-riemann-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-finitely-many-discontinuities-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Suppose there are $r \\in \\mathbb{N}$ and points\n$d_0, \\dots, d_{r-1} \\in [a,b]$ such that $f$ is continuous\n([[def-continuity-real]]) at every point of $[a,b]$ other than\n$d_0, \\dots, d_{r-1}$; that is, every discontinuity of $f$\n([[def-classification-of-discontinuities]]) occurs among those $r$ listed\npoints. Then $f$ is Riemann integrable on $[a,b]$ ([[def-darboux-integral]]).\n\nFor $r = 0$ the hypothesis says $f$ is continuous on $[a,b]$, so this reduces\nto the usual continuous-case integrability statement; the argument below covers\nthat case without a separate treatment. Repetitions in the list are allowed and\nharmless, and no claim is made that the listed points **are**\ndiscontinuities: the hypothesis is one-sided, so a finite superset of the\ndiscontinuity set is enough.\n\n**Nothing is said about the kind of the discontinuities.** They may be\nremovable, jumps, or essential ([[def-classification-of-discontinuities]]); only\ntheir number matters. Boundedness is a genuine hypothesis, since an unbounded\nfunction has no Darboux sums at all ([[def-darboux-sums]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-riemann-integrability-and-lebesgue-null-discontinuity-sets",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]).\n\n1. Let $a<b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded, with\n   discontinuity set $D$. Then $f$ is Riemann integrable on $[a,b]$ if and only\n   if $D$ is Lebesgue measurable with $\\lambda_1(D) = 0$.\n2. Let $m \\ge 1$ and let $f$ be a bounded real function on a closed\n   nondegenerate rectangle in $\\mathbb{R}^m$, with discontinuity set $D$. Then\n   $f$ is Riemann integrable if and only if $D$ is Lebesgue measurable with\n   $\\lambda_m(D) = 0$.\n\n**The choice ledger of the cited criteria is inherited, not discharged.** In\n[[thm-lebesgue-criterion]] the implication from integrability to nullity of $D$\nuses countable choice and the converse implication is a theorem of ZF; the\ntranslation performed here rests on the construction of $\\lambda$, which uses\ncountable choice in both directions, so the statement above carries the\nhypothesis throughout.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "prop-measure-of-a-set-difference",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $A\\subseteq B$ be measurable with $\\mu(A)<+\\infty$. Then\n\n$$\\mu(B)=\\mu(A)+\\mu(B\\setminus A).$$\n\nIf $\\mu(B)<+\\infty$, all terms are real and hence $\\mu(B\\setminus A)=\\mu(B)-\\mu(A)$. If $\\mu(B)=+\\infty$, then $\\mu(B\\setminus A)=+\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], fix an enumeration $(q_k)_{k\\ge0}$ of $\\mathbb Q\\cap(0,1)$. For each $k\\ge0$, let $$I_k:=\\bigl(q_k-2^{-k-4},\\,q_k+2^{-k-4}\\bigr)\\cap(0,1),$$ put $U_n:=\\bigcup_{k<n}I_k$ for $n\\ge1$, and put $U:=\\bigcup_{k\\ge0}I_k$. Each $U_n$ and $U$ is open, and every rational point of $(0,1)$ lies in $U$, so $U$ is dense in $(0,1)$ and hence in $[0,1]$. Each interval $I_k$ has length at most $2^{-k-3}$, so [L2], [L3], [L8], and [L9] give $$\\lambda_1(U)\\le\\sum_{k=0}^{\\infty}\\lambda_1(I_k)\\le\\sum_{k=0}^{\\infty}2^{-k-3} =2^{-3}\\sum_{k=0}^{\\infty}2^{-k}=1/4<1.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L8",
+            "L9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $U_n$ is a finite union of open intervals, so $\\mathbf 1_{U_n}$ is continuous away from the finitely many endpoints of those intervals. Thus [L5] makes every $\\mathbf 1_{U_n}$ Riemann integrable on $[0,1]$. Also $U_n\\uparrow U$, so $\\mathbf 1_{U_n}\\uparrow\\mathbf 1_U$ pointwise and $$|\\mathbf 1_U-\\mathbf 1_{U_n}|=\\mathbf 1_{U\\setminus U_n}.$$ By [L4] and [L7], $$\\int_{[0,1]}|\\mathbf 1_U-\\mathbf 1_{U_n}|\\,d\\lambda_1 =\\lambda_1(U\\setminus U_n)=\\lambda_1(U)-\\lambda_1(U_n)\\to0.$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "L5",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $C:=[0,1]\\setminus U$. Step 1.1 and [L8] give $$\\lambda_1(C)=\\lambda_1([0,1])-\\lambda_1(U)=1-\\lambda_1(U)>0.$$ Because $U$ is open, every point of $U$ is a continuity point of $\\mathbf 1_U$. Because $U$ is dense, every point of $C$ is a boundary point of $U$, hence every neighbourhood of such a point meets both $U$ and $C$; so $\\mathbf 1_U$ is discontinuous at every point of $C$. Therefore the discontinuity set of $\\mathbf 1_U$ contains the positive-measure set $C$, and [L6] shows that $\\mathbf 1_U$ is not Riemann integrable on $[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L6",
+            "L7",
+            "L8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An open dense set of measure less than 1 is the monotone L1-limit of Riemann integrable indicators, but its indicator is not Riemann integrable is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the open dense set U must have measure strictly less than 1 while the indicator sequence converges in L^1 and the limit still has a positive-measure discontinuity set. Resolved: step 1.1 controls lambda(U) by a geometric-series bound, step 2.1 gives Riemann integrable finite-stage indicators with L^1 convergence to 1_U, and step 3.1 uses the complement C of positive measure as a full discontinuity set witness."
+      }
+    },
+    "cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dirichlet-test-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $f$ be locally Riemann integrable on $[a,\\infty)$ and suppose its truncation primitive $F(x)=\\int_a^x f$ is bounded. Each of the following conditions implies convergence of $\\int_a^\\infty f(x)g(x)\\,dx$:\n\n1. $g$ is nonnegative, nonincreasing, and $g(x)\\to0$.\n2. $f$ is continuous, $g$ is differentiable with $g'$ Riemann integrable on every compact subinterval, $g(x)\\to0$, and $\\int_a^\\infty|g'(x)|\\,dx$ converges. Local integrability of $g'$ is a hypothesis and not a consequence of the last one: convergence of $\\int_a^\\infty|g'|$ presupposes only that $|g'|$ is integrable on each compact subinterval, and a bounded derivative need not be Riemann integrable.\n\nThe reflected statements hold at $-\\infty$ and at finite singular endpoints, with monotonicity directed toward the singular end.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-absolute-divergence-from-uniform-tail-mass",
+          "source_section": "Statement",
+          "quote": "Let $g\\ge0$ be monotone on $[a,\\infty)$ and suppose $\\int_a^\\infty g$ diverges. Let $a\\le x_0<x_1<\\cdots$ tend to infinity and satisfy $x_{j+1}-x_j\\le M$ for some $M>0$, and suppose a locally integrable $f$ satisfies\n$$\\int_{x_j}^{x_{j+1}}|f(x)|\\,dx\\ge\\delta>0$$\nfor every $j$. Then $\\int_a^\\infty|f(x)g(x)|\\,dx$ diverges, so $\\int_a^\\infty fg$ cannot converge absolutely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-improper-integral-at-infinity",
+          "source_section": "Statement",
+          "quote": "Let $f$ be Riemann integrable on every compact interval $[a,R]$ with $R>a$. The improper integral over the right-unbounded interval is\n$$\\int_a^\\infty f(x)\\,dx:=\\lim_{R\\to\\infty}\\int_a^R f(x)\\,dx,$$\nprovided this limit exists as a finite real number. In that case the improper integral **converges**; otherwise it diverges. In particular, a limit of $+\\infty$ or $-\\infty$ is divergence, not convergence to an extended-real value.\n\nIf $f$ is Riemann integrable on every $[R,b]$ with $R<b$, define\n$$\\int_{-\\infty}^b f(x)\\,dx:=\\lim_{R\\to-\\infty}\\int_R^b f(x)\\,dx$$\nunder the same finite-limit convention. All finite integrals use the oriented convention.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-absolute-and-conditional-improper-convergence",
+          "source_section": "Statement",
+          "quote": "An improper integral of $f$ is **absolutely convergent** when the corresponding improper integral of $|f|$ converges. It is **conditionally convergent** when the integral of $f$ converges but the integral of $|f|$ does not.\n\nFor an integral with several singular ends, absolute convergence means absolute convergence on every separately defined one-ended piece. Conditional convergence means convergence of every piece and failure of absolute convergence on at least one piece. Thus the terminology never permits cancellation between distinct singular ends.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $f$ is continuous on $[0,1]$, so its proper integral there exists. By [L1], the improper integral $$\\int_1^\\infty \\frac{\\sin x}{x}\\,dx$$ converges. For $R>1$, [L3] gives $$\\int_0^R f(x)\\,dx=\\int_0^1 f(x)\\,dx+\\int_1^R \\frac{\\sin x}{x}\\,dx.$$ Passing to the limit as $R\\to\\infty$ and using [L4], the improper integral $$\\int_0^\\infty \\frac{\\sin x}{x}\\,dx$$ converges. In the terminology of [L6], the sine integral is convergent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [L2] with the nonincreasing function $g(x)=1/x$, the bounded-gap sequence $x_j=j\\pi$, and the locally integrable oscillatory factor $u(x)=\\sin x$. Since $$\\int_{j\\pi}^{(j+1)\\pi}|\\sin x|\\,dx=2\\qquad(j\\ge1),$$ [L2] yields divergence of $$\\int_1^\\infty \\frac{|\\sin x|}{x}\\,dx.$$ Because $|f|$ is continuous on $[0,1]$, its proper integral there exists, so [L3] and [L4] show that $$\\int_0^\\infty |f(x)|\\,dx$$ also diverges. Thus the improper integral of $\\sin x/x$ is not absolutely convergent.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L6], steps 1.1 and 1.2 show that the sine integral is only conditionally convergent. If $f$ were Lebesgue integrable on $[0,\\infty)$, then [L5] would force $$\\int_{[0,\\infty)} |f|\\,d\\lambda_1<+\\infty,$$ so $|f|$ would be Lebesgue integrable on the half-line. For each natural number $n\\ge1$, put $$h_n:=|f|\\,\\chi_{[0,n]}.$$ Then $0\\le h_n\\le h_{n+1}$ and $h_n(x)\\uparrow |f(x)|$ for every $x\\ge0$. Since $|f|$ is continuous on $[0,n]$, [L7] makes it Riemann integrable there, and [L8] gives $$\\int_{[0,\\infty)} h_n\\,d\\lambda_1=\\int_{[0,n]} |f|\\,d\\lambda_1=\\int_0^n |f(x)|\\,dx.$$ Because $h_n\\uparrow |f|$, [L9] yields $$\\lim_{n\\to\\infty}\\int_0^n |f(x)|\\,dx=\\lim_{n\\to\\infty}\\int_{[0,\\infty)} h_n\\,d\\lambda_1=\\int_{[0,\\infty)} |f|\\,d\\lambda_1<+\\infty.$$ By [L4], that finite limit is exactly the improper integral $$\\int_0^\\infty |f(x)|\\,dx,$$ so the absolute improper integral converges, contradicting step 1.2. Therefore $f$ is not Lebesgue integrable on the half-line, and the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "L9"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero-denominator boundary by defining $f(0)=1$ and moving every quotient $\\sin x/x$ used for improper convergence to $[1,\\infty)$, where $x$ stays away from $0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sine integral is improperly Riemann integrable and not Lebesgue integrable is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the item uses a Choice-sensitive bounded-interval comparison and must still force divergence of the absolute improper integral after truncation. Resolved: the statement and facts now explicitly assume Countable Choice, step 1.2 proves divergence of integral |sin x|/x, and step 2.1 applies the compact-interval comparison and monotone convergence to show Lebesgue integrability would contradict that divergence."
+      }
+    },
+    "cex-semicontinuous-function-almost-everywhere-equal-to-no-riemann-integrable-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-semicontinuity",
+          "source_section": "Definition",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$, with\nneighbourhoods as in [[def-neighbourhood-r]].\n\n- $f$ is **upper semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;<\\; f(c) + \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **lower semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;>\\; f(c) - \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **upper semicontinuous on $A$**, respectively **lower semicontinuous on\n  $A$**, when it is so at every point of $A$.\n\nIn words: an upper semicontinuous function cannot jump **up** in the limit, and\na lower semicontinuous one cannot jump **down**. Both conditions are pointwise,\nboth quantify over the same unpunctured neighbourhoods as\n[[def-continuity-real]], and at $x = c$ each holds automatically, since\n$f(c) < f(c) + \\varepsilon$ and $f(c) > f(c) - \\varepsilon$.\n\n### Continuity is exactly the conjunction\n\n$f$ is continuous at $c$ **if and only if** it is both upper and lower\nsemicontinuous at $c$.\n\n*If $f$ is continuous at $c$*, a $\\delta$ witnessing $|f(x) - f(c)| < \\varepsilon$\non $A \\cap N_\\delta(c)$ witnesses both displayed conditions, since\n$|f(x) - f(c)| < \\varepsilon$ gives $-\\varepsilon < f(x) - f(c) < \\varepsilon$\n([[lem-of-abs-value]]).\n\n*Conversely*, given $\\varepsilon > 0$ take $\\delta_1$ for the upper condition\nand $\\delta_2$ for the lower one and put $\\delta := \\min\\{\\delta_1, \\delta_2\\} > 0$.\nFor $x \\in A \\cap N_\\delta(c)$ both $f(x) < f(c) + \\varepsilon$ and\n$f(x) > f(c) - \\varepsilon$ hold, that is $|f(x) - f(c)| < \\varepsilon$\n([[lem-of-abs-value]]). So $f$ is continuous at $c$.\n\nConsequently $f$ is continuous on $A$ exactly when it is both upper and lower\nsemicontinuous on $A$.\n\n### Negation exchanges the two\n\n$f$ is upper semicontinuous at $c$ **if and only if** $-f$ is lower\nsemicontinuous at $c$, since $f(x) < f(c) + \\varepsilon$ says the same thing as\n$-f(x) > -f(c) - \\varepsilon$ ([[def-complete-ordered-field]]). Every statement\nabout one notion below is therefore proved for one of them and transferred to\nthe other by this substitution, never proved twice.\n\n**Neither notion implies the other, and neither implies continuity.** The\nindicator of a closed set is upper semicontinuous and the indicator of an open\nset is lower semicontinuous, and neither is continuous unless the set is clopen;\nthe companion page uses an upper semicontinuous function on $[0,1]$ that attains\nno minimum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fat-cantor-set-has-positive-measure",
+          "source_section": "Statement",
+          "quote": "Let $S$ be the Smith-Volterra-Cantor set ([[def-fat-cantor-set]]). Then:\n\n1. $S$ is closed and bounded, hence compact\n   ([[thm-heine-borel-characterisation-r]]);\n2. $S$ is perfect ([[def-perfect-set-r]]);\n3. $S$ is nowhere dense ([[def-nowhere-dense-meager]]);\n4. if $(a_k)$ and $(b_k)$ are sequences of reals with $a_k \\le b_k$,\n   $S \\subseteq \\bigcup_k [a_k,b_k]$ and $\\sum_{k<i}(b_k - a_k) \\le M$ for every\n   $i \\in \\mathbb{N}$, then $M \\ge 2^{-1}$.\n\nIn particular $S$ does **not** have measure zero\n([[def-measure-zero-and-content-zero]]): no cover of $S$ by intervals has total\nlength below $2^{-1}$, let alone below every positive $\\varepsilon$.\n\n**Claim 4 is the quantitative form**, and it is what claim 4 of the title asserts\nin the only vocabulary available here. This library defines no outer measure, so\n\"the measure of $S$ is $1/2$\" is not a statement it can make; what it can state,\nand what is proved below, is that $2^{-1}$ is a lower bound for the total length\nof every interval cover of $S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-measure-of-a-set-difference",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $A\\subseteq B$ be measurable with $\\mu(A)<+\\infty$. Then\n\n$$\\mu(B)=\\mu(A)+\\mu(B\\setminus A).$$\n\nIf $\\mu(B)<+\\infty$, all terms are real and hence $\\mu(B\\setminus A)=\\mu(B)-\\mu(A)$. If $\\mu(B)=+\\infty$, then $\\mu(B\\setminus A)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-riemann-integrability-and-lebesgue-null-discontinuity-sets",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]).\n\n1. Let $a<b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded, with\n   discontinuity set $D$. Then $f$ is Riemann integrable on $[a,b]$ if and only\n   if $D$ is Lebesgue measurable with $\\lambda_1(D) = 0$.\n2. Let $m \\ge 1$ and let $f$ be a bounded real function on a closed\n   nondegenerate rectangle in $\\mathbb{R}^m$, with discontinuity set $D$. Then\n   $f$ is Riemann integrable if and only if $D$ is Lebesgue measurable with\n   $\\lambda_m(D) = 0$.\n\n**The choice ledger of the cited criteria is inherited, not discharged.** In\n[[thm-lebesgue-criterion]] the implication from integrability to nullity of $D$\nuses countable choice and the converse implication is a theorem of ZF; the\ntranslation performed here rests on the construction of $\\lambda$, which uses\ncountable choice in both directions, so the statement above carries the\nhypothesis throughout.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $\\chi_S$ is upper semicontinuous on $[0,1]$. If $x\\in S$, then $\\chi_S(y)\\le1<1+\\varepsilon$ for every $y$ and every $\\varepsilon>0$. If $x\\notin S$, then $S$ is closed by [L2], so there is an open neighbourhood of $x$ disjoint from $S$; on that neighbourhood $\\chi_S$ is identically $0$, which is certainly below $0+\\varepsilon$. Thus [L1] is satisfied at every point.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $g:[0,1]\\to\\mathbb R$ satisfy $g=\\chi_S$ almost everywhere, and let $N$ be a measurable null set containing the disagreement set. Because $S$ is compact, [L3] makes it measurable, and [L2] says it does not have measure zero. Therefore [L4] gives $$\\lambda_1(S\\setminus N)=\\lambda_1(S)-\\lambda_1(S\\cap N)=\\lambda_1(S)>0.$$ Fix $x\\in S\\setminus N$. Then $g(x)=1$. Since $S$ is nowhere dense by [L2], every neighbourhood of $x$ meets $[0,1]\\setminus S$; the intersection of that neighbourhood with $[0,1]\\setminus S$ is a nonempty open set, so it contains a nondegenerate interval and hence has positive measure by [L6]. Because $N$ is null, that positive-measure open set cannot be contained in $N$, so the neighbourhood contains $y\\notin S\\cup N$. Then $g(y)=\\chi_S(y)=0$. Thus $g$ is discontinuous at every $x\\in S\\setminus N$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that the discontinuity set of $g$ contains the positive-measure set $S\\setminus N$. Hence [L5] implies that $g$ is not Riemann integrable. So $\\chi_S$ is upper semicontinuous but is almost everywhere equal to no Riemann integrable function, and the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The indicator of a fat Cantor set is upper semicontinuous and equal almost everywhere to no Riemann integrable function is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the counterexample uses Choice-sensitive measurability and interval-measure inputs, and the positive-measure disagreement set must really force discontinuity at every point of S\\N. Resolved: the statement and facts now explicitly assume Countable Choice, step 2.1 proves lambda(S\\N) > 0 and finds nearby points outside S union N in every neighborhood, and step 3.1 applies the null-discontinuity criterion to rule out any Riemann-integrable representative."
+      }
+    },
+    "cex-a-null-set-that-is-no-functions-discontinuity-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-g-delta-and-f-sigma-in-a-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$A \\subseteq X$.\n\n- $A$ is a **$G_\\delta$ set of $X$** when there is a sequence\n  $(V_n)_{n \\in \\mathbb{N}}$ of open subsets of $X$ with\n  $$A \\;=\\; \\bigcap_{n \\in \\mathbb{N}} V_n .$$\n- $A$ is an **$F_\\sigma$ set of $X$** when there is a sequence\n  $(F_n)_{n \\in \\mathbb{N}}$ of closed subsets of $X$ with\n  $$A \\;=\\; \\bigcup_{n \\in \\mathbb{N}} F_n .$$\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, so both indexings start\nat $0$. An at most countable *family* may always be presented as a sequence\n([[def-countable]]): a finite list $V_0, \\dots, V_m$ is extended by $V_n := V_m$\nfor $n > m$, which changes neither the intersection nor the union, so nothing is\nlost by indexing over $\\mathbb{N}$.\n\n**The two classes are exchanged by complementation.** $A$ is $F_\\sigma$ in $X$ if\nand only if $X \\setminus A$ is $G_\\delta$ in $X$. If $A = \\bigcup_n F_n$ with\neach $F_n$ closed then $X \\setminus A = \\bigcap_n (X \\setminus F_n)$ by De Morgan\nand each $X \\setminus F_n$ is open ([[def-topological-space]]); the converse is\nthe same computation read backwards.\n\n**Every open set is $G_\\delta$ and every closed set is $F_\\sigma$**, by the\nconstant sequence $V_n := A$, respectively $F_n := A$. **Neither converse\nholds**, and $\\mathbb{R}$ with its usual topology already refutes both. The\nsingleton $\\{0\\}$ is a $G_\\delta$ that is **not open**: it is\n$\\bigcap_{n \\in \\mathbb{N}} (-1/(n+1),\\ 1/(n+1))$, since $0$ lies in every one of\nthose intervals while a real $t \\ne 0$ is excluded at some index, the\nArchimedean property giving a natural $k \\ge 1$ with $1/k < |t|$ and $k$ being a\nsuccessor $n+1$ ([[cor-archimedean-reciprocal]], [[lem-nat-nonzero-is-successor]],\n[[def-canonical-natural]]); and $\\{0\\}$ is not open because every bounded open\ninterval $(a,b)$ with $a < 0 < b$ contains the point $b/2 \\ne 0$\n([[def-interval]], [[lem-real-line-is-a-metric-space]], claim 3). Complementing,\n$\\mathbb{R} \\setminus \\{0\\}$ is an $F_\\sigma$ that is **not closed**, its\ncomplement $\\{0\\}$ not being open.\n\n**The condition that is a real restriction is the other pairing**, namely that\nevery **closed** set be a $G_\\delta$, equivalently that every **open** set be an\n$F_\\sigma$. That is not automatic in an arbitrary space, and it is exactly the\nsecond conjunct of perfect normality later on this page. It must not be confused\nwith the two automatic inclusions above: they hold everywhere and say nothing\nabout a space.\n\n**Agreement with the real-line notion, stated because a second notion of the\nsame name would be a defect.** [[def-f-sigma-g-delta]] defines $F_\\sigma$ and\n$G_\\delta$ subsets of $\\mathbb{R}$ by the same two displayed conditions, with\n\"open\" and \"closed\" read in the sense of [[def-open-and-closed-in-r]]. Those two\nwords name the same two collections of subsets of $\\mathbb{R}$ as the usual\ntopology of $\\mathbb{R}$ does, and the verification is one line of unfolding.\n[[def-open-and-closed-in-r]] calls $U$ open when every $x \\in U$ admits\n$\\varepsilon > 0$ with $N_\\varepsilon(x) \\subseteq U$, where\n$N_\\varepsilon(x) = (x - \\varepsilon,\\ x + \\varepsilon)$\n([[def-neighbourhood-r]]); [[def-metric-topology]] calls $U$ open in\n$(\\mathbb{R}, d_{\\mathbb{R}})$ when every $x \\in U$ admits $r > 0$ with\n$B(x,r) \\subseteq U$, and $B(x,r) = (x-r,\\ x+r)$ by claim 2 of\n[[lem-real-line-is-a-metric-space]]. The two conditions are therefore the same\ncondition word for word, so the two collections of open subsets of $\\mathbb{R}$\nare one collection, and hence so are the two collections of closed subsets, each\nbeing the complements of the other collection. The usual topology of $\\mathbb{R}$\nis the metric topology of $d_{\\mathbb{R}}$ ([[def-metrizable-space]]). Since the\ntwo definitions quantify over one collection of open sets and one collection of\nclosed sets, a subset of $\\mathbb{R}$ is $G_\\delta$ in the sense above, for\n$\\mathbb{R}$ with its usual topology, if and only if it is $G_\\delta$ in the\nsense of [[def-f-sigma-g-delta]]; and likewise for $F_\\sigma$. **There is one\nnotion here, not two**, and every statement proved about $F_\\sigma$ or $G_\\delta$\nsubsets of $\\mathbb{R}$ elsewhere in this library may be quoted verbatim as a\nstatement about the topological space $\\mathbb{R}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-discontinuity-set-is-f-sigma",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$ and let $f : A \\to \\mathbb{R}$. Write\n\n$$D \\;:=\\; \\{\\, x \\in A : f \\text{ is discontinuous at } x \\,\\}, \\qquad C \\;:=\\; A \\setminus D$$\n\n([[def-continuity-real]], [[def-classification-of-discontinuities]]). Then:\n\n1. **Pointwise exhaustion.** $D = \\{\\, x \\in A : \\omega_f(x) > 0 \\,\\}$\n   ([[def-oscillation]]), and $D$ is the union of the increasing sequence of\n   superlevel sets\n   $$D \\;=\\; \\bigcup_{n \\in \\mathbb{N}} \\{\\, x \\in A : \\omega_f(x) \\ge 1/\\iota(n+1) \\,\\}$$\n   ([[def-canonical-natural]]), whose thresholds are $1, 1/2, 1/3, \\dots$.\n2. **Descriptive form.** There is an $F_\\sigma$ set $F \\subseteq \\mathbb{R}$ and\n   a $G_\\delta$ set $V \\subseteq \\mathbb{R}$ ([[def-f-sigma-g-delta]]) with\n   $$D \\;=\\; A \\cap F, \\qquad C \\;=\\; A \\cap V, \\qquad V = \\mathbb{R} \\setminus F ,$$\n   and $F$ may be taken to be $\\bigcup_{n \\in \\mathbb{N}} G_n$ with each $G_n$ a\n   closed subset of $\\mathbb{R}$ cutting down on $A$ to the $n$-th set of\n   claim 1 ([[lem-oscillation-superlevel-sets-are-closed]]).\n\nIn particular, when $A = \\mathbb{R}$ the discontinuity set $D$ is an $F_\\sigma$\nsubset of $\\mathbb{R}$ and the continuity set $C$ is a $G_\\delta$ subset, and\nclaim 1 reads $D = \\bigcup_{n} \\{\\, x \\in \\mathbb{R} : \\omega_f(x) \\ge 1/\\iota(n+1) \\,\\}$.\n\n**Claim 1 is stated separately because it is what later arguments cite\ndownstream.** The exhaustion of $D$ by the superlevel sets\n$\\{\\omega_f \\ge 1/\\iota(n+1)\\}$ is exactly the form needed when a later proof\nestablishes a property one threshold at a time, so the identity itself is\nrecorded here and not only the descriptive conclusion of claim 2.\n\n**The statement is relative on purpose.** For a general domain $A$ the sets $D$\nand $C$ are subsets of $A$, and neither is $F_\\sigma$ or $G_\\delta$ in\n$\\mathbb{R}$ in general; what the proof produces are two subsets of\n$\\mathbb{R}$ that cut down to them. The absolute form is stated only for\n$A = \\mathbb{R}$, which is the case used later by the realization and\nexact-continuity-set examples.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-baire-category-r",
+          "source_section": "Statement",
+          "quote": "Let $(U_n)_{n \\in \\mathbb{N}}$ be a sequence of subsets of $\\mathbb{R}$, each\nopen ([[def-open-and-closed-in-r]]) and dense ([[def-limit-point-r]]). Then\n\n$$\\bigcap_{n \\in \\mathbb{N}} U_n \\quad \\text{is dense in } \\mathbb{R}.$$\n\nConsequently, if $(A_n)_{n \\in \\mathbb{N}}$ is a sequence of nowhere dense\nsubsets of $\\mathbb{R}$ ([[def-nowhere-dense-meager]]), then\n$\\bigcup_{n \\in \\mathbb{N}} A_n \\ne \\mathbb{R}$: no meager subset of\n$\\mathbb{R}$ exhausts $\\mathbb{R}$, so $\\mathbb{R}$ is of the second category in\nitself.\n\n**The selection is canonical, and the proof spends no choice principle.** The\ntextbook argument picks a nested interval at every stage in terms of the one\nbefore it, which is the axiom of dependent choice. The construction below\ninstead fixes one enumeration $e$ of the rationals ([[thm-rationals-countable]],\n[[lem-rat-embeds-dense]]) and, at every stage, takes the interval whose two\nrational endpoints have **least index** among those meeting the requirements.\nThe requirements are met by some rational-endpoint interval, which is what the\nrefinement claim of the proof establishes, and the least such index is\ndetermined by [[thm-well-ordering-principle]]; so the whole recursion is a\nsingle application of [[thm-recursion]] to one total map. This is the same\nleast-index device used later in the perfect-set development, transplanted here\nfrom perfect sets to dense open sets. What it does **not** settle is the\nstrength of the theorem for general complete metric spaces; that\nmetamathematical point is recorded separately on the choice ledger for this\nthread.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-nowhere-dense-meager",
+          "source_section": "Definition",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, with interior $A^{\\circ}$ and closure\n$\\overline{A}$ as in [[def-interior-closure-boundary-r]].\n\n- $A$ is **nowhere dense** when the interior of its closure is empty:\n  $$\\big(\\overline{A}\\big)^{\\circ} \\;=\\; \\varnothing .$$\n- $A$ is **meager**, or **of the first category**, when there is a sequence\n  $(A_n)_{n \\in \\mathbb{N}}$ of nowhere dense subsets of $\\mathbb{R}$ with\n  $$A \\;=\\; \\bigcup_{n \\in \\mathbb{N}} A_n .$$\n- $A$ is **of the second category** when it is not meager.\n- $A$ is **residual** (also *comeager*) when $\\mathbb{R} \\setminus A$ is meager.\n\n**Why a sequence, and why that is the same as \"an at most countable union\".**\nSequences here are indexed by $\\mathbb{N}$, which contains $0$. A finite family\n$A_0, \\dots, A_m$ of nowhere dense sets is turned into a sequence by setting\n$A_n := \\varnothing$ for $n > m$, and $\\varnothing$ is nowhere dense because\n$\\overline{\\varnothing} = \\varnothing$ has empty interior; the empty family is\nhandled the same way and gives $A = \\varnothing$. So \"a union of an at most\ncountable family of nowhere dense sets\" ([[def-countable]]) and the displayed\ncondition define the same class, and the sequence form is used below because it\ncarries an explicit index and needs no case split.\n\n**Nowhere dense means exactly that the complement of the closure is dense.**\nFor $A \\subseteq \\mathbb{R}$,\n\n$$\\big(\\overline{A}\\big)^{\\circ} = \\varnothing \\quad \\Longleftrightarrow \\quad \\mathbb{R} \\setminus \\overline{A} \\text{ is dense in } \\mathbb{R} .$$\n\nIndeed, by the pointwise description of the interior\n([[def-interior-closure-boundary-r]]), $(\\overline{A})^{\\circ} = \\varnothing$\nsays that no $x \\in \\mathbb{R}$ admits a real $\\varepsilon > 0$ with\n$N_\\varepsilon(x) \\subseteq \\overline{A}$ ([[def-neighbourhood-r]]), that is,\nthat every $N_\\varepsilon(x)$ meets $\\mathbb{R} \\setminus \\overline{A}$. By\nclaim 1 of [[thm-closure-characterisations-r]] that says precisely that every\n$x \\in \\mathbb{R}$ is adherent to $\\mathbb{R} \\setminus \\overline{A}$, that is,\n$\\overline{\\mathbb{R} \\setminus \\overline{A}} = \\mathbb{R}$, which is density\n([[def-limit-point-r]]).\n\n**A closed set is nowhere dense exactly when its interior is empty**, since a\nclosed set equals its own closure (claim 4 of [[thm-closure-characterisations-r]],\n[[def-open-and-closed-in-r]]). This is the form in which nowhere density is\nverified nearly every time below. (The phrase *almost everywhere* is avoided\nthroughout this pair: it is a measure-theoretic term, and the only measure notion\ndefined here is measure zero.)\n\n**Both classes are closed downwards.** If $B \\subseteq A$ then\n$\\overline{B} \\subseteq \\overline{A}$ and hence\n$(\\overline{B})^{\\circ} \\subseteq (\\overline{A})^{\\circ}$\n([[def-interior-closure-boundary-r]]), so a subset of a nowhere dense set is\nnowhere dense. If $B \\subseteq A = \\bigcup_n A_n$ with each $A_n$ nowhere dense,\nthen $B = \\bigcup_n (A_n \\cap B)$ and each $A_n \\cap B$ is nowhere dense by the\nprevious sentence, so a subset of a meager set is meager.\n\n**A union of two meager sets is meager.** Let $M = \\bigcup_n A_n$ and\n$M' = \\bigcup_n B_n$ with all $A_n$ and all $B_n$ nowhere dense; fixing one\nwitnessing sequence for $M$ and one for $M'$ is two instantiations of an\nexistential statement, not a choice principle. Let\n$J : \\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ be a bijection\n([[thm-n-cross-n-countable]]) and define a sequence $(C_j)_{j \\in \\mathbb{N}}$ by\n\n$$C_{J(m,n)} \\;:=\\; \\begin{cases} A_n & m = 0, \\\\ B_n & m \\ne 0. \\end{cases}$$\n\nThis is a total definition because $J$ is a bijection, every $C_j$ is nowhere\ndense, and $\\bigcup_j C_j = M \\cup M'$, since $A_n = C_{J(0,n)}$ and\n$B_n = C_{J(1,n)}$ and every $C_j$ is one of the $A_n$ or one of the $B_n$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], fix an enumeration $(q_j)_{j\\ge0}$ of $\\mathbb Q$. For each natural number $k\\ge1$, put $$U_k:=\\bigcup_{j\\ge0}\\bigl(q_j-2^{-j-k-2},\\,q_j+2^{-j-k-2}\\bigr).$$ Every $U_k$ is open and dense, because it contains every rational. Each interval in the union has length $2^{-j-k-1}$, so [L2], [L3], and [L10] give $$\\lambda_1(U_k)\\le\\sum_{j=0}^{\\infty}2^{-j-k-1} =2^{-k-1}\\sum_{j=0}^{\\infty}2^{-j}=2^{-k}.$$ Let $$G:=\\bigcap_{k\\ge1}U_k.$$ Then [L4] makes $G$ a $G_\\delta$ set, and [L6] makes it dense. Since $G\\subseteq U_k$ for every $k$, [L9] gives $\\lambda_1(G)\\le2^{-k}$ for all $k$, so $\\lambda_1(G)=0.$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L6",
+            "L9",
+            "L10",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose, for contradiction, that $G$ is the discontinuity set of some function $f:\\mathbb R\\to\\mathbb R$. Then [L5] makes $G$ an $F_\\sigma$ set, so by [L4] write $G=\\bigcup_{n\\ge0}F_n$ with each $F_n$ closed. Because $F_n\\subseteq G$ and $\\lambda_1(G)=0$, monotonicity [L9] gives $\\lambda_1(F_n)=0$ for every $n$. A closed null set cannot contain a nondegenerate interval, by [L8], so each $F_n$ has empty interior and is nowhere dense by [L7]. Therefore $G$ is meager.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "L5",
+            "L7",
+            "L8",
+            "L9",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 writes $G$ as a dense $G_\\delta$ set, so $\\mathbb R\\setminus G$ is meager by [L7]. If $G$ were also meager, then $$\\mathbb R = G\\cup(\\mathbb R\\setminus G)$$ would be a union of two meager sets and therefore meager, contradicting [L6]. So $G$ is a Lebesgue null set that is not the discontinuity set of any real-valued function, and the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L6",
+            "L7",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function is not a statement about an indexed family whose empty member requires a separate proof branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function has no free scalar or parameter whose value 0 creates an extra mathematical case beyond the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function has no singleton-index or unit-parameter branch separate from the general argument written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function introduces no additional collapsed configuration beyond the hypotheses already fixed in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function does not hinge on a distinct endpoint analysis beyond the interval or set hypotheses already built into the stated claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function does not turn on a separate nonempty-choice boundary case; any witness choices used in the proof are made inside the ordinary argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function is not stated as a biconditional, so it has no forward direction requiring a separate contract row."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A null set can fail to be the discontinuity set of any function is not stated as a biconditional, so it has no reverse direction requiring a separate contract row."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Risk: the construction must produce a dense G_delta set of measure 0 and then show that any discontinuity-set presentation would make it meager. Resolved: step 1.1 builds G as an intersection of dense opens with lambda(G) = 0, step 2.1 turns any hypothetical discontinuity representation into a countable union of nowhere dense closed sets, and step 3.1 uses Baire to contradict G being meager."
+      }
+    }
+  }
+}

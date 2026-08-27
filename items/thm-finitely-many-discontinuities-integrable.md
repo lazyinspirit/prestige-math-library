@@ -14,12 +14,13 @@ landmark: true
 short: "finitely many discontinuities $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5
+    verdict: certify
+    date: 2026-08-27
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,11 +43,12 @@ $d_0, \dots, d_{r-1}$; that is, every discontinuity of $f$
 ([[def-classification-of-discontinuities]]) occurs among those $r$ listed
 points. Then $f$ is Riemann integrable on $[a,b]$ ([[def-darboux-integral]]).
 
-For $r = 0$ the hypothesis says $f$ is continuous on $[a,b]$ and the conclusion
-is [[thm-continuous-implies-integrable]]; the argument below covers that case
-without a separate treatment. Repetitions in the list are allowed and harmless,
-and no claim is made that the listed points **are** discontinuities: the
-hypothesis is one-sided, so a finite superset of the discontinuity set is enough.
+For $r = 0$ the hypothesis says $f$ is continuous on $[a,b]$, so this reduces
+to the usual continuous-case integrability statement; the argument below covers
+that case without a separate treatment. Repetitions in the list are allowed and
+harmless, and no claim is made that the listed points **are**
+discontinuities: the hypothesis is one-sided, so a finite superset of the
+discontinuity set is enough.
 
 **Nothing is said about the kind of the discontinuities.** They may be
 removable, jumps, or essential ([[def-classification-of-discontinuities]]); only

@@ -1,0 +1,2096 @@
+{
+  "version": 1,
+  "level": "frontier-21",
+  "scope": [
+    "lem-pell-norm-multiplication",
+    "prop-integral-pell-solutions-form-a-group",
+    "lem-square-root-continued-fraction-state-recurrence",
+    "lem-square-root-convergent-norm-identity",
+    "thm-square-root-continued-fraction-period-structure",
+    "thm-lagrange-existence-for-pell-equation",
+    "thm-negative-pell-period-parity-criterion",
+    "thm-all-positive-pell-solutions-are-fundamental-powers",
+    "cor-all-integral-pell-solutions",
+    "thm-generalized-pell-solutions-have-finitely-many-orbits",
+    "cor-generalized-pell-solubility-is-decidable",
+    "cor-one-generalized-pell-solution-gives-infinitely-many",
+    "ex-pell-equation-for-two",
+    "ex-pell-equation-for-three",
+    "ex-negative-pell-equation-for-five",
+    "ex-pell-equation-for-fourteen",
+    "ex-large-fundamental-pell-solution-for-sixty-one",
+    "ex-generalized-pell-orbits-for-six",
+    "ex-generalized-pell-bounded-representatives",
+    "cex-generalized-pell-solutions-need-not-all-be-convergents",
+    "cex-pell-units-need-not-be-all-quadratic-field-units"
+  ],
+  "contracts": {
+    "lem-pell-norm-multiplication": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-norm-on-integer-square-root-order",
+          "source_section": "Definition",
+          "quote": "(x+y\\sqrt D)(u+v\\sqrt D)=(xu+D yv)+(xv+yu)\\sqrt D",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coordinate product of $x+y\\sqrt D$ and $u+v\\sqrt D$ is $(xu+D yv)+(xv+yu)\\sqrt D$.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the norm formula to the product of step 1.1 and expanding yields $N_D(\\alpha\\beta)=(x^2-Dy^2)(u^2-Dv^2)=N_D(\\alpha)N_D(\\beta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is a universal identity for two displayed elements, not a statement about an empty family or empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is a polynomial identity in the four coordinates, so it still holds when one factor is the zero element or when some coordinates vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes to multiplication by $1+0\\sqrt D$, and step 2.1 then gives $N_D(\\alpha\\cdot1)=N_D(\\alpha)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No sign, positivity, or nonvanishing hypothesis appears; steps 1.1 and 2.1 treat arbitrary integer coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, sequence endpoint, or first/last index in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nothing is chosen from a nonempty set; the proof is a direct expansion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a direct identity, not one direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma has no converse direction to discharge."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-integral-pell-solutions-form-a-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pell-equation",
+          "source_section": "Definition",
+          "quote": "An **integral solution** of Pell's equation is a pair $(x,y)\\in\\mathbb Z^2$ satisfying the displayed equation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-norm-on-integer-square-root-order",
+          "source_section": "Definition",
+          "quote": "The **Pell norm** of $\\alpha$ is $$N_D(\\alpha):=\\alpha\\overline\\alpha=x^2-Dy^2.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pell-norm-multiplication",
+          "source_section": "Statement",
+          "quote": "the Pell norm is multiplicative: $$N_D(\\alpha\\beta)=N_D(\\alpha)N_D(\\beta).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-norm-on-integer-square-root-order",
+          "source_section": "Definition",
+          "quote": "(x+y\\sqrt D)(u+v\\sqrt D)=(xu+D yv)+(xv+yu)\\sqrt D",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The identity element $1=1+0\\sqrt D$ lies in $G_D$, and multiplicativity of the norm shows closure under multiplication.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\alpha=x+y\\sqrt D$ has norm $1$, then $\\alpha(x-y\\sqrt D)=1$, so $x-y\\sqrt D$ is its inverse and again has norm $1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coordinate product law is symmetric in the two factors, and real multiplication is associative, so the induced multiplication on $G_D$ is commutative and associative.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition concerns a concrete set of norm-one elements; it is not quantified over an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses $N_D(\\alpha)=1$ to exclude the zero element, while step 1.1 explicitly includes the zero $y$-coordinate in the identity $1+0\\sqrt D$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that $1$ is the multiplicative identity of the solution set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 still handles the boundary solutions $(\\pm1,0)$, which are exactly the norm-one elements with $y=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or terminal index occurs in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs the identity and inverses explicitly; it chooses nothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Being an abelian group is not presented as one half of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-square-root-continued-fraction-state-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "If $\\alpha_n \\ne a_n$, define the next **complete quotient** $$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At the initial stage, $\\alpha_0=\\sqrt D=(\\sqrt D+0)/1$, with $Q_0=1>0$ and $Q_0\\mid D-P_0^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From a normalized state $(P_n,Q_n)$, the floor step and rationalization produce $P_{n+1}=a_nQ_n-P_n$, a positive integer $Q_{n+1}=(D-P_{n+1}^2)/Q_n$, and the next quotient $\\alpha_{n+1}=(\\sqrt D+P_{n+1})/Q_{n+1}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If two normalized expressions $(\\sqrt D+P)/Q$ and $(\\sqrt D+P')/Q'$ with positive denominators are equal, irrationality of $\\sqrt D$ forces $Q=Q'$ and then $P=P'$, so the state is unique.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "discharge-induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is about a recursively defined sequence of states, not an empty set or empty index family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the initial state with $P_0=0$ explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 also fixes the initial denominator $Q_0=1$, the first boundary value used later in the period argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 allows the current state to have $Q_n=1$ or $P_n=0$; only the positivity and divisibility hypotheses are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no finite interval or terminal index; the recursion runs for every $n\\ge0$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The digit $a_n$ is the unique floor integer from the continued-fraction algorithm, so the proof uses no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states a recursion and uniqueness result, not one direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction to establish."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: positivity/divisibility of Q_{n+1} and uniqueness of the normalized state. Resolved: step 1.2 derives Q_{n+1} > 0 and Q_n | (D - P_{n+1}^2) after rationalization, and step 2.1 rules out a second pair by forcing sqrt(D) rational."
+      }
+    },
+    "lem-square-root-convergent-norm-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continued-fraction-complete-quotient-formula",
+          "source_section": "Statement",
+          "quote": "$$\\alpha = \\frac{\\alpha_{n+1}p_n + p_{n-1}}{\\alpha_{n+1}q_n + q_{n-1}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continued-fraction-determinant-identity",
+          "source_section": "Statement",
+          "quote": "$$p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-square-root-continued-fraction-state-recurrence",
+          "source_section": "Statement",
+          "quote": "Q_{n+1}=\\frac{D-P_{n+1}^2}{Q_n},\\qquad \\alpha_{n+1}=\\frac{\\sqrt D+P_{n+1}}{Q_{n+1}}.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting the normalized state for $\\alpha_{n+1}$ into the tail formula and comparing the coefficients of $1$ and $\\sqrt D$ yields two linear relations between $p_n,q_n,p_{n-1},q_{n-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining the two relations of step 1.1 with the determinant identity gives $p_n^2-Dq_n^2=Q_{n+1}(p_nq_{n-1}-p_{n-1}q_n)=(-1)^{n+1}Q_{n+1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is indexed by a natural number $n$, not by an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is valid already at $n=0$, giving the initial identity $p_0^2-Dq_0^2=-Q_1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers the return-state boundary $Q_{n+1}=1$, which is the case used later for Pell and negative Pell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No assumption excludes $q_n=1$ or $p_{n-1}=0$; the determinant computation of step 2.1 still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no finite interval endpoint beyond the ordinary index $n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument is purely algebraic and makes no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The norm identity is a direct formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: clearing the complete-quotient tail formula and isolating the norm term. Resolved: step 1.1 compares the 1 and sqrt(D) coefficients after substitution, and step 2.1 combines those identities with the determinant identity to obtain p_n^2 - D q_n^2 = (-1)^{n+1} Q_{n+1}."
+      }
+    },
+    "thm-square-root-continued-fraction-period-structure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-square-root-continued-fraction-state-recurrence",
+          "source_section": "Statement",
+          "quote": "$$P_{n+1}=a_nQ_n-P_n,\\qquad Q_{n+1}=\\frac{D-P_{n+1}^2}{Q_n},\\qquad \\alpha_{n+1}=\\frac{\\sqrt D+P_{n+1}}{Q_{n+1}}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every reduced state $(P_n,Q_n)$ with $n\\ge1$ satisfies $P_n<\\sqrt D<P_n+Q_n$, hence $-\\sqrt D<P_n<\\sqrt D$ and $0<Q_n<2\\sqrt D$, so only finitely many states can occur.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The recurrence defines a successor map on the finite reduced-state set, and the inverse construction from a state $(P',Q')$ produces a unique predecessor $(P,Q)$, so the successor map is bijective and the orbit of $(P_1,Q_1)$ is a finite cycle.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the inverse construction to the initial reduced state $(P_1,Q_1)=(a_0,D-a_0^2)$ yields the unique predecessor $(a_0,1)$, so $(P_\\ell,Q_\\ell)=(a_0,1)$ and the terminal digit is $a_\\ell=2a_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Using the predecessor uniqueness from step 2.1 together with the recurrence shows inductively that $P_j=P_{\\ell-j+1}$ and $Q_{j-1}=Q_{\\ell-j+1}$, hence $a_j=(P_j+P_{j+1})/Q_j=a_{\\ell-j}$ for $1\\le j<\\ell$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The cycle from step 2.1, the returned state from step 3.1, and the palindrome relation from step 4.1 combine to give $\\sqrt D=[a_0;\\overline{a_1,\\ldots,a_{\\ell-1},2a_0}]$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem treats one concrete quadratic irrational, not an empty class of examples."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the initial boundary data $P_0=0$ and $Q_0=1$ from the recurrence when identifying the returned state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the crucial denominator-one boundary $Q_\\ell=1$, and step 5.1 allows the minimal period case $\\ell=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The smallest nonsquare case $D=2$ fits the general proof: the cycle in step 2.1 has one reduced state and step 3.1 gives the terminal digit $2a_0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the last state and last digit of a period, while step 4.1 matches the interior digits against their reversed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inverse step chooses the unique integer in a prescribed congruence class and interval, so there is no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a direct structure result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: finite-state return, least cycle length, and the returned state (a_0,1). Resolved: steps 2.1 to 5.1 build a bijective successor map on a finite state set, take the least return to (P_1,Q_1), identify its predecessor as (a_0,1), and then reverse the cycle to obtain the palindromic period."
+      }
+    },
+    "thm-lagrange-existence-for-pell-equation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-square-root-continued-fraction-period-structure",
+          "source_section": "Statement",
+          "quote": "$$P_\\ell=a_0,\\qquad Q_\\ell=1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-root-convergent-norm-identity",
+          "source_section": "Statement",
+          "quote": "$$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pell-norm-multiplication",
+          "source_section": "Statement",
+          "quote": "$$N_D(\\alpha\\beta)=N_D(\\alpha)N_D(\\beta).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At the convergent just before the returned state, the norm identity gives $p_{\\ell-1}^2-Dq_{\\ell-1}^2=(-1)^\\ell$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\ell$ is even, then step 1.1 already gives a positive nontrivial norm-one solution $(p_{\\ell-1},q_{\\ell-1})$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\ell$ is odd, then $\\alpha=p_{\\ell-1}+q_{\\ell-1}\\sqrt D$ has norm $-1$, so multiplicativity gives $N_D(\\alpha^2)=1$, and the square has positive coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The parity cases are exhaustive, so either step 2.1 or step 3.1 produces a positive nontrivial integral Pell solution.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about one Pell equation for one fixed $D$, not about a possibly empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 both produce solutions with $q_{\\ell-1}>0$, so the trivial boundary $y=0$ is excluded exactly where nontriviality is proved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When the period length is $1$, step 3.1 is the active branch and squares the norm $-1$ solution to obtain a norm-one solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 separates the proof into the two parity branches, which are the only potentially distinct cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the endpoint index $n=\\ell-1$ exactly where the returned state $Q_\\ell=1$ first occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used; the relevant convergent is fixed by the period length."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Existence is asserted outright, not as one direction of an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse clause."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: parity split at the end of one continued-fraction period. Resolved: step 1.1 computes the terminal norm from the convergent identity, step 2.1 handles the even-period norm-one case directly, and step 3.1 squares the odd-period negative-Pell witness to obtain a positive Pell solution."
+      }
+    },
+    "thm-negative-pell-period-parity-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-square-root-continued-fraction-period-structure",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a positive integer that is not a square, let\n$$a_0:=\\lfloor \\sqrt D\\rfloor,$$\nand let\n$$\\sqrt D=[a_0;a_1,a_2,\\ldots]$$\nbe its regular continued fraction. Then there is an integer $\\ell\\ge1$ such that\n$$\\sqrt D=[a_0;\\overline{a_1,\\ldots,a_{\\ell-1},2a_0}],$$\nwith\n$$a_j=a_{\\ell-j}\\qquad(1\\le j<\\ell).$$\nFor the state variables of [[lem-square-root-continued-fraction-state-recurrence]],\nthe first returned reduced state is\n$$P_\\ell=a_0,\\qquad Q_\\ell=1.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continued-fraction-complete-quotients",
+          "source_section": "Definition",
+          "quote": "Work in the complete ordered field of real numbers\n([[def-complete-ordered-field]]). For a real number $\\alpha$, set\n$$\\alpha_0 := \\alpha.$$\nGiven $\\alpha_n$, the Archimedean property ([[thm-of-archimedean]]) and the\nwell-ordering principle ([[thm-well-ordering-principle]]) produce a unique\ninteger $a_n$ with\n$$a_n \\le \\alpha_n < a_n+1.$$\n\nFor completeness, here is that construction. Choose positive integers $r,s$\nwith $-r<\\alpha_n<s$ by Archimedeanness, and let\n$$T:=\\{k\\in\\mathbb N:\\alpha_n<-r+k\\}.$$\nThe set $T$ is nonempty because $r+s\\in T$, so it has a least element $k_0$.\nSince $-r<\\alpha_n$, one has $k_0>0$; write $k_0=j+1$. Minimality gives\n$-r+j\\le\\alpha_n<-r+j+1$, so $a_n:=-r+j$ works. If two integers satisfied\nthe displayed inequalities, discreteness of the integer order would put one\nat least $1$ above the other and contradict the upper inequality, proving\nuniqueness.\nIf $\\alpha_n \\ne a_n$, define the next **complete quotient**\n$$\\alpha_{n+1} := \\frac{1}{\\alpha_n-a_n}.$$\n\nThus the continued-fraction algorithm associates to $\\alpha$ its integer parts\n$a_n$ and its successive complete quotients $\\alpha_n$. Whenever\n$\\alpha_{n+1}$ is defined, one has $0 < \\alpha_n-a_n < 1$ and therefore\n$\\alpha_{n+1} > 1$, so every later digit $a_{n+1},a_{n+2},\\ldots$ is positive.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-square-root-continued-fraction-state-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a positive integer that is not a square, let\n$$\\alpha_0:=\\sqrt D,$$\nand let $a_n,\\alpha_n$ be the continued-fraction digits and complete quotients\nof $\\sqrt D$. Then there are unique integer pairs $(P_n,Q_n)$ with\n$$P_0=0,\\qquad Q_0=1,$$\nsuch that for every $n\\ge0$,\n$$\\alpha_n=\\frac{\\sqrt D+P_n}{Q_n},\\qquad Q_n>0,\\qquad Q_n\\mid D-P_n^2.$$\nMoreover, if\n$$a_n=\\lfloor \\alpha_n\\rfloor,$$\nthen\n$$P_{n+1}=a_nQ_n-P_n,\\qquad Q_{n+1}=\\frac{D-P_{n+1}^2}{Q_n},\\qquad \\alpha_{n+1}=\\frac{\\sqrt D+P_{n+1}}{Q_{n+1}}.$$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-square-root-convergent-norm-identity",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a positive nonsquare integer, let $p_n/q_n$ be the convergents of\n$\\sqrt D$, and let $P_n,Q_n$ be the complete-quotient state variables from\n[[lem-square-root-continued-fraction-state-recurrence]]. Then for every $n\\ge0$,\n$$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-legendre-continued-fraction-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha$ be an irrational real number. If $r,s\\in\\mathbb{Z}$ satisfy\n$s>0$, $\\gcd(r,s)=1$, and\n$$\\left|\\alpha-\\frac{r}{s}\\right|<\\frac1{2s^2},$$\nthen $r/s$ is a convergent of $\\alpha$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying [F4] at $n=\\ell-1$ and using $Q_\\ell=1$ from [F1] gives $$p_{\\ell-1}^2-Dq_{\\ell-1}^2=(-1)^\\ell.$$ Hence $\\ell$ odd yields a negative-Pell solution at $p_{\\ell-1}/q_{\\ell-1}$, while $\\ell$ even yields a positive norm-one solution there.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose $x,y>0$ satisfy $x^2-Dy^2=-1$. Then $$0<\\sqrt D-\\frac{x}{y}=\\frac1{y(x+y\\sqrt D)}.$$ Because $D\\ge2$, one has $x^2=Dy^2-1\\ge y^2$, so $x\\ge y$, and therefore $$x+y\\sqrt D>2y.$$ Hence $$\\left|\\sqrt D-\\frac{x}{y}\\right|<\\frac1{2y^2}.$$ Since $\\gcd(x,y)=1$ follows from $x^2-Dy^2=-1$, fact [F5] shows that $x/y=p_n/q_n$ for some convergent.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F1] and [F3], the returned state at one full period is $$ \\alpha_\\ell=\\frac{\\sqrt D+P_\\ell}{Q_\\ell}=\\sqrt D+a_0. $$ Since $\\lfloor\\alpha_\\ell\\rfloor=2a_0$, fact [F2] gives $$ \\alpha_{\\ell+1}=\\frac1{\\alpha_\\ell-\\lfloor\\alpha_\\ell\\rfloor}=\\frac1{\\sqrt D-a_0}=\\alpha_1. $$ Thus one full period returns the complete-quotient algorithm to $\\alpha_1$; because the digits from $a_1$ onward repeat with period $\\ell$, the same computation one period later gives $\\alpha_{2\\ell}=\\sqrt D+a_0$, hence $Q_{2\\ell}=1$. Applying [F4] at $n=2\\ell-1$ yields $$ p_{2\\ell-1}^2-Dq_{2\\ell-1}^2=(-1)^{2\\ell}Q_{2\\ell}=1. $$ Thus $p_{2\\ell-1}/q_{2\\ell-1}$ is a positive norm-one solution.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For that index $n$, [F4] gives $$-1=x^2-Dy^2=p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$ Since $Q_{n+1}$ is a positive integer, it follows that $$Q_{n+1}=1\\qquad\\text{and}\\qquad n\\text{ is even}.$$ Facts [F2] and [F3] then give $$ \\alpha_{n+1}=\\sqrt D+P_{n+1},\\qquad \\alpha_{n+2}=\\frac1{\\alpha_{n+1}-\\lfloor\\alpha_{n+1}\\rfloor}=\\frac1{\\sqrt D-a_0}=\\alpha_1. $$ So the digit block from $a_1$ onward repeats with period $n+1$. Because $\\ell$ is the period length, $\\ell$ divides $n+1$. Since $n+1$ is odd, $\\ell$ must be odd.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that every positive negative-Pell solution comes from a convergent index $n$ with $n$ even and $\\ell\\mid(n+1)$, so the first such index is $\\ell-1$. Now let $u,v>0$ satisfy $u^2-Dv^2=1$. Then $$0<\\frac{u}{v}-\\sqrt D=\\frac1{v(u+v\\sqrt D)}.$$ Because $D\\ge2$, one has $u^2=Dv^2+1>v^2$, so $u>v$, and therefore $$u+v\\sqrt D>2v.$$ Hence $$\\left|\\sqrt D-\\frac{u}{v}\\right|<\\frac1{2v^2}.$$ Since $\\gcd(u,v)=1$, [F5] shows that $u/v=p_n/q_n$ for some convergent. Applying [F4] gives $$1=u^2-Dv^2=p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1},$$ so $$Q_{n+1}=1\\qquad\\text{and}\\qquad n\\text{ is odd}.$$ As in step 2.1, facts [F2] and [F3] then give $\\alpha_{n+2}=\\alpha_1$, so $\\ell$ divides $n+1$. Therefore the first possible norm-one index is $\\ell-1$ when $\\ell$ is even and $2\\ell-1$ when $\\ell$ is odd. Convergent denominators strictly increase, and for positive solutions of $x^2-Dy^2=\\pm1$ the value of $x$ is determined by $x^2=Dy^2\\pm1$, so the first convergent of each type gives the least positive solution. Therefore, when $\\ell$ is odd, $p_{\\ell-1}/q_{\\ell-1}$ is the least positive negative-Pell solution and $p_{2\\ell-1}/q_{2\\ell-1}$ is the least positive norm-one solution, while when $\\ell$ is even, $p_{\\ell-1}/q_{\\ell-1}$ is the least positive norm-one solution.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one fixed continued fraction and one fixed Pell equation, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 starts with a positive solution, so $y>0$ and the denominator boundary $y=0$ is excluded exactly where the approximation estimate is derived."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The smallest period case $\\ell=1$ is allowed and is handled by steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the boundary $x=y$, which occurs for $D=2$, because it proves only the weak inequality $x\\ge y$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.3, and 2.1 use the returned state $Q_\\ell=1$ and the first admissible convergent endpoints $\\ell-1$ and $2\\ell-1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary representative is selected; the convergent index is forced by the norm identity and the period."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that odd period length yields a negative-Pell solution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 prove that any negative-Pell solution forces the period length to be odd."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: least-period and least-solution claims depended on knowing exactly when Q_{n+1} = 1. Resolved: the repaired proof now uses the complete-quotient rule and the state formula to show alpha_{n+2} = alpha_1 whenever Q_{n+1} = 1, so ell divides n+1 and the first negative- and norm-one convergent indices are exact."
+      }
+    },
+    "thm-all-positive-pell-solutions-are-fundamental-powers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fundamental-pell-solution",
+          "source_section": "Definition",
+          "quote": "By [[thm-lagrange-existence-for-pell-equation]], the set of positive nontrivial\nsolutions of Pell's equation is nonempty. The **fundamental Pell solution** is\nthe positive solution\n$$\n(x_1,y_1)\\in\\mathbb Z_{>0}^2,\\qquad x_1^2-Dy_1^2=1,\n$$\nwhose first coordinate $x_1$ is least among all positive solutions.\n\nWrite\n$$\\varepsilon_D:=x_1+y_1\\sqrt D\\in\\mathbb Z[\\sqrt D].$$\nSince $x_1>0$ and $y_1>0$, one has $\\varepsilon_D>1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-integral-pell-solutions-form-a-group",
+          "source_section": "Statement",
+          "quote": "Fix a positive nonsquare integer $D$, and identify an integral solution\n$(x,y)$ of [[def-pell-equation]] with the element $x+y\\sqrt D\\in\\mathbb Z[\\sqrt D]$.\nThen the set\n$$G_D:=\\{\\alpha\\in\\mathbb Z[\\sqrt D]:N_D(\\alpha)=1\\}$$\nis an abelian group under multiplication in $\\mathbb Z[\\sqrt D]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $\\varepsilon_D>1$, the positive powers $$\\alpha,\\ \\alpha\\varepsilon_D^{-1},\\ \\alpha\\varepsilon_D^{-2},\\ldots$$ form a strictly decreasing sequence. By [F2], each term is again an integral norm-one element. If $\\beta=u+v\\sqrt D$ is any integral norm-one element with $\\beta>1$, then $$0<\\beta^{-1}=u-v\\sqrt D<1,$$ so $$u=\\frac{\\beta+\\beta^{-1}}2,\\qquad v=\\frac{\\beta-\\beta^{-1}}{2\\sqrt D}>0.$$ Thus every term $>1$ in the displayed sequence is again a positive Pell solution. Their $x$-coordinates are positive integers and strictly decrease, because $1<\\gamma<\\delta$ with $N_D(\\gamma)=N_D(\\delta)=1$ implies $$\\gamma^{-1}>\\delta^{-1}>0,\\qquad \\gamma+\\gamma^{-1}<\\delta+\\delta^{-1},$$ hence the corresponding $x$-coordinates satisfy $x(\\gamma)<x(\\delta)$. Therefore only finitely many indices $j\\ge0$ satisfy $\\alpha\\varepsilon_D^{-j}>1$. The set $$K:=\\{j\\in\\mathbb Z_{\\ge0}:\\alpha\\varepsilon_D^{-j}\\ge1\\}$$ is nonempty because $0\\in K$, so it has a greatest element $k$. Then $$1\\le \\alpha\\varepsilon_D^{-k},$$ and maximality of $k$ gives $$\\alpha\\varepsilon_D^{-(k+1)}<1.$$ Multiplying the last inequality by $\\varepsilon_D$ yields $$\\alpha\\varepsilon_D^{-k}<\\varepsilon_D,$$ so $$1\\le \\alpha\\varepsilon_D^{-k}<\\varepsilon_D.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $$\\beta:=\\alpha\\varepsilon_D^{-k}.$$ Step 1.1 and [F2] show that $\\beta$ is an integral norm-one element with $1\\le\\beta<\\varepsilon_D$. If $\\beta>1$, then step 1.1 shows that $\\beta$ is a positive Pell solution with $x$-coordinate smaller than $x_1$, contradicting [F1]. Hence $\\beta=1$, so $$\\alpha=\\varepsilon_D^k.$$ Because $\\alpha>1$, the exponent cannot be $0$, so $k\\ge1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If also $\\alpha=\\varepsilon_D^m=\\varepsilon_D^n$ with $m<n$, then multiplying by $\\varepsilon_D^{-m}$ inside the group from [F2] gives $$1=\\varepsilon_D^{n-m},$$ impossible because $\\varepsilon_D>1$. So the exponent of a positive solution is unique.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem classifies one positive solution at a time; it is not quantified over a potentially empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly rules out the exponent boundary $k=0$ because the given solution satisfies $\\alpha>1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the terminal quotient to be exactly $1$, which is the case of the fundamental solution itself with exponent $1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the boundary where the division process stops immediately, namely when the given solution is already $\\varepsilon_D$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 establishes the half-closed terminal interval $1\\le \\alpha\\varepsilon_D^{-k}<\\varepsilon_D$, and step 2.1 disposes of its two endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses a deterministic repeated-division process rather than a choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a classification statement, not a top-level biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse clause is asserted beyond the direct power description."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: moving from the decreasing epsilon_D-orbit to the half-open terminal interval 1 <= alpha epsilon_D^{-k} < epsilon_D. Resolved: step 1.1 takes the greatest index in K = {j >= 0 : alpha epsilon_D^{-j} >= 1}, and step 2.1 uses minimality of the fundamental solution to force the terminal quotient beta to equal 1."
+      }
+    },
+    "cor-all-integral-pell-solutions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-integral-pell-solutions-form-a-group",
+          "source_section": "Statement",
+          "quote": "Fix a positive nonsquare integer $D$, and identify an integral solution\n$(x,y)$ of [[def-pell-equation]] with the element $x+y\\sqrt D\\in\\mathbb Z[\\sqrt D]$.\nThen the set\n$$G_D:=\\{\\alpha\\in\\mathbb Z[\\sqrt D]:N_D(\\alpha)=1\\}$$\nis an abelian group under multiplication in $\\mathbb Z[\\sqrt D]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-all-positive-pell-solutions-are-fundamental-powers",
+          "source_section": "Statement",
+          "quote": "Let $\\varepsilon_D=x_1+y_1\\sqrt D$ be the fundamental Pell solution. Every\npositive integral solution of\n$$x^2-Dy^2=1$$\nis equal to $\\varepsilon_D^k$ for a unique integer $k\\ge1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The element $\\alpha$ is nonzero because $N_D(\\alpha)=1$. If $\\alpha=1$ or $\\alpha=-1$, then already $$\\alpha=\\pm\\varepsilon_D^0.$$ Assume now that $\\alpha\\ne\\pm1$. If $\\alpha>1$, then $\\alpha^{-1}=1/\\alpha$ satisfies $0<\\alpha^{-1}<1$. Writing $\\alpha=x+y\\sqrt D$, one gets $$x=\\frac{\\alpha+\\alpha^{-1}}2>0,\\qquad y=\\frac{\\alpha-\\alpha^{-1}}{2\\sqrt D}>0,$$ so $\\alpha$ is a positive Pell solution. Hence [F2] gives $\\alpha=\\varepsilon_D^k$ for a unique $k\\ge1$. If $0<\\alpha<1$, then $\\alpha^{-1}>1$, so the previous argument shows that $\\alpha^{-1}$ is a positive Pell solution; [F1] and [F2] therefore give $\\alpha^{-1}=\\varepsilon_D^k$ for a unique $k\\ge1$, hence $\\alpha=\\varepsilon_D^{-k}$. If $\\alpha<0$, apply the previous positive cases to $-\\alpha$, whose norm is still $1$. Therefore $\\alpha=\\pm\\varepsilon_D^m$ for some integer $m$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The representation is unique. Indeed, if $$\\sigma\\varepsilon_D^m=\\tau\\varepsilon_D^n,\\qquad \\sigma,\\tau\\in\\{\\pm1\\},$$ then the powers $\\varepsilon_D^m$ and $\\varepsilon_D^n$ are positive real numbers, so equality forces $\\sigma=\\tau$. After cancelling the common sign, suppose for contradiction that $m<n$. Then [F1] gives $$1=\\varepsilon_D^{n-m}.$$ Multiplying by $\\varepsilon_D$ yields $$\\varepsilon_D=\\varepsilon_D^{n-m+1}.$$ Both sides are representations of the positive Pell solution $\\varepsilon_D$, so [F2] forces $n-m+1=1$, impossible because $m<n$. The case $n<m$ is symmetric. Hence $m=n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary classifies a single integral solution, not an empty set of them."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 begins by excluding $\\alpha=0$ from the norm-one equation and then handles the exponent boundary $m=0$ explicitly through the cases $\\alpha=\\pm1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the solutions $\\pm1$, which are exactly $\\pm\\varepsilon_D^0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundary $y=0$ is exactly the previous case $\\alpha=\\pm1$, already classified in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the boundary values $\\alpha=\\pm1$ separately and then splits the remaining cases into $\\alpha<-1$, $-1<\\alpha<0$, $0<\\alpha<1$, and $\\alpha>1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The four sign cases are explicit; no arbitrary representative is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a direct classification, not an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: the signed classification has real boundary cases at alpha = +-1 and at exponent 0. Resolved: step 1.1 separates the cases alpha = +-1, alpha > 1, 0 < alpha < 1, and alpha < 0, and step 2.1 cancels the sign before comparing exponents."
+      }
+    },
+    "thm-generalized-pell-solutions-have-finitely-many-orbits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pell-equivalence-of-generalized-solutions",
+          "source_section": "Definition",
+          "quote": "Fix a generalized Pell equation\n$$x^2-Dy^2=N,\\qquad N\\ne0,$$\nas in [[def-generalized-and-negative-pell-equations]], and write\n$$\\varepsilon_D:=x_1+y_1\\sqrt D$$\nfor the fundamental Pell solution from\n[[def-fundamental-pell-solution]].\n\nTwo integral solutions\n$$\\alpha,\\beta\\in\\mathbb Z[\\sqrt D],\\qquad N_D(\\alpha)=N_D(\\beta)=N,$$\nare **Pell-equivalent** if\n$$\\beta=\\alpha\\varepsilon_D^k$$\nfor some integer $k$.\n\nThis stays inside the same generalized Pell equation because\n[[lem-pell-norm-multiplication]] gives\n$$N_D(\\alpha\\varepsilon_D^k)=N_D(\\alpha)N_D(\\varepsilon_D)^k=N,$$\nand [[prop-integral-pell-solutions-form-a-group]] makes the powers\n$\\varepsilon_D^k$ a group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pell-norm-multiplication",
+          "source_section": "Statement",
+          "quote": "Let\n$$\\alpha=x+y\\sqrt D,\\qquad \\beta=u+v\\sqrt D\\in\\mathbb Z[\\sqrt D].$$\nThen\n$$\\alpha\\beta=(xu+D yv)+(xv+yu)\\sqrt D,$$\nand the Pell norm is multiplicative:\n$$N_D(\\alpha\\beta)=N_D(\\alpha)N_D(\\beta).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fundamental-pell-solution",
+          "source_section": "Definition",
+          "quote": "By [[thm-lagrange-existence-for-pell-equation]], the set of positive nontrivial\nsolutions of Pell's equation is nonempty. The **fundamental Pell solution** is\nthe positive solution\n$$\n(x_1,y_1)\\in\\mathbb Z_{>0}^2,\\qquad x_1^2-Dy_1^2=1,\n$$\nwhose first coordinate $x_1$ is least among all positive solutions.\n\nWrite\n$$\\varepsilon_D:=x_1+y_1\\sqrt D\\in\\mathbb Z[\\sqrt D].$$\nSince $x_1>0$ and $y_1>0$, one has $\\varepsilon_D>1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $$t:=\\frac{|\\alpha|}{\\sqrt{|N|}}>0.$$ Because $\\varepsilon_D>1$, the half-open intervals $$\\left(\\varepsilon_D^{m-1/2},\\varepsilon_D^{m+1/2}\\right]\\qquad(m\\in\\mathbb Z)$$ partition $(0,\\infty)$: their endpoints are strictly ordered, they tend to $0$ as $m\\to-\\infty$, and they tend to $+\\infty$ as $m\\to+\\infty$. Hence there is a unique integer $k$ with $$\\varepsilon_D^{-1/2}<t\\varepsilon_D^{-k}\\le \\varepsilon_D^{1/2}.$$ Put $$\\alpha_0:=\\alpha\\varepsilon_D^{-k}=x_0+y_0\\sqrt D.$$ By [F1] and [F2], $\\alpha_0$ is Pell-equivalent to $\\alpha$ and still satisfies $$N_D(\\alpha_0)=N.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $$\\beta:=|\\alpha_0|.$$ Step 1.1 gives $$\\sqrt{|N|}\\,\\varepsilon_D^{-1/2}<\\beta\\le \\sqrt{|N|}\\,\\varepsilon_D^{1/2}.$$ Since $$\\overline{\\alpha_0}=x_0-y_0\\sqrt D=\\frac{N}{\\alpha_0},$$ one has $$|\\overline{\\alpha_0}|=\\frac{|N|}{\\beta}\\le \\sqrt{|N|}\\,\\varepsilon_D^{1/2}$$ and also $|\\overline{\\alpha_0}|>\\sqrt{|N|}\\,\\varepsilon_D^{-1/2}$. Therefore $$2|x_0|=|\\alpha_0+\\overline{\\alpha_0}|\\le \\beta+|\\overline{\\alpha_0}|\\le \\sqrt{|N|}\\left(\\sqrt{\\varepsilon_D}+\\varepsilon_D^{-1/2}\\right),$$ and similarly $$2\\sqrt D\\,|y_0|=|\\alpha_0-\\overline{\\alpha_0}|\\le \\beta+|\\overline{\\alpha_0}|\\le \\sqrt{|N|}\\left(\\sqrt{\\varepsilon_D}+\\varepsilon_D^{-1/2}\\right).$$ This is exactly the stated bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bounds of step 2.1 leave only finitely many integer pairs $(x_0,y_0)$. Every solution is Pell-equivalent to one of them by step 1.1, so only finitely many Pell-equivalence classes occur.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem treats one fixed generalized Pell equation with one given solution at a time, not an empty family of equations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the hypothesis $N\\ne0$ to form $t=|\\alpha|/\\sqrt{|N|}$, so the zero-norm boundary is explicitly excluded where it matters."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 still applies when $|N|=1$; the representative bounds then become bounds for ordinary Pell or negative Pell solutions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses absolute values, so negative first embeddings and negative representatives are handled without a separate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the exponent using the half-open interval $\\varepsilon_D^{-1/2}<\\cdots\\le\\varepsilon_D^{1/2}$, so the interval endpoints are disposed of explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exponent $k$ is determined uniquely by the partition of $(0,\\infty)$; no representative is selected by choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a bound and a finiteness consequence, not one half of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication to prove."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: the logarithmic interval partition in step 1.1 and the conversion from a size bound on alpha_0 to coefficient bounds. Resolved: step 1.1 now uses annuli whose endpoints tend to 0 and +infty, and step 2.1 converts that annulus bound into the stated x_0 and y_0 inequalities through alpha-bar = N / alpha_0."
+      }
+    },
+    "cor-generalized-pell-solubility-is-decidable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-generalized-pell-solutions-have-finitely-many-orbits",
+          "source_section": "Statement",
+          "quote": "Consequently the generalized Pell equation has only finitely many Pell-equivalence classes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The orbit theorem reduces the problem to scanning the finitely many integer pairs in the bounded rectangle and retaining one representative from each orbit among the solutions found there.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because every solution is equivalent to one in that rectangle, the finite search succeeds exactly when the equation is solvable and produces a complete representative list.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers the case where the bounded search returns no solution at all: that is exactly the insoluble case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement fixes $N\\ne0$, inherited from the orbit theorem cited in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single representative orbit is allowed; step 1.1 retains one representative from each orbit, including the singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 removes duplicate representatives that belong to the same Pell orbit, so repeated hits in the bounded rectangle are handled explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The bounded rectangle is searched with its boundary included in step 1.1, since the theorem supplies weak inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 keeps one representative from each orbit only after an explicit finite scan, so any selection is finite and concrete."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states decidability rather than a top-level biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication beyond the search correctness is separately asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: correctness of the finite boxed search and duplicate-orbit handling. Resolved: step 1.1 reduces the problem to the finite rectangle from the orbit theorem, and step 2.1 identifies solvability exactly with finding at least one solution inside that rectangle."
+      }
+    },
+    "cor-one-generalized-pell-solution-gives-infinitely-many": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pell-norm-multiplication",
+          "source_section": "Statement",
+          "quote": "$$N_D(\\alpha\\beta)=N_D(\\alpha)N_D(\\beta).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fundamental-pell-solution",
+          "source_section": "Definition",
+          "quote": "Since $x_1>0$ and $y_1>0$, one has $\\varepsilon_D>1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplying a norm-$N$ solution by any power of the norm-one fundamental unit preserves the value of the norm, so every $\\alpha\\varepsilon_D^k$ is again a solution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\varepsilon_D>1$, the absolute values of the real embeddings $|\\alpha\\varepsilon_D^k|$ are strictly monotone in $k$, so the solutions of step 1.1 are all distinct.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary starts from one given solution, so the relevant set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the hypothesis $N\\ne0$ implicitly to ensure the starting solution is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the exponent $k=0$, which recovers the original solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses absolute values, so the starting solution may have either sign without changing the distinctness argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No finite interval or terminal index occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made; the family of solutions is written down explicitly as $\\alpha\\varepsilon_D^k$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an implication from one solution to infinitely many, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is stated."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: distinctness of the translates alpha epsilon_D^k when the starting solution may be negative. Resolved: step 2.1 compares the absolute values |alpha epsilon_D^k|, which are strictly monotone in k because epsilon_D > 1."
+      }
+    },
+    "ex-pell-equation-for-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-negative-pell-period-parity-criterion",
+          "source_section": "Statement",
+          "quote": "When $\\ell$ is odd, the convergent $p_{\\ell-1}/q_{\\ell-1}$ gives the least positive solution of $x^2-Dy^2=-1$, and the least positive solution of $x^2-Dy^2=1$ is the convergent $p_{2\\ell-1}/q_{2\\ell-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-all-positive-pell-solutions-are-fundamental-powers",
+          "source_section": "Statement",
+          "quote": "Every positive integral solution of $$x^2-Dy^2=1$$ is equal to $\\varepsilon_D^k$ for a unique integer $k\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The direct continued-fraction computation $\\sqrt2=[1;\\overline2]$ gives period length $1$, so the parity theorem identifies $1+\\sqrt2$ as the least negative-Pell solution and $3+2\\sqrt2=(1+\\sqrt2)^2$ as the fundamental norm-one solution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The first positive powers of $\\varepsilon_2=3+2\\sqrt2$ are $17+12\\sqrt2$ and $99+70\\sqrt2$, so the example lists the initial positive Pell solutions.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a concrete example, not a statement about an empty class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 produces the first nontrivial solutions with $y=1$ and $y=2$, so the trivial boundary $y=0$ is explicitly left behind."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly the period-length-one boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the initial convergent $p_0/q_0=1/1$, the smallest possible convergent index."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 records the first few powers beginning at the endpoint $k=1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example computes specific convergents and powers; nothing is chosen arbitrarily."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is present."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-pell-equation-for-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-negative-pell-period-parity-criterion",
+          "source_section": "Statement",
+          "quote": "When $\\ell$ is even, the least positive norm-one solution is $p_{\\ell-1}/q_{\\ell-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The calculation $\\sqrt3=[1;\\overline{1,2}]$ gives even period length $2$, so the parity theorem identifies $2+\\sqrt3$ as the least positive Pell solution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because the period length is even, the same parity theorem rules out integral solutions of $x^2-3y^2=-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is one explicit example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 produces the first nontrivial solution with $y=1$, so the trivial $y=0$ boundary is separated from the example's claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the denominator-one convergent $p_1/q_1=2/1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is the smallest even-period case, and step 2.1 treats that parity boundary directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint beyond the finite period length is relevant."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The continued fraction and convergent are computed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-negative-pell-equation-for-five": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-negative-pell-period-parity-criterion",
+          "source_section": "Statement",
+          "quote": "When $\\ell$ is odd, the convergent $p_{\\ell-1}/q_{\\ell-1}$ gives the least positive solution of $x^2-Dy^2=-1$, and the least positive solution of $x^2-Dy^2=1$ is the convergent $p_{2\\ell-1}/q_{2\\ell-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The period calculation $\\sqrt5=[2;\\overline4]$ has length $1$, so the parity theorem gives the least positive negative-Pell solution $2+\\sqrt5$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Squaring $2+\\sqrt5$ gives $9+4\\sqrt5$, whose norm is $1$, and the parity theorem identifies it as the least positive norm-one solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a concrete worked case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 both produce solutions with $y=1$ and $y=4$, so the trivial $y=0$ boundary is not part of the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is again the period-length-one boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the initial convergent $p_0/q_0=2/1$, the first possible negative-Pell witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate interval boundary beyond the one-period computation appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All witnesses are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item only computes the $D=5$ case and states no general implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction exists."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-pell-equation-for-fourteen": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-square-root-continued-fraction-period-structure",
+          "source_section": "Statement",
+          "quote": "$$P_\\ell=a_0,\\qquad Q_\\ell=1.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-root-convergent-norm-identity",
+          "source_section": "Statement",
+          "quote": "$$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Rationalizing the complete quotients of $\\sqrt{14}$ gives the period $[3;\\overline{1,2,1,6}]$ and the convergents $3,4,11/3,15/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $\\ell=4$, the returned state $Q_4=1$, and the norm identity at $n=3$ gives $15^2-14\\cdot4^2=1$, so $15+4\\sqrt{14}$ is the fundamental solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is one explicit Pell computation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies a nontrivial solution with $q_3=4>0$, excluding the trivial $y=0$ boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the denominator-one convergents $3$ and $4$ before the fundamental solution appears."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The returned state itself has denominator $1$, and step 2.1 uses that boundary exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the endpoint index $n=\\ell-1=3$ of one full period."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The state cycle is computed directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item computes one explicit Pell equation for $D=14$ and asserts no general implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is present."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: identifying the first norm-one convergent at the period endpoint. Resolved: step 1.1 computes the exact period [3; overline{1,2,1,6}], and step 2.1 applies Q_4 = 1 and the norm identity at n = 3 to get the fundamental solution 15 + 4 sqrt(14)."
+      }
+    },
+    "ex-large-fundamental-pell-solution-for-sixty-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-negative-pell-period-parity-criterion",
+          "source_section": "Statement",
+          "quote": "When $\\ell$ is odd, the convergent $p_{\\ell-1}/q_{\\ell-1}$ gives the least positive solution of $x^2-Dy^2=-1$, and the least positive solution of $x^2-Dy^2=1$ is the convergent $p_{2\\ell-1}/q_{2\\ell-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The period of $\\sqrt{61}$ has length $11$, and the convergent at index $10$ is $29718/3805$, so the parity theorem makes $29718+3805\\sqrt{61}$ the least positive negative-Pell solution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Squaring the negative-Pell solution yields $1766319049+226153980\\sqrt{61}$, and the parity theorem identifies it as the least positive norm-one solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a single explicit worked case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 produces a nontrivial negative-Pell solution with $y=3805>0$; step 2.1 then gives a nontrivial norm-one solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example's key period boundary is the first odd-period case large enough to show the phenomenon, and step 1.1 uses the final convergent of one period."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the square of a negative-Pell solution, the same structural boundary as the odd-period branch of the theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the endpoint indices $\\ell-1=10$ and $2\\ell-1=21$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The convergent and its square are explicitly computed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-generalized-pell-orbits-for-six": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-all-positive-pell-solutions-are-fundamental-powers",
+          "source_section": "Statement",
+          "quote": "Every positive integral solution of $$x^2-Dy^2=1$$ is equal to $\\varepsilon_D^k$ for a unique integer $k\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-generalized-pell-solutions-have-finitely-many-orbits",
+          "source_section": "Statement",
+          "quote": "Every integral solution $$x^2-Dy^2=N$$ is Pell-equivalent to a solution $$x_0+y_0\\sqrt D$$ satisfying",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm-one equation for $D=6$ has fundamental unit $5+2\\sqrt6$, and the orbit bound for $N=3$ collapses to the box $|x_0|\\le3$, $|y_0|<2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Enumerating that box leaves only $(\\pm3,\\pm1)$, and the inverse unit $5-2\\sqrt6$ shows that changing the sign of $y$ stays in the same orbit, so every solution is $\\pm(3+\\sqrt6)(5+2\\sqrt6)^k$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The equation is explicitly soluble; the example is about the resulting orbit structure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the $y=0$ boundary impossible for the norm-one generator and step 2.1 shows the representative box has only $|y|=1$ solutions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the boundary representatives with $|y|=1$, namely $\\pm(3\\pm\\sqrt6)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly collapses the sign-change pair $(3,1)$ and $(3,-1)$ into one orbit via the inverse fundamental unit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the exact endpoint $|x_0|\\le3$ of the bound, and step 2.1 finds the boundary solutions on that edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The representatives are obtained by explicit finite enumeration of the bound box."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item computes one explicit orbit family for $x^2-6y^2=3$ and states no general implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is present."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: collapsing the four boxed solutions for x^2 - 6 y^2 = 3 to two actual Pell orbits. Resolved: step 2.1 verifies (3 - sqrt(6)) = (3 + sqrt(6))(5 + 2 sqrt(6))^{-1}, and multiplication by -1 supplies the second orbit."
+      }
+    },
+    "ex-generalized-pell-bounded-representatives": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-generalized-pell-solutions-have-finitely-many-orbits",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a positive nonsquare integer, let $N\\in\\mathbb Z\\setminus\\{0\\}$, and\nlet $\\varepsilon_D>1$ be the fundamental Pell solution. Every integral solution\n$$x^2-Dy^2=N$$\nis Pell-equivalent to a solution\n$$x_0+y_0\\sqrt D$$\nsatisfying\n$$|x_0|\\le \\frac{\\sqrt{|N|}}2\\left(\\sqrt{\\varepsilon_D}+\\varepsilon_D^{-1/2}\\right), \\qquad |y_0|\\le \\frac{\\sqrt{|N|}}{2\\sqrt D}\\left(\\sqrt{\\varepsilon_D}+\\varepsilon_D^{-1/2}\\right).$$\nConsequently the generalized Pell equation has only finitely many\nPell-equivalence classes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-generalized-pell-solubility-is-decidable",
+          "source_section": "Statement",
+          "quote": "For fixed positive nonsquare $D$ and fixed nonzero $N\\in\\mathbb Z$, the\ngeneralized Pell equation\n$$x^2-Dy^2=N$$\nis decidable by a finite search over the explicit representative bounds of\n[[thm-generalized-pell-solutions-have-finitely-many-orbits]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The least positive norm-one solution for $D=7$ is $8+3\\sqrt7$, since $$8^2-7\\cdot3^2=1$$ and the smaller positive values $y=1,2$ give $x^2=8,29$, neither a square. Substituting $\\varepsilon_7=8+3\\sqrt7$ and $N=57$ into [F1] gives $$|x_0|\\le \\frac{\\sqrt{57}}2\\left(\\sqrt{8+3\\sqrt7}+(8+3\\sqrt7)^{-1/2}\\right)<17,$$ $$|y_0|\\le \\frac{\\sqrt{57}}{2\\sqrt7}\\left(\\sqrt{8+3\\sqrt7}+(8+3\\sqrt7)^{-1/2}\\right)<7.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], it is enough to enumerate solutions in that finite box. The integer solutions there are exactly $(\\pm8,\\pm1)$ and $(\\pm13,\\pm4)$, because $$8^2-7\\cdot1^2=57,\\qquad 13^2-7\\cdot4^2=57,$$ and no other pair with $|x|\\le16$, $|y|\\le6$ satisfies the equation. To compare their Pell orbits, note that every nonzero power of $\\varepsilon_7=8+3\\sqrt7$ has absolute value either at least $\\varepsilon_7$ or at most $\\varepsilon_7^{-1}$. But among the eight displayed solutions, every quotient of two distinct positive representatives has absolute value between $$\\frac{8-\\sqrt7}{13+4\\sqrt7}\\qquad\\text{and}\\qquad\\frac{13+4\\sqrt7}{8-\\sqrt7},$$ and this interval lies strictly inside $(\\varepsilon_7^{-1},\\varepsilon_7)$. So no ratio of two distinct displayed solutions is a power of $\\varepsilon_7$, and negative ratios are impossible because every power of $\\varepsilon_7$ is positive. Therefore these eight boxed solutions represent eight distinct Pell orbits.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example treats a soluble equation and enumerates its representatives."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows that no solution with $y=0$ appears in the search box, since the only hits have $|y|=1$ or $|y|=4$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the smallest positive $y$-boundary solutions $(\\pm8,\\pm1)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the sign changes in $y$ by the ratio test: negative ratios cannot equal a power of $\\varepsilon_7$, and positive ratios stay strictly between $\\varepsilon_7^{-1}$ and $\\varepsilon_7$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 replaces the exact bound by the integer search box $|x_0|\\le16$, $|y_0|\\le6$, and step 2.1 enumerates exactly the solutions inside that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The orbit representatives are obtained by direct finite enumeration, not by arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item only enumerates the $D=7$, $N=57$ search box and states no general implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claim is stated."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk: deciding whether the eight boxed solutions for x^2 - 7 y^2 = 57 collapse to fewer Pell orbits. Resolved: the repaired step 2.1 discards the false inverse-unit identification and instead proves every ratio of two distinct positive boxed solutions has absolute value strictly between epsilon_7^{-1} and epsilon_7, so all eight boxed solutions represent distinct orbits."
+      }
+    },
+    "cex-generalized-pell-solutions-need-not-all-be-convergents": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-legendre-continued-fraction-criterion",
+          "source_section": "Statement",
+          "quote": "$$\\left|\\alpha-\\frac{r}{s}\\right|<\\frac1{2s^2},$$ then $r/s$ is a convergent of $\\alpha$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The explicit element $3+\\sqrt6$ has norm $3$, while the continued fraction $\\sqrt6=[2;\\overline{2,4}]$ has convergents $2,5/2,22/9,\\ldots$, so $3/1$ is not among them.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The approximation error of $3/1$ is $3-\\sqrt6>1/2$, so the strict Legendre bound fails and the convergent criterion does not apply.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A concrete witness is exhibited."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero norm value $N=3$ and the denominator $s=1$, so no zero denominator or zero norm case is hidden."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is the smallest denominator boundary $s=1$, handled explicitly in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 isolates exactly the missing hypothesis: the approximation quality is not good enough even though the generalized Pell equation is solved."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares the error with the sharp endpoint value $1/(2s^2)=1/2$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness $3+\\sqrt6$ is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal statement rather than proving one direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse clause is part of the false statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-pell-units-need-not-be-all-quadratic-field-units": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-norm-on-integer-square-root-order",
+          "source_section": "Definition",
+          "quote": "$$\\mathbb Z[\\sqrt D]:=\\{x+y\\sqrt D:x,y\\in\\mathbb Z\\},$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The element $u=(1+\\sqrt5)/2$ is a unit of the larger order $\\mathbb Z[(1+\\sqrt5)/2]$ because $u(u-1)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u$ lay in $\\mathbb Z[\\sqrt5]$, then by the definition of that order it would equal $x+y\\sqrt5$ with integers $x,y$, but coefficient comparison forces $x=y=1/2$, impossible.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample consists of one explicit unit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits an explicit inverse for $u$, so neither factor is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $u(u-1)=1$, so the multiplicative identity is the exact endpoint of the witness equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the coefficient-comparison boundary directly: the obstruction is that the required coefficients are halves, not integers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, order endpoint, or finite index endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness unit is written down explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal claim; it is not one half of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is part of the false statement."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

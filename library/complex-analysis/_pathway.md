@@ -18,9 +18,11 @@ parts:
       - the-winding-number-and-the-global-cauchy-theorem
       - harmonic-functions-and-the-poisson-integral
       - isolated-singularities-and-laurent-series
+      - the-argument-principle-and-rouche
       - the-hartogs-phenomena
       - subharmonic-functions-and-the-dirichlet-problem
       - the-residue-theorem
+      - domains-of-holomorphy-and-pseudoconvexity
 ---
 
 ## holomorphic-functions
@@ -34,11 +36,13 @@ term, and its derivatives recover its coefficients.
 ## contours-and-cauchy
 
 Complex line integrals, Goursat's theorem and Cauchy's formula turn local holomorphy into
-analyticity, derivative bounds and Laurent expansions, while winding numbers and homology
-globalise primitives, logarithms and roots. Harmonic and harmonic-conjugate methods then
-give mean-value, maximum and Poisson principles. The added pages extend this in three
-directions: residues evaluate real integrals and series via semicircle, indentation,
-keyhole and rectangle contours; plane subharmonicity and Perron's method turn maximum
-principles into Dirichlet existence and boundary regularity; and Hartogs extension,
-separate holomorphy and compact-hole extension show how several complex variables depart
-from one-variable singularity theory.
+analyticity, derivative bounds and Laurent expansions, while winding numbers globalise
+primitives, logarithms and roots. Residues then evaluate contour integrals and, through the
+logarithmic derivative, become the argument principle, so zeros and poles are counted by
+winding and Rouché's theorem, Hurwitz stability and local inverse formulas follow from
+boundary control. Harmonic and subharmonic methods add mean-value, maximum, Poisson and
+Perron principles for boundary problems. In several variables the same contour language
+changes character: Hartogs extension removes isolated-hole pathologies, holomorphic
+convexity and the Cartan-Thullen theorem characterize domains of holomorphy, and
+plurisubharmonic exhaustion and Levi pseudoconvexity supply the geometric boundary
+conditions that replace one-variable singularity barriers.

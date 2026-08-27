@@ -2,7 +2,7 @@
 // adjudication, cross-group edges, and final pre-judge closure.
 
 import { inspectLegacyStep6Cutover } from '../../step6-cutover-lib.mjs';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 /** A completed legacy run skips only stage ids introduced by this cutover.
@@ -40,6 +40,21 @@ export function step6Stages(d: any) {
     ? `research/${ctx.run}-step6-cutover.json`
     : normal;
   const introducedPlan = (ctx: any, build: () => any[]) => hasLegacyStep6Cutover(ctx) ? [] : build();
+  const readerFindingsNeedRecovery = (ctx: any, unit: string) => {
+    const path = join(ctx.repo, 'research', `${ctx.run}-reader-findings-${unit}.json`);
+    try {
+      const report = JSON.parse(readFileSync(path, 'utf8'));
+      if (!Array.isArray(report?.findings)) return true;
+      // A published-dependency finding's id is the published item itself. A
+      // reader that invents an obligation-shaped id (frontier 21 batch 7)
+      // cannot be routed because no assigned consumer can reach that phantom.
+      return report.findings.some((finding: any) => finding?.subject_type === 'published-dependency'
+        && (typeof finding?.id !== 'string'
+          || !existsSync(join(ctx.repo, 'items', `${finding.id}.md`))));
+    } catch {
+      return true;
+    }
+  };
   const solo = (_ctx: any, unit: string) => [String(unit)];
   const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
     gate(`step6-routing-${phase}`,
@@ -242,18 +257,41 @@ export function step6Stages(d: any) {
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,
-      pattern: introducedPattern(resultPattern('tool', 'split-\\d+')),
+      pattern: introducedPattern(resultPattern('tool', 'split-\\d+(?:-recovered)?')),
       labelFor: (unit: string) => `split-${unit}`,
       artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
         `research/${ctx.run}-step6-scope-${unit}.json`),
       concurrency: 12,
       cohort: solo,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
-        role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
-          '--batch', String(unit)],
-        timeout: 600,
-      }))),
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => {
+        const contract = join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.proof-contracts.json`);
+        if (!existsSync(contract)) {
+          return {
+            role: 'beta', label: `author-recover-${unit}`,
+            job: 'authoring', covers: [unit], brief: 'briefs/authoring.md',
+            task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
+            timeout: 21600,
+          };
+        }
+        if (readerFindingsNeedRecovery(ctx, unit)) {
+          return {
+            role: 'reader', label: `reader-recover-${unit}`,
+            job: 'audit', covers: [unit], brief: 'briefs/reader.md',
+            task: 'briefs/tasks/reader.md', outputSchema: 'briefs/schemas/reader-findings.json',
+            resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
+            timeout: 14400,
+          };
+        }
+        const recovered = ['beta-author-recover', 'reader-reader-recover']
+          .some((prefix) => existsSync(join(ctx.dispatchDir, `${prefix}-${unit}.result.json`)));
+        return {
+          role: 'tool', label: `split-${unit}${recovered ? '-recovered' : ''}`,
+          job: 'bookkeeping-mechanical', covers: [unit],
+          argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
+            '--batch', String(unit)],
+          timeout: 600,
+        };
+      })),
       gatesWaived: 'Each batch owns a separate scope artifact; exact manifest partition and refuter closure are checked at the pipeline join.',
     },
     {

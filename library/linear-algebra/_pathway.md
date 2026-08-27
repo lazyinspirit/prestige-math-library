@@ -29,6 +29,7 @@ parts:
       - eigenvalues-eigenvectors-and-the-characteristic-polynomial
       - diagonalisation-and-the-minimal-polynomial
       - triangularisation-and-jordan-canonical-form
+      - the-spectral-theorem-and-singular-value-decomposition
 ---
 
 ## spaces-and-linear-maps
@@ -64,6 +65,12 @@ makes least squares and spectral arguments possible.
 
 An eigenvalue is a root of the characteristic polynomial, and the gap between algebraic and
 geometric multiplicity is what obstructs diagonalisation. The minimal polynomial decides
-when the obstruction vanishes, and when it does not, generalised eigenspaces triangularise
-the operator and Jordan canonical form gives the normal form the similarity class is
-recognised by.
+when the obstruction vanishes, generalised eigenspaces triangularise the operator, and
+Jordan canonical form gives the similarity invariant when it does not. Once an inner
+product is available, the theory sharpens: Schur triangularisation and the spectral theorem
+diagonalise normal operators, self-adjoint operators admit real orthonormal eigenbases and
+spectral projections, functional calculus and Jordan-Chevalley separate semisimple from
+nilpotent behaviour, and positive operators have unique positive square roots. Singular
+values then measure arbitrary operators, yielding SVD, polar decomposition, operator norms,
+best rank-$k$ approximation, min-max eigenvalue formulas, interlacing, Weyl inequalities
+and Gershgorin disks.

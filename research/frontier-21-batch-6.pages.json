@@ -1,0 +1,746 @@
+[
+  {
+    "order": 201,
+    "id": "integer-partitions-and-the-twelvefold-way",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Integer Partitions and the Twelvefold Way",
+    "companion": "integer-partitions-and-the-twelvefold-way-examples",
+    "requires": [
+      "set-partitions-stirling-numbers-and-exponential-generating-functions",
+      "formal-power-series"
+    ],
+    "items": [
+      {
+        "id": "def-twelvefold-way-ball-box-conventions",
+        "kind": "definition",
+        "title": "Conventions for integer partitions, Ferrers diagrams, and the twelvefold-way table",
+        "strategy": "Fix once that compositions mean positive parts, weak compositions allow zeros, n counts domain elements and k counts codomain values or boxes, and Ferrers diagrams are read in English convention. Also record that the page cites the published partition definition and Euler-product corollary rather than re-minting them.",
+        "deps": [
+          "def-partition-of-a-positive-integer",
+          "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+          "thm-stars-and-bars",
+          "cor-integer-partitions-have-euler-product"
+        ]
+      },
+      {
+        "id": "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+        "kind": "definition",
+        "title": "Ferrers and Young diagrams, conjugate partitions, self-conjugacy, and the Durfee square",
+        "strategy": "For a partition of a positive integer, define the Ferrers or Young diagram, the conjugate partition by transposing the diagram, self-conjugacy, the Durfee length, and the Durfee square.",
+        "deps": [
+          "def-partition-of-a-positive-integer"
+        ]
+      },
+      {
+        "id": "def-partition-counting-functions-and-restricted-families",
+        "kind": "definition",
+        "title": "The functions p(n), p_k(n), and the standard restricted partition families",
+        "strategy": "Define p(n), p_k(n) for partitions into exactly k positive parts, and the families with parts at most m, with largest part m, with distinct parts, and with odd parts.",
+        "deps": [
+          "def-partition-of-a-positive-integer",
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square"
+        ]
+      },
+      {
+        "id": "lem-partition-conjugation-is-an-involution",
+        "kind": "lemma",
+        "title": "Conjugating a partition twice returns the original partition",
+        "strategy": "Transposing a Ferrers diagram twice restores every row length, so conjugation is a well-defined involution on integer partitions.",
+        "deps": [
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square"
+        ]
+      },
+      {
+        "id": "thm-partitions-with-k-parts-equal-largest-part-k",
+        "kind": "theorem",
+        "title": "Partitions with k parts are equinumerous with partitions whose largest part is k",
+        "strategy": "Conjugation swaps rows and columns of the Ferrers diagram, so the number of rows becomes the number of columns and vice versa.",
+        "deps": [
+          "lem-partition-conjugation-is-an-involution",
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k",
+        "kind": "corollary",
+        "title": "Partitions with at most k parts are equinumerous with partitions whose parts are all at most k",
+        "strategy": "Sum the preceding bijection over largest part j at most k, or read both conditions directly from the same conjugation involution.",
+        "deps": [
+          "thm-partitions-with-k-parts-equal-largest-part-k",
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "thm-partitions-into-k-parts-recurrence",
+        "kind": "theorem",
+        "title": "Exact-k partition recurrence",
+        "strategy": "Split partitions of n into k parts according to whether a part equal to 1 occurs; remove one 1 in the first case and subtract 1 from every part in the second.",
+        "deps": [
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "rem-euler-product-agrees-with-the-published-multiset-corollary",
+        "kind": "remark",
+        "title": "The direct multiplicity product and the published multiset proof give the same Euler product",
+        "strategy": "Record the page-boundary agreement: the published corollary proves the Euler product through the symbolic multiset construction, while this page also keeps the direct summability proof that builds the infinite product coefficientwise from partition multiplicities.",
+        "deps": [
+          "cor-integer-partitions-have-euler-product",
+          "thm-multiset-product-formula",
+          "def-partition-counting-functions-and-restricted-families",
+          "def-formal-power-series-and-coefficient-extraction",
+          "thm-summable-families-and-rearrangement"
+        ]
+      },
+      {
+        "id": "cor-distinct-partitions-have-product-generating-function",
+        "kind": "corollary",
+        "title": "Distinct-part product generating function",
+        "strategy": "A distinct-part partition chooses each part size at most once, so specialize the published powerset product formula to one atom of each positive size.",
+        "deps": [
+          "def-partition-counting-functions-and-restricted-families",
+          "thm-powerset-product-formula"
+        ]
+      },
+      {
+        "id": "cor-odd-partitions-have-product-generating-function",
+        "kind": "corollary",
+        "title": "Odd-part product generating function",
+        "strategy": "Allow unrestricted multiplicity on the odd part sizes and no even part sizes, then specialize the published multiset product formula.",
+        "deps": [
+          "def-partition-counting-functions-and-restricted-families",
+          "thm-multiset-product-formula"
+        ]
+      },
+      {
+        "id": "thm-euler-distinct-parts-equal-odd-parts-by-generating-functions",
+        "kind": "theorem",
+        "title": "Euler's theorem by generating functions",
+        "strategy": "Show the two product generating functions coincide by the standard cancellation of even factors, then compare coefficients.",
+        "deps": [
+          "cor-distinct-partitions-have-product-generating-function",
+          "cor-odd-partitions-have-product-generating-function",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "thm-glaisher-bijection-between-odd-and-distinct-partitions",
+        "kind": "theorem",
+        "title": "Glaisher's bijection between odd-part and distinct-part partitions",
+        "strategy": "Group equal odd parts into blocks of size powers of two to merge them into distinct parts, and reverse by splitting each part into its odd core times powers of two. The proof checks the forward and inverse constructions explicitly.",
+        "deps": [
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "rem-distinct-odd-proof-agreement",
+        "kind": "remark",
+        "title": "The generating-function proof and Glaisher's bijection prove the same Euler theorem",
+        "strategy": "Record that the two routes count the same two classes and therefore agree coefficientwise and bijectively; the remark exists so the page does not carry two unrelated equalities.",
+        "deps": [
+          "thm-euler-distinct-parts-equal-odd-parts-by-generating-functions",
+          "thm-glaisher-bijection-between-odd-and-distinct-partitions"
+        ]
+      },
+      {
+        "id": "thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions",
+        "kind": "theorem",
+        "title": "Self-conjugate partitions correspond to distinct odd-part partitions",
+        "strategy": "Read the hooks along the main diagonal of a self-conjugate Ferrers diagram; they are distinct odd lengths, and reversing the construction rebuilds the self-conjugate diagram.",
+        "deps": [
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "thm-durfee-square-identity",
+        "kind": "theorem",
+        "title": "Durfee-square decomposition of the partition series",
+        "strategy": "Partition every Ferrers diagram into its Durfee square plus the cells to the right and below. Conjugation turns the lower piece into another partition with parts bounded by the Durfee length, yielding the standard sum over the Durfee size.",
+        "deps": [
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square",
+          "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k",
+          "cor-integer-partitions-have-euler-product",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "thm-unlabelled-unlabelled-placement-counts",
+        "kind": "theorem",
+        "title": "The unlabelled-to-unlabelled cells of the twelvefold way",
+        "strategy": "A surjective placement is exactly a partition of n into k positive parts; an arbitrary placement is a partition into at most k parts, hence by conjugation into parts at most k; injectivity forces every part to be 1, so there is one class when n is at most k and none otherwise.",
+        "deps": [
+          "def-twelvefold-way-ball-box-conventions",
+          "def-partition-counting-functions-and-restricted-families",
+          "cor-partitions-with-at-most-k-parts-equal-parts-at-most-k"
+        ]
+      },
+      {
+        "id": "thm-twelvefold-way",
+        "kind": "theorem",
+        "title": "The twelvefold way",
+        "strategy": "State one twelve-clause theorem using the fixed ball-box conventions. The labelled-to-labelled clauses cite the published function and injection counts and the Stirling surjection count; the indistinguishable-domain clauses cite stars-and-bars and compositions; the indistinguishable-codomain clauses use Stirling numbers and the preceding unlabelled-to-unlabelled theorem.",
+        "deps": [
+          "def-twelvefold-way-ball-box-conventions",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-number-of-injections",
+          "thm-number-of-bijections-of-a-finite-set",
+          "thm-stars-and-bars",
+          "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+          "def-stirling-second-kind-and-bell-number",
+          "thm-stirling-second-kind-inclusion-exclusion-formula",
+          "thm-unlabelled-unlabelled-placement-counts"
+        ]
+      },
+      {
+        "id": "thm-euler-pentagonal-number-theorem-by-franklin",
+        "kind": "theorem",
+        "title": "Euler's pentagonal number theorem by Franklin's involution",
+        "strategy": "Work with partitions into distinct parts and the signed series over their lengths. Franklin's involution pairs all nonexceptional partitions with sign-reversing partners, leaving exactly the generalized pentagonal exponents.",
+        "deps": [
+          "cor-distinct-partitions-have-product-generating-function",
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square"
+        ]
+      },
+      {
+        "id": "cor-pentagonal-recurrence-for-partition-numbers",
+        "kind": "corollary",
+        "title": "Euler's pentagonal recurrence for partition numbers",
+        "strategy": "Multiply the pentagonal series by the published Euler product for the reciprocal partition series, compare coefficients, and isolate p(n).",
+        "deps": [
+          "thm-euler-pentagonal-number-theorem-by-franklin",
+          "cor-integer-partitions-have-euler-product",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "fs-partitions-into-k-parts-are-counted-by-binomial-coefficients",
+        "kind": "false-statement",
+        "title": "FALSE: p_k(n) is counted by C(n-1,k-1)",
+        "strategy": "Refute by comparing partitions with compositions: the binomial coefficient counts ordered positive decompositions, and the companion page exhibits the mismatch already at n=5, k=3.",
+        "deps": [
+          "thm-partitions-into-k-parts-recurrence",
+          "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients"
+        ]
+      },
+      {
+        "id": "fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions",
+        "kind": "false-statement",
+        "title": "FALSE: conjugation itself is the distinct-parts to odd-parts bijection",
+        "strategy": "Refute with a distinct-part partition whose conjugate has an even part. Glaisher's map, not ordinary conjugation, is the correct bijection.",
+        "deps": [
+          "lem-partition-conjugation-is-an-involution",
+          "thm-glaisher-bijection-between-odd-and-distinct-partitions"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 202,
+    "id": "integer-partitions-and-the-twelvefold-way-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Integer Partitions and the Twelvefold Way — Examples",
+    "companion": "integer-partitions-and-the-twelvefold-way",
+    "requires": [
+      "integer-partitions-and-the-twelvefold-way"
+    ],
+    "items": [
+      {
+        "id": "ex-partitions-of-six-listed",
+        "kind": "example",
+        "title": "The eleven partitions of 6",
+        "strategy": "List the partitions of 6 by largest part and group them by length to make the later conjugation picture visible.",
+        "deps": [
+          "def-partition-counting-functions-and-restricted-families"
+        ]
+      },
+      {
+        "id": "ex-conjugation-of-the-partitions-of-six",
+        "kind": "example",
+        "title": "Conjugation pairs the partitions of 6 by swapping length and largest part",
+        "strategy": "Draw Ferrers diagrams for the partitions of 6 and transpose them to see the involution and the k-parts/largest-part correspondence.",
+        "deps": [
+          "ex-partitions-of-six-listed",
+          "lem-partition-conjugation-is-an-involution"
+        ]
+      },
+      {
+        "id": "ex-a-self-conjugate-partition-and-its-diagonal-hooks",
+        "kind": "example",
+        "title": "A self-conjugate partition produces distinct odd diagonal hooks",
+        "strategy": "Use a concrete self-conjugate Ferrers diagram, read off its diagonal hook lengths, and match them to a partition into distinct odd parts.",
+        "deps": [
+          "thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions"
+        ]
+      },
+      {
+        "id": "ex-glaisher-bijection-on-an-odd-partition",
+        "kind": "example",
+        "title": "Glaisher's bijection on an odd-part partition",
+        "strategy": "Start with a partition into odd parts with repeated entries, merge equal odd parts in powers of two, and show the image has distinct parts.",
+        "deps": [
+          "thm-glaisher-bijection-between-odd-and-distinct-partitions"
+        ]
+      },
+      {
+        "id": "ex-durfee-square-decomposition-of-five-three-three-two-one",
+        "kind": "example",
+        "title": "The partition (5,3,3,2,1) decomposes by its Durfee square",
+        "strategy": "Mark the 3 by 3 Durfee square, then identify the right and lower remainders as partitions bounded by the Durfee length.",
+        "deps": [
+          "thm-durfee-square-identity"
+        ]
+      },
+      {
+        "id": "ex-pentagonal-recurrence-computes-p-ten",
+        "kind": "example",
+        "title": "Euler's pentagonal recurrence computes p(10)=42",
+        "strategy": "Run the recurrence with the generalized pentagonal offsets 1, 2, 5, and 7 and the alternating signs until every term is known.",
+        "deps": [
+          "cor-pentagonal-recurrence-for-partition-numbers"
+        ]
+      },
+      {
+        "id": "ex-twelvefold-way-labelled-labelled-at-three-and-two",
+        "kind": "example",
+        "title": "The labelled-to-labelled cells of the twelvefold way at n=3 and k=2",
+        "strategy": "Count all, injective, and surjective maps from a 3-element set to a 2-element set directly and compare with 2^3, 0, and 2!S(3,2).",
+        "deps": [
+          "thm-twelvefold-way"
+        ]
+      },
+      {
+        "id": "ex-twelvefold-way-unlabelled-to-labelled-at-three-and-two",
+        "kind": "example",
+        "title": "The unlabelled-domain to labelled-codomain cells at n=3 and k=2",
+        "strategy": "Interpret the classes as multisets, subsets, and positive compositions for 3 balls and 2 labelled boxes.",
+        "deps": [
+          "thm-twelvefold-way"
+        ]
+      },
+      {
+        "id": "ex-twelvefold-way-labelled-to-unlabelled-at-three-and-two",
+        "kind": "example",
+        "title": "The labelled-domain to unlabelled-codomain cells at n=3 and k=2",
+        "strategy": "Interpret the classes as set partitions with at most two blocks, with singleton blocks only, and with exactly two blocks.",
+        "deps": [
+          "thm-twelvefold-way"
+        ]
+      },
+      {
+        "id": "ex-twelvefold-way-unlabelled-unlabelled-at-three-and-two",
+        "kind": "example",
+        "title": "The unlabelled-to-unlabelled cells at n=3 and k=2",
+        "strategy": "List the partitions of 3 into at most two parts, note that there is no injective class because 3 is greater than 2, and identify the unique surjective class 2+1.",
+        "deps": [
+          "thm-twelvefold-way",
+          "thm-unlabelled-unlabelled-placement-counts"
+        ]
+      },
+      {
+        "id": "ex-partitions-into-three-parts-of-five-from-the-recurrence",
+        "kind": "example",
+        "title": "The recurrence gives p_3(5)=2",
+        "strategy": "Apply p_3(5)=p_2(4)+p_3(2)=2+0 and exhibit the two partitions 3+1+1 and 2+2+1.",
+        "deps": [
+          "thm-partitions-into-k-parts-recurrence"
+        ]
+      },
+      {
+        "id": "ex-distinct-and-odd-partitions-of-seven",
+        "kind": "example",
+        "title": "The partitions of 7 into distinct parts and into odd parts match",
+        "strategy": "List both families for n=7 and pair them either by equal count or by Glaisher's map.",
+        "deps": [
+          "thm-glaisher-bijection-between-odd-and-distinct-partitions",
+          "thm-euler-distinct-parts-equal-odd-parts-by-generating-functions"
+        ]
+      },
+      {
+        "id": "cex-a-partition-that-is-not-self-conjugate",
+        "kind": "counterexample",
+        "title": "The partition (4,2,1) is not self-conjugate",
+        "strategy": "Transpose its Ferrers diagram and observe that the conjugate is (3,2,1,1), not the original partition.",
+        "deps": [
+          "def-ferrers-young-diagram-conjugate-partition-and-durfee-square"
+        ]
+      },
+      {
+        "id": "cex-conjugation-does-not-send-distinct-parts-to-odd-parts",
+        "kind": "counterexample",
+        "title": "Conjugating (4,2,1) does not produce an odd-part partition",
+        "strategy": "The partition (4,2,1) has distinct parts, but its conjugate (3,2,1,1) has an even part, so plain conjugation is not Glaisher's bijection.",
+        "deps": [
+          "fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions",
+          "lem-partition-conjugation-is-an-involution"
+        ]
+      },
+      {
+        "id": "cex-manipulating-the-euler-product-without-summability",
+        "kind": "counterexample",
+        "title": "Ignoring summability in the Euler product leads to illegal coefficient manipulations",
+        "strategy": "Exhibit a naive coefficient computation in the infinite Euler product that informally sums infinitely many contributors to one coefficient, and contrast it with the finite-support justification.",
+        "deps": [
+          "rem-euler-product-agrees-with-the-published-multiset-corollary",
+          "thm-summable-families-and-rearrangement"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 205,
+    "id": "counting-up-to-symmetry-burnside-and-polya",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Counting up to Symmetry: Burnside and Pólya",
+    "companion": "counting-up-to-symmetry-burnside-and-polya-examples",
+    "requires": [
+      "group-actions-and-cayleys-theorem",
+      "symmetric-groups-and-the-sign-homomorphism",
+      "set-partitions-stirling-numbers-and-exponential-generating-functions",
+      "symmetric-polynomials"
+    ],
+    "items": [
+      {
+        "id": "rem-cycle-index-and-polya-naming-conventions",
+        "kind": "remark",
+        "title": "Naming conventions for Burnside, Cauchy-Frobenius, and Redfield-Pólya",
+        "strategy": "Record that this page cites the published orbit-counting theorem by its on-disk name Cauchy-Frobenius, while noting the alternative names Burnside's lemma and Redfield-Pólya only as terminology.",
+        "deps": [
+          "thm-cauchy-frobenius-orbit-counting"
+        ]
+      },
+      {
+        "id": "def-cycle-index-of-a-permutation-group",
+        "kind": "definition",
+        "title": "The cycle index of a finite permutation group",
+        "strategy": "For a finite group acting by permutations on a finite set, define j_k(g) as the number of k-cycles of g and set the cycle index to be the average of the corresponding monomials in the published multivariate polynomial ring.",
+        "deps": [
+          "def-group-action",
+          "def-fixed-point-sets-of-a-group-action",
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ]
+      },
+      {
+        "id": "def-colouring-action-weight-function-and-pattern-inventory",
+        "kind": "definition",
+        "title": "Colourings, weight functions, and the pattern inventory",
+        "strategy": "Define the induced action on colourings X to C, the weight of a colouring from a commutative-ring-valued weight on colours, and the orbit-sum called the pattern inventory.",
+        "deps": [
+          "def-group-action",
+          "def-fixed-point-sets-of-a-group-action",
+          "def-cycle-index-of-a-permutation-group",
+          "def-commutative-ring",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials"
+        ]
+      },
+      {
+        "id": "def-cycle-index-series-of-a-graded-symmetric-family",
+        "kind": "definition",
+        "title": "The cycle-index series of a graded family of S_n-actions",
+        "strategy": "Take a sequence A=(A_n) of finite sets where each A_n carries an action of S_n. Define its cycle-index series coefficientwise by setting the coefficient of t^n to be the rational polynomial (1/n!) times the sum over sigma in S_n of the number of fixed structures in A_n times the cycle-type monomial of sigma; this keeps every coefficient in Q[s_1,...,s_n].",
+        "deps": [
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-fixed-point-sets-of-a-group-action",
+          "def-cycle-index-of-a-permutation-group",
+          "def-formal-power-series-and-coefficient-extraction"
+        ]
+      },
+      {
+        "id": "lem-fixed-colourings-factor-by-cycle-type",
+        "kind": "lemma",
+        "title": "Fixed colourings factor by cycle type",
+        "strategy": "A colouring is fixed precisely when it is constant on every cycle of g. For plain colourings each cycle chooses one colour; for weighted inventory the contribution of a k-cycle is the kth power sum of the colour weights.",
+        "deps": [
+          "def-colouring-action-weight-function-and-pattern-inventory",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-polya-enumeration-theorem",
+        "kind": "theorem",
+        "title": "Pólya's enumeration theorem",
+        "strategy": "Apply the published Cauchy-Frobenius orbit count to the induced action on colourings and replace each fixed-point count by the cycle-type formula from the preceding lemma.",
+        "deps": [
+          "lem-fixed-colourings-factor-by-cycle-type",
+          "thm-cauchy-frobenius-orbit-counting"
+        ]
+      },
+      {
+        "id": "thm-weighted-pattern-inventory-formula",
+        "kind": "theorem",
+        "title": "The weighted pattern inventory is the cycle index evaluated at the power sums",
+        "strategy": "Combine the weighted fixed-colouring factorization with the weighted orbit average over the acting group, obtaining the cycle index after substitution of the power sums.",
+        "deps": [
+          "lem-fixed-colourings-factor-by-cycle-type",
+          "def-colouring-action-weight-function-and-pattern-inventory",
+          "thm-polya-enumeration-theorem"
+        ]
+      },
+      {
+        "id": "thm-cycle-index-of-cyclic-group",
+        "kind": "theorem",
+        "title": "The cycle index of the cyclic group C_n",
+        "strategy": "Classify rotations of an n-gon by gcd(r,n): a rotation by r has gcd(r,n) cycles, and the number of rotations with a given gcd is an Euler-totient count.",
+        "deps": [
+          "def-cycle-index-of-a-permutation-group",
+          "def-unit-group-modulo-n-and-euler-totient"
+        ]
+      },
+      {
+        "id": "thm-cycle-index-of-dihedral-group",
+        "kind": "theorem",
+        "title": "The cycle index of the dihedral group D_{2n}",
+        "strategy": "Average the cyclic rotations with the two reflection types. Odd and even n differ because even-gon reflections split into vertex-axis and edge-axis cases.",
+        "deps": [
+          "thm-cycle-index-of-cyclic-group",
+          "def-cycle-index-of-a-permutation-group"
+        ]
+      },
+      {
+        "id": "lem-permutations-with-a-given-cycle-type-count",
+        "kind": "lemma",
+        "title": "Permutations with a fixed cycle type are counted by the standard factorial denominator",
+        "strategy": "Choose the elements supporting each cycle length, order each k-cycle up to cyclic rotation, and divide again by permutations of the equal-length cycles. The result is the usual n! divided by the product over k of k^{m_k} m_k!.",
+        "deps": [
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "thm-number-of-bijections-of-a-finite-set",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "thm-cycle-index-of-symmetric-group",
+        "kind": "theorem",
+        "title": "The cycle index of S_n is the sum over cycle types",
+        "strategy": "Group permutations by cycle type, insert the same-page cycle-type counting lemma, and divide by n! in the defining average.",
+        "deps": [
+          "def-cycle-index-of-a-permutation-group",
+          "lem-permutations-with-a-given-cycle-type-count"
+        ]
+      },
+      {
+        "id": "thm-cycle-index-of-alternating-group",
+        "kind": "theorem",
+        "title": "The cycle index of A_n is the parity-filtered symmetric-group sum",
+        "strategy": "Filter the symmetric-group cycle-type sum by the sign condition from disjoint cycles and renormalize by |A_n|=n!/2; equivalently add the parity-twisted symmetric-group sum to the untwisted one and handle the small n cases separately.",
+        "deps": [
+          "thm-cycle-index-of-symmetric-group",
+          "def-alternating-group",
+          "cor-sign-from-disjoint-cycle-structure"
+        ]
+      },
+      {
+        "id": "cor-necklace-count-via-cycle-index",
+        "kind": "corollary",
+        "title": "Necklace count from the cyclic-group cycle index",
+        "strategy": "Apply Pólya's theorem to the rotation action of C_n on bead positions and substitute the number of colours for every cycle-index variable.",
+        "deps": [
+          "thm-polya-enumeration-theorem",
+          "thm-cycle-index-of-cyclic-group"
+        ]
+      },
+      {
+        "id": "rem-necklace-count-agrees-with-the-published-cycle-construction",
+        "kind": "remark",
+        "title": "The cycle-index necklace count agrees with the published CYC count",
+        "strategy": "Compare the present Pólya derivation with the earlier symbolic-method necklace formula so the library has one necklace sequence with two explained derivations.",
+        "deps": [
+          "cor-necklace-count-via-cycle-index",
+          "cor-necklaces-over-an-m-letter-alphabet"
+        ]
+      },
+      {
+        "id": "cor-bracelet-count-via-cycle-index",
+        "kind": "corollary",
+        "title": "Bracelet count from the dihedral-group cycle index",
+        "strategy": "Apply Pólya's theorem to the full dihedral symmetry group of the n-gon, so reflections and rotations are both counted.",
+        "deps": [
+          "thm-polya-enumeration-theorem",
+          "thm-cycle-index-of-dihedral-group"
+        ]
+      },
+      {
+        "id": "thm-edge-set-orbits-on-two-subsets-by-polya",
+        "kind": "theorem",
+        "title": "Pólya enumeration counts edge-set orbits on the 2-subsets of [n]",
+        "strategy": "Let S_n act on the set of 2-element subsets of [n]. A 0-1 colouring of these pairs is an edge-set, and the weighted pattern inventory with the substitution 1 + x^i counts its orbits under relabelling.",
+        "deps": [
+          "thm-weighted-pattern-inventory-formula",
+          "thm-two-element-subsets-count"
+        ]
+      },
+      {
+        "id": "cor-symmetric-group-cycle-index-series-is-exponential",
+        "kind": "corollary",
+        "title": "The symmetric-group cycle-index series is coefficientwise exponential",
+        "strategy": "Apply the cycle-index-series definition to the family with one size-n structure fixed by every permutation, so the t^n coefficient is Z(S_n). For fixed n, only the variables s_1 through s_n affect the coefficient of t^n in exp(sum_{k>=1} s_k t^k/k), so truncate to k<=n and expand coefficientwise to recover the same cycle-type denominator sum.",
+        "deps": [
+          "def-cycle-index-series-of-a-graded-symmetric-family",
+          "lem-permutations-with-a-given-cycle-type-count",
+          "thm-cycle-index-of-symmetric-group",
+          "def-formal-exponential-logarithm-and-powers",
+          "thm-formal-exponential-logarithm-identities"
+        ]
+      },
+      {
+        "id": "fs-distinct-groups-have-distinct-cycle-indices",
+        "kind": "false-statement",
+        "title": "FALSE: nonisomorphic groups acting on finite sets always have different cycle indices",
+        "strategy": "Refute with two nonisomorphic groups acting through the same quotient permutation action. For example, C_4 and V_4 can both act on four points through a quotient onto C_2, yielding the same multiset of identity and transposition permutations.",
+        "deps": [
+          "def-cycle-index-of-a-permutation-group"
+        ]
+      },
+      {
+        "id": "fs-cycle-index-determines-the-abstract-group",
+        "kind": "false-statement",
+        "title": "FALSE: the cycle index of a permutation action determines the abstract group",
+        "strategy": "Use the same nonfaithful quotient-action witness as above: equal cycle index need not force isomorphic acting groups.",
+        "deps": [
+          "def-cycle-index-of-a-permutation-group",
+          "fs-distinct-groups-have-distinct-cycle-indices"
+        ]
+      },
+      {
+        "id": "fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment",
+        "kind": "false-statement",
+        "title": "FALSE: every weight substitution collapses the pattern inventory to the plain orbit count",
+        "strategy": "Refute with a weight that remembers a colour statistic, so the resulting polynomial distinguishes orbit types instead of collapsing to a single total.",
+        "deps": [
+          "thm-weighted-pattern-inventory-formula"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 206,
+    "id": "counting-up-to-symmetry-burnside-and-polya-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Counting up to Symmetry: Burnside and Pólya — Examples",
+    "companion": "counting-up-to-symmetry-burnside-and-polya",
+    "requires": [
+      "counting-up-to-symmetry-burnside-and-polya"
+    ],
+    "items": [
+      {
+        "id": "ex-cycle-index-of-c-four",
+        "kind": "example",
+        "title": "The cycle index of C_4",
+        "strategy": "List the four rotations of the square, record their cycle types, and average the resulting monomials.",
+        "deps": [
+          "thm-cycle-index-of-cyclic-group"
+        ]
+      },
+      {
+        "id": "ex-cycle-index-of-d-four",
+        "kind": "example",
+        "title": "The cycle index of D_8",
+        "strategy": "Separate identity, quarter-turns, half-turn, and the two reflection types of the square.",
+        "deps": [
+          "thm-cycle-index-of-dihedral-group"
+        ]
+      },
+      {
+        "id": "ex-cycle-index-of-s-three",
+        "kind": "example",
+        "title": "The cycle index of S_3",
+        "strategy": "Group permutations of three letters by cycle type: identity, three transpositions, and two 3-cycles.",
+        "deps": [
+          "thm-cycle-index-of-symmetric-group"
+        ]
+      },
+      {
+        "id": "ex-a-nonfree-action-with-three-orbits-on-four-points",
+        "kind": "example",
+        "title": "A nonfree action can have 3 orbits on 4 points",
+        "strategy": "Let a transposition act on a four-point set with two fixed points; compute the orbit set and compare it with |X|/|G|.",
+        "deps": [
+          "thm-cauchy-frobenius-orbit-counting"
+        ]
+      },
+      {
+        "id": "ex-pattern-inventory-of-square-colourings-by-number-of-red-vertices",
+        "kind": "example",
+        "title": "Pattern inventory of square colourings by number of red vertices",
+        "strategy": "Use the dihedral cycle index of the square and the substitution x_i = 1 + r^i to recover how many colourings have each red-vertex count up to symmetry.",
+        "deps": [
+          "thm-weighted-pattern-inventory-formula",
+          "ex-cycle-index-of-d-four"
+        ]
+      },
+      {
+        "id": "ex-two-colour-necklaces-of-length-six-by-polya",
+        "kind": "example",
+        "title": "Two-colour necklaces of length 6 by Pólya",
+        "strategy": "Evaluate the cycle index of C_6 at 2 and confirm the orbit count directly from the divisor formula.",
+        "deps": [
+          "cor-necklace-count-via-cycle-index",
+          "thm-cycle-index-of-cyclic-group"
+        ]
+      },
+      {
+        "id": "ex-two-colour-necklaces-of-length-six-by-the-cycle-construction",
+        "kind": "example",
+        "title": "Two-colour necklaces of length 6 by the published CYC formula",
+        "strategy": "Use the earlier symbolic-method necklace formula at m=2 and check that it matches the Pólya count.",
+        "deps": [
+          "rem-necklace-count-agrees-with-the-published-cycle-construction",
+          "cor-necklaces-over-an-m-letter-alphabet"
+        ]
+      },
+      {
+        "id": "ex-two-colour-bracelets-of-length-six",
+        "kind": "example",
+        "title": "Two-colour bracelets of length 6",
+        "strategy": "Evaluate the dihedral cycle index of the hexagon at 2 to include reflections as well as rotations.",
+        "deps": [
+          "cor-bracelet-count-via-cycle-index",
+          "thm-cycle-index-of-dihedral-group"
+        ]
+      },
+      {
+        "id": "ex-cube-face-colourings-under-rotations",
+        "kind": "example",
+        "title": "Colourings of the faces of a cube up to rotation",
+        "strategy": "Identify the rotation group with its face-permutation cycle types, assemble the cycle index, and evaluate it at the chosen number of colours.",
+        "deps": [
+          "thm-polya-enumeration-theorem",
+          "def-cycle-index-of-a-permutation-group"
+        ]
+      },
+      {
+        "id": "ex-edge-set-orbits-on-four-vertices-by-polya",
+        "kind": "example",
+        "title": "There are 11 S_4-orbits of edge-sets on the pairs of [4]",
+        "strategy": "Use the pair action of S_4 on the 6 unordered vertex pairs, compute the induced cycle index, and substitute 1 + x^i.",
+        "deps": [
+          "thm-edge-set-orbits-on-two-subsets-by-polya"
+        ]
+      },
+      {
+        "id": "cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index",
+        "kind": "counterexample",
+        "title": "C_4 and V_4 can share the same cycle index through nonfaithful actions",
+        "strategy": "Let both groups act on four points through quotient maps onto the same transposition action of C_2. Each action has two identity elements and two transposition elements in its image-counted average, so the cycle indices agree although the groups are not isomorphic.",
+        "deps": [
+          "fs-distinct-groups-have-distinct-cycle-indices",
+          "fs-cycle-index-determines-the-abstract-group"
+        ]
+      },
+      {
+        "id": "cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information",
+        "kind": "counterexample",
+        "title": "The substitution x_i=x^i can erase colour-profile information",
+        "strategy": "Compare a weighted inventory that distinguishes red and blue counts with the collapsed one-variable substitution, which keeps only total weight and merges different colour profiles.",
+        "deps": [
+          "fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment",
+          "thm-weighted-pattern-inventory-formula"
+        ]
+      }
+    ]
+  }
+]
