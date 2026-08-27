@@ -1,7 +1,7 @@
 ---
 page: domains-of-holomorphy-and-pseudoconvexity
 title: "Domains of Holomorphy, Plurisubharmonicity and Pseudoconvexity"
-status: draft
+status: published
 items: [def-holomorphically-convex-hull-and-domain,
         lem-basic-properties-of-the-holomorphic-hull,
         def-polydisc-boundary-radius,

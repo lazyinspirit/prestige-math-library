@@ -2,7 +2,7 @@
 id: cor-riemann-integrable-function-is-almost-everywhere-equal-to-a-borel-function
 kind: corollary
 title: "A Riemann integrable function on a closed bounded interval is almost everywhere equal to a Borel function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

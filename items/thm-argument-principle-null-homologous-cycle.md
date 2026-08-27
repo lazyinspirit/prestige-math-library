@@ -2,7 +2,7 @@
 id: thm-argument-principle-null-homologous-cycle
 kind: theorem
 title: "The argument principle for an admissible null-homologous cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

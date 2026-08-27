@@ -2,7 +2,7 @@
 id: thm-arzela-bounded-convergence-for-riemann-integrals
 kind: theorem
 title: "Arzela's bounded convergence theorem for Riemann integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

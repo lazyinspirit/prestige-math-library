@@ -2,7 +2,7 @@
 id: thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional
 kind: theorem
 title: "Every irreducible representation of a finite abelian group over a splitting field is one-dimensional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line
 kind: theorem
 title: "A nonnegative improper Riemann integral on a half-line agrees with the Lebesgue integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-square-root-convergent-norm-identity
 kind: lemma
 title: "Convergents to $\\sqrt{D}$ satisfy the norm identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

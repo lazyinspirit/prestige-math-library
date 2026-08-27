@@ -1,7 +1,7 @@
 ---
 page: the-argument-principle-and-rouche
 title: "The Argument Principle and Rouché's Theorem"
-status: draft
+status: published
 items: [def-logarithmic-derivative-meromorphic-function,
         def-weighted-zero-and-pole-counts-on-cycle,
         lem-logarithmic-derivative-order-residue,

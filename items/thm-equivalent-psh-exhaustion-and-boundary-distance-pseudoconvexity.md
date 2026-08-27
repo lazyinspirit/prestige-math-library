@@ -2,7 +2,7 @@
 id: thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity
 kind: theorem
 title: "Hartogs pseudoconvexity yields a continuous plurisubharmonic exhaustion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

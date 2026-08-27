@@ -2,7 +2,7 @@
 id: ex-principal-submatrix-interlacing
 kind: example
 title: "The eigenvalues of a principal 2x2 submatrix interlace those of a 3x3 symmetric matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

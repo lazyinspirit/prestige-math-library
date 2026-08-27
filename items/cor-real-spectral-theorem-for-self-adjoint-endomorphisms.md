@@ -2,7 +2,7 @@
 id: cor-real-spectral-theorem-for-self-adjoint-endomorphisms
 kind: corollary
 title: "Real spectral theorem: a self-adjoint endomorphism of a finite-dimensional real inner product space has an orthonormal eigenbasis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

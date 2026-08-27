@@ -2,7 +2,7 @@
 id: def-operator-norm-on-a-finite-dimensional-inner-product-space
 kind: definition
 title: "The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv||"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-inner-product-norm]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

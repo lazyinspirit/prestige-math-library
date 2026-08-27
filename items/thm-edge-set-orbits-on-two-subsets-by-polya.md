@@ -2,7 +2,7 @@
 id: thm-edge-set-orbits-on-two-subsets-by-polya
 kind: theorem
 title: "Pólya enumeration counts edge-set orbits on the 2-subsets of [n]"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

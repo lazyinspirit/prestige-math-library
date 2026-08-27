@@ -2,7 +2,7 @@
 id: thm-artinian-local-ring-has-nilpotent-maximal-ideal
 kind: theorem
 title: "An Artinian local ring has nilpotent maximal ideal, and its finite modules have finite length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

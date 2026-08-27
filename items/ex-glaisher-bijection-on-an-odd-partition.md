@@ -2,7 +2,7 @@
 id: ex-glaisher-bijection-on-an-odd-partition
 kind: example
 title: "Glaisher's bijection on an odd-part partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

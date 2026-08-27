@@ -2,7 +2,7 @@
 id: cex-an-arbitrary-transversal-does-not-give-the-reduced-schreier-basis
 kind: counterexample
 title: "An arbitrary transversal need not give the reduced Schreier basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-fundamental-theorem-of-algebra-via-rouche
 kind: remark
 title: "Rouche gives the standard leading-term proof of the fundamental theorem of algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

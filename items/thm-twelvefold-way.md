@@ -2,7 +2,7 @@
 id: thm-twelvefold-way
 kind: theorem
 title: "The twelvefold way"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,8 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: classification
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

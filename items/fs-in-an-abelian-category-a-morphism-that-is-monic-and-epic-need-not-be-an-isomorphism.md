@@ -2,7 +2,7 @@
 id: fs-in-an-abelian-category-a-morphism-that-is-monic-and-epic-need-not-be-an-isomorphism
 kind: false-statement
 title: "FALSE: in an abelian category a morphism can be monic and epic without being an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

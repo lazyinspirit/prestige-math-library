@@ -2,7 +2,7 @@
 id: def-the-quotient-of-an-object-by-a-subobject
 kind: definition
 title: "The quotient of an object by a subobject"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

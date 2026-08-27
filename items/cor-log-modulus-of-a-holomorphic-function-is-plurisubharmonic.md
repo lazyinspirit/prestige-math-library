@@ -2,7 +2,7 @@
 id: cor-log-modulus-of-a-holomorphic-function-is-plurisubharmonic
 kind: corollary
 title: "The logarithm of the modulus of a holomorphic function is plurisubharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

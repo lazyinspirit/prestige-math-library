@@ -2,7 +2,7 @@
 id: thm-upper-envelope-theorem-for-plurisubharmonic-functions
 kind: theorem
 title: "Upper envelopes of locally upper-bounded plurisubharmonic families"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

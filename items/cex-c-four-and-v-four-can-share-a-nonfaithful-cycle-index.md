@@ -2,7 +2,7 @@
 id: cex-c-four-and-v-four-can-share-a-nonfaithful-cycle-index
 kind: counterexample
 title: "C_4 and V_4 can share the same cycle index through nonfaithful actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references: []

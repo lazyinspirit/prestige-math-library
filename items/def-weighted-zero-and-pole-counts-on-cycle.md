@@ -2,7 +2,7 @@
 id: def-weighted-zero-and-pole-counts-on-cycle
 kind: definition
 title: "Zero and pole counts weighted by multiplicity and winding number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

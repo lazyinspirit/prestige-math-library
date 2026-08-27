@@ -2,7 +2,7 @@
 id: cex-e-to-one-over-z-shows-essential-singularities-break-the-argument-principle
 kind: counterexample
 title: "The function e^(1/z) shows that essential singularities lie outside the argument principle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

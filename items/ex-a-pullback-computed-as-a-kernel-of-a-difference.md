@@ -2,7 +2,7 @@
 id: ex-a-pullback-computed-as-a-kernel-of-a-difference
 kind: example
 title: "A pullback of module maps is computed as a kernel of a difference map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

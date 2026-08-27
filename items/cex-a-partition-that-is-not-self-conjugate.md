@@ -2,7 +2,7 @@
 id: cex-a-partition-that-is-not-self-conjugate
 kind: counterexample
 title: "The partition (4,2,1) is not self-conjugate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

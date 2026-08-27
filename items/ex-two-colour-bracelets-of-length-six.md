@@ -2,7 +2,7 @@
 id: ex-two-colour-bracelets-of-length-six
 kind: example
 title: "Two-colour bracelets of length 6"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

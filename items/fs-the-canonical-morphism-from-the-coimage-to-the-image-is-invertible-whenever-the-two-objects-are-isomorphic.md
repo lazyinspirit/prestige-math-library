@@ -2,7 +2,7 @@
 id: fs-the-canonical-morphism-from-the-coimage-to-the-image-is-invertible-whenever-the-two-objects-are-isomorphic
 kind: false-statement
 title: "FALSE: if coimage and image happen to be isomorphic as objects, then the canonical map is automatically an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-a-small-product-of-abelian-categories-is-abelian
 kind: theorem
 title: "A small product of abelian categories is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

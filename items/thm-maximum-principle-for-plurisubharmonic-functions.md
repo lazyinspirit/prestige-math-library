@@ -2,7 +2,7 @@
 id: thm-maximum-principle-for-plurisubharmonic-functions
 kind: theorem
 title: "Maximum principle for plurisubharmonic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

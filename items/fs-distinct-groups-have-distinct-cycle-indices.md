@@ -2,7 +2,7 @@
 id: fs-distinct-groups-have-distinct-cycle-indices
 kind: false-statement
 title: "FALSE: nonisomorphic groups acting on finite sets always have different cycle indices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

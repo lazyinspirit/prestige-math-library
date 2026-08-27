@@ -2,7 +2,7 @@
 id: cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable
 kind: counterexample
 title: "The sine integral is improperly Riemann integrable and not Lebesgue integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-paradoxical-decomposition-of-a-free-group
 kind: example
 title: "A paradoxical decomposition of a free group of rank two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

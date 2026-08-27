@@ -2,7 +2,7 @@
 id: def-twelvefold-way-ball-box-conventions
 kind: definition
 title: "Conventions for integer partitions, Ferrers diagrams, and the twelvefold-way table"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

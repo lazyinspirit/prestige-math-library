@@ -2,7 +2,7 @@
 id: rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem
 kind: remark
 title: "The library does not use Freyd-Mitchell to prove the diagram lemmas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

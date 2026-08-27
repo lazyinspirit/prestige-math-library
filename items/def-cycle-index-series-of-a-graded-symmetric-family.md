@@ -2,7 +2,7 @@
 id: def-cycle-index-series-of-a-graded-symmetric-family
 kind: definition
 title: "The cycle-index series of a graded family of S_n-actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

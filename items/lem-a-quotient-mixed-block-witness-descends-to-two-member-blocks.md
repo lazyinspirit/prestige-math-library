@@ -2,7 +2,7 @@
 id: lem-a-quotient-mixed-block-witness-descends-to-two-member-blocks
 kind: lemma
 title: "A quotient-level mixed-block witness descends to two mixed member blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-third-isomorphism-theorem-checked-for-abelian-groups
 kind: example
 title: "The third isomorphism theorem in abelian groups matches the categorical statement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

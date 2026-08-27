@@ -2,7 +2,7 @@
 id: def-g-module-over-a-commutative-ring
 kind: definition
 title: "An $R$-linear action of $G$ on a left $R$-module, and a $G$-module over $R$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

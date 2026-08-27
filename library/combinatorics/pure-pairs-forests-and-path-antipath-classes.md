@@ -1,7 +1,7 @@
 ---
 page: pure-pairs-forests-and-path-antipath-classes
 title: "Pure Pairs, Forests and Path–Antipath Classes"
-status: draft
+status: published
 items: [def-strong-erdos-hajnal-property-for-a-hereditary-class,
         thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected,
         cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order,

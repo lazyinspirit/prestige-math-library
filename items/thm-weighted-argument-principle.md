@@ -2,7 +2,7 @@
 id: thm-weighted-argument-principle
 kind: theorem
 title: "The weighted argument principle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

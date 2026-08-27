@@ -2,7 +2,7 @@
 id: cor-the-pushout-of-a-monomorphism-is-a-monomorphism
 kind: corollary
 title: "The pushout of a monomorphism is a monomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct-corollary
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

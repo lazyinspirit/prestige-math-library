@@ -2,7 +2,7 @@
 id: lem-blocks-from-different-mixed-block-classes-form-pure-pairs
 kind: lemma
 title: "Blocks from distinct mixed-block classes are pure to each other"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

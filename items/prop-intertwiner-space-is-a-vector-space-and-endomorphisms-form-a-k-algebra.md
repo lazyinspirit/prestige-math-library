@@ -2,7 +2,7 @@
 id: prop-intertwiner-space-is-a-vector-space-and-endomorphisms-form-a-k-algebra
 kind: proposition
 title: "$\\operatorname{Hom}_G(V,W)$ is a $k$-vector space and $\\operatorname{End}_G(V)$ is a $k$-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

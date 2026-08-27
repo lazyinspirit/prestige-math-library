@@ -2,7 +2,7 @@
 id: thm-artinian-ring-characterisation-by-primes
 kind: theorem
 title: "A Noetherian ring is Artinian exactly when every prime ideal is maximal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

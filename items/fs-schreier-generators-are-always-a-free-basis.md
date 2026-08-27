@@ -2,7 +2,7 @@
 id: fs-schreier-generators-are-always-a-free-basis
 kind: false-statement
 title: "FALSE: the raw Schreier generators are always a free basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

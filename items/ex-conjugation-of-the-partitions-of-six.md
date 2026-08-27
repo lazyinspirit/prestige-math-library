@@ -2,7 +2,7 @@
 id: ex-conjugation-of-the-partitions-of-six
 kind: example
 title: "Conjugation pairs the partitions of 6 by swapping length and largest part"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path
 kind: example
 title: "The path-antipath theorem specialized to $P_5$ and $\\overline{P_5}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

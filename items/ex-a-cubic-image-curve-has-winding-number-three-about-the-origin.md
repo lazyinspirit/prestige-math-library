@@ -2,7 +2,7 @@
 id: ex-a-cubic-image-curve-has-winding-number-three-about-the-origin
 kind: example
 title: "A cubic image curve winds three times around the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

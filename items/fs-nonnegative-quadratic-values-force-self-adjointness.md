@@ -2,7 +2,7 @@
 id: fs-nonnegative-quadratic-values-force-self-adjointness
 kind: false-statement
 title: "FALSE: If <Tv,v> is nonnegative for every v, then T is automatically self-adjoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

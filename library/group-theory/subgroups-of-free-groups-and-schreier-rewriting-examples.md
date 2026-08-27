@@ -1,7 +1,7 @@
 ---
 page: subgroups-of-free-groups-and-schreier-rewriting-examples
 title: "Subgroups of Free Groups and Schreier Rewriting — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-index-two-subgroup-of-a-rank-two-free-group,
            ex-kernel-of-the-exponent-sum-map,

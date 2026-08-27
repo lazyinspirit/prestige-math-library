@@ -2,7 +2,7 @@
 id: ex-hermitian-two-by-two-unitary-diagonalisation
 kind: example
 title: "An explicit Hermitian 2x2 matrix is unitarily diagonalised"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

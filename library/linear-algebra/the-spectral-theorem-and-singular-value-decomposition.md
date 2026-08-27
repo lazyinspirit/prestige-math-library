@@ -1,7 +1,7 @@
 ---
 page: the-spectral-theorem-and-singular-value-decomposition
 title: 'The Spectral Theorem, Positive Operators and Singular Value Decomposition'
-status: draft
+status: published
 items: [def-self-adjoint-and-normal-endomorphism,
         prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases,
         thm-schur-triangularisation,

@@ -2,7 +2,7 @@
 id: cex-z-over-n-shows-why-hurwitz-needs-the-or-constant-clause
 kind: counterexample
 title: "The sequence z/(n+1) shows why the injective-limit theorem needs the constant escape clause"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

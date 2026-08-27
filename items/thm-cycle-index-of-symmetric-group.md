@@ -2,7 +2,7 @@
 id: thm-cycle-index-of-symmetric-group
 kind: theorem
 title: "The cycle index of S_n is the sum over cycle types"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

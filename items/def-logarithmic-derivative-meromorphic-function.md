@@ -2,7 +2,7 @@
 id: def-logarithmic-derivative-meromorphic-function
 kind: definition
 title: "The logarithmic derivative of a meromorphic function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

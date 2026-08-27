@@ -2,7 +2,7 @@
 id: fs-a-finite-index-d-subgroup-of-a-rank-n-free-group-has-rank-dn
 kind: false-statement
 title: "FALSE: a finite-index d subgroup of a rank n free group has rank dn"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

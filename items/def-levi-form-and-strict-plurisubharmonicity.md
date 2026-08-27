@@ -2,7 +2,7 @@
 id: def-levi-form-and-strict-plurisubharmonicity
 kind: definition
 title: "The Levi form and strict plurisubharmonicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

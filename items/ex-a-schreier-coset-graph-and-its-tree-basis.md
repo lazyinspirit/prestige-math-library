@@ -2,7 +2,7 @@
 id: ex-a-schreier-coset-graph-and-its-tree-basis
 kind: example
 title: "A Schreier coset graph and its spanning-tree basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

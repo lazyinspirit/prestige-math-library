@@ -2,7 +2,7 @@
 id: def-augmentation-map-and-augmentation-ideal-of-a-group-ring
 kind: definition
 title: "The augmentation map $\\varepsilon:R[G]\\to R$ and the augmentation ideal $I_G=\\ker\\varepsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

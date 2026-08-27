@@ -2,7 +2,7 @@
 id: cor-groups-containing-a-rank-two-free-subgroup-are-nonamenable
 kind: corollary
 title: "Under the ultrafilter lemma, groups containing a rank-two free subgroup are nonamenable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

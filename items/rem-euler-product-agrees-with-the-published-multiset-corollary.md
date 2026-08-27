@@ -2,7 +2,7 @@
 id: rem-euler-product-agrees-with-the-published-multiset-corollary
 kind: remark
 title: "The direct multiplicity product and the published multiset proof give the same Euler product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

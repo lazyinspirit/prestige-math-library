@@ -2,7 +2,7 @@
 id: ex-large-fundamental-pell-solution-for-sixty-one
 kind: example
 title: "The large fundamental solution for $D=61$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

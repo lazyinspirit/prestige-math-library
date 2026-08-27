@@ -2,7 +2,7 @@
 id: def-functional-calculus-for-a-normal-endomorphism
 kind: definition
 title: "The spectral functional calculus f(T) for a normal endomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-spectral-resolution-and-polynomial-spectral-projections]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

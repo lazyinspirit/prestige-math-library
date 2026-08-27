@@ -2,7 +2,7 @@
 id: rem-the-axiom-labels-and-where-they-come-from
 kind: remark
 title: "This page uses Grothendieck's AB1 and AB2 labels, and records the competing conventions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

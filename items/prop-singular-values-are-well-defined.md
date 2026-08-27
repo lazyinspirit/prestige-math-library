@@ -2,7 +2,7 @@
 id: prop-singular-values-are-well-defined
 kind: proposition
 title: "Singular values are well defined because the positive square root of T^*T is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

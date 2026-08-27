@@ -2,7 +2,7 @@
 id: thm-group-actions-and-group-ring-modules-correspond
 kind: theorem
 title: "For a commutative ring $R$, $R$-linear $G$-actions are exactly the compatible left $R[G]$-module structures"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

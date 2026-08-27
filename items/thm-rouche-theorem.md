@@ -2,7 +2,7 @@
 id: thm-rouche-theorem
 kind: theorem
 title: "Rouche's theorem in the classical strict-inequality form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

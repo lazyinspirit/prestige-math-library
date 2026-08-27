@@ -1,7 +1,7 @@
 ---
 page: amenable-groups-and-folner-criteria-examples
 title: "Amenable Groups and Folner Criteria — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-folner-intervals-in-the-integers,
            ex-folner-boxes-in-zn,

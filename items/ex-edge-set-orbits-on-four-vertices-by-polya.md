@@ -2,7 +2,7 @@
 id: ex-edge-set-orbits-on-four-vertices-by-polya
 kind: example
 title: "There are 11 S_4-orbits of edge-sets on the pairs of [4]"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

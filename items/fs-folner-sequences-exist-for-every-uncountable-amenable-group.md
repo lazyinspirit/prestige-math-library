@@ -2,7 +2,7 @@
 id: fs-folner-sequences-exist-for-every-uncountable-amenable-group
 kind: false-statement
 title: "FALSE: every uncountable amenable group has a Folner sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

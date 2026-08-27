@@ -2,7 +2,7 @@
 id: cor-rayleigh-quotient-extreme-eigenvalue-characterisation
 kind: corollary
 title: "The smallest and largest eigenvalues of a self-adjoint endomorphism are the minimum and maximum Rayleigh quotients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

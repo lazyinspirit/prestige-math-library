@@ -1,7 +1,7 @@
 ---
 page: quotient-blockades-and-mixing-relations-examples
 title: "Quotient Blockades and Mixing Relations — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-mixedness-of-blocks-is-not-transitive,
            ex-a-mixed-chain-collapses-to-one-quotient-block,

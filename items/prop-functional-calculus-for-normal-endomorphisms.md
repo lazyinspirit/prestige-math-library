@@ -2,7 +2,7 @@
 id: prop-functional-calculus-for-normal-endomorphisms
 kind: proposition
 title: "For normal endomorphisms, the spectral functional calculus respects sums, products, adjoints, and composition of scalar functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

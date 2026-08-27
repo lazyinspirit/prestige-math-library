@@ -2,7 +2,7 @@
 id: cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero
 kind: corollary
 title: "In an abelian category, monic means zero kernel and epic means zero cokernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct-corollary
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

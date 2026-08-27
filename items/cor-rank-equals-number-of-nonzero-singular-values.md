@@ -2,7 +2,7 @@
 id: cor-rank-equals-number-of-nonzero-singular-values
 kind: corollary
 title: "The rank of a linear map is the number of its nonzero singular values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

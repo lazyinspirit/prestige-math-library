@@ -2,7 +2,7 @@
 id: fs-schurs-lemma-over-an-arbitrary-field-still-forces-scalars
 kind: false-statement
 title: "FALSE: over every field, the endomorphism ring of an irreducible representation is just the base field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-partitions-of-six-listed
 kind: example
 title: "The eleven partitions of 6"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

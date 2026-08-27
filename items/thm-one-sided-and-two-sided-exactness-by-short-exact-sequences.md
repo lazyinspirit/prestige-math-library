@@ -2,7 +2,7 @@
 id: thm-one-sided-and-two-sided-exactness-by-short-exact-sequences
 kind: theorem
 title: "Left exactness, right exactness, and exactness are characterized by short exact sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

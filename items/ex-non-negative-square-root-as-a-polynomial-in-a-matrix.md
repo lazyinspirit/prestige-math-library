@@ -2,7 +2,7 @@
 id: ex-non-negative-square-root-as-a-polynomial-in-a-matrix
 kind: example
 title: "The non-negative square root of an explicit matrix is exhibited as a polynomial in the matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

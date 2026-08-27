@@ -2,7 +2,7 @@
 id: thm-cycle-index-of-dihedral-group
 kind: theorem
 title: "The cycle index of the dihedral group D_{2n}"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: parity-split
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

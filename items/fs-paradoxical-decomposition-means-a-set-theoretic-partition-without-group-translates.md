@@ -2,7 +2,7 @@
 id: fs-paradoxical-decomposition-means-a-set-theoretic-partition-without-group-translates
 kind: false-statement
 title: "FALSE: a paradoxical decomposition is just an abstract partition without prescribed translates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

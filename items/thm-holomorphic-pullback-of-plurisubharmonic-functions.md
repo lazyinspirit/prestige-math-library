@@ -2,7 +2,7 @@
 id: thm-holomorphic-pullback-of-plurisubharmonic-functions
 kind: theorem
 title: "Holomorphic pullbacks of $C^2$ plurisubharmonic functions are plurisubharmonic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

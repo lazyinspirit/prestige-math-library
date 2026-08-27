@@ -2,7 +2,7 @@
 id: thm-cycle-index-of-alternating-group
 kind: theorem
 title: "The cycle index of A_n is the parity-filtered symmetric-group sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

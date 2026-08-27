@@ -2,7 +2,7 @@
 id: cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order
 kind: corollary
 title: "Every $P_4$-free graph has a clique or stable set of size at least the square root of its order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

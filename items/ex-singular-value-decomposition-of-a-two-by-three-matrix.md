@@ -2,7 +2,7 @@
 id: ex-singular-value-decomposition-of-a-two-by-three-matrix
 kind: example
 title: "The singular value decomposition of an explicit 2x3 matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

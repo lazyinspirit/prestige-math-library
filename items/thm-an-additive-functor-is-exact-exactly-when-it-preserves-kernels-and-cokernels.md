@@ -2,7 +2,7 @@
 id: thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels
 kind: theorem
 title: "An additive functor is exact exactly when it preserves kernels and cokernels"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

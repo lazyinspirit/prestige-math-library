@@ -1,7 +1,7 @@
 ---
 page: subgroups-of-free-groups-and-schreier-rewriting
 title: "Subgroups of Free Groups and Schreier Rewriting"
-status: draft
+status: published
 items: [def-labeled-schreier-coset-graph,
         lem-schreier-coset-graph-is-connected-and-deterministic,
         def-schreier-transversal-and-schreier-system,

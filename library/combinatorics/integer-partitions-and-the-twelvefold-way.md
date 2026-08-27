@@ -1,7 +1,7 @@
 ---
 page: integer-partitions-and-the-twelvefold-way
 title: "Integer Partitions and the Twelvefold Way"
-status: draft
+status: published
 items: [def-twelvefold-way-ball-box-conventions,
         def-ferrers-young-diagram-conjugate-partition-and-durfee-square,
         def-partition-counting-functions-and-restricted-families,

@@ -2,7 +2,7 @@
 id: cor-an-abelian-category-that-is-a-preorder-is-trivial
 kind: corollary
 title: "An abelian category that is a preorder is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct-corollary
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

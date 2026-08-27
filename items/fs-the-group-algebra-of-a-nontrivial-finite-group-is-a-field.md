@@ -2,7 +2,7 @@
 id: fs-the-group-algebra-of-a-nontrivial-finite-group-is-a-field
 kind: false-statement
 title: "FALSE: if $|G|>1$, then $k[G]$ is a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

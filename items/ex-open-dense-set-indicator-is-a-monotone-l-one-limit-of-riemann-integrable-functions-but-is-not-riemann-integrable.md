@@ -2,7 +2,7 @@
 id: ex-open-dense-set-indicator-is-a-monotone-l-one-limit-of-riemann-integrable-functions-but-is-not-riemann-integrable
 kind: example
 title: "An open dense set of measure less than $1$ is the monotone $L^1$-limit of Riemann integrable indicators, but its indicator is not Riemann integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-a-nonfree-action-with-three-orbits-on-four-points
 kind: example
 title: "A nonfree action can have 3 orbits on 4 points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

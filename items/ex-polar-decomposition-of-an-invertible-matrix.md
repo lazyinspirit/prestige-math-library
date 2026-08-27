@@ -2,7 +2,7 @@
 id: ex-polar-decomposition-of-an-invertible-matrix
 kind: example
 title: "A worked polar decomposition of an invertible matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

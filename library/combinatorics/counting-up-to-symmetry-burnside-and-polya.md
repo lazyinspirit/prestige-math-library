@@ -1,7 +1,7 @@
 ---
 page: counting-up-to-symmetry-burnside-and-polya
 title: "Counting up to Symmetry: Burnside and Pólya"
-status: draft
+status: published
 items: [rem-cycle-index-and-polya-naming-conventions,
         def-cycle-index-of-a-permutation-group,
         def-colouring-action-weight-function-and-pattern-inventory,

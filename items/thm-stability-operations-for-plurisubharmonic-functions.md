@@ -2,7 +2,7 @@
 id: thm-stability-operations-for-plurisubharmonic-functions
 kind: theorem
 title: "Basic stability operations for plurisubharmonic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

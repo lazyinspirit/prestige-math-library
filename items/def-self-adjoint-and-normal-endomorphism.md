@@ -2,7 +2,7 @@
 id: def-self-adjoint-and-normal-endomorphism
 kind: definition
 title: "Self-adjoint and normal endomorphisms of a finite-dimensional real or complex inner product space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-adjoint-of-a-linear-map-between-inner-product-spaces]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

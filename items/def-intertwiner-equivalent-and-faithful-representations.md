@@ -2,7 +2,7 @@
 id: def-intertwiner-equivalent-and-faithful-representations
 kind: definition
 title: "Intertwiners, the spaces $\\operatorname{Hom}_G(V,W)$ and $\\operatorname{End}_G(V)$, equivalent representations, and faithful representations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

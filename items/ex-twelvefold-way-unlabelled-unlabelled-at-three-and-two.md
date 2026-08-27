@@ -2,7 +2,7 @@
 id: ex-twelvefold-way-unlabelled-unlabelled-at-three-and-two
 kind: example
 title: "The unlabelled-to-unlabelled cells at n=3 and k=2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

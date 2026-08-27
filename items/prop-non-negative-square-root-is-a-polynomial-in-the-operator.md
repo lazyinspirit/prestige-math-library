@@ -2,7 +2,7 @@
 id: prop-non-negative-square-root-is-a-polynomial-in-the-operator
 kind: proposition
 title: "The non-negative square root of a non-negative operator is a polynomial in the operator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

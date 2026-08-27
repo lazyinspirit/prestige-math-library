@@ -2,7 +2,7 @@
 id: fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment
 kind: false-statement
 title: "FALSE: every weight substitution collapses the pattern inventory to the plain orbit count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

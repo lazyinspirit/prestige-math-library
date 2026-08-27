@@ -2,7 +2,7 @@
 id: thm-continuity-of-zeros-locally-uniform-convergence
 kind: theorem
 title: "Locally uniform convergence preserves the total multiplicity near an isolated zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

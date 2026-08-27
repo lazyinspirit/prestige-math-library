@@ -1,7 +1,7 @@
 ---
 page: artinian-rings-and-length-examples
 title: "Artinian Rings and Length Examples"
-status: draft
+status: published
 items: []
 examples: [ex-artinian-truncated-polynomial-ring, ex-artinian-product-of-local-rings, ex-field-is-artinian, ex-noetherian-not-artinian, ex-length-of-a-truncated-local-module, ex-zero-dimensional-nonnoetherian-ring]
 ---

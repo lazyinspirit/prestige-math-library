@@ -2,7 +2,7 @@
 id: ex-gershgorin-disks-and-spectrum
 kind: example
 title: "Gershgorin disks for an explicit 3x3 matrix contain the true spectrum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

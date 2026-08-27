@@ -2,7 +2,7 @@
 id: thm-levi-and-hartogs-pseudoconvexity-for-c-two-domains
 kind: theorem
 title: "Hartogs pseudoconvexity implies Levi pseudoconvexity for $C^2$ domains"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

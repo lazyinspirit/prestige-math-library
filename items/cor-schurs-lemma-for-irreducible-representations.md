@@ -2,7 +2,7 @@
 id: cor-schurs-lemma-for-irreducible-representations
 kind: corollary
 title: "Schur's lemma for irreducible representations: a nonzero intertwiner is an isomorphism, and $\\operatorname{End}_G(V)$ is a division ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

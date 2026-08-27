@@ -2,7 +2,7 @@
 id: rem-necklace-count-agrees-with-the-published-cycle-construction
 kind: remark
 title: "The cycle-index necklace count agrees with the published CYC count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-free-groups-of-rank-at-least-two-have-subgroups-of-every-finite-rank
 kind: corollary
 title: "A free group of rank at least two has subgroups of every finite rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

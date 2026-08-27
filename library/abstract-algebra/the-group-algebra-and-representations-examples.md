@@ -1,7 +1,7 @@
 ---
 page: the-group-algebra-and-representations-examples
 title: "The Group Algebra and Representations of Finite Groups: Examples and False Statements"
-status: draft
+status: published
 items: []
 examples: [ex-the-complex-representations-of-a-cyclic-group-of-order-n-are-the-n-characters, ex-the-regular-representation-of-c-two-splits-as-trivial-plus-sign, ex-the-standard-two-dimensional-representation-of-s-three-is-irreducible, ex-the-permutation-representation-on-left-cosets-g-mod-h, ex-zero-divisors-in-the-group-algebra-of-a-nontrivial-finite-group, ex-the-quaternion-group-acts-on-the-quaternions-by-left-multiplication, ex-the-real-two-dimensional-irreducible-of-c-three-has-endomorphism-ring-c, fs-every-representation-is-faithful, fs-the-group-algebra-of-a-nontrivial-finite-group-is-a-field, fs-every-degree-one-representation-is-trivial, fs-schurs-lemma-over-an-arbitrary-field-still-forces-scalars]
 ---

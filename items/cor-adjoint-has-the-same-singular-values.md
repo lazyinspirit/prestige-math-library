@@ -2,7 +2,7 @@
 id: cor-adjoint-has-the-same-singular-values
 kind: corollary
 title: "An endomorphism and its adjoint have the same singular values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-ferrers-young-diagram-conjugate-partition-and-durfee-square
 kind: definition
 title: "Ferrers and Young diagrams, conjugate partitions, self-conjugacy, and the Durfee square"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

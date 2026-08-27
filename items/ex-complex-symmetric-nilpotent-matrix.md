@@ -2,7 +2,7 @@
 id: ex-complex-symmetric-nilpotent-matrix
 kind: example
 title: "A complex symmetric matrix can be nonzero, square to zero, and fail to be normal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-cycle-index-and-polya-naming-conventions
 kind: remark
 title: "Naming conventions for Burnside, Cauchy-Frobenius, and Redfield-Pólya"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

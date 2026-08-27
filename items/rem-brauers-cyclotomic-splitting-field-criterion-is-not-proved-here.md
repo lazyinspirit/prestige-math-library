@@ -2,7 +2,7 @@
 id: rem-brauers-cyclotomic-splitting-field-criterion-is-not-proved-here
 kind: remark
 title: "Brauer's cyclotomic criterion for splitting fields is recorded here only as an external theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

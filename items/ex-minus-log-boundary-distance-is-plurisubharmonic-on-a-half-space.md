@@ -2,7 +2,7 @@
 id: ex-minus-log-boundary-distance-is-plurisubharmonic-on-a-half-space
 kind: example
 title: "Minus log boundary distance is plurisubharmonic on a half-space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

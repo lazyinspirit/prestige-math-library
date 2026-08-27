@@ -2,7 +2,7 @@
 id: lem-fixed-colourings-factor-by-cycle-type
 kind: lemma
 title: "Fixed colourings factor by cycle type"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

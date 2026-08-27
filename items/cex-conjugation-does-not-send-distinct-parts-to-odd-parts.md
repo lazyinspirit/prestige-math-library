@@ -2,7 +2,7 @@
 id: cex-conjugation-does-not-send-distinct-parts-to-odd-parts
 kind: counterexample
 title: "Conjugating (4,2,1) does not produce an odd-part partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

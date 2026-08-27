@@ -2,7 +2,7 @@
 id: prop-enumerated-countable-amenable-groups-admit-folner-sequences
 kind: proposition
 title: "Enumerated countable amenable groups admit Folner sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

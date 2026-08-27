@@ -2,7 +2,7 @@
 id: prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases
 kind: proposition
 title: "In an orthonormal basis, self-adjoint means conjugate-transpose symmetry and normal means commuting with the conjugate transpose"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

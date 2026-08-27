@@ -2,7 +2,7 @@
 id: ex-rank-one-svd-truncation
 kind: example
 title: "The rank-one truncation of an SVD realises the Eckart-Young minimiser"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

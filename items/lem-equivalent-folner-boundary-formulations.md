@@ -2,7 +2,7 @@
 id: lem-equivalent-folner-boundary-formulations
 kind: lemma
 title: "Equivalent boundary formulations of the Folner condition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

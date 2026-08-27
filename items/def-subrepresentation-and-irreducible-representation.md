@@ -2,7 +2,7 @@
 id: def-subrepresentation-and-irreducible-representation
 kind: definition
 title: "Subrepresentations, direct sums of representations, and irreducibility"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

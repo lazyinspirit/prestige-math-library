@@ -1,7 +1,7 @@
 ---
 page: pure-pairs-forests-and-path-antipath-classes-examples
 title: "Pure Pairs, Forests and Path–Antipath Classes — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-path-antipath-theorem-specialized-to-the-five-vertex-path,
            ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path]

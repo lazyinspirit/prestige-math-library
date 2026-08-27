@@ -2,7 +2,7 @@
 id: cex-pell-units-need-not-be-all-quadratic-field-units
 kind: counterexample
 title: "The elementary Pell order can miss units from the larger quadratic order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

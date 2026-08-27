@@ -2,7 +2,7 @@
 id: ex-the-complex-representations-of-a-cyclic-group-of-order-n-are-the-n-characters
 kind: example
 title: "Over $\\mathbb{C}$, a cyclic group of order $n$ has exactly $n$ irreducible representations up to equivalence, represented by the characters $g\\mapsto \\lambda$ with $\\lambda^n=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

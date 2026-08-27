@@ -2,7 +2,7 @@
 id: thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions
 kind: theorem
 title: "Self-conjugate partitions correspond to distinct odd-part partitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: bijection
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

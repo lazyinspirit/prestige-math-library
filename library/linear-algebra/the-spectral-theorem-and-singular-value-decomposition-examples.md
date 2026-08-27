@@ -1,7 +1,7 @@
 ---
 page: the-spectral-theorem-and-singular-value-decomposition-examples
 title: 'The Spectral Theorem and SVD: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-real-symmetric-three-by-three-orthogonal-diagonalisation,
            ex-hermitian-two-by-two-unitary-diagonalisation,

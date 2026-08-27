@@ -2,7 +2,7 @@
 id: def-norm-on-integer-square-root-order
 kind: definition
 title: "The norm on the explicit order $\\mathbb{Z}[\\sqrt{D}]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

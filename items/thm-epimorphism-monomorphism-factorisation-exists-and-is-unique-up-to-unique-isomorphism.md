@@ -2,7 +2,7 @@
 id: thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism
 kind: theorem
 title: "Every morphism factors as an epimorphism followed by a monomorphism, uniquely up to unique isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

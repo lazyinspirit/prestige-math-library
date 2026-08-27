@@ -2,7 +2,7 @@
 id: thm-weyl-inequalities-for-self-adjoint-sums
 kind: theorem
 title: "Weyl inequalities bound the eigenvalues of a sum of self-adjoint endomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

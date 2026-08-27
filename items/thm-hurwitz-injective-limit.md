@@ -2,7 +2,7 @@
 id: thm-hurwitz-injective-limit
 kind: theorem
 title: "A locally uniform limit of injective holomorphic functions is injective or constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

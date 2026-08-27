@@ -2,7 +2,7 @@
 id: ex-distinct-and-odd-partitions-of-seven
 kind: example
 title: "The partitions of 7 into distinct parts and into odd parts match"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

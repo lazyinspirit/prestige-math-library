@@ -2,7 +2,7 @@
 id: cex-filtered-vector-spaces-fail-the-coimage-image-axiom
 kind: counterexample
 title: "Filtered vector spaces can have zero kernel and zero cokernel without satisfying AB2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars
 kind: corollary
 title: "Over an algebraically closed field, every endomorphism of an irreducible representation is scalar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

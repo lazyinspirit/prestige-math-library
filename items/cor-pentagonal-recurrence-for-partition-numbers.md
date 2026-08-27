@@ -2,7 +2,7 @@
 id: cor-pentagonal-recurrence-for-partition-numbers
 kind: corollary
 title: "Euler's pentagonal recurrence for partition numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: coefficient-comparison
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

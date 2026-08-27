@@ -1,7 +1,7 @@
 ---
 page: pell-equations-and-generalized-pell-orbits
 title: "Pell Equations and Generalized Pell Orbits"
-status: draft
+status: published
 items: [def-pell-equation,
         def-generalized-and-negative-pell-equations,
         def-norm-on-integer-square-root-order,

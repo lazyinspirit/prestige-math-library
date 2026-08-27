@@ -2,7 +2,7 @@
 id: fs-the-argument-principle-counts-zeros-without-multiplicity
 kind: false-statement
 title: "FALSE: the argument principle ignores multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

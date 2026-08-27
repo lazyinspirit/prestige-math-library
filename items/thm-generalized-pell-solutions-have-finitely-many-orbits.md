@@ -2,7 +2,7 @@
 id: thm-generalized-pell-solutions-have-finitely-many-orbits
 kind: theorem
 title: "Generalized Pell solutions fall into finitely many Pell orbits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

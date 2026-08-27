@@ -2,7 +2,7 @@
 id: def-the-freyd-axioms-for-an-abelian-category
 kind: definition
 title: "Freyd's axioms A0, A1, A1*, A2, A2*, A3, and A3* for abelian categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

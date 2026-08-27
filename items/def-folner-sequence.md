@@ -2,7 +2,7 @@
 id: def-folner-sequence
 kind: definition
 title: "Folner sequences for enumerated groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

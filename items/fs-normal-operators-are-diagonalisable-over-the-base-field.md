@@ -2,7 +2,7 @@
 id: fs-normal-operators-are-diagonalisable-over-the-base-field
 kind: false-statement
 title: "FALSE: Every normal operator is diagonalisable over its base field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

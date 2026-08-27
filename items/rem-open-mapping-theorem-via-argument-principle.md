@@ -2,7 +2,7 @@
 id: rem-open-mapping-theorem-via-argument-principle
 kind: remark
 title: "The argument principle recovers the open mapping theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

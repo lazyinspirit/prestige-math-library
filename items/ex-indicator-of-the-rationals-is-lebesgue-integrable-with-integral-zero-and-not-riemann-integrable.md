@@ -2,7 +2,7 @@
 id: ex-indicator-of-the-rationals-is-lebesgue-integrable-with-integral-zero-and-not-riemann-integrable
 kind: example
 title: "The indicator of the rationals in $[0,1]$ is Lebesgue integrable with integral $0$ and not Riemann integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

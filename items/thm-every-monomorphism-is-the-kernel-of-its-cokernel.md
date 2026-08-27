@@ -2,7 +2,7 @@
 id: thm-every-monomorphism-is-the-kernel-of-its-cokernel
 kind: theorem
 title: "Every monomorphism is the kernel of its cokernel, and dually every epimorphism is the cokernel of its kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-symmetric-group-cycle-index-series-is-exponential
 kind: corollary
 title: "The symmetric-group cycle-index series is coefficientwise exponential"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: coefficient comparison
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

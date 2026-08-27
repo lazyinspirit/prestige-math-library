@@ -2,7 +2,7 @@
 id: def-gershgorin-disks
 kind: definition
 title: "The Gershgorin disks of an endomorphism with respect to an ordered basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-coordinate-column-and-matrix-of-a-linear-map]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

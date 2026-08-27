@@ -2,7 +2,7 @@
 id: ex-two-colour-necklaces-of-length-six-by-the-cycle-construction
 kind: example
 title: "Two-colour necklaces of length 6 by the published CYC formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

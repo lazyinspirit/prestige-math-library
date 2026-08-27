@@ -2,7 +2,7 @@
 id: fs-every-riemann-integrable-function-is-borel-measurable
 kind: false-statement
 title: "FALSE: every Riemann integrable function on a closed bounded interval is Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

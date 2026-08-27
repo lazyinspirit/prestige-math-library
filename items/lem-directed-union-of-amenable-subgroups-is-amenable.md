@@ -2,7 +2,7 @@
 id: lem-directed-union-of-amenable-subgroups-is-amenable
 kind: lemma
 title: "Under the ultrafilter lemma, directed unions of amenable subgroups are amenable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

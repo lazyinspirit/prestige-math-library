@@ -2,7 +2,7 @@
 id: ex-the-quotient-witness-reduction-in-a-four-block-configuration
 kind: example
 title: "The quotient-witness reduction in a three-block configuration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

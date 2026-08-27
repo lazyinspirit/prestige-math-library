@@ -2,7 +2,7 @@
 id: thm-group-ring-is-commutative-iff-the-group-is-abelian
 kind: theorem
 title: "For a field $k$, the group algebra $k[G]$ is commutative if and only if $G$ is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

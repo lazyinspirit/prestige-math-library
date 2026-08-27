@@ -2,7 +2,7 @@
 id: ex-the-real-two-dimensional-irreducible-of-c-three-has-endomorphism-ring-c
 kind: example
 title: "The real $2$-dimensional irreducible representation of $C_3$ has endomorphism ring $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

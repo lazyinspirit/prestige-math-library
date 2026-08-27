@@ -2,7 +2,7 @@
 id: ex-an-exact-functor-between-module-categories
 kind: example
 title: "Localization of modules gives an exact functor between module categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

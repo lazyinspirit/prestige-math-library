@@ -2,7 +2,7 @@
 id: thm-negative-pell-period-parity-criterion
 kind: theorem
 title: "Negative Pell is soluble exactly for odd period length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

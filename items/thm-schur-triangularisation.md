@@ -2,7 +2,7 @@
 id: thm-schur-triangularisation
 kind: theorem
 title: "If the characteristic polynomial of an endomorphism splits, some orthonormal basis makes its matrix upper triangular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

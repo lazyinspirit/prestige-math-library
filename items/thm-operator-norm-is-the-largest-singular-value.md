@@ -2,7 +2,7 @@
 id: thm-operator-norm-is-the-largest-singular-value
 kind: theorem
 title: "The operator norm is 0 on the zero domain and otherwise equals the largest singular value, attained at a right-singular vector"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

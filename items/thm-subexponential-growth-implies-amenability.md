@@ -2,7 +2,7 @@
 id: thm-subexponential-growth-implies-amenability
 kind: theorem
 title: "Under the ultrafilter lemma, subexponential growth implies amenability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

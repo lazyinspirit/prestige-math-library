@@ -2,7 +2,7 @@
 id: ex-real-symmetric-three-by-three-orthogonal-diagonalisation
 kind: example
 title: "An explicit real symmetric 3x3 matrix is orthogonally diagonalised"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-marshall-hall-free-factor-theorem
 kind: theorem
 title: "Every finitely generated subgroup of a finite-rank free group is a free factor of a finite-index subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

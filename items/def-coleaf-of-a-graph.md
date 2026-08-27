@@ -2,7 +2,7 @@
 id: def-coleaf-of-a-graph
 kind: definition
 title: "Co-leaves of a finite graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks
 kind: lemma
 title: "A vertex mixed on a quotient block but pure on each member block yields two mixed member blocks with opposite adjacency"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

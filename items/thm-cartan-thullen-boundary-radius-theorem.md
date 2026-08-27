@@ -2,7 +2,7 @@
 id: thm-cartan-thullen-boundary-radius-theorem
 kind: theorem
 title: "Cartan-Thullen boundary-radius theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

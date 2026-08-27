@@ -2,7 +2,7 @@
 id: thm-square-root-continued-fraction-period-structure
 kind: theorem
 title: "The continued fraction of $\\sqrt{D}$ has symmetric period ending in $2a_0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

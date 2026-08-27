@@ -2,7 +2,7 @@
 id: ex-a-coleaf-is-a-leaf-in-the-complement-of-the-five-vertex-path
 kind: example
 title: "A co-leaf of $\\overline{P_5}$ is exactly a leaf of $P_5$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

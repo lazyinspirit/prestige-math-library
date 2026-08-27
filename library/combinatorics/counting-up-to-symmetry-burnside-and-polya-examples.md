@@ -1,7 +1,7 @@
 ---
 page: counting-up-to-symmetry-burnside-and-polya-examples
 title: "Counting up to Symmetry: Burnside and Pólya — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cycle-index-of-c-four,
            ex-cycle-index-of-d-four,

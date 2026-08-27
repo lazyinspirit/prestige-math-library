@@ -2,7 +2,7 @@
 id: thm-durfee-square-identity
 kind: theorem
 title: "Durfee-square decomposition of the partition series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: decomposition
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

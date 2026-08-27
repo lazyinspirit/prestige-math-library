@@ -2,7 +2,7 @@
 id: thm-structure-theorem-for-artinian-rings
 kind: theorem
 title: "An Artinian ring is canonically the finite product of its localizations at its maximal ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

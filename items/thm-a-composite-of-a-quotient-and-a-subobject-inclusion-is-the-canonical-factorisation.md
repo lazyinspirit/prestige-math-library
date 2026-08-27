@@ -2,7 +2,7 @@
 id: thm-a-composite-of-a-quotient-and-a-subobject-inclusion-is-the-canonical-factorisation
 kind: theorem
 title: "The quotient by the kernel followed by the image inclusion is the canonical epi-mono factorization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

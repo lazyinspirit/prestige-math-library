@@ -2,7 +2,7 @@
 id: rem-local-degree-argument-principle-agreement
 kind: remark
 title: "Argument-principle multiplicity agrees with the earlier local degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

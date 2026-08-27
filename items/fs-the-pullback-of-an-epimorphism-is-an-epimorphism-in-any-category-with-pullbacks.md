@@ -2,7 +2,7 @@
 id: fs-the-pullback-of-an-epimorphism-is-an-epimorphism-in-any-category-with-pullbacks
 kind: false-statement
 title: "FALSE: pullbacks preserve epimorphisms in every category with pullbacks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

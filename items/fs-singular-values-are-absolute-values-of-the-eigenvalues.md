@@ -2,7 +2,7 @@
 id: fs-singular-values-are-absolute-values-of-the-eigenvalues
 kind: false-statement
 title: "FALSE: The singular values of an operator are the absolute values of its eigenvalues"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

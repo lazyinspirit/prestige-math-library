@@ -2,7 +2,7 @@
 id: ex-the-standard-two-dimensional-representation-of-s-three-is-irreducible
 kind: example
 title: "The standard $2$-dimensional representation of $S_3$ inside the permutation representation on $\\mathbb C^3$ is irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

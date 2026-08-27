@@ -1,7 +1,7 @@
 ---
 page: abelian-categories-examples
 title: "Abelian Categories — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-kernels-cokernels-images-and-coimages-computed-in-abelian-groups,
            ex-the-canonical-factorisation-of-a-module-homomorphism,

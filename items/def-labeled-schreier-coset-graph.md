@@ -2,7 +2,7 @@
 id: def-labeled-schreier-coset-graph
 kind: definition
 title: "The labeled Schreier coset graph of a subgroup of a free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

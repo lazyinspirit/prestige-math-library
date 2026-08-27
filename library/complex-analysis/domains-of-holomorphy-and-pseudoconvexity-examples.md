@@ -1,7 +1,7 @@
 ---
 page: domains-of-holomorphy-and-pseudoconvexity-examples
 title: "Domains of Holomorphy, Plurisubharmonicity and Pseudoconvexity — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-bidisc-is-holomorphically-convex,
            ex-the-ball-is-levi-pseudoconvex,

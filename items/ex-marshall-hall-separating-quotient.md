@@ -2,7 +2,7 @@
 id: ex-marshall-hall-separating-quotient
 kind: example
 title: "Marshall Hall's theorem produces a separating finite-index overgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

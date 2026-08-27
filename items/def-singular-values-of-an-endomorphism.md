@@ -2,7 +2,7 @@
 id: def-singular-values-of-an-endomorphism
 kind: definition
 title: "The singular values of a linear map as the eigenvalues of the positive square root of T^*T"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-non-negative-square-root-exists-and-is-unique, prop-adjoint-algebra]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-glaisher-bijection-between-odd-and-distinct-partitions
 kind: theorem
 title: "Glaisher's bijection between odd-part and distinct-part partitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: bijection
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

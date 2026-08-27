@@ -2,7 +2,7 @@
 id: ex-noetherian-not-artinian
 kind: example
 title: "$\\mathbb Z$ and $k[x]$ are Noetherian but not Artinian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

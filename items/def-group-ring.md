@@ -2,7 +2,7 @@
 id: def-group-ring
 kind: definition
 title: "The group ring $R[G]$ of finitely supported formal $R$-linear combinations of group elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

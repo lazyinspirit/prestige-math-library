@@ -2,7 +2,7 @@
 id: thm-euler-pentagonal-number-theorem-by-franklin
 kind: theorem
 title: "Euler's pentagonal number theorem by Franklin's involution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,8 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: sign-reversing-involution
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

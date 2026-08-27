@@ -2,7 +2,7 @@
 id: def-splitting-field-for-a-finite-group
 kind: definition
 title: "A splitting field for a finite group: every irreducible representation has scalar endomorphism ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

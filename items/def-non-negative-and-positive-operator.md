@@ -2,7 +2,7 @@
 id: def-non-negative-and-positive-operator
 kind: definition
 title: "Non-negative and positive operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-self-adjoint-and-normal-endomorphism]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

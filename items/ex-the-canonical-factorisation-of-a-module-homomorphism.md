@@ -2,7 +2,7 @@
 id: ex-the-canonical-factorisation-of-a-module-homomorphism
 kind: example
 title: "A module homomorphism factors as quotient by its kernel followed by inclusion of its image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-the-regular-representation-of-c-two-splits-as-trivial-plus-sign
 kind: example
 title: "The regular representation of $C_2$ over a field of characteristic not $2$ is the direct sum of the trivial and sign representations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

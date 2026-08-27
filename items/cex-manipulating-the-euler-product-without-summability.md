@@ -2,7 +2,7 @@
 id: cex-manipulating-the-euler-product-without-summability
 kind: counterexample
 title: "Ignoring summability in the Euler product leads to illegal coefficient manipulations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references: []

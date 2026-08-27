@@ -1,7 +1,7 @@
 ---
 page: abelian-categories
 title: "Abelian Categories"
-status: draft
+status: published
 items: [def-normal-monomorphism-and-conormal-epimorphism,
         prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero,
         prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism,

@@ -2,7 +2,7 @@
 id: ex-a-mixed-chain-collapses-to-one-quotient-block
 kind: example
 title: "A mixed chain of blocks collapses to one quotient block"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

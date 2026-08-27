@@ -2,7 +2,7 @@
 id: ex-quarter-turn-real-normal-form
 kind: example
 title: "The real quarter-turn is normal and appears as a single 2x2 block in the real normal classification"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

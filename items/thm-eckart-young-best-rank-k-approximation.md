@@ -2,7 +2,7 @@
 id: thm-eckart-young-best-rank-k-approximation
 kind: theorem
 title: "The best rank-at-most-k approximation in operator norm is the rank-k truncation of a singular value decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

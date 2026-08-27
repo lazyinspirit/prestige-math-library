@@ -2,7 +2,7 @@
 id: cex-amenability-does-not-imply-subexponential-growth
 kind: counterexample
 title: "Under the ultrafilter lemma, amenability does not imply subexponential growth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

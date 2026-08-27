@@ -2,7 +2,7 @@
 id: ex-partitions-into-three-parts-of-five-from-the-recurrence
 kind: example
 title: "The recurrence gives p_3(5)=2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

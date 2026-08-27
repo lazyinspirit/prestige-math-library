@@ -1,8 +1,8 @@
 ---
 id: fs-partitions-into-k-parts-are-counted-by-binomial-coefficients
 kind: false-statement
-title: "FALSE: p_k(n) is counted by C(n-1,k-1)"
-status: draft
+title: "FALSE: $p_k(n)$ is counted by $\\binom{n-1}{k-1}$"
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

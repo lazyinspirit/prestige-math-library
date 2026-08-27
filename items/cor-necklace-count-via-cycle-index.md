@@ -2,7 +2,7 @@
 id: cor-necklace-count-via-cycle-index
 kind: corollary
 title: "Necklace count from the cyclic-group cycle index"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

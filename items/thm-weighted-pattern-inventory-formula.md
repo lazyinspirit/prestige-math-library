@@ -2,7 +2,7 @@
 id: thm-weighted-pattern-inventory-formula
 kind: theorem
 title: "The weighted pattern inventory is the cycle index evaluated at the power sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,8 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

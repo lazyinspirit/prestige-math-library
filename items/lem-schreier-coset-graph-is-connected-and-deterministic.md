@@ -2,7 +2,7 @@
 id: lem-schreier-coset-graph-is-connected-and-deterministic
 kind: lemma
 title: "The Schreier coset graph is connected and deterministic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

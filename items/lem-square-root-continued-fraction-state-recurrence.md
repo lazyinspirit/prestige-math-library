@@ -2,7 +2,7 @@
 id: lem-square-root-continued-fraction-state-recurrence
 kind: lemma
 title: "The complete quotients of $\\sqrt{D}$ satisfy the $P_n,Q_n$ recurrence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

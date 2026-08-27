@@ -2,7 +2,7 @@
 id: thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group
 kind: theorem
 title: "Equivalence classes of degree-one representations are exactly homomorphisms $G\\to k^{\\times}$; equivalently they factor through $G/G'$, and they form an abelian group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

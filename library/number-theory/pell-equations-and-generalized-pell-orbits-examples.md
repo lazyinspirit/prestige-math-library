@@ -1,7 +1,7 @@
 ---
 page: pell-equations-and-generalized-pell-orbits-examples
 title: "Pell Equations and Generalized Pell Orbits — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-pell-equation-for-two,
            ex-pell-equation-for-three,

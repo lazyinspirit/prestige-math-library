@@ -2,7 +2,7 @@
 id: rem-additivity-is-a-property-of-an-abelian-category-and-not-part-of-its-data
 kind: remark
 title: "Additivity can be derived rather than postulated, depending on the axiomatisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism
 kind: proposition
 title: "The cokernel of the zero map out of the zero object is the target, and dually for kernels"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

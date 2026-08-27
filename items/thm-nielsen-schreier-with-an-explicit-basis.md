@@ -2,7 +2,7 @@
 id: thm-nielsen-schreier-with-an-explicit-basis
 kind: theorem
 title: "Under the stated choice boundary, every subgroup of a free group is free with its nontrivial Schreier generators as a basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

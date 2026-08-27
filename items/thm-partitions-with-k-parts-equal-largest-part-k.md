@@ -2,7 +2,7 @@
 id: thm-partitions-with-k-parts-equal-largest-part-k
 kind: theorem
 title: "Partitions with k parts are equinumerous with partitions whose largest part is k"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: bijection
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

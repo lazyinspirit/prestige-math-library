@@ -2,7 +2,7 @@
 id: thm-group-ring-is-a-unital-algebra-with-basis-g
 kind: theorem
 title: "The group ring $R[G]$ is a unital $R$-algebra with basis $G$, and each $g\\in G$ is a unit of $R[G]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

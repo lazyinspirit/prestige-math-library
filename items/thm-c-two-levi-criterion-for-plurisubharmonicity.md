@@ -2,7 +2,7 @@
 id: thm-c-two-levi-criterion-for-plurisubharmonicity
 kind: theorem
 title: "The C^2 Levi criterion for plurisubharmonicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

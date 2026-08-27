@@ -2,7 +2,7 @@
 id: ex-kernel-of-the-exponent-sum-map
 kind: example
 title: "The kernel of an exponent-sum map in a free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

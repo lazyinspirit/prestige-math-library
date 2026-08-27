@@ -2,7 +2,7 @@
 id: thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits
 kind: theorem
 title: "An abelian category has all finite limits and all finite colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

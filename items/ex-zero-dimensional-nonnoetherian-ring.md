@@ -2,7 +2,7 @@
 id: ex-zero-dimensional-nonnoetherian-ring
 kind: example
 title: "The ring $(\\mathbb Z/2)^{\\mathbb N}$ is zero-dimensional but not Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

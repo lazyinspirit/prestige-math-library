@@ -2,7 +2,7 @@
 id: thm-artinian-ring-primes-are-maximal
 kind: theorem
 title: "Every prime ideal of an Artinian ring is maximal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

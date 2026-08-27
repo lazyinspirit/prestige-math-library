@@ -2,7 +2,7 @@
 id: thm-a-morphism-factors-uniquely-through-its-coimage
 kind: theorem
 title: "A morphism factors uniquely through its coimage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

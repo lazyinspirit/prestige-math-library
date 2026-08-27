@@ -2,7 +2,7 @@
 id: ex-the-abelian-category-of-representations-of-a-two-object-quiver
 kind: example
 title: "Representations of the quiver 1 -> 2 in abelian groups form an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

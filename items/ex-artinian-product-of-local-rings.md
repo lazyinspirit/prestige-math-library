@@ -2,7 +2,7 @@
 id: ex-artinian-product-of-local-rings
 kind: example
 title: "$\\mathbb Z/12\\mathbb Z$ splits as the product of its two local Artinian factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

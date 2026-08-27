@@ -2,7 +2,7 @@
 id: thm-lagrange-existence-for-pell-equation
 kind: theorem
 title: "Every Pell equation has a positive nontrivial integral solution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

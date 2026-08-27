@@ -2,7 +2,7 @@
 id: thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs
 kind: theorem
 title: "A pullback is the kernel of the difference of the two legs, and dually for pushouts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-finite-dimensional-representation-of-a-group-over-a-field
 kind: definition
 title: "A finite-dimensional representation $\\rho:G\\to \\operatorname{GL}(V)$ over a field, and its degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-a-locally-uniform-limit-of-injective-holomorphic-functions-is-injective
 kind: false-statement
 title: "FALSE: a locally uniform limit of injective holomorphic functions is always injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

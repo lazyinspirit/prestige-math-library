@@ -2,7 +2,7 @@
 id: thm-path-and-antipath-free-graphs-have-the-strong-erdos-hajnal-property
 kind: theorem
 title: "For every $k$, the class forbidding $P_k$ and $\\overline{P_k}$ has the strong Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

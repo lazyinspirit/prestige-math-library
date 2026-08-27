@@ -2,7 +2,7 @@
 id: thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected
 kind: theorem
 title: "Every nontrivial $P_4$-free graph is disconnected or has disconnected complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-spectral-resolution-and-polynomial-spectral-projections
 kind: theorem
 title: "A normal endomorphism is a sum of its eigenvalues times pairwise orthogonal projections, and each spectral projection is a polynomial in the endomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

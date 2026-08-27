@@ -2,7 +2,7 @@
 id: cor-generalized-pell-solubility-is-decidable
 kind: corollary
 title: "Generalized Pell solubility is decidable by bounded search"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

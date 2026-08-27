@@ -2,7 +2,7 @@
 id: cor-endomorphisms-of-an-irreducible-over-a-splitting-field-are-scalars
 kind: corollary
 title: "Over a splitting field, every $G$-endomorphism of an irreducible representation is scalar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

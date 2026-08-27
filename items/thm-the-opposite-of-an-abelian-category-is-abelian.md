@@ -2,7 +2,7 @@
 id: thm-the-opposite-of-an-abelian-category-is-abelian
 kind: theorem
 title: "The opposite of an abelian category is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

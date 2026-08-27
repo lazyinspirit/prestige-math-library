@@ -2,7 +2,7 @@
 id: cor-local-zero-count-via-rouche
 kind: corollary
 title: "Small perturbations preserve the total local zero multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

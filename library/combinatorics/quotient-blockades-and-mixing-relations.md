@@ -1,7 +1,7 @@
 ---
 page: quotient-blockades-and-mixing-relations
 title: "Quotient Blockades and Mixing Relations"
-status: draft
+status: published
 items: [def-mixed-block-reachability-relation-on-a-blockade,
         lem-mixed-block-reachability-is-an-equivalence-relation,
         def-quotient-blockade-by-mixed-block-reachability,

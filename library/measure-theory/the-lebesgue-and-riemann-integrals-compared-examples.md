@@ -1,7 +1,7 @@
 ---
 page: the-lebesgue-and-riemann-integrals-compared-examples
 title: "The Lebesgue and Riemann Integrals Compared — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-indicator-of-the-rationals-is-lebesgue-integrable-with-integral-zero-and-not-riemann-integrable, fs-every-riemann-integrable-function-is-borel-measurable, ex-open-dense-set-indicator-is-a-monotone-l-one-limit-of-riemann-integrable-functions-but-is-not-riemann-integrable, cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable, cex-semicontinuous-function-almost-everywhere-equal-to-no-riemann-integrable-function, cex-a-null-set-that-is-no-functions-discontinuity-set]
 ---

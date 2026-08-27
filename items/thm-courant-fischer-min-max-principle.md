@@ -2,7 +2,7 @@
 id: thm-courant-fischer-min-max-principle
 kind: theorem
 title: "Courant-Fischer min-max principle for self-adjoint endomorphisms on finite-dimensional real inner product spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

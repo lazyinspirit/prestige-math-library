@@ -2,7 +2,7 @@
 id: cor-one-generalized-pell-solution-gives-infinitely-many
 kind: corollary
 title: "One generalized Pell solution generates infinitely many more"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

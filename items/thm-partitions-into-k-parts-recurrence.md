@@ -2,7 +2,7 @@
 id: thm-partitions-into-k-parts-recurrence
 kind: theorem
 title: "Exact-k partition recurrence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: decomposition
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

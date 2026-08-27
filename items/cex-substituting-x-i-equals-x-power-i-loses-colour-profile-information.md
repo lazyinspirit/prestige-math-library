@@ -2,7 +2,7 @@
 id: cex-substituting-x-i-equals-x-power-i-loses-colour-profile-information
 kind: counterexample
 title: "The substitution x_i=x^i can erase colour-profile information"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

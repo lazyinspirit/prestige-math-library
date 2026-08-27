@@ -2,7 +2,7 @@
 id: lem-partition-conjugation-is-an-involution
 kind: lemma
 title: "Conjugating a partition twice returns the original partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

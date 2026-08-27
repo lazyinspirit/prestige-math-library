@@ -2,7 +2,7 @@
 id: def-abelian-subcategory-and-exact-embedding
 kind: definition
 title: "Abelian subcategory and exact embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

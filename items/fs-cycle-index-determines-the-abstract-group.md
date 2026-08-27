@@ -2,7 +2,7 @@
 id: fs-cycle-index-determines-the-abstract-group
 kind: false-statement
 title: "FALSE: the cycle index of a permutation action determines the abstract group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

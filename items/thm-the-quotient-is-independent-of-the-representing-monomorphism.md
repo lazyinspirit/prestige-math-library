@@ -2,7 +2,7 @@
 id: thm-the-quotient-is-independent-of-the-representing-monomorphism
 kind: theorem
 title: "The quotient by a subobject is independent of the chosen representing monomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

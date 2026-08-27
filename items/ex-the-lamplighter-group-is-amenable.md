@@ -2,7 +2,7 @@
 id: ex-the-lamplighter-group-is-amenable
 kind: example
 title: "Under the ultrafilter lemma, the standard lamplighter group is amenable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

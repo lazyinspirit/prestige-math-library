@@ -2,7 +2,7 @@
 id: cex-a-null-set-that-is-no-functions-discontinuity-set
 kind: counterexample
 title: "A null set can fail to be the discontinuity set of any function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

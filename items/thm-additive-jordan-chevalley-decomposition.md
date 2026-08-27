@@ -2,7 +2,7 @@
 id: thm-additive-jordan-chevalley-decomposition
 kind: theorem
 title: "Over a perfect field, every endomorphism has a unique commuting semisimple-plus-nilpotent decomposition, polynomial in the endomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

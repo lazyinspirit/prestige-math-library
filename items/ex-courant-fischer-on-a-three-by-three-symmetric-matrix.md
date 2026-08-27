@@ -2,7 +2,7 @@
 id: ex-courant-fischer-on-a-three-by-three-symmetric-matrix
 kind: example
 title: "Courant-Fischer is checked on an explicit 3x3 symmetric matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

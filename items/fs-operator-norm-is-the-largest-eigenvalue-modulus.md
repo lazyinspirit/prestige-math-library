@@ -2,7 +2,7 @@
 id: fs-operator-norm-is-the-largest-eigenvalue-modulus
 kind: false-statement
 title: "FALSE: The operator norm is always the largest modulus of an eigenvalue"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

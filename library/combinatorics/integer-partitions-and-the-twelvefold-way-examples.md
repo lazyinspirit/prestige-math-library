@@ -1,7 +1,7 @@
 ---
 page: integer-partitions-and-the-twelvefold-way-examples
 title: "Integer Partitions and the Twelvefold Way — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-partitions-of-six-listed,
            ex-conjugation-of-the-partitions-of-six,

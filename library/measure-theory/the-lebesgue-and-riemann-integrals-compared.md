@@ -1,7 +1,7 @@
 ---
 page: the-lebesgue-and-riemann-integrals-compared
 title: "The Lebesgue and Riemann Integrals Compared"
-status: draft
+status: published
 items: [lem-riemann-integrable-function-has-borel-darboux-envelopes, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-riemann-integrable-function-is-almost-everywhere-equal-to-a-borel-function, thm-arzela-bounded-convergence-for-riemann-integrals, thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line, thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral]
 examples: []
 ---

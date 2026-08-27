@@ -2,7 +2,7 @@
 id: ex-finite-and-locally-finite-amenable-groups
 kind: example
 title: "Under the ultrafilter lemma, finite groups and locally finite groups are amenable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

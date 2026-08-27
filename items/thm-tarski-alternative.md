@@ -2,7 +2,7 @@
 id: thm-tarski-alternative
 kind: theorem
 title: "Under the ultrafilter lemma and a matching-extension principle, a group is amenable if and only if it is not paradoxical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

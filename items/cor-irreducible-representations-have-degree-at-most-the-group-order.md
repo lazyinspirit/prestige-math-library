@@ -2,7 +2,7 @@
 id: cor-irreducible-representations-have-degree-at-most-the-group-order
 kind: corollary
 title: "Every irreducible representation of a finite group has degree at most $|G|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

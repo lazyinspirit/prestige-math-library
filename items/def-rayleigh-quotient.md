@@ -2,7 +2,7 @@
 id: def-rayleigh-quotient
 kind: definition
 title: "The Rayleigh quotient of a nonzero vector for a self-adjoint endomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-self-adjoint-and-normal-endomorphism, def-inner-product-space]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

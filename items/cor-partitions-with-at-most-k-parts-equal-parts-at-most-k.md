@@ -2,7 +2,7 @@
 id: cor-partitions-with-at-most-k-parts-equal-parts-at-most-k
 kind: corollary
 title: "Partitions with at most k parts are equinumerous with partitions whose parts are all at most k"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,8 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: bijection
+verification:
+  audited: 2026-08-28
 sources:
   scraped: []
   references:

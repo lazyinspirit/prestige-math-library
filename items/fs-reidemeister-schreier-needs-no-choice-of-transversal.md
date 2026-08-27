@@ -2,7 +2,7 @@
 id: fs-reidemeister-schreier-needs-no-choice-of-transversal
 kind: false-statement
 title: "FALSE: the Reidemeister-Schreier presentation needs no choice of transversal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

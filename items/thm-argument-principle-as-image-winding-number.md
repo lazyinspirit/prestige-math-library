@@ -2,7 +2,7 @@
 id: thm-argument-principle-as-image-winding-number
 kind: theorem
 title: "The argument-principle integral is the winding number of the image cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

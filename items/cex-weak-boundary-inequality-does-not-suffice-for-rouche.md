@@ -2,7 +2,7 @@
 id: cex-weak-boundary-inequality-does-not-suffice-for-rouche
 kind: counterexample
 title: "The weak inequality |f-g| <= |g| does not suffice in Rouche"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

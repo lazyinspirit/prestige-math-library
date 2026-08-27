@@ -2,7 +2,7 @@
 id: def-trivial-regular-and-permutation-representations
 kind: definition
 title: "The trivial representation, the regular representation, and permutation representations from finite $G$-sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

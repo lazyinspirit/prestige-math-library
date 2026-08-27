@@ -2,7 +2,7 @@
 id: fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions
 kind: false-statement
 title: "FALSE: conjugation itself is the distinct-parts to odd-parts bijection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

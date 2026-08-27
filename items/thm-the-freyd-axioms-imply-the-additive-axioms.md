@@ -2,7 +2,7 @@
 id: thm-the-freyd-axioms-imply-the-additive-axioms
 kind: theorem
 title: "Freyd's axioms force the additive structure and recover the AB2 definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

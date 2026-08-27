@@ -2,7 +2,7 @@
 id: def-semisimple-and-nilpotent-endomorphisms
 kind: definition
 title: "Semisimple endomorphisms as endomorphisms diagonalisable over an algebraic closure, and nilpotent endomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-algebraic-closure, def-diagonalisable-endomorphism, def-nilpotent-end
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

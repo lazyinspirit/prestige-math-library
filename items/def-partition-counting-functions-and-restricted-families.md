@@ -2,7 +2,7 @@
 id: def-partition-counting-functions-and-restricted-families
 kind: definition
 title: "The functions p(n), p_k(n), and the standard restricted partition families"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

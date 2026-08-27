@@ -2,7 +2,7 @@
 id: ex-cube-face-colourings-under-rotations
 kind: example
 title: "Colourings of the faces of a cube up to rotation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

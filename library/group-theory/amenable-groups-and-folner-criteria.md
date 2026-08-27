@@ -1,7 +1,7 @@
 ---
 page: amenable-groups-and-folner-criteria
 title: "Amenable Groups and Folner Criteria"
-status: draft
+status: published
 items: [def-mean-on-bounded-functions-on-a-group,
         def-left-translation-action-on-bounded-functions,
         def-left-invariant-mean-and-amenable-group,

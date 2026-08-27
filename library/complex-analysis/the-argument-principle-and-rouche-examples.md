@@ -1,7 +1,7 @@
 ---
 page: the-argument-principle-and-rouche-examples
 title: "The Argument Principle and Rouché's Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-z-five-plus-three-z-plus-one-has-one-zero-in-the-unit-disc,
            ex-z-five-plus-three-z-plus-one-has-four-zeros-in-the-annulus-one-to-two,

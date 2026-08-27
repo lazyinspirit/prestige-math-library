@@ -1,7 +1,7 @@
 ---
 page: artinian-rings-and-length
 title: "Artinian Rings and Length"
-status: draft
+status: published
 items: [lem-artinian-domain-is-a-field, thm-artinian-ring-primes-are-maximal, thm-artinian-ring-has-finitely-many-maximal-ideals, thm-nilradical-of-artinian-ring-is-nilpotent, thm-chinese-remainder-theorem-for-comaximal-ideals, thm-artinian-ring-is-noetherian, thm-artinian-ring-has-finite-length, thm-artinian-local-ring-has-nilpotent-maximal-ideal, thm-structure-theorem-for-artinian-rings, cor-prime-set-of-an-artinian-ring, thm-artinian-ring-characterisation-by-primes, cor-artinian-quotients-and-localisations]
 examples: []
 ---

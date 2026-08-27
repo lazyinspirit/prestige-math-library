@@ -2,7 +2,7 @@
 id: rem-the-freyd-mitchell-embedding-theorem
 kind: remark
 title: "Freyd-Mitchell gives a fully faithful exact functor from every small abelian category to a module category"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-durfee-square-decomposition-of-five-three-three-two-one
 kind: example
 title: "The partition (5,3,3,2,1) decomposes by its Durfee square"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

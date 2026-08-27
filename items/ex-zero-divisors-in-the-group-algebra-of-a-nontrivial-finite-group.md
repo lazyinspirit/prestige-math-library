@@ -2,7 +2,7 @@
 id: ex-zero-divisors-in-the-group-algebra-of-a-nontrivial-finite-group
 kind: example
 title: "Any nontrivial finite group algebra has zero divisors coming from a nonidentity cyclic subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

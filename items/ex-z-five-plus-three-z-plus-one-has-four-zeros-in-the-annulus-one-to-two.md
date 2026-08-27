@@ -2,7 +2,7 @@
 id: ex-z-five-plus-three-z-plus-one-has-four-zeros-in-the-annulus-one-to-two
 kind: example
 title: "The same polynomial has four zeros in the annulus 1 < |z| < 2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
