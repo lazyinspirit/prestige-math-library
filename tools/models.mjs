@@ -38,6 +38,13 @@ export const JUDGE_LINEUPS = Object.freeze({
 export const KNOWN_JUDGES = Object.freeze([...new Set(Object.values(JUDGE_LINEUPS).flat())]);
 export const DEFAULT_LINEUP = 'terra';
 
+// Codex's current Terra catalog advertises an 872k maximum context window.
+// Judge conversations keep one session for the whole A/B pair, so compact the
+// same session at exactly half that window rather than waiting for the model's
+// terminal boundary.
+export const JUDGE_CONTEXT_WINDOW = 872_000;
+export const JUDGE_AUTO_COMPACT_TOKEN_LIMIT = JUDGE_CONTEXT_WINDOW / 2;
+
 export function resolveLineup(name = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP) {
   const models = JUDGE_LINEUPS[name];
   if (!models) {

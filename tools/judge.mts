@@ -1,5 +1,5 @@
 // Topic-neutral refuter-judge for library items. Normal mode runs the configured
-// GPT lineup at xhigh with an explicit one-million-token context window.
+// GPT lineup at xhigh with Terra's catalog-advertised maximum context window.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -101,7 +101,10 @@ import { spawn } from "node:child_process";
 import { homedir } from "node:os";
 import { itemHashJudge } from "./item-hash.mjs";
 import { extractEmbeddedVerdict } from "./judge-parse.mjs";
-import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
+import {
+  MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP,
+  JUDGE_CONTEXT_WINDOW, JUDGE_AUTO_COMPACT_TOKEN_LIMIT,
+} from "./models.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch", "session-home", "resume-session", "session-pair"]);
@@ -129,6 +132,7 @@ if (!file && !bools.has("preflight")) {
 // EXIT CODES. 0 = a verdict was produced, 2 = usage/configuration error,
 // 3 = the configured account cannot serve a preflight request.
 const PAYMENT_EXIT = 3;
+const CONTEXT_RETRY_EXIT = 6;
 const TERRA_MODEL = MODELS.terra.id;
 const SUPPORTED_MODELS: string[] = Object.values(MODELS).map((m: any) => m.id);
 // JUDGE_LINEUP selects the configured GPT judge set. A normal invocation uses
@@ -270,11 +274,15 @@ const runCodex = (model: string, prompt: string, timeoutMs: number, activeSessio
   const initialArgs = [
     "--ask-for-approval", "never", "exec", ...(persistentHome ? [] : ["--ephemeral"]), "--model", model,
     "-c", 'model_reasoning_effort="xhigh"',
-    // The temporary CODEX_HOME below contains only auth.json, so the user's
-    // config.toml — including model_context_window — is deliberately NOT
-    // inherited. Pass the owner's 1,000,000-token window explicitly, or this
-    // lane silently runs at the Codex built-in default (owner, 2026-08-03).
-    "-c", "model_context_window=1000000",
+    // The isolated judge home does not inherit the user's config.toml. Declare
+    // Terra's actual catalog maximum and compact this same pair conversation at
+    // 50%, before another full-item turn can push it into the terminal margin.
+    "-c", `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
+    // Compact as soon as the live conversation reaches half of that window.
+    // The threshold is passed explicitly because the isolated judge home does
+    // not inherit the user's config.toml.
+    "-c", `model_auto_compact_token_limit=${JUDGE_AUTO_COMPACT_TOKEN_LIMIT}`,
+    "-c", 'model_auto_compact_token_limit_scope="total"',
     "--sandbox", "read-only", "--skip-git-repo-check", "--cd", temporaryWork, "-",
   ];
   const resumeArgs = [
@@ -282,7 +290,9 @@ const runCodex = (model: string, prompt: string, timeoutMs: number, activeSessio
     "--model", model,
     "-c", 'sandbox_mode="read-only"',
     "-c", 'model_reasoning_effort="xhigh"',
-    "-c", "model_context_window=1000000",
+    "-c", `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
+    "-c", `model_auto_compact_token_limit=${JUDGE_AUTO_COMPACT_TOKEN_LIMIT}`,
+    "-c", 'model_auto_compact_token_limit_scope="total"',
     "--skip-git-repo-check", "-",
   ];
   const child = spawn(process.env.CODEX_BIN ?? "codex", activeSession ? resumeArgs : initialArgs,
@@ -860,8 +870,11 @@ const emitAttempt = (judgeModel: string, attempt: number, event: Record<string, 
   } catch { /* telemetry must never suppress a verdict */ }
 };
 const backoffMs = (attempt: number): number => (attempt + 1) * 4000 + Math.floor(Math.random() * 1000);
+const exhaustedPersistentContext = (run: CodexRun): boolean => persistentJudge &&
+  /ran out of room in the model'?s context window|context window[^\n]*(?:exhaust|exceed|full)|maximum context length/i
+    .test(`${run.stderr}\n${run.stdout}`);
 
-type RetryKind = "transient" | "length";
+type RetryKind = "transient" | "length" | "compact";
 type CallResult = {
   content: string;
   usage?: JudgeUsage;
@@ -905,6 +918,18 @@ async function callCodex(model: string): Promise<CallResult> {
       // removes — one layer down, in the cost ledger.
       emitAttempt(model, attempt, event);
       return { content, raw: run.stderr, session_id: activeSession };
+    }
+    // Do not append the same full item to an already-full session again. The
+    // sweep rolls back only these failed, verdict-free turns, compacts this
+    // exact session id, and then retries the same one-item judge turn.
+    if (exhaustedPersistentContext(run)) {
+      emitAttempt(model, attempt, { ...event, outcome: "context_exhausted" });
+      return {
+        content: "",
+        raw: run.stderr || run.stdout || "persistent judge context exhausted",
+        retry: "compact",
+        session_id: activeSession,
+      };
     }
     emitAttempt(model, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
@@ -1007,5 +1032,7 @@ if (verdicts.some((verdict) => verdict.payment)) {
   process.exit(PAYMENT_EXIT);
 }
 if (verdicts.some((verdict) => verdict.retry)) {
-  process.exit(verdicts.some((verdict) => verdict.retry === "length") ? 5 : 4);
+  process.exit(verdicts.some((verdict) => verdict.retry === "compact")
+    ? CONTEXT_RETRY_EXIT
+    : verdicts.some((verdict) => verdict.retry === "length") ? 5 : 4);
 }

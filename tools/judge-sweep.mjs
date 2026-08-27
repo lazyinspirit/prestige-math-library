@@ -13,6 +13,7 @@ import { tsxLoader } from "./paths.mjs";
 import { verdictIsCurrent } from "./judge-currency.mjs";
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 import { buildCurrentContextHashes } from "./context-hash-pool.mjs";
+import { recoverJudgeSession } from "./judge-session-compact.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -243,6 +244,7 @@ const capFor = (model) => concurrencyOverride(model) ?? MODEL_CONCURRENCY[model]
 const MAX_CONCURRENT_CALLS = supportedModels.reduce((sum, model) => sum + capFor(model), 0);
 const RETRY_EXIT = 4;
 const LENGTH_RETRY_EXIT = 5;
+const COMPACT_RETRY_EXIT = 6;
 // These semaphores are shared across *all* sweep invocations. An in-process
 // pool alone would let two resumed sweeps exceed a model lane's cap. Directory
 // slots are atomic on this host filesystem; each holder refreshes its mtime,
@@ -377,7 +379,7 @@ if (persistentPairs) {
       if (captured.stdout) process.stdout.write(captured.stdout);
       if (captured.stderr) process.stderr.write(captured.stderr);
       let retry_after_ms = null;
-      if (captured.code === RETRY_EXIT || captured.code === LENGTH_RETRY_EXIT) {
+      if ([RETRY_EXIT, LENGTH_RETRY_EXIT, COMPACT_RETRY_EXIT].includes(captured.code)) {
         for (const line of captured.stdout.trim().split("\n").reverse()) {
           try {
             const control = JSON.parse(line);
@@ -388,7 +390,22 @@ if (persistentPairs) {
           } catch { /* diagnostic output */ }
         }
       }
-      return { code: captured.code, retry_after_ms };
+      if (captured.code === COMPACT_RETRY_EXIT) {
+        try {
+          if (!session) throw new Error('context exhaustion was reported before a persistent session id existed');
+          const receipt = await recoverJudgeSession({
+            sessionHome: sessionHomeFor(pair),
+            sessionId: session.session_id,
+            model: TERRA,
+          });
+          console.log(`[judge-sweep] compacted ${pair} session ${receipt.session_id} after reverting ${receipt.reverted_failed_turns} failed verdict-free turn(s).`);
+          return { code: captured.code, retry_after_ms: 0, recovered: true };
+        } catch (cause) {
+          console.error(`[judge-sweep] ${pair}: same-session compaction failed — ${cause.message ?? String(cause)}`);
+          return { code: 2, retry_after_ms: null, pair_blocked: true };
+        }
+      }
+      return { code: captured.code, retry_after_ms, recovered: false };
     } finally {
       heldSlotReleases.delete(releaseSlot);
       releaseSlot();
@@ -398,6 +415,7 @@ if (persistentPairs) {
   const pairWorker = async ([pair, targets]) => {
     for (const id of targets) {
       let lengthFallback = false;
+      let compactions = 0;
       for (let attempt = 0; attempt < 3; attempt += 1) {
         if (paymentFailed) return;
         const result = await runPairAttempt(pair, id, attempt, lengthFallback);
@@ -405,6 +423,16 @@ if (persistentPairs) {
           paymentFailed = true;
           console.error("[judge-sweep] account cannot pay; stopping without treating this as a verdict.");
           return;
+        }
+        if (result.pair_blocked) return;
+        if (result.code === COMPACT_RETRY_EXIT && result.recovered) {
+          compactions += 1;
+          if (compactions > 2) {
+            console.error(`[judge-sweep] ${pair}: two same-session compactions did not clear ${id}; stopping this pair worker.`);
+            return;
+          }
+          attempt -= 1; // Compaction is maintenance, not an item-verdict attempt.
+          continue;
         }
         if ((result.code === RETRY_EXIT || result.code === LENGTH_RETRY_EXIT) && attempt < 2) {
           lengthFallback ||= result.code === LENGTH_RETRY_EXIT;

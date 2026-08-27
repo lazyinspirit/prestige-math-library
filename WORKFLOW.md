@@ -194,9 +194,15 @@ incompatible closure entries. Step 10 mechanically renders
 
 The configured judge set is resolved only through `tools/models.mjs`.
 `judge-sweep.mjs` records each full A/B context, declared/cited dependencies,
-context hash, and initial pair session identity. Every scoped item needs a
-current verdict from the configured set; retained rows for unselected sets are
-evidence, not coverage.
+context hash, and pair session identity. One persistent judge session owns the
+entire A/B pair, and every item is judged in its own sequential turn inside that
+same session. The session auto-compacts at 50% of Terra's catalog-advertised
+context window. If a pre-threshold session is already exhausted, recovery
+reverts only its consecutive failed, verdict-free turns and compacts that exact
+session before retrying the same item; it never rotates the session identity or
+discards a successful item turn. Every scoped item needs a current verdict from
+the configured set; retained rows for unselected sets are evidence, not
+coverage.
 
 Step-7 group Alphas read the frozen text in read-only sessions and emit
 schema-checked digests. Step 8 resumes that session with write access when its
