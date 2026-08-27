@@ -88,7 +88,11 @@ finish({ scope: selected, checked });
 function validateItem(id, item, entry) {
   const facts = factsByLabel(item.body);
   const steps = numberedSteps(item.body);
-  const declared = new Set([...item.deps, ...item.justified]);
+  // A load-bearing citation to a later page is deliberately declared in
+  // `forward_refs`, not `deps`: fwdcheck owns its ordering and closure rules.
+  // Proof contracts must recognise the same declaration vocabulary or a
+  // schema-valid forward citation can never pass the strict contract gate.
+  const declared = new Set([...item.deps, ...item.justified, ...item.forward]);
   const citations = Array.isArray(entry.citations) ? entry.citations : [];
   const citationKeys = new Set();
   const citedFactKeys = new Set();
@@ -116,7 +120,7 @@ function validateItem(id, item, entry) {
       error('citation-source-not-in-fact', `${fact} does not link [[${source}]]`, id);
     }
     if (!declared.has(source)) {
-      error('citation-undeclared-dependency', `${fact} cites ${source}, which is absent from deps/justified_by`, id);
+      error('citation-undeclared-dependency', `${fact} cites ${source}, which is absent from deps/justified_by/forward_refs`, id);
     }
     const sourceItem = loadItem(source);
     if (!sourceItem) {
@@ -287,6 +291,7 @@ function loadItem(id) {
     body,
     deps: list(fm, 'deps'),
     justified: list(fm, 'justified_by'),
+    forward: list(fm, 'forward_refs'),
     statementProvenance: nested(fm, 'provenance', 'statement'),
   };
 }

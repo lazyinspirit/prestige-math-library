@@ -52,9 +52,10 @@ export function step6Stages(d: any) {
   /** Give each repair lane the exact current failure. Event order is not a
    * task contract: advisory events may be newer, and exhausted item ids remain
    * in the raw gate output. This generated file is the lane's authority. */
-  const writeGateTask = (args: any, phase: '6b' | '6c', edge: boolean) => {
+  const writeGateTask = (args: any, phase: '6b' | '6c', edge: boolean, lane = '') => {
     const safeGate = String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-');
-    const relative = `research/${args.ctx.run}-${args.stage.id}-${safeGate}-repair-${args.round}.task.md`;
+    const safeLane = String(lane).replace(/[^a-z0-9-]+/gi, '-');
+    const relative = `research/${args.ctx.run}-${args.stage.id}-${safeGate}-repair-${args.round}${safeLane ? `-${safeLane}` : ''}.task.md`;
     const live = (args.failure.liveItems ?? []).map(String);
     const exhausted = (args.failure.exhaustedItems ?? []).map(String);
     const advisory = (args.failure.advisory ?? []).map((failure: any) => ({
@@ -71,6 +72,7 @@ export function step6Stages(d: any) {
       `This file is the authority for repair cycle ${args.round}.`,
       `Primary gate: \`${args.failure.id}\``,
       `Reason: ${String(args.failure.why ?? 'See gate output below.')}`,
+      `Owning Alpha group: ${args.repairGroup ? `\`${args.repairGroup}\`` : '(repository-scoped or mixed)'}`,
       `Live item ids: ${live.length ? live.map((id: string) => `\`${id}\``).join(', ') : '(none named; repository-scoped)'}`,
       `Exhausted item ids — do not repair or re-review: ${exhausted.length ? exhausted.map((id: string) => `\`${id}\``).join(', ') : '(none)'}`,
       '',
@@ -81,7 +83,7 @@ export function step6Stages(d: any) {
       '## Primary gate output',
       '',
       '```text',
-      String(args.failure.output ?? '').slice(-20_000),
+      String(args.failure.output ?? ''),
       '```',
       '',
       '## Advisory failures',
@@ -102,6 +104,60 @@ export function step6Stages(d: any) {
   const dispatchGateRepair = async (args: any, phase: '6b' | '6c', residue = '') => {
     if (residue) args.failure = { ...args.failure,
       output: `${args.failure.output ?? ''}\n\nMECHANICAL RESIDUE:\n${residue}` };
+
+    // `risk-report --require-reviewed` is level-scoped but its remediation is
+    // group-owned. One global repair lane serialises four disjoint Alpha scopes
+    // and creates a competing writer for every group's report and decisions.
+    // Partition the complete live set through the per-batch contracts and the
+    // existing Alpha assignment, then launch one lane per owning group. The
+    // stage/role cap already bounds this fan-out at four.
+    const live = (args.failure.liveItems ?? []).map(String);
+    if (phase === '6b' && args.failure.id === 'risk-report' && live.length) {
+      const batchOf = new Map<string, string>();
+      for (const batch of batches(args.ctx)) {
+        const path = join(args.ctx.repo, 'research', `${args.ctx.run}-batch-${batch}.proof-contracts.json`);
+        let document: any = {};
+        try { document = JSON.parse(readFileSync(path, 'utf8')); } catch { /* gate output remains authoritative */ }
+        for (const id of Object.keys(document?.contracts ?? {})) batchOf.set(id, String(batch));
+      }
+      const groupOf = new Map<string, string>();
+      for (const group of alphaGroups(args.ctx)) {
+        for (const batch of group.covers.map(String)) groupOf.set(batch, String(group.label));
+      }
+      const byGroup = new Map<string, string[]>();
+      for (const id of live) {
+        const group = groupOf.get(batchOf.get(id) ?? '') ?? 'unowned';
+        if (!byGroup.has(group)) byGroup.set(group, []);
+        byGroup.get(group)!.push(id);
+      }
+      for (const [group, ids] of byGroup) {
+        const idSet = new Set(ids);
+        const scopedOutput = String(args.failure.output ?? '').split(/\r?\n/)
+          .filter((line) => line.startsWith('risk-report:')
+            || [...idSet].some((id) => line.includes(`[${id}]`)))
+          .join('\n');
+        const scopedArgs = {
+          ...args,
+          repairGroup: group === 'unowned' ? null : group,
+          failure: {
+            ...args.failure,
+            why: `${ids.length} high/critical item(s) in Alpha group ${group} lack complete risk_review records`,
+            output: scopedOutput,
+            liveItems: ids,
+            exhaustedItems: (args.failure.exhaustedItems ?? []).map(String)
+              .filter((id: string) => idSet.has(id)),
+          },
+        };
+        const dynamicTask = writeGateTask(scopedArgs, phase, false, group);
+        args.executor.start(args.stage, {
+          role: 'alpha', label: `${phase}-gate-risk-report-${args.round}-${group}`,
+          job: 'adjudication', covers: [], brief: 'briefs/alpha-step6.md', task: dynamicTask,
+          timeout: 3600,
+        });
+      }
+      return;
+    }
+
     const edge = await isEdgeDecision(args);
     const dynamicTask = writeGateTask(args, phase, edge);
     args.executor.start(args.stage, {

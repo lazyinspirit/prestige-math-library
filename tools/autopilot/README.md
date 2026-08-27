@@ -196,6 +196,12 @@ message every time. One round, then deadlock. It now fires whenever nothing is i
 flight and rounds remain, bounded by `maxFixRounds`; past the cap the gate still
 blocks and a person reads it.
 
+Gate output is repair evidence, so the engine retains it in full. Item-scoped
+repair accounting extracts every canonical subject from the complete failure,
+not from a display-sized tail. At Step 6, a reviewed risk-report residue fans
+out by the existing Alpha-group ownership: disjoint groups repair in parallel,
+while each named item keeps its independent three-try budget.
+
 ## Portability
 
 The platform-specific surface is **one config value**, an argv array:

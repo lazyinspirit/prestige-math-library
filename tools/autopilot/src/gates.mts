@@ -67,7 +67,13 @@ export async function runGate(gate: Gate, { cwd, env = {}, signal, logger = () =
   });
 
   const out = `${res.stdout}${res.stderr}`;
-  const base = { id: gate.id, code: res.code, output: out.slice(-4000) };
+  // The complete output is repair input, not display text. Step 6 derives the
+  // per-item repair scope from every canonical `ERROR ... [<id>]` line. Keeping
+  // only a tail silently turns one level-wide failure into serial waves: the
+  // first id survives through `why`, a handful survive in the tail, and every
+  // omitted id appears as a supposedly new failure after the next battery.
+  // Reporter/status formatting already shortens the human-facing summary.
+  const base = { id: gate.id, code: res.code, output: out };
 
   if (res.code !== 0) {
     return { ...base, ok: false, why: firstProblem(out) ?? `exit ${res.code}` };

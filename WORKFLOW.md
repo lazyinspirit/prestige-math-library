@@ -169,7 +169,16 @@ battery: strict proof contract, finite smoke, risk report, boundary audit,
 citation fidelity, and gate liveness. Finite smoke is a bounded counterexample
 search, never a general proof. Step 6 requires Alpha risk review, sends
 high/critical-risk and reader-untouched items to refutation, and verifies exact
-refuter scope coverage.
+refuter scope coverage. Each 6b group Alpha must write complete, item-specific
+`risk_review` records for every high/critical item in its owned batches before
+the reviewed gate runs. If residue remains, the engine retains the gate's full
+failure output, charges every named item in the same battery, and repairs the
+set in parallel by owning Alpha group rather than revealing a truncated tail in
+serial waves.
+
+The strict proof-contract citation check recognises all three schema declaration
+routes: `deps`, `justified_by`, and `forward_refs`. Forward citations remain
+subject to the separate ordering and closure rules enforced by `fwdcheck`.
 
 Touch snapshots define `pre-author → post-6b`, `post-6b → current`, and
 `post-step8 → Step-9` impact windows. Impact receipts require dispositions for
