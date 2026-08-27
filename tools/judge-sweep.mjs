@@ -13,7 +13,9 @@ import { tsxLoader } from "./paths.mjs";
 import { verdictIsCurrent } from "./judge-currency.mjs";
 import { MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP } from "./models.mjs";
 import { buildCurrentContextHashes } from "./context-hash-pool.mjs";
-import { recoverJudgeSession } from "./judge-session-compact.mjs";
+import {
+  compactJudgeSessionIfNeeded, recoverJudgeSession,
+} from "./judge-session-compact.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -358,6 +360,19 @@ if (persistentPairs) {
     const releaseSlot = await acquireModelSlot(TERRA);
     heldSlotReleases.add(releaseSlot);
     try {
+      if (session) {
+        try {
+          const maintenance = await compactJudgeSessionIfNeeded({
+            sessionHome: sessionHomeFor(pair), sessionId: session.session_id, model: TERRA,
+          });
+          if (maintenance.compacted) {
+            console.log(`[judge-sweep] compacted ${pair} session ${maintenance.session_id} at ${maintenance.context_tokens} context tokens after reverting ${maintenance.reverted_failed_turns} failed verdict-free turn(s).`);
+          }
+        } catch (cause) {
+          console.error(`[judge-sweep] ${pair}: threshold compaction failed — ${cause.message ?? String(cause)}`);
+          return { code: 2, retry_after_ms: null, pair_blocked: true };
+        }
+      }
       const args = ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--model", TERRA,
         "--session-home", sessionHomeFor(pair), "--session-pair", pair,
         ...(session ? ["--resume-session", session.session_id] : [])];

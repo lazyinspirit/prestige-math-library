@@ -6,7 +6,7 @@
 
 import {
   chmodSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync,
-  writeFileSync,
+  statSync, writeFileSync,
 } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { homedir } from 'node:os';
@@ -19,9 +19,10 @@ import {
 const UUID = /^[0-9a-f-]{36}$/i;
 const CONTEXT_ERROR = /ran out of room in the model'?s context window|context window[^\n]*(?:exhaust|exceed|full)|maximum context length/i;
 
-function findRollout(home, sessionId) {
+function findLatestRollout(home, sessionId) {
   const pending = [join(home, 'sessions')];
   const found = [];
+  const shardName = new RegExp(`-${sessionId}(?:_[0-9a-f-]{36})?\\.jsonl$`, 'i');
   while (pending.length) {
     const dir = pending.pop();
     let entries;
@@ -29,21 +30,27 @@ function findRollout(home, sessionId) {
     for (const entry of entries) {
       const path = join(dir, entry.name);
       if (entry.isDirectory()) pending.push(path);
-      else if (entry.name.endsWith(`-${sessionId}.jsonl`)) found.push(path);
+      else if (shardName.test(entry.name)) found.push(path);
     }
   }
-  if (found.length !== 1) {
-    throw new Error(`${home}: expected one rollout for ${sessionId}, found ${found.length}`);
-  }
-  return found[0];
+  if (!found.length) throw new Error(`${home}: found no rollout for ${sessionId}`);
+  // Codex keeps the thread id but writes resumed paginated history into a
+  // continuation shard named `<thread-id>_<shard-id>.jsonl`. The most recently
+  // written shard contains the active tail that thread/revert accepts.
+  return found.sort((a, b) => statSync(a).mtimeMs - statSync(b).mtimeMs).at(-1);
 }
 
-function consecutiveContextFailures(rollout) {
+function rolloutTailState(rollout) {
   let failures = [];
+  let contextTokens = 0;
   for (const [index, line] of readFileSync(rollout, 'utf8').split('\n').filter(Boolean).entries()) {
     let row;
     try { row = JSON.parse(line); }
     catch { throw new Error(`${rollout}:${index + 1}: invalid JSON`); }
+    if (row.type === 'event_msg' && row.payload?.type === 'token_count') {
+      const total = row.payload.info?.total_token_usage?.total_tokens;
+      if (Number.isFinite(total)) contextTokens = total;
+    }
     if (row.type !== 'event_msg' || row.payload?.type !== 'task_complete') continue;
     const error = row.payload.error;
     failures = error && (error.codex_error_info === 'context_window_exceeded'
@@ -51,9 +58,12 @@ function consecutiveContextFailures(rollout) {
       ? [...failures, row.payload.turn_id]
       : [];
   }
-  if (!failures.length) throw new Error(`${rollout}: no trailing context-exhausted judge turns to recover`);
-  if (!failures[0]) throw new Error(`${rollout}: first failed turn has no id`);
-  return { count: failures.length, beforeTurnId: failures[0] };
+  if (failures.length && !failures[0]) throw new Error(`${rollout}: first failed turn has no id`);
+  return {
+    contextTokens,
+    failedCount: failures.length,
+    beforeTurnId: failures[0] ?? null,
+  };
 }
 
 function syncAuthBefore(sessionHome) {
@@ -144,7 +154,11 @@ async function compactThroughAppServer({ sessionHome, sessionId, model, beforeTu
             finish(new Error(`thread/resume returned ${message.result?.thread?.id ?? 'no id'}, expected ${sessionId}`));
             return;
           }
-          send({ method: 'thread/revert', id: 2, params: { threadId: sessionId, beforeTurnId } });
+          if (beforeTurnId) {
+            send({ method: 'thread/revert', id: 2, params: { threadId: sessionId, beforeTurnId } });
+          } else {
+            send({ method: 'thread/compact/start', id: 3, params: { threadId: sessionId } });
+          }
         } else if (message.id === 2) {
           if (failResponse(message, 'thread/revert')) return;
           send({ method: 'thread/compact/start', id: 3, params: { threadId: sessionId } });
@@ -180,16 +194,53 @@ export async function recoverJudgeSession({ sessionHome, sessionId, model = MODE
     || !/^[A-Za-z0-9._-]+$/.test(metadata.pair ?? '')) {
     throw new Error(`${metadataPath}: recovery target does not match persistent judge metadata`);
   }
-  const rollout = findRollout(home, sessionId);
-  const failed = consecutiveContextFailures(rollout);
+  const rollout = findLatestRollout(home, sessionId);
+  const tail = rolloutTailState(rollout);
+  if (!tail.failedCount) throw new Error(`${rollout}: no trailing context-exhausted judge turns to recover`);
   await compactThroughAppServer({
     sessionHome: home,
     sessionId,
     model,
-    beforeTurnId: failed.beforeTurnId,
+    beforeTurnId: tail.beforeTurnId,
     timeoutMs,
   });
-  return { pair: metadata.pair, session_id: sessionId, reverted_failed_turns: failed.count };
+  return { pair: metadata.pair, session_id: sessionId, reverted_failed_turns: tail.failedCount };
+}
+
+/** Compact at the earliest item boundary after 50%, or recover any failed
+ * context-exhausted tail first. This preserves the exact thread identity and
+ * every successful one-item turn. */
+export async function compactJudgeSessionIfNeeded({
+  sessionHome, sessionId, model = MODELS.terra.id,
+  threshold = JUDGE_AUTO_COMPACT_TOKEN_LIMIT, timeoutMs = 12 * 60_000,
+}) {
+  const home = resolve(sessionHome);
+  if (!UUID.test(sessionId ?? '')) throw new Error('judge compaction requires a session UUID');
+  const metadataPath = join(home, 'judge-session.json');
+  const metadata = JSON.parse(readFileSync(metadataPath, 'utf8'));
+  if (metadata.version !== 1 || metadata.model !== model || metadata.session_id !== sessionId
+    || !/^[A-Za-z0-9._-]+$/.test(metadata.pair ?? '')) {
+    throw new Error(`${metadataPath}: compaction target does not match persistent judge metadata`);
+  }
+  const rollout = findLatestRollout(home, sessionId);
+  const tail = rolloutTailState(rollout);
+  if (!tail.failedCount && tail.contextTokens < threshold) {
+    return {
+      pair: metadata.pair, session_id: sessionId, compacted: false,
+      context_tokens: tail.contextTokens, reverted_failed_turns: 0,
+    };
+  }
+  await compactThroughAppServer({
+    sessionHome: home,
+    sessionId,
+    model,
+    beforeTurnId: tail.beforeTurnId,
+    timeoutMs,
+  });
+  return {
+    pair: metadata.pair, session_id: sessionId, compacted: true,
+    context_tokens: tail.contextTokens, reverted_failed_turns: tail.failedCount,
+  };
 }
 
 if (process.argv[1] && basename(process.argv[1]) === basename(new URL(import.meta.url).pathname)) {

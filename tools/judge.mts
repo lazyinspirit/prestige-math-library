@@ -276,7 +276,8 @@ const runCodex = (model: string, prompt: string, timeoutMs: number, activeSessio
     "-c", 'model_reasoning_effort="xhigh"',
     // The isolated judge home does not inherit the user's config.toml. Declare
     // Terra's actual catalog maximum and compact this same pair conversation at
-    // 50%, before another full-item turn can push it into the terminal margin.
+    // 50% of the effective window, before another full-item turn can push it
+    // into the terminal margin.
     "-c", `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
     // Compact as soon as the live conversation reaches half of that window.
     // The threshold is passed explicitly because the isolated judge home does

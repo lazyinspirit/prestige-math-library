@@ -196,8 +196,8 @@ The configured judge set is resolved only through `tools/models.mjs`.
 `judge-sweep.mjs` records each full A/B context, declared/cited dependencies,
 context hash, and pair session identity. One persistent judge session owns the
 entire A/B pair, and every item is judged in its own sequential turn inside that
-same session. The session auto-compacts at 50% of Terra's catalog-advertised
-context window. If a pre-threshold session is already exhausted, recovery
+same session. Before the next item turn, the sweep compacts at 50% of Terra's
+effective context window. If a pre-threshold session is already exhausted, recovery
 reverts only its consecutive failed, verdict-free turns and compacts that exact
 session before retrying the same item; it never rotates the session identity or
 discards a successful item turn. Every scoped item needs a current verdict from
