@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -10,6 +10,24 @@ import { stages } from '../stages/mathlib.mts';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'step9-changes.mjs');
+
+function hookFixture() {
+  const root = mkdtempSync(join(tmpdir(), 'step9-hook-'));
+  mkdirSync(join(root, 'items'));
+  mkdirSync(join(root, 'research'));
+  symlinkSync(join(REPO, 'tools'), join(root, 'tools'));
+  symlinkSync(join(REPO, 'briefs'), join(root, 'briefs'));
+  writeFileSync(join(root, 'items', 'modified.md'), 'repaired theorem\n');
+  writeFileSync(join(root, 'research', 'demo-touches.json'), JSON.stringify({ snapshots: [{
+    label: 'post-step8', hashes: { modified: shortHash(itemHashGuard('original theorem\n')) },
+  }] }));
+  writeFileSync(join(root, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+    { id: 'page', items: [{ id: 'modified' }] },
+  ]));
+  writeFileSync(join(root, 'research', 'demo-step9-changes.json'), JSON.stringify({ items: [] }));
+  writeFileSync(join(root, 'research', 'demo-step9-changes.pages.json'), '[]\n');
+  return root;
+}
 
 test('the Step 9 receipt includes created and modified mathematics and refuses deletions', () => {
   const root = mkdtempSync(join(tmpdir(), 'step9-changes-'));
@@ -126,5 +144,69 @@ test('a closure retry judges only ids that are actually stale', async () => {
       stage, round: 1, failure: { id: 'judge-closure' } });
     assert.equal(started.length, 1);
     assert.deepEqual(started[0].argv.slice(-2), ['--items', 'modified']);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('9-changes-judge refreshes a stale Step-9 delta after an in-stage repair', async () => {
+  const root = hookFixture();
+  const started: any[] = [];
+  const stage: any = stages.find((candidate: any) => candidate.id === '9-changes-judge');
+  try {
+    await stage.onGateFailure({
+      ctx: { run: 'demo', repo: root }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
+      stage, round: 1, failure: { id: 'step9-changes', output: 'receipt disagrees with current post-step8 delta' },
+    });
+    assert.equal(started.length, 0, 'the exact refresh is synchronous; the next battery owns rejudge routing');
+    assert.deepEqual(JSON.parse(readFileSync(join(root, 'research', 'demo-step9-changes.json'), 'utf8')).items, ['modified']);
+    assert.deepEqual(JSON.parse(readFileSync(join(root, 'research', 'demo-step9-changes.pages.json'), 'utf8'))[0].items,
+      [{ id: 'modified' }]);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('a clean mechanical advisory cannot suppress unhandled Step-9 gate failures', async () => {
+  const root = hookFixture();
+  const started: any[] = [];
+  const stage: any = stages.find((candidate: any) => candidate.id === '9-changes-judge');
+  try {
+    await stage.onGateFailure({
+      ctx: { run: 'demo', repo: root }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
+      stage, round: 2,
+      failure: {
+        id: 'precheck', output: 'PRIMARY precheck output [modified]', why: 'precheck failed',
+        advisory: [{ id: 'step9-changes', output: 'ADVISORY stale delta output', why: 'receipt stale' }],
+      },
+    });
+    assert.equal(started.length, 1);
+    assert.equal(started[0].label, 'step9-gate-adjudication-2');
+    const task = readFileSync(join(root, started[0].task[0]), 'utf8');
+    assert.match(task, /"id": "precheck"/);
+    assert.match(task, /PRIMARY precheck output/);
+    assert.doesNotMatch(task, /"id": "step9-changes"/, 'the successfully refreshed advisory is no longer cognitive residue');
+
+    started.length = 0;
+    await stage.onGateFailure({
+      ctx: { run: 'demo', repo: root }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
+      stage, round: 3,
+      failure: {
+        id: 'proof-contract', output: 'proof contract full output', why: 'proof contract failed',
+        advisory: [
+          { id: 'finite-smoke', output: 'finite full output', why: 'finite failed' },
+          { id: 'defect-ledger', output: 'ledger full output', why: 'ledger failed' },
+        ],
+      },
+    });
+    assert.equal(started.length, 1, 'one lead Alpha receives the complete nonmechanical battery residue');
+    const all = readFileSync(join(root, started[0].task[0]), 'utf8');
+    for (const id of ['proof-contract', 'finite-smoke', 'defect-ledger']) assert.match(all, new RegExp(`"id": "${id}"`));
+    for (const output of ['proof contract full output', 'finite full output', 'ledger full output']) assert.match(all, new RegExp(output));
+
+    started.length = 0;
+    await stage.onGateFailure({
+      ctx: { run: 'demo', repo: root }, executor: { start: (_stage: any, plan: any) => started.push(plan) },
+      stage, round: 4,
+      failure: { id: 'step9-judge-closure', output: 'closure receipt malformed', why: 'unreadable closure' },
+    });
+    assert.equal(started.length, 1, 'a closure failure with no narrow tuple work still reaches general adjudication');
+    assert.match(readFileSync(join(root, started[0].task[0]), 'utf8'), /"id": "step9-judge-closure"/);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

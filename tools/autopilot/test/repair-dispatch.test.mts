@@ -12,7 +12,7 @@
 // lane per owning BATCH with the batch as its cover.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -34,6 +34,7 @@ function fixtureRepo() {
   // mechanicalRepair and the gates share one convention: tool paths resolve
   // against ctx.repo. The fixture honours it rather than restating the tools.
   symlinkSync(join(REPO, 'tools'), join(dir, 'tools'));
+  symlinkSync(join(REPO, 'briefs'), join(dir, 'briefs'));
   return dir;
 }
 
@@ -122,11 +123,53 @@ test('Step-8 preflight routes contract residue without spending a judge round', 
   assert.equal(started.length, 1, 'the failure must dispatch, not fall through');
   const p = started[0];
   assert.equal(p.label, 'step8-preflight-a-1');
-  assert.deepEqual(p.task, [
-    'research/demo-alpha-a-step8-preflight.task.md',
-    'briefs/tasks/alpha-step8-preflight.md',
-  ]);
+  assert.deepEqual(p.task, ['research/demo-8-preflight-repair-envelope-1-a.task.md']);
+  const envelope = readFileSync(join(repo, p.task[0]), 'utf8');
+  assert.match(envelope, /"id": "risk-report"/);
+  assert.match(envelope, /"id": "thm-demo-x"/);
+  assert.match(envelope, /"scope": "run"/);
+  assert.match(envelope, /risk-review-missing \[thm-demo-x\]/, 'full gate output/why is in the dispatch task');
   assert.equal(p.role, 'alpha-adjudicate');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('Step-8 repair envelopes retain every failure and split run/published tuples by owner', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: ['thm-demo-x'],
+    unadjudicated_rows: [{ id: 'thm-demo-x', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64) }],
+    open_fatal: [], open_fatal_rows: [], closed: false,
+  }));
+  writeFileSync(join(repo, 'research', 'demo-step8-published-repairs.jsonl'), `${JSON.stringify({
+    kind: 'repaired', id: 'lem-published-y', group: 'b', found_via: 'thm-demo-y',
+  })}\n`);
+  writeFileSync(join(repo, 'research', 'demo-step8-published-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated_rows: [], open_fatal: ['lem-published-y'],
+    open_fatal_rows: [{ id: 'lem-published-y', model: 'gpt-5.6-terra', context_sha256: 'b'.repeat(64) }],
+    escalations: [],
+  }));
+  const started: any[] = [];
+  const stage: any = stages.find((candidate: any) => candidate.id === '8-preflight');
+  await stage.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
+    stage, round: 2,
+    failure: {
+      id: 'judge-closure', output: 'PRIMARY full output [thm-demo-x]', why: 'primary summary',
+      advisory: [{ id: 'step8-published', stage: '8-preflight', output: 'ADVISORY full output `lem-published-y`', why: 'advisory summary' }],
+    },
+  });
+  assert.deepEqual(started.map((plan) => plan.label).sort(), ['step8-preflight-a-2', 'step8-preflight-b-2']);
+  const byLabel = new Map(started.map((plan) => [plan.label, readFileSync(join(repo, plan.task[0]), 'utf8')]));
+  for (const text of byLabel.values()) {
+    assert.match(text, /PRIMARY full output/);
+    assert.match(text, /ADVISORY full output/);
+    assert.match(text, /"id": "judge-closure"/);
+    assert.match(text, /"id": "step8-published"/);
+  }
+  assert.match(byLabel.get('step8-preflight-a-2')!, /"id": "thm-demo-x"[\s\S]*?"scope": "run"/);
+  assert.doesNotMatch(byLabel.get('step8-preflight-a-2')!, /"id": "lem-published-y"[\s\S]*?"status": "open_fatal"/);
+  assert.match(byLabel.get('step8-preflight-b-2')!, /"id": "lem-published-y"[\s\S]*?"scope": "published"/);
+  assert.match(byLabel.get('step8-preflight-b-2')!, /"context_sha256": "b{64}"/);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -150,10 +193,10 @@ test('contract residue cannot consume rejudge budget and is routed at Step-8 clo
   assert.equal(started.length, 1);
   assert.equal(started[0].label, 'step8-close-a-1');
   assert.equal(started[0].role, 'alpha-adjudicate');
-  assert.deepEqual(started[0].task, [
-    'research/demo-alpha-a-step8-close.task.md',
-    'briefs/tasks/alpha-step8-close.md',
-  ]);
+  assert.deepEqual(started[0].task, ['research/demo-8-close-repair-envelope-1-a.task.md']);
+  const envelope = readFileSync(join(repo, started[0].task[0]), 'utf8');
+  assert.match(envelope, /"id": "risk-report"/);
+  assert.match(envelope, /"scope": "run"/);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -185,6 +228,46 @@ test('step 8 routes exact unadjudicated closure rows to one narrow recovery Alph
     'research/demo-alpha-a-step8-recovery.task.md',
     'briefs/tasks/alpha-step8-closure-recovery.md',
   ]);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('8-adjudicate routes step8-guard ids and full output instead of burning an empty round', async () => {
+  const repo = groupedFixture();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: ['thm-demo-x', 'thm-demo-y'], unadjudicated: [], unadjudicated_rows: [],
+    open_fatal: [], open_fatal_rows: [], closed: false,
+  }));
+  const started: any[] = [];
+  const stage: any = stages.find((candidate: any) => candidate.id === '8-adjudicate');
+  await stage.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
+    stage, round: 1,
+    failure: {
+      id: 'step8-guard', why: 'two unlicensed edits',
+      output: [
+        'ERROR nonfatal-edit: thm-demo-x: changed without a confirmed_fatal licence',
+        'ERROR nonfatal-edit: thm-demo-y: changed without a confirmed_fatal licence',
+      ].join('\n'),
+    },
+  });
+  assert.deepEqual(started.map((plan) => plan.label).sort(), ['step8-guard-a-round-1', 'step8-guard-b-round-1']);
+  for (const plan of started) {
+    const envelope = readFileSync(join(repo, plan.task[0]), 'utf8');
+    assert.match(envelope, /"id": "step8-guard"/);
+    assert.match(envelope, /changed without a confirmed_fatal licence/);
+    assert.match(envelope, /restore the pre-Step-8 mathematics/);
+  }
+  assert.match(readFileSync(join(repo, started.find((plan) => /-a-/.test(plan.label)).task[0]), 'utf8'),
+    /"assigned_items": \[[\s\S]*?"id": "thm-demo-x"/);
+  assert.match(readFileSync(join(repo, started.find((plan) => /-b-/.test(plan.label)).task[0]), 'utf8'),
+    /"assigned_items": \[[\s\S]*?"id": "thm-demo-y"/);
+  const unscoped: any[] = [];
+  await stage.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => unscoped.push(plan) },
+    stage, round: 2, failure: { id: 'step8-guard', why: 'guard output was unreadable', output: 'FAIL' },
+  });
+  assert.equal(unscoped.length, 1, 'even malformed guard output gets one exact diagnostic dispatch, never an empty round');
+  assert.equal(unscoped[0].label, 'step8-guard-review-round-2');
   rmSync(repo, { recursive: true, force: true });
 });
 

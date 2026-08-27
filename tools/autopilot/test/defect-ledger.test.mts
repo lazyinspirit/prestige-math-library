@@ -138,6 +138,67 @@ test('validate rejects an enum excursion and a noteless other', () => {
   assert.match(r.stderr, /requires subclass_note/);
 });
 
+test('validate accepts legacy step-6 location vocabulary when evidence already carries the note', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f20-b-t9-01',
+      run: 'frontier-20',
+      location: 'proof-step 3.1',
+      subclass: 'other',
+      evidence: [{ path: 'research/frontier-20-alpha-d-6b.md', note: 'Reader note already explains the repaired proof step.' }],
+    }),
+    row({
+      defect_id: 'f20-b-r9-03',
+      run: 'frontier-20',
+      location: 'statement-and-proof',
+      subclass: 'false-or-overstrong-statement',
+    }),
+    row({
+      defect_id: 'f20-b-t9-19',
+      run: 'frontier-20',
+      location: 'carrier',
+      subclass: 'other',
+      evidence: [{ path: 'research/frontier-20-alpha-b-6b.md', note: 'Whole-carrier reread closed the routed post-state on current disk.' }],
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('validate still rejects malformed proof-step legacy locations', () => {
+  const dir = fixture([
+    row({
+      defect_id: 'f20-b-r9-01',
+      run: 'frontier-20',
+      location: 'proof-step nonsense',
+    }),
+  ], []);
+  const r = spawnSync(process.execPath, [TOOL, 'validate'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /outside the closed enum/);
+});
+
+test('append remains strict for new rows with legacy-shaped locations or missing subclass_note', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ledger-append-'));
+  mkdirSync(join(dir, 'research'));
+  writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), '');
+  const incoming = {
+    ...row({
+      defect_id: 'r9-D001',
+      run: 'frontier-20',
+      subclass: 'other',
+      location: 'carrier',
+      evidence: [{ path: 'research/frontier-20-alpha-b-6b.md', note: 'Current carrier reread closes the routed state.' }],
+    }),
+  };
+  writeFileSync(join(dir, 'rows.json'), JSON.stringify(incoming));
+  const r = spawnSync(process.execPath, [TOOL, 'append', '--file', join(dir, 'rows.json')],
+    { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /outside the closed enum/);
+  assert.match(r.stderr, /requires subclass_note/);
+});
+
 test('render leads with outcomes, never a bare total', () => {
   const dir = fixture([row({}), row({ defect_id: 'r9-D002', subject: 'thm-y', caught_at_stage: '6b-adjudicate', prevention: { kind: 'mechanical', ref: 'tools/x.mjs' } })], []);
   const r = spawnSync(process.execPath, [TOOL, 'render', '--out', join(dir, 'view.md')],

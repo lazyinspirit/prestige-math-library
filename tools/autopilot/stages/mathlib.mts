@@ -17,8 +17,9 @@
 // whoever produced them. That is how a step done by hand, or by a tool rather
 // than an agent, still fits the machine.
 
-import { readdirSync, existsSync, readFileSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { step6Stages } from './mathlib.step6.mts';
@@ -261,6 +262,10 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
       '--cost', R(ctx, 'research', `${ctx.run}-judge-cost.jsonl`),
       '--pages', aPages.join(',')];
   },
+  // A Step-9 fatal repair changes the exact delta this receipt freezes. Refresh
+  // it synchronously before routing any independent cognitive residue, so the
+  // next closure pass judges the repaired bytes rather than a stale scope.
+  'step9-changes': (ctx) => step9ChangesRefreshArgv(ctx),
   // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
   // stage 4 IS the withheld-splice shape — same repair
   'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
@@ -324,6 +329,13 @@ const openContractRows = (ctx: any): any[] => {
         && r.location === 'contract-row' && r.batch);
   } catch { return []; }
 };
+
+/** A rework result is evidence for one exact set of still-open ledger rows, not
+ * for a batch forever. Any row edit (including a certifier's retained-open
+ * reason) changes the token and requires fresh owning-Beta work. */
+const contractReworkVersion = (rows: any[]): string => createHash('sha256')
+  .update(JSON.stringify([...rows].sort((a, b) => String(a.defect_id).localeCompare(String(b.defect_id)))))
+  .digest('hex').slice(0, 16);
 
 /** An unexpired quota/outage obligation for the given kind, as an outage
  *  report the executor turns into a backoff clock. */
@@ -697,6 +709,33 @@ const step9ScopeDeltaPath = (ctx) => `research/${ctx.run}-step9-scope-delta.json
 const step9ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step9-review.md`;
 const step9ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step9.md`;
 
+const step9ChangesRefreshArgv = (ctx: any): string[] => ['tools/step9-changes.mjs',
+  '--touches', touchesPath(ctx), '--baseline', 'post-step8',
+  '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+  '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx), '--root', ctx.repo];
+
+function writeStep9GateEnvelope({ ctx, stage, round, failures, mechanicalStderr = '' }: any): string {
+  const rel = `research/${ctx.run}-${stage.id}-gate-envelope-${round}.task.md`;
+  const envelope = {
+    version: 1, run: ctx.run, stage: stage.id, round,
+    failures: failures.map((entry: any) => ({
+      id: String(entry.id), stage: entry.stage ?? stage.id,
+      why: String(entry.why ?? ''), output: String(entry.output ?? ''),
+      named_ids: itemsFromGateFailure(entry),
+    })),
+    mechanical_residue: String(mechanicalStderr ?? ''),
+  };
+  writeFileSync(R(ctx, rel), [
+    `# Exact Step-9 gate envelope — round ${round}`,
+    '',
+    'The JSON envelope is the complete primary/advisory failure set assigned to this dispatch.',
+    'Adjudicate every entry; do not infer scope from whichever event happened to be logged last.',
+    '', '```json', JSON.stringify(envelope, null, 2), '```', '', '---', '',
+    readFileSync(R(ctx, 'briefs/tasks/alpha-step9-gate-adjudication.md'), 'utf8').trim(), '',
+  ].join('\n'));
+  return rel;
+}
+
 /** Step 9 cannot start its Alpha until the exact delta has been captured and
  * every group decision file has been refreshed from that frozen comparison.
  * The preparation command performs those two writes serially. */
@@ -719,6 +758,7 @@ function readClosure(ctx): {
   unadjudicated: string[];
   unadjudicated_rows?: Array<{ id: string; model: string; context_sha256: string }>;
   open_fatal: string[];
+  open_fatal_rows?: Array<{ id: string; model: string; context_sha256: string }>;
   closed: boolean;
 } | null {
   const p = R(ctx, closurePath(ctx));
@@ -838,6 +878,7 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
       unadjudicated: [...new Set<string>((row.unadjudicated_rows ?? []).map((entry: any) => String(entry.id)))],
       unadjudicated_rows: row.unadjudicated_rows ?? [],
       open_fatal: row.open_fatal ?? [],
+      open_fatal_rows: row.open_fatal_rows ?? [],
       closed: !(row.needs_rejudge?.length || row.unadjudicated_rows?.length || row.open_fatal?.length || row.escalations?.length),
     };
   } catch { return null; }
@@ -846,7 +887,13 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
 /** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
 function itemsFromGateFailure(failure: any): string[] {
   const text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
-  return [...new Set([...text.matchAll(/\[([a-z][a-z0-9]*(?:-[a-z0-9]+){2,})\]/g)].map((m) => m[1]))];
+  const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
+  return [...new Set([
+    ...[...text.matchAll(new RegExp(`\\[(${grammar})\\]`, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`\\\`(${grammar})\\\``, 'g'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`^\\s*(?:ERROR|FAIL)\\s+[a-z0-9-]+:\\s+(${grammar})(?=[:\\s])`, 'gmi'))].map((m) => m[1]),
+    ...[...text.matchAll(new RegExp(`items/(${grammar})\\.md`, 'g'))].map((m) => m[1]),
+  ])];
 }
 
 function startStep8Group(ctx: any, executor: any, stage: any, plan: any, group: string | null): void {
@@ -858,6 +905,107 @@ function startStep8Group(ctx: any, executor: any, stage: any, plan: any, group: 
     ...(group && sessionId ? { sessionHome: sessionHome(ctx, group), resumeSession: sessionId } : {}),
     ...plan,
   });
+}
+
+type Step8RepairScope = 'run' | 'published' | 'unknown';
+
+function step8RepairAssignments(ctx: any, ids: string[]): Array<{ id: string; scope: Step8RepairScope; owner: string | null }> {
+  let byItem: Record<string, string> = {};
+  try {
+    byItem = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-step8-scope.json`), 'utf8'))?.by_item ?? {};
+  } catch { /* an absent scope is represented explicitly as unknown below */ }
+  const published = new Map<string, string>();
+  try {
+    for (const line of readFileSync(R(ctx, `research/${ctx.run}-step8-published-repairs.jsonl`), 'utf8').split(/\r?\n/)) {
+      if (!line.trim()) continue;
+      const row = JSON.parse(line);
+      if (row.kind === 'repaired' && typeof row.id === 'string' && typeof row.group === 'string')
+        published.set(row.id, row.group);
+    }
+  } catch { /* no published repairs: none of the ids are published work */ }
+  return [...new Set(ids.map(String))].map((id) => byItem[id]
+    ? { id, scope: 'run' as const, owner: byItem[id] }
+    : published.has(id)
+      ? { id, scope: 'published' as const, owner: published.get(id)! }
+      : { id, scope: 'unknown' as const, owner: null });
+}
+
+/** Resolve Step-8 repair owners without treating a published item as an unknown
+ * run item. Unknown ids still fan out loudly under `step8Owners`' contract. */
+function step8RepairOwners(ctx: any, ids: string[]): Array<string | null> {
+  const assignments = step8RepairAssignments(ctx, ids);
+  const known = new Set(assignments.map((row) => row.owner).filter(Boolean) as string[]);
+  if (assignments.some((row) => row.scope === 'unknown'))
+    for (const owner of step8Owners(ctx, assignments.filter((row) => row.scope === 'unknown').map((row) => row.id)))
+      if (owner) known.add(owner);
+  const labels = alphaGroups(ctx).map((group: any) => String(group.label));
+  const ordered = labels.filter((label) => known.has(label));
+  if (ordered.length) return ordered;
+  return labels.length ? labels : [null];
+}
+
+function resolveStep8Task(ctx: any, task: string | string[]): string {
+  const candidates = Array.isArray(task) ? task : [task];
+  return candidates.find((candidate) => existsSync(R(ctx, candidate))) ?? candidates[candidates.length - 1];
+}
+
+/** Materialise the exact evidence a Step-8 repair dispatch owns. Event-log
+ * ordering is deliberately irrelevant: every primary/advisory failure and its
+ * full output is embedded, together with exact current closure tuples and an
+ * explicit run/published/unknown classification for every live id. */
+function writeStep8RepairEnvelope({ ctx, stage, round, group, mode, failures, mechanicalStderr = '', named, task }: any): string {
+  const runClosure = readClosure(ctx);
+  const publishedClosure = readPublishedClosure(ctx);
+  const assignments = step8RepairAssignments(ctx, named);
+  const belongs = (row: any) => group == null || row.owner === group || row.scope === 'unknown';
+  const assigned = assignments.filter(belongs);
+  const tupleRows = [
+    ...((runClosure?.unadjudicated_rows ?? []).map((row) => ({ ...row, scope: 'run', status: 'unadjudicated' }))),
+    ...((runClosure?.open_fatal_rows ?? []).map((row) => ({ ...row, scope: 'run', status: 'open_fatal' }))),
+    ...((publishedClosure?.unadjudicated_rows ?? []).map((row) => ({ ...row, scope: 'published', status: 'unadjudicated' }))),
+    ...((publishedClosure?.open_fatal_rows ?? []).map((row) => ({ ...row, scope: 'published', status: 'open_fatal' }))),
+  ];
+  const assignedIds = new Set(assigned.map((row) => row.id));
+  const envelope = {
+    version: 1,
+    run: ctx.run,
+    stage: stage.id,
+    round,
+    mode,
+    group,
+    failures: failures.map((entry: any) => ({
+      id: String(entry.id),
+      stage: entry.stage ?? stage.id,
+      why: String(entry.why ?? ''),
+      output: String(entry.output ?? ''),
+      named_ids: itemsFromGateFailure(entry),
+    })),
+    mechanical_residue: String(mechanicalStderr ?? ''),
+    live_items: assignments,
+    assigned_items: assigned,
+    live_tuples: tupleRows.filter((row: any) => assignedIds.has(String(row.id))),
+  };
+  const baseTask = resolveStep8Task(ctx, task);
+  const baseBody = readFileSync(R(ctx, baseTask), 'utf8');
+  const suffix = group == null ? 'review' : group;
+  const rel = `research/${ctx.run}-${stage.id}-repair-envelope-${round}-${suffix}.task.md`;
+  writeFileSync(R(ctx, rel), [
+    `# Exact Step-8 repair envelope — ${stage.id}, round ${round}`,
+    '',
+    'The JSON envelope below is the authority for this dispatch. It contains every failing gate from the battery,',
+    'the full untruncated output, exact current rejection tuples, and explicit run/published ownership.',
+    'Act only on `assigned_items` and `live_tuples`; do not substitute the latest event-log row.',
+    '',
+    '```json',
+    JSON.stringify(envelope, null, 2),
+    '```',
+    '',
+    '---',
+    '',
+    baseBody.trim(),
+    '',
+  ].join('\n'));
+  return rel;
 }
 
 /** Materialised alerts whose owning group still owes a disposition, or has
@@ -2089,6 +2237,26 @@ export const stages = [
     // A fatal defect that needs authoring is still work. It gets dispatched.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
+      const guardFailure = failures.find((entry: any) => entry.id === 'step8-guard');
+      if (guardFailure) {
+        refreshStep8Scope(ctx);
+        const guardIds = itemsFromGateFailure(guardFailure);
+        const owners = guardIds.length ? step8RepairOwners(ctx, guardIds) : [null];
+        for (const g of owners) {
+          const envelopeTask = writeStep8RepairEnvelope({
+            ctx, stage, round, group: g, mode: 'guard', failures, named: guardIds,
+            task: 'briefs/tasks/alpha-step8-guard.md',
+          });
+          startStep8Group(ctx, executor, stage, {
+            label: g ? `step8-guard-${g}-round-${round}` : `step8-guard-review-round-${round}`,
+            job: 'adjudication',
+            task: [envelopeTask],
+            timeout: 7200,
+          }, g);
+        }
+        return;
+      }
       // ALERT THE OWNING GROUP (owner, 2026-08-25). "If an Alpha discovers a
       // defect belonging to a different group, it must alert that group's Alpha."
       // The finding is already recorded and the gate already refuses to close
@@ -2249,23 +2417,28 @@ export const stages = [
       ])];
       // An exact id routes to its owning resumed group. A gate that provides no
       // id gets one focused reviewer, not four whole-group rereads.
-      const owners = named.length ? step8Owners(ctx, named) : [null];
+      const owners = named.length ? step8RepairOwners(ctx, named) : [null];
       for (const g of owners) {
         const recoveringRejection = (closure?.unadjudicated?.length ?? 0) > 0;
+        const baseTask = hasCompletedHistoricalRejudge(ctx)
+          ? (g
+            ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
+            : 'briefs/tasks/alpha-step8-close.md')
+          : recoveringRejection
+          ? (g
+            ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
+            : 'briefs/tasks/alpha-step8-closure-recovery.md')
+          : (g
+            ? [`research/${ctx.run}-alpha-${g}-step8-preflight.task.md`, 'briefs/tasks/alpha-step8-preflight.md']
+            : 'briefs/tasks/alpha-step8-preflight.md');
+        const envelopeTask = writeStep8RepairEnvelope({
+          ctx, stage, round, group: g, mode: 'preflight', failures,
+          mechanicalStderr: mechanical.stderr, named, task: baseTask,
+        });
         startStep8Group(ctx, executor, stage, {
           label: g ? `step8-preflight-${g}-${round}` : `step8-preflight-review-${round}`,
           job: 'adjudication',
-          task: hasCompletedHistoricalRejudge(ctx)
-            ? (g
-              ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
-              : 'briefs/tasks/alpha-step8-close.md')
-            : recoveringRejection
-            ? (g
-              ? [`research/${ctx.run}-alpha-${g}-step8-recovery.task.md`, 'briefs/tasks/alpha-step8-closure-recovery.md']
-              : 'briefs/tasks/alpha-step8-closure-recovery.md')
-            : (g
-              ? [`research/${ctx.run}-alpha-${g}-step8-preflight.task.md`, 'briefs/tasks/alpha-step8-preflight.md']
-              : 'briefs/tasks/alpha-step8-preflight.md'),
+          task: [envelopeTask],
           timeout: 7200,
         }, g);
       }
@@ -2486,14 +2659,19 @@ export const stages = [
       // Final closure never turns an unscoped detector message into four
       // duplicated whole-group reviews. One focused reviewer diagnoses the
       // residue; exact item failures still go to their owning conversation.
-      const owners = named.length ? step8Owners(ctx, named) : [null];
+      const owners = named.length ? step8RepairOwners(ctx, named) : [null];
       for (const g of owners) {
+        const baseTask = g
+          ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
+          : 'briefs/tasks/alpha-step8-close.md';
+        const envelopeTask = writeStep8RepairEnvelope({
+          ctx, stage, round, group: g, mode: 'close', failures,
+          mechanicalStderr: mechanical.stderr, named, task: baseTask,
+        });
         startStep8Group(ctx, executor, stage, {
           label: g ? `step8-close-${g}-${round}` : `step8-close-review-${round}`,
           job: 'adjudication',
-          task: g
-            ? [`research/${ctx.run}-alpha-${g}-step8-close.task.md`, 'briefs/tasks/alpha-step8-close.md']
-            : 'briefs/tasks/alpha-step8-close.md',
+          task: [envelopeTask],
           timeout: 7200,
         }, g);
       }
@@ -2612,10 +2790,7 @@ export const stages = [
         label: 'step9-changes-index',
         job: 'bookkeeping-mechanical',
         covers: [],
-        argv: ['node', 'tools/step9-changes.mjs',
-          '--touches', touchesPath(ctx), '--baseline', 'post-step8',
-          '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-          '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx)],
+        argv: ['node', ...step9ChangesRefreshArgv(ctx)],
       }, {
         role: 'tool',
         label: 'step9-changes-judge',
@@ -2632,8 +2807,10 @@ export const stages = [
       ...contractGates(ctx, { reviewed: true }), step9ClosureGate(ctx), closureGate(ctx), ledgerGate(ctx)],
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
-      if (failure.id === 'judge-closure' || failure.id === 'step9-judge-closure') {
-        const closure = failure.id === 'step9-judge-closure' ? readStep9Closure(ctx) : readClosure(ctx);
+      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id);
+      const closureFailure = failures.find((entry: any) => entry.id === 'judge-closure' || entry.id === 'step9-judge-closure');
+      if (closureFailure) {
+        const closure = closureFailure.id === 'step9-judge-closure' ? readStep9Closure(ctx) : readClosure(ctx);
         const needsJudge = closure?.needs_rejudge ?? [];
         if (needsJudge.length) {
           const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
@@ -2664,19 +2841,28 @@ export const stages = [
               : 'briefs/tasks/alpha-step8-closure-recovery.md', timeout: 21600,
           });
         }
-        return;
+        if (local.length || carried.length) return;
       }
 
       const mechanical = await mechanicalRepair({ ctx, failure, excludeGateIds: ['judge-closure'] });
       if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
-      if (mechanical.outcome !== 'unhandled') return;
-
-      if (['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
-        executor.start(stage, {
-          role: 'alpha', label: `step9-changes-contract-${round}`, job: 'adjudication', covers: [],
-          brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step9-adjudicate.task.md`, timeout: 21600,
-        });
-      }
+      // A closure failure with concrete stale/contested work returned through
+      // its narrow route above. Any other closure failure is still an
+      // unhandled nonmechanical finding and belongs in the general envelope.
+      const unhandled = failures.filter((entry: any) => !MECHANICAL_REPAIRS[entry.id]);
+      // A residual mechanical repair still needs judgment. A clean mechanical
+      // advisory must not hide an unrelated unhandled primary (or vice versa).
+      const routed = mechanical.outcome === 'residual'
+        ? failures
+        : unhandled;
+      if (!routed.length) return;
+      const envelopeTask = writeStep9GateEnvelope({
+        ctx, stage, round, failures: routed, mechanicalStderr: mechanical.stderr,
+      });
+      executor.start(stage, {
+        role: 'alpha', label: `step9-gate-adjudication-${round}`, job: 'adjudication', covers: [],
+        brief: 'briefs/alpha.md', task: [envelopeTask], timeout: 21600,
+      });
     },
   },
 
@@ -2726,9 +2912,7 @@ export const stages = [
       if (failure.id === 'step9-changes') {
         executor.start(stage, {
           role: 'tool', label: `step9-changes-refresh-${round}`, job: 'bookkeeping-mechanical', covers: [],
-          argv: ['node', 'tools/step9-changes.mjs', '--touches', touchesPath(ctx), '--baseline', 'post-step8',
-            '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-            '--out', step9ChangesPath(ctx), '--scope-out', step9ChangesScopePath(ctx)],
+          argv: ['node', ...step9ChangesRefreshArgv(ctx)],
         });
         return;
       }
@@ -2863,8 +3047,18 @@ export const stages = [
       if (blocked) return { outage: { reason: blocked.reason, retryAfterMs: blocked.retryAfterMs } };
       const batchesOwed = [...new Set(rows.map((r) => String(r.batch)))];
       const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
-      const reworkDone = (b: string) => readdirSync(dispatchDir)
-        .some((f: string) => f.includes(`contract-rework`) && f.includes(`-b${b}`) && f.endsWith('.result.json'));
+      const versions = new Map(batchesOwed.map((b) => [b,
+        contractReworkVersion(rows.filter((row) => String(row.batch) === b))]));
+      const reworkDone = (b: string) => readdirSync(dispatchDir).some((f: string) => {
+        if (!f.includes('contract-rework') || !f.includes(`-b${b}-${versions.get(b)}`)
+          || !f.endsWith('.result.json')) return false;
+        try {
+          const result = JSON.parse(readFileSync(join(dispatchDir, f), 'utf8'));
+          return result.ok === true && result.run === ctx.run
+            && String(result.label ?? '').endsWith(`-b${b}-${versions.get(b)}`)
+            && Array.isArray(result.covers) && result.covers.map(String).includes(b);
+        } catch { return false; }
+      });
       const pendingRework = batchesOwed.filter((b) => {
         try { return !reworkDone(b); } catch { return true; }
       });
@@ -2877,12 +3071,14 @@ export const stages = [
           executor.start(stage, {
             role: 'beta',
             job: 'authoring',
-            covers: [],
             brief: 'briefs/authoring.md',
             task: [`research/${ctx.run}-beta-contract-rework.task.md`],
             timeout: 14400,
             ...(override ?? {}),
-            label: `contract-rework-${round}-b${b}`,
+            // The batch is both prompt identity (`<i>`) and evidence identity.
+            // An obligation override may substitute a lane, never the work unit.
+            covers: [b],
+            label: `contract-rework-${round}-b${b}-${versions.get(b)}`,
           });
         }
         return;

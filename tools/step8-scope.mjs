@@ -620,7 +620,7 @@ if (mode === 'published') {
   const escalated = rows.filter((r) => r.kind === 'escalated');
   const receiptPath = opt('out');
   const pending = { version: 1, run, repaired: [...new Set(repaired.map((row) => row.id).filter(Boolean))],
-    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], escalations: escalated };
+    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], open_fatal_rows: [], escalations: escalated };
 
   // An escalation is a real disposition and must not be silent: the owner rule
   // reserves deletions, id changes and reading-order changes on published pages,
@@ -716,12 +716,15 @@ if (mode === 'published') {
       } else if (answer.outcome === 'confirmed_fatal') {
         bad.push(`\`${r.id}\`: ${v.model} rejection was confirmed fatal and remains on the current text`);
         pending.open_fatal.push(r.id);
+        pending.open_fatal_rows.push({ id: v.id, model: v.model, context_sha256: v.context_sha256 });
       }
     }
   }
 
   pending.needs_rejudge = [...new Set(pending.needs_rejudge)].sort();
   pending.open_fatal = [...new Set(pending.open_fatal)].sort();
+  pending.open_fatal_rows.sort((a, b) => `${a.id}|${a.model}|${a.context_sha256}`
+    .localeCompare(`${b.id}|${b.model}|${b.context_sha256}`));
   pending.unadjudicated_rows.sort((a, b) => `${a.id}|${a.model}`.localeCompare(`${b.id}|${b.model}`));
   if (receiptPath) {
     const resolvedReceipt = receiptPath.startsWith('/') ? receiptPath : R(receiptPath);

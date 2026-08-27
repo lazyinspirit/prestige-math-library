@@ -19,6 +19,7 @@ import { stages } from '../stages/mathlib.mts';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const OBLIG = join(REPO, 'tools', 'obligations.mjs');
+const DISPATCH = join(REPO, 'tools', 'dispatch.mjs');
 
 const runTool = (tool: string, cwd: string, args: string[]) => spawnSync(process.execPath,
   [tool, ...args], { cwd, encoding: 'utf8', timeout: 60_000 });
@@ -105,14 +106,51 @@ test('the 10-contract-close hook routes an open contract row to the owning Beta,
   await s10.onGateFailure(args);
   assert.equal(started.length, 1);
   assert.equal(started[0].role, 'beta');
-  assert.equal(started[0].label, 'contract-rework-1-b2');
+  assert.match(started[0].label, /^contract-rework-1-b2-[a-f0-9]{16}$/);
+  assert.deepEqual(started[0].covers, ['2'], 'the batch resolves <i> and is recorded on result evidence');
 
-  // The rework result lands; the next round certifies instead of re-dispatching.
-  writeFileSync(join(repo, 'research', 'demo-dispatch', 'beta-contract-rework-1-b2.result.json'), '{"ok":true}');
+  // A failed result is not evidence: the owning Beta is re-dispatched.
+  writeFileSync(join(repo, 'research', 'demo-dispatch', `beta-${started[0].label}.result.json`), JSON.stringify({
+    ok: false, run: 'demo', label: started[0].label, covers: ['2'],
+  }));
   await s10.onGateFailure({ ...args, round: 2 });
   assert.equal(started.length, 2);
-  assert.equal(started[1].role, 'alpha');
-  assert.match(started[1].label, /certify-rework-2/);
+  assert.equal(started[1].role, 'beta');
+  assert.match(started[1].label, /^contract-rework-2-b2-[a-f0-9]{16}$/);
+
+  // Current ok:true evidence advances to independent certification.
+  writeFileSync(join(repo, 'research', 'demo-dispatch', `beta-${started[1].label}.result.json`), JSON.stringify({
+    ok: true, run: 'demo', label: started[1].label, covers: ['2'],
+  }));
+  await s10.onGateFailure({ ...args, round: 3 });
+  assert.equal(started.length, 3);
+  assert.equal(started[2].role, 'alpha');
+  assert.match(started[2].label, /certify-rework-3/);
+
+  // Editing the still-open row changes its evidence version; the old success is stale.
+  writeFileSync(join(repo, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+    defect_id: 'demo-rr-1', run: 'demo', disposition: 'open', location: 'contract-row', batch: '2',
+    certification_failure: 'checked row still does not match the proof',
+  }) + '\n');
+  await s10.onGateFailure({ ...args, round: 4 });
+  assert.equal(started.length, 4);
+  assert.equal(started[3].role, 'beta');
+  assert.notEqual(started[3].label.split('-').at(-1), started[1].label.split('-').at(-1),
+    'the current row version, not a historical batch filename, binds the evidence');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a contract-rework batch cover resolves every <i> in the dispatched task', () => {
+  const result = runTool(DISPATCH, REPO, [
+    '--role', 'beta', '--brief', 'briefs/authoring.md', '--task', 'briefs/tasks/beta-contract-rework.md',
+    '--label', 'contract-rework-1-b2-testversion', '--run', 'demo', '--covers', '2',
+    '--var', 'run=demo', '--var', 'i=2', '--dry-run', '--json',
+  ]);
+  assert.equal(result.status, 0, result.stderr);
+  const prompt = JSON.parse(result.stdout).prompt;
+  assert.doesNotMatch(prompt, /<i>/);
+  assert.match(prompt, /batch-2\.proof-contracts\.json/);
+  assert.match(prompt, /covers: 2/);
 });
 
 test('a quota-blocked rework is an outage on the obligation clock, not a burnt round', async () => {

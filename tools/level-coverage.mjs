@@ -508,6 +508,7 @@ const needsRejudge = [];      // no current configured-model verdict — repaire
 const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
 const unadjudicatedRows = []; // exact (id, model, context) work units for Step 8
 const openFatal = [];         // Alpha confirmed fatal against the text on disk
+const openFatalRows = [];     // exact current confirmed-fatal tuples for repair routing
 const judgeCoverage = [];
 const terminalResolved = [];
 for (const id of judgePath ? judgeScope : []) {
@@ -589,6 +590,7 @@ for (const id of judgePath ? judgeScope : []) {
         (allowUnadjudicated ? warn : error)('judge-adjudication-missing', `${id}: current ${model} rejection has no exact Alpha outcome for context ${hash}`, id);
       } else if (outcome.outcome === 'confirmed_fatal') {
         if (!openFatal.includes(id)) openFatal.push(id);
+        openFatalRows.push({ id, model, context_sha256: hash });
         error('judge-verdict-confirmed-fatal', `${id}: Alpha confirmed a current ${model} rejection as fatal (${outcome.defect_type}); repair and rejudge`, id);
       } else {
         warn('judge-verdict-adjudicated-nonfatal', `${id}: Alpha classified current ${model} rejection as ${outcome.outcome}`, id);
@@ -620,6 +622,9 @@ if (outPath) {
       a.id.localeCompare(b.id) || a.model.localeCompare(b.model)
         || a.context_sha256.localeCompare(b.context_sha256)),
     open_fatal: openFatal.sort(),
+    open_fatal_rows: openFatalRows.sort((a, b) =>
+      a.id.localeCompare(b.id) || a.model.localeCompare(b.model)
+        || a.context_sha256.localeCompare(b.context_sha256)),
     // `closed` is the unconditional predicate, ignoring the --allow-* relaxations:
     // a stage may be allowed to proceed with work outstanding, but nothing should
     // be able to read this receipt and conclude the level is finished when it is not.

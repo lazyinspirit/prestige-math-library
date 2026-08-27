@@ -1,7 +1,8 @@
 # Step 8 — frozen integrity close, `{{run}}`
 
-The final judge boundary is closed. Read the latest failed gate and review only
-the named ids owned by the generated group; use a focused check when supported.
+The final judge boundary is closed. The generated repair envelope above is
+authoritative: review only its exact `assigned_items` and `live_tuples`, with
+their explicit run or published scope; use a focused check when supported.
 
 Do not alter mathematical items, start a judge cycle, or change another group's
 records. You may correct a contract or receipt only when it exactly describes

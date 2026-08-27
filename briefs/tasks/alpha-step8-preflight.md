@@ -1,7 +1,9 @@
 # Step 8 — targeted repair-integrity review, `{{run}}`
 
-Read the latest failed gate and take only named ids owned by the generated
-group. Rerun the focused gate where it supports item scope.
+The generated repair envelope above is authoritative. It supplies every failed
+gate with full output, the exact live ids and rejection tuples, and each id's
+run or published scope. Take only its `assigned_items` and `live_tuples`; rerun
+the focused gate where it supports item scope.
 
 Complete a repair already licensed by an exact `confirmed_fatal` adjudication,
 or correct a documentary contract/manifest/impact/verification record that must
