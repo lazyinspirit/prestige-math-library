@@ -2,7 +2,7 @@
 id: thm-riesz-subsequence-theorem-for-convergence-in-measure
 kind: theorem
 title: "Riesz's subsequence theorem for convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-convergence-in-measure, def-convergence-almost-everywhere-relative-to
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-convergence-in-measure-limits-are-unique-almost-everywhere
 kind: theorem
 title: "Convergence in measure determines the limit almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-measure, def-measure-null-set-and-almost-everywhere, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

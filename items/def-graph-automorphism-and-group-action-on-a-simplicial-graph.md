@@ -2,7 +2,7 @@
 id: def-graph-automorphism-and-group-action-on-a-simplicial-graph
 kind: definition
 title: "Graph automorphisms and group actions on a simplicial graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

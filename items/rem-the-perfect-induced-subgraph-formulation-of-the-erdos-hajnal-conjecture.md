@@ -2,7 +2,7 @@
 id: rem-the-perfect-induced-subgraph-formulation-of-the-erdos-hajnal-conjecture
 kind: remark
 title: "The perfect-induced-subgraph formulation of the Erdos-Hajnal conjecture"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

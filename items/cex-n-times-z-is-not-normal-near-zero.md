@@ -2,7 +2,7 @@
 id: cex-n-times-z-is-not-normal-near-zero
 kind: counterexample
 title: "The family nz is not normal on any domain containing zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

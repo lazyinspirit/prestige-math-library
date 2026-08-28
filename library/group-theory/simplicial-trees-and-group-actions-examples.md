@@ -1,7 +1,7 @@
 ---
 page: simplicial-trees-and-group-actions-examples
 title: "Simplicial Trees and Group Actions - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-bi-infinite-line-and-its-translation-action,
            ex-regular-cayley-trees-of-free-groups,

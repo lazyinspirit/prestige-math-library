@@ -2,7 +2,7 @@
 id: lem-primary-decomposition-combine-equal-radicals
 kind: lemma
 title: "Equal-radical primary components can be combined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

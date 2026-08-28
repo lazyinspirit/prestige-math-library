@@ -2,7 +2,7 @@
 id: thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice
 kind: theorem
 title: "The subobjects of an object in an abelian category form a lattice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

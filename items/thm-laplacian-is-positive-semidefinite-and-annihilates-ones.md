@@ -2,7 +2,7 @@
 id: thm-laplacian-is-positive-semidefinite-and-annihilates-ones
 kind: theorem
 title: "The Laplacian is positive semidefinite and sends the all-ones vector to zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

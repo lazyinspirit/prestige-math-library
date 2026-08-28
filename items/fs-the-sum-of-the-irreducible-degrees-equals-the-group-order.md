@@ -2,7 +2,7 @@
 id: fs-the-sum-of-the-irreducible-degrees-equals-the-group-order
 kind: false-statement
 title: "False statement: the sum of the irreducible degrees equals $|G|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-the-riemann-sphere-is-homeomorphic-to-the-complex-plane
 kind: false-statement
 title: "FALSE: the Riemann sphere is homeomorphic to the complex plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

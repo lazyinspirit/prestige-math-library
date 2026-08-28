@@ -1,7 +1,7 @@
 ---
 page: cographs-perfect-patterns-and-pure-pairs-examples
 title: "Cographs, Perfect Patterns and Pure Pairs - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-four-cycle-is-a-cograph,
            ex-the-five-vertex-path-is-perfect-but-not-a-cograph,

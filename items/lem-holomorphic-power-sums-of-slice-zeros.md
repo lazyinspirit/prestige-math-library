@@ -2,7 +2,7 @@
 id: lem-holomorphic-power-sums-of-slice-zeros
 kind: lemma
 title: "The power sums of the slice zeros vary holomorphically"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

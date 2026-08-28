@@ -2,7 +2,7 @@
 id: ex-embedded-component-varies-but-radical-does-not
 kind: example
 title: "Two minimal decompositions of $(x^2,xy)$ share radicals but not the embedded component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

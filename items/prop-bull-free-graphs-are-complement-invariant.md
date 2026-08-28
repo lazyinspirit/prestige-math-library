@@ -2,7 +2,7 @@
 id: prop-bull-free-graphs-are-complement-invariant
 kind: proposition
 title: "A graph is bull-free if and only if its complement is bull-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

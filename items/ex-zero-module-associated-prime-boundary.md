@@ -2,7 +2,7 @@
 id: ex-zero-module-associated-prime-boundary
 kind: example
 title: "The zero module has empty support and no associated primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated

@@ -2,7 +2,7 @@
 id: ex-two-composition-series-of-a-module-refined
 kind: example
 title: "Two composition series of Z/12 refine to the same simple factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

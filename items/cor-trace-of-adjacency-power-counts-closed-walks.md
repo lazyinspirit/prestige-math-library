@@ -2,7 +2,7 @@
 id: cor-trace-of-adjacency-power-counts-closed-walks
 kind: corollary
 title: "The trace of $A(G)^k$ counts closed walks of length $k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

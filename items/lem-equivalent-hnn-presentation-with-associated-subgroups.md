@@ -2,7 +2,7 @@
 id: lem-equivalent-hnn-presentation-with-associated-subgroups
 kind: lemma
 title: "The edge-group presentation is equivalent to the associated-subgroup presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

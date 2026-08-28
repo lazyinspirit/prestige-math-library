@@ -2,7 +2,7 @@
 id: cor-a-measurable-function-on-a-finite-measure-subset-of-rn-agrees-off-a-small-set-with-a-continuous-function
 kind: corollary
 title: "Assuming countable choice and dependent choice, a measurable function on a finite-measure subset of R^n agrees there, off a small set, with a continuous function on R^n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lusins-theorem, thm-tietze-extension-theorem, lem-metrics-on-rn, thm-metric-spaces-are-completely-normal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

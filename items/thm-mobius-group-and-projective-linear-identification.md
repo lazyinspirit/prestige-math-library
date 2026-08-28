@@ -2,7 +2,7 @@
 id: thm-mobius-group-and-projective-linear-identification
 kind: theorem
 title: "Möbius transformations form a group and identify with the projective linear quotient of GL_2(C)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

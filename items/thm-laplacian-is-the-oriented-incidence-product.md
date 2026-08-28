@@ -2,7 +2,7 @@
 id: thm-laplacian-is-the-oriented-incidence-product
 kind: theorem
 title: "The Laplacian equals $BB^{\\mathsf T}$ for every oriented incidence matrix $B$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

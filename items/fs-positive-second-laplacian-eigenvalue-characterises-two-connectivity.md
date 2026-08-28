@@ -2,7 +2,7 @@
 id: fs-positive-second-laplacian-eigenvalue-characterises-two-connectivity
 kind: false-statement
 title: "FALSE: positive second Laplacian eigenvalue characterises 2-connectivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

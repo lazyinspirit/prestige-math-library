@@ -2,13 +2,14 @@
 id: def-cauchy-in-measure
 kind: definition
 title: "Cauchy sequences in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-convergence-in-measure]
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   references:

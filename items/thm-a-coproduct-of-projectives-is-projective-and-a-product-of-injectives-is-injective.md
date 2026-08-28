@@ -2,7 +2,7 @@
 id: thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective
 kind: theorem
 title: "A coproduct of projectives is projective and a product of injectives is injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

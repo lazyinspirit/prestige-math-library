@@ -2,7 +2,7 @@
 id: thm-three-point-transitivity-mobius-transformations
 kind: theorem
 title: "A unique Möbius transformation carries any ordered triple of distinct sphere points to any other"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

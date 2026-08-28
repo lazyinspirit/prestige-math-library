@@ -2,7 +2,7 @@
 id: prop-dominated-families-are-uniformly-integrable
 kind: proposition
 title: "Dominated families are uniformly integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-uniformly-integrable-family, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-absolute-continuity-of-the-integral, thm-chebyshev-markov-inequality-for-the-integral, thm-the-lebesgue-integral-respects-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-decomposition-into-irreducible-subrepresentations-is-unique
 kind: false-statement
 title: "False statement: a completely reducible representation has a unique decomposition into irreducible subrepresentations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

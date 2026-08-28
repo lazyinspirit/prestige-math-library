@@ -2,7 +2,7 @@
 id: lem-finite-modules-over-noetherian-rings-are-noetherian
 kind: lemma
 title: "Finite modules over Noetherian rings are Noetherian"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

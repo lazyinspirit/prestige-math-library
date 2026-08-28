@@ -2,7 +2,7 @@
 id: cex-exp-z-one-z-two-has-invertible-complex-jacobian-and-is-not-injective
 kind: counterexample
 title: "The map $(z_1,z_2)\\mapsto(e^{z_1},z_2)$ has invertible complex Jacobian everywhere and is not injective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

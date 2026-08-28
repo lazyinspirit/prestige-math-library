@@ -2,7 +2,7 @@
 id: lem-associated-prime-localises-reverse-finite
 kind: lemma
 title: "Associated primes of a localized finite module come from upstairs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

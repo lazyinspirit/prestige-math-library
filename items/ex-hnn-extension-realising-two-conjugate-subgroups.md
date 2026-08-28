@@ -2,7 +2,7 @@
 id: ex-hnn-extension-realising-two-conjugate-subgroups
 kind: example
 title: "An HNN extension realises two chosen isomorphic subgroups as conjugate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-dominated-convergence-is-a-vitali-corollary
 kind: corollary
 title: "Dominated convergence is a Vitali corollary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces, prop-dominated-families-are-uniformly-integrable, thm-almost-everywhere-convergence-implies-convergence-in-measure-on-finite-measure-spaces, thm-chebyshev-markov-inequality-for-the-integral, thm-monotone-convergence-for-the-integral, thm-the-lebesgue-integral-respects-almost-everywhere-equality, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-finite-and-countable-subadditivity-of-measures, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-automorphisms-punctured-plane
 kind: theorem
 title: "Every biholomorphic self-map of the punctured plane is of the form az or a/z"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-uniqueness-in-weierstrass-preparation
 kind: theorem
 title: "Uniqueness in Weierstrass preparation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

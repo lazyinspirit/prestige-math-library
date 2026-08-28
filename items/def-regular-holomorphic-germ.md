@@ -2,7 +2,7 @@
 id: def-regular-holomorphic-germ
 kind: definition
 title: "Regular holomorphic germs in the last variable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

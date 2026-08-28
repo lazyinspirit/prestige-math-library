@@ -2,7 +2,7 @@
 id: lem-stability-of-slice-zero-count-under-holomorphic-parameters
 kind: lemma
 title: "Nearby slices of a regular germ have the same zero count"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-regular-representation-of-z-mod-four-over-c-splits-into-four-characters
 kind: example
 title: "The regular representation of $\\mathbb Z/4\\mathbb Z$ over $\\mathbb C$ splits into its four characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

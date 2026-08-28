@@ -2,7 +2,7 @@
 id: rem-local-uniform-convergence-dictionary-on-plane-domains
 kind: remark
 title: "Locally uniform convergence on a plane domain is the already-published compact-convergence notion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: [rem-local-uniform-convergence-dictionary]
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

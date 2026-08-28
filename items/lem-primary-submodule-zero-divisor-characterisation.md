@@ -2,7 +2,7 @@
 id: lem-primary-submodule-zero-divisor-characterisation
 kind: lemma
 title: "Primary submodules are exactly quotients with nilpotent zero divisors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

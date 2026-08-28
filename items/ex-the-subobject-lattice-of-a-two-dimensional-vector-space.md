@@ -2,7 +2,7 @@
 id: ex-the-subobject-lattice-of-a-two-dimensional-vector-space
 kind: example
 title: "The subobject lattice of a two-dimensional vector space over F_2 is the diamond M_3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -44,4 +45,5 @@ non-distributive
 **Proof technique:** direct.
 
 1.1 Over $\mathbf F_2$, the nonzero vectors of $V$ are $(1,0)$, $(0,1)$, and $(1,1)$, and each spans a distinct one-dimensional subspace. Any two distinct lines meet only in $0$, and because they are not equal each pair spans all of $V$. So the subspace lattice has exactly the five elements $0$, the three lines, and $V$. [L1, algebra]
+
 2.1 This is the same five-element diamond described in [L2]. Hence the subobject lattice of a very familiar module can already be modular without being distributive. [L2, step 1.1] ∎

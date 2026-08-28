@@ -2,7 +2,7 @@
 id: thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order
 kind: theorem
 title: "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, the number of irreducible representations of $G$ equals the number of conjugacy classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

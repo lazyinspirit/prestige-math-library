@@ -2,7 +2,7 @@
 id: thm-basic-bull-free-graphs-are-two-narrow
 kind: theorem
 title: "Every basic bull-free graph is 2-narrow"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

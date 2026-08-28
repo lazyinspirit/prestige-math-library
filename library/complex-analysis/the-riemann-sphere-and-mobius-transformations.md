@@ -1,7 +1,7 @@
 ---
 page: the-riemann-sphere-and-mobius-transformations
 title: "The Riemann Sphere and Möbius Transformations"
-status: draft
+status: published
 items: [rem-riemann-sphere-one-point-compactification, def-riemann-sphere-holomorphic-charts, thm-stereographic-projection-riemann-sphere-homeomorphism, def-chordal-metric-riemann-sphere, thm-chordal-metric-induces-sphere-topology, def-meromorphic-function-riemann-sphere, def-mobius-transformation, def-cross-ratio-riemann-sphere, def-circline-and-reflection, thm-mobius-group-and-projective-linear-identification, thm-mobius-transformations-biholomorphic-sphere, thm-three-point-transitivity-mobius-transformations, thm-cross-ratio-mobius-invariant, thm-real-cross-ratio-circline-characterization, thm-mobius-preserves-circlines-and-reflections, thm-meromorphic-functions-riemann-sphere-are-rational, def-degree-rational-map-riemann-sphere, thm-rational-map-fibre-count-degree, thm-biholomorphic-self-maps-riemann-sphere-are-mobius, cor-entire-biholomorphisms-are-affine, thm-automorphisms-punctured-plane, thm-classification-mobius-transformations]
 examples: []
 ---

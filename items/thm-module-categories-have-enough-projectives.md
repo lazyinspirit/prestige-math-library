@@ -2,7 +2,7 @@
 id: thm-module-categories-have-enough-projectives
 kind: theorem
 title: "Module categories have enough projectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -46,5 +47,7 @@ every object
 **Proof technique:** direct.
 
 1.1 Let $M$ be a left $R$-module. By [L1], the canonical free module $R^{(M)}$ admits a surjection $R^{(M)}\twoheadrightarrow M$. [L1]
+
 2.1 Under the Axiom of Choice, [L2] makes $R^{(M)}$ projective. So $M$ admits a projective epimorphism from step 1.1. [L2, step 1.1]
+
 3.1 Since $M$ was arbitrary, [L3] shows that $R\text{-}\mathbf{Mod}$ has enough projectives. [L3, step 2.1] ∎

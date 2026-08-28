@@ -2,7 +2,7 @@
 id: thm-spectrum-of-the-petersen-graph
 kind: theorem
 title: "The Petersen graph has adjacency spectrum $\\{3,1^5,(-2)^4\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

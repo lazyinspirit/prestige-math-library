@@ -2,7 +2,7 @@
 id: thm-completeness-of-continuous-functions-for-local-uniform-convergence
 kind: theorem
 title: "Continuous complex-valued functions on a plane domain are complete for an exhaustion metric"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-weierstrass-quotient-is-a-finite-module
 kind: lemma
 title: "A quotient by a Weierstrass polynomial is a finite module over the smaller germ ring"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

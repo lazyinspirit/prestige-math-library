@@ -2,7 +2,7 @@
 id: lem-associated-primes-exact-sequence-left-inclusion
 kind: lemma
 title: "Associated primes of a submodule lie in those of the ambient module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

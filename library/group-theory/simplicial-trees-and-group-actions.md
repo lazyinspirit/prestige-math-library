@@ -1,7 +1,7 @@
 ---
 page: simplicial-trees-and-group-actions
 title: "Simplicial Trees and Group Actions"
-status: draft
+status: published
 items: [def-oriented-graph-with-edge-reversal,
         def-simplicial-path-reduced-path-cycle-and-connectedness,
         def-simplicial-tree,

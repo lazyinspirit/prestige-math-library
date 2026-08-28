@@ -2,7 +2,7 @@
 id: fs-every-tree-action-is-without-edge-inversions
 kind: false-statement
 title: "FALSE: every tree action is without edge inversions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

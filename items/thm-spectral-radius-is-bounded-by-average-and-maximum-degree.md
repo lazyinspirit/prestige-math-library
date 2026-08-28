@@ -2,7 +2,7 @@
 id: thm-spectral-radius-is-bounded-by-average-and-maximum-degree
 kind: theorem
 title: "The adjacency spectral radius lies between the average degree and the maximum degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

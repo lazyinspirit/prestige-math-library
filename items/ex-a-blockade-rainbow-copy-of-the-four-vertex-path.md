@@ -2,7 +2,7 @@
 id: ex-a-blockade-rainbow-copy-of-the-four-vertex-path
 kind: example
 title: "A four-block blockade-rainbow copy of P_4"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

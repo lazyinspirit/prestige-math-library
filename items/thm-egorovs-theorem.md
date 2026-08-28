@@ -2,7 +2,7 @@
 id: thm-egorovs-theorem
 kind: theorem
 title: "Egorov's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-convergence-almost-everywhere-relative-to-a-measure, def-almost-unifo
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

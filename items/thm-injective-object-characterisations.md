@@ -2,7 +2,7 @@
 id: thm-injective-object-characterisations
 kind: theorem
 title: "Injective object characterisations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -57,5 +58,7 @@ of epimorphisms onto them
 **Proof technique:** direct.
 
 1.1 By [L1], the opposite category $\mathcal A^{\mathrm{op}}$ is abelian. In that opposite category, the object $I$ is projective exactly when it is injective in $\mathcal A$, because monomorphisms and epimorphisms are exchanged. [L1, L3]
+
 2.1 Apply the projective characterization [L2] to $I$ inside $\mathcal A^{\mathrm{op}}$. The exactness statement there becomes exactness of $\mathcal A(-,I)$ on short exact sequences in $\mathcal A$, and splitting of an epimorphism onto $I$ in the opposite category is splitting of a monomorphism out of $I$ in $\mathcal A$. [L1, L2, step 1.1]
+
 3.1 Therefore conditions 1, 2, and 3 are equivalent in $\mathcal A$. [L3, step 2.1] ∎

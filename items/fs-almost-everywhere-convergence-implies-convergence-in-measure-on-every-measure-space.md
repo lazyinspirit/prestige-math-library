@@ -2,7 +2,7 @@
 id: fs-almost-everywhere-convergence-implies-convergence-in-measure-on-every-measure-space
 kind: false-statement
 title: "FALSE: almost-everywhere convergence implies convergence in measure on every measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-almost-everywhere-relative-to-a-measure, def-convergence-in-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

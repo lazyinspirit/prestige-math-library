@@ -2,7 +2,7 @@
 id: lem-associated-primes-contained-in-support
 kind: lemma
 title: "Associated primes lie in the support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-isotypic-component-of-a-completely-reducible-representation
 kind: definition
 title: "The isotypic component of a completely reducible representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

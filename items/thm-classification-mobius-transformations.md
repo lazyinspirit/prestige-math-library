@@ -2,7 +2,7 @@
 id: thm-classification-mobius-transformations
 kind: theorem
 title: "Nonidentity Möbius transformations are parabolic or conjugate to a dilation, with the projective trace invariant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

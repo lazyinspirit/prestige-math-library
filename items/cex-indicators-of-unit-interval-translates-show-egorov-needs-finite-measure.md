@@ -2,7 +2,7 @@
 id: cex-indicators-of-unit-interval-translates-show-egorov-needs-finite-measure
 kind: counterexample
 title: "The translated unit intervals show that Egorov needs finite total measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [cex-indicators-of-unit-interval-translates-converge-almost-everywhere-but-not-in-measure, thm-almost-uniform-convergence-implies-almost-everywhere-and-in-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

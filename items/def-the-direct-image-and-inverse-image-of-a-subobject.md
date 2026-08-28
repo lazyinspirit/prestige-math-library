@@ -2,7 +2,7 @@
 id: def-the-direct-image-and-inverse-image-of-a-subobject
 kind: definition
 title: "Direct and inverse image of a subobject"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-direct-and-inverse-image-of-subobjects-form-a-galois-connecti
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

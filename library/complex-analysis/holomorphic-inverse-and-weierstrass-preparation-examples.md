@@ -1,7 +1,7 @@
 ---
 page: holomorphic-inverse-and-weierstrass-preparation-examples
 title: "The Holomorphic Inverse Function Theorem and Weierstrass Preparation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-z-one-squared-minus-z-two-prepares-to-z-two-minus-z-one-squared,
            cex-z-one-z-two-is-not-regular-in-z-two-at-the-origin,

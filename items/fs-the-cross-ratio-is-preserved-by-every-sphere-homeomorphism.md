@@ -2,7 +2,7 @@
 id: fs-the-cross-ratio-is-preserved-by-every-sphere-homeomorphism
 kind: false-statement
 title: "FALSE: every self-homeomorphism of the Riemann sphere preserves the cross-ratio"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-barycentric-subdivision-removes-edge-inversions
 kind: lemma
 title: "Barycentric subdivision removes edge inversions while preserving the tree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

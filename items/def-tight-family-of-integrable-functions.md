@@ -2,13 +2,14 @@
 id: def-tight-family-of-integrable-functions
 kind: definition
 title: "A tight family of integrable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, def-integral-over-a-measurable-set]
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   references:

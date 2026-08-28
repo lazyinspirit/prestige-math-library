@@ -2,7 +2,7 @@
 id: def-algebraic-connectivity-of-a-graph
 kind: definition
 title: "The algebraic connectivity of a finite simple graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

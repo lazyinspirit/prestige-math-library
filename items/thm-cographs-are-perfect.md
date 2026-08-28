@@ -2,7 +2,7 @@
 id: thm-cographs-are-perfect
 kind: theorem
 title: "Every cograph is perfect"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

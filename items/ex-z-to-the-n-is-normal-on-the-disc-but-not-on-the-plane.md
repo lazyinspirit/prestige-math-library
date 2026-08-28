@@ -2,7 +2,7 @@
 id: ex-z-to-the-n-is-normal-on-the-disc-but-not-on-the-plane
 kind: example
 title: "The family z^n is normal on the unit disc and not normal on the complex plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

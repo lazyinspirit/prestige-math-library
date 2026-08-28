@@ -2,13 +2,14 @@
 id: def-convergence-almost-everywhere-relative-to-a-measure
 kind: definition
 title: "Convergence almost everywhere relative to a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure-null-set-and-almost-everywhere]
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

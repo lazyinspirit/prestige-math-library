@@ -2,7 +2,7 @@
 id: def-ascending-hnn-extension
 kind: definition
 title: "Ascending HNN extensions of injective endomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

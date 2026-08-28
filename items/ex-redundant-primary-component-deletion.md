@@ -2,7 +2,7 @@
 id: ex-redundant-primary-component-deletion
 kind: example
 title: 'A redundant four-term decomposition cleans up to $(x)\cap(x,y)^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated

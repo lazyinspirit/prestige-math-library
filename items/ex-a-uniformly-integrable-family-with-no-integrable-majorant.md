@@ -2,7 +2,7 @@
 id: ex-a-uniformly-integrable-family-with-no-integrable-majorant
 kind: example
 title: "A uniformly integrable family need not admit a single integrable majorant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-uniformly-integrable-family, thm-uniform-integrability-equivalent-to-l-one-boundedness-and-uniform-absolute-continuity-on-finite-measure-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

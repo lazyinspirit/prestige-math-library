@@ -1,7 +1,7 @@
 ---
 page: modes-of-convergence-egorov-and-lusin-examples
 title: "Modes of Convergence Egorov and Lusin: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-typewriter-sequence-converges-in-measure-and-in-l-one-but-nowhere-pointwise, ex-an-explicit-riesz-subsequence-for-the-typewriter-sequence, cex-indicators-of-unit-interval-translates-converge-almost-everywhere-but-not-in-measure, cex-indicators-of-unit-interval-translates-show-egorov-needs-finite-measure, cex-spikes-converge-almost-everywhere-and-in-measure-but-not-in-l-one, ex-egorov-for-the-powers-x-to-the-k-on-the-unit-interval, ex-lusin-for-the-indicator-of-the-rationals-in-the-unit-interval, ex-a-uniformly-integrable-family-with-no-integrable-majorant]
 ---

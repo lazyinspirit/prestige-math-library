@@ -2,7 +2,7 @@
 id: cor-the-dimension-of-the-center-of-k-g-is-the-number-of-conjugacy-classes
 kind: corollary
 title: "The dimension of $Z(k[G])$ is the number of conjugacy classes of $G$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

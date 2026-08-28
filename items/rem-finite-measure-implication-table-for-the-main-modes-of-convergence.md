@@ -2,13 +2,14 @@
 id: rem-finite-measure-implication-table-for-the-main-modes-of-convergence
 kind: remark
 title: "Implication table for the main modes of convergence on a finite measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-l-one-convergence-implies-convergence-in-measure, thm-almost-uniform-convergence-implies-almost-everywhere-and-in-measure, thm-almost-everywhere-convergence-implies-convergence-in-measure-on-finite-measure-spaces, prop-truncated-l-one-metric-metrises-convergence-in-measure-on-finite-measure-spaces, thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces, thm-egorovs-theorem, cor-riesz-subsequence-can-be-chosen-almost-uniformly-on-a-finite-measure-space]
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   references:

@@ -2,7 +2,7 @@
 id: fs-convergence-in-measure-implies-almost-everywhere-convergence
 kind: false-statement
 title: "FALSE: convergence in measure implies almost-everywhere convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-measure, def-convergence-almost-everywhere-relative-to-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

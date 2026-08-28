@@ -2,7 +2,7 @@
 id: ex-a-shear-makes-z-one-z-two-regular-in-z-two
 kind: example
 title: "A linear shear makes $z_1z_2$ regular in $z_2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

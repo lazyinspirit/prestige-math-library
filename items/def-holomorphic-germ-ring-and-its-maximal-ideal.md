@@ -2,7 +2,7 @@
 id: def-holomorphic-germ-ring-and-its-maximal-ideal
 kind: definition
 title: "The ring of holomorphic germs at $0$ and its maximal ideal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

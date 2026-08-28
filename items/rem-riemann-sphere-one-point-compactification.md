@@ -2,7 +2,7 @@
 id: rem-riemann-sphere-one-point-compactification
 kind: remark
 title: "The Riemann sphere is the published one-point compactification of the complex plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

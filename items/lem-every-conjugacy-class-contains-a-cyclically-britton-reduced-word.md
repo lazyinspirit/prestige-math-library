@@ -2,7 +2,7 @@
 id: lem-every-conjugacy-class-contains-a-cyclically-britton-reduced-word
 kind: lemma
 title: "Every HNN conjugacy class contains a cyclically Britton-reduced representative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-prime-filtration-of-a-finite-module
 kind: theorem
 title: "Finite modules over Noetherian rings admit prime filtrations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-first-uniqueness-theorem-primary-decomposition
 kind: theorem
 title: "The radicals in a minimal primary decomposition are intrinsic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

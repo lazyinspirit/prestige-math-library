@@ -2,7 +2,7 @@
 id: rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route
 kind: remark
 title: "Substituting perfect graphs preserves perfection"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -18,6 +18,10 @@ external_dependency:
   local_proof_attempt: "The proof route is classical perfect-graph theory. The present batch needs only the exact preservation statement in order to lift good-function bounds across substitutions."
   necessity: "The theorem that alpha-narrowness is preserved under substitution uses this perfectness-preservation step to verify that the compressed function on the outer graph is still good."
 verification:
+  sources_checked:
+    date: 2026-08-28
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

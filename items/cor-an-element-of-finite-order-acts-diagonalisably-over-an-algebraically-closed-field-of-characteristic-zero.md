@@ -2,7 +2,7 @@
 id: cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero
 kind: corollary
 title: "Over an algebraically closed field of characteristic $0$, every element of finite order acts diagonalisably in a finite-dimensional representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

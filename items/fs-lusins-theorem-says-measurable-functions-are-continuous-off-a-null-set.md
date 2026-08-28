@@ -2,7 +2,7 @@
 id: fs-lusins-theorem-says-measurable-functions-are-continuous-off-a-null-set
 kind: false-statement
 title: "FALSE: assuming countable choice, Lusin's theorem says measurable functions are continuous off a null set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lusins-theorem, lem-q-and-irrationals-dense-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

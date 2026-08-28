@@ -2,7 +2,7 @@
 id: fs-l-one-convergence-implies-almost-everywhere-convergence
 kind: false-statement
 title: "FALSE: convergence in L^1(mu) forces almost-everywhere convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-l-one-of-a-measure, def-convergence-almost-everywhere-relative-to-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-grothendieck-category
 kind: definition
 title: "Grothendieck category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

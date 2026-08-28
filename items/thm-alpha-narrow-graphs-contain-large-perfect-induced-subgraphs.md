@@ -2,7 +2,7 @@
 id: thm-alpha-narrow-graphs-contain-large-perfect-induced-subgraphs
 kind: theorem
 title: "An $\\alpha$-narrow graph contains a perfect induced subgraph of order at least $|V(G)|^{1/\\alpha}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-annihilator-of-a-cyclic-submodule
 kind: lemma
 title: "A cyclic submodule is a residue module by its annihilator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

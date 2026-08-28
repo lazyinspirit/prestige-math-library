@@ -2,7 +2,7 @@
 id: thm-cographs-are-exactly-the-p-four-free-graphs
 kind: theorem
 title: "The cographs are exactly the P_4-free graphs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

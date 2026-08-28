@@ -2,13 +2,14 @@
 id: def-almost-uniform-convergence
 kind: definition
 title: "Almost uniform convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure-space, def-pointwise-uniform-and-uniformly-cauchy-convergence]
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

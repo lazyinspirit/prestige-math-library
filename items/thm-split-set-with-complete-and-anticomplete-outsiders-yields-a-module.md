@@ -2,7 +2,7 @@
 id: thm-split-set-with-complete-and-anticomplete-outsiders-yields-a-module
 kind: theorem
 title: "A split set with both a complete and an anticomplete outside vertex yields a nontrivial module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

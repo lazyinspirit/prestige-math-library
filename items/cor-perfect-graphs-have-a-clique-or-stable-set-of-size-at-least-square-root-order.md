@@ -2,7 +2,7 @@
 id: cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order
 kind: corollary
 title: "Every perfect graph has a clique or stable set of size at least the square root of its order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

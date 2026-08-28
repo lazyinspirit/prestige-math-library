@@ -2,7 +2,7 @@
 id: thm-isolated-primary-components-are-unique
 kind: theorem
 title: "Isolated primary components are recovered by localization and contraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

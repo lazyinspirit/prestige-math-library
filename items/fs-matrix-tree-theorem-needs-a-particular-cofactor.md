@@ -2,7 +2,7 @@
 id: fs-matrix-tree-theorem-needs-a-particular-cofactor
 kind: false-statement
 title: "FALSE: the matrix-tree theorem works only for one distinguished cofactor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

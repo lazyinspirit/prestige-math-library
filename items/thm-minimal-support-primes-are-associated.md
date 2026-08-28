@@ -2,7 +2,7 @@
 id: thm-minimal-support-primes-are-associated
 kind: theorem
 title: "Minimal support primes of a finite module are associated"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: rem-strong-perfect-graph-theorem-for-the-bull-route
 kind: remark
 title: "Strong Perfect Graph Theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -18,6 +18,10 @@ external_dependency:
   local_proof_attempt: "The library does not yet build the deep perfect-graph structure theorem needed for this equivalence, and the bull-free page needs only its exact criterion as cited by the source."
   necessity: "The neighborhood-versus-antineighborhood perfection theorem for basic bull-free graphs uses the odd-hole/odd-antihole criterion in both the graph and its complement."
 verification:
+  sources_checked:
+    date: 2026-08-28
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

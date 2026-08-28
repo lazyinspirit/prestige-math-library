@@ -2,7 +2,7 @@
 id: lem-associated-prime-localises-forward
 kind: lemma
 title: "Associated primes localize forward"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

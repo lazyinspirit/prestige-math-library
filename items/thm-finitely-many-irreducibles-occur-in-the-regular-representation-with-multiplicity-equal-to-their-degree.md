@@ -2,7 +2,7 @@
 id: thm-finitely-many-irreducibles-occur-in-the-regular-representation-with-multiplicity-equal-to-their-degree
 kind: theorem
 title: "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, there are finitely many irreducible representations, and each occurs in the regular representation with multiplicity equal to its degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

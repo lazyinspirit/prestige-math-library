@@ -2,7 +2,7 @@
 id: ex-cayley-transform-biholomorphism-upper-half-plane-to-disc
 kind: example
 title: "The Cayley transform carries the upper half-plane biholomorphically onto the unit disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

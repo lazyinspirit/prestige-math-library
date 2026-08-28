@@ -1,7 +1,7 @@
 ---
 page: hnn-extensions-and-brittons-lemma-examples
 title: "Hnn Extensions and Brittons Lemma - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-direct-product-a-times-z-as-an-hnn-extension,
            ex-baumslag-solitar-groups-as-hnn-extensions,

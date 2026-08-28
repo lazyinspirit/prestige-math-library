@@ -2,7 +2,7 @@
 id: ex-an-ascending-hnn-extension-from-doubling-the-integers
 kind: example
 title: "An ascending HNN extension from doubling the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-uniform-integrability-implies-domination-by-an-integrable-function
 kind: false-statement
 title: "FALSE: uniform integrability implies domination by one integrable function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-uniformly-integrable-family]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

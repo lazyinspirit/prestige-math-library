@@ -2,7 +2,7 @@
 id: thm-tau-critical-graphs-have-no-wide-cograph-pattern-blockades
 kind: theorem
 title: "A tau-critical graph has no wide pure blockade with cograph pattern"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -26,6 +26,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

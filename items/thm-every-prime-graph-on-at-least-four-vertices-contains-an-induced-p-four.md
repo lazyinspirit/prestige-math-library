@@ -2,7 +2,7 @@
 id: thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four
 kind: theorem
 title: "Every prime graph on at least four vertices contains an induced P_4"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

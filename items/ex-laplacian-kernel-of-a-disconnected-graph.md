@@ -2,7 +2,7 @@
 id: ex-laplacian-kernel-of-a-disconnected-graph
 kind: example
 title: "A disconnected graph has a Laplacian kernel spanned by its component indicators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

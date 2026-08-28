@@ -2,7 +2,7 @@
 id: lem-finite-prime-avoidance
 kind: lemma
 title: "An ideal contained in a finite union of prime ideals lies in one of them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

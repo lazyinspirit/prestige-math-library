@@ -2,7 +2,7 @@
 id: lem-path-metric-on-a-tree-is-geodesic-and-integer-valued
 kind: lemma
 title: "The path metric on a simplicial tree is geodesic and integer-valued"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-sum-of-squares-formula-for-irreducible-degrees
 kind: corollary
 title: "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, then $\\sum_i (\\dim_k V_i)^2=|G|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-adjacency-matrix-powers-count-walks
 kind: theorem
 title: "The $(i,j)$ entry of $A(G)^k$ counts walks of length $k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

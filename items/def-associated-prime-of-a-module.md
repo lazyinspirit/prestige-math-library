@@ -2,7 +2,7 @@
 id: def-associated-prime-of-a-module
 kind: definition
 title: "Associated primes of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -35,4 +35,3 @@ for some element $m \in M$. The set of associated primes of $M$ is denoted
 $$
 \operatorname{Ass}_R(M).
 $$
-

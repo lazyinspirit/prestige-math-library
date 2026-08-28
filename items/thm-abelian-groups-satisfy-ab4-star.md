@@ -2,7 +2,7 @@
 id: thm-abelian-groups-satisfy-ab4-star
 kind: theorem
 title: "Assuming the Axiom of Choice, abelian groups satisfy AB4*"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

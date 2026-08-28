@@ -2,7 +2,7 @@
 id: cor-algebraic-connectivity-characterises-connectedness
 kind: corollary
 title: "A finite simple graph is connected if and only if its algebraic connectivity is positive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

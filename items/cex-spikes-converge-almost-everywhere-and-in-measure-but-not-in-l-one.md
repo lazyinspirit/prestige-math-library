@@ -2,7 +2,7 @@
 id: cex-spikes-converge-almost-everywhere-and-in-measure-but-not-in-l-one
 kind: counterexample
 title: "The spikes k chi_(0,1/k) converge almost everywhere and in measure to zero but not in L^1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-almost-everywhere-relative-to-a-measure, def-convergence-in-measure, def-convergence-in-l-one-of-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

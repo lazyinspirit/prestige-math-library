@@ -2,7 +2,7 @@
 id: ex-weierstrass-division-of-z-one-by-z-two-squared-minus-z-one
 kind: example
 title: "Dividing $z_1$ by the Weierstrass polynomial $z_2^2-z_1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

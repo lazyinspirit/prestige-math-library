@@ -2,7 +2,7 @@
 id: def-normal-family-of-holomorphic-functions
 kind: definition
 title: "Normal families of holomorphic functions on a plane domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

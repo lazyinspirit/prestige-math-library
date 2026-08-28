@@ -1,7 +1,7 @@
 ---
 page: subobject-lattices-generators-and-the-grothendieck-axioms
 title: "Subobject Lattices Generators and the Grothendieck Axioms"
-status: draft
+status: published
 items: [def-modular-lattice,
         def-the-join-of-subobjects-in-an-abelian-category,
         thm-the-join-of-subobjects-is-their-least-upper-bound,

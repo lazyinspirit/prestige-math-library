@@ -2,7 +2,7 @@
 id: cor-compact-open-topology-is-independent-of-exhaustion
 kind: corollary
 title: "The compact-open topology on C(Ω,C) is independent of the chosen compact exhaustion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

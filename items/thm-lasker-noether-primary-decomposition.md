@@ -2,7 +2,7 @@
 id: thm-lasker-noether-primary-decomposition
 kind: theorem
 title: "Every submodule of a finite module over a Noetherian ring has a minimal primary decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

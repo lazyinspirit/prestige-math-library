@@ -2,7 +2,7 @@
 id: thm-pure-blockades-with-cograph-patterns-have-additive-kappa
 kind: theorem
 title: "A pure blockade with a cograph pattern has additive kappa"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

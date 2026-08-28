@@ -2,7 +2,7 @@
 id: lem-basic-bull-free-hole-with-a-complete-outside-vertex
 kind: lemma
 title: "In a basic bull-free graph, an odd hole with a complete outside vertex has tightly constrained neighbors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

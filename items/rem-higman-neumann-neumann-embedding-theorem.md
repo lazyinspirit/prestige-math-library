@@ -2,7 +2,7 @@
 id: rem-higman-neumann-neumann-embedding-theorem
 kind: remark
 title: "Higman-Neumann-Neumann: every countable group embeds in a two-generator group"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -13,6 +13,10 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  sources_checked:
+    date: 2026-08-28
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

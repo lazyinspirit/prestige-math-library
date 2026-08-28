@@ -2,7 +2,7 @@
 id: cor-radical-ideals-as-intersections-of-minimal-primes-noetherian
 kind: corollary
 title: "A radical ideal in a Noetherian ring is the intersection of its minimal primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

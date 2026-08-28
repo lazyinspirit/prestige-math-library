@@ -2,7 +2,7 @@
 id: cex-the-opposite-of-abelian-groups-does-not-satisfy-ab5
 kind: counterexample
 title: "The opposite of abelian groups does not satisfy AB5"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -39,4 +40,5 @@ The opposite category $\mathbf{Ab}^{\mathrm{op}}$ satisfies AB5.
 ## Counterexample
 
 1.1 By [L2], the opposite category $\mathbf{Ab}^{\mathrm{op}}$ is again abelian. Passing to the opposite exchanges joins with meets and AB5 with AB5*. [L2, algebra]
+
 2.1 If $\mathbf{Ab}^{\mathrm{op}}$ satisfied AB5, then $\mathbf{Ab}$ would satisfy AB5*. This contradicts [L1]. Therefore $\mathbf{Ab}^{\mathrm{op}}$ does not satisfy AB5. [L1, step 1.1] ∎

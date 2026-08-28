@@ -2,7 +2,7 @@
 id: cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter
 kind: corollary
 title: "Every bull-free graph has a clique or stable set of size at least $|V(G)|^{1/4}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

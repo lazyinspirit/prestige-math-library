@@ -2,7 +2,7 @@
 id: fs-egorovs-theorem-holds-on-every-measure-space
 kind: false-statement
 title: "FALSE: Egorov's theorem holds on every measure space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-almost-uniform-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-a-direct-summand-of-a-projective-is-projective
 kind: theorem
 title: "A direct summand of a projective is projective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -44,4 +45,5 @@ epimorphisms
 **Proof technique:** direct.
 
 1.1 Let $q:E\twoheadrightarrow M$ be epic and let $f:Q\to M$ be any morphism. Write $i:Q\to P$ and $r:P\to Q$ for the split inclusion and retraction, so $r i=1_Q$. The composite $f r:P\to M$ lifts across $q$ by [L1] to a map $\widetilde g:P\to E$. [L1, construct]
+
 2.1 Put $\widetilde f:=\widetilde g i:Q\to E$. Then $$q\widetilde f=q\widetilde g\,i=f r i=f.$$ So $Q$ has the lifting property against every epimorphism, hence is projective by [L1]. [L1, step 1.1] ∎

@@ -2,7 +2,7 @@
 id: cor-the-kernel-and-image-constructions-are-the-inverse-and-direct-images-along-a-morphism
 kind: corollary
 title: "Kernel and image are the inverse and direct images along a morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -49,5 +50,7 @@ $1_A:A\to A$ represent the zero and total subobjects
 **Proof technique:** direct.
 
 1.1 Pulling back the zero subobject $0\to A'$ along $f$ produces exactly the kernel square of $f$, so by [L1] and [L2] the inverse image $f^*(0)$ is $\ker(f)$. [L1, L2]
+
 1.2 The direct image of the identity subobject $1_A$ is, by [L1], the image of the composite $A\xrightarrow{1_A}A\xrightarrow f A'$, which is just the image of $f$ in the sense of [L3]. [L1, L2, L3]
+
 2.1 Therefore kernels and images are exactly inverse and direct images along the morphism $f$. [step 1.1, step 1.2] ∎

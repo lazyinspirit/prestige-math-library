@@ -2,7 +2,7 @@
 id: lem-associated-prime-equivalent-cyclic-embedding
 kind: lemma
 title: "Associated primes are exactly primes of embedded cyclic residue modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

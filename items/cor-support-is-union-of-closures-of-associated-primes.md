@@ -2,7 +2,7 @@
 id: cor-support-is-union-of-closures-of-associated-primes
 kind: corollary
 title: "The support is the union of the closures of the associated primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

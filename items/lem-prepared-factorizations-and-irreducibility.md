@@ -2,7 +2,7 @@
 id: lem-prepared-factorizations-and-irreducibility
 kind: lemma
 title: "Prepared factorizations correspond to germ factorizations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

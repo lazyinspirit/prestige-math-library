@@ -2,7 +2,7 @@
 id: cex-e-to-z-is-meromorphic-on-c-but-not-on-the-riemann-sphere
 kind: counterexample
 title: "The exponential function is meromorphic on C but not meromorphic on the Riemann sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical
 kind: proposition
 title: "A minimal counterexample to a kappa-bound is tau-critical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

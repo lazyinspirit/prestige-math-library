@@ -2,7 +2,7 @@
 id: lem-noetherian-ring-maximal-element-annihilator-exists
 kind: lemma
 title: "A nonzero module over a Noetherian ring has a maximal element annihilator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

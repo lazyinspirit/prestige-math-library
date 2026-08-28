@@ -2,7 +2,7 @@
 id: thm-real-cross-ratio-circline-characterization
 kind: theorem
 title: "Four distinct sphere points lie on one circline exactly when their cross-ratio is real"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-associated-primes-of-a-cyclic-module-are-primes-of-element-annihilators-modulo-ideal
 kind: corollary
 title: "Associated primes of a cyclic quotient are colon primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-regular-cayley-trees-of-free-groups
 kind: example
 title: "Regular Cayley trees of free groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

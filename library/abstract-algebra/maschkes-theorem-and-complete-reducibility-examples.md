@@ -1,7 +1,7 @@
 ---
 page: maschkes-theorem-and-complete-reducibility-examples
 title: "Maschke's Theorem, Complete Reducibility and the Structure of $k[G]$ — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-complex-group-algebra-of-z-mod-three-is-c-times-c-times-c, ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c, ex-the-complex-group-algebras-of-q-eight-and-dih-c-four-have-the-same-wedderburn-decomposition, ex-the-regular-representation-of-z-mod-four-over-c-splits-into-four-characters, ex-the-two-dimensional-trivial-representation-of-c-two-has-many-irreducible-splittings-but-one-isotypic-component, fs-maschkes-theorem-without-the-characteristic-hypothesis, fs-not-every-finite-dimensional-algebra-over-a-field-is-semisimple, fs-decomposition-into-irreducible-subrepresentations-is-unique, fs-the-sum-of-the-irreducible-degrees-equals-the-group-order, fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r]
 ---

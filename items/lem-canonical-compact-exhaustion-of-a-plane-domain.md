@@ -2,7 +2,7 @@
 id: lem-canonical-compact-exhaustion-of-a-plane-domain
 kind: lemma
 title: "Every plane domain has the canonical nested compact exhaustion by distance and radius cutoffs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

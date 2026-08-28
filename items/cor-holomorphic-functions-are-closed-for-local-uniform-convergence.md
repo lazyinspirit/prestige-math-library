@@ -2,7 +2,7 @@
 id: cor-holomorphic-functions-are-closed-for-local-uniform-convergence
 kind: corollary
 title: "Holomorphic functions form a closed subspace for locally uniform convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

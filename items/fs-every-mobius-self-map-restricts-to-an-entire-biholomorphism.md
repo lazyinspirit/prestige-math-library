@@ -2,7 +2,7 @@
 id: fs-every-mobius-self-map-restricts-to-an-entire-biholomorphism
 kind: false-statement
 title: "FALSE: every Möbius self-map of the Riemann sphere restricts to an entire biholomorphism of the complex plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

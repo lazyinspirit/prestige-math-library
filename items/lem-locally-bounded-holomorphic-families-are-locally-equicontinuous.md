@@ -2,7 +2,7 @@
 id: lem-locally-bounded-holomorphic-families-are-locally-equicontinuous
 kind: lemma
 title: "Locally bounded holomorphic families are locally equicontinuous"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

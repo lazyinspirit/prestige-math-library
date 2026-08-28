@@ -2,7 +2,7 @@
 id: thm-cauchy-in-measure-converges-in-measure
 kind: theorem
 title: "Cauchy sequences in measure converge in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cauchy-in-measure, def-convergence-in-measure, thm-finite-and-countable-subadditivity-of-measures, thm-continuity-from-above-for-measures, thm-uniform-cauchy-criterion-real-functions, prop-indicator-function-is-measurable-iff-its-set-is-measurable, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

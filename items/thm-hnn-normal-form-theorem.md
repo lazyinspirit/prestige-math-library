@@ -2,7 +2,7 @@
 id: thm-hnn-normal-form-theorem
 kind: theorem
 title: "Normal forms in an HNN extension are unique relative to chosen transversals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

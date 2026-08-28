@@ -2,7 +2,7 @@
 id: cor-l-one-convergence-has-an-almost-everywhere-convergent-subsequence
 kind: corollary
 title: "Convergence in L^1(mu) has an almost-everywhere convergent subsequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-l-one-convergence-implies-convergence-in-measure, thm-riesz-subsequence-theorem-for-convergence-in-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

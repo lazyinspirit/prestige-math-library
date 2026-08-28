@@ -2,7 +2,7 @@
 id: cor-bounded-domain-lusin-core-can-be-chosen-compact
 kind: corollary
 title: "Assuming countable choice, on a bounded measurable set, Lusin's closed core can be chosen compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-lusins-theorem, thm-heine-borel-rn]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

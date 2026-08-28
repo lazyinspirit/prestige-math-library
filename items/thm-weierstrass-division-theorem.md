@@ -2,7 +2,7 @@
 id: thm-weierstrass-division-theorem
 kind: theorem
 title: "Weierstrass division theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

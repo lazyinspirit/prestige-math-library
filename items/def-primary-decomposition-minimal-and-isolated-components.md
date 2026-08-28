@@ -2,7 +2,7 @@
 id: def-primary-decomposition-minimal-and-isolated-components
 kind: definition
 title: "Primary decompositions, minimality, and isolated components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

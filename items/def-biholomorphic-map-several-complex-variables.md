@@ -2,7 +2,7 @@
 id: def-biholomorphic-map-several-complex-variables
 kind: definition
 title: "Biholomorphic maps between open sets in $\\mathbb{C}^m$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

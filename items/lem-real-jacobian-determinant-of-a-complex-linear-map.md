@@ -2,7 +2,7 @@
 id: lem-real-jacobian-determinant-of-a-complex-linear-map
 kind: lemma
 title: "The real Jacobian determinant of a complex-linear automorphism is the squared modulus of its complex determinant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

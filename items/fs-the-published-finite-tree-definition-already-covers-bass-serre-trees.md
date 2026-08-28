@@ -2,7 +2,7 @@
 id: fs-the-published-finite-tree-definition-already-covers-bass-serre-trees
 kind: false-statement
 title: "FALSE: the published finite-tree definition already covers Bass-Serre trees"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

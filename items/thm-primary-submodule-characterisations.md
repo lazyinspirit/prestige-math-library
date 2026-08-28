@@ -2,7 +2,7 @@
 id: thm-primary-submodule-characterisations
 kind: theorem
 title: "Primary submodules of finite modules are characterized by a singleton associated-prime set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

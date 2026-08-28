@@ -2,7 +2,7 @@
 id: fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r
 kind: false-statement
 title: "False statement: a group with $r$ conjugacy classes has an irreducible representation of degree $r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-class-sums-form-a-basis-of-the-center-of-k-g
 kind: theorem
 title: "For a finite group, the class sums form a basis of $Z(k[G])$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

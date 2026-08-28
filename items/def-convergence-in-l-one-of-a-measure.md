@@ -2,13 +2,14 @@
 id: def-convergence-in-l-one-of-a-measure
 kind: definition
 title: "Convergence in L^1(mu)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-l-one-of-a-measure]
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   references:

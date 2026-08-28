@@ -2,7 +2,7 @@
 id: ex-adjacency-spectrum-of-c-four
 kind: example
 title: "The cycle $C_4$ has adjacency spectrum $\\{2,0,0,-2\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-indicators-of-unit-interval-translates-converge-almost-everywhere-but-not-in-measure
 kind: counterexample
 title: "The translates of the unit interval converge almost everywhere to zero but not in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-almost-everywhere-relative-to-a-measure, def-convergence-in-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

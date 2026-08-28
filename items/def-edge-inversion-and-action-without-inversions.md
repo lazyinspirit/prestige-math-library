@@ -2,7 +2,7 @@
 id: def-edge-inversion-and-action-without-inversions
 kind: definition
 title: "Edge inversions and actions without inversions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

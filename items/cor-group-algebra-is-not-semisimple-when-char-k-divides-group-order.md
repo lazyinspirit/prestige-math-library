@@ -2,7 +2,7 @@
 id: cor-group-algebra-is-not-semisimple-when-char-k-divides-group-order
 kind: corollary
 title: "If $\\operatorname{char} k \\mid |G|$, then $k[G]$ is not semisimple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

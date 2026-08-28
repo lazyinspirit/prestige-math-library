@@ -2,7 +2,7 @@
 id: thm-the-join-of-subobjects-is-their-least-upper-bound
 kind: theorem
 title: "The join of two subobjects is their least upper bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -53,5 +54,7 @@ factors ([[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors
 **Proof technique:** direct.
 
 1.1 Let $j:J\rightarrowtail A$ be the image inclusion of $[b,c]$. Since $[b,c]\iota_B=b$ and $[b,c]\iota_C=c$ for the biproduct injections, the factorization of $[b,c]$ through $j$ makes both $b$ and $c$ factor through $j$. Thus $B\le J$ and $C\le J$, so $J$ is an upper bound of the two subobjects. [L1, L2, L3]
+
 1.2 Let $n:N\rightarrowtail A$ be any common upper bound. Then $b=n u$ and $c=n v$ for suitable $u:B\to N$ and $v:C\to N$. By the universal property of $B\oplus C$, the induced map satisfies $[b,c]=n[u,v]$. Now [L2] says that the image inclusion $j$ factors through every monomorphism through which $[b,c]$ factors, so $J\le N$. [L2, L3, construct]
+
 2.1 Step 1.1 gives that $J$ is an upper bound, and step 1.2 gives that it lies below every upper bound. By [L3], this is exactly the least-upper-bound claim. [L3, step 1.1, step 1.2] ∎

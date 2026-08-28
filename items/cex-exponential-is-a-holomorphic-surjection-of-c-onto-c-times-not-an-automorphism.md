@@ -2,7 +2,7 @@
 id: cex-exponential-is-a-holomorphic-surjection-of-c-onto-c-times-not-an-automorphism
 kind: counterexample
 title: "The exponential map is a holomorphic surjection C to C^× that is not an automorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

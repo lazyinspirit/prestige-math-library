@@ -2,7 +2,7 @@
 id: ex-z-one-squared-minus-z-two-prepares-to-z-two-minus-z-one-squared
 kind: example
 title: "$z_1^2-z_2$ prepares to the Weierstrass polynomial $z_2-z_1^2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

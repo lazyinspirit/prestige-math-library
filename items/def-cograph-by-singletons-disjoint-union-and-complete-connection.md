@@ -2,7 +2,7 @@
 id: def-cograph-by-singletons-disjoint-union-and-complete-connection
 kind: definition
 title: "Cographs by the singleton, disjoint-union, and complete-connection recursion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

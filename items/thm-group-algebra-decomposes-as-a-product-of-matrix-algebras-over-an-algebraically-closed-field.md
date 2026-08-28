@@ -2,7 +2,7 @@
 id: thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field
 kind: theorem
 title: "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, then $k[G]\\cong\\prod_{i=1}^r M_{n_i}(k)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

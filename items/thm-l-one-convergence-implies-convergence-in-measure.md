@@ -2,7 +2,7 @@
 id: thm-l-one-convergence-implies-convergence-in-measure
 kind: theorem
 title: "Convergence in L^1(mu) implies convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-l-one-of-a-measure, def-convergence-in-measure, thm-chebyshev-markov-inequality-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

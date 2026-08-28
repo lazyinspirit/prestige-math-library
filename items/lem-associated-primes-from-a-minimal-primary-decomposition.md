@@ -2,7 +2,7 @@
 id: lem-associated-primes-from-a-minimal-primary-decomposition
 kind: lemma
 title: "The radicals in a minimal primary decomposition are exactly the associated primes of the quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-contraction-recovers-primary-component-after-localising-away-from-radical
 kind: lemma
 title: "A primary component is recovered by contracting its localization away from the radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

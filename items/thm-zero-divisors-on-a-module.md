@@ -2,7 +2,7 @@
 id: thm-zero-divisors-on-a-module
 kind: theorem
 title: "Zero divisors on a module over a Noetherian ring are the union of its associated primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

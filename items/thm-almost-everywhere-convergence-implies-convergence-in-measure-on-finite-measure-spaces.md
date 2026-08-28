@@ -2,7 +2,7 @@
 id: thm-almost-everywhere-convergence-implies-convergence-in-measure-on-finite-measure-spaces
 kind: theorem
 title: "On a finite measure space, almost-everywhere convergence implies convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-almost-everywhere-relative-to-a-measure, def-convergence-in-measure, thm-continuity-from-above-for-measures, prop-measure-monotonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

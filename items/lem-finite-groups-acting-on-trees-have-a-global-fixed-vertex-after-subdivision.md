@@ -2,7 +2,7 @@
 id: lem-finite-groups-acting-on-trees-have-a-global-fixed-vertex-after-subdivision
 kind: lemma
 title: "Finite groups acting on trees have a global fixed vertex after subdivision"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

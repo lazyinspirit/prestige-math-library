@@ -1,7 +1,7 @@
 ---
 page: bull-free-graphs-and-the-erdos-hajnal-property-examples
 title: "Bull-Free Graphs and the Erdős-Hajnal Property — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-bull-graph-is-self-complementary,
            cex-the-five-cycle-is-bull-free-but-not-perfect,

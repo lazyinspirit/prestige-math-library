@@ -2,7 +2,7 @@
 id: thm-stereographic-projection-riemann-sphere-homeomorphism
 kind: theorem
 title: "Stereographic projection identifies the Riemann sphere with the unit two-sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

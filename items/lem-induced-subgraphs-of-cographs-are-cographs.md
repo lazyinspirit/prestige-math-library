@@ -2,7 +2,7 @@
 id: lem-induced-subgraphs-of-cographs-are-cographs
 kind: lemma
 title: "Every induced subgraph of a cograph is a cograph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-irreducible-submodule-is-primary-noetherian
 kind: lemma
 title: "An irreducible submodule of a Noetherian module is primary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-second-isomorphism-theorem-in-an-abelian-category
 kind: theorem
 title: "Second isomorphism theorem in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -47,5 +48,7 @@ $$(B\vee C)/C\;\cong\;B/(B\wedge C).$$
 **Proof technique:** direct.
 
 1.1 Let $q:A\to A/C$ be the quotient map. Consider the composite $q b:B\to A/C$. By [L2], a morphism into $B$ is killed by $q b$ exactly when its composite into $A$ factors through $C$, which is exactly the pullback condition defining $B\wedge C$. So $\ker(q b)=B\wedge C$. [L2, construct]
+
 2.1 By [L3], step 1.1 gives a canonical isomorphism $$B/(B\wedge C)\cong \operatorname{im}(q b).$$ The map $q$ kills $C$, so its restriction to the join $B\vee C$ factors through the quotient $(B\vee C)/C$. Conversely, every summand used in the defining map $[b,c]$ lands in $\operatorname{im}(q b)$ after composing with $q$, because the $C$-summand dies. Hence $\operatorname{im}(q b)$ is exactly the image of $B\vee C$ in $A/C$, namely $(B\vee C)/C$. [L1, L3, step 1.1]
+
 3.1 Combining steps 1.1 and 2.1 yields the canonical isomorphism $(B\vee C)/C\cong B/(B\wedge C)$. [step 1.1, step 2.1] ∎

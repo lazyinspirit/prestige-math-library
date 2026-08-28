@@ -2,7 +2,7 @@
 id: thm-spectrum-of-the-complete-graph
 kind: theorem
 title: "The complete graph $K_n$ has adjacency spectrum $\\{n-1,(-1)^{n-1}\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

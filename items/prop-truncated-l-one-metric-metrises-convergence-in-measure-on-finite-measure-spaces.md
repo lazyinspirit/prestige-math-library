@@ -2,7 +2,7 @@
 id: prop-truncated-l-one-metric-metrises-convergence-in-measure-on-finite-measure-spaces
 kind: proposition
 title: "On a finite measure space, the truncated L^1 metric metrises convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-measure, def-integral-over-a-measurable-set, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

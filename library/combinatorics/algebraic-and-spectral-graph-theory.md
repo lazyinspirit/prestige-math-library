@@ -1,7 +1,7 @@
 ---
 page: algebraic-and-spectral-graph-theory
 title: "Algebraic and Spectral Graph Theory"
-status: draft
+status: published
 items: [def-adjacency-matrix-of-a-finite-simple-graph,
         def-graph-spectrum-spectral-radius-and-cospectrality,
         thm-adjacency-matrix-powers-count-walks,

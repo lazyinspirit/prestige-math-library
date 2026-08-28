@@ -2,7 +2,7 @@
 id: thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order
 kind: theorem
 title: "If $\\operatorname{char} k \\mid |G|$, the augmentation ideal of $k[G]$ has no $k[G]$-module complement in the regular representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

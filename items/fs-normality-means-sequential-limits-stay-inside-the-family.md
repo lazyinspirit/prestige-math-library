@@ -2,7 +2,7 @@
 id: fs-normality-means-sequential-limits-stay-inside-the-family
 kind: false-statement
 title: "FALSE: a normal family contains every locally uniform sequential limit of its own sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

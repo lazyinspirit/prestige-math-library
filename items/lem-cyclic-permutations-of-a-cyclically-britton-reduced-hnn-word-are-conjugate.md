@@ -2,7 +2,7 @@
 id: lem-cyclic-permutations-of-a-cyclically-britton-reduced-hnn-word-are-conjugate
 kind: lemma
 title: "Cyclic permutations of a cyclically Britton-reduced HNN word stay in the same conjugacy class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-bipartite-graph-iff-adjacency-spectrum-is-symmetric
 kind: theorem
 title: "A finite simple graph is bipartite if and only if its adjacency spectrum is symmetric about $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

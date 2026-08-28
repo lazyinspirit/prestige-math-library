@@ -2,7 +2,7 @@
 id: cex-the-five-cycle-is-bull-free-but-not-perfect
 kind: counterexample
 title: "The five-cycle is bull-free but not perfect"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

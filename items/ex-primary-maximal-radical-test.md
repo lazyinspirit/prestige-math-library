@@ -2,7 +2,7 @@
 id: ex-primary-maximal-radical-test
 kind: example
 title: "In a concrete Artinian local quotient, maximal radical forces primaryity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated

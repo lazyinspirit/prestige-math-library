@@ -2,7 +2,7 @@
 id: ex-primary-localisation-kills-a-component
 kind: example
 title: 'Localizing $(x^2,xy)=(x)\cap(x,y)^2$ keeps only the matching component'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

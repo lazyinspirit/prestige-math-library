@@ -2,7 +2,7 @@
 id: lem-primary-decomposition-delete-redundant-components
 kind: lemma
 title: "A finite primary decomposition can be stripped of redundant components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

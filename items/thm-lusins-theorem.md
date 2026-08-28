@@ -2,7 +2,7 @@
 id: thm-lusins-theorem
 kind: theorem
 title: "Assuming countable choice, Lusin's theorem on finite-measure subsets of R^n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-measurable-function-between-measurable-spaces, def-lebesgue-measure-a
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

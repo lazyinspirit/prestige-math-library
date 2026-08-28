@@ -2,7 +2,7 @@
 id: cex-cospectral-graphs-need-not-be-isomorphic
 kind: counterexample
 title: "Two cospectral graphs need not be isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: normal-families-and-montels-theorem-examples
 title: "Normal Families and Montel's Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-z-to-the-n-is-normal-on-the-disc-but-not-on-the-plane, ex-the-unit-ball-family-is-normal-on-any-domain, ex-diagonal-extraction-on-a-disc-for-montels-theorem, ex-the-exhaustion-metric-on-the-unit-disc, cex-n-times-z-is-not-normal-near-zero, cex-e-to-n-z-converges-chordally-to-infinity-on-the-right-half-plane, fs-normality-means-sequential-limits-stay-inside-the-family, fs-arzela-ascoli-alone-proves-montel, fs-a-chordal-limit-of-holomorphic-functions-cannot-be-identically-infinity]
 ---

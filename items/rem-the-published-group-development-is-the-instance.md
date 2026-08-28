@@ -2,7 +2,7 @@
 id: rem-the-published-group-development-is-the-instance
 kind: remark
 title: "The published abelian-group composition-series development is the instance"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

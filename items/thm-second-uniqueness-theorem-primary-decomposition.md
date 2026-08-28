@@ -2,7 +2,7 @@
 id: thm-second-uniqueness-theorem-primary-decomposition
 kind: theorem
 title: "Downward-closed intersections of primary components are intrinsic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

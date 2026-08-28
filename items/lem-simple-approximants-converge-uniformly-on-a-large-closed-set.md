@@ -2,7 +2,7 @@
 id: lem-simple-approximants-converge-uniformly-on-a-large-closed-set
 kind: lemma
 title: "Assuming countable choice, simple approximants to a measurable function can be made uniformly convergent on a large closed set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-measurable-functions-admit-dominated-simple-approximations, thm-egorovs-theorem, thm-lebesgue-inner-regularity-by-closed-and-compact-sets, lem-simple-functions-satisfy-lusins-theorem-on-a-finite-measure-set, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-jordan-holder-theorem-in-an-abelian-category
 kind: theorem
 title: "Jordan-Holder theorem in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,5 +50,7 @@ successive quotients
 **Proof technique:** direct.
 
 1.1 By [L2], the two composition series admit equivalent refinements. [given, L2]
+
 1.2 A composition series has no proper refinement. Indeed, if $A_{i-1}<K<A_i$, then the quotient map $A_i\to A_i/A_{i-1}$ carries $K$ to a nonzero proper subobject of the simple object $A_i/A_{i-1}$, contradicting [L1]. So any refinement of a composition series differs from it only by repeated adjacent terms. [L1, algebra]
+
 2.1 Delete repeated adjacent terms from the equivalent refinements of step 1.1. By step 1.2 this recovers the original two composition series, and the quotient pairing survives. Therefore the original series have the same number of factors, and a permutation matches their factors up to isomorphism. [step 1.1, step 1.2] ∎

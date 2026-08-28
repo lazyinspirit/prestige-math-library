@@ -2,7 +2,7 @@
 id: fs-arzela-ascoli-alone-proves-montel
 kind: false-statement
 title: "FALSE: Arzelà-Ascoli alone proves Montel's theorem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

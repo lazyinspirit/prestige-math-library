@@ -2,7 +2,7 @@
 id: ex-the-ring-as-a-generator-of-its-module-category
 kind: example
 title: "The ring R is a generator of R-Mod"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -47,4 +48,5 @@ such a generator ([[thm-module-categories-are-grothendieck-categories]]).
 **Proof technique:** direct.
 
 1.1 Every module homomorphism $u:R\to M$ is determined by $u(1)$, and every element $m\in M$ defines a homomorphism $u_m(r)=rm$. Therefore the canonical map $$\coprod_{m\in M} R\to M$$ that sends the $m$-indexed basis vector to $m$ is surjective. [L1, algebra]
+
 2.1 By [L1], this surjectivity is exactly the generator property for $R$, and [L2] records the same conclusion abstractly at the category level. [L1, L2, step 1.1] ∎

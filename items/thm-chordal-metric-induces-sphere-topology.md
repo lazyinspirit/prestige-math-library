@@ -2,7 +2,7 @@
 id: thm-chordal-metric-induces-sphere-topology
 kind: theorem
 title: "The chordal metric induces the standard topology of the Riemann sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

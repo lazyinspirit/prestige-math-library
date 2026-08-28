@@ -1,7 +1,7 @@
 ---
 page: bull-free-graphs-and-the-erdos-hajnal-property
 title: "Bull-Free Graphs and the Erdős-Hajnal Property"
-status: draft
+status: published
 items: [def-bull-graph,
         def-bull-free-graph,
         prop-bull-free-graphs-are-complement-invariant,

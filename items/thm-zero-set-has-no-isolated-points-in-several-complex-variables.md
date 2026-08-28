@@ -2,7 +2,7 @@
 id: thm-zero-set-has-no-isolated-points-in-several-complex-variables
 kind: theorem
 title: "A nonzero holomorphic hypersurface in complex dimension at least two has no isolated points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

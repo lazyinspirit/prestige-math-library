@@ -1,7 +1,7 @@
 ---
 page: hnn-extensions-and-brittons-lemma
 title: "Hnn Extensions and Brittons Lemma"
-status: draft
+status: published
 items: [def-hnn-extension-and-stable-letter,
         lem-equivalent-hnn-presentation-with-associated-subgroups,
         def-hnn-word-pin-and-britton-reduced-word,

@@ -2,7 +2,7 @@
 id: def-primary-submodule-and-primary-ideal
 kind: definition
 title: "Primary submodules and primary ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

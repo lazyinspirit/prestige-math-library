@@ -2,7 +2,7 @@
 id: thm-length-is-additive-along-a-subobject
 kind: theorem
 title: "Length is additive along a subobject"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -50,5 +51,7 @@ pulling a chain across a quotient or intersecting with a subobject
 **Proof technique:** direct.
 
 1.1 Assume $B$ and $A/B$ have finite length. Choose composition series $$0=B_0<\cdots<B_r=B,\qquad 0=C_0<\cdots<C_s=A/B.$$ Let $q:A\to A/B$ be the quotient map and put $D_j:=q^{-1}(C_j)$. Then $$B=D_0< D_1<\cdots< D_s=A,$$ and [L3] identifies each quotient $D_j/D_{j-1}$ with $C_j/C_{j-1}$. So $$0=B_0<\cdots<B_r=D_0< D_1<\cdots< D_s=A$$ is a composition series of $A$. Therefore $A$ has finite length and $\ell(A)=r+s=\ell(B)+\ell(A/B)$. [L1, L3, choose, construct]
+
 1.2 Assume now that $A$ has finite length, with composition series $$0=A_0< A_1<\cdots< A_n=A.$$ Intersecting with $B$ gives an increasing chain $$0=A_0\wedge B\le A_1\wedge B\le\cdots\le A_n\wedge B=B,$$ and quotienting by $B$ gives an increasing chain in $A/B$. By [L3], each successive factor in either chain is a subquotient of a simple factor $A_i/A_{i-1}$, hence is either $0$ or simple. Deleting repeated adjacent terms therefore yields composition series of $B$ and of $A/B$. [L1, L3, construct]
+
 2.1 Step 1.1 proves the extension direction and the displayed additive formula. Step 1.2 proves that finite length passes to subobjects and quotients. The number in the formula is independent of the chosen composition series by [L2]. [L2, step 1.1, step 1.2] ∎

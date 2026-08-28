@@ -2,7 +2,7 @@
 id: ex-k-four-is-bull-free-with-a-nontrivial-module
 kind: example
 title: "$K_4$ is bull-free and has a nontrivial module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

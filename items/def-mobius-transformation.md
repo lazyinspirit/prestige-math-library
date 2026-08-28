@@ -2,7 +2,7 @@
 id: def-mobius-transformation
 kind: definition
 title: "Möbius transformations of the Riemann sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

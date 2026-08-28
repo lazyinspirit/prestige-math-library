@@ -2,7 +2,7 @@
 id: ex-an-explicit-riesz-subsequence-for-the-typewriter-sequence
 kind: example
 title: "The leftmost dyadic intervals give an explicit almost-everywhere Riesz subsequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [ex-the-typewriter-sequence-converges-in-measure-and-in-l-one-but-nowhere-pointwise, thm-riesz-subsequence-theorem-for-convergence-in-measure, cor-riesz-subsequence-can-be-chosen-almost-uniformly-on-a-finite-measure-space]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

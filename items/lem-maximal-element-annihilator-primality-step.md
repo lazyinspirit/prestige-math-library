@@ -2,7 +2,7 @@
 id: lem-maximal-element-annihilator-primality-step
 kind: lemma
 title: "A maximal element annihilator is prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

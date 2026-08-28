@@ -2,7 +2,7 @@
 id: lem-simple-functions-satisfy-lusins-theorem-on-a-finite-measure-set
 kind: lemma
 title: "Assuming countable choice, simple functions are continuous on a large closed core"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-simple-function-and-canonical-representation, thm-lebesgue-inner-regularity-by-closed-and-compact-sets, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

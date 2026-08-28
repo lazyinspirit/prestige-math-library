@@ -2,7 +2,7 @@
 id: thm-radical-of-a-primary-ideal-is-prime
 kind: theorem
 title: "The radical of a primary ideal is prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

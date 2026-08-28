@@ -2,7 +2,7 @@
 id: ex-egorov-for-the-powers-x-to-the-k-on-the-unit-interval
 kind: example
 title: "Egorov for x^k on the unit interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-egorovs-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

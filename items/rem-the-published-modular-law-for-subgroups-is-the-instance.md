@@ -2,7 +2,7 @@
 id: rem-the-published-modular-law-for-subgroups-is-the-instance
 kind: remark
 title: "The published subgroup modular law is the instance"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

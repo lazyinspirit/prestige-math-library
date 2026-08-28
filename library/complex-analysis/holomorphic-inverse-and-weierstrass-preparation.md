@@ -1,7 +1,7 @@
 ---
 page: holomorphic-inverse-and-weierstrass-preparation
 title: "The Holomorphic Inverse Function Theorem and Weierstrass Preparation"
-status: draft
+status: published
 items: [def-biholomorphic-map-several-complex-variables,
         lem-real-jacobian-determinant-of-a-complex-linear-map,
         thm-holomorphic-inverse-function-theorem-several-variables,

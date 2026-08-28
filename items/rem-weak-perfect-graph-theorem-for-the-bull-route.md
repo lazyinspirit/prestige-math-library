@@ -2,7 +2,7 @@
 id: rem-weak-perfect-graph-theorem-for-the-bull-route
 kind: remark
 title: "Weak Perfect Graph Theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -18,6 +18,10 @@ external_dependency:
   local_proof_attempt: "The source page uses complement-invariance of perfection as a black box. Rebuilding Lovász's theorem here would add a separate perfect-graph theory package well beyond the local bull-free route."
   necessity: "The basic-graph narrowness proof passes to complements and must know that the good-function condition defined through perfect induced subgraphs is preserved by that passage."
 verification:
+  sources_checked:
+    date: 2026-08-28
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

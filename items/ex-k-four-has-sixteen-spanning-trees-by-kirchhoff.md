@@ -2,7 +2,7 @@
 id: ex-k-four-has-sixteen-spanning-trees-by-kirchhoff
 kind: example
 title: "Kirchhoff's formula gives $\\tau(K_4)=16$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

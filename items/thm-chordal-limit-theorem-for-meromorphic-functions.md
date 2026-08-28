@@ -2,7 +2,7 @@
 id: thm-chordal-limit-theorem-for-meromorphic-functions
 kind: theorem
 title: "A chordally locally uniform meromorphic limit is meromorphic or identically infinity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

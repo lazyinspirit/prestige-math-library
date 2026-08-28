@@ -2,7 +2,7 @@
 id: ex-lusin-for-the-indicator-of-the-rationals-in-the-unit-interval
 kind: example
 title: "The Dirichlet function satisfies Lusin's conclusion without being continuous anywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-rationals-countable, thm-finite-and-countable-subadditivity-of-measures, prop-measure-monotonicity, def-open-and-closed-in-r, lem-q-and-irrationals-dense-r]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

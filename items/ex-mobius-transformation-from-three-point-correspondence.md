@@ -2,7 +2,7 @@
 id: ex-mobius-transformation-from-three-point-correspondence
 kind: example
 title: "A Möbius transformation is recovered from three point correspondences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

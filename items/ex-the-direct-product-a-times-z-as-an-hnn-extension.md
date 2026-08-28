@@ -2,7 +2,7 @@
 id: ex-the-direct-product-a-times-z-as-an-hnn-extension
 kind: example
 title: "The direct product A x Z as an HNN extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

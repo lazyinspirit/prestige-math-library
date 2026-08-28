@@ -2,7 +2,7 @@
 id: cor-alpha-narrow-graphs-have-large-cliques-or-stable-sets
 kind: corollary
 title: "An $\\alpha$-narrow graph has a clique or stable set of size at least $|V(G)|^{1/(2\\alpha)}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

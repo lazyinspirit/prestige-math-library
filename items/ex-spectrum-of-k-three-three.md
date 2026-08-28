@@ -2,7 +2,7 @@
 id: ex-spectrum-of-k-three-three
 kind: example
 title: "The graph $K_{3,3}$ has adjacency spectrum $\\{3,0,0,0,0,-3\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

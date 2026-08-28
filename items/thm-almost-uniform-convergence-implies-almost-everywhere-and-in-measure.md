@@ -2,7 +2,7 @@
 id: thm-almost-uniform-convergence-implies-almost-everywhere-and-in-measure
 kind: theorem
 title: "Almost uniform convergence implies almost-everywhere convergence and convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-almost-uniform-convergence, def-convergence-almost-everywhere-relative-to-a-measure, def-convergence-in-measure, prop-measure-monotonicity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

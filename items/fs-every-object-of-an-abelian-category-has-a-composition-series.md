@@ -2,7 +2,7 @@
 id: fs-every-object-of-an-abelian-category-has-a-composition-series
 kind: false-statement
 title: "FALSE: every object of an abelian category has a composition series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -44,4 +45,5 @@ quotients
 ## Refutation
 
 1.1 Every nonzero subgroup of $\mathbb Z$ is of the form $n\mathbb Z$, hence is isomorphic to $\mathbb Z$. So if a composition series $0=A_0<\cdots<A_n=\mathbb Z$ existed, the first nonzero term $A_1$ would satisfy $A_1\cong\mathbb Z$, and the first quotient $A_1/A_0=A_1$ would not be simple. This contradicts [L1]. [L1, algebra]
+
 2.1 Therefore $\mathbb Z$ has no composition series, so by [L2] it is not of finite length. The universal statement is false even in $\mathbf{Ab}$. [L2, step 1.1] ∎

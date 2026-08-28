@@ -2,7 +2,7 @@
 id: thm-laplacian-kernel-dimension-counts-components
 kind: theorem
 title: "The multiplicity of the Laplacian eigenvalue $0$ equals the number of connected components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

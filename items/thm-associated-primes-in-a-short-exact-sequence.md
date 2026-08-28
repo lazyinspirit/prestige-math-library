@@ -2,7 +2,7 @@
 id: thm-associated-primes-in-a-short-exact-sequence
 kind: theorem
 title: "Associated primes in a short exact sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

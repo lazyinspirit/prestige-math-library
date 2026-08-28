@@ -2,7 +2,7 @@
 id: ex-the-typewriter-sequence-converges-in-measure-and-in-l-one-but-nowhere-pointwise
 kind: example
 title: "The typewriter sequence converges in measure and in L^1 but nowhere pointwise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-measure, def-convergence-in-l-one-of-a-measure, def-convergence-almost-everywhere-relative-to-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

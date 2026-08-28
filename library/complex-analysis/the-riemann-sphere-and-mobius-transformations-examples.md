@@ -1,7 +1,7 @@
 ---
 page: the-riemann-sphere-and-mobius-transformations-examples
 title: "The Riemann Sphere and Möbius Transformations — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cayley-transform-biholomorphism-upper-half-plane-to-disc, ex-mobius-transformation-from-three-point-correspondence, ex-classification-of-z-plus-one-two-z-and-one-over-z, ex-stereographic-projection-formulas-on-the-unit-sphere, ex-chordal-distance-formula-from-complex-coordinates, cex-e-to-z-is-meromorphic-on-c-but-not-on-the-riemann-sphere, cex-exponential-is-a-holomorphic-surjection-of-c-onto-c-times-not-an-automorphism, cex-complex-conjugation-is-a-sphere-homeomorphism-not-holomorphic, fs-every-mobius-self-map-restricts-to-an-entire-biholomorphism, fs-a-mobius-map-with-three-fixed-points-may-be-nonidentity, fs-the-cross-ratio-is-preserved-by-every-sphere-homeomorphism, fs-the-riemann-sphere-is-homeomorphic-to-the-complex-plane]
 ---

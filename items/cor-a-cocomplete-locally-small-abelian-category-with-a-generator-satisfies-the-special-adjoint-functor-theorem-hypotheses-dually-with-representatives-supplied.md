@@ -2,7 +2,7 @@
 id: cor-a-cocomplete-locally-small-abelian-category-with-a-generator-satisfies-the-special-adjoint-functor-theorem-hypotheses-dually-with-representatives-supplied
 kind: corollary
 title: "A cocomplete locally small abelian category with a generator supplies the category-side SAFT hypotheses dually"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

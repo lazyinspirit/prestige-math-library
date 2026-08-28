@@ -2,7 +2,7 @@
 id: fs-the-subobject-lattice-of-an-abelian-category-is-distributive
 kind: false-statement
 title: "FALSE: every subobject lattice in an abelian category is distributive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -41,4 +42,5 @@ non-distributive diamond
 ## Refutation
 
 1.1 The example [L1] exhibits an object of an abelian category whose subobject lattice is not distributive. [L1]
+
 2.1 Therefore the universal statement is false. In particular, modularity of subobject lattices does not imply distributivity. [L1, step 1.1] ∎

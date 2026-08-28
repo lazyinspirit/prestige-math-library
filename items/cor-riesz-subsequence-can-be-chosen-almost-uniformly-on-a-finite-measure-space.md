@@ -2,7 +2,7 @@
 id: cor-riesz-subsequence-can-be-chosen-almost-uniformly-on-a-finite-measure-space
 kind: corollary
 title: "On a finite measure space, convergence in measure has an almost-uniformly convergent subsequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riesz-subsequence-theorem-for-convergence-in-measure, thm-egorovs-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

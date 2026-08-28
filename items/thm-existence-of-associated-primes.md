@@ -2,7 +2,7 @@
 id: thm-existence-of-associated-primes
 kind: theorem
 title: "A nonzero module over a Noetherian ring has an associated prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

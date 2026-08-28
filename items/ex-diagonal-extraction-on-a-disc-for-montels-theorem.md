@@ -2,7 +2,7 @@
 id: ex-diagonal-extraction-on-a-disc-for-montels-theorem
 kind: example
 title: "Montel's diagonal extraction can be written out concretely on a disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

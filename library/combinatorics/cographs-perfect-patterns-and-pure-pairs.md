@@ -1,7 +1,7 @@
 ---
 page: cographs-perfect-patterns-and-pure-pairs
 title: "Cographs, Perfect Patterns and Pure Pairs"
-status: draft
+status: published
 items: [def-complete-connection-of-two-disjoint-graphs,
         def-cograph-by-singletons-disjoint-union-and-complete-connection,
         lem-induced-subgraphs-of-cographs-are-cographs,

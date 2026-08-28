@@ -2,7 +2,7 @@
 id: ex-the-unit-circle-is-a-holomorphic-graph-near-zero-one
 kind: example
 title: "Near $(0,1)$, the equation $z_1^2+z_2^2=1$ is a holomorphic graph"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

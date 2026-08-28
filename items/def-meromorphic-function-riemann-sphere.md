@@ -2,7 +2,7 @@
 id: def-meromorphic-function-riemann-sphere
 kind: definition
 title: "Meromorphic functions on the Riemann sphere"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

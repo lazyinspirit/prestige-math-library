@@ -2,7 +2,7 @@
 id: ex-the-complex-group-algebra-of-z-mod-three-is-c-times-c-times-c
 kind: example
 title: "$\\mathbb C[\\mathbb Z/3\\mathbb Z]\\cong\\mathbb C\\times\\mathbb C\\times\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

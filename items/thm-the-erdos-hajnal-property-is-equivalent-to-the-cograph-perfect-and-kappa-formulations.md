@@ -2,7 +2,7 @@
 id: thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations
 kind: theorem
 title: "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -25,6 +25,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

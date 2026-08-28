@@ -2,7 +2,7 @@
 id: thm-biholomorphic-self-maps-riemann-sphere-are-mobius
 kind: theorem
 title: "Every biholomorphic self-map of the Riemann sphere is Möbius"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-every-abelian-category-has-a-generator
 kind: false-statement
 title: "FALSE: every abelian category has a generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -39,5 +40,7 @@ Every abelian category has a generator.
 ## Refutation
 
 1.1 The category $\mathbf{FinAb}$ is abelian: kernels, cokernels, and finite biproducts of morphisms of finite abelian groups are again finite abelian groups. So [L2] applies to it. [L2, algebra]
+
 2.1 Let $G$ be any finite abelian group. Choose a prime $p$ not dividing the exponent of $G$. Then every homomorphism $G\to\mathbb Z/p$ is zero. Hence the identity map and the zero map of $\mathbb Z/p$ cannot be separated by precomposition with any map from $G$, so $G$ is not a generator by [L1]. Since $G$ was arbitrary, $\mathbf{FinAb}$ has no generator. [L1, step 1.1, choose]
+
 3.1 Thus not every abelian category has a generator. [step 2.1] ∎

@@ -2,7 +2,7 @@
 id: def-simplicial-path-metric
 kind: definition
 title: "The simplicial path metric on a tree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-path-metric-on-a-tree-is-geodesic-and-integer-valued]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

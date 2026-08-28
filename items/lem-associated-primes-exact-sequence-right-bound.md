@@ -2,7 +2,7 @@
 id: lem-associated-primes-exact-sequence-right-bound
 kind: lemma
 title: "Associated primes of the middle term lie in those of the ends"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

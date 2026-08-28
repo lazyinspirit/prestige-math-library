@@ -2,7 +2,7 @@
 id: thm-schreier-refinement-theorem-in-an-abelian-category
 kind: theorem
 title: "Schreier refinement theorem in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -48,5 +49,7 @@ be paired up up to isomorphism.
 **Proof technique:** direct.
 
 1.1 For $0\le i<m$ and $0\le j\le n$, define $$A_{i,j}:=A_i\vee(A_{i+1}\wedge B_j).$$ Then $A_{i,0}=A_i$ and $A_{i,n}=A_{i+1}$, while $A_{i,j}\le A_{i,j+1}$ for every $j$. Concatenating the chains $$A_i=A_{i,0}\le A_{i,1}\le\cdots\le A_{i,n}=A_{i+1}$$ over $i=0,\dots,m-1$ gives a refinement of the $A$-chain. Define $$B_{j,i}:=B_j\vee(B_{j+1}\wedge A_i)$$ symmetrically; concatenating those chains refines the $B$-chain. [F1, construct]
+
 2.1 For every cell $(i,j)$, apply [L1] to the pairs $A_i\le A_{i+1}$ and $B_j\le B_{j+1}$. It gives a canonical isomorphism $$ \frac{A_{i,j+1}}{A_{i,j}} \cong \frac{B_{j,i+1}}{B_{j,i}}. $$ So the successive quotients of the two refinements are paired by the same grid. [L1, step 1.1]
+
 3.1 Some adjacent terms may coincide, producing zero successive quotients. By [F1], deleting those repetitions leaves equivalent refinements, and the quotient pairing from step 2.1 survives on every nonzero factor. Hence the original two chains admit equivalent refinements. [F1, step 2.1] ∎

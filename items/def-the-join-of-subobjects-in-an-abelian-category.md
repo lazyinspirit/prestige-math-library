@@ -2,7 +2,7 @@
 id: def-the-join-of-subobjects-in-an-abelian-category
 kind: definition
 title: "The join of two subobjects in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-the-join-of-subobjects-is-their-least-upper-bound]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

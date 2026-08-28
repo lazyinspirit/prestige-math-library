@@ -2,7 +2,7 @@
 id: thm-composite-bull-free-graphs-have-a-nontrivial-module
 kind: theorem
 title: "Every composite bull-free graph has a nontrivial module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-directed-union-of-subgroups-meeting-a-fixed-subgroup
 kind: example
 title: "A directed union of subgroups distributes over intersection with a fixed subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -49,4 +50,5 @@ the statement.
 **Proof technique:** direct.
 
 1.1 The subgroups $B_n$ are directed by inclusion and their union is all of $A$, since every element of $A$ has finite support. Also $$B_n\cap C=\langle e_1+e_2,e_3,\dots,e_n\rangle$$ for $n\ge2$, because those are exactly the generators of $C$ lying in the first $n$ coordinates. [L1, algebra]
+
 2.1 Taking the union of the intersections from step 1.1 recovers all of $C$, so $$\bigvee_n(B_n\wedge C)=C=(\bigvee_n B_n)\wedge C.$$ This is precisely the AB5 identity [L1], exactly as the abstract theorem [L2] predicts for module categories. [L1, L2, step 1.1] ∎

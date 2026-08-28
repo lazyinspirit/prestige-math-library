@@ -2,7 +2,7 @@
 id: lem-newton-identities-for-slice-roots
 kind: lemma
 title: "Finite Newton recurrences for the slice zeros"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

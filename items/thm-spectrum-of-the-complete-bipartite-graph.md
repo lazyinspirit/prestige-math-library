@@ -2,7 +2,7 @@
 id: thm-spectrum-of-the-complete-bipartite-graph
 kind: theorem
 title: "The complete bipartite graph $K_{m,n}$ has adjacency spectrum $\\{\\sqrt{mn},0^{m+n-2},-\\sqrt{mn}\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

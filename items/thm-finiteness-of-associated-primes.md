@@ -2,7 +2,7 @@
 id: thm-finiteness-of-associated-primes
 kind: theorem
 title: "Finite modules over Noetherian rings have finitely many associated primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

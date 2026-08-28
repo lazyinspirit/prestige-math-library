@@ -2,7 +2,7 @@
 id: thm-meromorphic-functions-riemann-sphere-are-rational
 kind: theorem
 title: "Meromorphic functions on the Riemann sphere are exactly the rational functions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

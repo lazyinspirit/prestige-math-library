@@ -2,7 +2,7 @@
 id: lem-zero-divisor-annihilator-contained-in-associated-prime
 kind: lemma
 title: "A zero divisor is contained in an associated prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

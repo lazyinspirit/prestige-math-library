@@ -2,7 +2,7 @@
 id: ex-the-subobject-lattice-of-a-cyclic-group-of-order-twelve
 kind: example
 title: "The subobject lattice of a cyclic group of order twelve"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -44,4 +45,5 @@ subobject lattice is distributive, unlike the $M_3$ witness on the A page.
 **Proof technique:** direct.
 
 1.1 For each divisor $d$ of $12$, the cyclic group $C_{12}$ has a unique subgroup of order $d$, namely $\langle 12/d\rangle$. So the subgroup lattice is the divisor lattice of $12$ with elements of orders $1,2,3,4,6,12$. The meet is intersection, hence gcd of orders, and the join is subgroup sum, hence lcm of orders. [L1, algebra]
+
 2.1 The divisor lattice of a single integer is distributive, so this example is more rigid than the modular-only situation of [L2]. It therefore illustrates that modularity does not force every concrete subobject lattice to look like the $M_3$ example. [L2, step 1.1] ∎

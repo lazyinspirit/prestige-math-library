@@ -2,7 +2,7 @@
 id: thm-associated-primes-localise
 kind: theorem
 title: "Associated primes commute with localization for finite modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

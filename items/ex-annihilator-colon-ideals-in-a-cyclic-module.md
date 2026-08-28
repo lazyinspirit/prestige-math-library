@@ -2,7 +2,7 @@
 id: ex-annihilator-colon-ideals-in-a-cyclic-module
 kind: example
 title: "Colon ideals in $k[x,y]/(x^2,xy)$ recover its associated primes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

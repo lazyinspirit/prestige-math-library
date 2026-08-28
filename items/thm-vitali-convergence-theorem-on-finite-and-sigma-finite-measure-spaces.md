@@ -2,7 +2,7 @@
 id: thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces
 kind: theorem
 title: "Vitali convergence theorem on finite and sigma-finite measure spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-convergence-in-measure, def-convergence-in-l-one-of-a-measure, def-un
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:

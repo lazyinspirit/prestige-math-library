@@ -2,7 +2,7 @@
 id: fs-an-everywhere-invertible-complex-jacobian-forces-global-injectivity
 kind: false-statement
 title: "FALSE: an everywhere-invertible complex Jacobian forces global injectivity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

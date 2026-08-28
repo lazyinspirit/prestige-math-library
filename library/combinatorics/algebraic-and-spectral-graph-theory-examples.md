@@ -1,7 +1,7 @@
 ---
 page: algebraic-and-spectral-graph-theory-examples
 title: "Algebraic and Spectral Graph Theory — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-adjacency-spectrum-of-c-four,
            ex-laplacian-kernel-of-a-disconnected-graph,

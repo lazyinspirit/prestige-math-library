@@ -2,7 +2,7 @@
 id: lem-intersection-of-primary-submodules-with-same-radical
 kind: lemma
 title: "A finite intersection of primary submodules with one radical is primary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

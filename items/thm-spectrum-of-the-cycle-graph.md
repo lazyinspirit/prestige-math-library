@@ -2,7 +2,7 @@
 id: thm-spectrum-of-the-cycle-graph
 kind: theorem
 title: "The cycle graph $C_n$ has adjacency spectrum $\\{2\\cos(2\\pi j/n):0\\le j<n\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

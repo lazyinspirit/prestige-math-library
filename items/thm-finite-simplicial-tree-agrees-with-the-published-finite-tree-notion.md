@@ -2,7 +2,7 @@
 id: thm-finite-simplicial-tree-agrees-with-the-published-finite-tree-notion
 kind: theorem
 title: "For finite graphs, the simplicial-tree notion agrees with the published finite-tree notion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

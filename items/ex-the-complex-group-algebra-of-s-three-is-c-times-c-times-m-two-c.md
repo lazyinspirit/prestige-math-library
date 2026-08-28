@@ -2,7 +2,7 @@
 id: ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c
 kind: example
 title: "$\\mathbb C[S_3]\\cong\\mathbb C\\times\\mathbb C\\times M_2(\\mathbb C)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

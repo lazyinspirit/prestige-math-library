@@ -2,7 +2,7 @@
 id: thm-a-projective-generator-detects-isomorphisms
 kind: theorem
 title: "A projective generator detects isomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []
@@ -46,5 +47,7 @@ epic
 **Proof technique:** direct.
 
 1.1 Apply [L1] to the short exact sequences $0\to\ker(f)\to A\to \operatorname{im}(f)\to0$ and $0\to\operatorname{im}(f)\to B\to\operatorname{coker}(f)\to0$. Since $\mathcal A(P,f)$ is an isomorphism, the first sequence forces $\mathcal A(P,\ker(f))=0$ and the second forces $\mathcal A(P,\operatorname{coker}(f))=0$. [L1, construct]
+
 2.1 Let $X$ be any object with $\mathcal A(P,X)=0$. By [L2], the canonical map $\coprod_{u\in\mathcal A(P,X)} P\to X$ is epic. But the indexing set is empty, so this is the zero map $0\to X$. An epic zero map forces $X=0$. Applying this to the objects in step 1.1 gives $\ker(f)=0=\operatorname{coker}(f)$. [L2, step 1.1]
+
 3.1 Therefore $f$ is both monic and epic, hence an isomorphism in an abelian category. [step 2.1] ∎

@@ -1,7 +1,7 @@
 ---
 page: subobject-lattices-generators-and-the-grothendieck-axioms-examples
 title: "Subobject Lattices Generators and the Grothendieck Axioms — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-subobject-lattice-of-a-cyclic-group-of-order-twelve,
            ex-the-subobject-lattice-of-a-two-dimensional-vector-space,

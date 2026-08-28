@@ -2,7 +2,7 @@
 id: thm-spectral-gap-implies-connectivity-and-edge-expansion
 kind: theorem
 title: "For an $(n,d,\\lambda)$-graph with $\\lambda<d$, every nontrivial cut has many crossing edges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

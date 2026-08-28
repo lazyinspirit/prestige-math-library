@@ -2,7 +2,7 @@
 id: def-cross-ratio-riemann-sphere
 kind: definition
 title: "The cross-ratio of an ordered quadruple of sphere points"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

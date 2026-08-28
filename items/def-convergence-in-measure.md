@@ -2,13 +2,14 @@
 id: def-convergence-in-measure
 kind: definition
 title: "Convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure-space]
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   references:

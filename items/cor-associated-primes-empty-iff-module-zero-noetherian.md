@@ -2,7 +2,7 @@
 id: cor-associated-primes-empty-iff-module-zero-noetherian
 kind: corollary
 title: "A module over a Noetherian ring has no associated primes exactly when it is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

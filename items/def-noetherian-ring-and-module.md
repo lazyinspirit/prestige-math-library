@@ -2,7 +2,7 @@
 id: def-noetherian-ring-and-module
 kind: definition
 title: "Noetherian commutative rings and modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-28
   precheck: n/a
 sources:
   scraped: []

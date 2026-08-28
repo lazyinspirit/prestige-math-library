@@ -2,7 +2,7 @@
 id: ex-the-complex-group-algebras-of-q-eight-and-dih-c-four-have-the-same-wedderburn-decomposition
 kind: example
 title: "$\\mathbb C[Q_8]$ and $\\mathbb C[\\operatorname{Dih}(C_4)]$ both decompose as $\\mathbb C^4\\times M_2(\\mathbb C)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   scraped: []

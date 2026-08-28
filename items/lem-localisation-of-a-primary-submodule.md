@@ -2,7 +2,7 @@
 id: lem-localisation-of-a-primary-submodule
 kind: lemma
 title: "Localisation of a primary submodule either stays primary or becomes the whole module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

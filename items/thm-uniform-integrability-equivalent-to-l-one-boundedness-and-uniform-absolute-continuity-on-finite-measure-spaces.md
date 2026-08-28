@@ -2,7 +2,7 @@
 id: thm-uniform-integrability-equivalent-to-l-one-boundedness-and-uniform-absolute-continuity-on-finite-measure-spaces
 kind: theorem
 title: "On a finite measure space, uniform integrability is equivalent to L^1-boundedness plus uniform absolute continuity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-uniformly-integrable-family, def-l-one-of-a-measure, def-integral-over-a-measurable-set]
 proof_strategy: direct
 verification:
+  audited: 2026-08-28
   precheck: pass
 sources:
   references:
