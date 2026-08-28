@@ -1,0 +1,495 @@
+[
+  {
+    "order": 111.009,
+    "id": "associated-primes-and-primary-decomposition",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Associated Primes and Primary Decomposition",
+    "companion": "associated-primes-and-primary-decomposition-examples",
+    "requires": [
+      "artinian-rings-and-length-examples"
+    ],
+    "items": [
+      {
+        "id": "def-associated-prime-of-a-module",
+        "kind": "definition",
+        "title": "Associated primes of a module",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-annihilator-of-a-cyclic-submodule",
+        "kind": "lemma",
+        "title": "A cyclic submodule is a residue module by its annihilator",
+        "strategy": "Send the residue class of $r$ to $rm$. The kernel is exactly the annihilator of $m$, so the first isomorphism theorem identifies $Rm$ with $R/\\operatorname{Ann}(m)$.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-associated-prime-equivalent-cyclic-embedding",
+        "kind": "lemma",
+        "title": "Associated primes are exactly primes of embedded cyclic residue modules",
+        "strategy": "Use the cyclic-submodule identification to turn an element with annihilator $\\mathfrak p$ into an embedded copy of $R/\\mathfrak p$, and conversely read the annihilator of the image of $1$ in any embedding $R/\\mathfrak p\\hookrightarrow M$.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "lem-annihilator-of-a-cyclic-submodule"
+        ]
+      },
+      {
+        "id": "cor-associated-primes-of-a-cyclic-module-are-primes-of-element-annihilators-modulo-ideal",
+        "kind": "corollary",
+        "title": "Associated primes of a cyclic quotient are colon primes",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-quotient-module",
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-noetherian-ring-maximal-element-annihilator-exists",
+        "kind": "lemma",
+        "title": "A nonzero module over a Noetherian ring has a maximal element annihilator",
+        "strategy": "The annihilators of nonzero elements form a nonempty set of ideals, and the ascending chain condition on ideals in a Noetherian ring gives a maximal member.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "lem-maximal-element-annihilator-primality-step",
+        "kind": "lemma",
+        "title": "A maximal element annihilator is prime",
+        "strategy": "If $bc$ annihilates $m$ but $c$ does not, then $cm\\neq0$ and maximality forces $\\operatorname{Ann}(cm)=\\operatorname{Ann}(m)$, so $b$ lies in that annihilator.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "thm-existence-of-associated-primes",
+        "kind": "theorem",
+        "title": "A nonzero module over a Noetherian ring has an associated prime",
+        "strategy": "Choose a nonzero element whose annihilator is maximal among element annihilators, prove that annihilator prime, and then unpack the definition of associated prime.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "lem-noetherian-ring-maximal-element-annihilator-exists",
+          "lem-maximal-element-annihilator-primality-step"
+        ]
+      },
+      {
+        "id": "cor-associated-primes-empty-iff-module-zero-noetherian",
+        "kind": "corollary",
+        "title": "A module over a Noetherian ring has no associated primes exactly when it is zero",
+        "deps": [
+          "thm-existence-of-associated-primes"
+        ]
+      },
+      {
+        "id": "lem-associated-primes-exact-sequence-left-inclusion",
+        "kind": "lemma",
+        "title": "Associated primes of a submodule lie in those of the ambient module",
+        "strategy": "An embedded copy of $R/\\mathfrak p$ inside the submodule remains embedded after composing with the inclusion into the ambient module.",
+        "deps": [
+          "lem-associated-prime-equivalent-cyclic-embedding",
+          "def-exact-and-short-exact-sequences-of-modules"
+        ]
+      },
+      {
+        "id": "lem-associated-primes-exact-sequence-right-bound",
+        "kind": "lemma",
+        "title": "Associated primes of the middle term lie in those of the ends",
+        "strategy": "Intersect an embedded copy of $R/\\mathfrak p$ in the middle term with the submodule. If the intersection is zero it survives in the quotient; otherwise the nonzero intersection already realizes $\\mathfrak p$ in the left term.",
+        "deps": [
+          "lem-associated-prime-equivalent-cyclic-embedding",
+          "def-exact-and-short-exact-sequences-of-modules"
+        ]
+      },
+      {
+        "id": "thm-associated-primes-in-a-short-exact-sequence",
+        "kind": "theorem",
+        "title": "Associated primes in a short exact sequence",
+        "strategy": "Combine the left inclusion and the right bound, and record the direct-sum formula as the split special case needed later for primary intersections.",
+        "deps": [
+          "lem-associated-primes-exact-sequence-left-inclusion",
+          "lem-associated-primes-exact-sequence-right-bound"
+        ]
+      },
+      {
+        "id": "lem-associated-prime-localises-forward",
+        "kind": "lemma",
+        "title": "Associated primes localize forward",
+        "strategy": "Localize an embedding $R/\\mathfrak p\\hookrightarrow M$ and use the localization prime-spectrum correspondence to identify the source with $(S^{-1}R)/(S^{-1}\\mathfrak p)$.",
+        "deps": [
+          "lem-associated-prime-equivalent-cyclic-embedding",
+          "thm-localisation-of-modules-is-exact",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "thm-prime-spectrum-of-a-localisation-bijection"
+        ]
+      },
+      {
+        "id": "lem-associated-prime-localises-reverse-finite",
+        "kind": "lemma",
+        "title": "Associated primes of a localized finite module come from upstairs",
+        "strategy": "Represent an associated prime of $S^{-1}M$ as the annihilator of a localized element, clear finitely many denominators to get a nonzero element of $M$, and use maximality of an annihilator in the contraction ideal.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "lem-noetherian-ring-maximal-element-annihilator-exists",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "thm-ideal-correspondence-for-localisation",
+          "thm-prime-spectrum-of-a-localisation-bijection"
+        ]
+      },
+      {
+        "id": "thm-associated-primes-localise",
+        "kind": "theorem",
+        "title": "Associated primes commute with localization for finite modules",
+        "strategy": "The forward implication localizes an embedded cyclic residue module, and the reverse implication clears denominators from a localized annihilator before contracting the prime.",
+        "deps": [
+          "lem-associated-prime-localises-forward",
+          "lem-associated-prime-localises-reverse-finite"
+        ]
+      },
+      {
+        "id": "lem-associated-primes-contained-in-support",
+        "kind": "lemma",
+        "title": "Associated primes lie in the support",
+        "strategy": "If $\\mathfrak p=\\operatorname{Ann}(m)$, then no denominator outside $\\mathfrak p$ kills $m$, so $m/1$ is nonzero in $M_{\\mathfrak p}$.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-support-of-a-module",
+          "def-localisation-at-a-prime-ideal"
+        ]
+      },
+      {
+        "id": "thm-prime-filtration-of-a-finite-module",
+        "kind": "theorem",
+        "title": "Finite modules over Noetherian rings admit prime filtrations",
+        "strategy": "Because a finite module over a Noetherian ring is Noetherian, the maximal condition on its submodules lets us choose a maximal quotient still lacking a prime filtration. A nonzero quotient has an associated prime, hence a cyclic submodule isomorphic to $R/\\mathfrak p$, and adjoining it shortens the induction.",
+        "deps": [
+          "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian",
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "thm-existence-of-associated-primes",
+          "thm-associated-primes-in-a-short-exact-sequence",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "thm-minimal-support-primes-are-associated",
+        "kind": "theorem",
+        "title": "Minimal support primes of a finite module are associated",
+        "strategy": "Use a prime filtration. Any prime minimal in the support contains one of the filtration primes, and minimality forces equality; the filtration prime is associated by the cyclic quotient.",
+        "deps": [
+          "lem-associated-primes-contained-in-support",
+          "thm-prime-filtration-of-a-finite-module"
+        ]
+      },
+      {
+        "id": "cor-support-is-union-of-closures-of-associated-primes",
+        "kind": "corollary",
+        "title": "The support is the union of the closures of the associated primes",
+        "strategy": "Identify the support with $V(\\operatorname{Ann}(M))$, choose a minimal prime below any support prime, and invoke the minimal-support theorem.",
+        "deps": [
+          "thm-minimal-support-primes-are-associated",
+          "thm-support-and-annihilator-of-a-finite-module",
+          "lem-minimal-prime-over-an-ideal-exists"
+        ]
+      },
+      {
+        "id": "thm-finiteness-of-associated-primes",
+        "kind": "theorem",
+        "title": "Finite modules over Noetherian rings have finitely many associated primes",
+        "strategy": "Take a prime filtration and iterate the short-exact-sequence inclusions. Every associated prime must occur among the finitely many prime filtration quotients.",
+        "deps": [
+          "thm-associated-primes-in-a-short-exact-sequence",
+          "thm-prime-filtration-of-a-finite-module"
+        ]
+      },
+      {
+        "id": "lem-zero-divisor-annihilator-contained-in-associated-prime",
+        "kind": "lemma",
+        "title": "A zero divisor is contained in an associated prime",
+        "strategy": "If $x$ is a zero divisor on $M$, then the annihilator submodule $\\{m\\in M:xm=0\\}$ is nonzero. Apply associated-prime existence to that submodule and then use the short-exact-sequence inclusion.",
+        "deps": [
+          "def-annihilator-and-torsion-of-a-module",
+          "thm-associated-primes-in-a-short-exact-sequence",
+          "thm-existence-of-associated-primes"
+        ]
+      },
+      {
+        "id": "thm-zero-divisors-on-a-module",
+        "kind": "theorem",
+        "title": "Zero divisors on a module over a Noetherian ring are the union of its associated primes",
+        "strategy": "Every element of an associated prime is visibly a zero divisor, and every zero divisor lies in an associated prime by applying existence to its annihilator submodule.",
+        "deps": [
+          "thm-finiteness-of-associated-primes",
+          "lem-zero-divisor-annihilator-contained-in-associated-prime"
+        ]
+      },
+      {
+        "id": "def-primary-submodule-and-primary-ideal",
+        "kind": "definition",
+        "title": "Primary submodules and primary ideals",
+        "deps": [
+          "def-left-right-and-two-sided-ideal",
+          "def-quotient-module",
+          "def-annihilator-and-torsion-of-a-module"
+        ]
+      },
+      {
+        "id": "thm-radical-of-a-primary-ideal-is-prime",
+        "kind": "theorem",
+        "title": "The radical of a primary ideal is prime",
+        "strategy": "Pass to the quotient ring by the primary ideal, where every zero divisor is nilpotent. The nilradical of the quotient is therefore prime, and it is the image of the radical of the ideal.",
+        "deps": [
+          "def-primary-submodule-and-primary-ideal",
+          "def-radical-of-an-ideal",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-primary-submodule-zero-divisor-characterisation",
+        "kind": "lemma",
+        "title": "Primary submodules are exactly quotients with nilpotent zero divisors",
+        "strategy": "Unpack the definition through the quotient module $M/Q$: the condition on products in $M$ is equivalent to saying every zero divisor on $M/Q$ acts nilpotently there.",
+        "deps": [
+          "def-primary-submodule-and-primary-ideal",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "thm-primary-submodule-characterisations",
+        "kind": "theorem",
+        "title": "Characterizations of primary submodules in the Noetherian finite case",
+        "strategy": "Translate primaryity of $Q$ into structure of $M/Q$. The zero-divisor theorem turns singleton associated-prime support into one prime $\\mathfrak p$, and nilpotence of the nilradical on a finite module makes a power of $\\mathfrak p$ kill the quotient.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-primary-submodule-and-primary-ideal",
+          "def-annihilator-and-torsion-of-a-module",
+          "thm-zero-divisors-on-a-module",
+          "thm-support-and-annihilator-of-a-finite-module",
+          "thm-nilradical-of-a-noetherian-ring-is-nilpotent"
+        ]
+      },
+      {
+        "id": "lem-intersection-of-primary-submodules-with-same-radical",
+        "kind": "lemma",
+        "title": "A finite intersection of primary submodules with one radical is primary",
+        "strategy": "Embed the quotient by the intersection into the direct sum of the quotient modules by each component and use the short-exact-sequence theorem together with the singleton-associated-prime characterization.",
+        "deps": [
+          "thm-primary-submodule-characterisations"
+        ]
+      },
+      {
+        "id": "def-primary-decomposition-minimal-and-isolated-components",
+        "kind": "definition",
+        "title": "Minimal primary decompositions and isolated components",
+        "deps": [
+          "def-left-right-and-two-sided-ideal",
+          "def-radical-of-an-ideal"
+        ]
+      },
+      {
+        "id": "lem-irreducible-submodule-is-primary-noetherian",
+        "kind": "lemma",
+        "title": "Irreducible submodules of Noetherian modules are primary",
+        "strategy": "In the quotient by an irreducible submodule, stabilize the colon chain $(0:x)\\subseteq(0:x^2)\\subseteq\\cdots$, intersect the stable colon with a principal submodule, and use irreducibility to force a power of every zero divisor to vanish.",
+        "deps": [
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "lem-primary-submodule-zero-divisor-characterisation"
+        ]
+      },
+      {
+        "id": "lem-primary-decomposition-delete-redundant-components",
+        "kind": "lemma",
+        "title": "Redundant components can be deleted from a primary decomposition",
+        "strategy": "Starting from a finite decomposition, remove any component containing the intersection of the others. Finiteness guarantees the deletion process terminates.",
+        "deps": [
+          "def-primary-decomposition-minimal-and-isolated-components"
+        ]
+      },
+      {
+        "id": "lem-primary-decomposition-combine-equal-radicals",
+        "kind": "lemma",
+        "title": "Equal-radical primary components can be combined",
+        "strategy": "Group the components with the same radical and replace each group by its intersection. The previous lemma on intersections preserves primaryity for that common radical.",
+        "deps": [
+          "def-primary-decomposition-minimal-and-isolated-components",
+          "lem-intersection-of-primary-submodules-with-same-radical"
+        ]
+      },
+      {
+        "id": "thm-lasker-noether-primary-decomposition",
+        "kind": "theorem",
+        "title": "Lasker-Noether primary decomposition",
+        "strategy": "Because a finite module over a Noetherian ring is Noetherian, the maximal condition on submodules lets us choose a maximal submodule still lacking a finite primary decomposition. That counterexample is reducible, so it is an intersection of two strictly larger submodules that decompose already; then minimalize by deleting redundancy and combining equal radicals.",
+        "deps": [
+          "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian",
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "lem-irreducible-submodule-is-primary-noetherian",
+          "lem-primary-decomposition-delete-redundant-components",
+          "lem-primary-decomposition-combine-equal-radicals"
+        ]
+      },
+      {
+        "id": "lem-associated-primes-from-a-minimal-primary-decomposition",
+        "kind": "lemma",
+        "title": "Associated primes are the radicals in a minimal primary decomposition",
+        "strategy": "The quotient by the intersection embeds into the direct sum of the primary quotients, giving one inclusion. For the reverse inclusion, remove one component at a time and use irredundancy to produce a nonzero submodule whose associated prime is exactly that component's radical.",
+        "deps": [
+          "def-primary-decomposition-minimal-and-isolated-components",
+          "thm-associated-primes-in-a-short-exact-sequence",
+          "thm-primary-submodule-characterisations"
+        ]
+      },
+      {
+        "id": "thm-first-uniqueness-theorem-primary-decomposition",
+        "kind": "theorem",
+        "title": "First uniqueness of primary decomposition",
+        "strategy": "Apply the associated-primes lemma for minimal decompositions. The set of radicals is intrinsic because it equals $\\operatorname{Ass}(M/N)$.",
+        "deps": [
+          "lem-associated-primes-from-a-minimal-primary-decomposition"
+        ]
+      },
+      {
+        "id": "lem-localisation-of-a-primary-submodule",
+        "kind": "lemma",
+        "title": "Localisation of a primary submodule either stays primary or becomes the whole module",
+        "strategy": "Localize the quotient $M/Q$. If the denominator set meets the radical, some denominator becomes nilpotent and the localization vanishes; otherwise the localized quotient keeps the same unique associated prime after extension.",
+        "deps": [
+          "thm-associated-primes-localise",
+          "thm-primary-submodule-characterisations",
+          "thm-localisation-of-modules-commutes-with-quotients-and-sums",
+          "thm-noetherian-ring-quotients-and-localisations"
+        ]
+      },
+      {
+        "id": "lem-contraction-recovers-primary-component-after-localising-away-from-radical",
+        "kind": "lemma",
+        "title": "A primary component is recovered by contracting its localization",
+        "strategy": "If $sm\\in Q$ with $s$ outside the radical of a primary component, then multiplication by $s$ is injective on $M/Q$, so $m$ already lies in $Q$.",
+        "deps": [
+          "lem-localisation-of-a-primary-submodule",
+          "thm-localisation-of-modules-is-exact"
+        ]
+      },
+      {
+        "id": "thm-isolated-primary-components-are-unique",
+        "kind": "theorem",
+        "title": "Isolated primary components are unique",
+        "strategy": "Localize a minimal primary decomposition at a minimal radical among its components. All components with larger radicals disappear, the chosen component stays primary, and contraction recovers it uniquely in the original module.",
+        "deps": [
+          "def-primary-decomposition-minimal-and-isolated-components",
+          "lem-localisation-of-a-primary-submodule",
+          "lem-contraction-recovers-primary-component-after-localising-away-from-radical"
+        ]
+      },
+      {
+        "id": "lem-finite-prime-avoidance",
+        "kind": "lemma",
+        "title": "Finite prime avoidance",
+        "strategy": "Induct on the number of primes. If an ideal is not contained in one of the first $n-1$ primes or in the last prime, choose elements avoiding those targets and multiply them to build a contradiction.",
+        "deps": [
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "thm-second-uniqueness-theorem-primary-decomposition",
+        "kind": "theorem",
+        "title": "Second uniqueness of primary decomposition",
+        "strategy": "Use the associated-primes lemma for minimal decompositions to identify the radicals with $\\operatorname{Ass}(M/N)$. For a downward-closed subset of those primes, finite prime avoidance gives a multiplicative set that avoids exactly them. Localize a minimal decomposition, keep precisely the surviving components, and contract back to obtain a canonical intersection.",
+        "deps": [
+          "def-primary-decomposition-minimal-and-isolated-components",
+          "lem-associated-primes-from-a-minimal-primary-decomposition",
+          "thm-isolated-primary-components-are-unique",
+          "lem-finite-prime-avoidance"
+        ]
+      },
+      {
+        "id": "cor-radical-ideals-as-intersections-of-minimal-primes-noetherian",
+        "kind": "corollary",
+        "title": "Radical ideals are intersections of their minimal primes in Noetherian rings",
+        "strategy": "Apply primary decomposition to the ideal, use the first uniqueness theorem to identify the radicals with the associated primes of the quotient, and note that a radical ideal has only isolated components.",
+        "deps": [
+          "def-radical-of-an-ideal",
+          "thm-lasker-noether-primary-decomposition",
+          "thm-first-uniqueness-theorem-primary-decomposition"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.01,
+    "id": "associated-primes-and-primary-decomposition-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Associated Primes and Primary Decomposition — Examples",
+    "companion": "associated-primes-and-primary-decomposition",
+    "requires": [
+      "associated-primes-and-primary-decomposition"
+    ],
+    "items": [
+      {
+        "id": "ex-annihilator-colon-ideals-in-a-cyclic-module",
+        "kind": "example",
+        "title": "Colon ideals in a cyclic quotient recover the associated primes",
+        "strategy": "Compute annihilators of explicit residue classes in a small quotient ring and read off the associated primes as the prime colon ideals that appear.",
+        "deps": [
+          "cor-associated-primes-of-a-cyclic-module-are-primes-of-element-annihilators-modulo-ideal"
+        ]
+      },
+      {
+        "id": "ex-primary-maximal-radical-test",
+        "kind": "example",
+        "title": "Every ideal with maximal radical in an Artinian local quotient is primary",
+        "strategy": "Use the nilpotent maximal ideal in the local Artinian quotient to check directly that every zero divisor modulo the ideal is nilpotent.",
+        "deps": [
+          "def-primary-submodule-and-primary-ideal",
+          "thm-artinian-local-ring-has-nilpotent-maximal-ideal"
+        ]
+      },
+      {
+        "id": "ex-primary-localisation-kills-a-component",
+        "kind": "example",
+        "title": "Localization kills the components away from one associated prime",
+        "strategy": "Localize a monomial primary decomposition at each associated prime and track which factors become the whole ring and which survive.",
+        "deps": [
+          "lem-localisation-of-a-primary-submodule",
+          "thm-isolated-primary-components-are-unique"
+        ]
+      },
+      {
+        "id": "ex-redundant-primary-component-deletion",
+        "kind": "example",
+        "title": "A redundant primary decomposition can be minimalized explicitly",
+        "strategy": "Start with a deliberately redundant decomposition, delete the dispensable term, and then combine the components with equal radical.",
+        "deps": [
+          "lem-primary-decomposition-delete-redundant-components",
+          "lem-primary-decomposition-combine-equal-radicals"
+        ]
+      },
+      {
+        "id": "ex-embedded-component-varies-but-radical-does-not",
+        "kind": "example",
+        "title": "Embedded components can vary even when the radicals do not",
+        "strategy": "Compare two primary decompositions of the same ideal with the same radical set but different embedded components, and isolate the unique minimal component by localization.",
+        "deps": [
+          "thm-first-uniqueness-theorem-primary-decomposition",
+          "thm-isolated-primary-components-are-unique"
+        ]
+      },
+      {
+        "id": "ex-zero-module-associated-prime-boundary",
+        "kind": "example",
+        "title": "The zero module has empty support and no associated primes",
+        "strategy": "Check the definitions directly on the zero quotient and note that every primary-submodule statement becomes vacuous only after the proper-submodule hypothesis is enforced.",
+        "deps": [
+          "def-associated-prime-of-a-module",
+          "def-primary-submodule-and-primary-ideal",
+          "def-support-of-a-module"
+        ]
+      }
+    ]
+  }
+]

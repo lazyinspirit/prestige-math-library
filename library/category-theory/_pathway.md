@@ -22,6 +22,7 @@ parts:
       - abelian-categories
       - monadicity-and-becks-theorem
       - kan-extensions-density-and-the-free-cocompletion
+      - subobject-lattices-generators-and-the-grothendieck-axioms
 ---
 
 ## categories-and-yoneda
@@ -45,13 +46,12 @@ completion then supply the standard structural consequences.
 
 ## reflections-and-monads
 
-A reflective subcategory has an inclusion with a left adjoint, and the adjoint functor
-theorems say when preservation and size force such adjoints. Every adjunction induces a
-monad or comonad, Beck's theorem tests when the comparison with Eilenberg-Moore algebras is
-an equivalence, and Kan extensions generalise adjunctions and limits through comma-category
-and coend formulas, with density identifying presheaves as colimits of representables and
-presheaf categories as free cocompletions. Abelian categories insert the exact algebra used
-later in that universal language: kernels, cokernels, images and coimages give canonical
-epi-mono factorisations, pullbacks and pushouts preserve exactness in the expected
-directions, quotient and isomorphism theorems recover familiar module-style algebra, and
-exact functors become the categorical form of homological control.
+Reflective subcategories and the adjoint functor theorems explain when size and limit
+hypotheses force left adjoints, while every adjunction packages its algebra into a monad or
+comonad and Beck identifies when the comparison with Eilenberg-Moore algebras is an
+equivalence. Kan extensions and density turn presheaves into the language of free
+cocompletion. Abelian categories then supply kernels, cokernels, images, coimages, and
+exact factorisations, and the new page adds the internal algebra of subobject lattices,
+Jordan-Holder theory for finite-length objects, generators and the Grothendieck AB3/AB4/AB5
+axioms, and the projective/injective infrastructure that makes module categories the basic
+model.

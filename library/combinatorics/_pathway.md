@@ -33,6 +33,7 @@ parts:
       - graph-colouring
       - linear-algebra-methods-in-combinatorics
       - block-designs-and-finite-projective-planes
+      - algebraic-and-spectral-graph-theory
   - part: ramsey-and-extremal
     title: "Ramsey and extremal graph theory"
     pages:
@@ -55,8 +56,10 @@ parts:
       - polynomial-rodl-and-viral-equivalence
       - classical-and-loglog-erdos-hajnal-bounds
       - blockades-combs-and-pattern-graphs
+      - bull-free-graphs-and-the-erdos-hajnal-property
       - quotient-blockades-and-mixing-relations
       - pure-pairs-forests-and-path-antipath-classes
+      - cographs-perfect-patterns-and-pure-pairs
 ---
 
 ## counting
@@ -91,16 +94,14 @@ generalises inclusion-exclusion.
 
 ## graphs
 
-A graph begins as adjacency, degree, walks, components and trees, and those notions already
-control spanning trees, Eulerian and Hamiltonian circuits, hereditary classes and proper
-colourings. Incidence vectors and incidence matrices then move finite set systems into
-linear algebra: independence arguments prove Oddtown, Eventown, Fisher's inequality and
-Graham-Pollak, while design identities force the parameter equations of $2$-designs and
-symmetric designs. Steiner triple systems, finite projective planes and orthogonal Latin
-squares give structured examples in which the same counting becomes explicit, with
-projective planes realising symmetric $2$-designs and finite fields producing complete
-orthogonal families at prime-power orders. Shattering, VC dimension and the combinatorial
-Nullstellensatz close the part with order, geometry and polynomial methods.
+A graph begins with connectivity, trees, Eulerian and Hamiltonian circuits, hereditary
+classes, and colouring. Linear-algebra methods then encode incidences and set systems in
+matrices, proving results such as Fisher and Graham-Pollak, while block designs and finite
+projective planes show the same counting identities in structured examples. The new
+spectral page adds the adjacency and Laplacian dictionaries: powers count walks, the
+Laplacian detects components and algebraic connectivity, Kirchhoff's matrix-tree theorem
+turns spanning-tree counts into determinants and eigenvalue products, and canonical spectra
+for $K_n$, $C_n$, $K_{m,n}$, and the Petersen graph lead to basic expander estimates.
 
 ## ramsey-and-extremal
 
@@ -119,13 +120,11 @@ degree and gives the five colour theorem.
 
 ## probability
 
-A finite probability space turns expectation into a weighted count, so linearity, Markov's
-inequality and second moments produce combinatorial objects by proving positive
-probability. In hereditary graph theory this viewpoint yields homogeneous sets,
-induced-copy estimates, regularity-driven restricted subgraphs, modular decomposition, and
-the density statements behind Erdos-Hajnal, polynomial Rodl and virality formulations.
-Ordered blockades make those arguments local: combs and pure pattern graphs force long
-sparse or dense structure, quotienting by mixed-block reachability produces pure pairs
-between blockade classes and descent lemmas for small quotient blocks, and path-antipath-
-free classes inherit the strong Erdos-Hajnal property, hence the ordinary Erdos-Hajnal
-conclusion, through that pure-pair machinery and the cograph bridge.
+A finite probability space makes expectation a counting tool, and the probabilistic method
+turns that into homogeneous sets, induced-copy estimates, and regularity-style control in
+hereditary graph classes. Modular decomposition, blockades, quotienting, and pure-pair
+lemmas then organize the structural side of the Erdos-Hajnal program. The new bull-free
+page gives a complete narrowness-and-substitution route to the explicit $1/4$
+Erdos-Hajnal exponent for bull-free graphs, while the cograph/perfect-pattern page shows
+how cograph structure, perfect graphs, $\kappa$ bounds, and pure blockade patterns produce
+large cliques or stable sets and feed the later blockade expansion arguments.

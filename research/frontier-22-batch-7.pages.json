@@ -1,0 +1,440 @@
+[
+  {
+    "order": 353,
+    "id": "holomorphic-inverse-and-weierstrass-preparation",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "The Holomorphic Inverse Function Theorem and Weierstrass Preparation",
+    "companion": "holomorphic-inverse-and-weierstrass-preparation-examples",
+    "requires": [
+      "holomorphic-functions-of-several-variables",
+      "inverse-and-implicit-function-theorems",
+      "the-argument-principle-and-rouche",
+      "euclidean-domains-pids-and-unique-factorisation",
+      "the-field-of-fractions-and-localisation",
+      "constant-rank-submersions-and-regular-level-sets"
+    ],
+    "items": [
+      {
+        "id": "def-biholomorphic-map-several-complex-variables",
+        "kind": "definition",
+        "title": "Biholomorphic maps between open sets in $\\mathbb{C}^m$",
+        "deps": [
+          "def-holomorphic-map-and-complex-jacobian",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "lem-real-jacobian-determinant-of-a-complex-linear-map",
+        "kind": "lemma",
+        "title": "The real Jacobian determinant of a complex-linear automorphism is the squared modulus of its complex determinant",
+        "strategy": "Write the complex matrix as $A=B+iC$, so the underlying real matrix is the block matrix $\\begin{psmallmatrix}B&-C\\\\ C&B\\end{psmallmatrix}$. Conjugate it over $\\mathbb C$ by the fixed change-of-basis matrix that sends $(x,y)$ to $(z,\\bar z)$, obtain the block-triangular matrix $\\operatorname{diag}(A,\\overline A)$, and compare determinants.",
+        "deps": [
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-complex-numbers-form-a-field"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-inverse-function-theorem-several-variables",
+        "kind": "theorem",
+        "title": "The holomorphic inverse function theorem in several complex variables",
+        "strategy": "View the holomorphic map as a $C^1$ map on $\\mathbb R^{2m}$. The determinant lemma turns an invertible complex Jacobian into an invertible real Jacobian, so the real inverse function theorem gives a local $C^1$ inverse. Differentiate the inverse identities and use the complex chain rule to show that the inverse differential is complex-linear, hence the inverse is holomorphic.",
+        "deps": [
+          "def-biholomorphic-map-several-complex-variables",
+          "def-holomorphic-map-and-complex-jacobian",
+          "lem-real-jacobian-determinant-of-a-complex-linear-map",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-chain-rule-for-holomorphic-maps-in-several-variables"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-implicit-function-theorem",
+        "kind": "theorem",
+        "title": "The holomorphic implicit function theorem",
+        "strategy": "Apply the holomorphic inverse theorem to the block map $H(z,w)=(z,f(z,w))$. Its complex Jacobian is block upper triangular with the dependent-variable Jacobian on the diagonal, so it is invertible at the base point. The inverse has the form $(z,\\psi(z,\\eta))$, and restricting to $\\eta=0$ gives the holomorphic graph of the zero set.",
+        "deps": [
+          "def-holomorphic-map-and-complex-jacobian",
+          "thm-holomorphic-inverse-function-theorem-several-variables",
+          "thm-chain-rule-for-holomorphic-maps-in-several-variables"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-constant-rank-theorem",
+        "kind": "theorem",
+        "title": "The holomorphic constant-rank theorem",
+        "strategy": "Apply the real constant-rank normal form to the underlying $C^1$ map to obtain smooth source and target coordinates in which the map is $(u,v)\\mapsto(u,0)$. Then express those coordinate changes as the inverse and graph maps singled out by the holomorphic inverse and implicit function theorems for the chosen nonzero minor, upgrading the smooth normal form to a holomorphic one without assuming an unproved smooth-to-holomorphic result.",
+        "deps": [
+          "def-holomorphic-map-and-complex-jacobian",
+          "thm-holomorphic-inverse-function-theorem-several-variables",
+          "thm-holomorphic-implicit-function-theorem",
+          "thm-euclidean-constant-rank-normal-form"
+        ]
+      },
+      {
+        "id": "def-holomorphic-germ-ring-and-its-maximal-ideal",
+        "kind": "definition",
+        "title": "The ring of holomorphic germs at $0$ and its maximal ideal",
+        "deps": [
+          "def-holomorphic-function-in-several-complex-variables",
+          "def-local-ring"
+        ]
+      },
+      {
+        "id": "prop-units-in-the-holomorphic-germ-ring",
+        "kind": "proposition",
+        "title": "A germ is a unit exactly when its value at $0$ is nonzero, so $\\mathcal O_{m,0}$ is local",
+        "strategy": "If a germ has nonzero value at $0$, continuity gives a smaller neighborhood on which a representative never vanishes, and the holomorphic-algebra proposition makes its reciprocal holomorphic there. If the germ vanishes at $0$, every representative does too, so no product with another germ can equal $1$ at the base point.",
+        "deps": [
+          "def-holomorphic-germ-ring-and-its-maximal-ideal",
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "def-local-ring"
+        ]
+      },
+      {
+        "id": "def-regular-holomorphic-germ",
+        "kind": "definition",
+        "title": "Regular holomorphic germs in the last variable",
+        "deps": [
+          "def-holomorphic-germ-ring-and-its-maximal-ideal"
+        ]
+      },
+      {
+        "id": "def-weierstrass-polynomial",
+        "kind": "definition",
+        "title": "Weierstrass polynomials in the last variable",
+        "deps": [
+          "def-holomorphic-germ-ring-and-its-maximal-ideal",
+          "def-regular-holomorphic-germ"
+        ]
+      },
+      {
+        "id": "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular",
+        "kind": "lemma",
+        "title": "After a linear coordinate change, every nonzero germ is regular in the last variable",
+        "strategy": "Expand the germ as a power series and take its first nonzero homogeneous part. Choose a vector on which that homogeneous polynomial does not vanish, then send the last coordinate axis to that vector by an invertible complex-linear change of coordinates.",
+        "deps": [
+          "def-regular-holomorphic-germ",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "cor-uniqueness-of-multivariable-power-series-coefficients"
+        ]
+      },
+      {
+        "id": "lem-stability-of-slice-zero-count-under-holomorphic-parameters",
+        "kind": "lemma",
+        "title": "Nearby slices of a regular germ have the same zero count",
+        "strategy": "Choose a small circle on the last axis containing exactly the order-$d$ zero of the central slice and no boundary zero. Uniform continuity of the germ on the product torus makes the nearby slices uniformly close on that circle, and Rouché preserves the zero count inside the circle.",
+        "deps": [
+          "def-regular-holomorphic-germ",
+          "prop-holomorphic-functions-are-continuous-and-separately-holomorphic",
+          "thm-rouche-theorem"
+        ]
+      },
+      {
+        "id": "lem-holomorphic-power-sums-of-slice-zeros",
+        "kind": "lemma",
+        "title": "The power sums of the slice zeros vary holomorphically",
+        "strategy": "On the fixed circle from the zero-count lemma, the integrand $\\zeta^k\\partial_{z_m}f/f$ is jointly continuous and holomorphic in the parameter variables. The contour-parameter integral theorem therefore makes the power sums holomorphic, and the argument principle identifies the integral with the sum of the slice zeros counted with multiplicity.",
+        "deps": [
+          "lem-stability-of-slice-zero-count-under-holomorphic-parameters",
+          "def-logarithmic-derivative-meromorphic-function",
+          "thm-contour-parameter-integrals-are-holomorphic",
+          "thm-argument-principle-null-homologous-cycle"
+        ]
+      },
+      {
+        "id": "lem-newton-identities-for-slice-roots",
+        "kind": "lemma",
+        "title": "Finite Newton recurrences for the slice zeros",
+        "strategy": "Write the monic polynomial with roots $\\alpha_1,\\dots,\\alpha_d$, differentiate its logarithm, and compare coefficients. The resulting triangular system expresses each elementary symmetric coefficient in terms of the earlier power sums.",
+        "deps": [
+          "def-weierstrass-polynomial",
+          "lem-holomorphic-power-sums-of-slice-zeros"
+        ]
+      },
+      {
+        "id": "thm-weierstrass-preparation-theorem",
+        "kind": "theorem",
+        "title": "Weierstrass preparation theorem",
+        "strategy": "Use the slice-zero count to keep exactly $d$ zeros inside a fixed circle for nearby parameters. The power sums of those zeros are holomorphic, Newton recurrences turn them into holomorphic coefficients, and the resulting monic polynomial with those roots differs from the original germ by a nowhere-vanishing holomorphic factor.",
+        "deps": [
+          "prop-units-in-the-holomorphic-germ-ring",
+          "def-regular-holomorphic-germ",
+          "def-weierstrass-polynomial",
+          "lem-stability-of-slice-zero-count-under-holomorphic-parameters",
+          "lem-holomorphic-power-sums-of-slice-zeros",
+          "lem-newton-identities-for-slice-roots"
+        ]
+      },
+      {
+        "id": "thm-uniqueness-in-weierstrass-preparation",
+        "kind": "theorem",
+        "title": "Uniqueness in Weierstrass preparation",
+        "strategy": "If $f=uW=vP$ with both $W$ and $P$ monic Weierstrass polynomials of the same degree, then $W/P=v/u$ is holomorphic and nonvanishing. Restrict to the last coordinate axis to see that the quotient is $1$ there, and compare coefficients in the monic identity to force $W=P$ and then $u=v$.",
+        "deps": [
+          "prop-units-in-the-holomorphic-germ-ring",
+          "def-weierstrass-polynomial",
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "thm-weierstrass-division-theorem",
+        "kind": "theorem",
+        "title": "Weierstrass division theorem",
+        "strategy": "Choose a polydisc on which the Weierstrass polynomial is holomorphic and monic in the last variable. Cauchy's formula on a circle surrounding the slice zeros gives explicit integral formulas for the quotient and the remainder coefficients, and uniqueness reduces slice by slice to one-variable monic division.",
+        "deps": [
+          "def-weierstrass-polynomial",
+          "thm-contour-parameter-integrals-are-holomorphic",
+          "thm-cauchy-integral-formula-on-a-polydisc",
+          "prop-units-in-the-holomorphic-germ-ring"
+        ]
+      },
+      {
+        "id": "def-noetherian-ring-and-module",
+        "kind": "definition",
+        "title": "Noetherian commutative rings and modules",
+        "deps": [
+          "def-commutative-ring"
+        ]
+      },
+      {
+        "id": "lem-finite-modules-over-noetherian-rings-are-noetherian",
+        "kind": "lemma",
+        "title": "Finite modules over Noetherian rings are Noetherian",
+        "strategy": "Present a finitely generated module as a quotient of a finite free module. A finite direct sum of copies of a Noetherian ring is Noetherian by the submodule definition, and quotients preserve the condition.",
+        "deps": [
+          "def-noetherian-ring-and-module"
+        ]
+      },
+      {
+        "id": "lem-weierstrass-quotient-is-a-finite-module",
+        "kind": "lemma",
+        "title": "A quotient by a Weierstrass polynomial is a finite module over the smaller germ ring",
+        "strategy": "Use the division theorem to represent each class modulo $(W)$ by a unique remainder $a_0+a_1z_m+\\cdots+a_{d-1}z_m^{d-1}$. Those remainders identify the quotient with a free module of rank $d$ over the smaller germ ring.",
+        "deps": [
+          "def-noetherian-ring-and-module",
+          "thm-weierstrass-division-theorem"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-germ-ring-is-noetherian",
+        "kind": "theorem",
+        "title": "The ring of holomorphic germs is Noetherian",
+        "strategy": "Induct on the dimension. For a nonzero proper ideal, choose a nonzero element, change coordinates to make it regular, and replace it by its Weierstrass polynomial in the ideal. Remainders modulo that polynomial form a submodule of a finite module over the smaller germ ring, so finitely many remainders together with the polynomial generate the ideal.",
+        "deps": [
+          "def-noetherian-ring-and-module",
+          "lem-finite-modules-over-noetherian-rings-are-noetherian",
+          "lem-weierstrass-quotient-is-a-finite-module",
+          "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular",
+          "thm-weierstrass-preparation-theorem",
+          "thm-weierstrass-division-theorem"
+        ]
+      },
+      {
+        "id": "lem-noetherian-domains-are-atomic",
+        "kind": "lemma",
+        "title": "Noetherian domains are atomic",
+        "strategy": "A Noetherian domain satisfies the ascending chain condition on principal ideals. If a nonzero nonunit failed to factor into irreducibles, repeatedly splitting off a nonunit nonirreducible factor would create a strictly increasing chain of principal ideals, contradiction.",
+        "deps": [
+          "def-noetherian-ring-and-module",
+          "def-divisibility-and-associates-in-a-domain",
+          "def-irreducible-and-prime-elements-in-a-domain"
+        ]
+      },
+      {
+        "id": "lem-gauss-lemma-over-a-ufd",
+        "kind": "lemma",
+        "title": "Gauss lemma over a UFD",
+        "strategy": "Factor out the content of each polynomial using unique factorization in the coefficient ring. Reduce primitive products modulo an irreducible divisor to prove they stay primitive, then clear denominators in a factorization over the fraction field to recover a factorization by primitive polynomials over the original ring.",
+        "deps": [
+          "def-unique-factorisation-domain",
+          "def-field-of-fractions",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-divisibility-and-associates-in-a-domain",
+          "def-irreducible-and-prime-elements-in-a-domain"
+        ]
+      },
+      {
+        "id": "lem-prepared-factorizations-and-irreducibility",
+        "kind": "lemma",
+        "title": "Prepared factorizations correspond to germ factorizations",
+        "strategy": "If a prepared polynomial factors in the polynomial subring, multiplying by the preparation unit gives a factorization of the germ. Conversely, prepare each factor of a germ factorization; uniqueness of preparation forces the prepared polynomial of the product to equal the product of the prepared factors, so irreducibility is detected in the polynomial subring.",
+        "deps": [
+          "prop-units-in-the-holomorphic-germ-ring",
+          "def-weierstrass-polynomial",
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-germ-ring-is-a-ufd",
+        "kind": "theorem",
+        "title": "The ring of holomorphic germs is a UFD",
+        "strategy": "Use the Noetherian-domain lemma to obtain factorization once irreducibility can be promoted to primality. After a coordinate change and preparation, factor the prepared polynomial in the smaller polynomial ring, apply the UFD form of Gauss's lemma there, and transfer irreducibility and uniqueness back to the germ ring by the prepared-factorization correspondence.",
+        "deps": [
+          "def-unique-factorisation-domain",
+          "thm-holomorphic-germ-ring-is-noetherian",
+          "lem-noetherian-domains-are-atomic",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-prepared-factorizations-and-irreducibility",
+          "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular",
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "thm-zero-set-has-no-isolated-points-in-several-complex-variables",
+        "kind": "theorem",
+        "title": "A nonzero holomorphic hypersurface in complex dimension at least two has no isolated points",
+        "strategy": "Near any zero of a nonzero germ, either the germ vanishes identically on a neighborhood or a coordinate change makes it regular in the last variable of positive order. Nearby parameter values then produce slice zeros inside the fixed circle, so every neighborhood contains zeros other than the original one.",
+        "deps": [
+          "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular",
+          "lem-stability-of-slice-zero-count-under-holomorphic-parameters",
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "thm-riemann-extension-across-hypersurface-zero-sets",
+        "kind": "theorem",
+        "title": "Riemann extension across a holomorphic hypersurface zero set",
+        "strategy": "Near a point of $Z(g)$, use preparation to write $g=uW$ with $W$ Weierstrass. For each nearby parameter value the complement of the finite slice zero set $W(z',\\cdot)=0$ is a one-variable punctured domain on which the bounded holomorphic function extends across each missing point. The slice extensions are separately holomorphic and locally bounded, hence jointly holomorphic, and the zero-set theorem gives uniqueness on overlaps.",
+        "deps": [
+          "thm-removable-singularity-characterizations",
+          "thm-locally-bounded-separate-holomorphy",
+          "lem-stability-of-slice-zero-count-under-holomorphic-parameters",
+          "thm-weierstrass-preparation-theorem",
+          "thm-zero-set-has-no-isolated-points-in-several-complex-variables"
+        ]
+      },
+      {
+        "id": "cor-locally-bounded-meromorphic-poles-are-removable",
+        "kind": "corollary",
+        "title": "A locally bounded meromorphic quotient has no genuine pole",
+        "strategy": "Off the zero set of the denominator, the several-variable holomorphic algebra rules make the quotient holomorphic. Local boundedness near that zero set therefore brings the hypersurface extension theorem into play and produces a holomorphic continuation.",
+        "deps": [
+          "prop-algebra-of-holomorphic-functions-in-several-variables",
+          "thm-riemann-extension-across-hypersurface-zero-sets"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 354,
+    "id": "holomorphic-inverse-and-weierstrass-preparation-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "The Holomorphic Inverse Function Theorem and Weierstrass Preparation — Examples",
+    "companion": "holomorphic-inverse-and-weierstrass-preparation",
+    "requires": [
+      "holomorphic-inverse-and-weierstrass-preparation"
+    ],
+    "items": [
+      {
+        "id": "ex-z-one-squared-minus-z-two-prepares-to-z-two-minus-z-one-squared",
+        "kind": "example",
+        "title": "$z_1^2-z_2$ prepares to the Weierstrass polynomial $z_2-z_1^2$",
+        "strategy": "Apply the preparation theorem directly to $f(z_1,z_2)=z_1^2-z_2$. The unit is the constant $-1$, so the prepared factor is exactly the monic polynomial in $z_2$ with the same zero set.",
+        "deps": [
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "cex-z-one-z-two-is-not-regular-in-z-two-at-the-origin",
+        "kind": "counterexample",
+        "title": "$z_1z_2$ is not regular in $z_2$ at the origin",
+        "strategy": "Fix $z_1=0$. Every slice value $f(0,z_2)$ vanishes identically, so the last-variable restriction has no finite order of vanishing and the germ is not regular in $z_2$.",
+        "deps": [
+          "def-regular-holomorphic-germ"
+        ]
+      },
+      {
+        "id": "ex-a-shear-makes-z-one-z-two-regular-in-z-two",
+        "kind": "example",
+        "title": "A linear shear makes $z_1z_2$ regular in $z_2$",
+        "strategy": "Replace $z_1$ by $z_1+z_2$. Then $z_1z_2$ becomes $(z_1+z_2)z_2=z_1z_2+z_2^2$, whose last-variable restriction at $z_1=0$ is $z_2^2$, so the transformed germ is regular of order $2$ in $z_2$.",
+        "deps": [
+          "def-regular-holomorphic-germ",
+          "lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular"
+        ]
+      },
+      {
+        "id": "ex-weierstrass-division-of-z-one-by-z-two-squared-minus-z-one",
+        "kind": "example",
+        "title": "Dividing $z_1$ by the Weierstrass polynomial $z_2^2-z_1$",
+        "strategy": "Take $W(z_1,z_2)=z_2^2-z_1$. Then $z_1=(-1)W+z_2^2$, so the quotient is $-1$ and the remainder is the unique degree-$<2$ remainder.",
+        "deps": [
+          "thm-weierstrass-division-theorem"
+        ]
+      },
+      {
+        "id": "ex-the-unit-circle-is-a-holomorphic-graph-near-zero-one",
+        "kind": "example",
+        "title": "Near $(0,1)$, the equation $z_1^2+z_2^2=1$ is a holomorphic graph",
+        "strategy": "Apply the holomorphic implicit function theorem to $f(z_1,z_2)=z_1^2+z_2^2-1$ at $(0,1)$. The derivative in $z_2$ is $2\\neq0$, so near that point the zero set is the graph of a unique holomorphic function $z_2=\\varphi(z_1)$.",
+        "deps": [
+          "thm-holomorphic-implicit-function-theorem"
+        ]
+      },
+      {
+        "id": "cex-exp-z-one-z-two-has-invertible-complex-jacobian-and-is-not-injective",
+        "kind": "counterexample",
+        "title": "The map $(z_1,z_2)\\mapsto(e^{z_1},z_2)$ has invertible complex Jacobian everywhere and is not injective",
+        "strategy": "The complex Jacobian is $\\operatorname{diag}(e^{z_1},1)$, and the complex exponential is never zero. But $e^{z_1+2\\pi i}=e^{z_1}$, so $(z_1,z_2)$ and $(z_1+2\\pi i,z_2)$ have the same image.",
+        "deps": [
+          "def-holomorphic-map-and-complex-jacobian",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-eulers-formula",
+          "def-pi-via-first-positive-cosine-zero",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ]
+      },
+      {
+        "id": "fs-an-everywhere-invertible-complex-jacobian-forces-global-injectivity",
+        "kind": "false-statement",
+        "title": "FALSE: an everywhere-invertible complex Jacobian forces global injectivity",
+        "strategy": "Use the exponential counterexample immediately above. Its complex Jacobian is invertible at every point, but the map identifies $(z_1,z_2)$ with $(z_1+2\\pi i,z_2)$.",
+        "deps": [
+          "cex-exp-z-one-z-two-has-invertible-complex-jacobian-and-is-not-injective"
+        ]
+      },
+      {
+        "id": "fs-the-holomorphic-inverse-function-theorem-is-global",
+        "kind": "false-statement",
+        "title": "FALSE: the holomorphic inverse function theorem is global",
+        "strategy": "The theorem is irreducibly local. The exponential counterexample has invertible complex Jacobian everywhere, so each point has a biholomorphic neighborhood, but the whole map is still not globally one-to-one.",
+        "deps": [
+          "cex-exp-z-one-z-two-has-invertible-complex-jacobian-and-is-not-injective",
+          "thm-holomorphic-inverse-function-theorem-several-variables"
+        ]
+      },
+      {
+        "id": "fs-every-germ-is-regular-in-the-last-variable-without-a-coordinate-change",
+        "kind": "false-statement",
+        "title": "FALSE: every nonzero germ is regular in the last variable without a coordinate change",
+        "strategy": "Use $f(z_1,z_2)=z_1z_2$. The last-variable restriction at $z_1=0$ is identically zero, so the germ is not regular in $z_2$ even though an arbitrarily small shear makes it regular.",
+        "deps": [
+          "cex-z-one-z-two-is-not-regular-in-z-two-at-the-origin",
+          "ex-a-shear-makes-z-one-z-two-regular-in-z-two"
+        ]
+      },
+      {
+        "id": "fs-weierstrass-preparation-is-unique-without-the-unit-condition",
+        "kind": "false-statement",
+        "title": "FALSE: Weierstrass preparation is unique without requiring the nonpolynomial factor to be a unit",
+        "strategy": "Take $f(z_1,z_2)=z_2^2$. Then $f=1\\cdot z_2^2$ is a genuine preparation, but also $f=z_2\\cdot z_2$ if one drops the unit condition on the first factor. Both polynomial factors are Weierstrass, so uniqueness fails without the unit normalization.",
+        "deps": [
+          "thm-weierstrass-preparation-theorem"
+        ]
+      },
+      {
+        "id": "fs-a-nonconstant-scalar-holomorphic-function-in-dimension-at-least-two-can-have-an-isolated-zero",
+        "kind": "false-statement",
+        "title": "FALSE: a nonconstant scalar holomorphic function in dimension at least two can have an isolated zero",
+        "strategy": "The A-page zero-set theorem rules this out completely: every zero of a nonzero scalar holomorphic function in complex dimension at least two is a limit point of other zeros.",
+        "deps": [
+          "thm-zero-set-has-no-isolated-points-in-several-complex-variables"
+        ]
+      }
+    ]
+  }
+]

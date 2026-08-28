@@ -1,0 +1,338 @@
+[
+  {
+    "order": 145,
+    "id": "maschkes-theorem-and-complete-reducibility",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Maschke's Theorem, Complete Reducibility and the Structure of $k[G]$",
+    "companion": "maschkes-theorem-and-complete-reducibility-examples",
+    "requires": [
+      "the-group-algebra-and-representations"
+    ],
+    "items": [
+      {
+        "id": "def-completely-reducible-representation",
+        "kind": "definition",
+        "title": "A completely reducible representation as a finite direct sum of irreducible subrepresentations",
+        "strategy": "Define a finite-dimensional representation to be completely reducible when it is an internal direct sum of irreducible subrepresentations, allowing the zero representation as the empty direct sum. Record that under the group-ring dictionary this is the representation-side form of a semisimple $k[G]$-module.",
+        "deps": [
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-subrepresentation-and-irreducible-representation",
+          "cor-subrepresentations-correspond-to-submodules-and-irreducibility-to-simplicity",
+          "def-semisimple-module"
+        ]
+      },
+      {
+        "id": "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+        "kind": "theorem",
+        "title": "Maschke's theorem for finite groups over fields whose characteristic does not divide $|G|$",
+        "strategy": "Given a subrepresentation $W\\le V$, choose any $k$-linear projection $P:V\\to W$. Average it to $$P_G=\\frac1{|G|}\\sum_{g\\in G}\\rho(g)P\\rho(g)^{-1};$$ the scalar $|G|^{-1}$ is exactly where the characteristic hypothesis is spent. Then $P_G$ is $G$-equivariant, fixes $W$, and has kernel a $G$-invariant complement.",
+        "deps": [
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-subrepresentation-and-irreducible-representation"
+        ]
+      },
+      {
+        "id": "cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order",
+        "kind": "corollary",
+        "title": "If $\\operatorname{char} k \\nmid |G|$, every finite-dimensional representation of $G$ is completely reducible",
+        "strategy": "Induct on $\\dim_kV$. A nonzero finite-dimensional representation has a minimal nonzero subrepresentation, hence an irreducible one; Maschke splits it off, and the complementary summand has smaller dimension. The zero representation is the empty direct sum.",
+        "deps": [
+          "def-completely-reducible-representation",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-subrepresentation-and-irreducible-representation"
+        ]
+      },
+      {
+        "id": "cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order",
+        "kind": "corollary",
+        "title": "If $\\operatorname{char} k \\nmid |G|$, then $k[G]$ is a semisimple ring",
+        "strategy": "Apply the previous corollary to the regular representation of $G$ on $k[G]$. Under the published dictionary, a completely reducible regular representation is exactly a semisimple left $k[G]$-module, which is the definition of a semisimple ring.",
+        "deps": [
+          "cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order",
+          "def-trivial-regular-and-permutation-representations",
+          "cor-subrepresentations-correspond-to-submodules-and-irreducibility-to-simplicity",
+          "def-semisimple-ring"
+        ]
+      },
+      {
+        "id": "thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order",
+        "kind": "theorem",
+        "title": "If $\\operatorname{char} k \\mid |G|$, the augmentation ideal of $k[G]$ has no $k[G]$-module complement in the regular representation",
+        "strategy": "Assume $k[G]=I_G\\oplus J$ as left $k[G]$-modules. Because $I_G=\\ker\\varepsilon$, the restriction $\\varepsilon|_J:J\\to k$ is injective and nonzero, hence an isomorphism of one-dimensional $k$-spaces. Choose $x\\in J$ with $\\varepsilon(x)=1$. For every $g\\in G$, the element $gx\\in J$ has the same augmentation, so $gx=x$. Writing $x=\\sum a_h[h]$, left translation forces all coefficients $a_h$ to be equal; then $$1=\\varepsilon(x)=|G|a_h=0$$ in characteristic dividing $|G|$, a contradiction.",
+        "deps": [
+          "def-augmentation-map-and-augmentation-ideal-of-a-group-ring",
+          "def-trivial-regular-and-permutation-representations"
+        ]
+      },
+      {
+        "id": "cor-group-algebra-is-not-semisimple-when-char-k-divides-group-order",
+        "kind": "corollary",
+        "title": "If $\\operatorname{char} k \\mid |G|$, then $k[G]$ is not semisimple",
+        "strategy": "If $k[G]$ were semisimple, then every submodule of its left regular module would have a complement. The previous theorem shows that the augmentation ideal does not, so the regular module is not semisimple and neither is the ring.",
+        "deps": [
+          "thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order",
+          "def-semisimple-ring"
+        ]
+      },
+      {
+        "id": "def-isotypic-component-of-a-completely-reducible-representation",
+        "kind": "definition",
+        "title": "The isotypic component of a completely reducible representation",
+        "strategy": "For a completely reducible representation $V$ and an irreducible representation $S$, define $V_{(S)}$ to be the sum of all irreducible subrepresentations of $V$ that are isomorphic to $S$. Record that only the isomorphism class of $S$ matters.",
+        "deps": [
+          "def-completely-reducible-representation",
+          "def-subrepresentation-and-irreducible-representation"
+        ]
+      },
+      {
+        "id": "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique",
+        "kind": "theorem",
+        "title": "The isotypic decomposition of a completely reducible representation is unique",
+        "strategy": "Choose a decomposition of $V$ as a direct sum of irreducibles and group the summands by isomorphism class. If two grouped sums for different classes had nonzero intersection, an irreducible subrepresentation of that intersection would admit nonzero maps to two nonisomorphic irreducibles, contradicting Schur. The grouped blocks therefore sum directly to $V$, and each block is exactly the sum of all irreducible subrepresentations of its class, so it is independent of the chosen irreducible splitting.",
+        "deps": [
+          "def-isotypic-component-of-a-completely-reducible-representation",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-completely-reducible-representation"
+        ]
+      },
+      {
+        "id": "rem-decomposition-into-irreducible-summands-need-not-be-unique",
+        "kind": "remark",
+        "title": "A decomposition into irreducible summands need not be unique even when the isotypic decomposition is",
+        "strategy": "Record the contrast the design requires: the isotypic blocks are canonical, but the individual irreducible summands inside one isotypic block need not be. The companion page's two-dimensional trivial representation of $C_2$ is the minimal explicit witness.",
+        "deps": [
+          "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique"
+        ]
+      },
+      {
+        "id": "def-center-of-the-group-algebra",
+        "kind": "definition",
+        "title": "The center $Z(k[G])$ of the group algebra",
+        "strategy": "Define $$Z(k[G])=\\{x\\in k[G]:xy=yx\\text{ for all }y\\in k[G]\\}.$$ Record it as the central $k$-subalgebra that will be computed both from conjugacy classes and from the Wedderburn factors.",
+        "deps": [
+          "def-group-ring",
+          "thm-group-ring-is-a-unital-algebra-with-basis-g"
+        ]
+      },
+      {
+        "id": "def-class-sum-of-a-conjugacy-class-in-k-g",
+        "kind": "definition",
+        "title": "The class sum $\\widehat C$ of a conjugacy class $C$",
+        "strategy": "For a conjugacy class $C\\subseteq G$ in a finite group, define its class sum in $k[G]$ by $$\\widehat C:=\\sum_{g\\in C}[g].$$ Fix this hat notation once so the center argument does not drift into ad hoc symbols later.",
+        "deps": [
+          "def-group-ring",
+          "def-conjugacy-class-and-centralizer"
+        ]
+      },
+      {
+        "id": "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field",
+        "kind": "theorem",
+        "title": "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, then $k[G]\\cong\\prod_{i=1}^r M_{n_i}(k)$",
+        "strategy": "Maschke makes $k[G]$ a semisimple ring. Apply Wedderburn-Artin to write it as a finite product of matrix rings over division rings, one factor for each simple $k[G]$-module. Over an algebraically closed field, the endomorphism ring of each irreducible representation is just $k$, so every division ring factor collapses to the base field.",
+        "deps": [
+          "cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order",
+          "thm-wedderburn-artin-theorem",
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars"
+        ]
+      },
+      {
+        "id": "thm-finitely-many-irreducibles-occur-in-the-regular-representation-with-multiplicity-equal-to-their-degree",
+        "kind": "theorem",
+        "title": "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, there are finitely many irreducible representations, and each occurs in the regular representation with multiplicity equal to its degree",
+        "strategy": "Use the product decomposition $$k[G]\\cong\\prod_iM_{n_i}(k).$$ For each factor there is exactly one simple left module, namely the column module $k^{n_i}$, and the left regular module of $M_{n_i}(k)$ is a direct sum of $n_i$ copies of it. Translating the simple-module statement back across the group-ring dictionary gives finitely many irreducible representations $V_i$, each appearing in the regular representation with multiplicity $n_i=\\dim_kV_i$.",
+        "deps": [
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field",
+          "thm-simple-modules-over-semisimple-rings",
+          "thm-matrix-rings-over-division-rings-are-semisimple",
+          "cor-subrepresentations-correspond-to-submodules-and-irreducibility-to-simplicity",
+          "def-trivial-regular-and-permutation-representations"
+        ]
+      },
+      {
+        "id": "cor-sum-of-squares-formula-for-irreducible-degrees",
+        "kind": "corollary",
+        "title": "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, then $\\sum_i (\\dim_k V_i)^2=|G|$",
+        "strategy": "The regular representation has dimension $|G|$ over $k$. Sum the dimensions of the irreducible summands in the previous theorem, counting each $V_i$ with multiplicity $\\dim_kV_i$.",
+        "deps": [
+          "thm-finitely-many-irreducibles-occur-in-the-regular-representation-with-multiplicity-equal-to-their-degree",
+          "cor-dimension-of-a-finite-group-algebra"
+        ]
+      },
+      {
+        "id": "lem-the-center-of-a-full-matrix-algebra-over-a-field-consists-of-the-scalar-matrices",
+        "kind": "lemma",
+        "title": "The center of $M_n(k)$ consists of the scalar matrices",
+        "strategy": "Let $E_{ij}$ be the matrix units. If $X$ commutes with every $E_{ij}$, comparing $E_{ij}X$ with $XE_{ij}$ forces every off-diagonal entry of $X$ to vanish and all diagonal entries to agree. Scalar matrices obviously commute with everything.",
+        "deps": [
+          "def-field",
+          "def-ring-matrix-product-identity-and-transpose"
+        ]
+      },
+      {
+        "id": "thm-class-sums-form-a-basis-of-the-center-of-k-g",
+        "kind": "theorem",
+        "title": "For a finite group, the class sums form a basis of $Z(k[G])$",
+        "strategy": "Each class sum is central because left multiplication by $h$ permutes its summands exactly as right multiplication by $h$ does. Conversely, if $$x=\\sum_ga_g[g]$$ is central, then comparing coefficients in $hxh^{-1}=x$ shows that $a_g$ is constant on conjugacy classes. The supports of distinct class sums are disjoint, so they are linearly independent.",
+        "deps": [
+          "def-center-of-the-group-algebra",
+          "def-class-sum-of-a-conjugacy-class-in-k-g",
+          "thm-group-ring-is-a-unital-algebra-with-basis-g"
+        ]
+      },
+      {
+        "id": "cor-the-dimension-of-the-center-of-k-g-is-the-number-of-conjugacy-classes",
+        "kind": "corollary",
+        "title": "The dimension of $Z(k[G])$ is the number of conjugacy classes of $G$",
+        "strategy": "The preceding theorem gives a basis of the center indexed by the conjugacy classes themselves.",
+        "deps": [
+          "thm-class-sums-form-a-basis-of-the-center-of-k-g"
+        ]
+      },
+      {
+        "id": "thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order",
+        "kind": "theorem",
+        "title": "If $k$ is algebraically closed and $\\operatorname{char} k \\nmid |G|$, the number of irreducible representations of $G$ equals the number of conjugacy classes",
+        "strategy": "Compute $$\\dim_k Z(k[G])$$ in two ways. The class-sum theorem makes it the number of conjugacy classes. The Wedderburn product makes it the sum of the center dimensions of the matrix factors, and the scalar-center lemma shows that each factor contributes exactly one dimension. Hence the number of factors, i.e. the number of irreducible representation classes, equals the number of conjugacy classes.",
+        "deps": [
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field",
+          "lem-the-center-of-a-full-matrix-algebra-over-a-field-consists-of-the-scalar-matrices",
+          "cor-the-dimension-of-the-center-of-k-g-is-the-number-of-conjugacy-classes"
+        ]
+      },
+      {
+        "id": "cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero",
+        "kind": "corollary",
+        "title": "Over an algebraically closed field of characteristic $0$, every element of finite order acts diagonalisably in a finite-dimensional representation",
+        "strategy": "Let $T$ have finite order $m$ and let the cyclic group $C_m=\\langle g\\rangle$ act by $g\\mapsto T$. Because $m$ is invertible in characteristic $0$, Maschke makes this representation completely reducible. The field is a splitting field for $C_m$, and finite abelian groups have only one-dimensional irreducibles over a splitting field, so the representation has a basis of eigenvectors and $T$ is diagonalizable.",
+        "deps": [
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-splitting-field-for-a-finite-group",
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars",
+          "thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 146,
+    "id": "maschkes-theorem-and-complete-reducibility-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Maschke's Theorem, Complete Reducibility and the Structure of $k[G]$ — Examples",
+    "companion": "maschkes-theorem-and-complete-reducibility",
+    "requires": [
+      "maschkes-theorem-and-complete-reducibility"
+    ],
+    "items": [
+      {
+        "id": "ex-the-complex-group-algebra-of-z-mod-three-is-c-times-c-times-c",
+        "kind": "example",
+        "title": "$\\mathbb C[\\mathbb Z/3\\mathbb Z]\\cong\\mathbb C\\times\\mathbb C\\times\\mathbb C$",
+        "strategy": "Because $\\mathbb Z/3\\mathbb Z$ is abelian, its three elements are three conjugacy classes. The A-page count theorem therefore gives exactly three irreducible complex representations, and the sum-of-squares formula forces all three degrees to be $1$. The Wedderburn decomposition therefore has three $1\\times1$ factors and no larger matrix block.",
+        "deps": [
+          "cor-sum-of-squares-formula-for-irreducible-degrees",
+          "thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order",
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field"
+        ]
+      },
+      {
+        "id": "ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c",
+        "kind": "example",
+        "title": "$\\mathbb C[S_3]\\cong\\mathbb C\\times\\mathbb C\\times M_2(\\mathbb C)$",
+        "strategy": "The three conjugacy classes of $S_3$ are $\\{e\\}$, the three transpositions, and the two $3$-cycles, so the A-page count theorem gives three irreducible complex representations. Their squared degrees sum to $6$, and the only way to write $6$ as a sum of three positive squares is $1+1+4$. The matrix-factor decomposition follows immediately.",
+        "deps": [
+          "cor-sum-of-squares-formula-for-irreducible-degrees",
+          "thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order",
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field"
+        ]
+      },
+      {
+        "id": "ex-the-complex-group-algebras-of-q-eight-and-dih-c-four-have-the-same-wedderburn-decomposition",
+        "kind": "example",
+        "title": "$\\mathbb C[Q_8]$ and $\\mathbb C[\\operatorname{Dih}(C_4)]$ both decompose as $\\mathbb C^4\\times M_2(\\mathbb C)$",
+        "strategy": "For $Q_8$, the five conjugacy classes are $$\\{1\\},\\{-1\\},\\{\\pm i\\},\\{\\pm j\\},\\{\\pm k\\};$$ for $D=\\operatorname{Dih}(C_4)$, using the standard normal forms and the relation $srs^{-1}=r^{-1}$, they are $$\\{1\\},\\{r^2\\},\\{r,r^3\\},\\{s,r^2s\\},\\{rs,r^3s\\}.$$ So both groups have five conjugacy classes. With five irreducibles and squared degrees summing to $8$, the only possible degree multiset is $1,1,1,1,2$ for both groups. The A-page decomposition theorem then yields the identical Wedderburn type.",
+        "deps": [
+          "cor-dihedral-groups-as-semidirect-products",
+          "def-quaternion-group-of-order-eight",
+          "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two",
+          "cor-sum-of-squares-formula-for-irreducible-degrees",
+          "thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order",
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field"
+        ]
+      },
+      {
+        "id": "ex-the-regular-representation-of-z-mod-four-over-c-splits-into-four-characters",
+        "kind": "example",
+        "title": "The regular representation of $\\mathbb Z/4\\mathbb Z$ over $\\mathbb C$ splits into its four characters",
+        "strategy": "Because $\\mathbb Z/4\\mathbb Z$ is abelian, it has four conjugacy classes, so the A-page count theorem gives four irreducible complex representations. Their squared degrees sum to $4$, so all four degrees are $1$. The regular representation contains each irreducible with multiplicity equal to its degree, so each character occurs exactly once.",
+        "deps": [
+          "cor-sum-of-squares-formula-for-irreducible-degrees",
+          "thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order",
+          "thm-finitely-many-irreducibles-occur-in-the-regular-representation-with-multiplicity-equal-to-their-degree"
+        ]
+      },
+      {
+        "id": "ex-the-two-dimensional-trivial-representation-of-c-two-has-many-irreducible-splittings-but-one-isotypic-component",
+        "kind": "example",
+        "title": "The two-dimensional trivial representation of $C_2$ has many irreducible splittings but one isotypic component",
+        "strategy": "In the trivial action every line is invariant and irreducible, so any pair of complementary lines gives a decomposition into irreducible subrepresentations. But every irreducible summand is the trivial representation, so the unique isotypic component is the whole space.",
+        "deps": [
+          "def-trivial-regular-and-permutation-representations",
+          "thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique"
+        ]
+      },
+      {
+        "id": "fs-maschkes-theorem-without-the-characteristic-hypothesis",
+        "kind": "false-statement",
+        "title": "False statement: Maschke's theorem holds over every field",
+        "strategy": "Take a prime $p$, let $G=\\langle g\\rangle$ be cyclic of order $p$, let $k=\\mathbb F_p$, and let $$\\rho(g)=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}.$$ The line spanned by the second basis vector is invariant, but every complementary line is moved by $g$, so no invariant complement exists.",
+        "deps": [
+          "thm-z-mod-p-is-a-field",
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "def-subrepresentation-and-irreducible-representation"
+        ]
+      },
+      {
+        "id": "fs-not-every-finite-dimensional-algebra-over-a-field-is-semisimple",
+        "kind": "false-statement",
+        "title": "False statement: every finite-dimensional algebra over a field is semisimple",
+        "strategy": "For a prime $p$, the group algebra $\\mathbb F_p[C_p]$ has dimension $p$ over $\\mathbb F_p$, but the A-page converse shows it is not semisimple because the characteristic divides the group order.",
+        "deps": [
+          "thm-z-mod-p-is-a-field",
+          "cor-dimension-of-a-finite-group-algebra",
+          "cor-group-algebra-is-not-semisimple-when-char-k-divides-group-order"
+        ]
+      },
+      {
+        "id": "fs-decomposition-into-irreducible-subrepresentations-is-unique",
+        "kind": "false-statement",
+        "title": "False statement: a completely reducible representation has a unique decomposition into irreducible subrepresentations",
+        "strategy": "Reuse the two-dimensional trivial representation of $C_2$: distinct pairs of complementary lines produce different decompositions into irreducible subrepresentations, even though the isotypic component is fixed.",
+        "deps": [
+          "ex-the-two-dimensional-trivial-representation-of-c-two-has-many-irreducible-splittings-but-one-isotypic-component",
+          "rem-decomposition-into-irreducible-summands-need-not-be-unique"
+        ]
+      },
+      {
+        "id": "fs-the-sum-of-the-irreducible-degrees-equals-the-group-order",
+        "kind": "false-statement",
+        "title": "False statement: the sum of the irreducible degrees equals $|G|$",
+        "strategy": "For $S_3$, the irreducible degrees are $1,1,2$, so their sum is $4$ while $|S_3|=6$. The correct identity is the sum-of-squares formula.",
+        "deps": [
+          "ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c",
+          "cor-sum-of-squares-formula-for-irreducible-degrees"
+        ]
+      },
+      {
+        "id": "fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r",
+        "kind": "false-statement",
+        "title": "False statement: a group with $r$ conjugacy classes has an irreducible representation of degree $r$",
+        "strategy": "Both $Q_8$ and $\\operatorname{Dih}(C_4)$ have five conjugacy classes, but their irreducible degrees are $1,1,1,1,2$. So neither group has an irreducible representation of degree $5$.",
+        "deps": [
+          "ex-the-complex-group-algebras-of-q-eight-and-dih-c-four-have-the-same-wedderburn-decomposition"
+        ]
+      }
+    ]
+  }
+]

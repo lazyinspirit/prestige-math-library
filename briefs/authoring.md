@@ -12,6 +12,10 @@ material. A generated statement is never a dependency target. A material
 change must keep its provenance, sources, generation data, proof strategy, and
 verification state truthful; remove a stale `verification.judge` record.
 
+Every page and item authored by the current run must remain `status: draft`.
+Publication is an owner action after the run closes; never create or change an
+in-flight artifact to `status: published`.
+
 Write mathematics that establishes the stated claim. Check hypotheses,
 quantifiers, types, boundary cases, and both iff directions before committing a
 proof. Cite the proposition actually used, preserving its domain, hypotheses,

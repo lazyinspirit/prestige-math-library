@@ -14,18 +14,17 @@ parts:
       - the-lebesgue-integral-and-the-convergence-theorems
       - lebesgue-stieltjes-measures-and-distribution-functions
       - the-lebesgue-and-riemann-integrals-compared
+      - modes-of-convergence-egorov-and-lusin
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra is the closure needed for countable additivity, and outer measure plus
-Caratheodory turn covering costs into complete measures such as Lebesgue measure.
-Measurable functions are then characterised by generators, threshold sets and stability
-under arithmetic and sequential limits, and simple-function approximation builds the
-Lebesgue integral, monotone and dominated convergence, Fatou, and the Lebesgue-Stieltjes
-correspondence with distribution functions. The comparison page identifies exactly where
-Riemann theory sits inside that framework: bounded Riemann-integrable functions are
-measurable and have the same integral as their Lebesgue integrals, Arzela bounded
-convergence becomes a Lebesgue consequence, nonnegative improper integrals on half-lines
-are recovered by monotone convergence, and continuous Riemann-Stieltjes integration agrees
-with integration against the associated Lebesgue-Stieltjes measure.
+Caratheodory construct complete measures such as Lebesgue measure. Measurable functions are
+controlled by generator and threshold tests, simple functions build the Lebesgue integral,
+and monotone and dominated convergence, Fatou, and Lebesgue-Stieltjes measures supply the
+main integral calculus. The Riemann comparison page locates classical integration inside
+this framework. The new convergence page adds the finite-measure dictionary among
+almost-everywhere, in-measure, almost-uniform, and $L^1$ convergence, with Riesz
+subsequences, Egorov, Lusin, uniform integrability, and Vitali marking exactly where extra
+hypotheses are needed.

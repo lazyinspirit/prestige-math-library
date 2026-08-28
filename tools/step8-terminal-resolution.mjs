@@ -9,7 +9,7 @@
 // and context accepted.  It never writes a judge verdict or a judge stamp.
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, appendFileSync } from 'node:fs';
+import { existsSync, readFileSync, appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -120,6 +120,25 @@ function initialFatalCycleErrors(root, run, cycles) {
   return errors;
 }
 
+function freezeClosureEvidence(root, run, text) {
+  const hash = createHash('sha256').update(text).digest('hex');
+  const dir = join(root, 'research', `${run}-step8-terminal-evidence`);
+  const path = join(dir, `${hash}.json`);
+  mkdirSync(dir, { recursive: true });
+  if (existsSync(path)) {
+    const frozen = readFileSync(path, 'utf8');
+    if (createHash('sha256').update(frozen).digest('hex') !== hash || frozen !== text) {
+      throw new Error(`${path}: content-addressed terminal evidence does not match ${hash}`);
+    }
+  } else {
+    writeFileSync(path, text, { flag: 'wx' });
+  }
+  return {
+    path: path.replace(`${root}/`, ''),
+    sha256: hash,
+  };
+}
+
 export function terminalEvidence(root, run, id) {
   const statePath = join(root, '.autopilot', 'state.json');
   if (!existsSync(statePath)) throw new Error(`${statePath}: active run state is required`);
@@ -154,12 +173,13 @@ export function terminalEvidence(root, run, id) {
     ];
     const hit = classes.find(([, ids]) => ids.includes(id));
     if (!hit) continue;
+    const frozen = freezeClosureEvidence(root, run, text);
     return {
       exhaustedAt: itemCycles.at(-1).completed_at ?? itemCycles.at(-1).started_at,
       evidence: {
         cycle_ids: itemCycles.slice(-TERMINAL_REJUDGE_ROUNDS).map((cycle) => cycle.cycle_id),
-        closure_path: path.replace(`${root}/`, ''),
-        closure_sha256: createHash('sha256').update(text).digest('hex'),
+        closure_path: frozen.path,
+        closure_sha256: frozen.sha256,
         unresolved_as: hit[0],
       },
     };

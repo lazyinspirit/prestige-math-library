@@ -1,0 +1,345 @@
+[
+  {
+    "order": 413,
+    "id": "cographs-perfect-patterns-and-pure-pairs",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Cographs, Perfect Patterns and Pure Pairs",
+    "companion": "cographs-perfect-patterns-and-pure-pairs-examples",
+    "requires": [
+      "modules-substitution-and-prime-graphs",
+      "pure-pairs-forests-and-path-antipath-classes"
+    ],
+    "items": [
+      {
+        "id": "def-complete-connection-of-two-disjoint-graphs",
+        "kind": "definition",
+        "title": "The complete connection of two disjoint graphs",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+        "kind": "definition",
+        "title": "Cographs by the singleton, disjoint-union, and complete-connection recursion",
+        "deps": [
+          "def-complete-connection-of-two-disjoint-graphs",
+          "def-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "lem-induced-subgraphs-of-cographs-are-cographs",
+        "kind": "lemma",
+        "title": "Every induced subgraph of a cograph is a cograph",
+        "strategy": "Let $\\mathcal F$ be the class of graphs all of whose induced subgraphs are cographs. A one-vertex graph lies in $\\mathcal F$, and taking an induced subgraph of a disjoint union or of a complete connection splits into the same operation on the traces on the two sides. Since cographs are the smallest class closed under those operations, every cograph belongs to $\\mathcal F$.",
+        "deps": [
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-complete-connection-of-two-disjoint-graphs",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+        "kind": "theorem",
+        "title": "Every nontrivial cograph is disconnected or has disconnected complement",
+        "strategy": "Use the recursive definition. A nontrivial cograph is built from two smaller cographs either by disjoint union, which is visibly disconnected, or by complete connection, whose complement is the disjoint union of the complements of the two parts and is therefore disconnected.",
+        "deps": [
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-complete-connection-of-two-disjoint-graphs",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-cographs-are-exactly-the-p-four-free-graphs",
+        "kind": "theorem",
+        "title": "The cographs are exactly the $P_4$-free graphs",
+        "strategy": "For the forward direction, induced subgraphs of cographs are cographs and every nontrivial cograph satisfies the previous disconnected-or-complement-disconnected dichotomy, while the standard path P4 has edges 12, 23, 34 and complement edges 13, 14, 24, so it is connected and its complement is connected. For the reverse direction, induct on the order of a $P_4$-free graph and use the published Seinsche theorem to split it into a disjoint union or a complete connection of smaller $P_4$-free induced subgraphs.",
+        "deps": [
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "lem-induced-subgraphs-of-cographs-are-cographs",
+          "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+          "thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-h-free-and-family-free-graph",
+          "cor-connected-components-partition-the-vertex-set",
+          "lem-anticonnected-components-are-complement-components",
+          "lem-components-are-anticomplete-and-anticomponents-complete",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four",
+        "kind": "theorem",
+        "title": "Every prime graph on at least four vertices contains an induced $P_4$",
+        "strategy": "Harju's small-primitive-subgraph theorem gives a primitive induced subgraph on three or four vertices. The published three-vertex lemma rules out size three. If the primitive subgraph has four vertices, then unions of components or anticomponents would be modules, so primeness forces the graph to be connected and anticonnected; a four-vertex connected anticonnected graph has no degree 0 or 3 vertices, so a short degree count forces a degree-1 vertex and hence the path P4.",
+        "deps": [
+          "def-prime-graph",
+          "def-module-of-a-graph",
+          "lem-graphs-on-three-vertices-are-not-prime",
+          "lem-unions-of-components-and-of-anticomponents-are-modules",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-connected-graph-and-connected-component",
+          "def-anticonnected-graph-and-anticonnected-component",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "def-perfect-graph",
+        "kind": "definition",
+        "title": "Perfect graphs",
+        "deps": [
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "def-kappa-of-a-graph",
+        "kind": "definition",
+        "title": "The parameter $\\kappa(G)=\\alpha(G)\\omega(G)$",
+        "deps": [
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "lem-disjoint-union-of-perfect-graphs-is-perfect",
+        "kind": "lemma",
+        "title": "A disjoint union of two perfect graphs is perfect",
+        "strategy": "Every induced subgraph of a disjoint union is the disjoint union of the induced subgraphs on the two sides. For such a union, the clique number and chromatic number are both the maximum of the corresponding two side values, so equality on both sides passes to the union.",
+        "deps": [
+          "def-perfect-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "lem-complete-connection-of-perfect-graphs-is-perfect",
+        "kind": "lemma",
+        "title": "A complete connection of two perfect graphs is perfect",
+        "strategy": "An induced subgraph of a complete connection is the complete connection of the traces on the two sides. In a complete connection, every clique is the union of a clique from each side and every proper colouring uses disjoint colour sets on the two sides, so both $\\omega$ and $\\chi$ add across the construction. Equality therefore passes from the two perfect factors to the whole graph and to all its induced subgraphs.",
+        "deps": [
+          "def-complete-connection-of-two-disjoint-graphs",
+          "def-perfect-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "thm-cographs-are-perfect",
+        "kind": "theorem",
+        "title": "Every cograph is perfect",
+        "strategy": "Let $\\mathcal P$ be the class of perfect graphs. One-vertex graphs are perfect, the previous two lemmas show that $\\mathcal P$ is closed under disjoint unions and complete connections, and the cographs are the smallest class with those closure properties.",
+        "deps": [
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-perfect-graph",
+          "lem-disjoint-union-of-perfect-graphs-is-perfect",
+          "lem-complete-connection-of-perfect-graphs-is-perfect"
+        ]
+      },
+      {
+        "id": "thm-perfect-graphs-satisfy-kappa-at-least-their-order",
+        "kind": "theorem",
+        "title": "Every perfect graph satisfies $|V(G)|\\leq\\kappa(G)$",
+        "strategy": "For a perfect graph, the defining equality gives $\\chi(G)=\\omega(G)$. Combine this with the published bound $|V(G)|\\leq\\chi(G)\\alpha(G)$ and the definition of $\\kappa(G)$.",
+        "deps": [
+          "def-perfect-graph",
+          "def-kappa-of-a-graph",
+          "thm-clique-independence-chromatic-bounds",
+          "def-clique-stable-set-and-numbers",
+          "def-proper-vertex-colouring-and-chromatic-number"
+        ]
+      },
+      {
+        "id": "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+        "kind": "corollary",
+        "title": "Every perfect graph has a clique or stable set of size at least the square root of its order",
+        "strategy": "If $h=\\max\\{\\omega(G),\\alpha(G)\\}$, then $\\kappa(G)=\\alpha(G)\\omega(G)\\leq h^2$. Combine this with the previous theorem and take square roots.",
+        "deps": [
+          "thm-perfect-graphs-satisfy-kappa-at-least-their-order",
+          "def-kappa-of-a-graph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "thm-real-power-laws"
+        ]
+      },
+      {
+        "id": "rem-the-perfect-induced-subgraph-formulation-of-the-erdos-hajnal-conjecture",
+        "kind": "remark",
+        "title": "The perfect-induced-subgraph formulation of the Erdős–Hajnal conjecture",
+        "deps": [
+          "def-perfect-graph",
+          "def-h-free-and-family-free-graph",
+          "def-erdos-hajnal-property-and-constant",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations",
+        "kind": "theorem",
+        "title": "The Erdős–Hajnal property is equivalent to the large-cograph, large-perfect, and $\\kappa$ formulations",
+        "strategy": "Work with existence of some positive exponent, not a fixed one. A homogeneous set is itself an induced cograph and an induced perfect graph; every cograph is perfect by the previous theorem; a perfect induced subgraph of size $m$ contains a homogeneous set of size at least $m^{1/2}$ by the previous corollary; and $\\operatorname{hom}(G)^2\\geq\\kappa(G)\\geq\\operatorname{hom}(G)$ for every nonempty graph, so the homogeneous and $\\kappa$ formulations differ only by rescaling the exponent.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-perfect-graph",
+          "def-kappa-of-a-graph",
+          "thm-cographs-are-perfect",
+          "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+          "thm-real-power-laws"
+        ]
+      },
+      {
+        "id": "thm-pure-blockades-with-perfect-patterns-contain-large-homogeneous-subblockades",
+        "kind": "theorem",
+        "title": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade",
+        "strategy": "Apply the perfect-graph square-root corollary to the pattern graph. A clique of pattern vertices gives a complete subblockade, a stable set gives an anticomplete subblockade, and the width is unchanged because only whole blocks are discarded.",
+        "deps": [
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-perfect-graph",
+          "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ]
+      },
+      {
+        "id": "def-tau-critical-graph",
+        "kind": "definition",
+        "title": "A $\\tau$-critical graph",
+        "deps": [
+          "def-kappa-of-a-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-real-power",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical",
+        "kind": "proposition",
+        "title": "A minimal counterexample to a $\\kappa$-bound is $\\tau$-critical",
+        "strategy": "Fix $\\tau>0$ and a forbidden family, and choose a counterexample $G$ with the fewest vertices among those with $\\kappa(G)<|G|^\\tau$. Every proper induced subgraph of $G$ is smaller and therefore satisfies the bound, which is exactly the second clause of the $\\tau$-critical definition.",
+        "deps": [
+          "def-tau-critical-graph",
+          "def-kappa-of-a-graph",
+          "def-h-free-and-family-free-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+        "kind": "theorem",
+        "title": "A pure blockade with a cograph pattern has additive $\\kappa$",
+        "strategy": "Induct on the number of blocks. A nontrivial cograph pattern splits into two nonempty parts that are either complete or anticomplete across. Read the complete case in the complement, apply the induction hypothesis to the two unions, and combine the two bounds across an anticomplete split by adding stable sets and comparing clique numbers.",
+        "deps": [
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-kappa-of-a-graph",
+          "def-clique-stable-set-and-numbers",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-tau-critical-graphs-have-no-wide-cograph-pattern-blockades",
+        "kind": "theorem",
+        "title": "A $\\tau$-critical graph has no wide pure blockade with cograph pattern",
+        "strategy": "If such a blockade had length $t$ and width at least $|G|t^{-1/\\tau}$, then every block would satisfy $\\kappa(B_i)\\geq |B_i|^\\tau\\geq |G|^\\tau/t$ by $\\tau$-criticality, and the previous theorem would force $\\kappa(G)\\geq |G|^\\tau$, contradicting the definition.",
+        "deps": [
+          "def-tau-critical-graph",
+          "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-kappa-of-a-graph",
+          "def-complete-anticomplete-pure-and-x-sparse-blockades",
+          "thm-real-power-laws"
+        ]
+      },
+      {
+        "id": "def-blockade-rainbow-induced-copy",
+        "kind": "definition",
+        "title": "A blockade-rainbow induced copy",
+        "deps": [
+          "def-blockade-length-and-width",
+          "def-induced-embedding-and-induced-copy",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 414,
+    "id": "cographs-perfect-patterns-and-pure-pairs-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Cographs, Perfect Patterns and Pure Pairs — Examples",
+    "companion": "cographs-perfect-patterns-and-pure-pairs",
+    "requires": [
+      "cographs-perfect-patterns-and-pure-pairs"
+    ],
+    "items": [
+      {
+        "id": "ex-the-four-cycle-is-a-cograph",
+        "kind": "example",
+        "title": "The four-cycle is a cograph",
+        "strategy": "Build $C_4$ as the complete connection of two disjoint edges. This witnesses the recursive cograph definition directly and keeps the example small enough that the decomposition can be checked from the adjacency list alone.",
+        "deps": [
+          "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "def-complete-connection-of-two-disjoint-graphs",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-the-five-vertex-path-is-perfect-but-not-a-cograph",
+        "kind": "example",
+        "title": "The five-vertex path is perfect but not a cograph",
+        "strategy": "The induced subgraphs of $P_5$ are smaller forests, so each has clique number and chromatic number both equal to $1$ or $2$; verify this directly by finite case checking. It is not a cograph because its first four vertices induce a $P_4$.",
+        "deps": [
+          "def-perfect-graph",
+          "thm-cographs-are-exactly-the-p-four-free-graphs",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-two-block-pure-blockade-has-additive-kappa",
+        "kind": "example",
+        "title": "A two-block pure blockade can realize equality in the additive $\\kappa$ theorem",
+        "strategy": "Take two disjoint cliques that are complete to each other. Each block contributes its order to $\\kappa$, and the union is again a clique whose size is the sum of the two block sizes.",
+        "deps": [
+          "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-pure-blockade-with-perfect-but-not-cograph-pattern",
+        "kind": "example",
+        "title": "A pure blockade can have a perfect pattern that is not a cograph",
+        "strategy": "Use five singleton blocks whose pattern graph is $P_5$. The previous example supplies that $P_5$ is perfect and not a cograph, and the singleton blocks make the blockade and its pattern transparent.",
+        "deps": [
+          "thm-pure-blockades-with-perfect-patterns-contain-large-homogeneous-subblockades",
+          "ex-the-five-vertex-path-is-perfect-but-not-a-cograph",
+          "def-pattern-graph-of-a-pure-blockade",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-a-blockade-rainbow-copy-of-the-four-vertex-path",
+        "kind": "example",
+        "title": "A four-block blockade-rainbow copy of $P_4$",
+        "strategy": "Take one vertex from each of four singleton blocks whose induced graph is a path. Then each block meets the copy in exactly one vertex, so the copy is rainbow by definition.",
+        "deps": [
+          "def-blockade-rainbow-induced-copy",
+          "def-blockade-length-and-width",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      }
+    ]
+  }
+]

@@ -5,6 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -191,6 +192,13 @@ test('terminal intervention binds the exact unresolved item and two cycle receip
   const exact = terminalEvidence(root, 'demo', 'thm-demo-target');
   assert.deepEqual(exact.evidence.cycle_ids, ['c1', 'c2']);
   assert.equal(exact.evidence.unresolved_as, 'open_fatal');
+  assert.match(exact.evidence.closure_path,
+    /^research\/demo-step8-terminal-evidence\/[a-f0-9]{64}\.json$/);
+  const frozen = readFileSync(join(root, exact.evidence.closure_path), 'utf8');
+  assert.equal(createHash('sha256').update(frozen).digest('hex'), exact.evidence.closure_sha256);
+  writeFileSync(join(root, 'research', 'demo-judge-closure.json'), JSON.stringify({ closed: true }));
+  assert.equal(readFileSync(join(root, exact.evidence.closure_path), 'utf8'), frozen,
+    'later closure recomputation must not overwrite terminal failure evidence');
   assert.throws(() => terminalEvidence(root, 'demo', 'thm-arbitrary-other'),
     /terminal intervention is not licensed|not named in the current unresolved/);
 });

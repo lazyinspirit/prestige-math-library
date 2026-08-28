@@ -58,6 +58,7 @@ parts:
       - the-fundamental-theorem-of-algebra
       - solvability-by-radicals-and-kummer-theory
       - the-group-algebra-and-representations
+      - maschkes-theorem-and-complete-reducibility
 ---
 
 ## groups-and-quotients
@@ -116,12 +117,13 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 ## sylow-and-extensions
 
-A split extension is a semidirect product, so actions by automorphisms assemble finite
-groups from normal pieces. Sylow's theorems turn divisibility of $|G|$ into existence,
-conjugacy and counting of $p$-subgroups; nilpotence, the Frattini subgroup and the Galois
-correspondence refine that picture, while finite fields, cyclotomic polynomials and
-solvability by radicals give explicit extensions. Artin's proof of the fundamental theorem
-of algebra is the field-theoretic endpoint. The same structure also linearises: $k[G]$
-identifies representations with modules, the regular representation contains every
-irreducible, Schur's lemma and splitting fields control endomorphisms, and finite abelian
-groups have only one-dimensional irreducibles over a splitting field.
+A split extension is a semidirect product, so actions assemble groups from normal pieces,
+and Sylow theory turns the prime divisors of $|G|$ into existence, conjugacy, and counting
+statements for $p$-subgroups. Nilpotence, the Frattini subgroup, and the Galois
+correspondence refine that control, while finite fields, cyclotomic extensions,
+solvability by radicals, and Artin's field-theoretic proof of the fundamental theorem of
+algebra show how explicit extensions are built. The representation pages then pass to
+$k[G]$-modules: irreducibles sit inside the regular representation, Maschke gives complete
+reducibility when $\operatorname{char} k \nmid |G|$, Wedderburn decomposes $k[G]$ into
+matrix blocks, and class sums identify the center and count irreducibles by conjugacy
+classes.

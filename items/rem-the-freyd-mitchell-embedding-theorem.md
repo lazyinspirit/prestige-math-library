@@ -15,6 +15,10 @@ landmark: false
 verification:
   audited: 2026-08-28
   precheck: n/a
+  sources_checked:
+    date: 2026-08-27
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

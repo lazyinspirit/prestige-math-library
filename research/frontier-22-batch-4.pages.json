@@ -1,0 +1,703 @@
+[
+  {
+    "order": 227,
+    "id": "algebraic-and-spectral-graph-theory",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Algebraic and Spectral Graph Theory",
+    "companion": "algebraic-and-spectral-graph-theory-examples",
+    "requires": [
+      "block-designs-and-finite-projective-planes",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "determinants-of-matrices-over-a-commutative-ring",
+      "trees-forests-and-spanning-trees",
+      "linear-recurrences-and-rational-generating-functions"
+    ],
+    "items": [
+      {
+        "id": "def-adjacency-matrix-of-a-finite-simple-graph",
+        "kind": "definition",
+        "title": "The adjacency matrix of a finite simple graph",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "def-graph-spectrum-spectral-radius-and-cospectrality",
+        "kind": "definition",
+        "title": "Adjacency spectrum, spectral radius, and cospectral graphs",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-characteristic-polynomial-of-a-matrix",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ]
+      },
+      {
+        "id": "thm-adjacency-matrix-powers-count-walks",
+        "kind": "theorem",
+        "title": "The $(i,j)$ entry of $A(G)^k$ counts walks of length $k$",
+        "strategy": "Induct on the walk length. The case k=1 is the adjacency definition. For the inductive step, the matrix-product formula expands the (i,j) entry of A^(k+1) as a sum over intermediate vertices, and each summand counts the length-k walks ending at that intermediate vertex followed by one final edge.",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-graph-walk-trail-path-and-cycle",
+          "thm-matrix-of-a-composite-is-the-product"
+        ]
+      },
+      {
+        "id": "cor-trace-of-adjacency-power-counts-closed-walks",
+        "kind": "corollary",
+        "title": "The trace of $A(G)^k$ counts closed walks of length $k$",
+        "strategy": "Sum the diagonal entries in the walk-counting theorem. Each diagonal entry counts walks that start and end at the same vertex, so the trace counts all closed walks of the given length.",
+        "deps": [
+          "thm-adjacency-matrix-powers-count-walks",
+          "def-trace-of-a-square-matrix-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "prop-spectrum-is-an-isomorphism-invariant",
+        "kind": "proposition",
+        "title": "The adjacency spectrum is an isomorphism invariant",
+        "strategy": "An isomorphism between finite graphs permutes the vertex basis, so the two adjacency matrices are conjugate by a permutation matrix. Conjugate matrices have the same characteristic polynomial and therefore the same ordered real spectrum.",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-graph-isomorphism-and-complement",
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-characteristic-polynomial-of-a-matrix"
+        ]
+      },
+      {
+        "id": "thm-bipartite-graph-iff-adjacency-spectrum-is-symmetric",
+        "kind": "theorem",
+        "title": "A finite simple graph is bipartite if and only if its adjacency spectrum is symmetric about $0$",
+        "strategy": "If the graph is bipartite, conjugate its adjacency matrix by the diagonal sign matrix that is +1 on one part and -1 on the other to obtain -A. Conversely, symmetric spectrum forces every odd power to have trace zero, so there are no closed walks of odd length. The published odd-cycle criterion then gives bipartiteness.",
+        "deps": [
+          "def-bipartite-graph",
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "cor-trace-of-adjacency-power-counts-closed-walks",
+          "thm-bipartite-iff-no-odd-cycle"
+        ]
+      },
+      {
+        "id": "thm-spectral-radius-is-bounded-by-average-and-maximum-degree",
+        "kind": "theorem",
+        "title": "The adjacency spectral radius lies between the average degree and the maximum degree",
+        "strategy": "For the lower bound, evaluate the Rayleigh quotient on the all-ones vector to obtain the average degree. For the upper bound, each Gershgorin disk is centered at zero with radius equal to a vertex degree, so every eigenvalue has modulus at most the maximum degree.",
+        "deps": [
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-rayleigh-quotient",
+          "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+          "thm-gershgorin-disk-theorem"
+        ]
+      },
+      {
+        "id": "def-oriented-incidence-matrix-of-a-graph",
+        "kind": "definition",
+        "title": "An oriented incidence matrix of a finite simple graph",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "def-laplacian-matrix-of-a-finite-simple-graph",
+        "kind": "definition",
+        "title": "The Laplacian matrix of a finite simple graph",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-oriented-incidence-matrix-of-a-graph"
+        ]
+      },
+      {
+        "id": "thm-laplacian-is-the-oriented-incidence-product",
+        "kind": "theorem",
+        "title": "The Laplacian equals $BB^{\\mathsf T}$ for every oriented incidence matrix $B$",
+        "strategy": "Compute the diagonal and off-diagonal entries of BB^T directly from the column signs of an oriented incidence matrix. The diagonal entry counts edges incident to a vertex, while an off-diagonal entry is -1 when the vertices are adjacent and 0 otherwise.",
+        "deps": [
+          "def-oriented-incidence-matrix-of-a-graph",
+          "def-laplacian-matrix-of-a-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "thm-laplacian-is-positive-semidefinite-and-annihilates-ones",
+        "kind": "theorem",
+        "title": "The Laplacian is positive semidefinite and sends the all-ones vector to zero",
+        "strategy": "From L=BB^T, every quadratic form x^TLx is ||B^Tx||^2 and is therefore nonnegative. The column sum of an oriented incidence matrix is zero, so B^T times the all-ones vector vanishes and hence so does L times that vector.",
+        "deps": [
+          "def-laplacian-matrix-of-a-finite-simple-graph",
+          "thm-laplacian-is-the-oriented-incidence-product"
+        ]
+      },
+      {
+        "id": "thm-laplacian-kernel-dimension-counts-components",
+        "kind": "theorem",
+        "title": "The multiplicity of the Laplacian eigenvalue $0$ equals the number of connected components",
+        "strategy": "A vector lies in the kernel of the Laplacian exactly when it is constant on every edge, equivalently constant on every connected component. Indicator vectors of the connected components span that kernel and are linearly independent, giving the exact multiplicity count.",
+        "deps": [
+          "def-connected-graph-and-connected-component",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-laplacian-matrix-of-a-finite-simple-graph",
+          "thm-laplacian-is-positive-semidefinite-and-annihilates-ones"
+        ]
+      },
+      {
+        "id": "def-algebraic-connectivity-of-a-graph",
+        "kind": "definition",
+        "title": "The algebraic connectivity of a finite simple graph",
+        "deps": [
+          "thm-laplacian-kernel-dimension-counts-components"
+        ]
+      },
+      {
+        "id": "cor-algebraic-connectivity-characterises-connectedness",
+        "kind": "corollary",
+        "title": "A finite simple graph is connected if and only if its algebraic connectivity is positive",
+        "strategy": "The preceding theorem makes the second-smallest Laplacian eigenvalue positive exactly when the zero eigenspace is one-dimensional, and that happens exactly when the graph has one connected component.",
+        "deps": [
+          "def-algebraic-connectivity-of-a-graph",
+          "thm-laplacian-kernel-dimension-counts-components"
+        ]
+      },
+      {
+        "id": "thm-binet-cauchy-formula",
+        "kind": "theorem",
+        "title": "The Binet-Cauchy formula",
+        "strategy": "Expand the determinant of AB by selecting which m columns of A and corresponding rows of B contribute to a nonzero permutation term. Grouping the terms by that chosen m-set yields the sum of products of m-by-m minors.",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-spectrum-of-the-complete-graph",
+        "kind": "theorem",
+        "title": "The complete graph $K_n$ has adjacency spectrum $\\{n-1,(-1)^{n-1}\\}$",
+        "strategy": "Write A(K_n)=J-I. The all-ones vector is an eigenvector of J with eigenvalue n, while every vector orthogonal to it is annihilated by J. Subtracting the identity shifts those eigenvalues to n-1 and -1.",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-matrix-tree-theorem",
+        "kind": "theorem",
+        "title": "Kirchhoff's matrix-tree theorem",
+        "strategy": "Delete one row from an oriented incidence matrix B to get B0. Then L0=B0B0^T, so Binet-Cauchy expands det(L0) as a sum over (n-1)-edge subsets. A minor contributes 1 exactly for spanning trees and 0 otherwise, giving the spanning-tree count and simultaneously showing that every principal Laplacian cofactor agrees.",
+        "deps": [
+          "def-laplacian-matrix-of-a-finite-simple-graph",
+          "def-number-of-spanning-trees",
+          "def-oriented-incidence-matrix-of-a-graph",
+          "def-spanning-tree",
+          "thm-binet-cauchy-formula",
+          "thm-laplacian-is-the-oriented-incidence-product",
+          "thm-tree-characterisations"
+        ]
+      },
+      {
+        "id": "cor-kirchhoff-eigenvalue-product-formula",
+        "kind": "corollary",
+        "title": "The matrix-tree theorem becomes an eigenvalue product formula",
+        "strategy": "The deleted Laplacian cofactor is the product of the nonzero Laplacian eigenvalues divided by the number of vertices. For a d-regular graph, L=dI-A, so spectral mapping turns the Laplacian factors into d-lambda_i.",
+        "deps": [
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-laplacian-matrix-of-a-finite-simple-graph",
+          "thm-determinant-is-product-of-eigenvalues",
+          "thm-matrix-tree-theorem",
+          "thm-spectral-mapping-for-polynomials"
+        ]
+      },
+      {
+        "id": "cor-cayley-formula-from-the-matrix-tree-theorem",
+        "kind": "corollary",
+        "title": "Cayley's formula follows again from the matrix-tree theorem",
+        "strategy": "Apply the eigenvalue product formula to K_n. Its nontrivial adjacency eigenvalue is -1 with multiplicity n-1, so the regular-graph form gives tau(K_n)=n^(n-2), agreeing with the earlier Prüfer-code proof.",
+        "deps": [
+          "cor-kirchhoff-eigenvalue-product-formula",
+          "thm-cayley-formula",
+          "thm-spectrum-of-the-complete-graph"
+        ]
+      },
+      {
+        "id": "def-n-d-lambda-graph-and-expander",
+        "kind": "definition",
+        "title": "An $(n,d,\\lambda)$-graph and an expander",
+        "deps": [
+          "def-graph-spectrum-spectral-radius-and-cospectrality"
+        ]
+      },
+      {
+        "id": "thm-spectral-gap-implies-connectivity-and-edge-expansion",
+        "kind": "theorem",
+        "title": "For an $(n,d,\\lambda)$-graph with $\\lambda<d$, every nontrivial cut has many crossing edges",
+        "strategy": "Evaluate the second-eigenvalue Rayleigh quotient on the vector that is constant on one side of a vertex partition and constant of opposite sign on the other. Rearranging the resulting inequality yields a lower bound on the cut size, and positivity of that bound gives connectedness.",
+        "deps": [
+          "cor-connected-components-partition-the-vertex-set",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-n-d-lambda-graph-and-expander",
+          "def-rayleigh-quotient",
+          "thm-courant-fischer-min-max-principle"
+        ]
+      },
+      {
+        "id": "thm-spectrum-of-the-cycle-graph",
+        "kind": "theorem",
+        "title": "The cycle graph $C_n$ has adjacency spectrum $\\{2\\cos(2\\pi j/n):0\\le j<n\\}$",
+        "strategy": "View C_n as the Cayley graph of Z/nZ with generators ±1. The discrete Fourier basis diagonalizes every circulant matrix, and the corresponding eigenvalue at frequency j is omega^j+omega^{-j}=2 cos(2 pi j/n).",
+        "deps": [
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-spectrum-of-the-complete-bipartite-graph",
+        "kind": "theorem",
+        "title": "The complete bipartite graph $K_{m,n}$ has adjacency spectrum $\\{\\sqrt{mn},0^{m+n-2},-\\sqrt{mn}\\}$",
+        "strategy": "Write the adjacency matrix in block form with off-diagonal all-ones blocks. Vectors supported on one part and summing to zero, or on the other part and summing to zero, are killed by the matrix. The remaining two-dimensional block has matrix [[0,n],[m,0]], whose eigenvalues are ±sqrt(mn).",
+        "deps": [
+          "def-adjacency-matrix-of-a-finite-simple-graph",
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-spectrum-of-the-petersen-graph",
+        "kind": "theorem",
+        "title": "The Petersen graph has adjacency spectrum $\\{3,1^5,(-2)^4\\}$",
+        "strategy": "Use the two-subset model of the Petersen graph. The adjacency operator is the Kneser operator on two-subsets of a five-element set; the constant vector, the five-dimensional coordinate-sum space modulo constants, and its orthogonal complement are invariant, and the operator acts on them by 3, 1, and -2 respectively.",
+        "deps": [
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "def-petersen-graph"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 228,
+    "id": "algebraic-and-spectral-graph-theory-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Algebraic and Spectral Graph Theory — Examples",
+    "companion": "algebraic-and-spectral-graph-theory",
+    "requires": [
+      "algebraic-and-spectral-graph-theory"
+    ],
+    "items": [
+      {
+        "id": "ex-adjacency-spectrum-of-c-four",
+        "kind": "example",
+        "title": "The cycle $C_4$ has adjacency spectrum $\\{2,0,0,-2\\}$",
+        "deps": [
+          "thm-spectrum-of-the-cycle-graph"
+        ]
+      },
+      {
+        "id": "ex-laplacian-kernel-of-a-disconnected-graph",
+        "kind": "example",
+        "title": "A disconnected graph has a Laplacian kernel spanned by its component indicators",
+        "deps": [
+          "thm-laplacian-kernel-dimension-counts-components"
+        ]
+      },
+      {
+        "id": "ex-k-four-has-sixteen-spanning-trees-by-kirchhoff",
+        "kind": "example",
+        "title": "Kirchhoff's formula gives $\\tau(K_4)=16$",
+        "deps": [
+          "cor-kirchhoff-eigenvalue-product-formula",
+          "thm-spectrum-of-the-complete-graph"
+        ]
+      },
+      {
+        "id": "ex-spectrum-of-k-three-three",
+        "kind": "example",
+        "title": "The graph $K_{3,3}$ has adjacency spectrum $\\{3,0,0,0,0,-3\\}$",
+        "deps": [
+          "thm-spectrum-of-the-complete-bipartite-graph"
+        ]
+      },
+      {
+        "id": "ex-petersen-graph-spectrum-from-the-two-subset-model",
+        "kind": "example",
+        "title": "The two-subset model reproduces the Petersen spectrum",
+        "deps": [
+          "def-petersen-graph",
+          "thm-spectrum-of-the-petersen-graph"
+        ]
+      },
+      {
+        "id": "cex-cospectral-graphs-need-not-be-isomorphic",
+        "kind": "counterexample",
+        "title": "Two cospectral graphs need not be isomorphic",
+        "deps": [
+          "def-graph-spectrum-spectral-radius-and-cospectrality",
+          "prop-spectrum-is-an-isomorphism-invariant"
+        ]
+      },
+      {
+        "id": "fs-positive-second-laplacian-eigenvalue-characterises-two-connectivity",
+        "kind": "false-statement",
+        "title": "FALSE: positive second Laplacian eigenvalue characterises 2-connectivity",
+        "deps": [
+          "cor-algebraic-connectivity-characterises-connectedness",
+          "def-algebraic-connectivity-of-a-graph"
+        ]
+      },
+      {
+        "id": "fs-matrix-tree-theorem-needs-a-particular-cofactor",
+        "kind": "false-statement",
+        "title": "FALSE: the matrix-tree theorem works only for one distinguished cofactor",
+        "deps": [
+          "thm-matrix-tree-theorem"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 411,
+    "id": "bull-free-graphs-and-the-erdos-hajnal-property",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Bull-Free Graphs and the Erdős–Hajnal Property",
+    "companion": "bull-free-graphs-and-the-erdos-hajnal-property-examples",
+    "requires": [
+      "modules-substitution-and-prime-graphs",
+      "pure-pairs-forests-and-path-antipath-classes"
+    ],
+    "items": [
+      {
+        "id": "def-bull-graph",
+        "kind": "definition",
+        "title": "The bull graph",
+        "deps": [
+          "def-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "def-bull-free-graph",
+        "kind": "definition",
+        "title": "A bull-free graph",
+        "deps": [
+          "def-bull-graph",
+          "def-h-free-and-family-free-graph"
+        ]
+      },
+      {
+        "id": "prop-bull-free-graphs-are-complement-invariant",
+        "kind": "proposition",
+        "title": "A graph is bull-free if and only if its complement is bull-free",
+        "strategy": "The bull is self-complementary, so taking complements preserves the forbidden induced configuration. Apply the published complement construction to transport induced copies in both directions.",
+        "deps": [
+          "def-bull-free-graph",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "def-hole-antihole-and-odd-hole",
+        "kind": "definition",
+        "title": "Holes, antiholes, and odd holes",
+        "deps": [
+          "def-graph-isomorphism-and-complement",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "def-perfect-graph-for-the-bull-route",
+        "kind": "definition",
+        "title": "A perfect graph",
+        "deps": [
+          "def-clique-stable-set-and-numbers",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "rem-weak-perfect-graph-theorem-for-the-bull-route",
+        "kind": "remark",
+        "title": "Weak Perfect Graph Theorem",
+        "deps": [
+          "def-perfect-graph-for-the-bull-route",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "rem-strong-perfect-graph-theorem-for-the-bull-route",
+        "kind": "remark",
+        "title": "Strong Perfect Graph Theorem",
+        "deps": [
+          "def-hole-antihole-and-odd-hole",
+          "def-perfect-graph-for-the-bull-route"
+        ]
+      },
+      {
+        "id": "def-good-function-on-a-graph",
+        "kind": "definition",
+        "title": "A good function on a graph",
+        "deps": [
+          "def-perfect-graph-for-the-bull-route"
+        ]
+      },
+      {
+        "id": "def-alpha-narrow-graph",
+        "kind": "definition",
+        "title": "An $\\alpha$-narrow graph",
+        "deps": [
+          "def-good-function-on-a-graph",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "prop-perfect-graphs-are-one-narrow",
+        "kind": "proposition",
+        "title": "Every perfect graph is 1-narrow",
+        "strategy": "If G is perfect, then G itself is one of the perfect induced subgraphs tested in the definition of a good function. Therefore every good function has total weight at most 1 on all of V(G), which is exactly 1-narrowness.",
+        "deps": [
+          "def-alpha-narrow-graph",
+          "def-perfect-graph-for-the-bull-route"
+        ]
+      },
+      {
+        "id": "thm-alpha-narrow-graphs-contain-large-perfect-induced-subgraphs",
+        "kind": "theorem",
+        "title": "An $\\alpha$-narrow graph contains a perfect induced subgraph of order at least $|V(G)|^{1/\\alpha}$",
+        "strategy": "Let K be the maximum order of a perfect induced subgraph and test the narrowness inequality on the constant function 1/K. This function is good by definition of K, so the alpha-power bound forces |V(G)|/K^alpha <= 1.",
+        "deps": [
+          "def-alpha-narrow-graph",
+          "def-perfect-graph-for-the-bull-route",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "cor-alpha-narrow-graphs-have-large-cliques-or-stable-sets",
+        "kind": "corollary",
+        "title": "An $\\alpha$-narrow graph has a clique or stable set of size at least $|V(G)|^{1/(2\\alpha)}$",
+        "strategy": "Take a largest perfect induced subgraph from the preceding theorem. On that subgraph, the perfect-graph inequality alpha times omega at least the order yields a clique or stable set of square-root size, which becomes |V(G)|^(1/(2 alpha)) after substitution of the lower bound on the perfect subgraph order.",
+        "deps": [
+          "def-clique-stable-set-and-numbers",
+          "def-real-power",
+          "thm-alpha-narrow-graphs-contain-large-perfect-induced-subgraphs",
+          "def-perfect-graph-for-the-bull-route",
+          "thm-clique-independence-chromatic-bounds"
+        ]
+      },
+      {
+        "id": "def-basic-and-composite-bull-free-graphs",
+        "kind": "definition",
+        "title": "Basic and composite bull-free graphs",
+        "deps": [
+          "def-bull-free-graph",
+          "def-hole-antihole-and-odd-hole"
+        ]
+      },
+      {
+        "id": "def-split-set-in-a-bull-free-graph",
+        "kind": "definition",
+        "title": "A split set in a bull-free graph",
+        "deps": [
+          "def-bull-free-graph",
+          "def-hole-antihole-and-odd-hole",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "thm-split-set-with-complete-and-anticomplete-outsiders-yields-a-module",
+        "kind": "theorem",
+        "title": "A split set with both a complete and an anticomplete outside vertex yields a nontrivial module",
+        "strategy": "Follow the source's two-case bull obstruction for a mixed outside vertex, then grow the anticomplete side by paths through anticomplete vertices until its union with the split set becomes homogeneous to the rest of the graph. Translate the source's homogeneous-set conclusion into the library's module terminology.",
+        "deps": [
+          "def-module-of-a-graph",
+          "def-split-set-in-a-bull-free-graph",
+          "prop-bull-free-graphs-are-complement-invariant"
+        ]
+      },
+      {
+        "id": "thm-composite-bull-free-graphs-have-a-nontrivial-module",
+        "kind": "theorem",
+        "title": "Every composite bull-free graph has a nontrivial module",
+        "strategy": "A composite bull-free graph contains an odd hole or odd antihole with one outside vertex complete to it and another anticomplete to it. Check that the vertex set of the hole is a split set, then apply the previous theorem.",
+        "deps": [
+          "def-basic-and-composite-bull-free-graphs",
+          "def-split-set-in-a-bull-free-graph",
+          "thm-split-set-with-complete-and-anticomplete-outsiders-yields-a-module"
+        ]
+      },
+      {
+        "id": "cor-prime-bull-free-graphs-are-basic",
+        "kind": "corollary",
+        "title": "Every prime bull-free graph is basic",
+        "strategy": "If a prime bull-free graph were composite, the composite theorem would give a nontrivial module, contradicting primality.",
+        "deps": [
+          "def-basic-and-composite-bull-free-graphs",
+          "def-prime-graph",
+          "thm-composite-bull-free-graphs-have-a-nontrivial-module"
+        ]
+      },
+      {
+        "id": "lem-basic-bull-free-hole-with-a-complete-outside-vertex",
+        "kind": "lemma",
+        "title": "In a basic bull-free graph, a hole with a complete outside vertex has tightly constrained neighbors",
+        "strategy": "Assume a vertex outside the hole misses some hole vertex. The source's repeated bull obstructions force either complete adjacency to the hole or the exceptional five-hole configuration with at least three neighbors.",
+        "deps": [
+          "def-basic-and-composite-bull-free-graphs",
+          "def-hole-antihole-and-odd-hole"
+        ]
+      },
+      {
+        "id": "lem-basic-bull-free-hole-with-an-anticomplete-outside-vertex",
+        "kind": "lemma",
+        "title": "In a basic bull-free graph, a hole with an anticomplete outside vertex forbids consecutive neighbors",
+        "strategy": "If a vertex adjacent to the outside anticomplete vertex had two consecutive neighbors on the hole, then the source's minimal non-neighbor argument produces a bull. The resulting spacing also gives the lower bound on the number of hole non-neighbors.",
+        "deps": [
+          "def-basic-and-composite-bull-free-graphs",
+          "def-hole-antihole-and-odd-hole"
+        ]
+      },
+      {
+        "id": "rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route",
+        "kind": "remark",
+        "title": "Substituting perfect graphs preserves perfection",
+        "deps": [
+          "def-perfect-graph-for-the-bull-route",
+          "def-substitution-of-a-graph-for-a-vertex"
+        ]
+      },
+      {
+        "id": "thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect",
+        "kind": "theorem",
+        "title": "For a vertex in a basic bull-free graph, either its neighborhood or its antineighborhood is perfect",
+        "strategy": "Argue by contradiction: if both induced sides were imperfect, the strong perfect graph theorem would force odd holes or odd antiholes on each side. The two structural lemmas then overcount cross adjacencies and non-adjacencies between those witness cycles, producing the source contradiction.",
+        "deps": [
+          "def-perfect-graph-for-the-bull-route",
+          "lem-basic-bull-free-hole-with-a-complete-outside-vertex",
+          "lem-basic-bull-free-hole-with-an-anticomplete-outside-vertex",
+          "rem-strong-perfect-graph-theorem-for-the-bull-route"
+        ]
+      },
+      {
+        "id": "thm-basic-bull-free-graphs-are-two-narrow",
+        "kind": "theorem",
+        "title": "Every basic bull-free graph is 2-narrow",
+        "strategy": "Choose a vertex of maximum weight under a good function. One side of its neighborhood partition is perfect by the preceding theorem, and the other is smaller and still basic after complementing if needed. Rescale the good function on the imperfect side exactly as in the source and combine the two quadratic bounds.",
+        "deps": [
+          "def-alpha-narrow-graph",
+          "prop-bull-free-graphs-are-complement-invariant",
+          "thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect"
+        ]
+      },
+      {
+        "id": "thm-alpha-narrowness-is-preserved-under-substitution",
+        "kind": "theorem",
+        "title": "Substituting two $\\alpha$-narrow graphs yields another $\\alpha$-narrow graph",
+        "strategy": "Follow the source's two-graph substitution proof: compress the substituted block to one vertex whose weight is the maximum perfect-subgraph weight on that block, invoke preservation of perfection under substitution to verify the resulting good-function constraints, and combine the two alpha-power bounds.",
+        "deps": [
+          "def-alpha-narrow-graph",
+          "def-substitution-of-a-graph-for-a-vertex",
+          "rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route"
+        ]
+      },
+      {
+        "id": "thm-bull-free-graphs-are-two-narrow",
+        "kind": "theorem",
+        "title": "Every bull-free graph is 2-narrow",
+        "strategy": "Induct on the number of vertices. If the graph is prime, the prime-implies-basic corollary and the basic theorem apply. Otherwise the prime-graph theorem and the quotient-as-induced-subgraph lemma realize the graph as a substitution of two smaller bull-free graphs, and alpha-narrowness is preserved under substitution.",
+        "deps": [
+          "cor-prime-bull-free-graphs-are-basic",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "lem-the-quotient-is-an-induced-subgraph-on-a-transversal",
+          "prop-bull-free-graphs-are-complement-invariant",
+          "thm-alpha-narrowness-is-preserved-under-substitution",
+          "thm-basic-bull-free-graphs-are-two-narrow",
+          "thm-composite-bull-free-graphs-have-a-nontrivial-module",
+          "thm-prime-graphs-are-the-graphs-that-are-not-substitutions"
+        ]
+      },
+      {
+        "id": "cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter",
+        "kind": "corollary",
+        "title": "Every bull-free graph has a clique or stable set of size at least $|V(G)|^{1/4}$",
+        "strategy": "Combine two-narrowness with the general alpha-narrow clique-or-stable-set corollary at alpha=2, and restate the conclusion in the Erdős-Hajnal language already fixed earlier in the track.",
+        "deps": [
+          "cor-alpha-narrow-graphs-have-large-cliques-or-stable-sets",
+          "def-erdos-hajnal-property-and-constant",
+          "def-real-power",
+          "thm-bull-free-graphs-are-two-narrow"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 412,
+    "id": "bull-free-graphs-and-the-erdos-hajnal-property-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Bull-Free Graphs and the Erdős–Hajnal Property — Examples",
+    "companion": "bull-free-graphs-and-the-erdos-hajnal-property",
+    "requires": [
+      "bull-free-graphs-and-the-erdos-hajnal-property"
+    ],
+    "items": [
+      {
+        "id": "ex-the-bull-graph-is-self-complementary",
+        "kind": "example",
+        "title": "The bull graph is self-complementary",
+        "deps": [
+          "def-bull-graph",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "cex-the-five-cycle-is-bull-free-but-not-perfect",
+        "kind": "counterexample",
+        "title": "The five-cycle is bull-free but not perfect",
+        "deps": [
+          "def-bull-free-graph",
+          "def-clique-stable-set-and-numbers",
+          "def-perfect-graph-for-the-bull-route",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-k-four-is-bull-free-with-a-nontrivial-module",
+        "kind": "example",
+        "title": "$K_4$ is bull-free and has a nontrivial module",
+        "deps": [
+          "def-bull-free-graph",
+          "def-module-of-a-graph"
+        ]
+      },
+      {
+        "id": "ex-the-five-cycle-is-not-one-narrow",
+        "kind": "example",
+        "title": "The five-cycle is 2-narrow but not 1-narrow",
+        "deps": [
+          "cex-the-five-cycle-is-bull-free-but-not-perfect",
+          "def-alpha-narrow-graph",
+          "def-good-function-on-a-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-bull-free-graphs-are-two-narrow"
+        ]
+      },
+      {
+        "id": "fs-every-bull-free-graph-is-perfect",
+        "kind": "false-statement",
+        "title": "FALSE: every bull-free graph is perfect",
+        "deps": [
+          "cex-the-five-cycle-is-bull-free-but-not-perfect"
+        ]
+      },
+      {
+        "id": "fs-two-narrow-implies-one-narrow",
+        "kind": "false-statement",
+        "title": "FALSE: every 2-narrow graph is 1-narrow",
+        "deps": [
+          "ex-the-five-cycle-is-not-one-narrow"
+        ]
+      }
+    ]
+  }
+]

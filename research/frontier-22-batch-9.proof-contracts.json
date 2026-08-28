@@ -1,0 +1,2683 @@
+{
+  "version": 1,
+  "level": "frontier-22",
+  "note": "Step-5 authoring contract for frontier-22 batch 9 on Friday, August 28, 2026.",
+  "scope": [
+    "lem-induced-subgraphs-of-cographs-are-cographs",
+    "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+    "thm-cographs-are-exactly-the-p-four-free-graphs",
+    "thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four",
+    "lem-disjoint-union-of-perfect-graphs-is-perfect",
+    "lem-complete-connection-of-perfect-graphs-is-perfect",
+    "thm-cographs-are-perfect",
+    "thm-perfect-graphs-satisfy-kappa-at-least-their-order",
+    "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+    "thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations",
+    "thm-pure-blockades-with-perfect-patterns-contain-large-homogeneous-subblockades",
+    "prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical",
+    "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+    "thm-tau-critical-graphs-have-no-wide-cograph-pattern-blockades",
+    "ex-the-four-cycle-is-a-cograph",
+    "ex-the-five-vertex-path-is-perfect-but-not-a-cograph",
+    "ex-a-two-block-pure-blockade-has-additive-kappa",
+    "ex-a-pure-blockade-with-perfect-but-not-cograph-pattern",
+    "ex-a-blockade-rainbow-copy-of-the-four-vertex-path"
+  ],
+  "contracts": {
+    "lem-induced-subgraphs-of-cographs-are-cographs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "source_section": "Definition",
+          "quote": "The class of **cographs** is defined recursively as follows.\n\n1. The null graph is a cograph.\n2. Every one-vertex graph is a cograph.\n3. If $G$ and $H$ are vertex-disjoint cographs, then their disjoint union is a\n   cograph.\n4. If $G$ and $H$ are vertex-disjoint cographs, then their complete connection\n   $G\\nabla H$ is a cograph.\n5. No graph is a cograph unless it is obtained from the previous clauses by\n   finitely many applications.\n\nEquivalently, a finite graph is a cograph exactly when it is null or can be\nbuilt from singletons by repeatedly taking disjoint unions and complete\nconnections. In particular, every cograph with at least two vertices has a last\nconstruction step in which it is obtained from two nonempty smaller cographs by\none of those two operations.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complete-connection-of-two-disjoint-graphs",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be finite simple graphs with $V\\cap W=\\varnothing$.\nThe **complete connection** of $G$ and $H$ is the graph\n\n$$G\\nabla H:=(V\\cup W,\\ E\\cup F\\cup\\{\\{v,w\\}:v\\in V,\\ w\\in W\\}).$$\n\nThus $G\\nabla H$ contains $G$ and $H$ on their own vertex sets and adds every\npossible edge between the two sides. When $X\\subseteq V$ and $Y\\subseteq W$,\nthe induced subgraph on $X\\cup Y$ is exactly $G[X]\\nabla H[Y]$\n([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We argue by induction on the recursive definition of cographs. If $G$ is the null graph or a one-vertex graph, then $G[X]$ is again the null graph or a one-vertex graph, so it is a cograph by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $G$ is nontrivial, and that the claim is already known for the two smaller cographs in the last construction step of $G$. By [L1], there exist vertex-disjoint smaller cographs $G_1$ and $G_2$ such that $G$ is either their disjoint union or their complete connection. Put $X_i:=X\\cap V(G_i)$ for $i=1,2$. The induction hypothesis gives that $G_i[X_i]$ is a cograph for $i=1,2$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $G$ is the disjoint union of $G_1$ and $G_2$, then [L2] gives $G[X]=G_1[X_1]\\sqcup G_2[X_2]$, a disjoint union of cographs. If $G$ is $G_1\\nabla G_2$, then [L2] gives $G[X]=G_1[X_1]\\nabla G_2[X_2]$, a complete connection of cographs. In either case the recursive definition shows that $G[X]$ is a cograph.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 complete the induction, so every induced subgraph of a cograph is a cograph.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every induced subgraph of a cograph is a cograph is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the repaired null-graph base case and the last-step recursion. I rechecked that the null and one-vertex cases are explicit in the cograph definition now, and that induced subgraphs of a disjoint union or complete connection stay inside the same recursive constructors."
+      }
+    },
+    "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "source_section": "Definition",
+          "quote": "The class of **cographs** is defined recursively as follows.\n\n1. The null graph is a cograph.\n2. Every one-vertex graph is a cograph.\n3. If $G$ and $H$ are vertex-disjoint cographs, then their disjoint union is a\n   cograph.\n4. If $G$ and $H$ are vertex-disjoint cographs, then their complete connection\n   $G\\nabla H$ is a cograph.\n5. No graph is a cograph unless it is obtained from the previous clauses by\n   finitely many applications.\n\nEquivalently, a finite graph is a cograph exactly when it is null or can be\nbuilt from singletons by repeatedly taking disjoint unions and complete\nconnections. In particular, every cograph with at least two vertices has a last\nconstruction step in which it is obtained from two nonempty smaller cographs by\none of those two operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-connected-graph-and-connected-component",
+          "source_section": "Definition",
+          "quote": "Vertices $u$ and $v$ of a graph $G$ are **connected**, or **reachable from one\nanother**, when a path in $G$ has endpoints $u$ and $v$. Equivalently, a walk\njoins them, because [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]\nturns such a walk into a path.\n\nFor $v\\in V(G)$, its **connected component** is the induced subgraph on\n\n$$C_G(v):=\\{\\,u\\in V(G):u\\text{ is reachable from }v\\,\\}.$$\n\nA graph is **connected** when its vertex set is nonempty and every two vertices\nare reachable from one another. Thus the null graph is not connected. The\none-vertex graph is connected, since its vertex is joined to itself by the path\nof length $0$ from [[def-graph-walk-trail-path-and-cycle]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complete-connection-of-two-disjoint-graphs",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be finite simple graphs with $V\\cap W=\\varnothing$.\nThe **complete connection** of $G$ and $H$ is the graph\n\n$$G\\nabla H:=(V\\cup W,\\ E\\cup F\\cup\\{\\{v,w\\}:v\\in V,\\ w\\in W\\}).$$\n\nThus $G\\nabla H$ contains $G$ and $H$ on their own vertex sets and adds every\npossible edge between the two sides. When $X\\subseteq V$ and $Y\\subseteq W$,\nthe induced subgraph on $X\\cup Y$ is exactly $G[X]\\nabla H[Y]$\n([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there exist nonempty smaller cographs $G_1$ and $G_2$ such that $G$ is either the disjoint union of $G_1$ and $G_2$, or the complete connection $G_1\\nabla G_2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the disjoint-union case, [L2] immediately shows that $G$ is disconnected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the complete-connection case, [L3] shows that $\\overline G=\\overline{G_1}\\sqcup\\overline{G_2}$. Both sides are nonempty because $G_1$ and $G_2$ are nonempty, so $\\overline G$ is disconnected by [L2].",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore one of the two stated alternatives always holds: either $G$ is disconnected, or $\\overline G$ is disconnected.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every nontrivial cograph is disconnected or has disconnected complement is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the final-step decomposition and complement branch. I rechecked that every cograph with at least two vertices has a last construction step from two nonempty cographs, so the disjoint-union case makes G disconnected and the complete-connection case makes the complement a disjoint union of two nonempty graphs."
+      }
+    },
+    "thm-cographs-are-exactly-the-p-four-free-graphs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-induced-subgraphs-of-cographs-are-cographs",
+          "source_section": "Statement",
+          "quote": "If $G$ is a cograph and $X\\subseteq V(G)$, then the induced subgraph $G[X]$ is\nalso a cograph.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a cograph with at least two vertices. Then $G$ is disconnected or\n$\\overline G$ is disconnected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-connected-graph-and-connected-component",
+          "source_section": "Definition",
+          "quote": "Vertices $u$ and $v$ of a graph $G$ are **connected**, or **reachable from one\nanother**, when a path in $G$ has endpoints $u$ and $v$. Equivalently, a walk\njoins them, because [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]\nturns such a walk into a path.\n\nFor $v\\in V(G)$, its **connected component** is the induced subgraph on\n\n$$C_G(v):=\\{\\,u\\in V(G):u\\text{ is reachable from }v\\,\\}.$$\n\nA graph is **connected** when its vertex set is nonempty and every two vertices\nare reachable from one another. Thus the null graph is not connected. The\none-vertex graph is connected, since its vertex is joined to itself by the path\nof length $0$ from [[def-graph-walk-trail-path-and-cycle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-graph-isomorphism-and-complement",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be graphs. A **graph isomorphism** is a bijection\n$\\varphi:V\\to W$ ([[def-injection-surjection-bijection]]) such that, for all\ndistinct $u,v\\in V$,\n\n$$\\{u,v\\}\\in E\\quad\\Longleftrightarrow\\quad\\{\\varphi(u),\\varphi(v)\\}\\in F.$$\n\nGraphs are **isomorphic**, written $G\\cong H$, when such a map exists. An\n**automorphism** of $G$ is an isomorphism from $G$ to itself.\n\nThe **complement** of $G$ is the graph\n\n$$\\overline G:=(V,[V]^2\\setminus E).$$\n\nThus exactly one of $G$ and $\\overline G$ contains any given pair of distinct\nvertices as an edge, and $\\overline{\\overline G}=G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph with at least two vertices. If $G$ is\n$P_4$-free, then $G$ is disconnected or $\\overline G$ is disconnected.\nEquivalently, no nontrivial $P_4$-free graph is both connected and\nanticonnected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-connected-components-partition-the-vertex-set",
+          "source_section": "Statement",
+          "quote": "The vertex sets $C_G(v)$ of the connected components of a graph $G$ are\nnonempty, cover $V(G)$, and any two are equal or disjoint. Each induced graph\n$G[C_G(v)]$ is connected and contains every connected subgraph of $G$ that\ncontains $v$. Consequently the connected components are precisely the maximal\nconnected subgraphs of $G$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-anticonnected-components-are-complement-components",
+          "source_section": "Statement",
+          "quote": "For every graph $G$, its anticomponents are exactly the vertex sets of the connected components of $\\overline G$. In particular, they partition $V(G)$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-components-are-anticomplete-and-anticomponents-complete",
+          "source_section": "Statement",
+          "quote": "Distinct connected components of a graph are anticomplete to one another. Distinct anticomponents are complete to one another.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that $G$ is a cograph. If $G$ had an induced copy of $P_4$ on some vertex set $X$, then [L1] would make $G[X]$ a cograph. But $G[X]$ is isomorphic to $P_4$, and [L3] shows that both $P_4$ and its complement are connected, contradicting [L2]. Therefore every cograph is $P_4$-free.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the converse, we prove by induction on $n:=|V(G)|$ that every $P_4$-free graph on $n$ vertices is a cograph. If $n\\leq 1$, then $G$ is the null graph or a one-vertex graph, and the recursive definition makes it a cograph.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume now that $n\\geq 2$ and that every smaller $P_4$-free graph is a cograph. Because $G$ is $P_4$-free, [L4] gives that $G$ is disconnected or $\\overline G$ is disconnected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L4",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $G$ is disconnected, choose a connected component $C$ of $G$ and let $D:=V(G)\\setminus C$. Then $C$ and $D$ are nonempty, [L5] makes them anticomplete, and [F2] makes both $G[C]$ and $G[D]$ smaller $P_4$-free graphs. By the induction hypothesis they are cographs, so $G$ is their disjoint union and hence a cograph.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L5",
+            "F2",
+            "ih",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $\\overline G$ is disconnected, choose an anticomponent $C$ of $G$ and let $D:=V(G)\\setminus C$. Again $C$ and $D$ are nonempty, [L5] makes them complete to one another, and [F2] makes $G[C]$ and $G[D]$ smaller $P_4$-free graphs. By the induction hypothesis they are cographs, so $G$ is their complete connection and hence a cograph.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L5",
+            "F2",
+            "ih",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 close the induction, proving that every $P_4$-free graph is a cograph. Together with step 1.1, this proves the equivalence.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cographs are exactly the P_4-free graphs uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the direction \"cograph implies P_4-free\"."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, 3.1, and 3.2 establish the reverse direction, and step 4.1 closes the equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "Critical risk was the biconditional induction with both graph and complement disconnectivity branches. I rechecked the forward contradiction using P_4 and its complement both connected, then the reverse induction using the disconnected or complement-disconnected split and the cograph recursive constructors. The repaired null-graph base case is now explicit."
+      }
+    },
+    "thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-prime-graph",
+          "source_section": "Definition",
+          "quote": "A finite simple graph $G$ ([[def-finite-simple-graph]]) is **prime** when every\nmodule of $G$ is trivial, that is, when the only modules of $G$ are\n$\\varnothing$, the singletons and $V(G)$ ([[def-module-of-a-graph]]).\nEquivalently, $G$ is prime when it has no module $M$ with $2\\le|M|$ and\n$|M|\\le|V(G)|-1$ ([[def-finite-cardinality]]).\n\nUnder this convention the null graph, every graph on one vertex and every graph\non two vertices is prime, since such a graph has no vertex set at all whose\ncardinality lies between $2$ and $|V(G)|-1$. Which small graphs a source counts\nas prime is not uniform in the literature, and the alternatives are recorded in\n[[rem-conventions-for-prime-graphs]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-module-of-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph ([[def-finite-simple-graph]]). A vertex set\n$M\\subseteq V(G)$ is a **module** of $G$ when every vertex\n$v\\in V(G)\\setminus M$ is adjacent to every vertex of $M$ or to no vertex of\n$M$. Equivalently, the disjoint pair $(\\{v\\},M)$ is pure for every\n$v\\in V(G)\\setminus M$ ([[def-edges-between-sets-and-pure-mixed-pairs]],\n[[def-graph-adjacency-incidence-neighbourhood-and-degree]]).\n\nThe condition constrains only the edges between $M$ and $V(G)\\setminus M$: no\ncondition whatever is placed on the induced subgraph $G[M]$\n([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nThe **trivial modules** of $G$ are $\\varnothing$, the singletons $\\{v\\}$ for\n$v\\in V(G)$, and $V(G)$ itself. Each of the three really is a module: for\n$M=\\varnothing$ every pair $(\\{v\\},\\varnothing)$ is both complete and\nanticomplete, hence pure; for $M=\\{u\\}$ the pair $(\\{v\\},\\{u\\})$ is complete\nwhen $uv\\in E(G)$ and anticomplete otherwise; and for $M=V(G)$ there is no\nvertex outside $M$, so the condition is vacuous. A module that is not one of\nthese is **nontrivial**. Since $V(G)$ is finite, a module $M$ is nontrivial\nexactly when $2\\le|M|$ and $|M|\\le|V(G)|-1$, the second bound because a subset\nof a finite set has the full cardinality only if it is the whole set\n([[def-finite-cardinality]], [[thm-subset-of-a-finite-set]]).\n\nA module $M$ is **proper** when $M\\ne V(G)$. Thus $\\varnothing$ is a proper\nmodule exactly when $V(G)\\ne\\varnothing$, every singleton of a graph with at\nleast two vertices is a proper module, and every nontrivial module is proper.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cographs-are-exactly-the-p-four-free-graphs",
+          "source_section": "Statement",
+          "quote": "A finite graph is a cograph if and only if it is $P_4$-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a cograph with at least two vertices. Then $G$ is disconnected or\n$\\overline G$ is disconnected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-unions-of-components-and-of-anticomponents-are-modules",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite simple graph. If $M$ is a union of vertex sets of connected\ncomponents of $G$, then $M$ is a module of $G$, and every vertex outside $M$ is\nanticomplete to $M$. If $M$ is a union of anticomponents of $G$, then $M$ is a\nmodule of $G$, and every vertex outside $M$ is complete to $M$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose for contradiction that $G$ contains no induced $P_4$. Then [L2] shows that $G$ is a cograph. Since $|V(G)|\\geq 4$, the graph is nontrivial, so [L3] gives that $G$ is disconnected or $\\overline G$ is disconnected.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $G$ is disconnected, its connected components form a partition of $V(G)$ into at least two nonempty parts. By [F1], choose a proper union $M$ of component vertex sets with $2\\leq |M|\\leq |V(G)|-1$. Then [L4] makes $M$ a module of $G$, and the cardinality bounds say that it is nontrivial. This contradicts [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L4",
+            "F1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $\\overline G$ is disconnected, then the anticomponents of $G$ form a partition of $V(G)$ into at least two nonempty parts. Again [F1] gives a proper union $M$ of anticomponent vertex sets with $2\\leq |M|\\leq |V(G)|-1$, and [L4] makes $M$ a nontrivial module of $G$, contradicting [L1].",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L4",
+            "F1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both alternatives from step 1.1 are impossible, so the assumption was false. Therefore $G$ contains an induced copy of $P_4$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every prime graph on at least four vertices contains an induced P_4 is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "Critical risk was the contradiction through modules from components or anticomponents. I rechecked that a P_4-free prime graph would be a cograph, hence disconnected or complement-disconnected, and that a proper union of components or anticomponents with size between 2 and |V(G)|-1 is a genuine nontrivial module. This closes both branches."
+      }
+    },
+    "lem-disjoint-union-of-perfect-graphs-is-perfect": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-perfect-graph",
+          "source_section": "Definition",
+          "quote": "A finite graph $G$ is **perfect** when every induced subgraph $H$ of $G$\nsatisfies\n\n$$\\chi(H)=\\omega(H),$$\n\nwhere $\\chi(H)$ is the chromatic number and $\\omega(H)$ is the clique number\n([[def-proper-vertex-colouring-and-chromatic-number]],\n[[def-clique-stable-set-and-numbers]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library conventions, the null graph is perfect because its unique\ninduced subgraph is itself and $\\chi(K_0)=\\omega(K_0)=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let\n$k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function\n\n$$c:V\\longrightarrow k$$\n\nsuch that $c(u)\\ne c(v)$ whenever $\\{u,v\\}\\in E$. Its fibres are the\n**colour classes**. The graph is **$k$-colourable** when such a function exists.\n\nThe **chromatic number** of $G$ is\n\n$$\\chi(G):=\\min\\{\\,k\\in\\mathbb N:G\\text{ is }k\\text{-colourable}\\,\\}.$$\n\nThis minimum exists. Since $V$ is finite, there is a bijection\n$b:V\\to |V|$ ([[def-finite-cardinality]]), and $b$ is a proper\n$|V|$-colouring because adjacent vertices are distinct. The displayed set of\nadmissible natural numbers is therefore nonempty, so it has a least element by\n[[thm-well-ordering-principle]].\n\nThe null graph has $V=\\varnothing$. Its unique empty function\n$\\varnothing\\to0$ is a proper $0$-colouring, so $\\chi(G)=0$. Conversely, a\nnonnull graph has no function from its nonempty vertex set to $0=\\varnothing$,\nand hence has positive chromatic number. Colours are labels only: composing a\nproper colouring with a bijection of its colour set changes no adjacency\ncondition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $X\\subseteq V_G\\cup V_H$, and write $X_G:=X\\cap V_G$ and $X_H:=X\\cap V_H$. Since $G$ and $H$ are perfect, [L1] gives $\\chi(G[X_G])=\\omega(G[X_G])$ and $\\chi(H[X_H])=\\omega(H[X_H])$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the induced subgraph of $G\\sqcup H$ on $X$ is $G[X_G]\\sqcup H[X_H]$. Applying [L3] to that disjoint union and then using step 1.1 yields $\\chi((G\\sqcup H)[X])=\\max\\{\\chi(G[X_G]),\\chi(H[X_H])\\}=\\max\\{\\omega(G[X_G]),\\omega(H[X_H])\\}=\\omega((G\\sqcup H)[X]).$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves $\\chi(K)=\\omega(K)$ for every induced subgraph $K=(G\\sqcup H)[X]$, so the disjoint union $G\\sqcup H$ is perfect by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A disjoint union of two perfect graphs is perfect is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the induced-subgraph reduction and the max formulas for chi and omega. I rechecked that every induced subgraph of G sqcup H is G[X_G] sqcup H[X_H], cliques lie in one side, and the same palette can be reused across the two sides, so chi and omega are both the max of the side values."
+      }
+    },
+    "lem-complete-connection-of-perfect-graphs-is-perfect": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-perfect-graph",
+          "source_section": "Definition",
+          "quote": "A finite graph $G$ is **perfect** when every induced subgraph $H$ of $G$\nsatisfies\n\n$$\\chi(H)=\\omega(H),$$\n\nwhere $\\chi(H)$ is the chromatic number and $\\omega(H)$ is the clique number\n([[def-proper-vertex-colouring-and-chromatic-number]],\n[[def-clique-stable-set-and-numbers]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library conventions, the null graph is perfect because its unique\ninduced subgraph is itself and $\\chi(K_0)=\\omega(K_0)=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complete-connection-of-two-disjoint-graphs",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be finite simple graphs with $V\\cap W=\\varnothing$.\nThe **complete connection** of $G$ and $H$ is the graph\n\n$$G\\nabla H:=(V\\cup W,\\ E\\cup F\\cup\\{\\{v,w\\}:v\\in V,\\ w\\in W\\}).$$\n\nThus $G\\nabla H$ contains $G$ and $H$ on their own vertex sets and adds every\npossible edge between the two sides. When $X\\subseteq V$ and $Y\\subseteq W$,\nthe induced subgraph on $X\\cup Y$ is exactly $G[X]\\nabla H[Y]$\n([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let\n$k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function\n\n$$c:V\\longrightarrow k$$\n\nsuch that $c(u)\\ne c(v)$ whenever $\\{u,v\\}\\in E$. Its fibres are the\n**colour classes**. The graph is **$k$-colourable** when such a function exists.\n\nThe **chromatic number** of $G$ is\n\n$$\\chi(G):=\\min\\{\\,k\\in\\mathbb N:G\\text{ is }k\\text{-colourable}\\,\\}.$$\n\nThis minimum exists. Since $V$ is finite, there is a bijection\n$b:V\\to |V|$ ([[def-finite-cardinality]]), and $b$ is a proper\n$|V|$-colouring because adjacent vertices are distinct. The displayed set of\nadmissible natural numbers is therefore nonempty, so it has a least element by\n[[thm-well-ordering-principle]].\n\nThe null graph has $V=\\varnothing$. Its unique empty function\n$\\varnothing\\to0$ is a proper $0$-colouring, so $\\chi(G)=0$. Conversely, a\nnonnull graph has no function from its nonempty vertex set to $0=\\varnothing$,\nand hence has positive chromatic number. Colours are labels only: composing a\nproper colouring with a bijection of its colour set changes no adjacency\ncondition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $X\\subseteq V_G\\cup V_H$, and write $X_G:=X\\cap V_G$ and $X_H:=X\\cap V_H$. Because $G$ and $H$ are perfect, [L1] gives $\\chi(G[X_G])=\\omega(G[X_G])$ and $\\chi(H[X_H])=\\omega(H[X_H])$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the induced subgraph of $G\\nabla H$ on $X$ is $G[X_G]\\nabla H[X_H]$. Applying [L3] to that complete connection and then using step 1.1 yields $\\chi((G\\nabla H)[X]) =\\chi(G[X_G])+\\chi(H[X_H]) =\\omega(G[X_G])+\\omega(H[X_H]) =\\omega((G\\nabla H)[X]).$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves $\\chi(K)=\\omega(K)$ for every induced subgraph $K=(G\\nabla H)[X]$, so $G\\nabla H$ is perfect by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A complete connection of two perfect graphs is perfect is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the clique/chromatic-number additivity under join. I rechecked that every induced subgraph of a join is again the join of the induced sides, every clique splits as cliques from both sides, every stable set stays in one side, and hence chi and omega both add."
+      }
+    },
+    "thm-cographs-are-perfect": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "source_section": "Definition",
+          "quote": "The class of **cographs** is defined recursively as follows.\n\n1. The null graph is a cograph.\n2. Every one-vertex graph is a cograph.\n3. If $G$ and $H$ are vertex-disjoint cographs, then their disjoint union is a\n   cograph.\n4. If $G$ and $H$ are vertex-disjoint cographs, then their complete connection\n   $G\\nabla H$ is a cograph.\n5. No graph is a cograph unless it is obtained from the previous clauses by\n   finitely many applications.\n\nEquivalently, a finite graph is a cograph exactly when it is null or can be\nbuilt from singletons by repeatedly taking disjoint unions and complete\nconnections. In particular, every cograph with at least two vertices has a last\nconstruction step in which it is obtained from two nonempty smaller cographs by\none of those two operations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-disjoint-union-of-perfect-graphs-is-perfect",
+          "source_section": "Statement",
+          "quote": "If $G$ and $H$ are perfect graphs on disjoint vertex sets, then their disjoint\nunion is perfect.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-complete-connection-of-perfect-graphs-is-perfect",
+          "source_section": "Statement",
+          "quote": "If $G$ and $H$ are perfect graphs on disjoint vertex sets, then their complete\nconnection $G\\nabla H$ is perfect.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-perfect-graph",
+          "source_section": "Definition",
+          "quote": "A finite graph $G$ is **perfect** when every induced subgraph $H$ of $G$\nsatisfies\n\n$$\\chi(H)=\\omega(H),$$\n\nwhere $\\chi(H)$ is the chromatic number and $\\omega(H)$ is the clique number\n([[def-proper-vertex-colouring-and-chromatic-number]],\n[[def-clique-stable-set-and-numbers]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library conventions, the null graph is perfect because its unique\ninduced subgraph is itself and $\\chi(K_0)=\\omega(K_0)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We argue by induction on the recursive definition of cographs. If $G$ is the null graph or a one-vertex graph, then [F1] shows that $G$ is perfect.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $G$ is nontrivial and that the claim is already known for the two smaller cographs in its final construction step. By [L1], there exist smaller cographs $G_1$ and $G_2$ such that $G$ is either $G_1\\sqcup G_2$ or $G_1\\nabla G_2$. The induction hypothesis makes both $G_1$ and $G_2$ perfect.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the disjoint-union case, [L2] shows that $G$ is perfect. In the complete-connection case, [L3] shows that $G$ is perfect.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 close the induction. Therefore every cograph is perfect.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every cograph is perfect is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "Critical risk was the recursive base case after the cograph-definition repair. I rechecked that the null graph and one-vertex graph satisfy perfection, and that the induction step invokes only the two closure lemmas for disjoint union and complete connection of perfect graphs."
+      }
+    },
+    "thm-perfect-graphs-satisfy-kappa-at-least-their-order": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-perfect-graph",
+          "source_section": "Definition",
+          "quote": "A finite graph $G$ is **perfect** when every induced subgraph $H$ of $G$\nsatisfies\n\n$$\\chi(H)=\\omega(H),$$\n\nwhere $\\chi(H)$ is the chromatic number and $\\omega(H)$ is the clique number\n([[def-proper-vertex-colouring-and-chromatic-number]],\n[[def-clique-stable-set-and-numbers]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library conventions, the null graph is perfect because its unique\ninduced subgraph is itself and $\\chi(K_0)=\\omega(K_0)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-clique-independence-chromatic-bounds",
+          "source_section": "Statement",
+          "quote": "For every finite simple graph $G=(V,E)$,\n\n$$\\omega(G)\\leq\\chi(G),\\qquad |V|\\leq\\chi(G)\\alpha(G).$$\n\nBoth inequalities include the null graph, where all displayed quantities are\n$0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Combining [L1] and [L2] gives $|V(G)|\\leq \\chi(G)\\alpha(G)=\\omega(G)\\alpha(G).$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The right-hand side of step 1.1 is $\\kappa(G)$ by [L3]. Therefore $|V(G)|\\leq \\kappa(G)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every perfect graph satisfies |V(G)|<=kappa(G) is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-perfect-graphs-satisfy-kappa-at-least-their-order",
+          "source_section": "Statement",
+          "quote": "If $G$ is a perfect graph, then\n\n$$|V(G)|\\leq \\kappa(G).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $h:=\\operatorname{hom}(G)=\\max\\{\\alpha(G),\\omega(G)\\}$. Then $\\alpha(G)\\leq h$ and $\\omega(G)\\leq h$, so [L2] gives $\\kappa(G)=\\alpha(G)\\omega(G)\\leq h^2.$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $n=|V(G)|$, [L1] and step 1.1 yield $n\\leq h^2$. Therefore $h\\geq \\sqrt n$. If $h=\\omega(G)$, $G$ has a clique of size at least $\\sqrt n$; if $h=\\alpha(G)$, it has a stable set of that size.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence every perfect graph on $n$ vertices has a clique or stable set of size at least $\\sqrt n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every perfect graph has a clique or stable set of size at least the square root of its order is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-erdos-hajnal-property-and-constant",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a hereditary class of finite graphs ([[def-hereditary-graph-class]]). A real number $\\epsilon>0$ is an **Erdős–Hajnal constant** for $\\mathcal C$ if every nonempty $G\\in\\mathcal C$ satisfies\n$$\\operatorname{hom}(G)\\ge |V(G)|^\\epsilon,$$\nwhere the homogeneous number is that of [[def-homogeneous-set-and-homogeneous-number]] and the power is that of [[def-real-power]]. The class $\\mathcal C$ has the **Erdős–Hajnal property** if it has an Erdős–Hajnal constant.\n\nFor a finite graph $H$, we say that **$H$ has the Erdős–Hajnal property** when the hereditary class of $H$-free graphs has it. The same terminology applies to a finite family $\\mathcal F$ through its class of $\\mathcal F$-free graphs.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cographs-are-perfect",
+          "source_section": "Statement",
+          "quote": "Every cograph is perfect.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+          "source_section": "Statement",
+          "quote": "If $G$ is a perfect graph on $n$ vertices, then $G$ has a clique or a stable\nset of size at least $\\sqrt n$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-rational-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $a \\in \\mathbb{R}$ with $a > 0$ and let $r, s \\in \\mathbb{Q}$ with $r < s$\n([[def-rat-order]]), with rational powers as in [[def-rational-power]].\n\n1. **In the exponent.** If $a > 1$ then $a^{r} < a^{s}$; if $a = 1$ then $a^{r} = a^{s} = 1$; if $0 < a < 1$ then $a^{r} > a^{s}$.\n2. **In the base.** If $r \\in \\mathbb{Q}$ with $r > 0$ and $0 < a < b$, then $a^{r} < b^{r}$; so $a \\mapsto a^{r}$ is strictly increasing on $\\{a \\in \\mathbb{R} : a > 0\\}$.\n3. **Comparison with $1$.** For rational $t > 0$: $a > 1$ implies $a^{t} > 1$, and $0 < a < 1$ implies $a^{t} < 1$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-real-power-agrees-with-rational-exponent",
+          "source_section": "Statement",
+          "quote": "If $a>0$ and $r\\in\\mathbb Q$, then the real power $a^r=\\exp(r\\log a)$ agrees with the rational power of [[def-rational-power]]. For $r>0$, both conventions also give $0^r=0$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "source_section": "Definition",
+          "quote": "The class of **cographs** is defined recursively as follows.\n\n1. The null graph is a cograph.\n2. Every one-vertex graph is a cograph.\n3. If $G$ and $H$ are vertex-disjoint cographs, then their disjoint union is a\n   cograph.\n4. If $G$ and $H$ are vertex-disjoint cographs, then their complete connection\n   $G\\nabla H$ is a cograph.\n5. No graph is a cograph unless it is obtained from the previous clauses by\n   finitely many applications.\n\nEquivalently, a finite graph is a cograph exactly when it is null or can be\nbuilt from singletons by repeatedly taking disjoint unions and complete\nconnections. In particular, every cograph with at least two vertices has a last\nconstruction step in which it is obtained from two nonempty smaller cographs by\none of those two operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-homogeneous-set-and-homogeneous-number",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A vertex set $S\\subseteq V(G)$ is **homogeneous** if it is a clique or a stable set in $G$ ([[def-clique-stable-set-and-numbers]]). The **homogeneous number** of $G$ is\n$$\\operatorname{hom}(G):=\\max\\{\\omega(G),\\alpha(G)\\}.$$\n\nFor the null graph, the published conventions give $\\omega(G)=\\alpha(G)=0$, and hence $\\operatorname{hom}(G)=0$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume clause 1. By [L1], choose $\\tau>0$ such that every nonempty $\\mathcal H$-free graph $G$ satisfies $\\operatorname{hom}(G)\\geq |V(G)|^\\tau$. For such a graph, choose a homogeneous set $S$ with $|S|=\\operatorname{hom}(G)$. Then [F1] shows that $G[S]$ is a cograph on at least $|V(G)|^\\tau$ vertices. Hence clause 2 holds with the same exponent $\\tau$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume clause 2 with exponent $\\tau>0$. Every cograph is perfect by [L2], so the same induced subgraph witnesses clause 3 with the same exponent.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume clause 3 with exponent $\\tau>0$, and let $G$ be a nonempty $\\mathcal H$-free graph. Choose an induced perfect subgraph $J$ of $G$ with $|V(J)|\\geq |V(G)|^\\tau$. By [L3], the graph $J$ has a clique or stable set of size at least $|V(J)|^{1/2}$. Since $|V(J)|\\geq |V(G)|^\\tau>0$, [L5] gives $|V(J)|^{1/2}\\geq (|V(G)|^\\tau)^{1/2}=|V(G)|^{\\tau/2}$, where the equality is [L4]. Then [F2] turns that clique or stable set into one in $G$. Therefore clause 1 holds, with exponent $\\tau/2$.",
+          "step": "1.3",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For a nonempty graph $G$, [F3] gives $\\operatorname{hom}(G)\\leq\\kappa(G)\\leq \\operatorname{hom}(G)^2$. Therefore clause 1 implies clause 4 with the same exponent. Conversely, if clause 4 holds with exponent $\\tau$, then $\\operatorname{hom}(G)^2\\geq \\kappa(G)\\geq |V(G)|^\\tau>0$, so [L5] gives $\\operatorname{hom}(G)\\geq (|V(G)|^\\tau)^{1/2}=|V(G)|^{\\tau/2}$. Hence clause 4 implies clause 1.",
+          "step": "1.4",
+          "inputs": [
+            "L1",
+            "F3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The implications in steps 1.1, 1.2, and 1.3 prove $1\\Rightarrow 2\\Rightarrow 3\\Rightarrow 1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 gives the forward implication chain from clause 1 to clause 3 and back, while step 1.4 proves the equivalence of clauses 1 and 4. Therefore all four formulations are equivalent.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-3",
+            "reason": "The theorem quantifies over nonempty H-free graphs in every substantive clause; the only family token names the forbidden family H, not an indexed aggregate with an empty-value branch."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Erdos-Hajnal property is equivalent to the large-cograph, large-perfect, and kappa formulations uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 1.3 build the forward implication cycle among clauses 1, 2, and 3, and step 1.4 records clause 1 => 4."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.4 proves clause 4 => 1, while steps 1.3, 1.1, and 1.2 route clauses 3 and 2 back to clause 1; step 3.1 summarizes the equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "Critical risk was the exponent-rescaling step from large perfect subgraphs back to large homogeneous sets. I repaired both square-root inequalities by citing monotonicity of x -> x^(1/2) through rational-power monotonicity plus real/rational agreement, and rechecked the rest of the equivalence cycle and the kappa versus hom inequalities."
+      }
+    },
+    "thm-pure-blockades-with-perfect-patterns-contain-large-homogeneous-subblockades": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pattern-graph-of-a-pure-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{B}=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$. Its\n**pattern graph** is the graph $P(\\mathcal{B})$ with vertex set $[t]$ in which\n$i$ and $j$ are adjacent exactly when $B_i$ is complete to $B_j$.\n\nBecause the blockade is pure, every unordered pair of distinct blocks is either\ncomplete or anticomplete, so this graph is well defined. A pattern graph is\ncalled **$P_4$-free** when it contains no induced four-vertex path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order",
+          "source_section": "Statement",
+          "quote": "If $G$ is a perfect graph on $n$ vertices, then $G$ has a clique or a stable\nset of size at least $\\sqrt n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complete-anticomplete-pure-and-x-sparse-blockades",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{B}=(B_1,\\dots,B_t)$ be a blockade in a graph $G$ and let\n$x\\in[0,1]$.\n\n- $\\mathcal{B}$ is **complete** when every pair $(B_i,B_j)$ with $i<j$ is\n  complete in the sense of [[def-edges-between-sets-and-pure-mixed-pairs]].\n- It is **anticomplete** when every pair $(B_i,B_j)$ with $i<j$ is\n  anticomplete.\n- It is **pure** when every pair $(B_i,B_j)$ with $i<j$ is pure.\n- It is **weakly $x$-sparse** when every pair $(B_i,B_j)$ with $i<j$ is weakly\n  $x$-sparse in the sense of\n  [[def-directional-and-weak-sparsity-between-vertex-sets]].\n- It is **$x$-sparse** when $B_i$ is $x$-sparse to $B_j$ for every $i>j$.\n\nThe last condition depends on the order of the blocks, while the first four do\nnot.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying [L2] to the perfect pattern graph $P(\\mathcal B)$, choose a set $I\\subseteq [t]$ with $|I|\\geq \\sqrt t$ that is either a clique or a stable set in $P(\\mathcal B)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $I$ is a clique, then [L1] says that every two blocks indexed by $I$ are complete to one another, so $(B_i:i\\in I)$ is a complete subblockade in the sense of [L3]. If $I$ is a stable set, then no two indices in $I$ are adjacent in the pattern graph, so every two corresponding blocks are anticomplete and $(B_i:i\\in I)$ is an anticomplete subblockade. In either case the width is at least that of $\\mathcal B$ by [L4].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $\\mathcal B$ has a complete or anticomplete subblockade of length at least $\\sqrt t$ and width at least the original width.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a perfect pattern has a large complete or anticomplete subblockade is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the sqrt(t) extraction from a perfect pattern graph. I rechecked that the perfect-graph corollary yields a clique or stable set of size at least sqrt(t) in the t-vertex pattern graph, and that passing to the indexed subblockade preserves width because deleting blocks cannot lower the minimum size of the remaining ones."
+      }
+    },
+    "prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tau-critical-graph",
+          "source_section": "Definition",
+          "quote": "Let $\\tau>0$. A finite graph $G$ is **$\\tau$-critical** when the two conditions\nbelow hold.\n\n1. $\\kappa(G)<|V(G)|^\\tau$.\n2. Every proper induced subgraph $H$ of $G$ satisfies\n   $\\kappa(H)\\geq |V(H)|^\\tau$.\n\nHere $\\kappa$ is that of [[def-kappa-of-a-graph]], induced subgraphs are those\nof [[def-subgraph-induced-subgraph-and-spanning-subgraph]], and the real power\n$|V(G)|^\\tau$ is that of [[def-real-power]]. The first clause forces every\n$\\tau$-critical graph to be nonempty, because it would read\n$0<0^\\tau=0$ on the null graph.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-h-free-and-family-free-graph",
+          "source_section": "Definition",
+          "quote": "For finite graphs $H$ and $G$, the graph $G$ is **$H$-free** when $G$ has no induced copy of $H$ ([[def-induced-embedding-and-induced-copy]]). Equivalently,\n\n$$\\operatorname{ind}_H(G)=0$$\n\n([[def-induced-copy-number]]).\n\nFor a family $\\mathcal F$ of finite graphs, a finite graph $G$ is **$\\mathcal F$-free** when it is $H$-free for every $H\\in\\mathcal F$. Throughout this page, “free” always refers to induced subgraphs. It does not merely prohibit ordinary subgraph copies.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first clause of [L1] already holds for $G$ by the hypothesis $\\kappa(G)<|V(G)|^\\tau$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $H$ be a proper induced subgraph of $G$. Then [L2] makes $H$ $\\mathcal H$-free, and $|V(H)|<|V(G)|$. By the minimality of $G$, the graph $H$ cannot satisfy $\\kappa(H)<|V(H)|^\\tau$. Hence $\\kappa(H)\\geq |V(H)|^\\tau$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 are exactly the two clauses in [L1], so $G$ is $\\tau$-critical.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-3",
+            "reason": "The hypothesis kappa(G)<|V(G)|^tau already forces G to be nonempty, and the word family only names the forbidden family H rather than an empty indexed aggregate."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A minimal counterexample to a kappa-bound is tau-critical is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the minimality argument over proper induced subgraphs. I rechecked that every proper induced subgraph of an H-free graph is again H-free, so minimality by |V| converts 'not <' into kappa(H) >= |V(H)|^tau. No separate empty-family or zero-size branch is missing on the current statement."
+      }
+    },
+    "thm-pure-blockades-with-cograph-patterns-have-additive-kappa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-induced-subgraphs-of-cographs-are-cographs",
+          "source_section": "Statement",
+          "quote": "If $G$ is a cograph and $X\\subseteq V(G)$, then the induced subgraph $G[X]$ is\nalso a cograph.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a cograph with at least two vertices. Then $G$ is disconnected or\n$\\overline G$ is disconnected.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-components-are-anticomplete-and-anticomponents-complete",
+          "source_section": "Statement",
+          "quote": "Distinct connected components of a graph are anticomplete to one another. Distinct anticomponents are complete to one another.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-pattern-graph-of-a-pure-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{B}=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$. Its\n**pattern graph** is the graph $P(\\mathcal{B})$ with vertex set $[t]$ in which\n$i$ and $j$ are adjacent exactly when $B_i$ is complete to $B_j$.\n\nBecause the blockade is pure, every unordered pair of distinct blocks is either\ncomplete or anticomplete, so this graph is well defined. A pattern graph is\ncalled **$P_4$-free** when it contains no induced four-vertex path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We argue by induction on $t$. If $t=1$, then $V(\\mathcal B)=B_1$, so $\\kappa(G[V(\\mathcal B)])=\\kappa(G[B_1]),$ and the claim is immediate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume now that $t>1$ and that the theorem is known for shorter pure blockades with cograph pattern. By [L2], the cograph $P$ is disconnected or its complement is disconnected. Choose either a connected component $I$ of $P$ in the first case, or an anticomponent $I$ of $P$ in the second case, and let $J:=[t]\\setminus I$. Then $I$ and $J$ are nonempty. Put $U:=\\bigcup_{i\\in I}B_i,\\qquad W:=\\bigcup_{j\\in J}B_j,\\qquad V:=U\\cup W=V(\\mathcal B).$",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "choose",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The induced pattern subgraphs $P[I]$ and $P[J]$ are cographs by [L1]. If $I$ is a component, then [L3] and [L4] make $U$ anticomplete to $W$; if $I$ is an anticomponent, then [L3] and [L4] make $U$ complete to $W$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the induction hypothesis to the subblockades indexed by $I$ and $J$ gives $\\kappa(G[U])\\geq \\sum_{i\\in I}\\kappa(G[B_i]), \\qquad \\kappa(G[W])\\geq \\sum_{j\\in J}\\kappa(G[B_j]).$",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $U$ is anticomplete to $W$, then a stable set in $G[U]$ together with a stable set in $G[W]$ is stable in $G[V]$, while every clique in $G[V]$ lies in one side. Thus $\\alpha(G[V])\\geq \\alpha(G[U])+\\alpha(G[W]),\\qquad \\omega(G[V])\\geq \\max\\{\\omega(G[U]),\\omega(G[W])\\},$ and [L5] yields $\\kappa(G[V])\\geq \\kappa(G[U])+\\kappa(G[W])$. If $U$ is complete to $W$, the same reasoning with cliques and stable sets exchanged again gives $\\kappa(G[V])\\geq \\kappa(G[U])+\\kappa(G[W])$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining steps 3.1 and 3.2 gives $\\kappa(G[V(\\mathcal B)])=\\kappa(G[V])\\geq \\sum_{i=1}^{t}\\kappa(G[B_i]).$ Together with step 1.1, this closes the induction.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written.",
+          "reviewed": {
+            "upheld": true,
+            "by": "contract-audit-3",
+            "reason": "A blockade has length t>=1 and each block B_i is nonempty by definition, so the sum over i=1,...,t in the statement cannot collapse to an empty aggregate."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the single-block base case t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pure blockade with a cograph pattern has additive kappa is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "Critical risk was the induction on t and the additive kappa estimate. I rechecked that the cograph pattern splits into nonempty I and J via a connected component or anticomponent, that U and W are anticomplete or complete accordingly, and that the alpha and omega inequalities in step 3.2 really give kappa(G[V]) >= kappa(G[U]) + kappa(G[W])."
+      }
+    },
+    "thm-tau-critical-graphs-have-no-wide-cograph-pattern-blockades": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tau-critical-graph",
+          "source_section": "Definition",
+          "quote": "Let $\\tau>0$. A finite graph $G$ is **$\\tau$-critical** when the two conditions\nbelow hold.\n\n1. $\\kappa(G)<|V(G)|^\\tau$.\n2. Every proper induced subgraph $H$ of $G$ satisfies\n   $\\kappa(H)\\geq |V(H)|^\\tau$.\n\nHere $\\kappa$ is that of [[def-kappa-of-a-graph]], induced subgraphs are those\nof [[def-subgraph-induced-subgraph-and-spanning-subgraph]], and the real power\n$|V(G)|^\\tau$ is that of [[def-real-power]]. The first clause forces every\n$\\tau$-critical graph to be nonempty, because it would read\n$0<0^\\tau=0$ on the null graph.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$ whose\npattern graph is a cograph. Then\n\n$$\n\\kappa(G[V(\\mathcal B)])\\geq \\sum_{i=1}^{t}\\kappa(G[B_i]).\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-monotonicity-from-the-derivative",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]), let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]). The words\n*nondecreasing*, *increasing*, *nonincreasing* and *decreasing* are those of\n[[def-monotone-function]], in which *increasing* is the strict notion.\n\n1. If $f'(x) \\ge 0$ at every interior point $x$ of $I$, then $f$ is\n   nondecreasing on $I$.\n2. If $f'(x) > 0$ at every interior point $x$ of $I$, then $f$ is increasing on\n   $I$.\n3. If $f'(x) \\le 0$ at every interior point $x$ of $I$, then $f$ is\n   nonincreasing on $I$.\n4. If $f'(x) < 0$ at every interior point $x$ of $I$, then $f$ is decreasing on\n   $I$.\n\nConversely, with no continuity hypothesis and no hypothesis at any other point:\n\n5. If $f : I \\to \\mathbb{R}$ is nondecreasing on $I$ and differentiable at a\n   point $c \\in I$ that is a limit point of $I$, then $f'(c) \\ge 0$; if $f$ is\n   nonincreasing and differentiable at such a $c$, then $f'(c) \\le 0$.\n\n**No strict converse is claimed here, and none is true.** Claim 5 gives the\nweak inequality only, and it cannot be improved: an increasing function may have\na vanishing derivative at a point. That failure is recorded separately, as a\nfalse statement later on this page, with its witness worked out on the companion\npage. Reading claim 2 backwards is the single most common misuse of this\ntheorem, and this statement does not license it.\n\n**Claims 1 to 4 need the interval; claim 5 does not.** The forward direction\nruns through the mean value theorem on a segment joining two points of $I$, so\norder-convexity is essential. Claim 5 is a statement about one point and uses\nonly that the difference quotients have a constant sign.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose for contradiction that $\\mathcal B=(B_1,\\dots,B_t)$ is a pure blockade in $G$ with cograph pattern, length $t$, width at least $|V(G)|t^{-1/\\tau}$, and each $B_i$ a proper subset of $V(G)$. By [L1], each proper induced subgraph $G[B_i]$ satisfies $\\kappa(G[B_i])\\geq |B_i|^\\tau$. Since each block has size at least the width, [F1] gives $|B_i|\\ge |V(G)|t^{-1/\\tau}>0$, so [L5] and [L4] yield $\\kappa(G[B_i])\\geq |B_i|^\\tau \\geq (|V(G)|t^{-1/\\tau})^\\tau =|V(G)|^\\tau t^{-1}$ for every $i$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5",
+            "F1",
+            "given",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $X:=V(\\mathcal B)=B_1\\cup\\cdots\\cup B_t$. Applying [L2] to the blockade and then using step 1.1 yields $\\kappa(G[X])\\geq \\sum_{i=1}^{t}\\kappa(G[B_i]) \\geq \\sum_{i=1}^{t}|V(G)|^\\tau t^{-1} =|V(G)|^\\tau.$ Then [L3] gives $\\kappa(G)\\geq |V(G)|^\\tau$, contradicting the first clause of [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradiction proves that no such blockade exists.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A tau-critical graph has no wide pure blockade with cograph pattern is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk was the real-power monotonicity in step 1.1. I repaired the proof by citing that x -> x^tau is increasing on positive reals via the real-power derivative theorem and the derivative-sign theorem, then used the real-power laws to compute (|V(G)|t^(-1/tau))^tau = |V(G)|^tau t^(-1). The contradiction with kappa(G) < |V(G)|^tau now follows exactly."
+      }
+    },
+    "ex-the-four-cycle-is-a-cograph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cograph-by-singletons-disjoint-union-and-complete-connection",
+          "source_section": "Definition",
+          "quote": "The class of **cographs** is defined recursively as follows.\n\n1. The null graph is a cograph.\n2. Every one-vertex graph is a cograph.\n3. If $G$ and $H$ are vertex-disjoint cographs, then their disjoint union is a\n   cograph.\n4. If $G$ and $H$ are vertex-disjoint cographs, then their complete connection\n   $G\\nabla H$ is a cograph.\n5. No graph is a cograph unless it is obtained from the previous clauses by\n   finitely many applications.\n\nEquivalently, a finite graph is a cograph exactly when it is null or can be\nbuilt from singletons by repeatedly taking disjoint unions and complete\nconnections. In particular, every cograph with at least two vertices has a last\nconstruction step in which it is obtained from two nonempty smaller cographs by\none of those two operations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complete-connection-of-two-disjoint-graphs",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ and $H=(W,F)$ be finite simple graphs with $V\\cap W=\\varnothing$.\nThe **complete connection** of $G$ and $H$ is the graph\n\n$$G\\nabla H:=(V\\cup W,\\ E\\cup F\\cup\\{\\{v,w\\}:v\\in V,\\ w\\in W\\}).$$\n\nThus $G\\nabla H$ contains $G$ and $H$ on their own vertex sets and adds every\npossible edge between the two sides. When $X\\subseteq V$ and $Y\\subseteq W$,\nthe induced subgraph on $X\\cup Y$ is exactly $G[X]\\nabla H[Y]$\n([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A:=\\{0,2\\}$ and $B:=\\{1,3\\}$. By [L2], there is no edge inside $A$ and no edge inside $B$, while every cross pair $0$-$1$, $1$-$2$, $2$-$3$, and $3$-$0$ is an edge. Thus the induced graphs on $A$ and $B$ are two edgeless two-vertex graphs.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each edgeless two-vertex graph is a cograph, because it is the disjoint union of two one-vertex graphs. Step 1.1 and [L3] show that $C_4$ is the complete connection of those two cographs. Therefore [L1] makes $C_4$ a cograph.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence the four-cycle is a cograph.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The four-cycle is a cograph is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-the-five-vertex-path-is-perfect-but-not-a-cograph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-perfect-graph",
+          "source_section": "Definition",
+          "quote": "A finite graph $G$ is **perfect** when every induced subgraph $H$ of $G$\nsatisfies\n\n$$\\chi(H)=\\omega(H),$$\n\nwhere $\\chi(H)$ is the chromatic number and $\\omega(H)$ is the clique number\n([[def-proper-vertex-colouring-and-chromatic-number]],\n[[def-clique-stable-set-and-numbers]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nUnder the library conventions, the null graph is perfect because its unique\ninduced subgraph is itself and $\\chi(K_0)=\\omega(K_0)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cographs-are-exactly-the-p-four-free-graphs",
+          "source_section": "Statement",
+          "quote": "A finite graph is a cograph if and only if it is $P_4$-free.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $H$ be an induced subgraph of $P_5$. By [F1], each connected component of $H$ is a path. Colour each component alternately along the path. This gives a proper colouring with $0$ colours when $H$ is empty, with $1$ colour when $H$ is nonempty and edgeless, and with $2$ colours when $H$ has an edge.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], the vertices $\\{0,1,2,3\\}$ induce $P_4$. Therefore $P_5$ is not $P_4$-free, and [L3] shows that $P_5$ is not a cograph.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same trichotomy gives the clique number of $H$: it is $0$ when $H$ is empty, $1$ when $H$ is nonempty and edgeless, and $2$ when $H$ has an edge, because no path contains a triangle and disjoint union adds no new edges. Hence $\\chi(H)=\\omega(H)$ for every induced subgraph $H$, so [L1] shows that $P_5$ is perfect.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $P_5$ is perfect but not a cograph.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The five-vertex path is perfect but not a cograph is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha",
+        "notes": "High risk came from using the cograph characterization and from the empty induced-subgraph case. I rechecked that every induced subgraph of P_5 is a disjoint union of shorter paths, so chi and omega are 0, 1, or 2 together across the three cases, while the first four vertices induce P_4 and therefore rule out cograph status."
+      }
+    },
+    "ex-a-two-block-pure-blockade-has-additive-kappa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pattern-graph-of-a-pure-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{B}=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$. Its\n**pattern graph** is the graph $P(\\mathcal{B})$ with vertex set $[t]$ in which\n$i$ and $j$ are adjacent exactly when $B_i$ is complete to $B_j$.\n\nBecause the blockade is pure, every unordered pair of distinct blocks is either\ncomplete or anticomplete, so this graph is well defined. A pattern graph is\ncalled **$P_4$-free** when it contains no induced four-vertex path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-pure-blockades-with-cograph-patterns-have-additive-kappa",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal B=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$ whose\npattern graph is a cograph. Then\n\n$$\n\\kappa(G[V(\\mathcal B)])\\geq \\sum_{i=1}^{t}\\kappa(G[B_i]).\n$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The blockade $(A,B)$ is pure, and the two blocks are complete to each other because the ambient graph is $K_5$. Hence its pattern graph is $K_2$, which is a cograph.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The induced subgraphs on $A$, on $B$, and on $A\\cup B$ are respectively $K_2$, $K_3$, and $K_5$. By [L2], $\\kappa(G[A])=2,\\qquad \\kappa(G[B])=3,\\qquad \\kappa(G[A\\cup B])=5.$ So $\\kappa(G[A\\cup B])=\\kappa(G[A])+\\kappa(G[B]).$",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus this two-block pure blockade attains equality in the inequality from [L3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A two-block pure blockade can realize equality in the additive kappa theorem is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-pure-blockade-with-perfect-but-not-cograph-pattern": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-the-five-vertex-path-is-perfect-but-not-a-cograph",
+          "source_section": "Example",
+          "quote": "The path $P_5$ is perfect but not a cograph.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pattern-graph-of-a-pure-blockade",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{B}=(B_1,\\dots,B_t)$ be a pure blockade in a graph $G$. Its\n**pattern graph** is the graph $P(\\mathcal{B})$ with vertex set $[t]$ in which\n$i$ and $j$ are adjacent exactly when $B_i$ is complete to $B_j$.\n\nBecause the blockade is pure, every unordered pair of distinct blocks is either\ncomplete or anticomplete, so this graph is well defined. A pattern graph is\ncalled **$P_4$-free** when it contains no induced four-vertex path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because each block $B_i$ is a singleton, every pair $(B_i,B_j)$ is either complete or anticomplete according to whether its two vertices are adjacent. Hence $(B_1,\\dots,B_5)$ is a pure blockade in the graph $P_5$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the pattern graph has an edge $ij$ exactly when the vertices $i-1$ and $j-1$ are adjacent in $P_5$. Therefore the pattern graph of $(B_1,\\dots,B_5)$ is itself $P_5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 and [L1] show that this pure blockade has a perfect pattern that is not a cograph.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pure blockade can have a perfect pattern that is not a cograph is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-a-blockade-rainbow-copy-of-the-four-vertex-path": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-blockade-rainbow-induced-copy",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a graph and let $\\mathcal B=(B_1,\\dots,B_t)$ be a blockade in $G$.\nAn induced subgraph $H$ of $G$ is **$\\mathcal B$-rainbow** when\n\n$$V(H)\\subseteq V(\\mathcal B)\\qquad\\text{and}\\qquad |B_i\\cap V(H)|\\leq 1\\quad\\text{for every }i\\in[t].$$\n\nEquivalently, $H$ lies inside the support of the blockade and each block\ncontributes at most one vertex to it\n([[def-blockade-length-and-width]],\n[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).\n\nWe say that a graph $F$ has a **$\\mathcal B$-rainbow induced copy** in $G$ when\n$G$ contains an induced copy of $F$ whose image is $\\mathcal B$-rainbow\n([[def-induced-embedding-and-induced-copy]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-blockade-length-and-width",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph, let $\\ell\\in\\mathbb N$ with $\\ell\\ge 1$, and let\n$w>0$ be real. An **$(\\ell,w)$-blockade** in $G$ is a sequence\n\n$$\\mathcal{B}=(B_1,\\dots,B_t)$$\n\nof pairwise disjoint nonempty subsets of $V(G)$ such that $t\\geq \\ell$ and\n$|B_i|\\geq w$ for every $i\\in[t]$.\n\nEach $B_i$ is a **block**. The **length** of $\\mathcal{B}$ is $t$, its\n**width** is\n\n$$\\min\\{|B_1|,\\dots,|B_t|\\},$$\n\nand its **support** is\n\n$$V(\\mathcal{B})=B_1\\cup\\cdots\\cup B_t.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The support of the blockade is $\\{0,1,2,3\\}$ by [L3], so the whole graph $P_4$ already lies inside that support.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each block $B_i$ contains exactly one vertex of $P_4$, so the induced copy of $P_4$ given by the whole graph meets each block in at most one vertex. By [L1], it is therefore blockade-rainbow.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence the path $P_4$ has a four-block blockade-rainbow copy.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 does not quantify over an indexed family or aggregate whose empty case creates a separate proof branch beyond the hypotheses already written."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 introduces no free denominator or parameter whose zero value creates an additional case beyond the stated graph-theoretic hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 does not require a separate singleton or size-one branch beyond the argument already written in the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 has no further collapsed or coincident-structure case beyond the hypotheses explicitly stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 is not a statement over a parameter interval, so it has no separate endpoint obligation to discharge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 uses named vertices, named sets, or explicitly constructed witnesses, so it does not depend on a bare choice from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 is not stated as a biconditional or equivalence, so there is no separate forward-direction obligation beyond the written claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A four-block blockade-rainbow copy of P_4 is not stated as a biconditional or equivalence, so there is no separate reverse-direction obligation beyond the written claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}
