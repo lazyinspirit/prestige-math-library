@@ -3,22 +3,23 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { waves, packBatches, driftEvidence } from '../src/frontier.mts';
+import { waves, nextBuildableSet, packBatches, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 
 /** A tiny repo: a plan, some published pages, some unbuilt ones. */
-function repo({ pages, published = [], docs = {} }) {
+function repo({ pages, published = [], draft = [], docs = {} }) {
   const r = mkdtempSync(join(tmpdir(), 'ap-fr-'));
   mkdirSync(join(r, 'research'), { recursive: true });
   mkdirSync(join(r, 'library', 'x'), { recursive: true });
   writeFileSync(join(r, 'research', 'plan-spec.json'), JSON.stringify({ pages }));
   for (const p of published) writeFileSync(join(r, 'library', 'x', `${p}.md`), '---\nstatus: published\n---\n');
+  for (const p of draft) writeFileSync(join(r, 'library', 'x', `${p}.md`), '---\nstatus: draft\n---\n');
   for (const [name, body] of Object.entries<string>(docs)) writeFileSync(join(r, 'research', name), body);
   return r;
 }
 const A = (id, order, requires = [], category = 'c') =>
   ({ id, order, kind: 'A', category, title: id, requires, companion: `${id}-examples` });
-const B = (id, order) =>
-  ({ id: `${id}-examples`, order: order + 1, kind: 'B', category: 'c', title: '', requires: [id], companion: id });
+const B = (id, order, requires = [id], category = 'c') =>
+  ({ id: `${id}-examples`, order: order + 1, kind: 'B', category, title: '', requires, companion: id });
 
 test('the frontier is publication state, not plan position', () => {
   const pages = [A('base', 1), B('base', 1), A('next', 3, ['base']), B('next', 3)];
@@ -47,6 +48,113 @@ test('a pair blocked by a page outside scope is reported, not silently dropped',
   const { blocked } = waves(repo({ pages, published: [] }), { categories: ['c'] });
   assert.equal(blocked.length, 1);
   assert.deepEqual(blocked[0].blockedBy, ['elsewhere']);
+});
+
+test('next-run selection includes unbuilt prerequisites of priority subjects', () => {
+  const pages = [
+    A('foundation', 1, [], 'other'), B('foundation', 1),
+    A('target', 3, ['foundation-examples'], 'priority'), B('target', 3),
+  ];
+  const r = repo({ pages });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 2 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['foundation', 'target']);
+  assert.deepEqual(unsatisfiableEdges(r, next.pages.map((p) => p.id)), []);
+  assert.deepEqual(next.waves.map((wave) => wave.map((p) => p.id)), [['foundation'], ['target']]);
+});
+
+test('B-side prerequisites participate in closure and strict wave ordering', () => {
+  const pages = [
+    A('root', 1, [], 'other'), B('root', 1),
+    A('dep', 3, ['root-examples'], 'other'), B('dep', 3),
+    A('target', 5, [], 'priority'), B('target', 5, ['target', 'dep-examples']),
+  ];
+  const r = repo({ pages });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 3 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['root', 'dep', 'target']);
+  assert.deepEqual(next.waves.map((wave) => wave.map((p) => p.id)), [['root'], ['dep'], ['target']]);
+  assert.deepEqual(unsatisfiableEdges(r, next.pages.map((p) => p.id)), []);
+});
+
+test('draft pairs remain in the future schedule and cannot license dependants early', () => {
+  const pages = [
+    A('foundation', 1, [], 'other'), B('foundation', 1),
+    A('target', 3, ['foundation-examples'], 'priority'), B('target', 3),
+  ];
+  const r = repo({ pages, draft: ['foundation'] });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 2 });
+  assert.deepEqual(next.waves.map((wave) => wave.map((p) => p.id)), [['foundation'], ['target']]);
+});
+
+test('next-run selection refuses an A page whose companion pair is absent', () => {
+  const r = repo({ pages: [A('orphan', 1, [], 'priority')] });
+  assert.throws(
+    () => nextBuildableSet(r, { priorities: ['priority'], maxPairs: 1 }),
+    /unsatisfied prerequisite edge/,
+  );
+});
+
+test('next-run selection respects its cap without returning a broken closure', () => {
+  const pages = [
+    A('foundation', 1, [], 'other'), B('foundation', 1),
+    A('target', 3, ['foundation-examples'], 'priority'), B('target', 3),
+    A('independent', 5, [], 'priority'), B('independent', 5),
+  ];
+  const r = repo({ pages });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 1 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['independent']);
+  assert.equal(next.skipped.some((x) => x.id === 'target' && x.reason === 'capacity'), true);
+  assert.deepEqual(unsatisfiableEdges(r, next.pages.map((p) => p.id)), []);
+});
+
+test('an oversized preferred closure advances its buildable foundation prefix', () => {
+  const pages = [
+    A('p1', 1, [], 'foundation'), B('p1', 1),
+    A('p2', 3, ['p1-examples'], 'foundation'), B('p2', 3),
+    A('target', 5, ['p2-examples'], 'priority'), B('target', 5),
+  ];
+  const r = repo({ pages });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 2 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['p1', 'p2']);
+  assert.equal(next.skipped.some((x) => x.id === 'target' && x.reason === 'capacity-prefix'), true);
+  assert.deepEqual(unsatisfiableEdges(r, next.pages.map((p) => p.id)), []);
+});
+
+test('a published A with a draft B companion remains in scope', () => {
+  const pages = [A('partial', 1, [], 'priority'), B('partial', 1)];
+  const r = repo({ pages, published: ['partial'], draft: ['partial-examples'] });
+  const next = nextBuildableSet(r, { priorities: ['priority'], maxPairs: 1 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['partial']);
+});
+
+test('priority categories do not exclude prerequisite categories', () => {
+  const pages = [
+    A('a-root', 1, [], 'a'), B('a-root', 1),
+    A('b-root', 3, [], 'b'), B('b-root', 3),
+    A('a-next', 5, ['b-root-examples'], 'a'), B('a-next', 5),
+  ];
+  const r = repo({ pages });
+  const next = nextBuildableSet(r, { priorities: ['a'], maxPairs: 3 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['a-root', 'b-root', 'a-next']);
+});
+
+test('priority subjects are selected round-robin rather than by global order', () => {
+  const pages = [
+    A('a1', 1, [], 'a'), B('a1', 1), A('a2', 3, [], 'a'), B('a2', 3),
+    A('b1', 5, [], 'b'), B('b1', 5),
+  ];
+  const next = nextBuildableSet(repo({ pages }), { priorities: ['a', 'b'], maxPairs: 2 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['a1', 'b1']);
+});
+
+test('riemannian geometry uses its plan-spec category without an id allowlist', () => {
+  const pages = [
+    A('smooth-manifolds-and-smooth-maps', 1, [], 'differential-geometry'), B('smooth-manifolds-and-smooth-maps', 1),
+    A('riemannian-metrics-length-distance-and-volume', 3, ['smooth-manifolds-and-smooth-maps-examples'], 'riemannian-geometry'),
+    B('riemannian-metrics-length-distance-and-volume', 3, undefined, 'riemannian-geometry'),
+  ];
+  const next = nextBuildableSet(repo({ pages }), { priorities: ['riemannian-geometry'], maxPairs: 2 });
+  assert.deepEqual(next.pages.map((p) => p.id), ['smooth-manifolds-and-smooth-maps', 'riemannian-metrics-length-distance-and-volume']);
+  assert.deepEqual(next.unknownPriorities, []);
 });
 
 test('batching packs to the cap, within a category, by shared prerequisites', () => {

@@ -16,15 +16,26 @@ In this repository, `autopilot` means:
 node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts
 ```
 
-`frontier` reads `status:` from page files, not Git history, to return buildable
-A/B dependency waves. `plan` refuses a pair set unless each `requires` target is
-published or built by that run; `--allow-unbuildable` records an intentional
-stage-1 stop. Planning writes batch manifests, covers, the immutable scope
-ledger, generated task files, and drift-review inputs.
+`frontier` reads `status:` from page files, not Git history, to return the full
+A/B dependency schedule. Wave 1 contains only pairs whose prerequisites are
+already published; later waves are transitively buildable when their
+predecessors are included in the same run. `frontier --next` turns that schedule
+into a bounded next-run scope: named subjects are equal priorities,
+dependencies from other subjects are pulled in automatically, and output is in
+topological run waves. `plan --pairs next` uses the same selector. `plan`
+refuses a pair set unless each `requires` target is published or built by that
+run; its `next` selector is capped at the pipeline's 14-pair ceiling. The
+read-only `frontier --next` preview may use a larger explicit `--max-pairs` to
+inspect a longer dependency-closed roadmap. `--allow-unbuildable` records an
+intentional stage-1 stop. Planning writes
+batch manifests, covers, the immutable scope ledger, generated task files, and
+drift-review inputs.
 
 ```bash
 autopilot frontier [--categories category-a,category-b]
+autopilot frontier --next --priorities category-a,category-b [--max-pairs 14]
 autopilot plan --run <run> --pairs <a-page-id,...>
+autopilot plan --run <run> --pairs next --priorities category-a,category-b [--max-pairs 14]
 autopilot doctor --run <run>
 autopilot start --run <run> --detach
 autopilot status [--run <run>]

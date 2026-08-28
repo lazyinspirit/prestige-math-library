@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // autopilot — a deterministic control plane for multi-stage agent pipelines.
 //
-//   autopilot frontier [--categories a,b]      what is buildable now, in waves
+//   autopilot frontier [--categories a,b]      complete future schedule
+//   autopilot frontier --next --priorities a,b dependency-closed next-run scope
 //   autopilot plan --run <name> --pairs a,b    step 0: batch, manifest, drift-check
 //   autopilot start --run <name> [--detach]    run steps 1..10 with nobody in the loop
 //   autopilot status                           current state, human-readable
@@ -25,7 +26,7 @@ import { Reporter, renderStatus } from '../src/reporter.mts';
 import { Executor } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
-import { waves, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
+import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
@@ -226,6 +227,28 @@ async function buildExecutor(run?: string) {
 
 switch (cmd) {
   case 'frontier': {
+    if (has('next')) {
+      const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
+      const maxPairs = Number(opt('max-pairs', '14'));
+      const next = nextBuildableSet(repo, { priorities, maxPairs });
+      console.log(`${next.pages.length} A/B pair(s) selected for the next dependency-closed run (cap ${maxPairs})`);
+      if (priorities.length) console.log(`equal-priority subjects: ${priorities.join(', ')}`);
+      if (next.unknownPriorities.length) console.log(`unknown/empty subjects: ${next.unknownPriorities.join(', ')}`);
+      console.log('');
+      next.waves.forEach((wave: any, i: number) => {
+        console.log(`RUN WAVE ${i + 1}  (${wave.length} pair${wave.length === 1 ? '' : 's'})`);
+        for (const p of wave) {
+          console.log(`  ${String(p.order).padStart(8)}  [${p.category}]  ${p.id}`);
+          console.log(`            ${p.title}`);
+        }
+        console.log('');
+      });
+      const bad = unsatisfiableEdges(repo, next.pages.map((p: any) => p.id));
+      if (bad.length) die(`internal error: next-run selection has ${bad.length} unsatisfied edge(s)`);
+      console.log('dependency check: every prerequisite is published or selected in an earlier run wave');
+      if (next.skipped.length) console.log(`${next.skipped.length} preferred target(s) deferred by the cap or an external blocker`);
+      break;
+    }
     const cats = opt('categories');
     const { waves: w, blocked } = waves(repo, { categories: cats ? cats.split(',') : null });
     if (!w.length) { console.log('nothing buildable — every planned page in scope is built or blocked'); }
@@ -250,7 +273,16 @@ switch (cmd) {
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
     let pages;
-    if (pairsArg === 'wave1' || !pairsArg) {
+    if (pairsArg === 'next') {
+      const priorities = (opt('priorities') ?? opt('categories') ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
+      const maxPairs = Number(opt('max-pairs', '14'));
+      if (maxPairs > 14) die('plan --pairs next: --max-pairs cannot exceed the pipeline ceiling of 14');
+      const next = nextBuildableSet(repo, { priorities, maxPairs });
+      if (next.unknownPriorities.length) die(`unknown or empty priority subject(s): ${next.unknownPriorities.join(', ')}`);
+      pages = next.pages.map((p: any) => p.id);
+      if (!pages.length) die('nothing buildable');
+      console.log(`using dependency-closed next-run selection (${pages.length} pair(s))\n`);
+    } else if (pairsArg === 'wave1' || !pairsArg) {
       const cats = opt('categories');
       const { waves: w } = waves(repo, { categories: cats ? cats.split(',') : null });
       if (!w.length) die('nothing buildable');

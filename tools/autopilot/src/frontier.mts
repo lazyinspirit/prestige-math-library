@@ -95,13 +95,40 @@ export function unsatisfiableEdges(repo: string, pageIds: string[]): any[] {
   return out;
 }
 
+/** All external page prerequisites of an A/B pair.
+ *
+ * A companion may carry real prerequisites of its own. The routine edge from
+ * B back to its A is internal to the pair and is therefore excluded.
+ */
+function pairRequires(byId: Map<string, any>, a: any): string[] {
+  const companionId = a.companion ?? `${a.id}-examples`;
+  const b: any = byId.get(companionId);
+  const out = new Set<string>(a.requires ?? []);
+  for (const req of b?.requires ?? []) out.add(req);
+  out.delete(a.id);
+  out.delete(companionId);
+  return [...out];
+}
+
 export function waves(repo: string, { categories = null }: { categories?: string[] | null } = {}): any {
   const spec = loadPlan(repo);
   const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
   const status = pageStatus(repo);
   const published = new Set([...status.entries()].filter(([, s]) => s === 'published').map(([id]) => id));
 
-  const inScope = (p) => p.kind === 'A' && !status.has(p.id) && (!categories || categories.includes(p.category));
+  // A draft is not published and therefore cannot license dependants. Include
+  // it in the future schedule so a frontier can finish and publish it instead
+  // of silently dropping the rest of its dependency cone.
+  const inScope = (p) => {
+    if (p.kind !== 'A' || (categories && !categories.includes(p.category))) return false;
+    if (status.get(p.id) !== 'published') return true;
+    const b: any = byId.get(p.companion ?? `${p.id}-examples`);
+    if (!b) return true;
+    // Historical A-only pages deliberately have an empty, never-created B
+    // placeholder. A real draft companion is unfinished and stays in scope.
+    const deliberatelyOmitted = !status.has(b.id) && !(b.items ?? []).length;
+    return status.get(b.id) !== 'published' && !deliberatelyOmitted;
+  };
   const targets = spec.pages.filter(inScope);
 
   const have = new Set(published);
@@ -110,11 +137,16 @@ export function waves(repo: string, { categories = null }: { categories?: string
   const blocked = [];
 
   while (remaining.size) {
-    const ready = targets.filter((p: any) => remaining.has(p.id) && (p.requires ?? []).every((r: any) => have.has(r)));
+    const ready = targets.filter((p: any) => remaining.has(p.id) && pairRequires(byId, p).every((r: any) => have.has(r)));
     if (!ready.length) {
       for (const id of remaining as Set<string>) {
         const p: any = byId.get(id);
-        const external = (p.requires ?? []).filter((r: any) => !have.has(r) && !remaining.has(r));
+        const external = pairRequires(byId, p).filter((r: any) => {
+          if (have.has(r)) return false;
+          const dep: any = byId.get(r);
+          const pairId = dep?.kind === 'B' ? dep.companion : dep?.id;
+          return !pairId || !remaining.has(pairId);
+        });
         blocked.push({ id, title: p.title, category: p.category, blockedBy: external });
       }
       break;
@@ -131,6 +163,113 @@ export function waves(repo: string, { categories = null }: { categories?: string
     }
   }
   return { waves: out, blocked };
+}
+
+/** Select a bounded, dependency-closed scope for the next run.
+ *
+ * Wave 1 is only the set whose prerequisites are already published. All waves
+ * are a future schedule. This selector bridges those meanings: it prefers the
+ * requested subjects and pulls in every unbuilt prerequisite pair they need.
+ */
+export function nextBuildableSet(repo: string, {
+  priorities = [], maxPairs = 14,
+}: { priorities?: string[]; maxPairs?: number } = {}): any {
+  if (!Number.isInteger(maxPairs) || maxPairs < 1) throw new Error('maxPairs must be a positive integer');
+  const spec = loadPlan(repo);
+  const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
+  const status = pageStatus(repo);
+  const scheduled = waves(repo).waves;
+  const flat = scheduled.flat();
+  const scheduledIds = new Set(flat.map((p: any) => p.id));
+  const waveOf = new Map<string, number>();
+  scheduled.forEach((wave: any[], i: number) => wave.forEach((p: any) => waveOf.set(p.id, i)));
+  const matches = (subject: string, p: any) => p.category === subject;
+  const knownPriorities = priorities.filter((subject) => flat.some((p: any) => matches(subject, p)));
+  const unknownPriorities = priorities.filter((subject) => !flat.some((p: any) => matches(subject, p)));
+  // Round-robin the subjects. Their order is only a stable tie-breaker; no
+  // subject can consume a second preferred target before every peer has had a
+  // chance at its first.
+  const queues = knownPriorities.map((subject) => flat.filter((p: any) => matches(subject, p)));
+  const wanted: any[] = [];
+  const seenWanted = new Set<string>();
+  for (let i = 0; queues.some((q) => i < q.length); i += 1) {
+    for (const q of queues) {
+      const p = q[i];
+      if (p && !seenWanted.has(p.id)) { wanted.push(p); seenWanted.add(p.id); }
+    }
+  }
+  if (!priorities.length) wanted.push(...flat);
+  const selected = new Set<string>();
+  const skipped: any[] = [];
+
+  const pairFor = (id: string): string | null => {
+    const p: any = byId.get(id);
+    if (!p) return null;
+    return p.kind === 'B' ? p.companion : p.id;
+  };
+  const neededFor = (id: string): { ids: Set<string>; blockers: string[] } => {
+    const ids = new Set<string>();
+    const blockers = new Set<string>();
+    const visit = (pid: string) => {
+      if (selected.has(pid) || ids.has(pid)) return;
+      const p: any = byId.get(pid);
+      if (!p || p.kind !== 'A') { blockers.add(pid); return; }
+      for (const req of pairRequires(byId, p)) {
+        if (status.get(req) === 'published') continue;
+        const dep = pairFor(req);
+        if (!dep || !scheduledIds.has(dep)) { blockers.add(req); continue; }
+        visit(dep);
+      }
+      ids.add(pid);
+    };
+    visit(id);
+    return { ids, blockers: [...blockers].sort() };
+  };
+
+  for (const target of wanted) {
+    if (selected.has(target.id)) continue;
+    const need = neededFor(target.id);
+    if (need.blockers.length) {
+      skipped.push({ id: target.id, reason: 'blocked', blockedBy: need.blockers });
+      continue;
+    }
+    const additions = [...need.ids].filter((id) => !selected.has(id));
+    if (selected.size + additions.length > maxPairs) {
+      const room = maxPairs - selected.size;
+      // A closure larger than the run is still actionable: build its earliest
+      // closed prefix now. Global wave order is topological, so every prefix
+      // has all of its selected dependencies before it.
+      additions.sort((a, b) => waveOf.get(a)! - waveOf.get(b)!);
+      additions.slice(0, room).forEach((id) => selected.add(id));
+      skipped.push({ id: target.id, reason: room ? 'capacity-prefix' : 'capacity', needs: additions.length });
+      continue;
+    }
+    additions.forEach((id) => selected.add(id));
+  }
+
+  const pages = flat.filter((p: any) => selected.has(p.id));
+  const selectedWaves: any[][] = [];
+  for (const p of pages) {
+    const n = waveOf.get(p.id)!;
+    if (!selectedWaves[n]) selectedWaves[n] = [];
+    selectedWaves[n].push(p);
+  }
+  // This is an invariant of the selector, not merely a CLI presentation
+  // check. Callers may write manifests directly from this result.
+  const bad = unsatisfiableEdges(repo, pages.map((p: any) => p.id));
+  if (bad.length) {
+    throw new Error(`nextBuildableSet produced ${bad.length} unsatisfied prerequisite edge(s)`);
+  }
+  for (const p of pages) {
+    for (const req of pairRequires(byId, p)) {
+      if (status.get(req) === 'published') continue;
+      const dep = pairFor(req);
+      if (!dep || !selected.has(dep) || waveOf.get(dep)! >= waveOf.get(p.id)!) {
+        throw new Error(`nextBuildableSet did not schedule ${req} before ${p.id}`);
+      }
+    }
+  }
+  return { pages, waves: selectedWaves.filter(Boolean), skipped, priorities: [...priorities], unknownPriorities, maxPairs };
 }
 
 /** Transitive `requires` closure of a page, over the plan. */
