@@ -22,6 +22,53 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
+  deepseek: Object.freeze({
+    id: process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro',
+    runner: 'codex',
+    family: 'deepseek',
+  }),
+});
+
+// Stage-scoped overrides. A role still owns its sandbox, web access and cap;
+// a profile changes only the model/provider, reasoning tier and context window.
+// DeepSeek calls the top reasoning tier `max`; the public profile name retains
+// the owner's `xhigh` terminology and the dispatcher records both spellings.
+export const MODEL_PROFILE_NAMES = Object.freeze({
+  deepseekXhigh1m: 'deepseek-v4-pro-xhigh-1m',
+  gpt54Xhigh1m: 'gpt-5.4-xhigh-1m',
+  terraXhigh: 'gpt-5.6-terra-xhigh',
+});
+
+export const MODEL_PROFILES = Object.freeze({
+  [MODEL_PROFILE_NAMES.deepseekXhigh1m]: Object.freeze({
+    model: MODELS.deepseek.id,
+    runner: MODELS.deepseek.runner,
+    family: MODELS.deepseek.family,
+    provider: 'deepseek',
+    effort: 'max',
+    requestedEffort: 'xhigh',
+    contextWindow: 1_048_576,
+    effectiveContextFloor: 995_000,
+    attestContext: true,
+  }),
+  [MODEL_PROFILE_NAMES.gpt54Xhigh1m]: Object.freeze({
+    model: MODELS.gpt54.id,
+    runner: MODELS.gpt54.runner,
+    family: MODELS.gpt54.family,
+    provider: 'openai',
+    effort: 'xhigh',
+    requestedEffort: 'xhigh',
+    contextWindow: 1_000_000,
+  }),
+  [MODEL_PROFILE_NAMES.terraXhigh]: Object.freeze({
+    model: MODELS.terra.id,
+    runner: MODELS.terra.runner,
+    family: MODELS.terra.family,
+    provider: 'openai',
+    effort: 'xhigh',
+    requestedEffort: 'xhigh',
+    contextWindow: 872_000,
+  }),
 });
 
 export const LANES = Object.freeze({
@@ -66,6 +113,14 @@ export function laneFamily(laneName) {
   const key = LANES[laneName];
   if (!key) throw new Error(`unknown lane ${laneName}`);
   return MODELS[key].family;
+}
+
+export function modelProfile(name) {
+  const profile = MODEL_PROFILES[name];
+  if (!profile) {
+    throw new Error(`unknown model profile ${name}; known: ${Object.keys(MODEL_PROFILES).join(', ')}`);
+  }
+  return profile;
 }
 
 export const KNOWN_MODEL_IDS = Object.freeze(Object.values(MODELS).map((model) => model.id));

@@ -41,6 +41,10 @@ export const APP_DIR = APP_CANDIDATES.find((dir) => {
 export const WORKER_DIR = APP_DIR ? join(APP_DIR, 'worker') : null;
 export const WEB_DIR = APP_DIR ? join(APP_DIR, 'web') : null;
 
+/** Where the DeepSeek API key is read when it is not already in the env. */
+export const deepseekEnvFile = () =>
+  process.env.DEEPSEEK_ENV_FILE ?? (APP_DIR ? join(APP_DIR, '.env') : null);
+
 const need = (what, path, install) => {
   if (!APP_DIR) {
     throw new Error(

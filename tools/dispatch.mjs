@@ -15,12 +15,12 @@ import { spawn } from 'node:child_process';
 // shadowed there and silently settled the promise instead of building a path.
 import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:path';
 import { homedir } from 'node:os';
-import { REPO } from './paths.mjs';
+import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { validateCodexOutputSchema } from './codex-output-schema.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
-import { lane } from './models.mjs';
+import { lane, modelProfile } from './models.mjs';
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
@@ -243,6 +243,7 @@ const taskPath = option('--task');
 const imagePaths = options('--image').flatMap((value) => value.split(',')).map((s) => s.trim()).filter(Boolean);
 const outputSchemaPath = option('--output-schema');
 const resultArtifactPath = option('--result-artifact');
+const profileName = option('--profile');
 // A CODEX_HOME that OUTLIVES the dispatch, so the conversation can be resumed.
 // Every other lane gets a throwaway home deleted on exit — deliberately, because
 // a long-lived shared home was once corrupted and bricked every codex call. A
@@ -265,6 +266,7 @@ const usage = (message) => {
   console.error('usage: node tools/dispatch.mjs --role <role> --brief <file> --label <name> --run <name>');
   console.error(`                               [--var k=v ...] [--task <file>] [--timeout <sec>] [--attempt <n>] [--dry-run] [--json]`);
   console.error(`                               [--session-home <dir>] [--resume-session <uuid>]`);
+  console.error(`                               [--profile <registered-model-profile>]`);
   console.error(`roles: ${Object.entries(ROLES).map(([n, r]) => `${n} (${r.sandbox ?? r.runner}, cap ${r.cap})`).join(', ')}`);
   process.exit(2);
 };
@@ -296,7 +298,19 @@ if (resultArtifactPath) {
   }
 }
 
-const spec = ROLES[role];
+let profileSpec = null;
+if (profileName) {
+  try { profileSpec = modelProfile(profileName); }
+  catch (error) { usage(error?.message ?? String(error)); }
+}
+const spec = Object.freeze({
+  ...ROLES[role],
+  provider: 'openai',
+  contextWindow: 1_000_000,
+  requestedEffort: ROLES[role].effort ?? 'xhigh',
+  ...profileSpec,
+  profile: profileName,
+});
 
 // ---- prompt ------------------------------------------------------------------
 
@@ -472,9 +486,11 @@ const buildCodexResume = (sessionHome) => [
   process.env.CODEX_BIN ?? 'codex',
   [
     '--ask-for-approval', 'never', 'exec', 'resume', resumeSession,
+    '--model', spec.model,
+    ...(spec.provider !== 'openai' ? ['-c', `model_provider="${spec.provider}"`] : []),
     '-c', `sandbox_mode="${spec.sandbox}"`,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
-    '-c', 'model_context_window=1000000',
+    '-c', `model_context_window=${spec.contextWindow}`,
     ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
@@ -490,6 +506,7 @@ const buildCodex = (temporaryHome) => [
   [
     '--ask-for-approval', 'never', 'exec',
     '--model', spec.model,
+    ...(spec.provider !== 'openai' ? ['-c', `model_provider="${spec.provider}"`] : []),
     // Role-driven, defaulting to xhigh so every pre-existing lane is unchanged
     // (owner, 2026-08-14). Previously hardcoded, which meant a deliberately
     // cheap lane still paid for xhigh reasoning it did not need. A role that
@@ -499,7 +516,7 @@ const buildCodex = (temporaryHome) => [
     // model_context_window — is deliberately NOT inherited. Pass the owner's
     // 1,000,000-token window explicitly or the lane silently runs at the
     // built-in default.
-    '-c', 'model_context_window=1000000',
+    '-c', `model_context_window=${spec.contextWindow}`,
     // Passed explicitly, never inherited. The temporary CODEX_HOME carries only
     // auth.json, and wave 1b's defect was exactly an implicitly inherited
     // setting that turned out not to be inherited. A source-review role that cannot
@@ -521,8 +538,10 @@ const buildCodex = (temporaryHome) => [
 if (dryRun) {
   const [bin, args] = buildCodex('<temp-home>');
   const report = {
-    role, label, run, runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
-    effort: spec.effort ?? 'xhigh',
+    role, label, run, runner: spec.runner, provider: spec.provider,
+    model: spec.model, profile: spec.profile, sandbox: spec.sandbox,
+    requested_effort: spec.requestedEffort,
+    provider_effort: spec.effort ?? 'xhigh', context_window: spec.contextWindow,
     read_only_enforcement: spec.sandbox !== 'read-only' ? null
       : 'process: --sandbox read-only',
     lane_cap: spec.cap, timeout_s: timeoutSec,
@@ -562,6 +581,48 @@ let temporaryHome = null;
 // rollout a later `codex exec resume` re-enters.
 let persistentHome = null;
 let codexAuthPaths = null;
+let providerEnvironment = {};
+
+const deepseekKey = () => {
+  if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
+  const file = deepseekEnvFile();
+  if (!file || !existsSync(file)) return null;
+  const line = readFileSync(file, 'utf8').split(/\r?\n/)
+    .find((candidate) => /^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*\S/.test(candidate));
+  return line
+    ? line.replace(/^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*/, '')
+      .replace(/^['"]|['"]\s*$/g, '').trim()
+    : null;
+};
+
+const configureProviderHome = (activeHome) => {
+  if (spec.provider !== 'deepseek') return;
+  const key = deepseekKey();
+  if (!key) throw new Error(`no DEEPSEEK_API_KEY in env or ${deepseekEnvFile()}`);
+  const catalog = join(activeHome, 'models.json');
+  const config = join(activeHome, 'config.toml');
+  // Exact DeepSeek Codex catalog entry vendored from the official setup script:
+  // https://cdn.deepseek.com/api-docs/codex-deepseek-setup-en.sh
+  copyFileSync(join(REPO, 'tools', 'deepseek-models.json'), catalog);
+  chmodSync(catalog, 0o600);
+  writeFileSync(config, [
+    `model = "${spec.model}"`,
+    'model_provider = "deepseek"',
+    'preferred_auth_method = "apikey"',
+    'forced_login_method = "api"',
+    `model_reasoning_effort = "${spec.effort}"`,
+    `model_catalog_json = ${JSON.stringify(catalog)}`,
+    '',
+    '[model_providers.deepseek]',
+    'name = "deepseek"',
+    'base_url = "https://api.deepseek.com/"',
+    'wire_api = "responses"',
+    'env_key = "DEEPSEEK_API_KEY"',
+    '',
+  ].join('\n'));
+  chmodSync(config, 0o600);
+  providerEnvironment = { DEEPSEEK_API_KEY: key };
+};
 /** The codex conversation this dispatch created, or null for a non-codex lane.
  *
  *  Two sources, in order. codex announces `session id: <uuid>` on stderr at
@@ -576,8 +637,9 @@ const codexSessionId = (result) => {
     const hit = banner.exec(String(stream ?? ''))?.[1];
     if (hit) return hit;
   }
-  if (!persistentHome) return null;
-  const roots = [join(persistentHome, 'sessions')];
+  const sessionHome = persistentHome ?? temporaryHome;
+  if (!sessionHome) return null;
+  const roots = [join(sessionHome, 'sessions')];
   const found = [];
   while (roots.length) {
     const dir = roots.pop();
@@ -619,18 +681,30 @@ const result = await new Promise((resolve) => {
     temporaryHome = mkdtempSync(`/tmp/prestige-dispatch-${role}-`);
   }
   const activeHome = persistentHome ?? temporaryHome;
-  const sourceAuth = join(codexHome, 'auth.json');
-  codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
-  if (existsSync(sourceAuth)) {
-    copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
-    chmodSync(join(activeHome, 'auth.json'), 0o600);
+  try {
+    if (spec.provider === 'openai') {
+      const sourceAuth = join(codexHome, 'auth.json');
+      codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
+      if (existsSync(sourceAuth)) {
+        copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
+        chmodSync(join(activeHome, 'auth.json'), 0o600);
+      }
+    } else {
+      configureProviderHome(activeHome);
+    }
+  } catch (error) {
+    const stderr = String(error?.message ?? error);
+    writeAttemptFile(logPath, stableLogPath,
+      `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n\n\n## stderr\n${stderr}\n`);
+    resolve({ code: 1, timedOut: false, stdout: '', stderr });
+    return;
   }
   [bin, args, extraEnv] = resumeSession ? buildCodexResume(activeHome) : buildCodex(activeHome);
 
   const child = spawn(bin, args, {
     cwd: REPO,
     stdio: ['pipe', 'pipe', 'pipe'],
-    env: { ...process.env, ...extraEnv },
+    env: { ...process.env, ...extraEnv, ...providerEnvironment },
   });
 
   let stdout = '';
@@ -656,6 +730,64 @@ const result = await new Promise((resolve) => {
 
 release();
 persistRotatedCodexAuth();
+const completedSessionId = resumeSession ?? codexSessionId(result);
+
+const attestContext = () => {
+  if (!spec.attestContext) return null;
+  const home = persistentHome ?? temporaryHome;
+  const attestation = {
+    required: true,
+    ok: false,
+    profile: spec.profile,
+    model: spec.model,
+    provider: spec.provider,
+    requested_effort: spec.requestedEffort,
+    provider_effort: spec.effort,
+    nominal_context_window: spec.contextWindow,
+    observed_context_window: null,
+  };
+  if (!home || !completedSessionId) return { ...attestation, error: 'session metadata missing' };
+  const pending = [join(home, 'sessions')];
+  let rollout = null;
+  while (pending.length && !rollout) {
+    const dir = pending.pop();
+    let entries;
+    try { entries = readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+    for (const entry of entries) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) pending.push(path);
+      else if (entry.name.endsWith(`-${completedSessionId}.jsonl`)) { rollout = path; break; }
+    }
+  }
+  if (!rollout) return { ...attestation, error: 'rollout metadata missing' };
+  let provider = null;
+  let model = null;
+  let effort = null;
+  let observed = null;
+  for (const line of readFileSync(rollout, 'utf8').split('\n').filter(Boolean)) {
+    let row;
+    try { row = JSON.parse(line); } catch { continue; }
+    if (row.type === 'session_meta') provider = row.payload?.model_provider ?? provider;
+    if (row.type === 'turn_context') {
+      model = row.payload?.model ?? model;
+      effort = row.payload?.effort ?? effort;
+    }
+    if (row.type === 'event_msg' && row.payload?.type === 'task_started') {
+      observed = row.payload?.model_context_window ?? observed;
+    }
+  }
+  const ok = provider === spec.provider && model === spec.model && effort === spec.effort
+    && Number(observed) >= Number(spec.effectiveContextFloor);
+  return { ...attestation, ok, observed_context_window: observed,
+    observed_provider: provider, observed_model: model, observed_effort: effort,
+    ...(ok ? {} : { error: `expected ${spec.provider}/${spec.model}/${spec.effort} and >=${spec.effectiveContextFloor} effective tokens` }) };
+};
+
+const contextAttestation = attestContext();
+if (contextAttestation && !contextAttestation.ok) {
+  result.code = 1;
+  result.stderr += `\nDeepSeek context attestation failed: ${contextAttestation.error}`;
+}
 if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort */ } }
 
 // A read-only role cannot write its own receipt, so the dispatcher—not the
@@ -699,7 +831,11 @@ const record = {
   // neither needs the table to be edited.
   covers,
   stage: option('--stage') ?? null,
-  runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
+  runner: spec.runner, provider: spec.provider, model: spec.model,
+  profile: spec.profile, requested_effort: spec.requestedEffort,
+  provider_effort: spec.effort ?? 'xhigh', context_window: spec.contextWindow,
+  context_attestation: contextAttestation,
+  sandbox: spec.sandbox,
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,
   exit_code: result.code, timed_out: result.timedOut,
   ok: result.code === 0 && !result.timedOut,
@@ -720,7 +856,7 @@ const record = {
   // the rollout filename is the fallback: `rollout-<ts>-<uuid>.jsonl` under the
   // session home, which is unambiguous precisely because that home belongs to
   // this one dispatch.
-  session_id: resumeSession ?? codexSessionId(result),
+  session_id: completedSessionId,
   session_home: persistentHome ? relative(REPO, persistentHome) : null,
   log: logPath, prompt: promptPath,
   // The agent's own final text, which is its report. Truncated in the record;

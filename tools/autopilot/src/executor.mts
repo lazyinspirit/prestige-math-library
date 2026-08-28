@@ -477,6 +477,9 @@ export class Executor {
       : [];
     return {
       role: plan.role, label: plan.label, run: this.config.run,
+      profile: plan.profile ?? (typeof stage.modelProfile === 'function'
+        ? stage.modelProfile(plan)
+        : stage.modelProfile) ?? '',
       brief: plan.brief, task: plan.task,
       covers: (plan.covers ?? []).join(','),
       timeout: plan.timeout ?? this.config.defaultTimeoutSec ?? 14400,

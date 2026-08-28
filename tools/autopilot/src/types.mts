@@ -33,6 +33,9 @@ export interface Ctx {
  */
 export interface Plan {
   role: string;
+  /** Optional stage-selected model/provider profile. Role sandbox/caps remain
+   * unchanged; the repository dispatcher validates the named profile. */
+  profile?: string;
   label: string;
   job: string;
   covers?: Unit[];
@@ -116,6 +119,9 @@ export interface Stage {
    * declares for it — they mirror one cap, so the max IS the cap.
    */
   role?: string;
+  /** Model override applied to every matching primary and repair dispatch in
+   * this stage. A function may leave tool or unrelated role plans unchanged. */
+  modelProfile?: string | ((plan: Plan) => string | undefined);
   /**
    * Units that must advance TOGETHER, for a stage whose dispatch covers several
    * at once. A group Alpha owns up to three batches and its single dispatch

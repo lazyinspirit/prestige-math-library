@@ -57,6 +57,7 @@ function loadConfig(): Config {
       '--timeout', '{timeout}', '--attempt', '{attempt}',
       '--image', '{images}', '--output-schema', '{outputSchema}',
       '--result-artifact', '{resultArtifact}',
+      '--profile', '{profile}',
       // dispatch.mjs substitutes these into the brief and task as <run>, <i> and
       // <output>, so a generic template resolves to this run's real paths.
       // Each drops out entirely when empty.

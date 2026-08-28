@@ -4,6 +4,10 @@
 import { inspectLegacyStep6Cutover } from '../../step6-cutover-lib.mjs';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+
+const DEEPSEEK_XHIGH_1M = MODEL_PROFILE_NAMES.deepseekXhigh1m;
+const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
 
 /** A completed legacy run skips only stage ids introduced by this cutover.
  * The receipt is write-once and bound to its gate timestamps and artifacts;
@@ -228,6 +232,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-read',
       label: 'independent readers',
+      modelProfile: DEEPSEEK_XHIGH_1M,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -254,6 +259,9 @@ export function step6Stages(d: any) {
     {
       id: '6a-split',
       label: 'compute touched and untouched items (mechanical)',
+      modelProfile: (plan: any) => ['reader', 'beta'].includes(plan.role)
+        ? DEEPSEEK_XHIGH_1M
+        : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,
@@ -297,6 +305,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-refute',
       label: 'read-only refuters over untouched and high-risk items',
+      modelProfile: TERRA_XHIGH,
       pipeline: 'read',
       role: 'refuter',
       units: introducedBatches,
@@ -319,6 +328,7 @@ export function step6Stages(d: any) {
     {
       id: '6a-collect',
       label: 'validate refuter coverage and materialize obligations (mechanical)',
+      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_XHIGH : undefined,
       pipeline: 'read',
       role: 'tool',
       units: introducedBatches,

@@ -22,7 +22,11 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
+import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
+
+const DEEPSEEK_XHIGH_1M = MODEL_PROFILE_NAMES.deepseekXhigh1m;
+const GPT54_XHIGH_1M = MODEL_PROFILE_NAMES.gpt54Xhigh1m;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -1841,6 +1845,9 @@ export const stages = [
   {
     id: '5-author',
     label: 'authoring',
+    modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
+      ? DEEPSEEK_XHIGH_1M
+      : undefined,
     // THE LARGEST WIN. A batch whose authoring is finished starts its reader
     // while the other batches are still being written: authors run to six hours
     // and readers to four, and serially the slowest author gated every reader.
@@ -2182,6 +2189,9 @@ export const stages = [
   {
     id: '7-judge',
     label: 'one persistent Terra judge per A/B pair, with the group Alphas reading alongside',
+    modelProfile: (plan: any) => plan.role === 'alpha-group-read'
+      ? GPT54_XHIGH_1M
+      : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
     // a real obligation rather than a best-effort rider.
@@ -3516,5 +3526,14 @@ export const stages = [
     },
   },
 ];
+
+// Owner-selected late-stage model boundary (2026-08-29). Apply it at the
+// stage boundary so repair hooks and obligation re-dispatches cannot silently
+// fall back to their role's ordinary lane. Tool plans remain deterministic.
+for (const stage of stages) {
+  if (/^(?:9|10)-/.test(stage.id)) {
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : DEEPSEEK_XHIGH_1M;
+  }
+}
 
 export default { stages, batches, alphaGroups };

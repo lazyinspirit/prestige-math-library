@@ -103,6 +103,7 @@ import { itemHashJudge } from "./item-hash.mjs";
 import { extractEmbeddedVerdict } from "./judge-parse.mjs";
 import {
   MODELS, JUDGE_LINEUPS, DEFAULT_LINEUP,
+  KNOWN_JUDGES,
   JUDGE_CONTEXT_WINDOW, JUDGE_AUTO_COMPACT_TOKEN_LIMIT,
 } from "./models.mjs";
 
@@ -134,7 +135,7 @@ if (!file && !bools.has("preflight")) {
 const PAYMENT_EXIT = 3;
 const CONTEXT_RETRY_EXIT = 6;
 const TERRA_MODEL = MODELS.terra.id;
-const SUPPORTED_MODELS: string[] = Object.values(MODELS).map((m: any) => m.id);
+const SUPPORTED_MODELS: string[] = [...KNOWN_JUDGES];
 // JUDGE_LINEUP selects the configured GPT judge set. A normal invocation uses
 // all configured models; --model targets exactly one model for recovery work.
 const lineupName = process.env.JUDGE_LINEUP ?? DEFAULT_LINEUP;

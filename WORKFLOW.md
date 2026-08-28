@@ -68,10 +68,18 @@ stages.
 
 ## Ownership
 
-`tools/models.mjs` owns model IDs, runners, lanes, and judge-lineup resolution.
+`tools/models.mjs` owns model IDs, runners, stage-selectable profiles, and
+judge-lineup resolution.
 `tools/dispatch.mjs` owns role caps, effort, web access, sandbox enforcement,
-session handling, and output capture. Every registered model is a GPT model on
-the Codex runner; the current judge lineup is the singleton `gpt-5.6-terra` lane.
+provider isolation, session handling, and output capture. The current judge
+lineup is the singleton `gpt-5.6-terra` lane. Stage profiles route Step-5
+authoring, Step-6 readers, and all Step-9/10 agent dispatches through
+`deepseek-v4-pro` at the requested `xhigh` tier (DeepSeek spells its top tier
+`max`); Step-6 refuters use `gpt-5.6-terra` at `xhigh`, and Step-7 group readers
+use `gpt-5.4` at `xhigh`. DeepSeek's official Codex catalog declares a
+1,048,576-token window, and every DeepSeek dispatch fails closed unless its
+rollout attests the exact provider/model/effort and at least 995,000 effective
+tokens (the official catalog reserves five percent of the nominal window).
 
 | Role | Build responsibility | Evidence |
 |---|---|---|
