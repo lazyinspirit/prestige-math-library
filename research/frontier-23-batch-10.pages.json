@@ -1,0 +1,232 @@
+[
+  {
+    "order": 581,
+    "id": "formal-languages-encodings-and-decision-problems",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Formal Languages, Encodings, and Decision Problems",
+    "companion": "formal-languages-encodings-and-decision-problems-examples",
+    "requires": [
+      "linear-recurrences-and-rational-generating-functions",
+      "relations-functions-and-quotients",
+      "countability-and-uncountability"
+    ],
+    "items": [
+      {
+        "id": "def-computation-alphabet-and-word-convention",
+        "kind": "definition",
+        "title": "Computation alphabets, words, the empty word, and $\\Sigma^*$",
+        "deps": [
+          "def-finite-words-factor-avoidance-and-prefix-states",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-indexed-union-and-intersection"
+        ]
+      },
+      {
+        "id": "lem-computation-words-agree-with-published-finite-words",
+        "kind": "lemma",
+        "title": "The computation-word convention agrees with the published finite-word definition",
+        "strategy": "Let $\\Sigma$ be finite. Unpack the local definition of a word of length $n$ as a function $n\\to\\Sigma$ and compare it term-for-term with [[def-finite-words-factor-avoidance-and-prefix-states]]. The only real work is to note that both pages use the same empty word and the same offset concatenation, so the underlying set $\\Sigma^*$ is literally the same set and not merely a canonically isomorphic copy.",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-finite-words-factor-avoidance-and-prefix-states"
+        ]
+      },
+      {
+        "id": "def-language-over-an-alphabet",
+        "kind": "definition",
+        "title": "Languages over an alphabet",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-subset-and-proper-subset"
+        ]
+      },
+      {
+        "id": "def-language-boolean-operations",
+        "kind": "definition",
+        "title": "Boolean operations on languages over a fixed alphabet",
+        "deps": [
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "def-language-concatenation-powers-and-kleene-star",
+        "kind": "definition",
+        "title": "Language concatenation, powers, and Kleene star",
+        "deps": [
+          "def-language-over-an-alphabet",
+          "def-indexed-union-and-intersection"
+        ]
+      },
+      {
+        "id": "lem-language-concatenation-is-associative",
+        "kind": "lemma",
+        "title": "Language concatenation is associative",
+        "strategy": "For $w\\in (L_1L_2)L_3$, choose witnesses $u\\in L_1$, $v\\in L_2$, and $x\\in L_3$ with $w=(uv)x$. The offset definition of word concatenation makes $((uv)x)(i)$ and $(u(vx))(i)$ equal for every position $i$, so $(uv)x=u(vx)$. This gives $w\\in L_1(L_2L_3)$, and the reverse inclusion is symmetric.",
+        "deps": [
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "lem-kleene-star-has-the-expected-least-closure-property",
+        "kind": "lemma",
+        "title": "Kleene star is the least concatenation-closed language containing $L$ and $\\varepsilon$",
+        "strategy": "First show directly from the recursive definition of powers that $\\varepsilon\\in L^*$ and $LL^*\\subseteq L^*$. For minimality, let $K$ be any language with $\\varepsilon\\in K$ and $LK\\subseteq K$. Prove by induction on $n$ that $L^n\\subseteq K$: the base case is $L^0=\\{\\varepsilon\\}$, and the step uses $L^{n+1}=L^nL$ together with the induction hypothesis and the closure assumption. Taking the union over all $n$ gives $L^*\\subseteq K$.",
+        "deps": [
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "def-word-and-language-reversal",
+        "kind": "definition",
+        "title": "Word reversal and language reversal",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "lem-reversal-is-an-involution-and-reverses-concatenation",
+        "kind": "lemma",
+        "title": "Reversal is an involution and reverses concatenation",
+        "strategy": "Prove the word identities first. Induct on the length of the second factor to show $(uv)^R=v^Ru^R$, using the defining clause $(wa)^R=aw^R$. A second induction on length gives $(w^R)^R=w$. The language statements then follow pointwise from the definition $L^R=\\{w^R:w\\in L\\}$.",
+        "deps": [
+          "def-word-and-language-reversal",
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "def-alphabet-homomorphism-and-induced-word-map",
+        "kind": "definition",
+        "title": "Alphabet maps into $\\Delta^*$ and their induced maps on words",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-function"
+        ]
+      },
+      {
+        "id": "lem-induced-word-map-has-the-free-extension-property",
+        "kind": "lemma",
+        "title": "The induced word map is the unique concatenation-preserving extension",
+        "strategy": "Let $h:\\Sigma\\to\\Delta^*$ be the alphabet map of the definition and let $\\widehat h:\\Sigma^*\\to\\Delta^*$ be its induced map. Prove $\\widehat h(uv)=\\widehat h(u)\\widehat h(v)$ by induction on the length of $v$ and the explicit block-concatenation definition of $\\widehat h$. For uniqueness, let $g:\\Sigma^*\\to\\Delta^*$ preserve concatenation and agree with $h$ on one-letter words. Induct on word length: the empty word must map to $\\varepsilon$, and a nonempty word splits as $ua$, so $g(ua)=g(u)g(a)=\\widehat h(u)h(a)=\\widehat h(ua)$.",
+        "deps": [
+          "def-alphabet-homomorphism-and-induced-word-map"
+        ]
+      },
+      {
+        "id": "def-effective-binary-encoding-and-decoder",
+        "kind": "definition",
+        "title": "Effective binary encodings and total decoders",
+        "deps": [
+          "def-function",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "lem-finite-tuples-admit-effective-prefix-free-encodings",
+        "kind": "lemma",
+        "title": "Finite tuples admit effective prefix-free binary encodings",
+        "strategy": "Use an explicit self-delimiting code for a single binary word, for example $c(w)=1^{|w|}0w$. Then encode a tuple $(w_1,\\dots,w_k)$ as $1^k0\\,c(w_1)\\cdots c(w_k)$. Decode by first reading the initial unary block to recover $k$, then parse exactly $k$ self-delimiting word blocks. Prefix-freeness comes from the first block determining the tuple length and each subsequent block determining its own endpoint.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ]
+      },
+      {
+        "id": "def-decision-search-and-function-problem",
+        "kind": "definition",
+        "title": "Decision problems, search problems, and function problems",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "def-instance-size-under-an-encoding",
+        "kind": "definition",
+        "title": "Instance size and polynomially related encodings",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ]
+      },
+      {
+        "id": "prop-polynomially-related-encodings-preserve-polynomial-size",
+        "kind": "proposition",
+        "title": "Polynomially related encodings preserve polynomial size bounds",
+        "strategy": "Let $\\sigma$ and $\\tau$ be polynomially related encodings of the same instance family, and suppose some quantity $m(x)$ satisfies $m(x)\\le p(|\\sigma(x)|)$ for a polynomial $p$. If $|\\sigma(x)|\\le q(|\\tau(x)|)$ for a polynomial $q$, then $m(x)\\le p(q(|\\tau(x)|))$, still a polynomial bound. The reverse implication is identical with the roles of $\\sigma$ and $\\tau$ exchanged.",
+        "deps": [
+          "def-instance-size-under-an-encoding"
+        ]
+      },
+      {
+        "id": "fs-a-language-is-a-set-of-symbols",
+        "kind": "false-statement",
+        "title": "FALSE: a language is a set of symbols",
+        "strategy": "Refute the claim on the binary alphabet $\\Sigma=\\{0,1\\}$ with the language $L=\\{01\\}$. The element $01$ is a word of length two, so $L\\subseteq\\Sigma^*$ is a language, but $01\\notin\\Sigma$. The falsehood is exactly the design's syntax-versus-denotation warning: a language is a set of words over an alphabet, not a subset of the alphabet itself.",
+        "deps": [
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "fs-every-effective-encoding-is-prefix-free",
+        "kind": "false-statement",
+        "title": "FALSE: every effective encoding is prefix-free",
+        "strategy": "Refute the claim with the binary encoding $e(w)=1w$. It is injective, and the total decoder that strips the first bit on inputs beginning with $1$ and returns a fixed malformed-code token otherwise decodes it effectively. But the image is not prefix-free: $e(\\varepsilon)=1$ is a prefix of $e(0)=10$.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 582,
+    "id": "formal-languages-encodings-and-decision-problems-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Formal Languages, Encodings, and Decision Problems: Examples and Counterexamples",
+    "requires": [
+      "formal-languages-encodings-and-decision-problems"
+    ],
+    "items": [
+      {
+        "id": "ex-language-concatenation-is-associative",
+        "kind": "example",
+        "title": "A concrete calculation of $(L_1L_2)L_3=L_1(L_2L_3)$",
+        "strategy": "Take $L_1=\\{a\\}$, $L_2=\\{\\varepsilon,b\\}$, and $L_3=\\{a,bb\\}$ over $\\{a,b\\}$. Compute $L_1L_2=\\{a,ab\\}$ and then $(L_1L_2)L_3=\\{aa,abb,aba,abbb\\}$. Compute $L_2L_3=\\{a,bb,ba,bbb\\}$ and then $L_1(L_2L_3)=\\{aa,abb,aba,abbb\\}$. The example should exhibit the same four words on both sides rather than only appealing to the general lemma.",
+        "deps": [
+          "lem-language-concatenation-is-associative",
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "ex-polynomially-related-encodings-preserve-polynomial-size",
+        "kind": "example",
+        "title": "Ordinary binary numerals and doubled-bit numerals are polynomially related",
+        "strategy": "Encode a natural number $n$ first by its standard binary numeral $\\sigma(n)$ and second by the doubled-bit code $\\tau(n)$ obtained by replacing each bit by two copies. Then $|\\tau(n)|=2|\\sigma(n)|$ for every $n$, so the two encodings are polynomially related in the strongest possible way. Check a concrete instance such as $13$, where $\\sigma(13)=1101$ and $\\tau(13)=11110011$, and then show how a bound like $|\\tau(n)|^3$ translates back to $8|\\sigma(n)|^3$.",
+        "deps": [
+          "def-instance-size-under-an-encoding",
+          "prop-polynomially-related-encodings-preserve-polynomial-size"
+        ]
+      },
+      {
+        "id": "cex-a-language-is-a-set-of-symbols",
+        "kind": "counterexample",
+        "title": "The language $\\{01\\}$ is not a set of alphabet symbols",
+        "strategy": "Use the binary alphabet $\\Sigma=\\{0,1\\}$. The one-element set $L=\\{01\\}$ is a language because $01\\in\\Sigma^*$, but it is not a subset of $\\Sigma$ because $01$ is a word of length two rather than a single symbol. Write both containments explicitly: $01\\in\\Sigma^*$ and $01\\notin\\Sigma$.",
+        "deps": [
+          "def-language-over-an-alphabet",
+          "fs-a-language-is-a-set-of-symbols"
+        ]
+      },
+      {
+        "id": "cex-an-effective-encoding-need-not-be-prefix-free",
+        "kind": "counterexample",
+        "title": "The encoding $w\\mapsto 1w$ is effective but not prefix-free",
+        "strategy": "Take the encoding $e(w)=1w$ on binary strings. The decoder reads the first bit: if it is $1$, remove it and output the remainder; if it is $0$ or the string is empty, return the fixed malformed-code output. This shows effectiveness directly. Prefix-freeness fails because $1=e(\\varepsilon)$ is a proper prefix of $10=e(0)$.",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "fs-every-effective-encoding-is-prefix-free"
+        ]
+      }
+    ]
+  }
+]

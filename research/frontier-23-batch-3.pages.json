@@ -1,0 +1,284 @@
+[
+  {
+    "order": 111.011,
+    "id": "integral-extensions-and-going-up",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Integral Extensions and Going Up",
+    "companion": "integral-extensions-and-going-up-examples",
+    "requires": [
+      "associated-primes-and-primary-decomposition-examples"
+    ],
+    "items": [
+      {
+        "id": "def-integral-ring-extension",
+        "kind": "definition",
+        "title": "Integral ring maps and integral extensions",
+        "deps": [
+          "def-integral-element-and-algebraic-integer"
+        ]
+      },
+      {
+        "id": "def-integral-closure-and-integrally-closed-domain",
+        "kind": "definition",
+        "title": "Integral closure in an extension ring and integrally closed domains",
+        "deps": [
+          "def-integral-ring-extension",
+          "def-field-of-fractions",
+          "def-zero-divisor-and-integral-domain"
+        ]
+      },
+      {
+        "id": "thm-transitivity-of-integrality",
+        "kind": "theorem",
+        "title": "Integral extensions are transitive",
+        "strategy": "Handle the zero base ring first. For an element of the top ring, adjoin the finitely many coefficients of one monic equation over the middle ring, use the published finite-generator integrality lemma to make that coefficient algebra module-finite over the base, then adjoin the element itself and apply the one-element criterion back over the base.",
+        "deps": [
+          "def-integral-ring-extension",
+          "thm-integrality-and-finite-module-equivalences",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "lem-transitivity-of-module-finiteness"
+        ]
+      },
+      {
+        "id": "thm-integral-closure-is-integrally-closed",
+        "kind": "theorem",
+        "title": "The integral closure of a domain in a field extension is integrally closed",
+        "strategy": "Use the published subring theorem to see that integral elements over the base form a subring. If an element is integral over that subring, transitivity makes it integral over the original domain, so it was already in the closure.",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain",
+          "thm-transitivity-of-integrality",
+          "cor-integral-elements-form-a-subring"
+        ]
+      },
+      {
+        "id": "thm-integrality-commutes-with-localisation",
+        "kind": "theorem",
+        "title": "Integrality and integral closure commute with localisation",
+        "strategy": "Forwards, divide a monic equation by a suitable power of the chosen denominator. Backwards, clear all coefficient denominators from a monic equation in the localisation so that one multiplier sends the element into the original integral closure. The closure statement is then just a restatement of the two directions.",
+        "deps": [
+          "def-integral-ring-extension",
+          "def-integral-closure-and-integrally-closed-domain",
+          "def-multiplicative-subset-and-localisation",
+          "thm-localisation-equivalence-and-ring-laws"
+        ]
+      },
+      {
+        "id": "lem-field-integrality-criterion",
+        "kind": "lemma",
+        "title": "For an integral extension of domains, the upper ring is a field if and only if the lower ring is",
+        "strategy": "If the base is a field, take a monic relation of minimal degree for a nonzero element and solve for its inverse. If the upper ring is a field, apply a monic relation to the inverse of a nonzero base element and solve inside the base.",
+        "deps": [
+          "def-integral-ring-extension",
+          "def-field",
+          "def-zero-divisor-and-integral-domain"
+        ]
+      },
+      {
+        "id": "cor-contraction-of-maximal-ideals-integral-extension",
+        "kind": "corollary",
+        "title": "Under an integral extension, a prime is maximal if and only if its contraction is maximal",
+        "strategy": "Pass to the induced integral extension of quotient domains and apply the field criterion to the two quotient rings.",
+        "deps": [
+          "lem-field-integrality-criterion",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-quotient-is-field-iff-ideal-maximal"
+        ]
+      },
+      {
+        "id": "thm-lying-over",
+        "kind": "theorem",
+        "title": "Lying over for integral ring maps",
+        "strategy": "Reduce a general map to the injective case by quotienting by the kernel. Then quotient by the chosen prime, localise the resulting domain at its nonzero elements to reach a field, choose a maximal ideal in the nonzero localised upper ring, and contract it back through localisation and quotient correspondences.",
+        "deps": [
+          "def-integral-ring-extension",
+          "thm-integrality-commutes-with-localisation",
+          "cor-contraction-of-maximal-ideals-integral-extension",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-proper-ideal-contained-in-maximal-ideal"
+        ]
+      },
+      {
+        "id": "thm-incomparability-for-integral-extensions",
+        "kind": "theorem",
+        "title": "Comparable primes with the same contraction are equal under an integral map",
+        "strategy": "Localise at the common contraction. The two extended primes are then nested primes of the localised upper ring over the maximal ideal of the localised base, so the maximal-ideal contraction corollary makes both maximal and hence equal. Contract back through the localisation bijection.",
+        "deps": [
+          "def-integral-ring-extension",
+          "thm-integrality-commutes-with-localisation",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "cor-contraction-of-maximal-ideals-integral-extension"
+        ]
+      },
+      {
+        "id": "thm-going-up",
+        "kind": "theorem",
+        "title": "Going up for integral ring maps",
+        "strategy": "Quotient by the lower prime of the chain and by the chosen prime upstairs. The induced extension remains integral, so lying over lifts the next base prime and pulling back gives the required over-prime.",
+        "deps": [
+          "def-integral-ring-extension",
+          "thm-lying-over",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "cor-integral-extension-lifts-finite-prime-chains",
+        "kind": "corollary",
+        "title": "Integral extensions lift finite prime chains from the base",
+        "strategy": "Iterate the one-step going-up theorem along the chain.",
+        "deps": [
+          "thm-going-up"
+        ]
+      },
+      {
+        "id": "lem-integral-extension-chain-contraction-is-strict",
+        "kind": "lemma",
+        "title": "Strict prime chains contract strictly under integral extensions",
+        "strategy": "If two adjacent contractions were equal, incomparability would force the adjacent upper primes to be equal as well.",
+        "deps": [
+          "thm-incomparability-for-integral-extensions"
+        ]
+      },
+      {
+        "id": "cor-dimension-preserved-by-integral-extensions",
+        "kind": "corollary",
+        "title": "Injective integral extensions preserve Krull dimension",
+        "strategy": "Lift every finite chain in the base by going up, and contract every finite chain upstairs strictly by incomparability. The two inequalities give equality of dimensions.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "cor-integral-extension-lifts-finite-prime-chains",
+          "lem-integral-extension-chain-contraction-is-strict"
+        ]
+      },
+      {
+        "id": "lem-integrally-closed-minimal-polynomial-coefficients",
+        "kind": "lemma",
+        "title": "Minimal polynomials of integral elements over an integrally closed domain have coefficients in the domain",
+        "strategy": "Take a splitting field of the minimal polynomial. Every conjugate satisfies the same monic equation over the domain, so all conjugates are integral; expanding the minimal polynomial as a product of linear factors shows that its coefficients are integral, and integrally closedness pulls them back into the domain.",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain",
+          "cor-integral-elements-form-a-subring",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-splitting-fields-exist-for-nonzero-polynomials",
+          "thm-universal-property-of-adjoining-an-irreducible-root"
+        ]
+      },
+      {
+        "id": "thm-normality-is-local-for-domains",
+        "kind": "theorem",
+        "title": "A domain is integrally closed if and only if its prime localisations are, equivalently if and only if its maximal localisations are",
+        "strategy": "Forward direction is localisation of integral closure. For the converse, let x be integral over the domain; the finite module A[x]/A vanishes after localising at every maximal ideal by hypothesis, so the local criterion forces it to vanish globally and x already lies in the domain. Prime and maximal localisations are interchanged by iterated localisation.",
+        "deps": [
+          "def-integral-closure-and-integrally-closed-domain",
+          "thm-integrality-commutes-with-localisation",
+          "thm-integrality-and-finite-module-equivalences",
+          "thm-local-criterion-for-zero-modules-and-maps",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "prop-iterated-localisation",
+          "def-localisation-at-a-prime-ideal"
+        ]
+      },
+      {
+        "id": "thm-going-down-over-normal-domains",
+        "kind": "theorem",
+        "title": "Going down holds for integral extensions over integrally closed domains",
+        "strategy": "Localise at the upper prime so the upper ring becomes local and the base stays integrally closed. For an element of the lower extended ideal inside the localised upper ring, build a finite stable module and apply the determinant trick to a multiplication operator; the coefficient lemma then forces the critical denominator into the upper prime, proving the contraction equality needed for a final lying-over step inside the local ring.",
+        "deps": [
+          "def-integral-ring-extension",
+          "thm-normality-is-local-for-domains",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-integrality-commutes-with-localisation",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-lying-over",
+          "lem-integrally-closed-minimal-polynomial-coefficients",
+          "thm-integrality-and-finite-module-equivalences",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
+          "thm-adjugate-identity-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "cor-height-preserved-under-going-down-integral-extensions",
+        "kind": "corollary",
+        "title": "Under going down and incomparability, lying-over primes have the same finite height",
+        "strategy": "Going down lifts every finite chain below the contracted prime, and incomparability shows that every finite chain below the upper prime contracts strictly. The two resulting inequalities force equal finite heights.",
+        "deps": [
+          "def-height-of-a-prime-ideal",
+          "thm-going-down-over-normal-domains",
+          "thm-incomparability-for-integral-extensions"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.012,
+    "id": "integral-extensions-and-going-up-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Integral Extensions and Going Up — Examples",
+    "companion": "integral-extensions-and-going-up",
+    "requires": [
+      "integral-extensions-and-going-up"
+    ],
+    "items": [
+      {
+        "id": "ex-integrality-equation-and-power-basis",
+        "kind": "example",
+        "title": "Every element of k[X] is integral over k[X^2], and k[X] has basis 1, X over k[X^2]",
+        "strategy": "Write f(X) = a(X^2) + X b(X^2). Then f satisfies a quadratic monic equation over k[X^2], and the same decomposition shows that every element lies in the k[X^2]-span of 1 and X.",
+        "deps": [
+          "thm-integrality-and-finite-module-equivalences"
+        ]
+      },
+      {
+        "id": "ex-integral-elements-subring-computation",
+        "kind": "example",
+        "title": "Z[square-root of 2, square-root of 3] is finite over Z and contains the sum and product of its generators",
+        "strategy": "Show that 1, square-root of 2, square-root of 3, and square-root of 6 span the ring over Z. This one finite module exhibits both the multi-generator finiteness theorem and the closure of integral elements under addition and multiplication.",
+        "deps": [
+          "cor-integral-elements-form-a-subring",
+          "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite"
+        ]
+      },
+      {
+        "id": "ex-integrality-localisation-clearing-denominators",
+        "kind": "example",
+        "title": "The element 1/p is integral over Z[1/p] but not over Z",
+        "strategy": "After localising Z at the powers of p, the element 1/p already lies in the base ring and is therefore integral. Clearing denominators multiplies it back to 1 in Z, while a direct divisibility argument shows that 1/p itself cannot satisfy a monic equation over Z.",
+        "deps": [
+          "thm-integrality-commutes-with-localisation"
+        ]
+      },
+      {
+        "id": "ex-lying-over-by-quotient-and-localisation",
+        "kind": "example",
+        "title": "Lying over in k[t^2, t^3] subset k[t]",
+        "strategy": "Use the cusp subring A = k[t^2, t^3] inside B = k[t]. Track the primes over the zero ideal and the cusp maximal ideal by quotienting and localising exactly as in the proof of lying over.",
+        "deps": [
+          "thm-lying-over"
+        ]
+      },
+      {
+        "id": "ex-incomparability-in-a-quadratic-integral-extension",
+        "kind": "example",
+        "title": "In k[Y] subset k[X] with Y = X^2, comparable primes do not share a contraction",
+        "strategy": "Work in the integral extension k[Y] subset k[X] defined by Y = X^2. The upper primes are easy to list, and direct contraction shows that the only comparable chains contract strictly.",
+        "deps": [
+          "thm-incomparability-for-integral-extensions"
+        ]
+      },
+      {
+        "id": "ex-going-down-needs-normality",
+        "kind": "example",
+        "title": "An integral domain extension can fail going down when the base is not normal",
+        "strategy": "Use Hochster's standard example R = K[x(1 - x), y, xy] subset S = K[x, y]. The ring S is integral over R because x satisfies the monic equation z^2 - z + x(1 - x) = 0 with coefficients in R. Let P0 = (x(1 - x), xy)R and Q = (1 - x, y)S. Then Q lies over the maximal ideal P = (x(1 - x), y, xy)R containing P0, but any prime Q0 subset Q lying over P0 would have to avoid x while containing both x(1 - x) and xy, forcing 1 - x and y into Q0 and hence Q0 = Q, whose contraction is P rather than P0. Therefore going down fails if the normality hypothesis on the base is removed.",
+        "deps": [
+          "thm-going-down-over-normal-domains"
+        ]
+      }
+    ]
+  }
+]

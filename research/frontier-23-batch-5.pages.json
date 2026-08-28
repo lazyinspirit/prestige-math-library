@@ -1,0 +1,380 @@
+[
+  {
+    "order": 168.001,
+    "id": "matrix-norms-condition-numbers-and-numerical-stability",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Matrix Norms, Condition Numbers and Numerical Stability",
+    "companion": "matrix-norms-condition-numbers-and-numerical-stability-examples",
+    "requires": [
+      "rn-as-a-normed-space",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-absolute-and-relative-forward-error-for-a-problem-map",
+        "kind": "definition",
+        "title": "Absolute and relative forward error for an approximate value of a problem map",
+        "deps": [
+          "def-norm-and-normed-space"
+        ]
+      },
+      {
+        "id": "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+        "kind": "definition",
+        "title": "Absolute and relative local condition numbers of a problem map",
+        "deps": [
+          "def-absolute-and-relative-forward-error-for-a-problem-map",
+          "def-norm-and-normed-space"
+        ]
+      },
+      {
+        "id": "def-induced-matrix-p-norm",
+        "kind": "definition",
+        "title": "The matrix norm induced by a published vector p-norm",
+        "deps": [
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "kind": "theorem",
+        "title": "Induced matrix norms are compatible with multiplication, submultiplicative, and satisfy ||I|| = 1",
+        "strategy": "Use the defining supremum over nonzero vectors. Compatibility is immediate from the ratio definition, submultiplicativity follows by inserting Bx into the estimate for A, and the identity has norm one because every nonzero vector attains ratio one.",
+        "deps": [
+          "def-induced-matrix-p-norm",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics"
+        ]
+      },
+      {
+        "id": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+        "kind": "theorem",
+        "title": "The induced 1-norm is the maximum column sum and the induced infinity-norm is the maximum row sum",
+        "strategy": "For the 1-norm, expand Ax by columns and use the triangle inequality to bound ||Ax||_1 by the maximum column sum times ||x||_1, then attain equality on a basis vector at a maximizing column. The infinity-norm is the rowwise analogue, with equality on a sign choice that saturates a maximizing row.",
+        "deps": [
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "def-frobenius-matrix-norm",
+        "kind": "definition",
+        "title": "The Frobenius norm $||A||_F=(\\sum_{i,j}|a_{ij}|^2)^{1/2}$ on real or complex matrices",
+        "deps": [
+          "def-abs-value",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ]
+      },
+      {
+        "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+        "kind": "theorem",
+        "title": "Spectral and Frobenius norms are unitarily invariant, are given by singular values, and satisfy the sharp rank comparison",
+        "strategy": "Write A = U Sigma V^* by the singular value decomposition. The spectral norm is the largest singular value by the published operator-norm theorem, the Frobenius norm is the Euclidean norm of the singular-value vector, and left or right multiplication by orthogonal or unitary matrices leaves those singular values unchanged. The rank comparison is the max-versus-Euclidean bound on the singular-value vector, with equality when all nonzero singular values coincide.",
+        "deps": [
+          "def-frobenius-matrix-norm",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ]
+      },
+      {
+        "id": "def-condition-number-of-a-nonsingular-linear-system",
+        "kind": "definition",
+        "title": "The condition number kappa_p(A) = ||A||_p ||A^{-1}||_p of a nonsingular linear system",
+        "deps": [
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-right-hand-side-perturbation-bound-for-ax-equals-b",
+        "kind": "theorem",
+        "title": "Right-hand-side perturbations in Ax = b are amplified by the condition number",
+        "strategy": "If A(x + dx) = b + db, then A dx = db and hence dx = A^{-1} db. Bound dx by ||A^{-1}|| ||db|| and bound ||x|| below by ||b|| / ||A|| to obtain the relative estimate with kappa_p(A).",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-matrix-perturbation-bound-for-ax-equals-b",
+        "kind": "theorem",
+        "title": "Matrix perturbations in Ax = b obey a first-order condition-number bound",
+        "strategy": "Subtract (A + dA)(x + dx) = b from Ax = b to get A dx = -dA(x + dx). Rearranging gives an exact bound with denominator 1 - ||A^{-1}|| ||dA|| whenever that quantity is positive, and the first-order estimate is the small-perturbation expansion of the exact inequality.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity",
+        "kind": "theorem",
+        "title": "The reciprocal spectral condition number is the relative distance to singularity",
+        "strategy": "Use the smallest singular value to prove that every perturbation smaller than sigma_min(A) leaves A invertible, then attain that distance by subtracting sigma_min(A) times the outer product of a left and right singular vector for the smallest singular value. Divide by ||A||_2 = sigma_max(A).",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ]
+      },
+      {
+        "id": "thm-residual-to-forward-error-bounds-for-linear-systems",
+        "kind": "theorem",
+        "title": "Residual bounds on forward error for a nonsingular linear system",
+        "strategy": "For r = b - A x_hat and e = x - x_hat, the identity r = A e gives both r = A e and e = A^{-1} r. Apply the induced-norm inequalities in the two directions and normalize by ||b|| and ||x|| to show that a small residual controls the forward error only up to the condition number.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "def-normwise-and-componentwise-backward-error-for-linear-systems",
+        "kind": "definition",
+        "title": "Normwise and componentwise backward error for an approximate linear-system solution",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "prop-explicit-formulas-for-normwise-and-componentwise-backward-error",
+        "kind": "proposition",
+        "title": "Residual formulas for normwise and componentwise backward error",
+        "strategy": "Write the residual as r = d b - d A x_hat. Any admissible perturbation must therefore dominate r, which gives the lower bounds. Equality is attained by choosing perturbations aligned with the residual in the normwise case and entrywise saturated in the componentwise case, with the usual 0/0 = 0 convention.",
+        "deps": [
+          "def-normwise-and-componentwise-backward-error-for-linear-systems",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-residual-to-forward-error-bounds-for-linear-systems",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "kind": "definition",
+        "title": "The standard relative floating-point model and unit roundoff",
+        "deps": []
+      },
+      {
+        "id": "def-forward-and-backward-stability-for-a-problem-family",
+        "kind": "definition",
+        "title": "Forward and backward stability for a problem family under an arithmetic model",
+        "deps": [
+          "def-absolute-and-relative-forward-error-for-a-problem-map",
+          "def-normwise-and-componentwise-backward-error-for-linear-systems",
+          "def-standard-relative-floating-point-model-and-unit-roundoff"
+        ]
+      },
+      {
+        "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+        "kind": "lemma",
+        "title": "If |delta_i| <= u and nu < 1, then (1 + delta_1) ... (1 + delta_n) = 1 + theta_n with |theta_n| <= gamma_n",
+        "strategy": "Expand the product only through its extremal estimates: it lies between (1 - u)^n and (1 + u)^n. Geometric-series algebra turns the upper deviation into gamma_n = nu / (1 - nu), and theta_n is defined as the product minus one.",
+        "deps": [
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "thm-geometric-series"
+        ]
+      },
+      {
+        "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+        "kind": "theorem",
+        "title": "The computed floating-point dot product obeys componentwise and normwise error bounds",
+        "strategy": "Model each product and each addition by the relative floating-point rule. Absorb the resulting factors with the theta_n lemma to rewrite the computed dot product as the exact dot product of slightly perturbed summands, then take absolute values to obtain the normwise bound.",
+        "deps": [
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order",
+        "kind": "theorem",
+        "title": "Local conditioning times backward error controls forward error to first order",
+        "strategy": "Interpret a backward error as the size of the smallest nearby data perturbation for which the computed answer is exact. Apply the local condition-number inequality at that nearby input and then normalize by the definition of relative forward error; the first-order form is exactly the local linearization built into the condition-number definition.",
+        "deps": [
+          "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+          "def-normwise-and-componentwise-backward-error-for-linear-systems",
+          "def-forward-and-backward-stability-for-a-problem-family"
+        ]
+      },
+      {
+        "id": "thm-normal-equations-square-the-spectral-condition-number",
+        "kind": "theorem",
+        "title": "For full-column-rank A, the normal equations square the spectral condition number",
+        "strategy": "The normal-equation matrix is A^* A. Its eigenvalues are the squared singular values of A, so its 2-norm condition number is sigma_max(A)^2 / sigma_min(A)^2 = kappa_2(A)^2. The full-column-rank hypothesis is exactly what makes sigma_min(A) positive.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-least-squares-solutions-and-normal-equation"
+        ]
+      },
+      {
+        "id": "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices",
+        "kind": "theorem",
+        "title": "Exact rank is locally constant at full-rank matrices and discontinuous at nonmaximal-rank matrices",
+        "strategy": "If A has full rank, its smallest singular value is positive, so every sufficiently small spectral perturbation leaves all singular values positive and preserves rank. If A has nonmaximal rank, add an arbitrarily small singular-vector outer product in a zero singular direction to raise the rank, proving discontinuity there.",
+        "deps": [
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+        "kind": "definition",
+        "title": "Numerical rank relative to a declared norm, scale, and tolerance",
+        "deps": [
+          "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices"
+        ]
+      },
+      {
+        "id": "prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold",
+        "kind": "proposition",
+        "title": "In the spectral norm, numerical rank counts the singular values above the declared threshold",
+        "strategy": "Use Eckart-Young to identify the least spectral-norm distance from A to the set of matrices of rank at most k with the next singular value. Comparing that distance with the declared threshold gives the smallest admissible exact rank, hence the numerical rank. Changing the threshold changes the count whenever a singular value lies between the two thresholds.",
+        "deps": [
+          "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "thm-eckart-young-best-rank-k-approximation",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.002,
+    "id": "matrix-norms-condition-numbers-and-numerical-stability-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Matrix Norms, Condition Numbers and Numerical Stability: Examples and Counterexamples",
+    "companion": "matrix-norms-condition-numbers-and-numerical-stability",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-two-by-two-systems-with-contrasting-condition-numbers",
+        "kind": "example",
+        "title": "Two 2x2 systems can have dramatically different condition numbers",
+        "strategy": "Compute kappa_1 and kappa_infinity for one diagonal matrix and one nearly singular matrix with the same shape. The comparison makes the geometry of well-conditioning versus ill-conditioning visible without any asymptotics.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums"
+        ]
+      },
+      {
+        "id": "ex-low-order-hilbert-matrices-have-large-condition-numbers",
+        "kind": "example",
+        "title": "Low-order Hilbert matrices already have large condition numbers",
+        "strategy": "Compute the inverse of H_2 and H_3 explicitly and evaluate one induced condition number. The point is not asymptotic growth but that severe ill-conditioning appears at very small orders.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums"
+        ]
+      },
+      {
+        "id": "ex-vandermonde-conditioning-improves-after-centering-and-scaling",
+        "kind": "example",
+        "title": "Vandermonde conditioning improves after centering and scaling the nodes",
+        "strategy": "Compare two small Vandermonde systems representing the same interpolation problem before and after an affine change of variable. The rescaled system has a visibly smaller condition number, so conditioning depends on the chosen coordinates even when the underlying polynomial task is the same.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums"
+        ]
+      },
+      {
+        "id": "cex-a-tiny-residual-does-not-force-a-small-forward-error",
+        "kind": "counterexample",
+        "title": "A tiny residual does not force a small forward error",
+        "strategy": "Use a diagonal system with one very small singular value. An approximate solution can miss the small component badly while leaving the residual tiny in norm, exactly because the inverse amplifies that residual by the condition number.",
+        "deps": [
+          "thm-residual-to-forward-error-bounds-for-linear-systems",
+          "def-condition-number-of-a-nonsingular-linear-system"
+        ]
+      },
+      {
+        "id": "ex-a-backward-stable-solution-of-an-ill-conditioned-system",
+        "kind": "example",
+        "title": "A backward-stable computed solution of an ill-conditioned system can still have large forward error",
+        "strategy": "Choose an ill-conditioned diagonal system and an approximate solution whose residual gives a backward error of the same order as the small diagonal entry. The backward error is tiny, but the forward error is order one, showing both that ill-conditioning is not the same as instability and that backward stability does not remove ill-conditioning.",
+        "deps": [
+          "prop-explicit-formulas-for-normwise-and-componentwise-backward-error",
+          "thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order",
+          "def-forward-and-backward-stability-for-a-problem-family"
+        ]
+      },
+      {
+        "id": "ex-catastrophic-cancellation-and-a-stable-reformulation",
+        "kind": "example",
+        "title": "A cancellation-prone formula can be replaced by a stable reformulation",
+        "strategy": "Evaluate 1 - sqrt(1-z) for small z both directly and after rationalization. The direct form loses relative accuracy through cancellation, while the algebraically equivalent reformulation z / (1 + sqrt(1-z)) avoids subtracting nearby quantities.",
+        "deps": [
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "def-absolute-and-relative-forward-error-for-a-problem-map"
+        ]
+      },
+      {
+        "id": "ex-a-floating-point-dot-product-error-bound",
+        "kind": "example",
+        "title": "A short floating-point dot product obeys the gamma_n error bound",
+        "strategy": "Choose short vectors whose exact dot product and absolute summand total are easy to compute. Apply the theorem directly to verify the componentwise perturbation form and the resulting normwise bound on the computed value.",
+        "deps": [
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds"
+        ]
+      },
+      {
+        "id": "ex-normal-equations-versus-qr-conditioning",
+        "kind": "example",
+        "title": "Normal equations square the conditioning compared with QR on a nearly dependent least-squares problem",
+        "strategy": "Take a full-column-rank matrix with one small singular value and compare kappa_2(A) with kappa_2(A^T A). The normal equations magnify the ill-conditioning by a square, while a QR solve keeps the original least-squares conditioning visible instead.",
+        "deps": [
+          "thm-normal-equations-square-the-spectral-condition-number"
+        ]
+      },
+      {
+        "id": "cex-condition-number-depends-on-the-chosen-norm-and-scaling",
+        "kind": "counterexample",
+        "title": "Condition number depends on the chosen norm and on diagonal rescaling",
+        "strategy": "Use one explicit matrix, compute condition numbers in at least two induced norms, and then compare it with a diagonally rescaled equivalent system. The numbers change, so condition number is not an invariant of a bare linear relation without declared norms and scaling.",
+        "deps": [
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums"
+        ]
+      },
+      {
+        "id": "cex-numerical-rank-depends-on-the-declared-tolerance",
+        "kind": "counterexample",
+        "title": "The same matrix can have two different numerical ranks under two declared tolerances",
+        "strategy": "Pick a diagonal matrix with one singular value sitting between two tolerances. The spectral numerical-rank formula then gives two different counts from the same exact matrix, so numerical rank is not an exact invariant.",
+        "deps": [
+          "prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold"
+        ]
+      },
+      {
+        "id": "cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations",
+        "kind": "counterexample",
+        "title": "The relative floating-point model excludes overflow, underflow, and invalid operations",
+        "strategy": "Use one operation that overflows, one that underflows into a subnormal regime, and one invalid expression such as 0/0. These cases produce infinity, subnormal behavior, or NaN rather than a result of the form x(1 + delta), so the standard model needs its exclusions stated explicitly.",
+        "deps": [
+          "def-standard-relative-floating-point-model-and-unit-roundoff"
+        ]
+      }
+    ]
+  }
+]
