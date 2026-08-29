@@ -2,7 +2,7 @@
 id: def-condition-number-of-a-nonsingular-linear-system
 kind: definition
 title: "The condition number kappa_p(A) = ||A||_p ||A^{-1}||_p of a nonsingular linear system"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-induced-matrix-p-norm, thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized, def-invertible-matrix-and-general-linear-group]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

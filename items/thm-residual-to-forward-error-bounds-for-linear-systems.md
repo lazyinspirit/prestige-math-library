@@ -2,7 +2,7 @@
 id: thm-residual-to-forward-error-bounds-for-linear-systems
 kind: theorem
 title: "Residual bounds on forward error for a nonsingular linear system"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-matrix-n
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

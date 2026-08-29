@@ -2,7 +2,7 @@
 id: ex-graph-of-finite-groups-giving-a-virtually-free-group
 kind: example
 title: "A graph of finite groups giving a virtually free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

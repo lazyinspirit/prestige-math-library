@@ -2,7 +2,7 @@
 id: ex-an-ordinary-element-as-the-member-from-the-integers
 kind: example
 title: "An ordinary element as the member from the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-member-of-an-object,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

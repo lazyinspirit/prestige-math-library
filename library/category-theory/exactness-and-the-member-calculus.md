@@ -1,7 +1,7 @@
 ---
 page: exactness-and-the-member-calculus
 title: "Exactness and the Member Calculus"
-status: draft
+status: published
 items: [thm-the-subobject-inequalities-underlying-exactness,
         def-exactness-at-a-node,
         thm-the-arrow-theoretic-criterion-for-exactness,

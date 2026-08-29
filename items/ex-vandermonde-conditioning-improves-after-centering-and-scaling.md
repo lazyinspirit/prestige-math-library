@@ -2,7 +2,7 @@
 id: ex-vandermonde-conditioning-improves-after-centering-and-scaling
 kind: example
 title: "Vandermonde conditioning improves after centering and scaling the nodes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-one-and-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

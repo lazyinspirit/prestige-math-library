@@ -2,7 +2,7 @@
 id: cex-a-non-split-short-exact-sequence-of-abelian-groups
 kind: counterexample
 title: "A non-split short exact sequence of abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-split-short-exact-sequence-in-an-abelian-category,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

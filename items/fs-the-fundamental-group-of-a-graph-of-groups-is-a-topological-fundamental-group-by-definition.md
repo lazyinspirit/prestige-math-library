@@ -2,7 +2,7 @@
 id: fs-the-fundamental-group-of-a-graph-of-groups-is-a-topological-fundamental-group-by-definition
 kind: false-statement
 title: "FALSE: the fundamental group of a graph of groups is a topological fundamental group by definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

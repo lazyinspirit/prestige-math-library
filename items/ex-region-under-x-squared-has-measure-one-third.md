@@ -2,7 +2,7 @@
 id: ex-region-under-x-squared-has-measure-one-third
 kind: example
 title: "The region under x maps to x^2 on [0,1] has measure 1/3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral, thm-ftc-second-part]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

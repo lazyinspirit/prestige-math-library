@@ -2,7 +2,7 @@
 id: thm-character-of-the-regular-representation
 kind: theorem
 title: "The regular character is $|G|$ at $1$ and $0$ away from $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

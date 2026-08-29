@@ -2,7 +2,7 @@
 id: cex-numerical-rank-depends-on-the-declared-tolerance
 kind: counterexample
 title: "The same matrix can have two different numerical ranks under two declared tolerances"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-spectral-numerical-rank-counts-singular-values-above-the-declared-th
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

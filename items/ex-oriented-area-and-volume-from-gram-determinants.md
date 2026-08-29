@@ -2,7 +2,7 @@
 id: ex-oriented-area-and-volume-from-gram-determinants
 kind: example
 title: "Oriented area and volume are recovered from wedges and Gram determinants"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-a-backward-stable-solution-of-an-ill-conditioned-system
 kind: example
 title: "A backward-stable computed solution of an ill-conditioned system can still have large forward error"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-explicit-formulas-for-normwise-and-componentwise-backward-error, thm
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

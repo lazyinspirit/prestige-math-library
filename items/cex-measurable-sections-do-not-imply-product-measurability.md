@@ -2,7 +2,7 @@
 id: cex-measurable-sections-do-not-imply-product-measurability
 kind: counterexample
 title: "A set can have measurable horizontal and vertical sections and still fail to be product-measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-sigma-algebra, def-countable-choice, thm-countable-union-of-countable
        thm-iterated-section-measures-agree-on-product-measurable-sets]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

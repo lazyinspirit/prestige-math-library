@@ -2,7 +2,7 @@
 id: fs-every-hausdorff-locally-euclidean-space-is-a-manifold
 kind: false-statement
 title: "Hausdorff and locally Euclidean do not by themselves make a manifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

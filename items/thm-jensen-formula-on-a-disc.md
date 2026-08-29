@@ -2,7 +2,7 @@
 id: thm-jensen-formula-on-a-disc
 kind: theorem
 title: "Jensen's formula on a disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

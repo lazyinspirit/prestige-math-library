@@ -1,7 +1,7 @@
 ---
 page: formal-languages-encodings-and-decision-problems
 title: "Formal Languages, Encodings, and Decision Problems"
-status: draft
+status: published
 items:
   - def-computation-alphabet-and-word-convention
   - lem-computation-words-agree-with-published-finite-words

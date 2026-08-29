@@ -2,7 +2,7 @@
 id: fs-product-of-complete-measure-spaces-is-complete
 kind: false-statement
 title: "FALSE: the product of two complete measure spaces is complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-completed-product-measure, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-sections-of-product-measurable-sets-are-measurable, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-sine-has-its-weierstrass-product
 kind: theorem
 title: "The Weierstrass product for sine"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

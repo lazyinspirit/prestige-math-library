@@ -2,7 +2,7 @@
 id: ex-incomparability-in-a-quadratic-integral-extension
 kind: example
 title: "In k[Y] subset k[X] with Y = X^2, distinct comparable primes do not share a contraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

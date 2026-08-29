@@ -2,7 +2,7 @@
 id: thm-interior-product-is-adjoint-to-exterior-multiplication
 kind: theorem
 title: "Interior product is the adjoint of exterior multiplication by a vector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

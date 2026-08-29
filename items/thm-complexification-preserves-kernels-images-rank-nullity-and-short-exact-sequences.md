@@ -2,7 +2,7 @@
 id: thm-complexification-preserves-kernels-images-rank-nullity-and-short-exact-sequences
 kind: theorem
 title: "Complexification preserves kernels, images, finite rank, nullity, and short exact sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

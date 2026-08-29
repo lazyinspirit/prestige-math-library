@@ -2,7 +2,7 @@
 id: prop-recursive-dehn-function-implies-solvable-word-problem
 kind: proposition
 title: "A recursive Dehn function yields a solution to the word problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

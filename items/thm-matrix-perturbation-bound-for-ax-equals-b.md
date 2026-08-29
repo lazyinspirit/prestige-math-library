@@ -2,7 +2,7 @@
 id: thm-matrix-perturbation-bound-for-ax-equals-b
 kind: theorem
 title: "Matrix perturbations in Ax = b obey a first-order condition-number bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-matrix-n
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

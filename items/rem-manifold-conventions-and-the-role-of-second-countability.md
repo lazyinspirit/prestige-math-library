@@ -2,7 +2,7 @@
 id: rem-manifold-conventions-and-the-role-of-second-countability
 kind: remark
 title: "Manifold conventions and the role of second countability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

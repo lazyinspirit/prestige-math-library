@@ -2,7 +2,7 @@
 id: thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity
 kind: theorem
 title: "The reciprocal spectral condition number is the relative distance to singularity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-spectral-and-fro
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

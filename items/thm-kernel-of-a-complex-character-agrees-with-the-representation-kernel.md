@@ -2,7 +2,7 @@
 id: thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel
 kind: theorem
 title: "The kernel of a complex character agrees with the kernel of any representation affording it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

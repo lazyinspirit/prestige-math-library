@@ -2,7 +2,7 @@
 id: lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets
 kind: lemma
 title: "A C^1 diffeomorphism maps Lebesgue measurable sets to Lebesgue measurable sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-continuous-preimages-of-borel-sets-are-borel, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

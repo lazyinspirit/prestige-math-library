@@ -2,7 +2,7 @@
 id: thm-word-problem-for-free-products-and-amalgams-with-decidable-membership
 kind: theorem
 title: "Free products and suitable amalgamated free products have solvable word problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

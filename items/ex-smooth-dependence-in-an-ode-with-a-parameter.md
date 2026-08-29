@@ -2,7 +2,7 @@
 id: ex-smooth-dependence-in-an-ode-with-a-parameter
 kind: example
 title: "Smooth dependence in an ODE with a parameter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

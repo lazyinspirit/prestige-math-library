@@ -2,7 +2,7 @@
 id: thm-character-inner-product-computes-intertwiner-dimension
 kind: theorem
 title: "The class-function inner product $\\langle\\chi_V,\\chi_W\\rangle$ equals $\\dim\\operatorname{Hom}_G(W,V)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

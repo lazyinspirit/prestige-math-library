@@ -2,7 +2,7 @@
 id: ex-a-member-chase-verifying-monicity
 kind: example
 title: "A member chase verifying monicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-chasing-rule-monicity-detected-by-members,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

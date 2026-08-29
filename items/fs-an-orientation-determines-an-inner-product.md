@@ -2,7 +2,7 @@
 id: fs-an-orientation-determines-an-inner-product
 kind: false-statement
 title: "FALSE: an orientation determines an inner product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-conjugation-and-real-structure-on-a-complex-vector-space
 kind: definition
 title: "Conjugations and real structures on a complex vector space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-linear-map, def-complexification-of-a-real-vector-space, thm-universa
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

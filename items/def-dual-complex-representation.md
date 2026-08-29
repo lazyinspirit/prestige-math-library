@@ -2,7 +2,7 @@
 id: def-dual-complex-representation
 kind: definition
 title: "The dual or contragredient complex representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-algebraic-dual-and-linear-functional, def-finite-dimensional-representation-of-a-group-over-a-field]
 justified_by: []
 aliases: []
+verification:
+  audited: 2026-08-29
 sources:
   scraped: []
   references:

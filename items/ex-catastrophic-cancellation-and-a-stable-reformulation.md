@@ -2,7 +2,7 @@
 id: ex-catastrophic-cancellation-and-a-stable-reformulation
 kind: example
 title: "A cancellation-prone formula can be replaced by a stable reformulation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-standard-relative-floating-point-model-and-unit-roundoff, def-absolut
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

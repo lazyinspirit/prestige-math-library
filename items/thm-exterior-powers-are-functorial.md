@@ -2,7 +2,7 @@
 id: thm-exterior-powers-are-functorial
 kind: theorem
 title: "Exterior powers are functorial"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

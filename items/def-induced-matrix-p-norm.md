@@ -2,7 +2,7 @@
 id: def-induced-matrix-p-norm
 kind: definition
 title: "The matrix norm induced by a published vector p-norm"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-matrix-product-and-identity-matrix, thm-all-norms-on-rn-are-equivalent]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

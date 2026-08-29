@@ -2,7 +2,7 @@
 id: def-fixed-real-form-of-a-conjugation
 kind: definition
 title: "The fixed real form of a conjugation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-conjugation-and-real-structure-on-a-complex-vector-space]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

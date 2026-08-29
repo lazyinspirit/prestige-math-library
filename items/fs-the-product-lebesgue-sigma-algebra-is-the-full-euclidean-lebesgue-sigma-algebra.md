@@ -2,7 +2,7 @@
 id: fs-the-product-lebesgue-sigma-algebra-is-the-full-euclidean-lebesgue-sigma-algebra
 kind: false-statement
 title: "FALSE: the product Lebesgue sigma-algebra is the full Euclidean Lebesgue sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-sections-of-product-measurable-sets-are-measurable, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

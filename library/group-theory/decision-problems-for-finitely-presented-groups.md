@@ -1,7 +1,7 @@
 ---
 page: decision-problems-for-finitely-presented-groups
 title: "Decision Problems for Finitely Presented Groups"
-status: draft
+status: published
 items: [def-finite-alphabet-encoding-and-algorithm,
         def-recursive-and-recursively-enumerable-languages,
         def-recursive-and-finite-group-presentations,

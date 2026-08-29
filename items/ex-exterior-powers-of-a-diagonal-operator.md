@@ -2,7 +2,7 @@
 id: ex-exterior-powers-of-a-diagonal-operator
 kind: example
 title: "All exterior powers of a diagonal operator are diagonal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

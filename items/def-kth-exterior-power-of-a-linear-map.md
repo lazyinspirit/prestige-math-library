@@ -2,7 +2,7 @@
 id: def-kth-exterior-power-of-a-linear-map
 kind: definition
 title: "The induced map $\\Lambda^kT$ on exterior powers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-kth-exterior-power-by-quotient, prop-functoriality-of-module-tensor-p
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

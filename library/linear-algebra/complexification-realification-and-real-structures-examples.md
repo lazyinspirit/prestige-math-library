@@ -1,7 +1,7 @@
 ---
 page: complexification-realification-and-real-structures-examples
 title: "Complexification, Realification and Real Structures: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-canonical-embedding-of-r-n-into-c-n,
            ex-complexification-of-a-real-polynomial-space,

@@ -2,7 +2,7 @@
 id: prop-explicit-formulas-for-normwise-and-componentwise-backward-error
 kind: proposition
 title: "Residual formulas for normwise and componentwise backward error"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-normwise-and-componentwise-backward-error-for-linear-systems, thm-ind
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

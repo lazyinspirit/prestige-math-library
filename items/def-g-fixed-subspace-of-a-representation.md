@@ -2,7 +2,7 @@
 id: def-g-fixed-subspace-of-a-representation
 kind: definition
 title: "The fixed subspace $V^G$ of a representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-linear
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-29
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-realification-of-c-n-has-doubled-dimension
 kind: example
 title: "Realifying $\\mathbb C^n$ gives $\\mathbb R^{2n}$ with basis $e_1,ie_1,\\dots,e_n,ie_n$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

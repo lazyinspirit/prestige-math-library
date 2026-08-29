@@ -2,7 +2,7 @@
 id: thm-nonreal-generalised-eigenspaces-occur-in-conjugate-pairs
 kind: theorem
 title: "For a real operator, nonreal generalised eigenspaces of the complexification occur in conjugate pairs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

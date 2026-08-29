@@ -2,7 +2,7 @@
 id: def-topological-manifold-without-boundary
 kind: definition
 title: "Topological manifolds without boundary: Hausdorff, second-countable, and locally Euclidean spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

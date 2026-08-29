@@ -2,7 +2,7 @@
 id: ex-zeta-two-from-tonelli-and-the-geometric-series
 kind: example
 title: "Tonelli and the geometric series compute int_0^1 int_0^1 1/(1-xy) dx dy = pi^2/6"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-geometric-series, thm-tonelli-for-nonnegative-double-series]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

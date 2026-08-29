@@ -2,7 +2,7 @@
 id: fs-member-equivalence-is-transitive-in-any-pointed-category-with-pullbacks
 kind: false-statement
 title: "FALSE: member equivalence is transitive in any pointed category with pullbacks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-member-equivalence-is-transitive,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

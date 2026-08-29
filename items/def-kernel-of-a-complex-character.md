@@ -2,7 +2,7 @@
 id: def-kernel-of-a-complex-character
 kind: definition
 title: "The kernel of a complex character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-character-of-a-complex-representation]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-29
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

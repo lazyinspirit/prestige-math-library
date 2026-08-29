@@ -1,7 +1,7 @@
 ---
 page: integral-extensions-and-going-up-examples
 title: "Integral Extensions and Going Up - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-integrality-equation-and-power-basis, ex-integral-elements-subring-computation, ex-integrality-localisation-clearing-denominators, ex-lying-over-by-quotient-and-localisation, ex-incomparability-in-a-quadratic-integral-extension, ex-going-down-needs-normality]
 ---

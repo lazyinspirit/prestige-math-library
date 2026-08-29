@@ -2,7 +2,7 @@
 id: lem-averaging-operator-projects-onto-the-fixed-subspace
 kind: lemma
 title: "The averaging operator projects onto the fixed subspace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

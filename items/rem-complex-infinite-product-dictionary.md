@@ -2,7 +2,7 @@
 id: rem-complex-infinite-product-dictionary
 kind: remark
 title: "Complex infinite-product convention extending the published real definition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

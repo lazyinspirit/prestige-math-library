@@ -2,7 +2,7 @@
 id: def-hodge-star-on-an-oriented-inner-product-space
 kind: definition
 title: "The Hodge star on an oriented finite-dimensional real inner-product space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "Hodge star $\\star$"
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

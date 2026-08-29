@@ -2,7 +2,7 @@
 id: cex-condition-number-depends-on-the-chosen-norm-and-scaling
 kind: counterexample
 title: "Condition number depends on the chosen norm and on diagonal rescaling"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-one-and-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

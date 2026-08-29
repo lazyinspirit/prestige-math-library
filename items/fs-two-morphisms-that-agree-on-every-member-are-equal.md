@@ -2,7 +2,7 @@
 id: fs-two-morphisms-that-agree-on-every-member-are-equal
 kind: false-statement
 title: "FALSE: two morphisms that agree on every member are equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-chasing-rule-a-zero-arrow-is-detected-by-members,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

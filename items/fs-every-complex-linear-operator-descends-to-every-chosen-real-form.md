@@ -2,7 +2,7 @@
 id: fs-every-complex-linear-operator-descends-to-every-chosen-real-form
 kind: false-statement
 title: "FALSE: every complex-linear operator descends to every chosen real form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

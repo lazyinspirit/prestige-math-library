@@ -2,7 +2,7 @@
 id: thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures
 kind: theorem
 title: "The Euclidean Lebesgue measure is the completion of the product of the factor Lebesgue measures"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-lebesgue-measure-is-a-complete-measure, def-completed-product-measure, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

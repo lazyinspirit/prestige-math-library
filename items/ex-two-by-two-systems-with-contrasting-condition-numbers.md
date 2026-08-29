@@ -2,7 +2,7 @@
 id: ex-two-by-two-systems-with-contrasting-condition-numbers
 kind: example
 title: "Two 2x2 systems can have dramatically different condition numbers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-one-and-
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

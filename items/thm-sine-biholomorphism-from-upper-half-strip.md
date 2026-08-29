@@ -2,7 +2,7 @@
 id: thm-sine-biholomorphism-from-upper-half-strip
 kind: theorem
 title: "The sine map biholomorphically sends an upper half-strip onto the upper half-plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

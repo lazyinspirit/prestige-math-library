@@ -2,7 +2,7 @@
 id: prop-a-smooth-map-with-everywhere-smooth-local-inverses-is-a-local-diffeomorphism
 kind: proposition
 title: "A smooth map with everywhere smooth local inverses is a local diffeomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

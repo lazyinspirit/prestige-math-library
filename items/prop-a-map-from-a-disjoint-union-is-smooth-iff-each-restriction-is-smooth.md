@@ -2,7 +2,7 @@
 id: prop-a-map-from-a-disjoint-union-is-smooth-iff-each-restriction-is-smooth
 kind: proposition
 title: "A map from a disjoint union is smooth iff each restriction is smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

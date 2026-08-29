@@ -1,7 +1,7 @@
 ---
 page: integral-extensions-and-going-up
 title: "Integral Extensions and Going Up"
-status: draft
+status: published
 items: [def-integral-ring-extension, def-integral-closure-and-integrally-closed-domain, thm-transitivity-of-integrality, thm-integral-closure-is-integrally-closed, thm-integrality-commutes-with-localisation, lem-field-integrality-criterion, cor-contraction-of-maximal-ideals-integral-extension, thm-lying-over, thm-incomparability-for-integral-extensions, thm-going-up, cor-integral-extension-lifts-finite-prime-chains, lem-integral-extension-chain-contraction-is-strict, cor-dimension-preserved-by-integral-extensions, lem-integrally-closed-minimal-polynomial-coefficients, thm-normality-is-local-for-domains, thm-going-down-over-normal-domains, cor-height-preserved-under-going-down-integral-extensions]
 examples: []
 ---

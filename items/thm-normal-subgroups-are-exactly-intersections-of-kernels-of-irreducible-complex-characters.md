@@ -2,7 +2,7 @@
 id: thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters
 kind: theorem
 title: "The normal subgroups of a finite group are exactly the intersections of kernels of irreducible complex characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

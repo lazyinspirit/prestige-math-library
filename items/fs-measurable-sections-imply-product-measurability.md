@@ -2,7 +2,7 @@
 id: fs-measurable-sections-imply-product-measurability
 kind: false-statement
 title: "FALSE: if every horizontal and vertical section is measurable, then the set is product-measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sections-of-sets-and-functions-on-products, thm-sections-of-product-measurable-sets-are-measurable, def-sigma-algebra, def-countable-choice, thm-countable-union-of-countable, thm-iterated-section-measures-agree-on-product-measurable-sets]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

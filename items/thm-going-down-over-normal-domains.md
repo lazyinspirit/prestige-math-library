@@ -2,7 +2,7 @@
 id: thm-going-down-over-normal-domains
 kind: theorem
 title: "Going down holds for integral extensions over integrally closed domains"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

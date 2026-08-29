@@ -2,7 +2,7 @@
 id: thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized
 kind: theorem
 title: "Induced matrix norms are compatible with matrix-vector multiplication, submultiplicative, and satisfy ||I|| = 1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-induced-matrix-p-norm, def-matrix-product-and-identity-matrix, thm-ma
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

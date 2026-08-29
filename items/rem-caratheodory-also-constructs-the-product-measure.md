@@ -2,13 +2,14 @@
 id: rem-caratheodory-also-constructs-the-product-measure
 kind: remark
 title: "The product measure can also be constructed from the rectangle algebra by Caratheodory extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [lem-finite-rectangle-unions-form-a-generating-algebra, thm-caratheodory-extension-theorem, thm-caratheodory-domain-is-the-completion-under-sigma-finiteness, def-countable-choice]
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   references:

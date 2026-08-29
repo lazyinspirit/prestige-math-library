@@ -2,7 +2,7 @@
 id: def-coordinate-representation-of-a-map
 kind: definition
 title: "The coordinate representation of a map between manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

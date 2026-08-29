@@ -2,7 +2,7 @@
 id: ex-the-covering-criterion-checked-in-abelian-groups
 kind: example
 title: "The covering criterion checked in abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-the-covering-criterion-for-exactness,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

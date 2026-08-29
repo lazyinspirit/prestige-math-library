@@ -2,7 +2,7 @@
 id: cor-c-one-change-of-variables-for-l-one-functions
 kind: corollary
 title: "A C^1 diffeomorphism satisfies the change-of-variables formula for L^1 functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

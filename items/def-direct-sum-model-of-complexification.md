@@ -2,7 +2,7 @@
 id: def-direct-sum-model-of-complexification
 kind: definition
 title: "The direct-sum model $V\\oplus iV$ of a complexification"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-complexification-of-a-real-vector-space]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

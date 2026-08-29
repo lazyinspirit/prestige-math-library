@@ -2,7 +2,7 @@
 id: thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order
 kind: theorem
 title: "Local conditioning times backward error controls forward error to first order"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-absolute-and-relative-local-condition-numbers-of-a-problem-map, def-n
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

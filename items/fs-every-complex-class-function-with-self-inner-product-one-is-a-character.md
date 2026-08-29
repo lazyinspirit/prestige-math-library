@@ -2,7 +2,7 @@
 id: fs-every-complex-class-function-with-self-inner-product-one-is-a-character
 kind: false-statement
 title: "FALSE: every complex class function with self-inner-product $1$ is a character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: construct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

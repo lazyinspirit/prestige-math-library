@@ -2,7 +2,7 @@
 id: ex-the-kernel-cokernel-sequence-of-a-composite-of-module-maps
 kind: example
 title: "The kernel-cokernel sequence of a composite of module maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-the-kernel-cokernel-sequence-of-a-composite,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

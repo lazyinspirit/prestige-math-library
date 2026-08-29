@@ -2,7 +2,7 @@
 id: cex-product-measure-need-not-be-unique-without-sigma-finiteness
 kind: counterexample
 title: "Without sigma-finiteness, the rectangle formula need not determine a unique product measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

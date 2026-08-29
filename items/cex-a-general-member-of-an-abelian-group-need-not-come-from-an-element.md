@@ -2,7 +2,7 @@
 id: cex-a-general-member-of-an-abelian-group-need-not-come-from-an-element
 kind: counterexample
 title: "A general member of an abelian group need not come from an element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-members-modulo-equivalence-correspond-to-subobjects,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

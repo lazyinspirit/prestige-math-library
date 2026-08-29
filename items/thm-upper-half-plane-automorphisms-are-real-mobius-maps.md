@@ -2,7 +2,7 @@
 id: thm-upper-half-plane-automorphisms-are-real-mobius-maps
 kind: theorem
 title: "Automorphisms of the upper half-plane are real Mobius maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

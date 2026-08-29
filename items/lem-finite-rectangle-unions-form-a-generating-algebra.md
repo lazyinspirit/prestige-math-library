@@ -2,7 +2,7 @@
 id: lem-finite-rectangle-unions-form-a-generating-algebra
 kind: lemma
 title: "Finite disjoint unions of measurable rectangles form an algebra generating the product sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-measurable-rectangle, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-algebra-of-subsets, prop-cartesian-products-and-set-operations]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

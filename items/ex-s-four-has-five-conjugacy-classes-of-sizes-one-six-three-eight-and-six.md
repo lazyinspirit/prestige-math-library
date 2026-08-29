@@ -2,7 +2,7 @@
 id: ex-s-four-has-five-conjugacy-classes-of-sizes-one-six-three-eight-and-six
 kind: example
 title: "$S_4$ has five conjugacy classes of sizes $1$, $6$, $8$, $6$, and $3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

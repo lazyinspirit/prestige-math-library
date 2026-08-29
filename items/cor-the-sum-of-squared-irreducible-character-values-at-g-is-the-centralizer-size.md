@@ -2,7 +2,7 @@
 id: cor-the-sum-of-squared-irreducible-character-values-at-g-is-the-centralizer-size
 kind: corollary
 title: "For $g\\in G$, the sum of $|\\chi_i(g)|^2$ over the irreducible complex characters is $|C_G(g)|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

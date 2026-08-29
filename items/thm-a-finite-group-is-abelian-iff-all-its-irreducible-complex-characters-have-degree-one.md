@@ -2,7 +2,7 @@
 id: thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one
 kind: theorem
 title: "A finite group is abelian if and only if all its irreducible complex characters have degree $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

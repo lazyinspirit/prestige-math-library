@@ -2,7 +2,7 @@
 id: def-interior-product-on-the-exterior-algebra
 kind: definition
 title: "Interior product on the exterior algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-interior-product-is-adjoint-to-exterior-multiplication]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-exactness-is-self-dual
 kind: theorem
 title: "Exactness is self-dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

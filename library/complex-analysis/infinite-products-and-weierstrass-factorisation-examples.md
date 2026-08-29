@@ -1,7 +1,7 @@
 ---
 page: infinite-products-and-weierstrass-factorisation-examples
 title: "Infinite Products and the Weierstrass Factorisation Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-product-of-one-plus-z-over-two-to-n-is-entire-and-zero-free,
            ex-sine-product-recovers-the-basel-sum,

@@ -2,7 +2,7 @@
 id: cor-graph-of-a-measurable-function-is-lebesgue-null
 kind: corollary
 title: "The graph of a measurable function R^n to R is Lebesgue null"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, prop-countable-subsets-of-rn-are-lebesgue-null, thm-arithmetic-and-lattice-operations-preserve-measurability, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

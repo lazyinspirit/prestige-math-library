@@ -2,7 +2,7 @@
 id: fs-nonisomorphic-finite-groups-can-have-the-same-character-table
 kind: false-statement
 title: "FALSE: nonisomorphic finite groups always have different character tables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: construct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-character-table-of-a-finite-cyclic-group-over-c
 kind: example
 title: "The character table of a finite cyclic group over $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

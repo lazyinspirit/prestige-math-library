@@ -2,7 +2,7 @@
 id: prop-smooth-maps-are-continuous
 kind: proposition
 title: "Smooth maps are continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-product-measure-on-sigma-finite-spaces
 kind: definition
 title: "The product measure of two sigma-finite measure spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-iterated-section-measures-agree-on-product-measurable-sets, prop-sigma-finite-section-measure-functions-are-measurable]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: decision-problems-for-finitely-presented-groups-examples
 title: "Decision Problems for Finitely Presented Groups - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-word-problem-by-free-reduction,
            ex-word-problem-in-a-finite-cyclic-presentation,

@@ -2,7 +2,7 @@
 id: ex-jensen-formula-for-a-polynomial
 kind: example
 title: "Jensen's formula for a polynomial"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

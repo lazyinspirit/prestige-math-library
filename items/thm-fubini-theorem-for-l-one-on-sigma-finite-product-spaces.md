@@ -2,7 +2,7 @@
 id: thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
 kind: theorem
 title: "Fubini's theorem for L^1 functions on a sigma-finite product"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, def-l-one-of-a-measure, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-integral-triangle-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

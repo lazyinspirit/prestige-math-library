@@ -1,7 +1,7 @@
 ---
 page: euclidean-ordinary-differential-equations-with-smooth-dependence
 title: "Euclidean Ordinary Differential Equations with Smooth Dependence"
-status: draft
+status: published
 items: [def-autonomous-ordinary-differential-equation,
         def-variational-equation-along-an-ode-solution,
         lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval,

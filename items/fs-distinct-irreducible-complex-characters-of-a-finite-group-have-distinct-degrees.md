@@ -2,7 +2,7 @@
 id: fs-distinct-irreducible-complex-characters-of-a-finite-group-have-distinct-degrees
 kind: false-statement
 title: "FALSE: distinct irreducible complex characters of a finite group have distinct degrees"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: construct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

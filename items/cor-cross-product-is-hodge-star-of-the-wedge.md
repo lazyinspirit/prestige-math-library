@@ -2,7 +2,7 @@
 id: cor-cross-product-is-hodge-star-of-the-wedge
 kind: corollary
 title: "In oriented Euclidean three-space, the cross product is $\\star(u\\wedge v)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

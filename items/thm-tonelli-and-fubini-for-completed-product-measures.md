@@ -2,7 +2,7 @@
 id: thm-tonelli-and-fubini-for-completed-product-measures
 kind: theorem
 title: "Tonelli and Fubini for the completed product, with only almost-everywhere section measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-completed-product-measure, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-completion-measurable-functions-have-base-measurable-representatives, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-ae-equality-preserves-measurability-on-complete-spaces, def-integrable-real-and-complex-functions-and-their-integrals, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

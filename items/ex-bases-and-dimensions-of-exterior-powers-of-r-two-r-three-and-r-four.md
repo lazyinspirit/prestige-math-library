@@ -2,7 +2,7 @@
 id: ex-bases-and-dimensions-of-exterior-powers-of-r-two-r-three-and-r-four
 kind: example
 title: "Bases and dimensions of exterior powers of $\\mathbb R^2$, $\\mathbb R^3$, and $\\mathbb R^4$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

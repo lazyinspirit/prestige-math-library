@@ -2,7 +2,7 @@
 id: fs-the-exterior-power-is-a-canonical-subspace-of-the-tensor-power-over-every-field
 kind: false-statement
 title: "FALSE: $\\Lambda^kV$ is canonically a subspace of $V^{\\otimes k}$ over every field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

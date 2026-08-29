@@ -2,7 +2,7 @@
 id: thm-polar-coordinates-formula-for-lebesgue-measure
 kind: theorem
 title: "Polar coordinates decompose Lebesgue measure into r^{n-1} dr d sigma"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-polar-surface-measure-on-the-unit-sphere, thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-linear-change-of-variables-for-lebesgue-measure, thm-measure-uniqueness-on-a-sigma-finite-pi-system, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, def-pi-system, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

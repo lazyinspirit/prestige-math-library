@@ -2,7 +2,7 @@
 id: ex-strip-to-disc-biholomorphism-by-exponential-and-cayley
 kind: example
 title: "A horizontal strip is mapped biholomorphically to the disc by an exponential and a Cayley transform"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

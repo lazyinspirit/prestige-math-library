@@ -2,7 +2,7 @@
 id: thm-zero-exponent-is-bounded-by-entire-order
 kind: theorem
 title: "The exponent of convergence of the zeros of an entire function does not exceed its order"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-g-equivariant-maps-are-the-fixed-points-of-the-dual-tensor-representation
 kind: lemma
 title: "For finite-dimensional complex $V$, the intertwiners $V\\to W$ are exactly the fixed points of $V^*\\otimes W$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

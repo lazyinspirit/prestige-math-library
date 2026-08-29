@@ -2,7 +2,7 @@
 id: thm-the-arrow-theoretic-criterion-for-exactness
 kind: theorem
 title: "The arrow-theoretic criterion for exactness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

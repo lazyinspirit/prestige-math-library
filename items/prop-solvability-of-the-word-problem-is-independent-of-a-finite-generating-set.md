@@ -2,7 +2,7 @@
 id: prop-solvability-of-the-word-problem-is-independent-of-a-finite-generating-set
 kind: proposition
 title: "Solvability of the word problem does not depend on the chosen finite generating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

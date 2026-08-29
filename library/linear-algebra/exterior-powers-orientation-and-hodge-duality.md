@@ -1,7 +1,7 @@
 ---
 page: exterior-powers-orientation-and-hodge-duality
 title: "Exterior Powers, Orientation and Hodge Duality"
-status: draft
+status: published
 items: [def-alternating-k-linear-map,
         def-kth-exterior-power-by-quotient,
         def-decomposable-k-vector-and-basic-wedge-product,

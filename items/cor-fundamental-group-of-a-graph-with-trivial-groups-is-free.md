@@ -2,7 +2,7 @@
 id: cor-fundamental-group-of-a-graph-with-trivial-groups-is-free
 kind: corollary
 title: "The fundamental group of a graph with trivial groups is free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

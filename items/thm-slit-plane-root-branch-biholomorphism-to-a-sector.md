@@ -2,7 +2,7 @@
 id: thm-slit-plane-root-branch-biholomorphism-to-a-sector
 kind: theorem
 title: "A slit-plane root branch biholomorphically parametrizes a sector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

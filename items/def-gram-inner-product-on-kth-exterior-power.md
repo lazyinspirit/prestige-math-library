@@ -2,7 +2,7 @@
 id: def-gram-inner-product-on-kth-exterior-power
 kind: definition
 title: "The Gram inner product on $\\Lambda^kV$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-gram-inner-product-on-exterior-powers-is-positive-definite]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

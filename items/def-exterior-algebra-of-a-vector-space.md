@@ -2,7 +2,7 @@
 id: def-exterior-algebra-of-a-vector-space
 kind: definition
 title: "The graded exterior algebra $\\Lambda V$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 short: "Exterior algebra $\\Lambda V$"
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

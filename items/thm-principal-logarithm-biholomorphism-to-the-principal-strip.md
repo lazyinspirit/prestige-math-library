@@ -2,7 +2,7 @@
 id: thm-principal-logarithm-biholomorphism-to-the-principal-strip
 kind: theorem
 title: "The principal logarithm is a biholomorphism from the slit plane to the principal strip"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

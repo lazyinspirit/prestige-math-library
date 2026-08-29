@@ -2,7 +2,7 @@
 id: def-irreducible-complex-character
 kind: definition
 title: "An irreducible complex character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-character-of-a-complex-representation, def-subrepresentation-and-irreducible-representation]
 justified_by: []
 aliases: []
+verification:
+  audited: 2026-08-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: rem-the-covering-criterion-and-the-member-calculus-are-the-same-tool
 kind: remark
 title: "The covering criterion and the member calculus are the same tool"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [def-equivalence-of-members,
        thm-the-covering-criterion-for-exactness]
 justified_by: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-basic-wedge-is-multilinear-and-alternating
 kind: proposition
 title: "The basic wedge map $(v_1,\\dots,v_k)\\mapsto v_1\\wedge\\cdots\\wedge v_k$ is multilinear and alternating"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

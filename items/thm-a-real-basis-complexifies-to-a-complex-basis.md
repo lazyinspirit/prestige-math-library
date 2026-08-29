@@ -2,7 +2,7 @@
 id: thm-a-real-basis-complexifies-to-a-complex-basis
 kind: theorem
 title: "A real basis becomes a complex basis after complexification, so $\\dim_{\\mathbb C}(\\mathbb C\\otimes_{\\mathbb R}V)=\\dim_{\\mathbb R}V$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
 kind: theorem
 title: "For sigma-finite factors, the product measure exists, has the rectangle formula, is sigma-finite, and is unique"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-product-measure-on-sigma-finite-spaces, thm-iterated-section-measures-agree-on-product-measurable-sets, def-measure, def-pi-system, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-finite-sigma-finite-and-semifinite-measures, thm-monotone-convergence-for-the-integral, def-product-sigma-algebra-and-finite-product-sigma-algebras]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

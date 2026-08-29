@@ -2,7 +2,7 @@
 id: thm-gram-inner-product-on-exterior-powers-is-positive-definite
 kind: theorem
 title: "The Gram formula gives a well-defined positive-definite inner product on exterior powers, and $\\|v_1\\wedge\\cdots\\wedge v_k\\|^2$ is the Gram determinant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-principal-exponential-biholomorphism-from-principal-strip
 kind: theorem
 title: "The exponential is the inverse biholomorphism from the principal strip to the slit plane"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

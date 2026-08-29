@@ -2,7 +2,7 @@
 id: def-realification-of-a-complex-vector-space
 kind: definition
 title: "Realification of a complex vector space by restriction of scalars"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-vector-space, def-complex-numbers-and-arithmetic]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

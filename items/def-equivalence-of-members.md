@@ -2,7 +2,7 @@
 id: def-equivalence-of-members
 kind: definition
 title: "Equivalence of members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-member-of-an-object,
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

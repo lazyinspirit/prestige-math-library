@@ -2,7 +2,7 @@
 id: fs-exactness-can-be-defined-without-first-producing-a-canonical-monomorphism
 kind: false-statement
 title: "FALSE: the subobject-side definition of exactness needs no canonical image monomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-exactness-at-a-node,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

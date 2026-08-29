@@ -2,7 +2,7 @@
 id: def-comember-and-the-dual-calculus
 kind: definition
 title: "Comember and the dual calculus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-member-of-an-object,
        def-monomorphism-and-epimorphism]
 justified_by: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

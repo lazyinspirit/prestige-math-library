@@ -2,7 +2,7 @@
 id: def-standard-relative-floating-point-model-and-unit-roundoff
 kind: definition
 title: "The standard relative floating-point model and unit roundoff"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abs-value]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

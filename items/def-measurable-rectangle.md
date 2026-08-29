@@ -2,13 +2,14 @@
 id: def-measurable-rectangle
 kind: definition
 title: "Measurable rectangles in a product of measurable spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-measurable-space, def-cartesian-product]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

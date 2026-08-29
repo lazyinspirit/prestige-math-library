@@ -2,7 +2,7 @@
 id: ex-members-of-an-abelian-group-correspond-to-its-subgroups
 kind: example
 title: "Members of an abelian group correspond to its subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-members-modulo-equivalence-correspond-to-subobjects,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

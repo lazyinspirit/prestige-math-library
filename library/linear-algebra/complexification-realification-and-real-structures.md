@@ -1,7 +1,7 @@
 ---
 page: complexification-realification-and-real-structures
 title: "Complexification, Realification and Real Structures"
-status: draft
+status: published
 items: [def-realification-of-a-complex-vector-space,
         def-complexification-of-a-real-vector-space,
         def-direct-sum-model-of-complexification,

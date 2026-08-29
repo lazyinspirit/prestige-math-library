@@ -2,7 +2,7 @@
 id: ex-a-free-action-and-the-quotient-graph-basis
 kind: example
 title: "A free action and the quotient-graph basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

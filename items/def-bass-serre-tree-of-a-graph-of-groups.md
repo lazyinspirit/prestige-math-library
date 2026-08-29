@@ -2,7 +2,7 @@
 id: def-bass-serre-tree-of-a-graph-of-groups
 kind: definition
 title: "The Bass-Serre tree of a graph of groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

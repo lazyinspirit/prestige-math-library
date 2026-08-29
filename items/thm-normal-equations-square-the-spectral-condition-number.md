@@ -2,7 +2,7 @@
 id: thm-normal-equations-square-the-spectral-condition-number
 kind: theorem
 title: "For full-column-rank A, the normal equations square the spectral condition number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-singular-value-d
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

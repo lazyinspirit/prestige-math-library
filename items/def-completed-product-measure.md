@@ -2,13 +2,14 @@
 id: def-completed-product-measure
 kind: definition
 title: "The completed product measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-product-measure-on-sigma-finite-spaces, def-completion-of-a-measure-space, thm-completion-of-a-measure-space, def-countable-choice]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

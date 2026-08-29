@@ -2,7 +2,7 @@
 id: cor-a-bounded-vector-field-on-all-of-euclidean-space-is-complete
 kind: corollary
 title: "A bounded vector field on all of Euclidean space is complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

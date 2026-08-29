@@ -2,7 +2,7 @@
 id: fs-a-tietze-equivalent-presentation-can-change-solvability-of-the-word-problem
 kind: false-statement
 title: "FALSE: Tietze-equivalent finite presentations can differ on whether their word problem is solvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

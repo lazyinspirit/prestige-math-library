@@ -2,7 +2,7 @@
 id: ex-the-n-sphere-with-its-standard-smooth-atlas
 kind: example
 title: "The $n$-sphere with its standard smooth atlas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

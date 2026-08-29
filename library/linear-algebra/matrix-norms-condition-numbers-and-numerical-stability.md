@@ -1,7 +1,7 @@
 ---
 page: matrix-norms-condition-numbers-and-numerical-stability
 title: "Matrix Norms, Condition Numbers and Numerical Stability"
-status: draft
+status: published
 items: [def-absolute-and-relative-forward-error-for-a-problem-map,
         def-absolute-and-relative-local-condition-numbers-of-a-problem-map,
         def-induced-matrix-p-norm,

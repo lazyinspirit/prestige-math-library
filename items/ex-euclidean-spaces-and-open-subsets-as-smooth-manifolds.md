@@ -2,7 +2,7 @@
 id: ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds
 kind: example
 title: "Euclidean spaces and Euclidean open subsets as smooth manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-bass-serre-structure-theorem
 kind: theorem
 title: "Bass-Serre structure theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-each-object-has-a-zero-member-and-each-member-has-a-negative
 kind: proposition
 title: "Each object has a zero member and each member has a negative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

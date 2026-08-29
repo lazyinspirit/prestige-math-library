@@ -2,7 +2,7 @@
 id: cor-the-regular-character-gives-the-sum-of-squares-formula
 kind: corollary
 title: "The regular character gives a second proof of the sum-of-squares formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

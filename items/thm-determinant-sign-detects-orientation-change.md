@@ -2,7 +2,7 @@
 id: thm-determinant-sign-detects-orientation-change
 kind: theorem
 title: "A real linear isomorphism preserves or reverses orientation according to the sign of its determinant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

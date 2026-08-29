@@ -2,7 +2,7 @@
 id: fs-every-complex-vector-space-has-a-preferred-real-form
 kind: false-statement
 title: "FALSE: every complex vector space has a preferred real form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-a-four-has-a-normal-klein-four-subgroup-and-four-conjugacy-classes
 kind: example
 title: "$A_4$ has a normal Klein four subgroup and four conjugacy classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

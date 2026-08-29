@@ -2,7 +2,7 @@
 id: ex-sine-product-recovers-the-basel-sum
 kind: example
 title: "The sine product recovers the Basel sum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

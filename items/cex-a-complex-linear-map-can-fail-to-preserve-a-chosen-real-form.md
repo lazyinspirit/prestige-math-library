@@ -2,7 +2,7 @@
 id: cex-a-complex-linear-map-can-fail-to-preserve-a-chosen-real-form
 kind: counterexample
 title: "A complex-linear map need not preserve a chosen real form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

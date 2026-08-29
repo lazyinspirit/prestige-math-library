@@ -2,7 +2,7 @@
 id: cex-conditional-linear-sum-does-not-force-product-convergence
 kind: counterexample
 title: "Conditional convergence of $\\sum a_n$ does not force convergence of $\\prod(1+a_n)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

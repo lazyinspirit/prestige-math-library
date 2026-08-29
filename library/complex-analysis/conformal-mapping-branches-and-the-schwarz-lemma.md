@@ -1,7 +1,7 @@
 ---
 page: conformal-mapping-branches-and-the-schwarz-lemma
 title: "Conformal Mapping, Branches, and the Schwarz Lemma"
-status: draft
+status: published
 items: [rem-holomorphic-logarithm-and-principal-power-dictionary,
         def-complex-power-from-holomorphic-logarithm-branch,
         thm-branch-power-agrees-with-integer-powers,

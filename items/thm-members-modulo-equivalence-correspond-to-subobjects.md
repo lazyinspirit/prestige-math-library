@@ -2,7 +2,7 @@
 id: thm-members-modulo-equivalence-correspond-to-subobjects
 kind: theorem
 title: "Members modulo equivalence correspond to subobjects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

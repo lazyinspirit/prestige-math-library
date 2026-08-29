@@ -2,7 +2,7 @@
 id: prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold
 kind: proposition
 title: "In the spectral norm, numerical rank counts the singular values above the declared threshold"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-numerical-rank-relative-to-a-norm-scale-and-tolerance, thm-eckart-you
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

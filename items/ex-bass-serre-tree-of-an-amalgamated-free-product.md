@@ -2,7 +2,7 @@
 id: ex-bass-serre-tree-of-an-amalgamated-free-product
 kind: example
 title: "The Bass-Serre tree of an amalgamated free product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

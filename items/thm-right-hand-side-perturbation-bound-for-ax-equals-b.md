@@ -2,7 +2,7 @@
 id: thm-right-hand-side-perturbation-bound-for-ax-equals-b
 kind: theorem
 title: "Right-hand-side perturbations in Ax = b are amplified by the condition number"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-condition-number-of-a-nonsingular-linear-system, thm-induced-matrix-n
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

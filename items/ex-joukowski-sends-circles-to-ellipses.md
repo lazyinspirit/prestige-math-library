@@ -2,7 +2,7 @@
 id: ex-joukowski-sends-circles-to-ellipses
 kind: example
 title: "The Joukowski map sends circles centered at the origin to ellipses"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

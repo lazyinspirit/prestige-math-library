@@ -2,7 +2,7 @@
 id: lem-minimal-algebraic-relator-area-exists
 kind: lemma
 title: "Every null word has a minimal algebraic relator area"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

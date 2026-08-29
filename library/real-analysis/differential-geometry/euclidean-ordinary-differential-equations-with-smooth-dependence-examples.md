@@ -1,7 +1,7 @@
 ---
 page: euclidean-ordinary-differential-equations-with-smooth-dependence-examples
 title: "Euclidean Ordinary Differential Equations with Smooth Dependence: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-constant-vector-field-and-translation-solutions,
            ex-a-linear-system-and-its-fundamental-matrix,

@@ -2,7 +2,7 @@
 id: ex-s-three-has-three-irreducible-complex-characters-of-degrees-one-one-and-two
 kind: example
 title: "$S_3$ has three irreducible complex characters of degrees $1$, $1$, and $2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

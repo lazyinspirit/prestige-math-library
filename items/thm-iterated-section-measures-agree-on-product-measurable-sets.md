@@ -2,7 +2,7 @@
 id: thm-iterated-section-measures-agree-on-product-measurable-sets
 kind: theorem
 title: "For sigma-finite measures, the two section-measure integrals of a measurable set agree"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [prop-sigma-finite-section-measure-functions-are-measurable, lem-finite-rectangle-unions-form-a-generating-algebra, thm-monotone-class, thm-monotone-convergence-for-the-integral, def-integral-over-a-measurable-set, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

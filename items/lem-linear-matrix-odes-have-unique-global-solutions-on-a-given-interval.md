@@ -2,7 +2,7 @@
 id: lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval
 kind: lemma
 title: "Linear matrix ODEs have unique global solutions on a fixed interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-contraction-of-maximal-ideals-integral-extension
 kind: corollary
 title: "Under an integral extension, a prime is maximal if and only if its contraction is maximal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

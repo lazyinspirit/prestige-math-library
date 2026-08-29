@@ -1,7 +1,7 @@
 ---
 page: infinite-products-and-weierstrass-factorisation
 title: "Infinite Products and the Weierstrass Factorisation Theorem"
-status: draft
+status: published
 items: [rem-complex-infinite-product-dictionary,
         thm-absolute-convergence-criterion-for-complex-infinite-products,
         def-normal-convergence-of-holomorphic-products,

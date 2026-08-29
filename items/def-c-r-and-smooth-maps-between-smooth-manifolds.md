@@ -2,7 +2,7 @@
 id: def-c-r-and-smooth-maps-between-smooth-manifolds
 kind: definition
 title: "$C^r$ and smooth maps between smooth manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: [lem-chart-independence-of-c-r-smoothness]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

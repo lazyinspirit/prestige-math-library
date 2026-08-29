@@ -2,7 +2,7 @@
 id: cex-completed-product-sections-need-not-be-pointwise-measurable
 kind: counterexample
 title: "A completed-product measurable set can have a nonmeasurable exceptional section"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-product-of-complete-measures-need-not-be-complete]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

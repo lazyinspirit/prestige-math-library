@@ -2,7 +2,7 @@
 id: thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums
 kind: theorem
 title: "The induced 1-norm is the maximum column sum and the induced infinity-norm is the maximum row sum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-induced-matrix-p-norm, thm-induced-matrix-norms-are-compatible-submul
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-the-matrix-of-an-exterior-power-is-the-signed-minor-matrix
 kind: theorem
 title: "In basis-wedge coordinates, the matrix of $\\Lambda^kT$ is the signed matrix of $k$-minors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

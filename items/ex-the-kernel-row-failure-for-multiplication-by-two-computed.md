@@ -2,7 +2,7 @@
 id: ex-the-kernel-row-failure-for-multiplication-by-two-computed
 kind: example
 title: "The kernel row failure for multiplication by two computed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-sho
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

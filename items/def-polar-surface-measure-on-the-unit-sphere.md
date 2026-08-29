@@ -2,13 +2,14 @@
 id: def-polar-surface-measure-on-the-unit-sphere
 kind: definition
 title: "The polar surface set function on the unit sphere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-borel-sigma-algebra-of-a-subspace-is-the-trace, thm-borel-sets-are-lebesgue-measurable, thm-continuous-preimages-of-borel-sets-are-borel, def-borel-sigma-algebra, def-countable-choice]
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   references:

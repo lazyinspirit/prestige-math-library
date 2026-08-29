@@ -2,7 +2,7 @@
 id: ex-disc-automorphism-swapping-two-points
 kind: example
 title: "A disc automorphism carrying one prescribed point to another"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

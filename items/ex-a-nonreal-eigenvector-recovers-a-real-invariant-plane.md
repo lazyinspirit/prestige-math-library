@@ -2,7 +2,7 @@
 id: ex-a-nonreal-eigenvector-recovers-a-real-invariant-plane
 kind: example
 title: "One nonreal eigenvector reconstructs the invariant real plane of a rotation-scaling block"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

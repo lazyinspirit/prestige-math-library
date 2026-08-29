@@ -1,7 +1,7 @@
 ---
 page: characters-and-the-orthogonality-relations-examples
 title: "Characters and the Orthogonality Relations — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-irreducible-complex-characters-of-a-finite-cyclic-group-are-the-n-powers-of-a-primitive-nth-root, ex-the-character-table-of-a-finite-cyclic-group-over-c, ex-the-standard-representation-of-s-n-has-character-fixed-points-minus-one, ex-s-three-has-three-irreducible-complex-characters-of-degrees-one-one-and-two, ex-the-character-table-of-s-three, ex-decomposing-the-square-of-the-two-dimensional-s-three-character, ex-a-four-has-a-normal-klein-four-subgroup-and-four-conjugacy-classes, ex-the-character-table-of-a-four, ex-s-four-has-five-conjugacy-classes-of-sizes-one-six-three-eight-and-six, ex-the-character-table-of-s-four-and-its-normal-subgroups, ex-the-character-table-of-q-eight, ex-the-character-table-of-dih-c-four, fs-nonisomorphic-finite-groups-can-have-the-same-character-table, fs-a-complex-character-of-a-finite-group-is-always-a-homomorphism, fs-every-value-of-an-irreducible-complex-character-is-real, fs-distinct-irreducible-complex-characters-of-a-finite-group-have-distinct-degrees, fs-every-complex-class-function-with-self-inner-product-one-is-a-character]
 ---

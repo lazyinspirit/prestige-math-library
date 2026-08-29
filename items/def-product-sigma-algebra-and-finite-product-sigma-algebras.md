@@ -2,13 +2,14 @@
 id: def-product-sigma-algebra-and-finite-product-sigma-algebras
 kind: definition
 title: "The product sigma-algebra and its finite iterates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-measurable-rectangle, def-generated-sigma-algebra, thm-generated-sigma-algebra-exists-and-is-minimal]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

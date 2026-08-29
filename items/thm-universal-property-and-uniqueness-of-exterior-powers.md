@@ -2,7 +2,7 @@
 id: thm-universal-property-and-uniqueness-of-exterior-powers
 kind: theorem
 title: "Exterior powers represent alternating multilinear maps and are unique up to unique isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 short: "Universal property of $\\Lambda^kV$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

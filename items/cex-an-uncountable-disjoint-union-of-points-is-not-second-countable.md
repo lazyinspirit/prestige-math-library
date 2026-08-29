@@ -2,7 +2,7 @@
 id: cex-an-uncountable-disjoint-union-of-points-is-not-second-countable
 kind: counterexample
 title: "An uncountable disjoint union of points is not second-countable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

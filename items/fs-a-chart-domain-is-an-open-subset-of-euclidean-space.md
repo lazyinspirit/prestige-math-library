@@ -2,7 +2,7 @@
 id: fs-a-chart-domain-is-an-open-subset-of-euclidean-space
 kind: false-statement
 title: "A chart domain need not be a Euclidean open set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-increasing-basis-wedges-form-a-basis
 kind: theorem
 title: "Increasing-index wedges of a basis form a basis of $\\Lambda^kV$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 short: "Wedge basis of $\\Lambda^kV$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

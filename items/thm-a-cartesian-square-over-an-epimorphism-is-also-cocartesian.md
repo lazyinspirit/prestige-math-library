@@ -2,7 +2,7 @@
 id: thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian
 kind: theorem
 title: "A cartesian square over an epimorphism is also cocartesian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

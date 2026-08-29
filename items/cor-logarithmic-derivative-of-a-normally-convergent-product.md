@@ -2,7 +2,7 @@
 id: cor-logarithmic-derivative-of-a-normally-convergent-product
 kind: corollary
 title: "The logarithmic derivative of a normally convergent product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

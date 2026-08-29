@@ -2,7 +2,7 @@
 id: ex-bass-serre-tree-of-a-baumslag-solitar-group
 kind: example
 title: "The Bass-Serre tree of a Baumslag-Solitar group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

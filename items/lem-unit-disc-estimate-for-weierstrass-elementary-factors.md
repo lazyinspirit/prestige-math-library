@@ -2,7 +2,7 @@
 id: lem-unit-disc-estimate-for-weierstrass-elementary-factors
 kind: lemma
 title: "The unit-disc estimate for Weierstrass elementary factors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-a-group-acting-freely-without-inversions-on-a-tree-is-free
 kind: corollary
 title: "A group acting freely without inversions on a tree is free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

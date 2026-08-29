@@ -2,7 +2,7 @@
 id: def-character-table-of-a-finite-group
 kind: definition
 title: "The character table of a finite group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-conjugacy-class-and-centralizer, def-irreducible-complex-character]
 justified_by: []
 aliases: []
+verification:
+  audited: 2026-08-29
 sources:
   scraped: []
   references:

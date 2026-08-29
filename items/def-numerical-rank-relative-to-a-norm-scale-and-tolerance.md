@@ -2,7 +2,7 @@
 id: def-numerical-rank-relative-to-a-norm-scale-and-tolerance
 kind: definition
 title: "Numerical rank relative to a declared norm, scale, and tolerance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

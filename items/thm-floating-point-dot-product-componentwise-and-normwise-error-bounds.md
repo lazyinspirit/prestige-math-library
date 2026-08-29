@@ -2,7 +2,7 @@
 id: thm-floating-point-dot-product-componentwise-and-normwise-error-bounds
 kind: theorem
 title: "The computed floating-point dot product obeys componentwise and normwise error bounds"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-standard-relative-floating-point-model-and-unit-roundoff, lem-product
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

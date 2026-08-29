@@ -2,7 +2,7 @@
 id: fs-a-complex-character-of-a-finite-group-is-always-a-homomorphism
 kind: false-statement
 title: "FALSE: a complex character of a finite group is always a group homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: construct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

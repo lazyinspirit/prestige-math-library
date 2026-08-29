@@ -2,7 +2,7 @@
 id: ex-a-floating-point-dot-product-error-bound
 kind: example
 title: "A short floating-point dot product obeys the gamma_n error bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-the-subtraction-rule-produces-a-unique-member
 kind: false-statement
 title: "FALSE: the subtraction rule produces a unique member"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-chasing-rule-the-subtraction-surrogate,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

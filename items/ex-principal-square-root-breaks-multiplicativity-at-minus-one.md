@@ -2,7 +2,7 @@
 id: ex-principal-square-root-breaks-multiplicativity-at-minus-one
 kind: example
 title: "The principal square root fails to respect products at $(-1,-1)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

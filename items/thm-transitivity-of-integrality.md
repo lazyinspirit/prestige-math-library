@@ -2,7 +2,7 @@
 id: thm-transitivity-of-integrality
 kind: theorem
 title: "Integral extensions are transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

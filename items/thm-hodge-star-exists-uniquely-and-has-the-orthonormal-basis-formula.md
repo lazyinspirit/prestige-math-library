@@ -2,7 +2,7 @@
 id: thm-hodge-star-exists-uniquely-and-has-the-orthonormal-basis-formula
 kind: theorem
 title: "The Hodge star exists uniquely and is given by the complementary-basis formula in an oriented orthonormal basis"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 short: "Existence and basis formula for $\\star$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

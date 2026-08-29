@@ -2,7 +2,7 @@
 id: def-integral-ring-extension
 kind: definition
 title: "Integral ring maps and integral extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

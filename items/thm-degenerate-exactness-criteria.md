@@ -2,7 +2,7 @@
 id: thm-degenerate-exactness-criteria
 kind: theorem
 title: "Degenerate exactness criteria"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

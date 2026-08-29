@@ -2,7 +2,7 @@
 id: prop-sigma-finite-section-measure-functions-are-measurable
 kind: proposition
 title: "For sigma-finite measures, the section-measure functions are measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sections-of-sets-and-functions-on-products, lem-finite-rectangle-unions-form-a-generating-algebra, thm-sections-of-product-measurable-sets-are-measurable, thm-monotone-class, def-finite-sigma-finite-and-semifinite-measures, def-measure, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

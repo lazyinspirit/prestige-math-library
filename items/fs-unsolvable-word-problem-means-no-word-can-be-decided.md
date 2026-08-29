@@ -2,7 +2,7 @@
 id: fs-unsolvable-word-problem-means-no-word-can-be-decided
 kind: false-statement
 title: "FALSE: an unsolvable word problem means no individual word can be decided"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

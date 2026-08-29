@@ -2,7 +2,7 @@
 id: def-class-function-and-the-space-of-complex-class-functions
 kind: definition
 title: "Class functions and the complex vector space $\\mathrm{cf}(G)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-conjugacy-class-and-centralizer, def-vector-space]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-29
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

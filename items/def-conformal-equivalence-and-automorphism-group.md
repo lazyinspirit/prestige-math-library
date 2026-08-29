@@ -2,7 +2,7 @@
 id: def-conformal-equivalence-and-automorphism-group
 kind: definition
 title: "Conformal equivalence and the automorphism group of a domain"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

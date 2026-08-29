@@ -2,7 +2,7 @@
 id: rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form
 kind: remark
 title: "Finitely generated abelian groups admit invariant-factor normal form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,11 @@ external_dependency:
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
+  sources_checked:
+    date: 2026-08-29
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-decomposing-the-square-of-the-two-dimensional-s-three-character
 kind: example
 title: "The square of the two-dimensional $S_3$ character decomposes as $1+\\operatorname{sgn}+\\chi_2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

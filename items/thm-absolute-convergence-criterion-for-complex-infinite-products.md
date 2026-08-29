@@ -2,7 +2,7 @@
 id: thm-absolute-convergence-criterion-for-complex-infinite-products
 kind: theorem
 title: "Absolute convergence criterion for complex infinite products"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

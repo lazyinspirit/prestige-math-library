@@ -2,7 +2,7 @@
 id: def-tensor-product-of-complex-representations
 kind: definition
 title: "The tensor product of two complex representations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-finite-dimensional-representation-of-a-group-over-a-field, thm-universal-property-of-module-tensor-products]
 justified_by: []
 aliases: []
+verification:
+  audited: 2026-08-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-entire-order-equals-canonical-genus
 kind: false-statement
 title: "FALSE: the order of an entire function always equals its canonical genus"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

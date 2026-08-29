@@ -2,7 +2,7 @@
 id: def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation
 kind: definition
 title: "Algebraic relator area and the Dehn function of a finite presentation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

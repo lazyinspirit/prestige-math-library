@@ -2,7 +2,7 @@
 id: fs-continuous-dependence-alone-implies-differentiable-dependence
 kind: false-statement
 title: "Continuous dependence does not by itself imply differentiable dependence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

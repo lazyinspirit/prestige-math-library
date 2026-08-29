@@ -2,13 +2,14 @@
 id: rem-fubini-should-be-applied-after-tonelli-on-absolute-values
 kind: remark
 title: "To use Fubini safely, first use Tonelli on |f|"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

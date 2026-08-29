@@ -2,7 +2,7 @@
 id: ex-the-character-table-of-s-four-and-its-normal-subgroups
 kind: example
 title: "The character table of $S_4$ and the normal subgroups it reveals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

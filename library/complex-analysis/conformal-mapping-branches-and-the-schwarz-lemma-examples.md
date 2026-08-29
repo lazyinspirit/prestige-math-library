@@ -1,7 +1,7 @@
 ---
 page: conformal-mapping-branches-and-the-schwarz-lemma-examples
 title: "Conformal Mapping, Branches, and the Schwarz Lemma — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-principal-logarithm-breaks-additivity-at-minus-one,
            ex-principal-square-root-breaks-multiplicativity-at-minus-one,

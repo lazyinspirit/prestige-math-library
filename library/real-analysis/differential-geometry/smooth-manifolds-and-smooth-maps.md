@@ -1,7 +1,7 @@
 ---
 page: smooth-manifolds-and-smooth-maps
 title: "Smooth Manifolds and Smooth Maps"
-status: draft
+status: published
 items: [def-topological-manifold-without-boundary,
         def-manifold-chart-coordinate-domain-and-coordinate-functions,
         def-coordinate-representation-of-a-map,

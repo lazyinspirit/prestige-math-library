@@ -2,7 +2,7 @@
 id: def-standard-inner-product-on-complex-class-functions
 kind: definition
 title: "The standard inner product on $\\mathrm{cf}(G)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-class-function-and-the-space-of-complex-class-functions, def-complex-
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-29
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

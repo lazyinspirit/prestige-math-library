@@ -2,7 +2,7 @@
 id: ex-normal-equations-versus-qr-conditioning
 kind: example
 title: "Normal equations square the conditioning compared with QR on a badly scaled least-squares problem"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-normal-equations-square-the-spectral-condition-number, thm-gram-schmi
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

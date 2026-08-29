@@ -2,7 +2,7 @@
 id: thm-blaschke-factor-is-a-disc-automorphism
 kind: theorem
 title: "Blaschke factors are automorphisms of the disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

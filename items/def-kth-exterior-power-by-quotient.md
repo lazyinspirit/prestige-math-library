@@ -2,7 +2,7 @@
 id: def-kth-exterior-power-by-quotient
 kind: definition
 title: "The $k$th exterior power as the tensor-power quotient by repeated-vector relations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 short: "Exterior power $\\Lambda^kV$"
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

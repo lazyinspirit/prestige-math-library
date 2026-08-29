@@ -2,7 +2,7 @@
 id: ex-the-standard-representation-of-s-n-has-character-fixed-points-minus-one
 kind: example
 title: "The standard representation of $S_n$ has character equal to the number of fixed points minus $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

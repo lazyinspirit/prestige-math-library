@@ -2,7 +2,7 @@
 id: cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations
 kind: counterexample
 title: "The relative floating-point model excludes overflow, underflow, and invalid operations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-standard-relative-floating-point-model-and-unit-roundoff]
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

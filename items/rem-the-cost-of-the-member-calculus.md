@@ -2,7 +2,7 @@
 id: rem-the-cost-of-the-member-calculus
 kind: remark
 title: "The cost of the member calculus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-member-equivalence-is-transitive,
        thm-the-pullback-of-an-epimorphism-is-an-epimorphism]
 justified_by: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

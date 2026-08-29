@@ -2,7 +2,7 @@
 id: thm-tonelli-theorem-for-sigma-finite-product-spaces
 kind: theorem
 title: "Tonelli's theorem for nonnegative measurable functions on a sigma-finite product"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-sections-of-product-measurable-functions-are-measurable, thm-iterated-section-measures-agree-on-product-measurable-sets, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

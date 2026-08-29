@@ -2,7 +2,7 @@
 id: lem-product-of-one-plus-deltas-gives-theta-n
 kind: lemma
 title: "If |delta_i| <= u and n u < 1, then prod (1+delta_i) = 1 + theta_n with |theta_n| <= gamma_n"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-standard-relative-floating-point-model-and-unit-roundoff, thm-geometr
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

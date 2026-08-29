@@ -2,7 +2,7 @@
 id: cor-hodge-star-is-an-isometry-and-squares-to-a-sign
 kind: corollary
 title: "The Hodge star is an isometry and satisfies $\\star^2=(-1)^{k(n-k)}$ on $\\Lambda^kV$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

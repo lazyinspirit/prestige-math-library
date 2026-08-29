@@ -2,7 +2,7 @@
 id: cex-equal-iterated-integrals-do-not-imply-l-one-integrability
 kind: counterexample
 title: "Equal iterated integrals still do not imply product integrability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [cex-fubini-fails-without-l-one-integrability, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-one-loop-graph-of-groups-is-an-hnn-extension
 kind: theorem
 title: "A one-loop graph of groups gives an HNN extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

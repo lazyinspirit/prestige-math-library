@@ -2,7 +2,7 @@
 id: def-decomposable-k-vector-and-basic-wedge-product
 kind: definition
 title: "Decomposable $k$-vectors and the basic wedge product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-kth-exterior-power-by-quotient]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

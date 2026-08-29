@@ -2,7 +2,7 @@
 id: thm-the-covering-criterion-for-exactness
 kind: theorem
 title: "The covering criterion for exactness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

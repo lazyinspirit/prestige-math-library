@@ -2,7 +2,7 @@
 id: thm-normal-convergence-of-holomorphic-products
 kind: theorem
 title: "Normally convergent products define holomorphic functions with the expected zeros"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

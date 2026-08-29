@@ -2,7 +2,7 @@
 id: fs-the-novikov-boone-theorem-proves-the-uniform-problem-only
 kind: false-statement
 title: "FALSE: the Novikov-Boone theorem proves only the uniform problem is unsolvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

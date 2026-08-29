@@ -1,7 +1,7 @@
 ---
 page: smooth-manifolds-and-smooth-maps-examples
 title: "Smooth Manifolds and Smooth Maps: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds,
            ex-the-circle-from-two-stereographic-charts,

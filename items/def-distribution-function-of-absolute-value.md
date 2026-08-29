@@ -2,13 +2,14 @@
 id: def-distribution-function-of-absolute-value
 kind: definition
 title: "The distribution function of absolute value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-measure]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

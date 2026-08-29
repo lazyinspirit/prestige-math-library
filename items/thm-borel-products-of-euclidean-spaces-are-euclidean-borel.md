@@ -2,7 +2,7 @@
 id: thm-borel-products-of-euclidean-spaces-are-euclidean-borel
 kind: theorem
 title: "The Borel product of R^m and R^n is the Borel sigma-algebra of R^{m+n}"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-borel-sigma-algebra, thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn, def-second-countable-space, prop-second-countability-is-hereditary, thm-countable-products-of-second-countable-spaces, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-unit-disc-schwarz-lemma-with-rigidity
 kind: theorem
 title: "Schwarz lemma with the equality cases"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

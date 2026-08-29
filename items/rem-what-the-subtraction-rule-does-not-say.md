@@ -2,7 +2,7 @@
 id: rem-what-the-subtraction-rule-does-not-say
 kind: remark
 title: "What the subtraction rule does not say"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-chasing-rule-the-subtraction-surrogate]
 justified_by: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

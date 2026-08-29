@@ -2,7 +2,7 @@
 id: prop-components-of-a-topological-manifold-are-open-and-at-most-countable
 kind: proposition
 title: "Components of a topological manifold are open and at most countable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

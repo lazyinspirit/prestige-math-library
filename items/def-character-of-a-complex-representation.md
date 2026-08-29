@@ -2,7 +2,7 @@
 id: def-character-of-a-complex-representation
 kind: definition
 title: "The character $\\chi_V(g)=\\operatorname{tr}(\\rho_V(g))$ of a finite-dimensional complex representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,8 @@ provenance:
 deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-trace-of-an-endomorphism]
 justified_by: []
 aliases: []
+verification:
+  audited: 2026-08-29
 sources:
   scraped: []
   references:

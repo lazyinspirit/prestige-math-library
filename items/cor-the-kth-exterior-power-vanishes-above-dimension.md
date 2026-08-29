@@ -2,7 +2,7 @@
 id: cor-the-kth-exterior-power-vanishes-above-dimension
 kind: corollary
 title: "If $k>\\dim V$, then $\\Lambda^kV=0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

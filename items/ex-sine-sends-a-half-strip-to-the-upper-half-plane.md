@@ -2,7 +2,7 @@
 id: ex-sine-sends-a-half-strip-to-the-upper-half-plane
 kind: example
 title: "Boundary tracking for the sine biholomorphism of the upper half-strip"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

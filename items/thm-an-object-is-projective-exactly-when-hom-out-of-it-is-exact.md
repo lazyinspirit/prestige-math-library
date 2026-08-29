@@ -2,7 +2,7 @@
 id: thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact
 kind: theorem
 title: "An object is projective exactly when Hom out of it is exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

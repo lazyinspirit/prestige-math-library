@@ -2,7 +2,7 @@
 id: thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices
 kind: theorem
 title: "Exact rank is locally constant at full-rank matrices and discontinuous at nonmaximal-rank matrices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-va
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: matrix-norms-condition-numbers-and-numerical-stability-examples
 title: "Matrix Norms, Condition Numbers and Numerical Stability: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-two-by-two-systems-with-contrasting-condition-numbers,
            ex-low-order-hilbert-matrices-have-large-condition-numbers,

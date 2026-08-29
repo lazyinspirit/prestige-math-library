@@ -2,7 +2,7 @@
 id: ex-a-wedge-product-detects-linear-dependence
 kind: example
 title: "A wedge product detects linear dependence in concrete coordinates"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

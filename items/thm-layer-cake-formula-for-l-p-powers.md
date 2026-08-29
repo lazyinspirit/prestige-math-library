@@ -2,7 +2,7 @@
 id: thm-layer-cake-formula-for-l-p-powers
 kind: theorem
 title: "For 0 < p < infinity, the layer-cake formula computes the integral of |f|^p from the distribution function"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-distribution-function-of-absolute-value, def-real-power, thm-real-power-continuity-and-derivatives, thm-ftc-second-part, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

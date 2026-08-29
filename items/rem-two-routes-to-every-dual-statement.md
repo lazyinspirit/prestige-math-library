@@ -2,7 +2,7 @@
 id: rem-two-routes-to-every-dual-statement
 kind: remark
 title: "Two routes to every dual statement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-exactness-is-self-dual,
        def-comember-and-the-dual-calculus]
 justified_by: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

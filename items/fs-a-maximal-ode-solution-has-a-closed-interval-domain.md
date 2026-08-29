@@ -2,7 +2,7 @@
 id: fs-a-maximal-ode-solution-has-a-closed-interval-domain
 kind: false-statement
 title: "A maximal ODE solution need not have a closed interval domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

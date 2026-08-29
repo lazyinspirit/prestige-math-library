@@ -2,7 +2,7 @@
 id: cor-jensen-zero-counting-bound
 kind: corollary
 title: "Jensen's formula bounds the number of zeros in a smaller disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

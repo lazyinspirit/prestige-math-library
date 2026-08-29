@@ -2,7 +2,7 @@
 id: ex-product-of-one-plus-z-over-two-to-n-is-entire-and-zero-free
 kind: example
 title: "The product $\\prod_{n\\ge0}(1+z/2^n)$ defines an entire zero-free tail limit after the first factor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

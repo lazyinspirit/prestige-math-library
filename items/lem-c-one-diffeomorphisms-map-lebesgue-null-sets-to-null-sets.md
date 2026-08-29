@@ -2,7 +2,7 @@
 id: lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets
 kind: lemma
 title: "A C^1 diffeomorphism maps Lebesgue null sets to Lebesgue null sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-c-one-map-and-local-inverse, thm-lipschitz-images-of-null-sets-in-rn-are-null, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

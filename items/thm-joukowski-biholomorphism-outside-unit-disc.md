@@ -2,7 +2,7 @@
 id: thm-joukowski-biholomorphism-outside-unit-disc
 kind: theorem
 title: "The Joukowski map is a biholomorphism from the exterior disc onto $\\mathbb{C}\\setminus[-1,1]$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-normality-is-local-for-domains
 kind: theorem
 title: "A domain is integrally closed if and only if its prime localisations are, equivalently if and only if its maximal localisations are"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

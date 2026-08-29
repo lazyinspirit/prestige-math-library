@@ -2,7 +2,7 @@
 id: cor-a-nonreal-eigenvector-produces-an-invariant-real-two-plane
 kind: corollary
 title: "A nonreal eigenvector yields an invariant real two-plane and the standard rotation-scaling block"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

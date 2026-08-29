@@ -2,7 +2,7 @@
 id: thm-chasing-rule-a-zero-arrow-is-detected-by-members
 kind: theorem
 title: "A zero arrow is detected by members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

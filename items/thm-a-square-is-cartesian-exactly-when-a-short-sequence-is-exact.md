@@ -2,7 +2,7 @@
 id: thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact
 kind: theorem
 title: "A square is cartesian exactly when a short sequence is exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

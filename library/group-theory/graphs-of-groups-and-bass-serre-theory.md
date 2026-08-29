@@ -1,7 +1,7 @@
 ---
 page: graphs-of-groups-and-bass-serre-theory
 title: "Graphs of Groups and Bass Serre Theory"
-status: draft
+status: published
 items: [def-graph-of-groups,
         def-maximal-subtree-of-a-connected-graph,
         def-path-group-of-a-graph-of-groups,

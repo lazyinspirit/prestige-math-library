@@ -1,7 +1,7 @@
 ---
 page: exterior-powers-orientation-and-hodge-duality-examples
 title: "Exterior Powers, Orientation and Hodge Duality: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-bases-and-dimensions-of-exterior-powers-of-r-two-r-three-and-r-four,
            ex-a-wedge-product-detects-linear-dependence,

@@ -2,7 +2,7 @@
 id: cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one
 kind: corollary
 title: "A complex character is irreducible if and only if its self-inner-product is $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

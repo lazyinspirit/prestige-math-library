@@ -1,7 +1,7 @@
 ---
 page: formal-languages-encodings-and-decision-problems-examples
 title: "Formal Languages, Encodings, and Decision Problems: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-language-concatenation-is-associative

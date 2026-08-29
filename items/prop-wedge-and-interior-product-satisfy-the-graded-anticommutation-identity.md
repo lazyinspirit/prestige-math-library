@@ -2,7 +2,7 @@
 id: prop-wedge-and-interior-product-satisfy-the-graded-anticommutation-identity
 kind: proposition
 title: "Exterior multiplication and interior product satisfy the graded anticommutation identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

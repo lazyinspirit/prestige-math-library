@@ -2,7 +2,7 @@
 id: cor-real-forms-correspond-to-conjugations
 kind: corollary
 title: "Real forms of a complex vector space correspond exactly to conjugations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

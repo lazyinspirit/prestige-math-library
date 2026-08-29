@@ -2,7 +2,7 @@
 id: def-exact-sequence-and-short-exact-sequence-in-an-abelian-category
 kind: definition
 title: "Exact sequence and short exact sequence in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-exactness-at-a-node]
 justified_by: []
 landmark: true
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

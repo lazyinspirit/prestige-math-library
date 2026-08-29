@@ -2,13 +2,14 @@
 id: rem-finite-product-measures-are-the-base-case-for-countable-product-constructions
 kind: remark
 title: "Finite product measures are the base case for countable product constructions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-product-sigma-algebra-and-finite-product-sigma-algebras, def-product-measure-on-sigma-finite-spaces]
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   references:

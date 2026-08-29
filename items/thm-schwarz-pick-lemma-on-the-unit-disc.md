@@ -2,7 +2,7 @@
 id: thm-schwarz-pick-lemma-on-the-unit-disc
 kind: theorem
 title: "Schwarz-Pick lemma on the unit disc"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

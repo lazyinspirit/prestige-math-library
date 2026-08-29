@@ -2,7 +2,7 @@
 id: rem-biholomorphisms-are-conformal-with-holomorphic-inverse
 kind: remark
 title: "Biholomorphisms are conformal and have holomorphic inverse"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

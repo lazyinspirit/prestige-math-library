@@ -2,7 +2,7 @@
 id: ex-kurosh-decomposition-of-a-subgroup
 kind: example
 title: "A Kurosh decomposition of a subgroup of a free product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

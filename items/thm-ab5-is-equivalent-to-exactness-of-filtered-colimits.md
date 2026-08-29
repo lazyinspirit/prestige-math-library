@@ -2,7 +2,7 @@
 id: thm-ab5-is-equivalent-to-exactness-of-filtered-colimits
 kind: theorem
 title: "AB5 is equivalent to exactness of filtered colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

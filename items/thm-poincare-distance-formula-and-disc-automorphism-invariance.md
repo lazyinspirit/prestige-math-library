@@ -2,7 +2,7 @@
 id: thm-poincare-distance-formula-and-disc-automorphism-invariance
 kind: theorem
 title: "The Poincare distance has the formula $2\\operatorname{artanh}|\\varphi_z(w)|$ and is disc-automorphism invariant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

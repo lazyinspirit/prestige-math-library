@@ -2,7 +2,7 @@
 id: cex-two-morphisms-agreeing-on-every-member-need-not-be-equal
 kind: counterexample
 title: "Two morphisms agreeing on every member need not be equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ justified_by: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

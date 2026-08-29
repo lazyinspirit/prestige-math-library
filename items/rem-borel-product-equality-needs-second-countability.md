@@ -2,13 +2,14 @@
 id: rem-borel-product-equality-needs-second-countability
 kind: remark
 title: "The equality B(X) tensor B(Y) = B(X x Y) needs second countability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, def-second-countable-space]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

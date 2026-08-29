@@ -2,13 +2,14 @@
 id: def-sections-of-sets-and-functions-on-products
 kind: definition
 title: "Sections E_x, E^y, f_x, and f^y on a product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-product-sigma-algebra-and-finite-product-sigma-algebras, def-measurable-function-between-measurable-spaces]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

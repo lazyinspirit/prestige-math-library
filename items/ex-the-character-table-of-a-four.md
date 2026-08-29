@@ -2,7 +2,7 @@
 id: ex-the-character-table-of-a-four
 kind: example
 title: "The character table of $A_4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

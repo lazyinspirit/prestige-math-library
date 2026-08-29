@@ -2,13 +2,14 @@
 id: rem-polar-coordinates-recover-the-published-ball-volume-and-gaussian-formulas
 kind: remark
 title: "Polar coordinates recover the published ball-volume and Gaussian formulas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-polar-coordinates-formula-for-lebesgue-measure, cor-volume-of-the-unit-n-ball, cor-volume-of-a-radius-r-n-ball, lem-plane-gaussian-integral-in-polar-coordinates]
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

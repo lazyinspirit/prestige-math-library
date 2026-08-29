@@ -2,7 +2,7 @@
 id: def-exactness-at-a-node
 kind: definition
 title: "Exactness at a node"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-the-opposite-of-an-abelian-category-is-abelian,
 justified_by: [thm-the-subobject-inequalities-underlying-exactness]
 landmark: true
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

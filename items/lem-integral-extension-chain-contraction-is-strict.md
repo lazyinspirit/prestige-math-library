@@ -2,7 +2,7 @@
 id: lem-integral-extension-chain-contraction-is-strict
 kind: lemma
 title: "Strict prime chains contract strictly under integral extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

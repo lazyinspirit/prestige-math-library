@@ -2,7 +2,7 @@
 id: ex-word-problem-by-free-reduction
 kind: example
 title: "Free reduction decides a word in a free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

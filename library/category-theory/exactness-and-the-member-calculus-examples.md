@@ -1,7 +1,7 @@
 ---
 page: exactness-and-the-member-calculus-examples
 title: "Exactness and the Member Calculus — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-members-of-an-abelian-group-correspond-to-its-subgroups,
            ex-an-ordinary-element-as-the-member-from-the-integers,

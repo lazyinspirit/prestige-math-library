@@ -2,7 +2,7 @@
 id: fs-completed-product-sections-are-measurable-for-every-parameter
 kind: false-statement
 title: "FALSE: every section of a completed-product measurable function is measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-completed-product-measure, thm-tonelli-and-fubini-for-completed-product-measures, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

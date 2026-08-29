@@ -2,7 +2,7 @@
 id: thm-branch-discrepancies-for-logarithm-and-complex-powers
 kind: theorem
 title: "Different branches shift logarithms by $2\\pi i k$ and complex powers by exponential factors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

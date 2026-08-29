@@ -2,7 +2,7 @@
 id: fs-tonelli-holds-without-sigma-finiteness
 kind: false-statement
 title: "FALSE: Tonelli's theorem still holds without any sigma-finiteness hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

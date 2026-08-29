@@ -2,7 +2,7 @@
 id: rem-groups-with-unsolvable-conjugacy-problem
 kind: remark
 title: "There exist finitely presented groups with unsolvable conjugacy problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,11 @@ external_dependency:
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
+  sources_checked:
+    date: 2026-08-29
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

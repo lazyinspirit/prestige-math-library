@@ -2,7 +2,7 @@
 id: thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets
 kind: theorem
 title: "On Borel subsets of R^{m+n}, the product lambda_m times lambda_n agrees with lambda_{m+n}"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure, thm-lebesgue-measure-of-a-box-of-every-kind, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-pi-system, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

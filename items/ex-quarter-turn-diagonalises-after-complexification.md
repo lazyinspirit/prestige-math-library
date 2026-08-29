@@ -2,7 +2,7 @@
 id: ex-quarter-turn-diagonalises-after-complexification
 kind: example
 title: "The real quarter-turn diagonalises after complexification but has no real eigenvector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

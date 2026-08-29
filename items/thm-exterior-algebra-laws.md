@@ -2,7 +2,7 @@
 id: thm-exterior-algebra-laws
 kind: theorem
 title: "Exterior multiplication is well defined, graded, associative, unital, and graded-commutative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

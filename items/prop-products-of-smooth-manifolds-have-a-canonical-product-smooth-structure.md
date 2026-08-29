@@ -2,7 +2,7 @@
 id: prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure
 kind: proposition
 title: "Products of smooth manifolds have a canonical product smooth structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

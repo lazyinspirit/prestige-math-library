@@ -2,7 +2,7 @@
 id: def-split-short-exact-sequence-in-an-abelian-category
 kind: definition
 title: "Split short exact sequence in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category,
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

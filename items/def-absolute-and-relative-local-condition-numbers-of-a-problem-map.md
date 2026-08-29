@@ -2,7 +2,7 @@
 id: def-absolute-and-relative-local-condition-numbers-of-a-problem-map
 kind: definition
 title: "Absolute and relative local condition numbers of a problem map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-absolute-and-relative-forward-error-for-a-problem-map, def-norm-and-normed-space]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

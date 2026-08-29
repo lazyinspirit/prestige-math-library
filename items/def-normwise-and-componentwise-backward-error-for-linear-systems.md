@@ -2,7 +2,7 @@
 id: def-normwise-and-componentwise-backward-error-for-linear-systems
 kind: definition
 title: "Normwise and componentwise backward error for an approximate linear-system solution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-condition-number-of-a-nonsingular-linear-system, def-abs-value]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

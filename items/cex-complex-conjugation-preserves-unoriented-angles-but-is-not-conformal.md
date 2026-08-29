@@ -2,7 +2,7 @@
 id: cex-complex-conjugation-preserves-unoriented-angles-but-is-not-conformal
 kind: counterexample
 title: "Complex conjugation preserves angle magnitudes but is not conformal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

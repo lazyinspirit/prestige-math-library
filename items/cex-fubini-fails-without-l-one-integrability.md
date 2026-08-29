@@ -2,7 +2,7 @@
 id: cex-fubini-fails-without-l-one-integrability
 kind: counterexample
 title: "The function (x^2-y^2)/(x^2+y^2)^2 shows that Fubini's integrability hypothesis is not decorative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-principal-inverse-tangent-calculus]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

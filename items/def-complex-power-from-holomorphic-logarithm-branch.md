@@ -2,7 +2,7 @@
 id: def-complex-power-from-holomorphic-logarithm-branch
 kind: definition
 title: "Complex powers defined from a holomorphic logarithm branch"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

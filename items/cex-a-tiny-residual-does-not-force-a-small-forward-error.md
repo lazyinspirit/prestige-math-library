@@ -2,7 +2,7 @@
 id: cex-a-tiny-residual-does-not-force-a-small-forward-error
 kind: counterexample
 title: "A tiny residual does not force a small forward error"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-residual-to-forward-error-bounds-for-linear-systems, def-condition-nu
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

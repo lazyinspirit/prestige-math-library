@@ -2,7 +2,7 @@
 id: thm-universal-property-and-uniqueness-of-complexification
 kind: theorem
 title: "Complexification is initial for real-linear maps into complex vector spaces, and is unique up to unique isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

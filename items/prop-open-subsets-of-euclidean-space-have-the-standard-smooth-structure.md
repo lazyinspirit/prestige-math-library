@@ -2,7 +2,7 @@
 id: prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure
 kind: proposition
 title: "Open subsets of Euclidean space have the standard smooth structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

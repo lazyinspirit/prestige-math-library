@@ -2,7 +2,7 @@
 id: def-orientation-of-a-finite-dimensional-real-vector-space
 kind: definition
 title: "Orientation of a finite-dimensional real vector space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 short: "Orientation of a real vector space"
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

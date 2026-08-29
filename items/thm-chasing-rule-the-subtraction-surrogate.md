@@ -2,7 +2,7 @@
 id: thm-chasing-rule-the-subtraction-surrogate
 kind: theorem
 title: "The subtraction surrogate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ justified_by: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

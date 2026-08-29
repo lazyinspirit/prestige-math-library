@@ -2,7 +2,7 @@
 id: thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors
 kind: theorem
 title: "In a finite-dimensional vector space, a decomposable wedge is nonzero exactly when its vectors are linearly independent"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

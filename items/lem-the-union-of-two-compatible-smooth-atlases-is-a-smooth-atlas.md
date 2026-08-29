@@ -2,7 +2,7 @@
 id: lem-the-union-of-two-compatible-smooth-atlases-is-a-smooth-atlas
 kind: lemma
 title: "The union of two compatible smooth atlases is a smooth atlas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

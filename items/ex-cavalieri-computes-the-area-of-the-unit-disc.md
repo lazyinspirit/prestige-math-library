@@ -2,7 +2,7 @@
 id: ex-cavalieri-computes-the-area-of-the-unit-disc
 kind: example
 title: "Cavalieri computes the area of the unit disc from its sections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-real-power-continuity-and-derivatives, cor-volume-of-the-unit-n-ball]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

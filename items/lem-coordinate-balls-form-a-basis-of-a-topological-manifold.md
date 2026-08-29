@@ -2,7 +2,7 @@
 id: lem-coordinate-balls-form-a-basis-of-a-topological-manifold
 kind: lemma
 title: "Coordinate balls form a basis of a topological manifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

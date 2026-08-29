@@ -2,7 +2,7 @@
 id: thm-principal-branch-power-agrees-with-positive-real-power
 kind: theorem
 title: "On positive reals, the principal branch power agrees with the published real power"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

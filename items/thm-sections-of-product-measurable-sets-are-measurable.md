@@ -2,7 +2,7 @@
 id: thm-sections-of-product-measurable-sets-are-measurable
 kind: theorem
 title: "Every section of a product-measurable set is measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-sections-of-sets-and-functions-on-products, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-sigma-algebra, thm-generated-sigma-algebra-exists-and-is-minimal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

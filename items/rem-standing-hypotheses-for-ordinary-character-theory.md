@@ -2,7 +2,7 @@
 id: rem-standing-hypotheses-for-ordinary-character-theory
 kind: remark
 title: "Standing hypotheses for ordinary character theory: $G$ finite, $k=\\mathbb C$, and every representation finite-dimensional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: []
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-29
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

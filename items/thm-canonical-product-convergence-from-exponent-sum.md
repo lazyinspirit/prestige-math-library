@@ -2,7 +2,7 @@
 id: thm-canonical-product-convergence-from-exponent-sum
 kind: theorem
 title: "A canonical product converges when the $(p+1)$-power reciprocal sum converges"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

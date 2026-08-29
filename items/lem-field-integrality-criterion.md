@@ -2,7 +2,7 @@
 id: lem-field-integrality-criterion
 kind: lemma
 title: "For an integral extension of domains, the upper ring is a field if and only if the lower ring is"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

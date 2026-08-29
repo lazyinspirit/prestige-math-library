@@ -2,7 +2,7 @@
 id: cex-a-bijective-smooth-map-with-nonsmooth-inverse
 kind: counterexample
 title: "A bijective smooth map with nonsmooth inverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-topological-manifolds-are-locally-compact-and-locally-path-connected
 kind: proposition
 title: "Topological manifolds are locally compact and locally path connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

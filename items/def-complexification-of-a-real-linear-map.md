@@ -2,7 +2,7 @@
 id: def-complexification-of-a-real-linear-map
 kind: definition
 title: "Complexification of a real-linear map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-complexification-of-a-real-vector-space, def-linear-map, thm-universa
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

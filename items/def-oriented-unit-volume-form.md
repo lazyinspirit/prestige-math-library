@@ -2,7 +2,7 @@
 id: def-oriented-unit-volume-form
 kind: definition
 title: "The oriented unit volume form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-orientation-of-a-finite-dimensional-real-vector-space, thm-gram-inner
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

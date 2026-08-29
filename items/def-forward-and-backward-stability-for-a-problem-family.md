@@ -2,7 +2,7 @@
 id: def-forward-and-backward-stability-for-a-problem-family
 kind: definition
 title: "Forward and backward stability for a problem family under an arithmetic model"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-absolute-and-relative-forward-error-for-a-problem-map, def-normwise-and-componentwise-backward-error-for-linear-systems, def-standard-relative-floating-point-model-and-unit-roundoff, def-norm-and-normed-space]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

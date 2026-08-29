@@ -2,7 +2,7 @@
 id: thm-disc-automorphisms-are-rotated-blaschke-factors
 kind: theorem
 title: "Every automorphism of the disc is a rotated Blaschke factor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-unit-disc-upper-half-plane-and-blaschke-factor
 kind: definition
 title: "The unit disc, the upper half-plane, and Blaschke factors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

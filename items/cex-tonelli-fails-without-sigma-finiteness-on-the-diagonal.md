@@ -2,7 +2,7 @@
 id: cex-tonelli-fails-without-sigma-finiteness-on-the-diagonal
 kind: counterexample
 title: "The diagonal under Lebesgue times counting measure shows that Tonelli needs sigma-finiteness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

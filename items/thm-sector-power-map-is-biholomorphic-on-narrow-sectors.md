@@ -2,7 +2,7 @@
 id: thm-sector-power-map-is-biholomorphic-on-narrow-sectors
 kind: theorem
 title: "Power maps are biholomorphisms on sectors of width less than $2\\pi/n$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

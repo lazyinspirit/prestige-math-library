@@ -2,7 +2,7 @@
 id: thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison
 kind: theorem
 title: "Spectral and Frobenius norms are unitarily invariant, are given by singular values, and satisfy the sharp rank comparison"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-frobenius-matrix-norm, def-operator-norm-on-a-finite-dimensional-inne
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

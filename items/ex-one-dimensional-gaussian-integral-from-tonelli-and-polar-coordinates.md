@@ -2,7 +2,7 @@
 id: ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates
 kind: example
 title: "Tonelli and the plane polar formula give int_R e^{-x^2} dx = sqrt(pi)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, lem-plane-gaussian-integral-in-polar-coordinates]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

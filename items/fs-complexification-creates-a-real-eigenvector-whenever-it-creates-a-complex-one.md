@@ -2,7 +2,7 @@
 id: fs-complexification-creates-a-real-eigenvector-whenever-it-creates-a-complex-one
 kind: false-statement
 title: "FALSE: complexification creates a real eigenvector whenever it creates a complex one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-grushko-decomposition-and-rank-additivity
 kind: theorem
 title: "Grushko decomposition and rank additivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

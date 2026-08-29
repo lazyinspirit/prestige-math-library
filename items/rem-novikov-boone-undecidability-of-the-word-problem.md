@@ -2,7 +2,7 @@
 id: rem-novikov-boone-undecidability-of-the-word-problem
 kind: remark
 title: "Novikov-Boone: some finitely presented group has unsolvable word problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,11 @@ external_dependency:
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-29
+  sources_checked:
+    date: 2026-08-29
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

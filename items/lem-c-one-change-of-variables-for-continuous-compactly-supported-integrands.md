@@ -2,7 +2,7 @@
 id: lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands
 kind: lemma
 title: "The published Riemann change-of-variables theorem already gives the Lebesgue formula for continuous compactly supported integrands"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-change-of-variables-for-compactly-supported-functions, thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content, def-support-and-compactly-supported-riemann-integral-in-rn]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

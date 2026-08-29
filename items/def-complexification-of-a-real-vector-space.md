@@ -2,7 +2,7 @@
 id: def-complexification-of-a-real-vector-space
 kind: definition
 title: "Complexification as $\\mathbb C\\otimes_{\\mathbb R}V$ with its canonical real-linear embedding"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 short: "Complexification $\\mathbb C\\otimes_{\\mathbb R}V$"
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

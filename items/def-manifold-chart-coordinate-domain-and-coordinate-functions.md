@@ -2,7 +2,7 @@
 id: def-manifold-chart-coordinate-domain-and-coordinate-functions
 kind: definition
 title: "Manifold charts, coordinate domains, and coordinate functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

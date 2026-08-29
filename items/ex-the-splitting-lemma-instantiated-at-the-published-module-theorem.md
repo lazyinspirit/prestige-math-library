@@ -2,7 +2,7 @@
 id: ex-the-splitting-lemma-instantiated-at-the-published-module-theorem
 kind: example
 title: "The splitting lemma instantiated at the published module theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-splitting-lemma-in-an-abelian-category,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

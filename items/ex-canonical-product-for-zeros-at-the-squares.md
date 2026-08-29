@@ -2,7 +2,7 @@
 id: ex-canonical-product-for-zeros-at-the-squares
 kind: example
 title: "A genus-zero canonical product for the zero set $\\{n^2:n\\ge1\\}$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

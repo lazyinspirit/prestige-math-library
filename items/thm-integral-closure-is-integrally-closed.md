@@ -2,7 +2,7 @@
 id: thm-integral-closure-is-integrally-closed
 kind: theorem
 title: "The integral closure of a domain in a field extension is integrally closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

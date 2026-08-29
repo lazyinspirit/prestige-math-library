@@ -2,7 +2,7 @@
 id: thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions
 kind: theorem
 title: "A C^1 diffeomorphism satisfies the change-of-variables formula for nonnegative Lebesgue measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands, lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-class, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

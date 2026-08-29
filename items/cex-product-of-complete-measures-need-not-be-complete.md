@@ -2,7 +2,7 @@
 id: cex-product-of-complete-measures-need-not-be-complete
 kind: counterexample
 title: "A nonmeasurable subset of a null line shows that the product of complete measures need not be complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-sections-of-product-measurable-sets-are-measurable, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, prop-countable-subsets-of-rn-are-lebesgue-null, thm-lebesgue-measure-is-a-complete-measure, def-countable-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

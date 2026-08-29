@@ -2,7 +2,7 @@
 id: thm-complex-representations-are-determined-by-their-characters
 kind: theorem
 title: "Finite-dimensional complex representations of a finite group are determined up to isomorphism by their characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

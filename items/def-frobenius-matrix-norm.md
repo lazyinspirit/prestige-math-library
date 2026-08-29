@@ -2,7 +2,7 @@
 id: def-frobenius-matrix-norm
 kind: definition
 title: "The Frobenius norm $\\lVert A\\rVert_F=(\\sum_{i,j}|a_{ij}|^2)^{1/2}$ on real or complex matrices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-abs-value, def-complex-conjugate-real-imaginary-part-and-modulus, prop-standard-coordinate-inner-products, def-inner-product-norm, lem-complex-conjugation-and-modulus-laws]
 aliases: []
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

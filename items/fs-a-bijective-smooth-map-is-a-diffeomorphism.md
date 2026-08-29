@@ -2,7 +2,7 @@
 id: fs-a-bijective-smooth-map-is-a-diffeomorphism
 kind: false-statement
 title: "A bijective smooth map need not be a diffeomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

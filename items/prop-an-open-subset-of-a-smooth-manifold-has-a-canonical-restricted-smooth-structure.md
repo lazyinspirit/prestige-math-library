@@ -2,7 +2,7 @@
 id: prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure
 kind: proposition
 title: "An open subset of a smooth manifold has a canonical restricted smooth structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

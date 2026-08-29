@@ -2,7 +2,7 @@
 id: fs-the-kernel-row-of-a-morphism-of-short-exact-sequences-is-short-exact
 kind: false-statement
 title: "FALSE: the kernel row of a morphism of short exact sequences is short exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequence
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

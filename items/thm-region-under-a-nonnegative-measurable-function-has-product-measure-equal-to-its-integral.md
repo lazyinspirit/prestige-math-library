@@ -2,7 +2,7 @@
 id: thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral
 kind: theorem
 title: "The region under a nonnegative measurable function is product-measurable and has measure equal to the integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-tonelli-theorem-for-sigma-finite-product-spaces, def-product-measure-on-sigma-finite-spaces, thm-arithmetic-and-lattice-operations-preserve-measurability, def-lebesgue-measure-and-the-lebesgue-sigma-algebra]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   references:

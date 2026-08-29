@@ -2,7 +2,7 @@
 id: thm-branch-power-agrees-with-integer-powers
 kind: theorem
 title: "Branch-defined complex powers agree with integer powers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-tensor-and-direct-sum-models-of-complexification-agree
 kind: theorem
 title: "The tensor and direct-sum models of complexification are canonically complex-linearly isomorphic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

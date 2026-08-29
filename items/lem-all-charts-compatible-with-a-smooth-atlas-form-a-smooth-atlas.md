@@ -2,7 +2,7 @@
 id: lem-all-charts-compatible-with-a-smooth-atlas-form-a-smooth-atlas
 kind: lemma
 title: "All charts compatible with a smooth atlas form a smooth atlas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
 sources:
   scraped: []

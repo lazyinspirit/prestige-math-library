@@ -2,7 +2,7 @@
 id: thm-fundamental-group-acts-on-its-bass-serre-tree
 kind: theorem
 title: "The fundamental group acts without inversions on its Bass-Serre tree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

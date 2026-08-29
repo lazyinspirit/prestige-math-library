@@ -2,7 +2,7 @@
 id: fs-product-measure-is-unique-without-sigma-finiteness
 kind: false-statement
 title: "FALSE: the rectangle formula determines a unique product measure without any sigma-finiteness hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-08-29
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

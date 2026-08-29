@@ -2,7 +2,7 @@
 id: def-smoothly-compatible-charts
 kind: definition
 title: "Smoothly compatible charts and the smoothness of Euclidean transition maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-29
   precheck: n/a
 sources:
   scraped: []

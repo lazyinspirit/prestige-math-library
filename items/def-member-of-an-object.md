@@ -2,7 +2,7 @@
 id: def-member-of-an-object
 kind: definition
 title: "Member of an object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-category]
 justified_by: []
 landmark: true
 verification:
+  audited: 2026-08-29
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
