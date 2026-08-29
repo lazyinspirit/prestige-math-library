@@ -18,6 +18,7 @@ parts:
       - the-winding-number-and-the-global-cauchy-theorem
       - harmonic-functions-and-the-poisson-integral
       - isolated-singularities-and-laurent-series
+      - infinite-products-and-weierstrass-factorisation
       - the-argument-principle-and-rouche
       - the-hartogs-phenomena
       - subharmonic-functions-and-the-dirichlet-problem
@@ -26,6 +27,7 @@ parts:
       - holomorphic-inverse-and-weierstrass-preparation
       - domains-of-holomorphy-and-pseudoconvexity
       - normal-families-and-montels-theorem
+      - conformal-mapping-branches-and-the-schwarz-lemma
 ---
 
 ## holomorphic-functions
@@ -39,11 +41,12 @@ term, and its derivatives recover its coefficients.
 ## contours-and-cauchy
 
 Contour integrals, Goursat, and Cauchy's formula turn local holomorphy into analyticity,
-derivative estimates, Laurent expansions, residues, and zero-counting through the argument
-principle and Rouche's theorem. Harmonic and subharmonic methods add Poisson and Dirichlet
-boundary theory, while Hartogs phenomena and pseudoconvexity show how several variables
-change the global picture. The new pages add three further closures: the Riemann sphere and
-Mobius maps classify meromorphic self-maps by rational functions, the holomorphic
-inverse/implicit/constant-rank theorems and Weierstrass preparation describe local
-several-variable structure, and Montel normal-family compactness supplies the convergence
-package behind Vitali-Porter and meromorphic normality.
+derivative estimates, the identity and open mapping theorems, and zero-pole counting
+through Laurent series, residues, the argument principle, and Rouche. Poisson and
+Dirichlet theory and the several-variable Hartogs-pseudoconvexity contrast control
+boundary and extension phenomena. Infinite products add the entire-function package:
+Weierstrass primary factors build prescribed zero sets, factorization separates zeros from
+zero-free exponentials, and Jensen-Hadamard bounds connect zeros to growth. The late pages
+close the conformal geometry: Mobius maps on the sphere, holomorphic inverse and
+preparation theorems, Montel normal families, and branch-sensitive Schwarz-Pick maps for
+the disc, slit plane, sectors, Joukowski, and sine.

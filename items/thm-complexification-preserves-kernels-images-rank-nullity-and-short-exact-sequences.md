@@ -7,7 +7,7 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-tensor-and-direct-sum-models-of-complexification-agree, prop-complexification-is-functorial, thm-linear-kernel-image-and-injectivity, thm-rank-nullity, def-exact-and-short-exact-sequences-of-modules]
+deps: [def-complexification-of-a-real-linear-map, thm-tensor-and-direct-sum-models-of-complexification-agree, prop-complexification-is-functorial, thm-linear-kernel-image-and-injectivity, thm-rank-nullity, def-exact-and-short-exact-sequences-of-modules]
 aliases: []
 landmark: false
 proof_strategy: direct

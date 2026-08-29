@@ -10,6 +10,11 @@ provenance:
 deps: [def-character-of-a-complex-representation]
 justified_by: []
 aliases: []
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:

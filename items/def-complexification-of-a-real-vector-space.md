@@ -34,7 +34,7 @@ $$z\cdot(w\otimes v):=(zw)\otimes v\qquad(z,w\in\mathbb C,\ v\in V),$$
 
 and it carries the canonical real-linear **embedding**
 
-$$\iota:V\longrightarrow V_{\mathbb C},\qquad \iota(v):=1\otimes v.$$
+$$\iota:V\longrightarrow V_{\mathbb C},\qquad \iota v:=1\otimes v.$$
 
 **The scalar action is well defined.** For fixed $z\in\mathbb C$ the map $(w,v)\mapsto(zw)\otimes v$ from $\mathbb C\times V$ to $V_{\mathbb C}$ is additive in each variable and $\mathbb R$-balanced, so by [[thm-universal-property-of-module-tensor-products]] it induces a unique $\mathbb R$-linear map $\mu_z:V_{\mathbb C}\to V_{\mathbb C}$ with $\mu_z(w\otimes v)=(zw)\otimes v$. The identities $\mu_{z+z'}=\mu_z+\mu_{z'}$, $\mu_{zz'}=\mu_z\circ\mu_{z'}$ and $\mu_1=\operatorname{id}$ hold on every elementary tensor and hence everywhere, so the action makes $V_{\mathbb C}$ a complex vector space.
 

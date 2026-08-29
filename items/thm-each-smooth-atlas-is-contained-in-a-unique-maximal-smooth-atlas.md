@@ -16,6 +16,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -61,33 +65,31 @@ containing $\mathcal A$
 
 **Proof technique:** direct.
 
-1.1 By [F2], $[\mathcal A]$ is a smooth atlas on $M$ containing $\mathcal A$.
-[given, F2]
+1.1 By [F2] and [L1], $[\mathcal A]$ is a smooth atlas on $M$ containing $\mathcal A$. [given, F2, L1]
 
-1.2 If $\mathcal B$ is a smooth atlas containing $\mathcal A$, then every chart
-of $\mathcal B$ is compatible with every chart of $\mathcal A$: each chart of
-$\mathcal A$ belongs to $\mathcal B$, whose members are pairwise compatible by
-[F1]. Hence $\mathcal B\subseteq[\mathcal A]$ by the membership condition in
-[F2]. Applied to a smooth atlas containing $[\mathcal A]$, this yields
-$\mathcal B\subseteq[\mathcal A]$ for such $\mathcal B$ as well, so no smooth
-atlas properly contains $[\mathcal A]$: it is maximal. [given, F1, F2]
+1.2 If $\mathcal C$ is any smooth atlas containing $\mathcal A$, then every [given, F1, F2]
+chart of $\mathcal C$ is compatible with every chart of $\mathcal A$, because
+all members of the single atlas $\mathcal C$ are pairwise compatible by [F1];
+hence $\mathcal C\subseteq[\mathcal A]$ by the defining membership condition in
+[F2]. Applied to an atlas containing $[\mathcal A]$, this yields
+$\mathcal C\subseteq[\mathcal A]$, so $[\mathcal A]$ is maximal. [given, F1, F2]
 
-1.3 Conversely, if $[\mathcal A]=[\mathcal B]$, then every chart of
-$\mathcal A\cup\mathcal B$ is a member of the single smooth atlas $[\mathcal A]$
-by [F2]. The domains therefore cover $M$ and any two members are pairwise
-compatible by [F1], so $\mathcal A\cup\mathcal B$ is a smooth atlas. [given, F1,
-F2]
+1.3 If $[\mathcal A]=[\mathcal B]$, then every chart of $\mathcal A\cup\mathcal B$ [given, F1, F2]
+belongs to the smooth atlas $[\mathcal A]$; therefore the domains cover $M$ and
+all members are pairwise compatible by [F1], so $\mathcal A\cup\mathcal B$ is a
+smooth atlas. [given, F1, F2]
 
-2.1 If $\mathcal A\cup\mathcal B$ is a smooth atlas, then every chart of
-$\mathcal B$ is compatible with every chart of $\mathcal A$ by the cross-pairwise
-clause of [F1], so $\mathcal B\subseteq[\mathcal A]$ by [F2]; symmetrically
-$\mathcal A\subseteq[\mathcal B]$. Maximality from step 1.2 then forces
-$[\mathcal A]=[\mathcal B]$. [given, F1, F2, step 1.2]
+2.1 If $\mathcal A\cup\mathcal B$ is a smooth atlas, then each chart of [given, F1, F2, step 1.2]
+$\mathcal B$ is compatible with every chart of $\mathcal A$, so
+$\mathcal B\subseteq[\mathcal A]$ by [F2]; symmetrically
+$\mathcal A\subseteq[\mathcal B]$. Step 1.2 applied to the atlas $[\mathcal B]$
+containing $\mathcal B$ gives $[\mathcal B]\subseteq[\mathcal A]$, and the same
+argument with $A$ and $B$ exchanged gives $[\mathcal A]\subseteq[\mathcal B]$.
+Hence $[\mathcal A]=[\mathcal B]$. [given, F1, F2, step 1.2]
 
-3.1 Steps 1.1 and 1.2 give the maximal atlas $[\mathcal A]$ containing
-$\mathcal A$. If $\mathcal B$ is any maximal smooth atlas containing
-$\mathcal A$, then step 1.2 gives $\mathcal B\subseteq[\mathcal A]$, and the
-containment cannot be proper, because $[\mathcal A]$ is a smooth atlas by step
-1.1 and would then properly contain the maximal atlas $\mathcal B$; hence
-$\mathcal B=[\mathcal A]$. Together with step 2.1 and step 1.3 this proves all
-three claims. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+3.1 Steps 1.1 and 1.2 prove that $[\mathcal A]$ is a maximal smooth atlas [step 1.1, step 1.2, step 2.1]
+containing $\mathcal A$. If $\mathcal C$ is any maximal smooth atlas containing
+$\mathcal A$, then step 1.2 gives $\mathcal C\subseteq[\mathcal A]$, and this
+containment cannot be proper because $[\mathcal A]$ is itself a smooth atlas by
+step 1.1. Therefore $\mathcal C=[\mathcal A]$, and with steps 1.3 and 2.1 all
+three claims are proved. [step 1.1, step 1.2, step 1.3, step 2.1] ∎

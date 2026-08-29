@@ -14,6 +14,10 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -32,42 +36,22 @@ $$\langle\chi_i,\chi_j\rangle=\delta_{ij}\qquad(1\le i,j\le r).$$
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, and irreducible complex representations
-$V_1,\dots,V_r$ of $G$ with characters $\chi_1,\dots,\chi_r$, one from each
-equivalence class.
+**Given:** A finite group $G$, and irreducible complex representations $V_1,\dots,V_r$ of $G$ with characters $\chi_1,\dots,\chi_r$, one from each equivalence class.
 
-[F1] Irreducible characters are the characters of irreducible representations
-([[def-irreducible-complex-character]]).
+[F1] Irreducible characters are the characters of irreducible representations ([[def-irreducible-complex-character]]).
 
-[F2] The inner product computes intertwiner dimension:
-$\langle\chi_i,\chi_j\rangle=\dim\operatorname{Hom}_G(V_j,V_i)$
-([[thm-character-inner-product-computes-intertwiner-dimension]]).
+[F2] The inner product computes intertwiner dimension: $\langle\chi_i,\chi_j\rangle=\dim\operatorname{Hom}_G(V_j,V_i)$ ([[thm-character-inner-product-computes-intertwiner-dimension]]).
 
-[F3] Every nonzero intertwiner between irreducible representations is an
-isomorphism, and in particular $\operatorname{End}_G(V_i)$ is a division ring
-([[cor-schurs-lemma-for-irreducible-representations]]).
+[F3] Every nonzero intertwiner between irreducible representations is an isomorphism, and in particular $\operatorname{End}_G(V_i)$ is a division ring ([[cor-schurs-lemma-for-irreducible-representations]]).
 
-[F4] Over the algebraically closed field $\mathbb C$, every intertwiner
-$V_i\to V_i$ is a scalar operator
-([[cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars]]).
+[F4] Over the algebraically closed field $\mathbb C$, every intertwiner $V_i\to V_i$ is a scalar operator ([[cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For $i\ne j$ the representations $V_i$ and $V_j$ are inequivalent, because
-one representative was chosen from each class. If
-$T\in\operatorname{Hom}_G(V_j,V_i)$ were nonzero, [F3] would make $T$ an
-isomorphism, contradicting inequivalence; hence
-$\operatorname{Hom}_G(V_j,V_i)=0$. [F3, given]
+1.1 For $i\ne j$ the representations $V_i$ and $V_j$ are inequivalent, because one representative was chosen from each class. If $T\in\operatorname{Hom}_G(V_j,V_i)$ were nonzero, [F3] would make $T$ an isomorphism, contradicting inequivalence; hence $\operatorname{Hom}_G(V_j,V_i)=0$. [F3, given]
 
-2.1 For $i=j$, [F4] says every element of $\operatorname{Hom}_G(V_i,V_i)
-=\operatorname{End}_G(V_i)$ is a scalar multiple of the identity. The
-identity operator is nonzero, so the scalars $\lambda\operatorname{id}_{V_i}$
-form a one-dimensional complex line. Hence
-$\dim\operatorname{Hom}_G(V_i,V_i)=1$. [F4, given]
+1.2 For $i=j$, [F4] says every element of $\operatorname{Hom}_G(V_i,V_i) =\operatorname{End}_G(V_i)$ is a scalar multiple of the identity. The identity operator is nonzero, so the scalars $\lambda\operatorname{id}_{V_i}$ form a one-dimensional complex line. Hence $\dim\operatorname{Hom}_G(V_i,V_i)=1$. [F4, given]
 
-3.1 By [F2], $\langle\chi_i,\chi_j\rangle=\dim\operatorname{Hom}_G(V_j,V_i)$;
-steps 1.1 and 2.1 give this dimension to be $0$ when $i\ne j$ and $1$ when
-$i=j$. This is exactly $\langle\chi_i,\chi_j\rangle=\delta_{ij}$. [F1, F2,
-step 1.1, step 2.1, algebra] ∎
+2.1 By [F2], $\langle\chi_i,\chi_j\rangle=\dim\operatorname{Hom}_G(V_j,V_i)$; steps 1.1 and 1.2 give this dimension to be $0$ when $i\ne j$ and $1$ when $i=j$. This is exactly $\langle\chi_i,\chi_j\rangle=\delta_{ij}$. [F1, F2, step 1.1, step 1.2, algebra] ∎

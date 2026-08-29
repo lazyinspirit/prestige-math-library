@@ -13,6 +13,10 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -23,7 +27,8 @@ pipeline_run: null
 
 ## Definition
 
-Let $M$ and $N$ be topological manifolds, let $F:M\to N$ be any function, and let
+Let $M$ be a topological $m$-manifold, let $N$ be a topological $n$-manifold,
+let $F:M\to N$ be any function, and let
 $(U,\varphi)$ and $(V,\psi)$ be charts on $M$ and $N$ respectively
 ([[def-manifold-chart-coordinate-domain-and-coordinate-functions]]). The
 **coordinate representation** (or **local representative**) of $F$ with respect to

@@ -36,7 +36,7 @@ $$\Psi:V\oplus iV\longrightarrow \mathbb C\otimes_{\mathbb R}V,\qquad \Psi(v+iw)
 
 **Given:** A real vector space $V$, with $\mathbb C$ regarded as a real vector space through $\mathbb R\subseteq\mathbb C$.
 
-[L1] The complexification $V_{\mathbb C}=\mathbb C\otimes_{\mathbb R}V$ carries the complex scalar action $z'\cdot(z\otimes v)=(z'z)\otimes v$ and the real-linear embedding $\iota(v)=1\otimes v$ ([[def-complexification-of-a-real-vector-space]]).
+[L1] The complexification $V_{\mathbb C}=\mathbb C\otimes_{\mathbb R}V$ carries the complex scalar action $z'\cdot(z\otimes v)=(z'z)\otimes v$ and the real-linear embedding $\iota v=1\otimes v$ ([[def-complexification-of-a-real-vector-space]]).
 
 [L2] The direct-sum model is $V\oplus iV$ with $(a+bi)\cdot(v,w)=(av-bw,\,aw+bv)$, written $v+iw=(v,w)$ ([[def-direct-sum-model-of-complexification]]).
 

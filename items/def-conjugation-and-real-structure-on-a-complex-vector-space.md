@@ -12,6 +12,10 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -35,4 +39,9 @@ its well-definedness on the tensor product follows from [[thm-universal-property
 
 ## Remarks
 
-A conjugation is not complex-linear: it is conjugate-linear. It is $\mathbb R$-linear, because $\overline r=r$ for every $r\in\mathbb R$.
+On a nonzero complex vector space, a conjugation is not complex-linear: if it
+were, then for every $w$ one would have both
+$\sigma(iw)=-i\sigma(w)$ and $\sigma(iw)=i\sigma(w)$, forcing $w=0$ because
+$\sigma$ is an involution. On the zero space the unique conjugation is also
+complex-linear. Every conjugation is $\mathbb R$-linear, because
+$\overline r=r$ for every $r\in\mathbb R$.

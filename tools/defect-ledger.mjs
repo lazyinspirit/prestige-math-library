@@ -106,6 +106,10 @@ const ENUMS = {
     'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
     'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
     'undefined-notation', 'ill-typed-construction',
+    // Legacy Step-6/frontier-23 spellings still present in current ledgers.
+    'false-claim', 'ill-formed', 'false-computation',
+    'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
+    'missing-case',
     // richness
     'scope-drop', 'scope-loss', 'false-decline', 'deferral-without-destination',
     'thin-harvest', 'unsourced-locator',

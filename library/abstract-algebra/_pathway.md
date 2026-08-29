@@ -59,6 +59,7 @@ parts:
       - solvability-by-radicals-and-kummer-theory
       - the-group-algebra-and-representations
       - maschkes-theorem-and-complete-reducibility
+      - characters-and-the-orthogonality-relations
 ---
 
 ## groups-and-quotients
@@ -123,7 +124,6 @@ statements for $p$-subgroups. Nilpotence, the Frattini subgroup, and the Galois
 correspondence refine that control, while finite fields, cyclotomic extensions,
 solvability by radicals, and Artin's field-theoretic proof of the fundamental theorem of
 algebra show how explicit extensions are built. The representation pages then pass to
-$k[G]$-modules: irreducibles sit inside the regular representation, Maschke gives complete
-reducibility when $\operatorname{char} k \nmid |G|$, Wedderburn decomposes $k[G]$ into
-matrix blocks, and class sums identify the center and count irreducibles by conjugacy
-classes.
+$k[G]$-modules: Maschke gives complete reducibility when $\operatorname{char} k \nmid |G|$,
+and characters turn traces into orthogonality, multiplicity, regular-character, and
+kernel-detection formulas.

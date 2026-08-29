@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 99a0ef901c39 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 0027ebf93959 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 2773 |
+| defects caught before publication | 3121 |
 | now mechanically prevented | 233 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -260,6 +260,33 @@
 | citation-inflated |  | 1 |  |  |  | 2 |
 | arithmetic-error | 2 |  |  |  |  |  |
 | gate-vacuous |  | 1 |  |  |  |  |
+
+## frontier-23 — 348 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| other | 103 | 92 | 14 |  |  |
+| invalid-inference | 4 | 19 | 2 | 5 | 3 |
+| false-or-overstrong-statement | 1 |  |  | 12 | 2 |
+| ill-typed-construction | 1 | 1 |  | 4 | 4 |
+| missing-hypothesis |  | 3 |  | 6 | 1 |
+| missing-choice-scope |  |  |  | 10 |  |
+| undefined-notation |  | 2 |  | 6 | 1 |
+| invalid-witness |  |  |  | 8 | 1 |
+| missing-case | 2 |  |  | 5 |  |
+| citation-missing | 4 |  |  | 1 | 2 |
+| false-or-overstrong-title |  |  |  | 4 | 1 |
+| false-boundary-disposition | 1 |  |  | 2 | 1 |
+| citation-inflated |  |  |  | 2 | 2 |
+| false-computation | 1 |  |  | 2 |  |
+| invalid-refutation | 1 |  |  | 1 |  |
+| missing-map | 1 |  |  | 1 |  |
+| false-claim |  | 1 |  | 1 |  |
+| citation-truncated |  |  |  | 2 |  |
+| arithmetic-error |  |  |  | 2 |  |
+| overstrong-title-or-statement | 1 |  |  |  |  |
+| ill-formed |  | 1 |  |  |  |
+| citation-misattributed |  |  |  | 1 |  |
 
 ## pre-frontier-13 — 3 row(s)
 

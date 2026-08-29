@@ -35,6 +35,7 @@ export const MODELS = Object.freeze({
 // the owner's `xhigh` terminology and the dispatcher records both spellings.
 export const MODEL_PROFILE_NAMES = Object.freeze({
   deepseekXhigh1m: 'deepseek-v4-pro-xhigh-1m',
+  gpt54High1m: 'gpt-5.4-high-1m',
   gpt54Xhigh1m: 'gpt-5.4-xhigh-1m',
   terraXhigh: 'gpt-5.6-terra-xhigh',
 });
@@ -58,6 +59,15 @@ export const MODEL_PROFILES = Object.freeze({
     provider: 'openai',
     effort: 'xhigh',
     requestedEffort: 'xhigh',
+    contextWindow: 1_000_000,
+  }),
+  [MODEL_PROFILE_NAMES.gpt54High1m]: Object.freeze({
+    model: MODELS.gpt54.id,
+    runner: MODELS.gpt54.runner,
+    family: MODELS.gpt54.family,
+    provider: 'openai',
+    effort: 'high',
+    requestedEffort: 'high',
     contextWindow: 1_000_000,
   }),
   [MODEL_PROFILE_NAMES.terraXhigh]: Object.freeze({

@@ -28,6 +28,12 @@ pipeline_run: null
 
 Let $M$ and $N$ be smooth manifolds, let $F:M\to N$ be a map, let $p\in M$ and
 let $r\in\mathbb N_0\cup\{\infty\}$, where $\mathbb N_0=\{0,1,2,\ldots\}$.
+For $m,q\in\mathbb N_0$ and an open set $E\subseteq\mathbb R^m$, a map
+$g:E\to\mathbb R^q$ is **of class $C^r$** as follows. When $m=0$, every such
+map is declared $C^r$. When $m\ge1$, each component $g_l$ with $l<q$ must be
+$C^r$ in the sense of
+[[def-ck-and-multi-index-notation-in-several-variables]]; when $q=0$ this
+component condition is vacuous.
 Suppose $F$ is continuous at $p$. Then $F$ is **of class $C^r$ at $p$** when
 there are smooth charts $(U,\varphi)$ of $M$ at $p$ and $(V,\psi)$ of $N$ at
 $F(p)$ with $F(U)\subseteq V$ such that the coordinate representative
@@ -35,8 +41,7 @@ $F(p)$ with $F(U)\subseteq V$ such that the coordinate representative
 $$\psi\circ F\circ\varphi^{-1}:\varphi(U)\longrightarrow\psi(V)$$
 
 ([[def-coordinate-representation-of-a-map]]) is of class $C^r$ on a
-neighbourhood of $\varphi(p)$ in the Euclidean sense of
-[[def-ck-and-multi-index-notation-in-several-variables]]. By
+neighbourhood of $\varphi(p)$ in this componentwise Euclidean sense. By
 [[lem-chart-independence-of-c-r-smoothness]], this condition is independent of
 the chosen charts: if one such representative is $C^r$, then every one is, so
 "some charts" may be read as "any charts". A map is **$C^r$ on an open set**

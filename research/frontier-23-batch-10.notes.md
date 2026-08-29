@@ -256,3 +256,52 @@ What was still verified despite the shell-side source-gate blocker:
   - `node tools/validate-plan.mjs research/plan-spec.json` exited `0` and
     ended with:
     `OK — declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids among the 484 page(s) with item lists.`
+
+## Step-5 authoring
+
+Session date: Saturday, August 29, 2026.
+
+Authored artifacts:
+
+- A page: `library/computability-theory/formal-languages-encodings-and-decision-problems.md`
+- B page: `library/computability-theory/formal-languages-encodings-and-decision-problems-examples.md`
+- Proof-contract report: `research/frontier-23-batch-10.proof-contracts.json`
+- A-page items: `def-computation-alphabet-and-word-convention`, `lem-computation-words-agree-with-published-finite-words`, `def-language-over-an-alphabet`, `def-language-boolean-operations`, `def-language-concatenation-powers-and-kleene-star`, `lem-language-concatenation-is-associative`, `lem-kleene-star-has-the-expected-least-closure-property`, `def-word-and-language-reversal`, `lem-reversal-is-an-involution-and-reverses-concatenation`, `def-alphabet-homomorphism-and-induced-word-map`, `lem-induced-word-map-has-the-free-extension-property`, `def-effective-binary-encoding-and-decoder`, `lem-finite-tuples-admit-effective-prefix-free-encodings`, `def-decision-search-and-function-problem`, `def-instance-size-under-an-encoding`, `prop-polynomially-related-encodings-preserve-polynomial-size`, `fs-a-language-is-a-set-of-symbols`, `fs-every-effective-encoding-is-prefix-free`
+- B-page items: `ex-language-concatenation-is-associative`, `ex-polynomially-related-encodings-preserve-polynomial-size`, `cex-a-language-is-a-set-of-symbols`, `cex-an-effective-encoding-need-not-be-prefix-free`
+
+Provenance rationale kept on disk:
+
+- Core definitions and standard structural lemmas are tagged `literature-derived` in `provenance.statement`, with locally written proofs tagged `ai-generated` where the batch writes the proof text rather than merely copying a source proof.
+- The worked examples and counterexamples are tagged `ai-generated` statements with the required `generation.role` entries (`example` or `counterexample`), and none of those generated statements is used as a dependency target.
+- Every authored item and both pages remain `status: draft`, as required for an in-flight Step-5 run.
+
+Authoring repairs and claim control:
+
+- I kept the scaffold's repaired false statement `fs-every-effective-encoding-is-prefix-free`; I did not restore the non-authorable design placeholder `fs-every-injection-is-an-effective-encoding`.
+- No further narrowing or dropping was needed after authoring. The A-page route stayed the scaffolded one: words and languages, operations, reversal, induced maps, encodings, problem types, encoded size, and the two local false statements.
+- During contract validation I converted the proof-bearing items' `deps` frontmatter from YAML block lists to inline arrays. That was not a mathematical change; it was required because `tools/proof-contract.mjs` reads dependency lists with an inline-array parser and otherwise cannot see the cited dependencies.
+- I tightened two B-page facts to cite the underlying definitions directly instead of paraphrasing the false-statement items, so the proof-contract quotes preserve exact cited claims.
+
+Blockers:
+
+- None for the batch authoring scope.
+
+Checks run on the authored state:
+
+- `node tools/tsx-run.mjs tools/precheck.mts items/def-computation-alphabet-and-word-convention.md items/lem-computation-words-agree-with-published-finite-words.md items/def-language-over-an-alphabet.md items/def-language-boolean-operations.md items/def-language-concatenation-powers-and-kleene-star.md items/lem-language-concatenation-is-associative.md items/lem-kleene-star-has-the-expected-least-closure-property.md items/def-word-and-language-reversal.md items/lem-reversal-is-an-involution-and-reverses-concatenation.md items/def-alphabet-homomorphism-and-induced-word-map.md items/lem-induced-word-map-has-the-free-extension-property.md items/def-effective-binary-encoding-and-decoder.md items/lem-finite-tuples-admit-effective-prefix-free-encodings.md items/def-decision-search-and-function-problem.md items/def-instance-size-under-an-encoding.md items/prop-polynomially-related-encodings-preserve-polynomial-size.md items/fs-a-language-is-a-set-of-symbols.md items/fs-every-effective-encoding-is-prefix-free.md items/ex-language-concatenation-is-associative.md items/ex-polynomially-related-encodings-preserve-polynomial-size.md items/cex-a-language-is-a-set-of-symbols.md items/cex-an-effective-encoding-need-not-be-prefix-free.md`
+  - pass: `13 checked, 0 failing — all clean`
+- `node tools/content-policy.mjs research/frontier-23-batch-10.pages.json`
+  - pass: `content-policy: 22 scoped item(s), 0 error(s), 0 warning(s)`
+- `node tools/validate-plan.mjs research/plan-spec.json`
+  - pass, ending with:
+    `OK — declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids among the 512 page(s) with item lists.`
+    `NOTE: 781 planned page(s) carry no item list yet (marked * above). Their reading order is guaranteed; their item dependencies are not yet asserted, so re-run this after writing each page's items.`
+
+Additional contract checks run on the output report:
+
+- `node tools/proof-contract.mjs research/frontier-23-batch-10.proof-contracts.json --strict`
+  - pass: `proof-contract: 0 error(s), 0 warning(s), 13/13 item(s) checked`
+- `node tools/citation-fidelity.mjs research/frontier-23-batch-10.proof-contracts.json --fail-on-missing-quote`
+  - pass: `QUOTE NOT FOUND — none; every recorded quote appears in its cited item.`
+- `node tools/boundary-audit.mjs research/frontier-23-batch-10.proof-contracts.json --fail-on-contradicted --fail-on-template`
+  - pass: `TEMPLATE REUSE — none at or above 3 members.` and `CONTRADICTED DISPOSITIONS — none found by the three detectors.`

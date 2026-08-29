@@ -11,11 +11,14 @@ deps: [def-c-r-and-smooth-maps-between-smooth-manifolds,
        prop-smooth-maps-are-continuous,
        prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]
 justified_by: []
-forward_refs: [cex-a-bijective-smooth-map-with-nonsmooth-inverse]
 aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -45,9 +48,8 @@ diffeomorphism onto the open submanifold $F(U)$
 
 - **Smoothness of the inverse is not automatic.** A bijective smooth map need
   not be a diffeomorphism, and this is exactly why the definition demands
-  smoothness of $F^{-1}$ outright; the explicit witness $x\mapsto x^3$ on
-  $\mathbb R$ is
-  [[cex-a-bijective-smooth-map-with-nonsmooth-inverse]].
+  smoothness of $F^{-1}$ outright: the map $F(x)=x^3$ on $\mathbb R$ is smooth
+  and bijective, but $F^{-1}(y)=y^{1/3}$ is not differentiable at $0$.
 
 - **A diffeomorphism is a local diffeomorphism.** Taking $U=M$ at every point
   exhibits a diffeomorphism as a local diffeomorphism; no local inverse other

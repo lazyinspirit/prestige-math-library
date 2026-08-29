@@ -22,7 +22,7 @@ sources:
 
 ## Statement
 
-Let $V$ be a real vector space with ordered basis $\mathcal B=(v_1,\ldots,v_n)$. Then $(\iota(v_1),\ldots,\iota(v_n))$ is an ordered complex basis of the complexification $V_{\mathbb C}$ of [[def-complexification-of-a-real-vector-space]]. In particular, if $V$ is finite-dimensional then
+Let $V$ be a real vector space with ordered basis $\mathcal B=(v_1,\ldots,v_n)$. Then $(\iota v_1,\ldots,\iota v_n)$ is an ordered complex basis of the complexification $V_{\mathbb C}$ of [[def-complexification-of-a-real-vector-space]]. In particular, if $V$ is finite-dimensional then
 
 $$\dim_{\mathbb C}(\mathbb C\otimes_{\mathbb R}V)=\dim_{\mathbb R}V.$$
 
@@ -52,6 +52,6 @@ $$\dim_{\mathbb C}(\mathbb C\otimes_{\mathbb R}V)=\dim_{\mathbb R}V.$$
 
 2.2 The vectors $v_1,\ldots,v_n$ are complex-linearly independent: if $\sum_j(a_j+ib_j)v_j=0$, then $(\sum_ja_jv_j,\sum_jb_jv_j)=(0,0)$, so the real independence in step 1.2 forces every $a_j=b_j=0$. [step 1.2, algebra]
 
-3.1 Steps 2.1 and 2.2 make $(v_1,\ldots,v_n)$ an ordered complex basis of the direct-sum model, and applying $\Phi$ of [L3] carries it to the ordered complex basis $(\iota(v_1),\ldots,\iota(v_n))$ of $V_{\mathbb C}$. [step 2.1, step 2.2, L3, L4]
+3.1 Steps 2.1 and 2.2 make $(v_1,\ldots,v_n)$ an ordered complex basis of the direct-sum model, and applying $\Phi$ of [L3] carries it to the ordered complex basis $(\iota v_1,\ldots,\iota v_n)$ of $V_{\mathbb C}$. [step 2.1, step 2.2, L3, L4]
 
 4.1 Both bases have exactly $n$ elements, so by [L5] the complex dimension of $V_{\mathbb C}$ equals the real dimension of $V$. [step 3.1, L5] ∎

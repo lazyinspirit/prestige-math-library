@@ -1,0 +1,1427 @@
+{
+  "version": 1,
+  "level": "frontier-23",
+  "note": "Step-5 authoring contract for frontier-23 batch 10 on Saturday, August 29, 2026.",
+  "scope": [
+    "lem-computation-words-agree-with-published-finite-words",
+    "lem-language-concatenation-is-associative",
+    "lem-kleene-star-has-the-expected-least-closure-property",
+    "lem-reversal-is-an-involution-and-reverses-concatenation",
+    "lem-induced-word-map-has-the-free-extension-property",
+    "lem-finite-tuples-admit-effective-prefix-free-encodings",
+    "prop-polynomially-related-encodings-preserve-polynomial-size",
+    "fs-a-language-is-a-set-of-symbols",
+    "fs-every-effective-encoding-is-prefix-free",
+    "ex-language-concatenation-is-associative",
+    "ex-polynomially-related-encodings-preserve-polynomial-size",
+    "cex-a-language-is-a-set-of-symbols",
+    "cex-an-effective-encoding-need-not-be-prefix-free"
+  ],
+  "contracts": {
+    "lem-computation-words-agree-with-published-finite-words": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "For each natural number $n$, a **word of length $n$ over $\\Sigma$** is a function $w:n\\to\\Sigma$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-finite-words-factor-avoidance-and-prefix-states",
+          "source_section": "Definition",
+          "quote": "A **word of length $n$ over $\\Sigma$** is a function from the natural number $n=\\{0,\\ldots,n-1\\}$ ([[def-natural-numbers]]) to $\\Sigma$, written $a_0a_1\\cdots a_{n-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both conventions define a length-$n$ word over $\\Sigma$ as a function $n\\to\\Sigma$, so they have the same words of each fixed length.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Both conventions identify the unique length-zero word with $\\varepsilon$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The local concatenation writes the letters of $u$ followed by those of $v$, which is exactly the published notation $uv$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the same length-$n$ word sets agree for every $n$, their union $\\Sigma^*$ agrees as well.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement allows the empty alphabet $\\Sigma=\\varnothing$, and steps 1.1-2.1 compare the two conventions without choosing any letter."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the length-zero word explicitly, and step 2.1 includes that case in the union defining $\\Sigma^*$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 compares the two length-$n$ notions for every $n$, including $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Beyond the empty alphabet and the length-zero word already discharged, the lemma has no separate collapsed parameter or exceptional quotient case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 is exactly the concatenation boundary check between the first block and the second block of letters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set; the proof compares written definitions only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states agreement of conventions, not a biconditional with separate forward and reverse directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states agreement of conventions, not a biconditional with separate forward and reverse directions."
+        }
+      ]
+    },
+    "lem-language-concatenation-is-associative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Their **concatenation** is $$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "their **concatenation** is the word $uv:(m+n)\\to\\Sigma$ defined by",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A word in $(L_1L_2)L_3$ admits a witness factorization $(uv)x$ with $u\\in L_1$, $v\\in L_2$, and $x\\in L_3$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The offset definition of word concatenation makes $(uv)x$ and $u(vx)$ agree at every index.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "A word in $L_1(L_2L_3)$ likewise admits a witness factorization $u(vx)$ with the same membership data.",
+          "step": "1.3",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From $v\\in L_2$ and $x\\in L_3$ one gets $vx\\in L_2L_3$, so the first inclusion follows from step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The same index computation gives $u(vx)=(uv)x$, and with $uv\\in L_1L_2$ this yields the reverse inclusion.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two inclusions of steps 2.1 and 2.2 give equality.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement has no nonemptiness hypothesis on the languages, and steps 1.1-3.1 remain valid when one side is empty because the inclusion claims then become vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma has no scalar, cardinal, or integer parameter whose zero value creates a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-size parameter is singled out; the proof is uniform for all languages over the fixed alphabet."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If one language is $\\{\\varepsilon\\}$, steps 1.2, 2.1, and 2.2 still show the two bracketings produce the same words."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 is the endpoint analysis at the cut positions $m$ and $m+n$ in the concatenated word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness decompositions in steps 1.1 and 1.3 come directly from membership in a concatenation language; no separate choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an equality proof, not a biconditional phrased with separate iff directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an equality proof, not a biconditional phrased with separate iff directions."
+        }
+      ]
+    },
+    "lem-kleene-star-has-the-expected-least-closure-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **concatenation** is\n$$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$\nwhere $uv$ is word concatenation as in\n[[def-computation-alphabet-and-word-convention]].\n\nDefine the **powers** of $L$ by\n$$ L^0:=\\{\\varepsilon\\} $$\nand, for each $n\\ge 1$, let $L^n$ be the set of words of the form\n$u_1u_2\\cdots u_n$ with each $u_i\\in L$.\n\nThe **Kleene star** of $L$ is\n$$ L^*:=\\bigcup_{n\\in\\mathbb N}L^n. $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **concatenation** is\n$$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$\nwhere $uv$ is word concatenation as in\n[[def-computation-alphabet-and-word-convention]].\n\nDefine the **powers** of $L$ by\n$$ L^0:=\\{\\varepsilon\\} $$\nand, for each $n\\ge 1$, let $L^n$ be the set of words of the form\n$u_1u_2\\cdots u_n$ with each $u_i\\in L$.\n\nThe **Kleene star** of $L$ is\n$$ L^*:=\\bigcup_{n\\in\\mathbb N}L^n. $$",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $\\varepsilon\\in L^0\\subseteq L^*$. This proves clause 1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $w\\in LL^*$. By [L2] there are $u\\in L$ and $v\\in L^*$ with $w=uv$. Since $v\\in L^*$, [L1] gives some $n\\in\\mathbb N$ with $v\\in L^n$. Then $w\\in L^{n+1}$ by the definition of $L^{n+1}$ in [L1], so $w\\in L^*$ again. Thus $LL^*\\subseteq L^*$, proving clause 2.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $\\varepsilon\\in K$ and $LK\\subseteq K$. We prove by induction on $n\\in\\mathbb N$ that $L^n\\subseteq K$. For $n=0$, [L1] gives $L^0=\\{\\varepsilon\\}\\subseteq K$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the induction step, assume $L^n\\subseteq K$. If $w\\in L^{n+1}$, then by [L1] there are $u\\in L$ and $v\\in L^n$ with $w=uv$. The induction hypothesis gives $v\\in K$, so $w\\in LK\\subseteq K$. Hence $L^{n+1}\\subseteq K$.",
+          "step": "1.4",
+          "inputs": [
+            "ih",
+            "L1",
+            "L2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "If $u,v\\in L^*$, choose $m,n\\in\\mathbb N$ with $u\\in L^m$ and $v\\in L^n$. Writing $u=u_1\\cdots u_m$ and $v=v_1\\cdots v_n$ with every $u_i,v_j\\in L$, the concatenation $uv$ is the $(m+n)$-fold product $u_1\\cdots u_m v_1\\cdots v_n$, so $uv\\in L^{m+n}\\subseteq L^*$. Therefore $L^*L^*\\subseteq L^*$, and $L^*$ is concatenation-closed.",
+          "step": "1.5",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "Any concatenation-closed language $K$ containing $L$ and $\\varepsilon$ satisfies $LK\\subseteq K$, because for $u\\in L\\subseteq K$ and $v\\in K$ the concatenation $uv$ lies in $KK\\subseteq K$.",
+          "step": "1.6",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By steps 1.3 and 1.4, every $L^n$ is contained in $K$. Since $L^*=\\bigcup_{n\\in\\mathbb N}L^n$ by [L1], we get $L^*\\subseteq K$. This proves clause 3.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "L1",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives $\\varepsilon\\in L^*$, and [L1] gives $L=L^1\\subseteq L^*$. Together with step 1.5, this shows that $L^*$ is itself a concatenation-closed language containing $L$ and $\\varepsilon$. Now step 2.1 and step 1.6 show that every other such language contains $L^*$. This is exactly the stated minimality.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 1.5",
+            "step 1.6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When $L=\\varnothing$, step 1.1 still gives $\\varepsilon\\in L^*$ and step 1.2 says $LL^*=\\varnothing\\subseteq L^*$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The induction base at step 1.3 is exactly the $n=0$ case for the powers $L^n$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the first nontrivial power $L^1=L$ when it adjoins one more factor from $L$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof of clause 3 in steps 1.3-2.1 also covers the smallest closure candidate $K=\\{\\varepsilon\\}$ whenever the hypothesis $LK\\subseteq K$ holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, order endpoint, or cut-position argument is present; the proof is by containment and induction on the number of factors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witnesses $u$ and $v$ in steps 1.2 and 1.4 come from the defining shape of $L^{n+1}$ and of concatenation membership, not from an arbitrary choice out of a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states closure and minimality properties, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states closure and minimality properties, not an iff claim."
+        }
+      ]
+    },
+    "lem-reversal-is-an-involution-and-reverses-concatenation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-word-and-language-reversal",
+          "source_section": "Definition",
+          "quote": "Its **reversal** is the word $w^R:n\\to\\Sigma$ defined by $$ w^R(i):=w(n-1-i)\\qquad(i<n). $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "their **concatenation** is the word $uv:(m+n)\\to\\Sigma$ defined by",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Their **concatenation** is $$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For indices in the first $n$ positions of $(uv)^R$, the reversal formula picks letters from $v$ and matches $v^R$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For indices in the remaining $m$ positions, the same computation picks letters from $u$ and matches the offset part of $v^Ru^R$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Applying the reversal formula twice gives $(w^R)^R(i)=w(i)$ for every index $i$.",
+          "step": "1.3",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A word in $(LK)^R$ is the reversal of some $uv$ with $u\\in L$ and $v\\in K$, so step 1.2 places it in $K^RL^R$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, a word in $K^RL^R$ has the form $v^Ru^R$, which step 1.2 rewrites as $(uv)^R$ with $uv\\in LK$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Membership in $(L^R)^R$ is equivalent to being the double reversal of some $z\\in L$, and step 1.3 turns that into membership in $L$ and conversely.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes empty words and empty languages, and steps 1.3, 2.1, and 3.1 handle those cases without any extra hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length word case is covered by step 1.3, which proves double reversal returns the original word even when no indices occur."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter word is fixed by the computation in step 1.3, so the first nontrivial length is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If one factor is $\\varepsilon$, step 1.2 still gives $(u\\varepsilon)^R=\\varepsilon^Ru^R$ and hence the same word identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 split exactly at the endpoint between the $v$-block and the $u$-block of the reversed concatenation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; each factorization comes directly from the definitions of language reversal and concatenation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves identities, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves identities, not a biconditional claim."
+        }
+      ]
+    },
+    "lem-induced-word-map-has-the-free-extension-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-alphabet-homomorphism-and-induced-word-map",
+          "source_section": "Definition",
+          "quote": "For the empty word, $\\widehat h(\\varepsilon)=\\varepsilon$. For a nonempty word $w=a_0a_1\\cdots a_{n-1}$ over $\\Sigma$, $$ \\widehat h(w):=h(a_0)h(a_1)\\cdots h(a_{n-1}), $$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "Writing $w(i)=a_i$ for $i<n$, we display the word as $a_0a_1\\cdots a_{n-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the displayed letters of $uv$ and then applying the induced-map definition yields $\\widehat h(uv)=\\widehat h(u)\\widehat h(v)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From $g(\\varepsilon)=g(\\varepsilon)g(\\varepsilon)$, a length comparison forces $g(\\varepsilon)=\\varepsilon$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $w=ua$ and the induction hypothesis gives $g(u)=\\widehat h(u)$, then concatenation preservation and agreement on one-letter words give $g(w)=\\widehat h(w)$.",
+          "step": "1.3",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The induction starts at the empty word using step 1.2 and the definition of $\\widehat h(\\varepsilon)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The induction of steps 2.1 and 1.3 proves $g=\\widehat h$, and step 1.1 is the concatenation-preservation clause.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-word case is discharged explicitly in steps 1.2 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is the length-zero base case for the uniqueness induction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers a one-letter word by taking $u=\\varepsilon$ and the final letter $a\\in\\Sigma$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No extra singular case remains once the empty word is handled; the proof has no division, quotient, or undefined operation branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the endpoint between the letters coming from $u$ and the letters coming from $v$ when reading the displayed word $uv$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The decomposition $w=ua$ in step 1.3 is the standard final-letter decomposition of a nonempty word, not a choice from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives a homomorphism property and a uniqueness clause, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives a homomorphism property and a uniqueness clause, not an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the high-risk points are the empty-word base case and uniqueness over all word lengths. The current proof forces g(epsilon) = epsilon by the length equation g(epsilon) = g(epsilon) g(epsilon), then proves the uniqueness clause by induction on word length using a final-letter decomposition. The concatenation-preserving extension claim is therefore complete on current bytes."
+      }
+    },
+    "lem-finite-tuples-admit-effective-prefix-free-encodings": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-binary-encoding-and-decoder",
+          "source_section": "Definition",
+          "quote": "The encoding $e$ is **effective** when such a total decoder is specified. The encoding is **prefix-free** when no codeword is a proper prefix of another:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The self-delimiting code $c(w)=1^{|w|}0w$ can be parsed uniquely from left to right, yielding an injective encoding with a total malformed-code decoder.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Prefixing the fixed tuple-length header $1^k0$ and then $k$ self-delimiting blocks gives an effective encoding of $k$-tuples.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the parser knows it must stop exactly after the $k$th block, one valid tuple code cannot be a proper prefix of another.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 together give an effective prefix-free encoding of $(\\{0,1\\}^*)^k$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is only for fixed tuple length $k\\ge 1$, so the empty-tuple-length case is outside its hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles empty component words through the code $c(\\varepsilon)=10$, so zero-length tuple entries are covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes $k=1$, and step 2.1 then produces an encoding for one-word tuples."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated empty components still decode uniquely in steps 1.1 and 2.1 because each block is self-delimiting."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 is the endpoint argument: the parser knows the exact stopping point after the $k$th block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is constructive; it defines explicit encoders and decoders and chooses no witness from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is existential, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is existential, not an iff claim."
+        }
+      ]
+    },
+    "prop-polynomially-related-encodings-preserve-polynomial-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-instance-size-under-an-encoding",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a set of instances and let $\\sigma:I\\to\\{0,1\\}^*$ be an effective\nbinary encoding. The **size** of an instance $x\\in I$ with respect to $\\sigma$\nis the length of its codeword:\n$$ |x|_\\sigma:=|\\sigma(x)|. $$\n\nIf $\\sigma,\\tau:I\\to\\{0,1\\}^*$ are two effective encodings of the same instance\nset, they are **polynomially related** when there exist polynomials\n$p,q:\\mathbb N\\to\\mathbb N$ such that for every $x\\in I$,\n$$ |\\sigma(x)|\\le p(|\\tau(x)|)\\qquad\\text{and}\\qquad |\\tau(x)|\\le q(|\\sigma(x)|). $$",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume clause 1. Then there is a polynomial $p$ with $m(x)\\le p(|x|_\\sigma)$ for all $x\\in I$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], there is a polynomial $q$ with $|x|_\\sigma\\le q(|x|_\\tau)$ for all $x\\in I$. Choose a polynomial $P:\\mathbb N\\to\\mathbb N$ such that $p(n)\\le P(n)$ for every $n$ and $P$ is nondecreasing; for example, if $p(t)=\\sum_{j=0}^d a_j t^j$, one may take $P(t)=\\sum_{j=0}^d \\lceil |a_j| \\rceil (t+1)^j$. Then $$m(x)\\le p(|x|_\\sigma)\\le P(|x|_\\sigma)\\le P(q(|x|_\\tau))$$ for every $x\\in I$. Since $P\\circ q$ is again a polynomial, clause 2 holds.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Conversely, assume clause 2. Then there is a polynomial $r$ with $m(x)\\le r(|x|_\\tau)$ for all $x\\in I$.",
+          "step": "1.3",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [L1], there is a polynomial $s$ with $|x|_\\tau\\le s(|x|_\\sigma)$ for all $x\\in I$. Choose a polynomial $R:\\mathbb N\\to\\mathbb N$ such that $r(n)\\le R(n)$ for every $n$ and $R$ is nondecreasing. Then $$m(x)\\le r(|x|_\\tau)\\le R(|x|_\\tau)\\le R(s(|x|_\\sigma))$$ for every $x\\in I$. Since $R\\circ s$ is a polynomial, clause 1 holds.",
+          "step": "1.4",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.2 and 1.4 prove the two implications, so clauses 1 and 2 are equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the instance set $I$ is empty, the universal inequalities in the statement and in steps 1.2 and 1.4 are vacuously true."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and steps 1.2 and 1.4 allow code lengths equal to $0$, so the polynomial comparisons are evaluated at zero without any division or undefined expression."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Nothing in steps 1.2 or 1.4 excludes code length $1$; the same composed-polynomial argument applies there unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof uses only order-preserving substitution into polynomials and never divides or inverts a size bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or sequence endpoint is involved; the statement is pointwise over all instances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set; the argument is uniform for arbitrary $x\\in I$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves clause 1 implies clause 2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.4 proves clause 2 implies clause 1."
+        }
+      ]
+    },
+    "fs-a-language-is-a-set-of-symbols": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-over-an-alphabet",
+          "source_section": "Definition",
+          "quote": "A **language over $\\Sigma$** is a subset $L\\subseteq\\Sigma^*$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "For each natural number $n$, a **word of length $n$ over $\\Sigma$** is a function $w:n\\to\\Sigma$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The word $01$ is a binary word, so the singleton set $\\{01\\}$ is a language over $\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The element $01$ is a length-two word and therefore not one of the single symbols $0$ or $1$ in the alphabet.",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The language $\\{01\\}$ violates the claimed conclusion, so the universal statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 refutes a universal claim by one explicit counterexample over the nonempty alphabet $\\{0,1\\}$, so no separate empty-alphabet branch is needed for the refutation to succeed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a length-two word; no zero-length word plays any role in the failure of the claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Single-letter words are not the source of failure; the counterexample requires a word of length two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample language is the one-element set used in steps 1.1-2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered interval, concatenation cut, or boundary index argument in this refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation names a fixed language $\\{01\\}$ and does not choose a witness from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not phrased as an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not phrased as an iff claim."
+        }
+      ]
+    },
+    "fs-every-effective-encoding-is-prefix-free": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-binary-encoding-and-decoder",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb B:=\\{0,1\\}$. A **binary encoding** of a set $X$ is an injective\nfunction\n$$ e:X\\to\\mathbb B^* $$\n([[def-function]], [[def-injection-surjection-bijection]]).\n\nFix a symbol $\\mathtt{mal}$ not belonging to $X$. A **total decoder** for $e$\nis a function\n$$ d:\\mathbb B^*\\to X\\cup\\{\\mathtt{mal}\\} $$\nsuch that\n$$ d(e(x))=x\\quad(x\\in X),\\qquad d(w)=\\mathtt{mal}\\quad(w\\notin e[X]). $$\nThus $\\mathtt{mal}$ is exactly the output on malformed codes, and the decoder\nis defined on every binary word, not only on words in the image of $e$.\n\nThe encoding $e$ is **effective** when such a total decoder is specified.\n\nThe encoding is **prefix-free** when no codeword is a proper prefix of another:\nthere do not exist distinct $x,y\\in X$ and a nonempty binary word $u$ with\n$e(y)=e(x)u$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $e(w)=1w$ is injective: if $1u=1v$, deleting the common first bit gives $u=v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define a total decoder $d:\\{0,1\\}^*\\to\\{0,1\\}^*\\cup\\{\\mathtt{mal}\\}$ by setting $d(1w)=w$ for every binary word $w$ and $d(x)=\\mathtt{mal}$ for every binary word $x$ not beginning with $1$ (including the empty word). Then $d(e(w))=d(1w)=w$ for every $w$, so $e$ is effective by [L1].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The codeword $e(\\varepsilon)=1$ is a proper prefix of $e(0)=10$. So $e$ is not prefix-free.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 shows that $e$ is an effective encoding, while step 1.3 shows that it is not prefix-free. Therefore [A1] is false.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word is central: step 1.3 uses $e(\\varepsilon)=1$ to exhibit the failing prefix relation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length input word $\\varepsilon$ is handled explicitly in steps 1.2 and 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 compares the codeword of $\\varepsilon$ with the codeword of the one-letter word $0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The malformed-input branch at the empty word is part of the decoder defined in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 is the endpoint comparison showing that the shorter codeword ends before the longer one does."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation constructs a specific encoding and decoder; it does not choose a witness from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        }
+      ]
+    },
+    "ex-language-concatenation-is-associative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Their **concatenation** is $$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-language-concatenation-is-associative",
+          "source_section": "Statement",
+          "quote": "For languages $L_1,L_2,L_3$ over the same alphabet, $$ (L_1L_2)L_3=L_1(L_2L_3). $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Directly expanding the concatenations gives $(L_1L_2)L_3=\\{aa,abb,aba,abbb\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A second direct expansion gives $L_1(L_2L_3)=\\{aa,abb,aba,abbb\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The computed equality realizes the general associativity law.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example's middle language contains $\\varepsilon$, and steps 1.1 and 1.2 compute with that empty word explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example has no numeric zero parameter requiring a separate branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first language is the singleton $\\{a\\}$, so unit-size input data are already part of steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate concatenation factor $\\varepsilon$ appears in $L_2$ and is used explicitly in steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The verification is a finite set calculation rather than an index-by-index boundary argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; every word in the example is listed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is a worked example, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is a worked example, not an iff statement."
+        }
+      ]
+    },
+    "ex-polynomially-related-encodings-preserve-polynomial-size": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-instance-size-under-an-encoding",
+          "source_section": "Definition",
+          "quote": "they are **polynomially related** when there exist polynomials $p,q:\\mathbb N\\to\\mathbb N$ such that for every $x\\in I$, $$ |\\sigma(x)|\\le p(|\\tau(x)|)\\qquad\\text{and}\\qquad |\\tau(x)|\\le q(|\\sigma(x)|). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-polynomially-related-encodings-preserve-polynomial-size",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma,\\tau:I\\to\\{0,1\\}^*$ be polynomially related encodings of the same instance set $I$. For any function $m:I\\to\\mathbb N$, the following are equivalent:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The doubled-bit encoding satisfies exact linear comparisons in both directions, so it is polynomially related to the ordinary binary encoding.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The number 13 has ordinary code 1101 and doubled code 11110011.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The general proposition applies, and the explicit bound becomes $|\\tau(n)|^3=8|\\sigma(n)|^3$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is about numeral encodings of natural numbers, so it does not involve an empty instance family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example statement says $|\\tau(n)|=2|\\sigma(n)|$ for every $n$, so the zero input $n=0$ is included at the statement level."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-input branch is needed; the same length-doubling formula works uniformly for all $n$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The verification uses only exact length equalities and polynomial composition; there is no singular or collapsed case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no ordered interval or cut-position endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Everything is explicit: the encodings are defined directly and the sample value is fixed at 13."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example applies a proposition but does not itself state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example applies a proposition but does not itself state a biconditional."
+        }
+      ]
+    },
+    "cex-a-language-is-a-set-of-symbols": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-over-an-alphabet",
+          "source_section": "Definition",
+          "quote": "A **language over $\\Sigma$** is a subset $L\\subseteq\\Sigma^*$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $01$ is a binary word, the singleton set $\\{01\\}$ is a language over $\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The word $01$ is not one of the two alphabet symbols, so the singleton language is not a subset of $\\Sigma$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The language $\\{01\\}$ is therefore a counterexample to the refuted statement.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A single explicit counterexample over $\\{0,1\\}$ already refutes the universal statement, so an empty-alphabet branch is unnecessary for this item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample is not about the empty word; it uses the length-two word 01."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Unit-length words are not problematic here; the failure appears only once a longer word is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample language is the singleton used in steps 1.1-2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof lists a concrete language and does not split by boundary indices or interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set; the counterexample is named explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        }
+      ]
+    },
+    "cex-an-effective-encoding-need-not-be-prefix-free": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-binary-encoding-and-decoder",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb B:=\\{0,1\\}$. A **binary encoding** of a set $X$ is an injective\nfunction\n$$ e:X\\to\\mathbb B^* $$\n([[def-function]], [[def-injection-surjection-bijection]]).\n\nFix a symbol $\\mathtt{mal}$ not belonging to $X$. A **total decoder** for $e$\nis a function\n$$ d:\\mathbb B^*\\to X\\cup\\{\\mathtt{mal}\\} $$\nsuch that\n$$ d(e(x))=x\\quad(x\\in X),\\qquad d(w)=\\mathtt{mal}\\quad(w\\notin e[X]). $$\nThus $\\mathtt{mal}$ is exactly the output on malformed codes, and the decoder\nis defined on every binary word, not only on words in the image of $e$.\n\nThe encoding $e$ is **effective** when such a total decoder is specified.\n\nThe encoding is **prefix-free** when no codeword is a proper prefix of another:\nthere do not exist distinct $x,y\\in X$ and a nonempty binary word $u$ with\n$e(y)=e(x)u$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $e(w)=1w$ is effective: define a total decoder by removing the first bit from any binary word beginning with $1$, and sending every binary word not beginning with $1$ (including the empty word) to the fixed malformed token. Then the decoder recovers $w$ from $e(w)=1w$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The codeword $1=e(\\varepsilon)$ is a proper prefix of $10=e(0)$, so $e$ is not prefix-free.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $e$ is a counterexample to [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the empty word through the codeword $e(\\varepsilon)=1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length input $\\varepsilon$ is part of the decoder description in step 1.1 and of the prefix failure in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 compares the codeword of $\\varepsilon$ with the codeword of the one-letter word $0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The malformed-input branch at the empty word is handled directly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 is the endpoint comparison that witnesses a proper-prefix relation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is constructed explicitly, with no witness chosen from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        }
+      ]
+    }
+  }
+}

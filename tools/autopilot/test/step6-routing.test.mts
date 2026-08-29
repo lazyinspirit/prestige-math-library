@@ -88,6 +88,38 @@ test('Step 6 always dispatches canonical prompts, never stale run-specific tasks
   assert.equal(alpha6c.task, 'briefs/tasks/alpha-6c-edges.md');
 });
 
+test('split routes invented carrier ids and wrong batch identity to reader recovery', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'step6-reader-carrier-'));
+  try {
+    mkdirSync(join(root, 'research'), { recursive: true });
+    mkdirSync(join(root, 'items'), { recursive: true });
+    writeFileSync(join(root, 'research', 'r-batch-1.proof-contracts.json'), '{}\n');
+    writeFileSync(join(root, 'research', 'r-batch-1.pages.json'), JSON.stringify([
+      { id: 'assigned-page', items: [{ id: 'assigned-item' }] },
+    ]));
+    writeFileSync(join(root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
+      batch: '1', coverage_note: 'One uneditable finding.',
+      findings: [{ id: 'R1-U1', subject_type: 'page', consumer_id: null,
+        location: 'assigned-page / assigned-item / deps', defect: 'ill-formed',
+        evidence: 'The dependency list is incomplete.', severity: 'nonfatal' }],
+    }));
+    const active = await import('../stages/mathlib.mts');
+    const splitStage: any = active.stages.find((stage: any) => stage.id === '6a-split');
+    const plan = splitStage.plan({ run: 'r', repo: root, dispatchDir: join(root, 'dispatch') }, ['1'])[0];
+    assert.equal(plan.role, 'reader');
+    assert.equal(plan.label, 'reader-recover-1');
+    assert.equal(plan.resultArtifact, 'research/r-reader-findings-1.json');
+
+    writeFileSync(join(root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
+      batch: '23', findings: [], coverage_note: 'No open findings.',
+    }));
+    const wrongBatch = splitStage.plan({ run: 'r', repo: root,
+      dispatchDir: join(root, 'dispatch') }, ['1'])[0];
+    assert.equal(wrongBatch.role, 'reader');
+    assert.equal(wrongBatch.label, 'reader-recover-1');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('gate repair dispatch embeds the canonical protocol in its generated task', async () => {
   for (const edge of [false, true]) {
     const root = mkdtempSync(join(tmpdir(), 'step6-gate-task-'));

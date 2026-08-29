@@ -58,23 +58,29 @@
         "id": "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
         "kind": "theorem",
         "title": "A short exact sequence is a kernel-cokernel pair",
-        "strategy": "Apply item 3 to the sequence 0 -> A -> B -> C -> 0. The endpoint zeros identify the left arrow as the kernel of the right arrow and, by the dual criterion, the right arrow as the cokernel of the left arrow.",
+        "strategy": "Use the endpoint zero objects to read short exactness through the arrow criterion at $A$ and $C$, then use the middle-node exactness equalities to identify $i$ with $\\ker(p)$ and $p$ with $\\operatorname{coker}(i)$.",
         "deps": [
           "thm-the-arrow-theoretic-criterion-for-exactness",
           "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
           "prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero",
-          "prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism"
+          "prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism",
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+          "def-exactness-at-a-node",
+          "cor-equalizers-are-monic-and-coequalizers-are-epic",
+          "thm-every-monomorphism-is-the-kernel-of-its-cokernel"
         ]
       },
       {
         "id": "thm-degenerate-exactness-criteria",
         "kind": "theorem",
         "title": "Degenerate exactness criteria",
-        "strategy": "Specialize item 5 and its one-sided halves to the cases where one or both endpoints are zero. The bridge from exactness to monic or epic uses the published zero-kernel and zero-cokernel characterizations in abelian categories.",
+        "strategy": "Read one-sided exactness through exactness at a node: claim 1 is the zero-kernel characterization, claim 2 identifies a monic map with the kernel subobject of the next arrow, and claim 3 is the dual quotient statement. Combine those one-sided criteria to recover the short exact case.",
         "deps": [
-          "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
           "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
-          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero"
+          "def-exactness-at-a-node",
+          "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+          "cor-equalizers-are-monic-and-coequalizers-are-epic",
+          "thm-every-monomorphism-is-the-kernel-of-its-cokernel"
         ]
       },
       {
@@ -346,7 +352,7 @@
         "id": "thm-the-covering-criterion-for-exactness",
         "kind": "theorem",
         "title": "The covering criterion for exactness",
-        "strategy": "Translate the covering condition into the exactness of the pullback sequence supplied by item 28, and use item 31 to transport the needed epimorphism through the pullback. The reverse implication is just the pullback construction attached to a kernel comparison.",
+        "strategy": "Translate exactness into the member criterion, keeping the composite-zero condition $gf=0$ explicit. One direction turns a member lift $fx \\equiv h$ into an actual lift after a common epic refinement, and the converse converts such refined lifts back into the member criterion.",
         "deps": [
           "def-exactness-at-a-node",
           "thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact",
@@ -469,13 +475,16 @@
         "id": "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
         "kind": "theorem",
         "title": "AB5 is equivalent to exactness of filtered colimits",
-        "strategy": "Use the AB5 lattice law to show filtered colimits preserve kernels and hence exact sequences, and conversely apply exactness of filtered colimits to the filtered system of finite partial joins of a directed family of subobjects. The statement keeps all small filtered index categories explicit and does not replace them by directed posets without proof.",
+        "strategy": "Use the AB5 lattice law to control kernels in filtered short exact diagrams. For the converse, view the intersections $B_i \\wedge C$ as a filtered diagram of pullbacks and use exactness of filtered colimits to preserve that pullback square, identifying the resulting images with $\\bigvee_i(B_i \\wedge C)$ and $(\\bigvee_i B_i)\\wedge C$.",
         "deps": [
           "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
           "thm-degenerate-exactness-criteria",
           "def-the-axioms-ab5-and-ab5-star",
           "def-filtered-category-and-filtered-colimit",
-          "def-small-finite-and-large-limits-completeness-and-cocompleteness"
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-exact-functor-between-abelian-categories",
+          "thm-the-meet-of-subobjects-is-their-pullback",
+          "thm-the-image-is-the-least-subobject-through-which-a-morphism-factors"
         ]
       },
       {
@@ -522,16 +531,16 @@
         "id": "fs-the-subtraction-rule-produces-a-unique-member",
         "kind": "false-statement",
         "title": "FALSE: the subtraction rule produces a unique member",
-        "strategy": "Refute the statement with item 24's nonuniqueness warning. The surrogate only guarantees existence of a suitable z, not a canonical difference object.",
+        "strategy": "Work in $\\mathbf{Ab}$ with $B=\\mathbb Z$, $C=0$, $g=0$, and $x=y=0$. Both $0_{\\mathbb Z}$ and $1_{\\mathbb Z}$ satisfy $gz \\equiv 0$, so the subtraction surrogate witness is not unique.",
         "deps": [
           "thm-chasing-rule-the-subtraction-surrogate",
-          "rem-what-the-subtraction-rule-does-not-say"
+          "thm-abelian-groups-form-an-abelian-category"
         ]
       },
       {
         "id": "fs-exactness-can-be-defined-without-first-producing-a-canonical-monomorphism",
         "kind": "false-statement",
-        "title": "FALSE: exactness can be defined without first producing a canonical monomorphism",
+        "title": "FALSE: the subobject-side definition of exactness needs no canonical image monomorphism",
         "strategy": "Item 1 is the refutation: the comparison im(f) -> ker(g) is not ambient data but must be constructed from gf = 0. Without that arrow there is no well-typed equality of subobjects to call exactness.",
         "deps": [
           "thm-the-subobject-inequalities-underlying-exactness",

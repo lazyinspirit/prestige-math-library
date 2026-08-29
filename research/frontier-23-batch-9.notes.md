@@ -258,6 +258,73 @@ single source heading states them verbatim.
   The visible warning stream was the standing repo-wide `redundant-prereq`
   class, not a batch-9 failure.
 
+## Step-5 authoring
+
+Completed on Friday, August 28, 2026.
+
+Authored page files:
+
+- `library/real-analysis/differential-geometry/smooth-manifolds-and-smooth-maps.md`
+- `library/real-analysis/differential-geometry/smooth-manifolds-and-smooth-maps-examples.md`
+- `library/real-analysis/differential-geometry/euclidean-ordinary-differential-equations-with-smooth-dependence.md`
+- `library/real-analysis/differential-geometry/euclidean-ordinary-differential-equations-with-smooth-dependence-examples.md`
+
+Authored item scope:
+
+- Full batch-manifest scope completed: all `73` item ids listed in
+  `research/frontier-23-batch-9.pages.json`.
+- `24` pre-existing partial item files were preserved and finished rather than
+  re-scaffolded.
+- `49` previously missing item files were added.
+
+Proof-contract artifact:
+
+- Wrote `research/frontier-23-batch-9.proof-contracts.json`.
+- Final strict scope is the `61` proof-bearing batch-9 items.
+- Regenerated citation and derivation entries from the final on-disk item text
+  after the precheck repairs, so the contract matches the proofs actually
+  written rather than the earlier numbering.
+
+Provenance rationale kept explicit:
+
+- I tagged the A-page mathematical statements as `literature-derived` and their
+  local proofs as `ai-generated`, except for definitions/remark items whose
+  proof component remains `not-applicable`.
+- I also kept the B-page examples, counterexamples, and false statements
+  `literature-derived` rather than `ai-generated`. That is deliberate: several
+  of those items are dependency targets inside the batch, and the schema forbids
+  an `ai-generated` statement from becoming a `deps` target.
+
+Narrowed or dropped claims:
+
+- None. I kept the batch-9 manifest claim set intact.
+- I did not convert any theorem/proposition/example item into a recorded-not-
+  proved fallback.
+
+Mechanical repair ledger:
+
+- The proof text needed substantial canonical precheck normalization after
+  authoring. I repaired only the batch-9 item files, chiefly by adopting the
+  checker’s required phase numbering and moving valid tags onto multiline step
+  openers where needed.
+- The proof-contract file was regenerated twice after those repairs to clear
+  stale step references and citation-use mismatches caused by the renumbering.
+
+Checks actually run on the final Friday, August 28, 2026 bytes:
+
+- `node tools/tsx-run.mjs tools/precheck.mts <all 73 batch-9 items with 61 proof-bearing>` -> `61 checked, 0 failing — all clean`
+- `node tools/proof-contract.mjs research/frontier-23-batch-9.proof-contracts.json --strict` -> `0 error(s), 0 warning(s), 61/61 item(s) checked`
+- `node tools/content-policy.mjs research/frontier-23-batch-9.pages.json` -> `content-policy: 73 scoped item(s), 0 error(s), 0 warning(s)`
+- `node tools/validate-plan.mjs research/plan-spec.json` -> `OK`, with only the standing repository-wide `redundant-prereq` advisories
+
+Extra tool-mode note:
+
+- I also reran `node tools/content-policy.mjs --manifest-only research/frontier-23-batch-9.pages.json` after authoring. It now hard-fails with `batch-item-already-exists` on every batch id. That is not a new mathematical blocker; it is the tool’s documented pre-authoring mint-check mode, which rejects already-authored ids by design.
+
+Blockers:
+
+- None within batch-9 scope.
+
 ---
 
 ## 7. Reharvest-1 repair on Friday, August 28, 2026

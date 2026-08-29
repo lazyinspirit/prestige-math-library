@@ -58,4 +58,4 @@ is a complex-linear isomorphism whose restriction to the canonical embedding of 
 
 3.2 Injectivity: for $A,B\in W^{\sigma}$ one has $\theta(1\otimes A+i\otimes B)=A+iB$ by step 2.1. If $A+iB=0$, applying $\sigma$ and using [L1] gives $A-iB=0$; subtracting the two identities gives $2iB=0$, hence $B=0$ and then $A=0$, so the tensor $1\otimes A+i\otimes B$ is zero. [step 1.2, step 2.1, L1, algebra]
 
-4.1 Steps 2.1, 3.1 and 3.2 make $\theta$ a complex-linear isomorphism, and its restriction to $\iota(W^{\sigma})$ is the inclusion because $\theta(1\otimes A)=A$. [step 2.1, step 3.1, step 3.2] ∎
+4.1 Steps 2.1, 3.1 and 3.2 make $\theta$ a complex-linear isomorphism, and its restriction to $\iota W^{\sigma}$ is the inclusion because $\theta(1\otimes A)=A$. [step 2.1, step 3.1, step 3.2] ∎

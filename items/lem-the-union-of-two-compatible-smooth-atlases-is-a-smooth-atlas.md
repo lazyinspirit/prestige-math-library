@@ -14,6 +14,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -32,24 +36,14 @@ to $\mathcal A$ or to $\mathcal B$ is again a smooth atlas on $M$.
 
 **Given:** Compatible smooth atlases $\mathcal A$ and $\mathcal B$ on $M$.
 
-[F1] A smooth atlas is a family of charts whose domains cover $M$ and whose
-members are pairwise smoothly compatible, and compatible atlases have every
-chart of one smoothly compatible with every chart of the other
-([[def-smooth-atlas]]).
+[F1] A smooth atlas is a family of charts whose domains cover $M$ and whose members are pairwise smoothly compatible, and compatible atlases have every chart of one smoothly compatible with every chart of the other ([[def-smooth-atlas]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The union of the two domain covers is a cover of $M$, so the family
-$\mathcal A\cup\mathcal B$ satisfies the covering condition. [F1, given]
+1.1 The union of the two domain covers is a cover of $M$, so the family [F1, given] $\mathcal A\cup\mathcal B$ satisfies the covering condition. [F1, given]
 
-2.1 Two charts both from $\mathcal A$ are compatible by the pairwise condition
-inside $\mathcal A$, and likewise two charts both from $\mathcal B$; a chart of
-$\mathcal A$ and a chart of $\mathcal B$ are compatible because the two atlases
-are compatible. [F1, given]
+1.2 Two charts both from $\mathcal A$ are compatible by the pairwise condition [F1, given] inside $\mathcal A$, and likewise two charts both from $\mathcal B$; a chart of $\mathcal A$ and a chart of $\mathcal B$ are compatible because the two atlases are compatible. [F1, given]
 
-3.1 Therefore every pair of members of $\mathcal A\cup\mathcal B$ is smoothly
-compatible and the union is a smooth atlas, the only condition beyond the two
-given atlas conditions being exactly the cross-chart compatibility checked in
-step 2.1. [F1, step 1.1, step 2.1] ∎
+2.1 Therefore every pair of members of $\mathcal A\cup\mathcal B$ is smoothly [F1, step 1.1, step 1.2] compatible, and step 1.1 gives the covering condition. Hence $\mathcal A\cup\mathcal B$ is a smooth atlas. [F1, step 1.1, step 1.2] ∎

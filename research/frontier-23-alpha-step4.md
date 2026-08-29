@@ -4,21 +4,22 @@ Command run: `node tools/validate-plan.mjs research/plan-spec.json`
 
 ## Inputs
 
-- `research/frontier-23-splice-refusals.json` currently contains no refusal edges.
-- `validate-plan` currently reports one live `undeclared-prereq`.
+- `research/frontier-23-splice-refusals.json` contains no refusal edges.
+- The current `validate-plan` run reaches `OK` and reports no live `undeclared-prereq`.
 
-## Edge adjudications
+## Resolved Step 4 edge on current disk
 
 ### 1. `characters-and-the-orthogonality-relations-examples -> the-complex-exponential-and-eulers-formula`
 
-- Evidence: the current B-page scaffold at `research/frontier-23-batch-4.pages.json:332-362` requires only `characters-and-the-orthogonality-relations`, but its first two examples genuinely cite `thm-complex-nth-roots-and-roots-of-unity` and `cor-sum-of-roots-of-unity` at `research/frontier-23-batch-4.pages.json:342-360`. Those cited items live on the later A page `the-complex-exponential-and-eulers-formula` at `research/plan-spec.json:53271-53520`. The complex-analysis routing note explicitly says a representation-theory block that wants explicit complex exponentials or polar-form arguments needs that page at `research/plan-complex-analysis-track.md:207-212`, while the RT-3 design still declares only `maschkes-theorem-and-complete-reducibility`, `inner-product-spaces-and-orthogonality`, and `tensor-products-of-modules` at `research/plan-algebra-track-expansion.md:1534-1539`.
-- Current page closure: `research/plan-spec.json:44127-44135` still gives the B page only its A companion as a direct prerequisite, so its closure does not reach `the-complex-exponential-and-eulers-formula`.
-- Disposition: owner-rerouted through published backward A-page results after the automated adjudicator correctly refused the forward edge.
-- Edit: the B page now requires `finite-fields-and-cyclotomic-extensions` (101.2) and `the-fundamental-theorem-of-algebra` (139), both backward from order 148. Its first cyclic-character example uses the earlier roots-of-unity cyclicity and separability results together with the published FTA; its table example obtains the vanishing root sum from the earlier Vieta theorem. The same edit was applied to `research/frontier-23-batch-4.pages.json` so the batch scaffold and canonical plan remain aligned.
-- Validation result: `node tools/validate-plan.mjs research/plan-spec.json` returns `OK` with no unresolved item dependency, forward reference, B-page dependency, or cycle.
+- Evidence: the owning scaffold already reroutes the B page through backward A pages. `research/frontier-23-batch-4.pages.json:337-340` and `research/plan-spec.json:44131-44134` require `finite-fields-and-cyclotomic-extensions`, `the-fundamental-theorem-of-algebra`, and `characters-and-the-orthogonality-relations`.
+- Evidence: the first example on that B page depends on `thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity`, `prop-the-roots-of-unity-in-a-field-form-a-finite-cyclic-group`, and `thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity` at `research/frontier-23-batch-4.pages.json:344-354`. Those item ids live on the earlier A pages `the-fundamental-theorem-of-algebra` (order `139` at `research/plan-spec.json:42179-42342`) and `finite-fields-and-cyclotomic-extensions` (order `101.2` at `research/plan-spec.json:27848-28126`), not on the later page `the-complex-exponential-and-eulers-formula` (order `189` at `research/plan-spec.json:53274-53287`).
+- Current page closure: from order `148`, the declared `requires` closure now reaches the two earlier A pages and the A companion, so the earlier forward target at order `189` is no longer load-bearing.
+- Disposition: a direct page edge to `the-complex-exponential-and-eulers-formula` would have been a forward edge and therefore an owner blocker; the current disk state correctly resolves the need by rerouting through earlier A-page results.
+- Edit: no content edit was needed in this turn. The authorized backward reroute is already present in both the scaffold and `research/plan-spec.json`.
+- Validation result: the current `node tools/validate-plan.mjs research/plan-spec.json` run reaches `OK`; no `undeclared-prereq` remains.
 - Blocker: none.
 
-## Post-edit validation
+## Validation
 
-- The owner-authorized backward reroute is present in both the plan and scaffold.
-- `node tools/validate-plan.mjs research/plan-spec.json` passes.
+- `node tools/validate-plan.mjs research/plan-spec.json` passes on current disk.
+- No remaining Step 4 splice-refusal or undeclared-prereq action is pending for `frontier-23`.

@@ -23,9 +23,10 @@ pipeline_run: null
 
 ## Definition
 
-Let $m\ge1$, let $W\subseteq\mathbb R^m$ be open and let $f:W\to\mathbb R^q$. The
-map $f$ is **smooth** (of class $C^\infty$) when every component
-$f_l:W\to\mathbb R$ is of class $C^k$ for every $k\in\mathbb N$, where scalar
+Let $m\ge1$, let $q\in\mathbb N_0$, let $W\subseteq\mathbb R^m$ be open and
+let $f:W\to\mathbb R^q$. The map $f$ is **smooth** (of class $C^\infty$) when
+every component $f_l:W\to\mathbb R$, $l<q$, is of class $C^k$ for
+every $k\in\mathbb N$, where scalar
 $C^k$ means that every iterated coordinate derivative through order $k$ exists
 and is continuous on $W$ ([[def-ck-and-multi-index-notation-in-several-variables]]).
 For $m=0$ the domain is the one-point space or the empty set and every map from
@@ -37,9 +38,7 @@ charts on $M$ ([[def-manifold-chart-coordinate-domain-and-coordinate-functions]]
 The charts are **smoothly compatible** when $U\cap V=\varnothing$, or when
 $n\ge1$ and both **transition maps**
 
-$$\psi\circ\varphi^{-1}:\varphi(U\cap V)\longrightarrow\psi(U\cap V),
-\qquad
-\varphi\circ\psi^{-1}:\psi(U\cap V)\longrightarrow\varphi(U\cap V)$$
+$$\psi\circ\varphi^{-1}:\varphi(U\cap V)\longrightarrow\psi(U\cap V), \qquad \varphi\circ\psi^{-1}:\psi(U\cap V)\longrightarrow\varphi(U\cap V)$$
 
 are smooth in the sense above. Both directions of the transition are part of the
 definition; in dimension zero overlapping charts have the same one-point image,
@@ -54,6 +53,8 @@ compatible.
 
 - **Both transition directions are required by definition.** A bijective map
   whose one direction is smooth need not have a smooth inverse
-  ([[cex-two-noncompatible-atlases-on-the-real-line]]); requiring both directions
-  outright makes compatibility genuinely symmetric, as
+  (for example, the two charts $(\mathbb R,\operatorname{id})$ and
+  $(\mathbb R,x\mapsto x^3)$ have reverse transition $x\mapsto x^{1/3}$, which
+  is not differentiable at $0$); requiring both directions outright makes
+  compatibility genuinely symmetric, as
   [[lem-smooth-chart-compatibility-is-symmetric-and-reflexive]] records.

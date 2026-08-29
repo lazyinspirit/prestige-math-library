@@ -10,6 +10,11 @@ provenance:
 deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-linear-subspace]
 justified_by: []
 aliases: []
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -29,5 +34,6 @@ The set $V^{G}$ is a linear subspace of $V$
 ([[def-linear-subspace]]): it contains $0_V$ because every operator
 $\rho(g)$ is linear, it is closed under addition and scalar multiplication
 for the same reason, and the defining equations are the required pointwise
-identities. When $G$ is finite, [[lem-averaging-operator-projects-onto-the-fixed-subspace]]
-shows that an explicit projection of $V$ has image exactly $V^{G}$.
+identities. When $G$ is finite and $k=\mathbb C$,
+[[lem-averaging-operator-projects-onto-the-fixed-subspace]] shows that an
+explicit projection of $V$ has image exactly $V^{G}$.

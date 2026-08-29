@@ -1,0 +1,101 @@
+{
+  "batch": "5",
+  "opened": [
+    "cex-a-tiny-residual-does-not-force-a-small-forward-error",
+    "cex-condition-number-depends-on-the-chosen-norm-and-scaling",
+    "cex-numerical-rank-depends-on-the-declared-tolerance",
+    "cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations",
+    "def-absolute-and-relative-forward-error-for-a-problem-map",
+    "def-condition-number-of-a-nonsingular-linear-system",
+    "def-forward-and-backward-stability-for-a-problem-family",
+    "def-frobenius-matrix-norm",
+    "def-induced-matrix-p-norm",
+    "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+    "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "ex-a-backward-stable-solution-of-an-ill-conditioned-system",
+    "ex-low-order-hilbert-matrices-have-large-condition-numbers",
+    "ex-two-by-two-systems-with-contrasting-condition-numbers",
+    "lem-product-of-one-plus-deltas-gives-theta-n",
+    "matrix-norms-condition-numbers-and-numerical-stability",
+    "matrix-norms-condition-numbers-and-numerical-stability-examples",
+    "prop-explicit-formulas-for-normwise-and-componentwise-backward-error",
+    "prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold",
+    "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices",
+    "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+    "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+    "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+    "thm-matrix-perturbation-bound-for-ax-equals-b",
+    "thm-normal-equations-square-the-spectral-condition-number",
+    "thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity",
+    "thm-residual-to-forward-error-bounds-for-linear-systems",
+    "thm-right-hand-side-perturbation-bound-for-ax-equals-b",
+    "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "def-frobenius-matrix-norm",
+      "location": "Remarks",
+      "defect": "false-claim",
+      "evidence": "The Remark says, “The Frobenius norm is not an induced matrix norm” and “is not induced by any vector p-norm on R^n for n≥2.” For a real 1-by-2 matrix A=(a b), however, ||A||_F=sqrt(a^2+b^2), while its induced vector 2-norm is sup_{||x||_2≤1}|ax_0+bx_1|=sqrt(a^2+b^2), by Cauchy–Schwarz with equality at x proportional to (a,b).",
+      "severity": "fatal"
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "location": "Definition",
+      "defect": "ill-formed",
+      "evidence": "The Definition restricts its parameter to “p∈Q with p≥1,” and its final Remark says it “inherits that restriction verbatim.” Nevertheless the Definition asserts that the explicit values “at p=1 and p=∞” are supplied later. The cited vector-norm definition confirms that ||·||_∞ is separately defined and that “the subscript ∞ is a name, not a number”; no induced matrix infinity norm is defined by this rational-p definition.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "location": "Statement",
+      "defect": "ill-formed",
+      "evidence": "The Statement declares “δ_1,…,δ_n” but assumes “|δ_i|≤u for every i<n” and forms “∏_{i<n}(1+δ_i).” The library’s indexing convention is zero-based (for example, the dot-product theorem uses x_0,…,x_{n-1}); at n=1 this product requires δ_0, which was never declared. Under one-based reading it instead omits δ_n. Thus the quantified product is not defined as written.",
+      "severity": "fatal"
+    },
+    {
+      "id": "prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold",
+      "location": "Proof step 2.1",
+      "defect": "false-claim",
+      "evidence": "Step 2.1 says, “A matrix B satisfies ||A-B||_2≤τ with rank k exactly when k satisfies σ_{k+1}≤τ.” Step 1.1 only gives the minimum distance among matrices of rank at most k, hence licenses existence of a suitable B, not this assertion for every rank-k B. Take A=diag(1,0), τ=0, k=1, and B=2diag(1,0). Here σ_2=0≤τ and rank B=1, but ||A-B||_2=1>0.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices",
+      "location": "Proof step 1.2",
+      "defect": "false-claim",
+      "evidence": "Step 1.2 asserts for every m-by-n matrix B that its smallest listed singular value τ_k equals min_{||x||_2=1}||Bx||_2. For a wide matrix this is false: let B=(1 0) in M_{1×2}(R). Then k=1 and τ_k=1, but the unit vector x=(0,1) has Bx=0, so the displayed minimum is 0. The proof later applies this false assertion to arbitrary B in proving local constancy.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices",
+      "location": "Proof step 2.2",
+      "defect": "unlicensed-inference",
+      "evidence": "Claim 2 requires ||B-A||_2<ε. Steps 1.4 and 2.2 construct B_ε and explicitly prove “||B_ε-A||_2=ε,” then say this “proves claim 2.” Equality does not imply the required strict inequality. Replacing the construction parameter by a smaller positive number would close this gap.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "location": "Facts & Assumptions [L2]",
+      "defect": "unlicensed-inference",
+      "evidence": "[L2] invokes the product lemma for a product of m factors. The cited current lemma declares δ_1,…,δ_n while its asserted product and hypotheses use i<n, leaving δ_0 undefined under the repository’s zero-based convention. Consequently that malformed dependency does not license [L2] as written; consistently declaring δ_0,…,δ_{m-1} would repair the citation path.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+      "location": "Statement",
+      "defect": "citation-inaccurate",
+      "evidence": "The Statement calls both norms “the induced norms of [[def-induced-matrix-p-norm]]” and asserts a formula for ||A||_∞. That cited Definition quantifies only rational p≥1 and explicitly says it retains only that restriction; ∞ is not rational, and the separately published vector infinity norm does not define the induced matrix infinity norm. Thus the cited definition does not license the infinity-norm half of this Statement.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-right-hand-side-perturbation-bound-for-ax-equals-b",
+      "location": "Remarks",
+      "defect": "false-claim",
+      "evidence": "The Remark says that taking b to be a right singular vector for the smallest singular value and δb the corresponding left singular vector makes both inequalities equalities. For A=diag(1,2), the smallest right and left singular vectors are both e_2. With b=δb=e_2, one has x=δx=(0,1/2), so ||δx||_2/||x||_2=1 while κ_2(A)||δb||_2/||b||_2=2. The stated bound is not an equality.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Read all 29 scoped current item/page sources and the cited/page-linked dependencies needed to test their definitions, proofs, computations, and citations. No coverage limitation."
+}

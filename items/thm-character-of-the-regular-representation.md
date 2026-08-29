@@ -13,6 +13,10 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -29,14 +33,11 @@ $$\chi_{\mathrm{reg}}(g)=\begin{cases}|G|,&g=1,\\0,&g\ne1.\end{cases}$$
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, an element $g\in G$, and the regular
-representation $\mathbb C[G]$.
+**Given:** A finite group $G$, an element $g\in G$, and the regular representation $\mathbb C[G]$.
 
-[F1] The regular representation acts on the basis $([h])_{h\in G}$ by
-$g\cdot[h]=[gh]$ ([[def-trivial-regular-and-permutation-representations]]).
+[F1] The regular representation acts on the basis $([h])_{h\in G}$ by $g\cdot[h]=[gh]$ ([[def-trivial-regular-and-permutation-representations]]).
 
-[F2] The character of a permutation representation counts fixed points
-([[thm-character-of-a-permutation-representation-counts-fixed-points]]).
+[F2] The character of a permutation representation counts fixed points ([[thm-character-of-a-permutation-representation-counts-fixed-points]]).
 
 [A1] In a group, $gx=x$ holds if and only if $g=1$, by cancellation.
 
@@ -44,11 +45,6 @@ $g\cdot[h]=[gh]$ ([[def-trivial-regular-and-permutation-representations]]).
 
 **Proof technique:** direct.
 
-1.1 By [F1], the regular action is the permutation representation of the
-left $G$-set $G$ with basis indexed by the group elements. By [F2],
-$\chi_{\mathrm{reg}}(g)$ is the number of $h\in G$ with $g\cdot h=h$. [F1,
-F2, given]
+1.1 By [F1], the regular action is the permutation representation of the left $G$-set $G$ with basis indexed by the group elements. By [F2], $\chi_{\mathrm{reg}}(g)$ is the number of $h\in G$ with $g\cdot h=h$. [F1, F2, given]
 
-2.1 By [A1], $gh=h$ has a solution in $G$ only when $g=1$, in which case
-every $h$ is fixed. Hence the count of step 1.1 is $|G|$ for $g=1$ and $0$
-for $g\ne1$. [A1, step 1.1, algebra] ∎
+2.1 By [A1], $gh=h$ has a solution in $G$ only when $g=1$, in which case every $h$ is fixed. Hence the count of step 1.1 is $|G|$ for $g=1$ and $0$ for $g\ne1$. [A1, step 1.1, algebra] ∎

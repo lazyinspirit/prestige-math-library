@@ -34,9 +34,10 @@ A **chart** on $M$ is a pair $(U,\varphi)$ in which:
   the **coordinate map**; the open set $\widehat U=\varphi(U)$ is the **chart
   image**.
 
-For $n\ge1$ and $1\le i\le n$, the $i$-th **coordinate function** is
+For $n\ge1$ and $i<n$, the $i$-th **coordinate function** is
 $$x^i:=\pi_i\circ\varphi:U\longrightarrow\mathbb R,\qquad x^i(p)=\varphi(p)_i,$$
-so that $\varphi=(x^1,\ldots,x^n)$. A chart is often written $(U,(x^1,\ldots,x^n))$
+so that $\varphi=(x^0,\ldots,x^{n-1})$. A chart is often written
+$(U,(x^0,\ldots,x^{n-1}))$
 and the coordinates are then used to name points of $U$. In dimension zero the
 coordinate map is the unique map to $\{0\}$ and there are no coordinate functions.
 
@@ -44,7 +45,8 @@ coordinate map is the unique map to $\{0\}$ and there are no coordinate function
 
 - **The domain is open in the manifold, the image is open in Euclidean space.**
   The two openness statements are separate hypotheses; in particular the domain
-  $U$ need not itself be (homeomorphic to) an open subset of $\mathbb R^n$. The
+  $U$ need not itself be an open subset of $\mathbb R^n$, although the chart
+  map makes it homeomorphic to the Euclidean open set $\widehat U$. The
   companion false statement
   [[fs-a-chart-domain-is-an-open-subset-of-euclidean-space]] records the failure
   to keep them apart.

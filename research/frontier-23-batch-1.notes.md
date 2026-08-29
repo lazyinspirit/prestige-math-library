@@ -153,3 +153,55 @@ Date: Friday, August 28, 2026.
   Result: **pass** — `504 scoped item(s), 0 error(s), 0 warning(s)`.
   `node tools/validate-plan.mjs research/plan-spec.json`
   Result: **pass** — the run ends `OK` with only the standing repository-wide `redundant-prereq` advisories outside batch `1`.
+
+## Step-5 authoring
+
+Authored page files:
+
+- `library/group-theory/decision-problems-for-finitely-presented-groups.md`
+- `library/group-theory/decision-problems-for-finitely-presented-groups-examples.md`
+- `library/group-theory/graphs-of-groups-and-bass-serre-theory.md`
+- `library/group-theory/graphs-of-groups-and-bass-serre-theory-examples.md`
+
+Authored item ids:
+
+- GT-7 A page: `def-finite-alphabet-encoding-and-algorithm`, `def-recursive-and-recursively-enumerable-languages`, `def-recursive-and-finite-group-presentations`, `lem-trivial-words-in-a-recursively-presented-group-are-recursively-enumerable`, `def-word-problem-for-a-fixed-finite-presentation`, `def-uniform-word-problem-for-finite-presentations`, `prop-solvability-of-the-word-problem-is-independent-of-a-finite-generating-set`, `thm-word-problem-for-free-groups`, `rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form`, `thm-word-problem-for-finitely-generated-abelian-groups`, `thm-word-problem-for-free-products-and-amalgams-with-decidable-membership`, `def-conjugacy-problem-for-a-finitely-generated-group`, `def-isomorphism-problem-for-a-class-of-finite-presentations`, `def-markov-property-of-finitely-presented-groups`, `rem-novikov-boone-undecidability-of-the-word-problem`, `rem-adian-rabin-undecidability-for-markov-properties`, `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations`, `rem-undecidability-of-the-isomorphism-problem-for-finitely-presented-groups`, `rem-groups-with-unsolvable-conjugacy-problem`, `def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation`, `lem-minimal-algebraic-relator-area-exists`, `prop-recursive-dehn-function-implies-solvable-word-problem`, `fs-every-finitely-presented-group-has-solvable-word-problem`, `fs-recursively-enumerable-trivial-words-form-a-decision-algorithm`, `fs-unsolvable-word-problem-means-no-word-can-be-decided`, `fs-the-novikov-boone-theorem-proves-the-uniform-problem-only`, `fs-a-tietze-equivalent-presentation-can-change-solvability-of-the-word-problem`.
+- GT-7 B page: `ex-word-problem-by-free-reduction`, `ex-word-problem-in-a-finite-cyclic-presentation`, `ex-conjugacy-in-a-free-group-by-cyclic-reduction`, `ex-todd-coxeter-as-a-partial-coset-enumeration-procedure`, `ex-an-algebraic-relator-area-computation`, `cex-enumerating-relator-consequences-does-not-decide-nontriviality`.
+- GT-15 A page: `def-graph-of-groups`, `def-maximal-subtree-of-a-connected-graph`, `def-path-group-of-a-graph-of-groups`, `def-fundamental-group-of-a-graph-of-groups-relative-to-a-maximal-tree`, `thm-fundamental-groups-from-different-maximal-trees-are-isomorphic`, `def-reduced-graph-of-groups-word`, `thm-normal-form-for-fundamental-groups-of-graphs-of-groups`, `cor-vertex-groups-embed-in-the-graph-of-groups-fundamental-group`, `def-bass-serre-tree-of-a-graph-of-groups`, `lem-the-bass-serre-coset-graph-is-a-tree`, `thm-fundamental-group-acts-on-its-bass-serre-tree`, `def-quotient-graph-of-groups-from-a-tree-action`, `lem-boundary-monomorphisms-from-stabilizers-are-well-defined`, `thm-bass-serre-structure-theorem`, `thm-one-segment-graph-of-groups-is-an-amalgamated-free-product`, `thm-one-loop-graph-of-groups-is-an-hnn-extension`, `cor-a-group-acting-freely-without-inversions-on-a-tree-is-free`, `cor-fundamental-group-of-a-graph-with-trivial-groups-is-free`, `thm-kurosh-subgroup-theorem`, `thm-grushko-decomposition-and-rank-additivity`, `rem-stallings-theorem-on-ends-and-splittings`, `fs-the-fundamental-group-of-a-graph-of-groups-is-a-topological-fundamental-group-by-definition`, `fs-vertex-stabilizers-are-literally-the-chosen-vertex-groups-without-conjugacy`, `fs-every-tree-action-is-a-free-action`, `fs-the-quotient-graph-determines-the-acting-group-without-stabilizer-data`, `fs-kurosh-says-every-subgroup-of-a-free-product-is-free`.
+- GT-15 B page: `ex-bass-serre-tree-of-a-free-product`, `ex-bass-serre-tree-of-an-amalgamated-free-product`, `ex-bass-serre-tree-of-a-baumslag-solitar-group`, `ex-a-free-action-and-the-quotient-graph-basis`, `ex-kurosh-decomposition-of-a-subgroup`, `ex-graph-of-finite-groups-giving-a-virtually-free-group`, `cex-the-underlying-quotient-graph-does-not-determine-the-group`.
+
+Proof-contract output written:
+
+- `research/frontier-23-batch-1.proof-contracts.json` covering the 43 proof-bearing batch-1 items only, with regenerated citations and derivations from the authored Facts and numbered proof rows.
+
+Provenance rationale:
+
+- Structural and classical statement items on both A pages were tagged `literature-derived`; their local proofs or verifications are new write-ups and were tagged `ai-generated`.
+- The exact cited-only boundary carriers `rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form`, `rem-novikov-boone-undecidability-of-the-word-problem`, `rem-adian-rabin-undecidability-for-markov-properties`, `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations`, `rem-undecidability-of-the-isomorphism-problem-for-finitely-presented-groups`, `rem-groups-with-unsolvable-conjugacy-problem`, and `rem-stallings-theorem-on-ends-and-splittings` were written as `proved_here: false` remarks with the required `external_dependency` records rather than as pseudo-proved theorem shells.
+- The B-page examples and counterexamples are concrete local witnesses not intended as dependency targets, so they were tagged `ai-generated` with the required `generation.role`. The `fs-` items were kept `ai-altered`, since false statements are not allowed generated-statement targets under `content-policy`.
+
+Narrowed or clarified claims:
+
+- `thm-word-problem-for-free-products-and-amalgams-with-decidable-membership` was written with the effective content of the membership hypothesis explicit: the proof computes canonical factor and coset representatives by shortlex search, rather than silently assuming transversals.
+- `thm-grushko-decomposition-and-rank-additivity` was authored at the factor-matching / free-rank-invariance level that the local Kurosh route directly supports. I did not add a separate minimal-generator-count formula that would have required a stronger local infrastructure than this page currently establishes.
+- `ex-graph-of-finite-groups-giving-a-virtually-free-group` was narrowed from a would-be general virtually-free statement to the concrete `C_2 * C_3` one-segment example, so the written verification matches the item kind and the dependencies actually cited.
+
+Blockers and residual notes:
+
+- No batch-1 gate blocker remains on the authored files themselves.
+- Repo-wide `depcheck` is still red on the standing unrelated item `items/def-exactness-at-a-node.md` (`[justification-backward]` against `thm-the-subobject-inequalities-underlying-exactness`). I did not touch that out-of-batch file.
+
+Checks run after authoring:
+
+- `node tools/tsx-run.mjs tools/precheck.mts ...batch-1 proof-bearing item paths...`
+  - Pass after one canonical local repair to `thm-fundamental-group-acts-on-its-bass-serre-tree`; rerun result: `43 checked, 0 failing — all clean`.
+- `node tools/regen-contract-entries.mjs research/frontier-23-batch-1.proof-contracts.json ...43 ids...`
+  - Pass: regenerated `43`, skipped `0`.
+- `node tools/proof-contract.mjs research/frontier-23-batch-1.proof-contracts.json --strict`
+  - Pass: `0 error(s), 0 warning(s), 43/43 item(s) checked`.
+- `node tools/content-policy.mjs research/frontier-23-batch-1.pages.json`
+  - Pass: `66 scoped item(s), 0 error(s), 0 warning(s)`.
+- `node tools/validate-plan.mjs research/plan-spec.json`
+  - Pass: `OK`, with only the repository's standing `redundant-prereq` advisories outside this batch.
+- `node tools/depcheck.mjs --quiet`
+  - Not clean, but failure is outside batch `1`: the standing unrelated error is `items/def-exactness-at-a-node.md` with `[justification-backward]`; batch-1 authored items did not introduce a new reported depcheck error.

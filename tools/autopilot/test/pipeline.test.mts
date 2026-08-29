@@ -181,6 +181,57 @@ test('a unit enters the next pipelined stage while a sibling is still in flight 
   release();
 });
 
+test('artifact recovery starts while a sibling author is still in flight', async () => {
+  // A successful process receipt without its required artifact is abandoned
+  // work once that unit's process has drained. It must not wait behind an
+  // unrelated slow sibling before entering the bounded recovery loop.
+  const fx = fixture();
+  const stages: any = pipelinedStages(fx);
+  stages[0].artifacts = (_ctx: any, u: string) => `artifact-${u}.json`;
+  stages[0].pattern = /^worker-(?:a|recover)/;
+  stages[0].maxFixRounds = 2;
+  stages[0].onGateFailure = ({ executor, stage, round, failure }: any) => {
+    for (const u of failure.units ?? []) {
+      executor.start(stage, {
+        role: 'worker', label: `recover${u}-${round}`, job: 'authoring', covers: [u],
+      });
+    }
+  };
+  const ex = makeExecutor(fx, stages, { hang: true });
+
+  cover(fx, 'worker', 'a1', ['1']); // process finished, artifact deliberately absent
+  ex.inflight.set('s1:a2', {
+    promise: new Promise(() => {}),
+    meta: { stage: 's1', role: 'worker', label: 'a2', covers: ['2'], attempt: 1 },
+    startedAt: Date.now(),
+  });
+
+  assert.equal(await ex.tick(), 'working');
+  assert.deepEqual(inflightAt(ex, 's1').map((d: any) => d.meta.label).sort(), ['a2', 'recover1-1'],
+    'unit 1 recovery must overlap the still-running unit 2 author');
+  assert.equal(ex.state.data.stages.s1.fixRounds, 1);
+});
+
+test('a recovered unit retires its exhausted-lane blocker before sibling units finish', async () => {
+  const fx = fixture();
+  const stages: any = pipelinedStages(fx);
+  stages[0].artifacts = (_ctx: any, u: string) => `artifact-${u}.json`;
+  const ex = makeExecutor(fx, stages, { hang: true });
+
+  cover(fx, 'worker', 'a1', ['1']);
+  writeFileSync(join(fx.repo, 'artifact-1.json'), '{}\n');
+  ex.inflight.set('s1:a2', {
+    promise: new Promise(() => {}),
+    meta: { stage: 's1', role: 'worker', label: 'a2', covers: ['2'], attempt: 1 },
+    startedAt: Date.now(),
+  });
+  ex.state.addBlocker('s1', 'stage s1: a1 failed 3x (covers 1)');
+
+  assert.equal(await ex.tick(), 'working');
+  assert.equal(ex.state.data.blockers.length, 0,
+    'a replacement receipt plus artifact makes the old unit blocker false immediately');
+});
+
 test('cohort: a stage whose dispatch covers several units waits for all of them', async () => {
   // A group Alpha owns up to three batches and its one result file declares
   // coverage of all of them. Starting it when two of the three are done would

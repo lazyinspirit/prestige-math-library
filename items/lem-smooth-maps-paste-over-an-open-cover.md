@@ -36,28 +36,18 @@ smooth.
 
 ## Facts & Assumptions
 
-**Given:** An open cover $(U_i)_{i\in I}$ of $M$ and smooth maps $F_i:U_i\to N$
-agreeing on all overlaps.
+**Given:** An open cover $(U_i)_{i\in I}$ of $M$ and smooth maps $F_i:U_i\to N$ agreeing on all overlaps.
 
-[L1] A family of continuous maps on an open cover that agree on overlaps
-determines a unique continuous map on the whole space
-([[lem-continuity-is-local-and-pastes]]).
+[L1] A family of continuous maps on an open cover that agree on overlaps determines a unique continuous map on the whole space ([[lem-continuity-is-local-and-pastes]]).
 
-[L2] A continuous map into $N$ is smooth exactly when its restriction to every
-member of an open cover is smooth
-([[prop-smoothness-is-local-on-the-source]]).
+[L2] A continuous map into $N$ is smooth exactly when its restriction to every member of an open cover is smooth ([[prop-smoothness-is-local-on-the-source]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Define $F:M\to N$ by $F(x):=F_i(x)$ whenever $x\in U_i$. The overlap
-hypothesis makes this single-valued, and each $F_i$ is continuous because
-smooth maps are continuous, so [L1] pastes the pieces into a unique continuous
-map $F$ with $F|_{U_i}=F_i$ for every $i$. [given, L1]
+1.1 Define $F:M\to N$ by $F(x):=F_i(x)$ whenever $x\in U_i$. The overlap [given, L1] hypothesis makes this single-valued, and each $F_i$ is continuous because smooth maps are continuous, so [L1] pastes the pieces into a unique continuous map $F$ with $F|_{U_i}=F_i$ for every $i$. [given, L1]
 
-1.2 Every restriction $F|_{U_i}=F_i$ is smooth by the hypothesis, and $F$ is
-continuous by step 1.1, so [L2] makes $F$ smooth. [given, L2, step 1.1]
+2.1 Every restriction $F|_{U_i}=F_i$ is smooth by the hypothesis, and $F$ is [given, L2, step 1.1] continuous by step 1.1, so [L2] makes $F$ smooth. [given, L2, step 1.1]
 
-2.1 The uniqueness and the defining restriction property come from step 1.1,
-and smoothness from step 1.2, which proves the claim. [step 1.1, step 1.2] ∎
+3.1 The uniqueness and the defining restriction property come from step 1.1, [step 1.1, step 2.1] and smoothness comes from step 2.1. This proves the claim. [step 1.1, step 2.1] ∎

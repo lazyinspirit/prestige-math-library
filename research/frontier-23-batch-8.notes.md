@@ -256,8 +256,123 @@ If a later runner has working network resolution, the next exact actions are:
 
 ## Step-3 fix pass
 
-Fix pass run on August 29, 2026 against the current batch-8 scaffold bytes and
+Fix pass run on August 28, 2026 against the current batch-8 scaffold bytes and
 the stable findings in `research/frontier-23-alpha-d-step3-scaffold-review.md`.
+
+## Step-5 authoring
+
+Authoring completed on Friday, August 28, 2026 for the full batch-8 scope:
+
+- A page items:
+  `thm-the-subobject-inequalities-underlying-exactness`,
+  `def-exactness-at-a-node`,
+  `thm-the-arrow-theoretic-criterion-for-exactness`,
+  `def-exact-sequence-and-short-exact-sequence-in-an-abelian-category`,
+  `thm-a-short-exact-sequence-is-a-kernel-cokernel-pair`,
+  `thm-degenerate-exactness-criteria`,
+  `thm-exactness-is-self-dual`,
+  `def-split-short-exact-sequence-in-an-abelian-category`,
+  `thm-splitting-lemma-in-an-abelian-category`,
+  `fs-a-short-exact-sequence-splits-whenever-its-middle-object-is-isomorphic-to-the-biproduct-of-the-outer-two`,
+  `def-member-of-an-object`,
+  `def-equivalence-of-members`,
+  `prop-member-equivalence-is-reflexive-and-symmetric`,
+  `thm-member-equivalence-is-transitive`,
+  `thm-members-modulo-equivalence-correspond-to-subobjects`,
+  `prop-each-object-has-a-zero-member-and-each-member-has-a-negative`,
+  `prop-a-morphism-carries-members-to-members-and-preserves-equivalence`,
+  `thm-chasing-rule-monicity-detected-by-members`,
+  `thm-chasing-rule-monicity-by-member-cancellation`,
+  `thm-chasing-rule-epimorphy-detected-by-members`,
+  `thm-chasing-rule-a-zero-arrow-is-detected-by-members`,
+  `thm-chasing-rule-exactness-detected-by-members`,
+  `thm-chasing-rule-the-subtraction-surrogate`,
+  `rem-what-the-subtraction-rule-does-not-say`,
+  `cex-the-members-of-an-object-do-not-form-a-group`,
+  `cex-two-morphisms-agreeing-on-every-member-need-not-be-equal`,
+  `rem-the-cost-of-the-member-calculus`,
+  `thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact`,
+  `thm-a-cartesian-square-induces-an-isomorphism-on-the-kernels-of-its-parallel-legs`,
+  `thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian`,
+  `thm-epimorphisms-in-an-abelian-category-are-universal`,
+  `thm-the-covering-criterion-for-exactness`,
+  `rem-the-covering-criterion-and-the-member-calculus-are-the-same-tool`,
+  `thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each`,
+  `cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact`,
+  `thm-exactness-of-kernel-and-cokernel-sequences-under-endpoint-hypotheses`,
+  `thm-the-kernel-cokernel-sequence-of-a-composite`,
+  `def-comember-and-the-dual-calculus`,
+  `rem-two-routes-to-every-dual-statement`,
+  `thm-hom-is-left-exact-in-each-variable`,
+  `cex-hom-is-not-exact`,
+  `thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact`,
+  `thm-ab5-is-equivalent-to-exactness-of-filtered-colimits`,
+  `fs-two-morphisms-that-agree-on-every-member-are-equal`,
+  `fs-the-members-of-an-object-form-an-abelian-group`,
+  `fs-member-equivalence-is-transitive-in-any-pointed-category-with-pullbacks`,
+  `fs-the-kernel-row-of-a-morphism-of-short-exact-sequences-is-short-exact`,
+  `fs-the-subtraction-rule-produces-a-unique-member`,
+  `fs-exactness-can-be-defined-without-first-producing-a-canonical-monomorphism`.
+- B page items:
+  `ex-members-of-an-abelian-group-correspond-to-its-subgroups`,
+  `ex-an-ordinary-element-as-the-member-from-the-integers`,
+  `cex-a-general-member-of-an-abelian-group-need-not-come-from-an-element`,
+  `ex-a-member-chase-verifying-monicity`,
+  `ex-the-covering-criterion-checked-in-abelian-groups`,
+  `ex-the-kernel-cokernel-sequence-of-a-composite-of-module-maps`,
+  `cex-a-non-split-short-exact-sequence-of-abelian-groups`,
+  `ex-the-splitting-lemma-instantiated-at-the-published-module-theorem`,
+  `ex-the-kernel-row-failure-for-multiplication-by-two-computed`.
+- Page files:
+  `library/category-theory/exactness-and-the-member-calculus.md`,
+  `library/category-theory/exactness-and-the-member-calculus-examples.md`.
+- Proof-contract artifact:
+  `research/frontier-23-batch-8.proof-contracts.json`.
+
+### Provenance rationale
+
+- Literature-derived statements were used for the sourced Mac Lane / Stacks /
+  Freyd / Weibel items whose exact claims are standard source-backed results:
+  exactness definitions and criteria, the six member rules, the pullback exact
+  sequence criterion, the covering criterion, the split-sequence theorem, the
+  kernel/cokernel exactness lemmas, Hom left exactness, and the AB5 exact
+  filtered-colimit equivalence.
+- AI-altered statements were used where the batch deliberately packages or
+  sharpens sourced material into the library's exact house claim: combined
+  tables of degenerate exactness criteria, the kernel-row/cokernel-row summary,
+  the page remarks, the explicit false statements, and the categorical-to-
+  module example wording.
+- Proof provenance stays `ai-generated` or `ai-altered` according to what was
+  actually written locally. No new `verification.judge` records were added to
+  any draft item.
+
+### Narrowed or dropped claims
+
+- No manifest item was dropped.
+- No planned page split was needed: the A page remained at 49 items.
+- The member-calculus cost remark stays narrowed exactly as required by the
+  design correction: choice-free and smallness-free are recorded, but no
+  constructivity claim is asserted.
+
+### Blockers
+
+- No authoring blocker remains on the final batch-8 bytes.
+- `proof-contract --strict` is green with one advisory warning only:
+  `shotgun-bracket` on
+  `thm-a-short-exact-sequence-is-a-kernel-cokernel-pair`. This is not a gate
+  error and was left factual rather than cosmetically rewritten.
+
+### Checks run on final bytes
+
+- `node tools/tsx-run.mjs tools/precheck.mts $(jq -r '.[] | .items[].id' research/frontier-23-batch-8.pages.json | sed 's#^#items/#; s#$#.md#' | xargs)`  
+  Result: `48 checked, 0 failing — all clean`.
+- `node tools/validate-plan.mjs research/plan-spec.json`  
+  Result: `OK`, with existing run-wide `redundant-prereq` warnings outside this
+  batch unchanged.
+- `node tools/content-policy.mjs research/frontier-23-batch-8.pages.json`  
+  Result: `content-policy: 58 scoped item(s), 0 error(s), 0 warning(s)`.
+- `node tools/proof-contract.mjs research/frontier-23-batch-8.proof-contracts.json --strict`  
+  Result: `0 error(s), 1 warning(s), 48/48 item(s) checked`.
 No manifest or coverage edit was needed in this pass; the reviewed repairs are
 already present on disk.
 
@@ -277,13 +392,13 @@ already present on disk.
   `cex-a-non-split-short-exact-sequence-of-abelian-groups` record depends only
   on the local split-sequence items plus
   `thm-abelian-groups-form-an-abelian-category`. A read-only dependency scan on
-  August 29, 2026 found `0` surviving cross-page B-item dependency edges in the
+  August 28, 2026 found `0` surviving cross-page B-item dependency edges in the
   batch manifest. Changed scaffold record:
   `research/frontier-23-batch-8.pages.json` (review repair accepted; unchanged
   in this pass).
 
 - Source verification — `research/frontier-23-batch-8.coverage.json` remains
-  fetch-verified at all four recorded URLs. On August 29, 2026, the Stacks,
+  fetch-verified at all four recorded URLs. On August 28, 2026, the Stacks,
   Weibel, and Cornell URLs opened directly in the web reader; the Mac Lane
   recorded URL was re-verified through the live MIT directory index, which
   still lists `maclane-categories.pdf`. Changed scaffold record:

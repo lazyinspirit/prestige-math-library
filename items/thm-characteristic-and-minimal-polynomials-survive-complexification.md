@@ -13,6 +13,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -46,7 +50,7 @@ where the minimal polynomial of $T$ is regarded as an element of $\mathbb R[x]\s
 
 **Proof technique:** direct.
 
-1.1 Choose an ordered real basis $\mathcal B=(v_1,\ldots,v_n)$ of $V$; by [L1], $(\iota(v_1),\ldots,\iota(v_n))$ is an ordered complex basis of $V_{\mathbb C}$, and by [L2] the matrix of $T_{\mathbb C}$ in it equals the matrix $A=[T]_{\mathcal B}$, because $T_{\mathbb C}(\iota(v_j))=\iota(Tv_j)$. [L1, L2]
+1.1 Choose an ordered real basis $\mathcal B=(v_1,\ldots,v_n)$ of $V$; by [L1], $(\iota v_1,\ldots,\iota v_n)$ is an ordered complex basis of $V_{\mathbb C}$, and by [L2] the matrix of $T_{\mathbb C}$ in it equals the matrix $A=[T]_{\mathcal B}$, because $T_{\mathbb C}(\iota v_j)=\iota Tv_j$. [L1, L2]
 
 2.1 By [L3], $\chi_T$ is the characteristic polynomial of $A$ over $\mathbb R$ and $\chi_{T_{\mathbb C}}$ is the characteristic polynomial of the same matrix $A$ over $\mathbb C$; the two polynomials have the same coefficients, so $\chi_{T_{\mathbb C}}=\chi_T$. [step 1.1, L3]
 

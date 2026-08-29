@@ -25,8 +25,7 @@ import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
 
-const DEEPSEEK_XHIGH_1M = MODEL_PROFILE_NAMES.deepseekXhigh1m;
-const GPT54_XHIGH_1M = MODEL_PROFILE_NAMES.gpt54Xhigh1m;
+const GPT54_HIGH_1M = MODEL_PROFILE_NAMES.gpt54High1m;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -1846,7 +1845,7 @@ export const stages = [
     id: '5-author',
     label: 'authoring',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
-      ? DEEPSEEK_XHIGH_1M
+      ? GPT54_HIGH_1M
       : undefined,
     // THE LARGEST WIN. A batch whose authoring is finished starts its reader
     // while the other batches are still being written: authors run to six hours
@@ -1854,7 +1853,7 @@ export const stages = [
     pipeline: 'read',
     role: 'beta',
     units: batches,
-    pattern: resultPattern('beta', 'author-batch-\\d+'),
+    pattern: resultPattern('beta', '(?:author-batch-\\d+|author-recover-\\d+(?:-\\d+)?)'),
     labelFor: (u) => `author-batch-${u}`,
     // A zero-exit author result is only a process receipt. Frontier 21 batch 8
     // explicitly stopped after one of two pairs and omitted its contract, yet
@@ -1904,15 +1903,17 @@ export const stages = [
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
       // Artifact accounting now keeps a partial zero-exit author covered but
       // incomplete. Resume exactly the batches whose required contracts never
-      // landed; a successful continuation makes the ordinary stage complete
-      // without manufacturing a second coverage claim.
+      // landed. The executor names only covered, artifact-incomplete units that
+      // are no longer active, so one slow ordinary author cannot suppress or
+      // duplicate recovery for its completed siblings.
       if (failure.id === 'stage-stalemate') {
-        const missing = batches(ctx).filter((u: any) => !existsSync(join(ctx.repo,
+        const requested = Array.isArray(failure.units) ? failure.units.map(String) : batches(ctx).map(String);
+        const missing = requested.filter((u: any) => !existsSync(join(ctx.repo,
           'research', `${ctx.run}-batch-${u}.proof-contracts.json`)));
         for (const u of missing) {
           executor.start(stage, {
             role: 'beta', label: `author-recover-${u}-${round}`,
-            job: 'authoring', covers: [], brief: 'briefs/authoring.md',
+            job: 'authoring', covers: [u], brief: 'briefs/authoring.md',
             task: [`research/${ctx.run}-beta-${u}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
             timeout: 21600,
           });
@@ -2065,10 +2066,28 @@ export const stages = [
           let malformed = false;
           try {
             const report = JSON.parse(readFileSync(findings, 'utf8'));
-            malformed = !Array.isArray(report?.findings)
-              || report.findings.some((finding: any) => finding?.subject_type === 'published-dependency'
-                && (typeof finding?.id !== 'string'
-                  || !existsSync(join(ctx.repo, 'items', `${finding.id}.md`))));
+            const manifest = JSON.parse(readFileSync(join(ctx.repo, 'research',
+              `${ctx.run}-batch-${unit}.pages.json`), 'utf8'));
+            const assignedItems = new Set((Array.isArray(manifest) ? manifest : [])
+              .flatMap((page: any) => (page?.items ?? []).map((item: any) => String(item?.id ?? item))));
+            const assignedPages = new Set((Array.isArray(manifest) ? manifest : [])
+              .map((page: any) => String(page?.id ?? '')).filter(Boolean));
+            // The output schema proves only that these are strings. Routing
+            // needs carrier identities: invented obligation labels such as
+            // R3-U1 are neither a page nor an item, and sending them straight
+            // to the mechanical split only retries the same deterministic
+            // failure until its lane budget is exhausted.
+            const badCarrier = (finding: any) => {
+              if (typeof finding?.id !== 'string') return true;
+              if (finding.subject_type === 'in-flight-item') return !assignedItems.has(finding.id);
+              if (finding.subject_type === 'page') return !assignedPages.has(finding.id);
+              if (finding.subject_type === 'published-dependency') {
+                return !existsSync(join(ctx.repo, 'items', `${finding.id}.md`));
+              }
+              return true;
+            };
+            malformed = ![String(unit), `${ctx.run}-batch-${unit}`].includes(String(report?.batch))
+              || !Array.isArray(report?.findings) || report.findings.some(badCarrier);
             const prePath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-pre.json`);
             const postPath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-post.json`);
             if (existsSync(prePath) && existsSync(postPath)) {
@@ -2094,14 +2113,18 @@ export const stages = [
               '# Step 6 reader routing-artifact correction',
               '',
               `Correct research/${ctx.run}-reader-findings-${unit}.json for batch ${unit}.`,
+              `Set the top-level \`batch\` field to exactly "${unit}"; it identifies this batch, not the run number.`,
               'Preserve every genuine uneditable finding and the existing reader report.',
               'The finding `id` is NOT an obligation label or a newly invented finding key.',
               'For `published-dependency`, `id` must be the exact published item id:',
               'the filename stem under items/ for the carrier named by `location`.',
               'For `in-flight-item` or `page`, `id` must likewise be the exact assigned carrier id.',
               '`consumer_id` must be an assigned item whose dependency closure reaches that published id.',
-              'Remove a finding if its in-flight item or page changed since the pre-reader hash;',
-              'that carrier is already routed as touched and cannot also remain an open finding.',
+              'Remove a finding if its in-flight item or page changed since the pre-reader hash.',
+              'Compare the COMPLETE JSON fingerprint at pre.hashes[id] versus post.hashes[id]',
+              '(or pre.page_hashes[id] versus post.page_hashes[id]), not only item_sha256/file_sha256.',
+              'A changed contract_sha256 or manifest_sha256 also makes the carrier touched.',
+              'A touched carrier is already routed mechanically and cannot remain an open finding.',
               'Write the corrected schema-conforming JSON to the same named result artifact.',
               '',
             ].join('\n'));
@@ -2190,7 +2213,7 @@ export const stages = [
     id: '7-judge',
     label: 'one persistent Terra judge per A/B pair, with the group Alphas reading alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? GPT54_XHIGH_1M
+      ? GPT54_HIGH_1M
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
@@ -3532,7 +3555,7 @@ export const stages = [
 // fall back to their role's ordinary lane. Tool plans remain deterministic.
 for (const stage of stages) {
   if (/^(?:9|10)-/.test(stage.id)) {
-    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : DEEPSEEK_XHIGH_1M;
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : GPT54_HIGH_1M;
   }
 }
 

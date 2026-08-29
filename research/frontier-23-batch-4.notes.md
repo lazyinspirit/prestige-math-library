@@ -249,3 +249,133 @@ the coverage URLs need mathematical replacement.
   harvest-backs those bridge items, extends the Etingof locator to Section
   `3.3`, and preserves the superseded Webb CSE URL as `original_url` while the
   live Minnesota-hosted PDF carries the current `url`.
+
+## Step-5 authoring
+
+### Authored artifacts
+
+Authored all 47 planned items and both pages, all `status: draft`:
+
+- A page `characters-and-the-orthogonality-relations` (30 items), file
+  `library/abstract-algebra/characters-and-the-orthogonality-relations.md`.
+- B page `characters-and-the-orthogonality-relations-examples` (17 items),
+  file
+  `library/abstract-algebra/characters-and-the-orthogonality-relations-examples.md`.
+- All 47 item files in `items/`, ids unchanged from the scaffold manifest:
+  the 1 remark, 9 definitions, 8 theorems, 2 lemmas, 2 propositions, 8
+  corollaries, 12 examples, and 5 false statements planned for batch 4. The
+  four batch-local bridge examples added at the Step-3 fix pass (cyclic
+  characters, `S_3` degrees, `A_4` Klein-four/classes, `S_4` classes) are
+  authored here and homed on the B page.
+
+Written `research/frontier-23-batch-4.proof-contracts.json`: scope is the 37
+proof-bearing items; the remark and the 9 definitions carry no contract
+entries, matching prior runs where non-proof items are out of contract scope.
+Every proof-bearing entry carries its `citations`, `derivations`, all eight
+standard boundary dispositions, and `routine_steps: []`.
+
+### Provenance rationale
+
+All 47 items carry `provenance` with both component values. Statements are
+`literature-derived` except the five false statements and the
+standing-hypotheses remark, which are `ai-altered`; every proof is
+`ai-altered` (the source routes are reworked into the schema's phase format).
+The three scaffold sources back the content exactly as the coverage file
+records them: Webb at the recovered UMN-hosted PDF, Etingof et al. at the OCW
+PDF, and Meynet-Moscrop at the Springer paper. Every proof-bearing item lists
+`sources.references` URLs present in the coverage file. No item uses a
+recorded-not-proved or external-dependency fallback.
+
+### Canonical precheck repairs
+
+The interrupted authoring run had committed 47 item files whose proof steps
+were hard-wrapped across physical lines; the line-based phase checker then
+failed 37 files with `untagged-steps`. I ran `tools/reflow.mts` over the
+proof sections and then adopted the checker's canonical phase stratification
+for every file that passed only after auto-repair: step numbers are
+relabelled and step lines reordered into layered dependency order by the
+checker's own `layerRepair`, and `step p.q` references are renamed to match.
+After the fix point, `precheck` reports `37 checked, 0 failing — all clean`
+with no repair step.
+
+### Content corrections made while verifying
+
+All are batch-local and keep the claims of the cited targets intact:
+
+- `cor-the-regular-character-gives-the-sum-of-squares-formula`: the proof
+  used additivity of characters on direct sums without declaring it. Added
+  `thm-characters-of-direct-sums-tensor-products-and-duals` to `deps`, a new
+  fact `[F3]` carrying the additivity clause, and cited `[F3]` in step 2.1.
+- `lem-averaging-operator-projects-onto-the-fixed-subspace`: the linked
+  assumption `[A1]` (trace linearity via `prop-trace-is-linear`) is not used
+  anywhere in the proof; `tr P = dim V^G` follows from the projection block
+  form `[A2]`. Dropped the fact and the dep so no citation is fabricated.
+- `thm-second-column-orthogonality-relation-for-irreducible-complex-characters`:
+  the fact `[F3]` quoting the character-table definition is never cited by a
+  step. Dropped the fact and the `def-character-table-of-a-finite-group` dep;
+  the theorem needs neither.
+- `prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient`:
+  the definition of normality was linked only in an uncited fact. The
+  Statement now links `def-normal-subgroup` (the dep stays declared), the
+  uncited fact is dropped, and the remaining facts renumber `F3->F2`,
+  `F4->F3` with all step citations updated.
+- Two phantom step references fixed in prose: `thm-character-inner-product-computes-intertwiner-dimension`
+  and `fs-every-complex-class-function-with-self-inner-product-one-is-a-character`
+  both said "steps 1.1 through 3.1" where the last step is 1.3; corrected to
+  "through 1.3".
+- Missing fact citations added so every fact with a wikilink is actually used:
+  `[F1]` (class sizes) in step 5.1 of the `S_4` table, `[F1]` (order 8) in
+  step 6.1 of the `Dih(C_4)` table, and `[F1]` (trivial character) in step
+  1.2 of the unit-inner-product false statement.
+- `thm-second-column-orthogonality-relation-for-irreducible-complex-characters`:
+  a `cases` display split across source lines was joined to one line to
+  satisfy the one-line-display render contract.
+
+Title alignment: the authored title of
+`thm-character-inner-product-computes-intertwiner-dimension` states
+`dim Hom_G(W,V)`, the orientation its proof actually establishes through the
+fixed points of `W* tensor V`; the scaffold title had the equivalent
+`dim Hom_G(V,W)`. No claim was narrowed by this.
+
+### Narrowed / dropped claims
+
+No planned item was dropped and no statement was narrowed. Three local bridge
+facts were removed as unused declarations, not claims: trace linearity in the
+averaging lemma, the normality definition in the quotient proposition, and
+the character-table definition in the column-orthogonality theorem. The
+design's `A_5` table remains deliberately unclaimed (design trap (iv)), and
+the center-reading statement of Meynet-Moscrop (A.18) stays out-of-scope as
+recorded in the coverage harvest. Design order 143/144 versus spec order
+147/148 is carried from the scaffold notes; authoring followed the spec
+orders and the current `plan-spec.json`.
+
+### Checks run (all on the batch scope)
+
+- `precheck` over the 47 batch items: 37 proof-bearing checked, 0 failing.
+- `content-policy` item mode on `research/frontier-23-batch-4.pages.json`:
+  `47 scoped item(s), 0 error(s), 0 warning(s)`.
+- `validate-plan research/plan-spec.json`: OK, acyclic and consistent.
+- `proof-contract --strict` on the batch contract: `0 error(s), 0 warning(s),
+  37/37 item(s) checked`; also clean after a one-batch merge test.
+- `boundary-audit --fail-on-contradicted --fail-on-template`: clean; no
+  contradicted dispositions and no template clusters.
+- `citation-fidelity --fail-on-missing-quote`: 126 citations over 37 items,
+  every recorded quote present in its cited item; no widening candidates.
+- `finite-smoke`: `0 error(s), 0 check(s) over 0/37 item(s)` — honest
+  disposition: no registered check in `tools/finite-smoke.mjs` models a
+  character-table or orthogonality claim, and attaching `cyclic-subgroup-lagrange`
+  or `matrix-ring-laws-mod-n` would manufacture coverage. Recorded here
+  rather than fabricated.
+- `risk-report`: 37 items routed, 0 errors (tiered HIGH/CRITICAL items are
+  listed; Step 6 owns the `risk_review` records).
+- `rendercheck`, `depcheck`, `fwdcheck`, `extcheck`, `depsource`, `pathcheck`:
+  no batch-4 finding in any of them. The repo-level failures that remain are
+  foreign-batch (smooth-manifolds batch 9: three unresolved wikilinks, three
+  multiline displays, one undeclared forward reference) and are not batch 4.
+
+### Blockers
+
+None batch-local. The shell DNS liveness probe from the scaffold notes remains
+a runner-local transport issue, not a content blocker; the three coverage
+URLs were re-opened at their recorded locators and the durable
+`fetch_verified` stamps exist.

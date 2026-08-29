@@ -10,6 +10,11 @@ provenance:
 deps: [def-class-function-and-the-space-of-complex-class-functions, def-complex-conjugate-real-imaginary-part-and-modulus, def-inner-product-space, def-sum-over-a-finite-index-set]
 justified_by: []
 aliases: []
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:

@@ -20110,7 +20110,8 @@
         {
           "id": "def-finite-alphabet-encoding-and-algorithm",
           "kind": "definition",
-          "title": "Finite alphabets, encoded inputs, and algorithms"
+          "title": "Finite alphabets, encoded inputs, and algorithms",
+          "deps": []
         },
         {
           "id": "def-recursive-and-recursively-enumerable-languages",
@@ -20183,7 +20184,8 @@
           "id": "rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form",
           "kind": "remark",
           "title": "Finitely generated abelian groups admit invariant-factor normal form",
-          "strategy": "Record the exact invariant-factor classification needed for coordinate reduction; the later PID-module page proves the stronger structural theorem, but this page only cites the resulting normal form."
+          "strategy": "Record the exact invariant-factor classification needed for coordinate reduction; the later PID-module page proves the stronger structural theorem, but this page only cites the resulting normal form.",
+          "deps": []
         },
         {
           "id": "thm-word-problem-for-finitely-generated-abelian-groups",
@@ -20321,7 +20323,9 @@
           "title": "FALSE: recursively enumerable trivial words already give a decision algorithm",
           "strategy": "Refute by distinguishing enumeration of true instances from a halting procedure on both trivial and nontrivial words.",
           "deps": [
-            "lem-trivial-words-in-a-recursively-presented-group-are-recursively-enumerable"
+            "def-recursive-and-finite-group-presentations",
+            "lem-trivial-words-in-a-recursively-presented-group-are-recursively-enumerable",
+            "rem-novikov-boone-undecidability-of-the-word-problem"
           ]
         },
         {
@@ -34480,16 +34484,12 @@
           "id": "thm-going-down-over-normal-domains",
           "kind": "theorem",
           "title": "Going down holds for integral extensions over integrally closed domains",
-          "strategy": "Localise at the upper prime so the upper ring becomes local and the base stays integrally closed. For an element of the lower extended ideal inside the localised upper ring, build a finite stable module and apply the determinant trick to a multiplication operator; the coefficient lemma then forces the critical denominator into the upper prime, proving the contraction equality needed for a final lying-over step inside the local ring.",
+          "strategy": "Work in the localization at the chosen upper prime, prove the exact contraction $A\\cap \\mathfrak p_0B_{\\mathfrak q_1}=\\mathfrak p_0$ by a determinant-trick and minimal-polynomial argument, and then use a multiplicative-set prime-existence lemma to recover a prime below $\\mathfrak q_1$.",
           "deps": [
             "def-integral-ring-extension",
-            "thm-normality-is-local-for-domains",
-            "thm-localisation-at-a-prime-is-local",
-            "thm-integrality-commutes-with-localisation",
             "thm-prime-spectrum-of-a-localisation-bijection",
-            "thm-lying-over",
+            "lem-prime-containing-a-multiplicative-set-disjoint-ideal",
             "lem-integrally-closed-minimal-polynomial-coefficients",
-            "thm-integrality-and-finite-module-equivalences",
             "lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite",
             "thm-adjugate-identity-over-a-commutative-ring"
           ]
@@ -44247,12 +44247,13 @@
           "title": "The character table of $S_4$ and the normal subgroups it reveals",
           "strategy": "Use the conjugacy-class data, the permutation character on four letters, its sign twist, and orthogonality to complete the table; then intersect character kernels to recover the normal subgroups.",
           "deps": [
+            "cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one",
             "cor-the-regular-character-gives-the-sum-of-squares-formula",
             "def-sign-representation-and-restriction-of-a-representation",
             "ex-s-four-has-five-conjugacy-classes-of-sizes-one-six-three-eight-and-six",
             "ex-the-standard-representation-of-s-n-has-character-fixed-points-minus-one",
             "thm-characters-of-direct-sums-tensor-products-and-duals",
-            "thm-first-orthogonality-relation-for-irreducible-complex-characters",
+            "thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions",
             "thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters",
             "thm-second-column-orthogonality-relation-for-irreducible-complex-characters"
           ]
@@ -88319,7 +88320,7 @@
         {
           "id": "def-sections-of-sets-and-functions-on-products",
           "kind": "definition",
-          "title": "Sections $E_x$, $E^y$, $f_x$, and $f^y$ on a product",
+          "title": "Sections E_x, E^y, f_x, and f^y on a product",
           "deps": [
             "def-product-sigma-algebra-and-finite-product-sigma-algebras",
             "def-measurable-function-between-measurable-spaces"
@@ -88515,7 +88516,7 @@
         {
           "id": "rem-borel-product-equality-needs-second-countability",
           "kind": "remark",
-          "title": "The equality $\\mathcal B(X) \\otimes \\mathcal B(Y) = \\mathcal B(X \\times Y)$ needs second countability",
+          "title": "The equality B(X) tensor B(Y) = B(X x Y) needs second countability",
           "deps": [
             "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
             "def-second-countable-space"
@@ -88592,11 +88593,9 @@
         {
           "id": "def-distribution-function-of-absolute-value",
           "kind": "definition",
-          "title": "The distribution function $t \\mapsto \\mu(\\{|f| > t\\})$ of a measurable function",
+          "title": "The distribution function of absolute value",
           "deps": [
-            "def-integrable-real-and-complex-functions-and-their-integrals",
-            "thm-threshold-characterisations-of-real-and-extended-real-measurability",
-            "thm-arithmetic-and-lattice-operations-preserve-measurability"
+            "def-measure"
           ]
         },
         {
@@ -96312,10 +96311,12 @@
           "id": "thm-fundamental-groups-from-different-maximal-trees-are-isomorphic",
           "kind": "theorem",
           "title": "Different maximal trees give isomorphic graph-of-groups fundamental groups",
-          "strategy": "Choose connecting paths between the two tree gauges and conjugate each stable edge generator across those paths to build mutually inverse homomorphisms.",
+          "strategy": "Act on the Bass-Serre tree for one maximal tree and reapply Bass-Serre structure using the other maximal tree on the same quotient graph of groups.",
           "deps": [
-            "def-fundamental-group-of-a-graph-of-groups-relative-to-a-maximal-tree",
-            "def-maximal-subtree-of-a-connected-graph"
+            "def-bass-serre-tree-of-a-graph-of-groups",
+            "def-quotient-graph-of-groups-from-a-tree-action",
+            "thm-bass-serre-structure-theorem",
+            "thm-fundamental-group-acts-on-its-bass-serre-tree"
           ]
         },
         {
@@ -96333,7 +96334,9 @@
           "title": "Normal form for the fundamental group of a graph of groups",
           "strategy": "Peel the graph off one geometric edge at a time, reducing to the published amalgam and HNN normal forms at each step.",
           "deps": [
+            "def-path-group-of-a-graph-of-groups",
             "def-reduced-graph-of-groups-word",
+            "def-fundamental-group-of-a-graph-of-groups-relative-to-a-maximal-tree",
             "thm-hnn-normal-form-theorem",
             "thm-normal-form-for-free-products-with-amalgamation"
           ]
@@ -96403,9 +96406,12 @@
           "title": "Bass-Serre structure theorem",
           "strategy": "Choose orbit representatives and connecting lifts, map each stabilizer and non-tree edge generator into the acting group, and compare the resulting action with the Bass-Serre tree of the reconstructed graph of groups.",
           "deps": [
+            "def-bass-serre-tree-of-a-graph-of-groups",
+            "def-fundamental-group-of-a-graph-of-groups-relative-to-a-maximal-tree",
+            "def-path-group-of-a-graph-of-groups",
             "def-quotient-graph-of-groups-from-a-tree-action",
-            "lem-boundary-monomorphisms-from-stabilizers-are-well-defined",
-            "thm-fundamental-group-acts-on-its-bass-serre-tree"
+            "lem-the-bass-serre-coset-graph-is-a-tree",
+            "thm-normal-form-for-fundamental-groups-of-graphs-of-groups"
           ]
         },
         {
@@ -96464,8 +96470,9 @@
           "title": "Grushko decomposition and rank additivity",
           "strategy": "Use free splittings with trivial edge groups, derive terminal freely indecomposable factors from maximality, and use Kurosh on two decompositions to compare factor conjugacy classes and the free rank.",
           "deps": [
-            "cor-a-group-acting-freely-without-inversions-on-a-tree-is-free",
-            "thm-kurosh-subgroup-theorem"
+            "thm-kurosh-subgroup-theorem",
+            "thm-nielsen-schreier-with-an-explicit-basis",
+            "thm-finite-free-bases-have-the-same-cardinality"
           ]
         },
         {
@@ -114350,23 +114357,29 @@
           "id": "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
           "kind": "theorem",
           "title": "A short exact sequence is a kernel-cokernel pair",
-          "strategy": "Apply item 3 to the sequence 0 -> A -> B -> C -> 0. The endpoint zeros identify the left arrow as the kernel of the right arrow and, by the dual criterion, the right arrow as the cokernel of the left arrow.",
+          "strategy": "Use the endpoint zero objects to read short exactness through the arrow criterion at $A$ and $C$, then use the middle-node exactness equalities to identify $i$ with $\\ker(p)$ and $p$ with $\\operatorname{coker}(i)$.",
           "deps": [
             "thm-the-arrow-theoretic-criterion-for-exactness",
             "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
             "prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero",
-            "prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism"
+            "prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism",
+            "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+            "def-exactness-at-a-node",
+            "cor-equalizers-are-monic-and-coequalizers-are-epic",
+            "thm-every-monomorphism-is-the-kernel-of-its-cokernel"
           ]
         },
         {
           "id": "thm-degenerate-exactness-criteria",
           "kind": "theorem",
           "title": "Degenerate exactness criteria",
-          "strategy": "Specialize item 5 and its one-sided halves to the cases where one or both endpoints are zero. The bridge from exactness to monic or epic uses the published zero-kernel and zero-cokernel characterizations in abelian categories.",
+          "strategy": "Read one-sided exactness through exactness at a node: claim 1 is the zero-kernel characterization, claim 2 identifies a monic map with the kernel subobject of the next arrow, and claim 3 is the dual quotient statement. Combine those one-sided criteria to recover the short exact case.",
           "deps": [
-            "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
             "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
-            "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero"
+            "def-exactness-at-a-node",
+            "cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero",
+            "cor-equalizers-are-monic-and-coequalizers-are-epic",
+            "thm-every-monomorphism-is-the-kernel-of-its-cokernel"
           ]
         },
         {
@@ -114638,7 +114651,7 @@
           "id": "thm-the-covering-criterion-for-exactness",
           "kind": "theorem",
           "title": "The covering criterion for exactness",
-          "strategy": "Translate the covering condition into the exactness of the pullback sequence supplied by item 28, and use item 31 to transport the needed epimorphism through the pullback. The reverse implication is just the pullback construction attached to a kernel comparison.",
+          "strategy": "Translate exactness into the member criterion, keeping the composite-zero condition $gf=0$ explicit. One direction turns a member lift $fx \\equiv h$ into an actual lift after a common epic refinement, and the converse converts such refined lifts back into the member criterion.",
           "deps": [
             "def-exactness-at-a-node",
             "thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact",
@@ -114761,13 +114774,16 @@
           "id": "thm-ab5-is-equivalent-to-exactness-of-filtered-colimits",
           "kind": "theorem",
           "title": "AB5 is equivalent to exactness of filtered colimits",
-          "strategy": "Use the AB5 lattice law to show filtered colimits preserve kernels and hence exact sequences, and conversely apply exactness of filtered colimits to the filtered system of finite partial joins of a directed family of subobjects. The statement keeps all small filtered index categories explicit and does not replace them by directed posets without proof.",
+          "strategy": "Use the AB5 lattice law to control kernels in filtered short exact diagrams. For the converse, view the intersections $B_i \\wedge C$ as a filtered diagram of pullbacks and use exactness of filtered colimits to preserve that pullback square, identifying the resulting images with $\\bigvee_i(B_i \\wedge C)$ and $(\\bigvee_i B_i)\\wedge C$.",
           "deps": [
             "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
             "thm-degenerate-exactness-criteria",
             "def-the-axioms-ab5-and-ab5-star",
             "def-filtered-category-and-filtered-colimit",
-            "def-small-finite-and-large-limits-completeness-and-cocompleteness"
+            "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+            "def-exact-functor-between-abelian-categories",
+            "thm-the-meet-of-subobjects-is-their-pullback",
+            "thm-the-image-is-the-least-subobject-through-which-a-morphism-factors"
           ]
         },
         {
@@ -114814,16 +114830,16 @@
           "id": "fs-the-subtraction-rule-produces-a-unique-member",
           "kind": "false-statement",
           "title": "FALSE: the subtraction rule produces a unique member",
-          "strategy": "Refute the statement with item 24's nonuniqueness warning. The surrogate only guarantees existence of a suitable z, not a canonical difference object.",
+          "strategy": "Work in $\\mathbf{Ab}$ with $B=\\mathbb Z$, $C=0$, $g=0$, and $x=y=0$. Both $0_{\\mathbb Z}$ and $1_{\\mathbb Z}$ satisfy $gz \\equiv 0$, so the subtraction surrogate witness is not unique.",
           "deps": [
             "thm-chasing-rule-the-subtraction-surrogate",
-            "rem-what-the-subtraction-rule-does-not-say"
+            "thm-abelian-groups-form-an-abelian-category"
           ]
         },
         {
           "id": "fs-exactness-can-be-defined-without-first-producing-a-canonical-monomorphism",
           "kind": "false-statement",
-          "title": "FALSE: exactness can be defined without first producing a canonical monomorphism",
+          "title": "FALSE: the subobject-side definition of exactness needs no canonical image monomorphism",
           "strategy": "Item 1 is the refutation: the comparison im(f) -> ker(g) is not ambient data but must be constructed from gf = 0. Without that arrow there is no well-typed equality of subobjects to call exactness.",
           "deps": [
             "thm-the-subobject-inequalities-underlying-exactness",
@@ -121277,11 +121293,10 @@
           "id": "thm-topological-manifolds-are-sigma-compact",
           "kind": "theorem",
           "title": "Topological manifolds are sigma-compact",
-          "strategy": "Start from a fixed countable basis of coordinate balls whose closures are compact. Local compactness and the chart-basis lemma show that those compact-closure basis elements cover the manifold, so enumerating their closures gives a countable compact cover with no pointwise choice.",
+          "strategy": "Start from a fixed countable basis of coordinate balls whose closures are compact. The chart-basis lemma already gives those compact-closure basis elements directly, so enumerating their closures yields a countable compact cover with no pointwise choice.",
           "deps": [
             "def-topological-manifold-without-boundary",
-            "lem-coordinate-balls-form-a-basis-of-a-topological-manifold",
-            "prop-topological-manifolds-are-locally-compact-and-locally-path-connected"
+            "lem-coordinate-balls-form-a-basis-of-a-topological-manifold"
           ]
         },
         {
@@ -121679,12 +121694,15 @@
           "id": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
           "kind": "lemma",
           "title": "Linear matrix ODEs have unique global solutions on a fixed interval",
-          "strategy": "View an $n \\times n$ matrix as a vector in $\\mathbb R^{n^2}$ and apply the published Picard-Lindelof theorem on small subintervals. The compact-interval coefficient bound and the continuation theorem then prevent finite-endpoint breakdown inside the interval.",
+          "strategy": "Extend the coefficient field to an open time interval, view an $n \\times n$ matrix as a vector in $\\mathbb R^{n^2}$, and apply Picard-Lindelof locally. The Volterra equation, norm-integral estimate, and Gronwall bound control both time directions, and the continuation theorem prevents finite-endpoint breakdown inside the interval.",
           "deps": [
             "def-first-order-ode-initial-value-problem-and-solution",
             "thm-picard-lindelof-local-existence-and-uniqueness",
             "lem-ode-extension-from-a-compact-interior-region",
-            "thm-extreme-value-metric"
+            "thm-extreme-value-metric",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "thm-gronwall-integral-inequality"
           ]
         },
         {
@@ -121706,7 +121724,10 @@
           "deps": [
             "def-variational-equation-along-an-ode-solution",
             "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
-            "thm-continuous-dependence-of-odes-on-initial-data-and-parameters"
+            "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "thm-gronwall-integral-inequality"
           ]
         },
         {
@@ -124958,20 +124979,23 @@
           "id": "cor-the-kth-exterior-power-vanishes-above-dimension",
           "kind": "corollary",
           "title": "If $k>\\dim V$, then $\\Lambda^kV=0$",
-          "strategy": "When $k$ exceeds the basis size, there are no increasing $k$-tuples, so the basis theorem leaves no nonzero basis wedges.",
+          "strategy": "A $k$-tuple in an $n$-dimensional space cannot be independent when $k>n$, so every decomposable $k$-wedge vanishes; the quotient definition then forces all of $\\Lambda^kV$ to be zero.",
           "deps": [
-            "thm-increasing-basis-wedges-form-a-basis",
-            "cor-dimension-of-the-kth-exterior-power"
+            "def-dimension",
+            "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+            "thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors",
+            "def-kth-exterior-power-by-quotient"
           ]
         },
         {
           "id": "thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors",
           "kind": "theorem",
-          "title": "A decomposable wedge is nonzero exactly when its vectors are linearly independent",
-          "strategy": "Dependent vectors give a repeated direction after solving one vector in terms of the others, so alternation kills the wedge. For independent vectors, extend to a basis and observe that the wedge is one of the basis vectors from the preceding theorem.",
+          "title": "In a finite-dimensional vector space, a decomposable wedge is nonzero exactly when its vectors are linearly independent",
+          "strategy": "Dependent vectors give a repeated direction after solving one vector in terms of the others, so alternation kills the wedge. In finite dimension an independent list extends to a basis without Choice, and the wedge is then one of the basis wedges from the preceding theorem.",
           "deps": [
             "thm-increasing-basis-wedges-form-a-basis",
-            "def-linear-independence"
+            "def-linear-independence",
+            "thm-dimension-of-a-linear-subspace"
           ]
         },
         {
@@ -125014,9 +125038,7 @@
           "strategy": "When $k=n$, the exterior power is one-dimensional with basis the wedge of an ordered basis, and the signed-minor matrix has the single entry $\\det T$.",
           "deps": [
             "thm-the-matrix-of-an-exterior-power-is-the-signed-minor-matrix",
-            "def-orientation-of-a-finite-dimensional-real-vector-space",
-            "def-determinant-of-a-linear-operator",
-            "thm-operator-determinant-scales-every-alternating-top-form"
+            "def-determinant-of-a-linear-operator"
           ]
         },
         {
@@ -125877,7 +125899,7 @@
           "id": "lem-kleene-star-has-the-expected-least-closure-property",
           "kind": "lemma",
           "title": "Kleene star is the least concatenation-closed language containing $L$ and $\\varepsilon$",
-          "strategy": "First show directly from the recursive definition of powers that $\\varepsilon\\in L^*$ and $LL^*\\subseteq L^*$. For minimality, let $K$ be any language with $\\varepsilon\\in K$ and $LK\\subseteq K$. Prove by induction on $n$ that $L^n\\subseteq K$: the base case is $L^0=\\{\\varepsilon\\}$, and the step uses $L^{n+1}=L^nL$ together with the induction hypothesis and the closure assumption. Taking the union over all $n$ gives $L^*\\subseteq K$.",
+          "strategy": "Show directly that $\\varepsilon\\in L^*$ and $LL^*\\subseteq L^*$. Then prove by induction that any language $K$ with $\\varepsilon\\in K$ and $LK\\subseteq K$ contains every $L^n$. A separate factor-count argument gives $L^*L^*\\subseteq L^*$, so $L^*$ is itself the least concatenation-closed language containing $L$ and $\\varepsilon$.",
           "deps": [
             "def-language-concatenation-powers-and-kleene-star"
           ]
@@ -125958,7 +125980,7 @@
           "id": "prop-polynomially-related-encodings-preserve-polynomial-size",
           "kind": "proposition",
           "title": "Polynomially related encodings preserve polynomial size bounds",
-          "strategy": "Let $\\sigma$ and $\\tau$ be polynomially related encodings of the same instance family, and suppose some quantity $m(x)$ satisfies $m(x)\\le p(|\\sigma(x)|)$ for a polynomial $p$. If $|\\sigma(x)|\\le q(|\\tau(x)|)$ for a polynomial $q$, then $m(x)\\le p(q(|\\tau(x)|))$, still a polynomial bound. The reverse implication is identical with the roles of $\\sigma$ and $\\tau$ exchanged.",
+          "strategy": "Given a polynomial bound in one encoding, first replace that bound polynomial by a nondecreasing polynomial majorant. Then compose with the comparison polynomial from polynomial relatedness to transfer the bound to the other encoding, and argue symmetrically in the reverse direction.",
           "deps": [
             "def-instance-size-under-an-encoding"
           ]

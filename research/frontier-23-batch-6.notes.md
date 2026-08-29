@@ -213,3 +213,112 @@ Current validator evidence on the batch-6 scaffold bytes:
   repository's standing out-of-batch `redundant-prereq` advisories, with no
   batch-6 cycle, forward-reference, B-page dependency, unresolved-id, or
   item-cap failure.
+
+## Step-5 authoring
+
+Run date for this pass: Saturday, August 29, 2026 (Australia/Sydney local
+time).
+
+- Authored ids on the A page:
+  `def-measurable-rectangle`,
+  `def-product-sigma-algebra-and-finite-product-sigma-algebras`,
+  `lem-finite-rectangle-unions-form-a-generating-algebra`,
+  `rem-caratheodory-also-constructs-the-product-measure`,
+  `def-sections-of-sets-and-functions-on-products`,
+  `thm-sections-of-product-measurable-sets-are-measurable`,
+  `thm-sections-of-product-measurable-functions-are-measurable`,
+  `fs-measurable-sections-imply-product-measurability`,
+  `prop-sigma-finite-section-measure-functions-are-measurable`,
+  `thm-iterated-section-measures-agree-on-product-measurable-sets`,
+  `def-product-measure-on-sigma-finite-spaces`,
+  `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique`,
+  `fs-product-measure-is-unique-without-sigma-finiteness`,
+  `thm-tonelli-theorem-for-sigma-finite-product-spaces`,
+  `fs-tonelli-holds-without-sigma-finiteness`,
+  `thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces`,
+  `rem-fubini-should-be-applied-after-tonelli-on-absolute-values`,
+  `def-completed-product-measure`,
+  `thm-tonelli-and-fubini-for-completed-product-measures`,
+  `fs-completed-product-sections-are-measurable-for-every-parameter`,
+  `thm-borel-products-of-euclidean-spaces-are-euclidean-borel`,
+  `rem-borel-product-equality-needs-second-countability`,
+  `thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets`,
+  `thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures`,
+  `fs-product-of-complete-measure-spaces-is-complete`,
+  `fs-the-product-lebesgue-sigma-algebra-is-the-full-euclidean-lebesgue-sigma-algebra`,
+  `thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral`,
+  `cor-graph-of-a-measurable-function-is-lebesgue-null`,
+  `def-distribution-function-of-absolute-value`,
+  `thm-layer-cake-formula-for-l-p-powers`,
+  `def-polar-surface-measure-on-the-unit-sphere`,
+  `thm-polar-coordinates-formula-for-lebesgue-measure`,
+  `rem-polar-coordinates-recover-the-published-ball-volume-and-gaussian-formulas`,
+  `lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets`,
+  `lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets`,
+  `lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands`,
+  `thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions`,
+  `cor-c-one-change-of-variables-for-l-one-functions`,
+  `rem-finite-product-measures-are-the-base-case-for-countable-product-constructions`.
+- Authored ids on the B page:
+  `ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates`,
+  `ex-zeta-two-from-tonelli-and-the-geometric-series`,
+  `ex-region-under-x-squared-has-measure-one-third`,
+  `ex-cavalieri-computes-the-area-of-the-unit-disc`,
+  `cex-measurable-sections-do-not-imply-product-measurability`,
+  `cex-tonelli-fails-without-sigma-finiteness-on-the-diagonal`,
+  `cex-fubini-fails-without-l-one-integrability`,
+  `cex-equal-iterated-integrals-do-not-imply-l-one-integrability`,
+  `cex-product-measure-need-not-be-unique-without-sigma-finiteness`,
+  `cex-product-of-complete-measures-need-not-be-complete`,
+  `cex-completed-product-sections-need-not-be-pointwise-measurable`.
+- Wrote the page files
+  `library/measure-theory/product-measures-and-the-fubini-tonelli-theorems.md`
+  and
+  `library/measure-theory/product-measures-and-the-fubini-tonelli-theorems-examples.md`,
+  and wrote the batch contract
+  `research/frontier-23-batch-6.proof-contracts.json`.
+- Provenance rationale:
+  sourced theorem, definition, remark, and standard witness statements are
+  tagged `ai-altered` because the final wording is library-local but tied
+  directly to Tao, Hunter, and Folland; local proofs are `ai-generated`; proof
+  free definitions and remarks keep `proof: not-applicable`; and only
+  `cex-equal-iterated-integrals-do-not-imply-l-one-integrability` is marked
+  `provenance.statement: ai-generated` with `generation.role: counterexample`,
+  matching the planned two-copy synthesis branch recorded earlier in this file.
+- Narrowed or adjusted authoring choices:
+  `cex-measurable-sections-do-not-imply-product-measurability` uses the exact
+  Folland Exercise `47` well-ordered witness rather than the stronger
+  `[0,1]^2` CH-only Sierpinski form, so the batch keeps a ZFC-safe local item
+  instead of silently importing the published recorded-not-proved CH remark;
+  `ex-zeta-two-from-tonelli-and-the-geometric-series` keeps the Basel value as
+  a classical inline input rather than taking a forbidden dependency on the
+  draft `ai-generated` item `ex-sine-product-recovers-the-basel-sum`; and
+  `cex-fubini-fails-without-l-one-integrability` was rewritten to a direct
+  arctangent computation so it no longer depends on the published
+  `ai-generated` worked example
+  `ex-unequal-iterated-improper-integrals-on-the-unit-square`.
+- Narrowed or dropped claims:
+  none. Every planned batch-6 id remains authored on disk and `status: draft`.
+- Blockers:
+  none remain on the current batch-6 bytes.
+
+Final validator evidence on the authored batch-6 bytes:
+
+- `node tools/tsx-run.mjs tools/precheck.mts ...` on the 38 proof-bearing
+  batch-6 items passed on Saturday, August 29, 2026:
+  `38` checked, `0` failing.
+- `node tools/content-policy.mjs research/frontier-23-batch-6.pages.json`
+  passed on Saturday, August 29, 2026:
+  `50` scoped item(s), `0` error(s), `0` warning(s).
+- `node tools/validate-plan.mjs research/plan-spec.json`
+  exited `0` on Saturday, August 29, 2026, with only the repository's standing
+  out-of-batch `redundant-prereq` advisories.
+- `node tools/proof-contract.mjs research/frontier-23-batch-6.proof-contracts.json --strict`
+  passed on Saturday, August 29, 2026:
+  `0` error(s), `0` warning(s), `38/38` item(s) checked.
+- `node tools/citation-fidelity.mjs research/frontier-23-batch-6.proof-contracts.json --fail-on-missing-quote`
+  passed on Saturday, August 29, 2026:
+  `93` citation(s), no missing quote, no widening candidate.
+- `git diff --check -- ...batch-6-authored-paths...`
+  passed on Saturday, August 29, 2026 with no whitespace or merge-marker
+  defects in the authored item, page, or contract files.

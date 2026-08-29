@@ -13,6 +13,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -48,6 +52,6 @@ Let $W$ be a complex vector space, let $\sigma$ be a conjugation on $W$, let $V=
 
 2.1 With this $S$, one has $\theta\circ S_{\mathbb C}\circ\theta^{-1}=T$: for $w=\theta(z\otimes v)$, $\theta S_{\mathbb C}(z\otimes v)=\theta(z\otimes Sv)=z\cdot Sv=T(z\,v)=T(\theta(z\otimes v))=Tw$, using [L1], the complex-linearity of $T$, and the identity $\theta(1\otimes v)=v$ of [L4]. [step 1.2, L1, L4, algebra]
 
-3.1 Uniqueness: if $T=\theta\circ S_{\mathbb C}\circ\theta^{-1}=\theta\circ R_{\mathbb C}\circ\theta^{-1}$, then $S_{\mathbb C}=R_{\mathbb C}$ because $\theta$ is an isomorphism, and evaluating on $1\otimes v$ gives $\iota(Sv)=S_{\mathbb C}(1\otimes v)=R_{\mathbb C}(1\otimes v)=\iota(Rv)$, whence $Sv=Rv$ by the injectivity of the embedding in [L4]. [step 2.1, L1, L4]
+3.1 Uniqueness: if $T=\theta\circ S_{\mathbb C}\circ\theta^{-1}=\theta\circ R_{\mathbb C}\circ\theta^{-1}$, then $S_{\mathbb C}=R_{\mathbb C}$ because $\theta$ is an isomorphism, and evaluating on $1\otimes v$ gives $\iota\,Sv=S_{\mathbb C}(1\otimes v)=R_{\mathbb C}(1\otimes v)=\iota\,Rv$, whence $Sv=Rv$ by the injectivity of the embedding in [L4]. [step 2.1, L1, L4]
 
 4.1 Steps 1.1, 2.1 and 3.1 together prove both directions of the claimed equivalence, the concrete description of $S$ as the restriction, and its uniqueness. [step 1.1, step 2.1, step 3.1] ∎

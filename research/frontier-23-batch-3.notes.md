@@ -237,3 +237,69 @@ What is currently verified on Saturday, August 29, 2026:
   `ex-going-down-needs-normality`, and preserved the live H20 URL as
   `original_url`; this notes file was rewritten to match the repaired scaffold
   and source state.
+
+## Step-5 authoring
+
+Authored on Saturday, August 29, 2026:
+
+- A page file `library/commutative-algebra/integral-extensions-and-going-up.md`
+  and B page file
+  `library/commutative-algebra/integral-extensions-and-going-up-examples.md`.
+- Definitions: `def-integral-ring-extension`,
+  `def-integral-closure-and-integrally-closed-domain`.
+- Proof-bearing A-page items: `thm-transitivity-of-integrality`,
+  `thm-integral-closure-is-integrally-closed`,
+  `thm-integrality-commutes-with-localisation`,
+  `lem-field-integrality-criterion`,
+  `cor-contraction-of-maximal-ideals-integral-extension`, `thm-lying-over`,
+  `thm-incomparability-for-integral-extensions`, `thm-going-up`,
+  `cor-integral-extension-lifts-finite-prime-chains`,
+  `lem-integral-extension-chain-contraction-is-strict`,
+  `cor-dimension-preserved-by-integral-extensions`,
+  `lem-integrally-closed-minimal-polynomial-coefficients`,
+  `thm-normality-is-local-for-domains`,
+  `thm-going-down-over-normal-domains`,
+  `cor-height-preserved-under-going-down-integral-extensions`.
+- Proof-bearing B-page items: `ex-integrality-equation-and-power-basis`,
+  `ex-integral-elements-subring-computation`,
+  `ex-integrality-localisation-clearing-denominators`,
+  `ex-lying-over-by-quotient-and-localisation`,
+  `ex-incomparability-in-a-quadratic-integral-extension`,
+  `ex-going-down-needs-normality`.
+- Batch proof-contract artifact:
+  `research/frontier-23-batch-3.proof-contracts.json`.
+
+Provenance rationale:
+
+- I kept every dependency-bearing statement `literature-derived`. That includes
+  the Cohen-Seidenberg spine, the normality-local theorem, the going-down
+  theorem, and the Hochster failure example.
+- I marked the new local proofs and verifications `ai-altered` because they are
+  freshly written reductions or computations from the recorded sources rather
+  than copied literature proofs.
+- I kept the two definitions at `proof: not-applicable`, with
+  `verification.precheck: n/a`, and left all authored items and pages at
+  `status: draft`.
+
+Narrowed or dropped claims:
+
+- None in Step 5. The authored item set matches the repaired scaffold from the
+  batch manifest.
+
+Blockers:
+
+- No blocking authoring defect remains for batch `3`.
+- The final strict proof-contract pass is clean.
+
+Checks run on Saturday, August 29, 2026:
+
+- `node tools/tsx-run.mjs tools/precheck.mts ...batch-3 proof-bearing items...`
+  -> `21 checked, 0 failing — all clean`.
+- `node tools/validate-plan.mjs research/plan-spec.json`
+  -> ends `OK — declared page order is acyclic and consistent...`; the printed
+  `NOTE` is the standing run-wide reminder that many other planned pages still
+  lack authored item lists.
+- `node tools/content-policy.mjs research/frontier-23-batch-3.pages.json`
+  -> `content-policy: 23 scoped item(s), 0 error(s), 0 warning(s)`.
+- `node tools/proof-contract.mjs research/frontier-23-batch-3.proof-contracts.json --strict`
+  -> `0 error(s), 0 warning(s), 21/21 item(s) checked`.

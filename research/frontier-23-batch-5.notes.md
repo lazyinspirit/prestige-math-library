@@ -214,3 +214,134 @@ Run date: Saturday, August 29, 2026.
   cycles, forward references, B-page dependencies, or unresolved ids among the
   138 page(s) with item lists.` The remaining 50 messages are
   `redundant-prereq` warnings on prerequisite pages, not on LA-16 itself.
+
+## Step-5 authoring
+
+All 34 planned items and both planned pages are authored, and every artifact
+remains `status: draft`; no judge record was written. Item ids are unchanged
+from the batch manifest.
+
+**Authored ids.** On `matrix-norms-condition-numbers-and-numerical-stability`
+(23): the nine definitions `def-absolute-and-relative-forward-error-for-a-problem-map`,
+`def-absolute-and-relative-local-condition-numbers-of-a-problem-map`,
+`def-induced-matrix-p-norm`, `def-frobenius-matrix-norm`,
+`def-condition-number-of-a-nonsingular-linear-system`,
+`def-normwise-and-componentwise-backward-error-for-linear-systems`,
+`def-standard-relative-floating-point-model-and-unit-roundoff`,
+`def-forward-and-backward-stability-for-a-problem-family`, and
+`def-numerical-rank-relative-to-a-norm-scale-and-tolerance`, and the fourteen
+proof items `thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized`,
+`thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums`,
+`thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison`,
+`thm-right-hand-side-perturbation-bound-for-ax-equals-b`,
+`thm-matrix-perturbation-bound-for-ax-equals-b`,
+`thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity`,
+`thm-residual-to-forward-error-bounds-for-linear-systems`,
+`prop-explicit-formulas-for-normwise-and-componentwise-backward-error`,
+`lem-product-of-one-plus-deltas-gives-theta-n`,
+`thm-floating-point-dot-product-componentwise-and-normwise-error-bounds`,
+`thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order`,
+`thm-normal-equations-square-the-spectral-condition-number`,
+`thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices`,
+and `prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold`.
+On the B page (11): the seven examples
+`ex-two-by-two-systems-with-contrasting-condition-numbers`,
+`ex-low-order-hilbert-matrices-have-large-condition-numbers`,
+`ex-vandermonde-conditioning-improves-after-centering-and-scaling`,
+`ex-a-backward-stable-solution-of-an-ill-conditioned-system`,
+`ex-catastrophic-cancellation-and-a-stable-reformulation`,
+`ex-a-floating-point-dot-product-error-bound`,
+`ex-normal-equations-versus-qr-conditioning`, and the four counterexamples
+`cex-a-tiny-residual-does-not-force-a-small-forward-error`,
+`cex-condition-number-depends-on-the-chosen-norm-and-scaling`,
+`cex-numerical-rank-depends-on-the-declared-tolerance`, and
+`cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations`.
+
+**Provenance rationale.** Statements that are directly the harvested results
+carry `provenance.statement: literature-derived` with the matching source URL
+(Trefethen–Bau Lectures 12, 15, 18, 19, 31 for the conditioning, stability and
+least-squares spine; Demmel Lecture 3 for matrix norms, the distance to
+singularity and the residual/backward-error formulas; Demmel Lecture 2 and
+Bindel September 8 for the floating-point model and cancellation; Bindel
+September 10 for the dot-product bounds; Bindel October 15 for unitary
+invariance, distance to rank deficiency and numerical rank). The local
+2x2/3x3 witnesses that the sources motivate but do not isolate carry
+`provenance.statement: ai-altered` with the governing A-page source URL
+attached, so every source-backed component has a reader-visible reference. All
+local proofs carry `provenance.proof: ai-altered`; they were written fresh in
+the checker's phase format and are not transcriptions of one source. The nine
+definitions carry `provenance.proof: not-applicable`. No item has
+`provenance.statement: ai-generated`, so no item is a forbidden dependency
+target and no `generation` block was needed.
+
+**Narrowed and dropped claims.** No planned item was narrowed or dropped. The
+planned scope of the published `p`-norms was preserved verbatim: induced matrix
+norms and `kappa_p(A)` are stated for rational `p >= 1` only, exactly as the
+published `def-p-norms-on-rn` allows, and the real/complex boundary is recorded
+rather than blurred (induced `p`-norms over `R^n`, Frobenius and spectral
+material over `R` or `C` through the published SVD page). The explicit
+zero-dimension normalisation value `||I_0||_p = 0` is stated in the definition
+and the compatibility theorem rather than silently carrying `||I|| = 1` to
+`n = 0`; the normwise backward-error formula is stated for the spectral norm,
+where the attained equality is proved, rather than over-claimed for every
+`p`-norm; and the rectangular condition number `sigma_1/sigma_n` in the
+normal-equations theorem is defined locally in the statement, with the
+published square agreement recorded.
+
+**Dependency additions during authoring.** The manifest `deps` were kept and
+the following already-published prerequisites were added where the proof
+genuinely spends them: `thm-all-norms-on-rn-are-equivalent` on
+`def-induced-matrix-p-norm` (finiteness of the induced norm);
+`prop-standard-coordinate-inner-products`, `def-inner-product-norm`,
+`lem-complex-conjugation-and-modulus-laws` on `def-frobenius-matrix-norm`
+(norm axioms via the coordinate inner product); `cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus`
+and `def-operator-norm-on-a-finite-dimensional-inner-product-space` on the
+spectral/Frobenius theorem; `thm-invertible-matrix-theorem` and
+`cor-rank-equals-number-of-nonzero-singular-values` on the
+distance-to-singularity theorem; `thm-matrix-multiplication-laws` on the
+residual bounds; `thm-cauchy-schwarz-and-the-euclidean-norm` and
+`lem-p-norms-are-norms-and-induce-the-published-metrics` on the backward-error
+formulas; `thm-binomial-theorem` on the `theta_n` lemma;
+`cor-rank-equals-number-of-nonzero-singular-values`,
+`def-linear-isometry-and-orthogonal-or-unitary-operator` on the
+normal-equations theorem; and `thm-gram-schmidt-orthonormalisation` plus the
+same-run spectral theorem on the normal-equations-versus-QR example. All
+resolve on earlier published pages or earlier on this page.
+
+**Forward references.** Five orientation-only Remarks links to the B page are
+declared in `forward_refs` (`cex-condition-number-depends-on-the-chosen-norm-and-scaling`
+on `def-condition-number-of-a-nonsingular-linear-system`,
+`ex-a-backward-stable-solution-of-an-ill-conditioned-system` on
+`def-forward-and-backward-stability-for-a-problem-family`,
+`cex-numerical-rank-depends-on-the-declared-tolerance` on
+`def-numerical-rank-relative-to-a-norm-scale-and-tolerance`,
+`cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations`
+on `def-standard-relative-floating-point-model-and-unit-roundoff`, and
+`ex-normal-equations-versus-qr-conditioning` on the normal-equations theorem);
+none is load-bearing and none supplies a premise to a spine item.
+
+**Proof contracts.** `research/frontier-23-batch-5.proof-contracts.json`
+(version 1, level `frontier-23`) carries one contract for each of the 25
+proof-bearing items: exact quotes for all 74 cited facts, one derivation entry
+per numbered proof step with stated inputs, empty `routine_steps` and
+`finite_smoke` lists, and all eight boundary dispositions per item, with a
+`checked` row naming its proof step and each `not_applicable` row giving the
+mathematical reason for that statement. The nine definitions carry no proof and
+are correctly outside the contract scope.
+
+**Blockers.** None for this batch. The batch-owned coverage ledger was not
+edited at this step, so no coverage or liveness recheck was required.
+
+**Checks run, with results.**
+
+- `node tools/tsx-run.mjs tools/precheck.mts` over all 34 batch items: `25 checked, 0 failing — all clean` (the 9 definitions are `n/a`). Canonical phase-stratification repair was applied during authoring: every numbered step is a single source line with its trailing tags, and the stored step numbers are already in the checker's layer order.
+- `node tools/validate-plan.mjs research/plan-spec.json`: `OK`; the batch-5 pages keep their declared orders 168.001 and 168.002 and prerequisites, with no item-level cycle, forward reference, B-page dependency, or unresolved id involving this batch.
+- `node tools/content-policy.mjs research/frontier-23-batch-5.pages.json` (item mode): `34 scoped item(s), 0 error(s), 0 warning(s)`.
+- `node tools/depcheck.mjs`, filtered to the 34 batch ids: no findings for this batch.
+- `node tools/rendercheck.mjs` over the 34 item files and the 2 page files: `OK` for all 36 files (KaTeX and YAML clean).
+- `node tools/proof-contract.mjs research/frontier-23-batch-5.proof-contracts.json --strict`: `0 error(s), 0 warning(s), 25/25 item(s) checked`.
+- `node tools/boundary-audit.mjs research/frontier-23-batch-5.proof-contracts.json --fail-on-contradicted --fail-on-template`: exit 0; no contradicted dispositions and no template-reuse clusters at or above threshold.
+- `node tools/citation-fidelity.mjs research/frontier-23-batch-5.proof-contracts.json --fail-on-missing-quote`: 74 citations, no missing quotes, no widening candidates.
+- `node tools/finite-smoke.mjs research/frontier-23-batch-5.proof-contracts.json`: exit 0 (no obligations declared for this batch).
+- `node tools/risk-report.mjs research/frontier-23-batch-5.proof-contracts.json`: exit 0; the routing tiers are recorded for the Step-6 reader (no `risk_review` is expected before Step 6).
+- `node tools/fwdcheck.mjs`: the only hard error is the pre-existing open forward reference `def-diffeomorphism-and-local-diffeomorphism-of-manifolds -> cex-a-bijective-smooth-map-with-nonsmooth-inverse` from another batch, not this one; none of this batch's five declared forward references is an error.

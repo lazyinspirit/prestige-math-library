@@ -81,6 +81,8 @@ parts:
       - improper-and-parameter-dependent-multiple-integrals
       - convex-and-semicontinuous-functions-on-rn
       - picard-lindelof-and-first-order-odes
+      - smooth-manifolds-and-smooth-maps
+      - euclidean-ordinary-differential-equations-with-smooth-dependence
       - regular-surfaces-and-surface-integrals
       - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems
@@ -188,16 +190,15 @@ solid of revolution, and non-injective spherical coordinates.
 ## several-variables
 
 Norms give limits in $\mathbb R^n$; total derivatives give the chain rule, mixed partials,
-Taylor formulas, extrema and inverse and implicit functions, refined by higher regularity,
-regular loci, local diffeomorphisms and orientation. Jordan integration, Fubini and change
-of variables extend by compact exhaustion to improper integrals; domination permits
-parameter limits and differentiation, polar coordinates the Gaussian integral. Convexity
-runs through epigraphs, Jensen, local Lipschitz bounds, separation, subgradients, Hessians
-and semicontinuous extrema; Volterra, Picard, Gronwall, maximal solutions, Euler polygons
-and Osgood settle first-order equations. Rank semicontinuity gives the constant-rank normal
-form, hence submersions, immersions, regular level sets, tangent kernels and Lagrange
-multipliers; the first fundamental form and Gram determinant give area, scalar integrals
-and flux for graphs and surfaces of revolution.
+Taylor formulas, extrema, and inverse and implicit functions. Jordan integration, Fubini,
+change of variables, improper multiple integrals, and parameter differentiation extend
+integration to higher dimensions, while convexity and semicontinuity supply epigraph,
+subgradient, and Hessian tools. Volterra, Picard, Gronwall, maximal solutions, and Osgood
+settle first-order equations. The manifold page then abstracts the coordinate theory
+through topological manifolds, smooth atlases, smooth maps, and diffeomorphisms, and the
+smooth-dependence page adds variational equations, smooth local flows, and completeness for
+bounded or compactly supported fields. Regular surfaces, constant-rank maps, regular level
+sets, and Lagrange multipliers close the geometric thread.
 
 ## curves-and-the-fundamental-theorems
 

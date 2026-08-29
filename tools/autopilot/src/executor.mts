@@ -976,19 +976,27 @@ export class Executor {
     const ctx = this.ctx();
     const { stage } = this.currentStage();
 
-    // A COMPLETED STAGE CANNOT HAVE A LIVE BLOCKER. Retiring them only when a
-    // stage re-dispatches is not enough: a stage that blocked, was fixed, and
-    // then finished never dispatches again, so its blocker sat on the status
-    // page indefinitely. Anyone reading it sees a problem that no longer
-    // exists, and cannot tell it from one that does.
+    // A COMPLETED STAGE CANNOT HAVE A LIVE BLOCKER. Neither can a recovered
+    // dispatch unit: in an overlap group batch 3 can be repaired while batch 6
+    // is still reading, so waiting for the whole stage to finish leaves a false
+    // red blocker beside work that already has its replacement receipt.
+    // Anyone reading that row cannot distinguish it from a live problem.
     if (this.state.data.blockers.length) {
       const doneIds = new Set(this.stages.filter((s: any) => this.stageStatus(s, ctx).done).map((s: any) => s.id));
-      const kept = this.state.data.blockers.filter((b: any) => !doneIds.has(b.stage));
+      const completeByStage = new Map(this.stages.map((s: any) => [s.id, this.unitsComplete(s, ctx)]));
+      const recoveredDispatch = (blocker: any) => {
+        const match = /\(covers ([^)]+)\)$/.exec(String(blocker.message ?? ''));
+        if (!match || match[1] === 'n/a') return false;
+        const done = completeByStage.get(blocker.stage);
+        const units = match[1].split(',').map((unit: string) => unit.trim()).filter(Boolean);
+        return Boolean(done && units.length && units.every((unit: string) => done.has(unit)));
+      };
+      const kept = this.state.data.blockers.filter((b: any) => !doneIds.has(b.stage) && !recoveredDispatch(b));
       if (kept.length !== this.state.data.blockers.length) {
         const n = this.state.data.blockers.length - kept.length;
         this.state.data.blockers = kept;
         this.state.save();
-        this.reporter.notify('unblocked', `retired ${n} blocker(s) belonging to stage(s) that have since completed`);
+        this.reporter.notify('unblocked', `retired ${n} blocker(s) whose stage or covered unit has since completed`);
       }
     }
 
@@ -1109,19 +1117,30 @@ export class Executor {
     // (nothing to start), the join saw missing artifacts (gates may not run),
     // nothing was in flight — and the engine sat between the two predicates
     // in silence, ticking and emitting nothing, for as long as nobody looked.
-    // A stage that is covered, undispatched and drained but still not
-    // artifact-complete can make no progress on its own; that is a
-    // first-class failure, not a wait state. It routes through the same
-    // bounded repair loop as a gate failure (synthetic id `stage-stalemate`),
-    // and a stage with no handler for it gets a VISIBLE blocker.
-    if (!unitsAllDone && !this.inflight.size) {
+    // A covered unit that is no longer running but is still artifact-incomplete
+    // can make no progress on its own. Detect that PER UNIT, even while a
+    // sibling is still working. Waiting for the whole overlap group to drain
+    // serialized every missing-contract recovery behind its slowest author.
+    // Active units are excluded so a receipt that lands just before process
+    // teardown is never mistaken for abandoned work.
+    //
+    // This routes through the same bounded repair loop as a gate failure
+    // (synthetic id `stage-stalemate`), and a stage with no handler for it gets
+    // a VISIBLE blocker.
+    if (!unitsAllDone) {
       for (const { s, st } of statuses) {
         if (st.unitsDone) continue;
         const owed = (s.units ? s.units(ctx) : []).map(String);
         const cov = covered(ctx.dispatchDir, stagePattern(s, ctx), ctx.coversMap);
-        if (pending(owed, cov).length) continue;   // dispatchable — not a stalemate
-        const missing = owed.filter((u: string) => !this.unitsComplete(s, ctx).has(u));
-        const failure = { id: 'stage-stalemate', ok: false, why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete, nothing dispatchable` };
+        const complete = this.unitsComplete(s, ctx);
+        const active = new Set([...this.inflight.values()]
+          .filter((d: any) => d.meta.stage === s.id)
+          .flatMap((d: any) => (d.meta.covers ?? []).map(String)));
+        for (const unit of this.adoptedUnits(s)) active.add(String(unit));
+        const missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u));
+        if (!missing.length) continue;
+        const failure = { id: 'stage-stalemate', ok: false, units: missing,
+          why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete and no longer running` };
         const spent = await this.spendRepairRound(s, failure as any, ctx, `stalemate — ${failure.why}`);
         if (spent === 'spent') return 'working';
         if (spent === 'waiting') {

@@ -36,51 +36,26 @@ $\operatorname{Hom}_G(V,W)$.
 
 ## Facts & Assumptions
 
-**Given:** Finite-dimensional complex representations $V$ and $W$ of a finite
-group $G$.
+**Given:** Finite-dimensional complex representations $V$ and $W$ of a finite group $G$.
 
-[F1] The dual action is $(g\cdot f)(v)=f(g^{-1}\cdot v)$
-([[def-dual-complex-representation]]).
+[F1] The dual action is $(g\cdot f)(v)=f(g^{-1}\cdot v)$ ([[def-dual-complex-representation]]).
 
-[F2] The diagonal action on the tensor product is
-$g\cdot(f\otimes w)=(g\cdot f)\otimes(g\cdot w)$
-([[def-tensor-product-of-complex-representations]]).
+[F2] The diagonal action on the tensor product is $g\cdot(f\otimes w)=(g\cdot f)\otimes(g\cdot w)$ ([[def-tensor-product-of-complex-representations]]).
 
-[F3] The fixed subspace of a representation is the set of vectors fixed by
-every $g\in G$ ([[def-g-fixed-subspace-of-a-representation]]).
+[F3] The fixed subspace of a representation is the set of vectors fixed by every $g\in G$ ([[def-g-fixed-subspace-of-a-representation]]).
 
-[F4] Intertwiners are the linear maps $T$ with
-$T(g\cdot v)=g\cdot T(v)$ for all $g,v$
-([[def-intertwiner-equivalent-and-faithful-representations]]).
+[F4] Intertwiners are the linear maps $T$ with $T(g\cdot v)=g\cdot T(v)$ for all $g,v$ ([[def-intertwiner-equivalent-and-faithful-representations]]).
 
-[F5] The map $(f,w)\mapsto[v\mapsto f(v)w]$ induces a natural isomorphism
-$\Phi:V^{*}\otimes_{\mathbb C}W\to\operatorname{Hom}_{\mathbb C}(V,W)$
-([[thm-hom-from-a-finite-dimensional-space-as-a-tensor-product]]).
+[F5] The map $(f,w)\mapsto[v\mapsto f(v)w]$ induces a natural isomorphism $\Phi:V^{*}\otimes_{\mathbb C}W\to\operatorname{Hom}_{\mathbb C}(V,W)$ ([[thm-hom-from-a-finite-dimensional-space-as-a-tensor-product]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For an elementary tensor $f\otimes w$ and $v\in V$,
-$\Phi(g\cdot(f\otimes w))(v)=\Phi((g\cdot f)\otimes(g\cdot w))(v)$
-by [F2], and this equals $(g\cdot f)(v)(g\cdot w)=f(g^{-1}\cdot v)(g\cdot w)$
-by [F1]. [F1, F2, given]
+1.1 For an elementary tensor $f\otimes w$ and $v\in V$, $\Phi(g\cdot(f\otimes w))(v)=\Phi((g\cdot f)\otimes(g\cdot w))(v)$ by [F2], and this equals $(g\cdot f)(v)(g\cdot w)=f(g^{-1}\cdot v)(g\cdot w)$ by [F1]. [F1, F2, given]
 
-2.1 The right-hand side of step 1.1 is
-$g\cdot\bigl(f(g^{-1}\cdot v)w\bigr)=g\cdot\bigl(\Phi(f\otimes
-w)(g^{-1}\cdot v)\bigr)$, which is the value at $v$ of the conjugation action
-on the linear map $\Phi(f\otimes w)$. Since elementary tensors span the
-tensor product, $\Phi$ is an intertwiner of representations. [F5, step 1.1,
-algebra]
+2.1 The right-hand side of step 1.1 is $g\cdot\bigl(f(g^{-1}\cdot v)w\bigr)=g\cdot\bigl(\Phi(f\otimes w)(g^{-1}\cdot v)\bigr)$, which is the value at $v$ of the conjugation action on the linear map $\Phi(f\otimes w)$. Since elementary tensors span the tensor product, $\Phi$ is an intertwiner of representations. [F5, step 1.1, algebra]
 
-3.1 An element of $V^{*}\otimes W$ is fixed by $G$ exactly when its image
-under $\Phi$ is fixed by $G$, because $\Phi$ is a bijective intertwiner of
-step 2.1; so $\Phi\bigl((V^{*}\otimes W)^{G}\bigr)
-=\operatorname{Hom}_{\mathbb C}(V,W)^{G}$ by [F3]. [F3, step 2.1, given]
+3.1 An element of $V^{*}\otimes W$ is fixed by $G$ exactly when its image under $\Phi$ is fixed by $G$, because $\Phi$ is a bijective intertwiner of step 2.1; so $\Phi\bigl((V^{*}\otimes W)^{G}\bigr) =\operatorname{Hom}_{\mathbb C}(V,W)^{G}$ by [F3]. [F3, step 2.1, given]
 
-3.2 A linear map $T$ is fixed by the conjugation action of every $g$ exactly
-when $g\cdot T(g^{-1}\cdot v)=T(v)$ for all $g,v$, i.e. when
-$T(g\cdot v)=g\cdot T(v)$; by [F4] this says precisely that
-$T\in\operatorname{Hom}_G(V,W)$. Hence
-$\operatorname{Hom}_{\mathbb C}(V,W)^{G}=\operatorname{Hom}_G(V,W)$, which
-combines with step 3.1 into the claim. [F4, step 3.1, algebra] ∎
+4.1 A linear map $T$ is fixed by the conjugation action of every $g$ exactly when $g\cdot T(g^{-1}\cdot v)=T(v)$ for all $g,v$, i.e. when $T(g\cdot v)=g\cdot T(v)$; by [F4] this says precisely that $T\in\operatorname{Hom}_G(V,W)$. Hence $\operatorname{Hom}_{\mathbb C}(V,W)^{G}=\operatorname{Hom}_G(V,W)$, which combines with step 3.1 into the claim. [F4, step 3.1, algebra] ∎

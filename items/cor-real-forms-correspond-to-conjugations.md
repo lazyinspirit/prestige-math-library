@@ -7,12 +7,16 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-fixed-points-of-a-conjugation-form-a-real-space-and-its-complexification-recovers-the-ambient-space, def-conjugation-and-real-structure-on-a-complex-vector-space, def-fixed-real-form-of-a-conjugation]
+deps: [thm-fixed-points-of-a-conjugation-form-a-real-space-and-its-complexification-recovers-the-ambient-space, def-conjugation-and-real-structure-on-a-complex-vector-space, def-fixed-real-form-of-a-conjugation, thm-tensor-and-direct-sum-models-of-complexification-agree]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-29
 sources:
   scraped: []
   references:
@@ -38,13 +42,15 @@ where $\sigma_V$ is the conjugation on $W$ transported from the canonical conjug
 
 [L3] The fixed real form of a conjugation is the real subspace of its fixed points ([[def-fixed-real-form-of-a-conjugation]]).
 
+[L4] Every element of the complexification $V_{\mathbb C}$ is uniquely $1\otimes A+i\otimes B$ with $A,B\in V$ ([[thm-tensor-and-direct-sum-models-of-complexification-agree]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 For a conjugation $\sigma$, the subspace $W^{\sigma}$ is a real form of $W$: by [L1] the complexification of $W^{\sigma}$ recovers $W$ through the multiplication map, which is exactly the defining condition. [L1]
 
-1.2 The fixed points of $\sigma_{\operatorname{can}}$ on $V_{\mathbb C}$ are the embedded copy of $V$: writing an element as $1\otimes A+i\otimes B$, one has $\sigma_{\operatorname{can}}(1\otimes A+i\otimes B)=1\otimes A-i\otimes B$ by [L2], which is fixed exactly when $B=0$. [L2, algebra]
+1.2 The fixed points of $\sigma_{\operatorname{can}}$ on $V_{\mathbb C}$ are the embedded copy of $V$: by [L4] an element is uniquely $1\otimes A+i\otimes B$, and $\sigma_{\operatorname{can}}(1\otimes A+i\otimes B)=1\otimes A-i\otimes B$ by [L2], which equals itself exactly when $i\otimes B=-i\otimes B$, hence $B=0$. [L2, L4, algebra]
 
 1.3 For a real form $V$ with isomorphism $\theta:V_{\mathbb C}\to W$, define $\sigma_V(w)=\theta(\sigma_{\operatorname{can}}(\theta^{-1}w))$. It is additive and conjugate-linear because $\theta$ is complex-linear and $\sigma_{\operatorname{can}}$ has these properties by [L2], and it is an involution because $\sigma_{\operatorname{can}}^2=\operatorname{id}$. [L2, given, algebra]
 

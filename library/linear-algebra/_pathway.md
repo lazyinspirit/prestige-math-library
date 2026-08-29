@@ -29,7 +29,10 @@ parts:
       - eigenvalues-eigenvectors-and-the-characteristic-polynomial
       - diagonalisation-and-the-minimal-polynomial
       - triangularisation-and-jordan-canonical-form
+      - complexification-realification-and-real-structures
       - the-spectral-theorem-and-singular-value-decomposition
+      - matrix-norms-condition-numbers-and-numerical-stability
+      - exterior-powers-orientation-and-hodge-duality
 ---
 
 ## spaces-and-linear-maps
@@ -66,11 +69,11 @@ makes least squares and spectral arguments possible.
 An eigenvalue is a root of the characteristic polynomial, and the gap between algebraic and
 geometric multiplicity is what obstructs diagonalisation. The minimal polynomial decides
 when the obstruction vanishes, generalised eigenspaces triangularise the operator, and
-Jordan canonical form gives the similarity invariant when it does not. Once an inner
-product is available, the theory sharpens: Schur triangularisation and the spectral theorem
-diagonalise normal operators, self-adjoint operators admit real orthonormal eigenbases and
-spectral projections, functional calculus and Jordan-Chevalley separate semisimple from
-nilpotent behaviour, and positive operators have unique positive square roots. Singular
-values then measure arbitrary operators, yielding SVD, polar decomposition, operator norms,
-best rank-$k$ approximation, min-max eigenvalue formulas, interlacing, Weyl inequalities
-and Gershgorin disks.
+Jordan canonical form gives the similarity invariant when it does not. Complexification,
+realification, and conjugations then compare real and complex linear algebra, preserving
+kernels, exact sequences, and characteristic data while pairing nonreal generalized
+eigenspaces into invariant real two-planes. With an inner product, Schur
+triangularization, the spectral theorem, and singular values sharpen the theory through
+orthonormal eigenbases, SVD, and polar decomposition. Matrix norms and condition numbers
+measure perturbation sensitivity and numerical rank, and exterior powers recover
+determinants, orientation, the Hodge star, and the cross product.

@@ -235,3 +235,188 @@ Current validator evidence on the batch-7 scaffold bytes:
   repository's standing out-of-batch `redundant-prereq` advisories, with no
   batch-7 cycle, forward-reference, B-page dependency, unresolved-id, or
   item-cap failure.
+
+## Step-5 authoring
+
+Run date for this partial authoring pass: Friday, August 28, 2026.
+
+Authored or completed item files on disk in this pass:
+
+- CA-12 A page:
+  `thm-blaschke-factor-is-a-disc-automorphism`,
+  `thm-unit-disc-schwarz-lemma-with-rigidity`,
+  `thm-schwarz-pick-lemma-on-the-unit-disc`,
+  `thm-disc-automorphisms-are-rotated-blaschke-factors`,
+  `thm-upper-half-plane-automorphisms-are-real-mobius-maps`,
+  `thm-sector-power-map-is-biholomorphic-on-narrow-sectors`,
+  `thm-slit-plane-root-branch-biholomorphism-to-a-sector`,
+  `thm-principal-logarithm-biholomorphism-to-the-principal-strip`,
+  `thm-principal-exponential-biholomorphism-from-principal-strip`,
+  `thm-the-sphere-the-plane-and-the-disc-are-pairwise-nonbiholomorphic`.
+- CA-12 B page:
+  `ex-principal-logarithm-breaks-additivity-at-minus-one`,
+  `ex-principal-square-root-breaks-multiplicativity-at-minus-one`,
+  `ex-strip-to-disc-biholomorphism-by-exponential-and-cayley`,
+  `ex-disc-automorphism-swapping-two-points`,
+  `ex-power-map-sends-a-sector-to-a-half-plane`,
+  `ex-joukowski-sends-circles-to-ellipses`,
+  `ex-sine-sends-a-half-strip-to-the-upper-half-plane`,
+  `cex-complex-conjugation-preserves-unoriented-angles-but-is-not-conformal`,
+  `fs-conformal-maps-preserve-euclidean-lengths`,
+  `fs-schwarz-lemma-holds-without-a-fixed-point-at-zero`.
+- CA-18 A page:
+  `rem-complex-infinite-product-dictionary`,
+  `thm-absolute-convergence-criterion-for-complex-infinite-products`,
+  `def-normal-convergence-of-holomorphic-products`,
+  `thm-normal-convergence-of-holomorphic-products`,
+  `cor-logarithmic-derivative-of-a-normally-convergent-product`,
+  `def-weierstrass-elementary-factor`,
+  `lem-unit-disc-estimate-for-weierstrass-elementary-factors`,
+  `def-weierstrass-products-canonical-products-and-genus`,
+  `def-exponent-of-convergence-of-a-zero-sequence`,
+  `thm-canonical-product-convergence-from-exponent-sum`,
+  `thm-weierstrass-product-theorem-on-the-complex-plane`,
+  `thm-weierstrass-factorization-for-entire-functions`,
+  `cor-meromorphic-functions-on-the-plane-are-entire-quotients`,
+  `thm-jensen-formula-on-a-disc`,
+  `cor-jensen-zero-counting-bound`,
+  `def-order-of-an-entire-function`,
+  `thm-zero-exponent-is-bounded-by-entire-order`.
+- CA-18 B page:
+  `ex-product-of-one-plus-z-over-two-to-n-is-entire-and-zero-free`,
+  `ex-canonical-product-for-zeros-at-the-squares`,
+  `ex-jensen-formula-for-a-polynomial`,
+  `cex-conditional-linear-sum-does-not-force-product-convergence`,
+  `fs-weierstrass-factorization-is-unique`,
+  `fs-every-zero-sequence-admits-a-genus-zero-canonical-product`,
+  `fs-entire-order-equals-canonical-genus`.
+
+Preserved pre-existing partial files that were left on disk and not rewritten in
+this pass because they were already precheck-clean and consistent enough to
+build on:
+
+- `rem-holomorphic-logarithm-and-principal-power-dictionary`
+- `def-complex-power-from-holomorphic-logarithm-branch`
+- `thm-branch-power-agrees-with-integer-powers`
+- `thm-principal-branch-power-agrees-with-positive-real-power`
+- `thm-branch-discrepancies-for-logarithm-and-complex-powers`
+- `def-conformal-equivalence-and-automorphism-group`
+- `def-unit-disc-upper-half-plane-and-blaschke-factor`
+- `def-poincare-metric-and-distance-on-the-disc`
+- `rem-biholomorphisms-are-conformal-with-holomorphic-inverse`
+- `thm-conformal-equivalence-is-an-equivalence-relation`
+
+Validation actually run on authored bytes in this pass:
+
+- Targeted `precheck` runs on every newly written wave listed above. Every file
+  named in the authored list now passes `node tools/tsx-run.mjs tools/precheck.mts ...`
+  on Friday, August 28, 2026.
+
+Live blockers and unfinished scope:
+
+- CA-12 still lacks `thm-joukowski-biholomorphism-outside-unit-disc` and
+  `thm-sine-biholomorphism-from-upper-half-strip`.
+- CA-18 still lacks `thm-sine-has-its-weierstrass-product`,
+  `thm-hadamard-factorization-for-finite-order-entire-functions`,
+  `cor-nonintegral-entire-order-bounds-canonical-genus`, and
+  `ex-sine-product-recovers-the-basel-sum`.
+- `research/frontier-23-batch-7.proof-contracts.json` has not yet been created.
+- The four library page files for the two A/B pairs have not yet been written.
+- Batch-wide required checks (`precheck` on the full batch item set,
+  `validate-plan`, and item-scoped `content-policy`; plus any contract checks
+  after the proof-contract artifact exists) have not yet been rerun on the
+  incomplete batch bytes.
+
+Reason the pass stopped here:
+
+- The remaining six items are the hardest analytic pieces in the batch. I
+  paused after the medium-weight spine was durable rather than fabricating or
+  hand-waving the outstanding Joukowski, sine-product, Hadamard, and
+  nonintegral-genus arguments.
+
+## Step-5 authoring
+
+Recovery completion pass after the partial authoring stop:
+
+- Completed the six missing item files:
+  `thm-joukowski-biholomorphism-outside-unit-disc`,
+  `thm-sine-biholomorphism-from-upper-half-strip`,
+  `thm-sine-has-its-weierstrass-product`,
+  `thm-hadamard-factorization-for-finite-order-entire-functions`,
+  `cor-nonintegral-entire-order-bounds-canonical-genus`,
+  and `ex-sine-product-recovers-the-basel-sum`.
+- Authored the four page files:
+  `library/complex-analysis/conformal-mapping-branches-and-the-schwarz-lemma.md`,
+  `library/complex-analysis/conformal-mapping-branches-and-the-schwarz-lemma-examples.md`,
+  `library/complex-analysis/infinite-products-and-weierstrass-factorisation.md`,
+  and `library/complex-analysis/infinite-products-and-weierstrass-factorisation-examples.md`.
+- Created `research/frontier-23-batch-7.proof-contracts.json` with `49`
+  proof-bearing scope items, then regenerated all citation and derivation rows
+  from the final on-disk prose with `tools/regen-contract-entries.mjs`.
+
+Preserved and extended earlier authoring rather than restarting it:
+
+- I left the already-authored batch-7 items in place and only added the six
+  missing ones plus the page and contract artifacts.
+- I also repaired one previously authored companion example,
+  `ex-strip-to-disc-biholomorphism-by-exponential-and-cayley`, because its fact
+  block cited `thm-upper-half-plane-automorphisms-are-real-mobius-maps` without
+  declaring that dependency or citing it at the proof step that actually uses
+  it. This was a proof-contract sync repair, not a scope change.
+
+Provenance and dependency rationale for the recovery completion items:
+
+- The six newly authored mathematical items remain `status: draft`,
+  `origin: pipeline`, and `provenance.statement: literature-derived`; the lone
+  new example `ex-sine-product-recovers-the-basel-sum` correctly remains
+  `ai-generated` with `generation.role: example`.
+- The actual finished proofs for the sine half-strip, Hadamard, the sine
+  product, and the Basel example needed already-published trig or growth
+  interfaces and, for the sine half-strip, the newly authored Joukowski theorem.
+  I recorded those dependencies in the item files themselves so the contract and
+  the proofs agree with the text actually written.
+
+Narrowed or dropped claims:
+
+- None. The six previously unfinished planned claims were all completed at
+  their planned strength; nothing was narrowed, dropped, or converted to a
+  recorded-not-proved fallback.
+
+Authoring blockers at completion:
+
+- None on the mathematical authoring scope.
+- I did not rerun the earlier shell-side URL liveness sweep from the scaffold
+  pass. The documented DNS-resolution blocker for those source URLs therefore
+  remains exactly as recorded above and was not represented here as repaired.
+
+Validation actually run on the completed batch bytes:
+
+- Wave repair check:
+  `node tools/tsx-run.mjs tools/precheck.mts` on the six newly authored items
+  passed after one numbering repair on
+  `thm-hadamard-factorization-for-finite-order-entire-functions`.
+- Full batch proof-format check:
+  `node tools/tsx-run.mjs tools/precheck.mts <all 61 batch-7 item paths>`
+  checked the `49` proof-bearing items in scope and passed `49/49`, `0`
+  failing.
+- Plan validation:
+  `node tools/validate-plan.mjs research/plan-spec.json`
+  exited `0`. As in the earlier scaffold pass, it emitted the repository's
+  standing out-of-batch `redundant-prereq` advisory stream but no batch-7
+  cycle, forward-reference, B-leaf, unresolved-id, or over-cap failure.
+- Item-scoped content policy:
+  `node tools/content-policy.mjs research/frontier-23-batch-7.pages.json`
+  passed with `61` scoped items, `0` errors, and `0` warnings.
+- Proof-contract strict gate:
+  `node tools/proof-contract.mjs research/frontier-23-batch-7.proof-contracts.json --strict`
+  passed with `0` errors, `0` warnings, and `49/49` scoped items checked after
+  the `ex-strip-to-disc-biholomorphism-by-exponential-and-cayley` sync repair.
+- Citation fidelity:
+  `node tools/citation-fidelity.mjs research/frontier-23-batch-7.proof-contracts.json --fail-on-missing-quote`
+  reported `122` citations, no missing quote, and no widening candidate.
+- Finite smoke:
+  `node tools/finite-smoke.mjs research/frontier-23-batch-7.proof-contracts.json`
+  passed with `0` errors and `0` registered checks.
+- Whitespace/diff hygiene:
+  `git diff --check -- <all edited batch-7 files>`
+  passed with no output.
