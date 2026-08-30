@@ -2,7 +2,7 @@
 id: thm-riemann-mapping-theorem
 kind: theorem
 title: "Every proper homologically simply connected plane domain is conformally equivalent to the unit disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-axiom-of-choice, def-homologically-simply-connected-complex-domain, lem-riemann-map-extremal-family-is-nonempty, lem-riemann-map-extremal-derivative-is-attained, lem-riemann-map-extremizer-is-univalent, lem-riemann-map-extremizer-is-surjective, cor-injective-holomorphic-derivative-nonzero]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

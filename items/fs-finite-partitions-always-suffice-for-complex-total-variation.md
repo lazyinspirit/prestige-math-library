@@ -2,14 +2,14 @@
 id: fs-finite-partitions-always-suffice-for-complex-total-variation
 kind: false-statement
 title: "FALSE: finite partitions always suffice for complex total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -39,6 +39,7 @@ $\left|\int_A e^{ix}\,d\lambda\right|<\lambda(A)$.
 1.1 Let $E_1,\dots,E_m$ be any finite measurable partition of $[0,2\pi]$. [L1, A1]
 Applying [A1] on each positive-measure piece and summing gives
 $$\sum_{j=1}^m |\nu(E_j)|<\sum_{j=1}^m \lambda(E_j)=2\pi.$$
+
 2.1 By [L1], the total variation of the whole interval is exactly $2\pi$, so [L1, step 1.1] ∎
 step 1.1 shows that no finite partition attains it. Therefore the claim is
 false.

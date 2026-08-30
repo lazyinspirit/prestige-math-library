@@ -2,7 +2,7 @@
 id: thm-five-lemma-in-an-abelian-category
 kind: theorem
 title: "Five lemma in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ deps: [thm-sharp-five-lemma-in-an-abelian-category,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

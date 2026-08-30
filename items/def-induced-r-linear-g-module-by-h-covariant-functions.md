@@ -2,7 +2,7 @@
 id: def-induced-r-linear-g-module-by-h-covariant-functions
 kind: definition
 title: "The induced $R$-linear $G$-module $\\operatorname{Ind}_H^G W$ as $H$-covariant functions on $G$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Section 4.3"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

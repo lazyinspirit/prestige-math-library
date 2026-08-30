@@ -2,7 +2,7 @@
 id: ex-cantor-measure-minus-lebesgue-on-zero-one-is-already-in-jordan-form
 kind: example
 title: "Cantor measure minus Lebesgue measure on [0,1] is already in Jordan form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: example
 deps: [prop-cantor-measure-is-a-singular-atomless-probability-measure, thm-jordan-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -49,6 +49,7 @@ while $\lambda_0$ vanishes on measurable subsets of $C$ because $\lambda(C)=0$.
 Thus $\mu_c\perp\lambda_0$. Both are positive measures, so
 $\nu=\mu_c-\lambda_0$ is a signed measure already written as a difference of
 mutually singular positive measures.
+
 2.1 The uniqueness clause in [L2] now forces [L2, step 1.1] ∎
 $$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$
 Hence $\mu_c-\lambda_0$ is already in Jordan form.

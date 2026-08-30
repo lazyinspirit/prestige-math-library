@@ -2,14 +2,14 @@
 id: lem-the-cokernel-of-a-chain-map-is-computed-degreewise
 kind: lemma
 title: "The cokernel of a chain map is computed degreewise"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-chain-map,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: rem-the-two-halves-of-the-four-lemma-are-mutually-dual
 kind: remark
 title: "The two halves of the four lemma are mutually dual"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [thm-four-lemma-in-an-abelian-category,
        thm-the-opposite-of-an-abelian-category-is-abelian]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

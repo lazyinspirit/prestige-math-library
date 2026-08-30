@@ -2,7 +2,7 @@
 id: thm-an-exact-functor-commutes-with-homology
 kind: theorem
 title: "An exact functor commutes with homology"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -11,7 +11,7 @@ deps: [def-exact-functor-between-abelian-categories,
        prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps,
        def-homology-object-of-a-chain-complex]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

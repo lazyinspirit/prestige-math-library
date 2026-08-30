@@ -2,14 +2,14 @@
 id: ex-ahlfors-proof-yields-the-explicit-bloch-bound-sqrt-three-over-four
 kind: example
 title: "The elementary Bloch proof on this page yields the explicit lower bound 1/48"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [thm-bloch-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

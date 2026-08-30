@@ -2,7 +2,7 @@
 id: cor-noether-normalisation-module-finiteness
 kind: corollary
 title: "Noether normalisation yields module finiteness over a polynomial subring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

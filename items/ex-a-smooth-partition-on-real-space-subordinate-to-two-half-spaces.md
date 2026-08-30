@@ -2,7 +2,7 @@
 id: ex-a-smooth-partition-on-real-space-subordinate-to-two-half-spaces
 kind: example
 title: "A smooth partition on real space subordinate to two half-spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

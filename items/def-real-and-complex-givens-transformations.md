@@ -2,14 +2,14 @@
 id: def-real-and-complex-givens-transformations
 kind: definition
 title: "Real Givens rotations and complex Givens transformations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-inner-product-norm]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

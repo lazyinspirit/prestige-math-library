@@ -2,7 +2,7 @@
 id: lem-half-nine-lemma
 kind: lemma
 title: "Half nine lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

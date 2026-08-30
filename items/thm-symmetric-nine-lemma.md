@@ -2,7 +2,7 @@
 id: thm-symmetric-nine-lemma
 kind: theorem
 title: "Symmetric nine lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-sharp-nine-lemma,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

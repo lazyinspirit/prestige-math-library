@@ -2,7 +2,7 @@
 id: lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite
 kind: lemma
 title: "A maximal ideal of an affine algebra has finite residue field over the base field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

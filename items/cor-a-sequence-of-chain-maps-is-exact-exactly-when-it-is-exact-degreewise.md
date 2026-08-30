@@ -2,7 +2,7 @@
 id: cor-a-sequence-of-chain-maps-is-exact-exactly-when-it-is-exact-degreewise
 kind: corollary
 title: "A sequence of chain maps is exact exactly when it is exact degreewise"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -11,7 +11,7 @@ deps: [thm-the-category-of-complexes-in-an-abelian-category-is-abelian,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        def-exactness-at-a-node]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

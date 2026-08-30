@@ -2,7 +2,7 @@
 id: lem-every-manifold-has-a-compact-exhaustion
 kind: lemma
 title: "Every manifold has a compact exhaustion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

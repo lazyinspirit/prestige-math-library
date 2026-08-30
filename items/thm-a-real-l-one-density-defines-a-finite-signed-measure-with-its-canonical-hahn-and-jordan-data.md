@@ -2,14 +2,14 @@
 id: thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data
 kind: theorem
 title: "A real L^1 density defines a finite signed measure with its canonical Hahn and Jordan data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-hahn-decomposition-for-signed-measures, thm-jordan-decomposition-for-signed-measures, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, def-integrable-real-and-complex-functions-and-their-integrals, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

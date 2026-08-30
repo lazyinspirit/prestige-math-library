@@ -1,7 +1,7 @@
 ---
 page: mittag-leffler-and-runges-theorem
 title: "Mittag-Leffler and Runge's Theorem"
-status: draft
+status: published
 items: [def-principal-part-at-an-isolated-point,
         def-rational-approximation-with-a-runge-pole-set,
         def-pole-pushing-along-a-chain-of-discs,

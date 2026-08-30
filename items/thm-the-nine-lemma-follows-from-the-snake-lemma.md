@@ -2,7 +2,7 @@
 id: thm-the-nine-lemma-follows-from-the-snake-lemma
 kind: theorem
 title: "The nine lemma follows from the snake lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,7 +11,7 @@ deps: [thm-snake-lemma-in-an-abelian-category]
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

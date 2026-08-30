@@ -2,13 +2,13 @@
 id: def-complex-measure
 kind: definition
 title: "A complex measure is a finite-valued countably additive set function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-sigma-algebra, thm-complex-numbers-form-a-field]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-a-pointwise-finite-smooth-family-whose-sum-is-not-continuous
 kind: counterexample
 title: "A pointwise-finite smooth family whose sum is not continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

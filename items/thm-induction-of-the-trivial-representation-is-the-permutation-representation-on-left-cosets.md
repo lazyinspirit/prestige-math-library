@@ -2,7 +2,7 @@
 id: thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets
 kind: theorem
 title: "Inducing the trivial representation gives the permutation representation on $G/H$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.8"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -50,6 +50,9 @@ representation on a finite $G$-set has basis vectors indexed by that set
 **Proof technique:** direct.
 
 1.1 In the trivial representation of $H$, every $h\in H$ acts as the identity on $\mathbb C$. So the covariance condition of [F1] becomes $f(gh)=f(g)$ for all $g\in G$ and $h\in H$. Therefore $f$ is constant on each left coset $gH$. [F1, given]
+
 2.1 Define $\Phi:\operatorname{Ind}_H^G\mathbf 1_H\longrightarrow \mathbb C^{(G/H)}$ by $\Phi(f)(gH):=f(g)$. Step 1.1 makes this well defined, and every function on $G/H$ pulls back uniquely to an $H$-covariant function on $G$, so $\Phi$ is a linear bijection. [F2, step 1.1, construct]
+
 3.1 For $x\in G$, one has $\Phi(x\cdot f)(gH)=(x\cdot f)(g)=f(x^{-1}g)=\Phi(f)(x^{-1}gH)$, which is exactly the left permutation action of $G$ on the coset set $G/H$ from [F2]. Hence $\Phi$ is $G$-equivariant. [F1, F2, step 2.1, algebra]
+
 4.1 The bijection of step 2.1 and the equivariance of step 3.1 identify $\operatorname{Ind}_H^G\mathbf 1_H$ with the permutation representation of $G$ on $G/H$. [step 2.1, step 3.1] ∎

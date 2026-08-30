@@ -2,13 +2,13 @@
 id: def-quotient-complex
 kind: definition
 title: "Quotient complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-subcomplex,
        lem-the-differential-descends-to-a-quotient-complex]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

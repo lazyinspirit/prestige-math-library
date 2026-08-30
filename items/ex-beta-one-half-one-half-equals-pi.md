@@ -2,7 +2,7 @@
 id: ex-beta-one-half-one-half-equals-pi
 kind: example
 title: "$B(1/2,1/2)=\\pi$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

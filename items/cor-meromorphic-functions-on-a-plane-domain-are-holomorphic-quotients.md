@@ -2,7 +2,7 @@
 id: cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients
 kind: corollary
 title: "Every meromorphic function on a plane domain is a quotient of holomorphic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -54,5 +54,7 @@ holomorphic function ([[thm-zero-divisor-theorem-on-plane-domains]]).
 **Proof technique:** direct.
 
 1.1 Let $P$ be the pole set of $f$, with multiplicities equal to pole orders. By [L2], choose a holomorphic function $h$ on $\Omega$ whose zero divisor is exactly $P$. [L1, L2, given, construct]
+
 2.1 On $\Omega\setminus P$, define $g:=fh$. Near a pole $a\in P$, the zero of $h$ has exactly the same order as the pole of $f$, so $g$ is locally bounded on a punctured neighbourhood of $a$. By [L3], $g$ extends holomorphically across every point of $P$. [L1, L3, step 1.1, algebra]
+
 3.1 Away from $P$, one has $f=g/h$. Since both sides are meromorphic and agree on the dense open set $\Omega\setminus P$, this quotient represents $f$ on all of $\Omega$. [step 1.1, step 2.1, algebra] ∎

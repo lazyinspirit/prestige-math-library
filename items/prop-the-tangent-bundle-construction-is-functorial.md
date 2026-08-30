@@ -2,7 +2,7 @@
 id: prop-the-tangent-bundle-construction-is-functorial
 kind: proposition
 title: "The tangent-bundle construction is functorial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

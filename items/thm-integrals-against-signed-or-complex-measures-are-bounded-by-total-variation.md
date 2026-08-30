@@ -2,14 +2,14 @@
 id: thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation
 kind: theorem
 title: "Integrals against signed or complex measures are bounded by total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-integration-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -46,10 +46,12 @@ $|\int_E s\,d\nu|\le\int_E |s|\,d|\nu|$. ([[prop-simple-integrals-are-bounded-by
 $\int |f-s_n|\,d|\nu|\to0$ and
 $$\int f\,d\nu=\lim_n \int s_n\,d\nu.$$
 Applying [L2] to $s_n-s_m$ shows that $(\int s_n\,d\nu)$ is Cauchy.
+
 2.1 By [L2], [L1, L2, step 1.1]
 $$\left|\int s_n\,d\nu\right|\le \int |s_n|\,d|\nu|\le \int |f|\,d|\nu|+\int |f-s_n|\,d|\nu|.$$
 Letting $n\to\infty$ in step 1.1 yields
 $$\left|\int f\,d\nu\right|\le \int |f|\,d|\nu|.$$
 Applying the same argument to $f\mathbf 1_E$ gives the measurable-subset
 version.
+
 3.1 Step 2.1 proves both inequalities. [step 2.1] ∎

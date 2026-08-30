@@ -2,7 +2,7 @@
 id: thm-great-picard-theorem
 kind: theorem
 title: "Great Picard theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [lem-two-omitted-values-rule-out-an-essential-singularity]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

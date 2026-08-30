@@ -2,7 +2,7 @@
 id: cex-annulus-needs-a-pole-in-each-bounded-complementary-component
 kind: counterexample
 title: "The annulus shows Runge approximation needs a pole in each bounded complementary component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -43,4 +43,5 @@ $|z|<1$, so its integral around $|z|=1$ is $0$
 **Proof technique:** direct.
 
 1.1 Let $r$ be any rational function whose poles all lie in the unbounded complementary component of $K$. Then $r$ is holomorphic on the closed unit disc, so [L1] gives $\int_{|z|=1}r(z)\,dz=0$. [given, L1]
+
 2.1 But $\int_{|z|=1}dz/z=2\pi i$. Therefore no such rational function can approximate $1/z$ uniformly on $K$, because the contour integral on the inner circle would preserve the limit. So the inner complementary component also needs a pole representative. [step 1.1, algebra] ∎

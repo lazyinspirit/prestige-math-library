@@ -2,13 +2,13 @@
 id: rem-agreement-between-classical-and-nevanlinna-picard-theorems
 kind: remark
 title: "Agreement between the classical and Nevanlinna proofs of Picard's theorems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-little-picard-theorem, thm-great-picard-theorem]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

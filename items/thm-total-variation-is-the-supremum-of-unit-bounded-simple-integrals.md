@@ -2,14 +2,14 @@
 id: thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals
 kind: theorem
 title: "Total variation is the supremum of simple integrals over unit-bounded test functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-simple-integral-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation, def-total-variation-of-a-signed-or-complex-measure]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

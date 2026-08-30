@@ -2,7 +2,7 @@
 id: thm-the-category-of-complexes-in-an-additive-category-is-additive
 kind: theorem
 title: "The category of complexes in an additive category is additive"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-additive-category,
        def-biproduct,
        def-chain-map]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

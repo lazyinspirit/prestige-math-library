@@ -2,7 +2,7 @@
 id: rem-smooth-and-topological-partition-theorems-have-different-proof-costs
 kind: remark
 title: "Smooth and topological partition theorems have different proof costs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [thm-smooth-partitions-of-unity-exist-on-manifolds, thm-subordinate-partit
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

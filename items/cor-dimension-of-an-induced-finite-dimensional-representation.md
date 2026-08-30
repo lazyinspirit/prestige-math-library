@@ -2,7 +2,7 @@
 id: cor-dimension-of-an-induced-finite-dimensional-representation
 kind: corollary
 title: "The dimension of an induced finite-dimensional representation is $[G:H]\\dim W$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Proposition 4.3.1"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -57,6 +57,9 @@ with a linear group action ([[def-finite-dimensional-representation-of-a-group-o
 **Proof technique:** direct.
 
 1.1 Choose a left transversal $T=\{t_1,\dots,t_n\}$ for $G/H$; since $G$ is finite, $n=[G:H]$. By [F1], $\operatorname{Ind}_H^G W\cong\bigoplus_{i=1}^n W$ as $k$-vector spaces. [F1, given, choose]
+
 2.1 Let $B$ be a basis of $W$ with $|B|=\dim_k W$ by [F2]. The vectors supported in one summand and equal there to a basis element of $B$ form a basis of $\bigoplus_{i=1}^n W$, so that direct sum has $n\dim_k W$ basis vectors. Hence $\dim_k\operatorname{Ind}_H^G W=n\dim_k W=[G:H]\dim_k W$. [F2, step 1.1, algebra]
+
 3.1 The induced module already carries a $k$-linear $G$-action by its definition, and step 2.1 shows that its underlying vector space is finite-dimensional. Therefore it is a finite-dimensional representation of $G$ over $k$ in the sense of [F3]. [F3, step 2.1]
+
 4.1 Steps 2.1 and 3.1 prove the stated dimension formula and finite-dimensionality claim. [step 2.1, step 3.1] ∎

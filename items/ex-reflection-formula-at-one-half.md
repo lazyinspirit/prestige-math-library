@@ -2,7 +2,7 @@
 id: ex-reflection-formula-at-one-half
 kind: example
 title: "Checking the reflection formula at z=1/2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -46,4 +46,5 @@ At $z=1/2$, the reflection formula reads $\Gamma(1/2)^2=\pi$.
 **Proof technique:** direct.
 
 1.1 Substituting $z=1/2$ into [L1] gives $\Gamma(1/2)^2=\pi/\sin(\pi/2)=\pi$. [L1, given]
+
 2.1 This agrees with [L2], since $(\sqrt{\pi})^2=\pi$. [step 1.1, L2, algebra] ∎

@@ -2,7 +2,7 @@
 id: thm-mittag-leffler-theorem-on-plane-domains
 kind: theorem
 title: "Mittag-Leffler on plane domains"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: true
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-runge-pole-pushing-lemma
 kind: lemma
 title: "Runge's pole-pushing lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

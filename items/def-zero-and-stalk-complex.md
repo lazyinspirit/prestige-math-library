@@ -2,13 +2,13 @@
 id: def-zero-and-stalk-complex
 kind: definition
 title: "Zero complex and stalk complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category,
        def-initial-terminal-and-zero-object]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

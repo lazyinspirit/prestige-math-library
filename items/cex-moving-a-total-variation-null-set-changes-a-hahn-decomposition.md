@@ -2,7 +2,7 @@
 id: cex-moving-a-total-variation-null-set-changes-a-hahn-decomposition
 kind: counterexample
 title: "Moving a total-variation-null set changes a Hahn decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: counterexample
 deps: [thm-hahn-decomposition-for-signed-measures, prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,6 +45,7 @@ space $(X,\mathcal P(X))$, where $X=\{0,1\}$.
 measurable set is both positive and negative. Thus
 $$P_0=\varnothing,\ N_0=X\qquad\text{and}\qquad P_1=\{0\},\ N_1=\{1\}$$
 are both Hahn decompositions.
+
 2.1 The two decompositions are different, but the moved set $\{0\}$ is [L1, L2, step 1.1] ∎
 $\nu$-null and therefore has total variation $0$ by [L2]. This is exactly the
 allowed nonuniqueness in [L1].

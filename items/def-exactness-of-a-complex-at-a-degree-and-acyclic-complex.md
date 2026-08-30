@@ -2,7 +2,7 @@
 id: def-exactness-of-a-complex-at-a-degree-and-acyclic-complex
 kind: definition
 title: "Exactness of a complex at a degree and acyclic complexes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -10,7 +10,7 @@ deps: [def-chain-complex-in-an-abelian-category,
        def-exactness-at-a-node,
        def-cycle-and-boundary-subobjects-of-a-complex,
        lem-the-boundary-subobject-factors-through-the-cycle-subobject]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

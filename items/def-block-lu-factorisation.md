@@ -2,14 +2,14 @@
 id: def-block-lu-factorisation
 kind: definition
 title: "Block LU factorisation and the associated Schur complement"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-normalised-lu-factorisation, def-invertible-matrix-and-general-linear-group, def-matrix-product-and-identity-matrix]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,14 @@
 id: cex-a-biholomorphism-between-the-disc-and-the-punctured-disc-cannot-exist
 kind: counterexample
 title: "A biholomorphism between the disc and the punctured disc cannot exist"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-removable-singularity-characterizations, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

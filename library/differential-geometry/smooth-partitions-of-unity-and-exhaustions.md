@@ -1,7 +1,7 @@
 ---
 page: smooth-partitions-of-unity-and-exhaustions
 title: "Smooth Partitions of Unity and Exhaustions"
-status: draft
+status: published
 items: [def-the-standard-flat-function,
         lem-exponential-decay-dominates-every-inverse-power,
         thm-the-standard-flat-function-is-smooth-and-flat-at-zero,

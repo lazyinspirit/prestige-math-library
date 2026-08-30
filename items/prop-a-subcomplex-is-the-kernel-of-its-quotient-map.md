@@ -2,7 +2,7 @@
 id: prop-a-subcomplex-is-the-kernel-of-its-quotient-map
 kind: proposition
 title: "A subcomplex is the kernel of its quotient map"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -12,7 +12,7 @@ deps: [def-subcomplex,
        thm-the-category-of-complexes-in-an-abelian-category-is-abelian,
        cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

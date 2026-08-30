@@ -2,7 +2,7 @@
 id: lem-zero-locus-of-an-ideal-equals-zero-locus-of-its-radical
 kind: lemma
 title: "An ideal and its radical have the same zero locus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

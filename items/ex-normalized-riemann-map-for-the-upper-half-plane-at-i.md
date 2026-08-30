@@ -2,14 +2,14 @@
 id: ex-normalized-riemann-map-for-the-upper-half-plane-at-i
 kind: example
 title: "The normalized Riemann map from the upper half-plane sending i to 0"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-upper-half-plane-automorphisms-are-real-mobius-maps, thm-blaschke-factor-is-a-disc-automorphism]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

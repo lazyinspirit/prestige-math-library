@@ -1,7 +1,7 @@
 ---
 page: tangent-cotangent-and-the-differential-examples
 title: "Tangent Cotangent and the Differential — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-tangent-space-of-euclidean-space,
            ex-tangent-basis-change-between-cartesian-and-polar-coordinates,

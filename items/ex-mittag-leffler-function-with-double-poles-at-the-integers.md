@@ -2,7 +2,7 @@
 id: ex-mittag-leffler-function-with-double-poles-at-the-integers
 kind: example
 title: "A Mittag-Leffler function with double poles at the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -41,4 +41,5 @@ principal parts ([[thm-mittag-leffler-theorem-on-the-plane]]).
 **Proof technique:** direct.
 
 1.1 The set $\mathbb Z$ is discrete in $\mathbb C$, and each $p_n(z)=(z-n)^{-2}$ is a finite negative Laurent polynomial at $n$. [given]
+
 2.1 Applying [L1] to this data yields a meromorphic function $f$ whose principal part at every integer is exactly $(z-n)^{-2}$. Because that principal part is nonzero and contains only the degree $-2$ term, each pole has exact order $2$. [step 1.1, L1, algebra] ∎

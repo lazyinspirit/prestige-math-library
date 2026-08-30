@@ -1,7 +1,7 @@
 ---
 page: the-diagram-lemmas-in-an-abelian-category
 title: "The Diagram Lemmas in an Abelian Category"
-status: draft
+status: published
 items: [thm-short-five-lemma-in-an-abelian-category,
         cor-a-morphism-of-short-exact-sequences-with-invertible-outer-maps-is-invertible,
         thm-short-five-lemma-by-pullback-without-members,

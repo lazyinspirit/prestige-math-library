@@ -2,7 +2,7 @@
 id: rem-choice-strength-of-runge-and-mittag-leffler
 kind: remark
 title: "Choice bookkeeping for Runge and Mittag-Leffler"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ justified_by: []
 forward_refs: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

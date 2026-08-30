@@ -2,7 +2,7 @@
 id: ex-householder-qr-factorisation-by-hand
 kind: example
 title: "A short dense matrix admits a worked Householder QR factorisation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,5 +49,7 @@ $$A=QR,\qquad Q=H,\qquad R=HA=\begin{pmatrix}\sqrt2&0\\0&\sqrt2\end{pmatrix}.$$
 **Proof technique:** direct.
 
 1.1 The vector $v$ has norm $1$, and direct multiplication of $I-2vv^{\mathsf T}$ gives the displayed matrix $H$. Since $H^{\mathsf T}H=I$, it is an orthogonal reflector. [given, algebra]
+
 2.1 Multiplying by $A$ gives $$ HA= \frac{1}{\sqrt2} \begin{pmatrix}1&1\\1&-1\end{pmatrix} \begin{pmatrix}1&1\\1&-1\end{pmatrix} = \begin{pmatrix}\sqrt2&0\\0&\sqrt2\end{pmatrix}. $$ Thus $A=QR$ with $Q=H$ and $R$ upper triangular, exactly as predicted by [L1]. [step 1.1, L1, algebra]
+
 3.1 Steps 1.1-2.1 verify the example. [step 1.1, step 2.1] ∎

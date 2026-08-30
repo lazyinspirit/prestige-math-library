@@ -2,7 +2,7 @@
 id: cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field
 kind: corollary
 title: "Over an algebraically closed field, maximal ideals of an affine algebra are kernels of points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: noether-normalisation-and-nullstellensatz
 title: "Noether Normalisation and Nullstellensatz"
-status: draft
+status: published
 items: [lem-maximal-algebraically-independent-subset-is-a-transcendence-basis, lem-transcendence-basis-exchange, cor-transcendence-degree-tower-additivity, lem-noether-normalisation-nonzero-polynomial-made-monic, lem-noether-normalisation-finite-field-exponent-substitution, lem-noether-normalisation-one-relation-reduction, lem-noether-normalisation-inductive-integrality, cor-noether-normalisation-module-finiteness, cor-noether-normalisation-dimension-lower-bound, lem-zariski-lemma-one-variable-localisation-not-finite, lem-zariski-lemma-localised-polynomial-ring-not-field, lem-zariski-lemma-transcendence-basis-reduction, cor-field-finite-type-over-a-field-is-a-finite-extension, lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite, lem-evaluation-ideal-is-maximal, cor-weak-nullstellensatz-algebraically-closed-coordinate-form, lem-rabinowitsch-auxiliary-ideal-has-empty-zero-locus, lem-rabinowitsch-unit-ideal-consequence, lem-rabinowitsch-substitution-clears-denominators, cor-strong-nullstellensatz-two-inclusions, lem-affine-algebra-points-as-k-algebra-maps, cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field, lem-vanishing-ideal-is-radical, lem-zero-locus-of-an-ideal-equals-zero-locus-of-its-radical, cor-affine-radical-ideal-point-separation, lem-jacobson-ring-prime-as-intersection-of-maximals, lem-finite-type-jacobson-residue-extension, cor-affine-closed-points-detect-radicals]
 examples: []
 ---

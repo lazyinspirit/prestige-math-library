@@ -2,7 +2,7 @@
 id: thm-euler-gamma-function-is-holomorphic
 kind: theorem
 title: "Euler's Gamma function is holomorphic on the right half-plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

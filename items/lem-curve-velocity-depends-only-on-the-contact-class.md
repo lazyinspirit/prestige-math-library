@@ -2,7 +2,7 @@
 id: lem-curve-velocity-depends-only-on-the-contact-class
 kind: lemma
 title: "Curve velocity depends only on the contact class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

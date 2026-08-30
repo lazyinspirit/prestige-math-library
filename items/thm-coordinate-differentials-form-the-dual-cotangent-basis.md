@@ -2,7 +2,7 @@
 id: thm-coordinate-differentials-form-the-dual-cotangent-basis
 kind: theorem
 title: "Coordinate differentials form the dual cotangent basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

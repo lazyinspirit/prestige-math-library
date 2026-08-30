@@ -2,14 +2,14 @@
 id: def-householder-reflector
 kind: definition
 title: "Householder reflectors in real or complex inner-product spaces"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-inner-product-norm]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

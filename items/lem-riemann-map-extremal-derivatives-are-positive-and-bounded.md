@@ -2,14 +2,14 @@
 id: lem-riemann-map-extremal-derivatives-are-positive-and-bounded
 kind: lemma
 title: "The extremal derivatives are positive and have a finite supremum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, lem-riemann-map-extremal-family-is-nonempty, lem-cauchy-estimates-on-concentric-subdiscs]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

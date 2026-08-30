@@ -2,7 +2,7 @@
 id: prop-isomorphisms-of-complexes-are-quasi-isomorphisms
 kind: proposition
 title: "Isomorphisms of complexes are quasi-isomorphisms"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-quasi-isomorphism,
        prop-homology-respects-identities-and-composition,
        def-category-of-chain-complexes]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-meromorphic-functions-on-a-domain-form-a-field
 kind: corollary
 title: "Meromorphic functions on a connected plane domain form a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -48,5 +48,7 @@ functions with $h\not\equiv0$
 **Proof technique:** direct.
 
 1.1 Sums and products of meromorphic functions are meromorphic by the pointwise formulas on the common holomorphic locus. [given]
+
 2.1 Let $f$ be a nonzero meromorphic function. By [L1], write $f=g/h$ with $g,h$ holomorphic and $h\not\equiv0$. Since $\Omega$ is connected and $f\not\equiv0$, one also has $g\not\equiv0$. On the set where $g\ne0$, $1/f=h/g$, which is meromorphic; at a zero of $g$ this quotient has at worst a pole. Hence $1/f$ is meromorphic on $\Omega$. [L1, step 1.1, algebra]
+
 3.1 Therefore every nonzero meromorphic function has a multiplicative inverse, and together with step 1.1 this makes the meromorphic functions a field. [step 1.1, step 2.1, algebra] ∎

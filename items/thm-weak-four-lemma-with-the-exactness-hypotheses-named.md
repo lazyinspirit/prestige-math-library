@@ -2,7 +2,7 @@
 id: thm-weak-four-lemma-with-the-exactness-hypotheses-named
 kind: theorem
 title: "Weak four lemma with the exactness hypotheses named"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

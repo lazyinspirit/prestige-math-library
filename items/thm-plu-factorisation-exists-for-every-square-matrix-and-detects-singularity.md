@@ -2,7 +2,7 @@
 id: thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity
 kind: theorem
 title: "Every real or complex square matrix admits a PLU factorisation, and the first failed pivot marks the singular boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-permutation-matrix-partial-pivoting-and-pivot-growth, def-normalised-lu-factorisation, thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors, def-invertible-matrix-and-general-linear-group]
 aliases: []
 proof_strategy: induction
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,13 @@
 id: def-positive-negative-and-null-sets-for-a-signed-measure
 kind: definition
 title: "Positive, negative, and null sets for a signed measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-signed-measure]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

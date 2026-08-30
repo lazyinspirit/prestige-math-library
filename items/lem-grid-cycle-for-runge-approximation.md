@@ -2,7 +2,7 @@
 id: lem-grid-cycle-for-runge-approximation
 kind: lemma
 title: "A square-grid cycle enclosing a compact set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

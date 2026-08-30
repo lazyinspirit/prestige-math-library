@@ -2,7 +2,7 @@
 id: thm-a-chain-map-induces-a-well-defined-map-on-homology
 kind: theorem
 title: "A chain map induces a well-defined map on homology"
-status: draft
+status: published
 landmark: true
 provenance:
   statement: literature-derived
@@ -11,7 +11,7 @@ deps: [def-homology-object-of-a-chain-complex,
        lem-a-chain-map-carries-cycles-to-cycles-and-boundaries-to-boundaries,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

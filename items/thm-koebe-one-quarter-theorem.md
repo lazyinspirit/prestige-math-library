@@ -2,7 +2,7 @@
 id: thm-koebe-one-quarter-theorem
 kind: theorem
 title: "Every normalized univalent disc map contains the quarter disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-normalized-univalent-class, cor-bieberbach-second-coefficient-bound]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

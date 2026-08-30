@@ -2,12 +2,12 @@
 id: def-cochain-complex-in-an-abelian-category
 kind: definition
 title: "Cochain complex in an abelian category"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abelian-category, def-chain-complex-in-an-abelian-category]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

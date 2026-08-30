@@ -2,14 +2,14 @@
 id: fs-a-hahn-decomposition-is-unique
 kind: false-statement
 title: "FALSE: a Hahn decomposition is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -40,5 +40,6 @@ space $(X,\mathcal P(X))$, where $X=\{0,1\}$.
 measure, so both
 $$\varnothing\sqcup X\qquad\text{and}\qquad \{0\}\sqcup\{1\}$$
 are Hahn decompositions.
+
 2.1 These decompositions are different, so exact uniqueness fails. This is [L1, step 1.1] ∎
 compatible with [L1] because the differing set is null.

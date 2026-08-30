@@ -2,7 +2,7 @@
 id: thm-beta-gamma-identity
 kind: theorem
 title: "The Beta-Gamma identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,7 +20,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

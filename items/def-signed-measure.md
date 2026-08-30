@@ -2,13 +2,13 @@
 id: def-signed-measure
 kind: definition
 title: "A signed measure is countably additive and takes at most one infinite value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-sigma-algebra, def-extended-reals, def-absolute-and-conditional-convergence]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

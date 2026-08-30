@@ -2,7 +2,7 @@
 id: fs-the-tangent-space-is-defined-only-after-embedding-the-manifold-in-euclidean-space
 kind: false-statement
 title: "The tangent space is intrinsically defined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

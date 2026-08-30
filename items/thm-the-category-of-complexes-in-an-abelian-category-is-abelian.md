@@ -2,7 +2,7 @@
 id: thm-the-category-of-complexes-in-an-abelian-category-is-abelian
 kind: theorem
 title: "The category of complexes in an abelian category is abelian"
-status: draft
+status: published
 landmark: true
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ deps: [def-abelian-category,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        thm-the-category-of-complexes-in-an-additive-category-is-additive]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

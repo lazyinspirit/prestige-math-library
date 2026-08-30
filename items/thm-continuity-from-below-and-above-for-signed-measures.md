@@ -2,14 +2,14 @@
 id: thm-continuity-from-below-and-above-for-signed-measures
 kind: theorem
 title: "Continuity from below, and from above when one set has finite signed measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-jordan-decomposition-for-signed-measures, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, lem-finite-signed-measure-sets-have-only-finite-subset-values]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

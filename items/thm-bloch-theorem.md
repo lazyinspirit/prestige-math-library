@@ -2,7 +2,7 @@
 id: thm-bloch-theorem
 kind: theorem
 title: "Bloch's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-bloch-radius-and-bloch-constant, lem-bloch-rescaling-at-an-almost-maximal-derivative, lem-quantitative-univalence-from-controlled-derivative]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

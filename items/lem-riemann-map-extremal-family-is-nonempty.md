@@ -2,14 +2,14 @@
 id: lem-riemann-map-extremal-family-is-nonempty
 kind: lemma
 title: "A proper homologically simply connected plane domain has a bounded univalent competitor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, def-homologically-simply-connected-complex-domain, cor-holomorphic-roots-homologically-simply-connected-domains, thm-blaschke-factor-is-a-disc-automorphism, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-derivation-at-a-point-and-tangent-space
 kind: definition
 title: "Derivations at a point and the tangent space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-the-local-algebra-of-smooth-function-germs, def-algebraic-dual-and-li
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

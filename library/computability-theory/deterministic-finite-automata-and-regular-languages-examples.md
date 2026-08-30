@@ -1,7 +1,7 @@
 ---
 page: deterministic-finite-automata-and-regular-languages-examples
 title: "Deterministic Finite Automata and Regular Languages: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-extended-dfa-transition-respects-concatenation

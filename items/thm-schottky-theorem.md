@@ -2,7 +2,7 @@
 id: thm-schottky-theorem
 kind: theorem
 title: "Schottky's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [lem-holomorphic-logarithms-for-two-omitted-values, thm-bloch-theorem, cor-holomorphic-roots-homologically-simply-connected-domains, thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-addition-and-real-extension, prop-star-shaped-plane-domains-are-homologically-simply-connected, thm-holomorphic-logarithms-homologically-simply-connected-domains]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

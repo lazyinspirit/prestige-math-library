@@ -2,7 +2,7 @@
 id: thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure
 kind: theorem
 title: "Assuming countable choice, the tangent bundle has a canonical smooth 2n-manifold structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

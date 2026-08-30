@@ -2,7 +2,7 @@
 id: fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem
 kind: false-statement
 title: "FALSE: the diagram lemmas in an abelian category follow from the module case by the embedding theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [rem-the-freyd-mitchell-embedding-theorem,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

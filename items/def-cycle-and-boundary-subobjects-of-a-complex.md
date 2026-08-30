@@ -2,14 +2,14 @@
 id: def-cycle-and-boundary-subobjects-of-a-complex
 kind: definition
 title: "Cycle and boundary subobjects of a complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers,
        def-image-and-coimage-in-a-category-with-kernels-and-cokernels]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

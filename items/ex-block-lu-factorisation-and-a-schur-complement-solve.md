@@ -2,7 +2,7 @@
 id: ex-block-lu-factorisation-and-a-schur-complement-solve
 kind: example
 title: "A block LU factorisation turns a linear solve into a Schur-complement solve"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-block-lu-factorisation-via-an-invertible-leading-block, thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -51,5 +51,7 @@ Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]
 **Proof technique:** direct.
 
 1.1 The leading block is $A_{11}=[2]$, so $S=\begin{pmatrix}3&1\\1&2\end{pmatrix}-\frac12\binom11(1\ 1)$, which is the displayed Schur complement. The block-LU formula of [L1] gives the displayed factorisation. [given, L1, algebra]
+
 2.1 Solve $Ly=b$: $y_1=4$, $y_2=5-\frac12\cdot 4=3$, $y_3=4-\frac12\cdot 4=2$. Then solve $Ux=y$ from the bottom: $\frac32x_3=2-\frac12x_2$, $\frac52x_2+\frac12x_3=3$, and $2x_1+x_2+x_3=4$. This gives $x_3=1$, $x_2=1$, and $x_1=1$. [step 1.1, L2, algebra]
+
 3.1 Steps 1.1-2.1 verify both the factorisation and the Schur-complement solve. [step 1.1, step 2.1] ∎

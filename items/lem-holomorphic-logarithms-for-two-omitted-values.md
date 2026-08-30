@@ -2,14 +2,14 @@
 id: lem-holomorphic-logarithms-for-two-omitted-values
 kind: lemma
 title: "Disc functions omitting 0 and 1 admit holomorphic logarithms for f and 1-f"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [prop-star-shaped-plane-domains-are-homologically-simply-connected, thm-holomorphic-logarithms-homologically-simply-connected-domains]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

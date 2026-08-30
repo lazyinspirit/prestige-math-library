@@ -2,7 +2,7 @@
 id: def-global-differential-or-tangent-map
 kind: definition
 title: "The global differential or tangent map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-differential-of-a-smooth-map, def-tangent-bundle-as-a-disjoint-union]
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

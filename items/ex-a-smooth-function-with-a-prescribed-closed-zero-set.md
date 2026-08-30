@@ -2,7 +2,7 @@
 id: ex-a-smooth-function-with-a-prescribed-closed-zero-set
 kind: example
 title: "A smooth function with a prescribed closed zero set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,14 +2,14 @@
 id: prop-products-and-coproducts-of-complexes-are-degreewise-when-they-exist-and-preserve-differentials
 kind: proposition
 title: "Products and coproducts of complexes are degreewise when they exist and preserve differentials"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-chain-complex-in-an-abelian-category,
        def-products-and-coproducts]
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

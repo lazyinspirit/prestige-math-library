@@ -2,14 +2,14 @@
 id: fs-a-nonconstant-meromorphic-function-on-the-plane-omits-at-most-one-sphere-value
 kind: false-statement
 title: "FALSE: a nonconstant meromorphic function on the plane omits at most one sphere value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [cor-meromorphic-little-picard-theorem, cex-a-meromorphic-function-on-the-plane-can-omit-two-sphere-values]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

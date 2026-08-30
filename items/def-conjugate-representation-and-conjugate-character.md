@@ -2,7 +2,7 @@
 id: def-conjugate-representation-and-conjugate-character
 kind: definition
 title: "Conjugate representations and conjugate characters on conjugate subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Section 20.1"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

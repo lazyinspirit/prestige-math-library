@@ -2,7 +2,7 @@
 id: thm-a-complex-is-exact-at-n-exactly-when-its-nth-homology-is-zero
 kind: theorem
 title: "A complex is exact at n exactly when its nth homology is zero"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -11,7 +11,7 @@ deps: [def-homology-object-of-a-chain-complex,
        cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero,
        thm-an-abelian-category-is-balanced]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

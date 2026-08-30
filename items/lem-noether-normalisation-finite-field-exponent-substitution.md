@@ -2,7 +2,7 @@
 id: lem-noether-normalisation-finite-field-exponent-substitution
 kind: lemma
 title: "Rapidly increasing power substitutions isolate one highest x_n-term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

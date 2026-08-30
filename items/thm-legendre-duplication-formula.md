@@ -2,7 +2,7 @@
 id: thm-legendre-duplication-formula
 kind: theorem
 title: "Legendre's duplication formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -46,4 +46,5 @@ $\Gamma(z)\Gamma(z+1/2)=(2\pi)^{1/2}2^{1/2-2z}\Gamma(2z)$
 **Proof technique:** direct.
 
 1.1 Apply [L1] with $m=2$. This gives $\Gamma(z)\Gamma(z+1/2)=(2\pi)^{1/2}2^{1/2-2z}\Gamma(2z)$. [L1, given]
+
 2.1 Step 1.1 is exactly the duplication formula after rewriting $(2\pi)^{1/2}2^{1/2-2z}$ as $2^{1-2z}\sqrt{\pi}$. [L1, algebra] ∎

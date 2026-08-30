@@ -2,14 +2,14 @@
 id: ex-a-chain-map-computed-on-cycles-boundaries-and-homology
 kind: example
 title: "A chain map computed on cycles, boundaries, and homology"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,14 +2,14 @@
 id: lem-nonconstant-local-uniform-limits-of-univalent-functions-are-univalent
 kind: lemma
 title: "A nonconstant locally uniform limit of univalent functions is univalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-univalent-holomorphic-function, thm-hurwitz-zero-free-limit]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

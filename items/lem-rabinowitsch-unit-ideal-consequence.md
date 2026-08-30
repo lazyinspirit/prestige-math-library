@@ -2,7 +2,7 @@
 id: lem-rabinowitsch-unit-ideal-consequence
 kind: lemma
 title: "The auxiliary ideal is the unit ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

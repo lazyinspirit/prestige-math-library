@@ -2,14 +2,14 @@
 id: def-category-of-chain-complexes
 kind: definition
 title: "The category of chain complexes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-map,
        prop-identities-and-composites-of-chain-maps-are-chain-maps,
        def-bounded-bounded-below-and-bounded-above-complex]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

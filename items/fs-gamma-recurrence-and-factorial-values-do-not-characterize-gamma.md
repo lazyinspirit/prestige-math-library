@@ -2,7 +2,7 @@
 id: fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma
 kind: false-statement
 title: "FALSE: the Gamma recurrence and factorial values characterize Gamma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -44,4 +44,5 @@ $F(z+1)=zF(z)$ and $F(n+1)=n!$ for every integer $n\ge0$, then $F=\Gamma$.
 **Proof technique:** direct.
 
 1.1 Define $F(z):=\Gamma(z)e^{\sin(2\pi z)}$. Since $\sin(2\pi(z+1))=\sin(2\pi z)$, the exponential factor is $1$-periodic. Hence [L1] gives $F(z+1)=zF(z)$. [given, L1, construct]
+
 2.1 For every integer $n$, $\sin(2\pi n)=0$, so $e^{\sin(2\pi n)}=1$. Thus [L2] gives $F(n+1)=\Gamma(n+1)=n!$. But $e^{\sin(2\pi z)}\ne1$ identically, so $F\ne\Gamma$. Therefore the stated data do not characterize Gamma. [step 1.1, L2, algebra] ∎

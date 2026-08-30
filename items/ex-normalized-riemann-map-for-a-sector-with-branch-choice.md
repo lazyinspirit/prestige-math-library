@@ -2,14 +2,14 @@
 id: ex-normalized-riemann-map-for-a-sector-with-branch-choice
 kind: example
 title: "A normalized Riemann map for a sector with an explicit branch choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-sector-power-map-is-biholomorphic-on-narrow-sectors, thm-upper-half-plane-automorphisms-are-real-mobius-maps, thm-blaschke-factor-is-a-disc-automorphism]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

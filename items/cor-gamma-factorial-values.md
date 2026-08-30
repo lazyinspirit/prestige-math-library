@@ -2,7 +2,7 @@
 id: cor-gamma-factorial-values
 kind: corollary
 title: "Gamma at the positive integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -41,4 +41,5 @@ $$\Gamma(n+1)=n!.$$
 **Proof technique:** direct.
 
 1.1 Directly from the defining integral, $\Gamma(1)=\int_0^\infty e^{-t}\,dt=1$. [given]
+
 2.1 Repeatedly applying [L1] gives $\Gamma(n+1)=n\Gamma(n)=\cdots=n! \Gamma(1)=n!$. [step 1.1, L1, algebra] ∎

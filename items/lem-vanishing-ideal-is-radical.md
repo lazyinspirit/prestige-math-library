@@ -2,7 +2,7 @@
 id: lem-vanishing-ideal-is-radical
 kind: lemma
 title: "A vanishing ideal is always radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

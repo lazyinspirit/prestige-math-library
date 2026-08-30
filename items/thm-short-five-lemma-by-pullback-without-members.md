@@ -2,7 +2,7 @@
 id: thm-short-five-lemma-by-pullback-without-members
 kind: theorem
 title: "Short five lemma by pullback without members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,7 +15,7 @@ deps: [thm-a-short-exact-sequence-is-a-kernel-cokernel-pair,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

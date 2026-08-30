@@ -2,7 +2,7 @@
 id: thm-a-prime-power-conjugacy-class-forces-a-proper-nontrivial-normal-subgroup
 kind: theorem
 title: "A conjugacy class of prime-power size forces a proper nontrivial normal subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Theorem 4.23"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -53,7 +53,11 @@ normality means invariance under conjugation ([[def-generated-subgroup]], [[def-
 **Proof technique:** direct.
 
 1.1 Choose $g\in C$. Since $|C|>1$, one has $g\ne e$. Split the irreducible characters into the trivial character, the set $D$ of nontrivial irreducibles whose degree is divisible by $p$, and the set $N$ of nontrivial irreducibles whose degree is not divisible by $p$. Applying [F1] at $h=e$ gives $0=1+\sum_{\chi\in D}\chi(1)\chi(g)+\sum_{\chi\in N}\chi(1)\chi(g)$. [F1, given, choose]
+
 2.1 Write $\chi(1)=pm_\chi$ for $\chi\in D$. Because each $\chi(g)$ is an algebraic integer by [F3], the sum $a:=\sum_{\chi\in D} m_\chi\chi(g)$ is an algebraic integer. If the sum over $N$ were zero, step 1.1 would give $1=-pa$, so $-1/p$ would be a rational algebraic integer, contradicting [F4]. Therefore some $\chi\in N$ satisfies $\chi(g)\ne0$. [F3, F4, step 1.1, assume-contra, discharge-contradiction]
+
 3.1 For that chosen $\chi$, the class size $|C|=p^a$ is coprime to $\chi(1)$ by the definition of $N$, so [F2] shows that $g$ acts as a scalar on the irreducible representation $V$ affording $\chi$. Every element of the conjugacy class $C$ is conjugate to $g$, so each of them acts by the same scalar on $V$. [F2, step 2.1, algebra]
+
 4.1 Let $M=\langle ab^{-1}:a,b\in C\rangle$. Because conjugation permutes $C$, the set $\{ab^{-1}:a,b\in C\}$ is stable under conjugation, so [F5] makes $M$ a normal subgroup of $G$. By step 3.1 every generator $ab^{-1}$ acts trivially on $V$, so $M$ acts trivially on the nontrivial irreducible representation $V$; hence $M\ne G$. [F5, step 3.1, algebra]
+
 5.1 Since $|C|>1$, choose distinct $a,b\in C$; then $ab^{-1}\ne e$ lies in $M$, so $M$ is nontrivial. Together with step 4.1, this makes $M$ a proper nontrivial normal subgroup of $G$. [F5, step 4.1, choose] ∎

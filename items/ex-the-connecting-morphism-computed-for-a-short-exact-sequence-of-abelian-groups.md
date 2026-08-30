@@ -2,7 +2,7 @@
 id: ex-the-connecting-morphism-computed-for-a-short-exact-sequence-of-abelian-groups
 kind: example
 title: "The connecting morphism computed for a short exact sequence of abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,7 +15,7 @@ deps: [thm-the-connecting-morphism-exists-and-is-unique,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

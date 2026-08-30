@@ -1,7 +1,7 @@
 ---
 page: the-gamma-function-examples
 title: "The Gamma Function — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-gamma-values-at-half-integers-and-negative-half-integers,
            ex-residue-of-gamma-at-minus-two,

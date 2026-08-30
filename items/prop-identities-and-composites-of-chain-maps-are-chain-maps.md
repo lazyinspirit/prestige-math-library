@@ -2,13 +2,13 @@
 id: prop-identities-and-composites-of-chain-maps-are-chain-maps
 kind: proposition
 title: "Identities and composites of chain maps are chain maps"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-chain-map]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

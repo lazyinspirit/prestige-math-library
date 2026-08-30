@@ -1,7 +1,7 @@
 ---
 page: context-free-grammars-and-normal-forms
 title: "Context-Free Grammars and Normal Forms"
-status: draft
+status: published
 items:
   - def-context-free-grammar
   - def-one-step-and-reflexive-transitive-derivation

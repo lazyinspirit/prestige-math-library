@@ -2,7 +2,7 @@
 id: cex-extension-by-zero-without-support-away-from-the-boundary-is-not-smooth
 kind: counterexample
 title: "Extension by zero without support away from the boundary is not smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

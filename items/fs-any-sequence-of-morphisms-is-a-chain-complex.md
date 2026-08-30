@@ -2,14 +2,14 @@
 id: fs-any-sequence-of-morphisms-is-a-chain-complex
 kind: false-statement
 title: "FALSE: any sequence of morphisms is a chain complex"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-chain-complex-in-an-abelian-category,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

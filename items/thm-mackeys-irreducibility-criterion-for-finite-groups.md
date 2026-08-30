@@ -2,7 +2,7 @@
 id: thm-mackeys-irreducibility-criterion-for-finite-groups
 kind: theorem
 title: "Mackey's irreducibility criterion for finite groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://arxiv.org/pdf/1001.0462.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Section 5.2"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -53,6 +53,9 @@ as a sum over the double cosets in $H\backslash G/H$
 **Proof technique:** direct.
 
 1.1 Because $\chi$ is irreducible, [F1] gives $\langle \chi,\chi\rangle_H=1$. Applying [F2] with $\psi=\operatorname{Ind}_H^G\chi$ gives $\langle \operatorname{Ind}_H^G\chi,\operatorname{Ind}_H^G\chi\rangle_G=\langle \chi,\operatorname{Res}_H^G\operatorname{Ind}_H^G\chi\rangle_H$. [F1, F2, given]
+
 2.1 Apply [F3] to the restriction on the right side of step 1.1. The term for the identity double coset $H$ is exactly $\chi$, so it contributes $1$. Every other term is $\operatorname{Ind}_{H\cap sHs^{-1}}^H(\operatorname{Res}_{H\cap sHs^{-1}}^{sHs^{-1}}\,{}^s\chi)$, whose inner product with $\chi$ is, by another use of [F2], precisely $\langle \operatorname{Res}_{H\cap sHs^{-1}}^H\chi,\operatorname{Res}_{H\cap sHs^{-1}}^{sHs^{-1}}\,{}^s\chi\rangle_{H\cap sHs^{-1}}$. [F2, F3, step 1.1, algebra]
+
 3.1 Therefore $\langle \operatorname{Ind}_H^G\chi,\operatorname{Ind}_H^G\chi\rangle_G=1+\sum_{s\in S\setminus\{1\}} \langle \operatorname{Res}_{H\cap sHs^{-1}}^H\chi,\operatorname{Res}_{H\cap sHs^{-1}}^{sHs^{-1}}\,{}^s\chi\rangle_{H\cap sHs^{-1}}$. Each summand is a multiplicity and hence a nonnegative integer. [F2, step 2.1, algebra]
+
 4.1 The self-inner-product in step 3.1 equals $1$ if and only if every nonidentity summand vanishes. By [F1], that is equivalent to $\operatorname{Ind}_H^G\chi$ being irreducible. [F1, step 3.1, algebra] ∎

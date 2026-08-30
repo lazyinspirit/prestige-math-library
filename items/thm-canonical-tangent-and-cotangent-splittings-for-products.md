@@ -2,7 +2,7 @@
 id: thm-canonical-tangent-and-cotangent-splittings-for-products
 kind: theorem
 title: "Canonical tangent and cotangent splittings for products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

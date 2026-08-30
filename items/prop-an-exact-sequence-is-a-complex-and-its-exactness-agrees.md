@@ -2,7 +2,7 @@
 id: prop-an-exact-sequence-is-a-complex-and-its-exactness-agrees
 kind: proposition
 title: "An exact sequence is a complex, and its exactness agrees with the earlier notion"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -12,7 +12,7 @@ deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category,
        def-exactness-at-a-node,
        thm-the-arrow-theoretic-criterion-for-exactness]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

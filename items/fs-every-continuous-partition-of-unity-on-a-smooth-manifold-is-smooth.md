@@ -2,7 +2,7 @@
 id: fs-every-continuous-partition-of-unity-on-a-smooth-manifold-is-smooth
 kind: false-statement
 title: "A continuous partition of unity need not be smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

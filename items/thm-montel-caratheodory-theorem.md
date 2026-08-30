@@ -2,7 +2,7 @@
 id: thm-montel-caratheodory-theorem
 kind: theorem
 title: "Families omitting two values are chordally normal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-axiom-of-choice, def-two-value-omitting-holomorphic-family, def-chordal-local-uniform-convergence-and-meromorphic-normality, thm-schottky-theorem, thm-chordal-arzela-ascoli-criterion-for-meromorphic-families, lem-locally-bounded-holomorphic-families-are-locally-equicontinuous]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

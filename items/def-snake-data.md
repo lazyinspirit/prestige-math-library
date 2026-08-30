@@ -2,7 +2,7 @@
 id: def-snake-data
 kind: definition
 title: "Snake data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

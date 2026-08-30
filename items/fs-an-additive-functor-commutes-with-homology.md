@@ -2,7 +2,7 @@
 id: fs-an-additive-functor-commutes-with-homology
 kind: false-statement
 title: "FALSE: an additive functor commutes with homology"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps,
        thm-an-exact-functor-commutes-with-homology,
        def-additive-functor]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

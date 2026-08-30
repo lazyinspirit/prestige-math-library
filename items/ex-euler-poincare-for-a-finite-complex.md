@@ -2,14 +2,14 @@
 id: ex-euler-poincare-for-a-finite-complex
 kind: example
 title: "Euler-Poincare for a finite complex"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [thm-euler-poincare-formula-for-finite-free-complexes,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

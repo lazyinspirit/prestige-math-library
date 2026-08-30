@@ -2,7 +2,7 @@
 id: thm-gaussian-elimination-with-partial-pivoting-computes-a-nearby-factorisation-with-pivot-growth-bound
 kind: theorem
 title: "In the standard real floating-point model, computed pivoted LU is a nearby factorisation with a pivot-growth dependent backward bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity, def-permutation-matrix-partial-pivoting-and-pivot-growth, def-standard-relative-floating-point-model-and-unit-roundoff, lem-product-of-one-plus-deltas-gives-theta-n, thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

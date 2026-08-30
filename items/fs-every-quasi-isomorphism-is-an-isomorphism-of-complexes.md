@@ -2,7 +2,7 @@
 id: fs-every-quasi-isomorphism-is-an-isomorphism-of-complexes
 kind: false-statement
 title: "FALSE: every quasi-isomorphism is an isomorphism of complexes"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-quasi-isomorphism,
        prop-isomorphisms-of-complexes-are-quasi-isomorphisms,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

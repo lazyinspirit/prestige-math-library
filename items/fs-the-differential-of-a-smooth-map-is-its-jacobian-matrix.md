@@ -2,7 +2,7 @@
 id: fs-the-differential-of-a-smooth-map-is-its-jacobian-matrix
 kind: false-statement
 title: "The differential is intrinsic, not merely a Jacobian matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

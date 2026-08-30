@@ -2,7 +2,7 @@
 id: cor-weak-nullstellensatz-algebraically-closed-coordinate-form
 kind: corollary
 title: "Over an algebraically closed field, every maximal ideal is an evaluation ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

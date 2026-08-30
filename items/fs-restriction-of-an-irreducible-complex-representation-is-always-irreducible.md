@@ -2,7 +2,7 @@
 id: fs-restriction-of-an-irreducible-complex-representation-is-always-irreducible
 kind: false-statement
 title: "Restriction of an irreducible complex representation is always irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.11"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -38,5 +38,7 @@ subgroup $A_3\le S_3$.
 **Proof technique:** direct.
 
 1.1 The character $\chi_2$ is irreducible on $S_3$ by the example that constructs it. [given, algebra]
+
 2.1 But [F1] writes its restriction to $A_3$ as the sum of two distinct nontrivial characters, so the restricted representation is reducible. [F1, step 1.1]
+
 3.1 Therefore restriction does not preserve irreducibility in general. [step 2.1] ∎

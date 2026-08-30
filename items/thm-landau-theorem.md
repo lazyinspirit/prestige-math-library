@@ -2,14 +2,14 @@
 id: thm-landau-theorem
 kind: theorem
 title: "Landau's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-landau-radius-and-landau-constant, thm-bloch-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

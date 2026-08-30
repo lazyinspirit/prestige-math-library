@@ -1,7 +1,7 @@
 ---
 page: direct-matrix-factorisations-lu-cholesky-and-qr-examples
 title: "Direct Matrix Factorisations: LU, Cholesky and QR: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot,
            ex-plu-factorisation-by-hand,

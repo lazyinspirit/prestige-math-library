@@ -1,7 +1,7 @@
 ---
 page: induced-representations-and-frobenius-reciprocity-examples
 title: "Induced Representations, Frobenius Reciprocity and Applications — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character, ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters, ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character, ex-frobenius-reciprocity-for-the-two-preceding-s-three-inductions, ex-c-four-shows-divisibility-of-irreducible-degrees-by-the-group-order-is-not-an-equivalence, fs-an-induced-irreducible-complex-character-is-always-irreducible, fs-induction-followed-by-restriction-is-the-identity-on-complex-representations, fs-restriction-of-an-irreducible-complex-representation-is-always-irreducible, fs-every-divisor-of-the-group-order-is-an-irreducible-character-degree]
 ---

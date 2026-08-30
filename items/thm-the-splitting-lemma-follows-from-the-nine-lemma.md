@@ -2,7 +2,7 @@
 id: thm-the-splitting-lemma-follows-from-the-nine-lemma
 kind: theorem
 title: "The splitting lemma follows from the nine lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [thm-nine-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

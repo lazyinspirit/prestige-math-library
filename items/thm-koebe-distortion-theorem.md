@@ -2,14 +2,14 @@
 id: thm-koebe-distortion-theorem
 kind: theorem
 title: "Koebe's distortion theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-normalized-univalent-class, thm-blaschke-factor-is-a-disc-automorphism, cor-bieberbach-second-coefficient-bound]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

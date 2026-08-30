@@ -2,14 +2,14 @@
 id: ex-the-exponential-function-omits-exactly-zero-and-shows-little-picard-is-sharp
 kind: example
 title: "The exponential function omits exactly zero and shows little Picard is sharp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-surjects-onto-the-punctured-plane, thm-kernel-and-fibres-of-complex-exponential, thm-little-picard-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

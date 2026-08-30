@@ -2,13 +2,13 @@
 id: fs-the-boundaries-of-a-complex-are-a-quotient-of-its-cycles
 kind: false-statement
 title: "FALSE: the boundaries of a complex are a quotient of its cycles"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-cycle-and-boundary-subobjects-of-a-complex]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

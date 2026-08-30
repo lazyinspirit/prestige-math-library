@@ -2,14 +2,14 @@
 id: ex-the-multiplication-by-m-complex-computes-a-cyclic-group
 kind: example
 title: "The multiplication-by-m complex computes a cyclic group"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [ex-a-two-term-complex-and-its-kernel-and-cokernel-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

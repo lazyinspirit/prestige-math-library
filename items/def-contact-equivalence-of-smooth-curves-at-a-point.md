@@ -2,7 +2,7 @@
 id: def-contact-equivalence-of-smooth-curves-at-a-point
 kind: definition
 title: "Contact equivalence of smooth curves at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-smooth-manifold]
 justified_by: [lem-contact-equivalence-is-chart-independent-and-an-equivalence-relation]
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

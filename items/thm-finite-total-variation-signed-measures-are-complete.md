@@ -2,14 +2,14 @@
 id: thm-finite-total-variation-signed-measures-are-complete
 kind: theorem
 title: "Finite-total-variation signed measures are complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-the-space-of-finite-total-variation-signed-measures, thm-finite-total-variation-signed-measures-form-a-real-normed-space, thm-continuity-from-above-for-measures, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

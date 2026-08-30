@@ -2,14 +2,14 @@
 id: lem-two-omitted-values-rule-out-an-essential-singularity
 kind: lemma
 title: "Two omitted finite values rule out an essential singularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-axiom-of-choice, thm-montel-caratheodory-theorem, thm-chordal-limit-theorem-for-meromorphic-functions, thm-boundary-maximum-modulus-principle, thm-removable-singularity-characterizations, thm-pole-characterizations, thm-isolated-singularity-trichotomy]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

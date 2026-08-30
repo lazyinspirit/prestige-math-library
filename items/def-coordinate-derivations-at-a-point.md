@@ -2,7 +2,7 @@
 id: def-coordinate-derivations-at-a-point
 kind: definition
 title: "Coordinate derivations at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-germ-of-a-smooth-function-at-a-point, def-derivation-at-a-point-and-t
 justified_by: [lem-coordinate-derivations-are-well-defined-derivations]
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

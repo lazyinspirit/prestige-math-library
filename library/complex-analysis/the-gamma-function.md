@@ -1,7 +1,7 @@
 ---
 page: the-gamma-function
 title: "The Gamma Function"
-status: draft
+status: published
 items: [def-euler-gamma-function,
         lem-gamma-integral-converges-locally-uniformly,
         thm-euler-gamma-function-is-holomorphic,

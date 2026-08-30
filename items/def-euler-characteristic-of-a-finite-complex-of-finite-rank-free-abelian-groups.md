@@ -2,13 +2,13 @@
 id: def-euler-characteristic-of-a-finite-complex-of-finite-rank-free-abelian-groups
 kind: definition
 title: "Euler characteristic of a finite complex of finite-rank free abelian groups"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-bounded-bounded-below-and-bounded-above-complex,
        def-invariant-basis-number-and-rank-of-a-free-module]
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

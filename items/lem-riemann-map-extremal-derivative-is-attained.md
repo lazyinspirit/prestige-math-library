@@ -2,14 +2,14 @@
 id: lem-riemann-map-extremal-derivative-is-attained
 kind: lemma
 title: "A maximizing sequence has a locally uniform limit with extremal derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-axiom-of-choice, def-riemann-map-extremal-family, lem-riemann-map-extremal-derivatives-are-positive-and-bounded, thm-montel-theorem-for-holomorphic-functions, cor-derivative-operators-are-continuous-for-local-uniform-convergence, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: def-euler-gamma-function
 kind: definition
 title: "Euler's Gamma function on the right half-plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: [lem-gamma-integral-converges-locally-uniformly]
 forward_refs: []
 aliases: []
 landmark: true
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-class-sums-act-by-central-character-scalars
 kind: proposition
 title: "Class sums act on an irreducible representation by central-character scalars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Chapter 15"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -53,5 +53,7 @@ $g\in C$ ([[def-central-character-of-an-irreducible-complex-character]]).
 **Proof technique:** direct.
 
 1.1 Because $\widehat C$ is central by [F1], the operator $\rho_V(\widehat C)$ commutes with $\rho_V(g)$ for every $g\in G$, so it is a $G$-endomorphism of the irreducible representation $V$. By [F3], there is a scalar $\lambda_C$ with $\rho_V(\widehat C)=\lambda_C\operatorname{id}_V$. [F1, F3, given]
+
 2.1 Taking traces gives $\lambda_C\chi(1)=\operatorname{tr}\rho_V(\widehat C)=\sum_{x\in C}\operatorname{tr}\rho_V(x)=\sum_{x\in C}\chi(x)=|C|\chi(g)$ for any $g\in C$, because $\chi$ is constant on $C$. Hence $\lambda_C=|C|\chi(g)/\chi(1)=\omega_\chi(\widehat C)$ by [F2]. [F2, step 1.1, algebra]
+
 3.1 Substituting the scalar from step 2.1 into step 1.1 yields $\rho_V(\widehat C)=\omega_\chi(\widehat C)\operatorname{id}_V$. [F2, step 1.1, step 2.1] ∎

@@ -2,7 +2,7 @@
 id: cor-strong-nullstellensatz-two-inclusions
 kind: corollary
 title: "Strong Nullstellensatz: I(V(I)) equals the radical of I"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

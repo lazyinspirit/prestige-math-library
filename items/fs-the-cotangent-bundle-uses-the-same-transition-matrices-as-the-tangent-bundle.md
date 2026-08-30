@@ -2,7 +2,7 @@
 id: fs-the-cotangent-bundle-uses-the-same-transition-matrices-as-the-tangent-bundle
 kind: false-statement
 title: "Cotangent transitions are inverse transpose, not tangent Jacobians"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-nine-lemma-variants-by-which-rows-are-assumed-exact
 kind: theorem
 title: "Nine lemma variants by which rows are assumed exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,7 +18,7 @@ deps: [thm-nine-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

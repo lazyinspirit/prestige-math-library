@@ -2,7 +2,7 @@
 id: thm-the-first-isomorphism-theorem-for-complexes
 kind: theorem
 title: "The first isomorphism theorem for complexes"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [thm-first-isomorphism-theorem-in-an-abelian-category,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        lem-the-kernel-of-a-chain-map-is-computed-degreewise]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

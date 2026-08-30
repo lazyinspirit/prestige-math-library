@@ -2,14 +2,14 @@
 id: def-cohomology-object-of-a-cochain-complex
 kind: definition
 title: "Cohomology object of a cochain complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-cochain-complex-in-an-abelian-category,
        lem-the-boundary-subobject-factors-through-the-cycle-subobject,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

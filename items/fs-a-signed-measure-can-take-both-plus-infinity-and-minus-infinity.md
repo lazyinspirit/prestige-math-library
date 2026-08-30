@@ -2,14 +2,14 @@
 id: fs-a-signed-measure-can-take-both-plus-infinity-and-minus-infinity
 kind: false-statement
 title: "FALSE: a signed measure can take both +infinity and -infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-signed-measure]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -38,5 +38,6 @@ set and the value $-\infty$ on another.
 
 1.1 The displayed claim asserts exactly the negation of the second clause in [L1]
 [L1].
+
 2.1 Therefore no signed measure satisfies the claim, and the statement is [L1, step 1.1] ∎
 false.

@@ -2,13 +2,13 @@
 id: def-complex-simple-function
 kind: definition
 title: "Complex simple functions as finite sums of measurable indicators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-sigma-algebra, thm-complex-numbers-form-a-field]
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   references:

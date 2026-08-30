@@ -2,7 +2,7 @@
 id: thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity
 kind: theorem
 title: "Smooth locally defined functions can be glued by a partition of unity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

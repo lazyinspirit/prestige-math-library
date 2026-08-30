@@ -2,14 +2,14 @@
 id: thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation
 kind: theorem
 title: "A complex L^1 density defines a complex measure whose total variation is |h| dmu"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-complex-measure, def-integration-against-a-signed-or-complex-measure, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-l-one-functions-admit-dominated-complex-simple-approximations, def-integral-over-a-measurable-set, thm-monotone-convergence-for-the-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-integral-triangle-inequality, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: def-smooth-partition-of-unity-subordinate-to-an-open-cover
 kind: definition
 title: "Smooth partitions of unity subordinate to an open cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-smooth-manifold, def-cover-refinement-and-local-finiteness]
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

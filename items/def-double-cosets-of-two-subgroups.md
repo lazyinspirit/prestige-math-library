@@ -2,7 +2,7 @@
 id: def-double-cosets-of-two-subgroups
 kind: definition
 title: "Double cosets $K\\backslash G/H$ of two subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Section 20.1"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

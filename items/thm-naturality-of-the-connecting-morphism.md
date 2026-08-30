@@ -2,7 +2,7 @@
 id: thm-naturality-of-the-connecting-morphism
 kind: theorem
 title: "Naturality of the connecting morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ deps: [def-snake-data,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

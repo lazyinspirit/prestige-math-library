@@ -2,7 +2,7 @@
 id: cor-an-exact-functor-preserves-and-reflects-quasi-isomorphisms-when-conservative
 kind: corollary
 title: "An exact functor preserves quasi-isomorphisms and reflects them when it is conservative"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [thm-an-exact-functor-commutes-with-homology,
        def-quasi-isomorphism,
        def-conservative-functor]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

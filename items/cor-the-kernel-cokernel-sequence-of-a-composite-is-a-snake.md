@@ -2,7 +2,7 @@
 id: cor-the-kernel-cokernel-sequence-of-a-composite-is-a-snake
 kind: corollary
 title: "The kernel-cokernel sequence of a composite is a snake"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [def-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

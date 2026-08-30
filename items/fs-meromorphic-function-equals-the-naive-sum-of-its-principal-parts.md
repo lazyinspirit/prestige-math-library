@@ -2,7 +2,7 @@
 id: fs-meromorphic-function-equals-the-naive-sum-of-its-principal-parts
 kind: false-statement
 title: "FALSE: a meromorphic function always equals the naive sum of its principal parts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -40,4 +40,5 @@ principal parts, with no convergence-forcing corrections.
 **Proof technique:** direct.
 
 1.1 Fix any noninteger positive real $x$. Then $p_n(x)=-n/(x-n)=1+x/(n-x)\to1$ as $n\to\infty$. [given, algebra]
+
 2.1 Therefore the naive series $\sum_{n\ge1}p_n(x)$ has terms that do not tend to $0$, so it diverges. This is exactly why the correction terms from [L1] are not optional in Mittag-Leffler's theorem. [step 1.1, L1, algebra] ∎

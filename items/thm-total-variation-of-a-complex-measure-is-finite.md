@@ -2,7 +2,7 @@
 id: thm-total-variation-of-a-complex-measure-is-finite
 kind: theorem
 title: "Every complex measure has finite total variation"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -10,7 +10,7 @@ provenance:
   proof: ai-generated
 deps: [prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, def-total-variation-of-a-signed-or-complex-measure, def-complex-measure, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

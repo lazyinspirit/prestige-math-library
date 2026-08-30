@@ -2,7 +2,7 @@
 id: thm-the-connecting-morphism-exists-and-is-unique
 kind: theorem
 title: "The connecting morphism exists and is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ deps: [def-snake-data,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-mittag-leffler-expansion-of-pi-cotangent
 kind: theorem
 title: "The Mittag-Leffler expansion of pi cotangent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ forward_refs: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

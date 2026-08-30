@@ -2,7 +2,7 @@
 id: prop-the-tangent-bundle-projection-and-zero-section-are-smooth
 kind: proposition
 title: "The tangent-bundle projection and zero section are smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

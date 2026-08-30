@@ -2,7 +2,7 @@
 id: fs-the-five-lemma-needs-only-that-the-two-middle-maps-are-monic
 kind: false-statement
 title: "FALSE: the five lemma needs only that the two middle maps are monic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-sharp-five-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-zariski-lemma-transcendence-basis-reduction
 kind: lemma
 title: "A finite-type field reduces to a localization over a transcendence basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

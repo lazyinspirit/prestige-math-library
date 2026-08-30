@@ -2,7 +2,7 @@
 id: thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts
 kind: theorem
 title: "Successive Householder or Givens transformations produce full and reduced QR factorisations with the standard dense operation counts"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries, thm-qr-factorisation-over-r-or-c]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

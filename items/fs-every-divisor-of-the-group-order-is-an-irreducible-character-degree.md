@@ -2,7 +2,7 @@
 id: fs-every-divisor-of-the-group-order-is-an-irreducible-character-degree
 kind: false-statement
 title: "Every divisor of $|G|$ is an irreducible character degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Section 3.5"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -42,5 +42,7 @@ degree
 **Proof technique:** direct.
 
 1.1 The integer $2$ divides $|C_4|=4$. [given, algebra]
+
 2.1 But [F1] shows that no irreducible complex character of $C_4$ has degree $2$. [F1, step 1.1]
+
 3.1 Hence not every divisor of the group order occurs as an irreducible character degree. [step 2.1] ∎

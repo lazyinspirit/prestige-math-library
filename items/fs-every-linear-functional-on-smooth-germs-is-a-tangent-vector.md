@@ -2,7 +2,7 @@
 id: fs-every-linear-functional-on-smooth-germs-is-a-tangent-vector
 kind: false-statement
 title: "Linearity alone does not make a tangent vector"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

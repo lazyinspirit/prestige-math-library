@@ -2,14 +2,14 @@
 id: fs-conformal-equivalence-preserves-euclidean-area
 kind: false-statement
 title: "FALSE: conformal equivalence preserves Euclidean area"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-conformal-equivalence-and-automorphism-group]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

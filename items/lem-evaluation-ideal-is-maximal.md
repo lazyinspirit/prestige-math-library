@@ -2,7 +2,7 @@
 id: lem-evaluation-ideal-is-maximal
 kind: lemma
 title: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

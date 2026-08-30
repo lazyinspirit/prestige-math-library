@@ -2,7 +2,7 @@
 id: lem-gamma-integral-converges-locally-uniformly
 kind: lemma
 title: "Euler's Gamma integral converges locally uniformly on the right half-plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +46,5 @@ for $s>0$ ([[thm-real-gamma-euler-integral-convergence]]).
 **Proof technique:** direct.
 
 1.1 Since $K$ is compact in the open right half-plane, choose real numbers $0<a\le b$ with $a\le\operatorname{Re}z\le b$ for every $z\in K$. For $0<t\le1$ one has $|t^{z-1}e^{-t}|=t^{\operatorname{Re}z-1}e^{-t}\le t^{a-1}$, and for $t\ge1$ one has $|t^{z-1}e^{-t}|\le t^{b-1}e^{-t}$. [given, choose, algebra]
+
 2.1 By [L1], both majorants from step 1.1 have convergent improper integrals on their respective ranges. The Weierstrass M-test on compact subsets therefore gives local-uniform convergence of the truncated integrals to the Gamma integral on $K$. [step 1.1, L1, algebra] ∎

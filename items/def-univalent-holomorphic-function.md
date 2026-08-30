@@ -2,13 +2,13 @@
 id: def-univalent-holomorphic-function
 kind: definition
 title: "Univalent holomorphic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

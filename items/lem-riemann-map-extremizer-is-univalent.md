@@ -2,14 +2,14 @@
 id: lem-riemann-map-extremizer-is-univalent
 kind: lemma
 title: "The extremal limit is univalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [lem-riemann-map-extremal-derivative-is-attained, lem-nonconstant-local-uniform-limits-of-univalent-functions-are-univalent]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

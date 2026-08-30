@@ -2,14 +2,14 @@
 id: fs-finite-values-and-finite-additivity-force-finite-total-variation
 kind: false-statement
 title: "FALSE: finite values and finite additivity force finite total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

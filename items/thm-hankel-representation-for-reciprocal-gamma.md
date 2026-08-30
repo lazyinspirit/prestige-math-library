@@ -2,7 +2,7 @@
 id: thm-hankel-representation-for-reciprocal-gamma
 kind: theorem
 title: "Hankel's representation for reciprocal Gamma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

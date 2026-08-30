@@ -2,13 +2,13 @@
 id: def-chain-complex-in-an-abelian-category
 kind: definition
 title: "Chain complex in an abelian category"
-status: draft
+status: published
 landmark: true
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abelian-category]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

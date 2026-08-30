@@ -2,14 +2,14 @@
 id: ex-exp-one-over-z-shows-great-picard-is-sharp
 kind: example
 title: "The function e^(1/z) omits zero and takes every nonzero value infinitely often near the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-complex-exponential-surjects-onto-the-punctured-plane, thm-kernel-and-fibres-of-complex-exponential, thm-great-picard-theorem, thm-isolated-singularity-trichotomy]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

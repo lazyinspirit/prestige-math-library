@@ -2,7 +2,7 @@
 id: lem-locally-finite-families-of-supports-have-locally-finite-cozero-families
 kind: lemma
 title: "Locally finite supports have locally finite cozero sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: rem-induced-representation-agrees-with-the-tensor-product-model
 kind: remark
 title: "The function model of induction agrees with the tensor-product model $k[G]\\otimes_{k[H]}W$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Section 18.1"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

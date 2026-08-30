@@ -2,13 +2,13 @@
 id: def-total-variation-of-a-signed-or-complex-measure
 kind: definition
 title: "The total variation |nu|(E) from countable measurable partitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-signed-measure, def-complex-measure, def-extended-reals]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

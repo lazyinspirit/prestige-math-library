@@ -2,7 +2,7 @@
 id: ex-a-subcomplex-and-its-quotient-complex
 kind: example
 title: "A subcomplex and its quotient complex"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-subcomplex,
        def-quotient-complex,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

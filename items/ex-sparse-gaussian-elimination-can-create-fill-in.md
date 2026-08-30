@@ -2,7 +2,7 @@
 id: ex-sparse-gaussian-elimination-can-create-fill-in
 kind: example
 title: "Sparse Gaussian elimination can create fill-in in the factors"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [def-permutation-matrix-partial-pivoting-and-pivot-growth]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

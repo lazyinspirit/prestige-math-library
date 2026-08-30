@@ -2,7 +2,7 @@
 id: cor-smooth-functions-separate-points-from-closed-sets
 kind: corollary
 title: "Smooth functions separate points from closed sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

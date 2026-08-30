@@ -2,7 +2,7 @@
 id: cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot
 kind: counterexample
 title: "An invertible matrix can fail unpivoted LU at the first pivot"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -37,5 +37,7 @@ pivots exactly when every leading principal minor is nonzero
 **Proof technique:** direct.
 
 1.1 The determinant of $A$ is $-1$, so $A$ is invertible. Its first leading principal minor is the $1\times 1$ determinant $\Delta_1=0$. [given, algebra]
+
 2.1 By [L1], the vanishing of $\Delta_1$ forbids an unpivoted unit-lower LU factorisation with nonzero pivots. Therefore invertibility alone does not suffice. [step 1.1, L1]
+
 3.1 Step 2.1 refutes the statement. [step 2.1] ∎

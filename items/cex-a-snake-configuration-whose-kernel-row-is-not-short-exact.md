@@ -2,7 +2,7 @@
 id: cex-a-snake-configuration-whose-kernel-row-is-not-short-exact
 kind: counterexample
 title: "A snake configuration whose kernel row is not short exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,7 +15,7 @@ deps: [thm-snake-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

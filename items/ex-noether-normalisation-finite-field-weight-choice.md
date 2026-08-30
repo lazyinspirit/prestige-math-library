@@ -2,7 +2,7 @@
 id: ex-noether-normalisation-finite-field-weight-choice
 kind: example
 title: "Finite-field normalization needs the weight trick"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

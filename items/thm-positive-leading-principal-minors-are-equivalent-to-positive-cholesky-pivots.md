@@ -2,7 +2,7 @@
 id: thm-positive-leading-principal-minors-are-equivalent-to-positive-cholesky-pivots
 kind: theorem
 title: "For real symmetric matrices, positive leading principal minors are equivalent to positive Cholesky pivots"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique, thm-sylvesters-criterion-for-positive-definiteness, thm-determinant-of-a-triangular-matrix]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -58,5 +58,7 @@ entries ([[thm-determinant-of-a-triangular-matrix]]).
 for leading Cholesky blocks.
 
 1.1 By [L1] and [L2], condition 1 is equivalent to positive definiteness, and positive definiteness is equivalent to existence of a Cholesky factorisation with positive diagonal. Hence conditions 1 and 2 are equivalent. [L1, L2]
+
 2.1 Suppose $A=LL^{\mathsf T}$ with $L$ lower triangular and positive diagonal. Its leading $k\times k$ principal block factors as $A_k=L_kL_k^{\mathsf T}$, where $L_k$ is the leading $k\times k$ block of $L$. By [L3], $$\Delta_k=\det(A_k)=\det(L_k)^2=\left(\prod_{i<k}\ell_{ii}\right)^2 =\prod_{i<k}\ell_{ii}^2.$$ Since each $\ell_{ii}>0$, every $\Delta_k$ is positive. [step 1.1, L3, algebra]
+
 3.1 Step 1.1 proves the equivalence, and step 2.1 identifies the leading principal minors with the squared pivot products. [step 1.1, step 2.1] ∎

@@ -2,7 +2,7 @@
 id: lem-the-differential-descends-to-a-quotient-complex
 kind: lemma
 title: "The differential descends to a quotient complex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-subcomplex,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers,
        def-chain-complex-in-an-abelian-category]
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

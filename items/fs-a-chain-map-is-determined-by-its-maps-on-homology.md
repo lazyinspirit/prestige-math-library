@@ -2,14 +2,14 @@
 id: fs-a-chain-map-is-determined-by-its-maps-on-homology
 kind: false-statement
 title: "FALSE: a chain map is determined by its maps on homology"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

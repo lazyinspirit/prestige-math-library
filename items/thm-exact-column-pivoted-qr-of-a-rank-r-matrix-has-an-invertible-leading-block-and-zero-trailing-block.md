@@ -2,7 +2,7 @@
 id: thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block
 kind: theorem
 title: "Exact column-pivoted QR of a real or complex rank-r matrix has an invertible leading triangular block and zero trailing block"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, def-invertible-matrix-and-general-linear-group, def-rank-and-nullity]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

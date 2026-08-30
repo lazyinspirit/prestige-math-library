@@ -2,7 +2,7 @@
 id: cor-gamma-one-half-value
 kind: corollary
 title: "The value of Gamma at one half"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -52,4 +52,5 @@ $\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)$
 **Proof technique:** direct.
 
 1.1 Substituting $z=1/2$ into [L3] gives $\Gamma(1/2)^2=\pi$, because $\sin(\pi/2)=1$. [L3, given]
+
 2.1 By [L1] and [L2], $\Gamma(1/2)$ is the positive real number $\sqrt{\pi}$. Step 1.1 leaves only the two square roots of $\pi$, so the positive one is the required value. [step 1.1, L1, L2] ∎

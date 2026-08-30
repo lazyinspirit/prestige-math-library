@@ -2,7 +2,7 @@
 id: cex-a-finitely-additive-finite-valued-set-function-can-have-infinite-total-variation
 kind: counterexample
 title: "A finitely additive finite-valued set function can have infinite total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: counterexample
 deps: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

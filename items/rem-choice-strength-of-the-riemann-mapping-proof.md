@@ -2,13 +2,13 @@
 id: rem-choice-strength-of-the-riemann-mapping-proof
 kind: remark
 title: "Choice strength used in the extremal proof of the Riemann mapping theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-riemann-map-extremal-derivative-is-attained, thm-montel-theorem-for-holomorphic-functions]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

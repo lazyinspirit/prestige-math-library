@@ -2,12 +2,12 @@
 id: def-quasi-isomorphism
 kind: definition
 title: "Quasi-isomorphism"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

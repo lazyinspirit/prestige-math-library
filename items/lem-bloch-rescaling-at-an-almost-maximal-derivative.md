@@ -2,14 +2,14 @@
 id: lem-bloch-rescaling-at-an-almost-maximal-derivative
 kind: lemma
 title: "Maximizing-point rescaling produces a normalized map with uniformly bounded derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-extreme-value-metric]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

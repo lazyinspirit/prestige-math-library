@@ -2,7 +2,7 @@
 id: ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters
 kind: example
 title: "Restricting that degree-two $S_3$ character to the three-cycle subgroup gives the two nontrivial linear characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Section 4.11"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -49,5 +49,7 @@ $\operatorname{Ind}_{A_3}^{S_3}\theta$
 **Proof technique:** direct.
 
 1.1 Restricting the values $(2,0,-1)$ from [F1] to $A_3=\{e,(123),(132)\}$ gives $\operatorname{Res}_{A_3}^{S_3}\chi_2=(2,-1,-1)$. [F1, given]
+
 2.1 Frobenius reciprocity [F2] gives $\langle \theta,\operatorname{Res}_{A_3}^{S_3}\chi_2\rangle_{A_3}=\langle \operatorname{Ind}_{A_3}^{S_3}\theta,\chi_2\rangle_{S_3}=\langle \chi_2,\chi_2\rangle_{S_3}=1$, and the same computation with $\overline\theta$ gives multiplicity $1$ for $\overline\theta$. [F1, F2, step 1.1, algebra]
+
 3.1 The restriction has degree $2$ at the identity, while the two nontrivial linear characters already account for degree $1+1=2$. Hence no trivial summand occurs, and $\operatorname{Res}_{A_3}^{S_3}\chi_2=\theta+\overline\theta$. [step 1.1, step 2.1, algebra] ∎

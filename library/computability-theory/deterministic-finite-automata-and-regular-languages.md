@@ -1,7 +1,7 @@
 ---
 page: deterministic-finite-automata-and-regular-languages
 title: "Deterministic Finite Automata and Regular Languages"
-status: draft
+status: published
 items:
   - def-deterministic-finite-automaton
   - def-extended-dfa-transition-function

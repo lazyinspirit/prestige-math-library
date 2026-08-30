@@ -1,7 +1,7 @@
 ---
 page: smooth-partitions-of-unity-and-exhaustions-examples
 title: "Smooth Partitions of Unity and Exhaustions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-standard-compactly-supported-bump-on-the-line,
            ex-a-radial-bump-on-euclidean-space,

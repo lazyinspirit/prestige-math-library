@@ -2,14 +2,14 @@
 id: ex-an-exact-short-sequence-as-an-acyclic-three-term-complex
 kind: example
 title: "An exact short sequence as an acyclic three-term complex"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [prop-an-exact-sequence-is-a-complex-and-its-exactness-agrees,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-cauchy-riemann-sums-give-rational-approximation
 kind: lemma
 title: "Riemann sums of the Cauchy integral give rational approximation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -60,5 +60,7 @@ continuous image of a compact space is compact
 **Proof technique:** direct.
 
 1.1 Choose $\Gamma$ as in [L1]. Because $n(\Gamma,z)=1$ on $K$ and $\Gamma^\ast\subseteq U$, the cycle is null-homologous in $U$ and [L2] gives $$f(z)=\frac{1}{2\pi i}\int_\Gamma\frac{f(\zeta)}{\zeta-z}\,d\zeta \qquad(z\in K).$$ [L1, L2, given]
+
 2.1 Decompose $\Gamma$ into finitely many oriented line segments $\gamma_j:[a_j,b_j]\to\mathbb C$. For each $j$, the function $\phi_j(t,z)=f(\gamma_j(t))\gamma_j'(t)/(\gamma_j(t)-z)$ is continuous on the compact set $[a_j,b_j]\times K$, because $\Gamma^\ast\cap K=\varnothing$. By [L3], each $\phi_j$ is uniformly continuous there, so a fine enough Riemann sum approximates $\int_{a_j}^{b_j}\phi_j(t,z)\,dt$ uniformly in $z\in K$. [step 1.1, L3, algebra]
+
 3.1 Summing those edgewise Riemann sums gives a rational function of the form $r(z)=\sum_\nu c_\nu/(\xi_\nu-z)$ with sample points $\xi_\nu\in\Gamma^\ast$. Choosing the mesh so that the total edgewise error is below $\varepsilon$ and using step 1.1 yields $\sup_{z\in K}|f(z)-r(z)|<\varepsilon$. [step 1.1, step 2.1, construct, algebra] ∎

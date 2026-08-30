@@ -2,7 +2,7 @@
 id: ex-the-differential-of-a-map-between-spheres-in-stereographic-coordinates
 kind: example
 title: "The differential of a map between spheres in stereographic coordinates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-smooth-function-defined-near-a-closed-set-extends-globally-without-a-cutoff
 kind: false-statement
 title: "Naive extension by zero from an open set need not be smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

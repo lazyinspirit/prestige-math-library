@@ -2,7 +2,7 @@
 id: cor-affine-radical-ideal-point-separation
 kind: corollary
 title: "A radical ideal omitting a function admits a point that kills the ideal but not the function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

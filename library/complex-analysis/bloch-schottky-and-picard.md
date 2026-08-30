@@ -1,7 +1,7 @@
 ---
 page: bloch-schottky-and-picard
 title: "Bloch, Schottky, and the Picard Theorems"
-status: draft
+status: published
 items: [def-bloch-radius-and-bloch-constant, def-landau-radius-and-landau-constant, def-two-value-omitting-holomorphic-family, lem-bloch-rescaling-at-an-almost-maximal-derivative, lem-quantitative-univalence-from-controlled-derivative, thm-bloch-theorem, thm-landau-theorem, lem-holomorphic-logarithms-for-two-omitted-values, thm-schottky-theorem, thm-montel-caratheodory-theorem, thm-little-picard-theorem, lem-two-omitted-values-rule-out-an-essential-singularity, thm-great-picard-theorem, cor-meromorphic-little-picard-theorem, cor-meromorphic-great-picard-theorem, rem-agreement-between-classical-and-nevanlinna-picard-theorems]
 examples: []
 ---

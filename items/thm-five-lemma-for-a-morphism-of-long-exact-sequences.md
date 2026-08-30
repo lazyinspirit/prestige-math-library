@@ -2,7 +2,7 @@
 id: thm-five-lemma-for-a-morphism-of-long-exact-sequences
 kind: theorem
 title: "Five lemma for a morphism of long exact sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-sharp-five-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-an-atomic-signed-measure-on-z-has-total-variation-three
 kind: example
 title: "An atomic signed measure on Z has total variation three"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: example
 deps: [thm-jordan-decomposition-for-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -47,6 +47,7 @@ $\mathbb Z$, so $\nu$ is countably additive. If $E$ contains only even
 integers, then every term in the series for $\nu(E)$ is nonnegative; if $E$
 contains only odd integers, every term is nonpositive. Thus the even integers
 form a positive set and the odd integers form a negative set.
+
 2.1 The Jordan positive part is therefore the even-atom measure [L1, A1, step 1.1] ∎
 $\nu^+(A)=\sum_{k\in A,\ k\text{ even}}2^{-|k|}$ and the negative part is
 $\nu^-(A)=\sum_{k\in A,\ k\text{ odd}}2^{-|k|}$. Hence [L1] gives

@@ -2,7 +2,7 @@
 id: fs-a-partition-of-unity-can-glue-manifold-valued-maps-by-taking-weighted-sums
 kind: false-statement
 title: "Weighted sums do not glue arbitrary manifold-valued maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

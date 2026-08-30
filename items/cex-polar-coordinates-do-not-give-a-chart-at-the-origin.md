@@ -2,7 +2,7 @@
 id: cex-polar-coordinates-do-not-give-a-chart-at-the-origin
 kind: counterexample
 title: "Polar coordinates do not give a chart at the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-principal-part-at-an-isolated-point
 kind: definition
 title: "The principal part at an isolated singularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 forward_refs: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

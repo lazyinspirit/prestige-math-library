@@ -2,7 +2,7 @@
 id: lem-the-boundary-subobject-factors-through-the-cycle-subobject
 kind: lemma
 title: "The boundary subobject factors through the cycle subobject"
-status: draft
+status: published
 landmark: true
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ deps: [def-cycle-and-boundary-subobjects-of-a-complex,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers,
        thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

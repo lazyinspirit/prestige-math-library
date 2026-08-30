@@ -2,7 +2,7 @@
 id: ex-stirling-approximation-to-ten-factorial
 kind: example
 title: "Stirling's approximation for 10!"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

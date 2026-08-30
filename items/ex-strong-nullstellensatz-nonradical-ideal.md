@@ -2,7 +2,7 @@
 id: ex-strong-nullstellensatz-nonradical-ideal
 kind: example
 title: "I(V(x^2, xy)) keeps only the radical information"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

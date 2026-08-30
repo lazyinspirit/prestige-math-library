@@ -2,7 +2,7 @@
 id: ex-residue-of-gamma-at-minus-two
 kind: example
 title: "The residue of Gamma at z=-2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -43,4 +43,5 @@ $$\operatorname{Res}(\Gamma,-2)=\frac12.$$
 **Proof technique:** direct.
 
 1.1 Substitute $n=2$ into [L1]. Then $\operatorname{Res}(\Gamma,-2)=(-1)^2/2!$. [L1, given]
+
 2.1 Since $(-1)^2=1$ and $2!=2$, step 1.1 simplifies to $\operatorname{Res}(\Gamma,-2)=1/2$. [step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: cor-frobenius-reciprocity-for-complex-characters
 kind: corollary
 title: "Frobenius reciprocity for complex characters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Chapter 19"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 
@@ -52,5 +52,7 @@ $\operatorname{Ind}_H^G W$ ([[def-induced-character-of-a-complex-representation]
 **Proof technique:** direct.
 
 1.1 By [F3] and then [F1], $\langle \operatorname{Ind}_H^G\chi,\psi\rangle_G=\dim\operatorname{Hom}_G(\operatorname{Ind}_H^G W,V)$. [F1, F3, given]
+
 1.2 By [F2], this dimension equals $\dim\operatorname{Hom}_H(W,\operatorname{Res}_H^G V)$; applying [F1] again on $H$ gives $\dim\operatorname{Hom}_H(W,\operatorname{Res}_H^G V)=\langle \chi,\operatorname{Res}_H^G\psi\rangle_H$. [F1, F2, given]
+
 2.1 The expressions in steps 1.1 and 1.2 are equal, which is exactly the Frobenius reciprocity identity. [step 1.1, step 1.2] ∎

@@ -2,14 +2,14 @@
 id: ex-the-unit-disc-extremal-problem-is-solved-by-the-identity
 kind: example
 title: "The unit-disc extremal problem is solved by the identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, cor-uniqueness-of-the-normalized-riemann-map, thm-unit-disc-schwarz-lemma-with-rigidity]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

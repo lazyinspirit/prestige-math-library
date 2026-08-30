@@ -2,7 +2,7 @@
 id: lem-noether-normalisation-one-relation-reduction
 kind: lemma
 title: "A monic relation makes the last generator integral over the earlier ones"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

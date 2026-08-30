@@ -2,7 +2,7 @@
 id: def-pullback-of-a-cotangent-vector
 kind: definition
 title: "Pullback of a cotangent vector"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-differential-of-a-smooth-map, def-cotangent-space-and-cotangent-bundl
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

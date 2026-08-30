@@ -2,7 +2,7 @@
 id: ex-the-zero-differential-complex-has-homology-equal-to-each-term
 kind: example
 title: "A zero-differential complex has homology equal to each term"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-homology-object-of-a-chain-complex,
        def-zero-and-stalk-complex,
        prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

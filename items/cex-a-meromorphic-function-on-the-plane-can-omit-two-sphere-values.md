@@ -2,14 +2,14 @@
 id: cex-a-meromorphic-function-on-the-plane-can-omit-two-sphere-values
 kind: counterexample
 title: "The exponential function omits 0 and infinity as a meromorphic map on the plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [cor-meromorphic-little-picard-theorem, thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-surjects-onto-the-punctured-plane]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

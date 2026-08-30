@@ -2,14 +2,14 @@
 id: def-cholesky-factorisation-with-positive-diagonal
 kind: definition
 title: "Hermitian positive-definite matrices and Cholesky factorisation A = LL* with positive diagonal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-sesquilinear-and-hermitian-forms-over-a-field-with-involution, def-triangular-and-diagonal-matrices-over-a-commutative-ring]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

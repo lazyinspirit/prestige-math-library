@@ -2,7 +2,7 @@
 id: rem-why-the-five-lemma-asks-for-isomorphisms-in-the-middle
 kind: remark
 title: "Why the five lemma asks for isomorphisms in the middle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [thm-four-lemma-in-an-abelian-category,
        thm-sharp-five-lemma-in-an-abelian-category]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

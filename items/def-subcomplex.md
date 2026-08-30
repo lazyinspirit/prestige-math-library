@@ -2,13 +2,13 @@
 id: def-subcomplex
 kind: definition
 title: "Subcomplex"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category,
        def-subobject-and-quotient-object]
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

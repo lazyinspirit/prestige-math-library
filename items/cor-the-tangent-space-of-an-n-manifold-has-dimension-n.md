@@ -2,7 +2,7 @@
 id: cor-the-tangent-space-of-an-n-manifold-has-dimension-n
 kind: corollary
 title: "The tangent space of an n-manifold has dimension n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

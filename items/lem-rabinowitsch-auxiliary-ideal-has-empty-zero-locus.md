@@ -2,7 +2,7 @@
 id: lem-rabinowitsch-auxiliary-ideal-has-empty-zero-locus
 kind: lemma
 title: "The Rabinowitsch auxiliary ideal has no common zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

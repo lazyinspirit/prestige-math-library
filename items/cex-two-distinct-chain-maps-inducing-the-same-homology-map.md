@@ -2,14 +2,14 @@
 id: cex-two-distinct-chain-maps-inducing-the-same-homology-map
 kind: counterexample
 title: "Two distinct chain maps inducing the same homology map"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [fs-a-chain-map-is-determined-by-its-maps-on-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

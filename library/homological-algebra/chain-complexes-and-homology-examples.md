@@ -1,7 +1,7 @@
 ---
 page: chain-complexes-and-homology-examples
 title: "Chain Complexes and Homology — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-zero-differential-complex-has-homology-equal-to-each-term,
            ex-a-two-term-complex-and-its-kernel-and-cokernel-homology,

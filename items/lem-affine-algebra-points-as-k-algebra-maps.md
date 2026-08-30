@@ -2,7 +2,7 @@
 id: lem-affine-algebra-points-as-k-algebra-maps
 kind: lemma
 title: "k-points of k[x_1, ..., x_n]/I are exactly k-algebra maps to k"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

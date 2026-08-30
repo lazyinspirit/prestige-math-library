@@ -2,7 +2,7 @@
 id: thm-mittag-leffler-theorem-on-the-plane
 kind: theorem
 title: "Mittag-Leffler on the complex plane"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,7 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

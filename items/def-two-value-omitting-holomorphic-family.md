@@ -2,13 +2,13 @@
 id: def-two-value-omitting-holomorphic-family
 kind: definition
 title: "Families of holomorphic functions omitting two common finite values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

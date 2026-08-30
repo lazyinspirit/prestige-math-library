@@ -2,14 +2,14 @@
 id: def-normalised-lu-factorisation
 kind: definition
 title: "A normalised LU factorisation has a unit lower-triangular L and an upper-triangular U"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

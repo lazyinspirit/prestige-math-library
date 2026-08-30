@@ -2,7 +2,7 @@
 id: rem-why-the-middle-nine-lemma-needs-a-zero-composite
 kind: remark
 title: "Why the middle nine lemma needs a zero composite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-nine-lemma-variants-by-which-rows-are-assumed-exact]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

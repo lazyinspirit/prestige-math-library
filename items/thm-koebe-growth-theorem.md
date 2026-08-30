@@ -2,14 +2,14 @@
 id: thm-koebe-growth-theorem
 kind: theorem
 title: "Koebe's growth theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-normalized-univalent-class, thm-koebe-distortion-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

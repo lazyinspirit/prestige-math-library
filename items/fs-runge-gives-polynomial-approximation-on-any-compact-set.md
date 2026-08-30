@@ -2,7 +2,7 @@
 id: fs-runge-gives-polynomial-approximation-on-any-compact-set
 kind: false-statement
 title: "FALSE: Runge's theorem gives polynomial approximation on every compact set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,4 +45,5 @@ by polynomials
 **Proof technique:** direct.
 
 1.1 The unit circle is compact, and $1/z$ is holomorphic on a neighbourhood of it. [given]
+
 2.1 If the displayed claim were true, then $1/z$ would be uniformly approximable on that compact set by polynomials. This contradicts [L1]. [step 1.1, L1] ∎

@@ -2,14 +2,14 @@
 id: cor-bieberbach-second-coefficient-bound
 kind: corollary
 title: "The second coefficient of a normalized univalent function has modulus at most two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-normalized-univalent-class, thm-area-theorem-for-exterior-univalent-functions, prop-star-shaped-plane-domains-are-homologically-simply-connected, cor-holomorphic-roots-homologically-simply-connected-domains]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

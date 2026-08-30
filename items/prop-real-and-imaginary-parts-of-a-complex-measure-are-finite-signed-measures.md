@@ -2,14 +2,14 @@
 id: prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures
 kind: proposition
 title: "The real and imaginary parts of a complex measure are finite signed measures, and nu = Re nu + i Im nu"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-complex-measure, def-signed-measure, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

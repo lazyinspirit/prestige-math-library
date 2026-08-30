@@ -2,7 +2,7 @@
 id: def-homology-object-of-a-chain-complex
 kind: definition
 title: "Homology object of a chain complex"
-status: draft
+status: published
 landmark: true
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-cycle-and-boundary-subobjects-of-a-complex,
        lem-the-boundary-subobject-factors-through-the-cycle-subobject,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

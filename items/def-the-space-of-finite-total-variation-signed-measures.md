@@ -2,13 +2,13 @@
 id: def-the-space-of-finite-total-variation-signed-measures
 kind: definition
 title: "The space of finite total variation signed measures"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-signed-measure, def-total-variation-of-a-signed-or-complex-measure]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

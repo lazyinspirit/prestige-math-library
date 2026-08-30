@@ -2,7 +2,7 @@
 id: fs-curve-velocities-in-two-charts-have-the-same-coordinate-tuple
 kind: false-statement
 title: "Curve velocity coordinates depend on the chart"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

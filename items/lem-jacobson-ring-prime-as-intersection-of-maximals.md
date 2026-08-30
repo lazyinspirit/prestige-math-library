@@ -2,7 +2,7 @@
 id: lem-jacobson-ring-prime-as-intersection-of-maximals
 kind: lemma
 title: "A ring is Jacobson iff every prime ideal is an intersection of maximal ideals containing it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

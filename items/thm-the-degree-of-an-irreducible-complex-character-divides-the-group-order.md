@@ -2,7 +2,7 @@
 id: thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order
 kind: theorem
 title: "The degree of an irreducible complex character divides $|G|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Theorem 15.7"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 

@@ -2,7 +2,7 @@
 id: thm-jordan-decomposition-for-signed-measures
 kind: theorem
 title: "Jordan decomposition of a signed measure into unique mutually singular positive parts"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -10,7 +10,7 @@ provenance:
   proof: ai-generated
 deps: [def-measure, def-mutually-singular-measures, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -54,19 +54,23 @@ $[0,+\infty]$. Their countable additivity is inherited from that of $\nu$, so
 [L3] makes $\nu^+$ and $\nu^-$ positive measures. Also
 $$\nu(A)=\nu(A\cap P)+\nu(A\cap N)=\nu^+(A)-\nu^-(A)$$
 for every measurable $A$.
+
 2.1 The defining pieces in step 1.1 also show mutual singularity: every [L1, L2, step 1.1]
 measurable subset of $N$ has $\nu^+$-value $0$, and every measurable subset of
 $P$ has $\nu^-$-value $0$. Thus [L2] gives $\nu^+\perp\nu^-$.
+
 2.2 Suppose $\nu=\mu-\eta$ with positive measures $\mu\perp\eta$. By [L2], [L1, L2, step 1.1]
 choose $P',N'$ with $P'\sqcup N'=X$, $\mu$ vanishing on subsets of $N'$, and
 $\eta$ vanishing on subsets of $P'$. Then every measurable subset of $P'$ has
 $\nu$-value $\mu(E)\ge0$, so $P'$ is positive, and every measurable subset of
 $N'$ has $\nu$-value $-\eta(E)\le0$, so $N'$ is negative. Hence $(P',N')$ is a
 Hahn decomposition, so [L1] makes $P\triangle P'$ null.
+
 3.1 Because $\mu$ vanishes on subsets of $N'$ and null subsets of $P'$ have [L1, L2, step 1.1, step 2.2]
 $\mu$-value $0$ as well, step 2.2 gives
 $$\mu(A)=\mu(A\cap P')=\nu(A\cap P')=\nu(A\cap P)=\nu^+(A).$$
 The same argument on $N'$ gives $\eta(A)=-\nu(A\cap N)=\nu^-(A)$. Thus the
 Jordan decomposition is unique.
+
 4.1 Steps 1.1, 2.1, and 3.1 prove existence, mutual singularity, and [step 1.1, step 2.1, step 3.1] ∎
 uniqueness.

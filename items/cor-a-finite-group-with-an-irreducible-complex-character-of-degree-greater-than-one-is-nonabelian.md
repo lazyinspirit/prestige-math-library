@@ -2,7 +2,7 @@
 id: cor-a-finite-group-with-an-irreducible-complex-character-of-degree-greater-than-one-is-nonabelian
 kind: corollary
 title: "A finite group with an irreducible complex character of degree greater than $1$ is nonabelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Theorem 4.1.5"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -43,4 +43,5 @@ characters have degree $1$
 **Proof technique:** direct.
 
 1.1 If $G$ were abelian, then [F1] would force every irreducible complex character of $G$ to have degree $1$. [F1, given, assume-contra]
+
 2.1 That contradicts the hypothesis $\chi(1)>1$. Therefore $G$ is nonabelian. [step 1.1, discharge-contradiction] ∎

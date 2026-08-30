@@ -2,7 +2,7 @@
 id: def-induced-character-of-a-complex-representation
 kind: definition
 title: "The induced character $\\operatorname{Ind}_H^G\\chi$ of a complex character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, Theorem 4.32"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
 ---
 

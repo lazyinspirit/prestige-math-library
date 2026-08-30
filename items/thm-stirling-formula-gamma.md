@@ -2,7 +2,7 @@
 id: thm-stirling-formula-gamma
 kind: theorem
 title: "Stirling's formula for Gamma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

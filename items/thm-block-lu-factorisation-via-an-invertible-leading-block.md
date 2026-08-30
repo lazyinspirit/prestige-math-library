@@ -2,7 +2,7 @@
 id: thm-block-lu-factorisation-via-an-invertible-leading-block
 kind: theorem
 title: "An invertible leading block yields block LU through its Schur complement"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [def-block-lu-factorisation, thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost, def-invertible-matrix-and-general-linear-group, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -59,6 +59,9 @@ $S=A_{22}-A_{21}A_{11}^{-1}A_{12}$.
 **Proof technique:** explicit block multiplication.
 
 1.1 By [L3], $A_{11}^{-1}$ exists, and by [L4] the block product $$ \begin{pmatrix}I&0\\A_{21}A_{11}^{-1}&I\end{pmatrix} \begin{pmatrix}A_{11}&A_{12}\\0&S\end{pmatrix} $$ has upper-left block $A_{11}$, upper-right block $A_{12}$, lower-left block $A_{21}A_{11}^{-1}A_{11}=A_{21}$, and lower-right block $A_{21}A_{11}^{-1}A_{12}+S=A_{22}$. Hence it equals $A$. [L1, L3, L4, algebra]
+
 2.1 If $S=\widetilde L\widetilde U$, substitute this into step 1.1 and absorb the factorisation of $S$ into the lower-right block. The resulting left factor is block lower triangular and the right factor is block upper triangular, so this is a block LU factorisation in the sense of [L1]. [step 1.1, L1, algebra]
+
 2.2 The off-diagonal block $A_{21}A_{11}^{-1}$ is exactly the block of multipliers obtained by solving $X A_{11}=A_{21}$. If $A_{11}$ itself has a triangular factorisation, [L2] computes these multipliers by triangular solves. [L2, step 1.1]
+
 3.1 Steps 1.1 and 2.1 prove claims 1 and 2, and step 2.2 identifies the solve interpretation of the multiplier block. [step 1.1, step 2.1, step 2.2] ∎

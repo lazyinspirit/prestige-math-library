@@ -2,7 +2,7 @@
 id: cor-noether-normalisation-dimension-lower-bound
 kind: corollary
 title: "A domain finite over a polynomial ring has dimension at least the number of variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

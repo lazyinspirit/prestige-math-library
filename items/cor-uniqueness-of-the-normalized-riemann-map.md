@@ -2,14 +2,14 @@
 id: cor-uniqueness-of-the-normalized-riemann-map
 kind: corollary
 title: "The normalized Riemann map is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-unit-disc-schwarz-lemma-with-rigidity, thm-chain-rule-for-complex-derivatives]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

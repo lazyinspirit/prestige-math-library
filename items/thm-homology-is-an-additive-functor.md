@@ -2,7 +2,7 @@
 id: thm-homology-is-an-additive-functor
 kind: theorem
 title: "Homology is an additive functor"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -13,7 +13,7 @@ deps: [def-additive-functor,
        thm-the-category-of-complexes-in-an-additive-category-is-additive,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-runge-polynomial-approximation
 kind: corollary
 title: "Runge polynomial approximation when the complement is connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +46,5 @@ component ([[thm-runge-approximation-with-prescribed-poles]]).
 **Proof technique:** direct.
 
 1.1 Since $\widehat{\mathbb C}\setminus K$ is connected, the singleton $P=\{\infty\}$ meets its unique complementary component. Applying [L1] with that pole set gives rational approximants whose only possible pole is at $\infty$. [given, L1]
+
 2.1 If $r=P/Q$ is such a rational function in lowest terms and $Q$ has positive degree, then a zero of $Q$ would give a finite pole of $r$. Therefore $Q$ is constant, so $r$ is a polynomial. Hence the approximants from step 1.1 are polynomials. [step 1.1, algebra] ∎

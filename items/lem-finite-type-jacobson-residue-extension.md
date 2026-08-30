@@ -2,7 +2,7 @@
 id: lem-finite-type-jacobson-residue-extension
 kind: lemma
 title: "Finite-type maps from Jacobson rings induce finite residue-field extensions at maximal ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

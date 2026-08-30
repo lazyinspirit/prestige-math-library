@@ -2,14 +2,14 @@
 id: fs-agreement-on-a-generating-pi-system-always-determines-a-signed-measure
 kind: false-statement
 title: "FALSE: agreement on a generating pi-system always determines a signed measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-pi-system, def-signed-measure]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -42,5 +42,6 @@ $\sigma(\mathcal P)=\mathcal P(X)$ because complements and unions recover
 $\{1\}$ and $X$. Define signed measures
 $$\mu(A):=0,\qquad \nu(A):=\mathbf 1_A(1).$$
 They agree on the generating pi-system element $\{0\}$.
+
 2.1 However $\mu(\{1\})=0$ while $\nu(\{1\})=1$, so the signed measures are not [L2, step 1.1] ∎
 equal on the generated sigma-algebra. Therefore the claim is false.

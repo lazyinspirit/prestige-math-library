@@ -2,7 +2,7 @@
 id: ex-the-tangent-bundle-of-euclidean-space-is-trivial
 kind: example
 title: "The tangent bundle of Euclidean space is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

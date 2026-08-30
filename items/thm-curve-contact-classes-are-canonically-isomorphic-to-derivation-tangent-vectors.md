@@ -2,7 +2,7 @@
 id: thm-curve-contact-classes-are-canonically-isomorphic-to-derivation-tangent-vectors
 kind: theorem
 title: "Curve contact classes are canonically isomorphic to derivation tangent vectors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

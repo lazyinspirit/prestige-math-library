@@ -2,7 +2,7 @@
 id: ex-sine-density-on-zero-to-two-pi-exhibits-the-nonuniqueness-of-hahn-decompositions
 kind: example
 title: "The signed measure with density sin x on [0,2pi] exhibits the nonuniqueness of Hahn decompositions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: example
 deps: [thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

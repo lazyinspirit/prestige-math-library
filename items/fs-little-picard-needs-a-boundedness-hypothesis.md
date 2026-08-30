@@ -2,14 +2,14 @@
 id: fs-little-picard-needs-a-boundedness-hypothesis
 kind: false-statement
 title: "FALSE: little Picard needs a boundedness hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-little-picard-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

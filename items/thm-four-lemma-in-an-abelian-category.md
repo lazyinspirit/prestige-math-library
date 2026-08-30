@@ -2,7 +2,7 @@
 id: thm-four-lemma-in-an-abelian-category
 kind: theorem
 title: "Four lemma in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,7 +16,7 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

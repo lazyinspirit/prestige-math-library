@@ -2,7 +2,7 @@
 id: prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps
 kind: proposition
 title: "An additive functor applies degreewise to complexes and chain maps"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -11,7 +11,7 @@ deps: [def-additive-functor,
        def-chain-complex-in-an-abelian-category,
        def-chain-map]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

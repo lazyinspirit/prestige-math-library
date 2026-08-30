@@ -2,7 +2,7 @@
 id: ex-a-two-term-complex-and-its-kernel-and-cokernel-homology
 kind: example
 title: "A two-term complex has kernel and cokernel homology"
-status: draft
+status: published
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-homology-object-of-a-chain-complex,
        def-cycle-and-boundary-subobjects-of-a-complex,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-zariski-lemma-one-variable-localisation-not-finite
 kind: lemma
 title: "The rational function field k(t) is not finite over k[t]"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-central-character-of-an-irreducible-complex-character
 kind: definition
 title: "The central character of an irreducible complex character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ sources:
       url: "https://arxiv.org/pdf/1001.0462.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Section 3.5"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

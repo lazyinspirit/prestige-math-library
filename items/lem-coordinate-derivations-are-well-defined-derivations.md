@@ -2,7 +2,7 @@
 id: lem-coordinate-derivations-are-well-defined-derivations
 kind: lemma
 title: "Coordinate derivations are well-defined derivations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

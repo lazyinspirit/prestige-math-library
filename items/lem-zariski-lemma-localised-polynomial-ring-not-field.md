@@ -2,7 +2,7 @@
 id: lem-zariski-lemma-localised-polynomial-ring-not-field
 kind: lemma
 title: "A finitely localized polynomial ring in positive dimension is not a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

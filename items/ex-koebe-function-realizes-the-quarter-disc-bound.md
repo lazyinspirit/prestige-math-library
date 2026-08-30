@@ -2,14 +2,14 @@
 id: ex-koebe-function-realizes-the-quarter-disc-bound
 kind: example
 title: "The Koebe function realizes the quarter-disc bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-koebe-one-quarter-theorem, thm-koebe-growth-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

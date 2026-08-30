@@ -2,7 +2,7 @@
 id: def-the-arrow-category-of-an-abelian-category
 kind: definition
 title: "The arrow category of an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [def-functor-category,
        thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

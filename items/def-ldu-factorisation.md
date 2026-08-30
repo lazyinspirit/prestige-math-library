@@ -2,14 +2,14 @@
 id: def-ldu-factorisation
 kind: definition
 title: "An LDU factorisation has unit lower-triangular L, diagonal D, and unit upper-triangular U"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-normalised-lu-factorisation, def-triangular-and-diagonal-matrices-over-a-commutative-ring]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

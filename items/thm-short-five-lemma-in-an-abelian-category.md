@@ -2,7 +2,7 @@
 id: thm-short-five-lemma-in-an-abelian-category
 kind: theorem
 title: "Short five lemma in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

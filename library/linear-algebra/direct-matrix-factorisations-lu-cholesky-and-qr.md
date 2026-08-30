@@ -1,7 +1,7 @@
 ---
 page: direct-matrix-factorisations-lu-cholesky-and-qr
 title: "Direct Matrix Factorisations: LU, Cholesky and QR"
-status: draft
+status: published
 items: [def-forward-and-back-substitution-for-triangular-systems,
         thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost,
         def-normalised-lu-factorisation,

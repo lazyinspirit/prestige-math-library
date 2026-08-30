@@ -2,14 +2,14 @@
 id: lem-quantitative-univalence-from-controlled-derivative
 kind: lemma
 title: "Controlled derivative oscillation forces injectivity on a fixed subdisc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-univalent-holomorphic-function, lem-bloch-rescaling-at-an-almost-maximal-derivative, thm-unit-disc-schwarz-lemma-with-rigidity, thm-rouche-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

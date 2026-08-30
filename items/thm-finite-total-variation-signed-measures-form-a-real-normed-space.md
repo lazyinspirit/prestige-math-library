@@ -2,14 +2,14 @@
 id: thm-finite-total-variation-signed-measures-form-a-real-normed-space
 kind: theorem
 title: "The finite-total-variation signed measures form a real normed space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-the-space-of-finite-total-variation-signed-measures, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals, prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation, def-vector-space, def-norm-and-normed-space]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:
@@ -56,12 +56,15 @@ so $\nu+\mu$ and $a\nu$ remain in $\mathcal M(X,\mathcal A)$. Thus
 $\mathcal M(X,\mathcal A)$ is closed under the pointwise operations, and the
 vector-space axioms are inherited from the real-valued function space on
 $\mathcal A$.
+
 1.2 The formula $\|\nu\|=|\nu|(X)$ is nonnegative by definition. If $\|\nu\|=0$, [L1, L3, L4]
 then [L3] makes $X$ null for $\nu$, so every measurable set has $\nu$-value
 $0$ and therefore $\nu$ is the zero measure. Conversely the zero measure has
 variation $0$. Thus the separation axiom of [L4] holds.
+
 2.1 Step 1.1 already proved absolute homogeneity and the triangle inequality: [L2, L4, step 1.1]
 $$\|a\nu\|=|a|\,\|\nu\|,\qquad \|\nu+\mu\|\le \|\nu\|+\|\mu\|.$$
 Hence [L4] shows that $\|\cdot\|$ is a norm.
+
 3.1 Steps 1.1 through 2.1 prove that $\mathcal M(X,\mathcal A)$ is a real [step 1.1, step 1.2, step 2.1] ∎
 normed space.

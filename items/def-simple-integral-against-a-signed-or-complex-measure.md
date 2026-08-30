@@ -2,14 +2,14 @@
 id: def-simple-integral-against-a-signed-or-complex-measure
 kind: definition
 title: "The simple integral against a signed or complex measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-complex-simple-function, def-signed-measure, def-complex-measure,
        def-total-variation-of-a-signed-or-complex-measure]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

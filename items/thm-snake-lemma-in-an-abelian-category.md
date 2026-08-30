@@ -2,7 +2,7 @@
 id: thm-snake-lemma-in-an-abelian-category
 kind: theorem
 title: "Snake lemma in an abelian category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,7 +17,7 @@ deps: [def-snake-data,
 justified_by: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

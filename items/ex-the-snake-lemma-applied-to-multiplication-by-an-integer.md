@@ -2,7 +2,7 @@
 id: ex-the-snake-lemma-applied-to-multiplication-by-an-integer
 kind: example
 title: "The snake lemma applied to multiplication by an integer"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ deps: [thm-snake-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

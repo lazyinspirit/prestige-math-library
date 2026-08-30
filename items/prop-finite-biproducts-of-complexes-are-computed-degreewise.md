@@ -2,14 +2,14 @@
 id: prop-finite-biproducts-of-complexes-are-computed-degreewise
 kind: proposition
 title: "Finite biproducts of complexes are computed degreewise"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-the-category-of-complexes-in-an-additive-category-is-additive,
        thm-homology-is-an-additive-functor]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

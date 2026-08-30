@@ -2,7 +2,7 @@
 id: prop-images-and-coimages-of-chain-maps-are-computed-degreewise
 kind: proposition
 title: "Images and coimages of chain maps are computed degreewise"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [lem-the-kernel-of-a-chain-map-is-computed-degreewise,
        lem-the-cokernel-of-a-chain-map-is-computed-degreewise,
        def-image-and-coimage-in-a-category-with-kernels-and-cokernels]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

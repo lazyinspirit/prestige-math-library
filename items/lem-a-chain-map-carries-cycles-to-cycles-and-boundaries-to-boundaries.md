@@ -2,7 +2,7 @@
 id: lem-a-chain-map-carries-cycles-to-cycles-and-boundaries-to-boundaries
 kind: lemma
 title: "A chain map carries cycles to cycles and boundaries to boundaries"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -12,7 +12,7 @@ deps: [def-chain-map,
        thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism,
        thm-every-monomorphism-is-the-kernel-of-its-cokernel]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

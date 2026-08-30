@@ -2,14 +2,14 @@
 id: fs-riemann-map-is-unique-without-normalization
 kind: false-statement
 title: "FALSE: the Riemann map is unique without normalization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-disc-automorphisms-are-rotated-blaschke-factors]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

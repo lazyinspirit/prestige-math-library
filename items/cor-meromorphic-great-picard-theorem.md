@@ -2,14 +2,14 @@
 id: cor-meromorphic-great-picard-theorem
 kind: corollary
 title: "A meromorphic essential singularity omits at most two sphere values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-great-picard-theorem, thm-three-point-transitivity-mobius-transformations, thm-mobius-transformations-biholomorphic-sphere]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

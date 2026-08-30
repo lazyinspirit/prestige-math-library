@@ -1,7 +1,7 @@
 ---
 page: mittag-leffler-and-runges-theorem-examples
 title: "Mittag-Leffler and Runge's Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-one-over-z-not-polynomially-approximable-on-unit-circle,
            ex-pole-pushing-along-three-discs,

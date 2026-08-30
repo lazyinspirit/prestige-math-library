@@ -2,7 +2,7 @@
 id: thm-normalised-lu-and-ldu-factorisations-are-unique
 kind: theorem
 title: "Normalised LU and LDU factorisations with nonzero pivots are unique"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [def-normalised-lu-factorisation, def-ldu-factorisation, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -57,5 +57,7 @@ triangular, $D$ diagonal, and $U$ unit upper triangular
 **Proof technique:** induction on the matrix size.
 
 1.1 For claim 1, the first row of $A$ equals the first row of both $U$ and $U'$, because the first rows of $L$ and $L'$ are $(1,0,\ldots,0)$. Hence the first rows of $U$ and $U'$ agree, in particular $u_{00}=u'_{00}\ne 0$. Then the first-column equations are $a_{i0}=\ell_{i0}u_{00}=\ell'_{i0}u'_{00}$ for $i>0$, so $\ell_{i0}=\ell'_{i0}$. Subtracting the common first-column outer product leaves two factorizations of the same trailing principal block by unit lower and upper triangular matrices of size $n-1$ with nonzero diagonal. Induction gives equality of the trailing blocks, hence $L=L'$ and $U=U'$. [L1, L2, induction]
+
 2.1 For claim 2, put $V:=DU$ and $V':=D'U'$. Because $D,D'$ are diagonal and $U,U'$ are unit upper triangular, $V,V'$ are upper triangular and their diagonals are exactly the diagonals of $D,D'$, so they are nonzero. The factorisations $A=LV=L'V'$ are therefore of the kind handled in step 1.1, which gives $L=L'$ and $V=V'$. Taking diagonals of $V=V'$ yields $D=D'$, and then $DU=D'U'$ forces $U=U'$. [step 1.1, L1, L2, algebra]
+
 3.1 Steps 1.1 and 2.1 prove claims 1 and 2. The nonzero-pivot hypothesis is essential: without it, a zero row of the upper factor leaves lower-triangular multipliers undetermined. [step 1.1, step 2.1, discharge-induction] ∎

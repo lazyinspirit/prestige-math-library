@@ -2,7 +2,7 @@
 id: cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function
 kind: corollary
 title: "Every closed subset of a manifold is the zero set of a smooth nonnegative function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-rabinowitsch-identity-explicit
 kind: example
 title: "A small Rabinowitsch identity written out completely"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

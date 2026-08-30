@@ -2,7 +2,7 @@
 id: thm-gamma-functional-equation
 kind: theorem
 title: "The Gamma functional equation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,7 +15,7 @@ forward_refs: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []
@@ -52,4 +52,5 @@ $\int_0^\infty t^{z-1}e^{-t}\,dt$ on $\operatorname{Re}z>0$
 **Proof technique:** direct.
 
 1.1 For $0<\varepsilon<R$, apply [L1] on $[\varepsilon,R]$ with $u(t)=t^z$ and $v'(t)=e^{-t}$. This gives $$\int_\varepsilon^R t^ze^{-t}\,dt =\bigl[-t^ze^{-t}\bigr]_\varepsilon^R +z\int_\varepsilon^R t^{z-1}e^{-t}\,dt.$$ [given, L1]
+
 2.1 Since $\operatorname{Re}z>0$, one has $|\varepsilon^ze^{-\varepsilon}|=\varepsilon^{\operatorname{Re}z}e^{-\varepsilon}\to0$ as $\varepsilon\downarrow0$, and $|R^ze^{-R}|=R^{\operatorname{Re}z}e^{-R}\to0$ as $R\uparrow\infty$. Passing to the improper limits in step 1.1 and using [L2] and [L3] gives $\Gamma(z+1)=z\Gamma(z)$. [step 1.1, L2, L3, algebra] ∎

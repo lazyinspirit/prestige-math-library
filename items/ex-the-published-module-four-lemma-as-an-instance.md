@@ -2,7 +2,7 @@
 id: ex-the-published-module-four-lemma-as-an-instance
 kind: example
 title: "The published module four lemma as an instance"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ deps: [thm-four-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

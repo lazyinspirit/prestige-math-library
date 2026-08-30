@@ -2,7 +2,7 @@
 id: ex-noether-normalisation-triangular-change
 kind: example
 title: "A triangular change makes a bivariate relation monic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

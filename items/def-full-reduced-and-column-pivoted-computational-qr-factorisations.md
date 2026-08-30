@@ -2,14 +2,14 @@
 id: def-full-reduced-and-column-pivoted-computational-qr-factorisations
 kind: definition
 title: "Full, reduced, and column-pivoted computational QR factorisations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-qr-factorisation-over-r-or-c, def-permutation-matrix-partial-pivoting-and-pivot-growth, def-householder-reflector, def-real-and-complex-givens-transformations]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

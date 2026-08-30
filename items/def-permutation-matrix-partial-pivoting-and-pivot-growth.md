@@ -2,14 +2,14 @@
 id: def-permutation-matrix-partial-pivoting-and-pivot-growth
 kind: definition
 title: "Permutation matrices, partial pivoting, and the pivot-growth factor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-matrix-product-and-identity-matrix, def-abs-value]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

@@ -2,14 +2,14 @@
 id: ex-schottky-bound-for-a-map-with-center-value-one-half
 kind: example
 title: "Schottky's theorem applied to a disc map with center value 1/2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-schottky-theorem]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

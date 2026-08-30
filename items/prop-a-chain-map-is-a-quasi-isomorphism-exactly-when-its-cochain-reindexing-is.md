@@ -2,7 +2,7 @@
 id: prop-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cochain-reindexing-is
 kind: proposition
 title: "A chain map is a quasi-isomorphism exactly when its cochain reindexing is"
-status: draft
+status: published
 provenance:
   statement: literature-derived
   proof: ai-generated
@@ -10,7 +10,7 @@ deps: [def-cochain-complex-in-an-abelian-category,
        def-cohomology-object-of-a-cochain-complex,
        def-quasi-isomorphism]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

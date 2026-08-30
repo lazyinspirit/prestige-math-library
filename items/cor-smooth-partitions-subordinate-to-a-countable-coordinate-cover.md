@@ -2,7 +2,7 @@
 id: cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover
 kind: corollary
 title: "Smooth partitions subordinate to a countable coordinate cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

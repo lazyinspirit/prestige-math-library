@@ -2,7 +2,7 @@
 id: thm-mackey-double-coset-formula-for-restricting-an-induced-character
 kind: theorem
 title: "Mackey's double-coset formula for restricting an induced character"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Theorem 20.6"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
 ---
 

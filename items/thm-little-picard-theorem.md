@@ -2,7 +2,7 @@
 id: thm-little-picard-theorem
 kind: theorem
 title: "Little Picard theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-schottky-theorem, thm-liouville-bounded-entire-function]
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

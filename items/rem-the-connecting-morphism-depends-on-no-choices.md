@@ -2,7 +2,7 @@
 id: rem-the-connecting-morphism-depends-on-no-choices
 kind: remark
 title: "The connecting morphism depends on no choices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-the-connecting-morphism-exists-and-is-unique]
 justified_by: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

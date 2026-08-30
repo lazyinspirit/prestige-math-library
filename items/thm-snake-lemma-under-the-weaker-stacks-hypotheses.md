@@ -2,7 +2,7 @@
 id: thm-snake-lemma-under-the-weaker-stacks-hypotheses
 kind: theorem
 title: "Snake lemma under the weaker Stacks hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,7 +19,7 @@ deps: [def-snake-data,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

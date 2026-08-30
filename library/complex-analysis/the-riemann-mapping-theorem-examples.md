@@ -1,7 +1,7 @@
 ---
 page: the-riemann-mapping-theorem-examples
 title: "The Riemann Mapping Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-normalized-riemann-map-for-the-upper-half-plane-at-i, ex-normalized-riemann-map-for-a-horizontal-strip, ex-normalized-riemann-map-for-a-sector-with-branch-choice, ex-normalized-riemann-map-for-the-slit-plane, ex-the-unit-disc-extremal-problem-is-solved-by-the-identity, ex-koebe-function-realizes-the-quarter-disc-bound, cex-a-biholomorphism-between-the-disc-and-the-punctured-disc-cannot-exist, fs-riemann-map-is-unique-without-normalization, fs-conformal-equivalence-preserves-euclidean-area]
 ---

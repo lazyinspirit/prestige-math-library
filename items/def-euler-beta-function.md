@@ -2,7 +2,7 @@
 id: def-euler-beta-function
 kind: definition
 title: "Euler's Beta function on the right half-planes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: [thm-beta-gamma-identity]
 forward_refs: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,14 +2,14 @@
 id: lem-positive-finite-signed-measure-set-contains-a-positive-subset-of-at-least-the-same-mass
 kind: lemma
 title: "A set of positive finite signed measure contains a positive subset of at least the same mass"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-positive-negative-and-null-sets-for-a-signed-measure, lem-finite-signed-measure-sets-have-only-finite-subset-values, prop-finite-union-values-force-absolute-convergence-for-signed-measure-additivity]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

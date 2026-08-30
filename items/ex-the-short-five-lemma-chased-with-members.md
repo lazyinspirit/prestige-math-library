@@ -2,7 +2,7 @@
 id: ex-the-short-five-lemma-chased-with-members
 kind: example
 title: "The short five lemma chased with members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ deps: [thm-short-five-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-middle-nine-lemma-holds-without-assuming-the-composite-is-zero
 kind: false-statement
 title: "FALSE: the middle nine lemma holds without assuming the composite is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-nine-lemma-variants-by-which-rows-are-assumed-exact,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

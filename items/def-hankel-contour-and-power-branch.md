@@ -2,7 +2,7 @@
 id: def-hankel-contour-and-power-branch
 kind: definition
 title: "The Hankel contour and the principal power branch"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 forward_refs: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

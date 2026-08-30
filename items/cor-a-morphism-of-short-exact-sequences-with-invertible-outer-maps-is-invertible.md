@@ -2,7 +2,7 @@
 id: cor-a-morphism-of-short-exact-sequences-with-invertible-outer-maps-is-invertible
 kind: corollary
 title: "A morphism of short exact sequences with invertible outer maps is invertible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-short-five-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

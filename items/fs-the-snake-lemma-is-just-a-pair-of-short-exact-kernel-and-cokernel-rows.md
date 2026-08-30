@@ -2,7 +2,7 @@
 id: fs-the-snake-lemma-is-just-a-pair-of-short-exact-kernel-and-cokernel-rows
 kind: false-statement
 title: "FALSE: the snake lemma is just a pair of short exact kernel and cokernel rows"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +13,7 @@ deps: [thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequence
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

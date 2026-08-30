@@ -2,7 +2,7 @@
 id: cex-a-chart-dependent-coordinate-vector-is-not-an-intrinsic-tangent-vector
 kind: counterexample
 title: "A coordinate tuple is not an intrinsic tangent vector"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,7 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

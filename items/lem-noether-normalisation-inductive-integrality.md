@@ -2,7 +2,7 @@
 id: lem-noether-normalisation-inductive-integrality
 kind: lemma
 title: "Induction produces a polynomial subalgebra over which the affine algebra is integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

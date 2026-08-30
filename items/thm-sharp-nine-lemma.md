@@ -2,7 +2,7 @@
 id: thm-sharp-nine-lemma
 kind: theorem
 title: "Sharp nine lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,7 +17,7 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

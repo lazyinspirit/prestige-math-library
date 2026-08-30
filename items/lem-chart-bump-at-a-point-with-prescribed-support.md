@@ -2,7 +2,7 @@
 id: lem-chart-bump-at-a-point-with-prescribed-support
 kind: lemma
 title: "A chart bump at a point with prescribed support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

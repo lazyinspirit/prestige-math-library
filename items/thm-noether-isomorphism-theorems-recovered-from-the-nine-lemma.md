@@ -2,7 +2,7 @@
 id: thm-noether-isomorphism-theorems-recovered-from-the-nine-lemma
 kind: theorem
 title: "Noether isomorphism theorems recovered from the nine lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,7 +15,7 @@ deps: [thm-nine-lemma-in-an-abelian-category,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

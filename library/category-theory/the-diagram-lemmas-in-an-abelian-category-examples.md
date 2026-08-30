@@ -1,7 +1,7 @@
 ---
 page: the-diagram-lemmas-in-an-abelian-category-examples
 title: "The Diagram Lemmas in an Abelian Category — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-published-module-five-lemma-as-an-instance,
            ex-the-published-module-snake-lemma-as-an-instance,

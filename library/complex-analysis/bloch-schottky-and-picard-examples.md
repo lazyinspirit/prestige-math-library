@@ -1,7 +1,7 @@
 ---
 page: bloch-schottky-and-picard-examples
 title: "Bloch, Schottky, and the Picard Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-ahlfors-proof-yields-the-explicit-bloch-bound-sqrt-three-over-four, ex-schottky-bound-for-a-map-with-center-value-one-half, ex-the-exponential-function-omits-exactly-zero-and-shows-little-picard-is-sharp, ex-exp-one-over-z-shows-great-picard-is-sharp, cex-a-meromorphic-function-on-the-plane-can-omit-two-sphere-values, fs-little-picard-needs-a-boundedness-hypothesis, fs-a-nonconstant-meromorphic-function-on-the-plane-omits-at-most-one-sphere-value]
 ---

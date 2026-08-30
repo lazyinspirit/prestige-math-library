@@ -1,7 +1,7 @@
 ---
 page: tangent-cotangent-and-the-differential
 title: "Tangent Cotangent and the Differential"
-status: draft
+status: published
 items: [def-germ-of-a-smooth-function-at-a-point,
         lem-equality-near-a-point-is-an-equivalence-relation-on-local-smooth-functions,
         def-the-local-algebra-of-smooth-function-germs,

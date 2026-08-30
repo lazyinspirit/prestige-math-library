@@ -2,7 +2,7 @@
 id: cor-affine-closed-points-detect-radicals
 kind: corollary
 title: "In a finite-type algebra over a field, radical ideals are intersections of maximal ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

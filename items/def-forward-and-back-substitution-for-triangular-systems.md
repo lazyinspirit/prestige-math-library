@@ -2,14 +2,14 @@
 id: def-forward-and-back-substitution-for-triangular-systems
 kind: definition
 title: "Forward and backward substitution for triangular linear systems"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix]
 aliases: []
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

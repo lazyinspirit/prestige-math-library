@@ -2,7 +2,7 @@
 id: fs-the-connecting-morphism-depends-on-the-choices-made-in-its-construction
 kind: false-statement
 title: "FALSE: the connecting morphism depends on the choices made in its construction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ deps: [thm-the-connecting-morphism-exists-and-is-unique,
 justified_by: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

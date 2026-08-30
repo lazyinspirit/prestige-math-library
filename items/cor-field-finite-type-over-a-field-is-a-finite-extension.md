@@ -2,7 +2,7 @@
 id: cor-field-finite-type-over-a-field-is-a-finite-extension
 kind: corollary
 title: "A field finitely generated as a k-algebra is a finite extension of k"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: context-free-grammars-and-normal-forms-examples
 title: "Context-Free Grammars and Normal Forms: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-elimination-of-useless-symbols

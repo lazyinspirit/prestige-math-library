@@ -2,7 +2,7 @@
 id: cex-countable-partitions-can-be-strictly-better-than-finite-ones-for-a-complex-measure
 kind: counterexample
 title: "Finite partitions need not attain complex total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: counterexample
 deps: [thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

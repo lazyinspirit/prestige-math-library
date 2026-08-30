@@ -2,7 +2,7 @@
 id: ex-delta-one-minus-delta-minus-one-has-the-obvious-hahn-and-jordan-decomposition
 kind: example
 title: "The signed measure delta_1 minus delta_-1 has the obvious Hahn and Jordan decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: example
 deps: [def-dirac-measure, thm-jordan-decomposition-for-signed-measures, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   references:

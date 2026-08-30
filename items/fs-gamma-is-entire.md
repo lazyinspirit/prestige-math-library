@@ -2,7 +2,7 @@
 id: fs-gamma-is-entire
 kind: false-statement
 title: "FALSE: the Gamma function is entire"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -43,4 +43,5 @@ $0,-1,-2,\dots$ ([[thm-gamma-meromorphic-continuation]]).
 **Proof technique:** direct.
 
 1.1 By [L1], Gamma has a pole at $0$ and therefore is not holomorphic there. [L1, given]
+
 2.1 An entire function is holomorphic on all of $\mathbb C$, so step 1.1 contradicts the claim. Hence Gamma is not entire. [step 1.1, algebra] ∎

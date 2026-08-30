@@ -2,14 +2,14 @@
 id: prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation
 kind: proposition
 title: "A set is null for a signed measure exactly when its total variation is zero there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-positive-negative-and-null-sets-for-a-signed-measure, def-total-variation-of-a-signed-or-complex-measure]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -44,9 +44,11 @@ $\sum_n |\nu(E_n)|$ over countable measurable partitions of $E$.
 1.1 Assume $E$ is null. If $(E_n)$ is a countable measurable partition of $E$, [L1, L2]
 then every $E_n\subseteq E$ has $\nu(E_n)=0$ by [L1], so its partition sum in
 [L2] is $0$. Hence every admissible sum is $0$, and therefore $|\nu|(E)=0$.
+
 1.2 Assume instead that $|\nu|(E)=0$. Let $F\subseteq E$ be measurable. Then [L1, L2]
 $F$ and $E\setminus F$ form a measurable partition of $E$, so [L2] gives
 $$0=|\nu|(E)\ge |\nu(F)|+|\nu(E\setminus F)|\ge |\nu(F)|.$$
 Thus $\nu(F)=0$. Since $F\subseteq E$ was arbitrary, [L1] shows that $E$ is
 null.
+
 2.1 Steps 1.1 and 1.2 prove both implications. [step 1.1, step 1.2] ∎

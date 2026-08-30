@@ -2,13 +2,13 @@
 id: def-riemann-map-extremal-family
 kind: definition
 title: "The extremal family of disc-valued univalent maps fixing a basepoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-univalent-holomorphic-function, def-unit-disc-upper-half-plane-and-blaschke-factor]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

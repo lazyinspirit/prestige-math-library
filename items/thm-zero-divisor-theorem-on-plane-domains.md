@@ -2,7 +2,7 @@
 id: thm-zero-divisor-theorem-on-plane-domains
 kind: theorem
 title: "Every discrete effective divisor on a plane domain is the zero divisor of a holomorphic function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,7 +16,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: constructive
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

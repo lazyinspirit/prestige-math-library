@@ -2,7 +2,7 @@
 id: thm-burnsides-p-a-q-b-theorem
 kind: theorem
 title: "Burnside's $p^aq^b$ theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,7 +18,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Pavel Etingof et al., Introduction to Representation Theory, proof after Theorem 4.23"
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

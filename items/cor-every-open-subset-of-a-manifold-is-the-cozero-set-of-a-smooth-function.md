@@ -2,7 +2,7 @@
 id: cor-every-open-subset-of-a-manifold-is-the-cozero-set-of-a-smooth-function
 kind: corollary
 title: "Every open subset of a manifold is the cozero set of a smooth function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

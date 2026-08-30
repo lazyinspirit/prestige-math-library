@@ -1,7 +1,7 @@
 ---
 page: chain-complexes-and-homology
 title: "Chain Complexes and Homology"
-status: draft
+status: published
 items: [def-chain-complex-in-an-abelian-category,
         def-cochain-complex-in-an-abelian-category,
         def-bounded-bounded-below-and-bounded-above-complex,

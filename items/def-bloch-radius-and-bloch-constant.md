@@ -2,13 +2,13 @@
 id: def-bloch-radius-and-bloch-constant
 kind: definition
 title: "Bloch radii and the Bloch constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-univalent-holomorphic-function]
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-tangent-bundle-as-a-disjoint-union
 kind: definition
 title: "The tangent bundle as a disjoint union"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-derivation-at-a-point-and-tangent-space]
 justified_by: []
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-total-variation-can-exceed-the-absolute-value-of-the-set-value
 kind: counterexample
 title: "Total variation can exceed the absolute value of the set value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -11,7 +11,7 @@ generation:
   role: counterexample
 deps: [def-dirac-measure, def-total-variation-of-a-signed-or-complex-measure]
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,6 +45,7 @@ $|\nu(E_n)|$. ([[def-total-variation-of-a-signed-or-complex-measure]])
 
 1.1 By [L1], one has $\nu(E)=\delta_1(E)-\delta_{-1}(E)=1-1=0$, so [L1]
 $|\nu(E)|=0$.
+
 2.1 The two singletons $\{1\}$ and $\{-1\}$ form a measurable partition of [L1, L2, step 1.1] ∎
 $E$, and [L1] gives
 $$|\nu(\{1\})|+|\nu(\{-1\})|=1+1=2.$$

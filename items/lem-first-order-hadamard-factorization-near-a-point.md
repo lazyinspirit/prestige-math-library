@@ -2,7 +2,7 @@
 id: lem-first-order-hadamard-factorization-near-a-point
 kind: lemma
 title: "First-order Hadamard factorization near a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,7 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

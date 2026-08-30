@@ -2,7 +2,7 @@
 id: ex-reduced-qr-least-squares-versus-normal-equations
 kind: example
 title: "Reduced QR avoids the condition-number squaring seen in the normal equations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,7 +10,7 @@ provenance:
 deps: [thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number]
 aliases: []
 proof_strategy: direct
-verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,5 +49,7 @@ normal equations
 **Proof technique:** direct.
 
 1.1 The columns of $A$ are already orthogonal, so $\widehat Q=(e_1,e_2)$ and $\widehat R=\operatorname{diag}(1,10^{-4})$ form a reduced QR factorisation. Also $\widehat Q^*b=(1,1)^{\mathsf T}$. [given, algebra]
+
 2.1 Solving $\widehat R x=\widehat Q^*b$ gives $x_1=1$ and $10^{-4}x_2=1$, hence $x=(1,10^4)^{\mathsf T}$. The factor $\widehat R$ has spectral condition number $10^4$, whereas $A^{\mathsf T}A=\operatorname{diag}(1,10^{-8})$ has spectral condition number $10^8$. This is exactly the contrast described in [L1]. [step 1.1, L1, algebra]
+
 3.1 Steps 1.1-2.1 verify the example. [step 1.1, step 2.1] ∎

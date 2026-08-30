@@ -2,7 +2,7 @@
 id: def-the-local-algebra-of-smooth-function-germs
 kind: definition
 title: "The local algebra of smooth function germs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,7 +11,7 @@ deps: [def-germ-of-a-smooth-function-at-a-point]
 justified_by: [lem-algebra-operations-on-smooth-germs-are-representative-independent]
 aliases: []
 landmark: false
-verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"
