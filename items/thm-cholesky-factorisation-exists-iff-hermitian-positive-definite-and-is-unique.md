@@ -10,6 +10,7 @@ provenance:
 deps: [def-cholesky-factorisation-with-positive-diagonal, thm-determinant-of-a-triangular-matrix, thm-determinant-multiplicative, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: induction
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

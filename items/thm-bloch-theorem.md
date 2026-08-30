@@ -10,6 +10,7 @@ provenance:
 deps: [def-bloch-radius-and-bloch-constant, lem-bloch-rescaling-at-an-almost-maximal-derivative, lem-quantitative-univalence-from-controlled-derivative]
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

@@ -13,6 +13,7 @@ deps: [thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequence
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

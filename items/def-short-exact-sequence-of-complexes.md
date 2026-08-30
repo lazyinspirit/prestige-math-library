@@ -8,6 +8,7 @@ provenance:
   proof: not-applicable
 deps: [def-category-of-chain-complexes,
        def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

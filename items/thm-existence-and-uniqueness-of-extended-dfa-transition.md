@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-extended-dfa-transition
 kind: theorem
 title: "The extended transition function exists and is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-extended-dfa-transition-function]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

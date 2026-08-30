@@ -2,7 +2,7 @@
 id: def-parse-tree-and-yield
 kind: definition
 title: "Parse trees and their yields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - def-finitely-branching-tree-on-finite-sequences
   - def-computation-alphabet-and-word-convention
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

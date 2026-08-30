@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [lem-riemann-map-extremal-derivative-is-attained, lem-nonconstant-local-uniform-limits-of-univalent-functions-are-univalent]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

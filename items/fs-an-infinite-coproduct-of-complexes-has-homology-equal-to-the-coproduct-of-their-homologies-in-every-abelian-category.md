@@ -11,6 +11,7 @@ deps: [prop-products-and-coproducts-of-complexes-are-degreewise-when-they-exist-
        def-the-axioms-ab4-and-ab4-star,
        cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

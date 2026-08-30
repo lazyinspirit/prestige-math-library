@@ -10,6 +10,7 @@ provenance:
 deps: [def-householder-reflector, def-real-and-complex-givens-transformations, def-linear-isometry-and-orthogonal-or-unitary-operator]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

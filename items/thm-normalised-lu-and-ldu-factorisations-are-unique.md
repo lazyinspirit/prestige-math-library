@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalised-lu-factorisation, def-ldu-factorisation, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

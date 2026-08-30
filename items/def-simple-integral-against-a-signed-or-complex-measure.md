@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-complex-simple-function, def-signed-measure, def-complex-measure,
        def-total-variation-of-a-signed-or-complex-measure]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

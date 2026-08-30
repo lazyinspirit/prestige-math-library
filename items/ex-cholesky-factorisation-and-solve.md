@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique, thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

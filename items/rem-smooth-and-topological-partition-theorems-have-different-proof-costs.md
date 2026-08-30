@@ -11,6 +11,7 @@ deps: [thm-smooth-partitions-of-unity-exist-on-manifolds, thm-subordinate-partit
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

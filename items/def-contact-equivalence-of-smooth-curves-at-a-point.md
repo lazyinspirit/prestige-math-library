@@ -11,6 +11,7 @@ deps: [def-smooth-manifold]
 justified_by: [lem-contact-equivalence-is-chart-independent-and-an-equivalence-relation]
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

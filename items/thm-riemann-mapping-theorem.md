@@ -10,6 +10,7 @@ provenance:
 deps: [def-axiom-of-choice, def-homologically-simply-connected-complex-domain, lem-riemann-map-extremal-family-is-nonempty, lem-riemann-map-extremal-derivative-is-attained, lem-riemann-map-extremizer-is-univalent, lem-riemann-map-extremizer-is-surjective, cor-injective-holomorphic-derivative-nonzero]
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

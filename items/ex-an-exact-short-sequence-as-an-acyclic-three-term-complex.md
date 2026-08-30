@@ -9,6 +9,7 @@ provenance:
 deps: [prop-an-exact-sequence-is-a-complex-and-its-exactness-agrees,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

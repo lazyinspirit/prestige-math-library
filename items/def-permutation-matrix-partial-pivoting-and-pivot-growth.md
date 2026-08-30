@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-matrix-product-and-identity-matrix, def-abs-value]
 aliases: []
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

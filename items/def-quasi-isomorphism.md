@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

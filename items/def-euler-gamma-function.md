@@ -12,6 +12,7 @@ justified_by: [lem-gamma-integral-converges-locally-uniformly]
 forward_refs: []
 aliases: []
 landmark: true
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

@@ -18,6 +18,7 @@ sources:
       url: "https://ocw.mit.edu/courses/18-712-introduction-to-representation-theory-fall-2010/84358595a02a73bced2c4e363a5d66f0_MIT18_712F10_ch4.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Proposition 4.3.1"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

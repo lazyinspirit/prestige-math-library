@@ -8,6 +8,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [lem-riemann-map-extremal-derivative-is-attained, thm-montel-theorem-for-holomorphic-functions]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

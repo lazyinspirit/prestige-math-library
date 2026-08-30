@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [lem-riemann-map-extremizer-is-univalent, def-homologically-simply-connected-complex-domain, thm-blaschke-factor-is-a-disc-automorphism, cor-holomorphic-roots-homologically-simply-connected-domains]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

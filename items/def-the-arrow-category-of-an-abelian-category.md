@@ -13,6 +13,7 @@ deps: [def-functor-category,
        thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]
 justified_by: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

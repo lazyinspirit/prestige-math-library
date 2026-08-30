@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-univalent-holomorphic-function, thm-hurwitz-zero-free-limit]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

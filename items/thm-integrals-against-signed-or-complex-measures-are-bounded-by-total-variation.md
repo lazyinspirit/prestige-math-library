@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-integration-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

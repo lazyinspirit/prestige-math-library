@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-little-picard-theorem, thm-three-point-transitivity-mobius-transformations, thm-mobius-transformations-biholomorphic-sphere]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

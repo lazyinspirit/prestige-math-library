@@ -2,7 +2,7 @@
 id: fs-complementing-a-dfa-complements-its-transition-graph
 kind: false-statement
 title: "FALSE: complementing a DFA complements its transition graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-finite-automaton, thm-complementing-accept-states-complements-the-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

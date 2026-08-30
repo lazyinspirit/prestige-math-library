@@ -11,6 +11,7 @@ deps: [def-derivation-at-a-point-and-tangent-space]
 justified_by: [lem-pullback-of-a-target-germ-by-a-smooth-map-is-a-well-defined-source-germ, lem-the-differential-sends-derivations-to-derivations-and-is-linear]
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

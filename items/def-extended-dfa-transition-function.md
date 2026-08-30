@@ -2,7 +2,7 @@
 id: def-extended-dfa-transition-function
 kind: definition
 title: "The extended transition function of a DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-deterministic-finite-automaton
   - def-computation-alphabet-and-word-convention
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

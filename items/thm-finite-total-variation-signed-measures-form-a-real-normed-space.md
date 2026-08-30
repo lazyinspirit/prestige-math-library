@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-the-space-of-finite-total-variation-signed-measures, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals, prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation, def-vector-space, def-norm-and-normed-space]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

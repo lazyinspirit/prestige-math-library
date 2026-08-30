@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-the-space-of-finite-total-variation-signed-measures, thm-finite-total-variation-signed-measures-form-a-real-normed-space, thm-continuity-from-above-for-measures, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

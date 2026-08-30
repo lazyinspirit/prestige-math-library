@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 deps: [prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, def-total-variation-of-a-signed-or-complex-measure, def-complex-measure, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

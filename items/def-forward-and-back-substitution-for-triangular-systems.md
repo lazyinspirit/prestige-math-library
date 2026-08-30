@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix]
 aliases: []
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

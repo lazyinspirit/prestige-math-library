@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-abelian-category, def-chain-complex-in-an-abelian-category]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

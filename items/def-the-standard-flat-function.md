@@ -11,6 +11,7 @@ deps: [def-real-exponential-function-and-e]
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

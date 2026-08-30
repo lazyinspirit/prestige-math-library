@@ -11,6 +11,7 @@ generation:
   role: example
 deps: [thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

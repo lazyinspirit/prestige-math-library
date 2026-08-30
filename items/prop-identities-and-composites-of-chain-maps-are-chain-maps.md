@@ -8,6 +8,7 @@ provenance:
   proof: ai-generated
 deps: [def-chain-map]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

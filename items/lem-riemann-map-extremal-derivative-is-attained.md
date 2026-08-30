@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-axiom-of-choice, def-riemann-map-extremal-family, lem-riemann-map-extremal-derivatives-are-positive-and-bounded, thm-montel-theorem-for-holomorphic-functions, cor-derivative-operators-are-continuous-for-local-uniform-convergence, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-extreme-value-metric]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

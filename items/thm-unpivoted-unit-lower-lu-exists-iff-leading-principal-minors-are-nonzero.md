@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalised-lu-factorisation, thm-block-lu-factorisation-via-an-invertible-leading-block, thm-determinant-of-a-triangular-matrix, thm-determinant-multiplicative]
 aliases: []
 proof_strategy: induction
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

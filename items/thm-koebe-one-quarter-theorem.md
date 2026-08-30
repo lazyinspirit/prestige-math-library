@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalized-univalent-class, cor-bieberbach-second-coefficient-bound]
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

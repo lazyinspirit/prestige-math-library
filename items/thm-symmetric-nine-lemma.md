@@ -12,6 +12,7 @@ deps: [thm-sharp-nine-lemma,
 justified_by: []
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

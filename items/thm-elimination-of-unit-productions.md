@@ -2,7 +2,7 @@
 id: thm-elimination-of-unit-productions
 kind: theorem
 title: "Unit productions can be eliminated"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nullable-generating-and-reachable-variable, thm-elimination-of-epsilon-productions, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

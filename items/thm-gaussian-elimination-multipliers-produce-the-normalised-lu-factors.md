@@ -10,6 +10,7 @@ provenance:
 deps: [def-normalised-lu-factorisation, thm-block-lu-factorisation-via-an-invertible-leading-block, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

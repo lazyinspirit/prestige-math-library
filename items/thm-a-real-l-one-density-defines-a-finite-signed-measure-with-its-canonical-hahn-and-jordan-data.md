@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-hahn-decomposition-for-signed-measures, thm-jordan-decomposition-for-signed-measures, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, def-integrable-real-and-complex-functions-and-their-integrals, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

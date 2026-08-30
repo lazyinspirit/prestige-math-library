@@ -9,6 +9,7 @@ provenance:
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

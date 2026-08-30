@@ -10,6 +10,7 @@ provenance:
 deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries, thm-qr-factorisation-over-r-or-c]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

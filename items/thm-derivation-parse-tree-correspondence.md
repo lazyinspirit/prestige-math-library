@@ -2,7 +2,7 @@
 id: thm-derivation-parse-tree-correspondence
 kind: theorem
 title: "Derivations and parse trees correspond"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-leftmost-and-rightmost-derivation, def-parse-tree-and-yield]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-elimination-of-useless-symbols
 kind: theorem
 title: "Eliminating useless symbols preserves the generated language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nullable-generating-and-reachable-variable, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

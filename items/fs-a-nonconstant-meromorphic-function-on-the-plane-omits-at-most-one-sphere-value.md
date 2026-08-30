@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [cor-meromorphic-little-picard-theorem, cex-a-meromorphic-function-on-the-plane-can-omit-two-sphere-values]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

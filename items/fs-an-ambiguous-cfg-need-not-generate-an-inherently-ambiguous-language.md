@@ -2,7 +2,7 @@
 id: fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language
 kind: false-statement
 title: "FALSE: an ambiguous CFG always generates an inherently ambiguous language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ambiguity-and-inherent-ambiguity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

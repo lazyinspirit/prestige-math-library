@@ -2,7 +2,7 @@
 id: def-ambiguity-and-inherent-ambiguity
 kind: definition
 title: "Ambiguous grammars, unambiguous grammars, and inherently ambiguous languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - thm-derivation-parse-tree-correspondence
   - def-language-generated-by-a-cfg
 verification:
+  audited: 2026-08-30
   precheck: n/a
 sources:
   scraped: []

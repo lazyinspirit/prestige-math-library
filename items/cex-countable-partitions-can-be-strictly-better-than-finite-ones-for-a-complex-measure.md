@@ -11,6 +11,7 @@ generation:
   role: counterexample
 deps: [thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

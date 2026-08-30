@@ -9,6 +9,7 @@ provenance:
 deps: [ex-a-two-term-complex-and-its-kernel-and-cokernel-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

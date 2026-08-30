@@ -2,7 +2,7 @@
 id: thm-cfl-closure-under-union-concatenation-star-and-homomorphism
 kind: theorem
 title: "Context-free languages are closed under union, concatenation, Kleene star, and homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-language-generated-by-a-cfg, def-alphabet-homomorphism-and-induced-word-map]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

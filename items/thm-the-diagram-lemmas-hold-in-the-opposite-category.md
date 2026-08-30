@@ -16,6 +16,7 @@ deps: [thm-the-opposite-of-an-abelian-category-is-abelian,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

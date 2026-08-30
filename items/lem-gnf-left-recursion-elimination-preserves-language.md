@@ -2,7 +2,7 @@
 id: lem-gnf-left-recursion-elimination-preserves-language
 kind: lemma
 title: "Eliminating immediate left recursion preserves the language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-leftmost-and-rightmost-derivation, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

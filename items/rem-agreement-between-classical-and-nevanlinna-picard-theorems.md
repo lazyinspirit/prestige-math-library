@@ -8,6 +8,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-little-picard-theorem, thm-great-picard-theorem]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

@@ -11,6 +11,7 @@ deps: [thm-the-category-of-complexes-in-an-abelian-category-is-abelian,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        def-exactness-at-a-node]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

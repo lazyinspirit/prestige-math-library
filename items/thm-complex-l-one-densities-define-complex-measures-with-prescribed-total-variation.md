@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-complex-measure, def-integration-against-a-signed-or-complex-measure, thm-total-variation-is-the-supremum-of-unit-bounded-simple-integrals, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-l-one-functions-admit-dominated-complex-simple-approximations, def-integral-over-a-measurable-set, thm-monotone-convergence-for-the-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-integrable-real-and-complex-functions-and-their-integrals, thm-integral-triangle-inequality, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-upper-half-plane-automorphisms-are-real-mobius-maps, thm-blaschke-factor-is-a-disc-automorphism]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

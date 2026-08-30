@@ -10,6 +10,7 @@ deps: [def-quasi-isomorphism,
        prop-homology-respects-identities-and-composition,
        def-category-of-chain-complexes]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

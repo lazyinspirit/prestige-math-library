@@ -12,6 +12,7 @@ justified_by: [thm-beta-gamma-identity]
 forward_refs: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

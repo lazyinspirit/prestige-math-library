@@ -9,6 +9,7 @@ provenance:
 deps: [thm-euler-poincare-formula-for-finite-free-complexes,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

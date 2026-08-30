@@ -11,6 +11,7 @@ deps: [thm-four-lemma-in-an-abelian-category,
        thm-sharp-five-lemma-in-an-abelian-category]
 justified_by: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

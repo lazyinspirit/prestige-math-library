@@ -2,7 +2,7 @@
 id: def-deterministic-finite-automaton
 kind: definition
 title: "Deterministic finite automata"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps:
   - def-finite-cardinality
   - def-cartesian-product
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

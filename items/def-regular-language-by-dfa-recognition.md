@@ -2,7 +2,7 @@
 id: def-regular-language-by-dfa-recognition
 kind: definition
 title: "Regular languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-dfa-acceptance-and-recognized-language
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-published-prefix-automata-extend-to-factor-avoidance-dfas
 kind: proposition
 title: "The published prefix automata extend canonically to DFAs for factor-avoidance languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-prefix-automaton-for-a-finite-forbidden-factor-set, def-finite-words-factor-avoidance-and-prefix-states, def-deterministic-finite-automaton, def-dfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

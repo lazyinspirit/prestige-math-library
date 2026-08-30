@@ -2,7 +2,7 @@
 id: cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language
 kind: counterexample
 title: "An ambiguous expression grammar with an unambiguous grammar for the same language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-ambiguity-and-inherent-ambiguity, fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -15,6 +15,7 @@ deps: [thm-a-short-exact-sequence-is-a-kernel-cokernel-pair,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

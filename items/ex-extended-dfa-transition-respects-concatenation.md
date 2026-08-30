@@ -2,7 +2,7 @@
 id: ex-extended-dfa-transition-respects-concatenation
 kind: example
 title: "Computing $\\delta^*(q,uv)$ as $\\delta^*(\\delta^*(q,u),v)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-extended-dfa-transition-respects-concatenation, def-dfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

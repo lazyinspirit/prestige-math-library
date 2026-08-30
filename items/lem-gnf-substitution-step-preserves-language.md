@@ -2,7 +2,7 @@
 id: lem-gnf-substitution-step-preserves-language
 kind: lemma
 title: "Substituting a variable's productions into a leading variable occurrence preserves the language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-language-generated-by-a-cfg, def-one-step-and-reflexive-transitive-derivation]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -18,6 +18,7 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/charthy.pdf"
     - title: "John Tate's tensor-power argument, as summarized in expository sources"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+verification:
   audited: 2026-08-30
   precheck: pass
 ---

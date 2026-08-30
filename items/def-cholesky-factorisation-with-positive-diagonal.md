@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-sesquilinear-and-hermitian-forms-over-a-field-with-involution, def-triangular-and-diagonal-matrices-over-a-commutative-ring]
 aliases: []
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

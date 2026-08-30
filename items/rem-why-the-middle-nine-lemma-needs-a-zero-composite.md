@@ -10,6 +10,7 @@ provenance:
 deps: [thm-nine-lemma-variants-by-which-rows-are-assumed-exact]
 justified_by: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

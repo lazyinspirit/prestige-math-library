@@ -10,6 +10,7 @@ provenance:
 deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, def-invertible-matrix-and-general-linear-group, def-rank-and-nullity]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

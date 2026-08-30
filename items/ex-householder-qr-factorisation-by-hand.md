@@ -10,6 +10,7 @@ provenance:
 deps: [thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

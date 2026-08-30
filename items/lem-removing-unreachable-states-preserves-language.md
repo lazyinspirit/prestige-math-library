@@ -2,7 +2,7 @@
 id: lem-removing-unreachable-states-preserves-language
 kind: lemma
 title: "Removing unreachable states preserves the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-reachable-dfa-state, def-dfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

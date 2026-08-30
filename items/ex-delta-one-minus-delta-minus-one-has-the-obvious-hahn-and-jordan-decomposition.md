@@ -11,6 +11,7 @@ generation:
   role: example
 deps: [def-dirac-measure, thm-jordan-decomposition-for-signed-measures, thm-hahn-decomposition-for-signed-measures]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

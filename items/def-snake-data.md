@@ -10,6 +10,7 @@ provenance:
 deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]
 justified_by: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

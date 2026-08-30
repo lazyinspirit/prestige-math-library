@@ -18,6 +18,7 @@ sources:
       url: "https://arxiv.org/pdf/1001.0462.pdf"
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Section 5.2"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+verification:
   audited: 2026-08-30
   precheck: pass
 ---

@@ -9,6 +9,7 @@ provenance:
 deps: [def-chain-complex-in-an-abelian-category,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers,
        def-image-and-coimage-in-a-category-with-kernels-and-cokernels]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

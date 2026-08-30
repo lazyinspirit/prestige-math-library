@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-simple-integral-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation, def-total-variation-of-a-signed-or-complex-measure]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

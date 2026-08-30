@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-positive-negative-and-null-sets-for-a-signed-measure, lem-finite-signed-measure-sets-have-only-finite-subset-values, prop-finite-union-values-force-absolute-convergence-for-signed-measure-additivity]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

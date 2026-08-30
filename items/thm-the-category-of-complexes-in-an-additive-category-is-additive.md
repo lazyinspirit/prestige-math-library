@@ -10,6 +10,7 @@ deps: [def-additive-category,
        def-biproduct,
        def-chain-map]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

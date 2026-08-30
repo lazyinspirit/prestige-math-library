@@ -11,6 +11,7 @@ deps: [def-smooth-manifold, def-cover-refinement-and-local-finiteness]
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

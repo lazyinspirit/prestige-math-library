@@ -20,6 +20,7 @@ deps: [def-euler-characteristic-of-a-finite-complex-of-finite-rank-free-abelian-
        def-free-module-on-a-set-and-standard-basis,
        def-invariant-basis-number-and-rank-of-a-free-module]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

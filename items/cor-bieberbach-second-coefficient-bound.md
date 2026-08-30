@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-normalized-univalent-class, thm-area-theorem-for-exterior-univalent-functions, prop-star-shaped-plane-domains-are-homologically-simply-connected, cor-holomorphic-roots-homologically-simply-connected-domains]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-univalent-holomorphic-function, cor-injective-holomorphic-derivative-nonzero, thm-identity-theorem-for-real-analytic-functions-on-an-interval, def-type-i-type-ii-and-elementary-green-regions, cor-area-as-a-line-integral-for-elementary-regions]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

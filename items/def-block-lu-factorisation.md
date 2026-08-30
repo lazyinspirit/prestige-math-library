@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-normalised-lu-factorisation, def-invertible-matrix-and-general-linear-group, def-matrix-product-and-identity-matrix]
 aliases: []
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

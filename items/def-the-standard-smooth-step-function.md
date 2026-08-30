@@ -11,6 +11,7 @@ deps: [thm-the-standard-flat-function-is-smooth-and-flat-at-zero]
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

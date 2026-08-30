@@ -10,6 +10,7 @@ deps: [def-chain-complex-in-an-abelian-category,
        def-exactness-at-a-node,
        def-cycle-and-boundary-subobjects-of-a-complex,
        lem-the-boundary-subobject-factors-through-the-cycle-subobject]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

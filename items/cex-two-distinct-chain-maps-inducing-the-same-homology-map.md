@@ -9,6 +9,7 @@ provenance:
 deps: [fs-a-chain-map-is-determined-by-its-maps-on-homology,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

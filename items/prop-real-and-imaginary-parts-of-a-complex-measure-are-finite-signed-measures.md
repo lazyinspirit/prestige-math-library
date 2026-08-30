@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-complex-measure, def-signed-measure, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

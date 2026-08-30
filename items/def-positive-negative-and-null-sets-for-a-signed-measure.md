@@ -8,6 +8,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-signed-measure]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

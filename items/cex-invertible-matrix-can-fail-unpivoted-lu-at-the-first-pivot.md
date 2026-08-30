@@ -10,6 +10,7 @@ provenance:
 deps: [thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

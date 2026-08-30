@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [prop-star-shaped-plane-domains-are-homologically-simply-connected, thm-holomorphic-logarithms-homologically-simply-connected-domains]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

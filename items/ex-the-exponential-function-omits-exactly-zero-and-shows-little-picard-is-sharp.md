@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-exponential-surjects-onto-the-punctured-plane, thm-kernel-and-fibres-of-complex-exponential, thm-little-picard-theorem]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

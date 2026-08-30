@@ -17,6 +17,7 @@ sources:
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
     - title: "Anupam Singh, Representation Theory of Finite Groups, Section 20.1"
       url: "https://arxiv.org/pdf/1001.0462.pdf"
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

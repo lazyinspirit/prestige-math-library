@@ -12,6 +12,7 @@ deps: [thm-nine-lemma-variants-by-which-rows-are-assumed-exact,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

@@ -2,7 +2,7 @@
 id: ex-cfl-closure-under-union-concatenation-star-and-homomorphism
 kind: example
 title: "One family of grammars realizing union, concatenation, star, and homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-cfl-closure-under-union-concatenation-star-and-homomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

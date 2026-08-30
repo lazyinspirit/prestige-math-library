@@ -2,7 +2,7 @@
 id: lem-extended-dfa-transition-respects-concatenation
 kind: lemma
 title: "Extended DFA transition respects concatenation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-existence-and-uniqueness-of-extended-dfa-transition]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

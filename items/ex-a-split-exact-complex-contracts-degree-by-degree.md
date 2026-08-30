@@ -10,6 +10,7 @@ deps: [def-split-short-exact-sequence-in-an-abelian-category,
        thm-splitting-lemma-in-an-abelian-category,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

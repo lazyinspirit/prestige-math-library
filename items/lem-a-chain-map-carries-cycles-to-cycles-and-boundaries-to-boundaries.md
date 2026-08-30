@@ -12,6 +12,7 @@ deps: [def-chain-map,
        thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism,
        thm-every-monomorphism-is-the-kernel-of-its-cokernel]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

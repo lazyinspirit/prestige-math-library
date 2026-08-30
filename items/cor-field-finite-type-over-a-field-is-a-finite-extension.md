@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

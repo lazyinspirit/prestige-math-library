@@ -8,6 +8,7 @@ provenance:
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category,
        def-subobject-and-quotient-object]
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

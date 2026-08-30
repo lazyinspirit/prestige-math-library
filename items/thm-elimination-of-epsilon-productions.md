@@ -2,7 +2,7 @@
 id: thm-elimination-of-epsilon-productions
 kind: theorem
 title: "Epsilon-productions can be eliminated except possibly at the start symbol"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nullable-generating-and-reachable-variable, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

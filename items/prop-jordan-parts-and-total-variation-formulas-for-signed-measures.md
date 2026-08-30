@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-total-variation-of-a-signed-or-complex-measure, thm-jordan-decomposition-for-signed-measures]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

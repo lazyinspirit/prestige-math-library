@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-connecting-morphism-exists-and-is-unique]
 justified_by: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

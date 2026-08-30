@@ -2,7 +2,7 @@
 id: thm-dfa-for-language-difference
 kind: theorem
 title: "The product construction gives a DFA for language difference"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dfa-acceptance-and-recognized-language, def-language-boolean-operations, lem-extended-dfa-transition-respects-concatenation, thm-product-dfa-for-union-and-intersection]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

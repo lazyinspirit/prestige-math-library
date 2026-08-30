@@ -2,7 +2,7 @@
 id: prop-every-finite-language-is-regular
 kind: proposition
 title: "Every finite language is regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-language-by-dfa-recognition, def-finite-cardinality, def-language-over-an-alphabet]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

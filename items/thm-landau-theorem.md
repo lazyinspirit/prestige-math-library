@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-landau-radius-and-landau-constant, thm-bloch-theorem]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

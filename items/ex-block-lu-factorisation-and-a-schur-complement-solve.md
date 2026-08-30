@@ -10,6 +10,7 @@ provenance:
 deps: [thm-block-lu-factorisation-via-an-invertible-leading-block, thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

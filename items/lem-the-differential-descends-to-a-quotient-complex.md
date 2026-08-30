@@ -10,6 +10,7 @@ deps: [def-subcomplex,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers,
        def-chain-complex-in-an-abelian-category]
 proof_strategy: constructive
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

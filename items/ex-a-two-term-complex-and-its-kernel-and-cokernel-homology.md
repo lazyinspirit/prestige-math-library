@@ -10,6 +10,7 @@ deps: [def-homology-object-of-a-chain-complex,
        def-cycle-and-boundary-subobjects-of-a-complex,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

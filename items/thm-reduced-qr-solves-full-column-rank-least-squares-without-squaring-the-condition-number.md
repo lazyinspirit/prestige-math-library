@@ -10,6 +10,7 @@ provenance:
 deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, thm-least-squares-solutions-and-normal-equation, thm-normal-equations-square-the-spectral-condition-number, def-condition-number-of-a-nonsingular-linear-system, thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

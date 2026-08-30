@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, lem-riemann-map-extremal-family-is-nonempty, lem-cauchy-estimates-on-concentric-subdiscs]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

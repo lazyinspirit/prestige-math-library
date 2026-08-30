@@ -11,6 +11,7 @@ deps: [def-differential-of-a-smooth-map, def-cotangent-space-and-cotangent-bundl
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

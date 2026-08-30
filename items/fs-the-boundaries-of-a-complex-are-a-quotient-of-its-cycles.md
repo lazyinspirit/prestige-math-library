@@ -8,6 +8,7 @@ provenance:
   proof: ai-generated
 deps: [def-cycle-and-boundary-subobjects-of-a-complex]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

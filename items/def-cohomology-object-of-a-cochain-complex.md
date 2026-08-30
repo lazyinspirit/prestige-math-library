@@ -9,6 +9,7 @@ provenance:
 deps: [def-cochain-complex-in-an-abelian-category,
        lem-the-boundary-subobject-factors-through-the-cycle-subobject,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

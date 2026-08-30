@@ -11,6 +11,7 @@ deps: [def-germ-of-a-smooth-function-at-a-point]
 justified_by: [lem-curve-velocity-depends-only-on-the-contact-class]
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

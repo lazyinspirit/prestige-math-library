@@ -10,6 +10,7 @@ provenance:
 deps: [lem-two-omitted-values-rule-out-an-essential-singularity]
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

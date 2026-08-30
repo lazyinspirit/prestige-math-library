@@ -12,6 +12,7 @@ deps: [def-exact-sequence-and-short-exact-sequence-in-an-abelian-category,
        def-exactness-at-a-node,
        thm-the-arrow-theoretic-criterion-for-exactness]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

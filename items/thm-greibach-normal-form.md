@@ -2,7 +2,7 @@
 id: thm-greibach-normal-form
 kind: theorem
 title: "Every context-free language has an equivalent grammar in Greibach normal form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-chomsky-normal-form, def-greibach-normal-form, lem-gnf-substitution-step-preserves-language, lem-gnf-left-recursion-elimination-preserves-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

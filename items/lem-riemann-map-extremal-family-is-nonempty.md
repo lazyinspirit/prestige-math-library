@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, def-homologically-simply-connected-complex-domain, cor-holomorphic-roots-homologically-simply-connected-domains, thm-blaschke-factor-is-a-disc-automorphism, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

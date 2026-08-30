@@ -2,7 +2,7 @@
 id: def-reachable-dfa-state
 kind: definition
 title: "Reachable states of a DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-extended-dfa-transition-function
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

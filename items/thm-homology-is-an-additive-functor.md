@@ -13,6 +13,7 @@ deps: [def-additive-functor,
        thm-the-category-of-complexes-in-an-additive-category-is-additive,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

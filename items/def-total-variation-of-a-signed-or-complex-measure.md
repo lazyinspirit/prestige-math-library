@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-signed-measure, def-complex-measure, def-extended-reals]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

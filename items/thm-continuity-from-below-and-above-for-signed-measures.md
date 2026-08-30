@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-jordan-decomposition-for-signed-measures, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, lem-finite-signed-measure-sets-have-only-finite-subset-values]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-axiom-of-choice, thm-montel-caratheodory-theorem, thm-chordal-limit-theorem-for-meromorphic-functions, thm-boundary-maximum-modulus-principle, thm-removable-singularity-characterizations, thm-pole-characterizations, thm-isolated-singularity-trichotomy]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

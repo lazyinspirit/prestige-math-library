@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-l-one-of-a-measure, def-simple-integral-against-a-signed-or-complex-measure, prop-simple-integrals-are-bounded-by-total-variation, thm-total-variation-is-a-measure, thm-l-one-functions-admit-dominated-complex-simple-approximations]
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

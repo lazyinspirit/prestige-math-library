@@ -2,7 +2,7 @@
 id: def-leftmost-and-rightmost-derivation
 kind: definition
 title: "Leftmost and rightmost derivations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-one-step-and-reflexive-transitive-derivation
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

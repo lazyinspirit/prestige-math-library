@@ -11,6 +11,7 @@ generation:
   role: counterexample
 deps: [thm-hahn-decomposition-for-signed-measures, prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

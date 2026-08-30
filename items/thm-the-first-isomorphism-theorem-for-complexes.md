@@ -10,6 +10,7 @@ deps: [thm-first-isomorphism-theorem-in-an-abelian-category,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        lem-the-kernel-of-a-chain-map-is-computed-degreewise]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

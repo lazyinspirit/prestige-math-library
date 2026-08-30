@@ -10,6 +10,7 @@ deps: [def-quasi-isomorphism,
        prop-isomorphisms-of-complexes-are-quasi-isomorphisms,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

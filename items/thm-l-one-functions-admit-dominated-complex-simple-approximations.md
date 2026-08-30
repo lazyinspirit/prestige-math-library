@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-complex-simple-function, def-integrable-real-and-complex-functions-and-their-integrals, def-positive-and-negative-parts-of-a-function, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

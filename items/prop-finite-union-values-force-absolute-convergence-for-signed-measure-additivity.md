@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-signed-measure, lem-finite-signed-measure-sets-have-only-finite-subset-values, def-rearrangement-and-unconditional-convergence, cor-unconditional-iff-absolute-in-r]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

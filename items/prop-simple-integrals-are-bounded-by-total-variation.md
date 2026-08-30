@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-integral-of-a-nonnegative-simple-function, def-simple-integral-against-a-signed-or-complex-measure, def-total-variation-of-a-signed-or-complex-measure, thm-total-variation-is-a-measure]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

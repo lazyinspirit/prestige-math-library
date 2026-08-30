@@ -2,7 +2,7 @@
 id: ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa
 kind: example
 title: "Adding a sink turns the published prefix automaton for avoiding `11` into a DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-published-prefix-automata-extend-to-factor-avoidance-dfas]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

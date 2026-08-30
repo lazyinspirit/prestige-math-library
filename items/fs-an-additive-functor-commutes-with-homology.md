@@ -10,6 +10,7 @@ deps: [prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps,
        thm-an-exact-functor-commutes-with-homology,
        def-additive-functor]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

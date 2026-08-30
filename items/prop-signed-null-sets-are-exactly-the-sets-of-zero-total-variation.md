@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-positive-negative-and-null-sets-for-a-signed-measure, def-total-variation-of-a-signed-or-complex-measure]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

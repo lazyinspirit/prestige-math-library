@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-complex-exponential-surjects-onto-the-punctured-plane, thm-kernel-and-fibres-of-complex-exponential, thm-great-picard-theorem, thm-isolated-singularity-trichotomy]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

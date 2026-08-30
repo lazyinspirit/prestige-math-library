@@ -14,6 +14,7 @@ forward_refs: []
 aliases: []
 landmark: false
 proof_strategy: constructive
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

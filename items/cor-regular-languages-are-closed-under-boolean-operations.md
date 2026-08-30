@@ -2,7 +2,7 @@
 id: cor-regular-languages-are-closed-under-boolean-operations
 kind: corollary
 title: "Regular languages are closed under the Boolean operations over a fixed alphabet"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-language-by-dfa-recognition, thm-product-dfa-for-union-and-intersection, thm-complementing-accept-states-complements-the-language]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

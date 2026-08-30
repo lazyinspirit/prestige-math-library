@@ -2,7 +2,7 @@
 id: def-one-step-and-reflexive-transitive-derivation
 kind: definition
 title: "One-step derivation and finite derivation in a context-free grammar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-context-free-grammar
   - def-relation-domain-range-and-field
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

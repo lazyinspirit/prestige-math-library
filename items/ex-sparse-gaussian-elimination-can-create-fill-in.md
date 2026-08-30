@@ -10,6 +10,7 @@ provenance:
 deps: [def-permutation-matrix-partial-pivoting-and-pivot-growth]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

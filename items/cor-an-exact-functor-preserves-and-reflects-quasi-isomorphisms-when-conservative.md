@@ -10,6 +10,7 @@ deps: [thm-an-exact-functor-commutes-with-homology,
        def-quasi-isomorphism,
        def-conservative-functor]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

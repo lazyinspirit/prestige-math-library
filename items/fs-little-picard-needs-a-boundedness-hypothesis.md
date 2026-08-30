@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-little-picard-theorem]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

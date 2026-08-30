@@ -9,6 +9,7 @@ provenance:
 deps: [thm-a-chain-map-induces-a-well-defined-map-on-homology,
        prop-identities-and-composites-of-chain-maps-are-chain-maps]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -2,7 +2,7 @@
 id: def-nullable-generating-and-reachable-variable
 kind: definition
 title: "Nullable, generating, and reachable variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-context-free-grammar
   - def-one-step-and-reflexive-transitive-derivation
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -11,6 +11,7 @@ deps: [def-germ-of-a-smooth-function-at-a-point, def-derivation-at-a-point-and-t
 justified_by: [lem-coordinate-derivations-are-well-defined-derivations]
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

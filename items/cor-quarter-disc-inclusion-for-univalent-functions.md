@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-univalent-holomorphic-function, thm-blaschke-factor-is-a-disc-automorphism, thm-koebe-one-quarter-theorem]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -2,7 +2,7 @@
 id: fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality
 kind: false-statement
 title: "FALSE: a DFA transition diagram may omit a sink without changing totality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-finite-automaton]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

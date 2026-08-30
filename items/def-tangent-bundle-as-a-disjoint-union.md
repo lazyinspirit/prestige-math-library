@@ -11,6 +11,7 @@ deps: [def-derivation-at-a-point-and-tangent-space]
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

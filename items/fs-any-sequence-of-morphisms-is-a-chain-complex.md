@@ -9,6 +9,7 @@ provenance:
 deps: [def-chain-complex-in-an-abelian-category,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

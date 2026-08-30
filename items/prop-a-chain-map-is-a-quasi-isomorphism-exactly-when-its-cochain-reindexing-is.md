@@ -10,6 +10,7 @@ deps: [def-cochain-complex-in-an-abelian-category,
        def-cohomology-object-of-a-cochain-complex,
        def-quasi-isomorphism]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

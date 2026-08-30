@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 deps: [def-positive-negative-and-null-sets-for-a-signed-measure, prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation, lem-positive-finite-signed-measure-set-contains-a-positive-subset-of-at-least-the-same-mass]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

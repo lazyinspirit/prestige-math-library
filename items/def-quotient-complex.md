@@ -8,6 +8,7 @@ provenance:
   proof: not-applicable
 deps: [def-subcomplex,
        lem-the-differential-descends-to-a-quotient-complex]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

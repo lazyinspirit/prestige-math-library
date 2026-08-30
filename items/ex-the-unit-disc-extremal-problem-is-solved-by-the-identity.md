@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-riemann-map-extremal-family, cor-uniqueness-of-the-normalized-riemann-map, thm-unit-disc-schwarz-lemma-with-rigidity]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

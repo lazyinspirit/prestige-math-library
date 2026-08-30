@@ -11,6 +11,7 @@ deps: [def-additive-functor,
        def-chain-complex-in-an-abelian-category,
        def-chain-map]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

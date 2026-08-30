@@ -15,6 +15,7 @@ deps: [thm-the-connecting-morphism-exists-and-is-unique,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

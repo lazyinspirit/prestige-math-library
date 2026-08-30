@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique, thm-sylvesters-criterion-for-positive-definiteness, thm-determinant-of-a-triangular-matrix]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

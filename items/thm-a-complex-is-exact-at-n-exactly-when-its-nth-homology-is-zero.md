@@ -11,6 +11,7 @@ deps: [def-homology-object-of-a-chain-complex,
        cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero,
        thm-an-abelian-category-is-balanced]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

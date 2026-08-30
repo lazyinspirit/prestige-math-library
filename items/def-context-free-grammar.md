@@ -2,7 +2,7 @@
 id: def-context-free-grammar
 kind: definition
 title: "Context-free grammars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-computation-alphabet-and-word-convention
   - def-finite-cardinality
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -11,6 +11,7 @@ deps: [def-smooth-manifold]
 justified_by: [lem-equality-near-a-point-is-an-equivalence-relation-on-local-smooth-functions]
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

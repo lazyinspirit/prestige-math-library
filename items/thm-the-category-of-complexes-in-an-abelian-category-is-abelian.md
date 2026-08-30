@@ -13,6 +13,7 @@ deps: [def-abelian-category,
        prop-images-and-coimages-of-chain-maps-are-computed-degreewise,
        thm-the-category-of-complexes-in-an-additive-category-is-additive]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

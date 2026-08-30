@@ -9,6 +9,7 @@ provenance:
 deps: [def-chain-map,
        prop-identities-and-composites-of-chain-maps-are-chain-maps,
        def-bounded-bounded-below-and-bounded-above-complex]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

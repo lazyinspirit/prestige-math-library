@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-sigma-algebra, thm-complex-numbers-form-a-field]
+verification:
   audited: 2026-08-30
   precheck: n/a
 sources:

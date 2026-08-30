@@ -16,6 +16,7 @@ sources:
   references:
     - title: "Peter Webb, A Course in Finite Group Representation Theory, Theorem 4.1.5"
       url: "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

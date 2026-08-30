@@ -2,7 +2,7 @@
 id: cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality
 kind: counterexample
 title: "A missing `1`-transition shows the drawn machine is not yet a DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-deterministic-finite-automaton, fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

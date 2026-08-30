@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-measure, def-total-variation-of-a-signed-or-complex-measure, thm-total-variation-of-a-complex-measure-is-finite, prop-jordan-parts-and-total-variation-formulas-for-signed-measures]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

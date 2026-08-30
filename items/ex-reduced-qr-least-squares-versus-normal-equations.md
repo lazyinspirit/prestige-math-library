@@ -10,6 +10,7 @@ provenance:
 deps: [thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

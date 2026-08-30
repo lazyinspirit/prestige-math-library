@@ -8,6 +8,7 @@ provenance:
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category,
        def-cochain-complex-in-an-abelian-category]
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

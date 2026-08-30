@@ -10,6 +10,7 @@ provenance:
 deps: [thm-schottky-theorem, thm-liouville-bounded-entire-function]
 landmark: true
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

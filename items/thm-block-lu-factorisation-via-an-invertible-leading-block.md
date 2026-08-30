@@ -10,6 +10,7 @@ provenance:
 deps: [def-block-lu-factorisation, thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost, def-invertible-matrix-and-general-linear-group, def-matrix-product-and-identity-matrix]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

@@ -10,6 +10,7 @@ provenance:
 deps: [thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost, thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique, def-cholesky-factorisation-with-positive-diagonal]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

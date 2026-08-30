@@ -11,6 +11,7 @@ generation:
   role: example
 deps: [thm-jordan-decomposition-for-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

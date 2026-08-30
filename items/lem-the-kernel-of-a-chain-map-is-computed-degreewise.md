@@ -9,6 +9,7 @@ provenance:
 deps: [def-chain-map,
        def-kernels-and-cokernels-as-equalizers-and-coequalizers]
 proof_strategy: constructive
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

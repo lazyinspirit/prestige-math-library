@@ -16,6 +16,7 @@ deps: [thm-chasing-rule-monicity-by-member-cancellation,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

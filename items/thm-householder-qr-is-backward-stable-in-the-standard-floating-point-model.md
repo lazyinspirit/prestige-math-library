@@ -10,6 +10,7 @@ provenance:
 deps: [thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, def-standard-relative-floating-point-model-and-unit-roundoff, lem-product-of-one-plus-deltas-gives-theta-n, thm-floating-point-dot-product-componentwise-and-normwise-error-bounds, thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]
 aliases: []
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

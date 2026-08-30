@@ -2,7 +2,7 @@
 id: thm-complementing-accept-states-complements-the-language
 kind: theorem
 title: "Complementing the accepting states complements the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dfa-acceptance-and-recognized-language, def-language-boolean-operations, def-deterministic-finite-automaton]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-elimination-of-useless-symbols
 kind: example
 title: "Removing one nongenerating variable and one unreachable variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-elimination-of-useless-symbols]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

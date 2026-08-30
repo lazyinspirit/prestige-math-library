@@ -11,6 +11,7 @@ deps: [def-the-local-algebra-of-smooth-function-germs, def-algebraic-dual-and-li
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

@@ -10,6 +10,7 @@ deps: [def-quasi-isomorphism,
        fs-every-quasi-isomorphism-is-an-isomorphism-of-complexes,
        thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

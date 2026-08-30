@@ -11,6 +11,7 @@ deps: [def-algebraic-dual-and-linear-functional, def-tangent-bundle-as-a-disjoin
 justified_by: []
 aliases: []
 landmark: false
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

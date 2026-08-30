@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-riemann-mapping-theorem, thm-unit-disc-schwarz-lemma-with-rigidity, thm-chain-rule-for-complex-derivatives]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

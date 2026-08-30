@@ -2,7 +2,7 @@
 id: def-chomsky-normal-form
 kind: definition
 title: "Chomsky normal form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps:
   - def-context-free-grammar
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -13,6 +13,7 @@ deps: [rem-the-freyd-mitchell-embedding-theorem,
 justified_by: []
 landmark: false
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:

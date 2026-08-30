@@ -2,7 +2,7 @@
 id: fs-cnf-preserves-epsilon-without-an-exception
 kind: false-statement
 title: "FALSE: converting to Chomsky normal form preserves epsilon without a special start-symbol exception"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chomsky-normal-form, thm-chomsky-normal-form]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

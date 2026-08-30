@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-inner-product-norm]
 aliases: []
+verification:
   audited: 2026-08-30
   precheck: n/a
   judge:

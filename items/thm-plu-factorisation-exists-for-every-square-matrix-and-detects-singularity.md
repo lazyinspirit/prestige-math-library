@@ -10,6 +10,7 @@ provenance:
 deps: [def-permutation-matrix-partial-pivoting-and-pivot-growth, def-normalised-lu-factorisation, thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors, def-invertible-matrix-and-general-linear-group]
 aliases: []
 proof_strategy: induction
+verification:
   audited: 2026-08-30
   precheck: pass
 sources:

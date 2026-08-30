@@ -2,7 +2,7 @@
 id: thm-chomsky-normal-form
 kind: theorem
 title: "Every context-free language has an equivalent grammar in Chomsky normal form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-elimination-of-useless-symbols, thm-elimination-of-epsilon-productions, thm-elimination-of-unit-productions, def-chomsky-normal-form]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

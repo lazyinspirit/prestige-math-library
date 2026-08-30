@@ -2,7 +2,7 @@
 id: thm-product-dfa-for-union-and-intersection
 kind: theorem
 title: "The product construction gives DFA's for union and intersection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dfa-acceptance-and-recognized-language, def-language-boolean-operations, lem-extended-dfa-transition-respects-concatenation]
 proof_strategy: direct
 verification:
+  audited: 2026-08-30
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-dfa-acceptance-and-recognized-language
 kind: definition
 title: "Acceptance of a word by a DFA and the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - thm-existence-and-uniqueness-of-extended-dfa-transition
   - def-language-over-an-alphabet
 verification:
+  audited: 2026-08-30
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

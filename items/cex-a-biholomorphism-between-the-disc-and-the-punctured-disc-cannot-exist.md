@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-removable-singularity-characterizations, thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
+verification:
   audited: 2026-08-30
   precheck: pass
   judge:
