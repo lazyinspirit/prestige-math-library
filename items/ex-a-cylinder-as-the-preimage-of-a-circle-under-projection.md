@@ -2,7 +2,7 @@
 id: ex-a-cylinder-as-the-preimage-of-a-circle-under-projection
 kind: example
 title: "A cylinder is the preimage of a circle under a projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

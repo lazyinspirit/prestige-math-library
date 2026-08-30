@@ -2,7 +2,7 @@
 id: ex-delta-zero-plus-lebesgue-on-zero-one-splits-into-discrete-and-absolutely-continuous-parts
 kind: example
 title: "The measure $\\delta_0+\\lambda\\!\\restriction_{[0,1]}$ splits into discrete and absolutely continuous parts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition, def-dirac-measure, prop-dirac-measure-is-a-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

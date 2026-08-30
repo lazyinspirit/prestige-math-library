@@ -1,7 +1,7 @@
 ---
 page: nondeterministic-finite-automata-and-subset-construction-examples
 title: "Nondeterministic Finite Automata and Subset Construction: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-every-dfa-is-an-nfa

@@ -2,7 +2,7 @@
 id: ex-a-lax-monoidal-functor-that-is-not-strong
 kind: example
 title: "The power-set functor is lax monoidal but not strong"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-power-set, def-lax-strong-and-strict-monoidal-functor, cor-set-cat-and-every-complete-category-are-cartesian-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

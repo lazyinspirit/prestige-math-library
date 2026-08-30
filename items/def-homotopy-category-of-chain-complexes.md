@@ -2,7 +2,7 @@
 id: def-homotopy-category-of-chain-complexes
 kind: definition
 title: "The homotopy category of chain complexes"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: not-applicable
 deps: [def-homotopy-classes-of-chain-maps, lem-composition-of-homotopy-classes-is-well-defined]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

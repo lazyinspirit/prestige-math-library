@@ -2,7 +2,7 @@
 id: def-immersion-submersion-and-constant-rank-map
 kind: definition
 title: "Immersions, submersions, and constant-rank maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

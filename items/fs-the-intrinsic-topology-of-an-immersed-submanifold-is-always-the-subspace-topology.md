@@ -2,7 +2,7 @@
 id: fs-the-intrinsic-topology-of-an-immersed-submanifold-is-always-the-subspace-topology
 kind: false-statement
 title: "The intrinsic topology of an immersed submanifold need not be the subspace topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

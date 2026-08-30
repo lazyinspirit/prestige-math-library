@@ -2,7 +2,7 @@
 id: thm-parenthesised-words-of-a-given-length-are-counted-by-the-catalan-numbers
 kind: theorem
 title: "Parenthesised tensor words of a fixed length are counted by the Catalan numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parenthesised-tensor-word]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-shift-of-a-chain-complex
 kind: definition
 title: "The shift of a chain complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-complex-in-an-abelian-category]
 justified_by: [lem-the-shifted-differential-squares-to-zero]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

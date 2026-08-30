@@ -2,7 +2,7 @@
 id: thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures
 kind: theorem
 title: "The Lebesgue decomposition of a sigma-finite signed measure is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-measure-concentrated-on-a-measurable-set, thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

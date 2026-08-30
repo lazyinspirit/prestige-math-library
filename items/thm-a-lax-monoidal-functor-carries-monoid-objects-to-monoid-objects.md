@@ -2,7 +2,7 @@
 id: thm-a-lax-monoidal-functor-carries-monoid-objects-to-monoid-objects
 kind: theorem
 title: "A lax monoidal functor carries monoid objects to monoid objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lax-strong-and-strict-monoidal-functor, def-monoid-object-and-comonoi
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

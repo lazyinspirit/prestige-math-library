@@ -2,7 +2,7 @@
 id: cor-prime-ideals-and-dimension-of-a-dvr
 kind: corollary
 title: "Prime ideals and dimension of a DVR"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

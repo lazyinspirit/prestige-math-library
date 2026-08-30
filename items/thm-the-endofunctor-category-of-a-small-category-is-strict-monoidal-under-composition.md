@@ -2,7 +2,7 @@
 id: thm-the-endofunctor-category-of-a-small-category-is-strict-monoidal-under-composition
 kind: theorem
 title: "The endofunctor category of a small category is strict monoidal under composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-functor-category, prop-size-of-functor-categories, def-strict-monoida
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

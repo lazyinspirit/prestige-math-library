@@ -2,7 +2,7 @@
 id: def-rayleigh-quotient-iteration
 kind: definition
 title: "Rayleigh-quotient iteration for Hermitian matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-inverse-and-shifted-inverse-iteration,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

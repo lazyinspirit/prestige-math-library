@@ -2,7 +2,7 @@
 id: def-divisor-counting-function
 kind: definition
 title: "The divisor-counting function $\\tau$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function, def-divides-in-z, def-sum-over-a-finite-index-se
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

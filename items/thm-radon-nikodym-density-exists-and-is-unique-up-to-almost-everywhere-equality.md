@@ -2,7 +2,7 @@
 id: thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality
 kind: theorem
 title: "A sigma-finite signed measure that is absolutely continuous with respect to a sigma-finite positive measure has a unique almost-everywhere density"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-integrable-real-and-complex-functions-and-their-integrals, def-total-variation-of-a-signed-or-complex-measure, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero, thm-jordan-decomposition-for-signed-measures, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

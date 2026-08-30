@@ -2,7 +2,7 @@
 id: thm-preimage-theorem-for-submanifolds-under-submersions
 kind: theorem
 title: "The preimage theorem for submanifolds under submersions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

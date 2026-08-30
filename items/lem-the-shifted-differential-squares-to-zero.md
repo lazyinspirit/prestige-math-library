@@ -2,7 +2,7 @@
 id: lem-the-shifted-differential-squares-to-zero
 kind: lemma
 title: "The shifted differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shift-of-a-chain-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

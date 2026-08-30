@@ -2,7 +2,7 @@
 id: fs-every-quasi-isomorphism-is-a-chain-homotopy-equivalence
 kind: false-statement
 title: "FALSE: every quasi-isomorphism is a chain homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quasi-isomorphism, thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism, prop-zero-homology-does-not-make-an-object-zero-in-the-homotopy-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

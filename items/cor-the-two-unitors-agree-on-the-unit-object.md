@@ -2,7 +2,7 @@
 id: cor-the-two-unitors-agree-on-the-unit-object
 kind: corollary
 title: "The two unitors agree on the tensor unit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-left-unitor-of-a-tensor-product-is-determined, thm-the-right-unitor-of-a-tensor-product-is-determined]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-a-discrete-embedded-submanifold-is-closed-locally-and-countable
 kind: corollary
 title: "A discrete embedded submanifold is locally closed and countable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-power-iteration-on-a-diagonal-matrix-displays-the-eigenvalue-ratio-rate
 kind: example
 title: "Power iteration on a diagonal matrix shows the $|\\lambda_2/\\lambda_1|^k$ convergence rate explicitly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -47,4 +48,5 @@ eigenvalue ratio
 **Proof technique:** computation.
 
 1.1 Since $A^k x_0=2^{-1/2}(4^k,1)^T$, normalising gives $$ x_k= \frac{1}{\sqrt{16^k+1}} \begin{bmatrix} 4^k\\1 \end{bmatrix} = \frac{1}{\sqrt{1+16^{-k}}} \begin{bmatrix} 1\\4^{-k} \end{bmatrix}. $$ [algebra]
+
 2.1 The second coordinate of $x_k$ is asymptotic to $4^{-k}$, so the angle to the dominant eigendirection $\mathbb Fe_1$ decays like $4^{-k}$. This is exactly the rate predicted by [L1]. [L1, step 1.1, algebra] ∎

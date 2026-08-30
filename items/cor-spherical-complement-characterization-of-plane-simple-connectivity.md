@@ -2,7 +2,7 @@
 id: cor-spherical-complement-characterization-of-plane-simple-connectivity
 kind: corollary
 title: "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-grand-equivalence-for-simply-connected-plane-domains,
        lem-null-homology-implies-connected-spherical-complement]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

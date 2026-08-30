@@ -2,7 +2,7 @@
 id: prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive
 kind: proposition
 title: "The canonical functor from complexes to the homotopy category is additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homotopy-category-of-chain-complexes, thm-the-homotopy-category-is-additive, thm-the-category-of-complexes-in-an-additive-category-is-additive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

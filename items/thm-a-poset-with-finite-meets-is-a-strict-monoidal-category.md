@@ -2,7 +2,7 @@
 id: thm-a-poset-with-finite-meets-is-a-strict-monoidal-category
 kind: theorem
 title: "A poset with finite meets is a strict monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strict-monoidal-category, def-lattice-distributive-lattice-and-order-ideal, prop-preorders-as-categories-and-monotone-maps-as-functors]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

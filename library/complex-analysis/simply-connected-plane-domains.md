@@ -1,7 +1,7 @@
 ---
 page: simply-connected-plane-domains
 title: "Simply Connected Plane Domains: the Grand Equivalence"
-status: draft
+status: published
 items: [thm-homotopy-invariance-of-holomorphic-line-integrals,
         cor-cauchy-theorem-for-null-homotopic-loops,
         thm-winding-number-equals-circle-degree,

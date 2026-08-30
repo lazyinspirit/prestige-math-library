@@ -2,7 +2,7 @@
 id: cex-a-rank-drop-at-a-point-need-not-persist-locally
 kind: counterexample
 title: "A rank drop at one point need not persist locally"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

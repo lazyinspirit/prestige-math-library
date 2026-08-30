@@ -2,7 +2,7 @@
 id: ex-divisor-counting-and-sum-prime-power-formulas
 kind: example
 title: "Prime-power formulas for $\\tau$ and $\\sigma_k$ in concrete cases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [prop-divisor-functions-under-dirichlet-convolution, thm-canonical-prime-f
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

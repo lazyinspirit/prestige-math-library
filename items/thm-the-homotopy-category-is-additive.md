@@ -2,7 +2,7 @@
 id: thm-the-homotopy-category-is-additive
 kind: theorem
 title: "The homotopy category is additive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homotopy-category-of-chain-complexes, prop-null-homotopic-maps-form-a-two-sided-additive-ideal, thm-the-category-of-complexes-in-an-additive-category-is-additive, prop-finite-biproducts-of-complexes-are-computed-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

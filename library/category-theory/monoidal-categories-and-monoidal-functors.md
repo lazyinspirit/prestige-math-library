@@ -1,7 +1,7 @@
 ---
 page: monoidal-categories-and-monoidal-functors
 title: "Monoidal Categories and Monoidal Functors"
-status: draft
+status: published
 items: [def-monoidal-category,
         rem-the-associator-runs-the-other-way-in-mac-lane,
         thm-the-pentagon-and-the-triangle-are-independent,

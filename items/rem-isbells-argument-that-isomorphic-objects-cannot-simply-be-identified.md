@@ -2,7 +2,7 @@
 id: rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified
 kind: remark
 title: "Isbell's warning that isomorphic objects cannot simply be identified"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category, rem-unbracketed-tensor-strings-are-not-yet-defined]
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-shift-of-a-chain-map-and-chain-homotopy
 kind: definition
 title: "Shifted chain maps and shifted chain homotopies"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-shift-of-a-chain-complex, def-chain-map, def-chain-homotopy]
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

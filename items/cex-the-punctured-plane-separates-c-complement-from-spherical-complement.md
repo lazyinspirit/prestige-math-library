@@ -2,7 +2,7 @@
 id: cex-the-punctured-plane-separates-c-complement-from-spherical-complement
 kind: counterexample
 title: "The punctured plane has connected complement in C but disconnected spherical complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [cor-spherical-complement-characterization-of-plane-simple-connectivity,
        cor-winding-number-classifies-loops-in-the-punctured-plane]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

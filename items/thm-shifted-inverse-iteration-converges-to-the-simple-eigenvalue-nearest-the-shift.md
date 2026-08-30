@@ -2,7 +2,7 @@
 id: thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift
 kind: theorem
 title: "If $\\mu$ is not an eigenvalue and one simple eigenvalue is uniquely nearest to $\\mu$, shifted inverse iteration converges to its eigendirection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -45,5 +46,7 @@ with shift $\mu$ converges projectively to the eigendirection of $v_j$.
 **Proof technique:** direct.
 
 1.1 The eigenvectors of $(A-\mu I)^{-1}$ are the same $v_i$, and the corresponding eigenvalues are $(\lambda_i-\mu)^{-1}$. The hypothesis $|\lambda_j-\mu|<|\lambda_i-\mu|$ means $$ \left|\frac1{\lambda_j-\mu}\right| > \left|\frac1{\lambda_i-\mu}\right| \qquad(i\neq j). $$ [given, algebra]
+
 2.1 Therefore $(A-\mu I)^{-1}$ has a simple eigenvalue of strictly largest modulus in the eigendirection $v_j$. The start vector has nonzero $v_j$-component by hypothesis, so [L2] applies. [L2, step 1.1]
+
 3.1 Since [L1] identifies shifted inverse iteration with that power iteration, the iterates converge projectively to the eigendirection of $v_j$. [L1, step 2.1] ∎

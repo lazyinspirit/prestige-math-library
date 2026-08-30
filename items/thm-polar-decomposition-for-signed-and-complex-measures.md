@@ -2,7 +2,7 @@
 id: thm-polar-decomposition-for-signed-and-complex-measures
 kind: theorem
 title: "Every finite signed or complex measure has a polar decomposition against its total variation"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, def-total-variation-of-a-signed-or-complex-measure, thm-hahn-decomposition-for-signed-measures, thm-jordan-decomposition-for-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-total-variation-of-a-complex-measure-is-finite, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

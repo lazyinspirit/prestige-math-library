@@ -2,13 +2,14 @@
 id: rem-simply-connected-convention-for-plane-domains
 kind: remark
 title: "Under the grand theorem's Choice hypothesis, plane-domain simple connectivity means any grand-equivalent clause"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [thm-grand-equivalence-for-simply-connected-plane-domains]
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

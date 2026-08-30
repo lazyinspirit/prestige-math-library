@@ -2,7 +2,7 @@
 id: def-arithmetic-function
 kind: definition
 title: "Arithmetic functions on the positive integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-divisibility-poset-on-positive-integers, thm-complex-numbers-form-a-f
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

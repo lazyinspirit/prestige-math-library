@@ -1,7 +1,7 @@
 ---
 page: the-moore-penrose-pseudoinverse-and-regularised-least-squares
 title: "The Moore--Penrose Pseudoinverse and Regularised Least Squares"
-status: draft
+status: published
 items: [def-moore-penrose-pseudoinverse,
         thm-moore-penrose-pseudoinverse-exists-and-is-unique,
         prop-pseudoinversion-is-involutive-adjoint-compatible-and-unitarily-equivariant,

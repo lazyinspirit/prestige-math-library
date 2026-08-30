@@ -2,13 +2,14 @@
 id: def-null-homotopic-chain-map
 kind: definition
 title: "A null-homotopic chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-homotopy, def-hom-complex-of-chain-complexes]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

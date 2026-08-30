@@ -2,7 +2,7 @@
 id: lem-null-homology-implies-connected-spherical-complement
 kind: lemma
 title: "A homologically simply connected plane domain has connected spherical complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ deps: [def-homologically-simply-connected-complex-domain,
        cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

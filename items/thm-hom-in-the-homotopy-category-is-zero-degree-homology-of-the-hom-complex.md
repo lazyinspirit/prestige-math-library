@@ -2,7 +2,7 @@
 id: thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex
 kind: theorem
 title: "Hom in the homotopy category is zero-degree homology of the Hom complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-complex-of-chain-complexes, prop-zero-cocycles-in-the-hom-complex-are-chain-maps, def-null-homotopic-chain-map, def-homotopy-classes-of-chain-maps, def-homotopy-category-of-chain-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

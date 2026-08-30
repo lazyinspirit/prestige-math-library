@@ -2,7 +2,7 @@
 id: prop-reduced-qr-formulas-for-full-rank-pseudoinverses
 kind: proposition
 title: "Reduced QR gives the full-column and full-row-rank pseudoinverse formulas without forming normal equations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -47,5 +48,7 @@ sources:
 **Proof technique:** direct.
 
 1.1 Suppose $A$ has full column rank and $A=\widehat Q\widehat R$. By [L1], $$ A^*A=\widehat R^*\widehat Q^*\widehat Q\widehat R=\widehat R^*\widehat R. $$ Using [L2], $$ A^+=(A^*A)^{-1}A^* =(\widehat R^*\widehat R)^{-1}\widehat R^*\widehat Q^* =\widehat R^{-1}\widehat Q^*. $$ [L1, L2, algebra]
+
 2.1 Suppose now that $A$ has full row rank and $A^*=\widehat Q\widehat R$ is a reduced QR factorisation of $A^*$. Applying step 1.1 to $A^*$ gives $$ (A^*)^+=\widehat R^{-1}\widehat Q^*. $$ Taking adjoints yields $$ A^+=((A^*)^+)^*=\widehat Q\widehat R^{-*}. $$ [L1, L3, step 1.1, algebra]
+
 3.1 These are exactly the reduced-QR pseudoinverse formulas. [step 1.1, step 2.1] ∎

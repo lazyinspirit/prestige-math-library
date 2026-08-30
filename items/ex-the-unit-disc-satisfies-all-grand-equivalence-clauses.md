@@ -2,7 +2,7 @@
 id: ex-the-unit-disc-satisfies-all-grand-equivalence-clauses
 kind: example
 title: "The unit disc satisfies all of the grand-equivalent simple connectivity clauses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-grand-equivalence-for-simply-connected-plane-domains]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

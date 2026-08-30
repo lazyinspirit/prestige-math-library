@@ -1,7 +1,7 @@
 ---
 page: the-radon-nikodym-theorem-and-lebesgue-decomposition
 title: "The Radon Nikodym Theorem and Lebesgue Decomposition"
-status: draft
+status: published
 items: [def-measure-concentrated-on-a-measurable-set, def-absolutely-continuous-with-respect-to-a-positive-measure, thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures, thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures, def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, thm-integration-against-a-radon-nikodym-derivative, thm-additivity-of-radon-nikodym-derivatives, thm-chain-rule-for-radon-nikodym-derivatives, cor-reciprocal-rule-for-equivalent-sigma-finite-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, prop-the-radon-nikodym-derivative-is-integrable-exactly-when-the-absolutely-continuous-part-is-finite, thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures, thm-polar-decomposition-for-signed-and-complex-measures, thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition, rem-von-neumanns-hilbert-space-proof-of-radon-nikodym]
 examples: []
 ---

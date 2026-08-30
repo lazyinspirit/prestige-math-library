@@ -1,7 +1,7 @@
 ---
 page: the-moore-penrose-pseudoinverse-and-regularised-least-squares-examples
 title: "The Moore--Penrose Pseudoinverse and Regularised Least Squares: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-diagonal-pseudoinverse-and-the-two-orthogonal-projections,
            ex-an-overdetermined-inconsistent-system-and-its-minimum-norm-least-squares-solution,

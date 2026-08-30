@@ -2,7 +2,7 @@
 id: ex-wilkinson-shifted-qr-deflates-a-symmetric-tridiagonal-tail
 kind: example
 title: "A Wilkinson-shifted QR step can sharply reduce the tail of a symmetric tridiagonal matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

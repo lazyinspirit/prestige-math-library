@@ -2,13 +2,14 @@
 id: def-monoidal-equivalence
 kind: definition
 title: "Monoidal equivalence and monoidal quasi-inverse data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-lax-strong-and-strict-monoidal-functor, def-monoidal-natural-transformation, thm-monoidal-functors-compose-and-laxness-is-preserved, def-equivalence-and-adjoint-equivalence-of-categories, thm-every-equivalence-can-be-made-an-adjoint-equivalence]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

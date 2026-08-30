@@ -2,7 +2,7 @@
 id: thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures
 kind: theorem
 title: "For finite signed or complex measures, absolute continuity is equivalent to the epsilon-delta small-set condition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-radon-nikodym-derivative, def-total-variation-of-a-signed-or-complex-measure, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value, thm-absolute-continuity-of-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

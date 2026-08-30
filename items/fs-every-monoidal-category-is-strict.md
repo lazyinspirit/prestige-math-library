@@ -2,7 +2,7 @@
 id: fs-every-monoidal-category-is-strict
 kind: false-statement
 title: "FALSE: every monoidal category is strict"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-strict-monoidal-category, rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

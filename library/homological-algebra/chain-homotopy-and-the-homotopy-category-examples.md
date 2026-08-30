@@ -1,7 +1,7 @@
 ---
 page: chain-homotopy-and-the-homotopy-category-examples
 title: "Chain Homotopy and the Homotopy Category - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-contracting-homotopy-for-the-two-term-identity-complex,
            ex-two-homotopic-maps-with-different-components,

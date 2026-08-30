@@ -2,7 +2,7 @@
 id: ex-a-monoid-as-a-one-object-monoidal-category
 kind: example
 title: "A commutative monoid as a one-object strict monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-monoids-and-groups-as-one-object-categories, thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

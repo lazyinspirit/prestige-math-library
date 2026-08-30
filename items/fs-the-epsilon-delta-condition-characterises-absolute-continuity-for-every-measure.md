@@ -2,7 +2,7 @@
 id: fs-the-epsilon-delta-condition-characterises-absolute-continuity-for-every-measure
 kind: false-statement
 title: "FALSE: the epsilon-delta condition characterises absolute continuity for every measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-measure-with-density,
        thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

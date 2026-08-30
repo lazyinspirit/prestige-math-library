@@ -1,7 +1,7 @@
 ---
 page: arithmetic-functions-and-dirichlet-convolution
 title: "Arithmetic Functions and Dirichlet Convolution"
-status: draft
+status: published
 items: [def-arithmetic-function,
         def-multiplicative-arithmetic-function,
         def-completely-multiplicative-arithmetic-function,

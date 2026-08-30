@@ -2,7 +2,7 @@
 id: thm-von-mangoldt-divisor-sum-identity
 kind: theorem
 title: "The divisor sum of von Mangoldt is the arithmetic-function logarithm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

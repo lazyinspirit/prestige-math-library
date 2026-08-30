@@ -2,13 +2,14 @@
 id: def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure
 kind: definition
 title: "The absolutely continuous part and the singular part in the Lebesgue decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures, thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

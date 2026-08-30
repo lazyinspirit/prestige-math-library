@@ -2,7 +2,7 @@
 id: thm-null-homology-is-equivalent-to-global-harmonic-conjugates
 kind: theorem
 title: "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ deps: [def-harmonic-conjugate,
        thm-open-mapping-theorem-holomorphic-functions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

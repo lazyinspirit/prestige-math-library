@@ -2,7 +2,7 @@
 id: def-subspace-iteration-and-the-dominant-invariant-subspace
 kind: definition
 title: "Subspace iteration and the dominant invariant subspace of a matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

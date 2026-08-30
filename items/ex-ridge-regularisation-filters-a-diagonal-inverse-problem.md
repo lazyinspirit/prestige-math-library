@@ -2,7 +2,7 @@
 id: ex-ridge-regularisation-filters-a-diagonal-inverse-problem
 kind: example
 title: "Ridge regularisation damps the small-singular-value directions in a diagonal inverse problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,5 +46,7 @@ $$ x_\lambda= \begin{bmatrix} \frac{1}{1+\lambda} \\ \frac{10^{-2}}{10^{-4}+\lam
 **Proof technique:** computation.
 
 1.1 The singular values are $1$ and $10^{-2}$, so the unregularised pseudoinverse multiplies the second component of $b$ by $10^2$, producing the large coefficient $100$. [algebra]
+
 1.2 By [L1], the Tikhonov filter factors are $$ \frac{1}{1+\lambda}=\frac{100}{101}, \qquad \frac{10^{-2}}{10^{-4}+\lambda}=\frac{100}{101}, $$ so the regularised solution is the displayed vector. [L1, algebra]
+
 2.1 Step 1.2 shows that the small singular direction is strongly damped: the unstable coefficient $100$ is replaced by $100/101$. [step 1.1, step 1.2] ∎

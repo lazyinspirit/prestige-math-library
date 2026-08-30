@@ -2,7 +2,7 @@
 id: fs-every-measure-is-absolutely-continuous-or-singular-with-respect-to-lebesgue-measure
 kind: false-statement
 title: "FALSE: every measure is absolutely continuous or singular with respect to Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [prop-cantor-measure-is-a-singular-atomless-probability-measure,
        thm-existence-of-the-lebesgue-stieltjes-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

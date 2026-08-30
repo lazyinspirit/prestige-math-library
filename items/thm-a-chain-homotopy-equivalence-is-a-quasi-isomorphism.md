@@ -2,7 +2,7 @@
 id: thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism
 kind: theorem
 title: "A chain homotopy equivalence is a quasi-isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy-equivalence, thm-chain-homotopic-maps-induce-the-same-map-on-homology, prop-homology-respects-identities-and-composition, def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

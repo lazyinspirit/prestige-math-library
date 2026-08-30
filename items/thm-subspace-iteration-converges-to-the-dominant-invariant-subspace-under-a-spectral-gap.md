@@ -2,7 +2,7 @@
 id: thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap
 kind: theorem
 title: "Subspace iteration converges to the dominant invariant subspace when a spectral gap separates the wanted and unwanted eigenvalues"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -54,6 +55,9 @@ the leading coefficient block $C_1$ in the statement is invertible.
 **Proof technique:** direct.
 
 1.1 By [L1], use the decomposition from the statement, where $\Lambda_1=\operatorname{diag}(\lambda_1,\dots,\lambda_p)$ and $\Lambda_2=\operatorname{diag}(\lambda_{p+1},\dots,\lambda_n)$. The hypothesis states exactly that $C_1$ is invertible. [L1, given]
+
 2.1 The spectral gap implies $\lambda_p\neq0$, so $\Lambda_1^kC_1$ is invertible for every $k$. Hence $A^kQ_0$ has full column rank, every reduced QR step in [L2] is defined, and the column space of $Q_k$ equals that of $A^kQ_0$. Now $$ A^kQ_0= V \begin{bmatrix} \Lambda_1^k C_1 \\ \Lambda_2^k C_2 \end{bmatrix}. $$ Multiplying on the right by $C_1^{-1}\Lambda_1^{-k}$ shows that the same column space is the graph of $\Lambda_2^k C_2 C_1^{-1}\Lambda_1^{-k}$ over the dominant invariant subspace. [L2, step 1.1, algebra]
+
 3.1 The spectral gap implies $$ \|\Lambda_2^k C_2 C_1^{-1}\Lambda_1^{-k}\|_2 =O\!\left(\left|\frac{\lambda_{p+1}}{\lambda_p}\right|^k\right). $$ Hence the graph in step 2.1 converges to the dominant invariant subspace at that rate. [step 2.1, algebra]
+
 4.1 Therefore the column space of $Q_k$ converges to the dominant invariant subspace, with the precise graph-norm rate stated above. [step 3.1] ∎

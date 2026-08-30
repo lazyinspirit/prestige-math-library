@@ -2,7 +2,7 @@
 id: fs-a-monoidal-functor-is-one-whose-structure-maps-are-isomorphisms
 kind: false-statement
 title: "FALSE: every lax monoidal functor has invertible structure maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-lax-strong-and-strict-monoidal-functor, rem-monoidal-functor-means-different-things-in-different-sources, def-power-set, cor-set-cat-and-every-complete-category-are-cartesian-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

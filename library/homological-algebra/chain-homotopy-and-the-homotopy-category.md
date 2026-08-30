@@ -1,7 +1,7 @@
 ---
 page: chain-homotopy-and-the-homotopy-category
 title: "Chain Homotopy and the Homotopy Category"
-status: draft
+status: published
 items: [def-graded-morphism-of-chain-complexes,
         def-hom-complex-of-chain-complexes,
         lem-the-hom-complex-differential-squares-to-zero,

@@ -2,7 +2,7 @@
 id: prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms
 kind: proposition
 title: "Shift preserves homotopy equivalences, contractibility, and quasi-isomorphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy-equivalence, def-contractible-complex, thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism, def-shift-of-a-chain-map-and-chain-homotopy, thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories, prop-homology-of-a-shift-is-shifted-homology, def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

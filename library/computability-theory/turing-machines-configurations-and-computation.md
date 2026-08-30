@@ -1,7 +1,7 @@
 ---
 page: turing-machines-configurations-and-computation
 title: "Turing Machines, Configurations, and Computation"
-status: draft
+status: published
 items:
   - def-deterministic-one-tape-turing-machine
   - def-tape-finite-support-convention

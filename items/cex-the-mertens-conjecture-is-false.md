@@ -2,7 +2,7 @@
 id: cex-the-mertens-conjecture-is-false
 kind: counterexample
 title: "The Mertens conjecture is false"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-mertens-function]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

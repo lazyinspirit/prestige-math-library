@@ -2,7 +2,7 @@
 id: fs-a-monoid-object-in-the-endofunctor-category-is-the-definition-of-a-monad
 kind: false-statement
 title: "FALSE: a monoid object in an endofunctor category is the definition of a monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monad, thm-a-monoid-object-in-the-endofunctor-category-is-exactly-a-monad, rem-a-monad-is-a-monoid-in-the-endofunctor-category-only-when-that-category-exists, prop-sets-and-functions-form-category-set]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

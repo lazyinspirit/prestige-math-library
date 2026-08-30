@@ -2,7 +2,7 @@
 id: ex-dirichlet-convolution-table-through-twelve
 kind: example
 title: "A Dirichlet-convolution table through $12$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-dirichlet-convolution, def-dirichlet-convolution-identity, def-diviso
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

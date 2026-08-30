@@ -1,7 +1,7 @@
 ---
 page: pushdown-automata-and-context-free-languages
 title: "Pushdown Automata and Context-Free Languages"
-status: draft
+status: published
 items:
   - def-nondeterministic-pushdown-automaton
   - def-pda-configuration-and-step

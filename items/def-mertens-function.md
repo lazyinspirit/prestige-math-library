@@ -2,7 +2,7 @@
 id: def-mertens-function
 kind: definition
 title: "The Mertens function $M(x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-number-theoretic-mobius-function]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

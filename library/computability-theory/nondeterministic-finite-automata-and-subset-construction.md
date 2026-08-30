@@ -1,7 +1,7 @@
 ---
 page: nondeterministic-finite-automata-and-subset-construction
 title: "Nondeterministic Finite Automata and Subset Construction"
-status: draft
+status: published
 items:
   - def-nfa-with-epsilon-moves
   - def-epsilon-closure-of-a-state-set

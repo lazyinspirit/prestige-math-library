@@ -2,7 +2,7 @@
 id: ex-the-special-linear-group-as-a-regular-level-set
 kind: example
 title: "The special linear group is a codimension-one embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

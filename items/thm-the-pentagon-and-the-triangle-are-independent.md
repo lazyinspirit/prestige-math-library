@@ -2,7 +2,7 @@
 id: thm-the-pentagon-and-the-triangle-are-independent
 kind: theorem
 title: "The pentagon axiom and the triangle axiom are independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monoidal-category]
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

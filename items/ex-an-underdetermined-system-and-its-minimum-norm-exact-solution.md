@@ -2,7 +2,7 @@
 id: ex-an-underdetermined-system-and-its-minimum-norm-exact-solution
 kind: example
 title: "An underdetermined consistent system has infinitely many exact solutions but a unique minimum-norm one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -46,5 +47,7 @@ and the minimum-norm one is $A^+b=(1/3,1/3,2/3)^T$.
 **Proof technique:** computation.
 
 1.1 Solving $Ax=b$ gives the one-parameter family $x(t)=(1-t,1-t,t)^T$. Thus the system is consistent and has infinitely many exact solutions. [algebra]
+
 1.2 Here $$ AA^*= \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}, \qquad (AA^*)^{-1}=\frac13 \begin{bmatrix} 2 & -1 \\ -1 & 2 \end{bmatrix}, $$ so [L1] gives $$ A^+b=A^*(AA^*)^{-1}b= \begin{bmatrix} \tfrac13 \\ \tfrac13 \\ \tfrac23 \end{bmatrix}. $$ [L1, algebra]
+
 2.1 The vector of step 1.2 equals $x(2/3)$ from step 1.1, so it is an exact solution. By [L2], it is the unique exact solution of minimum Euclidean norm. [L2, step 1.1, step 1.2] ∎

@@ -2,7 +2,7 @@
 id: cex-a-quasi-isomorphism-with-no-homotopy-inverse
 kind: counterexample
 title: "A quasi-isomorphism with no homotopy inverse"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-an-acyclic-noncontractible-complex-from-a-nonsplit-extension, def-quasi-isomorphism, thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

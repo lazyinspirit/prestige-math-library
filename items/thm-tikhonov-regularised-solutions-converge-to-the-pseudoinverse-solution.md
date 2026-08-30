@@ -2,7 +2,7 @@
 id: thm-tikhonov-regularised-solutions-converge-to-the-pseudoinverse-solution
 kind: theorem
 title: "As $\\lambda\\downarrow0$, the Tikhonov minimisers converge to the Moore--Penrose solution $A^+b$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -55,6 +56,9 @@ zero block fixed. Direct diagonal multiplication verifies all four Penrose
 equations, so uniqueness in [L3] gives $B=A^+$. Consequently
 $$ A^+b=\sum_{\sigma_i>0}\frac{1}{\sigma_i}\,\langle b,u_i\rangle v_i. $$
 [L1, L3, algebra]
+
 2.1 Step 1.1 and [L1] show that the coefficient of $v_i$ in $x_\lambda-A^+b$ is $$ \left(\frac{\sigma_i}{\sigma_i^2+\lambda}-\frac{1}{\sigma_i}\right) \langle b,u_i\rangle =-\frac{\lambda}{\sigma_i(\sigma_i^2+\lambda)}\langle b,u_i\rangle $$ for each nonzero singular value, while the zero-singular-value coefficients are $0$ in both vectors. [L1, step 1.1, algebra]
+
 3.1 For each fixed nonzero $\sigma_i$, $\sigma_i/(\sigma_i^2+\lambda)\to 1/\sigma_i$ as $\lambda\downarrow0$, so every coefficient from step 2.1 tends to $0$. Because there are only finitely many singular directions, $\|x_\lambda-A^+b\|_2\to0$. [step 2.1, algebra]
+
 4.1 Therefore $x_\lambda\to A^+b$, the Moore--Penrose minimum-norm least-squares solution from [L2]. [L2, step 3.1] ∎

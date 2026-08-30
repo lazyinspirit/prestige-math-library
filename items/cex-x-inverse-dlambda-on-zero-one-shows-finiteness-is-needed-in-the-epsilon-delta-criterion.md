@@ -2,7 +2,7 @@
 id: cex-x-inverse-dlambda-on-zero-one-shows-finiteness-is-needed-in-the-epsilon-delta-criterion
 kind: counterexample
 title: "$x^{-1}d\\lambda$ on $(0,1)$ shows finiteness is needed in the epsilon-delta criterion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-measure-with-density,
        thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

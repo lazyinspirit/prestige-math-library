@@ -1,7 +1,7 @@
 ---
 page: valuation-rings-and-discrete-valuation-rings-examples
 title: "Valuation Rings and Discrete Valuation Rings - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-p-adic-dvr,
            ex-localisation-of-a-pid-at-a-prime,

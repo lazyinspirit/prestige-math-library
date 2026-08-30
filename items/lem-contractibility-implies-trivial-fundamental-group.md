@@ -2,7 +2,7 @@
 id: lem-contractibility-implies-trivial-fundamental-group
 kind: lemma
 title: "A contractible space has trivial fundamental group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-nullhomotopic-map-and-contractible-space,
        thm-fundamental-group-laws]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: prop-tikhonov-regularisation-has-singular-filter-factors
 kind: proposition
 title: "Tikhonov regularisation scales each singular component by the filter factor $\\sigma/(\\sigma^2+\\lambda)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -48,5 +49,7 @@ and a parameter $\lambda>0$.
 **Proof technique:** direct.
 
 1.1 Using [L2] and the SVD from [L1], $$ x_\lambda =V(\Sigma^*\Sigma+\lambda I)^{-1}\Sigma^*U^*b. $$ [L1, L2, algebra]
+
 2.1 The diagonal matrix $(\Sigma^*\Sigma+\lambda I)^{-1}\Sigma^*$ has diagonal entries $\sigma_i/(\sigma_i^2+\lambda)$ in the nonzero singular directions and $0$ in the zero singular directions. Therefore $$ x_\lambda =\sum_{\sigma_i>0}\frac{\sigma_i}{\sigma_i^2+\lambda}\,\langle b,u_i\rangle v_i. $$ [step 1.1, algebra]
+
 3.1 This is exactly the stated filter-factor formula. [step 2.1] ∎

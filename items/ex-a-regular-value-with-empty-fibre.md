@@ -2,7 +2,7 @@
 id: ex-a-regular-value-with-empty-fibre
 kind: example
 title: "A value outside the image can still be regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: monoidal-categories-and-monoidal-functors-examples
 title: "Monoidal Categories and Monoidal Functors - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-cartesian-monoidal-structure-on-sets-computed,
            ex-the-pentagon-checked-for-cartesian-products,

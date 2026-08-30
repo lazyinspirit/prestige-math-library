@@ -2,7 +2,7 @@
 id: thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures
 kind: theorem
 title: "Every sigma-finite signed measure admits a Lebesgue decomposition relative to a sigma-finite positive measure"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-absolutely-continuous-with-respect-to-a-positive-measure, def-measure-concentrated-on-a-measurable-set, def-measure-with-density, def-restriction-of-a-measure, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, prop-restriction-is-a-measure, thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero, thm-continuity-from-below-for-measures, thm-hahn-decomposition-for-signed-measures, thm-jordan-decomposition-for-signed-measures, thm-monotone-convergence-for-the-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: thm-dirichlet-convolution-commutative-ring
 kind: theorem
 title: "Arithmetic functions form a commutative ring under pointwise addition and Dirichlet convolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

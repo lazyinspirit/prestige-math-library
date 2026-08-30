@@ -2,7 +2,7 @@
 id: cex-a-defective-jordan-block-has-ill-conditioned-eigenvectors
 kind: counterexample
 title: "A defective Jordan block shows that tiny perturbations can destroy an eigenvector picture even when eigenvalues barely move"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -43,5 +44,7 @@ $J_\varepsilon$ has condition number of order $|\varepsilon|^{-1}$.
 **Proof technique:** direct.
 
 1.1 The eigenvalues of $J_\varepsilon$ are $1$ and $1+\varepsilon$, so they differ from the repeated eigenvalue of $J$ by at most $|\varepsilon|$. An eigenvector for $1$ is $e_1$, and an eigenvector for $1+\varepsilon$ is $(1,\varepsilon)^T$. [algebra]
+
 2.1 Hence an eigenbasis matrix is $$ X_\varepsilon= \begin{bmatrix} 1 & 1\\ 0 & \varepsilon \end{bmatrix}, \qquad X_\varepsilon^{-1}= \begin{bmatrix} 1 & -\varepsilon^{-1}\\ 0 & \varepsilon^{-1} \end{bmatrix}. $$ So $\|X_\varepsilon^{-1}\|_2$ is of order $|\varepsilon|^{-1}$, and therefore $\kappa_2(X_\varepsilon)$ is also of order $|\varepsilon|^{-1}$. [step 1.1, algebra]
+
 3.1 As $\varepsilon\to0$, the eigenvalues of $J_\varepsilon$ coalesce gently, but the eigenvectors become nearly parallel and the eigenbasis becomes badly conditioned. This refutes the claim and illustrates the warning in [L1]. [L1, step 2.1] ∎

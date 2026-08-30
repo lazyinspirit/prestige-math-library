@@ -2,7 +2,7 @@
 id: prop-tangent-space-of-a-regular-level-set-is-the-kernel
 kind: proposition
 title: "The tangent space of a regular level set is the kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

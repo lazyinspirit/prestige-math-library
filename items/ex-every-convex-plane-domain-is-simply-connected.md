@@ -2,7 +2,7 @@
 id: ex-every-convex-plane-domain-is-simply-connected
 kind: example
 title: "Every convex plane domain is simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-grand-equivalence-for-simply-connected-plane-domains,
        thm-convex-subsets-have-trivial-fundamental-group]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

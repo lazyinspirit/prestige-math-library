@@ -2,7 +2,7 @@
 id: prop-liouville-convolution-square-indicator
 kind: proposition
 title: "The convolution $\\mathbf 1*\\lambda$ detects perfect squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

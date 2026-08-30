@@ -2,7 +2,7 @@
 id: cor-winding-number-classifies-loops-in-the-punctured-plane
 kind: corollary
 title: "Winding number identifies the fundamental group of C times with the integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [thm-winding-number-equals-circle-degree,
        prop-retracts-inject-fundamental-groups]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

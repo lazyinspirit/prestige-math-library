@@ -2,7 +2,7 @@
 id: thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid
 kind: theorem
 title: "The endomorphisms of the tensor unit form a commutative monoid"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monoidal-category, cor-the-two-unitors-agree-on-the-unit-object, def-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

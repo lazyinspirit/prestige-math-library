@@ -2,7 +2,7 @@
 id: fs-the-image-of-every-immersion-is-an-embedded-submanifold
 kind: false-statement
 title: "The image of every immersion need not be an embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

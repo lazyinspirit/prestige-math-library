@@ -2,7 +2,7 @@
 id: ex-householder-reduction-to-hessenberg-form-for-a-three-by-three-matrix
 kind: example
 title: "A single Householder similarity reduces a $3\\times3$ matrix to Hessenberg form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,4 +50,5 @@ sequence of Householder similarities
 **Proof technique:** computation.
 
 1.1 The lower part of the first column of $A$ is $(3,4)^T$, whose Euclidean norm is $5$. The reflector $Q$ fixes the first basis vector and sends $(3,4)^T$ to $(5,0)^T$. [algebra]
+
 2.1 Direct multiplication gives the displayed matrix $Q^TAQ$, whose $(3,1)$ entry is $0$. Therefore it has no entries below the first subdiagonal, so it is upper Hessenberg. This is the $3\times3$ instance of [L1]. [L1, step 1.1, algebra] ∎

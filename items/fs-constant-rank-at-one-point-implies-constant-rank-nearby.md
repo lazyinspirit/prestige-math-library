@@ -2,7 +2,7 @@
 id: fs-constant-rank-at-one-point-implies-constant-rank-nearby
 kind: false-statement
 title: "Rank at one point need not determine nearby rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-smooth-inverse-function-theorem-on-manifolds
 kind: theorem
 title: "The smooth inverse function theorem on manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-the-five-cycle-has-the-erdos-hajnal-property
 kind: corollary
 title: "The five-cycle has the Erdős-Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

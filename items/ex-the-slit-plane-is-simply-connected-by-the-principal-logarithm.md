@@ -2,7 +2,7 @@
 id: ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm
 kind: example
 title: "Assuming the Axiom of Choice, the slit plane is simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-spherical-complement-characterization-of-plane-simple-connectivity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

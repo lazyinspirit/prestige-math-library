@@ -2,7 +2,7 @@
 id: ex-von-mangoldt-divisor-sum
 kind: example
 title: "Checking the von Mangoldt divisor-sum identity on sample integers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-von-mangoldt-function, thm-von-mangoldt-divisor-sum-identity]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

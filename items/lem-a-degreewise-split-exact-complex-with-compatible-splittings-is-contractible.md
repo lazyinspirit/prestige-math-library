@@ -2,7 +2,7 @@
 id: lem-a-degreewise-split-exact-complex-with-compatible-splittings-is-contractible
 kind: lemma
 title: "A degreewise split exact complex with compatible splittings is contractible"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-contractible-complex, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

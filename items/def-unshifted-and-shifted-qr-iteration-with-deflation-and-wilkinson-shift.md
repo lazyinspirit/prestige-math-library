@@ -2,7 +2,7 @@
 id: def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift
 kind: definition
 title: "Unshifted QR iteration, shifted QR iteration, deflation, and the Wilkinson shift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

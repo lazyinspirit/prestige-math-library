@@ -2,7 +2,7 @@
 id: thm-winding-number-equals-circle-degree
 kind: theorem
 title: "For loops in C times, the winding number about 0 equals the circle degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ deps: [def-winding-number-closed-complex-contour,
        cor-geometric-unit-circle-has-fundamental-group-z]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

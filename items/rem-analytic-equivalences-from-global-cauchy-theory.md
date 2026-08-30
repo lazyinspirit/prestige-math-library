@@ -2,7 +2,7 @@
 id: rem-analytic-equivalences-from-global-cauchy-theory
 kind: remark
 title: "The global Cauchy equivalences give primitives, zero periods, and holomorphic logarithms, which in turn give holomorphic roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-homological-simple-connectivity-equivalences,
        thm-holomorphic-logarithms-homologically-simply-connected-domains,
        cor-holomorphic-roots-homologically-simply-connected-domains]
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

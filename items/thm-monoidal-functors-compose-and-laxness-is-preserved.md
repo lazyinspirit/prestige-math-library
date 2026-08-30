@@ -2,7 +2,7 @@
 id: thm-monoidal-functors-compose-and-laxness-is-preserved
 kind: theorem
 title: "Lax monoidal functors compose, and composition preserves strength and strictness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-lax-strong-and-strict-monoidal-functor, def-monoidal-natural-transformation]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

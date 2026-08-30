@@ -2,7 +2,7 @@
 id: thm-monoid-objects-in-a-cartesian-monoidal-category-are-monoids-in-the-ordinary-sense
 kind: theorem
 title: "Monoid objects in a cartesian category are internal monoids; in Set they are ordinary monoids"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoid-object-and-comonoid-object-in-a-monoidal-category, def-semigroup-and-monoid, thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-dirichlet-convolution-preserves-multiplicativity
 kind: theorem
 title: "Dirichlet convolution preserves multiplicativity, and multiplicative inverses stay multiplicative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: induction
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

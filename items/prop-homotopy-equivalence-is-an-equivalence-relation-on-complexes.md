@@ -2,7 +2,7 @@
 id: prop-homotopy-equivalence-is-an-equivalence-relation-on-complexes
 kind: proposition
 title: "Homotopy equivalence is an equivalence relation on complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy-equivalence, lem-chain-homotopy-is-compatible-with-addition-and-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

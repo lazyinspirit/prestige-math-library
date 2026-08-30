@@ -2,7 +2,7 @@
 id: prop-smoothness-into-an-embedded-submanifold-is-an-initial-property
 kind: proposition
 title: "Smoothness into an embedded submanifold is an initial property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-embedded-submanifold-and-slice-chart
 kind: definition
 title: "Embedded submanifolds and slice charts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-slice-chart-restrictions-form-a-smooth-atlas]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

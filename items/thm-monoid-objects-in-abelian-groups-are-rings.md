@@ -2,7 +2,7 @@
 id: thm-monoid-objects-in-abelian-groups-are-rings
 kind: theorem
 title: "Monoid objects in abelian groups are rings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoid-object-and-comonoid-object-in-a-monoidal-category, def-ring, thm-the-category-of-abelian-groups-is-monoidal-under-the-tensor-product]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

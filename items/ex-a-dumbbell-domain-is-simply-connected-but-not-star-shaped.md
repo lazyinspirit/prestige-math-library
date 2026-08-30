@@ -2,7 +2,7 @@
 id: ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped
 kind: example
 title: "A dumbbell-shaped plane domain can be simply connected without being star-shaped"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-spherical-complement-characterization-of-plane-simple-connectivity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

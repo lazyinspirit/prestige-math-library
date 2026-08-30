@@ -2,7 +2,7 @@
 id: ex-the-lebesgue-decomposition-of-half-lebesgue-plus-half-cantor-measure
 kind: example
 title: "The Lebesgue decomposition of one half Lebesgue plus one half Cantor measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures, prop-cantor-measure-is-a-singular-atomless-probability-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

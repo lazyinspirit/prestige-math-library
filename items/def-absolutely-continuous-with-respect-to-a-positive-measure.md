@@ -2,13 +2,14 @@
 id: def-absolutely-continuous-with-respect-to-a-positive-measure
 kind: definition
 title: "Absolute continuity of a signed or complex measure with respect to a positive measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure, def-signed-measure, def-complex-measure]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

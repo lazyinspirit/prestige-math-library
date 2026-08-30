@@ -2,7 +2,7 @@
 id: lem-chain-homotopy-is-compatible-with-addition-and-composition
 kind: lemma
 title: "Chain homotopy is compatible with addition and composition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy, prop-identities-and-composites-of-chain-maps-are-chain-maps, thm-the-category-of-complexes-in-an-additive-category-is-additive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

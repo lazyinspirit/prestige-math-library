@@ -2,7 +2,7 @@
 id: ex-euler-totient-as-a-mobius-convolution
 kind: example
 title: "Euler's totient as the convolution $\\mu*\\operatorname{id}_1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [cor-classical-mobius-inversion, def-divisor-power-sum-functions, thm-sum-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

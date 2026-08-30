@@ -2,7 +2,7 @@
 id: ex-a-split-exact-complex-and-its-contraction
 kind: example
 title: "A split exact complex and its contraction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-degreewise-split-exact-complex-with-compatible-splittings-is-contractible, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

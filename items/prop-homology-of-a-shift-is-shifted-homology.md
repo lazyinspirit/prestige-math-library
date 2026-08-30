@@ -2,7 +2,7 @@
 id: prop-homology-of-a-shift-is-shifted-homology
 kind: proposition
 title: "Homology of a shift is shifted homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shift-of-a-chain-complex, def-homology-object-of-a-chain-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

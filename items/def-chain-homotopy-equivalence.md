@@ -2,13 +2,14 @@
 id: def-chain-homotopy-equivalence
 kind: definition
 title: "A chain homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-homotopy, prop-identities-and-composites-of-chain-maps-are-chain-maps]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

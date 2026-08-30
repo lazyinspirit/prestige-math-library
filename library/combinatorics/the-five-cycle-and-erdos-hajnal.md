@@ -1,7 +1,7 @@
 ---
 page: the-five-cycle-and-erdos-hajnal
 title: "The Five-Cycle and the Erdős-Hajnal Property"
-status: draft
+status: published
 items: [lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears,
         thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side,
         def-rooted-stable-tooth-comb,

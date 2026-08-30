@@ -2,13 +2,14 @@
 id: def-measure-concentrated-on-a-measurable-set
 kind: definition
 title: "A positive, signed, or complex measure concentrated on a measurable set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-measure, def-signed-measure, def-complex-measure]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

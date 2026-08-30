@@ -2,7 +2,7 @@
 id: cex-lebesgue-plus-counting-measure-has-no-lebesgue-decomposition-relative-to-lebesgue-measure
 kind: counterexample
 title: "Lebesgue plus counting measure has no Lebesgue decomposition relative to Lebesgue measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-counting-measure, prop-counting-measure-is-a-measure, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

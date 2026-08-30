@@ -2,7 +2,7 @@
 id: fs-absolutely-continuous-measures-always-have-bounded-radon-nikodym-derivatives
 kind: false-statement
 title: "FALSE: absolutely continuous measures always have bounded Radon-Nikodym derivatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-measure-with-density, def-radon-nikodym-derivative,
        cor-integral-over-a-null-set-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

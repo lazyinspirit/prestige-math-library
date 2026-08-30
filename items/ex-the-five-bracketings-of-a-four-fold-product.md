@@ -2,7 +2,7 @@
 id: ex-the-five-bracketings-of-a-four-fold-product
 kind: example
 title: "The five bracketings of a four-fold tensor product with no inserted unit symbol"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-parenthesised-tensor-word, thm-parenthesised-words-of-a-given-length-are-counted-by-the-catalan-numbers]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

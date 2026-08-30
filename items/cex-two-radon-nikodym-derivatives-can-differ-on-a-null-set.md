@@ -2,7 +2,7 @@
 id: cex-two-radon-nikodym-derivatives-can-differ-on-a-null-set
 kind: counterexample
 title: "Two Radon-Nikodym derivatives can differ on a null set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-radon-nikodym-derivative, cor-cantor-set-is-an-uncountable-lebesgue-null-set, cor-integral-over-a-null-set-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

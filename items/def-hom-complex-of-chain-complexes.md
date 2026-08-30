@@ -2,7 +2,7 @@
 id: def-hom-complex-of-chain-complexes
 kind: definition
 title: "The Hom complex of chain complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-graded-morphism-of-chain-complexes, thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]
 justified_by: [lem-the-hom-complex-differential-squares-to-zero]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

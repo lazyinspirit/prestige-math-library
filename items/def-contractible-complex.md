@@ -2,13 +2,14 @@
 id: def-contractible-complex
 kind: definition
 title: "A contractible complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-homotopy-equivalence, def-null-homotopic-chain-map]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

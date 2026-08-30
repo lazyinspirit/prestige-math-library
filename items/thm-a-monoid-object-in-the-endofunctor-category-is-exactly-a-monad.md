@@ -2,7 +2,7 @@
 id: thm-a-monoid-object-in-the-endofunctor-category-is-exactly-a-monad
 kind: theorem
 title: "A monoid object in a small endofunctor category is exactly a monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monad, rem-a-monad-is-a-monoid-in-the-endofunctor-category-only-when-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-tikhonov-regularised-least-squares
 kind: definition
 title: "The Tikhonov regularised least-squares objective $\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$ for $\\lambda>0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-inner-product-norm]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-coordinate-inclusions-and-projections-as-immersion-and-submersion
 kind: example
 title: "Coordinate inclusions are immersions and coordinate projections are submersions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

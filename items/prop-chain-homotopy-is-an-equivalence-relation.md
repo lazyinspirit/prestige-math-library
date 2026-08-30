@@ -2,7 +2,7 @@
 id: prop-chain-homotopy-is-an-equivalence-relation
 kind: proposition
 title: "Chain homotopy is an equivalence relation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

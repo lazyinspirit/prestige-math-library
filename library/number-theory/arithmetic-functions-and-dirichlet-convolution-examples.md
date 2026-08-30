@@ -1,7 +1,7 @@
 ---
 page: arithmetic-functions-and-dirichlet-convolution-examples
 title: "Arithmetic Functions and Dirichlet Convolution — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dirichlet-convolution-table-through-twelve,
            ex-dirichlet-inverse-recursion,

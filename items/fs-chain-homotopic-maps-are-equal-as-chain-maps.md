@@ -2,7 +2,7 @@
 id: fs-chain-homotopic-maps-are-equal-as-chain-maps
 kind: false-statement
 title: "FALSE: chain-homotopic maps are equal as chain maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy, def-homotopy-category-of-chain-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-simply-connected-plane-domains-are-convex
 kind: false-statement
 title: "FALSE: every simply connected plane domain is convex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

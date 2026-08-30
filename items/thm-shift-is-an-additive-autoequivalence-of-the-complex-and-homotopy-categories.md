@@ -2,7 +2,7 @@
 id: thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories
 kind: theorem
 title: "Shift is an additive autoequivalence of the complex and homotopy categories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shift-of-a-chain-complex, lem-the-shifted-differential-squares-to-zero, def-shift-of-a-chain-map-and-chain-homotopy, def-homotopy-category-of-chain-complexes, thm-the-homotopy-category-is-additive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

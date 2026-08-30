@@ -2,13 +2,14 @@
 id: def-chain-homotopy
 kind: definition
 title: "A chain homotopy"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-graded-morphism-of-chain-complexes, def-chain-map, def-hom-complex-of-chain-complexes]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

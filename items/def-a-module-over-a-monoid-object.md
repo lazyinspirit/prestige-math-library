@@ -2,7 +2,7 @@
 id: def-a-module-over-a-monoid-object
 kind: definition
 title: "Modules over a monoid object, their morphisms, and their category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoid-object-and-comonoid-object-in-a-monoidal-category, def-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-pentagon-follows-from-the-triangle
 kind: false-statement
 title: "FALSE: the pentagon axiom follows from the triangle axiom"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-pentagon-and-the-triangle-are-independent]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

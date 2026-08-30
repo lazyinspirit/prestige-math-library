@@ -2,7 +2,7 @@
 id: thm-wilkinson-shifted-symmetric-tridiagonal-qr-has-local-deflation-away-from-ties
 kind: theorem
 title: "A real Wilkinson-shifted symmetric tridiagonal QR step preserves symmetric tridiagonal form away from ties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

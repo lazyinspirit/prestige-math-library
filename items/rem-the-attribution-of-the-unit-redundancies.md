@@ -2,13 +2,14 @@
 id: rem-the-attribution-of-the-unit-redundancies
 kind: remark
 title: "The unit-constraint redundancies are cited mathematically through EGNO"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-the-left-unitor-of-a-tensor-product-is-determined, thm-the-right-unitor-of-a-tensor-product-is-determined, cor-the-two-unitors-agree-on-the-unit-object]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

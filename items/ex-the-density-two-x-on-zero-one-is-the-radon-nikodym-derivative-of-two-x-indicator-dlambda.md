@@ -2,7 +2,7 @@
 id: ex-the-density-two-x-on-zero-one-is-the-radon-nikodym-derivative-of-two-x-indicator-dlambda
 kind: example
 title: "The density $2x$ on $[0,1]$ is the Radon-Nikodym derivative of its density measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-radon-nikodym-derivative, def-measure-with-density, thm-integration-against-a-density]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

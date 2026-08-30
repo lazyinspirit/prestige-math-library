@@ -2,7 +2,7 @@
 id: lem-connected-spherical-complement-implies-null-homology
 kind: lemma
 title: "A connected spherical complement forces every cycle in the domain to be null-homologous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-null-homologous-and-homologous-complex-cycles,
        cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

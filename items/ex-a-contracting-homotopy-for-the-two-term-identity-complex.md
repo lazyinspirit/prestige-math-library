@@ -2,7 +2,7 @@
 id: ex-a-contracting-homotopy-for-the-two-term-identity-complex
 kind: example
 title: "A contracting homotopy for the two-term identity complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy, def-contractible-complex, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

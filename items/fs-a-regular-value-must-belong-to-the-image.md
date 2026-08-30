@@ -2,7 +2,7 @@
 id: fs-a-regular-value-must-belong-to-the-image
 kind: false-statement
 title: "A regular value need not belong to the image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

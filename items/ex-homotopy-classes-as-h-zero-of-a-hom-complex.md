@@ -2,7 +2,7 @@
 id: ex-homotopy-classes-as-h-zero-of-a-hom-complex
 kind: example
 title: "Homotopy classes as H-zero of a Hom complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-the-hom-complex-of-two-two-term-complexes, thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

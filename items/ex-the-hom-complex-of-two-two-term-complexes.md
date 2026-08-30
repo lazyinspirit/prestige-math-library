@@ -2,7 +2,7 @@
 id: ex-the-hom-complex-of-two-two-term-complexes
 kind: example
 title: "The Hom complex of two two-term complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-complex-of-chain-complexes, prop-zero-cocycles-in-the-hom-complex-are-chain-maps, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

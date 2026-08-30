@@ -2,7 +2,7 @@
 id: ex-shifting-a-three-term-complex-with-all-signs
 kind: example
 title: "Shifting a three-term complex with all signs"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shift-of-a-chain-complex, prop-homology-of-a-shift-is-shifted-homology, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

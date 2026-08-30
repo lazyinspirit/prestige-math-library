@@ -2,7 +2,7 @@
 id: thm-integration-against-a-radon-nikodym-derivative
 kind: theorem
 title: "Integrating against a Radon-Nikodym derivative recovers integration against the measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, def-simple-integral-against-a-signed-or-complex-measure, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

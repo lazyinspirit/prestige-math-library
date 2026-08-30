@@ -2,7 +2,7 @@
 id: fs-the-homotopy-category-is-obtained-by-identifying-quasi-isomorphisms-with-identities
 kind: false-statement
 title: "FALSE: the homotopy category is obtained by identifying quasi-isomorphisms with identities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homotopy-category-of-chain-complexes, def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

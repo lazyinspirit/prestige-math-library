@@ -2,7 +2,7 @@
 id: thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b
 kind: theorem
 title: "Every least-squares solution has the form $A^+b+(I-A^+A)z$, and the same affine family specializes to exact solutions when $b\\in\\operatorname{im}A$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -50,7 +51,11 @@ exactly the full solution set of $Ax=b$.
 **Proof technique:** direct.
 
 1.1 By [L2] and [L3], $A^+A$ is the orthogonal projection onto $(\ker A)^\perp$. Therefore $I-A^+A$ is the orthogonal projection onto $\ker A$. In particular, its image is $\ker A$ and it vanishes on $(\ker A)^\perp$. [L2, L3, algebra]
+
 2.1 By [L1], every least-squares minimiser has the form $A^+b+u$ with $u\in\ker A$. Since step 1.1 says every $u\in\ker A$ equals $(I-A^+A)z$ for some $z$, every least-squares minimiser has the stated form. [L1, step 1.1]
+
 2.2 Conversely, if $x=A^+b+(I-A^+A)z$, then step 1.1 gives $(I-A^+A)z\in\ker A$. Hence $x$ differs from the least-squares minimiser $A^+b$ by a kernel vector, so [L1] implies that $x$ is again a least-squares minimiser. [L1, step 1.1, algebra]
+
 3.1 If $b\in\operatorname{im}A$, then the least-squares residual can be $0$. Thus the least-squares minimisers are exactly the exact solutions of $Ax=b$, and steps 2.1-2.1 identify that exact solution set with the same affine family. [L1, step 2.1, step 2.2]
+
 4.1 Steps 2.1 and 2.2 prove the if-and-only-if description, and step 3.1 gives the consistent specialisation. [step 2.1, step 2.2, step 3.1] ∎

@@ -2,13 +2,14 @@
 id: def-the-reverse-and-the-opposite-of-a-monoidal-category
 kind: definition
 title: "The reverse and the opposite of a monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-monoidal-category, def-opposite-category]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

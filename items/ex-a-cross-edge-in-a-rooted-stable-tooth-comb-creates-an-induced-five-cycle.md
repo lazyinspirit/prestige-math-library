@@ -2,7 +2,7 @@
 id: ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle
 kind: example
 title: "A cross-edge in a rooted stable-tooth comb creates an induced five-cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

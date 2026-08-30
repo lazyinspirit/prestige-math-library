@@ -1,7 +1,7 @@
 ---
 page: rank-theorems-and-embedded-submanifolds-examples
 title: "Rank Theorems and Embedded Submanifolds Examples"
-status: draft
+status: published
 items: []
 examples: [ex-coordinate-inclusions-and-projections-as-immersion-and-submersion,
            ex-the-special-linear-group-as-a-regular-level-set,

@@ -2,7 +2,7 @@
 id: def-divisor-power-sum-functions
 kind: definition
 title: "The power functions $\\operatorname{id}_k$ and the divisor-power-sum functions $\\sigma_k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function, def-divides-in-z, thm-complex-numbers-form-a-fie
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: rem-monoidal-functor-means-different-things-in-different-sources
 kind: remark
 title: "Why the bare phrase 'monoidal functor' is ambiguous across sources"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-lax-strong-and-strict-monoidal-functor]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

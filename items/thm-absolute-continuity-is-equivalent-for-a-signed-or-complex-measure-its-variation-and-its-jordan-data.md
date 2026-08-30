@@ -2,7 +2,7 @@
 id: thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data
 kind: theorem
 title: "For signed and complex measures, absolute continuity is equivalent for the measure, its Jordan or real-imaginary parts, and its total variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-absolutely-continuous-with-respect-to-a-positive-measure, def-total-variation-of-a-signed-or-complex-measure, prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, thm-jordan-decomposition-for-signed-measures, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-total-variation-is-a-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

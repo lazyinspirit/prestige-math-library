@@ -2,7 +2,7 @@
 id: cex-an-acyclic-noncontractible-complex-from-a-nonsplit-extension
 kind: counterexample
 title: "An acyclic noncontractible complex from a nonsplit extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-a-contractible-complex-is-acyclic, prop-zero-homology-does-not-make-an-object-zero-in-the-homotopy-category, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-pentagon-checked-for-cartesian-products
 kind: example
 title: "The pentagon checked for cartesian products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

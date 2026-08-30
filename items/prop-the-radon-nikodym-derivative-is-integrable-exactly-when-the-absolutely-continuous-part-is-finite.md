@@ -2,7 +2,7 @@
 id: prop-the-radon-nikodym-derivative-is-integrable-exactly-when-the-absolutely-continuous-part-is-finite
 kind: proposition
 title: "The Radon-Nikodym derivative is integrable exactly when the absolutely continuous part is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure, def-radon-nikodym-derivative, def-integrable-real-and-complex-functions-and-their-integrals, def-total-variation-of-a-signed-or-complex-measure, prop-jordan-parts-and-total-variation-formulas-for-signed-measures, thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

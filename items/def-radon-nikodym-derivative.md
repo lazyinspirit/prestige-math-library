@@ -2,13 +2,14 @@
 id: def-radon-nikodym-derivative
 kind: definition
 title: "The Radon-Nikodym derivative as an almost-everywhere equivalence class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-measure-null-set-and-almost-everywhere]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

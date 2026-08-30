@@ -1,7 +1,7 @@
 ---
 page: eigenvalue-iterations-and-the-qr-algorithm-examples
 title: "Eigenvalue Iterations and the QR Algorithm: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-power-iteration-on-a-diagonal-matrix-displays-the-eigenvalue-ratio-rate,
            cex-equal-dominant-moduli-can-make-power-iteration-cycle,

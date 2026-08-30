@@ -2,7 +2,7 @@
 id: thm-homology-factors-uniquely-through-the-homotopy-category
 kind: theorem
 title: "Homology factors uniquely through the homotopy category"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-homotopy-category-of-chain-complexes, thm-chain-homotopic-maps-induce-the-same-map-on-homology, thm-homology-is-an-additive-functor, prop-the-canonical-functor-from-complexes-to-the-homotopy-category-is-additive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

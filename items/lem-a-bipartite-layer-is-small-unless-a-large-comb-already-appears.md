@@ -2,7 +2,7 @@
 id: lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears
 kind: lemma
 title: "A bipartite layer is small unless a large comb already appears"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

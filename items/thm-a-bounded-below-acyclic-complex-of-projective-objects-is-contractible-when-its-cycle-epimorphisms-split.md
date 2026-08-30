@@ -2,7 +2,7 @@
 id: thm-a-bounded-below-acyclic-complex-of-projective-objects-is-contractible-when-its-cycle-epimorphisms-split
 kind: theorem
 title: "A bounded below acyclic complex of projective objects is contractible when its cycle epimorphisms split"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-a-degreewise-split-exact-complex-with-compatible-splittings-is-contractible, def-bounded-bounded-below-and-bounded-above-complex, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, def-cycle-and-boundary-subobjects-of-a-complex, def-projective-object]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

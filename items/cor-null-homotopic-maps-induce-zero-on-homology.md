@@ -2,7 +2,7 @@
 id: cor-null-homotopic-maps-induce-zero-on-homology
 kind: corollary
 title: "Null-homotopic maps induce zero on homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-null-homotopic-chain-map, thm-chain-homotopic-maps-induce-the-same-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

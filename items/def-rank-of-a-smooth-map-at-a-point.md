@@ -2,7 +2,7 @@
 id: def-rank-of-a-smooth-map-at-a-point
 kind: definition
 title: "The rank of a smooth map at a point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

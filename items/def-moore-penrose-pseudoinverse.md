@@ -2,7 +2,7 @@
 id: def-moore-penrose-pseudoinverse
 kind: definition
 title: "The Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-matrix-product-and-identity-matrix,
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

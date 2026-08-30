@@ -2,7 +2,7 @@
 id: cor-moore-penrose-image-and-kernel-identities
 kind: corollary
 title: "The Moore--Penrose pseudoinverse exchanges image and adjoint-image, and exchanges kernel and adjoint-kernel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -53,7 +54,11 @@ $$ \ker A^+=\ker A^*, \qquad \ker (A^+)^*=\ker A. $$
 **Proof technique:** direct.
 
 1.1 Apply [L1] to $A$: $A^+A$ is the orthogonal projection onto $\operatorname{im}A^*$. Apply [L1] again to $A^+$ and use [L2] to identify $(A^+)^+=A$; then $A^+A$ is also the orthogonal projection onto $\operatorname{im}A^+$. Orthogonal projections onto a given space are unique, so $\operatorname{im}A^+=\operatorname{im}A^*$. [L1, L2]
+
 2.1 Using [L2] in the same way, $AA^+$ is both the orthogonal projection onto $\operatorname{im}A$ and the orthogonal projection onto $\operatorname{im}(A^+)^*$. Hence $\operatorname{im}(A^+)^*=\operatorname{im}A$. [L1, L2, step 1.1]
+
 2.2 By [L3] and step 1.1, $$ \ker A=(\operatorname{im}A^*)^\perp =(\operatorname{im}A^+)^\perp =\ker (A^+)^*. $$ [L3, step 1.1, algebra]
+
 3.1 By [L3] and step 2.1, $$ \ker A^*=(\operatorname{im}A)^\perp =(\operatorname{im}(A^+)^*)^\perp =\ker A^+. $$ [L3, step 2.1, algebra]
+
 4.1 Steps 1.1, 2.1, 3.1, and 2.2 give the image and kernel identities. [step 1.1, step 2.1, step 3.1, step 2.2] ∎

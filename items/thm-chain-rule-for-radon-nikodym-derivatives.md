@@ -2,7 +2,7 @@
 id: thm-chain-rule-for-radon-nikodym-derivatives
 kind: theorem
 title: "Radon-Nikodym derivatives satisfy the chain rule along nu << mu << lambda"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-integration-against-a-density, thm-jordan-decomposition-for-signed-measures, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

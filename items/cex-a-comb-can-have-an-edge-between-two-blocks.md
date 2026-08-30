@@ -2,7 +2,7 @@
 id: cex-a-comb-can-have-an-edge-between-two-blocks
 kind: counterexample
 title: "A comb can have an edge between two blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-graded-morphism-of-chain-complexes
 kind: definition
 title: "A graded morphism of chain complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-complex-in-an-abelian-category, thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

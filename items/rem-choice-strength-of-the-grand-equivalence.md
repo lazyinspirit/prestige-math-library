@@ -2,7 +2,7 @@
 id: rem-choice-strength-of-the-grand-equivalence
 kind: remark
 title: "Once the cited Riemann mapping theorem is granted, the new bridge implications in the grand equivalence are choice-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-grand-equivalence-for-simply-connected-plane-domains,
        rem-choice-strength-of-the-riemann-mapping-proof]
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

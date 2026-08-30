@@ -2,7 +2,7 @@
 id: thm-chain-homotopic-maps-induce-the-same-map-on-homology
 kind: theorem
 title: "Chain-homotopic maps induce the same map on homology"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-chain-homotopy, thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

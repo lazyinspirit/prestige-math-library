@@ -1,7 +1,7 @@
 ---
 page: rank-theorems-and-embedded-submanifolds
 title: "Rank Theorems and Embedded Submanifolds"
-status: draft
+status: published
 items: [def-rank-of-a-smooth-map-at-a-point,
         def-immersion-submersion-and-constant-rank-map,
         def-regular-and-critical-points-and-values,

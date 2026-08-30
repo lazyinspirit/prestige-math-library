@@ -2,7 +2,7 @@
 id: lem-trivial-fundamental-group-implies-null-homology-for-plane-domains
 kind: lemma
 title: "A plane domain with trivial fundamental group is homologically simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ deps: [def-based-loops-and-fundamental-group,
        prop-reversal-and-concatenation-of-complex-line-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

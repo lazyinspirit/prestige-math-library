@@ -2,7 +2,7 @@
 id: thm-tikhonov-regularised-least-squares-has-a-unique-minimiser
 kind: theorem
 title: "For every $\\lambda>0$, the Tikhonov objective is strictly convex and has the unique minimiser $(A^*A+\\lambda I)^{-1}A^*b$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -50,7 +51,11 @@ $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 **Proof technique:** direct.
 
 1.1 By [L2], write $A=U\Sigma V^*$ and set $x=Vy$ and $\widehat b:=U^*b$. Since $U$ and $V$ are unitary, $$ J_\lambda(Vy)=\|\Sigma y-\widehat b\|_2^2+\lambda\|y\|_2^2. $$ [L1, L2, algebra]
+
 2.1 If $\sigma_1,\dots,\sigma_r$ are the nonzero singular values, then step 1.1 becomes $$ J_\lambda(Vy)=\sum_{i=1}^r |\sigma_i y_i-\widehat b_i|^2 +\sum_{i=r+1}^m |\widehat b_i|^2 +\lambda\sum_{i=1}^n |y_i|^2. $$ Each variable $y_i$ appears in a one-variable quadratic with positive coefficient $\sigma_i^2+\lambda$ or $\lambda$, so the objective is strictly convex. [step 1.1, algebra]
+
 3.1 Minimising coordinatewise gives $$ y_i=\frac{\sigma_i}{\sigma_i^2+\lambda}\widehat b_i \quad(1\le i\le r), \qquad y_i=0 \quad(r<i\le n). $$ Equivalently, $$ y=(\Sigma^*\Sigma+\lambda I)^{-1}\Sigma^*\widehat b. $$ [step 2.1, algebra]
+
 4.1 Returning to $x=Vy$ and using $A^*A=V\Sigma^*\Sigma V^*$, one gets $$ x_\lambda =V(\Sigma^*\Sigma+\lambda I)^{-1}\Sigma^*U^*b =(A^*A+\lambda I)^{-1}A^*b. $$ [L2, step 3.1, algebra]
+
 5.1 Step 2.1 proves strict convexity and step 4.1 gives the unique minimiser. [step 2.1, step 4.1] ∎

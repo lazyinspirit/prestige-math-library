@@ -2,7 +2,7 @@
 id: lem-composition-of-homotopy-classes-is-well-defined
 kind: lemma
 title: "Composition of homotopy classes is well defined"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-homotopy-classes-of-chain-maps, lem-chain-homotopy-is-compatible-with-addition-and-composition, prop-null-homotopic-maps-form-a-two-sided-additive-ideal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

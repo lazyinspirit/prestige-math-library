@@ -2,7 +2,7 @@
 id: cor-a-contractible-complex-is-acyclic
 kind: corollary
 title: "A contractible complex is acyclic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-contractible-complex, thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

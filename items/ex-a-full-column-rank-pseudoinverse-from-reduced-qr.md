@@ -2,7 +2,7 @@
 id: ex-a-full-column-rank-pseudoinverse-from-reduced-qr
 kind: example
 title: "A full-column-rank pseudoinverse can be read off directly from a reduced QR factorisation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,5 +50,7 @@ $$ A^+=\widehat R^{-1}\widehat Q^* = \begin{bmatrix} \tfrac23 & \tfrac13 & -\tfr
 **Proof technique:** computation.
 
 1.1 Direct multiplication shows $\widehat Q^*\widehat Q=I$ and $\widehat Q\widehat R=A$, so the displayed matrices are indeed a reduced QR factorisation. [algebra]
+
 2.1 The inverse of $\widehat R$ is $$ \widehat R^{-1}= \begin{bmatrix} \tfrac1{\sqrt2} & -\tfrac1{\sqrt6} \\ 0 & \tfrac2{\sqrt6} \end{bmatrix}. $$ Therefore [L1] gives the displayed matrix for $A^+$. [L1, step 1.1, algebra]
+
 3.1 Multiplying $A^+A$ gives the $2\times2$ identity, confirming that the matrix from step 2.1 is the full-column-rank pseudoinverse. [step 2.1, algebra] ∎

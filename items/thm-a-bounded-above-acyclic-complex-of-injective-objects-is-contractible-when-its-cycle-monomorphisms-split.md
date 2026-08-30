@@ -2,7 +2,7 @@
 id: thm-a-bounded-above-acyclic-complex-of-injective-objects-is-contractible-when-its-cycle-monomorphisms-split
 kind: theorem
 title: "A bounded above acyclic complex of injective objects is contractible when its cycle monomorphisms split"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-bounded-below-acyclic-complex-of-projective-objects-is-contractible-when-its-cycle-epimorphisms-split, def-bounded-bounded-below-and-bounded-above-complex, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, def-cycle-and-boundary-subobjects-of-a-complex, def-injective-object, thm-the-opposite-of-an-abelian-category-is-abelian]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

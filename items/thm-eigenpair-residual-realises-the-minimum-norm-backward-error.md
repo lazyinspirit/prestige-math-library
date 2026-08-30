@@ -2,7 +2,7 @@
 id: thm-eigenpair-residual-realises-the-minimum-norm-backward-error
 kind: theorem
 title: "For a unit vector $x$, the smallest perturbation making $(\\mu,x)$ an exact eigenpair has spectral norm $\\|Ax-\\mu x\\|_2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -53,5 +54,7 @@ $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 **Proof technique:** direct.
 
 1.1 If $(A+E)x=\mu x$, then $Ex=-(Ax-\mu x)=-r$. Because $\|x\|_2=1$, [L2] gives $$ \|E\|_2\ge \|Ex\|_2=\|r\|_2. $$ So every admissible perturbation has norm at least $\|r\|_2$. [L1, L2, algebra]
+
 1.2 Define $E:=-rx^*$. Then $$ Ex=-r(x^*x)=-r, $$ so $(A+E)x=\mu x$. For any unit vector $y$, [L3] gives $$ \|Ey\|_2=\|r\|_2\,|x^*y|\le \|r\|_2, $$ with equality at $y=x$. Hence $\|E\|_2=\|r\|_2$. [L1, L3, construct, algebra]
+
 2.1 Step 1.1 gives the lower bound and step 1.2 attains it, so $\eta(A,\mu,x)=\|r\|_2$. [step 1.1, step 1.2] ∎

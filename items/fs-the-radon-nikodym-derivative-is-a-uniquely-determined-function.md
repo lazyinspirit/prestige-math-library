@@ -2,7 +2,7 @@
 id: fs-the-radon-nikodym-derivative-is-a-uniquely-determined-function
 kind: false-statement
 title: "FALSE: the Radon-Nikodym derivative is a uniquely determined function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-radon-nikodym-derivative, cor-cantor-set-is-an-uncountable-lebesgue-null-set, cor-integral-over-a-null-set-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

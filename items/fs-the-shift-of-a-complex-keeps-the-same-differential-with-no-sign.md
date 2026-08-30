@@ -2,7 +2,7 @@
 id: fs-the-shift-of-a-complex-keeps-the-same-differential-with-no-sign
 kind: false-statement
 title: "FALSE: the shift of a complex keeps the same differential with no sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-shift-of-a-chain-complex, lem-the-shifted-differential-squares-to-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

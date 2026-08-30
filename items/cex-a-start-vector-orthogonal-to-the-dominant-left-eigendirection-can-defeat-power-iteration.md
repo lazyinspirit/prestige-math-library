@@ -2,7 +2,7 @@
 id: cex-a-start-vector-orthogonal-to-the-dominant-left-eigendirection-can-defeat-power-iteration
 kind: counterexample
 title: "For a nonnormal matrix, a start vector orthogonal to the dominant left eigendirection can defeat power iteration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -48,5 +49,7 @@ $1$.
 **Proof technique:** direct.
 
 1.1 The right eigenvectors are $e_1$ for eigenvalue $2$ and $(1,-1)^T$ for eigenvalue $1$. A left eigenvector for eigenvalue $2$ is $(1,1)^T$, and $$ \begin{bmatrix}1&1\end{bmatrix}x_0=0. $$ So the start vector is orthogonal to the dominant left eigendirection. [algebra]
+
 2.1 Direct multiplication gives $$ Ax_0= \frac1{\sqrt2} \begin{bmatrix} 1\\-1 \end{bmatrix} =x_0. $$ Hence every normalised power iterate equals $x_0$. [step 1.1, algebra]
+
 3.1 The power iteration never approaches the dominant eigendirection $e_1$, so the start condition in [L1] is genuinely necessary. [L1, step 2.1] ∎

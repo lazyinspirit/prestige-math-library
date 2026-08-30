@@ -2,7 +2,7 @@
 id: prop-full-row-rank-pseudoinverse-formula
 kind: proposition
 title: "If $A$ has full row rank, then $A^+=A^*(AA^*)^{-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -47,5 +48,7 @@ $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 **Proof technique:** direct.
 
 1.1 Because $A$ has full row rank, the adjoint $A^*$ has full column rank. Applying [L1] to $A^*$ gives $$ (A^*)^+=((A^*)^*A^*)^{-1}(A^*)^* =(AA^*)^{-1}A. $$ [L1, algebra]
+
 2.1 Taking adjoints and using [L2], $$ A^+=((A^*)^+)^* =((AA^*)^{-1}A)^* =A^*(AA^*)^{-1}. $$ [L2, step 1.1, algebra]
+
 3.1 In particular $AA^*$ is invertible and the displayed formula holds. [step 2.1] ∎

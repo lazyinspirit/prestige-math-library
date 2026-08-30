@@ -2,7 +2,7 @@
 id: def-dirichlet-convolution
 kind: definition
 title: "Dirichlet convolution of arithmetic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function, def-divides-in-z, def-finite-sum-in-a-commutativ
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-grand-equivalence-for-simply-connected-plane-domains
 kind: theorem
 title: "For a plane domain, the complement, homology, primitive, logarithm, conjugate, conformal, homotopy, and contractibility conditions are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -24,6 +24,7 @@ deps: [thm-homological-simple-connectivity-equivalences,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

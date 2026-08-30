@@ -2,7 +2,7 @@
 id: ex-dirichlet-inverse-recursion
 kind: example
 title: "Computing a Dirichlet inverse recursively"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-dirichlet-convolution-identity, thm-dirichlet-convolution-invertibili
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

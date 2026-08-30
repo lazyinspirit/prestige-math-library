@@ -2,7 +2,7 @@
 id: def-dirichlet-convolution-identity
 kind: definition
 title: "The Dirichlet-convolution identity and the constant-one function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters
 kind: proposition
 title: "Truncated SVD and Tikhonov regularisation act as hard and smooth spectral filters on the singular components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -52,5 +53,7 @@ threshold $\tau\ge0$, and a parameter $\lambda>0$.
 **Proof technique:** direct.
 
 1.1 By [L1], applying $A_\tau^+$ to $b=\sum_i \langle b,u_i\rangle u_i$ gives $$ A_\tau^+b =\sum_{\sigma_i>\tau}\frac{1}{\sigma_i}\,\langle b,u_i\rangle v_i. $$ Thus the filter is $g_\tau(\sigma_i)$ with a hard cutoff at $\tau$. [L1, algebra]
+
 1.2 By [L2], the Tikhonov solution is $$ x_\lambda =\sum_{\sigma_i>0}\frac{\sigma_i}{\sigma_i^2+\lambda}\,\langle b,u_i\rangle v_i. $$ Hence every nonzero singular direction is retained but damped smoothly according to $g_\lambda(\sigma_i)$, while zero singular directions have filter value $g_\lambda(0)=0$. [L2, algebra]
+
 2.1 Step 1.1 is the truncated-SVD filter and step 1.2 is the Tikhonov filter, so the two methods are hard and smooth spectral filters respectively. [step 1.1, step 1.2] ∎

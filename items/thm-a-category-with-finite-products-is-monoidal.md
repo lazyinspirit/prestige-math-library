@@ -2,7 +2,7 @@
 id: thm-a-category-with-finite-products-is-monoidal
 kind: theorem
 title: "A category with finite products is monoidal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monoidal-category, def-products-and-coproducts, def-initial-terminal-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-the-unit-constraints-must-be-imposed-as-axioms
 kind: false-statement
 title: "FALSE: the standard unit-constraint identities must all be imposed as independent axioms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-left-unitor-of-a-tensor-product-is-determined, thm-the-right-unitor-of-a-tensor-product-is-determined, cor-the-two-unitors-agree-on-the-unit-object]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

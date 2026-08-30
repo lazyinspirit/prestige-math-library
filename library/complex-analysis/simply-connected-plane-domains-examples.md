@@ -1,7 +1,7 @@
 ---
 page: simply-connected-plane-domains-examples
 title: "Simply Connected Plane Domains: the Grand Equivalence — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-unit-disc-satisfies-all-grand-equivalence-clauses,
            ex-the-complex-plane-satisfies-all-grand-equivalence-clauses,

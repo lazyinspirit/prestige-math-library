@@ -2,7 +2,7 @@
 id: thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb
 kind: theorem
 title: "A tau-critical graph with a large low-degree induced subgraph has a rooted stable-tooth comb"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

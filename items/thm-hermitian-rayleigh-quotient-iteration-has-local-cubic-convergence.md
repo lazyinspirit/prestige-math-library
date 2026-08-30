@@ -2,7 +2,7 @@
 id: thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence
 kind: theorem
 title: "Near a simple Hermitian eigenvector, Rayleigh-quotient iteration converges cubically"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

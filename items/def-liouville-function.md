@@ -2,7 +2,7 @@
 id: def-liouville-function
 kind: definition
 title: "Liouville's function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function, thm-canonical-prime-factorisation]
 justified_by: []
 aliases: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

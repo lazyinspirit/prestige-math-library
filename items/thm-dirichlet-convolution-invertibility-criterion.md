@@ -2,7 +2,7 @@
 id: thm-dirichlet-convolution-invertibility-criterion
 kind: theorem
 title: "An arithmetic function has a Dirichlet inverse exactly when its value at $1$ is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: induction
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

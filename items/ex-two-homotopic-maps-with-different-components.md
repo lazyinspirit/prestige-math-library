@@ -2,7 +2,7 @@
 id: ex-two-homotopic-maps-with-different-components
 kind: example
 title: "Two homotopic maps with different components"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy, thm-chain-homotopic-maps-induce-the-same-map-on-homology, ex-a-contracting-homotopy-for-the-two-term-identity-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

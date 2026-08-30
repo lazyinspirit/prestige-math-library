@@ -2,7 +2,7 @@
 id: cex-the-skeleton-of-set-cannot-be-made-strict-by-identification
 kind: counterexample
 title: "A skeleton of Set cannot be made strict by identifying isomorphic objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified]
 proof_strategy: counterexample
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

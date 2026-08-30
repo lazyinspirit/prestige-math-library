@@ -2,7 +2,7 @@
 id: cex-multiplicative-does-not-mean-completely-multiplicative
 kind: counterexample
 title: "Tau is multiplicative but not completely multiplicative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-completely-multiplicative-arithmetic-function, def-multiplicative-ari
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-the-figure-eight-is-an-immersed-image-not-an-embedded-submanifold
 kind: counterexample
 title: "A figure-eight curve is an immersed image but not an embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

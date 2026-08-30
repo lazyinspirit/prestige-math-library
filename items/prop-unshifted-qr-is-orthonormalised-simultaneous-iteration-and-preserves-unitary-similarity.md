@@ -2,7 +2,7 @@
 id: prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity
 kind: proposition
 title: "Unshifted QR is orthonormalised simultaneous iteration, and every QR iterate is unitarily similar to the original matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -48,5 +49,7 @@ $\widehat Q_0:=I$ and $\widehat Q_k:=Q_0Q_1\cdots Q_{k-1}$ for $k\ge1$.
 **Proof technique:** direct.
 
 1.1 From [L1], $$ A_{k+1}=R_kQ_k=Q_k^*A_kQ_k. $$ Iterating this identity yields $A_k=\widehat Q_k^*A\widehat Q_k$. [L1, algebra]
+
 1.2 Also $A_kQ_k=Q_kR_kQ_k=Q_kA_{k+1}$, so multiplying the factorisations gives $$ A^k=(Q_0Q_1\cdots Q_{k-1})(R_{k-1}\cdots R_1R_0) =\widehat Q_k\widehat R_k $$ with $\widehat R_k$ upper triangular. Thus the columns of $\widehat Q_k$ are the orthonormalised columns of $A^k$. [L1, algebra]
+
 2.1 Step 1.1 proves unitary similarity, and step 1.2 identifies the iteration with simultaneous orthonormalised power iteration as in [L2]. [L2, step 1.1, step 1.2] ∎

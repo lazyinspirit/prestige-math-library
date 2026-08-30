@@ -2,7 +2,7 @@
 id: thm-modules-over-a-commutative-ring-form-a-monoidal-category
 kind: theorem
 title: "Modules over a commutative ring form a monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-commutative-ring, prop-modules-and-homomorphisms-form-category-rmod, thm-associativity-of-balanced-tensor-products, thm-unit-isomorphisms-for-module-tensor-products, thm-symmetry-and-associativity-over-a-commutative-ring, prop-functoriality-of-module-tensor-products]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

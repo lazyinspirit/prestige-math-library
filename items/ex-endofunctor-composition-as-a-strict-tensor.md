@@ -2,7 +2,7 @@
 id: ex-endofunctor-composition-as-a-strict-tensor
 kind: example
 title: "Endofunctor composition as a strict tensor product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-the-endofunctor-category-of-a-small-category-is-strict-monoidal-under-composition]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

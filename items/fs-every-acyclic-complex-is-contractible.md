@@ -2,7 +2,7 @@
 id: fs-every-acyclic-complex-is-contractible
 kind: false-statement
 title: "FALSE: every acyclic complex is contractible"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-contractible-complex, cor-a-contractible-complex-is-acyclic, prop-zero-homology-does-not-make-an-object-zero-in-the-homotopy-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

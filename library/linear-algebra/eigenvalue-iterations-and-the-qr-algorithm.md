@@ -1,7 +1,7 @@
 ---
 page: eigenvalue-iterations-and-the-qr-algorithm
 title: "Eigenvalue Iterations and the QR Algorithm"
-status: draft
+status: published
 items: [def-eigenpair-residual-and-normwise-backward-error,
         thm-eigenpair-residual-realises-the-minimum-norm-backward-error,
         def-power-iteration,

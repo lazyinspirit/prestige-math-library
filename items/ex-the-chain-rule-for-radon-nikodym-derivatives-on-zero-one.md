@@ -2,7 +2,7 @@
 id: ex-the-chain-rule-for-radon-nikodym-derivatives-on-zero-one
 kind: example
 title: "The chain rule for Radon-Nikodym derivatives on $[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [def-radon-nikodym-derivative,
        thm-chain-rule-for-radon-nikodym-derivatives]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

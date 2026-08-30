@@ -2,7 +2,7 @@
 id: prop-a-chain-isomorphism-is-a-chain-homotopy-equivalence
 kind: proposition
 title: "A chain isomorphism is a chain homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-homotopy-equivalence, prop-identities-and-composites-of-chain-maps-are-chain-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

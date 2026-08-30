@@ -2,7 +2,7 @@
 id: prop-smoothness-of-a-map-on-an-embedded-submanifold-is-local-in-the-ambient-space
 kind: proposition
 title: "Smoothness of a map on an embedded submanifold is local in the ambient space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

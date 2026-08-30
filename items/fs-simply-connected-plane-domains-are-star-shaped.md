@@ -2,7 +2,7 @@
 id: fs-simply-connected-plane-domains-are-star-shaped
 kind: false-statement
 title: "FALSE: every simply connected plane domain is star-shaped"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

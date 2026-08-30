@@ -2,7 +2,7 @@
 id: def-eigenpair-residual-and-normwise-backward-error
 kind: definition
 title: "The residual $r=Ax-\\mu x$ and the normwise backward error of an approximate eigenpair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-inner-product-norm, def-matrix-product-and-identity-matrix,
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

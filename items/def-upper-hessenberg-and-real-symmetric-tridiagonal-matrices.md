@@ -2,7 +2,7 @@
 id: def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices
 kind: definition
 title: "Upper Hessenberg matrices and real symmetric tridiagonal matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

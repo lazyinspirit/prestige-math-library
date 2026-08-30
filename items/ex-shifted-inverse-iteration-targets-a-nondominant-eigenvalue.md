@@ -2,7 +2,7 @@
 id: ex-shifted-inverse-iteration-targets-a-nondominant-eigenvalue
 kind: example
 title: "Shifted inverse iteration can target a non-dominant eigenvalue by moving it closest to the shift"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -47,4 +48,5 @@ eigendirection, shifted inverse iteration converges to that eigendirection
 **Proof technique:** computation.
 
 1.1 Here $$ (A-\mu I)^{-1} =\operatorname{diag}\!\left(\frac5{21},5\right). $$ The transformed eigenvalue magnitudes are $5/21$ and $5$, so the eigendirection $e_2$ of the original eigenvalue $1$ becomes dominant. [algebra]
+
 2.1 The start vector has nonzero $e_2$-component, so [L1] applies and the normalised iterates converge to the line $\mathbb Fe_2$. [L1, step 1.1] ∎

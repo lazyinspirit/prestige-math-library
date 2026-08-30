@@ -2,7 +2,7 @@
 id: ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix
 kind: example
 title: "Rayleigh-quotient iteration on a $2\\times2$ symmetric matrix exhibits fast local convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

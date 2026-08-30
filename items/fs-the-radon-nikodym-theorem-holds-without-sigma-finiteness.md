@@ -2,7 +2,7 @@
 id: fs-the-radon-nikodym-theorem-holds-without-sigma-finiteness
 kind: false-statement
 title: "FALSE: the Radon-Nikodym theorem holds without sigma-finiteness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-counting-measure, prop-counting-measure-is-a-measure,
        thm-existence-of-the-lebesgue-stieltjes-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cor-reciprocal-rule-for-equivalent-sigma-finite-measures
 kind: corollary
 title: "Equivalent sigma-finite positive measures have reciprocal Radon-Nikodym derivatives almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-radon-nikodym-derivative, thm-chain-rule-for-radon-nikodym-derivatives, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

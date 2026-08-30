@@ -2,7 +2,7 @@
 id: thm-constant-rank-theorem-for-manifolds
 kind: theorem
 title: "The constant-rank theorem for manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 short: "$(u,v)\\mapsto(u,0)$"
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

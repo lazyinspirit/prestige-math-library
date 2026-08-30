@@ -2,7 +2,7 @@
 id: lem-the-plane-or-disc-alternative-gives-contractibility
 kind: lemma
 title: "A plane domain homeomorphic to the plane or to the disc is contractible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [def-nullhomotopic-map-and-contractible-space,
        cor-convex-subsets-of-rn-are-contractible]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

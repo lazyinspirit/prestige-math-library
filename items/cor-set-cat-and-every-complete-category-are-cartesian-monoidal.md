@@ -2,7 +2,7 @@
 id: cor-set-cat-and-every-complete-category-are-cartesian-monoidal
 kind: corollary
 title: "Set, Cat, and every complete category are cartesian monoidal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-category-with-finite-products-is-monoidal, prop-sets-and-functions-form-category-set, thm-small-categories-form-a-strict-two-category, def-small-finite-and-large-limits-completeness-and-cocompleteness]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

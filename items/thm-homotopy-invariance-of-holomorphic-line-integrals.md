@@ -2,7 +2,7 @@
 id: thm-homotopy-invariance-of-holomorphic-line-integrals
 kind: theorem
 title: "Endpoint-fixed homotopic paths have equal holomorphic line integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ deps: [def-homotopy-relative-and-path-homotopy,
        def-complex-contours-reversal-concatenation-and-closedness]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

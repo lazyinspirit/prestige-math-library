@@ -1,7 +1,7 @@
 ---
 page: turing-machines-configurations-and-computation-examples
 title: "Turing Machines, Configurations, and Computation: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-valid-computation-histories-are-decidable

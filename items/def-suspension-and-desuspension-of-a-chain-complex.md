@@ -2,13 +2,14 @@
 id: def-suspension-and-desuspension-of-a-chain-complex
 kind: definition
 title: "Suspension and desuspension of a chain complex"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-shift-of-a-chain-complex]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

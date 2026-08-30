@@ -2,7 +2,7 @@
 id: thm-finite-borel-measures-on-r-have-a-unique-absolutely-continuous-discrete-and-singular-continuous-decomposition
 kind: theorem
 title: "Every finite Borel measure on R has a unique absolutely continuous, discrete, and singular-continuous decomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-absolutely-continuous-and-singular-parts-of-a-sigma-finite-signed-measure, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures, thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures, cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity, def-cantor-measure, prop-cantor-measure-is-a-singular-atomless-probability-measure, thm-finite-borel-measure-on-r-is-atomic-plus-atomless]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

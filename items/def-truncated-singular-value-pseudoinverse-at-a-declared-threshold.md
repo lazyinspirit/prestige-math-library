@@ -2,7 +2,7 @@
 id: def-truncated-singular-value-pseudoinverse-at-a-declared-threshold
 kind: definition
 title: "The truncated singular-value pseudoinverse obtained by discarding singular values below a declared numerical-rank threshold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-numerical-rank-relative-to-a-norm-scale-and-tolerance,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

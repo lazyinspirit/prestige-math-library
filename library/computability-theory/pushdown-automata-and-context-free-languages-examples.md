@@ -1,7 +1,7 @@
 ---
 page: pushdown-automata-and-context-free-languages-examples
 title: "Pushdown Automata and Context-Free Languages: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-cfg-to-pda-construction

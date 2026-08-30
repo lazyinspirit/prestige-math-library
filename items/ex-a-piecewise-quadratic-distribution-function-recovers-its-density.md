@@ -2,7 +2,7 @@
 id: ex-a-piecewise-quadratic-distribution-function-recovers-its-density
 kind: example
 title: "A piecewise-quadratic distribution function recovers its density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ deps: [def-radon-nikodym-derivative, def-measure-with-density,
        thm-existence-of-the-lebesgue-stieltjes-measure]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

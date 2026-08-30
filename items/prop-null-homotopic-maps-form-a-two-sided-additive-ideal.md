@@ -2,7 +2,7 @@
 id: prop-null-homotopic-maps-form-a-two-sided-additive-ideal
 kind: proposition
 title: "Null-homotopic maps form a two-sided additive ideal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-null-homotopic-chain-map, lem-chain-homotopy-is-compatible-with-addition-and-composition, thm-the-category-of-complexes-in-an-additive-category-is-additive]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

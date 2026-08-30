@@ -2,7 +2,7 @@
 id: thm-the-category-of-abelian-groups-is-monoidal-under-the-tensor-product
 kind: theorem
 title: "Abelian groups are monoidal under the tensor product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-monoidal-category, prop-abelian-groups-are-z-modules, thm-abelian-gro
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

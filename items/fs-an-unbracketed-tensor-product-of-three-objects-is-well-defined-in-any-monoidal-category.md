@@ -2,7 +2,7 @@
 id: fs-an-unbracketed-tensor-product-of-three-objects-is-well-defined-in-any-monoidal-category
 kind: false-statement
 title: "FALSE: an unbracketed three-fold tensor product is already well defined in any monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-unbracketed-tensor-strings-are-not-yet-defined]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

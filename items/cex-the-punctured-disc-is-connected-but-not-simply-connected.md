@@ -2,7 +2,7 @@
 id: cex-the-punctured-disc-is-connected-but-not-simply-connected
 kind: counterexample
 title: "The punctured disc is connected but not simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-grand-equivalence-for-simply-connected-plane-domains,
        thm-winding-number-circle-traversed-k-times]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

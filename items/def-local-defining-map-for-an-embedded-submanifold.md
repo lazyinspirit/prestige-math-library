@@ -2,7 +2,7 @@
 id: def-local-defining-map-for-an-embedded-submanifold
 kind: definition
 title: "Local defining maps for embedded submanifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-embedded-submanifolds-admit-local-defining-submersions]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

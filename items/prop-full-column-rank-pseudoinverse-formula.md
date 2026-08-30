@@ -2,7 +2,7 @@
 id: prop-full-column-rank-pseudoinverse-formula
 kind: proposition
 title: "If $A$ has full column rank, then $A^+=(A^*A)^{-1}A^*$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -52,6 +53,9 @@ $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 **Proof technique:** direct.
 
 1.1 By [L4], choose an SVD $A=U\Sigma V^*$, and by [L1] the diagonal matrix $\Sigma$ has the form $\operatorname{diag}(\sigma_1,\dots,\sigma_n)$ with every $\sigma_i>0$. [L1, L4]
+
 2.1 Then $$ A^*A=V\Sigma^* \Sigma V^* =V\operatorname{diag}(\sigma_1^2,\dots,\sigma_n^2)V^*, $$ so [L3] gives $$ (A^*A)^{-1}=V\operatorname{diag}(\sigma_1^{-2},\dots,\sigma_n^{-2})V^*. $$ [L3, step 1.1, algebra]
+
 3.1 Multiplying by $A^*=V\Sigma^*U^*$ yields $$ B:=(A^*A)^{-1}A^* =V\operatorname{diag}(\sigma_1^{-1},\dots,\sigma_n^{-1})U^*. $$ Direct diagonal multiplication shows that $B$ satisfies all four Penrose equations for $A$, so uniqueness in [L2] gives $B=A^+$. [L2, step 2.1, algebra]
+
 4.1 Therefore $A^*A$ is invertible and $A^+=(A^*A)^{-1}A^*$. [step 3.1] ∎

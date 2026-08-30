@@ -2,7 +2,7 @@
 id: thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound
 kind: theorem
 title: "The C5-free graphs satisfy a polynomial kappa bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

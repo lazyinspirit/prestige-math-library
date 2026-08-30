@@ -2,7 +2,7 @@
 id: cor-finite-complex-measures-admit-integrable-radon-nikodym-densities
 kind: corollary
 title: "A finite complex measure absolutely continuous with respect to a sigma-finite positive measure has an integrable complex density"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, thm-total-variation-of-a-complex-measure-is-finite, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, def-integrable-real-and-complex-functions-and-their-integrals]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

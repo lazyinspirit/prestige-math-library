@@ -2,7 +2,7 @@
 id: lem-null-homology-gives-the-plane-or-disc-alternative
 kind: lemma
 title: "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-homologically-simply-connected-complex-domain,
        thm-riemann-mapping-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

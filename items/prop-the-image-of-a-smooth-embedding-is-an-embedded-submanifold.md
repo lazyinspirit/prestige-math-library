@@ -2,7 +2,7 @@
 id: prop-the-image-of-a-smooth-embedding-is-an-embedded-submanifold
 kind: proposition
 title: "The image of a smooth embedding is an embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

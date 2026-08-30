@@ -2,7 +2,7 @@
 id: lem-the-hom-complex-differential-squares-to-zero
 kind: lemma
 title: "The Hom-complex differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-complex-of-chain-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

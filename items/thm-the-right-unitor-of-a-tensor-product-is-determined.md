@@ -2,7 +2,7 @@
 id: thm-the-right-unitor-of-a-tensor-product-is-determined
 kind: theorem
 title: "The right unitor of a tensor product is determined by the associator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

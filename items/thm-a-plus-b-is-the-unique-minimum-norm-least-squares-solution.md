@@ -2,7 +2,7 @@
 id: thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution
 kind: theorem
 title: "For every right-hand side $b$, $A^+b$ is the unique least-squares solution of minimum Euclidean norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -57,8 +58,12 @@ $A^*(Ax-b)=0$, and any two minimisers differ by an element of $\ker A$
 **Proof technique:** direct.
 
 1.1 By [L1], $AA^+b$ is the orthogonal projection of $b$ onto $\operatorname{im}A$. Therefore the residual $b-AA^+b$ lies in $(\operatorname{im}A)^\perp=\ker A^*$ by [L4], so $A^*(AA^+b-b)=0$ and [L3] shows that $A^+b$ is a least-squares minimiser. [L1, L3, L4]
+
 1.2 By [L2] and [L5], $A^+b\in\operatorname{im}A^+=\operatorname{im}A^*=(\ker A)^\perp$. Thus
 $A^+b$ is orthogonal to every vector in $\ker A$. [L2, L5, algebra]
+
 2.1 Let $x$ be any least-squares minimiser. By [L3], $x-A^+b\in\ker A$, so $x=A^+b+z$ for some $z\in\ker A$. Step 1.2 then gives $$ \|x\|_2^2=\|A^+b\|_2^2+\|z\|_2^2\ge \|A^+b\|_2^2. $$ [L3, step 1.2, algebra]
+
 3.1 Equality in step 2.1 holds only when $z=0$, so the least-squares minimiser of minimum Euclidean norm is unique and equals $A^+b$. [step 2.1, algebra]
+
 4.1 Step 1.1 proves the least-squares claim and steps 2.1 and 3.1 prove the minimum-norm claim. [step 1.1, step 2.1, step 3.1] ∎

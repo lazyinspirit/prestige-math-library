@@ -1,7 +1,7 @@
 ---
 page: valuation-rings-and-discrete-valuation-rings
 title: "Valuation Rings and Discrete Valuation Rings"
-status: draft
+status: published
 items: [def-totally-ordered-abelian-group,
         def-valuation-on-a-field,
         def-valuation-ring,

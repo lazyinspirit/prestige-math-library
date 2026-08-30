@@ -2,7 +2,7 @@
 id: thm-equivalent-characterisations-of-a-dvr
 kind: theorem
 title: "Equivalent characterizations of a DVR"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

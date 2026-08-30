@@ -2,7 +2,7 @@
 id: thm-height-one-localisation-of-normal-noetherian-domain-is-dvr
 kind: theorem
 title: "Height-one localizations of normal Noetherian domains are DVRs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

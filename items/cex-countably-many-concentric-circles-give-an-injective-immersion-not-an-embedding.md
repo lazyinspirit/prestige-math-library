@@ -2,7 +2,7 @@
 id: cex-countably-many-concentric-circles-give-an-injective-immersion-not-an-embedding
 kind: counterexample
 title: "Countably many concentric circles give an injective immersion that is not an embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

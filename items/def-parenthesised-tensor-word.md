@@ -2,7 +2,7 @@
 id: def-parenthesised-tensor-word
 kind: definition
 title: "Parenthesised tensor words and their evaluation functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category]
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

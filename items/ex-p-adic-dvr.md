@@ -2,7 +2,7 @@
 id: ex-p-adic-dvr
 kind: example
 title: "The $p$-adic valuation ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

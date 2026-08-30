@@ -2,7 +2,7 @@
 id: ex-liouville-square-indicator
 kind: example
 title: "Working out the square-indicator convolution for prime powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-liouville-function, prop-liouville-convolution-square-indicator]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

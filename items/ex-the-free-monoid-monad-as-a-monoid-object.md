@@ -2,7 +2,7 @@
 id: ex-the-free-monoid-monad-as-a-monoid-object
 kind: example
 title: "The free-monoid monad as a monoid object in the endofunctor category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-the-free-monoid-monad-and-its-algebras-are-monoids, thm-a-monoid-object-in-the-endofunctor-category-is-exactly-a-monad]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

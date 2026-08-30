@@ -2,7 +2,7 @@
 id: prop-zero-cocycles-in-the-hom-complex-are-chain-maps
 kind: proposition
 title: "Zero cocycles in the Hom complex are chain maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-hom-complex-of-chain-complexes, def-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

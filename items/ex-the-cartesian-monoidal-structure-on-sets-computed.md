@@ -2,7 +2,7 @@
 id: ex-the-cartesian-monoidal-structure-on-sets-computed
 kind: example
 title: "The cartesian monoidal structure on sets computed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [cor-set-cat-and-every-complete-category-are-cartesian-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

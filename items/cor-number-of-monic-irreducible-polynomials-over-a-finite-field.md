@@ -2,7 +2,7 @@
 id: cor-number-of-monic-irreducible-polynomials-over-a-finite-field
 kind: corollary
 title: "Möbius inversion gives the closed formula for the number of monic irreducibles over $\\mathbb F_q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

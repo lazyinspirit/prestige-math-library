@@ -2,13 +2,14 @@
 id: def-homotopy-classes-of-chain-maps
 kind: definition
 title: "Homotopy classes of chain maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [prop-null-homotopic-maps-form-a-two-sided-additive-ideal]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-power-iteration
 kind: definition
 title: "Power iteration with normalisation and Rayleigh-quotient eigenvalue estimates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

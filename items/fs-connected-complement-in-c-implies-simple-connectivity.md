@@ -2,7 +2,7 @@
 id: fs-connected-complement-in-c-implies-simple-connectivity
 kind: false-statement
 title: "FALSE: a connected plane-domain complement in C already implies simple connectivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-the-punctured-plane-separates-c-complement-from-spherical-complement]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cex-counting-measure-on-zero-one-shows-the-dominating-measure-needs-sigma-finiteness
 kind: counterexample
 title: "Counting measure on $[0,1]$ shows the dominating measure needs sigma-finiteness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-counting-measure, prop-counting-measure-is-a-measure, def-measure-with-density, prop-the-nonnegative-integral-agrees-with-the-simple-integral]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

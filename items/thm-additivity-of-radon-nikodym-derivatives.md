@@ -2,7 +2,7 @@
 id: thm-additivity-of-radon-nikodym-derivatives
 kind: theorem
 title: "Radon-Nikodym derivatives add almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-radon-nikodym-derivative,
        cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

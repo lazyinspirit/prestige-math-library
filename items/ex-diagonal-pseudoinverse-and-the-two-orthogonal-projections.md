@@ -2,7 +2,7 @@
 id: ex-diagonal-pseudoinverse-and-the-two-orthogonal-projections
 kind: example
 title: "A diagonal rank-deficient matrix makes $A^+$, $AA^+$, and $A^+A$ completely explicit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: computation
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -50,5 +51,7 @@ So both $AA^+$ and $A^+A$ are the coordinate projection onto the first axis.
 **Proof technique:** computation.
 
 1.1 Because $A$ is already diagonal with one nonzero singular value, inverting that entry and leaving the zero entry fixed gives the candidate $A^+=\operatorname{diag}(1/2,0)$. [L1, algebra]
+
 2.1 Direct multiplication gives $AA^+=A^+A=\operatorname{diag}(1,0)$. [step 1.1, algebra]
+
 3.1 The matrix $\operatorname{diag}(1,0)$ is the orthogonal projection onto the first coordinate axis, which is exactly $\operatorname{im}A=\operatorname{im}A^*$. This matches [L2]. [L2, step 2.1, algebra] ∎

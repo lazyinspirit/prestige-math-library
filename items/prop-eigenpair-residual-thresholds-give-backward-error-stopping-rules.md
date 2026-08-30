@@ -2,7 +2,7 @@
 id: prop-eigenpair-residual-thresholds-give-backward-error-stopping-rules
 kind: proposition
 title: "A residual threshold on a normalised approximate eigenpair is exactly a normwise backward-error stopping rule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -43,5 +44,7 @@ So a residual stopping rule is exactly a normwise backward-error stopping rule.
 **Proof technique:** direct.
 
 1.1 If $\|r\|_2\le\varepsilon$, then [L2] gives $\eta(A,\mu,x)=\|r\|_2\le\varepsilon$. [L2, algebra]
+
 1.2 If $\eta(A,\mu,x)\le\varepsilon$, then [L2] again gives $\|r\|_2=\eta(A,\mu,x)\le\varepsilon$. [L2, algebra]
+
 2.1 Steps 1.1 and 1.2 prove the equivalence, and [L1] identifies it as a backward-error stopping rule. [L1, step 1.1, step 1.2] ∎

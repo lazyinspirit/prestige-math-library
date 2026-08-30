@@ -2,7 +2,7 @@
 id: thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value
 kind: theorem
 title: "The total variation of an absolutely continuous signed or complex measure has density the absolute value of the Radon-Nikodym derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, thm-a-real-l-one-density-defines-a-finite-signed-measure-with-its-canonical-hahn-and-jordan-data, thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

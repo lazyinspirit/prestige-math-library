@@ -2,7 +2,7 @@
 id: prop-a-smooth-map-of-locally-maximal-rank-has-locally-constant-rank
 kind: proposition
 title: "A smooth map of locally maximal rank has locally constant rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

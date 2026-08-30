@@ -2,7 +2,7 @@
 id: cex-an-absolutely-continuous-finite-measure-can-have-an-unbounded-radon-nikodym-derivative
 kind: counterexample
 title: "An absolutely continuous finite measure can have an unbounded Radon-Nikodym derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-measure-with-density, def-radon-nikodym-derivative,
        cor-integral-over-a-null-set-vanishes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 ---
 

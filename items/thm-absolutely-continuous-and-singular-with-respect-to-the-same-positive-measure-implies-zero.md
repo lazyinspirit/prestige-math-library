@@ -2,7 +2,7 @@
 id: thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero
 kind: theorem
 title: "A signed or complex measure that is both absolutely continuous and singular with respect to the same positive measure is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-measure-concentrated-on-a-measurable-set, def-absolutely-continuous-with-respect-to-a-positive-measure, def-mutually-singular-measures]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

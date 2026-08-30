@@ -2,7 +2,7 @@
 id: prop-zero-homology-does-not-make-an-object-zero-in-the-homotopy-category
 kind: proposition
 title: "Zero homology does not make an object zero in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-contractible-complex, cor-a-contractible-complex-is-acyclic, def-homotopy-category-of-chain-complexes, thm-the-homotopy-category-is-additive, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
