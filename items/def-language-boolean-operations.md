@@ -2,7 +2,7 @@
 id: def-language-boolean-operations
 kind: definition
 title: "Boolean operations on languages over a fixed alphabet"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-30
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

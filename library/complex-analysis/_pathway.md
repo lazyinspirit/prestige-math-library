@@ -20,6 +20,8 @@ parts:
       - isolated-singularities-and-laurent-series
       - infinite-products-and-weierstrass-factorisation
       - the-argument-principle-and-rouche
+      - the-gamma-function
+      - mittag-leffler-and-runges-theorem
       - the-hartogs-phenomena
       - subharmonic-functions-and-the-dirichlet-problem
       - the-residue-theorem
@@ -28,6 +30,8 @@ parts:
       - domains-of-holomorphy-and-pseudoconvexity
       - normal-families-and-montels-theorem
       - conformal-mapping-branches-and-the-schwarz-lemma
+      - bloch-schottky-and-picard
+      - the-riemann-mapping-theorem
 ---
 
 ## holomorphic-functions
@@ -41,12 +45,11 @@ term, and its derivatives recover its coefficients.
 ## contours-and-cauchy
 
 Contour integrals, Goursat, and Cauchy's formula turn local holomorphy into analyticity,
-derivative estimates, the identity and open mapping theorems, and zero-pole counting
-through Laurent series, residues, the argument principle, and Rouche. Poisson and
-Dirichlet theory and the several-variable Hartogs-pseudoconvexity contrast control
-boundary and extension phenomena. Infinite products add the entire-function package:
-Weierstrass primary factors build prescribed zero sets, factorization separates zeros from
-zero-free exponentials, and Jensen-Hadamard bounds connect zeros to growth. The late pages
-close the conformal geometry: Mobius maps on the sphere, holomorphic inverse and
-preparation theorems, Montel normal families, and branch-sensitive Schwarz-Pick maps for
-the disc, slit plane, sectors, Joukowski, and sine.
+derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hartogs, and
+pseudoconvexity handle boundary and extension phenomena, while Weierstrass factorization
+and Jensen-Hadamard connect zeros to growth. Gamma extends Euler's integral to reflection,
+multiplication, Stirling asymptotics, and the Hankel formula, and Runge-Mittag-Leffler
+turn Cauchy theory into approximation and prescribed principal parts. The conformal
+endgame then passes through the sphere, inverse and preparation theorems, Montel normal
+families, and Schwarz-Pick maps to Bloch, Schottky, Picard, and the Riemann mapping
+theorem.

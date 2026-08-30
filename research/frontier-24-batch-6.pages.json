@@ -1,0 +1,561 @@
+[
+  {
+    "order": 339,
+    "id": "mittag-leffler-and-runges-theorem",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Mittag-Leffler and Runge's Theorem",
+    "companion": "mittag-leffler-and-runges-theorem-examples",
+    "requires": [
+      "infinite-products-and-weierstrass-factorisation",
+      "the-riemann-sphere-and-mobius-transformations",
+      "the-residue-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-principal-part-at-an-isolated-point",
+        "kind": "definition",
+        "title": "The principal part at an isolated singularity",
+        "deps": [
+          "thm-laurent-regular-principal-decomposition"
+        ]
+      },
+      {
+        "id": "def-rational-approximation-with-a-runge-pole-set",
+        "kind": "definition",
+        "title": "Runge pole sets for rational approximation on a compact set",
+        "deps": []
+      },
+      {
+        "id": "def-pole-pushing-along-a-chain-of-discs",
+        "kind": "definition",
+        "title": "Pole pushing along a chain of discs",
+        "deps": [
+          "def-rational-approximation-with-a-runge-pole-set"
+        ]
+      },
+      {
+        "id": "lem-grid-cycle-for-runge-approximation",
+        "kind": "lemma",
+        "title": "A square-grid cycle enclosing a compact set",
+        "strategy": "Choose a finite union of grid cells whose interior contains the compact set and which lies inside the open neighborhood. Cancel oppositely oriented internal edges to obtain the frontier cycle. Compute each cell-boundary index from normalized argument increment, then use index additivity and local constancy to obtain index one on the compact set.",
+        "deps": [
+          "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "cor-winding-number-is-the-normalized-argument-increment",
+          "cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace",
+          "thm-winding-number-chain-laws"
+        ]
+      },
+      {
+        "id": "lem-cauchy-riemann-sums-give-rational-approximation",
+        "kind": "lemma",
+        "title": "Riemann sums of the Cauchy integral give rational approximation",
+        "strategy": "Write the Cauchy integral over the enclosing cycle as a sum of parameter integrals over finitely many edges. Uniform continuity of the Cauchy kernel on the compact parameter-set product lets edgewise Riemann sums converge uniformly on the compact set, and each such sum is rational with poles on the cycle.",
+        "deps": [
+          "lem-grid-cycle-for-runge-approximation"
+        ]
+      },
+      {
+        "id": "lem-runge-pole-pushing-lemma",
+        "kind": "lemma",
+        "title": "Runge's pole-pushing lemma",
+        "strategy": "Move a simple pole along a finite chain of overlapping discs inside one complementary component. The geometric-series expansion on one disc step approximates a pole at one center by a rational function with pole at the next center, and iterating along the chain pushes the pole to the chosen endpoint or to infinity.",
+        "deps": [
+          "def-pole-pushing-along-a-chain-of-discs"
+        ]
+      },
+      {
+        "id": "thm-runge-approximation-with-prescribed-poles",
+        "kind": "theorem",
+        "title": "Runge approximation with a prescribed pole set",
+        "strategy": "Approximate the Cauchy integral on an enclosing grid cycle by rational functions with poles on that cycle. Then push each cycle pole through its complementary component to the chosen Runge pole representative; linearity assembles the pushed local approximants into the desired global rational approximation.",
+        "deps": [
+          "def-rational-approximation-with-a-runge-pole-set",
+          "lem-cauchy-riemann-sums-give-rational-approximation",
+          "lem-runge-pole-pushing-lemma"
+        ]
+      },
+      {
+        "id": "cor-runge-polynomial-approximation",
+        "kind": "corollary",
+        "title": "Runge polynomial approximation when the complement is connected",
+        "strategy": "If the complement of the compact set is connected, the singleton pole set {infinity} meets its only complementary component. Apply the prescribed-poles theorem with that pole set, then identify rational functions whose only pole is at infinity with polynomials.",
+        "deps": [
+          "thm-runge-approximation-with-prescribed-poles"
+        ]
+      },
+      {
+        "id": "def-runge-approximation-on-a-plane-domain",
+        "kind": "definition",
+        "title": "Runge approximation on a plane domain",
+        "deps": [
+          "cor-runge-polynomial-approximation"
+        ]
+      },
+      {
+        "id": "thm-runge-approximation-on-plane-domains",
+        "kind": "theorem",
+        "title": "Runge approximation on plane domains",
+        "strategy": "Fix a canonical exhaustion of the domain by compact sets whose complementary components already register the outside of the domain. Apply the compact-set Runge theorem on each exhaustion set with error 1/n and diagonalize along the exhaustion to obtain local-uniform approximation on the whole domain.",
+        "deps": [
+          "def-runge-approximation-on-a-plane-domain",
+          "thm-runge-approximation-with-prescribed-poles"
+        ]
+      },
+      {
+        "id": "thm-mittag-leffler-theorem-on-the-plane",
+        "kind": "theorem",
+        "title": "Mittag-Leffler on the complex plane",
+        "strategy": "Enumerate the prescribed poles so that they escape to infinity. For each principal part, subtract a Taylor polynomial on a large centered disc so that the corrected term is small there; the resulting locally normal series of meromorphic terms converges to a meromorphic function with the desired principal parts.",
+        "deps": [
+          "def-principal-part-at-an-isolated-point",
+          "cor-runge-polynomial-approximation"
+        ]
+      },
+      {
+        "id": "thm-mittag-leffler-theorem-on-plane-domains",
+        "kind": "theorem",
+        "title": "Mittag-Leffler on plane domains",
+        "strategy": "Use a canonical exhaustion of the domain and group the discrete pole set into finite layers. On each new layer, subtract a Runge approximant on the previous compact set to make the correction uniformly tiny there; the resulting series converges locally uniformly away from the poles and preserves the prescribed principal parts.",
+        "deps": [
+          "def-principal-part-at-an-isolated-point",
+          "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "thm-runge-approximation-with-prescribed-poles"
+        ]
+      },
+      {
+        "id": "thm-mittag-leffler-expansion-of-pi-cotangent",
+        "kind": "theorem",
+        "title": "The Mittag-Leffler expansion of pi cotangent",
+        "strategy": "Integrate pi cot(pi w)/(w^2-z^2) around large half-integer rectangles. The residue theorem gives the symmetric pole sum, and the boundary integral vanishes because cotangent stays uniformly bounded on those edges.",
+        "deps": [
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "def-tangent-cotangent-secant-cosecant",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "thm-complex-sine-and-cosine-zero-sets",
+          "thm-residue-theorem-null-homologous-cycle"
+        ]
+      },
+      {
+        "id": "cor-partial-fraction-expansion-of-pi-squared-cosecant-squared",
+        "kind": "corollary",
+        "title": "The partial-fraction expansion of pi-squared cosecant-squared",
+        "strategy": "Differentiate the cotangent partial-fraction expansion termwise on compact sets away from the integers. The derivative of cotangent is minus cosecant-squared, and the derivative of each simple-pole term yields the required double-pole series.",
+        "deps": [
+          "thm-mittag-leffler-expansion-of-pi-cotangent",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ]
+      },
+      {
+        "id": "thm-zero-divisor-theorem-on-plane-domains",
+        "kind": "theorem",
+        "title": "Every discrete effective divisor on a plane domain is the zero divisor of a holomorphic function",
+        "strategy": "Build local factors that create the desired zeros on each exhaustion layer. Runge-correct the partial products on earlier compact sets so that the corrections converge normally, then compare with the already-published plane case on the whole complex plane.",
+        "deps": [
+          "thm-runge-approximation-on-plane-domains"
+        ]
+      },
+      {
+        "id": "cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients",
+        "kind": "corollary",
+        "title": "Every meromorphic function on a plane domain is a quotient of holomorphic functions",
+        "strategy": "Apply the zero-divisor theorem to the pole divisor of the meromorphic function to construct a holomorphic denominator with exactly those zeros. Multiplying by that denominator removes the poles, so the original function is a quotient of the resulting holomorphic numerator by the constructed denominator.",
+        "deps": [
+          "def-meromorphic-function-complex-domain",
+          "thm-removable-singularity-characterizations",
+          "thm-zero-divisor-theorem-on-plane-domains"
+        ]
+      },
+      {
+        "id": "cor-meromorphic-functions-on-a-domain-form-a-field",
+        "kind": "corollary",
+        "title": "Meromorphic functions on a connected plane domain form a field",
+        "strategy": "Addition and multiplication are local. For a nonzero meromorphic function, the quotient theorem gives a holomorphic numerator-denominator presentation; connectedness keeps the numerator from vanishing identically, so the reciprocal is meromorphic wherever the function is nonzero and extends meromorphically across its zero set.",
+        "deps": [
+          "cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients"
+        ]
+      },
+      {
+        "id": "rem-choice-strength-of-runge-and-mittag-leffler",
+        "kind": "remark",
+        "title": "Choice bookkeeping for Runge and Mittag-Leffler",
+        "deps": [
+          "thm-runge-approximation-on-plane-domains",
+          "thm-mittag-leffler-theorem-on-plane-domains"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 340,
+    "id": "mittag-leffler-and-runges-theorem-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Mittag-Leffler and Runge's Theorem — Examples",
+    "companion": "mittag-leffler-and-runges-theorem",
+    "requires": [
+      "mittag-leffler-and-runges-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-one-over-z-not-polynomially-approximable-on-unit-circle",
+        "kind": "example",
+        "title": "$1/z$ is not uniformly approximable by polynomials on the unit circle",
+        "strategy": "Assume uniform polynomial approximation on the circle. Integrate the approximants and the target around the unit circle; the polynomial integrals vanish while the integral of 1/z is 2pi i, giving the contradiction.",
+        "deps": [
+          "cor-runge-polynomial-approximation"
+        ]
+      },
+      {
+        "id": "ex-pole-pushing-along-three-discs",
+        "kind": "example",
+        "title": "Pole pushing along an explicit chain of three discs",
+        "strategy": "Choose concrete centers forming a disc chain inside one complementary component and write the successive geometric-series approximants that move the pole from the first center to the second, then to the third, and finally to infinity.",
+        "deps": [
+          "lem-runge-pole-pushing-lemma"
+        ]
+      },
+      {
+        "id": "ex-cotangent-expansion-computes-sum-of-one-over-n-squared-plus-a-squared",
+        "kind": "example",
+        "title": "The cotangent expansion computes $\\sum_{n\\in\\mathbb Z} 1/(n^2+a^2)$",
+        "strategy": "Evaluate the cotangent partial-fraction expansion at ia and separate the n=0 term from the symmetric pairs n and -n. Rearranging the resulting identity gives the closed form for the series.",
+        "deps": [
+          "thm-mittag-leffler-expansion-of-pi-cotangent"
+        ]
+      },
+      {
+        "id": "ex-mittag-leffler-function-with-double-poles-at-the-integers",
+        "kind": "example",
+        "title": "A Mittag-Leffler function with double poles at the integers",
+        "strategy": "Prescribe the principal part 1/(z-n)^2 at each integer and apply the plane Mittag-Leffler theorem. The verification checks that no new poles appear and that every prescribed pole order is exactly two.",
+        "deps": [
+          "thm-mittag-leffler-theorem-on-the-plane"
+        ]
+      },
+      {
+        "id": "fs-runge-gives-polynomial-approximation-on-any-compact-set",
+        "kind": "false-statement",
+        "title": "FALSE: Runge's theorem gives polynomial approximation on every compact set",
+        "strategy": "Use the unit circle and the function 1/z. If polynomials approximated 1/z uniformly there, the contour integrals would converge to 2pi i, but every polynomial integral around the circle is zero.",
+        "deps": [
+          "ex-one-over-z-not-polynomially-approximable-on-unit-circle"
+        ]
+      },
+      {
+        "id": "cex-annulus-needs-a-pole-in-each-bounded-complementary-component",
+        "kind": "counterexample",
+        "title": "The annulus shows Runge approximation needs a pole in each bounded complementary component",
+        "strategy": "Take K to be a round annulus and test approximation of 1/z. Rational approximants whose poles miss the bounded complementary component would extend holomorphically across the inner hole, so the same contour-integral obstruction as on the unit circle rules them out.",
+        "deps": [
+          "thm-runge-approximation-with-prescribed-poles"
+        ]
+      },
+      {
+        "id": "fs-meromorphic-function-equals-the-naive-sum-of-its-principal-parts",
+        "kind": "false-statement",
+        "title": "FALSE: a meromorphic function always equals the naive sum of its principal parts",
+        "strategy": "Use the principal parts -n/(z-n) at the positive integers. Each term is eventually close to 1 at any fixed noninteger positive point, so any uncorrected grouped sum diverges there; the convergence-forcing corrections in Mittag-Leffler's theorem are therefore essential.",
+        "deps": [
+          "thm-mittag-leffler-theorem-on-the-plane"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 343,
+    "id": "the-gamma-function",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "The Gamma Function",
+    "companion": "the-gamma-function-examples",
+    "requires": [
+      "infinite-products-and-weierstrass-factorisation",
+      "the-residue-theorem",
+      "improper-integrals",
+      "analyticity-liouville-and-morera",
+      "product-measures-and-the-fubini-tonelli-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-euler-gamma-function",
+        "kind": "definition",
+        "title": "Euler's Gamma function on the right half-plane",
+        "deps": []
+      },
+      {
+        "id": "lem-gamma-integral-converges-locally-uniformly",
+        "kind": "lemma",
+        "title": "Euler's Gamma integral converges locally uniformly on the right half-plane",
+        "strategy": "Split the improper integral at 1. On a compact vertical strip in Re z > 0, dominate the near-zero part by t^(a-1) and the tail by t^(b-1)e^(-t), where a and b bound the real parts on the strip.",
+        "deps": [
+          "def-euler-gamma-function"
+        ]
+      },
+      {
+        "id": "thm-euler-gamma-function-is-holomorphic",
+        "kind": "theorem",
+        "title": "Euler's Gamma function is holomorphic on the right half-plane",
+        "strategy": "Integrate over [1/n,n] and use the published holomorphic finite-interval parameter-integral theorem on each truncation. The local-uniform convergence lemma lets the truncated holomorphic functions converge locally uniformly to Gamma, so the limit is holomorphic.",
+        "deps": [
+          "lem-gamma-integral-converges-locally-uniformly",
+          "thm-holomorphic-parameter-riemann-integral",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ]
+      },
+      {
+        "id": "thm-complex-gamma-restricts-to-the-real-gamma-function",
+        "kind": "theorem",
+        "title": "The complex Gamma function restricts to the real Gamma function",
+        "strategy": "On the positive real axis, the complex integral uses the same real branch t^(x-1) as the published real definition. The local-uniform convergence and the real convergence theorem justify identifying the complex and real constructions pointwise on (0,infinity).",
+        "deps": [
+          "def-euler-gamma-function",
+          "def-real-gamma-function-by-the-euler-integral",
+          "thm-euler-gamma-function-is-holomorphic",
+          "thm-real-gamma-euler-integral-convergence"
+        ]
+      },
+      {
+        "id": "thm-gamma-functional-equation",
+        "kind": "theorem",
+        "title": "The Gamma functional equation",
+        "strategy": "Integrate by parts on [1/n,n] with u=t^z and dv=e^(-t)dt. The boundary terms vanish uniformly on compact right-half-plane strips, so passing to the improper limit gives Gamma(z+1)=zGamma(z).",
+        "deps": [
+          "def-euler-gamma-function",
+          "lem-gamma-integral-converges-locally-uniformly",
+          "thm-integration-by-parts"
+        ]
+      },
+      {
+        "id": "cor-gamma-factorial-values",
+        "kind": "corollary",
+        "title": "Gamma at the positive integers",
+        "strategy": "Evaluate Gamma(1) directly from the integral and iterate the functional equation.",
+        "deps": [
+          "thm-gamma-functional-equation"
+        ]
+      },
+      {
+        "id": "thm-gamma-meromorphic-continuation",
+        "kind": "theorem",
+        "title": "Meromorphic continuation of Gamma",
+        "strategy": "Use the functional equation to define Gamma(z)=Gamma(z+n+1)/(z(z+1)...(z+n)) away from the nonpositive integers. The definitions agree on overlaps, give a meromorphic extension to the plane, and the explicit denominator identifies the simple poles and their residues.",
+        "deps": [
+          "cor-gamma-factorial-values",
+          "thm-gamma-functional-equation"
+        ]
+      },
+      {
+        "id": "thm-euler-limit-formula-for-gamma",
+        "kind": "theorem",
+        "title": "Euler's limit formula for Gamma",
+        "strategy": "Prove the finite-n formula on the right half-plane, shift compact sets into that half-plane by the recurrence, and pass to the limit using the explicit continuation formula from the meromorphic-extension theorem.",
+        "deps": [
+          "thm-gamma-meromorphic-continuation",
+          "thm-beta-gamma-identity"
+        ]
+      },
+      {
+        "id": "thm-gamma-weierstrass-product",
+        "kind": "theorem",
+        "title": "The Weierstrass product for reciprocal Gamma",
+        "strategy": "Rewrite Euler's limit formula by isolating the harmonic-number exponential factor and passing to the limit. The resulting product is the canonical genus-one product with zeros at the nonpositive integers, and local uniform convergence follows from the same exponential renormalization.",
+        "deps": [
+          "thm-euler-limit-formula-for-gamma",
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic"
+        ]
+      },
+      {
+        "id": "cor-gamma-function-has-no-zeros",
+        "kind": "corollary",
+        "title": "Gamma has no zeros",
+        "strategy": "The Weierstrass product gives 1/Gamma as an entire function whose zero set is exactly the nonpositive integers. Therefore Gamma has poles there and nowhere vanishes.",
+        "deps": [
+          "thm-gamma-weierstrass-product"
+        ]
+      },
+      {
+        "id": "thm-euler-reflection-formula",
+        "kind": "theorem",
+        "title": "Euler's reflection formula",
+        "strategy": "Multiply the reciprocal-Gamma product at z and 1-z and compare the resulting product with the published sine product. The zeros and normalization match, so Gamma(z)Gamma(1-z)=pi/sin(pi z) as a meromorphic identity.",
+        "deps": [
+          "thm-gamma-weierstrass-product",
+          "thm-sine-has-its-weierstrass-product",
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic"
+        ]
+      },
+      {
+        "id": "cor-gamma-one-half-value",
+        "kind": "corollary",
+        "title": "The value of Gamma at one half",
+        "strategy": "Evaluate the reflection formula at z=1/2 and use the bridge item to identify the positive square root with the already-published real value.",
+        "deps": [
+          "cor-real-gamma-one-half-is-root-pi",
+          "thm-complex-gamma-restricts-to-the-real-gamma-function",
+          "thm-euler-reflection-formula"
+        ]
+      },
+      {
+        "id": "def-euler-beta-function",
+        "kind": "definition",
+        "title": "Euler's Beta function on the right half-planes",
+        "deps": []
+      },
+      {
+        "id": "thm-beta-gamma-identity",
+        "kind": "theorem",
+        "title": "The Beta-Gamma identity",
+        "strategy": "First fix one positive real parameter and prove the Beta function is holomorphic in the other variable by truncation. Then combine the real Beta-Gamma identity with the identity theorem, and repeat with the roles of p and q reversed to cover the full right-half-plane product.",
+        "deps": [
+          "def-euler-beta-function",
+          "def-euler-gamma-function",
+          "thm-euler-gamma-function-is-holomorphic",
+          "thm-holomorphic-parameter-riemann-integral",
+          "thm-real-beta-gamma-identity",
+          "thm-complex-gamma-restricts-to-the-real-gamma-function",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ]
+      },
+      {
+        "id": "thm-gauss-multiplication-formula",
+        "kind": "theorem",
+        "title": "Gauss's multiplication formula",
+        "strategy": "Compare the reciprocal-Gamma products of Gamma(z+k/m) for k=0,...,m-1 with the product for Gamma(mz). The zero sets and exponential factors match after collecting the m progressions, and the remaining constant is fixed by evaluating at a positive real point.",
+        "deps": [
+          "thm-gamma-weierstrass-product"
+        ]
+      },
+      {
+        "id": "thm-legendre-duplication-formula",
+        "kind": "theorem",
+        "title": "Legendre's duplication formula",
+        "strategy": "Take the case m=2 of Gauss's multiplication formula and then replace z by z/2.",
+        "deps": [
+          "thm-gauss-multiplication-formula"
+        ]
+      },
+      {
+        "id": "thm-stirling-formula-gamma",
+        "kind": "theorem",
+        "title": "Stirling's formula for Gamma",
+        "strategy": "Take logarithms of the reciprocal-Gamma product with the principal branch, compare the finite truncations to the corresponding harmonic and logarithmic asymptotics, and control the remainder uniformly on each closed sector |arg z|<=pi-delta.",
+        "deps": [
+          "thm-euler-mascheroni-constant-and-harmonic-asymptotic",
+          "thm-gamma-weierstrass-product",
+          "thm-real-stirling-formula"
+        ]
+      },
+      {
+        "id": "def-hankel-contour-and-power-branch",
+        "kind": "definition",
+        "title": "The Hankel contour and the principal power branch",
+        "deps": []
+      },
+      {
+        "id": "thm-hankel-representation-for-reciprocal-gamma",
+        "kind": "theorem",
+        "title": "Hankel's representation for reciprocal Gamma",
+        "strategy": "Integrate e^t t^(-z) around the negatively cut Hankel contour with the fixed principal branch. On the initial convergence region the lower and upper sides of the cut differ by the sine factor, giving the reciprocal-Gamma formula; then extend meromorphically to all z.",
+        "deps": [
+          "def-hankel-contour-and-power-branch",
+          "thm-euler-reflection-formula",
+          "thm-gamma-meromorphic-continuation"
+        ]
+      },
+      {
+        "id": "fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma",
+        "kind": "false-statement",
+        "title": "FALSE: the Gamma recurrence and factorial values characterize Gamma",
+        "strategy": "The B page constructs Gamma(z)e^(sin 2pi z), which is entire and 1-periodic in the exponential factor. The periodic factor preserves both the recurrence and the positive-integer values, but the resulting function is not Gamma.",
+        "deps": [
+          "cor-gamma-factorial-values",
+          "thm-gamma-functional-equation"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 344,
+    "id": "the-gamma-function-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "The Gamma Function — Examples",
+    "companion": "the-gamma-function",
+    "requires": [
+      "the-gamma-function"
+    ],
+    "items": [
+      {
+        "id": "ex-gamma-values-at-half-integers-and-negative-half-integers",
+        "kind": "example",
+        "title": "Half-integer and negative-half-integer values of Gamma",
+        "strategy": "Start from Gamma(1/2)=sqrt(pi) and iterate the functional equation forward and backward to compute Gamma(3/2), Gamma(5/2), and Gamma(-1/2).",
+        "deps": [
+          "cor-gamma-one-half-value",
+          "thm-gamma-functional-equation"
+        ]
+      },
+      {
+        "id": "ex-residue-of-gamma-at-minus-two",
+        "kind": "example",
+        "title": "The residue of Gamma at z=-2",
+        "strategy": "Apply the meromorphic-continuation residue formula at n=2.",
+        "deps": [
+          "thm-gamma-meromorphic-continuation"
+        ]
+      },
+      {
+        "id": "ex-beta-one-half-one-half-equals-pi",
+        "kind": "example",
+        "title": "$B(1/2,1/2)=\\pi$",
+        "strategy": "Insert p=q=1/2 into the Beta-Gamma identity and use Gamma(1/2)=sqrt(pi) together with Gamma(1)=1.",
+        "deps": [
+          "cor-gamma-one-half-value",
+          "cor-gamma-factorial-values",
+          "thm-beta-gamma-identity"
+        ]
+      },
+      {
+        "id": "ex-reflection-formula-at-one-half",
+        "kind": "example",
+        "title": "Checking the reflection formula at z=1/2",
+        "strategy": "Evaluate both sides of the reflection formula at z=1/2 and simplify using Gamma(1/2)=sqrt(pi).",
+        "deps": [
+          "cor-gamma-one-half-value",
+          "thm-euler-reflection-formula"
+        ]
+      },
+      {
+        "id": "ex-stirling-approximation-to-ten-factorial",
+        "kind": "example",
+        "title": "Stirling's approximation for 10!",
+        "strategy": "Evaluate Stirling's formula at z=11 and compare the approximation with the exact factorial value from the recurrence.",
+        "deps": [
+          "cor-gamma-factorial-values",
+          "thm-stirling-formula-gamma"
+        ]
+      },
+      {
+        "id": "cex-periodic-perturbation-preserves-the-gamma-recurrence-and-factorial-values",
+        "kind": "counterexample",
+        "title": "A periodic perturbation preserves the Gamma recurrence and factorial values",
+        "strategy": "Take F(z)=Gamma(z)e^(sin 2pi z). The exponential factor is entire, 1-periodic, and equals 1 at every integer, so F satisfies the same recurrence and integer values as Gamma but differs from Gamma away from the integers.",
+        "deps": [
+          "fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma"
+        ]
+      },
+      {
+        "id": "fs-gamma-is-entire",
+        "kind": "false-statement",
+        "title": "FALSE: the Gamma function is entire",
+        "strategy": "The meromorphic continuation theorem exhibits simple poles at 0,-1,-2,..., so Gamma cannot be entire.",
+        "deps": [
+          "thm-gamma-meromorphic-continuation"
+        ]
+      }
+    ]
+  }
+]

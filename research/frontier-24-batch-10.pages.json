@@ -1,0 +1,463 @@
+[
+  {
+    "order": 583,
+    "id": "deterministic-finite-automata-and-regular-languages",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Deterministic Finite Automata and Regular Languages",
+    "companion": "deterministic-finite-automata-and-regular-languages-examples",
+    "requires": [
+      "formal-languages-encodings-and-decision-problems",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "def-deterministic-finite-automaton",
+        "kind": "definition",
+        "title": "Deterministic finite automata",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-function",
+          "def-finite-cardinality",
+          "def-cartesian-product"
+        ]
+      },
+      {
+        "id": "def-extended-dfa-transition-function",
+        "kind": "definition",
+        "title": "The extended transition function of a DFA",
+        "deps": [
+          "def-deterministic-finite-automaton"
+        ]
+      },
+      {
+        "id": "thm-existence-and-uniqueness-of-extended-dfa-transition",
+        "kind": "theorem",
+        "title": "The extended transition function exists and is unique",
+        "strategy": "Use recursion on the length of the input word. The empty word gives the base case, and the clause for a word of the form $ua$ determines the next state uniquely from the already-constructed value of $\\delta^*(p,u)$ and the total transition function $\\delta$.",
+        "deps": [
+          "def-extended-dfa-transition-function"
+        ]
+      },
+      {
+        "id": "lem-extended-dfa-transition-respects-concatenation",
+        "kind": "lemma",
+        "title": "Extended DFA transition respects concatenation",
+        "strategy": "Fix a state $p$ and a first word $u$, and induct on the length of the second word $v$ to prove $\\delta^*(p,uv)=\\delta^*(\\delta^*(p,u),v)$. The inductive step is exactly the recursive clause from the previous theorem.",
+        "deps": [
+          "thm-existence-and-uniqueness-of-extended-dfa-transition"
+        ]
+      },
+      {
+        "id": "def-dfa-acceptance-and-recognized-language",
+        "kind": "definition",
+        "title": "Acceptance of a word by a DFA and the recognized language",
+        "deps": [
+          "def-extended-dfa-transition-function",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "def-regular-language-by-dfa-recognition",
+        "kind": "definition",
+        "title": "Regular languages",
+        "deps": [
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "prop-every-finite-language-is-regular",
+        "kind": "proposition",
+        "title": "Every finite language is regular",
+        "strategy": "For a finite language $L$, take the finite set of all prefixes of words in $L$ and adjoin one sink state. Reading a letter extends a prefix when possible and otherwise falls into the sink. Mark exactly the prefix states that are full words of $L$ as accepting. This finite trie-with-sink accepts exactly $L$.",
+        "deps": [
+          "def-regular-language-by-dfa-recognition",
+          "def-finite-cardinality",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "thm-product-dfa-for-union-and-intersection",
+        "kind": "theorem",
+        "title": "The product construction gives DFA's for union and intersection",
+        "strategy": "Given DFAs over the same alphabet, run them in parallel on the Cartesian product of their state sets. Induct on the input word to show the product machine reaches exactly the ordered pair of component states. Then choose accepting pairs $F_1\\times F_2$ for intersection and $(F_1\\times Q_2)\\cup(Q_1\\times F_2)$ for union.",
+        "deps": [
+          "def-dfa-acceptance-and-recognized-language",
+          "def-language-boolean-operations",
+          "lem-extended-dfa-transition-respects-concatenation"
+        ]
+      },
+      {
+        "id": "thm-complementing-accept-states-complements-the-language",
+        "kind": "theorem",
+        "title": "Complementing the accepting states complements the recognized language",
+        "strategy": "Keep the same total transition graph and start state, replace the accepting set $F$ by $Q\\setminus F$, and unpack the acceptance definition inside the fixed ambient alphabet $\\Sigma^*$.",
+        "deps": [
+          "def-dfa-acceptance-and-recognized-language",
+          "def-language-boolean-operations",
+          "def-deterministic-finite-automaton"
+        ]
+      },
+      {
+        "id": "cor-regular-languages-are-closed-under-boolean-operations",
+        "kind": "corollary",
+        "title": "Regular languages are closed under the Boolean operations over a fixed alphabet",
+        "strategy": "Union and intersection come from the product construction, complement comes from swapping accepting states, and the remaining Boolean operations are built from these by the language identities from the previous page.",
+        "deps": [
+          "def-regular-language-by-dfa-recognition",
+          "thm-product-dfa-for-union-and-intersection",
+          "thm-complementing-accept-states-complements-the-language"
+        ]
+      },
+      {
+        "id": "thm-dfa-for-language-difference",
+        "kind": "theorem",
+        "title": "The product construction gives a DFA for language difference",
+        "strategy": "Reuse the product DFA and declare a pair $(p,q)$ accepting exactly when $p\\in F_1$ and $q\\notin F_2$. The same product-run invariant used for union and intersection then yields $L(D_1)\\setminus L(D_2)$.",
+        "deps": [
+          "def-dfa-acceptance-and-recognized-language",
+          "def-language-boolean-operations",
+          "lem-extended-dfa-transition-respects-concatenation",
+          "thm-product-dfa-for-union-and-intersection"
+        ]
+      },
+      {
+        "id": "def-reachable-dfa-state",
+        "kind": "definition",
+        "title": "Reachable states of a DFA",
+        "deps": [
+          "def-extended-dfa-transition-function"
+        ]
+      },
+      {
+        "id": "lem-removing-unreachable-states-preserves-language",
+        "kind": "lemma",
+        "title": "Removing unreachable states preserves the recognized language",
+        "strategy": "Restrict the DFA to the states reached by some input from the start state. Every accepting run of the original DFA stays inside that reachable submachine because every visited state is reached by a prefix of the accepted word, and the restricted machine has the same transitions on those states.",
+        "deps": [
+          "def-reachable-dfa-state",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "prop-published-prefix-automata-extend-to-factor-avoidance-dfas",
+        "kind": "proposition",
+        "title": "The published prefix automata extend canonically to DFAs for factor-avoidance languages",
+        "strategy": "Start from the published prefix-state machine on $S_B$. Adjoin one sink state for every rejected letter transition, keep every state in $S_B$ accepting, and let the sink loop on every letter. Induct on the input length to show that the machine stays in the longest allowed proper-prefix suffix while no forbidden factor has appeared and enters the sink exactly when one does.",
+        "deps": [
+          "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+          "def-finite-words-factor-avoidance-and-prefix-states",
+          "def-deterministic-finite-automaton",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality",
+        "kind": "false-statement",
+        "title": "FALSE: a DFA transition diagram may omit a sink without changing totality",
+        "strategy": "Refute the claim with a one-state machine over $\\{0,1\\}$ drawn with only a loop on $0$. As drawn there is no transition on input $1$, so the picture does not specify a total transition function and therefore does not yet define a DFA.",
+        "deps": [
+          "def-deterministic-finite-automaton"
+        ]
+      },
+      {
+        "id": "fs-complementing-a-dfa-complements-its-transition-graph",
+        "kind": "false-statement",
+        "title": "FALSE: complementing a DFA complements its transition graph",
+        "strategy": "Refute the claim with a small complete DFA whose complement language is obtained by changing only the accepting set. Graph-complementing the transition relation generally destroys the one-outgoing-edge-per-letter property and does not preserve the original start-state runs.",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "thm-complementing-accept-states-complements-the-language"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 584,
+    "id": "deterministic-finite-automata-and-regular-languages-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Deterministic Finite Automata and Regular Languages: Examples and Counterexamples",
+    "requires": [
+      "deterministic-finite-automata-and-regular-languages"
+    ],
+    "items": [
+      {
+        "id": "ex-extended-dfa-transition-respects-concatenation",
+        "kind": "example",
+        "title": "Computing $\\delta^*(q,uv)$ as $\\delta^*(\\delta^*(q,u),v)$",
+        "strategy": "Use the standard four-state DFA for words over $\\{a,b\\}$ ending in `abb`. Take $u=ab$ and $v=abb$, compute both $\\delta^*(q_0,uv)$ and $\\delta^*(\\delta^*(q_0,u),v)$ explicitly, and check that both calculations land in the accepting state.",
+        "deps": [
+          "lem-extended-dfa-transition-respects-concatenation",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa",
+        "kind": "example",
+        "title": "Adding a sink turns the published prefix automaton for avoiding `11` into a DFA",
+        "strategy": "Let $B=\\{11\\}$ over $\\{0,1\\}$. The published prefix states are $\\varepsilon$ and `1`. Adjoin a sink state $\\bot$, send the missing transition from `1` on input `1` to $\\bot$, and let $\\bot$ loop on both letters. Mark $\\varepsilon$ and `1` accepting. The resulting DFA accepts exactly the binary words with no factor `11`.",
+        "deps": [
+          "prop-published-prefix-automata-extend-to-factor-avoidance-dfas"
+        ]
+      },
+      {
+        "id": "cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality",
+        "kind": "counterexample",
+        "title": "A missing `1`-transition shows the drawn machine is not yet a DFA",
+        "strategy": "Draw one start-and-accept state with only a loop on `0`. This picture omits any transition on `1`, so it does not define a total map $Q\\times\\Sigma\\to Q$. Adding a sink repairs the machine, which is exactly why the original claim is false.",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 591,
+    "id": "context-free-grammars-and-normal-forms",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Context-Free Grammars and Normal Forms",
+    "companion": "context-free-grammars-and-normal-forms-examples",
+    "requires": [
+      "formal-languages-encodings-and-decision-problems",
+      "ramsey-theory"
+    ],
+    "items": [
+      {
+        "id": "def-context-free-grammar",
+        "kind": "definition",
+        "title": "Context-free grammars",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-one-step-and-reflexive-transitive-derivation",
+        "kind": "definition",
+        "title": "One-step derivation and finite derivation in a context-free grammar",
+        "deps": [
+          "def-context-free-grammar",
+          "def-relation-domain-range-and-field"
+        ]
+      },
+      {
+        "id": "def-language-generated-by-a-cfg",
+        "kind": "definition",
+        "title": "The language generated by a context-free grammar",
+        "deps": [
+          "def-one-step-and-reflexive-transitive-derivation"
+        ]
+      },
+      {
+        "id": "def-leftmost-and-rightmost-derivation",
+        "kind": "definition",
+        "title": "Leftmost and rightmost derivations",
+        "deps": [
+          "def-one-step-and-reflexive-transitive-derivation"
+        ]
+      },
+      {
+        "id": "def-parse-tree-and-yield",
+        "kind": "definition",
+        "title": "Parse trees and their yields",
+        "deps": [
+          "def-context-free-grammar",
+          "def-finitely-branching-tree-on-finite-sequences",
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "thm-derivation-parse-tree-correspondence",
+        "kind": "theorem",
+        "title": "Derivations and parse trees correspond",
+        "strategy": "Build a finite parse tree from a finite derivation by recording each production at the expanded leaf, treating $A\\to\\varepsilon$ as a marked variable leaf. Conversely, read the unique leftmost or rightmost derivation from a finite parse tree by expanding its variable leaves in frontier order.",
+        "deps": [
+          "def-leftmost-and-rightmost-derivation",
+          "def-parse-tree-and-yield"
+        ]
+      },
+      {
+        "id": "def-ambiguity-and-inherent-ambiguity",
+        "kind": "definition",
+        "title": "Ambiguous grammars, unambiguous grammars, and inherently ambiguous languages",
+        "deps": [
+          "thm-derivation-parse-tree-correspondence",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "def-nullable-generating-and-reachable-variable",
+        "kind": "definition",
+        "title": "Nullable, generating, and reachable variables",
+        "deps": [
+          "def-context-free-grammar",
+          "def-one-step-and-reflexive-transitive-derivation"
+        ]
+      },
+      {
+        "id": "thm-elimination-of-useless-symbols",
+        "kind": "theorem",
+        "title": "Eliminating useless symbols preserves the generated language",
+        "strategy": "First delete nongenerating variables and their rules, handling the empty-language case separately. Then delete variables that never appear in any sentential form reachable from the start symbol. Any derivation of a terminal string uses only generating and reachable variables, and conversely the reduced grammar keeps every rule used by such a derivation.",
+        "deps": [
+          "def-nullable-generating-and-reachable-variable",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "thm-elimination-of-epsilon-productions",
+        "kind": "theorem",
+        "title": "Epsilon-productions can be eliminated except possibly at the start symbol",
+        "strategy": "Compute the nullable variables, add every rule obtained by deleting nullable occurrences from a right-hand side, and then isolate the case $\\varepsilon\\in L(G)$ with a fresh start symbol that does not appear on any right-hand side. Compare derivations by inserting or deleting the nullable subderivations.",
+        "deps": [
+          "def-nullable-generating-and-reachable-variable",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "thm-elimination-of-unit-productions",
+        "kind": "theorem",
+        "title": "Unit productions can be eliminated",
+        "strategy": "After the epsilon-elimination step, compute the unit-reachability closure among variables. Replace each unit chain $A\\Rightarrow^* B$ by copying every nonunit production of $B$ into $A$. A derivation using unit chains can be compressed to one using the copied nonunit rule, and a derivation in the new grammar can be expanded back through the recorded unit chain.",
+        "deps": [
+          "def-nullable-generating-and-reachable-variable",
+          "thm-elimination-of-epsilon-productions",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "def-chomsky-normal-form",
+        "kind": "definition",
+        "title": "Chomsky normal form",
+        "deps": [
+          "def-context-free-grammar"
+        ]
+      },
+      {
+        "id": "thm-chomsky-normal-form",
+        "kind": "theorem",
+        "title": "Every context-free language has an equivalent grammar in Chomsky normal form",
+        "strategy": "Reduce the grammar by eliminating useless symbols, epsilon-productions, and unit productions. Then replace terminals inside longer right-hand sides by fresh letter variables and binarize every right-hand side of length at least three. The only remaining epsilon rule is the special start-symbol rule when $\\varepsilon$ belongs to the language.",
+        "deps": [
+          "thm-elimination-of-useless-symbols",
+          "thm-elimination-of-epsilon-productions",
+          "thm-elimination-of-unit-productions",
+          "def-chomsky-normal-form"
+        ]
+      },
+      {
+        "id": "def-greibach-normal-form",
+        "kind": "definition",
+        "title": "Greibach normal form",
+        "deps": [
+          "def-context-free-grammar"
+        ]
+      },
+      {
+        "id": "lem-gnf-substitution-step-preserves-language",
+        "kind": "lemma",
+        "title": "Substituting a variable's productions into a leading variable occurrence preserves the language",
+        "strategy": "Replace a production $A\\to uBv$ by the family $A\\to uw_iv$ over the full production family $B\\to w_i$. Any derivation using $A\\to uBv$ and later expanding that same occurrence of $B$ can be compressed to one substituted step even if surrounding-context rewrites occur in between, and each substituted step can be expanded back to the original two-step fragment.",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "def-one-step-and-reflexive-transitive-derivation"
+        ]
+      },
+      {
+        "id": "lem-gnf-left-recursion-elimination-preserves-language",
+        "kind": "lemma",
+        "title": "Eliminating immediate left recursion preserves the language",
+        "strategy": "For rules $A\\to Au_i$ and $A\\to v_j$, introduce a helper variable that stores the tail built from the $u_i$. In a leftmost derivation, any maximal initial block of left-recursive uses ends with one non-left-recursive rule, so group that block into the helper-variable derivation and reverse the regrouping to recover the original derivation.",
+        "deps": [
+          "def-leftmost-and-rightmost-derivation",
+          "def-language-generated-by-a-cfg"
+        ]
+      },
+      {
+        "id": "thm-greibach-normal-form",
+        "kind": "theorem",
+        "title": "Every context-free language has an equivalent grammar in Greibach normal form",
+        "strategy": "Start from a CNF grammar, run a forward pass to remove leading lower-index variables and immediate left recursion, and then run a downward substitution sweep to make both the original and auxiliary variables terminal-leading. The two preceding lemmas justify the exhaustive substitution and left-recursion rewrites, so the final grammar is in Greibach normal form.",
+        "deps": [
+          "thm-chomsky-normal-form",
+          "def-greibach-normal-form",
+          "lem-gnf-substitution-step-preserves-language",
+          "lem-gnf-left-recursion-elimination-preserves-language"
+        ]
+      },
+      {
+        "id": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+        "kind": "theorem",
+        "title": "Context-free languages are closed under union, concatenation, Kleene star, and homomorphism",
+        "strategy": "For union, concatenation, and star, rename variables apart and add a fresh start variable with the standard bridge rules. For a homomorphism into $\\Delta^*$, first rename the source grammar's variables to be disjoint from $\\Delta$, then replace each terminal $a$ in every right-hand side by the word $h(a)$. The resulting grammar still lives over $\\Delta$ and generates exactly the homomorphic image.",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "def-alphabet-homomorphism-and-induced-word-map"
+        ]
+      },
+      {
+        "id": "fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language",
+        "kind": "false-statement",
+        "title": "FALSE: an ambiguous CFG always generates an inherently ambiguous language",
+        "strategy": "Refute the claim with the standard arithmetic-expression language. The grammar $E\\to E+E\\mid E*E\\mid(E)\\mid a\\mid b$ is ambiguous, but the precedence grammar with variables for expressions, terms, and factors generates the same language unambiguously. So the language is not inherently ambiguous.",
+        "deps": [
+          "def-ambiguity-and-inherent-ambiguity"
+        ]
+      },
+      {
+        "id": "fs-cnf-preserves-epsilon-without-an-exception",
+        "kind": "false-statement",
+        "title": "FALSE: converting to Chomsky normal form preserves epsilon without a special start-symbol exception",
+        "strategy": "Refute the claim with the one-rule grammar $S\\to\\varepsilon$. In Chomsky normal form the only allowed epsilon rule is a start-symbol rule whose start symbol does not appear on any right-hand side, so preserving $\\varepsilon$ requires that explicit exception.",
+        "deps": [
+          "def-chomsky-normal-form",
+          "thm-chomsky-normal-form"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 592,
+    "id": "context-free-grammars-and-normal-forms-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Context-Free Grammars and Normal Forms: Examples and Counterexamples",
+    "requires": [
+      "context-free-grammars-and-normal-forms"
+    ],
+    "items": [
+      {
+        "id": "ex-elimination-of-useless-symbols",
+        "kind": "example",
+        "title": "Deleting unreachable and nongenerating variables from a small grammar",
+        "strategy": "Use the grammar with rules $S\\to aSb\\mid ab\\mid A$, $A\\to bA$, and $B\\to cd$. The variable $A$ is reachable but nongenerating, while $B$ is generating but unreachable. Eliminating both leaves the reduced grammar $S\\to aSb\\mid ab$, which generates the same language $\\{a^n b^n : n\\ge 1\\}$.",
+        "deps": [
+          "def-nullable-generating-and-reachable-variable",
+          "thm-elimination-of-useless-symbols"
+        ]
+      },
+      {
+        "id": "ex-cfl-closure-under-union-concatenation-star-and-homomorphism",
+        "kind": "example",
+        "title": "Closure constructions on two small context-free languages",
+        "strategy": "Take $L_1=\\{a^n b^n:n\\ge 0\\}$ and $L_2=\\{c^m d^m:m\\ge 0\\}$ with their standard one-variable grammars. Write the standard new-start-symbol grammars for $L_1\\cup L_2$, $L_1L_2$, and $L_1^*$. Then apply the homomorphism sending $a\\mapsto 0$, $b\\mapsto 1$, $c\\mapsto 00$, and $d\\mapsto 11$ by replacing terminals on right-hand sides accordingly.",
+        "deps": [
+          "thm-cfl-closure-under-union-concatenation-star-and-homomorphism"
+        ]
+      },
+      {
+        "id": "cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language",
+        "kind": "counterexample",
+        "title": "Arithmetic expressions admit both ambiguous and unambiguous CFGs",
+        "strategy": "Use the ambiguous grammar $E\\to E+E\\mid E*E\\mid(E)\\mid a\\mid b$ and the unambiguous precedence grammar $E\\to E+T\\mid T$, $T\\to T*F\\mid F$, $F\\to(E)\\mid a\\mid b$. The string $a+b*a$ has two parse trees in the first grammar, while the second grammar generates the same expression language with a unique precedence-respecting parse.",
+        "deps": [
+          "def-ambiguity-and-inherent-ambiguity",
+          "fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language"
+        ]
+      }
+    ]
+  }
+]

@@ -2,7 +2,7 @@
 id: def-computation-alphabet-and-word-convention
 kind: definition
 title: "Computation alphabets, words, the empty word, and $\\Sigma^*$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-30
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

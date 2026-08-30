@@ -60,6 +60,7 @@ parts:
       - the-group-algebra-and-representations
       - maschkes-theorem-and-complete-reducibility
       - characters-and-the-orthogonality-relations
+      - induced-representations-and-frobenius-reciprocity
 ---
 
 ## groups-and-quotients
@@ -120,10 +121,9 @@ canonical form, Cayley-Hamilton, Jordan form, and the similarity criterion.
 
 A split extension is a semidirect product, so actions assemble groups from normal pieces,
 and Sylow theory turns the prime divisors of $|G|$ into existence, conjugacy, and counting
-statements for $p$-subgroups. Nilpotence, the Frattini subgroup, and the Galois
-correspondence refine that control, while finite fields, cyclotomic extensions,
-solvability by radicals, and Artin's field-theoretic proof of the fundamental theorem of
-algebra show how explicit extensions are built. The representation pages then pass to
-$k[G]$-modules: Maschke gives complete reducibility when $\operatorname{char} k \nmid |G|$,
-and characters turn traces into orthogonality, multiplicity, regular-character, and
-kernel-detection formulas.
+statements for $p$-subgroups. Nilpotence, the Frattini subgroup, the Galois
+correspondence, finite fields, cyclotomic extensions, solvability by radicals, and Artin's
+proof of the fundamental theorem of algebra show how extensions are built. Representation
+theory then passes to $k[G]$-modules: Maschke gives semisimplicity, characters encode
+orthogonality and central-character arithmetic, and induction adds Frobenius reciprocity,
+Mackey decomposition, and Burnside's $p^aq^b$ solvability theorem.

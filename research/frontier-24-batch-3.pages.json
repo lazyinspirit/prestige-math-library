@@ -1,0 +1,380 @@
+[
+  {
+    "order": 168.003,
+    "id": "direct-matrix-factorisations-lu-cholesky-and-qr",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Direct Matrix Factorisations: LU, Cholesky and QR",
+    "companion": "direct-matrix-factorisations-lu-cholesky-and-qr-examples",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability"
+    ],
+    "items": [
+      {
+        "id": "def-forward-and-back-substitution-for-triangular-systems",
+        "kind": "definition",
+        "title": "Forward and backward substitution for triangular linear systems",
+        "deps": [
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+        "kind": "theorem",
+        "title": "Forward and backward substitution are correct, unique, and quadratic in scalar operations",
+        "strategy": "Solve the entries one row at a time. Induction on the row index gives correctness and uniqueness because each new diagonal entry is nonzero and every earlier unknown is already fixed. The operation count is the sum of the rowwise inner-product lengths.",
+        "deps": [
+          "def-forward-and-back-substitution-for-triangular-systems"
+        ]
+      },
+      {
+        "id": "def-normalised-lu-factorisation",
+        "kind": "definition",
+        "title": "A normalised LU factorisation has a unit lower-triangular L and an upper-triangular U",
+        "deps": [
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "def-ldu-factorisation",
+        "kind": "definition",
+        "title": "An LDU factorisation has unit lower-triangular L, diagonal D, and unit upper-triangular U",
+        "deps": [
+          "def-normalised-lu-factorisation",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-normalised-lu-and-ldu-factorisations-are-unique",
+        "kind": "theorem",
+        "title": "Normalised LU and LDU factorisations are unique when they exist",
+        "strategy": "Compare two factorizations by moving one to the other side. A matrix that is simultaneously unit lower triangular and upper triangular must be the identity, which gives LU uniqueness; splitting the upper factor into its diagonal and unit-upper parts then gives LDU uniqueness.",
+        "deps": [
+          "def-normalised-lu-factorisation",
+          "def-ldu-factorisation",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "def-block-lu-factorisation",
+        "kind": "definition",
+        "title": "Block LU factorisation and the associated Schur complement",
+        "deps": [
+          "def-normalised-lu-factorisation",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+        "kind": "theorem",
+        "title": "An invertible leading block yields block LU through its Schur complement",
+        "strategy": "Write the block equations for A = LU and solve for the off-diagonal blocks using triangular solves against the leading factors. The trailing block is then exactly the Schur complement, and conversely a factorization of that Schur complement reconstructs a block LU factorization of the whole matrix.",
+        "deps": [
+          "def-block-lu-factorisation",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero",
+        "kind": "theorem",
+        "title": "An invertible matrix has an unpivoted unit-lower LU factorisation exactly when all leading principal minors are nonzero",
+        "strategy": "If A = LU, every leading principal block factors as a leading block of L times a leading block of U, so its determinant is the product of the leading pivots and is nonzero. Conversely, induction on the size uses the first nonzero leading minor to form the first pivot, identifies the trailing Schur complement, and shows its leading minors are the determinant ratios needed to continue the recursion.",
+        "deps": [
+          "def-normalised-lu-factorisation",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-multiplicative"
+        ]
+      },
+      {
+        "id": "thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors",
+        "kind": "theorem",
+        "title": "When unpivoted elimination runs to completion, the elimination multipliers are the entries of the normalised LU factors",
+        "strategy": "Express each elimination step as left multiplication by a unit-lower Gauss transform. Inverting the product of these transforms shows that the stored multipliers fill the strict lower triangle of L, while the final reduced matrix is U.",
+        "deps": [
+          "def-normalised-lu-factorisation",
+          "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+        "kind": "definition",
+        "title": "Permutation matrices, partial pivoting, and the pivot-growth factor",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+        "kind": "theorem",
+        "title": "Every real or complex square matrix admits a PLU factorisation, and the first failed pivot marks the singular boundary",
+        "strategy": "At each stage, swap a row with a nonzero maximal entry into the pivot position. If such an entry exists, the remaining elimination step is legitimate and the multiplier theorem applies; if no such entry exists, the active column is zero below the current row and the remaining trailing block is singular.",
+        "deps": [
+          "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "def-normalised-lu-factorisation",
+          "thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-gaussian-elimination-with-partial-pivoting-computes-a-nearby-factorisation-with-pivot-growth-bound",
+        "kind": "theorem",
+        "title": "In the standard real floating-point model, computed pivoted LU is a nearby factorisation with a pivot-growth dependent backward bound",
+        "strategy": "Model each real floating-point multiplier formation and trailing dot-product update, absorb local roundoff into an entrywise perturbation E, transport it back through the row permutation, and bound the resulting backward error using pivot growth and the multiplier bound |L_hat|<=1.",
+        "deps": [
+          "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+          "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds"
+        ]
+      },
+      {
+        "id": "def-cholesky-factorisation-with-positive-diagonal",
+        "kind": "definition",
+        "title": "Hermitian positive-definite matrices and Cholesky factorisation A = LL* with positive diagonal",
+        "deps": [
+          "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution",
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+        "kind": "theorem",
+        "title": "A matrix admits a Cholesky factorisation with positive diagonal exactly when it is Hermitian positive definite, and that factor is unique",
+        "strategy": "If A = LL*, then x*Ax = ||L*x||_2^2 is positive for every nonzero x. Conversely, recurse on the first pivot and the Schur complement, using positivity to show each square root and division is legitimate. Uniqueness follows by comparing two factors and showing their quotient is triangular, unitary, and has positive diagonal, hence is the identity.",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-multiplicative",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-positive-leading-principal-minors-are-equivalent-to-positive-cholesky-pivots",
+        "kind": "theorem",
+        "title": "For real symmetric matrices, positive leading principal minors are equivalent to positive Cholesky pivots",
+        "strategy": "Sylvester's criterion identifies positive definiteness with positive leading principal minors. For a Cholesky factor, the leading principal determinants are products of squared leading diagonal entries, so positivity of one family is equivalent to positivity of the other.",
+        "deps": [
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-sylvesters-criterion-for-positive-definiteness",
+          "thm-determinant-of-a-triangular-matrix"
+        ]
+      },
+      {
+        "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+        "kind": "theorem",
+        "title": "Cholesky solves Hermitian positive-definite systems and has about half the factorisation cost of LU",
+        "strategy": "Once A = LL* is known, solve Ly = b and L*x = y by triangular substitution. The factorization count follows from the recursive column update and matches one triangular half of LU because symmetry halves the trailing work.",
+        "deps": [
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ]
+      },
+      {
+        "id": "def-householder-reflector",
+        "kind": "definition",
+        "title": "Householder reflectors in real or complex inner-product spaces",
+        "deps": [
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "def-real-and-complex-givens-transformations",
+        "kind": "definition",
+        "title": "Real Givens rotations and complex Givens transformations",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+        "kind": "theorem",
+        "title": "Householder reflectors and Givens transformations are unitary and can annihilate prescribed entries",
+        "strategy": "Direct matrix multiplication proves the unitary identities. The parameter choices are then constructed so that a reflector sends a vector to a multiple of e_1 and a Givens transformation zeros a chosen second coordinate without changing the Euclidean norm.",
+        "deps": [
+          "def-householder-reflector",
+          "def-real-and-complex-givens-transformations",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator"
+        ]
+      },
+      {
+        "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+        "kind": "definition",
+        "title": "Full, reduced, and column-pivoted computational QR factorisations",
+        "deps": [
+          "thm-qr-factorisation-over-r-or-c",
+          "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "def-householder-reflector",
+          "def-real-and-complex-givens-transformations"
+        ]
+      },
+      {
+        "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+        "kind": "theorem",
+        "title": "Successive Householder or Givens transformations produce full and reduced QR factorisations with the standard dense operation counts",
+        "strategy": "Introduce zeros below the diagonal column by column. Because each reflector or rotation is unitary, the accumulated left transforms give Q and the transformed matrix is upper triangular; deleting the zero rows gives the reduced factorization. The dense flop counts come from summing the shrinking trailing updates.",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "thm-qr-factorisation-over-r-or-c"
+        ]
+      },
+      {
+        "id": "thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model",
+        "kind": "theorem",
+        "title": "Householder QR is backward stable in the standard real floating-point model",
+        "strategy": "Convert each real floating-point Householder step into an exact orthogonal step for a perturbed trailing block, transport those perturbations back through the computed reflectors, and sum the resulting geometric Frobenius bound to obtain a nearby-factorization estimate.",
+        "deps": [
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ]
+      },
+      {
+        "id": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+        "kind": "theorem",
+        "title": "Exact column-pivoted QR of a real or complex rank-r matrix has an invertible leading triangular block and zero trailing block",
+        "strategy": "Choose columns greedily by residual norm. As long as a nonzero residual column remains, the next diagonal entry of R is nonzero; once the residual space vanishes, every remaining column lies in the span of the chosen ones and the trailing block is zero. Rank then forces exactly r nonzero diagonal pivots.",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-rank-and-nullity"
+        ]
+      },
+      {
+        "id": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+        "kind": "theorem",
+        "title": "Reduced QR over the reals solves full-column-rank least squares without squaring the condition number",
+        "strategy": "Use an orthogonal completion of the reduced QR factorization to identify the least-squares minimizer, then compare the singular values of A and R and invoke the real normal-equations condition-number theorem to show the QR route avoids squaring kappa_2(A).",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "thm-least-squares-solutions-and-normal-equation",
+          "thm-normal-equations-square-the-spectral-condition-number",
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.004,
+    "id": "direct-matrix-factorisations-lu-cholesky-and-qr-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Direct Matrix Factorisations: LU, Cholesky and QR: Examples and Counterexamples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot",
+        "kind": "counterexample",
+        "title": "An invertible matrix can fail unpivoted LU at the first pivot",
+        "strategy": "Use a small invertible matrix whose (1,1)-entry is zero while the determinant is nonzero. The first leading principal minor vanishes, so the LU existence theorem fails immediately even though the matrix itself is invertible.",
+        "deps": [
+          "thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero"
+        ]
+      },
+      {
+        "id": "ex-plu-factorisation-by-hand",
+        "kind": "example",
+        "title": "A full PLU factorisation can be computed explicitly by hand",
+        "strategy": "Carry out the row swaps and elimination steps on a small dense matrix, record the permutation matrix, and verify PA = LU directly.",
+        "deps": [
+          "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+          "def-permutation-matrix-partial-pivoting-and-pivot-growth"
+        ]
+      },
+      {
+        "id": "ex-ldu-factorisation-and-its-unique-diagonal-pivots",
+        "kind": "example",
+        "title": "An LDU factorisation isolates the pivot scalars uniquely",
+        "strategy": "Start from a small matrix with nonzero unpivoted pivots, extract D from the LU diagonal, and check that no other unit-lower and unit-upper factors can change those diagonal entries.",
+        "deps": [
+          "def-ldu-factorisation",
+          "thm-normalised-lu-and-ldu-factorisations-are-unique"
+        ]
+      },
+      {
+        "id": "ex-block-lu-factorisation-and-a-schur-complement-solve",
+        "kind": "example",
+        "title": "A block LU factorisation turns a linear solve into a Schur-complement solve",
+        "strategy": "Partition a small matrix into a 2x2 block form with an invertible leading block, compute the Schur complement, and then solve the block triangular systems in the factorization order.",
+        "deps": [
+          "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ]
+      },
+      {
+        "id": "ex-cholesky-factorisation-and-solve",
+        "kind": "example",
+        "title": "A Cholesky factorisation solves a small positive-definite system efficiently",
+        "strategy": "Factor a concrete symmetric positive-definite matrix as LL* and then solve by the two triangular substitutions, checking both the factorization and the recovered solution.",
+        "deps": [
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost"
+        ]
+      },
+      {
+        "id": "cex-indefinite-and-semidefinite-matrices-fail-positive-diagonal-cholesky",
+        "kind": "counterexample",
+        "title": "Indefinite and semidefinite matrices can both fail positive-diagonal Cholesky",
+        "strategy": "Give one indefinite symmetric matrix and one positive-semidefinite singular matrix. In the first case some quadratic form value is negative; in the second the required triangular factor would be singular, so neither case admits a positive-diagonal Cholesky factor.",
+        "deps": [
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ]
+      },
+      {
+        "id": "ex-householder-qr-factorisation-by-hand",
+        "kind": "example",
+        "title": "A short dense matrix admits a worked Householder QR factorisation",
+        "strategy": "Construct the reflectors that zero each column in turn, multiply them into the matrix, and read off both the reduced QR factors and the resulting least-squares solve ingredients.",
+        "deps": [
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts"
+        ]
+      },
+      {
+        "id": "ex-givens-qr-on-a-sparse-matrix",
+        "kind": "example",
+        "title": "Givens QR can zero selected entries of a sparse matrix one at a time",
+        "strategy": "Apply a short sequence of Givens transformations to a sparse matrix so that each rotation removes one visible entry while leaving earlier zeros intact.",
+        "deps": [
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts"
+        ]
+      },
+      {
+        "id": "ex-reduced-qr-least-squares-versus-normal-equations",
+        "kind": "example",
+        "title": "Reduced QR avoids the condition-number squaring seen in the normal equations",
+        "strategy": "Use a full-column-rank matrix with one small singular value, compare the reduced-QR solve with the normal-equation matrix, and make the squared-conditioning penalty visible numerically.",
+        "deps": [
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number"
+        ]
+      },
+      {
+        "id": "ex-sparse-gaussian-elimination-can-create-fill-in",
+        "kind": "example",
+        "title": "Sparse Gaussian elimination can create fill-in in the factors",
+        "strategy": "Start from a matrix with visible zeros, run a few elimination steps, and track which new nonzero positions are created by the outer-product updates.",
+        "deps": [
+          "def-permutation-matrix-partial-pivoting-and-pivot-growth"
+        ]
+      }
+    ]
+  }
+]

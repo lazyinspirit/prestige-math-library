@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 0027ebf93959 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 10d749d2b549 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 3121 |
+| defects caught before publication | 3347 |
 | now mechanically prevented | 233 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -287,6 +287,32 @@
 | overstrong-title-or-statement | 1 |  |  |  |  |
 | ill-formed |  | 1 |  |  |  |
 | citation-misattributed |  |  |  | 1 |  |
+
+## frontier-24 — 226 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| other | 41 | 39 | 9 |  |  |
+| invalid-inference | 6 | 8 |  | 18 | 4 |
+| missing-hypothesis | 2 | 6 |  | 10 | 5 |
+| invalid-witness |  |  |  | 12 |  |
+| ill-typed-construction |  |  |  | 8 |  |
+| ill-formed | 2 | 4 |  | 1 |  |
+| false-or-overstrong-statement | 1 | 2 |  | 3 |  |
+| undefined-notation |  |  |  | 6 |  |
+| false-boundary-disposition | 3 | 1 |  | 1 |  |
+| false-claim |  | 4 |  |  | 1 |
+| citation-inflated | 1 | 2 |  |  | 1 |
+| citation-corrupted | 4 |  |  |  |  |
+| citation-truncated |  |  |  |  | 4 |
+| arithmetic-error | 3 |  |  |  |  |
+| missing-case |  |  |  | 3 |  |
+| false-computation |  |  |  | 3 |  |
+| citation-misattributed |  | 1 |  | 1 |  |
+| citation-missing |  |  |  | 1 | 1 |
+| missing-choice-scope |  |  |  |  | 2 |
+| false-or-overstrong-title |  | 1 |  |  |  |
+| prompt-transcription |  |  |  | 1 |  |
 
 ## pre-frontier-13 — 3 row(s)
 

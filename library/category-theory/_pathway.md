@@ -24,6 +24,7 @@ parts:
       - kan-extensions-density-and-the-free-cocompletion
       - subobject-lattices-generators-and-the-grothendieck-axioms
       - exactness-and-the-member-calculus
+      - the-diagram-lemmas-in-an-abelian-category
 ---
 
 ## categories-and-yoneda
@@ -52,6 +53,8 @@ hypotheses force left adjoints, while adjunctions package algebra into monads an
 and Beck identifies the monadic cases. Kan extensions and density express presheaves as
 free cocompletions. Abelian categories then supply kernels, cokernels, images, coimages,
 subobject lattices, Jordan-Holder theory, Grothendieck axioms, and projective/injective
-structure. The closing exactness page turns that structure into working chases: exactness
-as image-kernel comparison, short exact sequences and splittings, member and comember
-calculi, Hom left exactness, and AB5 via exact filtered colimits.
+structure. Exactness and the member calculus turn that structure into working chases, and
+the diagram-lemma page makes the standard consequences explicit: short five, snake, four,
+five, and nine lemmas, connecting morphisms, pullback-pushout exactness, and exact-functor
+transport. At that point abelian exactness is no longer just a list of definitions but a
+reusable calculus for kernels, cokernels, and long exact sequences.

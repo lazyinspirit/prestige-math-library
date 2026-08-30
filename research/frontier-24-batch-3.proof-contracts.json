@@ -1,0 +1,2883 @@
+{
+  "version": 1,
+  "level": "frontier-24",
+  "scope": [
+    "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+    "thm-normalised-lu-and-ldu-factorisations-are-unique",
+    "thm-block-lu-factorisation-via-an-invertible-leading-block",
+    "thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero",
+    "thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors",
+    "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+    "thm-gaussian-elimination-with-partial-pivoting-computes-a-nearby-factorisation-with-pivot-growth-bound",
+    "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+    "thm-positive-leading-principal-minors-are-equivalent-to-positive-cholesky-pivots",
+    "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+    "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+    "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+    "thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model",
+    "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+    "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+    "cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot",
+    "ex-plu-factorisation-by-hand",
+    "ex-ldu-factorisation-and-its-unique-diagonal-pivots",
+    "ex-block-lu-factorisation-and-a-schur-complement-solve",
+    "ex-cholesky-factorisation-and-solve",
+    "cex-indefinite-and-semidefinite-matrices-fail-positive-diagonal-cholesky",
+    "ex-householder-qr-factorisation-by-hand",
+    "ex-givens-qr-on-a-sparse-matrix",
+    "ex-reduced-qr-least-squares-versus-normal-equations",
+    "ex-sparse-gaussian-elimination-can-create-fill-in"
+  ],
+  "contracts": {
+    "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for $nge 1$, so the empty-size system is outside the authored claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof does not split on a zero scalar or zero right-hand side: the only load-bearing exclusion is the nonzero diagonal already built into the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the first-row/single-equation lower-triangular case and step 1.2 handles the last-row/single-equation upper-triangular case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Apart from the declared nonzero-diagonal hypothesis, the triangular solves have no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item concerns finite systems indexed by rows, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The solve is given by explicit recursions, not by choosing an element from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives two direct claims and an operation count, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives two direct claims and an operation count, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\nIf $L=(\\ell_{ij})\\in M_n(F)$ is lower triangular with every diagonal entry\n$\\ell_{ii}\\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive\nconstruction\n\n$$x_i:=\\frac{1}{\\ell_{ii}}\\left(b_i-\\sum_{j<i}\\ell_{ij}x_j\\right)\\qquad(0\\le i<n).$$If $U=(u_{ij})\\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\\frac{1}{u_{ii}}\\left(b_i-\\sum_{j>i}u_{ij}x_j\\right)\\qquad(n-1\\ge i\\ge 0).$$\n\nThe triangular vocabulary is from\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix\nproduct convention from [[def-matrix-product-and-identity-matrix]] is the one\nused when later items rewrite these recursions as matrix equations.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Forward substitution. For $i=0$, [L1] gives $x_0=b_0/\\ell_{00}$, so the first row equation is satisfied. Assume the first $i$ rows are satisfied. Then the $(i+1)$-st row of a lower-triangular system is $\\sum_{j\\le i+1}\\ell_{i+1,j}x_j=b_{i+1}$, and solving for $x_{i+1}$ gives exactly the recursion in [L1]. Because $\\ell_{i+1,i+1}\\ne 0$, this value is forced and is unique. Induction proves that the forward recursion solves $Lx=b$ and that no other vector can differ in any coordinate.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Backward substitution is the same argument from the last row upward: the last row determines $x_{n-1}=b_{n-1}/u_{n-1,n-1}$, and once $x_{i+1},\\ldots,x_{n-1}$ are fixed, the $i$-th row forces $x_i=u_{ii}^{-1}(b_i-\\sum_{j>i}u_{ij}x_j)$. Hence the backward recursion solves $Ux=b$ and the solution is unique.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In either triangular case, the $i$-th step forms one sum with $i$ products and $i$ additions in the lower-triangular solve, or with $n-1-i$ products and $n-1-i$ additions in the upper-triangular solve, followed by one division. Summing over all rows gives $n$ divisions and $\\sum_{i=0}^{n-1} i = \\sum_{i=0}^{n-1}(n-1-i)=n(n-1)/2$ multiplications and the same number of additions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves claim 1, step 1.2 proves claim 2, and step 2.1 gives the operation counts.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the recursive and uniqueness risks are handled explicitly. The proof treats the first-row and last-row bases separately, then the induction shows each next coordinate is forced by the nonzero diagonal, and the operation count is the exact rowwise sum."
+      }
+    },
+    "thm-normalised-lu-and-ldu-factorisations-are-unique": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The uniqueness statement now explicitly assumes $nge 1$, so the empty matrix case is outside the authored claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero first pivot $u_{00}=u_{00}^prime\ne 0$ to force equality of the first-column multipliers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 already covers the $1\times 1$ case: the first row and first column determine both factors completely."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem excludes the genuinely degenerate zero-pivot situation by hypothesis and does not require a second degeneration split."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite matrix-factorisation uniqueness theorem, so there are no endpoint parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof compares two explicit factorizations; it makes no arbitrary choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a uniqueness statement, not an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a uniqueness statement, not an if-and-only-if criterion."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-normalised-lu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\nA **normalised LU factorisation** of $A$ is a factorisation\n\n$$A=LU,$$\n\nwhere $L\\in M_n(F)$ is lower triangular with diagonal entries all equal to $1$,\nand $U\\in M_n(F)$ is upper triangular. Thus $L$ is unit lower triangular.\n\nWhen every diagonal entry of $U$ is nonzero, the factorisation has\n**nonzero pivots**. Later existence and uniqueness results state explicitly\nwhen that extra hypothesis is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-ldu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\nAn **LDU factorisation** of $A$ is a factorisation\n\n$$A=LDU,$$\n\nwhere $L$ is unit lower triangular, $D$ is diagonal, and $U$ is unit upper\ntriangular. Every LDU factorisation therefore gives a normalised LU\nfactorisation $A=L\\widetilde U$ with $\\widetilde U:=DU$ upper triangular. In\nthe converse direction, if $A=L\\widetilde U$ is a normalised LU factorisation\nwhose diagonal pivots are all nonzero, then\n$$D:=\\operatorname{diag}(\\widetilde U),\\qquad U:=D^{-1}\\widetilde U$$\ngive an LDU factorisation. This converse need not hold when a diagonal pivot\nvanishes.\n\nWhen every diagonal entry of $D$ is nonzero, the factorisation has\n**nonzero diagonal pivots**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For claim 1, the first row of $A$ equals the first row of both $U$ and $U'$, because the first rows of $L$ and $L'$ are $(1,0,\\ldots,0)$. Hence the first rows of $U$ and $U'$ agree, in particular $u_{00}=u'_{00}\\ne 0$. Then the first-column equations are $a_{i0}=\\ell_{i0}u_{00}=\\ell'_{i0}u'_{00}$ for $i>0$, so $\\ell_{i0}=\\ell'_{i0}$. Subtracting the common first-column outer product leaves two factorizations of the same trailing principal block by unit lower and upper triangular matrices of size $n-1$ with nonzero diagonal. Induction gives equality of the trailing blocks, hence $L=L'$ and $U=U'$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For claim 2, put $V:=DU$ and $V':=D'U'$. Because $D,D'$ are diagonal and $U,U'$ are unit upper triangular, $V,V'$ are upper triangular and their diagonals are exactly the diagonals of $D,D'$, so they are nonzero. The factorisations $A=LV=L'V'$ are therefore of the kind handled in step 1.1, which gives $L=L'$ and $V=V'$. Taking diagonals of $V=V'$ yields $D=D'$, and then $DU=D'U'$ forces $U=U'$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove claims 1 and 2. The nonzero-pivot hypothesis is essential: without it, a zero row of the upper factor leaves lower-triangular multipliers undetermined.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the uniqueness argument and the repaired LDU interface now line up. Step 1.1 fixes the first row and first column before inducting on the trailing block, and step 2.1 uses V = DU so diagonal extraction gives D = D' and then U = U'."
+      }
+    },
+    "thm-block-lu-factorisation-via-an-invertible-leading-block": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The block formulas are written uniformly for the chosen partition; there is no separate empty-case branch in the authored statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The only excluded singular boundary is the invertibility of $A_{11}$ already stated explicitly; no extra zero-denominator split is needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 specifically interprets the off-diagonal block through the $1\times 1$ leading solve $X A_{11}=A_{21}$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Zero-sized trailing or off-diagonal blocks are covered by the same block multiplication formula rather than by a separate degeneration argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Block rows and columns are discrete indices, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every block in the factorisation is written explicitly from $A_{11}^{-1}$ and the Schur complement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item states a construction and its refinement, not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item states a construction and its refinement, not a biconditional criterion."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-block-lu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square matrix over a field, with square leading block $A_{11}$.\n\nA **block LU factorisation across this partition** is a factorisation\n\n$$A=\\begin{pmatrix}L_{11}&0\\\\L_{21}&L_{22}\\end{pmatrix}\\begin{pmatrix}U_{11}&U_{12}\\\\0&U_{22}\\end{pmatrix},$$\n\nwhere the diagonal blocks are square, the left factor is block lower\ntriangular, and the right factor is block upper triangular.\n\nIf $A_{11}$ is invertible, the **Schur complement** of $A_{11}$ in $A$ is\n\n$$S:=A_{22}-A_{21}A_{11}^{-1}A_{12}.$$\n\nThis is the trailing block left after eliminating the off-diagonal blocks using\nthe invertible leading block.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is [[cor-general-linear-group-is-a-group]]. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], $A_{11}^{-1}$ exists, and by [L4] the block product $$ \\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix} \\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix} $$ has upper-left block $A_{11}$, upper-right block $A_{12}$, lower-left block $A_{21}A_{11}^{-1}A_{11}=A_{21}$, and lower-right block $A_{21}A_{11}^{-1}A_{12}+S=A_{22}$. Hence it equals $A$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $S=\\widetilde L\\widetilde U$, substitute this into step 1.1 and absorb the factorisation of $S$ into the lower-right block. The resulting left factor is block lower triangular and the right factor is block upper triangular, so this is a block LU factorisation in the sense of [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The off-diagonal block $A_{21}A_{11}^{-1}$ is exactly the block of multipliers obtained by solving $X A_{11}=A_{21}$. If $A_{11}$ itself has a triangular factorisation, [L2] computes these multipliers by triangular solves.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove claims 1 and 2, and step 2.2 identifies the solve interpretation of the multiplier block.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the Schur-complement block algebra is explicit. Step 1.1 computes every block of the product directly, and claim 2 only substitutes a normalised LU of the Schur complement into that exact identity, so no hidden hypothesis beyond invertibility of A_11 is used."
+      }
+    },
+    "thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The criterion is stated for $nge 1$, so there is no empty-size branch in the authored claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 uses $a=Delta_1\ne 0$ to form the Schur complement and continue the induction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is the explicit $n=1$ base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The only real degeneration is a vanished leading principal minor, and that is exactly the boundary the theorem characterizes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The boundary here is algebraic rank/pivot failure, not an interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs the factorisation recursively from the leading block and Schur complement; it makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that a nonzero-pivot LU factorisation forces every leading principal minor to be nonzero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2-2.1 prove that nonzero leading principal minors produce the LU factorisation."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-normalised-lu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\nA **normalised LU factorisation** of $A$ is a factorisation\n\n$$A=LU,$$\n\nwhere $L\\in M_n(F)$ is lower triangular with diagonal entries all equal to $1$,\nand $U\\in M_n(F)$ is upper triangular. Thus $L$ is unit lower triangular.\n\nWhen every diagonal entry of $U$ is nonzero, the factorisation has\n**nonzero pivots**. Later existence and uniqueness results state explicitly\nwhen that extra hypothesis is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square block matrix over a field, with $A_{11}$ square and invertible, and\nlet $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.\n\n1. One has the exact block factorisation\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix}.$$\n2. If $S=\\widetilde L\\widetilde U$ is any normalised LU factorisation, then\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&\\widetilde L\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&\\widetilde U\\end{pmatrix}$$\n   is a block LU factorisation across the same partition.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $A=LU$ as in [L1] and that the diagonal of $U$ is nonzero. For each $k$, the leading block also factors as $A_k=L_kU_k$, where $L_k$ is unit lower triangular and $U_k$ is upper triangular with diagonal $u_{00},\\ldots,u_{k-1,k-1}$. By [L3] and [L4], $$\\Delta_k=\\det(A_k)=\\det(L_k)\\det(U_k)=1\\cdot\\prod_{i<k}u_{ii}\\ne 0.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the converse, use induction on $n$. When $n=1$, the condition is $\\Delta_1=a_{00}\\ne 0$, and $A=(1)(a_{00})$ is already a normalised LU factorisation with nonzero diagonal.",
+          "step": "1.2",
+          "inputs": [
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $n>1$ and the converse for size $n-1$. Write $$A=\\begin{pmatrix}a&r^{\\mathsf T}\\\\ c&C\\end{pmatrix}.$$ Then $a=\\Delta_1\\ne 0$. Set $S:=C-ca^{-1}r^{\\mathsf T}$. For each $1\\le j<n$, apply [L2] to the leading $(j+1)\\times(j+1)$ block of $A$: its determinant is $a\\det(S_j)$, where $S_j$ is the leading $j\\times j$ block of $S$. Hence $$\\det(S_j)=\\Delta_{j+1}/a\\ne 0.$$ By the induction hypothesis, $S$ has a normalised LU factorisation $S=\\widetilde L\\widetilde U$ with nonzero diagonal.",
+          "step": "1.3",
+          "inputs": [
+            "ih",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.3 and [L2] give $$A= \\begin{pmatrix}1&0\\\\ ca^{-1}&\\widetilde L\\end{pmatrix} \\begin{pmatrix}a&r^{\\mathsf T}\\\\0&\\widetilde U\\end{pmatrix},$$ which is a normalised LU factorisation of $A$. Its upper diagonal is $a$ followed by the diagonal of $\\widetilde U$, so it is nonzero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves the forward implication, and steps 1.2-2.1 prove the reverse implication for every $n\\ge 1$. The final sentence is the case $k=n$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the iff and zero-pivot boundary are justified. The forward direction computes each leading minor as the product of the first k pivots, and the reverse direction uses a = Delta_1 != 0 plus block LU to show det(S_j) = Delta_{j+1}/a before inducting on the Schur complement."
+      }
+    },
+    "thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The smallest allowed case is $n=1$, where the product of elimination matrices is empty and step 2.1 gives $L=I$ and $U=A$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero pivot would stop the run to completion, so the theorem excludes that boundary in its hypothesis instead of treating it as a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the singleton case through the empty product of elimination matrices, giving $L=I$ and $U=A$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No extra degeneracy remains once zero pivots are excluded by the hypothesis that elimination runs to completion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item concerns finitely many elimination stages, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The factors are built from the recorded elimination matrices and their explicit inverses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem identifies the factors produced by elimination; it is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem identifies the factors produced by elimination; it is not stated as a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-normalised-lu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\nA **normalised LU factorisation** of $A$ is a factorisation\n\n$$A=LU,$$\n\nwhere $L\\in M_n(F)$ is lower triangular with diagonal entries all equal to $1$,\nand $U\\in M_n(F)$ is upper triangular. Thus $L$ is unit lower triangular.\n\nWhen every diagonal entry of $U$ is nonzero, the factorisation has\n**nonzero pivots**. Later existence and uniqueness results state explicitly\nwhen that extra hypothesis is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square block matrix over a field, with $A_{11}$ square and invertible, and\nlet $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.\n\n1. One has the exact block factorisation\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix}.$$\n2. If $S=\\widetilde L\\widetilde U$ is any normalised LU factorisation, then\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&\\widetilde L\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&\\widetilde U\\end{pmatrix}$$\n   is a block LU factorisation across the same partition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At stage $k$, the matrix $E_k$ is unit lower triangular and differs from $I$ only in column $k$ below the diagonal. Its inverse is $E_k^{-1}=I+\\sum_{i>k} m_{ik} e_i e_k^{\\mathsf T}$, because all cross terms vanish: $e_i e_k^{\\mathsf T} e_j e_k^{\\mathsf T}=0$ for $i,j>k$. Thus $E_k^{-1}$ is unit lower triangular with strict lower entries exactly the multipliers from column $k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $U=E_{n-2}\\cdots E_0A$, one has $A=E_0^{-1}\\cdots E_{n-2}^{-1}U$. The product of unit lower triangular matrices is unit lower triangular, and the first time a strict lower entry in column $k$ appears is in $E_k^{-1}$, so later factors do not change that column above the already-created zeros. Hence the strict lower entries of $L:=E_0^{-1}\\cdots E_{n-2}^{-1}$ are exactly the stored multipliers $m_{ik}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrix $U$ is upper triangular by construction, so step 2.1 is a normalised LU factorisation in the sense of [L1]. This is the scalar-entry form of the same elimination mechanism that [L2] packages blockwise. Equivalently, the row operations of elimination store their multipliers in $L$ and leave the final reduced matrix as $U$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 prove the claim.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-adjudicate-rejudge-b-round-1",
+        "notes": "Risk reviewed on the round-1 repair: the statement now binds n >= 1 and treats n = 1 by the explicit empty-product convention U = A. For n > 1, step 1.1 computes each inverse elimination matrix and step 2.1 verifies that later factors preserve the stored multiplier columns, so the entries of L remain exactly the elimination multipliers."
+      }
+    },
+    "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The authored statement now assumes $nge 1$, so the empty matrix case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the zero-pivot boundary: the active column vanishes and the trailing block is singular."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is the $1\times 1$ base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The genuine degeneration is the failed pivot, and the theorem records it explicitly rather than requiring a second worksheet split."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Partial-pivoting stages are discrete elimination steps, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Row swaps are chosen by the declared maximal-entry rule of partial pivoting, not by an unchecked arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item gives existence plus a singular-boundary implication, not an if-and-only-if theorem in the schema sense."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item gives existence plus a singular-boundary implication, not an if-and-only-if theorem in the schema sense."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$, let $F=\\mathbb R$ or $\\mathbb C$, and let $\\sigma$ be a permutation of\n$\\{0,\\ldots,n-1\\}$. The corresponding **permutation matrix** $P_\\sigma$ is the\nmatrix whose $i$-th row is the $\\sigma(i)$-th row of $I_n$. Thus left\nmultiplication by $P_\\sigma$ permutes the rows of a matrix.\n\nIn **Gaussian elimination with partial pivoting**, ties are resolved by a fixed\ndeterministic rule. At stage $k$ one inspects the\nentries in column $k$ from rows $k$ through $n-1$, swaps a row with maximal\nentry modulus into row $k$, and then eliminates the entries below that pivot.\n\nIf $PA=LU$ is the resulting factorisation, its **pivot-growth factor** is\n\n$$\\rho(A):=\\frac{\\max_{i,j}|u_{ij}|}{\\max_{i,j}|a_{ij}|},$$\n\nprovided $A\\ne 0$; when $A=0$ one declares $\\rho(A)=1$. The absolute value or\nmodulus is the one from [[def-abs-value]] on real entries and its standard\ncomplex analogue on complex entries.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-gaussian-elimination-multipliers-produce-the-normalised-lu-factors",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$, let $F$ be a field, and let $A\\in M_n(F)$. Assume unpivoted Gaussian elimination reaches an\nupper-triangular matrix without encountering a zero pivot. Let $m_{ik}$ be the\nmultiplier used to eliminate entry $(i,k)$, so the $k$-th elimination matrix is\n\n$$E_k:=I-\\sum_{i>k} m_{ik} e_i e_k^{\\mathsf T}.$$If $U:=E_{n-2}\\cdots E_0A$ is the final upper-triangular matrix, with this product understood as the empty product and $U=A$ when $n=1$, then$$A=LU,$$\n\nwhere $L$ is unit lower triangular and its strict lower entry in position\n$(i,k)$ is exactly $m_{ik}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is [[cor-general-linear-group-is-a-group]]. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=1$, either $A=[a]$ with $a\\ne 0$ or $a=0$. In both cases $I_1A=(1)[a]$ is a PLU factorisation, and the zero-pivot case is exactly the singular case.",
+          "step": "1.1",
+          "inputs": [
+            "base",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $n>1$. After an initial row swap, write $$PA=\\begin{pmatrix}a&r^{\\mathsf T}\\\\ c&C\\end{pmatrix},$$ where $|a|$ is maximal in the first column below the swap position. If $a\\ne 0$, perform the first elimination step. This produces $$ \\begin{pmatrix}a&r^{\\mathsf T}\\\\ 0&S\\end{pmatrix} $$ with multipliers $c/a$. By the induction hypothesis, the trailing block $S$ has a PLU factorisation. Reassembling the first elimination step and the recursive factorisation gives $P'A=LU$ for suitable $P',L,U$. If $a=0$, then the whole first column is zero, so $PA$ already has the block form $\\begin{pmatrix}0&r^{\\mathsf T}\\\\0&C\\end{pmatrix}$; by the induction hypothesis $C$ has a PLU factorisation, and adjoining the zero first column yields a PLU factorisation of $PA$, hence of $A$.",
+          "step": "1.2",
+          "inputs": [
+            "ih",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the first failed pivot occurs at stage $k$, then after the previous row swaps and eliminations the active matrix has the form $$ \\begin{pmatrix} *&*\\\\ 0&T \\end{pmatrix}, $$ where the first column of $T$ is zero. Therefore $T$ is singular because $Te_0=0$ for a nonzero standard basis vector $e_0$. The whole active matrix is then singular, hence so are all earlier row permutations and elimination preimages, including $A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Claim 1 is steps 1.1-1.2. Step 2.1 proves claim 2, and its contrapositive is the final sentence: an invertible matrix cannot reach a zero pivot under partial pivoting.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the field scope now matches partial pivoting by modulus. The theorem is explicitly real/complex, and the induction separates the nonzero pivot branch from the zero-first-column singular branch, so both PLU existence and failed-pivot singularity are covered on the written hypotheses."
+      }
+    },
+    "thm-gaussian-elimination-with-partial-pivoting-computes-a-nearby-factorisation-with-pivot-growth-bound": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the smallest case $n=1$, step 1.1 has a single-entry residual relation and step 2.1 still defines $\\Delta A=\\widehat P^{\\mathsf T}E$ without any hidden empty-stage ambiguity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the pivot-size boundary through the multiplier bound $|widehatell_{ik}|le 1$ and the resulting norm estimate, so no zero denominator is left untreated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-dimensional split is needed: the entrywise residual formulas and norm bound are uniform in $n$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Overflow, underflow, and failed pivots are excluded in the stated floating-point and pivoting hypotheses rather than handled as hidden degeneracies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is about matrix entries and stage counts, not endpoint limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The perturbation matrix $Delta A$ is defined explicitly as $widehat P^{mathsf T}E$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way stability theorem, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$, let $n\\ge 1$, and let\n$A\\in M_n(\\mathbb F)$.\n\n1. There exist a permutation matrix $P$, a unit lower-triangular matrix $L$,\n   and an upper-triangular matrix $U$ such that\n   $$PA=LU.$$\n2. If partial pivoting encounters a stage at which the whole active pivot column\n   is zero, then the active trailing block is singular, hence $A$ is singular.\n   Equivalently, if $A$ is invertible, partial pivoting finds a nonzero pivot at\n   every stage.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$, let $F=\\mathbb R$ or $\\mathbb C$, and let $\\sigma$ be a permutation of\n$\\{0,\\ldots,n-1\\}$. The corresponding **permutation matrix** $P_\\sigma$ is the\nmatrix whose $i$-th row is the $\\sigma(i)$-th row of $I_n$. Thus left\nmultiplication by $P_\\sigma$ permutes the rows of a matrix.\n\nIn **Gaussian elimination with partial pivoting**, ties are resolved by a fixed\ndeterministic rule. At stage $k$ one inspects the\nentries in column $k$ from rows $k$ through $n-1$, swaps a row with maximal\nentry modulus into row $k$, and then eliminates the entries below that pivot.\n\nIf $PA=LU$ is the resulting factorisation, its **pivot-growth factor** is\n\n$$\\rho(A):=\\frac{\\max_{i,j}|u_{ij}|}{\\max_{i,j}|a_{ij}|},$$\n\nprovided $A\\ne 0$; when $A=0$ one declares $\\rho(A)=1$. The absolute value or\nmodulus is the one from [[def-abs-value]] on real entries and its standard\ncomplex analogue on complex entries.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "source_section": "Definition",
+          "quote": "**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.\n\n**Unit roundoff.** A real $u>0$ is a **unit roundoff** for the system when\nevery real $t$ with $N_{\\min}\\le|t|\\le N_{\\max}$ satisfies\n\n$$\\operatorname{fl}(t)=t(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u,$$\n\nwith $|\\cdot|$ the absolute value ([[def-abs-value]]). The model quantifies all\nsubsequent error analysis through the single constant $u$ and says nothing\nabout the internal bit representation beyond the bound $|\\delta|\\le u$.\n\n**The standard relative model.** For each operation\n$\\circ\\in\\{+,-,\\times,\\div\\}$ and all $x,y\\in\\mathbb F$ such that $x\\circ y$ is\nzero or is a real number in the normal range\n($N_{\\min}\\le|x\\circ y|\\le N_{\\max}$; for $\\div$ this includes $y\\ne 0$), the\ncomputed result is\n\n$$\\operatorname{fl}(x\\circ y)=(x\\circ y)(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u.$$\n\nWhen $x\\circ y=0$, this identity is the exact-zero rule\n$\\operatorname{fl}(0)=0$ and one may take $\\delta=0$.\n\n**The exclusions are part of the model, and are stated explicitly.**\n\n- **Overflow** is excluded: when $|x\\circ y|>N_{\\max}$ the result is not a real\n  number of the form $(x\\circ y)(1+\\delta)$ with $|\\delta|\\le u$.\n- **Underflow** is excluded: when $0<|x\\circ y|<N_{\\min}$ the result falls into\n  the subnormal or lost range and need not satisfy the relative bound.\n- **Invalid operations** are excluded: when $x\\circ y$ is not a real number\n  (for example $0/0$), there is no real $\\delta$ for the displayed identity.\n\nEvery item on this page that uses the model therefore carries the hypotheses\nthat the relevant operations lie in the normal range, and statements about\noverflow, underflow or invalid operations are made only where the exclusion is\nmentioned.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $x=(x_j),y=(y_j)\\in\\mathbb{R}^{n}$, with the dot product\n$x\\cdot y=\\sum_{j<n}x_jy_j$ computed from left to right in an arithmetic model\nwith unit roundoff $u$ satisfying $nu<1$\n([[def-standard-relative-floating-point-model-and-unit-roundoff]]), where every\nproduct $x_jy_j$, every rounded product\n$p_j:=\\operatorname{fl}(x_jy_j)$, and every intermediate sum lies in the normal\nrange. Let $s_1:=p_0$ and, for $1\\le k<n$, let\n$s_{k+1}:=\\operatorname{fl}(s_k+p_k)$. Then:\n\n1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In exact arithmetic, each computed upper-triangular entry satisfies a formula of the form $$ \\widehat u_{ij}=\\operatorname{fl}\\left((\\widehat P A)_{ij}-\\sum_{k<i}\\widehat \\ell_{ik}\\widehat u_{kj}\\right), $$ and each computed strict-lower entry satisfies $$ \\widehat \\ell_{ij}=\\operatorname{fl}\\left(\\frac{(\\widehat P A)_{ij}-\\sum_{k<j} \\widehat \\ell_{ik}\\widehat u_{kj}}{\\widehat u_{jj}}\\right). $$ By [L2]-[L4], each such floating-point combination is the exact relation for a perturbed entry of $\\widehat P A$, with perturbation bounded by $\\gamma_n$ times the corresponding dot-product sum. Collecting those entrywise perturbations into a matrix $E$ gives $$\\widehat P A + E = \\widehat L\\widehat U$$ and $$|E_{ij}|\\le \\gamma_n\\sum_{k\\le \\min(i,j)}|\\widehat \\ell_{ik}|\\,|\\widehat u_{kj}|.$$",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $\\Delta A:=\\widehat P^{\\mathsf T}E$. Because $\\widehat P$ is a permutation matrix, $$|\\Delta A|=\\widehat P^{\\mathsf T}|E|\\le \\gamma_n\\,\\widehat P^{\\mathsf T}(|\\widehat L|\\,|\\widehat U|)$$ by step 1.1. Multiplying the identity of step 1.1 by $\\widehat P^{\\mathsf T}$ on the left gives $$\\widehat P(A+\\Delta A)=\\widehat L\\widehat U,$$ which is the nearby-factorisation statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [L1], every row of $|\\widehat L|$ has one diagonal $1$ and at most $n-1$ strict-lower entries of modulus at most $1$, so its row sum is at most $n$. Every entry of $\\widehat U$ is bounded by $\\rho(A)\\max_{p,q}|a_{pq}|$ from the definition of pivot growth. Therefore each row sum of $|\\widehat L||\\widehat U|$ is at most $n^2\\rho(A)\\max_{p,q}|a_{pq}|$, and step 1.1 yields $$\\|E\\|_\\infty\\le n^2\\gamma_n\\rho(A)\\max_{p,q}|a_{pq}|.$$ Because row permutations preserve the infinity norm, the same bound holds for $\\Delta A$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves the backward-error identity, and step 2.2 gives the pivot-growth dependent bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: both Step-6 refuter risks are closed. The theorem is now restricted to the real floating-point model actually supplied by the cited arithmetic results, and the backward-error step carries the entrywise bound through P^T instead of treating a row permutation as if it preserved row indices."
+      }
+    },
+    "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique": {
+      "finite_smoke": [
+        {
+          "check": "matrix-ring-laws-mod-n",
+          "asserts": "Determinants are multiplicative"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The authored statement now assumes $nge 1$, so the empty matrix case is outside the written claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 uses $a>0$ to justify dividing by $a$ and forming $ell=r/sqrt a$, so the zero-pivot boundary is handled explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is the scalar $n=1$ base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Indefinite and semidefinite matrices are excluded exactly by the positive-definite hypothesis, so no second degeneration split is hidden."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Positive-definiteness and factorisation do not involve interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs $L$ explicitly from $a$, $r$, and the inductively built factor of the Schur complement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that a positive-diagonal Cholesky factorisation forces Hermitian positive definiteness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2-2.1 construct the Cholesky factor from Hermitian positive definiteness."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $A=LL^*$ as in [L1]. Then $A^*=LL^*=A$, so $A$ is Hermitian. For any nonzero $x$, one has $$x^*Ax=x^*LL^*x=(L^*x)^*(L^*x)=\\|L^*x\\|_2^2.$$ The diagonal of $L$ is positive, hence nonzero; [L2] and [L3] give $\\det L\\ne 0$, so $L$ is invertible and $L^*x\\ne 0$ when $x\\ne 0$. Therefore $x^*Ax>0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the converse, use induction on $n$. The case $n=1$ is immediate: $A=[a]$ is Hermitian positive definite exactly when $a>0$, in which case $A=[\\sqrt a][\\sqrt a]^*$.",
+          "step": "1.2",
+          "inputs": [
+            "base",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $n>1$ and the converse for size $n-1$. Write $$A=\\begin{pmatrix}a&r^*\\\\ r&C\\end{pmatrix}.$$ Positive definiteness of $A$ at $x=e_0$ gives $a>0$. Set $\\ell:=r/\\sqrt a$ and $S:=C-\\ell\\ell^*$. For nonzero $y\\in\\mathbb C^{n-1}$, apply positive definiteness to $x=\\binom{-a^{-1}r^*y}{y}$: $$0<x^*Ax=y^*Sy.$$ Thus $S$ is Hermitian positive definite. By the induction hypothesis, $S=\\widetilde L\\widetilde L^*$ with $\\widetilde L$ lower triangular and positive diagonal.",
+          "step": "1.3",
+          "inputs": [
+            "ih",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $$L:=\\begin{pmatrix}\\sqrt a&0\\\\ \\ell&\\widetilde L\\end{pmatrix}.$$ Direct multiplication gives $$LL^*=\\begin{pmatrix}a&r^*\\\\ r&\\ell\\ell^*+\\widetilde L\\widetilde L^*\\end{pmatrix} =\\begin{pmatrix}a&r^*\\\\ r&C\\end{pmatrix}=A.$$ The matrix $L$ is lower triangular and its diagonal is positive real, so this is a Cholesky factorisation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For uniqueness, suppose $A=L_1L_1^*=L_2L_2^*$ are two such factorizations. Then $M:=L_2^{-1}L_1$ is lower triangular, and $MM^*=I$ because $L_2MM^*L_2^*=L_1L_1^*=L_2L_2^*$. A lower-triangular unitary matrix has zero strict-lower entries and diagonal entries of modulus $1$; since the diagonal of $M$ is the ratio of two positive real diagonals, each diagonal entry is also positive real, hence equals $1$. Therefore $M=I$ and $L_1=L_2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 proves that a Cholesky factorisation implies Hermitian positive definiteness. Steps 1.2-2.1 prove the converse by induction, and step 3.1 gives uniqueness.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the existence, positivity, and uniqueness steps are all explicit. The proof isolates a > 0, proves the Schur complement is again Hermitian positive definite by the targeted vector test, builds L blockwise, and then forces uniqueness by showing the comparison matrix is lower triangular, unitary, and has positive real diagonal."
+      }
+    },
+    "thm-positive-leading-principal-minors-are-equivalent-to-positive-cholesky-pivots": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The first admissible index is $k=1$, and step 2.1 computes $\\Delta_1=\\ell_{00}^2>0$, so the leading-minor formula is grounded at the initial boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem compares strict positivity of determinants and pivots, so the zero boundary is excluded by the claim itself rather than treated separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 already covers the first pivot and first leading minor through the leading-block determinant formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The only degenerate alternative would be a vanished leading minor or pivot, and the theorem explicitly rules that out by strict positivity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item concerns determinants and pivots, not endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct comparison of published criteria and determinant formulas, with no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that positive leading principal minors imply the positive-diagonal Cholesky factorisation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 show that a positive-diagonal Cholesky factorisation forces positive leading principal minors."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sylvesters-criterion-for-positive-definiteness",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb R)$ be symmetric, with $n\\ge1$, and let $\\Delta_k$ be the determinant of its leading $k\\times k$ principal submatrix. Then $A$ is positive definite if and only if\n\n$$\\Delta_k>0\\qquad(1\\le k\\le n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], condition 1 is equivalent to positive definiteness, and positive definiteness is equivalent to existence of a Cholesky factorisation with positive diagonal. Hence conditions 1 and 2 are equivalent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $A=LL^{\\mathsf T}$ with $L$ lower triangular and positive diagonal. Its leading $k\\times k$ principal block factors as $A_k=L_kL_k^{\\mathsf T}$, where $L_k$ is the leading $k\\times k$ block of $L$. By [L3], $$\\Delta_k=\\det(A_k)=\\det(L_k)^2=\\left(\\prod_{i<k}\\ell_{ii}\\right)^2 =\\prod_{i<k}\\ell_{ii}^2.$$ Since each $\\ell_{ii}>0$, every $\\Delta_k$ is positive.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves the equivalence, and step 2.1 identifies the leading principal minors with the squared pivot products.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the biconditional is anchored on two named results and the pivot formula is computed separately. Step 1.1 uses Sylvester plus the Cholesky existence theorem for the equivalence, and step 2.1 identifies each leading minor with the squared product of the first k Cholesky pivots."
+      }
+    },
+    "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is written for a concrete Cholesky factorisation of a positive-size system and has no separate empty-size clause."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero pivots are excluded by the positive-diagonal Cholesky hypothesis; no extra zero-boundary split remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 cover the single-column/single-row triangular solves and the resulting constant-cost factorisation case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Once Hermitian positive definiteness is assumed, there is no additional semidefinite or indefinite branch in this solve-and-cost theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument counts algebraic operations; it has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The solve route and cost counts are explicit and algorithmic, not based on a choice from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a direct consequence theorem, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a direct consequence theorem, not an iff statement."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2] and [L3], the equation $Ax=b$ is $LL^*x=b$. Solve $Ly=b$ by forward substitution and then $L^*x=y$ by backward substitution. Stepwise uniqueness in [L1] makes both solves unique, and substituting $y=L^*x$ back into the first equation gives $Ax=b$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The solve cost is the sum of two triangular solves, so [L1] gives $$2\\left(n+\\frac{n(n-1)}{2}+\\frac{n(n-1)}{2}\\right)=2n^2+O(n)$$ scalar operations, or $n^2+O(n)$ multiply-add pairs.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the dense factorisation, column $k$ computes one square root, $n-1-k$ divisions in the column below the pivot, and updates the trailing symmetric submatrix of size $n-1-k$ by a rank-one outer product. That update touches $\\frac{(n-1-k)(n-k)}{2}$ stored entries, and each one costs one multiplication and one subtraction, so the update work is $$(n-1-k)(n-k).$$ Summing with $m=n-1-k$ gives $$\\sum_{m=0}^{n-1}m(m+1)=\\frac{1}{3}n(n-1)(n+1)=\\frac{1}{3}n^3+O(n^2),$$ which dominates the cost. LU performs the same style of update on the full trailing matrix, giving $$2\\sum_{m=0}^{n-1}m^2=\\frac{1}{3}n(n-1)(2n-1)=\\frac{2}{3}n^3+O(n^2)$$ scalar operations. Thus Cholesky uses about half the factorisation work.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves the solve statement, while steps 1.2 and 2.1 give the operation counts.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: Reader 3's cost repair is mathematically correct on the current bytes. The solve count now totals both triangular solves as 2n^2 + O(n), and the factorization count sums only the stored symmetric updates, giving the honest 1/3 n^3 versus 2/3 n^3 comparison."
+      }
+    },
+    "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem begins with a unit vector, a nonzero vector, and a nonzero coordinate pair, so an empty ambient object is outside the written hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the nonzero-coordinate boundary in the Givens construction, and step 2.1 handles the already-axis-aligned Householder case without dividing by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the $m=1$ Householder case with $H=[-1]$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the degenerate alignment case where $z$ is already a scalar multiple of $e_1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval variable or endpoint limit in this linear-algebra construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The parameters $r,c,s,alpha,w,v$ are all written down explicitly from the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem lists constructive properties of reflectors and rotations; it is not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem lists constructive properties of reflectors and rotations; it is not biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-householder-reflector",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner-product space and let\n$v\\in V$ satisfy $\\|v\\|=1$, where $\\|\\cdot\\|$ is the norm of\n[[def-inner-product-norm]]. The **Householder reflector with normal $v$** is\nthe linear map\n\n$$H_v(x):=x-2\\langle x,v\\rangle v.$$In matrix form relative to an orthonormal basis, this is$$H_v=I-2vv^*.$$\n\nThe reflector fixes every vector orthogonal to $v$ and sends $v$ to $-v$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-real-and-complex-givens-transformations",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 2$ and let $0\\le i<j\\le n-1$.\n\nA **real Givens rotation** in the $(i,j)$-plane is the identity matrix except on\nrows and columns $i,j$, where it has the $2\\times 2$ block\n\n$$\\begin{pmatrix}c&s\\\\-s&c\\end{pmatrix}\\qquad(c,s\\in\\mathbb R,\\ c^2+s^2=1).$$A **complex Givens transformation** in the $(i,j)$-plane is the identity except on rows and columns $i,j$, where it has block$$\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix},$$\n\nwith $c\\in\\mathbb R_{\\ge 0}$, $s\\in\\mathbb C$, and $c^2+|s|^2=1$. The modulus\n$|s|$ is the one from [[def-complex-conjugate-real-imaginary-part-and-modulus]].\n\nSuch transformations act only on the two chosen coordinates and are designed to\nzero one targeted entry while preserving the Euclidean norm from\n[[def-inner-product-norm]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "source_section": "Definition",
+          "quote": "A linear map $T:V\\to W$ ([[def-linear-map]]) between inner product spaces ([[def-inner-product-space]]) is a **linear isometry** if\n\n$$\\lVert Tv\\rVert=\\lVert v\\rVert$$\n\nfor every $v\\in V$, where the norm is the induced norm [[def-inner-product-norm]]. An invertible linear isometry from a real finite-dimensional inner product space to itself is an **orthogonal operator**; over $\\mathbb C$ it is a **unitary operator**.\n\nEquivalently, once the finite-dimensional characterisation is proved, orthogonal and unitary operators are the endomorphisms satisfying $T^*T=TT^*=I$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $H_v=I-2vv^*$ with $v^*v=1$, one has $H_v^*=I-2vv^*=H_v$ and $H_v^2=I-4vv^*+4v(v^*v)v^*=I$. Hence $H_v^*H_v=I$, so $H_v$ is orthogonal or unitary.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the real case, for $(a,b)\\ne(0,0)$ set $r=(a^2+b^2)^{1/2}$, $c=a/r$, and $s=b/r$. Then $c^2+s^2=1$ and $$ \\begin{pmatrix}c&s\\\\-s&c\\end{pmatrix}\\binom{a}{b} =\\binom{r}{0}. $$ In the complex case, if $a=0$ take $c=0$ and $s=b/|b|$; otherwise write $a=\\phi|a|$ with $|\\phi|=1$, set $r=(|a|^2+|b|^2)^{1/2}$, $c=|a|/r$, and $s=\\phi\\overline b/r$. Then $c^2+|s|^2=1$ and $$ \\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}\\binom{a}{b} =\\binom{\\phi r}{0}. $$ Thus a Givens transformation annihilates the second entry while preserving the Euclidean norm.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $z$ is already a scalar multiple of $e_1$, choose any Householder reflector fixing $e_1$: for $m=1$, $H=[-1]$ works; for $m>1$, take $v=e_2$, so $H_ve_1=e_1$. Otherwise set $\\alpha:=e^{i\\theta}\\|z\\|_2$, where $e^{i\\theta}=z_1/|z_1|$ when $z_1\\ne 0$ and $e^{i\\theta}=1$ when $z_1=0$, and put $w:=z-\\alpha e_1$, $v:=w/\\|w\\|_2$. Then $v^*z=(\\|z\\|_2^2-\\overline\\alpha z_1)/\\|w\\|_2=\\|w\\|_2/2$, so $H_vz=z-2v(v^*z)=z-w=\\alpha e_1$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves claim 1, step 2.1 proves claim 2, and step 1.2 proves claim 3.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The authored QR construction is for matrices with stated column structure; there is no separate empty-process clause in the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem does not split on a zero scalar boundary; zero columns are handled uniformly by the annihilation step of the chosen transformations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the final column case when only one active column remains to be triangularised."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof treats shrinking trailing blocks uniformly and does not require a separate degeneracy branch beyond that recursion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The only indices are finite row and column counters, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each reflector or rotation is selected by the explicit annihilation construction from the current active column."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item gives a construction and operation counts, not an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item gives a construction and operation counts, not an if-and-only-if criterion."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-qr-factorisation-over-r-or-c",
+          "source_section": "Statement",
+          "quote": "Every invertible matrix $A\\in M_n(\\mathbb F)$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$, has a unique factorisation\n\n$$A=QR,$$\n\nwhere $Q^*Q=I$ and $R$ is upper triangular with positive real diagonal entries. Thus $Q$ is orthogonal over $\\mathbb R$ and unitary over $\\mathbb C$. The assertion includes the unique $0\\times0$ factorisation.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For column $k$, apply [L2] to the subvector of rows $k$ through $m-1$. Embedding the resulting reflector or sequence of Givens transformations into the identity on the first $k$ rows leaves the earlier zeros unchanged and zeros all entries below the diagonal in column $k$. Repeating for $k=0,\\ldots,n-1$ produces a unitary matrix $Q^*$ whose product with $A$ is upper trapezoidal; therefore $A=QR$ with $Q=(Q^*)^*$, and deleting the zero rows of $R$ gives the reduced factorisation, in the computational form refining the abstract QR existence of [L3].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In a dense real Householder step on the trailing block of size $(m-k)\\times(n-k)$, forming the reflector costs $O(m-k)$ scalar operations and applying it to the trailing block costs $4(m-k)(n-k)$ scalar operations. Summing over $k=0,\\ldots,n-1$ gives $$ 4\\sum_{k=0}^{n-1}(m-k)(n-k)+O\\!\\left(\\sum_{k=0}^{n-1}(m-k)\\right) =2mn^2-\\frac{2}{3}n^3+O(mn). $$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In dense real Givens QR, column $k$ has $m-k-1$ entries to eliminate below the diagonal, and each rotation updates two rows across the remaining $n-k$ columns using $6(n-k)+O(1)$ scalar operations. Hence the cost is $$ 6\\sum_{k=0}^{n-1}(m-k-1)(n-k)+O(mn) =3mn^2-n^3+O(mn). $$",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 proves the constructive QR statement, and steps 2.1-2.2 give the standard dense operation counts.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the constructive QR argument is intact and the dense flop counts are now numerically correct. The Householder step uses 4(m-k)(n-k) update work and the Givens step uses 6(n-k) per rotation, which sum to the stated 2mn^2 - 2/3 n^3 and 3mn^2 - n^3 leading terms."
+      }
+    },
+    "thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stability theorem is written for a concrete floating-point run on an $m\times n$ matrix and does not isolate an empty-run case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The local model excludes out-of-range divisions and invalid operations in the stated hypotheses, so no hidden zero-denominator branch remains."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The perturbation transport argument is uniform in the number of columns and does not require a separate one-column lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The degenerate floating-point events are overflow, underflow, and invalid operations, and these are excluded explicitly by the stated model assumptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a backward-error estimate in finite dimensions, not an endpoint limit theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The global perturbation is assembled explicitly from the transported local perturbations $E_k$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Backward stability is asserted in one direction only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Backward stability is asserted in one direction only."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The local-step hypothesis [A1] supplies a perturbation $E_k$ for every active block and an exact orthogonal update $\\widehat H_k(A^{(k)}+E_k)=A^{(k+1)}$ with $\\|E_k\\|_F\\le 3\\gamma_m\\|A^{(k)}\\|_F$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Embed each $E_k$ into the original matrix size by padding zeros outside the active block and transport it back through the previous computed reflectors. Because every $\\widehat H_k$ is orthogonal, [L3] preserves the Frobenius norm of each transported perturbation. Summing the $n$ transported perturbations gives a single matrix $\\Delta A$ such that $$A+\\Delta A=\\widehat Q\\widehat R$$ and $$ \\|\\Delta A\\|_F\\le \\sum_{k=0}^{n-1}\\|E_k\\|_F \\le 3\\gamma_m\\sum_{k=0}^{n-1}\\|A^{(k)}\\|_F. $$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "From step 1.1 and [L3], $$\\|A^{(k+1)}\\|_F=\\|\\widehat H_k(A^{(k)}+E_k)\\|_F=\\|A^{(k)}+E_k\\|_F\\le \\|A^{(k)}\\|_F+\\|E_k\\|_F\\le (1+3\\gamma_m)\\|A^{(k)}\\|_F.$$ Since $A^{(0)}=A$, induction gives $$\\|A^{(k)}\\|_F\\le (1+3\\gamma_m)^k\\|A\\|_F$$ for every $k$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting step 2.2 into step 2.1 yields $$\\|\\Delta A\\|_F\\le 3\\gamma_m\\sum_{k=0}^{n-1}(1+3\\gamma_m)^k\\|A\\|_F=\\bigl((1+3\\gamma_m)^n-1\\bigr)\\|A\\|_F.$$ This is the stated backward bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 proves the displayed estimate, and step 2.1 gives the nearby factorisation identity.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-adjudicate-rejudge-b-round-1",
+        "notes": "Risk reviewed on the round-1 repair: the theorem no longer claims that scalar-operation bounds alone prove the local Householder perturbation estimate. It assumes the exact local-step identity and 3 gamma_m Frobenius bound explicitly, then proves only their global accumulation through orthogonal transport and the recurrence ||A^(k)||_F <= (1 + 3 gamma_m)^k ||A||_F."
+      }
+    },
+    "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a rank-$r$ matrix and its pivoted QR factorisation; there is no separate empty-object clause in the written statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the rank-zero boundary: after $r=0$ pivot columns, every residual is zero and the whole $R$ block is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the first independent pivot column and therefore the rank-one leading-block boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem deliberately stops at the exact rank boundary and does not promote the greedy pivoting heuristic to a stronger rank-revealing claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Residual-norm pivoting uses finite column indices, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The pivot column is chosen by the declared maximal residual-norm rule, not by an arbitrary unchecked choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a structural consequence of exact pivoted QR, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a structural consequence of exact pivoted QR, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is [[cor-general-linear-group-is-a-group]]. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are\n\n$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$\n\nBoth dimensions are defined. The kernel is a linear subspace of the\nfinite-dimensional space $V$, so it is finite-dimensional by\n[[thm-linear-kernel-image-and-injectivity]] and\n[[thm-dimension-of-a-linear-subspace]]. The image is finite-dimensional because\n[[lem-kernel-basis-extension-gives-image-basis]] constructs a finite basis of\nit from a basis of $V$. Thus rank and nullity are natural numbers, including\nwhen $V$ is the zero space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "After $k$ pivot steps, the first $k$ pivoted columns span the same subspace as the first $k$ columns of $QR$, and the next pivot diagonal entry $r_{kk}$ is the norm of the residual of the chosen column after projection onto that span. Hence $r_{kk}\\ne 0$ exactly when some remaining column still has a nonzero residual, that is, still lies outside the span of the first $k$ chosen columns.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $k<r$, the chosen columns cannot already span every column of $A$, because then all columns would lie in a $k$-dimensional span and [L4] would give rank at most $k<r$. Therefore some remaining column has nonzero residual, and by the greedy rule step 1.1 gives $r_{kk}\\ne 0$. Thus the first $r$ diagonal entries of $R$ are nonzero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "After $r$ pivot columns have been chosen, [L4] says no further independent column exists. Hence every remaining column lies in the span of the first $r$ chosen columns, so every remaining residual is zero. Step 1.1 then forces every entry below and on the diagonal in the trailing block to be zero, giving $$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix}.$$ The block $R_{11}$ is upper triangular with nonzero diagonal by step 2.1, so it is invertible.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 prove the claim.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the greedy pivoting scope and the rank argument are now aligned. The statement is explicitly real/complex, matching the residual 2-norm rule, and steps 2.1-3.1 correctly separate the k < r nonzero-pivot regime from the zero-residual trailing block after r columns."
+      }
+    },
+    "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The authored least-squares theorem assumes $nge 1$, so the empty-column problem is outside the written claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Full column rank rules out the zero singular-value boundary for the triangular factor $widehat R$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 already describes the one-column decomposition of the residual into parallel and orthogonal parts."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rank deficiency is the relevant degeneracy here, and it is excluded explicitly by the full-column-rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This theorem compares algebraic condition numbers and least-squares residuals, not endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The minimiser is identified explicitly as the solution of $widehat R x=widehat Q^*b$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not phrased as an iff: it gives the minimiser formula and the condition-number comparison."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not phrased as an iff: it gives the minimiser formula and the condition-number comparison."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-normal-equations-square-the-spectral-condition-number",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $n\\ge 1$ and $m\\ge n$, and let\n$A\\in M_{m\\times n}(\\mathbb{R})$ have full column rank (rank $n$), with singular\nvalues $\\sigma_1\\ge\\cdots\\ge\\sigma_n>0$. Define the spectral condition number\nof the rectangular matrix $A$ by\n\n$$\\kappa_2(A):=\\frac{\\sigma_1}{\\sigma_n};$$\n\nfor a square invertible $A$ this agrees with\n$\\lVert A\\rVert_2\\lVert A^{-1}\\rVert_2$ of\n[[def-condition-number-of-a-nonsingular-linear-system]]. Then:\n\n1. The normal-equation matrix $A^{\\mathsf T}A$ is invertible, with\n   $\\kappa_2(A^{\\mathsf T}A)=\\kappa_2(A)^{2}$;\n2. equivalently,\n   $$\\kappa_2(A^{\\mathsf T}A)=\\frac{\\sigma_1^{2}}{\\sigma_n^{2}}.$$\n\nThe least-squares normal equation $A^{\\mathsf T}Ax=A^{\\mathsf T}b$ of\n[[thm-least-squares-solutions-and-normal-equation]] therefore has condition\nnumber exactly the square of the condition number of the least-squares problem\nitself.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With the reduced QR factorisation supplied by [L2] and shaped as in [L1], extend the columns of $\\widehat Q$ to an orthogonal basis $Q=[\\widehat Q\\ \\widehat Q_\\perp]$. Then $$ \\|Ax-b\\|_2 =\\|Q^{\\mathsf T}(Ax-b)\\|_2 =\\left\\|\\binom{\\widehat R x-\\widehat Q^{\\mathsf T}b}{-\\widehat Q_\\perp^{\\mathsf T}b}\\right\\|_2, $$ so $$ \\|Ax-b\\|_2^2 =\\|\\widehat R x-\\widehat Q^{\\mathsf T}b\\|_2^2+\\|\\widehat Q_\\perp^{\\mathsf T}b\\|_2^2. $$ The second term is independent of $x$, so minimising $\\|Ax-b\\|_2$ is equivalent to solving $\\widehat R x=\\widehat Q^{\\mathsf T}b$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $A$ has full column rank, the upper-triangular factor $\\widehat R$ has nonzero diagonal, so the triangular system of step 1.1 has a unique solution. Thus the least-squares minimiser is unique and equals that solution. This agrees with the normal equation of [L3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $Q$ is orthogonal and $A=Q\\binom{\\widehat R}{0}$, [L5] implies that $A$ and $\\widehat R$ have the same positive singular values, hence the same spectral condition number. By [L4], the normal-equation matrix has condition number $\\kappa_2(A)^2$. Therefore the QR solve uses a factor with condition $\\kappa_2(A)$, not the squared condition of the normal equations.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1-2.1 prove claim 1, and step 3.1 proves claim 2.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: the least-squares and conditioning claims now use the real scope of the cited normal-equations theorem. The proof identifies the minimizer by an orthogonal decomposition and compares the singular values of A and R to keep kappa_2(A) unsquared."
+      }
+    },
+    "cex-invertible-matrix-can-fail-unpivoted-lu-at-the-first-pivot": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This counterexample is a concrete $2\times 2$ matrix, so there is no empty-size branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the vanishing first leading principal minor $Delta_1=0$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is intentionally $2\times 2$ because the failure requires a nontrivial first pivot boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly the degenerate first-pivot witness: the matrix is invertible but its first pivot is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite matrix witness, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a fixed concrete matrix, not an arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counterexamples refute a one-way false statement rather than proving a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counterexamples refute a one-way false statement rather than proving a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$. For\n$1\\le k\\le n$, let $\\Delta_k$ be the determinant of the leading $k\\times k$\nprincipal submatrix $A_k$.\n\nThen $A$ has a normalised LU factorisation $A=LU$ whose upper factor $U$ has\nnonzero diagonal if and only if\n\n$$\\Delta_k\\ne 0\\qquad(1\\le k\\le n).$$\n\nIn particular, the condition forces $\\Delta_n=\\det A\\ne 0$, so $A$ is\ninvertible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The determinant of $A$ is $-1$, so $A$ is invertible. Its first leading principal minor is the $1\\times 1$ determinant $\\Delta_1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the vanishing of $\\Delta_1$ forbids an unpivoted unit-lower LU factorisation with nonzero pivots. Therefore invertibility alone does not suffice.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 refutes the statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-plu-factorisation-by-hand": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a specific $3\times 3$ matrix and has no empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 tracks the zero entry in the first row after pivoting and the zero multiplier for the old first row."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A $1\times 1$ matrix would not exhibit the row-swap behavior this worked example is meant to show."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 highlights the initially vanishing first pivot before the permutation moves a nonzero row into place."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite worked factorisation, not an endpoint computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every row swap and multiplier is computed explicitly from the displayed matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify a construction; they are not biconditional statements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify a construction; they are not biconditional statements."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-plu-factorisation-exists-for-every-square-matrix-and-detects-singularity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$, let $n\\ge 1$, and let\n$A\\in M_n(\\mathbb F)$.\n\n1. There exist a permutation matrix $P$, a unit lower-triangular matrix $L$,\n   and an upper-triangular matrix $U$ such that\n   $$PA=LU.$$\n2. If partial pivoting encounters a stage at which the whole active pivot column\n   is zero, then the active trailing block is singular, hence $A$ is singular.\n   Equivalently, if $A$ is invertible, partial pivoting finds a nonzero pivot at\n   every stage.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$, let $F=\\mathbb R$ or $\\mathbb C$, and let $\\sigma$ be a permutation of\n$\\{0,\\ldots,n-1\\}$. The corresponding **permutation matrix** $P_\\sigma$ is the\nmatrix whose $i$-th row is the $\\sigma(i)$-th row of $I_n$. Thus left\nmultiplication by $P_\\sigma$ permutes the rows of a matrix.\n\nIn **Gaussian elimination with partial pivoting**, ties are resolved by a fixed\ndeterministic rule. At stage $k$ one inspects the\nentries in column $k$ from rows $k$ through $n-1$, swaps a row with maximal\nentry modulus into row $k$, and then eliminates the entries below that pivot.\n\nIf $PA=LU$ is the resulting factorisation, its **pivot-growth factor** is\n\n$$\\rho(A):=\\frac{\\max_{i,j}|u_{ij}|}{\\max_{i,j}|a_{ij}|},$$\n\nprovided $A\\ne 0$; when $A=0$ one declares $\\rho(A)=1$. The absolute value or\nmodulus is the one from [[def-abs-value]] on real entries and its standard\ncomplex analogue on complex entries.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The largest entry in modulus in the first column is $2$ in row $2$, so the first pivot swap sends that row to the top. The first elimination multipliers are $0$ for the new second row and $1/2$ for the new third row, producing the intermediate matrix $$\\begin{pmatrix}2&1&1\\\\0&1&1\\\\0&\\frac12&\\frac32\\end{pmatrix}.$$ The second pivot is already the entry $1$ in row $2$, so no further swap is needed, and eliminating the $(3,2)$ entry with multiplier $1/2$ gives the displayed $U$. Recording the two nonzero multipliers in the permuted row order gives the displayed $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct multiplication gives $$ LU=\\begin{pmatrix}2&1&1\\\\0&1&1\\\\1&1&2\\end{pmatrix}=PA. $$ Hence the displayed matrices are a correct PLU factorisation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-ldu-factorisation-and-its-unique-diagonal-pivots": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is a concrete $2\times 2$ matrix, so there is no empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks that the diagonal pivots are nonzero before invoking uniqueness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is intentionally two-dimensional so both pivots and the unit-upper factor are visible."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example avoids the degenerate zero-pivot boundary so that uniqueness can be checked honestly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a matrix factorisation example, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The factors are written explicitly and multiplied out directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify a displayed factorisation rather than an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify a displayed factorisation rather than an iff statement."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ldu-factorisation",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\nAn **LDU factorisation** of $A$ is a factorisation\n\n$$A=LDU,$$\n\nwhere $L$ is unit lower triangular, $D$ is diagonal, and $U$ is unit upper\ntriangular. Every LDU factorisation therefore gives a normalised LU\nfactorisation $A=L\\widetilde U$ with $\\widetilde U:=DU$ upper triangular. In\nthe converse direction, if $A=L\\widetilde U$ is a normalised LU factorisation\nwhose diagonal pivots are all nonzero, then\n$$D:=\\operatorname{diag}(\\widetilde U),\\qquad U:=D^{-1}\\widetilde U$$\ngive an LDU factorisation. This converse need not hold when a diagonal pivot\nvanishes.\n\nWhen every diagonal entry of $D$ is nonzero, the factorisation has\n**nonzero diagonal pivots**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-normalised-lu-and-ldu-factorisations-are-unique",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $A\\in M_n(F)$.\n\n1. Suppose\n   $$A=LU=L'U',$$\n   where $L,L'$ are unit lower triangular and $U,U'$ are upper triangular with\n   nonzero diagonal. Then $L=L'$ and $U=U'$.\n2. Suppose\n   $$A=LDU=L'D'U',$$\n   where $L,L'$ are unit lower triangular, $D,D'$ are diagonal with nonzero\n   diagonal entries, and $U,U'$ are unit upper triangular. Then\n   $L=L'$, $D=D'$, and $U=U'$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiplying the right two factors gives $$ \\begin{pmatrix}2&0\\\\0&3\\end{pmatrix} \\begin{pmatrix}1&\\frac12\\\\0&1\\end{pmatrix} = \\begin{pmatrix}2&1\\\\0&3\\end{pmatrix}, $$ and then left multiplication by $\\begin{pmatrix}1&0\\\\2&1\\end{pmatrix}$ yields $\\begin{pmatrix}2&1\\\\4&5\\end{pmatrix}=A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The diagonal factor has nonzero entries $2$ and $3$, so [L2] applies. Any other LDU factorisation of $A$ with nonzero diagonal pivots must therefore have the same diagonal factor and hence the same pivot scalars.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-block-lu-factorisation-and-a-schur-complement-solve": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a concrete $3\times 3$ matrix and a $1+2$ block split, so there is no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The leading block is the nonzero scalar $2$, so the example does not cross the singular leading-block boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works with a $1\times 1$ leading block, exactly the smallest nontrivial block-LU split."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The purpose is the honest Schur-complement solve, so the singular or zero-leading-block degeneration is deliberately avoided."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a worked linear-system solve, not an endpoint computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Schur complement and the solve are computed explicitly from the displayed matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify one concrete factorisation and solve rather than an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify one concrete factorisation and solve rather than an iff statement."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-block-lu-factorisation-via-an-invertible-leading-block",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$A=\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}$$\n\nbe a square block matrix over a field, with $A_{11}$ square and invertible, and\nlet $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.\n\n1. One has the exact block factorisation\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&I\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&S\\end{pmatrix}.$$\n2. If $S=\\widetilde L\\widetilde U$ is any normalised LU factorisation, then\n   $$A=\\begin{pmatrix}I&0\\\\A_{21}A_{11}^{-1}&\\widetilde L\\end{pmatrix}\\begin{pmatrix}A_{11}&A_{12}\\\\0&\\widetilde U\\end{pmatrix}$$\n   is a block LU factorisation across the same partition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The leading block is $A_{11}=[2]$, so $S=\\begin{pmatrix}3&1\\\\1&2\\end{pmatrix}-\\frac12\\binom11(1\\ 1)$, which is the displayed Schur complement. The block-LU formula of [L1] gives the displayed factorisation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Solve $Ly=b$: $y_1=4$, $y_2=5-\\frac12\\cdot 4=3$, $y_3=4-\\frac12\\cdot 4=2$. Then solve $Ux=y$ from the bottom: $\\frac32x_3=2-\\frac12x_2$, $\\frac52x_2+\\frac12x_3=3$, and $2x_1+x_2+x_3=4$. This gives $x_3=1$, $x_2=1$, and $x_1=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify both the factorisation and the Schur-complement solve.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-cholesky-factorisation-and-solve": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete $2\times 2$ positive-definite matrix and has no empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The positive diagonal entries of $L$ keep the example away from the zero-pivot boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is two-dimensional so both Cholesky steps and both triangular solves are visible."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Indefinite and semidefinite degenerations are separated to the companion counterexample item instead of being mixed into this worked SPD example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite matrix solve, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The factor and solution are computed explicitly from the displayed numbers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify a concrete SPD factorisation rather than a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify a concrete SPD factorisation rather than a biconditional statement."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite and let\n$A=LL^*$ be its Cholesky factorisation with positive diagonal.\n\n1. For every right-hand side $b\\in\\mathbb C^n$, the system $Ax=b$ is solved by\n   first solving $Ly=b$ and then solving $L^*x=y$.\n2. The two triangular solves cost $2n^2+O(n)$ scalar operations altogether, and\n   the dense Cholesky factorisation costs\n   $$\\frac{1}{3}n^3+O(n^2)$$\n   scalar operations, compared with\n   $$\\frac{2}{3}n^3+O(n^2)$$\n   for dense LU factorisation without exploiting symmetry.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $$ LL^{\\mathsf T}= \\begin{pmatrix}2&0\\\\1&\\sqrt2\\end{pmatrix} \\begin{pmatrix}2&1\\\\0&\\sqrt2\\end{pmatrix} = \\begin{pmatrix}4&2\\\\2&3\\end{pmatrix}=A, $$ so the displayed matrix is a Cholesky factor.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Solve $Ly=b$: $2y_1=6$ and $y_1+\\sqrt2\\,y_2=5$, so $y_1=3$ and $y_2=\\sqrt2$. Then solve $L^{\\mathsf T}x=y$: $\\sqrt2\\,x_2=\\sqrt2$ and $2x_1+x_2=3$, hence $x_2=1$ and $x_1=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "cex-indefinite-and-semidefinite-matrices-fail-positive-diagonal-cholesky": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witnesses are concrete $2\times 2$ matrices, so no empty-size branch is relevant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 is the singular semidefinite zero-determinant boundary, and step 1.1 is the negative quadratic-form boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The two-dimensional witnesses are needed to separate the indefinite and semidefinite failures."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 is exactly the degenerate semidefinite case where singularity prevents a positive-diagonal Cholesky factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite matrix counterexample, not an endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both witnesses are fixed concrete matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a false one-way statement rather than proving an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a false one-way statement rather than proving an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $A$ is Hermitian, but with $x=(0,1)^{\\mathsf T}$ one has $x^*Ax=-1<0$, so $A$ is not positive definite. Therefore [L1] forbids a positive-diagonal Cholesky factorisation of $A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The matrix $B$ is positive semidefinite but singular. If $B=LL^*$ with positive diagonal, then every diagonal entry of $L$ is nonzero, so $L$ would be invertible and $B$ would be invertible as well, a contradiction. Hence $B$ also has no such Cholesky factorisation.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1-1.2 refute the statement in both the indefinite and the merely semidefinite cases.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b",
+        "notes": "Risk reviewed: both counterexample branches are explicit and correct. The indefinite witness violates positive definiteness at x = (0,1)^T, and the semidefinite witness shows that a positive-diagonal Cholesky factor would force invertibility, contradicting singularity."
+      }
+    },
+    "ex-householder-qr-factorisation-by-hand": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete $2\times 2$ matrix with an explicit reflector; there is no empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The only denominator is the fixed scalar $\\sqrt2\\ne 0$, and step 1.1 verifies directly that the displayed unit vector and reflector are well defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works directly with the first reflector and step 2.1 completes the last remaining column, which is the smallest full QR computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is chosen so the reflector is nontrivial rather than the already-axis-aligned degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a QR computation, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reflector vector $v$ and the resulting $Q,R$ are written down explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify one factorisation rather than an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify one factorisation rather than an iff claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector $v$ has norm $1$, and direct multiplication of $I-2vv^{\\mathsf T}$ gives the displayed matrix $H$. Since $H^{\\mathsf T}H=I$, it is an orthogonal reflector.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying by $A$ gives $$ HA= \\frac{1}{\\sqrt2} \\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix} \\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix} = \\begin{pmatrix}\\sqrt2&0\\\\0&\\sqrt2\\end{pmatrix}. $$ Thus $A=QR$ with $Q=H$ and $R$ upper triangular, exactly as predicted by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-givens-qr-on-a-sparse-matrix": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a specific sparse $3\times 2$ matrix and has no empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 each zero a targeted entry while preserving earlier zeros, which is the boundary behavior the example is meant to show."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The point is the two-stage sparse elimination pattern, so a one-row or one-column example would not show the intended behavior."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example avoids the already-zero active pair boundary so the two constructed rotations do genuine work."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a sparse QR example, not an endpoint computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both Givens parameters are computed explicitly from the displayed columns."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify a displayed QR computation rather than an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify a displayed QR computation rather than an iff claim."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first rotation $G_1=\\begin{pmatrix}3/5&4/5&0\\\\-4/5&3/5&0\\\\0&0&1\\end{pmatrix}$ sends the first column $(3,4,0)^{\\mathsf T}$ to $(5,0,0)^{\\mathsf T}$, so it zeros the $(2,1)$ entry while preserving the zero in position $(3,1)$. Applied to the second column, it gives $(24/5,-7/5,2)^{\\mathsf T}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The second rotation $$G_2=\\begin{pmatrix}1&0&0\\\\0&-7/\\sqrt{149}&10/\\sqrt{149}\\\\0&-10/\\sqrt{149}&-7/\\sqrt{149}\\end{pmatrix}$$ acts only on rows $2,3$, so it keeps the first column fixed and sends $(-7/5,2)^{\\mathsf T}$ to $(\\sqrt{149}/5,0)^{\\mathsf T}$. Hence $$R=G_2G_1A=\\begin{pmatrix}5&24/5\\\\0&\\sqrt{149}/5\\\\0&0\\end{pmatrix},$$ the displayed upper-triangular matrix.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since both rotations are unitary, $Q=(G_2G_1)^*$ and $A=QR$. This verifies the Givens QR factorisation promised by [L2].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1-3.1 verify the example.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-reduced-qr-least-squares-versus-normal-equations": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a concrete $3\times 2$ least-squares system; there is no empty-case branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses a small but nonzero singular value $10^{-4}$ precisely to show condition-number squaring before the zero-rank boundary is reached."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Two columns are needed to exhibit the contrast between the original factor and the normal-equation square."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example stays at full column rank, so the genuinely rank-deficient degeneration is deliberately avoided."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite-dimensional least-squares comparison, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reduced QR factor and the normal-equation matrix are fixed explicit matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify one numerical contrast rather than a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify one numerical contrast rather than a biconditional theorem."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb R)$ with $m\\ge n\\ge 1$ and full column rank.\nLet\n\n$$A=\\widehat Q\\widehat R$$\n\nbe a reduced QR factorisation, with\n$$\\widehat Q^{\\mathsf T}\\widehat Q=I_n$$\nand\n$\\widehat R$ upper triangular. Then:\n\n1. The least-squares minimiser of $\\|Ax-b\\|_2$ is the unique solution of\n   $$\\widehat R x=\\widehat Q^{\\mathsf T}b.$$\n2. The spectral condition number of $\\widehat R$ equals that of $A$, whereas\n   the normal-equation matrix satisfies\n   $$\\kappa_2(A^{\\mathsf T}A)=\\kappa_2(A)^2.$$\n   Thus the QR route solves with a factor of condition $\\kappa_2(A)$ rather\n   than the squared factor $\\kappa_2(A)^2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The columns of $A$ are already orthogonal, so $\\widehat Q=(e_1,e_2)$ and $\\widehat R=\\operatorname{diag}(1,10^{-4})$ form a reduced QR factorisation. Also $\\widehat Q^*b=(1,1)^{\\mathsf T}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Solving $\\widehat R x=\\widehat Q^*b$ gives $x_1=1$ and $10^{-4}x_2=1$, hence $x=(1,10^4)^{\\mathsf T}$. The factor $\\widehat R$ has spectral condition number $10^4$, whereas $A^{\\mathsf T}A=\\operatorname{diag}(1,10^{-8})$ has spectral condition number $10^8$. This is exactly the contrast described in [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-sparse-gaussian-elimination-can-create-fill-in": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a concrete $3\times 3$ sparse matrix and has no empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with a zero entry in position $(3,2)$ and shows that elimination turns it into $-1$."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The fill-in phenomenon needs at least a nontrivial elimination step, so a singleton matrix would not witness it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example isolates exactly the sparse-pattern degeneration where a structural zero is lost under elimination."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a sparse elimination witness, not an endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example follows one fixed elimination sequence on one displayed matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples verify one witness rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples verify one witness rather than a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$, let $F=\\mathbb R$ or $\\mathbb C$, and let $\\sigma$ be a permutation of\n$\\{0,\\ldots,n-1\\}$. The corresponding **permutation matrix** $P_\\sigma$ is the\nmatrix whose $i$-th row is the $\\sigma(i)$-th row of $I_n$. Thus left\nmultiplication by $P_\\sigma$ permutes the rows of a matrix.\n\nIn **Gaussian elimination with partial pivoting**, ties are resolved by a fixed\ndeterministic rule. At stage $k$ one inspects the\nentries in column $k$ from rows $k$ through $n-1$, swaps a row with maximal\nentry modulus into row $k$, and then eliminates the entries below that pivot.\n\nIf $PA=LU$ is the resulting factorisation, its **pivot-growth factor** is\n\n$$\\rho(A):=\\frac{\\max_{i,j}|u_{ij}|}{\\max_{i,j}|a_{ij}|},$$\n\nprovided $A\\ne 0$; when $A=0$ one declares $\\rho(A)=1$. The absolute value or\nmodulus is the one from [[def-abs-value]] on real entries and its standard\ncomplex analogue on complex entries.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the first pivot $a_{11}=1$. Eliminating the entries below it subtracts row $1$ from rows $2$ and $3$, giving $$ \\begin{pmatrix}1&1&0\\\\0&0&1\\\\0&-1&1\\end{pmatrix}. $$ The entry in position $(3,2)$ was $0$ before elimination and is now $-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The new nonzero in step 1.1 is fill-in: it appears after one elimination step even though the corresponding original entry was zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1-2.1 verify the example.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

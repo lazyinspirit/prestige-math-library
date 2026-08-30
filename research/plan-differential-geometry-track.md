@@ -897,7 +897,8 @@ full AC is used by the selected proof.
 **B page id:** `tangent-cotangent-and-the-differential-examples`
 **`requires`:** `smooth-manifolds-and-smooth-maps`,
 `the-total-derivative`, `dual-spaces-bilinear-forms-and-inertia`,
-`the-determinant-of-a-linear-operator`, `the-fundamental-theorems-of-calculus`
+`the-determinant-of-a-linear-operator`, `the-fundamental-theorems-of-calculus`,
+`the-inverse-function-theorem-completed`
 
 A tangent vector is defined first as an intrinsic derivation on germs of
 smooth functions. Coordinate derivations then prove that this abstract space

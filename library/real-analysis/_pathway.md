@@ -83,6 +83,7 @@ parts:
       - picard-lindelof-and-first-order-odes
       - smooth-manifolds-and-smooth-maps
       - euclidean-ordinary-differential-equations-with-smooth-dependence
+      - smooth-partitions-of-unity-and-exhaustions
       - regular-surfaces-and-surface-integrals
       - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems
@@ -95,6 +96,7 @@ parts:
       - the-complex-exponential-and-eulers-formula
       - trigonometric-and-oscillatory-examples-in-one-variable
       - areas-of-elementary-plane-figures
+      - tangent-cotangent-and-the-differential
       - the-real-gamma-and-beta-functions
       - volumes-of-elementary-solids-and-solids-of-revolution
       - the-divergence-theorem-and-classical-stokes
@@ -191,24 +193,21 @@ solid of revolution, and non-injective spherical coordinates.
 
 Norms give limits in $\mathbb R^n$; total derivatives give the chain rule, mixed partials,
 Taylor formulas, extrema, and inverse and implicit functions. Jordan integration, Fubini,
-change of variables, improper multiple integrals, and parameter differentiation extend
-integration to higher dimensions, while convexity and semicontinuity supply epigraph,
-subgradient, and Hessian tools. Volterra, Picard, Gronwall, maximal solutions, and Osgood
-settle first-order equations. The manifold page then abstracts the coordinate theory
-through topological manifolds, smooth atlases, smooth maps, and diffeomorphisms, and the
-smooth-dependence page adds variational equations, smooth local flows, and completeness for
-bounded or compactly supported fields. Regular surfaces, constant-rank maps, regular level
-sets, and Lagrange multipliers close the geometric thread.
+change of variables, improper multiple integrals, parameter differentiation, and convexity
+extend calculus to higher dimensions, while Volterra, Picard, Gronwall, maximal
+solutions, and Osgood settle first-order equations. Manifolds then abstract the coordinate
+theory through atlases, smooth maps, and diffeomorphisms; smooth dependence gives local
+flows; and partitions of unity plus proper exhaustions turn local charts into global
+constructions by supplying bump functions, gluing, smooth Urysohn separation, and compact
+exhaustion. Regular surfaces and constant-rank geometry close the thread.
 
 ## curves-and-the-fundamental-theorems
 
 Path length is the supremum of polygonal approximations, so bounded variation becomes
 geometry on curves; the fundamental theorems of calculus, line integrals and the gradient
-theorem turn derivatives back into increments along intervals and paths. Jordan content
-gives area and volume for polygons, solids of revolution and higher-dimensional balls,
-while the characterisations of $\pi$, the complex exponential, oscillatory examples and the
-Gamma and Beta integrals connect geometry with power series and special functions. In three
-dimensions divergence, curl and the Laplacian organise vector calculus, with conservative
-fields and vector potentials as the local structure theorems. The divergence theorem,
-Green's identities and classical Stokes then identify flux and circulation as the global
-integrals attached to divergence and curl.
+theorem turn derivatives back into increments. Jordan content gives area and volume. The
+tangent-cotangent page rewrites first-order calculus intrinsically on manifolds, with
+vectors as derivations or curve velocities and differentials as functorial chain-rule
+maps. The characterisations of $\pi$, the complex exponential, oscillatory examples, and
+the Gamma and Beta integrals connect geometry with special functions. The divergence
+theorem and classical Stokes then globalize divergence and curl.

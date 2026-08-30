@@ -229,6 +229,10 @@ recorded ID exists, otherwise it uses the mechanically rendered group task.
 Write scope remains with the owning group, while cross-group discoveries become
 alerts requiring the owner's group disposition.
 
+Step-8 adjudicators have web search enabled. Whenever their mathematics is
+uncertain, their task requires them to verify the point against original
+sources and record the exact source support before deciding or repairing it.
+
 Each rejection has an exact item/model/context-hash outcome:
 `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`. Only a confirmed
 fatal authorizes a Step-8 content edit; the other outcomes close without

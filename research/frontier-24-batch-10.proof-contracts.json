@@ -1,0 +1,2968 @@
+{
+  "version": 1,
+  "level": "frontier-24",
+  "note": "Step-5 authoring contract for frontier-24 batch 10 on Saturday, August 29, 2026.",
+  "scope": [
+    "thm-existence-and-uniqueness-of-extended-dfa-transition",
+    "lem-extended-dfa-transition-respects-concatenation",
+    "prop-every-finite-language-is-regular",
+    "thm-product-dfa-for-union-and-intersection",
+    "thm-complementing-accept-states-complements-the-language",
+    "cor-regular-languages-are-closed-under-boolean-operations",
+    "thm-dfa-for-language-difference",
+    "lem-removing-unreachable-states-preserves-language",
+    "prop-published-prefix-automata-extend-to-factor-avoidance-dfas",
+    "fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality",
+    "fs-complementing-a-dfa-complements-its-transition-graph",
+    "ex-extended-dfa-transition-respects-concatenation",
+    "ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa",
+    "cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality",
+    "thm-derivation-parse-tree-correspondence",
+    "thm-elimination-of-useless-symbols",
+    "thm-elimination-of-epsilon-productions",
+    "thm-elimination-of-unit-productions",
+    "thm-chomsky-normal-form",
+    "lem-gnf-substitution-step-preserves-language",
+    "lem-gnf-left-recursion-elimination-preserves-language",
+    "thm-greibach-normal-form",
+    "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+    "fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language",
+    "fs-cnf-preserves-epsilon-without-an-exception",
+    "ex-elimination-of-useless-symbols",
+    "ex-cfl-closure-under-union-concatenation-star-and-homomorphism",
+    "cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language"
+  ],
+  "contracts": {
+    "thm-existence-and-uniqueness-of-extended-dfa-transition": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "An **extended transition function** for $D$ is a function $$ \\delta^*:Q\\times\\Sigma^*\\to Q $$ satisfying the two clauses",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Iterating the DFA transition letter by letter defines a candidate function $\\delta^*$ on $Q\\times\\Sigma^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The candidate function satisfies the empty-word clause and the recursive clause from the definition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any other extended transition function agrees with the constructed one on $\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Agreement on length-$n$ words forces agreement on words of length $n+1$ by the same recursive clause.",
+          "step": "3.2",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The constructed function is therefore the unique extended transition function.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles $w=\\varepsilon$ explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 is the length-zero base case in the uniqueness induction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers words of the form $ua$ with $u=\\varepsilon$, hence length one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem concerns all DFA runs uniformly and has no separate collapsed quotient or empty-state exception beyond the empty word already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the run from the initial state to the final state by stepping through the word's first-to-last letters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from an arbitrary nonempty set; the proof gives an explicit construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The extended transition function exists and is unique, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The extended transition function exists and is unique, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the vulnerable point is the recursive definition and uniqueness across the empty versus nonempty word split. The current proof fixes q and w = a_0...a_{n-1}, builds the state sequence s_i explicitly, checks the n = 0 case for epsilon, and proves uniqueness by induction on |w| using the decomposition w = ua for every nonempty word."
+      }
+    },
+    "lem-extended-dfa-transition-respects-concatenation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-existence-and-uniqueness-of-extended-dfa-transition",
+          "source_section": "Statement",
+          "quote": "$$ \\delta^*(q,\\varepsilon)=q,\\qquad \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The concatenation law holds when the second word is $\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the law holds for $v$, the recursive clause turns $\\delta^*(p,uva)$ into $\\delta(\\delta^*(\\delta^*(p,u),v),a)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the recursive clause again identifies the last expression with $\\delta^*(\\delta^*(p,u),va)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Induction on the length of the second word proves the concatenation law for all $u$ and $v$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [
+        {
+          "id": "step-1-2",
+          "claim": "This step fixes the induction successor case by adjoining one final letter $a$ after the word $v$.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the case $v=\\varepsilon$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The induction base in step 1.1 is the zero-length second word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 handle the successor case $va$, which includes one-letter second words."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no exceptional sink, quotient, or empty-state branch beyond the empty second word already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 is exactly the boundary step where one extra final letter $a$ is appended."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a uniform induction and does not select an element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Extended DFA transition respects concatenation, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Extended DFA transition respects concatenation, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "prop-every-finite-language-is-regular": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "A language $L\\subseteq\\Sigma^*$ is **regular** when there exists a DFA $D$ over $\\Sigma$ such that $$ L=L(D), $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite prefix set $P$ plus one sink state defines a total finite automaton.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A run from $\\varepsilon$ ends at the state $w$ exactly for prefix words $w$, and otherwise falls to the sink.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The accepting set $F=L$ makes the constructed DFA accept exactly the words of $L$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the constructed DFA recognizes $L$, the language is regular.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The proof uses the start state $\\varepsilon$ and works even for the empty language through steps 1.1 and 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the empty word $\\varepsilon$ in the prefix-state set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the first appended letter case, hence one-letter words."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The one-state-plus-sink behavior in steps 1.1 and 2.1 covers degenerate finite languages such as $\\varnothing$ and $\\{\\varepsilon\\}$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the boundary where a word first ceases to be a prefix and enters the sink."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The automaton is constructed explicitly from all prefixes; no arbitrary witness is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every finite language is regular, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every finite language is regular, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "thm-product-dfa-for-union-and-intersection": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "A word $w\\in\\Sigma^*$ is **accepted by $D$** when $$ \\delta^*(q_0,w)\\in F. $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Their **union**, **intersection**, and **difference** are the languages $$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The product machine runs the two DFA's in parallel on ordered pairs of states.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The extended run of the product machine is the pair of the extended runs of the component machines.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With accepting set $F_1\\times F_2$, the product machine recognizes the intersection.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "With accepting set $(F_1\\times Q_2)\\cup(Q_1\\times F_2)$, the product machine recognizes the union.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The product construction therefore yields DFA witnesses for both operations.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the empty input word in the product-run invariant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The invariant of step 1.2 starts from the empty word and the start pair $(q_1,q_2)$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The successor-letter argument inside step 1.2 covers one-letter inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 remain valid when one language is empty or all of $\\Sigma^*$, since acceptance is read coordinatewise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the last appended letter in each coordinate run."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the construction is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The product construction gives DFA's for union and intersection, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The product construction gives DFA's for union and intersection, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the load-bearing step is the product-run invariant and the exact accepting sets for intersection and union. Step 1.2 proves delta_x^*((p,r),w) = (delta_1^*(p,w), delta_2^*(r,w)) by induction on |w|, with the epsilon and one-letter extension cases explicit, and steps 2.1-2.2 then translate membership in F_1 x F_2 and (F_1 x Q_2) union (Q_1 x F_2) into the two Boolean operations without hidden assumptions."
+      }
+    },
+    "thm-complementing-accept-states-complements-the-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Their **complement** is taken inside the same ambient $\\Sigma^*$: $$ L^{c}:=\\Sigma^*\\setminus L. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "A word $w\\in\\Sigma^*$ is **accepted by $D$** when $$ \\delta^*(q_0,w)\\in F. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The original DFA and the complemented DFA follow the same run on every word.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A word is accepted by the complemented DFA exactly when it is rejected by the original DFA.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the new language is the complement of the old one inside $\\Sigma^*$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 compares the two machines on every word, including $\\varepsilon$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies immediately to the empty word through the common final state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers one-letter words because the transition function is unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers degenerate accepting sets such as $F=\\varnothing$ or $F=Q$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof compares whole runs and accepting sets, not interval endpoints or concatenation cuts."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Complementing the accepting states complements the recognized language, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Complementing the accepting states complements the recognized language, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "cor-regular-languages-are-closed-under-boolean-operations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "A language $L\\subseteq\\Sigma^*$ is **regular** when there exists a DFA $D$ over $\\Sigma$ such that $$ L=L(D), $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-dfa-for-union-and-intersection",
+          "source_section": "Statement",
+          "quote": "there is a DFA over $\\Sigma$ recognizing $L_1\\cap L_2$, and there is a DFA over $\\Sigma$ recognizing $L_1\\cup L_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complementing-accept-states-complements-the-language",
+          "source_section": "Statement",
+          "quote": "$$ L(D^c)=\\Sigma^*\\setminus L(D). $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regular witnesses for $L$ and $K$ produce regular witnesses for union, intersection, and complement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every other Boolean combination is built from union, intersection, and complement inside the fixed ambient alphabet.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence every Boolean combination of two regular languages is regular.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes difference and symmetric difference, which still behave correctly when one language is empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The corollary has no numeric parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The corollary has no unit-size parameter requiring separate treatment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 already covers complement witnesses for extreme languages such as $\\varnothing$ and $\\Sigma^*$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or concatenation boundary is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof chooses DFA witnesses from regularity hypotheses, not from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under the Boolean operations over a fixed alphabet, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Regular languages are closed under the Boolean operations over a fixed alphabet, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "thm-dfa-for-language-difference": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Their **union**, **intersection**, and **difference** are the languages $$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-dfa-for-union-and-intersection",
+          "source_section": "Statement",
+          "quote": "Then there is a DFA over $\\Sigma$ recognizing $L_1\\cap L_2$, and there is a DFA over $\\Sigma$ recognizing $L_1\\cup L_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "A word $w\\in\\Sigma^*$ is **accepted by $D$** when $$ \\delta^*(q_0,w)\\in F. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The same product state space tracks the runs of $D_1$ and $D_2$ simultaneously.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choosing accepting pairs $(p,r)$ with $p\\in F_1$ and $r\\notin F_2$ encodes set difference.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Acceptance in the product machine is equivalent to acceptance by $D_1$ and rejection by $D_2$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "That acceptance condition is exactly membership in $L_1\\setminus L_2$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when one of the languages is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The product-run claim of step 1.1 includes the empty input word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers one-letter inputs through the product transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 covers degenerate accepting sets such as $F_2=Q_2$, yielding empty difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or concatenation endpoint analysis is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof gives an explicit machine construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The product construction gives a DFA for language difference, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The product construction gives a DFA for language difference, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "lem-removing-unreachable-states-preserves-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-reachable-dfa-state",
+          "source_section": "Definition",
+          "quote": "A state $q\\in Q$ is **reachable** when there exists a word $w\\in\\Sigma^*$ such that $$ q=\\delta^*(q_0,w). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "The **language recognized by $D$** is $$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every state visited while reading a word is reachable by the corresponding prefix.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The restricted automaton follows the same run as the original one on every word.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence a word is accepted by the restricted automaton exactly when it is accepted by the original automaton.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The two automata recognize the same language.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to every word, including $\\varepsilon$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length prefix in step 1.1 is the start state itself."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers prefixes of length one and therefore first-step reachability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If only the start state is reachable, step 2.1 still shows the restricted machine is correct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 is a prefix-by-prefix boundary argument along the run."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lemma uses the given input word and its prefixes; no witness is chosen from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Removing unreachable states preserves the recognized language, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Removing unreachable states preserves the recognized language, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "prop-published-prefix-automata-extend-to-factor-avoidance-dfas": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-words-factor-avoidance-and-prefix-states",
+          "source_section": "Definition",
+          "quote": "$$S_B:=\\{u:u\\text{ avoids }B\\text{ and }u\\text{ is a proper prefix of some }b\\in B\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+          "source_section": "Definition",
+          "quote": "For $s\\in S_B$ and $a\\in\\Sigma$, reject the letter $a$ if the concatenation $sa$ contains a factor in $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "A word $w\\in\\Sigma^*$ is **accepted by $D$** when $$ \\delta^*(q_0,w)\\in F. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Adjoining a sink to the published prefix automaton yields a total DFA.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The completed DFA ends in a prefix state exactly for avoiding words and in the sink exactly when a forbidden factor appears.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The accepting set $S_B$ therefore accepts exactly the words that avoid $B$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The completed machine recognizes the factor-avoidance language.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses that $\\varepsilon\\in S_B$ to supply the start state."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty word is accepted because step 2.1 places it at the start state in $S_B$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the first appended letter and whether it immediately creates a forbidden factor."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sink-state branch in steps 1.1 and 2.1 is the degenerate run after the first forbidden factor appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 tracks the boundary between the longest allowed suffix and the first disallowed extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the machine is defined canonically from $B$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The published prefix automata extend canonically to DFAs for factor-avoidance languages, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The published prefix automata extend canonically to DFAs for factor-avoidance languages, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the construction must repair the published partial prefix automaton to a total DFA without changing the factor-avoidance language. Step 1.1 adds the sink, sends every rejected letter to it, and keeps the longest-suffix state otherwise; step 2.1 checks by induction that avoiding words stay in S_B at exactly their longest allowed suffix while the first forbidden factor forces the run to bot forever."
+      }
+    },
+    "fs-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "$\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The pictured machine specifies a transition on input $0$ but none on input $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because the transition is undefined at $(q,1)$, the picture does not define a DFA.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This explicit picture refutes the claim that the sink may simply be omitted.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A single explicit counterexample over $\\{0,1\\}$ already refutes the universal claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The failure is missing one input transition, not an empty-word issue."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 isolates the missing one-letter input `1`."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample is already the one-state degenerate machine."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or concatenation boundary argument is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is named explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: a DFA transition diagram may omit a sink without changing totality, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: a DFA transition diagram may omit a sink without changing totality, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    },
+    "fs-complementing-a-dfa-complements-its-transition-graph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complementing-accept-states-complements-the-language",
+          "source_section": "Statement",
+          "quote": "$$ L(D^c)=\\Sigma^*\\setminus L(D). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "for each pair $(q,a)\\in Q\\times\\Sigma$ there is exactly one next state $\\delta(q,a)$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The true complement construction keeps the same transitions and changes only the accepting set.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Graph complementation of the one-state looping machine removes the only outgoing edges and destroys the DFA property.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore complementing the transition graph is not the DFA complement operation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the degenerate language complement from $\\Sigma^*$ to $\\varnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation is about whole-machine structure, not a zero-length parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is the one-state DFA used in steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 shows the graph-complemented machine degenerates to having no outgoing edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No boundary-index analysis appears in the refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refuting example is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: complementing a DFA complements its transition graph, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: complementing a DFA complements its transition graph, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    },
+    "ex-extended-dfa-transition-respects-concatenation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-extended-dfa-transition-respects-concatenation",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$. Then for all $p\\in Q$ and all words $u,v\\in\\Sigma^*$,\n$$ \\delta^*(p,uv)=\\delta^*(\\delta^*(p,u),v). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compute directly that $\\delta^*(q_0,ab)=q_2$, because $q_0\\xrightarrow{a}q_1\\xrightarrow{b}q_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Reading the whole concatenated word at once gives $q_0\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{b}q_3$, so $\\delta^*(q_0,uv)=q_3$ as well.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Continuing from $q_2$, we get $q_2\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{b}q_3$, so $\\delta^*(q_2,abb)=q_3$. Therefore $\\delta^*(\\delta^*(q_0,u),v)=q_3$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two calculations agree, exactly as [L1] predicts. In particular the word $ababb$ lands in the accepting state $q_3$, consistent with [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This worked example uses nonempty words $u$ and $v$; it is not designed as an empty-word test case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-length input occurs in the chosen calculation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each step of the explicit run in steps 1.1, 1.2, and 2.1 is a one-letter transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example intentionally uses a nontrivial four-state DFA rather than a degenerate machine."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares the endpoint after finishing $u$ with the endpoint after finishing all of $uv$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes concrete words rather than choosing witnesses from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Computing $\\\\delta^*(q,uv)$ as $\\\\delta^*(\\\\delta^*(q,u),v)$, the item is an example rather than a biconditional, so it has no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Computing $\\\\delta^*(q,uv)$ as $\\\\delta^*(\\\\delta^*(q,u),v)$, the item is an example rather than a biconditional, so it has no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-published-prefix-automata-extend-to-factor-avoidance-dfas",
+          "source_section": "Statement",
+          "quote": "The resulting machine is a DFA over $\\Sigma$, and it recognizes exactly the language of words over $\\Sigma$ that avoid every factor in $B$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $B=\\{11\\}$ the nonsink prefix states are exactly $\\varepsilon$ and $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The missing transition from $1$ on input $1$ must go to a looping sink because that extension creates the forbidden factor.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This completed machine is exactly the factor-avoidance DFA promised by the proposition.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 keeps $\\varepsilon$ as an accepting start state."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty word is included through the state $\\varepsilon$ in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 isolates the first forbidden one-letter extension from the state `1`."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sink-state loop in step 1.2 is the degenerate branch after a forbidden factor appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 analyzes exactly the boundary letter that turns `1` into the forbidden factor `11`."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is explicit and chooses no witness from an abstract nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Adding a sink turns the published prefix automaton for avoiding `11` into a DFA, the item is an example rather than a biconditional, so it has no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Adding a sink turns the published prefix automaton for avoiding `11` into a DFA, the item is an example rather than a biconditional, so it has no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-a-dfa-transition-diagram-may-omit-a-sink-without-changing-totality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "$\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The pictured machine lacks any image for the input pair $(q,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A missing image on $Q\\times\\Sigma$ means the picture is not a DFA.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So the picture is a counterexample to the refuted statement.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample already refutes the universal claim over the nonempty alphabet $\\{0,1\\}$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The failure is a missing transition on input `1`, not an empty-word issue."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 isolates the missing one-letter input `1`."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample is already the minimal one-state case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No boundary or cut argument is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A missing `1`-transition shows the drawn machine is not yet a DFA, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A missing `1`-transition shows the drawn machine is not yet a DFA, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    },
+    "thm-derivation-parse-tree-correspondence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-leftmost-and-rightmost-derivation",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar, and suppose\n$xAy\\Rightarrow_G x\\alpha y$ is one derivation step.\n\nThis step is **leftmost** when $x$ contains no variables, so the rewritten\noccurrence of $A$ is the leftmost variable in the sentential form. It is\n**rightmost** when $y$ contains no variables, so the rewritten occurrence of\n$A$ is the rightmost variable.\n\nA finite derivation is a **leftmost derivation** when each of its steps is\nleftmost, and a **rightmost derivation** when each of its steps is rightmost.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-parse-tree-and-yield",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. A **parse tree** for $G$ is a\nfinite, finitely branching rooted tree of finite sequences in the sense of\n[[def-finitely-branching-tree-on-finite-sequences]], together with a label on\neach node, satisfying the following conditions.\n\n- The root is labelled by the start variable $S$.\n- Every internal node is labelled by a variable $A\\in V$.\n- If an internal node labelled $A$ has ordered children labelled\n  $x_1,\\ldots,x_k$, then $A\\to x_1\\cdots x_k$ is a production of $G$.\n- A leaf is either labelled by a terminal in $\\Sigma$, or is a variable leaf\n  corresponding to a production $A\\to\\varepsilon$ and contributes no terminal\n  symbol to the yield.\n\nReading the terminal leaves from left to right gives a word in $\\Sigma^*$,\ncalled the **yield** of the parse tree.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that $S\\Rightarrow_G^* w$. Start with one root labelled $S$ and process the derivation step by step. When a step rewrites a current leaf labelled $A$ by a nonempty right-hand side $x_1\\cdots x_k$, make that leaf an internal node with ordered children labelled $x_1,\\ldots,x_k$. When a step uses $A\\to\\varepsilon$, leave that leaf in place as the variable leaf corresponding to the $\\varepsilon$-production. Because the derivation is finite, this constructs a finite parse tree whose nodes record exactly the productions used in the derivation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose a parse tree for $G$ has yield $w$. Start from the sentential form $S$ and repeatedly rewrite the leftmost variable leaf represented in the fixed tree: if that leaf is an internal node of the tree with ordered children $x_1,\\ldots,x_k$, apply the production $A\\to x_1\\cdots x_k$; if it is a variable leaf corresponding to $A\\to\\varepsilon$, apply that $\\varepsilon$-production. By [L2], every step is licensed by $G$, and by construction every step is leftmost in the sense of [L1]. Because the tree is finite, this process terminates after one step for each variable-labelled node, and the final terminal frontier is exactly the yield $w$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the end of the construction in step 1.1, the leaves read left to right are exactly the symbols of the terminal word $w$, because each derivation step replaces one leaf occurrence of $A$ by the same ordered right-hand side that the tree stores. So a derivation of $w$ yields a parse tree whose yield is $w$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The choice in step 1.2 is forced: at each stage there is a unique leftmost variable leaf of the fixed parse tree, so the leftmost derivation read from the tree is unique. The same argument, reading rightmost variable leaves instead, gives a unique rightmost derivation.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the forward implication of clause 1, and step 1.2 proves the reverse implication. Step 2.2 proves clause 2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers parse trees whose yield is $\\varepsilon$ via variable leaves corresponding to $\\varepsilon$-productions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-step derivation is included in step 1.1 as the induction base."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers one-step derivations and step 1.2 covers trees with one production at the root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 handles the degenerate case of a uniquely forced derivation from a fixed parse tree."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the leftmost frontier endpoint choice to read the derivation from the tree."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof does not appeal to a choice principle; the relevant leaf is forced by the fixed derivation or tree."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 cites steps 1.1 and 2.1 for the direction from derivation to parse tree."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 cites step 1.2 for the direction from parse tree to derivation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the refuter was right that this route is only correct for finite parse trees and must also account for epsilon leaves. The current definition now requires finiteness, step 1.1 records epsilon productions as variable leaves, and step 1.2 terminates because a finite tree has only finitely many variable-labelled nodes. That closes both the false equivalence and the ambiguity corollary that depended on it."
+      }
+    },
+    "thm-elimination-of-useless-symbols": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nullable-generating-and-reachable-variable",
+          "source_section": "Definition",
+          "quote": "A variable is **useful** when it is both generating and reachable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the start variable is not generating, the language is empty and one may switch to a fixed empty-language grammar.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Deleting variables unreachable from the start variable removes no terminal derivation.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the start variable is generating, deleting nongenerating productions leaves the language unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "After both deletions, all remaining variables are generating and reachable and the language is preserved.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining the empty-language branch with the generating-start branch proves the theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the empty-language case $L(G)=\\varnothing$ explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem has no scalar zero parameter apart from the empty-language branch already handled."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-size parameter requires its own branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 is the degenerate branch where even the start variable is nongenerating."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks reachability from the start variable, i.e. the boundary at the root of every derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit subsets of variables rather than choosing from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Eliminating useless symbols preserves the generated language, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Eliminating useless symbols preserves the generated language, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the risk is the empty-language branch and the claim that deleting nongenerating and then unreachable variables loses no terminal derivation. Step 1.1 isolates S notin T and the empty-language case, step 2.1 shows every variable used in a terminal derivation must be generating, and step 3.1 then removes only symbols outside the reachability closure from S."
+      }
+    },
+    "thm-elimination-of-epsilon-productions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nullable-generating-and-reachable-variable",
+          "source_section": "Definition",
+          "quote": "A variable $A\\in V$ is **nullable** when $A\\Rightarrow_G^*\\varepsilon$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Deleting explicit $\\varepsilon$-rules and adding all nonempty nullable deletions gives a grammar for the nonempty words of $L(G)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\varepsilon\\in L(G)$, a fresh start symbol restores that one missing word by a special rule $S_0\\to\\varepsilon$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Nonempty terminal derivations in the old and new grammars correspond by deleting or re-inserting nullable subderivations.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Adding the fresh start variable yields an equivalent grammar with the unique permitted $\\varepsilon$-production.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 isolates the case $\\varepsilon\\in L(G)$ explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length word is exactly the $\\varepsilon$ case handled in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers derivations of nonempty words, including one-letter terminal words."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The special-start-symbol repair in step 3.1 is the degenerate branch where the empty word must be restored."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 analyzes deleting nullable occurrences from the ends or interior of a right-hand side."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All nullable deletions are added systematically; no arbitrary witness is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Epsilon-productions can be eliminated except possibly at the start symbol, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Epsilon-productions can be eliminated except possibly at the start symbol, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the proof has to separate nonempty words from the exceptional epsilon case and show that deleting nullable occurrences does not invent or lose other derivations. Step 1.1 adds every nonempty nullable deletion, step 2.1 compresses and re-expands exactly the nullable subderivations, and step 3.1 restores epsilon only via a fresh start symbol S_0 that never appears on a right-hand side."
+      }
+    },
+    "thm-elimination-of-unit-productions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-elimination-of-epsilon-productions",
+          "source_section": "Statement",
+          "quote": "there exists a context-free grammar $G'$ with $L(G')=L(G)$ whose only $\\varepsilon$-production is a start-symbol rule $S_0\\to\\varepsilon$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "After the epsilon-reduction seam, unit chains can be replaced by copied nonunit productions.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every terminal derivation in the old grammar compresses to one in the copied-rule grammar.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Every copied production in the new grammar expands back through a unit chain in the old grammar.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The copied-rule grammar is equivalent to the original and has no unit productions.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 imports the prior epsilon-elimination seam, so the empty-word branch is already controlled before unit elimination."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A unit chain of length zero is included implicitly in step 1.1 when $A=B$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the case of a single unit production immediately followed by one nonunit production."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the degenerate case where there are no unit productions, so the copied-rule grammar is unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is about grammar rewrites and unit chains, not interval or concatenation boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All copied productions are added systematically from the unit-reachability relation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Unit productions can be eliminated, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Unit productions can be eliminated, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the delicate point is that the copied-rule grammar must cover both zero-length and positive-length unit chains while preserving the possible start epsilon rule imported from epsilon elimination. Step 1.1 defines A leadsto B using only unit productions, so A = B is included; steps 2.1 and 2.2 then compress a maximal unit block to a copied nonunit production and expand any copied production back through the recorded unit chain."
+      }
+    },
+    "thm-chomsky-normal-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-elimination-of-useless-symbols",
+          "source_section": "Statement",
+          "quote": "For every context-free grammar $G$ there exists a context-free grammar $G'$ such that $L(G')=L(G)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-elimination-of-epsilon-productions",
+          "source_section": "Statement",
+          "quote": "$G_\\varepsilon$ has no $\\varepsilon$-productions and $$ L(G_\\varepsilon)=L(G)\\setminus\\{\\varepsilon\\}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-elimination-of-unit-productions",
+          "source_section": "Statement",
+          "quote": "there exists a context-free grammar $H$ such that $L(H)=L(G)$ and $H$ has no unit productions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-chomsky-normal-form",
+          "source_section": "Definition",
+          "quote": "1. $A\\to BC$, where $A,B,C\\in V$;",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The standard useless-symbol, epsilon, and unit eliminations reduce to a grammar with only nonunit nonempty structure left to normalize.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Replacing terminals inside long right-hand sides by fresh letter variables preserves the language and leaves only terminal-singletons or variable strings.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Binarizing every variable string of length at least three preserves the yield of each long production.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "After these rewrites, every production has one of the CNF shapes and the language is unchanged.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 carries along the special epsilon-exception seam from the previous theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length word is exactly the optional $S\\to\\varepsilon$ exception retained through step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 preserves one-letter terminal productions of the form $A\\to a$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 is vacuous when there are no right-hand sides of length at least three, and the proof still goes through."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles the endpoints of long right-hand sides when replacing them by a binary chain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The introduced variables are chosen fresh explicitly; no arbitrary witness from a nonempty family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every context-free language has an equivalent grammar in Chomsky normal form, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every context-free language has an equivalent grammar in Chomsky normal form, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the normal-form claim is only sound if the prior useless-symbol, epsilon, and unit eliminations leave the unique permitted epsilon exception under control and if the terminal-replacement and binarization steps preserve yields exactly. The current proof uses that seam explicitly in step 1.1, keeps one-letter terminal rules in step 2.1, and makes each long rule into a forced binary chain in step 3.1."
+      }
+    },
+    "lem-gnf-substitution-step-preserves-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-one-step-and-reflexive-transitive-derivation",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. A word over $V\\cup\\Sigma$ is\na **sentential form**.\n\nFor sentential forms $\\beta,\\gamma$, write\n$$ \\beta\\Rightarrow_G\\gamma $$\nwhen there exist words $x,y$ over $V\\cup\\Sigma$, a variable $A\\in V$, and a\nproduction $A\\to\\alpha$ in $P$ such that\n$$ \\beta=xAy,\\qquad \\gamma=x\\alpha y. $$\nThis is the **one-step derivation relation** of $G$, a relation in the sense of\n[[def-relation-domain-range-and-field]] on the set of sentential forms.\n\nWrite\n$$ \\beta\\Rightarrow_G^*\\gamma $$\nwhen $\\gamma$ is obtained from $\\beta$ by finitely many one-step derivations,\npossibly zero. This is the **reflexive transitive closure** of $\\Rightarrow_G$,\nand a chain\n$$ \\beta=\\beta_0\\Rightarrow_G\\beta_1\\Rightarrow_G\\cdots\\Rightarrow_G\\beta_n=\\gamma $$\nis a **finite derivation** from $\\beta$ to $\\gamma$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $xAy\\Rightarrow_G xuBvy$ be one use of the deleted production. In any terminal derivation, the distinguished occurrence of $B$ is eventually rewritten by one of the displayed productions $B\\to w_i$, because those are exactly the productions of $B$ in $G$. If later in the same derivation that occurrence is rewritten by $B\\to w_i$, then the relevant part of the derivation has the form $$ xAy\\Rightarrow_G xuBvy\\Rightarrow_G^* x'uBvy'\\Rightarrow_G x'uw_ivy'\\Rightarrow_G^* z, $$ where the intermediate steps from $xuBvy$ to $x'uBvy'$ rewrite only the surrounding context and do not touch that occurrence of $B$. Because $H$ contains the substituted production $A\\to uw_iv$, we may instead begin with $$ xAy\\Rightarrow_H xuw_ivy, $$ then perform the same surrounding-context rewrites to obtain $x'uw_ivy'$, and then continue to $z$. So the two marked uses in $G$ are replaced by one use in $H$ with the same final yield.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, every use in $H$ of a substituted production $A\\to uw_iv$ can be expanded in $G$ to the two steps $$ xAy\\Rightarrow_G xuBvy\\Rightarrow_G xuw_ivy. $$ Replacing each substituted step in a derivation of a terminal word in $H$ by this two-step fragment yields a derivation in $G$ with the same yield. Hence [L2] gives $L(H)\\subseteq L(G)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a terminal derivation in $G$ never uses the deleted production $A\\to uBv$, then it is also a derivation in $H$. Otherwise apply step 1.1 to the first use of $A\\to uBv$, and repeat this replacement for each remaining use. The result is a derivation in $H$ of the same terminal word, so [L2] gives $L(G)\\subseteq L(H)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two inclusions from steps 2.1 and 1.2 prove $L(H)=L(G)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The lemma permits $u$, $v$, and the $w_i$ to be empty words, and steps 1.1 and 2.1 still match the derivation fragments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-length context word is included when $u=\\varepsilon$ or $v=\\varepsilon$ in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 already handles the one-substitution case of a single production $B\\to w_i$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the target production $A\\to uBv$ is never used, step 2.1 leaves the derivation in $H$ unchanged and step 3.1 gives the reverse inclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow the distinguished occurrence of $B$ to sit at either endpoint by taking $u=\\varepsilon$ or $v=\\varepsilon$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All substituted productions are listed explicitly; no arbitrary witness is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Substituting a variable's productions into a leading variable occurrence preserves the language, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Substituting a variable's productions into a leading variable occurrence preserves the language, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "lem-gnf-left-recursion-elimination-preserves-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-leftmost-and-rightmost-derivation",
+          "source_section": "Definition",
+          "quote": "A finite derivation is a **leftmost derivation** when each of its steps is leftmost",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any maximal leftmost block of immediate left-recursive uses of $A\\to Au_i$ ends with one non-left-recursive production $A\\to v_j$ and yields $v_j$ followed by a finite tail of the $u_i$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The helper variable $R$ generates exactly those finite tails, so the rewritten grammar reproduces the same segment.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, every derivation segment through $R$ regroups into a block of old left-recursive uses followed by one $A\\to v_j$ step.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Because all other productions are unchanged, the regrouping preserves the whole generated language.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the case $k=0$, where no left-recursive use occurs and the grammar uses $A\\to v_j$ directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The $k=0$ branch in step 2.1 is the zero-left-recursion case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the case of exactly one immediate left-recursive use before the final $A\\to v_j$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If there are no left-recursive productions at all, the rewriting of steps 2.1 and 3.1 is vacuous."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 tracks the tail words appended at the right endpoint of the expanding sentential form."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The helper productions are introduced explicitly; no arbitrary witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Eliminating immediate left recursion preserves the language, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Eliminating immediate left recursion preserves the language, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: the load-bearing point is regrouping a maximal left-recursive block into the helper variable R, including the k = 0 branch and the order of the u_i tail. Step 1.1 identifies the exact leftmost derivation segment A => Au_i1 => ... => v_j u_ik ... u_i1, and steps 2.1-3.1 convert that segment back and forth with the R-derivation without changing the produced word."
+      }
+    },
+    "thm-greibach-normal-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky\nnormal form.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-gnf-substitution-step-preserves-language",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a context-free grammar containing the production\n$$ A\\to uBv. $$\nSuppose the productions of $B$ in $G$ are exactly\n$$ B\\to w_1,\\ldots,B\\to w_m, $$\nwhere $u,v,w_1,\\ldots,w_m$ are words over variables and terminals. Let $H$ be\nthe grammar obtained by deleting the production $A\\to uBv$ and replacing it by\nthe family\n$$ A\\to uw_1v,\\ldots,A\\to uw_mv, $$\nwhile keeping every other production of $G$.\n\nThen\n$$ L(H)=L(G). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-gnf-left-recursion-elimination-preserves-language",
+          "source_section": "Statement",
+          "quote": "Suppose the productions of a variable $A$ in a context-free grammar are exactly\n$$ A\\to Au_1,\\ldots,A\\to Au_r,\\qquad A\\to v_1,\\ldots,A\\to v_s, $$\nwhere none of the words $v_j$ begins with $A$. Introduce a fresh variable $R$\nand replace those productions by\n$$ A\\to v_1,\\ldots,A\\to v_s,\\qquad A\\to v_1R,\\ldots,A\\to v_sR, $$\n$$ R\\to u_1,\\ldots,R\\to u_r,\\qquad R\\to u_1R,\\ldots,R\\to u_rR, $$\nleaving every other production unchanged.\n\nThen the resulting grammar generates the same language as the original grammar.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-greibach-normal-form",
+          "source_section": "Definition",
+          "quote": "A context-free grammar $G=(V,\\Sigma,P,S)$ is in **Greibach normal form** when\nevery production is of the form\n$$ A\\to a\\alpha, $$\nwhere $A\\in V$, $a\\in\\Sigma$, and $\\alpha$ is a possibly empty word of\nvariables, together with the optional exception $S\\to\\varepsilon$ when\n$S$ does not occur on any right-hand side.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replace $G$ by an equivalent CNF grammar $G_1$ as in [L1], and order its original variables as $A_1,\\ldots,A_n$. In a forward pass through this list, fix $A_i$ and repeatedly use [L2] to remove every production of the form $A_i\\to A_j\\alpha$ with $j<i$. When that is done, use [L3] to eliminate the remaining immediate left-recursive productions $A_i\\to A_i\\beta$, introducing an auxiliary variable $B_i$ if needed. After stage $i$, every production of $A_i$ begins either with a terminal or with an original variable $A_k$ satisfying $k>i$, and every new production of $B_i$ begins either with a terminal or with an original variable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In particular, after the forward pass the productions of $A_n$ already begin with terminals, because there is no index $k>n$. Now argue downward on $i=n-1,n-2,\\ldots,1$. Assume the productions of $A_{i+1},\\ldots,A_n$ already begin with terminals. Every production of $A_i$ begins either with a terminal or with some $A_k$ having $k>i$ by step 1.1, so repeated use of [L2] substitutes the full terminal-leading production family of each such $A_k$ into the leading occurrence. Thus every production of $A_i$ can also be made terminal-leading without changing the language.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The same downward substitutions clean every auxiliary variable introduced during the left-recursion eliminations. By step 1.1, each production of such a $B_i$ already begins either with a terminal or with an original variable $A_k$. Once the productions of each $A_k$ are terminal-leading by step 2.1, repeated use of [L2] removes that leading variable from the productions of $B_i$ as well. Therefore, after finitely many substitutions, every production in the whole grammar begins with a terminal, except possibly the start-symbol rule $S\\to\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Because the construction started from CNF, the symbols after the first terminal in any rewritten production are variables, and the optional start-symbol rule $S\\to\\varepsilon$ is preserved only in the exceptional case allowed by [L4]. Hence the final grammar is in Greibach normal form, and [L2] and [L3] preserved equivalence throughout.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 preserves the optional start-symbol $\\varepsilon$ exception when the language contains the empty word."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length exceptional word is the optional $S\\to\\varepsilon$ clause preserved in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes productions already beginning with a terminal and no following variables."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If a processed variable already has only terminal-leading productions, step 2.1 is vacuous for that variable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 specifically targets the left endpoint of each right-hand side, namely its leading variable."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The variable order is fixed explicitly and the rewrites are deterministic once that order is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every context-free language has an equivalent grammar in Greibach normal form, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every context-free language has an equivalent grammar in Greibach normal form, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed: this theorem was genuinely vulnerable both at the reader stage and at refutation time. The current proof no longer claims one forward pass suffices; it uses the repaired two-phase route, and [L2] now cites the substitution lemma in the exact exhaustive form needed to substitute all productions of a leading variable. The downward sweep then cleans both the original variables and every auxiliary B_i."
+      }
+    },
+    "thm-cfl-closure-under-union-concatenation-star-and-homomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-alphabet-homomorphism-and-induced-word-map",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\Delta$ be alphabets. An **alphabet map** is a function\n$h:\\Sigma\\to\\Delta^*$ in the sense of [[def-function]].\n\nIts **induced word map** is the function\n$$ \\widehat h:\\Sigma^*\\to\\Delta^* $$\ndefined as follows. For the empty word, $\\widehat h(\\varepsilon)=\\varepsilon$.\nFor a one-letter word $w=a_0$, set $\\widehat h(w):=h(a_0)$. For a word\n$w=a_0a_1\\cdots a_{n-1}$ of length $n\\ge2$ over $\\Sigma$, set\n$$ \\widehat h(w):=\\bigl(\\cdots((h(a_0)h(a_1))h(a_2))\\cdots h(a_{n-1})\\bigr), $$\nthe left-associated concatenation of the image words of its letters.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Rename variables of $G_1$ and $G_2$ apart, and add a fresh start variable $S$. The grammar with productions of $G_1$ and $G_2$ together with $S\\to S_1$ and $S\\to S_2$ generates exactly $L_1\\cup L_2$. Similarly, adding only the bridge rule $S\\to S_1S_2$ yields a grammar for the concatenation $L_1L_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For Kleene star, keep $G_1$ and add a fresh start variable $S$ with productions $S\\to\\varepsilon$ and $S\\to S_1S$. Repeating the second rule any finite number of times and then using $S\\to\\varepsilon$ generates exactly a concatenation of finitely many words from $L_1$, so the new grammar generates $L_1^*$.",
+          "step": "1.2",
+          "inputs": [
+            "construct",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For homomorphism, first rename the variables of the chosen grammar for $L_1$ so that they are disjoint from $\\Delta$. Then replace every terminal letter $a$ occurring in a production by the word $h(a)$, keeping that renamed variable set unchanged. The result is still a context-free grammar over $\\Delta$, and if a derivation in the source grammar yields $w=a_0\\cdots a_{n-1}$, then the corresponding derivation in the rewritten grammar yields $h(a_0)\\cdots h(a_{n-1})=\\widehat h(w)$ by [L2].",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, any terminal derivation in the rewritten grammar follows the same variable-expansion pattern as a terminal derivation in the renamed source grammar, because the only change was to replace each source terminal occurrence by its prescribed image word $h(a)$. Therefore the terminal word produced at the end is exactly the image under $\\widehat h$ of a word of $L_1$, so the new grammar generates exactly $\\widehat h(L_1)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 1.2, 1.3, and 2.1 construct grammars for all four languages, so [L1] shows that context-free languages are closed under union, concatenation, Kleene star, and homomorphism.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly inserts $S\\to\\varepsilon$ for Kleene star."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-fold concatenation in $L_1^*$ is exactly the $S\\to\\varepsilon$ branch of step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 also covers the one-factor case by one use of $S\\to S_1S$ followed by $S\\to\\varepsilon$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 remains correct if one input language is empty, and step 1.3 remains correct if some letter image is $\\varepsilon$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 replaces terminals at every position of a right-hand side, including the first and last positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The constructions are explicit once the input grammars and homomorphism are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under union, concatenation, Kleene star, and homomorphism, the top-level claim is not written as a biconditional, so it has no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Context-free languages are closed under union, concatenation, Kleene star, and homomorphism, the top-level claim is not written as a biconditional, so it has no separate reverse implication boundary."
+        }
+      ]
+    },
+    "fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ambiguity-and-inherent-ambiguity",
+          "source_section": "Definition",
+          "quote": "A context-free language $L$ is **inherently ambiguous** when every context-free grammar $G$ with $L(G)=L$ is ambiguous.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The expression grammar is ambiguous because the word $a+a*a$ has two distinct parses.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A precedence grammar generates the same expression language but assigns $a+a*a$ only the parse $a+(a*a)$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the language has an unambiguous grammar, it is not inherently ambiguous, so the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A single explicit counterexample language already refutes the universal claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample is not about empty-word generation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The ambiguity witness needs a longer expression than one symbol."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The refutation hinges on one concrete witness word, $a+a*a$, in steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof compares parse structures rather than index endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample grammars are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: an ambiguous CFG always generates an inherently ambiguous language, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: an ambiguous CFG always generates an inherently ambiguous language, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    },
+    "fs-cnf-preserves-epsilon-without-an-exception": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-chomsky-normal-form",
+          "source_section": "Definition",
+          "quote": "optionally, $S\\to\\varepsilon$, provided that $S$ does not occur on any right-hand side.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chomsky-normal-form",
+          "source_section": "Statement",
+          "quote": "Every context-free grammar has an equivalent context-free grammar in Chomsky normal form.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The grammar $S\\to\\varepsilon$ generates $\\{\\varepsilon\\}$, so any equivalent CNF grammar must generate $\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Without the start-symbol exception, the remaining CNF rule shapes can only generate nonempty terminal words.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "That contradiction shows the special start-symbol exception is genuinely necessary.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 are entirely about the empty word $\\varepsilon$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 isolates the zero-length word case explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 contrasts the empty word with the fact that CNF terminal productions always contribute one symbol."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample grammar is the minimal one-rule grammar $S\\to\\varepsilon$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or concatenation boundary argument appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample grammar is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: converting to Chomsky normal form preserves epsilon without a special start-symbol exception, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: converting to Chomsky normal form preserves epsilon without a special start-symbol exception, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    },
+    "ex-elimination-of-useless-symbols": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-elimination-of-useless-symbols",
+          "source_section": "Statement",
+          "quote": "there exists a context-free grammar $G'$ such that $L(G')=L(G)$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The variable $C$ is nongenerating and the variable $D$ is unreachable in the displayed grammar.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "All terminal derivations from $S$ already lie in the smaller grammar with only $S$, $A$, and $B$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The reduced grammar is therefore a concrete instance of useless-symbol elimination.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example is about a nonempty language $\\{a,ab\\}$ rather than the empty-language branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric zero parameter is present."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example keeps the one-letter word $a$ in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits both kinds of uselessness: nongenerating and unreachable."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The verification is a grammar inspection, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is fully explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Removing one nongenerating variable and one unreachable variable, the item is an example rather than a biconditional, so it has no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Removing one nongenerating variable and one unreachable variable, the item is an example rather than a biconditional, so it has no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "ex-cfl-closure-under-union-concatenation-star-and-homomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+          "source_section": "Statement",
+          "quote": "4. $\\widehat h(L_1)=\\{\\widehat h(w):w\\in L_1\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed bridge rules realize the union, concatenation, and star constructions for the concrete languages $L_1$ and $L_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Replacing $a$ by $0$ and $b$ by $1$ gives the homomorphic image grammar for $\\{0^n1^n:n\\ge 0\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These explicit grammars realize all four closure operations from the theorem.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the star grammar's $S\\to\\varepsilon$ branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-fold concatenation in $L_1^*$ is exactly the $\\varepsilon$ branch of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One application of $S\\to S_1S$ followed by $S\\to\\varepsilon$ in step 1.1 yields the one-factor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is intentionally nondegenerate and does not use empty input languages or trivial homomorphisms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 replaces both endpoint terminals $a$ and $b$ in each source word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every grammar and homomorphism in the example is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In One family of grammars realizing union, concatenation, star, and homomorphism, the item is an example rather than a biconditional, so it has no separate forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In One family of grammars realizing union, concatenation, star, and homomorphism, the item is an example rather than a biconditional, so it has no separate reverse implication to discharge."
+        }
+      ]
+    },
+    "cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ambiguity-and-inherent-ambiguity",
+          "source_section": "Definition",
+          "quote": "A context-free language $L$ is **inherently ambiguous** when every context-free grammar $G$ with $L(G)=L$ is ambiguous.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first grammar is ambiguous because $a+a*a$ has two distinct parses there.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The second grammar gives the same language but forces the precedence parse $a+(a*a)$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the shared language is not inherently ambiguous and the first grammar is a counterexample.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The explicit expression-language counterexample already refutes the universal claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample is not about the empty word."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness needs a longer expression than one symbol."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The single witness word $a+a*a$ drives the counterexample in steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof compares parse structures rather than word endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two grammars are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In An ambiguous expression grammar with an unambiguous grammar for the same language, the item refutes a one-way claim rather than proving an iff, so there is no separate forward implication boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In An ambiguous expression grammar with an unambiguous grammar for the same language, the item refutes a one-way claim rather than proving an iff, so there is no separate reverse implication boundary."
+        }
+      ]
+    }
+  }
+}

@@ -5,6 +5,12 @@ and incoming alerts. Read each owned rejection against the current item and its
 cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
 one adjudication.
 
+Web search is available in this role. If any mathematics is uncertain, use it
+and verify the point against original sources before deciding the outcome or
+making a repair. Record the sources consulted and the exact claim each source
+supports in the group report; do not resolve uncertainty from memory or a
+secondary summary alone.
+
 Append one row per rejection to `research/{{run}}-judge-adjudications.jsonl`
 with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
 `confirmed_fatal` licenses a content repair and matching defect-ledger row;

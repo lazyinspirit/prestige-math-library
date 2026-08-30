@@ -1,0 +1,266 @@
+[
+  {
+    "defect_id": "frontier-24-S6-d-touched-10-lem-gnf-substitution-step-preserves-language",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "invalid-inference",
+    "severity": "fatal",
+    "location": "proof-step",
+    "subject": "lem-gnf-substitution-step-preserves-language",
+    "batch": "10",
+    "caught_at_stage": "6a-read",
+    "caught_by_role": "reader",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "rewrite",
+    "source": "reader-10",
+    "adjudication_ref": [
+      "touched:10:lem-gnf-substitution-step-preserves-language"
+    ],
+    "subclass_note": "Reader 10 confirmed that the old proof compressed only the adjacent two-step fragment A -> uBv then B -> w_i, so it did not justify derivations that rewrite the surrounding context before that distinguished B is expanded. The current lemma rewrites the proof around the actual derivation fragment with intervening context rewrites, and Alpha later tightened the statement to require the displayed B-productions to be exhaustive.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-reader-10.md",
+        "note": "Reader 10 records that the old proof handled only the adjacent substitution fragment."
+      },
+      {
+        "path": "items/lem-gnf-substitution-step-preserves-language.md",
+        "note": "The current lemma handles intervening context rewrites and states that the displayed B-productions are the full family."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-touched-10-thm-greibach-normal-form",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "invalid-inference",
+    "severity": "fatal",
+    "location": "proof-step",
+    "subject": "thm-greibach-normal-form",
+    "batch": "10",
+    "caught_at_stage": "6a-read",
+    "caught_by_role": "reader",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "rewrite",
+    "source": "reader-10",
+    "adjudication_ref": [
+      "touched:10:thm-greibach-normal-form"
+    ],
+    "subclass_note": "Reader 10 confirmed that the old proof falsely claimed one forward pass through the ordered variables makes every production terminal-leading. The current theorem uses the honest forward-pass plus downward-substitution route, and Alpha later tightened its facts block so [L2] cites the substitution lemma only in the exhaustive form the proof actually needs.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-reader-10.md",
+        "note": "Reader 10 records the false one-pass inference and the repaired two-phase proof route."
+      },
+      {
+        "path": "items/thm-greibach-normal-form.md",
+        "note": "The current theorem uses the forward pass, the downward sweep, and the corrected exhaustive [L2] citation."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-1",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "ill-formed",
+    "severity": "fatal",
+    "location": "definition",
+    "subject": "def-parse-tree-and-yield",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:1"
+    ],
+    "subclass_note": "The refuter correctly observed that the old definition allowed finitely branching but infinite trees, so an infinite unary A-chain could count as a parse tree without encoding any finite derivation. The current definition now requires the tree itself to be finite and makes that exclusion explicit in the remarks.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 gives the infinite A-chain counterexample against the old finitely branching definition."
+      },
+      {
+        "path": "items/def-parse-tree-and-yield.md",
+        "note": "The current definition requires a finite tree and explicitly rules out infinite variable chains."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-2",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "false-or-overstrong-statement",
+    "severity": "fatal",
+    "location": "statement",
+    "subject": "thm-derivation-parse-tree-correspondence",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "rewrite",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:2"
+    ],
+    "subclass_note": "The refuter correctly showed that the old equivalence failed once the parse-tree definition admitted infinite branches. The current proof route now works only with finite parse trees, records epsilon-productions as variable leaves, and makes the converse construction terminate because there are only finitely many variable-labelled nodes to expand.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 uses the infinite parse-tree counterexample to refute the old statement."
+      },
+      {
+        "path": "items/thm-derivation-parse-tree-correspondence.md",
+        "note": "The current theorem and proof now rely on finite parse trees and explicit epsilon-leaf handling."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-3",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "false-or-overstrong-statement",
+    "severity": "fatal",
+    "location": "definition",
+    "subject": "def-ambiguity-and-inherent-ambiguity",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:3"
+    ],
+    "subclass_note": "The old ambiguity definition inherited the parse-tree defect and therefore falsely claimed that two parse trees always correspond to two distinct leftmost derivations. The current definition now states the equivalence using finite parse trees, which is exactly the repaired theorem it cites.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 explains why the old parse-tree equivalence made the ambiguity clause false."
+      },
+      {
+        "path": "items/def-ambiguity-and-inherent-ambiguity.md",
+        "note": "The current definition names finite parse trees and now matches the repaired correspondence theorem."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-4",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "missing-hypothesis",
+    "severity": "fatal",
+    "location": "proof-step",
+    "subject": "ex-extended-dfa-transition-respects-concatenation",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:4"
+    ],
+    "subclass_note": "The refuter correctly observed that the example called q_3 an accepting state without ever specifying an accepting set. The current example now declares q_0 as the start state and F = {q_3} as the accepting set before invoking the acceptance definition in its final verification step.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 records that the old example named an accepting state without defining F."
+      },
+      {
+        "path": "items/ex-extended-dfa-transition-respects-concatenation.md",
+        "note": "The current example now specifies both the start state and the accepting set."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-5",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "missing-hypothesis",
+    "severity": "nonfatal",
+    "location": "proof-step",
+    "subject": "thm-cfl-closure-under-union-concatenation-star-and-homomorphism",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:5"
+    ],
+    "subclass_note": "The refuter correctly observed that the old homomorphism proof replaced terminals by h(a) without first separating the source variable alphabet from the target terminal alphabet Delta. The current proof now renames the variables of the source grammar to be disjoint from Delta before rewriting terminal occurrences, so the resulting object is again a well-formed CFG over Delta.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 gives the X-in-Delta counterexample showing why the old homomorphism construction was not always a CFG."
+      },
+      {
+        "path": "items/thm-cfl-closure-under-union-concatenation-star-and-homomorphism.md",
+        "note": "The current proof now renames the source variables away from Delta before replacing terminals by h(a)."
+      }
+    ]
+  },
+  {
+    "defect_id": "frontier-24-S6-d-refuter-10-6",
+    "run": "frontier-24",
+    "at": "2026-08-29",
+    "class": "accuracy",
+    "subclass": "citation-inflated",
+    "severity": "fatal",
+    "location": "facts-block",
+    "subject": "thm-greibach-normal-form",
+    "batch": "10",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "introduced_by_role": "beta",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "source": "refuter-10",
+    "adjudication_ref": [
+      "refuter:10:6"
+    ],
+    "subclass_note": "The refuter correctly observed that the old [L2] cited the substitution lemma as if it applied after listing only some productions of B. The current theorem now states [L2] in the exact exhaustive form it needs, and the repaired substitution lemma now says explicitly that the displayed B-productions are the full family in G.",
+    "evidence": [
+      {
+        "path": "research/frontier-24-refute-10.json",
+        "note": "Refuter 10 gives the A -> B, B -> a | b counterexample showing why the old citation inflated the lemma."
+      },
+      {
+        "path": "items/thm-greibach-normal-form.md",
+        "note": "The current theorem restates [L2] using all productions of the leading variable."
+      }
+    ]
+  }
+]

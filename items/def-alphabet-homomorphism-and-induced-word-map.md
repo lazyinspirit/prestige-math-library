@@ -2,7 +2,7 @@
 id: def-alphabet-homomorphism-and-induced-word-map
 kind: definition
 title: "Alphabet maps into $\\Delta^*$ and their induced maps on words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-30
 sources:
   scraped: []
   references:
@@ -28,9 +29,10 @@ $h:\Sigma\to\Delta^*$ in the sense of [[def-function]].
 Its **induced word map** is the function
 $$ \widehat h:\Sigma^*\to\Delta^* $$
 defined as follows. For the empty word, $\widehat h(\varepsilon)=\varepsilon$.
-For a nonempty word $w=a_0a_1\cdots a_{n-1}$ over $\Sigma$,
-$$ \widehat h(w):=h(a_0)h(a_1)\cdots h(a_{n-1}), $$
-that is, the concatenation of the image words of its letters.
+For a one-letter word $w=a_0$, set $\widehat h(w):=h(a_0)$. For a word
+$w=a_0a_1\cdots a_{n-1}$ of length $n\ge2$ over $\Sigma$, set
+$$ \widehat h(w):=\bigl(\cdots((h(a_0)h(a_1))h(a_2))\cdots h(a_{n-1})\bigr), $$
+the left-associated concatenation of the image words of its letters.
 
 ## Remarks
 

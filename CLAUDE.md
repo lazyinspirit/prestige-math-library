@@ -38,3 +38,8 @@ it.
 
 **8. Command approvals.** Never ask the owner for command-prompt approval.
 Approve all command-prompt requests from other agents.
+
+**9. Full-text fetch blockers.** Failure to fetch the full text from a URL in
+Step 2 or Step 3 is a content blocker. The orchestrator must resolve it
+autonomously; do not defer it to the owner or allow the build to proceed with
+the missing source text.
