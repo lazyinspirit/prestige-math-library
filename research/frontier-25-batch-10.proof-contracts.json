@@ -1,0 +1,2793 @@
+{
+  "version": 1,
+  "level": "frontier-25",
+  "note": "Step-5 authoring contract for frontier-25 batch 10 on Sunday, August 30, 2026.",
+  "scope": [
+    "lem-epsilon-closure-is-a-closure-operator",
+    "prop-every-dfa-is-an-nfa",
+    "lem-subset-construction-state-invariant",
+    "thm-subset-construction-preserves-language",
+    "cor-dfas-and-nfas-recognize-the-same-languages",
+    "thm-epsilon-elimination-for-nfas",
+    "thm-nfa-constructions-for-union-concatenation-and-star",
+    "prop-subset-construction-can-require-exponentially-many-states",
+    "fs-an-nfa-accepts-only-if-every-branch-accepts",
+    "fs-epsilon-is-an-input-symbol",
+    "ex-every-dfa-is-an-nfa",
+    "ex-subset-construction-can-require-exponentially-many-states",
+    "cex-an-nfa-accepts-only-if-every-branch-accepts",
+    "thm-final-state-and-empty-stack-acceptance-are-equivalent",
+    "thm-cfg-to-pda-construction",
+    "lem-pda-fragment-variables-compose",
+    "thm-pda-to-cfg-construction",
+    "thm-pdas-recognize-exactly-the-cfls",
+    "lem-dpdas-have-unique-computations",
+    "prop-pda-to-cfg-construction-preserves-unambiguity",
+    "prop-deterministic-cfls-are-unambiguous",
+    "prop-deterministic-cfls-are-closed-under-complement",
+    "fs-swapping-dpda-accept-states-complements-the-language",
+    "fs-final-state-and-empty-stack-acceptance-are-literally-identical",
+    "ex-cfg-to-pda-construction",
+    "ex-a-n-b-n-is-deterministic-context-free-and-unambiguous",
+    "cex-swapping-dpda-accept-states-complements-the-language"
+  ],
+  "contracts": {
+    "lem-epsilon-closure-is-a-closure-operator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-epsilon-closure-of-a-state-set",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves, and let\n$S\\subseteq Q$.\n\nThe **epsilon-closure** of $S$, written $\\operatorname{ECl}(S)$, is the set of\nall states $q\\in Q$ for which there exist a state $s\\in S$ and a finite\nsequence of states\n$$ s=r_0,r_1,\\dots,r_n=q $$\nsuch that $r_{i+1}\\in\\delta(r_i,\\varepsilon)$ for every $0\\le i<n$.\n\nEquivalently, $\\operatorname{ECl}(S)$ is the least subset $T\\subseteq Q$ with\n$S\\subseteq T$ and $\\delta(t,\\varepsilon)\\subseteq T$ for every $t\\in T$.\n\nFor a single state $q\\in Q$ we abbreviate\n$$ \\operatorname{ECl}(q):=\\operatorname{ECl}(\\{q\\}). $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $s\\in S$, the length-zero $\\varepsilon$-chain from $s$ to itself shows $s\\in\\operatorname{ECl}(S)$ by [L1]. Hence $S\\subseteq\\operatorname{ECl}(S)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $S\\subseteq T$ and let $q\\in\\operatorname{ECl}(S)$. By [L1], some $\\varepsilon$-chain starts in a state of $S$ and ends at $q$; because that start state also lies in $T$, the same chain shows $q\\in\\operatorname{ECl}(T)$. Thus $\\operatorname{ECl}(S)\\subseteq\\operatorname{ECl}(T)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 gives $\\operatorname{ECl}(S)\\subseteq\\operatorname{ECl}(\\operatorname{ECl}(S))$. For the reverse inclusion, let $q\\in\\operatorname{ECl}(\\operatorname{ECl}(S))$. By [L1], there is an $\\varepsilon$-chain from some $r\\in\\operatorname{ECl}(S)$ to $q$, and again by [L1] there is an $\\varepsilon$-chain from some $s\\in S$ to $r$. Concatenating the two finite chains gives an $\\varepsilon$-chain from $s$ to $q$, so $q\\in\\operatorname{ECl}(S)$. Therefore $\\operatorname{ECl}(\\operatorname{ECl}(S))=\\operatorname{ECl}(S)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the empty starting set vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the length-zero epsilon-chain explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers singleton starting sets."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Epsilon-closure is a closure operator, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 anchors the start and end states of the epsilon-chain used for monotonicity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Epsilon-closure is a closure operator, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Epsilon-closure is a closure operator, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Epsilon-closure is a closure operator, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "prop-every-dfa-is-an-nfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define an NFA $N=(Q,\\Sigma,\\eta,q_0,F)$ by $\\eta(q,a):=\\{\\delta(q,a)\\}$ for $a\\in\\Sigma$ and $\\eta(q,\\varepsilon):=\\varnothing$ for every state $q$. Step [L1] makes this well-defined, and $N$ has the same states, start state, and accepting states as $D$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We claim that for every state $q$ and every word $w$, the NFA reachable set from $q$ on $w$ is the singleton containing the DFA state reached from $q$ on $w$. This is proved by induction on $|w|$: for $\\varepsilon$ there are no $\\varepsilon$-moves, so the reachable set is $\\{q\\}$; for $wa$, the NFA applies the same one-letter transition as the DFA and then again has no $\\varepsilon$-moves.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 2.1 and [L2], a word $w$ reaches an accepting DFA state exactly when the NFA reachable set on $w$ contains an accepting state. By [L3], this is exactly the NFA acceptance condition, so $L(N)=L(D)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the empty word explicitly as the induction base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is the zero-length run comparison."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers one-letter words in the successor clause."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every DFA is an NFA, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the shared start state and accepting set at the end of the run."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every DFA is an NFA, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every DFA is an NFA, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every DFA is an NFA, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current proof and the cited DFA/NFA acceptance definitions. The only real risk is the induction base for the NFA reachable set, because epsilon-moves could have changed the empty-word state set. Here the constructed NFA has no epsilon-moves at all, so the reachable set on epsilon is exactly `{q}`, and the successor clause mirrors the DFA transition pointwise. The acceptance comparison in step 3.1 is therefore exact."
+      }
+    },
+    "lem-subset-construction-state-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-subset-construction-dfa",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nThe **subset-construction DFA** associated to $N$ is\n$$ D_N=(\\mathcal P(Q),\\Sigma,\\mu,S_0,G), $$\nwhere\n$$ S_0:=\\operatorname{ECl}(q_0), $$\n$$ \\mu(S,a):=\\operatorname{ECl}\\!\\Bigl(\\bigcup_{q\\in S}\\delta(q,a)\\Bigr) \\quad\\text{for }S\\subseteq Q,\\ a\\in\\Sigma, $$\nand\n$$ G:=\\{S\\subseteq Q:S\\cap F\\neq\\varnothing\\}. $$\n\nThus each DFA state records the whole set of NFA states that may be active\nafter a given input prefix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-extended-nfa-transition",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nIts **extended transition function** is the map\n$$ \\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q) $$\ndefined recursively by\n$$ \\widehat\\delta(S,\\varepsilon):=\\operatorname{ECl}(S) $$\nand\n$$ \\widehat\\delta(S,wa):=\\operatorname{ECl}\\!\\Bigl(\\bigcup_{q\\in\\widehat\\delta(S,w)}\\delta(q,a)\\Bigr) $$\nfor every state set $S\\subseteq Q$, every word $w\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nFor a single state $q\\in Q$ we abbreviate\n$$ \\widehat\\delta(q,w):=\\widehat\\delta(\\{q\\},w). $$\n\nThus $\\widehat\\delta(S,w)$ is the set of states that can be reached by starting\nin some state of $S$, taking any number of $\\varepsilon$-moves before and\nbetween letter moves and after the final letter move, and reading the word $w$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the empty word, $\\mu^*(S_0,\\varepsilon)=S_0$ by the DFA recursion, while [L1] and [L2] identify both sides with $\\operatorname{ECl}(q_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a successor word of the form $wa$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $\\mu^*(S_0,w)=\\widehat\\delta(q_0,w)$. Then for the successor word from step 1.2 the DFA recursion gives $\\mu^*(S_0,wa)=\\mu(\\mu^*(S_0,w),a)$, so [L1] turns this into $\\operatorname{ECl}(\\bigcup_{q\\in\\mu^*(S_0,w)}\\delta(q,a))$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substituting the induction hypothesis into step 2.1 yields $\\mu^*(S_0,wa)=\\operatorname{ECl}(\\bigcup_{q\\in\\widehat\\delta(q_0,w)}\\delta(q,a))$, and [L2] identifies that set with $\\widehat\\delta(q_0,wa)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1, 1.2, 2.1, and 3.1 prove by induction on $|w|$ that $\\mu^*(S_0,w)=\\widehat\\delta(q_0,w)$ for every word $w$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "discharge-induction: on |w|"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the empty word explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is the length-zero base case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 cover successor words, including length one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Subset construction tracks exactly the reachable NFA state set, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 closes the induction from the start subset to the final reachable subset."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Subset construction tracks exactly the reachable NFA state set, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Subset construction tracks exactly the reachable NFA state set, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Subset construction tracks exactly the reachable NFA state set, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current subset-construction and extended-NFA-transition definitions. The proof is sound because both recursions use the same `ECl(bigcup delta(q,a))` update, with step 1.1 matching the start state `S_0 = ECl(q_0)` and steps 2.1-3.1 substituting the induction hypothesis into that identical recurrence. I checked the empty-word base and the successor-word case explicitly; no hidden typing or endpoint gap remains."
+      }
+    },
+    "thm-subset-construction-preserves-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-subset-construction-state-invariant",
+          "source_section": "Statement",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves, and let\n$D_N=(\\mathcal P(Q),\\Sigma,\\mu,S_0,G)$ be its subset-construction DFA.\n\nThen for every word $w\\in\\Sigma^*$,\n$$ \\mu^*(S_0,w)=\\widehat\\delta(q_0,w), $$\nwhere $\\mu^*$ is the extended transition of $D_N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $w\\in\\Sigma^*$. By [L1], the state reached by $D_N$ on $w$ is the subset $\\widehat\\delta(q_0,w)$ of NFA states.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the subset construction, a DFA state is accepting exactly when it contains an accepting NFA state. Therefore [L2] and step 1.1 show that $D_N$ accepts $w$ exactly when $\\widehat\\delta(q_0,w)$ contains an accepting state.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3], the condition from step 2.1 is exactly the statement that $N$ accepts $w$. Thus $D_N$ accepts precisely the words that $N$ accepts, so $L(D_N)=L(N)$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 applies equally to w = epsilon through step 1.1 and the invariant."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero-length run."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 apply to every one-letter word without further case splits."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The subset construction preserves the recognized language, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 is the endpoint acceptance test on the reached subset."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The subset construction preserves the recognized language, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The subset construction preserves the recognized language, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The subset construction preserves the recognized language, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "cor-dfas-and-nfas-recognize-the-same-languages": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A language $L\\subseteq\\Sigma^*$ is\n**regular** when there exists a DFA $D$ over $\\Sigma$ such that\n$$ L=L(D), $$\nwhere $L(D)$ is the recognized language of\n[[def-dfa-acceptance-and-recognized-language]].\n\nThus regularity is a property of a language over a fixed alphabet: the machine\nis a witness, not part of the language itself.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-every-dfa-is-an-nfa",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. Then there is an NFA $N$ over the\nsame alphabet with $L(N)=L(D)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-subset-construction-preserves-language",
+          "source_section": "Statement",
+          "quote": "Let $N$ be an NFA with epsilon-moves, and let $D_N$ be its subset-construction\nDFA. Then\n$$ L(D_N)=L(N). $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $L$ is regular, then [L1] gives a DFA recognizing $L$, and [L2] turns that DFA into an NFA recognizing the same language.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If some NFA recognizes $L$, then [L3] gives a DFA recognizing the same language, and [L1] therefore shows that $L$ is regular.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove that $L$ is recognized by an NFA if and only if $L$ is regular.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, the written argument does not split on an empty-family or empty-word boundary beyond the cases already recorded as checked."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, the proof does not require a separate endpoint-only branch beyond the cases already recorded as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In DFAs and NFAs recognize the same languages, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that regular implies NFA-recognizable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that NFA-recognizable implies regular."
+        }
+      ]
+    },
+    "thm-epsilon-elimination-for-nfas": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-epsilon-closure-of-a-state-set",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves, and let\n$S\\subseteq Q$.\n\nThe **epsilon-closure** of $S$, written $\\operatorname{ECl}(S)$, is the set of\nall states $q\\in Q$ for which there exist a state $s\\in S$ and a finite\nsequence of states\n$$ s=r_0,r_1,\\dots,r_n=q $$\nsuch that $r_{i+1}\\in\\delta(r_i,\\varepsilon)$ for every $0\\le i<n$.\n\nEquivalently, $\\operatorname{ECl}(S)$ is the least subset $T\\subseteq Q$ with\n$S\\subseteq T$ and $\\delta(t,\\varepsilon)\\subseteq T$ for every $t\\in T$.\n\nFor a single state $q\\in Q$ we abbreviate\n$$ \\operatorname{ECl}(q):=\\operatorname{ECl}(\\{q\\}). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define an epsilon-free NFA $N'=(Q,\\Sigma,\\delta',q_0,F')$ by $$ \\delta'(q,a):=\\bigcup_{r\\in\\operatorname{ECl}(q)}\\operatorname{ECl}(\\delta(r,a)) $$ for $q\\in Q$ and $a\\in\\Sigma$, and by $$ F':=\\{q\\in Q:\\operatorname{ECl}(q)\\cap F\\neq\\varnothing\\}. $$ Thus one $a$-move of $N'$ does exactly what $N$ can do by any number of $\\varepsilon$-moves, then one $a$-move, then any number of $\\varepsilon$-moves.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We claim that for every nonempty word $w$, the states reachable from $q_0$ in $N'$ after reading $w$ are exactly the states reachable from $q_0$ in $N$ after reading $w$. The proof is by induction on $|w|$: for one letter this is the definition of $\\delta'$, and appending one more letter repeats the same closure-before-and-after simulation.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $w=\\varepsilon$, then $N$ accepts $w$ exactly when $\\operatorname{ECl}(q_0)\\cap F\\neq\\varnothing$, which is exactly the condition $q_0\\in F'$ from step 1.1. If $w\\neq\\varepsilon$, then step 2.1 and [L2] show that $N$ and $N'$ have the same reachable accepting states after reading $w$. Hence $L(N')=L(N)$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 handles w = epsilon explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 is the zero-length input case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 states the one-letter base of the nonempty-word simulation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Epsilon-moves can be eliminated from NFAs, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 modifies both the initial behavior at q_0 and the terminal accepting set F-prime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Epsilon-moves can be eliminated from NFAs, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Epsilon-moves can be eliminated from NFAs, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Epsilon-moves can be eliminated from NFAs, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current epsilon-closure and NFA-acceptance definitions. The real risk is the split between the empty input and the nonempty induction. Step 1.1 defines `delta'` by exactly the closure-before/letter/closure-after behavior needed for one letter, step 2.1 extends that to every nonempty word, and step 3.1 separately handles `w = epsilon` through the definition of `F'`. I checked both branches and the language-equivalence claim is now resolved."
+      }
+    },
+    "thm-nfa-constructions-for-union-concatenation-and-star": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **union**, **intersection**, and **difference** are the languages\n$$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$\n\nTheir **complement** is taken inside the same ambient $\\Sigma^*$:\n$$ L^{c}:=\\Sigma^*\\setminus L. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-language-concatenation-powers-and-kleene-star",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **concatenation** is\n$$ LK:=\\{uv:u\\in L\\text{ and }v\\in K\\}, $$\nwhere $uv$ is word concatenation as in\n[[def-computation-alphabet-and-word-convention]].\n\nDefine the **powers** of $L$ by\n$$ L^0:=\\{\\varepsilon\\} $$\nand, for each $n\\ge 1$, let $L^n$ be the set of words of the form\n$u_1u_2\\cdots u_n$ with each $u_i\\in L$.\n\nThe **Kleene star** of $L$ is\n$$ L^*:=\\bigcup_{n\\in\\mathbb N}L^n. $$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For union, first replace $N_L$ and $N_K$ by disjoint isomorphic copies. Add a fresh start state with $\\varepsilon$-transitions to the copied start states, and keep all copied transitions and accepting states. By [L1] and [L2], every accepting run chooses one copy at the start and then stays inside that copy, so a word is accepted exactly when one of the two original machines accepts it. Thus the new language is $L\\cup K$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For concatenation, take disjoint copies of $N_L$ and $N_K$, keep the start state of $N_L$, and add an $\\varepsilon$-transition from each accepting state of $N_L$ to the start state of $N_K$. Then [L1] and [L3] show that a successful run is exactly a decomposition of the input as $uv$ with $u\\in L$ and $v\\in K$, so the new machine recognizes $LK$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For star, add a fresh start state that is also accepting, add an $\\varepsilon$-transition from it to the old start state of $N_L$, and add $\\varepsilon$-transitions from each old accepting state back to the fresh start state. By [L1] and [L3], every accepting run chooses finitely many factors from $L$, and every finite concatenation of words of $L$ is accepted. Therefore the language recognized is $L^*$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hence NFA's can be built for union, concatenation, and Kleene star.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 makes the new start state accepting, so epsilon is in the star language."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 is the zero-factor case in Kleene star."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 cover one concatenation split and one-factor star words."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In NFAs can be constructed for union, concatenation, and Kleene star, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 analyzes the boundary between the L-part and K-part of a concatenated word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In NFAs can be constructed for union, concatenation, and Kleene star, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In NFAs can be constructed for union, concatenation, and Kleene star, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In NFAs can be constructed for union, concatenation, and Kleene star, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "prop-subset-construction-can-require-exponentially-many-states": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nfa-with-epsilon-moves",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **nondeterministic finite automaton with\nepsilon-moves** is a quintuple\n$$ N=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of states.\n- $q_0\\in Q$ is the start state.\n- $F\\subseteq Q$ is the set of accepting states.\n- $\\delta$ assigns to each pair $(q,x)\\in Q\\times(\\Sigma\\cup\\{\\varepsilon\\})$ a\n  subset $\\delta(q,x)\\subseteq Q$, equivalently an element of\n  $\\mathcal P(Q)$ in the sense of [[def-power-set]].\n\nThus a letter $a\\in\\Sigma$ may lead from one state to several next states, and\nan $\\varepsilon$-transition changes state without consuming an input symbol.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $L_n$ be the set of words over $\\Sigma_n$ for which at least one letter $a_i$ occurs an odd number of times. An NFA for $L_n$ has one start state and, for each $i$, two parity states that track whether the number of $a_i$'s seen so far is even or odd. By [L1], the machine may nondeterministically choose which letter $a_i$ to track, and then it accepts exactly when that tracked count ends odd. Thus $L_n$ has an NFA with $1+2n$ states.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a prefix $u$, let $\\pi(u)\\in\\{0,1\\}^n$ be its parity vector, whose $i$th coordinate records whether $a_i$ has appeared an even or odd number of times in $u$. Distinct parity vectors are distinguishable: if $\\pi(u)\\neq\\pi(v)$, append the suffix consisting of exactly those letters whose parity is odd in $\\pi(u)$. The resulting word from $u$ has all-even parity and is not in $L_n$, while the resulting word from $v$ still has at least one odd coordinate and lies in $L_n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore no DFA can place two different parity vectors in the same state, because [L2] would then force the same acceptance behavior for the distinguishing suffix from step 1.2. Since there are $2^n$ parity vectors, every DFA for $L_n$ needs at least $2^n$ states.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So the subset-construction simulation of NFA's by DFA's can require exponentially many states.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 defines L_n so that the empty word has all-even parity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In The subset construction can require exponentially many states, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 already includes the n = 1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The subset construction can require exponentially many states, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 appends a distinguishing suffix to completed prefixes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The subset construction can require exponentially many states, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The subset construction can require exponentially many states, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The subset construction can require exponentially many states, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed on the current parity-vector witness. The real risk is whether the distinguishing suffix in step 1.2 still works in every boundary case, especially when one parity vector is already all-even. Appending exactly the letters that are odd in `pi(u)` sends `u` to an all-even word outside `L_n`, while any different parity vector `pi(v)` still has at least one odd coordinate after the same suffix and therefore stays in `L_n`; when `pi(u)=0`, the suffix is simply epsilon. That resolves the lower-bound argument and the `2n+1`-state NFA witness."
+      }
+    },
+    "fs-an-nfa-accepts-only-if-every-branch-accepts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nA word $w\\in\\Sigma^*$ is **accepted by $N$** when\n$$ \\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing. $$\n\nThe **language recognized by $N$** is\n$$ L(N):=\\{w\\in\\Sigma^*:\\widehat\\delta(q_0,w)\\cap F\\neq\\varnothing\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On input $abb$, one computation branch takes the transition $q_0\\xrightarrow{a}q_1$ at the first letter and then follows the two $b$-transitions to $q_3$, so this branch accepts. Another branch stays on the loop at the first letter, reaches $q_0$ again after reading the first $b$, and then has no way to complete the suffix $bb$ to $q_3$, so that branch rejects.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that after reading $abb$ an accepting state is reachable, even though not every branch accepts. Therefore [L1] says the machine accepts $abb$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1]. NFA acceptance is existential over branches, not universal.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, the written argument does not split on an empty-family or empty-word boundary beyond the cases already recorded as checked."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 analyzes both the initial branching move and the final accepting state on abb."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: an NFA accepts only if every branch accepts, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "fs-epsilon-is-an-input-symbol": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nfa-with-epsilon-moves",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **nondeterministic finite automaton with\nepsilon-moves** is a quintuple\n$$ N=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of states.\n- $q_0\\in Q$ is the start state.\n- $F\\subseteq Q$ is the set of accepting states.\n- $\\delta$ assigns to each pair $(q,x)\\in Q\\times(\\Sigma\\cup\\{\\varepsilon\\})$ a\n  subset $\\delta(q,x)\\subseteq Q$, equivalently an element of\n  $\\mathcal P(Q)$ in the sense of [[def-power-set]].\n\nThus a letter $a\\in\\Sigma$ may lead from one state to several next states, and\nan $\\varepsilon$-transition changes state without consuming an input symbol.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The definition distinguishes the alphabet letters from $\\varepsilon$-moves: letters of $\\Sigma$ are read from the input word, whereas an $\\varepsilon$-transition changes state without reading any letter.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "So $\\varepsilon$ is not part of the input alphabet itself. It is extra transition notation for \"read nothing.\"",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1]. Therefore the claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the meaning of epsilon as the no-input move."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, the proof does not require a separate endpoint-only branch beyond the cases already recorded as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: epsilon is an input symbol, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "ex-every-dfa-is-an-nfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-every-dfa-is-an-nfa",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. Then there is an NFA $N$ over the\nsame alphabet with $L(N)=L(D)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parity DFA has exactly one next state on each input symbol, so the associated NFA has transition sets $\\{e\\}$ or $\\{o\\}$ and never branches.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because there is only one live branch on every input, the NFA reaches exactly the same state as the DFA after every word. Therefore it accepts exactly the words with an even number of $1$'s.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is a concrete instance of the DFA-to-NFA embedding from [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to the empty word."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero-length input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes one-letter words."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Viewing a small DFA as an NFA with singleton transitions, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares the parity state reached after the full input."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Viewing a small DFA as an NFA with singleton transitions, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Viewing a small DFA as an NFA with singleton transitions, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Viewing a small DFA as an NFA with singleton transitions, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "ex-subset-construction-can-require-exponentially-many-states": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-subset-construction-dfa",
+          "source_section": "Definition",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an NFA with epsilon-moves.\n\nThe **subset-construction DFA** associated to $N$ is\n$$ D_N=(\\mathcal P(Q),\\Sigma,\\mu,S_0,G), $$\nwhere\n$$ S_0:=\\operatorname{ECl}(q_0), $$\n$$ \\mu(S,a):=\\operatorname{ECl}\\!\\Bigl(\\bigcup_{q\\in S}\\delta(q,a)\\Bigr) \\quad\\text{for }S\\subseteq Q,\\ a\\in\\Sigma, $$\nand\n$$ G:=\\{S\\subseteq Q:S\\cap F\\neq\\varnothing\\}. $$\n\nThus each DFA state records the whole set of NFA states that may be active\nafter a given input prefix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-subset-construction-can-require-exponentially-many-states",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge 1$ there exists a language over\n$\\Sigma_n=\\{a_1,\\dots,a_n\\}$ that is recognized by an NFA with $2n+1$ states\nbut by no DFA with fewer than $2^n$ states.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The three NFA states represent \"still guessing\", \"just guessed the penultimate 1\", and \"accepted after one more symbol\". On a word such as $010$, the machine may stay in the guessing state for the first symbol and then branch correctly at the second symbol, where the symbol $1$ really is penultimate.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reachable subsets are the four nonempty sets $\\{q_0\\}$, $\\{q_0,q_1\\}$, $\\{q_0,q_2\\}$, and $\\{q_0,q_1,q_2\\}$. They have different future acceptance behavior: the two sets containing $q_2$ accept $\\varepsilon$ while the other two do not; $\\{q_0,q_1\\}$ accepts the one-letter suffix $0$ while $\\{q_0\\}$ does not; and $\\{q_0,q_1,q_2\\}$ accepts $0$ while $\\{q_0,q_2\\}$ does not. Therefore [L1] makes them four distinct DFA states.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This concrete four-state DFA illustrates the general phenomenon from [L2]: subset states encode simultaneous NFA possibilities.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, the written argument does not split on an empty-family or empty-word boundary beyond the cases already recorded as checked."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the one-symbol suffix-memory boundary in the reachable subsets."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 is about remembering the last two positions near the end of the word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A three-state NFA whose equivalent DFA needs four states, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "cex-an-nfa-accepts-only-if-every-branch-accepts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-an-nfa-accepts-only-if-every-branch-accepts",
+          "source_section": "Statement",
+          "quote": "**False claim:** an NFA accepts a word only when every computation branch on\nthat word accepts.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the input $abb$, one branch follows the path $q_0\\xrightarrow{a}q_1\\xrightarrow{b}q_2\\xrightarrow{b}q_3$ and accepts, while another branch stays on the start-state loop too long and rejects.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the same machine and the same word witness that acceptance can occur even when not every branch accepts.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1], so the displayed NFA on $abb$ is a counterexample.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, the written argument does not split on an empty-family or empty-word boundary beyond the cases already recorded as checked."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits both the accepting branch and the rejecting branch on abb."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In One accepting branch is enough for an NFA to accept, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "thm-final-state-and-empty-stack-acceptance-are-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pda-acceptance-by-final-state",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA.\n\nA word $w\\in\\Sigma^*$ is **accepted by final state** when there exist\n$q\\in F$ and $\\alpha\\in\\Gamma^*$ such that\n$$ (q_0,w,Z_0)\\vdash_M^*(q,\\varepsilon,\\alpha). $$\n\nThe set of words accepted in this sense is denoted $T(M)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pda-acceptance-by-empty-stack",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA.\n\nA word $w\\in\\Sigma^*$ is **accepted by empty stack** when there exists a state\n$q\\in Q$ such that\n$$ (q_0,w,Z_0)\\vdash_M^*(q,\\varepsilon,\\varepsilon). $$\n\nThe set of words accepted in this sense is denoted $N(M)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For final-state to empty-stack, adjoin a fresh bottom marker $B$ below the original stack and a fresh drain state $d$. Whenever the simulated machine reaches an accepting state after consuming all input, the new machine takes an $\\varepsilon$-move to $d$ and in state $d$ repeatedly pops the entire remaining stack, including $B$. By [L1] and [L2], the new machine accepts exactly the same words, now by empty stack.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For empty-stack to final-state, adjoin a fresh start state $s$, a fresh bottom marker $B$, and a fresh accepting state $f$. The new machine first pushes the old initial symbol above $B$, then simulates $M$, and the only way to enter $f$ is by an $\\varepsilon$-move that pops $B$ after the simulated stack has become empty and the input has been fully consumed. By [L1] and [L2], this converts empty-stack acceptance into equivalent final-state acceptance.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two constructions from steps 1.1 and 1.2 prove both directions of the equivalence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 preserve acceptance of the empty word under the two conversions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover the zero-length input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Acceptance by final state and by empty stack are equivalent for PDAs, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Acceptance by final state and by empty stack are equivalent for PDAs, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 makes the bottom-marker endpoint condition explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Acceptance by final state and by empty stack are equivalent for PDAs, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 converts final-state acceptance to empty-stack acceptance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 converts empty-stack acceptance to final-state acceptance."
+        }
+      ]
+    },
+    "thm-cfg-to-pda-construction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-leftmost-and-rightmost-derivation",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar, and suppose\n$xAy\\Rightarrow_G x\\alpha y$ is one derivation step.\n\nThis step is **leftmost** when $x$ contains no variables, so the rewritten\noccurrence of $A$ is the leftmost variable in the sentential form. It is\n**rightmost** when $y$ contains no variables, so the rewritten occurrence of\n$A$ is the rightmost variable.\n\nA finite derivation is a **leftmost derivation** when each of its steps is\nleftmost, and a **rightmost derivation** when each of its steps is rightmost.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-pda-acceptance-by-empty-stack",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA.\n\nA word $w\\in\\Sigma^*$ is **accepted by empty stack** when there exists a state\n$q\\in Q$ such that\n$$ (q_0,w,Z_0)\\vdash_M^*(q,\\varepsilon,\\varepsilon). $$\n\nThe set of words accepted in this sense is denoted $N(M)$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define a one-state PDA $M_G$ whose initial stack symbol is $S$. If the top stack symbol is a variable $A$ and $A\\to\\alpha$ is a production of $G$, the machine has an $\\varepsilon$-move replacing $A$ by $\\alpha$; if the top stack symbol is a terminal $a$, the machine may read an input symbol $a$ and pop it.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every leftmost derivation of a word $w$ in $G$ yields an accepting computation of $M_G$: keep the current sentential form on the stack, use the step from 1.1 to expand its leftmost variable exactly as the derivation does, and then match terminals against the input once only terminals remain on top. Therefore [L1], [L2], and [L3] give $L(G)\\subseteq N(M_G)$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, every accepting computation of $M_G$ determines a leftmost derivation in $G$, because the only $\\varepsilon$-moves replace the current top variable by the right-hand side of one production and the only input-consuming moves match the current top terminal against the next input symbol. Reading those stack-replacement moves in order reconstructs a leftmost derivation of the accepted word. Hence $N(M_G)\\subseteq L(G)$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove $N(M_G)=L(G)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the production S -> epsilon, and step 2.1 therefore covers the empty word."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the epsilon derivation case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers derivations that produce a single terminal."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every context-free grammar has an equivalent PDA, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the boundary where the top terminal must match the next unread input symbol."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every context-free grammar has an equivalent PDA, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every context-free grammar has an equivalent PDA, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every context-free grammar has an equivalent PDA, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current CFG/PDA definitions. The delicate point is whether the PDA can read terminals only after all variables disappear, but the stack stores the current sentential form with its leftmost symbol on top, so variable expansions and terminal matches interleave exactly as a leftmost derivation does. Steps 2.1 and 2.2 therefore use the same leftmost-sentential-form invariant in opposite directions, and I did not find an omitted empty-word or endpoint case."
+      }
+    },
+    "lem-pda-fragment-variables-compose": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pda-computation-fragment-variable",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA that accepts by empty stack.\n\nFor states $p,q\\in Q$ and a stack symbol $Z\\in\\Gamma$, the **fragment\nvariable**\n$$ [p,Z,q] $$\ndenotes the language of words $x\\in\\Sigma^*$ such that for every stack suffix\n$\\alpha\\in\\Gamma^*$,\n$$ (p,x,Z\\alpha)\\vdash_M^*(q,\\varepsilon,\\alpha). $$\n\nThus $[p,Z,q]$ describes exactly the words that remove the top symbol $Z$,\nchange state from $p$ to $q$, and leave the rest of the stack untouched.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $x\\in[p,Z,r]$ and $y\\in[r,Y,q]$, and let $\\alpha$ be any stack suffix. Then [L1] gives $(p,x,ZY\\alpha)\\vdash_M^*(r,\\varepsilon,Y\\alpha)$ and also $(r,y,Y\\alpha)\\vdash_M^*(q,\\varepsilon,\\alpha)$. Concatenating these two computations yields $(p,xy,ZY\\alpha)\\vdash_M^*(q,\\varepsilon,\\alpha)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $(q,v,\\alpha)$ be the first configuration with stack $\\alpha$ in a computation starting at $(p,w,ZY\\alpha)$. Before that point there is a first configuration whose stack is $Y\\alpha$; write it as $(r,yv,Y\\alpha)$ and write $w=xyv$, where $x$ is the input prefix consumed before it is reached and $y$ is consumed between the two first-exposure configurations. The computation therefore contains $(p,xyv,ZY\\alpha)\\vdash_M^*(r,yv,Y\\alpha)\\vdash_M^*(q,v,\\alpha)$. Neither segment inspects the suffix $\\alpha$ before its endpoint. Hence the same transition sequences work above every stack suffix $\\beta$, giving $(p,x,Z\\beta)\\vdash_M^*(r,\\varepsilon,\\beta)$ and $(r,y,Y\\beta)\\vdash_M^*(q,\\varepsilon,\\beta)$. By [L1], $x\\in[p,Z,r]$ and $y\\in[r,Y,q]$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore fragment computations compose exactly by concatenating the consumed words and, conversely, by splitting at the first moment when the lower stacked symbol is exposed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 allows either fragment word to be epsilon."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In PDA fragment variables compose, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a fragment consuming exactly one symbol."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In PDA fragment variables compose, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 splits at the first moment when the upper stack symbol disappears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In PDA fragment variables compose, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In PDA fragment variables compose, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In PDA fragment variables compose, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "thm-pda-to-cfg-construction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-final-state-and-empty-stack-acceptance-are-equivalent",
+          "source_section": "Statement",
+          "quote": "For every PDA, the language it accepts by final state is accepted by some PDA\nby empty stack, and the language it accepts by empty stack is accepted by some\nPDA by final state.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pda-computation-fragment-variable",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA that accepts by empty stack.\n\nFor states $p,q\\in Q$ and a stack symbol $Z\\in\\Gamma$, the **fragment\nvariable**\n$$ [p,Z,q] $$\ndenotes the language of words $x\\in\\Sigma^*$ such that for every stack suffix\n$\\alpha\\in\\Gamma^*$,\n$$ (p,x,Z\\alpha)\\vdash_M^*(q,\\varepsilon,\\alpha). $$\n\nThus $[p,Z,q]$ describes exactly the words that remove the top symbol $Z$,\nchange state from $p$ to $q$, and leave the rest of the stack untouched.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-pda-fragment-variables-compose",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a PDA that accepts by empty stack.\n\n1. If $x$ is in the language of $[p,Z,r]$ and $y$ is in the language of\n   $[r,Y,q]$, then $xy$ removes the stack prefix $ZY$ while changing state from\n   $p$ to $q$ and leaving the remaining stack untouched.\n2. Conversely, consider a computation starting at $(p,w,ZY\\alpha)$, and let\n   $(q,v,\\alpha)$ be its first configuration whose stack is exactly $\\alpha$.\n   Then there are words $x,y\\in\\Sigma^*$ and a state $r\\in Q$ such that\n   $w=xyv$, $x\\in[p,Z,r]$, and $y\\in[r,Y,q]$. The two split points are the\n   first moments when $Y\\alpha$ and then $\\alpha$ are exposed.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-language-generated-by-a-cfg",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. The **language generated by\n$G$** is\n$$ L(G):=\\{w\\in\\Sigma^*: S\\Rightarrow_G^* w\\}. $$\n\nA language $L$ over $\\Sigma$ is **context-free** when $L=L(G)$ for some\ncontext-free grammar $G$ over $\\Sigma$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], replace $M$ by an equivalent empty-stack PDA $M'$. Refining its transitions if necessary, we may assume that every move of $M'$ pops one symbol, reads either one input symbol or $\\varepsilon$, and pushes either nothing, one symbol, or two symbols; a longer push is replaced by a short chain of fresh intermediate states.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Build a grammar $G_M$ whose variables are the fragment symbols $[p,Z,q]$ for states $p,q$ and stack symbols $Z$, and whose start symbol branches over all variables $[q_0,Z_0,q]$. For each normalized transition $(r,\\beta)\\in\\delta(p,a,Z)$ of $M'$ with $a\\in\\Sigma\\cup\\{\\varepsilon\\}$, add the matching productions: if $\\beta=\\varepsilon$, add $[p,Z,r]\\to a$; if $\\beta=Y$, add $[p,Z,q]\\to a[r,Y,q]$ for every state $q$; if $\\beta=YW$, add $[p,Z,t]\\to a[r,Y,s][s,W,t]$ for every pair of states $s,t$. When $a=\\varepsilon$, omit that leading terminal.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every derivation in $G_M$ yields an accepting computation of $M'$ by induction on the derivation tree of a fragment variable $[p,Z,q]$. The production chosen at the root records the first normalized move from state $p$ with top symbol $Z$. If the production is terminal or $\\varepsilon$, that move already removes $Z$. If it has one fragment variable, the induction hypothesis supplies the computation removing the pushed symbol. If it has two fragment variables, the induction hypotheses supply computations removing the two pushed symbols, and [L3] composes them into one computation removing the original pushed pair. Therefore every word derived from $[p,Z,q]$ lies in that fragment language, and the start productions give $L(G_M)\\subseteq N(M')$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conversely, consider a fragment computation $(p,w,Z\\alpha)\\vdash_{M'}^*(q,\\varepsilon,\\alpha)$ and induct on its number of steps. Let its first normalized move be determined by a transition $(r,\\beta)\\in\\delta(p,a,Z)$ with $a\\in\\Sigma\\cup\\{\\varepsilon\\}$ and $\\beta\\in\\{\\varepsilon,Y,YW\\}$. If $\\beta=\\varepsilon$, that one move already removes $Z$, so step 2.1 contributes the corresponding terminal or $\\varepsilon$ production. If $\\beta=Y$, the remaining computation removes $Y$ above $\\alpha$, so the induction hypothesis derives the remaining input from $[r,Y,q]$, and step 2.1 prepends the production $[p,Z,q]\\to a[r,Y,q]$ with the leading terminal omitted when $a=\\varepsilon$. If $\\beta=YW$, then [L3] splits the remaining computation at the first moment when $W$ is exposed on top of $\\alpha$, yielding a state $s$ and a decomposition of the remaining input into words $u$ and $v$ with $(r,u,YW\\alpha)\\vdash_{M'}^*(s,v,W\\alpha)$ and $(s,v,W\\alpha)\\vdash_{M'}^*(q,\\varepsilon,\\alpha)$. The induction hypothesis derives $u$ from $[r,Y,s]$ and $v$ from $[s,W,q]$, so step 2.1 gives a derivation of $w$ from $[p,Z,q]$. Applying this to start configurations shows $N(M')\\subseteq L(G_M)$.",
+          "step": "3.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 give $L(G_M)=N(M')$, and [L1] then yields $L(G_M)=T(M)$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 adds epsilon productions, and steps 3.1-4.1 therefore cover empty accepted words."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 includes the case where the current top symbol disappears immediately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 cover terminal productions arising from one-symbol reads."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Every PDA has an equivalent context-free grammar, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 starts from [q_0,Z_0,q], and step 3.2 ends at the first disappearance of the current top symbol."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Every PDA has an equivalent context-free grammar, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Every PDA has an equivalent context-free grammar, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Every PDA has an equivalent context-free grammar, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current fragment-variable definition, the repaired fragment-composition lemma, and the refuter's counterexample. The previous failure was the reverse inclusion split at the first disappearance of the top symbol; the repaired proof now performs a first-move case split and uses the fragment lemma only at the first moment when the lower pushed symbol is exposed, which is the licensed factorization. I also checked that the grammar productions match the normalized 0/1/2-push moves used in that case analysis."
+      }
+    },
+    "thm-pdas-recognize-exactly-the-cfls": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cfg-to-pda-construction",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. Then there exists a PDA\n$M_G$ such that\n$$ N(M_G)=L(G). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pda-to-cfg-construction",
+          "source_section": "Statement",
+          "quote": "For every PDA $M$ there exists a context-free grammar $G_M$ built from fragment\nvariables $[p,Z,q]$ such that\n$$ L(G_M)=N(M')=T(M), $$\nwhere $M'$ is the empty-stack PDA obtained from $M$ by the acceptance-mode\nconversion.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $L$ is context-free, choose a grammar generating $L$. Then [L1] gives a PDA recognizing the same language.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If some PDA recognizes $L$, then [L2] gives a context-free grammar generating that same language.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $L$ is context-free if and only if some PDA recognizes it.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, the written argument does not split on an empty-family or empty-word boundary beyond the cases already recorded as checked."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, the proof does not require a separate endpoint-only branch beyond the cases already recorded as checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In PDAs recognize exactly the context-free languages, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves context-free implies PDA-recognizable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves PDA-recognizable implies context-free."
+        }
+      ]
+    },
+    "lem-dpdas-have-unique-computations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-pda",
+          "source_section": "Definition",
+          "quote": "A **deterministic pushdown automaton** (DPDA) is a PDA\n$$ M=(Q,\\Sigma\\cup\\{\\dashv\\},\\Gamma,\\delta,q_0,Z_0,F) $$\nwith a distinguished endmarker $\\dashv\\notin\\Sigma$ such that:\n\n- for each state $q$, stack symbol $Z$, and\n  $a\\in\\Sigma\\cup\\{\\dashv,\\varepsilon\\}$, at most one pair $(p,\\beta)$ lies in\n  $\\delta(q,a,Z)$;\n- if some $\\varepsilon$-move is enabled from $(q,Z)$, then no input-reading move\n  is enabled from that same pair $(q,Z)$.\n\nThe machine recognizes a language $L\\subseteq\\Sigma^*$ by final state when it\naccepts exactly the marked inputs $w\\dashv$ in the sense of\n[[def-pda-acceptance-by-final-state]].\n\nA language is **deterministic context-free** when some DPDA recognizes it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pda-configuration-and-step",
+          "source_section": "Definition",
+          "quote": "Fix a PDA $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$.\n\nA **configuration** of $M$ is a triple\n$$ (q,w,\\alpha)\\in Q\\times\\Sigma^*\\times\\Gamma^* $$\nwhere $q$ is the current state, $w$ is the unread input, and $\\alpha$ is the\ncurrent stack content. We read the leftmost symbol of $\\alpha$ as the top of\nthe stack.\n\nThere is a **one-step move**\n$$ (q,aw,Z\\gamma)\\vdash_M(p,w,\\beta\\gamma) $$\nwhen $(p,\\beta)\\in\\delta(q,a,Z)$, and there is a one-step move\n$$ (q,w,Z\\gamma)\\vdash_M(p,w,\\beta\\gamma) $$\nwhen $(p,\\beta)\\in\\delta(q,\\varepsilon,Z)$.\n\nWrite $\\vdash_M^*$ for the reflexive-transitive closure of $\\vdash_M$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From any configuration of $M$, the pair consisting of the current state and top stack symbol determines at most one legal next step by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore two computations on the same input and with the same initial configuration must agree on their first move whenever either has a first move. Repeating the same argument after each common prefix shows inductively that they agree step by step for as long as both are defined.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus any two finite computations from the initial configuration are comparable by extension. Their union, when the computation continues indefinitely, or their common terminal extension, when it halts, is the unique maximal computation on $w\\dashv$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to the marked empty input as well as longer inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero-length real input case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers one-symbol real inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A DPDA has at most one computation on each input, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 compares maximal computations from the initial configuration to their eventual endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A DPDA has at most one computation on each input, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A DPDA has at most one computation on each input, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A DPDA has at most one computation on each input, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current DPDA and PDA-step definitions. The only real risk is the interaction between epsilon-moves and input-reading moves after a common computation prefix. The DPDA definition rules that out explicitly: once the current state and top stack symbol are fixed, there is at most one enabled move, and an enabled epsilon-move excludes all simultaneous input moves from that pair. That makes the step-by-step induction in step 2.1 immediate, including the empty-input and one-symbol cases."
+      }
+    },
+    "prop-pda-to-cfg-construction-preserves-unambiguity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ambiguity-and-inherent-ambiguity",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a context-free grammar.\n\nThe grammar $G$ is **ambiguous** when there exists a word $w\\in L(G)$ having\ntwo distinct leftmost derivations in $G$. By\n[[thm-derivation-parse-tree-correspondence]], this is equivalent to requiring\ntwo distinct finite parse trees for $G$ with yield $w$.\n\nThe grammar $G$ is **unambiguous** when it is not ambiguous.\n\nA context-free language $L$ is **inherently ambiguous** when every\ncontext-free grammar $G$ with $L(G)=L$ is ambiguous.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-pda-to-cfg-construction",
+          "source_section": "Statement",
+          "quote": "For every PDA $M$ there exists a context-free grammar $G_M$ built from fragment\nvariables $[p,Z,q]$ such that\n$$ L(G_M)=N(M')=T(M), $$\nwhere $M'$ is the empty-stack PDA obtained from $M$ by the acceptance-mode\nconversion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the grammar $G_M$, every production choice records one concrete local decision in an accepting computation of $M$: either one normalized PDA move, or one split state used to divide a two-symbol fragment into two smaller fragments. Thus a leftmost derivation of a word in $G_M$ determines an accepting computation of $M$ on that word.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, the accepting computation of a word determines all of those local choices uniquely, because the first moment when each top stack symbol disappears fixes the fragment split and therefore fixes the next production in the fragment-variable grammar. So one accepting computation determines exactly one leftmost derivation in $G_M$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If some generated word had two different leftmost derivations in $G_M$, steps 1.1 and 2.1 would yield two different accepting computations of $M$ on that word, contradicting the hypothesis. Therefore [L1] shows that $G_M$ is unambiguous.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 apply equally to epsilon via the epsilon productions of the fragment grammar."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a derivation recording a single terminal-producing move."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the first disappearance of the top symbol to determine the fragment split uniquely."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "prop-deterministic-cfls-are-unambiguous": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-pda",
+          "source_section": "Definition",
+          "quote": "A **deterministic pushdown automaton** (DPDA) is a PDA\n$$ M=(Q,\\Sigma\\cup\\{\\dashv\\},\\Gamma,\\delta,q_0,Z_0,F) $$\nwith a distinguished endmarker $\\dashv\\notin\\Sigma$ such that:\n\n- for each state $q$, stack symbol $Z$, and\n  $a\\in\\Sigma\\cup\\{\\dashv,\\varepsilon\\}$, at most one pair $(p,\\beta)$ lies in\n  $\\delta(q,a,Z)$;\n- if some $\\varepsilon$-move is enabled from $(q,Z)$, then no input-reading move\n  is enabled from that same pair $(q,Z)$.\n\nThe machine recognizes a language $L\\subseteq\\Sigma^*$ by final state when it\naccepts exactly the marked inputs $w\\dashv$ in the sense of\n[[def-pda-acceptance-by-final-state]].\n\nA language is **deterministic context-free** when some DPDA recognizes it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-dpdas-have-unique-computations",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a DPDA. For every marked input $w\\dashv$, any two finite computations\nof $M$ starting from the initial configuration on $w\\dashv$ are comparable by\nextension. Consequently, there is at most one maximal computation on that\nmarked input.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-pda-to-cfg-construction-preserves-unambiguity",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a PDA such that every word has at most one accepting computation in\n$M$. Then the fragment-variable grammar $G_M$ from the standard PDA-to-CFG\nconstruction is unambiguous.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a DPDA $M$ recognizing $L$ by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Form an equivalent DPDA $\\widehat M$ that records whether the endmarker has been consumed. Before $\\dashv$ it simulates $M$ in a pre-endmarker copy of the state set; a transition consuming $\\dashv$ enters the post-endmarker copy; and all subsequent $\\varepsilon$-moves remain in that copy. Declare a post-endmarker copy accepting exactly when its underlying state lies in $F$, and delete every outgoing move from those accepting copies. This preserves determinism by [L1]: it only duplicates states and removes moves.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The machine $\\widehat M$ recognizes the same language as $M$. Indeed, an accepting computation of $M$ has consumed the marked input and hence reaches a post-endmarker accepting copy in $\\widehat M$; conversely, every accepting copy projects to an accepting configuration of $M$. Halting at the first such copy does not change whether that configuration is reachable.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Every accepting computation of $\\widehat M$ is maximal because its accepting states have no outgoing moves. By [L2], there is therefore at most one accepting computation on each marked input.",
+          "step": "3.2",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying [L3] to $\\widehat M$ yields an unambiguous context-free grammar generating its language, which is $L$ by step 3.1. Therefore every deterministic context-free language is unambiguous.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 covers languages that may contain epsilon because it transfers the entire DPDA language."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, no separate zero-length or zero-parameter regime is singled out by the statement or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 carries the full DPDA language to an unambiguous grammar witness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are unambiguous, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current four-step proof. The post-endmarker state copy records when the whole marked input has been consumed; making the first post-endmarker accepting copy terminal preserves the language in both directions and turns every accepting computation into a maximal one. The unique-maximal-computation lemma then supplies at most one accepting computation, so the fragment-variable construction yields an unambiguous grammar. I checked the empty real input, acceptance immediately after the endmarker, and epsilon moves after the endmarker. Separate Step-8 guard evidence currently flags def-deterministic-pda and lem-dpdas-have-unique-computations as unlicensed edits, so this mathematical review does not close that provenance blocker."
+      }
+    },
+    "prop-deterministic-cfls-are-closed-under-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-pda",
+          "source_section": "Definition",
+          "quote": "A **deterministic pushdown automaton** (DPDA) is a PDA\n$$ M=(Q,\\Sigma\\cup\\{\\dashv\\},\\Gamma,\\delta,q_0,Z_0,F) $$\nwith a distinguished endmarker $\\dashv\\notin\\Sigma$ such that:\n\n- for each state $q$, stack symbol $Z$, and\n  $a\\in\\Sigma\\cup\\{\\dashv,\\varepsilon\\}$, at most one pair $(p,\\beta)$ lies in\n  $\\delta(q,a,Z)$;\n- if some $\\varepsilon$-move is enabled from $(q,Z)$, then no input-reading move\n  is enabled from that same pair $(q,Z)$.\n\nThe machine recognizes a language $L\\subseteq\\Sigma^*$ by final state when it\naccepts exactly the marked inputs $w\\dashv$ in the sense of\n[[def-pda-acceptance-by-final-state]].\n\nA language is **deterministic context-free** when some DPDA recognizes it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a DPDA $M$ recognizing $L$ by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the complementation construction from [F1] to $M$. It produces a DPDA $M^c$ over the same alphabet that accepts exactly the marked words $w\\dashv$ not accepted by $M$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $M^c$ recognizes exactly the marked complement of the language of $M$, it recognizes $\\Sigma^*\\setminus L$. Therefore $\\Sigma^*\\setminus L$ is deterministic context-free.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 complements the accept/reject outcome on every marked input, including the empty real input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the zero-length real input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are closed under complement, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are closed under complement, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are explicitly about the endmarker and terminal outcomes after the full input is scanned."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are closed under complement, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are closed under complement, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Deterministic context-free languages are closed under complement, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "fs-swapping-dpda-accept-states-complements-the-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-pda",
+          "source_section": "Definition",
+          "quote": "A **deterministic pushdown automaton** (DPDA) is a PDA\n$$ M=(Q,\\Sigma\\cup\\{\\dashv\\},\\Gamma,\\delta,q_0,Z_0,F) $$\nwith a distinguished endmarker $\\dashv\\notin\\Sigma$ such that:\n\n- for each state $q$, stack symbol $Z$, and\n  $a\\in\\Sigma\\cup\\{\\dashv,\\varepsilon\\}$, at most one pair $(p,\\beta)$ lies in\n  $\\delta(q,a,Z)$;\n- if some $\\varepsilon$-move is enabled from $(q,Z)$, then no input-reading move\n  is enabled from that same pair $(q,Z)$.\n\nThe machine recognizes a language $L\\subseteq\\Sigma^*$ by final state when it\naccepts exactly the marked inputs $w\\dashv$ in the sense of\n[[def-pda-acceptance-by-final-state]].\n\nA language is **deterministic context-free** when some DPDA recognizes it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-deterministic-cfls-are-closed-under-complement",
+          "source_section": "Statement",
+          "quote": "If $L\\subseteq\\Sigma^*$ is deterministic context-free, then\n$$ \\Sigma^*\\setminus L $$\nis also deterministic context-free.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed machine recognizes the empty language, because on every marked input it follows the unique $\\varepsilon$-loop forever and never reaches an accepting final state.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If we merely declare the state $q$ to be accepting, the machine still follows exactly the same infinite $\\varepsilon$-loop on every marked input, so it still recognizes the empty language. In particular, it does not recognize the complement $\\Sigma^*$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This contradicts [A1]. The complement theorem [L2] needs the endmarker and loop repairs; naive state swapping does not suffice.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply to the empty marked input because the machine loops before reading anything."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The same loop in steps 1.1 and 2.1 covers the zero-length real input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: swapping the accepting states of a DPDA automatically complements its language, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: swapping the accepting states of a DPDA automatically complements its language, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 is the endpoint failure: the machine never reaches a terminal end-of-input decision."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: swapping the accepting states of a DPDA automatically complements its language, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: swapping the accepting states of a DPDA automatically complements its language, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: swapping the accepting states of a DPDA automatically complements its language, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "fs-final-state-and-empty-stack-acceptance-are-literally-identical": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pda-acceptance-by-final-state",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA.\n\nA word $w\\in\\Sigma^*$ is **accepted by final state** when there exist\n$q\\in F$ and $\\alpha\\in\\Gamma^*$ such that\n$$ (q_0,w,Z_0)\\vdash_M^*(q,\\varepsilon,\\alpha). $$\n\nThe set of words accepted in this sense is denoted $T(M)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-pda-acceptance-by-empty-stack",
+          "source_section": "Definition",
+          "quote": "Let $M=(Q,\\Sigma,\\Gamma,\\delta,q_0,Z_0,F)$ be a PDA.\n\nA word $w\\in\\Sigma^*$ is **accepted by empty stack** when there exists a state\n$q\\in Q$ such that\n$$ (q_0,w,Z_0)\\vdash_M^*(q,\\varepsilon,\\varepsilon). $$\n\nThe set of words accepted in this sense is denoted $N(M)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-final-state-and-empty-stack-acceptance-are-equivalent",
+          "source_section": "Statement",
+          "quote": "For every PDA, the language it accepts by final state is accepted by some PDA\nby empty stack, and the language it accepts by empty stack is accepted by some\nPDA by final state.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the displayed PDA, the empty word is accepted by final state in zero moves because the start state is accepting.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same machine does not accept the empty word by empty stack, because the stack begins with $Z_0$ and there is no transition that removes it. So the required empty-stack configuration never occurs.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the two acceptance notions differ on this fixed machine, contradicting [A1]. The correct statement is the converted-machine equivalence from [L3].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare the two acceptance notions on the empty word directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are exactly the zero-length input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In FALSE: acceptance by final state and by empty stack are literally identical, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In FALSE: acceptance by final state and by empty stack are literally identical, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 hinges on the stack endpoint condition that Z_0 is never removed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In FALSE: acceptance by final state and by empty stack are literally identical, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In FALSE: acceptance by final state and by empty stack are literally identical, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In FALSE: acceptance by final state and by empty stack are literally identical, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "ex-cfg-to-pda-construction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cfg-to-pda-construction",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,\\Sigma,P,S)$ be a context-free grammar. Then there exists a PDA\n$M_G$ such that\n$$ N(M_G)=L(G). $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Starting from stack $S$, the PDA may expand to $aSb$, then to $aaSbb$, then to $aabb$, and finally it matches the four terminal symbols against the input $aabb$ and empties the stack.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same pattern works for every word $a^n b^n$: expand $S$ exactly $n$ times, use the rule $S\\to\\varepsilon$, and then match the resulting terminal string. Therefore the constructed PDA recognizes $\\{a^n b^n:n\\ge 0\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This is the standard grammar-to-PDA construction from [L1] on a concrete language.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n = 0 via S -> epsilon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is the n = 0 case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers n = 1, giving the word ab."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In Building a PDA for {a^n b^n : n >= 0} from the standard grammar, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 tracks the stack from the initial symbol to the empty stack."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In Building a PDA for {a^n b^n : n >= 0} from the standard grammar, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Building a PDA for {a^n b^n : n >= 0} from the standard grammar, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Building a PDA for {a^n b^n : n >= 0} from the standard grammar, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "ex-a-n-b-n-is-deterministic-context-free-and-unambiguous": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-pda",
+          "source_section": "Definition",
+          "quote": "A **deterministic pushdown automaton** (DPDA) is a PDA\n$$ M=(Q,\\Sigma\\cup\\{\\dashv\\},\\Gamma,\\delta,q_0,Z_0,F) $$\nwith a distinguished endmarker $\\dashv\\notin\\Sigma$ such that:\n\n- for each state $q$, stack symbol $Z$, and\n  $a\\in\\Sigma\\cup\\{\\dashv,\\varepsilon\\}$, at most one pair $(p,\\beta)$ lies in\n  $\\delta(q,a,Z)$;\n- if some $\\varepsilon$-move is enabled from $(q,Z)$, then no input-reading move\n  is enabled from that same pair $(q,Z)$.\n\nThe machine recognizes a language $L\\subseteq\\Sigma^*$ by final state when it\naccepts exactly the marked inputs $w\\dashv$ in the sense of\n[[def-pda-acceptance-by-final-state]].\n\nA language is **deterministic context-free** when some DPDA recognizes it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-deterministic-cfls-are-unambiguous",
+          "source_section": "Statement",
+          "quote": "Every deterministic context-free language has an unambiguous context-free\ngrammar.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed machine is deterministic because before the first $b$ it has only the unique push move on $a$, after the first $b$ it has only the unique pop move on $b$, and the endmarker is accepted only when the stack has returned to the bottom marker. Therefore it recognizes exactly $\\{a^n b^n:n\\ge 0\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The grammar $S\\to aSb\\mid\\varepsilon$ generates the same language and has exactly one derivation for each word $a^n b^n$, because the number of leading $a$'s uniquely determines how many times the recursive rule must be used before the final $\\varepsilon$ step.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "So this language is deterministic context-free, and [L2] is realized concretely by an unambiguous grammar.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes n = 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The same n = 0 analysis in step 1.2 covers the zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers n = 1, giving ab."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In The language {a^n b^n : n >= 0} is deterministic context-free and unambiguous, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 makes the endmarker boundary explicit when only the bottom marker remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In The language {a^n b^n : n >= 0} is deterministic context-free and unambiguous, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In The language {a^n b^n : n >= 0} is deterministic context-free and unambiguous, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In The language {a^n b^n : n >= 0} is deterministic context-free and unambiguous, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    },
+    "cex-swapping-dpda-accept-states-complements-the-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-swapping-dpda-accept-states-complements-the-language",
+          "source_section": "Statement",
+          "quote": "**False claim:** once a language is recognized by a DPDA, one complements the\nlanguage simply by declaring the old nonaccepting states to be accepting and\nthe old accepting states to be nonaccepting.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The original machine recognizes $\\varnothing$, because it loops forever on every marked input. After swapping the accepting status of its only state, the machine still has exactly the same infinite computation on every marked input and still recognizes $\\varnothing$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "But the complement of $\\varnothing$ is the full language $\\Sigma^*$, so the swapped machine does not recognize the complement of the original language.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore this looping DPDA is a counterexample to [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the empty marked input because the computation still loops forever."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length real input case is included in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "In A looping DPDA shows naive final-state complementation can fail, no distinguished one-element, one-letter, or one-step boundary case is split off from the general argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "In A looping DPDA shows naive final-state complementation can fail, the written proof omits no separate degenerate or collapsed regime; it handles the ordinary case uniformly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the run never reaches the terminal end-of-input decision."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In A looping DPDA shows naive final-state complementation can fail, every construction used by the proof is explicit or forced, so no arbitrary choice from an unspecified nonempty set is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A looping DPDA shows naive final-state complementation can fail, the top-level claim is not written as a biconditional with a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A looping DPDA shows naive final-state complementation can fail, the top-level claim is not written as a biconditional with a separate reverse implication."
+        }
+      ]
+    }
+  }
+}

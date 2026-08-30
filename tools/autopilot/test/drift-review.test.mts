@@ -224,6 +224,35 @@ test('a page built by this run satisfies an edge, even though nothing is publish
   rmSync(dir, { recursive: true, force: true });
 });
 
+test('a rescope verdict fails until its named target is materialised in the scope ledger', () => {
+  const report = [
+    '### alpha-page',
+    'its real prerequisite is planned but unpublished, so build that foundation instead.',
+    'VERDICT: drift-rescoped — build delta-page (order 5) instead',
+    '### beta-page',
+    'VERDICT: no-drift',
+  ].join('\n');
+  const specPages = [
+    ...SPEC_PAGES,
+    { id: 'delta-page', kind: 'A', order: 5, requires: [] },
+    { id: 'delta-page-examples', kind: 'B', order: 6, requires: ['delta-page'] },
+  ];
+
+  const stale = fixture(PAGES, report, { specPages });
+  const before = check(stale);
+  assert.equal(before.status, 1);
+  assert.match(before.stderr, /drift-check-not-materialised: delta-page/);
+  rmSync(stale, { recursive: true, force: true });
+
+  const applied = fixture([
+    { id: 'delta-page', kind: 'A', batch: '1' },
+    { id: 'delta-page-examples', kind: 'B', batch: '1' },
+  ], report, { specPages });
+  const after = check(applied);
+  assert.equal(after.status, 0, after.stderr);
+  rmSync(applied, { recursive: true, force: true });
+});
+
 test('a verdict claiming an edge the spec does not carry fails', () => {
   // A report claiming an edit it did not make produces the same file as one
   // that made it — the step-3 recheck's failure mode, one stage earlier.

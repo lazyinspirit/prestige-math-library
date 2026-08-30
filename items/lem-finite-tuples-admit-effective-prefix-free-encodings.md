@@ -2,7 +2,7 @@
 id: lem-finite-tuples-admit-effective-prefix-free-encodings
 kind: lemma
 title: "Finite tuples admit effective prefix-free binary encodings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ proof_strategy: direct
 justified_by: []
 verification:
   precheck: pass
+  audited: 2026-08-30
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -32,10 +33,7 @@ $(w_1,\dots,w_k)\in(\{0,1\}^*)^k$ has an effective prefix-free binary encoding.
 
 **Given:** A fixed integer $k\ge1$.
 
-[L1] An effective binary encoding is an injective map into $\{0,1\}^*$ equipped
-with a total decoder having a fixed malformed-code output, and prefix-free means
-that no codeword is a proper prefix of another, by
-[[def-effective-binary-encoding-and-decoder]].
+[L1] An effective binary encoding is an injective map into $\{0,1\}^*$ equipped with a total decoder having a fixed malformed-code output, and prefix-free means that no codeword is a proper prefix of another, by [[def-effective-binary-encoding-and-decoder]].
 
 ## Proof
 

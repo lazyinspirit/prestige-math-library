@@ -1,0 +1,173 @@
+[
+  {
+    "order": 415,
+    "id": "the-five-cycle-and-erdos-hajnal",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "The Five-Cycle and the Erdős–Hajnal Property",
+    "companion": "the-five-cycle-and-erdos-hajnal-examples",
+    "requires": [
+      "cographs-perfect-patterns-and-pure-pairs",
+      "bull-free-graphs-and-the-erdos-hajnal-property"
+    ],
+    "items": [
+      {
+        "id": "lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears",
+        "kind": "lemma",
+        "title": "A bipartite layer is small unless a large comb already appears",
+        "strategy": "For a fixed layer, define the sets P_i and Q_i from the source construction. Mark good vertices backwards so that at least half of the chosen vertices are good by comparing the disjoint P_i with the union of the Q_i. The good vertices then yield a comb unless its width is already too small, and in that remaining case the same inequality bounds the whole layer.",
+        "deps": [
+          "def-comb-in-a-graph"
+        ]
+      },
+      {
+        "id": "thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side",
+        "kind": "theorem",
+        "title": "A bipartite graph with bounded A-degree has a large comb or a small B-side",
+        "strategy": "Partition the B-side into layers according to the geometric degree thresholds (2/3)^s Delta. The previous lemma bounds every layer unless a comb already appears, and summing those bounds gives a geometric series. Hence either a comb exists at some stage or the whole B-side is small.",
+        "deps": [
+          "lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears",
+          "def-comb-in-a-graph",
+          "thm-geometric-series"
+        ]
+      },
+      {
+        "id": "def-rooted-stable-tooth-comb",
+        "kind": "definition",
+        "title": "A rooted stable-tooth comb",
+        "deps": [
+          "def-comb-in-a-graph",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb",
+        "kind": "theorem",
+        "title": "A tau-critical graph with a large low-degree induced subgraph has a rooted stable-tooth comb",
+        "strategy": "Starting from the given induced subgraph X, iteratively choose a maximum-degree vertex v_i, its neighbourhood A_i inside the current remainder, a large stable set C_i inside A_i using tau-criticality, and then the next remainder X_i anticomplete to {v_i} union C_i. Apply the bipartite comb theorem to each pair (C_i,D_i) to bound D_i unless the desired rooted comb already appears. If no rooted comb appears, the partition of X into the vertices v_i, the sets A_i, and the sets D_i contradicts the inequality used to choose tau.",
+        "deps": [
+          "thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side",
+          "def-rooted-stable-tooth-comb",
+          "def-tau-critical-graph",
+          "def-kappa-of-a-graph",
+          "def-clique-stable-set-and-numbers",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree",
+        "kind": "lemma",
+        "title": "A sparse graph has a prescribed-size induced subgraph of bounded maximum degree",
+        "strategy": "Average the edge count over all subsets of size 2m-1. Some such subset inherits the same sparse edge bound, so fewer than m of its vertices can have degree at least epsilon(m-1). Deleting those high-degree vertices leaves an m-vertex induced subgraph with the required maximum-degree bound.",
+        "deps": [
+          "def-edge-density-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree",
+        "kind": "corollary",
+        "title": "An H-free graph has a linearly large induced subgraph whose graph or complement has bounded maximum degree",
+        "strategy": "Use the published edge-density form of Rödl's theorem to get a linearly large set Z whose induced graph or complement has low edge density. After halving the density parameter, shrink to size ceil(delta|G|) with the previous lemma. The resulting set has size at least delta|G| and its induced graph or complement has maximum degree at most epsilon delta|G|.",
+        "deps": [
+          "cor-rodl-in-the-edge-density-form",
+          "lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree",
+          "def-edge-density-between-vertex-sets",
+          "def-graph-isomorphism-and-complement",
+          "def-h-free-and-family-free-graph"
+        ]
+      },
+      {
+        "id": "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+        "kind": "lemma",
+        "title": "A rooted stable-tooth comb with a cross-edge between two blocks contains an induced five-cycle",
+        "strategy": "Take two teeth a_i and a_j, their matched block vertices b_i and b_j, and the root v. The rooted-comb axioms force exactly the adjacencies of the cycle v-a_i-b_i-b_j-a_j-v and exclude all other edges among these five vertices, so they induce C_5.",
+        "deps": [
+          "def-rooted-stable-tooth-comb",
+          "def-induced-embedding-and-induced-copy",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound",
+        "kind": "theorem",
+        "title": "The C5-free graphs satisfy a polynomial kappa bound",
+        "strategy": "Fix epsilon below 1/400 and a corresponding low-degree constant delta from the previous corollary, then choose tau small enough that the rooted-comb theorem applies and the final exponent comparison goes through. A minimal counterexample is tau-critical. The bounded-degree corollary gives a large set X in G or in its complement; since C5 is self-complementary, work in the sparse case. The rooted comb theorem gives a rooted stable-tooth comb in G[X], and the previous lemma shows that its blocks must be pairwise anticomplete. Tau-criticality gives a polynomial lower bound for each block, and summing the resulting stable sets contradicts the assumed upper bound on kappa(G).",
+        "deps": [
+          "cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree",
+          "thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb",
+          "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+          "prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical",
+          "def-clique-stable-set-and-numbers",
+          "def-kappa-of-a-graph",
+          "def-graph-isomorphism-and-complement",
+          "def-h-free-and-family-free-graph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-real-power-laws"
+        ]
+      },
+      {
+        "id": "cor-the-five-cycle-has-the-erdos-hajnal-property",
+        "kind": "corollary",
+        "title": "The five-cycle has the Erdős-Hajnal property",
+        "strategy": "The previous theorem gives a positive exponent tau with kappa(G) at least |G|^tau on every C5-free graph. The published equivalence between the kappa and homogeneous-set formulations then yields the Erdős-Hajnal property for C5.",
+        "deps": [
+          "thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound",
+          "thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 416,
+    "id": "the-five-cycle-and-erdos-hajnal-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "The Five-Cycle and the Erdős–Hajnal Property — Examples",
+    "companion": "the-five-cycle-and-erdos-hajnal",
+    "requires": [
+      "the-five-cycle-and-erdos-hajnal"
+    ],
+    "items": [
+      {
+        "id": "ex-a-rooted-stable-tooth-comb-with-two-teeth",
+        "kind": "example",
+        "title": "A rooted stable-tooth comb with two teeth",
+        "strategy": "Take vertices v, a_1, a_2, b_1, b_2 with edges va_1, va_2, a_1b_1, and a_2b_2, and no others. Then ((a_1,{b_1}),(a_2,{b_2})) is a two-tooth comb, the teeth are stable, and v is adjacent to both teeth while anticomplete to both blocks.",
+        "deps": [
+          "def-rooted-stable-tooth-comb"
+        ]
+      },
+      {
+        "id": "ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle",
+        "kind": "example",
+        "title": "A cross-edge in a rooted stable-tooth comb creates an induced five-cycle",
+        "strategy": "Add the edge b_1b_2 to the previous five-vertex rooted comb. Then v, a_1, b_1, b_2, a_2 induce the cycle C_5 in that cyclic order.",
+        "deps": [
+          "def-rooted-stable-tooth-comb",
+          "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-a-comb-can-have-an-edge-between-two-blocks",
+        "kind": "counterexample",
+        "title": "A comb can have an edge between two blocks",
+        "strategy": "Use the same two-tooth data as in the previous example. It is still a comb in the bare sense, but the edge b_1b_2 shows that pairwise anticompleteness of the blocks is not built into the definition.",
+        "deps": [
+          "def-comb-in-a-graph",
+          "ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle"
+        ]
+      },
+      {
+        "id": "fs-every-comb-has-pairwise-anticomplete-blocks",
+        "kind": "false-statement",
+        "title": "FALSE: every comb has pairwise anticomplete blocks",
+        "strategy": "Refute the claim with the previous counterexample. The anticomplete-block conclusion on the A page uses the extra rooted stable-tooth structure together with C5-freeness, not the comb definition alone.",
+        "deps": [
+          "cex-a-comb-can-have-an-edge-between-two-blocks"
+        ]
+      }
+    ]
+  }
+]

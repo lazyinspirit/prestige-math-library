@@ -32,6 +32,7 @@ parts:
       - conformal-mapping-branches-and-the-schwarz-lemma
       - bloch-schottky-and-picard
       - the-riemann-mapping-theorem
+      - simply-connected-plane-domains
 ---
 
 ## holomorphic-functions
@@ -45,11 +46,12 @@ term, and its derivatives recover its coefficients.
 ## contours-and-cauchy
 
 Contour integrals, Goursat, and Cauchy's formula turn local holomorphy into analyticity,
-derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hartogs, and
-pseudoconvexity handle boundary and extension phenomena, while Weierstrass factorization
-and Jensen-Hadamard connect zeros to growth. Gamma extends Euler's integral to reflection,
-multiplication, Stirling asymptotics, and the Hankel formula, and Runge-Mittag-Leffler
-turn Cauchy theory into approximation and prescribed principal parts. The conformal
-endgame then passes through the sphere, inverse and preparation theorems, Montel normal
-families, and Schwarz-Pick maps to Bloch, Schottky, Picard, and the Riemann mapping
-theorem.
+derivative estimates, residues, and zero-pole counting. Poisson, Dirichlet, Hartogs,
+pseudoconvexity, Runge-Mittag-Leffler, Gamma, and Weierstrass extend that control to
+boundary values, approximation, principal parts, growth, and special functions; Montel,
+Schwarz-Pick, Bloch, Schottky, Picard, and Riemann mapping complete the conformal side.
+The new simply-connected page then identifies the planar equivalences behind the theory:
+zero periods and homotopy-invariant integrals match primitives and harmonic conjugates,
+trivial fundamental group matches null homology and connected spherical complement,
+contractibility closes the circle, and winding number becomes the degree invariant for
+loops in $\mathbb C^\times$.

@@ -72,9 +72,16 @@ const againstLabel = option('--against');
 // the flag leaves the guard exactly as strict as it was.
 const publishedRepairsPath = option('--published-repairs');
 const terminalResolutionsPath = option('--terminal-resolutions');
+// A fatal repair can expose a defect in one of its own run-local prerequisites.
+// That prerequisite has no judge row of its own, so the ordinary fatal licence
+// cannot name it.  After automatic repair exhaustion, the owner may authorize
+// that one dependency repair explicitly.  The receipt is deliberately exact:
+// same group, direct dependency, a real confirmed-fatal exposing item, baseline
+// and repaired hashes, and the authoritative sources used for the correction.
+const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 
 const usage = () => {
-  console.error('usage: node tools/step8-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step8-scope.json> [--published-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
+  console.error('usage: node tools/step8-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step8-scope.json> [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
   process.exit(2);
 };
 if (!touchesPath || !baselineLabel || !judgeLedgerPath || !adjudicationsPath || !scopePath) usage();
@@ -260,6 +267,64 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
   }
 }
 
+// ---- exact owner-authorized run-local prerequisite repairs -----------------
+
+/** id -> Set of baseline states licensed by an exact owner prerequisite row. */
+const ownerPrerequisiteLicences = new Map();
+if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepairsPath))) {
+  for (const [index, line] of readFileSync(resolvePath(ownerPrerequisiteRepairsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
+    let record;
+    try { record = JSON.parse(line); } catch {
+      error('owner-prerequisite-repair-json', `${ownerPrerequisiteRepairsPath}:${index + 1}: invalid JSON`);
+      continue;
+    }
+    const where = `${ownerPrerequisiteRepairsPath}:${index + 1}`;
+    if (record?.version !== 1 || record?.kind !== 'owner-prerequisite-repair'
+      || record?.run !== scope.run || record?.authorized_by !== 'owner'
+      || typeof record?.id !== 'string' || typeof record?.found_via !== 'string'
+      || typeof record?.defect !== 'string' || record.defect.trim().length < 20
+      || typeof record?.correction_basis !== 'string' || record.correction_basis.trim().length < 80
+      || !Array.isArray(record?.source_urls) || record.source_urls.length < 2
+      || record.source_urls.some((url) => typeof url !== 'string' || !/^https:\/\//.test(url))
+      || typeof record?.at !== 'string' || !Number.isFinite(Date.parse(record.at))
+      || !/^[a-f0-9]{64}$/.test(record?.pre_sha256 ?? '')
+      || !/^[a-f0-9]{64}$/.test(record?.post_sha256 ?? '')) {
+      error('owner-prerequisite-repair-shape',
+        `${where}: requires a version-1 owner-prerequisite-repair with run, id, found_via, `
+        + 'authorized_by:"owner", exact pre/post hashes, at least two HTTPS source URLs, and concrete defect/correction evidence',
+        record?.id ?? null);
+      continue;
+    }
+    if (!runItems.has(record.id) || !runItems.has(record.found_via)) {
+      error('owner-prerequisite-repair-scope', `${where}: id and found_via must both belong to this run`, record.id);
+      continue;
+    }
+    const group = scope.by_item?.[record.id];
+    if (group !== scope.by_item?.[record.found_via] || String(record.group) !== String(group)) {
+      error('owner-prerequisite-repair-group', `${where}: prerequisite and exposing item must belong to the recorded group`, record.id);
+      continue;
+    }
+    const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
+    const deps = (exposingText.match(/^deps:\s*\[([^\]]*)\]/m)?.[1] ?? '')
+      .split(',').map((dep) => dep.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+    if (!deps.includes(record.id)) {
+      error('owner-prerequisite-repair-not-direct', `${where}: ${record.id} is not a direct dependency of ${record.found_via}`, record.id);
+      continue;
+    }
+    if (!(fatalLicences.get(record.found_via)?.size)) {
+      error('owner-prerequisite-repair-no-fatal', `${where}: found_via has no exact confirmed-fatal judge adjudication`, record.id);
+      continue;
+    }
+    if (shortHash(record.pre_sha256) !== baseline.hashes?.[record.id]
+      || shortHash(record.post_sha256) !== now?.[record.id]) {
+      error('owner-prerequisite-repair-stale', `${where}: exact pre/post hashes do not match the Step-8 baseline and current item`, record.id);
+      continue;
+    }
+    if (!ownerPrerequisiteLicences.has(record.id)) ownerPrerequisiteLicences.set(record.id, new Set());
+    ownerPrerequisiteLicences.get(record.id).add(shortHash(record.pre_sha256));
+  }
+}
+
 // ---- R1 ---------------------------------------------------------------------
 
 const changed = [];
@@ -280,6 +345,7 @@ for (const id of changed) {
   // back to the sole Terra judge, which is stronger certification than the single
   // reader the published-dependency-repair rule asks for at step 6.
   if (publishedLicences.get(id)?.has(baseline.hashes[id])) continue;
+  if (ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])) continue;
   // The two-cycle terminal route is deliberately post-edit and exact: it
   // licenses only the current item bytes named by the manual resolution. Judge
   // closure separately verifies the context hash before treating the blocker as
@@ -326,7 +392,7 @@ if (asJson) {
 } else {
   console.log(`step8-guard: baseline "${baselineLabel}"${baseline.at ? ` (${baseline.at})` : ''} vs ${summary.compared_against}`);
   console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal adjudication or exact terminal resolution`);
+  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal adjudication, exact owner prerequisite repair, or terminal resolution`);
   for (const w of warnings) console.log(`  WARN  ${w.code}: ${w.message}`);
   for (const e of errors) console.log(`  ERROR ${e.code}: ${e.message}`);
   console.log(errors.length ? `\nFAIL — ${errors.length} error(s)` : '\nOK — every step-8 edit is licensed by a confirmed fatal defect');

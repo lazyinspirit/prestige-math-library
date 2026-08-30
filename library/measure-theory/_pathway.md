@@ -17,16 +17,18 @@ parts:
       - modes-of-convergence-egorov-and-lusin
       - product-measures-and-the-fubini-tonelli-theorems
       - signed-and-complex-measures-hahn-and-jordan
+      - the-radon-nikodym-theorem-and-lebesgue-decomposition
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra is the closure needed for countable additivity, and outer measure plus
-Caratheodory construct complete measures such as Lebesgue measure. Measurable and simple
-functions build the Lebesgue integral; monotone and dominated convergence,
-Lebesgue-Stieltjes measures, Riemann comparison, and the Egorov-Lusin-Vitali convergence
-dictionary give its basic calculus. Product measures then add Tonelli-Fubini, Euclidean
-product identifications, layer-cake and polar-coordinate formulas, and the $C^1$
-change-of-variables theorem. The closing signed-and-complex-measure page removes
-positivity through Hahn and Jordan decompositions, total variation, and integration with
-cancellation.
+Caratheodory build Lebesgue measure and the measurable-function/integration calculus.
+Convergence theorems, Lebesgue-Stieltjes measures, Riemann comparison, Egorov-Lusin-Vitali
+phenomena, and product measures extend that calculus to approximation, modes of
+convergence, and iterated integration, while signed and complex measures remove positivity
+through Hahn and Jordan decompositions and total variation. The new closing page then
+splits sigma-finite signed measures into absolutely continuous and singular parts,
+produces Radon-Nikodym densities with almost-everywhere uniqueness, and records the
+derivative calculus: integration, additivity, chain and reciprocal rules, polar
+decomposition, and the three-part decomposition of finite Borel measures on $\mathbb R$.

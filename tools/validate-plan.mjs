@@ -46,10 +46,13 @@
 //  17. redundant-prereq   WARN when a direct requirement is already implied
 //                         transitively (keep `requires` a transitive reduction,
 //                         matching the birds-eye flowchart rule in CLAUDE.md)
+//  18. track-category     pages owned by the differential-geometry track,
+//                         including each A page's actual companion, retain the
+//                         owner-declared `differential-geometry` category
 //
 // Exit code 0 iff there are no hard errors.
 
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
 
@@ -309,6 +312,34 @@ for (const comp of sccs(pages.map((p) => p.id), pageSucc))
 // ------------------------------------------- checks 12-17: declared page prereqs
 
 const pageById = new Map(pages.map((p) => [p.id, p]));
+
+// The differential-geometry design is a long-lived source document: several
+// later plan splices are expected to consume it. Keep its owner-declared
+// category contract executable. The table's B label and the canonical plan's
+// current companion id can differ, so check both the documented page ids and
+// every present A page's actual companion. Missing pages are future work and
+// become subject to this check as soon as they enter the canonical plan.
+const differentialGeometryTrack = join(repo, 'research', 'plan-differential-geometry-track.md');
+if (existsSync(differentialGeometryTrack)) {
+  const source = readFileSync(differentialGeometryTrack, 'utf8');
+  const rows = [...source.matchAll(/^\| DG-\d+ \| `([^`]+)` \| `([^`]+)` \|/gm)];
+  if (!rows.length) {
+    err('track-category', `${differentialGeometryTrack}: no DG pair rows found; category contract cannot be checked`);
+  } else {
+    const trackPages = new Set();
+    for (const [, aId, bId] of rows) {
+      trackPages.add(aId);
+      trackPages.add(bId);
+      const aPage = pageById.get(aId);
+      if (aPage?.companion) trackPages.add(aPage.companion);
+    }
+    for (const id of trackPages) {
+      const page = pageById.get(id);
+      if (page && page.category !== 'differential-geometry')
+        err('track-category', `page ${id}: plan-differential-geometry-track.md requires category "differential-geometry", found "${page.category ?? '(missing)'}"`);
+    }
+  }
+}
 
 for (const p of pages)
   for (const r of p.requires ?? []) {

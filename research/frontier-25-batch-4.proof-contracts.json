@@ -1,0 +1,2889 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-homotopy-invariance-of-holomorphic-line-integrals",
+    "cor-cauchy-theorem-for-null-homotopic-loops",
+    "thm-winding-number-equals-circle-degree",
+    "lem-trivial-fundamental-group-implies-null-homology-for-plane-domains",
+    "lem-connected-spherical-complement-implies-null-homology",
+    "lem-null-homology-implies-connected-spherical-complement",
+    "thm-null-homology-is-equivalent-to-global-harmonic-conjugates",
+    "lem-null-homology-gives-the-plane-or-disc-alternative",
+    "lem-the-plane-or-disc-alternative-gives-contractibility",
+    "lem-contractibility-implies-trivial-fundamental-group",
+    "thm-grand-equivalence-for-simply-connected-plane-domains",
+    "cor-spherical-complement-characterization-of-plane-simple-connectivity",
+    "cor-winding-number-classifies-loops-in-the-punctured-plane",
+    "ex-the-unit-disc-satisfies-all-grand-equivalence-clauses",
+    "ex-the-complex-plane-satisfies-all-grand-equivalence-clauses",
+    "ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm",
+    "ex-every-convex-plane-domain-is-simply-connected",
+    "ex-every-star-shaped-plane-domain-is-simply-connected",
+    "ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped",
+    "cex-the-punctured-plane-separates-c-complement-from-spherical-complement",
+    "cex-a-round-annulus-is-connected-but-not-simply-connected",
+    "cex-the-punctured-disc-is-connected-but-not-simply-connected",
+    "fs-connected-complement-in-c-implies-simple-connectivity",
+    "fs-simply-connected-plane-domains-are-convex",
+    "fs-simply-connected-plane-domains-are-star-shaped"
+  ],
+  "contracts": {
+    "thm-homotopy-invariance-of-holomorphic-line-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "Write $I=[0,1]$ with its usual subspace topology, as in [[def-path-connected]]. Let $X$ and $Y$ be topological spaces, and let $f,g:X\\to Y$ be continuous maps ([[def-continuous-map-top]]).\n\nA **homotopy from $f$ to $g$** is a continuous map\n\n$$H:X\\times I\\longrightarrow Y$$\n\nfrom the product space ([[def-product-topology]]) such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x\\in X$. When such an $H$ exists, $f$ and $g$ are **homotopic**, written $f\\simeq g$.\n\nLet $A\\subseteq X$ carry the subspace topology ([[def-subspace-topology-top]]). The homotopy $H$ is a **homotopy relative to $A$**, or a homotopy **rel $A$**, when\n\n$$H(a,t)=f(a)=g(a)\\qquad(a\\in A,\\ t\\in I).$$\n\nThus a homotopy rel $A$ can exist only when $f|_A=g|_A$, and every ordinary homotopy is a homotopy rel $\\varnothing$. We write $f\\simeq_A g$ when a homotopy rel $A$ exists.\n\nIf $\\alpha,\\beta:I\\to Y$ are paths with the same initial point and the same terminal point ([[def-path-connected]]), a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$. Explicitly,\n\n$$H(s,0)=\\alpha(s),\\quad H(s,1)=\\beta(s),\\quad H(0,t)=\\alpha(0)=\\beta(0),\\quad H(1,t)=\\alpha(1)=\\beta(1).$$\n\nThe first coordinate $s$ parametrises the path and the second coordinate $t$ parametrises the deformation.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.\n\nDiameters of nonempty subsets of $X$ are defined because a compact space is\nbounded ([[thm-compact-subset-is-closed-and-bounded]]) and a subset of a bounded\nset is bounded. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-holomorphic-primitive-on-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped with respect to $a\\in U$. Every holomorphic function $f:U\\to\\mathbb C$ has the primitive\n\n$$F(z)=\\int_{\\ell_{az}}f(\\zeta)\\,d\\zeta.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-fundamental-theorem-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\\gamma:[a,b]\\to\\mathbb C$. If $F'=f$ is continuous, then\n$$\\int_\\gamma f(z)\\,dz=F(\\gamma(b))-F(\\gamma(a)).$$",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-cauchy-theorem-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped, let $f:U\\to\\mathbb C$ be holomorphic, and let $\\gamma$ be a closed rectifiable contour in $U$. Then\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-complex-contours-reversal-concatenation-and-closedness",
+          "source_section": "Definition",
+          "quote": "A **complex contour** is a rectifiable path $\\gamma:[a,b]\\to\\mathbb C$ in the sense of [[rem-complex-contours-as-planar-rectifiable-paths]]. It is **closed** when $\\gamma(a)=\\gamma(b)$. Its **reversal** is $\\gamma^-(t)=\\gamma(a+b-t)$.\n\nIf $\\alpha,\\beta:[0,1]\\to\\mathbb C$ satisfy $\\alpha(1)=\\beta(0)$, their concatenation $\\alpha*\\beta$ is defined by the same two affine pieces as in [[def-piecewise-c1-path-operations-and-oriented-reparametrizations]]. An increasing continuous bijection of compact parameter intervals preserves orientation; a decreasing one reverses orientation. The underlying length is unchanged by either monotone reparametrization by [[thm-arc-length-is-invariant-under-monotone-reparametrization]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the image of the homotopy square lies in $\\Omega$. For each point $x$ of $[0,1]^2$, openness of $\\Omega$ gives an open disc $D_x\\subseteq\\Omega$ centered at $H(x)$, and the sets $H^{-1}(D_x)$ form an open cover of the compact square $[0,1]^2$. By [L2], there is $\\delta>0$ such that every subset of the square of diameter less than $\\delta$ lies in some $H^{-1}(D_x)$. Choose $N$ with $\\sqrt2/N<\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $1\\le j,k\\le N$, write $$Q_{jk}=\\Bigl[\\frac{j-1}{N},\\frac{j}{N}\\Bigr]\\times\\Bigl[\\frac{k-1}{N},\\frac{k}{N}\\Bigr].$$ Each cell has diameter $\\sqrt2/N<\\delta$, so step 1.1 places $H[Q_{jk}]$ inside an open disc $D_{jk}\\subseteq\\Omega$. Put $$a_{jk}=H\\Bigl(\\frac{j-1}{N},\\frac{k-1}{N}\\Bigr),\\quad b_{jk}=H\\Bigl(\\frac{j}{N},\\frac{k-1}{N}\\Bigr),\\quad c_{jk}=H\\Bigl(\\frac{j}{N},\\frac{k}{N}\\Bigr),\\quad d_{jk}=H\\Bigl(\\frac{j-1}{N},\\frac{k}{N}\\Bigr).$$ Since every disc is convex, the straight segments from $a_{jk}$ to $b_{jk}$, from $b_{jk}$ to $c_{jk}$, from $c_{jk}$ to $d_{jk}$, and from $d_{jk}$ to $a_{jk}$ all lie in $D_{jk}$. Let $P_{jk}$ be the closed polygonal contour obtained by traversing those four segments in that order.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $D_{jk}$ is star-shaped, [L5] gives $$\\int_{P_{jk}} f(z)\\,dz=0.$$ Also [L3] gives a primitive $F_{jk}$ of $f$ on $D_{jk}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Summing the zero integrals from step 3.1 over all cells, every interior polygon edge appears once in each orientation, so [L6] and [L7] cancel all interior contributions. The surviving outer boundary is the bottom polygonal path $P_0$ built from the straight segments joining $\\gamma_0((j-1)/N)$ to $\\gamma_0(j/N)$, the top path $P_1$ built analogously from $\\gamma_1((j-1)/N)$ to $\\gamma_1(j/N)$ but with reverse orientation, and the two side edges. By [L1] both side edges are constant, and for a constant path $s$ one has $s*s=s$, so [L6] gives $\\int_s f\\,dz=\\int_{s*s}f\\,dz=2\\int_s f\\,dz$, hence $\\int_s f\\,dz=0$. Therefore $$\\int_{P_0} f(z)\\,dz=\\int_{P_1} f(z)\\,dz.$$",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L6",
+            "L7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For each $1\\le j\\le N$, the bottom subpath $\\gamma_0|_{[(j-1)/N,\\,j/N]}$ and the chord segment from $\\gamma_0((j-1)/N)$ to $\\gamma_0(j/N)$ both lie in $D_{j1}$. Since $F_{j1}$ is a primitive of $f$ on $D_{j1}$, [L4] gives the same endpoint increment for both, so their integrals are equal. Summing over $j$ and using [L6] yields $$\\int_{\\gamma_0} f(z)\\,dz=\\int_{P_0} f(z)\\,dz.$$ The same argument with the top-row discs $D_{jN}$ gives $$\\int_{\\gamma_1} f(z)\\,dz=\\int_{P_1} f(z)\\,dz.$$",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "L4",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Combining steps 4.1 and 4.2 gives $$\\int_{\\gamma_0} f(z)\\,dz=\\int_{\\gamma_1} f(z)\\,dz,$$ as required.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses N with sqrt(2)/N < delta, so the only denominator introduced there is a positive integer and cannot vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Endpoint-fixed homotopic paths have equal holomorphic line integrals: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: arbitrary homotopy images of cell boundaries need not be rectifiable, so the equality proof must work through honest rectifiable contours. Steps 2.1-4.2 replace the old cell-boundary-image argument by polygonal cell boundaries inside discs and then compare those polygons back to the top and bottom paths using local primitives."
+      }
+    },
+    "cor-cauchy-theorem-for-null-homotopic-loops": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "Write $I=[0,1]$ with its usual subspace topology, as in [[def-path-connected]]. Let $X$ and $Y$ be topological spaces, and let $f,g:X\\to Y$ be continuous maps ([[def-continuous-map-top]]).\n\nA **homotopy from $f$ to $g$** is a continuous map\n\n$$H:X\\times I\\longrightarrow Y$$\n\nfrom the product space ([[def-product-topology]]) such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x\\in X$. When such an $H$ exists, $f$ and $g$ are **homotopic**, written $f\\simeq g$.\n\nLet $A\\subseteq X$ carry the subspace topology ([[def-subspace-topology-top]]). The homotopy $H$ is a **homotopy relative to $A$**, or a homotopy **rel $A$**, when\n\n$$H(a,t)=f(a)=g(a)\\qquad(a\\in A,\\ t\\in I).$$\n\nThus a homotopy rel $A$ can exist only when $f|_A=g|_A$, and every ordinary homotopy is a homotopy rel $\\varnothing$. We write $f\\simeq_A g$ when a homotopy rel $A$ exists.\n\nIf $\\alpha,\\beta:I\\to Y$ are paths with the same initial point and the same terminal point ([[def-path-connected]]), a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints** is a homotopy $H:I\\times I\\to Y$ rel $\\{0,1\\}$. Explicitly,\n\n$$H(s,0)=\\alpha(s),\\quad H(s,1)=\\beta(s),\\quad H(0,t)=\\alpha(0)=\\beta(0),\\quad H(1,t)=\\alpha(1)=\\beta(1).$$\n\nThe first coordinate $s$ parametrises the path and the second coordinate $t$ parametrises the deformation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-homotopy-invariance-of-holomorphic-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $f:\\Omega\\to\\mathbb C$ be\nholomorphic, and let $\\gamma_0,\\gamma_1:[0,1]\\to\\Omega$ be rectifiable paths\nwith the same endpoints. If $\\gamma_0$ and $\\gamma_1$ are path-homotopic\nrelative to the endpoints, then\n\n$$\\int_{\\gamma_0} f(z)\\,dz=\\int_{\\gamma_1} f(z)\\,dz.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-contour-integral-of-a-constant-is-an-endpoint-increment",
+          "source_section": "Statement",
+          "quote": "For $c\\in\\mathbb C$ and a rectifiable contour $\\gamma:[a,b]\\to\\mathbb C$,\n$$\\int_\\gamma c\\,dz=c\\bigl(\\gamma(b)-\\gamma(a)\\bigr).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complex-contours-reversal-concatenation-and-closedness",
+          "source_section": "Definition",
+          "quote": "A **complex contour** is a rectifiable path $\\gamma:[a,b]\\to\\mathbb C$ in the sense of [[rem-complex-contours-as-planar-rectifiable-paths]]. It is **closed** when $\\gamma(a)=\\gamma(b)$. Its **reversal** is $\\gamma^-(t)=\\gamma(a+b-t)$.\n\nIf $\\alpha,\\beta:[0,1]\\to\\mathbb C$ satisfy $\\alpha(1)=\\beta(0)$, their concatenation $\\alpha*\\beta$ is defined by the same two affine pieces as in [[def-piecewise-c1-path-operations-and-oriented-reparametrizations]]. An increasing continuous bijection of compact parameter intervals preserves orientation; a decreasing one reverses orientation. The underlying length is unchanged by either monotone reparametrization by [[thm-arc-length-is-invariant-under-monotone-reparametrization]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Given and [L1] place $\\gamma$ and the constant loop $c$ under the hypotheses of [L2]. Therefore $$\\int_\\gamma f(z)\\,dz=\\int_c f(z)\\,dz.$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $c$ is constant, one has $f(c(t))=f(c(0))$ for every $t$. Since [L4] makes $c$ a closed contour, [L3] gives $$\\int_c f(z)\\,dz=\\int_c f(c(0))\\,dz=f(c(0))\\bigl(c(1)-c(0)\\bigr)=0.$$ Combining this with step 1.1 proves $\\int_\\gamma f(z)\\,dz=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A closed contour path-homotopic to a constant loop has zero integral against every holomorphic function: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: ordinary nullhomotopy of a map I->Omega does not force an endpoint-fixed loop homotopy. The repaired statement now requires path-homotopy relative to the endpoints to a constant loop, and steps 1.1-2.1 reduce the integral to a constant-loop integral with zero endpoint displacement."
+      }
+    },
+    "thm-winding-number-equals-circle-degree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-winding-number-is-the-normalized-argument-increment",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a closed complex contour, let\n$p\\notin\\gamma^\\ast$, let $\\lambda$ be a continuous logarithm of $\\gamma-p$ along\n$\\gamma$ and let $\\theta=\\operatorname{Im}\\lambda$ be the associated continuous\nargument ([[def-continuous-argument-and-holomorphic-logarithm-branches]]). Then\n\n$$\\operatorname{Re}\\lambda(t)=\\log|\\gamma(t)-p|\\quad(a\\le t\\le b), \\qquad n(\\gamma,p)=\\frac{\\theta(b)-\\theta(a)}{2\\pi}.$$\n\nIn particular $\\theta(b)-\\theta(a)$ is an integer multiple of $2\\pi$, and it is\nthe same for every continuous argument of $\\gamma-p$ along $\\gamma$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-winding-number-closed-complex-contour",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a **closed** complex contour, that is a\nrectifiable path with $\\gamma(a)=\\gamma(b)$\n([[def-complex-contours-reversal-concatenation-and-closedness]]), with trace\n$\\gamma^\\ast$, and let $p\\in\\mathbb C$ with $p\\notin\\gamma^\\ast$. The **winding\nnumber**, or **index**, of $\\gamma$ about $p$ is\n\n$$n(\\gamma,p):=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{dz}{z-p},$$\n\nthe complex line integral of\n[[def-complex-line-integral-over-a-rectifiable-path]].\n\nThe integral exists: $z\\mapsto1/(z-p)$ is complex differentiable, hence\ncontinuous, on $\\mathbb C\\setminus\\{p\\}$ by\n[[thm-algebra-of-complex-derivatives]] and\n[[cor-complex-differentiability-implies-continuity]], the trace $\\gamma^\\ast$ is\ncontained in that set, and $\\gamma$ is rectifiable, so\n[[thm-existence-of-complex-line-integrals-on-rectifiable-paths]] applies.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$$\n\nwith the Euclidean subspace topology. The function\n\n$$h:\\mathbb R/\\mathbb Z\\longrightarrow C,\\qquad h([t])=(\\cos 2\\pi t,\\sin 2\\pi t),$$\n\nis a homeomorphism. Thus $[t]\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-degree-of-a-circle-loop",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha:I\\to\\mathbb R/\\mathbb Z$ be a based loop at $[0]$. Since\n$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering map\n([[thm-real-line-covers-real-line-mod-integers]]), path lifting\n([[thm-path-lifting-for-covering-maps]]) gives a unique lift\n$\\widetilde\\alpha:I\\to\\mathbb R$ with $\\widetilde\\alpha(0)=0$ and\n$p\\circ\\widetilde\\alpha=\\alpha$; this is a lift in the sense of\n[[def-lift-of-a-map-path-and-homotopy]].\n\nBecause $\\alpha(1)=[0]$, its terminal value satisfies\n$\\widetilde\\alpha(1)\\in p^{-1}([0])=\\mathbb Z$ by\n[[def-circle-as-real-line-mod-integers]]. Define $\\deg(\\alpha)=\\widetilde\\alpha(1)$.\n\nThis defines degree on based loops. Its independence from a representative of\na path-homotopy class is proved separately before degree is used on\n$\\pi_1(S^1,[0])$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-geometric-unit-circle-has-fundamental-group-z",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ with basepoint $(1,0)$. Then\n\n$$\\pi_1(C,(1,0))\\cong(\\mathbb Z,+).$$\n\nUnder this isomorphism, the loop\n\n$$t\\longmapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$$\n\ncorresponds to $n$ for every $n\\in\\mathbb Z$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $\\gamma(t)\\ne0$ for every $t$, the normalized map $\\alpha(t)=\\gamma(t)/|\\gamma(t)|$ is a continuous loop in the unit circle based at $1$. Using the homeomorphism of [L2], regard the same loop as a based loop $\\beta:[0,1]\\to\\mathbb R/\\mathbb Z$ at $[0]$. Let $\\widetilde\\beta:[0,1]\\to\\mathbb R$ be its lift with $\\widetilde\\beta(0)=0$, and define $\\theta(t)=2\\pi\\widetilde\\beta(t)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the definition of $h$ in [L2], the lift from step 1.1 supplies a continuous argument. [step 1.1, L1, L2, algebra]\n$$\\alpha(t)=\\cos\\theta(t)+i\\sin\\theta(t)=e^{i\\theta(t)}.$$\nHence\n$$\\gamma(t)=|\\gamma(t)|e^{i\\theta(t)},$$\nso $\\theta$ is a continuous argument of $\\gamma$ about $0$. Therefore [L1] gives\n$$n(\\gamma,0)=\\frac{\\theta(1)-\\theta(0)}{2\\pi}=\\widetilde\\beta(1).$$",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\widetilde\\beta(1)$ is exactly the degree of $\\beta$ by [L3], step 2.1 shows $n(\\gamma,0)=\\deg(\\beta)$, which is the asserted degree of the normalized circle loop of $\\gamma$. Fact [L4] records that this is the same integer that classifies the loop class in the usual $\\pi_1(S^1)\\cong\\mathbb Z$ convention.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 divides by the fixed nonzero constant 2pi, and the loop lives in C^times so the argument formula never evaluates at 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For loops in C times, the winding number about 0 equals the circle degree: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the loop must carry a continuous argument from the lifted circle path, and the resulting integer must match the circle degree exactly. Steps 1.1-3.1 lift the normalized loop, build theta(t)=2pi beta-tilde(t), compute n(gamma,0) from the argument increment, and identify beta-tilde(1) with degree."
+      }
+    },
+    "lem-trivial-fundamental-group-implies-null-homology-for-plane-domains": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$**\nis a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$\n([[def-path-connected]]). Two based loops are equivalent when they are\npath-homotopic relative to the endpoints. This is an equivalence relation by\n[[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]].\n\nThe **fundamental group set** of $X$ at $x_0$ is\n\n$$\\pi_1(X,x_0):=\\{\\,[\\alpha]:\\alpha\\text{ is a based loop at }x_0\\,\\}.$$\n\nFor composable paths, write\n\n$$(\\alpha*\\beta)(s):=\\begin{cases}\\alpha(2s),&0\\leq s\\leq\\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\leq s\\leq1.\\end{cases}$$\n\nThe finite closed-pasting argument already carried out in\n[[def-path-connected]] shows that this is a path. The multiplication proposed\non loop classes is\n\n$$[\\alpha][\\beta]:=[\\alpha*\\beta].$$\n\n**Order convention.** The product $[\\alpha][\\beta]$ traverses $\\alpha$ first\nand $\\beta$ second. Every product on this page uses this convention.\n\nThe constant loop at $x_0$ is denoted $c_{x_0}$, and the reversed loop is\n$\\bar\\alpha(s):=\\alpha(1-s)$. The next theorem proves that multiplication is\nindependent of representatives and that $[c_{x_0}]$ and $[\\bar\\alpha]$ are the\nidentity and inverse required by the group axioms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cauchy-theorem-for-null-homotopic-loops",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $f:\\Omega\\to\\mathbb C$ be\nholomorphic, and let $\\gamma:[0,1]\\to\\Omega$ be a closed rectifiable contour. If\n$\\gamma$ is path-homotopic relative to the endpoints to a constant loop in\n$\\Omega$, then\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-homological-simple-connectivity-equivalences",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a complex domain. The following are equivalent.\n\n1. $U$ is homologically simply connected: every complex chain which is a cycle\n   with trace in $U$ is null-homologous in $U$.\n2. Every holomorphic function on $U$ has a primitive on $U$.\n3. Every holomorphic nowhere-zero function on $U$ has a holomorphic logarithm on\n   $U$.\n4. For every $p\\in\\mathbb C\\setminus U$, the function $z\\mapsto1/(z-p)$ has a\n   primitive on $U$.\n5. $\\int_\\Gamma f(z)\\,dz=0$ for every holomorphic $f$ on $U$ and every cycle\n   $\\Gamma$ with trace in $U$.\n6. $\\int_\\Gamma\\frac{dz}{z-p}=0$ for every cycle $\\Gamma$ with trace in $U$ and\n   every $p\\in\\mathbb C\\setminus U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complex-chain-and-cycle",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open. A **complex chain in $\\Omega$** is a\nfinite list\n\n$$\\Gamma=\\bigl((m_0,\\gamma_0),\\dots,(m_{r-1},\\gamma_{r-1})\\bigr),\\qquad r\\in\\mathbb N,$$\n\neach $m_k$ an integer ([[def-integers]]) and each\n$\\gamma_k:[a_k,b_k]\\to\\mathbb C$ a complex contour\n([[def-complex-contours-reversal-concatenation-and-closedness]]) whose trace\nlies in $\\Omega$. It is written $\\sum_{k<r}m_k\\gamma_k$. The list of length $r=0$\nis the **empty chain**.\n\nIts **trace** is the set\n\n$$\\Gamma^\\ast:=\\bigcup\\{\\,\\gamma_k^\\ast\\ :\\ k<r\\text{ and }m_k\\ne0\\,\\},$$\n\na subset of $\\Omega$; a term with $m_k=0$ contributes nothing to it.\n\nIts **boundary** is the function $\\partial\\Gamma:\\mathbb C\\to\\mathbb Z$ given by\n\n$$\\partial\\Gamma(q):=\\sum_{\\substack{k<r\\\\ \\gamma_k(b_k)=q}}m_k\\ -\\ \\sum_{\\substack{k<r\\\\ \\gamma_k(a_k)=q}}m_k,$$\n\neach sum being a finite sum over a subset of $\\{k:k<r\\}$\n([[def-finite-sum-in-a-commutative-monoid]], [[def-finite-cardinality]]), and\nthe subtraction is that of the commutative ring $\\mathbb Z$\n([[thm-int-comm-ring]]). The chain $\\Gamma$ is a **cycle** when $\\partial\\Gamma(q)=0$ for every\n$q\\in\\mathbb C$.\n\n**Sum and negation.** For chains $\\Gamma_1$ and $\\Gamma_2$ in $\\Omega$, the sum\n$\\Gamma_1+\\Gamma_2$ is the concatenated list, and $-\\Gamma$ is the list with\nevery coefficient replaced by $-m_k$ and every contour unchanged. Write\n$\\Gamma_1-\\Gamma_2:=\\Gamma_1+(-\\Gamma_2)$. The **reversal** $\\Gamma^-$ is the\nlist with every coefficient unchanged and every contour replaced by its\nreversal; the additive inverse $-m_k$ is taken in $\\mathbb Z$\n([[thm-int-comm-ring]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-integration-and-index-of-complex-chain",
+          "source_section": "Definition",
+          "quote": "Let $\\Gamma=\\sum_{k<r}m_k\\gamma_k$ be a complex chain\n([[def-complex-chain-and-cycle]]) with trace $\\Gamma^\\ast$, and let $f$ be\ncontinuous on $\\Gamma^\\ast$. The **integral of $f$ over $\\Gamma$** is\n\n$$\\int_\\Gamma f(z)\\,dz:=\\sum_{\\substack{k<r\\\\ m_k\\ne0}}m_k\\int_{\\gamma_k}f(z)\\,dz,$$\n\na finite sum ([[def-finite-sum-in-a-commutative-monoid]]) of the complex line\nintegrals of [[def-complex-line-integral-over-a-rectifiable-path]]. Each summand\nexists: for $k$ with $m_k\\ne0$ the trace $\\gamma_k^\\ast$ is contained in\n$\\Gamma^\\ast$, so $f$ is continuous on it, and $\\gamma_k$ is rectifiable, so\n[[thm-existence-of-complex-line-integrals-on-rectifiable-paths]] applies. Terms\nwith $m_k=0$ are omitted, so no integral of $f$ over a contour outside the trace\nis required. The empty chain, and any chain all of whose coefficients vanish,\ngive $\\int_\\Gamma f\\,dz=0$.\n\nFor $p\\in\\mathbb C\\setminus\\Gamma^\\ast$, the **index of $\\Gamma$ about $p$** is\n\n$$n(\\Gamma,p):=\\frac1{2\\pi i}\\int_\\Gamma\\frac{dz}{z-p}.$$\n\nThis is defined: $z\\mapsto 1/(z-p)$ is complex differentiable, hence continuous,\non $\\mathbb C\\setminus\\{p\\}\\supseteq\\Gamma^\\ast$ by\n[[thm-algebra-of-complex-derivatives]] and\n[[cor-complex-differentiability-implies-continuity]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-open-connected-subsets-of-rn-are-polygonally-connected",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb{R}^n$ be open. Then $U$ is connected if and only if it is path-connected, if and only if it is polygonally connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-polygonal-path-and-polygonal-connectedness",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\mathbb{R}^n$. A **polygonal path in $A$** from $x$ to $y$ is a path $\\gamma:[0,1]\\to A$ ([[def-path-connected]], [[def-interval]]) for which there are a finite list of vertices $v_0,\\ldots,v_m\\in A$ and a partition $0=t_0<t_1<\\cdots<t_m=1$ such that $v_0=x$, $v_m=y$, and\n\n$$\\gamma(t)=\\frac{t_i-t}{t_i-t_{i-1}}v_{i-1}+\\frac{t-t_{i-1}}{t_i-t_{i-1}}v_i\\quad\\text{when }t_{i-1}\\le t\\le t_i.$$\n\nThe formula uses only scalar multiplication and vector addition in $\\mathbb{R}^n$ ([[def-vector-space]]). The finite list is indexed by a natural number ([[def-finite-cardinality]]).\n\nThe subset $A$ is **polygonally connected** when every pair of its points is joined by a polygonal path in $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb R^n$ be continuous. Suppose there is a partition $a=t_0<\\cdots<t_m=b$ such that on each $[t_i,t_{i+1}]$ the restriction is differentiable in the interior and its derivative has a continuous extension $v_i$ to that closed subinterval. Then $\\gamma$ is rectifiable and\n\n$$L_{[a,b]}(\\gamma)=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}\\lVert v_i(t)\\rVert_2\\,dt.$$\n\nNo agreement between $v_{i-1}(t_i)$ and $v_i(t_i)$ is required, so corners are allowed. For a singleton interval the empty sum and the length are zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Gamma=\\sum_{j<r}m_j\\gamma_j$ be a cycle with trace in $\\Omega$, and let $f$ be holomorphic on $\\Omega$. Choose a basepoint $z_0\\in\\Omega$. Let\n$$E:=\\{\\gamma_j(a_j):j<r,\\ m_j\\ne0\\}\\cup\\{\\gamma_j(b_j):j<r,\\ m_j\\ne0\\}.$$\nFor each $q\\in E$, [L5] gives a polygonal path $\\lambda_q$ in $\\Omega$ from $z_0$ to $q$; by [L6] each $\\lambda_q$ is a rectifiable contour.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L4",
+            "L5",
+            "L6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $j<r$ with $m_j\\ne0$, and write $a_j=\\gamma_j(a_j)$ and $b_j=\\gamma_j(b_j)$. The contour\n$$\\delta_j:=\\lambda_{a_j}*\\gamma_j*\\lambda_{b_j}^-$$\nis a based loop at $z_0$. By the triviality hypothesis, its loop class is the identity, so [L1] makes $\\delta_j$ path-homotopic relative to the endpoints to the constant loop at $z_0$. Applying [L2] and then [L6] gives\n$$0=\\int_{\\delta_j} f(z)\\,dz=\\int_{\\lambda_{a_j}} f(z)\\,dz+\\int_{\\gamma_j} f(z)\\,dz-\\int_{\\lambda_{b_j}} f(z)\\,dz,$$\nhence\n$$\\int_{\\gamma_j} f(z)\\,dz=\\int_{\\lambda_{b_j}} f(z)\\,dz-\\int_{\\lambda_{a_j}} f(z)\\,dz.$$",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L4] and step 1.2,\n$$\\int_\\Gamma f(z)\\,dz=\\sum_{\\substack{j<r\\\\m_j\\ne0}}m_j\\int_{\\gamma_j} f(z)\\,dz=\\sum_{\\substack{j<r\\\\m_j\\ne0}}m_j\\int_{\\lambda_{b_j}} f(z)\\,dz-\\sum_{\\substack{j<r\\\\m_j\\ne0}}m_j\\int_{\\lambda_{a_j}} f(z)\\,dz.$$\nGrouping the two finite sums by endpoint $q\\in E$ and using the boundary formula from [L4], this becomes\n$$\\int_\\Gamma f(z)\\,dz=\\sum_{q\\in E}\\partial\\Gamma(q)\\int_{\\lambda_q} f(z)\\,dz=0,$$\nbecause $\\Gamma$ is a cycle. Thus $\\int_\\Gamma f(z)\\,dz=0$ for every holomorphic $f$ and every cycle $\\Gamma$ in $\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The criterion in [L3] now shows that $\\Omega$ is homologically simply connected.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 rewrites the chain integral as a finite endpoint sum over E, and when the cycle is empty that set is empty and the defining chain integral is already 0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a basepoint in the nonempty domain and, for each endpoint appearing in the finite cycle, a connector path from that basepoint."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A plane domain with trivial fundamental group is homologically simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: a complex cycle need not be a list of closed contours, so trivial pi_1 must be turned into endpoint-cancellation on a general finite chain. Steps 1.1-2.1 choose connector paths to the finitely many endpoints, convert each contour integral into a connector difference, and then cancel those terms with the cycle boundary."
+      }
+    },
+    "lem-connected-spherical-complement-implies-null-homology": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma=\\sum_{k<r}m_k\\gamma_k$ be a complex chain which is a cycle, and put\n$M(\\Gamma)=\\sum_{k<r,\\,m_k\\ne0}|m_k|\\,L(\\gamma_k)$. Then the trace $\\Gamma^\\ast$\nis compact, $\\mathbb C\\setminus\\Gamma^\\ast$ is open, and:\n\n1. for $p_0\\notin\\Gamma^\\ast$ with $d=\\inf\\{|w-p_0|:w\\in\\Gamma^\\ast\\}$ and\n   $|p-p_0|<d/2$,\n   $$|n(\\Gamma,p)-n(\\Gamma,p_0)|\\le\\frac{M(\\Gamma)\\,|p-p_0|}{\\pi d^2},$$\n   so $n(\\Gamma,\\cdot)$ is continuous on $\\mathbb C\\setminus\\Gamma^\\ast$;\n2. $n(\\Gamma,\\cdot)$ is constant on every connected component of\n   $\\mathbb C\\setminus\\Gamma^\\ast$, and each such component is open, so the index\n   is locally constant;\n3. there is $R>0$ with $n(\\Gamma,p)=0$ for every $p$ with $|p|>R$.\n\nConsequently $\\Omega_0:=\\{p\\in\\mathbb C\\setminus\\Gamma^\\ast:n(\\Gamma,p)=0\\}$ is\nopen and contains $\\{p:|p|>R\\}$.\n\nIf $\\Gamma^\\ast=\\varnothing$ then $d$ is the infimum of the empty set and clause\n1 is not asserted; in that case $n(\\Gamma,p)=0$ for every $p\\in\\mathbb C$ and\nclauses 2 and 3 hold with $\\Omega_0=\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-null-homologous-and-homologous-complex-cycles",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open and let $\\Gamma$ be a complex chain which\nis a cycle and whose trace lies in $\\Omega$\n([[def-complex-chain-and-cycle]]).\n\n$\\Gamma$ is **null-homologous in $\\Omega$** when\n\n$$n(\\Gamma,p)=0\\qquad\\text{for every }p\\in\\mathbb C\\setminus\\Omega,$$\n\nthe index being that of [[def-integration-and-index-of-complex-chain]]; the\nvalues are defined because $\\Gamma^\\ast\\subseteq\\Omega$, so every\n$p\\notin\\Omega$ lies off the trace, and they are integers by\n[[thm-winding-number-of-a-cycle-is-integer]].\n\nTwo cycles $\\Gamma_1,\\Gamma_2$ with traces in $\\Omega$ are **homologous in\n$\\Omega$** when $\\Gamma_1-\\Gamma_2$ is null-homologous in $\\Omega$. By\n[[thm-winding-number-chain-laws]] the chain $\\Gamma_1-\\Gamma_2$ is again a cycle\nwith trace inside $\\Gamma_1^\\ast\\cup\\Gamma_2^\\ast\\subseteq\\Omega$, and its index\nat a point $p$ off that union is $n(\\Gamma_1,p)-n(\\Gamma_2,p)$; so the condition\nsays exactly that\n\n$$n(\\Gamma_1,p)=n(\\Gamma_2,p)\\qquad\\text{for every }p\\in\\mathbb C\\setminus\\Omega.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\Gamma^\\ast\\subseteq\\Omega$, the index $n(\\Gamma,p)$ is defined for every $p\\in\\mathbb C\\setminus\\Omega$. By [L1], the function $p\\mapsto n(\\Gamma,p)$ is locally constant on $\\mathbb C\\setminus\\Gamma^\\ast$, and there is $R>0$ with $n(\\Gamma,p)=0$ whenever $|p|>R$. Thus the subset [given, L1, construct]\n$$E=\\{\\infty\\}\\cup\\{p\\in\\mathbb C\\setminus\\Omega:n(\\Gamma,p)=0\\}$$\ncontains $\\infty$ together with a punctured neighborhood of $\\infty$ in the sphere.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $E$ is open in $\\widehat{\\mathbb C}\\setminus\\Omega$ by the local constancy from [L1], and its complement in $\\widehat{\\mathbb C}\\setminus\\Omega$ is open for the same reason. Since $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected and $E$ is nonempty by step 1.1, it follows that [step 1.1, L1, algebra]\n$$E=\\widehat{\\mathbb C}\\setminus\\Omega.$$\nTherefore $n(\\Gamma,p)=0$ for every $p\\in\\mathbb C\\setminus\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L2], the vanishing from step 2.1 is exactly the statement that $\\Gamma$ is null-homologous in $\\Omega$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A connected spherical complement forces every cycle in the domain to be null-homologous: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "lem-null-homology-implies-connected-spherical-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homologically-simply-connected-complex-domain",
+          "source_section": "Definition",
+          "quote": "A complex domain $\\Omega$ ([[def-complex-domain]]) is **homologically simply\nconnected** when every complex chain which is a cycle and whose trace lies in\n$\\Omega$ ([[def-complex-chain-and-cycle]]) is null-homologous in $\\Omega$\n([[def-null-homologous-and-homologous-complex-cycles]]); equivalently, when\n\n$$n(\\Gamma,p)=0\\qquad\\text{for every cycle }\\Gamma\\text{ in }\\Omega\\text{ and every }p\\in\\mathbb C\\setminus\\Omega,$$\n\nwith the index of [[def-integration-and-index-of-complex-chain]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. If $C\\subseteq U\\subseteq\\mathbb R^n$, where $C$ is compact and $U$ is open, then there is a compact Jordan set $K$ such that\n$$C\\subseteq\\operatorname{int}K\\subseteq K\\subseteq U.$$\nThe set $K$ can be chosen as a finite union of closed grid rectangles.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-winding-number-chain-laws",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma$, $\\Gamma_1$, $\\Gamma_2$ be complex chains\n([[def-complex-chain-and-cycle]]). Then:\n\n1. $(\\Gamma_1+\\Gamma_2)^\\ast=\\Gamma_1^\\ast\\cup\\Gamma_2^\\ast$,\n   $(-\\Gamma)^\\ast=\\Gamma^\\ast$ and $(\\Gamma^-)^\\ast=\\Gamma^\\ast$;\n2. $\\partial(\\Gamma_1+\\Gamma_2)=\\partial\\Gamma_1+\\partial\\Gamma_2$,\n   $\\partial(-\\Gamma)=-\\partial\\Gamma$ and $\\partial(\\Gamma^-)=-\\partial\\Gamma$\n   as functions on $\\mathbb C$; consequently a sum of cycles is a cycle, and the\n   negative and the reversal of a cycle are cycles;\n3. for $f$ continuous on $\\Gamma_1^\\ast\\cup\\Gamma_2^\\ast$,\n   $$\\int_{\\Gamma_1+\\Gamma_2}f\\,dz=\\int_{\\Gamma_1}f\\,dz+\\int_{\\Gamma_2}f\\,dz,$$\n   and for $f$ continuous on $\\Gamma^\\ast$,\n   $$\\int_{-\\Gamma}f\\,dz=-\\int_\\Gamma f\\,dz,\\qquad \\int_{\\Gamma^-}f\\,dz=-\\int_\\Gamma f\\,dz;$$\n4. for $p\\notin\\Gamma_1^\\ast\\cup\\Gamma_2^\\ast$,\n   $n(\\Gamma_1+\\Gamma_2,p)=n(\\Gamma_1,p)+n(\\Gamma_2,p)$, and for\n   $p\\notin\\Gamma^\\ast$, $n(-\\Gamma,p)=-n(\\Gamma,p)=n(\\Gamma^-,p)$;\n5. the empty chain is a cycle, its integral of every function is $0$, and its\n   index is $0$ at every point of $\\mathbb C$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-winding-number-is-the-normalized-argument-increment",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a closed complex contour, let\n$p\\notin\\gamma^\\ast$, let $\\lambda$ be a continuous logarithm of $\\gamma-p$ along\n$\\gamma$ and let $\\theta=\\operatorname{Im}\\lambda$ be the associated continuous\nargument ([[def-continuous-argument-and-holomorphic-logarithm-branches]]). Then\n\n$$\\operatorname{Re}\\lambda(t)=\\log|\\gamma(t)-p|\\quad(a\\le t\\le b), \\qquad n(\\gamma,p)=\\frac{\\theta(b)-\\theta(a)}{2\\pi}.$$\n\nIn particular $\\theta(b)-\\theta(a)$ is an integer multiple of $2\\pi$, and it is\nthe same for every continuous argument of $\\gamma-p$ along $\\gamma$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma=\\sum_{k<r}m_k\\gamma_k$ be a complex chain which is a cycle, and put\n$M(\\Gamma)=\\sum_{k<r,\\,m_k\\ne0}|m_k|\\,L(\\gamma_k)$. Then the trace $\\Gamma^\\ast$\nis compact, $\\mathbb C\\setminus\\Gamma^\\ast$ is open, and:\n\n1. for $p_0\\notin\\Gamma^\\ast$ with $d=\\inf\\{|w-p_0|:w\\in\\Gamma^\\ast\\}$ and\n   $|p-p_0|<d/2$,\n   $$|n(\\Gamma,p)-n(\\Gamma,p_0)|\\le\\frac{M(\\Gamma)\\,|p-p_0|}{\\pi d^2},$$\n   so $n(\\Gamma,\\cdot)$ is continuous on $\\mathbb C\\setminus\\Gamma^\\ast$;\n2. $n(\\Gamma,\\cdot)$ is constant on every connected component of\n   $\\mathbb C\\setminus\\Gamma^\\ast$, and each such component is open, so the index\n   is locally constant;\n3. there is $R>0$ with $n(\\Gamma,p)=0$ for every $p$ with $|p|>R$.\n\nConsequently $\\Omega_0:=\\{p\\in\\mathbb C\\setminus\\Gamma^\\ast:n(\\Gamma,p)=0\\}$ is\nopen and contains $\\{p:|p|>R\\}$.\n\nIf $\\Gamma^\\ast=\\varnothing$ then $d$ is the infimum of the empty set and clause\n1 is not asserted; in that case $n(\\Gamma,p)=0$ for every $p\\in\\mathbb C$ and\nclauses 2 and 3 hold with $\\Omega_0=\\mathbb C$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose, toward a contradiction, that $F:=\\widehat{\\mathbb C}\\setminus\\Omega$ is disconnected. Then $F=A\\sqcup B$ for disjoint nonempty closed subsets $A,B\\subseteq F$. Since $\\infty\\in F$, relabel so that $\\infty\\in B$. Because the Riemann sphere is a metric space, the disjoint closed sets $A$ and $B$ have disjoint open neighbourhoods $U$ and $V$ in $\\widehat{\\mathbb C}$ with $A\\subseteq U$ and $B\\subseteq V$. The inclusion $\\infty\\in V$ forces $U\\subseteq\\mathbb C$, so $A$ is compact in $\\mathbb C$ and $U\\cap(\\mathbb C\\setminus\\Omega)=U\\cap F=A$. Hence $U\\setminus A\\subseteq\\Omega$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L2] to the compact set $A\\subseteq U$, viewing $\\mathbb C$ as $\\mathbb R^2$. It gives a finite union $J$ of closed grid rectangles with $A\\subseteq\\operatorname{int}J\\subseteq J\\subseteq U$. Give each rectangle boundary its positive orientation, sum those boundary chains, and cancel every interior edge with its opposite by [L3]. Let $\\Gamma$ be the remaining chain. Then $\\Gamma$ is a cycle, and its trace is the frontier of $J$, so $\\Gamma^\\ast\\subseteq U\\setminus A\\subseteq\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $p\\in\\operatorname{int}J$ lie on no grid line. Exactly one grid cell $Q$ of $J$ contains $p$. Along the positively oriented boundary of $Q$, the continuous argument of $\\zeta-p$ increases by $2\\pi$, while along the boundary of every other grid cell it has increment $0$ because $p$ lies outside that cell. Therefore [L4] gives winding number $1$ for $\\partial^+Q$ about $p$ and $0$ for every other cell boundary, and additivity from [L3] yields $n(\\Gamma,p)=1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $a\\in A$. Because $A\\subseteq\\operatorname{int}J$, choose a disc $D(a,r)\\subseteq\\operatorname{int}J$ and then choose $p\\in D(a,r)$ on no grid line. The disc misses $\\Gamma^\\ast$, so local constancy from [L5] and step 3.1 give $n(\\Gamma,a)=n(\\Gamma,p)=1$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The point $a$ lies in $\\mathbb C\\setminus\\Omega$, while step 2.1 gives $\\Gamma^\\ast\\subseteq\\Omega$. Step 4.1 yields $n(\\Gamma,a)=1\\ne0$, so [L1] says that $\\Gamma$ is not null-homologous in $\\Omega$, contradicting the homological simple connectivity of $\\Omega$. Therefore the assumption of step 1.1 was false, and $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "L1",
+            "discharge-contradiction",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain has connected spherical complement: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the proof must turn disconnected spherical complement into a cycle in Omega with nonzero index at an omitted point. I checked the separation of A and B in the sphere, the Jordan-neighbourhood cycle construction inside U\\A, and the local-constancy transfer of n(Gamma,p)=1 to a point a in A."
+      }
+    },
+    "thm-null-homology-is-equivalent-to-global-harmonic-conjugates": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-harmonic-conjugate-on-homologically-simply-connected-domains",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a homologically simply connected complex domain and let\n$u:\\Omega\\to\\mathbb R$ be harmonic. Then $u$ has a harmonic conjugate on\n$\\Omega$ ([[def-harmonic-conjugate]]).\n\nEquivalently, there is a holomorphic function $F:\\Omega\\to\\mathbb C$ with\n$\\operatorname{Re}F=u$ on $\\Omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-homological-simple-connectivity-equivalences",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a complex domain. The following are equivalent.\n\n1. $U$ is homologically simply connected: every complex chain which is a cycle\n   with trace in $U$ is null-homologous in $U$.\n2. Every holomorphic function on $U$ has a primitive on $U$.\n3. Every holomorphic nowhere-zero function on $U$ has a holomorphic logarithm on\n   $U$.\n4. For every $p\\in\\mathbb C\\setminus U$, the function $z\\mapsto1/(z-p)$ has a\n   primitive on $U$.\n5. $\\int_\\Gamma f(z)\\,dz=0$ for every holomorphic $f$ on $U$ and every cycle\n   $\\Gamma$ with trace in $U$.\n6. $\\int_\\Gamma\\frac{dz}{z-p}=0$ for every cycle $\\Gamma$ with trace in $U$ and\n   every $p\\in\\mathbb C\\setminus U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-harmonic-conjugate",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $u:\\Omega\\to\\mathbb R$ be harmonic\n([[def-plane-harmonic-function]]), and let $v:\\Omega\\to\\mathbb R$. Then $v$ is a\n**harmonic conjugate** of $u$ on $\\Omega$ when the complex-valued function\n\n$$u+iv:\\Omega\\to\\mathbb C$$\n\nis holomorphic on $\\Omega$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-plane-harmonic-function",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, and write $z=x+iy$ for the real\ncoordinates on $\\mathbb C=\\mathbb R^2$. A real-valued function\n$u:\\Omega\\to\\mathbb R$ is **harmonic** on $\\Omega$ when $u$ is of class $C^2$\nand satisfies Laplace's equation\n\n$$u_{xx}+u_{yy}=0$$\n\nthroughout $\\Omega$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-holomorphic-logarithm-has-the-logarithmic-derivative",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $L,h:U\\to\\mathbb C$ be holomorphic with\n$\\exp(L(z))=h(z)$ for every $z\\in U$. Then $h$ is nowhere zero on $U$ and\n\n$$L'(z)=\\frac{h'(z)}{h(z)}\\qquad(z\\in U).$$\n\nIn particular, if $p\\in\\mathbb C$, if $U$ misses $p$, and if $L$ is holomorphic\non $U$ with $\\exp(L(z))=z-p$ for every $z\\in U$, then $L'(z)=1/(z-p)$ on $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-chain-rule-for-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V$ and $g:V\\to\\mathbb C$, where $U,V\\subseteq\\mathbb C$ are open. If $f$ is complex differentiable at $a\\in U$ and $g$ is complex differentiable at $f(a)$, then $g\\circ f$ is complex differentiable at $a$ and\n\n$$ (g\\circ f)'(a)=g'(f(a))f'(a). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-algebra-of-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f,g:U\\to\\mathbb C$ be complex differentiable at $a\\in U$, and let $\\alpha,\\beta\\in\\mathbb C$. Then\n\n$$ (\\alpha f+\\beta g)'(a)=\\alpha f'(a)+\\beta g'(a), $$\n\n$$ (fg)'(a)=f'(a)g(a)+f(a)g'(a). $$\n\nIf $g(a)\\ne0$, then $g$ is nonzero on some neighbourhood of $a$, the reciprocal $1/g$ is complex differentiable at $a$, and\n\n$$ (1/g)'(a)=-\\frac{g'(a)}{g(a)^2},\\qquad (f/g)'(a)=\\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}. $$\n\nEvery constant function has derivative $0$, and the identity function has derivative $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-open-mapping-theorem-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "Every nonconstant holomorphic function on a complex domain is an open map.\n\nThus, if $f:\\Omega\\to\\mathbb C$ is nonconstant and holomorphic on a complex domain $\\Omega$, then $f[O]$ is open in $\\mathbb C$ for every open subset $O\\subseteq\\Omega$ ([[def-homeomorphism-and-open-maps]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume condition 1. Then [L1] gives condition 2 immediately.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume condition 2. Fix $p\\in\\mathbb C\\setminus\\Omega$ and define [L3, given, choose, construct]\n$$u_p(z)=\\log|z-p|.$$\nDirect differentiation gives\n$$\\frac{\\partial u_p}{\\partial x}=\\frac{x-\\operatorname{Re}p}{|z-p|^2},\\qquad \\frac{\\partial u_p}{\\partial y}=\\frac{y-\\operatorname{Im}p}{|z-p|^2},$$\nand then\n$$\\frac{\\partial^2 u_p}{\\partial x^2}+\\frac{\\partial^2 u_p}{\\partial y^2}=0$$\non $\\Omega$, because $p\\notin\\Omega$. So $u_p$ is harmonic on $\\Omega$. By condition 2 and [L3], choose a harmonic conjugate $v_p$ on $\\Omega$ and put\n$$F_p=u_p+iv_p,$$\nwhich is holomorphic on $\\Omega$.",
+          "step": "1.2",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function [step 1.2, L5, L6, algebra]\n$$G_p(z)=\\frac{\\exp(F_p(z))}{z-p}$$\nis holomorphic on $\\Omega$ by [L5]. Its modulus is\n$$|G_p(z)|=\\frac{|\\exp(F_p(z))|}{|z-p|}=\\frac{e^{\\operatorname{Re}F_p(z)}}{|z-p|}=\\frac{e^{u_p(z)}}{|z-p|}=1,$$\nso $G_p(\\Omega)$ lies on the unit circle. By [L6], $G_p$ cannot be nonconstant, hence it is constant:\n$$G_p(z)\\equiv c_p,\\qquad |c_p|=1.$$\nTherefore $L_p:=F_p-\\log c_p$ satisfies $\\exp(L_p(z))=z-p$ on $\\Omega$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L4], each $L_p$ from step 2.1 is a primitive of $1/(z-p)$ on $\\Omega$. Since $p\\in\\mathbb C\\setminus\\Omega$ was arbitrary, condition 4 of [L2] holds for $\\Omega$, so [L2] gives condition 1. Together with step 1.1, this proves the equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L4",
+            "discharge-construct",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 differentiates u_p(z)=log|z-p| only on Omega with p outside Omega, so the displayed |z-p|^2 denominators are nonzero throughout the calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate, step 1.1 proves the forward implication: Assume condition 1. Then [L1] gives condition 2 immediately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In A plane domain is homologically simply connected exactly when every harmonic function has a global conjugate, step 3.1 proves the reverse implication: By [L4], each $L_p$ from step 2.1 is a primitive of $1/(z-p)$ on $\\Omega$. Since $p\\in\\mathbb C\\setminus\\Omega$ was arbitrary, condition 4 of [L2] holds for $\\Omega$, so [L2] gives condition 1. Together with step 1.1, t…"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the converse direction must turn a harmonic conjugate of log|z-p| into an omitted-point primitive without missing the constant-modulus branch. Steps 1.2-3.1 build F_p=u_p+iv_p, show exp(F_p)/(z-p) has constant modulus 1 and is therefore constant by open mapping, and then obtain the primitive L_p."
+      }
+    },
+    "lem-null-homology-gives-the-plane-or-disc-alternative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-homologically-simply-connected-complex-domain",
+          "source_section": "Definition",
+          "quote": "A complex domain $\\Omega$ ([[def-complex-domain]]) is **homologically simply\nconnected** when every complex chain which is a cycle and whose trace lies in\n$\\Omega$ ([[def-complex-chain-and-cycle]]) is null-homologous in $\\Omega$\n([[def-null-homologous-and-homologous-complex-cycles]]); equivalently, when\n\n$$n(\\Gamma,p)=0\\qquad\\text{for every cycle }\\Gamma\\text{ in }\\Omega\\text{ and every }p\\in\\mathbb C\\setminus\\Omega,$$\n\nwith the index of [[def-integration-and-index-of-complex-chain]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subsetneq\\mathbb C$ be a homologically simply connected complex\ndomain and let $z_0\\in\\Omega$. Then there is a biholomorphic map\n$f:\\Omega\\to\\mathbb D$ such that\n\n$$f(z_0)=0,\\qquad f'(z_0)>0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $\\Omega$ is a complex domain. If $\\Omega=\\mathbb C$, then the first alternative holds and there is nothing more to prove.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\Omega\\ne\\mathbb C$, then $\\Omega\\subsetneq\\mathbb C$ is a proper homologically simply connected complex domain, so [L2] applies and gives a biholomorphic map $\\Omega\\to\\mathbb D$. This is exactly the second alternative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the dichotomy.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles the whole-plane/proper-domain split explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A homologically simply connected plane domain is either the plane or conformally equivalent to the disc: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "lem-the-plane-or-disc-alternative-gives-contractibility": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-convex-subsets-of-rn-are-contractible",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Every nonempty convex subset $C\\subseteq\\mathbb R^n$, with its Euclidean subspace topology, is contractible. More precisely, for each $c\\in C$ the formula\n\n$$H(x,t)=(1-t)x+tc$$\n\nis a homotopy from $\\operatorname{id}_C$ to the constant map at $c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-composition-respects-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to Y$ be continuous and suppose $f\\simeq_A g$ for a subspace $A\\subseteq X$.\n\n1. If $u:W\\to X$ is continuous, $B\\subseteq W$, and $u[B]\\subseteq A$, then $f\\circ u\\simeq_B g\\circ u$.\n2. If $v:Y\\to Z$ is continuous, then $v\\circ f\\simeq_A v\\circ g$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nullhomotopic-map-and-contractible-space",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous. The map $f$ is **nullhomotopic** if there is a point $y_0\\in Y$ such that $f$ is homotopic to the constant map $c_{y_0}:X\\to Y$, $c_{y_0}(x)=y_0$ ([[def-homotopy-relative-and-path-homotopy]]).\n\nA nonempty topological space $X$ is **contractible** if every continuous map $f:X\\to Y$ to every topological space $Y$ is nullhomotopic.\n\nThis definition separates the property of the space from the particular map $\\operatorname{id}_X$. The next corollary proves that it is equivalent to the familiar condition that the identity map be nullhomotopic.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both $\\mathbb C\\cong\\mathbb R^2$ and the unit disc $\\mathbb D$ are convex subsets of $\\mathbb R^2$, so [L1] makes $E$ contractible. In particular, the identity map $\\operatorname{id}_E$ is homotopic to a constant map $c_e$ for some $e\\in E$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Postcompose the homotopy from step 1.1 by $h^{-1}$ and precompose it by $h$. By [L2], this yields a homotopy from [step 1.1, L2, algebra]\n$$h^{-1}\\circ\\operatorname{id}_E\\circ h=\\operatorname{id}_\\Omega$$\nto the constant map at $h^{-1}(e)$. Thus $\\operatorname{id}_\\Omega$ is nullhomotopic.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $f:\\Omega\\to Y$ be any continuous map into any topological space $Y$. Postcomposing the nullhomotopy from step 2.1 by $f$ and using [L2] again shows that [step 2.1, L2, L3]\n$$f=f\\circ\\operatorname{id}_\\Omega$$\nis homotopic to the constant map at $f(h^{-1}(e))$. Hence every continuous map out of $\\Omega$ is nullhomotopic, so [L3] makes $\\Omega$ contractible.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A plane domain homeomorphic to the plane or to the disc is contractible: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "lem-contractibility-implies-trivial-fundamental-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nullhomotopic-map-and-contractible-space",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous. The map $f$ is **nullhomotopic** if there is a point $y_0\\in Y$ such that $f$ is homotopic to the constant map $c_{y_0}:X\\to Y$, $c_{y_0}(x)=y_0$ ([[def-homotopy-relative-and-path-homotopy]]).\n\nA nonempty topological space $X$ is **contractible** if every continuous map $f:X\\to Y$ to every topological space $Y$ is nullhomotopic.\n\nThis definition separates the property of the space from the particular map $\\operatorname{id}_X$. The next corollary proves that it is equivalent to the familiar condition that the identity map be nullhomotopic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-contractible-iff-identity-nullhomotopic",
+          "source_section": "Statement",
+          "quote": "For a nonempty topological space $X$, the following are equivalent:\n\n1. $X$ is contractible.\n2. The identity map $\\operatorname{id}_X$ is nullhomotopic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$**\nis a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$\n([[def-path-connected]]). Two based loops are equivalent when they are\npath-homotopic relative to the endpoints. This is an equivalence relation by\n[[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]].\n\nThe **fundamental group set** of $X$ at $x_0$ is\n\n$$\\pi_1(X,x_0):=\\{\\,[\\alpha]:\\alpha\\text{ is a based loop at }x_0\\,\\}.$$\n\nFor composable paths, write\n\n$$(\\alpha*\\beta)(s):=\\begin{cases}\\alpha(2s),&0\\leq s\\leq\\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\leq s\\leq1.\\end{cases}$$\n\nThe finite closed-pasting argument already carried out in\n[[def-path-connected]] shows that this is a path. The multiplication proposed\non loop classes is\n\n$$[\\alpha][\\beta]:=[\\alpha*\\beta].$$\n\n**Order convention.** The product $[\\alpha][\\beta]$ traverses $\\alpha$ first\nand $\\beta$ second. Every product on this page uses this convention.\n\nThe constant loop at $x_0$ is denoted $c_{x_0}$, and the reversed loop is\n$\\bar\\alpha(s):=\\alpha(1-s)$. The next theorem proves that multiplication is\nindependent of representatives and that $[c_{x_0}]$ and $[\\bar\\alpha]$ are the\nidentity and inverse required by the group axioms.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there are a point $x_1\\in X$ and a homotopy $H:X\\times I\\to X$ from $\\operatorname{id}_X$ to the constant map $c_{x_1}$. Evaluating at the chosen basepoint gives a path $$\\lambda(t)=H(x_0,t)$$ from $x_0$ to $x_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $[\\alpha]\\in\\pi_1(X,x_0)$. Define $K:I\\times I\\to X$ by $$K(s,t)=\\begin{cases} H\\bigl(x_0,\\,3st\\bigr),&0\\le s\\le \\tfrac13,\\\\[2mm] H\\bigl(\\alpha(3s-1),\\,t\\bigr),&\\tfrac13\\le s\\le \\tfrac23,\\\\[2mm] H\\bigl(x_0,\\,(3-3s)t\\bigr),&\\tfrac23\\le s\\le1. \\end{cases}$$ The three pieces are continuous and agree on the seams $s=\\tfrac13,\\tfrac23$ because $\\alpha(0)=x_0=\\alpha(1)$, so $K$ is continuous. Also $K(0,t)=x_0=K(1,t)$ for every $t$, so $K$ is a path homotopy relative to the endpoints between loops at $x_0$. At $t=0$ it is $c_{x_0}*\\alpha*c_{x_0}$, and at $t=1$ it is $\\lambda*c_{x_1}*\\bar\\lambda$. Hence $$[c_{x_0}*\\alpha*c_{x_0}]=[\\lambda*c_{x_1}*\\bar\\lambda].$$ Since $[c_{x_0}]$ is the identity by [L2], this gives $[\\alpha]=[\\lambda*c_{x_1}*\\bar\\lambda]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $J:I\\times I\\to X$ by $$J(s,u)=\\begin{cases} \\lambda\\bigl(3s(1-u)\\bigr),&0\\le s\\le \\tfrac13,\\\\[2mm] \\lambda(1-u),&\\tfrac13\\le s\\le \\tfrac23,\\\\[2mm] \\lambda\\bigl((3-3s)(1-u)\\bigr),&\\tfrac23\\le s\\le1. \\end{cases}$$ The three pieces are continuous and agree on the seams, so $J$ is continuous. Also $J(0,u)=x_0=J(1,u)$ for every $u$, while $J(-,0)=\\lambda*c_{x_1}*\\bar\\lambda$ and $J(-,1)=c_{x_0}$. Thus $[\\lambda*c_{x_1}*\\bar\\lambda]=[c_{x_0}]$ by [L2], and step 2.1 yields $[\\alpha]=[c_{x_0}]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Every loop class at $x_0$ is therefore the identity, so $\\pi_1(X,x_0)$ is trivial.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A contractible space has trivial fundamental group: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: contractibility only gives a contraction to some point x_1, not automatically to the chosen basepoint x_0. Steps 1.1-3.1 keep the loop based at x_0 by threading the contraction through the connector lambda(t)=H(x_0,t), then shrink lambda*c_{x_1}*lambda^- directly to c_{x_0}."
+      }
+    },
+    "thm-grand-equivalence-for-simply-connected-plane-domains": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-connected-spherical-complement-implies-null-homology",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. If\n$\\widehat{\\mathbb C}\\setminus\\Omega$ is connected, then every cycle with trace\nin $\\Omega$ is null-homologous in $\\Omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-null-homology-implies-connected-spherical-complement",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a homologically simply connected complex\ndomain. Then $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-homological-simple-connectivity-equivalences",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a complex domain. The following are equivalent.\n\n1. $U$ is homologically simply connected: every complex chain which is a cycle\n   with trace in $U$ is null-homologous in $U$.\n2. Every holomorphic function on $U$ has a primitive on $U$.\n3. Every holomorphic nowhere-zero function on $U$ has a holomorphic logarithm on\n   $U$.\n4. For every $p\\in\\mathbb C\\setminus U$, the function $z\\mapsto1/(z-p)$ has a\n   primitive on $U$.\n5. $\\int_\\Gamma f(z)\\,dz=0$ for every holomorphic $f$ on $U$ and every cycle\n   $\\Gamma$ with trace in $U$.\n6. $\\int_\\Gamma\\frac{dz}{z-p}=0$ for every cycle $\\Gamma$ with trace in $U$ and\n   every $p\\in\\mathbb C\\setminus U$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "rem-analytic-equivalences-from-global-cauchy-theory",
+          "source_section": "Remark",
+      "quote": "The genuinely new work on this page is the bridge between planar homotopy,\nplanar complement topology, and the older homological criterion. The analytic\nequivalences themselves were already proved on\n[[thm-homological-simple-connectivity-equivalences]]:\n\n- every cycle has zero period against every holomorphic function;\n- every holomorphic function has a primitive;\n- every nowhere-zero holomorphic function has a holomorphic logarithm.\n\nThe one-way root consequence is already present too: once the logarithm exists,\n[[cor-holomorphic-roots-homologically-simply-connected-domains]] gives\nholomorphic roots of every positive order. The grand theorem below cites those\nresults instead of restating their proofs.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-holomorphic-roots-homologically-simply-connected-domains",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a homologically simply connected complex domain, let\n$f:\\Omega\\to\\mathbb C$ be holomorphic and nowhere zero, and let $m$ be a natural\nnumber with $m\\ge1$. Then there is a holomorphic, nowhere-zero\n$q:\\Omega\\to\\mathbb C$ with\n\n$$q(z)^m=f(z)\\qquad(z\\in\\Omega).$$\n\nOne such $q$ is $\\exp(L/m)$ for any holomorphic logarithm $L$ of $f$; replacing\n$L$ by another holomorphic logarithm of $f$ multiplies $q$ by an $m$th root of\nunity.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-null-homology-is-equivalent-to-global-harmonic-conjugates",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. Then the following are\nequivalent.\n\n1. $\\Omega$ is homologically simply connected.\n2. Every harmonic function $u:\\Omega\\to\\mathbb R$ has a harmonic conjugate on $\\Omega$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-null-homology-gives-the-plane-or-disc-alternative",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a homologically\nsimply connected complex domain. Then either $\\Omega=\\mathbb C$, or there is a\nbiholomorphic map from $\\Omega$ onto the unit disc $\\mathbb D$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-the-plane-or-disc-alternative-gives-contractibility",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a topological space homeomorphic either to the\ncomplex plane $\\mathbb C$ or to the unit disc $\\mathbb D$. Then $\\Omega$ is\ncontractible.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-contractibility-implies-trivial-fundamental-group",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a contractible topological space and let $x_0\\in X$. Then\n$\\pi_1(X,x_0)$ is the trivial group.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-trivial-fundamental-group-implies-null-homology-for-plane-domains",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. If every based loop in\n$\\Omega$ represents the identity class in its fundamental group, then $\\Omega$\nis homologically simply connected.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-path-independence-and-complex-primitive-criterion",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a complex domain and $f:U\\to\\mathbb C$ continuous. The following are equivalent:\n\n1. $f$ has a primitive on $U$;\n2. the integral of $f$ along rectifiable contours in $U$ depends only on the endpoints;\n3. the integral of $f$ around every closed rectifiable contour in $U$ is $0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-continuous-logarithms-exist-along-a-contour",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a complex contour and let $p\\in\\mathbb C$ with\n$p\\notin\\gamma^\\ast$. Then:\n\n1. there is a continuous logarithm $\\lambda$ of $\\gamma-p$ along $\\gamma$\n   ([[def-continuous-argument-and-holomorphic-logarithm-branches]]);\n2. if $\\lambda_1$ and $\\lambda_2$ are two of them, then $\\lambda_1-\\lambda_2$ is\n   a constant function with value in $2\\pi i\\mathbb Z$;\n3. for each $v\\in\\mathbb C$ with $\\exp v=\\gamma(a)-p$ there is exactly one\n   continuous logarithm $\\lambda$ of $\\gamma-p$ along $\\gamma$ with\n   $\\lambda(a)=v$.\n\nIn particular the increment $\\lambda(b)-\\lambda(a)$, and the increment\n$\\theta(b)-\\theta(a)$ of the associated continuous argument, are the same for\nevery choice of $\\lambda$. No differentiability of $\\gamma$ is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-winding-number-closed-complex-contour",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a **closed** complex contour, that is a\nrectifiable path with $\\gamma(a)=\\gamma(b)$\n([[def-complex-contours-reversal-concatenation-and-closedness]]), with trace\n$\\gamma^\\ast$, and let $p\\in\\mathbb C$ with $p\\notin\\gamma^\\ast$. The **winding\nnumber**, or **index**, of $\\gamma$ about $p$ is\n\n$$n(\\gamma,p):=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{dz}{z-p},$$\n\nthe complex line integral of\n[[def-complex-line-integral-over-a-rectifiable-path]].\n\nThe integral exists: $z\\mapsto1/(z-p)$ is complex differentiable, hence\ncontinuous, on $\\mathbb C\\setminus\\{p\\}$ by\n[[thm-algebra-of-complex-derivatives]] and\n[[cor-complex-differentiability-implies-continuity]], the trace $\\gamma^\\ast$ is\ncontained in that set, and $\\gamma$ is rectifiable, so\n[[thm-existence-of-complex-line-integrals-on-rectifiable-paths]] applies.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "cor-winding-number-is-the-normalized-argument-increment",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be a closed complex contour, let\n$p\\notin\\gamma^\\ast$, let $\\lambda$ be a continuous logarithm of $\\gamma-p$ along\n$\\gamma$ and let $\\theta=\\operatorname{Im}\\lambda$ be the associated continuous\nargument ([[def-continuous-argument-and-holomorphic-logarithm-branches]]). Then\n\n$$\\operatorname{Re}\\lambda(t)=\\log|\\gamma(t)-p|\\quad(a\\le t\\le b), \\qquad n(\\gamma,p)=\\frac{\\theta(b)-\\theta(a)}{2\\pi}.$$\n\nIn particular $\\theta(b)-\\theta(a)$ is an integer multiple of $2\\pi$, and it is\nthe same for every continuous argument of $\\gamma-p$ along $\\gamma$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], conditions 1 and 2 are equivalent. By [L2], conditions 2, 4, and 6 are equivalent. By [L4], conditions 2 and 8 are equivalent. By [L9], conditions 4 and 5 are equivalent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "L9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Condition 2 implies condition 7 by [L3]. Conversely, assume condition 7. Fix $p\\in\\mathbb C\\setminus\\Omega$ and a closed rectifiable contour $\\gamma:[a,b]\\to\\Omega$. Applying condition 7 repeatedly to the nowhere-zero holomorphic function $z\\mapsto z-p$ produces, for every $m\\ge1$, a nowhere-zero holomorphic function $g_m$ on $\\Omega$ with $g_m^{2^m}=z-p$. By [L10], the closed contour $g_m\\circ\\gamma$ admits a continuous logarithm $\\lambda_m$; write $\\theta_m=\\operatorname{Im}\\lambda_m$. Then $2^m\\lambda_m$ is a continuous logarithm of $\\gamma-p$ along $\\gamma$, so [L11] gives\n$$n(\\gamma,p)=2^m\\frac{\\theta_m(b)-\\theta_m(a)}{2\\pi}.$$\nApplying [L11] again to $g_m\\circ\\gamma$ shows that $(\\theta_m(b)-\\theta_m(a))/(2\\pi)$ is an integer. Therefore\n$$n(\\gamma,p)\\in 2^m\\mathbb Z\\qquad(m\\ge1).$$\nThe only integer divisible by every power of $2$ is $0$, so $n(\\gamma,p)=0$. By [L11], this is equivalent to\n$$\\int_\\gamma\\frac{dz}{z-p}=0.$$\nSince $p$ and $\\gamma$ were arbitrary and $z\\mapsto1/(z-p)$ is continuous on $\\Omega$, [L9] makes $1/(z-p)$ admit a primitive on $\\Omega$. Thus condition 2 holds by [L2], and conditions 2 and 7 are equivalent.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L9",
+            "L10",
+            "L11",
+            "algebra",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume condition 2. By [L5], condition 9 follows. Any conformal equivalence is in particular a homeomorphism, so condition 9 implies condition 10. Then [L6] gives condition 11, [L7] gives condition 3, and [L8] returns to condition 2. Thus [L5, L6, L7, L8]\n$$2\\Rightarrow9\\Rightarrow10\\Rightarrow11\\Rightarrow3\\Rightarrow2.$$",
+          "step": "1.3",
+          "inputs": [
+            "L5",
+            "L6",
+            "L7",
+            "L8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1, 1.2, and 1.3 connect every listed clause to condition 2, so all eleven conditions are equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For a plane domain, the complement, homology, primitive, logarithm, conjugate, conformal, homotopy, and contractibility conditions are equivalent: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In step 1.2 the omitted-point parameter satisfies p notin Omega, so z-p is nonzero along every contour in Omega; the only other denominator is the fixed nonzero constant 2pi in the winding-number formula."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For a plane domain, the complement, homology, primitive, logarithm, conjugate, conformal, homotopy, and contractibility conditions are equivalent: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For a plane domain, the complement, homology, primitive, logarithm, conjugate, conformal, homotopy, and contractibility conditions are equivalent: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For a plane domain, the complement, homology, primitive, logarithm, conjugate, conformal, homotopy, and contractibility conditions are equivalent: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes the Axiom of Choice exactly where step 1.3 invokes the plane-or-disc alternative from [L5]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 1.3 route each displayed condition to condition 2 or back from it, and step 2.1 closes the multi-way equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 combines the routes established in steps 1.1, 1.2, and 1.3 to recover every displayed condition from condition 2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the square-root clause must imply homological simple connectivity without silently replacing cycles by loops or importing more Choice than stated. The repaired proof uses continuous logarithms and argument increments to force every omitted-point winding number into 2^m Z for all m and hence to 0, then applies the closed-contour primitive criterion; the only use of the Axiom of Choice is the plane-or-disc alternative in step 1.3."
+      }
+    },
+    "cor-spherical-complement-characterization-of-plane-simple-connectivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-connected-spherical-complement-implies-null-homology",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. If\n$\\widehat{\\mathbb C}\\setminus\\Omega$ is connected, then every cycle with trace\nin $\\Omega$ is null-homologous in $\\Omega$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-null-homology-implies-connected-spherical-complement",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be a homologically simply connected complex\ndomain. Then $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected, then [L2] gives homological simple connectivity, and [L1] identifies that with simple connectivity under the current Axiom-of-Choice hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\Omega$ is simply connected, then [L1] places it under the grand-equivalent conditions, so it is homologically simply connected; [L2] then gives connected spherical complement.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove both directions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected, step 1.1 proves the forward implication: If $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected, then [L2] gives homological simple connectivity, and [L1] identifies that with simple connectivity under the current Axiom-of-Choice hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In Assuming the Axiom of Choice, a plane domain is simply connected exactly when its spherical complement is connected, step 2.1 proves the reverse implication: Steps 1.1 and 1.2 prove both directions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the bridge from connected spherical complement to simple connectivity in this batch is Choice-scoped. The repaired statement now carries the Axiom of Choice explicitly, and steps 1.1-1.2 route through the checked complement/null-homology lemmas and the repaired grand theorem."
+      }
+    },
+    "cor-winding-number-classifies-loops-in-the-punctured-plane": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-winding-number-equals-circle-degree",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[0,1]\\to\\mathbb C^\\times$ be a closed rectifiable loop with\n$\\gamma(0)=\\gamma(1)=1$, and define\n\n$$\\alpha(t)=\\frac{\\gamma(t)}{|\\gamma(t)|}\\in\\{z\\in\\mathbb C:|z|=1\\}.$$\n\nUnder the standard homeomorphism $[s]\\mapsto(\\cos 2\\pi s,\\sin 2\\pi s)$ from\n$\\mathbb R/\\mathbb Z$ to the unit circle, the loop $\\alpha$ determines a based\nloop in $\\mathbb R/\\mathbb Z$ at $[0]$, and\n\n$$n(\\gamma,0)=\\deg(\\alpha).$$\n\nEquivalently, the winding number of $\\gamma$ about $0$ is exactly the integer\nthat classifies the normalized circle loop of $\\gamma$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-punctured-rn-deformation-retracts-onto-the-sphere",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, put $P=\\mathbb R^n\\setminus\\{0\\}$, and let $S^{n-1}\\subseteq P$ be the unit sphere. Radial normalisation\n\n$$r:P\\to S^{n-1},\\qquad r(x)=\\frac{x}{\\lVert x\\rVert_2},$$\n\nis a retraction, and\n\n$$H(x,t)=\\left((1-t)+\\frac{t}{\\lVert x\\rVert_2}\\right)x$$\n\nis a deformation retraction of $P$ onto $S^{n-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-retracts-inject-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq X$, let $i:A\\hookrightarrow X$ be the inclusion, and choose $a\\in A$. If $A$ is a retract of $X$ ([[def-retraction-and-deformation-retract]]), then\n\n$$i_*:\\pi_1(A,a)\\longrightarrow\\pi_1(X,a)$$\n\nis injective. If $A$ is a deformation retract of $X$, the inclusion and retraction induce mutually inverse fundamental-group isomorphisms at every basepoint of $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-geometric-unit-circle-has-fundamental-group-z",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ with basepoint $(1,0)$. Then\n\n$$\\pi_1(C,(1,0))\\cong(\\mathbb Z,+).$$\n\nUnder this isomorphism, the loop\n\n$$t\\longmapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$$\n\ncorresponds to $n$ for every $n\\in\\mathbb Z$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C=\\{z\\in\\mathbb C:|z|=1\\}\\subseteq\\mathbb C^\\times$ and let $r:\\mathbb C^\\times\\to C$ be radial normalization, $r(z)=z/|z|$. Specializing [L2] to $n=2$ and applying [L3], the induced map\n$$r_*:\\pi_1(\\mathbb C^\\times,1)\\longrightarrow\\pi_1(C,1)$$\nis an isomorphism. For the given loop $\\gamma$, its image under $r_*$ is the class of the normalized circle loop $\\alpha(t)=\\gamma(t)/|\\gamma(t)|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fact [L4] identifies the class of $\\alpha$ in $\\pi_1(C,1)$ with the integer $\\deg(\\alpha)$, and [L1] says $\\deg(\\alpha)=n(\\gamma,0)$. Thus the map $[\\gamma]\\mapsto n(\\gamma,0)$ is exactly the composite of the isomorphism $r_*$ from step 1.1 with the standard identification $\\pi_1(C,1)\\cong\\mathbb Z$. Therefore it is the standard isomorphism\n$$\\pi_1(\\mathbb C^\\times,1)\\cong(\\mathbb Z,+).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Winding number identifies the fundamental group of C times with the integers: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-the-unit-disc-satisfies-all-grand-equivalence-clauses": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The complement $\\widehat{\\mathbb C}\\setminus\\mathbb D=\\{z:|z|\\ge1\\}\\cup\\{\\infty\\}$ is connected: the exterior $\\{z:|z|>1\\}$ is path-connected, and $\\infty$ is its point at infinity.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], condition 1 from step 1.1 forces every other clause on the grand-equivalence list. So $\\mathbb D$ satisfies them all.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The unit disc satisfies all of the grand-equivalent simple connectivity clauses: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-the-complex-plane-satisfies-all-grand-equivalence-clauses": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The spherical complement of $\\mathbb C$ is the singleton $\\{\\infty\\}$, hence connected.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the connected complement from step 1.1 forces all remaining clauses. In particular, every cycle in $\\mathbb C$ is null-homologous, every entire function has a primitive, and $\\mathbb C$ is contractible.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The complex plane satisfies all of the grand-equivalent simple connectivity clauses: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-spherical-complement-characterization-of-plane-simple-connectivity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. Then $\\Omega$ is simply\nconnected if and only if $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The spherical complement of $\\Omega$ is\n$$\\widehat{\\mathbb C}\\setminus\\Omega=(-\\infty,0]\\cup\\{\\infty\\},$$\nwhich is connected: it is the closure in $\\widehat{\\mathbb C}$ of one arc from $0$ to $\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore [L1] makes $\\Omega$ simply connected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Assuming the Axiom of Choice, the slit plane is simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-every-convex-plane-domain-is-simply-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-convex-subsets-have-trivial-fundamental-group",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$ and let $C\\subseteq\\mathbb R^n$ be nonempty and convex, with its\nEuclidean subspace topology. Then $C$ is simply connected. More explicitly,\nfor every basepoint $x_0\\in C$ and every loop $\\alpha$ at $x_0$, the formula\n\n$$H(s,t)=(1-t)\\alpha(s)+t x_0$$\n\nis a path homotopy relative to the endpoints from $\\alpha$ to the constant\nloop at $x_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $\\Omega$ as a convex subset of $\\mathbb R^2$. Then [L1] gives trivial fundamental group.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], clause 3 from step 1.1 implies that $\\Omega$ is simply connected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every convex plane domain is simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-every-star-shaped-plane-domain-is-simply-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-star-shaped-plane-domains-are-homologically-simply-connected",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be nonempty, open, and star-shaped with respect to some\n$a\\in U$ ([[def-star-shaped-open-subset-of-rn]]). Then $U$ is a complex domain\nand is homologically simply connected\n([[def-homologically-simply-connected-complex-domain]]).\n\nIn particular every nonempty convex open subset of $\\mathbb C$ is homologically\nsimply connected, since it is star-shaped with respect to each of its points;\nthis covers every open disc and $\\mathbb C$ itself.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fact [L1] makes the given domain $\\Omega$ homologically simply connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], step 1.1 implies that $\\Omega$ is simply connected.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every star-shaped plane domain is simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-spherical-complement-characterization-of-plane-simple-connectivity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. Then $\\Omega$ is simply\nconnected if and only if $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $\\Omega$ is open and connected by construction. Its spherical complement is connected: outside the two discs and corridor one can move continuously around the exterior, and the slits cut out by the corridor attach to the same unbounded exterior region instead of creating a hole. Therefore [L1] makes $\\Omega$ simply connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The domain is not star-shaped. Set $$u_\\pm=(\\pm2,\\tfrac34),\\qquad \\ell_\\pm=(\\pm2,-\\tfrac34),$$ which all lie in $\\Omega$. Let $z_0=(x_0,y_0)\\in\\Omega$. If $x_0\\le0$ and $y_0\\ge0$, then along the segment from $z_0$ to $u_+$ the point with $x$-coordinate $1$ has $y$-coordinate at least $\\tfrac38>\\tfrac14$, so it lies above the corridor and also outside the right unit disc because its distance to $(2,0)$ exceeds $1$. Hence that segment leaves $\\Omega$. If $x_0\\le0$ and $y_0<0$, the same argument with $\\ell_+$ gives a point at $x=1$ with $y\\le-\\tfrac38<-\\tfrac14$, again outside $\\Omega$. By symmetry, if $x_0\\ge0$ then one of the segments from $z_0$ to $u_-$ or $\\ell_-$ leaves $\\Omega$. Thus no point of $\\Omega$ sees all of $\\Omega$ by straight segments, so $\\Omega$ is not star-shaped.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 give the required witness: simply connected need not imply star-shaped.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A dumbbell-shaped plane domain can be simply connected without being star-shaped: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "cex-the-punctured-plane-separates-c-complement-from-spherical-complement": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-spherical-complement-characterization-of-plane-simple-connectivity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain. Then $\\Omega$ is simply\nconnected if and only if $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-winding-number-classifies-loops-in-the-punctured-plane",
+          "source_section": "Statement",
+      "quote": "For a based loop $\\gamma:[0,1]\\to\\mathbb C^\\times$ at $1$, let\n$r(z)=z/|z|$ and define\n\n$$W([\\gamma]):=\\deg(r\\circ\\gamma).$$\n\nThen $W$ is the standard isomorphism\n\n$$\\pi_1(\\mathbb C^\\times,1)\\cong(\\mathbb Z,+).$$\n\nIf $\\gamma$ is rectifiable, then\n\n$$W([\\gamma])=n(\\gamma,0).$$\n\nThus the analytic winding number of any rectifiable representative is the\ninteger classifying its loop class.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The complement of $\\Omega$ in $\\mathbb C$ is the singleton $\\{0\\}$, hence connected. But the spherical complement is $$\\widehat{\\mathbb C}\\setminus\\Omega=\\{0,\\infty\\},$$ which is disconnected.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assuming the Axiom of Choice, [L1] makes the disconnected spherical complement from step 1.1 enough to conclude that $\\Omega$ is not simply connected. Fact [L2] records the same failure independently as the nontrivial group $\\pi_1(\\mathbb C^\\times)\\cong\\mathbb Z$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore connected complement in $\\mathbb C$ does not imply simple connectivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The punctured plane has connected complement in C but disconnected spherical complement: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "cex-a-round-annulus-is-connected-but-not-simply-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-winding-number-circle-traversed-k-times",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $r>0$, let $k\\in\\mathbb Z$ and put\n\n$$\\gamma_k(t)=a+r\\exp(ikt),\\qquad t\\in[0,2\\pi].$$\n\nThen $\\gamma_k$ is a closed complex contour and\n\n$$n(\\gamma_k,z)=k\\quad\\text{for }|z-a|<r,\\qquad n(\\gamma_k,z)=0\\quad\\text{for }|z-a|>r.$$\n\nFor $k\\ne0$ the trace of $\\gamma_k$ is the circle $\\{z:|z-a|=r\\}$. For $k=0$ the\ncontour is the constant path at $a+r$ and its trace is $\\{a+r\\}$; the two\ndisplayed formulas still hold, both values being $0$, and both regions still lie\noff the trace.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The annulus $\\Omega$ is open and connected, and the unit circle $\\gamma$ lies in $\\Omega$. The spherical complement of $\\Omega$ has two pieces: the closed inner disc $\\{|z|\\le\\tfrac12\\}$ and the exterior region $\\{|z|\\ge2\\}\\cup\\{\\infty\\}$. So it is disconnected.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], step 1.1 already shows that $\\Omega$ is not simply connected. Fact [L2] gives the familiar loop witness: the unit circle still winds once around the omitted origin.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore connectedness of the domain does not force simple connectivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A round annulus is connected but not simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "cex-the-punctured-disc-is-connected-but-not-simply-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-grand-equivalence-for-simply-connected-plane-domains",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\Omega\\subseteq\\mathbb C$ be a complex domain.\nThe following conditions are equivalent.\n\n1. $\\widehat{\\mathbb C}\\setminus\\Omega$ is connected.\n2. $\\Omega$ is homologically simply connected.\n3. The fundamental group of $\\Omega$ is trivial.\n4. Every holomorphic function on $\\Omega$ has a primitive.\n5. For every holomorphic $f$ on $\\Omega$ and every closed rectifiable contour $\\gamma$ in $\\Omega$,\n   $$\\int_\\gamma f(z)\\,dz=0.$$\n6. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic logarithm.\n7. Every nowhere-zero holomorphic function on $\\Omega$ has a holomorphic square root.\n8. Every harmonic function on $\\Omega$ has a harmonic conjugate.\n9. Either $\\Omega=\\mathbb C$, or $\\Omega$ is conformally equivalent to $\\mathbb D$.\n10. Either $\\Omega$ is homeomorphic to $\\mathbb C$, or $\\Omega$ is homeomorphic to $\\mathbb D$.\n11. $\\Omega$ is contractible.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-winding-number-circle-traversed-k-times",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $r>0$, let $k\\in\\mathbb Z$ and put\n\n$$\\gamma_k(t)=a+r\\exp(ikt),\\qquad t\\in[0,2\\pi].$$\n\nThen $\\gamma_k$ is a closed complex contour and\n\n$$n(\\gamma_k,z)=k\\quad\\text{for }|z-a|<r,\\qquad n(\\gamma_k,z)=0\\quad\\text{for }|z-a|>r.$$\n\nFor $k\\ne0$ the trace of $\\gamma_k$ is the circle $\\{z:|z-a|=r\\}$. For $k=0$ the\ncontour is the constant path at $a+r$ and its trace is $\\{a+r\\}$; the two\ndisplayed formulas still hold, both values being $0$, and both regions still lie\noff the trace.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The punctured disc is open and connected, and the loop $\\gamma$ lies in it. Its spherical complement is the union of the singleton $\\{0\\}$ and the outer region $\\{|z|\\ge1\\}\\cup\\{\\infty\\}$, so it is disconnected.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], step 1.1 shows that the punctured disc is not simply connected. Fact [L2] gives the same geometric reason numerically: the loop $\\gamma$ still winds once around the omitted point $0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This refutes the claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The punctured disc is connected but not simply connected: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "fs-connected-complement-in-c-implies-simple-connectivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-the-punctured-plane-separates-c-complement-from-spherical-complement",
+          "source_section": "Statement refuted",
+          "quote": "A connected complex domain with connected complement in $\\mathbb C$ is simply\nconnected.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to $\\Omega=\\mathbb C^\\times$. Its complement in $\\mathbb C$ is the connected set $\\{0\\}$, but the domain is not simply connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "So the displayed implication fails. The missing point is exactly that plane simple connectivity depends on the complement in $\\widehat{\\mathbb C}$, not merely in $\\mathbb C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: a connected plane-domain complement in C already implies simple connectivity: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "fs-simply-connected-plane-domains-are-convex": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-the-slit-plane-is-simply-connected-by-the-principal-logarithm",
+          "source_section": "Example",
+          "quote": "Let\n\n$$\\Omega=\\mathbb C\\setminus(-\\infty,0].$$\n\nThen $\\Omega$ is simply connected.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the slit plane is simply connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "It is not convex: the points $-1+i$ and $-1-i$ lie in the slit plane, but the straight segment between them is the vertical line segment $\\{-1+it:-1\\le t\\le1\\}$, which contains the removed point $-1\\in(-\\infty,0]$. Thus the segment is not contained in the domain.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore simple connectivity does not imply convexity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is convex: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    },
+    "fs-simply-connected-plane-domains-are-star-shaped": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped",
+          "source_section": "Example",
+          "quote": "Let\n\n$$\\Omega=B(-2,1)\\cup([-2,2]\\times(-\\tfrac14,\\tfrac14))\\cup B(2,1),$$\n\nthe union of two unit discs joined by a thin horizontal corridor. Then\n$\\Omega$ is simply connected, but $\\Omega$ is not star-shaped.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1]. It gives a plane domain that is simply connected and simultaneously not star-shaped.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hence the universal claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: the claim concerns the specific domain or witness named in the statement, not a variable family with a separate empty-index branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: the proof does not divide by a free zero-sensitive quantity beyond constants or hypotheses that already exclude vanishing."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: no special value 1 or one-fold normalization creates a distinct proof branch here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: apart from any explicit split already written in the proof, no smaller collapsed configuration survives as an additional boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: endpoint data are either built into the hypotheses already or absent from the claim, so no separate endpoint branch remains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: every existential object is given or explicitly constructed in the proof, not chosen from a merely asserted nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: this item is not stated as a biconditional with a separate forward implication to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: every simply connected plane domain is star-shaped: this item is not stated as a biconditional with a separate reverse implication to prove."
+        }
+      ]
+    }
+  }
+}

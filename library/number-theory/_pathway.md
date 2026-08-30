@@ -15,6 +15,7 @@ parts:
       - congruences-and-the-chinese-remainder-theorem
       - primitive-roots-and-unit-groups-modulo-n
       - positive-definite-binary-quadratic-forms-and-reduction
+      - arithmetic-functions-and-dirichlet-convolution
   - part: quadratic-residues
     title: "Quadratic residues and reciprocity"
     pages:
@@ -39,15 +40,16 @@ solubility decidable by a finite search.
 
 ## congruences-and-unit-groups
 
-Congruence modulo n turns divisibility into an equivalence relation, so the integers modulo
-n become a ring in which linear equations can be solved. The Chinese remainder theorem
-splits a composite modulus into prime powers, Euler's totient counts the units, and the
-unit group modulo a prime is cyclic. The same congruence language governs binary quadratic
-forms: discriminants are constrained modulo $4$, the discriminant-square criterion detects
-primitive representations, and unimodular substitutions define proper equivalence. For
-positive-definite forms, Gauss reduction gives each class a unique reduced representative,
-so each negative discriminant has finitely many classes. Class number is therefore finite,
-and reduction makes proper equivalence decidable.
+Congruences modulo $n$ turn divisibility into arithmetic in quotient rings, so the Chinese
+remainder theorem splits moduli, Euler's totient counts units, and primitive roots describe
+the cyclic prime-modulus case. The same language governs positive-definite binary
+quadratic forms: discriminants are constrained modulo $4$, representations are preserved by
+unimodular change of variables, and Gauss reduction gives finitely many classes with
+unique reduced representatives. The new arithmetic-functions page repackages this
+arithmetic on positive integers: Dirichlet convolution forms a commutative ring, preserves
+multiplicativity, and determines multiplicative functions from prime powers, while divisor,
+Liouville, von Mangoldt, and Mertens functions supply finite identities such as divisor
+sums, irreducible-polynomial counts, and square detection by $\mathbf 1 * \lambda$.
 
 ## quadratic-residues
 

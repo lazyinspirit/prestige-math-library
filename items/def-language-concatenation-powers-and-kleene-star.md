@@ -2,7 +2,7 @@
 id: def-language-concatenation-powers-and-kleene-star
 kind: definition
 title: "Language concatenation, powers, and Kleene star"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps:
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-30
 sources:
   scraped: []
   references:

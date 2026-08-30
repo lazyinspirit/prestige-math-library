@@ -1,0 +1,842 @@
+{
+  "version": 1,
+  "level": "frontier-25",
+  "note": "Step-5 authoring contract for frontier-25 batch 11 on Sunday, August 30, 2026.",
+  "scope": [
+    "lem-deterministic-nonhalting-configurations-have-unique-successors",
+    "prop-valid-computation-histories-are-decidable",
+    "lem-acceptance-is-configuration-reachability",
+    "fs-rejection-is-divergence",
+    "fs-nondeterministic-acceptance-requires-every-branch-to-halt",
+    "ex-valid-computation-histories-are-decidable",
+    "ex-acceptance-is-configuration-reachability",
+    "cex-rejection-is-divergence"
+  ],
+  "contracts": {
+    "lem-deterministic-nonhalting-configurations-have-unique-successors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-deterministic-one-tape-turing-machine",
+          "source_section": "Definition",
+          "quote": "$$ \\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}. $$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-one-step-configuration-relation",
+          "source_section": "Definition",
+          "quote": "So one step changes only the scanned tape cell, updates the state, and moves the head one cell right or one cell left, except that the left boundary clamps the head at cell $0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the configuration is nonhalting, the scanned state-symbol pair lies in the domain of the transition function and determines a unique transition triple.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying that unique triple yields a concrete successor configuration.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any other claimed successor must use the same transition triple and the same local update rule, hence equals the constructed successor.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Existence and uniqueness together give exactly one one-step successor.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every nonhalting deterministic configuration has a unique successor has no separate empty-family branch; the proof is pointwise for one fixed configuration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the left-boundary update rule, which includes the head-at-cell-0 case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every nonhalting deterministic configuration has a unique successor has no independent size-one parameter requiring a separate branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 still apply when the tape is blank away from the scanned cell; no extra rule is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the only endpoint issue, namely the left boundary at cell 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every nonhalting deterministic configuration has a unique successor uses a function value, not a hidden choice from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every nonhalting deterministic configuration has a unique successor is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every nonhalting deterministic configuration has a unique successor is not stated as a biconditional."
+        }
+      ]
+    },
+    "prop-valid-computation-histories-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-language-recognized-and-decided",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic one-tape Turing machine with input alphabet\n$\\Sigma$, and let $L\\subseteq\\Sigma^*$ be a language\n([[def-language-over-an-alphabet]]).\n\nWe say that **$M$ recognizes $L$** if for every input word $w\\in\\Sigma^*$,\n$$ w\\in L \\quad\\Longleftrightarrow\\quad M \\text{ has an accepting computation on } w. $$\n\nWe say that **$M$ decides $L$** if $M$ recognizes $L$ and halts on every input\n$w\\in\\Sigma^*$.\n\nEquivalently, $M$ decides $L$ exactly when every input has either an accepting\nor rejecting computation history and\n$$ w\\in L \\iff M \\text{ accepts } w,\\qquad w\\notin L \\iff M \\text{ rejects } w. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-finite-tuples-admit-effective-prefix-free-encodings",
+          "source_section": "Statement",
+          "quote": "For every fixed $k\\ge 1$, the set of binary $k$-tuples\n$(w_1,\\dots,w_k)\\in(\\{0,1\\}^*)^k$ has an effective prefix-free binary encoding.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-turing-machine-configuration",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **configuration** of $M$ is a triple\n$$ C=(q,h,t) $$\nwhere $q\\in Q$ is the current state, $h\\in\\mathbb N$ is the current head\nposition, and $t:\\mathbb N\\to\\Gamma$ is a tape content in the sense of\n[[def-tape-finite-support-convention]].\n\nThe symbol currently scanned in $C$ is $t(h)$. The configuration is\n**nonhalting** when $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$.\n\nFor later encoding arguments it is convenient to write a configuration as a\nfinite word over the alphabet $Q\\cup\\Gamma$: if\n$r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and $a_i:=t(i)$ for $0\\le i\\le r$,\nthen the associated **configuration word** is\n$$ a_0a_1\\cdots a_{h-1}\\,q\\,a_h\\cdots a_r. $$\nThe state symbol is inserted immediately before the scanned tape symbol, and\nthe word is long enough to include the head position even when the scanned cell\nis blank.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $M$ is fixed, the disjoint tagged alphabet $(\\{\\mathtt{s}\\}\\times Q)\\cup(\\{\\mathtt{t}\\}\\times\\Gamma)$ is finite. Choose pairwise distinct binary blocks of one common length for these tagged symbols. Encode each configuration word by replacing its unique state symbol $q$ with the block for $(\\mathtt{s},q)$ and each tape symbol $a$ with the block for $(\\mathtt{t},a)$. The common block length makes this code uniquely decodable back to the tagged configuration word.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Use the explicit pair encoding $E_2$ from [L3], and encode finite lists of configuration codes recursively by $$ \\operatorname{Hist}() := 0,\\qquad \\operatorname{Hist}(x_0,\\dots,x_n) := 1\\,E_2\\bigl(x_0,\\operatorname{Hist}(x_1,\\dots,x_n)\\bigr). $$ A decoder returns the empty list only when its entire current candidate is exactly `0`; a candidate beginning with `0` and containing any further bit is malformed. When the candidate begins with `1`, the decoder applies the total decoder for $E_2$ to the remaining suffix. If that suffix is malformed it rejects; otherwise it recovers the first configuration code and a tail-code and continues on the tail. By [L3], every successfully decoded tail-code is strictly shorter than the current candidate, so this recursion halts on every binary input and returns either one finite list or the malformed-code output.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given a decoded tagged word, check mechanically that it contains exactly one state-tagged block, all other blocks are tape-tagged, at least one tape-tagged block follows the state-tagged block, and whenever more than one tape-tagged block follows the state-tagged block the last of them is not the blank-tagged block $(\\mathtt{t},\\sqcup)$. By [L4], these are exactly the configuration words of $M$: the number of tape-tagged blocks before the unique state-tagged block is the head position, the tagged tape blocks recover the finite word $a_0\\cdots a_r$, and the last-block test enforces the canonical choice $r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$. Thus valid configuration codes can be parsed effectively back into configurations of $M$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On input a candidate binary word $z$, first decode it by the recursive history decoder from step 1.2. If the decoder reports malformed input or the empty list, reject immediately. Otherwise step 2.1 parses each configuration code in the decoded list into a configuration, yielding $C_0,\\dots,C_n$. Check whether $C_0=I_M(w)$, whether each adjacent pair satisfies $C_i\\vdash_M C_{i+1}$, and whether $C_n$ is accepting. Each check is finite and local: the first compares one explicit configuration with the fixed start configuration, the middle checks one transition of the fixed machine $M$, and the last reads the final state. Accept exactly when all checks pass.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L2], a decoded list passes the step-3.1 test exactly when it is an accepting computation history of $M$ on input $w$. The machine just described halts on every candidate history code, because the recursive decoder from step 1.2 terminates and the subsequent checks are finite.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Therefore there is a deterministic Turing machine that decides $H_{M,w}$. By [L1], $H_{M,w}$ is a decidable language.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the decoded first configuration with the fixed initial configuration, which also covers the empty-input case $w=\\varepsilon$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 rejects the empty decoded list immediately, so the zero-entry candidate case is handled explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 still checks singleton and longer decoded lists uniformly by testing the initial configuration, every adjacent pair, and the final state."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For a fixed machine and input, valid accepting computation histories form a decidable language has no extra quotient or collapsed-parameter case beyond the finite parsing cases already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks both endpoints of the history: the initial configuration and the final accepting configuration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit encodings and explicit decoders rather than choosing an element from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For a fixed machine and input, valid accepting computation histories form a decidable language is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For a fixed machine and input, valid accepting computation histories form a decidable language is not stated as a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current proof, `def-turing-machine-configuration`, and both refuter counterexamples. The old encoding failed when `Q` overlapped `Gamma` and it also admitted noncanonical configuration words with redundant trailing blanks. The repaired proof now tags state blocks separately from tape blocks and rejects a trailing blank unless the scanned cell is the final cell, so the parser recognizes exactly the canonical configuration words used by the computation-history checker."
+      }
+    },
+    "lem-acceptance-is-configuration-reachability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ and\nan input word $w\\in\\Sigma^*$.\n\nA **finite computation history** of $M$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=I_M(w)$ and\n$$ C_i\\vdash_M C_{i+1}\\qquad(0\\le i<n). $$\n\nSuch a history is:\n\n- **accepting** if $C_n$ is an accepting configuration,\n- **rejecting** if $C_n$ is a rejecting configuration,\n- **halting** if it is accepting or rejecting.\n\nWe say that **$M$ halts on $w$** if there exists a halting computation history\nof $M$ on $w$.\n\nWe say that **$M$ diverges on $w$** if there is no halting computation history\nof $M$ on $w$.\n\nFor a halting configuration $C=(q,h,t)$ and a word $u=a_0\\cdots a_{m-1}$ over\n$\\Gamma\\setminus\\{\\sqcup\\}$, we say that **$C$ outputs $u$** when\n$$ t(i)=\\begin{cases} a_i,&0\\le i<m,\\\\ \\sqcup,&i\\ge m. \\end{cases} $$\nSo the tape contains exactly $u$ followed by blanks.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nondeterministic-accepting-computation",
+          "source_section": "Definition",
+          "quote": "Fix a nondeterministic one-tape Turing machine\n$N=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\Delta)$ and an\ninput word $w\\in\\Sigma^*$.\n\nA **configuration of $N$** is a triple $(q,h,t)$ with $q\\in Q$, head position\n$h\\in\\mathbb N$, and finite-support tape content $t:\\mathbb N\\to\\Gamma$, just\nas in [[def-turing-machine-configuration]]. It is **accepting** when\n$q=q_{\\mathrm{acc}}$ and **rejecting** when $q=q_{\\mathrm{rej}}$, as in\n[[def-initial-accepting-and-rejecting-configurations]].\n\nFor configurations $C=(q,h,t)$ and $C'=(q',h',t')$ of $N$, write\n$$ C\\vdash_N C' $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and there exists an allowed\ninstruction\n$$ (p,b,D)\\in\\Delta(q,t(h)) $$\nsuch that $C'$ is obtained from $C$ by the same local rewrite and head-move\nrecipe used in [[def-one-step-configuration-relation]], with $q'=p$.\n\nAn **accepting computation** of $N$ on input $w$ is a finite list of\nconfigurations\n$$ C_0,C_1,\\dots,C_n $$\nsuch that $C_0=(q_0,0,t_w)$, where $t_w$ is the input tape defined in the same\nway as for deterministic machines, each $C_i\\vdash_N C_{i+1}$ for $0\\le i<n$,\nand $C_n$ is accepting.\n\nWe say that **$N$ accepts $w$** if such an accepting computation exists.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-configuration-graph",
+          "source_section": "Definition",
+          "quote": "Let $N$ be either a deterministic one-tape Turing machine or a nondeterministic\none-tape Turing machine, and fix an input word $w$.\n\nWrite $C\\leadsto_N C'$ when $C'$ follows $C$ by one legal step of $N$: in the\ndeterministic case this means $C\\vdash_N C'$ in the sense of\n[[def-one-step-configuration-relation]], and in the nondeterministic case it\nmeans that one allowed instruction of $N$ changes $C$ to $C'$ by the same local\nrewrite and head-move rule.\n\nThe **configuration graph** of $N$ on $w$ is the directed graph\n$$ G_N(w)=(V,A) $$\nwhose vertex set $V$ is the set of all configurations reachable from the\ninitial configuration $(q_0,0,t_w)$ by finitely many legal steps, where $t_w$\nis the input tape for $w$, and whose arc set $A\\subseteq V\\times V$ consists of\nthe ordered pairs $(C,C')$ such that\n$$ C\\leadsto_N C'. $$\n\nThis uses the same ordered-pair arc convention as a digraph in\n[[def-multigraph-loop-and-digraph]], but no finiteness claim is made here: the\nconfiguration graph may be infinite.\n\nAn **accepting vertex** is an accepting configuration of $N$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that $N$ accepts $w$. By [L1] in the deterministic case and by [L2] in the nondeterministic case, there is a finite accepting computation $C_0,\\dots,C_n$ from the initial configuration to an accepting configuration. By [L3], each consecutive pair is an arc of $G_N(w)$, so this finite vertex list witnesses that an accepting configuration is reachable from the initial configuration.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, suppose there is a finite vertex list $C_0,\\dots,C_n$ in $G_N(w)$ whose first term is the initial configuration, whose last term is accepting, and whose consecutive pairs are arcs. By [L3], each consecutive pair satisfies the legal one-step relation. Therefore [L1] or [L2], according to the kind of machine $N$, makes $C_0,\\dots,C_n$ an accepting computation of $N$ on $w$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove that $N$ accepts $w$ if and only if some accepting configuration is reachable from the initial configuration in $G_N(w)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 are uniform in the input word and therefore also cover the empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the zero-length witness list case when the initial configuration is already accepting."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 both include the case of a single legal move to acceptance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Acceptance is reachability of an accepting configuration has no extra collapsed graph case beyond the zero-length path already checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 both preserve the initial configuration and the final accepting configuration of the finite witness list."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof transforms a given finite walk and does not invoke any choice from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that acceptance implies reachability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that reachability of an accepting configuration implies acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the current configuration-graph definition and the deterministic/nondeterministic computation definitions. The old proof inflated a finite-digraph path citation to a graph that may be infinite. The repaired lemma no longer needs that citation: both directions are proved directly from finite witness lists of consecutive arcs, which is exactly the data supplied by accepting computations and by the intended meaning of reachability in this item. That removes the citation-scope gap completely."
+      }
+    },
+    "fs-rejection-is-divergence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "We say that **$M$ diverges on $w$** if there is no halting computation history of $M$ on $w$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-initial-accepting-and-rejecting-configurations",
+          "source_section": "Definition",
+          "quote": "- **rejecting** if $q=q_{\\mathrm{rej}}$,",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed transition sends the initial configuration on input 1 to a configuration in state $q_{\\mathrm{rej}}$ after one step.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "That next configuration is rejecting, so the two-term history is a halting computation history.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since a halting computation history exists, the input does not diverge, contradicting the false claim.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: rejection is divergence is refuted on the explicit nonempty input 1, so no empty-input branch is part of this proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: rejection is divergence has no independent zero-size parameter in the chosen witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 use a one-step rejecting computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "FALSE: rejection is divergence is disproved by an ordinary halting rejection, not by a special collapsed machine or tape case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 identify the initial configuration and the rejecting endpoint of the witness history."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness machine and input are written explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: rejection is divergence is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: rejection is divergence is not a biconditional."
+        }
+      ]
+    },
+    "fs-nondeterministic-acceptance-requires-every-branch-to-halt": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nondeterministic-accepting-computation",
+          "source_section": "Definition",
+          "quote": "We say that **$N$ accepts $w$** if such an accepting computation exists.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "One allowed first move reaches the accept state immediately, so an accepting branch exists.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Another allowed first move reaches a state whose only permitted move repeats the same nonhalting situation forever.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Existence of the accepting branch proves acceptance, while the looping branch disproves the claim that every branch must halt.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "FALSE: nondeterministic acceptance requires every branch to halt is refuted on the explicit input 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "FALSE: nondeterministic acceptance requires every branch to halt has no zero-size parameter in its witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a length-one accepting branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the looping self-repeat branch explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the left boundary at cell 0 to keep the looping branch in place."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses an explicit machine with two named transitions, not a hidden choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "FALSE: nondeterministic acceptance requires every branch to halt is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "FALSE: nondeterministic acceptance requires every branch to halt is not a biconditional."
+        }
+      ]
+    },
+    "ex-valid-computation-histories-are-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-valid-computation-histories-are-decidable",
+          "source_section": "Statement",
+          "quote": "Then one can choose a binary encoding of configurations of $M$ and a binary encoding of finite tuples of such codes so that the set",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-halting-computation-and-divergence",
+          "source_section": "Definition",
+          "quote": "A **finite computation history** of $M$ on input $w$ is a finite list of configurations",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first displayed configuration word is the correct initial configuration for input III.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each displayed successive pair is a legal machine transition, including the final write-on-blank step into the accept state.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The final configuration is accepting, so the displayed list is an accepting computation history of the type whose validity the proposition decides.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Checking a short accepting history for a unary increment machine is written for the explicit input III."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Checking a short accepting history for a unary increment machine is not a zero-step example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the final single transition from $IIIq_0B$ to $IIIIq_{\\mathrm{acc}}B$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Checking a short accepting history for a unary increment machine is an ordinary worked example with no special degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the initial configuration and step 2.1 identifies the accepting terminal configuration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The machine, input, and candidate history are all explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Checking a short accepting history for a unary increment machine is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Checking a short accepting history for a unary increment machine is not a biconditional statement."
+        }
+      ]
+    },
+    "ex-acceptance-is-configuration-reachability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-acceptance-is-configuration-reachability",
+          "source_section": "Statement",
+          "quote": "Then $N$ accepts $w$ if and only if, in the configuration graph $G_N(w)$, some accepting configuration is reachable from the initial configuration.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The edge from the initial configuration to the accepting configuration is already a directed path of length 1.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The alternative edge into the looping configuration together with its loop witnesses a nonhalting branch, matching the earlier refutation.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The length-1 path is enough for acceptance by the reachability lemma, independently of the looping branch.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A branching configuration graph with one accepting path and one looping path is written for the explicit input 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A branching configuration graph with one accepting path and one looping path does not use a zero-length path witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is a length-one accepting path."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the self-looping branch at $C_L$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 names both endpoints of the accepting path, from $C_0$ to $C_{\\mathrm{acc}}$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses an explicit graph with named vertices and arcs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A branching configuration graph with one accepting path and one looping path is an example, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A branching configuration graph with one accepting path and one looping path is an example, not a biconditional theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "Risk reviewed against the repaired reachability lemma and the current three-vertex example. The only risk is whether the separate looping branch interferes with the acceptance witness. It does not: the edge `C_0 -> C_acc` is already a complete finite accepting witness, while the `C_L -> C_L` loop only shows that another branch can continue forever. The example therefore still illustrates the existential nature of configuration-graph reachability for nondeterministic acceptance."
+      }
+    },
+    "cex-rejection-is-divergence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-initial-accepting-and-rejecting-configurations",
+          "source_section": "Definition",
+          "quote": "- **rejecting** if $q=q_{\\mathrm{rej}}$,",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The explicit machine reaches the reject state after one legal step from the initial configuration on input 1.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "That next configuration is rejecting, so the computation halts after one step and therefore is not divergent.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence this machine and input form a counterexample to the statement that rejection is divergence.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Immediate rejection is a halting computation, not a divergence uses the explicit input 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Immediate rejection is a halting computation, not a divergence has no zero-size parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 give a one-step rejecting computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Immediate rejection is a halting computation, not a divergence is an ordinary explicit witness rather than a special degenerate edge case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 starts from the initial configuration and step 2.1 identifies the rejecting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is fully explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Immediate rejection is a halting computation, not a divergence is a counterexample statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Immediate rejection is a halting computation, not a divergence is a counterexample statement, not a biconditional."
+        }
+      ]
+    }
+  }
+}

@@ -57,10 +57,10 @@
 //   VERDICT: drift-blocked — <the exact edge and why no authority reaches it>
 //
 // `drift-minted` and `drift-rescoped` are materialised by tools/drift-apply.mjs,
-// which the `1-drift` stage runs as its mechanical repair. This gate does not
-// re-check their bookkeeping directly: a minted page that never reached a
-// manifest is absent from the scope ledger, so the unbuildable-edge loop below
-// still reports its citing page. One check, not two that can disagree.
+// which the `1-drift` stage runs as its mechanical repair. Their named pages
+// MUST appear in the regenerated scope ledger. The ordinary unbuildable-edge
+// loop is not enough for a rescope: the citing page has no newly declared edge,
+// so an unapplied rescope can otherwise look buildable and let this gate pass.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -143,6 +143,18 @@ const satisfiable = (id) => published.has(id) || builtHere.has(id);
 const errors = [];
 let applied = 0;
 let edgesChecked = 0;
+
+// A mint/rescope verdict is a decision whose transition is owned by
+// drift-apply. Before that repair runs, each named target is absent from the
+// ledger and this deliberately fails the gate. After drift-apply regenerates
+// the manifests and ledger, the same report passes. Check this directly: a
+// rescope does not add an edge to the original citing page, so edge validation
+// cannot prove that the scope transition happened.
+for (const id of mintedOrRescoped) {
+  if (!builtHere.has(id)) {
+    errors.push(`drift-check-not-materialised: ${id} is named by a drift-minted/drift-rescoped verdict but is absent from ${ledgerPath}`);
+  }
+}
 
 // A verdict names its pages as `<page-id> (order <n>)`. Shared by every verdict
 // kind that names one, so the report contract has a single spelling.

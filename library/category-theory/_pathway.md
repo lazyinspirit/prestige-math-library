@@ -23,6 +23,7 @@ parts:
       - monadicity-and-becks-theorem
       - kan-extensions-density-and-the-free-cocompletion
       - subobject-lattices-generators-and-the-grothendieck-axioms
+      - monoidal-categories-and-monoidal-functors
       - exactness-and-the-member-calculus
       - the-diagram-lemmas-in-an-abelian-category
 ---
@@ -48,13 +49,12 @@ completion then supply the standard structural consequences.
 
 ## reflections-and-monads
 
-Reflective subcategories and the adjoint functor theorems explain when size and limit
-hypotheses force left adjoints, while adjunctions package algebra into monads and comonads
-and Beck identifies the monadic cases. Kan extensions and density express presheaves as
-free cocompletions. Abelian categories then supply kernels, cokernels, images, coimages,
-subobject lattices, Jordan-Holder theory, Grothendieck axioms, and projective/injective
-structure. Exactness and the member calculus turn that structure into working chases, and
-the diagram-lemma page makes the standard consequences explicit: short five, snake, four,
-five, and nine lemmas, connecting morphisms, pullback-pushout exactness, and exact-functor
-transport. At that point abelian exactness is no longer just a list of definitions but a
-reusable calculus for kernels, cokernels, and long exact sequences.
+Reflective subcategories and the adjoint functor theorems explain when completeness and
+size hypotheses force left adjoints, while monads and comonads package algebra and Beck
+identifies the monadic cases. Kan extensions and density turn presheaves into free
+cocompletions, and abelian categories add kernels, cokernels, subobject structure,
+Grothendieck axioms, projectives, injectives, and the diagram-lemma exactness calculus.
+The new monoidal page closes the algebraic side: finite products, endofunctor
+composition, and tensor products furnish monoidal categories; monoid objects recover
+ordinary monoids, rings, and monads; and lax monoidal functors transport that structure
+while bracketed tensor words keep coherence issues explicit.

@@ -62,7 +62,7 @@ test('steps 5, 6, and 7 select the requested stage-specific profiles', () => {
   const judgeStage = stage('7-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
   for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-group-read')) {
-    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.gpt54High1m);
+    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.terraXhigh);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
     'the Terra judge tool is not a Step-7 reader agent');

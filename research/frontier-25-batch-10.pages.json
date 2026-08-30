@@ -1,0 +1,425 @@
+[
+  {
+    "order": 585,
+    "id": "nondeterministic-finite-automata-and-subset-construction",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Nondeterministic Finite Automata and Subset Construction",
+    "companion": "nondeterministic-finite-automata-and-subset-construction-examples",
+    "requires": [
+      "deterministic-finite-automata-and-regular-languages",
+      "the-zfc-axioms-and-basic-set-constructions"
+    ],
+    "items": [
+      {
+        "id": "def-nfa-with-epsilon-moves",
+        "kind": "definition",
+        "title": "Nondeterministic finite automata with epsilon-moves",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "def-power-set"
+        ]
+      },
+      {
+        "id": "def-epsilon-closure-of-a-state-set",
+        "kind": "definition",
+        "title": "The epsilon-closure of a set of NFA states",
+        "deps": [
+          "def-nfa-with-epsilon-moves",
+          "def-subset-and-proper-subset"
+        ]
+      },
+      {
+        "id": "lem-epsilon-closure-is-a-closure-operator",
+        "kind": "lemma",
+        "title": "Epsilon-closure is a closure operator",
+        "strategy": "Use the least epsilon-closed superset characterization. Extensivity is immediate because the closure contains the starting set, monotonicity comes from enlarging the admissible starting set, and idempotence comes from the fact that an epsilon-closed set is already equal to its own least epsilon-closed superset.",
+        "deps": [
+          "def-epsilon-closure-of-a-state-set"
+        ]
+      },
+      {
+        "id": "def-extended-nfa-transition",
+        "kind": "definition",
+        "title": "The extended transition function of an NFA",
+        "deps": [
+          "def-epsilon-closure-of-a-state-set"
+        ]
+      },
+      {
+        "id": "def-nfa-acceptance-and-recognized-language",
+        "kind": "definition",
+        "title": "Acceptance of a word by an NFA and the recognized language",
+        "deps": [
+          "def-extended-nfa-transition",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "prop-every-dfa-is-an-nfa",
+        "kind": "proposition",
+        "title": "Every DFA is an NFA",
+        "strategy": "Given a DFA, replace each transition value $\\delta(q,a)$ by the singleton set $\\{\\delta(q,a)\\}$ and declare every epsilon-transition set empty. An induction on input length shows that the NFA's extended transition returns exactly the singleton containing the DFA state reached on the same word, so the two machines recognize the same language.",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-nfa-with-epsilon-moves",
+          "def-nfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "def-subset-construction-dfa",
+        "kind": "definition",
+        "title": "The subset-construction DFA",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "def-epsilon-closure-of-a-state-set",
+          "def-nfa-with-epsilon-moves"
+        ]
+      },
+      {
+        "id": "lem-subset-construction-state-invariant",
+        "kind": "lemma",
+        "title": "Subset construction tracks exactly the reachable NFA state set",
+        "strategy": "Induct on the length of the input word. The empty word case is the initial epsilon-closure. For a successor word $wa$, use the induction hypothesis to identify the current subset of NFA states, then apply the subset-construction transition rule to collect all one-letter moves on $a$ and close them under epsilon-moves.",
+        "deps": [
+          "def-subset-construction-dfa",
+          "def-extended-nfa-transition"
+        ]
+      },
+      {
+        "id": "thm-subset-construction-preserves-language",
+        "kind": "theorem",
+        "title": "The subset construction preserves the recognized language",
+        "strategy": "Apply the subset-construction state invariant to the start state. A word is accepted by the constructed DFA exactly when the reachable subset contains at least one accepting state of the original NFA, which is exactly the NFA acceptance criterion.",
+        "deps": [
+          "lem-subset-construction-state-invariant",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-nfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "cor-dfas-and-nfas-recognize-the-same-languages",
+        "kind": "corollary",
+        "title": "DFAs and NFAs recognize the same languages",
+        "strategy": "One direction is the singleton-transition embedding of a DFA into an NFA. The other is the subset-construction theorem. Together they show that a language is regular if and only if some NFA recognizes it.",
+        "deps": [
+          "prop-every-dfa-is-an-nfa",
+          "thm-subset-construction-preserves-language",
+          "def-regular-language-by-dfa-recognition"
+        ]
+      },
+      {
+        "id": "thm-epsilon-elimination-for-nfas",
+        "kind": "theorem",
+        "title": "Epsilon-moves can be eliminated from NFAs",
+        "strategy": "Keep the same state set and accepting states up to epsilon-closure, and define the new one-letter transition from $q$ on $a$ to be every state reachable by first taking any number of epsilon-moves from $q$, then one $a$-move, then any number of epsilon-moves. Induction on word length shows that the new epsilon-free machine has the same extended transition sets on every word.",
+        "deps": [
+          "def-epsilon-closure-of-a-state-set",
+          "def-nfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "thm-nfa-constructions-for-union-concatenation-and-star",
+        "kind": "theorem",
+        "title": "NFAs can be constructed for union, concatenation, and Kleene star",
+        "strategy": "For union, add a new start state with epsilon-transitions to the two original start states. For concatenation, add epsilon-transitions from each accepting state of the first machine to the start state of the second. For star, add a new start-and-accept state with an epsilon-edge into the original start state and epsilon-edges from old accepting states back to the new start state. In each case, unpack the acceptance game to show that the new NFA recognizes exactly the intended language operation.",
+        "deps": [
+          "def-nfa-acceptance-and-recognized-language",
+          "def-language-boolean-operations",
+          "def-language-concatenation-powers-and-kleene-star"
+        ]
+      },
+      {
+        "id": "prop-subset-construction-can-require-exponentially-many-states",
+        "kind": "proposition",
+        "title": "The subset construction can require exponentially many states",
+        "strategy": "For each alphabet $\\Sigma_n=\\{a_1,\\dots,a_n\\}$, let $L_n$ be the language of words in which at least one letter occurs an odd number of times. An NFA can guess which letter to track and then use two parity states for that letter. Any equivalent DFA must distinguish all $2^n$ parity vectors of the $n$ letters, because appending a single letter flips exactly one coordinate and can change acceptance. Hence the DFA size can grow exponentially in $n$.",
+        "deps": [
+          "def-nfa-with-epsilon-moves",
+          "def-deterministic-finite-automaton",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "fs-an-nfa-accepts-only-if-every-branch-accepts",
+        "kind": "false-statement",
+        "title": "FALSE: an NFA accepts only if every branch accepts",
+        "strategy": "Refute the claim with the standard NFA for $\\Sigma^*\\{abb\\}$ on input $abb$. One computation branch that stays too long at the start state gets stuck or rejects, while another branch guesses the final suffix correctly and accepts. Existence of one accepting branch is enough.",
+        "deps": [
+          "def-nfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "fs-epsilon-is-an-input-symbol",
+        "kind": "false-statement",
+        "title": "FALSE: epsilon is an input symbol",
+        "strategy": "Refute the claim directly from the definition: the input alphabet is $\\Sigma$, while epsilon appears only in the auxiliary transition domain $\\Sigma\\cup\\{\\varepsilon\\}$ to denote a move that consumes no symbol. A transition labeled epsilon changes the machine state without reading an input letter.",
+        "deps": [
+          "def-nfa-with-epsilon-moves"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 586,
+    "id": "nondeterministic-finite-automata-and-subset-construction-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Nondeterministic Finite Automata and Subset Construction: Examples and Counterexamples",
+    "requires": [
+      "nondeterministic-finite-automata-and-subset-construction"
+    ],
+    "items": [
+      {
+        "id": "ex-every-dfa-is-an-nfa",
+        "kind": "example",
+        "title": "Viewing a small DFA as an NFA with singleton transitions",
+        "strategy": "Take the two-state DFA over $\\{0,1\\}$ that accepts words with an even number of $1$'s. Replace each transition value by a singleton subset and declare every epsilon-transition empty. The resulting NFA has exactly one live branch on every input, so it recognizes the same language visibly.",
+        "deps": [
+          "prop-every-dfa-is-an-nfa"
+        ]
+      },
+      {
+        "id": "ex-subset-construction-can-require-exponentially-many-states",
+        "kind": "example",
+        "title": "A three-state NFA whose equivalent DFA needs four states",
+        "strategy": "Use the language over $\\{0,1\\}$ of words whose second symbol from the end is $1$. An NFA can guess when two symbols remain, so it needs only three states. The equivalent DFA must distinguish the four possible suffix memories of length at most two, and the subset construction displays those four states explicitly.",
+        "deps": [
+          "def-subset-construction-dfa",
+          "prop-subset-construction-can-require-exponentially-many-states"
+        ]
+      },
+      {
+        "id": "cex-an-nfa-accepts-only-if-every-branch-accepts",
+        "kind": "counterexample",
+        "title": "One accepting branch is enough for an NFA to accept",
+        "strategy": "Use the NFA for $\\Sigma^*\\{abb\\}$ on input $abb$. One branch guesses the final suffix immediately and reaches an accepting state after reading the full word, while another branch delays the guess and fails. The machine still accepts because acceptance is existential over branches.",
+        "deps": [
+          "fs-an-nfa-accepts-only-if-every-branch-accepts"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 593,
+    "id": "pushdown-automata-and-context-free-languages",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Pushdown Automata and Context-Free Languages",
+    "companion": "pushdown-automata-and-context-free-languages-examples",
+    "requires": [
+      "context-free-grammars-and-normal-forms",
+      "deterministic-finite-automata-and-regular-languages"
+    ],
+    "items": [
+      {
+        "id": "def-nondeterministic-pushdown-automaton",
+        "kind": "definition",
+        "title": "Nondeterministic pushdown automata",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-finite-cardinality",
+          "def-function"
+        ]
+      },
+      {
+        "id": "def-pda-configuration-and-step",
+        "kind": "definition",
+        "title": "PDA configurations and one-step moves",
+        "deps": [
+          "def-nondeterministic-pushdown-automaton"
+        ]
+      },
+      {
+        "id": "def-pda-acceptance-by-final-state",
+        "kind": "definition",
+        "title": "Acceptance by final state for a PDA",
+        "deps": [
+          "def-pda-configuration-and-step"
+        ]
+      },
+      {
+        "id": "def-pda-acceptance-by-empty-stack",
+        "kind": "definition",
+        "title": "Acceptance by empty stack for a PDA",
+        "deps": [
+          "def-pda-configuration-and-step"
+        ]
+      },
+      {
+        "id": "thm-final-state-and-empty-stack-acceptance-are-equivalent",
+        "kind": "theorem",
+        "title": "Acceptance by final state and by empty stack are equivalent for PDAs",
+        "strategy": "In one direction, add a fresh accept state and bottom marker so that after the original machine reaches a final state with the input consumed, the new machine jumps to the fresh state and drains the remaining stack. In the other direction, add a fresh start symbol that can be popped only after the original machine would have accepted. The constructions preserve exactly the words accepted.",
+        "deps": [
+          "def-pda-acceptance-by-final-state",
+          "def-pda-acceptance-by-empty-stack"
+        ]
+      },
+      {
+        "id": "thm-cfg-to-pda-construction",
+        "kind": "theorem",
+        "title": "Every context-free grammar has an equivalent PDA",
+        "strategy": "Start with the grammar's start variable on the stack. When a variable is on top, use an epsilon-move to replace it by the right-hand side of one chosen production; when a terminal is on top, match it against the next input symbol and pop it. A simultaneous induction on leftmost derivations and PDA runs shows that the machine accepts exactly the generated language by empty stack.",
+        "deps": [
+          "def-context-free-grammar",
+          "def-language-generated-by-a-cfg",
+          "def-leftmost-and-rightmost-derivation",
+          "def-pda-acceptance-by-empty-stack"
+        ]
+      },
+      {
+        "id": "def-pda-computation-fragment-variable",
+        "kind": "definition",
+        "title": "The PDA fragment variable $[p,Z,q]$",
+        "deps": [
+          "def-context-free-grammar",
+          "def-pda-configuration-and-step"
+        ]
+      },
+      {
+        "id": "lem-pda-fragment-variables-compose",
+        "kind": "lemma",
+        "title": "PDA fragment variables compose",
+        "strategy": "Interpret $[p,Z,q]$ as the words that remove the top symbol $Z$ while returning from state $p$ to state $q$ without disturbing the lower stack. If $x$ realizes one fragment and $y$ realizes the next fragment stacked beneath it, then $xy$ realizes the combined pop sequence. Conversely, any accepting fragment that removes a pushed pair of symbols splits at the first moment the upper symbol disappears.",
+        "deps": [
+          "def-pda-computation-fragment-variable"
+        ]
+      },
+      {
+        "id": "thm-pda-to-cfg-construction",
+        "kind": "theorem",
+        "title": "Every PDA has an equivalent context-free grammar",
+        "strategy": "First normalize to a PDA that accepts by empty stack and pushes at most two symbols in one move. Then create grammar variables $[p,Z,q]$ whose derivations encode the words that remove $Z$ while moving from state $p$ to state $q$ with the rest of the stack untouched. The productions mirror the PDA's single-step moves, and the fragment-composition lemma supplies the inductive correctness argument.",
+        "deps": [
+          "def-language-generated-by-a-cfg",
+          "def-pda-acceptance-by-empty-stack",
+          "def-pda-computation-fragment-variable",
+          "lem-pda-fragment-variables-compose"
+        ]
+      },
+      {
+        "id": "thm-pdas-recognize-exactly-the-cfls",
+        "kind": "theorem",
+        "title": "PDAs recognize exactly the context-free languages",
+        "strategy": "Combine the grammar-to-PDA construction with the PDA-to-grammar construction. One direction shows every context-free language is accepted by some PDA; the other shows every PDA language is generated by some context-free grammar.",
+        "deps": [
+          "thm-cfg-to-pda-construction",
+          "thm-pda-to-cfg-construction"
+        ]
+      },
+      {
+        "id": "def-deterministic-pda",
+        "kind": "definition",
+        "title": "Deterministic pushdown automata and deterministic context-free languages",
+        "deps": [
+          "def-nondeterministic-pushdown-automaton",
+          "def-pda-acceptance-by-final-state"
+        ]
+      },
+      {
+        "id": "lem-dpdas-have-unique-computations",
+        "kind": "lemma",
+        "title": "A DPDA has at most one computation on each input",
+        "strategy": "Use the determinism clause directly: once the current state, unread input, and top stack symbol are fixed, at most one move applies. Therefore two computations on the same input must agree step by step for as long as both are defined, so a DPDA cannot branch into two distinct accepting runs on one word.",
+        "deps": [
+          "def-deterministic-pda",
+          "def-pda-configuration-and-step"
+        ]
+      },
+      {
+        "id": "prop-pda-to-cfg-construction-preserves-unambiguity",
+        "kind": "proposition",
+        "title": "If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous",
+        "strategy": "Use the same fragment-variable grammar as in the PDA-to-CFG theorem. A leftmost derivation determines an accepting PDA computation by reading off which transition or fragment split was used at each step, while an accepting computation determines exactly one sequence of fragment expansions. Hence two distinct derivations of the same word would force two distinct accepting computations.",
+        "deps": [
+          "def-ambiguity-and-inherent-ambiguity",
+          "thm-pda-to-cfg-construction"
+        ]
+      },
+      {
+        "id": "prop-deterministic-cfls-are-unambiguous",
+        "kind": "proposition",
+        "title": "Deterministic context-free languages are unambiguous",
+        "strategy": "A deterministic context-free language is accepted by some DPDA. By the uniqueness lemma, that machine has at most one accepting computation on each word. The preceding proposition therefore turns its standard PDA-to-CFG image into an unambiguous grammar for the same language.",
+        "deps": [
+          "def-ambiguity-and-inherent-ambiguity",
+          "def-deterministic-pda",
+          "lem-dpdas-have-unique-computations",
+          "prop-pda-to-cfg-construction-preserves-unambiguity"
+        ]
+      },
+      {
+        "id": "prop-deterministic-cfls-are-closed-under-complement",
+        "kind": "proposition",
+        "title": "Deterministic context-free languages are closed under complement",
+        "strategy": "Normalize a DPDA by adding an explicit endmarker bit to the control, then modify it so every input is scanned completely and every premature loop is diverted into a rejecting sink that still consumes the rest of the input. Once the machine has become total in this sense, swapping the terminal accept and reject outcomes complements the language while preserving determinism.",
+        "deps": [
+          "def-deterministic-pda"
+        ]
+      },
+      {
+        "id": "fs-swapping-dpda-accept-states-complements-the-language",
+        "kind": "false-statement",
+        "title": "FALSE: swapping the accepting states of a DPDA automatically complements its language",
+        "strategy": "Refute the claim with a DPDA that can loop forever by epsilon-moves before reading the whole input. Swapping which states are marked accepting does not change that premature loop, so the modified machine still fails to accept those inputs even though they belong to the complement language.",
+        "deps": [
+          "def-deterministic-pda",
+          "prop-deterministic-cfls-are-closed-under-complement"
+        ]
+      },
+      {
+        "id": "fs-final-state-and-empty-stack-acceptance-are-literally-identical",
+        "kind": "false-statement",
+        "title": "FALSE: acceptance by final state and by empty stack are literally identical",
+        "strategy": "Refute the claim with a PDA whose start state is already accepting and whose initial stack symbol is never removed. The empty word is then accepted by final state in zero moves, but it is not accepted by empty stack because no computation ever empties the stack. The notions are equivalent only up to machine conversion.",
+        "deps": [
+          "def-pda-acceptance-by-final-state",
+          "def-pda-acceptance-by-empty-stack",
+          "thm-final-state-and-empty-stack-acceptance-are-equivalent"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 594,
+    "id": "pushdown-automata-and-context-free-languages-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Pushdown Automata and Context-Free Languages: Examples and Counterexamples",
+    "requires": [
+      "pushdown-automata-and-context-free-languages"
+    ],
+    "items": [
+      {
+        "id": "ex-cfg-to-pda-construction",
+        "kind": "example",
+        "title": "Building a PDA for $\\{a^n b^n : n \\ge 0\\}$ from the standard grammar",
+        "strategy": "Start from the grammar $S\\to aSb\\mid \\varepsilon$. Put $S$ on the stack, use epsilon-moves to expand $S$ either to $aSb$ or to $\\varepsilon$, and match the terminal symbols on the stack against the input. Tracing the runs on $aabb$ shows directly how the PDA mimics a leftmost derivation.",
+        "deps": [
+          "thm-cfg-to-pda-construction"
+        ]
+      },
+      {
+        "id": "ex-a-n-b-n-is-deterministic-context-free-and-unambiguous",
+        "kind": "example",
+        "title": "The language $\\{a^n b^n : n \\ge 0\\}$ is deterministic context-free and unambiguous",
+        "strategy": "Use the usual DPDA that pushes one stack symbol for each $a$, then pops one for each $b$, and accepts exactly when the endmarker arrives with only the bottom marker left. The grammar $S\\to aSb\\mid \\varepsilon$ generates the same language with a unique parse tree for each word, illustrating the deterministic-context-free-to-unambiguous proposition.",
+        "deps": [
+          "def-deterministic-pda",
+          "prop-deterministic-cfls-are-unambiguous"
+        ]
+      },
+      {
+        "id": "cex-swapping-dpda-accept-states-complements-the-language",
+        "kind": "counterexample",
+        "title": "A looping DPDA shows naive final-state complementation can fail",
+        "strategy": "Take a DPDA with one nonaccepting state and one epsilon-loop that preserves the bottom marker, so the machine loops forever on every input and recognizes the empty language. If we merely declare that state accepting instead, the machine still loops forever and still recognizes the empty language, not the complement $\\Sigma^*$.",
+        "deps": [
+          "fs-swapping-dpda-accept-states-complements-the-language"
+        ]
+      }
+    ]
+  }
+]

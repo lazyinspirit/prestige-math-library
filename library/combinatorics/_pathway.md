@@ -60,6 +60,7 @@ parts:
       - quotient-blockades-and-mixing-relations
       - pure-pairs-forests-and-path-antipath-classes
       - cographs-perfect-patterns-and-pure-pairs
+      - the-five-cycle-and-erdos-hajnal
 ---
 
 ## counting
@@ -121,10 +122,11 @@ degree and gives the five colour theorem.
 ## probability
 
 A finite probability space makes expectation a counting tool, and the probabilistic method
-turns that into homogeneous sets, induced-copy estimates, and regularity-style control in
-hereditary graph classes. Modular decomposition, blockades, quotienting, and pure-pair
-lemmas then organize the structural side of the Erdos-Hajnal program. The new bull-free
-page gives a complete narrowness-and-substitution route to the explicit $1/4$
-Erdos-Hajnal exponent for bull-free graphs, while the cograph/perfect-pattern page shows
-how cograph structure, perfect graphs, $\kappa$ bounds, and pure blockade patterns produce
-large cliques or stable sets and feed the later blockade expansion arguments.
+turns that into homogeneous sets, induced-copy estimates, regularity control, and the
+structural decompositions used in the Erdos-Hajnal program. Bull-free graphs give an
+explicit narrowness-and-substitution route, while cograph and perfect-pattern arguments
+turn $\kappa$ bounds and pure blockade patterns into large clique-or-stable-set
+witnesses. The new five-cycle page adds the first concrete forbidden graph beyond bull:
+comb extraction from bounded-degree induced subgraphs yields a polynomial bound on
+$\kappa(G)=\alpha(G)\omega(G)$ for $C_5$-free graphs, and the established equivalence then
+converts that bound into the Erdős-Hajnal property.

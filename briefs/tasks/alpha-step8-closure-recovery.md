@@ -13,6 +13,10 @@ Append one exact adjudication outcome per owned row. Only
 only records made stale by that repair. Send a concrete other-group finding to
 `research/{{run}}-step8-cross-group.jsonl`, never repair that item.
 
+Every `confirmed_fatal` row must also set `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`. Do not use a descriptive
+defect-ledger subclass in that field.
+
 Write `research/{{run}}-alpha-step8-closure-recovery-<group>.md` with the rows
 handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
 blockers. Preserve shared append-only ledgers.

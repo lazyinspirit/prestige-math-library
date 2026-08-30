@@ -22,10 +22,14 @@ test('the step-8 window is guarded end to end', async () => {
   const ctx = { run: 'frontier-14', repo: REPO };
   for (const id of ['8-adjudicate', '8-rejudge']) {
     const st = mod.stages.find((s: any) => s.id === id);
-    const tools = st.gates(ctx)
-      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
+    const argvRows = st.gates(ctx)
+      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv));
+    const tools = argvRows
       .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
     assert.ok(tools.includes('tools/step8-guard.mjs'), `${id} does not run the fatal-only guard`);
+    const guardArgv = argvRows.find((argv: string[]) => argv.includes('tools/step8-guard.mjs'));
+    assert.ok(guardArgv?.includes('--owner-prerequisite-repairs'),
+      `${id} drops exact owner-authorized prerequisite repair receipts`);
     assert.ok(!tools.includes('tools/proof-contract.mjs'),
       `${id} lets contract bookkeeping consume the bounded judge loop`);
   }

@@ -1,0 +1,585 @@
+[
+  {
+    "order": 168.005,
+    "id": "the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "The Moore--Penrose Pseudoinverse and Regularised Least Squares",
+    "companion": "the-moore-penrose-pseudoinverse-and-regularised-least-squares-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "def-moore-penrose-pseudoinverse",
+        "kind": "definition",
+        "title": "The Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations",
+        "deps": [
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ]
+      },
+      {
+        "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+        "kind": "theorem",
+        "title": "Every finite real or complex matrix has a unique Moore--Penrose pseudoinverse",
+        "strategy": "Write $A=U\\Sigma V^*$ by the singular value decomposition and define $A^+=V\\Sigma^+U^*$ by inverting the nonzero singular values and leaving the zero block fixed. The Penrose equations reduce to the diagonal case, and uniqueness follows by transporting any second solution back to that diagonal model.",
+        "deps": [
+          "def-moore-penrose-pseudoinverse",
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "prop-pseudoinversion-is-involutive-adjoint-compatible-and-unitarily-equivariant",
+        "kind": "proposition",
+        "title": "Pseudoinversion is involutive, commutes with adjoints, and is equivariant under unitary left and right factors",
+        "strategy": "Apply the uniqueness theorem to the SVD formula $A^+=V\\Sigma^+U^*$. The identities $(A^+)^+=A$, $(A^*)^+=(A^+)^*$, and $(UAV)^+=V^*A^+U^*$ are immediate in the diagonal singular-value coordinates.",
+        "deps": [
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+        "kind": "theorem",
+        "title": "$AA^+$ and $A^+A$ are the orthogonal projections onto $\\operatorname{im}A$ and $\\operatorname{im}A^*$",
+        "strategy": "In the singular-value decomposition, $AA^+=U\\operatorname{diag}(I_r,0)U^*$ and $A^+A=V\\operatorname{diag}(I_r,0)V^*$, so both operators are self-adjoint idempotents. Their ranges are exactly the left and right singular subspaces attached to the nonzero singular values, hence the image spaces of $A$ and $A^*$.",
+        "deps": [
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections"
+        ]
+      },
+      {
+        "id": "cor-moore-penrose-image-and-kernel-identities",
+        "kind": "corollary",
+        "title": "The Moore--Penrose pseudoinverse exchanges image and adjoint-image, and exchanges kernel and adjoint-kernel",
+        "strategy": "The projection theorem identifies $\\operatorname{im}(AA^+)$ and $\\operatorname{im}(A^+A)$ with $\\operatorname{im}A$ and $\\operatorname{im}A^*$. The published range-kernel orthogonality theorem then converts the complementary kernels of those orthogonal projections into $\\ker A^*$ and $\\ker A$.",
+        "deps": [
+          "prop-pseudoinversion-is-involutive-adjoint-compatible-and-unitarily-equivariant",
+          "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "thm-adjoint-kernel-and-range-orthogonality"
+        ]
+      },
+      {
+        "id": "prop-full-column-rank-pseudoinverse-formula",
+        "kind": "proposition",
+        "title": "If $A$ has full column rank, then $A^+=(A^*A)^{-1}A^*$",
+        "strategy": "Full column rank means every singular value of $A$ is positive, so $A^*A$ is invertible. Check directly that $(A^*A)^{-1}A^*$ satisfies the four Penrose equations, or equivalently evaluate the formula in the singular-value basis where it becomes $\\Sigma^{-1}$ on the nonzero block.",
+        "deps": [
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "prop-full-row-rank-pseudoinverse-formula",
+        "kind": "proposition",
+        "title": "If $A$ has full row rank, then $A^+=A^*(AA^*)^{-1}$",
+        "strategy": "Apply the full-column-rank formula to $A^*$ and then use adjoint compatibility of pseudoinversion. In the singular-value basis this is the same diagonal computation with the nonzero block on the row side.",
+        "deps": [
+          "prop-full-column-rank-pseudoinverse-formula",
+          "prop-pseudoinversion-is-involutive-adjoint-compatible-and-unitarily-equivariant"
+        ]
+      },
+      {
+        "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+        "kind": "theorem",
+        "title": "For every right-hand side $b$, $A^+b$ is the unique least-squares solution of minimum Euclidean norm",
+        "strategy": "Because $AA^+$ is the orthogonal projection onto $\\operatorname{im}A$, the residual $b-AA^+b$ is orthogonal to $\\operatorname{im}A$, so $A^+b$ is a least-squares minimiser. The abstract least-squares theorem says every minimiser differs by an element of $\\ker A$, and $A^+b\\in(\\ker A)^\\perp=\\operatorname{im}A^*$, so adding any nonzero kernel vector strictly increases the norm.",
+        "deps": [
+          "cor-moore-penrose-image-and-kernel-identities",
+          "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "thm-least-squares-solutions-and-normal-equation"
+        ]
+      },
+      {
+        "id": "thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b",
+        "kind": "theorem",
+        "title": "Every least-squares solution has the form $A^+b+(I-A^+A)z$, and the same affine family specializes to exact solutions when $b\\in\\operatorname{im}A$",
+        "strategy": "The least-squares theorem says the full solution set is an affine translate of $\\ker A$. The projector identity $I-A^+A=P_{\\ker A}$ rewrites that translate canonically, and when $b$ already lies in $\\operatorname{im}A$ the least residual is zero, so the same description becomes the exact-solution family.",
+        "deps": [
+          "cor-moore-penrose-image-and-kernel-identities",
+          "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "thm-least-squares-solutions-and-normal-equation"
+        ]
+      },
+      {
+        "id": "prop-reduced-qr-formulas-for-full-rank-pseudoinverses",
+        "kind": "proposition",
+        "title": "Reduced QR gives the full-column and full-row-rank pseudoinverse formulas without forming normal equations",
+        "strategy": "For full column rank, write $A=\\widehat Q\\widehat R$ with $\\widehat Q^*\\widehat Q=I$ and substitute into $(A^*A)^{-1}A^*$ to obtain $\\widehat R^{-1}\\widehat Q^*$. For full row rank, apply the same argument to $A^*$ and then transpose back with the adjoint-compatibility proposition.",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "prop-full-column-rank-pseudoinverse-formula",
+          "prop-full-row-rank-pseudoinverse-formula"
+        ]
+      },
+      {
+        "id": "def-tikhonov-regularised-least-squares",
+        "kind": "definition",
+        "title": "The Tikhonov regularised least-squares objective $\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$ for $\\lambda>0$",
+        "deps": [
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+        "kind": "theorem",
+        "title": "For every $\\lambda>0$, the Tikhonov objective is strictly convex and has the unique minimiser $(A^*A+\\lambda I)^{-1}A^*b$",
+        "strategy": "Expand the objective in singular-value coordinates $A=U\\Sigma V^*$ so it becomes a sum of decoupled one-variable quadratics $(\\sigma_i y_i-\\widehat b_i)^2+\\lambda y_i^2$. Each coefficient is positive because $\\lambda>0$, so the objective is strictly convex and its coordinatewise minimiser gives the stated closed form.",
+        "deps": [
+          "def-tikhonov-regularised-least-squares",
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "prop-tikhonov-regularisation-has-singular-filter-factors",
+        "kind": "proposition",
+        "title": "Tikhonov regularisation scales each singular component by the filter factor $\\sigma/(\\sigma^2+\\lambda)$",
+        "strategy": "Insert the singular-value decomposition into the minimiser formula and read off the coordinates along the right-singular vectors. The $i$th coefficient is obtained from a one-dimensional solve and equals $\\sigma_i/(\\sigma_i^2+\\lambda)$ times the left-singular data coefficient.",
+        "deps": [
+          "thm-singular-value-decomposition",
+          "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser"
+        ]
+      },
+      {
+        "id": "thm-tikhonov-regularised-solutions-converge-to-the-pseudoinverse-solution",
+        "kind": "theorem",
+        "title": "As $\\lambda\\downarrow0$, the Tikhonov minimisers converge to the Moore--Penrose solution $A^+b$",
+        "strategy": "Compare the spectral coefficients of the Tikhonov minimiser and of $A^+b$. For each nonzero singular value, $\\sigma_i/(\\sigma_i^2+\\lambda)\\to1/\\sigma_i$, and for each zero singular value both coefficients are zero, so the whole vector converges in norm.",
+        "deps": [
+          "prop-tikhonov-regularisation-has-singular-filter-factors",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+        "kind": "definition",
+        "title": "The truncated singular-value pseudoinverse obtained by discarding singular values below a declared numerical-rank threshold",
+        "deps": [
+          "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "thm-singular-value-decomposition"
+        ]
+      },
+      {
+        "id": "prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters",
+        "kind": "proposition",
+        "title": "Truncated SVD and Tikhonov regularisation act as hard and smooth spectral filters on the singular components",
+        "strategy": "Write both constructions in the singular-vector basis. Truncated SVD multiplies the retained coordinates by $1/\\sigma_i$ and annihilates the discarded ones, while Tikhonov multiplies every coordinate by the smooth factor $\\sigma_i/(\\sigma_i^2+\\lambda)$.",
+        "deps": [
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "prop-tikhonov-regularisation-has-singular-filter-factors"
+        ]
+      },
+      {
+        "id": "thm-pseudoinversion-is-continuous-on-each-fixed-rank-stratum-and-discontinuous-at-rank-loss",
+        "kind": "theorem",
+        "title": "The Moore--Penrose pseudoinverse is continuous on each fixed-rank stratum and is not continuous across rank loss",
+        "strategy": "On matrices of fixed rank $r$, the singular-value formula uses only the $r$ positive singular values and inverts them continuously, so the transported diagonal formula varies continuously. Across rank loss, the family $\\operatorname{diag}(1,t)$ has pseudoinverse $\\operatorname{diag}(1,t^{-1})$, which blows up as $t\\to0$.",
+        "deps": [
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-singular-value-decomposition"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.006,
+    "id": "the-moore-penrose-pseudoinverse-and-regularised-least-squares-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "The Moore--Penrose Pseudoinverse and Regularised Least Squares: Examples and Counterexamples",
+    "requires": [
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares"
+    ],
+    "items": [
+      {
+        "id": "ex-diagonal-pseudoinverse-and-the-two-orthogonal-projections",
+        "kind": "example",
+        "title": "A diagonal rank-deficient matrix makes $A^+$, $AA^+$, and $A^+A$ completely explicit",
+        "strategy": "Take a diagonal matrix with one nonzero and one zero singular value. The pseudoinverse is obtained by inverting only the nonzero entry, and the two products become the coordinate projections onto the image spaces.",
+        "deps": [
+          "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "ex-an-overdetermined-inconsistent-system-and-its-minimum-norm-least-squares-solution",
+        "kind": "example",
+        "title": "An overdetermined inconsistent system has a unique minimum-norm least-squares solution given by $A^+b$",
+        "strategy": "Choose a full-column-rank tall matrix and a right-hand side outside its image. Compute the normal-equation or QR solution explicitly and verify that it matches $A^+b$ and minimizes the residual.",
+        "deps": [
+          "prop-reduced-qr-formulas-for-full-rank-pseudoinverses",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution"
+        ]
+      },
+      {
+        "id": "ex-an-underdetermined-system-and-its-minimum-norm-exact-solution",
+        "kind": "example",
+        "title": "An underdetermined consistent system has infinitely many exact solutions but a unique minimum-norm one",
+        "strategy": "Take a wide full-row-rank matrix with a compatible right-hand side. Parametrize the exact solutions by one free variable and show that the orthogonal-to-the-kernel choice is exactly $A^+b$.",
+        "deps": [
+          "prop-full-row-rank-pseudoinverse-formula",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution"
+        ]
+      },
+      {
+        "id": "ex-a-rank-deficient-matrix-has-an-affine-family-of-least-squares-minimisers",
+        "kind": "example",
+        "title": "A rank-deficient matrix has an affine family of least-squares minimisers of the form $A^+b+(I-A^+A)z$",
+        "strategy": "Pick a rank-one matrix and an arbitrary right-hand side. Compute one minimiser from the pseudoinverse and verify that adding any kernel vector leaves the residual unchanged while changing the norm unless the kernel increment is zero.",
+        "deps": [
+          "thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b"
+        ]
+      },
+      {
+        "id": "ex-a-full-column-rank-pseudoinverse-from-reduced-qr",
+        "kind": "example",
+        "title": "A full-column-rank pseudoinverse can be read off directly from a reduced QR factorisation",
+        "strategy": "Factor a small tall matrix as $\\widehat Q\\widehat R$, compute $\\widehat R^{-1}\\widehat Q^*$, and check that the result agrees with $(A^*A)^{-1}A^*$.",
+        "deps": [
+          "prop-reduced-qr-formulas-for-full-rank-pseudoinverses"
+        ]
+      },
+      {
+        "id": "ex-ridge-regularisation-filters-a-diagonal-inverse-problem",
+        "kind": "example",
+        "title": "Ridge regularisation damps the small-singular-value directions in a diagonal inverse problem",
+        "strategy": "Use a diagonal matrix with one large and one tiny singular value. Evaluate the Tikhonov filter factors $\\sigma_i/(\\sigma_i^2+\\lambda)$ and compare them with the unstable coefficients of the unregularised pseudoinverse.",
+        "deps": [
+          "prop-tikhonov-regularisation-has-singular-filter-factors"
+        ]
+      },
+      {
+        "id": "ex-truncated-svd-denoising-on-a-diagonal-problem",
+        "kind": "example",
+        "title": "Truncated SVD denoising on a diagonal problem keeps the declared large singular directions and discards the noisy ones",
+        "strategy": "Choose a diagonal matrix and a tolerance whose numerical rank drops one singular direction. Compute the truncated pseudoinverse and compare its recovered vector with the untruncated and Tikhonov-filtered reconstructions.",
+        "deps": [
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters"
+        ]
+      },
+      {
+        "id": "fs-reverse-order-pseudoinversion-holds-without-hypotheses",
+        "kind": "false-statement",
+        "title": "For arbitrary matrices, $(AB)^+=B^+A^+$",
+        "strategy": "Use two simple rank-one matrices whose product vanishes while neither factor has zero pseudoinverse. Then $(AB)^+=0$ but $B^+A^+$ is nonzero.",
+        "deps": [
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ]
+      },
+      {
+        "id": "cex-pseudoinversion-is-discontinuous-at-a-rank-changing-diagonal-family",
+        "kind": "counterexample",
+        "title": "The family $\\operatorname{diag}(1,t)$ shows that pseudoinversion is not continuous across rank loss",
+        "strategy": "Compute the pseudoinverse of $\\operatorname{diag}(1,t)$ explicitly as $\\operatorname{diag}(1,t^{-1})$. As $t\\to0$, the matrices converge but the pseudoinverses do not.",
+        "deps": [
+          "thm-pseudoinversion-is-continuous-on-each-fixed-rank-stratum-and-discontinuous-at-rank-loss"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.007,
+    "id": "eigenvalue-iterations-and-the-qr-algorithm",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Eigenvalue Iterations and the QR Algorithm",
+    "companion": "eigenvalue-iterations-and-the-qr-algorithm-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "def-eigenpair-residual-and-normwise-backward-error",
+        "kind": "definition",
+        "title": "The residual $r=Ax-\\mu x$ and the normwise backward error of an approximate eigenpair",
+        "deps": [
+          "def-inner-product-norm",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-eigenpair-residual-realises-the-minimum-norm-backward-error",
+        "kind": "theorem",
+        "title": "For a unit vector $x$, the smallest perturbation making $(\\mu,x)$ an exact eigenpair has spectral norm $\\|Ax-\\mu x\\|_2$",
+        "strategy": "Let $r=Ax-\\mu x$ and define $E=-rx^*$. Then $(A+E)x=\\mu x$ and $\\|E\\|_2=\\|r\\|_2$ because $x$ has unit norm. Any perturbation $F$ with $(A+F)x=\\mu x$ must satisfy $Fx=-r$, so its operator norm is at least $\\|r\\|_2$.",
+        "deps": [
+          "def-eigenpair-residual-and-normwise-backward-error"
+        ]
+      },
+      {
+        "id": "def-power-iteration",
+        "kind": "definition",
+        "title": "Power iteration with normalisation and Rayleigh-quotient eigenvalue estimates",
+        "deps": []
+      },
+      {
+        "id": "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue",
+        "kind": "theorem",
+        "title": "If a diagonalisable matrix has a simple eigenvalue of strictly largest modulus and the start vector has a nonzero component in that eigendirection, power iteration converges projectively at the eigenvalue-ratio rate",
+        "strategy": "Expand the start vector in an eigenbasis. After $k$ steps the dominant term is scaled by $\\lambda_1^k$ and every other term by $(\\lambda_j/\\lambda_1)^k$, so the normalized iterate approaches the dominant eigendirection up to sign or phase at the ratio $|\\lambda_2/\\lambda_1|^k$.",
+        "deps": [
+          "def-diagonalisable-endomorphism",
+          "def-power-iteration"
+        ]
+      },
+      {
+        "id": "def-inverse-and-shifted-inverse-iteration",
+        "kind": "definition",
+        "title": "Inverse iteration and shifted inverse iteration",
+        "deps": [
+          "def-power-iteration",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift",
+        "kind": "theorem",
+        "title": "If $\\mu$ is not an eigenvalue and one simple eigenvalue is uniquely nearest to $\\mu$, shifted inverse iteration converges to its eigendirection",
+        "strategy": "Apply the power-iteration theorem to $(A-\\mu I)^{-1}$. Its eigenvectors are the same as those of $A$, and the eigenvalues become $(\\lambda_j-\\mu)^{-1}$, so the eigenvalue nearest the shift becomes the dominant one.",
+        "deps": [
+          "def-inverse-and-shifted-inverse-iteration",
+          "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue"
+        ]
+      },
+      {
+        "id": "def-rayleigh-quotient-iteration",
+        "kind": "definition",
+        "title": "Rayleigh-quotient iteration for Hermitian matrices",
+        "deps": [
+          "def-inverse-and-shifted-inverse-iteration"
+        ]
+      },
+      {
+        "id": "prop-hermitian-rayleigh-quotient-stationary-points-and-residual-gradient",
+        "kind": "proposition",
+        "title": "For a Hermitian matrix, the eigenvectors are the stationary points of the Rayleigh quotient and the residual is its constrained gradient",
+        "strategy": "Differentiate $\\rho_A(x)=x^*Ax/(x^*x)$ on the punctured space and simplify to obtain $\\nabla\\rho_A(x)=2(Ax-\\rho_A(x)x)/(x^*x)$. Therefore a nonzero vector is stationary exactly when the residual vanishes, that is, exactly when it is an eigenvector.",
+        "deps": [
+          "def-self-adjoint-and-normal-endomorphism"
+        ]
+      },
+      {
+        "id": "prop-rayleigh-quotient-and-residual-converge-along-hermitian-power-iteration",
+        "kind": "proposition",
+        "title": "For Hermitian matrices, the Rayleigh quotient and residual converge with the expected rates along power iteration",
+        "strategy": "Once the normalized iterate is within $O((|\\lambda_2|/|\\lambda_1|)^k)$ of the dominant eigendirection, the Rayleigh quotient error is quadratic in that vector error and the residual is linear in it. The Hermitian Rayleigh-quotient stationary-point formula supplies those two scalings.",
+        "deps": [
+          "def-power-iteration",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue"
+        ]
+      },
+      {
+        "id": "thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence",
+        "kind": "theorem",
+        "title": "Near a simple Hermitian eigenvector, Rayleigh-quotient iteration converges cubically",
+        "strategy": "Near a simple eigenvector, the Rayleigh quotient gives an eigenvalue estimate whose error is quadratic in the vector error. Feeding that shift into one inverse-iteration step multiplies by one more power of the current error, so both the vector and eigenvalue errors become cubic.",
+        "deps": [
+          "def-rayleigh-quotient-iteration",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ]
+      },
+      {
+        "id": "def-subspace-iteration-and-the-dominant-invariant-subspace",
+        "kind": "definition",
+        "title": "Subspace iteration and the dominant invariant subspace of a matrix",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "def-invariant-subspace-and-induced-quotient-operator"
+        ]
+      },
+      {
+        "id": "thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap",
+        "kind": "theorem",
+        "title": "Subspace iteration converges to the dominant invariant subspace when a spectral gap separates the wanted and unwanted eigenvalues",
+        "strategy": "Diagonalize the matrix and track how $A^k$ scales the components of the initial basis in the wanted and unwanted eigenspaces. QR reorthonormalization preserves the spanned subspace, and the unwanted block decays at the gap ratio.",
+        "deps": [
+          "def-diagonalisable-endomorphism",
+          "def-subspace-iteration-and-the-dominant-invariant-subspace"
+        ]
+      },
+      {
+        "id": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+        "kind": "definition",
+        "title": "Upper Hessenberg matrices and real symmetric tridiagonal matrices",
+        "deps": [
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form",
+        "kind": "theorem",
+        "title": "Householder similarities reduce a general matrix to upper Hessenberg form and a real symmetric matrix to tridiagonal form",
+        "strategy": "Apply successive Householder reflectors to annihilate the entries below the first subdiagonal, one column at a time. In the symmetric case, use the same reflector on the left and right so the mirror zeros appear above the first superdiagonal as well, leaving a tridiagonal matrix.",
+        "deps": [
+          "def-householder-reflector",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+        ]
+      },
+      {
+        "id": "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+        "kind": "definition",
+        "title": "Unshifted QR iteration, shifted QR iteration, deflation, and the Wilkinson shift",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices"
+        ]
+      },
+      {
+        "id": "prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity",
+        "kind": "proposition",
+        "title": "Unshifted QR is orthonormalised simultaneous iteration, and every QR iterate is unitarily similar to the original matrix",
+        "strategy": "Show inductively that QR factorizing $A^{k}Q^{(0)}$ produces the same orthonormal bases as simultaneous iteration with reorthonormalization. The relation $A^{(k)}=Q_k^*A^{(k-1)}Q_k$ then gives unitary similarity at each step.",
+        "deps": [
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+          "def-subspace-iteration-and-the-dominant-invariant-subspace"
+        ]
+      },
+      {
+        "id": "thm-unshifted-qr-converges-under-separated-moduli-and-leading-minor-hypotheses",
+        "kind": "theorem",
+        "title": "If a matrix is diagonalisable, its eigenvalue moduli are distinct, and the leading principal minors of the eigenvector matrix are nonzero, then unshifted QR converges to triangular form with the eigenvalues on the diagonal",
+        "strategy": "Use the equivalence with simultaneous iteration. The leading-minor hypothesis says the initial coordinate flag has nondegenerate projections onto the dominant invariant flags, and distinct moduli force those flags to separate asymptotically, which drives the QR iterates to triangular form.",
+        "deps": [
+          "def-diagonalisable-endomorphism",
+          "prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity",
+          "thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap"
+        ]
+      },
+      {
+        "id": "prop-shifted-qr-preserves-upper-hessenberg-form",
+        "kind": "proposition",
+        "title": "Shifted QR iteration preserves upper Hessenberg form",
+        "strategy": "For an upper Hessenberg matrix, a QR factorization can be built from local orthogonal or unitary transformations acting on adjacent rows. Recombining the shifted factors in reverse order chases one bulge downward but never creates fill beyond the first subdiagonal.",
+        "deps": [
+          "def-real-and-complex-givens-transformations",
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+        ]
+      },
+      {
+        "id": "thm-wilkinson-shifted-symmetric-tridiagonal-qr-has-local-deflation-away-from-ties",
+        "kind": "theorem",
+        "title": "Away from the tie case, a Wilkinson-shifted symmetric tridiagonal QR step stays tridiagonal",
+        "strategy": "Away from a Wilkinson tie, the trailing 2x2 block chooses a unique shift. The shifted QR step remains upper Hessenberg, and the orthogonal-similarity formula preserves symmetry, so the output stays symmetric tridiagonal.",
+        "deps": [
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+          "prop-shifted-qr-preserves-upper-hessenberg-form"
+        ]
+      },
+      {
+        "id": "prop-eigenpair-residual-thresholds-give-backward-error-stopping-rules",
+        "kind": "proposition",
+        "title": "A residual threshold on a normalised approximate eigenpair is exactly a normwise backward-error stopping rule",
+        "strategy": "The residual-backward-error theorem identifies the smallest perturbation norm with the residual norm itself when the eigenvector estimate is normalized. Therefore a stopping condition of the form $\\|Ax-\\mu x\\|_2\\le\\tau$ is exactly the demand that the pair solve a nearby problem within backward tolerance $\\tau$.",
+        "deps": [
+          "def-eigenpair-residual-and-normwise-backward-error",
+          "thm-eigenpair-residual-realises-the-minimum-norm-backward-error"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168.008,
+    "id": "eigenvalue-iterations-and-the-qr-algorithm-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Eigenvalue Iterations and the QR Algorithm: Examples and Counterexamples",
+    "requires": [
+      "eigenvalue-iterations-and-the-qr-algorithm"
+    ],
+    "items": [
+      {
+        "id": "ex-power-iteration-on-a-diagonal-matrix-displays-the-eigenvalue-ratio-rate",
+        "kind": "example",
+        "title": "Power iteration on a diagonal matrix shows the $|\\lambda_2/\\lambda_1|^k$ convergence rate explicitly",
+        "strategy": "Expand the start vector in the standard eigenbasis of a diagonal matrix and normalize after each multiplication. The dominant coordinate survives, while every other coordinate decays by the corresponding eigenvalue ratio.",
+        "deps": [
+          "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue"
+        ]
+      },
+      {
+        "id": "cex-equal-dominant-moduli-can-make-power-iteration-cycle",
+        "kind": "counterexample",
+        "title": "Equal dominant moduli can make power iteration alternate or cycle instead of converging",
+        "strategy": "Use a diagonal matrix with dominant eigenvalues $1$ and $-1$ of the same modulus and a start vector with components in both directions. The normalized iterates alternate sign or rotate inside the dominant two-plane rather than converging projectively to one eigendirection.",
+        "deps": [
+          "def-power-iteration"
+        ]
+      },
+      {
+        "id": "cex-a-start-vector-orthogonal-to-the-dominant-left-eigendirection-can-defeat-power-iteration",
+        "kind": "counterexample",
+        "title": "For a nonnormal matrix, a start vector orthogonal to the dominant left eigendirection can defeat power iteration",
+        "strategy": "Choose a diagonalisable nonnormal matrix whose right eigenvector for the dominant eigenvalue is not orthogonal to the other right eigenspaces. A start vector with zero pairing against the dominant left eigenvector has no dominant spectral coefficient and therefore converges to a different eigendirection or stalls.",
+        "deps": [
+          "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue"
+        ]
+      },
+      {
+        "id": "ex-shifted-inverse-iteration-targets-a-nondominant-eigenvalue",
+        "kind": "example",
+        "title": "Shifted inverse iteration can target a non-dominant eigenvalue by moving it closest to the shift",
+        "strategy": "Take a diagonal matrix with three separated eigenvalues and choose a shift near the middle one. The reciprocals of the shifted eigenvalue gaps make that middle eigendirection dominant for the transformed iteration.",
+        "deps": [
+          "thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift"
+        ]
+      },
+      {
+        "id": "ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix",
+        "kind": "example",
+        "title": "Rayleigh-quotient iteration on a $2\\times2$ symmetric matrix exhibits fast local convergence",
+        "strategy": "Start near one eigenvector of a symmetric $2\\times2$ matrix, compute the Rayleigh quotient shift, and solve the shifted system explicitly. The resulting errors drop by roughly a cubic power once the iterates are close.",
+        "deps": [
+          "thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence"
+        ]
+      },
+      {
+        "id": "ex-householder-reduction-to-hessenberg-form-for-a-three-by-three-matrix",
+        "kind": "example",
+        "title": "A single Householder similarity reduces a $3\\times3$ matrix to Hessenberg form",
+        "strategy": "Choose a matrix with two nonzero entries below the diagonal in its first column and construct the reflector that annihilates the lowest one. Conjugating by that reflector leaves only the first subdiagonal entry.",
+        "deps": [
+          "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form"
+        ]
+      },
+      {
+        "id": "ex-unshifted-and-shifted-qr-steps-on-a-symmetric-matrix",
+        "kind": "example",
+        "title": "One unshifted QR step and one shifted QR step on the same symmetric matrix show the role of the shift",
+        "strategy": "Compute both factorizations and compare the new trailing entries. The shifted step pushes the iterate more directly toward deflation because the shift moves the wanted eigenvalue nearer to zero before the QR factorization.",
+        "deps": [
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift"
+        ]
+      },
+      {
+        "id": "ex-wilkinson-shifted-qr-deflates-a-symmetric-tridiagonal-tail",
+        "kind": "example",
+        "title": "A Wilkinson-shifted QR step can sharply reduce the tail of a symmetric tridiagonal matrix",
+        "strategy": "Compute the Wilkinson shift from the trailing 2x2 block of a small symmetric tridiagonal matrix and carry out one shifted QR step. The last subdiagonal entry drops sharply in the explicit result.",
+        "deps": [
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift"
+        ]
+      },
+      {
+        "id": "cex-a-defective-jordan-block-has-ill-conditioned-eigenvectors",
+        "kind": "counterexample",
+        "title": "A defective Jordan block shows that tiny perturbations can destroy an eigenvector picture even when eigenvalues barely move",
+        "strategy": "Use a size-two Jordan block and perturb its lower-left entry. The eigenvalues move by only a square root scale, but the eigenvectors swing violently, showing why small residuals do not by themselves guarantee a stable eigenbasis for nonnormal problems.",
+        "deps": [
+          "thm-eigenpair-residual-realises-the-minimum-norm-backward-error"
+        ]
+      }
+    ]
+  }
+]

@@ -12,7 +12,7 @@
 // lane per owning BATCH with the batch as its cover.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync, utimesSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -106,6 +106,49 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
     assert.equal(p.job, 'scaffolding');
   }
   rmSync(repo, { recursive: true, force: true });
+});
+
+test('an unchanged post-fix Alpha receipt routes the still-insufficient page back to Beta', async () => {
+  const repo = fixtureRepo();
+  const research = join(repo, 'research');
+  const dispatch = join(research, 'demo-dispatch');
+  mkdirSync(dispatch);
+  writeFileSync(join(research, 'demo-scaffold-closure.json'), JSON.stringify({
+    insufficient: ['page-x'], work: [],
+  }));
+  writeFileSync(join(research, 'demo-scope-ledger.json'), JSON.stringify({
+    pages: [{ id: 'page-x', kind: 'A', batch: '4' }],
+  }));
+  writeFileSync(join(research, 'demo-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['4'], rationale: 'fixture' },
+  ]));
+  const verdict = join(research, 'demo-alpha-a-step3-verdicts.json');
+  const decisions = join(research, 'demo-alpha-a-scope-decisions.json');
+  const beta = join(dispatch, 'beta-scaffold-fix-1-b4.result.json');
+  const recheck = join(dispatch, 'alpha-high-scaffold-recheck-2-a.result.json');
+  for (const path of [verdict, decisions, beta, recheck]) writeFileSync(path, '{}\n');
+  utimesSync(verdict, new Date(1_000), new Date(1_000));
+  utimesSync(decisions, new Date(1_000), new Date(1_000));
+  utimesSync(beta, new Date(2_000), new Date(2_000));
+  utimesSync(recheck, new Date(3_000), new Date(3_000));
+
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  await s3.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s3, round: 3,
+    failure: { id: 'scaffold-verdicts', why: '' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].role, 'beta');
+  assert.equal(started[0].label, 'scaffold-fix-3-b4');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('stale scope-decision rows have a mechanical refresh', () => {
+  const argv = MECHANICAL_REPAIRS['scope-decisions']({ run: 'demo', repo: '/tmp/library' } as any);
+  assert.deepEqual(argv, ['tools/scope-decisions.mjs', 'refresh',
+    '--run', 'demo', '--all', '--root', '/tmp/library']);
 });
 
 test('Step-8 preflight routes contract residue without spending a judge round', async () => {

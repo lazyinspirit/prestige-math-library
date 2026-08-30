@@ -146,13 +146,13 @@ test('priority subjects are selected round-robin rather than by global order', (
   assert.deepEqual(next.pages.map((p) => p.id), ['a1', 'b1']);
 });
 
-test('riemannian geometry uses its plan-spec category without an id allowlist', () => {
+test('differential-geometry track pages use their plan-spec category without an id allowlist', () => {
   const pages = [
     A('smooth-manifolds-and-smooth-maps', 1, [], 'differential-geometry'), B('smooth-manifolds-and-smooth-maps', 1),
-    A('riemannian-metrics-length-distance-and-volume', 3, ['smooth-manifolds-and-smooth-maps-examples'], 'riemannian-geometry'),
-    B('riemannian-metrics-length-distance-and-volume', 3, undefined, 'riemannian-geometry'),
+    A('riemannian-metrics-length-distance-and-volume', 3, ['smooth-manifolds-and-smooth-maps-examples'], 'differential-geometry'),
+    B('riemannian-metrics-length-distance-and-volume', 3, undefined, 'differential-geometry'),
   ];
-  const next = nextBuildableSet(repo({ pages }), { priorities: ['riemannian-geometry'], maxPairs: 2 });
+  const next = nextBuildableSet(repo({ pages }), { priorities: ['differential-geometry'], maxPairs: 2 });
   assert.deepEqual(next.pages.map((p) => p.id), ['smooth-manifolds-and-smooth-maps', 'riemannian-metrics-length-distance-and-volume']);
   assert.deepEqual(next.unknownPriorities, []);
 });

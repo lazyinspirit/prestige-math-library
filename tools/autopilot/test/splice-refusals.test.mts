@@ -108,8 +108,13 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   assert.equal(started[0].job, 'adjudication');
   assert.equal(started[0].label, 'step4-adjudicate-1');
   // the stalemate synthetic takes the same path
-  await s4.onGateFailure({ ctx, executor, stage: s4, round: 2, failure: { id: 'stage-stalemate', why: '' } });
+  await s4.onGateFailure({
+    ctx, executor, stage: s4, round: 2,
+    failure: { id: 'stage-stalemate', why: '', units: ['1', '2'] },
+  });
   assert.equal(started.length, 2);
+  assert.deepEqual(started[1].covers, ['1', '2'],
+    'a live stalemate adjudicator must hold its withheld units against duplicate repair dispatches');
   // adjudication lands: the spec gains the edge -> re-splice is clean, no Alpha
   const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
   spec.pages.find((p: any) => p.id === 'refusing-page').requires = ['target-page'];

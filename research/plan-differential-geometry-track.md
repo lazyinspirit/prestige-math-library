@@ -6,6 +6,11 @@
 > after HA-17's final companion,
 > `grothendieck-spectral-sequences-and-computations-examples`. The obsolete
 > internal `spectral-sequences-examples` anchor is retired for this splice.
+> **Category contract (owner-authorised 2026-08-30):** every A page and every
+> B/examples page defined by this track has category `differential-geometry`.
+> Riemannian, Lie-theoretic, and symplectic strands are subjects within this
+> track, not separate library categories. The canonical plan, batch manifests,
+> and final library placement must preserve this category.
 
 ## 0. Summary for the orchestrator
 

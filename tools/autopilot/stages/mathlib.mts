@@ -26,6 +26,7 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { hasLegacyStep6Cutover, step6Stages } from './mathlib.step6.mts';
 
 const GPT54_HIGH_1M = MODEL_PROFILE_NAMES.gpt54High1m;
+const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXhigh;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -250,6 +251,12 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
     '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
+  // Coverage repairs can retire or rewrite decline rows after an Alpha has
+  // already classified them. Removing decisions for declines that no longer
+  // exist is mechanical; any new or changed decline remains `pending` and the
+  // check still routes it back to an Alpha.
+  'scope-decisions': (ctx) => ['tools/scope-decisions.mjs', 'refresh',
+    '--run', ctx.run, '--all', '--root', ctx.repo],
   // withheld splice batches -> re-transcribe; exit 1 = edges still await the
   // adjudicating Alpha (the residual the stage-4 hook routes)
   'splice-refusals': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
@@ -869,7 +876,8 @@ const step8GuardGate = (ctx) => gate('step8-guard', ['node', 'tools/step8-guard.
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
   '--scope', `research/${ctx.run}-step8-scope.json`,
   '--terminal-resolutions', terminalResolutionsPath(ctx),
-  '--published-repairs', `research/${ctx.run}-step8-published-repairs.jsonl`]);
+  '--published-repairs', `research/${ctx.run}-step8-published-repairs.jsonl`,
+  '--owner-prerequisite-repairs', `research/${ctx.run}-step8-owner-prerequisite-repairs.jsonl`]);
 
 const publishedGate = (ctx) => gate('step8-published', ['node', 'tools/step8-scope.mjs',
   'published', '--run', ctx.run, '--out', publishedClosurePath(ctx)]);
@@ -1670,10 +1678,22 @@ export const stages = [
         if (!group.covers.some((batch: string) => owed.includes(batch))) return false;
         const verdict = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-step3-verdicts.json`);
         const decisions = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-scope-decisions.json`);
-        const judgedAt = Math.min(
+        const artifactJudgedAt = Math.min(
           existsSync(verdict) ? statSync(verdict).mtimeMs : 0,
           existsSync(decisions) ? statSync(decisions).mtimeMs : 0,
         );
+        // An unchanged verdict is still a completed recheck. Codex correctly
+        // leaves byte-identical artifacts untouched, so their mtimes alone can
+        // make the same Alpha look stale forever. The dispatch receipt is the
+        // durable proof that the group read the repaired bytes; include the
+        // newest one when deciding whether another Beta or another Alpha owns
+        // the next move.
+        const recheckJudgedAt = existsSync(dispatchDir)
+          ? readdirSync(dispatchDir)
+            .filter((name: string) => new RegExp(`^alpha-(?:high-)?scaffold-recheck-\\d+-${group.label}\\.result\\.json$`).test(name))
+            .reduce((latest: number, name: string) => Math.max(latest, statSync(join(dispatchDir, name)).mtimeMs), 0)
+          : 0;
+        const judgedAt = Math.max(artifactJudgedAt, recheckJudgedAt);
         return repairFiles.some((name: string) => {
           const batch = name.match(/-b(\d+)\.result\.json$/)?.[1];
           return batch && group.covers.includes(batch)
@@ -1805,7 +1825,12 @@ export const stages = [
         role: 'alpha',
         label: `step4-adjudicate-${round}`,
         job: 'adjudication',
-        covers: [],
+        // A stalemate is unit-scoped. Claim its withheld units while this
+        // repair is in flight so the executor's next 30-second scan does not
+        // mistake the same units for abandoned and launch another writer
+        // against this report. The Alpha receipt cannot satisfy 4-splice
+        // coverage because the stage pattern admits only tool/splice-all.
+        covers: failure.id === 'stage-stalemate' ? (failure.units ?? []).map(String) : [],
         brief: 'briefs/alpha.md',
         task: [`research/${ctx.run}-alpha-step4.task.md`],
         timeout: 3600,
@@ -2205,15 +2230,15 @@ export const stages = [
   // on disk recording it. `alpha-group-read` carries `--sandbox read-only`; its
   // digest reaches disk through `--result-artifact`, which the DISPATCHER writes.
   //
-  // QUOTA. Four Sol lanes now run concurrently with the sweep's Terra lane, all
-  // on the Codex weekly cap. A cap is a ceiling the engine may use, never a quota
-  // it must spend: if lanes start dying on a limit, lower `alpha-group-read`'s cap
-  // rather than re-spending the loop.
+  // QUOTA. Four Terra group-reader lanes may run concurrently with the Terra
+  // judge sweep, all on the Codex weekly cap. A cap is a ceiling the engine may
+  // use, never a quota it must spend: if lanes start dying on a limit, lower
+  // `alpha-group-read`'s cap rather than re-spending the loop.
   {
     id: '7-judge',
     label: 'one persistent Terra judge per A/B pair, with the group Alphas reading alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? GPT54_HIGH_1M
+      ? TERRA_XHIGH
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading

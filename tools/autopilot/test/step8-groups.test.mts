@@ -628,6 +628,12 @@ test('step7 scope renders before the judge ledger exists', () => {
       assert.match(r.stdout, /0 open rejection\(s\) partitioned/);
       const scope = JSON.parse(readFileSync(generated[0], 'utf8'));
       assert.deepEqual(scope.groups[0].rejections, []);
+      assert.match(readFileSync(generated[2], 'utf8'),
+        /defect_type` to exactly one of\s+`logic`, `dependency_citation`, or `other`/,
+        'rendered adjudication tasks must name the validator\'s closed defect-type vocabulary');
+      assert.match(readFileSync(generated[3], 'utf8'),
+        /defect_type` to exactly one of\s+`logic`, `dependency_citation`, or `other`/,
+        'rendered recovery tasks must preserve the same defect-type vocabulary');
       const checked = check(run);
       assert.equal(checked.status, 0, `${checked.stdout}${checked.stderr}`);
       assert.match(checked.stdout, /1 item\(s\) partitioned/);

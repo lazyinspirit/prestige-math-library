@@ -18,6 +18,11 @@ with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
 contract, impact, or judge changes. The engine rejudges exactly changed items
 against the configured judge set.
 
+Every `confirmed_fatal` row must also set `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`. Descriptive defect-ledger subclasses
+such as `invalid-inference`, `false-claim`, or `ill-typed-construction` are not
+valid adjudication `defect_type` values.
+
 For an incoming alert, append the owning-group disposition to
 `research/{{run}}-step8-alert-decisions.jsonl`. A defect in another group is a
 `research/{{run}}-step8-cross-group.jsonl` alert, not permission to repair it. Use

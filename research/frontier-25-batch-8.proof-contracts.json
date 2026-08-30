@@ -1,0 +1,1365 @@
+{
+  "version": 1,
+  "level": "frontier-25",
+  "scope": [
+    "lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears",
+    "thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side",
+    "thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb",
+    "lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree",
+    "cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree",
+    "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+    "thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound",
+    "cor-the-five-cycle-has-the-erdos-hajnal-property",
+    "ex-a-rooted-stable-tooth-comb-with-two-teeth",
+    "ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle",
+    "cex-a-comb-can-have-an-edge-between-two-blocks",
+    "fs-every-comb-has-pairwise-anticomplete-blocks"
+  ],
+  "contracts": {
+    "lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-comb-in-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $\\ell\\in\\mathbb N$ with $\\ell\\geq1$, and let $w>0$. An\n**$(\\ell,w)$-comb** in a graph $G$ is a sequence of pairs\n\n$$((a_i,B_i):i\\in[\\ell])$$\n\nsatisfying the conditions below.\n\nHere a vertex $a$ is **complete to** (respectively, **anticomplete to**) a set\n$B$ when the pair $(\\{a\\},B)$ is complete (respectively, anticomplete) in the\nsense of [[def-edges-between-sets-and-pure-mixed-pairs]].\n\n1. $(B_1,\\dots,B_\\ell)$ is an $(\\ell,w)$-blockade;\n2. the vertices $a_1,\\dots,a_\\ell$ are distinct;\n3. the set $\\{a_1,\\dots,a_\\ell\\}$ is disjoint from every block $B_i$; and\n4. for every $i\\in[\\ell]$, the vertex $a_i$ is complete to $B_i$; and\n5. for all distinct $i,j\\in[\\ell]$, the vertex $a_i$ is anticomplete to $B_j$.\n\nThe vertices $a_i$ are the **teeth** of the comb.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$, let $P_i$ be the set of vertices in $D$ adjacent to $a_i$ and to none of $a_1,\\dots,a_{i-1}$. By the second hypothesis, $|P_i|\\geq (2/3)^s\\Delta$, and the sets $P_1,\\dots,P_k$ are pairwise disjoint. Let $Q_i$ be the set of vertices in $D\\setminus P_i$ adjacent to $a_i$. Since every vertex of $A$ has at most $(2/3)^{s-1}\\Delta$ neighbours in $D$, we have $|Q_i|\\leq (2/3)^{s-1}\\Delta-(2/3)^s\\Delta=(2/3)^s\\Delta/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Declare the vertices $a_k,a_{k-1},\\dots,a_1$ good backwards as follows: $a_i$ is good when at most $|P_i|/2$ vertices of $P_i$ are adjacent to a good vertex among $a_{i+1},\\dots,a_k$. Let $I$ be the set of good indices, and let $Q:=\\bigcup_{i\\in I}Q_i$. For every bad index $i\\notin I$, at least $|P_i|/2\\geq (2/3)^s\\Delta/2$ vertices of $P_i$ lie in $Q$. Since the $P_i$ are disjoint and each $Q_i$ has size at most $(2/3)^s\\Delta/2$, it follows that $(k-|I|)(2/3)^s\\Delta/2\\leq |Q|\\leq |I|(2/3)^s\\Delta/2$, so $|I|\\geq k/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $I\\neq\\varnothing$, then for each $i\\in I$ let $B_i:=P_i\\setminus Q$. We have $|B_i|\\geq |P_i|/2\\geq (2/3)^s\\Delta/2$. If $i<j$ are both in $I$, then $B_i$ is disjoint from $P_j$ and every vertex of $B_i$ avoids $Q_j$, so no vertex of $B_i$ is adjacent to $a_j$; similarly no vertex of $B_j$ is adjacent to $a_i$. Therefore $((a_i,B_i):i\\in I)$ is a $(|I|,(2/3)^s\\Delta/2)$-comb in $(A,B)$ by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $I\\neq\\varnothing$ and $(2/3)^s\\Delta/2\\geq \\Gamma |I|^{-1/d}$, then step 3.1 already gives the first alternative. Hence we may assume either $I=\\varnothing$ or $(2/3)^s\\Delta/2<\\Gamma |I|^{-1/d}$. In the second case, $|I|<(2\\Gamma(3/2)^s/\\Delta)^d$. When $I=\\varnothing$, step 2.1 gives $k=0$, so then $C=\\varnothing$. In either remaining case, $k\\leq 2(2\\Gamma(3/2)^s/\\Delta)^d$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.1",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since every $a_i$ has at most $(2/3)^{s-1}\\Delta$ neighbours in $D$, the set $C$ of all vertices of $D$ adjacent to one of the $a_i$ satisfies $|C|\\leq k(2/3)^{s-1}\\Delta\\leq 2(2\\Gamma(3/2)^s/\\Delta)^d(2/3)^{s-1}\\Delta=2^{d+1}(2/3)^{s-sd-1}\\Gamma^d\\Delta^{1-d}$. This is the second alternative.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 handles the empty-good-index regime explicitly: if $I=\\varnothing$, then $k=0$ and hence $C=\\varnothing$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses already require $\\Gamma,\\Delta>0$ and $d\\in(0,1)$, so the proof never branches on a zero denominator or zero exponent."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The argument does not need a separate $t=1$ or $k=1$ branch; the comb construction and size estimate are uniform in the admissible integers."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Beyond the empty-good-index case already discharged at step 4.1, the proof has no further collapsed graph configuration requiring separate treatment."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The integer layer parameter $s\\geq 1$ is used uniformly, and the proof does not split off a first-layer or last-layer endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sets $P_i$, $Q_i$, $I$, and $B_i$ are defined canonically from the given data; the proof makes no arbitrary pick from an unspecified nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an either-or statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is an either-or statement, not a biconditional."
+        }
+      ]
+    },
+    "thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph with a bipartition $(A,B)$, let $\\Gamma,\\Delta>0$,\nlet $d\\in(0,1)$, and let $s\\geq 1$ be an integer. Suppose that\n$D\\subseteq B$ and distinct vertices $a_1,\\dots,a_k\\in A$ satisfy:\n\n1. every vertex of $A$ has at most $(2/3)^{s-1}\\Delta$ neighbours in $D$; and\n2. for each $i\\in\\{1,\\dots,k\\}$, at least $(2/3)^s\\Delta$ vertices of $D$ are\n   adjacent to $a_i$ and to none of $a_1,\\dots,a_{i-1}$.\n\nLet $C\\subseteq D$ be the set of vertices adjacent to at least one of\n$a_1,\\dots,a_k$. Then at least one of the following holds:\n\n1. for some integer $t\\geq 1$, there is a $(t,\\Gamma t^{-1/d})$-comb in\n   $(A,B)$ whose teeth lie in $\\{a_1,\\dots,a_k\\}$ and whose blocks lie in $C$;\n2. $$|C|\\leq 2^{d+1}(2/3)^{s-sd-1}\\Gamma^d\\Delta^{1-d}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define pairwise disjoint sets $C_1,C_2,\\dots$ inductively. Set $D_1:=B$, and after defining $C_1,\\dots,C_{s-1}$ let $D_s:=B\\setminus(C_1\\cup\\cdots\\cup C_{s-1})$. Choose distinct vertices $a_1,\\dots,a_k\\in A$ with $k$ maximal such that for each $i$ there are at least $(2/3)^s\\Delta$ vertices of $D_s$ adjacent to $a_i$ and to none of $a_1,\\dots,a_{i-1}$. Let $C_s$ be the set of vertices of $D_s$ adjacent to one of $a_1,\\dots,a_k$. By maximality of $k$, every vertex of $A$ has at most $(2/3)^s\\Delta$ neighbours in $D_s\\setminus C_s$. Inducting on $s$ shows that every vertex of $A$ has at most $(2/3)^{s-1}\\Delta$ neighbours in $D_s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every vertex of $B$ belongs to some layer $C_s$. Indeed, if some $b\\in B$ survived in every $D_s$, choose a neighbour $a\\in A$ of $b$. Then $a$ has at least one neighbour in each $D_s$, contradicting step 1.1 for all large $s$ because $(2/3)^{s-1}\\Delta<1$ eventually. Thus $B=C_1\\sqcup C_2\\sqcup\\cdots$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $s\\geq 1$. The data $D_s$ and the chosen vertices $a_1,\\dots,a_k$ satisfy the hypotheses of [L1]. Therefore either [L1] already yields a $(t,\\Gamma t^{-1/d})$-comb in $(A,B)$, or $|C_s|\\leq 2^{d+1}(2/3)^{s-sd-1}\\Gamma^d\\Delta^{1-d}$. So if the first alternative never occurs, the displayed bound holds for every $s$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $q:=(2/3)^{1-d}$. Since $d\\in(0,1)$, we have $0<q<1$, and $(2/3)^{s-sd-1}=(3/2)^d q^{s-1}$. Hence [L2] gives $\\sum_{s\\geq 1}(2/3)^{s-sd-1}=(3/2)^d\\sum_{n\\geq 0}q^n=(3/2)^d/(1-(2/3)^{1-d})$. Using the disjoint union from step 2.1 and the layer bound from step 2.2, we obtain $|B|=\\sum_{s\\geq 1}|C_s|\\leq 2^{d+1}\\Gamma^d\\Delta^{1-d}\\sum_{s\\geq 1}(2/3)^{s-sd-1}=\\frac{2^{d+1}(3/2)^d}{1-(2/3)^{1-d}}\\Gamma^d\\Delta^{1-d}=\\frac{3^{d+1}}{3/2-(3/2)^d}\\Gamma^d\\Delta^{1-d}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore either the comb alternative occurs at some stage, or the displayed bound on $|B|$ holds. This is exactly the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Although $B$ may happen to be empty, the layer construction and the final bound continue uniformly; the proof does not require a separate empty-$B$ branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem assumes $\\Gamma,\\Delta>0$ and $d\\in(0,1)$, so no zero-value denominator or zero-exponent case survives into the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished value one for $t$ or for the number of layers requires its own argument; the same recurrence and summation cover it."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Outside the uniform layer recursion, the proof does not isolate any special collapsed bipartite configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not an interval-endpoint argument; the infinite geometric tail is summed uniformly from the same first-index convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the hypothesis that every $b\\in B$ has a neighbour in $A$ to choose a witnessing neighbour when proving that every vertex lies in some layer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an either-or conclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an either-or conclusion, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk because it sums layer estimates over all s and depends on the geometric-series normalization. I checked the current proof against the repaired layer lemma and the geometric-series theorem; the layer partition is explicit, the starting-index convention is used correctly, and the final bound on |B| follows without any hidden endpoint case."
+      }
+    },
+    "thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-tau-critical-graph",
+          "source_section": "Definition",
+          "quote": "Let $\\tau>0$. A finite graph $G$ is **$\\tau$-critical** when the two conditions\nbelow hold.\n\n1. $\\kappa(G)<|V(G)|^\\tau$.\n2. Every proper induced subgraph $H$ of $G$ satisfies\n   $\\kappa(H)\\geq |V(H)|^\\tau$.\n\nHere $\\kappa$ is that of [[def-kappa-of-a-graph]], induced subgraphs are those\nof [[def-subgraph-induced-subgraph-and-spanning-subgraph]], and the real power\n$|V(G)|^\\tau$ is that of [[def-real-power]]. The first clause forces every\n$\\tau$-critical graph to be nonempty, because it would read\n$0<0^\\tau=0$ on the null graph.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph. A graph $H=(W,F)$ is a **subgraph** of $G$ when\n$W\\subseteq V$ and $F\\subseteq E\\cap[W]^2$.\n\nFor $W\\subseteq V$, the **subgraph induced by $W$** is\n\n$$G[W]:=(W,\\ E\\cap[W]^2).$$\n\nThus it retains every edge of $G$ whose two endpoints lie in $W$. A subgraph\n$H=(W,F)$ is **induced** when $H=G[W]$, and it is **spanning** when $W=V$.\nThese constructions remain finite simple graphs by\n[[def-finite-simple-graph]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph with a bipartition $(A,B)$ such that every vertex of\n$B$ has a neighbour in $A$. Let $\\Gamma,\\Delta>0$ and let $d\\in(0,1)$. Suppose\nevery vertex of $A$ has at most $\\Delta$ neighbours in $B$. Then at least one\nof the following holds:\n\n1. for some integer $t\\geq 1$, there is a $(t,\\Gamma t^{-1/d})$-comb in\n   $(A,B)$;\n2. $$|B|\\leq \\frac{3^{d+1}}{3/2-(3/2)^d}\\Gamma^d\\Delta^{1-d}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-rooted-stable-tooth-comb",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A **rooted stable-tooth comb** in $G$ is data\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr)$$\n\nwith $t\\geq 1$ such that:\n\n1. $((a_i,B_i):1\\leq i\\leq t)$ is a $(t,w)$-comb in $G$ for some $w>0$, in the\n   sense of [[def-comb-in-a-graph]];\n2. $v\\notin\\{a_1,\\dots,a_t\\}\\cup B_1\\cup\\cdots\\cup B_t$;\n3. the set $\\{a_1,\\dots,a_t\\}$ is stable; and\n4. the root vertex $v$ is complete to $\\{a_1,\\dots,a_t\\}$ and anticomplete to\n   $B_1\\cup\\cdots\\cup B_t$.\n\nThe word \"stable-tooth\" records condition 3: the teeth form a stable set.\nCondition 2 makes the disjoint-set predicates in condition 4 well defined in\nthe sense of [[def-edges-between-sets-and-pure-mixed-pairs]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\delta>1$, then no nonempty graph can have a subset $X\\subseteq V(G)$ with $|X|\\geq \\delta|V(G)|$, so the theorem is vacuous. Hence we may assume $\\delta\\leq 1$. Choose $\\tau_0\\in(0,1/2)$ so small that $\\frac{2^{1-1/\\tau_0}}{\\delta}+\\left(\\epsilon+\\frac{19}{20}\\right)(\\epsilon\\delta)^{-\\tau_0}<1$. Because $\\epsilon\\delta<1/20<1$, decreasing $\\tau$ decreases both summands, so the same inequality holds for every $0<\\tau\\leq\\tau_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], $\\kappa(G)<|V(G)|^\\tau$. Since $\\kappa(G)$ is a positive integer for every nonempty graph, it cannot equal $1$: otherwise [L2] would force $\\alpha(G)=\\omega(G)=1$, hence $|V(G)|=1$, contradicting $1<1^\\tau$. Therefore $\\kappa(G)\\geq 2$, so $2<|V(G)|^\\tau$ and hence $|V(G)|>2^{1/\\tau}$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Set $X_0:=X$. As long as $X_{i-1}\\neq\\varnothing$, choose a vertex $v_i\\in X_{i-1}$ of maximum degree in $G[X_{i-1}]$, let $A_i:=N_{G[X_{i-1}]}(v_i)$, choose a stable set $C_i\\subseteq A_i$ with $|C_i|\\geq |A_i|^\\tau/\\omega(G)$, and let $X_i$ be the set of vertices in $X_{i-1}\\setminus\\{v_i\\}$ with no neighbour in $\\{v_i\\}\\cup C_i$. This is possible because when $A_i\\neq\\varnothing$, the induced subgraph $G[A_i]$ is proper, so [L1] and [L2] give $\\alpha(G[A_i])\\geq \\kappa(G[A_i])/\\omega(G)\\geq |A_i|^\\tau/\\omega(G)$. The process stops after finitely many steps because $v_i\\notin X_i$, so $|X_i|<|X_{i-1}|$ whenever $X_{i-1}\\neq\\varnothing$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i<j$, the set $X_j$ is contained in $X_i$, so by construction there are no edges from $\\{v_i\\}\\cup C_i$ to $X_j$. Hence $v_1,\\dots,v_s$ are pairwise nonadjacent, and $C_1\\cup\\cdots\\cup C_s$ is stable. For each $i$, let $D_i$ be the set of vertices in $X_{i-1}\\setminus(A_i\\cup\\{v_i\\})$ that have a neighbour in $C_i$. Then $X=\\{v_1,\\dots,v_s\\}\\sqcup A_1\\sqcup\\cdots\\sqcup A_s\\sqcup D_1\\sqcup\\cdots\\sqcup D_s$, because every vertex removed when passing from $X_{i-1}$ to $X_i$ is either $v_i$, a neighbour of $v_i$, or a vertex outside $A_i\\cup\\{v_i\\}$ with a neighbour in $C_i$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $\\gamma:=\\delta/(400\\epsilon)$. Fix $1\\leq i\\leq s$. If $A_i=\\varnothing$, then $C_i=\\varnothing$ and therefore $D_i=\\varnothing$, so certainly $|D_i|\\leq 19\\sqrt{|A_i||X|/(400\\epsilon)}$. Assume now that $A_i\\neq\\varnothing$. Every vertex of $D_i$ has a neighbour in $C_i$ by definition, and every vertex of $C_i$ has at most $|A_i|$ neighbours in $D_i$ because $v_i$ has maximum degree in $G[X_{i-1}]$ and $|A_i|=\\deg_{G[X_{i-1}]}(v_i)$. Apply [L3] to the bipartite graph between $C_i$ and $D_i$ with $\\Gamma:=\\gamma|X|/\\delta=|X|/(400\\epsilon)$, $\\Delta:=|A_i|$, and $d:=1/2$. If [L3] yields a $(t,\\Gamma t^{-2})$-comb $((a_j,B_j):1\\leq j\\leq t)$ in $(C_i,D_i)$, then the blocks lie in $X$, the teeth lie in the stable set $C_i$, and $v_i$ is adjacent to every tooth and anticomplete to every block. Thus [L4] gives a rooted stable-tooth comb in $G[X]$. Also $t\\Gamma t^{-2}\\leq |X|$ because the $t$ disjoint blocks lie in $X$, so $t\\geq 1/(400\\epsilon)$, and $\\Gamma t^{-2}=|X|/(400\\epsilon t^2)\\geq \\delta|V(G)|/(400\\epsilon t^2)$. Therefore the theorem is proved in this case. We may hence assume instead that $|D_i|\\leq \\frac{3^{3/2}}{3/2-(3/2)^{1/2}}\\sqrt{|A_i||X|/(400\\epsilon)}\\leq 19\\sqrt{|A_i||X|/(400\\epsilon)}$. This bound now holds for every $1\\leq i\\leq s$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $x_i:=|A_i|/|X|$. Since $C_1\\cup\\cdots\\cup C_s$ is stable by step 2.1, its size is at most $\\alpha(G)$. On the other hand, step 1.3 and [L1] give $|C_i|\\geq |A_i|^\\tau/\\omega(G)=x_i^\\tau |X|^\\tau/\\omega(G)\\geq (x_i\\delta)^\\tau |V(G)|^\\tau/\\omega(G)>(x_i\\delta)^\\tau \\alpha(G)$. Summing over $i$ and dividing by $\\alpha(G)$ yields $\\sum_{i=1}^s x_i^\\tau<\\delta^{-\\tau}$.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Since $v_1,\\dots,v_s$ are stable by step 2.1, we have $\\frac{s}{|X|}\\leq \\frac{\\alpha(G)}{|X|}\\leq \\frac{\\kappa(G)}{|X|}<\\frac{|V(G)|^\\tau}{|X|}\\leq \\frac{|V(G)|^{\\tau-1}}{\\delta}<\\frac{2^{1-1/\\tau}}{\\delta}$, where the last inequality uses step 1.2.",
+          "step": "3.3",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Because $X_{i-1}\\subseteq X$ and $v_i$ has maximum degree in $G[X_{i-1}]$, we have $x_i=|A_i|/|X|\\leq \\epsilon\\delta|V(G)|/|X|\\leq \\epsilon$. Hence $\\sum_{i=1}^s x_i=\\sum_{i=1}^s x_i^\\tau x_i^{1-\\tau}\\leq \\epsilon^{1-\\tau}\\sum_{i=1}^s x_i^\\tau\\leq \\epsilon(\\epsilon\\delta)^{-\\tau}$, and, because $\\tau<1/2$, $\\sum_{i=1}^s x_i^{1/2}=\\sum_{i=1}^s x_i^\\tau x_i^{1/2-\\tau}\\leq \\epsilon^{1/2-\\tau}\\sum_{i=1}^s x_i^\\tau\\leq \\epsilon^{1/2}(\\epsilon\\delta)^{-\\tau}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Divide the partition identity in step 2.1 by $|X|$. Using step 3.1 and the bound on $\\sum x_i^{1/2}$ from step 4.1, we obtain $1=\\frac{s}{|X|}+\\sum_{i=1}^s x_i+\\sum_{i=1}^s \\frac{|D_i|}{|X|}\\leq \\frac{s}{|X|}+\\epsilon(\\epsilon\\delta)^{-\\tau}+\\frac{19}{20}\\epsilon^{-1/2}\\sum_{i=1}^s x_i^{1/2}\\leq \\frac{s}{|X|}+\\left(\\epsilon+\\frac{19}{20}\\right)(\\epsilon\\delta)^{-\\tau}$. Combining this with steps 1.1 and 3.3 gives $1<\\frac{2^{1-1/\\tau}}{\\delta}+\\left(\\epsilon+\\frac{19}{20}\\right)(\\epsilon\\delta)^{-\\tau}<1$, a contradiction. Therefore the comb outcome in step 3.1 must occur, and that outcome yields exactly the rooted stable-tooth comb asserted in the Statement.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.3",
+            "step 4.1",
+            "discharge-contradiction",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 allows the intermediate neighbourhood $A_i$ to be empty and stops the recursion when $X_s=\\varnothing$, so the empty substructure regime is part of the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In A tau-critical graph with a large low-degree induced subgraph has a rooted stable-tooth comb, steps 1.2 and 5.1 handle the zero boundary: step 1.2 proves |V(G)|>2^{1/\\tau}>1, and with \\delta>0 and |X|\\ge \\delta|V(G)| every later division by |X| is by a positive quantity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof does not split off a special one-tooth or one-step case; the recursive construction and contradiction estimate are uniform."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Once empty neighbourhoods and the terminal set $X_s=\\varnothing$ are handled in step 1.3, no further collapsed configuration remains to check separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses $\\tau_0<1/2$, and step 4.1 later uses the strict inequality $\\tau<1/2$ to control the exponent $1/2-\\tau$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 explicitly chooses a maximum-degree vertex $v_i$ and then a stable set $C_i\\subseteq A_i$ from the nonempty family guaranteed by criticality."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way existence statement, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk because the proof uses a recursive pruning process, the kappa parameter, and a comb-extraction alternative. I checked the current proof against Theorem 3.1 on arXiv and the refuter notes; the recursion now explicitly removes v_i at each stage, the D_i bound is stated for every i, and the final contradiction estimate is therefore fully licensed."
+      }
+    },
+    "lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m=1$, then any single vertex set $X$ works, because a one-vertex graph has maximum degree $0=4\\epsilon(m-1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\epsilon=0$, then $G$ has no edges, so any $m$-vertex set $X$ has maximum degree $0=4\\epsilon(m-1)$. Hence we may assume from now on that $m\\geq 2$ and $\\epsilon>0$. Average the edge count over all $(2m-1)$-vertex subsets $Y\\subseteq V(G)$. Some such $Y$ satisfies $e(G[Y])\\leq \\epsilon(2m-1)(m-1)$, because the expected edge count in a random $(2m-1)$-subset is exactly the global edge count multiplied by the probability that both endpoints of a given edge are chosen.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In this chosen set $Y$, fewer than $m$ vertices have degree greater than $4\\epsilon(m-1)$. Otherwise at least $m$ vertices would contribute more than $4\\epsilon(m-1)$ each to the degree sum, giving $2e(G[Y])>4\\epsilon m(m-1)>2\\epsilon(2m-1)(m-1)$, contrary to step 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Delete all vertices of $Y$ whose degree in $G[Y]$ exceeds $4\\epsilon(m-1)$. By step 2.1 at least $m$ vertices remain; choose any $m$ of them and call the resulting set $X$. Every vertex of $G[X]$ has degree at most its degree in $G[Y]$, so $\\Delta(G[X])\\leq 4\\epsilon(m-1)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This $X$ has the required size and degree bound.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is intentionally narrowed to $m\\geq 1$, so there is no zero-vertex branch left to discharge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 now handles the endpoint $\\epsilon=0$ explicitly by observing that the graph is edgeless and any $m$-vertex induced subgraph has maximum degree $0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the case $m=1$ explicitly by taking a single vertex and observing that its induced maximum degree is $0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "After the explicit $m=1$ branch, the remainder of the proof is the ordinary averaging argument with no additional collapsed regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The upper bound $m\\leq (|V(G)|+1)/2$ is used only to make the averaging subset size $2m-1$ legitimate; no separate endpoint calculation is split off."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses any $m$ of the remaining vertices after the high-degree deletions, using the nonemptiness proved in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence statement, not a biconditional."
+        }
+      ]
+    },
+    "cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-rodl-in-the-edge-density-form",
+          "source_section": "Statement",
+          "quote": "For every graph $H$ and every $\\epsilon\\in(0,\\tfrac12)$ there exists\n$\\delta>0$ such that every nonempty $H$-free finite simple graph $G$ contains a\nset $X\\subseteq V(G)$ with $|X|\\ge\\delta|V(G)|$ and either\n$d_G(X,X)\\le\\epsilon$ or $d_G(X,X)\\ge1-\\epsilon$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph with at most\n\n$$\\epsilon |V(G)|(|V(G)|-1)/2$$\n\nedges, where $\\epsilon\\geq 0$. If $m$ is an integer with\n$1\\leq m\\leq (|V(G)|+1)/2$, then there exists $X\\subseteq V(G)$ with $|X|=m$\nsuch that the induced subgraph $G[X]$ has maximum degree at most\n$4\\epsilon(m-1)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\eta:=\\epsilon/8$. If $\\eta\\geq 1/2$, then $\\epsilon\\geq 4$. The conclusion is trivial with $\\delta:=1$, because every induced subgraph has maximum degree at most $|V(G)|-1<|V(G)|\\leq \\epsilon|V(G)|=\\epsilon\\delta|V(G)|$. So we may assume $\\eta<1/2$, and [L1] gives $\\delta_0>0$ for the parameter $\\eta$. Set $\\delta:=\\min\\{\\delta_0,1\\}/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "choose",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [L1] to the given nonempty $H$-free graph $G$. Then there is $Z\\subseteq V(G)$ with $|Z|\\geq \\delta_0|V(G)|\\geq 2\\delta|V(G)|$ and either $d_G(Z,Z)\\leq \\eta$ or $d_G(Z,Z)\\geq 1-\\eta$. Let $m:=\\lceil \\delta|V(G)|\\rceil$. Since $|Z|$ is an integer and $|Z|\\geq 2\\delta|V(G)|$, we have $|Z|\\geq \\lceil 2\\delta|V(G)|\\rceil\\geq 2m-1$, so $m\\leq (|Z|+1)/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "First suppose $d_G(Z,Z)\\leq \\eta$. Writing $n:=|Z|$, the definition of density gives $2|E(G[Z])|/n^2\\leq \\eta$. If $n=1$, then $m=1$ and $Z$ itself already has maximum degree $0\\leq \\epsilon\\delta|V(G)|$. If $n\\geq 2$, then $n^2\\leq 2n(n-1)$, so $|E(G[Z])|\\leq \\eta n^2/2\\leq (\\epsilon/4)n(n-1)/2$. Applying [L2] with $\\lambda=\\epsilon/4$ gives a set $X\\subseteq Z$ with $|X|=m$ and maximum degree at most $4(\\epsilon/4)(m-1)=\\epsilon(m-1)\\leq \\epsilon\\delta|V(G)|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now suppose instead that $d_G(Z,Z)\\geq 1-\\eta$. If $n:=|Z|$, then $d_{\\overline G}(Z,Z)=1-\\frac1n-d_G(Z,Z)\\leq \\eta-\\frac1n\\leq \\eta$. Applying step 3.1 to the complement graph on the same vertex set yields $X\\subseteq Z$ with $|X|=m$ such that $\\overline G[X]$ has maximum degree at most $\\epsilon\\delta|V(G)|$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In either case there is a set $X$ with $|X|=m\\geq \\delta|V(G)|$ such that one of $G[X]$ or $\\overline G[X]$ has maximum degree at most $\\epsilon\\delta|V(G)|$.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "cases-exhaustive"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary is stated only for nonempty $H$-free graphs, so no empty-host branch remains."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter $\\epsilon$ is assumed positive, and the proof introduces only positive rescalings $\\eta=\\epsilon/8$ and $\\delta>0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the case $n=1$ explicitly, showing that the one-vertex induced subgraph already has maximum degree $0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Once the singleton induced-subgraph case is handled in step 3.1, the rest of the proof is the ordinary sparse-versus-dense split."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 splits off the threshold case $\\eta\\geq 1/2$ before invoking the edge-density corollary, so the half-density boundary is checked directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the Rödl witness set $Z$, and step 3.1 then chooses the size-$m$ subset $X$ supplied by the sparse induced-subgraph lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way existence statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way existence statement, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "High risk because it mixes Rodl density, complement density, ceiling arithmetic, and a large-set degree bound. I repaired the eta >= 1/2 branch so the trivial large-epsilon case uses a true inequality, and I checked the remaining sparse and complement branches against the repaired lemma and density formula; the corollary is now correct on both branches."
+      }
+    },
+    "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-rooted-stable-tooth-comb",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A **rooted stable-tooth comb** in $G$ is data\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr)$$\n\nwith $t\\geq 1$ such that:\n\n1. $((a_i,B_i):1\\leq i\\leq t)$ is a $(t,w)$-comb in $G$ for some $w>0$, in the\n   sense of [[def-comb-in-a-graph]];\n2. $v\\notin\\{a_1,\\dots,a_t\\}\\cup B_1\\cup\\cdots\\cup B_t$;\n3. the set $\\{a_1,\\dots,a_t\\}$ is stable; and\n4. the root vertex $v$ is complete to $\\{a_1,\\dots,a_t\\}$ and anticomplete to\n   $B_1\\cup\\cdots\\cup B_t$.\n\nThe word \"stable-tooth\" records condition 3: the teeth form a stable set.\nCondition 2 makes the disjoint-set predicates in condition 4 well defined in\nthe sense of [[def-edges-between-sets-and-pure-mixed-pairs]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-induced-embedding-and-induced-copy",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $G$ be finite simple graphs ([[def-finite-simple-graph]]). An **induced embedding** of $H$ in $G$ is an injection $\\varphi:V(H)\\to V(G)$ such that, for all distinct $x,y\\in V(H)$,\n\n$$xy\\in E(H)\\quad\\Longleftrightarrow\\quad \\varphi(x)\\varphi(y)\\in E(G).$$\n\nThus $\\varphi$ preserves both adjacency and nonadjacency ([[def-injection-surjection-bijection]]). Its image $G[\\varphi(V(H))]$ is an **induced copy** of $H$ in $G$: the restricted map is an isomorphism from $H$ onto that induced subgraph ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-graph-isomorphism-and-complement]]).\n\nWe say that $H$ is an **induced subgraph of $G$ up to isomorphism** when such an embedding exists.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and\nthe **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element\nlabelled set, these are also denoted $\\overline K_n$ and $K_n$.\n\nFor disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$\nhas vertex set $A\\cup B$ and edge set\n\n$$\\{\\,\\{a,b\\}:a\\in A,\\ b\\in B\\,\\}.$$\n\nIf $|A|=m$ and $|B|=n$, it is denoted $K_{m,n}$.\n\nThe **path graph** $P_n$ has $n$ vertices. For $n\\ge1$, take vertices\n$0,\\ldots,n-1$ and edges $\\{i,i+1\\}$ for $0\\le i<n-1$; it has length $n-1$.\nSet $P_0$ equal to the null graph. The **cycle graph** $C_n$ is defined only for\n$n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges\n$\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$. Thus in this\nnotation the subscript records the number of vertices, not the length of a path.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the edges $va_i$, $va_j$, $a_ib_i$, $a_jb_j$, and $b_ib_j$ are present. The same definition excludes every other edge among $\\{v,a_i,b_i,b_j,a_j\\}$: the teeth $a_i,a_j$ are nonadjacent, the root $v$ is anticomplete to the blocks, and each tooth is anticomplete to the other tooth's block.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the cyclic order $v-a_i-b_i-b_j-a_j-v$ uses exactly the edges of the induced subgraph on $\\{v,a_i,b_i,b_j,a_j\\}$. By [L2], that induced subgraph is a copy of $C_5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses already name two block indices $i<j$ and vertices $b_i\\in B_i$, $b_j\\in B_j$, so the proof never enters an empty-family regime."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma has no numeric denominator, zero exponent, or zero-parameter branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-tooth comb cannot satisfy the hypothesis $i<j$, so the singleton-tooth case is excluded before the proof begins rather than requiring a separate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "With the five named vertices fixed by hypothesis, the proof is only an adjacency check and has no further collapsed configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or extremal endpoint parameter appears in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The root, teeth, and block vertices are already given in the hypotheses; the proof makes no additional arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way implication from a cross-edge to an induced five-cycle, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way implication from a cross-edge to an induced five-cycle, not a biconditional."
+        }
+      ]
+    },
+    "thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree",
+          "source_section": "Statement",
+          "quote": "For every finite graph $H$ and every real $\\epsilon>0$, there exists\n$\\delta>0$ such that every nonempty $H$-free graph $G$ contains a set\n$X\\subseteq V(G)$ with $|X|\\geq \\delta|V(G)|$ for which one of $G[X]$ or\n$\\overline{G}[X]$ has maximum degree at most $\\epsilon\\delta|V(G)|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb",
+          "source_section": "Statement",
+          "quote": "For all reals $\\delta,\\epsilon>0$ with $\\epsilon<1/20$, there exists\n$\\tau_0>0$ such that the following holds for every real $\\tau$ with\n$0<\\tau\\leq\\tau_0$.\n\nLet $G$ be a $\\tau$-critical graph, and let $X\\subseteq V(G)$ satisfy\n$|X|\\geq \\delta|V(G)|$. Suppose the induced subgraph $G[X]$ has maximum degree\nat most $\\epsilon\\delta|V(G)|$. Then there are:\n\n1. an integer $t\\geq 1/(400\\epsilon)$;\n2. vertices $a_1,\\dots,a_t,v\\in X$; and\n3. pairwise disjoint sets $B_1,\\dots,B_t\\subseteq X$\n\nsuch that\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr)$$\n\nis a rooted stable-tooth comb in $G[X]$, and each block satisfies\n\n$$|B_i|\\geq \\frac{\\delta|V(G)|}{400\\epsilon t^2}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph containing a rooted stable-tooth comb\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr).$$\n\nIf $1\\leq i<j\\leq t$ and there are vertices $b_i\\in B_i$ and $b_j\\in B_j$ with\n$b_ib_j\\in E(G)$, then the induced subgraph on\n$\\{v,a_i,b_i,b_j,a_j\\}$ is isomorphic to $C_5$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a family of finite graphs, let $\\tau>0$, and let $G$ be an\n$\\mathcal H$-free graph with $\\kappa(G)<|V(G)|^\\tau$. If $G$ has the fewest\nvertices among all $\\mathcal H$-free graphs with that strict inequality, then\n$G$ is $\\tau$-critical.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-kappa-of-a-graph",
+          "source_section": "Definition",
+          "quote": "For a finite graph $G$, define\n\n$$\\kappa(G):=\\alpha(G)\\omega(G),$$\n\nwhere $\\alpha(G)$ and $\\omega(G)$ are the stability number and clique number of\n$G$ ([[def-clique-stable-set-and-numbers]]).\n\nIn particular, $\\kappa(K_0)=0$ because both factors vanish on the null graph.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-clique-stable-set-and-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite simple graph. A set $X\\subseteq V(G)$ is a **clique** when every two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is complete. It is a **stable set**, or **independent set**, when no two distinct vertices of $X$ are adjacent, equivalently when $G[X]$ is edgeless ([[def-subgraph-induced-subgraph-and-spanning-subgraph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).\n\nThe **clique number** and **stability number** are\n\n$$\\omega(G):=\\max\\{|X|:X\\text{ is a clique in }G\\},\\qquad \\alpha(G):=\\max\\{|X|:X\\text{ is a stable set in }G\\}.$$\n\nBoth maxima exist because the families are nonempty, containing $\\varnothing$, and lie inside the finite power set of $V(G)$ ([[def-finite-cardinality]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[thm-well-ordering-principle]]). In particular, $\\omega(K_0)=\\alpha(K_0)=0$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $\\epsilon$ with $0<\\epsilon<1/400$. Apply [L1] with $H=C_5$ and this $\\epsilon$ to obtain $\\delta_0>0$. Set $\\delta:=\\min\\{\\delta_0,1\\}/2$. Then every nonempty $C_5$-free graph has a set $X$ with $|X|\\geq \\delta|V(G)|$ such that one of $G[X]$ or $\\overline G[X]$ has maximum degree at most $\\epsilon\\delta|V(G)|$. Let $\\tau_0$ be the constant from [L2] for this pair $(\\delta,\\epsilon)$. Because $400\\epsilon<1$, choose $\\tau\\in(0,\\tau_0]\\cap(0,1/2)$ so small that $(400\\epsilon)^{2-1/\\tau}>400\\epsilon/\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose for contradiction that some nonempty $C_5$-free graph satisfies $\\kappa(G)<|V(G)|^\\tau$. Choose such a graph of minimum order. Then [L4] makes it $\\tau$-critical.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "assume-contra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the last sentence of step 1.1 to this minimal counterexample. There is a set $X\\subseteq V(G)$ with $|X|\\geq \\delta|V(G)|$ such that one of $G[X]$ or $\\overline G[X]$ has maximum degree at most $\\epsilon\\delta|V(G)|$. If the low-degree graph is $\\overline G[X]$, replace $G$ by its complement. This preserves the order, preserves $\\kappa$ because complement swaps cliques and stable sets, preserves $\\tau$-criticality because induced subgraphs and complements commute, and preserves $C_5$-freeness because $C_5\\cong \\overline{C_5}$. So after this replacement we may assume that $G[X]$ itself has maximum degree at most $\\epsilon\\delta|V(G)|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L2] to the $\\tau$-critical graph $G$ and the set $X$. We obtain a rooted stable-tooth comb $\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr)$ in $G[X]$ such that $t\\geq 1/(400\\epsilon)$ and $|B_i|\\geq \\delta|V(G)|/(400\\epsilon t^2)$ for each $i$. If some block $B_i$ meets another block $B_j$ by an edge, then [L3] gives an induced $C_5$ in $G$, impossible. Therefore the blocks $B_1,\\dots,B_t$ are pairwise anticomplete.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L3",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each $B_i$ is a proper induced subgraph of $G$, so $\\tau$-criticality and [L5] give $|B_i|^\\tau\\leq \\kappa(B_i)=\\alpha(B_i)\\omega(B_i)\\leq \\alpha(B_i)\\omega(G)$. Hence $\\alpha(B_i)\\geq |B_i|^\\tau/\\omega(G)\\geq \\left(\\delta|V(G)|/(400\\epsilon t^2)\\right)^\\tau/\\omega(G)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Because the blocks are pairwise anticomplete, stable sets chosen inside different $B_i$ may be united. Thus $\\alpha(G)\\geq \\sum_{i=1}^t \\alpha(B_i)\\geq t\\left(\\delta|V(G)|/(400\\epsilon t^2)\\right)^\\tau/\\omega(G)$. Multiplying by $\\omega(G)$ and using [L5], $\\kappa(G)\\geq t\\left(\\delta|V(G)|/(400\\epsilon t^2)\\right)^\\tau$. Since step 1.2 assumes $\\kappa(G)<|V(G)|^\\tau$, cancelling $|V(G)|^\\tau$ yields $400\\epsilon/\\delta>t^{1/\\tau-2}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L5",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Step 3.1 gives $t\\geq 1/(400\\epsilon)$, and step 1.1 has $\\tau<1/2$, so $1/\\tau-2>0$. Therefore $t^{1/\\tau-2}\\geq (1/(400\\epsilon))^{1/\\tau-2}=(400\\epsilon)^{2-1/\\tau}$. Combining with step 5.1 gives $400\\epsilon/\\delta>(400\\epsilon)^{2-1/\\tau}$, contrary to step 1.1. This contradiction proves that no counterexample exists, so every nonempty $C_5$-free graph satisfies $\\kappa(G)\\geq |V(G)|^\\tau$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 5.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated only for nonempty $C_5$-free graphs, so the null graph is outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The constructed exponent $\\tau$ and auxiliary constants $\\delta,\\epsilon$ are all chosen strictly positive, and the proof never branches on a zero denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 rules out a one-vertex counterexample by observing that such a graph would have $\\kappa(G)=1=|V(G)|^\\tau$, not the strict inequality needed for minimal criticality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Outside the excluded one-vertex counterexample, the proof runs through the uniform critical-graph contradiction and does not require another collapsed graph regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses $\\tau<1/2$, and step 6.1 uses that endpoint restriction to make the exponent $1/\\tau-2$ positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses a minimal counterexample from the nonempty family of putative violations, and step 2.1 later chooses the low-degree witness set from the Rödl corollary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the existence of one exponent giving a lower bound; it is not written as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the existence of one exponent giving a lower bound; it is not written as an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-c",
+        "notes": "Critical because the final polynomial kappa bound depends on the minimal-counterexample argument, complement passage, and the rooted-comb extraction theorem. I checked the current proof against the repaired corollary, the repaired rooted-comb theorem, and the five-cycle cross-edge lemma; complement passage preserves the hypotheses, the comb blocks are pairwise anticomplete in the C5-free setting, and the final exponent contradiction now closes cleanly."
+      }
+    },
+    "cor-the-five-cycle-has-the-erdos-hajnal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound",
+          "source_section": "Statement",
+          "quote": "There exists a real $\\tau>0$ such that every nonempty $C_5$-free graph $G$\nsatisfies\n\n$$\\kappa(G)\\geq |V(G)|^\\tau.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite family of finite graphs. The following are\nequivalent.\n\n1. $\\mathcal H$ has the Erdos-Hajnal property.\n2. There exists $\\tau>0$ such that every nonempty $\\mathcal H$-free graph\n   contains an induced cograph with at least $|V(G)|^\\tau$ vertices.\n3. There exists $\\tau>0$ such that every nonempty $\\mathcal H$-free graph\n   contains an induced perfect graph with at least $|V(G)|^\\tau$ vertices.\n4. There exists $\\tau>0$ such that every nonempty $\\mathcal H$-free graph\n   satisfies $\\kappa(G)\\geq |V(G)|^\\tau$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the family consisting only of $C_5$ satisfies the $\\kappa$-formulation of the Erdős-Hajnal property.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the implication from clause 4 to clause 1 in [L2], we conclude that $C_5$ has the Erdős-Hajnal property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns the single graph $C_5$, not an empty graph family or empty host graph."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter, denominator, or zero-size branch occurs in this short deduction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly specializes the previous theorem to the singleton family consisting only of $C_5$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof is only the passage from the polynomial $\\kappa$-bound to the Erdős-Hajnal formulation and has no additional collapsed regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No boundary-value parameter is split off in this corollary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct implication chase and performs no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary itself is not stated as a biconditional, even though it cites an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary itself is not stated as a biconditional, even though it cites an equivalence theorem."
+        }
+      ]
+    },
+    "ex-a-rooted-stable-tooth-comb-with-two-teeth": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-rooted-stable-tooth-comb",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite graph. A **rooted stable-tooth comb** in $G$ is data\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr)$$\n\nwith $t\\geq 1$ such that:\n\n1. $((a_i,B_i):1\\leq i\\leq t)$ is a $(t,w)$-comb in $G$ for some $w>0$, in the\n   sense of [[def-comb-in-a-graph]];\n2. $v\\notin\\{a_1,\\dots,a_t\\}\\cup B_1\\cup\\cdots\\cup B_t$;\n3. the set $\\{a_1,\\dots,a_t\\}$ is stable; and\n4. the root vertex $v$ is complete to $\\{a_1,\\dots,a_t\\}$ and anticomplete to\n   $B_1\\cup\\cdots\\cup B_t$.\n\nThe word \"stable-tooth\" records condition 3: the teeth form a stable set.\nCondition 2 makes the disjoint-set predicates in condition 4 well defined in\nthe sense of [[def-edges-between-sets-and-pure-mixed-pairs]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two teeth $a_1,a_2$ are distinct, the blocks $\\{b_1\\}$ and $\\{b_2\\}$ are disjoint, each tooth is adjacent to its own block vertex, and neither tooth is adjacent to the other block. Thus $((a_1,\\{b_1\\}),(a_2,\\{b_2\\}))$ is a comb in $G$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The set $\\{a_1,a_2\\}$ is stable, the root $v$ is adjacent to both teeth, and $v$ is anticomplete to both blocks. Therefore [L1] identifies the displayed data as a rooted stable-tooth comb.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes five named vertices and two singleton blocks, so no empty configuration is under discussion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numeric zero-parameter or zero-denominator branch in this adjacency verification."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-tooth witness; the singleton-block sizes are part of the fixed data rather than a special case needing proof separation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item is only the direct check of one explicit graph, with no collapsed alternative regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or extremal endpoint parameter appears in the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness graph and all of its vertices are fully specified in the statement, so the verification makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional claim."
+        }
+      ]
+    },
+    "ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite graph containing a rooted stable-tooth comb\n\n$$\\bigl(v,\\ ((a_i,B_i):1\\leq i\\leq t)\\bigr).$$\n\nIf $1\\leq i<j\\leq t$ and there are vertices $b_i\\in B_i$ and $b_j\\in B_j$ with\n$b_ib_j\\in E(G)$, then the induced subgraph on\n$\\{v,a_i,b_i,b_j,a_j\\}$ is isomorphic to $C_5$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The underlying five-vertex configuration is still a rooted stable-tooth comb with teeth $a_1,a_2$, blocks $\\{b_1\\},\\{b_2\\}$, and root $v$; the new feature is exactly the cross-edge $b_1b_2$ between the two blocks.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] with $i=1$ and $j=2$ shows that the induced subgraph on $\\{v,a_1,b_1,b_2,a_2\\}$ is a copy of $C_5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item starts from an explicit five-vertex graph with a specified added edge, so no empty witness family is present."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The verification uses only finite adjacency data and no zero-sensitive parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example already fixes two teeth and two blocks; there is no singleton-parameter branch to discharge."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The graph is completely specified, and the verification has no separate collapsed configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or threshold endpoint appears in this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example names the graph, the added cross-edge, and the resulting five-cycle explicitly, leaving no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a witness statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a witness statement, not a biconditional."
+        }
+      ]
+    },
+    "cex-a-comb-can-have-an-edge-between-two-blocks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-comb-in-a-graph",
+          "source_section": "Definition",
+          "quote": "Let $\\ell\\in\\mathbb N$ with $\\ell\\geq1$, and let $w>0$. An\n**$(\\ell,w)$-comb** in a graph $G$ is a sequence of pairs\n\n$$((a_i,B_i):i\\in[\\ell])$$\n\nsatisfying the conditions below.\n\nHere a vertex $a$ is **complete to** (respectively, **anticomplete to**) a set\n$B$ when the pair $(\\{a\\},B)$ is complete (respectively, anticomplete) in the\nsense of [[def-edges-between-sets-and-pure-mixed-pairs]].\n\n1. $(B_1,\\dots,B_\\ell)$ is an $(\\ell,w)$-blockade;\n2. the vertices $a_1,\\dots,a_\\ell$ are distinct;\n3. the set $\\{a_1,\\dots,a_\\ell\\}$ is disjoint from every block $B_i$; and\n4. for every $i\\in[\\ell]$, the vertex $a_i$ is complete to $B_i$; and\n5. for all distinct $i,j\\in[\\ell]$, the vertex $a_i$ is anticomplete to $B_j$.\n\nThe vertices $a_i$ are the **teeth** of the comb.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the given graph, $a_1$ is adjacent to $b_1$ and not to $b_2$, while $a_2$ is adjacent to $b_2$ and not to $b_1$. The teeth are distinct and the singleton blocks are disjoint. Therefore [L1] shows that $((a_1,\\{b_1\\}),(a_2,\\{b_2\\}))$ is a comb.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two blocks are not anticomplete, because the graph was built with the edge $b_1b_2$. So this comb refutes the statement that every comb has pairwise anticomplete blocks.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is one explicit five-vertex comb, so no empty witness regime is involved."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item contains no zero-sensitive denominator or parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness uses two blocks because the refuted statement is about relations between different blocks; a one-block comb would not even test the claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item is only the verification of one fixed witness graph and has no additional collapsed case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness graph, its teeth, and its blocks are fully specified in the statement and given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is universal, not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is universal, not biconditional."
+        }
+      ]
+    },
+    "fs-every-comb-has-pairwise-anticomplete-blocks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-a-comb-can-have-an-edge-between-two-blocks",
+          "source_section": "Statement refuted",
+          "quote": "Every comb has pairwise anticomplete blocks.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there exists a specific comb with two blocks that are not anticomplete.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the universal statement is false. The anticomplete-block conclusion on the A page needs the extra rooted stable-tooth structure together with $C_5$-freeness, not merely the definition of a comb.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The false statement is a universal claim about combs; the refutation uses one concrete two-block comb and does not hinge on an empty-family branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or denominator appears in the refutation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-block comb would not test pairwise anticompleteness, so the refutation correctly uses a two-block witness instead of a singleton case split."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The refutation is only the appeal to one explicit counterexample and has no further collapsed configuration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint-sensitive parameter is present in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation cites a previously fixed counterexample and makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        }
+      ]
+    }
+  }
+}

@@ -81,9 +81,6 @@ parts:
       - improper-and-parameter-dependent-multiple-integrals
       - convex-and-semicontinuous-functions-on-rn
       - picard-lindelof-and-first-order-odes
-      - smooth-manifolds-and-smooth-maps
-      - euclidean-ordinary-differential-equations-with-smooth-dependence
-      - smooth-partitions-of-unity-and-exhaustions
       - regular-surfaces-and-surface-integrals
       - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems
@@ -96,7 +93,6 @@ parts:
       - the-complex-exponential-and-eulers-formula
       - trigonometric-and-oscillatory-examples-in-one-variable
       - areas-of-elementary-plane-figures
-      - tangent-cotangent-and-the-differential
       - the-real-gamma-and-beta-functions
       - volumes-of-elementary-solids-and-solids-of-revolution
       - the-divergence-theorem-and-classical-stokes

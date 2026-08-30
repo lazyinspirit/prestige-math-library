@@ -127,9 +127,9 @@ const ROLES = Object.freeze({
   // not conservatism.
   'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'step-8 fatal-only adjudication, one per group Alpha; held on Sol so fatal counts stay comparable across runs' },
   // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
-  // judges are still sweeping (owner, 2026-08-25). Same lane and effort as the
-  // adjudicator it writes for, so the notes are in the idiom of the reader that
-  // will consume them.
+  // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
+  // xhigh profile in the stage table; Step 8 resumes the same conversation
+  // under the adjudicator's own Sol xhigh role.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 7 judges a frozen text; an
   // edit landing mid-sweep voids verdicts already cast against the old bytes and
@@ -145,8 +145,9 @@ const ROLES = Object.freeze({
   // `alpha-group-read` — the step-7 half of a group Alpha's life (owner,
   // 2026-08-25). Read-only at the kernel while the judges sweep a frozen text,
   // and given a PERSISTENT session home so that `8-adjudicate` resumes this very
-  // conversation with write access rather than starting a fresh agent. Same lane
-  // and effort as the adjudicating half because it IS the adjudicating half.
+  // conversation with write access rather than starting a fresh agent. The
+  // model change at the boundary is deliberate: Terra xhigh reads at Step 7,
+  // then Sol xhigh performs the Step-8 adjudication.
   //
   // No web: everything it reads is on disk. Sourcing belongs to the Beta that
   // authored the page, not to a reader of it.

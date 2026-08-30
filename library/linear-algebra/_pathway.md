@@ -34,6 +34,8 @@ parts:
       - matrix-norms-condition-numbers-and-numerical-stability
       - exterior-powers-orientation-and-hodge-duality
       - direct-matrix-factorisations-lu-cholesky-and-qr
+      - the-moore-penrose-pseudoinverse-and-regularised-least-squares
+      - eigenvalue-iterations-and-the-qr-algorithm
 ---
 
 ## spaces-and-linear-maps
@@ -67,12 +69,12 @@ makes least squares and spectral arguments possible.
 
 ## eigenvalues-and-canonical-forms
 
-An eigenvalue is a root of the characteristic polynomial, and the gap between algebraic and
-geometric multiplicity is what obstructs diagonalisation. The minimal polynomial,
-generalised eigenspaces, and Jordan form organise similarity; complexification and
-realification compare real and complex operators; and inner products add Schur form, the
-spectral theorem, singular values, and polar decomposition. Matrix norms and condition
-numbers measure perturbation sensitivity, exterior powers recover determinants and
-orientation, and the direct-factorisation page supplies the computational side: LU and PLU
-for elimination and pivoting, Cholesky for positive-definite matrices, and QR for stable
-least-squares without squaring the condition number.
+An eigenvalue is a characteristic-polynomial root, and the minimal polynomial, generalized
+eigenspaces, Jordan form, scalar-change comparisons, Schur form, singular values, norms,
+conditioning, and exterior powers organize similarity, orthogonality, and perturbation.
+LU, Cholesky, and QR provide the stable factorization layer. The new pseudoinverse page
+turns SVD geometry into orthogonal projections, minimum-norm least squares, QR formulas,
+Tikhonov regularization, spectral filters, and the fixed-rank continuity boundary. The
+new iteration page adds power, inverse, Rayleigh-quotient, and subspace iterations, then
+reduces matrices to Hessenberg or tridiagonal form so shifted QR and Wilkinson deflation
+become the final eigenvalue algorithms.

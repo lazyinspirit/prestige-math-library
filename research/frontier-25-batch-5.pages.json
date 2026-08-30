@@ -1,0 +1,317 @@
+[
+  {
+    "order": 348.001,
+    "id": "arithmetic-functions-and-dirichlet-convolution",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Arithmetic Functions and Dirichlet Convolution",
+    "companion": "arithmetic-functions-and-dirichlet-convolution-examples",
+    "requires": [
+      "bloch-schottky-and-picard-examples",
+      "incidence-algebras-and-mobius-inversion",
+      "finite-fields-and-cyclotomic-extensions"
+    ],
+    "items": [
+      {
+        "id": "def-arithmetic-function",
+        "kind": "definition",
+        "title": "Arithmetic functions on the positive integers",
+        "deps": [
+          "def-divisibility-poset-on-positive-integers",
+          "thm-complex-numbers-form-a-field"
+        ]
+      },
+      {
+        "id": "def-multiplicative-arithmetic-function",
+        "kind": "definition",
+        "title": "Multiplicative arithmetic functions",
+        "deps": [
+          "def-arithmetic-function",
+          "def-coprime"
+        ]
+      },
+      {
+        "id": "def-completely-multiplicative-arithmetic-function",
+        "kind": "definition",
+        "title": "Completely multiplicative arithmetic functions",
+        "deps": [
+          "def-arithmetic-function"
+        ]
+      },
+      {
+        "id": "def-dirichlet-convolution",
+        "kind": "definition",
+        "title": "Dirichlet convolution of arithmetic functions",
+        "deps": [
+          "def-arithmetic-function",
+          "def-divides-in-z",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-divisibility-poset-is-lower-finite-and-factorises"
+        ]
+      },
+      {
+        "id": "def-dirichlet-convolution-identity",
+        "kind": "definition",
+        "title": "The Dirichlet-convolution identity and the constant-one function",
+        "deps": [
+          "def-arithmetic-function"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-convolution-commutative-ring",
+        "kind": "theorem",
+        "title": "Arithmetic functions form a commutative ring under pointwise addition and Dirichlet convolution",
+        "strategy": "Use the field structure of C for pointwise addition. For convolution, reindex by d <-> n/d for commutativity, and reindex the triple sum over abc = n for associativity; distributivity and the epsilon identity are direct finite-sum manipulations.",
+        "deps": [
+          "def-dirichlet-convolution",
+          "def-dirichlet-convolution-identity",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-complex-numbers-form-a-field"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-convolution-invertibility-criterion",
+        "kind": "theorem",
+        "title": "An arithmetic function has a Dirichlet inverse exactly when its value at 1 is nonzero",
+        "strategy": "Isolate the divisor d = n in the equation (f*g)(n) = epsilon(n). The n = 1 case forces g(1) = 1/f(1); for n > 1 the remaining terms involve only proper divisors, so strong induction determines one new value at a time and also proves uniqueness.",
+        "deps": [
+          "def-dirichlet-convolution",
+          "def-dirichlet-convolution-identity",
+          "def-divides-in-z",
+          "lem-divisor-bound",
+          "thm-complex-numbers-form-a-field",
+          "thm-dirichlet-convolution-commutative-ring",
+          "thm-strong-induction"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-convolution-preserves-multiplicativity",
+        "kind": "theorem",
+        "title": "Dirichlet convolution preserves multiplicativity, and multiplicative inverses stay multiplicative",
+        "strategy": "For coprime m and n, identify every divisor of mn uniquely as ab with a | m and b | n, then factor the divisor sum into a product of two sums. For inverses, apply the same divisor splitting to the recursion from the inverse criterion and induct on mn.",
+        "deps": [
+          "def-coprime",
+          "def-dirichlet-convolution",
+          "def-multiplicative-arithmetic-function",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-dirichlet-convolution-invertibility-criterion",
+          "thm-fundamental-theorem-of-arithmetic",
+          "thm-strong-induction"
+        ]
+      },
+      {
+        "id": "thm-multiplicative-functions-determined-by-prime-powers",
+        "kind": "theorem",
+        "title": "Multiplicative functions are determined by their prime-power values",
+        "strategy": "Apply multiplicativity to the pairwise coprime prime-power factors in the canonical factorization of n. For the converse, define f on products by the prescribed prime-power data and use uniqueness of the canonical factorization to prove the definition is well posed and multiplicative.",
+        "deps": [
+          "def-multiplicative-arithmetic-function",
+          "thm-canonical-prime-factorisation"
+        ]
+      },
+      {
+        "id": "def-divisor-counting-function",
+        "kind": "definition",
+        "title": "The divisor-counting function tau",
+        "deps": [
+          "def-arithmetic-function",
+          "def-divides-in-z",
+          "def-sum-over-a-finite-index-set"
+        ]
+      },
+      {
+        "id": "def-divisor-power-sum-functions",
+        "kind": "definition",
+        "title": "The power functions id_k and the divisor-power-sum functions sigma_k",
+        "deps": [
+          "def-arithmetic-function",
+          "def-divides-in-z",
+          "thm-complex-numbers-form-a-field"
+        ]
+      },
+      {
+        "id": "def-liouville-function",
+        "kind": "definition",
+        "title": "Liouville's function",
+        "deps": [
+          "def-arithmetic-function",
+          "thm-canonical-prime-factorisation"
+        ]
+      },
+      {
+        "id": "def-von-mangoldt-function",
+        "kind": "definition",
+        "title": "The von Mangoldt function",
+        "deps": [
+          "def-arithmetic-function",
+          "def-natural-logarithm",
+          "thm-fundamental-theorem-of-arithmetic"
+        ]
+      },
+      {
+        "id": "prop-divisor-functions-under-dirichlet-convolution",
+        "kind": "proposition",
+        "title": "The divisor functions arise by Dirichlet convolution",
+        "strategy": "Unpack the convolution definitions: summing 1 over the divisors gives tau, and summing d^k over the divisors gives sigma_k. Then check directly that 1 and id_k are multiplicative, invoke convolution stability, and read off the prime-power formulas from the divisors of p^a.",
+        "deps": [
+          "def-completely-multiplicative-arithmetic-function",
+          "def-dirichlet-convolution",
+          "def-dirichlet-convolution-identity",
+          "def-divisor-counting-function",
+          "def-divisor-power-sum-functions",
+          "thm-dirichlet-convolution-preserves-multiplicativity"
+        ]
+      },
+      {
+        "id": "thm-von-mangoldt-divisor-sum-identity",
+        "kind": "theorem",
+        "title": "The divisor sum of von Mangoldt is the arithmetic-function logarithm",
+        "strategy": "Write n = prod p_i^{e_i}. Among the divisors of n, only the prime powers p_i^j contribute to the sum of Lambda, so the divisor sum becomes sum_i e_i log p_i; repeated use of the logarithm product law then identifies this with log n.",
+        "deps": [
+          "def-dirichlet-convolution",
+          "def-natural-logarithm",
+          "def-von-mangoldt-function",
+          "thm-canonical-prime-factorisation",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "cor-von-mangoldt-mobius-inversion-formula",
+        "kind": "corollary",
+        "title": "Möbius inversion gives Lambda = mu * log",
+        "strategy": "Apply the published classical Mobius inversion theorem to the identity 1 * Lambda = log from the preceding theorem and keep the already-published Mobius carrier rather than reproving inversion locally.",
+        "deps": [
+          "cor-classical-mobius-inversion",
+          "thm-von-mangoldt-divisor-sum-identity"
+        ]
+      },
+      {
+        "id": "cor-number-of-monic-irreducible-polynomials-over-a-finite-field",
+        "kind": "corollary",
+        "title": "Möbius inversion gives the closed formula for the number of monic irreducibles over F_q",
+        "strategy": "Start from the published divisor-sum identity sum_{d|n} d N_d(q) = q^n. Apply the published Mobius inversion theorem to the arithmetic functions n N_n(q) and q^n, then divide the resulting identity by n.",
+        "deps": [
+          "cor-classical-mobius-inversion",
+          "prop-divisor-sum-identity-for-monic-irreducibles-over-a-finite-field"
+        ]
+      },
+      {
+        "id": "prop-liouville-convolution-square-indicator",
+        "kind": "proposition",
+        "title": "The convolution 1 * lambda detects perfect squares",
+        "strategy": "Write each divisor of n = prod p_i^{e_i} as prod p_i^{j_i}, rewrite the divisor sum as a product of finite alternating sums in the exponents j_i, and evaluate each factor as 1 when e_i is even and 0 when e_i is odd.",
+        "deps": [
+          "def-dirichlet-convolution",
+          "def-dirichlet-convolution-identity",
+          "def-liouville-function",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-canonical-prime-factorisation"
+        ]
+      },
+      {
+        "id": "def-mertens-function",
+        "kind": "definition",
+        "title": "The Mertens function M(x)",
+        "deps": [
+          "def-number-theoretic-mobius-function"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 348.002,
+    "id": "arithmetic-functions-and-dirichlet-convolution-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Arithmetic Functions and Dirichlet Convolution — Examples",
+    "companion": "arithmetic-functions-and-dirichlet-convolution",
+    "requires": [
+      "arithmetic-functions-and-dirichlet-convolution"
+    ],
+    "items": [
+      {
+        "id": "ex-dirichlet-convolution-table-through-twelve",
+        "kind": "example",
+        "title": "A Dirichlet-convolution table through 12",
+        "strategy": "List the positive divisors of each n <= 12, compute (1 * 1)(n) term by term from those divisor groups, and compare the resulting column with tau(n).",
+        "deps": [
+          "def-dirichlet-convolution",
+          "def-dirichlet-convolution-identity",
+          "def-divisor-counting-function"
+        ]
+      },
+      {
+        "id": "ex-dirichlet-inverse-recursion",
+        "kind": "example",
+        "title": "Computing a Dirichlet inverse recursively",
+        "strategy": "Apply the inverse criterion to the constant-one function, solve successively for the first few inverse values, and verify both convolution orders against epsilon.",
+        "deps": [
+          "def-dirichlet-convolution-identity",
+          "thm-dirichlet-convolution-invertibility-criterion"
+        ]
+      },
+      {
+        "id": "ex-divisor-counting-and-sum-prime-power-formulas",
+        "kind": "example",
+        "title": "Prime-power formulas for tau and sigma_k in concrete cases",
+        "strategy": "Factor several integers, apply the local prime-power formulas for tau and sigma_k factor by factor, and compare with direct divisor lists.",
+        "deps": [
+          "prop-divisor-functions-under-dirichlet-convolution",
+          "thm-canonical-prime-factorisation"
+        ]
+      },
+      {
+        "id": "ex-euler-totient-as-a-mobius-convolution",
+        "kind": "example",
+        "title": "Euler's totient as the convolution mu * id_1",
+        "strategy": "Start from the published divisor-sum theorem sum_{d|n} phi(d) = n, apply the published Mobius inversion theorem, and rewrite the result as phi = mu * id_1 instead of depending on the older worked example.",
+        "deps": [
+          "cor-classical-mobius-inversion",
+          "def-divisor-power-sum-functions",
+          "thm-sum-of-totients-over-divisors"
+        ]
+      },
+      {
+        "id": "ex-von-mangoldt-divisor-sum",
+        "kind": "example",
+        "title": "Checking the von Mangoldt divisor-sum identity on sample integers",
+        "strategy": "Evaluate Lambda on the divisors of a prime power and of a number with three distinct prime factors, sum the nonzero terms, and compare with log n.",
+        "deps": [
+          "def-von-mangoldt-function",
+          "thm-von-mangoldt-divisor-sum-identity"
+        ]
+      },
+      {
+        "id": "ex-liouville-square-indicator",
+        "kind": "example",
+        "title": "Working out the square-indicator convolution for prime powers",
+        "strategy": "Compute (1 * lambda)(p^e) = sum_{j=0}^e (-1)^j for even and odd e, then interpret the two answers as the square and nonsquare cases.",
+        "deps": [
+          "def-liouville-function",
+          "prop-liouville-convolution-square-indicator"
+        ]
+      },
+      {
+        "id": "cex-multiplicative-does-not-mean-completely-multiplicative",
+        "kind": "counterexample",
+        "title": "Tau is multiplicative but not completely multiplicative",
+        "strategy": "Use the local divisor-function proposition to compare tau(4) = 3 with tau(2)^2 = 4, while keeping the coprime case multiplicativity intact.",
+        "deps": [
+          "def-completely-multiplicative-arithmetic-function",
+          "def-multiplicative-arithmetic-function",
+          "prop-divisor-functions-under-dirichlet-convolution"
+        ]
+      },
+      {
+        "id": "cex-the-mertens-conjecture-is-false",
+        "kind": "counterexample",
+        "title": "The Mertens conjecture is false",
+        "strategy": "State the historical claim |M(x)| < sqrt(x) for x > 1, record the Odlyzko-te Riele disproof as a sourced computational counterexample, and keep it explicitly non-load-bearing for this page's finite convolution development.",
+        "deps": [
+          "def-mertens-function"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,2357 @@
+{
+  "version": 1,
+  "level": "frontier-25",
+  "note": "Step-5 authoring contract for frontier-25 batch 1 on Sunday, August 30, 2026.",
+  "scope": [
+    "lem-valuation-ring-is-local",
+    "thm-valuation-ring-characterisations",
+    "thm-every-valuation-ring-arises-from-its-value-group",
+    "thm-valuation-ring-is-integrally-closed",
+    "thm-dvr-element-normal-form",
+    "thm-ideals-in-a-dvr",
+    "cor-prime-ideals-and-dimension-of-a-dvr",
+    "thm-equivalent-characterisations-of-a-dvr",
+    "thm-noetherian-valuation-ring-characterisation",
+    "thm-dvr-ideal-and-module-length",
+    "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr",
+    "cor-dvr-is-a-pid",
+    "ex-p-adic-dvr",
+    "ex-localisation-of-a-pid-at-a-prime",
+    "ex-plane-curve-local-ring-not-dvr",
+    "ex-rank-two-valuation-ring-not-dvr",
+    "ex-nondiscrete-ordered-subgroup-valuation",
+    "ex-dvr-length-computation",
+    "ex-uniformisers-and-dvr-ideal-arithmetic",
+    "ex-valuation-ring-ideals-linearly-ordered"
+  ],
+  "contracts": {
+    "lem-valuation-ring-is-local": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma studies one fixed ring and specific ring elements, not an empty family of objects or generators."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 handles the additivity check when one of the two tested elements is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the unit boundary by proving 1 is outside the nonunit ideal candidate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The field and zero-ring collapses are excluded by the valuation-ring hypothesis as used in the written proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval, first-versus-last index, or chain endpoint argument occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof defines the ideal and reasons uniformly; it does not choose a witness from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is not stated as a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field. A subring $V\\subseteq K$ is a **valuation ring of $K$** if\nfor every $x\\in K^\\times$ at least one of $x$ and $x^{-1}$ belongs to $V$.\n\nThus a valuation ring decides each nonzero element of the ambient field by\nmembership: either the element itself is in the ring, or its inverse is.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathfrak m:=\\{x\\in V:x=0\\text{ or }x^{-1}\\notin V\\}$. By [A1], an element of $V$ lies outside $\\mathfrak m$ exactly when it is a unit, so $1\\notin\\mathfrak m$ and $\\mathfrak m$ is proper.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $r\\in V$ and $x\\in\\mathfrak m$, then $rx\\in\\mathfrak m$: if $rx\\ne0$ and $(rx)^{-1}\\in V$, then $x^{-1}=r(rx)^{-1}\\in V$, contradicting $x\\in\\mathfrak m$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $x,y\\in\\mathfrak m$. If $x+y\\notin\\mathfrak m$, then $x+y$ is a unit by step 1.1. If $x=0$ or $y=0$ this contradicts $x,y\\in\\mathfrak m$, so assume $x,y\\ne0$. By [F1], either $y/x\\in V$ or $x/y\\in V$; in the first case $x^{-1}=(x+y)^{-1}(1+y/x)\\in V$, and in the second case $y^{-1}=(x+y)^{-1}(1+x/y)\\in V$, again a contradiction. Thus $x+y\\in\\mathfrak m$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 show that $\\mathfrak m$ is an ideal. Every proper ideal contains no unit, so every proper ideal is contained in $\\mathfrak m$. Hence $\\mathfrak m$ is the unique maximal ideal of $V$, and $V$ is local.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-valuation-ring-characterisations": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares three conditions on one fixed subring, not an empty algebraic family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the divisibility boundary when a or b is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the one-generator boundary among finitely generated ideals."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate collapsed case beyond the stated subring-of-a-field setting appears in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses ideal comparability, not interval endpoints or first/last indices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only maximal principal ideal chosen in step 4.1 comes from a displayed finite list, not from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 carry condition 1 forward through conditions 2 and 3."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.3 closes the reverse direction by recovering condition 1 from condition 3."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field. A subring $V\\subseteq K$ is a **valuation ring of $K$** if\nfor every $x\\in K^\\times$ at least one of $x$ and $x^{-1}$ belongs to $V$.\n\nThus a valuation ring decides each nonzero element of the ambient field by\nmembership: either the element itself is in the ring, or its inverse is.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-valuation-ring-is-local",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a valuation ring. Then the nonunits of $V$ form an ideal. That ideal\nis the unique maximal ideal of $V$, so $V$ is a local ring.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume condition 1. Let $a,b\\in V$. If $a=0$ or $b=0$, divisibility is trivial. If $a,b\\ne0$, apply [F1] to $a/b\\in K^\\times$: if $a/b\\in V$, then $a=(a/b)b$, so $b$ divides $a$; if $b/a\\in V$, then $a$ divides $b$. Thus condition 2 holds.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume condition 2. Let $I$ and $J$ be ideals of $V$. If $I\\not\\subseteq J$, choose $a\\in I\\setminus J$. For any $b\\in J$, condition 2 says either $a$ divides $b$ or $b$ divides $a$; the second option would put $a$ in $J$, so $b=ca$ for some $c\\in V$ and hence $b\\in I$. Therefore $J\\subseteq I$. By symmetry, any two ideals are comparable, so condition 3 holds.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume condition 3. Let $x\\in K^\\times$, and choose $a,b\\in V$ with $b\\ne0$ and $x=a/b$ by [A1]. The principal ideals $(a)$ and $(b)$ are comparable. If $(a)\\subseteq(b)$, then $a=bc$ for some $c\\in V$, so $x=c\\in V$. If $(b)\\subseteq(a)$, then $b=ad$ for some $d\\in V$, so $x^{-1}=d\\in V$. Thus condition 1 holds.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under condition 3, a finitely generated ideal $I=(a_1,\\ldots,a_n)$ is principal: among the finitely many comparable principal ideals $(a_i)$, choose a largest one, say $(a_j)$. Then every $a_i$ lies in $(a_j)$, so $I=(a_j)$. The zero ideal is $(0)$, and step 1.3 now identifies $V$ as a valuation ring, so [L1] records the local consequence for nonunits.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-every-valuation-ring-arises-from-its-value-group": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem constructs one ordered quotient group from one fixed valuation ring; there is no empty-support branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the valuation law when x+y=0 by sending the sum to infinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the class of 1 to identify the nonnegative locus with the original ring."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof excludes no extra collapsed quotient case beyond antisymmetry already written in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The order is proved total and translation-invariant, but no separate endpoint case appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is explicit and makes no witness choice from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a construction-and-recovery theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a construction-and-recovery theorem, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-valuation-on-a-field",
+          "source_section": "Definition",
+      "quote": "Let $K$ be a field and let $\\Gamma$ be a totally ordered abelian group\n([[def-totally-ordered-abelian-group]]). Adjoin a symbol $\\infty$ with\n$$\\gamma<\\infty,\\qquad \\gamma+\\infty=\\infty+\\gamma=\\infty,\\qquad \\infty+\\infty=\\infty.$$\nfor every $\\gamma\\in\\Gamma$.\n\nA **valuation on $K$ with value group in $\\Gamma$** is a map\n$$\nv:K\\to\\Gamma\\cup\\{\\infty\\}\n$$\nsuch that for all $x,y\\in K$,\n$$\nv(x)=\\infty \\Longleftrightarrow x=0,\n$$\n$$\nv(xy)=v(x)+v(y),\n$$\nand\n$$\nv(x+y)\\ge\\min\\{v(x),v(y)\\}.\n$$\n\nWhen $x\\ne 0$, the value $v(x)$ lies in $\\Gamma$. The displayed laws imply\n$v(1)=0$ and $v(x^{-1})=-v(x)$ for $x\\in K^\\times$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-value-group-of-a-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $V\\subseteq K$ be a valuation ring ([[def-valuation-ring]]). Its **value\ngroup** is the quotient abelian group\n$$\nK^\\times/V^\\times,\n$$\nwritten additively, where the group law is induced by multiplication in\n$K^\\times$.\n\nFor $x\\in K^\\times$, write $\\overline x$ for its class in $K^\\times/V^\\times$.\nThe intended order is\n$$\n\\overline x\\le\\overline y \\Longleftrightarrow y/x\\in V.\n$$\nThe next theorem checks that this order is well defined, total, and\ntranslation-invariant.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The order relation of [L2] is well defined on cosets: if $x'=ux$ and $y'=vy$ with $u,v\\in V^\\times$, then $y'/x'=(v/u)(y/x)$, and [A1] shows that $y'/x'\\in V$ exactly when $y/x\\in V$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The order is reflexive because $x/x=1\\in V$. It is antisymmetric because if $\\overline x\\le\\overline y$ and $\\overline y\\le\\overline x$, then both $y/x$ and $x/y$ lie in $V$, so $y/x$ is a unit of $V$. Hence $x$ and $y$ represent the same coset in $\\Gamma$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The order is transitive because $y/x\\in V$ and $z/y\\in V$ imply $z/x=(z/y)(y/x)\\in V$. It is total because $V$ is a valuation ring: for any $x,y\\in K^\\times$, the quotient $y/x$ either lies in $V$ or has inverse $x/y$ in $V$. It is translation-invariant because $\\overline x+\\overline z\\le\\overline y+\\overline z$ is equivalent to $(yz)/(xz)=y/x\\in V$. Thus $\\Gamma$ is a totally ordered abelian group.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $v(0)=\\infty$ and $v(x)=\\overline x$ for $x\\ne0$. Then $v(x)=\\infty$ exactly when $x=0$, and for $x,y\\ne0$ one has $v(xy)=\\overline{xy}=\\overline x+\\overline y=v(x)+v(y)$. If $x+y=0$, then $v(x+y)=\\infty\\ge\\min\\{v(x),v(y)\\}$. Otherwise, after swapping $x$ and $y$ if needed, step 1.3 gives $v(x)\\le v(y)$, so $y/x\\in V$ and $x+y=x(1+y/x)$ with $1+y/x\\in V$; hence $v(x+y)\\ge v(x)=\\min\\{v(x),v(y)\\}$. Therefore $v$ satisfies the valuation axioms of [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The nonnegative locus of $v$ is exactly $V$: for $x\\in K^\\times$, the condition $0\\le v(x)$ means $\\overline 1\\le\\overline x$, which by [L2] is equivalent to $x\\in V$. Since $0\\in V$ as well, the valuation ring of $v$ is precisely $V$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the quotient order on K^times/V^times must be representative-independent, total, and translation-invariant, and the resulting valuation must recover V exactly. Steps 1.1-3.1 check coset independence, the x+y=0 branch of the valuation axiom, and the nonnegative locus 0<=v(x) iff x in V, so the reconstruction is sound."
+      }
+    },
+    "thm-valuation-ring-is-integrally-closed": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof studies one integral element x, not an empty family of coefficients or roots."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The integral-element argument does not need a separate x=0 branch; the contradiction proof handles only the nontrivial outside-the-ring case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 reaches the contradiction by forcing 1 into the maximal ideal."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case arises beyond the ambient subring-of-a-field hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered-chain or endpoint split in the monic-equation argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The monic equation is supplied by the integrality hypothesis; no further existential choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is one-directional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is one-directional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-integral-closure-and-integrally-closed-domain",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a domain and let $A\\to B$ be a homomorphism into a commutative ring. The **integral closure of $A$ in $B$** is the set of elements of $B$ integral over $A$. When $K$ is a field extension of the field of fractions $\\operatorname{Frac}(A)$ of [[def-field-of-fractions]], the integral closure of $A$ in $K$ is often denoted $\\overline A$.\n\nThe domain $A$ is **integrally closed** when every element of $\\operatorname{Frac}(A)$ integral over $A$ already lies in $A$. Thus an integrally closed domain is one whose field of fractions contains no new elements integral over it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field. A subring $V\\subseteq K$ is a **valuation ring of $K$** if\nfor every $x\\in K^\\times$ at least one of $x$ and $x^{-1}$ belongs to $V$.\n\nThus a valuation ring decides each nonzero element of the ambient field by\nmembership: either the element itself is in the ring, or its inverse is.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-valuation-ring-is-local",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a valuation ring. Then the nonunits of $V$ form an ideal. That ideal\nis the unique maximal ideal of $V$, so $V$ is a local ring.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $x$ be an element of the field of fractions of $V$ that is integral over $V$. By [A1], regard $x$ as an element of $K$. If $x\\notin V$, then [F1] gives $x^{-1}\\in V$. This element is not a unit of $V$, because a unit inverse would put $x$ back in $V$. Hence [L2] places $x^{-1}$ in the maximal ideal $\\mathfrak m$ of $V$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose a monic equation $x^n+a_{n-1}x^{n-1}+\\cdots+a_0=0$ with $a_i\\in V$. Multiplying by $x^{-n}$ gives $1+a_{n-1}x^{-1}+\\cdots+a_0x^{-n}=0$. Since $x^{-1}\\in\\mathfrak m$ and $\\mathfrak m$ is an ideal, every term except $1$ lies in $\\mathfrak m$. Therefore $1\\in\\mathfrak m$, contradicting maximality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So $x\\in V$. By [L1], this proves that $V$ is integrally closed; by [A1], it is also a domain.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "A1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: an integral fraction x notin V must force 1 into the maximal ideal after dividing a monic equation by x^n. Steps 1.1-3.1 place x^{-1} in the maximal ideal, show every remaining term lies there, and derive the contradiction correctly."
+      }
+    },
+    "thm-dvr-element-normal-form": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a single nonzero fraction and has no empty-support parameter."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is explicitly restricted to nonzero elements of the fraction field."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the unit boundary v(u)=0 and the uniformiser boundary v(pi)=1 in the factorisation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate factorisation case remains once x is assumed nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The exponent n ranges in Z without endpoint cases in the proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof defines u from x and pi explicitly; no arbitrary witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and uniqueness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and uniqueness, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniformising-parameter",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a discrete valuation ring with discrete valuation $v$ and maximal\nideal $\\mathfrak m$. A **uniformising parameter** or **uniformiser** is an\nelement $\\pi\\in V$ with\n$$\nv(\\pi)=1.\n$$\n\nThis is equivalent to requiring that $\\pi$ generate the maximal ideal\n$\\mathfrak m$. Indeed, if $v(\\pi)=1$ and $x\\in\\mathfrak m$ is nonzero, then\n$v(x)\\ge1$, so $v(x/\\pi)\\ge0$ and therefore $x\\in(\\pi)$. Conversely, if\n$\\mathfrak m=(\\pi)$ and $v(\\pi)\\ge2$, then surjectivity of the valuation gives\nan element $y$ with $v(y)=1$, and $y\\in\\mathfrak m=(\\pi)$ would force\n$1=v(y)\\ge v(\\pi)\\ge2$, impossible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discrete-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field and let $v$ be a discrete valuation on $K$\n([[def-discrete-valuation]]). Its **valuation ring** is\n$$\nV_v:=\\{x\\in K:v(x)\\ge 0\\}.\n$$\nThis is a valuation ring in the sense of [[def-valuation-ring]].\n\nA **discrete valuation ring** (DVR) is a subring $V\\subseteq K$ of the form\n$V=V_v$ for some discrete valuation $v$ on $K$. Because $v$ is surjective,\nthere is an element of value $1$, so $V$ has a nonunit and is therefore not a\nfield.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $x\\in K^\\times$ and put $n:=v(x)\\in\\mathbb Z$. Since $v(\\pi)=1$ by [F1], one has $v(x\\pi^{-n})=v(x)-n\\,v(\\pi)=0$. Setting $u:=x\\pi^{-n}$, [F2] gives $u\\in V$ and $u^{-1}\\in V$, hence $u\\in V^\\times$. Therefore $x=u\\pi^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose also that $x=u'\\pi^m$ with $u'\\in V^\\times$ and $m\\in\\mathbb Z$. Applying $v$ gives $n=v(x)=v(u)+n=v(u')+m=m$ because units have valuation $0$. Then $u=x\\pi^{-n}=x\\pi^{-m}=u'$. So the expression is unique.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: negative exponents and uniqueness must both be controlled by the discrete valuation. Steps 1.1-2.1 set n=v(x), prove u=x pi^{-n} is a unit because v(u)=0, and recover n=m from valuation additivity in the comparison branch."
+      }
+    },
+    "thm-ideals-in-a-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about one nonzero ideal, not an empty ideal family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim is explicitly for nonzero ideals; the zero ideal is outside the stated classification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the unit-ideal boundary n=0 when the minimal valuation is 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No extra collapsed case occurs beyond the excluded zero ideal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The valuation minimum is taken in N, but no first-versus-last index split appears beyond that minimum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses an element of least valuation from the nonempty ideal."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a classification statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a classification statement, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dvr-element-normal-form",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with fraction field $K$, let $v$ be its\ndiscrete valuation, and let $\\pi\\in V$ be a uniformiser. Then every nonzero\nelement $x\\in K^\\times$ has a unique expression\n$$\nx=u\\pi^n\n$$\nwith $u\\in V^\\times$ and $n\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-uniformising-parameter",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a discrete valuation ring with discrete valuation $v$ and maximal\nideal $\\mathfrak m$. A **uniformising parameter** or **uniformiser** is an\nelement $\\pi\\in V$ with\n$$\nv(\\pi)=1.\n$$\n\nThis is equivalent to requiring that $\\pi$ generate the maximal ideal\n$\\mathfrak m$. Indeed, if $v(\\pi)=1$ and $x\\in\\mathfrak m$ is nonzero, then\n$v(x)\\ge1$, so $v(x/\\pi)\\ge0$ and therefore $x\\in(\\pi)$. Conversely, if\n$\\mathfrak m=(\\pi)$ and $v(\\pi)\\ge2$, then surjectivity of the valuation gives\nan element $y$ with $v(y)=1$, and $y\\in\\mathfrak m=(\\pi)$ would force\n$1=v(y)\\ge v(\\pi)\\ge2$, impossible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $I\\ne0$ be an ideal of $V$. Because $I\\subseteq V$, every nonzero element of $I$ has valuation in $\\mathbb Z_{\\ge0}$. Choose $x\\in I\\setminus\\{0\\}$ with minimal valuation $n$. By [L1], $x=u\\pi^n$ for a unit $u$, so $\\pi^n=u^{-1}x\\in I$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $y\\in I$ is nonzero, then [L1] gives $y=u'\\pi^m$ for some unit $u'$ and $m\\ge0$. Minimality of $n$ yields $m\\ge n$, so $y=u'\\pi^{m-n}\\pi^n\\in(\\pi^n)$. Thus $I\\subseteq(\\pi^n)$, while step 1.1 gave $(\\pi^n)\\subseteq I$. Hence $I=(\\pi^n)$. Since [F1] gives $\\mathfrak m=(\\pi)$, this is also $\\mathfrak m^n$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $(\\pi^n)=(\\pi^m)$, then $\\pi^n\\in(\\pi^m)$ and $\\pi^m\\in(\\pi^n)$, so $n\\ge m$ and $m\\ge n$. Therefore $n=m$, and the exponent is unique.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: choosing a least valuation in a nonzero ideal and proving uniqueness of the exponent uses the order on Z_{>=0}. Steps 1.1-3.1 choose the minimal valuation, show every other element has exponent at least n, and then compare two principal powers both ways to force n=m."
+      }
+    },
+    "cor-prime-ideals-and-dimension-of-a-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary computes the prime spectrum of one DVR, not an empty spectrum family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the zero-prime boundary by recording that (0) is prime in the domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the dimension from the unique strict chain of length 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The field case is already excluded by the DVR hypothesis, so no extra degenerate branch remains."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies both ends of the only strict prime chain, from (0) up to the maximal ideal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a nonzero element from a nonzero prime ideal to start the argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not written as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not written as an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-krull-dimension-of-a-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a nonzero commutative ring. A **strict chain of prime ideals of length $n$** is a sequence\n$$\n\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_n\n$$\nof prime ideals of $R$.\n\nThe **Krull dimension** of $R$ is the supremum of all integers $n\\ge 0$ for which such a chain exists. This supremum is allowed to be infinite.\n\nOn this page the zero ring is left outside the definition so that later chain statements do not hide that degenerate boundary.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\mathfrak p$ be a nonzero prime ideal of $V$. Choose $0\\ne x\\in\\mathfrak p$. By [L1], $x=u\\pi^n$ for some unit $u$ and some $n\\ge1$, so $\\pi^n\\in\\mathfrak p$. Since $\\mathfrak p$ is prime, $\\pi\\in\\mathfrak p$. Therefore $\\mathfrak m=(\\pi)\\subseteq\\mathfrak p$, and maximality of $\\mathfrak m$ forces $\\mathfrak p=\\mathfrak m$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], $(0)$ is prime, and step 1.1 shows there are no other nonzero primes besides $\\mathfrak m$. Therefore the prime spectrum has exactly the strict chain $(0)\\subsetneq\\mathfrak m$. Its length is $1$, and no longer chain exists. Hence [F1] gives $\\dim V=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ]
+    },
+    "thm-equivalent-characterisations-of-a-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares four structural conditions on one fixed nonfield domain, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-parameter branch appears; the proof works with nonzero maximal-ideal and fraction-field data fixed by hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 uses the valuation normalisation v(pi)=1, and step 1.3 uses dimension 1 exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 excludes the field collapse by showing the maximal ideal is nonzero, and step 1.3 treats the one-dimensional local case directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Although dimension and chains appear, the proof does not split into separate first-versus-last index endpoint arguments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 3.2, 4.2, and 5.1 make the genuine witness choices from nonzero ideals and minimal powers that the written proof uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 records the forward equivalence closure using steps 1.1, 1.2, 3.1, and 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 records the reverse closure, with steps 4.1 and 5.1 returning to condition 1 and condition 4."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-local-ring",
+          "source_section": "Definition",
+          "quote": "A **local ring** is a nonzero commutative ring $R$ with exactly one maximal ideal. That ideal is usually denoted $\\mathfrak m_R$ or simply $\\mathfrak m$. The quotient $R/\\mathfrak m$, which is a field, is the **residue field** of the local ring.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-noetherian-ring-ideal-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. The following are equivalent.\n\n1. $R$ is Noetherian ([[def-noetherian-ring]]).\n2. Every ideal of $R$ is finitely generated: for every ideal $\\mathfrak a$ there\n   are finitely many $a_1,\\ldots,a_n\\in\\mathfrak a$, with $n\\in\\mathbb N$, such\n   that $\\mathfrak a=(a_1,\\ldots,a_n)$.\n3. **Ascending chain condition.** Every chain of ideals\n   $\\mathfrak a_0\\subseteq\\mathfrak a_1\\subseteq\\mathfrak a_2\\subseteq\\cdots$\n   indexed by $\\mathbb N$ stabilises: there is $N\\in\\mathbb N$ with\n   $\\mathfrak a_n=\\mathfrak a_N$ for every $n\\ge N$.\n4. **Maximal condition.** Every nonempty set of ideals of $R$ has a maximal\n   member with respect to inclusion.\n\nThe implication from the ascending chain condition to the maximal condition uses\ndependent choice; the remaining implications are choice-free. The same\nattribution is carried by\n[[thm-equivalent-characterizations-of-noetherian-modules]], from which this\nstatement is obtained.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-principal-ideal-domain",
+          "source_section": "Definition",
+          "quote": "An integral domain $R$ is a **principal ideal domain** (PID) if every ideal\n$I\\mathrel{\\trianglelefteq}R$ is principal: there is an $a\\in R$ with $I=(a)$.\n\nThe domain hypothesis is part of the term. A ring in which all ideals are\nprincipal but which has zero divisors is not called a PID here.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-closure-and-integrally-closed-domain",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a domain and let $A\\to B$ be a homomorphism into a commutative ring. The **integral closure of $A$ in $B$** is the set of elements of $B$ integral over $A$. When $K$ is a field extension of the field of fractions $\\operatorname{Frac}(A)$ of [[def-field-of-fractions]], the integral closure of $A$ in $K$ is often denoted $\\overline A$.\n\nThe domain $A$ is **integrally closed** when every element of $\\operatorname{Frac}(A)$ integral over $A$ already lies in $A$. Thus an integrally closed domain is one whose field of fractions contains no new elements integral over it.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-valuation-ring-is-integrally-closed",
+          "source_section": "Statement",
+          "quote": "Every valuation ring is an integrally closed domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-valuation-ring-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a domain with fraction field $K$. The following are equivalent.\n\n1. $V$ is a valuation ring of $K$.\n2. For every $a,b\\in V$, one of $a$ and $b$ divides the other in $V$.\n3. The ideals of $V$ are linearly ordered by inclusion.\n\nWhen these conditions hold, every finitely generated ideal of $V$ is principal.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-valuation-ring-is-local",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a valuation ring. Then the nonunits of $V$ form an ideal. That ideal\nis the unique maximal ideal of $V$, so $V$ is a local ring.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-prime-ideals-and-dimension-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m$. Then the\nonly prime ideals of $V$ are $(0)$ and $\\mathfrak m$. In particular,\n$$\n\\dim V=1.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-noetherian-ring-quotients-and-localisations",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then\n\n1. $R/I$ is Noetherian for every ideal $I$ of $R$\n   ([[def-quotient-ring]]), and\n2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$\n   ([[def-multiplicative-subset-and-localisation]]).\n\nBoth cases include their degenerate instances: $I=R$ makes $R/I$ the zero ring,\nand $0\\in S$ makes $S^{-1}R$ the zero ring, and the zero ring is Noetherian.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-nilradical-of-a-noetherian-ring-is-nilpotent",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then its nilradical $\\operatorname{Nil}(R)$ is a nilpotent ideal: there exists an integer $N\\ge 1$ such that $\\operatorname{Nil}(R)^N=(0)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-adjugate-identity-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "For a commutative ring $R$, $n\\geq1$, and $A\\in M_n(R)$,\n\n$$A\\operatorname{adj}(A) =\\operatorname{adj}(A)A =\\det(A)I_n.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-krull-dimension-of-a-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a nonzero commutative ring. A **strict chain of prime ideals of length $n$** is a sequence\n$$\n\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_n\n$$\nof prime ideals of $R$.\n\nThe **Krull dimension** of $R$ is the supremum of all integers $n\\ge 0$ for which such a chain exists. This supremum is allowed to be infinite.\n\nOn this page the zero ring is left outside the definition so that later chain statements do not hide that degenerate boundary.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume condition 1. Then [L3] makes $R$ local. By [L4], every ideal of $R$ is principal, so [F3] shows that $R$ is a PID; in particular it is condition 4. Because every ideal is principal, [F2] makes $R$ Noetherian, so condition 2 holds as well. By [L1] and [L5], $R$ is integrally closed and one-dimensional, so condition 3 also holds.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "L1",
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume condition 2. By [L3], the ring is local with maximal ideal $\\mathfrak m$. Because $R$ is not a field, $\\mathfrak m\\ne0$. By [F2], every ideal of $R$ is finitely generated, so choose generators $a_1,\\ldots,a_r$ of $\\mathfrak m$. By [L2], one of them divides all the others; rename it $\\pi$. Then $\\mathfrak m=(\\pi)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "L2",
+            "L3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume condition 3. Let $\\mathfrak m$ be the unique maximal ideal. It is nonzero because $R$ is not a field. Choose $0\\ne x\\in\\mathfrak m$. The quotient $R/xR$ is Noetherian by [L6]. Every prime ideal of $R$ containing $xR$ is nonzero, hence equals $\\mathfrak m$ because $\\dim R=1$. Therefore the nilradical of $R/xR$ is $\\mathfrak m/xR$, so [L7] yields an integer $n\\ge1$ with $\\mathfrak m^n\\subseteq xR$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F5",
+            "L6",
+            "L7",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Assume condition 4. Then the ring is local with nonzero maximal ideal $\\mathfrak m=(\\pi)$. Because every ideal is principal, [F2] makes $R$ Noetherian. Every element outside $\\mathfrak m$ is a unit: if $x\\notin\\mathfrak m$, then $(x)$ is not contained in the unique maximal ideal, so $(x)=R$. Hence every nonunit is a multiple of $\\pi$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the situations of steps 1.2 and 1.4, the ring is a Noetherian local domain with nonzero principal maximal ideal $\\mathfrak m=(\\pi)$. Let $0\\ne x\\in R$. If $x$ is not a unit, the maximal-ideal description gives $x=\\pi x_1$. If $x_1$ is not a unit, write $x_1=\\pi x_2$, and continue. This process stops, for otherwise $(x)\\subsetneq(x_1)\\subsetneq(x_2)\\subsetneq\\cdots$ would be a strict ascending chain of ideals, contradicting Noetherianity. Thus every nonzero element has the form $u\\pi^n$ with $u$ a unit and $n\\ge0$. If $u\\pi^n=u'\\pi^m$ with units $u,u'$, then $n=m$, for otherwise a positive power of the nonunit $\\pi$ would equal a unit.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the same situations, every nonzero ideal $I$ of $R$ is $(\\pi^n)$ for a unique integer $n\\ge0$: choose $0\\ne x\\in I$ whose exponent in step 2.1 is minimal, say $x=u\\pi^n$. Then $\\pi^n=u^{-1}x\\in I$. For any nonzero $y\\in I$, write $y=u'\\pi^m$ by step 2.1; minimality gives $m\\ge n$, so $y\\in(\\pi^n)$. Hence $I=(\\pi^n)$. Therefore step 1.2 already yields condition 4.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Under condition 4, let $x=a/b\\in K^\\times$ with $a,b\\in R\\setminus\\{0\\}$. By step 2.1, write $a=u\\pi^m$ and $b=v\\pi^n$. Then $x=(uv^{-1})\\pi^{m-n}$. If $m\\ge n$, then $x\\in R$; if $m<n$, then $x^{-1}\\in R$. Thus $R$ is a valuation ring, and step 1.4 already makes it Noetherian. Therefore condition 2 holds.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Return to condition 3. Choose $n\\ge1$ minimal with $\\mathfrak m^n\\subseteq xR$. If $n=1$, then $\\mathfrak m=(x)$, so steps 1.3 and 3.1 give condition 4. Suppose instead that $n>1$, and choose $y\\in\\mathfrak m^{n-1}\\setminus xR$. Then $y\\mathfrak m\\subseteq\\mathfrak m^n\\subseteq xR$, so $z:=y/x\\in K$ satisfies $z\\mathfrak m\\subseteq R$ while $z\\notin R$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.3",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Under condition 4, define $v:K\\to\\mathbb Z\\cup\\{\\infty\\}$ by $v(0)=\\infty$ and $v(x)=m-n$ when $x=(uv^{-1})\\pi^{m-n}$ as in step 3.2. The uniqueness part of step 2.1 makes this well defined. Multiplicativity is immediate from exponents. If $v(x)\\le v(y)$, write $x=u\\pi^m$ and $y=u'\\pi^n$ with $m\\le n$; then $x+y=\\pi^m(u+u'\\pi^{n-m})$, and the bracket lies in $R$, so $v(x+y)\\ge m=\\min\\{v(x),v(y)\\}$. Because $v(\\pi)=1$, this valuation is surjective, and its nonnegative locus is exactly $R$. Therefore condition 1 holds.",
+          "step": "4.2",
+          "inputs": [
+            "step 2.1",
+            "algebra",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Still under condition 3, suppose also that $z\\mathfrak m\\subseteq\\mathfrak m$. Because $R$ is Noetherian, [F2] lets us choose generators $b_1,\\ldots,b_r$ of $\\mathfrak m$. Write $zb_j=\\sum_{i=1}^r c_{ij}b_i$ with $c_{ij}\\in R$. In matrix form this is $(zI_r-C)\\mathbf b=0$. By [L8], $\\det(zI_r-C)\\mathbf b=0$. Choose an index $j$ with $b_j\\ne0$; since $R$ is a domain, the equality $\\det(zI_r-C)b_j=0$ forces $\\det(zI_r-C)=0$. This is a monic polynomial equation for $z$ with coefficients in $R$, so $z$ is integral over $R$. Because $z\\in K$ and condition 3 says $R$ is integrally closed, [F4] then forces $z\\in R$, a contradiction. Hence $z\\mathfrak m\\nsubseteq\\mathfrak m$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "L8",
+            "step 4.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "By step 5.1, choose $a\\in\\mathfrak m$ with $az\\notin\\mathfrak m$. Since $z\\mathfrak m\\subseteq R$, the element $u:=az$ lies in $R$. Being outside the maximal ideal, $u$ is a unit. For every $b\\in\\mathfrak m$, the element $zb$ lies in $R$, so $b=u^{-1}a(zb)\\in aR$. Thus $\\mathfrak m\\subseteq aR\\subseteq\\mathfrak m$, and $\\mathfrak m=aR$ is principal. Together with step 1.3, step 3.1 now gives condition 4.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Step 1.1 proves $(1)\\Rightarrow(2),(1)\\Rightarrow(3),(1)\\Rightarrow(4)$; steps 1.2 and 3.1 prove $(2)\\Rightarrow(4)$; step 3.2 proves $(4)\\Rightarrow(2)$; step 4.2 proves $(4)\\Rightarrow(1)$; and steps 1.3 to 6.1 prove $(3)\\Rightarrow(4)$. Therefore all four conditions are equivalent.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "step 3.2",
+            "step 4.2",
+            "step 6.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the one-dimensional Noetherian local normal branch must produce a principal maximal ideal without circularity, and the implication summary must cite that step exactly. Steps 4.1-6.1 run the determinant-trick contradiction to force a unit az outside m, derive m=aR, and step 7.1 now correctly records steps 1.3-6.1 for (3)=>(4)."
+      }
+    },
+    "thm-noetherian-valuation-ring-characterisation": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem asks about one valuation ring, not an empty set of rings."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued numerical parameter occurs in the proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The argument distinguishes fields from DVRs, not a special value-1 branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the degenerate field case separately from the DVR case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or indexed-endpoint reasoning occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct case split and makes no existential choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the forward implication from Noetherian valuation ring to field-or-DVR."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the reverse implication from field-or-DVR to Noetherian."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-noetherian-ring",
+          "source_section": "Definition",
+          "quote": "A unital ring $R$ is **left Noetherian** when its left regular module ${}_R R$ is Noetherian, and **right Noetherian** when the right regular module $R_R$ is Noetherian. Unqualified “Noetherian ring” means left Noetherian here; the side is stated whenever both notions occur.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-valuation-ring-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a domain with fraction field $K$. The following are equivalent.\n\n1. $V$ is a valuation ring of $K$.\n2. For every $a,b\\in V$, one of $a$ and $b$ divides the other in $V$.\n3. The ideals of $V$ are linearly ordered by inclusion.\n\nWhen these conditions hold, every finitely generated ideal of $V$ is principal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonfield domain. The following are equivalent.\n\n1. $R$ is a discrete valuation ring.\n2. $R$ is a Noetherian valuation ring.\n3. $R$ is a one-dimensional Noetherian local integrally closed domain.\n4. $R$ is a local principal ideal domain with nonzero maximal ideal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $V$ is Noetherian. A valuation ring is a domain, so if $V$ is not a field then [L2] applies and shows that $V$ is a DVR. Thus a Noetherian valuation ring is a field or a DVR.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, every field is Noetherian because its only ideals are $(0)$ and the whole ring. If $V$ is a DVR, then [L2] applied in the forward direction shows that it is a Noetherian valuation ring. Hence $V$ is Noetherian exactly in the two stated cases.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "thm-dvr-ideal-and-module-length": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem computes lengths of explicit quotient modules, not an empty filtration family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the base case n=0 by identifying V/(1) with the zero module."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 also handles the case n=1 by proving V/(pi) is simple."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement already separates the zero-module base case from the positive powers; no further degeneration appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 runs the induction from the initial quotient V/(1) up through V/(pi^n)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from an arbitrary nonempty set; the filtration and short exact sequences are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dvr-element-normal-form",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with fraction field $K$, let $v$ be its\ndiscrete valuation, and let $\\pi\\in V$ be a uniformiser. Then every nonzero\nelement $x\\in K^\\times$ has a unique expression\n$$\nx=u\\pi^n\n$$\nwith $u\\in V^\\times$ and $n\\in\\mathbb Z$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-composition-series-and-length-of-a-module",
+          "source_section": "Definition",
+          "quote": "A **composition series** of a left $R$-module $M$ is a finite chain $$0=M_0<M_1<\\cdots<M_n=M$$ whose factors $M_i/M_{i-1}$ are simple. If such a series exists, the **length** $\\ell_R(M)$ is its number $n$ of factors; [[thm-jordan-holder-theorem-for-modules]] proves independence of the chosen series. The zero module has the empty series and length $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-length-is-additive-in-short-exact-sequences",
+          "source_section": "Statement",
+          "quote": "For a short exact sequence $0\\to N\\to M\\to Q\\to0$, the module $M$ has finite length if and only if $N$ and $Q$ do, and then $$\\ell_R(M)=\\ell_R(N)+\\ell_R(Q).$$ See [[thm-jordan-holder-theorem-for-modules]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The case $n=0$ is $V/(1)=0$, whose length is $0$ by [F1]. For $n=1$, the ideals of $V/(\\pi)$ correspond to the ideals of $V$ containing $(\\pi)$. By [L2], those are only $(\\pi)$ and $V$, so $V/(\\pi)$ is simple and has length $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $n\\ge1$ there is a short exact sequence $0\\to(\\pi^n)/(\\pi^{n+1})\\to V/(\\pi^{n+1})\\to V/(\\pi^n)\\to0$. Multiplication by $\\pi^n$ induces an isomorphism $V/(\\pi)\\cong(\\pi^n)/(\\pi^{n+1})$, so step 1.1 gives $\\ell_V((\\pi^n)/(\\pi^{n+1}))=1$. Therefore [L3] yields $\\ell_V(V/(\\pi^{n+1}))=\\ell_V(V/(\\pi^n))+1$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By induction on $n$, step 1.1 and step 2.1 give $\\ell_V(V/(\\pi^n))=n$ for every $n\\ge0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $x\\in V$ be nonzero, and write $x=u\\pi^n$ as in [L1]. Multiplication by the unit $u^{-1}$ identifies the ideals $(x)$ and $(\\pi^n)$, so $V/(x)\\cong V/(\\pi^n)$ as $V$-modules. Hence $\\ell_V(V/(x))=\\ell_V(V/(\\pi^n))=n$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the base cases n=0 and n=1 and the quotient identification (pi^n)/(pi^{n+1}) ~= V/(pi) must all be explicit before the induction. Steps 1.1-4.1 handle the zero module, the simple residue-field case, the short exact sequence increment, and the unit-times-uniformiser reduction for V/(x)."
+      }
+    },
+    "thm-height-one-localisation-of-normal-noetherian-domain-is-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem localises at one chosen prime, not an empty set of primes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 writes each denominator $s_i$ outside the prime ideal $\\mathfrak p$; since $0\\in\\mathfrak p$, every such denominator is nonzero, so the localisation argument has no hidden zero-denominator branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 spends the height-one boundary exactly by identifying dim(R_p)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 rules out the degenerate field case by showing the maximal ideal of the localisation is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint split on a chain or filtration is used beyond the fixed height computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 chooses a nonzero element of the height-one prime to prove the localisation is not a field."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-directional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-height-of-a-prime-ideal",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $\\mathfrak p\\in\\operatorname{Spec}(R)$. The **height** of $\\mathfrak p$ is the Krull dimension of the local ring $R_{\\mathfrak p}$:\n$$\n\\operatorname{ht}(\\mathfrak p)=\\dim(R_{\\mathfrak p}).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-localisation-at-a-prime-ideal",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $\\mathfrak p\\subset R$ be a prime ideal. Since $1\\notin\\mathfrak p$ and the product of two elements outside $\\mathfrak p$ remains outside $\\mathfrak p$, the complement $R\\setminus\\mathfrak p$ is multiplicative. The **localisation of $R$ at $\\mathfrak p$** is\n$$ R_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}R. $$\nIts elements are fractions $r/s$ with $s\\notin\\mathfrak p$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-localisation-at-a-prime-is-local",
+          "source_section": "Statement",
+          "quote": "Let $\\mathfrak p$ be a prime ideal of a commutative ring $R$. Then $R_{\\mathfrak p}$ is a nonzero local ring. Its unique maximal ideal is\n$$ \\mathfrak pR_{\\mathfrak p}=\\{r/s:r\\in\\mathfrak p,\\ s\\notin\\mathfrak p\\}, $$\nand its units are exactly the fractions $r/s$ with $r\\notin\\mathfrak p$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-closure-and-integrally-closed-domain",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a domain and let $A\\to B$ be a homomorphism into a commutative ring. The **integral closure of $A$ in $B$** is the set of elements of $B$ integral over $A$. When $K$ is a field extension of the field of fractions $\\operatorname{Frac}(A)$ of [[def-field-of-fractions]], the integral closure of $A$ in $K$ is often denoted $\\overline A$.\n\nThe domain $A$ is **integrally closed** when every element of $\\operatorname{Frac}(A)$ integral over $A$ already lies in $A$. Thus an integrally closed domain is one whose field of fractions contains no new elements integral over it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-noetherian-ring-quotients-and-localisations",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a Noetherian commutative ring. Then\n\n1. $R/I$ is Noetherian for every ideal $I$ of $R$\n   ([[def-quotient-ring]]), and\n2. $S^{-1}R$ is Noetherian for every multiplicative subset $S\\subseteq R$\n   ([[def-multiplicative-subset-and-localisation]]).\n\nBoth cases include their degenerate instances: $I=R$ makes $R/I$ the zero ring,\nand $0\\in S$ makes $S^{-1}R$ the zero ring, and the zero ring is Noetherian.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonfield domain. The following are equivalent.\n\n1. $R$ is a discrete valuation ring.\n2. $R$ is a Noetherian valuation ring.\n3. $R$ is a one-dimensional Noetherian local integrally closed domain.\n4. $R$ is a local principal ideal domain with nonzero maximal ideal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L3], the ring $R_{\\mathfrak p}$ is a Noetherian local domain. By [F1], its Krull dimension is $\\dim(R_{\\mathfrak p})=\\operatorname{ht}(\\mathfrak p)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The localisation remains integrally closed. Let $x$ lie in the fraction field of $R_{\\mathfrak p}$ and be integral over $R_{\\mathfrak p}$. Write a monic equation $x^n+\\frac{a_{n-1}}{s_{n-1}}x^{n-1}+\\cdots+\\frac{a_0}{s_0}=0$ with each $s_i\\notin\\mathfrak p$. Put $s=s_0\\cdots s_{n-1}$. Then $sx$ is integral over $R$, so [F3] gives $sx\\in R$. Since $s\\notin\\mathfrak p$, we conclude $x=(sx)/s\\in R_{\\mathfrak p}$. Thus $R_{\\mathfrak p}$ is integrally closed.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The maximal ideal of $R_{\\mathfrak p}$ is nonzero. Choose $0\\ne a\\in\\mathfrak p$. If $a/1=0$ in $R_{\\mathfrak p}$, then some $s\\notin\\mathfrak p$ satisfies $sa=0$, impossible in the domain $R$. Hence $a/1\\in\\mathfrak pR_{\\mathfrak p}$ is nonzero, so $R_{\\mathfrak p}$ is not a field.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1, 1.2, and 1.3 verify condition 3 of [L4] for the ring $R_{\\mathfrak p}$. Therefore $R_{\\mathfrak p}$ is a discrete valuation ring.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: localisation must preserve integral closedness and still leave a nonzero maximal ideal, especially because denominators lie outside p. Steps 1.2-1.3 clear denominators with s notin p, keep s nonzero automatically, and choose 0!=a in p to show R_p is not a field before invoking the DVR criterion."
+      }
+    },
+    "cor-dvr-is-a-pid": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns the ideal lattice of one DVR, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero ideal among the principal ideals of the domain."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special value-1 branch is detached from the uniform ideal argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The DVR hypothesis already excludes the only degenerate collapse to a field."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof does not run through an indexed chain or endpoint computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; the proof reads off principality from the prior theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-principal-ideal-domain",
+          "source_section": "Definition",
+          "quote": "An integral domain $R$ is a **principal ideal domain** (PID) if every ideal\n$I\\mathrel{\\trianglelefteq}R$ is principal: there is an $a\\in R$ with $I=(a)$.\n\nThe domain hypothesis is part of the term. A ring in which all ideals are\nprincipal but which has zero divisors is not called a PID here.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A discrete valuation ring is a domain. Its zero ideal is principal, and [L1] shows that every nonzero ideal is principal.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore every ideal of the domain $V$ is principal, so [F1] makes $V$ a principal ideal domain.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the zero ideal and the nonzero ideals must both be covered before applying the PID definition. Step 1.1 handles (0) separately and uses ideals-in-a-DVR for every nonzero ideal, so step 2.1 legitimately concludes every ideal is principal."
+      }
+    },
+    "ex-p-adic-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one prime p and one concrete localisation ring, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines v(0)=infinity as part of the concrete valuation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the normalisation boundary by recording v(p)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The prime p and the p-adic ring are fixed; there is no separate degenerate arithmetic case beyond that."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The valuation exponent n ranges over Z without a first-or-last-index split."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The p-power factorisation is constructed directly from numerator and denominator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is descriptive, not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is descriptive, not biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field and let $v$ be a discrete valuation on $K$\n([[def-discrete-valuation]]). Its **valuation ring** is\n$$\nV_v:=\\{x\\in K:v(x)\\ge 0\\}.\n$$\nThis is a valuation ring in the sense of [[def-valuation-ring]].\n\nA **discrete valuation ring** (DVR) is a subring $V\\subseteq K$ of the form\n$V=V_v$ for some discrete valuation $v$ on $K$. Because $v$ is surjective,\nthere is an element of value $1$, so $V$ has a nonunit and is therefore not a\nfield.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-dvr-element-normal-form",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with fraction field $K$, let $v$ be its\ndiscrete valuation, and let $\\pi\\in V$ be a uniformiser. Then every nonzero\nelement $x\\in K^\\times$ has a unique expression\n$$\nx=u\\pi^n\n$$\nwith $u\\in V^\\times$ and $n\\in\\mathbb Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every nonzero rational number can be written uniquely as $x=u\\,p^n$ with $n\\in\\mathbb Z$ and $u=a/b\\in\\mathbb Q^\\times$ having both $a$ and $b$ prime to $p$: factor all powers of $p$ from the numerator and denominator and collect the difference in the exponent $n$. Define $v(0)=\\infty$ and $v(x)=n$ for $x\\ne0$. Then $v(xy)=v(x)+v(y)$, the ultrametric inequality follows by factoring out the smaller power of $p$, and $v$ is surjective because $v(p)=1$. Its nonnegative locus is exactly $\\mathbb Z_{(p)}$, so [F1] makes $\\mathbb Z_{(p)}$ a DVR with uniformiser $p$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the units are exactly the elements of valuation $0$, namely the fractions with numerator and denominator both prime to $p$. By [L2], every nonzero ideal is generated by $p^n$ for a unique $n\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ]
+    },
+    "ex-localisation-of-a-pid-at-a-prime": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example localises one PID at one chosen nonzero prime ideal."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero-prime case is excluded in the statement and is not analysed here."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies pi/1 as a uniformiser, i.e. the valuation-one boundary in the localisation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 separately rules out the degenerate field case by proving pi/1 is not a unit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The repeated pi-divisibility argument has no first-versus-last endpoint split beyond eventual termination."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the factorisation is produced by repeated division by the fixed generator pi."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not phrased as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not phrased as an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-principal-ideal-domain",
+          "source_section": "Definition",
+          "quote": "An integral domain $R$ is a **principal ideal domain** (PID) if every ideal\n$I\\mathrel{\\trianglelefteq}R$ is principal: there is an $a\\in R$ with $I=(a)$.\n\nThe domain hypothesis is part of the term. A ring in which all ideals are\nprincipal but which has zero divisors is not called a PID here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-prime-and-maximal-ideals",
+          "source_section": "Definition",
+          "quote": "Prime ideals and maximal ideals in a commutative ring.\n\nLet $R$ be a commutative ring. A proper ideal $P\\subsetneq R$ is **prime** when\n$ab\\in P$ implies $a\\in P$ or $b\\in P$. A proper ideal $M\\subsetneq R$ is\n**maximal** when there is no proper ideal strictly between $M$ and $R$; equivalently,\nit is a maximal element of the poset of proper ideals ordered by inclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-localisation-at-a-prime-ideal",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $\\mathfrak p\\subset R$ be a prime ideal. Since $1\\notin\\mathfrak p$ and the product of two elements outside $\\mathfrak p$ remains outside $\\mathfrak p$, the complement $R\\setminus\\mathfrak p$ is multiplicative. The **localisation of $R$ at $\\mathfrak p$** is\n$$ R_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}R. $$\nIts elements are fractions $r/s$ with $s\\notin\\mathfrak p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-principal-ideal-domains-are-noetherian",
+          "source_section": "Statement",
+          "quote": "Every principal ideal domain is Noetherian.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonfield domain. The following are equivalent.\n\n1. $R$ is a discrete valuation ring.\n2. $R$ is a Noetherian valuation ring.\n3. $R$ is a one-dimensional Noetherian local integrally closed domain.\n4. $R$ is a local principal ideal domain with nonzero maximal ideal.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $a\\in R$ be nonzero. If $a\\in\\mathfrak p$, then $a=\\pi a_1$ because $\\mathfrak p=(\\pi)$. If $a_1\\in\\mathfrak p$, divide by $\\pi$ again, and continue. This process stops, for otherwise $(a)\\subsetneq(a_1)\\subsetneq(a_2)\\subsetneq\\cdots$ would be a strict ascending chain of principal ideals, contradicting [L1]. Thus $a=u\\pi^n b$ with $n\\ge0$, $u$ a unit of $R$, and $b\\notin\\mathfrak p$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every nonzero element of $R_{\\mathfrak p}$ is therefore $(a/s)=((ub)/s)(\\pi/1)^n$ with $s\\notin\\mathfrak p$ and $b\\notin\\mathfrak p$. Since both $b$ and $s$ are in the denominator set, $(ub)/s$ is a unit of $R_{\\mathfrak p}$. Hence $R_{\\mathfrak p}$ is local with nonzero maximal ideal generated by $\\pi/1$, and every ideal is principal by the same minimum-exponent argument as in a DVR.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The ring $R_{\\mathfrak p}$ is not a field because $\\pi/1$ lies in its maximal ideal and is not a unit. So [L2] applies and shows that $R_{\\mathfrak p}$ is a discrete valuation ring with uniformiser $\\pi/1$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ]
+    },
+    "ex-plane-curve-local-ring-not-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses one explicit cusp ring and one explicit local ring, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued degree or exponent boundary is separated in the written cusp argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 isolates the forbidden t-term, the degree-one monomial boundary that obstructs membership in k[t^2,t^3]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example already fixes the singular cusp local ring; there is no further degenerate ambient case to split off."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof does not involve interval or chain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen from a nonempty set; the element t is fixed from the start."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a negative conclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a negative conclusion, not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-localisation-at-a-prime-ideal",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring and let $\\mathfrak p\\subset R$ be a prime ideal. Since $1\\notin\\mathfrak p$ and the product of two elements outside $\\mathfrak p$ remains outside $\\mathfrak p$, the complement $R\\setminus\\mathfrak p$ is multiplicative. The **localisation of $R$ at $\\mathfrak p$** is\n$$ R_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}R. $$\nIts elements are fractions $r/s$ with $s\\notin\\mathfrak p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-equivalent-characterisations-of-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonfield domain. The following are equivalent.\n\n1. $R$ is a discrete valuation ring.\n2. $R$ is a Noetherian valuation ring.\n3. $R$ is a one-dimensional Noetherian local integrally closed domain.\n4. $R$ is a local principal ideal domain with nonzero maximal ideal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The element $t\\in k[t]$ is integral over $A_{\\mathfrak m}$ because it satisfies the monic equation $T^2-t^2=0$ with coefficient $t^2\\in A\\subseteq A_{\\mathfrak m}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The element $t$ does not belong to $A_{\\mathfrak m}$. Indeed, if $t=a/s$ with $a\\in A$ and $s\\in A\\setminus\\mathfrak m$, then $st=a\\in A$. Since $s\\notin\\mathfrak m$, its constant term is nonzero, so $s=c+t^2h(t)$ with $c\\in k^\\times$. Then $st=ct+t^3h(t)$. Every element of $A=k[t^2,t^3]$ is a $k$-linear combination of monomials $t^n$ with $n=0$ or $n\\ge2$, so no element of $A$ has a nonzero $t^1$ term. But $ct+t^3h(t)$ does, contradiction.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $A_{\\mathfrak m}$ contains an element of its fraction field integral over it that does not lie in the ring. By [L1], $A_{\\mathfrak m}$ is not a DVR.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the witness t must be integral over A_m yet excluded from the localisation by a concrete coefficient obstruction. Steps 1.1-3.1 use T^2-t^2=0 for integrality and show any denominator outside m has a nonzero constant term, forcing an impossible t-term in st."
+      }
+    },
+    "ex-rank-two-valuation-ring-not-dvr": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example builds one valuation from one ordered group, not an empty-support construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 extends the valuation by sending 0 to infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special value-1 subgroup case is singled out; non-discreteness comes from the whole rank-two group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 rules out the degenerate field case by producing the positive-value element t^(0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lexicographic order is used globally, not through a separate endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is explicit and chooses no witness from an arbitrary nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A rank-two valuation ring that is not a DVR: this example records one concrete valuation-ring computation, not the forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A rank-two valuation ring that is not a DVR: this example records one concrete valuation-ring computation, not the reverse direction of a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-totally-ordered-abelian-group",
+          "source_section": "Definition",
+          "quote": "A **totally ordered abelian group** is an abelian group $(\\Gamma,+,0)$ together\nwith a total order $\\le$ such that translation preserves the order:\n$$\n\\gamma\\le\\delta \\Longrightarrow \\gamma+\\eta\\le\\delta+\\eta\n$$\nfor all $\\gamma,\\delta,\\eta\\in\\Gamma$.\n\nThe positive cone is\n$$\n\\Gamma_{\\ge 0}:=\\{\\gamma\\in\\Gamma:\\gamma\\ge 0\\},\n$$\nand similarly $\\Gamma_{>0}$, $\\Gamma_{\\le 0}$, and $\\Gamma_{<0}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-valuation-on-a-field",
+          "source_section": "Definition",
+      "quote": "Let $K$ be a field and let $\\Gamma$ be a totally ordered abelian group\n([[def-totally-ordered-abelian-group]]). Adjoin a symbol $\\infty$ with\n$$\\gamma<\\infty,\\qquad \\gamma+\\infty=\\infty+\\gamma=\\infty,\\qquad \\infty+\\infty=\\infty.$$\nfor every $\\gamma\\in\\Gamma$.\n\nA **valuation on $K$ with value group in $\\Gamma$** is a map\n$$\nv:K\\to\\Gamma\\cup\\{\\infty\\}\n$$\nsuch that for all $x,y\\in K$,\n$$\nv(x)=\\infty \\Longleftrightarrow x=0,\n$$\n$$\nv(xy)=v(x)+v(y),\n$$\nand\n$$\nv(x+y)\\ge\\min\\{v(x),v(y)\\}.\n$$\n\nWhen $x\\ne 0$, the value $v(x)$ lies in $\\Gamma$. The displayed laws imply\n$v(1)=0$ and $v(x^{-1})=-v(x)$ for $x\\in K^\\times$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-noetherian-valuation-ring-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a valuation ring. Then $V$ is Noetherian if and only if $V$ is a\nfield or a discrete valuation ring.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the group algebra $k[t^\\Gamma]=\\{\\sum_{\\gamma\\in\\Gamma} a_\\gamma t^\\gamma : \\text{only finitely many }a_\\gamma\\ne0\\}$, and let $K$ be its fraction field. For a nonzero element $f=\\sum a_\\gamma t^\\gamma$, define $v(f)$ to be the smallest $\\gamma$ in its finite support. Because the order on $\\Gamma$ is translation-invariant by [F1], the product of the two lowest terms is the unique lowest term of a product, so $v(fg)=v(f)+v(g)$. For sums, the minimum support can only stay the same or move upward, so $v(f+g)\\ge\\min\\{v(f),v(g)\\}$. Extending by $v(f/g)=v(f)-v(g)$ and $v(0)=\\infty$ gives a valuation on $K$ in the sense of [F2], with value group all of $\\Gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $V:=\\{x\\in K:v(x)\\ge0\\}$. Then $V$ is a valuation ring and is not a field because $t^{(0,1)}$ has positive value. It is not a DVR, since its value group is $\\Gamma$ rather than $\\mathbb Z$: any cyclic subgroup of $\\Gamma$ is generated by one pair, so it cannot contain both $(1,0)$ and $(0,1)$. Hence [L1] implies that $V$ is not Noetherian.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "ex-nondiscrete-ordered-subgroup-valuation": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses one explicit ordered subgroup and one explicit group-algebra valuation, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 extends the concrete valuation by assigning infinity to 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 measures the least-positive obstruction against the element 1 in the subgroup."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The subgroup is fixed and noncyclic in the required sense; there is no additional degenerate case to peel off."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses order comparisons in the subgroup, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The contradiction argument uses the explicit integer ceil(1/epsilon), not a witness chosen from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not stated as an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-totally-ordered-abelian-group",
+          "source_section": "Definition",
+          "quote": "A **totally ordered abelian group** is an abelian group $(\\Gamma,+,0)$ together\nwith a total order $\\le$ such that translation preserves the order:\n$$\n\\gamma\\le\\delta \\Longrightarrow \\gamma+\\eta\\le\\delta+\\eta\n$$\nfor all $\\gamma,\\delta,\\eta\\in\\Gamma$.\n\nThe positive cone is\n$$\n\\Gamma_{\\ge 0}:=\\{\\gamma\\in\\Gamma:\\gamma\\ge 0\\},\n$$\nand similarly $\\Gamma_{>0}$, $\\Gamma_{\\le 0}$, and $\\Gamma_{<0}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-valuation-on-a-field",
+          "source_section": "Definition",
+      "quote": "Let $K$ be a field and let $\\Gamma$ be a totally ordered abelian group\n([[def-totally-ordered-abelian-group]]). Adjoin a symbol $\\infty$ with\n$$\\gamma<\\infty,\\qquad \\gamma+\\infty=\\infty+\\gamma=\\infty,\\qquad \\infty+\\infty=\\infty.$$\nfor every $\\gamma\\in\\Gamma$.\n\nA **valuation on $K$ with value group in $\\Gamma$** is a map\n$$\nv:K\\to\\Gamma\\cup\\{\\infty\\}\n$$\nsuch that for all $x,y\\in K$,\n$$\nv(x)=\\infty \\Longleftrightarrow x=0,\n$$\n$$\nv(xy)=v(x)+v(y),\n$$\nand\n$$\nv(x+y)\\ge\\min\\{v(x),v(y)\\}.\n$$\n\nWhen $x\\ne 0$, the value $v(x)$ lies in $\\Gamma$. The displayed laws imply\n$v(1)=0$ and $v(x^{-1})=-v(x)$ for $x\\in K^\\times$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-valuation-ring",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field. A subring $V\\subseteq K$ is a **valuation ring of $K$** if\nfor every $x\\in K^\\times$ at least one of $x$ and $x^{-1}$ belongs to $V$.\n\nThus a valuation ring decides each nonzero element of the ambient field by\nmembership: either the element itself is in the ring, or its inverse is.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "As in the previous example, form the group algebra $k[t^\\Gamma]$ and its fraction field $K$. For a nonzero finite sum $f=\\sum_{\\gamma\\in\\Gamma} a_\\gamma t^\\gamma$, let $v(f)$ be the least element of its support. The same minimum-support argument as before gives $v(fg)=v(f)+v(g)$ and $v(f+g)\\ge\\min\\{v(f),v(g)\\}$, so extending by $v(f/g)=v(f)-v(g)$ and $v(0)=\\infty$ yields a valuation on $K$ with value group $\\Gamma$. Its nonnegative locus is therefore a valuation ring.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ordered group $\\Gamma$ has no least positive element. Indeed, $0<\\sqrt2-1<1$, so any least positive element $\\varepsilon$ would satisfy $0<\\varepsilon<1$. Choose $n=\\lceil1/\\varepsilon\\rceil$, so $n>1$ and $0\\le n\\varepsilon-1<\\varepsilon$. Equality $n\\varepsilon-1=0$ would give $\\varepsilon=1/n$. But $1/n$ cannot lie in $\\Gamma$: if $1/n=a+b\\sqrt2$ with $a,b\\in\\mathbb Z$, then $nb\\sqrt2=1-na$ is rational, so $b=0$ and then $na=1$, impossible for $n>1$. Thus $0<n\\varepsilon-1<\\varepsilon$, contradicting minimality. Hence the valuation is not discrete.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the nondiscreteness witness must exclude the boundary case epsilon=1 before the ceiling argument. Step 2.1 now begins with 0<sqrt(2)-1<1, then uses n=ceil(1/epsilon) and the impossibility of 1/n in Z+Zsqrt(2) to produce a smaller positive element."
+      }
+    },
+    "ex-dvr-length-computation": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The filtration is explicit and nonempty because the statement starts at n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This example begins at n>=1 and does not detach the n=0 quotient as a separate case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 shows each successive quotient has length 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate quotient case appears beyond the stated filtration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 counts the filtration from its first nonzero factor up to V/(pi^n)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No existential witness is chosen; the filtration and quotient maps are fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "'Computing the length of $R/(\\pi^n)$': this example records one concrete valuation-ring computation, not the forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "'Computing the length of $R/(\\pi^n)$': this example records one concrete valuation-ring computation, not the reverse direction of a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniformising-parameter",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a discrete valuation ring with discrete valuation $v$ and maximal\nideal $\\mathfrak m$. A **uniformising parameter** or **uniformiser** is an\nelement $\\pi\\in V$ with\n$$\nv(\\pi)=1.\n$$\n\nThis is equivalent to requiring that $\\pi$ generate the maximal ideal\n$\\mathfrak m$. Indeed, if $v(\\pi)=1$ and $x\\in\\mathfrak m$ is nonzero, then\n$v(x)\\ge1$, so $v(x/\\pi)\\ge0$ and therefore $x\\in(\\pi)$. Conversely, if\n$\\mathfrak m=(\\pi)$ and $v(\\pi)\\ge2$, then surjectivity of the valuation gives\nan element $y$ with $v(y)=1$, and $y\\in\\mathfrak m=(\\pi)$ would force\n$1=v(y)\\ge v(\\pi)\\ge2$, impossible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-dvr-ideal-and-module-length",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with uniformiser $\\pi$. Then for every\ninteger $n\\ge0$,\n$$\n\\ell_V(V/(\\pi^n))=n.\n$$\nMore generally, if $x\\in V$ is nonzero and $x=u\\pi^n$ with $u$ a unit, then\n$$\n\\ell_V(V/(x))=n.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each successive quotient in the displayed filtration is generated by the class of $\\pi^i$, so multiplication by $\\pi^i$ identifies it with $V/(\\pi)$. Thus every factor has length $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Adding the $n$ successive factors recovers the quotient $V/(\\pi^n)$, and [L1] confirms that the total length is exactly $n$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the displayed filtration is only a composition series if each quotient really has length 1 and the count matches the theorem at n=1. Step 1.1 identifies each factor with V/(pi), and step 2.1 then matches the n successive factors with the length theorem."
+      }
+    },
+    "ex-uniformisers-and-dvr-ideal-arithmetic": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example compares two fixed uniformisers and two fixed powers, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the exponent-0 boundary in the formulas for sums and intersections of powers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the one-generator maximal-ideal boundary by comparing the two uniformisers."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further degenerate case arises once both elements are assumed to be uniformisers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The min and max formulas use exponent comparison, not a separate endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the unit relating the two uniformisers is derived directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not written as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not written as an iff."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniformising-parameter",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a discrete valuation ring with discrete valuation $v$ and maximal\nideal $\\mathfrak m$. A **uniformising parameter** or **uniformiser** is an\nelement $\\pi\\in V$ with\n$$\nv(\\pi)=1.\n$$\n\nThis is equivalent to requiring that $\\pi$ generate the maximal ideal\n$\\mathfrak m$. Indeed, if $v(\\pi)=1$ and $x\\in\\mathfrak m$ is nonzero, then\n$v(x)\\ge1$, so $v(x/\\pi)\\ge0$ and therefore $x\\in(\\pi)$. Conversely, if\n$\\mathfrak m=(\\pi)$ and $v(\\pi)\\ge2$, then surjectivity of the valuation gives\nan element $y$ with $v(y)=1$, and $y\\in\\mathfrak m=(\\pi)$ would force\n$1=v(y)\\ge v(\\pi)\\ge2$, impossible.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-ideals-in-a-dvr",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a discrete valuation ring with maximal ideal $\\mathfrak m=(\\pi)$,\nwhere $\\pi$ is a uniformiser. Then every nonzero ideal $I\\subseteq V$ is of the\nform\n$$\nI=(\\pi^n)=\\mathfrak m^n\n$$\nfor a unique integer $n\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], both $\\pi$ and $\\pi'$ generate the maximal ideal, so $(\\pi)=(\\pi')$. Hence $\\pi'\\in(\\pi)$, say $\\pi'=u\\pi$, and similarly $\\pi=v\\pi'$. Multiplying gives $\\pi=vu\\pi$, so $vu=1$ in the domain $V$ and $u$ is a unit.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sum $(\\pi^m)+(\\pi^n)$ is one of the two comparable ideals $(\\pi^m)$ and $(\\pi^n)$, namely the larger one, so [L1] makes it $(\\pi^{\\min\\{m,n\\}})$. Likewise the intersection is the smaller one, namely $(\\pi^{\\max\\{m,n\\}})$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    "ex-valuation-ring-ideals-linearly-ordered": {
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example analyses one explicitly defined ideal inside one explicit valuation ring, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes 0 in the displayed ideal and checks closure there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the cutoff value 1 in the nonprincipal ideal I={x:v(x)>1}."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The ideal is intentionally nonprincipal, so no extra degenerate principal case is left unresolved."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The order cut >1 is used globally; there is no separate endpoint branch beyond that threshold."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a value gamma with 1<gamma<v(a) from the no-least-positive property to witness nonprincipality."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not a biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-valuation-ring-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a domain with fraction field $K$. The following are equivalent.\n\n1. $V$ is a valuation ring of $K$.\n2. For every $a,b\\in V$, one of $a$ and $b$ divides the other in $V$.\n3. The ideals of $V$ are linearly ordered by inclusion.\n\nWhen these conditions hold, every finitely generated ideal of $V$ is principal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-nondiscrete-ordered-subgroup-valuation",
+          "source_section": "Example",
+          "quote": "Let $\\Gamma=\\mathbb Z+\\mathbb Z\\sqrt2\\subset\\mathbb R$ with the usual order.\nThere is a valuation on a field with value group $\\Gamma$. The associated\nvaluation ring has rank one but is not discrete.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ideal-comparability statement is exactly [L1]. For the displayed set $I$, closure under multiplication by elements of $V$ is immediate because $v(zx)=v(z)+v(x)\\ge v(x)>1$ when $v(z)\\ge0$. If $x,y\\in I$, then $v(x+y)\\ge\\min\\{v(x),v(y)\\}>1$, so $x+y\\in I$. Thus $I$ is an ideal of $V$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $I=(a)$ were principal, then $v(a)>1$ and every element of $I$ would have value at least $v(a)$. But [L2] says there is no least element of the set $\\{\\gamma\\in\\Gamma:\\gamma>1\\}$, so one can choose $1<\\gamma<v(a)$ and then an element $x\\in V$ with $v(x)=\\gamma$. Such an $x$ lies in $I$ but not in $(a)$, contradiction. Hence $I$ is nonprincipal.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ]
+    }
+  }
+}

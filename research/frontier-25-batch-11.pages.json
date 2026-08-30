@@ -1,0 +1,219 @@
+[
+  {
+    "order": 597,
+    "id": "turing-machines-configurations-and-computation",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Turing Machines, Configurations, and Computation",
+    "companion": "turing-machines-configurations-and-computation-examples",
+    "requires": [
+      "formal-languages-encodings-and-decision-problems",
+      "graphs-walks-and-connectivity",
+      "eulerian-and-hamiltonian-graphs"
+    ],
+    "items": [
+      {
+        "id": "def-deterministic-one-tape-turing-machine",
+        "kind": "definition",
+        "title": "Deterministic one-tape Turing machines with designated accept and reject states",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-function",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-tape-finite-support-convention",
+        "kind": "definition",
+        "title": "Right-infinite tapes as finite-support functions",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-function",
+          "def-natural-numbers",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-turing-machine-configuration",
+        "kind": "definition",
+        "title": "Configurations of a deterministic one-tape Turing machine",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-tape-finite-support-convention",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "def-one-step-configuration-relation",
+        "kind": "definition",
+        "title": "The one-step configuration relation",
+        "deps": [
+          "def-turing-machine-configuration"
+        ]
+      },
+      {
+        "id": "lem-deterministic-nonhalting-configurations-have-unique-successors",
+        "kind": "lemma",
+        "title": "Every nonhalting deterministic configuration has a unique successor",
+        "strategy": "Unpack the machine definition and the one-step relation. In a nonhalting configuration the scanned state is neither the accept nor reject state, so the transition function supplies exactly one action for the current state and scanned symbol. That one action determines exactly one rewritten tape symbol and exactly one new head position, so exactly one successor configuration satisfies the definition.",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-one-step-configuration-relation"
+        ]
+      },
+      {
+        "id": "def-initial-accepting-and-rejecting-configurations",
+        "kind": "definition",
+        "title": "Initial, accepting, and rejecting configurations",
+        "deps": [
+          "def-turing-machine-configuration",
+          "def-computation-alphabet-and-word-convention"
+        ]
+      },
+      {
+        "id": "def-halting-computation-and-divergence",
+        "kind": "definition",
+        "title": "Finite computation histories, halting computations, and divergence",
+        "deps": [
+          "def-initial-accepting-and-rejecting-configurations",
+          "def-one-step-configuration-relation",
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "def-language-recognized-and-decided",
+        "kind": "definition",
+        "title": "Languages recognized and decided by a Turing machine",
+        "deps": [
+          "def-halting-computation-and-divergence",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "def-partial-function-computed-by-a-machine",
+        "kind": "definition",
+        "title": "Partial functions computed by a machine under fixed encodings",
+        "deps": [
+          "def-halting-computation-and-divergence",
+          "def-effective-binary-encoding-and-decoder",
+          "def-function"
+        ]
+      },
+      {
+        "id": "def-multitape-and-nondeterministic-machines",
+        "kind": "definition",
+        "title": "Multitape and nondeterministic Turing machine variants",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-nondeterministic-accepting-computation",
+        "kind": "definition",
+        "title": "Accepting computations of a nondeterministic machine",
+        "deps": [
+          "def-multitape-and-nondeterministic-machines",
+          "def-initial-accepting-and-rejecting-configurations",
+          "def-one-step-configuration-relation",
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "prop-valid-computation-histories-are-decidable",
+        "kind": "proposition",
+        "title": "For a fixed machine and input, valid accepting computation histories form a decidable language",
+        "strategy": "Encode each configuration as a finite word by writing the nonblank tape segment and inserting the current state immediately before the scanned symbol. A candidate history is then a finite tuple of such words. Use the tuple-decoding lemma to parse the candidate, check that the first configuration is the initial one for the chosen input, verify locally that each successive pair satisfies the one-step relation, and confirm that the last configuration is accepting. A decider can reject on the first failed local check and accept exactly the valid histories.",
+        "deps": [
+          "def-language-recognized-and-decided",
+          "def-halting-computation-and-divergence",
+          "def-one-step-configuration-relation",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "def-configuration-graph",
+        "kind": "definition",
+        "title": "The configuration graph of a machine on an input",
+        "deps": [
+          "def-one-step-configuration-relation",
+          "def-initial-accepting-and-rejecting-configurations",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "lem-acceptance-is-configuration-reachability",
+        "kind": "lemma",
+        "title": "Acceptance is reachability of an accepting configuration",
+        "strategy": "Unpack the definition of a halting computation in the deterministic case and of an accepting computation in the nondeterministic case. A finite accepting computation history is exactly a list of configurations whose consecutive pairs are edges of the configuration graph, so it is a directed path from the initial configuration to an accepting one. Conversely, any directed path beginning at the initial configuration records such a computation history and therefore witnesses acceptance.",
+        "deps": [
+          "def-configuration-graph",
+          "def-halting-computation-and-divergence",
+          "def-nondeterministic-accepting-computation",
+          "def-directed-walk-trail-path-cycle-and-strong-connectivity"
+        ]
+      },
+      {
+        "id": "fs-rejection-is-divergence",
+        "kind": "false-statement",
+        "title": "FALSE: rejection is divergence",
+        "strategy": "Refute the claim with a machine whose start state immediately transitions to the designated reject state on the first scanned symbol. On the corresponding input the machine rejects after one step, so the computation halts and therefore does not diverge.",
+        "deps": [
+          "def-halting-computation-and-divergence",
+          "def-initial-accepting-and-rejecting-configurations"
+        ]
+      },
+      {
+        "id": "fs-nondeterministic-acceptance-requires-every-branch-to-halt",
+        "kind": "false-statement",
+        "title": "FALSE: nondeterministic acceptance requires every branch to halt",
+        "strategy": "Refute the claim with a nondeterministic machine whose first move branches in two ways on the same input: one branch enters the accept state immediately, while the other enters a simple two-state loop. The machine accepts because an accepting computation exists, even though another branch never halts.",
+        "deps": [
+          "def-nondeterministic-accepting-computation"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 598,
+    "id": "turing-machines-configurations-and-computation-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Turing Machines, Configurations, and Computation: Examples and Counterexamples",
+    "requires": [
+      "turing-machines-configurations-and-computation"
+    ],
+    "items": [
+      {
+        "id": "ex-valid-computation-histories-are-decidable",
+        "kind": "example",
+        "title": "Checking a short accepting history for a unary increment machine",
+        "strategy": "Take a machine that replaces the first blank after a unary block of I's by I and then halts. Write an explicit candidate history on input III, encode each configuration by inserting the state symbol before the scanned tape cell, and verify one local transition at a time that the history starts correctly, follows the transition table, and ends in the accept state.",
+        "deps": [
+          "prop-valid-computation-histories-are-decidable",
+          "def-halting-computation-and-divergence"
+        ]
+      },
+      {
+        "id": "ex-acceptance-is-configuration-reachability",
+        "kind": "example",
+        "title": "A branching configuration graph with one accepting path and one looping path",
+        "strategy": "Use a nondeterministic machine that on input 1 branches immediately: one branch enters the accept state, while the other toggles forever between two nonhalting states without changing the tape. Draw the first few vertices of the configuration graph and identify the length-one path to acceptance alongside the infinite looping branch.",
+        "deps": [
+          "lem-acceptance-is-configuration-reachability",
+          "fs-nondeterministic-acceptance-requires-every-branch-to-halt"
+        ]
+      },
+      {
+        "id": "cex-rejection-is-divergence",
+        "kind": "counterexample",
+        "title": "Immediate rejection is a halting computation, not a divergence",
+        "strategy": "Let the start state read the initial symbol and move directly to the reject state. The unique computation on that input has one transition and stops in a rejecting configuration, so it is rejected without diverging.",
+        "deps": [
+          "fs-rejection-is-divergence",
+          "def-initial-accepting-and-rejecting-configurations"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,1326 @@
+{
+  "version": 1,
+  "level": "frontier-25",
+  "scope": [
+    "thm-dirichlet-convolution-commutative-ring",
+    "thm-dirichlet-convolution-invertibility-criterion",
+    "thm-dirichlet-convolution-preserves-multiplicativity",
+    "thm-multiplicative-functions-determined-by-prime-powers",
+    "prop-divisor-functions-under-dirichlet-convolution",
+    "thm-von-mangoldt-divisor-sum-identity",
+    "cor-von-mangoldt-mobius-inversion-formula",
+    "cor-number-of-monic-irreducible-polynomials-over-a-finite-field",
+    "prop-liouville-convolution-square-indicator",
+    "ex-dirichlet-convolution-table-through-twelve",
+    "ex-dirichlet-inverse-recursion",
+    "ex-divisor-counting-and-sum-prime-power-formulas",
+    "ex-euler-totient-as-a-mobius-convolution",
+    "ex-von-mangoldt-divisor-sum",
+    "ex-liouville-square-indicator",
+    "cex-multiplicative-does-not-mean-completely-multiplicative",
+    "cex-the-mertens-conjecture-is-false"
+  ],
+  "contracts": {
+    "thm-dirichlet-convolution-commutative-ring": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Pointwise addition, zero, and additive inverses are inherited from the field structure on complex numbers, and Dirichlet convolution is an arithmetic function by definition.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The divisor involution $d \\mapsto n/d$ reindexes the finite divisor sum and proves commutativity of convolution.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Both nested convolutions reduce to the same finite sum over ordered factorizations $abc=n$, proving associativity.",
+          "step": "1.3",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Finite termwise expansion gives distributivity, and the support of $\\varepsilon$ at $1$ gives the multiplicative identity law.",
+          "step": "1.4",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Collecting the previous four steps yields the commutative-ring structure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is about arithmetic functions on positive integers; no empty divisor set or empty domain appears."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.4 handle the additive zero function and the vanishing values of $\\varepsilon(n)$ for $n>1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.4 checks the identity behavior coming from the divisor $1$ and therefore covers the unit case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 allow fixed-point divisors such as $d^2=n$ and repeated factors in $abc=n$ without changing the reindexing argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or analytic endpoint occurs in this finite algebraic proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no witness or subsequence choice; it rewrites finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not stated as a biconditional."
+        }
+      ]
+    },
+    "thm-dirichlet-convolution-invertibility-criterion": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluating the inverse equation at $1$ forces $f(1)\\neq 0$ and determines $g(1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assuming $f(1)\\neq 0$, the value $g(1)=1/f(1)$ gives the base case of the recursion.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $n>1$, every proper divisor is smaller than $n$, so the convolution equation at $n$ has one new unknown and, after reindexing proper divisors, determines $g(n)$ recursively.",
+          "step": "1.3",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Strong induction applied to the shifted recursion yields a unique inverse on all positive integers.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Commutativity of convolution gives the reverse-sided identity, completing both directions of the equivalence and the uniqueness claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For every $n\\ge 1$, the positive-divisor set of $n$ contains $1$, so the inversion sum in the statement and recursion never runs over an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 isolate the nonzero hypothesis on $f(1)$, and step 1.3 solves the equation with right-hand side $0$ for $n>1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 explicitly treat the $n=1$ case and determine $g(1)$ there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 covers prime $n$ and every case with only the trivial proper divisor, so the recursion does not become circular."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint analysis occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof defines values recursively and does not choose an arbitrary witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the direction 'inverse exists implies $f(1)\\neq 0$'."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 2.1, and 3.1 prove the direction '$f(1)\\neq 0$ implies inverse exists'."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the inverse recursion depends on isolating the unique new term at n>1 and on a genuine strong-induction closure. Steps 1.1-2.1 separate the n=1 base case, use proper divisors d<n in the recursive step, and then apply strong induction to obtain a unique inverse on all positive integers."
+      }
+    },
+    "thm-dirichlet-convolution-preserves-multiplicativity": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The divisor-splitting bijection for coprime $m$ and $n$ identifies divisors of $mn$ with pairs of divisors of $m$ and $n$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The inverse criterion supplies the inverse $h$ and the unit value $h(1)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using the divisor splitting, the convolution of multiplicative functions factors into a product of divisor sums and is therefore multiplicative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The base cases $m=1$ or $n=1$ give $h(mn)=h(m)h(n)$ because $h(1)=1$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Strong induction on $mn$ rewrites the zero product $(f*h)(m)(f*h)(n)$ as $h(m)h(n)$ plus the proper-divisor recursion sum for $mn$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Comparing the inductive rewrite with the inverse recursion at $mn$ proves $h(mn)=h(m)h(n)$ and discharges the induction.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns positive integers and finite divisor sums only."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.3 uses $(f*h)(m)=\\varepsilon(m)=0$ and $(f*h)(n)=\\varepsilon(n)=0$ in the nontrivial coprime case $m,n>1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $(f*g)(1)=1$, and step 2.2 separates the cases $m=1$ or $n=1$ by using $h(1)=1$ from step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.3 removes only the exceptional pair $(a,b)=(m,n)$, so every remaining product $ab$ is a proper divisor of $mn$ and the induction hypothesis applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or limiting endpoint is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses a canonical divisor bijection and a previously constructed inverse, not an arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-a",
+        "notes": "Reviewed on Sunday, August 30, 2026. Risk: the inverse half must justify replacing h(a)h(b) by h(ab) only for proper divisor pairs with ab<mn. Steps 1.1-3.1 use the divisor-splitting bijection for coprime m,n, isolate the exceptional pair (m,n), and apply the strong-induction hypothesis only on the proper-divisor remainder."
+      }
+    },
+    "thm-multiplicative-functions-determined-by-prime-powers": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Canonical prime factorization breaks a multiplicative function value into the product of its prime-power values.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Prescribed prime-power data define a candidate function by the canonical factorization of each positive integer.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Coprime factorizations concatenate, so the defining products show that the constructed function is multiplicative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Any multiplicative function with those prime-power values must satisfy the factorization formula and therefore equals the constructed one.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats $n=1$ as the empty product and step 1.2 sets $F(1)=1$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem works on positive integers and never divides by or solves for a zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 explicitly record the unit case $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the case where one coprime factor is $1$, so the concatenation argument still works."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or asymptotic endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is canonical from prime-power data and uses no arbitrary witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a determination-and-extension statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a determination-and-extension statement, not a biconditional."
+        }
+      ]
+    },
+    "prop-divisor-functions-under-dirichlet-convolution": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Unpacking the definitions identifies $\\tau$ and $\\sigma_k$ with the two stated convolutions.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $\\mathbf 1$ and $\\operatorname{id}_k$ are completely multiplicative, the convolution theorem makes $\\tau$ and $\\sigma_k$ multiplicative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Listing the positive divisors of a prime power yields the displayed prime-power formulas.",
+          "step": "3.1",
+          "inputs": [
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition uses positive divisors of positive integers, so no empty divisor set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 admit the exponent boundary $a=0$, so $p^a=1$ is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 at $a=0$ gives the values at $1$, namely $\\tau(1)=1$ and $\\sigma_k(1)=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 already handles $n=1$, and step 3.1 handles the repeated-prime case of a single prime power."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no continuous interval or limiting endpoint to check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof only expands definitions and lists divisors canonically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition does not state a biconditional."
+        }
+      ]
+    },
+    "thm-von-mangoldt-divisor-sum-identity": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Only prime-power divisors contribute to the divisor sum, reducing it to $\\sum e_i\\log p_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The logarithm product law gives the same expression $\\sum e_i\\log p_i$ for $\\log n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Comparing the two expressions proves the divisor-sum identity and its convolution form.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 treats $n=1$ by the empty factorization and the empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses that $\\Lambda$ vanishes on divisors that are not prime powers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly records the equality $0=\\log 1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles repeated prime factors through the exponents $e_i$, so prime powers are included rather than excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No analytic interval or limiting endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses canonical factorization and no arbitrary witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way identity, not a biconditional."
+        }
+      ]
+    },
+    "cor-von-mangoldt-mobius-inversion-formula": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The previous theorem rewrites the divisor sum of $\\Lambda$ as the arithmetic-function logarithm.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Classical Möbius inversion applied to that divisor-sum identity yields the explicit formula for $\\Lambda(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The resulting divisor sum is exactly the Dirichlet convolution $\\mu*\\log$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 sum over the positive divisors of $n$, and that set always contains $1$, so the displayed family is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument neither divides by a variable nor introduces a separate zero-sized family; it only applies Möbius inversion to an existing identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 imports an identity valid for every positive integer, including $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 is only a reinterpretation of the divisor sum from step 2.1, so no collapsed special case changes the formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice; it cites an identity and inverts it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not stated as a biconditional."
+        }
+      ]
+    },
+    "cor-number-of-monic-irreducible-polynomials-over-a-finite-field": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The published finite-field divisor-sum identity is recast as an arithmetic-function equation in the degree variable.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Classical Möbius inversion turns that divisor-sum identity into a formula for $nN_q(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Dividing by the positive integer $n$ yields the closed formula for $N_q(n)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 sum over the positive divisors of $n$, and for every $n\\ge 1$ that set contains $1$, so the inversion family is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the stated hypothesis $n\\ge 1$, which is exactly what excludes division by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 include the degree-one case because the formula is asserted for every $n\\ge 1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 already includes the smallest degree case and does not require distinct prime divisors or any nontrivial factorization of $n$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No analytic endpoint or limit occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof applies a published identity and Möbius inversion without making a choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not a biconditional."
+        }
+      ]
+    },
+    "prop-liouville-convolution-square-indicator": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Canonical factorization turns the divisor sum for $\\mathbf 1*\\lambda$ into a product of alternating geometric sums.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each local alternating sum is $1$ for an even exponent and $0$ for an odd exponent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A positive integer is a perfect square exactly when every prime exponent in its canonical factorization is even, so the convolution is the square indicator.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 allows the empty canonical factorization at $n=1$, so the empty-product case is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly produces the zero value when some exponent is odd."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include $n=1$ as the square with empty exponent list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles single-prime powers and repeated exponents directly, so prime powers are not a separate obstruction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is purely finite and discrete."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; the argument is canonical from factorization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states a case split, not a biconditional sentence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states a case split, not a biconditional sentence."
+        }
+      ]
+    },
+    "ex-dirichlet-convolution-table-through-twelve": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The convolution formula shows that each entry through $6$ is just the number of listed positive divisors.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The same divisor-counting computation yields the entries from $7$ through $12$ and matches them with $\\tau(n)$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Together the two half-ranges cover the whole table and verify $(\\mathbf 1*\\mathbf 1)(n)=\\tau(n)$ there.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked range is the fixed nonempty set $\\{1,\\dots,12\\}$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example starts at $n=1$, so neither a zero input nor a zero divisor count occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first row and step 1.1 explicitly compute the value at $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example table and steps 1.1 and 1.2 include primes, prime powers, and composites with repeated divisors, so no special divisor pattern is omitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and steps 1.1 and 1.2 explicitly cover the endpoints $n=1$ and $n=12$ of the displayed range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; the table is a direct computation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a finite divisor table on $1\\le n\\le 12$, not a forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The verification checks listed rows only and does not assert any converse statement."
+        }
+      ]
+    },
+    "ex-dirichlet-inverse-recursion": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying the inverse recursion to the constant-one function gives the first six values of its inverse.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using those values, the convolution with the constant-one function matches $\\varepsilon$ on the displayed range.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Commutativity of convolution gives the same check in the opposite order on that range.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example computes on the fixed nonempty range $1\\le n\\le 6$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 produce the value $g(4)=0$ and the zero values $\\varepsilon(n)$ for $2\\le n\\le 6$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with $g(1)=1$, and step 2.1 checks the convolution at $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes both prime inputs and the repeated-prime case $n=4$, where the recursion collapses to a zero value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 all work on the displayed range from $1$ through $6$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the values are recursively computed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example is not a biconditional statement."
+        }
+      ]
+    },
+    "ex-divisor-counting-and-sum-prime-power-formulas": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Canonical factorizations of $12$ and $18$ feed directly into the prime-power formulas.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluating the resulting products gives the displayed numerical values.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct divisor lists reproduce the same counts and sums, confirming the formulas concretely.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example treats the specific nonempty inputs $12$ and $18$ only."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Neither worked input is $0$, and no zero denominator or zero-sized family appears."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked examples intentionally start at the composite integers $12$ and $18$, not at the unit value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 both include repeated prime powers, namely $2^2$ in $12$ and $3^2$ in $18$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is part of the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation with no choice step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is not a biconditional claim."
+        }
+      ]
+    },
+    "ex-euler-totient-as-a-mobius-convolution": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The published divisor-sum identity identifies the summatory function of $\\varphi$ with $\\operatorname{id}_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Möbius inversion converts that divisor-sum identity into an explicit divisor formula for $\\varphi(n)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The divisor formula is exactly the convolution $\\mu*\\operatorname{id}_1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns positive integers and finite divisor sums only."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof does not divide by a variable or require a separate zero-case argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 imports an identity valid for every positive integer, including $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 is only a reinterpretation of the divisor sum from step 2.1, so the smallest case $n=1$ is not lost when passing to convolution notation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is an inversion calculation with no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not state a biconditional."
+        }
+      ]
+    },
+    "ex-von-mangoldt-divisor-sum": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the prime power $16$, only the four nontrivial prime-power divisors contribute to the von Mangoldt sum.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the squarefree composite $30$, only the prime divisors contribute to the von Mangoldt sum.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These two explicit computations match the theorem in two distinct divisor patterns.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example treats the specific nonempty inputs $16$ and $30$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the vanishing of $\\Lambda$ on divisors that are not prime powers."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked cases are $16$ and $30$, so the unit case is not part of this sample computation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 deliberately contrast a repeated-prime case with a squarefree case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example contains no witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is not a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is not a biconditional statement."
+        }
+      ]
+    },
+    "ex-liouville-square-indicator": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At exponent $4$, the alternating Liouville sum equals $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At exponent $3$, the same alternating sum equals $0$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Comparing the even and odd exponents exhibits the square-indicator behavior.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the two specific prime powers $p^4$ and $p^3$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly produces the zero value for the odd exponent."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly produces the value $1$ for the even exponent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the same prime base $p$ in both computations, isolating the parity of the exponent as the only changing feature."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example makes no arbitrary choice beyond the given prime."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item compares two explicit prime-power computations and states no implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Its conclusion matches the proposition on two sample exponents only, not via a converse claim."
+        }
+      ]
+    },
+    "cex-multiplicative-does-not-mean-completely-multiplicative": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The divisor-counting function is a legitimate multiplicative function.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The values at $2$ and $4$ show that $\\tau(mn)=\\tau(m)\\tau(n)$ fails once coprimality is removed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus $\\tau$ witnesses the failure of the refuted universal statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses one explicit arithmetic function and two explicit inputs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero input, zero denominator, or zero-sized family occurs in the counterexample."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The separating computation is intentionally at $2$ and $4$, not at the unit value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the non-coprime diagonal pair $m=n=2$, which is exactly the collapsed case that distinguishes the two definitions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses the fixed function $\\tau$ and no choice step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not written as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not written as a biconditional."
+        }
+      ]
+    },
+    "cex-the-mertens-conjecture-is-false": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The cited literature supplies a witness $x>1$ at which the strict Mertens inequality fails.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "That witness falsifies the universal statement and so refutes the conjecture.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a single sourced witness statement, not an empty-family argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows the equality case $|M(x)|=\\sqrt{x}$, which already contradicts the strict inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 both keep the historical quantified range $x>1$ explicit, excluding the trivial boundary value $x=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 shows that even equality at the threshold is enough to refute the conjecture, so the boundary case is not lost."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The repair removes the old false endpoint inclusion: the historical claim starts at $x>1$, so the counterexample no longer misuses the boundary value $x=1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the sourced existence of a witness $x>1$ and then works with that witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted conjecture is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted conjecture is not a biconditional."
+        }
+      ]
+    }
+  }
+}
