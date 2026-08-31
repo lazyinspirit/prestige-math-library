@@ -2,7 +2,7 @@
 id: prop-polynomially-related-encodings-preserve-polynomial-size
 kind: proposition
 title: "Polynomially related encodings preserve polynomial size bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ proof_strategy: direct
 justified_by: []
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

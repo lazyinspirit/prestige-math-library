@@ -19,17 +19,18 @@ parts:
       - signed-and-complex-measures-hahn-and-jordan
       - the-radon-nikodym-theorem-and-lebesgue-decomposition
       - the-lp-spaces-holder-minkowski-and-riesz-fischer
+      - density-separability-and-convolution-in-lp
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra is the closure needed for countable additivity, and outer measure plus
-Caratheodory build Lebesgue measure and the measurable-function and integration calculus.
-Convergence theorems, Lebesgue-Stieltjes measures, Riemann comparison, Egorov-Lusin-Vitali
-phenomena, product measures, signed measures, and Radon-Nikodym/Lebesgue decomposition
-extend that calculus to approximation, modes of convergence, iterated integration,
-densities, and total variation. The closing $L^p$ page packages the resulting normed
-spaces in the quotient-by-null-functions convention: Hölder and Minkowski control
-integrability, Riesz-Fischer gives completeness, subsequence and in-measure consequences
-connect back to convergence, exponent comparisons recover inclusion theorems, norm limits
-recover the essential supremum, and the $0<p<1$ appendix marks where convexity fails.
+Caratheodory build Lebesgue measure, measurable functions, and integration. Convergence
+theorems, product and signed measures, and Radon-Nikodym/Lebesgue decomposition extend
+that calculus to iterated integration, densities, and total variation. The $L^p$ page
+then supplies Hölder, Minkowski, completeness, inclusion theorems, and
+essential-supremum limits. The added page turns that theory into Euclidean analysis:
+dense simple, step, compactly supported continuous, and smooth functions in finite $p$,
+separability under countably generated sigma-finite hypotheses, translation continuity,
+convolution and Young's inequality, and mollifier approximation, with the $L^\infty$
+endpoint failures kept explicit.

@@ -63,6 +63,8 @@ parts:
       - the-five-cycle-and-erdos-hajnal
       - star-expansions-and-erdos-hajnal
       - iterative-sparsification-and-the-five-vertex-path
+      - small-graph-erdos-hajnal-consequences
+      - iterative-restriction-and-comb-extraction-lemmas
 ---
 
 ## counting
@@ -125,11 +127,11 @@ degree and gives the five colour theorem.
 
 A finite probability space makes expectation a counting tool, and the probabilistic method
 turns that into homogeneous sets, induced-copy estimates, regularity control, and the
-structural decompositions used in the Erdos-Hajnal program. Bull-free graphs give an
-explicit narrowness-and-substitution route, while cograph and perfect-pattern arguments
-turn $\kappa$ bounds and pure blockade patterns into large clique-or-stable-set
-witnesses. The added pages push that program further in two directions: star-expansion
-arguments transfer Erdős-Hajnal from forests to the star-expansion of $P_4$, hence to
-$C_6$, $C_7$, and the hatted five-cycle, while iterative sparsification proves that
-$P_5$ is nice and then upgrades nice blockades to the polynomial Rödl property and
-finally to the Erdős-Hajnal property for $P_5$ and $\overline{P_5}$.
+structural decompositions used in the Erdos-Hajnal program. Bull-free, cograph,
+perfect-pattern, star-expansion, and iterative-sparsification arguments then produce
+large clique-or-stable-set witnesses for classes ranging from the bull and $C_5$ to
+$C_6$, $C_7$, the hatted five-cycle, $P_5$, and $\overline{P_5}$. The new pages close
+the finite and iterative seams: one records the single-graph consequences through five
+vertices and the resolved six-vertex prime $H$ cases, and the other isolates the
+sparse-pair, comb-extraction, and restriction lemmas that drive the later six-vertex
+endpoint theorems.

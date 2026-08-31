@@ -1,0 +1,523 @@
+[
+  {
+    "order": 111.019,
+    "id": "krull-dimension-and-height-theorems",
+    "kind": "A",
+    "category": "commutative-algebra",
+    "title": "Krull Dimension and Height Theorems",
+    "companion": "krull-dimension-and-height-theorems-examples",
+    "requires": [
+      "dedekind-domains-and-ideal-classes-examples"
+    ],
+    "items": [
+      {
+        "id": "cor-minimal-prime-has-height-zero",
+        "kind": "corollary",
+        "title": "Minimal primes are exactly the primes of height zero",
+        "strategy": "Use the published chain description of height to identify height zero with the absence of any strict prime below the given prime.",
+        "deps": [
+          "lem-height-equals-local-dimension"
+        ]
+      },
+      {
+        "id": "lem-prime-chains-in-a-domain-start-at-zero",
+        "kind": "lemma",
+        "title": "In a domain, every prime chain below a prime begins at (0)",
+        "strategy": "Because the zero ideal is prime in a domain, any chain below a prime can be extended downward by adjoining (0) when it is not already present.",
+        "deps": [
+          "def-zero-divisor-and-integral-domain",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "lem-height-in-quotient-is-relative-chain-length",
+        "kind": "lemma",
+        "title": "Height in a quotient measures chains between two primes",
+        "strategy": "Apply the published chain description of height to the quotient ring R/p and use quotient-prime correspondence to translate chains there into chains from p to q in R.",
+        "deps": [
+          "lem-height-equals-local-dimension",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "lem-principal-ideal-theorem-reduction-to-local-domain",
+        "kind": "lemma",
+        "title": "Reduce the principal ideal theorem to a Noetherian local domain",
+        "strategy": "Quotient by a minimal prime below the target prime and then localize at the target prime; the relative-height lemma and the height-zero corollary show that proving the bound there suffices upstairs.",
+        "deps": [
+          "cor-minimal-prime-has-height-zero",
+          "lem-height-in-quotient-is-relative-chain-length",
+          "lem-minimal-prime-over-an-ideal-exists",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-quotient-is-domain-iff-ideal-prime"
+        ]
+      },
+      {
+        "id": "lem-principal-ideal-theorem-associated-prime-step",
+        "kind": "lemma",
+        "title": "The associated-prime step inside the principal ideal theorem",
+        "strategy": "In the reduced local-domain situation, stabilize the symbolic-power filtration and use an associated-prime argument plus Nakayama to force every localization below the maximal ideal to have dimension zero.",
+        "deps": [
+          "def-prime-and-maximal-ideals",
+          "def-zero-divisor-and-integral-domain"
+        ]
+      },
+      {
+        "id": "thm-krull-principal-ideal-theorem",
+        "kind": "theorem",
+        "title": "Krull's principal ideal theorem",
+        "strategy": "Reduce to a Noetherian local domain whose maximal ideal is minimal over one nonzero element, run the associated-prime step there, and translate the resulting local chain bound back upstairs.",
+        "deps": [
+          "lem-principal-ideal-theorem-associated-prime-step",
+          "lem-principal-ideal-theorem-reduction-to-local-domain"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-noetherian-local-domain-dimension-zero-iff-field",
+        "kind": "corollary",
+        "title": "A Noetherian local domain has dimension zero exactly when it is a field",
+        "strategy": "In a local domain both (0) and the maximal ideal are prime; dimension zero forbids a strict chain between them, so the maximal ideal must be zero.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "def-local-ring",
+          "def-prime-and-maximal-ideals",
+          "def-zero-divisor-and-integral-domain"
+        ]
+      },
+      {
+        "id": "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+        "kind": "corollary",
+        "title": "A minimal prime over a principal nonzerodivisor has height one",
+        "strategy": "After the local-domain reduction, principal ideal theorem gives height at most one, while height zero would force the local domain to be a field and hence make the chosen element a unit.",
+        "deps": [
+          "cor-noetherian-local-domain-dimension-zero-iff-field",
+          "thm-krull-principal-ideal-theorem",
+          "lem-principal-ideal-theorem-reduction-to-local-domain"
+        ]
+      },
+      {
+        "id": "lem-height-theorem-first-generator-reduction",
+        "kind": "lemma",
+        "title": "Choose the first generator's minimal prime inside the target prime",
+        "strategy": "Localize at the target prime, choose a prime minimal over the first generator inside the maximal ideal, contract it back, and invoke the principal ideal theorem on that first minimal prime.",
+        "deps": [
+          "lem-finite-prime-avoidance",
+          "lem-minimal-prime-over-an-ideal-exists",
+          "thm-krull-principal-ideal-theorem",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes"
+        ]
+      },
+      {
+        "id": "lem-height-theorem-quotient-induction",
+        "kind": "lemma",
+        "title": "Quotienting by the first minimal prime reduces the remaining height count",
+        "strategy": "Pass to the quotient by the minimal prime chosen over the first generator; in the quotient the image of the target prime is minimal over at most n-1 generators, so the remaining chain length is the quotient height.",
+        "deps": [
+          "lem-height-in-quotient-is-relative-chain-length",
+          "lem-height-theorem-first-generator-reduction",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "thm-krull-height-theorem",
+        "kind": "theorem",
+        "title": "Krull's height theorem",
+        "strategy": "Induct on the number of generators: isolate a minimal prime over the first generator, quotient by it, and bound the remaining chain by the induction hypothesis.",
+        "deps": [
+          "lem-height-theorem-first-generator-reduction",
+          "lem-height-theorem-quotient-induction",
+          "thm-krull-principal-ideal-theorem"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-height-of-a-prime-bounded-by-minimal-number-of-generators",
+        "kind": "corollary",
+        "title": "Height is bounded by the minimal number of local generators",
+        "strategy": "Localize at the prime, observe that the maximal ideal there is minimal over itself, and apply the height theorem to a minimal generating set of that local maximal ideal.",
+        "deps": [
+          "def-height-of-a-prime-ideal",
+          "thm-krull-height-theorem",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-noetherian-ring-quotients-and-localisations"
+        ]
+      },
+      {
+        "id": "lem-height-converse-parameter-selection",
+        "kind": "lemma",
+        "title": "Select generators witnessing the converse height theorem",
+        "strategy": "Choose the generators inside the prime inductively, using the finiteness of the relevant minimal-prime families and finite prime avoidance to stay out of every lower-height obstruction.",
+        "deps": [
+          "lem-finite-prime-avoidance",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "thm-krull-principal-ideal-theorem",
+          "thm-krull-height-theorem"
+        ]
+      },
+      {
+        "id": "thm-krull-height-theorem-converse",
+        "kind": "theorem",
+        "title": "Converse to Krull's height theorem in localised form",
+        "strategy": "Localize at the chosen prime, use the selection lemma to build a generating set inside the maximal ideal, and compare the resulting ideal height with the local dimension to force minimality at the maximal ideal.",
+        "deps": [
+          "def-height-of-a-prime-ideal",
+          "lem-height-converse-parameter-selection",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-noetherian-ring-quotients-and-localisations"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "def-system-of-parameters-and-parameter-ideal",
+        "kind": "definition",
+        "title": "Systems of parameters and parameter ideals",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "def-local-ring",
+          "def-radical-of-an-ideal"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "lem-parameter-ideal-equivalent-m-primary",
+        "kind": "lemma",
+        "title": "Parameter ideals are exactly the m-primary d-generated ideals",
+        "strategy": "In a Noetherian local ring, radical equal to the maximal ideal is the same as primary to the maximal ideal; apply this to an ideal generated by exactly dim R elements.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "thm-primary-submodule-characterisations"
+        ]
+      },
+      {
+        "id": "lem-parameter-selection-avoids-minimal-components",
+        "kind": "lemma",
+        "title": "Choose a parameter that misses the top-dimensional minimal components",
+        "strategy": "List the minimal primes whose quotient dimension is maximal and use finite prime avoidance to choose an element of the maximal ideal outside all of them, forcing every surviving quotient component to lose one dimension.",
+        "deps": [
+          "cor-minimal-prime-over-a-nonzerodivisor-has-height-one",
+          "def-krull-dimension-of-a-ring",
+          "def-local-ring",
+          "lem-finite-prime-avoidance",
+          "thm-noetherian-ring-has-finitely-many-minimal-primes",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "lem-parameter-dimension-drop-is-exact",
+        "kind": "lemma",
+        "title": "A first parameter lowers local dimension by exactly one",
+        "strategy": "The parameter tail shows the quotient has dimension at most d-1, while the converse height theorem and the principal-ideal theorem force the lower bound d-1.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-ideal-equivalent-m-primary",
+          "thm-krull-height-theorem",
+          "thm-krull-height-theorem-converse",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "thm-existence-of-systems-of-parameters",
+        "kind": "theorem",
+        "title": "Every finite-dimensional Noetherian local ring has a system of parameters",
+        "strategy": "Induct on dimension by choosing a first parameter outside the top-dimensional minimal components and then lifting a system of parameters from the quotient.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-selection-avoids-minimal-components",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "thm-dimension-as-minimal-number-of-radical-generators",
+        "kind": "theorem",
+        "title": "Local dimension is the minimal number of generators of an ideal with maximal radical",
+        "strategy": "The converse height theorem produces such an ideal with d generators, while the height theorem rules out any smaller generating set.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-ideal-equivalent-m-primary",
+          "thm-existence-of-systems-of-parameters",
+          "thm-krull-height-theorem",
+          "thm-krull-height-theorem-converse"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-dimension-drops-under-a-parameter",
+        "kind": "corollary",
+        "title": "Quotienting by a first parameter lowers local dimension by one",
+        "strategy": "Apply the exact one-step parameter-dimension-drop lemma to the first element of a chosen system of parameters.",
+        "deps": [
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-dimension-drop-is-exact"
+        ]
+      },
+      {
+        "id": "cor-localisation-dimension-does-not-increase",
+        "kind": "corollary",
+        "title": "Localisation does not increase Krull dimension",
+        "strategy": "Contract a prime chain in the localization to a strict chain of primes in the original ring disjoint from the denominator set.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-localisation-bijection"
+        ]
+      },
+      {
+        "id": "cor-quotient-dimension-does-not-increase",
+        "kind": "corollary",
+        "title": "Passing to a quotient does not increase Krull dimension",
+        "strategy": "Lift every prime chain in the quotient to a strict chain of primes in the original ring containing the quotient ideal.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "lem-polynomial-ring-dimension-lower-chain",
+        "kind": "lemma",
+        "title": "A prime chain in R extends to a longer chain in R[x]",
+        "strategy": "Extend each prime ideal to the polynomial ring and top the chain with the prime generated by the final extended prime together with x.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-quotient-is-domain-iff-ideal-prime"
+        ]
+      },
+      {
+        "id": "lem-polynomial-prime-contraction-height-jump-at-most-one",
+        "kind": "lemma",
+        "title": "Only one saturated step can lie over a fixed contracted prime in R[x]",
+        "strategy": "Localize at the contracted prime, pass to the quotient by it, then localize further to the fraction field; the resulting chain lives in K[x], where every nonzero prime is maximal.",
+        "deps": [
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "def-field-of-fractions",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-prime-spectrum-of-a-quotient-bijection",
+          "thm-quotient-is-domain-iff-ideal-prime"
+        ]
+      },
+      {
+        "id": "lem-polynomial-ring-dimension-upper-bound",
+        "kind": "lemma",
+        "title": "A prime chain in R[x] has length at most one more than its contraction chain",
+        "strategy": "Contract the chain to R and use the previous lemma to count at most one extra saturated step over each repeated contraction.",
+        "deps": [
+          "def-height-of-a-prime-ideal",
+          "thm-krull-height-theorem",
+          "thm-krull-height-theorem-converse",
+          "thm-localisation-at-a-prime-is-local",
+          "thm-noetherian-ring-quotients-and-localisations",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "thm-prime-spectrum-of-a-quotient-bijection"
+        ]
+      },
+      {
+        "id": "thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring",
+        "kind": "theorem",
+        "title": "A Noetherian polynomial ring has dimension one larger",
+        "strategy": "The lower-chain lemma gives dim R[x] at least dim R + 1, and the contraction-count lemma gives the matching upper bound.",
+        "deps": [
+          "lem-polynomial-ring-dimension-lower-chain",
+          "lem-polynomial-ring-dimension-upper-bound"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+        "kind": "corollary",
+        "title": "A polynomial ring in n variables over a field has dimension n",
+        "strategy": "Induct on the number of variables, starting from a field of dimension zero and adjoining one polynomial variable at a time.",
+        "deps": [
+          "thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring"
+        ]
+      },
+      {
+        "id": "lem-affine-domain-normalisation-dimension-upper-bound",
+        "kind": "lemma",
+        "title": "A finite affine extension of a polynomial ring has dimension at most the number of variables",
+        "strategy": "Contract a prime chain strictly along the finite integral extension by incomparability and compare it with the dimension of the polynomial subring.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "thm-incomparability-for-integral-extensions"
+        ]
+      },
+      {
+        "id": "lem-affine-domain-normalisation-dimension-lower-bound",
+        "kind": "lemma",
+        "title": "A finite affine extension of a polynomial ring has dimension at least the number of variables",
+        "strategy": "Lift the coordinate-prime chain of the polynomial subring through the finite integral extension by going up.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-integral-extension-lifts-finite-prime-chains"
+        ]
+      },
+      {
+        "id": "thm-affine-domain-dimension-transcendence-degree",
+        "kind": "theorem",
+        "title": "Affine-domain dimension equals transcendence degree",
+        "strategy": "Apply Noether normalization to embed a polynomial subring with finite extension, compare dimensions with the two normalisation bounds, and identify the number of variables with the transcendence degree of the fraction field.",
+        "deps": [
+          "cor-noether-normalisation-module-finiteness",
+          "cor-transcendence-degree-tower-additivity",
+          "lem-affine-domain-normalisation-dimension-lower-bound",
+          "lem-affine-domain-normalisation-dimension-upper-bound",
+          "thm-transitivity-of-algebraicity"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "lem-affine-domain-chain-dimension-formula-step",
+        "kind": "lemma",
+        "title": "Transcendence degrees along affine prime quotients add correctly",
+        "strategy": "Apply the affine-domain dimension theorem to the quotient domain A/p and use additivity of transcendence degree in the tower k ⊂ Frac(A/p) ⊂ Frac(A).",
+        "deps": [
+          "thm-dimension-formula-for-affine-domains"
+        ]
+      },
+      {
+        "id": "thm-dimension-formula-for-affine-domains",
+        "kind": "theorem",
+        "title": "The dimension formula for affine domains",
+        "strategy": "Normalize, compare prime chains by going down and incomparability, and then convert the resulting dimension count into the transcendence-degree identity.",
+        "deps": [
+          "lem-height-equals-local-dimension",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-quotient-is-domain-iff-ideal-prime"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-height-plus-quotient-dimension-affine-domain",
+        "kind": "corollary",
+        "title": "Height plus quotient dimension equals ambient dimension in an affine domain",
+        "strategy": "Apply the affine-dimension theorem to A/p and rewrite the transcendence-degree formula in terms of Krull dimensions.",
+        "deps": [
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-dimension-formula-for-affine-domains"
+        ]
+      },
+      {
+        "id": "cor-affine-domain-maximal-ideal-height-equals-dimension",
+        "kind": "corollary",
+        "title": "Maximal ideals of an affine domain have full height",
+        "strategy": "A maximal ideal has finite residue field over the base field, hence quotient transcendence degree zero, so the affine dimension formula forces full height.",
+        "deps": [
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite"
+        ]
+      },
+      {
+        "id": "cor-maximal-chains-in-affine-domains-have-equal-length",
+        "kind": "corollary",
+        "title": "Maximal chains in an affine domain all have the same length",
+        "strategy": "In a domain every chain to a maximal ideal begins at (0), so the length of any saturated chain to a maximal ideal is that maximal ideal's height, which is the full dimension.",
+        "deps": [
+          "cor-affine-domain-maximal-ideal-height-equals-dimension",
+          "cor-minimal-prime-has-height-zero",
+          "lem-affine-domain-chain-dimension-formula-step",
+          "thm-dimension-formula-for-affine-domains"
+        ]
+      },
+      {
+        "id": "rem-catenarity-boundary",
+        "kind": "remark",
+        "title": "Why the equal-chain statement stops at affine domains",
+        "deps": [
+          "cor-maximal-chains-in-affine-domains-have-equal-length"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 111.02,
+    "id": "krull-dimension-and-height-theorems-examples",
+    "kind": "B",
+    "category": "commutative-algebra",
+    "title": "Krull Dimension and Height Theorems — Examples",
+    "companion": "krull-dimension-and-height-theorems",
+    "requires": [
+      "krull-dimension-and-height-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-relative-height-in-a-quotient",
+        "kind": "example",
+        "title": "Relative height in a quotient of k[x,y,z]",
+        "strategy": "Quotient by a coordinate prime, compare the surviving coordinate chain with the quotient-height lemma, and check the same numbers from the affine dimension formula.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "lem-height-in-quotient-is-relative-chain-length"
+        ]
+      },
+      {
+        "id": "ex-principal-ideal-height-zero-for-a-zerodivisor",
+        "kind": "example",
+        "title": "A principal ideal generated by a zero divisor can have a minimal prime of height zero",
+        "strategy": "Use a reducible quotient where the chosen principal generator lies in a minimal prime, then compare the result with the exact-height corollary for nonzerodivisors.",
+        "deps": [
+          "cor-minimal-prime-has-height-zero",
+          "thm-krull-principal-ideal-theorem"
+        ]
+      },
+      {
+        "id": "ex-height-theorem-bound-sharp",
+        "kind": "example",
+        "title": "Coordinate ideals show the height bound is sharp",
+        "strategy": "Take the ideal generated by n coordinates in a polynomial ring, identify its quotient, and compute its height from the affine dimension formula.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "thm-krull-height-theorem"
+        ]
+      },
+      {
+        "id": "ex-system-of-parameters-not-a-minimal-generating-set",
+        "kind": "example",
+        "title": "A system of parameters need not minimally generate the maximal ideal",
+        "strategy": "Work in a singular local quotient, identify one parameter ideal by its radical, and compare it with a larger minimal generating set of the maximal ideal.",
+        "deps": [
+          "cor-noetherian-local-domain-dimension-zero-iff-field",
+          "def-system-of-parameters-and-parameter-ideal",
+          "lem-parameter-ideal-equivalent-m-primary",
+          "thm-dimension-as-minimal-number-of-radical-generators"
+        ]
+      },
+      {
+        "id": "ex-localisation-strictly-lowers-dimension",
+        "kind": "example",
+        "title": "Localisation can strictly lower dimension",
+        "strategy": "Localize a polynomial ring at the height-one prime $(x)$ so the resulting local ring has dimension $1$ while the original ring still has dimension $2$.",
+        "deps": [
+          "cor-dimension-of-a-finite-polynomial-ring-over-a-field",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "cor-localisation-dimension-does-not-increase",
+          "def-height-of-a-prime-ideal"
+        ]
+      },
+      {
+        "id": "ex-polynomial-dimension-zero-ring-boundary",
+        "kind": "example",
+        "title": "The polynomial-dimension formula at fields, Artinian rings, and the zero-ring boundary",
+        "strategy": "Check the field and nonreduced Artinian cases directly from the theorem, and record separately why the stated theorem deliberately excludes the zero ring.",
+        "deps": [
+          "def-krull-dimension-of-a-ring",
+          "thm-dimension-of-a-polynomial-ring-over-a-noetherian-ring"
+        ]
+      },
+      {
+        "id": "ex-affine-dimension-formula",
+        "kind": "example",
+        "title": "The affine dimension formula on a plane curve domain",
+        "strategy": "Compute a small list of primes in a two-variable affine domain, evaluate the quotient transcendence degrees, and verify the height-plus-quotient formula term by term.",
+        "deps": [
+          "cor-affine-domain-maximal-ideal-height-equals-dimension",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "thm-dimension-formula-for-affine-domains"
+        ]
+      }
+    ]
+  }
+]

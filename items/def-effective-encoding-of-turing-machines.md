@@ -2,7 +2,7 @@
 id: def-effective-encoding-of-turing-machines
 kind: definition
 title: "A fixed effective binary encoding of deterministic one-tape Turing machines"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-deterministic-one-tape-turing-machine, def-effective-binary-encoding-
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

@@ -1,0 +1,3105 @@
+{
+  "version": 1,
+  "level": "frontier-27",
+  "note": "Step-5 authoring contract for frontier-27 batch 9 on Monday, August 31, 2026.",
+  "scope": [
+    "lem-state-equivalence-is-a-right-congruence",
+    "lem-quotient-dfa-is-well-defined-and-equivalent",
+    "lem-nerode-equivalence-is-a-right-congruence",
+    "lem-dfa-states-refine-nerode-classes",
+    "thm-myhill-nerode-characterization",
+    "cor-nerode-classes-give-the-canonical-minimal-dfa",
+    "thm-minimal-dfa-is-unique-up-to-pointed-isomorphism",
+    "thm-table-filling-minimization-algorithm",
+    "thm-pumping-lemma-for-regular-languages",
+    "cor-distinguishable-prefix-nonregularity-criterion",
+    "fs-the-pumping-lemma-characterizes-regular-languages",
+    "fs-pumping-quantifiers-may-be-reordered",
+    "ex-quotient-dfa-is-well-defined-and-equivalent",
+    "ex-distinguishable-prefix-nonregularity-criterion",
+    "cex-the-pumping-lemma-characterizes-regular-languages",
+    "thm-recognizable-iff-enumerable",
+    "thm-decidable-iff-language-and-complement-are-recognizable",
+    "thm-recognizable-languages-are-closed-under-union-and-intersection",
+    "thm-decidable-languages-are-closed-under-boolean-operations",
+    "lem-dovetailing-reaches-every-finite-stage",
+    "thm-domains-and-ranges-of-partial-computable-functions-are-ce",
+    "thm-every-ce-set-is-a-domain",
+    "thm-infinite-ce-sets-have-computable-injective-enumerations",
+    "prop-machine-descriptions-form-a-decidable-language",
+    "fs-recognizable-means-total",
+    "fs-every-countable-language-is-decidable",
+    "ex-decidable-iff-language-and-complement-are-recognizable",
+    "ex-machine-descriptions-form-a-decidable-language",
+    "cex-recognizable-means-total"
+  ],
+  "contracts": {
+    "lem-state-equivalence-is-a-right-congruence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-right-language-and-equivalent-dfa-states",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$.\n\nFor a state $q\\in Q$, the **right language** of $q$ is\n$$ R_D(q):=\\{w\\in\\Sigma^*:\\delta^*(q,w)\\in F\\}. $$\n\nTwo states $p,q\\in Q$ are **state-equivalent** when they have the same right\nlanguage:\n$$ p\\equiv_D q \\quad\\Longleftrightarrow\\quad R_D(p)=R_D(q). $$\nEquivalently,\n$$ p\\equiv_D q \\quad\\Longleftrightarrow\\quad \\forall w\\in\\Sigma^*,\\ \\delta^*(p,w)\\in F \\iff \\delta^*(q,w)\\in F. $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-equivalence-relation",
+          "source_section": "Definition",
+          "quote": "A **binary relation** on a set $A$ is a subset $R \\subseteq A \\times A$\n([[def-relation-domain-range-and-field]], [[def-cartesian-product]]); we write\n$a \\sim b$ for $(a,b) \\in R$ and read it \"$a$ is related to $b$\".\n\nA binary relation $\\sim$ on $A$ is an **equivalence relation** when it is reflexive\non $A$, symmetric and transitive ([[def-properties-of-a-relation-on-a-set]]), that\nis, when it is\n\n- **reflexive**: $a \\sim a$ for every $a \\in A$;\n- **symmetric**: $a \\sim b$ implies $b \\sim a$, for all $a, b \\in A$;\n- **transitive**: $a \\sim b$ and $b \\sim c$ imply $a \\sim c$, for all\n  $a, b, c \\in A$.\n\nLet $\\sim$ be an equivalence relation on $A$. For $a \\in A$, the **equivalence\nclass** of $a$ is the subset\n\n$$[a] \\;:=\\; \\{\\, b \\in A \\;:\\; a \\sim b \\,\\} \\;\\subseteq\\; A,$$\n\nand any $b$ with $[b] = C$ is called a **representative** of the class $C$. The\n**quotient set** is the set of all classes,\n\n$$A/{\\sim} \\;:=\\; \\{\\, [a] \\;:\\; a \\in A \\,\\},$$\n\na subset of the power set of $A$ ([[def-power-set]]). The map\n$\\pi : A \\to A/{\\sim}$ ([[def-function]]) with $\\pi(a) = [a]$ is the **quotient\nmap**; it is surjective by construction ([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. An **extended transition function**\nfor $D$ is a function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsatisfying the two clauses\n$$ \\delta^*(q,\\varepsilon)=q $$\nfor every $q\\in Q$, and\n$$ \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a) $$\nfor every state $q\\in Q$, every word $u\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nThus $\\delta^*(q,w)$ is intended to be the state reached from $q$ after reading\nthe whole word $w$. The next theorem proves that such a function exists and is\nunique.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Equality of right languages is reflexive, symmetric, and transitive, so [L1] and [L2] show that $\\equiv_D$ is an equivalence relation on $Q$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a letter $a\\in\\Sigma$. If $p\\equiv_D q$, then induction on $v$ using [L3] gives $\\delta^*(\\delta(p,a),v)=\\delta^*(p,av)$ and $\\delta^*(\\delta(q,a),v)=\\delta^*(q,av)$ for every word $v$; applying [L1] to the continuation $av$ therefore yields $\\delta(p,a)\\equiv_D\\delta(q,a)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We now induct on the word $u$. The case $u=\\varepsilon$ is immediate from [L3]. If the claim holds for $u$ and $a\\in\\Sigma$, then step 1.2 applied to the equivalent states $\\delta^*(p,u)$ and $\\delta^*(q,u)$ gives $\\delta^*(p,ua)\\equiv_D\\delta^*(q,ua)$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both claims.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "State-equivalent DFA states stay equivalent after every input word is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "dfa-state-equivalence-right-congruence",
+          "asserts": "for every word $u\\in\\Sigma^*$,\n$$ p\\equiv_D q \\implies \\delta^*(p,u)\\equiv_D\\delta^*(q,u). $$",
+          "claim": "Exact right-language equivalence in each bounded DFA is checked for equivalence-relation laws and closure under every letter transition; iterating that closure is the arbitrary-word claim in the statement.",
+          "checked_in": "Statement and steps 1.1-2.1",
+          "max_states": 3,
+          "alphabet_size": 2
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is preserving state equivalence under arbitrary continuations, not just one letter. The current proof first proves the one-letter step from the right-language definition and then inducts on the whole word."
+      }
+    },
+    "lem-quotient-dfa-is-well-defined-and-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quotient-dfa-by-state-equivalence",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\equiv_D$ be the\nstate-equivalence relation of [[def-right-language-and-equivalent-dfa-states]].\nIts quotient set $Q/{\\equiv_D}$ is available by\n[[lem-state-equivalence-is-a-right-congruence]] together with\n[[def-equivalence-relation]].\n\nThe **quotient DFA by state equivalence** is the automaton\n$$ D/{\\equiv_D}:=\\bigl(Q/{\\equiv_D},\\Sigma,\\overline\\delta,[q_0],\\overline F\\bigr), $$\nwhere\n$$ \\overline\\delta([q],a):=[\\delta(q,a)] $$\nand\n$$ \\overline F:=\\{[q]\\in Q/{\\equiv_D}: q\\in F\\}. $$\n\nThe next item proves that these definitions do not depend on the chosen\nrepresentatives and that the quotient recognizes the same language as $D$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-state-equivalence-is-a-right-congruence",
+          "source_section": "Statement",
+          "quote": "For every DFA $D$, the state-equivalence relation $\\equiv_D$ of\n[[def-right-language-and-equivalent-dfa-states]] is an equivalence relation on\nthe state set, and for every word $u\\in\\Sigma^*$,\n$$ p\\equiv_D q \\implies \\delta^*(p,u)\\equiv_D\\delta^*(q,u). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. An **extended transition function**\nfor $D$ is a function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsatisfying the two clauses\n$$ \\delta^*(q,\\varepsilon)=q $$\nfor every $q\\in Q$, and\n$$ \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a) $$\nfor every state $q\\in Q$, every word $u\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nThus $\\delta^*(q,w)$ is intended to be the state reached from $q$ after reading\nthe whole word $w$. The next theorem proves that such a function exists and is\nunique.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-right-language-and-equivalent-dfa-states",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$.\n\nFor a state $q\\in Q$, the **right language** of $q$ is\n$$ R_D(q):=\\{w\\in\\Sigma^*:\\delta^*(q,w)\\in F\\}. $$\n\nTwo states $p,q\\in Q$ are **state-equivalent** when they have the same right\nlanguage:\n$$ p\\equiv_D q \\quad\\Longleftrightarrow\\quad R_D(p)=R_D(q). $$\nEquivalently,\n$$ p\\equiv_D q \\quad\\Longleftrightarrow\\quad \\forall w\\in\\Sigma^*,\\ \\delta^*(p,w)\\in F \\iff \\delta^*(q,w)\\in F. $$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Step [L2] shows that if $q\\equiv_D q'$ then $[\\delta(q,a)]=[\\delta(q',a)]$ for every letter $a$, so $\\overline\\delta([q],a)$ is independent of the chosen representative.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $q\\equiv_D q'$ and $q\\in F$, then [L4] gives $\\delta^*(q,\\varepsilon)=q$ and $\\delta^*(q',\\varepsilon)=q'$. Applying [L5] to the continuation $\\varepsilon$ therefore shows $q'\\in F$ as well. Thus $\\overline F$ is representative-independent.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $\\overline\\delta^*$ be the extended transition of the quotient DFA. Induction on $u$ using [L1] and [L4] gives $\\overline\\delta^*([q],u)=[\\delta^*(q,u)]$ for every state class $[q]$ and every word $u$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L4",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every word $u$, step 1.3 and [L3] give $u\\in L(D/{\\equiv_D}) \\iff \\overline\\delta^*([q_0],u)\\in\\overline F \\iff [\\delta^*(q_0,u)]\\in\\overline F \\iff \\delta^*(q_0,u)\\in F \\iff u\\in L(D)$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore the quotient DFA is well defined and equivalent to $D$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The quotient by state equivalence is a well-defined equivalent DFA is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The load-bearing point is well-definedness of both transitions and accepting classes on equivalence classes. I repaired the acceptance-class step to use the empty continuation in the state-equivalence definition, and the quotient-language calculation is now fully licensed."
+      }
+    },
+    "lem-nerode-equivalence-is-a-right-congruence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nerode-equivalence",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language over an alphabet $\\Sigma$.\n\nTwo words $u,v\\in\\Sigma^*$ are **Nerode-equivalent for $L$** when every right\ncontinuation tests membership in the same way:\n$$ u\\equiv_L v \\quad\\Longleftrightarrow\\quad \\forall x\\in\\Sigma^*,\\ ux\\in L \\iff vx\\in L. $$\n\nThe equivalence classes of $\\equiv_L$ are the **Nerode classes** of $L$. Their\nnumber, finite or infinite, is the **index** of $\\equiv_L$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-equivalence-relation",
+          "source_section": "Definition",
+          "quote": "A **binary relation** on a set $A$ is a subset $R \\subseteq A \\times A$\n([[def-relation-domain-range-and-field]], [[def-cartesian-product]]); we write\n$a \\sim b$ for $(a,b) \\in R$ and read it \"$a$ is related to $b$\".\n\nA binary relation $\\sim$ on $A$ is an **equivalence relation** when it is reflexive\non $A$, symmetric and transitive ([[def-properties-of-a-relation-on-a-set]]), that\nis, when it is\n\n- **reflexive**: $a \\sim a$ for every $a \\in A$;\n- **symmetric**: $a \\sim b$ implies $b \\sim a$, for all $a, b \\in A$;\n- **transitive**: $a \\sim b$ and $b \\sim c$ imply $a \\sim c$, for all\n  $a, b, c \\in A$.\n\nLet $\\sim$ be an equivalence relation on $A$. For $a \\in A$, the **equivalence\nclass** of $a$ is the subset\n\n$$[a] \\;:=\\; \\{\\, b \\in A \\;:\\; a \\sim b \\,\\} \\;\\subseteq\\; A,$$\n\nand any $b$ with $[b] = C$ is called a **representative** of the class $C$. The\n**quotient set** is the set of all classes,\n\n$$A/{\\sim} \\;:=\\; \\{\\, [a] \\;:\\; a \\in A \\,\\},$$\n\na subset of the power set of $A$ ([[def-power-set]]). The map\n$\\pi : A \\to A/{\\sim}$ ([[def-function]]) with $\\pi(a) = [a]$ is the **quotient\nmap**; it is surjective by construction ([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reflexivity, symmetry, and transitivity follow immediately from the biconditional in [L1], so [L2] shows that $\\equiv_L$ is an equivalence relation.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $u\\equiv_L v$ and fix $x\\in\\Sigma^*$. For every continuation $y$, [L1] applied to the continuation $xy$ gives $uxy\\in L \\iff vxy\\in L$, which is exactly the condition $(ux)\\equiv_L(vx)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $\\equiv_L$ is an equivalence relation preserved by right concatenation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nerode-equivalent words stay equivalent after right concatenation is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is the biconditional under right concatenation. The proof simply substitutes the longer continuation xy into the Nerode definition, so both the equivalence-relation and right-congruence clauses are sound."
+      }
+    },
+    "lem-dfa-states-refine-nerode-classes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nerode-equivalence",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language over an alphabet $\\Sigma$.\n\nTwo words $u,v\\in\\Sigma^*$ are **Nerode-equivalent for $L$** when every right\ncontinuation tests membership in the same way:\n$$ u\\equiv_L v \\quad\\Longleftrightarrow\\quad \\forall x\\in\\Sigma^*,\\ ux\\in L \\iff vx\\in L. $$\n\nThe equivalence classes of $\\equiv_L$ are the **Nerode classes** of $L$. Their\nnumber, finite or infinite, is the **index** of $\\equiv_L$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. An **extended transition function**\nfor $D$ is a function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsatisfying the two clauses\n$$ \\delta^*(q,\\varepsilon)=q $$\nfor every $q\\in Q$, and\n$$ \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a) $$\nfor every state $q\\in Q$, every word $u\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nThus $\\delta^*(q,w)$ is intended to be the state reached from $q$ after reading\nthe whole word $w$. The next theorem proves that such a function exists and is\nunique.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every state $s$ and words $x,z$, repeated use of [L3] gives $\\delta^*(s,xz)=\\delta^*(\\delta^*(s,x),z)$; in particular, $\\delta^*(q_0,uz)=\\delta^*(\\delta^*(q_0,u),z)$ and $\\delta^*(q_0,vz)=\\delta^*(\\delta^*(q_0,v),z)$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\delta^*(q_0,u)=\\delta^*(q_0,v)$, then step 1.1 implies $\\delta^*(q_0,uz)=\\delta^*(q_0,vz)$ for every $z\\in\\Sigma^*$. By [L2], this gives $uz\\in L$ if and only if $vz\\in L$ for every $z$, so [L1] yields $u\\equiv_L v$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore every reachable state of $D$ contains words from at most one Nerode class, and distinct Nerode classes must land in distinct reachable states.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A DFA can realize at most one Nerode class per reachable state is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is the factorization of a run on uz into the state reached after u followed by z. The proof establishes that factorization and then uses acceptance-from-state equality to inject Nerode classes into reachable states."
+      }
+    },
+    "thm-myhill-nerode-characterization": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A language $L\\subseteq\\Sigma^*$ is\n**regular** when there exists a DFA $D$ over $\\Sigma$ such that\n$$ L=L(D), $$\nwhere $L(D)$ is the recognized language of\n[[def-dfa-acceptance-and-recognized-language]].\n\nThus regularity is a property of a language over a fixed alphabet: the machine\nis a witness, not part of the language itself.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-dfa-states-refine-nerode-classes",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a DFA recognizing a language $L$. If two words $u,v\\in\\Sigma^*$ drive\n$D$ from its start state to the same state, then $u\\equiv_L v$. Consequently,\ndistinct Nerode classes of $L$ must reach distinct reachable states of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-nerode-equivalence-is-a-right-congruence",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\Sigma^*$, the Nerode relation $\\equiv_L$ of\n[[def-nerode-equivalence]] is an equivalence relation on $\\Sigma^*$, and for\nevery words $u,v,x\\in\\Sigma^*$,\n$$ u\\equiv_L v \\implies ux\\equiv_L vx. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $L$ is regular. By [L1], choose a DFA $D$ recognizing $L$. Step [L2] gives an injection from the set of Nerode classes of $L$ into the reachable state set of $D$, so the index of $\\equiv_L$ is finite because a DFA has only finitely many states.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume conversely that $\\equiv_L$ has finite index. Let $Q$ be its finite set of equivalence classes, let the start state be $[\\varepsilon]$, define $\\delta([u],a):=[ua]$, and let $F:=\\{[u]\\in Q:u\\in L\\}$. By [L3], the transition rule is well defined, so [L4] gives a DFA $D_L=(Q,\\Sigma,\\delta,[\\varepsilon],F)$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every word $u\\in\\Sigma^*$, induction on $u$ shows that the state reached by $D_L$ from $[\\varepsilon]$ is exactly $[u]$. Hence $u\\in L(D_L) \\iff [u]\\in F \\iff u\\in L$, so $D_L$ recognizes $L$ and [L1] implies that $L$ is regular.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove both implications.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A language is regular if and only if its Nerode equivalence has finite index uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the regular-to-finite-index direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the finite-index-to-regular direction."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The real risk is the converse construction on Nerode classes. The current proof uses right-congruence to define class transitions, the empty continuation to interpret acceptance, and the reachable-state refinement lemma for the forward finite-index bound."
+      }
+    },
+    "cor-nerode-classes-give-the-canonical-minimal-dfa": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-myhill-nerode-characterization",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language. Then $L$ is regular if and only if its\nNerode equivalence relation $\\equiv_L$ has finite index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-dfa-states-refine-nerode-classes",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a DFA recognizing a language $L$. If two words $u,v\\in\\Sigma^*$ drive\n$D$ from its start state to the same state, then $u\\equiv_L v$. Consequently,\ndistinct Nerode classes of $L$ must reach distinct reachable states of $D$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $L$ is regular, [L1] provides a DFA $D_L$ whose states are exactly the Nerode classes of $L$ and which recognizes $L$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $D$ be any DFA recognizing $L$. Every Nerode class contains some word $u$, and the state reached by $D$ on $u$ is reachable. By [L2], two distinct Nerode classes cannot reach the same state of $D$, so $D$ has at least as many reachable states as $D_L$ has states.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 shows that no DFA for $L$ can use fewer reachable states than $D_L$, so $D_L$ is minimal. It is canonical because its states are defined directly from the language $L$ rather than from an auxiliary machine.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Nerode classes form the canonical minimal DFA is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-minimal-dfa-is-unique-up-to-pointed-isomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-nerode-classes-give-the-canonical-minimal-dfa",
+          "source_section": "Statement",
+          "quote": "If $L$ is regular, then the DFA whose states are the Nerode classes of $L$ is a\nminimal DFA for $L$. Its state set and transition structure depend only on $L$,\nso it is canonical.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-reachable-dfa-state",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$. A state $q\\in Q$ is **reachable** when there exists a word\n$w\\in\\Sigma^*$ such that\n$$ q=\\delta^*(q_0,w). $$\n\nThe set of all reachable states is the **reachable part** of the DFA.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-removing-unreachable-states-preserves-language",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, let $Q_r\\subseteq Q$ be its reachable\nstates, and let $D_r$ be the DFA obtained by restricting $D$ to the states\n$Q_r$. Then\n$$ L(D_r)=L(D). $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A minimal DFA has no unreachable states. Indeed, if $D_i$ had an unreachable state, then [L3] would remove it without changing the language, contradicting minimality.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $D_L$ be the canonical Nerode-class DFA from [L1]. Because step 1.1 shows that every state of $D_i$ is reachable, for each state $q$ of $D_i$ we may choose a word $u$ with $\\delta_i^*(q_{0,i},u)=q$, which is possible by [L2], and send $q$ to the Nerode class $[u]$. If two words $u,v$ reach the same state $q$, then every continuation is accepted or rejected identically from that state, so $u$ and $v$ determine the same Nerode class. Thus the map is well defined. For any Nerode class $[u]$, the state reached by $D_i$ on $u$ maps to $[u]$, so the map is surjective onto the state set of $D_L$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both $D_i$ and $D_L$ are minimal DFAs for $L$: $D_i$ by hypothesis and $D_L$ by [L1]. Therefore their finite state sets have the same cardinality. The surjection from step 2.1 between finite sets of equal size is therefore a bijection.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The bijection of steps 2.1 and 3.1 sends the start state to $[\\varepsilon]$, and its definition via reaching words shows that it preserves letter transitions and accepting states. Hence each $D_i$ is pointed-isomorphic to $D_L$, so $D_1$ and $D_2$ are pointed-isomorphic to one another.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Minimal DFAs are unique up to start-state-preserving isomorphism is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The fragile step was uniqueness from minimality. Reader 9 repaired this by mapping each reachable state to its Nerode class, proving surjectivity onto the canonical DFA, and then using equal finite cardinalities to recover a pointed isomorphism."
+      }
+    },
+    "thm-table-filling-minimization-algorithm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-removing-unreachable-states-preserves-language",
+          "source_section": "Statement",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, let $Q_r\\subseteq Q$ be its reachable\nstates, and let $D_r$ be the DFA obtained by restricting $D$ to the states\n$Q_r$. Then\n$$ L(D_r)=L(D). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-distinguishing-word",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$.\n\n- A word $x\\in\\Sigma^*$ **distinguishes** states $p,q\\in Q$ when exactly one of\n  the states $\\delta^*(p,x)$ and $\\delta^*(q,x)$ is accepting. Equivalently,\n  $x$ witnesses that $p$ and $q$ are not state-equivalent.\n\n- For a language $L\\subseteq\\Sigma^*$, a word $x\\in\\Sigma^*$ **distinguishes**\n  words $u,v\\in\\Sigma^*$ when exactly one of $ux$ and $vx$ lies in $L$.\n  Equivalently, $x$ witnesses that $u\\not\\equiv_L v$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-state-equivalence-is-a-right-congruence",
+          "source_section": "Statement",
+          "quote": "For every DFA $D$, the state-equivalence relation $\\equiv_D$ of\n[[def-right-language-and-equivalent-dfa-states]] is an equivalence relation on\nthe state set, and for every word $u\\in\\Sigma^*$,\n$$ p\\equiv_D q \\implies \\delta^*(p,u)\\equiv_D\\delta^*(q,u). $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-quotient-dfa-is-well-defined-and-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a DFA. The quotient automaton $D/{\\equiv_D}$ of\n[[def-quotient-dfa-by-state-equivalence]] is well defined and recognizes the\nsame language as $D$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Replace $D$ by its reachable part using [L1]. Let $M_0$ be the set of accepting/nonaccepting pairs, and for $t\\geq 0$ let $M_{t+1}$ be obtained from $M_t$ by also marking every pair $\\{p,q\\}$ for which some letter $a$ has $\\{\\delta(p,a),\\delta(q,a)\\}\\in M_t$. Put $M:=\\bigcup_t M_t$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We prove by induction on $t$ that every pair in $M_t$ has a distinguishing word of length at most $t$. For $M_0$, the empty word distinguishes every accepting/nonaccepting pair by [L2]. For the induction step, if $\\{p,q\\}$ is newly marked because $\\{\\delta(p,a),\\delta(q,a)\\}\\in M_t$, prepend the letter $a$ to a distinguishing word for the successor pair.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, we induct on the length of a distinguishing word $x$. If $x=\\varepsilon$, then the pair is in $M_0$. If $x=ay$, then $y$ distinguishes $\\delta(p,a)$ and $\\delta(q,a)$, so the induction hypothesis puts the successor pair in some $M_t$, and the algorithm then marks $\\{p,q\\}$ at the next stage. Therefore a pair is marked exactly when it is distinguishable.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Unmarked pairs are therefore precisely the indistinguishable pairs, hence precisely the state-equivalent pairs by [L2]. By [L3] this is an equivalence relation, and [L4] gives an equivalent quotient DFA $Q$.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Let $E$ be any reachable DFA equivalent to $D$. Because step 1.1 replaced $D$ by its reachable part, each state class $C$ of $Q$ has a representative state $q_C$ reached in $D$ by some word $u_C$. Send $C$ to the state reached by $E$ on $u_C$. If $C\\neq C'$, then their representatives are distinguishable by step 3.1; choose a distinguishing word $x$. The words $u_Cx$ and $u_{C'}x$ are then accepted differently by $D$, hence also by the equivalent DFA $E$, so the reached states of $E$ are distinct. Thus this map from the states of $Q$ into the states of $E$ is injective.",
+          "step": "4.2",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Therefore every reachable DFA equivalent to $D$ has at least as many states as $Q$. Since $Q$ itself is equivalent to $D$ by step 4.1, it is a minimal DFA for the same language.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The table-filling algorithm computes state equivalence and DFA minimization is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is proving global minimality rather than only no-further-merge. Reader 9 added the distinguishing-suffix injection from quotient states into any reachable equivalent DFA, which closes the minimality claim."
+      }
+    },
+    "thm-pumping-lemma-for-regular-languages": {
+      "citations": [
+        {
+          "fact": "L0",
+          "source": "def-regular-language-by-dfa-recognition",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A language $L\\subseteq\\Sigma^*$ is\n**regular** when there exists a DFA $D$ over $\\Sigma$ such that\n$$ L=L(D), $$\nwhere $L(D)$ is the recognized language of\n[[def-dfa-acceptance-and-recognized-language]].\n\nThus regularity is a property of a language over a fixed alphabet: the machine\nis a witness, not part of the language itself.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-extended-dfa-transition-function",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA. An **extended transition function**\nfor $D$ is a function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsatisfying the two clauses\n$$ \\delta^*(q,\\varepsilon)=q $$\nfor every $q\\in Q$, and\n$$ \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a) $$\nfor every state $q\\in Q$, every word $u\\in\\Sigma^*$, and every letter\n$a\\in\\Sigma$.\n\nThus $\\delta^*(q,w)$ is intended to be the state reached from $q$ after reading\nthe whole word $w$. The next theorem proves that such a function exists and is\nunique.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-pigeonhole",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N}$ be the von Neumann naturals, with $0 = \\varnothing$ and\n$\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $<$ be the order of\n[[def-nat-order]], so that $m < n \\iff m \\in n$ and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ ([[lem-nat-order-is-membership]]).\nWrite $\\approx$ for equinumerosity ([[def-equinumerous]]). Then:\n\n1. for every $n \\in \\mathbb{N}$ there is **no injection** $\\sigma(n) \\to n$;\n2. if $m < n$ then there is no injection $n \\to m$;\n3. if $n \\approx m$ with $n, m \\in \\mathbb{N}$, then $n = m$;\n4. $\\mathbb{N} \\not\\approx n$ for every $n \\in \\mathbb{N}$;\n5. no natural number is equinumerous with a proper subset of itself: if\n   $A \\subseteq n$ and $n \\approx A$, then $A = n$.\n\nClaim 1 is the pigeonhole principle in its sharpest form, that $n + 1$ pigeons do\nnot fit injectively into $n$ holes; the other four are the consequences the\nlibrary actually quotes. Claim 3 says a finite set is equinumerous with exactly\none natural number, so \"the number of elements\" is well defined. Claim 4 says\n$\\mathbb{N}$ is infinite. Claim 5 says no natural number is Dedekind-infinite.\n\n**Why this is proved here.** The next item on this page defines finiteness as\nequinumerosity with a natural number, and the three size classes it introduces\nare exhaustive by construction but mutually exclusive only because of claim 4.\nSeveral later items also need claim 3 or claim 5. The principle is elementary and\nbelongs with the naturals, but it is about counting rather than about order, so\nit is proved here, immediately before finiteness is defined, from induction and\nthe identification of the order with membership alone. Nothing below uses\nordinals, cardinals, or any later material.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose the DFA $D$ recognizing $L$ supplied by [L0], and let $p$ be its number of states, which is finite by [L1]. Fix a word $w=a_1\\cdots a_m\\in L$ with $m\\geq p$. As $D$ reads the prefixes $\\varepsilon,a_1,a_1a_2,\\dots,a_1\\cdots a_p$, [L3] gives $p+1$ visited states.",
+          "step": "1.1",
+          "inputs": [
+            "L0",
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L4], two of those first $p+1$ visited states are equal; write them as the states after the prefixes of lengths $i<j\\leq p$, and set $x:=a_1\\cdots a_i$, $y:=a_{i+1}\\cdots a_j$, and $z:=a_{j+1}\\cdots a_m$. Then $w=xyz$, $|xy|=j\\leq p$, and $|y|=j-i>0$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the run returns to the same state after reading $y$, repeating or deleting that loop does not change the state reached before the suffix $z$. Therefore [L2] implies $xy^iz\\in L$ for every $i\\geq 0$, so the factorization from step 2.1 satisfies all three required conditions.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The pumping lemma for regular languages is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The only load-bearing point is the repeated-state loop among the first p+1 prefixes. The current proof chooses the repeated states by pigeonhole and pumps exactly the loop segment between them."
+      }
+    },
+    "cor-distinguishable-prefix-nonregularity-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-distinguishing-word",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$.\n\n- A word $x\\in\\Sigma^*$ **distinguishes** states $p,q\\in Q$ when exactly one of\n  the states $\\delta^*(p,x)$ and $\\delta^*(q,x)$ is accepting. Equivalently,\n  $x$ witnesses that $p$ and $q$ are not state-equivalent.\n\n- For a language $L\\subseteq\\Sigma^*$, a word $x\\in\\Sigma^*$ **distinguishes**\n  words $u,v\\in\\Sigma^*$ when exactly one of $ux$ and $vx$ lies in $L$.\n  Equivalently, $x$ witnesses that $u\\not\\equiv_L v$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-myhill-nerode-characterization",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language. Then $L$ is regular if and only if its\nNerode equivalence relation $\\equiv_L$ has finite index.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If two words are pairwise distinguished by suffixes, then [L1] shows that they lie in distinct Nerode classes.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the infinitely many given words occupy infinitely many Nerode classes. By [L2], $L$ cannot be regular.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Infinitely many pairwise distinguishable prefixes force nonregularity is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-the-pumping-lemma-characterizes-regular-languages": {
+      "citations": [
+        {
+          "fact": "L2",
+          "source": "cor-distinguishable-prefix-nonregularity-criterion",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$. If there are infinitely many words in $\\Sigma^*$ that\nare pairwise distinguished by suffixes, then $L$ is not regular.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The language $G$ satisfies the pumping conclusion with pumping length $4$. If $s=ww^Rv\\in G$ with $|w|\\geq 2$, write $w=au$ with $u\\neq\\varepsilon$ and choose $x=\\varepsilon$, $y=a$, $z=uu^Rav$; then $xz=uu^Rav\\in G$, the original word is $xyz\\in G$, and for every $i\\geq 2$ the word $xy^iz=a^iuu^Rav$ lies in $G$ by using the one-letter witness word $a$ and the nonempty suffix $a^{i-2}uu^Rav$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $n\\geq 1$, let $p_n:=(01)^n$ and $x_n:=(10)^n1$. Then $p_nx_n=(01)^n(10)^n1$ lies in $G$ by taking witness word $(01)^n$ and suffix $1$. If $m>n$ and $p_mx_n$ were in $G$, write $p_mx_n=rr^Rv$ with $r\\neq\\varepsilon$ and $v\\in\\{0,1\\}^+$. The word $p_mx_n=(01)^m(10)^n1$ has exactly one doubled adjacent pair, namely the middle `11` at the junction between $(01)^m$ and $(10)^n1$. Any prefix of the form $rr^R$ has a doubled middle pair at the boundary between $r$ and $r^R$, so that boundary must be this unique `11`. Hence $|r|=2m$, which makes the palindromic prefix $rr^R$ have length $4m$. But $|p_mx_n|=2m+2n+1<4m+1$ because $n<m$, so no such factorization with nonempty $v$ exists. Therefore $p_mx_n\\notin G$, and the prefixes $p_n$ are pairwise distinguishable.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If instead $|w|=1$, then $s=aav$ with $|v|\\geq 2$ because $|s|\\geq 4$; writing $v=bt$ and choosing $x=aa$, $y=b$, $z=t$ pumps entirely inside the nonempty suffix $v$, so every $xy^iz$ stays in $G$. Thus every sufficiently long word in $G$ has a legal pumping decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.2 and [L2] show that $G$ is not regular, while steps 1.1 and 2.1 show that $G$ still has the regular pumping property. Therefore the pumping property does not characterize regularity, and the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the witness-language branch where the front word has length 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the pumping lemma characterizes the regular languages is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-pumping-quantifiers-may-be-reordered": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-pumping-lemma-for-regular-languages",
+          "source_section": "Statement",
+          "quote": "If $L$ is regular, then there exists $p\\geq 1$ such that every word\n$w\\in L$ with $|w|\\geq p$ can be written as $w=xyz$ with\n$$ |xy|\\leq p,\\qquad |y|>0,\\qquad xy^iz\\in L\\ \\text{for every } i\\geq 0. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The language $O$ is regular: a two-state DFA that toggles parity after each input symbol accepts exactly the words of odd length.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any pumping length $p\\geq 1$ and take $w:=0^{2p+1}\\in O$. The decomposition $x:=\\varepsilon$, $y:=0$, $z:=0^{2p}$ is legal because $|xy|=1\\leq p$ and $|y|>0$, but pumping once gives $xz=0^{2p}$, whose length is even, so $xz\\notin O$. Thus this legal decomposition does not pump.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 shows that a regular language can have bad legal decompositions even though [L1] supplies some good one. Therefore the quantifiers cannot be reordered as stated, and the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "the pumping lemma still works if its quantifiers are reordered is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-quotient-dfa-is-well-defined-and-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-quotient-dfa-is-well-defined-and-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $D$ be a DFA. The quotient automaton $D/{\\equiv_D}$ of\n[[def-quotient-dfa-by-state-equivalence]] is well defined and recognizes the\nsame language as $D$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The states $r$ and $s$ are equivalent because every continuation from either state stays in a rejecting sink. No other pair is equivalent: $q_a$ is distinguished from $q_b$ by the word $b$, and $q_0$ is distinguished from both $q_a$ and $q_b$ by $\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The quotient therefore has four states $[q_0]$, $[q_a]$, $[q_b]$, and $[r]=[s]$. Its only nontrivial merge is the class $[r]=[s]$, and [L1] shows that the quotient recognizes the same language as the original DFA.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Concretely, the quotient still accepts $a$, $b$, and $bb$, while it rejects $\\varepsilon$, $ab$, and $ba$. The merge removes a redundant rejecting state without changing any acceptance decision.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Merging equivalent sink-like states in a small DFA is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-distinguishable-prefix-nonregularity-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-distinguishing-word",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA with extended transition function\n$\\delta^*$.\n\n- A word $x\\in\\Sigma^*$ **distinguishes** states $p,q\\in Q$ when exactly one of\n  the states $\\delta^*(p,x)$ and $\\delta^*(q,x)$ is accepting. Equivalently,\n  $x$ witnesses that $p$ and $q$ are not state-equivalent.\n\n- For a language $L\\subseteq\\Sigma^*$, a word $x\\in\\Sigma^*$ **distinguishes**\n  words $u,v\\in\\Sigma^*$ when exactly one of $ux$ and $vx$ lies in $L$.\n  Equivalently, $x$ witnesses that $u\\not\\equiv_L v$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-distinguishable-prefix-nonregularity-criterion",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$. If there are infinitely many words in $\\Sigma^*$ that\nare pairwise distinguished by suffixes, then $L$ is not regular.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix integers $i<j$. Appending the suffix $1^i$ gives $0^i1^i\\in L$ and $0^j1^i\\notin L$, so [L1] shows that $1^i$ distinguishes the prefixes $0^i$ and $0^j$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because every pair $0^i,0^j$ with $i<j$ is distinguished by step 1.1, the family $\\{0^n:n\\geq 0\\}$ is pairwise distinguishable. Therefore [L2] implies that $L$ is not regular.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0} is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-the-pumping-lemma-characterizes-regular-languages": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "fs-the-pumping-lemma-characterizes-regular-languages",
+          "source_section": "Statement",
+          "quote": "If a language satisfies the regular pumping property, then it is regular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-distinguishable-prefix-nonregularity-criterion",
+          "source_section": "Statement",
+          "quote": "Let $L\\subseteq\\Sigma^*$. If there are infinitely many words in $\\Sigma^*$ that\nare pairwise distinguished by suffixes, then $L$ is not regular.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "fs-the-pumping-lemma-characterizes-regular-languages",
+          "source_section": "Statement",
+          "quote": "If a language satisfies the regular pumping property, then it is regular.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The same decomposition used in [[fs-the-pumping-lemma-characterizes-regular-languages]] shows that $G$ satisfies the regular pumping conclusion: words with $|w|\\geq 2$ pump on the first letter of the front copy of $w$, while words with $|w|=1$ pump inside the nonempty tail $v$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $n\\geq 1$, the prefix $p_n=(01)^n$ is distinguished from every longer $p_m=(01)^m$ by the suffix $x_n=(10)^n1$, because [L3] gives $p_nx_n\\in G$ and $p_mx_n\\notin G$ when $m>n$. Hence the prefixes $p_n$ are pairwise distinguishable, so [L2] shows that $G$ is not regular.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $G$ is a concrete nonregular language that still satisfies the pumping conclusion, so it is a counterexample to the refuted statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonregular language can still satisfy the regular pumping lemma is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-recognizable-iff-enumerable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computably-enumerable-set",
+          "source_section": "Definition",
+          "quote": "Fix an effectively encoded set $X$.\n\nA subset $A\\subseteq X$ is **computably enumerable** when either $A=\\varnothing$\nor there exists a total computable function\n$$ e:\\mathbb N\\to X $$\nwhose range is exactly $A$.\n\nIf $L\\subseteq\\Sigma^*$ is a language over an alphabet $\\Sigma$, then $L$ is\n**computably enumerable** when it is c.e. as a subset of $\\Sigma^*$ under the\nchosen effective word encoding.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume first that $L$ is c.e. If $L=\\varnothing$, then the machine that immediately rejects every input recognizes $L$. Otherwise choose a total computable enumerator $e:\\mathbb N\\to\\{0,1\\}^*$ with range $L$ as in [L2]. On input $x$, search through $n=0,1,2,\\dots$ and compute $e(n)$ until $e(n)=x$; if this occurs, accept. For $x\\in L$ the search eventually finds a witness $n$, and for $x\\notin L$ it never accepts. Thus $L$ is recognizable by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume conversely that $L$ is recognizable. If $L=\\varnothing$, then [L2] already says that $L$ is c.e. So assume $L\\neq\\varnothing$, and let $M$ be a recognizer for $L$. By dovetailing the simulations of $M$ over binary words in shortlex order, fix one accepted word $a_0\\in L$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a standard total computable bijection $n\\mapsto(i,t)$ from $\\mathbb N$ onto $\\mathbb N\\times\\mathbb N$, and let $w_i$ be the $i$th binary word in shortlex order. Define $$ e(n):=\\begin{cases} w_i,&\\text{if }M\\text{ accepts }w_i\\text{ within }t\\text{ steps},\\\\ a_0,&\\text{otherwise.} \\end{cases} $$ This is a total computable function $\\mathbb N\\to\\{0,1\\}^*$. Every output of $e$ lies in $L$, and if $w\\in L$ then $w=w_i$ for some $i$ and $M$ accepts $w_i$ in some finite number of steps $t$, so $e(n)=w$ for the paired input with coordinates $(i,t)$. Hence the range of $e$ is exactly $L$, so [L2] shows that $L$ is c.e.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 handle the empty-language case explicitly before the nonempty enumeration construction."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A language is recognizable if and only if it is computably enumerable has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A language is recognizable if and only if it is computably enumerable has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A language is recognizable if and only if it is computably enumerable has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A language is recognizable if and only if it is computably enumerable is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 replaces an arbitrary witness by the first accepted word in length-lex order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves computably enumerable implies recognizable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves recognizable implies computably enumerable."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The old risk was the unsupported jump from recognizability to computable enumerability under an arbitrary word encoding. The current theorem is deliberately the binary-identity version needed on these pages, and its reverse direction now builds the enumerator by pairing a word index with a time bound."
+      }
+    },
+    "thm-decidable-iff-language-and-complement-are-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **union**, **intersection**, and **difference** are the languages\n$$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$\n\nTheir **complement** is taken inside the same ambient $\\Sigma^*$:\n$$ L^{c}:=\\Sigma^*\\setminus L. $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $L$ is decidable, then a decider for $L$ is already a recognizer for $L$, and swapping its accepting and rejecting halting states gives a recognizer for $L^c$. Thus item 1 implies item 2 by [L1] and [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $M$ recognizes $L$ and $N$ recognizes $L^c$. On input $w$, simulate one step of $M$, then one step of $N$, then two steps of each, and so on. If $M$ accepts at some stage, accept; if $N$ accepts at some stage, reject. Because every word lies in exactly one of $L$ and $L^c$, exactly one machine must eventually accept, so this interleaving always halts with the correct answer. Therefore $L$ is decidable by [L1].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove both directions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A language is decidable if and only if it and its complement are recognizable uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves decidable implies both the language and its complement are recognizable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves recognizability of both the language and its complement implies decidability."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is total halting of the interleaved recognizers. The proof uses that every word lies in exactly one of L and its complement, so one of the two simulations must eventually accept and halt the combined machine."
+      }
+    },
+    "thm-recognizable-languages-are-closed-under-union-and-intersection": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **union**, **intersection**, and **difference** are the languages\n$$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$\n\nTheir **complement** is taken inside the same ambient $\\Sigma^*$:\n$$ L^{c}:=\\Sigma^*\\setminus L. $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M_L$ recognize $L$ and $M_K$ recognize $K$. To recognize $L\\cup K$, interleave their computations on an input $w$ and accept as soon as either machine accepts. If $w\\in L\\cup K$, one of the recognizers eventually accepts; if $w\\notin L\\cup K$, neither does. Hence $L\\cup K$ is recognizable by [L1] and [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "To recognize $L\\cap K$, again interleave the two computations on $w$, but now record whether each machine has accepted and halt only once both accept. If $w\\in L\\cap K$, both accepting events occur after finitely many stages; if $w\\notin L\\cap K$, at least one machine never accepts, which is allowed for a recognizer. Thus $L\\cap K$ is recognizable.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore recognizable languages are closed under union and intersection.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Recognizable languages are closed under union and intersection is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-decidable-languages-are-closed-under-boolean-operations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-language-boolean-operations",
+          "source_section": "Definition",
+          "quote": "Fix an alphabet $\\Sigma$, and let $L,K\\subseteq\\Sigma^*$ be languages over\n$\\Sigma$ ([[def-language-over-an-alphabet]]).\n\nTheir **union**, **intersection**, and **difference** are the languages\n$$ L\\cup K,\\qquad L\\cap K,\\qquad L\\setminus K. $$\n\nTheir **complement** is taken inside the same ambient $\\Sigma^*$:\n$$ L^{c}:=\\Sigma^*\\setminus L. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $M_L$ decides $L$, then flipping its final yes-or-no answer gives a halting decider for $L^c$. If $M_L$ and $M_K$ decide $L$ and $K$, run both and combine their two halting answers by the ordinary Boolean truth tables to decide $L\\cup K$ and $L\\cap K$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], the same deciders decide $L\\setminus K$ as $L\\cap K^c$ and decide $L\\triangle K$ as $(L\\setminus K)\\cup(K\\setminus L)$. Because each constituent operation from step 1.1 preserves halting, these languages are decidable as well.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore decidable languages are closed under all five stated Boolean operations.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Decidable languages are closed under the Boolean operations is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-dovetailing-reaches-every-finite-stage": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dovetailing-schedule",
+          "source_section": "Definition",
+          "quote": "For each stage $s\\in\\mathbb N$, let\n$$ S_s:=\\{(i,t)\\in\\mathbb N^2:i+t=s\\}. $$\nInside $S_s$, order the pairs lexicographically by $i$ and then by $t$.\n\nThe sequence\n$$ S_0,S_1,S_2,\\dots $$\nis the **stage-sum dovetailing schedule**. Running task $i$ for one more local\nstep at each occurrence of a pair $(i,t)$ means that global stage $s$ performs\nexactly the finitely many local simulations whose task index and local time sum\nto $s$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(i,t)\\in\\mathbb N^2$ and set $s:=i+t$. Then the defining condition for $S_s$ is satisfied, so [L1] gives $(i,t)\\in S_s$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the task with index $i$ is run through its local time $t$ by the finite global stage $s=i+t$. This is exactly the claimed fairness property.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A dovetailing schedule reaches every finite simulation stage is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-domains-and-ranges-of-partial-computable-functions-are-ce": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computable-and-partial-computable-function",
+          "source_section": "Definition",
+          "quote": "Fix effective encodings of sets $X$ and $Y$.\n\nA function\n$$ f:D\\to Y,\\qquad D\\subseteq X, $$\nis **partial computable** when some deterministic Turing machine computes it in\nthe sense of [[def-partial-function-computed-by-a-machine]].\n\nIf $D=X$, so the machine halts with the correct output on every input in $X$,\nthen $f$ is **computable** or **total computable**.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-recognizable-iff-enumerable",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\{0,1\\}^*$, the following are equivalent, where\ncomputable enumerability is taken with respect to the identity encoding of\nbinary words:\n\n1. $L$ is recognizable.\n2. $L$ is computably enumerable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-dovetailing-reaches-every-finite-stage",
+          "source_section": "Statement",
+          "quote": "In the stage-sum dovetailing schedule of [[def-dovetailing-schedule]], every\npair $(i,t)\\in\\mathbb N^2$ appears at the finite global stage $i+t$. In\nparticular, every fixed finite simulation prefix of every fixed task is\neventually reached.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E_D:=\\{e_X(x):x\\in D\\}\\subseteq\\{0,1\\}^*$. On an input word $z\\in\\{0,1\\}^*$, run the computable decoder from the given data for the input encoding of $X$. If $z$ is malformed, diverge forever. If $z=e_X(x)$ is valid, simulate the machine from [L1] on the same word $z$ and accept exactly when that simulation halts. This recognizes exactly the binary language $E_D$, so [L2] makes $E_D$ computably enumerable. Since $E_D$ consists exactly of the codes of elements of $D$, the same enumeration viewed through the fixed encoding $e_X$ witnesses that $D$ is computably enumerable as a subset of $X$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $E_R:=\\{e_Y(y):y\\in f[D]\\}\\subseteq\\{0,1\\}^*$. On an input word $z\\in\\{0,1\\}^*$, dovetail the following branches over all binary words $w$ in shortlex order: first run the computable decoder for the input encoding of $X$ on $w$, and discard the branch if $w$ is malformed; otherwise simulate the machine from [L1] on $w$. Accept as soon as some valid input code halts with output $z$. If $z=e_Y(f(x))$ for some $x\\in D$, then [L3] ensures that the halting computation on the valid code $e_X(x)$ is eventually reached, so the recognizer accepts. If $z\\notin E_R$, no valid branch can witness acceptance. Thus $E_R$ is recognizable, [L2] makes it computably enumerable as a binary language, and therefore $f[D]$ is computably enumerable as a subset of $Y$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore both the domain and the range of a partial computable function are computably enumerable.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Domains and ranges of partial computable functions are computably enumerable is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The old proof treated a merely specified decoder as a machine subroutine. The current statement now makes the input-decoder computability explicit and routes both domain and range through recognizable binary code languages."
+      }
+    },
+    "thm-every-ce-set-is-a-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computably-enumerable-set",
+          "source_section": "Definition",
+          "quote": "Fix an effectively encoded set $X$.\n\nA subset $A\\subseteq X$ is **computably enumerable** when either $A=\\varnothing$\nor there exists a total computable function\n$$ e:\\mathbb N\\to X $$\nwhose range is exactly $A$.\n\nIf $L\\subseteq\\Sigma^*$ is a language over an alphabet $\\Sigma$, then $L$ is\n**computably enumerable** when it is c.e. as a subset of $\\Sigma^*$ under the\nchosen effective word encoding.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computable-and-partial-computable-function",
+          "source_section": "Definition",
+          "quote": "Fix effective encodings of sets $X$ and $Y$.\n\nA function\n$$ f:D\\to Y,\\qquad D\\subseteq X, $$\nis **partial computable** when some deterministic Turing machine computes it in\nthe sense of [[def-partial-function-computed-by-a-machine]].\n\nIf $D=X$, so the machine halts with the correct output on every input in $X$,\nthen $f$ is **computable** or **total computable**.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $A=\\varnothing$, take the nowhere-defined partial function from $X$ to the one-point set $\\{0\\}$. Its machine diverges on every input, so [L2] shows that its domain is exactly $\\varnothing=A$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose now that $A\\neq\\varnothing$, and let $e:\\mathbb N\\to X$ be the total computable enumerator from [L1]. Define a machine on an input code $z\\in\\{0,1\\}^*$ that computes the outputs $e(0),e(1),e(2),\\dots$ one after another until it first sees the codeword $z$, at which point it halts and outputs $0$. If $z=e_X(x)$ with $x\\in A$, some index $n$ satisfies $e(n)=x$, so the machine eventually halts on $z$. If $x\\notin A$, no enumerated value has code $z$, so the machine never halts on $z$. Thus [L2] gives a partial computable function whose domain is exactly $A$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In either case, $A$ is the domain of a partial computable function.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the empty set with the nowhere-defined partial function."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every computably enumerable set is the domain of a partial computable function is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is typing the machine on codewords rather than on abstract elements of X. The repaired proof now searches the enumerated output codes and halts exactly on the codes of elements of A."
+      }
+    },
+    "thm-infinite-ce-sets-have-computable-injective-enumerations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-computably-enumerable-set",
+          "source_section": "Definition",
+          "quote": "Fix an effectively encoded set $X$.\n\nA subset $A\\subseteq X$ is **computably enumerable** when either $A=\\varnothing$\nor there exists a total computable function\n$$ e:\\mathbb N\\to X $$\nwhose range is exactly $A$.\n\nIf $L\\subseteq\\Sigma^*$ is a language over an alphabet $\\Sigma$, then $L$ is\n**computably enumerable** when it is c.e. as a subset of $\\Sigma^*$ under the\nchosen effective word encoding.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-computable-and-partial-computable-function",
+          "source_section": "Definition",
+          "quote": "Fix effective encodings of sets $X$ and $Y$.\n\nA function\n$$ f:D\\to Y,\\qquad D\\subseteq X, $$\nis **partial computable** when some deterministic Turing machine computes it in\nthe sense of [[def-partial-function-computed-by-a-machine]].\n\nIf $D=X$, so the machine halts with the correct output on every input in $X$,\nthen $f$ is **computable** or **total computable**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose a total computable enumerator $e:\\mathbb N\\to X$ with range exactly $A$, and let $E$ be a machine as in [L2] that computes it. On input $n$, simulate the computations of $E$ on $0,1,2,\\dots$ one after another, keep the list of distinct output codewords already seen, and halt when the $(n+1)$st new codeword appears, outputting that codeword.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The resulting function $g:\\mathbb N\\to X$ is injective by construction, because each output is the next codeword not seen before. Every value of $g$ lies in $A$ because every output of $E$ lies in the range of $e$. Conversely, if $x\\in A$, then some stage of the sequential scan in step 1.1 encounters the codeword $e_X(x)$ among the outputs of $E$, so that codeword is eventually appended to the distinct-output list. Hence the range of $g$ is exactly $A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $A$ is infinite, for each $n$ there are at least $n+1$ distinct elements of $A$. Step 2.1 shows that each of their codewords appears somewhere in the scan from step 1.1, so the $(n+1)$st new codeword is found after finitely many outputs of $E$. Therefore the machine of step 1.1 halts on every input $n$, and it computes a total injective function $g:\\mathbb N\\to X$ with range $A$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus every infinite c.e. set has a computable injective enumeration.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Infinite computably enumerable sets have computable injective enumerations is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-machine-descriptions-form-a-decidable-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On input a binary word $w$, run the total decoder from [L1]. If it reports malformed input, reject; if it returns a coded machine, accept. Because the decoder is total, this procedure halts on every input.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The procedure accepts exactly those binary words that decode to well-formed deterministic one-tape Turing machine descriptions. Therefore [L2] shows that the description language is decidable.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-recognizable-means-total": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M$ be the machine that accepts immediately on input `0` and otherwise moves right forever without entering any halting state. Then $M$ accepts exactly the one-word language $\\{0\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On every nonmember of $\\{0\\}$, the machine from step 1.1 diverges. So $M$ recognizes $\\{0\\}$ but does not halt on every input.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore recognizability does not force total halting, and the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "recognizable means total halting is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-countable-language-is-decidable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-effective-enumeration-of-turing-machines",
+          "source_section": "Statement",
+          "quote": "The coded deterministic one-tape Turing machines of\n[[def-effective-encoding-of-turing-machines]] can be effectively enumerated.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $\\{1\\}^*$ is countable by length, so write its elements as $w_n:=1^n$ for $n\\ge 0$. Filter the effective list from [L2] by keeping only the coded machines whose input-alphabet parameter satisfies $s\\ge 1$; by [L4], this gives an effective enumeration $N_0,N_1,N_2,\\dots$ of all coded deterministic one-tape machines that can read every unary word. Let $D:=\\{w_n:N_n \\text{ does not accept } w_n\\}$. By [L1], the language $D$ is countable because it is a subset of the countable set $\\{1\\}^*$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose a decider decides $D$. By [F1], an equivalent coded decider occurs as some $N_k$ in the filtered enumeration. If $w_k\\in D$, then step 1.1 says that $N_k$ does not accept $w_k$, contradicting the requirement that a decider for $D$ accept members. If $w_k\\notin D$, then step 1.1 says that $N_k$ accepts $w_k$, contradicting the requirement that a decider reject nonmembers.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus no decider decides the countable language $D$, so the statement is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "every countable language is decidable is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The diagonal argument must respect the repo's coded-machine input alphabets. The current refutation now diagonalizes on unary words 1^n against the filtered machine list with s>=1, so every compared input is legal."
+      }
+    },
+    "ex-decidable-iff-language-and-complement-are-recognizable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-decidable-iff-language-and-complement-are-recognizable",
+          "source_section": "Statement",
+          "quote": "For every language $L\\subseteq\\Sigma^*$, the following are equivalent:\n\n1. $L$ is decidable.\n2. Both $L$ and its complement $\\Sigma^*\\setminus L$ are recognizable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A recognizer for $A$ scans the input from left to right and accepts as soon as it sees a `1`; on an all-zero input it may simply continue forever. A recognizer for $A^c$ scans to the end of the input and accepts exactly when every scanned symbol is `0`.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On any input word, exactly one of the two recognizers from step 1.1 eventually accepts. Therefore [L1] interleaves them into a decider for $A$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Recognizers for strings containing a 1 and for all-zero strings is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is the empty-word boundary in the all-zero complement. The current example's second recognizer accepts exactly the all-zero words, including epsilon, so the interleaving theorem applies cleanly."
+      }
+    },
+    "ex-machine-descriptions-form-a-decidable-language": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-machine-descriptions-form-a-decidable-language",
+          "source_section": "Statement",
+          "quote": "Under the chosen encoding of [[def-effective-encoding-of-turing-machines]], the\nset of binary words that decode to well-formed deterministic one-tape Turing\nmachines is a decidable language.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The words `0` and `10` are malformed. The first never even begins the required positive-arity tuple code, and the second announces arity $1$ but provides no self-delimiting payload block. Therefore the decoder of [L1] rejects both.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The word `111111011011100101101100101` is the code of the tuple $(11,0,1,1,0,1)$, so it decodes to the normalized machine with $m=3$, $s=0$, $n=1$, and the unique transition $(0,0)\\mapsto(1,0,1)$. In particular $0\\le s<n$, and the tuple has the required $3+3(m-2)n=6$ entries. Thus [L1] accepts it as a well-formed machine description, and [L2] classifies the three sample words exactly as claimed.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This makes the decidability test concrete: two malformed inputs are rejected and one genuine machine code is accepted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Testing a few short binary strings for machine-code well-formedness is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The finite-check risk is misreading the tuple code or malformed-header cases. I rechecked the sample code: the long word decodes to the displayed one-transition machine, and the short words fail the arity/payload parse exactly as claimed."
+      }
+    },
+    "cex-recognizable-means-total": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-decidable-and-recognizable-language",
+          "source_section": "Definition",
+          "quote": "Let $L\\subseteq\\Sigma^*$ be a language.\n\n- $L$ is **recognizable** when some deterministic Turing machine recognizes $L$\n  in the sense of [[def-language-recognized-and-decided]].\n- $L$ is **decidable** when some deterministic Turing machine decides $L$ in\n  the sense of [[def-language-recognized-and-decided]].\n\nAfter fixing any effective binary encoding of the finite alphabet $\\Sigma$\n(and hence of $\\Sigma^*$) and the evident encoding of $\\{0,1\\}$, equivalently\n$L$ is decidable exactly when its characteristic function\n$\\chi_L:\\Sigma^*\\to\\{0,1\\}$ is computable with respect to those encodings.\nRecognizability only asks for effective halting on the positive instances and\nforbids acceptance on the negative instances.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-recognizable-means-total",
+          "source_section": "Statement",
+          "quote": "Whenever a machine recognizes a language, it halts on every input.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M$ accept immediately on input `0` and otherwise move right forever without entering any halting state. Then [L1] shows that $M$ recognizes exactly $\\{0\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every nonmember of $\\{0\\}$ makes $M$ diverge, so $M$ is not total. This contradicts the claim summarized in [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $M$ is a concrete counterexample to the refuted statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember does not introduce an indexed family or generated object whose empty case needs a separate argument beyond the written proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember has no free numeric parameter whose value 0 creates an additional proof branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember has no special singleton or value-1 case that changes the argument beyond the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember has no further collapsed or exceptional configuration beyond the hypotheses already stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember is not an endpoint or interval-boundary statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember uses explicit constructions or named witnesses, not an unlicensed choice from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember is not stated as a biconditional requiring a separate forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A recognizer for {0} that loops on every nonmember is not stated as a biconditional requiring a separate reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

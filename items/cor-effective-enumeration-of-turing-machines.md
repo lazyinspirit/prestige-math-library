@@ -2,7 +2,7 @@
 id: cor-effective-enumeration-of-turing-machines
 kind: corollary
 title: "Turing machines admit an effective enumeration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

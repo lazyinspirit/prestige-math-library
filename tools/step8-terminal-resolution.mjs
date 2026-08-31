@@ -139,8 +139,8 @@ function freezeClosureEvidence(root, run, text) {
   };
 }
 
-export function terminalEvidence(root, run, id) {
-  const statePath = join(root, '.autopilot', 'state.json');
+export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
+  const statePath = join(resolve(root, stateDir), 'state.json');
   if (!existsSync(statePath)) throw new Error(`${statePath}: active run state is required`);
   const state = JSON.parse(readFileSync(statePath, 'utf8'));
   if (state.run !== run) throw new Error(`${statePath}: active run is ${state.run}, not ${run}`);
@@ -193,7 +193,7 @@ function value(argv, flag) {
 }
 
 function usage() {
-  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|session --disposition repaired|accepted-after-review --basis <evidence> [--root <repo>]');
+  console.error('usage: node tools/step8-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|session --disposition repaired|accepted-after-review --basis <evidence> [--root <repo>] [--state-dir <dir>]');
   console.error('       node tools/step8-terminal-resolution.mjs check --run <run> [--root <repo>]');
   process.exit(2);
 }
@@ -260,7 +260,7 @@ function main() {
   const disposition = value(argv, '--disposition');
   const basis = value(argv, '--basis');
   if (!id || !RESOLVERS.has(resolvedBy) || !DISPOSITIONS.has(disposition) || basis.trim().length < 80) usage();
-  const exhausted = terminalEvidence(root, run, id);
+  const exhausted = terminalEvidence(root, run, id, value(argv, '--state-dir') || '.autopilot');
   const now = currentHashes(root, id);
   const row = {
     version: TERMINAL_RESOLUTION_VERSION,

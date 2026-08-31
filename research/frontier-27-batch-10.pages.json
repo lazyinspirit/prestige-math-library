@@ -1,0 +1,417 @@
+[
+  {
+    "order": 609,
+    "id": "primitive-recursive-and-partial-computable-functions",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Primitive Recursive and Partial Computable Functions",
+    "companion": "primitive-recursive-and-partial-computable-functions-examples",
+    "requires": [
+      "robust-machine-models-and-universal-computation",
+      "construction-of-the-natural-numbers"
+    ],
+    "items": [
+      {
+        "id": "def-initial-arithmetic-functions",
+        "kind": "definition",
+        "title": "The zero, successor, and projection functions on the natural numbers",
+        "deps": [
+          "def-function",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "def-composition-and-primitive-recursion-schemes",
+        "kind": "definition",
+        "title": "Composition and primitive recursion as closure schemes on arithmetic functions",
+        "deps": [
+          "def-initial-arithmetic-functions",
+          "thm-recursion"
+        ]
+      },
+      {
+        "id": "def-primitive-recursive-function",
+        "kind": "definition",
+        "title": "Primitive recursive functions",
+        "deps": [
+          "def-initial-arithmetic-functions",
+          "def-composition-and-primitive-recursion-schemes"
+        ]
+      },
+      {
+        "id": "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+        "kind": "proposition",
+        "title": "Basic arithmetic operations and bounded quantification are primitive recursive",
+        "strategy": "Generate addition, multiplication, truncated subtraction, and the usual primitive-recursive characteristic functions by repeated use of composition and primitive recursion. Then express bounded existential and universal quantifiers through bounded sums and products of those characteristic functions.",
+        "deps": [
+          "def-primitive-recursive-function"
+        ]
+      },
+      {
+        "id": "def-natural-number-coding-of-finite-sequences",
+        "kind": "definition",
+        "title": "A natural-number coding of finite sequences",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ]
+      },
+      {
+        "id": "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+        "kind": "theorem",
+        "title": "The sequence-length and coordinate-reading functions are primitive recursive",
+        "strategy": "Use the fixed sequence code induced by the effective finite-tuple encoding. The decoder can recover tuple boundaries and entries by bounded scans, so both the length function and the map sending a coded sequence and an index to the corresponding coordinate are obtained by primitive-recursive bounded search and composition.",
+        "deps": [
+          "def-primitive-recursive-function",
+          "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+          "def-natural-number-coding-of-finite-sequences"
+        ]
+      },
+      {
+        "id": "def-mu-minimization-and-partial-recursive-function",
+        "kind": "definition",
+        "title": "Unbounded minimization and partial recursive functions",
+        "deps": [
+          "def-function",
+          "def-primitive-recursive-function"
+        ]
+      },
+      {
+        "id": "prop-ackermann-is-total-computable-but-not-primitive-recursive",
+        "kind": "proposition",
+        "title": "The Ackermann function is total computable but not primitive recursive",
+        "strategy": "For computability, describe a concrete machine procedure that evaluates the nested recursion by maintaining an explicit finite stack of pending calls. For non-primitive-recursiveness, invoke the classical domination theorem that every primitive recursive function is eventually bounded by some fixed stage of the Ackermann hierarchy, while the Ackermann function eventually outruns every such bound.",
+        "deps": [
+          "def-primitive-recursive-function",
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "lem-turing-step-coding-is-primitive-recursive",
+        "kind": "lemma",
+        "title": "The one-step update on coded Turing configurations is primitive recursive",
+        "strategy": "Decode the concrete machine-code tuple by bounded scans of its unary header and self-delimiting blocks, decode the configuration sequence code, perform the bounded transition lookup, and re-encode the successor configuration; malformed inputs return a fixed default code.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-turing-machine-configuration",
+          "def-one-step-configuration-relation",
+          "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+          "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive"
+        ]
+      },
+      {
+        "id": "def-kleene-t-predicate-and-output-function",
+        "kind": "definition",
+        "title": "Kleene's T-predicate and output function",
+        "deps": [
+          "def-natural-number-coding-of-finite-sequences",
+          "lem-turing-step-coding-is-primitive-recursive"
+        ]
+      },
+      {
+        "id": "thm-kleene-normal-form",
+        "kind": "theorem",
+        "title": "Kleene normal form for partial recursive functions",
+        "strategy": "Use the T-predicate to express that a code s is a complete halting computation history for the e-th procedure on input x, and use the output function U to read off the resulting value. Minimization over s then yields a single normal-form expression U(μs T(e,x,s)) for every partial recursive function.",
+        "deps": [
+          "def-mu-minimization-and-partial-recursive-function",
+          "def-kleene-t-predicate-and-output-function"
+        ]
+      },
+      {
+        "id": "thm-partial-recursive-iff-turing-computable",
+        "kind": "theorem",
+        "title": "A partial function is partial recursive if and only if it is Turing computable",
+        "strategy": "For the forward direction, use Kleene normal form to search for the least coded successful computation and then output its U-value with a universal Turing machine. For the reverse direction, arithmetize Turing computations with the primitive-recursive step-coding lemma, obtain the corresponding T-predicate and output function, and read the machine-computed function back into normal form.",
+        "deps": [
+          "def-partial-function-computed-by-a-machine",
+          "def-mu-minimization-and-partial-recursive-function",
+          "def-kleene-t-predicate-and-output-function",
+          "thm-kleene-normal-form",
+          "thm-existence-of-a-universal-turing-machine"
+        ]
+      },
+      {
+        "id": "def-lambda-term-beta-reduction-and-represented-function",
+        "kind": "definition",
+        "title": "Lambda terms, beta reduction, and the partial functions they represent",
+        "deps": [
+          "def-function",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "thm-lambda-definable-iff-partial-recursive",
+        "kind": "theorem",
+        "title": "A partial function is lambda-definable if and only if it is partial recursive",
+        "strategy": "Use the classical two directions separately. Primitive recursive functions are lambda-definable, fixpoint combinators handle the minimization-driven recursive clauses, and hence every partial recursive function is lambda-definable. Conversely, arithmetize lambda terms and their normalization process to obtain a partial-recursive evaluator for every lambda-definable function.",
+        "deps": [
+          "def-lambda-term-beta-reduction-and-represented-function",
+          "def-mu-minimization-and-partial-recursive-function",
+          "thm-partial-recursive-iff-turing-computable"
+        ]
+      },
+      {
+        "id": "fs-every-total-computable-function-is-primitive-recursive",
+        "kind": "false-statement",
+        "title": "FALSE: every total computable function is primitive recursive",
+        "strategy": "Refute the claim with the Ackermann function. It is total and computable, but its growth eventually dominates every primitive recursive function, so it cannot itself be primitive recursive.",
+        "deps": [
+          "prop-ackermann-is-total-computable-but-not-primitive-recursive"
+        ]
+      },
+      {
+        "id": "fs-mu-minimization-is-always-total",
+        "kind": "false-statement",
+        "title": "FALSE: applying mu-minimization to a computable search predicate always yields a total function",
+        "strategy": "Refute the claim by minimizing an everywhere-positive primitive recursive function. Because the searched-for zero never appears, the minimization diverges on every input and therefore defines only a partial function.",
+        "deps": [
+          "def-mu-minimization-and-partial-recursive-function"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 610,
+    "id": "primitive-recursive-and-partial-computable-functions-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Primitive Recursive and Partial Computable Functions: Examples and Counterexamples",
+    "requires": [
+      "primitive-recursive-and-partial-computable-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-sequence-length-and-coordinate-functions-are-primitive-recursive",
+        "kind": "example",
+        "title": "Reading the length and third coordinate of a coded finite sequence",
+        "strategy": "Work with one concrete coded tuple, decode its boundary markers, and then evaluate the primitive-recursive length and coordinate maps on that code. The example should make visible that the same bounded-decoding routine works uniformly for every coded finite sequence.",
+        "deps": [
+          "thm-sequence-length-and-coordinate-functions-are-primitive-recursive"
+        ]
+      },
+      {
+        "id": "ex-lambda-definable-iff-partial-recursive",
+        "kind": "example",
+        "title": "Factorial is both lambda-definable and partial recursive",
+        "strategy": "Present factorial through primitive recursion, then exhibit the corresponding lambda-term route using Church numerals together with a fixpoint combinator. The point is not the full normalization proof, but the concrete passage between the two representations guaranteed by the equivalence theorem.",
+        "deps": [
+          "thm-lambda-definable-iff-partial-recursive"
+        ]
+      },
+      {
+        "id": "cex-every-total-computable-function-is-primitive-recursive",
+        "kind": "counterexample",
+        "title": "The Ackermann function refutes the claim that all total computable functions are primitive recursive",
+        "strategy": "Use the Ackermann function as the single witness. Verify that it is total and computable, and then cite its non-primitive-recursive growth to discharge the universal negation.",
+        "deps": [
+          "prop-ackermann-is-total-computable-but-not-primitive-recursive"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 617,
+    "id": "resource-bounds-and-machine-invariance",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Resource Bounds and Machine Invariance",
+    "companion": "resource-bounds-and-machine-invariance-examples",
+    "requires": [
+      "robust-machine-models-and-universal-computation",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "def-worst-case-time-and-space-complexity",
+        "kind": "definition",
+        "title": "Worst-case time and space complexity of a machine",
+        "deps": [
+          "def-language-recognized-and-decided",
+          "def-partial-function-computed-by-a-machine",
+          "def-multitape-and-nondeterministic-machines"
+        ]
+      },
+      {
+        "id": "def-asymptotic-resource-comparison",
+        "kind": "definition",
+        "title": "Asymptotic comparison of resource bounds",
+        "deps": [
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "def-time-and-space-constructible-function",
+        "kind": "definition",
+        "title": "Time-constructible and space-constructible functions",
+        "deps": [
+          "def-asymptotic-resource-comparison",
+          "def-effective-binary-encoding-and-decoder"
+        ]
+      },
+      {
+        "id": "def-dtime-ntime-dspace-and-nspace",
+        "kind": "definition",
+        "title": "The classes DTIME, NTIME, DSPACE, and NSPACE",
+        "deps": [
+          "def-asymptotic-resource-comparison",
+          "def-time-and-space-constructible-function",
+          "def-multitape-and-nondeterministic-machines",
+          "def-nondeterministic-accepting-computation"
+        ]
+      },
+      {
+        "id": "lem-time-at-least-input-length-permits-complete-input-reading",
+        "kind": "lemma",
+        "title": "Any machine that fully reads every input of length n needs at least linear time",
+        "strategy": "Each step inspects at most one new tape cell under the input head. Therefore a machine that must see all n input symbols before halting cannot do so in fewer than n steps up to the fixed additive constants coming from the start and halt conventions.",
+        "deps": [
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "lem-time-bounds-imply-space-bounds",
+        "kind": "lemma",
+        "title": "A time bound always yields the same-order space bound",
+        "strategy": "A machine can visit at most one new tape cell per step, so the total number of distinct cells it ever touches is bounded by its running time. Combining this with the input-reading lemma gives the standard inclusion from time classes into the corresponding space classes.",
+        "deps": [
+          "def-asymptotic-resource-comparison",
+          "def-worst-case-time-and-space-complexity",
+          "lem-time-at-least-input-length-permits-complete-input-reading"
+        ]
+      },
+      {
+        "id": "thm-multitape-to-single-tape-time-simulation",
+        "kind": "theorem",
+        "title": "Every multitape time-T computation has a single-tape simulation in O((n+T(n))^2) time",
+        "strategy": "Use the standard fixed one-tape simulator and its bound time_{S_M}(w) <= c_M(|w|+t+1)^2. Replacing t by the multitape worst-case bound T(n) yields the uniform O((n+T(n))^2) simulation theorem.",
+        "deps": [
+          "def-asymptotic-resource-comparison",
+          "def-dtime-ntime-dspace-and-nspace",
+          "thm-multitape-machines-have-one-tape-simulations",
+          "lem-multitape-simulation-has-quadratic-time-overhead"
+        ]
+      },
+      {
+        "id": "thm-multitape-to-single-tape-space-simulation",
+        "kind": "theorem",
+        "title": "Every multitape space-S computation has a single-tape simulation in O(n+S(n)) space",
+        "strategy": "The standard one-tape simulator stores the entire input block together with the visited simulated work cells. That gives the correct uniform O(n+S(n)) space bound for a fixed multitape decider.",
+        "deps": [
+          "def-asymptotic-resource-comparison",
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-worst-case-time-and-space-complexity",
+          "thm-multitape-machines-have-one-tape-simulations"
+        ]
+      },
+      {
+        "id": "thm-universal-simulation-with-logarithmic-overhead",
+        "kind": "theorem",
+        "title": "A universal simulator can realize T steps with only O(T log T) overhead",
+        "strategy": "Store the simulated machine description, current control state, and a sparse representation of the simulated tapes on a fixed universal machine. Reblock the work tape geometrically so that head realignment and local updates cost only amortized logarithmic overhead per simulated step, giving total simulation time O(T log T) after the initial decoding work.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-universal-turing-machine",
+          "def-time-and-space-constructible-function",
+          "def-worst-case-time-and-space-complexity"
+        ]
+      },
+      {
+        "id": "prop-polynomial-time-and-space-are-model-invariant",
+        "kind": "proposition",
+        "title": "Polynomial-time and polynomial-space computation are invariant across standard machine models",
+        "strategy": "Use the quadratic single-tape simulation in one direction, the O(T log T) universal simulation in the other, and the fact that T log T is still polynomial whenever T is polynomial. For space, combine the linear-space multitape-to-single-tape simulation with the general fact that time bounds control space bounds.",
+        "deps": [
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-multitape-to-single-tape-time-simulation",
+          "thm-multitape-to-single-tape-space-simulation",
+          "thm-universal-simulation-with-logarithmic-overhead"
+        ]
+      },
+      {
+        "id": "lem-clocked-machine-construction",
+        "kind": "lemma",
+        "title": "A constructible time bound yields a uniformly clocked simulator",
+        "strategy": "Given a machine M and a constructible bound t, first compute t(|x|) on the input length, then simulate M while decrementing a separate counter, forcing rejection on timeout. Constructibility is exactly what makes the bound writable and manageable within the stated asymptotic resources.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "def-universal-turing-machine",
+          "def-time-and-space-constructible-function",
+          "lem-time-at-least-input-length-permits-complete-input-reading"
+        ]
+      },
+      {
+        "id": "prop-polynomially-related-encodings-preserve-polynomial-classes",
+        "kind": "proposition",
+        "title": "Polynomially related encodings preserve polynomial-time and polynomial-space classes",
+        "strategy": "First decide whether an input is a valid code, then translate valid codes with total polynomial-time and polynomial-space maps in both directions before running the target decider. Polynomial relatedness controls the translated length, so both polynomial-time and polynomial-space classes are preserved.",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-instance-size-under-an-encoding",
+          "prop-polynomially-related-encodings-preserve-polynomial-size"
+        ]
+      },
+      {
+        "id": "fs-model-invariance-means-equal-step-counts",
+        "kind": "false-statement",
+        "title": "FALSE: machine invariance means equivalent models perform exactly the same number of steps",
+        "strategy": "Refute the claim by comparing a multitape computation with its single-tape simulation. The two machines decide the same language, but the standard simulation can incur quadratic slowdown, so invariance is only up to controlled asymptotic overhead, not equality of exact step counts.",
+        "deps": [
+          "prop-polynomial-time-and-space-are-model-invariant",
+          "thm-multitape-to-single-tape-time-simulation"
+        ]
+      },
+      {
+        "id": "fs-time-bounds-never-need-constructibility",
+        "kind": "false-statement",
+        "title": "FALSE: clocked-simulation and time-hierarchy arguments never need constructibility hypotheses",
+        "strategy": "Refute the claim by isolating the clocked-simulation step that must compute and enforce the bound it is supposed to respect. Constructibility is exactly what turns that symbolic bound into an actual timeout in clocked and time-hierarchy arguments.",
+        "deps": [
+          "def-time-and-space-constructible-function",
+          "lem-clocked-machine-construction"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 618,
+    "id": "resource-bounds-and-machine-invariance-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Resource Bounds and Machine Invariance: Examples and Counterexamples",
+    "requires": [
+      "resource-bounds-and-machine-invariance"
+    ],
+    "items": [
+      {
+        "id": "ex-time-bounds-imply-space-bounds",
+        "kind": "example",
+        "title": "A machine that runs in O(n^2) time necessarily uses at most O(n^2) space",
+        "strategy": "Take a concrete decider that repeatedly sweeps across an input of length n while reusing the same work area. Count new tape cells per step to make explicit that even without optimizing the algorithm, the number of distinct visited cells never exceeds the time budget.",
+        "deps": [
+          "lem-time-bounds-imply-space-bounds"
+        ]
+      },
+      {
+        "id": "ex-polynomially-related-encodings-preserve-polynomial-classes",
+        "kind": "example",
+        "title": "Changing between two polynomially related tuple encodings preserves polynomial complexity",
+        "strategy": "Use two effective encodings of finite tuples whose translation maps are polynomially bounded in both directions. Compose the translation with a polynomial-time decider under the second encoding to obtain a polynomial-time decider under the first, and make the same bookkeeping for space.",
+        "deps": [
+          "prop-polynomially-related-encodings-preserve-polynomial-classes"
+        ]
+      },
+      {
+        "id": "cex-model-invariance-means-equal-step-counts",
+        "kind": "counterexample",
+        "title": "A linear-time multitape computation can require quadratic time on one tape",
+        "strategy": "Compare a multitape machine that scans and updates several tracks in one pass with its standard single-tape simulation. The two computations decide the same language, but the one-tape simulation pays the familiar quadratic tape-shuffling overhead, so exact step-count equality fails.",
+        "deps": [
+          "thm-multitape-to-single-tape-time-simulation"
+        ]
+      }
+    ]
+  }
+]

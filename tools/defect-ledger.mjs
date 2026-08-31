@@ -107,11 +107,11 @@ const ENUMS = {
     'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
     'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
     'undefined-notation', 'ill-typed-claim', 'ill-typed-construction',
-    // Legacy Step-6/frontier-23 spellings still present in current ledgers.
+    // Legacy Step-6 spellings still present in current ledgers.
     'false-claim', 'ill-formed', 'false-computation', 'contract-mismatch',
     'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
     'missing-case', 'unlicensed-inference', 'unsupported-inference',
-    'unsupported-universal-property',
+    'unsupported-universal-property', 'reader-repair', 'risk-review',
     // richness
     'scope-drop', 'scope-loss', 'false-decline', 'deferral-without-destination',
     'thin-harvest', 'unsourced-locator',
@@ -135,7 +135,9 @@ const OPTIONAL_ENUMS = {
   introduced_at_stage: STAGES,
   should_have_caught: STAGES,
   repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope',
-    'blocker', 'tool-change', 'run-restart', 'contract-sync'],
+    'blocker', 'tool-change', 'run-restart', 'contract-sync',
+    // Step-6 rows recorded before the narrower `rescope` name stabilized.
+    'narrow-statement'],
 };
 const CURRENT_STEP6_LOCATION_EXACT = new Set([
   // Current Step-6 evidence names section labels and contract loci directly.
@@ -148,6 +150,9 @@ const CURRENT_STEP6_LOCATION_EXACT = new Set([
   'proof-contract entry',
   'statement-and-proof',
   'title-and-statement',
+  // Frontier-27 touched-carrier rows use this lower-case locus for
+  // manifest-only carrier changes that left the item mathematics intact.
+  'manifest',
 ]);
 const CURRENT_STEP6_LOCATION_RE = [
   /^proof-step \d+(?:\.\d+)*$/,

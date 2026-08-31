@@ -367,6 +367,76 @@ function makeChecks() { return {
     }
     return { ok: true, summary: `determinant multiplicativity and associativity held in ${checked} products, moduli through ${M}, ${d}x${d}` };
   },
+
+  // Equality of DFA right languages must be a right congruence.  Exhaustive
+  // small automata are especially good at catching a swapped transition
+  // convention or a claim that checks only the start state.  Equivalence is
+  // decided exactly for each finite DFA by reachability in the product
+  // automaton; the bound limits the family of DFAs, not the continuation words.
+  'dfa-state-equivalence-right-congruence': ({ max_states = 3, alphabet_size = 2 }) => {
+    const maxStates = boundedInteger(max_states, 3, 1, 3);
+    const alphabetSize = boundedInteger(alphabet_size, 2, 1, 2);
+    let automata = 0;
+    let equivalentPairs = 0;
+
+    for (let states = 1; states <= maxStates; states += 1) {
+      const tableCount = states ** (states * alphabetSize);
+      for (let tableCode = 0; tableCode < tableCount; tableCode += 1) {
+        const transition = new Array(states * alphabetSize);
+        let code = tableCode;
+        for (let i = 0; i < transition.length; i += 1) {
+          transition[i] = code % states;
+          code = Math.floor(code / states);
+        }
+        const step = (state, letter) => transition[state * alphabetSize + letter];
+
+        for (let acceptingMask = 0; acceptingMask < (1 << states); acceptingMask += 1) {
+          automata += 1;
+          const accepting = (state) => Boolean(acceptingMask & (1 << state));
+          const equivalent = (left, right) => {
+            const queue = [[left, right]];
+            const seen = new Set();
+            for (let at = 0; at < queue.length; at += 1) {
+              const [p, q] = queue[at];
+              const key = p * states + q;
+              if (seen.has(key)) continue;
+              seen.add(key);
+              if (accepting(p) !== accepting(q)) return false;
+              for (let letter = 0; letter < alphabetSize; letter += 1) {
+                queue.push([step(p, letter), step(q, letter)]);
+              }
+            }
+            return true;
+          };
+
+          const relation = Array.from({ length: states }, (_, p) =>
+            Array.from({ length: states }, (_, q) => equivalent(p, q)));
+          for (let p = 0; p < states; p += 1) {
+            if (!relation[p][p]) return { ok: false, summary: `state equivalence is not reflexive in DFA ${automata}, state ${p}` };
+            for (let q = 0; q < states; q += 1) {
+              if (relation[p][q] !== relation[q][p]) {
+                return { ok: false, summary: `state equivalence is not symmetric in DFA ${automata}, states ${p},${q}` };
+              }
+              if (!relation[p][q]) continue;
+              equivalentPairs += 1;
+              for (let letter = 0; letter < alphabetSize; letter += 1) {
+                const nextP = step(p, letter), nextQ = step(q, letter);
+                if (!relation[nextP][nextQ]) {
+                  return { ok: false, summary: `equivalent states ${p},${q} separate after letter ${letter} in DFA ${automata}` };
+                }
+              }
+              for (let r = 0; r < states; r += 1) {
+                if (relation[q][r] && !relation[p][r]) {
+                  return { ok: false, summary: `state equivalence is not transitive in DFA ${automata}, states ${p},${q},${r}` };
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return { ok: true, summary: `checked ${equivalentPairs} equivalent state-pairs across all ${automata} DFAs through ${maxStates} states over ${alphabetSize} letters` };
+  },
 }; }
 
 // A finite poset from its cover relations: reflexive-transitive closure, then

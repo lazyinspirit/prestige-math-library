@@ -1,0 +1,330 @@
+[
+  {
+    "order": 288.000061,
+    "id": "conjugate-gradients-minres-and-preconditioning",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Conjugate Gradients, MINRES and Preconditioning",
+    "companion": "conjugate-gradients-minres-and-preconditioning-examples",
+    "requires": [
+      "krylov-subspaces-arnoldi-and-gmres",
+      "convex-and-semicontinuous-functions-on-rn"
+    ],
+    "items": [
+      {
+        "id": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+        "kind": "definition",
+        "title": "The energy inner product $\\langle u,v\\rangle_A=\\langle Au,v\\rangle$ and energy norm $\\|u\\|_A$ for a Hermitian positive-definite matrix",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "def-quadratic-energy-of-a-hermitian-positive-definite-linear-system",
+        "kind": "definition",
+        "title": "The quadratic energy $\\phi(x)=\\tfrac12\\langle Ax,x\\rangle-\\operatorname{Re}\\langle b,x\\rangle$ of a Hermitian positive-definite linear system",
+        "deps": [
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+        "kind": "theorem",
+        "title": "For Hermitian positive-definite $A$, the exact solution of $Ax=b$ is the unique minimizer of the quadratic energy",
+        "strategy": "Let $x_\\ast$ solve $Ax=b$. Expanding $\\phi(x)-\\phi(x_\\ast)$ collapses the linear terms and leaves $\\tfrac12\\|x-x_\\ast\\|_A^2$. Positive definiteness makes this quantity nonnegative and forces equality only at $x=x_\\ast$, so the minimizer exists and is unique.",
+        "deps": [
+          "def-quadratic-energy-of-a-hermitian-positive-definite-linear-system",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ]
+      },
+      {
+        "id": "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+        "kind": "definition",
+        "title": "The $m$th Krylov Galerkin iterate in the affine space $x_0+K_m(A,r_0)$ for a Hermitian positive-definite system",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate",
+        "kind": "proposition",
+        "title": "Galerkin orthogonality turns residual orthogonality into $A$-orthogonality of the error, and the Galerkin iterate is unique",
+        "strategy": "Write the residual as $r_m=b-Ax_m=A(x_\\ast-x_m)$. Testing against vectors of the Krylov space converts the Euclidean residual condition into $A$-orthogonality of the error. If two affine-space candidates satisfy that condition, their difference lies in the Krylov space and is $A$-orthogonal to itself, so positive definiteness forces equality.",
+        "deps": [
+          "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix"
+        ]
+      },
+      {
+        "id": "def-conjugate-gradient-recurrence",
+        "kind": "definition",
+        "title": "The conjugate-gradient recurrence",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix"
+        ]
+      },
+      {
+        "id": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+        "kind": "proposition",
+        "title": "Before convergence, every CG denominator $p_k^*Ap_k$ is positive",
+        "strategy": "Before convergence the current search direction is nonzero. For a Hermitian positive-definite matrix, $p_k^*Ap_k=\\|p_k\\|_A^2$, and the energy norm of a nonzero vector is strictly positive.",
+        "deps": [
+          "def-conjugate-gradient-recurrence",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix"
+        ]
+      },
+      {
+        "id": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+        "kind": "theorem",
+        "title": "In exact arithmetic, CG residuals are mutually orthogonal and the search directions are $A$-conjugate",
+        "strategy": "Induct on the iteration number. The step length is chosen to kill the current residual component along the active search direction, and the update coefficient is then chosen so the next search direction is $A$-orthogonal to the earlier ones. The same recurrence identities force each new residual to be orthogonal to all previous residuals.",
+        "deps": [
+          "def-conjugate-gradient-recurrence",
+          "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix"
+        ]
+      },
+      {
+        "id": "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+        "kind": "theorem",
+        "title": "CG is the Krylov Galerkin method, and the $m$th iterate uniquely minimizes the $A$-norm of the error over $x_0+K_m(A,r_0)$",
+        "strategy": "The recurrence keeps $x_m$ in the affine Krylov space while the orthogonality theorem makes its residual orthogonal to that whole space, so CG satisfies the Galerkin condition. The difference identity for the quadratic energy then shows that among all vectors in the same affine Krylov space, this iterate alone minimizes the energy and therefore the $A$-norm of the error.",
+        "deps": [
+          "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+          "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate",
+          "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer"
+        ]
+      },
+      {
+        "id": "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+        "kind": "theorem",
+        "title": "In exact arithmetic, CG terminates no later than the relative grade and hence in at most $n$ steps",
+        "strategy": "The CG iterate at step $m$ is the Galerkin minimizer over $x_0+K_m(A,r_0)$. When the exact solution enters that affine Krylov space at the relative grade, zero residual becomes an admissible candidate, so the Galerkin minimizer must realize it. Since the grade is at most the ambient dimension, the method also terminates by step $n$.",
+        "deps": [
+          "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+          "cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade",
+          "def-grade-and-relative-minimal-polynomial-of-a-start-vector"
+        ]
+      },
+      {
+        "id": "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+        "kind": "theorem",
+        "title": "CG obeys the Chebyshev $A$-norm bound in terms of the spectral condition number $\\kappa_2(A)$",
+        "strategy": "Because CG minimizes the error over the affine Krylov space, its error is bounded by the best polynomial $p_m(A)e_0$ with $p_m(0)=1$ and degree at most $m$. Diagonalizing the Hermitian positive-definite matrix moves the problem to the spectral interval $[\\lambda_{\\min},\\lambda_{\\max}]$, and scaling that interval to $[-1,1]$ lets the Chebyshev minimax polynomial deliver the standard condition-number estimate.",
+        "deps": [
+          "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "rem-floating-point-conjugate-gradients-can-lose-orthogonality-conjugacy-and-finite-termination",
+        "kind": "remark",
+        "title": "In floating-point arithmetic, CG can lose exact residual orthogonality, $A$-conjugacy, and the finite-termination guarantee",
+        "deps": [
+          "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic"
+        ]
+      },
+      {
+        "id": "def-lanczos-process-as-hermitian-arnoldi",
+        "kind": "definition",
+        "title": "The Lanczos process as Arnoldi specialized to a Hermitian matrix, with the usual real-subdiagonal phase convention",
+        "deps": [
+          "def-arnoldi-process",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases"
+        ]
+      },
+      {
+        "id": "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+        "kind": "theorem",
+        "title": "With a Hermitian matrix, Arnoldi collapses to the Lanczos three-term recurrence and a real symmetric tridiagonal projection",
+        "strategy": "Start from the Arnoldi Hessenberg factorization. Hermitian symmetry forces all entries below the first subdiagonal and above the first superdiagonal to vanish, and the phase convention makes the off-diagonal coefficients real. What remains is exactly the Lanczos three-term recurrence together with a real symmetric tridiagonal projected matrix.",
+        "deps": [
+          "def-lanczos-process-as-hermitian-arnoldi",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices"
+        ]
+      },
+      {
+        "id": "def-minres-iterate-from-the-lanczos-tridiagonalization",
+        "kind": "definition",
+        "title": "The MINRES iterate from the Lanczos tridiagonal least-squares problem",
+        "deps": [
+          "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+          "thm-least-squares-solutions-and-normal-equation"
+        ]
+      },
+      {
+        "id": "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space",
+        "kind": "theorem",
+        "title": "For Hermitian $A$, including the indefinite case, MINRES minimizes the Euclidean residual over $x_0+K_m(A,r_0)$",
+        "strategy": "MINRES is GMRES specialized to a Hermitian coefficient matrix. The Lanczos theorem turns Arnoldi's small Hessenberg least-squares problem into a tridiagonal least-squares problem, and the GMRES minimal-residual proof carries over unchanged. Positivity is not needed here, only Hermitian structure.",
+        "deps": [
+          "def-minres-iterate-from-the-lanczos-tridiagonalization",
+          "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+          "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem",
+          "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space"
+        ]
+      },
+      {
+        "id": "def-stationary-iteration-from-a-matrix-splitting",
+        "kind": "definition",
+        "title": "Stationary iteration from a matrix splitting $A=M-N$",
+        "deps": [
+          "def-invertible-matrix-and-general-linear-group",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+        "kind": "theorem",
+        "title": "A stationary splitting converges for every start if and only if its iteration matrix has spectral radius below $1$",
+        "strategy": "Subtract the fixed-point equation from the iteration to obtain the error recurrence $e_{k+1}=Be_k$ with $B=M^{-1}N$. Thus convergence for every initial vector is equivalent to $B^k\\to0$. Jordan form over $\\mathbb C$ then reduces this to the scalar condition that every eigenvalue of $B$ has modulus less than $1$, that is, $\\rho(B)<1$.",
+        "deps": [
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-the-complex-numbers-are-algebraically-closed",
+          "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "def-left-right-and-symmetric-positive-definite-preconditioning",
+        "kind": "definition",
+        "title": "Left preconditioning, right preconditioning, and symmetric preconditioning of a linear system",
+        "deps": [
+          "def-invertible-matrix-and-general-linear-group",
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ]
+      },
+      {
+        "id": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+        "kind": "proposition",
+        "title": "Invertible preconditioners give equivalent linear systems, with the transformed residuals and errors written explicitly",
+        "strategy": "Left preconditioning multiplies the equation by an invertible matrix, while right and symmetric preconditioning are invertible changes of variables. Unwind each transformation directly to express the new residuals and errors in terms of the old ones, and record which norm or inner-product interpretation has changed.",
+        "deps": [
+          "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem",
+        "kind": "theorem",
+        "title": "Symmetric positive-definite preconditioning preserves a Hermitian positive-definite CG problem, and the CG bound uses the transformed condition number",
+        "strategy": "Factor the positive-definite preconditioner as $M=CC^*$ and rewrite the system as $C^{-1}AC^{-*}y=C^{-1}b$ with $x=C^{-*}y$. Congruence by $C^{-1}$ preserves Hermitian positive definiteness, so ordinary CG applies to the transformed problem. Applying the usual Chebyshev estimate there replaces $\\kappa_2(A)$ by $\\kappa_2(C^{-1}AC^{-*})$.",
+        "deps": [
+          "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 288.000062,
+    "id": "conjugate-gradients-minres-and-preconditioning-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Conjugate Gradients, MINRES and Preconditioning: Examples and Counterexamples",
+    "requires": [
+      "conjugate-gradients-minres-and-preconditioning"
+    ],
+    "items": [
+      {
+        "id": "ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system",
+        "kind": "example",
+        "title": "CG on a $2\\times2$ Hermitian positive-definite system reaches the solution in at most two steps",
+        "strategy": "Choose a small Hermitian positive-definite matrix, compute the residuals, step lengths, and search directions explicitly, and verify that the second iterate is exact. The calculation should also display the residual orthogonality and $A$-conjugacy relations numerically.",
+        "deps": [
+          "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic"
+        ]
+      },
+      {
+        "id": "ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension",
+        "kind": "example",
+        "title": "CG can terminate at a relative grade strictly smaller than the ambient dimension",
+        "strategy": "Choose a matrix and start vector whose relative minimal polynomial has degree smaller than $n$. Compute the Krylov chain and show that the exact solution enters the affine Krylov space before the full dimension is reached, so CG stops early for structural rather than accidental reasons.",
+        "deps": [
+          "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+          "def-grade-and-relative-minimal-polynomial-of-a-start-vector"
+        ]
+      },
+      {
+        "id": "ex-clustered-eigenvalues-give-a-better-cg-bound-than-spread-eigenvalues",
+        "kind": "example",
+        "title": "Clustered eigenvalues give a visibly better CG condition-number bound than equally sized spread spectra",
+        "strategy": "Compare two small Hermitian positive-definite matrices with different eigenvalue spreads. Compute the relevant condition numbers and the corresponding Chebyshev estimates, then relate the sharper bound to the visibly tighter clustering.",
+        "deps": [
+          "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm"
+        ]
+      },
+      {
+        "id": "cex-conjugate-gradients-can-break-on-a-symmetric-indefinite-system",
+        "kind": "counterexample",
+        "title": "A symmetric indefinite matrix can make the CG denominator vanish or change sign before convergence",
+        "strategy": "Choose a small symmetric indefinite matrix and start vector for which $p_k^TAp_k\\le0$ appears before the residual vanishes. This shows exactly why positive definiteness, not mere symmetry, is load-bearing in the recurrence.",
+        "deps": [
+          "def-conjugate-gradient-recurrence",
+          "prop-conjugate-gradient-denominators-are-positive-before-convergence"
+        ]
+      },
+      {
+        "id": "cex-conjugate-gradients-does-not-apply-to-a-nonsymmetric-invertible-matrix",
+        "kind": "counterexample",
+        "title": "A nonsymmetric invertible matrix does not fit the CG orthogonality and minimization theory",
+        "strategy": "Work a small nonsymmetric system and show that the Euclidean residual orthogonality or the $A$-conjugacy identity fails at once, so the SPD proofs cannot be transplanted verbatim. Contrast the situation with the earlier GMRES page rather than trying to force a broken recurrence through.",
+        "deps": [
+          "def-conjugate-gradient-recurrence",
+          "def-gmres-iterate"
+        ]
+      },
+      {
+        "id": "ex-minres-on-a-symmetric-indefinite-system",
+        "kind": "example",
+        "title": "MINRES still minimizes the residual on a small symmetric indefinite system",
+        "strategy": "Choose a symmetric indefinite matrix for which plain CG is obstructed, run the Lanczos tridiagonalization, solve the resulting small least-squares problem, and compare the residual norm with nearby affine Krylov competitors. The point is to make MINRES's indefinite-matrix niche concrete.",
+        "deps": [
+          "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space"
+        ]
+      },
+      {
+        "id": "ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison",
+        "kind": "example",
+        "title": "Jacobi and Gauss-Seidel splittings can be compared by the spectral radii of their iteration matrices",
+        "strategy": "For one small linear system, write the Jacobi and Gauss-Seidel splittings explicitly, compute the two iteration matrices, and compare their spectral radii. Then relate the smaller spectral radius to the faster observed decay of the error.",
+        "deps": [
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one"
+        ]
+      },
+      {
+        "id": "ex-diagonal-spd-preconditioning-improves-the-preconditioned-condition-number",
+        "kind": "example",
+        "title": "A diagonal positive-definite preconditioner can improve the relevant condition number",
+        "strategy": "Choose a badly scaled Hermitian positive-definite system, precondition it by a diagonal positive-definite matrix, and compute the spectrum of the symmetrically transformed operator. The comparison should show the CG bound improving for the transformed problem rather than by vague optimism.",
+        "deps": [
+          "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem"
+        ]
+      },
+      {
+        "id": "cex-a-preconditioner-can-worsen-the-preconditioned-condition-number",
+        "kind": "counterexample",
+        "title": "A preconditioner can worsen the condition number that actually controls CG",
+        "strategy": "Choose a simple preconditioner whose transformed operator has a larger spectral condition number than the original system. Compute both condition numbers explicitly so the failure is numerical, not rhetorical.",
+        "deps": [
+          "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem"
+        ]
+      }
+    ]
+  }
+]

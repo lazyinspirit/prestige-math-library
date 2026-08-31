@@ -2,7 +2,7 @@
 id: thm-existence-of-a-universal-turing-machine
 kind: theorem
 title: "A universal Turing machine exists for the chosen coding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

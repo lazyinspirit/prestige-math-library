@@ -81,6 +81,7 @@ parts:
       - improper-and-parameter-dependent-multiple-integrals
       - convex-and-semicontinuous-functions-on-rn
       - picard-lindelof-and-first-order-odes
+      - normed-and-banach-spaces
       - regular-surfaces-and-surface-integrals
       - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems
@@ -190,12 +191,12 @@ solid of revolution, and non-injective spherical coordinates.
 Norms give limits in $\mathbb R^n$; total derivatives give the chain rule, mixed partials,
 Taylor formulas, extrema, and inverse and implicit functions. Jordan integration, Fubini,
 change of variables, improper multiple integrals, parameter differentiation, and convexity
-extend calculus to higher dimensions, while Volterra, Picard, Gronwall, maximal
-solutions, and Osgood settle first-order equations. Manifolds then abstract the coordinate
-theory through atlases, smooth maps, and diffeomorphisms; smooth dependence gives local
-flows; and partitions of unity plus proper exhaustions turn local charts into global
-constructions by supplying bump functions, gluing, smooth Urysohn separation, and compact
-exhaustion. Regular surfaces and constant-rank geometry close the thread.
+extend calculus to higher dimensions, while Picard-Lindelof and its consequences settle
+first-order equations. The added normed-space page makes the ambient completeness theory
+explicit by introducing normed subspaces, finite product norms, Banach spaces,
+absolutely convergent series, and completion via bounded linear maps. Manifolds, local
+flows, partitions of unity, regular surfaces, and constant-rank geometry then close the
+thread by turning coordinate calculations into intrinsic constructions.
 
 ## curves-and-the-fundamental-theorems
 

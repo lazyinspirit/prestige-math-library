@@ -26,6 +26,7 @@ parts:
       - monoidal-categories-and-monoidal-functors
       - exactness-and-the-member-calculus
       - strictification-and-mac-lanes-coherence-theorem
+      - closed-monoidal-categories-and-the-internal-hom
       - the-diagram-lemmas-in-an-abelian-category
 ---
 
@@ -52,11 +53,11 @@ completion then supply the standard structural consequences.
 
 Reflective subcategories and the adjoint functor theorems explain when completeness and
 size hypotheses force left adjoints, while monads, comonads, and Beck turn adjunction
-data into algebraic structure. Kan extensions and density identify presheaves as free
-cocompletions, abelian categories add kernels, cokernels, subobjects, Grothendieck
-axioms, projectives, injectives, and exactness lemmas, and monoidal categories organize
-tensor products and monoid objects. The strictification page closes the part by
-separating equivalence from isomorphism: every monoidal category is monoidally
-equivalent to a strict one, canonical rebracketings therefore agree, and coherence is
-exactly the well-definedness of parenthesised tensor expressions and monoid-object
-axioms.
+data into algebraic and cocompletion structure. Abelian categories add kernels,
+cokernels, subobjects, Grothendieck axioms, exactness, and diagram lemmas, while
+monoidal categories organize tensor products and coherence. Strictification replaces
+every monoidal category by a monoidally equivalent strict one. The added closed page then
+makes tensoring representable: internal homs encode maps out of tensor products,
+symmetric closure identifies left and right versions, cartesian and locally cartesian
+closure recover exponentials and pullback-right-adjoint criteria, and subobject
+classifiers represent monomorphisms in `Set` and presheaf examples.

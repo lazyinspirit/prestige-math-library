@@ -38,6 +38,7 @@ parts:
       - the-moore-penrose-pseudoinverse-and-regularised-least-squares
       - eigenvalue-iterations-and-the-qr-algorithm
       - krylov-subspaces-arnoldi-and-gmres
+      - conjugate-gradients-minres-and-preconditioning
 ---
 
 ## spaces-and-linear-maps
@@ -74,10 +75,11 @@ makes least squares and spectral arguments possible.
 An eigenvalue is a characteristic-polynomial root, and the minimal polynomial, generalized
 eigenspaces, Jordan form, scalar-change comparisons, Schur form, singular values, norms,
 conditioning, and exterior powers organize similarity, orthogonality, and perturbation.
-LU, Cholesky, QR, the pseudoinverse, and regularized least squares add the factorization
-and inverse-problem layer, while classical eigenvalue iterations explain how those
-structures are computed. The added pages close the part on local sensitivity and
-large-scale computation: matrix differentials give Fréchet derivative rules, simple
-eigenpair, projector, and singular-value formulas, and sharp failure modes at defective
-or crossing spectra, and Krylov, Arnoldi, Ritz, and GMRES turn polynomial approximation
-into matrix-free solvers with exact-arithmetic termination and restart caveats.
+LU, Cholesky, QR, the pseudoinverse, and regularized least squares add factorization and
+inverse-problem techniques, while matrix differentials give Fréchet derivative rules and
+sharp sensitivity phenomena at defective or crossing spectra. Krylov, Arnoldi, Ritz, and
+GMRES then turn polynomial approximation into matrix-free solvers. The added Hermitian
+page specializes that story: conjugate gradients are the energy-minimizing Galerkin
+method for positive-definite systems, Lanczos is Arnoldi with a three-term recurrence,
+MINRES handles Hermitian residual minimization, and preconditioning is analyzed through
+the transformed operator.

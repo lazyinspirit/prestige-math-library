@@ -1,0 +1,2120 @@
+{
+  "version": 1,
+  "level": "frontier-27",
+  "note": "Step-5 authoring contract for frontier-27 batch 2 on Monday, August 31, 2026. This batch-local contract file was created from the authored Step-5 item text.",
+  "scope": [
+    "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+    "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate",
+    "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+    "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+    "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+    "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+    "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+    "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+    "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space",
+    "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+    "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+    "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem",
+    "ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system",
+    "ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension",
+    "ex-clustered-eigenvalues-give-a-better-cg-bound-than-spread-eigenvalues",
+    "cex-conjugate-gradients-can-break-on-a-symmetric-indefinite-system",
+    "cex-conjugate-gradients-does-not-apply-to-a-nonsymmetric-invertible-matrix",
+    "ex-minres-on-a-symmetric-indefinite-system",
+    "ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison",
+    "ex-diagonal-spd-preconditioning-improves-the-preconditioned-condition-number",
+    "cex-a-preconditioner-can-worsen-the-preconditioned-condition-number"
+  ],
+  "contracts": {
+    "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quadratic-energy-of-a-hermitian-positive-definite-linear-system",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, and let\n$b\\in\\mathbb C^n$. The **quadratic energy** of the linear system $Ax=b$ is the\nreal-valued function\n\n$$\\phi:\\mathbb C^n\\to\\mathbb R,\\qquad \\phi(x):=\\tfrac12\\langle Ax,x\\rangle-\\operatorname{Re}\\langle b,x\\rangle,$$\n\nwhere the coordinate inner product is the one from\n[[prop-standard-coordinate-inner-products]]. The diagonal term is real because\n$\\langle Ax,x\\rangle=\\|x\\|_A^2$ by\n[[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], there is a lower-triangular matrix $L$ with positive diagonal such that $A=LL^*$. Hence $L$ and $L^*$ are invertible, so $A$ is invertible and the system $Ax=b$ has the unique solution $x_*:=A^{-1}b$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $Ax_*=b$, [F1] gives $$\\phi(x)-\\phi(x_*)=\\tfrac12\\langle A(x-x_*),x-x_*\\rangle+\\operatorname{Re}\\!\\left(\\tfrac12\\langle Ax_*,x-x_*\\rangle-\\tfrac12\\langle A(x-x_*),x_*\\rangle\\right).$$ Because $A$ is Hermitian, $\\langle Ax_*,x-x_*\\rangle=\\langle x_*,A(x-x_*)\\rangle$ is the complex conjugate of $\\langle A(x-x_*),x_*\\rangle$, so the real part in parentheses vanishes. Therefore $$\\phi(x)-\\phi(x_*)=\\tfrac12\\langle A(x-x_*),x-x_*\\rangle=\\tfrac12\\|x-x_*\\|_A^2.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L1], the quantity $\\|x-x_*\\|_A^2$ is nonnegative and is zero only when $x=x_*$. Step 2.1 therefore shows $\\phi(x)\\ge\\phi(x_*)$ for every $x$, with equality only at $x_*$. Hence $x_*$ is the unique minimizer of $\\phi$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a fixed finite-dimensional Hermitian positive-definite system, not an empty family or empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-parameter branch is needed: the proof works uniformly for all right-hand sides, including b=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special singleton or value-one regime beyond the ordinary positive-definite argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the equality case by showing that zero energy norm forces x=x_*."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is not organized by interval endpoints or first-versus-last indices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no arbitrary choice from a bare nonempty set: x_* is canonically A^{-1}b."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level claim is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because the claim is existence plus uniqueness. Step 1.1 gets the unique solution x_* from Cholesky invertibility, step 2.1 computes phi(x)-phi(x_*) = (1/2)||x-x_*||_A^2, and step 3.1 uses positive definiteness to force equality only at x_*."
+      }
+    },
+    "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, and put\n\n$$r_0:=b-Ax_0.$$\n\nFor $m\\ge 0$, an element $x_m\\in x_0+K_m(A,r_0)$ is the **$m$th Krylov\nGalerkin iterate** when its residual\n\n$$r_m:=b-Ax_m$$\n\nis orthogonal to $K_m(A,r_0)$ in the standard inner product. The next\nproposition identifies this residual condition with $A$-orthogonality of the\nerror $x_*-x_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $v\\in K_m(A,r_0)$, the identity $Ax_*=b$ gives $$\\langle b-Ax_m,v\\rangle=\\langle A(x_*-x_m),v\\rangle=\\langle x_*-x_m,v\\rangle_A$$ by [L1]. Hence the residual is orthogonal to $K_m(A,r_0)$ if and only if the error is $A$-orthogonal to $K_m(A,r_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $x_m$ and $y_m$ both lie in $x_0+K_m(A,r_0)$ and both satisfy the equivalent conditions from step 1.1. Then $d:=x_m-y_m$ lies in $K_m(A,r_0)$, and both errors are $A$-orthogonal to $d$. Subtracting the two orthogonality relations gives $$0=\\langle x_*-x_m,d\\rangle_A-\\langle x_*-y_m,d\\rangle_A=\\langle y_m-x_m,d\\rangle_A=-\\langle d,d\\rangle_A.$$ Positive definiteness of the energy inner product therefore forces $d=0$, so $x_m=y_m$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition compares orthogonality conditions on one fixed Krylov space, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-residual or zero-vector branch is needed beyond the general orthogonality identity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special singleton or unit case distinct from the general affine-space argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the uniqueness degeneration: if two candidates satisfy the condition, their difference d has <d,d>_A=0, hence d=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument does not split by interval endpoints or terminal indices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No hidden arbitrary choice occurs; the candidates x_m and y_m are the given affine-space points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves residual orthogonality implies A-orthogonality of the error."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves A-orthogonality of the error implies residual orthogonality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it is an iff plus uniqueness statement. Step 1.1 identifies residual orthogonality with A-orthogonality of the error using Ax_*=b, and step 2.1 shows any two candidates differ by d with <d,d>_A = 0, hence are equal."
+      }
+    },
+    "prop-conjugate-gradient-denominators-are-positive-before-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We first show by induction on $j\\le k$ that $\\langle p_j,r_j\\rangle=\\langle r_j,r_j\\rangle$. For $j=0$ this is immediate from $p_0=r_0$ in [F1]. If it holds at $j$, then [F1] gives $\\langle p_j,r_{j+1}\\rangle=\\langle p_j,r_j\\rangle-\\alpha_j\\langle p_j,Ap_j\\rangle=\\langle r_j,r_j\\rangle-\\alpha_j\\langle p_j,Ap_j\\rangle=0$, so $$\\langle p_{j+1},r_{j+1}\\rangle=\\langle r_{j+1},r_{j+1}\\rangle+\\beta_j\\langle p_j,r_{j+1}\\rangle=\\langle r_{j+1},r_{j+1}\\rangle.$$ Thus the identity holds for every $j\\le k$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $j=k$, step 1.1 gives $\\langle p_k,r_k\\rangle=\\langle r_k,r_k\\rangle>0$ because $r_k\\ne0$. Hence $p_k\\ne0$. By [L1], $$p_k^*Ap_k=\\langle Ap_k,p_k\\rangle=\\|p_k\\|_A^2>0,$$ which is the desired positivity of the denominator.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition addresses one concrete nonconverged CG step rather than an empty collection of steps."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The converged case r_k=0 is outside the statement; the claim is only about steps before convergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate value-one or singleton branch appears in the denominator argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the only dangerous degeneration by proving p_k is nonzero before concluding p_k^*Ap_k>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not an endpoint comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The recurrence determines every vector canonically from the preceding step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is one-way, not if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is one-way, not if-and-only-if."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the recurrence divides by p_k^*Ap_k. Step 1.1 proves <p_j,r_j> = <r_j,r_j> inductively, and step 2.1 turns r_k != 0 into p_k != 0 and then p_k^*Ap_k = ||p_k||_A^2 > 0."
+      }
+    },
+    "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the conjugate-gradient recurrence of\n[[def-conjugate-gradient-recurrence]] is defined through step $k$ for a\nHermitian positive-definite matrix $A$. If $r_k\\ne0$, then $p_k\\ne0$ and\n\n$$p_k^*Ap_k=\\|p_k\\|_A^2>0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We prove by induction on $k\\ge0$ that $r_0,\\dots,r_k$ are pairwise orthogonal and $p_0,\\dots,p_k$ are pairwise $A$-conjugate. For $k=0$ there is nothing to prove. Assume the claim through step $k$. Because $p_j=r_j+\\beta_{j-1}p_{j-1}$ for $j\\ge1$ and $r_j=p_j-\\beta_{j-1}p_{j-1}$, the spans $\\operatorname{span}\\{p_0,\\dots,p_j\\}$ and $\\operatorname{span}\\{r_0,\\dots,r_j\\}$ agree for every $j$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "base",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i<k$, the induction hypothesis and step 1.1 give $$\\langle r_i,r_{k+1}\\rangle=\\langle r_i,r_k\\rangle-\\alpha_k\\langle r_i,Ap_k\\rangle=-\\alpha_k\\langle r_i,p_k\\rangle_A=0,$$ using [L2], because $r_i$ lies in $\\operatorname{span}\\{p_0,\\dots,p_i\\}$ and $p_k$ is $A$-conjugate to each of those earlier directions. Also, $$\\langle r_k,r_{k+1}\\rangle=\\langle r_k,r_k\\rangle-\\alpha_k\\langle r_k,p_k\\rangle_A.$$ Since $r_k=p_k-\\beta_{k-1}p_{k-1}$ for $k\\ge1$, the induction hypothesis gives $\\langle r_k,p_k\\rangle_A=\\langle p_k,p_k\\rangle_A$, and for $k=0$ the same identity is immediate. Using [F1], we obtain $\\langle r_k,r_{k+1}\\rangle=\\langle r_k,r_k\\rangle-\\alpha_k\\langle p_k,p_k\\rangle_A=0$. Thus $r_{k+1}$ is orthogonal to every earlier residual.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "step 1.1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $i<k$, Hermitian symmetry and [F1] give $$p_i^*Ap_{k+1}=p_i^*Ar_{k+1}+\\beta_kp_i^*Ap_k=(Ap_i)^*r_{k+1}.$$ Because $Ap_i=\\alpha_i^{-1}(r_i-r_{i+1})$ from [F1], step 2.1 implies $(Ap_i)^*r_{k+1}=0$, so $p_i^*Ap_{k+1}=0$. For $i=k$, step 2.1 yields $\\langle r_k,r_{k+1}\\rangle=0$, hence $$p_k^*Ar_{k+1}=(Ap_k)^*r_{k+1}=\\alpha_k^{-1}(r_k-r_{k+1})^*r_{k+1}=-\\alpha_k^{-1}\\langle r_{k+1},r_{k+1}\\rangle.$$ Therefore $$p_k^*Ap_{k+1}=p_k^*Ar_{k+1}+\\beta_kp_k^*Ap_k=-\\alpha_k^{-1}\\langle r_{k+1},r_{k+1}\\rangle+\\beta_kp_k^*Ap_k=0,$$ because $\\beta_k=\\langle r_{k+1},r_{k+1}\\rangle/\\langle r_k,r_k\\rangle$ and $\\alpha_k=\\langle r_k,r_k\\rangle/(p_k^*Ap_k)$ by [F1], with positivity from [L1] ensuring these divisions are valid before convergence. This closes the induction.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1",
+            "discharge-induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the computed residual and search-direction sequences, not an empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Only defined CG quantities are asserted, so the already-converged zero-residual stop case is outside the theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the base case k=0 before the induction step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the positive denominator from L1 to rule out invalid divisions before convergence."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is an induction over later indices, not an endpoint split on an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All recurrence objects are determined by the algorithm; no arbitrary choice from a nonempty set is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level theorem is not formulated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level theorem is not formulated as a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because orthogonality and conjugacy are inductive and feed later divisions. Steps 2.1 and 3.1 close the induction and use the positive-denominator proposition so the recurrence formulas stay licensed before convergence."
+      }
+    },
+    "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, and put\n\n$$r_0:=b-Ax_0.$$\n\nFor $m\\ge 0$, an element $x_m\\in x_0+K_m(A,r_0)$ is the **$m$th Krylov\nGalerkin iterate** when its residual\n\n$$r_m:=b-Ax_m$$\n\nis orthogonal to $K_m(A,r_0)$ in the standard inner product. The next\nproposition identifies this residual condition with $A$-orthogonality of the\nerror $x_*-x_m$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, let $r_0=b-Ax_0$, let $x_*$ be the exact solution of $Ax=b$, and let\n$x_m\\in x_0+K_m(A,r_0)$. Then the following are equivalent:\n\n1. $b-Ax_m$ is orthogonal to $K_m(A,r_0)$ in the standard inner product.\n2. $x_*-x_m$ is orthogonal to $K_m(A,r_0)$ in the energy inner product.\n\nWhen these conditions hold, the vector $x_m$ is the unique element of\n$x_0+K_m(A,r_0)$ with that property.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, and run the conjugate-gradient\nrecurrence in exact arithmetic. For all indices $i\\ne j$ for which the\nquantities are defined,\n\n$$\\langle r_i,r_j\\rangle=0,\\qquad p_i^*Ap_j=0.$$\n\nThus the residuals are mutually orthogonal and the search directions are\n$A$-conjugate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $b\\in\\mathbb C^n$,\nand let $\\phi$ be the quadratic energy from\n[[def-quadratic-energy-of-a-hermitian-positive-definite-linear-system]]. Then\nthe system $Ax=b$ has a unique solution $x_*$, and for every $x\\in\\mathbb C^n$\none has\n\n$$\\phi(x)-\\phi(x_*)=\\tfrac12\\|x-x_*\\|_A^2.$$\n\nIn particular, $x_*$ is the unique minimizer of $\\phi$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The CG recurrence gives $x_m-x_0$ as a linear combination of $p_0,\\dots,p_{m-1}$, so $x_m\\in x_0+\\operatorname{span}\\{p_0,\\dots,p_{m-1}\\}$. Also each residual satisfies $r_j=r_0-A(x_j-x_0)$, so $r_j\\in K_{j+1}(A,r_0)\\subseteq K_m(A,r_0)$ for $j<m$, and each $p_j=r_j+\\beta_{j-1}p_{j-1}$ therefore also lies in $K_m(A,r_0)$. By [L2], the nonzero residuals $r_0,\\dots,r_{m-1}$ are mutually orthogonal, hence linearly independent; since they all lie in the $m$-generated space $K_m(A,r_0)$, they form a basis of that space, and so do $p_0,\\dots,p_{m-1}$ by the triangular relation $p_j\\in r_j+\\operatorname{span}\\{r_0,\\dots,r_{j-1}\\}$. Thus $x_m\\in x_0+K_m(A,r_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2], the residual $r_m$ is orthogonal to each earlier residual. Since step 1.1 shows that $p_0,\\dots,p_{m-1}$ form a basis of $K_m(A,r_0)$ and each $p_j$ lies in $\\operatorname{span}\\{r_0,\\dots,r_j\\}$, the same orthogonality implies $r_m$ is orthogonal to $K_m(A,r_0)$. Therefore $x_m$ is a Krylov Galerkin iterate by [F1], and [L1] makes it unique.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $x\\in x_0+K_m(A,r_0)$ and put $v:=x-x_m\\in K_m(A,r_0)$. By [L1] and step 2.1, the error $x_*-x_m$ is $A$-orthogonal to $v$, so $$\\|x_*-x\\|_A^2=\\|(x_*-x_m)-v\\|_A^2=\\|x_*-x_m\\|_A^2+\\|v\\|_A^2.$$ Hence $\\|x_*-x_m\\|_A\\le\\|x_*-x\\|_A$, with equality only if $v=0$, that is, $x=x_m$. Using [L3], this is equivalent to saying that $x_m$ also uniquely minimizes the quadratic energy over the same affine Krylov space.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem works in one fixed affine Krylov space and does not introduce an empty-family branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement presumes the mth CG iterate exists, so the trivial earlier-stop branch is not part of this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special unit or singleton case needs separate treatment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the equality case: the comparison is sharp only when v=x-x_m is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary minimizer is chosen: uniqueness comes from the Galerkin characterization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states existence and optimality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states existence and optimality, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it identifies CG with the Galerkin minimizer. Step 1.1 shows the search directions span K_m, step 2.1 converts residual orthogonality into the Galerkin condition, and step 3.1 gives the Pythagorean A-norm minimization."
+      }
+    },
+    "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$, and let $b$ be a\nvector of matching size. The **relative minimal polynomial of $b$ with respect\nto $A$** is the unique monic polynomial over the same field\n$q_{A,b}$ of least degree such that\n\n$$q_{A,b}(A)b=0.$$\n\nIts degree\n\n$$\\nu(A,b):=\\deg q_{A,b}$$\n\nis the **grade** of $b$ relative to $A$.\n\nIf $b=0$, then $q_{A,b}=1$ and $\\nu(A,b)=0$.\n\nThis polynomial is well defined. If $A$ is $n\\times n$, then the $n+1$\nvectors $b,Ab,\\dots,A^n b$ are linearly dependent, so some nonzero polynomial\nannihilates $b$; dividing a least-degree annihilator by its leading coefficient\nmakes it monic. If two monic least-degree annihilators existed, their\ndifference would be an annihilator of strictly smaller degree, so they would be\nequal.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade",
+          "source_section": "Statement",
+          "quote": "Let $A$ be invertible, let $b$ be a vector, and let $\\nu=\\nu(A,b)$. If\n$x_\\ast$ is the exact solution of $Ax=b$, then\n\n$$x_\\ast\\in K_\\nu(A,b).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, let $x_*$ be the exact solution of $Ax=b$, and let $x_m$ be the $m$th\nconjugate-gradient iterate with initial residual $r_0=b-Ax_0$. Then $x_m$ is\nthe unique Krylov Galerkin iterate in $x_0+K_m(A,r_0)$, and for every\n$x\\in x_0+K_m(A,r_0)$,\n\n$$\\|x_*-x_m\\|_A\\le \\|x_*-x\\|_A,$$\n\nwith equality only when $x=x_m$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $r_0=0$, then $Ax_0=b$, so CG has already reached the exact solution at step $0=\\nu$ by [F1]. Assume now that $r_0\\ne0$. The initial error $e_0:=x_*-x_0$ satisfies $Ae_0=r_0$, so [L1] gives $e_0\\in K_\\nu(A,r_0)$. Therefore $$x_*=x_0+e_0\\in x_0+K_\\nu(A,r_0).$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If CG has already reached $x_*$ at some step $m<\\nu$, then it has certainly terminated no later than step $\\nu$. Otherwise the recurrence defines the $\\nu$th iterate, so [L2] applies with $m=\\nu$. Since $x_*$ itself belongs to the admissible affine space from step 1.1 and has zero error, the minimal $A$-norm error over that space is $0$. Hence the unique minimizer is $x_\\nu=x_*$, so CG terminates no later than step $\\nu$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $A$ is $n\\times n$, the $n+1$ vectors $r_0,Ar_0,\\dots,A^nr_0$ are linearly dependent. Thus some nonzero polynomial of degree at most $n$ annihilates $r_0$, and the minimal possible degree in [F1] therefore satisfies $\\nu\\le n$. Combining this with step 2.1 gives termination in at most $n$ steps.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one start vector r_0 and its grade, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 separates the zero-residual case r_0=0 and shows termination already at step 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent singleton or value-one branch is required beyond the general grade argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate branch remains once r_0=0 has been split off in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not an endpoint comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exact solution and the grade are canonically determined by A, b, and x_0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is one-way, not if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is one-way, not if-and-only-if."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the grade-zero and early-stop cases are boundary-sensitive. Step 1.1 splits r_0 = 0, and step 2.1 now separates prior termination from the case where x_nu is defined before applying the minimizer theorem."
+      }
+    },
+    "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, let $x_0$ be an initial\nguess, let $x_*$ be the exact solution of $Ax=b$, and let $x_m$ be the $m$th\nconjugate-gradient iterate with initial residual $r_0=b-Ax_0$. Then $x_m$ is\nthe unique Krylov Galerkin iterate in $x_0+K_m(A,r_0)$, and for every\n$x\\in x_0+K_m(A,r_0)$,\n\n$$\\|x_*-x_m\\|_A\\le \\|x_*-x\\|_A,$$\n\nwith equality only when $x=x_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every vector in $x_0+K_m(A,r_0)$ has the form $x_0+Az(A)e_0$ for some polynomial $z$ of degree at most $m-1$, because $r_0=Ae_0$. Hence every attainable error has the form $$e_0-Az(A)e_0=p(A)e_0,$$ where $p(0)=1$ and $\\deg p\\le m$. By [L1], the actual CG error therefore satisfies $$\\|e_m\\|_A\\le\\min_{\\substack{p(0)=1\\\\ \\deg p\\le m}}\\|p(A)e_0\\|_A.$$",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $A$ is Hermitian, [L2] and [L3] give an orthonormal basis of eigenvectors, so $A=U\\Lambda U^*$ with $U$ unitary and $\\Lambda=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$, where each $\\lambda_j>0$. Writing $U^*e_0=c$, one gets $$\\|p(A)e_0\\|_A^2=\\langle Ap(A)e_0,p(A)e_0\\rangle=\\sum_{j=1}^n \\lambda_j|p(\\lambda_j)|^2|c_j|^2\\le \\max_{\\lambda\\in[\\lambda_{\\min},\\lambda_{\\max}]}|p(\\lambda)|^2\\,\\|e_0\\|_A^2.$$ Thus $$\\|e_m\\|_A\\le \\min_{\\substack{p(0)=1\\\\ \\deg p\\le m}}\\max_{\\lambda\\in[\\lambda_{\\min},\\lambda_{\\max}]}|p(\\lambda)|\\,\\|e_0\\|_A.$$",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $$t(\\lambda):=\\frac{\\lambda_{\\max}+\\lambda_{\\min}-2\\lambda}{\\lambda_{\\max}-\\lambda_{\\min}},\\qquad p_m(\\lambda):=\\frac{T_m(t(\\lambda))}{T_m\\!\\left(\\frac{\\lambda_{\\max}+\\lambda_{\\min}}{\\lambda_{\\max}-\\lambda_{\\min}}\\right)},$$ where $T_m$ is the $m$th Chebyshev polynomial. Then $p_m(0)=1$, $\\deg p_m=m$, and $|T_m(t)|\\le1$ on $[-1,1]$, so $$\\max_{\\lambda\\in[\\lambda_{\\min},\\lambda_{\\max}]}|p_m(\\lambda)|\\le \\frac{1}{\\left|T_m\\!\\left(\\frac{\\lambda_{\\max}+\\lambda_{\\min}}{\\lambda_{\\max}-\\lambda_{\\min}}\\right)\\right|}.$$ With $\\kappa=\\lambda_{\\max}/\\lambda_{\\min}$, the denominator equals $T_m((\\kappa+1)/(\\kappa-1))$. For $s>1$, $$T_m(s)=\\frac{(s+\\sqrt{s^2-1})^m+(s-\\sqrt{s^2-1})^m}{2}\\ge \\frac{(s+\\sqrt{s^2-1})^m}{2},$$ and at $s=(\\kappa+1)/(\\kappa-1)$ one has $$\\frac{1}{s+\\sqrt{s^2-1}}=\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}.$$ Therefore $$\\max_{\\lambda\\in[\\lambda_{\\min},\\lambda_{\\max}]}|p_m(\\lambda)|\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m.$$ Combining this polynomial with step 2.1 gives the stated bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proof optimizes over nonempty polynomial classes and a positive spectral interval, not an empty set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-parameter branch is used; the estimate is uniform in m>=0 and in the initial error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special singleton or value-one regime beyond the general Chebyshev estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes A is Hermitian positive definite, so lambda_min>0 and the spectral interval does not collapse at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly uses the spectral endpoints lambda_min and lambda_max to scale the interval to [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The chosen polynomial p_m is written explicitly; there is no existential choice left unspecified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is an inequality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is an inequality, not a biconditional."
+        }
+      ]
+    },
+    "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+          "source_section": "Definition",
+          "quote": "A square matrix $H=(h_{ij})$ is **upper Hessenberg** when\n$h_{ij}=0$ for every $i>j+1$, so entries below the first subdiagonal vanish.\n\nA real symmetric matrix $T=(t_{ij})$ is **tridiagonal** when\n$t_{ij}=0$ for every $|i-j|>1$. Thus a real symmetric tridiagonal matrix is\nexactly a symmetric upper Hessenberg matrix.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $j$ and let $i\\le j-2$. By [L1], $Aq_i$ lies in $\\operatorname{span}\\{q_1,\\dots,q_{i+1}\\}$, which is orthogonal to $q_j$. Since $A$ is Hermitian, $$h_{ij}=q_i^*Aq_j=(Aq_i)^*q_j=0.$$ Together with the upper-Hessenberg zero pattern from [L2], this shows that the only possibly nonzero coefficients in column $j$ are $h_{j-1,j}$, $h_{jj}$, and $h_{j+1,j}$. Therefore each Arnoldi column relation collapses to a three-term recurrence.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hermitian symmetry also gives $h_{j,j-1}=\\overline{h_{j-1,j}}$. Under the phase convention in [F1], the subdiagonal coefficients $h_{j+1,j}$ are real and nonnegative; write $\\beta_j:=h_{j+1,j}$ and $\\alpha_j:=h_{jj}$. Since $h_{jj}=q_j^*Aq_j$ equals its own complex conjugate, each $\\alpha_j$ is real. Hence $$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1},$$ which is the Lanczos recurrence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The projected matrix is $T_m=Q_m^*AQ_m=(q_i^*Aq_j)_{i,j}=(h_{ij})_{1\\le i,j\\le m}$. Step 1.1 shows $h_{ij}=0$ for $|i-j|>1$, and Hermitian symmetry together with the reality from step 2.1 shows $h_{ij}=h_{ji}\\in\\mathbb R$ on the remaining bands. Thus $T_m$ is a real symmetric tridiagonal matrix in the sense of [L2].",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem treats one Arnoldi run on a nonzero start vector, not an empty process."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Arnoldi starts from a nonzero vector, so a zero-start branch is outside the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 incorporates the first-column case through the convention beta_0=0 in the three-term recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Breakdown is excluded in the statement, so no separate degenerate Arnoldi branch remains here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not organized by interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The phase convention fixes the remaining ambiguity in q_{j+1}; no arbitrary choice is left unrecorded."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the three-term reduction uses hidden zero-pattern and phase conventions. Step 1.1 kills off-band entries via Hermitian symmetry and the Arnoldi span relation, and steps 2.1 and 3.1 recover the real tridiagonal Lanczos coefficients."
+      }
+    },
+    "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minres-iterate-from-the-lanczos-tridiagonalization",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian, let $x_0$ be an initial guess for $Ax=b$, let\n$r_0=b-Ax_0$, and put $\\beta=\\|r_0\\|_2$. Assume Lanczos runs through step $m$\nwithout breakdown and yields\n\n$$AQ_m=Q_{m+1}\\bar T_m,\\qquad r_0=\\beta q_1=\\beta Q_{m+1}e_1,$$\n\nwith $\\bar T_m$ tridiagonal in the sense of\n[[thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]]. A\nvector\n\n$$x_m:=x_0+Q_my_m$$\n\nis an **$m$th MINRES iterate** when $y_m$ minimizes\n\n$$\\|\\beta e_1-\\bar T_my\\|_2$$\n\nover all $y\\in\\mathbb C^m$. Such a minimizer exists by\n[[thm-least-squares-solutions-and-normal-equation]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian, and run Arnoldi on $(A,b)$ through step $m$ without\nbreakdown. Write\n\n$$AQ_m=Q_{m+1}\\bar H_m,\\qquad Q_m=[q_1\\,\\dots\\,q_m].$$\n\nThen there exist real numbers $\\alpha_1,\\dots,\\alpha_m$ and nonnegative real\nnumbers $\\beta_1,\\dots,\\beta_m$ such that\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (1\\le j\\le m,\\ q_0:=0,\\ \\beta_0:=0).$$\n\nMoreover, $T_m:=Q_m^*AQ_m$ is a real symmetric tridiagonal matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem",
+          "source_section": "Statement",
+          "quote": "Let $r_0=b-Ax_0\\ne0$ and set $\\beta=\\|r_0\\|_2$. Run Arnoldi on $(A,r_0)$\nthrough step $m$ without breakdown, so that $v_1=r_0/\\beta$. Then every vector\n$x\\in x_0+K_m(A,r_0)$ has the form $x=x_0+Q_my$ for some $y\\in\\mathbb F^m$, and\n\n$$b-Ax=Q_{m+1}(\\beta e_1-\\bar H_my).$$\n\nConsequently,\n\n$$\\min_{x\\in x_0+K_m(A,r_0)}\\|b-Ax\\|_2 =\\min_{y\\in\\mathbb F^m}\\|\\beta e_1-\\bar H_my\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+          "source_section": "Statement",
+          "quote": "If $y_m$ minimizes $\\|\\beta e_1-\\bar H_my\\|_2$ in the Arnoldi coordinates of\nthe previous theorem, then\n\n$$x_m:=x_0+Q_my_m$$\n\nis a GMRES iterate. Equivalently, GMRES minimizes the residual norm over the\naffine Krylov space $x_0+K_m(A,r_0)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the Hermitian Arnoldi factorization uses the same orthonormal Krylov basis $Q_m$ as Arnoldi but with $\\bar H_m=\\bar T_m$ tridiagonal. Therefore the least-squares problem in [L2] is exactly the Lanczos least-squares problem recorded in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that the vector $x_m=x_0+Q_my_m$ coming from [F1] is also the GMRES iterate at step $m$. Applying [L3] gives $$\\|b-Ax_m\\|_2=\\min_{x\\in x_0+K_m(A,r_0)}\\|b-Ax\\|_2.$$ Neither step 1.1 nor [L3] uses positive definiteness, only Hermitian structure, so the same conclusion holds for Hermitian indefinite $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares one MINRES iterate with one affine Krylov space, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero-residual trivial case is not split off; the statement is about an mth MINRES iterate coming from Lanczos."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate singleton or value-one branch is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly records that the proof still goes through for the Hermitian indefinite case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof does not depend on an interval endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The minimizer y_m is the one built into the MINRES definition; no hidden choice is used later."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a direct minimization statement, not an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a direct minimization statement, not an if-and-only-if."
+        }
+      ]
+    },
+    "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form",
+          "source_section": "Statement",
+          "quote": "Every endomorphism of a finite-dimensional vector space over an algebraically closed field has a Jordan canonical form over that field, including the endomorphism of the zero space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "source_section": "Statement",
+          "quote": "For an endomorphism $T$ of a finite-dimensional $F$-vector space,\n\n$$\\sigma_F(T)=\\{\\lambda\\in F:\\chi_T(\\lambda)=0\\}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A vector $x$ is a fixed point of the stationary iteration if and only if it solves $Ax=b$: indeed, by [F1], $$x=Bx+M^{-1}b \\iff Mx=Nx+b \\iff Ax=b.$$ Therefore, whenever $x_*$ solves $Ax=b$, the error $e_k:=x_k-x_*$ satisfies $$e_{k+1}=Bx_k+M^{-1}b-x_*=B(x_k-x_*)=Be_k.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $\\rho(B)<1$. By [L1], [L2], and [L3], we may write $B=SJS^{-1}$ with $J$ Jordan and every eigenvalue $\\lambda$ of $B$ satisfying $|\\lambda|<1$. On a Jordan block $J_\\lambda=\\lambda I+N$ with nilpotent $N$, one has $$J_\\lambda^k=\\sum_{j=0}^{s-1}\\binom{k}{j}\\lambda^{k-j}N^j.$$ Because $|\\lambda|<1$, each scalar factor $\\binom{k}{j}\\lambda^{k-j}$ tends to $0$, so every Jordan block tends to $0$. Hence $J^k\\to0$ and therefore $B^k\\to0$. Since $1\\notin\\sigma(B)$, the matrix $I-B$ is invertible by [L3]. Define $$x_*:=(I-B)^{-1}M^{-1}b.$$ Then $(I-B)x_*=M^{-1}b$, so $x_*=Bx_*+M^{-1}b$, and step 1.1 shows that $x_*$ solves $Ax=b$. For any initial vector $x_0$, step 1.1 gives $e_k=B^ke_0\\to0$, so the iterates converge to $x_*$. If $y$ is another solution of $Ax=b$, then step 1.1 also gives $y=By+M^{-1}b$, hence $$y-x_*=B(y-x_*).$$ Iterating and using $B^k\\to0$ yields $y-x_*=B^k(y-x_*)\\to0$, so $y=x_*$. Thus the iterates converge to the unique solution of $Ax=b$ for every $b$ and every $x_0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, assume the iteration converges for every $b$ and every $x_0$. Taking $b=0$, statement 1 gives convergence to the unique solution of $Ax=0$. By step 1.1 that unique solution is also the unique fixed point of $x\\mapsto Bx$, so it is $0$. Hence for every start $x_0$ one has $B^kx_0=x_k\\to0$, which means $B^k\\to0$. If $Bv=\\lambda v$ with $v\\ne0$, then $$\\lambda^kv=B^kv\\to0,$$ so $\\lambda^k\\to0$ and therefore $|\\lambda|<1$. By [L3], every spectral value of $B$ is such an eigenvalue over $\\mathbb C$, and thus $\\rho(B)<1$.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one iteration matrix B rather than an empty family of splittings."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 specializes to the zero right-hand side b=0 to extract B^k->0 from the assumed convergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special singleton or value-one branch needs separate treatment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces the whole convergence question to the error recurrence e_{k+1}=Be_k and hence B^k->0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is spectral rather than an endpoint comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Jordan form is used after existence is supplied by the cited theorem; no arbitrary choice is left unstated in the written proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves rho(B)<1 implies convergence for every start."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves convergence for every start implies rho(B)<1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because it is an iff existence and uniqueness theorem. The current statement is now over M_n(C), step 1.1 identifies fixed points with solutions, and steps 2.1 and 3.1 prove both directions via Jordan decay, invertibility of I-B, and the zero right-hand side test; the refuter missing-field issue is resolved."
+      }
+    },
+    "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "source_section": "Definition",
+          "quote": "Let $Ax=b$ be a linear system.\n\nIf $P\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible, the **left-preconditioned\nsystem** is\n\n$$P^{-1}Ax=P^{-1}b.$$\n\nIf $P\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible and $y:=Px$, the\n**right-preconditioned system** is\n\n$$AP^{-1}y=b,\\qquad x=P^{-1}y.$$\n\nIf $M$ is Hermitian positive definite, then by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]\nit has a Cholesky factor $M=CC^*$ with $C$ invertible. The corresponding\n**symmetric preconditioning** is\n\n$$C^{-1}AC^{-*}y=C^{-1}b,\\qquad x=C^{-*}y.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is [[cor-general-linear-group-is-a-group]]. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For left preconditioning, [L1] implies $$Ax=b \\iff P^{-1}Ax=P^{-1}b.$$ For any trial vector $x$, the transformed residual is $$P^{-1}b-P^{-1}Ax=P^{-1}(b-Ax)=P^{-1}r.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For right preconditioning, put $y=Px$, so $x=P^{-1}y$ by [L1]. Then $$Ax=b \\iff AP^{-1}y=b.$$ The right-preconditioned residual is $$b-AP^{-1}y=b-Ax=r,$$ and if $y_*=Px_*$ then $$y-y_*=P(x-x_*)=Pe.$$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For symmetric preconditioning, [F1] writes $x=C^{-*}y$, equivalently $y=C^*x$. Therefore $$Ax=b \\iff C^{-1}AC^{-*}y=C^{-1}b.$$ If $y_*=C^*x_*$, then $$C^{-1}b-C^{-1}AC^{-*}y=C^{-1}(b-Ax)=C^{-1}r,$$ and $$y-y_*=C^*(x-x_*)=C^*e.$$ Thus each transformed system is equivalent to the original one, with the displayed residual and error maps.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition lists three concrete transformed systems, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-data case is needed because each equivalence is purely algebraic."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special unit or singleton regime beyond the general invertibility identities."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement already assumes invertibility, so singular-preconditioner degeneration is outside scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint regime is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The transformed variables y and y_* are canonically defined from x and x_*; no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 establish the forward implications from the original system to the left, right, and symmetric transforms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 establish the reverse implications from each transformed system back to Ax=b."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it is a three-way equivalence with residual and error maps. Steps 1.1, 1.2, and 2.1 explicitly rewrite the left, right, and symmetric systems and track the transformed residuals and errors by algebraic identities."
+      }
+    },
+    "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-left-right-and-symmetric-positive-definite-preconditioning",
+          "source_section": "Definition",
+          "quote": "Let $Ax=b$ be a linear system.\n\nIf $P\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible, the **left-preconditioned\nsystem** is\n\n$$P^{-1}Ax=P^{-1}b.$$\n\nIf $P\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible and $y:=Px$, the\n**right-preconditioned system** is\n\n$$AP^{-1}y=b,\\qquad x=P^{-1}y.$$\n\nIf $M$ is Hermitian positive definite, then by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]\nit has a Cholesky factor $M=CC^*$ with $C$ invertible. The corresponding\n**symmetric preconditioning** is\n\n$$C^{-1}AC^{-*}y=C^{-1}b,\\qquad x=C^{-*}y.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "source_section": "Statement",
+          "quote": "Let $Ax=b$ be a linear system. In the error formulas in parts 2 and 3, assume\n$x_*$ is a solution of $Ax=b$ and put $e:=x-x_*$. The corresponding\ntransformed exact solutions are denoted by $y_*$.\n\n1. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and\n   $$P^{-1}Ax=P^{-1}b,$$\n   then the left-preconditioned system has exactly the same solution set as\n   $Ax=b$. Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.\n2. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and $y:=Px$, then\n   $$AP^{-1}y=b$$\n   is equivalent to $Ax=b$. Its residual is the same physical residual\n   $\\hat r=b-AP^{-1}y=r$, and its error is $\\hat e=y-y_*=Pe$, where\n   $y_*:=Px_*$.\n3. If $M=CC^*$ is Hermitian positive definite and $y:=C^*x$, then\n   $$C^{-1}AC^{-*}y=C^{-1}b$$\n   is equivalent to $Ax=b$. Its residual is\n   $$r_{\\mathrm{sym}}=C^{-1}r,$$\n   and its error is\n   $$e_{\\mathrm{sym}}=y-y_*=C^*e,$$\n   where $y_*:=C^*x_*$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $x_*$ solve\n$Ax=b$, let $e_m:=x_*-x_m$ be the error in the $m$th exact-arithmetic CG\niterate, let $0<\\lambda_{\\min}\\le\\lambda_{\\max}$ be the smallest and largest\neigenvalues of $A$, and let\n\n$$\\kappa:=\\frac{\\lambda_{\\max}}{\\lambda_{\\min}}.$$\n\nThen for every $m\\ge0$,\n\n$$\\|e_m\\|_A\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m\\|e_0\\|_A.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the preconditioner has a factorization $M=CC^*$ with invertible $C$. For any nonzero $z$, $$z^*\\widetilde Az=(C^{-*}z)^*A(C^{-*}z)>0,$$ because $C^{-*}z\\ne0$ and $A$ is Hermitian positive definite. Also $$\\widetilde A^*=(C^{-1}AC^{-*})^*=C^{-1}A^*C^{-*}=C^{-1}AC^{-*}=\\widetilde A.$$ So $\\widetilde A$ is Hermitian positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [L1], the transformed system $\\widetilde Ay=\\widetilde b$ is equivalent to $Ax=b$, and its transformed error is $e_{\\mathrm{sym}}=y-y_*=C^*(x-x_*)$. Therefore $$\\|y-y_*\\|_{\\widetilde A}^2=(y-y_*)^*\\widetilde A(y-y_*)=(x-x_*)^*A(x-x_*)=\\|x-x_*\\|_A^2.$$ Hence the energy norms agree under the symmetric change of variables.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since step 1.1 shows that $\\widetilde A$ is Hermitian positive definite, [L3] applies to the transformed system and gives $$\\|y_*-y_m\\|_{\\widetilde A}\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m\\|y_*-y_0\\|_{\\widetilde A},$$ where $\\kappa=\\lambda_{\\max}(\\widetilde A)/\\lambda_{\\min}(\\widetilde A)$ is the spectral ratio from the Statement. By step 2.1, this is exactly the preconditioned CG estimate expressed in the original variables. The bound depends on the transformed operator $\\widetilde A$, not on $\\kappa_2(A)$ by itself.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one fixed HPD system and one HPD preconditioner, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-parameter split is required: the congruence and norm identities are uniform in the data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no special singleton or value-one regime beyond the general transformed-system proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the only load-bearing degeneration by proving the transformed matrix remains Hermitian positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Cholesky factor C is supplied by the cited theorem and the transformed variables are then canonical."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states preservation and an error bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states preservation and an error bound, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it combines HPD preservation with the transformed CG bound. Step 1.1 proves C^{-1}AC^{-*} stays Hermitian positive definite, step 2.1 matches the energy norms exactly, and step 3.1 applies the repaired Chebyshev theorem to the transformed spectral ratio."
+      }
+    },
+    "ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, and run the conjugate-gradient\nrecurrence in exact arithmetic. For all indices $i\\ne j$ for which the\nquantities are defined,\n\n$$\\langle r_i,r_j\\rangle=0,\\qquad p_i^*Ap_j=0.$$\n\nThus the residuals are mutually orthogonal and the search directions are\n$A$-conjugate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $Ax=b$, let $x_0$\nbe an initial guess, let $r_0=b-Ax_0$, and let $\\nu=\\nu(A,r_0)$ be the grade of\n$r_0$. Then exact-arithmetic conjugate gradients reaches the exact solution no\nlater than step $\\nu$. In particular, $\\nu\\le n$, so CG terminates in at most\n$n$ steps.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $r_0=p_0=b=(2,1)^T$, so $$\\alpha_0=\\frac{r_0^Tr_0}{p_0^TAp_0}=\\frac{5}{9},\\qquad x_1=\\binom{10/9}{5/9},\\qquad r_1=b-Ax_1=\\binom{-2/9}{4/9}.$$ Then $$\\beta_0=\\frac{r_1^Tr_1}{r_0^Tr_0}=\\frac{4}{81},\\qquad p_1=r_1+\\beta_0p_0=\\binom{-10/81}{40/81}.$$ One checks $$r_0^Tr_1=2(-2/9)+1(4/9)=0,\\qquad p_0^TAp_1=(2,1)\\cdot\\binom{-20/81}{40/81}=0,$$ exactly as [L1] predicts.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Next $$\\alpha_1=\\frac{r_1^Tr_1}{p_1^TAp_1}=\\frac{20/81}{200/729}=\\frac{9}{10},$$ so $$x_2=x_1+\\alpha_1p_1=\\binom{10/9}{5/9}+\\frac9{10}\\binom{-10/81}{40/81}=\\binom11=x_*.$$ Thus the method terminates in two steps, which matches the $n=2$ upper bound in [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one explicit 2x2 system, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero initial guess is part of the fixed witness, not a separate boundary branch in the argument.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "The detector keys off symbolic denominators, but steps 1.1 and 2.1 compute them numerically as 9, 5, and 200/729 in this fixed 2x2 witness, so no separate zero-denominator branch is omitted on the current bytes."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is genuinely two-dimensional and does not collapse to a singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate denominator or stalled step occurs in this positive-definite witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 reaches the terminal bound case exactly at the second step, the dimension endpoint n=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every vector in the computation is fixed by the displayed data and the CG recurrence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In CG on a $2\\\\times2$ Hermitian positive-definite system reaches the solution in at most two steps, the example records one witness rather than a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In CG on a $2\\\\times2$ Hermitian positive-definite system reaches the solution in at most two steps, the example records one witness rather than a biconditional statement."
+        }
+      ]
+    },
+    "ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$, and let $b$ be a\nvector of matching size. The **relative minimal polynomial of $b$ with respect\nto $A$** is the unique monic polynomial over the same field\n$q_{A,b}$ of least degree such that\n\n$$q_{A,b}(A)b=0.$$\n\nIts degree\n\n$$\\nu(A,b):=\\deg q_{A,b}$$\n\nis the **grade** of $b$ relative to $A$.\n\nIf $b=0$, then $q_{A,b}=1$ and $\\nu(A,b)=0$.\n\nThis polynomial is well defined. If $A$ is $n\\times n$, then the $n+1$\nvectors $b,Ab,\\dots,A^n b$ are linearly dependent, so some nonzero polynomial\nannihilates $b$; dividing a least-degree annihilator by its leading coefficient\nmakes it monic. If two monic least-degree annihilators existed, their\ndifference would be an annihilator of strictly smaller degree, so they would be\nequal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $Ax=b$, let $x_0$\nbe an initial guess, let $r_0=b-Ax_0$, and let $\\nu=\\nu(A,r_0)$ be the grade of\n$r_0$. Then exact-arithmetic conjugate gradients reaches the exact solution no\nlater than step $\\nu$. In particular, $\\nu\\le n$, so CG terminates in at most\n$n$ steps.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $Ar_0=r_0$, the polynomial $q(z)=z-1$ annihilates $r_0$. The vector $r_0$ is nonzero, so no constant polynomial can annihilate it. Therefore $q_{A,r_0}(z)=z-1$ and $\\nu(A,r_0)=1$ by [F1]. In particular, $1<3=\\dim\\mathbb R^3$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact solution is $x_*=A^{-1}b=(1,1,0)^T=r_0$. Because $p_0=r_0$ and $$\\alpha_0=\\frac{r_0^Tr_0}{p_0^TAp_0}=\\frac{2}{2}=1,$$ the first CG update gives $x_1=x_0+\\alpha_0p_0=r_0=x_*$. Thus the method stops at step $1=\\nu(A,r_0)$, exactly as [L1] allows.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one explicit 3x3 system, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero initial guess is part of the chosen witness, not a separate boundary split.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "The only denominator here is p_0^T A p_0 = 2 in the fixed 3x3 witness, so the symbolic-zero heuristic is not pointing to an omitted zero branch beyond the explicit one-step computation in step 2.1."
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the relative grade as the singleton value nu=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degeneracy occurs once the relative minimal polynomial is computed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The point of the example is strict inequality nu<3, not an endpoint equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness matrix and vector are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In CG can terminate at a relative grade strictly smaller than the ambient dimension, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In CG can terminate at a relative grade strictly smaller than the ambient dimension, the example gives a single witness rather than a biconditional claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the example hinges on a relative-grade boundary smaller than dimension. Step 1.1 computes nu = 1 from (A-I)r_0 = 0, and step 2.1 shows the first CG step lands exactly at x_*."
+      }
+    },
+    "ex-clustered-eigenvalues-give-a-better-cg-bound-than-spread-eigenvalues": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $x_*$ solve\n$Ax=b$, let $e_m:=x_*-x_m$ be the error in the $m$th exact-arithmetic CG\niterate, let $0<\\lambda_{\\min}\\le\\lambda_{\\max}$ be the smallest and largest\neigenvalues of $A$, and let\n\n$$\\kappa:=\\frac{\\lambda_{\\max}}{\\lambda_{\\min}}.$$\n\nThen for every $m\\ge0$,\n\n$$\\|e_m\\|_A\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m\\|e_0\\|_A.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The spectral condition numbers are $$\\kappa_2(A_{\\mathrm{cl}})=\\frac{11}{9},\\qquad \\kappa_2(A_{\\mathrm{sp}})=100.$$ So the contraction factors in [L1] are $$\\theta_{\\mathrm{cl}}=\\frac{\\sqrt{11/9}-1}{\\sqrt{11/9}+1}=\\frac{\\sqrt{11}-3}{\\sqrt{11}+3},$$ and $$\\theta_{\\mathrm{sp}}=\\frac{\\sqrt{100}-1}{\\sqrt{100}+1}=\\frac{9}{11}.$$ Moreover $\\sqrt{11}<10/3$, so $\\theta_{\\mathrm{cl}}<1/18$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $m=2$, [L1] yields $$\\|e_2\\|_{A_{\\mathrm{cl}}}\\le 2\\theta_{\\mathrm{cl}}^2\\|e_0\\|_{A_{\\mathrm{cl}}}<\\frac{1}{162}\\|e_0\\|_{A_{\\mathrm{cl}}},$$ whereas $$\\|e_2\\|_{A_{\\mathrm{sp}}}\\le 2\\theta_{\\mathrm{sp}}^2\\|e_0\\|_{A_{\\mathrm{sp}}}=\\frac{162}{121}\\|e_0\\|_{A_{\\mathrm{sp}}}.$$ Thus the clustered eigenvalues give a visibly sharper theoretical CG estimate than the spread spectrum of the same size.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The comparison uses two explicit spectra, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-data branch is relevant to this condition-number comparison."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither spectrum collapses to a one-point example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both matrices are strictly positive definite, so the comparison avoids any degenerate spectral interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the extreme eigenvalues in each example, and step 2.1 uses those endpoint-controlled kappa values in the bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrices are fixed explicitly; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way comparison, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way comparison, not a biconditional."
+        }
+      ]
+    },
+    "cex-conjugate-gradients-can-break-on-a-symmetric-indefinite-system": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the conjugate-gradient recurrence of\n[[def-conjugate-gradient-recurrence]] is defined through step $k$ for a\nHermitian positive-definite matrix $A$. If $r_k\\ne0$, then $p_k\\ne0$ and\n\n$$p_k^*Ap_k=\\|p_k\\|_A^2>0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $$A=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\qquad b=\\binom11,\\qquad x_0=\\binom00.$$ Then $A$ is symmetric and invertible but indefinite. By [F1], $$r_0=p_0=b=\\binom11,$$ so $$p_0^TAp_0=(1,1)\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}\\binom11=(1,1)\\binom1{-1}=0.$$ Yet $r_0\\ne0$, so the method has not converged.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 shows that the first CG denominator can fail to be positive even before convergence. Therefore the refuted statement is false. The contrast with [L1] isolates the missing hypothesis: positive definiteness, not mere symmetry, is load-bearing.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is one explicit 2x2 witness, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is a zero-denominator witness: p_0^TAp_0=0 while the residual is still nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or value-one split is relevant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the exact breakdown degeneration at the first nonconverged step."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is not an endpoint comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrix, right-hand side, and start vector are all fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A symmetric indefinite matrix can make the CG denominator vanish or change sign before convergence, the counterexample refutes a single claim rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A symmetric indefinite matrix can make the CG denominator vanish or change sign before convergence, the counterexample refutes a single claim rather than a biconditional."
+        }
+      ]
+    },
+    "cex-conjugate-gradients-does-not-apply-to-a-nonsymmetric-invertible-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-gmres-iterate",
+          "source_section": "Definition",
+          "quote": "Let $Ax=b$ be a linear system, let $x_0$ be an initial guess, and let\n\n$$r_0:=b-Ax_0.$$\n\nFor $m\\ge 0$, a **GMRES iterate at step $m$** is any vector\n$x_m\\in x_0+K_m(A,r_0)$ such that\n\n$$\\|b-Ax_m\\|_2=\\min_{x\\in x_0+K_m(A,r_0)} \\|b-Ax\\|_2.$$\n\nThus GMRES is defined by residual minimization over the affine Krylov space\ngenerated by the initial residual.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $$A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix},\\qquad b=\\binom01,\\qquad x_0=\\binom00.$$ Then $A$ is invertible but not symmetric. From [F1], $$r_0=p_0=\\binom01,\\qquad \\alpha_0=\\frac{1}{1}=1,\\qquad x_1=\\binom01,\\qquad r_1=b-Ax_1=\\binom{-1}0.$$ Also $$\\beta_0=\\frac{r_1^Tr_1}{r_0^Tr_0}=1,\\qquad p_1=r_1+\\beta_0p_0=\\binom{-1}1.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Now $$p_0^TAp_1=(0,1)\\begin{pmatrix}0\\\\1\\end{pmatrix}=1\\ne0.$$ So the search directions fail the basic $A$-conjugacy identity already at the second direction, and the SPD CG theory cannot be transplanted to this nonsymmetric matrix. The appropriate general method here is the affine-Krylov residual minimizer named in [L1], not CG's Hermitian positive-definite theory.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is one explicit 2x2 nonsymmetric system."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-denominator or zero-residual branch is the point of this witness.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "Step 1.1 fixes r_0^T r_0 = 1 and computes the next search direction directly, so the symbolic denominator comes from a fixed nonzero witness rather than an omitted zero-residual case."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or value-one case is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the first failure mode directly: the second search direction is not A-conjugate to the first."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof does not compare interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness system is fixed explicitly and the recurrence determines the rest."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A nonsymmetric invertible matrix does not fit the CG orthogonality and minimization theory, the counterexample refutes a single claim rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A nonsymmetric invertible matrix does not fit the CG orthogonality and minimization theory, the counterexample refutes a single claim rather than a biconditional."
+        }
+      ]
+    },
+    "ex-minres-on-a-symmetric-indefinite-system": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian, let $x_0$ be an initial guess for $Ax=b$, let\n$r_0=b-Ax_0$, and let $x_m$ be an $m$th MINRES iterate from the Lanczos\ntridiagonal least-squares problem. Then\n\n$$\\|b-Ax_m\\|_2=\\min_{x\\in x_0+K_m(A,r_0)}\\|b-Ax\\|_2.$$\n\nThis remains valid when $A$ is Hermitian indefinite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $r_0=b$, so $q_1=r_0/\\|r_0\\|_2=(1,1)^T/\\sqrt2$ and $$Aq_1=\\binom{1/\\sqrt2}{-1/\\sqrt2},\\qquad \\alpha_1=q_1^TAq_1=0,\\qquad \\beta_1=1,\\qquad q_2=\\binom{1/\\sqrt2}{-1/\\sqrt2}.$$ Thus the first Lanczos matrix is $$\\bar T_1=\\binom01,$$ and the step-$1$ least-squares problem is $$\\min_{y\\in\\mathbb R}\\left\\|\\binom{\\sqrt2}{0}-\\binom0y\\right\\|_2,$$ whose unique minimizer is $y_1=0$. Therefore $x_1=x_0+q_1y_1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The affine space $x_0+K_1(A,r_0)$ is $\\{t(1,1)^T:t\\in\\mathbb R\\}$. For such a vector, $$b-A\\binom tt=\\binom{1-t}{1+t},\\qquad \\left\\|b-A\\binom tt\\right\\|_2^2=(1-t)^2+(1+t)^2=2+2t^2,$$ which is minimized exactly at $t=0$. So the explicit computation in step 1.1 matches [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one explicit indefinite 2x2 system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the first least-squares minimizer is the zero scalar y_1=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is exactly the one-step MINRES least-squares problem on K_1(A,r_0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the indefinite but Hermitian edge case by minimizing over the one-dimensional affine Krylov space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is not an endpoint comparison."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All witness data are explicit; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In MINRES still minimizes the residual on a small symmetric indefinite system, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In MINRES still minimizes the residual on a small symmetric indefinite system, the example gives a single witness rather than a biconditional claim."
+        }
+      ]
+    },
+    "ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "source_section": "Statement",
+          "quote": "Let $A=M-N$ be a matrix splitting in $M_n(\\mathbb C)$ with stationary iteration\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b,$$\n\nand let $B:=M^{-1}N$ be its iteration matrix. Then the following are\nequivalent:\n\n1. For every right-hand side $b$ and every initial vector $x_0$, the iterates\n   converge to the unique solution of $Ax=b$.\n2. The spectral radius $\\rho(B)$ is strictly less than $1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $$B_J=M_J^{-1}N_J=\\begin{pmatrix}0&-1/4\\\\-2/3&0\\end{pmatrix},\\qquad B_G=M_G^{-1}N_G=\\begin{pmatrix}0&-1/4\\\\0&1/6\\end{pmatrix}.$$ The eigenvalues of $B_J$ are $\\pm 1/\\sqrt6$, so $\\rho(B_J)=1/\\sqrt6$, while the eigenvalues of $B_G$ are $0$ and $1/6$, so $\\rho(B_G)=1/6$. Both are below $1$, and Gauss-Seidel has the smaller spectral radius.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact solution is $x_*=(1/5,1/5)^T$. Jacobi gives $$x_1^{(J)}=\\binom{1/4}{1/3},\\qquad x_2^{(J)}=\\binom{1/6}{1/6},$$ so $$\\|x_1^{(J)}-x_*\\|_\\infty=\\frac{2}{15},\\qquad \\|x_2^{(J)}-x_*\\|_\\infty=\\frac{1}{30}.$$ Gauss-Seidel gives $$x_1^{(G)}=\\binom{1/4}{1/6},\\qquad x_2^{(G)}=\\binom{5/24}{7/36},$$ so $$\\|x_1^{(G)}-x_*\\|_\\infty=\\frac1{20},\\qquad \\|x_2^{(G)}-x_*\\|_\\infty=\\frac1{120}.$$ Thus the splitting with smaller spectral radius also shows faster observed error decay here, consistent with [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example compares two explicit splittings of one matrix, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero initial guess is part of the chosen run, not a separate mathematical boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not reduce to a one-dimensional or value-one special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both iteration matrices are nondegenerate and already satisfy rho(B)<1 without a special branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the spectral-radius threshold against the endpoint value 1, and step 2.1 compares the resulting decay."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two splittings and the initial iterate are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not itself a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not itself a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it tests the spectral-radius threshold numerically. Step 1.1 computes both iteration matrices and their eigenvalues explicitly, and step 2.1 verifies the faster observed decay from the smaller spectral radius on exact iterates."
+      }
+    },
+    "ex-diagonal-spd-preconditioning-improves-the-preconditioned-condition-number": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $x_*$ solve\n$Ax=b$, and let $M$ be Hermitian positive definite. Write $M=CC^*$, and define\n\n$$\\widetilde A:=C^{-1}AC^{-*},\\qquad \\widetilde b:=C^{-1}b,\\qquad y:=C^*x,\\qquad y_*:=C^*x_*.$$\n\nThen $\\widetilde A$ is Hermitian positive definite, the transformed system\n\n$$\\widetilde Ay=\\widetilde b$$\n\nis equivalent to $Ax=b$, and\n\n$$\\|y-y_*\\|_{\\widetilde A}=\\|x-x_*\\|_A.$$\n\nConsequently, if\n\n$$\\kappa:=\\frac{\\lambda_{\\max}(\\widetilde A)}{\\lambda_{\\min}(\\widetilde A)},$$\n\nthen exact-arithmetic CG on the transformed system obeys\n\n$$\\|y_*-y_m\\|_{\\widetilde A}\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m\\|y_*-y_0\\|_{\\widetilde A},$$\n\nwhich is the preconditioned CG bound.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The original spectral condition number is $$\\kappa_2(A)=\\frac{100}{1}=100.$$ If $M=CC^*$, then we may take $C=\\operatorname{diag}(10,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The symmetrically preconditioned operator is $$C^{-1}AC^{-*}=\\operatorname{diag}(1/10,1)\\operatorname{diag}(100,1)\\operatorname{diag}(1/10,1)=I_2,$$ so $$\\kappa_2(C^{-1}AC^{-*})=1.$$ Therefore the relevant condition number has improved from $100$ to $1$, exactly the transformed quantity singled out in [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is one explicit diagonal system and one explicit diagonal preconditioner."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-data branch is relevant to this condition-number computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 reaches the optimal endpoint kappa_2(C^{-1}AC^{-*})=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The transformed operator is the identity, not a degenerate or singular matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is about exact improvement to kappa=1 rather than an interval-endpoint split."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness A and M are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A diagonal positive-definite preconditioner can improve the relevant condition number, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A diagonal positive-definite preconditioner can improve the relevant condition number, the example gives a single witness rather than a biconditional claim."
+        }
+      ]
+    },
+    "cex-a-preconditioner-can-worsen-the-preconditioned-condition-number": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "source_section": "Statement",
+          "quote": "Let $Ax=b$ be a linear system. In the error formulas in parts 2 and 3, assume\n$x_*$ is a solution of $Ax=b$ and put $e:=x-x_*$. The corresponding\ntransformed exact solutions are denoted by $y_*$.\n\n1. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and\n   $$P^{-1}Ax=P^{-1}b,$$\n   then the left-preconditioned system has exactly the same solution set as\n   $Ax=b$. Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.\n2. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and $y:=Px$, then\n   $$AP^{-1}y=b$$\n   is equivalent to $Ax=b$. Its residual is the same physical residual\n   $\\hat r=b-AP^{-1}y=r$, and its error is $\\hat e=y-y_*=Pe$, where\n   $y_*:=Px_*$.\n3. If $M=CC^*$ is Hermitian positive definite and $y:=C^*x$, then\n   $$C^{-1}AC^{-*}y=C^{-1}b$$\n   is equivalent to $Ax=b$. Its residual is\n   $$r_{\\mathrm{sym}}=C^{-1}r,$$\n   and its error is\n   $$e_{\\mathrm{sym}}=y-y_*=C^*e,$$\n   where $y_*:=C^*x_*$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite, let $x_*$ solve\n$Ax=b$, and let $M$ be Hermitian positive definite. Write $M=CC^*$, and define\n\n$$\\widetilde A:=C^{-1}AC^{-*},\\qquad \\widetilde b:=C^{-1}b,\\qquad y:=C^*x,\\qquad y_*:=C^*x_*.$$\n\nThen $\\widetilde A$ is Hermitian positive definite, the transformed system\n\n$$\\widetilde Ay=\\widetilde b$$\n\nis equivalent to $Ax=b$, and\n\n$$\\|y-y_*\\|_{\\widetilde A}=\\|x-x_*\\|_A.$$\n\nConsequently, if\n\n$$\\kappa:=\\frac{\\lambda_{\\max}(\\widetilde A)}{\\lambda_{\\min}(\\widetilde A)},$$\n\nthen exact-arithmetic CG on the transformed system obeys\n\n$$\\|y_*-y_m\\|_{\\widetilde A}\\le 2\\left(\\frac{\\sqrt{\\kappa}-1}{\\sqrt{\\kappa}+1}\\right)^m\\|y_*-y_0\\|_{\\widetilde A},$$\n\nwhich is the preconditioned CG bound.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $$A=I_2,\\qquad M=\\operatorname{diag}(1,1/100).$$ Then $A$ is already Hermitian positive definite with $$\\kappa_2(A)=1.$$ Since $M=CC^*$ with $C=\\operatorname{diag}(1,1/10)$, [F1] gives the transformed operator $$C^{-1}AC^{-*}=\\operatorname{diag}(1,10)I_2\\operatorname{diag}(1,10)=\\operatorname{diag}(1,100).$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The transformed spectral condition number is therefore $$\\kappa_2(C^{-1}AC^{-*})=100>1=\\kappa_2(A).$$ So this symmetric positive-definite preconditioner worsens the condition number that actually appears in the CG bound from [L1]. The refuted statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses one explicit matrix and one explicit SPD preconditioner."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-data branch is needed for this witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare the unit condition number kappa_2(A)=1 with the worsened transformed value 100."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both the original and transformed matrices are nonsingular, so the witness is not a singular degeneration."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample does not hinge on interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness matrices are written explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In A preconditioner can worsen the condition number that actually controls CG, the counterexample refutes a single claim rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In A preconditioner can worsen the condition number that actually controls CG, the counterexample refutes a single claim rather than a biconditional."
+        }
+      ]
+    }
+  }
+}

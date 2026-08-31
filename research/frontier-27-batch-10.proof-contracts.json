@@ -1,0 +1,2723 @@
+{
+  "version": 1,
+  "level": "frontier-27",
+  "note": "Step-5 authoring contract for frontier-27 batch 10 on Monday, August 31, 2026.",
+  "scope": [
+    "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+    "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+    "prop-ackermann-is-total-computable-but-not-primitive-recursive",
+    "lem-turing-step-coding-is-primitive-recursive",
+    "thm-kleene-normal-form",
+    "thm-partial-recursive-iff-turing-computable",
+    "thm-lambda-definable-iff-partial-recursive",
+    "fs-every-total-computable-function-is-primitive-recursive",
+    "fs-mu-minimization-is-always-total",
+    "ex-sequence-length-and-coordinate-functions-are-primitive-recursive",
+    "ex-lambda-definable-iff-partial-recursive",
+    "cex-every-total-computable-function-is-primitive-recursive",
+    "lem-time-at-least-input-length-permits-complete-input-reading",
+    "lem-time-bounds-imply-space-bounds",
+    "thm-multitape-to-single-tape-time-simulation",
+    "thm-multitape-to-single-tape-space-simulation",
+    "thm-universal-simulation-with-logarithmic-overhead",
+    "prop-polynomial-time-and-space-are-model-invariant",
+    "lem-clocked-machine-construction",
+    "prop-polynomially-related-encodings-preserve-polynomial-classes",
+    "fs-model-invariance-means-equal-step-counts",
+    "fs-time-bounds-never-need-constructibility",
+    "ex-time-bounds-imply-space-bounds",
+    "ex-polynomially-related-encodings-preserve-polynomial-classes",
+    "cex-model-invariance-means-equal-step-counts"
+  ],
+  "contracts": {
+    "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-primitive-recursive-function",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\mathbb N^k\\to\\mathbb N$ is **primitive recursive** when\nit belongs to the smallest collection of total arithmetic functions that:\n\n- contains every initial arithmetic function from\n  [[def-initial-arithmetic-functions]], and\n- is closed under the two schemes from\n  [[def-composition-and-primitive-recursion-schemes]].\n\nEquivalently, a primitive recursive function is one obtainable from the zero,\nsuccessor, and projection functions by finitely many applications of\ncomposition and primitive recursion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Addition is obtained by primitive recursion from the clauses $\\operatorname{add}(0,n)=n$ and $\\operatorname{add}(m+1,n)=S(\\operatorname{add}(m,n))$. Multiplication is then obtained by primitive recursion from $0$ and addition via $\\operatorname{mul}(0,n)=0$ and $\\operatorname{mul}(m+1,n)=\\operatorname{add}(\\operatorname{mul}(m,n),n)$. By [L1], both functions are primitive recursive.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The predecessor function is primitive recursive from $p(0)=0$ and $p(n+1)=P_1^2(n,p(n))$. Then truncated subtraction is primitive recursive by $m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} 0=m$ and $m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} (n+1)=p(m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n)$. From this, the zero-test $\\chi_0$ is primitive recursive via $\\chi_0(0)=1$ and $\\chi_0(n+1)=0$, the sign function $\\operatorname{sg}(n)=1-\\chi_0(n)$ is primitive recursive, equality is given by $\\chi_{=}(m,n)=\\chi_0((m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n)+(n \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} m))$, and order is given by $\\chi_{\\le}(m,n)=\\chi_0(m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n)$. So the listed basic arithmetic and characteristic functions are primitive recursive by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $g:\\mathbb N^{k+1}\\to\\mathbb N$ is primitive recursive, then bounded sums and products are obtained by primitive recursion through $\\Sigma_g(0,x)=g(0,x)$, $\\Sigma_g(n+1,x)=\\Sigma_g(n,x)+g(n+1,x)$, $\\Pi_g(0,x)=g(0,x)$, and $\\Pi_g(n+1,x)=\\Pi_g(n,x)\\cdot g(n+1,x)$. Hence $\\Sigma_g$ and $\\Pi_g$ are primitive recursive by [L1].",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $r(y,x)\\in\\{0,1\\}$ is a primitive-recursive characteristic function, then $\\chi_{\\exists y\\le n\\,r(y,x)=1}(n,x)=\\operatorname{sg}(\\Sigma_r(n,x))$ and $\\chi_{\\forall y\\le n\\,r(y,x)=1}(n,x)=\\Pi_r(n,x)$. Thus bounded existential and bounded universal quantification preserve primitive recursiveness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The displayed constructions establish every operation and quantifier listed in the statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The only indexed aggregates in the statement are the bounded sums and products over $y\\le n$, and those index sets are never empty because $0\\le n$ for every natural number $n$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 handles the zero boundary through the base clauses for bounded sums and products, and step 2.1 feeds the quantifier constructions in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proposition does not need a separate singleton-parameter argument beyond the explicit recursive clauses already written for arithmetic constructors."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed or collapsed regime appears beyond the stated total arithmetic functions and bounded predicates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is about natural-number recursions and bounded quantifiers, not interval endpoints or boundary points in an ordered continuum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs the listed functions explicitly from primitive-recursive schemes and makes no arbitrary choice from a merely nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Basic arithmetic and bounded quantification` states a one-way closure result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Basic arithmetic and bounded quantification` states a one-way closure result, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The vulnerable step was the order characteristic function. I corrected chi_{<=}(m,n) to chi_0(m dotted-minus n), so the arithmetic closure list now matches the intended order relation."
+      }
+    },
+    "thm-sequence-length-and-coordinate-functions-are-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "The following total functions are primitive recursive:\n\n- addition and multiplication on $\\mathbb N$,\n- predecessor $p(0)=0$, $p(n+1)=n$,\n- truncated subtraction\n  $m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n:=\\max(m-n,0)$,\n- the characteristic functions of $0$, equality, and order,\n- for every primitive recursive $g:\\mathbb N^{k+1}\\to\\mathbb N$, the bounded\n  sum and bounded product\n  $$ \\Sigma_g(n,x):=\\sum_{y\\le n} g(y,x),\\qquad \\Pi_g(n,x):=\\prod_{y\\le n} g(y,x), $$\n- and therefore bounded existential and universal quantifiers of\n  primitive-recursive predicates.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-natural-number-coding-of-finite-sequences",
+          "source_section": "Definition",
+          "quote": "Write $\\operatorname{bin}(n)$ for the canonical binary numeral of $n$, with\n$\\operatorname{bin}(0)=0$. For a binary word $w$, let\n$$ c(w):=1^{|w|}0w. $$\n\nFor a finite sequence of natural numbers\n$$ a=(a_0,\\dots,a_{k-1}), $$\ndefine its **sequence word**\n$$ W(a):=1\\,1^k0\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_{k-1})). $$\nThe leading $1$ keeps the whole word a canonical positive binary numeral even\nwhen $k=0$.\n\nThe **natural-number code** of $a$ is the unique natural number\n$$ \\ulcorner a\\urcorner_{\\mathrm{seq}} $$\nwhose binary numeral is $W(a)$. In particular, the empty sequence has code\n$\\ulcorner()\\urcorner_{\\mathrm{seq}}=2$, because $W(())=10$.\n\nBy [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of\nbinary numerals inside $W(a)$ is effectively and uniquely decodable, so this\nconstruction gives an injective coding of finite sequences of natural numbers\nby natural numbers.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By bounded search on quotients and remainders, one can primitive-recursively\nrecover the binary length of a positive integer and each individual bit of its\ncanonical binary numeral. Using [L2], a bounded scan first reads the sentinel\nand unary header, obtaining a candidate $k$. It then parses exactly $k$\nself-delimiting blocks, checks that each payload is a canonical binary numeral,\nand verifies that the final block ends at the end of the numeral. Only if all\nthese checks succeed does it return $k$; otherwise it returns $0$. All scan\nbounds are at most the binary length of $s$, so this full validity test and the\ntotal function $\\operatorname{len}$ are primitive recursive by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Once $\\operatorname{len}(s)=k$ is known, the start and end of the $i$th block $c(\\operatorname{bin}(a_i))$ are found by another bounded scan through the same binary numeral: each block begins with a run of $1$'s whose length is the bit-length of $a_i$, followed by one delimiter $0$, followed by exactly that many payload bits. The integer represented by that payload is then recovered by a bounded primitive-recursive evaluation of binary place values.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the bounded scan shows that $i\\ge\\operatorname{len}(s)$ or that the numeral of $s$ is not of the required form, define the output to be $0$. Otherwise return the value decoded in step 2.1. Because every search range is bounded by the bit-length of $s$, the total function $\\operatorname{entry}(s,i)$ is primitive recursive by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 and 3.1 prove that both the length function and the total coordinate-reading function are primitive recursive.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 covers header decoding uniformly, including the code of the empty sequence with decoded length 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 handles the zero-output boundary by defining the coordinate reader to return 0 on out-of-range or malformed inputs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem proves uniform primitive recursiveness of the decoders; it does not split off a separate singleton-length argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 explicitly treats malformed numerals of the wrong form by returning the default value 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Sequence decoding here involves discrete scans through a binary numeral, not interval-endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every boundary location in the code word is recovered by bounded search from the given numeral; the proof makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Sequence-length and coordinate functions are primitive recursive` is a one-direction theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Sequence-length and coordinate functions are primitive recursive` is a one-direction theorem, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risk is totality on malformed sequence codes and keeping the proof inside bounded scans. Reader 10 already repaired the statement to return 0 off the coding image, and the current proof stays within the chosen header-and-block encoding."
+      }
+    },
+    "prop-ackermann-is-total-computable-but-not-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-primitive-recursive-function",
+          "source_section": "Definition",
+          "quote": "A total function $f:\\mathbb N^k\\to\\mathbb N$ is **primitive recursive** when\nit belongs to the smallest collection of total arithmetic functions that:\n\n- contains every initial arithmetic function from\n  [[def-initial-arithmetic-functions]], and\n- is closed under the two schemes from\n  [[def-composition-and-primitive-recursion-schemes]].\n\nEquivalently, a primitive recursive function is one obtainable from the zero,\nsuccessor, and projection functions by finitely many applications of\ncomposition and primitive recursion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A deterministic machine can evaluate $A(m,n)$ by keeping a finite stack of pending calls. Start with the one stack entry $(m,n)$. If the top entry is $(0,r)$, replace it by the value $r+1$; if it is $(p+1,0)$, replace it by $(p,1)$; and if it is $(p+1,r+1)$, replace it by the two pending calls $(p+1,r)$ and then $(p,\\square)$, where the second frame waits for the value returned by the first and then substitutes it into $A(p,\\cdot)$. Every individual rewrite is effective on a coded stack, so by [L2] this gives a machine procedure for evaluating $A$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each primitive recursive $k$-ary function $f$, structural induction on its construction from [L1] gives constants $c,r$ such that $f(x_1,\\dots,x_k)\\le A_c(\\max_i x_i+r)$ for all inputs. The initial functions satisfy such a bound. For composition, apply the induction bounds to all inner functions, take their maximum, and then apply the bound for the outer function; monotonicity and the absorption property in [F1] replace the resulting finite composition by one higher fixed row. For primitive recursion, the recursion variable bounds the number of successive applications of the step function; [F1] again absorbs those boundedly many lower-row iterations into a higher fixed row.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "F1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The defining recursion decreases the left argument whenever the right argument is reset, and otherwise decreases the right argument before the left argument is used again. Induction on $m$ and then on $n$ therefore shows that every call chain eventually reaches the base clause $A(0,r)=r+1$. Hence the machine from step 1.1 halts on every input $(m,n)$, so $A$ is total computable.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $A$ itself were primitive recursive, step 1.2 would give fixed $c,r$ with $A(m,n)\\le A_c(\\max\\{m,n\\}+r)$ for all $m,n$. Setting $m=n$ and then taking $n>c$ sufficiently large gives $A(n,n)>A_c(n+r)$ by [F1], contradicting that bound. Therefore $A$ is not primitive recursive.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove that Ackermann's function is total computable but not primitive recursive.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Ackermann's function is a total arithmetic function on natural-number inputs, so there is no separate empty-family regime."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 uses the base clause $A(0,r)=r+1$ and the reset case in the recursion to prove totality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses a sufficiently high fixed row above $A_c$ to dominate the shifted bound, matching the corrected hierarchy fact rather than assuming the immediately next row always suffices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proposition concerns ordinary natural-number inputs and a concrete recursion, not malformed codes or a collapsed exceptional object."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument uses recursion on naturals and growth domination, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The stack procedure and domination contradiction are explicit; no arbitrary choice from a nonempty set is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Ackermann is total computable but not primitive recursive` is a conjunction of two claims, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Ackermann is total computable but not primitive recursive` is a conjunction of two claims, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The pressure point is separating total computability from the non-primitive-recursive domination argument. The current proof first shows the stack evaluator halts on all inputs and then uses the standard hierarchy domination contradiction."
+      }
+    },
+    "lem-turing-step-coding-is-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-turing-machine-configuration",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nA **configuration** of $M$ is a triple\n$$ C=(q,h,t) $$\nwhere $q\\in Q$ is the current state, $h\\in\\mathbb N$ is the current head\nposition, and $t:\\mathbb N\\to\\Gamma$ is a tape content in the sense of\n[[def-tape-finite-support-convention]].\n\nThe symbol currently scanned in $C$ is $t(h)$. The configuration is\n**nonhalting** when $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$.\n\nFor later encoding arguments it is convenient to write a configuration as a\nfinite word over the alphabet $Q\\cup\\Gamma$: if\n$r=\\max(\\{h\\}\\cup\\operatorname{supp}(t))$, and $a_i:=t(i)$ for $0\\le i\\le r$,\nthen the associated **configuration word** is\n$$ a_0a_1\\cdots a_{h-1}\\,q\\,a_h\\cdots a_r. $$\nThe state symbol is inserted immediately before the scanned tape symbol, and\nthe word is long enough to include the head position even when the scanned cell\nis blank.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-one-step-configuration-relation",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nLet $C=(q,h,t)$ and $C'=(q',h',t')$ be configurations of $M$.\n\nWe say that **$C'$ follows $C$ in one step**, and write\n$$ C\\vdash_M C', $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and, writing\n$$ \\delta(q,t(h))=(p,b,D), $$\none has:\n\n- $q'=p$,\n- $t'(h)=b$,\n- $t'(i)=t(i)$ for every $i\\ne h$,\n- if $D=R$, then $h'=h+1$,\n- if $D=L$ and $h>0$, then $h'=h-1$,\n- if $D=L$ and $h=0$, then $h'=0$.\n\nSo one step changes only the scanned tape cell, updates the state, and moves\nthe head one cell right or one cell left, except that the left boundary clamps\nthe head at cell $0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "For the coding from [[def-natural-number-coding-of-finite-sequences]], the\nfollowing total functions are primitive recursive:\n\n- the decoded length function $\\operatorname{len}(s)$ defined by\n  $$ \\operatorname{len}(s)=k \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}}, $$\n  and $\\operatorname{len}(s)=0$ otherwise, and\n- the coordinate-reading function $\\operatorname{entry}(s,i)$ defined by\n  $$ \\operatorname{entry}(s,i)=a_i \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}} \\text{ and } i<k, $$\n  and $\\operatorname{entry}(s,i)=0$ otherwise.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "The following total functions are primitive recursive:\n\n- addition and multiplication on $\\mathbb N$,\n- predecessor $p(0)=0$, $p(n+1)=n$,\n- truncated subtraction\n  $m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n:=\\max(m-n,0)$,\n- the characteristic functions of $0$, equality, and order,\n- for every primitive recursive $g:\\mathbb N^{k+1}\\to\\mathbb N$, the bounded\n  sum and bounded product\n  $$ \\Sigma_g(n,x):=\\sum_{y\\le n} g(y,x),\\qquad \\Pi_g(n,x):=\\prod_{y\\le n} g(y,x), $$\n- and therefore bounded existential and universal quantifiers of\n  primitive-recursive predicates.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the configuration-code definition in the statement and [L3], primitive recursive functions recover from $c$ the decoded length of the tuple, its first two entries $q,h$, the currently scanned symbol $t(h)$, and any later tape symbol that may need to be copied into the output code.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using the explicit tuple format from [L1], together with the primitive-recursive arithmetic and bounded searches from [L4], one can scan the canonical binary numeral of $e$: count the initial unary arity header, locate each self-delimiting block, verify the tuple-length and alphabet constraints, and recover the first three numerals and every transition-table coordinate, returning the default branch on malformed inputs. A bounded search through the recovered transition list therefore finds the unique transition triple $(q',b,D)$ attached to the pair $(q,t(h))$ when $q$ is nonhalting. Using [L2] and the decoded tape coordinates from step 1.1, form the updated tape, state, and head position $h'$. Then use a bounded backward search through positions at most $r+1$ to find the rightmost nonblank updated cell, taking $0$ if none exists, and set $r'$ to the maximum of that position and $h'$. The output tuple is exactly $(q',h',t'(0),\\dots,t'(r'))$, so erasing the former rightmost nonblank cell trims the trailing blank while a head move onto a blank cell still records the head position.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the decoded state $q$ is already accepting or rejecting, step 2.1 is skipped and the output is the original code $c$. If the input code is malformed, return one fixed default code. These are again primitive-recursive case distinctions because the relevant checks are bounded and finite.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "construct",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Re-encoding the canonically trimmed updated sequence from step 2.1 uses only primitive-recursive arithmetic on its boundedly many coordinates, so the total function $\\operatorname{Step}(e,c)$ is primitive recursive and has the stated behavior.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The step-coding lemma concerns coded configurations and transition tables, not a set-valued family with an empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 handles the head-at-0 boundary by sending a left move to 0 according to the clamped left-boundary rule."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate value-1 argument is required: the proof is uniform in the decoded coordinates and machine state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 explicitly returns a fixed default code on malformed inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the only endpoint phenomenon on this page, namely the left tape boundary at cell 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Transition lookup is a bounded search through a finite decoded table, so the proof does not make an arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Turing step coding is primitive recursive` is a one-way representability statement, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Turing step coding is primitive recursive` is a one-way representability statement, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The proof now handles both earlier coding gaps: it parses the explicit machine tuple by bounded arithmetic and canonically trims trailing blanks after the local update, while retaining the head position when it lies on a blank cell."
+      }
+    },
+    "thm-kleene-normal-form": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-mu-minimization-and-partial-recursive-function",
+          "source_section": "Definition",
+          "quote": "A **partial function** $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is a function\nwhose domain is some subset of $\\mathbb N^k$ and whose values lie in\n$\\mathbb N$. Thus the hooked arrow records the ambient input set, while the\nactual domain may be smaller.\n\nLet $g:\\mathbb N^{k+1}\\rightharpoonup\\mathbb N$ be a partial function. Its\n**unbounded minimization** is the partial function\n$$ \\mu y\\,g(x,y) $$\ndefined at $x\\in\\mathbb N^k$ exactly when there exists $y$ such that\n$g(x,y)=0$ and $g(x,z)$ is defined and nonzero for every $z<y$; in that case\n$\\mu y\\,g(x,y)$ is the least such $y$.\n\nComposition of partial functions is **strict**: if\n$g:\\mathbb N^m\\rightharpoonup\\mathbb N$ and\n$h_1,\\dots,h_m:\\mathbb N^k\\rightharpoonup\\mathbb N$, then\n$g(h_1(x),\\dots,h_m(x))$ is defined exactly when every $h_i(x)$ is defined and\n$g$ is defined at the resulting tuple. Primitive recursion for partial\nfunctions uses the same two recursive clauses as in the total case, with a\nvalue undefined as soon as a required earlier value or an application of a\ndefining function is undefined.\n\nA partial function $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is\n**partial recursive** when it belongs to the smallest class of partial\nfunctions on finite powers of $\\mathbb N$ that:\n\n- contains every initial arithmetic function, viewed as a total partial\n  function,\n- is closed under strict composition,\n- is closed under partial primitive recursion, and\n- is closed under unbounded minimization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-kleene-t-predicate-and-output-function",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding from [[def-effective-encoding-of-turing-machines]] and\nthe sequence coding from [[def-natural-number-coding-of-finite-sequences]].\n\nFor natural numbers $e,x,s$, define **Kleene's $T$-predicate**\n$$ T(e,x,s) $$\nto hold exactly when $s$ codes a finite sequence of configurations\n$$ C_0,\\dots,C_r $$\nsuch that:\n\n- $e$ decodes to a machine $M$,\n- $C_0$ is the initial configuration of $M$ on input $x$,\n- $C_{j+1}$ is obtained from $C_j$ by the coded one-step update for every\n  $j<r$, and\n- $C_r$ is halting.\n\nDefine the **output function**\n$$ U(s) $$\nas follows. If $s$ decodes to a nonempty sequence whose final entry is a\nwell-formed configuration code and the tape in that configuration contains a\ncanonical binary numeral followed by blanks, let $U(s)$ be the natural number\nrepresented by that numeral. On every other input, set $U(s)=0$. Thus $U$\nonly extracts data from the final coded configuration; it does not first test\nan unbounded existential claim about whether some machine and input have that\nhistory. The output-word convention is the one fixed in\n[[def-halting-computation-and-divergence]].\n\nDefine the numeric **zero-test for $T$** by\n$$\\tau_T(e,x,s):=\\begin{cases}0,&T(e,x,s),\\\\1,&\\text{otherwise}.\\end{cases}$$\n\nThe primitive-recursive readers of\n[[thm-sequence-length-and-coordinate-functions-are-primitive-recursive]] parse\nthe history and every configuration coordinate. A bounded universal check over\nthe decoded list verifies the initial configuration, each update using\n[[lem-turing-step-coding-is-primitive-recursive]], and the final halting state.\nEquality tests, composition, bounded search, and bounded universal\nquantification preserve primitive recursiveness by\n[[prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive]].\nThe same readers locate the final configuration and perform a bounded scan of\nits finitely encoded tape segment, checking and evaluating the canonical binary\nnumeral. Consequently the combined history-validity zero-test $\\tau_T$ and the\nfinal-output reader $U$ are primitive recursive, and $T$ is a\nprimitive-recursive relation through its zero-test.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the function $f$ is presented by a finite derivation from the initial functions using composition, primitive recursion, and minimization. Build a machine for that derivation by structural induction. The zero, successor, and projection functions have immediate machines. For composition, run the machines for the inner functions in sequence and feed their outputs to the outer machine; divergence of any required subcomputation propagates. For primitive recursion, store the parameters and previous value and iterate the step machine from $0$ to the recursion argument. For minimization, evaluate the search function at $0,1,2,\\dots$ in order and halt at the first zero; if an earlier required value is undefined, the machine diverges as prescribed by partial minimization. Since the derivation is finite, this yields one machine code $e$ computing $f$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For this fixed code $e$, the predicate from [L2] recognizes exactly the coded halting histories of that machine. Therefore, if $f(x)=y$, there is at least one code $s$ with $T(e,x,s)$, and every such successful history has halting output $y$, so $U(s)=y$. If the minimization search never finds a zero or some earlier subcomputation diverges, then the machine has no halting history on $x$, so there is no $s$ with $T(e,x,s)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the defined case, the least successful history code $\\mu s\\,\\tau_T(e,x,s)$ exists, and step 2.1 gives $f(x)=U(\\mu s\\,\\tau_T(e,x,s))$. In the undefined case, step 2.1 gives the second clause of the statement.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly treats the no-history case by stating that when the computation diverges there is no $s$ with $T(e,x,s)$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The normal-form theorem does not depend on a distinguished free parameter at 0 beyond the minimization variable handled uniformly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof is uniform in the input and history code; it does not isolate a separate value-1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no malformed-code fallback in the theorem statement itself; the statement is about partial recursive functions and successful or absent histories."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is about minimization over natural numbers and coded histories, not endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the least successful history code $\\mu s\\,\\tau_T(e,x,s)$, so the nonempty zero-set of the numeric test is discharged there."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Kleene normal form` is stated in one direction only on this page."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Kleene normal form` is stated in one direction only on this page."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The proof now constructs the machine for a partial-recursive derivation by structural induction, then identifies its successful histories and applies minimization to the numeric zero-test only in the defined case."
+      }
+    },
+    "thm-partial-recursive-iff-turing-computable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-partial-function-computed-by-a-machine",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be sets, let\n$$ e_X:X\\to\\{0,1\\}^*,\\qquad e_Y:Y\\to\\{0,1\\}^* $$\nbe effective binary encodings in the sense of\n[[def-effective-binary-encoding-and-decoder]], let\n$$ M=(Q,\\{0,1\\},\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nbe a deterministic one-tape Turing machine, and let\n$$ f:D\\to Y $$\nbe a function with domain $D\\subseteq X$.\n\nThe machine $M$ **computes the partial function $f$ under the fixed encodings\n$e_X,e_Y$** if:\n\n- for every $x\\in D$, the computation of $M$ on input $e_X(x)$ halts and its\n  final configuration outputs the binary word $e_Y(f(x))$, and\n- for every $x\\in X\\setminus D$, the computation of $M$ on input $e_X(x)$\n  diverges.\n\nThus the machine's input and output are ordinary finite binary words, while the\nmathematical function lives on the underlying sets $X$ and $Y$ through the\nchosen encodings.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mu-minimization-and-partial-recursive-function",
+          "source_section": "Definition",
+          "quote": "A **partial function** $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is a function\nwhose domain is some subset of $\\mathbb N^k$ and whose values lie in\n$\\mathbb N$. Thus the hooked arrow records the ambient input set, while the\nactual domain may be smaller.\n\nLet $g:\\mathbb N^{k+1}\\rightharpoonup\\mathbb N$ be a partial function. Its\n**unbounded minimization** is the partial function\n$$ \\mu y\\,g(x,y) $$\ndefined at $x\\in\\mathbb N^k$ exactly when there exists $y$ such that\n$g(x,y)=0$ and $g(x,z)$ is defined and nonzero for every $z<y$; in that case\n$\\mu y\\,g(x,y)$ is the least such $y$.\n\nComposition of partial functions is **strict**: if\n$g:\\mathbb N^m\\rightharpoonup\\mathbb N$ and\n$h_1,\\dots,h_m:\\mathbb N^k\\rightharpoonup\\mathbb N$, then\n$g(h_1(x),\\dots,h_m(x))$ is defined exactly when every $h_i(x)$ is defined and\n$g$ is defined at the resulting tuple. Primitive recursion for partial\nfunctions uses the same two recursive clauses as in the total case, with a\nvalue undefined as soon as a required earlier value or an application of a\ndefining function is undefined.\n\nA partial function $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is\n**partial recursive** when it belongs to the smallest class of partial\nfunctions on finite powers of $\\mathbb N$ that:\n\n- contains every initial arithmetic function, viewed as a total partial\n  function,\n- is closed under strict composition,\n- is closed under partial primitive recursion, and\n- is closed under unbounded minimization.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-kleene-normal-form",
+          "source_section": "Statement",
+          "quote": "For every partial recursive function $f:\\mathbb N\\rightharpoonup\\mathbb N$,\nthere exists a natural number $e$ such that for every input $x$:\n\n- if $f(x)$ is defined, then\n  $$ f(x)=U\\bigl(\\mu s\\,\\tau_T(e,x,s)\\bigr), $$\n- and if $f(x)$ is undefined, then there is no $s$ with $T(e,x,s)$.\n\nHere $T$, its numeric zero-test $\\tau_T$, and $U$ are the primitive recursive objects from\n[[def-kleene-t-predicate-and-output-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-kleene-t-predicate-and-output-function",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding from [[def-effective-encoding-of-turing-machines]] and\nthe sequence coding from [[def-natural-number-coding-of-finite-sequences]].\n\nFor natural numbers $e,x,s$, define **Kleene's $T$-predicate**\n$$ T(e,x,s) $$\nto hold exactly when $s$ codes a finite sequence of configurations\n$$ C_0,\\dots,C_r $$\nsuch that:\n\n- $e$ decodes to a machine $M$,\n- $C_0$ is the initial configuration of $M$ on input $x$,\n- $C_{j+1}$ is obtained from $C_j$ by the coded one-step update for every\n  $j<r$, and\n- $C_r$ is halting.\n\nDefine the **output function**\n$$ U(s) $$\nas follows. If $s$ decodes to a nonempty sequence whose final entry is a\nwell-formed configuration code and the tape in that configuration contains a\ncanonical binary numeral followed by blanks, let $U(s)$ be the natural number\nrepresented by that numeral. On every other input, set $U(s)=0$. Thus $U$\nonly extracts data from the final coded configuration; it does not first test\nan unbounded existential claim about whether some machine and input have that\nhistory. The output-word convention is the one fixed in\n[[def-halting-computation-and-divergence]].\n\nDefine the numeric **zero-test for $T$** by\n$$\\tau_T(e,x,s):=\\begin{cases}0,&T(e,x,s),\\\\1,&\\text{otherwise}.\\end{cases}$$\n\nThe primitive-recursive readers of\n[[thm-sequence-length-and-coordinate-functions-are-primitive-recursive]] parse\nthe history and every configuration coordinate. A bounded universal check over\nthe decoded list verifies the initial configuration, each update using\n[[lem-turing-step-coding-is-primitive-recursive]], and the final halting state.\nEquality tests, composition, bounded search, and bounded universal\nquantification preserve primitive recursiveness by\n[[prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive]].\nThe same readers locate the final configuration and perform a bounded scan of\nits finitely encoded tape segment, checking and evaluating the canonical binary\nnumeral. Consequently the combined history-validity zero-test $\\tau_T$ and the\nfinal-output reader $U$ are primitive recursive, and $T$ is a\nprimitive-recursive relation through its zero-test.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume first that $f$ is partial recursive. By [L3], choose $e$ with $f(x)=U(\\mu s\\,\\tau_T(e,x,s))$ whenever $f(x)$ is defined. Every primitive-recursive function is Turing computable: the initial functions have immediate machines, machine composition realizes composition, and a finite loop realizes primitive recursion. Hence machines compute the primitive-recursive functions $\\tau_T$ and $U$ from [L5]. A machine can therefore search successively through $s=0,1,2,\\dots$, evaluate $\\tau_T(e,x,s)$, and at the first zero compute $U(s)$ and halt with its binary numeral. If there is no successful $s$, the search continues forever. By [L1], this machine computes $f$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume that $f$ is Turing computable. Then by [L1] there is a machine code $e$ whose halting computations on input $x$ produce exactly the values of $f(x)$. By [L5], the characteristic function of the relation $T(e,x,s)$ is primitive recursive, so the total search function $g_e(x,s)$ that returns $0$ exactly when $T(e,x,s)$ holds and $1$ otherwise is primitive recursive. By [L2], the partial search $m_e(x):=\\mu s\\,g_e(x,s)$ is therefore partial recursive, and composing with the primitive recursive output map $U$ shows that $x\\mapsto U(m_e(x))$ is partial recursive as well. Its domain and values agree with $f$ because $m_e(x)$ exists exactly when the machine coded by $e$ has a halting history on $x$, and then [L5] says that $U(m_e(x))$ is exactly the machine's output. Hence $f$ is partial recursive.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove both implications, so $f$ is partial recursive if and only if it is Turing computable.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 treats the no-successful-history boundary by continuing the universal search forever when there is no $s$ with $T(e,x,s)$."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem compares two notions of computability for arbitrary partial functions and does not require a separate zero-input case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton-value split is needed; both directions are proved uniformly for all inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem itself is extensional about partial functions and encodings, not about malformed syntax classes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or boundary-point phenomenon appears in this equivalence theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only existential witness is a machine code or successful history obtained from prior theorems; the proof does not hinge on an arbitrary noncanonical selection step beyond those constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves the forward implication from partial recursive to Turing computable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 proves the reverse implication from Turing computable to partial recursive."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The reverse direction needed the mu-minimization route written out explicitly. Reader 10 added the missing dependency and the current proof now builds f from the primitive-recursive T-predicate, minimization, and the output map U."
+      }
+    },
+    "thm-lambda-definable-iff-partial-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-lambda-term-beta-reduction-and-represented-function",
+          "source_section": "Definition",
+          "quote": "The **lambda terms** are the finite expressions built from variables by the\nrules\n$$ x,\\qquad (MN),\\qquad (\\lambda x.M). $$\nBecause they are finite strings over a fixed finite syntax, they admit\neffective coding.\n\nA **beta reduction** is one application of the rewrite rule\n$$ (\\lambda x.M)N\\to_\\beta M[x:=N], $$\nwhere $M[x:=N]$ denotes **capture-avoiding substitution**: before substituting,\nbound variables of $M$ are alpha-renamed when necessary so that no free\nvariable of $N$ becomes bound. Terms that differ only by such a consistent\nrenaming of bound variables are identified up to alpha-equivalence.\nThe relation $\\to_\\beta^*$ denotes the reflexive transitive closure of beta\nreduction modulo alpha-equivalence.\n\nFor each $n\\in\\mathbb N$, let $\\overline n$ be the Church numeral for $n$. A\nlambda term $F$ **represents** a partial function\n$f:\\mathbb N^k\\rightharpoonup\\mathbb N$ when:\n\n- for every $(n_1,\\dots,n_k)$ in the domain of $f$,\n  $$ F\\,\\overline{n_1}\\cdots\\overline{n_k}\\to_\\beta^* \\overline{f(n_1,\\dots,n_k)}, $$\n- and for every input tuple outside the domain, the term\n  $F\\,\\overline{n_1}\\cdots\\overline{n_k}$ never reaches a Church numeral by\n  beta reduction.\n\nSuch a function is called **lambda-definable**.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-mu-minimization-and-partial-recursive-function",
+          "source_section": "Definition",
+          "quote": "A **partial function** $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is a function\nwhose domain is some subset of $\\mathbb N^k$ and whose values lie in\n$\\mathbb N$. Thus the hooked arrow records the ambient input set, while the\nactual domain may be smaller.\n\nLet $g:\\mathbb N^{k+1}\\rightharpoonup\\mathbb N$ be a partial function. Its\n**unbounded minimization** is the partial function\n$$ \\mu y\\,g(x,y) $$\ndefined at $x\\in\\mathbb N^k$ exactly when there exists $y$ such that\n$g(x,y)=0$ and $g(x,z)$ is defined and nonzero for every $z<y$; in that case\n$\\mu y\\,g(x,y)$ is the least such $y$.\n\nComposition of partial functions is **strict**: if\n$g:\\mathbb N^m\\rightharpoonup\\mathbb N$ and\n$h_1,\\dots,h_m:\\mathbb N^k\\rightharpoonup\\mathbb N$, then\n$g(h_1(x),\\dots,h_m(x))$ is defined exactly when every $h_i(x)$ is defined and\n$g$ is defined at the resulting tuple. Primitive recursion for partial\nfunctions uses the same two recursive clauses as in the total case, with a\nvalue undefined as soon as a required earlier value or an application of a\ndefining function is undefined.\n\nA partial function $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is\n**partial recursive** when it belongs to the smallest class of partial\nfunctions on finite powers of $\\mathbb N$ that:\n\n- contains every initial arithmetic function, viewed as a total partial\n  function,\n- is closed under strict composition,\n- is closed under partial primitive recursion, and\n- is closed under unbounded minimization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-partial-recursive-iff-turing-computable",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb N\\rightharpoonup\\mathbb N$ be a partial function, with inputs and\noutputs encoded by their canonical binary numerals. Then $f$ is partial\nrecursive if and only if $f$ is Turing computable under those encodings.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-natural-number-coding-of-finite-sequences",
+          "source_section": "Definition",
+          "quote": "Write $\\operatorname{bin}(n)$ for the canonical binary numeral of $n$, with\n$\\operatorname{bin}(0)=0$. For a binary word $w$, let\n$$ c(w):=1^{|w|}0w. $$\n\nFor a finite sequence of natural numbers\n$$ a=(a_0,\\dots,a_{k-1}), $$\ndefine its **sequence word**\n$$ W(a):=1\\,1^k0\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_{k-1})). $$\nThe leading $1$ keeps the whole word a canonical positive binary numeral even\nwhen $k=0$.\n\nThe **natural-number code** of $a$ is the unique natural number\n$$ \\ulcorner a\\urcorner_{\\mathrm{seq}} $$\nwhose binary numeral is $W(a)$. In particular, the empty sequence has code\n$\\ulcorner()\\urcorner_{\\mathrm{seq}}=2$, because $W(())=10$.\n\nBy [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of\nbinary numerals inside $W(a)$ is effectively and uniquely decodable, so this\nconstruction gives an injective coding of finite sequences of natural numbers\nby natural numbers.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "For the coding from [[def-natural-number-coding-of-finite-sequences]], the\nfollowing total functions are primitive recursive:\n\n- the decoded length function $\\operatorname{len}(s)$ defined by\n  $$ \\operatorname{len}(s)=k \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}}, $$\n  and $\\operatorname{len}(s)=0$ otherwise, and\n- the coordinate-reading function $\\operatorname{entry}(s,i)$ defined by\n  $$ \\operatorname{entry}(s,i)=a_i \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}} \\text{ and } i<k, $$\n  and $\\operatorname{entry}(s,i)=0$ otherwise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "The following total functions are primitive recursive:\n\n- addition and multiplication on $\\mathbb N$,\n- predecessor $p(0)=0$, $p(n+1)=n$,\n- truncated subtraction\n  $m \\mathbin{\\overset{\\scriptscriptstyle\\bullet}{-}} n:=\\max(m-n,0)$,\n- the characteristic functions of $0$, equality, and order,\n- for every primitive recursive $g:\\mathbb N^{k+1}\\to\\mathbb N$, the bounded\n  sum and bounded product\n  $$ \\Sigma_g(n,x):=\\sum_{y\\le n} g(y,x),\\qquad \\Pi_g(n,x):=\\prod_{y\\le n} g(y,x), $$\n- and therefore bounded existential and universal quantifiers of\n  primitive-recursive predicates.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $f$ is partial recursive. By [L2], it is built from the initial arithmetic functions by composition, primitive recursion, and minimization. The initial functions are represented by the standard lambda terms for zero, successor, and projections; composition is represented by term substitution; primitive recursion is represented by the usual iterator on Church numerals; and minimization is represented by a fixpoint term that performs the unbounded search $y=0,1,2,\\dots$ until a zero-test succeeds. Hence some lambda term represents $f$ in the sense of [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume $f$ is lambda-definable. By [L1], there is a lambda term $F$ such that $F\\,\\overline{n_1}\\cdots\\overline{n_k}$ reaches a Church numeral exactly on the tuples where $f$ is defined, and the numeral reached is its value. Given the sequence code of $(n_1,\\dots,n_k)$, a Turing machine uses [L4] to recover the coordinates, forms that application, and performs a breadth-first search through all finite beta-reduction sequences, halting when a branch reaches a Church numeral. This computes the unary coded version of $f$, so [L3] makes that coded function partial recursive. Composing with the primitive-recursive tuple coder from [L5] and coordinate readers from [L4] makes the original $k$-ary $f$ partial recursive.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "L5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove both directions, so lambda-definability and partial recursiveness are equivalent for $f$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem compares two representation notions for partial functions; it is not indexed by an empty ambient family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No special argument at input 0 is needed beyond the general Church-numeral and recursion constructions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof treats all inputs uniformly rather than splitting off a separate singleton-value case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement is about represented partial functions and beta reduction, not malformed codewords."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lambda-definability comparison has no interval-endpoint regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The representing term in step 1.1 and the simulated reduction machine in step 1.2 are explicit constructions, not arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves that every partial recursive function is lambda-definable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 proves that every lambda-definable partial function is partial recursive."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The reverse implication cannot rely on an unquoted standardization theorem. Reader 10 replaced the normal-order shortcut by a breadth-first search through all finite beta-reduction sequences, which is the right machine-checkable argument."
+      }
+    },
+    "fs-every-total-computable-function-is-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-ackermann-is-total-computable-but-not-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "Let $A:\\mathbb N^2\\to\\mathbb N$ be the Ackermann-Peter function defined by\n$$ A(0,n)=n+1, $$\n$$ A(m+1,0)=A(m,1), $$\n$$ A(m+1,n+1)=A\\bigl(m,A(m+1,n)\\bigr). $$\nThen $A$ is a total computable function, but $A$ is not primitive recursive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the Ackermann function $A$ is a total computable function on $\\mathbb N^2$, so it is directly an instance of the universal claim [A1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same fact [L1] states that $A$ is not primitive recursive. This contradicts [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses one concrete witness function and does not involve an empty indexing family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The false universal claim is refuted by a function-level witness, not by a special value at 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The contradiction does not depend on a separate singleton parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No malformed or collapsed exceptional object appears; the witness is an ordinary total computable function."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint analysis in this function-theoretic refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness is the specific Ackermann function supplied by the cited proposition, so there is no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "This refutation is intentionally short: all load-bearing mathematics is delegated to the Ackermann proposition, and the proof only spends that witness."
+      }
+    },
+    "fs-mu-minimization-is-always-total": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-mu-minimization-and-partial-recursive-function",
+          "source_section": "Definition",
+          "quote": "A **partial function** $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is a function\nwhose domain is some subset of $\\mathbb N^k$ and whose values lie in\n$\\mathbb N$. Thus the hooked arrow records the ambient input set, while the\nactual domain may be smaller.\n\nLet $g:\\mathbb N^{k+1}\\rightharpoonup\\mathbb N$ be a partial function. Its\n**unbounded minimization** is the partial function\n$$ \\mu y\\,g(x,y) $$\ndefined at $x\\in\\mathbb N^k$ exactly when there exists $y$ such that\n$g(x,y)=0$ and $g(x,z)$ is defined and nonzero for every $z<y$; in that case\n$\\mu y\\,g(x,y)$ is the least such $y$.\n\nComposition of partial functions is **strict**: if\n$g:\\mathbb N^m\\rightharpoonup\\mathbb N$ and\n$h_1,\\dots,h_m:\\mathbb N^k\\rightharpoonup\\mathbb N$, then\n$g(h_1(x),\\dots,h_m(x))$ is defined exactly when every $h_i(x)$ is defined and\n$g$ is defined at the resulting tuple. Primitive recursion for partial\nfunctions uses the same two recursive clauses as in the total case, with a\nvalue undefined as soon as a required earlier value or an application of a\ndefining function is undefined.\n\nA partial function $f:\\mathbb N^k\\rightharpoonup\\mathbb N$ is\n**partial recursive** when it belongs to the smallest class of partial\nfunctions on finite powers of $\\mathbb N$ that:\n\n- contains every initial arithmetic function, viewed as a total partial\n  function,\n- is closed under strict composition,\n- is closed under partial primitive recursion, and\n- is closed under unbounded minimization.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take the total computable function $g(x,y)=1$ for all $x,y\\in\\mathbb N$. For this $g$, there is no $y$ with $g(x,y)=0$ for any input $x$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1], the minimization $\\mu y\\,g(x,y)$ is therefore undefined for every $x$. In particular it is not total, contradicting [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation is about one explicit always-positive search function, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 explains that the minimization never finds a zero value, which is exactly the missing-zero boundary that breaks totality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the constant function $g(x,y)=1$, making the value 1 the concrete counterexample witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample uses an ordinary total computable predicate, not malformed input data."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument concerns an unbounded search over naturals, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness function is explicitly fixed as the constant-1 function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This false claim denies a one-way necessity about constructibility in clocked simulation and hierarchy arguments; it does not assert a forward implication between two named conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item does not claim that constructibility would by itself guarantee a hierarchy or clocked-simulation argument; no reverse implication is being asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The only risk was conflating 'computable predicate' with 'predicate that eventually hits 0'. The proof makes the failure mode explicit by taking the constant-1 search function."
+      }
+    },
+    "ex-sequence-length-and-coordinate-functions-are-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-sequence-length-and-coordinate-functions-are-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "For the coding from [[def-natural-number-coding-of-finite-sequences]], the\nfollowing total functions are primitive recursive:\n\n- the decoded length function $\\operatorname{len}(s)$ defined by\n  $$ \\operatorname{len}(s)=k \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}}, $$\n  and $\\operatorname{len}(s)=0$ otherwise, and\n- the coordinate-reading function $\\operatorname{entry}(s,i)$ defined by\n  $$ \\operatorname{entry}(s,i)=a_i \\text{ if } s=\\ulcorner(a_0,\\dots,a_{k-1})\\urcorner_{\\mathrm{seq}} \\text{ and } i<k, $$\n  and $\\operatorname{entry}(s,i)=0$ otherwise.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The block $1110$ immediately after the initial sentinel has three leading $1$'s before its first $0$, so the decoded sequence length is $3$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "After the first two payload blocks $11010$ and $1110101$, the last block is $101$, which is the self-delimiting block for the binary numeral $1$. Therefore the third decoded coordinate is $1$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 show exactly what the theorem [L1] predicts on this concrete input: the primitive-recursive decoders return $\\operatorname{len}(s)=3$ and $\\operatorname{entry}(s,2)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example intentionally uses a length-3 sequence rather than the empty sequence."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness code decodes to $(2,5,1)$, so neither the sequence length nor the highlighted coordinate is the zero boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.2 verifies that the third decoded coordinate is exactly 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses a valid concrete code word, not a malformed numeral."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The calculation is discrete block decoding, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness sequence and its code are explicitly written down."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item is an example, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item is an example, not a biconditional theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The example's job is to make the code blocks legible, not to re-prove the theorem. The verification checks only the claimed header and third block."
+      }
+    },
+    "ex-lambda-definable-iff-partial-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-lambda-definable-iff-partial-recursive",
+          "source_section": "Statement",
+          "quote": "For a partial function $f:\\mathbb N^k\\rightharpoonup\\mathbb N$, the following\nare equivalent:\n\n1. $f$ is lambda-definable.\n2. $f$ is partial recursive.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The displayed recursion for factorial uses the initial value $1$ and the recursive update $(n,u)\\mapsto (n+1)u$, so factorial is a primitive-recursive total function.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every primitive-recursive function is partial recursive. Applying [L1] to step 1.1 therefore gives a closed lambda term $F$ representing factorial on Church numerals.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 gives the partial-recursive side and step 2.1 gives the lambda-definable side, so factorial is a concrete example of the equivalence asserted in [L1].",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The factorial example concerns a concrete total function, not an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the base value $\\operatorname{fact}(0)=1$, and step 2.1 applies the equivalence theorem to obtain a representing closed lambda term for the total factorial function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the first successor case through $\\operatorname{fact}(n+1)=(n+1)\\operatorname{fact}(n)$; step 2.1 transfers the resulting primitive-recursive function to a lambda representation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses the standard total factorial function, and the representing closed term is supplied by the cited equivalence theorem rather than by an unverified syntactic macro expansion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint phenomenon appears in this arithmetic example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The existence of a representing closed term follows from the cited equivalence theorem applied to the explicitly proved primitive-recursive factorial function; no arbitrary unlicensed choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates both sides of an equivalence but is not itself an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates both sides of an equivalence but is not itself an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The earlier explicit lambda expression used undeclared macros. The repaired example proves factorial primitive recursive and invokes the cited equivalence theorem for the closed representing term, so it no longer claims an unchecked normalization calculation."
+      }
+    },
+    "cex-every-total-computable-function-is-primitive-recursive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-ackermann-is-total-computable-but-not-primitive-recursive",
+          "source_section": "Statement",
+          "quote": "Let $A:\\mathbb N^2\\to\\mathbb N$ be the Ackermann-Peter function defined by\n$$ A(0,n)=n+1, $$\n$$ A(m+1,0)=A(m,1), $$\n$$ A(m+1,n+1)=A\\bigl(m,A(m+1,n)\\bigr). $$\nThen $A$ is a total computable function, but $A$ is not primitive recursive.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the function $A$ is total computable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The same proposition [L1] states that $A$ is not primitive recursive.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 exhibit one total computable function that fails to be primitive recursive, so $A$ refutes the universal claim stated above.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a single explicit function witness, not an empty class."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The refutation turns on the global status of Ackermann, not on a special value at 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton boundary value is singled out in the witness argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Ackermann is an ordinary total computable function, not a malformed or exceptional object."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint analysis in this counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness is fixed once and for all as the Ackermann function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This counterexample exhibits one translated copying computation with different step counts; it does not assert a forward implication between two abstract conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The witness pair only disproves exact step preservation; it does not assert any reverse implication that would need a separate discharge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "This counterexample simply packages the earlier Ackermann proposition into a one-witness refutation of the universal statement."
+      }
+    },
+    "lem-time-at-least-input-length-permits-complete-input-reading": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In one machine step, the input head can move across at most one tape edge, so a single step can expose at most one previously unseen input cell. Starting at the leftmost input cell, reaching all first $n$ input cells therefore requires at least $n-1$ moves and hence at least $n$ time steps under the usual start-and-halt conventions.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The hypothesis says this lower bound applies on every input of length $n$. By [L1], the worst-case value $\\operatorname{Time}_M(n)$ is at least that common lower bound, so $\\operatorname{Time}_M(n)\\ge n$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is parameterized by an input length $n$, not by an empty family of inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 states the bound uniformly for every input length $n$, including the trivial case $n=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 covers the first nontrivial input-reading case because exposing all first $n$ cells already includes the singleton input-cell regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement already assumes a halting machine with the stated input-reading property, so there is no second collapsed regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof counts tape-head moves on discrete cells rather than interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lower bound follows from head-movement counting and uses no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Time at least input length` is a one-way lower-bound lemma, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Time at least input length` is a one-way lower-bound lemma, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The quantitative point is easy to blur. The proof explicitly counts newly exposed input cells per step and then lifts that lower bound to worst-case time."
+      }
+    },
+    "lem-time-bounds-imply-space-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-asymptotic-resource-comparison",
+          "source_section": "Definition",
+          "quote": "Let $f,g:\\mathbb N\\to[0,\\infty)$. We say that **$f$ is asymptotically bounded by\n$g$**, and write\n$$ f(n)=O(g(n)), $$\nwhen there exist constants $c>0$ and $n_0\\in\\mathbb N$ such that\n$$ f(n)\\le c\\,g(n)\\qquad(n\\ge n_0). $$\n\nWe say that two bounds are **of the same asymptotic order** when each is\n$O$-bounded by the other. Fix further bounds\n$t,s:\\mathbb N\\to[0,\\infty)$.\n\nIf $M$ is a machine in the sense of [[def-worst-case-time-and-space-complexity]]\nand halts on every input, then its worst-case resource functions are defined at\nevery input length, and:\n\n- $M$ has **time complexity $O(t(n))$** when\n  $\\operatorname{Time}_M(n)=O(t(n))$;\n- $M$ has **space complexity $O(s(n))$** when\n  $\\operatorname{Space}_M(n)=O(s(n))$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-time-at-least-input-length-permits-complete-input-reading",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a $k$-tape machine that halts on every input of length $n$. If, on\nevery such input, the accepting or rejecting branch of $M$ scans each of the\nfirst $n$ input cells before halting, then\n$$ \\operatorname{Time}_M(n)\\ge n. $$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "During one step, each of the $k$ heads can enter at most one new cell on its own tape. Therefore after $t$ steps, the total number of visited cells across all tapes is at most the initial $k$ cells plus $kt$. By [L1], every halting computation using $t$ steps uses at most $k(t+1)$ space.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying step 1.1 to the worst halting run on an input of length $n$ gives $\\operatorname{Space}_M(n)\\le k(\\operatorname{Time}_M(n)+1)$. The additive constant is harmless asymptotically, and [L2] converts this inequality together with the hypothesis $\\operatorname{Time}_M(n)=O(T(n))$ into $\\operatorname{Space}_M(n)=O(T(n))$. When an argument also requires the budget to dominate input reading, [L3] supplies the usual linear lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a worst-case machine bound, not a statement about an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 begins with the initial visited cells and therefore covers the zero-step boundary in the space count."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The proof counts visited cells uniformly in the number of steps and does not require a separate one-step lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement already assumes a fixed halting machine with a time bound; there is no malformed or exceptional second regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is a global counting argument over steps and visited cells, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; the inequality follows deterministically from head-motion counting."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Time bounds imply space bounds` is a one-way implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Time bounds imply space bounds` is a one-way implication, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The important choice was to count visited cells, not merely initially occupied ones, so the time-to-space comparison is valid in the stated model."
+      }
+    },
+    "thm-multitape-to-single-tape-time-simulation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-multitape-simulation-has-quadratic-time-overhead",
+          "source_section": "Statement",
+          "quote": "Fix a deterministic $k$-tape Turing machine $M$ and the standard one-tape\nsimulator $S_M$ from [[thm-multitape-machines-have-one-tape-simulations]].\nThere is a constant $c_M>0$ such that, for every input word $w$ and every\n$t\\ge 0$, after simulating $t$ steps of $M$ on $w$ the simulator $S_M$ has used\nat most $c_M(|w|+t+1)$ tape cells and at most $c_M(|w|+t+1)^2$ time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-asymptotic-resource-comparison",
+          "source_section": "Definition",
+          "quote": "Let $f,g:\\mathbb N\\to[0,\\infty)$. We say that **$f$ is asymptotically bounded by\n$g$**, and write\n$$ f(n)=O(g(n)), $$\nwhen there exist constants $c>0$ and $n_0\\in\\mathbb N$ such that\n$$ f(n)\\le c\\,g(n)\\qquad(n\\ge n_0). $$\n\nWe say that two bounds are **of the same asymptotic order** when each is\n$O$-bounded by the other. Fix further bounds\n$t,s:\\mathbb N\\to[0,\\infty)$.\n\nIf $M$ is a machine in the sense of [[def-worst-case-time-and-space-complexity]]\nand halts on every input, then its worst-case resource functions are defined at\nevery input length, and:\n\n- $M$ has **time complexity $O(t(n))$** when\n  $\\operatorname{Time}_M(n)=O(t(n))$;\n- $M$ has **space complexity $O(s(n))$** when\n  $\\operatorname{Space}_M(n)=O(s(n))$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-dtime-ntime-dspace-and-nspace",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists\na deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.\n\nA **nondeterministic $k$-tape Turing machine** is obtained from the deterministic\n$k$-tape model of [[def-multitape-and-nondeterministic-machines]] by replacing\nits transition function with a finite-valued transition map\n$$\\Delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\longrightarrow\\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma^k\\times\\{L,R\\}^k).$$\nOne branch chooses one instruction from the finite set at each step.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **NTIME$(t(n))$** when there exists\nsuch a nondeterministic $k$-tape machine $N$ for which:\n\n- every branch of $N$ on every input of length $n$ halts within $O(t(n))$\n  steps, and\n- some branch of $N$ accepts exactly on the words of $L$, in the same\n  existential sense as [[def-nondeterministic-accepting-computation]].\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DSPACE$(s(n))$** when a\ndeterministic multitape decider uses worst-case space $O(s(n))$. It belongs to\n**NSPACE$(s(n))$** when a nondeterministic multitape machine accepts exactly the\nwords in $L$, every branch halts, and the maximum number of visited cells over\nall branches and inputs of length $n$ is $O(s(n))$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], choose the one-tape simulator $S_M$ that reproduces the accept, reject, and divergence behavior of $M$ on every input.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an input $w$ of length $n$, let $t=\\operatorname{time}_M(w)$. The quadratic-overhead lemma [L2] gives $\\operatorname{time}_{S_M}(w)\\le c_M(|w|+t+1)^2$ for a constant $c_M$ depending only on $M$. Because $t\\le \\operatorname{Time}_M(n)$ and $|w|=n$, the hypothesis and [L3] imply $\\operatorname{time}_{S_M}(w)=O((n+T(n))^2)$. Taking the maximum over all $w$ of length $n$ yields $\\operatorname{Time}_{S_M}(n)=O((n+T(n))^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The simulator from step 1.1 decides the same language as $M$, and step 2.1 gives the quantitative bound. Therefore the language decided by $M$ also lies in the one-tape deterministic time class described by [L4].",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns simulation overhead for a fixed machine, not an empty family of computations."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The argument is asymptotic in the running-time bound and does not isolate a special zero-time case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-step simulation case is required beyond the uniform quadratic-overhead estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes a bona fide halting machine and its standard simulator, not malformed codes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is about asymptotic simulation cost, not endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The simulator $S_M$ is fixed by the cited one-tape simulation theorem, so there is no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Multitape to single-tape time simulation` is a one-way theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Multitape to single-tape time simulation` is a one-way theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The old statement dropped the input-length term hidden in the simulator bound c_M(n+t+1)^2. The repaired theorem now states the correct O((n+T(n))^2) consequence of the quadratic-overhead lemma."
+      }
+    },
+    "thm-multitape-to-single-tape-space-simulation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multitape-machines-have-one-tape-simulations",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge 1$. For every deterministic $k$-tape Turing machine $M$, there is a\ndeterministic one-tape Turing machine $S_M$ that, on every input, has the same\naccept, reject, diverge, and output behavior as $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-asymptotic-resource-comparison",
+          "source_section": "Definition",
+          "quote": "Let $f,g:\\mathbb N\\to[0,\\infty)$. We say that **$f$ is asymptotically bounded by\n$g$**, and write\n$$ f(n)=O(g(n)), $$\nwhen there exist constants $c>0$ and $n_0\\in\\mathbb N$ such that\n$$ f(n)\\le c\\,g(n)\\qquad(n\\ge n_0). $$\n\nWe say that two bounds are **of the same asymptotic order** when each is\n$O$-bounded by the other. Fix further bounds\n$t,s:\\mathbb N\\to[0,\\infty)$.\n\nIf $M$ is a machine in the sense of [[def-worst-case-time-and-space-complexity]]\nand halts on every input, then its worst-case resource functions are defined at\nevery input length, and:\n\n- $M$ has **time complexity $O(t(n))$** when\n  $\\operatorname{Time}_M(n)=O(t(n))$;\n- $M$ has **space complexity $O(s(n))$** when\n  $\\operatorname{Space}_M(n)=O(s(n))$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-dtime-ntime-dspace-and-nspace",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists\na deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.\n\nA **nondeterministic $k$-tape Turing machine** is obtained from the deterministic\n$k$-tape model of [[def-multitape-and-nondeterministic-machines]] by replacing\nits transition function with a finite-valued transition map\n$$\\Delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\longrightarrow\\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma^k\\times\\{L,R\\}^k).$$\nOne branch chooses one instruction from the finite set at each step.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **NTIME$(t(n))$** when there exists\nsuch a nondeterministic $k$-tape machine $N$ for which:\n\n- every branch of $N$ on every input of length $n$ halts within $O(t(n))$\n  steps, and\n- some branch of $N$ accepts exactly on the words of $L$, in the same\n  existential sense as [[def-nondeterministic-accepting-computation]].\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DSPACE$(s(n))$** when a\ndeterministic multitape decider uses worst-case space $O(s(n))$. It belongs to\n**NSPACE$(s(n))$** when a nondeterministic multitape machine accepts exactly the\nwords in $L$, every branch halts, and the maximum number of visited cells over\nall branches and inputs of length $n$ is $O(s(n))$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the standard simulator from [L1] that stores the $k$ simulated tapes as marked blocks on one tape. On an input of length $n$, the first simulated tape block initially records the whole input word, contributing $n$ cells up to a constant factor. Beyond that initial block, the simulator records only cells that the multitape computation has visited, together with only constant-size bookkeeping per recorded cell and a fixed number of delimiters depending on $M$. If the simulated computation has visited at most $S(n)$ cells altogether, [L2] therefore bounds the one-tape encoding length by $O(n+S(n))$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore there exists a constant $c_M$ such that every halting run of the simulator on an input of length $n$ visits at most $c_M(n+S(n)+1)$ cells. By [L3], this is $O(n+S(n))$. Taking maxima over all length-$n$ inputs gives $\\operatorname{Space}_{S_M}(n)=O(n+S(n))$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The simulator still decides the same language as $M$, and step 2.1 places it in the deterministic single-tape space class described by [L4].",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about a fixed simulated machine, not an empty ambient family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof is a linear-overhead bound on visited cells and does not separate out a zero-space case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate singleton-space argument is needed beyond the block-encoding estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement is about standard simulators on valid machines, not malformed inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The space proof counts encoded block sizes rather than endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The simulator is fixed by the cited equivalence theorem; there is no arbitrary choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Multitape to single-tape space simulation` is one-way."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Multitape to single-tape space simulation` is one-way."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The old O(S(n)) claim ignored that the standard one-tape simulator stores the entire input block. The repaired theorem now records the correct O(n+S(n)) space bound."
+      }
+    },
+    "thm-universal-simulation-with-logarithmic-overhead": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-machine-encoding-is-injective-and-decodable",
+          "source_section": "Statement",
+          "quote": "The coding $\\ulcorner M\\urcorner$ fixed in\n[[def-effective-encoding-of-turing-machines]] is injective on coded\ndeterministic one-tape Turing machines, and it has a total decoder that either\nreconstructs the unique coded machine or reports malformed input.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-universal-turing-machine",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nEncode a pair of binary words $(x,y)$ by the self-delimiting binary word\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $v=a_1\\cdots a_\\ell$ is a finite word whose symbols are natural numbers,\nwrite\n$$ \\widehat v:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nA deterministic one-tape Turing machine $U$ with input alphabet $\\{0,1\\}$ is a **universal Turing machine\nfor the chosen coding** if, for every coded deterministic one-tape machine\n$M=(m,s,n,\\tau)$, every input word $w\\in\\Sigma_s^*$, and every output word\n$u$ of $M$, the following hold:\n\n- if $M$ halts on input $w$ with output $u$, then $U$ halts on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ with output $\\widehat u$;\n- if $M$ diverges on input $w$, then $U$ diverges on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-worst-case-time-and-space-complexity",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a deterministic $k$-tape Turing machine. For an input word $w$, let\n$\\operatorname{time}_M(w)$ be the number of steps in the computation of $M$ on\n$w$ when that computation halts, and let $\\operatorname{space}_M(w)$ be the\ntotal number of tape cells that are ever visited during that computation across\nall $k$ tapes.\n\nIf $M$ halts on every input of length $n$, its **worst-case time complexity**\nand **worst-case space complexity** are the functions\n$$ \\operatorname{Time}_M(n):=\\max_{|w|=n}\\operatorname{time}_M(w),\\qquad \\operatorname{Space}_M(n):=\\max_{|w|=n}\\operatorname{space}_M(w). $$\n\nFor a nondeterministic machine $N$, define $\\operatorname{time}_N(w)$ and\n$\\operatorname{space}_N(w)$ as the maximum over all halting branches on input\n$w$, provided every branch halts. The worst-case functions\n$\\operatorname{Time}_N$ and $\\operatorname{Space}_N$ are then defined by the\nsame maxima over inputs of length $n$.\n\nWe say that a machine **runs in time at most $t(n)$** when its worst-case time\nis bounded by $t$, and **runs in space at most $s(n)$** when its worst-case\nspace is bounded by $s$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the simulator can first decode $e$ into the finite control data of $M$ and copy those data to a read-only program track. It then stores the current simulated configuration in a geometrically blocked tape layout whose block sizes double outward from the simulated heads. This representation keeps recently accessed cells near the center while allowing farther regions to be reached after only logarithmically many block crossings.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "One simulated step of $M$ changes only the current state, one scanned tape symbol, and one head position. In the blocked layout from step 1.1, finding the current symbol, updating it, and recentering after a head move costs amortized $O_e(\\log T)$ over the first $T$ simulated steps: most steps touch only the central blocks, and a level-$j$ reblocking costs $O_e(2^j)$ but occurs only once per $\\Omega(2^j)$ simulated head moves. Summing over the $O(\\log T)$ occupied levels gives the asserted amortized bound. The subscript records the fixed cost of interpreting the finite alphabet, state set, and transition table encoded by $e$; the cited efficient-universality theorem permits exactly this machine dependence. No constructibility hypothesis on the integer $T$ is used.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the amortized $O_e(\\log T)$ cost over at most $T$ simulated steps gives total simulation time $O_e(T\\log T)$. The initial decode-and-load work contributes $O_e(|e|+|w|+1)$. If the simulation halts with output word $u$, at most $|w|+T+1$ simulated tape cells can belong to its visited output segment. A final scan therefore converts $u$ to the self-delimiting word $\\widehat u$ in $O_e(|w|+T+1)$ time, which is absorbed by the displayed bound. By [L2], the simulator is universal because it emits exactly $\\widehat u$ and, when $M$ diverges, continues simulating forever rather than entering a halting state.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore, for each fixed valid code $e$, the machine $U$ has the claimed universal behavior with total running time bounded by $c_e(|e|+|w|+T\\log T+1)$ for a suitable constant $c_e$ independent of $w$ and $T$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Universal simulation here is parameterized by a valid machine code, an input word, and a time budget, not by an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem explicitly assumes $T\\ge 2$, so the zero-budget case is outside the stated claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem explicitly assumes $T\\ge 2$, so the one-step budget case is not a separate obligation here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement is restricted to valid machine codes and ordinary divergence, not malformed codes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The logarithmic-overhead estimate is amortized over blocked tape regions, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The simulator layout is explicitly constructed; the proof does not rely on an arbitrary element of a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Universal simulation with logarithmic overhead` is a one-way existence and bound theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Universal simulation with logarithmic overhead` is a one-way existence and bound theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The risky parts are the amortized block-layout accounting and the output convention. The repaired statement keeps decode/load separate from the T log T term and now returns the encoded output $\\widehat u$ required by the universal-machine definition."
+      }
+    },
+    "prop-polynomial-time-and-space-are-model-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multitape-to-single-tape-time-simulation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a fixed deterministic multitape Turing machine. If\n$$ \\operatorname{Time}_M(n)=O(T(n)), $$\nthen there exists a deterministic one-tape Turing machine $S_M$ deciding the\nsame language and satisfying\n$$ \\operatorname{Time}_{S_M}(n)=O((n+T(n))^2). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-multitape-to-single-tape-space-simulation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a fixed deterministic multitape Turing machine. If\n$$ \\operatorname{Space}_M(n)=O(S(n)), $$\nthen there exists a deterministic one-tape Turing machine $S_M$ deciding the\nsame language and satisfying\n$$ \\operatorname{Space}_{S_M}(n)=O(n+S(n)). $$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a language is decided by a deterministic multitape machine in time bounded by a polynomial $p(n)$. By [L1], there is a single-tape decider running in time $O((n+p(n))^2)$, and $(n+p(n))^2$ is still a polynomial. Thus polynomial time on multitape machines implies polynomial time on one tape.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, every one-tape machine is already a special case of a multitape machine, so any one-tape polynomial-time algorithm is automatically a multitape polynomial-time algorithm.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For space, [L2] shows that a multitape polynomial-space decider has a single-tape decider using $O(n+s(n))$ space, which is still polynomial whenever $s$ is polynomial. The reverse implication is immediate because one tape is a special multitape case.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove model invariance for polynomial time, and step 1.3 proves it for polynomial space. Therefore the two standard models define the same polynomial-time and polynomial-space language classes.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This proposition compares two standard deterministic machine models, not an empty class of models."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The claim is asymptotic about polynomial classes and does not require a separate zero-input or zero-time boundary analysis."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton boundary is separated; the proof works with general polynomial bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proposition is about standard valid machine models and their asymptotic classes, not malformed encodings."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The argument is asymptotic and algebraic, not about interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The simulations used are canonical consequences of earlier theorems; the proof does not make an arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states equality of classes via paired inclusions, but not as one syntactic iff formula requiring a separate direction worksheet beyond the explicit inclusion steps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states equality of classes via paired inclusions, but not as one syntactic iff formula requiring a separate direction worksheet beyond the explicit inclusion steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The only real danger is mixing different simulation theorems and forgetting the extra n term in the fixed-machine bounds. The current proof now uses O((n+p(n))^2) for time and O(n+s(n)) for space, which are still polynomial."
+      }
+    },
+    "lem-clocked-machine-construction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-time-and-space-constructible-function",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nThe function $t$ is **time-constructible** when there exists a deterministic\nmachine $C_t$ such that, on unary input $1^n$, the machine halts within\n$O(t(n))$ steps and outputs the binary numeral $\\operatorname{bin}(t(n))$.\n\nThe function $s$ is **space-constructible** when there exists a deterministic\nmachine $C_s$ such that, on unary input $1^n$, the machine halts while using\n$O(s(n))$ tape cells and outputs the binary numeral $\\operatorname{bin}(s(n))$.\n\nOn this page, whenever a constructible bound is used to clock another machine,\nwe also require the evident size condition\n$$ n\\le t(n) $$\nfor large enough $n$, so that the budget is at least large enough to read an\ninput of length $n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-universal-turing-machine",
+          "source_section": "Definition",
+          "quote": "Fix the machine coding $\\ulcorner M\\urcorner$ from\n[[def-effective-encoding-of-turing-machines]]. For a binary word $z$, write\n$$ c(z):=1^{|z|}0z. $$\nEncode a pair of binary words $(x,y)$ by the self-delimiting binary word\n$$ \\langle x,y\\rangle:=1^{|x|}0xy. $$\nIf $v=a_1\\cdots a_\\ell$ is a finite word whose symbols are natural numbers,\nwrite\n$$ \\widehat v:=c(\\operatorname{bin}(\\ell))\\,c(\\operatorname{bin}(a_1))\\cdots c(\\operatorname{bin}(a_\\ell)). $$\n\nA deterministic one-tape Turing machine $U$ with input alphabet $\\{0,1\\}$ is a **universal Turing machine\nfor the chosen coding** if, for every coded deterministic one-tape machine\n$M=(m,s,n,\\tau)$, every input word $w\\in\\Sigma_s^*$, and every output word\n$u$ of $M$, the following hold:\n\n- if $M$ halts on input $w$ with output $u$, then $U$ halts on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$ with output $\\widehat u$;\n- if $M$ diverges on input $w$, then $U$ diverges on input\n  $\\langle\\ulcorner M\\urcorner,\\widehat w\\rangle$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-effective-encoding-of-turing-machines",
+          "source_section": "Definition",
+          "quote": "For this page, a **coded deterministic one-tape Turing machine** is presented\nin the normalized numeric form\n$$ M=(m,s,n,\\tau), $$\nwhere:\n\n- $m\\ge 3$, and the state set is $Q_m:=\\{0,\\dots,m-1\\}$ with start state $0$,\n  accept state $1$, and reject state $2$;\n- $n\\ge 1$, and the tape alphabet is $\\Gamma_n:=\\{0,\\dots,n-1\\}$ with blank\n  symbol $0$;\n- $0\\le s<n$, and the input alphabet is $\\Sigma_s:=\\{1,\\dots,s\\}$;\n- $\\tau$ is a total function\n  $$ \\tau:(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n\\to Q_m\\times\\Gamma_n\\times\\{0,1\\}, $$\n  where the last coordinate encodes the move direction by\n  $$ 0=L,\\qquad 1=R. $$\n\nBy [[def-deterministic-one-tape-turing-machine]], each such tuple determines a\ndeterministic one-tape Turing machine, and on this page we use this numeric\npresentation as the machine description to be encoded.\n\nLet $\\operatorname{bin}(r)$ denote the usual binary numeral for a natural\nnumber $r$, with $\\operatorname{bin}(0)=0$. List the source pairs\n$(q,a)\\in(Q_m\\setminus\\{1,2\\})\\times\\Gamma_n$ in lexicographic order, and for\neach such pair write\n$$ \\tau(q,a)=\\bigl(q',a',d\\bigr). $$\nThe **description tuple** of $M$ is the finite tuple of binary words\n$$ \\operatorname{Desc}(M):=\\bigl(\\operatorname{bin}(m),\\operatorname{bin}(s),\\operatorname{bin}(n),\\operatorname{bin}(q'_1),\\operatorname{bin}(a'_1),\\operatorname{bin}(d_1),\\dots,\\operatorname{bin}(q'_N),\\operatorname{bin}(a'_N),\\operatorname{bin}(d_N)\\bigr), $$\nwhere $N=(m-2)n$ and the triples are listed in the same lexicographic source\norder.\n\nFor a binary word $w$, put $c(w):=1^{|w|}0w$. For every finite nonempty tuple\nof binary words define one variable-arity encoder by\n$$E(w_1,\\dots,w_k):=1^k0c(w_1)\\cdots c(w_k).$$\nThe first $0$ recovers the arity $k$, and the self-delimiting blocks then\nrecover the entries. Different arities have different unary headers, so this\nsingle encoder is injective and prefix-free across all finite positive arities;\nfor each fixed arity it is the construction from\n[[lem-finite-tuples-admit-effective-prefix-free-encodings]].\n\nThe **chosen code** of $M$, written $\\ulcorner M\\urcorner$, is\n$$\\ulcorner M\\urcorner:=E(\\operatorname{Desc}(M)).$$\n\nIts total decoder first parses the unary arity and the indicated\nself-delimiting blocks. It then checks that every entry is a canonical binary\nnumeral, that the first three entries give $m\\ge3$, $n\\ge1$, and $0\\le s<n$,\nthat the arity is $3+3(m-2)n$, and that every transition triple lies in\n$Q_m\\times\\Gamma_n\\times\\{0,1\\}$. If every check succeeds, it returns the\nunique coded machine determined by those data; otherwise it returns a fixed\nmalformed-code symbol. Thus the chosen machine coding is effective in the\nsense of [[def-effective-binary-encoding-and-decoder]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-time-at-least-input-length-permits-complete-input-reading",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a $k$-tape machine that halts on every input of length $n$. If, on\nevery such input, the accepting or rejecting branch of $M$ scans each of the\nfirst $n$ input cells before halting, then\n$$ \\operatorname{Time}_M(n)\\ge n. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On input $x$, the machine $\\operatorname{Clock}_{e,t}$ first scans the whole input once to learn $|x|$. The lower bound hypothesis $n\\le t(n)$ together with [L4] ensures that this preliminary scan fits inside the intended asymptotic budget. It then runs the constructor from [L1] on unary input $1^{|x|}$ to obtain the binary numeral of $t(|x|)$ and writes a counter of that size on a work tape.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Next, using the fixed code $e$ from [L3], the machine simulates $M$ on $x$ while decrementing the counter once per simulated step. If the simulation halts before the counter reaches $0$, the simulator outputs exactly what $M$ outputs; if the counter reaches $0$ first, the machine enters a rejecting state and stops. This is the standard clocked simulation built from the universal behavior in [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 proves the two clauses of the statement: successful runs of $M$ before the deadline are preserved, and overlong runs are cut off by a halting reject state.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The clocked-simulator lemma is about a fixed bound and a fixed coded machine, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes an eventually dominating time bound with $n\\le t(n)$, so the interesting boundary is not a zero budget."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate unit-budget case is needed once the clocking construction is written for general $t(|x|)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The machine code and time bound are assumed valid; the lemma does not treat malformed descriptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof concerns a countdown budget and universal simulation, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The clocked simulator is explicitly built from the given code and constructible bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "`Clocked machine construction` is a one-way construction lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "`Clocked machine construction` is a one-way construction lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-d",
+        "notes": "The pressure point is computing the deadline within the claimed asymptotic budget. The current proof explicitly reads |x| first, uses constructibility to write t(|x|), and then enforces that counter as a real timeout."
+      }
+    },
+    "prop-polynomially-related-encodings-preserve-polynomial-classes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-polynomially-related-encodings-preserve-polynomial-size",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma,\\tau:I\\to\\{0,1\\}^*$ be polynomially related encodings of the same\ninstance set $I$. For any function $m:I\\to\\mathbb N$, the following are\nequivalent:\n\n1. There is a polynomial $p$ such that $m(x)\\le p(|x|_\\sigma)$ for every\n   $x\\in I$.\n2. There is a polynomial $r$ such that $m(x)\\le r(|x|_\\tau)$ for every\n   $x\\in I$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-instance-size-under-an-encoding",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a set of instances and let $\\sigma:I\\to\\{0,1\\}^*$ be an effective\nbinary encoding. The **size** of an instance $x\\in I$ with respect to $\\sigma$\nis the length of its codeword:\n$$ |x|_\\sigma:=|\\sigma(x)|. $$\n\nIf $\\sigma,\\tau:I\\to\\{0,1\\}^*$ are two effective encodings of the same instance\nset, they are **polynomially related** when there exist polynomials\n$p,q:\\mathbb N\\to\\mathbb N$ such that for every $x\\in I$,\n$$ |\\sigma(x)|\\le p(|\\tau(x)|)\\qquad\\text{and}\\qquad |\\tau(x)|\\le q(|\\sigma(x)|). $$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dtime-ntime-dspace-and-nspace",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists\na deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.\n\nA **nondeterministic $k$-tape Turing machine** is obtained from the deterministic\n$k$-tape model of [[def-multitape-and-nondeterministic-machines]] by replacing\nits transition function with a finite-valued transition map\n$$\\Delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\longrightarrow\\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma^k\\times\\{L,R\\}^k).$$\nOne branch chooses one instruction from the finite set at each step.\n\nA language $L\\subseteq\\Sigma^*$ belongs to **NTIME$(t(n))$** when there exists\nsuch a nondeterministic $k$-tape machine $N$ for which:\n\n- every branch of $N$ on every input of length $n$ halts within $O(t(n))$\n  steps, and\n- some branch of $N$ accepts exactly on the words of $L$, in the same\n  existential sense as [[def-nondeterministic-accepting-computation]].\n\nA language $L\\subseteq\\Sigma^*$ belongs to **DSPACE$(s(n))$** when a\ndeterministic multitape decider uses worst-case space $O(s(n))$. It belongs to\n**NSPACE$(s(n))$** when a nondeterministic multitape machine accepts exactly the\nwords in $L$, every branch halts, and the maximum number of visited cells over\nall branches and inputs of length $n$ is $O(s(n))$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $L$ is decidable in polynomial time under $\\tau$. Let $M_\\tau$ be a decider for the code language $\\tau[L]$ whose running time is polynomial in the input length. On an arbitrary binary input $z$, first run the assumed polynomial-time decider for the valid-code language $\\sigma[I]$. If $z\\notin\\sigma[I]$, reject. If $z=\\sigma(x)$ is valid, compute $T_{\\sigma\\to\\tau}(z)$ and run $M_\\tau$ on that translated word. The output is correct because $T_{\\sigma\\to\\tau}(\\sigma(x))=\\tau(x)$. By [L1] and [L2], the translated length is polynomially bounded in $|z|$, and the validity test and translator are polynomial-time by hypothesis, so the whole composition is polynomial-time.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same composition argument works in the opposite direction using the validity test for $\\tau[I]$ and the translator $T_{\\tau\\to\\sigma}$. Therefore polynomial-time decidability under $\\sigma$ and under $\\tau$ are equivalent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Replace the time bounds in step 1.1 by space bounds. The validity tests and translators use polynomial space by hypothesis, and [L1] again converts a polynomial bound in one encoding length into a polynomial bound in the other. Hence polynomial-space decidability is preserved in both directions as well.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove the preservation of polynomial-time and polynomial-space classes described in [L3].",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The proposition compares two concrete encodings and their translators, not an empty family of encodings."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof is asymptotic in code lengths and does not separate a special size-0 boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special size-1 case is needed; the translation argument is uniform."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement now handles malformed inputs by first deciding the valid-code languages before any translation is applied, so malformed words are rejected rather than silently translated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns encoding translations and polynomial bounds, not endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The translators are part of the hypotheses and the composed deciders are explicitly constructed from them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves the forward transfer from a polynomial-time decider under $\\tau$ to one under $\\sigma$, and step 2.2 repeats the same transfer logic for polynomial space."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves the reverse time-direction using the validity test for tau[I] and the translator T_{tau->sigma}, and step 2.2 gives the corresponding reverse space transfer."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The original broad slogan is not mathematically sound from polynomial length comparison alone. The authored statement therefore adds the polynomial-translation hypothesis explicitly, and the proof uses that stronger hypothesis at every composition step."
+      }
+    },
+    "fs-model-invariance-means-equal-step-counts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-polynomial-time-and-space-are-model-invariant",
+          "source_section": "Statement",
+          "quote": "For deterministic single-tape and fixed-multitape Turing-machine models, the\nnotions of polynomial-time computation and polynomial-space computation define\nthe same language classes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-multitape-and-nondeterministic-machines",
+          "source_section": "Definition",
+          "quote": "Fix finite alphabets $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$ with\n$\\sqcup\\in\\Gamma$, and a finite state set $Q$ with distinct states\n$q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$.\n\nFor an integer $k\\ge 1$, a **deterministic $k$-tape Turing machine** has the same finite control data as\nthe one-tape model, but carries $k$ right-infinite tapes and $k$ head\npositions. Its transition function has the form\n$$ \\delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\to Q\\times\\Gamma^k\\times\\{L,R\\}^k. $$\nSo one step reads one symbol from each tape, writes one symbol on each tape,\nand moves each head left or right.\n\nA **nondeterministic one-tape Turing machine** has the same data\n$(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}})$ as the\ndeterministic model, but replaces the transition function by a finite-valued\ntransition map\n$$ \\Delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to \\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma\\times\\{L,R\\}), $$\nwhere each $\\Delta(q,a)$ is a finite set of allowed next instructions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M$ be a one-tape scanning machine, regarded by [L2] as a multitape machine with one tape. Translate it to an equivalent one-tape machine $S$ by inserting, before every original transition, a two-step right-then-left excursion that changes no tape symbol and records the finitely many encountered symbols in the control state. The third step performs the original transition. Thus $S$ has exactly the same behavior as $M$ but uses three steps for every nonhalting step of $M$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On every input for which $M$ takes a positive number of steps, the translated computation takes three times as many, contradicting [A1]. This is consistent with [L1]: robustness preserves asymptotic complexity classes, not literal equality of running times.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses one concrete scanning machine and one explicitly delayed equivalent machine, not an empty class."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The contradiction uses any input on which the original scanning machine takes a positive number of steps; a zero-step run is not part of the witness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The three-for-one delayed transition construction is uniform and needs no separate singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample uses standard multitape and one-tape machines, not malformed objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint argument in this asymptotic slowdown refutation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness scanning machine and its two-step right-left delay translation are explicitly described."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The refutation targets exact step equality with an explicit delayed transition construction. It no longer attributes a standard simulator or lower bound to an existential asymptotic simulation theorem."
+      }
+    },
+    "fs-time-bounds-never-need-constructibility": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-time-and-space-constructible-function",
+          "source_section": "Definition",
+          "quote": "Let $t,s:\\mathbb N\\to\\mathbb N$.\n\nThe function $t$ is **time-constructible** when there exists a deterministic\nmachine $C_t$ such that, on unary input $1^n$, the machine halts within\n$O(t(n))$ steps and outputs the binary numeral $\\operatorname{bin}(t(n))$.\n\nThe function $s$ is **space-constructible** when there exists a deterministic\nmachine $C_s$ such that, on unary input $1^n$, the machine halts while using\n$O(s(n))$ tape cells and outputs the binary numeral $\\operatorname{bin}(s(n))$.\n\nOn this page, whenever a constructible bound is used to clock another machine,\nwe also require the evident size condition\n$$ n\\le t(n) $$\nfor large enough $n$, so that the budget is at least large enough to read an\ninput of length $n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-clocked-machine-construction",
+          "source_section": "Statement",
+          "quote": "Let $t:\\mathbb N\\to\\mathbb N$ be time-constructible, and assume $n\\le t(n)$ for\nall sufficiently large $n$. Then for every coded deterministic machine\n$e=\\ulcorner M\\urcorner$ there exists a deterministic machine\n$\\operatorname{Clock}_{e,t}$ such that, on each input $x$:\n\n- if $M$ halts within at most $t(|x|)$ steps, then\n  $\\operatorname{Clock}_{e,t}$ halts with the same output;\n- if $M$ has not halted by time $t(|x|)$, then\n  $\\operatorname{Clock}_{e,t}$ halts and rejects.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the total bound $t(n):=2n+b(n)$ using [F1]. Then $t(n)\\ge n$. If a uniform constructor could materialize $t(n)$ on input $1^n$, subtracting $2n$ from its output would compute $b(n)$, contradicting [F1]. Hence this total bound is not time-constructible in the sense of [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The construction in [L2] works precisely by first computing the bound and then enforcing it as a timeout. Step 1.1 exhibits a total bound satisfying the size condition for which that first operation is impossible. Therefore [A1] is false: a uniform same-scale clock cannot be obtained for every total bound without a constructibility hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses the explicit diagonal total function $b$ and bound $t(n)=2n+b(n)$, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The explicit bound satisfies $t(0)=b(0)$ and the contradiction concerns computing its noncomputable low-order bit; no omitted zero-time convention is used."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special one-step case is relevant to the constructibility objection."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The proof concerns standard asymptotic bounds and simulations, not malformed objects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint behavior occurs in the constructibility argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The diagonal function and the total bound $t(n)=2n+b(n)$ are explicitly defined; the proof makes no arbitrary choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is one-way, not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is one-way, not biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The earlier proof inferred necessity from a sufficient clocking lemma. The repaired refutation gives a concrete nonconstructible total bound whose materialization would compute a diagonal noncomputable function, so the need for a constructibility hypothesis is now witnessed directly."
+      }
+    },
+    "ex-time-bounds-imply-space-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-time-bounds-imply-space-bounds",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a fixed $k$-tape machine that halts on every input. If\n$$ \\operatorname{Time}_M(n)=O(T(n)), $$\nthen\n$$ \\operatorname{Space}_M(n)=O(T(n)). $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial $3n^2+5n+7$ is $O(n^2)$. So the hypothesis places $M$ in the setting of [L1] with $T(n)=n^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] yields $\\operatorname{Space}_M(n)=O(n^2)$. This matches the concrete intuition that a machine cannot visit more than a constant multiple of its own number of time steps.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses an explicit quadratic bound, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked example emphasizes a quadratic polynomial bound rather than the trivial zero-length case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special unit-input analysis is needed for the example's use of the lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The witness machine is described as an ordinary decider with a concrete polynomial bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is asymptotic, not an endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The polynomial $3n^2+5n+7$ is fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Examples are not biconditional theorems."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Examples are not biconditional theorems."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The example only instantiates the lemma with a concrete polynomial. It does not claim any sharper space bound than the general time-to-space implication supplies."
+      }
+    },
+    "ex-polynomially-related-encodings-preserve-polynomial-classes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-polynomially-related-encodings-preserve-polynomial-classes",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a set of instances, let $L\\subseteq I$, and let\n$\\sigma,\\tau:I\\to\\{0,1\\}^*$ be effective encodings that are polynomially\nrelated in the sense of [[def-instance-size-under-an-encoding]]. Assume in\naddition that the valid-code languages $\\sigma[I]$ and $\\tau[I]$ are decidable\nin polynomial time and polynomial space, and that there are total functions\n$$ T_{\\sigma\\to\\tau},T_{\\tau\\to\\sigma}:\\{0,1\\}^*\\to\\{0,1\\}^* $$\ncomputable in polynomial time and polynomial space such that\n$$ T_{\\sigma\\to\\tau}(\\sigma(x))=\\tau(x),\\qquad T_{\\tau\\to\\sigma}(\\tau(x))=\\sigma(x) $$\nfor every $x\\in I$. Then $L$ is decidable in polynomial time under $\\sigma$ if\nand only if it is decidable in polynomial time under $\\tau$, and likewise for\npolynomial space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The bit-doubling and pair-checking procedures are linear-time and linear-space translations between valid $\\sigma$-codes and valid $\\tau$-codes. Also $|\\tau(x)|=2|\\sigma(x)|$ for every instance $x$, so the two code lengths bound each other polynomially.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the hypotheses of [L1] hold, and [L1] transfers polynomial-time and polynomial-space decidability between the two tuple encodings.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses two explicit tuple encodings, not an empty encoding family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example discusses linear translators and doubled code lengths, not a distinguished zero-size case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate length-1 argument is needed in the doubling example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is restricted to valid codes with explicit inverse translation checks."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is an encoding-translation example, not an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both encodings and both translators are written down explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an example illustrating a theorem, not an iff claim in its own right."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is an example illustrating a theorem, not an iff claim in its own right."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The example was chosen so the translation hypothesis added to the proposition is visibly satisfied: bit-doubling and pair-checking are obviously linear-time and linear-space."
+      }
+    },
+    "cex-model-invariance-means-equal-step-counts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multitape-to-single-tape-time-simulation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a fixed deterministic multitape Turing machine. If\n$$ \\operatorname{Time}_M(n)=O(T(n)), $$\nthen there exists a deterministic one-tape Turing machine $S_M$ deciding the\nsame language and satisfying\n$$ \\operatorname{Time}_{S_M}(n)=O((n+T(n))^2). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-multitape-and-nondeterministic-machines",
+          "source_section": "Definition",
+          "quote": "Fix finite alphabets $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$ with\n$\\sqcup\\in\\Gamma$, and a finite state set $Q$ with distinct states\n$q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$.\n\nFor an integer $k\\ge 1$, a **deterministic $k$-tape Turing machine** has the same finite control data as\nthe one-tape model, but carries $k$ right-infinite tapes and $k$ head\npositions. Its transition function has the form\n$$ \\delta_k:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma^k\\to Q\\times\\Gamma^k\\times\\{L,R\\}^k. $$\nSo one step reads one symbol from each tape, writes one symbol on each tape,\nand moves each head left or right.\n\nA **nondeterministic one-tape Turing machine** has the same data\n$(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}})$ as the\ndeterministic model, but replaces the transition function by a finite-valued\ntransition map\n$$ \\Delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to \\mathcal P_{\\mathrm{fin}}(Q\\times\\Gamma\\times\\{L,R\\}), $$\nwhere each $\\Delta(q,a)$ is a finite set of allowed next instructions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On an input of length $n$, the two-tape presentation of $M$ ignores its second tape, makes one pass across the input on the first tape, and halts after a positive linear number $t(n)$ of steps.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Construct a one-tape machine $S$ by replacing each nonhalting transition of $M$ with three transitions. Before executing the original transition, $S$ moves one cell right without changing the scanned symbol, records in its finite control the original state and symbol together with the symbol seen on the right, then moves left while restoring that right-hand symbol, and finally performs the original transition. The two preliminary moves return the tape and head to their original state, so $S$ has exactly the same accept/reject behavior as $M$ but uses exactly $3t(n)$ steps on every length-$n$ input.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $t(n)>0$, the translated computation of $S$ and the original two-tape computation of $M$ have different exact step counts. Thus this translation is a counterexample to the false claim; [L1] is consistent with the witness because both running times remain linear.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses one explicitly described scanning machine and its delayed translation, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The proof restricts to inputs on which the scanning machine takes a positive number of steps, so a zero-step computation is outside the witness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The translated machine uses three steps per original nonhalting step uniformly, so no separate size-1 computation is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both the multitape machine and the simulator are standard valid machines."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a complexity counterexample rather than an endpoint argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scanning machine and the two-step right-left delay inserted before each original transition are explicitly constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A counterexample item is not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A counterexample item is not a biconditional theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author-batch-10",
+        "notes": "The earlier marked-block argument supplied no exact simulator or lower bound. The repaired witness explicitly inserts a reversible two-step delay before each original transition, so the translated computation provably takes three times as many steps while preserving behavior."
+      }
+    }
+  }
+}

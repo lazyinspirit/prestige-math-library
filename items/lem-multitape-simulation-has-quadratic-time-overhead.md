@@ -2,7 +2,7 @@
 id: lem-multitape-simulation-has-quadratic-time-overhead
 kind: lemma
 title: "The standard one-tape simulation of a fixed multitape machine has quadratic overhead"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

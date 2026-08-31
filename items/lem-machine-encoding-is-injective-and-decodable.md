@@ -2,7 +2,7 @@
 id: lem-machine-encoding-is-injective-and-decodable
 kind: lemma
 title: "The chosen machine coding is injective and has a total decoder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -38,10 +39,7 @@ reconstructs the unique coded machine or reports malformed input.
 
 [L1] A coded deterministic one-tape machine is described by a finite tuple of binary numerals recording $m$, $s$, $n$, and the lexicographically ordered transition triples, and its code is the result of applying the fixed tuple encoder to that description tuple, by [[def-effective-encoding-of-turing-machines]].
 
-[L2] The machine definition fixes the single variable-arity encoder
-$E(w_1,\ldots,w_k)=1^k0c(w_1)\cdots c(w_k)$, whose arity header and
-self-delimiting entries give a total parser
-([[def-effective-encoding-of-turing-machines]]).
+[L2] The machine definition fixes the single variable-arity encoder $E(w_1,\ldots,w_k)=1^k0c(w_1)\cdots c(w_k)$, whose arity header and self-delimiting entries give a total parser ([[def-effective-encoding-of-turing-machines]]).
 
 ## Proof
 

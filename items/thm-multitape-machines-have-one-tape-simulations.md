@@ -2,7 +2,7 @@
 id: thm-multitape-machines-have-one-tape-simulations
 kind: theorem
 title: "Every fixed multitape Turing machine has an equivalent one-tape simulation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
 sources:
   scraped: []
   references:
@@ -33,17 +34,9 @@ accept, reject, diverge, and output behavior as $M$.
 
 [L1] A deterministic $k$-tape Turing machine has $k$ right-infinite tapes, $k$ head positions, and one simultaneous move on each tape at each step, by [[def-multitape-and-nondeterministic-machines]].
 
-[F1] For this theorem, extend the standard terminology to a deterministic
-multitape machine by using its accept, reject, and divergence behavior for
-recognition and decision, and by treating its first tape as the output tape for
-partial-function computation. These are exactly the clauses of
-[[def-language-recognized-and-decided]] and
-[[def-partial-function-computed-by-a-machine]], with "tape" replaced by "first
-tape" in the output clause.
+[F1] For this theorem, extend the standard terminology to a deterministic multitape machine by using its accept, reject, and divergence behavior for recognition and decision, and by treating its first tape as the output tape for partial-function computation. These are exactly the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]], with "tape" replaced by "first tape" in the output clause.
 
-[L2] Stay-put bookkeeping may be removed without changing accept, reject,
-divergence, or output behavior, by
-[[thm-stay-put-moves-can-be-eliminated]].
+[L2] Stay-put bookkeeping may be removed without changing accept, reject, divergence, or output behavior, by [[thm-stay-put-moves-can-be-eliminated]].
 
 ## Proof
 

@@ -1,0 +1,2540 @@
+{
+  "version": 1,
+  "level": "frontier-27",
+  "scope": [
+    "lem-reverse-triangle-inequality-in-a-normed-space",
+    "lem-complete-subspace-is-closed",
+    "lem-closed-subspace-of-a-banach-space-is-banach",
+    "lem-vector-operations-are-continuous-in-a-normed-space",
+    "lem-finite-product-norms-are-equivalent",
+    "thm-finite-products-of-banach-spaces-are-banach",
+    "lem-absolutely-convergent-series-is-cauchy",
+    "thm-banach-series-criterion",
+    "lem-completion-operations-are-well-defined",
+    "thm-metric-completion-carries-a-unique-banach-space-structure",
+    "thm-completion-universal-property-for-bounded-linear-maps",
+    "cor-normed-space-completions-are-uniquely-linearly-isometric",
+    "ex-ell-infinity-is-a-banach-space",
+    "ex-c0-is-a-banach-space",
+    "ex-cb-of-a-space-is-banach",
+    "ex-c-of-a-compact-space-is-banach",
+    "ex-finite-sequences-c00-with-standard-norms",
+    "ex-polynomials-are-not-complete-in-the-supremum-norm",
+    "ex-lp-banach-space-dictionary",
+    "cex-an-incomplete-subspace-need-not-be-closed",
+    "cex-equivalent-metrics-need-not-come-from-equivalent-norms"
+  ],
+  "contracts": {
+    "lem-reverse-triangle-inequality-in-a-normed-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. This is the same convention [[rem-metric-axiom-conventions]]\nrecords for metrics.\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $x=(x-y)+y$, the triangle inequality in [L1] gives $\\|x\\|\\le \\|x-y\\|+\\|y\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $y=(y-x)+x$ and $\\|y-x\\|=\\|x-y\\|$ by absolute homogeneity at the scalar $-1$, [L1] also gives $\\|y\\|\\le \\|x-y\\|+\\|x\\|$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 yields $\\|x\\|-\\|y\\|\\le \\|x-y\\|$, and step 1.2 yields $\\|y\\|-\\|x\\|\\le \\|x-y\\|$; together these are exactly $\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The displayed inequality says precisely that the map $x\\mapsto \\|x\\|$ is $1$-Lipschitz for the metric $d(u,v)=\\|u-v\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is about two vectors, not an empty family or empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the case where one vector is 0 and the norm difference is compared directly with the norm distance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished singleton or value-one parameter occurs in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the diagonal case x=y, where both sides are 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limit endpoint, or boundary parameter in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct inequality argument and chooses nothing from a merely nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ]
+    },
+    "lem-complete-subspace-is-closed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-normed-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a linear subspace in the\nsense of [[def-linear-subspace]]. The **normed subspace** $W$ is the vector\nspace $W$ equipped with the restricted norm\n$$\\|w\\|_W:=\\|w\\|_V \\qquad (w\\in W).$$\n\nIts induced metric is the restriction of the ambient norm metric to\n$W\\times W$, so the inclusion $W\\hookrightarrow V$ is an isometric embedding in\nthe sense of [[def-isometry-and-metric-embedding]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complete-subspace-iff-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A \\subseteq X$\ncarry the subspace metric $d_A$ ([[def-isometry-and-metric-embedding]]). Then:\n\n1. If $(A,d_A)$ is complete ([[def-complete-metric-space]]), then $A$ is closed\n   in $(X,d)$ ([[def-metric-topology]]). **No hypothesis on $X$ is needed.**\n2. If $(X,d)$ is complete and $A$ is closed in $(X,d)$, then $(A,d_A)$ is\n   complete.\n\nConsequently, for a complete $(X,d)$ a subset $A \\subseteq X$ is complete if and\nonly if it is closed.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the metric on $W$ induced by the restricted norm is exactly the ambient norm metric restricted to $W$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The hypothesis that $W$ is complete for its restricted norm therefore says that $W$ is complete as a metric subspace of $V$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [L2] to that metric subspace shows that $W$ is closed in the ambient normed space $V$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a normed subspace, not an empty-set construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero subspace, which is complete and therefore closed by the same specialization."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton cardinality or value-one parameter is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers the case W=V, where the ambient space is closed in itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting-endpoint condition appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local proof only specializes the published theorem and makes no new arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the complete-implies-closed direction is stated here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Only the complete-implies-closed direction is stated here."
+        }
+      ]
+    },
+    "lem-closed-subspace-of-a-banach-space-is-banach": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-normed-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a linear subspace in the\nsense of [[def-linear-subspace]]. The **normed subspace** $W$ is the vector\nspace $W$ equipped with the restricted norm\n$$\\|w\\|_W:=\\|w\\|_V \\qquad (w\\in W).$$\n\nIts induced metric is the restriction of the ambient norm metric to\n$W\\times W$, so the inclusion $W\\hookrightarrow V$ is an isometric embedding in\nthe sense of [[def-isometry-and-metric-embedding]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complete-subspace-iff-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A \\subseteq X$\ncarry the subspace metric $d_A$ ([[def-isometry-and-metric-embedding]]). Then:\n\n1. If $(A,d_A)$ is complete ([[def-complete-metric-space]]), then $A$ is closed\n   in $(X,d)$ ([[def-metric-topology]]). **No hypothesis on $X$ is needed.**\n2. If $(X,d)$ is complete and $A$ is closed in $(X,d)$, then $(A,d_A)$ is\n   complete.\n\nConsequently, for a complete $(X,d)$ a subset $A \\subseteq X$ is complete if and\nonly if it is closed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L3], the ambient norm metric on $V$ is complete.",
+          "step": "1.1",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L1], the restricted norm on $W$ induces exactly the ambient subspace metric on $W$.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $W$ is closed in the complete metric space $V$, [L2] makes that subspace metric complete.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Completeness of the restricted norm metric is exactly the Banach property for $W$ by [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim is about a closed linear subspace inside a Banach space, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the zero subspace, whose restricted norm metric is complete."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No value-one or singleton branch is isolated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the case W=V, where the conclusion repeats the Banach hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof applies the closed-subspace theorem directly and does not choose from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma states only one direction of the completeness/closedness package."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This lemma states only one direction of the completeness/closedness package."
+        }
+      ]
+    },
+    "lem-vector-operations-are-continuous-in-a-normed-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-real-and-complex-normed-space-convention",
+          "source_section": "Remark",
+          "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-reverse-triangle-inequality-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space. For all $x,y\\in V$,\n$$\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|.$$\nIn particular, the norm map is $1$-Lipschitz for the norm metric.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For addition, $\\|(x+h)+(y+k)-(x+y)\\|=\\|h+k\\|\\le \\|h\\|+\\|k\\|$ by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For scalar multiplication, $(\\lambda+\\alpha)(x+h)-\\lambda x=\\lambda h+\\alpha x+\\alpha h$, so $\\|(\\lambda+\\alpha)(x+h)-\\lambda x\\|\\le |\\lambda|\\,\\|h\\|+|\\alpha|\\,\\|x\\|+|\\alpha|\\,\\|h\\|$ by the triangle inequality and absolute homogeneity from [L1] and [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given $\\varepsilon>0$, step 1.1 shows that if $\\|h\\|<\\varepsilon/2$ and $\\|k\\|<\\varepsilon/2$, then $(x+h)+(y+k)$ lies in the $\\varepsilon$-ball around $x+y$; this is continuity of addition at $(x,y)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For scalar multiplication at $(\\lambda,x)$, first require $|\\alpha|<1$ and then choose $\\delta>0$ so that $|\\lambda|\\,\\delta+\\delta(\\|x\\|+\\delta)<\\varepsilon$; step 1.2 then gives $\\|(\\lambda+\\alpha)(x+h)-\\lambda x\\|<\\varepsilon$ whenever $|\\alpha|<\\delta$ and $\\|h\\|<\\delta$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the point $(x,y)$ was arbitrary, step 2.1 proves continuity of addition everywhere, and step 2.2 proves continuity of scalar multiplication everywhere.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Continuity of addition and scalar multiplication is not an empty-set statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 covers the scalar-zero and vector-zero cases through the same epsilon estimate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special singleton or value-one branch needs a separate argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the exact-base-point case h=k=0 and the unchanged-point continuity check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only explicit epsilon-delta estimates and no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-finite-product-norms-are-equivalent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-product-norms-on-finitely-many-normed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, and let $E_0,\\dots,E_{n-1}$ be normed\nspaces. On the Cartesian product\n$$E:=\\prod_{k<n}E_k$$\nwrite $x=(x_0,\\dots,x_{n-1})$. The three standard product norms on $E$ are\n\n$$\\|x\\|_{\\max}:=\\max_{k<n}\\|x_k\\|,$$\n$$\\|x\\|_1:=\\sum_{k<n}\\|x_k\\|,$$\n$$\\|x\\|_2:=\\Bigl(\\sum_{k<n}\\|x_k\\|^2\\Bigr)^{1/2}.$$\n\nThe finite sum is that of [[def-finite-sum]], and the symbol $n$ in the\ndisplayed upper bound is the canonical natural of [[def-canonical-natural]]\nwhen it is read inside real inequalities.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each coordinate, $\\|x_k\\|^2$ is one of the nonnegative summands in $\\sum_{j<n}\\|x_j\\|^2$, so $\\|x_k\\|\\le \\|x\\|_2$ for every $k$ and therefore $\\|x\\|_{\\max}\\le \\|x\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Applying the scalar inequality $\\|(a_k)\\|_2\\le \\|(a_k)\\|_1$ from [L2] to the nonnegative real tuple $(\\|x_0\\|,\\dots,\\|x_{n-1}\\|)$ gives $\\|x\\|_2\\le \\|x\\|_1$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Since every coordinate norm is at most $\\|x\\|_{\\max}$, summing $n$ such bounds gives $\\|x\\|_1\\le n\\|x\\|_{\\max}$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The three displayed inequalities of steps 1.1, 1.2, and 1.3 are exactly the comparison constants needed for equivalence of the three norms.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is about a finite product with n>=1, so there is no empty-product case in scope.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "The statement assumes n>=1, so the product index {k<n} is already nonempty; the detector is reacting to the product notation rather than to a live empty-product branch in the current item."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypothesis n>=1 excludes the zero-factor case because the maximum norm is only defined there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers n=1, where all three product norms agree with the single factor norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero vector, for which each inequality is an equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is coordinatewise and uses no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "In The standard finite product norms are equivalent, steps 1.1-1.3 establish the comparison inequalities and step 2.1 records that these constants prove the forward implication inside norm equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In The standard finite product norms are equivalent, the same inequalities from steps 1.1-1.3 and the conclusion in step 2.1 bound the other standard product norms back by the maximum norm, giving the reverse implication of equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because all three norms must compare uniformly, including n = 1 and x = 0. Steps 1.1 through 1.3 prove max <= 2 <= 1 <= n*max, and step 2.1 records the explicit comparison constants."
+      }
+    },
+    "thm-finite-products-of-banach-spaces-are-banach": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-product-norms-on-finitely-many-normed-spaces",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, and let $E_0,\\dots,E_{n-1}$ be normed\nspaces. On the Cartesian product\n$$E:=\\prod_{k<n}E_k$$\nwrite $x=(x_0,\\dots,x_{n-1})$. The three standard product norms on $E$ are\n\n$$\\|x\\|_{\\max}:=\\max_{k<n}\\|x_k\\|,$$\n$$\\|x\\|_1:=\\sum_{k<n}\\|x_k\\|,$$\n$$\\|x\\|_2:=\\Bigl(\\sum_{k<n}\\|x_k\\|^2\\Bigr)^{1/2}.$$\n\nThe finite sum is that of [[def-finite-sum]], and the symbol $n$ in the\ndisplayed upper bound is the canonical natural of [[def-canonical-natural]]\nwhen it is read inside real inequalities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-finite-product-norms-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $E=\\prod_{k<n}E_k$ be a finite product of normed spaces,\nequipped with the three standard product norms of\n[[def-product-norms-on-finitely-many-normed-spaces]]. Then for every\n$x\\in E$,\n$$\\|x\\|_{\\max}\\le \\|x\\|_2\\le \\|x\\|_1\\le n\\|x\\|_{\\max}.$$\nConsequently these three norms are equivalent.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $x^{(m)}$ is Cauchy for $\\|\\cdot\\|_{\\max}$, then each coordinate sequence $(x^{(m)}_k)_m$ is Cauchy in $E_k$, because $\\|x^{(m)}_k-x^{(\\ell)}_k\\|\\le \\|x^{(m)}-x^{(\\ell)}\\|_{\\max}$ for every $k<n$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since each $E_k$ is Banach, [L1] gives a point $x_k\\in E_k$ with $x^{(m)}_k\\to x_k$. Put $x:=(x_0,\\dots,x_{n-1})$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Given $\\varepsilon>0$, choose $M_0$ so that $\\|x^{(m)}-x^{(\\ell)}\\|_{\\max}<\\varepsilon/2$ for $m,\\ell\\ge M_0$, and for each $k<n$ choose $M_k$ so that $\\|x^{(m)}_k-x_k\\|<\\varepsilon/2$ for $m\\ge M_k$. For $M:=\\max\\{M_0,M_1,\\dots,M_{n-1}\\}$ and $m\\ge M$, taking $\\ell\\to\\infty$ in a fixed coordinate gives $\\|x^{(m)}_k-x_k\\|\\le \\varepsilon/2$ for every $k<n$, hence $\\|x^{(m)}-x\\|_{\\max}\\le \\varepsilon/2<\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus the product is complete for the maximum norm, hence Banach for that norm by [L1].",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The inequalities in [L3] show that a sequence is Cauchy or convergent for one standard product norm exactly when it is so for the others. Therefore completeness for $\\|\\cdot\\|_{\\max}$ is equivalent to completeness for $\\|\\cdot\\|_2$ and for $\\|\\cdot\\|_1$, so the product is Banach for all three norms.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for n>=1, so the empty product is outside the written scope.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "The theorem begins with n>=1, so the finite product never collapses to the empty product; the detector is reacting to the product notation, not to a live empty-case obligation."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero-factor product is excluded by the standing n>=1 hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the single-factor case, where the product is the original Banach space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 includes factors that are zero spaces and Cauchy sequences that are eventually constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records the finite coordinatewise construction of the candidate limit point from the complete factors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not phrased as an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not phrased as an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because completeness must be independent of the chosen standard product norm. Steps 1.1 through 3.1 build the coordinatewise limit under max-norm Cauchy control, and step 5.1 transfers completeness to the 1- and 2-norms using the equivalence lemma."
+      }
+    },
+    "lem-absolutely-convergent-series-is-cauchy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-series-and-absolute-convergence-in-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space. A **sequence in $V$** is a function\n$x:\\mathbb N\\to V$, written $(x_n)_{n\\ge0}$ with $x_n:=x(n)$\n([[def-natural-numbers]]). Fix such a sequence.\n\nDefine its vector partial sums recursively by\n\n$$s_0:=0_V,\\qquad s_{m+1}:=s_m+x_m.$$\n\nWe write $s_m=\\sum_{n<m}x_n$. The **series**\n$\\sum_{n=0}^\\infty x_n$ **converges** when these partial sums converge in $V$.\nIts sum is then the limit of the partial sums.\n\nThe series is **absolutely convergent** when the scalar series\n$$\\sum_{n=0}^\\infty \\|x_n\\|$$\nconverges in the sense of [[def-series]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-real-numbers]]) and\na **sequence of reals** is a function $a : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), written $(a_k)$; recall that $\\mathbb{N}$ contains $0$.\n\n**Partial sums.** Let $(a_k)$ be a sequence of reals. Its **sequence of partial\nsums** is\n\n$$s_n \\;:=\\; \\sum_{k < n} a_k \\qquad (n \\in \\mathbb{N}),$$\n\nthe finite sum of [[def-finite-sum]]. In particular $s_0 = 0$, the empty sum, and\n$s_{n+1} = s_n + a_n$ for every $n$, those being exactly the two recursion clauses\nthat define the finite sum. Note that $s_n$ is the sum of the $n$ terms\n$a_0, \\dots, a_{n-1}$, so the index $n$ counts terms rather than naming the last\none.\n\n**Convergence, the sum, divergence.** The **series** of $(a_k)$, written\n$\\sum a_k$, **converges** when the sequence $(s_n)$ of partial sums converges\n([[def-real-limit]]), and then the **sum of the series** is\n\n$$\\sum_{k=0}^{\\infty} a_k \\;:=\\; \\lim_{n} s_n .$$\n\nThe series **diverges** when $(s_n)$ does not converge. A convergent sequence of\nreals has exactly one limit ([[lem-limit-unique]]), so the displayed symbol names\na single real number and nothing further has to be checked for it to be\nwell defined.\n\n**Series with a general starting index.** Let $m \\in \\mathbb{N}$ and let $a$ be a\nfunction on $\\{\\, k \\in \\mathbb{N} : k \\ge m \\,\\}$, which we call a **family from\n$m$** and write $(a_k)_{k \\ge m}$. The series\n\n$$\\sum_{k \\ge m} a_k$$\n\nis by definition the series of the sequence $b_j := a_{j + m}$,\n$j \\in \\mathbb{N}$, which is a genuine sequence of reals; it converges exactly\nwhen that series converges, and its sum is then written\n$\\sum_{k = m}^{\\infty} a_k$. Its partial sums are\n\n$$\\sum_{k=m}^{n-1} a_k \\;=\\; \\sum_{j < n-m} a_{m+j} \\qquad (n \\ge m),$$\n\nin the notation of [[def-finite-sum]], the value at $n = m$ being the empty sum\n$0$. A sequence on $\\mathbb{N}$ is the case $m = 0$, and the two readings of\n$\\sum a_k$ agree there, since $b_j = a_j$.\n\n**This clause is not a convenience.** Sequences in this library are functions on\n$\\mathbb{N}$ and $\\mathbb{N}$ contains $0$ ([[def-sequence]]), while many of the\nclassical series are built from expressions that are undefined at the index $0$:\n$1/k$, $1/k^{p}$ and $|a_k|^{1/k}$ all require $k \\ge 1$. Writing such a series as\n$\\sum_{k \\ge 1} a_k$ names an honest object, whereas writing it as a sequence on\n$\\mathbb{N}$ would require a value at an index where the defining expression has\nnone. Every statement on this page says which starting index it uses.\n\n**Tail series.** For $N \\in \\mathbb{N}$, the **$N$-th tail series** of\n$\\sum a_k$ is $\\sum_{k \\ge N} a_k$, that is the series of the $N$-th tail\n$a^{(N)}$ of [[def-sequence]], whose terms are $a^{(N)}_j = a_{j+N}$. The\n$0$-th tail series is the series itself.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] and [L2], for every $\\varepsilon>0$ there is $N$ such that $\\sum_{\\ell\\le n<m}\\|x_n\\|<\\varepsilon$ whenever $m>\\ell\\ge N$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For such $m>\\ell\\ge N$, the tail of the vector partial sums satisfies $s_m-s_\\ell=\\sum_{\\ell\\le n<m}x_n$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the triangle inequality to the finite sum in step 1.2 gives $\\|s_m-s_\\ell\\|\\le \\sum_{\\ell\\le n<m}\\|x_n\\|<\\varepsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since this holds for every $\\varepsilon>0$, the partial sums $(s_m)$ are Cauchy in the norm metric, which is exactly the claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a series and its tails, not an empty ambient domain.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha-contract-audit-6",
+            "reason": "The indexed tail sum runs over integers with m>ell>=N, so the proof never quantifies over an empty ambient family; the detector is reacting to sigma notation alone rather than to a genuine empty-case boundary."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero-series case, where every tail norm is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 also covers the first nontrivial one-term tail because the same tail estimate applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the equal-index case of the Cauchy condition, where the partial-sum difference is 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint condition occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof extracts only the index supplied by scalar Cauchy-ness and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma states an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This lemma states an implication, not a biconditional."
+        }
+      ]
+    },
+    "thm-banach-series-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-absolutely-convergent-series-is-cauchy",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $\\sum_{n=0}^\\infty x_n$ be an absolutely\nconvergent series in $V$. Then the partial sums form a Cauchy sequence in $V$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $V$ is Banach. If $\\sum x_n$ is absolutely convergent, [L2] makes its partial sums Cauchy, and [L1] then makes those partial sums converge in $V$. So every absolutely convergent series converges.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume [A1]. Let $(y_m)$ be a Cauchy sequence in $V$. Choose inductively a strictly increasing sequence $(n_k)$ with $\\|y_m-y_n\\|<2^{-k}$ whenever $m,n\\ge n_k$. Then $\\|y_{n_{k+1}}-y_{n_k}\\|<2^{-k}$ for every $k$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The series $\\sum_{k=0}^\\infty (y_{n_{k+1}}-y_{n_k})$ is absolutely convergent because $\\sum 2^{-k}$ converges and each term has norm at most $2^{-k}$. By [A1] it therefore converges to some $z\\in V$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Its partial sums are $y_{n_m}-y_{n_0}$, so the subsequence $(y_{n_m})$ converges to $y_{n_0}+z$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Given $\\varepsilon>0$, choose $K$ so that $\\|y_m-y_n\\|<\\varepsilon/2$ for $m,n\\ge K$, and choose $m$ with $n_m\\ge K$ and $\\|y_{n_m}-(y_{n_0}+z)\\|<\\varepsilon/2$. Then for every $n\\ge K$, $\\|y_n-(y_{n_0}+z)\\|\\le \\|y_n-y_{n_m}\\|+\\|y_{n_m}-(y_{n_0}+z)\\|<\\varepsilon$. So $(y_n)$ converges, and $V$ is complete.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 1.1 proves $(1)\\Rightarrow(2)$ and steps 1.2 through 4.1 prove $(2)\\Rightarrow(1)$, so the two conditions are equivalent.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about a normed space and its series criterion, not an empty-set construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the zero series in the forward direction, and step 3.1 covers the zero-space completeness case in the reverse direction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton cardinality or value-one branch is isolated in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 covers eventually constant Cauchy sequences when proving completeness from the series condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint variable in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the rapidly Cauchy subsequence used in the reverse implication."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that Banach implies every absolutely convergent series converges."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves completeness from the hypothesis that every absolutely convergent series converges."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it is a biconditional between Banach completeness and absolute-convergence completeness. Step 1.1 handles the forward direction, steps 1.2 through 4.1 build a rapidly Cauchy subsequence and telescope it into a convergent series, and step 5.1 closes the iff."
+      }
+    },
+    "lem-completion-operations-are-well-defined": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-metric-completion-exists",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\\mathcal{C}$ be the\nset of all Cauchy sequences in $X$ ([[def-cauchy-in-metric]]). Then:\n\n1. For all $x = (x_n)$ and $y = (y_n)$ in $\\mathcal{C}$ the real sequence\n   $\\big(d(x_n,y_n)\\big)_n$ converges, so\n   $$\\rho(x,y) \\;:=\\; \\lim_{n} d(x_n,y_n)$$\n   is a single well-determined real ([[thm-cauchy-criterion-via-lub]],\n   [[lem-limit-unique]]).\n2. The relation $x \\sim y :\\Longleftrightarrow \\rho(x,y) = 0$ is an equivalence\n   relation on $\\mathcal{C}$. Write $\\widehat{X} := \\mathcal{C}/\\!\\sim$ for the\n   set of its classes and $[x]$ for the class of $x$.\n3. $\\widehat{d}\\big([x],[y]\\big) := \\rho(x,y)$ does not depend on the chosen\n   representatives, and $\\widehat{d}$ is a metric on $\\widehat{X}$.\n4. The map $\\iota : X \\to \\widehat{X}$ sending $p$ to the class of the constant\n   sequence at $p$ is an isometric embedding with dense image\n   ([[def-isometry-and-metric-embedding]],\n   [[def-metric-interior-closure-boundary]]).\n5. $(\\widehat{X}, \\widehat{d})$ is complete.\n\nConsequently $\\big((\\widehat{X},\\widehat{d}), \\iota\\big)$ is a completion of\n$(X,d)$ ([[def-metric-completion]]), and **every metric space has a\ncompletion**.\n\n**The notation is kept honest.** A Cauchy sequence in $X$ need not converge in\n$X$, so no symbol $\\lim_n x_n$ appears anywhere below; the only limits taken are\nlimits of *real* sequences, and each is written only after its existence has been\nproved. The equivalence relation is defined and verified here rather than cited, as was\ndone for [[def-integers]], so that the construction is self-contained and its\ntransitivity argument is visible at the point of use.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-metric-completion",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]). A **completion** of $(X,d)$\nis a pair $\\big((\\widehat{X}, \\widehat{d}),\\, \\iota\\big)$ in which\n\n- $(\\widehat{X}, \\widehat{d})$ is a **complete** metric space\n  ([[def-complete-metric-space]]);\n- $\\iota : X \\to \\widehat{X}$ is an **isometric embedding**, that is\n  $\\widehat{d}(\\iota(x), \\iota(y)) = d(x,y)$ for all $x,y \\in X$\n  ([[def-isometry-and-metric-embedding]]);\n- $\\iota[X]$ is **dense** in $\\widehat{X}$, that is\n  $\\overline{\\iota[X]} = \\widehat{X}$\n  ([[def-metric-interior-closure-boundary]]).\n\n**The embedding is part of the data, not an afterthought.** A completion is a\npair, and two completions of the same space are compared through their embeddings\n([[thm-metric-completion-unique]]); the underlying complete space alone carries\nno information about where $X$ sits inside it. This is the same discipline as for\nthe metric itself: a metric space is a pair, not a set.\n\n**$\\iota$ identifies $X$ with a subspace of $\\widehat{X}$, metric and topology\nincluded.** An isometric embedding is injective, is an isometry onto its image,\nand carries the metric topology of $X$ onto the subspace topology of $\\iota[X]$\n([[lem-isometry-is-an-embedding]]). So \"$X$ is a dense subspace of a complete\nspace\" is an accurate reading of the definition, and the pedantic version with\n$\\iota$ written out is used only where two completions have to be compared.\n\n**Existence and uniqueness are theorems, not part of the definition.** That every\nmetric space has a completion is [[thm-metric-completion-exists]]; that any two\nare isometric by a unique isometry commuting with the embeddings is\n[[thm-metric-completion-unique]]. Until the first of those is proved, the phrase\n*the* completion is not licensed, and it is not used here.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. This is the same convention [[rem-metric-axiom-conventions]]\nrecords for metrics.\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-reverse-triangle-inequality-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space. For all $x,y\\in V$,\n$$\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|.$$\nIn particular, the norm map is $1$-Lipschitz for the norm metric.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x_l| < \\hat\\varepsilon$ for all $k, l \\ge K$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-limit-unique",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let $x, y \\in\n\\mathbb{R}$. If $(x_k)$ converges to $x$ and $(x_k)$ converges to $y$\n([[def-real-limit]]), then $x = y$. A sequence therefore has at most one limit,\nand when a limit exists it may be denoted $\\lim_{k} x_k$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-limit-preserves-order",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]). If $x_k \\le y_k$ eventually, that\nis for all $k$ from some index on, then\n\n$$\\lim_{k} x_k \\;\\le\\; \\lim_{k} y_k .$$\n\nIn particular, if $x_k \\ge 0$ eventually then $\\lim_k x_k \\ge 0$, and if\n$a \\le x_k \\le b$ eventually then $a \\le \\lim_k x_k \\le b$.\n\nThe conclusion is **not** strict, and cannot be made strict; see the remarks\nbelow and the false statement at the end of this page.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Termwise sums and scalar multiples of Cauchy sequences are again Cauchy: the triangle inequality gives $\\|(x_n+y_n)-(x_m+y_m)\\|\\le \\|x_n-x_m\\|+\\|y_n-y_m\\|$, and absolute homogeneity gives $\\|\\lambda x_n-\\lambda x_m\\|=|\\lambda|\\,\\|x_n-x_m\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Likewise $\\|\\lambda x_n-\\lambda x'_n\\|=|\\lambda|\\,\\|x_n-x'_n\\|$ for every $n$, so [L1] and [L3] give $\\rho((\\lambda x_n),(\\lambda x'_n))=0$. Hence scalar multiplication on classes is representative-independent.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Because $(x_n)$ is Cauchy, the reverse triangle inequality in [L2] gives $\\bigl|\\|x_n\\|-\\|x_m\\|\\bigr|\\le \\|x_n-x_m\\|$; so the real sequence $(\\|x_n\\|)$ is Cauchy and therefore convergent by [L3].",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $[x_n]=[x'_n]$ and $[y_n]=[y'_n]$, then $\\|(x_n+y_n)-(x'_n+y'_n)\\|\\le \\|x_n-x'_n\\|+\\|y_n-y'_n\\|$ for every $n$; passing to limits and using [L1] and [L3] gives $\\rho((x_n+y_n),(x'_n+y'_n))=0$. So addition on classes is representative-independent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $[x_n]=[x'_n]$, then $\\bigl|\\|x_n\\|-\\|x'_n\\|\\bigr|\\le \\|x_n-x'_n\\|$ for every $n$; the right-hand side tends to $0$ by [L1], so the two real norm sequences have the same limit by [L3]. Thus $\\|[x_n]\\|:=\\lim_n\\|x_n\\|$ is well defined.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item concerns equivalence classes of Cauchy sequences, not an empty family case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the zero class, whose norm is the limit of the constant zero sequence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or distinguished value-one parameter appears."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 covers constant representative sequences, where the descended operations agree with the original ones."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The representatives are given in the statement of the lemma; the proof descends their operations without choosing new ones."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is about well-definedness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is about well-definedness, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because addition, scalar multiplication, and the norm must descend to Cauchy classes. Steps 1.1 through 1.3 show the operations preserve Cauchy sequences and the norm sequence converges, while steps 2.1 and 3.1 prove representative independence."
+      }
+    },
+    "thm-metric-completion-carries-a-unique-banach-space-structure": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-metric-completion-exists",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\\mathcal{C}$ be the\nset of all Cauchy sequences in $X$ ([[def-cauchy-in-metric]]). Then:\n\n1. For all $x = (x_n)$ and $y = (y_n)$ in $\\mathcal{C}$ the real sequence\n   $\\big(d(x_n,y_n)\\big)_n$ converges, so\n   $$\\rho(x,y) \\;:=\\; \\lim_{n} d(x_n,y_n)$$\n   is a single well-determined real ([[thm-cauchy-criterion-via-lub]],\n   [[lem-limit-unique]]).\n2. The relation $x \\sim y :\\Longleftrightarrow \\rho(x,y) = 0$ is an equivalence\n   relation on $\\mathcal{C}$. Write $\\widehat{X} := \\mathcal{C}/\\!\\sim$ for the\n   set of its classes and $[x]$ for the class of $x$.\n3. $\\widehat{d}\\big([x],[y]\\big) := \\rho(x,y)$ does not depend on the chosen\n   representatives, and $\\widehat{d}$ is a metric on $\\widehat{X}$.\n4. The map $\\iota : X \\to \\widehat{X}$ sending $p$ to the class of the constant\n   sequence at $p$ is an isometric embedding with dense image\n   ([[def-isometry-and-metric-embedding]],\n   [[def-metric-interior-closure-boundary]]).\n5. $(\\widehat{X}, \\widehat{d})$ is complete.\n\nConsequently $\\big((\\widehat{X},\\widehat{d}), \\iota\\big)$ is a completion of\n$(X,d)$ ([[def-metric-completion]]), and **every metric space has a\ncompletion**.\n\n**The notation is kept honest.** A Cauchy sequence in $X$ need not converge in\n$X$, so no symbol $\\lim_n x_n$ appears anywhere below; the only limits taken are\nlimits of *real* sequences, and each is written only after its existence has been\nproved. The equivalence relation is defined and verified here rather than cited, as was\ndone for [[def-integers]], so that the construction is self-contained and its\ntransitivity argument is visible at the point of use.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-completion-operations-are-well-defined",
+          "source_section": "Statement",
+          "quote": "In the published Cauchy-sequence model of the metric completion of a normed\nspace, if $[x_n]$ and $[y_n]$ denote equivalence classes of Cauchy sequences,\nthen\n\n$$[x_n]+[y_n]:=[x_n+y_n],\\qquad \\lambda[x_n]:=[\\lambda x_n],\\qquad \\|[x_n]\\|:=\\lim_n \\|x_n\\|$$\n\nare well defined.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a normed space. A **completion of $X$** is a pair\n$\\bigl(\\widehat X,\\iota\\bigr)$ such that\n\n- $\\widehat X$ is a Banach space ([[def-banach-space]]);\n- $\\iota:X\\to \\widehat X$ is a linear isometry\n  ([[def-linear-isometry-and-isometric-isomorphism]]);\n- $\\iota[X]$ is dense in $\\widehat X$\n  ([[def-metric-interior-closure-boundary]]).\n\nEquivalently, a completion of a normed space is a completion of its norm metric\n([[def-metric-completion]]) together with compatible linear structure on the\ncomplete space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-vector-operations-are-continuous-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$. Then\n\n$$+:V\\times V\\to V,\\qquad (x,y)\\mapsto x+y,$$\n\nand\n\n$$m:\\mathbb{K}\\times V\\to V,\\qquad (\\lambda,x)\\mapsto \\lambda x,$$\n\nare continuous for the product topology on the domain and the norm topology on\nthe target.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the Cauchy classes carry termwise addition and scalar multiplication, and each class has a well-defined norm $\\|[x_n]\\|:=\\lim_n\\|x_n\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On constant sequences these operations agree with those of $X$, and $\\|i(x)\\|=\\|x\\|$ by definition, so $i$ is a linear isometry.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For classes $[x_n]$ and $[y_n]$, the distance of the published metric completion is $\\lim_n\\|x_n-y_n\\|$, while the new difference class is $[x_n-y_n]$; therefore the completion metric is exactly the metric induced by the norm from step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because the underlying metric space is complete by [L1], step 2.2 makes $\\widehat X$ complete for its new norm metric. So $\\widehat X$ is Banach and $(\\widehat X,i)$ is a completion of $X$ in the sense of [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Suppose a second Banach-space structure on the same underlying set induces the published completion metric and also makes $i$ a dense linear isometry. Its addition and scalar multiplication are continuous by [L4], and they agree with the operations of step 1.1 on the dense subset $i[X]\\times i[X]$ and on $\\mathbb K\\times i[X]$; therefore they agree everywhere.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The norm is then forced as well, because in any compatible normed structure $\\|u\\|$ equals the metric distance from $u$ to $0$. So the compatible Banach-space structure is unique.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is about the completion of a normed space, not an empty-set statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 covers the zero-space case, where the completion is already complete and the induced norm is trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 discharges the uniqueness branch by proving there is exactly one compatible norm structure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes constant sequences from the dense copy, where the new operations coincide with the old ones."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint enters the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof equips the already constructed metric completion and does not make a fresh arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is not written as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is not written as a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because uniqueness is only correct for structures compatible with the published metric. The current statement now includes that metric-compatibility hypothesis, step 2.2 identifies the induced norm metric with the published completion metric, and steps 3.2 and 4.1 force any other compatible Banach structure to share the same operations and norm."
+      }
+    },
+    "thm-completion-universal-property-for-bounded-linear-maps": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space. The published metric completion of the norm metric on\n$X$ admits a unique vector-space structure and norm whose induced metric is the\npublished completion metric and such that the constant sequence embedding\n$i:X\\to \\widehat X$ is a dense linear isometry. With this structure,\n$\\widehat X$ is a Banach space.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a normed space. A **completion of $X$** is a pair\n$\\bigl(\\widehat X,\\iota\\bigr)$ such that\n\n- $\\widehat X$ is a Banach space ([[def-banach-space]]);\n- $\\iota:X\\to \\widehat X$ is a linear isometry\n  ([[def-linear-isometry-and-isometric-isomorphism]]);\n- $\\iota[X]$ is dense in $\\widehat X$\n  ([[def-metric-interior-closure-boundary]]).\n\nEquivalently, a completion of a normed space is a completion of its norm metric\n([[def-metric-completion]]) together with compatible linear structure on the\ncomplete space.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).\n\n- $f$ is **Lipschitz** with **constant** $L$, where $L \\in \\mathbb{R}$ and\n  $L \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; L \\, d_X(x,x') \\qquad \\text{for all } x, x' \\in X .$$\n  $f$ is *Lipschitz* if it is Lipschitz with some such constant.\n- Let $\\alpha \\in \\mathbb{Q}$ with $0 < \\alpha \\le 1$ ([[def-rat-order]]). $f$ is\n  **$\\alpha$-Hölder** with **constant** $C$, where $C \\in \\mathbb{R}$ and\n  $C \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; C \\, d_X(x,x')^{\\alpha} \\qquad \\text{for all } x, x' \\in X ,$$\n  the power being the rational power of a nonnegative base\n  ([[def-rational-power]]). $f$ is *$\\alpha$-Hölder* if it is so with some such\n  constant, and *Hölder* if it is $\\alpha$-Hölder for some rational\n  $\\alpha \\in (0,1]$.\n- $f$ is a **contraction** with constant $q$ if it is Lipschitz with constant $q$\n  and $0 \\le q < 1$. The number $q$ is then called a **contraction constant** for\n  $f$.\n\n**The power $d_X(x,x')^{\\alpha}$ is defined at every pair, including $x = x'$.**\nThe base $d_X(x,x')$ is a nonnegative real, and [[def-rational-power]] defines\n$a^{\\alpha}$ for every $a > 0$ and, by its supplementary clause, sets\n$0^{\\alpha} = 0$ for every rational $\\alpha > 0$. Since $\\alpha > 0$ is required\nhere, the displayed inequality at $x = x'$ reads $0 \\le C \\cdot 0$, which holds;\nso no separate clause and no restriction to $x \\ne x'$ is needed. Note that this\ndoes not by itself explain the strict inequality $\\alpha>0$: if one extended the\nformula to $\\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the\nequal-point inequality would still be the automatic $0\\le C$. Globally, however,\nthat extension would reduce to the bounded-diameter condition\n$d_Y(f(x),f(x'))\\le C$, outside the standard Hölder range adopted here.\n\n**Why the exponent is rational on this page and why it is at most $1$.** At this\npoint in the reading order only rational powers are available\n([[def-rational-power]]), so $\\alpha$ ranges over the rationals. The upper\nbound $\\alpha \\le 1$ is the standard convention, and it is where the notion is\nuseful: the classical theory reserves the name for $\\alpha \\in (0,1]$, and\nnothing in this library uses an exponent outside that range. No claim is made\nhere about what an exponent $\\alpha > 1$ would do.\n\n**Constants are not unique and are not part of the data.** If $f$ is Lipschitz\nwith constant $L$ it is Lipschitz with every constant $L' \\ge L$, and likewise\nfor Hölder constants; the adjectives above are existential statements. A\n*contraction*, by contrast, requires a constant strictly below $1$, and that is a\nreal restriction: exhibiting the constant is part of exhibiting a contraction, and\na map that shrinks every distance without admitting one uniform constant is not a\ncontraction here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-metric-regularity-hierarchy",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function, with the three regularity conditions as in\n[[def-lipschitz-holder-contraction]]. Then:\n\n1. If $f$ is a contraction, it is Lipschitz.\n2. If $f$ is Lipschitz, it is uniformly continuous\n   ([[def-metric-uniform-continuity]]).\n3. If $f$ is uniformly continuous, it is continuous\n   ([[def-metric-continuity]]).\n4. If $f$ is $\\alpha$-Hölder for some rational $\\alpha$ with $0 < \\alpha \\le 1$,\n   it is uniformly continuous.\n5. Suppose $X$ is nonempty and bounded, and put\n   $R := \\operatorname{diam}(X) + 1$, a real with $R > 0$\n   ([[def-metric-bounded-diameter]]). If $f$ is Lipschitz with constant $L$, then\n   for **every** rational $\\alpha$ with $0 < \\alpha \\le 1$ the map $f$ is\n   $\\alpha$-Hölder with constant $L\\,R^{\\,1-\\alpha}$.\n\n**Claim 5 carries its boundedness hypothesis for a reason, and no unconditional\n\"Lipschitz implies Hölder\" is asserted anywhere here.** On an unbounded space the\nimplication is false; the witness and its verification are in the first remark\nbelow.\n\n**Strictness is not claimed.** The five implications are asserted and nothing\nmore; that none of them reverses is witnessed elsewhere, and those witnesses are\nnot prerequisites of this theorem. See the second remark.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-uniformly-continuous-extension-from-dense",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a metric space ([[def-metric-space]]), let $A \\subseteq X$ be\ndense in $X$ ([[def-metric-interior-closure-boundary]]) and carry the subspace\nmetric ([[def-isometry-and-metric-embedding]]), let $(Y,d_Y)$ be a **complete**\nmetric space ([[def-complete-metric-space]]), and let $f : A \\to Y$ be uniformly\ncontinuous ([[def-metric-uniform-continuity]]). Then:\n\n1. There is a uniformly continuous $g : X \\to Y$ with $g(a) = f(a)$ for every\n   $a \\in A$.\n2. $g$ is the **only** continuous map $X \\to Y$ extending $f$\n   ([[def-metric-continuity]]).\n\nThe map $g$ is constructed explicitly below, as the unique point common to the\nclosures of the images of the shrinking balls around $x$; no value of $g$ is\nselected, each is determined.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-vector-operations-are-continuous-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space over $\\mathbb{R}$ or $\\mathbb{C}$. Then\n\n$$+:V\\times V\\to V,\\qquad (x,y)\\mapsto x+y,$$\n\nand\n\n$$m:\\mathbb{K}\\times V\\to V,\\qquad (\\lambda,x)\\mapsto \\lambda x,$$\n\nare continuous for the product topology on the domain and the norm topology on\nthe target.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x,y\\in X$, linearity gives $Tx-Ty=T(x-y)$, so the bound in [L2] yields $\\|Tx-Ty\\|\\le C\\|x-y\\|$. Thus $T$ is Lipschitz and uniformly continuous.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $S:i[X]\\to Y$ by $S(i(x)):=T(x)$. This is well defined because $i$ is injective as a linear isometry, and $S$ is uniformly continuous with the same constant $C$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $i[X]$ is dense in the Banach space $\\widehat X$ and $Y$ is complete, [L3] gives a unique continuous map $\\widehat T:\\widehat X\\to Y$ with $\\widehat T\\!\\restriction_{\\,i[X]}=S$, equivalently $\\widehat T\\circ i=T$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $u,v\\in\\widehat X$. Choose sequences $i(x_n)\\to u$ and $i(y_n)\\to v$ from the dense copy. By [L4], $i(x_n+y_n)=i(x_n)+i(y_n)\\to u+v$ in $\\widehat X$, so continuity of $\\widehat T$ gives $$\\widehat T(u+v)=\\lim_n \\widehat T(i(x_n+y_n))=\\lim_n T(x_n+y_n)=\\lim_n\\bigl(Tx_n+Ty_n\\bigr).$$ Using linearity of $T$ and continuity of addition in $Y$ from [L4], the right-hand side is $$\\lim_n Tx_n+\\lim_n Ty_n=\\widehat T(u)+\\widehat T(v).$$ Hence $\\widehat T(u+v)=\\widehat T(u)+\\widehat T(v)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L1",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For $u\\in\\widehat X$, choose a sequence $i(x_n)\\to u$ from the dense copy. Continuity gives $\\widehat T(u)=\\lim_n T(x_n)$, and step 1.1 yields $\\|T(x_n)\\|\\le C\\|x_n\\|=C\\|i(x_n)\\|$ for every $n$; passing to the limit gives $\\|\\widehat T(u)\\|\\le C\\|u\\|$. So $\\widehat T$ is bounded with the same constant.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $\\lambda$ be a scalar and let $u\\in\\widehat X$, and choose a sequence $i(x_n)\\to u$ from the dense copy. By [L4], $i(\\lambda x_n)=\\lambda i(x_n)\\to \\lambda u$ in $\\widehat X$, so continuity of $\\widehat T$ gives $$\\widehat T(\\lambda u)=\\lim_n \\widehat T(i(\\lambda x_n))=\\lim_n T(\\lambda x_n)=\\lim_n \\lambda T(x_n)=\\lambda \\lim_n T(x_n)=\\lambda\\widehat T(u).$$ Thus $\\widehat T$ is homogeneous, and with step 4.1 it is linear.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "L1",
+            "L4",
+            "construct",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The continuity extension in step 3.1 was unique, so no second bounded linear map can also extend $T$. Therefore $\\widehat T$ is the unique bounded linear extension of $T$ across the completion.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is about extending a bounded linear map, not an empty-set or empty-family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the zero-map and zero-vector cases under the same bound-preservation argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 proves uniqueness of the extension, so exactly one extension survives."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the trivial-domain and eventually constant approximation cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 4.1, 4.2, and 5.1 choose dense approximating sequences in the completion to prove additivity, preserve the bound, and prove homogeneity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-uniqueness statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-uniqueness statement, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "Critical because linearity on arbitrary completion points is the risk. Step 3.1 gets the unique continuous extension, steps 4.1 and 5.1 now prove additivity and homogeneity via dense approximating sequences plus continuity of vector operations, and step 6.1 closes uniqueness."
+      }
+    },
+    "cor-normed-space-completions-are-uniquely-linearly-isometric": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-metric-completion-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]); completions of it exist\n([[thm-metric-completion-exists]], [[def-metric-completion]]). Then:\n\n1. **Universal property.** Let $\\big((\\widehat{X},\\widehat{d}), \\iota\\big)$ be a\n   completion of $(X,d)$, let $(Z,d_Z)$ be a complete metric space\n   ([[def-complete-metric-space]]) and let $f : X \\to Z$ be uniformly continuous\n   ([[def-metric-uniform-continuity]]). Then there is exactly one continuous\n   $F : \\widehat{X} \\to Z$ with $F \\circ \\iota = f$, and that $F$ is uniformly\n   continuous.\n2. **Uniqueness of the completion.** Let\n   $\\big((\\widehat{X}_1,\\widehat{d}_1), \\iota_1\\big)$ and\n   $\\big((\\widehat{X}_2,\\widehat{d}_2), \\iota_2\\big)$ be completions of $(X,d)$.\n   Then there is exactly one continuous\n   $\\varphi : \\widehat{X}_1 \\to \\widehat{X}_2$ with\n   $\\varphi \\circ \\iota_1 = \\iota_2$, and that $\\varphi$ is an isometry\n   ([[def-isometry-and-metric-embedding]]).\n\nSo a completion is determined by $(X,d)$ up to a unique isometry compatible with\nthe embeddings, which is what licenses the phrase *the* completion from here on.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-completion-universal-property-for-bounded-linear-maps",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, let $(\\widehat X,i)$ be its completion, and let $Y$\nbe a Banach space. Suppose $T:X\\to Y$ is linear and bounded in the concrete\nsense that some constant $C\\ge 0$ satisfies\n$$\\|Tx\\|\\le C\\|x\\|\\qquad (x\\in X).$$\nThen there is a unique bounded linear map $\\widehat T:\\widehat X\\to Y$ with\n$$\\widehat T\\circ i=T,$$\nand the same constant $C$ satisfies\n$$\\|\\widehat T u\\|\\le C\\|u\\|\\qquad (u\\in \\widehat X).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-linear-isometry-and-isometric-isomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be normed spaces over the same scalar field.\n\nA linear map $T:V\\to W$ ([[def-linear-map]]) is a **linear isometry** if\n$$\\|Tx\\|=\\|x\\| \\qquad \\text{for every } x\\in V.$$\n\nA linear isometry is automatically an isometric embedding for the induced\nmetrics, because\n$$\\|T(x)-T(y)\\|=\\|T(x-y)\\|=\\|x-y\\|.$$\n\nA **linear isometric isomorphism** is a linear isometry that is bijective\n([[def-injection-surjection-bijection]]). Equivalently, it is a bijective\nisometry between the underlying metric spaces whose map is linear.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a normed space. A **completion of $X$** is a pair\n$\\bigl(\\widehat X,\\iota\\bigr)$ such that\n\n- $\\widehat X$ is a Banach space ([[def-banach-space]]);\n- $\\iota:X\\to \\widehat X$ is a linear isometry\n  ([[def-linear-isometry-and-isometric-isomorphism]]);\n- $\\iota[X]$ is dense in $\\widehat X$\n  ([[def-metric-interior-closure-boundary]]).\n\nEquivalently, a completion of a normed space is a completion of its norm metric\n([[def-metric-completion]]) together with compatible linear structure on the\ncomplete space.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], there is a unique isometry $U:Y\\to Z$ with $U\\circ j=k$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the dense subspace $j[X]\\subseteq Y$, the map $j(x)\\mapsto k(x)$ is linear and norm-preserving. Applying [L2] to this dense linear isometry extends it to a bounded linear map $\\widetilde U:Y\\to Z$ with $\\widetilde U\\circ j=k$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both $U$ and $\\widetilde U$ are continuous maps $Y\\to Z$ extending the same map on $j[X]$, so the uniqueness in step 1.1 forces $U=\\widetilde U$. Hence $U$ is linear.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $U$ is already an isometry by step 1.1, it is a linear isometric isomorphism. Uniqueness of such a map is again the uniqueness from [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary compares two completions of a normed space, not an empty-set construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the zero-space completion, where the unique isometry is the identity on the one-point space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the metric uniqueness theorem to show there is exactly one compatible isometry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 also covers the case where the original space was already complete, so both completions are the same dense copy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint data appear."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses uniqueness theorems and a fixed dense-copy map, without arbitrary selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because it upgrades metric uniqueness to a unique linear isometry. Step 1.2 extends the dense-copy isometry by the universal property, step 2.1 identifies it with the unique metric isometry, and step 3.1 concludes the map is the unique linear isometric isomorphism."
+      }
+    },
+    "ex-ell-infinity-is-a-banach-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed coordinate $n$, the scalar sequence $(x^{(m)}_n)_m$ is Cauchy because $|x^{(m)}_n-x^{(\\ell)}_n|\\le \\|x^{(m)}-x^{(\\ell)}\\|_\\infty$. Let $x_n:=\\lim_m x^{(m)}_n$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $(x^{(m)})$ is Cauchy, choose $M$ with $\\|x^{(m)}-x^{(\\ell)}\\|_\\infty<1$ for $m,\\ell\\ge M$. Fixing $\\ell=M$ and letting $m\\to\\infty$ coordinatewise gives $|x_n|\\le \\|x^{(M)}\\|_\\infty+1$ for every $n$, so $x=(x_n)$ is bounded and lies in $\\ell^\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Given $\\varepsilon>0$, choose $M$ with $\\|x^{(m)}-x^{(\\ell)}\\|_\\infty<\\varepsilon$ for $m,\\ell\\ge M$. Letting $\\ell\\to\\infty$ coordinatewise yields $|x^{(m)}_n-x_n|\\le \\varepsilon$ for every $n$, so $\\|x^{(m)}-x\\|_\\infty\\le \\varepsilon$ for $m\\ge M$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus every supremum-norm Cauchy sequence in $\\ell^\\infty$ converges in $\\ell^\\infty$, so $\\ell^\\infty$ is Banach by [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a completeness claim about a concrete space, not an empty-set claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero sequence and more generally bounded limits with zero coordinates."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No special singleton or value-one branch is isolated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes eventually constant Cauchy sequences, which the same supremum estimate sends to their constant limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint condition occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the candidate limit by taking each coordinatewise scalar limit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In the bounded-sequence example $\\ell^\\infty$, the witness records one Banach space rather than an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In the bounded-sequence example $\\ell^\\infty$, the witness records one Banach space rather than an iff statement."
+        }
+      ]
+    },
+    "ex-c0-is-a-banach-space": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-ell-infinity-is-a-banach-space",
+          "source_section": "Example",
+          "quote": "Let $\\ell^\\infty$ be the space of bounded scalar sequences\n$x=(x_n)_{n\\ge 0}$ with norm\n$$\\|x\\|_\\infty:=\\sup_{n\\ge 0}|x_n|.$$\nThen $\\ell^\\infty$ is a Banach space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-closed-subspace-of-a-banach-space-is-banach",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a Banach space and let $W\\subseteq V$ be a closed linear subspace,\nequipped with the restricted norm. Then $W$ is a Banach space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\varepsilon>0$ and choose $m$ with $\\|x-x^{(m)}\\|_\\infty<\\varepsilon/2$. Because $x^{(m)}\\in c_0$, there is $N$ with $|x^{(m)}_n|<\\varepsilon/2$ for all $n\\ge N$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n\\ge N$, $|x_n|\\le |x_n-x^{(m)}_n|+|x^{(m)}_n|<\\varepsilon/2+\\varepsilon/2=\\varepsilon$. Hence $x_n\\to 0$, so $x\\in c_0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that $c_0$ is closed in $\\ell^\\infty$. Since $\\ell^\\infty$ is Banach by [L1], [L2] makes $c_0$ Banach.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is about the space c_0, not an empty-set or empty-family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the defining tail-to-zero condition for the limit sequence itself."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or value-one boundary case is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero subspace behavior and eventually constant approximating sequences."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses one approximant and then one tail index from the defining convergence statements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In $c_0$ is Banach for the supremum norm, the example records one witness rather than a biconditional statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In $c_0$ is Banach for the supremum norm, the example records one witness rather than a biconditional statement."
+        }
+      ]
+    },
+    "ex-cb-of-a-space-is-banach": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-uniform-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{T}_X)$ be a topological space ([[def-topological-space]]) and\nlet $(Y,d)$ be a metric space ([[def-metric-space]]) carrying its metric\ntopology. Then:\n\n1. **The $\\varepsilon/3$ criterion.** Let $f : X \\to Y$ be a function such that\n   for every real $\\varepsilon > 0$ there is a **continuous** $g : X \\to Y$ with\n   $$d\\big(f(x), g(x)\\big) < \\varepsilon \\qquad \\text{for every } x \\in X .$$\n   Then $f$ is continuous ([[def-continuous-map-top]]).\n2. **Uniform limit theorem.** If $X$ is nonempty, $(f_k)$ is a sequence of\n   continuous maps $X \\to Y$ and $(f_k)$ converges uniformly to $f$\n   ([[def-topology-of-uniform-convergence]]), then $f$ is continuous.\n3. **Closedness.** If $X$ is nonempty, $C(X,Y)$ is a closed subset of\n   $(Y^{X}, \\bar\\rho)$, the uniform metric being that of\n   [[lem-uniform-metric-on-a-function-space]].\n\n**The domain is an arbitrary topological space**, not a metric space: nothing in\nthe argument uses a distance in $X$. Only the target carries a metric, and it\ncarries one because the hypothesis of claim 1 is a statement about distances in\n$Y$.\n\n**No choice principle is used, and claim 3 in particular is choice free.** The\nproof of claim 3 instantiates *one* continuous $g$ for each $\\varepsilon$ and uses\nit immediately, rather than manufacturing a sequence of them; a sequential\nargument through [[thm-metric-sequential-closure]] would spend the Axiom of\nCountable Choice, and that route is deliberately not taken.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $x\\in X$, the scalar sequence $(f_m(x))_m$ is Cauchy because $|f_m(x)-f_\\ell(x)|\\le \\|f_m-f_\\ell\\|_\\infty$. Define $f(x):=\\lim_m f_m(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $M$ with $\\|f_m-f_\\ell\\|_\\infty<1$ for $m,\\ell\\ge M$. Fixing $\\ell=M$ and letting $m\\to\\infty$ pointwise gives $|f(x)|\\le \\|f_M\\|_\\infty+1$ for every $x$, so $f$ is bounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Given $\\varepsilon>0$, choose $M$ with $\\|f_m-f_\\ell\\|_\\infty<\\varepsilon$ for $m,\\ell\\ge M$. Letting $\\ell\\to\\infty$ pointwise yields $\\|f_m-f\\|_\\infty\\le \\varepsilon$ for $m\\ge M$. Thus $f_m\\to f$ uniformly, and [L1] makes $f$ continuous.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "So every supremum-norm Cauchy sequence in $C_b(X)$ converges in $C_b(X)$, and [L2] shows that $C_b(X)$ is Banach.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns a function space on a fixed topological space, not an empty-set theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero function and the case of a Cauchy sequence converging uniformly to 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or distinguished value-one branch occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers eventually constant Cauchy sequences and the corresponding constant limit function."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint condition in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the candidate limit function pointwise from the scalar limits."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In the bounded-function-space example $C_b(X)$, the witness records one Banach space rather than an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In the bounded-function-space example $C_b(X)$, the witness records one Banach space rather than an iff statement."
+        }
+      ]
+    },
+    "ex-c-of-a-compact-space-is-banach": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-cb-of-a-space-is-banach",
+          "source_section": "Example",
+          "quote": "Let $X$ be a nonempty topological space, and let $C_b(X)$ be the space of bounded\ncontinuous scalar-valued functions on $X$ with norm\n$$\\|f\\|_\\infty:=\\sup_{x\\in X}|f(x)|.$$\nThen $C_b(X)$ is a Banach space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $f\\in C(K)$, [L2] makes $f$ bounded. Hence $C(K)=C_b(K)$ as sets and the supremum norms agree.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $K$ is nonempty and compact, [L1] makes $C_b(K)$ Banach for the supremum norm. By step 1.1, this is exactly $C(K)$ with the same norm.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes the compact metric space is nonempty, because the supremum norm is only written for that case on this page."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero function in the nonempty compact case through boundedness, and step 2.1 then imports completeness from the bounded-function-space example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a one-point compact space, where every continuous function is bounded, and step 2.1 then applies the bounded-function-space example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the minimal nonempty compact case, such as a one-point space, by reducing directly to boundedness of every continuous function."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is about compact metric spaces, not intervals with endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a direct reduction to the bounded-function-space example, with no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In $C(K)$ is Banach when $K$ is compact metric, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In $C(K)$ is Banach when $K$ is compact metric, the example gives a single witness rather than a biconditional claim."
+        }
+      ]
+    },
+    "ex-finite-sequences-c00-with-standard-norms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-c0-is-a-banach-space",
+          "source_section": "Example",
+          "quote": "Let\n$$c_0:=\\{x=(x_n)_{n\\ge 0}\\in \\ell^\\infty : x_n\\to 0\\}.$$\nWith the supremum norm inherited from $\\ell^\\infty$, the space $c_0$ is Banach.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-normed-space-completions-are-uniquely-linearly-isometric",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, and let $(Y,j)$ and $(Z,k)$ be two completions of\n$X$. Then there is a unique linear isometric isomorphism $U:Y\\to Z$ such that\n$$U\\circ j=k.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "rem-lp-spaces-are-banach-spaces",
+          "source_section": "Remark",
+          "quote": "The measure-theory page already proves the classical completeness theorem:\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nbuilds the normed spaces $L^p(\\mu)$, and\n[[thm-riesz-fischer-completeness-of-l-p]] proves they are complete. Therefore\neach $L^p(\\mu)$ with $1\\le p\\le \\infty$ is a Banach space in the sense of\n[[def-banach-space]].\n\nThe published [[rem-lp-completeness-and-the-banach-property]] records this as\nthe agreement seam between the measure-theory track and the functional-analysis\ntrack. Nothing on the present page repeats the quotient construction or the\nRiesz-Fischer proof.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $x\\in c_0$, then $x^{(N)}\\in c_{00}$ and $\\|x-x^{(N)}\\|_\\infty=\\sup_{n>N}|x_n|\\to 0$. So $c_{00}$ is dense in $c_0$ for the supremum norm.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $1\\le p<\\infty$ and $x\\in \\ell^p$, the truncations satisfy $\\|x-x^{(N)}\\|_p^p=\\sum_{n>N}|x_n|^p\\to 0$, so $c_{00}$ is dense in $\\ell^p$ for the $\\ell^p$ norm.",
+          "step": "1.2",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sequence $u=(1,1/2,1/3,\\dots)$ lies in $c_0$ but not in $c_{00}$, while its truncations $u^{(N)}\\in c_{00}$ converge to $u$ in the supremum norm by step 1.1. Hence $c_{00}$ is not complete for that norm, and since $c_0$ is Banach by [L1], [L2] identifies the supremum-norm completion of $c_{00}$ with $c_0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $\\ell^p$ is Banach by [L3], the uniqueness statement [L2] identifies the $\\ell^p$-completion of $c_{00}$ with $\\ell^p$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns a concrete sequence space, not an empty-set statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the zero sequence, whose truncations stabilize immediately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the endpoint p=1 of the lp range in the same truncation-density argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 separates the dense-but-proper witness sequence from the finitely supported subspace, which is the incompleteness mechanism."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 records the written range 1<=p<infinity and includes the left endpoint p=1 while excluding p=infinity from the lp-completion clause."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the explicit witness sequence u=(1,1/2,1/3,...) for incompleteness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states completion identifications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states completion identifications, not a biconditional."
+        }
+      ]
+    },
+    "ex-polynomials-are-not-complete-in-the-supremum-norm": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a nonempty compact metric space and let $A\\subseteq C(K,\\mathbb R)$ be a unital subalgebra which separates points. Then $A$ is dense in $C(K,\\mathbb R)$ for the supremum metric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-c-of-a-compact-space-is-banach",
+          "source_section": "Example",
+          "quote": "If $K$ is a nonempty compact metric space, then the space $C(K)$ of continuous\nscalar functions on $K$, with the supremum norm, is a Banach space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-normed-space-completions-are-uniquely-linearly-isometric",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space, and let $(Y,j)$ and $(Z,k)$ be two completions of\n$X$. Then there is a unique linear isometric isomorphism $U:Y\\to Z$ such that\n$$U\\circ j=k.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the polynomial algebra $P[a,b]$ is dense in $C([a,b])$, so in particular the continuous function $h(x)=|x-c|$ lies in its supremum-norm closure.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The function $h$ is not a polynomial on $[a,b]$: if a polynomial $p$ agreed with $h$, then on $[c,b]$ it would satisfy $p(x)=x-c$, and on $[a,c]$ it would satisfy $p(x)=c-x$. So the polynomial $p(x)-(x-c)$ would vanish on the interval $[c,b]$, hence be identically zero, and similarly $p(x)-(c-x)$ would be identically zero, forcing $x-c=c-x$ for all $x$, impossible because $a<b$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 show that $P[a,b]$ is dense and proper in the Banach space $C([a,b])$, so it is not complete.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $C([a,b])$ is Banach by [L2] and contains $P[a,b]$ densely, [L3] identifies the completion of $P[a,b]$ with $C([a,b])$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is written for a nondegenerate compact interval with a<b, so the empty case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the zero polynomial inside the dense subspace while separating it from the nonpolynomial witness h."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or value-one parameter is singled out."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the nondegenerate hypothesis a<b exactly to separate the two affine pieces of |x-c|."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the compact interval endpoints a and b through the midpoint c=(a+b)/2 and the two half-intervals [a,c] and [c,b]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the explicit midpoint witness and no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Polynomials are not complete in the supremum norm on a compact interval, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Polynomials are not complete in the supremum norm on a compact interval, the example gives a single witness rather than a biconditional claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the witness must separate density from completeness on a nondegenerate interval. Steps 1.1 and 1.2 use h(x) = |x-c| to show the closure contains a nonpolynomial, and steps 2.1 and 3.1 identify C([a,b]) as the completion."
+      }
+    },
+    "ex-lp-banach-space-dictionary": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "rem-lp-spaces-are-banach-spaces",
+          "source_section": "Remark",
+          "quote": "The measure-theory page already proves the classical completeness theorem:\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nbuilds the normed spaces $L^p(\\mu)$, and\n[[thm-riesz-fischer-completeness-of-l-p]] proves they are complete. Therefore\neach $L^p(\\mu)$ with $1\\le p\\le \\infty$ is a Banach space in the sense of\n[[def-banach-space]].\n\nThe published [[rem-lp-completeness-and-the-banach-property]] records this as\nthe agreement seam between the measure-theory track and the functional-analysis\ntrack. Nothing on the present page repeats the quotient construction or the\nRiesz-Fischer proof.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-finite-sequences-c00-with-standard-norms",
+          "source_section": "Example",
+          "quote": "Let\n$$c_{00}:=\\{x=(x_n)_{n\\ge 0}: x_n=0 \\text{ for all but finitely many } n\\}.$$\nThen $c_{00}$ is an incomplete normed space for the supremum norm, its\ncompletion for that norm is $c_0$, and for each $1\\le p<\\infty$ its completion\nfor the $\\ell^p$ norm is $\\ell^p$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first two bullets are exactly the content of [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The third bullet is exactly the content of [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining steps 1.1 and 1.2 gives the stated dictionary.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a dictionary example, not an empty-domain theorem."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The exponent range starts at p=1, so no zero-exponent branch is part of the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the endpoint p=1 in the cited Banach-space package."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the dense subspace c00 sitting inside the larger classical sequence spaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 covers both named endpoints p=1 and p=infinity from the classical Lp range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification only packages earlier results and makes no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "In Dictionary of the classical $L^p$ and $\\\\ell^p$ Banach spaces, the example gives a single witness rather than a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "In Dictionary of the classical $L^p$ and $\\\\ell^p$ Banach spaces, the example gives a single witness rather than a biconditional claim."
+        }
+      ]
+    },
+    "cex-an-incomplete-subspace-need-not-be-closed": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-c0-is-a-banach-space",
+          "source_section": "Example",
+          "quote": "Let\n$$c_0:=\\{x=(x_n)_{n\\ge 0}\\in \\ell^\\infty : x_n\\to 0\\}.$$\nWith the supremum norm inherited from $\\ell^\\infty$, the space $c_0$ is Banach.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-finite-sequences-c00-with-standard-norms",
+          "source_section": "Example",
+          "quote": "Let\n$$c_{00}:=\\{x=(x_n)_{n\\ge 0}: x_n=0 \\text{ for all but finitely many } n\\}.$$\nThen $c_{00}$ is an incomplete normed space for the supremum norm, its\ncompletion for that norm is $c_0$, and for each $1\\le p<\\infty$ its completion\nfor the $\\ell^p$ norm is $\\ell^p$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-complete-subspace-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a normed subspace. If $W$ is\ncomplete for its restricted norm, then $W$ is closed in $V$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2], the subspace $c_{00}$ is incomplete.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [L2], the same subspace is dense in $c_0$, so if it were closed then it would equal all of $c_0$. But $c_{00}\\ne c_0$, since for example $(1,1/2,1/3,\\dots)\\in c_0\\setminus c_{00}$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore $c_{00}$ is an incomplete normed subspace that is not closed, refuting the statement. The ambient space is Banach by [L1], and [L3] explains why no contradiction occurs: [L3] goes in the opposite direction.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is a concrete inclusion of sequence spaces, not an empty-set claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the zero vector inside the witness subspace while showing the subspace is still not closed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton or value-one branch is isolated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the failure already in a dense linear subspace of a Banach space, which is the minimal structural degeneration at issue."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness c00 inside c0 is explicit and no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication rather than proving a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication rather than proving a biconditional."
+        }
+      ]
+    },
+    "cex-equivalent-metrics-need-not-come-from-equivalent-norms": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-bounded-remetrisation",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and define, for\n$x, y \\in X$,\n\n$$d'(x,y) := \\min\\{\\, d(x,y),\\ 1 \\,\\}, \\qquad d''(x,y) := \\frac{d(x,y)}{1 + d(x,y)} .$$\n\nBoth are well defined: $d(x,y) \\ge 0$ ([[lem-metric-nonnegativity]]), so\n$1 + d(x,y) > 0$ and is invertible, and the minimum of a two-element set of\nreals exists ([[lem-finite-set-has-max]], [[def-max-min]]). Then:\n\n1. $d'$ and $d''$ are metrics on $X$.\n2. $d'(x,y) \\le 1$ and $d''(x,y) < 1$ for all $x,y$; hence $(X,d')$ and\n   $(X,d'')$ are bounded metric spaces\n   ([[def-metric-bounded-diameter]]), and if $X \\ne \\emptyset$ then\n   $\\operatorname{diam}(X) \\le 1$ for both.\n3. $d'$ and $d''$ are each uniformly equivalent to $d$, hence topologically\n   equivalent to it ([[def-equivalent-metrics]],\n   [[thm-metric-equivalence-hierarchy]]).\n\n**Consequently every metric space carries a bounded metric with exactly the same\ntopology**, so boundedness cannot be read off the topology alone.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-equivalent-metrics",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $d$ and $d'$ both be metrics on $X$\n([[def-metric-space]]). Note that the underlying set is the same; nothing below\ncompares metrics on different sets.\n\n- $d$ and $d'$ are **topologically equivalent** if they have the same metric\n  topology ([[def-metric-topology]]):\n  $$\\mathcal{T}_d = \\mathcal{T}_{d'} .$$\n- $d$ and $d'$ are **uniformly equivalent** if for every real $\\varepsilon > 0$\n  there are reals $\\delta > 0$ and $\\delta' > 0$ such that, for all\n  $x, y \\in X$,\n  $$d(x,y) < \\delta \\;\\Longrightarrow\\; d'(x,y) < \\varepsilon \\qquad \\text{and} \\qquad d'(x,y) < \\delta' \\;\\Longrightarrow\\; d(x,y) < \\varepsilon .$$\n- $d$ and $d'$ are **Lipschitz equivalent** if there are reals\n  $\\alpha, \\beta > 0$ with\n  $$\\alpha\\, d(x,y) \\;\\le\\; d'(x,y) \\;\\le\\; \\beta\\, d(x,y) \\qquad \\text{for all } x, y \\in X .$$\n\n**What the middle condition says in words.** It is the statement that both\nidentity maps $\\mathrm{id} : (X,d) \\to (X,d')$ and\n$\\mathrm{id} : (X,d') \\to (X,d)$ are *uniformly* continuous: the same $\\delta$\nworks at every pair of points, not merely at each point separately as in\n[[def-metric-continuity]]. Uniform continuity has no definition of its own at\nthis point in the reading order, so the condition is written out in full above;\na later page defines it, and until then this write-out is what earlier pages\nquote.\n\n**Each of the three is an equivalence relation on the metrics on $X$.**\nReflexivity is immediate ($\\delta = \\varepsilon$, and $\\alpha = \\beta = 1$);\nsymmetry is built into the statements, the uniform one being symmetric by\nconstruction and the Lipschitz one because\n$\\alpha d \\le d' \\le \\beta d$ gives $\\beta^{-1} d' \\le d \\le \\alpha^{-1} d'$;\nand transitivity follows by composing the $\\delta$s and multiplying the\nconstants.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. This is the same convention [[rem-metric-axiom-conventions]]\nrecords for metrics.\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the metric $d'(x,y):=\\min\\{d(x,y),1\\}$ has the same topology as the original norm metric $d$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $d'$ were induced by some norm $M$ on $V$. Choose a nonzero vector $v$; then $M(v)>0$, so [L2] gives $d'(tv,0)=M(tv)=|t|M(v)$ for every scalar $t$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The right-hand side of step 2.1 is unbounded as $|t|\\to\\infty$, but by definition $d'(tv,0)\\le 1$ for every $t$. This contradiction shows that $d'$ is not induced by any norm at all.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence $d'$ is topologically equivalent to a norm metric while failing even to come from a norm, so it certainly does not come from a norm equivalent to the original one. This refutes the statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample starts from a nonzero normed space, so there is no empty-set case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness requires a nonzero vector space so that homogeneity along scalar multiples can contradict boundedness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the truncation level 1 in the bounded remetrisation d'(x,y)=min{d(x,y),1}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separates the nonzero vector-space case from the trivial one-point space where every metric is bounded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses an explicit nonzero vector v to force the homogeneity contradiction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication, not one direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal implication, not one direction of a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "codex",
+        "notes": "High because the counterexample depends on a bounded remetrization versus norm homogeneity. Step 1.1 gives a topologically equivalent truncated metric, and steps 2.1 through 4.1 use a nonzero vector ray to contradict any norm representation."
+      }
+    }
+  }
+}

@@ -1,0 +1,436 @@
+[
+  {
+    "order": 589,
+    "id": "myhill-nerode-theory-and-dfa-minimization",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Myhill--Nerode Theory and DFA Minimization",
+    "companion": "myhill-nerode-theory-and-dfa-minimization-examples",
+    "requires": [
+      "regular-expressions-and-kleenes-theorem",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "def-right-language-and-equivalent-dfa-states",
+        "kind": "definition",
+        "title": "The right language of a DFA state and state equivalence",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "def-extended-dfa-transition-function",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "lem-state-equivalence-is-a-right-congruence",
+        "kind": "lemma",
+        "title": "State-equivalent DFA states stay equivalent after every input word",
+        "strategy": "If two states have the same right language, then for every input word u and continuation v the equality of the two acceptance conditions for uv is exactly the equality of the two acceptance conditions for v after reading u. Reflexivity, symmetry, and transitivity are immediate from equality of right languages, so state equivalence is an equivalence relation preserved by all transitions.",
+        "deps": [
+          "def-right-language-and-equivalent-dfa-states",
+          "def-equivalence-relation",
+          "def-extended-dfa-transition-function"
+        ]
+      },
+      {
+        "id": "def-quotient-dfa-by-state-equivalence",
+        "kind": "definition",
+        "title": "The quotient DFA by state equivalence",
+        "deps": [
+          "def-right-language-and-equivalent-dfa-states",
+          "lem-state-equivalence-is-a-right-congruence",
+          "def-equivalence-relation",
+          "def-deterministic-finite-automaton",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "lem-quotient-dfa-is-well-defined-and-equivalent",
+        "kind": "lemma",
+        "title": "The quotient by state equivalence is a well-defined equivalent DFA",
+        "strategy": "The previous lemma guarantees that the class of delta(q,a) depends only on the class of q, so the quotient transition function and accepting set are independent of representatives. Induct on the input word to show that the quotient run from [q0] ends in [delta*(q0,w)], and conclude that w is accepted by the quotient exactly when it is accepted by the original DFA.",
+        "deps": [
+          "def-quotient-dfa-by-state-equivalence",
+          "lem-state-equivalence-is-a-right-congruence",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-extended-dfa-transition-function",
+          "def-right-language-and-equivalent-dfa-states"
+        ]
+      },
+      {
+        "id": "def-nerode-equivalence",
+        "kind": "definition",
+        "title": "Nerode equivalence of words",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "lem-nerode-equivalence-is-a-right-congruence",
+        "kind": "lemma",
+        "title": "Nerode-equivalent words stay equivalent after right concatenation",
+        "strategy": "Reflexivity, symmetry, and transitivity come directly from the biconditional that defines Nerode equivalence. If u and v are Nerode-equivalent and x is any word, then for every continuation y the test ux y in L iff vx y in L is just the defining test applied to the continuation xy, so ux and vx remain Nerode-equivalent.",
+        "deps": [
+          "def-nerode-equivalence",
+          "def-equivalence-relation"
+        ]
+      },
+      {
+        "id": "lem-dfa-states-refine-nerode-classes",
+        "kind": "lemma",
+        "title": "A DFA can realize at most one Nerode class per reachable state",
+        "strategy": "Fix a DFA D recognizing L. If two words u and v drive D from the start state to the same reachable state q, then every continuation z leads to the same state delta*(q,z), so uz is accepted exactly when vz is. Therefore u and v are Nerode-equivalent, and each reachable state refines at most one Nerode class.",
+        "deps": [
+          "def-nerode-equivalence",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-extended-dfa-transition-function"
+        ]
+      },
+      {
+        "id": "thm-myhill-nerode-characterization",
+        "kind": "theorem",
+        "title": "A language is regular if and only if its Nerode equivalence has finite index",
+        "strategy": "If L is regular, choose a DFA recognizing it and send each word to the reachable state reached after reading it; the previous lemma shows that distinct Nerode classes inject into the finite reachable state set. Conversely, if Nerode equivalence has finitely many classes, use those classes as states, use right invariance to define the transition on a letter by concatenation, and mark exactly the classes contained in L. The resulting DFA recognizes L.",
+        "deps": [
+          "def-nerode-equivalence",
+          "lem-nerode-equivalence-is-a-right-congruence",
+          "lem-dfa-states-refine-nerode-classes",
+          "def-deterministic-finite-automaton",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "cor-nerode-classes-give-the-canonical-minimal-dfa",
+        "kind": "corollary",
+        "title": "Nerode classes form the canonical minimal DFA",
+        "strategy": "The construction in the converse direction of Myhill-Nerode gives a DFA whose states are the Nerode classes. Every DFA for the same language has at least one reachable state for each Nerode class by the previous lower-bound lemma, so the class automaton has the least possible number of states and is canonical from the language alone.",
+        "deps": [
+          "thm-myhill-nerode-characterization",
+          "lem-dfa-states-refine-nerode-classes"
+        ]
+      },
+      {
+        "id": "thm-minimal-dfa-is-unique-up-to-pointed-isomorphism",
+        "kind": "theorem",
+        "title": "Minimal DFAs are unique up to start-state-preserving isomorphism",
+        "strategy": "A minimal DFA has no unreachable states, because deleting an unreachable state preserves the language while shrinking the automaton. Map each reachable state q of a minimal DFA to the Nerode class of any word reaching q. The lower-bound lemma makes this map well-defined and injective, minimality makes it surjective, and the class construction preserves start state, transitions, and accepting states. Therefore every minimal DFA is pointed-isomorphic to the canonical Nerode DFA.",
+        "deps": [
+          "cor-nerode-classes-give-the-canonical-minimal-dfa",
+          "def-reachable-dfa-state",
+          "lem-removing-unreachable-states-preserves-language"
+        ]
+      },
+      {
+        "id": "def-distinguishing-word",
+        "kind": "definition",
+        "title": "Distinguishing words for states and for prefixes",
+        "deps": [
+          "def-right-language-and-equivalent-dfa-states",
+          "def-nerode-equivalence",
+          "def-dfa-acceptance-and-recognized-language"
+        ]
+      },
+      {
+        "id": "thm-table-filling-minimization-algorithm",
+        "kind": "theorem",
+        "title": "The table-filling algorithm computes state equivalence and DFA minimization",
+        "strategy": "First delete unreachable states. Mark every final/nonfinal pair as immediately distinguishable, then repeatedly mark any unmarked pair whose a-successors are already marked for some letter a. An induction on witness length shows that a pair is marked exactly when some distinguishing word exists. The unmarked relation is therefore state equivalence, so merging its classes gives the minimal DFA by the quotient lemma.",
+        "deps": [
+          "def-distinguishing-word",
+          "lem-state-equivalence-is-a-right-congruence",
+          "def-quotient-dfa-by-state-equivalence",
+          "lem-quotient-dfa-is-well-defined-and-equivalent",
+          "lem-removing-unreachable-states-preserves-language"
+        ]
+      },
+      {
+        "id": "thm-pumping-lemma-for-regular-languages",
+        "kind": "theorem",
+        "title": "The pumping lemma for regular languages",
+        "strategy": "Let D be a DFA for L with n states and take any accepted word w of length at least n. The first n + 1 states on the run of D over w contain a repeated state by the pigeonhole principle, so w factors as xyz with y following a loop and with |xy| at most n. Repeating or deleting the loop keeps the run on the same state before z, so xy^i z stays in L for every i.",
+        "deps": [
+          "def-deterministic-finite-automaton",
+          "def-dfa-acceptance-and-recognized-language",
+          "def-extended-dfa-transition-function",
+          "lem-pigeonhole"
+        ]
+      },
+      {
+        "id": "cor-distinguishable-prefix-nonregularity-criterion",
+        "kind": "corollary",
+        "title": "Infinitely many pairwise distinguishable prefixes force nonregularity",
+        "strategy": "If a language has infinitely many prefixes that are pairwise distinguished by suffixes, then those prefixes belong to infinitely many distinct Nerode classes. The Myhill-Nerode theorem therefore rules out regularity.",
+        "deps": [
+          "thm-myhill-nerode-characterization",
+          "def-distinguishing-word"
+        ]
+      },
+      {
+        "id": "fs-the-pumping-lemma-characterizes-regular-languages",
+        "kind": "false-statement",
+        "title": "FALSE: the pumping lemma characterizes the regular languages",
+        "strategy": "Refute the claim with the classical language G = {ww^Rv : w,v in {0,1}^+, w nonempty}. A front-letter choice gives a legal pump for every sufficiently long word of G, but the prefixes (01)^n are pairwise distinguishable by suitable suffixes, so G is not regular by the distinguishable-prefix criterion.",
+        "deps": [
+          "thm-pumping-lemma-for-regular-languages",
+          "cor-distinguishable-prefix-nonregularity-criterion"
+        ]
+      },
+      {
+        "id": "fs-pumping-quantifiers-may-be-reordered",
+        "kind": "false-statement",
+        "title": "FALSE: the pumping lemma still works if its quantifiers are reordered",
+        "strategy": "Refute the claim with the regular language of binary strings of odd total length. A convenient bad choice of pumping length or a single bad decomposition can make this regular language look unpumpable, but the real lemma quantifies first over the language's pumping length and then over all legal decompositions of each chosen long word. The order of those quantifiers is what makes the contradiction argument valid.",
+        "deps": [
+          "thm-pumping-lemma-for-regular-languages"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 590,
+    "id": "myhill-nerode-theory-and-dfa-minimization-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Myhill--Nerode Theory and DFA Minimization: Examples and Counterexamples",
+    "requires": [
+      "myhill-nerode-theory-and-dfa-minimization"
+    ],
+    "items": [
+      {
+        "id": "ex-quotient-dfa-is-well-defined-and-equivalent",
+        "kind": "example",
+        "title": "Merging equivalent sink-like states in a small DFA",
+        "strategy": "Use a nonminimal DFA for the language {a} union {b^m : m >= 1} that has two distinct rejecting sink-like states with the same future behavior. Compute the state-equivalence classes, build the quotient transition table, and check on a few representative inputs that the merged automaton accepts exactly the same language.",
+        "deps": [
+          "lem-quotient-dfa-is-well-defined-and-equivalent"
+        ]
+      },
+      {
+        "id": "ex-distinguishable-prefix-nonregularity-criterion",
+        "kind": "example",
+        "title": "The prefixes 0^n distinguish the language {0^n1^n : n >= 0}",
+        "strategy": "For i < j, the suffix 1^i distinguishes the prefixes 0^i and 0^j because 0^i1^i belongs to the language while 0^j1^i does not. This yields infinitely many pairwise distinguishable prefixes and therefore another proof that {0^n1^n : n >= 0} is not regular.",
+        "deps": [
+          "cor-distinguishable-prefix-nonregularity-criterion",
+          "def-distinguishing-word"
+        ]
+      },
+      {
+        "id": "cex-the-pumping-lemma-characterizes-regular-languages",
+        "kind": "counterexample",
+        "title": "A nonregular language can still satisfy the regular pumping lemma",
+        "strategy": "Take G = {ww^Rv : w,v in {0,1}^+, w nonempty}. The first letter of the front copy of w can be pumped while staying inside G, so the language has the regular pumping property. But the prefixes (01)^n are pairwise distinguishable by suffixes tailored to force the mirrored block, so G is not regular.",
+        "deps": [
+          "fs-the-pumping-lemma-characterizes-regular-languages",
+          "cor-distinguishable-prefix-nonregularity-criterion"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 601,
+    "id": "decidable-recognizable-and-enumerable-languages",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Decidable, Recognizable, and Enumerable Languages",
+    "companion": "decidable-recognizable-and-enumerable-languages-examples",
+    "requires": [
+      "robust-machine-models-and-universal-computation",
+      "countability-and-uncountability"
+    ],
+    "items": [
+      {
+        "id": "def-computable-and-partial-computable-function",
+        "kind": "definition",
+        "title": "Computable and partial computable functions",
+        "deps": [
+          "def-partial-function-computed-by-a-machine"
+        ]
+      },
+      {
+        "id": "def-decidable-and-recognizable-language",
+        "kind": "definition",
+        "title": "Decidable and recognizable languages",
+        "deps": [
+          "def-language-recognized-and-decided",
+          "def-computable-and-partial-computable-function"
+        ]
+      },
+      {
+        "id": "def-computably-enumerable-set",
+        "kind": "definition",
+        "title": "Computably enumerable sets and languages",
+        "deps": [
+          "def-computable-and-partial-computable-function",
+          "def-language-over-an-alphabet"
+        ]
+      },
+      {
+        "id": "thm-recognizable-iff-enumerable",
+        "kind": "theorem",
+        "title": "A binary language is recognizable if and only if it is computably enumerable",
+        "strategy": "For binary languages under the identity encoding, a total computable enumerator yields a recognizer by searching its outputs. Conversely, from a recognizer and one accepted word, pair a binary word index with a time bound to build a total computable enumerator whose range is exactly the language.",
+        "deps": [
+          "def-decidable-and-recognizable-language",
+          "def-computably-enumerable-set"
+        ]
+      },
+      {
+        "id": "thm-decidable-iff-language-and-complement-are-recognizable",
+        "kind": "theorem",
+        "title": "A language is decidable if and only if it and its complement are recognizable",
+        "strategy": "One direction is immediate: a decider is already a recognizer for the language and for its complement after flipping accept and reject. For the converse, run the two recognizers in parallel, spending stage t on t steps of each machine. Exactly one recognizer must eventually accept, so the parallel simulation halts with the correct yes-or-no answer.",
+        "deps": [
+          "def-decidable-and-recognizable-language",
+          "def-language-boolean-operations"
+        ]
+      },
+      {
+        "id": "thm-recognizable-languages-are-closed-under-union-and-intersection",
+        "kind": "theorem",
+        "title": "Recognizable languages are closed under union and intersection",
+        "strategy": "For union, run the two recognizers in parallel and accept as soon as either one accepts. For intersection, again interleave the two simulations, but record whether each machine has already accepted and halt only once both accept. On a member of the target language the required accepting events occur after finitely many stages, while on a nonmember the combined machine is allowed to run forever.",
+        "deps": [
+          "def-decidable-and-recognizable-language",
+          "def-language-boolean-operations"
+        ]
+      },
+      {
+        "id": "thm-decidable-languages-are-closed-under-boolean-operations",
+        "kind": "theorem",
+        "title": "Decidable languages are closed under the Boolean operations",
+        "strategy": "Complement is handled by flipping the output of a decider. For union and intersection, run the two deciders and combine their two halting answers with the usual Boolean truth table. Difference and symmetric difference then follow from intersection together with complement, so every Boolean combination of decidable languages is decidable.",
+        "deps": [
+          "def-decidable-and-recognizable-language",
+          "def-language-boolean-operations"
+        ]
+      },
+      {
+        "id": "def-dovetailing-schedule",
+        "kind": "definition",
+        "title": "A dovetailing schedule",
+        "deps": [
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "lem-dovetailing-reaches-every-finite-stage",
+        "kind": "lemma",
+        "title": "A dovetailing schedule reaches every finite simulation stage",
+        "strategy": "Use the explicit stage-sum schedule: at global stage s, run exactly the finitely many tasks whose index and local time add up to s, in length-lex order inside that finite set. For any fixed task index i and local time t, the pair (i,t) appears at stage i + t, so no finite computation fragment is postponed forever.",
+        "deps": [
+          "def-dovetailing-schedule"
+        ]
+      },
+      {
+        "id": "thm-domains-and-ranges-of-partial-computable-functions-are-ce",
+        "kind": "theorem",
+        "title": "Domains and ranges of partial computable functions are computably enumerable",
+        "strategy": "Let f be partial computable. To enumerate dom(f), recognize x by simulating the machine for f on x and accepting exactly when the simulation halts; recognizability then gives computable enumerability. To enumerate range(f), on input y dovetail the simulations of f on all candidate inputs and accept once some input halts with output y. The dovetailing lemma guarantees that every genuine witness is eventually found.",
+        "deps": [
+          "def-computable-and-partial-computable-function",
+          "def-computably-enumerable-set",
+          "def-dovetailing-schedule",
+          "lem-dovetailing-reaches-every-finite-stage",
+          "thm-recognizable-iff-enumerable"
+        ]
+      },
+      {
+        "id": "thm-every-ce-set-is-a-domain",
+        "kind": "theorem",
+        "title": "Every computably enumerable set is the domain of a partial computable function",
+        "strategy": "If A is empty, use the nowhere-defined partial function. Otherwise write A as the range of a total computable enumerator e. Define a partial search function g(x) that scans e(0), e(1), e(2), ... until it first finds x and then halts with some fixed output. The search halts exactly for x in A, so dom(g) = A.",
+        "deps": [
+          "def-computably-enumerable-set",
+          "def-computable-and-partial-computable-function"
+        ]
+      },
+      {
+        "id": "thm-infinite-ce-sets-have-computable-injective-enumerations",
+        "kind": "theorem",
+        "title": "Infinite computably enumerable sets have computable injective enumerations",
+        "strategy": "Start with a total computable enumerator of the infinite c.e. set A and scan its outputs sequentially, suppressing duplicate codewords. On input n, output the (n+1)-st new codeword; infinitude guarantees totality and duplicate suppression makes the enumeration injective.",
+        "deps": [
+          "def-computably-enumerable-set",
+          "def-computable-and-partial-computable-function"
+        ]
+      },
+      {
+        "id": "prop-machine-descriptions-form-a-decidable-language",
+        "kind": "proposition",
+        "title": "Well-formed deterministic one-tape Turing machine descriptions form a decidable language",
+        "strategy": "Use the total decoder attached to the chosen machine encoding. On input w, run the decoder, reject malformed codes, and accept exactly when the decoded tuple satisfies the deterministic one-tape machine shape. Because the decoder always halts, this test is a decider.",
+        "deps": [
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "fs-recognizable-means-total",
+        "kind": "false-statement",
+        "title": "FALSE: recognizable means total halting",
+        "strategy": "Refute the claim with the language {0}. A machine that accepts input 0 immediately and otherwise moves right forever still recognizes {0}, because it halts and accepts on every member. Its divergence on nonmembers shows that recognizability does not force total halting.",
+        "deps": [
+          "def-decidable-and-recognizable-language"
+        ]
+      },
+      {
+        "id": "fs-every-countable-language-is-decidable",
+        "kind": "false-statement",
+        "title": "FALSE: every countable language is decidable",
+        "strategy": "Diagonalize over the effectively listed coded machines that can read every unary word 1^n. Let D={1^n : N_n rejects 1^n}; D is countable, but no unary decider N_k can agree with D on the input 1^k.",
+        "deps": [
+          "def-countable",
+          "def-decidable-and-recognizable-language",
+          "cor-effective-enumeration-of-turing-machines",
+          "def-effective-encoding-of-turing-machines",
+          "def-computation-alphabet-and-word-convention"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 602,
+    "id": "decidable-recognizable-and-enumerable-languages-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Decidable, Recognizable, and Enumerable Languages: Examples and Counterexamples",
+    "requires": [
+      "decidable-recognizable-and-enumerable-languages"
+    ],
+    "items": [
+      {
+        "id": "ex-decidable-iff-language-and-complement-are-recognizable",
+        "kind": "example",
+        "title": "Recognizers for strings containing a 1 and for all-zero strings",
+        "strategy": "Let A be the set of binary strings containing at least one 1. One recognizer scans until it sees a 1 and then accepts; another scans to the end and accepts exactly the all-zero strings. Interleaving the two recognizers halts on every input and reconstructs a decider for A.",
+        "deps": [
+          "thm-decidable-iff-language-and-complement-are-recognizable"
+        ]
+      },
+      {
+        "id": "ex-machine-descriptions-form-a-decidable-language",
+        "kind": "example",
+        "title": "Testing a few short binary strings for machine-code well-formedness",
+        "strategy": "Decode several short binary strings with the fixed machine decoder. Reject the malformed tuple shapes immediately and accept the first string that really encodes a deterministic one-tape transition table. This makes the decidability claim concrete.",
+        "deps": [
+          "prop-machine-descriptions-form-a-decidable-language",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-effective-encoding-of-turing-machines"
+        ]
+      },
+      {
+        "id": "cex-recognizable-means-total",
+        "kind": "counterexample",
+        "title": "A recognizer for {0} that loops on every nonmember",
+        "strategy": "Use the machine that accepts input 0 in one step and otherwise moves right forever without entering a halting state. The language it recognizes is exactly {0}, but the machine is not total because every other input diverges.",
+        "deps": [
+          "fs-recognizable-means-total",
+          "def-decidable-and-recognizable-language"
+        ]
+      }
+    ]
+  }
+]

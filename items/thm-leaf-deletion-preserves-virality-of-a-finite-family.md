@@ -2,7 +2,7 @@
 id: thm-leaf-deletion-preserves-virality-of-a-finite-family
 kind: theorem
 title: "Deleting a leaf from each of two forbidden graphs preserves virality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

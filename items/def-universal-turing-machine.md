@@ -2,7 +2,7 @@
 id: def-universal-turing-machine
 kind: definition
 title: "A universal Turing machine relative to a fixed machine encoding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-effective-encoding-of-turing-machines, def-partial-function-computed-
 justified_by: []
 verification:
   precheck: n/a
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

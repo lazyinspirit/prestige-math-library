@@ -1,0 +1,483 @@
+[
+  {
+    "order": 365.043,
+    "id": "long-exact-sequences-in-homology",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Long Exact Sequences in Homology",
+    "companion": "long-exact-sequences-in-homology-examples",
+    "requires": [
+      "mapping-cones-cylinders-and-chain-triangles-examples",
+      "the-diagram-lemmas-in-an-abelian-category"
+    ],
+    "items": [
+      {
+        "id": "def-morphism-of-short-exact-sequences-of-complexes",
+        "kind": "definition",
+        "title": "A morphism of short exact sequences of complexes",
+        "deps": [
+          "def-short-exact-sequence-of-complexes",
+          "def-chain-map"
+        ]
+      },
+      {
+        "id": "lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes",
+        "kind": "lemma",
+        "title": "The cycle-boundary diagram associated to a short exact sequence of complexes",
+        "strategy": "Take two consecutive degree rows of a short exact sequence of complexes, pass the upper row to cokernels of the incoming differentials and the lower row to kernels of the outgoing differentials, and use the published kernel-row and cokernel-row exactness to obtain the snake diagram that produces the connecting arrow.",
+        "deps": [
+          "def-short-exact-sequence-of-complexes",
+          "def-cycle-and-boundary-subobjects-of-a-complex",
+          "thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each"
+        ]
+      },
+      {
+        "id": "def-preconnecting-arrow-on-cycles",
+        "kind": "definition",
+        "title": "The preconnecting arrow on cycles",
+        "deps": [
+          "lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes",
+          "thm-snake-lemma-under-the-weaker-stacks-hypotheses",
+          "def-homology-object-of-a-chain-complex"
+        ]
+      },
+      {
+        "id": "lem-the-preconnecting-arrow-annihilates-boundaries",
+        "kind": "lemma",
+        "title": "The preconnecting arrow annihilates boundaries",
+        "strategy": "Represent a boundary in the right-hand complex by an actual incoming differential, lift one degree higher through the middle complex, and compare the resulting class in the left-hand complex with an explicit boundary there. This is the one descent obligation the homology quotient still needs.",
+        "deps": [
+          "def-preconnecting-arrow-on-cycles",
+          "def-cycle-and-boundary-subobjects-of-a-complex",
+          "lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes"
+        ]
+      },
+      {
+        "id": "def-connecting-morphism-in-homology",
+        "kind": "definition",
+        "title": "The connecting morphism in homology",
+        "deps": [
+          "def-preconnecting-arrow-on-cycles",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "justified_by": [
+          "lem-the-preconnecting-arrow-annihilates-boundaries"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-elementwise-formula-for-the-connecting-map-in-module-categories",
+        "kind": "proposition",
+        "title": "Elementwise formula for the connecting map in module categories",
+        "strategy": "In a short exact sequence of module complexes, represent a homology class by a cycle in the right-hand complex, lift it to the middle complex, take its boundary in the left-hand complex, and prove independence of both lifts and of the chosen cycle representative. This is a specialization and verification of the categorical definition, not a replacement for it.",
+        "deps": [
+          "def-connecting-morphism-in-homology",
+          "def-short-exact-sequence-of-complexes",
+          "thm-modules-over-a-ring-form-an-abelian-category"
+        ]
+      },
+      {
+        "id": "lem-exactness-at-the-homology-of-the-left-complex",
+        "kind": "lemma",
+        "title": "Exactness at the homology of the left complex",
+        "strategy": "Show first that the image of the connecting map dies in the homology of the middle complex, then reverse the argument by lifting a class whose image vanishes in the middle complex and tracing its failure of exactness through the preconnecting construction.",
+        "deps": [
+          "def-connecting-morphism-in-homology",
+          "def-preconnecting-arrow-on-cycles",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "lem-exactness-at-the-homology-of-the-middle-complex",
+        "kind": "lemma",
+        "title": "Exactness at the homology of the middle complex",
+        "strategy": "Use degreewise exactness to show every class coming from the left complex dies in the right complex, and conversely lift a cycle whose right-hand class vanishes to a cycle in the left complex after correcting by a boundary in the middle complex.",
+        "deps": [
+          "def-short-exact-sequence-of-complexes",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "lem-exactness-at-the-homology-of-the-right-complex",
+        "kind": "lemma",
+        "title": "Exactness at the homology of the right complex",
+        "strategy": "Prove that every class coming from the middle complex has zero connecting image, then start from a class whose connecting image vanishes and use the vanishing witness in the left-hand homology to modify a lift into the image of the middle homology map.",
+        "deps": [
+          "def-connecting-morphism-in-homology",
+          "def-preconnecting-arrow-on-cycles",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "lem-exactness-at-the-target-of-the-connecting-map",
+        "kind": "lemma",
+        "title": "Exactness at the target of the connecting map",
+        "strategy": "The image of the connecting map lands in the kernel because the left-hand map kills boundaries coming from the middle complex. For the reverse inclusion, start from a left-hand homology class whose image in the middle complex vanishes and turn that vanishing into a cycle in the right-hand complex whose connecting image is the original class.",
+        "deps": [
+          "def-connecting-morphism-in-homology",
+          "def-preconnecting-arrow-on-cycles",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "thm-long-exact-sequence-in-homology",
+        "kind": "theorem",
+        "title": "The long exact sequence in homology",
+        "strategy": "Assemble the four exactness lemmas around the induced homology maps and the connecting morphism. The theorem states the full bi-infinite sequence only after those local exactness obligations have been discharged separately.",
+        "deps": [
+          "def-connecting-morphism-in-homology",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology",
+          "lem-exactness-at-the-homology-of-the-left-complex",
+          "lem-exactness-at-the-homology-of-the-middle-complex",
+          "lem-exactness-at-the-homology-of-the-right-complex",
+          "lem-exactness-at-the-target-of-the-connecting-map"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-naturality-of-the-homology-connecting-morphism",
+        "kind": "theorem",
+        "title": "Naturality of the homology connecting morphism",
+        "strategy": "A morphism of short exact sequences of complexes induces a morphism between the quotient-kernel snake diagrams used to define the preconnecting arrows. Apply the published naturality of the categorical connecting morphism there, then descend through the quotient uniqueness that defines the homology connecting map.",
+        "deps": [
+          "def-morphism-of-short-exact-sequences-of-complexes",
+          "def-connecting-morphism-in-homology",
+          "thm-naturality-of-the-connecting-morphism"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-the-long-exact-homology-sequence-is-natural",
+        "kind": "corollary",
+        "title": "The long exact homology sequence is natural",
+        "strategy": "All ordinary squares come from functoriality of homology on chain maps, and the only substantive square is the connecting one supplied by the preceding theorem.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ]
+      },
+      {
+        "id": "thm-long-exact-sequence-in-cohomology",
+        "kind": "theorem",
+        "title": "The long exact sequence in cohomology",
+        "strategy": "Read a short exact sequence of cochain complexes as a short exact sequence of reindexed chain complexes, apply the homology theorem there, and translate the indexing back so the boundary runs from H^n(C) to H^{n+1}(A).",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "def-cochain-complex-in-an-abelian-category",
+          "def-cohomology-object-of-a-cochain-complex"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "thm-naturality-of-the-cohomology-connecting-morphism",
+        "kind": "theorem",
+        "title": "Naturality of the cohomology connecting morphism",
+        "strategy": "Use the same cochain-to-chain reindexing as in the cohomology long exact sequence, transport the homology naturality theorem across that identification, and print the resulting upper-index square explicitly.",
+        "deps": [
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "thm-long-exact-sequence-in-cohomology",
+          "def-cochain-complex-in-an-abelian-category"
+        ]
+      },
+      {
+        "id": "cor-a-short-exact-sequence-with-acyclic-middle-identifies-neighbouring-homology",
+        "kind": "corollary",
+        "title": "A short exact sequence with acyclic middle complex identifies neighbouring homology",
+        "strategy": "Delete the zero homology terms of the middle complex from the long exact sequence and read the connecting morphism as the remaining isomorphism between adjacent outer terms.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex"
+        ]
+      },
+      {
+        "id": "cor-two-out-of-three-for-acyclicity-in-a-short-exact-sequence-of-complexes",
+        "kind": "corollary",
+        "title": "Two-out-of-three for acyclicity in a short exact sequence of complexes",
+        "strategy": "If two of the three complexes are acyclic, then every degree window of the long exact sequence collapses to show the remaining homology object is zero as well.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex"
+        ]
+      },
+      {
+        "id": "cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram",
+        "kind": "corollary",
+        "title": "Two-out-of-three for quasi-isomorphisms in a short exact sequence diagram",
+        "strategy": "Compare the two long exact homology sequences attached to a morphism of short exact sequences and apply the published five lemma to the appropriate five-term window in each of the three missing-map cases.",
+        "deps": [
+          "cor-the-long-exact-homology-sequence-is-natural",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "def-quasi-isomorphism"
+        ]
+      },
+      {
+        "id": "prop-the-connecting-morphism-vanishes-for-a-chain-split-short-exact-sequence",
+        "kind": "proposition",
+        "title": "The connecting morphism vanishes for a chain-split short exact sequence",
+        "strategy": "A chain section or chain retraction lifts cycles in a way that already commutes with the differentials, so the preconnecting construction sees an actual cycle with zero boundary and the descended homology map is therefore zero. The proof must distinguish this from a merely degreewise splitting.",
+        "deps": [
+          "def-preconnecting-arrow-on-cycles",
+          "def-connecting-morphism-in-homology",
+          "def-chain-map"
+        ]
+      },
+      {
+        "id": "thm-the-cone-long-exact-sequence",
+        "kind": "theorem",
+        "title": "The cone long exact sequence",
+        "strategy": "Apply the general homology long exact sequence to the canonical short exact cone sequence and then rewrite the shifted source terms with the published shift-homology identification. The horizontal maps are the homology maps induced by the original chain map.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact",
+          "prop-homology-of-a-shift-is-shifted-homology",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign",
+        "kind": "proposition",
+        "title": "The cone connecting map agrees with the shifted identity up to the declared sign",
+        "strategy": "Compute the connecting map in the canonical cone sequence by the elementwise lift-boundary formula and compare it with the published shift identification. The point of the calculation is to pin down the sign convention promised on the mapping-cone page, not to reprove exactness.",
+        "deps": [
+          "prop-elementwise-formula-for-the-connecting-map-in-module-categories",
+          "thm-the-cone-long-exact-sequence",
+          "prop-homology-of-a-shift-is-shifted-homology"
+        ]
+      },
+      {
+        "id": "cor-the-cone-criterion-from-the-general-long-exact-sequence",
+        "kind": "corollary",
+        "title": "The cone criterion from the general long exact sequence",
+        "strategy": "Treat this as a cross-check, not as a replacement theorem: once the cone long exact sequence is in hand, exactness shows that vanishing cone homology is equivalent to the original map being a quasi-isomorphism. Cite the published HA-3 theorem to record that the two routes agree on the same criterion.",
+        "deps": [
+          "thm-the-cone-long-exact-sequence",
+          "thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex"
+        ]
+      },
+      {
+        "id": "thm-long-exact-sequence-of-relative-homology-for-a-composable-pair",
+        "kind": "theorem",
+        "title": "The long exact sequence of relative homology for a composable pair",
+        "strategy": "For a composable pair C -> D -> E, form the induced map from Cone(f) to Cone(gf), apply the cone long exact sequence to it, and then replace the cone of that map by Cone(g) using the published three-cone calculation together with invariance of relative homology under homotopy-equivalence of arrows.",
+        "deps": [
+          "def-relative-homology-of-a-chain-map",
+          "thm-the-cone-long-exact-sequence",
+          "lem-the-three-cone-calculation-for-a-composite-chain-map",
+          "thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism",
+          "thm-a-chain-map-induces-a-well-defined-map-on-homology"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "cor-a-chain-map-between-acyclic-complexes-has-acyclic-cone",
+        "kind": "corollary",
+        "title": "A chain map between acyclic complexes has an acyclic cone",
+        "strategy": "If both source and target are acyclic, every outer term in the cone long exact sequence vanishes, so the cone homology terms vanish as well.",
+        "deps": [
+          "thm-the-cone-long-exact-sequence",
+          "def-exactness-of-a-complex-at-a-degree-and-acyclic-complex"
+        ]
+      },
+      {
+        "id": "prop-an-exact-functor-carries-the-long-exact-homology-sequence-to-the-corresponding-long-exact-sequence",
+        "kind": "proposition",
+        "title": "An exact functor carries the long exact homology sequence to the corresponding long exact sequence",
+        "strategy": "Apply the exact functor to the short exact sequence of complexes, use the published canonical isomorphisms F(H_n(C)) ~ H_n(F(C)), and compare the two long exact sequences by naturality so the connecting maps are transported as well as the ordinary homology maps.",
+        "deps": [
+          "def-exact-functor-between-abelian-categories",
+          "thm-an-exact-functor-commutes-with-homology",
+          "cor-the-long-exact-homology-sequence-is-natural",
+          "thm-long-exact-sequence-in-homology"
+        ]
+      },
+      {
+        "id": "cor-homology-of-a-degreewise-split-direct-sum-sequence",
+        "kind": "corollary",
+        "title": "Homology of a chain-split direct-sum sequence",
+        "strategy": "In a chain-split short exact sequence the connecting morphism is zero, so each degree window breaks into a short exact sequence of homology objects; the chain splitting then identifies the middle homology with the biproduct of the outer two.",
+        "deps": [
+          "prop-the-connecting-morphism-vanishes-for-a-chain-split-short-exact-sequence",
+          "thm-long-exact-sequence-in-homology"
+        ]
+      },
+      {
+        "id": "cor-short-five-lemma-for-quasi-isomorphisms",
+        "kind": "corollary",
+        "title": "Short five lemma for quasi-isomorphisms",
+        "strategy": "Specialize the full any-two-of-three quasi-isomorphism statement to the conventional case where the outer two vertical maps in a morphism of short exact sequences are quasi-isomorphisms and the middle map is the one to be proved.",
+        "deps": [
+          "cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram"
+        ]
+      },
+      {
+        "id": "prop-a-short-exact-sequence-of-complexes-gives-six-term-exact-sequences-when-homology-is-concentrated-in-two-degrees",
+        "kind": "proposition",
+        "title": "A short exact sequence of complexes gives six-term exact sequences when homology is concentrated in two degrees",
+        "strategy": "When the three complexes have homology only in two adjacent degrees, every other term in the long exact sequence is zero. Remove those zero terms and keep the surviving six-term exact window with its connecting maps.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology"
+        ]
+      },
+      {
+        "id": "def-homological-delta-functor-carried-by-homology-of-complexes",
+        "kind": "definition",
+        "title": "The homological delta-functor carried by homology of complexes",
+        "deps": [
+          "thm-homology-is-an-additive-functor",
+          "def-connecting-morphism-in-homology"
+        ],
+        "landmark": true
+      },
+      {
+        "id": "prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws",
+        "kind": "proposition",
+        "title": "Homology of complexes satisfies the delta-functor naturality and exactness laws",
+        "strategy": "This is the packaging theorem: quote the long exact homology sequence for exactness and the naturality corollary for compatibility with morphisms of short exact sequences, and record that these are exactly the laws required of the concrete homological delta-functor just defined.",
+        "deps": [
+          "def-homological-delta-functor-carried-by-homology-of-complexes",
+          "thm-long-exact-sequence-in-homology",
+          "cor-the-long-exact-homology-sequence-is-natural"
+        ]
+      },
+      {
+        "id": "fs-the-connecting-morphism-is-defined-by-choosing-one-lift-with-no-independence-proof",
+        "kind": "false-statement",
+        "title": "FALSE: the connecting morphism is defined by choosing one lift with no independence proof",
+        "strategy": "Refute this by pointing to the three separate choice-independence obligations in the module formula and to the categorical route's uniqueness statement. A single lucky lift does not define a morphism on homology classes.",
+        "deps": [
+          "prop-elementwise-formula-for-the-connecting-map-in-module-categories",
+          "rem-the-connecting-morphism-depends-on-no-choices"
+        ]
+      },
+      {
+        "id": "fs-a-degreewise-split-short-exact-sequence-of-complexes-has-zero-connecting-map",
+        "kind": "false-statement",
+        "title": "FALSE: a degreewise split short exact sequence of complexes has zero connecting map",
+        "strategy": "Use the canonical cone sequence to separate degreewise splitting from chain splitting. The degreewise split cone sequence can have connecting map equal to the shifted identity, so vanishing requires a genuine chain splitting, not just a termwise one.",
+        "deps": [
+          "thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact",
+          "prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign"
+        ]
+      },
+      {
+        "id": "fs-the-homology-functor-is-exact-on-short-exact-sequences-of-complexes",
+        "kind": "false-statement",
+        "title": "FALSE: the homology functor is exact on short exact sequences of complexes",
+        "strategy": "The right repair is the long exact sequence with a connecting morphism, and the cone sequence supplies a case where that connecting map is the shifted identity rather than zero. So homology is homological, not exact, on short exact sequences of complexes.",
+        "deps": [
+          "thm-long-exact-sequence-in-homology",
+          "prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign"
+        ]
+      },
+      {
+        "id": "fs-the-cohomology-connecting-morphism-lowers-degree",
+        "kind": "false-statement",
+        "title": "FALSE: the cohomology connecting morphism lowers degree",
+        "strategy": "Read the printed upper-index long exact sequence and refute the claim directly: the cohomology boundary goes from H^n(C) to H^{n+1}(A), so the indexing direction is the opposite of the homology one.",
+        "deps": [
+          "thm-long-exact-sequence-in-cohomology"
+        ]
+      },
+      {
+        "id": "fs-naturality-of-the-long-exact-sequence-follows-without-checking-the-connecting-square",
+        "kind": "false-statement",
+        "title": "FALSE: naturality of the long exact sequence follows without checking the connecting square",
+        "strategy": "The ordinary homology maps are already functorial; the only nonformal square is the one involving the connecting morphisms. Refuting the claim is exactly the point of proving naturality of the connecting map before packaging the whole ladder.",
+        "deps": [
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "cor-the-long-exact-homology-sequence-is-natural"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.044,
+    "id": "long-exact-sequences-in-homology-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Long Exact Sequences in Homology — Examples",
+    "companion": "long-exact-sequences-in-homology",
+    "requires": [
+      "long-exact-sequences-in-homology"
+    ],
+    "items": [
+      {
+        "id": "ex-the-connecting-map-for-a-short-exact-sequence-of-two-term-complexes",
+        "kind": "example",
+        "title": "The connecting map for a short exact sequence of two-term complexes",
+        "strategy": "Choose a short exact sequence of two-term module complexes whose outer homology groups are easy kernel-and-cokernel computations, then compute the connecting map by the lift-boundary formula and verify that it matches the long exact sequence window.",
+        "deps": [
+          "prop-elementwise-formula-for-the-connecting-map-in-module-categories"
+        ]
+      },
+      {
+        "id": "ex-a-degreewise-split-sequence-with-nonzero-connecting-map",
+        "kind": "example",
+        "title": "A degreewise split sequence with nonzero connecting map",
+        "strategy": "Use the canonical cone sequence of the identity map on a stalk complex. It is degreewise split term-by-term, but the connecting morphism is the shifted identity up to the declared sign, so it is visibly nonzero.",
+        "deps": [
+          "prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign",
+          "thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact"
+        ]
+      },
+      {
+        "id": "ex-the-cone-long-exact-sequence-for-multiplication-by-m",
+        "kind": "example",
+        "title": "The cone long exact sequence for multiplication by m",
+        "strategy": "Take multiplication by m on the stalk complex Z[0], insert the computed cone homology into the cone long exact sequence, and write the resulting exact segment explicitly so the map H_0(Z) --times m--> H_0(Z) and its cokernel are visible on the nose.",
+        "deps": [
+          "thm-the-cone-long-exact-sequence"
+        ]
+      },
+      {
+        "id": "ex-two-out-of-three-for-a-diagram-of-finite-complexes",
+        "kind": "example",
+        "title": "Two-out-of-three for a diagram of finite complexes",
+        "strategy": "Write a map of short exact sequences of finite two-term complexes in which two vertical maps are easy quasi-isomorphisms. Compute the missing homology groups directly and then confirm that the general two-out-of-three corollary predicts the same outcome.",
+        "deps": [
+          "cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram"
+        ]
+      },
+      {
+        "id": "ex-a-six-term-cohomology-sequence",
+        "kind": "example",
+        "title": "A six-term cohomology sequence",
+        "strategy": "Choose a short exact sequence of cochain complexes whose cohomology is concentrated in two adjacent degrees, collapse the long exact sequence to its six surviving terms, and verify the indexing direction of the connecting map by hand.",
+        "deps": [
+          "thm-long-exact-sequence-in-cohomology"
+        ]
+      },
+      {
+        "id": "cex-homology-is-not-an-exact-functor",
+        "kind": "counterexample",
+        "title": "Homology is not an exact functor",
+        "strategy": "Reuse the degreewise split but not chain-split example: the short exact sequence is exact term-by-term, yet its connecting morphism is nonzero, so the three displayed homology groups do not form a short exact sequence.",
+        "deps": [
+          "ex-a-degreewise-split-sequence-with-nonzero-connecting-map"
+        ]
+      },
+      {
+        "id": "ex-naturality-of-a-connecting-map-under-a-map-of-coefficient-sequences",
+        "kind": "example",
+        "title": "Naturality of a connecting map under a map of coefficient sequences",
+        "strategy": "Take a concrete morphism between two short exact sequences of module complexes, compute both connecting maps by the lift-boundary recipe, and verify that the comparison square from the naturality theorem commutes on the chosen generators.",
+        "deps": [
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "prop-elementwise-formula-for-the-connecting-map-in-module-categories"
+        ]
+      },
+      {
+        "id": "ex-relative-homology-of-a-composable-pair-of-stalk-complexes",
+        "kind": "example",
+        "title": "Relative homology of a composable pair of stalk complexes",
+        "strategy": "Take a composable pair of integer multiplications on stalk complexes, compute the three relative homology objects from the cone models, and display the resulting long exact sequence of the pair together with the comparison from the three-cone calculation.",
+        "deps": [
+          "thm-long-exact-sequence-of-relative-homology-for-a-composable-pair"
+        ]
+      }
+    ]
+  }
+]
