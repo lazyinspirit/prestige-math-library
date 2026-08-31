@@ -1,7 +1,7 @@
 ---
 page: conjugate-gradients-minres-and-preconditioning
 title: "Conjugate Gradients, MINRES and Preconditioning"
-status: draft
+status: published
 items: [def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix,
         def-quadratic-energy-of-a-hermitian-positive-definite-linear-system,
         thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer,

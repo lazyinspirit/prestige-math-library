@@ -2,7 +2,7 @@
 id: fs-translation-is-continuous-in-l-infinity
 kind: false-statement
 title: "FALSE: translation is continuous in $L^\\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity]
 landmark: false
 proof_strategy: "Refute with $\\mathbf{1}_{[0,1]}$: every nonzero translation changes the value on a positive-measure set by exactly $1$, so the $L^\\infty$ distance never shrinks."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

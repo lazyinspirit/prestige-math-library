@@ -2,7 +2,7 @@
 id: def-cartesian-closed-category
 kind: definition
 title: "Cartesian closed category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exponential-object, thm-a-category-with-finite-products-is-monoidal]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

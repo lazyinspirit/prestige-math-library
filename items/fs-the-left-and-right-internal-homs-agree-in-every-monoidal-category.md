@@ -2,7 +2,7 @@
 id: fs-the-left-and-right-internal-homs-agree-in-every-monoidal-category
 kind: false-statement
 title: "FALSE: the left and right internal homs agree in every monoidal category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-closed-and-right-closed-monoidal-category, def-bimodule, thm-universal-property-of-module-tensor-products]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

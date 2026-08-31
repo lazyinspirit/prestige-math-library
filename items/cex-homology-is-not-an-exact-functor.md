@@ -2,7 +2,7 @@
 id: cex-homology-is-not-an-exact-functor
 kind: counterexample
 title: "Homology is not an exact functor"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-a-degreewise-split-sequence-with-nonzero-connecting-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

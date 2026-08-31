@@ -2,7 +2,7 @@
 id: lem-the-preconnecting-arrow-annihilates-boundaries
 kind: lemma
 title: "The preconnecting arrow annihilates boundaries"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-preconnecting-arrow-on-cycles,
        def-homology-object-of-a-chain-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

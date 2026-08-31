@@ -1,7 +1,7 @@
 ---
 page: decidable-recognizable-and-enumerable-languages-examples
 title: "Decidable, Recognizable, and Enumerable Languages: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-decidable-iff-language-and-complement-are-recognizable

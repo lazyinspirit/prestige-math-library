@@ -2,7 +2,7 @@
 id: ex-polynomial-dimension-zero-ring-boundary
 kind: example
 title: "The polynomial-dimension formula at fields, Artinian rings, and the zero-ring boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

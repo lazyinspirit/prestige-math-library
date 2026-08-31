@@ -2,7 +2,7 @@
 id: cor-minimal-prime-over-a-nonzerodivisor-has-height-one
 kind: corollary
 title: "A minimal prime over a principal nonzerodivisor has height one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-l-infinity-of-unit-interval-is-not-separable
 kind: theorem
 title: "$L^\\infty[0,1]$ is not separable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-separable-space, def-countable, def-l-infinity-on-a-measure-space, th
 landmark: true
 proof_strategy: "Use the uncountable family $\\{\\mathbf{1}_{[0,t]} : t \\in [0,1]\\}$, whose pairwise $L^\\infty$ distances are exactly $1$. Any dense set would have to hit the disjoint radius-$1/2$ balls around all of them."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

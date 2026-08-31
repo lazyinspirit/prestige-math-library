@@ -2,7 +2,7 @@
 id: fs-every-k-form-on-an-n-manifold-can-be-nonzero-when-k-is-greater-than-n
 kind: false-statement
 title: "A $k$-form on an $n$-manifold must vanish when $k>n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

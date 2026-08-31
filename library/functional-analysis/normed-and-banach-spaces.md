@@ -1,7 +1,7 @@
 ---
 page: normed-and-banach-spaces
 title: "Normed and Banach Spaces"
-status: draft
+status: published
 items: [rem-real-and-complex-normed-space-convention, def-banach-space,
         lem-reverse-triangle-inequality-in-a-normed-space,
         def-linear-isometry-and-isometric-isomorphism, def-normed-subspace,

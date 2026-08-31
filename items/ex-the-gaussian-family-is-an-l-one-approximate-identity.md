@@ -2,7 +2,7 @@
 id: ex-the-gaussian-family-is-an-l-one-approximate-identity
 kind: example
 title: "The Gaussian family is an $L^1$ approximate identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-l-one-approximate-identity-on-rn]
 landmark: false
 proof_strategy: "Check directly that the normalized Gaussian has mass one, fixed $L^1$ norm, and vanishing tails after rescaling. This records the standard non-compactly-supported family the design wanted on the companion page."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

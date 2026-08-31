@@ -2,7 +2,7 @@
 id: thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity
 kind: theorem
 title: "$\\|\\tau_h f - f\\|_p \\to 0$ in $L^p(\\mathbb{R}^n)$ as $h \\to 0$, for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-translation-of-a-function-on-rn, thm-c-c-rn-is-dense-in-l-p-of-rn, le
 landmark: true
 proof_strategy: "Approximate $f$ in $L^p$ by a compactly supported continuous function and use the previous lemma on that dense subclass. The three-term estimate is the page's exact reason for building $C_c$ density before convolution and approximate identities."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

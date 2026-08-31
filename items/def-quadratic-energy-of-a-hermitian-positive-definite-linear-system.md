@@ -2,7 +2,7 @@
 id: def-quadratic-energy-of-a-hermitian-positive-definite-linear-system
 kind: definition
 title: "The quadratic energy $\\phi(x)=\\tfrac12\\langle Ax,x\\rangle-\\operatorname{Re}\\langle b,x\\rangle$ of a Hermitian positive-definite linear system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix,
        prop-standard-coordinate-inner-products]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

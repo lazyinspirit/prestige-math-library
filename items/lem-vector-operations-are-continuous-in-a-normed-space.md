@@ -2,7 +2,7 @@
 id: lem-vector-operations-are-continuous-in-a-normed-space
 kind: lemma
 title: "Vector addition and scalar multiplication are continuous in a normed space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

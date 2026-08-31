@@ -2,7 +2,7 @@
 id: def-left-right-and-symmetric-positive-definite-preconditioning
 kind: definition
 title: "Left preconditioning, right preconditioning, and symmetric preconditioning of a linear system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-invertible-matrix-and-general-linear-group,
        def-cholesky-factorisation-with-positive-diagonal,
        thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

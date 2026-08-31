@@ -2,7 +2,7 @@
 id: cor-the-cone-criterion-from-the-general-long-exact-sequence
 kind: corollary
 title: "The cone criterion from the general long exact sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-the-cone-long-exact-sequence,
        def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-system-of-parameters-not-a-minimal-generating-set
 kind: example
 title: "A system of parameters need not minimally generate the maximal ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

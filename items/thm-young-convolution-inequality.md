@@ -2,7 +2,7 @@
 id: thm-young-convolution-inequality
 kind: theorem
 title: "Young's convolution inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound,
 landmark: true
 proof_strategy: "Treat the $r=\\infty$ endpoint with Holder directly and the finite-$r$ case by combining the $L^1$ convolution bound, the generalized Holder product estimate, and Minkowski's integral inequality on a normalized kernel. The exponents are kept in the exact relation $1/r = 1/p + 1/q - 1$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

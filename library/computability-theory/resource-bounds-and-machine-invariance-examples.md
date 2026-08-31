@@ -1,7 +1,7 @@
 ---
 page: resource-bounds-and-machine-invariance-examples
 title: "Resource Bounds and Machine Invariance: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-time-bounds-imply-space-bounds

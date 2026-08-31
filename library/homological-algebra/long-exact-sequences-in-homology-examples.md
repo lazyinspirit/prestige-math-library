@@ -1,7 +1,7 @@
 ---
 page: long-exact-sequences-in-homology-examples
 title: "Long Exact Sequences in Homology - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-connecting-map-for-a-short-exact-sequence-of-two-term-complexes,
            ex-a-degreewise-split-sequence-with-nonzero-connecting-map,

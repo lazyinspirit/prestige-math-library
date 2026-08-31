@@ -2,7 +2,7 @@
 id: ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison
 kind: example
 title: "Jacobi and Gauss-Seidel splittings can be compared by the spectral radii of their iteration matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-stationary-iteration-from-a-matrix-splitting,
        thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

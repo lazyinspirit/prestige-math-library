@@ -2,7 +2,7 @@
 id: ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension
 kind: example
 title: "CG can terminate at a relative grade strictly smaller than the ambient dimension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmet
        def-grade-and-relative-minimal-polynomial-of-a-start-vector]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign
 kind: proposition
 title: "The cone connecting map agrees with the shifted identity up to the declared sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [prop-elementwise-formula-for-the-connecting-map-in-module-categories,
        prop-homology-of-a-shift-is-shifted-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -1,7 +1,7 @@
 ---
 page: conjugate-gradients-minres-and-preconditioning-examples
 title: "Conjugate Gradients, MINRES and Preconditioning: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system,
            ex-conjugate-gradients-can-terminate-at-a-relative-grade-smaller-than-the-dimension,

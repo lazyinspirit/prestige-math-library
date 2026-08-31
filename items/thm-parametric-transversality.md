@@ -2,7 +2,7 @@
 id: thm-parametric-transversality
 kind: theorem
 title: "Parametric transversality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

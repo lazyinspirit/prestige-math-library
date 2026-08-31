@@ -2,7 +2,7 @@
 id: ex-the-exponential-of-two-small-categories
 kind: example
 title: "The exponential of two small categories computed on a walking-arrow source"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-category-of-small-categories-is-cartesian-closed]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

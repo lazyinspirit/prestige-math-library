@@ -2,7 +2,7 @@
 id: ex-localisation-strictly-lowers-dimension
 kind: example
 title: "Localisation can strictly lower dimension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact
 kind: proposition
 title: "The critical value set of a smooth map is sigma-compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

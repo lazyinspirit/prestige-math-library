@@ -1,7 +1,7 @@
 ---
 page: normed-and-banach-spaces-examples
 title: "Normed and Banach Spaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-ell-infinity-is-a-banach-space, ex-c0-is-a-banach-space,
            ex-cb-of-a-space-is-banach, ex-c-of-a-compact-space-is-banach,

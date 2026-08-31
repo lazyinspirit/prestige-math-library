@@ -2,7 +2,7 @@
 id: thm-finite-products-of-banach-spaces-are-banach
 kind: theorem
 title: "Finite products of Banach spaces are Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

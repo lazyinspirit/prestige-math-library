@@ -2,7 +2,7 @@
 id: prop-global-graph-characterization-by-one-point-transverse-fibres
 kind: proposition
 title: "A globally one-to-one transverse-fibre submanifold is a graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

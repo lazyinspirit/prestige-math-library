@@ -1,7 +1,7 @@
 ---
 page: small-graph-erdos-hajnal-consequences
 title: "Small-Graph Erdős-Hajnal Consequences"
-status: draft
+status: published
 items: [cor-the-four-vertex-path-has-the-erdos-hajnal-property, thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property, cor-the-bull-graph-has-the-erdos-hajnal-property, lem-the-prime-five-vertex-graphs-are-exactly-the-bull-five-cycle-five-vertex-path-and-its-complement, thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property, def-left-six-vertex-prime-h-graph, def-right-six-vertex-prime-h-graph, cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property, def-e-graph-and-co-e-graph, def-bird-graph-and-co-bird-graph, def-h-plus-and-h-minus-for-two-special-vertices, def-h-zero-through-h-five, cor-the-h-zero-graph-has-the-erdos-hajnal-property]
 examples: []
 ---

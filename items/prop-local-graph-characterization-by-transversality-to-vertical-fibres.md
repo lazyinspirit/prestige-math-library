@@ -2,7 +2,7 @@
 id: prop-local-graph-characterization-by-transversality-to-vertical-fibres
 kind: proposition
 title: "An $m$-dimensional submanifold transverse to vertical fibres is locally a graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-conjugate-gradient-chebyshev-bound-in-the-a-norm
 kind: theorem
 title: "CG obeys the Chebyshev $A$-norm bound in terms of the spectral condition number $\\kappa_2(A)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-en
        prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-mollifier-families-are-l-one-approximate-identities
 kind: proposition
 title: "A unit-mass smooth bump generates an $L^1$ approximate identity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-l-one-approximate-identity-on-rn, def-mollifier-family-generated-by-a
 landmark: false
 proof_strategy: "Rescaling preserves total mass by the linear change of variables formula, keeps the $L^1$ norm fixed, and squeezes the support into a shrinking ball around the origin. This item is the whole reason the page does not mint a second bump example."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

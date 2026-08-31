@@ -2,7 +2,7 @@
 id: def-locally-cartesian-closed-category
 kind: definition
 title: "Locally cartesian closed category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cartesian-closed-category, def-slice-category-and-the-pullback-functor]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

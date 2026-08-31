@@ -2,7 +2,7 @@
 id: prop-tensor-products-and-contractions-of-smooth-tensor-fields-are-smooth
 kind: proposition
 title: "Tensor products and contractions of smooth tensor fields are smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

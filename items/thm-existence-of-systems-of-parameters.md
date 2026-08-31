@@ -2,7 +2,7 @@
 id: thm-existence-of-systems-of-parameters
 kind: theorem
 title: "Every finite-dimensional Noetherian local ring has a system of parameters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

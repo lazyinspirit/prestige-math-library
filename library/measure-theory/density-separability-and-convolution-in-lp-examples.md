@@ -1,7 +1,7 @@
 ---
 page: density-separability-and-convolution-in-lp-examples
 title: "Density Separability and Convolution in $L^p$ — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-indicator-of-the-unit-interval-convolved-with-itself-is-the-tent-function, ex-mollifying-the-unit-interval-indicator-at-two-scales, ex-rational-box-step-functions-give-a-countable-dense-family-in-l-two-of-unit-interval, ex-initial-interval-indicators-are-one-separated-in-l-infinity, ex-young-inequality-for-an-l-one-kernel-and-an-l-two-function, ex-the-gaussian-family-is-an-l-one-approximate-identity, fs-c-c-of-rn-is-dense-in-l-infinity-of-rn, fs-l-p-of-every-measure-space-is-separable-for-finite-p, fs-translation-is-continuous-in-l-infinity, fs-l-one-convolution-is-defined-at-every-point, cex-two-l-two-functions-can-have-convolution-outside-l-two, fs-convolution-is-measurable-for-every-lebesgue-representative]
 ---

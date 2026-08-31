@@ -2,7 +2,7 @@
 id: fs-l-one-convolution-is-defined-at-every-point
 kind: false-statement
 title: "FALSE: if $f,g \\in L^1(\\mathbb{R}^n)$, then $f*g(x)$ is defined for every $x$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]
 landmark: false
 proof_strategy: "Use the A-page theorem's explicit warning that the conclusion is only almost-everywhere. The companion counterexample is the standard singular overlap from the design's $L^2$ witness family."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

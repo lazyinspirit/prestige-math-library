@@ -1,7 +1,7 @@
 ---
 page: krull-dimension-and-height-theorems-examples
 title: "Krull Dimension and Height Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-relative-height-in-a-quotient, ex-principal-ideal-height-zero-for-a-zerodivisor, ex-height-theorem-bound-sharp, ex-system-of-parameters-not-a-minimal-generating-set, ex-localisation-strictly-lowers-dimension, ex-polynomial-dimension-zero-ring-boundary, ex-affine-dimension-formula]
 ---

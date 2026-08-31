@@ -2,7 +2,7 @@
 id: lem-affine-domain-chain-dimension-formula-step
 kind: lemma
 title: "Transcendence degrees along affine prime quotients add correctly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

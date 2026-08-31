@@ -2,7 +2,7 @@
 id: lem-principal-ideal-theorem-reduction-to-local-domain
 kind: lemma
 title: "Reduce the principal ideal theorem to a Noetherian local domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

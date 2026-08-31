@@ -2,7 +2,7 @@
 id: fs-the-coordinate-components-of-a-tensor-transform-as-independent-scalar-functions
 kind: false-statement
 title: "Tensor components do not transform as independent scalar functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

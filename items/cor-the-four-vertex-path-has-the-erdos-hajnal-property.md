@@ -2,7 +2,7 @@
 id: cor-the-four-vertex-path-has-the-erdos-hajnal-property
 kind: corollary
 title: "The four-vertex path has the Erdős-Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

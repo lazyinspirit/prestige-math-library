@@ -2,7 +2,7 @@
 id: thm-universal-property-of-the-finite-dimensional-exterior-power
 kind: theorem
 title: "Universal property of the finite-dimensional exterior power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-clustered-eigenvalues-give-a-better-cg-bound-than-spread-eigenvalues
 kind: example
 title: "Clustered eigenvalues give a visibly better CG condition-number bound than equally sized spread spectra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-conjugate-gradient-chebyshev-bound-in-the-a-norm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

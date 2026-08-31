@@ -1,6 +1,6 @@
 ---
 category: functional-analysis
-status: draft
+status: published
 parts:
   - part: foundations
     title: "Normed spaces and completeness"

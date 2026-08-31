@@ -2,7 +2,7 @@
 id: cex-two-l-two-functions-can-have-convolution-outside-l-two
 kind: counterexample
 title: "Two $L^2$ functions can have convolution outside $L^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-young-convolution-inequality]
 landmark: false
 proof_strategy: "Take the one-dimensional functions $f=g=(1+|x|)^{-3/4}$. They lie in $L^2$, but their convolution has an $x^{-1/2}$ tail and therefore does not lie in $L^2$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cex-a-monoidal-category-need-not-be-closed
 kind: counterexample
 title: "A monoidal category need not be closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-closed-and-right-closed-monoidal-category, thm-a-poset-with-finite-meets-is-a-strict-monoidal-category, def-lattice-distributive-lattice-and-order-ideal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

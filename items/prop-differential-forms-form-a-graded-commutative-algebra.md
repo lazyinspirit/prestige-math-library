@@ -2,7 +2,7 @@
 id: prop-differential-forms-form-a-graded-commutative-algebra
 kind: proposition
 title: "Differential forms form a graded commutative algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

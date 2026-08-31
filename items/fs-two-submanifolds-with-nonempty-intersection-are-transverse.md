@@ -2,7 +2,7 @@
 id: fs-two-submanifolds-with-nonempty-intersection-are-transverse
 kind: false-statement
 title: "Intersecting submanifolds need not be transverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

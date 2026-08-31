@@ -1,7 +1,7 @@
 ---
 page: small-graph-erdos-hajnal-consequences-examples
 title: "Small-Graph Erdős-Hajnal Consequences — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull, ex-the-right-six-vertex-prime-h-graph-is-the-complement-of-the-left-one-and-is-prime, ex-the-e-graph-and-co-e-graph-by-adjacency, ex-the-bird-graph-and-co-bird-graph-by-adjacency, ex-h-zero-is-the-five-wheel, ex-h-one-and-h-five-arise-by-the-prescribed-leaf-attachments]
 ---

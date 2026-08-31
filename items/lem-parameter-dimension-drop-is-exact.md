@@ -2,7 +2,7 @@
 id: lem-parameter-dimension-drop-is-exact
 kind: lemma
 title: "A first parameter lowers local dimension by exactly one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

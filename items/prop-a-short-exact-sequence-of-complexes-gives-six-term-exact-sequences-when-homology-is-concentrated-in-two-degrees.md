@@ -2,7 +2,7 @@
 id: prop-a-short-exact-sequence-of-complexes-gives-six-term-exact-sequences-when-homology-is-concentrated-in-two-degrees
 kind: proposition
 title: "A short exact sequence of complexes gives six-term exact sequences when homology is concentrated in two degrees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-simple-functions-are-dense-in-l-infinity-in-essential-supremum
 kind: theorem
 title: "Simple functions are dense in $L^\\infty(\\mu)$ in the essential-supremum norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as
 landmark: false
 proof_strategy: "Choose an essentially bounded representative and quantize its range into finitely many intervals of width below $\\varepsilon$. The resulting simple function is uniformly close almost everywhere, hence close in the essential-supremum norm."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

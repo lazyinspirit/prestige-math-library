@@ -2,7 +2,7 @@
 id: thm-currying-and-uncurrying-are-mutually-inverse
 kind: theorem
 title: "Currying and uncurrying are mutually inverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cartesian-closed-category, def-the-internal-hom-and-its-evaluation-morphism, thm-the-internal-hom-composition-morphism, thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

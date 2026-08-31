@@ -2,7 +2,7 @@
 id: thm-set-is-locally-cartesian-closed
 kind: theorem
 title: "Set is locally cartesian closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-locally-cartesian-closed-category, thm-local-cartesian-closure-is-equivalent-to-every-pullback-functor-having-a-right-adjoint, thm-currying-is-an-adjunction-in-set, prop-sets-and-functions-form-category-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

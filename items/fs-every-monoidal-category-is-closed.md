@@ -2,7 +2,7 @@
 id: fs-every-monoidal-category-is-closed
 kind: false-statement
 title: "FALSE: every monoidal category is closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-a-monoidal-category-need-not-be-closed]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

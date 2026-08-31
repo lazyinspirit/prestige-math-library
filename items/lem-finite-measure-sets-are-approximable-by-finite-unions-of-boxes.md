@@ -2,7 +2,7 @@
 id: lem-finite-measure-sets-are-approximable-by-finite-unions-of-boxes
 kind: lemma
 title: "A finite-measure measurable set in $\\mathbb{R}^n$ is approximable in measure by a finite union of boxes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-lebesgue-outer-regularity-for-arbitrary-subsets, thm-open-subsets-of-
 landmark: false
 proof_strategy: "Use outer regularity to enlarge the set by an open set of small excess, decompose that open set into countably many disjoint dyadic cubes, and truncate the sum by continuity from below to a finite union. This is the exact regularity step the box-step density argument needs."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

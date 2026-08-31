@@ -2,7 +2,7 @@
 id: lem-a-sparse-graph-either-sparsifies-further-or-yields-a-comb-or-a-large-sparse-pair
 kind: lemma
 title: "A sparse graph either sparsifies further or yields a comb or a large sparse pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

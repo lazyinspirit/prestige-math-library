@@ -2,7 +2,7 @@
 id: cor-l-one-approximate-identities-converge-uniformly-on-compacta-for-continuous-functions
 kind: corollary
 title: "$L^1$ approximate identities converge uniformly on compacta for bounded continuous functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-l-one-approximate-identity-on-rn, thm-heine-cantor-metric, prop-lebes
 landmark: false
 proof_strategy: "On a fixed compact set, continuity becomes uniform continuity after enlarging to a slightly bigger compact neighborhood. Split the convolution error into a near-origin piece controlled by uniform continuity and a tail piece controlled by the kernel mass concentration."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets
 kind: proposition
 title: "An equidimensional $C^1$ map sends null sets to null sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

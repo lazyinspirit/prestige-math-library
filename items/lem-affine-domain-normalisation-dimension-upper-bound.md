@@ -2,7 +2,7 @@
 id: lem-affine-domain-normalisation-dimension-upper-bound
 kind: lemma
 title: "A finite affine extension of a polynomial ring has dimension at most the number of variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

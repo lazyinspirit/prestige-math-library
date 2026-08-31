@@ -2,7 +2,7 @@
 id: ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull
 kind: example
 title: "The left six-vertex prime $\\mathcal H$-graph is prime, and deleting any pendant leaf gives the bull"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

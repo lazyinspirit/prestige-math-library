@@ -2,7 +2,7 @@
 id: cex-conjugate-gradients-can-break-on-a-symmetric-indefinite-system
 kind: counterexample
 title: "A symmetric indefinite matrix can make the CG denominator vanish or change sign before convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-conjugate-gradient-recurrence,
        prop-conjugate-gradient-denominators-are-positive-before-convergence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

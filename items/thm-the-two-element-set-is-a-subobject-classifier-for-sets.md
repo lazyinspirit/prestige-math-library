@@ -2,7 +2,7 @@
 id: thm-the-two-element-set-is-a-subobject-classifier-for-sets
 kind: theorem
 title: "The two-element set is a subobject classifier for Set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-subobject-classifier, thm-a-subobject-classifier-represents-the-subob
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

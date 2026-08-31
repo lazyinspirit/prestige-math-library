@@ -2,7 +2,7 @@
 id: cor-dimension-of-a-finite-polynomial-ring-over-a-field
 kind: corollary
 title: "A polynomial ring in n variables over a field has dimension n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

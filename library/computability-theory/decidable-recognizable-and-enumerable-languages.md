@@ -1,7 +1,7 @@
 ---
 page: decidable-recognizable-and-enumerable-languages
 title: "Decidable, Recognizable, and Enumerable Languages"
-status: draft
+status: published
 items:
   - def-computable-and-partial-computable-function
   - def-decidable-and-recognizable-language

@@ -2,7 +2,7 @@
 id: lem-parameter-selection-avoids-minimal-components
 kind: lemma
 title: "Choose a parameter that misses the top-dimensional minimal components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

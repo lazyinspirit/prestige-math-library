@@ -2,7 +2,7 @@
 id: thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence
 kind: theorem
 title: "With a Hermitian matrix, Arnoldi collapses to the Lanczos three-term recurrence and a real symmetric tridiagonal projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-lanczos-process-as-hermitian-arnoldi,
        def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

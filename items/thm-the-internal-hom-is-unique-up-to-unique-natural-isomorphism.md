@@ -2,7 +2,7 @@
 id: thm-the-internal-hom-is-unique-up-to-unique-natural-isomorphism
 kind: theorem
 title: "The internal hom is unique up to a unique adjunction-compatible natural isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-closed-and-right-closed-monoidal-category, thm-adjoints-are-uniq
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn
 kind: theorem
 title: "Rational box-step functions form a countable dense subset of $L^p(\\mathbb{R}^n)$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-box-step-functions-are-dense-in-l-p-of-rn, thm-rational-points-and-bo
 landmark: true
 proof_strategy: "Restrict the box-step density theorem to boxes with rational vertices and rational complex coefficients. The rational-box basis theorem and countable-union bookkeeping make this family countable, giving separability in the sense of the published topological definition."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

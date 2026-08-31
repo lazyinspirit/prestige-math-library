@@ -2,7 +2,7 @@
 id: thm-local-cartesian-closure-is-equivalent-to-every-pullback-functor-having-a-right-adjoint
 kind: theorem
 title: "Local cartesian closure is equivalent to every pullback functor having a right adjoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-locally-cartesian-closed-category, def-slice-category-and-the-pullbac
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

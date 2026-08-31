@@ -2,7 +2,7 @@
 id: ex-a-bilinear-form-as-a-type-zero-two-tensor
 kind: example
 title: "A bilinear form as a type $(0,2)$ tensor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

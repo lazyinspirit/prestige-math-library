@@ -2,7 +2,7 @@
 id: lem-c1-local-diffeomorphisms-preserve-null-sets-locally
 kind: lemma
 title: "$C^1$ local diffeomorphisms preserve null sets locally"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

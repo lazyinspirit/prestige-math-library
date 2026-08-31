@@ -2,7 +2,7 @@
 id: def-system-of-parameters-and-parameter-ideal
 kind: definition
 title: "Systems of parameters and parameter ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: definition
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

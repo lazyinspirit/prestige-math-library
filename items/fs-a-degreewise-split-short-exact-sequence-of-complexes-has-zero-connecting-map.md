@@ -2,7 +2,7 @@
 id: fs-a-degreewise-split-short-exact-sequence-of-complexes-has-zero-connecting-map
 kind: false-statement
 title: "FALSE: a degreewise split short exact sequence of complexes has zero connecting map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact,
        prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

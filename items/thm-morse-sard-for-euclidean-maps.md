@@ -2,7 +2,7 @@
 id: thm-morse-sard-for-euclidean-maps
 kind: theorem
 title: "Morse-Sard for Euclidean maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

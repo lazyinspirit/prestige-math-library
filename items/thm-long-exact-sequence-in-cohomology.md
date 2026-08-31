@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-in-cohomology
 kind: theorem
 title: "The long exact sequence in cohomology"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -13,6 +13,7 @@ deps: [thm-long-exact-sequence-in-homology,
        def-cohomology-object-of-a-cochain-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

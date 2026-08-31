@@ -1,7 +1,7 @@
 ---
 page: sard-theorem-and-transversality-examples
 title: "Sard Theorem and Transversality — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-critical-points-and-values-of-a-height-function-on-a-sphere,
            ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value,

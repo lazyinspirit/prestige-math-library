@@ -2,7 +2,7 @@
 id: thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign
 kind: theorem
 title: "Convolution with a mollifier is smooth, and derivatives pass under the integral sign"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-mollifier-family-generated-by-a-unit-mass-smooth-bump, lem-borel-repr
 landmark: false
 proof_strategy: "Fix $f \\in L^1_{\\mathrm{loc}}$ and differentiate the kernel variable under the integral sign. Every derivative of the mollifier remains integrable and compactly supported, so the integral-sign differentiation theorem applies repeatedly."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

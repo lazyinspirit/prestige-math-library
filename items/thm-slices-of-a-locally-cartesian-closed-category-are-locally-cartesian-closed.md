@@ -2,7 +2,7 @@
 id: thm-slices-of-a-locally-cartesian-closed-category-are-locally-cartesian-closed
 kind: theorem
 title: "Slices of a locally cartesian closed category are locally cartesian closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-locally-cartesian-closed-category, def-comma-slice-and-coslice-categories]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

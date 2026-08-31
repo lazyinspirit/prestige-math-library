@@ -2,7 +2,7 @@
 id: cex-a-vector-field-with-no-pullback-under-a-noninjective-map
 kind: counterexample
 title: "A vector field with no pullback under a noninjective map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

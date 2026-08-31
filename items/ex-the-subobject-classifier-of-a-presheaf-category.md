@@ -2,7 +2,7 @@
 id: ex-the-subobject-classifier-of-a-presheaf-category
 kind: example
 title: "The subobject classifier in a presheaf category on the walking arrow"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [def-subobject-classifier, thm-the-two-element-set-is-a-subobject-classifier-for-sets, def-yoneda-embedding]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

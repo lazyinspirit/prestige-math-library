@@ -2,7 +2,7 @@
 id: lem-convolution-is-independent-of-the-chosen-borel-representatives
 kind: lemma
 title: "Convolution on $L^1(\\mathbb{R}^n)$ is independent of the chosen Borel representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-borel-representatives-make-the-convolution-integrand-borel-measurable
 landmark: false
 proof_strategy: "If two Borel representatives agree almost everywhere, then after translating the null set they still agree almost everywhere in the integration variable. The integral of the difference therefore vanishes for every $x$ outside a fixed null exceptional set."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-an-exact-functor-carries-the-long-exact-homology-sequence-to-the-corresponding-long-exact-sequence
 kind: proposition
 title: "An exact functor carries the long exact homology sequence to the corresponding long exact sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-exact-functor-between-abelian-categories,
        thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

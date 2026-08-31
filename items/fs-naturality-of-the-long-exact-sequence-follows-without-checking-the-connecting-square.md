@@ -2,7 +2,7 @@
 id: fs-naturality-of-the-long-exact-sequence-follows-without-checking-the-connecting-square
 kind: false-statement
 title: "FALSE: naturality of the long exact sequence follows without checking the connecting square"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-naturality-of-the-homology-connecting-morphism,
        cor-the-long-exact-homology-sequence-is-natural]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

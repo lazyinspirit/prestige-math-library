@@ -2,7 +2,7 @@
 id: lem-finite-measure-sets-admit-compact-open-sandwiches-with-small-excess
 kind: lemma
 title: "A finite-measure measurable set in $\\mathbb{R}^n$ has a compact core and a bounded open neighbourhood of arbitrarily small excess"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-lebesgue-outer-regularity-for-arbitrary-subsets, thm-continuity-from-
 landmark: false
 proof_strategy: "First truncate the set to a large bounded piece using its finite measure. Then apply outer regularity both to that bounded piece and to its complement inside the large closed ball to produce a compact core $K\\subseteq E$ and a bounded open neighbourhood $O\\supseteq K$ with both $E\\setminus K$ and $O\\setminus K$ arbitrarily small."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

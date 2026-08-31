@@ -2,7 +2,7 @@
 id: thm-in-a-symmetric-monoidal-category-the-two-closures-agree
 kind: theorem
 title: "A supplied symmetry identifies the left and right internal homs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-the-internal-hom-and-its-evaluation-morphism, thm-the-internal-hom-is
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

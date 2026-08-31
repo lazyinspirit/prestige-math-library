@@ -2,7 +2,7 @@
 id: ex-finite-sequences-c00-with-standard-norms
 kind: example
 title: "The finitely supported sequences form an incomplete normed space with different standard completions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

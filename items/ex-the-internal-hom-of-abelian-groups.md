@@ -2,7 +2,7 @@
 id: ex-the-internal-hom-of-abelian-groups
 kind: example
 title: "The internal hom of abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-internal-hom-and-its-evaluation-morphism, thm-hom-tensor-adjunction-for-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 name: functional-analysis
 title: Functional Analysis
-status: draft
+status: published
 ---
 
 Functional analysis studies infinite-dimensional vector spaces by combining

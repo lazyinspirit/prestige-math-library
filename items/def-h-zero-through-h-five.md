@@ -2,7 +2,7 @@
 id: def-h-zero-through-h-five
 kind: definition
 title: "The graphs $H_0,H_1,\\ldots,H_5$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

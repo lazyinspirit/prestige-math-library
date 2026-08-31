@@ -2,7 +2,7 @@
 id: thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic
 kind: theorem
 title: "In exact arithmetic, CG terminates no later than the relative grade and hence in at most $n$ steps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-en
        def-grade-and-relative-minimal-polynomial-of-a-start-vector]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

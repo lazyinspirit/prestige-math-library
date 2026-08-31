@@ -1,7 +1,7 @@
 ---
 page: primitive-recursive-and-partial-computable-functions-examples
 title: "Primitive Recursive and Partial Computable Functions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-sequence-length-and-coordinate-functions-are-primitive-recursive

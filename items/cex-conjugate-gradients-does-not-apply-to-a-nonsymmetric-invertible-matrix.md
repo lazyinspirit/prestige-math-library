@@ -2,7 +2,7 @@
 id: cex-conjugate-gradients-does-not-apply-to-a-nonsymmetric-invertible-matrix
 kind: counterexample
 title: "A nonsymmetric invertible matrix does not fit the CG orthogonality and minimization theory"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-conjugate-gradient-recurrence,
        def-gmres-iterate]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-young-inequality-for-an-l-one-kernel-and-an-l-two-function
 kind: example
 title: "Young's inequality on an $L^1 * L^2$ pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-young-convolution-inequality]
 landmark: false
 proof_strategy: "Choose an explicit integrable kernel and an explicit square-integrable function, compute the convolution where it is easy, and verify the stated $L^2$ bound from the theorem."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

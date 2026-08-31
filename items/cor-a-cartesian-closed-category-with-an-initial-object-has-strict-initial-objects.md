@@ -2,7 +2,7 @@
 id: cor-a-cartesian-closed-category-with-an-initial-object-has-strict-initial-objects
 kind: corollary
 title: "In a cartesian closed category, any initial object is strict"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cartesian-closed-category, cor-left-adjoints-preserve-colimits, def-initial-terminal-and-zero-object]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

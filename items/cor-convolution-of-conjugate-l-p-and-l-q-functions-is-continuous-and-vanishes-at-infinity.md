@@ -2,7 +2,7 @@
 id: cor-convolution-of-conjugate-l-p-and-l-q-functions-is-continuous-and-vanishes-at-infinity
 kind: corollary
 title: "If $1 < p < \\infty$ and $q$ is conjugate to $p$, then $f*g$ is continuous and vanishes at infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity, thm-youn
 landmark: false
 proof_strategy: "In the conjugate case Young puts $f*g$ in $L^\\infty$, and the translation-continuity theorem makes the convolution map continuous under shifts. Vanishing at infinity follows by first proving it for compactly supported continuous data and then approximating by the density results already built."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

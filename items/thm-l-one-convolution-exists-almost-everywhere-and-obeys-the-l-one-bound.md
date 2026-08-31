@@ -2,7 +2,7 @@
 id: thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound
 kind: theorem
 title: "If $f,g \\in L^1(\\mathbb{R}^n)$, then $f*g$ exists almost everywhere, belongs to $L^1$, and $\\|f*g\\|_1 \\le \\|f\\|_1 \\|g\\|_1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-borel-representatives-make-the-convolution-integrand-borel-measurable
 landmark: false
 proof_strategy: "Apply Tonelli to the nonnegative product integrand built from Borel representatives. This gives absolute integrability for almost every section and then the global $L^1$ bound by exchanging the two integrals."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

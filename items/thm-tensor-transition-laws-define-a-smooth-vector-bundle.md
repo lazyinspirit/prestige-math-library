@@ -2,7 +2,7 @@
 id: thm-tensor-transition-laws-define-a-smooth-vector-bundle
 kind: theorem
 title: "Tensor transition laws define a smooth vector bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

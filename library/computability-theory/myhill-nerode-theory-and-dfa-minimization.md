@@ -1,7 +1,7 @@
 ---
 page: myhill-nerode-theory-and-dfa-minimization
 title: "Myhill--Nerode Theory and DFA Minimization"
-status: draft
+status: published
 items:
   - def-right-language-and-equivalent-dfa-states
   - lem-state-equivalence-is-a-right-congruence

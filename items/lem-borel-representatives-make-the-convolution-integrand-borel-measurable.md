@@ -2,7 +2,7 @@
 id: lem-borel-representatives-make-the-convolution-integrand-borel-measurable
 kind: lemma
 title: "Borel representatives make the convolution integrand Borel measurable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-convolution-of-two-functions-on-rn, thm-completion-measurable-functio
 landmark: false
 proof_strategy: "Choose Borel representatives of the two $L^1$ classes, compose one with the continuous subtraction map $(x,y) \\mapsto x-y$, and multiply by the second factor. Product Borel structure on $\\mathbb{R}^{2n}$ turns this into a bona fide measurable integrand."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

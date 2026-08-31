@@ -2,7 +2,7 @@
 id: thm-morse-sard-for-smooth-manifolds
 kind: theorem
 title: "Morse-Sard for smooth manifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

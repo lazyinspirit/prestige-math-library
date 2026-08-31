@@ -2,7 +2,7 @@
 id: def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system
 kind: definition
 title: "The $m$th Krylov Galerkin iterate in the affine space $x_0+K_m(A,r_0)$ for a Hermitian positive-definite system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-krylov-subspace-of-a-matrix-and-start-vector,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix,
        def-matrix-product-and-identity-matrix]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

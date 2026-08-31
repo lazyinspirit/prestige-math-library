@@ -2,7 +2,7 @@
 id: def-product-norms-on-finitely-many-normed-spaces
 kind: definition
 title: "The standard product norms on a finite product of normed spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

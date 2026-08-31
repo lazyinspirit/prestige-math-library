@@ -2,7 +2,7 @@
 id: cex-a-preconditioner-can-worsen-the-preconditioned-condition-number
 kind: counterexample
 title: "A preconditioner can worsen the condition number that actually controls CG"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [prop-invertible-preconditioners-give-equivalent-linear-systems-with-expli
        thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

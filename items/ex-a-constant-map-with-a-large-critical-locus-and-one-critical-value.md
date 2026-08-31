@@ -2,7 +2,7 @@
 id: ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value
 kind: example
 title: "A constant map has a large critical locus and one critical value"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

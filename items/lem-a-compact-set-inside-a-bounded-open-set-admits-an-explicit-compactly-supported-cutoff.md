@@ -2,7 +2,7 @@
 id: lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff
 kind: lemma
 title: "A compact set inside a bounded open set admits an explicit compactly supported continuous cutoff"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-distance-to-set-is-lipschitz, thm-heine-borel-rn, thm-extreme-value-m
 landmark: false
 proof_strategy: "For compact $K \\subset O \\subset \\mathbb{R}^n$ with $O$ bounded and open, use the distance-to-the-complement function $u(x)=d(x,O^c)$ and the positive minimum of $u$ on $K$. A piecewise-linear cutoff in $u$ then equals $1$ on $K$ and vanishes on a collar near $O^c$, so its support stays compactly inside $O$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

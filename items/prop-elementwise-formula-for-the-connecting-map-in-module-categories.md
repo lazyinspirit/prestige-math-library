@@ -2,7 +2,7 @@
 id: prop-elementwise-formula-for-the-connecting-map-in-module-categories
 kind: proposition
 title: "Elementwise formula for the connecting map in module categories"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-connecting-morphism-in-homology,
        thm-modules-over-a-ring-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

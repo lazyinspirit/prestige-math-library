@@ -2,7 +2,7 @@
 id: thm-naturality-of-the-cohomology-connecting-morphism
 kind: theorem
 title: "Naturality of the cohomology connecting morphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-naturality-of-the-homology-connecting-morphism,
        def-cochain-complex-in-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-naturality-of-the-homology-connecting-morphism
 kind: theorem
 title: "Naturality of the homology connecting morphism"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -14,6 +14,7 @@ deps: [def-morphism-of-short-exact-sequences-of-complexes,
        thm-snake-lemma-under-the-weaker-stacks-hypotheses]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

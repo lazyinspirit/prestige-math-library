@@ -2,7 +2,7 @@
 id: cor-a-short-exact-sequence-with-acyclic-middle-identifies-neighbouring-homology
 kind: corollary
 title: "A short exact sequence with acyclic middle complex identifies neighbouring homology"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-long-exact-sequence-in-homology,
        def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

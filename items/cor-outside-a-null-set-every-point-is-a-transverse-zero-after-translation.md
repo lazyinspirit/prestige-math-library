@@ -2,7 +2,7 @@
 id: cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation
 kind: corollary
 title: "Outside a null set every translation makes a chosen value a transverse zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

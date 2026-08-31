@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-in-homology
 kind: theorem
 title: "The long exact sequence in homology"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -16,6 +16,7 @@ deps: [def-connecting-morphism-in-homology,
        lem-exactness-at-the-target-of-the-connecting-map]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

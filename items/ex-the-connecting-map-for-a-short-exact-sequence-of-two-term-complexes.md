@@ -2,7 +2,7 @@
 id: ex-the-connecting-map-for-a-short-exact-sequence-of-two-term-complexes
 kind: example
 title: "The connecting map for a short exact sequence of two-term complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-elementwise-formula-for-the-connecting-map-in-module-categories]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

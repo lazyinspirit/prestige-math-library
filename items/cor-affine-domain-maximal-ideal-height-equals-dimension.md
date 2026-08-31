@@ -2,7 +2,7 @@
 id: cor-affine-domain-maximal-ideal-height-equals-dimension
 kind: corollary
 title: "Maximal ideals of an affine domain have full height"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

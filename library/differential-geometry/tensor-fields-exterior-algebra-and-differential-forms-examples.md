@@ -1,7 +1,7 @@
 ---
 page: tensor-fields-exterior-algebra-and-differential-forms-examples
 title: "Tensor Fields Exterior Algebra and Differential Forms — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-tensor-product-and-contraction-in-a-basis,
            ex-a-bilinear-form-as-a-type-zero-two-tensor,

@@ -2,7 +2,7 @@
 id: thm-metric-completion-carries-a-unique-banach-space-structure
 kind: theorem
 title: "The metric completion of a normed space carries a unique compatible Banach-space structure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-pullback-of-the-circle-angular-form-along-a-parametrized-curve
 kind: example
 title: "Pullback of the circle angular form along a parametrized curve"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

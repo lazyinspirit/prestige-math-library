@@ -2,7 +2,7 @@
 id: ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids
 kind: example
 title: "A map vacuously transverse to a submanifold it avoids"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

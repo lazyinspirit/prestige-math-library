@@ -1,7 +1,7 @@
 ---
 page: primitive-recursive-and-partial-computable-functions
 title: "Primitive Recursive and Partial Computable Functions"
-status: draft
+status: published
 items:
   - def-initial-arithmetic-functions
   - def-composition-and-primitive-recursion-schemes

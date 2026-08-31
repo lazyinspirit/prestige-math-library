@@ -2,7 +2,7 @@
 id: lem-compactly-supported-continuous-functions-are-translation-continuous-in-l-p
 kind: lemma
 title: "Continuous compactly supported functions are translation-continuous in $L^p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-translation-of-a-function-on-rn, def-c-c-and-c-c-infinity-on-rn, thm-
 landmark: false
 proof_strategy: "A compactly supported continuous function is uniformly continuous on a large compact set containing all small translates of its support. Uniform smallness on that set, together with bounded support measure, gives $L^p$ smallness."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

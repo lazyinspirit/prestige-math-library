@@ -2,7 +2,7 @@
 id: lem-exactness-at-the-target-of-the-connecting-map
 kind: lemma
 title: "Exactness at the target of the connecting map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-connecting-morphism-in-homology,
        thm-snake-lemma-under-the-weaker-stacks-hypotheses]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

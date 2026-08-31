@@ -2,7 +2,7 @@
 id: prop-countable-unions-and-subsets-of-manifold-null-sets-are-null
 kind: proposition
 title: "Countable unions and subsets of manifold null sets are null"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

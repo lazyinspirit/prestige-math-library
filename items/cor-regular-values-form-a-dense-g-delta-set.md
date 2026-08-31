@@ -2,7 +2,7 @@
 id: cor-regular-values-form-a-dense-g-delta-set
 kind: corollary
 title: "Regular values form a dense $G_\\delta$ set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

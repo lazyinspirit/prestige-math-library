@@ -2,7 +2,7 @@
 id: ex-initial-interval-indicators-are-one-separated-in-l-infinity
 kind: example
 title: "The family $\\{\\mathbf{1}_{[0,t]} : t \\in [0,1]\\}$ is $1$-separated in $L^\\infty[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-l-infinity-of-unit-interval-is-not-separable]
 landmark: false
 proof_strategy: "For $s \\neq t$, the two indicators disagree on an interval of positive measure, so their essential-supremum distance is exactly $1$. This is the explicit computation behind the nonseparability theorem."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

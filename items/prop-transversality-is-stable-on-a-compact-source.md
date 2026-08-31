@@ -2,7 +2,7 @@
 id: prop-transversality-is-stable-on-a-compact-source
 kind: proposition
 title: "Transversality is stable on a compact source"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

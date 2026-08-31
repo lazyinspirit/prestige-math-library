@@ -1,7 +1,7 @@
 ---
 page: closed-monoidal-categories-and-the-internal-hom-examples
 title: "Closed Monoidal Categories and the Internal Hom - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-function-set-as-an-exponential-computed, ex-currying-for-sets-of-three-variables, ex-the-internal-hom-of-abelian-groups, ex-the-exponential-of-two-small-categories, ex-a-locally-cartesian-closed-slice-computed, ex-the-subobject-classifier-of-a-presheaf-category]
 ---

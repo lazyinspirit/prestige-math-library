@@ -2,7 +2,7 @@
 id: thm-dimension-as-minimal-number-of-radical-generators
 kind: theorem
 title: "Local dimension is the minimal number of generators of an ideal with maximal radical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

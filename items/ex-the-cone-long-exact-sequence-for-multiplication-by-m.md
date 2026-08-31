@@ -2,7 +2,7 @@
 id: ex-the-cone-long-exact-sequence-for-multiplication-by-m
 kind: example
 title: "The cone long exact sequence for multiplication by m"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-cone-long-exact-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

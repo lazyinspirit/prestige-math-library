@@ -2,7 +2,7 @@
 id: prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws
 kind: proposition
 title: "Homology of complexes satisfies the delta-functor naturality and exactness laws"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [def-homological-delta-functor-carried-by-homology-of-complexes,
        cor-the-long-exact-homology-sequence-is-natural]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

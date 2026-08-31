@@ -2,7 +2,7 @@
 id: ex-a-locally-cartesian-closed-slice-computed
 kind: example
 title: "A slice of Set computed as a locally cartesian closed category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-set-is-locally-cartesian-closed, def-slice-category-and-the-pullback-functor]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

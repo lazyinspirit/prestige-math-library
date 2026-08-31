@@ -2,7 +2,7 @@
 id: thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one
 kind: theorem
 title: "A stationary splitting converges for every start if and only if its iteration matrix has spectral radius below $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-stationary-iteration-from-a-matrix-splitting,
        thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

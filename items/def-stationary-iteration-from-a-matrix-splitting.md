@@ -2,7 +2,7 @@
 id: def-stationary-iteration-from-a-matrix-splitting
 kind: definition
 title: "Stationary iteration from a matrix splitting $A=M-N$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-invertible-matrix-and-general-linear-group,
        def-matrix-product-and-identity-matrix]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

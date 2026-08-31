@@ -2,7 +2,7 @@
 id: thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate
 kind: theorem
 title: "In exact arithmetic, CG residuals are mutually orthogonal and the search directions are $A$-conjugate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-conjugate-gradient-recurrence,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]
 proof_strategy: induction
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

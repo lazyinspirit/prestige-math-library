@@ -2,7 +2,7 @@
 id: ex-polynomials-are-not-complete-in-the-supremum-norm
 kind: example
 title: "Polynomials are not complete in the supremum norm on a compact interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

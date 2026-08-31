@@ -2,7 +2,7 @@
 id: lem-the-prime-five-vertex-graphs-are-exactly-the-bull-five-cycle-five-vertex-path-and-its-complement
 kind: lemma
 title: "The prime five-vertex graphs are exactly the bull, $C_5$, $P_5$, and $\\overline{P_5}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

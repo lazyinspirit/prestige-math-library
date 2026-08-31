@@ -2,7 +2,7 @@
 id: prop-the-null-set-definition-is-independent-of-the-smooth-atlas
 kind: proposition
 title: "The null-set definition is independent of the smooth atlas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

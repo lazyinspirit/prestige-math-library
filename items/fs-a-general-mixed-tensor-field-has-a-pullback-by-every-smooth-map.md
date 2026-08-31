@@ -2,7 +2,7 @@
 id: fs-a-general-mixed-tensor-field-has-a-pullback-by-every-smooth-map
 kind: false-statement
 title: "A general mixed tensor field does not have a pullback by every smooth map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

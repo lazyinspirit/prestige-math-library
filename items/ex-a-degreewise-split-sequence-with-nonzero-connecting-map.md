@@ -2,7 +2,7 @@
 id: ex-a-degreewise-split-sequence-with-nonzero-connecting-map
 kind: example
 title: "A degreewise split sequence with nonzero connecting map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-d
        thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

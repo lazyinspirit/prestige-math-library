@@ -2,7 +2,7 @@
 id: ex-two-out-of-three-for-a-diagram-of-finite-complexes
 kind: example
 title: "Two-out-of-three for a diagram of finite complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

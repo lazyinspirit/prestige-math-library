@@ -2,7 +2,7 @@
 id: thm-l-one-approximate-identities-converge-in-l-p
 kind: theorem
 title: "Every $L^1$ approximate identity converges to the identity in $L^p$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-l-one-approximate-identity-on-rn, thm-translation-is-continuous-in-l-
 landmark: false
 proof_strategy: "Write $$f*K_\\varepsilon - f = \\int K_\\varepsilon(y) (\\tau_y f - f) \\, dy$$ and estimate the $L^p$ norm with Minkowski's integral inequality. Translation continuity supplies the pointwise small factor, and the uniform $L^1$ bound on the kernels closes the limit."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

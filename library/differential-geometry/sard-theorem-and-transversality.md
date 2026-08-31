@@ -1,7 +1,7 @@
 ---
 page: sard-theorem-and-transversality
 title: "Sard Theorem and Transversality"
-status: draft
+status: published
 items: [def-null-subset-of-a-smooth-manifold,
         lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets,
         lem-c1-local-diffeomorphisms-preserve-null-sets-locally,

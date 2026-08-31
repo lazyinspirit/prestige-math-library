@@ -2,7 +2,7 @@
 id: def-conjugate-gradient-recurrence
 kind: definition
 title: "The conjugate-gradient recurrence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-krylov-subspace-of-a-matrix-and-start-vector,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]
 justified_by: [prop-conjugate-gradient-denominators-are-positive-before-convergence]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

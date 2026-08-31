@@ -2,7 +2,7 @@
 id: ex-h-one-and-h-five-arise-by-the-prescribed-leaf-attachments
 kind: example
 title: "$H_1$ and $H_5$ arise by the stated labelled leaf attachments"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

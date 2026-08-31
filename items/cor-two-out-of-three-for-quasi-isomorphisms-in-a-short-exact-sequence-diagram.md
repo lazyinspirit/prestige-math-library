@@ -2,7 +2,7 @@
 id: cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram
 kind: corollary
 title: "Two-out-of-three for quasi-isomorphisms in a short exact sequence diagram"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [cor-the-long-exact-homology-sequence-is-natural,
        def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

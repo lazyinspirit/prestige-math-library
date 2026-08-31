@@ -2,13 +2,15 @@
 id: def-minres-iterate-from-the-lanczos-tridiagonalization
 kind: definition
 title: "The MINRES iterate from the Lanczos tridiagonal least-squares problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence,
        thm-least-squares-solutions-and-normal-equation]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

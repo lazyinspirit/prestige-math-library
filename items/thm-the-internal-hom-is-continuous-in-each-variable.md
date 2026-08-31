@@ -2,7 +2,7 @@
 id: thm-the-internal-hom-is-continuous-in-each-variable
 kind: theorem
 title: "The internal hom preserves limits in the covariant variable and sends colimits to limits in the contravariant variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-internal-hom-and-its-evaluation-morphism, thm-right-adjoints-preserve-limits, thm-a-closed-monoidal-category-has-its-tensor-cocontinuous-in-each-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

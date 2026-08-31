@@ -2,7 +2,7 @@
 id: thm-cartesian-closed-preorders-have-relative-implications
 kind: theorem
 title: "A cartesian closed preorder has relative implications"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cartesian-closed-category, prop-preorders-as-categories-and-monotone-maps-as-functors, def-products-and-coproducts]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

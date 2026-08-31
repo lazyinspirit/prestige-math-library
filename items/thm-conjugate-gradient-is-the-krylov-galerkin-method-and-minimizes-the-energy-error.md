@@ -2,7 +2,7 @@
 id: thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error
 kind: theorem
 title: "CG is the Krylov Galerkin method, and the $m$th iterate uniquely minimizes the $A$-norm of the error over $x_0+K_m(A,r_0)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system,
        thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-short-five-lemma-for-quasi-isomorphisms
 kind: corollary
 title: "Short five lemma for quasi-isomorphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

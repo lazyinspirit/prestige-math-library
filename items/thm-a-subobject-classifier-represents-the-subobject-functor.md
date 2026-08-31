@@ -2,7 +2,7 @@
 id: thm-a-subobject-classifier-represents-the-subobject-functor
 kind: theorem
 title: "With a supplied well-powering, a subobject classifier represents the subobject functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-subobject-classifier, def-well-powered-and-co-well-powered-category, 
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-homology-of-a-degreewise-split-direct-sum-sequence
 kind: corollary
 title: "Homology of a chain-split direct-sum sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-the-connecting-morphism-vanishes-for-a-chain-split-short-exact-seque
        thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

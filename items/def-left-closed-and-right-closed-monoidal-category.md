@@ -2,7 +2,7 @@
 id: def-left-closed-and-right-closed-monoidal-category
 kind: definition
 title: "Left-closed, right-closed, and biclosed monoidal categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category, def-adjunction-by-unit-counit-and-triangle-identities]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

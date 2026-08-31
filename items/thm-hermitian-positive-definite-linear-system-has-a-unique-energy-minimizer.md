@@ -2,7 +2,7 @@
 id: thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer
 kind: theorem
 title: "For Hermitian positive-definite $A$, the exact solution of $Ax=b$ is the unique minimizer of the quadratic energy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-quadratic-energy-of-a-hermitian-positive-definite-linear-system,
        thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

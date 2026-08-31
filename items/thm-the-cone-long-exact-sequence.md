@@ -2,7 +2,7 @@
 id: thm-the-cone-long-exact-sequence
 kind: theorem
 title: "The cone long exact sequence"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -16,6 +16,7 @@ deps: [thm-long-exact-sequence-in-homology,
        thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -5,7 +5,7 @@ The evidence packet supports mathematical and workflow closure at the engine lev
 ## What was built
 
 - 28 pages and 376 items across 9 categories.
-- Categories: category-theory, combinatorics, commutative-algebra, computability-theory, differential-geometry, homological-algebra, linear-algebra, measure-theory, real-analysis.
+- Categories: category-theory, combinatorics, commutative-algebra, computability-theory, differential-geometry, functional-analysis, homological-algebra, linear-algebra, measure-theory.
 - Item kinds: corollary 36; counterexample 12; definition 66; example 67; false-statement 27; lemma 52; proposition 38; remark 5; theorem 73.
 
 ## Verification closure
@@ -14,7 +14,7 @@ The evidence packet supports mathematical and workflow closure at the engine lev
 - Current judge verdicts complete: 425/449.
 - Terminal owner/session resolutions after the 2-cycle cap: 24 (cex-model-invariance-means-equal-step-counts, def-asymptotic-resource-comparison, def-interior-product-of-a-form-by-a-vector-field, def-interior-product-on-alternating-covectors, def-kleene-t-predicate-and-output-function, def-lanczos-process-as-hermitian-arnoldi, def-pullback-of-a-covariant-tensor-by-a-linear-map, def-series-and-absolute-convergence-in-a-normed-space, def-time-and-space-constructible-function, ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value, fs-l-one-convolution-is-defined-at-every-point, fs-model-invariance-means-equal-step-counts, fs-time-bounds-never-need-constructibility, lem-iterated-sparse-restriction-reaches-the-target-sparsity-threshold, lem-principal-ideal-theorem-reduction-to-local-domain, lem-sard-on-the-infinitely-flat-critical-stratum, lem-turing-step-coding-is-primitive-recursive, prop-ackermann-is-total-computable-but-not-primitive-recursive, prop-transversality-is-stable-on-a-compact-source, thm-kleene-normal-form, thm-lambda-definable-iff-partial-recursive, thm-the-cone-long-exact-sequence, thm-the-internal-hom-is-unique-up-to-unique-natural-isomorphism, thm-universal-simulation-with-logarithmic-overhead).
 - Judge closure: closed; workflow-owned blockers: 0.
-- Evidence fingerprint: `e0e0b5a32b34e9781ad1cd9342d9e7c1393c0eedf5c956ccfd8c8091089b35a6`.
+- Evidence fingerprint: `02f93ce63992cb1ebe20292f5d791e0ad11372264dc54e9937ba4bda183b99a7`.
 
 ## Fatal mathematical defects — exhaustive ledger table
 

@@ -2,7 +2,7 @@
 id: fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions
 kind: false-statement
 title: "Sard's theorem does not hold for every $C^1$ map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,8 @@ deps: [thm-morse-sard-for-euclidean-maps]
 justified_by: []
 aliases: []
 landmark: false
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-preconnecting-arrow-on-cycles
 kind: definition
 title: "The preconnecting arrow on cycles"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-co
        thm-snake-lemma-under-the-weaker-stacks-hypotheses,
        def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

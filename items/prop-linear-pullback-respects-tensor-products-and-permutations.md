@@ -2,7 +2,7 @@
 id: prop-linear-pullback-respects-tensor-products-and-permutations
 kind: proposition
 title: "Linear pullback respects tensor products and permutations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

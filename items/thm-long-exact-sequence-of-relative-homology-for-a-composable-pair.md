@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-of-relative-homology-for-a-composable-pair
 kind: theorem
 title: "The long exact sequence of relative homology for a composable pair"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -15,6 +15,7 @@ deps: [def-relative-homology-of-a-chain-map,
        thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

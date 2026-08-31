@@ -2,7 +2,7 @@
 id: def-lanczos-process-as-hermitian-arnoldi
 kind: definition
 title: "The Lanczos process as Arnoldi specialized to a Hermitian matrix, with the usual real-subdiagonal phase convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,8 @@ provenance:
 deps: [def-arnoldi-process,
        prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases]
 justified_by: [thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

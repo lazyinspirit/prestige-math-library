@@ -2,7 +2,7 @@
 id: def-convolution-of-two-functions-on-rn
 kind: definition
 title: "Convolution of two functions on $\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-one-of-a-measure]
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

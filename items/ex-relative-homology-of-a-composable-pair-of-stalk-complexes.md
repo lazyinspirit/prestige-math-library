@@ -2,7 +2,7 @@
 id: ex-relative-homology-of-a-composable-pair-of-stalk-complexes
 kind: example
 title: "Relative homology of a composable pair of stalk complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-long-exact-sequence-of-relative-homology-for-a-composable-pair]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

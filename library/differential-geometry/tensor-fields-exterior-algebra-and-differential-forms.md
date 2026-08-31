@@ -1,7 +1,7 @@
 ---
 page: tensor-fields-exterior-algebra-and-differential-forms
 title: "Tensor Fields Exterior Algebra and Differential Forms"
-status: draft
+status: published
 items: [def-type-r-s-tensor-on-a-finite-dimensional-vector-space,
         def-tensor-product-of-multilinear-tensors,
         prop-tensor-product-of-multilinear-tensors-is-associative-and-bilinear,

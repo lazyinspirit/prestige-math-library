@@ -2,7 +2,7 @@
 id: def-homological-delta-functor-carried-by-homology-of-complexes
 kind: definition
 title: "The homological delta-functor carried by homology of complexes"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-homology-is-an-additive-functor,
        def-connecting-morphism-in-homology]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

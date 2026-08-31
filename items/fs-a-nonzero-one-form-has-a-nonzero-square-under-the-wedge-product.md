@@ -2,7 +2,7 @@
 id: fs-a-nonzero-one-form-has-a-nonzero-square-under-the-wedge-product
 kind: false-statement
 title: "A nonzero one-form need not have a nonzero square under the wedge product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

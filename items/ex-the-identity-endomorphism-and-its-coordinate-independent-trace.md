@@ -2,7 +2,7 @@
 id: ex-the-identity-endomorphism-and-its-coordinate-independent-trace
 kind: example
 title: "The identity endomorphism and its coordinate-independent trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-elementary-duality-formula-for-nonnegative-l-p-functions
 kind: lemma
 title: "For $1 < p < \\infty$, the $L^p$ norm of a nonnegative function is the supremum of its pairings with $L^q$ unit vectors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-conjugate-exponents, thm-holder-inequality-for-integrals, def-l-p-spa
 landmark: false
 proof_strategy: "Use Holder for the upper bound, and for the lower bound write down the explicit extremizer $$g = F^{p-1}/\\|F\\|_p^{p/q}.$$ This is the exact half of duality that Minkowski's integral inequality is allowed to consume before MT-16."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

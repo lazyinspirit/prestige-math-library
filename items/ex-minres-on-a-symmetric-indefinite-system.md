@@ -2,7 +2,7 @@
 id: ex-minres-on-a-symmetric-indefinite-system
 kind: example
 title: "MINRES still minimizes the residual on a small symmetric indefinite system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

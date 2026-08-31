@@ -2,7 +2,7 @@
 id: thm-a-presheaf-category-on-a-small-category-is-cartesian-closed
 kind: theorem
 title: "A presheaf category on a small category is cartesian closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-cartesian-closed-category, def-yoneda-embedding, cor-contravariant-yo
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

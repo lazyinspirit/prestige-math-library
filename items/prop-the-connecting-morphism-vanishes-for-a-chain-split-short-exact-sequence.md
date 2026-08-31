@@ -2,7 +2,7 @@
 id: prop-the-connecting-morphism-vanishes-for-a-chain-split-short-exact-sequence
 kind: proposition
 title: "The connecting morphism vanishes for a chain-split short exact sequence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-preconnecting-arrow-on-cycles,
        thm-long-exact-sequence-in-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

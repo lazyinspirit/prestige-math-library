@@ -2,7 +2,7 @@
 id: thm-box-step-functions-are-dense-in-l-p-of-rn
 kind: theorem
 title: "Finite linear combinations of box indicators are dense in $L^p(\\mathbb{R}^n)$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-fin
 landmark: false
 proof_strategy: "Start from finite-support simple-function density and replace each measurable support set by a finite union of boxes with small symmetric-difference measure. Minkowski and the coefficient bounds sum the set-approximation errors."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-c-zero-on-rn
 kind: definition
 title: "The space $C_0(\\mathbb{R}^n)$ of continuous functions vanishing at infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-vector-valued-functions-limits-and-continuity, def-metric-compactness]
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

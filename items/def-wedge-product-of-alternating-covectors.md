@@ -2,7 +2,7 @@
 id: def-wedge-product-of-alternating-covectors
 kind: definition
 title: "The wedge product of alternating covectors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-c-c-infinity-rn-is-dense-in-l-p-of-rn
 kind: theorem
 title: "$C_c^\\infty(\\mathbb{R}^n)$ is dense in $L^p(\\mathbb{R}^n)$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-c-c-rn-is-dense-in-l-p-of-rn, prop-mollifier-families-are-l-one-appro
 landmark: true
 proof_strategy: "Approximate first by a compactly supported continuous function, then convolve with a mollifier. The previous two items give smoothness and $L^p$ convergence, while the compact-support theorem keeps the mollified functions inside $C_c^\\infty$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

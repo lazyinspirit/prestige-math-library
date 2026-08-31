@@ -2,7 +2,7 @@
 id: def-wedge-product-of-differential-forms
 kind: definition
 title: "The wedge product of differential forms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: [prop-differential-forms-form-a-graded-commutative-algebra]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

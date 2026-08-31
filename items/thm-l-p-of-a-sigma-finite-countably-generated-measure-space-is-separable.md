@@ -2,7 +2,7 @@
 id: thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable
 kind: theorem
 title: "If $\\mu$ is sigma-finite and $\\mathcal{A}$ is countably generated, then $L^p(\\mu)$ is separable for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-fin
 landmark: true
 proof_strategy: "Assuming Countable Choice, approximate finite-support simple functions by simple functions on a countable generating algebra and then quantize the coefficients to rationals. This proves the exact hypothesis ledger recorded earlier in the published remark on $L^p$ separability, without overclaiming for arbitrary measures."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

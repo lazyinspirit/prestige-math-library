@@ -2,7 +2,7 @@
 id: def-morphism-of-short-exact-sequences-of-complexes
 kind: definition
 title: "A morphism of short exact sequences of complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-short-exact-sequence-of-complexes,
        def-chain-map]
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

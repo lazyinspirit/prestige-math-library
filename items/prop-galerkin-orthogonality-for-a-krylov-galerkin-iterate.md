@@ -2,7 +2,7 @@
 id: prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate
 kind: proposition
 title: "Galerkin orthogonality turns residual orthogonality into $A$-orthogonality of the error, and the Galerkin iterate is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

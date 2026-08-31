@@ -2,7 +2,7 @@
 id: fs-every-cartesian-closed-category-is-locally-cartesian-closed
 kind: false-statement
 title: "FALSE: every cartesian closed category is locally cartesian closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cartesian-closed-category, def-locally-cartesian-closed-category]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

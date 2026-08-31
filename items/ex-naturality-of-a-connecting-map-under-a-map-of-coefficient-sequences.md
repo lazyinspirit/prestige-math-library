@@ -2,7 +2,7 @@
 id: ex-naturality-of-a-connecting-map-under-a-map-of-coefficient-sequences
 kind: example
 title: "Naturality of a connecting map under a map of coefficient sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-naturality-of-the-homology-connecting-morphism,
        prop-elementwise-formula-for-the-connecting-map-in-module-categories]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

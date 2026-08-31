@@ -2,7 +2,7 @@
 id: prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold
 kind: proposition
 title: "A null set has dense complement in a positive-dimensional manifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

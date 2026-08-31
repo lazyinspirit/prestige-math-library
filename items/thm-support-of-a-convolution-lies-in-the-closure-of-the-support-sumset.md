@@ -2,7 +2,7 @@
 id: thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset
 kind: theorem
 title: "The support of a convolution lies in the closure of the support sumset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound,
 landmark: false
 proof_strategy: "If $x$ lies outside the closure of $\\operatorname{supp} f + \\operatorname{supp} g$, then nearby pairs $(x-y,y)$ never meet both supports at once, so the convolution integral is identically $0$ on an open neighborhood of $x$. Extending by $0$ on the exceptional set gives the stated support inclusion for an actual representative."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-rational-box-step-functions-give-a-countable-dense-family-in-l-two-of-unit-interval
 kind: example
 title: "A concrete countable dense family in $L^2[0,1]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-r
 landmark: false
 proof_strategy: "Specialize the rational-box step family to one-dimensional dyadic or rational intervals in $[0,1]$. The point of the example is to show the abstract separability proof as an actual list of approximants."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-lp-banach-space-dictionary
 kind: example
 title: "Dictionary of the classical $L^p$ and $\\ell^p$ Banach spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

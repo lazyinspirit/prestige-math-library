@@ -2,7 +2,7 @@
 id: lem-parameter-ideal-equivalent-m-primary
 kind: lemma
 title: "Parameter ideals are exactly the m-primary d-generated ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

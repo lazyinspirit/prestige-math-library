@@ -2,7 +2,7 @@
 id: thm-completion-universal-property-for-bounded-linear-maps
 kind: theorem
 title: "Bounded linear maps extend uniquely across the completion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

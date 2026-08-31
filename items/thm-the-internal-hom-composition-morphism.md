@@ -2,7 +2,7 @@
 id: thm-the-internal-hom-composition-morphism
 kind: theorem
 title: "The internal-hom composition morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-the-internal-hom-and-its-evaluation-morphism]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

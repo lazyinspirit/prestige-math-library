@@ -2,7 +2,7 @@
 id: prop-the-image-of-a-lower-dimensional-c1-manifold-is-null
 kind: proposition
 title: "The image of a lower-dimensional $C^1$ manifold is null"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

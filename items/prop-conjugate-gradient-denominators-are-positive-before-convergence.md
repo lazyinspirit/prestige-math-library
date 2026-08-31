@@ -2,7 +2,7 @@
 id: prop-conjugate-gradient-denominators-are-positive-before-convergence
 kind: proposition
 title: "Before convergence, every CG denominator $p_k^*Ap_k$ is positive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-conjugate-gradient-recurrence,
        def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

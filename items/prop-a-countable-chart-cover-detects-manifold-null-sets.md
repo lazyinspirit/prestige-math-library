@@ -2,7 +2,7 @@
 id: prop-a-countable-chart-cover-detects-manifold-null-sets
 kind: proposition
 title: "A countable chart cover detects manifold null sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

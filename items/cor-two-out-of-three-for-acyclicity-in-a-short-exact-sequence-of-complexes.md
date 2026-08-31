@@ -2,7 +2,7 @@
 id: cor-two-out-of-three-for-acyclicity-in-a-short-exact-sequence-of-complexes
 kind: corollary
 title: "Two-out-of-three for acyclicity in a short exact sequence of complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-long-exact-sequence-in-homology,
        def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

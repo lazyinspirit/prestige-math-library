@@ -2,7 +2,7 @@
 id: ex-a-four-tooth-comb-with-an-external-complete-vertex
 kind: example
 title: "A four-tooth comb with an external complete vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

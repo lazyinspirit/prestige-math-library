@@ -2,7 +2,7 @@
 id: thm-the-category-of-small-categories-is-cartesian-closed
 kind: theorem
 title: "The category of small categories is cartesian closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-cartesian-closed-category, cor-set-cat-and-every-complete-category-ar
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

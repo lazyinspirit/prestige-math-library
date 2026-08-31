@@ -2,7 +2,7 @@
 id: fs-l-p-of-every-measure-space-is-separable-for-finite-p
 kind: false-statement
 title: "FALSE: $L^p(\\mu)$ is separable for every measure $\\mu$ and every $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable,
 landmark: false
 proof_strategy: "Use counting measure on an uncountable set. The singleton indicators are pairwise separated by a fixed positive $L^p$ distance, so no countable set can be dense."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

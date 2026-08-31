@@ -2,7 +2,7 @@
 id: ex-currying-for-sets-of-three-variables
 kind: example
 title: "Currying for sets of three variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-currying-and-uncurrying-are-mutually-inverse]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

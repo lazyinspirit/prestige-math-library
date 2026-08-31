@@ -1,7 +1,7 @@
 ---
 page: iterative-restriction-and-comb-extraction-lemmas-examples
 title: "Iterative Restriction and Comb-Extraction Lemmas — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-five-vertex-path-is-leaf-reducible, ex-a-nearly-covered-sparse-pair-at-small-parameters, ex-a-numeric-run-of-the-lemma-two-nine-iteration, ex-a-four-tooth-comb-with-an-external-complete-vertex]
 ---

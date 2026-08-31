@@ -2,7 +2,7 @@
 id: prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges
 kind: proposition
 title: "Pullback of forms is smooth functorial and preserves wedges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

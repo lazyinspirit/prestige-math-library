@@ -2,7 +2,7 @@
 id: def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix
 kind: definition
 title: "The energy inner product $\\langle u,v\\rangle_A=\\langle Au,v\\rangle$ and energy norm $\\|u\\|_A$ for a Hermitian positive-definite matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cholesky-factorisation-with-positive-diagonal,
        prop-standard-coordinate-inner-products]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

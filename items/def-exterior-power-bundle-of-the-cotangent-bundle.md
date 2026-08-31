@@ -2,7 +2,7 @@
 id: def-exterior-power-bundle-of-the-cotangent-bundle
 kind: definition
 title: "The exterior power bundle of the cotangent bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: [thm-exterior-power-transition-laws-define-a-smooth-vector-bundle]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

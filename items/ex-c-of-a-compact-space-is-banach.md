@@ -2,7 +2,7 @@
 id: ex-c-of-a-compact-space-is-banach
 kind: example
 title: "$C(K)$ is Banach when $K$ is compact metric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

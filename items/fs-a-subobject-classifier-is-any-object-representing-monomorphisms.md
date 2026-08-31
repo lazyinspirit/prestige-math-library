@@ -2,7 +2,7 @@
 id: fs-a-subobject-classifier-is-any-object-representing-monomorphisms
 kind: false-statement
 title: "FALSE: a subobject classifier is any object representing monomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-subobject-classifier, def-subobject-and-quotient-object, thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

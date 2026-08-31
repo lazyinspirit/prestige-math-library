@@ -2,7 +2,7 @@
 id: thm-minkowski-integral-inequality
 kind: theorem
 title: "Minkowski's integral inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-elementary-duality-formula-for-nonnegative-l-p-functions, thm-tonelli
 landmark: true
 proof_strategy: "For $1 < p < \\infty$, first obtain the pairing bound against arbitrary $L^q$ unit vectors, then apply the duality lemma to bounded finite-measure truncations of the section integral and pass to the limit by monotone convergence. The endpoint $p=1$ is direct from Tonelli, so no Hahn-Banach or future dual-space theorem enters."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

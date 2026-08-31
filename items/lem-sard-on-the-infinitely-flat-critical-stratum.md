@@ -2,7 +2,7 @@
 id: lem-sard-on-the-infinitely-flat-critical-stratum
 kind: lemma
 title: "Sard on the infinitely flat critical stratum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

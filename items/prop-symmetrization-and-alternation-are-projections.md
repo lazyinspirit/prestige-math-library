@@ -2,7 +2,7 @@
 id: prop-symmetrization-and-alternation-are-projections
 kind: proposition
 title: "Symmetrization and alternation are projections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

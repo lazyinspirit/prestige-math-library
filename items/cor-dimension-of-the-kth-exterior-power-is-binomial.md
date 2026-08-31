@@ -2,7 +2,7 @@
 id: cor-dimension-of-the-kth-exterior-power-is-binomial
 kind: corollary
 title: "Dimension of the $k$th exterior power is binomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

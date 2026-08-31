@@ -2,7 +2,7 @@
 id: ex-conjugate-gradients-on-a-two-by-two-hermitian-positive-definite-system
 kind: example
 title: "CG on a $2\\times2$ Hermitian positive-definite system reaches the solution in at most two steps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are
        thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

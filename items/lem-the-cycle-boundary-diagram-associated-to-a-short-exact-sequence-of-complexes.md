@@ -2,7 +2,7 @@
 id: lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes
 kind: lemma
 title: "The cycle-boundary diagram associated to a short exact sequence of complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-short-exact-sequence-of-complexes,
        thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-c-c-rn-is-dense-in-l-p-of-rn
 kind: theorem
 title: "$C_c(\\mathbb{R}^n)$ is dense in $L^p(\\mathbb{R}^n)$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-box-step-functions-are-dense-in-l-p-of-rn, lem-a-compact-set-inside-a
 landmark: true
 proof_strategy: "Approximate finite-support simple functions by continuous cutoffs between compact-inside-open sandwiches. The explicit Euclidean cutoff formula keeps the argument local to $\\mathbb{R}^n$ rather than citing the general Urysohn lemma as a load-bearing step."
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

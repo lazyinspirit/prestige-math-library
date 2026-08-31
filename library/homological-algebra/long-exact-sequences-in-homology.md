@@ -1,7 +1,7 @@
 ---
 page: long-exact-sequences-in-homology
 title: "Long Exact Sequences in Homology"
-status: draft
+status: published
 items: [def-morphism-of-short-exact-sequences-of-complexes,
         lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes,
         def-preconnecting-arrow-on-cycles,

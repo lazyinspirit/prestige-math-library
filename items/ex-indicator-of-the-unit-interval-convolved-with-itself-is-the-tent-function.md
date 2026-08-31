@@ -2,7 +2,7 @@
 id: ex-indicator-of-the-unit-interval-convolved-with-itself-is-the-tent-function
 kind: example
 title: "$\\mathbf{1}_{[0,1]} * \\mathbf{1}_{[0,1]}$ is the tent function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound,
 landmark: false
 proof_strategy: "Compute the overlap length of $[0,1]$ and $[x-1,x]$ case by case. Then compare the resulting support with the A-page support theorem."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

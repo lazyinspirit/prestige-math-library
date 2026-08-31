@@ -2,7 +2,7 @@
 id: def-the-internal-hom-and-its-evaluation-morphism
 kind: definition
 title: "The internal hom and its evaluation morphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-left-closed-and-right-closed-monoidal-category, def-adjunct-and-transposition-under-an-adjunction]
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

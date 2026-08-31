@@ -2,7 +2,7 @@
 id: thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p
 kind: theorem
 title: "Simple functions with finite-measure support are dense in $L^p(\\mu)$ for $1 \\le p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-l-p-space-as-a-quotient-by-null-functions, rem-elements-of-l-p-are-eq
 landmark: true
 proof_strategy: "Choose a measurable representative, approximate it by dominated simple functions, and apply dominated convergence to $|f-s_k|^p$. The support clause is exactly the finite-measure condition for a simple function to lie in $L^p$."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

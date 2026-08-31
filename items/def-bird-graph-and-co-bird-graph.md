@@ -2,7 +2,7 @@
 id: def-bird-graph-and-co-bird-graph
 kind: definition
 title: "The Bird graph and co-Bird"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

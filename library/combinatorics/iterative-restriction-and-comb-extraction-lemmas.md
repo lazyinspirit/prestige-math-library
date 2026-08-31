@@ -1,7 +1,7 @@
 ---
 page: iterative-restriction-and-comb-extraction-lemmas
 title: "Iterative Restriction and Comb-Extraction Lemmas"
-status: draft
+status: published
 items: [def-leaf-reducible-finite-family, lem-a-sparse-graph-without-a-large-sparse-pair-has-a-large-nearly-covered-sparse-pair, lem-leaf-reducible-families-yield-a-large-anticomplete-pair-or-a-more-restricted-induced-subgraph, lem-iterated-sparse-restriction-reaches-the-target-sparsity-threshold, lem-a-sparse-graph-either-sparsifies-further-or-yields-a-comb-or-a-large-sparse-pair]
 examples: []
 ---

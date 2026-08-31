@@ -2,7 +2,7 @@
 id: def-h-plus-and-h-minus-for-two-special-vertices
 kind: definition
 title: "The graphs $H^+$ and $H^-$ for two distinguished vertices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

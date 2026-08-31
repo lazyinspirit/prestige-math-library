@@ -2,7 +2,7 @@
 id: fs-the-homology-functor-is-exact-on-short-exact-sequences-of-complexes
 kind: false-statement
 title: "FALSE: the homology functor is exact on short exact sequences of complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [thm-long-exact-sequence-in-homology,
        prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

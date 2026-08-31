@@ -2,7 +2,7 @@
 id: def-subobject-classifier
 kind: definition
 title: "Subobject classifier"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-subobject-and-quotient-object, def-initial-terminal-and-zero-object, def-pullbacks-and-pushouts, def-monomorphism-and-epimorphism]
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-a-submersion-is-transverse-to-every-embedded-submanifold
 kind: corollary
 title: "A submersion is transverse to every embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

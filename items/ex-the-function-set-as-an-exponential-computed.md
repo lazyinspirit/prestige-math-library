@@ -2,7 +2,7 @@
 id: ex-the-function-set-as-an-exponential-computed
 kind: example
 title: "A function set computed as an exponential object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-set-is-cartesian-closed]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

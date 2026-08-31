@@ -2,7 +2,7 @@
 id: thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn
 kind: theorem
 title: "The $L^\\infty$-closure of $C_c(\\mathbb{R}^n)$ is $C_0(\\mathbb{R}^n)$, not all of $L^\\infty(\\mathbb{R}^n)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-c-c-and-c-c-infinity-on-rn, def-c-zero-on-rn, lem-a-compact-set-insid
 landmark: false
 proof_strategy: "Use explicit cutoffs to approximate every $C_0$ function uniformly by compactly supported ones, and note that on continuous compactly supported functions the $L^\\infty$ norm is the supremum norm. Uniform limits of such functions stay continuous and vanish at infinity."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

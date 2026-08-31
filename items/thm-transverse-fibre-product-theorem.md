@@ -2,7 +2,7 @@
 id: thm-transverse-fibre-product-theorem
 kind: theorem
 title: "Transverse fibre products are embedded submanifolds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

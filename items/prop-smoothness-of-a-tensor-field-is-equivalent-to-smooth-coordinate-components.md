@@ -2,7 +2,7 @@
 id: prop-smoothness-of-a-tensor-field-is-equivalent-to-smooth-coordinate-components
 kind: proposition
 title: "Smoothness of a tensor field is equivalent to smooth coordinate components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

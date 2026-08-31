@@ -2,7 +2,7 @@
 id: fs-the-connecting-morphism-is-defined-by-choosing-one-lift-with-no-independence-proof
 kind: false-statement
 title: "FALSE: the connecting morphism is defined by choosing one lift with no independence proof"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-elementwise-formula-for-the-connecting-map-in-module-categories,
        rem-the-connecting-morphism-depends-on-no-choices]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

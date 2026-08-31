@@ -2,7 +2,7 @@
 id: thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space
 kind: theorem
 title: "For Hermitian $A$, including the indefinite case, MINRES minimizes the Euclidean residual over $x_0+K_m(A,r_0)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-minres-iterate-from-the-lanczos-tridiagonalization,
        cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

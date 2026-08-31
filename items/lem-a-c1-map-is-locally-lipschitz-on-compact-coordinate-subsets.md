@@ -2,7 +2,7 @@
 id: lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets
 kind: lemma
 title: "A $C^1$ map is locally Lipschitz on compact coordinate subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

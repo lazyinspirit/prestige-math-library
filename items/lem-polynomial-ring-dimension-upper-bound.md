@@ -2,7 +2,7 @@
 id: lem-polynomial-ring-dimension-upper-bound
 kind: lemma
 title: "A prime chain in R[x] has length at most one more than its contraction chain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

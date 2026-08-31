@@ -2,7 +2,7 @@
 id: prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps
 kind: proposition
 title: "Invertible preconditioners give equivalent linear systems, with the transformed residuals and errors written explicitly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-right-and-symmetric-positive-definite-preconditioning,
        def-invertible-matrix-and-general-linear-group]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-transversality-is-globally-open-for-arbitrary-noncompact-sources-in-the-uniform-c1-topology
 kind: false-statement
 title: "Uniform $C^1$ openness of transversality fails on arbitrary noncompact sources"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

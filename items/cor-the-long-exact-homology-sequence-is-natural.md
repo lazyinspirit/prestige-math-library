@@ -2,7 +2,7 @@
 id: cor-the-long-exact-homology-sequence-is-natural
 kind: corollary
 title: "The long exact homology sequence is natural"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-long-exact-sequence-in-homology,
        thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-generic-translations-of-a-map-to-euclidean-space-are-transverse
 kind: corollary
 title: "Generic translations of a Euclidean-valued map are transverse"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

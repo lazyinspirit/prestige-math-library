@@ -2,7 +2,7 @@
 id: thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem
 kind: theorem
 title: "Symmetric positive-definite preconditioning preserves a Hermitian positive-definite CG problem, and the CG bound uses the transformed condition number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps: [def-left-right-and-symmetric-positive-definite-preconditioning,
        thm-conjugate-gradient-chebyshev-bound-in-the-a-norm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

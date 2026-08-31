@@ -2,7 +2,7 @@
 id: def-a-smooth-map-transverse-to-an-embedded-submanifold
 kind: definition
 title: "A smooth map transverse to an embedded submanifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
 sources:
   scraped: []

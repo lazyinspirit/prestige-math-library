@@ -2,7 +2,7 @@
 id: cor-normed-space-completions-are-uniquely-linearly-isometric
 kind: corollary
 title: "Any two completions of a normed space are uniquely linearly isometric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

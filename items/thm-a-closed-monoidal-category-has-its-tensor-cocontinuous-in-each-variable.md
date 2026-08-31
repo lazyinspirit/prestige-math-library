@@ -2,7 +2,7 @@
 id: thm-a-closed-monoidal-category-has-its-tensor-cocontinuous-in-each-variable
 kind: theorem
 title: "In a biclosed monoidal category tensor is cocontinuous in each variable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-left-closed-and-right-closed-monoidal-category, cor-left-adjoints-pre
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-the-top-exterior-power-is-one-dimensional
 kind: proposition
 title: "The top exterior power is one-dimensional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

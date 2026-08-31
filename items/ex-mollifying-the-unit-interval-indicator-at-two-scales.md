@@ -2,7 +2,7 @@
 id: ex-mollifying-the-unit-interval-indicator-at-two-scales
 kind: example
 title: "Mollifying $\\mathbf{1}_{[0,1]}$ at two scales"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-mollifier-families-are-l-one-approximate-identities, thm-convolution
 landmark: false
 proof_strategy: "Write the convolution with a fixed compactly supported bump at two values of $\\varepsilon$ and describe the rounded boundary layers explicitly. This is the concrete picture behind the abstract $L^p$ convergence theorem."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

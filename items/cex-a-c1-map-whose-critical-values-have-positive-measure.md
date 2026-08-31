@@ -2,7 +2,7 @@
 id: cex-a-c1-map-whose-critical-values-have-positive-measure
 kind: counterexample
 title: "A $C^1$ map whose critical values have positive measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,8 @@ deps: [fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions]
 justified_by: []
 aliases: []
 landmark: false
+verification:
+  audited: 2026-09-01
 sources:
   scraped: []
   references:

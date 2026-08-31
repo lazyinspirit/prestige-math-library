@@ -1,7 +1,7 @@
 ---
 page: resource-bounds-and-machine-invariance
 title: "Resource Bounds and Machine Invariance"
-status: draft
+status: published
 items:
   - def-worst-case-time-and-space-complexity
   - def-asymptotic-resource-comparison

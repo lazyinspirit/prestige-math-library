@@ -2,7 +2,7 @@
 id: ex-the-euclidean-metric-as-a-symmetric-two-tensor
 kind: example
 title: "The Euclidean metric as a symmetric two-tensor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

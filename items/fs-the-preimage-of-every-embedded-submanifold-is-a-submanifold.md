@@ -2,7 +2,7 @@
 id: fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold
 kind: false-statement
 title: "A preimage need not be a submanifold without transversality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

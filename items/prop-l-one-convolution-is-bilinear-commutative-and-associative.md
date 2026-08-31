@@ -2,7 +2,7 @@
 id: prop-l-one-convolution-is-bilinear-commutative-and-associative
 kind: proposition
 title: "Convolution on $L^1(\\mathbb{R}^n)$ is bilinear, commutative, and associative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound,
 landmark: false
 proof_strategy: "Bilinearity is pointwise linearity of the integral once absolute convergence is known. Commutativity is the change of variables $y \\mapsto x-y$, and associativity is a three-variable Fubini rearrangement justified by absolute integrability."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

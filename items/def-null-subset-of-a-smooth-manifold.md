@@ -2,7 +2,7 @@
 id: def-null-subset-of-a-smooth-manifold
 kind: definition
 title: "Null subsets of a smooth manifold"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ justified_by: [prop-the-null-set-definition-is-independent-of-the-smooth-atlas]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

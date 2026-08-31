@@ -2,7 +2,7 @@
 id: cex-equivalent-metrics-need-not-come-from-equivalent-norms
 kind: counterexample
 title: "Topologically equivalent metrics on a vector space need not come from equivalent norms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

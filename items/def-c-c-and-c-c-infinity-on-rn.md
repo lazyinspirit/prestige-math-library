@@ -2,7 +2,7 @@
 id: def-c-c-and-c-c-infinity-on-rn
 kind: definition
 title: "The spaces $C_c(\\mathbb{R}^n)$ and $C_c^\\infty(\\mathbb{R}^n)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-support-and-compactly-supported-riemann-integral-in-rn, def-vector-valued-functions-limits-and-continuity, def-ck-and-multi-index-notation-in-several-variables]
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

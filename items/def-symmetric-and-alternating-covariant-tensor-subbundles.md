@@ -2,7 +2,7 @@
 id: def-symmetric-and-alternating-covariant-tensor-subbundles
 kind: definition
 title: "Symmetric and alternating covariant tensor subbundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ justified_by: [thm-symmetric-and-alternating-images-are-smooth-subbundles]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

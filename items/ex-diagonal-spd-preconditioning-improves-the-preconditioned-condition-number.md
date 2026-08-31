@@ -2,7 +2,7 @@
 id: ex-diagonal-spd-preconditioning-improves-the-preconditioned-condition-number
 kind: example
 title: "A diagonal positive-definite preconditioner can improve the relevant condition number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

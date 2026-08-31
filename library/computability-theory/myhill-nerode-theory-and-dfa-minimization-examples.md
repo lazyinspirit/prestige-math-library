@@ -1,7 +1,7 @@
 ---
 page: myhill-nerode-theory-and-dfa-minimization-examples
 title: "Myhill--Nerode Theory and DFA Minimization: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-quotient-dfa-is-well-defined-and-equivalent

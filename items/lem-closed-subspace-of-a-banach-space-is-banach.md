@@ -2,7 +2,7 @@
 id: lem-closed-subspace-of-a-banach-space-is-banach
 kind: lemma
 title: "A closed subspace of a Banach space is Banach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

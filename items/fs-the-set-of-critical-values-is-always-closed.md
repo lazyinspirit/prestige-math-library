@@ -2,7 +2,7 @@
 id: fs-the-set-of-critical-values-is-always-closed
 kind: false-statement
 title: "The critical-value set need not be closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

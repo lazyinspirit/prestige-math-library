@@ -2,7 +2,7 @@
 id: rem-floating-point-conjugate-gradients-can-lose-orthogonality-conjugacy-and-finite-termination
 kind: remark
 title: "In floating-point arithmetic, CG can lose exact residual orthogonality, $A$-conjugacy, and the finite-termination guarantee"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate,
        thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]
 verification:
+  audited: 2026-09-01
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-convolution-is-measurable-for-every-lebesgue-representative
 kind: false-statement
 title: "FALSE: the Borel-representative discipline in convolution is unnecessary because continuous precomposition always preserves Lebesgue measurability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [lem-borel-representatives-make-the-convolution-integrand-borel-measurable
 landmark: false
 proof_strategy: "Refute by combining the A-page Borel-representative seam with the published false statement that precomposition with a continuous map can destroy Lebesgue measurability. The point is not that convolution fails, but that arbitrary representatives are the wrong definition."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

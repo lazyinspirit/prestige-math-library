@@ -2,7 +2,7 @@
 id: rem-lp-spaces-are-banach-spaces
 kind: remark
 title: "The classical $L^p$ spaces are Banach spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

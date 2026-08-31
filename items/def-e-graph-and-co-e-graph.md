@@ -2,7 +2,7 @@
 id: def-e-graph-and-co-e-graph
 kind: definition
 title: "The $E$-graph and co-$E$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-01
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

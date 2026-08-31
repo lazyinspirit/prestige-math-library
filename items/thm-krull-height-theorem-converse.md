@@ -2,7 +2,7 @@
 id: thm-krull-height-theorem-converse
 kind: theorem
 title: "Converse to Krull's height theorem in localised form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-countable-generators-yield-countable-set-algebras
 kind: lemma
 title: "A countable generator of a sigma-algebra yields a countable algebra of sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-generated-sigma-algebra, def-algebra-of-subsets, def-countable, thm-c
 landmark: false
 proof_strategy: "Close the countable generator under finite complements, intersections, and unions. Each finite Boolean word lives in a countable finite product, and the algebra is the countable union over word length."
 verification:
+  audited: 2026-09-01
   precheck: pass
 sources:
   scraped: []
