@@ -2,7 +2,7 @@
 id: cor-every-vector-subbundle-has-a-smooth-complement
 kind: corollary
 title: "Every vector subbundle has a smooth complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,4 +46,5 @@ Every smooth vector subbundle $S\subseteq E$ has a smooth complement in $E$.
 **Proof technique:** direct.
 
 1.1 Choose a smooth bundle metric on $E$ by [L1]. [L1, given, choose]
+
 2.1 With that metric, [L2] gives a smooth subbundle $S^\perp\subseteq E$, and fibrewise one has $E_p=S_p\oplus S_p^\perp$. Thus $S^\perp$ is a smooth complement of $S$. [L2, step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: lem-summatory-logarithm-asymptotic
 kind: lemma
 title: "The summatory logarithm is x log x minus x plus O(log x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ deps: [def-natural-logarithm,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

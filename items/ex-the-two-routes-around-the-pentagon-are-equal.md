@@ -2,7 +2,7 @@
 id: ex-the-two-routes-around-the-pentagon-are-equal
 kind: example
 title: "The two routes around the pentagon are equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-mac-lane-coherence-in-the-canonical-map-form]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

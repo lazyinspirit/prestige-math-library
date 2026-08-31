@@ -2,7 +2,7 @@
 id: cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences
 kind: corollary
 title: "$L^p$-convergent sequences have almost-everywhere convergent subsequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-riesz-fischer-completeness-of-l-p]
 proof_strategy: "Choose a rapidly convergent subsequence from an L^p-convergent sequence and re-use the subsequence construction inside Riesz-Fischer."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

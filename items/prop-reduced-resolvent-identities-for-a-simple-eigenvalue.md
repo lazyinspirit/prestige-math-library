@@ -2,7 +2,7 @@
 id: prop-reduced-resolvent-identities-for-a-simple-eigenvalue
 kind: proposition
 title: "The reduced resolvent satisfies the standard projector and inverse identities on the complementary invariant subspace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

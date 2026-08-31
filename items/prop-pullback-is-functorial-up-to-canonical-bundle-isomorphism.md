@@ -2,7 +2,7 @@
 id: prop-pullback-is-functorial-up-to-canonical-bundle-isomorphism
 kind: proposition
 title: "Pullback is functorial up to canonical bundle isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -43,4 +44,5 @@ structure ([[def-pullback-vector-bundle-as-a-fibre-product]],
 **Proof technique:** direct.
 
 1.1 For the identity map, define $I:\operatorname{id}_M^*E\to E$ by $I(p,e)=e$. This is well defined because $p=\pi(e)$ in the identity pullback, and its inverse is $e\mapsto(\pi(e),e)$. [L1, given, construct]
+
 2.1 An element of $g^*(f^*E)$ is a pair $(x,(g(x),e))$ with $f(g(x))=\pi(e)$. Send it to $(x,e)\in(f\circ g)^*E$. The inverse is $(x,e)\mapsto(x,(g(x),e))$. In the pulled-back bundle charts of [L1], both maps are the identity on the fibre coordinate, so they are smooth vector bundle isomorphisms. [L1, step 1.1, algebra] ∎

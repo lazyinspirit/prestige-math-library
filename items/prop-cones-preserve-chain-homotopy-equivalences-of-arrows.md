@@ -2,7 +2,7 @@
 id: prop-cones-preserve-chain-homotopy-equivalences-of-arrows
 kind: proposition
 title: "Cones preserve chain-homotopy equivalences of arrows"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-cone-triangle-of-a-chain-map, def-homotopy-category-of-chain-complexes, def-chain-homotopy-equivalence, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

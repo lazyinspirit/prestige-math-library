@@ -2,7 +2,7 @@
 id: ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership
 kind: example
 title: "$x^{-a}$ on $(0,1)$ and on $(1,\\infty)$ calibrates $L^p$ membership"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-calligraphic-l-p-on-a-measure-space, thm-real-power-continuity-and-derivatives, thm-logarithm-derivative-and-integral, thm-comparison-test-for-improper-integrals]
 proof_strategy: "Integrate x^(-ap) on (0, 1) and on (1, infinity) using the real-power antiderivative and compare the two thresholds ap < 1 and ap > 1."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-dedekind-localisation-is-dvr
 kind: example
 title: "Localizing a Dedekind domain at a nonzero prime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

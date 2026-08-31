@@ -2,7 +2,7 @@
 id: ex-a-quasi-isomorphism-detected-by-an-acyclic-cone
 kind: example
 title: "A quasi-isomorphism detected by an acyclic cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic, ex-the-cone-of-zero-and-of-the-identity]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

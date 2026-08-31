@@ -2,7 +2,7 @@
 id: def-mapping-cylinder-of-a-chain-map
 kind: definition
 title: "The mapping cylinder of a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chain-map, def-mapping-cone-of-a-chain-map, thm-the-category-of-complexes-in-an-additive-category-is-additive]
 justified_by: [lem-the-mapping-cylinder-differential-squares-to-zero]
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

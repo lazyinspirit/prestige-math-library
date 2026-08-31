@@ -2,7 +2,7 @@
 id: def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue
 kind: definition
 title: "The reduced resolvent, or group inverse, on the complementary invariant subspace of a simple eigenvalue"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ justified_by: [prop-reduced-resolvent-identities-for-a-simple-eigenvalue]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

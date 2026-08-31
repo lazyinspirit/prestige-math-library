@@ -2,7 +2,7 @@
 id: def-vector-bundle-chart-and-transition-function
 kind: definition
 title: "Vector bundle charts and transition functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

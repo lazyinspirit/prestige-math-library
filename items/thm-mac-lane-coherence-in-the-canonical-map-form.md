@@ -2,7 +2,7 @@
 id: thm-mac-lane-coherence-in-the-canonical-map-form
 kind: theorem
 title: "Mac Lane coherence in canonical-map form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-canonical-morphism-between-parenthesised-words, thm-mac-lane-strictif
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

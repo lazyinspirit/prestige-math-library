@@ -2,7 +2,7 @@
 id: prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices
 kind: proposition
 title: "Smoothness of a bundle map is equivalent to smooth local matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -50,4 +51,5 @@ local frames on $U$ and $V$ as above.
 **Proof technique:** direct.
 
 1.1 By [L1], the chosen frames identify $E|_U$ with $U\times\mathbb R^r$ and $F|_V$ with $V\times\mathbb R^s$. In these trivializations, fibrewise linearity forces $\Phi$ to have the form $\Phi(p,v)=(f(p),A(p)v)$ for a unique matrix $A(p)=(a_{ji}(p))$. [L1, given]
+
 2.1 The local representative $(p,v)\mapsto(f(p),A(p)v)$ is smooth exactly when its matrix entries $a_{ji}$ are smooth on $U$. Equivalently, the images $\Phi(e_i)=\sum_j a_{ji}u_j\circ f$ have smooth local components, which is the criterion in [L2]. [L2, step 1.1, algebra] ∎

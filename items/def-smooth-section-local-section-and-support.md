@@ -2,7 +2,7 @@
 id: def-smooth-section-local-section-and-support
 kind: definition
 title: "Smooth sections, local sections, and support"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-the-star-expansion-of-the-four-vertex-path-contains-induced-c-six-and-c-seven
 kind: lemma
 title: "The star-expansion of the four-vertex path contains induced six- and seven-cycles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

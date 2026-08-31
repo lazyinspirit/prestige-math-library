@@ -2,7 +2,7 @@
 id: def-condition-number-of-a-simple-eigenvalue
 kind: definition
 title: "The normwise condition number of a simple eigenvalue"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,8 @@ deps: [prop-simple-eigenvalues-admit-left-right-normalization,
        def-inner-product-norm]
 aliases: []
 landmark: false
+verification:
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

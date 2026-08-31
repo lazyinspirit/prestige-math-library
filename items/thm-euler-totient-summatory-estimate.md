@@ -2,7 +2,7 @@
 id: thm-euler-totient-summatory-estimate
 kind: theorem
 title: "The summatory totient function is 3 over pi squared times x squared plus O(x log x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ deps: [cor-classical-mobius-inversion,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

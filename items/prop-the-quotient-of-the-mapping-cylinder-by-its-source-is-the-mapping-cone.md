@@ -2,7 +2,7 @@
 id: prop-the-quotient-of-the-mapping-cylinder-by-its-source-is-the-mapping-cone
 kind: proposition
 title: "The quotient of the mapping cylinder by its source is the mapping cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cylinder-of-a-chain-map, def-mapping-cone-of-a-chain-map, lem-the-cokernel-of-a-chain-map-is-computed-degreewise, prop-finite-biproducts-of-complexes-are-computed-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

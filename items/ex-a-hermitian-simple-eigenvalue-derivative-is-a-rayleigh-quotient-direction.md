@@ -2,7 +2,7 @@
 id: ex-a-hermitian-simple-eigenvalue-derivative-is-a-rayleigh-quotient-direction
 kind: example
 title: "For a Hermitian family, the first derivative of a simple eigenvalue is the corresponding Rayleigh quotient direction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

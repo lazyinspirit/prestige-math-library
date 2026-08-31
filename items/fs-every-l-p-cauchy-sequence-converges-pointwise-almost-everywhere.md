@@ -2,7 +2,7 @@
 id: fs-every-l-p-cauchy-sequence-converges-pointwise-almost-everywhere
 kind: false-statement
 title: "FALSE: representatives of every $L^p$-Cauchy sequence converge pointwise almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-l-one-convergence-implies-almost-everywhere-convergence]
 proof_strategy: "Refute in L^1 by the published A-page typewriter witness: the sequence converges in norm and therefore is Cauchy, but it has no pointwise limit anywhere on [0,1]."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

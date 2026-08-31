@@ -2,7 +2,7 @@
 id: rem-covering-maps-among-complete-analytic-functions
 kind: remark
 title: "The germ projection of a complete analytic function is a covering map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   references:

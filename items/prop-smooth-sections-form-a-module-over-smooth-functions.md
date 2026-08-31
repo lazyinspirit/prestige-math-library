@@ -2,7 +2,7 @@
 id: prop-smooth-sections-form-a-module-over-smooth-functions
 kind: proposition
 title: "Smooth sections form a module over smooth functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -42,4 +43,5 @@ module over $C^\infty(M)$ under pointwise addition and scalar multiplication.
 **Proof technique:** direct.
 
 1.1 Let $\sigma,\tau$ be smooth sections and let $f\in C^\infty(M)$. On a local frame, write $\sigma=\sum a_i s_i$ and $\tau=\sum b_i s_i$ with smooth components $a_i,b_i$. Then $\sigma+\tau=\sum(a_i+b_i)s_i$ and $f\sigma=\sum(fa_i)s_i$. [L1, given]
+
 2.1 By [L2], the component functions $a_i+b_i$ and $fa_i$ are smooth, so [L1] shows that $\sigma+\tau$ and $f\sigma$ are again smooth sections. The module axioms hold fibrewise because each fibre is a vector space. [L1, L2, step 1.1] ∎

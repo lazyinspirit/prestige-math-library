@@ -2,7 +2,7 @@
 id: rem-finite-counting-measure-minkowski-agrees-with-the-published-finite-theorem
 kind: remark
 title: "On a finite counting space, Minkowski agrees with the published finite theorem for $p>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ sources:
     - title: "Richard L. Wheeden and Antoni Zygmund, Measure and Integral, Chapter 8"
       url: "https://djvu.online/file/u1gYJemR8hzMe"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

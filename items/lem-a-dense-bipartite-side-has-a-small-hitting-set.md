@@ -2,7 +2,7 @@
 id: lem-a-dense-bipartite-side-has-a-small-hitting-set
 kind: lemma
 title: "A dense bipartite side has a small hitting set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

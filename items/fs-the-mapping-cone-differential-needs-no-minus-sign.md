@@ -2,7 +2,7 @@
 id: fs-the-mapping-cone-differential-needs-no-minus-sign
 kind: false-statement
 title: "FALSE: the mapping-cone differential needs no minus sign"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, lem-the-mapping-cone-differential-squares-to-zero]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

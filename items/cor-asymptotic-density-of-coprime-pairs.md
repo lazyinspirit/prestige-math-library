@@ -2,7 +2,7 @@
 id: cor-asymptotic-density-of-coprime-pairs
 kind: corollary
 title: "The proportion of pairs in {1,...,n}^2 that are coprime tends to 6 over pi squared"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-coprime-pair-counting-asymptotic]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

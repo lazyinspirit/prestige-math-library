@@ -2,7 +2,7 @@
 id: thm-dedekind-pid-class-group-characterisation
 kind: theorem
 title: "A Dedekind domain is a PID exactly when its class group is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

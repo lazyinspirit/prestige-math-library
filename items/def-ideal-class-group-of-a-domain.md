@@ -2,7 +2,7 @@
 id: def-ideal-class-group-of-a-domain
 kind: definition
 title: "The ideal class group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-ideal-class-group-well-defined]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

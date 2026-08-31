@@ -2,7 +2,7 @@
 id: thm-finite-torsionfree-modules-over-dedekind-domains
 kind: theorem
 title: "Finite torsion-free Dedekind modules split into invertible ideal summands"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

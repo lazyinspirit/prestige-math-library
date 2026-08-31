@@ -2,7 +2,7 @@
 id: thm-riemann-surface-of-the-logarithm
 kind: theorem
 title: "The Riemann surface of the logarithm is the complex plane over the punctured plane via exp"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

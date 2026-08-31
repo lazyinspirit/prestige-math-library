@@ -2,7 +2,7 @@
 id: ex-a-ritz-pair-and-its-residual-from-a-small-arnoldi-run
 kind: example
 title: "A Ritz pair from Arnoldi has a residual given by the last Hessenberg column entry"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

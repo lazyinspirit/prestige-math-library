@@ -2,7 +2,7 @@
 id: thm-divisor-sum-summatory-estimate
 kind: theorem
 title: "The summatory divisor-sum function is pi squared over 12 times x squared plus O(x log x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [prop-divisor-functions-under-dirichlet-convolution,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

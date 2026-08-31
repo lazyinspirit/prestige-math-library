@@ -2,7 +2,7 @@
 id: thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise
 kind: theorem
 title: "The dimensions of the Krylov spaces grow by one until the grade and then stabilize"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

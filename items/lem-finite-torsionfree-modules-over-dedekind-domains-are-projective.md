@@ -2,7 +2,7 @@
 id: lem-finite-torsionfree-modules-over-dedekind-domains-are-projective
 kind: lemma
 title: "Finite torsion-free modules over Dedekind domains are projective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

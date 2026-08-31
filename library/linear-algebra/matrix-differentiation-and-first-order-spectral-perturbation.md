@@ -1,7 +1,7 @@
 ---
 page: matrix-differentiation-and-first-order-spectral-perturbation
 title: "Matrix Differentiation and First-order Spectral Perturbation"
-status: draft
+status: published
 items: [def-real-frechet-derivative-on-real-and-complex-matrix-spaces,
         prop-matrix-differentials-obey-sum-product-and-adjoint-rules,
         thm-derivative-of-matrix-inversion,

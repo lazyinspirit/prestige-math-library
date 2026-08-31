@@ -2,7 +2,7 @@
 id: thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric
 kind: theorem
 title: "Every smooth vector bundle admits a smooth bundle metric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -41,4 +42,5 @@ covers ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
 **Proof technique:** direct.
 
 1.1 Choose a trivializing open cover $(U_\alpha)$ of $M$ and, by [L2], a local frame on each $U_\alpha$. Pull back the Euclidean inner product on $\mathbb R^r$ through that trivialization to obtain a smooth local bundle metric $h_\alpha$ on $E|_{U_\alpha}$. [L2, given, choose]
+
 2.1 By [L1], choose a smooth partition of unity $(\rho_\alpha)$ subordinate to $(U_\alpha)$ and define $h:=\sum_\alpha \rho_\alpha h_\alpha.$ The sum is locally finite, so $h$ is smooth. At each point $p$, some $\rho_\alpha(p)>0$, all weights are nonnegative, and $\sum_\alpha\rho_\alpha(p)=1$, so $h_p$ is a positive-definite inner product on $E_p$. Therefore $h$ is a smooth bundle metric on $E$. [L1, step 1.1, construct, algebra] ∎

@@ -2,7 +2,7 @@
 id: def-grade-and-relative-minimal-polynomial-of-a-start-vector
 kind: definition
 title: "The grade of a start vector and its relative minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,8 @@ provenance:
 deps: [def-krylov-subspace-of-a-matrix-and-start-vector]
 aliases: []
 landmark: false
+verification:
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

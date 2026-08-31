@@ -2,13 +2,14 @@
 id: def-morphism-of-chain-maps
 kind: definition
 title: "A morphism of chain maps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-chain-map, def-category-of-chain-complexes]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

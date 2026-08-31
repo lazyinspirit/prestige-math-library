@@ -2,7 +2,7 @@
 id: cor-average-order-of-two-square-representations
 kind: corollary
 title: "The average order of the two-square representation count is pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-summatory-function-and-average-order,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-divisor-group-of-a-dedekind-domain
 kind: definition
 title: "The divisor group of a Dedekind domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

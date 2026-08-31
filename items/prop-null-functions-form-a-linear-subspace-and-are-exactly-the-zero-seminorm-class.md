@@ -2,7 +2,7 @@
 id: prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class
 kind: proposition
 title: "Null functions form a linear subspace and are exactly the zero-seminorm class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-null-subspace-of-almost-everywhere-zero-functions, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-linear-subspace, thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: "Use countable-union stability of null sets for addition and scalar multiplication. For 1 <= p < infinity, the p-seminorm vanishes exactly when the integral of |f|^p is zero; for p = infinity, vanishing means the essential supremum is zero."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

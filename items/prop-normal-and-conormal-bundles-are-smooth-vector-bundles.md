@@ -2,7 +2,7 @@
 id: prop-normal-and-conormal-bundles-are-smooth-vector-bundles
 kind: proposition
 title: "Assuming countable choice, normal and conormal bundles are smooth vector bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,4 +50,5 @@ $y_1=\cdots=y_c=0$ ([[def-embedded-submanifold-and-slice-chart]]).
 **Proof technique:** direct.
 
 1.1 In a slice chart $(x_1,\dots,x_k,y_1,\dots,y_c)$ with $S=\{y=0\}$, the induced charts of [L0] make $TM|_S$ a smooth vector bundle with local frame $\partial_{x_1},\dots,\partial_{x_k},\partial_{y_1},\dots,\partial_{y_c}$, while $TS$ is spanned by the $\partial_{x_i}$. Hence $TS$ is a smooth subbundle and the classes of $\partial_{y_j}$ give a local frame of the quotient $TM|_S/TS$. By [L2], the normal bundle is smooth. [L0, L1, L2, given]
+
 2.1 In the same slice chart, the induced cotangent charts of [L0] give the local coframe $dx_1,\dots,dx_k,dy_1,\dots,dy_c$, and the covectors annihilating $TS$ are exactly the span of $dy_1,\dots,dy_c$. These local frames vary smoothly, so the conormal bundle is a smooth subbundle of $T^*M|_S$, hence a smooth vector bundle over $S$. [L0, L1, step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: prop-a-vector-bundle-section-with-surjective-vertical-differential-at-every-zero-has-a-submanifold-zero-set
 kind: proposition
 title: "A vector bundle section with surjective vertical differential at every zero has a submanifold zero set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -47,4 +48,5 @@ component map to $\mathbb R^r$
 **Proof technique:** direct.
 
 1.1 Let $p\in Z(s)$ and choose a local frame near $p$. Then $s(x)=\sum_i f_i(x)e_i(x)$ for a smooth map $f=(f_1,\dots,f_r):U\to\mathbb R^r$. Because $s(p)=0_p$, one has $f(p)=0$. Under a change of frame by a matrix $A(x)$, the new component map is $A(x)f(x)$, whose derivative at $p$ is $A(p)df_p$ because the term $(dA)_p f(p)$ vanishes. Thus surjectivity of the vertical differential is exactly surjectivity of $df_p$, independent of the chosen frame. [L1, given]
+
 2.1 Near $p$, the zero set of $s$ is therefore the zero set of the component map $f$, and $0\in\mathbb R^r$ is a regular value because $df_p$ is surjective. By [L2], $f^{-1}(0)$ is an embedded submanifold of codimension $r$. Doing this at every zero proves that $Z(s)$ is an embedded submanifold of codimension $r$. [L2, step 1.1, algebra] ∎

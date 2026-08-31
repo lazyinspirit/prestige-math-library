@@ -1,7 +1,7 @@
 ---
 page: star-expansions-and-erdos-hajnal
 title: "Star Expansions and the Erdős-Hajnal Property"
-status: draft
+status: published
 items: [def-star-expansion-of-a-graph,
         thm-a-wide-coherent-blockade-contains-a-blockade-rainbow-copy-of-a-forest,
         cor-few-induced-copies-force-a-linearly-large-induced-subgraph-with-bounded-maximum-degree,

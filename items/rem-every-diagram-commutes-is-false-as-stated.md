@@ -2,13 +2,14 @@
 id: rem-every-diagram-commutes-is-false-as-stated
 kind: remark
 title: "Why 'every diagram commutes' is false as stated"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-canonical-morphism-between-parenthesised-words]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

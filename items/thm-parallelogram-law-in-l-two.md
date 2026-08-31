@@ -2,7 +2,7 @@
 id: thm-parallelogram-law-in-l-two
 kind: theorem
 title: "The parallelogram law in $L^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-generalized-holder-inequality-for-products, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: "Expand |f + g|^2 + |f - g|^2 pointwise to 2|f|^2 + 2|g|^2 and integrate."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

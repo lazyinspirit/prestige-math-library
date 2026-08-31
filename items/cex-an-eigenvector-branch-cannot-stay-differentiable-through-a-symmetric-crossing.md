@@ -2,7 +2,7 @@
 id: cex-an-eigenvector-branch-cannot-stay-differentiable-through-a-symmetric-crossing
 kind: counterexample
 title: "At a symmetric crossing, an ordered eigenvector branch cannot remain differentiable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

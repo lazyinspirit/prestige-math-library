@@ -2,7 +2,7 @@
 id: thm-circle-of-convergence-contains-a-singular-point
 kind: theorem
 title: "A power series of finite radius has a singular point on its circle of convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-simple-eigenvalue-condition-number-is-norm-x-norm-y-over-y-star-x
 kind: proposition
 title: "The normwise condition number of a simple eigenvalue is $\\|x\\|_2\\|y\\|_2/|y^*x|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

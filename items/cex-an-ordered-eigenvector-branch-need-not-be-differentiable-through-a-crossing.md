@@ -2,7 +2,7 @@
 id: cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing
 kind: counterexample
 title: "An ordered eigenvector branch need not extend differentiably through an eigenvalue crossing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

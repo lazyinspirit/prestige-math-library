@@ -2,7 +2,7 @@
 id: def-local-frame-and-global-frame-of-a-vector-bundle
 kind: definition
 title: "Local and global frames of a vector bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

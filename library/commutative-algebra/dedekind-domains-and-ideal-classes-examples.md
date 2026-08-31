@@ -1,7 +1,7 @@
 ---
 page: dedekind-domains-and-ideal-classes-examples
 title: "Dedekind Domains and Ideal Classes Examples"
-status: draft
+status: published
 items: []
 examples: [ex-pid-as-dedekind-domain, ex-semilocal-dedekind-domain-is-a-pid, ex-fractional-ideal-in-the-integers, ex-ideal-inverse-computation, ex-steinitz-class-rank-two-module, ex-dedekind-localisation-is-dvr, ex-two-generators-for-a-dedekind-ideal, ex-divisor-of-a-fractional-ideal, ex-nondedekind-ideal-not-invertible]
 ---

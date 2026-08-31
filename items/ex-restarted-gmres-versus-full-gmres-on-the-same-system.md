@@ -2,7 +2,7 @@
 id: ex-restarted-gmres-versus-full-gmres-on-the-same-system
 kind: example
 title: "Restarted GMRES can need more cycles than unrestarted GMRES on the same system"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

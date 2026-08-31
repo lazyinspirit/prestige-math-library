@@ -2,7 +2,7 @@
 id: fs-strictification-requires-the-axiom-of-choice
 kind: false-statement
 title: "Strictification requires the axiom of choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-the-choice-cost-of-strictification]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

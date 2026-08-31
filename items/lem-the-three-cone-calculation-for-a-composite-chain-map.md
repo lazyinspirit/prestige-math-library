@@ -2,7 +2,7 @@
 id: lem-the-three-cone-calculation-for-a-composite-chain-map
 kind: lemma
 title: "The three-cone calculation for a composite chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones, prop-cones-preserve-chain-homotopy-equivalences-of-arrows, def-chain-homotopy-equivalence, thm-the-cone-of-an-identity-map-is-contractible]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

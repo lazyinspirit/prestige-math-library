@@ -2,7 +2,7 @@
 id: fs-every-monoidal-category-is-monoidally-equivalent-to-a-skeletal-strict-one
 kind: false-statement
 title: "Every monoidal category is monoidally equivalent to a skeletal strict one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-skeletal-category-and-skeleton, rem-strictification-gives-equivalence-and-never-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

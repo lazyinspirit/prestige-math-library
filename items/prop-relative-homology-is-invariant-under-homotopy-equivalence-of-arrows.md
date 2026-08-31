@@ -2,7 +2,7 @@
 id: prop-relative-homology-is-invariant-under-homotopy-equivalence-of-arrows
 kind: proposition
 title: "Relative homology is invariant under homotopy equivalence of arrows"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-homology-of-a-chain-map, prop-cones-preserve-chain-homotopy-equivalences-of-arrows, thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism, thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

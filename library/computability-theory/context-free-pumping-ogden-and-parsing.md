@@ -1,7 +1,7 @@
 ---
 page: context-free-pumping-ogden-and-parsing
 title: "Context-Free Pumping, Ogden's Lemma, and Parsing"
-status: draft
+status: published
 items:
   - lem-height-and-yield-bound-for-cnf-trees
   - thm-pumping-lemma-for-context-free-languages

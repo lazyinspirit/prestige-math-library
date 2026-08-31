@@ -2,7 +2,7 @@
 id: def-null-subspace-of-almost-everywhere-zero-functions
 kind: definition
 title: "The null subspace of measurable functions that vanish almost everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.1"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
 ---
 

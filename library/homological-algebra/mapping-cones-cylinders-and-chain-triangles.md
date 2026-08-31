@@ -1,7 +1,7 @@
 ---
 page: mapping-cones-cylinders-and-chain-triangles
 title: "Mapping Cones Cylinders and Chain Triangles"
-status: draft
+status: published
 items: [def-mapping-cone-of-a-chain-map,
         lem-the-mapping-cone-differential-squares-to-zero,
         def-canonical-inclusion-and-projection-for-a-mapping-cone,

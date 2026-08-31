@@ -2,7 +2,7 @@
 id: lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section
 kind: lemma
 title: "Every vector in a fibre extends to a compactly supported smooth section"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

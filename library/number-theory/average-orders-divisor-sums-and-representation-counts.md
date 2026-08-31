@@ -1,7 +1,7 @@
 ---
 page: average-orders-divisor-sums-and-representation-counts
 title: "Average Orders Divisor Sums and Representation Counts"
-status: draft
+status: published
 items: [def-summatory-function-and-average-order,
         def-euler-mascheroni-constant,
         lem-harmonic-sum-asymptotic,

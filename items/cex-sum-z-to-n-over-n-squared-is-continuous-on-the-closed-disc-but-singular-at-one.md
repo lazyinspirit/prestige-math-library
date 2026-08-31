@@ -2,7 +2,7 @@
 id: cex-sum-z-to-n-over-n-squared-is-continuous-on-the-closed-disc-but-singular-at-one
 kind: counterexample
 title: "The series sum z to the n over n squared is continuous on the closed disc but singular at 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

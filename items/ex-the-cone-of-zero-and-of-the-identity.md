@@ -2,7 +2,7 @@
 id: ex-the-cone-of-zero-and-of-the-identity
 kind: example
 title: "The cone of zero and of the identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift, thm-the-cone-of-an-identity-map-is-contractible, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

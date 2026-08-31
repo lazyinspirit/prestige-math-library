@@ -2,7 +2,7 @@
 id: thm-ideal-class-group-is-the-picard-group
 kind: theorem
 title: "The ideal class group is the Picard group of rank-one projectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-mapping-cone-is-a-functor-on-the-homotopy-category-with-no-extra-data
 kind: false-statement
 title: "FALSE: mapping cone is a functor on the homotopy category with no extra data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-mapping-cone-is-functorial-on-the-arrow-category-of-complexes, lem-homotopic-maps-have-chain-isomorphic-mapping-cones, def-homotopy-category-of-chain-complexes, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-summatory-function-and-average-order
 kind: definition
 title: "Summatory functions and average orders"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-arithmetic-function]
 justified_by: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

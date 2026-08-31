@@ -2,7 +2,7 @@
 id: prop-diagonalizable-gmres-residual-bound-keeps-the-eigenvector-conditioning-factor
 kind: proposition
 title: "For a diagonalizable matrix, the GMRES residual bound carries the eigenvector-conditioning factor $\\kappa(V)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

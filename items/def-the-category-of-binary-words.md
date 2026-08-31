@@ -2,13 +2,14 @@
 id: def-the-category-of-binary-words
 kind: definition
 title: "The category of binary words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-category]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-a-monoidal-category-equivalent-to-a-strict-one-satisfies-coherence
 kind: theorem
 title: "A monoidal category equivalent to a strict one satisfies coherence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-canonical-morphism-between-parenthesised-words, def-monoidal-equivale
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-mac-lane-strictification
 kind: theorem
 title: "Mac Lane strictification"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-the-category-of-right-module-endofunctors, thm-the-module-endofunctor
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

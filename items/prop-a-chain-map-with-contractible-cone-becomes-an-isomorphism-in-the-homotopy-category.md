@@ -2,7 +2,7 @@
 id: prop-a-chain-map-with-contractible-cone-becomes-an-isomorphism-in-the-homotopy-category
 kind: proposition
 title: "A chain map with contractible cone becomes an isomorphism in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible, def-homotopy-category-of-chain-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: cor-coherence-follows-from-freeness
 kind: corollary
 title: "The free-word formulation implies the canonical-map formulation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-the-category-of-binary-words, thm-the-word-category-is-the-free-monoidal-category-on-one-generator]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

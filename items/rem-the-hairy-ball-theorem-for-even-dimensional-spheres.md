@@ -2,7 +2,7 @@
 id: rem-the-hairy-ball-theorem-for-even-dimensional-spheres
 kind: remark
 title: "The hairy-ball theorem for even-dimensional spheres"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  sources_checked: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

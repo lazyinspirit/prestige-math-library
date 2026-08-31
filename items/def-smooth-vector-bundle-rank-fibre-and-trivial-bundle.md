@@ -2,7 +2,7 @@
 id: def-smooth-vector-bundle-rank-fibre-and-trivial-bundle
 kind: definition
 title: "Smooth vector bundles, rank, fibres, and trivial bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

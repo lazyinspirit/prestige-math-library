@@ -2,7 +2,7 @@
 id: prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination
 kind: proposition
 title: "Restarted GMRES preserves cyclewise residual minimization but loses the unrestarted finite-termination guarantee"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

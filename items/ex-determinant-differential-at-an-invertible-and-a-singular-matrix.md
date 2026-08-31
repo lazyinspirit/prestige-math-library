@@ -2,7 +2,7 @@
 id: ex-determinant-differential-at-an-invertible-and-a-singular-matrix
 kind: example
 title: "The adjugate formula still differentiates the determinant at a singular matrix, while Jacobi's inverse form does not"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

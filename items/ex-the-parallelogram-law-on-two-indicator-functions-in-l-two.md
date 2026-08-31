@@ -2,7 +2,7 @@
 id: ex-the-parallelogram-law-on-two-indicator-functions-in-l-two
 kind: example
 title: "The parallelogram law on two indicator functions in $L^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-parallelogram-law-in-l-two]
 proof_strategy: "Evaluate all four L^2 norms on a pair of simple indicator functions and compare the two sides directly."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

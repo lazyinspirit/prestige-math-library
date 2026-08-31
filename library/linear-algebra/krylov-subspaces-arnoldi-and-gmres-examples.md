@@ -1,7 +1,7 @@
 ---
 page: krylov-subspaces-arnoldi-and-gmres-examples
 title: "Krylov Subspaces, Arnoldi and GMRES: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-a-krylov-chain-with-early-stabilisation-and-its-relative-minimal-polynomial,
            ex-arnoldi-factorization-by-hand-for-a-three-step-krylov-chain,

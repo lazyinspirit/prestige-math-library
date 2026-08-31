@@ -2,7 +2,7 @@
 id: fs-every-diagram-in-a-monoidal-category-commutes
 kind: false-statement
 title: "Every diagram in a monoidal category commutes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-every-diagram-commutes-is-false-as-stated, thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

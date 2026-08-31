@@ -2,7 +2,7 @@
 id: thm-finite-measure-l-r-includes-into-l-p-for-p-less-r
 kind: theorem
 title: "Finite-measure $L^r$ includes into $L^p$ for $p < r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Write |f|^p as |f|^p times 1 and apply Holder with exponents r/p and r/(r - p). The finite total measure contributes the factor mu(X)^(1/p - 1/r)."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

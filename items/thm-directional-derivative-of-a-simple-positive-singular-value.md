@@ -2,7 +2,7 @@
 id: thm-directional-derivative-of-a-simple-positive-singular-value
 kind: theorem
 title: "If $\\sigma>0$ is a simple singular value with left and right singular vectors $u,v$, then its real directional derivative is $\\operatorname{Re}(u^*Hv)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x
 kind: theorem
 title: "Along a differentiable matrix path, a simple eigenvalue satisfies $\\lambda'=y^*A'x$ under the normalization $y^*x=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

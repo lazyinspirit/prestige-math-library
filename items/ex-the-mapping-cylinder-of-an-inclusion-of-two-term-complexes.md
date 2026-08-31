@@ -2,7 +2,7 @@
 id: ex-the-mapping-cylinder-of-an-inclusion-of-two-term-complexes
 kind: example
 title: "The mapping cylinder of an inclusion of two-term complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cylinder-of-a-chain-map, thm-the-mapping-cylinder-factors-a-chain-map, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

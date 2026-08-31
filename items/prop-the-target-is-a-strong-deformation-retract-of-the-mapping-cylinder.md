@@ -2,7 +2,7 @@
 id: prop-the-target-is-a-strong-deformation-retract-of-the-mapping-cylinder
 kind: proposition
 title: "The target is a strong deformation retract of the mapping cylinder"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-mapping-cylinder-factors-a-chain-map, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

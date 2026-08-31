@@ -2,7 +2,7 @@
 id: thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one
 kind: theorem
 title: "$\\mathcal{L}^p$ and $L^\\infty$ are vector spaces for $p \\ge 1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, thm-minkowski-inequality-for-integrals, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-vector-space, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: "For 1 <= p < infinity, use Minkowski to keep sums in L^p and homogeneity of the integral to keep scalar multiples. For L^infinity, intersect the two essential-bound sets and use countable-union stability of null sets."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

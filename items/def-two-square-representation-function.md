@@ -2,7 +2,7 @@
 id: def-two-square-representation-function
 kind: definition
 title: "The two-square representation function r_2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-arithmetic-function,
        def-sum-of-two-squares-representation]
 justified_by: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

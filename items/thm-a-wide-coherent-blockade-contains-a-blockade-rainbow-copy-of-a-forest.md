@@ -2,7 +2,7 @@
 id: thm-a-wide-coherent-blockade-contains-a-blockade-rainbow-copy-of-a-forest
 kind: theorem
 title: "A wide coherent blockade contains a blockade-rainbow copy of a forest"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: rem-the-exact-scope-of-the-coherence-statement
 kind: remark
 title: "The coherence theorem's exact scope"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-mac-lane-coherence-in-the-canonical-map-form]
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

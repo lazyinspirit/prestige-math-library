@@ -2,7 +2,7 @@
 id: cor-gmres-minimizes-the-residual-over-the-affine-krylov-space
 kind: corollary
 title: "GMRES minimizes the residual norm over the affine Krylov space $x_0+K_m(A,r_0)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

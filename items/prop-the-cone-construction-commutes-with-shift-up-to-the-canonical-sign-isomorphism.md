@@ -2,7 +2,7 @@
 id: prop-the-cone-construction-commutes-with-shift-up-to-the-canonical-sign-isomorphism
 kind: proposition
 title: "The cone construction commutes with shift up to the canonical sign isomorphism"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-shift-of-a-chain-complex, def-shift-of-a-chain-map-and-chain-homotopy, prop-identities-and-composites-of-chain-maps-are-chain-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

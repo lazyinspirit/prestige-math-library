@@ -2,7 +2,7 @@
 id: def-function-element-and-direct-analytic-continuation
 kind: definition
 title: "Function elements and direct analytic continuation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

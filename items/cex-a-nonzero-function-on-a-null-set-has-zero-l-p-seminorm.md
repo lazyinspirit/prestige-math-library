@@ -2,7 +2,7 @@
 id: cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm
 kind: counterexample
 title: "A nonzero function on a null set has zero $L^p$ seminorm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class, thm-rationals-countable, lem-countable-sets-are-null]
 proof_strategy: "Use the indicator of a countable null subset of [0, 1]. It is not the zero function, but its p-seminorm and essential supremum both vanish."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

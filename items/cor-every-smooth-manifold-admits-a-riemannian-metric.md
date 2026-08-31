@@ -2,7 +2,7 @@
 id: cor-every-smooth-manifold-admits-a-riemannian-metric
 kind: corollary
 title: "Assuming countable choice, every smooth manifold admits a Riemannian metric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -39,4 +40,5 @@ Assume $\mathrm{AC}_\omega$. Every smooth manifold admits a Riemannian metric.
 **Proof technique:** direct.
 
 1.1 By [L1], the tangent bundle of $M$ is a smooth vector bundle. [L1, given]
+
 2.1 Apply [L2] to $TM$. A smooth bundle metric on $TM$ is exactly a Riemannian metric on $M$. [L2, step 1.1] ∎

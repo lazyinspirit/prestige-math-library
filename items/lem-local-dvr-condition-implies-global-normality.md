@@ -2,7 +2,7 @@
 id: lem-local-dvr-condition-implies-global-normality
 kind: lemma
 title: "Local DVRs at the nonzero primes force global normality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-the-category-of-binary-words-is-monoidal
 kind: theorem
 title: "The category of binary words is monoidal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-category-of-binary-words, def-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

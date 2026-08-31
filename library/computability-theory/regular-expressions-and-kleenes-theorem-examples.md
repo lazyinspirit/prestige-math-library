@@ -1,7 +1,7 @@
 ---
 page: regular-expressions-and-kleenes-theorem-examples
 title: "Regular Expressions and Kleene's Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-regular-expression-to-epsilon-nfa

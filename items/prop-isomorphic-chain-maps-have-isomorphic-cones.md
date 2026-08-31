@@ -2,7 +2,7 @@
 id: prop-isomorphic-chain-maps-have-isomorphic-cones
 kind: proposition
 title: "Isomorphic chain maps have isomorphic cones"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-chain-map, prop-identities-and-composites-of-chain-maps-are-chain-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

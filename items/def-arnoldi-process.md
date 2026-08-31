@@ -2,7 +2,7 @@
 id: def-arnoldi-process
 kind: definition
 title: "The Arnoldi process for building an orthonormal basis of a Krylov subspace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [def-krylov-subspace-of-a-matrix-and-start-vector,
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

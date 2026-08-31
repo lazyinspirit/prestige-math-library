@@ -2,7 +2,7 @@
 id: thm-the-pullback-fibre-product-is-a-smooth-vector-bundle
 kind: theorem
 title: "The pullback fibre product is a smooth vector bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -45,4 +46,5 @@ $(p,v)\mapsto(p,g_{\beta\alpha}(p)v)$
 **Proof technique:** direct.
 
 1.1 Let $\Phi_\alpha:E|_{U_\alpha}\to U_\alpha\times\mathbb R^r$ be a vector bundle chart. For $q\in f^{-1}(U_\alpha)$ and $(q,e)\in f^*E$, define $\widetilde\Phi_\alpha(q,e)=(q,v)$ when $\Phi_\alpha(e)=(f(q),v)$. This is a bijection $(f^*E)|_{f^{-1}(U_\alpha)}\to f^{-1}(U_\alpha)\times\mathbb R^r$. [L1, L2, given, construct]
+
 2.1 On overlaps, $\widetilde\Phi_\beta\circ\widetilde\Phi_\alpha^{-1}(q,v)=(q,g_{\beta\alpha}(f(q))v)$. These chart changes are smooth and fibrewise linear because the original transition functions are smooth. Therefore the pulled-back charts define a smooth rank-$r$ vector bundle over $N$. [L1, step 1.1, algebra] ∎

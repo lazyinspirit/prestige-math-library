@@ -2,7 +2,7 @@
 id: ex-the-star-expansion-of-k-three-contains-the-hatted-five-cycle
 kind: example
 title: "The star-expansion of $K_3$ contains the hatted five-cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-a-long-blockade-yields-a-wide-cograph-pattern-subblockade-or-a-rainbow-forest
 kind: theorem
 title: "A long blockade yields a wide cograph-pattern subblockade or a rainbow forest"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

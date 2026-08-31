@@ -2,7 +2,7 @@
 id: fs-the-riemann-surface-of-a-multivalued-function-is-always-a-subset-of-c-squared
 kind: false-statement
 title: "FALSE: the Riemann surface of a multivalued function is automatically a subset of C squared"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

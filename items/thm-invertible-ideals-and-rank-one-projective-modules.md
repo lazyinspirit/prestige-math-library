@@ -2,7 +2,7 @@
 id: thm-invertible-ideals-and-rank-one-projective-modules
 kind: theorem
 title: "Invertible fractional ideals are exactly the rank-one projective modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

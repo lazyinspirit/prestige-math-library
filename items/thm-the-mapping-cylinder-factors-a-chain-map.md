@@ -2,7 +2,7 @@
 id: thm-the-mapping-cylinder-factors-a-chain-map
 kind: theorem
 title: "The mapping cylinder factors a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cylinder-of-a-chain-map, def-chain-homotopy-equivalence, lem-the-mapping-cylinder-differential-squares-to-zero, def-split-short-exact-sequence-in-an-abelian-category, prop-finite-biproducts-of-complexes-are-computed-degreewise, prop-identities-and-composites-of-chain-maps-are-chain-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

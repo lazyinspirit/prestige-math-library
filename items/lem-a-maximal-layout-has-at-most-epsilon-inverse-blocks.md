@@ -2,7 +2,7 @@
 id: lem-a-maximal-layout-has-at-most-epsilon-inverse-blocks
 kind: lemma
 title: "A maximal layout has at most $\\epsilon^{-1}$ blocks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

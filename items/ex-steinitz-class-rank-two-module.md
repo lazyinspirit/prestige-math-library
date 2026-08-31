@@ -2,7 +2,7 @@
 id: ex-steinitz-class-rank-two-module
 kind: example
 title: "A rank-two module and its ideal-class label"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-k-to-the-minus-a-membership-in-ell-p
 kind: example
 title: "$k^{-a}$ membership in $\\ell^p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-ell-p-is-l-p-of-counting-measure, thm-p-series-real-exponents]
 proof_strategy: "Apply the real p-series test to the series sum k^(-ap) and read off the threshold ap > 1."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

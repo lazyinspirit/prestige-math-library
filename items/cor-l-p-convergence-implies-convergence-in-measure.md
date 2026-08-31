@@ -2,7 +2,7 @@
 id: cor-l-p-convergence-implies-convergence-in-measure
 kind: corollary
 title: "Convergence in $L^p$ implies convergence in measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-convergence-in-measure, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-chebyshev-markov-inequality-for-the-integral, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "For 1 <= p < infinity, apply Chebyshev-Markov to |f_n - f|^p. For p = infinity, the essential-supremum bound makes the bad set null for all large n."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

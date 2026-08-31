@@ -2,7 +2,7 @@
 id: prop-an-exact-functor-carries-mapping-cone-sequences-to-mapping-cone-sequences
 kind: proposition
 title: "An exact functor carries mapping-cone sequences to mapping-cone sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-exact-functor-between-abelian-categories, thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive, prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps, def-mapping-cone-of-a-chain-map, def-canonical-inclusion-and-projection-for-a-mapping-cone, def-shift-of-a-chain-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

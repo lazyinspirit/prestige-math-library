@@ -2,7 +2,7 @@
 id: thm-generalized-holder-inequality-for-products
 kind: theorem
 title: "Generalized Holder inequality puts products into $L^r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "Raise |fg| to the r-th power and apply Holder to |f|^r and |g|^r with conjugate exponents p/r and q/r."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-finite-counting-measure-on-n-points-recovers-rn-p-norms
 kind: example
 title: "Finite counting measure on $n$ points recovers $\\mathbb{R}^n$ $p$-norms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-ell-p-is-l-p-of-counting-measure, def-p-norms-on-rn, def-counting-measure, prop-counting-measure-is-a-measure, def-nonnegative-lebesgue-integral, cor-beppo-levi-theorem]
 proof_strategy: "Unwind the counting-measure integral on a finite set and compare it term by term with the published p-norms on R^n."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

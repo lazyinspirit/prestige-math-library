@@ -2,13 +2,14 @@
 id: rem-strictification-gives-equivalence-and-never-isomorphism
 kind: remark
 title: "Strictification gives equivalence, not on-the-nose identification"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-mac-lane-strictification, rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified, def-skeletal-category-and-skeleton]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

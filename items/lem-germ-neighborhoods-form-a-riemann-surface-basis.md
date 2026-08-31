@@ -2,7 +2,7 @@
 id: lem-germ-neighborhoods-form-a-riemann-surface-basis
 kind: lemma
 title: "The germ neighborhoods form a Hausdorff, second-countable Riemann-surface atlas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

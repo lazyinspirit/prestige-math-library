@@ -2,7 +2,7 @@
 id: thm-determinant-differential-and-jacobis-formula
 kind: theorem
 title: "The determinant differential is $D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H)$ at every matrix, and Jacobi's formula holds on the invertible locus"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

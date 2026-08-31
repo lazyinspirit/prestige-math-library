@@ -1,7 +1,7 @@
 ---
 page: matrix-differentiation-and-first-order-spectral-perturbation-examples
 title: "Matrix Differentiation and First-order Spectral Perturbation: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-inverse-derivative-of-a-two-by-two-matrix,
            ex-determinant-differential-at-an-invertible-and-a-singular-matrix,

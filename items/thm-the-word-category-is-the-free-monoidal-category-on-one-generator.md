@@ -2,7 +2,7 @@
 id: thm-the-word-category-is-the-free-monoidal-category-on-one-generator
 kind: theorem
 title: "The word category is the free monoidal category on one generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-canonical-morphism-between-parenthesised-words, thm-mac-lane-coherenc
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: fs-the-essential-supremum-equals-the-pointwise-supremum
 kind: false-statement
 title: "FALSE: the essential supremum equals the pointwise supremum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one]
 proof_strategy: "Refute with the indicator of the rationals on [0, 1], whose pointwise supremum is 1 but whose essential supremum is 0."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

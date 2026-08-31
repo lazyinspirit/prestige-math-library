@@ -2,7 +2,7 @@
 id: cor-single-valued-continuation-on-simply-connected-domains
 kind: corollary
 title: "On a simply connected domain, pathwise continuation glues to one holomorphic function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

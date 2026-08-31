@@ -2,7 +2,7 @@
 id: prop-essential-supremum-is-attained-as-the-least-essential-bound
 kind: proposition
 title: "The essential supremum is attained as the least essential bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-essential-supremum-with-respect-to-a-measure, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-finite-and-countable-subadditivity-of-measures]
 proof_strategy: "Take the countable family of bad sets {|f| > ||f||_infinity + 1/n}; each is null by minimality of the infimum. Their union is null, giving |f| <= ||f||_infinity almost everywhere, and leastness is built into the definition."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

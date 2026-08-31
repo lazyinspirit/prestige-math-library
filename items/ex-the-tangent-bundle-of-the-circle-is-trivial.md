@@ -2,7 +2,7 @@
 id: ex-the-tangent-bundle-of-the-circle-is-trivial
 kind: example
 title: "Assuming countable choice, the tangent bundle of the circle is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -41,4 +42,5 @@ Assume $\mathrm{AC}_\omega$. The tangent bundle of $S^1$ is a trivial line bundl
 **Proof technique:** direct.
 
 1.1 Define $X:S^1\to TS^1$ by $X(x,y)=(-y,x)$. This vector is tangent to $S^1$ at $(x,y)$ because it is orthogonal to the radial vector $(x,y)$, and it is never zero on the circle. [L1, given, construct]
+
 2.1 Because $TS^1$ has rank $1$, the nowhere-zero tangent field $X$ is a global frame. Hence [L2] shows that $TS^1$ is trivial. [L2, step 1.1] ∎

@@ -2,7 +2,7 @@
 id: ex-the-word-category-on-words-of-length-three
 kind: example
 title: "The word category on words of length three"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-the-category-of-binary-words, thm-the-category-of-binary-words-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

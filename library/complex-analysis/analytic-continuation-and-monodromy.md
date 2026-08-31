@@ -1,7 +1,7 @@
 ---
 page: analytic-continuation-and-monodromy
 title: "Analytic Continuation, Monodromy, and Riemann Surfaces"
-status: draft
+status: published
 items: [def-holomorphic-germ,
         thm-holomorphic-germs-at-a-point-form-a-local-ring,
         def-function-element-and-direct-analytic-continuation,

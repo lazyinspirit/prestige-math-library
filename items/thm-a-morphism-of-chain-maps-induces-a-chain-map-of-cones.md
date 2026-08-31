@@ -2,7 +2,7 @@
 id: thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones
 kind: theorem
 title: "A morphism of chain maps induces a chain map of cones"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morphism-of-chain-maps, def-mapping-cone-of-a-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

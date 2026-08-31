@@ -2,7 +2,7 @@
 id: lem-refining-the-largest-layout-block-forces-local-blockade-length-at-least-epsilon-inverse
 kind: lemma
 title: "Refining the largest layout block forces local blockade length at least $\\epsilon^{-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

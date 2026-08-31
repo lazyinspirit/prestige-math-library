@@ -2,7 +2,7 @@
 id: thm-submodules-of-projectives-over-dedekind-domains
 kind: theorem
 title: "Finitely generated submodules of projective Dedekind modules are projective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

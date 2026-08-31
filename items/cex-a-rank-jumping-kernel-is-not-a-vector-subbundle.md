@@ -2,7 +2,7 @@
 id: cex-a-rank-jumping-kernel-is-not-a-vector-subbundle
 kind: counterexample
 title: "A rank-jumping kernel is not a vector subbundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -38,4 +39,5 @@ The kernel of a smooth bundle map is always a smooth vector subbundle.
 **Proof technique:** direct.
 
 1.1 On the trivial line bundle $\mathbb R\times\mathbb R\to\mathbb R$, define the smooth bundle map $\Phi(x,v)=(x,xv)$. For $x\neq0$, the fibre map is injective, so $\ker\Phi_x=\{0\}$. At $x=0$, the fibre map is zero, so $\ker\Phi_0=\mathbb R$. [L1, given, construct]
+
 2.1 The fibre dimensions of $\ker\Phi$ jump from $0$ to $1$, so the kernel is not locally trivial and therefore not a smooth vector subbundle. This is exactly why [L1] requires constant rank. [L1, step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: ex-a-sparse-p-five-free-graph-with-an-anticomplete-two-blockade
 kind: example
 title: "A sparse $P_5$-free graph with an anticomplete two-blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

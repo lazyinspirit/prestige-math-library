@@ -2,7 +2,7 @@
 id: thm-dual-and-hom-transition-functions-define-smooth-bundles
 kind: theorem
 title: "Dual and Hom transition functions define smooth bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -45,4 +46,5 @@ matrices $g_{\beta\alpha}$ and $h_{\beta\alpha}$.
 **Proof technique:** direct.
 
 1.1 If $\lambda\in E_p^*$ has row-coordinate vector $\ell$ in one dual basis, then after changing the primal basis by $g_{\beta\alpha}(p)$, the same functional has coordinate vector $\ell(g_{\beta\alpha}(p))^{-1}$. By [L2], the dual transition matrix is therefore $(g_{\beta\alpha}(p)^{-1})^T$. [L1, L2, given]
+
 2.1 If $A:E_p\to F_p$ has matrix $B$ in one pair of local frames, then after changing frames by $g_{\beta\alpha}(p)$ and $h_{\beta\alpha}(p)$, the same linear map has matrix $h_{\beta\alpha}(p)Bg_{\beta\alpha}(p)^{-1}$. These formulas are smooth on overlaps because they are built from the smooth transition functions, so they define smooth bundle atlases on $E^*$ and $\operatorname{Hom}(E,F)$. [L1, step 1.1, algebra] ∎

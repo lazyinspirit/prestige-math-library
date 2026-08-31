@@ -2,7 +2,7 @@
 id: rem-elements-of-l-p-are-equivalence-classes-and-pointwise-statements-require-a-representative
 kind: remark
 title: "Elements of $L^p$ are equivalence classes, so pointwise statements require a representative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Section 7B"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

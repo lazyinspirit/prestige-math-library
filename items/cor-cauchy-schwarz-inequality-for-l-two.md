@@ -2,7 +2,7 @@
 id: cor-cauchy-schwarz-inequality-for-l-two
 kind: corollary
 title: "Cauchy-Schwarz inequality for $L^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, thm-equality-case-in-holder-inequality]
 proof_strategy: "Specialize Holder to p = q = 2, and inherit the equality clause from the strict-exponent equality theorem."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

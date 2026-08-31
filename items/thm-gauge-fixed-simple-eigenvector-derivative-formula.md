@@ -2,7 +2,7 @@
 id: thm-gauge-fixed-simple-eigenvector-derivative-formula
 kind: theorem
 title: "In a fixed gauge, the derivative of a simple right eigenvector is obtained by applying the reduced resolvent to the perturbation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-the-star-expansion-of-a-forest-containing-a-long-path-contains-the-corresponding-cycle
 kind: lemma
 title: "A star-expansion of a forest containing a long path contains the corresponding cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

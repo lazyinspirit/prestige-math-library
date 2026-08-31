@@ -2,7 +2,7 @@
 id: thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic
 kind: theorem
 title: "In exact arithmetic, unrestarted GMRES terminates no later than the relative grade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-the-pullback-bundle-is-the-set-theoretic-inverse-image-of-the-total-space
 kind: false-statement
 title: "The pullback bundle is the set-theoretic inverse image of the total space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -43,4 +44,5 @@ space.
 **Proof technique:** direct.
 
 1.1 Let $f:\mathbb R\to\{0\}\subseteq\mathbb R$ be the constant map and let $E=\mathbb R\times\mathbb R\to\mathbb R$ be the trivial line bundle. Then $f^*E=\{(q,(0,v)):q\in\mathbb R,\ v\in\mathbb R\}$, which is naturally $\mathbb R\times\mathbb R$. [L1, given, construct]
+
 2.1 Different base points $q_1\neq q_2$ with the same fibre element $v$ give distinct pullback points $(q_1,(0,v))\neq(q_2,(0,v))$. Thus the pullback keeps new base information and is not a subset of the old total space. It is a fibre product, not a set-theoretic inverse image. [L1, step 1.1, algebra] ∎

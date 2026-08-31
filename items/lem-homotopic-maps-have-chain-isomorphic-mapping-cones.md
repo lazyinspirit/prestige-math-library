@@ -2,7 +2,7 @@
 id: lem-homotopic-maps-have-chain-isomorphic-mapping-cones
 kind: lemma
 title: "Homotopic maps have chain-isomorphic mapping cones"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

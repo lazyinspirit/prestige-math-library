@@ -2,7 +2,7 @@
 id: fs-the-mapping-cylinder-factorization-is-a-model-category-factorization
 kind: false-statement
 title: "FALSE: the mapping cylinder by itself supplies model-category data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-every-chain-map-factors-as-a-cofibration-like-inclusion-followed-by-a-homotopy-equivalence]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

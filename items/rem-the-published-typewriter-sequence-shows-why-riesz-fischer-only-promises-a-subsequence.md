@@ -2,7 +2,7 @@
 id: rem-the-published-typewriter-sequence-shows-why-riesz-fischer-only-promises-a-subsequence
 kind: remark
 title: "The published typewriter sequence shows why Riesz-Fischer only promises a subsequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ sources:
     - title: "Terence Tao, 245A Notes 4: Modes of convergence, Example 7"
       url: "https://terrytao.wordpress.com/2010/10/02/245a-notes-4-modes-of-convergence/"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

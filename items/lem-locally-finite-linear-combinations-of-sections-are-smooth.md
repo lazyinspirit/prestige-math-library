@@ -2,7 +2,7 @@
 id: lem-locally-finite-linear-combinations-of-sections-are-smooth
 kind: lemma
 title: "Locally finite linear combinations of sections are smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -49,4 +50,5 @@ finite family of supports $\operatorname{supp}(f_i\sigma_i)$.
 **Proof technique:** direct.
 
 1.1 Fix a local frame $(s_1,\dots,s_r)$ on an open set $U$. Write $\sigma_i|_U=\sum_j a_{ij}s_j$ with smooth coefficient functions $a_{ij}$. Then on $U$ the formal sum has components $\sum_i f_i a_{ij}$. Because the supports of $f_i\sigma_i$ are locally finite, only finitely many terms are nonzero near each point. [L1, given]
+
 2.1 Each component $\sum_i f_i a_{ij}$ is therefore a locally finite sum of smooth scalar functions, so it is smooth by [L2]. Applying [L1] again shows that $\sum_i f_i\sigma_i$ is a smooth section on $U$, and hence on all of $M$. [L1, L2, step 1.1] ∎

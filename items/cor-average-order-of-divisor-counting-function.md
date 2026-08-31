@@ -2,7 +2,7 @@
 id: cor-average-order-of-divisor-counting-function
 kind: corollary
 title: "The average order of tau is log n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [def-summatory-function-and-average-order,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

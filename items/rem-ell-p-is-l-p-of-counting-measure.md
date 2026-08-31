@@ -2,7 +2,7 @@
 id: rem-ell-p-is-l-p-of-counting-measure
 kind: remark
 title: "$\\ell^p$ is the $L^p$ space of counting measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Example 2.55 and Chapter 7"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

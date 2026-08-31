@@ -2,7 +2,7 @@
 id: lem-an-iterative-sparsification-step-for-sparse-co-p-five-free-graphs
 kind: lemma
 title: "An iterative sparsification step for sparse $\\overline{P_5}$-free graphs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

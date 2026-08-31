@@ -2,7 +2,7 @@
 id: ex-a-two-step-function-shows-the-l-p-norm-converging-to-the-essential-supremum
 kind: example
 title: "A two-step function shows the $L^p$ norm converging to the essential supremum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions]
 proof_strategy: "Compute the p-norms explicitly for a two-step simple function with two distinct values and let p tend to infinity."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-proportional-functions-realise-the-equality-case-of-holder
 kind: example
 title: "Proportional functions realise the equality case of Holder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-equality-case-in-holder-inequality]
 proof_strategy: "Choose nonnegative functions with |f|^p and |g|^q proportional almost everywhere and invoke the equality theorem."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

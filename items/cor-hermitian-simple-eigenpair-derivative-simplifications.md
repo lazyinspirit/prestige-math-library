@@ -2,7 +2,7 @@
 id: cor-hermitian-simple-eigenpair-derivative-simplifications
 kind: corollary
 title: "For a Hermitian simple eigenvalue, one may take $y=x$ and the first-order formulas simplify accordingly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

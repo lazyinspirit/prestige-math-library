@@ -2,7 +2,7 @@
 id: thm-equality-case-in-holder-inequality
 kind: theorem
 title: "Equality in Holder's inequality for $1 < p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, thm-young-inequality-real-exponents, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-calligraphic-l-p-on-a-measure-space]
 proof_strategy: "Trace where equality can occur in the normalized Young-inequality proof. Equality in Young forces the normalized powers |f|^p and |g|^q to be proportional almost everywhere, and conversely that proportionality makes the inequality an equality."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

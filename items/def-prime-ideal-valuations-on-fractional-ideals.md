@@ -2,7 +2,7 @@
 id: def-prime-ideal-valuations-on-fractional-ideals
 kind: definition
 title: "Prime-ideal valuations on fractional ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

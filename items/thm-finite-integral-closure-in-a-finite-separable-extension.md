@@ -2,7 +2,7 @@
 id: thm-finite-integral-closure-in-a-finite-separable-extension
 kind: theorem
 title: "Finite separable integral closures over normal Noetherian domains are module-finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

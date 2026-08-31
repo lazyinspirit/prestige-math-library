@@ -2,7 +2,7 @@
 id: cex-two-formally-distinct-words-that-become-the-same-object
 kind: counterexample
 title: "Two formally distinct words can become the same object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-strict-monoidal-category, rem-every-diagram-commutes-is-false-as-stated]
 proof_strategy: counterexample
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

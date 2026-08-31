@@ -2,7 +2,7 @@
 id: ex-pullback-of-the-tautological-line-bundle-along-the-antipodal-cover
 kind: example
 title: "Pullback of the tautological line bundle along the antipodal cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +47,5 @@ frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
 **Proof technique:** direct.
 
 1.1 A point of $q^*\gamma^1$ is a pair $(x,([x],v))$ with $v\in\mathbb Rx$. Define a section $s:S^n\to q^*\gamma^1$ by $s(x)=(x,([x],x))$. This is well defined because $x$ lies in the line represented by $[x]$. [L1, given, construct]
+
 2.1 The section $s$ is nowhere zero. Since $q^*\gamma^1$ has rank $1$, it is a global frame, so [L2] implies that the pulled-back tautological bundle is trivial. [L2, step 1.1] ∎

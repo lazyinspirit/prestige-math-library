@@ -2,7 +2,7 @@
 id: thm-riesz-fischer-completeness-of-l-p
 kind: theorem
 title: "Riesz-Fischer completeness of $L^p$ for $1 \\le p \\le \\infty$"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-minkowski-inequality-for-integrals, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-complete-metric-space, def-convergence-almost-everywhere-relative-to-a-measure, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-finite-and-countable-subadditivity-of-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound]
 proof_strategy: "For 1 <= p < infinity, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For p = infinity, union the exceptional null sets and take the pointwise limit outside them."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

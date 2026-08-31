@@ -2,7 +2,7 @@
 id: def-restarted-gmres-m
 kind: definition
 title: "Restarted GMRES$(m)$ as repeated GMRES cycles on fixed-size Krylov spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-gmres-iterate]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

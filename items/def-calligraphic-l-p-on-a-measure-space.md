@@ -2,7 +2,7 @@
 id: def-calligraphic-l-p-on-a-measure-space
 kind: definition
 title: "The function space $\\mathcal{L}^p(\\mu)$ for $0 < p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.1"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
 ---
 

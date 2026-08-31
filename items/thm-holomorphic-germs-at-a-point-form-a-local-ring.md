@@ -2,7 +2,7 @@
 id: thm-holomorphic-germs-at-a-point-form-a-local-ring
 kind: theorem
 title: "Holomorphic germs at a point form a local ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

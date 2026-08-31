@@ -1,7 +1,7 @@
 ---
 page: iterative-sparsification-and-the-five-vertex-path
 title: "Iterative Sparsification and the Five-Vertex Path"
-status: draft
+status: published
 items: [def-nice-graph,
         lem-small-anticonnected-components-yield-a-complete-blockade,
         lem-a-dense-bipartite-side-has-a-small-hitting-set,

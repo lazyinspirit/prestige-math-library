@@ -2,7 +2,7 @@
 id: lem-refinement-of-analytic-continuation-chains
 kind: lemma
 title: "Two admissible continuation chains along one path admit a common refinement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

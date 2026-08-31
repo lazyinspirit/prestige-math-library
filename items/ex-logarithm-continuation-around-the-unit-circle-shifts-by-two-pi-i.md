@@ -2,7 +2,7 @@
 id: ex-logarithm-continuation-around-the-unit-circle-shifts-by-two-pi-i
 kind: example
 title: "Continuing the logarithm once around the unit circle adds 2 pi i"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

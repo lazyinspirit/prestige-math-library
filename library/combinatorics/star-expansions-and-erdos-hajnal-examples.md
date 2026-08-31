@@ -1,7 +1,7 @@
 ---
 page: star-expansions-and-erdos-hajnal-examples
 title: "Star Expansions and the Erdős-Hajnal Property — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-star-expansion-of-the-four-vertex-path,
            ex-the-star-expansion-of-the-four-vertex-path-contains-an-induced-five-cycle,

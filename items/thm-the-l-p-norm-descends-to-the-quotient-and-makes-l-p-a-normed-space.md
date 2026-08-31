@@ -2,7 +2,7 @@
 id: thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space
 kind: theorem
 title: "The $L^p$ norm descends to the quotient and makes $L^p$ a normed space for $1 \\le p \\le \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-norm-and-normed-space, prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class, thm-minkowski-inequality-for-integrals, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-quotient-vector-space-operations-and-projection]
 proof_strategy: "Use the previous proposition to identify the null functions as the kernel of the seminorm. Hence the seminorm is constant on cosets and separates points on the quotient, while Minkowski and homogeneity descend from representatives."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

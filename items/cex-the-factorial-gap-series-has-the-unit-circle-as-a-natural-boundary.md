@@ -2,7 +2,7 @@
 id: cex-the-factorial-gap-series-has-the-unit-circle-as-a-natural-boundary
 kind: counterexample
 title: "The factorial-gap series shows that a holomorphic function need not continue past its boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

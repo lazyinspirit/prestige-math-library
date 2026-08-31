@@ -2,7 +2,7 @@
 id: def-product-and-colon-of-fractional-ideals
 kind: definition
 title: "Products, colons, and inverse candidates for fractional ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [lem-fractional-ideal-operations-well-defined]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

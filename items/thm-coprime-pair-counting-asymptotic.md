@@ -2,7 +2,7 @@
 id: thm-coprime-pair-counting-asymptotic
 kind: theorem
 title: "Ordered coprime pairs in a box have asymptotic density 6 over pi squared"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [def-coprime,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

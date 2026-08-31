@@ -2,7 +2,7 @@
 id: fs-an-acyclic-mapping-cone-is-contractible
 kind: false-statement
 title: "FALSE: an acyclic mapping cone is contractible"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift, prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms, def-contractible-complex, def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

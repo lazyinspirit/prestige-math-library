@@ -2,7 +2,7 @@
 id: prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components
 kind: proposition
 title: "Smoothness of a section is equivalent to smooth local components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +47,5 @@ $\sigma:U\to E|_U$.
 **Proof technique:** direct.
 
 1.1 By [L1], the chosen frame gives a bundle chart $\Phi:E|_U\to U\times\mathbb R^r$ in which $s_i(p)$ corresponds to the $i$-th standard basis vector. Therefore $\Phi(\sigma(p))=(p,f_1(p),\dots,f_r(p))$ exactly when $\sigma(p)=\sum_i f_i(p)s_i(p)$. [L1, given]
+
 2.1 In this chart, $\sigma$ is smooth exactly when the coordinate map $p\mapsto(f_1(p),\dots,f_r(p))$ is smooth. Equivalently, each component $f_i$ is smooth, and the criterion is local on $U$ by [L2]. [L2, step 1.1, algebra] ∎

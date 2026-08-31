@@ -2,7 +2,7 @@
 id: fs-l-one-half-with-its-p-functional-is-a-normed-space
 kind: false-statement
 title: "FALSE: $L^{1/2}$ with its $p$-functional is a normed space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-half-norm-fails-the-triangle-inequality-on-two-indicators, def-norm-and-normed-space]
 proof_strategy: "Refute with the explicit 1/2-triangle-inequality failure on two indicators."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

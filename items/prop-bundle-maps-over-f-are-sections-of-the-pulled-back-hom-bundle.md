@@ -2,7 +2,7 @@
 id: prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle
 kind: proposition
 title: "Bundle maps over f are sections of the pulled-back Hom bundle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -44,4 +45,5 @@ the identity ([[prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-map
 **Proof technique:** direct.
 
 1.1 For each $p\in M$, the fibre map $\Phi_p:E_p\to F_{f(p)}$ may be viewed as a linear map $E_p\to(f^*F)_p$ because $(f^*F)_p$ is canonically $F_{f(p)}$. Hence $p\mapsto\Phi_p$ defines a section of $\operatorname{Hom}(E,f^*F)\to M$. [L1, given, construct]
+
 2.1 In local trivializations the matrix of this section is exactly the local matrix of $\Phi$, so the section is smooth exactly when $\Phi$ is smooth. Therefore [L2] applied to the bundles $E$ and $f^*F$ yields the required bijection. [L1, L2, step 1.1, algebra] ∎

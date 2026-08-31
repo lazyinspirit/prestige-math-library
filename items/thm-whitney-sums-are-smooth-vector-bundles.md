@@ -2,7 +2,7 @@
 id: thm-whitney-sums-are-smooth-vector-bundles
 kind: theorem
 title: "Whitney sums are smooth vector bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -40,4 +41,5 @@ and $F$ with $U\times\mathbb R^r$ and $U\times\mathbb R^s$
 **Proof technique:** direct.
 
 1.1 On a common trivializing neighborhood $U$, use [L1] to identify $E|_U\oplus F|_U$ with $U\times(\mathbb R^r\oplus\mathbb R^s)\cong U\times\mathbb R^{r+s}$. This gives a local trivialization of the Whitney sum. [L1, given, construct]
+
 2.1 If the transition matrices for $E$ and $F$ are $g_{\beta\alpha}$ and $h_{\beta\alpha}$, then the transition matrix for $E\oplus F$ is the block diagonal matrix $\operatorname{diag}(g_{\beta\alpha},h_{\beta\alpha})$, which is smooth on overlaps. Therefore these local trivializations define a smooth rank-$(r+s)$ bundle. [L1, step 1.1, algebra] ∎

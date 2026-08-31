@@ -2,7 +2,7 @@
 id: lem-harmonic-sum-asymptotic
 kind: lemma
 title: "The harmonic sum is log x plus gamma plus O(1/x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ deps: [def-euler-mascheroni-constant,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

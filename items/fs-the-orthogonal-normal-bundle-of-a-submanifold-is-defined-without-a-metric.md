@@ -2,7 +2,7 @@
 id: fs-the-orthogonal-normal-bundle-of-a-submanifold-is-defined-without-a-metric
 kind: false-statement
 title: "The orthogonal normal bundle of a submanifold is defined without a metric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,4 +46,5 @@ obtained only after choosing an ambient metric
 **Proof technique:** direct.
 
 1.1 Let $S=\mathbb R\times\{0\}\subseteq\mathbb R^2$. For the Euclidean metric, the orthogonal complement of $TS$ is spanned by $\partial_y$. [L1, given]
+
 2.1 For the metric $g=dx^2+2dx\,dy+2dy^2$, a vector $a\partial_x+b\partial_y$ is orthogonal to $\partial_x$ exactly when $a+b=0$, so the orthogonal complement is spanned by $\partial_y-\partial_x$. The orthogonal normal line therefore depends on the chosen metric, and only the quotient normal bundle is intrinsic. [L1, step 1.1, algebra] ∎

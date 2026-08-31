@@ -2,7 +2,7 @@
 id: thm-localisation-of-a-dedekind-domain
 kind: theorem
 title: "A localization of a Dedekind domain is Dedekind or a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

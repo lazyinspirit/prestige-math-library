@@ -2,7 +2,7 @@
 id: thm-nonzero-ideals-in-dedekind-domains-are-invertible
 kind: theorem
 title: "Every nonzero fractional ideal of a Dedekind domain is invertible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

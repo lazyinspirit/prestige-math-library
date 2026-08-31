@@ -2,7 +2,7 @@
 id: thm-the-module-endofunctor-category-is-strict-monoidal
 kind: theorem
 title: "The right-module endofunctor category is strict monoidal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-the-category-of-right-module-endofunctors, def-strict-monoidal-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

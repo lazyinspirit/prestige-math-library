@@ -2,7 +2,7 @@
 id: prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle
 kind: proposition
 title: "Assuming countable choice, an ambient metric identifies the two normal bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -67,4 +68,5 @@ isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphis
 **Proof technique:** direct.
 
 1.1 By [L0], [L4], and [L5], the induced charts make $TM\to M$ a smooth vector bundle. By [L6] and [L7], its pullback along $i$ is the smooth vector bundle $TM|_S\to S$. In a slice chart from [L8], its coordinate frame is $\partial_{x_1},\dots,\partial_{x_k},\partial_{y_1},\dots,\partial_{y_c}$ and $TS$ is spanned by the first $k$ vectors, so [L9] makes $TS$ a smooth subbundle. In that pulled-back frame, the coefficients of $g|_S$ are the smooth coefficient functions of $g$ composed with the smooth inclusion $i$; hence [F0] makes $g|_S$ a smooth bundle metric on $TM|_S$. Applying [L1], the orthogonal complements $TS_p^\perp$ form a smooth subbundle and fibrewise $T_pM=T_pS\oplus T_pS^\perp$. [F0, L0, L1, L4, L5, L6, L7, L8, L9, given]
+
 2.1 Restrict the quotient map of [L2] to $TS^\perp$. On each fibre this is the usual linear isomorphism from a chosen complement onto the quotient by $T_pS$. Hence the restricted map $TS^\perp\to\nu(S)$ is fibrewise bijective, so [L3] shows that it is a smooth bundle isomorphism. [L2, L3, step 1.1, algebra] ∎

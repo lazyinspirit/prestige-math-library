@@ -2,7 +2,7 @@
 id: ex-dirichlet-hyperbola-lattice-decomposition
 kind: example
 title: "A small lattice decomposition for Dirichlet's hyperbola method"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps: [thm-dirichlet-hyperbola-method,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

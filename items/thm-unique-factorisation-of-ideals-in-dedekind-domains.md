@@ -2,7 +2,7 @@
 id: thm-unique-factorisation-of-ideals-in-dedekind-domains
 kind: theorem
 title: "Unique factorization of nonzero fractional ideals into prime powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

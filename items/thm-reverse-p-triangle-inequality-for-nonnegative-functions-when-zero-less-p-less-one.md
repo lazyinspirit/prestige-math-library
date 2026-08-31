@@ -2,7 +2,7 @@
 id: thm-reverse-p-triangle-inequality-for-nonnegative-functions-when-zero-less-p-less-one
 kind: theorem
 title: "The $p$-power triangle inequality for nonnegative functions when $0 < p < 1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-calligraphic-l-p-on-a-measure-space, thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric, prop-order-and-scalar-rules-for-the-nonnegative-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: "For nonnegative numbers a, b and 0 < p < 1 one has (a + b)^p <= a^p + b^p. Apply this pointwise to f and g and integrate."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

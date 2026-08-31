@@ -2,7 +2,7 @@
 id: ex-the-inverse-derivative-of-a-two-by-two-matrix
 kind: example
 title: "Differentiating the inverse of a $2\\times2$ matrix reproduces the closed formula entrywise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

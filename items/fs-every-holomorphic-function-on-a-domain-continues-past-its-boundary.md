@@ -2,7 +2,7 @@
 id: fs-every-holomorphic-function-on-a-domain-continues-past-its-boundary
 kind: false-statement
 title: "FALSE: every holomorphic function on a domain continues past its boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

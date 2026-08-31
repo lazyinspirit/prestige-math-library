@@ -2,7 +2,7 @@
 id: thm-unbracketed-tensor-strings-are-well-defined-expressions
 kind: theorem
 title: "Unbracketed tensor strings are well defined after coherence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-parenthesised-tensor-word, rem-unbracketed-tensor-strings-are-not-yet
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

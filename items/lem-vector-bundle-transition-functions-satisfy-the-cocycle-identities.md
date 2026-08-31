@@ -2,7 +2,7 @@
 id: lem-vector-bundle-transition-functions-satisfy-the-cocycle-identities
 kind: lemma
 title: "Vector bundle transition functions satisfy the cocycle identities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -49,4 +50,5 @@ $g_{\beta\alpha}(p)\in GL(r,\mathbb R)$
 **Proof technique:** direct.
 
 1.1 On $U_\alpha$, the map $\Phi_\alpha\circ\Phi_\alpha^{-1}$ is the identity, so [L1] gives $(p,g_{\alpha\alpha}(p)v)=(p,v)$ for every $v\in\mathbb R^r$. Hence $g_{\alpha\alpha}(p)=I_r$. [L1, given]
+
 2.1 On a triple overlap, $\Phi_\gamma\circ\Phi_\alpha^{-1}=(\Phi_\gamma\circ\Phi_\beta^{-1})\circ(\Phi_\beta\circ\Phi_\alpha^{-1})$. Applying [L1] to $(p,v)$ gives $(p,g_{\gamma\alpha}(p)v)=(p,g_{\gamma\beta}(p)g_{\beta\alpha}(p)v)$ for every $v$, so $g_{\gamma\alpha}(p)=g_{\gamma\beta}(p)g_{\beta\alpha}(p)$. [L1, step 1.1, algebra] ∎

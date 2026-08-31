@@ -2,7 +2,7 @@
 id: def-ritz-values-and-ritz-vectors-from-arnoldi
 kind: definition
 title: "Ritz values and Ritz vectors extracted from the Arnoldi Hessenberg reduction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ deps: [thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-fac
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift
 kind: proposition
 title: "The cone of the zero map is the direct sum with a shift"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-shift-of-a-chain-complex, prop-finite-biproducts-of-complexes-are-computed-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-relative-homology-of-a-chain-map
 kind: definition
 title: "The relative homology of a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-mapping-cone-of-a-chain-map, def-homology-object-of-a-chain-complex]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

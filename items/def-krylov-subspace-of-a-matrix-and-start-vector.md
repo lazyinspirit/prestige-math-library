@@ -2,7 +2,7 @@
 id: def-krylov-subspace-of-a-matrix-and-start-vector
 kind: definition
 title: "The Krylov subspace $K_m(A,b)=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-matrix-product-and-identity-matrix]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

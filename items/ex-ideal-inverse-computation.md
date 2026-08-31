@@ -2,7 +2,7 @@
 id: ex-ideal-inverse-computation
 kind: example
 title: "Computing an inverse fractional ideal explicitly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

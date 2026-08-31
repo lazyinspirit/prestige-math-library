@@ -2,7 +2,7 @@
 id: fs-l-p-includes-into-l-r-on-every-measure-space-when-p-less-r
 kind: false-statement
 title: "FALSE: $L^p$ includes into $L^r$ on every measure space when $p < r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-l-one-not-subset-l-two-on-the-line, cex-l-two-not-subset-l-one-on-the-line]
 proof_strategy: "Refute with the two power-function counterexamples on the line: one witness lies in L^1 minus L^2 and another lies in L^2 minus L^1."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-a-vector-bundle-projection-is-a-surjective-submersion
 kind: proposition
 title: "A vector bundle projection is a surjective submersion"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -43,4 +44,5 @@ every point ([[def-immersion-submersion-and-constant-rank-map]]).
 **Proof technique:** direct.
 
 1.1 Surjectivity is part of the definition of a smooth fibre bundle, so $\pi$ is surjective. Fix $e\in E$ with $p=\pi(e)$, and choose a local trivialization $\Phi:\pi^{-1}(U)\to U\times\mathbb R^r$ around $e$. In this chart, $\pi$ becomes the product projection $\operatorname{pr}_1:U\times\mathbb R^r\to U$. [L1, given]
+
 2.1 In product coordinates the differential of $\operatorname{pr}_1$ is the coordinate projection $T_pU\oplus T_v\mathbb R^r\to T_pU$, which is surjective. Therefore $d\pi_e$ is surjective, and since $e$ was arbitrary, $\pi$ is a submersion by [L2]. [L2, step 1.1, algebra] ∎

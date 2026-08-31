@@ -2,7 +2,7 @@
 id: thm-end-germ-of-path-continuation-is-independent-of-the-chain
 kind: theorem
 title: "The terminal germ of a continuation along a fixed path is chain-independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

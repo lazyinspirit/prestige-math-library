@@ -2,7 +2,7 @@
 id: cor-relative-homology-vanishes-exactly-for-quasi-isomorphisms
 kind: corollary
 title: "Relative homology vanishes exactly for quasi-isomorphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-homology-of-a-chain-map, thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

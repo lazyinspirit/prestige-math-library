@@ -2,7 +2,7 @@
 id: prop-orthogonal-complements-of-subbundles-are-smooth-subbundles
 kind: proposition
 title: "Orthogonal complements of subbundles are smooth subbundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +47,5 @@ and a smooth bundle metric on $E$.
 **Proof technique:** direct.
 
 1.1 Around each point, choose a local frame $(e_1,\dots,e_r)$ of $E$ such that $(e_1,\dots,e_k)$ spans $S$. Apply smooth Gram-Schmidt from [L2] to obtain a local orthonormal frame $(u_1,\dots,u_r)$. Because the first $k$ input vectors already lie in $S$, the first $k$ orthonormalized vectors still span $S$. [L1, L2, given, choose]
+
 2.1 For each fibre, the orthogonal complement of $S_p$ is then spanned by $u_{k+1}(p),\dots,u_r(p)$. These vectors vary smoothly, so they give a local frame of $S^\perp$. Hence $S^\perp$ is a smooth vector subbundle of $E$. [step 1.1, algebra] ∎

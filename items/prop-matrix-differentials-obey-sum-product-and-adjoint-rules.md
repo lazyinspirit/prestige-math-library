@@ -2,7 +2,7 @@
 id: prop-matrix-differentials-obey-sum-product-and-adjoint-rules
 kind: proposition
 title: "Matrix differentials obey the sum rule, product rule, and adjoint rule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

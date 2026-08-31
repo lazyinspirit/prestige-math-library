@@ -2,7 +2,7 @@
 id: thm-the-cone-of-an-identity-map-is-contractible
 kind: theorem
 title: "The cone of an identity map is contractible"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-contractible-complex, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

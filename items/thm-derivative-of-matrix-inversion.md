@@ -2,7 +2,7 @@
 id: thm-derivative-of-matrix-inversion
 kind: theorem
 title: "On the invertible locus, $D\\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

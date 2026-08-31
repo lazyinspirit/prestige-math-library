@@ -2,7 +2,7 @@
 id: thm-the-monoid-object-axioms-may-be-written-without-associators
 kind: theorem
 title: "The monoid-object axioms may be written without associators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoid-object-and-comonoid-object-in-a-monoidal-category, thm-mac-lane-strictification, thm-unbracketed-tensor-strings-are-well-defined-expressions]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

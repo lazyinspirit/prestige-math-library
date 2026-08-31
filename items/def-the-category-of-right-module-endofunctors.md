@@ -2,7 +2,7 @@
 id: def-the-category-of-right-module-endofunctors
 kind: definition
 title: "The category of right-module endofunctors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-monoidal-category, def-functor-and-contravariant-functor, def-natural-transformation, def-natural-isomorphism]
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

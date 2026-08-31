@@ -2,7 +2,7 @@
 id: thm-lyapunov-interpolation-inequality-for-l-p-norms
 kind: theorem
 title: "Lyapunov interpolation inequality for $L^p$ norms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space]
 proof_strategy: "If 1/p = theta/p_0 + (1 - theta)/p_1, rewrite |f|^p as |f|^(theta p)|f|^((1 - theta)p) and apply Holder with conjugate exponents p_0/(theta p) and p_1/((1 - theta)p)."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

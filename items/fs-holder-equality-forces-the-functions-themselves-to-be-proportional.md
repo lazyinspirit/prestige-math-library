@@ -2,7 +2,7 @@
 id: fs-holder-equality-forces-the-functions-themselves-to-be-proportional
 kind: false-statement
 title: "FALSE: Holder equality forces the functions themselves to be proportional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, thm-equality-case-in-holder-inequality]
 proof_strategy: "Refute at the endpoint p = 1, q = infinity with f = 1_A and g = 1 on a proper positive-measure subset A. Equality holds, but the functions are not proportional on the whole space."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

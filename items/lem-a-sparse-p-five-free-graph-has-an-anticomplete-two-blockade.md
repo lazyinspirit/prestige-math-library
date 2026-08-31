@@ -2,7 +2,7 @@
 id: lem-a-sparse-p-five-free-graph-has-an-anticomplete-two-blockade
 kind: lemma
 title: "A sparse $P_5$-free graph has an anticomplete two-blockade"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

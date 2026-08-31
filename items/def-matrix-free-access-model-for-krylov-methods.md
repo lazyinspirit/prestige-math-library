@@ -2,7 +2,7 @@
 id: def-matrix-free-access-model-for-krylov-methods
 kind: definition
 title: "The matrix-free access model for Krylov methods"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-matrix-product-and-identity-matrix]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-canonical-morphism-between-parenthesised-words
 kind: definition
 title: "Canonical morphisms between parenthesised tensor words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parenthesised-tensor-word, def-monoidal-category, def-natural-transformation]
 landmark: true
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

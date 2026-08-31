@@ -2,13 +2,14 @@
 id: def-cone-triangle-of-a-chain-map
 kind: definition
 title: "The cone triangle of a chain map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-mapping-cone-of-a-chain-map, def-canonical-inclusion-and-projection-for-a-mapping-cone]
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

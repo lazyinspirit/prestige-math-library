@@ -2,7 +2,7 @@
 id: thm-minkowski-inequality-for-integrals
 kind: theorem
 title: "Minkowski's inequality for integrals, including $p = \\infty$"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [thm-holder-inequality-for-integrals, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-holder-finite-real-exponents]
 proof_strategy: "For 1 < p < infinity, first use the two-term finite Holder inequality to show |f + g|^p is integrable, then apply the standard Holder step to |f + g| |f + g|^(p - 1). The cases p = 1 and p = infinity are handled directly from subadditivity of absolute value and the essential-supremum bound."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

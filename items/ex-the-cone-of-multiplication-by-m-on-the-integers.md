@@ -2,7 +2,7 @@
 id: ex-the-cone-of-multiplication-by-m-on-the-integers
 kind: example
 title: "The cone of multiplication by m on the integers"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

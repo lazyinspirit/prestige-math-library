@@ -1,7 +1,7 @@
 ---
 page: context-free-pumping-ogden-and-parsing-examples
 title: "Context-Free Pumping, Ogden's Lemma, and Parsing: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pumping-lemma-for-context-free-languages

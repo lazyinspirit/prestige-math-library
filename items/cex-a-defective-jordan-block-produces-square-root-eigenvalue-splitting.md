@@ -2,7 +2,7 @@
 id: cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting
 kind: counterexample
 title: "A defective Jordan block can split under perturbation at square-root scale"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

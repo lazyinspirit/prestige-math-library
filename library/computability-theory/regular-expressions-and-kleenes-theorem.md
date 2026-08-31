@@ -1,7 +1,7 @@
 ---
 page: regular-expressions-and-kleenes-theorem
 title: "Regular Expressions and Kleene's Theorem"
-status: draft
+status: published
 items:
   - def-regular-expression-syntax
   - def-regular-expression-denotation

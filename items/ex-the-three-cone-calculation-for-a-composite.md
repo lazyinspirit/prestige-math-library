@@ -2,7 +2,7 @@
 id: ex-the-three-cone-calculation-for-a-composite
 kind: example
 title: "The three-cone calculation for a composite"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-the-three-cone-calculation-for-a-composite-chain-map, ex-the-cone-of-multiplication-by-m-on-the-integers, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

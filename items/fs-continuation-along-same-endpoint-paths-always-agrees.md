@@ -2,7 +2,7 @@
 id: fs-continuation-along-same-endpoint-paths-always-agrees
 kind: false-statement
 title: "FALSE: continuation along two paths with the same endpoints always agrees"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

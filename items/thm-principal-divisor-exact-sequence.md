@@ -2,7 +2,7 @@
 id: thm-principal-divisor-exact-sequence
 kind: theorem
 title: "The principal-divisor exact sequence for a Dedekind domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

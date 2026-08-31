@@ -2,7 +2,7 @@
 id: lem-ideal-class-group-well-defined
 kind: lemma
 title: "The ideal class group quotient is well defined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

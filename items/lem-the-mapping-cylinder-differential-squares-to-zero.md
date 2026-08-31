@@ -2,7 +2,7 @@
 id: lem-the-mapping-cylinder-differential-squares-to-zero
 kind: lemma
 title: "The mapping-cylinder differential squares to zero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-mapping-cylinder-of-a-chain-map, def-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

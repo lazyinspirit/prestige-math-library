@@ -2,7 +2,7 @@
 id: thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact
 kind: theorem
 title: "The canonical mapping-cone sequence is degreewise split short exact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-canonical-inclusion-and-projection-for-a-mapping-cone, def-short-exact-sequence-of-complexes, def-split-short-exact-sequence-in-an-abelian-category, prop-finite-biproducts-of-complexes-are-computed-degreewise]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-the-zero-section-is-a-smooth-embedding
 kind: proposition
 title: "The zero section is a smooth embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -42,4 +43,5 @@ its image with the subspace topology ([[def-smooth-embedding]]).
 **Proof technique:** direct.
 
 1.1 In a local trivialization $\Phi:\pi^{-1}(U)\to U\times\mathbb R^r$, the zero section is represented by $p\mapsto(p,0)$. This map is smooth, injective, and its image is the slice $U\times\{0\}$. [L1, given]
+
 2.1 The coordinate slice $U\times\{0\}$ is an embedded submanifold of the product, so $p\mapsto(p,0)$ is an immersion and a homeomorphism onto its image. Transporting this property through the bundle charts proves that $0_M$ is a smooth embedding by [L2]. [L2, step 1.1, algebra] ∎

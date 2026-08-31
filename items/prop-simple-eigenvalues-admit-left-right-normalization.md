@@ -2,7 +2,7 @@
 id: prop-simple-eigenvalues-admit-left-right-normalization
 kind: proposition
 title: "For a simple eigenvalue, left and right eigenvectors pair nontrivially and may be normalized by $y^*x=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

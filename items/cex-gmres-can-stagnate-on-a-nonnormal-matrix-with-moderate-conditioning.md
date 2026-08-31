@@ -2,7 +2,7 @@
 id: cex-gmres-can-stagnate-on-a-nonnormal-matrix-with-moderate-conditioning
 kind: counterexample
 title: "A nonnormal matrix can make GMRES stagnate even when ordinary conditioning is not extreme"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

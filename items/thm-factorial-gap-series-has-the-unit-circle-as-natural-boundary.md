@@ -2,7 +2,7 @@
 id: thm-factorial-gap-series-has-the-unit-circle-as-natural-boundary
 kind: theorem
 title: "The factorial-gap series has the unit circle as a natural boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

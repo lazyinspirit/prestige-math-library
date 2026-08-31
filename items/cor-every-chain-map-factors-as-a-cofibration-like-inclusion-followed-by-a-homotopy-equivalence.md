@@ -2,7 +2,7 @@
 id: cor-every-chain-map-factors-as-a-cofibration-like-inclusion-followed-by-a-homotopy-equivalence
 kind: corollary
 title: "Every chain map factors as a cofibration-like inclusion followed by a homotopy equivalence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-mapping-cylinder-factors-a-chain-map]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

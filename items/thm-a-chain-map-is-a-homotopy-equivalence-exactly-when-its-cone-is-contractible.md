@@ -2,7 +2,7 @@
 id: thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible
 kind: theorem
 title: "A chain map is a homotopy equivalence exactly when its cone is contractible"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-chain-homotopy-equivalence, def-contractible-complex, def-mapping-cone-of-a-chain-map, def-chain-homotopy, prop-cones-preserve-chain-homotopy-equivalences-of-arrows, thm-the-cone-of-an-identity-map-is-contractible]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-simple-nonnormal-eigenvalue-derivative-uses-left-and-right-eigenvectors
 kind: example
 title: "For a nonnormal matrix, the simple eigenvalue derivative uses distinct left and right eigenvectors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

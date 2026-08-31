@@ -2,7 +2,7 @@
 id: rem-lp-completeness-and-the-banach-property
 kind: remark
 title: "$L^p$ completeness and the Banach-property wording"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Theorem 7.24"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

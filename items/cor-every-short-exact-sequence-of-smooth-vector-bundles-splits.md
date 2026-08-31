@@ -2,7 +2,7 @@
 id: cor-every-short-exact-sequence-of-smooth-vector-bundles-splits
 kind: corollary
 title: "Every short exact sequence of smooth vector bundles splits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -52,4 +53,5 @@ isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphis
 **Proof technique:** direct.
 
 1.1 Exactness gives $i(E)=\ker q\subseteq G$. By [L1], this image is a smooth subbundle of $G$. Choose a smooth complement $H\subseteq G$ to $i(E)$ by [L2], so $G_p=i(E_p)\oplus H_p$ for every $p\in M$. [L1, L2, given, choose]
+
 2.1 Because $\ker(q|_{H_p})=H_p\cap i(E_p)=0$ and $q_p$ is surjective, $q|_H:H\to F$ is fibrewise bijective. By [L3] it is a smooth bundle isomorphism, so its inverse $s:F\to H\subseteq G$ is smooth and satisfies $q\circ s=\operatorname{id}_F$. Thus the sequence splits. [L3, step 1.1, algebra] ∎

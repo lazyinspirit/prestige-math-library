@@ -2,7 +2,7 @@
 id: ex-a-krylov-chain-with-early-stabilisation-and-its-relative-minimal-polynomial
 kind: example
 title: "A Krylov chain can stabilize early when the start vector has a short relative minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

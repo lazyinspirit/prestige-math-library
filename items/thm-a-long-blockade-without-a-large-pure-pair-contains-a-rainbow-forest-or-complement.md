@@ -2,7 +2,7 @@
 id: thm-a-long-blockade-without-a-large-pure-pair-contains-a-rainbow-forest-or-complement
 kind: theorem
 title: "A long blockade without a large pure pair contains a rainbow forest or its complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

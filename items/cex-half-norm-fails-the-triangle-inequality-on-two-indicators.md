@@ -2,7 +2,7 @@
 id: cex-half-norm-fails-the-triangle-inequality-on-two-indicators
 kind: counterexample
 title: "The half-norm fails the triangle inequality on two indicators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one]
 proof_strategy: "Take two disjoint indicators of equal positive measure. Then the 1/2-functional of the sum exceeds the sum of the two 1/2-functionals."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

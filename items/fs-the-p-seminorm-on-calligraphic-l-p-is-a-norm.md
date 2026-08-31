@@ -2,7 +2,7 @@
 id: fs-the-p-seminorm-on-calligraphic-l-p-is-a-norm
 kind: false-statement
 title: "FALSE: the $p$-seminorm on calligraphic $L^p$ is a norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm, def-norm-and-normed-space]
 proof_strategy: "Refute with a nonzero function supported on a null set, whose seminorm is 0."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

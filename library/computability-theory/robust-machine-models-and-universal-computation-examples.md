@@ -1,7 +1,7 @@
 ---
 page: robust-machine-models-and-universal-computation-examples
 title: "Robust Machine Models and Universal Computation: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-stay-put-moves-can-be-eliminated

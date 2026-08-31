@@ -2,7 +2,7 @@
 id: ex-the-directional-derivative-of-a-simple-singular-value
 kind: example
 title: "The directional derivative of a simple singular value is the real part of $u^*Hv$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

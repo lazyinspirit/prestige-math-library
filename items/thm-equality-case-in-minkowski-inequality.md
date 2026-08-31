@@ -2,7 +2,7 @@
 id: thm-equality-case-in-minkowski-inequality
 kind: theorem
 title: "Equality in Minkowski's inequality for $1 < p < \\infty$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-minkowski-inequality-for-integrals, thm-equality-case-in-holder-inequality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: "Examine the Holder step in the standard proof of Minkowski. Equality forces the nonnegative functions |f| and |g| to be proportional almost everywhere, and that proportionality is sufficient."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

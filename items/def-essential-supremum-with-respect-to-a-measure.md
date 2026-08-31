@@ -2,7 +2,7 @@
 id: def-essential-supremum-with-respect-to-a-measure
 kind: definition
 title: "The essential supremum of a measurable function with respect to a measure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Section 7A"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

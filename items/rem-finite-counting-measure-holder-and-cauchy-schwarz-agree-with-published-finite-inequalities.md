@@ -2,7 +2,7 @@
 id: rem-finite-counting-measure-holder-and-cauchy-schwarz-agree-with-published-finite-inequalities
 kind: remark
 title: "Finite counting measure recovers finite Holder and implies the signed Cauchy-Schwarz inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ sources:
     - title: "Richard L. Wheeden and Antoni Zygmund, Measure and Integral, Chapter 8"
       url: "https://djvu.online/file/u1gYJemR8hzMe"
 verification:
+  audited: 2026-08-31
   precheck: n/a
 ---
 

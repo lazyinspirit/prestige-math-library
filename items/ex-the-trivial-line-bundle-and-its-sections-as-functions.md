@@ -2,7 +2,7 @@
 id: ex-the-trivial-line-bundle-and-its-sections-as-functions
 kind: example
 title: "The trivial line bundle and its sections as functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -47,4 +48,5 @@ projection is the identity ([[def-smooth-section-local-section-and-support]]).
 **Proof technique:** direct.
 
 1.1 If $s:M\to M\times\mathbb R$ is a section, then $\operatorname{pr}_1(s(p))=p$, so $s(p)=(p,f(p))$ for a unique scalar function $f:M\to\mathbb R$. [L1, given]
+
 2.1 The map $s$ is smooth exactly when its second component $f$ is smooth. Conversely every smooth $f$ gives a smooth section $p\mapsto(p,f(p))$. Thus sections of the trivial line bundle are the same as smooth functions on $M$. [L1, step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: def-real-frechet-derivative-on-real-and-complex-matrix-spaces
 kind: definition
 title: "The real Frechet derivative on real and complex matrix spaces with the Frobenius norm"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-frobenius-matrix-norm]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

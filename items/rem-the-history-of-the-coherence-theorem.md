@@ -2,13 +2,14 @@
 id: rem-the-history-of-the-coherence-theorem
 kind: remark
 title: "The historical route to coherence and the route authored here"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [rem-mac-lanes-original-conditions-and-what-became-of-them, thm-mac-lane-strictification, thm-mac-lane-coherence-in-the-canonical-map-form]
 verification:
+  audited: 2026-08-31
   precheck: n/a
 sources:
   scraped: []

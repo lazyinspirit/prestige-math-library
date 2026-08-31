@@ -2,7 +2,7 @@
 id: def-simple-spectral-projector
 kind: definition
 title: "The simple spectral projector $P=xy^*/(y^*x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [prop-simple-eigenvalues-admit-left-right-normalization]
 aliases: []
 landmark: false
 verification:
+  audited: 2026-08-31
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

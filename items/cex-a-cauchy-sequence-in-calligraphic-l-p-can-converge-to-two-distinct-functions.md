@@ -2,7 +2,7 @@
 id: cex-a-cauchy-sequence-in-calligraphic-l-p-can-converge-to-two-distinct-functions
 kind: counterexample
 title: "A Cauchy sequence in calligraphic $L^p$ can converge to two distinct functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm, def-calligraphic-l-p-on-a-measure-space]
 proof_strategy: "Take the constant sequence equal to a nonzero function supported on a null set. Its distance to the zero function is 0, so it converges to both itself and 0 in the pseudometric on calligraphic L^p."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-the-five-vertex-path-is-nice
 kind: theorem
 title: "The five-vertex path is nice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

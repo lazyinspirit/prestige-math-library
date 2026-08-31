@@ -1,7 +1,7 @@
 ---
 page: robust-machine-models-and-universal-computation
 title: "Robust Machine Models and Universal Computation"
-status: draft
+status: published
 items:
   - def-effective-encoding-of-turing-machines
   - lem-machine-encoding-is-injective-and-decodable

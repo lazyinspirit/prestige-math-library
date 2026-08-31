@@ -2,7 +2,7 @@
 id: fs-a-fibrewise-linear-continuous-bundle-map-is-automatically-smooth
 kind: false-statement
 title: "A continuous fibrewise linear map over a smooth base map is automatically smooth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -42,4 +43,5 @@ smooth.
 **Proof technique:** direct.
 
 1.1 On the trivial line bundle $\mathbb R\times\mathbb R\to\mathbb R$, define $\Phi(x,v)=(x,|x|v)$. This map is continuous, covers the smooth base map $\operatorname{id}_{\mathbb R}$, and is linear on every fibre. [L1, given, construct]
+
 2.1 Its local matrix coefficient is the scalar function $|x|$, which is not smooth at $0$. Therefore [L1] implies that $\Phi$ is not smooth. So the displayed statement is false. [L1, step 1.1] ∎

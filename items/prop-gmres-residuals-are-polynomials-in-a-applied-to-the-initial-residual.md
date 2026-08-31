@@ -2,7 +2,7 @@
 id: prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual
 kind: proposition
 title: "The GMRES residual has the form $r_m=p_m(A)r_0$ with $p_m(0)=1$ and $\\deg p_m\\le m$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

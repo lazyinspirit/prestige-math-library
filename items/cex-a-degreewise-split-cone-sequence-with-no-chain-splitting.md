@@ -2,7 +2,7 @@
 id: cex-a-degreewise-split-cone-sequence-with-no-chain-splitting
 kind: counterexample
 title: "A degreewise split cone sequence with no chain splitting"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact, thm-the-cone-of-an-identity-map-is-contractible, prop-homology-of-a-shift-is-shifted-homology, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

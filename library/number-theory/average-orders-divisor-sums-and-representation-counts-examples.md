@@ -1,7 +1,7 @@
 ---
 page: average-orders-divisor-sums-and-representation-counts-examples
 title: "Average Orders Divisor Sums and Representation Counts — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dirichlet-hyperbola-lattice-decomposition,
            ex-divisor-summatory-error-table]

@@ -2,7 +2,7 @@
 id: fs-the-degreewise-splitting-of-the-cone-sequence-is-a-chain-splitting
 kind: false-statement
 title: "FALSE: the degreewise splitting of the cone sequence is a chain splitting"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact, prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift, prop-homology-of-a-shift-is-shifted-homology, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

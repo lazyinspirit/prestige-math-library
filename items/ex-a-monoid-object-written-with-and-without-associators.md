@@ -2,7 +2,7 @@
 id: ex-a-monoid-object-written-with-and-without-associators
 kind: example
 title: "A monoid object written with and without associators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-monoid-object-and-comonoid-object-in-a-monoidal-category, thm-the-monoid-object-axioms-may-be-written-without-associators]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

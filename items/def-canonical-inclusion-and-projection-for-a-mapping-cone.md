@@ -2,13 +2,14 @@
 id: def-canonical-inclusion-and-projection-for-a-mapping-cone
 kind: definition
 title: "The canonical inclusion and projection for a mapping cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-mapping-cone-of-a-chain-map, def-shift-of-a-chain-complex, def-chain-map]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

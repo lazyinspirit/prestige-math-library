@@ -2,7 +2,7 @@
 id: def-gmres-iterate
 kind: definition
 title: "The GMRES iterate as the residual minimizer over an affine Krylov space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,8 @@ deps: [def-krylov-subspace-of-a-matrix-and-start-vector,
        def-matrix-product-and-identity-matrix]
 aliases: []
 landmark: false
+verification:
+  audited: 2026-08-31
 sources:
   scraped: []
   references:

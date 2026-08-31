@@ -2,7 +2,7 @@
 id: thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic
 kind: theorem
 title: "A chain map is a quasi-isomorphism exactly when its cone is acyclic"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-mapping-cone-of-a-chain-map, def-quasi-isomorphism, def-exactness-of-a-complex-at-a-degree-and-acyclic-complex, thm-a-chain-map-induces-a-well-defined-map-on-homology]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

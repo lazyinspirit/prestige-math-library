@@ -2,7 +2,7 @@
 id: fs-every-monoidal-category-is-isomorphic-to-a-strict-one
 kind: false-statement
 title: "Every monoidal category is strictly monoidally isomorphic to a strict one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-mac-lane-strictification, rem-strictification-gives-equivalence-and-never-isomorphism, thm-a-category-with-finite-products-is-monoidal]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one
 kind: example
 title: "Indicator of the rationals has zero essential supremum but pointwise supremum one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-essential-supremum-with-respect-to-a-measure, thm-rationals-countable, lem-countable-sets-are-null]
 proof_strategy: "Use that the rationals in [0, 1] are countable and therefore null, so every positive threshold is exceeded only on a null set."
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

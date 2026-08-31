@@ -2,7 +2,7 @@
 id: lem-finite-support-of-ideal-valuations
 kind: lemma
 title: "Prime-ideal valuations of a fractional ideal have finite support and add under products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

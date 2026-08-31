@@ -2,7 +2,7 @@
 id: ex-two-gauge-choices-give-different-eigenvector-derivatives
 kind: example
 title: "Different gauge choices change the eigenvector derivative but not the eigenvalue derivative or projector derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

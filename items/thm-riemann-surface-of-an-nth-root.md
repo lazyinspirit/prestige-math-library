@@ -2,7 +2,7 @@
 id: thm-riemann-surface-of-an-nth-root
 kind: theorem
 title: "The Riemann surface of an nth root is the n-sheeted covering w maps to w to the nth power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

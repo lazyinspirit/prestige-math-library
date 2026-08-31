@@ -2,7 +2,7 @@
 id: ex-divisor-summatory-error-table
 kind: example
 title: "The divisor summatory estimate through several small values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-divisor-counting-summatory-estimate]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

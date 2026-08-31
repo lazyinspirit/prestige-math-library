@@ -2,7 +2,7 @@
 id: prop-isomorphic-cocycles-define-isomorphic-vector-bundles
 kind: proposition
 title: "Isomorphic cocycles define isomorphic vector bundles"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -45,4 +46,5 @@ the quotient construction ([[thm-vector-bundle-construction-from-a-smooth-cocycl
 **Proof technique:** direct.
 
 1.1 On the $\alpha$-th trivializing piece define $H_\alpha(p,v)=(p,h_\alpha(p)v)$. If $(p,v)_\alpha\sim(p,g_{\beta\alpha}(p)v)_\beta$, then the gauge relation gives $H_\beta(p,g_{\beta\alpha}(p)v)=(p,g'_{\beta\alpha}(p)h_\alpha(p)v)=H_\alpha(p,v)$, so the local maps descend to a well-defined bundle map $H:E\to E'$. [L1, given, construct]
+
 2.1 In the quotient charts of [L1], the descended map is $(p,v)\mapsto(p,h_\alpha(p)v)$, hence smooth and fibrewise linear. Replacing $h_\alpha$ by $h_\alpha^{-1}$ gives the inverse construction, so $H$ is a smooth bundle isomorphism. [L1, step 1.1, algebra] ∎

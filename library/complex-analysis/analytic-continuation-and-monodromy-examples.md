@@ -1,7 +1,7 @@
 ---
 page: analytic-continuation-and-monodromy-examples
 title: "Analytic Continuation, Monodromy, and Riemann Surfaces — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-logarithm-continuation-around-the-unit-circle-shifts-by-two-pi-i,
            ex-square-root-continuation-around-the-origin-changes-sign,

@@ -2,7 +2,7 @@
 id: lem-a-sparse-co-p-five-free-graph-has-a-large-nearly-covered-sparse-pair
 kind: lemma
 title: "A sparse $\\overline{P_5}$-free graph has a large nearly covered sparse pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

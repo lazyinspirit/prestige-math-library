@@ -2,7 +2,7 @@
 id: def-euler-mascheroni-constant
 kind: definition
 title: "The Euler-Mascheroni constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-natural-logarithm]
 justified_by: []
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

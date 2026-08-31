@@ -2,7 +2,7 @@
 id: thm-ell-p-includes-into-ell-r-for-p-less-r
 kind: theorem
 title: "$\\ell^p$ includes into $\\ell^r$ for $p < r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-ell-p-is-l-p-of-counting-measure, def-counting-measure, prop-counting-measure-is-a-measure, def-real-power, thm-real-power-laws, thm-exponential-is-strictly-increasing]
 proof_strategy: "For counting measure, only finitely many terms can exceed 1 when a sequence lies in ell^p. Split the series at that finite set and compare |a_n|^r to |a_n|^p on the tail where |a_n| <= 1."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

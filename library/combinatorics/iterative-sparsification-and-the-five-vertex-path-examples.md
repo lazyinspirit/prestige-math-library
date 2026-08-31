@@ -1,7 +1,7 @@
 ---
 page: iterative-sparsification-and-the-five-vertex-path-examples
 title: "Iterative Sparsification and the Five-Vertex Path — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-two-large-anticonnected-components-give-a-complete-two-blockade,
            ex-a-sparse-p-five-free-graph-with-an-anticomplete-two-blockade,

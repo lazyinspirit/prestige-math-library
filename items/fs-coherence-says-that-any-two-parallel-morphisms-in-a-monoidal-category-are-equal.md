@@ -2,7 +2,7 @@
 id: fs-coherence-says-that-any-two-parallel-morphisms-in-a-monoidal-category-are-equal
 kind: false-statement
 title: "Coherence says that any two parallel morphisms in a monoidal category are equal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [rem-the-exact-scope-of-the-coherence-statement]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

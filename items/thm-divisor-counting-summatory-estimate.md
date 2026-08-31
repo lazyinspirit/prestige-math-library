@@ -2,7 +2,7 @@
 id: thm-divisor-counting-summatory-estimate
 kind: theorem
 title: "The summatory divisor-counting function is x log x plus (2 gamma - 1)x plus O(sqrt x)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps: [lem-harmonic-sum-asymptotic,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

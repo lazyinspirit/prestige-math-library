@@ -2,7 +2,7 @@
 id: prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism
 kind: proposition
 title: "A fibrewise bijective smooth bundle map over a diffeomorphism is a bundle isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -43,4 +44,5 @@ $\Phi$ is a vector bundle isomorphism.
 **Proof technique:** direct.
 
 1.1 If the common fibre rank is $0$, then every fibre is the zero vector space, so $\Phi$ is already the unique smooth bundle map between zero bundles over $f$ and hence a bundle isomorphism. Otherwise choose local frames so that on one trivializing neighborhood, $\Phi(p,v)=(f(p),A(p)v)$. Fibrewise bijectivity means that each matrix $A(p)$ is invertible, so [L2] gives $\det A(p)\neq0$ for every $p$. [L1, L2, given]
+
 2.1 In the positive-rank case, [L3] makes the entries of $A^{-1}$ smooth on the same neighborhood. Thus the local inverse is $(q,w)\mapsto(f^{-1}(q),A(f^{-1}(q))^{-1}w)$, which is smooth because $f^{-1}$ is smooth. These local inverses agree on overlaps, so $\Phi$ is a smooth bundle isomorphism. Together with the rank-$0$ branch of step 1.1, this proves the proposition. [L3, step 1.1, algebra] ∎

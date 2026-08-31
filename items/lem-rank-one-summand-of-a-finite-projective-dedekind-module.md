@@ -2,7 +2,7 @@
 id: lem-rank-one-summand-of-a-finite-projective-dedekind-module
 kind: lemma
 title: "A nonzero finite projective module over a Dedekind domain splits off a rank-one summand"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-two-square-representation-count
 kind: theorem
 title: "The divisor formula for the two-square representation count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ deps: [def-coprime,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-the-graph-of-a-bundle-map-as-a-subbundle-of-a-whitney-sum
 kind: example
 title: "The graph of a bundle map as a subbundle of a Whitney sum"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -50,4 +51,5 @@ is a smooth vector subbundle of the Whitney sum.
 **Proof technique:** direct.
 
 1.1 Define $G:E\to E\oplus F$ by $G(e)=(e,\Phi(e))$. This is a smooth bundle map over $\operatorname{id}_M$, and each fibre map $G_p(v)=(v,\Phi_p(v))$ is injective, hence has constant rank $\operatorname{rank}E$. [L1, given, construct]
+
 2.1 The image of $G$ is exactly the graph $\Gamma_\Phi$. Therefore [L2] implies that $\Gamma_\Phi$ is a smooth vector subbundle of $E\oplus F$. [L2, step 1.1] ∎

@@ -2,7 +2,7 @@
 id: cex-l-two-not-subset-l-one-on-the-line
 kind: counterexample
 title: "$L^2$ is not a subset of $L^1$ on the line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]
 proof_strategy: "Use the power-function family x^(-a) at infinity with 1/2 < a <= 1."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

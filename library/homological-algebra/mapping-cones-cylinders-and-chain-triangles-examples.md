@@ -1,7 +1,7 @@
 ---
 page: mapping-cones-cylinders-and-chain-triangles-examples
 title: "Mapping Cones Cylinders and Chain Triangles - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-cone-of-multiplication-by-m-on-the-integers,
            ex-the-cone-of-zero-and-of-the-identity,

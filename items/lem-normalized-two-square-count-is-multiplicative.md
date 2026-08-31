@@ -2,7 +2,7 @@
 id: lem-normalized-two-square-count-is-multiplicative
 kind: lemma
 title: "The normalized two-square count is multiplicative with the expected prime-power values"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ deps: [def-two-square-representation-function,
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

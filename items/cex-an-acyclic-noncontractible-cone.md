@@ -2,7 +2,7 @@
 id: cex-an-acyclic-noncontractible-cone
 kind: counterexample
 title: "An acyclic noncontractible cone"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift, prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms, def-contractible-complex, def-quasi-isomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-l-p-space-as-a-quotient-by-null-functions
 kind: definition
 title: "The space $L^p(\\mu)$ as the quotient by null functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.4"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
 ---
 

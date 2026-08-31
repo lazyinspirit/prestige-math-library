@@ -1,7 +1,7 @@
 ---
 page: strictification-and-mac-lanes-coherence-theorem
 title: "Strictification and Mac Lanes Coherence Theorem"
-status: draft
+status: published
 items: [def-canonical-morphism-between-parenthesised-words,
         rem-every-diagram-commutes-is-false-as-stated,
         def-the-category-of-binary-words,

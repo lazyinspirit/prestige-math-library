@@ -1,7 +1,7 @@
 ---
 page: dedekind-domains-and-ideal-classes
 title: "Dedekind Domains and Ideal Classes"
-status: draft
+status: published
 items: [def-dedekind-domain, lem-dedekind-localisation-at-nonzero-prime-is-dvr, lem-local-dvr-condition-implies-global-normality, lem-local-dvr-condition-implies-dimension-one, thm-local-characterisation-of-dedekind-domains, thm-localisation-of-a-dedekind-domain, lem-trace-pairing-for-a-finite-separable-extension, thm-finite-integral-closure-in-a-finite-separable-extension, cor-integral-closure-of-a-dedekind-domain-in-a-finite-separable-extension, rem-separability-is-essential-for-finite-integral-closure, def-fractional-ideal, def-product-and-colon-of-fractional-ideals, lem-fractional-ideal-operations-well-defined, def-invertible-fractional-ideal, thm-invertible-ideal-characterisations, thm-nonzero-ideals-in-dedekind-domains-are-invertible, def-prime-ideal-valuations-on-fractional-ideals, lem-finite-support-of-ideal-valuations, thm-unique-factorisation-of-ideals-in-dedekind-domains, cor-ideal-divisibility-reverses-inclusion-dedekind, cor-ideals-in-a-dedekind-domain-are-two-generated, def-ideal-class-group-of-a-domain, lem-ideal-class-group-well-defined, def-divisor-group-of-a-dedekind-domain, thm-principal-divisor-exact-sequence, thm-dedekind-pid-class-group-characterisation, lem-rank-one-projective-embedded-as-a-fractional-ideal, thm-invertible-ideals-and-rank-one-projective-modules, thm-ideal-class-group-is-the-picard-group, lem-finite-torsionfree-modules-over-dedekind-domains-are-projective, lem-rank-one-summand-of-a-finite-projective-dedekind-module, thm-finite-torsionfree-modules-over-dedekind-domains, thm-submodules-of-projectives-over-dedekind-domains]
 examples: []
 ---

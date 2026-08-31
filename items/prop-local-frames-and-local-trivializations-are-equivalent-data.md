@@ -2,7 +2,7 @@
 id: prop-local-frames-and-local-trivializations-are-equivalent-data
 kind: proposition
 title: "Local frames and local trivializations are equivalent data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

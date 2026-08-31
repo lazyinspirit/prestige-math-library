@@ -2,7 +2,7 @@
 id: ex-relative-homology-of-a-map-between-stalk-complexes
 kind: example
 title: "Relative homology of a map between stalk complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-relative-homology-of-a-chain-map, ex-the-cone-of-multiplication-by-m-on-the-integers, thm-abelian-groups-form-an-abelian-category]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

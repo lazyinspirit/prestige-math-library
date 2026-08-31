@@ -2,7 +2,7 @@
 id: prop-the-p-functional-is-not-a-norm-for-zero-less-p-less-one
 kind: proposition
 title: "The $p$-functional need not be a norm for $0 < p < 1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-real-power, thm-real-power-laws, thm-exponential-is-strictly-increasing, def-norm-and-normed-space, def-counting-measure, prop-counting-measure-is-a-measure]
 proof_strategy: "Use the concavity of t maps to t^p on [0, infinity) to show triangle inequality fails on two disjoint equal-mass indicators, so the p-functional is not subadditive and therefore is not a norm."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-mapping-cone-is-functorial-on-the-arrow-category-of-complexes
 kind: proposition
 title: "Mapping cone is functorial on the arrow category of complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-morphism-of-chain-maps, thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones, def-category-of-chain-complexes]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

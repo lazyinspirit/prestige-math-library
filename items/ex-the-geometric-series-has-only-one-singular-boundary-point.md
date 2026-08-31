@@ -2,7 +2,7 @@
 id: ex-the-geometric-series-has-only-one-singular-boundary-point
 kind: example
 title: "The geometric series has only one singular point on its unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   references:

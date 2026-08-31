@@ -2,7 +2,7 @@
 id: thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric
 kind: theorem
 title: "The $L^p$ distance for $0 < p < 1$ is a complete translation-invariant metric"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-metric-space, def-complete-metric-space, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-finite-and-countable-subadditivity-of-measures, def-real-power, thm-natural-logarithm-laws, thm-exponential-is-strictly-increasing]
 proof_strategy: "Because (a + b)^p <= a^p + b^p for 0 < p < 1, d([f],[g]) = int |f - g|^p dmu defines a metric on quotient classes and is translation invariant. Completeness follows by repeating the Riesz-Fischer telescoping argument without taking p-th roots."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

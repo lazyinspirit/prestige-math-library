@@ -2,7 +2,7 @@
 id: prop-the-cone-triangle-of-a-null-homotopic-map-splits-in-the-homotopy-category
 kind: proposition
 title: "The cone triangle of a null-homotopic map splits in the homotopy category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-homotopic-maps-have-chain-isomorphic-mapping-cones, prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift, def-homotopy-category-of-chain-complexes, thm-the-homotopy-category-is-additive, def-cone-triangle-of-a-chain-map, def-chain-homotopy]
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

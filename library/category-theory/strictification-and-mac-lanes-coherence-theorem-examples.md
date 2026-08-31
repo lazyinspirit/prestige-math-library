@@ -1,7 +1,7 @@
 ---
 page: strictification-and-mac-lanes-coherence-theorem-examples
 title: "Strictification and Mac Lanes Coherence Theorem - Examples"
-status: draft
+status: published
 items: []
 examples: [ex-the-two-routes-around-the-pentagon-are-equal,
            ex-the-canonical-map-between-two-bracketings-of-a-five-fold-product,

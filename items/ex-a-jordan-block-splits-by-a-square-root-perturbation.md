@@ -2,7 +2,7 @@
 id: ex-a-jordan-block-splits-by-a-square-root-perturbation
 kind: example
 title: "A $2\\times2$ Jordan block splits into two eigenvalues separated by a square root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

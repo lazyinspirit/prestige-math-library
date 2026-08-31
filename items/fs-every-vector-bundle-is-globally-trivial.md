@@ -2,7 +2,7 @@
 id: fs-every-vector-bundle-is-globally-trivial
 kind: false-statement
 title: "Every vector bundle is globally trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -45,4 +46,5 @@ Every smooth vector bundle is globally trivial.
 **Proof technique:** direct.
 
 1.1 Cover $S^1$ by the two standard arcs $U_0=S^1\setminus\{(-1,0)\}$ and $U_1=S^1\setminus\{(1,0)\}$. Their overlap has an upper and a lower component. Define a rank-one cocycle by $g_{10}=1$ on the upper overlap and $g_{10}=-1$ on the lower overlap. By [L1], this glues a smooth line bundle $L\to S^1$. [L1, given, construct]
+
 2.1 If $L$ were trivial, then [L2] would give a nowhere-zero global frame. In local trivializations that would be given by nowhere-zero functions $f_0$ on $U_0$ and $f_1$ on $U_1$ with $f_1=f_0$ on the upper overlap and $f_1=-f_0$ on the lower overlap. Since $U_1$ is connected, a nowhere-zero continuous $f_1$ has constant sign, but the two overlap equations force opposite signs. This contradiction shows that $L$ is not trivial. [L2, step 1.1, contradiction] ∎

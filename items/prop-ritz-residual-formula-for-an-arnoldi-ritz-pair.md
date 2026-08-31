@@ -2,7 +2,7 @@
 id: prop-ritz-residual-formula-for-an-arnoldi-ritz-pair
 kind: proposition
 title: "An Arnoldi Ritz pair has residual norm controlled by the last Hessenberg subdiagonal entry"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

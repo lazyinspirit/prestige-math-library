@@ -2,7 +2,7 @@
 id: prop-the-total-space-of-a-rank-r-bundle-has-dimension-dim-m-plus-r
 kind: proposition
 title: "The total space of a rank-r bundle has dimension dim M + r"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -40,4 +41,5 @@ $U\times\mathbb R^r$ over an open set $U\subseteq M$
 **Proof technique:** direct.
 
 1.1 Fix $e\in E$ with base point $p=\pi(e)$. Choose a chart of $M$ sending a neighborhood of $p$ diffeomorphically onto an open subset of $\mathbb R^n$, and combine it with a vector bundle chart from [L1]. This identifies a neighborhood of $e$ in $E$ with an open subset of $\mathbb R^n\times\mathbb R^r$. [L1, given]
+
 2.1 Since $\mathbb R^n\times\mathbb R^r\cong\mathbb R^{n+r}$, every point of $E$ has a chart of dimension $n+r$. Therefore the total space $E$ is an $(n+r)$-manifold. [step 1.1, algebra] ∎

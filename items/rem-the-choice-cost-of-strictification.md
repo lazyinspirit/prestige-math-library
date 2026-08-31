@@ -2,13 +2,14 @@
 id: rem-the-choice-cost-of-strictification
 kind: remark
 title: "Strictification itself costs no Choice; choosing a skeleton can"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-mac-lane-strictification, def-skeletal-category-and-skeleton]
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: krylov-subspaces-arnoldi-and-gmres
 title: "Krylov Subspaces, Arnoldi and GMRES"
-status: draft
+status: published
 items: [def-krylov-subspace-of-a-matrix-and-start-vector,
         def-grade-and-relative-minimal-polynomial-of-a-start-vector,
         prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector,

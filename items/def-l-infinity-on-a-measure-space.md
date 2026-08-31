@@ -2,7 +2,7 @@
 id: def-l-infinity-on-a-measure-space
 kind: definition
 title: "The space $L^\\infty(\\mu)$ of essentially bounded measurable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Section 7A"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

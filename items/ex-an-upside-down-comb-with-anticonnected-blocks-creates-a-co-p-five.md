@@ -2,7 +2,7 @@
 id: ex-an-upside-down-comb-with-anticonnected-blocks-creates-a-co-p-five
 kind: example
 title: "An upside-down comb with anticonnected blocks creates a $\\overline{P_5}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

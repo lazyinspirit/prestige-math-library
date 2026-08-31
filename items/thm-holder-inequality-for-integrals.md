@@ -2,7 +2,7 @@
 id: thm-holder-inequality-for-integrals
 kind: theorem
 title: "Holder's inequality for integrals, including the endpoint cases"
-status: draft
+status: published
 origin: session
 landmark: true
 provenance:
@@ -11,6 +11,7 @@ provenance:
 deps: [def-conjugate-exponents, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-essential-supremum-is-attained-as-the-least-essential-bound, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-young-inequality-real-exponents, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
 proof_strategy: "For 1 < p < infinity, normalize the nonzero norms and apply the published Young inequality pointwise before integrating. Treat the endpoint pairs (1, infinity) and (infinity, 1) separately from the essential-bound definition."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

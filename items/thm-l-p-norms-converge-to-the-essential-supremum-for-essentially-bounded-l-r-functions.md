@@ -2,7 +2,7 @@
 id: thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions
 kind: theorem
 title: "$L^p$ norms converge to the essential supremum for essentially bounded $L^r$ functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-essential-supremum-is-attained-as-the-least-essential-bound, def-calligraphic-l-p-on-a-measure-space, def-l-infinity-on-a-measure-space, prop-order-and-scalar-rules-for-the-nonnegative-integral]
 proof_strategy: "The upper bound is ||f||_p^p <= ||f||_infinity^(p - r) ||f||_r^r. For the lower bound, every epsilon below the essential supremum leaves a set of positive measure where |f| exceeds ||f||_infinity - epsilon, forcing the p-norm above that level as p grows."
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

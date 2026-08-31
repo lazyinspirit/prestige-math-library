@@ -2,7 +2,7 @@
 id: thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization
 kind: theorem
 title: "Before breakdown, Arnoldi produces an orthonormal Krylov basis and a rectangular upper-Hessenberg factorization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []

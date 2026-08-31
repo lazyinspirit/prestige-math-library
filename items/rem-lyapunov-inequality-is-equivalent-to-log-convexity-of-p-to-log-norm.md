@@ -2,7 +2,7 @@
 id: rem-lyapunov-inequality-is-equivalent-to-log-convexity-of-p-to-log-norm
 kind: remark
 title: "Lyapunov inequality is equivalent to log-convexity of the reciprocal-exponent norm profile"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 6.3"
       url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
 verification:
+  audited: 2026-08-31
   precheck: n/a
 ---
 

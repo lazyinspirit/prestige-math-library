@@ -2,7 +2,7 @@
 id: ex-the-normal-bundle-of-the-sphere-in-euclidean-space-is-trivial
 kind: example
 title: "Assuming countable choice, the normal bundle of the sphere is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
 sources:
   scraped: []
@@ -46,4 +47,5 @@ identifies it with the orthogonal normal line bundle
 **Proof technique:** direct.
 
 1.1 Write $S^n$ as the regular level set of $F(z)=\langle z,z\rangle$. Since $dF_x(v)=2\langle x,v\rangle$, [L3] gives $T_xS^n=x^\perp$. Its Euclidean orthogonal complement is therefore the one-dimensional space $\mathbb Rx$, so [L1] identifies the normal bundle with a line bundle spanned by the radial vector. [L1, L3, given, algebra]
+
 2.1 The smooth section $x\mapsto x$ is nowhere zero and spans that line at every point, so it is a global frame. Therefore [L2] implies that the normal bundle of $S^n$ is trivial. [L2, step 1.1] ∎

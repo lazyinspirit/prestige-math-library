@@ -2,7 +2,7 @@
 id: prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map
 kind: proposition
 title: "The canonical map to a quotient bundle is a smooth bundle map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-31
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -44,4 +45,5 @@ kernel is $S$.
 **Proof technique:** direct.
 
 1.1 In an adapted local frame $(e_1,\dots,e_r)$ with $S$ spanned by the first $k$ vectors, the quotient bundle chart from [L1] identifies $q$ with the map $(p,u,w)\mapsto(p,w)$, where $u\in\mathbb R^k$ and $w\in\mathbb R^{r-k}$. Thus $q$ is smooth and fibrewise linear. [L1, given]
+
 2.1 In the same coordinates, $q(p,u,w)=0$ exactly when $w=0$, which means that the vector lies in the span of $e_1,\dots,e_k$, namely in $S_p$. Therefore $\ker q=S$. [step 1.1, algebra] ∎
