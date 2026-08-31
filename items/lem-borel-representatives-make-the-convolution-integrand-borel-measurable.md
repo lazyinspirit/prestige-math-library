@@ -58,6 +58,7 @@ $(u,v) \mapsto \tilde f(u)$ and $(u,v) \mapsto \tilde g(v)$ are Borel
 measurable on $\mathbb{R}^{2n}$ by [L2] and [L3], the functions
 $(x,y) \mapsto \tilde f(x-y)$ and $(x,y) \mapsto \tilde g(y)$ are Borel
 measurable. [L2, L3, given, construct]
+
 2.1 Multiplication on $\mathbb{C}$ is continuous, so [L3] makes [L3, L4, step 1.1]
 $$
 H(x,y)=\tilde f(x-y)\tilde g(y)

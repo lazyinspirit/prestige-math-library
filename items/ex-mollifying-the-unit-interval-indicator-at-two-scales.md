@@ -54,11 +54,13 @@ by direct support control
 Because $\operatorname{supp}(\varphi_\varepsilon)\subseteq[-\varepsilon,\varepsilon]$,
 the convolution vanishes unless the interval $[0,1]$ meets
 $[x-\varepsilon,x+\varepsilon]$, namely unless $x \in [-\varepsilon,1+\varepsilon]$. [L1, given, algebra]
+
 2.1 If $x \in [\varepsilon,1-\varepsilon]$, then the whole support of [L1, step 1.1, algebra]
 $\varphi_\varepsilon(x-\cdot)$ lies inside $[0,1]$, so
 $$ (f*\varphi_\varepsilon)(x)=\int \varphi_\varepsilon = 1. $$
 Near $x=0$ and $x=1$, only part of the kernel fits inside $[0,1]$, producing
 the two smooth transition layers. [L1, step 1.1, algebra]
+
 3.1 By [L2], every $f*\varphi_\varepsilon$ is smooth; the cases [L2, L3, step 2.1]
 $\varepsilon=1/4$ and $\varepsilon=1/8$ differ only in the width of the two
 boundary layers, with the smaller $\varepsilon$ giving the sharper transition. [L2, L3, step 2.1] ∎

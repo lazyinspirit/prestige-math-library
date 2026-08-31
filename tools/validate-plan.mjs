@@ -46,14 +46,15 @@
 //  17. redundant-prereq   WARN when a direct requirement is already implied
 //                         transitively (keep `requires` a transitive reduction,
 //                         matching the birds-eye flowchart rule in CLAUDE.md)
-//  18. track-category     pages owned by the differential-geometry track,
-//                         including each A page's actual companion, retain the
-//                         owner-declared `differential-geometry` category
+//  18. track-category     pages owned by a track with an executable category
+//                         contract, including each A page's actual companion,
+//                         retain that category in both the plan and their
+//                         top-level `library/<category>/` location
 //
 // Exit code 0 iff there are no hard errors.
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
 
 const args = process.argv.slice(2);
@@ -186,7 +187,9 @@ for (const p of pages) {
 // but an EXISTING repo item used as a dep should also live on some published page.
 const publishedPageItems = new Set();
 const homePageOf = new Map();          // itemId -> the page id in library/ that lists it
+const pageLocationOf = new Map();      // pageId -> top-level category and relative file path
 try {
+  const libraryRoot = join(repo, 'library');
   const walk = (dir) => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const fp = join(dir, e.name);
@@ -194,6 +197,8 @@ try {
       else if (e.name.endsWith('.md') && !e.name.startsWith('_')) {
         const src = readFileSync(fp, 'utf8');
         const pageId = src.match(/^page:\s*(\S+)/m)?.[1] ?? e.name.slice(0, -3);
+        const rel = relative(libraryRoot, fp);
+        pageLocationOf.set(pageId, { category: rel.split(/[\\/]/)[0], file: rel });
         for (const key of ['items', 'examples']) {
           const m = src.match(new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm'));
           if (m) for (const id of m[1].split(',').map((s) => s.trim())) if (id) {
@@ -204,7 +209,7 @@ try {
       }
     }
   };
-  walk(join(repo, 'library'));
+  walk(libraryRoot);
 } catch { /* ignore */ }
 
 for (const p of pages)
@@ -313,33 +318,47 @@ for (const comp of sccs(pages.map((p) => p.id), pageSucc))
 
 const pageById = new Map(pages.map((p) => [p.id, p]));
 
-// The differential-geometry design is a long-lived source document: several
-// later plan splices are expected to consume it. Keep its owner-declared
-// category contract executable. The table's B label and the canonical plan's
-// current companion id can differ, so check both the documented page ids and
-// every present A page's actual companion. Missing pages are future work and
-// become subject to this check as soon as they enter the canonical plan.
-const differentialGeometryTrack = join(repo, 'research', 'plan-differential-geometry-track.md');
-if (existsSync(differentialGeometryTrack)) {
-  const source = readFileSync(differentialGeometryTrack, 'utf8');
-  const rows = [...source.matchAll(/^\| DG-\d+ \| `([^`]+)` \| `([^`]+)` \|/gm)];
+// Long-lived track designs feed several later plan splices, so their category
+// contracts must stay executable. Check documented ids, each present A page's
+// actual companion, and the authored file location. A correct category field
+// is not enough when the page was nested under a prerequisite subject, because
+// the renderer classifies it by the first directory below library/.
+function checkTrackCategory({ file, rowPattern, rowLabel, category }) {
+  const path = join(repo, 'research', file);
+  if (!existsSync(path)) return;
+  const rows = [...readFileSync(path, 'utf8').matchAll(rowPattern)];
   if (!rows.length) {
-    err('track-category', `${differentialGeometryTrack}: no DG pair rows found; category contract cannot be checked`);
-  } else {
-    const trackPages = new Set();
-    for (const [, aId, bId] of rows) {
-      trackPages.add(aId);
-      trackPages.add(bId);
-      const aPage = pageById.get(aId);
-      if (aPage?.companion) trackPages.add(aPage.companion);
-    }
-    for (const id of trackPages) {
-      const page = pageById.get(id);
-      if (page && page.category !== 'differential-geometry')
-        err('track-category', `page ${id}: plan-differential-geometry-track.md requires category "differential-geometry", found "${page.category ?? '(missing)'}"`);
-    }
+    err('track-category', `${path}: no ${rowLabel} pair rows found; category contract cannot be checked`);
+    return;
+  }
+  const trackPages = new Set();
+  for (const row of rows) {
+    for (const id of row.slice(1)) if (id) trackPages.add(id);
+    const aPage = pageById.get(row[1]);
+    if (aPage?.companion) trackPages.add(aPage.companion);
+  }
+  for (const id of trackPages) {
+    const page = pageById.get(id);
+    if (page && page.category !== category)
+      err('track-category', `page ${id}: ${file} requires category "${category}", found "${page.category ?? '(missing)'}"`);
+    const location = pageLocationOf.get(id);
+    if (page && location && location.category !== category)
+      err('track-category-path', `page ${id}: ${file} requires library/${category}/${id}.md, found library/${location.file}`);
   }
 }
+
+checkTrackCategory({
+  file: 'plan-differential-geometry-track.md',
+  rowPattern: /^\| DG-\d+ \| `([^`]+)` \| `([^`]+)` \|/gm,
+  rowLabel: 'DG',
+  category: 'differential-geometry',
+});
+checkTrackCategory({
+  file: 'plan-functional-analysis-track.md',
+  rowPattern: /^\| FA-\d+ \| `([^`]+)` \|/gm,
+  rowLabel: 'FA',
+  category: 'functional-analysis',
+});
 
 for (const p of pages)
   for (const r of p.requires ?? []) {

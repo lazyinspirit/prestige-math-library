@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -48,5 +44,7 @@ is a basis of $\operatorname{Alt}^3(\mathbb R^3)$.
 **Proof technique:** direct.
 
 1.1 Since $dx$ and $dy$ are $1$-forms, [L1] gives $dx\wedge dy=-dy\wedge dx$ and $dx\wedge dx=-dx\wedge dx$, hence $dx\wedge dx=0$. [L1, given, algebra]
+
 1.2 By [L2], the unique increasing triple wedge $dx\wedge dy\wedge dz$ forms a basis of $\operatorname{Alt}^3(\mathbb R^3)$. [L2, given]
+
 2.1 These are the standard wedge-product identities in the dual basis. [step 1.1, step 1.2] ∎

@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -45,5 +41,7 @@ its first contravariant slot against its first covariant slot is smooth.
 **Proof technique:** direct.
 
 1.1 In any chart, [L1] identifies $S$, $T$, and $R$ with families of smooth coefficient functions. By [L2], the coefficients of $S\otimes T$ are finite sums of products of the coefficients of $S$ and $T$. Those are smooth. [L1, L2, given, algebra]
+
 1.2 In the same chart, [L2] writes each contracted coefficient of $R$ as a finite sum of coordinate coefficients of $R$. Because the contraction formula is basis-independent, these chartwise definitions glue. The resulting coefficient functions are smooth by [L1]. [L1, L2, given, algebra]
+
 2.1 Therefore tensor products and the contraction defined above preserve smoothness. [step 1.1, step 1.2] ∎

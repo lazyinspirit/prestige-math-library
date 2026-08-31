@@ -14,10 +14,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -51,5 +47,7 @@ defines a type $(1,1)$ tensor on $\mathbb R^2$.
 **Proof technique:** direct.
 
 1.1 For fixed $v$, the map $\alpha\mapsto\alpha(Av)$ is linear because evaluation of a fixed vector is linear on $V^*$. For fixed $\alpha$, the map $v\mapsto\alpha(Av)$ is linear because $A$ and $\alpha$ are linear. Thus $T$ is bilinear on $(\mathbb R^2)^*\times\mathbb R^2$. [given, algebra]
+
 2.1 By [F1], this means $T$ is a type $(1,1)$ tensor. [F1, step 1.1]
+
 3.1 Therefore an endomorphism gives a concrete type $(1,1)$ tensor through evaluation. [step 2.1] ∎

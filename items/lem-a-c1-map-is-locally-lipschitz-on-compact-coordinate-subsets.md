@@ -45,5 +45,7 @@ $\psi\circ F\circ\varphi^{-1}$ is Lipschitz on $\varphi(\overline W)$.
 **Proof technique:** direct.
 
 1.1 Let $f:=\psi\circ F\circ\varphi^{-1}$. By [F1], $f$ is $C^1$ on the open set $\varphi(U)\subseteq\mathbb R^m$. For each $x\in\varphi(K)$ choose an open Euclidean ball $B_x$ with $\overline{B_x}$ compact and contained in $\varphi(U)$. [F1, given, choose]
+
 2.1 The derivative norm $\|Df\|$ is continuous on each compact ball $\overline{B_x}$, so [L1] gives a finite bound $L_x$ there. Since $\overline{B_x}$ is convex, [L2] makes $f$ $L_x$-Lipschitz on $\overline{B_x}$. [L1, L2, step 1.1]
+
 3.1 Put $W_x:=\varphi^{-1}(B_x)$. Then $W_x$ is an open neighbourhood of $\varphi^{-1}(x)$ with $\overline{W_x}\subseteq U$, and $f$ is Lipschitz on $\varphi(\overline{W_x})=\overline{B_x}$. Since $x$ was arbitrary in $\varphi(K)$, the claim follows. [step 2.1, construct] ∎

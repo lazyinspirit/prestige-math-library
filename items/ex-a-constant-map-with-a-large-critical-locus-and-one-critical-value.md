@@ -39,5 +39,7 @@ the critical value set is $\{q\}$.
 **Proof technique:** direct.
 
 1.1 The differential of a constant map is zero at every point. Because $T_qN$ is nonzero, this differential is not surjective, so every point of $M$ is critical. [given, algebra]
+
 2.1 Hence the critical locus from [F1] is all of $M$, and because $M$ is nonempty, its image is the singleton $\{q\}$. [F1, step 1.1]
+
 3.1 Therefore a constant map has a large critical locus and one critical value. [step 2.1] ∎

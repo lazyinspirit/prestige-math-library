@@ -49,6 +49,9 @@ for every composable smooth map $G$.
 **Proof technique:** direct.
 
 1.1 In local coordinates, [F1] expresses each coefficient of $F^*T$ as a finite sum of the coefficients of $T\circ F$ multiplied by partial derivatives of $F$. Those are smooth, so [L1] implies that $F^*T$ is smooth. [F1, L1, given, algebra]
+
 1.2 The identity map has identity differential, so [F1] gives $(\operatorname{id}_M)^*T=T$. [F1, given]
+
 1.3 For $v_1,\ldots,v_k\in T_pM$, [F1] and [L2] give $$ ((G\circ F)^*T)_p(v_1,\ldots,v_k) =T_{G(F(p))}(dG_{F(p)}dF_pv_1,\ldots,dG_{F(p)}dF_pv_k), $$ which is exactly $(F^*(G^*T))_p(v_1,\ldots,v_k)$. [F1, L2, given, algebra]
+
 2.1 Therefore pullback of covariant tensors is smooth and functorial. [step 1.1, step 1.2, step 1.3] ∎

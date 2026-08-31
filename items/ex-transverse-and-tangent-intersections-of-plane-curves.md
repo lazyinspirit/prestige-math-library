@@ -43,5 +43,7 @@ $L_0=\{y=0\}$ is tangent to $P$ at $(0,0)$ and is not transverse there.
 **Proof technique:** direct.
 
 1.1 The tangent lines to $L_1$ and $P$ are spanned by $(1,1)$ and $(1,2x)$, respectively. At $x=0$ and $x=1$ these are distinct, so their spans add to $\mathbb R^2$. Thus $L_1\pitchfork P$ at both intersection points by [F1]. [F1, given, algebra]
+
 1.2 The tangent line to $L_0$ is spanned by $(1,0)$, and the tangent line to $P$ at $(0,0)$ is also spanned by $(1,0)$. Their sum is only one-dimensional, so [F1] fails there. This is the tangent situation warned about by [L1]. [F1, L1, given, algebra]
+
 2.1 Therefore the parabola exhibits both transverse and tangent intersections in the plane. [step 1.1, step 1.2] ∎

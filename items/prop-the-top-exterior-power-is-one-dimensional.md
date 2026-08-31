@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ $\bigwedge^nV$ and $\bigwedge^nV^*$ are one-dimensional.
 **Proof technique:** direct.
 
 1.1 By [L1], the space $\bigwedge^nV^*=\operatorname{Alt}^n(V)$ is one-dimensional. [L1, given]
+
 2.1 Since $\bigwedge^nV$ is the dual of $\bigwedge^nV^*$ by definition, or equivalently because [L2] identifies it with the dual through a nondegenerate pairing, it has the same dimension. Hence $\dim\bigwedge^nV=1$. [L2, step 1.1, algebra]
+
 3.1 Therefore both top exterior powers are one-dimensional. [step 1.1, step 2.1] ∎

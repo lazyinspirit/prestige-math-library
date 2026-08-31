@@ -40,10 +40,12 @@ Then $(G_\varepsilon)_{\varepsilon>0}$ is an $L^1$ approximate identity.
 1.1 The change of variables $u=x/\varepsilon$ gives [L1, given, algebra]
 $$ \int_{\mathbb{R}^n} G_\varepsilon(x)\,dx = \int_{\mathbb{R}^n} (2\pi)^{-n/2} e^{-|u|^2/2}\,du = 1, $$
 so every kernel has mass one and $\|G_\varepsilon\|_1=1$. [L1, given, algebra]
+
 2.1 For every $\delta > 0$, [step 1.1, algebra]
 $$ \int_{|x|>\delta} G_\varepsilon(x)\,dx = \int_{|u|>\delta/\varepsilon} (2\pi)^{-n/2} e^{-|u|^2/2}\,du \longrightarrow 0 $$
 as $\varepsilon \to 0^+$, because the integration region escapes to infinity
 against an integrable Gaussian tail. [step 1.1, algebra]
+
 3.1 Steps 1.1 and 2.1 verify the defining clauses of [L1], so the Gaussian [L1, step 1.1, step 2.1]
 family is an $L^1$ approximate identity even though it is not compactly
 supported. [L1, step 1.1, step 2.1] ∎

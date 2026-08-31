@@ -81,7 +81,6 @@ parts:
       - improper-and-parameter-dependent-multiple-integrals
       - convex-and-semicontinuous-functions-on-rn
       - picard-lindelof-and-first-order-odes
-      - normed-and-banach-spaces
       - regular-surfaces-and-surface-integrals
       - constant-rank-submersions-and-regular-level-sets
   - part: curves-and-the-fundamental-theorems

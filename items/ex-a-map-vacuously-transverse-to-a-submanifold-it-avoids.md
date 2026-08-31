@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -42,5 +38,7 @@ the $x$-axis $Z=\mathbb R\times\{0\}$ because $F(\mathbb R)\cap Z=\varnothing$.
 **Proof technique:** direct.
 
 1.1 The image of $F$ is the single point $(0,1)$, which does not lie on the $x$-axis. Hence $F^{-1}(Z)=\varnothing$. [given]
+
 2.1 By [F1], the transversality condition has no points to check when the preimage is empty. Therefore $F\pitchfork Z$. [F1, step 1.1]
+
 3.1 This is a concrete vacuous transversality example. [step 2.1] ∎

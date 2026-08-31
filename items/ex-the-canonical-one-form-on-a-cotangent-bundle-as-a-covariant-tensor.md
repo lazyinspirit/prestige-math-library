@@ -53,5 +53,7 @@ where $\pi:T^*\mathbb R^2\to\mathbb R^2$ is the bundle projection.
 **Proof technique:** direct.
 
 1.1 Write $v=a\,\partial_x+b\,\partial_y+c\,\partial_{\xi_1}+d\,\partial_{\xi_2}$ at $(x,y,\xi_1,\xi_2)$. Then $d\pi(v)=a\,\partial_x+b\,\partial_y$, so the covector $\xi=\xi_1\,dx+\xi_2\,dy$ gives $\xi(d\pi(v))=\xi_1a+\xi_2b$. [F2, given, algebra]
+
 2.1 The form $\lambda=\xi_1\,dx+\xi_2\,dy$ takes the same value on $v$, namely $\lambda(v)=\xi_1a+\xi_2b$. Thus $\lambda_{(p,\xi)}(v)=\xi(d\pi(v))$. Its coefficients are smooth coordinate functions, so [F1] makes it a smooth $1$-form. [F1, step 1.1, algebra]
+
 3.1 Therefore the canonical one-form is a concrete covariant tensor on the cotangent bundle. [step 2.1] ∎

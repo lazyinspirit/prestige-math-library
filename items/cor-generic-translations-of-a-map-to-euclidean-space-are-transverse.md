@@ -45,5 +45,7 @@ fails to be transverse to $Z$ is a null subset of $\mathbb R^n$.
 **Proof technique:** direct.
 
 1.1 Define the smooth family $\mathcal F:M\times\mathbb R^n\to\mathbb R^n$ by $\mathcal F(p,a)=f(p)+a$. Its slice at $a$ is exactly $f_a$. [L1, given, construct]
+
 2.1 The differential of $\mathcal F$ in the parameter direction is the identity on $\mathbb R^n$, so $\mathcal F$ is a submersion. Therefore [L2] gives $\mathcal F\pitchfork Z$. [L2, step 1.1, algebra]
+
 3.1 Applying [L1] to this family shows that the nontransverse parameters form a null subset of $\mathbb R^n$. [L1, step 2.1] ∎

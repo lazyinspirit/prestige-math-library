@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ a reflection.
 **Proof technique:** direct.
 
 1.1 The reflection satisfies $R^*dx=dx$ and $R^*dy=d(-y)=-dy$. [given, algebra]
+
 2.1 By [L1], $$ R^*\omega=R^*(dx\wedge dy)=R^*dx\wedge R^*dy=dx\wedge(-dy)=-dx\wedge dy. $$ [L1, step 1.1, algebra]
+
 3.1 Therefore the top-degree form changes sign under the reflection, so the claimed invariance is false. [step 2.1] ∎

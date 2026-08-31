@@ -48,5 +48,7 @@ where $F(r,\theta)=(r\cos\theta,r\sin\theta)$.
 **Proof technique:** direct.
 
 1.1 By [F1], $$ F^*dx=\cos\theta\,dr-r\sin\theta\,d\theta,\qquad F^*dy=\sin\theta\,dr+r\cos\theta\,d\theta. $$ [F1, given, algebra]
+
 2.1 Using [L1] and bilinearity of the wedge product, $$ F^*(dx\wedge dy)=F^*dx\wedge F^*dy =(\cos\theta\,dr-r\sin\theta\,d\theta)\wedge(\sin\theta\,dr+r\cos\theta\,d\theta) =r\,dr\wedge d\theta. $$ [L1, step 1.1, algebra]
+
 3.1 Thus the area form becomes $r\,dr\wedge d\theta$ in polar coordinates. [step 2.1] ∎

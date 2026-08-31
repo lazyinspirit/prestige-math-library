@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -47,5 +43,7 @@ $$ A^*(S\otimes T)=A^*S\otimes A^*T,\qquad A^*(\sigma\cdot T)=\sigma\cdot(A^*T).
 **Proof technique:** direct.
 
 1.1 Evaluating on $v_1,\ldots,v_{k+\ell}$ and using [F1] and [F2], $$ A^*(S\otimes T)(v_1,\ldots,v_{k+\ell}) =(S\otimes T)(Av_1,\ldots,Av_{k+\ell}) =S(Av_1,\ldots,Av_k)\,T(Av_{k+1},\ldots,Av_{k+\ell}), $$ which is exactly $(A^*S\otimes A^*T)(v_1,\ldots,v_{k+\ell})$. [F1, F2, given, algebra]
+
 1.2 Likewise, $$ A^*(\sigma\cdot T)(v_1,\ldots,v_\ell) =(\sigma\cdot T)(Av_1,\ldots,Av_\ell) =T(Av_{\sigma(1)},\ldots,Av_{\sigma(\ell)}), $$ which equals $(\sigma\cdot A^*T)(v_1,\ldots,v_\ell)$. [F1, F2, given, algebra]
+
 2.1 Therefore linear pullback respects tensor products and permutations. [step 1.1, step 1.2] ∎

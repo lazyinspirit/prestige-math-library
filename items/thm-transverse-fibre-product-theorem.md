@@ -48,5 +48,7 @@ is an embedded submanifold of $M\times P$.
 **Proof technique:** direct.
 
 1.1 Define $H:M\times P\to N\times N$ by $H(p,q)=(F(p),G(q))$. By [L2], $H$ is smooth, and $$ H^{-1}(\Delta_N)=\{(p,q):F(p)=G(q)\}=M\times_NP. $$ [L1, L2, given]
+
 2.1 At a point $(p,q)$ with $F(p)=G(q)=y$, the tangent space to $\Delta_N$ is $\{(u,u):u\in T_yN\}$. Therefore transversality of $H$ to $\Delta_N$ means that every pair $(a,b)\in T_yN\times T_yN$ can be written as $$ (a,b)=(dF_pu,dG_qv)+(w,w). $$ This is equivalent to $a-b\in dF_p(T_pM)+dG_q(T_qP)$, which is exactly [F1]. [F1, step 1.1, algebra]
+
 3.1 Hence $H\pitchfork\Delta_N$, so [L2] applied with [L1] shows that $M\times_NP$ is an embedded submanifold of $M\times P$. [L1, L2, step 2.1] ∎

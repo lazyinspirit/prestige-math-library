@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ submanifold $Z\subseteq N$.
 **Proof technique:** direct.
 
 1.1 Let $p\in F^{-1}(Z)$. By [F1], $dF_p(T_pM)=T_{F(p)}N$. [F1, given]
+
 2.1 Therefore $dF_p(T_pM)+T_{F(p)}Z=T_{F(p)}N$, so [F2] gives $F\pitchfork Z$ at $p$. [F2, step 1.1]
+
 3.1 Since $p$ was arbitrary, $F$ is transverse to every embedded submanifold. [step 2.1] ∎

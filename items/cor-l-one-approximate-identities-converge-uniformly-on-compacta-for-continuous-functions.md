@@ -48,11 +48,13 @@ a compact set $K$.
 $$ |f(x-y)-f(x)| < \eta $$
 whenever $x \in K$ and $|y| < \delta$; this is possible by [L2] on a compact
 neighborhood of $K$. [L2, L3, given, choose]
+
 2.1 For $x \in K$, [L1, step 1.1, algebra]
 $$ |(f*K_\varepsilon)(x)-f(x)| \le \int |K_\varepsilon(y)|\,|f(x-y)-f(x)|\,dy. $$
 Split the integral into $|y|<\delta$ and $|y|\ge\delta$. The near part is at
 most $\eta \|K_\varepsilon\|_1$, while the far part is bounded by
 $2\|f\|_\infty \int_{|y|\ge\delta}|K_\varepsilon(y)|\,dy$. [L1, step 1.1, algebra]
+
 3.1 The $L^1$ norms are uniformly bounded and the tail term tends to $0$ by [L1]. [L1, step 2.1]
 Hence first choose $\eta$ small enough and then $\varepsilon$ small enough to
 make the right-hand side uniformly small for all $x \in K$. This is exactly the

@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -50,5 +46,7 @@ is surjective.
 **Proof technique:** direct.
 
 1.1 Let $\pi:T_yN\to T_yN/T_yZ$ be the quotient map from [F2]. Its kernel is exactly $T_yZ$. Therefore $\pi(dF_p(T_pM))=T_yN/T_yZ$ if and only if $dF_p(T_pM)+T_yZ=T_yN$. [F2, given, algebra]
+
 2.1 By [F1], the right-hand condition in step 1.1 is exactly transversality of $F$ to $Z$ at $p$. [F1, step 1.1]
+
 3.1 Hence transversality is equivalent to surjectivity on the normal quotient. [step 2.1] ∎

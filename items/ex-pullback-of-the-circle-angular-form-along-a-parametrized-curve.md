@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -53,5 +49,7 @@ $$
 **Proof technique:** direct.
 
 1.1 Along the curve, $x\circ c=\cos t$, $y\circ c=\sin t$, so $$ c^*x=\cos t,\qquad c^*y=\sin t,\qquad c^*dx=-\sin t\,dt,\qquad c^*dy=\cos t\,dt. $$ [F1, given, algebra]
+
 2.1 Therefore $$ c^*\eta=-(\sin t)(-\sin t\,dt)+(\cos t)(\cos t\,dt)=(\sin^2 t+\cos^2 t)\,dt=dt. $$ [step 1.1, algebra]
+
 3.1 Thus the angular form pulls back to the standard parameter form on the circle. [step 2.1] ∎

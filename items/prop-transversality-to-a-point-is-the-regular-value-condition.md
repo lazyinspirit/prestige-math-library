@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ is equivalent to saying that $q$ is a regular value of $F$.
 **Proof technique:** direct.
 
 1.1 Because $T_q\{q\}=0$, [F1] says that $F\pitchfork\{q\}$ exactly when $dF_p(T_pM)=T_qN$ for every $p\in F^{-1}(q)$. [F1, given]
+
 2.1 The condition in step 1.1 is precisely that every fibre point is a submersion point, which [F2] identifies with $q$ being a regular value. [F2, step 1.1]
+
 3.1 Therefore transversality to a point is the regular-value condition. [step 2.1] ∎

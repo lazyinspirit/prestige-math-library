@@ -37,5 +37,7 @@ product is bilinear in $(\alpha,\beta)$.
 **Proof technique:** direct.
 
 1.1 By [F1], $\alpha\wedge\beta$ is obtained by applying the alternation operator to $\alpha\otimes\beta$. Alternation produces an alternating multilinear form, so $\alpha\wedge\beta\in\operatorname{Alt}^{k+\ell}(V)$. [F1, given]
+
 1.2 Both tensor product and alternation are linear in each argument, so [F1] gives $$ (a\alpha+b\alpha')\wedge\beta=a(\alpha\wedge\beta)+b(\alpha'\wedge\beta), $$ and similarly in the second slot. [F1, given, algebra]
+
 2.1 Therefore the wedge product is alternating and bilinear. [step 1.1, step 1.2] ∎

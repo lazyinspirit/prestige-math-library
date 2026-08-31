@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -45,5 +41,7 @@ $\sigma$-compact subset of $N$.
 **Proof technique:** direct.
 
 1.1 By [L1], the critical locus $\operatorname{Crit}(F)$ is closed in $M$. Let $K_1\subseteq K_2\subseteq\cdots$ be a compact exhaustion of $M$ from [L1]. [L1, given, choose]
+
 2.1 Then $\operatorname{Crit}(F)\cap K_j$ is compact for every $j$, so [L1] makes $F(\operatorname{Crit}(F)\cap K_j)$ compact in $N$. [L1, step 1.1]
+
 3.1 By [F1], $$ \operatorname{CV}(F)=\bigcup_{j\ge 1}F(\operatorname{Crit}(F)\cap K_j), $$ so $\operatorname{CV}(F)$ is a countable union of compact sets. [F1, step 2.1, algebra] ∎

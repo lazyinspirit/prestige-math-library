@@ -40,5 +40,7 @@ Such an $X$ would be the natural candidate for a pullback of $Y$ along $F$.
 **Proof technique:** direct.
 
 1.1 The field $Y$ is a type $(1,0)$ tensor field, so the false claim requires a vector field $X$ on $\mathbb R$ with $dF_t(X_t)=Y_{F(t)}$ for every $t$. [given]
+
 2.1 The differential of the constant map is zero at every point, so $dF_t(X_t)=0$ for every possible $X_t\in T_t\mathbb R$, whereas $Y_{F(t)}\neq0$. Thus the required equality is impossible. [given, step 1.1, algebra]
+
 3.1 Thus a general mixed tensor field does not have a pullback by every smooth map, even though [L1] shows that purely covariant tensors do. [L1, step 2.1] ∎

@@ -47,5 +47,7 @@ $$
 **Proof technique:** direct.
 
 1.1 By [F1], $F^*\alpha$ is obtained from the covariant tensor pullback. Because [L1] sends smooth covariant tensors to smooth covariant tensors and preserves composition, the same is true for forms. [F1, L1, given]
+
 1.2 At each point $p\in M$, [F1] and [L2] give $$ (F^*(\alpha\wedge\beta))_p=dF_p^*(\alpha_{F(p)}\wedge\beta_{F(p)}) =dF_p^*(\alpha_{F(p)})\wedge dF_p^*(\beta_{F(p)}), $$ which is exactly $(F^*\alpha\wedge F^*\beta)_p$. [F1, L2, given, algebra]
+
 2.1 The identity and composition laws are inherited from [L1], and step 1.2 gives wedge preservation. Therefore pullback of forms is smooth, functorial, and wedge-preserving. [L1, step 1.2] ∎

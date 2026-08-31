@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -51,6 +47,9 @@ is exactly $\det[v_1\ \cdots\ v_n]$.
 **Proof technique:** direct.
 
 1.1 The matrix with entries $e^i(v_j)$ is exactly the coordinate matrix $[v_1\ \cdots\ v_n]$ of the ordered $n$-tuple $(v_1,\ldots,v_n)$. [given]
+
 2.1 Applying [L1] to $\alpha_i=e^i$ gives $$ \langle e^1\wedge\cdots\wedge e^n,\ v_1\wedge\cdots\wedge v_n\rangle =\det(e^i(v_j)) =\det[v_1\ \cdots\ v_n]. $$ [L1, step 1.1, algebra]
+
 3.1 By [L2], this scalar determines the decomposable top wedge relative to the standard volume form. [L2, step 2.1]
+
 4.1 Thus the determinant is the top-degree pairing against $e^1\wedge\cdots\wedge e^n$. [step 2.1, step 3.1] ∎

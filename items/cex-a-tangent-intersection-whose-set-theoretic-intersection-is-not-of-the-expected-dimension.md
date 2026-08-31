@@ -39,5 +39,7 @@ the expected dimension.
 **Proof technique:** direct.
 
 1.1 The intersection $S\cap T$ is the whole $x$-axis, so it is $1$-dimensional. [given]
+
 2.1 Each of $S$ and $T$ has codimension $1$ in $\mathbb R^2$, so a transverse intersection would have expected codimension $2$ and thus expected dimension $0$. Step 1.1 shows the actual intersection dimension is larger. This is precisely the nontransverse situation highlighted in [L1]. [L1, step 1.1, algebra]
+
 3.1 Therefore tangent intersections need not have the expected set-theoretic dimension. [step 2.1] ∎

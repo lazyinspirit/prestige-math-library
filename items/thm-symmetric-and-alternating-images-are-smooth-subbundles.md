@@ -43,5 +43,7 @@ form smooth vector subbundles of the covariant tensor bundle.
 **Proof technique:** direct.
 
 1.1 By [L1], symmetrization and alternation act fibrewise on $T^0_kM$ as smooth bundle endomorphisms over $\operatorname{id}_M$. Their fibres are the usual linear projections onto the symmetric and alternating tensors. [F1, L1, given]
+
 2.1 Because a projection has constant rank equal to the dimension of its image, the fibre ranks of these bundle maps are constant on $M$. Therefore [L2] shows that their images are smooth vector subbundles. [L1, L2, step 1.1, algebra]
+
 3.1 Those images are exactly the symmetric and alternating bundles from [F1]. Hence both are smooth vector subbundles of $T^0_kM$. [F1, step 2.1] ∎

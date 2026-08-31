@@ -42,5 +42,7 @@ its coordinate component functions are smooth.
 **Proof technique:** direct.
 
 1.1 By [F1] and [L1], a tensor field is a section of a smooth vector bundle whose local bundle coordinates are exactly the tensor coefficients relative to the chart bases $\partial/\partial x^i$ and $dx^i$. [F1, L1, given]
+
 2.1 Applying [L2] to those trivializations shows that the section is smooth exactly when each local coefficient function is smooth. [L1, L2, step 1.1]
+
 3.1 Therefore smoothness of a tensor field is equivalent to smoothness of its coordinate components. [step 2.1] ∎

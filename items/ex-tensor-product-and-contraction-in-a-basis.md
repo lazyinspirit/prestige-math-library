@@ -48,5 +48,7 @@ $$
 **Proof technique:** direct.
 
 1.1 For vectors $(a_1,a_2)$ and $(b_1,b_2)$, [L1] gives $$ (S\otimes T)((a_1,a_2),(b_1,b_2))=S(a_1,a_2)\,T(b_1,b_2)=a_1b_2, $$ so $S\otimes T=e^1\otimes e^2$. [L1, given, algebra]
+
 1.2 Again by [L1], $$ \operatorname{ctr}(R)=R(e^1,e_1)+R(e^2,e_2)=1+1=2. $$ [L1, given, algebra]
+
 2.1 This computes the announced tensor product and contraction. [step 1.1, step 1.2] ∎

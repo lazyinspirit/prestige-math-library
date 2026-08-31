@@ -45,5 +45,7 @@ Let $\Phi:M'\to M$ and $\Psi:N\to N'$ be diffeomorphisms.
 **Proof technique:** direct.
 
 1.1 By [L1], the differentials $d\Phi$, $d\Psi$, and their inverses are linear isomorphisms. Applying the chain rule to the composite maps multiplies the original differentials by these isomorphisms on the source and target sides. [L1, given]
+
 2.1 A linear isomorphism preserves the property that a sum of subspaces is the whole target space. Therefore the spanning conditions in [F1] hold for the original maps exactly when they hold for the conjugated maps. [F1, step 1.1, algebra]
+
 3.1 Hence both notions of transversality are invariant under diffeomorphic changes of source and target. [step 2.1] ∎

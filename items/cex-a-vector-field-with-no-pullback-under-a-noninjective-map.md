@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ $p\in M$.
 **Proof technique:** direct.
 
 1.1 The map $F$ is noninjective and has differential $dF_t=0$ for every $t\in\mathbb R$. [given]
+
 2.1 A vector field $X$ as in the false claim would satisfy $dF_t(X_t)=Y_{F(t)}$ at each point. Step 1.1 makes that impossible, because $dF_t(X_t)=0$ for every $X_t\in T_t\mathbb R$, whereas $Y_{F(t)}\neq 0$. [given, step 1.1, algebra]
+
 3.1 Hence $Y$ has no pullback along $F$, giving the announced counterexample and agreeing with [L1]. [L1, step 2.1] ∎

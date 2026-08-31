@@ -37,5 +37,7 @@ independent scalar function.
 **Proof technique:** direct.
 
 1.1 In Cartesian coordinates, the coefficient matrix of $g$ is $\begin{pmatrix}1&0\\0&1\end{pmatrix}$. [given]
+
 2.1 In polar coordinates, $dx=\cos\theta\,dr-r\sin\theta\,d\theta$ and $dy=\sin\theta\,dr+r\cos\theta\,d\theta$, so $$ g=dr\otimes dr+r^2\,d\theta\otimes d\theta. $$ Thus the coefficient matrix becomes $\begin{pmatrix}1&0\\0&r^2\end{pmatrix}$, not the unchanged scalar pair from step 1.1. This is exactly the Jacobian action described in [L1]. [L1, step 1.1, algebra]
+
 3.1 Therefore tensor components do not transform as independent scalar functions. [step 2.1] ∎

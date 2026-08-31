@@ -12,10 +12,6 @@ landmark: false
 proof_strategy: "For $s \\neq t$, the two indicators disagree on an interval of positive measure, so their essential-supremum distance is exactly $1$. This is the explicit computation behind the nonseparability theorem."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -44,10 +40,12 @@ explicit family ([[thm-l-infinity-of-unit-interval-is-not-separable]]).
 1.1 Assume $s < t$. Then [L1, given, algebra]
 $\mathbf{1}_{[0,t]}-\mathbf{1}_{[0,s]}$ equals $1$ on $(s,t]$, a set of positive
 measure. [L1, given, algebra]
+
 2.1 Hence [step 1.1, algebra]
 $$
 \|\mathbf{1}_{[0,t]}-\mathbf{1}_{[0,s]}\|_\infty = 1.
 $$
 The same conclusion holds when $t < s$ by symmetry. [step 1.1, algebra]
+
 3.1 So any two distinct members of the family are distance $1$ apart, which is [L1, step 2.1]
 exactly the one-separated property used in [L1]. [L1, step 2.1] ∎

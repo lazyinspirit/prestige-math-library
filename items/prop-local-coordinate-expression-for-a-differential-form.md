@@ -49,5 +49,7 @@ with smooth coefficient functions $\omega_{i_1\cdots i_k}$ on $U$.
 **Proof technique:** direct.
 
 1.1 At each point $p\in U$, [L1] gives a basis of $\bigwedge^kT_p^*M$, so $\omega_p$ has a unique expansion $$ \omega_p=\sum_I \omega_I(p)\,dx^I_p $$ over increasing multi-indices $I$. [F1, L1, given]
+
 2.1 The coefficient functions $p\mapsto\omega_I(p)$ are exactly the local components of the section $\omega$ in the bundle frame from [L1]. Therefore [L2] makes them smooth on $U$. [L1, L2, step 1.1]
+
 3.1 This gives the unique local coordinate expression for $\omega$. [step 1.1, step 2.1] ∎

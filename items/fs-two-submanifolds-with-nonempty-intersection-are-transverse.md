@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -41,5 +37,7 @@ transverse.
 **Proof technique:** direct.
 
 1.1 The intersection $S\cap T$ is all of $\mathbb R\times\{0\}$, so it is nonempty. [given]
+
 1.2 At every point $p\in S\cap T$, one has $T_pS=T_pT=\mathbb R\times\{0\}$. Their sum is still the $x$-axis, not $T_p\mathbb R^2=\mathbb R^2$. Thus [F1] fails. [F1, given, algebra]
+
 2.1 Therefore nonempty intersection does not force transversality. [step 1.1, step 1.2] ∎

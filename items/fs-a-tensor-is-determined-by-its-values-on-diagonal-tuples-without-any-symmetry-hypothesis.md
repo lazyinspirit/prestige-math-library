@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -41,5 +37,7 @@ $(v,\ldots,v)$ without any symmetry hypothesis.
 **Proof technique:** direct.
 
 1.1 By [F1], both $B_1$ and $B_2$ are tensors of the same type. They are distinct because $B_1(e_1,e_2)=1$ while $B_2(e_1,e_2)=0$. [F1, given]
+
 1.2 For every $v=(a,b)\in\mathbb R^2$, one has $B_1(v,v)=ab=B_2(v,v)$. Thus the two tensors agree on every diagonal pair $(v,v)$. [given, algebra]
+
 2.1 Therefore diagonal values alone do not determine a general tensor. [step 1.1, step 1.2] ∎

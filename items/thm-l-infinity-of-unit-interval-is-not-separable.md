@@ -44,10 +44,12 @@ $$
 $$
 by [L2]. Thus the family $\{u_t : t \in [0,1]\}$ is uncountable and
 $1$-separated. [L2, given, algebra]
+
 2.1 Suppose $D$ were a countable dense subset. For each $t \in [0,1]$, choose [L1, step 1.1, choose, algebra]
 $d_t \in D$ with $\|d_t-u_t\|_\infty < 1/3$. If $s \neq t$, then the balls
 $B_\infty(u_s,1/3)$ and $B_\infty(u_t,1/3)$ are disjoint because the centers are
 distance $1$ apart, so $d_s \neq d_t$. This gives an injection
 $[0,1] \hookrightarrow D$, contradicting countability. [L1, step 1.1, choose, algebra]
+
 3.1 Therefore no countable subset is dense in $L^\infty([0,1])$, so [step 2.1]
 $L^\infty([0,1])$ is not separable. [step 2.1] ∎

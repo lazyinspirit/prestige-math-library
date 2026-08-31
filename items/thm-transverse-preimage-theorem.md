@@ -17,10 +17,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -54,6 +50,9 @@ $$
 **Proof technique:** direct.
 
 1.1 Fix $p\in F^{-1}(Z)$ and put $y=F(p)$. By [L1], choose a neighbourhood $V$ of $y$ and a submersion $h:V\to\mathbb R^c$ such that $Z\cap V=h^{-1}(0)$. [L1, given, choose]
+
 2.1 At $p$, the differential $dh_y$ kills exactly $T_yZ$. Therefore [L2] implies that $dh_y\circ dF_p=d(h\circ F)_p$ is surjective. So $0$ is a regular value of $h\circ F$ near $p$. [L2, step 1.1, algebra]
+
 3.1 Since $(h\circ F)^{-1}(0)=F^{-1}(Z)\cap F^{-1}(V)$, [L3] shows that this set is an embedded codimension-$c$ submanifold near $p$, with tangent space $$ \ker d(h\circ F)_p=\{v:dF_p(v)\in T_yZ\}. $$ [L3, step 2.1, algebra]
+
 4.1 Because $p$ was arbitrary, these local models glue to an embedded submanifold structure on $F^{-1}(Z)$ with the stated tangent-space formula. [step 3.1] ∎

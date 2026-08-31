@@ -12,6 +12,11 @@ material. A generated statement is never a dependency target. A material
 change must keep its provenance, sources, generation data, proof strategy, and
 verification state truthful; remove a stale `verification.judge` record.
 
+Write every planned page directly at
+`library/<page.category>/<page.id>.md`. A prerequisite category does not own a
+later track: in particular, every functional-analysis A/B pair belongs under
+`library/functional-analysis/`, never under `library/real-analysis/`.
+
 Every page and item authored by the current run must remain `status: draft`.
 Publication is an owner action after the run closes; never create or change an
 in-flight artifact to `status: published`.

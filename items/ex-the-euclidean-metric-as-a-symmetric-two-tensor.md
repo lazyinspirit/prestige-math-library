@@ -46,5 +46,7 @@ is a smooth section of the symmetric subbundle of $T^0_2\mathbb R^n$.
 **Proof technique:** direct.
 
 1.1 The coefficients of $g$ in the standard coordinates are constant, so $g$ is smooth. [given]
+
 2.1 For vectors $u,v$, one has $g(u,v)=g(v,u)$, so each fibre value $g_p$ is symmetric. Hence [F1] places $g$ in the symmetric fibrewise part, and [L1] identifies that part as a smooth subbundle. [F1, L1, step 1.1]
+
 3.1 Therefore the Euclidean metric is a symmetric smooth two-tensor. [step 2.1] ∎

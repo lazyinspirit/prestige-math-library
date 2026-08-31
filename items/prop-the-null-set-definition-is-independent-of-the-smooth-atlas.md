@@ -45,5 +45,7 @@ $\mathcal B$-null.
 **Proof technique:** direct.
 
 1.1 Assume $E$ is $\mathcal A$-null. Fix a chart $(V,\psi)\in\mathcal B$. The sets $V\cap U$ with $(U,\varphi)\in\mathcal A$ cover $V$, so [L2] gives a countable cover of $V$ by relatively compact coordinate balls $W_j\subseteq V\cap U_j$. [F1, L2, given, choose]
+
 2.1 On each $W_j$, the transition map $\psi\circ\varphi_j^{-1}$ is a local diffeomorphism between Euclidean chart domains. Since $E$ is $\mathcal A$-null, [F1] makes $\varphi_j(E\cap W_j)$ null. Applying [L1] to the transition map shows that $\psi(E\cap W_j)$ is null for every $j$. [F1, L1, step 1.1]
+
 3.1 The set $\psi(E\cap V)$ is the countable union of the null sets $\psi(E\cap W_j)$, hence is null. Since $(V,\psi)$ was arbitrary, $E$ is $\mathcal B$-null by [F1]. The reverse implication is symmetric. [F1, step 2.1, algebra] ∎

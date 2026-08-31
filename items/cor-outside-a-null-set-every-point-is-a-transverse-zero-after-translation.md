@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -44,5 +40,7 @@ value.
 **Proof technique:** direct.
 
 1.1 Apply [L1] with $Z=\{q\}$. Then outside a null subset of $a\in\mathbb R^n$, the translated map $f_a(p)=f(p)+a$ is transverse to $\{q\}$. [L1, given]
+
 2.1 By [L2], $f_a\pitchfork\{q\}$ is equivalent to $q$ being a regular value of $f_a$. [L2, step 1.1]
+
 3.1 Therefore outside a null set of translations, the chosen value becomes a transverse zero. [step 2.1] ∎

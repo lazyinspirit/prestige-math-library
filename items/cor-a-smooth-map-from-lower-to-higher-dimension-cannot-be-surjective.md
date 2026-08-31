@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ nonempty $N$.
 **Proof technique:** direct.
 
 1.1 By [L1], $F(M)$ is a null subset of $N$. Since $m<n$, the target dimension is positive. [L1, given]
+
 2.1 If $F$ were surjective, then $N=F(M)$ would be null in itself. But [L2] would then force its complement $\varnothing$ to be dense in $N$, impossible because $N$ is nonempty. [L2, step 1.1, contradiction]
+
 3.1 Hence $F$ cannot be surjective. [discharge-contradiction: surjectivity impossible, step 2.1] ∎

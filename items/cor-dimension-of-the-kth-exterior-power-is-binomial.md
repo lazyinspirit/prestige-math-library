@@ -46,5 +46,7 @@ In particular, $\operatorname{Alt}^k(V)=0$ for $k>n$.
 **Proof technique:** direct.
 
 1.1 Choose a basis $e_1,\ldots,e_n$ of $V$. By [L1], $\operatorname{Alt}^k(V)$ has one basis vector for each strictly increasing $k$-tuple $(i_1,\ldots,i_k)$ from $\{1,\ldots,n\}$. [L1, given, choose]
+
 2.1 Such tuples are the same thing as $k$-element subsets of an $n$-element set, so [F1] counts them by $\binom{n}{k}$. Therefore $\dim\operatorname{Alt}^k(V)=\binom{n}{k}$. If $k>n$, there are no such tuples, so the basis is empty and $\operatorname{Alt}^k(V)=0$. [F1, step 1.1, algebra]
+
 3.1 This is exactly the claimed dimension formula and vanishing statement. [step 2.1] ∎

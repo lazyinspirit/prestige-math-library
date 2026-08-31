@@ -45,5 +45,7 @@ $$
 **Proof technique:** direct.
 
 1.1 Let $i:S\hookrightarrow M$ be the inclusion. By [F1], $i\pitchfork T$. Since $i^{-1}(T)=S\cap T$, [L1] shows that $S\cap T$ is an embedded submanifold of $S$ of codimension $\operatorname{codim}_M T=b$. [F1, L1, given]
+
 2.1 Therefore $$ \operatorname{codim}_M(S\cap T)=\operatorname{codim}_M S+\operatorname{codim}_S(S\cap T)=a+b. $$ The tangent-space formula from [L1] becomes $$ T_p(S\cap T)=\{v\in T_pS:di_p(v)\in T_pT\}=T_pS\cap T_pT. $$ [L1, step 1.1, algebra]
+
 3.1 Hence transverse embedded submanifolds intersect in the expected codimension. [step 2.1] ∎

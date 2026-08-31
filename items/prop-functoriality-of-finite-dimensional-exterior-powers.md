@@ -47,6 +47,9 @@ $$ \bigwedge^k(\operatorname{id}_V)=\operatorname{id}_{\wedge^kV},\qquad \bigwed
 **Proof technique:** direct.
 
 1.1 The map $(v_1,\ldots,v_k)\mapsto Av_1\wedge\cdots\wedge Av_k$ is alternating and $k$-linear in $v_1,\ldots,v_k$. By [L1], it therefore factors uniquely through a linear map $\bigwedge^kA:\bigwedge^kV\to\bigwedge^kW$ with the stated action on decomposable wedges. [L1, given, construct]
+
 2.1 The identity map and the composite $(\bigwedge^kB)\circ(\bigwedge^kA)$ have the expected values on every decomposable wedge: $$ \bigwedge^k(\operatorname{id}_V)(v_1\wedge\cdots\wedge v_k)=v_1\wedge\cdots\wedge v_k, $$ and $$ ((\bigwedge^kB)\circ(\bigwedge^kA))(v_1\wedge\cdots\wedge v_k)=BAv_1\wedge\cdots\wedge BAv_k. $$ The same formula holds for $\bigwedge^k(B\circ A)$. [step 1.1, given, algebra]
+
 3.1 By uniqueness in [L1], the maps in step 2.1 must agree. Therefore exterior powers preserve identities and composition. [L1, step 2.1]
+
 4.1 Hence $V\mapsto\bigwedge^kV$ and $A\mapsto\bigwedge^kA$ define a functor. [step 1.1, step 3.1] ∎

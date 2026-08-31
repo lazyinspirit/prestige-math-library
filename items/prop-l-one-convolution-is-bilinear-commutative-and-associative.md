@@ -44,11 +44,13 @@ integrals ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]],
 
 1.1 Bilinearity follows from linearity of the integral in [L3] once [L1]
 guarantees absolute convergence for almost every $x$. [L1, L3, given, algebra]
+
 1.2 For commutativity, fix $x$ where convolution is defined and change [L1, L2, L3, algebra]
 variables $u := x-y$:
 $$ (f*g)(x) = \int f(x-y)g(y)\,dy = \int g(x-u)f(u)\,du = (g*f)(x). $$
 Associativity is similar: [L2] applies to
 $|f(x-y-z)g(z)h(y)|$, so one may reorder the three integrations and obtain
 $((f*g)*h)(x)=(f*(g*h))(x)$ almost everywhere. [L1, L2, L3, algebra]
+
 2.1 Therefore convolution is bilinear, commutative, and associative on [step 1.1, step 1.2]
 $L^1(\mathbb{R}^n)$. [step 1.1, step 1.2] ∎

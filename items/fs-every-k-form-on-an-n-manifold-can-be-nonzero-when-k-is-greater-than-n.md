@@ -38,5 +38,7 @@ sources:
 **Proof technique:** direct.
 
 1.1 For each $p\in M$, the tangent space $T_pM$ has dimension $n$. Hence [L1] gives $\operatorname{Alt}^k(T_pM)=0$. [L1, given]
+
 2.1 By [L2], every fibre of $\bigwedge^kT^*M$ is zero. Therefore every section of that bundle is the zero form. [L2, step 1.1]
+
 3.1 So no nonzero $k$-form exists when $k>n$, and the claim is false. [step 2.1] ∎

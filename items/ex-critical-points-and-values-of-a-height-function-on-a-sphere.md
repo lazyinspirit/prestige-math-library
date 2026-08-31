@@ -17,10 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -43,5 +39,7 @@ are the north and south poles, and its critical values are $1$ and $-1$.
 **Proof technique:** direct.
 
 1.1 The tangent space at $(x,y,z)\in S^2$ consists of vectors orthogonal to $(x,y,z)$. The differential of $h$ is the projection $v\mapsto v_z$, so it vanishes on that tangent space exactly when every tangent vector has zero $z$-component, which happens only at $(0,0,\pm1)$. [given, algebra]
+
 2.1 Therefore the critical locus from [F1] is $\{(0,0,1),(0,0,-1)\}$, and the critical value set is $\{1,-1\}$. [F1, step 1.1]
+
 3.1 Thus the sphere height function has exactly the two expected critical points and values. [step 2.1] ∎

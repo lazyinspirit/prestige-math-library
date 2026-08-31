@@ -132,7 +132,7 @@ The renderer splits an item only on level-two headings. It renders `Facts & Assu
 | false-statement | `Statement` | `Refutation` |
 | remark | free prose | none |
 
-Facts are blank-line-separated paragraphs. Contract-aware tools recognize fact labels `[F<n>]`, `[A<n>]`, and `[L<n>]`; a cited fact carries the source wikilink. A proof row starts `<phase>.<step> ` and may end with one bracketed comma-separated justification group and a final QED glyph. A leading `**Proof technique:** <text>.` paragraph is displayed separately but is not independently checked against `proof_strategy`.
+Facts are blank-line-separated paragraphs. Contract-aware tools recognize fact labels `[F<n>]`, `[A<n>]`, and `[L<n>]`; a cited fact carries the source wikilink. A proof row starts `<phase>.<step> ` and may end with one bracketed comma-separated justification group and a final QED glyph. Separate consecutive proof rows with a blank line so Markdown renders each step as its own paragraph rather than merging the proof into one text block. A leading `**Proof technique:** <text>.` paragraph is displayed separately but is not independently checked against `proof_strategy`.
 
 For a phase-format body, `tools/precheck.mts` requires a `**Given:**` declaration, at least two numbered steps, a final QED, no later numbered step after that QED, and trailing valid tags on at least 70% of steps. Valid tag tokens are `given`, `F/A/L/C<n>`, `step p.q` or `p.q`, `algebra`, `assume-contra`, `assume-hyp`, `ih`, `assume-case[ <word>]`, `base`, `construct`, `choose`, `suffices[: ...]`, `contrapositive-reduce`, `discharge-{contradiction|contrapositive|induction|construct}[: ...]`, and `{contradiction|contrapositive|induction|cases|cases-exhaustive}[: ...]`. Forward step references fail. The wrapper also fails a proof that only passes after its phase-stratification repair, so stored step numbers must already be in that repaired order. `contradiction`, `contrapositive`, `induction`, `cases`, and `constructive` strategies require their corresponding opener/discharge tags; other strategy strings have only the common checks.
 
@@ -159,6 +159,8 @@ A page whose slug ends in `-examples`, or whose plan kind is `B`, is an examples
 ## 5. Categories and pathways
 
 `library/<category>/_category.md` supplies the category title and optional Markdown overview. The renderer falls back to a title derived from the directory name when `title` is absent. Its body is optional; `pathcheck` warns when a top-level category overview is missing or shorter than 120 words.
+
+For a plan-backed page, the plan's `category` is its top-level library directory: write the page at `library/<category>/<page>.md`. Do not nest one subject track beneath a prerequisite track. In particular, functional-analysis A/B pairs live directly in `library/functional-analysis/`.
 
 A top-level category may have `_pathway.md`:
 

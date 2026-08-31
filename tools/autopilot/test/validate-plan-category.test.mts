@@ -43,10 +43,54 @@ test('the differential-geometry track fixes both A and actual companion categori
   const badRepo = fixture('lie-theory');
   const bad = run(badRepo);
   assert.equal(bad.status, 1, bad.stderr);
-  assert.match(bad.stdout, /\[track-category\] page actual-b: .*requires category "differential-geometry"/);
+  assert.match(bad.stdout + bad.stderr, /\[track-category\] page actual-b: .*requires category "differential-geometry"/);
   rmSync(badRepo, { recursive: true, force: true });
 
   const goodRepo = fixture('differential-geometry');
+  const good = run(goodRepo);
+  assert.equal(good.status, 0, good.stdout + good.stderr);
+  rmSync(goodRepo, { recursive: true, force: true });
+});
+
+function functionalFixture(pageDirectory: string) {
+  const repo = mkdtempSync(join(tmpdir(), 'validate-plan-functional-category-'));
+  mkdirSync(join(repo, 'research'), { recursive: true });
+  mkdirSync(join(repo, 'items'));
+  mkdirSync(join(repo, 'library', pageDirectory), { recursive: true });
+  writeFileSync(join(repo, 'research', 'plan-functional-analysis-track.md'), [
+    '| label | A page id | mathematical spine |',
+    '|---|---|---|',
+    '| FA-1 | `normed-spaces` | foundations |',
+    '',
+  ].join('\n'));
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    {
+      order: 1, id: 'normed-spaces', title: 'Normed spaces', kind: 'A',
+      category: 'functional-analysis', companion: 'normed-spaces-examples',
+      requires: [], items: [],
+    },
+    {
+      order: 2, id: 'normed-spaces-examples', title: 'Normed spaces examples', kind: 'B',
+      category: 'functional-analysis', companion: 'normed-spaces',
+      requires: ['normed-spaces'], items: [],
+    },
+  ] }, null, 2));
+  for (const id of ['normed-spaces', 'normed-spaces-examples']) {
+    writeFileSync(join(repo, 'library', pageDirectory, `${id}.md`), [
+      '---', `page: ${id}`, 'status: draft', 'items: []', 'examples: []', '---', '',
+    ].join('\n'));
+  }
+  return repo;
+}
+
+test('functional-analysis pages live in their own top-level category directory', () => {
+  const badRepo = functionalFixture('real-analysis/functional-analysis');
+  const bad = run(badRepo);
+  assert.equal(bad.status, 1, bad.stderr);
+  assert.match(bad.stdout + bad.stderr, /\[track-category-path\].*requires library\/functional-analysis\/normed-spaces\.md/);
+  rmSync(badRepo, { recursive: true, force: true });
+
+  const goodRepo = functionalFixture('functional-analysis');
   const good = run(goodRepo);
   assert.equal(good.status, 0, good.stdout + good.stderr);
   rmSync(goodRepo, { recursive: true, force: true });

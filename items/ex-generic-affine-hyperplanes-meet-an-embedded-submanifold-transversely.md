@@ -41,5 +41,7 @@ transverse points.
 **Proof technique:** direct.
 
 1.1 The fibre $h^{-1}(a)$ is $S^1\cap H_a$. When $|a|<1$, the equation $x=a$ on $x^2+y^2=1$ gives the two points $(a,\pm\sqrt{1-a^2})$. At either point, $dh$ is nonzero on the circle tangent line exactly when $a\neq\pm1$. [given, algebra]
+
 2.1 Therefore for every $a\neq\pm1$, the line $H_a$ either misses the circle or meets it transversely. The exceptional set $\{-1,1\}$ is finite, hence null, exactly as [L1] predicts in this one-parameter family. [L1, step 1.1]
+
 3.1 Thus generic affine hyperplanes meet the embedded circle transversely. [step 2.1] ∎

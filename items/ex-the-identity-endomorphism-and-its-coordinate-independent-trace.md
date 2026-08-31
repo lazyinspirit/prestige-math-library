@@ -42,5 +42,7 @@ type $(1,1)$ tensor has contraction $n$, so its trace is $n$ in every basis.
 **Proof technique:** direct.
 
 1.1 The tensor associated to $\operatorname{id}_{\mathbb R^n}$ is $T(\alpha,v)=\alpha(v)$. Therefore [F1] gives $$ \operatorname{ctr}(T)=\sum_{i=1}^n e^i(e_i)=n. $$ [F1, given, algebra]
+
 2.1 In the chosen basis, the matrix of the identity endomorphism is the identity matrix, so [F2] gives trace $n$. This agrees with step 1.1, and neither value depends on the basis. [F2, step 1.1, algebra]
+
 3.1 Thus the identity endomorphism has coordinate-independent trace $n$. [step 2.1] ∎

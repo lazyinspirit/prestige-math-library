@@ -41,5 +41,7 @@ $F^{-1}$.
 **Proof technique:** direct.
 
 1.1 By [F1], both $F$ and $F^{-1}$ are smooth, so [L1] gives pullback maps in both directions on covariant tensor fields and on forms. [F1, L1, given]
+
 2.1 Functoriality from [L1] yields $$ (F^{-1})^*\circ F^*=(F\circ F^{-1})^*=\operatorname{id}^*,\qquad F^*\circ(F^{-1})^*=((F^{-1})\circ F)^*=\operatorname{id}^*. $$ The identity pullback is the identity map by the same functoriality statements. [L1, step 1.1, algebra]
+
 3.1 Hence $F^*$ is an isomorphism with inverse $(F^{-1})^*$ on covariant tensor fields and on differential forms. [step 2.1] ∎

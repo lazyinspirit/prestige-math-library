@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -47,6 +43,9 @@ $\varphi_j(E\cap U_j)$ is empty when $\dim M=0$.
 **Proof technique:** direct.
 
 1.1 If $\dim M=0$, [F1] says that $E$ is null exactly when $E=\varnothing$. Because the chart domains cover $M$, this is equivalent to every $E\cap U_j$ being empty, hence to every chart image being empty. [F1, given, cases]
+
 1.2 Assume $\dim M\ge1$. If $E$ is null, then every chart image $\varphi_j(E\cap U_j)$ is null by definition. [given, cases]
+
 2.1 Conversely, the given countable atlas is itself a smooth atlas, so [L2] says that being null with respect to this atlas is the same as being null with respect to any other. Therefore the displayed chartwise condition implies that $E$ is null. [L2, step 1.1, step 1.2]
+
 3.1 Hence this countable chart cover detects manifold null sets in every dimension. [step 1.1, step 1.2, step 2.1] ∎

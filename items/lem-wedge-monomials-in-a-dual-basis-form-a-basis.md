@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -50,5 +46,7 @@ form a basis of $\operatorname{Alt}^k(V)$.
 **Proof technique:** direct.
 
 1.1 Let $\omega\in\operatorname{Alt}^k(V)$. Expanding each input vector in the basis and using multilinearity shows that $\omega$ is determined by its values on basis $k$-tuples. Because $\omega$ is alternating, every tuple with a repeated index vanishes and every tuple with distinct indices reduces, up to sign, to one with increasing indices. Thus $\omega$ is a linear combination of the displayed wedges from [F1]. [F1, L1, given, algebra]
+
 2.1 Suppose $\sum_I c_I e^I=0$, where $I=(i_1<\cdots<i_k)$ and $e^I:=e^{i_1}\wedge\cdots\wedge e^{i_k}$. Evaluating at $(e_{j_1},\ldots,e_{j_k})$ with $j_1<\cdots<j_k$, [L1] gives $e^I(e_{j_1},\ldots,e_{j_k})=1$ when $I=(j_1,\ldots,j_k)$ and $0$ otherwise. Hence every $c_I=0$. [L1, step 1.1, algebra]
+
 3.1 Therefore the displayed wedges form a basis of $\operatorname{Alt}^k(V)$. [step 1.1, step 2.1] ∎

@@ -39,5 +39,7 @@ $$
 **Proof technique:** direct.
 
 1.1 The supports of the summands are pairwise disjoint, so the series defines a smooth function. At each center $x=k$, the derivative is zero and $$ f(k)=1-\frac1k. $$ Thus every value $1-\frac1k$ is a critical value. [given, algebra]
+
 2.1 The sequence $1-\frac1k$ converges to $1$. But $f(x)\neq 1$ for every $x$, because every summand has height strictly below $1$ and outside the supports the function is $0$. Hence $1$ is a regular value with empty fibre, not a critical value. [step 1.1, algebra]
+
 3.1 Therefore the critical value set contains $\{1-\frac1k:k\ge 1\}$ but not its limit $1$, so it is not closed. This is consistent with [L1]. [L1, step 2.1] ∎

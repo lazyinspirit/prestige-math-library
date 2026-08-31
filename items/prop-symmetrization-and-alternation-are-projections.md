@@ -40,6 +40,9 @@ Their images are exactly the symmetric and alternating covariant tensors.
 **Proof technique:** direct.
 
 1.1 Applying $\operatorname{Sym}$ twice gives a double average over $S_k\times S_k$. Reindex by the product permutation $\rho=\sigma\tau$; each $\rho$ occurs exactly $k!$ times, so the second averaging changes nothing. Thus $\operatorname{Sym}(\operatorname{Sym}T)=\operatorname{Sym}T$. [F1, given, algebra]
+
 1.2 The same reindexing works for $\operatorname{Alt}$, and the sign factors multiply to $\operatorname{sgn}(\sigma\tau)$. Hence $\operatorname{Alt}(\operatorname{Alt}T)=\operatorname{Alt}T$. [F1, given, algebra]
+
 2.1 If $T$ is symmetric, every summand in [F1] equals $T$, so $\operatorname{Sym}T=T$. Conversely, $\operatorname{Sym}T$ is fixed by every permutation because averaging over the whole group is permutation-invariant. The alternating case is identical, with the sign picked up under permutation. [F1, step 1.1, step 1.2]
+
 3.1 Therefore $\operatorname{Sym}$ and $\operatorname{Alt}$ are projections onto the symmetric and alternating tensors. [step 1.1, step 1.2, step 2.1] ∎

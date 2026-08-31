@@ -36,6 +36,9 @@ tensors is associative and bilinear in each factor.
 **Proof technique:** direct.
 
 1.1 Fix a list of arguments of the right total type. By [F1], $((R\otimes S)\otimes T)$ evaluates on that list as the product of the three separate values $R(\cdots)S(\cdots)T(\cdots)$. [F1, given, algebra]
+
 1.2 The same formula [F1] gives exactly the same scalar for $R\otimes(S\otimes T)$ on the same list of arguments. Hence $(R\otimes S)\otimes T=R\otimes(S\otimes T)$. [F1, given, algebra]
+
 1.3 Again by [F1], $((aR+bS)\otimes T)(\cdots)=(aR+bS)(\cdots)\,T(\cdots)=a(R\otimes T)(\cdots)+b(S\otimes T)(\cdots)$, and the same computation in the second slot gives bilinearity there as well. [F1, given, algebra]
+
 2.1 Therefore the tensor product is associative and bilinear in each factor. [step 1.2, step 1.3] ∎

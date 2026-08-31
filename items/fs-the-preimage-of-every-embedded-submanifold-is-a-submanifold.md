@@ -36,5 +36,7 @@ again a submanifold.
 **Proof technique:** direct.
 
 1.1 The preimage is $$ F^{-1}(0)=\{(x,y):xy=0\}=(\mathbb R\times\{0\})\cup(\{0\}\times\mathbb R), $$ the union of the two coordinate axes. [given, algebra]
+
 2.1 At the origin this set has two distinct tangent directions, so no neighbourhood of $(0,0)$ is diffeomorphic to an open interval or to a point. Hence it is not a $1$-dimensional or $0$-dimensional embedded submanifold there. This is exactly the failure excluded by the hypothesis in [L1]. [L1, step 1.1]
+
 3.1 Therefore a preimage need not be a submanifold when transversality is dropped. [step 2.1] ∎

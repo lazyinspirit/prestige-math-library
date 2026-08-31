@@ -35,5 +35,7 @@ sources:
 **Proof technique:** direct.
 
 1.1 The differential of $F$ is zero at every point and is not surjective onto $T_0\mathbb R$, so every point of $\mathbb R$ is critical. [given, algebra]
+
 2.1 The critical locus is therefore all of $\mathbb R$, which has no isolated points. This is the critical locus from [F1]. [F1, step 1.1]
+
 3.1 Therefore critical points need not be isolated. [step 2.1] ∎

@@ -43,5 +43,7 @@ $$
 **Proof technique:** direct.
 
 1.1 At each point $p\in M$, [F1] identifies $(\iota_X(\alpha\wedge\beta))_p$ with $\iota_{X_p}(\alpha_p\wedge\beta_p)$. [F1, given]
+
 2.1 Applying [L1] in the vector space $T_pM$ gives $$ \iota_{X_p}(\alpha_p\wedge\beta_p)=\iota_{X_p}\alpha_p\wedge\beta_p+(-1)^k\alpha_p\wedge\iota_{X_p}\beta_p. $$ Using [F1] again identifies this with the fibre at $p$ of the claimed form identity. [F1, L1, step 1.1]
+
 3.1 Since the two forms agree at every point, the displayed identity holds on $M$. [step 2.1] ∎

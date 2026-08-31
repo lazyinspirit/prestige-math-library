@@ -50,5 +50,7 @@ is a transverse codimension-$2$ level set.
 **Proof technique:** direct.
 
 1.1 If $F(x)= (1,1)$, then $(x_1,x_2)\neq(0,0)$ and $(x_3,x_4)\neq(0,0)$. The Jacobian matrix $$ \begin{bmatrix} 2x_1&2x_2&0&0\\ 0&0&2x_3&2x_4 \end{bmatrix} $$ therefore has rank $2$, so $(1,1)$ is a regular value. [given, algebra]
+
 2.1 The fibre equation is exactly $$ x_1^2+x_2^2=1,\qquad x_3^2+x_4^2=1, $$ which is $S^1\times S^1$. By [L1], this fibre is an embedded codimension-$2$ submanifold of $\mathbb R^4$. [L1, step 1.1]
+
 3.1 Thus the product of the two coordinate circles appears as a transverse level set. [step 2.1] ∎

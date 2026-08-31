@@ -38,5 +38,7 @@ then $M\setminus E$ is dense in $M$.
 **Proof technique:** direct.
 
 1.1 Suppose $M\setminus E$ were not dense. Then some nonempty open set $O\subseteq M$ would satisfy $O\subseteq E$. Choose a chart $(U,\varphi)$ with $U\subseteq O$ and $\varphi(U)\subseteq\mathbb R^m$, where $m=\dim M\ge 1$. [given, assume-contra, choose]
+
 2.1 Since $U\subseteq E$, the chart image $\varphi(U)$ would be a null subset of $\mathbb R^m$ by [L1]. But $\varphi(U)$ is a nonempty open subset of $\mathbb R^m$, so it contains a closed cube of positive side length and therefore cannot be null. Contradiction. [L1, step 1.1, contradiction]
+
 3.1 Hence every nonempty open subset of $M$ meets $M\setminus E$, so $M\setminus E$ is dense. [discharge-contradiction: dense complement, step 2.1] ∎

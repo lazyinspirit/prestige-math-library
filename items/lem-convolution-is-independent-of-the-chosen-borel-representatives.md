@@ -48,10 +48,12 @@ These are null sets. For a fixed $x$, the set
 $$ \{y : \tilde f_1(x-y) \neq \tilde f_2(x-y)\} = x-N_f $$
 is also null by [L3]. Hence the two section integrands agree for almost every
 $y$, outside the null set $(x-N_f) \cup N_g$. [L3, given, algebra]
+
 2.1 By [L1], both section integrands are measurable, and step 1.1 says they are [L1, L2, step 1.1]
 equal almost everywhere in $y$. Therefore [L2] gives equality of their
 integrals whenever either side is defined as an absolutely convergent Lebesgue
 integral. [L1, L2, step 1.1]
+
 3.1 This holds for every fixed $x$, so in particular it holds for almost every [step 2.1]
 $x$ on the domain where the $L^1$ convolution is defined. Thus the convolution
 does not depend on the chosen Borel representatives. [step 2.1] ∎

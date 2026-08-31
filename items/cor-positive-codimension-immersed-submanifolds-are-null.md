@@ -39,5 +39,7 @@ null subset of the ambient manifold.
 **Proof technique:** direct.
 
 1.1 By [F1], every point of $S$ has a neighbourhood in $N$ on which $S$ is the image of a smooth immersion from an $m$-manifold. [F1, given]
+
 2.1 Because $m<n$, [L1] makes each such local image null in the ambient neighbourhood. Therefore $S$ is locally null, and a countable cover of $S$ by such neighbourhoods shows that $S$ is null in $N$. [L1, step 1.1, algebra]
+
 3.1 Hence every positive-codimension immersed submanifold is null. [step 2.1] ∎

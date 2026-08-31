@@ -41,5 +41,7 @@ $\bigwedge^kT^*M\to M$ is a smooth vector bundle.
 **Proof technique:** direct.
 
 1.1 The bundle $T^0_kM$ is the covariant $k$-tensor bundle, and its alternating fibrewise image is the collection of alternating $k$-covectors at each point. [F1, given]
+
 2.1 By [L1], that alternating fibrewise image is a smooth vector subbundle of $T^0_kM$. By step 1.1, this subbundle is exactly $\bigwedge^kT^*M$. [F1, L1, step 1.1]
+
 3.1 Therefore the exterior-power transition laws define a smooth vector bundle. [step 2.1] ∎

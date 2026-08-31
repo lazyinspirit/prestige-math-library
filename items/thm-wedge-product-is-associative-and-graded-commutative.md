@@ -52,5 +52,7 @@ $$
 **Proof technique:** direct.
 
 1.1 Using [F1] twice and bilinearity from [L1], both $(\alpha\wedge\beta)\wedge\gamma$ and $\alpha\wedge(\beta\wedge\gamma)$ are the full alternation of the multilinear tensor $\alpha\otimes\beta\otimes\gamma$ with the same normalization factor. Hence they are equal. [F1, L1, given, algebra]
+
 1.2 In the shuffle formula of [F1], swapping the $k$ inputs destined for $\alpha$ with the $\ell$ inputs destined for $\beta$ contributes the sign of the block permutation, namely $(-1)^{k\ell}$. Therefore every term of $\alpha\wedge\beta$ matches the corresponding term of $(-1)^{k\ell}\beta\wedge\alpha$. [F1, given, algebra]
+
 2.1 Therefore the wedge product is associative and graded commutative. [step 1.1, step 1.2] ∎

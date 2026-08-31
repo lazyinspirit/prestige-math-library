@@ -50,6 +50,7 @@ t_m := s_m\,\mathbf{1}_{\{|u| \ge 1/m\}}.
 $$
 Then each $t_m$ is simple and
 $\operatorname{supp}(t_m) \subseteq \{|u| \ge 1/m\}$. [L1, L3, given, choose, construct]
+
 2.1 Since $|u|^p$ is integrable, [step 1.1, algebra]
 $$
 \mu(\{|u| \ge 1/m\}) \le m^p \int |u|^p\,d\mu < \infty,
@@ -61,6 +62,7 @@ $$
 |u-t_m|^p \le (2|u|)^p,
 $$
 whose right-hand side is integrable. [step 1.1, algebra]
+
 3.1 Applying [L2] to $|u-t_m|^p$ gives [L2, step 2.1]
 $$
 \|f-t_m\|_p^p = \int |u-t_m|^p\,d\mu \longrightarrow 0.

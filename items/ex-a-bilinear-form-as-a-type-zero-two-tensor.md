@@ -16,10 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
 sources:
   scraped: []
   references:
@@ -47,5 +43,7 @@ is a type $(0,2)$ tensor.
 **Proof technique:** direct.
 
 1.1 The displayed formula is linear in $(a,b)$ and in $(c,d)$ separately, so $g$ is bilinear. [given, algebra]
+
 2.1 By [F1], bilinearity is exactly the requirement for a type $(0,2)$ tensor. Hence $g$ is such a tensor. [F1, step 1.1]
+
 3.1 Therefore the Euclidean dot product is a concrete type $(0,2)$ tensor. [step 2.1] ∎

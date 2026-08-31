@@ -43,5 +43,7 @@ $$
 **Proof technique:** direct.
 
 1.1 Evaluate both sides on $(v_2,\ldots,v_{k+\ell})$. By [F2], the terms in $(\alpha\wedge\beta)(v,v_2,\ldots,v_{k+\ell})$ split into two groups: those where $v$ lands among the $k$ arguments sent to $\alpha$, and those where it lands among the $\ell$ arguments sent to $\beta$. [F2, given]
+
 2.1 The first group is exactly $(\iota_v\alpha)\wedge\beta$ by [F1]. To move $v$ into the first slot of $\beta$ in the second group, it must cross the $k$ slots occupied by $\alpha$, which contributes the sign $(-1)^k$; that group is therefore $(-1)^k\alpha\wedge\iota_v\beta$. [F1, F2, step 1.1, algebra]
+
 3.1 Summing the two groups gives the claimed formula, so interior product is a graded antiderivation. [step 2.1] ∎

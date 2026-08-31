@@ -36,5 +36,7 @@ sources:
 **Proof technique:** direct.
 
 1.1 Evaluating on $(\partial_x,\partial_y)$ gives $(dx\wedge dy)(\partial_x,\partial_y)=1$, so $dx\wedge dy\neq 0$. [given, algebra]
+
 2.1 By [L1], $dy\wedge dx=-dx\wedge dy$. Since step 1.1 shows $dx\wedge dy$ is nonzero, it follows that $dy\wedge dx\neq dx\wedge dy$. [L1, step 1.1]
+
 3.1 Therefore the wedge product is not commutative. [step 2.1] ∎

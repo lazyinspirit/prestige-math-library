@@ -51,6 +51,9 @@ for all $v_1,\ldots,v_k\in V$.
 **Proof technique:** direct.
 
 1.1 Choose a basis $e_1,\ldots,e_n$ of $V$. Define $\widetilde A$ on the spanning set of decomposable wedges by $$ \widetilde A(e_{i_1}\wedge\cdots\wedge e_{i_k}):=A(e_{i_1},\ldots,e_{i_k}) $$ for $i_1<\cdots<i_k$, and extend linearly. This is possible because [L1] gives a basis indexed by those increasing tuples. [L1, given, choose, construct]
+
 2.1 For arbitrary $v_1,\ldots,v_k$, expand each $v_j$ in the chosen basis. Multilinearity of $A$ and of the wedge, together with alternation on both sides, reduce both expressions to the same signed sum over increasing $k$-tuples. Hence $\widetilde A(v_1\wedge\cdots\wedge v_k)=A(v_1,\ldots,v_k)$. [F1, step 1.1, algebra]
+
 3.1 If $L:\bigwedge^kV\to W$ is another linear map with the same property, then $L$ and $\widetilde A$ agree on every decomposable basis wedge, hence on all of $\bigwedge^kV$ by linearity and [L1]. So $\widetilde A$ is unique. [L1, step 2.1]
+
 4.1 Therefore every alternating $k$-linear map factors uniquely through $\bigwedge^kV$. [step 1.1, step 2.1, step 3.1] ∎
